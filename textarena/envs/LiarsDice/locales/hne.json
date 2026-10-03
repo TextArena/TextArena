@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "तुम्हर लियार्स डाइस खेल में प्लेयर {player_id} हो। ई खेल {num_players} प्लेयरन के साथ खेला जात है।\nनियम:\n- तुम्हर पाली में, तुम दू चीज़ कर सकत हो:\n  १) एक नया बिड करो जिसमें मात्रा या चेहरा (या दोनों) पिछले बिड से ज्यादा हो; जैसे '[Bid: 3, 4]',\n  २) पिछले बिड को '[Call]' टाइप करके चुनौती दो।\n\nयदि तुम चुनौती देत हो:\n  - यदि सभी पासों में उस चेहरे की वास्तविक संख्या बिड से कम है, तो पिछला बिडर एक पासा हार जात है।\n  - अन्यथा, चुनौती देने वाला एक पासा हार जात है।\nजो प्लेयर ० पासा पर पहुँच जात है, वह खेल से बाहर हो जात है। जो प्लेयर अंत तक रहत है, वह जीत जात है।"
+  },
+  "board": {
+    "per_player": "\tप्लेयर {p}: {d}",
+    "new_round": "\nनया राउंड - शेष डाइस: {dice_summary}\nतुम्हारे वर्तमान डाइस हे: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "खिलाड़ी {current_player_id} बोलत हे! {face_value} के चेहरा के वास्तविक गिनती {count} हे, जे {quantity} से कम हे।\nखिलाड़ी {loser_id} (आखिरी बोलीदाता) एक डाइस हारत हे।",
+    "caller_loses": "खिलाड़ी {current_player_id} बोलत हे! {face_value} के चेहरा के वास्तविक गिनती {count} हे, जे {quantity} के बराबर या जादा हे।\nखिलाड़ी {loser_id} (बोलवाला) एक डाइस हारत हे।"
+  },
+  "action": {
+    "bid_announce": "खिलाड़ी {player_id} {quantity} के चेहरा {face_value} के लिए बोलत हे।"
+  },
+  "invalid_move": {
+    "call_no_bid": "बिना कोनो पूर्व बोली के कॉल करे गइस ।",
+    "invalid_bid": "अमान्य बोलीः {reason} अउ",
+    "not_recognized": "क्रिया '[Bid: X, Y]' या '[Call]' के रूप में मान्यता नहीं दी गई। जमा की गई क्रिया: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "नया मात्रा {new_quantity} वर्तमान {current_quantity} से कम हे।",
+    "face_lower": "नया चेहरा मूल्य {new_face_value} वर्तमान {current_face_value} से कम हे।",
+    "identical": "बोली वर्तमान बोली के समान हवय।",
+    "face_range": "अंकित मूल्य 1 अउ 6 के बीच होना चाहि।"
+  },
+  "message": {
+    "eliminated_invalid": "खिलाड़ी {player_id} अमान्य चाल ले बाहर हो गइस।"
+  },
+  "outcome": {
+    "win": "खिलाड़ी {winner} जीतत हे! अंतिम रैंकिंग: {final_ranking}"
+  }
+}

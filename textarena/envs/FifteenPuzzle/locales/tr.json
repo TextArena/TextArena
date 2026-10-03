@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Oyuncu {player_id}'siniz. 15-Puzzle oyununu oynuyorsunuz.\nOyunun amacı, numaralı taşları 1'den 15'e kadar artan sırayla dizmek ve boş alanı sağ alt köşeye yerleştirmektir.\nBir hamle yapmak için, bir taşı boş alana (örneğin __ ile temsil edilir) kaydırabilirsiniz. Aşağıdaki komutlardan birini kullanın:\n- 'up': Boş alanın altındaki taşı yukarı kaydırın.\n- 'down': Boş alanın üstündeki taşı aşağı kaydırın.\n- 'left': Boş alanın sağındaki taşı sola kaydırın.\n- 'right': Boş alanın solundaki taşı sağa kaydırın.\nHamlenizi göndermek için, yönü (örneğin 'up', 'down', 'left' veya 'right') köşeli parantezler içinde yazın, örneğin [up].\nMevcut tahta düzeni aşağıda gösterilmiştir. Bu bilgileri kullanarak bulmacayı çözün.\n"
+  },
+  "board": {
+    "current_board": "Mevcut Tahta:\n\n{board}\nMevcut Hamleler: {moves}",
+    "game_board": "Oyun Tahtası:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Geçersiz hamle formatı. Oyuncu {player_id} geçerli bir yönü köşeli parantezler içinde vermedi.",
+    "illegal_move": "Geçersiz hamle. Belirtilen yönde taş hareket ettirilemez."
+  },
+  "outcome": {
+    "win": "Tebrikler! Oyuncu {player_id} 15-Puzzle'ı başarıyla çözdü.",
+    "turn_limit": "Tur sınırına ulaşıldı. Model bulmacanın %{percent}ünü tamamladı."
+  }
+}

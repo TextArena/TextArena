@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Ko koe te Kaitakaro {player_id} i tetahi keemu Poka Iniana.\n- 52 kāri; ka kite koe i te kāri o te hoariri anake.\n- Utu {ante} hipi i ia raunati, {max_rounds} raunati katoa.\n- Neke atu tika: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (Ko X he mōrahi nui ake i to hipi tuhinga.)\n- Ko te kāri ngaro teitei toa ai te poti i te whakaaturanga.\n"
+  },
+  "round": {
+    "announce": "### Raunati {current_round}/{max_rounds}\nKo te kāri a te hoariri: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Hoatu tetahi koata kotahi, he tauira, '[check]', '[bet 2]', '[call]', '[raise 3]', '[fold]'.",
+    "cannot_check": "E kore e taea te [check] - e whakataetae ana koe ki te bet.",
+    "amount_min": "Ko te nui o te peti / piki me ≥ 1.",
+    "cannot_bet": "E kore e taea te [bet] - me [call] / [raise] / [fold].",
+    "nothing_to_call": "Kaore he mea hei karanga; ka taea e koe te [check].",
+    "no_bet_to_raise": "Whakamahia te [bet X] hei whakatuwhera; kaore he peti ki te whakanui.",
+    "insufficient": "He iti noa iho ngā tūemi mō taua mahi."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (utu {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Ko ō mahi ka taea: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Poti {pot} → Kaitakaro {winner}. (Pūtea P0:{p0}, P1:{p1})",
+    "folded": "Kua takahia te kaitākaro {player_id}.",
+    "showdown_win": "Whakataetae: Ka wini {card_win} i {card_lose}.",
+    "showdown_tie": "Whakakotahitanga: e rua {card}. Ka wehewehea te poari  ka riro i a ia tetahi {split} ."
+  },
+  "outcome": {
+    "p0_wins": "Kaitakaro 0 toa ({bank0} > {bank1})",
+    "p1_wins": "Kaitakaro 1 toa ({bank1} > {bank0})",
+    "draw": "He ōrite ngā tūtohu i muri o te katoa o nga rauna."
+  }
+}

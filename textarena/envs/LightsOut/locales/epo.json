@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Bonvenon al Lights Out! Vi havas {size}x{size} kraton de lumoj.\nVia celo estas malŝalti ĈIUJN lumojn (prezentitaj per '.')\nKiam vi premas lumon, ĝi ŝaltas sin mem kaj siajn apudajn najbarojn (supren/malsupren/maldekstre/dekstre).\nSkribu [row col] por premi lumon (0-indeksita, do valida limo estas 0-{max_index}).\nVi havas ĝis {max_turns} movojn por solvi la enigmon.\nLegendo: 'O' = lumo ENE, '.' = lumo MALŜALTE"
+  },
+  "board": {
+    "current_state": "Nuna krado-estado (Movado {moves_made}, {moves_left} movoj restantaj, {completion}% kompleta):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "La agado devas esti en formato [row col] kie vico kaj kolumno estas entjeroj de 0 ĝis {max_index}.",
+    "out_of_range": "Koordinatoj devas esti inter 0 kaj {max_index}. Vi enmetis [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Gratulon! Vi solvis la puzlon en {moves_used} movoj!",
+    "loss": "Ludo finiĝis! Vi uzis ĉiujn {max_turns} movojn sen solvi la enigmon. Fina kompletiĝo: {completion}%\nFina stato:\n{grid}"
+  }
+}

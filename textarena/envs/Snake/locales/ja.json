@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake ロケールファイル。キー（左側）は翻訳しないでください。値（右側）のみを翻訳します。すべての {placeholder} をそのままにし、プレイヤーが入力する移動/方向トークン ([up], [down], [left], [right], w, s, a, d) や {board} に描画される ASCII ボードは翻訳しないでください。",
+  "_slots": {
+    "{num_players}": "試合のプレイヤー数",
+    "{width}": "ボードの幅（セル数）",
+    "{height}": "ボードの高さ（セル数）",
+    "{max_turns}": "試合のターン制限",
+    "{player_id}": "プレイヤーの番号（0始まり）",
+    "{board}": "描画された ASCII グリッド；中立的なままにし、その文字を翻訳しないでください",
+    "{reason}": "ゲーム終了時の理由フレーズ",
+    "{groups}": "中立的なランキングデータ（最下位から最上位のプレイヤーIDグループのリスト）；翻訳しないでください"
+  },
+  "player_prompt": {
+    "intro": "{num_players}プレイヤーの Snake で、{width}×{height} のグリッド上をプレイします。\nあなたは蛇 {player_id} を操作します。有効な移動: '[up]'/'[down]'/'[left]'/'[right]' (または w/s/a/d)。\n目的: 最長時間生き残るか、最も長く成長して最高得点を獲得すること（ターン制限 {max_turns} ターン）。"
+  },
+  "board": {
+    "current": "現在のボード:\n{board}",
+    "after_moves": "現在のボード状態:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "蛇 {player_id} が無効な移動により死亡しました。"
+  },
+  "outcome": {
+    "survived_win": "プレイヤー {player_id} が生き残り、他のすべてのプレイヤーが死亡しました。",
+    "all_dead_simul": "すべての蛇が同時に死亡しました。",
+    "outlived": "プレイヤーが他のすべてのプレイヤーよりも長く生き残りました。",
+    "all_dead": "すべての蛇が死亡しました。",
+    "turn_limit": "ターン制限に達しました - 最高得点で引き分けを決します。",
+    "ranking": "{reason} 最終ランキンググループ（最下位→最上位）: {groups}"
+  }
+}

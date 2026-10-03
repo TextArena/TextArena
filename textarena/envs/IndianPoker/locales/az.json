@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Siz Hind Pokerində Oyunçu {player_id}-siniz.\n- 52-kartlı kolleksiya; siz yalnız rəqibin kartını görürsünüz.\n- Hər turda {ante} çip(s) ante, ümumi {max_rounds} tur.\n- Etibarlı hərəkətlər: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X sizin çip sayınızdan kiçik və ya bərabər olan müsbət tam ədəddir.)\n- Ən yüksək gizli kart qalib gəlir.\n"
+  },
+  "round": {
+    "announce": "### Tur {current_round}/{max_rounds}\nRəqibinizin kartı: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Dəqiq bir hərəkət təqdim edin, məsələn '[check]', '[bet 2]', '[call]', '[raise 3]', və ya '[fold]'.",
+    "cannot_check": "'[check]' etmək mümkün deyil - siz bir mərc ilə qarşılaşırsınız.",
+    "amount_min": "Mərc / Artırma məbləği ≥ 1 olmalıdır.",
+    "cannot_bet": "'[bet]' etmək mümkün deyil - '[call]' / '[raise]' / '[fold]' etməlisiniz.",
+    "nothing_to_call": "Heç bir şey çağırmaq mümkün deyil; siz '[check]' edə bilərsiniz.",
+    "no_bet_to_raise": "'[bet X]' açmaq üçün istifadə edin; artırmaq üçün heç bir mərc yoxdur.",
+    "insufficient": "Bu hərəkət üçün kifayət qədər çip yoxdur."
+  },
+  "game_action": {
+    "action": "Oyunçu {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (xərclə {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Mümkün hərəkətləriniz: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Qazanç {pot} → Oyunçu {winner}. (Bankrollar P0:{p0}, P1:{p1})",
+    "folded": "Oyunçu {player_id} fold etdi.",
+    "showdown_win": "Qarşılaşma: {card_win} {card_lose} məğlub edir.",
+    "showdown_tie": "Qarşılaşma heç-heçə: hər ikisi {card}. Qazanç bölündü – hər biri {split} alır."
+  },
+  "outcome": {
+    "p0_wins": "Oyunçu 0 qazandı ({bank0} > {bank1})",
+    "p1_wins": "Oyunçu 1 qazandı ({bank1} > {bank0})",
+    "draw": "Bütün turlardan sonra bərabər çip"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Int qed ikun Plejer {player_id} li qed tilgħab logħba ta' Pig Dice.\n\nRegoli:\n- Matul il-logħob tiegħek, tista' jagħmel '[roll]' jew '[hold]'\n- Roll ta' 2-6: Żid mal-total tal-logħob tiegħek\n- Roll ta' 1: Tilef it-total tal-logħob tiegħek u spiċċa t-logħob\n- Hold: Żid it-total tal-logħob tiegħek mal-punteġġ tiegħek u spiċċa t-logħob\n- L-ewwel li jilħaq {winning_score} punti jirbaħ\n\nMeta jkun il-logħob tiegħek, tara l-punteġġi kurrenti u t-total tal-logħob.\nWeġib '[roll]' biex tirrolla d-die jew '[hold]' biex tiddepożita l-punteġġi tiegħek."
+  },
+  "invalid_move": {
+    "invalid_action": "Format ta' azzjoni invalid. Uża '[roll]' jew '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Player {player_id} qalgħa, tilef {turn_total} punti!",
+    "player_hold": "Player {player_id} żamm u bankja {turn_total} punti."
+  },
+  "board": {
+    "player": "Plejer 0: '{score_0}'; Plejer 1: '{score_1}'",
+    "current_total_scores": "Il-Punti totali kurrenti: {scores} It-total attwali tiegħek huwa {turn_total}.",
+    "roll_history": "{observation}\nStorja tar-rolling tiegħek għal din it-turn: {roll_history}",
+    "first_roll": "{observation} Dan huwa l-ewwel roll ta 'l-turn tiegħek.",
+    "available_actions": "{observation}\nAzzjonijiet disponibbli: '[roll]' jew '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Player {winner_id} rebaħ billi kellu puntata ogħla meta waslet il-limitu tat-turn ({scores})",
+    "winner_by_score": "Player {winner_id} rebaħ billi wasal għal puntata target ta' {winning_score}!",
+    "draw": "Il-limitu ta 'dawran intlaħaq u l-plejers kollha għandhom l-istess punteġġ: {scores}"
+  }
+}

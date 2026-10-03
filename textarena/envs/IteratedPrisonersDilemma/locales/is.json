@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í Endurtekinu Fangelsisdilemmu sem spannar {num_rounds} umferðir.\n\nLeikjauppbygging:\n- Áður en hver ákvarðanir hefur þú {total_conversation_rounds} umferðir til að tjá þig frjálslega.\n- Eftir það velja báðir leikmenn hvort þeir vilja samstarfa eða svíkja.\n\nLaunatafla (föst hverja umferð):\n- Báðir samstarfa ➜ hver {cooperate_reward}\n- Báðir svíkja ➜ hver {mutual_defect_reward}\n- Einn svíkja, einn samstarfa ➜ Svíkja {defect_reward}, Samstarfsmaður {sucker_reward}\n\nHvernig á að spila:\n- Á meðan á tjáningu stendur: skrifaðu hvað sem þú vilt.\n- Á meðan á ákvarðanir stendur: hafðu '[Cooperate]' eða '[Defect]' (óháð stórum og litlum stöfum) með í svari. Þú mátt bæta við extra texta fyrir eftir token."
+  },
+  "phases": {
+    "conversation_finished": "Tjáningu lokið fyrir umferð {round}. Vinsamlegast svaraðu með '[Cooperate]' eða '[Defect]' innan \\boxed{{}}.",
+    "starting_round": "--- Byrja umferð {round} ---",
+    "round_summary": "Niðurstöður umferðar {round}:\n{outcome}\nLeikmaður 0 fékk {r0} (heild {score_0}), Leikmaður 1 fékk {r1} (heild {score_1})."
+  },
+  "outcome": {
+    "winner": "Leikmaður {winner} vinnur {win_score} - {lose_score}.",
+    "draw": "Jafntefli! Báðir leikmenn fengu {s0}.",
+    "round_both_cooperate": "Báðir leikmenn samstarfuðu.",
+    "round_both_defect": "Báðir leikmenn svíkuðu.",
+    "round_p0_cooperates_p1_defects": "Leikmaður 0 samstarfaði, Leikmaður 1 svíkaði.",
+    "round_p0_defects_p1_cooperates": "Leikmaður 0 svíkaði, Leikmaður 1 samstarfaði."
+  }
+}

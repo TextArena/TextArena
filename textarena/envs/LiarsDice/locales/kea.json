@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Bu é Jogadór {player_id} na un jogo di Dado di Mintira di {num_players} jogadór.\nRegras:\n- Na bu tornu, bu pode:\n  1) Faze un nova oferta ku un kantidade maior ou valor di cara maior (ou ambos) ki oferta atual; ez. '[Bid: 3, 4]',\n  2) Chamá última oferta digitando '[Call]'.\n\nSi bu chamá:\n  - Si kontadura real di valor di cara di dado entre todus dado é menor ki oferta, últimu ofertante perde un dado.\n  - Si nó, chamadór perde un dado.\nUn jogadór ki chega 0 dado é eliminadu. Últimu jogadór restante ganha."
+  },
+  "board": {
+    "per_player": "\tPlayer {p}: {d}",
+    "new_round": "\nNova ronda - Dado restante: {dice_summary}\nBu dado atual é: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Jogadó {current_player_id} chamô! A konta real di kará {face_value} é {count}, ki é MENOS ki {quantity}.\nJogadó {loser_id} (o últimu ofercedó) perde un dadi.",
+    "caller_loses": "Jogadó {current_player_id} chamô! A konta real di kará {face_value} é {count}, ki é >= {quantity}.\nJogadó {loser_id} (o chamadó) perde un dadi."
+  },
+  "action": {
+    "bid_announce": "Jogadór {player_id} ofertá {quantity} di valor di cara {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "N faze un konbersu sen oferese ninhun prémiu.",
+    "invalid_bid": "Ofertas invalidu: {reason}",
+    "not_recognized": "Aksón no rekognisí komu un '[Bid: X, Y]' válidu ou '[Call]'. Aksón prezentá: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Númeru novu {new_quantity} é más baxu ki númeru atual {current_quantity}.",
+    "face_lower": "Novu valor nominal {new_face_value} é más baxu ki atual {current_face_value}.",
+    "identical": "Ofertas é idêntiku a ofertas atual.",
+    "face_range": "Valór nominal ten ki sta entri 1 i 6."
+  },
+  "message": {
+    "eliminated_invalid": "Jogu {player_id} foi eliminadu pa un movimentu inválidu."
+  },
+  "outcome": {
+    "win": "Jogadó {winner} gana! Klasifikasón final: {final_ranking}"
+  }
+}

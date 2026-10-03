@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "Estás en una habitación con {num_buttons} botones: {buttons}. Cada botón está asociado a una distribución de Bernoulli con una media fija pero desconocida; las medias de los distintos botones pueden ser diferentes.\nCada vez que pulses un botón, recibirás una recompensa muestreada de la distribución asociada.\nDispones de {num_turns} pasos de tiempo y, en cada paso, puedes elegir cualquier botón y recibir su recompensa.\nTu objetivo es elegir estratégicamente los botones en cada paso para recopilar información sobre sus distribuciones de recompensa, de modo que puedas identificar correctamente el botón con la recompensa media más alta al final de los {num_turns} turnos."
+  },
+  "board": {
+    "stat_line": "{button}: {reward} (elegido {count} veces)",
+    "summary": "Resumen:\n{stats}"
+  },
+  "invalid_move": {
+    "wrong_format": "El jugador no respondió con un formato de acción válido.",
+    "invalid_button": "Se ha seleccionado un botón no válido."
+  },
+  "game_action": {
+    "pressed": "Has pulsado el botón {button} y has recibido una recompensa de {reward}."
+  },
+  "game_message": {
+    "final_decision": "Has agotado tu presupuesto para probar distintas opciones y observar sus recompensas. Ahora deduce cuál es la mejor opción."
+  },
+  "outcome": {
+    "win": "¡Enhorabuena! Has elegido el botón correcto.",
+    "lose": "Has elegido un botón incorrecto."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} u Nimu.\nVaš cilj je uzeti posljednji preostali objekt.\nU svakom potezu, odaberite točno jednu gomilu i uklonite jedan ili više objekata iz nje.\nKoristite format '[gomila količina]', gdje je gomila indeks gomile, a količina je broj objekata koji treba ukloniti.\nNa primjer, '[0 3]' uklanja 3 objekta iz gomile 0."
+  },
+  "state": {
+    "current_pile": "Trenutna gomila:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nije pronađen valjani format poteza. Koristite '[gomila količina]'.",
+    "correct_format_wrong_fields": "Igrač {player_id}, nevaljana radnja. Stupac {col} je izvan granica.",
+    "out_of_range": "Indeks gomile {pile_index} je izvan raspona.",
+    "non_positive": "Morate ukloniti barem 1 objekt.",
+    "exceeds_pile": "Ne možete ukloniti {quantity} iz gomile {pile_index} (samo {pile_count} preostalo)."
+  },
+  "observation": {
+    "removed_from_piles": "Igrač {player_id} je odigrao [{pile_index} {quantity}], uklanjajući {quantity} objekt(a) iz gomile {pile_index}."
+  },
+  "outcome": {
+    "win": "Igrač {player_id} je uzeo posljednji objekt(e)!"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Grajesz jako {color} w grze Breakthrough. Poruszasz się {direction} na planszy o wymiarach {board_size}x{board_size}.\nW swojej turze możesz przesunąć jedną figurę o jeden krok do przodu lub po przekątnej do przodu.\nFigura może poruszać się po przekątnej tylko wtedy, gdy znajduje się tam figura przeciwnika, i może wejść na takie zajęte pole tylko w kroku po przekątnej.\nGdy wchodzisz na pole z figurą przeciwnika, zdobywasz ją, a figura przeciwnika jest trwale usuwana z planszy.\nUżyj notacji podobnej do UCI w nawiasach, np. [a2a3], aby przesunąć figurę z a2 na a3.\n* 'a' odpowiada lewej kolumnie, '1' jest dolnym rzędem (z perspektywy Białych).\n* Górny rząd jest domowym rzędem Czarnych (rząd 8 dla planszy 8x8), dolny rząd jest domowym rzędem Białych (rząd 1 dla planszy 8x8).\nPierwszy gracz, którego figura dotrze do domowego rzędu przeciwnika, wygrywa. Jeśli wszystkie twoje figury zostaną zdobyte, przegrywasz."
+  },
+  "invalid_move": {
+    "wrong_format": "Proszę użyć notacji algebraicznej w nawiasach, np. [a2a3].",
+    "out_of_bounds": "Ruch jest poza granicami planszy.",
+    "illegal": "Ten ruch nie jest zgodny z zasadami Breakthrough lub nie jest twoją figurą."
+  },
+  "game_action": {
+    "moved": "Gracz {player_id} przesuwa {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Białe dotarły do domowego rzędu Czarnych.",
+    "black_reached": "Czarne dotarły do domowego rzędu Białych.",
+    "white_captured": "Wszystkie figury Białych zostały zdobyte.",
+    "black_captured": "Wszystkie figury Czarnych zostały zdobyte.",
+    "no_moves": "Gracz {player_id} nie ma już ruchów."
+  }
+}

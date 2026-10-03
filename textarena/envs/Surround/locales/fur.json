@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Zûc di Surround su une gracie {width}x{height}.\nTu sês zûc {player_id}. Moviments valids: '[up]' '[down]' '[left]' '[right]' o w/s/a/d.\nObietîf: supravivî a ducj. Lis tracis a son letalis; i impats cu la pareti a ucin; i scontrs frontâi a ucin ducj dôs."
+  },
+  "board": {
+    "current": "Consei atuâl: {board}",
+    "after_moves": "Il tabelon daspò moviments simultanis: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Il zuiadôr {player_id} al è muart par vie di une mosse no valide."
+  },
+  "outcome": {
+    "survived_win": "Il zuiadôr {player_id} al è sorevivût; ducj chei altris a son colâts.",
+    "all_crashed": "Ducj i zuiadôrs a son colâts in maniere simultanie.",
+    "outlived": "Il zuiadôr al è rivât a vivi plui di ducj i altris.",
+    "all_dead": "Ducj i zuiadôrs muarts.",
+    "turn_limit": "Al è rivât il limit di volte: vinç chel che al à sorevivude plui a lunc.",
+    "ranking": "{reason} Classifiche finâl grupis (miglior→pegjor): {groups}"
+  }
+}

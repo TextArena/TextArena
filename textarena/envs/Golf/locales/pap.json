@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Bo ta hunga Golf (Wega di Carta) - Player {player_id}.\nMeta: Haya e puntuacion total mas abao den e rondo aki. Si columnanan ta comparti mesun valor, nan ta suma como 0.\nValor di Cartanan: A=1, 2-10=valor di cara, J/Q=10, K=0\n\nAccionnan (usá parentesis exacto):\n- '[draw]' - Sacá for di baraha\n- '[take]' - Tuma for di pila di descarta\n- '[swap X Y]' - Cambia carta sacá cu position X (fila) Y (columna)\n- '[discard]' - Descarta e carta sacá"
+  },
+  "board": {
+    "drew": "Bo a saca: {card}\nAwo bo mester [swap X Y] o [discard]",
+    "took": "Bo a tuma: {card} for di e pila di deskarga. Bo mester [swap X Y] ku esaki (no por kita).",
+    "peeked": "Bo a mira na position ({row},{col}): {card}",
+    "turn_view": "Mano di bo:\n{hand}\nPila di descarta: {discard}\n{options}",
+    "none": "Ningun di nan."
+  },
+  "options": {
+    "final_turns": "Turnonan final! Opcionnan di bo: [draw], [take], [peek X Y]",
+    "draw": "Opcionnan di bo: [draw], [take]",
+    "must_swap": "Bo mester: [swap X Y] (no por kita karchinan for di e pila pa tira)",
+    "swap_or_discard": "Bo mester: [swap X Y] òf [discard]"
+  },
+  "hand": {
+    "no_cards": "No tin karchi.",
+    "header": "Col: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} a cambia {new} cu {old} na position ({row},{col})",
+    "discarded": "Player {pid} a descarta {card}"
+  },
+  "message": {
+    "deck_empty": "E palu ta bashí! Wegua ta kaba mesora.",
+    "knocked": "E hungadó {pid} a keda knock! Kada otro hungadó ta haña un turno mas.",
+    "final_round": "Hungadó {pid} {reason}! Kada otro hungadó ta haña un rònt mas."
+  },
+  "reason": {
+    "all_revealed": "tur carta a keda revela?"
+  },
+  "invalid": {
+    "wrong_action": "Usá EXACTAMENTE UN accion entre parentesis: [draw], [take], [swap X Y], [discard], [knock], o [peek X Y]",
+    "discard_empty": "E pila di deskarga ta bashí!",
+    "must_draw_first": "Bo mester prome [draw], [take], [knock], o [peek X Y]",
+    "cannot_discard_taken": "Bo no por kita un karta ku bo a saka for di e pila, sino kambia.",
+    "have_drawn_card": "Bo tin un karchi di sorteo. Abo mester [swap X Y] òf [discard] e.",
+    "need_drawn_swap": "Bo mester di un karta ku ta ser trese pa bo por interkambiá.",
+    "need_drawn_discard": "Bo mester di un karta ku bo a saka pa kita.",
+    "out_of_bounds": "Position fuera di limites. Usá fila 1-{max_row}, columna 1-{max_col}",
+    "knock_with_card": "Bo no por bati na porta ku un karta di karchi. Kompleta bo turno promé.",
+    "already_knocked": "Algu a dal ya un knock den e ronda aki.",
+    "already_revealed": "E karta ei ya ta revelá!"
+  },
+  "summary": {
+    "full": "Wega a termina! Player {winner} ta gana cu un puntuacion di {score} punto!\n\nPuntuacionnan Final:\n{scores}",
+    "line": "Player {pid}: {score} punto\n"
+  },
+  "board_str": {
+    "title": "=== WEGA DI GOLF ===",
+    "discard": "Pila di desecha: {card}",
+    "knocked": "E hungadó {pid} a bati!",
+    "player_header": "Player {pid} (Puntuacion: {score}):"
+  }
+}

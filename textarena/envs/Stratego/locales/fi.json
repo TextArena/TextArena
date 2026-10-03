@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} Stratego-pelissä.\nTavoitteesi on vallata vastustajasi lippu tai eliminoida kaikki heidän liikkuvat nappulansa.\nArmeijasi on asetettu sinulle pelilaudalle, mukaan lukien lippusi, pommit ja muut nappulat eri arvoista.\n\n### Peliohjeet\n1. **Liikkumissäännöt:**\n   - Vuorollasi voit liikuttaa yhtä nappulaa yhden askeleen viereiseen ruutuun (ylös, alas, vasemmalle tai oikealle), joka on jo varattu omilla nappuloillasi.\n   - Esimerkki: Nappula voi liikkua A1:stä B1:een tai A1:stä A2:een, jos B1 ja A2 eivät ole pelaajan omia nappuloita.\n   - Jos valittu nappula on pommi tai lippu, sitä ei voi liikuttaa.\n2. **Taistelut:**\n   - Jos liikutat nappulaa ruutuun, jossa on vastustajan nappula, syntyy taistelu:\n     - Korkeamman arvon nappula voittaa ja poistaa vastustajan nappulan.\n     - Jos arvot ovat samat, molemmat nappulat poistetaan pelilaudalta.\n     - **Erikoistapaukset:**\n       - Pommit eliminoida useimmat hyökkäävät nappulat paitsi kaivostyöntekijät, jotka purkavat pommit.\n       - Vakoojat voivat voittaa marsalkan, jos vakooja hyökkää ensin, mutta häviävät kaikille muille nappuloille.\n3. **Strategiset tavoitteet:**\n   - Tunnista vastustajasi nappulat heidän liikkeidensä ja taisteluidensa kautta.\n   - Suojaa lippuasi yrittäessäsi vallata vastustajasi lipun.\n   - Käytä tiedustelijoita strategisesti saadaksesi tietoa vastustajasi nappuloista ja hyökätä heikkoja kohteita vastaan.\n\n### Miten tehdä siirto:\n1. Määritä siirrettävän nappulan koordinaatit ja sen kohde.\n2. Käytä muotoa: [A0 B0], jossa A0 on lähtöpositio ja B0 on kohde.\n   - Esimerkki: Siirtääksesi nappulan riviltä 0, sarakkeelta 0 riville 1, sarakkeelle 0, syötä [A0 B0].\n3. Varmista, että kohde on kelvollinen liikkumissääntöjen mukaan.\n\n### Tärkeitä huomioita:\n- Pelilauta näyttää nappulasi ja niiden sijainnit, esim. MN, MS.\n- Pelilauta näyttää myös vastustajasi nappuloiden tiedossa olevat sijainnit ilman niiden arvoja, esim. ?.\n- Ruudut, joissa on ~, ovat järviä, eikä niille voi siirtyä.\n- Aloita pelisi siirtämällä nappuloita, jotka ovat etulinjalla, saadaksesi tietoa vastustajasi nappuloista. Pelaajan 0 ja pelaajan 1 etulinjat ovat rivit D ja G.\n\nTässä on nykyinen pelilauta:\n"
+  },
+  "board": {
+    "current_board": "Nykyinen pelilauta:\n\n{board}\nSaatavilla olevat siirrot: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Virheellinen toimintamuoto. Pelaaja {player_id} ei syöttänyt siirtoa muodossa [A0 B0].",
+    "invalid_coordinates": "Virheellinen toimintamuoto. Pelaaja {player_id} ei syöttänyt kelvollisia koordinaatteja.",
+    "not_own_piece": "Virheellinen toimintamuoto. Pelaaja {player_id} täytyy siirtää yhtä omista nappuloistaan.",
+    "scout_through_pieces": "Virheellinen toimintamuoto. Pelaaja {player_id} ei voi siirtää tiedustelijaa muiden nappuloiden läpi.",
+    "scout_diagonal": "Virheellinen toimintamuoto. Pelaaja {player_id} ei voi siirtää tiedustelijaa diagonaalisesti.",
+    "non_scout_multi_square": "Virheellinen toimintamuoto. Nappulat, paitsi tiedustelijat, voivat siirtyä vain yhden ruudun kerrallaan.",
+    "move_into_lake": "Virheellinen toimintamuoto. Pelaaja {player_id} ei voi siirtyä järveen.",
+    "move_onto_own_piece": "Virheellinen toimintamuoto. Pelaaja {player_id} ei voi siirtyä omalle nappulalleen.",
+    "move_bomb_or_flag": "Virheellinen toimintamuoto. Pelaaja {player_id} ei voi siirtää pommia tai lippua."
+  },
+  "game_action": {
+    "you_moved": "Olet siirtänyt nappulasi {source}sta {dest}iin.",
+    "opponent_moved": "Pelaaja {player_id} on siirtänyt nappulansa {source}sta {dest}iin.",
+    "you_equal_ranks": "Olet siirtänyt nappulasi {source}sta {dest}iin. Hyökkäävän nappulan arvo oli {attacking_rank} ja kohteen nappulan arvo oli {target_rank}. Koska arvot ovat samat, molemmat nappulat hävisivät.",
+    "opponent_equal_ranks": "Pelaaja {player_id} on siirtänyt nappulansa {source}sta {dest}iin. Hyökkäävän nappulan arvo oli {attacking_rank} ja kohteen nappulan arvo oli {target_rank}. Koska arvot ovat samat, molemmat nappulat hävisivät.",
+    "you_miner_defused": "Olet siirtänyt nappulasi {source}sta {dest}iin. Hyökkäävän nappulan arvo oli {attacking_rank} ja kohteen nappulan arvo oli {target_rank}. Koska kaivostyöntekijät voivat purkaa pommit, voitit taistelun.",
+    "opponent_miner_defused": "Pelaaja {player_id} on siirtänyt nappulansa {source}sta {dest}iin. Hyökkäävän nappulan arvo oli {attacking_rank} ja kohteen nappulan arvo oli {target_rank}. Koska kaivostyöntekijät voivat purkaa pommit, hävisit taistelun.",
+    "you_bomb_lost": "Olet siirtänyt nappulasi {source}sta {dest}iin. Hyökkäävän nappulan arvo oli {attacking_rank} ja kohteen nappulan arvo oli {target_rank}. Koska hyökkääjä ei ole kaivostyöntekijä, hävisit taistelun.",
+    "opponent_bomb_won": "Pelaaja {player_id} on siirtänyt nappulansa {source}sta {dest}iin. Hyökkäävän nappulan arvo oli {attacking_rank} ja kohteen nappulan arvo oli {target_rank}. Koska hyökkääjä ei ole kaivostyöntekijä, voitit taistelun.",
+    "you_spy_won": "Olet siirtänyt nappulasi {source}sta {dest}iin. Hyökkäävän nappulan arvo oli {attacking_rank} ja kohteen nappulan arvo oli {target_rank}. Koska hyökkääjä on vakooja ja kohde on marsalkka, voitit taistelun.",
+    "opponent_spy_lost": "Pelaaja {player_id} on siirtänyt nappulansa {source}sta {dest}iin. Hyökkäävän nappulan arvo oli {attacking_rank} ja kohteen nappulan arvo oli {target_rank}. Koska hyökkääjä on vakooja ja kohde on marsalkka, hävisit taistelun.",
+    "you_higher_won": "Olet siirtänyt nappulasi {source}sta {dest}iin. Hyökkäävän nappulan arvo oli {attacking_rank} ja kohteen nappulan arvo oli {target_rank}. Koska hyökkääjä on korkeampi arvo kuin kohde, voitit taistelun.",
+    "opponent_higher_lost": "Pelaaja {player_id} on siirtänyt nappulansa {source}sta {dest}iin. Hyökkäävän nappulan arvo oli {attacking_rank} ja kohteen nappulan arvo oli {target_rank}. Koska hyökkääjä on korkeampi arvo kuin kohde, hävisit taistelun.",
+    "you_lower_lost": "Olet siirtänyt nappulasi {source}sta {dest}iin. Hyökkäävän nappulan arvo oli {attacking_rank} ja kohteen nappulan arvo oli {target_rank}. Koska hyökkääjä on alempi arvo kuin kohde, hävisit taistelun.",
+    "opponent_lower_won": "Pelaaja {player_id} on siirtänyt nappulansa {source}sta {dest}iin. Hyökkäävän nappulan arvo oli {attacking_rank} ja kohteen nappulan arvo oli {target_rank}. Koska hyökkääjä on alempi arvo kuin kohde, voitit taistelun."
+  },
+  "outcome": {
+    "flag_captured": "Pelaaja {player_id} on vallannut vastustajansa lipun!",
+    "no_movable_pieces": "Pelaaja {winner_id} voittaa! Pelaajalla {loser_id} ei ole enää liikkuvia nappuloita."
+  }
+}

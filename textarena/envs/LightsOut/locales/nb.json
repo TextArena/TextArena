@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Velkommen til Lights Out! Du har et {size}x{size} rutenett av lys.\nMålet ditt er å slå AV alle lysene (representert med '.').\nNår du trykker på et lys, toggler det seg selv OG sine tilstøtende naboer (opp/ned/venstre/høyre).\nSkriv [rad kol] for å trykke på et lys (0-indeksert, så gyldig område er 0-{max_index}).\nDu har opptil {max_turns} trekk for å løse puslespillet.\nForklaring: 'O' = lys PÅ, '.' = lys AV"
+  },
+  "board": {
+    "current_state": "Nåværende rutenett-tilstand (Trekk {moves_made}, {moves_left} trekk igjen, {completion}% fullført):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Handlingen må være i format [rad kol] hvor rad og kol er heltall fra 0 til {max_index}.",
+    "out_of_range": "Koordinatene må være mellom 0 og {max_index}. Du skrev [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Gratulerer! Du løste puslespillet på {moves_used} trekk!",
+    "loss": "Spillet er over! Du brukte alle {max_turns} trekk uten å løse puslespillet. Endelig fullføring: {completion}%\nEndelig tilstand:\n{grid}"
+  }
+}

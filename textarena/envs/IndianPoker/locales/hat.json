@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Ou se Jwè {player_id} nan yon jwèt Paki endyen.\n- Dek 52 kat; ou we sèlman kat adversè a.\n- Ante {ante} chip(s) chak tou, {max_rounds} tou total.\n- Mouvmans valab: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X se yon entèj pòzitif <= kont chip ou).\n- Kat kache pi wo a genyen pot la nan showdown.\n"
+  },
+  "round": {
+    "announce": "### Tou {current_round}/{max_rounds}\nKat adversè a se: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Pwovide egzakteman YON aksyon nan bwat, pa egzanp '[check]', '[bet 2]', '[call]', '[raise 3]', oswa '[fold]'.",
+    "cannot_check": "Pa kapab [check] - ou ap fè fas a yon parye.",
+    "amount_min": "Bet / ogmante kantite lajan dwe ≥ 1.",
+    "cannot_bet": "Pa ka [bet] - dwe [call] / [raise] / [fold].",
+    "nothing_to_call": "Pa gen anyen pou rele; ou ka [check] olye.",
+    "no_bet_to_raise": "Sèvi ak [bet X] pou louvri; pa gen okenn parye ogmante.",
+    "insufficient": "Chips ensifizan pou aksyon sa a."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kòs {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Aksyon posib ou yo: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Jwè {winner}. (Bankwout P0:{p0}, P1:{p1})",
+    "folded": "Jwè {player_id} abandone.",
+    "showdown_win": "Showdown: {card_win} bat {card_lose}.",
+    "showdown_tie": "Showdown krache: tou de {card}. Pot divize  chak resevwa {split} ."
+  },
+  "outcome": {
+    "p0_wins": "Jwè 0 genyen ({bank0} > {bank1})",
+    "p1_wins": "Jwè 1 genyen ({bank1} > {bank0})",
+    "draw": "Chips egal apre tout wonn yo."
+  }
+}

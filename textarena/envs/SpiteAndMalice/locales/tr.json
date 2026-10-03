@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "İki oyunculu Spite and Malice oyununda Oyuncu {player_id}'siniz. Hedefiniz, ilk olarak ödemeniz yığınını boşaltmaktır.\n\n### Oyun Genel Bakış:\n- Amacınız, merkezdeki yığınlara kart oynayarak ödemeniz yığınını temizlemektir.\n- Üç kaynaktan kart oynayabilirsiniz:\n  1. **Eliniz** (her turda en fazla 5 kartla başlarsınız).\n  2. **Ödemeniz yığınının üst kartı**.\n  3. **Atık yığınlarınızın üst kartı**.\n\n### Oyun Kuralları:\n- Bir kartı merkezdeki bir yığına oynayabilirsiniz, eğer o yığındaki üst karttan **bir sıra daha yüksek** ise (merkez yığınları As ile başlar ve Kraliçeye kadar gider; Krallar vahşi - herhangi bir karta oynanabilir, ancak sıra dizisini değiştirmez. Bu, bir Kral 4'ten sonra kullanılırsa, o Kral 5 olarak sıralanır ve bir sonraki kart 6 olmalıdır anlamına gelir).\n- Daha fazla kart oynayamazsanız, turunuzu bitirmek için bir kartı atık yığınlarınızdan birine **atmanız** gerekir.\n- Bir merkez yığındaki kartlar Kraliçeye ulaşırsa, otomatik olarak temizlenir.\n- Sıra düzeni: A=1, 2=2, ..., 9=9, J=10, Q=11, K vahşi olarak.\n\n### Eylemler:\n1. **Çek**: Turunuzun başında, elinizi 5 karta kadar doldurmak için kartlar çekin. **[draw]** girerek başlayın.\n2. **Kart Oyna**: Bir kart oynamak için, kartı ve merkez yığınını şu şekilde belirtin: **[play A♠ 0]** (burada 'A♠' kartı ve '0' merkez yığın dizinidir).\n3. **At**: Daha fazla kart oynayamazsanız, turunuzu bitirmek için elinizden bir kartı atık yığına atın. **[discard A♠ 1]** girin (burada 'A♠' kartı ve '1' atık yığın dizinidir). Ödemeniz yığından herhangi bir kartı atamayacağınızı unutmayın. Yalnızca elinizdeki kartları atabilirsiniz.\n\n"
+  },
+  "board": {
+    "current_board": "Mevcut Tahta:\n\n{board}\nMevcut Hamleler: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Merkez Yığınları ---\n",
+    "pile": "{observation}Yığın {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Oyuncu {player_id}'nin Görünümü ---\n",
+    "payoff": "{observation}Ödeme Yığını (Üst Kart): {top_card}, Ödeme Yığını Uzunluğu: {payoff_length}\n",
+    "hand": "{observation}El: {hand}\n",
+    "discard": "{observation}Atık Yığınları: {discard}\n",
+    "empty": "Boş"
+  },
+  "game_message": {
+    "no_cards_left": "Çekilecek kart kalmadı. Aşağıdaki kaynaklardan kart oynayabileceğinizi unutmayın:\n  1. **Eliniz**.\n  2. **Ödemeniz yığınının üst kartı**.\n  3. **Atık yığınlarınızın üst kartı**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Geçersiz hamle formatı. Oyuncu {player_id} geçerli bir hamle ile yanıt vermedi.",
+    "invalid_play": "Geçersiz oynama. Oyuncu {player_id} {card} kartını merkez yığını {index}'e oynamaya çalıştı.",
+    "discard_from_payoff": "Geçersiz atma. Oyuncu {player_id} ödemeniz yığından bir kart atmaya çalıştı.",
+    "discard_not_in_hand": "Geçersiz atma. Oyuncu {player_id} elinde olmayan bir kartı atmaya çalıştı.",
+    "wrong_move_type": "Geçersiz hamle türü. Oyuncu {player_id} geçerli bir hamle türü ile yanıt vermedi."
+  },
+  "game_action": {
+    "you_drew": "Kart çektiniz.",
+    "opponent_drew": "Oyuncu {player_id} kart çekti.",
+    "you_played": "{card} kartını merkez yığını {index}'e oynadınız.",
+    "opponent_played": "Oyuncu {player_id} {card} kartını merkez yığını {index}'e oynadı.",
+    "you_discarded": "{card} kartını atık yığını {index}'e attınız, bu da turunuzu bitirdi. Bu tur için başka eylemleriniz dikkate alınmaz. Oyuncu {next_player_id} sıradaki oyuncu olacaktır.",
+    "opponent_discarded": "Oyuncu {player_id} {card} kartını atık yığını {index}'e attı, bu da turunu bitirdi. Oyuncu {player_id}'nin başka eylemleri bu tur için dikkate alınmaz. Oyuncu {next_player_id}, lütfen eyleminizi [eylem kartı merkez_dizini] formatında girin."
+  },
+  "outcome": {
+    "payoff_cleared": "Oyuncu {current_player} ödemeniz yığınını bitirdi! Oyuncu {current_player} kazandı!",
+    "deadlock_player_0": "Çıkmaz durum oluştu! Oyuncu 0, Oyuncu 1'in {player_1_payoff} kartına karşı {player_0_payoff} kartı ile kazandı.",
+    "deadlock_player_1": "Çıkmaz durum oluştu! Oyuncu 1, Oyuncu 0'ın {player_0_payoff} kartına karşı {player_1_payoff} kartı ile kazandı.",
+    "deadlock_tie": "Çıkmaz durum oluştu ve berabere! Her iki oyuncu da {player_0_payoff} kartı ile kaldı. Oyuncu {current_player} varsayılan olarak kazandı."
+  }
+}

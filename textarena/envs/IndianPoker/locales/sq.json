@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në një lojë të Pokerit Indian.\n- 52-kartë në dekë; shihni vetëm kartën e kundërshtarit.\n- Ante {ante} çip(s) çdo raund, {max_rounds} raund(e) gjithsej.\n- Lëvizje të vlefshme: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X është një numër i pozitiv i plotë ≤ numri i çipeve tuaj.)\n- Karta e fshehur më e lartë fiton potin në shfaqje.\n"
+  },
+  "round": {
+    "announce": "### Raundi {current_round}/{max_rounds}\nKarta e kundërshtarit është: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Furnizoni saktësisht NJË veprim të kllapëzuar, p.sh. '[check]', '[bet 2]', '[call]', '[raise 3]', ose '[fold]'.",
+    "cannot_check": "Nuk mund të [check] - jeni përballur me një bast.",
+    "amount_min": "Shuma e bastit / rritjes duhet të jetë ≥ 1.",
+    "cannot_bet": "Nuk mund të [bet] - duhet të [call] / [raise] / [fold].",
+    "nothing_to_call": "Asnjë gjë për të thirrur; mund të [check] në vend të kësaj.",
+    "no_bet_to_raise": "Përdorni [bet X] për të hapur; nuk ka bast për të rritur.",
+    "insufficient": "Çipet e pamjaftueshme për atë veprim."
+  },
+  "game_action": {
+    "action": "Lojtari {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kosto {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Veprimet tuaja të mundshme: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Lojtari {winner}. (Bankrollat P0:{p0}, P1:{p1})",
+    "folded": "Lojtari {player_id} u tërhoq.",
+    "showdown_win": "Shfaqja: {card_win} mund {card_lose}.",
+    "showdown_tie": "Barazim në shfaqje: të dy {card}. Poti ndahet – secili merr {split}."
+  },
+  "outcome": {
+    "p0_wins": "Lojtari 0 fiton ({bank0} > {bank1})",
+    "p1_wins": "Lojtari 1 fiton ({bank1} > {bank0})",
+    "draw": "Çipet e barabarta pas të gjitha raundeve"
+  }
+}

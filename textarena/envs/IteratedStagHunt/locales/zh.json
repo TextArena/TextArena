@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "你是玩家 {player_id}，正在进行一场共 {num_rounds} 回合的 Iterated Stag Hunt 游戏。\n\n游戏结构：\n- 游戏包含 {decision_rounds} 个决策回合\n- 每次决策前，你有 {conversation_rounds} 轮进行交流\n- 交流结束后，双方同时选择猎鹿或猎兔\n\n收益：\n- 猎鹿和猎兔对应的收益可能因回合而异\n- 每回合开始时会显示该回合的收益\n\n游戏方式：\n- 交流阶段：直接输入你的消息\n- 决策阶段：使用 '[Stag]' 或 '[Hare]'\n你可以在这些标记之前或之后添加其他文字。\n"
+  },
+
+  "round": {
+    "payoff_matrix": "第 {round} 回合开始，本回合的收益矩阵如下：\n- 双方都猎鹿：双方各获得 {mutual_stag} 分\n- 双方都猎兔：双方各获得 {mutual_hare} 分\n- 一方猎兔，另一方猎鹿：猎兔者获得 {single_hare} 分，猎鹿者获得 {single_stag} 分\n作出决定前，你可以与对手自由交流 {conversation_rounds} 轮。",
+    "decision_phase": "第 {round} 回合的决策阶段已经开始。请回复 '[stag]' 或 '[hare]'。",
+    "results": "第 {round} 回合结束。结果：\n\t玩家 0 选择了 '{decision0}'（本回合收益：{payoff0}；总收益：{total0}）\n\t玩家 1 选择了 '{decision1}'（本回合收益：{payoff1}；总收益：{total1}）"
+  },
+
+  "outcome": {
+    "win": "最终得分：玩家 0：{p0}，玩家 1：{p1}\n玩家 {winner_id} 获胜！",
+    "draw": "最终得分：玩家 0：{p0}，玩家 1：{p1}\n平局！"
+  }
+}

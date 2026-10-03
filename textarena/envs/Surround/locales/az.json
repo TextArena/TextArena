@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround yerli faylı. Açarları (sol tərəf) tərcümə etməyin. Yalnız dəyərləri (sağ tərəf) tərcümə edin. Hər {placeholder}ı olduğu kimi saxlayın.",
+  "_slots": {
+    "{num_players}": "Oyunda olan oyunçu sayı",
+    "{width}": "Taxta eni hücrələrdə",
+    "{height}": "Taxta hündürlüyü hücrələrdə",
+    "{player_id}": "Oyunçunun nömrəsi (0-əsaslı)",
+    "{board}": "Render edilmiş ASCII şəbəkəsi; neytral saxlayın, heç vaxt simvollarını tərcümə etməyin",
+    "{reason}": "Oyunun sonunda səbəb cümləsi",
+    "{groups}": "Neytral reytinq məlumatı (oyunçu-id qruplarının siyahısı, ən yaxşısından ən pisinə); tərcümə etməyin"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Oyunçu Surround {width}x{height} şəbəkəsində.\nSiz oyunçu {player_id}-siniz. Etibarlı hərəkətlər: '[up]' '[down]' '[left]' '[right]' və ya w/s/a/d.\nMəqsəd: hamıdan uzun yaşamaq. İz qoyan ölümcüldür; divara toxunma öldürür; baş-başa toqquşma hər ikisini öldürür."
+  },
+  "board": {
+    "current": "Cari Taxta:\n{board}",
+    "after_moves": "Eyni vaxtda hərəkətlərdən sonra taxta:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Oyunçu {player_id} etibarsız hərəkətə görə öldü."
+  },
+  "outcome": {
+    "survived_win": "Oyunçu {player_id} sağ qaldı; hamısı qəzaya uğradı.",
+    "all_crashed": "Bütün oyunçular eyni vaxtda qəzaya uğradılar.",
+    "outlived": "Oyunçu hamıdan uzun yaşadı.",
+    "all_dead": "Bütün oyunçular öldülər.",
+    "turn_limit": "Növbə limiti çatdı - ən uzun müddət sağ qalan qazanır.",
+    "ranking": "{reason} Final reytinq qrupları (ən yaxşısından ən pisinə): {groups}"
+  }
+}

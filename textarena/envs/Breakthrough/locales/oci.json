@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Jogatz {color} dins un jòc de Breakthrough. Desplaçatz {direction} sus un tauler {board_size}x{board_size}.\nA cada torn, podetz desplaçar una sola pèça d'un pas cap avant o en diagonal cap avant.\nUna pèça pòt solament se desplaçar en diagonal se una pèça adversària es présenta, e solament se desplaçar dins una tal plaça ocupada a un pas en diagonal.\nQuand intratz dins una plaça amb una pèça adversària, la capturatz e la pèça de l'adversari es levada definitivament del tauler.\nUtilizatz una notacion semblabla a UCI, entre parentèsis, per exemple [a2a3] per desplaçar de a2 cap a a3.\n* 'a' correspond a la colomna mai a esquèrra, '1' es la linha inferior (despuèi la perspectiva del Blanc).\n* La linha de depart dels Negres es la linha superior (linha 8 per un tauler 8x8). La linha de depart dels Blancs es la linha inferior (linha 1 per un tauler 8x8).\nLo primièr jogaire que fa arribar una de sas pèças a la linha de depart de l'adversari ganha. Se totas las vosas pèças son capturadas, perdètz."
+  },
+  "invalid_move": {
+    "wrong_format": "Utilizatz la notacion algebrica entre parentèsis coma [a2a3].",
+    "out_of_bounds": "Lo movement es fòra de las limitas del conselh.",
+    "illegal": "Aqueste movement seguís pas las règlas de la desbocadura o es pas ta pèça."
+  },
+  "game_action": {
+    "moved": "Jogador {player_id} desplaça {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Los blancs arribèron a la fila de casa dels negres.",
+    "black_reached": "Las negras arribèron a la fila de casa dels blancs.",
+    "white_captured": "Totas las pèças blancas capturadas.",
+    "black_captured": "Totas las pèças Negras capturadas.",
+    "no_moves": "Lo jogaire {player_id} a pas mai de movements."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i Nim.\nMålet ditt er å ta det siste gjenværende objektet.\nPå hver tur skal du velge nøyaktig én haug og fjerne ett eller flere objekter fra den.\nBruk formatet '[haug mengde]', hvor haug er haugens indeks og mengde er antallet objekter å fjerne.\nFor eksempel, '[0 3]' fjerner 3 objekter fra haug 0."
+  },
+  "state": {
+    "current_pile": "Nåværende Haug:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ingen gyldig trekkformat funnet. Bruk '[haug mengde]'.",
+    "correct_format_wrong_fields": "Spiller {player_id}, Ugyldig handling. Kolonne {col} er utenfor grensene.",
+    "out_of_range": "Haugens indeks {pile_index} er utenfor rekkevidde.",
+    "non_positive": "Må fjerne minst 1 objekt.",
+    "exceeds_pile": "Kan ikke fjerne {quantity} fra haug {pile_index} (bare {pile_count} igjen)."
+  },
+  "observation": {
+    "removed_from_piles": "Spiller {player_id} spilte [{pile_index} {quantity}], fjernet {quantity} objekt(er) fra haug {pile_index}."
+  },
+  "outcome": {
+    "win": "Spiller {player_id} tok det siste objektet(ene)!"
+  }
+}

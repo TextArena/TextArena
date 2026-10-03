@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction file ng lokasyon. HUWAG isalin ang mga susi (kaliwang bahagi). Isalin lamang ang mga halaga (kanang bahagi). Huwag isalin ang mga coordinate ng board (a-h, 1-8), titik ng mga piraso (O, X), ang token ng format ng pagkilos, o ang grid na ASCII ng {board}.",
+  "_slots": {
+    "{player_id}": "Ang numero ng manlalaro, alinman sa 0 o 1",
+    "{side}": "Ang titik ng piraso ng manlalaro, alinman sa O o X",
+    "{other}": "Ang titik ng piraso ng kalaban, alinman sa O o X",
+    "{board}": "Ang pag-render ng ASCII ng board; panatilihin bilang is",
+    "{coord}": "Isang coordinate ng board tulad ng b1 o a3",
+    "{from}": "Ang pinagmulang coordinate ng isang pagkilos, tulad ng b1",
+    "{to}": "Ang destinasyon ng coordinate ng isang pagkilos, tulad ng b3"
+  },
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa laro ng LinesOfAction.\nAng iyong mga piraso ay '{side}', ang mga piraso ng kalaban ay '{other}'.\nFormat ng pagkilos: `[b1b3]` (mula-coordinate hanggang-coordinate). Ang isang legal na pagkilos ay naglalakbay nang pahalang, patayo, o diagonal na bilang ng mga parisukat na katumbas ng kabuuang mga piraso (anumang kulay) sa linyang iyon. Maaari kang tumalon sa ibabaw ng iyong sariling mga piraso, ngunit hindi sa mga piraso ng kalaban; ang pag-landing sa isang kalaban ay nagkakapture nito.  Manalo kapag ang lahat ng iyong mga piraso ay konektado sa 8-kapitbahay."
+  },
+  "board": {
+    "current_board": "Board:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ang format ay dapat na e2e4 (mula, hanggang sa mga coordinate).",
+    "no_piece": "Walang piraso ng {side} sa {coord}.",
+    "identical": "Ang pinagmulan at destinasyon ay magkapareho.",
+    "not_straight_or_diagonal": "Ang pagkilos ay dapat na tuwid o diagonal.",
+    "wrong_distance": "Dapat lumipat ng distansya na katumbas ng mga piraso sa linya.",
+    "enemy_blocks": "Ang piraso ng kalaban ay humaharang sa daan.",
+    "destination_own": "Ang destinasyon ay okupado ng sariling piraso."
+  },
+  "game_action": {
+    "moved": "Ang Player {player_id} ay lumipat {from} -> {to}",
+    "captured_suffix": "Ang Player {player_id} ay lumipat {from} -> {to} na nakakapture ng isang kalaban."
+  },
+  "outcome": {
+    "win": "Ang lahat ng mga piraso ay konektado.",
+    "draw_no_capture": "60 pagkilos nang walang capture.",
+    "draw_repetition": "Ang posisyon ay paulit-ulit nang tatlong beses."
+  }
+}

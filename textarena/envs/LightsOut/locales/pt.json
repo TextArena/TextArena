@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Bem-vindo ao Lights Out! Você tem uma grade de {size}x{size} luzes.\nSeu objetivo é desligar TODAS as luzes (representadas por '.').\nQuando você pressiona uma luz, ela alterna seu próprio estado E os de seus vizinhos adjacentes (cima/baixo/esquerda/direita).\nDigite [row col] para pressionar uma luz (indexada em 0, então o intervalo válido é 0-{max_index}).\nVocê tem até {max_turns} movimentos para resolver o quebra-cabeça.\nLegenda: 'O' = luz LIGADA, '.' = luz DESLIGADA"
+  },
+  "board": {
+    "current_state": "Estado atual da grade (Movimento {moves_made}, {moves_left} movimentos restantes, {completion}% completo):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "A ação deve estar no formato [row col] onde linha e coluna são números inteiros de 0 a {max_index}.",
+    "out_of_range": "As coordenadas devem estar entre 0 e {max_index}. Você entrou [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Parabéns! Você resolveu o quebra-cabeça em {moves_used} movimentos!",
+    "loss": "Fim de jogo! Você usou todos os {max_turns} movimentos sem resolver o quebra-cabeça. Conclusão final: {completion}%\nEstado final:\n{grid}"
+  }
+}

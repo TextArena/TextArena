@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Oyun başlanır. Trump suiti: {trump_suit} (trump kartı: {trump_str}).",
+    "no_trump_card": "yoxdur"
+  },
+  "player_prompt": {
+    "intro": "Siz Alman Vistində Oyunçu {player_id}-siniz.\n{phase_info}\nSiz {hand_size} kart saxlayırsınız.\nKartı '[play N]' ilə oynayın, burada N sizin əlinizdəki mövqedir (məsələn '[play 3]').",
+    "phase_learning": "ÖYRƏNMƏ FASESİ: hər bir trick-in qalibi üzü-açık kartı götürür və uduzan növbəti kartı kolleksiyadan çəkir. Bu fazada qazanılan trick-lər qələbəyə hesab olunmur.",
+    "phase_playing": "OYUN FASESİ: kolleksiya tükənib. İndidən etibarən hər bir trick qələbəyə hesab olunur."
+  },
+  "next_card": {
+    "playing_phase": "Heç bir kart təklif olunmur - oyun fazası başlanır.",
+    "deck_empty": "Kolleksiya boşdur - heç bir kart təklif olunmur.",
+    "available": "Təklif olunan kart: {card}",
+    "available_trump": "Təklif olunan kart: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Yanlış hərəkət formatı. '[play N]' ilə N-ci kartı oynamaq üçün istifadə edin.",
+    "bad_position": "Bu kart mövqeyi mövcud deyil. Siz {hand_size} kart saxlayırsınız.",
+    "must_follow_suit": "Siz suiti izləməli və {lead_suit} kartı oynamaq üçün istifadə edin.",
+    "invalid_play": "Bu kart oynanamaz."
+  },
+  "game_action": {
+    "played": "Oyunçu {player_id} {card} kartını oynadı."
+  },
+  "trick": {
+    "won": "Oyunçu {winner_id} {card} kartı ilə trick-i qazandı.",
+    "won_learning": "Oyunçu {winner_id} {card} kartı ilə trick-i qazandı və üzü-açık kartı götürdü."
+  },
+  "phase": {
+    "learning_complete": "Kolleksiya tükənib. Öyrənmə fazası başa çatdı - qalan hər bir trick qələbəyə hesab olunur."
+  },
+  "draw": {
+    "winner_received": "Siz trick-i qazandınız və {card} kartını aldınız.",
+    "loser_received": "Siz trick-i uduzdunuz və kolleksiyadan {card} kartını çədiniz.",
+    "winner_preview": "Növbəti kart təklif olunur: {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "İndiyə qədər qazanılan trick-lər - Oyunçu 0: {tricks0}, Oyunçu 1: {tricks1}",
+    "scores_playing": "Qələbəyə hesab olunan trick-lər - Oyunçu 0: {tricks0}, Oyunçu 1: {tricks1}",
+    "phase": "Faza: {phase}",
+    "phase_learning": "Faza: {phase} (kolleksiyada {remaining_cards} kart qalıb)"
+  },
+  "hand": {
+    "no_cards": "Heç bir kart",
+    "no_cards_in_hand": "Əldə heç bir kart yoxdur",
+    "header": "Sizin əliniz:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Hələ heç bir kart oynanmayıb.",
+    "header": "Cari trick:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Oyunçu {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Oyun başlanmayıb",
+    "header": "=== ALMAN VİST OYUNU ===",
+    "phase": "{observation}\nFaza: {phase}",
+    "trump_suit": "{observation}\nTrump suiti: {trump_suit}",
+    "trump_card": "{observation}\nTrump kartı: {card}",
+    "cards_left": "{observation}\nKolleksiyada qalan kartlar: {count}",
+    "next_card": "{observation}\nQalib üçün növbəti kart: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nCari trick:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Oyunçu {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nOyunçu {player_id}: {scoring} qələbəyə hesab olunan trick-lər ({tricks} ümumi), {hand_size} kart əldə"
+  },
+  "outcome": {
+    "summary": "Öyrənmə fazası - Oyunçu 0: {l0}, Oyunçu 1: {l1}. Oyun fazası - Oyunçu 0: {p0}, Oyunçu 1: {p1}. Oyunçu {winner_id} {winner_tricks} qələbəyə hesab olunan trick-lərlə qazandı!"
+  }
+}

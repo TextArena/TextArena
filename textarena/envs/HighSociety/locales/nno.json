@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spelar {player_id} i eit spel av HighSociety (2-spelarversjon).\nSpelflåt:  Ti prestigekort auksjoneres ein etter ein.\nBudgjeving:    Kvar auksjon, velg hemmeleg ein pengeseddel 1-11 og avdekke.\n            • Høgare bud vinn prestigekortet og kassérer den pengeseddelen.\n            • Lågare bud held pengeseddelen sin.\n            • Uavgjort -> begge bud returneres og same prestigekortet auksjoneres på nytt.\nPoengsystem:    Etter alle ti auksjonane, legg til **attverande kontantar + prestisjepoeng**.\n            Høgare *nettverdi* vinn (eksakt uavgjort -> uavgjort).\n\n**Handlingssyntax**  →  byd ein enkelt seddel som '[7]' eller '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Auksjon {round}/10  |  Prestigekort: {prize}"
+  },
+  "board": {
+    "money_cards": "Dei attverande pengekortane dine: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Må innehalda nøyaktig eitt [X] pengekort.",
+    "card_not_held": "Du har ikkje noko pengekort lenger."
+  },
+  "message": {
+    "tie": "Uavgjort - bud returnert. Byd igjen!",
+    "auction_result": "P0 bydde {bid0}, P1 bydde {bid1}. Spelar {winner} vinn prestisje {prize} (totalt {total})."
+  },
+  "outcome": {
+    "p0_wins": "Nettverdi {nw0} > {nw1}",
+    "p1_wins": "Nettverdi {nw1} > {nw0}",
+    "draw": "Begge netto-verde {nw0}  eksakt same."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id}. Unacheza Sudoku.\nHapa kuna hali ya sasa ya gridi ya Sudoku. Kila safu imepewa nambari kutoka 1 hadi 9, na kila safu wima pia imepewa nambari kutoka 1 hadi 9.\nSeli tupu zinawakilishwa na '.', na seli zilizojazwa awali zina tarakimu kutoka 1 hadi 9.\n\nGridi ya Sudoku ya Sasa:\nLengo lako ni kujaza seli tupu katika gridi ya 9x9 na tarakimu kutoka 1 hadi 9 kiasi kwamba:\n1. Kila safu ina tarakimu zote kutoka 1 hadi 9 bila kurudia.\n2. Kila safu wima ina tarakimu zote kutoka 1 hadi 9 bila kurudia.\n3. Kila moja ya subgridi 9 za 3x3 ina tarakimu zote kutoka 1 hadi 9 bila kurudia.\n\nSheria na Mwongozo:\n1. **Usibadilishe** nambari za awali zilizotolewa kwenye gridi.\n2. **Jaza tu** seli tupu zinazowakilishwa na '.'.\n3. Unaweza kujibu kwa njia yoyote unayopenda, lakini hakikisha kwamba jibu lako lina muundo wa '[safu safu wima nambari]'.\n4. **Hakikisha** kwamba hatua yako haikiuki sheria za Sudoku. Hatua zisizo halali zitasababisha adhabu.\nMifano:\n- **Hatua Halali**:\n  - Sehemu ya Gridi Kabla ya Hatua:\n  \n  - Hatua: `[5 3 7]`\n  - Maelezo: Kuweka 7 katika safu ya 5, safu wima ya 3 haikiuki sheria yoyote ya Sudoku.\n\n- **Hatua Isiyohalali** (Kubadilisha seli iliyojazwa awali):\n  - Sehemu ya Gridi Kabla ya Hatua:\n  \n  - Hatua: `[1 1 9]`\n  - Maelezo: Seli (1,1) tayari imejazwa na 5. Huwezi kubadilisha.\n\n- **Hatua Isiyohalali** (Kukiuka sheria za Sudoku):\n  - Sehemu ya Gridi Kabla ya Hatua:\n  \n  - Hatua: `[1 3 5]`\n  - Maelezo: Kuweka 5 katika safu ya 1, safu wima ya 3 inakiuka sheria kwa kuwa 5 tayari ipo katika safu ya 1.\n\nHistoria ya hatua zako na mawazo yako yataongezwa kadiri unavyocheza raundi zaidi. Tumia historia ya hatua zako kuboresha ufanyaji maamuzi kwa kuepuka hatua ambazo umajaribu. Bahati njema!\n\n"
+  },
+  "board": {
+    "game_board": "Ubao wa Mchezo:\n{board}",
+    "board_state": "Hali ya Ubao: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Muundo usio sahihi wa hatua. Mchezaji {player_id} hajajibu na 'safu safu wima nambari' halali.",
+    "out_of_bounds": "Hatua isiyohalali. Mchezaji {player_id} alijaribu kuweka {num} katika ({row}, {col}), ambayo iko nje ya mipaka.",
+    "overwrite": "Hatua isiyohalali. Mchezaji {player_id} alijaribu kubadilisha seli iliyojazwa awali ({row}, {col}).",
+    "violates_rules": "Hatua isiyohalali. Mchezaji {player_id} alijaribu kuweka {num} katika ({row}, {col}), ambayo inakiuka sheria za Sudoku."
+  },
+  "outcome": {
+    "win": "Hongera! Mchezaji {player_id} amemaliza puzzle ya Sudoku.",
+    "turn_limit": "Kikomo cha raundi kimefikia. Ulijaza kwa usahihi {percent}% ya seli tupu."
+  }
+}

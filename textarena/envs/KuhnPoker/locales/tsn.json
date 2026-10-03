@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "O wena Player {player_id} mo papading ya Kuhn Poker ya {max_rounds} raundi.\nMelao ya Papadi:\n- Kuhn Poker e dirisa dekete tsa 3 tsa J, Q, K (J e le kwa tlase, K e le kwa godimo)\n- Mongwe le mongwe wa batsamaisi ba papadi a ntsha {ante} chip le go amogela karete 1 ka raundi (tsenya tsogo gore karete di arogelwa ka tsela ya go se kemiše, kwa hore ga o tlhole o na karete e le nngwe le mmaba wa gago).\n- Papadi e tswelela ka {max_rounds} raundi\n- Motshameki yo o nang le madi a mantsi ka morago ga raundi zote o a fenya\nMelao ya Tiro:\n- '[check]': O passe ka tsela ya go se bete (fela fa go se na bete mo taflen)\n- '[bet]': O oketsa 1 chip mo poteng (fela fa go se na bete mo taflen)\n- '[call]': O itshwantsha bete ya mmaba wa gago ka go oketsa 1 chip mo poteng\n- '[fold]': O itshwarela seatla sa gago le go letla mmaba wa gago a fenye pota"
+  },
+  "init_round": {
+    "round_start": "### Tsalo ya kgwedi {current_round} ya {max_rounds} dipalo tsa kgwedi. Karte ya gago ke: '{player_card}'",
+    "available_actions": "Ditiro tse o ka di dirang ke: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Tiro e tshwanetse e be [Check], [Bet], [Call], goba [Fold].",
+    "not_legal": "Kgato e tshwanetse go nna {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, o rometse tiro: '[{move}]'.",
+    "valid_actions": "Ditiro tse o ka di dirang ke: {legal_actions}.",
+    "round_summary": "{reason} Dibuka tsa jaanong: Moshupi 0: '{player_0_chips}'; Moshupi 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Tshenyo: Moshupi {winner} o na le {winner_card} e lebetse Moshupi {loser} ka {loser_card}. Moshupi {winner} o wetsa pot ya {pot_value} tshipi."
+  },
+  "outcome": {
+    "draw": "Kwa bokhutlong jwa {max_rounds} raundi, batshameki ka bobedi ba ne ba na le palo e e tshwanang ya ditšhipi.",
+    "round_win": "Motshameki {player_id} o ne a latlhela bolo.",
+    "winner_player0": "Motshameki 0 o ne a fenya ka go nna le ditšhipisi tse dintsi kwa bokhutlong jwa {max_rounds} raundi.",
+    "winner_player1": "Motshameki wa 1 o ne a fenya ka go nna le ditšhipi tse dintsi kwa bokhutlong jwa {max_rounds} raundi."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Inti Player {player_id} f'logħba {max_rounds} tar-rond ta' Kuhn Poker.\nRegoli tal-Logħba:\n- Kuhn Poker tuża dek ta' 3-karti bil J, Q, K (J l-inqas, K l-ogħla)\n- Kull player jagħmel ante {ante} ċip u jirċievi 1 karta kull rond (peress li l-karti huma mbagħdin mingħajr ripetizzjoni, hekk inti ma tistax ikollha l-istess karta bħal maġġoranza tiegħek).\n- Il-logħba tkompli għal {max_rounds} rundi\n- Il-player bil-ħafna ċips wara r-rondi kollha jirbaħ\nRegoli tal-Azzjoni:\n- '[check]': Għaddi mingħajr li tħallas (biss jekk m'hemmx bet fuq il-mejda)\n- '[bet]': Żid 1 ċip fil-pot (biss jekk m'hemmx bet fuq il-mejda)\n- '[call]': Qabbel bet ta' maġġoranza tiegħek billi żid 1 ċip fil-pot\n- '[fold]': Irriżenja id-dejk tiegħek u ħallilmaġġoranza tiegħek tirbaħ il-pot"
+  },
+  "init_round": {
+    "round_start": "### Bidu tar-rond {current_round} minn {max_rounds} rundi. Il-karta tiegħek hija: '{player_card}'",
+    "available_actions": "L-azzjonijiet disponibbli tiegħek huma: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "L-azzjoni trid tkun [Check], [Bet], [Call], jew [Fold].",
+    "not_legal": "L-azzjoni għandha tkun {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Plejer {player_id}, ippreżenta mossa: '[{move}]'.",
+    "valid_actions": "L-azzjonijiet disponibbli tiegħek huma: {legal_actions}.",
+    "round_summary": "{reason} Is-skorijiet attwali: Plejer 0: '{player_0_chips}'; Plejer 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Il-karta {winner_card} ta' Plejer {winner} tħossha l-karta {loser_card} ta' Plejer {loser}. Plejer {winner} jirbaħ pot ta' {pot_value} ċip."
+  },
+  "outcome": {
+    "draw": "Fl-aħħar tar-rawnds {max_rounds}, iż-żewġ plejers kellhom l-istess numru ta' ċips.",
+    "round_win": "Il-plejer {player_id} waqaf.",
+    "winner_player0": "Il-plejer 0 rebaħ billi kellu aktar chips fi tmiem ir-rawnds kollha {max_rounds}.",
+    "winner_player1": "Il-plejer 1 rebaħ billi kellu aktar chips fi tmiem ir-rawnds kollha {max_rounds}."
+  }
+}

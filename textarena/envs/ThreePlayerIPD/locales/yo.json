@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "O jẹ oṣere {player_id} ni 3-player Iterated Prisoner's Dilemma. Idaraya naa pẹ {num_rounds} awọn iyipo. Ẹya iyipo: • {conv_rounds} awọn iyipo iwiregbe ọfẹ • 1 ipinnu ipinnu - fi ami kan fun alatako: '[<opp-id> cooperate]' tabi '[<opp-id> defect]' (ie '[1 defect] [2 cooperate]'; aiyipada ni 'ṣiṣẹpọ'). Matrix isanwo ti o ni imọran (ti a lo si ọkọọkan awọn tọkọtaya ti ko ni aṣẹ): - Mejeeji ṣe ifowosowopo -> {reward} - Mejeeji jẹ alailẹgbẹ -> {punishment} - O jẹ alailẹgbẹ, wọn ṣe ifowosowopo -> {temptation} - O ṣe ifowosowopo, wọn jẹ alailẹgbẹ -> {sucker} Awọn oṣere) pẹlu awọn aami ti o ga julọ ni opin gbogbo awọn iyipo."
+  },
+  "round": {
+    "start": "─── Ìbẹ̀rẹ̀ Ìyí {round} ─── Ẹ lè bá ara yín sọ̀rọ̀ fàlàlà fún ìyí {conv_rounds} tó ń bọ̀.",
+    "chat_finished": "Ifẹsẹ̀wọ̀nsẹ̀ tan an fún ẹ̀rún {round}. Fi ìpinnu rẹ̀ sílẹ̀, ọ̀kan tókẹ́nì fún ọ̀tọ̀ kọ̀ọ̀kan: `[pid cooperate]` tàbí `[pid defect]`."
+  },
+  "results": {
+    "header": "### Ìyí {round} - Ìyọrísí:",
+    "pair_line": "{observation}\n\t Oṣere {i} vs Oṣere {j} yan lati {choice_i} ati {choice_j} bi o ṣe rẹ (Oṣere {i} gba {gain_i}, Oṣere {j} gba {gain_j})",
+    "scores_open": "{observation} -> Àwọn ìyọrísí tó wà nísinsìnyí: ",
+    "score_first": "{observation}Oṣere {player_id} ({score})",
+    "score_next": "{observation}; Òṣèré {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Awọn ipele ipari: {scores}. Awọn ẹgbẹ ipo (ti o buru julọ→ti o dara julọ): {groups}"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "I n'ye Jɛgɛ {player_id} ye 3-jɛgɛ Dilemme Prisonnier Itéré la. Match bɛ́ na {num_rounds} walasaw.\nWalasa fasali:\n• {conv_rounds} parolɛ́ sɔrɔw\n• 1 kɛlɛli sɔrɔ - sɔrɔ́ cɛ́cɛ ka dɛmɛ kelen kɔ kɔnɔ kɔnɔ: '[<opp-id> cooperate]' walima '[<opp-id> defect]' (o la, '[1 defect] [2 cooperate]'; dɔw la 'cooperate').\nPayoff matrisi pɛrɛ-pɛrɛn (kɔnɔ kɔnɔ pɛrɛ-pɛrɛn):\n  - Ɔɔ ka jɛgɛw bɛ́ɛ kɛlɛ  ->  {reward}\n  - Ɔɔ ka jɛgɛw bɛ́ɛ yɛrɛ     ->  {punishment}\n  - I yɛrɛ, u kɛlɛ  -> {temptation}\n  - I kɛlɛ, u yɛrɛ  -> {sucker}\nJɛgɛ (w) bɛ́ na dɔw sɔrɔ bɛ́ɛ kɔnɔ walasa wɔɔrɔ la, u bɛ́ sɔrɔ."
+  },
+  "round": {
+    "start": "─── Turu {round} dɔn ───\tI ni daɲɛw laɲɛw {conv_rounds} turu wɔɔrɔw la.",
+    "chat_finished": "Parolɛ́ bɛ́ na walasa {round}. Sɔrɔ́ cɛ́cɛ ka dɛmɛ, o kelen kɔ kɔnɔ kɔnɔ: `[pid cooperate]` walima `[pid defect]`."
+  },
+  "results": {
+    "header": "### Koun {round} - Ntigini:",
+    "pair_line": "{observation}\n\t Jɛgɛ {i} vs Jɛgɛ {j} ka chɛ a ka {choice_i} ni {choice_j} (Jɛgɛ {i} ka gain {gain_i}, Jɛgɛ {j} ka gain {gain_j})",
+    "scores_open": "{observation} -> Bi tile la jatidenw: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}  bɛ"
+  },
+  "outcome": {
+    "final": "Scorew ɲɛma: {scores}.  Ranking groups (worst→best): {groups}"
+  }
+}

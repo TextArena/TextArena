@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في لعبة Indian Poker.\n- مجموعة من 52 بطاقة؛ لا ترى سوى بطاقة الخصم.\n- يدفع كل لاعب رهانًا إجباريًا قدره {ante} رقاقة في كل جولة، بإجمالي {max_rounds} جولة.\n- الحركات الصالحة: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (يجب أن تكون X عددًا صحيحًا موجبًا <= عدد رقائقك.)\n- تفوز أعلى بطاقة مخفية بالرهان عند كشف البطاقات.\n"
+  },
+  "round": {
+    "announce": "### الجولة {current_round}/{max_rounds}\nبطاقة خصمك هي: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "أرسل حركة واحدة فقط بين قوسين مربعين، مثل '[check]' أو '[bet 2]' أو '[call]' أو '[raise 3]' أو '[fold]'.",
+    "cannot_check": "لا يمكنك استخدام [check] - أنت تواجه رهانًا.",
+    "amount_min": "يجب أن يكون مبلغ Bet / Raise ≥ 1.",
+    "cannot_bet": "لا يمكنك استخدام [bet] - يجب استخدام [call] / [raise] / [fold].",
+    "nothing_to_call": "لا يوجد رهان لمجاراته؛ يمكنك استخدام [check] بدلًا من ذلك.",
+    "no_bet_to_raise": "استخدم [bet X] لبدء الرهان؛ لا يوجد رهان يمكن زيادته.",
+    "insufficient": "لا توجد رقائق كافية لهذه الحركة."
+  },
+  "game_action": {
+    "action": "اللاعب {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]'، '[bet X]'",
+    "actions_facing_bet": "'[call]' (التكلفة {to_call})، '[raise X]'، '[fold]'",
+    "possible_actions": "حركاتك الممكنة: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  الرهان {pot} → اللاعب {winner}. (الأرصدة P0:{p0}، P1:{p1})",
+    "folded": "انسحب اللاعب {player_id}.",
+    "showdown_win": "كشف البطاقات: {card_win} تتفوق على {card_lose}.",
+    "showdown_tie": "تعادل عند كشف البطاقات: لدى كليهما {card}. يُقسّم الرهان – يحصل كل لاعب على {split}."
+  },
+  "outcome": {
+    "p0_wins": "يفوز اللاعب 0 ({bank0} > {bank1})",
+    "p1_wins": "يفوز اللاعب 1 ({bank1} > {bank0})",
+    "draw": "تساوي الرقائق بعد جميع الجولات"
+  }
+}

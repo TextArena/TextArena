@@ -1,0 +1,31 @@
+{
+  "_comment": "Lokal Inggris untuk Hangman. Kunci (kiri) tetap; terjemahkan hanya nilai (kanan). Simpan setiap {placeholder} secara harfiah. Simpan token netral tidak diterjemahkan: format kurung '[L]' / '[LIGHT]', tebakan satu huruf {letter}, header kolom (C00, C01, ...) dan '_' kosong di dalam {board}.",
+  "_slots": {
+    "{board}": "Papan netral yang dirender (header kolom C00/C01, huruf yang terungkap, '_' kosong); jangan diterjemahkan",
+    "{tries_left}": "Jumlah percobaan salah yang tersisa (bilangan bulat)",
+    "{guessed}": "Daftar huruf yang sudah ditebak, dipisahkan dengan koma",
+    "{letter}": "Huruf atau kata lengkap yang ditebak (dipertahankan sesuai yang ditulis)",
+    "{pct}": "Persentase karakter yang ditebak dengan benar, diformat hingga 2 desimal",
+    "{target_word}": "Kata target yang tersembunyi"
+  },
+  "prompt": {
+    "intro": "Anda sedang bermain Hangman. Tujuan permainan ini adalah menebak kata dengan memberikan satu huruf atau kata lengkap.\nSetiap kolom dinomori. Sel yang perlu diisi dengan huruf direpresentasikan dengan '_'.\n\nAda dua cara Anda bisa menjawab. Anda bisa memberikan tebakan satu huruf dalam format '[L]', atau Anda bisa menebak kata lengkap dalam format '[LIGHT]'.\nJika huruf yang diberikan ada dalam kata, huruf tersebut akan terungkap di grid.\nJika kata yang diberikan benar, Anda menang.\nSaat Anda bermain, riwayat pilihan Anda akan ditambahkan di bawah. Gunakan informasi tersebut untuk menebak kata dan menang.\nAnda memiliki 6 percobaan salah sebelum permainan berakhir.\n\n"
+  },
+  "board": {
+    "status": "Papan saat ini:\n{board}\nAnda memiliki {tries_left} percobaan tersisa.\nHuruf yang sudah ditebak: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Format gerakan tidak valid. Anda tidak merespons dengan 'huruf' atau 'kata' yang valid.",
+    "already_guessed": "Anda menebak huruf '{letter}' yang sudah pernah ditebak."
+  },
+  "message": {
+    "wrong_word": "Tebakan Anda '{letter}' bukan kata target.",
+    "letter_in": "Tebakan Anda {letter} ada dalam kata",
+    "letter_not_in": "Tebakan Anda {letter} tidak ada dalam kata. Anda memiliki {tries_left} nyawa tersisa."
+  },
+  "outcome": {
+    "win_word": "Selamat! Anda telah menyelesaikan teka-teki Hangman.",
+    "win_board": "Selamat! Anda telah menyelesaikan teka-teki Hangman.",
+    "out_of_tries": "Anda kehabisan percobaan. Anda menebak {pct} persen karakter dengan benar. Kata target adalah: {target_word}"
+  }
+}

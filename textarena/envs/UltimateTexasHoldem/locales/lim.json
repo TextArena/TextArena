@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Nog gein kaarten.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Single Player vs Dealer\n\n📖 GAME OVERVIEW:\n• Je begint met {start_chips} chips\n• Enkel deck van 52 kaarten (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Je speelt tegen de dealer (huis)\n• Elke ronde volgt de Ultimate Texas Hold'em structuur: je plaatst ANTE en BLIND inzetten, ontvangt 2 hole kaarten, beslist over optionele PLAY inzetten in de inzetfasen, en onthult vervolgens gemeenschapskaarten en vergelijkt je beste 5-kaart hand met die van de dealer. Je doel is om je winst te maximaliseren (wanneer je de betere hand hebt), terwijl je je verlies minimaliseert (wanneer je de slechtere hand hebt).\n• Het spel eindigt wanneer je 0 chips of minder hebt aan het begin van de ronde (VERLIES) of wanneer je 1000 rondes voltooit met chips (WINST)\n\n💰 INZETSTRUCTUUR:\n• ANTE: Verplicht ${ante} inzet elke ronde\n• BLIND: Verplicht ${ante} inzet elke ronde\n• PLAY: Optionele inzet tijdens het spel. Gedurende de ronde kun je alleen één van de volgende kiezen: (${ante4} als je dit doet in PRE-FLOP, ${ante2} als je dit doet in FLOP, of ${ante} als je dit doet in RIVER. Je kunt ook folden in de river, waardoor je de hand opgeeft en geen inzet plaatst.)\n\n🎴 KAARTDELEN:\n• Je ontvangt 2 open kaarten (je hole kaarten)\n• De dealer ontvangt 2 gesloten kaarten (verborgen voor jou)\n• 5 gemeenschapskaarten worden aanvankelijk gesloten gedeeld\n• Gemeenschapskaarten worden progressief onthuld in de spel fasen\n\n🏆 DEALERKWALIFICATIE:\n• De dealer moet minstens een PAIR (2 kaarten van dezelfde rang) hebben om te kwalificeren, met behulp van de 2 kaarten in hun hand en de 5 gemeenschapskaarten.\n• De dealerkwalificatie beïnvloedt de inzetuitkomsten, zoals later zal worden uitgelegd.\n\n🎮 SPELFASEN & ACTIES:\n📋 PRE-FLOP:\n  • Acties: [4x] (${ante4}) of [check]\n  • [4x]: Plaats ${ante4} PLAY inzet, onthult de eerste 3 gemeenschapskaarten\n  • [check]: Geen extra inzet, onthult de eerste 3 gemeenschapskaarten\n\n📋 FLOP:\n  • Als je 4x inzet hebt geplaatst: Alleen [skip] beschikbaar (automatisch onthult de laatste 2 gemeenschapskaarten)\n  • Als je geen 4x inzet hebt geplaatst: [2x] (${ante2}) of [check]\n  • [2x]: Plaats ${ante2} PLAY inzet, onthult de laatste 2 gemeenschapskaarten\n  • [check]: Geen extra inzet, onthult de laatste 2 gemeenschapskaarten\n\n📋 RIVER:\n  • Als je 4x of 2x inzet hebt geplaatst: Alleen [skip] beschikbaar (automatisch naar de showdown)\n  • Als je geen eerdere PLAY inzet hebt geplaatst: [1x] (${ante}) of [fold]\n  • [1x]: Plaats ${ante} PLAY inzet, gaat naar de showdown\n  • [fold]: Geef de hand op, verlies ANTE en BLIND inzetten\n\n📋 SHOWDOWN:\n  • Alle kaarten worden onthuld en geëvalueerd\n  • Beste 5-kaart hand van 7 kaarten (2 hole + 5 gemeenschapskaarten)\n  • Inzetten worden geregeld volgens de uitbetalingsregels\n\n💎 INZETUITBETALINGEN:\n📊 ANTE INZET:\n  • Dealer kwalificeert zich niet: PUSH (inzet terugbetaald)\n  • Dealer kwalificeert zich en je wint: 1:1 uitbetaling (inzet + winst)\n  • Dealer kwalificeert zich en je verliest: Inzet verloren\n  • Gelijkspel: PUSH (inzet terugbetaald)\n\n📊 BLIND INZET:\n  • Niet beïnvloed door de dealerkwalificatie\n  • Je wint: Inzet terugbetaald en extra uitbetaling op basis van je handsterkte\n  • Je verliest: Inzet verloren\n  • Gelijkspel: PUSH (inzet terugbetaald)\n\n📊 BLIND INZET UITBETALINGSTABEL:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Minder dan Straight: Geen extra uitbetaling\n\n📊 PLAY INZET:\n  • Niet beïnvloed door de dealerkwalificatie\n  • Directe vergelijking: Je beste hand vs de beste hand van de dealer\n  • Je wint: 1:1 uitbetaling (inzet + winst)\n  • Je verliest: Inzet verloren\n  • Gelijkspel: PUSH (inzet terugbetaald)\n\n🎯 POKERHANDRANGSCHIKKING (Beste naar slechtste):\n  1. Royal Flush: A-K-Q-J-10 van dezelfde soort\n  2. Straight Flush: 5 opeenvolgende kaarten van dezelfde soort\n  3. Four of a Kind: 4 kaarten van dezelfde rang\n  4. Full House: 3 van een soort + 2 van een soort\n  5. Flush: 5 kaarten van dezelfde soort\n  6. Straight: 5 opeenvolgende kaarten\n  7. Three of a Kind: 3 kaarten van dezelfde rang\n  8. Two Pair: 2 paren van verschillende rangen\n  9. One Pair: 2 kaarten van dezelfde rang\n  10. High Card: Hoogste kaart wint\n\n⌨️  ACTIECOMMANDO'S:\n• [4x] of [play bet 4x]: Plaats ${{self.ante_amount*4}} PLAY inzet\n• [2x] of [play bet 2x]: Plaats ${{self.ante_amount*2}} PLAY inzet\n• [1x] of [play bet 1x]: Plaats ${{self.ante_amount*1}} PLAY inzet\n• [check] of [c]: Check (geen extra inzet)\n• [fold] of [f]: Fold (geef de hand op)\n• [skip] of [s]: Sla over naar de volgende fase (wanneer geen actie nodig is)\n\n💡 STRATEGIETIPS:\n• Sterke startkaarten (paren, hoge kaarten) rechtvaardigen vaak 4x inzetten\n• Overweeg de dealerkwalificatie - zwakke handen kunnen duwen als de dealer zich niet kwalificeert\n• BLIND inzet kan zeer winstgevend zijn met sterke handen (Royal Flush = 500:1!)\n• Houd je chipstapel in de gaten! Als het naar 0 of minder gaat aan het begin van de ronde, verlies je.\n\n⚠️  BELANGRIJKE NOTITIES:\n• ANTE en BLIND inzetten zijn verplicht elke ronde\n• PLAY inzetten zijn optioneel en strategisch\n• Zorg ervoor dat je de juiste actie invoert, en slechts één actie tegelijk.\n\n",
+    "state": "🎯 RONDE {round}\n💰 Chips: {chips}\n🎴 Duw hand: {hand}\n📊 Huidige inzat: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fase: {phase}\n🎯 Besjikbare acties: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Rond {round} gestart! Inzat: ANTE ${ante}, BLIND ${blind}. Du häös {chips} chips euver.",
+    "your_hand": " Je hand: {hand}",
+    "flop_revealed": " FLOP onthuld: {cards}",
+    "river_revealed": " RIVER onthuld: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Invalide actie veur de huidige fase. Besjikbare acties: {available}",
+    "message": " Ingeldige actie! Beschikbare acties: {available}"
+  },
+  "action": {
+    "folded": " Je bent opgevallen."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Dealer ziene hand: {cards}",
+    "community_cards": " Gemeenschapskaarte: {cards}",
+    "player_best": "🎴 Speler's bèste hand: {name} ({cards})",
+    "dealer_best": "🎴 Dealer's bèste hand: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (gevouwd)",
+    "blind_lost_folded": " Blind bet LOST! -${blind} (gevouwd)",
+    "ante_won": "✅ ANTE-inzat GEWÓNNE! +${amount}",
+    "ante_pushed": "🔄 ANTE-inzat TERUGGEKÈRG! $ {ante} tröggegaof",
+    "ante_lost": " ANTE weddjint VERLOOS! -${ante}",
+    "blind_won": "✅ Blind bet WON! +${amount}",
+    "blind_pushed": " Blind bet PUSHED! ${blind} returned.",
+    "blind_lost": " Blind bet LOST! -${blind}",
+    "play_won": "✅ PLAY inzet GEWONNEN! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} returned.",
+    "play_lost": " PLAY bet LOST! -${play}",
+    "net_gain": "🎉 Ronde {round} voltoajd! Netto-winst: +${net}",
+    "net_loss": "💸 Ronde {round} voltoajd! Netto-verlies: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 SPEL AAF! {max_turns} rondes voltoaj. Du häös ${chips} chips - DU WINT!",
+    "game_over_lose": "De dealer wint, de chips zien leeg.",
+    "reward_win": "Speler haet {winner_rounds} rondes voltoajd mit ${chips} chips",
+    "reward_lose": "Speler liep in ronde {round} zonder fiches.",
+    "reward_win_max": "Speler haet {max_turns} rondes voltoajd mit ${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush (Köninklik vlot)",
+    "straight_flush": "Straight Flush (Straot vlot)",
+    "four_of_a_kind": "Vier van 'n soort",
+    "full_house": "Vol Hoes",
+    "flush": "Flush (sjloet)",
+    "straight": "Rechte waeg.",
+    "three_of_a_kind": "Drie vaan 'n soort",
+    "two_pair": "Twie paar.",
+    "one_pair": "Ein paar.",
+    "high_card": "Hoeg kaart.",
+    "unknown": "Onbekinde hand."
+  }
+}

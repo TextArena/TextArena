@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Du bis Speler {player_id} in 'n {num_players}-spelers Liar's Dice spel.\nRegele:\n- Op dien beurt, maog du ÈÈn van twieë dinge doon:\n  1) 'n Nujen bieje mit 'n hoeëger kwantiteit of 'n hoeëger gesich (of allebei) as de hujige bieje; dus '[Bid: 3, 4]',\n  2) De lèste bieje roppe door '[Call]' te typen.\n\nEs du rop:\n  - Es de echte tel van dae gesichwaarde ónder de dobbelsteine minder is as de bieje, dan verluus de lèste biejer eine dobbelsteen.\n  - Anders verluus de ropers eine dobbelsteen.\n'ne Speler dae biej 0 dobbelsteine kump, is oetgesjlaote. De lèste rèsjerende speler wint."
+  },
+  "board": {
+    "per_player": "\tSpeler {p}: {d}",
+    "new_round": "\nNujen rónj - Resterende dobbelsteine: {dice_summary}\nDin hujige dobbelsteine zint: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Speler {current_player_id} röp! 't Echte aantal {face_value} is {count}, wat MINDER is es {quantity}.\nSpeler {loser_id} (de lèste bieder) verluis ein dobbelsteen.",
+    "caller_loses": "Speler {current_player_id} rop! De echte tel van gesich {face_value} is {count}, wat >= {quantity}.\nSpeler {loser_id} (de ropers) verluus eine dobbelsteen."
+  },
+  "action": {
+    "bid_announce": "Speler {player_id} biej {quantity} van gesich {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Oproep gemaak zonder e veurbiege bod.",
+    "invalid_bid": "Gein geldig bod: {reason}",
+    "not_recognized": "Actie woort neet herkènd es 'n gèldige '[Bid: X, Y]' of '[Call]'. Ingevoerde actie: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nieuwe hoeveelheid {new_quantity} is lager dan de huidige {current_quantity}.",
+    "face_lower": "Nieje nominale waerde {new_face_value} is lager es de huidige {current_face_value}.",
+    "identical": "Bied is identiek aan 't huidig bied.",
+    "face_range": "Nominale waarde mós tösse 1 en 6 ligke."
+  },
+  "message": {
+    "eliminated_invalid": "Speler {player_id} is geëlimineerd door ongeldige zet."
+  },
+  "outcome": {
+    "win": "Speler {winner} wint! Finale ranking: {final_ranking}"
+  }
+}

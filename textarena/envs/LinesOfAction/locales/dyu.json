@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "I ye Player {player_id} ye kɛlɛbaga LinesOfAction la.\nA ma kɔlɔsi ye '{side}', a kɔlɔsi tɛmɛ ye '{other}'.\nKɛlɛbaga bɔnɛ: `[b1b3]` (kɔɔrɔdɔnɛ kɔɔrɔdɔnɛ). Kɛlɛbaga tɔgɔ ye kɔlɔnɛnɛ, wolonɛnɛ, wala kɔɔrɔnɛnɛ, a ma kɔlɔsi tɔgɔ ye kɔlɔnɛnɛ bɛɛ la. I ka kɔlɔsi wolonɛnɛ, nka a kɔlɔsi tɛmɛ mɔ; a kɔlɔsi tɛmɛ kanɛ bɛ a fa. I ye kɛlɛbaga kɔlɔsi 8-kɔɔrɔdɔnɛ ye, i ye kɛlɛbaga la."
+  },
+  "board": {
+    "current_board": "Jamanakuntigi: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "O sɛbɛri ka kan k'a kɛ e2e4 ye (ka bɔ,kɔnɔbɔyɔrɔ la).",
+    "no_piece": "A te se {side} dɔgɔ kɔnɔ {coord}.",
+    "identical": "A bɔyɔrɔ n'a tagayɔrɔ ye kelen ye.",
+    "not_straight_or_diagonal": "A ka ɲi k'a kɛ siratilennin na wala a kana tɛmɛ o kan.",
+    "wrong_distance": "Kɛlɛbaga tɔgɔ ye kɔlɔsi tɔgɔ ye kɔlɔnɛnɛ la.",
+    "enemy_blocks": "An jugu ka kɛlɛkɛwotoro dɔ be sira dira an ma.",
+    "destination_own": "A yɛrɛ ka kɛlɛkɛwotoro kelen lo tun b'a tagara yɔrɔ min na."
+  },
+  "game_action": {
+    "moved": "Jokali {player_id} donyi {from} -> {to}",
+    "captured_suffix": "Jokali {player_id} donyi {from} -> {to} ka kɛɛ donyi dɔgɔtigɛ."
+  },
+  "outcome": {
+    "win": "An ka koo lajɛ.",
+    "draw_no_capture": "A y'a kɛ cogo di do? - O ye kabako lo ye.",
+    "draw_repetition": "A y'a ka jɔyɔrɔ fɔ siɲɛ saba."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "तपाईं तीन-खेलाडी GOPS मा खेलाडी {player_id} हुनुहुन्छ।\n- तपाईं १३ कार्डहरू A-K (प्रत्येक ठीक एक पटक) समात्नुहुन्छ।\n- प्रत्येक राउन्डमा एक प्राइज अनावरण गरिन्छ। एउटा कार्ड जस्तै `[Q]`, `[10]`, `[2]` … सबमिट गर्नुहोस्\n- सबैभन्दा उच्च कार्ड प्राइज जित्छ (+ कुनै पनि बाँकी पोट)। टाईहरू प्राइजलाई अर्को राउन्डमा रोल गर्छन्।\n- १३ राउन्ड पछि, सबैभन्दा उच्च कुल जित्छ। अवैध चालहरू = निष्कासन।"
+  },
+  "round": {
+    "header": "### राउन्ड {round}/13 - पुरस्कार: {prize} (मूल्य {worth})",
+    "hand": "तपाईंको बाँकी हात: {hand}"
+  },
+  "reveal": {
+    "win": "बिड  {bids} - खेलाडी {winner} जीत {pot}।",
+    "tie": "बिड  {bids} - टाई, पोट अब {pot}।",
+    "scores": "स्कोरहरू → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "कार्यलाई कोष्ठकमा राखिएको कार्ड चाहिन्छ जस्तै \"[Q]\"",
+    "bad_card": "कार्ड पहिले नै प्रयोग गरिएको वा अवैध"
+  },
+  "elimination": {
+    "player": "खेलाडी {pid} बारम्बार अवैध चाल पछि बाहिरिएको छ।"
+  },
+  "outcome": {
+    "auto_win": "दुई खेलाडीहरू बाहिरिए - स्वचालित जित",
+    "final": "अन्तिम स्कोरहरू: {scores}"
+  }
+}

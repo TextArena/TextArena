@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "ທ່ານເປັນ Player {player_id} ໃນເກມ Liar's Dice ຂອງຜູ້ຫຼິ້ນ {num_players}. ກົດລະບຽບ: - ໃນເວລາທ່ານມາກັບທ່ານ, ທ່ານສາມາດ: 1) ເຮັດການປະມູນ ໃຫມ່ ດ້ວຍປະລິມານທີ່ສູງກວ່າຫຼືໃບ ຫນ້າ ທີ່ສູງກວ່າ (ຫຼືທັງສອງ) ກວ່າການປະມູນໃນປະຈຸບັນ; ie '[Bid: 3, 4]', 2) ເອີ້ນການປະມູນສຸດທ້າຍໂດຍການພິມ '[Call]'. ຖ້າທ່ານໂທ: - ຖ້າການນັບຕົວຈິງຂອງມູນຄ່າໃບ ຫນ້າ ໃນບັນດາ dice ທັງ ຫມົດ ແມ່ນ ຫນ້ອຍ ກວ່າການປະມູນ, ຜູ້ສະ ເຫນີ ລາຄາສຸດທ້າຍຈະສູນເສຍ 1 ແຜ່ນ. - ຖ້າບໍ່ດັ່ງນັ້ນ, ຜູ້ໂທຈະສູນເສຍ 1 ແຜ່ນ. ຜູ້ນທີ່ບັນລຸ 0 ແຜ່ນຖືກລົບລ້າງ. ຜູ້ນທີ່ຍັງເຫຼືອສຸດທ້າຍຊະນະ."
+  },
+  "board": {
+    "per_player": "ນັກຫຼິ້ນ {p}: {d}",
+    "new_round": "ຮອບໃຫມ່ - ຫວຍທີ່ຍັງເຫຼືອ: {dice_summary} ຫວຍຂອງທ່ານໃນປະຈຸບັນແມ່ນ: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "ຜູ້ນ {current_player_id} ໂທ! ຈໍາ ນວນຕົວຈິງຂອງໃບ ຫນ້າ {face_value} ແມ່ນ {count}, ເຊິ່ງແມ່ນ LESS ກວ່າ {quantity}. ຜູ້ນ {loser_id} (ຜູ້ສະ ເຫນີ ລາຄາສຸດທ້າຍ) ເສຍຊີວິດ ຫນຶ່ງ.",
+    "caller_loses": "ຜູ້ນ {current_player_id} ໂທ! ຈໍາ ນວນຕົວຈິງຂອງໃບ ຫນ້າ {face_value} ແມ່ນ {count}, ເຊິ່ງແມ່ນ >= {quantity} ຜູ້ນ {loser_id} (ຜູ້ໂທ) ເສຍຊີວິດ ຫນຶ່ງ."
+  },
+  "action": {
+    "bid_announce": "ຜູ້ນ {player_id} ສະເຫນີລາຄາ {quantity} ຂອງໃບ ຫນ້າ {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "ການໂທທີ່ເຮັດໂດຍບໍ່ມີການປະມູນກ່ອນ.",
+    "invalid_bid": "ຂໍ້ສະເຫນີທີ່ບໍ່ຖືກຕ້ອງ: {reason}",
+    "not_recognized": "ການຮ້ອງຂໍບໍ່ຖືກຮັບຮູ້ວ່າເປັນ \"[Bid: X, Y]\" ຫຼື \"[Call]\" ທີ່ຖືກຕ້ອງ. ການຮ້ອງຂໍທີ່ຖືກຍື່ນ: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "ປະລິມານໃຫມ່ {new_quantity} ແມ່ນຕໍ່າກວ່າປະລິມານປະຈຸບັນ {current_quantity}.",
+    "face_lower": "ຄ່າໃບຫນ້າໃຫມ່ {new_face_value} ແມ່ນຕໍ່າກວ່າຄ່າປະຈຸບັນ {current_face_value}.",
+    "identical": "ການສະເຫນີລາຄາແມ່ນຄືກັນກັບການສະເຫນີລາຄາໃນປະຈຸບັນ.",
+    "face_range": "ຄ່າທີ່ສະແດງຕ້ອງຢູ່ລະຫວ່າງ 1 ແລະ 6."
+  },
+  "message": {
+    "eliminated_invalid": "ຜູ້ນ {player_id} ຖືກໄລ່ອອກໂດຍການຍ້າຍທີ່ບໍ່ຖືກຕ້ອງ."
+  },
+  "outcome": {
+    "win": "ນັກເຕະ {winner} ຊະນະ! ອັນດັບສຸດທ້າຍ: {final_ranking}"
+  }
+}

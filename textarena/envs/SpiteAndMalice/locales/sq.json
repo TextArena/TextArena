@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në një lojë me dy lojtarë të Spite dhe Malice. Qëllimi juaj është të jeni i pari që të zbrazë shpërblimin tuaj.\n\n### Përmbledhje e Lojës:\n- Objektivi është të pastroni shpërblimin tuaj duke luajtur letra në grumbujt qendrorë.\n- Mund të luani letra nga tre burime:\n  1. **Dora juaj** (ju filloni çdo radhë me deri në 5 letra në dorë).\n  2. **Letra e sipërme e shpërblimit tuaj**.\n  3. **Letra e sipërme e çdo grumbulli të hedhur**.\n\n### Rregullat e Lojës:\n- Mund të luani një letër në një grumbull qendror nëse është **një gradë më e lartë** se letra e sipërme në atë grumbull (grumbujt qendrorë fillojnë me As dhe shkojnë deri në Mbretëreshë; Mbretërit janë të egër - ata mund të luhen në çdo letër, por nuk ndryshojnë rendin e gradës. Kjo do të thotë se nëse një Mbret është përdorur pas 4, atëherë ai Mbret është i rendit 5 dhe letra e radhës duhet të jetë 6).\n- Nëse nuk mund të luani më letra, duhet të **hedhni një letër** në një nga grumbujt tuaj të hedhur për të mbaruar radhën tuaj.\n- Nëse një grumbull qendror arrin Mbretëreshën, ai do të pastrohet automatikisht.\n- Rendi i gradës është: A=1, 2=2, ..., 9=9, J=10, Q=11, K si i egër.\n\n### Veprimet:\n1. **Tërheq**: Në fillim të radhës suaj, tërheqni letra për të mbushur dorën tuaj deri në 5 letra. Shkruani **[draw]** për të filluar.\n2. **Luaj një Letër**: Për të luajtur një letër, specifikoni letren dhe grumbullin qendror si këtë: **[play A♠ 0]** (ku 'A♠' është letra dhe '0' është indeksi i grumbullit qendror).\n3. **Hedh**: Nëse nuk mund të luani më letra, hedhni një letër nga dora juaj në një grumbull të hedhur për të mbaruar radhën tuaj. Shkruani **[discard A♠ 1]** (ku 'A♠' është letra dhe '1' është indeksi i grumbullit të hedhur). Shënojeni se nuk mund të hedhni asnjë letër nga shpërblimi. Mund të hedhni vetëm letra nga dora juaj.\n\n"
+  },
+  "board": {
+    "current_board": "Bordi aktual:\n\n{board}\nLëvizjet e disponueshme: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Grumbujt Qendrorë ---\n",
+    "pile": "{observation}Grumbulli {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Pamja e Lojtarit {player_id} ---\n",
+    "payoff": "{observation}Shpërblimi (Letra e Sipërme): {top_card}, Gjatësia e Shpërblimit: {payoff_length}\n",
+    "hand": "{observation}Dora: {hand}\n",
+    "discard": "{observation}Grumbujt e Hedhur: {discard}\n",
+    "empty": "Bosh"
+  },
+  "game_message": {
+    "no_cards_left": "Nuk ka më letra për të tërhequr. Mbani mend se mund të luani letra nga këto burime:\n  1. **Dora juaj**.\n  2. **Letra e sipërme e shpërblimit tuaj**.\n  3. **Letra e sipërme e çdo grumbulli të hedhur**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Format i gabuar i lëvizjes. Lojtari {player_id} nuk u përgjigj me një lëvizje të vlefshme në kllapa katrore.",
+    "invalid_play": "Lojë e pavlefshme. Lojtari {player_id} u përpoq të luante {card} në grumbullin qendror {index}.",
+    "discard_from_payoff": "Hedhje e pavlefshme. Lojtari {player_id} u përpoq të hedhte një letër nga shpërblimi.",
+    "discard_not_in_hand": "Hedhje e pavlefshme. Lojtari {player_id} u përpoq të hedhte një letër që nuk është në dorë.",
+    "wrong_move_type": "Lloj i gabuar i lëvizjes. Lojtari {player_id} nuk u përgjigj me një lloj të vlefshëm të lëvizjes."
+  },
+  "game_action": {
+    "you_drew": "Ju tërheqët letra.",
+    "opponent_drew": "Lojtari {player_id} tërheq letra.",
+    "you_played": "Ju luajtë {card} në grumbullin qendror {index}.",
+    "opponent_played": "Lojtari {player_id} luajti {card} në grumbullin qendror {index}.",
+    "you_discarded": "Ju keni hedhur {card} në grumbullin e hedhur {index}, çka do të thotë se keni mbaruar radhën tuaj. Nuk do të konsiderohen më veprime të tua për këtë radhë. Lojtari {next_player_id} do të vijë i radhës.",
+    "opponent_discarded": "Lojtari {player_id} hodhi {card} në grumbullin e hedhur {index}, çka do të thotë se ata mbaruan radhën e tyre. Nuk do të konsiderohen më veprime të Lojtarit {player_id} për këtë radhë. Lojtari {next_player_id}, ju do të vini i radhës. Ju lutemi, shkruani veprimin tuaj në formatin [veprim letër indeks_qendror]."
+  },
+  "outcome": {
+    "payoff_cleared": "Lojtari {current_player} ka mbaruar shpërblimin e tyre! Lojtari {current_player} fiton!",
+    "deadlock_player_0": "Është arritur një ngërç! Lojtari 0 fiton me {player_0_payoff} letra të mbetura kundër {player_1_payoff} letra të Lojtarit 1.",
+    "deadlock_player_1": "Është arritur një ngërç! Lojtari 1 fiton me {player_1_payoff} letra të mbetura kundër {player_0_payoff} letra të Lojtarit 0.",
+    "deadlock_tie": "Është arritur një ngërç me barazim! Të dy lojtarët kanë {player_0_payoff} letra të mbetura. Lojtari {current_player} fiton nga parazgjedhja."
+  }
+}

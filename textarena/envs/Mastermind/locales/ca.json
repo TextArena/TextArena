@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Estàs jugant al Mastermind.\nHas de trobar el codi que té {code_length} dígits de llargada, cada dígit del 1 al {num_numbers}, {repeats}.\nA la teva resposta, pots enviar la teva suposició en el següent format: '[2 1 4 5]'.\nDesprés de cada suposició, rebràs una resposta en forma de clavilles negres i blanques.\nUna clavilla negra indica un dígit correcte en la posició correcta, mentre que una clavilla blanca indica un dígit correcte en la posició incorrecta.\nTens {max_turns} torns per endevinar el codi.\n",
+    "with_repeats": "amb possibles repeticions",
+    "no_duplicates": "sense duplicats"
+  },
+  "invalid_move": {
+    "wrong_format": "No has respost amb una llista de números separats per espais i envoltats en claus quadrades.",
+    "not_integers": "Totes les entrades han de ser números enters vàlids.",
+    "wrong_length": "La suposició ha de contenir exactament {code_length} números.",
+    "out_of_range": "Tots els números han de ser entre 1 i {num_numbers}.",
+    "duplicates_not_allowed": "No es permeten números duplicats.",
+    "repeated_guess": "Ja has endevinat {guess}. Si us plau, prova una altra suposició."
+  },
+  "game_action": {
+    "feedback": "S'ha enviat [{guess}]. Resposta: {black_pegs} clavilla(s) negra(s), {white_pegs} clavilla(s) blanca(s)."
+  },
+  "outcome": {
+    "win": "Has desxifrat el codi, resolent {black_pegs} de {code_length} clavilles correctament",
+    "turn_limit": "S'ha assolit el límit de torns. Has endevinat {percent} percent dels números correctament."
+  }
+}

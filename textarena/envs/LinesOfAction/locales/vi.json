@@ -1,0 +1,36 @@
+{
+  "_comment": "Tệp ngôn ngữ LinesOfAction. KHÔNG được dịch các khóa (bên trái). Chỉ dịch các giá trị (bên phải). Không dịch tọa độ bàn cờ (a-h, 1-8), chữ cái quân cờ (O, X), token định dạng nước đi, hoặc lưới ASCII {board}.",
+  "_slots": {
+    "{player_id}": "Số thứ tự của người chơi, hoặc 0 hoặc 1",
+    "{side}": "Chữ cái quân cờ của người chơi, hoặc O hoặc X",
+    "{other}": "Chữ cái quân cờ của đối thủ, hoặc O hoặc X",
+    "{board}": "Lưới ASCII của bàn cờ; giữ nguyên",
+    "{coord}": "Tọa độ trên bàn cờ như b1 hoặc a3",
+    "{from}": "Tọa độ nguồn của nước đi, như b1",
+    "{to}": "Tọa độ đích của nước đi, như b3"
+  },
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong trò LinesOfAction.\nQuân cờ của bạn là '{side}', quân cờ của đối thủ là '{other}'.\nĐịnh dạng nước đi: `[b1b3]` (tọa độ nguồn đến tọa độ đích). Một nước đi hợp lệ di chuyển ngang, dọc hoặc chéo một số ô bằng tổng số quân cờ (bất kể màu) trên đường đó. Bạn có thể nhảy qua quân cờ của mình, nhưng không được nhảy qua quân cờ của đối thủ; đặt quân cờ lên quân cờ của đối thủ sẽ bắt được nó. Thắng khi tất cả quân cờ của bạn được kết nối 8-hàng xóm."
+  },
+  "board": {
+    "current_board": "Bàn cờ:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Định dạng phải là e2e4 (tọa độ nguồn, đích).",
+    "no_piece": "Không có quân cờ {side} ở {coord}.",
+    "identical": "Nguồn và đích trùng nhau.",
+    "not_straight_or_diagonal": "Nước đi phải là ngang, dọc hoặc chéo.",
+    "wrong_distance": "Phải di chuyển một khoảng cách bằng số quân cờ trên đường.",
+    "enemy_blocks": "Quân cờ của đối thủ chặn đường.",
+    "destination_own": "Đích bị chiếm bởi quân cờ của bạn."
+  },
+  "game_action": {
+    "moved": "Người chơi {player_id} đã di chuyển {from} -> {to}",
+    "captured_suffix": "Người chơi {player_id} đã di chuyển {from} -> {to} và bắt được quân cờ của đối thủ."
+  },
+  "outcome": {
+    "win": "Tất cả quân cờ đã kết nối.",
+    "draw_no_capture": "60 nước đi không bắt được quân cờ.",
+    "draw_repetition": "Vị trí lặp lại ba lần."
+  }
+}

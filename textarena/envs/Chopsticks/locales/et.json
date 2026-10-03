@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Sa oled Mängija {player_id} Chopsticks mängus. Oma käigu ajal vali üks järgnevatest:\n  + Ründa:  '[attack M O]'  kus M=sinu käsi (0 või 1), O=vastase käsi (0 või 1).\n    - Vastase käe arv suureneb sinu käe võrra; kui >=5, siis see muutub 0-ks.\n  + Jagune:   '[split L R]'  et ümber jagada oma kogu sõrmede arv L-ks ja R-ks (L+R = sinu kogu).\nVasta täpselt ühega nendest käskudest."
+  },
+  "board": {
+    "current_board": "Praegune laud:\nMängija 0: {hands_0}\nMängija 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Sinu käsi {my_idx} on surnud.",
+    "opp_hand_dead": "Vastase käsi {opp_idx} on juba surnud.",
+    "split_sum": "Jagunemine peab olema võrdne {total}.",
+    "split_no_change": "Jagunemine peab muutma sinu käe jaotuse.",
+    "invalid_command": "Vigane käik. Kasuta “[attack M O]” või “[split L R]”."
+  },
+  "game_action": {
+    "attack": "Mängija {player_id} ründab Mängija {opp_id} kätt {opp_idx}: see läheb {opp_val}-lt {new_val}-ks.",
+    "split": "Mängija {player_id} jaguneb [{L}, {R}]-ks."
+  },
+  "history": {
+    "entry": "Mängija {player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Mõlemad vastase käed on surnud.",
+    "draw": "Käikude piir on ületatud."
+  }
+}

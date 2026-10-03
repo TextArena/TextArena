@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Вы гуляеце ў Клондайк Салітаір. Вашая мэта — перамясціць усе карты ў фундаментныя калоды.\n\nПравілы гульні:\n- Фундаментныя калоды (F1-F4): пабудаваць ад Туза да Караля ў адной масці\n- Калоды табло (T1-T7): пабудаваць уніз, чаргуючы колеры (чырвоны на чорны, чорны на чырвоны)\n- Сток: выцягваць карты ў калоду адходаў\n- Адходы (W): верхняя карта даступная для гульні\n\nКаманды:\n- 'draw' — выцягнуць карты з стока ў калоду адходаў\n- 'move <source> <destination> [count]' — перамясціць карты паміж калодамі\n  Прыклады: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count таксама можа быць 'all', які паспрабуе перамясціць усе карты тварам угору.\n- 'forfeit' — адразу скончыць гульню і замацаваць цяперашні рахунак\n- Назвы калод: W (адходы), F1-F4 (фундаментныя), T1-T7 (табло)\n\nВы можаце выконваць некалькі дзеянняў за адзін ход, падзяляючы іх коскамі:\n  Прыклад: 'draw, move W T1, move T2 F1'\n\nТолькі Каралі могуць быць пакладзены на пустыя калоды табло.\nДзеянні выконваюцца па парадку — калі адно правальваецца, астатнія дзеянні прапускаюцца.\nВыкарыстоўвайце 'forfeit', калі лічыце, што гульня немагчыма выйграць."
+  },
+  "format_error": {
+    "no_brackets": "Несапраўдны формат дзеяння. Дзеянне павінна быць у дужках.",
+    "no_closing_bracket": "Несапраўдны фармат дзеяння. Адсутнічае закрыццё дужкі \"]\"",
+    "empty_command": "Пустая каманда. Тып \"draw\" або \"move <source> <destination> [count]\"",
+    "empty_action": "Пустыя дзеянні",
+    "move_needs_args": "Каманда перамяшчэння патрабуе крыніцы і прызначэння. Выкарыстанне: 'move <source> <destination> [count]'",
+    "count_positive": "Колькасць павінна быць станоўчай ці 'all'",
+    "count_invalid": "Няправільная колькасць. Выкарыстоўвайце лік ці 'all'",
+    "unknown_command": "Невядомая каманда \"{cmd}\". Выкарыстоўвайце \"draw\", \"move <source> <destination> [count]\", або \"forfeit\"",
+    "wrapped": "Дзеянне {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Дзеянне {n}: {msg}",
+    "before_failure": "Выкананы {n} дзеянне ((s) да няўдачы.",
+    "failed": "Заява {n} не прайшла: {msg}"
+  },
+  "move_result": {
+    "drew": "Карта здымаецца з запасу ў адходы.",
+    "cannot_draw": "Не можа выцягнуць. І запас і адходы пустыя.",
+    "invalid_pile": "Несапраўдны імя шэрагу. Выкарыстоўвайце W, F1-F4 або T1-T7",
+    "foundation_one_card": "Можа перамяшчаць толькі 1 карту ў аснову",
+    "waste_to_foundation_ok": "Пераведзены карткі з адходаў у фонд F{dst}",
+    "waste_to_foundation_bad": "Немагчыма перанесці карту сметніка ў той асновы слупок",
+    "tableau_to_foundation_ok": "Перанеслі карту з табліцы T{src} у падмурак F{dst}",
+    "tableau_to_foundation_bad": "Немагчыма перанесці карту табло ў той асновы слупок",
+    "foundation_to_foundation": "Не можа перамяшчацца з падмурка да падмурка",
+    "waste_to_tableau_one_card": "Можа перамяшчаць толькі 1 карту з адходаў у табліцы",
+    "waste_to_tableau_ok": "Перанеслі карту з адходаў у табліцу T{dst}",
+    "waste_to_tableau_bad": "Не можа размясціць карткі на гэтай кучы табліцы",
+    "no_face_up": "Няма адкрытай карты, каб перамяшчацца",
+    "tableau_to_tableau_ok": "Перанесена {count} карта(ы) з табло T{src} у T{dst}",
+    "tableau_to_tableau_bad": "Немагчыма перанесці {count} карта(ы) з T{src} у T{dst}",
+    "foundation_to_tableau_one_card": "Можа перамяшчаць толькі 1 карту ад падмурка да табліцы",
+    "foundation_empty": "Фундацыя F{src} пустая",
+    "foundation_to_tableau_ok": "Перанеслі карту з падмурка F{src} у табліцу T{dst}",
+    "foundation_to_tableau_bad": "Не можа размясціць карту падмурка на табліцы T{dst}",
+    "to_waste_or_stock": "Не можа перамяшчацца ў адходы або запас"
+  },
+  "outcome": {
+    "forfeit": "Гульня страчана. Канчатковы бал: {score} карты ў падмурках.",
+    "won": "Віншую! Вы выйгралі ў пасьянсе Клондайка!",
+    "turn_limit": "Гульня скончана! Вы дасягнулі максімуму {max_turns} чарг. Справаздача: {score} карты ў падмурках."
+  },
+  "board": {
+    "title": "=== KLONDIKE адзінокага ===",
+    "turn": "Паварот: {turn}/{max_turns}",
+    "stock": "Сакрацыя: {stock} карткі",
+    "waste": "Адходы (W): {waste}",
+    "foundations_header": "Фундацыі:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Табліца:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

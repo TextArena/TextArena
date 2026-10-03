@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Nge ujile ujile {player_id} mu Tic Tac Toe ya Quantum.\nSímbolo iá nge ni '{symbol}', iá númeru za kuenda nge zikuwa zile {parity} (e.g., X1, X3 or O2, O4).\n\nObjetivo: Uje vitória kuunda uma linha ya tatu ya marcas clássicas (solidificadas a partir de superposições).\n\nKamba nge kuenda:\n- Kuenda kila vez, ponde uma marca assustadora em dois quadrados vazios diferentes usando o formato '[a,b]'.\n- Marcas assustadoras zikuwa entrelaçadas, iá zikuwa zile 'X1 / X1' ou 'O4 / O4'.\n- Nge kuweza ponde marcas assustadoras em um quadrado que já kuwa solidificado.\n\nRegra ya kuweka:\n- Se kuenda nge cria um ciclo no gráfico de entrelaçamento, kuweka automaticamente.\n- Cada marca assustadora no ciclo kuwa uma marca clássica em uma das suas duas posições.\n- Marcas assustadoras dependentes também kuweka.\n\nVitória:\n- Jogo kuweka quando um jogador tiver três marcas clássicas em uma linha.\n- Se ambos jogadores obtenham uma linha durante o mesmo kuweka, aquele com o número máximo de kuenda mais baixo vence.\n\nExemplo de kuenda: '[0,4]' ponde uma marca assustadora em células 0 e 4."
+  },
+  "board": {
+    "current_board": "Tábua ya Tic Tac Toe ya Quantum:\n\n{board}\n\nSubmeta kuenda nge como '[a,b]' para ponde uma marca quântica em dois locais."
+  },
+  "invalid_move": {
+    "wrong_format": "Mbunge ya nginga. Usa '[a,b]'.",
+    "invalid_cells": "O kijimbuete kia ku katula o kidimbu kiki, a tena ku ki lungulula.",
+    "already_solidified": "Sai kibamba kia disanze kiá."
+  },
+  "game_action": {
+    "placed": "Mwana {player_id} wakudisha simbolo yake mu kubunguluka kati ya malwenge {pos_a} na {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Kubunguluka kwa kubunguluka kwakulunguluka. Malwenge ({r}, {c}) yena {symbol}.",
+    "last_cell_resolved": "Kubunguluka kwa malwenge ya mwisho kwakulunguluka. Malwenge ({r}, {c}) yena {symbol}.",
+    "superposition_resolved": "Kubunguluka kwakulunguluka. Malwenge ({r}, {c}) yena {symbol}."
+  },
+  "outcome": {
+    "win": "Mwana {player_id} unanguka na makundi ya kisima!",
+    "draw": "O ita ia bhu!"
+  }
+}

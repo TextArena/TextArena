@@ -1,0 +1,35 @@
+{
+  "_comment": "Snake-Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel (linke Seite), nur die Werte (rechte Seite). Behalte jeden {platzhalter} exakt bei. Übersetze NICHT die Bewegungs-/Richtungs-Token, die der Spieler eingibt ([up], [down], [left], [right], w, s, a, d), noch das in {board} gerenderte ASCII-Spielfeld.",
+  "_slots": {
+    "{num_players}": "Anzahl der Spieler in der Partie",
+    "{width}": "Spielfeldbreite in Zellen",
+    "{height}": "Spielfeldhöhe in Zellen",
+    "{max_turns}": "Zuglimit für die Partie",
+    "{player_id}": "Die Nummer eines Spielers (0-basiert)",
+    "{board}": "Das gerenderte ASCII-Raster; neutral halten, seine Zeichen niemals übersetzen",
+    "{reason}": "Der gerenderte Grund für das Spielende",
+    "{groups}": "Neutrale Ranking-Daten (eine Liste von Spieler-ID-Gruppen, schlechteste bis beste); nicht übersetzen"
+  },
+
+  "player_prompt": {
+    "intro": "{num_players}-Spieler-Snake auf einem {width}×{height}-Raster.\nDu steuerst Schlange {player_id}. Gültige Züge: '[up]'/'[down]'/'[left]'/'[right]' (oder w/s/a/d).\nZiel: am längsten überleben oder die längste Schlange sein und die höchste Punktzahl erreichen (Zuglimit {max_turns} Züge)."
+  },
+
+  "board": {
+    "current":     "Aktuelles Spielfeld:\n{board}",
+    "after_moves": "Aktueller Spielfeldzustand:\n{board}"
+  },
+
+  "game_action": {
+    "invalid_death": "Schlange {player_id} ist wegen eines ungültigen Zugs gestorben."
+  },
+
+  "outcome": {
+    "survived_win":   "Spieler {player_id} hat überlebt; alle anderen sind umgekommen.",
+    "all_dead_simul": "Alle Schlangen sind gleichzeitig gestorben.",
+    "outlived":       "Spieler hat alle anderen überlebt.",
+    "all_dead":       "Alle Schlangen tot.",
+    "turn_limit":     "Zuglimit erreicht - die beste Punktzahl gewinnt den Gleichstand.",
+    "ranking":        "{reason} Endgültige Ranggruppen (schlechteste→beste): {groups}"
+  }
+}

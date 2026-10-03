@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Bo ta hunga Klondike Solitaire. Bo meta ta pa move tur kart pa e pila di fundashon.\n\nReglanan di Wega:\n- Pila di fundashon (F1-F4): Konstruí desde As te Rei den suit\n- Pila di tablero (T1-T7): Konstruí abou ku koló alterna (koru riba preto, preto riba koru)\n- Stock: Tira kart pa e pila di waste\n- Waste (W): E kart di ariba disponibel pa hunga\n\nKomandonan:\n- 'draw' - Tira kart for di stock pa waste\n- 'move <source> <destination> [count]' - Move kart entre pila\n  Ehempel: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count tambe por ta 'all', ku lo intenta move tur kart ku ta wak.\n- 'forfeit' - Kaba e wega inmediatamente i sera bo skor aktual\n- Nòmber di pila: W (waste), F1-F4 (fundashon), T1-T7 (tablero)\n\nBo por ehekutá aksiononan múltiplo den un turno pa separá nan ku komma:\n  Ehempel: 'draw, move W T1, move T2 F1'\n\nSolamente Rei por ta poní riba pila di tablero bashí.\nAksiononan ta ehekutá den órdu - si un faya, e aksiononan restante ta saltá.\nUsa 'forfeit' si bo kere ku e wega ta imposibel pa gana."
+  },
+  "format_error": {
+    "no_brackets": "E forma di e akshon ta invalido. Akshon mester keda den paréntesis.",
+    "no_closing_bracket": "Formato di akshon no válido. Falta e paréntesis pa sera ']'",
+    "empty_command": "Komando sin nada. Tipo 'draw' òf 'move <source><destination> [count]'.",
+    "empty_action": "Akshon ku no tin nada di hasi",
+    "move_needs_args": "E komando move ta rekerí fuente i destinashon. Uso: 'move <source> <destination> [count]'",
+    "count_positive": "Kantidat mester ta positivo of 'all'",
+    "count_invalid": "Kantidat inválido. Usa un número of 'all'",
+    "unknown_command": "Komando desconosí '{cmd}'. Usa 'draw', 'move <source> <destination> [count]', of 'forfeit'",
+    "wrapped": "Aksion {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Aksion {n}: {msg}",
+    "before_failure": "Ejercushon di {n} akshonnan promé ku fayesimentu.",
+    "failed": "Aksion {n} a falha: {msg}"
+  },
+  "move_result": {
+    "drew": "E ta un di e dos tipo di karchi ku a sali for di stock pa deshasí.",
+    "cannot_draw": "No por tira, ni e stock ni e residuo ta yen.",
+    "invalid_pile": "Nomber di pila no ta valido. Usa W, F1-F4 of T1-T7",
+    "foundation_one_card": "Por move solamente 1 karta pa e fundeshi.",
+    "waste_to_foundation_ok": "A move karchi for di awa na fundacion F{dst}",
+    "waste_to_foundation_bad": "No por move karchi di despilfarro na e pila di fundeshi ei.",
+    "tableau_to_foundation_ok": "A mové karton for di tableau T{src} pa fundashon F{dst}",
+    "tableau_to_foundation_bad": "No por move e karta di tabèl na e pila fundashon.",
+    "foundation_to_foundation": "No por move di fundeshi pa otro fundacion.",
+    "waste_to_tableau_one_card": "Por move solamente 1 karta for di e waste pa tableau.",
+    "waste_to_tableau_ok": "Move kart for di waste pa tablero T{dst}",
+    "waste_to_tableau_bad": "No por pone karchi di despilfarro riba e pila di tablero ei.",
+    "no_face_up": "No tin karchi ku ta habri pa move.",
+    "tableau_to_tableau_ok": "A mové {count} karton(nan) for di tableau T{src} pa T{dst}",
+    "tableau_to_tableau_bad": "No por mové {count} karton(nan) for di T{src} pa T{dst}",
+    "foundation_to_tableau_one_card": "Por move solamente 1 karta for di fundeshi pa tabla.",
+    "foundation_empty": "Fundacion F{src} ta bashí.",
+    "foundation_to_tableau_ok": "A mové karton for di fundashon F{src} pa tableau T{dst}",
+    "foundation_to_tableau_bad": "No por pone e karchi di fundashon riba tabla T{dst}",
+    "to_waste_or_stock": "No por move na awa of stock."
+  },
+  "outcome": {
+    "forfeit": "E wega a keda pèrdí. Score final: {score} karchinan den fundashonnan.",
+    "won": "Felicitacion, bo a gana Klondike Solitaire!",
+    "turn_limit": "Wega a terminá! Bo a alcanzá e máximo di {max_turns} turnonan. Puntuashon: {score} karton(nan) den fundashonnan."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== E ta un di e personanan ku a keda detené.",
+    "turn": "Turno: {turn}/{max_turns}",
+    "stock": "Stock: {stock} karchinan",
+    "waste": "Deshecho (D): {waste}",
+    "foundations_header": "Fundacion:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Tabel:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "نۆۋەتتىكى كوم: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "توغرا يۆتكەش شەكلى تېپىلمىدى. '[pile quantity]' نى ئىشلىتىڭ.",
+    "correct_format_wrong_fields": "ئوينچى {player_id}، توغرا فورمات بىلەن خاتا مەيدانلار. سۇتۇن {col} چەكلىكىدىن ئاشقان.",
+    "out_of_range": "كومېتىرىنىڭ كۆرسەتكۈچى {pile_index} دائىرىدىن چىقىپ قالدى.",
+    "non_positive": "ئاز دېگەندە بىر نەرسىنى ئېلىپ تاشلىشى كېرەك.",
+    "exceeds_pile": "توپ {pile_index} دىن {quantity} نى ئېلىپ تاشلىيەلمەيسىز (بارغانسېرى {pile_count} قالمىقى بار)."
+  },
+  "observation": {
+    "removed_from_piles": "{player_id} نومۇرلۇق ئويۇنچى [{pile_index} {quantity}] ھەرىكىتىنى قىلدى، {quantity} نەرسىنى {pile_index} نومۇرلۇق كۇپىدىن چىقىرىۋېتتى."
+  },
+  "outcome": {
+    "win": "ئويۇنچى {player_id} ئاخىرقى ئوبيېكتىنى ئالدى!"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Kai ne Dan wasa {player_id}, ka taka {num_rounds} zagaye na wasa na Iterated Ultimatum.\nKa riƙe $ {pool} don raba a zagaye na yanzu tsakanin kai da Dan wasa {other_id}.\n\nMai gabatar da shawara:\n  - Yi shawara: [Offer: $X] (0 <= X <= pool)\n  - Idan aka karɓa → Ka samu $(pool - X), dan wasan wani ya samu $X\n  - Idan aka ƙi → Dukkan su samu $0\n  - Misali: [Offer: $3]  ko  'Ina ganin haka ne adalci. [Offer: $5]'\n\nMai amsa:\n  - Kada shawara da [Accept] ko [Reject]\n  - Misali: 'Haka ya dace. [Accept]'\n            'Bai dace ba. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Zagaye {round_number} ya fara! ---\nDan wasa {proposer_id} ne mai gabatar da shawara, Dan wasa {responder_id} ne mai amsa.",
+    "offer": "Zagaye {round_number}: Dan wasa {proposer_id} ya bayar $ {offer} ga Dan wasa {responder_id} (yana riƙe $ {keep}).",
+    "accepted": "Dan wasa {responder_id} ya karɓa! Zagaye {round_number} nasara: Dan wasa {proposer_id} +$ {proposer_gain}, Dan wasa {responder_id} +$ {responder_gain}. Jimlar sabo: Dan wasa 0: $ {total_0}, Dan wasa 1: $ {total_1}.",
+    "rejected": "Dan wasa {responder_id} ya ƙi shawara! Zagaye {round_number} nasara: Dukkan dan wasa +$0. Jimlar ya tsaya: Dan wasa 0: $ {total_0}, Dan wasa 1: $ {total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Am do lamar shima dǝga fǝlezǝna ma so dәye awowa sǝdinma sodǝn faidatǝro format [Offer: $X] lan.",
+    "bad_integer": "Adaduwa cinnabe dә lamba kalkallo waljin.",
+    "out_of_range": "Awo do tәmoyin dә $0-a ${pool} lan kara.",
+    "no_current_offer": "Awowa kәlanzәbe banajin ba.",
+    "accept_or_reject": "Responder kuli [Accept] ko [Reject] kadi offer."
+  },
+  "outcome": {
+    "win": "Dan wasa {winner} ya yi nasara da $ {winner_total} jimlar vs Dan wasa {loser} $ {loser_total}.",
+    "draw": "Kәla nduma indisoye ${total} samma so'a kәrmaza."
+  }
+}

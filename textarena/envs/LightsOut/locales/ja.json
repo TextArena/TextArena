@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Lights Out! へようこそ。{size}x{size} のライトのグリッドがあります。\nあなたの目標は、すべてのライトをOFF（ピリオド '.' で表されます）にすることです。\nライトを押すと、そのライトと隣接するライト（上/下/左/右）が切り替わります。\nライトを押すには [row col] を入力してください（0から始まるインデックスなので、有効な範囲は 0-{max_index} です）。\nパズルを解くために最大 {max_turns} 回の手ができます。\n凡例: 'O' = ライト ON, '.' = ライト OFF"
+  },
+  "board": {
+    "current_state": "現在のグリッド状態（{moves_made} 手目、残り {moves_left} 手、{completion}% 完了）:\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "アクションは [row col] の形式でなければなりません。row と col は 0 から {max_index} までの整数でなければなりません。",
+    "out_of_range": "座標は 0 から {max_index} の間でなければなりません。入力した座標は [{row},{col}] です。"
+  },
+  "outcome": {
+    "win": "おめでとうございます！あなたは {moves_used} 手でパズルを解きました！",
+    "loss": "ゲームオーバー！あなたは {max_turns} 手を使い果たしてもパズルを解くことができませんでした。最終的な完成度: {completion}%\n最終状態:\n{grid}"
+  }
+}

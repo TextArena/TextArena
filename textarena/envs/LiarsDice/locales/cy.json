@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Rydych yn chwaraewr {player_id} mewn gêm ddos Llaiwr {num_players}-chwaraewr. Rheolau: - Ar eich tro, gallwch naill ai: 1) Gwneud cynnig newydd gyda chyfradd uwch neu wyneb uwch (neu'r ddau) na'r cynnig presennol; ie '[Bid: 3, 4]', 2) Galw'r cynnig diwethaf trwy nodi '[Call]'. Os ydych yn galw: - Os yw cyfrif gwirioneddol y gwerth wyneb hwnnw ymhlith yr holl ddos yn llai na'r cynnig, mae'r buddsoddwr olaf yn colli un ddos. - Fel arall, mae'r galwwr yn colli un ddos. Caiff chwaraewr sy'n cyrraedd 0 ddos ei ddileu. Mae'r chwaraewr olaf sy'n weddill yn ennill."
+  },
+  "board": {
+    "per_player": "Chwaraewr {p}: {d}",
+    "new_round": "Cyfnod newydd - Dyw'r dais sy'n weddill: {dice_summary} Eich dais presennol yw: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Chwaraewr {current_player_id} yn galw! Y cyfrif gwirioneddol o wyneb {face_value} yw {count}, sy'n LLAI na {quantity}.\nChwaraewr {loser_id} (y chwaraewr a wnaeth y cynnig diwethaf) yn colli un dis.",
+    "caller_loses": "Mae chwaraewr {current_player_id} yn galw! Y gwir gyfrif o wyneb {face_value} yw {count}, sydd >= {quantity}.\nMae chwaraewr {loser_id} (y galwr) yn colli un deis."
+  },
+  "action": {
+    "bid_announce": "Mae chwaraewr {player_id} yn cynnig {quantity} ar wyneb {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Galwad wedi'i wneud heb gynnig blaenorol.",
+    "invalid_bid": "Budd ddi-gwerth: {reason}",
+    "not_recognized": "Gweithred heb ei adnabod fel '[Bid: X, Y]' dilys neu '[Call]'. Gweithred a gyflwynwyd: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Mae maint newydd {new_quantity} yn is na'r maint presennol {current_quantity}.",
+    "face_lower": "Mae gwerth enwog newydd {new_face_value} yn is na'r presennol {current_face_value}.",
+    "identical": "Mae'r cynnig yn union yr un fath â'r cynnig presennol.",
+    "face_range": "Rhaid i'r gwerth enwol fod rhwng 1 a 6."
+  },
+  "message": {
+    "eliminated_invalid": "Cafodd y chwaraewr {player_id} ei ddileu gan symud anghywir."
+  },
+  "outcome": {
+    "win": "Chwaraewr {winner} yn ennill! Safle terfynol: {final_ranking}"
+  }
+}

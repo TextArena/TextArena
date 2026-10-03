@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ndiwe Mchezaji {player_id} m'mpira wa wachezaji wawili wa Spite na Malice. Lengo lako ni kuwa wa kwanza kupata malo pa malipiro.\n\n### Oneni Mpira:\n- Lengo ni kusafisha malo pa malipiro kwa kucheza kadi ku malo pa katikati.\n- Ungaweza kucheza kadi kutoka kwa zina tatu:\n  1. Mkono wako (**hand**) (unayanza kila zamu na mpaka kadi 5 m'mkono).\n  2. Kadi ya juu ya malo pa malipiro yako.\n  3. Kadi ya juu ya malo yoyose ya taya zako.\n\n### Mwendo wa Mpira:\n- Ungaweza kucheza kadi ku malo pa katikati ngati ni **cheo kimoja cha juu** kuliko kadi ya juu pa malo acho (malo pa katikati yanayanza na Ace na kupanda mpaka Queen; Mafumu ni yabwino - yangaweza kucheza pa kadi yoyose koma hayasintha mpangilio wa cheo. Ichi ngati Mfumu ukagwiritsidwa pa 4, basi Mfumu uyo ni cheo 5 na kadi inayofuata lazima iwe 6).\n- Ngati hukuchezeka kadi yoyose, lazima **utaye kadi** ku malo yako ya taya ili kumaliza zamu yako.\n- Ngati malo pa katikati yakafikia Queen, yangasafishwa yenyewe.\n- Mpangilio wa cheo ni: A=1, 2=2, ..., 9=9, J=10, Q=11, K yabwino.\n\n### Vitendo:\n1. **Oga**: Pa mwanzo wa zamu yako, oga kadi ili kujaza mkono wako mpaka kadi 5. Lowetsa **[draw]** ili kuanza.\n2. **Cheza Kadi**: Ili kucheza kadi, fafanua kadi na malo pa katikati kwa njira hii: **[play A♠ 0]** (ambapo 'A♠' ni kadi na '0' ni malo pa katikati).\n3. **Taya**: Ngati hukuchezeka kadi yoyose, taya kadi kutoka kwa mkono wako ku malo ya taya ili kumaliza zamu yako. Lowetsa **[discard A♠ 1]** (ambapo 'A♠' ni kadi na '1' ni malo pa taya). Ona kwamba hukutayika kadi yoyose kutoka kwa malo pa malipiro. Ungaweza kutaya kadi kutoka kwa mkono wako tu.\n\n"
+  },
+  "board": {
+    "current_board": "Bodi ya Sasa:\n\n{board}\nMichezo Inayopatikana: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Mipira ya Katikati ---\n",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Mtazamo wa Mchezaji {player_id} ---\n",
+    "payoff": "{observation}Matundu ya Malipo (Kadi ya Juu): {top_card}, Urefu wa Matundu ya Malipo: {payoff_length}\n",
+    "hand": "{observation}Mkono: {hand}\n",
+    "discard": "{observation}Matundu ya Kutupwa: {discard}\n",
+    "empty": "Chinthu chambura kanthu."
+  },
+  "game_message": {
+    "no_cards_left": "Palije makadi ghanyake agho mungatolera. Kumbukani kuti mungachita maseŵero agha: 1. Mukono winu 2. Khadi la pachanya pa thumba linu 3. Khadi lapachanya mu thumba lililose ilo mwaleka.* "
+  },
+  "invalid_move": {
+    "wrong_format": "Chinthu chambura kwenelera. Woseŵera {player_id} wakazgora na chinthu chiwemi yayi mu vilembo vyapafupi-patali.",
+    "invalid_play": "Cheza lisilo halali. Mchezaji {player_id} alijaribu kucheza {card} kwenye matundu ya kati {index}.",
+    "discard_from_payoff": "Wosewera {player_id} anayesa kutaya khadi kuchokera ku mulu wa malipiro.",
+    "discard_not_in_hand": "Wosewera {player_id} anayesa kutaya khadi lomwe lilibe m'manja.",
+    "wrong_move_type": "Mtundu wa ntchitoko ngwambura kwenelera. Wosewerayo {player_id} wakazgora na mtundu wa ntchichito yayi."
+  },
+  "game_action": {
+    "you_drew": "Mukalemba makadi.",
+    "opponent_drew": "Woseŵera {player_id} wakalemba makadi.",
+    "you_played": "Umecheza {card} kwenye mkunjo wa katikati {index}.",
+    "opponent_played": "Mchezaji {player_id} amecheza {card} kwenye mkunjo wa katikati {index}.",
+    "you_discarded": "Umeitupa {card} kwenye matundu ya kutupwa {index}, ambayo ina maana kwamba umeimaliza mchezo wako. Hatua zaidi za yako hazizingatiwi kwa mchezo huu. Mchezaji {next_player_id} atacheza unavyofuata.",
+    "opponent_discarded": "Mchezaji {player_id} anatupa {card} kwenye matundu ya kutupwa {index}, ambayo ina maana kwamba amemaliza mchezo wake. Hatua zaidi za Mchezaji {player_id} hazizingatiwi kwa mchezo huu. Mchezaji {next_player_id}, utacheza unavyofuata. Tafadhali ingiza hatua yako kwa muundo [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mchezaji {current_player} amemaliza matundu yake ya malipo! Mchezaji {current_player} anashinda!",
+    "deadlock_player_0": "Kufikia kikomo kimefikiwa! Mchezaji 0 anashinda na {player_0_payoff} kadi zimesalia dhidi ya Mchezaji 1's {player_1_payoff} kadi.",
+    "deadlock_player_1": "Kufikia kikomo kimefikiwa! Mchezaji 1 anashinda na {player_1_payoff} kadi zimesalia dhidi ya Mchezaji 0's {player_0_payoff} kadi.",
+    "deadlock_tie": "Kufikia kizuizi na ushindi wa sare! Wachezaji wote wawili wana {player_0_payoff} kadi zilizobaki. Mchezaji {current_player} anashinda kwa chaguo-msingi."
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "U tsa raloka Klondike Solitaire. Sepheo sa hao ke ho suthisa karete tsohle ho ya kwenye matlole a thekiso.\n\nMelao ya Mokhatlo:\n- Matlole a thekiso (F1-F4): Ahlolela ho tloha Ace ho ya ho Koning ya letsopa\n- Matlole a tafoleng (T1-T7): Ahlolela ho theoha ka mebala e fapaneng (kgubedu hodima kgubedu e ntsho, kgubedu e ntsho hodima kgubedu)\n- Senthimithara: Tosa karete ho ya kwenye matlole a makgubedu\n- Matlole a makgubedu (W): Karete ya hodimo e fumaneha bakeng sa mokhatlo\n\nDikgang tsa Mokhatlo:\n- 'draw' - Tosa karete ho tloha senthimithareng ho ya kwenye matlole a makgubedu\n- 'move <source> <destination> [count]' - Suthisa karete kwenye matlole\n  Mehlala: 'move W T1', 'move T1 F2', 'move T3 T5 2'. palo e ka ba le 'all', e tla leka ho suthisa karete tsohle tse kgubedu.\n- 'forfeit' - Fetoha mokhatlo ka nako e kgutshwane le ho kgutshwanya sephetho sa hao sa jale\n- Maina a matlole: W (matlole a makgubedu), F1-F4 (matlole a thekiso), T1-T7 (matlole a tafoleng)\n\nU ka phetha mesebetsi e mengata ka nako e le nngwe ka ho a arola ka matlhaku:\n  Mokhatlo: 'draw, move W T1, move T2 F1'\n\nMakgubedu a Koning a ka bea hodima matlole a tafoleng a sa kgubedu.\nMesebetsi e phethwa ka tatellano - ha e le hore e mong a hloleha, mesebetsi e setseng e tla hloleha.\nSebedisa 'forfeit' ha u dumela hore mokhatlo o sa kgoneha ho hloleha."
+  },
+  "format_error": {
+    "no_brackets": "Sebopeho sa ketso se fosahetseng. Ketso e lokela ho ba ka har'a li-brackets.",
+    "no_closing_bracket": "Sebopeho sa ketso se fosahetseng. Ho haella kholomo ea ho koala ']'",
+    "empty_command": "Taelo e se nang letho. Tlanya 'draw' kapa 'move <source> <destination> [count]'",
+    "empty_action": "Ketso e se nang letho",
+    "move_needs_args": "Kgang ya mokhatlo ya ho suthisa e hloka tse kgutshwane le sebaka sa ho ya. Tshebediso: 'move <source> <destination> [count]'",
+    "count_positive": "Nomoro e tlameha ba e kgolo kapa 'all'",
+    "count_invalid": "Nomoro e sa tsejweng. Tumella nomoro kapa 'all'",
+    "unknown_command": "Halofo e senyehang ka '{cmd}'. Sebelisa 'draw', 'move <source> <destination> [count]', kapa 'forfeit'",
+    "wrapped": "Setsebi {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Setsebi {n}: {msg}",
+    "before_failure": "Ho phethahatsa {n} ketso (s) pele ho hloleha.",
+    "failed": "Setsebi {n} sesenyehile: {msg}"
+  },
+  "move_result": {
+    "drew": "Ho hula karete ho tloha setokong ho ea litšila.",
+    "cannot_draw": "Ha o kgone ho ntsha karete. Stock le waste di futsane.",
+    "invalid_pile": "Lebitso la mokoloko le fosahetseng. Sebelisa W, F1-F4, kapa T1-T7",
+    "foundation_one_card": "E ka tsamaisa karete e le ' ngoe feela ho ea motheo .",
+    "waste_to_foundation_ok": "Karete e tlositsoeng ho tloha litšila ho ea motheo F{dst}",
+    "waste_to_foundation_bad": "Ha e khone ho tsamaisa karete ea litšila mokotleng oa motheo oo",
+    "tableau_to_foundation_ok": "Karte e tsamaisitse ho tsoa tableau T{src} ho ya foundation F{dst}",
+    "tableau_to_foundation_bad": "Ha e khone ho tsamaisa karete ea tableau mokotleng oa motheo oo",
+    "foundation_to_foundation": "Ha e khone ho tloha motheong o mong ho ea ho o mong",
+    "waste_to_tableau_one_card": "E ka tsamaisa karete e le 'ngoe feela ho tloha litšila ho ea tafoleng.",
+    "waste_to_tableau_ok": "Karete e tlositsoeng ho tloha litšila ho ea tafoleng T{dst}",
+    "waste_to_tableau_bad": "Ha e khone ho beha karete ea litšila mokotleng oo oa tafole",
+    "no_face_up": "Ha ho na likarete tse shebileng holimo tseo u ka li tsamaisang.",
+    "tableau_to_tableau_ok": "Karte {count} e tsamaisitse ho tsoa tableau T{src} ho ya T{dst}",
+    "tableau_to_tableau_bad": "Ha o kgone go tsamaisa {count} karte(s) ho tsoa T{src} ho ya T{dst}",
+    "foundation_to_tableau_one_card": "E ka tsamaisa karete e le ' ngoe feela ho tloha motheong oa motheo ho ea tafoleng .",
+    "foundation_empty": "Motheo oa F{src} ha o na letho.",
+    "foundation_to_tableau_ok": "Karte e tsamaisitse ho tsoa foundation F{src} ho ya tableau T{dst}",
+    "foundation_to_tableau_bad": "Ha e khone ho beha karete ea motheo tafoleng T{dst}",
+    "to_waste_or_stock": "Ha e khone ho fetisetsoa litšila kapa setokong."
+  },
+  "outcome": {
+    "forfeit": "Papali e lahlehetsoe. Sephetho sa ho qetela: {score} likarete metheong ea motheo.",
+    "won": "Kea le leboha, le hlōtse papali ea Klondike Solitaire!",
+    "turn_limit": "Mosebetsi o felile! U fihlile nomoro e kgolo ya {max_turns} ditiriso. Nomoro: {score} karete ka hare ho mokwabo wa motheo."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLOTHO ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Setsi: {stock} likarete",
+    "waste": "Litšila (W): {waste}",
+    "foundations_header": "Motheo:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Setšoantšo:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

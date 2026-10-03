@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Q'umir pukllaypi Player {player_id} kanki, {max_rounds} pukllaykunapi Kuhn Poker pukllayta. \nPukllay Kamachikuna:\n- Kuhn Poker 3 kartakunayuq pukllayta, J, Q, K (J aswan pisi, K aswan hatun)\n- Sapa pukllaq {ante} chipwan qallariyta, 1 karta sapa pukllaypi chaskiyta (karta kanchu k'uskiyta, mana p'inqakunaykichu).\n- Pukllay {max_rounds} pukllaykunapi kawsayta\n- Aswan chipkuna pukllaypa tukukuyninpi atipaqmi\nKamachikuna:\n- '[check]': Mana bet kanchu p'inqayta (p'inqaytaqa pukllay mesa pisi kaspa)\n- '[bet]': 1 chipwan pukllay potman yapayta (p'inqaytaqa pukllay mesa pisi kaspa)\n- '[call]': Pukllay oponenteqa betninman t'inkayta 1 chipwan pukllay potman yapayta\n- '[fold]': K'uskiyta pukllay k'uskiyta, oponenteqa atipaqmi pukllay potman"
+  },
+  "init_round": {
+    "round_start": "### Q'alla p'unchay {current_round} munasq'ayki {max_rounds} p'unchaykunamanta. Q'awakayki k'uskaqa: '{player_card}'",
+    "available_actions": "Kaykuna ruway atisqaykimanta: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ruwayqa [Check], [Bet], [Call],[Fold] kashanmi.",
+    "not_legal": "Chayqa {legal_actions} nisqa kanan tiyan."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, kamachiyta q'umirayta: '[{move}]'.",
+    "valid_actions": "Kaykuna ruwasqaykiqa: {legal_actions}.",
+    "round_summary": "{reason} Kunan q'illaykuna: Pukllaq 0: '{player_0_chips}'; Pukllaq 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Pukllaq {winner} '{winner_card}' Pukllaq {loser} '{loser_card}' nisqata atinku. Pukllaq {winner} {pot_value} ch'iqata atinku."
+  },
+  "outcome": {
+    "draw": "{max_rounds} round tukukuqtinqa, iskaynin pukllaqkuna kikin chip-ninkunata churanku.",
+    "round_win": "{player_id} pukllaqqa tukurqan.",
+    "winner_player0": "P'anqaqa, tukuy {max_rounds} muyuriq tukukuyninpi aswan qichwayuq kaspa atipan.",
+    "winner_player1": "1 kaq pukllaq atiparqan tukuy {max_rounds} muyukunapa tukukuyninpi aswan chipkuna kasqanrayku."
+  }
+}

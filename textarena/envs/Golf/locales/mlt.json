@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Qiegħed tilgħab Golf (Logħba tal-Karti) - Player {player_id}.\nGħan: Ikollok l-inqas punti totali f'dan il-dawra waħda. Jekk il-kolonni jinqasmu l-istess valur, huma jiġu somati bħala 0.\nValuri tal-Karti: A=1, 2-10=valur ċar, J/Q=10, K=0\n\nAzzjoni (uża brakketti eżatti):\n- '[draw]' - Ritolja mill-deck\n- '[take]' - Ħad mill-pila tal-iskart\n- '[swap X Y]' - Ibdel il-karta ritolta ma' pożizzjoni X (riga) Y (kolonna)\n- '[discard]' - Telaq il-karta ritolta"
+  },
+  "board": {
+    "drew": "Ritolt: {card}\nIssa trid [swap X Y] jew [discard]",
+    "took": "Ħadt: {card} mill-pila tal-iskart\nTrid [swap X Y] miegħu (ma tistax telaq)",
+    "peeked": "Żrift fil-pożizzjoni ({row},{col}): {card}",
+    "turn_view": "Idejk:\n{hand}\nPila tal-iskart: {discard}\n{options}",
+    "none": "Ebda waħda."
+  },
+  "options": {
+    "final_turns": "Dawn l-aħħar dawriet! Għazliet tiegħek: [draw], [take], [peek X Y]",
+    "draw": "Għazliet tiegħek: [draw], [take]",
+    "must_swap": "Għandek: [swap X Y] (ma tistax tirrifjuta karti mill-pil ta 'skart)",
+    "swap_or_discard": "Trid: [swap X Y] jew [discard]"
+  },
+  "hand": {
+    "no_cards": "Ebda karti.",
+    "header": "Kol: 1 2 3",
+    "row": "Rigà {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} ibdella {new} ma' {old} fil-pożizzjoni ({row},{col})",
+    "discarded": "Player {pid} telaq {card}"
+  },
+  "message": {
+    "deck_empty": "Il-gverta hija vojta! Logħba tispiċċa immedjatament.",
+    "knocked": "Il-plejer {pid} jitklikkjat! Kull plejer ieħor ikollu turna oħra.",
+    "final_round": "Plejer {pid} {reason}! Kull plejer ieħor jikseb dritt ieħor."
+  },
+  "reason": {
+    "all_revealed": "l- karti kollha ġew żvelati?"
+  },
+  "invalid": {
+    "wrong_action": "Uża eżattament WAĦDA mill-azzjoni bil-brakketti: [draw], [take], [swap X Y], [discard], [knock], jew [peek X Y]",
+    "discard_empty": "Il- munzell tal- skart huwa vojt!",
+    "must_draw_first": "Trid l-ewwel [draw], [take], [knock], jew [peek X Y]",
+    "cannot_discard_taken": "Ma tistax tirrifjuta karta li tkun ħadt mill- munzell tar- rifjut. Għandek taqlebha.",
+    "have_drawn_card": "Għandek karta ritolta. Trid [swap X Y] jew [discard]",
+    "need_drawn_swap": "Għandek bżonn karta li tkun ġiet imġarrba biex taqleb.",
+    "need_drawn_discard": "Għandek bżonn karta li tkun ġiet imġarrba biex tirrifjutaha.",
+    "out_of_bounds": "Pożizzjoni barra mill-limiti. Uża riga 1-{max_row}, kolonna 1-{max_col}",
+    "knock_with_card": "Ma tistax tnikket bil- karta li tkun ġibdet. Ikompli l- turno tiegħek qabel xejn.",
+    "already_knocked": "Xi ħadd diġà knocked dan il-medda.",
+    "already_revealed": "Din il- karta diġà ġiet żvelata!"
+  },
+  "summary": {
+    "full": "Logħba Tahla! Player {winner} rebaħ bi skor ta' {score} punti!\n\nPunteġġi Finali:\n{scores}",
+    "line": "Player {pid}: {score} punti\n"
+  },
+  "board_str": {
+    "title": "=== Logħba tal-Golf===",
+    "discard": "Għażla ta' skart: {card}",
+    "knocked": "Il-plejer {pid} tkokka!",
+    "player_header": "Player {pid} (Punteġġ: {score}):"
+  }
+}

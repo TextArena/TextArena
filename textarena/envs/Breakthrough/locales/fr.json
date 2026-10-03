@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Vous jouez {color} dans une partie de Breakthrough. Vous vous déplacez vers {direction} sur un plateau de {board_size}x{board_size}.\nÀ votre tour, vous pouvez déplacer un seul pion d'une case vers l'avant ou en diagonale vers l'avant.\nUn pion ne peut se déplacer en diagonale que si un pion adverse s'y trouve, et il ne peut entrer sur une case occupée que par un déplacement diagonal.\nLorsque vous entrez sur une case occupée par un pion adverse, vous le capturez et le pion adverse est définitivement retiré du plateau.\nUtilisez une notation semblable à UCI entre crochets, par ex. [a2a3] pour aller de a2 à a3.\n* 'a' correspond à la colonne la plus à gauche, et '1' est la rangée du bas (du point de vue de White).\n* La rangée de départ de Black est la rangée du haut (rangée 8 sur un plateau 8x8). La rangée de départ de White est la rangée du bas (rangée 1 sur un plateau 8x8).\nLe premier joueur dont un pion atteint la rangée de départ adverse gagne. Si tous vos pions sont capturés, vous perdez."
+  },
+  "invalid_move": {
+    "wrong_format": "Veuillez utiliser une notation algébrique entre crochets, comme [a2a3].",
+    "out_of_bounds": "Le mouvement se trouve hors des limites du plateau.",
+    "illegal": "Ce mouvement ne respecte pas les règles de Breakthrough ou le pion ne vous appartient pas."
+  },
+  "game_action": {
+    "moved": "Le Joueur {player_id} joue {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "White a atteint la rangée de départ de Black.",
+    "black_reached": "Black a atteint la rangée de départ de White.",
+    "white_captured": "Tous les pions de White ont été capturés.",
+    "black_captured": "Tous les pions de Black ont été capturés.",
+    "no_moves": "Le Joueur {player_id} n'a plus de mouvements."
+  }
+}

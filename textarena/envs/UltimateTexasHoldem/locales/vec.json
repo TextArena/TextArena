@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "No xe ancora carte.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Xugador Singoło contro Dealer\n\n📖 PANORAMICA DEL XOGO:\n• Ti scominsi con {start_chips} fiches\n• Mazo singoło de 52 carte (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Ti xogi contro el dealer (casa)\n• Ogni partìa segue ła strutura de Ultimate Texas Hold'em: ti meti łe scommesse ANTE e BLIND, ricevi 2 carte coperte, decidi so łe scommesse PLAY opzionałi inte łe fasi de scommessa, po' riveli łe carte comuni e confronti ła to mejo man de 5 carte contro queła del dealer. El to obietivo xe de masimixar i to guadagni (quando che ti ga ła mejo man), mentre che minimixi łe to perdite (quando che ti ga ła pezo man).\n• El xogo finise quando che ti rivi a 0 fiches o soto a l'inisio de ła partìa (PERDITA) o completi 1000 partìe con fiches (VITORIA)\n\n💰 STRUTURA DE łE SCOMMESSE:\n• ANTE: Scommessa obligatoria de ${ante} ogni partìa\n• BLIND: Scommessa obligatoria de ${ante} ogni partìa\n• PLAY: Scommessa opzionałe durante el xogo. Inte ła partìa, ti pode scegliere soło UNA de łe seguenti: (${ante4} se fata a PRE-FLOP, ${ante2} se fata a FLOP, o ${ante} se fata a RIVER. Ti pode anca piegar a river, rinunciando a ła man e sensa far scommesse.)\n\n🎴 DISTRIBUZION DE łE CARTE:\n• Ti ricevi 2 carte scoperte (łe to carte coperte)\n• El dealer riceve 2 carte coperte (sconosse a ti)\n• 5 carte comuni xe distribuie coperte inisialmente\n• Łe carte comuni xe rivaełae progresivamente inte łe fasi del xogo\n\n🏆 QUALIFICAZION DEL DEALER:\n• El dealer deve aver almanco un PAIR (2 carte de ło stesso rango) par quałificarse, usando łe 2 carte de ła so man e łe 5 carte comuni.\n• Ła quałificasion del dealer afecta i rexultai de łe scommesse, come sarà spiegà dopo.\n\n🎮 FASI DEL XOGO & AZIONI:\n📋 PRE-FLOP:\n  • Azion: [4x] (${ante4}) o [check]\n  • [4x]: Meti ${ante4} scommessa PLAY, rivela łe prime 3 carte comuni\n  • [check]: Nisuna scommessa adisionałe, rivela łe prime 3 carte comuni\n\n📋 FLOP:\n  • Se scommessa 4x fata: Soło [skip] disponibiłe (auto-rivela łe ultime 2 carte comuni)\n  • Se nisuna scommessa 4x fata: [2x] (${ante2}) o [check]\n  • [2x]: Meti ${ante2} scommessa PLAY, rivela łe ultime 2 carte comuni\n  • [check]: Nisuna scommessa adisionałe, rivela łe ultime 2 carte comuni\n\n📋 RIVER:\n  • Se scommessa 4x o 2x fata: Soło [skip] disponibiłe (auto-procede a ła showdown)\n  • Se nisuna scommessa PLAY fata: [1x] (${ante}) o [fold]\n  • [1x]: Meti ${ante} scommessa PLAY, procede a ła showdown\n  • [fold]: Rinuncia a ła man, perdi łe scommesse ANTE e BLIND\n\n📋 SHOWDOWN:\n  • Tute łe carte xe rivaełae e vałuate\n  • Mejo man de 5 carte da 7 carte (2 coperte + 5 comuni)\n  • Scommesse regołae secondo łe regołe de pagamento\n\n💎 PAYOUT DE łE SCOMMESSE:\n📊 ANTE BET:\n  • Dealer no se quałifica: PUSH (scommessa restituia)\n  • Dealer se quałifica e ti vinci: 1:1 payout (scommessa + vitoria)\n  • Dealer se quałifica e ti perdi: Scommessa persa\n  • Pareggio: PUSH (scommessa restituia)\n\n📊 BLIND BET:\n  • No xe afectà da ła quałificasion del dealer\n  • Ti vinci: Scommessa restituia e payout adisionałe basà so ła forsa de ła to man\n  • Ti perdi: Scommessa persa\n  • Pareggio: PUSH (scommessa restituia)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Nisun payout adisionałe\n\n📊 PLAY BET:\n  • No xe afectà da ła quałificasion del dealer\n  • Confronto direto: ła to mejo man contro ła mejo man del dealer\n  • Ti vinci: 1:1 payout (scommessa + vitoria)\n  • Ti perdi: Scommessa persa\n  • Pareggio: PUSH (scommessa restituia)\n\n🎯 CLASSIFICA DE łE MAN DE POKER (Mejo a Pezo):\n  1. Royal Flush: A-K-Q-J-10 de ło stesso seme\n  2. Straight Flush: 5 carte consecutive de ło stesso seme\n  3. Four of a Kind: 4 carte de ło stesso rango\n  4. Full House: 3 carte de ło stesso rango + 2 carte de ło stesso rango\n  5. Flush: 5 carte de ło stesso seme\n  6. Straight: 5 carte consecutive\n  7. Three of a Kind: 3 carte de ło stesso rango\n  8. Two Pair: 2 carte de ło stesso rango + 2 carte de ło stesso rango\n  9. One Pair: 2 carte de ło stesso rango\n  10. High Card: Carta più alta\n\n⌨️  COMANDI DE AZION:\n• [4x] o [play bet 4x]: Meti ${{self.ante_amount*4}} scommessa PLAY\n• [2x] o [play bet 2x]: Meti ${{self.ante_amount*2}} scommessa PLAY\n• [1x] o [play bet 1x]: Meti ${{self.ante_amount*1}} scommessa PLAY\n• [check] o [c]: Check (nisuna scommessa adisionałe)\n• [fold] o [f]: Piega (rinuncia a ła man)\n• [skip] o [s]: Salta a ła prossima fasae (quando no xe necesaria nisuna azion)\n\n💡 CONSIGLI DE STRATEGIA:\n• Man inisiałi forti (coppie, carte alte) spesso giustificano scommesse 4x\n• Considera ła quałificasion del dealer - man deboli pode esar push se el dealer no se quałifica\n• Scommessa BLIND pode esar molto proficua con man forti (Royal Flush = 500:1!)\n• Controła el to stack de fiches! Se el va a 0 o soto a l'inisio de ła partìa, ti perdi.\n\n⚠️  NOTE IMPORTANTI:\n• Scommesse ANTE e BLIND xe obligatorie ogni partìa\n• Scommesse PLAY xe opzionałi e strategiche\n• Assicurati de inserir ła azion coreta, e soło una azion a ła volta.\n\n",
+    "state": "🎯 TORNIO {round}\n💰 Fichi: {chips}\n🎴 La tua man: {hand}\n📊 Pari corenti: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fase: {phase}\n🎯 Azioni disponìbili: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Round {round} scumisià! Pari: ANTE ${ante}, BLIND ${blind}. Te ghe rimane {chips} fichi.",
+    "your_hand": " La tua man: {hand}",
+    "flop_revealed": " FLOP rivelato: {cards}",
+    "river_revealed": " RIVER rivelato: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Asion invalida par ła fase atual.Axion disponibiłi: {available}",
+    "message": " Asion invalida!Asion disponibiłi: {available}"
+  },
+  "action": {
+    "folded": "- Te te ga messo."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! La man del mazziere: {cards}",
+    "community_cards": " Carte comunitari: {cards}",
+    "player_best": "🎴 La mejo man del zogador: {name} ({cards})",
+    "dealer_best": "🎴 La mejo man del banco: {name} ({cards})",
+    "ante_lost_folded": " ANTE scomesa PERSADA! -${ante} (ripiegà)",
+    "blind_lost_folded": " PEGO SCOPIO PERSO! -${blind} (ripiegato)",
+    "ante_won": "✅ ANTE scommessa VINTO! +${amount}",
+    "ante_pushed": " ANTE scomesa PUSHED! ${ante} ritornà",
+    "ante_lost": " ANTE scommessa PERSADA! -${ante}",
+    "blind_won": "✅ ła puntata CIECA ła xe VINTA! +${amount}",
+    "blind_pushed": " PUSHED BET! ${blind} return",
+    "blind_lost": "❌ ła puntata CIECA ła xe PERSA! -${blind}",
+    "play_won": "✅ GIOCA scommessa VINTO! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} return",
+    "play_lost": " GIOCA scommessa PERSA! -${play}",
+    "net_gain": "🎉 Torno {round} conpletà! Guadagno neto: +${net}",
+    "net_loss": "💸 Torno {round} conpletà! Perdita neto: ${net}",
+    "separator": "- I'è 'na roba che no se pol far. - No, ma..."
+  },
+  "outcome": {
+    "game_over_win": "🏁 PARTIA FINIA! {max_turns} torni conpletà. Te ghe {chips} fichi - TI VINCI!",
+    "game_over_lose": "GAME OVER! Te ghè finì le fiche. El dealer vinse!",
+    "reward_win": "Zogador conpletà {winner_rounds} torni con ${chips} fichi",
+    "reward_lose": "El xugador el ga finìo le fiche inte'l giro {round}",
+    "reward_win_max": "Zogador conpletà {max_turns} torni con ${chips} fichi"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush (Rosałe)",
+    "straight_flush": "Straight Flush (Flusso direto)",
+    "four_of_a_kind": "Quattro de un tipo",
+    "full_house": "Casa piena.",
+    "flush": "Flush",
+    "straight": "drito.",
+    "three_of_a_kind": "Tre del so tipo",
+    "two_pair": "Dò copie",
+    "one_pair": "Una copia",
+    "high_card": "Carte alta",
+    "unknown": "Man sconosciuta."
+  }
+}

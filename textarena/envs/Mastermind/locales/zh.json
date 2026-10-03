@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "你正在玩 Mastermind。\n你需要找出一个长度为 {code_length} 位的代码，每个数字都在 1 到 {num_numbers} 之间，{repeats}。\n你可以使用以下格式提交猜测：'[2 1 4 5]'。\n每次猜测后，你都会收到黑色和白色标记形式的反馈。\n黑色标记表示数字正确且位置正确，白色标记表示数字正确但位置错误。\n你有 {max_turns} 个回合来猜出代码。\n",
+    "with_repeats": "允许数字重复",
+    "no_duplicates": "不允许数字重复"
+  },
+  "invalid_move": {
+    "wrong_format": "你的回复不是一个由空格分隔、并用方括号括起来的数字列表。",
+    "not_integers": "所有条目都必须是有效整数。",
+    "wrong_length": "猜测必须恰好包含 {code_length} 个数字。",
+    "out_of_range": "所有数字都必须在 1 到 {num_numbers} 之间。",
+    "duplicates_not_allowed": "不允许出现重复数字。",
+    "repeated_guess": "你已经猜过 {guess}。请尝试其他猜测。"
+  },
+  "game_action": {
+    "feedback": "已提交 [{guess}]。反馈：{black_pegs} 个黑色标记，{white_pegs} 个白色标记。"
+  },
+  "outcome": {
+    "win": "你已破解代码，正确解出了 {code_length} 个标记中的 {black_pegs} 个",
+    "turn_limit": "已达到回合上限。你正确猜出了 {percent}% 的数字。"
+  }
+}

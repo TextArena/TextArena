@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} no Xogo de Negociación.\nTes algún recurso, e a túa tarefa é comerciar de xeito que o valor total dos teus recursos aumente.\nOs recursos e valores asociados que tes actualmente son:\n\t+ {resource_value_list}\nEn cada quenda, podes falar co teu opoñente e facer unha oferta de comercio.\nUsa os seguintes tokens especiais para accións:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Recursos Ofrecidos -> Recursos Solicitados]\n  - '[Accept]': Para aceptar unha oferta entrante.\n  - '[Deny]': Para rexeitar unha oferta entrante (por defecto).\nO xogo dura {max_turns} quendas en total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "O xogador intentou aceptar un comercio sen ter os recursos necesarios.",
+    "out_of_range": "Xogador {player_id}, Acción inválida. A columna {col} está fóra dos límites.",
+    "already_full": "Xogador {player_id}, Acción inválida. A columna {col} está chea.",
+    "proposing_with_no_resource": "O xogador {player_id} intentou facer unha oferta de comercio sen ter os recursos necesarios.",
+    "incorrect_offer_format": "O xogador {player_id} fixo unha oferta de comercio nun formato incorrecto.",
+    "no_new_offer": "O xogador {player_id} non fixo unha nova oferta de comercio."
+  },
+  "offers": {
+    "reject": "O xogador {player_id} rexeitou a oferta de comercio.",
+    "accept": "O xogador {acceptor_id} aceptou a oferta de comercio do xogador {proposer_id}.",
+    "proposal": "O xogador {player_id} fixo a seguinte oferta ao xogador {opponent_id}: Obxectos ofrecidos: {offered} -> Obxectos solicitados: {requested}"
+  },
+  "outcome": {
+    "win": "O xogador {winner_id} gañou ao ter un maior aumento no valor do inventario.",
+    "draw": "O mesmo cambio no valor do inventario para todos os xogadores. Empate."
+  }
+}

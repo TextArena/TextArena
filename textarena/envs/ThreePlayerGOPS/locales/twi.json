@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Wo ne Odwumayɛni {player_id} wɔ Three-Player GOPS.\n- Wo wɔ nsa 13 a ɛwɔ A-K (biara pɛ). \n- Round biara no, wɔabɔ kɔɔto. Fa kɔɔto baako te sɛ `[Q]`, `[10]`, `[2]` …\n- Kɔɔto a ɛkorɔn sen biara no di nkonim wɔ kɔɔto no mu (+ biribiara a wɔaka abɔ). Sɛ wɔaka abɔ a, wɔaka kɔɔto no mu wɔ round a edi hɔ.\n- Akyiri 13 round no, odwumayɛni a ɔwɔ nkrataa dɔɔso sen biara no di nkonim. Nkrɔfo a wɔayi wɔn afi agorɔ no mu = wɔayi wɔn afi agorɔ no mu."
+  },
+  "round": {
+    "header": "### Akɔdeɛ {round}/13 - Abɔdeɛ: {prize} (ɛwo {worth})",
+    "hand": "Wo nsa a aka no: {hand}"
+  },
+  "reveal": {
+    "win": "Nkrataa » {bids} - Odwumayɛni {winner} di nkonim wɔ {pot}.",
+    "tie": "Nkrataa » {bids} - tie, sika no wɔ {pot} mu.",
+    "scores": "Nkɔso → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "adwuma no hia kaade bi te sɛ \"[Q]\" a ɛwɔ ntweaso mu.",
+    "bad_card": "adaka a wɔde adi dwuma dedaw anaa nea enni mu"
+  },
+  "elimination": {
+    "player": "Ɔbɔadeɛ {pid} a wɔayi no afi agodie mu esiane sɛ ɔtwee akwan bi a ɛmfata mpɛn pii nti."
+  },
+  "outcome": {
+    "auto_win": "Sɛ woyi agumadifo baanu fi adi a, wɔdi nkonim.",
+    "final": "Awiei no: {scores}"
+  }
+}

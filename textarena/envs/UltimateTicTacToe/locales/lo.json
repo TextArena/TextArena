@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "ທ່ານເປັນຜູ້ຫຼິ້ນ {player_id} ໃນ **ຕິກຕັກໂຕສຸດທິ**.\nກະລຸນາສົ່ງການເຄື່ອນໄປຢ່າງ **[macro  micro]** (ຕົວເລກສອງຕົວ 0-8):\n• *macro*  = ທີ່ມີນິ້ບອດທີ່ທ່ານຫຼິ້ນ\n• *micro* = ສະກາຍານທີ່ຢູ່ໃນນິ້ບອດນັ້ນ\nຕົວຢ່າງ `[7 8]` ➜ ວັດເຄື່ອງໝາຍຂອງທ່ານໃນນິ້ບອດ 7, ສະກາຍານ 8, ແລະ\nບັງຄັບຜູ້ຫຼິ້ນຂ້າງກົງຂອງທ່ານໃຫ້ຫຼິ້ນໃນນິ້ບອດ 8 ຕໍ່ໄປ.\n\nທ່ານເປັນ `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "ຄະນະກໍາມະການປັດຈຸບັນ: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ການຍ້າຍຕ້ອງຢູ່ໃນຮູບແບບ [macro micro] ດ້ວຍຕົວເລກ 0-8.",
+    "out_of_range": "ດັດຊະນີແຕ່ລະອັນຕ້ອງຢູ່ລະຫວ່າງ 0 ແລະ 8.",
+    "index_out_of_range": "micro_board, row, ຫຼື col ແມ່ນອອກຈາກຂອບເຂດ.",
+    "cell_occupied": "ຫ້ອງນີ້ຖືກຄວບຄຸມຢູ່ແລ້ວ.",
+    "wrong_micro_board": "ຜູ້ຫຼິ້ນຕ້ອງຫຼິ້ນໃນກະດານ micro ຕໍ່ໄປ.",
+    "micro_board_won": "ກະດານໄມໂຄຣໄດ້ຊະນະແລ້ວ."
+  },
+  "next_board": {
+    "any": "ກະດານ micro ໃດ",
+    "specific": "ນິ້ບອດຍ່ອຍ {nxt}"
+  },
+  "game_action": {
+    "played": "ຜູ້ນ {player_id} ຫຼິ້ນໃນ micro board {macro_idx}, cell {micro_idx} (row {row}, col {col}). ຜູ້ນ {opponent_id} ຕ້ອງຫຼິ້ນໃນ {nxt_txt}."
+  },
+  "outcome": {
+    "win": "ຜູ້ນ {player_id} ຊະນະ Ultimate Tic Tac Toe!",
+    "draw": "ເກມແມ່ນ draw!"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} hrajúci {colour} ({piece}) v hre Othello.\nVašim cieľom je mať na konci hry viac kameňov svojej farby na doske.\nPočas svojej ťahy umiestnite kameň tak, aby bol v ľubovoľnom smere (horizontálnom, vertikálnom alebo diagonálnom) medzi vaším novým kameňom a ďalším z vašich existujúcich kameňov, a tým obkľúčil jeden alebo viac kameňov súpera. Všetky obkľúčené kameňe súpera budú otočené na vašu farbu.\nZadajte svoj ťah v formáte '[riadok, stĺpec]'."
+  },
+  "board": {
+    "game_board": "Herná doska:\n{board}",
+    "valid_moves": "{observation}\nPlatné ťahy: {moves}",
+    "no_valid_moves_reset": "{observation}\nŽiadne platné ťahy - môžete musieť preskočiť.",
+    "no_valid_moves_step": "{observation}\nŽiadne platné ťahy – môžete musieť preskočiť.",
+    "scores_reset": "{observation}\nAktuálne skóre - Čierny: {black_count}, Biely: {white_count}\n",
+    "scores_step": "{observation}\nSkóre - Čierny: {black_count}, Biely: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Ťah musí byť v tvare [riadok, stĺpec].",
+    "illegal": "Neplatný ťah. Platné ťahy: {valid}"
+  },
+  "game_action": {
+    "skipped": "Hráč {pid} musel preskočiť svoju ťahu",
+    "played": "Hráč {pid} ({piece}) zahrál [{r}, {c}] a otočil {flipped} kameň(ov)"
+  },
+  "game_message": {
+    "must_skip": "Hráč {pid} ({piece}) nemá žiadne platné ťahy a musí preskočiť."
+  },
+  "outcome": {
+    "black_wins": "Čierny vyhráva {black_count}-{white_count}.",
+    "white_wins": "Biely vyhráva {white_count}-{black_count}.",
+    "draw": "Remíza {black_count}-{white_count}."
+  }
+}

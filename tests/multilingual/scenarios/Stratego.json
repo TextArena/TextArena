@@ -1,0 +1,18 @@
+{
+  "entry": "textarena.envs.Stratego.env:StrategoEnv",
+  "num_players": 2,
+  "seed": 42,
+  "scenarios": {
+    "wrong_format": ["not a move"],
+    "not_own_piece": ["[E0 E1]"],
+    "scout_through": ["[C0 C4]"],
+    "scout_diagonal": ["[C0 E1]"],
+    "not_scout_one_square": ["[D0 F0]"],
+    "into_lake": ["[D2 E2]"],
+    "onto_own": ["[D0 D1]"],
+    "move_empty": ["[D0 E0]"],
+    "battle_higher": ["[D1 E1]", "[G5 F5]", "[E1 F1]", "[F5 G5]", "[F1 G1]", "[G5 F5]"],
+    "battle_lower": ["[D0 E0]", "[G5 F5]", "[E0 F0]", "[F5 G5]", "[F0 G0]", "[G5 F5]"],
+    "battle_equal": ["[D8 E8]", "[G5 F5]", "[E8 F8]", "[F5 G5]", "[F8 G8]", "[G5 F5]"]
+  }
+}

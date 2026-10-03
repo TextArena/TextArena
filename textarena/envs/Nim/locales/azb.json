@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "Current Pile: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "یئرلشدیریلن بیر فورماتا راست گلمیر. '[pile quantity]' ایستیفاده ائدین.",
+    "correct_format_wrong_fields": "Oyuncu {player_id}, Yanlış hərəkət. Sütun {col} sərhədlərdən kənarda yerləşir.",
+    "out_of_range": "پایل ایندکس {pile_index} یئرین دن چیخمیشدیر.",
+    "non_positive": "گرک اَلّی-آز بیر شئی گؤتورسون.",
+    "exceeds_pile": "Yığın {pile_index}-dən {quantity} götürə bilmərsiniz (sadəcə {pile_count} qalıb)."
+  },
+  "observation": {
+    "removed_from_piles": "Player {player_id} played [{pile_index} {quantity}], removing {quantity} object(s) from pile {pile_index}."
+  },
+  "outcome": {
+    "win": "اویونچو {player_id} سون شئی نی آلدی!"
+  }
+}

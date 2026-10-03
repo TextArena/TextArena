@@ -1,0 +1,27 @@
+{
+  "_comment": "TicTacToe dil dosyası. Anahtarları (sol taraf) çevirme. Yalnızca değerleri (sağ taraf) çevir.",
+  "_slots": {
+    "{player_id}": "Oyuncunun numarası, örneğin 0 veya 1",
+    "{symbol}": "Oyuncunun işareti, X veya O",
+    "{opponent_symbol}": "Rakibin işareti, X veya O",
+    "{cell}": "Tahta hücresi numarası, 0 ile 8 arasında"
+  },
+  "player_prompt": {
+    "intro": "Tic Tac Toe'da Oyuncu {player_id}'siniz.\nHedefiniz, tahtada üçü bir arada (yatay, dikey veya çapraz) kazanmaktır.\nSıranızda, işaretinizi koymak istediğiniz kare numarasını (0-8) seçmelisiniz.\nÖrneğin, '[4]' işareti tahtanın orta hücresine koyar.\nOyuncu {player_id} olarak, siz '{symbol}' olacaksınız, rakibiniz ise '{opponent_symbol}' olacaktır."
+  },
+  "board": {
+    "current_board": "Mevcut Tahta:\n\n{board}\n\nMevcut Hamleler: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Gönderilen hamle doğru formata uymuyor.",
+    "out_of_range": "{cell} geçerli bir hücre değil. 0 ile 8 arasında olmalıdır.",
+    "already_occupied": "{cell} hücresi zaten dolu."
+  },
+  "game_action": {
+    "placed": "Oyuncu {player_id}, işaretini ({symbol}) {cell} hücresine koydu."
+  },
+  "outcome": {
+    "win": "Oyuncu {player_id} kazandı!",
+    "draw": "Oyun berabere!"
+  }
+}

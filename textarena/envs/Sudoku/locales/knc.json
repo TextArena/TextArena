@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Káma {player_id} ka. Káma Sudoku ka.\nKán Sudoku Grid ka:\nKám ka ɗaɗum ka ɓaŋ 1 si 9, kám kol ka ɓaŋ 1 si 9.\nKám cell ka ɓaŋ '.' ka, kám cell ka ɓaŋ digit 1 si 9 ka.\n\nKán Sudoku Grid ka:\nKám man ka ɓaŋ ɗaɗum ka ɓaŋ 9x9 grid ka digit 1 si 9 ka:\n1. Kám ɗaɗum ka ɓaŋ digit 1 si 9 ka ɓaŋ ɓaŋɗa.\n2. Kám kol ka ɓaŋ digit 1 si 9 ka ɓaŋ ɓaŋɗa.\n3. Kám ɓaŋ 3x3 subgrid ka ɓaŋ digit 1 si 9 ka ɓaŋ ɓaŋɗa.\n\nKán Rules ka Instructions ka:\n1. **Káma ɓaŋɗa** grid ka ɓaŋ digit ka.\n2. **Káma ɓaŋ** cell ka ɓaŋ '.' ka.\n3. Káma response ka ɓaŋɓaŋ, amma káma format ka '[row column number]'.\n4. **Káma ɓaŋɗa** move ka ɓaŋɓaŋ Sudoku rules ka. Invalid move ka penalties ka.\nExamples ka:\n- **Valid Move** ka:\n  - Grid Snippet Before Move ka:\n  \n  - Move: `[5 3 7]`\n  - Explanation: 7 ka row 5, column 3 ka ɓaŋɓaŋ Sudoku rules ka.\n\n- **Invalid Move** (Overwriting a pre-filled cell) ka:\n  - Grid Snippet Before Move ka:\n  \n  - Move: `[1 1 9]`\n  - Explanation: Cell (1,1) ka ɓaŋ 5 ka. Káma ɓaŋɗa.\n\n- **Invalid Move** (Violating Sudoku rules) ka:\n  - Grid Snippet Before Move ka:\n  \n  - Move: `[1 3 5]`\n  - Explanation: 5 ka row 1, column 3 ka ɓaŋɓaŋ Sudoku rules ka.\n\nKán history ka moves ka thoughts ka ɓaŋɓaŋ rounds ka. Káma history ka move ka ɓaŋɓaŋ decision making ka ɓaŋɓaŋ moves ka. Káma luck ka!\n\n"
+  },
+  "board": {
+    "game_board": "Káma kású káma kású:\n{board}",
+    "board_state": "Kәrma dәye: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format move ba wo. Kambiwu {player_id}ye 'row column number' kalkallo jawawunzǝnyi.",
+    "out_of_bounds": "Káma ɓaŋɗa. {player_id} ka ɓaŋ {num} ka ({row}, {col}) ka, ka ɓaŋɓaŋ bounds ka.",
+    "overwrite": "Káma ɓaŋɗa. {player_id} ka ɓaŋ pre-filled cell ({row}, {col}) ka.",
+    "violates_rules": "Káma ɓaŋɗa. {player_id} ka ɓaŋ {num} ka ({row}, {col}) ka, ka ɓaŋɓaŋ Sudoku rules ka."
+  },
+  "outcome": {
+    "win": "Congratulations! Kәmbu {player_id}be sudoku puzzle dәga sǝdǝna.",
+    "turn_limit": "Kәndaram nǝmkambe dǝga sǝta. Nyiye kalkal ro {percent}% cellwa baaro yikowo."
+  }
+}

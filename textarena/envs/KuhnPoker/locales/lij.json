@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ti sei o Zugador {player_id} in te un zögo de {max_rounds} turni de Kuhn Poker.\nRegole do Zögo:\n- O Kuhn Poker o l'usa un mazzo de 3 carte con J, Q, K (J o l'é a carta ciù bassa, K a ciù alta)\n- Ogni zugador o mette {ante} fichi e o riceve 1 carta ogni turno (nota che e carte son distribuïe senza sostituïle, quindi no pêu avei a mæxima carta do teu avversaio).\n- O zögo o continua pe {max_rounds} turni\n- O zugador con ciù fichi a-a fin de tutti i turni o vince\nRegole de l'Azion:\n- '[check]': Passa senza puntâ (solo se no gh'é nisciun puntê in sciâ töa)\n- '[bet]': Azonzi 1 fiche in sciô pot (solo se no gh'é nisciun puntê in sciâ töa)\n- '[call]': Azonzi 1 fiche in sciô pot pe pareggiâ a puntâ de l'avversaio\n- '[fold]': Abandoni a töa man e lasci che l'avversaio o vinca o pot"
+  },
+  "init_round": {
+    "round_start": "### Inìçio do round {current_round} de {max_rounds} rounds. A tò card è: '{player_card}'",
+    "available_actions": "E teu açioin che ti gh'æ son: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Açion dovéiva êse [Check], [Bet], [Call], ò [Fold].",
+    "not_legal": "L'açion a deve ëse {legal_actions}."
+  },
+  "action": {
+    "submit_move": "O Zugador {player_id}, a presentou a mossa: '[{move}]'.",
+    "valid_actions": "E teu açioin dispoxibili son: {legal_actions}.",
+    "round_summary": "{reason} Puntuaçioin atuaî: Giugou 0: '{player_0_chips}'; Giugou 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Sciortia: A carta {winner_card} do Zugador {winner} a batte a carta {loser_card} do Zugador {loser}. O Zugador {winner} o vinca o pot de {pot_value} fichi."
+  },
+  "outcome": {
+    "draw": "A-a fin de {max_rounds} tourni, tutti doî i zugadöi an avuo o mæximo numero de fiñe.",
+    "round_win": "O zugatô {player_id} o l'é sciortio.",
+    "winner_player0": "O zugatô 0 o l'à vinto avendo ciù fichas à a fin de tutte e {max_rounds} rie.",
+    "winner_player1": "O zugatô 1 o l'à vinto avendo ciù fichas à a fin de tutti i {max_rounds} tour."
+  }
+}

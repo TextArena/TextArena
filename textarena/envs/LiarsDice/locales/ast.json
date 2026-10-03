@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Yes el xugador {player_id} nun xuegu de Liar's Dice con {num_players} xugadores.\nRegles:\n- Nel to tornu, puedes:\n  1) Facer una nueva ufierta con una cantidá o valor de cara mayor (o dambos) que la ufierta actual; p. ex. '[Bid: 3, 4]',\n  2) Llamar a la última ufierta escribiendo '[Call]'.\n\nSi llames:\n  - Si'l recuentu real d'esi valor de cara ente tolos dados ye menor que la ufierta, el postreru que fixo la ufierta pierde un dau.\n  - De lo contrario, el que llamó pierde un dau.\nUn xugador que llega a 0 dados queda elimináu. El postreru xugador que quede gana."
+  },
+  "board": {
+    "per_player": "\tXugador {p}: {d}",
+    "new_round": "\nNueva ronda - Daos restantes: {dice_summary}\nLos tos daos actuales son: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Xugador {current_player_id} llama! La cuenta real de la cara {face_value} ye {count}, que ye MENOR que {quantity}.\nXugador {loser_id} (l'últimu ufiertante) pierde un dau.",
+    "caller_loses": "Xugador {current_player_id} llama! La cuenta real de la cara {face_value} ye {count}, que ye >= {quantity}.\nXugador {loser_id} (el que llama) pierde un dau."
+  },
+  "action": {
+    "bid_announce": "El xugador {player_id} puza {quantity} de cara {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "La llamada foi efectuada ensin una oferta previa.",
+    "invalid_bid": "Oferta inválida: {reason}",
+    "not_recognized": "Aición non reconocida como una válida '[Bid: X, Y]' o '[Call]'. Aición unviada: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nueva cantidá {new_quantity} ye menor que l'actual {current_quantity}.",
+    "face_lower": "El valor nominal nuevu {new_face_value} ye menor qu'el actual {current_face_value}.",
+    "identical": "La puxanza ye idéntica a la actual.",
+    "face_range": "El valor nominal tien de tar ente 1 y 6."
+  },
+  "message": {
+    "eliminated_invalid": "El xugador {player_id} foi elimináu por un movimientu inválidu."
+  },
+  "outcome": {
+    "win": "Xugador {winner} gana! Clasificación final: {final_ranking}"
+  }
+}

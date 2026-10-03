@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Sampeyan iku Player {player_id} ing Nim.\nGol sampeyan yaiku ngambil objek sing tersisa pungkasan.\nSaben giliran, pilih tumpukan sing tepat siji lan ilangke siji utawa luwih objek saka tumpukan kasebut.\nGunakna format '[pile quantity]', ing ngendi tumpukan iku indeks tumpukan lan kuantitas iku jumlah objek sing arep diilangke.\nUmpamane, '[0 3]' ngilangke 3 objek saka tumpukan 0."
+  },
+  "state": {
+    "current_pile": "Tumpukan Saiki:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ora ditemokaké format pamindhahan sing sah. Gunakake \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Player {player_id}, Laku batal. Kolom {col} njaba wates.",
+    "out_of_range": "Indeks tumpukan {pile_index} ora ana ing kisaran.",
+    "non_positive": "Kudu mbusak paling ora 1 obyek.",
+    "exceeds_pile": "Ora bisa mbusak {quantity} saka tumpukan {pile_index} (mung {pile_count} kiwa)."
+  },
+  "observation": {
+    "removed_from_piles": "Pemain {player_id} main [{pile_index} {quantity}], mbusak {quantity} objek saka tumpukan {pile_index}."
+  },
+  "outcome": {
+    "win": "Pemain {player_id} njupuk obyek pungkasan ((s)!"
+  }
+}

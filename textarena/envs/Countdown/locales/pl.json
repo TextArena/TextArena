@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Graj w grę liczb Countdown!\nCel: Połącz liczby za pomocą +, -, *, /, aby osiągnąć cel.\nFormat akcji: [i j op], gdzie i, j to indeksy, a op to operacja.\nPrzykład: [0 2 *] mnoży liczbę o indeksie 0 przez liczbę o indeksie 2.\nDzielenie musi dać wynik w postaci liczby całkowitej."
+  },
+  "board": {
+    "header": "CEL: {target}\n\nDostępne liczby:\n{numbers}",
+    "best": "{observation}\n\nNajlepszy wynik do tej pory: {best_value} (odległość: {distance})\nNajlepszy wyrażenie: {best_expression}",
+    "history": "{observation}\n\nHistoria ruchów:\n{moves}",
+    "progress": "{observation}\nAktualny wynik postępu: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nieprawidłowy format akcji. Użyj `[i j op]`, gdzie i, j to indeksy, a op to +,-,*,/",
+    "invalid_indices": "Nieprawidłowe indeksy. Muszą być różne i w zakresie 0-{max_index}",
+    "invalid_operation": "Nieprawidłowa operacja (dzielenie przez zero lub wynik niecałkowity)"
+  },
+  "outcome": {
+    "win": "Doskonale! Znaleziono dokładny cel: {target}",
+    "no_moves": "Brak kolejnych ruchów. Najlepszy wynik: {best_value} (cel: {target})",
+    "turn_limit": "Osiągnięto limit tur. Najlepszy wynik: {best_value} (cel: {target})"
+  }
+}

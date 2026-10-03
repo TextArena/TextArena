@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in Kwantum Tic Tac Toe.\nJou simbool is '{symbol}', en jou skuifnommers is altyd {parity} (bv. X1, X3 of O2, O4).\n\nDoel: Wen deur 'n lyn van drie klassieke merke (verdig van superposisies) te vorm.\n\nHoe om te Speel:\n- Op elke beurt, plaas 'n spookmerk in twee verskillende leë vierkante met die formaat '[a,b]'.\n- Hierdie merke is verstrengel, en gelabel soos 'X1 / X1' of 'O4 / O4'.\n- Jy kan nie spookmerke in 'n vierkant plaas wat reeds ineengestort (verdig) het nie.\n\nIneenstortingreël:\n- As jou skuif 'n siklus in die verstrengelingsgrafiek skep, stort dit outomaties ineen.\n- Elke spookmerk in die siklus verander in 'n klassieke merk in een van sy twee posisies.\n- Enige afhanklike spookmerke stort ook ineen.\n\nOorwinning:\n- Die spel eindig wanneer 'n speler drie klassieke merke in 'n ry het.\n- As beide spelers 'n lyn tydens dieselfde ineenstorting kry, wen die een met die laer maksimum skuifnommer.\n\nVoorbeeldskuif: '[0,4]' plaas 'n spookmerk in selle 0 en 4."
+  },
+  "board": {
+    "current_board": "Kwantum Tic Tac Toe Bord:\n\n{board}\n\nDien jou skuif in as '[a,b]' om 'n kwantummerk in twee plekke te plaas."
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldige formaat. Gebruik '[a,b]'.",
+    "invalid_cells": "Ongeldige of duplikaat sel-indeks.",
+    "already_solidified": "Een van die selle is reeds verdig."
+  },
+  "game_action": {
+    "placed": "Speler {player_id} het hul simbool in 'n superposisie tussen selle {pos_a} en {pos_b} geplaas."
+  },
+  "game_message": {
+    "dependent_resolved": "Afhanklike superposisie opgelos. Sel ({r}, {c}) is nou {symbol}.",
+    "last_cell_resolved": "Superposisie vir laaste sel opgelos. Sel ({r}, {c}) is nou {symbol}.",
+    "superposition_resolved": "Superposisie opgelos. Sel ({r}, {c}) is nou {symbol}."
+  },
+  "outcome": {
+    "win": "Speler {player_id} wen met verdigte merke!",
+    "draw": "Die spel is 'n gelykopuitslag!"
+  }
+}

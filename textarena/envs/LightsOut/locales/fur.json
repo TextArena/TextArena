@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Welcome to Lights Out! You have a {size}x{size} grid of lights.\nYour goal is to turn ALL lights OFF (represented by '.')\nWhen you press a light, it toggles itself AND its adjacent neighbors (up/down/left/right).\nType [row col] to press a light (0-indexed, so valid range is 0-{max_index}).\nYou have up to {max_turns} moves to solve the puzzle.\nLegend: 'O' = light ON, '.' = light OFF"
+  },
+  "board": {
+    "current_state": "Stât corrent de gride (Mozion {moves_made}, {moves_left} mos inmaneadis, {completion}% complet):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "La azion e à di jessi tal formât [row col] dulà che la righe e il colon a son intîrs dal 0 al {max_index}.",
+    "out_of_range": "Lis coordenadis a devin jessi tra 0 e {max_index}. Tu âs inserît [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Compliments! Tu âs risolût il puzzle in {moves_used} moviments!",
+    "loss": "Zugo finît! Tu âs doprât ducj i {max_turns} mos cence risolvi il puzzle. Completament finâl: {completion}%\nStât finâl:\n{grid}"
+  }
+}

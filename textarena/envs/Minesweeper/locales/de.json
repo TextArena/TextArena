@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Du spielst Minesweeper.\nDas Ziel des Spiels ist es, alle Felder aufzudecken, die keine Minen enthalten.\nUm einen Zug auszuführen, gib einfach die Zeilen- und Spaltenkoordinaten des Feldes an, das du aufdecken möchtest. Verwende dazu das folgende Format:\n- `[row col]`: Decke das Feld in der angegebenen Zeile und Spalte auf.\nZum Beispiel:\n- `[3 2]`, um das Feld in Zeile 3, Spalte 2 aufzudecken.\n- `[5 6]`, um das Feld in Zeile 5, Spalte 6 aufzudecken.\nBei deinem ersten Zug wird ein Bereich um das gewählte Feld aufgedeckt, um einen sicheren Start zu gewährleisten.\nDie aktuelle Anordnung des Spielfelds ist unten dargestellt. Nicht aufgedeckte Felder werden durch einen Punkt ('.') dargestellt; aufgedeckte Zahlen zeigen die Anzahl benachbarter Minen an.\nAchte darauf, keine bereits aufgedeckten Felder auszuwählen.\nHier ist die aktuelle Anordnung des Spielfelds:\n"
+  },
+  "board": {
+    "game_board": "Spielfeld:\n\n{board}",
+    "current_board": "Aktuelles Spielfeld:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Du hast nicht mit gültigen Koordinaten in eckigen Klammern geantwortet.",
+    "out_of_bounds": "Die angegebenen Zeilen- und Spaltenkoordinaten liegen außerhalb des Spielfelds.",
+    "already_revealed": "Das Feld bei ({row}, {col}) wurde bereits aufgedeckt.",
+    "hit_mine": "Du hast bei ({row}, {col}) eine Mine getroffen."
+  },
+  "game_action": {
+    "revealed": "Du hast das Feld bei ({row}, {col}) aufgedeckt."
+  },
+  "outcome": {
+    "win": "Glückwunsch! Du hast das Minesweeper-Spielfeld erfolgreich geräumt.",
+    "turn_limit": "Das Zuglimit wurde erreicht. Du hast erfolgreich {percent}% der sicheren Felder aufgedeckt."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Eres el jugador {player_id} en una partida de Iterated Stag Hunt de {num_rounds} rondas.\n\nEstructura del juego:\n- La partida consta de {decision_rounds} rondas de decisión\n- Antes de cada decisión, tienes {conversation_rounds} turnos para comunicarte\n- Después de la comunicación, ambos jugadores eligen simultáneamente cazar un ciervo o una liebre\n\nRecompensas:\n- Las recompensas asociadas con la caza de ciervos y liebres pueden variar entre rondas\n- Las recompensas se presentan al comienzo de cada ronda\n\nCómo jugar:\n- Durante la comunicación: simplemente escribe tu mensaje\n- Durante la fase de decisión: usa '[Stag]' o '[Hare]'\nPuedes incluir texto adicional antes o después de estos símbolos.\n"
+  },
+
+  "round": {
+    "payoff_matrix": "Comienza la ronda {round} con la siguiente matriz de recompensas:\n- Ambos cazan un ciervo: ambos reciben {mutual_stag} puntos\n- Ambos cazan una liebre: ambos reciben {mutual_hare} puntos\n- Uno caza una liebre y el otro un ciervo: el cazador de la liebre recibe {single_hare} puntos y el cazador del ciervo recibe {single_stag} puntos\nPuedes comunicarte libremente con tu oponente durante {conversation_rounds} rondas antes de tomar una decisión.",
+    "decision_phase": "Ha comenzado la fase de decisión de la ronda {round}. Responde con '[stag]' o '[hare]'.",
+    "results": "La ronda {round} ha terminado. Resultados:\n\tEl jugador 0 eligió '{decision0}' (recompensa: {payoff0}; total: {total0})\n\tEl jugador 1 eligió '{decision1}' (recompensa: {payoff1}; total: {total1})"
+  },
+
+  "outcome": {
+    "win": "Puntuaciones finales: jugador 0: {p0}, jugador 1: {p1}\n¡El jugador {winner_id} ganó!",
+    "draw": "Puntuaciones finales: jugador 0: {p0}, jugador 1: {p1}\n¡Es un empate!"
+  }
+}

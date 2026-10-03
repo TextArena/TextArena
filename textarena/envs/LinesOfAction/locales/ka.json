@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "თქვენ ხართ მოთამაშე {player_id} LinesOfAction-ის თამაშში.\nთქვენი ფიგურებია '{side}', მეტოქის ფიგურებია '{other}'.\nსვლის ფორმატი: `[b1b3]` (საწყისი კოორდინატი სამიზნე კოორდინატი). ლეგალური სვლა მიდის ჰორიზონტალურად, ვერტიკალურად ან დიაგონალურად იმდენი უჯრედი, რამდენიც არის იმ ხაზზე ფიგურები (ნებისმიერი ფერი). თქვენ შეგიძლიათ გადახტეთ საკუთარ ფიგურებზე, მაგრამ არ შეგიძლიათ გადახტეთ მეტოქის ფიგურებზე; მეტოქის ფიგურაზე დაშვებით თქვენ იგებთ მას. გაიმარჯვებთ, როდესაც ყველა თქვენი ფიგურა 8-მეზობლიანად იქნება დაკავშირებული."
+  },
+  "board": {
+    "current_board": "საბჭო: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ფორმატი უნდა იყოს e2e4 (coordinates-დან,to-მდე).",
+    "no_piece": "No {side} ნაჭერი {coord}-ზე.",
+    "identical": "საწყისი და სამიზნე პოზიციები ერთნაირია.",
+    "not_straight_or_diagonal": "მოძრაობა უნდა იყოს სწორი ან დიაგონალური.",
+    "wrong_distance": "გადაადგილების მანძილი უნდა იყოს ხაზში მდგარ ფიგურების რაოდის ტოლი.",
+    "enemy_blocks": "მტრის ნაწილის ბლოკირება.",
+    "destination_own": "სამიზნე პოზიცია დაკავებულია თქვენი საკუთარი ფიგურით."
+  },
+  "game_action": {
+    "moved": "მოთამაშე {player_id} გადავიდა {from} -> {to}",
+    "captured_suffix": "მოთამაშე {player_id} გადავიდა {from} -> {to} და დაიჭირა მტერი."
+  },
+  "outcome": {
+    "win": "ყველა ფიგურა დაკავშირებულია.",
+    "draw_no_capture": "60 სვლა გავლილია ფიგურის აღების გარეშე.",
+    "draw_repetition": "პოზიცია სამჯერ განმეორდა."
+  }
+}

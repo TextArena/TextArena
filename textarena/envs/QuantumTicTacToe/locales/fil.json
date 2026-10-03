@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa Quantum Tic Tac Toe.\nAng iyong simbolo ay '{symbol}', at ang iyong mga numero ng pagkilos ay laging {parity} (hal., X1, X3 o O2, O4).\n\nLayunin: Manalo sa pamamagitan ng pagbuo ng isang linya ng tatlong klasikal na marka (solidified mula sa superpositions).\n\nPaano Maglaro:\n- Sa bawat pagkakataon, ilagay ang isang spooky marka sa dalawang magkakaibang mga parisukat na walang laman gamit ang format '[a,b]'.\n- Ang mga markang ito ay entangled, at may label na tulad ng 'X1 / X1' o 'O4 / O4'.\n- Hindi ka maaaring maglagay ng spooky marka sa isang parisukat na nakuha na (solidified).\n\nPatakaran ng Pagbagsak:\n- Kung ang iyong pagkilos ay lumilikha ng isang siklo sa graph ng entanglement, ito ay automatikong nagbagsak.\n- Ang bawat spooky marka sa siklo ay nagiging isang klasikal na marka sa isa sa dalawang posisyon nito.\n- Ang anumang dependent spooky marka ay nagbagsak din.\n\nTagumpay:\n- Ang laro ay nagtatapos kapag ang isang manlalaro ay may tatlong klasikal na marka sa isang hanay.\n- Kung ang parehong manlalaro ay nakakuha ng isang linya sa panahon ng parehong pagbagsak, ang isa na may mas mababang pinakamataas na numero ng pagkilos ay nanalo.\n\nHalimbawa ng pagkilos: '[0,4]' ay naglalagay ng isang spooky marka sa mga cell 0 at 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Board:\n\n{board}\n\nIsalin ang iyong pagkilos bilang '[a,b]' upang ilagay ang isang quantum marka sa dalawang lokasyon."
+  },
+  "invalid_move": {
+    "wrong_format": "Hindi wastong format. Gamitin ang '[a,b]'.",
+    "invalid_cells": "Hindi wastong o paulit-ulit na mga indeks ng cell.",
+    "already_solidified": "Isa sa mga cell ay nakuha na (solidified)."
+  },
+  "game_action": {
+    "placed": "Ang Player {player_id} ay naglagay ng kanilang simbolo sa isang superposition sa pagitan ng mga cell {pos_a} at {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Ang dependent superposition ay naresolba. Ang cell ({r}, {c}) ay ngayon {symbol}.",
+    "last_cell_resolved": "Ang superposition para sa huling cell ay naresolba. Ang cell ({r}, {c}) ay ngayon {symbol}.",
+    "superposition_resolved": "Ang superposition ay naresolba. Ang cell ({r}, {c}) ay ngayon {symbol}."
+  },
+  "outcome": {
+    "win": "Ang Player {player_id} ay nanalo sa mga solidified na marka!",
+    "draw": "Ang laro ay isang tabla!"
+  }
+}

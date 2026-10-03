@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Tu si Jucaturi {player_id} in nu jocu di Poker Indianu.\n- Mazzu di 52 carti; tu vidi sulu a carta di l'avversariu.\n- Ante {ante} fiches ogni turnu, {max_rounds} turni in tutali.\n- Mossi validi: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X è nu nummuru positivu <= ô nummuru di fiches chi tu hai.)\n- A carta nascosta cchiù àuta vinci ô poti ô showdown.\n"
+  },
+  "round": {
+    "announce": "### Turnu {current_round}/{max_rounds}\nA carta di l'avversariu è: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Fornisci esattamenti UNA azziuni tra parentesi, p'es. '[check]', '[bet 2]', '[call]', '[raise 3]', o '[fold]'.",
+    "cannot_check": "Nun pò [check] - stai affruntannu na puntata.",
+    "amount_min": "U numeru di puntata / alza deve esse ≥ 1.",
+    "cannot_bet": "Non po' [bet] - deve [call] / [raise] / [fold].",
+    "nothing_to_call": "Nenti di chiamari; tu puoi [check] 'nveci.",
+    "no_bet_to_raise": "Utilizza [bet X] pi apriri; nun c'è nisciuna scumessa da rilanciari.",
+    "insufficient": "Chips insufficienti pi chista azzioni."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Li tò azzioni pussibbili: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Jucaturi {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Lu jucaturi {player_id} si ritira.",
+    "showdown_win": "Showdown: {card_win} batte lu {card_lose}.",
+    "showdown_tie": "Showdown tie: tutti dui {card}. Pot split  ognunu riceve {split}."
+  },
+  "outcome": {
+    "p0_wins": "Giucaturi 0 vinci ({bank0} > {bank1})",
+    "p1_wins": "Giucaturi 1 vinci ({bank1} > {bank0})",
+    "draw": "Chips uguali doppu tutti li giri."
+  }
+}

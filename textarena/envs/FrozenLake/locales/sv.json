@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Välkommen till Frusna Sjön!\n\nDu representeras av 'P' på rutnätet.\nRutnätssymboler:\n  ' ' = Frusen yta (säker att gå på)\n  'H' = Hål (fall i och förlor!)\n  'G' = Mål (nå detta för att vinna!)\n  'P' = Din nuvarande position\n\nTillgängliga åtgärder: up, down, left, right (eller w, a, s, d)\nSkriv din åtgärd som: [up], [down], [left], [right] eller [w], [a], [s], [d]\n\nMål: Navigera från starten (övre vänstra) till målet (nedre högra) utan att falla i några hål!\n"
+  },
+  "board": {
+    "current_board": "Aktuell Bräda:\n\n{board}\n\nTillgängliga Åtgärder: {actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ogiltigt åtgärdsformat. Använd [up], [down], [left], [right] eller [w], [a], [s], [d].",
+    "unknown_action": "Okänd åtgärd '{action}'. Använd up, down, left, right, eller w, a, s, d.",
+    "hit_wall": "Du försökte flytta {action} men träffade en vägg!"
+  },
+  "game_action": {
+    "moved": "Du flyttade {action} till position ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Grattis! Du nådde målet!",
+    "fell_in_hole": "Du föll i ett hål! Spelet är över. Du slutförde {pct}% av resan till målet.",
+    "turn_limit": "Du nådde tidsgränsen! Spelet är över. Du slutförde {pct}% av resan till målet."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Sei {role} in Colonel Blotto.\nIl tuo obiettivo è vincere più round del tuo avversario.\nIn ogni round, assegna esattamente {num_total_units} unità ai campi {field_names}.\nIl giocatore che assegna più unità a un campo vince quel campo e il giocatore che vince più campi vince il round.\nAd esempio, '[A7 B7 C6]' assegna 7 unità ad A, 7 a B e 6 a C.",
+    "commander_alpha": "Comandante Alpha",
+    "commander_beta": "Comandante Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nRound vinti - Comandante Alpha: {alpha_score}, Comandante Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRound {current_round}\nComandante Alpha ha assegnato: {p0_allocations}\nComandante Beta ha assegnato: {p1_allocations}\n",
+    "winner_alpha": "{message}Vincitore: Comandante Alpha",
+    "winner_beta": "{message}Vincitore: Comandante Beta",
+    "tie": "{message}Pareggio!"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato di input non valido. Utilizza: A:5, B:10, C:5",
+    "invalid_field": "Nome/i campo/i non valido/i. Campi validi: {field_names}",
+    "wrong_allocation_value": "Tutte le assegnazioni devono essere numeri interi non negativi.",
+    "incorrect_total_units": "Devi assegnare esattamente {num_total_units} unità. Somma attuale: {current_sum}",
+    "good_allocations": "L'assegnazione è corretta."
+  },
+  "outcome": {
+    "winner_alpha": "Comandante Alpha vince {score_0}-{score_1} dopo {num_rounds} round!",
+    "winner_beta": "Comandante Beta vince {score_1}-{score_0} dopo {num_rounds} round!",
+    "draw": "La partita termina con un pareggio di {score_0}-{score_1} dopo {num_rounds} round!",
+    "early_winner_alpha": "Comandante Alpha vince {scores_0}-{scores_1} (maggioranza raggiunta)!",
+    "early_winner_beta": "Comandante Beta vince {scores_1}-{scores_0} (maggioranza raggiunta)!"
+  }
+}

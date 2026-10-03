@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Tù ses su Giogadore {player_id} in unu giogu de LinesOfAction.\nIs pezzos tuos sunt '{side}', is pezzos de s'avversàriu sunt '{other}'.\nFormatu de sa mòvida: `[b1b3]` (coordinadu de orìgine - coordinadu de destinatzione). Una mòvida legale si movet in orizontale, verticale o diagonale unu nùmeru de cuadrados uguale a su nùmeru totale de pezzos (de colore cale si siat) in cussa lìnia. Podes saltare is pezzos tuos, ma no is pezzos de s'avversàriu; si aterras in unu pezzo de s'avversàriu, lu catturas.  Vincis cando is pezzos tuos sunt tutti connessos in 8 diretziones."
+  },
+  "board": {
+    "current_board": "Cunsigliu: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Su formadu depet èssere e2e4 (de,a coordinadas).",
+    "no_piece": "No {side} pezzu in su {coord}.",
+    "identical": "Sa orìgine e sa destinatzione sunt idènticas.",
+    "not_straight_or_diagonal": "Su movimentu depet èssere deretu o diagonale.",
+    "wrong_distance": "Depet mòvere distàntzia uguale a sas partes in lìnia.",
+    "enemy_blocks": "Su corfu de s'inimigu blocat su caminu.",
+    "destination_own": "Destinatzione ocupada dae sa pròpia peça."
+  },
+  "game_action": {
+    "moved": "Giogadore {player_id} si est mottu {from} -> {to}",
+    "captured_suffix": "Giogadore {player_id} si est mottu {from} -> {to} cun sa catura de un'inimigu."
+  },
+  "outcome": {
+    "win": "Totus sas partes sunt collegadas.",
+    "draw_no_capture": "60 mòvidas senza cattura.",
+    "draw_repetition": "Posizione repìtida tres bortas."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Polski język dla Hangman. Klucze (lewa strona) są stałe; tłumacz tylko wartości (prawa strona). Zachowaj każdy {placeholder} w oryginalnej formie. Zachowaj neutralne tokeny nieprzetłumaczone: formaty nawiasów '[L]' / '[LIGHT]', pojedyncze litery zgadywania {letter}, nagłówki kolumn (C00, C01, ...) oraz spacje '_' wewnątrz {board}.",
+  "_slots": {
+    "{board}": "Neutralna plansza (nagłówki kolumn C00/C01, odkryte litery, spacje '_'); nie tłumacz",
+    "{tries_left}": "Pozostałe niepoprawne próby (liczba całkowita)",
+    "{guessed}": "Lista już odgadniętych liter oddzielona przecinkami",
+    "{letter}": "Zgadywana litera lub pełne słowo (zachowane tak, jak wpisano)",
+    "{pct}": "Procent poprawnie odgadniętych znaków, sformatowany do 2 miejsc po przecinku",
+    "{target_word}": "Ukryte słowo docelowe"
+  },
+  "prompt": {
+    "intro": "Grajecie w Hangman. Celem gry jest odgadnięcie słowa poprzez podanie jednej litery lub całego słowa.\nKażda kolumna jest numerowana. Komórki, które należy wypełnić literami, są reprezentowane przez '_'.\n\nIstnieją dwa sposoby odpowiedzi. Możesz podać jedną literę w formacie '[L]', lub możesz odgadnąć całe słowo w formacie '[LIGHT]'.\nJeśli podana litera znajduje się w słowie, zostanie ujawniona w siatce.\nJeśli podane słowo jest poprawne, wygrywasz.\nW miarę gry historia Twoich wyborów będzie dodawana poniżej. Użyj informacji, aby odgadnąć słowo i wygrać.\nMasz 6 niepoprawnych prób, zanim gra się zakończy.\n\n"
+  },
+  "board": {
+    "status": "Aktualna plansza:\n{board}\nMasz {tries_left} prób.\nOdgadnięte litery: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Niepoprawny format ruchu. Nie odpowiedziałeś poprawną 'literą' lub 'słowem'.",
+    "already_guessed": "Odgadłeś literę '{letter}', która już została odgadnięta."
+  },
+  "message": {
+    "wrong_word": "Twoje odgadnięcie '{letter}' nie jest słowem docelowym.",
+    "letter_in": "Twoje odgadnięcie {letter} znajduje się w słowie",
+    "letter_not_in": "Twoje odgadnięcie {letter} nie znajduje się w słowie. Masz {tries_left} żyć."
+  },
+  "outcome": {
+    "win_word": "Gratulacje! Ukończyłeś puzzle Hangman.",
+    "win_board": "Gratulacje! Ukończyłeś puzzle Hangman.",
+    "out_of_tries": "Skonczyły Ci się próby. Odgadłeś {pct} procent znaków poprawnie. Słowo docelowe było: {target_word}"
+  }
+}

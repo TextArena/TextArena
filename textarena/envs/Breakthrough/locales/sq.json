@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ju po luani {color} në një lojë të Breakthrough. Ju lëvizni {direction} në një bord {board_size}x{board_size}.\nNë radhën tuaj mund të lëvizni një copë të vetme një hap përpara ose diagonalisht përpara.\nNjë copë mund të lëvizë vetëm diagonalisht nëse një copë kundërshtari është atje, dhe vetëm të lëvizë në një katror të tillë të zënë në një hap diagonal.\nKur hyni në një katror me një copë kundërshtari, e kapni atë dhe copa e kundërshtarit hiqet përgjithmonë nga bordi.\nPërdorni notacionin e ngjashëm me UCI në kllapa, p.sh. [a2a3] për të lëvizur nga a2 në a3.\n* 'a' përkon me kolonën më të majtë, '1' është rreshti i poshtëm (nga perspektiva e Bardhë).\n* Rreshti i shtëpisë së Zezë është rreshti i sipërm (rreshti 8 për një 8x8). Rreshti i shtëpisë së Bardhë është rreshti i poshtëm (rreshti 1 për një 8x8).\nLojtari i parë i cili copa e tij arrin në rreshtin e shtëpisë së kundërshtarit fiton. Nëse copat tuaja janë të gjitha të kapura, humbas."
+  },
+  "invalid_move": {
+    "wrong_format": "Ju lutem përdorni notacionin algjebrik në kllapa si [a2a3].",
+    "out_of_bounds": "Lëvizja është jashtë kufijve të bordit.",
+    "illegal": "Lëvizja e tillë nuk ndjek rregullat e Breakthrough apo nuk është copa juaj."
+  },
+  "game_action": {
+    "moved": "Lojtari {player_id} lëviz {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Bardha arriti në rreshtin e shtëpisë së Zezë.",
+    "black_reached": "Zezë arriti në rreshtin e shtëpisë së Bardhë.",
+    "white_captured": "Të gjitha copat e Bardhë u kapën.",
+    "black_captured": "Të gjitha copat e Zezë u kapën.",
+    "no_moves": "Lojtari {player_id} nuk ka më lëvizje."
+  }
+}

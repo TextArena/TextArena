@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id}. Igrate Sudoku.\nTukaj je trenutno stanje mreže Sudoku. Vsaka vrstica je označena s številkami od 1 do 9, in vsaka stolpec je prav tako označen s številkami od 1 do 9.\nPrazne celice so predstavljene z '.', in predhodno izpolnjene celice vsebujejo številke od 1 do 9.\n\nTrenutna mreža Sudoku:\nVaš cilj je izpolniti prazne celice v 9x9 mreži s številkami od 1 do 9 tako, da:\n1. Vsaka vrstica vsebuje vse številke od 1 do 9 brez ponavljanja.\n2. Vsak stolpec vsebuje vse številke od 1 do 9 brez ponavljanja.\n3. Vsaka od devetih 3x3 podmrež vsebuje vse številke od 1 do 9 brez ponavljanja.\n\nPravila in navodila:\n1. **Ne prepisujte** začetnih številk, ki so v mreži že podane.\n2. **Izpolnite le** prazne celice, ki so predstavljene z '.'.\n3. Odgovorite lahko na kakršen koli način, a zagotovite, da vaš odgovor vključuje format '[vrstica stolpec številka]'.\n4. **Zagotovite**, da vaša poteza ne krši pravil Sudokuja. Neveljavne poteze bodo rezultirale v kazni.\nPrimeri:\n- **Veljavna poteza**:\n  - Izrez mreže pred potezo:\n  \n  - Poteza: `[5 3 7]`\n  - Razlaga: Postavljanje 7 v vrstico 5, stolpec 3 ne krši nobenega pravila Sudokuja.\n\n- **Neveljavna poteza** (Prepisovanje predhodno izpolnjene celice):\n  - Izrez mreže pred potezo:\n  \n  - Poteza: `[1 1 9]`\n  - Razlaga: Celica (1,1) je že izpolnjena s 5. Ne morete jo prepisati.\n\n- **Neveljavna poteza** (Kršenje pravil Sudokuja):\n  - Izrez mreže pred potezo:\n  \n  - Poteza: `[1 3 5]`\n  - Razlaga: Postavljanje 5 v vrstico 1, stolpec 3 krši pravilo, saj 5 že obstaja v vrstici 1.\n\nZgodovina vaših potez in misli bo dodana, ko boste igrali več krogov. Uporabite zgodovino vaših potez za izboljšanje vaše odločitev z izogibanjem potezam, ki ste jih že poskusili. Srečno!\n\n"
+  },
+  "board": {
+    "game_board": "Igralna plošča:\n{board}",
+    "board_state": "Stanje plošče: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neveljavni format poteze. Igralec {player_id} ni odgovoril z veljavnim 'vrstica stolpec številka'.",
+    "out_of_bounds": "Neveljavna poteza. Igralec {player_id} je poskusil postaviti {num} na ({row}, {col}), kar je zunaj meja.",
+    "overwrite": "Neveljavna poteza. Igralec {player_id} je poskusil prepisati predhodno izpolnjeno celico ({row}, {col}).",
+    "violates_rules": "Neveljavna poteza. Igralec {player_id} je poskusil postaviti {num} na ({row}, {col}), kar krši pravila Sudokuja."
+  },
+  "outcome": {
+    "win": "Čestitke! Igralec {player_id} je dokončal Sudoku uganko.",
+    "turn_limit": "Omejitev potez je bila dosežena. Pravilno ste izpolnili {percent}% praznih celic."
+  }
+}

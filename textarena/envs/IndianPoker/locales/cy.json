@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Rydych chi'n Chwaraewr {player_id} mewn gêm o Boker Indiaidd.\n- Pac o 52 gard; rydych chi ond yn gweld card eich gwrthwynebydd.\n- Ante {ante} sglodion yn y rownd, {max_rounds} rownd(ydd) i gyd.\n- Symudiadau dilys: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X yw rhif cyfanif positif <= eich nifer o sglodion.)\n- Y card cudd uchaf sy'n ennill y pot yn y sioe.\n"
+  },
+  "round": {
+    "announce": "### Cyfnod {current_round}/{max_rounds} Mae cerdyn eich gwrthwynebydd yn: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Darparu union UN gweithred wedi'i ymagor, er enghraifft \"[check]\", \"[bet 2]\", \"[call]\", \"[raise 3]\", neu \"[fold]\".",
+    "cannot_check": "Ni all [check] - rydych chi'n wynebu bet.",
+    "amount_min": "Rhaid i swm y bet / godi fod ≥ 1.",
+    "cannot_bet": "Ni all [bet] - rhaid [call] / [raise] / [fold].",
+    "nothing_to_call": "Dim byd i'w alw; gallwch chi [check] yn lle hynny.",
+    "no_bet_to_raise": "Defnyddiwch [bet X] i agor; nid oes bet i'w codi.",
+    "insufficient": "Nid yw'r cipiau yn ddigonol ar gyfer y camau hynny."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "\"[check]\", \"[bet X]\"",
+    "actions_facing_bet": "\"[call]\" (cost {to_call}), \"[raise X]\", \"[fold]\"",
+    "possible_actions": "Eich camau posibl: {legal}"
+  },
+  "message": {
+    "round_result": "{reason} Pot {pot} → Player {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Chwaraewr {player_id} wedi plygu.",
+    "showdown_win": "Sioe: {card_win} yn trechu {card_lose}.",
+    "showdown_tie": "Sioe gyfartal: y ddau {card}. Pot wedi ei rannu – pob un yn derbyn {split}."
+  },
+  "outcome": {
+    "p0_wins": "Mae chwaraewr 0 yn ennill ({bank0} > {bank1})",
+    "p1_wins": "Mae chwaraewr 1 yn ennill ({bank1} > {bank0})",
+    "draw": "Chips cyfartal ar ôl pob rownd"
+  }
+}

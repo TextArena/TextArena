@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Du spielst Slitherlink auf einem {R}×{C}-Raster!\nZeichne eine einzige zusammenhängende Schleife, sodass jede nummerierte Zelle von genau so vielen Kanten begrenzt wird wie angegeben.\nSchalte Kanten mit folgenden Befehlen um:\n  [h r c] - schaltet die waagerechte Kante oberhalb der Punkte in Zeile r, Spalte c um\n  [v r c] - schaltet die senkrechte Kante links von den Punkten in Zeile r, Spalte c um\nZahlen geben die erforderliche Anzahl an Kanten an; '.' bedeutet, dass keine Vorgabe besteht.\nDu hast bis zu {max_turns} Züge, um das Puzzle zu lösen."
+  },
+  "board": {
+    "current_board": "{board}\nErfüllte Hinweise: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ungültiges Aktionsformat. Verwende [h row col] oder [v row col].",
+    "out_of_bounds": "Die Kante liegt außerhalb des Spielfelds."
+  },
+  "outcome": {
+    "win": "🎉 Du hast eine einzige Schleife gebildet! Puzzle gelöst!",
+    "turn_limit": "Zuglimit erreicht. Rätsel unvollendet."
+  }
+}

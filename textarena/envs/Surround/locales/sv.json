@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround-lokaliseringsfil. ÖVERSÄTT INTE nycklar (vänster sida). Översätt endast värden (höger sida). Behåll varje {placeholder} exakt som det är. ÖVERSÄTT INTE flytt/riktningstoken som spelaren skriver ([up], [down], [left], [right], w, s, a, d) eller ASCII-brädet som återges i {board}.",
+  "_slots": {
+    "{num_players}": "Antal spelare i matchen",
+    "{width}": "Brädbredd i celler",
+    "{height}": "Brädhöjd i celler",
+    "{player_id}": "En spelares nummer (0-baserat)",
+    "{board}": "Det återgivna ASCII-rutnätet; behåll neutralt, översätt aldrig dess tecken",
+    "{reason}": "Den återgivna slut-på-spelet-frasen",
+    "{groups}": "Neutralt rankningsdata (en lista med spelar-id-grupper, bäst till sämst); översätt inte"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-spelar Surround på en {width}x{height}-ruta.\nDu är spelare {player_id}. Giltiga drag: '[up]' '[down]' '[left]' '[right]' eller w/s/a/d.\nMål: överlev alla andra. Spår är dödliga; vägghits dödar; frontalkrockar dödar båda."
+  },
+  "board": {
+    "current": "Aktuellt bräde:\n{board}",
+    "after_moves": "Bräde efter samtidiga drag:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Spelare {player_id} dog på grund av ogiltigt drag."
+  },
+  "outcome": {
+    "survived_win": "Spelare {player_id} överlevde; alla andra kraschade.",
+    "all_crashed": "Alla spelare kraschade samtidigt.",
+    "outlived": "Spelare överlevde alla andra.",
+    "all_dead": "Alla spelare döda.",
+    "turn_limit": "Tidsgräns nådd - den som överlevt längst vinner.",
+    "ranking": "{reason} Slutliga rankningsgrupper (bäst→sämst): {groups}"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola-localebestand. Vertaal GEEN sleutels (linkerkant). Vertaal alleen waarden (rechterkant).",
+  "_slots": {
+    "{player_id}": "Een spelernummer, bijv. 0 of 1",
+    "{trump_suit}": "Het symbool van de troefkleur (♠♥♦♣) - niet vertalen",
+    "{trump_card}": "Het label van de troefkaart, bijv. '7♠' - niet vertalen",
+    "{card}": "Een kaartlabel, bijv. 'A♥' - niet vertalen",
+    "{trump_mark}": "De vooraf gerenderde '(TROEF)'-markering, of leeg",
+    "{max_pos}": "De hoogste legale kaartpositie in de hand van de speler",
+    "{count}": "Het aantal kaarten dat een speler vasthoudt",
+    "{pos}": "Het positienummer van een kaart in de hand",
+    "{points}": "Een aantal punten (kaartwaarde of verzamelde score)",
+    "{hand}": "De vooraf gerenderde, meerregelige handlijst",
+    "{trick}": "De vooraf gerenderde huidige-truc-lijst",
+    "{scores}": "De vooraf gerenderde scorelijn, of de eindelijke scoreblok per speler",
+    "{trump_info}": "De vooraf gerenderde troefkleur/deck-telling-lijn",
+    "{winner}": "Het spelernummer dat de truc of het spel won",
+    "{tricks}": "Een aantal gewonnen trucs door een speler",
+    "{deck_count}": "Aantal kaarten over in het deck"
+  },
+  "game": {
+    "start": "Briscola-spel gestart! Troefkleur: {trump_suit} (Troefkaart: {trump_card})"
+  },
+  "prompt": {
+    "intro": "U speelt Briscola - Speler {player_id}.\nDoel: Win trucs en verzamel de meeste punten (120 totale punten in het deck).\nKaartpunten: A=11, 3=10, K=4, Q=3, J=2, anderen=0\nKaartkracht: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTroefkaarten verslaan niet-troefkaarten ongeacht kracht.\n\nActie: '[play X]' waar X de positie (1-{max_pos}) is van de kaart in uw hand\n"
+  },
+  "hand": {
+    "none": "Geen kaarten",
+    "empty": "Geen kaarten in hand",
+    "header": "Uw hand:",
+    "card_line": "  {pos}. {card} [{points} punten]{trump_mark}",
+    "trump_mark": " (TROEF)"
+  },
+  "trick": {
+    "empty": "Nog geen kaarten gespeeld deze truc.",
+    "header": "Huidige truc:",
+    "line": "  Speler {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Speler {player_id}: {points} punten",
+    "trump_info": "Troefkleur: {trump_suit}",
+    "trump_info_deck": "Troefkleur: {trump_suit} | Kaarten over in het deck: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nScores: {scores}\n{trump_info}\n\nSpeel een kaart met [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Gebruik [play X] waar X de kaartpositie is (1, 2, 3, etc.)",
+    "out_of_range": "Ongeldige kaartpositie. U hebt {count} kaarten (1-{count})"
+  },
+  "action": {
+    "played": "Speler {player_id} speelde {card}",
+    "trick_win": "Speler {winner} wint de truc met {card} en krijgt {points} punten!"
+  },
+  "outcome": {
+    "head": "Spel afgelopen! Speler {winner} wint met {points} punten!\n\nEindelijke scores:\n{scores}",
+    "player_line": "Speler {player_id}: {points} punten ({tricks} trucs)\n"
+  }
+}

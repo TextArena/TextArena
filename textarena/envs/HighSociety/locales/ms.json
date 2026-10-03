@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam permainan HighSociety versi 2 pemain.\nAliran permainan:  Sepuluh kad prestij dilelong satu demi satu.\nBidaan:            Dalam setiap lelongan, pilih secara rahsia satu kad wang antara 1 hingga 11, kemudian dedahkannya.\n                   • Bidaan yang lebih tinggi memenangi kad prestij dan membuang kad wang yang digunakan.\n                   • Bidaan yang lebih rendah menyimpan kad wangnya.\n                   • Jika seri, kedua-dua kad bidaan dikembalikan dan kad prestij yang sama dilelong semula.\nPemarkahan:        Selepas kesemua sepuluh lelongan, jumlahkan **wang yang berbaki + mata prestij**.\n                   Pemain dengan *nilai bersih* yang lebih tinggi menang. Nilai yang sama tepat menghasilkan keputusan seri.\n\n**Sintaks tindakan**  →  bida satu kad sahaja, seperti '[7]' atau '[11]'."
+  },
+
+  "auction": {
+    "announce": "\n### Lelongan {round}/10  |  Kad prestij: {prize}"
+  },
+
+  "board": {
+    "money_cards": "Kad wang anda yang masih berbaki: {money}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Mesti mengandungi tepat satu kad wang dalam format [X].",
+    "card_not_held": "Anda tidak lagi mempunyai kad wang itu."
+  },
+
+  "message": {
+    "tie": "Seri, kad bidaan dikembalikan. Bida semula!",
+    "auction_result": "P0 membida {bid0}, P1 membida {bid1}. Pemain {winner} memenangi prestij {prize}, dengan jumlah {total}."
+  },
+
+  "outcome": {
+    "p0_wins": "Nilai bersih {nw0} > {nw1}",
+    "p1_wins": "Nilai bersih {nw1} > {nw0}",
+    "draw": "Kedua-duanya mempunyai nilai bersih {nw0}, seri tepat."
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "_comment": "Fichier de langue de Snake en français. NE traduisez PAS les clés (côté gauche), uniquement les valeurs (côté droit). Conservez chaque {marqueur} tel quel. NE traduisez PAS les jetons de mouvement/direction que le joueur saisit ([up], [down], [left], [right], w, s, a, d) ni le plateau ASCII rendu dans {board}.",
+  "_slots": {
+    "{num_players}": "Nombre de joueurs dans la partie",
+    "{width}": "Largeur du plateau en cases",
+    "{height}": "Hauteur du plateau en cases",
+    "{max_turns}": "Limite de tours de la partie",
+    "{player_id}": "Le numéro d'un joueur (à partir de 0)",
+    "{board}": "La grille ASCII rendue ; gardez-la neutre, ne traduisez jamais ses caractères",
+    "{reason}": "Le motif de fin de partie déjà rendu",
+    "{groups}": "Données de classement neutres (une liste de groupes d'identifiants de joueurs, du pire au meilleur) ; ne pas traduire"
+  },
+
+  "player_prompt": {
+    "intro": "Snake à {num_players} joueurs sur une grille de {width}×{height}.\nVous contrôlez le serpent {player_id}. Coups valides : '[up]'/'[down]'/'[left]'/'[right]' (ou w/s/a/d).\nObjectif : survivre le plus longtemps ou être le plus long et obtenir le meilleur score (limite de tours : {max_turns} tours)."
+  },
+
+  "board": {
+    "current":     "Plateau actuel :\n{board}",
+    "after_moves": "État actuel du plateau :\n{board}"
+  },
+
+  "game_action": {
+    "invalid_death": "Le serpent {player_id} est mort à cause d'un coup invalide."
+  },
+
+  "outcome": {
+    "survived_win":   "Le joueur {player_id} a survécu ; tous les autres ont péri.",
+    "all_dead_simul": "Tous les serpents sont morts simultanément.",
+    "outlived":       "Le joueur a survécu à tous les autres.",
+    "all_dead":       "Tous les serpents morts.",
+    "turn_limit":     "Limite de tours atteinte - le meilleur score l'emporte en cas d'égalité.",
+    "ranking":        "{reason} Groupes de classement finaux (pire→meilleur) : {groups}"
+  }
+}

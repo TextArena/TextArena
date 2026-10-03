@@ -1,0 +1,31 @@
+{
+  "_comment": "Súbor lokalizácie Snake. NEPREKLADAJTE kľúče (ľavá strana). Prekladajte iba hodnoty (pravá strana). Zachovajte každý {placeholder} presne tak, ako je.",
+  "_slots": {
+    "{num_players}": "Počet hráčov v zápase",
+    "{width}": "Šírka dosky v bunkách",
+    "{height}": "Výška dosky v bunkách",
+    "{max_turns}": "Limit ťahov pre zápas",
+    "{player_id}": "Číslo hráča (0-založené)",
+    "{board}": "Vykreslená ASCII mriežka; zachovajte neutrálne, nikdy neprekladajte jej znaky",
+    "{reason}": "Vykreslená fráza dôvodu konca hry",
+    "{groups}": "Neutrálny rebríček (zoznam skupín hráčov, od najhorších po najlepších); neprekladajte"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-hráčová hra Snake na {width}×{height} mriežke.\nOvládajte hada {player_id}. Platné ťahy: '[up]'/'[down]'/'[left]'/'[right]' (alebo w/s/a/d).\nCieľ: prežiť najdlhšie alebo byť najdlhší a dosiahnuť najvyšší skóre (limit ťahov {max_turns} ťahov)."
+  },
+  "board": {
+    "current": "Aktuálna doska:\n{board}",
+    "after_moves": "Aktuálny stav dosky:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Had {player_id} zomrel kvôli neplatnému ťahu."
+  },
+  "outcome": {
+    "survived_win": "Hráč {player_id} prežil; všetci ostatní zahynuli.",
+    "all_dead_simul": "Všetci hadi zomreli súčasne.",
+    "outlived": "Hráč prežil všetkých ostatných.",
+    "all_dead": "Všetci hadi sú mŕtvi.",
+    "turn_limit": "Bol dosiahnutý limit ťahov - najlepší skóre víťazí v prípade nerozhodného výsledku.",
+    "ranking": "{reason} Konečné skupiny rebríčka (od najhorších po najlepších): {groups}"
+  }
+}

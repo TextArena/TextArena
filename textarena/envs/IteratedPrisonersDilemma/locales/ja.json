@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "あなたは {num_rounds} ラウンドにわたる反復囚人のジレンマのプレイヤー {player_id} です。\n\nゲームの構造:\n- それぞれの決定の前に、{total_conversation_rounds} 回の自由な会話のターンがあります。\n- その後、両プレイヤーは同時に協力するか裏切るかを選択します。\n\n報酬行列（各ラウンド固定）:\n- 両者が協力 ➜ それぞれ {cooperate_reward}\n- 両者が裏切り ➜ それぞれ {mutual_defect_reward}\n- 一方が裏切り、もう一方が協力 ➜ 裏切り者 {defect_reward}、協力者 {sucker_reward}\n\nプレイ方法:\n- 会話中: 任意のテキストを入力します。\n- 決定フェーズ: '[Cooperate]' または '[Defect]'（大文字小文字を区別しません）を含めます。トークンの前後には追加のテキストを入力できます。"
+  },
+  "phases": {
+    "conversation_finished": "ラウンド {round} の会話が終了しました。'[Cooperate]' または '[Defect]' を \\boxed{{}} 内に入力してください。",
+    "starting_round": "--- ラウンド {round} 開始 ---",
+    "round_summary": "ラウンド {round} の結果:\n{outcome}\nプレイヤー 0 は {r0} を獲得（合計 {score_0}）、プレイヤー 1 は {r1} を獲得（合計 {score_1}）。"
+  },
+  "outcome": {
+    "winner": "プレイヤー {winner} が {win_score} - {lose_score} で勝利しました。",
+    "draw": "引き分け！両プレイヤーは {s0} を獲得しました。",
+    "round_both_cooperate": "両プレイヤーが協力しました。",
+    "round_both_defect": "両プレイヤーが裏切りました。",
+    "round_p0_cooperates_p1_defects": "プレイヤー 0 が協力し、プレイヤー 1 が裏切りました。",
+    "round_p0_defects_p1_cooperates": "プレイヤー 0 が裏切り、プレイヤー 1 が協力しました。"
+  }
+}

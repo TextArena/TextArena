@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Peli alkaa. Valttimaa: {trump_suit} (valttikortti: {trump_str}).",
+    "no_trump_card": "ei mitään"
+  },
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} Saksalaisessa Vistissä.\n{phase_info}\nSinulla on {hand_size} korttia.\nPelaa kortti komennolla '[play N]', missä N on kortin paikka kädessäsi (esimerkiksi '[play 3]').",
+    "phase_learning": "OPISKELUVAIHE: jokaisen tikkivoittajan saa kuvapuoli ylöspäin olevan kortin ja häviäjä nostaa seuraavan kortin pakasta. Tässä vaiheessa voitetut tikit eivät vaikuta voittoon.",
+    "phase_playing": "PELIVAIHE: pakka on tyhjä. Jokainen tikki tästä lähtien vaikuttaa voittoon."
+  },
+  "next_card": {
+    "playing_phase": "Ei korttia tarjolla - pelivaihe on alkanut.",
+    "deck_empty": "Pakka on tyhjä - ei korttia tarjolla.",
+    "available": "Kortti tarjolla: {card}",
+    "available_trump": "Kortti tarjolla: {card} (VALTTI)"
+  },
+  "invalid_move": {
+    "wrong_format": "Virheellinen siirtomuoto. Käytä komentoa '[play N]' pelataksesi N:ttä korttia kädessäsi.",
+    "bad_position": "Tämä korttipaikka ei ole olemassa. Sinulla on {hand_size} korttia.",
+    "must_follow_suit": "Sinun täytyy seurata maata ja pelata {lead_suit} -korttia.",
+    "invalid_play": "Tätä korttia ei voi pelata."
+  },
+  "game_action": {
+    "played": "Pelaaja {player_id} pelasi {card}."
+  },
+  "trick": {
+    "won": "Pelaaja {winner_id} voittaa tikin {card} -kortilla.",
+    "won_learning": "Pelaaja {winner_id} voittaa tikin {card} -kortilla ja saa kuvapuoli ylöspäin olevan kortin."
+  },
+  "phase": {
+    "learning_complete": "Pakka on tyhjä. Opiskeluvaihe on ohi - jokainen jäljellä oleva tikki vaikuttaa voittoon."
+  },
+  "draw": {
+    "winner_received": "Voitit tikin ja saat {card} -kortin.",
+    "loser_received": "Hävisit tikin ja nostit {card} -kortin pakasta.",
+    "winner_preview": "Seuraava kortti tarjolla on {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Tähän mennessä voitetut tikit - Pelaaja 0: {tricks0}, Pelaaja 1: {tricks1}",
+    "scores_playing": "Pisteitä tuovat tikit - Pelaaja 0: {tricks0}, Pelaaja 1: {tricks1}",
+    "phase": "Vaihe: {phase}",
+    "phase_learning": "Vaihe: {phase} ({remaining_cards} korttia jäljellä pakassa)"
+  },
+  "hand": {
+    "no_cards": "Ei kortteja",
+    "no_cards_in_hand": "Ei kortteja kädessä",
+    "header": "Kätesi:",
+    "trump_indicator": " (VALTTI)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Ei kortteja pelattu vielä tällä tikillä.",
+    "header": "Nykyinen tikki:",
+    "trump_indicator": " (VALTTI)",
+    "card_line": "{observation}\n  Pelaaja {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Peliä ei ole aloitettu",
+    "header": "=== SAKSALAINEN VISTI -PELI ===",
+    "phase": "{observation}\nVaihe: {phase}",
+    "trump_suit": "{observation}\nValttimaa: {trump_suit}",
+    "trump_card": "{observation}\nValttikortti: {card}",
+    "cards_left": "{observation}\nKortteja jäljellä pakassa: {count}",
+    "next_card": "{observation}\nSeuraava kortti voittajalle: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nNykyinen tikki:",
+    "trump_indicator": " (VALTTI)",
+    "trick_line": "{observation}\n  Pelaaja {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPelaaja {player_id}: {scoring} pisteitä tuovia tikkejä ({tricks} yhteensä), {hand_size} korttia kädessä"
+  },
+  "outcome": {
+    "summary": "Opiskeluvaihe - Pelaaja 0: {l0}, Pelaaja 1: {l1}. Pelivaihe - Pelaaja 0: {p0}, Pelaaja 1: {p1}. Pelaaja {winner_id} voittaa {winner_tricks} pisteitä tuovilla tikeillä!"
+  }
+}

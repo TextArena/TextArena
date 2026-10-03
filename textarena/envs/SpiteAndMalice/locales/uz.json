@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Siz Spite and Malice o'yinining ikki o'yinchi versiyasida {player_id} o'yinchisiz. Sizning maqsadingiz o'z payoff qatoringizni bo'shatishdan iborat.\n\n### O'yin haqida:\n- Maqsad payoff qatoringizni markaziy qatorlarga karta o'ynash orqali bo'shatishdan iborat.\n- Siz kartalarni uchta manbadan o'ynashingiz mumkin:\n  1. Sizning **qo'lingiz** (siz har bir navbatda 5 tagacha karta bilan boshlaysiz).\n  2. Sizning **payoff qatoringizning eng yuqori kartasi**.\n  3. Sizning **har qanday discard qatoringizning eng yuqori kartasi**.\n\n### O'yin qoidalari:\n- Siz markaziy qatorga karta o'ynashingiz mumkin, agar u **bir rang yuqori** bo'lsa, markaziy qatorning eng yuqori kartasidan (markaziy qatorlar Ace bilan boshlanadi va Queen bilan tugaydi; Kings - ular istalgan kartaga o'ynalishi mumkin, lekin ular rang ketma-ketligini o'zgartirmaydi. Bu shuni anglatadi, agar King 4 dan keyin ishlatilsa, u 5-o'rinni egallaydi va keyingi karta 6 bo'lishi kerak).\n- Agar siz yana kartalar o'ynay olmagan bo'lsangiz, siz **kartani discard qilishingiz** kerak, o'z navbatini tugatish uchun.\n- Agar markaziy qator Queen bilan tugasa, u avtomatik ravishda bo'shatiladi.\n- Rang tartibi: A=1, 2=2, ..., 9=9, J=10, Q=11, K - istalgan rang.\n\n### Harakatlar:\n1. **Chizish**: O'z navbatining boshida, kartalarni chizish uchun, o'z qo'lingizni 5 kartagacha to'ldiring. **[draw]** ni kiriting.\n2. **Karta o'ynash**: Karta o'ynash uchun, kartani va markaziy qatorni shunday ko'rsating: **[play A♠ 0]** (bu yerda 'A♠' karta va '0' markaziy qator indeksi).\n3. **Discard**: Agar siz yana kartalar o'ynay olmagan bo'lsangiz, o'z qo'lingizdan kartani discard qilishingiz kerak, o'z navbatini tugatish uchun. **[discard A♠ 1]** ni kiriting (bu yerda 'A♠' karta va '1' discard qator indeksi). E'tibor bering, siz payoff qatoridan kartani discard qila olmaysiz. Siz faqat o'z qo'lingizdan kartalarni discard qilishingiz mumkin.\n\n"
+  },
+  "board": {
+    "current_board": "Joriy kengash: {board} Mavjud harakatlar: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Markaziy toʻplamlar --- ",
+    "pile": "{observation}To'plam {i}: {pile} ",
+    "player_view_header": "{observation} --- O'yinchi {player_id}ning fikri --- ",
+    "payoff": "{observation}Payoff Pile (Top Card): {top_card}, Payoff Pile uzunligi: {payoff_length} ",
+    "hand": "{observation} Qoʻl: {hand} ",
+    "discard": "{observation}Qoʻyib tashlash toʻplamlari: {discard} ",
+    "empty": "Boʻsh"
+  },
+  "game_message": {
+    "no_cards_left": "Qizish uchun boshqa kartalar yo'q. Shuni yodda tutingki, siz quyidagi manbalardan kartalarni o'ynashingiz mumkin: 1. Sizning ** qo'lingiz **. 2. Sizning to'lov to'plamingizning ** yuqori kartasi **. 3. Sizning tashlash to'plamlaringizning ** yuqori kartasi **."
+  },
+  "invalid_move": {
+    "wrong_format": "Noto'g'ri harakat format. {player_id} o'yinchi to'g'ri harakat bilan javob bermadi.",
+    "invalid_play": "Noto'g'ri o'yin. O'yinchi {player_id} markazdagi to'plamda {card} o'ynashga urindi {index} .",
+    "discard_from_payoff": "Noto'g'ri tashlash. {player_id} o'yinchi to'lov to'plamidan kartani tashlashga urindi.",
+    "discard_not_in_hand": "Noto'g'ri tashlash. {player_id} o'yinchi qo'lida bo'lmagan kartani tashlashga urindi.",
+    "wrong_move_type": "Noto'g'ri harakat turi. {player_id} o'yinchi to'g'ri harakat turi bilan javob bermadi."
+  },
+  "game_action": {
+    "you_drew": "Siz kartalarni chizgansiz.",
+    "opponent_drew": "O'yinchi {player_id} kartalarni chizdi.",
+    "you_played": "Siz {card} markazdagi to'plamda {index} o'ynadingiz.",
+    "opponent_played": "O'yinchi {player_id} o'rta to'plamda {card} o'ynadi {index} .",
+    "you_discarded": "Siz {card} to'plamni {index} tashlash uchun tashladingiz, bu shuningdek ularning navbatini tugatganingizni anglatadi. Ushbu navbatda sizning boshqa harakatlaringiz hisobga olinmaydi. O'yinchi {next_player_id} keyingi o'yinchi bo'ladi.",
+    "opponent_discarded": "O'yinchi {player_id} to'plamni {card} tashlab {index} tashlab ketdi, bu ham o'z navbatini tugatganligini anglatadi. O'yinchi {player_id}ning boshqa harakatlari bu tur uchun hisobga olinmaydi. O'yinchi {next_player_id}, siz keyingi o'yinchi bo'lasiz. Iltimos, harakatingizni [action card center_index] formatida kiriting."
+  },
+  "outcome": {
+    "payoff_cleared": "O'yinchi {current_player} o'z to'plamini tugatdi! O'yinchi {current_player} g'olib chiqdi!",
+    "deadlock_player_0": "Tupikka kelindi! O'yinchi 0 {player_0_payoff} kartalar bilan g'alaba qozondi, O'yinchi 1 ning {player_1_payoff} kartalariga qarshi.",
+    "deadlock_player_1": "O'yinchi 1 g'alaba qozonadi, qolgan {player_1_payoff} kartalari o'yinchi 0 ning {player_0_payoff} kartalariga qarshi.",
+    "deadlock_tie": "Tupikka kelindi, durang! Ikkala o'yinchi ham {player_0_payoff} kartalar bilan qoldi. O'yinchi {current_player} avtomatik ravishda g'alaba qozondi."
+  }
+}

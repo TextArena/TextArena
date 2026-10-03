@@ -1,0 +1,81 @@
+{
+  "_comment": "Arquivo de localização do Ultimate Texas Hold'em. NÃO traduza as chaves (lado esquerdo). Traduza apenas os valores (lado direito). Mantenha todos os {placeholders} exatamente como estão. Nunca traduza os tokens de ação ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), as etiquetas de cartas/naipes (por exemplo, 'A♠', 'K♥', '10♦'), as etiquetas de fase passadas em {phase}, ou quaisquer quantias numéricas de fichas/apostas/pagamentos. Os fragmentos literais escapados '${{...}}' na tabela de regras de pagamento reproduzem um bug de exibição pré-existente verbatim e devem ser mantidos exatamente (as duplas chaves são intencionais).",
+  "_slots": {
+    "{start_chips}": "Quantidade inicial de fichas, por exemplo, 1000",
+    "{ante}": "O valor da aposta ante/cega, por exemplo, 25",
+    "{ante4}": "Quatro vezes o ante, por exemplo, 100",
+    "{ante2}": "Duas vezes o ante, por exemplo, 50",
+    "{round}": "O número atual da rodada",
+    "{chips}": "A quantidade atual de fichas do jogador",
+    "{hand}": "Uma lista separada por vírgulas de etiquetas de cartas, por exemplo, 'A♠, K♥', ou o texto localizado de 'nenhuma carta'",
+    "{phase}": "A etiqueta de fase atual (PRÉ-RODADA, PRÉ-FLOP, FLOP, RIO, CONFRONTO)",
+    "{actions}": "Uma lista separada por vírgulas de tokens de ação entre colchetes, por exemplo, '[play_bet_4x], [check]'",
+    "{available}": "Uma lista separada por vírgulas de tokens de ação entre colchetes atualmente legais",
+    "{blind}": "O valor da aposta cega",
+    "{play}": "O valor da aposta de jogo",
+    "{cards}": "Uma lista separada por vírgulas de etiquetas de cartas, por exemplo, 'Q♣, 7♦, 2♠'",
+    "{name}": "Um nome de mão de pôquer localizado, inserido verbatim",
+    "{amount}": "Uma quantidade de fichas",
+    "{net}": "A alteração líquida de fichas para a rodada (pode ser negativa)",
+    "{max_turns}": "O número máximo de rodadas",
+    "{winner_rounds}": "O número de rodadas concluídas"
+  },
+  "player_prompt": {
+    "no_cards": "Nenhuma carta ainda",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Jogador Único vs. Dealer\n\n📖 VISÃO GERAL DO JOGO:\n• Você começa com {start_chips} fichas\n• Baralho único de 52 cartas (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Você joga contra o dealer (casa)\n• Cada rodada segue a estrutura do Ultimate Texas Hold'em: você faz apostas ANTE e BLIND, recebe 2 cartas de buraco, decide sobre apostas opcionais de JOGO nas fases de apostas, então revela cartas comunitárias e compara sua melhor mão de 5 cartas contra a do dealer. Seu objetivo é maximizar seus ganhos (quando você tem a melhor mão), enquanto minimiza suas perdas (quando você tem a pior mão).\n• O jogo termina quando você atinge 0 fichas ou menos no início da rodada (DERROTA) ou completa 1000 rodadas com fichas (VITÓRIA)\n\n💰 ESTRUTURA DE APOSTAS:\n• ANTE: Aposta obrigatória de ${ante} a cada rodada\n• BLIND: Aposta obrigatória de ${ante} a cada rodada\n• JOGO: Aposta opcional durante o jogo. Ao longo da rodada, você pode escolher APENAS UMA das seguintes: (${ante4} se feito na PRÉ-FLOP, ${ante2} se feito na FLOP, ou ${ante} se feito no RIO. Também pode desistir no rio, desistindo da mão e não fazendo aposta.)\n\n🎴 DISTRIBUIÇÃO DE CARTAS:\n• Você recebe 2 cartas de buraco face para cima\n• O dealer recebe 2 cartas de buraco face para baixo (escondidas de você)\n• 5 cartas comunitárias são distribuídas face para baixo inicialmente\n• As cartas comunitárias são reveladas progressivamente através das fases do jogo\n\n🏆 QUALIFICAÇÃO DO DEALER:\n• O dealer deve ter pelo menos um PAR (2 cartas do mesmo valor) para se qualificar, usando as 2 cartas em sua mão e as 5 cartas comunitárias.\n• A qualificação do dealer afeta os resultados das apostas, como será explicado mais tarde.\n\n🎮 FASES DO JOGO E AÇÕES:\n📋 PRÉ-FLOP:\n  • Ações: [4x] (${ante4}) ou [check]\n  • [4x]: Coloca aposta de JOGO de ${ante4}, revela as primeiras 3 cartas comunitárias\n  • [check]: Nenhuma aposta adicional, revela as primeiras 3 cartas comunitárias\n\n📋 FLOP:\n  • Se a aposta 4x for colocada: Apenas [skip] disponível (revela automaticamente as últimas 2 cartas comunitárias)\n  • Se nenhuma aposta 4x for colocada: [2x] (${ante2}) ou [check]\n  • [2x]: Coloca aposta de JOGO de ${ante2}, revela as últimas 2 cartas comunitárias\n  • [check]: Nenhuma aposta adicional, revela as últimas 2 cartas comunitárias\n\n📋 RIO:\n  • Se a aposta 4x ou 2x for colocada: Apenas [skip] disponível (procede automaticamente para o confronto)\n  • Se nenhuma aposta de JOGO anterior for colocada: [1x] (${ante}) ou [fold]\n  • [1x]: Coloca aposta de JOGO de ${ante}, procede para o confronto\n  • [fold]: Desiste da mão, perde apostas ANTE e BLIND\n\n📋 CONFRONTO:\n  • Todas as cartas são reveladas e avaliadas\n  • A melhor mão de 5 cartas de 7 cartas (2 de buraco + 5 comunitárias)\n  • As apostas são liquidadas de acordo com as regras de pagamento\n\n💎 PAGAMENTOS DE APOSTAS:\n📊 APOSTA ANTE:\n  • O dealer não se qualifica: EMPATE (aposta devolvida)\n  • O dealer se qualifica e você vence: Pagamento de 1:1 (aposta + ganhos)\n  • O dealer se qualifica e você perde: Aposta perdida\n  • Empate: EMPATE (aposta devolvida)\n\n📊 APOSTA BLIND:\n  • Não é afetada pela qualificação do dealer\n  • Você vence: Aposta devolvida e pagamento adicional com base na força da sua mão\n  • Você perde: Aposta perdida\n  • Empate: EMPATE (aposta devolvida)\n\n📊 TABELA DE PAGAMENTO DA APOSTA BLIND:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Menos que Straight: Nenhum pagamento adicional\n\n📊 APOSTA DE JOGO:\n  • Não é afetada pela qualificação do dealer\n  • Comparação direta: Sua melhor mão vs. a melhor mão do dealer\n  • Você vence: Pagamento de 1:1 (aposta + ganhos)\n  • Você perde: Aposta perdida\n  • Empate: EMPATE (aposta devolvida)\n\n🎯 RANKING DAS MÃOS DE PÔQUER (Melhor para Pior):\n  1. Royal Flush: A-K-Q-J-10 do mesmo naipe\n  2. Straight Flush: 5 cartas consecutivas do mesmo naipe\n  3. Four of a Kind: 4 cartas do mesmo valor\n  4. Full House: 3 do mesmo valor + 2 do mesmo valor\n  5. Flush: 5 cartas do mesmo naipe\n  6. Straight: 5 cartas consecutivas\n  7. Three of a Kind: 3 cartas do mesmo valor\n  8. Two Pair: 2 pares de valores diferentes\n  9. One Pair: 2 cartas do mesmo valor\n  10. High Card: A carta mais alta vence\n\n⌨️ COMANDOS DE AÇÃO:\n• [4x] ou [play bet 4x]: Coloca aposta de JOGO de ${{self.ante_amount*4}}\n• [2x] ou [play bet 2x]: Coloca aposta de JOGO de ${{self.ante_amount*2}}\n• [1x] ou [play bet 1x]: Coloca aposta de JOGO de ${{self.ante_amount*1}}\n• [check] ou [c]: Verifica (nenhuma aposta adicional)\n• [fold] ou [f]: Desiste (desiste da mão)\n• [skip] ou [s]: Pula para a próxima fase (quando nenhuma ação é necessária)\n\n💡 Dicas de Estratégia:\n• Mãos iniciais fortes (pares, cartas altas) frequentemente justificam apostas 4x\n• Considere a qualificação do dealer - mãos fracas podem empatar se o dealer não se qualificar\n• A aposta BLIND pode ser muito lucrativa com mãos fortes (Royal Flush = 500:1!)\n• Fique atento ao seu estoque de fichas! Se ele chegar a 0 ou menos no início da rodada, você perde.\n\n⚠️ NOTAS IMPORTANTES:\n• As apostas ANTE e BLIND são obrigatórias a cada rodada\n• As apostas de JOGO são opcionais e estratégicas\n• Certifique-se de inserir a ação correta e apenas uma ação de cada vez.\n\n",
+    "state": "🎯 RODADA {round}\n💰 Fichas: {chips}\n🎴 Sua mão: {hand}\n📊 Apostas atuais: Ante ${ante}, Blind ${blind}, Jogo ${play}\n📋 Fase: {phase}\n🎯 Ações disponíveis: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Rodada {round} iniciada! Apostas: ANTE ${ante}, BLIND ${blind}. Você tem {chips} fichas restantes.",
+    "your_hand": "🎴 Sua mão: {hand}",
+    "flop_revealed": "🃏 FLOP revelado: {cards}",
+    "river_revealed": "🃏 RIO revelado: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Ação inválida para a fase atual. Ações disponíveis: {available}",
+    "message": "❌ Ação inválida! Ações disponíveis: {available}"
+  },
+  "action": {
+    "folded": "🃏 Você desistiu."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 CONFRONTO! Mão do dealer: {cards}",
+    "community_cards": "🃏 Cartas comunitárias: {cards}",
+    "player_best": "🎴 Melhor mão do jogador: {name} ({cards})",
+    "dealer_best": "🎴 Melhor mão do dealer: {name} ({cards})",
+    "ante_lost_folded": "❌ Aposta ANTE PERDIDA! -${ante} (desistiu)",
+    "blind_lost_folded": "❌ Aposta BLIND PERDIDA! -${blind} (desistiu)",
+    "ante_won": "✅ Aposta ANTE VENCIDA! +${amount}",
+    "ante_pushed": "🔄 Aposta ANTE EMPATADA! ${ante} devolvida",
+    "ante_lost": "❌ Aposta ANTE PERDIDA! -${ante}",
+    "blind_won": "✅ Aposta BLIND VENCIDA! +${amount}",
+    "blind_pushed": "🔄 Aposta BLIND EMPATADA! ${blind} devolvida",
+    "blind_lost": "❌ Aposta BLIND PERDIDA! -${blind}",
+    "play_won": "✅ Aposta de JOGO VENCIDA! +${amount}",
+    "play_pushed": "🔄 Aposta de JOGO EMPATADA! ${play} devolvida",
+    "play_lost": "❌ Aposta de JOGO PERDIDA! -${play}",
+    "net_gain": "🎉 Rodada {round} concluída! Ganho líquido: +${net}",
+    "net_loss": "💸 Rodada {round} concluída! Perda líquida: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 FIM DO JOGO! {max_turns} rodadas concluídas. Você tem ${chips} fichas - VOCÊ VENCEU!",
+    "game_over_lose": "🏁 FIM DO JOGO! Você ficou sem fichas. O dealer venceu!",
+    "reward_win": "Jogador concluiu {winner_rounds} rodadas com ${chips} fichas",
+    "reward_lose": "Jogador ficou sem fichas na rodada {round}",
+    "reward_win_max": "Jogador concluiu {max_turns} rodadas com ${chips} fichas"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Four of a Kind",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Three of a Kind",
+    "two_pair": "Two Pair",
+    "one_pair": "One Pair",
+    "high_card": "High Card",
+    "unknown": "Mão Desconhecida"
+  }
+}

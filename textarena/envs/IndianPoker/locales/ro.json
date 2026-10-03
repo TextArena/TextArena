@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} într-un joc de Indian Poker.\n- Pachet de 52 de cărți; vedeți doar cartea adversarului.\n- Ante {ante} jeton(i) în fiecare rundă, {max_rounds} rundă(e) în total.\n- Mișcări valide: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X este un număr întreg pozitiv ≤ numărul dvs. de jetoane.)\n- Cartea ascunsă cea mai mare câștigă potul la showdown.\n"
+  },
+  "round": {
+    "announce": "### Runda {current_round}/{max_rounds}\nCartea adversarului dvs. este: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Furnizați exact O acțiune între paranteze, de exemplu '[check]', '[bet 2]', '[call]', '[raise 3]' sau '[fold]'.",
+    "cannot_check": "Nu puteți [check] - vă confruntați cu un pariu.",
+    "amount_min": "Suma pariului / ridicării trebuie să fie ≥ 1.",
+    "cannot_bet": "Nu puteți [bet] - trebuie să [call] / [raise] / [fold].",
+    "nothing_to_call": "Nimic de apelat; puteți [check] în schimb.",
+    "no_bet_to_raise": "Folosiți [bet X] pentru a deschide; nu există niciun pariu de ridicat.",
+    "insufficient": "Jetoane insuficiente pentru acea acțiune."
+  },
+  "game_action": {
+    "action": "Jucătorul {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Acțiunile dvs. posibile: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Jucător {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Jucătorul {player_id} s-a retras.",
+    "showdown_win": "Showdown: {card_win} bate {card_lose}.",
+    "showdown_tie": "Egalitate la showdown: ambele {card}. Pot împărțit – fiecare primește {split}."
+  },
+  "outcome": {
+    "p0_wins": "Jucătorul 0 câștigă ({bank0} > {bank1})",
+    "p1_wins": "Jucătorul 1 câștigă ({bank1} > {bank0})",
+    "draw": "Jetoane egale după toate rundele"
+  }
+}

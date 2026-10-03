@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Int qed ikun Plejer {player_id} f'Tic Tac Toe Kwantiku.\nIs-simbolu tiegħek huwa '{symbol}', u n-numri tal-movimenti tiegħek dejjem ikunu {parity} (eż., X1, X3 jew O2, O4).\n\nGħan: Rebħa billi tifforma linja ta' tliet marki klassiċi (solidifikati minn superpożizzjonijiet).\n\nKif tnilagħbu:\n- F'kull darba, poġġi marka spallaġġanti f'żewġ kwadri differenti vojta uża l-format '[a,b]'.\n- Dawn il-marki huma entanġolati, u etikettati bħal 'X1 / X1' jew 'O4 / O4'.\n- Ma tistax tpoġġi marki spallaġġanti f'kwadru li diġà kkollassa (solidifikat).\n\nRegola tal-Kollass:\n- Jekk il-mossa tiegħek toħloq ċiklu fil-grafu tal-entanġolament, tikollassa awtomatikament.\n- Kull marka spallaġġanti fil-ċiklu tibdel f'marka klassika f'waħda mit-tnejn pożizzjonijiet tagħha.\n- Marki spallaġġanti dipendenti jikollassaw ukoll.\n\nRebħa:\n- Il-logħba tintemm meta plejer ikollu tliet marki klassiċi f'linja.\n- Jekk iż-żewġ plejers jiksbu linja matul l-istess kollass, dak bil-numru tal-mossa massima aktar baxxa jirbaħ.\n\nEżempju ta' mossa: '[0,4]' tpoġġi marka spallaġġanti f'ċelluli 0 u 4."
+  },
+  "board": {
+    "current_board": "Bord ta' Quantum Tic Tac Toe:\n\n{board}\n\nIbgħat il-mozzjoni tiegħek bħala '[a,b]' biex tqiegħ marka kwantika f'żewġ postijiet."
+  },
+  "invalid_move": {
+    "wrong_format": "Format invalidu. Uża \"[a,b]\".",
+    "invalid_cells": "Indiċijiet taċ-ċelloli invalidi jew duplikati.",
+    "already_solidified": "Wieħed miċ- ċelloli diġà sar solidu."
+  },
+  "game_action": {
+    "placed": "Player {player_id} qiegħa s-simbolu tiegħu f'superpożizzjoni bejn ċelluli {pos_a} u {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superpożizzjoni dipendenti nżoliet. Ċellula ({r}, {c}) issa hija {symbol}.",
+    "last_cell_resolved": "Superpożizzjoni tal-aħħar ċellula nżoliet. Ċellula ({r}, {c}) issa hija {symbol}.",
+    "superposition_resolved": "Superpożizzjoni nżoliet. Ċellula ({r}, {c}) issa hija {symbol}."
+  },
+  "outcome": {
+    "win": "Il-plejer {player_id} jirbaħ b'marki solidifikati!",
+    "draw": "Il-logħba hija lott imwaħħal!"
+  }
+}

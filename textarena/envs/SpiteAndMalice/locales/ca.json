@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} en un joc de dos jugadors de Spite and Malice. El teu objectiu és ser el primer a buidar la teva pila de pagament.\n\n### Visió general del joc:\n- L'objectiu és netejar la teva pila de pagament jugant cartes a les piles centrals.\n- Pots jugar cartes de tres fonts:\n  1. La teva **mà** (comences cada torn amb fins a 5 cartes a la mà).\n  2. La **carta superior de la teva pila de pagament**.\n  3. La **carta superior de qualsevol de les teves piles de descart**.\n\n### Regles de joc:\n- Pots jugar una carta a una pila central si és **una rang més alta** que la carta superior d'aquella pila (les piles centrals comencen amb l'As i van fins a la Reina; els Reis són comodí - es poden jugar sobre qualsevol carta però no canvien la seqüència de rang. Això significa que si un Rei s'utilitza després d'un 4, llavors aquell Rei té un rang de 5 i la següent carta ha de ser un 6).\n- Si no pots jugar més cartes, has de **descartar una carta** a una de les teves piles de descart per acabar el teu torn.\n- Si una pila central arriba a la Reina, es netejarà automàticament.\n- L'ordre de rang és: A=1, 2=2, ..., 9=9, J=10, Q=11, K com a comodí.\n\n### Accions:\n1. **Robar**: Al començament del teu torn, roba cartes per omplir la teva mà fins a 5 cartes. Introdueix **[draw]** per començar.\n2. **Jugar una carta**: Per jugar una carta, especifica la carta i la pila central d'aquesta manera: **[play A♠ 0]** (on 'A♠' és la carta i '0' és l'índex de la pila central).\n3. **Descartar**: Si no pots jugar més cartes, descarta una carta de la teva mà a una pila de descart per acabar el teu torn. Introdueix **[discard A♠ 1]** (on 'A♠' és la carta i '1' és l'índex de la pila de descart). Tingues en compte que no pots descartar cap carta de la pila de pagament. Només pots descartar les cartes de la teva mà.\n\n"
+  },
+  "board": {
+    "current_board": "Tauler actual:\n\n{board}\nMoviments disponibles: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Piles centrals ---\n",
+    "pile": "{observation}Pila {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vista del Jugador {player_id} ---\n",
+    "payoff": "{observation}Pila de pagament (Carta superior): {top_card}, Longitud de la pila de pagament: {payoff_length}\n",
+    "hand": "{observation}Mà: {hand}\n",
+    "discard": "{observation}Piles de descart: {discard}\n",
+    "empty": "Buit"
+  },
+  "game_message": {
+    "no_cards_left": "No hi ha més cartes per robar. Recorda que pots jugar cartes de les següents fonts:\n  1. La teva **mà**.\n  2. La **carta superior de la teva pila de pagament**.\n  3. La **carta superior de qualsevol de les teves piles de descart**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de moviment invàlid. El Jugador {player_id} no ha respost amb un moviment vàlid entre claudàtors.",
+    "invalid_play": "Jugada invàlida. El Jugador {player_id} ha intentat jugar {card} a la pila central {index}.",
+    "discard_from_payoff": "Descart invàlid. El Jugador {player_id} ha intentat descartar una carta de la pila de pagament.",
+    "discard_not_in_hand": "Descart invàlid. El Jugador {player_id} ha intentat descartar una carta que no és a la mà.",
+    "wrong_move_type": "Tipus de moviment invàlid. El Jugador {player_id} no ha respost amb un tipus de moviment vàlid."
+  },
+  "game_action": {
+    "you_drew": "Has robat cartes.",
+    "opponent_drew": "El Jugador {player_id} ha robat cartes.",
+    "you_played": "Has jugat {card} a la pila central {index}.",
+    "opponent_played": "El Jugador {player_id} ha jugat {card} a la pila central {index}.",
+    "you_discarded": "Has descartat {card} a la pila de descart {index}, el que també significa que has acabat el teu torn. No es consideren més accions teves per aquest torn. El Jugador {next_player_id} jugarà el següent.",
+    "opponent_discarded": "El Jugador {player_id} ha descartat {card} a la pila de descart {index}, el que també significa que ha acabat el seu torn. No es consideren més accions del Jugador {player_id} per aquest torn. Jugador {next_player_id}, jugaràs el següent. Introdueix la teva acció en el format [acció carta índex_central]."
+  },
+  "outcome": {
+    "payoff_cleared": "El Jugador {current_player} ha acabat la seva pila de pagament! El Jugador {current_player} guanya!",
+    "deadlock_player_0": "S'ha arribat a un punt mort! El Jugador 0 guanya amb {player_0_payoff} cartes restants vs {player_1_payoff} cartes del Jugador 1.",
+    "deadlock_player_1": "S'ha arribat a un punt mort! El Jugador 1 guanya amb {player_1_payoff} cartes restants vs {player_0_payoff} cartes del Jugador 0.",
+    "deadlock_tie": "S'ha arribat a un punt mort amb empat! Tots dos jugadors tenen {player_0_payoff} cartes restants. El Jugador {current_player} guanya per defecte."
+  }
+}

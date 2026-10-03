@@ -133,54 +133,50 @@ class BriscolaEnv(ta.Env):
         """ Announce the start of the game with trump suit """
         gs = self.state.game_state
         trump_str = self._card_to_string(gs['trump_card']) if gs['trump_card'] else "None"
-        
+
         self.state.add_observation(
-            message=f"Briscola game started! Trump suit: {gs['trump_suit']} (Trump card: {trump_str})",
+            message=self.m("game", "start", trump_suit=gs['trump_suit'], trump_card=trump_str),
             observation_type=ta.ObservationType.GAME_MESSAGE
         )
     
     def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are playing Briscola - Player {player_id}.\n"
-            f"Goal: Win tricks and collect the most points (120 total points in the deck).\n"
-            f"Card Points: A=11, 3=10, K=4, Q=3, J=2, others=0\n"
-            f"Card Power: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\n"
-            f"Trump cards beat non-trump cards regardless of power.\n\n"
-            f"Action: '[play X]' where X is the position (1-{len(game_state['players'][player_id]['hand']) if player_id in game_state['players'] else 3}) of the card in your hand\n"
-        )
+        max_pos = len(game_state['players'][player_id]['hand']) if player_id in game_state['players'] else 3
+        return self.m("prompt", "intro", player_id=player_id, max_pos=max_pos)
     
     def _render_player_hand(self, player_id: int) -> str:
         """ Renders the player's hand """
         gs = self.state.game_state
         if player_id not in gs['players']:
-            return "No cards"
-            
+            return self.m("hand", "none").render(_pid=player_id)
+
         player = gs['players'][player_id]
         hand = player['hand']
-        
+
         if not hand:
-            return "No cards in hand"
-        
+            return self.m("hand", "empty").render(_pid=player_id)
+
+        trump_mark = self.m("hand", "trump_mark").render(_pid=player_id)
         output = []
-        output.append("Your hand:")
+        output.append(self.m("hand", "header").render(_pid=player_id))
         for i, card in enumerate(hand):
-            trump_indicator = " (TRUMP)" if card['suit'] == gs['trump_suit'] else ""
-            output.append(f"  {i+1}. {self._card_to_string(card)} [{card['points']} pts]{trump_indicator}")
-        
+            trump_indicator = trump_mark if card['suit'] == gs['trump_suit'] else ""
+            output.append(self.m("hand", "card_line", pos=i + 1, card=self._card_to_string(card), points=card['points'], trump_mark=trump_indicator).render(_pid=player_id))
+
         return "\n".join(output)
     
-    def _render_current_trick(self) -> str:
+    def _render_current_trick(self, recipient_id: int) -> str:
         """ Renders the current trick being played """
         gs = self.state.game_state
         if not gs['current_trick']:
-            return "No cards played yet this trick."
-        
+            return self.m("trick", "empty").render(_pid=recipient_id)
+
+        trump_mark = self.m("hand", "trump_mark").render(_pid=recipient_id)
         output = []
-        output.append("Current trick:")
+        output.append(self.m("trick", "header").render(_pid=recipient_id))
         for player_id, card in gs['current_trick']:
-            trump_indicator = " (TRUMP)" if card['suit'] == gs['trump_suit'] else ""
-            output.append(f"  Player {player_id}: {self._card_to_string(card)}{trump_indicator}")
-        
+            trump_indicator = trump_mark if card['suit'] == gs['trump_suit'] else ""
+            output.append(self.m("trick", "line", player_id=player_id, card=self._card_to_string(card), trump_mark=trump_indicator).render(_pid=recipient_id))
+
         return "\n".join(output)
     
     def step(self, action: str) -> Tuple[bool, ta.Info]:
@@ -197,21 +193,21 @@ class BriscolaEnv(ta.Env):
         card_index = self._find_action_token(action)
         
         if card_index is None:
-            self.state.set_invalid_move("Use [play X] where X is the card position (1, 2, 3, etc.)")
+            self.state.set_invalid_move(self.m("invalid_move", "wrong_format"))
             return self.state.step()
-        
+
         # Validate card index
         player = gs['players'][player_id]
         if card_index < 0 or card_index >= len(player['hand']):
-            self.state.set_invalid_move(f"Invalid card position. You have {len(player['hand'])} cards (1-{len(player['hand'])})")
+            self.state.set_invalid_move(self.m("invalid_move", "out_of_range", count=len(player['hand'])))
             return self.state.step()
-        
+
         # Play the card
         played_card = player['hand'].pop(card_index)
         gs['current_trick'].append((player_id, played_card))
-        
+
         self.state.add_observation(
-            message=f"Player {player_id} played {self._card_to_string(played_card)}",
+            message=self.m("action", "played", player_id=player_id, card=self._card_to_string(played_card)),
             observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION
         )
         
@@ -245,7 +241,7 @@ class BriscolaEnv(ta.Env):
         gs['tricks_won'][winner_id].append(gs['current_trick'].copy())
         
         self.state.add_observation(
-            message=f"Player {winner_id} wins the trick with {self._card_to_string(winning_card)} and gains {trick_points} points!",
+            message=self.m("action", "trick_win", winner=winner_id, card=self._card_to_string(winning_card), points=trick_points),
             observation_type=ta.ObservationType.GAME_MESSAGE
         )
         
@@ -337,12 +333,13 @@ class BriscolaEnv(ta.Env):
         winner_points = gs['points_won'][winner_id]
         
         # Create final summary
-        summary = f"Game Over! Player {winner_id} wins with {winner_points} points!\n\nFinal Scores:\n"
         sorted_players = sorted(gs['points_won'].items(), key=lambda x: x[1], reverse=True)
-        
-        for player_id, points in sorted_players:
-            tricks_count = len(gs['tricks_won'][player_id])
-            summary += f"Player {player_id}: {points} points ({tricks_count} tricks)\n"
+
+        scores = "".join(
+            self.m("outcome", "player_line", player_id=player_id, points=points, tricks=len(gs['tricks_won'][player_id])).render()
+            for player_id, points in sorted_players
+        )
+        summary = self.m("outcome", "head", winner=winner_id, points=winner_points, scores=scores)
         
         if self.state.num_players == 2:
             # Set winner for two-player game
@@ -361,23 +358,22 @@ class BriscolaEnv(ta.Env):
         gs = self.state.game_state
         
         hand_str = self._render_player_hand(player_id)
-        trick_str = self._render_current_trick()
-        
+        trick_str = self._render_current_trick(player_id)
+
         # Show current scores
         scores = []
         for pid in range(self.state.num_players):
-            scores.append(f"Player {pid}: {gs['points_won'][pid]} pts")
+            scores.append(self.m("turn", "score_entry", player_id=pid, points=gs['points_won'][pid]).render(_pid=player_id))
         scores_str = " | ".join(scores)
-        
-        trump_info = f"Trump suit: {gs['trump_suit']}"
+
         if gs['deck']:
-            trump_info += f" | Cards left in deck: {len(gs['deck'])}"
-        
-        message = f"{hand_str}\n\n{trick_str}\n\nScores: {scores_str}\n{trump_info}\n\nPlay a card using [play X]"
-        
+            trump_info = self.m("turn", "trump_info_deck", trump_suit=gs['trump_suit'], deck_count=len(gs['deck'])).render(_pid=player_id)
+        else:
+            trump_info = self.m("turn", "trump_info", trump_suit=gs['trump_suit']).render(_pid=player_id)
+
         self.state.add_observation(
             to_id=player_id,
-            message=message,
+            message=self.m("turn", "board", hand=hand_str, trick=trick_str, scores=scores_str, trump_info=trump_info),
             observation_type=ta.ObservationType.GAME_BOARD
         )
     

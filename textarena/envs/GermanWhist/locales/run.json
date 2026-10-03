@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Mchezo unaanza. Suti ya trump: {trump_suit} (kadi ya trump: {trump_str}).",
+    "no_trump_card": "none None"
+  },
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Whist ya Kijerumani.\n{phase_info}\nUna kadi {hand_size}.\nCheza kadi kwa '[play N]', ambapo N ni nafasi yake katika mkono wako (kwa mfano '[play 3]').",
+    "phase_learning": "INTEGURO Y'UKWIGA: uwatsinze muri buri gakino atwara ikarata yerekana umutwe, uwaguye na we agaca akurako akandi gakarata. Imigwi yatsindanye muriki gice ntibaraba mu gutsinda.",
+    "phase_playing": "Uhereye ubu, uburyo bwose bw'uguhenda umuntu buzoba ari ngirakamaro kugira ngo atsinde."
+  },
+  "next_card": {
+    "playing_phase": "Nta karata n'imwe igicishwa - igihe co gukina kiratanguye.",
+    "deck_empty": "Urutonde rw'amakarata ruragaragara - nta karata na kamwe kariho.",
+    "available": "Agakarata gatangwa: {card}",
+    "available_trump": "Ikarata yatanzwe: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Uburyo bwo gutamba butemewe. Koresha '[play N]' kugira ngo ukine ikarata ya Nth iri mu kuboko kwawe.",
+    "bad_position": "Iyo karata ntibaho. Ufise {hand_size} ikarata.",
+    "must_follow_suit": "Ugomba kugendera ibitaka na kuteka ikarata ya {lead_suit}.",
+    "invalid_play": "Ico gitsindo ntigishobora gukinirwa."
+  },
+  "game_action": {
+    "played": "Umukinnyi {player_id} yakinye {card}."
+  },
+  "trick": {
+    "won": "Umukinyi {winner_id} aratsinda mu buryo bwa {card}.",
+    "won_learning": "Mchezaji {winner_id} anashinda mchezo huo kwa {card} na kuchukua kadi iliyo wazi."
+  },
+  "phase": {
+    "learning_complete": "Umwanya wo kwiga urarangiye, ubuhinga bwose busigaye burakenewe kugira ngo utsinde."
+  },
+  "draw": {
+    "winner_received": "Watsinze urukino maze uronka {card}.",
+    "loser_received": "Watsinzwe mu buryo bw'amayeri maze ugatora {card} muri karatiye.",
+    "winner_preview": "Agakarata gakurikira ni {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Mafungu yaliyoshinda hadi sasa - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
+    "scores_playing": "Mafungu ya kuhesabu - Mchezaji 0: {tricks0}, Mchezaji 1: {tricks1}",
+    "phase": "Igice: {phase}",
+    "phase_learning": "Mzunguko: {phase} ({remaining_cards} kadi zimesalia katika sitaha)"
+  },
+  "hand": {
+    "no_cards": "Nta makarata yo guhanahana amakuru",
+    "no_cards_in_hand": "Nta makarata afise mu minwe.",
+    "header": "Ukuboko kwawe:",
+    "trump_indicator": "(TRUMP) Nibaza ko ari vyo.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Nta makarata yarakoreshejwe muri ico gikorwa.",
+    "header": "Ubuhinga bwa none:",
+    "trump_indicator": "(TRUMP) Nibaza ko ari vyo.",
+    "card_line": "{observation}\n  Mchezaji {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Umukino ntutangura",
+    "header": "=== UMUKINO WA GERMAN WHIST ===",
+    "phase": "{observation}\nMzunguko: {phase}",
+    "trump_suit": "{observation}\nSuti ya trump: {trump_suit}",
+    "trump_card": "{observation}\nIkarata y'umwuga: {card}",
+    "cards_left": "{observation}\nKadi zimezwa: {count}",
+    "next_card": "{observation}\nKadi inayofuata kwa mshindi: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation}\nMkwaju wa sasa:",
+    "trump_indicator": "(TRUMP) Nibaza ko ari vyo.",
+    "trick_line": "{observation}\n  Mchezaji {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nMchezaji {player_id}: {scoring} mikwaju ya alama ({tricks} kwa jumla), {hand_size} kadi mikononi"
+  },
+  "outcome": {
+    "summary": "Igihembo - Mchezaji 0: {l0}, Mchezaji 1: {l1}. Igihembo kikuu - Mchezaji 0: {p0}, Mchezaji 1: {p1}. Mchezaji {winner_id} ashinda na mikwaju {winner_tricks} ya alama!"
+  }
+}

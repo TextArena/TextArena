@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Eres {role} en Coronel Blotto.\nO teu obxectivo é gañar máis rondas que o teu opoñente.\nEn cada ronda, asigna exactamente {num_total_units} unidades aos campos {field_names}.\nO xogador que asigna máis unidades a un campo gaña ese campo, e o xogador que gaña máis campos gaña a ronda.\nPor exemplo, '[A7 B7 C6]' asigna 7 unidades a A, 7 a B e 6 a C.",
+    "commander_alpha": "Comandante Alfa",
+    "commander_beta": "Comandante Beta"
+  },
+  "game_state": {
+    "header_round": "=== CORONEL BLOTTO - Ronda {current_round}/{num_rounds} ===\nRondas Gañadas - Comandante Alfa: {alpha_score}, Comandante Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRonda {current_round}\nComandante Alfa asignou: {p0_allocations}\nComandante Beta asignou: {p1_allocations}\n",
+    "winner_alpha": "{message}Gañador: Comandante Alfa",
+    "winner_beta": "{message}Gañador: Comandante Beta",
+    "tie": "{message}Empate!"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de entrada incorrecto. Usa: A:5, B:10, C:5",
+    "invalid_field": "Nome(s) de campo incorrecto(s). Campos válidos: {field_names}",
+    "wrong_allocation_value": "Todas as asignacións deben ser números enteiros non negativos.",
+    "incorrect_total_units": "Debes asignar exactamente {num_total_units} unidades. Suma actual: {current_sum}",
+    "good_allocations": "A asignación é boa."
+  },
+  "outcome": {
+    "winner_alpha": "Comandante Alfa gaña {score_0}-{score_1} despois de {num_rounds} rondas!",
+    "winner_beta": "Comandante Beta gaña {score_1}-{score_0} despois de {num_rounds} rondas!",
+    "draw": "O xogo remata nun {score_0}-{score_1} empate despois de {num_rounds} rondas!",
+    "early_winner_alpha": "Comandante Alfa gaña {scores_0}-{scores_1} (maioría alcanzada)!",
+    "early_winner_beta": "Comandante Beta gaña {scores_1}-{scores_0} (maioría alcanzada)!"
+  }
+}

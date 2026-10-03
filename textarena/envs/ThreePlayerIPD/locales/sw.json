@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Dilemma ya Wafungwa 3 wenye Mzunguko. Mchezo utadumu kwa {num_rounds} raundi.\nMuundo wa raundi:\n• {conv_rounds} mizunguko ya mazungumzo ya bure\n• 1 mzunguko wa uamuzi - wasilisha kitengo kimoja kwa kila mpinzani: '[<opp-id> cooperate]' au '[<opp-id> defect]' (yaani '[1 defect] [2 cooperate]'; chaguo la awali ni 'ushirikiane'). \nMatrix ya malipo ya jozi (inayotumika kwa kila jozi isiyo na mpangilio):\n  - Wote wawili ushirikiane  ->  {reward}\n  - Wote wawili ukanushie     ->  {punishment}\n  - Wewe ukanushie, wao ushirikiane -> {temptation}\n  - Wewe ushirikiane, wao ukanushie -> {sucker}\nMchezaji (wa) wenye alama ya juu zaidi mwishoni mwa raundi zote atashinda."
+  },
+  "round": {
+    "start": "─── Kuanza Raundi {round} ───\tUnaweza kujadiliana kwa uhuru kwa raundi {conv_rounds} zijazo.",
+    "chat_finished": "Mazungumzo yamekwisha kwa raundi {round}. Wasilisha maamuzi yako, kitengo kimoja kwa kila mpinzani: `[pid cooperate]` au `[pid defect]`."
+  },
+  "results": {
+    "header": "### Raundi {round} - Matokeo:",
+    "pair_line": "{observation}\n\t Mchezaji {i} dhidi ya Mchezaji {j} walichagua {choice_i} na {choice_j} mtawalia (Mchezaji {i} alipata {gain_i}, Mchezaji {j} alipata {gain_j})",
+    "scores_open": "{observation}\n-> Alama za sasa: ",
+    "score_first": "{observation}Mchezaji {player_id} ({score})",
+    "score_next": "{observation}; Mchezaji {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Alama za mwisho: {scores}.  Vikundi vya utaratibu (mbaya→bora): {groups}"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id}. Jūs spēlējat Sudoku.\nŠeit ir pašreizējais Sudoku režģa stāvoklis. Katra rinda ir numurēta no 1 līdz 9, un katrs stabs arī ir numurēts no 1 līdz 9.\nTukšās šūnas ir pārstāvētas ar '.', un iepriekš aizpildītās šūnas satur ciparus no 1 līdz 9.\n\nPašreizējais Sudoku režģis:\nJūsu mērķis ir aizpildīt tukšās šūnas 9x9 režģī ar cipariem no 1 līdz 9 tā, lai:\n1. Katrā rindā būtu visi cipari no 1 līdz 9 bez atkārtojuma.\n2. Katrā stabā būtu visi cipari no 1 līdz 9 bez atkārtojuma.\n3. Katrā no deviņiem 3x3 apakšrežģiem būtu visi cipari no 1 līdz 9 bez atkārtojuma.\n\nNoteikumi un instrukcijas:\n1. **Nepārrakstiet** sākotnējos skaitļus, kas sniegti režģī.\n2. **Aizpildiet** tikai tukšās šūnas, kas pārstāvētas ar '.'.\n3. Jūs varat atbildēt jebkādā veidā, bet nodrošiniet, ka jūsu atbilde ietver formātu '[rinda stabs numurs]'.\n4. **Nodrošiniet**, ka jūsu gājiens neievēro Sudoku noteikumus. Nederīgi gājieni rezultēsies ar sodiem.\nPiemeņi:\n- **Derīgs gājiens**:\n  - Režģa fragments pirms gājiena:\n  \n  - Gājiens: `[5 3 7]`\n  - Skaidrojums: 7 novietošana rindā 5, stabā 3 neievēro nekādus Sudoku noteikumus.\n\n- **Nederīgs gājiens** (pārrakstot iepriekš aizpildītu šūnu):\n  - Režģa fragments pirms gājiena:\n  \n  - Gājiens: `[1 1 9]`\n  - Skaidrojums: Šūna (1,1) jau ir aizpildīta ar 5. Jūs nevarat to pārrakstīt.\n\n- **Nederīgs gājiens** (ievērojot Sudoku noteikumus):\n  - Režģa fragments pirms gājiena:\n  \n  - Gājiens: `[1 3 5]`\n  - Skaidrojums: 5 novietošana rindā 1, stabā 3 ievēro noteikumu, jo 5 jau eksistē rindā 1.\n\nJūsu gājienu un domu vēsture tiks pievienota, kad jūs spēlēsiet vairāk kārtu. Izmantojiet savu gājienu vēsturi, lai uzlabotu savu lēmumu pieņemšanu, izvēloties gājienus, ko jūs esat mēģinājuši. Veiksmi!\n\n"
+  },
+  "board": {
+    "game_board": "Spēles galdiņš:\n{board}",
+    "board_state": "Galdiņa stāvoklis: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nederīgs gājiens formāts. Spēlētājs {player_id} neatbildēja ar derīgu 'rinda stabs numurs'.",
+    "out_of_bounds": "Nederīgs gājiens. Spēlētājs {player_id} mēģināja novietot {num} pozīcijā ({row}, {col}), kas ir ārpus robežām.",
+    "overwrite": "Nederīgs gājiens. Spēlētājs {player_id} mēģināja pārrakstīt iepriekš aizpildītu šūnu ({row}, {col}).",
+    "violates_rules": "Nederīgs gājiens. Spēlētājs {player_id} mēģināja novietot {num} pozīcijā ({row}, {col}), kas ievēro Sudoku noteikumus."
+  },
+  "outcome": {
+    "win": "Apsveicam! Spēlētājs {player_id} pabeidza Sudoku uzdevumu.",
+    "turn_limit": "Gājienu limits ir sasniegts. Jūs pareizi aizpildījāt {percent}% no tukšajām šūnām."
+  }
+}

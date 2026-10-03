@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Neniu kartoj ankoraŭ",
+    "rules": "🎯 ULTIMA TEKSAZA HOLDEM - Unuopa Ludanto kontraŭ Vendisto\n\n📖 LUDOVERVUO:\n• Vi komencas kun {start_chips} ĉipoj\n• Unu ferdeko de 52 kartoj (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Vi ludas kontraŭ la vendisto (domo)\n• Ĉiu rondo sekvas la strukturon de Ultimate Texas Hold'em: vi metas ANTE kaj BLIND vetludojn, ricevas 2 truojn, decidis pri opcionalaj LUDI vetludoj tra la vetludfazoj, tiam malkaŝas komunumajn kartojn kaj komparas vian plej bonan 5-kartan manon kontraŭ tiu de la vendisto. Via celo estas maksimumi viajn gajnojn (kiam vi havas la pli bonan manon), dum minimumigas viajn perdojn (kiam vi havas la pli malbonan manon).\n• La ludo finiĝas kiam vi atingas 0 ĉipojn aŭ sube de la komenco de rondo (PERDO) aŭ kompletas 1000 rondojn kun ĉipoj (VENKO)\n\n💰 VETLUDA STRUKTURO:\n• ANTE: Deviga ${ante} vetludo ĉiun rondan\n• BLIND: Deviga ${ante} vetludo ĉiun rondan\n• LUDI: Opcia vetludo dum la ludado. Tra la tuta rondo, vi povas elekti NUR UNU el la sekvaj: (${ante4} se farita ĉe PRE-FLOP, ${ante2} se farita ĉe FLOP, aŭ ${ante} se farita ĉe RIVER. Ankaŭ povas faldi ĉe rivero, cedante la manon, kaj farante neniun vetludon.)\n\n🎴 KARTA DISPONADO:\n• Vi ricevas 2 malfermitajn kartojn (viaj truoj)\n• La vendisto ricevas 2 fermitajn kartojn (kaŝitajn de vi)\n• 5 komunumaj kartoj estas disponeblaj malferme komence\n• Komunumaj kartoj estas malkaŝitaj progrese tra la ludfazoj\n\n🏆 VENDISTA KVALIFIKADO:\n• La vendisto devas havi almenaŭ PARON (2 kartoj de sama rango) por kvalifiki, uzante la 2 kartojn en lia mano kaj la 5 komunumajn kartojn.\n• La kvalifiko de la vendisto influas la vetludrezultojn, kiel estos eksplikite poste.\n\n🎮 LUDFAZOJ & AGOJOJ:\n📋 PRE-FLOP:\n  • Agadoj: [4x] (${ante4}) aŭ [check]\n  • [4x]: Meti ${ante4} LUDI vetludon, malkaŝas la unuajn 3 komunumajn kartojn\n  • [check]: Neniu aldona vetludo, malkaŝas la unuajn 3 komunumajn kartojn\n\n📋 FLOP:\n  • Se 4-obla vetludo metita: NUR [skip] havebla (aŭtomate malkaŝas la lastajn 2 komunumajn kartojn)\n  • Se neniu 4-obla vetludo: [2x] (${ante2}) aŭ [check]\n  • [2x]: Meti ${ante2} LUDI vetludon, malkaŝas la lastajn 2 komunumajn kartojn\n  • [check]: Neniu aldona vetludo, malkaŝas la lastajn 2 komunumajn kartojn\n\n📋 RIVER:\n  • Se 4-obla aŭ 2-obla vetludo metita: NUR [skip] havebla (aŭtomate iras al konfrontiĝo)\n  • Se neniu antaŭa LUDI vetludo: [1x] (${ante}) aŭ [fold]\n  • [1x]: Meti ${ante} LUDI vetludon, iras al konfrontiĝo\n  • [fold]: Cedas la manon, perdas ANTE kaj BLIND vetludojn\n\n📋 KONFRONTIĜO:\n  • Ĉiuj kartoj malkaŝitaj kaj taksitaj\n  • Plej bona 5-karta mano el 7 kartoj (2 truoj + 5 komunumaj)\n  • Vetludoj solvitaj laŭ la pagreguloj\n\n💎 VETLUDPAGADOJ:\n📊 ANTE VETLUDO:\n  • La vendisto ne kvalifikiĝas: PUŜI (vetludo redonita)\n  • La vendisto kvalifikiĝas & vi venkas: 1:1 pagado (vetludo + gajno)\n  • La vendisto kvalifikiĝas & vi perdas: Vetludo perdiĝas\n  • Ligo: PUŜI (vetludo redonita)\n\n📊 BLIND VETLUDO:\n  • Nefektita de la kvalifiko de la vendisto\n  • Vi venkas: Vetludo redonita kaj aldona pagado bazita sur via manforto\n  • Vi perdas: Vetludo perdiĝas\n  • Ligo: PUŜI (vetludo redonita)\n\n📊 BLIND VETLUDO PAGTABELO:\n  • Reĝa Fuŝo: 500:1 (${{self.ante_amount * 500}})\n  • Rektfuŝo: 50:1 (${{self.ante_amount * 50}})\n  • Kvar el sama rango: 10:1 (${{self.ante_amount * 10}})\n  • Plena Domo: 3:1 (${{self.ante_amount * 3}})\n  • Fuŝo: 3:1 (${{self.ante_amount * 3}})\n  • Rektlinio: 1:1 (${{self.ante_amount * 1}})\n  • Malpli ol Rektlinio: Neniu aldona pagado\n\n📊 LUDI VETLUDO:\n  • Nefektita de la kvalifiko de la vendisto\n  • Rektkomparo: Via plej bona mano kontraŭ tiu de la vendisto\n  • Vi venkas: 1:1 pagado (vetludo + gajno)\n  • Vi perdas: Vetludo perdiĝas\n  • Ligo: PUŜI (vetludo redonita)\n\n🎯 POKERA MANRANGORDO (Plej bona al Plej malbona):\n  1. Reĝa Fuŝo: A-K-Q-J-10 de sama kostumo\n  2. Rektfuŝo: 5 sinsekvaj kartoj de sama kostumo\n  3. Kvar el sama rango: 4 kartoj de sama rango\n  4. Plena Domo: 3 el sama rango + 2 el sama rango\n  5. Fuŝo: 5 kartoj de sama kostumo\n  6. Rektlinio: 5 sinsekvaj kartoj\n  7. Tri el sama rango: 3 kartoj de sama rango\n  8. Du Paroj: 2 paroj de malsamaj rangoj\n  9. Unu Paro: 2 kartoj de sama rango\n  10. Alta Karto: Plej alta karto gajnas\n\n⌨️  AGOJKOMANDOJ:\n• [4x] aŭ [play bet 4x]: Meti ${{self.ante_amount*4}} LUDI vetludon\n• [2x] aŭ [play bet 2x]: Meti ${{self.ante_amount*2}} LUDI vetludon\n• [1x] aŭ [play bet 1x]: Meti ${{self.ante_amount*1}} LUDI vetludon\n• [check] aŭ [c]: Kontroli (neniu aldona vetludo)\n• [fold] aŭ [f]: Faldi (cedi la manon)\n• [skip] aŭ [s]: Salti al la sekva fazo (kiam neniu agado bezonata)\n\n💡 STRATEGIAJ KONSILJOJ:\n• Fortaj komencantaj manoj (paroj, altaj kartoj) ofte pravigas 4-oblan vetludon\n• Konsideru la kvalifikon de la vendisto - malfortaj manoj povas puŝi se la vendisto ne kvalifikiĝas\n• BLIND vetludo povas esti tre profita kun fortaj manoj (Reĝa Fuŝo = 500:1!)\n• Rigardu vian ĉipstakon! Se ĝi iras al 0 aŭ sube de la komenco de rondo, vi perdas.\n\n⚠️  GRAVAJ NOTOJ:\n• ANTE kaj BLIND vetludoj estas devigaj ĉiun rondan\n• LUDI vetludoj estas opcionalaj kaj strategiaj\n• Certigu, ke vi enmetas la ĝustan agon, kaj nur unu agon samtempe.\n\n",
+    "state": "🎯 RONDO {round}\n💰 Ĉipoj: {chips}\n🎴 Via mano: {hand}\n📊 Aktualaj vetludoj: Ante ${ante}, Blind ${blind}, Ludi ${play}\n📋 Fazo: {phase}\n🎯 Haveblaj agadoj: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Rondo {round} komenciĝis! Vetludoj: ANTE ${ante}, BLIND ${blind}. Vi havas {chips} ĉipojn restantajn.",
+    "your_hand": " Via mano: {hand}",
+    "flop_revealed": " FLOP rivelita: {cards}",
+    "river_revealed": " Rivero rivelita: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Malvalida ago por nuna fazo. Disponeblaj agoj: {available}",
+    "message": " Malvalidaj agoj! Disponeblaj agoj: {available}"
+  },
+  "action": {
+    "folded": "Vi rezignis."
+  },
+  "showdown": {
+    "dealer_hand": " METEJO! La mano de la komercisto: {cards}",
+    "community_cards": " Komunumkartoj: {cards}",
+    "player_best": "🎴 La plej bona mano de la ludanto: {name} ({cards})",
+    "dealer_best": "🎴 La plej bona mano de la vendisto: {name} ({cards})",
+    "ante_lost_folded": " ANTE vetas PERDITA! - ${ante} (faldiĝis)",
+    "blind_lost_folded": " VETO PERDITA! - ${blind} (faldiĝis)",
+    "ante_won": "✅ ANTE vetas WON! +${amount}",
+    "ante_pushed": " ANTE veto PUSHED! ${ante} revenis.",
+    "ante_lost": " Antaŭ la vetado PERDITA! - ${ante}",
+    "blind_won": "✅ VETO PER LA SINJORO GXOSTIS! +${amount}",
+    "blind_pushed": " VETTO PUSHED! ${blind} revenis.",
+    "blind_lost": " VETO PERDITA! -${blind}",
+    "play_won": "✅ PLAY-veto GET! +${amount}",
+    "play_pushed": " PLAY-veto PUSHED! ${play} revenis.",
+    "play_lost": " Ludu veton PERDIT! -${play}",
+    "net_gain": "🎉 Rondo {round} kompletigita! Neta gajno: +${net}",
+    "net_loss": "💸 Rondo {round} kompletigita! Neta perdo: ${net}",
+    "separator": "Mi estas la unua kiu havas tion ĉi. - Ĉu vi ne scias? - Jes, mi konas ĝin..."
+  },
+  "outcome": {
+    "game_over_win": "🏁 LUDO FINIĜIS! {max_turns} rondoj kompletigitaj. Vi havas ${chips} ĉipojn - VI VENKAS!",
+    "game_over_lose": " GAME OVER! Vi ne plu havas pecetojn. La komercisto venkas!",
+    "reward_win": "Ludanto kompletis {winner_rounds} rondojn kun ${chips} ĉipoj",
+    "reward_lose": "Ludanto elĉerpis la pecetojn en rondo {round}.",
+    "reward_win_max": "Ludanto kompletis {max_turns} rondojn kun ${chips} ĉipoj"
+  },
+  "hand_names": {
+    "royal_flush": "Reĝa Flush",
+    "straight_flush": "Rekta Flush",
+    "four_of_a_kind": "Kvar el la speco",
+    "full_house": "Plenplena domo.",
+    "flush": "Ŝprucigita.",
+    "straight": "Rekte.",
+    "three_of_a_kind": "Tri el la speco",
+    "two_pair": "Du paroj.",
+    "one_pair": "Unu paro.",
+    "high_card": "Plej alta karto.",
+    "unknown": "Nekonata Mano."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v Chopsticks. Na vašo vrsto morate izbrati eno od naslednjih možnosti:\n  + Napad: '[attack M O]' kjer je M=vaša roka (0 ali 1), O=roka nasprotnika (0 ali 1).\n    - Število prstov na roki nasprotnika se poveča za število prstov na vaši roki; če je >=5, postane 0.\n  + Razdelitev: '[split L R]' za prerazporeditev vašega skupnega števila prstov v L in R (L+R = vaš skupni znesek).\nOdgovorite z natanko eno od teh ukazov."
+  },
+  "board": {
+    "current_board": "Trenutna plošča:\nIgralec 0: {hands_0}\nIgralec 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Vaša roka {my_idx} je mrtva.",
+    "opp_hand_dead": "Roka nasprotnika {opp_idx} je že mrtva.",
+    "split_sum": "Razdelitev mora biti enaka {total}.",
+    "split_no_change": "Razdelitev mora spremeniti razporeditev vaših rok.",
+    "invalid_command": "Neveljavna poteza. Uporabite “[attack M O]” ali “[split L R]”."
+  },
+  "game_action": {
+    "attack": "Igralec {player_id} napada roko igralca {opp_id} {opp_idx}: gre iz {opp_val} v {new_val}.",
+    "split": "Igralec {player_id} razdeli v [{L}, {R}]."
+  },
+  "history": {
+    "entry": "Igralec {player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Obi roki nasprotnika sta mrtvi.",
+    "draw": "Dosežen je časovni limit."
+  }
+}

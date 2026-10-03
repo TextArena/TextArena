@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id}. Você está jogando o Jogo da Memória.\nSeu objetivo é combinar mais pares de cartas no tabuleiro do que seu oponente.\nNa sua vez, selecione duas cartas para virar, inserindo os números de linha e coluna da primeira e segunda carta, respectivamente, como '[0 1 1 0]', onde a primeira carta está na linha 0 e coluna 1, e a segunda carta está na linha 1 e coluna 0.\nSe as duas cartas combinarem, você ganha um ponto e as cartas permanecem viradas para cima. Se elas não combinarem, as cartas são viradas novamente para baixo, por exemplo, '.'.\nO jogo termina quando todos os pares forem combinados."
+  },
+  "board": {
+    "current_board": "Tabuleiro Atual:\n{board}",
+    "current_game_board": "Tabuleiro do Jogo Atual:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movimento inválido. O Jogador {player_id} não respondeu com uma direção válida entre colchetes.",
+    "out_of_bounds": "Movimento inválido. O Jogador {player_id} selecionou uma posição fora dos limites.",
+    "same_card_twice": "Movimento inválido. O Jogador {player_id} selecionou a mesma carta duas vezes.",
+    "already_matched": "Movimento inválido. O Jogador {player_id} selecionou uma ou ambas as cartas que já foram combinadas."
+  },
+  "game_message": {
+    "cards_match": "As cartas selecionadas pelo Jogador {player_id} nas posições [{r1} {c1}] e [{r2} {c2}] combinam!",
+    "cards_no_match": "As cartas selecionadas pelo Jogador {player_id} não combinam. As cartas nas posições [{r1} {c1}] e [{r2} {c2}] são {pos1} e {pos2}, respectivamente."
+  },
+  "outcome": {
+    "draw": "Ambos os jogadores combinaram o mesmo número de pares de cartas.",
+    "win": "O Jogador {winner_id} venceu!",
+    "turn_limit": "O limite de turnos foi alcançado. O jogo terminou. O Jogador 0 marcou {score_0} pontos, o Jogador 1 marcou {score_1} pontos.",
+    "turn_limit_win": "{reason} O Jogador {winner_id} venceu!"
+  }
+}

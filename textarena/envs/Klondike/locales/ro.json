@@ -1,0 +1,74 @@
+{
+  "_comment": "Fișier de localizare pentru Klondike Solitaire. NU traduceți cheile (partea stângă). Traduceți doar valorile (partea dreaptă).",
+  "_slots": {
+    "{n}": "Indexul acțiunii în cadrul unei comenzi separate prin virgulă, bazat pe 1",
+    "{msg}": "Un mesaj de rezultat al acțiunii (deja localizat)",
+    "{count}": "Numărul de cărți cu fața în sus care sunt mutate",
+    "{src}": "Numărul grămezii de cărți sursă, bazat pe 1",
+    "{dst}": "Numărul grămezii de cărți destinație, bazat pe 1",
+    "{cmd}": "Comanda necunoscută tastată de jucător (netradusă)",
+    "{max_turns}": "Numărul maxim de ture înainte de sfârșitul jocului",
+    "{score}": "Numărul de cărți din grămezile de fundație",
+    "{board}": "Tabla de joc ASCII (niciodată tradusă)",
+    "{turn}": "Numărul curent al turei",
+    "{stock}": "Numărul de cărți rămase în stoc",
+    "{waste}": "Eticheta cărții de deșeu superioare sau '--' dacă este goală (niciodată tradusă)",
+    "{cards}": "Cărțile dintr-o grămadă ca etichete neutre sau '--' dacă este goală (niciodată tradusă)"
+  },
+  "player_prompt": {
+    "intro": "Jucați Klondike Solitaire. Scopul dvs. este să mutați toate cărțile în grămezile de fundație.\n\nReguli de joc:\n- Grămezile de fundație (F1-F4): Construiți de la As la Rege în funcție de culoare\n- Grămezile de cărți (T1-T7): Construiți în jos, alternând culorile (roșu pe negru, negru pe roșu)\n- Stoc: Trageți cărți în grămada de deșeu\n- Deșeu (W): Cărțile superioare disponibile pentru joc\n\nComenzi:\n- 'draw' - Trageți cărți din stoc în grămada de deșeu\n- 'move <sursă> <destinație> [număr]' - Mutarea cărților între grămezi\n  Exemple: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Numărul poate fi și 'all', care va încerca să mute toate cărțile cu fața în sus.\n- 'forfeit' - Încheiați jocul imediat și blocați scorul curent\n- Numele grămezilor: W (deșeu), F1-F4 (fundații), T1-T7 (grămezi de cărți)\n\nPuteți executa mai multe acțiuni într-o singură tură, separându-le cu virgule:\n  Exemplu: 'draw, move W T1, move T2 F1'\n\nDoar Regii pot fi plasați pe grămezile de cărți goale.\nAcțiunile se execută în ordine - dacă una eșuează, acțiunile rămase sunt omise.\nFolosiți 'forfeit' dacă credeți că jocul este imposibil de câștigat."
+  },
+  "format_error": {
+    "no_brackets": "Format de acțiune invalid. Acțiunea ar trebui să fie între paranteze.",
+    "no_closing_bracket": "Format de acțiune invalid. Lipsă paranteză de închidere ']'",
+    "empty_command": "Comandă goală. Tastați 'draw' sau 'move <sursă> <destinație> [număr]'",
+    "empty_action": "Acțiune goală",
+    "move_needs_args": "Comanda 'move' necesită sursă și destinație. Utilizare: 'move <sursă> <destinație> [număr]'",
+    "count_positive": "Numărul trebuie să fie pozitiv sau 'all'",
+    "count_invalid": "Număr invalid. Utilizați un număr sau 'all'",
+    "unknown_command": "Comandă necunoscută '{cmd}'. Utilizați 'draw', 'move <sursă> <destinație> [număr]' sau 'forfeit'",
+    "wrapped": "Acțiune {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Acțiune {n}: {msg}",
+    "before_failure": "Executat {n} acțiune/acțiuni înainte de eșec.",
+    "failed": "Acțiune {n} eșuată: {msg}"
+  },
+  "move_result": {
+    "drew": "Trasă carte/cărți din stoc în grămada de deșeu.",
+    "cannot_draw": "Nu se pot trage cărți. Atât stocul, cât și grămada de deșeu sunt goale.",
+    "invalid_pile": "Nume de grămadă invalid. Utilizați W, F1-F4 sau T1-T7",
+    "foundation_one_card": "Se poate muta doar o carte în fundație",
+    "waste_to_foundation_ok": "Mutată carte din grămada de deșeu în fundația F{dst}",
+    "waste_to_foundation_bad": "Nu se poate muta carta din grămada de deșeu în acea fundație",
+    "tableau_to_foundation_ok": "Mutată carte din grămada de cărți T{src} în fundația F{dst}",
+    "tableau_to_foundation_bad": "Nu se poate muta carta din grămada de cărți în acea fundație",
+    "foundation_to_foundation": "Nu se poate muta din fundație în fundație",
+    "waste_to_tableau_one_card": "Se poate muta doar o carte din grămada de deșeu în grămada de cărți",
+    "waste_to_tableau_ok": "Mutată carte din grămada de deșeu în grămada de cărți T{dst}",
+    "waste_to_tableau_bad": "Nu se poate plasa carta din grămada de deșeu pe acea grămadă de cărți",
+    "no_face_up": "Nu există cărți cu fața în sus de mutat",
+    "tableau_to_tableau_ok": "Mutate {count} carte/cărți din grămada de cărți T{src} în T{dst}",
+    "tableau_to_tableau_bad": "Nu se pot muta {count} carte/cărți din T{src} în T{dst}",
+    "foundation_to_tableau_one_card": "Se poate muta doar o carte din fundație în grămada de cărți",
+    "foundation_empty": "Fundația F{src} este goală",
+    "foundation_to_tableau_ok": "Mutată carte din fundația F{src} în grămada de cărți T{dst}",
+    "foundation_to_tableau_bad": "Nu se poate plasa carta din fundație pe grămada de cărți T{dst}",
+    "to_waste_or_stock": "Nu se poate muta în grămada de deșeu sau stoc"
+  },
+  "outcome": {
+    "forfeit": "Joc abandonat. Scor final: {score} cărți în fundații.",
+    "won": "Felicitări! Ați câștigat Klondike Solitaire!",
+    "turn_limit": "Joc terminat! Ați atins numărul maxim de {max_turns} ture. Scor: {score} cărți în fundații."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Tură: {turn}/{max_turns}",
+    "stock": "Stoc: {stock} cărți",
+    "waste": "Deșeu (W): {waste}",
+    "foundations_header": "Fundații:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Grămezi de cărți:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

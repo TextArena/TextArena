@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay naglalaro ng Countdown numbers game!\nLayunin: Pagsamahin ang mga numero gamit ang +, -, *, / upang maabot ang target.\nFormat ng pagkilos: [i j op] kung saan i,j ay mga indeks at op ay ang operasyon.\nHalimbawa: [0 2 *] ay nagpaparami ng numero sa indeks 0 sa numero sa indeks 2.\nAng paghahati ay dapat magresulta sa mga buong numero lamang."
+  },
+  "board": {
+    "header": "TARGET: {target}\n\nMga numero na magagamit:\n{numbers}",
+    "best": "{observation}\n\nPinakamahusay hanggang ngayon: {best_value} (distansya: {distance})\nPinakamahusay na ekspresyon: {best_expression}",
+    "history": "{observation}\n\nKasaysayan ng mga pagkilos:\n{moves}",
+    "progress": "{observation}\nKasalukuyang iskor ng progreso: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hindi wastong format ng pagkilos. Gamitin ang `[i j op]` kung saan i,j ay mga indeks at op ay +,-,*,/",
+    "invalid_indices": "Hindi wastong mga indeks. Dapat ay magkakaiba at nasa saklaw ng 0-{max_index}",
+    "invalid_operation": "Hindi wastong operasyon (paghahati sa sero o hindi buong numero na resulta)"
+  },
+  "outcome": {
+    "win": "Perpekto! Natagpuan ang eksaktong target: {target}",
+    "no_moves": "Walang mga pagkilos pa. Pinakamahusay na resulta: {best_value} (target: {target})",
+    "turn_limit": "Naabot ang hangganan ng mga pagliko. Pinakamahusay na resulta: {best_value} (target: {target})"
+  }
+}

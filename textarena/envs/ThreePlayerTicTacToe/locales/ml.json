@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "നിങ്ങൾ {player_id} പ്ലേയർ ആണ് മൂന്ന് കളിക്കാരുടെ ടിക് ടാക് ടോയിൽ.\nനിങ്ങളുടെ ചിഹ്നം '{symbol}' ആണ്.\nനാല് വരി രൂപപ്പെടുത്താൻ നിങ്ങൾ നിങ്ങളുടെ ചിഹ്നം 5x5 ബോർഡിൽ സ്ഥാപിക്കുന്നതിലൂടെ തിരഞ്ഞെടുക്കുക.\nവരികൾ തിരശ്ചീനമോ നിലവോ വികർണ്ണമോ ആയിരിക്കാം.\n'[4]' ഫോർമാറ്റ് ഉപയോഗിച്ച് നിങ്ങളുടെ നീക്കം സമർപ്പിക്കുക, സെൽ 4 അടയാളപ്പെടുത്താൻ."
+  },
+  "board": {
+    "current_board": "നിലവിലെ ബോർഡ്: {board} ലഭ്യമായ നീക്കങ്ങൾ: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "അസാധുവായ നീക്ക ഫോർമാറ്റ്. സെൽ 0-{max_cell} ആണെങ്കിൽ '[cell]' ഉപയോഗിക്കുക.",
+    "out_of_range": "അസാധുവായ സെൽ നമ്പർ: {cell}. 0 നും {max_cell} നും ഇടയിലായിരിക്കണം.",
+    "already_occupied": "സെൽ {cell} ഇതിനകം തന്നെ ഉപയോഗിച്ചുകഴിഞ്ഞു.",
+    "made_invalid": "കളിക്കാരന് {player_id} അസാധുവായ ഒരു നീക്കം നടത്തി"
+  },
+  "game_action": {
+    "placed": "കളിക്കാരൻ {player_id} അവരുടെ ചിഹ്നം ({symbol}) ഫീൽഡിൽ ({row}, {col}) സ്ഥാപിക്കുന്നു."
+  },
+  "outcome": {
+    "win": "കളിക്കാരന് {player_id} ({symbol}) വിജയിക്കുന്നു!",
+    "draw": "കളി സമനിലയിലാണ്!"
+  }
+}

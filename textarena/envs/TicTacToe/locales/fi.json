@@ -1,0 +1,27 @@
+{
+  "_comment": "TicTacToe-lokaalitiedosto. ÄLÄ käännä avaimia (vasen puoli). Käännä vain arvot (oikea puoli).",
+  "_slots": {
+    "{player_id}": "Pelaajan numero, esim. 0 tai 1",
+    "{symbol}": "Pelaajan merkki, joko X tai O",
+    "{opponent_symbol}": "Vastustajan merkki, joko X tai O",
+    "{cell}": "Pelilaudan ruutunumero välillä 0 ja 8"
+  },
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} Tic Tac Toe -pelissä.\nTavoitteesi on voittaa kolme peräkkäistä ruutua (vaakasuunnassa, pystysuunnassa tai diagonaalisesti) pelilaudalla.\nVuorollasi sinun tulee valita ruutunumero (0-8), johon haluat asettaa merkkisi seuraavaksi.\nEsimerkiksi '[4]' asettaa merkkisi pelilaudan keskimmäiseen ruutuun.\nPelaajana {player_id} sinä olet '{symbol}', kun taas vastustajasi on '{opponent_symbol}'."
+  },
+  "board": {
+    "current_board": "Nykyinen pelilauta:\n\n{board}\n\nSaatavilla olevat siirrot: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Lähetetty siirto ei noudata oikeaa muotoa.",
+    "out_of_range": "{cell} ei ole kelvollinen ruutu. Tulee olla välillä 0 ja 8.",
+    "already_occupied": "Ruutu {cell} on jo varattu."
+  },
+  "game_action": {
+    "placed": "Pelaaja {player_id} asetti merkkinsä ({symbol}) ruutuun {cell}."
+  },
+  "outcome": {
+    "win": "Pelaaja {player_id} on voittanut!",
+    "draw": "Peli on tasapeli!"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "_comment": "Klondike-Solitaire-Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel (linke Seite), nur die Werte (rechte Seite). Behalte jeden {platzhalter} exakt bei. Übersetze NIEMALS Kartenbezeichnungen/Farben (z. B. A, 10, K, ♣️, ♦️, ♥️, ♠️), die Stapel-Token W, F1-F4, T1-T7, das ASCII-Brett in {board} oder die Befehle 'draw', 'move', 'forfeit', 'all'. Die Klammer-Syntax wie 'move W T1' bleibt unverändert in lateinischer Schrift.",
+  "_slots": {
+    "{n}": "Aktionsindex innerhalb eines durch Kommas getrennten Befehls, 1-basiert",
+    "{msg}": "Eine verschachtelte Ergebnismeldung pro Aktion (bereits lokalisiert)",
+    "{count}": "Anzahl der aufgedeckten Karten, die verschoben werden",
+    "{src}": "Nummer des Quell-Tableau-Stapels, 1-basiert",
+    "{dst}": "Nummer des Zielstapels, 1-basiert",
+    "{cmd}": "Der unbekannte Befehl, den der Spieler eingegeben hat (nicht übersetzen)",
+    "{max_turns}": "Die maximale Anzahl an Zügen, bevor das Spiel endet",
+    "{score}": "Anzahl der Karten, die sich derzeit in den Fundamentstapeln befinden",
+    "{board}": "Das gerenderte ASCII-Brett (niemals übersetzen)",
+    "{turn}": "Aktuelle Zugnummer",
+    "{stock}": "Anzahl der im Talon verbleibenden Karten",
+    "{waste}": "Die oberste Ablagekarte, oder '--' falls leer (niemals übersetzen)",
+    "{cards}": "Die Karten eines Stapels als neutrale Bezeichnungen, oder '--' falls leer (niemals übersetzen)"
+  },
+
+  "player_prompt": {
+    "intro": "Du spielst Klondike-Solitaire. Dein Ziel ist es, alle Karten auf die Fundamentstapel zu bringen.\n\nSpielregeln:\n- Fundamentstapel (F1-F4): Baue in einer Farbe von Ass bis König aufsteigend auf\n- Tableau-Stapel (T1-T7): Baue absteigend in wechselnden Farben (Rot auf Schwarz, Schwarz auf Rot)\n- Talon: Ziehe Karten auf den Ablagestapel\n- Ablage (W): Die oberste Karte steht zum Spielen bereit\n\nBefehle:\n- 'draw' - Ziehe Karten vom Talon auf die Ablage\n- 'move <source> <destination> [count]' - Verschiebe Karten zwischen Stapeln\n  Beispiele: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count kann auch 'all' sein, was versucht, alle aufgedeckten Karten zu verschieben.\n- 'forfeit' - Beende das Spiel sofort und sichere deine aktuelle Punktzahl\n- Stapelnamen: W (Ablage), F1-F4 (Fundamente), T1-T7 (Tableau)\n\nDu kannst mehrere Aktionen in einem Zug ausführen, indem du sie mit Kommas trennst:\n  Beispiel: 'draw, move W T1, move T2 F1'\n\nNur Könige dürfen auf leere Tableau-Stapel gelegt werden.\nAktionen werden der Reihe nach ausgeführt - schlägt eine fehl, werden die übrigen Aktionen übersprungen.\nBenutze 'forfeit', wenn du glaubst, dass das Spiel nicht zu gewinnen ist."
+  },
+
+  "format_error": {
+    "no_brackets": "Ungültiges Aktionsformat. Die Aktion sollte in Klammern stehen.",
+    "no_closing_bracket": "Ungültiges Aktionsformat. Fehlende schließende Klammer ']'",
+    "empty_command": "Leerer Befehl. Gib 'draw' oder 'move <source> <destination> [count]' ein",
+    "empty_action": "Leere Aktion",
+    "move_needs_args": "Der move-Befehl erfordert Quelle und Ziel. Verwendung: 'move <source> <destination> [count]'",
+    "count_positive": "count muss positiv oder 'all' sein",
+    "count_invalid": "Ungültiges count. Verwende eine Zahl oder 'all'",
+    "unknown_command": "Unbekannter Befehl '{cmd}'. Verwende 'draw', 'move <source> <destination> [count]' oder 'forfeit'",
+    "wrapped": "Aktion {n}: {msg}"
+  },
+
+  "action_result": {
+    "success": "Aktion {n}: {msg}",
+    "before_failure": "{n} Aktion(en) vor dem Fehlschlag ausgeführt.",
+    "failed": "Aktion {n} fehlgeschlagen: {msg}"
+  },
+
+  "move_result": {
+    "drew": "Karte(n) vom Talon auf die Ablage gezogen.",
+    "cannot_draw": "Ziehen nicht möglich. Talon und Ablage sind beide leer.",
+    "invalid_pile": "Ungültiger Stapelname. Verwende W, F1-F4 oder T1-T7",
+    "foundation_one_card": "Es kann nur 1 Karte auf ein Fundament gelegt werden",
+    "waste_to_foundation_ok": "Karte von der Ablage auf Fundament F{dst} gelegt",
+    "waste_to_foundation_bad": "Die Ablagekarte kann nicht auf dieses Fundament gelegt werden",
+    "tableau_to_foundation_ok": "Karte vom Tableau T{src} auf Fundament F{dst} gelegt",
+    "tableau_to_foundation_bad": "Die Tableau-Karte kann nicht auf dieses Fundament gelegt werden",
+    "foundation_to_foundation": "Von Fundament zu Fundament ist kein Verschieben möglich",
+    "waste_to_tableau_one_card": "Es kann nur 1 Karte von der Ablage aufs Tableau gelegt werden",
+    "waste_to_tableau_ok": "Karte von der Ablage auf Tableau T{dst} gelegt",
+    "waste_to_tableau_bad": "Die Ablagekarte kann nicht auf diesen Tableau-Stapel gelegt werden",
+    "no_face_up": "Keine aufgedeckten Karten zum Verschieben",
+    "tableau_to_tableau_ok": "{count} Karte(n) vom Tableau T{src} auf T{dst} verschoben",
+    "tableau_to_tableau_bad": "{count} Karte(n) können nicht von T{src} auf T{dst} verschoben werden",
+    "foundation_to_tableau_one_card": "Es kann nur 1 Karte vom Fundament aufs Tableau gelegt werden",
+    "foundation_empty": "Fundament F{src} ist leer",
+    "foundation_to_tableau_ok": "Karte vom Fundament F{src} auf Tableau T{dst} gelegt",
+    "foundation_to_tableau_bad": "Die Fundamentkarte kann nicht auf Tableau T{dst} gelegt werden",
+    "to_waste_or_stock": "Auf Ablage oder Talon kann nicht verschoben werden"
+  },
+
+  "outcome": {
+    "forfeit": "Spiel aufgegeben. Endpunktzahl: {score} Karten in den Fundamenten.",
+    "won": "Glückwunsch! Du hast Klondike-Solitaire gewonnen!",
+    "turn_limit": "Spiel vorbei! Du hast das Maximum von {max_turns} Zügen erreicht. Punktzahl: {score} Karten in den Fundamenten."
+  },
+
+  "board": {
+    "title": "=== KLONDIKE SOLITÄR ===",
+    "turn": "Zug: {turn}/{max_turns}",
+    "stock": "Talon: {stock} Karten",
+    "waste": "Ablage (W): {waste}",
+    "foundations_header": "Fundamente:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

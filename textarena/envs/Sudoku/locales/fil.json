@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id}. Ikaw ay naglalaro ng Sudoku.\nNarito ang kasalukuyang estado ng grid ng Sudoku. Ang bawat hilera ay may numero mula 1 hanggang 9, at ang bawat hanay ay may numero din mula 1 hanggang 9.\nAng mga blangkong cell ay kinakatawan ng '.', at ang mga pre-filled cell ay naglalaman ng mga digit mula 1 hanggang 9.\n\nKasalukuyang Grid ng Sudoku:\nAng iyong layunin ay upang punan ang mga blangkong cell sa 9x9 grid ng mga digit mula 1 hanggang 9 sa paraang:\n1. Ang bawat hilera ay naglalaman ng lahat ng mga digit mula 1 hanggang 9 nang walang paulit-ulit.\n2. Ang bawat hanay ay naglalaman ng lahat ng mga digit mula 1 hanggang 9 nang walang paulit-ulit.\n3. Ang bawat isa sa siyam na 3x3 subgrid ay naglalaman ng lahat ng mga digit mula 1 hanggang 9 nang walang paulit-ulit.\n\nMga Patakaran at Tagubilin:\n1. **Huwag magsulat** sa mga paunang numero na ibinigay sa grid.\n2. **Punan lamang** ang mga blangkong cell na kinakatawan ng '.'.\n3. Maaari kang tumugon sa anumang paraan na gusto mo, ngunit siguraduhin na ang iyong tugon ay may format ng '[hilera hanay numero]'.\n4. **Siguraduhin** na ang iyong galaw ay hindi lumalabag sa mga patakaran ng Sudoku. Ang mga hindi wastong galaw ay magreresulta sa mga parusa.\nHalimbawa:\n- **Wastong Galaw**:\n  - Grid Snippet Bago ang Galaw:\n  \n  - Galaw: `[5 3 7]`\n  - Paliwanag: Ang paglalagay ng 7 sa hilera 5, hanay 3 ay hindi lumalabag sa anumang patakaran ng Sudoku.\n\n- **Hindi Wastong Galaw** (Pagsulat sa pre-filled cell):\n  - Grid Snippet Bago ang Galaw:\n  \n  - Galaw: `[1 1 9]`\n  - Paliwanag: Ang cell (1,1) ay nakalagyan na ng 5. Hindi mo ito maaaring baguhin.\n\n- **Hindi Wastong Galaw** (Pagsuway sa mga patakaran ng Sudoku):\n  - Grid Snippet Bago ang Galaw:\n  \n  - Galaw: `[1 3 5]`\n  - Paliwanag: Ang paglalagay ng 5 sa hilera 1, hanay 3 ay lumalabag sa patakaran dahil ang 5 ay nasa hilera 1 na.\n\nAng kasaysayan ng iyong mga galaw at pag-iisip ay idadagdag habang naglalaro ka ng higit pang mga round. Gamitin ang kasaysayan ng iyong galaw upang mapahusay ang iyong pagpapasya sa pamamagitan ng pag-iwas sa mga galaw na nasubukan mo na. Good luck!\n\n"
+  },
+  "board": {
+    "game_board": "Board ng Laro:\n{board}",
+    "board_state": "Estado ng Board: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hindi wastong format ng galaw. Ang Player {player_id} ay hindi tumugon ng wastong 'hilera hanay numero'.",
+    "out_of_bounds": "Hindi wastong galaw. Ang Player {player_id} ay sumubok na ilagay ang {num} sa ({row}, {col}), na nasa labas ng sakop.",
+    "overwrite": "Hindi wastong galaw. Ang Player {player_id} ay sumubok na magsulat sa pre-filled cell ({row}, {col}).",
+    "violates_rules": "Hindi wastong galaw. Ang Player {player_id} ay sumubok na ilagay ang {num} sa ({row}, {col}), na lumalabag sa mga patakaran ng Sudoku."
+  },
+  "outcome": {
+    "win": "Binabati kita! Ang Player {player_id} ay nakumpleto ang puzzle ng Sudoku.",
+    "turn_limit": "Ang limitasyon ng paggalaw ay naabot. Tama mong pinunan ang {percent}% ng mga blangkong cell."
+  }
+}

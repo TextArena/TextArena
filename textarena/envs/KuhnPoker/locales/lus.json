@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "I Kuhn Poker khel {max_rounds} round khelhnaah Player {player_id} i ni.\nKhel Dan:\n- Kuhn Poker hian J, Q, K (J hniam ber, K sang ber) nei 3-card deck a hmang\n- Player tinin {ante} chip an pe a, round tinah card 1 an dawng (card te hi chhut thlak theih lohvin an sem darh a, i khingpui nen card in ang thei lo)\n- Khelh hi {max_rounds} round chhung a awh\n- Round zawng zawng zawh hnuah chip ngah zawk zawk chuan a chak\nKhelh Dan (Action):\n- '[check]': Bet awm loh chuan pass (bet loh chuan)\n- '[bet]': Pot-ah chip 1 belh (bet awm loh chuan)\n- '[call]': Khingpui bet ang khat aia pot-ah chip 1 belh\n- '[fold]': I kut kaipui a, khingpuiin pot a la"
+  },
+  "init_round": {
+    "round_start": "### Round {current_round} tan a ni. Round {max_rounds} awmzia. I card hi: '{player_card}'",
+    "available_actions": "I tih theihte chu: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action tur hi [Check], [Bet], [Call], [Fold] a ni.",
+    "not_legal": "Action chu {legal_actions} a ni tûr."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, khelh tur a theh lut: '[{move}]'.",
+    "valid_actions": "I tih theihte chu: {legal_actions}.",
+    "round_summary": "{reason} Hnathawh te: Player 0: '{player_0_chips}'; Player 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Player {winner}'s {winner_card} beats Player {loser}'s {loser_card}. Player {winner} wins pot of {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "{max_rounds} round tawp lamah player pahnih chuan chip an nei ve tho a.",
+    "round_win": "Player {player_id} chuan a fold ta.",
+    "winner_player0": "Player 0 chuan {max_rounds} round zawng zawngah chip a neih tam zawk avangin hnehna a chang.",
+    "winner_player1": "Player 1 chuan {max_rounds} round tawp lama chip a neih tam zawk avangin hnehna a chang."
+  }
+}

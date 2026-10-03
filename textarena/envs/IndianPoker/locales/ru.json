@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Вы — Игрок {player_id} в игре Индийский Покер.\n- Колода из 52 карт; вы видите только карту противника.\n- Анте {ante} фишки(ек) каждый раунд, всего {max_rounds} раунд(ов).\n- Допустимые ходы: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X — положительное целое число ≤ количества ваших фишек.)\n- Высшая скрытая карта выигрывает банк в шоудауне.\n"
+  },
+  "round": {
+    "announce": "### Раунд {current_round}/{max_rounds}\nКарта противника: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Укажите ровно ОДНО действие в скобках, например '[check]', '[bet 2]', '[call]', '[raise 3]' или '[fold]'.",
+    "cannot_check": "Нельзя [check] — перед вами ставка.",
+    "amount_min": "Сумма ставки/повышения должна быть ≥ 1.",
+    "cannot_bet": "Нельзя [bet] — необходимо [call] / [raise] / [fold].",
+    "nothing_to_call": "Нечего коллить; вы можете [check] вместо этого.",
+    "no_bet_to_raise": "Используйте [bet X], чтобы открыть; нет ставки, которую можно повысить.",
+    "insufficient": "Недостаточно фишек для этого действия."
+  },
+  "game_action": {
+    "action": "Игрок {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (стоимость {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Ваши возможные действия: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Банк {pot} → Игрок {winner}. (Банкроллы P0:{p0}, P1:{p1})",
+    "folded": "Игрок {player_id} сдался.",
+    "showdown_win": "Шоудаун: {card_win} побеждает {card_lose}.",
+    "showdown_tie": "Ничья в шоудауне: обе карты {card}. Банк разделен — каждый получает {split}."
+  },
+  "outcome": {
+    "p0_wins": "Игрок 0 выигрывает ({bank0} > {bank1})",
+    "p1_wins": "Игрок 1 выигрывает ({bank1} > {bank0})",
+    "draw": "Равное количество фишек после всех раундов"
+  }
+}

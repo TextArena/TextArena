@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Geam Briscola air a thòisich! Suith thrumpa: {trump_suit} (Càrdaichean thrumpa: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Tha thu a' cluich Briscola - Cluichiche {player_id}.\nAmas: Cheartan a bhuannachadh agus a' cruinneachadh a' mhòr-chuid phuingean (120 phuingean iomlan sa deck).\nPhuingean Càrda: A=11, 3=10, K=4, Q=3, J=2, eile=0\nCumhachd Càrda: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nCàrdaichean thrumpa a' bualadh càrdaichean neo-thrumpa, gun chumhachd sam bith.\n\nGnìomh: '[play X]' far a bheil X na shiostam (1-{max_pos}) a' chàrda sa làimh agad"
+  },
+  "hand": {
+    "none": "Gun chairtean.",
+    "empty": "Chan eil cairtean ann an làimh.",
+    "header": "Do làmh:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP) Tha mi a 'smaoineachadh gu bheil e coltach."
+  },
+  "trick": {
+    "empty": "Chan eil cairtean a chluich fhathast an cleas seo.",
+    "header": "Trèic gnàthach:",
+    "line": "  Cluichiche {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Cluichiche {player_id}: {points} phuingean",
+    "trump_info": "Suidheachadh Trump: {trump_suit}",
+    "trump_info_deck": "Suith thrumpa: {trump_suit} | Càrdaichean air fhàgail sa deck: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nScòran: {scores}\n{trump_info}\n\nCluich càrda aig [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Cleachd [play X] far a bheil X na shuidheachadh cairt (1, 2, 3, msaa)",
+    "out_of_range": "Innseadh ceàrr. Tha {count} càrdaichean agad (1-{count})"
+  },
+  "action": {
+    "played": "Cluichiche {player_id} a' cluich {card}",
+    "trick_win": "Cluichiche {winner} a' gluasad a' cheart le {card} agus a' dol a dh'fhàgail {points} phuingean!"
+  },
+  "outcome": {
+    "head": "Crìoch an geama! Tha cluicheadair {winner} a' buannachadh le {points} puingean!\n\nSgòran Deireannach:\n{scores}",
+    "player_line": "Cluichiche {player_id}: {points} phuingean ({tricks} cheartan)\n"
+  }
+}

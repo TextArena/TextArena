@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Dɔwɔla si wɔ na {width}x{height} grid.\nEfe dɔwɔla {player_id}. Nya siwo menya: '[up]' '[down]' '[left]' '[right]' alɔga wɔ 'w/s/a/d'.\nNusɔsrɔ si: ku nyɔnuwo hɛ. Trails katɛ ɖo; wɔ ɖo ɖi ɖo; anyi siwo wɔ ɖo ku sia."
+  },
+  "board": {
+    "current": "Dɔdzikpɔha si li fifia: {board}",
+    "after_moves": "Ne woƒo agba ɖeka le ɣeyiɣi ma ke me la, kpea: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Fefewɔla {player_id} ku le asitɔtrɔ madzemadze ta."
+  },
+  "outcome": {
+    "survived_win": "Fefewɔla {player_id} tsi agbe; ame susɔeawo katã dze anyi.",
+    "all_crashed": "Amesiwo katã nɔ fefe ma wɔm la dze anyi le ɣeyiɣi ɖeka me.",
+    "outlived": "Ame ku aƒe ame bubu.",
+    "all_dead": "Fefewɔla ɖesiaɖe ku.",
+    "turn_limit": "Ne wotrɔa asi le eŋu wòde akpa aɖe dzi la, amesi tsi agbe didi wu lae ɖu.",
+    "ranking": "{reason} Kɔmitii kple kɔmitiiwo katɛ (dɔwɔla→xɔxɔla): {groups}"
+  }
+}

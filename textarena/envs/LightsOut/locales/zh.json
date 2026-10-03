@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "欢迎来到 Lights Out！你有一个 {size}×{size} 的灯光网格。\n你的目标是关闭所有灯光（关闭状态用 '.' 表示）。\n按下一盏灯时，它自身以及相邻的灯（上/下/左/右）都会切换状态。\n输入 [row col] 来按下一盏灯（索引从 0 开始，因此有效范围为 0-{max_index}）。\n你最多可以使用 {max_turns} 次移动来解开谜题。\n图例：'O' = 灯亮，'.' = 灯灭"
+  },
+  "board": {
+    "current_state": "当前网格状态（第 {moves_made} 步，剩余 {moves_left} 步，已完成 {completion}%）：\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "操作必须采用 [row col] 格式，其中 row 和 col 是 0 到 {max_index} 之间的整数。",
+    "out_of_range": "坐标必须在 0 到 {max_index} 之间。你输入了 [{row},{col}]。"
+  },
+  "outcome": {
+    "win": "恭喜！你用了 {moves_used} 步解开了谜题！",
+    "loss": "游戏结束！你用完了全部 {max_turns} 步，但未能解开谜题。最终完成度：{completion}%\n最终状态：\n{grid}"
+  }
+}

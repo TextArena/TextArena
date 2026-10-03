@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in 'n Herhaalde Gevangene se Dilemma wat {num_rounds} rondtes strek.\n\nSpelstruktuur:\n- Voor elke besluit het jy {total_conversation_rounds} beurte om vryelik te kommunikeer.\n- Daarna kies beide spelers gelyktydig om saam te werk of te bedrieg.\n\nBeloningsmatriks (vas elke ronde):\n- Beide Samewerk ➜ elkeen {cooperate_reward}\n- Beide Bedrieg ➜ elkeen {mutual_defect_reward}\n- Een Bedrieg, een Samewerk ➜ Bedrieër {defect_reward}, Samewerker {sucker_reward}\n\nHoe om te Speel:\n- Tydens gesprek: tik enige teks wat jy wil.\n- Tydens besluitfase: sluit '[Cooperate]' of '[Defect]' in (nie-hooflettergevoelig). Jy mag ekstra teks voor/na die teken byvoeg."
+  },
+  "phases": {
+    "conversation_finished": "Gesprek voltooi vir ronde {round}. Antwoord asseblief met '[Cooperate]' of '[Defect]' binne \\boxed{{}}.",
+    "starting_round": "--- Begin van Ronde {round} ---",
+    "round_summary": "Ronde {round} resultate:\n{outcome}\nSpeler 0 het {r0} verdien (totaal {score_0}), Speler 1 het {r1} verdien (totaal {score_1})."
+  },
+  "outcome": {
+    "winner": "Speler {winner} wen {win_score} - {lose_score}.",
+    "draw": "Gelykop! Beide spelers het {s0} behaal.",
+    "round_both_cooperate": "Beide spelers het saamgewerk.",
+    "round_both_defect": "Beide spelers het bedrieg.",
+    "round_p0_cooperates_p1_defects": "Speler 0 het saamgewerk, Speler 1 het bedrieg.",
+    "round_p0_defects_p1_cooperates": "Speler 0 het bedrieg, Speler 1 het saamgewerk."
+  }
+}

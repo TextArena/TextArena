@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Nanhte Player {player_id} kaw na mi Spite and Malice kaw shangai sha 2 kaw na Player ni. Nanhte a lam hte maren sha kaw na payoff pile kaw shangai sha hkring.\n\n### Shangai Sha Htingbu:\n- A lam hte maren sha kaw na payoff pile kaw shangai sha hkring na matu center piles hte sha kaw na cards sha play kaw na.\n- Nanhte sha kaw na cards sha play kaw na 3 kaw na sources hte na:\n  1. Nanhte **lak kaw** (nanhte kaw na turn hte start kaw na up to 5 cards lak kaw hte).\n  2. Nanhte **payoff pile kaw top card**.\n  3. Nanhte **discard piles kaw top card**.\n\n### Play Sha Htingbu:\n- Nanhte sha kaw na card sha play kaw na center pile hte na matu **kaw na rank htingbu** kaw na top card hte kaw na (center piles kaw start kaw na Ace hte kaw na Queen; Kings kaw na wild - kaw na card hte kaw na play kaw na matu kaw na rank sequence hte kaw na change kaw na. Kaja kaw na King kaw na use kaw na 4 hte kaw na, kaja kaw na King kaw na ranked 5 hte kaw na next card kaw na 6 hte kaw na).\n- Nanhte sha kaw na card sha play kaw na kaw na, nanhte **discard kaw na card** kaw na discard piles hte kaw na nanhte turn hte end kaw na.\n- Kaja kaw na center pile kaw na Queen kaw na, kaja kaw na cleared kaw na.\n- Rank order kaw na: A=1, 2=2, ..., 9=9, J=10, Q=11, K kaw na wild.\n\n### Actions:\n1. **Draw**: Nanhte turn hte start kaw na, draw cards kaw na fill kaw na lak kaw up to 5 cards. Enter **[draw]** kaw na begin kaw na.\n2. **Play kaw na Card**: Card kaw na play kaw na, specify kaw na card hte center pile hte na matu: **[play A♠ 0]** (kaja kaw na 'A♠' kaw na card hte '0' kaw na center pile index).\n3. **Discard**: Nanhte sha kaw na card sha play kaw na kaw na, discard kaw na card kaw na lak kaw hte discard pile kaw na nanhte turn hte end kaw na. Enter **[discard A♠ 1]** (kaja kaw na 'A♠' kaw na card hte '1' kaw na discard pile index). Kaja kaw na note kaw na, nanhte kaw na discard kaw na card kaw na payoff pile hte kaw na. Nanhte kaw na discard kaw na cards kaw na lak kaw hte.\n\n"
+  },
+  "board": {
+    "current_board": "Hkum tsun:\n\n{board}\nHkrai hkrai lu hkum: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Center Piles (Mung Daw Htinggaw Ni) -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Player {player_id} kaw View ---\n",
+    "payoff": "{observation}Payoff Pile (Top Card): {top_card}, Payoff Pile Length: {payoff_length}\n",
+    "hand": "{observation}Lata: {hand} hpe lata ai.",
+    "discard": "{observation}Discard Piles: {discard}\n",
+    "empty": "N nga ai."
+  },
+  "game_message": {
+    "no_cards_left": "Hpang shat kasha ai hte kasha gaw nlu ai. Ngai hpe tsun ai gaw:\n  1. Nang **lakap**.\n  2. Nang **hkrat sumla kasha u hpang shat**.\n  3. Nang **kasha pawt kasha hpang shat shagu**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "N jaw ai shamu shamawt hkrang. {player_id} ginsup wa gaw, kadun lapran hta ka da ai hkrak re ai sharu shatsang n galaw sai.",
+    "invalid_play": "Hkrai lu hkum hpyen. Hkum u {player_id} hkrai lu {card} hkum tsun hpang {index} hta.",
+    "discard_from_payoff": "N jaw ai discard. Player {player_id} gaw, payoff pile kaw na card hpe kabai kau mayu sai.",
+    "discard_not_in_hand": "N jaw ai discard. Player {player_id} gaw lata hta n rawng ai card hpe kabai kau mayu sai.",
+    "wrong_move_type": "N jaw ai shamu shamawt ladat. ginsup ninghkring {player_id} gaw n tara ai shamoq hte mahtai n jaw da sai."
+  },
+  "game_action": {
+    "you_drew": "Nang gaw ka ni hpe lata ai.",
+    "opponent_drew": "Player {player_id} gaw ka ni hpe la ai.",
+    "you_played": "Nanhte {card} center pile {index} a play kawng.",
+    "opponent_played": "Hkum u {player_id} hkrai lu {card} hkum tsun hpang {index} hta.",
+    "you_discarded": "Nanhte {card} discard pile {index} a discard kawng, turn finish kawng. Player {next_player_id} next kawng.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Player {current_player} kaw na payoff pile kaw na finished! Player {current_player} kaw na wins!",
+    "deadlock_player_0": "Hkrai lu hkum hkrat! Hkum u 0 hkrai lu {player_0_payoff} hkum u hpang hkrat, Hkum u 1 hkrai lu {player_1_payoff} hkum u hpang hpe.",
+    "deadlock_player_1": "Hkrai lu hkum hkrat! Hkum u 1 hkrai lu {player_1_payoff} hkum u hpang hkrat, Hkum u 0 hkrai lu {player_0_payoff} hkum u hpang hpe.",
+    "deadlock_tie": "Deadlock kaw na reached kaw na tie! Kaja kaw na players kaw na {player_0_payoff} cards kaw na remaining. Player {current_player} kaw na wins kaw na default."
+  }
+}

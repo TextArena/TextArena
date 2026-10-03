@@ -1,0 +1,32 @@
+{
+  "_comment": "Berkas lokal ThreePlayerTicTacToe. JANGAN menerjemahkan kunci (sisi kiri). Hanya terjemahkan nilai (sisi kanan). Simpan setiap {placeholder} persis seperti yang ada.",
+  "_slots": {
+    "{player_id}": "Nomor pemain, misalnya 0, 1 atau 2",
+    "{symbol}": "Tanda pemain, salah satu dari A, B atau C",
+    "{cell}": "Nomor sel papan",
+    "{max_cell}": "Nomor sel yang paling tinggi (board_size^2 - 1)",
+    "{row}": "Indeks baris papan tempat tanda ditempatkan",
+    "{col}": "Indeks kolom papan tempat tanda ditempatkan",
+    "{board}": "Papan ASCII yang dirender (jangan diterjemahkan)",
+    "{moves}": "Daftar koma-terpisah dari token gerakan yang tersedia seperti '[4]' (jangan diterjemahkan)"
+  },
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam Tic Tac Toe Tiga Pemain.\nTanda Anda adalah '{symbol}'.\nAnda bergantian menempatkan tanda Anda pada papan 5x5 untuk membentuk garis empat.\nGaris bisa horizontal, vertikal, atau diagonal.\nKirim gerakan Anda menggunakan format '[4]' untuk menandai sel 4."
+  },
+  "board": {
+    "current_board": "Papan Saat Ini:\n\n{board}\n\nGerakan Tersedia: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format gerakan tidak valid. Gunakan '[cell]' di mana cell adalah 0-{max_cell}.",
+    "out_of_range": "Nomor sel tidak valid: {cell}. Harus antara 0 dan {max_cell}.",
+    "already_occupied": "Sel {cell} sudah terisi.",
+    "made_invalid": "Pemain {player_id} melakukan gerakan yang tidak valid"
+  },
+  "game_action": {
+    "placed": "Pemain {player_id} menempatkan tanda mereka ({symbol}) di lapangan ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Pemain {player_id} ({symbol}) menang!",
+    "draw": "Permainan seri!"
+  }
+}

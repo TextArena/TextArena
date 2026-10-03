@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Colonel Blotto'da {role}'siniz.\nHedefiniz, rakibinizden daha fazla tur kazanmaktır.\nHer turda, {field_names} alanlarına tam olarak {num_total_units} birim dağıtın.\nBir alana daha fazla birim dağıtan oyuncu o alanı kazanır ve daha fazla alan kazanan oyuncu turu kazanır.\nÖrneğin, '[A7 B7 C6]' A'ya 7 birim, B'ye 7 birim ve C'ye 6 birim dağıtır.",
+    "commander_alpha": "Komutan Alfa",
+    "commander_beta": "Komutan Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Tur {current_round}/{num_rounds} ===\nKazanılan Turlar - Komutan Alfa: {alpha_score}, Komutan Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nTur {current_round}\nKomutan Alfa dağıttı: {p0_allocations}\nKomutan Beta dağıttı: {p1_allocations}\n",
+    "winner_alpha": "{message}Kazanan: Komutan Alfa",
+    "winner_beta": "{message}Kazanan: Komutan Beta",
+    "tie": "{message}Berabere!"
+  },
+  "invalid_move": {
+    "wrong_format": "Geçersiz girdi formatı. Kullanım: A:5, B:10, C:5",
+    "invalid_field": "Geçersiz alan adı(ları). Geçerli alanlar: {field_names}",
+    "wrong_allocation_value": "Tüm dağıtımlar negatif olmayan tam sayı olmalıdır.",
+    "incorrect_total_units": "Tam olarak {num_total_units} birim dağıtmalısınız. Mevcut toplam: {current_sum}",
+    "good_allocations": "Dağıtım iyidir."
+  },
+  "outcome": {
+    "winner_alpha": "Komutan Alfa {score_0}-{score_1} kazandı {num_rounds} tur sonra!",
+    "winner_beta": "Komutan Beta {score_1}-{score_0} kazandı {num_rounds} tur sonra!",
+    "draw": "Oyun {score_0}-{score_1} berabere bitti {num_rounds} tur sonra!",
+    "early_winner_alpha": "Komutan Alfa {scores_0}-{scores_1} kazandı (çoğunluk sağlandı)!",
+    "early_winner_beta": "Komutan Beta {scores_1}-{scores_0} kazandı (çoğunluk sağlandı)!"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "ທ່ານກໍາລັງຫຼີ້ນກ໊ອຟ (ເກມບັດ) - ຜູ້ຫຼິ້ນ {player_id} ເປົ້າຫມາຍ: ໄດ້ຮັບຄະແນນລວມຕ່ໍາທີ່ສຸດໃນຮອບດຽວນີ້. ຖ້າຄໍລໍາມີມູນຄ່າດຽວກັນ, ພວກເຂົາຈະຖືກລວມເປັນ 0. ມູນຄ່າບັດ: A = 1, 2-10 = ມູນຄ່າຫນ້າ, J / Q = 10, K = 0 ການກະ ທໍາ (ໃຊ້ແຖບຄັດ: - '[draw]' - ດຶງຈາກຊັ້ນ - '[take]' - ເອົາຈາກຖິ້ມຖິ້ມ - '[swap X Y]' - ແລກປ່ຽນບັດທີ່ຖືກຖ່າຍດ້ວຍ ຕໍາ ແຫນ່ງ X (ແຖວ) Y (ຄໍລໍາ) - '[discard]' - ຖິ້ມບັດທີ່ຖືກຖ່າຍ."
+  },
+  "board": {
+    "drew": "ທ່ານໄດ້ຈັບ: {card}\nຕອນນີ້ທ່ານຕ້ອງ [swap X Y] ຫຼື [discard] ມັນ.",
+    "took": "ທ່ານໄດ້: {card} ຈາກຖິ້ມ pile ທ່ານຕ້ອງ [swap X Y] ກັບມັນ (ບໍ່ສາມາດຖິ້ມ).",
+    "peeked": "ທ່ານໄດ້ຊົມທີ່ຢູ່ ({row},{col}): {card}",
+    "turn_view": "ມືຂອງທ່ານ: {hand} ຖິ້ມຖິ້ມ: {discard} {options}",
+    "none": "ບໍ່ມີ"
+  },
+  "options": {
+    "final_turns": "ການຫັນສຸດທ້າຍ! ທາງເລືອກຂອງທ່ານ: [draw], [take], [peek X Y]",
+    "draw": "ທາງເລືອກຂອງທ່ານ: [draw], [take]",
+    "must_swap": "ທ່ານຕ້ອງ: [swap X Y] (ບໍ່ສາມາດຖິ້ມບັດຈາກຖິ້ມຖິ້ມ)",
+    "swap_or_discard": "ທ່ານຕ້ອງ: [swap X Y] ຫຼື [discard]"
+  },
+  "hand": {
+    "no_cards": "ບໍ່ມີບັດ",
+    "header": "Col: 1 2 3",
+    "row": "ແຖວ {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "ນັກເຕະ {pid} ແລກປ່ຽນ {new} ກັບ {old} ຢູ່ທີ່ ຕໍາ ແຫນ່ງ ({row},{col})",
+    "discarded": "ຜູ້ຫຼິ້ນ {pid} ຂາດ {card}"
+  },
+  "message": {
+    "deck_empty": "ເຮືອເປົ່າແລ້ວ ເກມສິ້ນສຸດລົງທັນທີ",
+    "knocked": "Player {pid} ຖືກຕິ! ກະສົມຫຼິ້ນອື່ນໆຂອງທ່ານໄດ້ຮັບເງິນເພີ່ມອີກ 1 ຄັ້ງ.",
+    "final_round": "ນັກເຕະ {pid} {reason}! ນັກເຕະຄົນອື່ນໄດ້ຮັບອີກຫນຶ່ງຄັ້ງ."
+  },
+  "reason": {
+    "all_revealed": "ໄດ້ເປີດບັດທັງຫມົດ"
+  },
+  "invalid": {
+    "wrong_action": "ໃຊ້ຢ່າງຖືກຕ້ອງຫນຶ່ງການກະ ທໍາ ທີ່ຖືກກໍານົດໄວ້ໃນແຈ: [draw], [take], [swap X Y], [discard], [knock], ຫຼື [peek X Y]",
+    "discard_empty": "ຊຸດຂາດວ່າງ!",
+    "must_draw_first": "ທ່ານຕ້ອງທໍາອິດ [draw], [take], [knock], ຫຼື [peek X Y]",
+    "cannot_discard_taken": "ທ່ານບໍ່ສາມາດຖິ້ມບັດທີ່ຖືກຖິ້ມຈາກກະຕ່າຖິ້ມ. ທ່ານຕ້ອງແລກປ່ຽນມັນ.",
+    "have_drawn_card": "ທ່ານມີບາດຈັບ. ທ່ານຕ້ອງ [swap X Y] ຫຼື [discard] ມັນ.",
+    "need_drawn_swap": "ທ່ານຕ້ອງການບັດທີ່ຖືກຖ່າຍເພື່ອແລກປ່ຽນ.",
+    "need_drawn_discard": "ທ່ານຕ້ອງມີບາດຈັບກ່ອນຈະຂາດ.",
+    "out_of_bounds": "ສະຖານະການນອກຂອບເຂດ. ໃຊ້ແຖວ 1-{max_row}, ຄໍລໍາ 1-{max_col}",
+    "knock_with_card": "ທ່ານບໍ່ສາມາດຕີດ້ວຍບັດທີ່ຖືກຖອດອອກໄດ້. ໃຫ້ສໍາເລັດການປ່ຽນຂອງທ່ານກ່ອນ.",
+    "already_knocked": "ມີຄົນຫນຶ່ງໄດ້ຕີຮອບນີ້ແລ້ວ.",
+    "already_revealed": "ບັດນັ້ນຖືກເປີດເຜີຍແລ້ວ!"
+  },
+  "summary": {
+    "full": "ເກມສິ້ນສຸດ! ຜູ້ນ {winner} ຊະນະດ້ວຍຄະແນນຂອງ {score} ຄະແນນ! ຄະແນນສຸດທ້າຍ: {scores}",
+    "line": "ນັກເຕະ {pid}: {score} ຄະແນນ "
+  },
+  "board_str": {
+    "title": "=== ເກມກອຟ ===",
+    "discard": "ຊຸດຂາດ: {card}",
+    "knocked": "ນັກເຕະ {pid} ໄດ້ຕີ!",
+    "player_header": "ນັກເຕະ {pid} (ຄະແນນ: {score}):"
+  }
+}

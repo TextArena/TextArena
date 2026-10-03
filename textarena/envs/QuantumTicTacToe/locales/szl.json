@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jeżeś graczem {player_id} we Quantum Tic Tac Toe.\nTwůj symbol to '{symbol}', a twoje numery ruchů sům zawsze {parity} (np. X1, X3 abo O2, O4).\n\nCel: Wygraj utworzůnij linię ze trzech klasycznych znakůw (ze superpozycyji).\n\nJak grać:\n- We każdej turze umieść dwa spůkniynte znaki we dwůch różnych pustyj kwadratach używajůnc formatu '[a,b]'.\n- Te znaki sům splůtane, a mjanowane jak 'X1 / X1' abo 'O4 / O4'.\n- Niy możesz umieścić spůkniyntyj znakůw we kwadracie, kery już się zespolił (zesolidyfikował).\n\nReguła kollapse:\n- Jeśli twůj ruch utworzi cykl we grafie splůtań, to on automatycznie kollapse.\n- Każdy spůkniynty znak we cyklu przemjyni się we klasyczny znak we jednym ze dwůch położeń.\n- Wszelke zależne spůkniynte znaki tyż kollapse.\n\nZwycięstwo:\n- Gra kończy się, kej gracz mo trzi klasyczne znaki we rzyndzie.\n- Jeśli uobaj gracze dostůnij linię we tym samym kollapse, to ten s niższym maksymalnym numerem ruchu wygrywo.\n\nPrzikład ruchu: '[0,4]' umjeść spůkniynty znak we komůrkach 0 a 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Board:\n\n{board}\n\nWnůj swůj ruch jako '[a,b]', coby umjyścić kwantowy znak we dwůch mjyjscach."
+  },
+  "invalid_move": {
+    "wrong_format": "Niyprawidłowy format. Użyj \"[a,b]\".",
+    "invalid_cells": "Niyprawidłowe abo duplikowane indeksy kōmōrki.",
+    "already_solidified": "Jedna ze komórek je już zestalona."
+  },
+  "game_action": {
+    "placed": "Gracź {player_id} umjyścił swůj symbol we superpozycyji mjyndzy komůrkami {pos_a} a {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Zależno superpozycyjo rozwiōnzano. Komůrka ({r}, {c}) terozki je {symbol}.",
+    "last_cell_resolved": "Superpozycyjo za ostatńo komůrka rozwiōnzano. Komůrka ({r}, {c}) terozki je {symbol}.",
+    "superposition_resolved": "Superpozycyjo rozwiōnzano. Komůrka ({r}, {c}) terozki je {symbol}."
+  },
+  "outcome": {
+    "win": "Gracz {player_id} wygrywo z utrwalōnymi znakami!",
+    "draw": "Mecz je remis!"
+  }
+}

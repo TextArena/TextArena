@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS-lokaalitiedosto. ÄLÄ käännä avaimia (vasen puoli). Käännä vain arvot (oikea puoli).",
+  "_slots": {
+    "{player_id}": "Pelaajan numero, 0, 1 tai 2",
+    "{round}": "Nykyinen kierrosnumero, 1..13",
+    "{prize}": "Paljastetun palkintokortin etiketti (A, 2..10, J, Q, K) - älä käännä",
+    "{worth}": "Palkinnon kokonaisarvo mukaan lukien mahdollinen kantamispotti",
+    "{hand}": "Pelaajan jäljellä olevat kortit, esitetty sulkeissa olevina tokeneina kuten '[A]' '[2]' - älä käännä",
+    "{bids}": "Neutraali pilkulla erotettu lista pelatuista korteista kuten 'P0:10, P1:J, P2:Q' - älä käännä",
+    "{winner}": "Pelaajan numero, joka voitti kierroksen",
+    "{pot}": "Potti, joka myönnettiin tai siirrettiin tällä kierroksella",
+    "{scoreline}": "Neutraali juokseva pistetaulukko kuten 'P0:0  P1:0  P2:11' - älä käännä",
+    "{pid}": "Pelaajan numero, joka eliminoidaan",
+    "{scores}": "Lopulliset pisteet raakana pelaajan numeron ja pistemäärän kartoituksena - älä käännä"
+  },
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} Three-Player GOPS -pelissä.\n- Sinulla on 13 korttia A-K (jokainen tasan kerran).\n- Jokaisella kierroksella paljastetaan palkinto. Lähetä YKSI kortti kuten `[Q]`, `[10]`, `[2]` …\n- Korkein kortti voittaa palkinnon (+ mahdollinen kantamispotti). Tasapelit siirtävät palkinnon seuraavalle kierrokselle.\n- 13 kierroksen jälkeen korkein kokonaissumma voittaa. Virheelliset siirrot = eliminointi."
+  },
+  "round": {
+    "header": "### Kierros {round}/13 - Palkinto: {prize} (arvo {worth})",
+    "hand": "Jäljellä oleva käsi: {hand}"
+  },
+  "reveal": {
+    "win": "Tarjoukset » {bids} - Pelaaja {winner} voittaa {pot}.",
+    "tie": "Tarjoukset » {bids} - tasapeli, potti nyt {pot}.",
+    "scores": "Pisteet → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "toiminto vaatii sulkeissa olevan kortin kuten '[Q]'",
+    "bad_card": "kortti on jo käytetty tai virheellinen"
+  },
+  "elimination": {
+    "player": "Pelaaja {pid} eliminoidaan toistuvien virheellisten siirtojen jälkeen."
+  },
+  "outcome": {
+    "auto_win": "Kaksi pelaajaa eliminoidaan - automaattinen voitto.",
+    "final": "Lopulliset pisteet: {scores}"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "Datoteka s lokalizacijom za IteratedUltimatumGame. NE PREVODITE ključeve (lijeva strana). Samo prevodite vrijednosti (desna strana). Zadržite svaki {placeholder} točno kao što je; nemojte prevoditi akcijske tokenove [Offer: $X] / [Accept] / [Reject]. Zadržite simbol valute '$' i sve brojeve kao što su.",
+  "_slots": {
+    "{player_id}": "Broj igrača, 0 ili 1",
+    "{other_id}": "Broj drugog igrača, 1 ili 0",
+    "{num_rounds}": "Ukupan broj rundi",
+    "{pool}": "Iznos novca dostupan svake runde (broj)",
+    "{round_number}": "Trenutni broj runde",
+    "{proposer_id}": "Broj igrača koji predlaže, 0 ili 1",
+    "{responder_id}": "Broj igrača koji odgovara, 0 ili 1",
+    "{offer}": "Ponuda (broj)",
+    "{keep}": "Iznos koji predlagač zadržava (broj)",
+    "{proposer_gain}": "Novac koji je predlagač dobio ovoj rundi (broj)",
+    "{responder_gain}": "Novac koji je odgovaratelj dobio ovoj rundi (broj)",
+    "{total_0}": "Ukupni iznos igrača 0 (broj)",
+    "{total_1}": "Ukupni iznos igrača 1 (broj)",
+    "{winner}": "Broj pobjedničkog igrača",
+    "{loser}": "Broj gubitničkog igrača",
+    "{winner_total}": "Ukupni iznos pobjednika (broj)",
+    "{loser_total}": "Ukupni iznos gubitnika (broj)",
+    "{total}": "Ukupni iznos svakog igrača pri izjednačenju (broj)"
+  },
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id}, koji igra {num_rounds} rundi Iterated Ultimatum Game.\nImate ${pool} za podijeliti ovu rundu između sebe i Igrača {other_id}.\n\nPredlagač:\n  - Napravite ponudu: [Offer: $X] (0 <= X <= pool)\n  - Ako se prihvati → Vi dobivate $(pool - X), drugi igrač dobiva $X\n  - Ako se odbije → Oboje dobivate $0\n  - Primjer: [Offer: $3]  ili  'Mislim da je ovo pošteno. [Offer: $5]'\n\nOdgovaratelj:\n  - Odlučite o ponudi s [Accept] ili [Reject]\n  - Primjer: 'Čini se razumno. [Accept]'\n            'Previše nepošteno. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Runda {round_number} počinje! ---\nIgrač {proposer_id} je predlagač, Igrač {responder_id} je odgovaratelj.",
+    "offer": "Runda {round_number}: Igrač {proposer_id} nudi ${offer} Igraču {responder_id} (zadržavajući ${keep}).",
+    "accepted": "Igrač {responder_id} je prihvatio! Runda {round_number} dobitci: Igrač {proposer_id} +${proposer_gain}, Igrač {responder_id} +${responder_gain}. Novi ukupni iznosi: Igrač 0: ${total_0}, Igrač 1: ${total_1}.",
+    "rejected": "Igrač {responder_id} je odbio ponudu! Runda {round_number} dobitci: Oboje igrača +$0. Ukupni iznosi ostaju: Igrač 0: ${total_0}, Igrač 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Predlagač mora napraviti ponudu koristeći format [Offer: $X].",
+    "bad_integer": "Iznos ponude mora biti valjani cijeli broj.",
+    "out_of_range": "Ponuda mora biti između $0 i ${pool}.",
+    "no_current_offer": "Nema trenutne ponude za odgovoriti.",
+    "accept_or_reject": "Odgovaratelj mora ili [Accept] ili [Reject] ponudu."
+  },
+  "outcome": {
+    "win": "Igrač {winner} je pobijedio s ukupnim iznosom ${winner_total} protiv Igrača {loser} koji ima ${loser_total}.",
+    "draw": "Izjednačeno! Oboje igrača su završili s ukupnim iznosom ${total}."
+  }
+}

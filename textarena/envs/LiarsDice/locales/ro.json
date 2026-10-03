@@ -1,0 +1,55 @@
+{
+  "_comment": "Șiruri de caractere pentru interfața utilizatorului în Liar's Dice. Tokenurile de acțiune între paranteze ('[Bid: X, Y]', '[Call]'), indicii jucătorilor, valorile fețelor zarurilor, cantitățile și numărările sunt sloturi neutre și nu trebuie niciodată traduse.",
+  "_slots": {
+    "player_id": "indicele jucătorului (număr întreg)",
+    "num_players": "numărul de jucători în joc (număr întreg)",
+    "dice_summary": "rezumat pre-rendat al numărului de zaruri rămase pentru fiecare jucător, unite prin '; '",
+    "your_dice": "listă pre-rendată a valorilor fețelor zarurilor jucătorului curent, unite prin virgulă",
+    "p": "indicele jucătorului (număr întreg)",
+    "d": "numărul de zaruri rămase pentru acel jucător (număr întreg)",
+    "current_player_id": "indicele jucătorului care a chemat (număr întreg)",
+    "face_value": "valoarea feței zarului care este numărată (1-6)",
+    "count": "numărul real de zaruri care se potrivesc (număr întreg)",
+    "quantity": "cantitatea licitației (număr întreg)",
+    "loser_id": "indicele jucătorului care pierde un zar (număr întreg)",
+    "new_quantity": "cantitatea licitației care tocmai a fost trimisă (număr întreg)",
+    "current_quantity": "cantitatea curentă a licitației (număr întreg)",
+    "new_face_value": "valoarea feței zarului care tocmai a fost trimisă (număr întreg)",
+    "current_face_value": "valoarea curentă a feței zarului (număr întreg)",
+    "action": "șirul de caractere al acțiunii brute trimise de jucător",
+    "reason": "motivul respingerii licitației",
+    "winner": "indicele jucătorului care câștigă (număr întreg)",
+    "final_ranking": "listă de indici ai jucătorilor de la primul eliminat la câștigător"
+  },
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} într-un joc de Liar's Dice cu {num_players} jucători.\nReguli:\n- La rândul dvs., puteți fie:\n  1) Faceți o nouă ofertă cu o cantitate sau o valoare a feței mai mare (sau ambele) decât oferta curentă; adică '[Bid: 3, 4]',\n  2) Chemarea ultimei oferte prin tastarea '[Call]'.\n\nDacă chemați:\n  - Dacă numărul real al acestei valori a feței printre toate zarurile este mai mic decât oferta, ultimul ofertant pierde un zar.\n  - Altfel, chemătorul pierde un zar.\nUn jucător care ajunge la 0 zaruri este eliminat. Ultimul jucător rămas câștigă."
+  },
+  "board": {
+    "per_player": "\tJucător {p}: {d}",
+    "new_round": "\nNouă rundă - Zaruri rămase: {dice_summary}\nZarurile dvs. curente sunt: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Jucătorul {current_player_id} cheamă! Numărul real al feței {face_value} este {count}, care este MAI MIC decât {quantity}.\nJucătorul {loser_id} (ultimul ofertant) pierde un zar.",
+    "caller_loses": "Jucătorul {current_player_id} cheamă! Numărul real al feței {face_value} este {count}, care este >= {quantity}.\nJucătorul {loser_id} (chemătorul) pierde un zar."
+  },
+  "action": {
+    "bid_announce": "Jucătorul {player_id} oferă {quantity} din fața {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Chemare făcută fără o ofertă anterioară.",
+    "invalid_bid": "Ofertă nevalidă: {reason}",
+    "not_recognized": "Acțiunea nu este recunoscută ca fiind o '[Bid: X, Y]' sau '[Call]' validă. Acțiune trimisă: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Noua cantitate {new_quantity} este mai mică decât cea curentă {current_quantity}.",
+    "face_lower": "Noua valoare a feței {new_face_value} este mai mică decât cea curentă {current_face_value}.",
+    "identical": "Oferta este identică cu oferta curentă.",
+    "face_range": "Valoarea feței trebuie să fie între 1 și 6."
+  },
+  "message": {
+    "eliminated_invalid": "Jucătorul {player_id} a fost eliminat din cauza unei mișcări nevalide."
+  },
+  "outcome": {
+    "win": "Jucătorul {winner} câștigă! Clasament final: {final_ranking}"
+  }
+}

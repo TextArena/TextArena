@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Uri gukina Golf (Imikino ya Kadi) - Umukino {player_id}.\nItegeko: Ureke amafaranga ya chini mu mukino umwe.\nIkiwa koloni zifanana, zongerwa ku ngufu 0.\nIbidandaro: A=1, 2-10=ibidandaro, J/Q=10, K=0\n\nImikorere (tumye ibara vyawe):\n- '[draw]' - Tara ku kadi\n- '[take]' - Tora ku rutonde rw'icye\n- '[swap X Y]' - Badanya ikaro na ngozo X (intara) Y (koloni)\n- '[discard]' - Cye ikaro"
+  },
+  "board": {
+    "drew": "Waryiye: {card}\nUbasha [swap X Y] cyangwa [discard]",
+    "took": "Waryiye: {card} ku rutonde rw'icye\nUbasha [swap X Y] nayo (ntacye)",
+    "peeked": "Wapekeje ku ngozo ({row},{col}): {card}",
+    "turn_view": "Ikaro yawe:\n{hand}\nRutonde rw'icye: {discard}\n{options}",
+    "none": "Nta na kimwe"
+  },
+  "options": {
+    "final_turns": "Imikino ya mwisho! Amahitamo yawe: [draw], [take], [peek X Y]",
+    "draw": "Ikoresho ryawe: [draw], [take]",
+    "must_swap": "Utegerezwa: [swap X Y] (ntushobora guta amakarata yo mu mugwi wo gutabwa)",
+    "swap_or_discard": "Ubasha [swap X Y] cyangwa [discard]"
+  },
+  "hand": {
+    "no_cards": "Nta makarata yo guhanahana amakuru",
+    "header": "Ururimi: 1 2 3",
+    "row": "Intara {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Umukino {pid} aribadanye {new} na {old} ku ngozo ({row},{col})",
+    "discarded": "Umukino {pid} aricye {card}"
+  },
+  "message": {
+    "deck_empty": "Umupira urarangiye.",
+    "knocked": "Umukinyi {pid} aratsinzwe! Umukinnyi wese agira uwundi mwanya.",
+    "final_round": "Umukinnyi {pid} {reason}! Buri mukinnyi mwingine anapata mizunguko imwe."
+  },
+  "reason": {
+    "all_revealed": "yoba yerekanye amakarata yose?"
+  },
+  "invalid": {
+    "wrong_action": "Utumye umukino umwe tu w'ibara: [draw], [take], [swap X Y], [discard], [knock], cyangwa [peek X Y]",
+    "discard_empty": "Imirongo yo mu bubiko bw'ibikoresho yaheze!",
+    "must_draw_first": "Ubasha [draw], [take], [knock], cyangwa [peek X Y]",
+    "cannot_discard_taken": "Ntushobora guheba ikarata yakuwe mu yindi, utegerezwa kuyisubiriza.",
+    "have_drawn_card": "Uriye n'ikaro. Ubasha [swap X Y] cyangwa [discard]",
+    "need_drawn_swap": "Ukeneye ikarata y'igicapo kugira ngo uhindurane.",
+    "need_drawn_discard": "Urakeneye ikarata yakuwe mu minwe kugira ngo uyitandukanye n'iyindi.",
+    "out_of_bounds": "Aho ku ngozo si ku mwanya. Utumye intara 1-{max_row}, koloni 1-{max_col}",
+    "knock_with_card": "Ntushobora gukomanga ufise ikarata y'umutsindo. Banza urangize uruja n'uruza rwawe.",
+    "already_knocked": "Hari uwoba yaramaze gutangura urwo rugendo.",
+    "already_revealed": "Ico gakarata karamaze guhishurwa!"
+  },
+  "summary": {
+    "full": "Imikino yageze! Umukino {winner} ushobora na amafaranga {score}!\n\nAmafaranga ya nyuma:\n{scores}",
+    "line": "Umukino {pid}: {score} amafaranga\n"
+  },
+  "board_str": {
+    "title": "=== GAKINDO K'IGOLFU===",
+    "discard": "Igisenge co guta: {card}",
+    "knocked": "Umukinnyi {pid} yarakomye!",
+    "player_header": "Umukino {pid} (Amafaranga: {score}):"
+  }
+}

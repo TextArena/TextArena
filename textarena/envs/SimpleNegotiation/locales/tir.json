@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "እቲ ተጻዋታይ፡ ዘድሊ ዓቕሚ ብዘይምህላዉ ነቲ ሽርሒ ክቅበል ፈቲኑ ነይሩ።",
+    "out_of_range": "ርኢቶ �{player_id}, ኣይተኣማንን ስራሕ. ኮለን �{col} ወገን ይርከብ.",
+    "already_full": "ርኢቶ �{player_id}, ኣይተኣማንን ስራሕ. ኮለን �{col} ተሞላሓ.",
+    "proposing_with_no_resource": "ተፃዋቲ {player_id} እቲ ዘድሊ ዓቕሚ ብዘይምሓዝ ናይ ንግዲ ቅፅዓት ከቕርብ ፈተነ።",
+    "incorrect_offer_format": "ተጻዋታይ {player_id} ኣብ ግጉይ ቅርጺ ናይ ንግዲ ቅጥዒ ኣቕሪቡ።",
+    "no_new_offer": "ተጻዋታይ {player_id} ሓድሽ ናይ ንግዲ ቅጥዒ ኣይገበረን።"
+  },
+  "offers": {
+    "reject": "ተጻዋታይ {player_id} ነቲ ናይ ምልውዋጥ ዕድመ ነጺጉዎ።",
+    "accept": "ርኢቶ �{acceptor_id} ምዕራፍ ንርኢቶ �{proposer_id} ተቀበለ.",
+    "proposal": "ርኢቶ �{player_id} ምዕራፍ ንርኢቶ �{opponent_id} ኣቀረበ: ኣብ ምዕራፍ ዝተረከበ ነገራት: {offered} -> ዝተቐደረ ነገራት: {requested}"
+  },
+  "outcome": {
+    "win": "ተፃዋታይ {winner_id} ኣብ ዋጋ ክምዝገብ ዝዓበየ ረብሓ ብምሓዝ ተዓዊቱ።",
+    "draw": "ንኹሎም ተጻወትቲ ኣብ ዋጋ ክምዝገብ ተመሳሳሊ ለውጢ ኣሎ። ኣሰላስል።"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Du er Spelar {player_id} i eit spel LinesOfAction.\nBrikkene dine er '{side}', motstandarbrikkene er '{other}'.\nFlytteformat: `[b1b3]` (frå-koordinat til-koordinat). Ein gyldig flytt går horisontalt, vertikalt eller diagonalt eit visst tal ruter som er likt det totale talet på brikker (i alle fargar) på den linja. Du kan hoppe over brikkene dine, men ikkje motstandarbrikkene; å lande på ein motstandarbrikke fangar han. Vinn når alle brikkene dine er 8-nabosamanhengande."
+  },
+  "board": {
+    "current_board": "Styresett: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatet må vera e2e4 (frå,til koordinater).",
+    "no_piece": "Ingen {side} stykke på {coord}.",
+    "identical": "Kjelde og mål er identiske.",
+    "not_straight_or_diagonal": "Flytta må vera rett eller diagonal.",
+    "wrong_distance": "Må flytte avstand lik antal brikker i linje.",
+    "enemy_blocks": "Fiendens stykke blokkerer vegen.",
+    "destination_own": "Destinasjonen er okkupert av eigen brikke."
+  },
+  "game_action": {
+    "moved": "Spelar {player_id} flytta {from} -> {to}",
+    "captured_suffix": "Spelar {player_id} flytta {from} -> {to} og tok ein fiende."
+  },
+  "outcome": {
+    "win": "Alle delane er samansett.",
+    "draw_no_capture": "60 flytt utan fangst.",
+    "draw_repetition": "Staden er gjenteke tre gonger."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in einer Partie HighSociety für 2 Spieler.\nSpielablauf:  Zehn Prestigekarten werden nacheinander versteigert.\nBieten:       Wähle bei jeder Auktion verdeckt eine Geldkarte von 1 bis 11 und decke sie auf.\n             • Das höhere Gebot gewinnt die Prestigekarte und die verwendete Geldkarte wird abgelegt.\n             • Das niedrigere Gebot behält seine Geldkarte.\n             • Bei einem Gleichstand werden beide Gebote zurückgegeben und dieselbe Prestigekarte wird erneut versteigert.\nWertung:      Addiere nach allen zehn Auktionen **verbleibendes Geld + Prestigepunkte**.\n             Das höhere *Nettovermögen* gewinnt. Bei einem exakten Gleichstand endet das Spiel unentschieden.\n\n**Aktionsformat**  →  Biete eine einzelne Karte wie '[7]' oder '[11]'."
+  },
+
+  "auction": {
+    "announce": "\n### Auktion {round}/10  |  Prestigekarte: {prize}"
+  },
+
+  "board": {
+    "money_cards": "Deine verbleibenden Geldkarten: {money}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Es muss genau eine Geldkarte im Format [X] angegeben werden.",
+    "card_not_held": "Du hast diese Geldkarte nicht mehr."
+  },
+
+  "message": {
+    "tie": "Gleichstand, Gebote zurückgegeben. Erneut bieten!",
+    "auction_result": "S0 bot {bid0}, S1 bot {bid1}. Spieler {winner} gewinnt die Prestigekarte {prize} und hat nun insgesamt {total}."
+  },
+
+  "outcome": {
+    "p0_wins": "Nettovermögen {nw0} > {nw1}",
+    "p1_wins": "Nettovermögen {nw1} > {nw0}",
+    "draw": "Beide haben ein Nettovermögen von {nw0}, exakter Gleichstand."
+  }
+}

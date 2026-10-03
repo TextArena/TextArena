@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "तुम Player {player_id} हो एक Iterated Prisoner's Dilemma में जो {num_rounds} राउंड तक चल्ही।\n\nगेम के नियम:\n- हर निर्णय लेवे से पहिले तुम्हारे पास {total_conversation_rounds} टर्न होथे खुल्ले बातचीत करे के लिए।\n- ओकरे बाद, दोनों खिलाड़ी एक साथ सहयोग करे या धोखा देवे के निर्णय लेथे।\n\nपेऑफ मैट्रिक्स (हर राउंड में एक जैसे):\n- दोनों सहयोग करथे ➜ हर एक {cooperate_reward}\n- दोनों धोखा देवथे ➜ हर एक {mutual_defect_reward}\n- एक धोखा देवे, एक सहयोग करे ➜ धोखेबाज {defect_reward}, सहयोगी {sucker_reward}\n\nकैसे खेले:\n- बातचीत के दौरान: तुम्हारे मन में आओ वो कोई भी टेक्स्ट टाइप करो।\n- निर्णय के चरण में: '[Cooperate]' या '[Defect]' (केस-इनसेंसिटिव) शामिल करो। तुम अतिरिक्त टेक्स्ट टोकन से पहिले या बाद में जोड़ सकोथे।"
+  },
+  "phases": {
+    "conversation_finished": "राउंड {round} के लिए बातचीत समाप्त हो गई है। कृपया '\\boxed{{}}' के भीतर '[Cooperate]' या '[Defect]' के साथ जवाब दो।",
+    "starting_round": "--- राउंड {round} शुरू हो रहा है ---",
+    "round_summary": "राउंड {round} के परिणाम:\n{outcome}\nखेलाड़ी 0 ने {r0} (कुल {score_0}) कमाया, खेलाड़ी 1 ने {r1} (कुल {score_1}) कमाया।"
+  },
+  "outcome": {
+    "winner": "खेलाड़ी {winner} {win_score} - {lose_score} से जीतता है।",
+    "draw": "ड्रॉ! दुनों खिलाड़ीमन हर {s0} स्कोर करिस।",
+    "round_both_cooperate": "दुनों खिलाड़ीमन सहयोग करिन।",
+    "round_both_defect": "दुनों खिलाड़ी मन ह भाग गिन।",
+    "round_p0_cooperates_p1_defects": "खिलाड़ी 0 सहयोग करिस, खिलाड़ी 1 ह भाग गिन।",
+    "round_p0_defects_p1_cooperates": "खिलाड़ी 0 डिफेक्ट हो गए, खिलाड़ी 1 सहयोग करे।"
+  }
+}

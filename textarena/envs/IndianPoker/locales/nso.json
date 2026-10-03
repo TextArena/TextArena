@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "O u player {player_id} mo gameng ya Indian Poker.\n- 52-card deck; o bona ka karata ya mmusi.\n- Ante {ante} chip(s) ka kgwedi, {max_rounds} kgwedi(s) e e seng kgwele.\n- Ditshwanelo tse di makgethwa: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ke polelo e e siameng ya <= ho kae chip count.)\n- Karata e kgolo e e siiwa e fenya pot mo showdown.\n"
+  },
+  "round": {
+    "announce": "### Round {current_round}/{max_rounds}\nKarata ya mmusi ke: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Naya ka mabapi a lekgetho la setshaba, e.g. '[check]', '[bet 2]', '[call]', '[raise 3]', kapa '[fold]'.",
+    "cannot_check": "O ka se kgone [check] - o lebeletšane le go petšha.",
+    "amount_min": "Palo ya go beela / go ntšha e swanetše go ba ≥ 1.",
+    "cannot_bet": "Ga go na le tokelo ya [bet] - go swanetse [call] / [raise] / [fold].",
+    "nothing_to_call": "Ga go na selo seo o ka se bitšago; mohlomongwe [check].",
+    "no_bet_to_raise": "Diriša [bet X] go bula; ga go na tefo yeo e swanetšego go godišwa.",
+    "insufficient": "Go se be le ditšhipi tše di lekanego bakeng sa tiro yeo."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Mediro ya gago e ka bago gona: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Poto {pot} → Modisa {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Sebapadi {player_id} se ile sa tlogela.",
+    "showdown_win": "Go bontšhana: {card_win} e betha {card_lose}.",
+    "showdown_tie": "Showdown e tshwana: bobedi {card}. Pot e abelwa - mongwe le mongwe o amogela {split}."
+  },
+  "outcome": {
+    "p0_wins": "Player 0 a fenya ({bank0} > {bank1})",
+    "p1_wins": "Player 1 a fenya ({bank1} > {bank0})",
+    "draw": "Di-chip tše di lekanago ka morago ga makga a mantši"
+  }
+}

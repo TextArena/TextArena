@@ -1,0 +1,30 @@
+{
+  "_comment": "Surroundi keelefail. ÄRGE tõlgige võtmeid (vasak pool). Tõlgige ainult väärtused (parem pool). Jätke iga {placeholder} täpselt samaks.",
+  "_slots": {
+    "{num_players}": "Mängijate arv matšis",
+    "{width}": "Laua laius ruutudes",
+    "{height}": "Laua kõrgus ruutudes",
+    "{player_id}": "Mängija number (0-põhine)",
+    "{board}": "Renderdatud ASCII võrk; jätke neutraalseks, ärge tõlgige selle märke",
+    "{reason}": "Renderdatud mängu lõpu põhjuse fraas",
+    "{groups}": "Neutraalne edetabeli andmed (mängija-id grupid, parimast halvimani); ärge tõlgige"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-mängija Surround {width}x{height} võrgustikul.\nOled mängija {player_id}. Kehtivad käigud: '[up]' '[down]' '[left]' '[right]' või w/s/a/d.\nEesmärk: elada kõigi teiste üle. Rööpad on surmavad; seina pihtamised tapavad; pea-pea kokkupõrked tapavad mõlemad."
+  },
+  "board": {
+    "current": "Praegune laud:\n{board}",
+    "after_moves": "Laud pärast samaaegseid käike:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Mängija {player_id} suri kehtetu käigu tõttu."
+  },
+  "outcome": {
+    "survived_win": "Mängija {player_id} elas üle; kõik teised kukkusid.",
+    "all_crashed": "Kõik mängijad kukkusid samaaegselt.",
+    "outlived": "Mängija elas kõigi teiste üle.",
+    "all_dead": "Kõik mängijad on surnud.",
+    "turn_limit": "Käikude piir saavutatud - pikima elueaga võidab.",
+    "ranking": "{reason} Lõplik edetabeli grupid (parimast halvimani): {groups}"
+  }
+}

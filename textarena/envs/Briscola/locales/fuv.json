@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Wasannin Briscola yaɓɓita! Trump suit: {trump_suit} (Trump card: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Ka ɓannde wasan Briscola - Ɗanƴo {player_id}.\nManufa: Ɗon haƙuri kuma ɗon yimɓe pointi maaɓɓe (120 pointi jimla a ɗakon kaarten).\nPointi kaarte: A=11, 3=10, K=4, Q=3, J=2, wasan =0\nIko kaarte: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTrump kaarte ɗon ɓata kaarte ba Trump ba, ko ɗon ɓata iko.\n\nAiki: '[play X]' inda X wuri ne (1-{max_pos}) na kaarte a hannde ka"
+  },
+  "hand": {
+    "none": "Wala kaadiji.",
+    "empty": "Wala kaadi ha juɗe ma'ako.",
+    "header": "Jungo maaɗa:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP) Ɗo ɓe wi'i:"
+  },
+  "trick": {
+    "empty": "Walaa kujeji je ɗon fija haa jooni.",
+    "header": "Dabare jonta:",
+    "line": "  Ɗanƴo {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Ɗanƴo {player_id}: {points} pts",
+    "trump_info": "Liddol Trump: {trump_suit}",
+    "trump_info_deck": "Trump suit: {trump_suit} | Kaarte mabbe a ɗakon: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPointi: {scores}\n{trump_info}\n\nTɛ kaarte tare da [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Naftirgo [play X] to X woni darnde kaadi (1, 2, 3, be ko nanndi)",
+    "out_of_range": "Wuri ngal maɓɓe. Kuna {count} kaarten (1-{count})"
+  },
+  "action": {
+    "played": "Ɗanƴo {player_id} yaɓɓi {card}",
+    "trick_win": "Ɗanƴo {winner} ɗon haƙuri nde o yaɓɓi {card} kuma ya ɗon yimɓe {points} pointi!"
+  },
+  "outcome": {
+    "head": "Wasan ya ɗon ƙare! Ɗanƴo {winner} ya ɓuri nde o yaɓɓi {points} pointi!\n\nCiwan pointi:\n{scores}",
+    "player_line": "Tukkur {player_id}: {points} alama ({tricks} kure)\n"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Velkommen til Lights Out! Du har en {size}x{size} gitter af lys.\nDit mål er at slukke ALLE lys (repræsenteret af '.').\nNår du trykker på et lys, skifter det selv OG dets nærmeste naboer (op/ned/venstre/højre).\nSkriv [række kolonne] for at trykke på et lys (0-indekseret, så gyldig interval er 0-{max_index}).\nDu har op til {max_turns} træk til at løse puslespillet.\nForklaring: 'O' = lys TÆNDT, '.' = lys SLUKKET"
+  },
+  "board": {
+    "current_state": "Aktuel gittertilstand (Træk {moves_made}, {moves_left} træk tilbage, {completion}% færdig):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Handlingen skal være i format [række kolonne], hvor række og kolonne er heltal fra 0 til {max_index}.",
+    "out_of_range": "Koordinaterne skal være mellem 0 og {max_index}. Du indtastede [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Tillykke! Du løste puslespillet på {moves_used} træk!",
+    "loss": "Spillet er slut! Du brugte alle {max_turns} træk uden at løse puslespillet. Endelig færdig: {completion}%\nEndelig tilstand:\n{grid}"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "Tệp ngôn ngữ ThreePlayerTicTacToe. KHÔNG được dịch các khóa (bên trái). Chỉ dịch các giá trị (bên phải). Giữ mọi {placeholder} y như ban đầu.",
+  "_slots": {
+    "{player_id}": "Số thứ tự của người chơi, ví dụ 0, 1 hoặc 2",
+    "{symbol}": "Dấu của người chơi, một trong A, B hoặc C",
+    "{cell}": "Số ô trên bàn cờ",
+    "{max_cell}": "Số ô hợp lệ cao nhất (board_size^2 - 1)",
+    "{row}": "Chỉ số hàng của dấu đã đặt",
+    "{col}": "Chỉ số cột của dấu đã đặt",
+    "{board}": "Bàn cờ ASCII đã được hiển thị (không dịch)",
+    "{moves}": "Danh sách các nước đi có thể thực hiện, cách nhau bằng dấu phẩy như '[4]' (không dịch)"
+  },
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong Tic Tac Toe ba người.\nDấu của bạn là '{symbol}'.\nBạn luân phiên đặt dấu của mình lên bàn cờ 5x5 để tạo thành một hàng bốn.\nHàng có thể là ngang, dọc hoặc chéo.\nGửi nước đi của bạn bằng cách sử dụng định dạng '[4]' để đánh dấu ô 4."
+  },
+  "board": {
+    "current_board": "Bàn cờ hiện tại:\n\n{board}\n\nCác nước đi có thể thực hiện: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Định dạng nước đi không hợp lệ. Sử dụng '[cell]' trong đó cell là 0-{max_cell}.",
+    "out_of_range": "Số ô không hợp lệ: {cell}. Phải nằm trong khoảng từ 0 đến {max_cell}.",
+    "already_occupied": "Ô {cell} đã bị chiếm.",
+    "made_invalid": "Người chơi {player_id} đã thực hiện nước đi không hợp lệ"
+  },
+  "game_action": {
+    "placed": "Người chơi {player_id} đặt dấu ({symbol}) vào ô ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Người chơi {player_id} ({symbol}) thắng!",
+    "draw": "Trò chơi hòa!"
+  }
+}

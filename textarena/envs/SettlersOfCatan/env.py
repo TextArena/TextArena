@@ -197,6 +197,15 @@ class SettlersOfCatanEnv(ta.Env):
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         self.state.add_observation(from_id=self.state.current_player_id, to_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+        # Safeguard the game always terminates. The only "natural" endings are a
+        # player reaching the VP target or every player being eliminated; without
+        # this, a table that never reaches the target (e.g. everyone repeatedly
+        # choosing "Nothing.") would run forever. On reaching the turn cap we
+        # resolve on points, ranked by VP (the same ranking used on elimination).
+        if self.state.turn >= self.state.max_turns and not self.state.done:
+            self.state.add_observation(message=f"The turn limit ({self.state.max_turns}) was reached without a player hitting the victory-point target. Resolving on victory points.", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self._determine_winner()
+            return self.state.step(rotate_player=False)
         colour = self.board.str_to_enum(color_str=self.roles[self.state.current_player_id])
         match self.state.game_state["turn_phase"]: 
             case "action":
@@ -258,8 +267,10 @@ class SettlersOfCatanEnv(ta.Env):
         m = m_list[-1]
         choice = m.group(1).lower()
         if choice in self.pids_from_roles.keys(): choice = self.pids_from_roles[choice]
-        try: choice = int(choice)
-        except Exception as e: print(f"Exception, {e}")
+        # `choice` is now either a pid int (mapped from a colour name above) or a
+        # digit string from the [0-3] regex branch, so int() cannot fail here; the
+        # previous try/except only swallowed an exception that could never occur.
+        choice = int(choice)
         colors = [self.roles[pid] for pid in pid_options]
         if choice not in pid_options+colors: pass ; return False # not a valid selection # TODO
         # convert to pid choice 

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in Connect Four.\nIl tuo simbolo del disco: {symbol}.\nLa tavola di gioco ha {num_rows} righe e {num_cols} colonne.\nI giocatori si alternano lasciando cadere il loro disco in una delle colonne (0 a {end_col}).\nIl primo a collegare (i propri) quattro dischi verticalmente, orizzontalmente o diagonalmente vince.\nNel tuo turno, inserisci il numero della colonna tra parentesi quadre per fare la tua mossa.\nAd esempio: '[col 4]' o '[col 1]'."
+  },
+  "board": {
+    "board_visible_state": "Stato della tavola:\n{board_visual}",
+    "board_notvisible_state": "La tavola di gioco non è visibile ai giocatori."
+  },
+  "invalid_move": {
+    "wrong_format": "Giocatore {player_id}, formato di azione non valido. Formato previsto: '[col x]'.",
+    "out_of_range": "Giocatore {player_id}, azione non valida. La colonna {col} è fuori dai limiti.",
+    "already_full": "Giocatore {player_id}, azione non valida. La colonna {col} è piena."
+  },
+  "action": {
+    "dropped_disk": "Il Giocatore {player_id} ha lasciato cadere il suo disco ({player_symbol}) nella colonna {col}."
+  },
+  "outcome": {
+    "win": "Il Giocatore {player_id} vince collegando quattro!",
+    "draw": "La partita è finita in parità."
+  }
+}

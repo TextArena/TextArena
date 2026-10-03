@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "អ្នកជាអ្នកលេង {player_id}, លេង {num_rounds} ជុំនៃ Iterated Ultimatum Game. អ្នកមាន ${pool} ដើម្បីបែងចែកជុំនេះ រវាងអ្នកនិងអ្នកលេង {other_id}. សំណើ: - ធ្វើការផ្តល់ជូន: [Offer: $X] (0 <= X <= pool) - ប្រសិនបើត្រូវបានទទួល → អ្នកទទួលបាន $ ((pool - X), អ្នកលេងផ្សេងទៀតទទួលបាន $ X - ប្រសិនបើបដិសេធ → ទាំងពីរទទួលបាន $ 0 - ឧទាហរណ៍: [Offer: $3] ឬ 'ខ្ញុំគិតថានេះជាយុត្តិធម៌។ [Offer: $5]' អ្នកឆ្លើយតប: - សម្រេចចិត្តលើការផ្តល់ជូនជាមួយ [Accept] ឬ [Reject] - ឧទាហរណ៍: 'វាហាក់ដូចជាសមរម្យ។ [Accept] 'មិនយុត្តិធម៌ណាស់ [Reject] '"
+  },
+  "round": {
+    "begins": "--- ជុំ {round_number} ចាប់ផ្តើម! --- កីឡាករ {proposer_id} គឺជាអ្នកស្នើ, កីឡាករ {responder_id} គឺជាអ្នកឆ្លើយតប។",
+    "offer": "ជុំ {round_number}: កីឡាករ {proposer_id} ផ្តល់ ${offer} ទៅ កីឡាករ {responder_id} (រក្សា ${keep}) ។",
+    "accepted": "កីឡាករ {responder_id} ទទួលយក! ជុំ {round_number} ចំណេញ: កីឡាករ {proposer_id} + ${proposer_gain}, កីឡាករ {responder_id} + ${responder_gain}. សរុបថ្មី: កីឡាករ 0: ${total_0}, កីឡាករ 1: ${total_1}.",
+    "rejected": "កីឡាករ {responder_id} បានបដិសេធការផ្តល់ជូន! ជុំ {round_number} ទទួលបាន: កីឡាករទាំងពីរ + $ 0. សរុបនៅសល់: កីឡាករ 0: ${total_0}, កីឡាករ 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "អ្នកស្នើត្រូវដាក់សំណើដោយប្រើទម្រង់ [Offer: $X] ។",
+    "bad_integer": "ចំនួនប្រាក់ដែលផ្តល់ជូនត្រូវជាចំនួនសរុបត្រឹមត្រូវ។",
+    "out_of_range": "ការផ្តល់ជូនត្រូវស្ថិតនៅចន្លោះ $0 និង ${pool} ។",
+    "no_current_offer": "គ្មានការផ្តល់ជូនបច្ចុប្បន្ន ដើម្បីឆ្លើយតប។",
+    "accept_or_reject": "អ្នកឆ្លើយតបត្រូវតែ [Accept] ឬ [Reject] ការផ្តល់ជូន។"
+  },
+  "outcome": {
+    "win": "កីឡាករ {winner} ឈ្នះដោយ ${winner_total} សរុប vs កីឡាករ {loser} របស់ ${loser_total} ។",
+    "draw": "ស្មើ! កីឡាករទាំងពីរបានបញ្ចប់ដោយ ${total} សរុប។"
+  }
+}

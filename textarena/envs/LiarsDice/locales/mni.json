@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "নিংশুবা খেলগী {player_id} লাইআর্স ডাইস খেলবা অমুক মীওই {num_players} খেলগী।\nনিয়ম:\n- নিংশুবা খেলগী চাউখৎকা, নিংশুবা খেলগী:\n  1) থাগৎপা বিড অমুক উচা লম্বা নতুন বিড অমুক উচা লম্বা ফেস (অথবা অবা) করমক চালবা বিড, অর্থাৎ '[Bid: 3, 4]',\n  2) অখৎনা বিড কল করমক '[Call]' টাইপ করমক।\n\nনিংশুবা কল করলে:\n  - যদি অখৎনা ফেস মূল্য অনুসারে সকল ডাইস অমুক গণনা কম অমুক বিড, অখৎনা বিডার এক ডাই হারাবা।\n  - অন্যথায়, কলার এক ডাই হারাবা।\nখেলগী যে ডাইস 0 অমুক পৌঁছে সে খেলবা নিষিদ্ধ। অবশিষ্ট খেলগী জয় করবা।"
+  },
+  "board": {
+    "per_player": "\tPlayer {p}: {d}",
+    "new_round": "\nনতুন রাউন্ড - অবশিষ্ট ডাইস: {dice_summary}\nনিংশুবা ডাইস অমুক: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "খেলগী {current_player_id} কল করে! অখৎনা ফেস {face_value} গণনা অমুক {count}, যা কম অমুক {quantity}।\nখেলগী {loser_id} (অখৎনা বিডার) এক ডাই হারাবা।",
+    "caller_loses": "খেলগী {current_player_id} কল করে! অখৎনা ফেস {face_value} গণনা অমুক {count}, যা >= অমুক {quantity}।\nখেলগী {loser_id} (কলার) এক ডাই হারাবা।"
+  },
+  "action": {
+    "bid_announce": "খেলগী {player_id} বিড করে {quantity} অমুক ফেস {face_value}।"
+  },
+  "invalid_move": {
+    "call_no_bid": "মমাংদা পীখিবা শেলগী তেংবাং য়াওদনা কৌখিবনি।",
+    "invalid_bid": "শোয়দনা পীবা বিদ: {reason}",
+    "not_recognized": "'[Bid: X, Y]' amata '[Call]' haina leiribasingda paojel haibasi.  Paojel action: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "New quantity {new_quantity} current {current_quantity} na thasa.",
+    "face_lower": "New face value {new_face_value} current {current_face_value} na thasa.",
+    "identical": "বিদ অদু হৌজিক্কী বাইদগা মান্নৈ।",
+    "face_range": "মমলগী ভেল্যু অসি 1 অমসুং 6কী মরক্তা ওইগদবনি।"
+  },
+  "message": {
+    "eliminated_invalid": "শান্নরোই {player_id} অসি অশোয়বা খোঙথাং অমগা লোয়ননা থাদোকখি।"
+  },
+  "outcome": {
+    "win": "খেলগী {winner} জয় করে! চূড়ান্ত র‌্যাঙ্কিং: {final_ranking}"
+  }
+}

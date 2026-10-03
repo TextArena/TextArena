@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Ðelawo dze agbagba be yewoawɔ asitsatsa aɖe evɔ ga mele wo si o.",
+    "out_of_range": "Aʋa {player_id}, Ɖɔ si wò wɔ le dɔme. Ɖɔ {col} le dɔme ƒe go.",
+    "already_full": "Aʋa {player_id}, Ɖɔ si wò wɔ le dɔme. Ɖɔ {col} bɔ.",
+    "proposing_with_no_resource": "Fefewɔla {player_id} dze agbagba be yeawɔ asitsatsa ƒe ɖoɖo evɔ ga si hiã la mele esi o.",
+    "incorrect_offer_format": "Fefewɔla {player_id} tsɔ mɔnu si mesɔ o do fefea.",
+    "no_new_offer": "Fefewɔla {player_id} mena asi yeye aɖeke o."
+  },
+  "offers": {
+    "reject": "Fefewɔla {player_id} gbe asitsatsa ƒe nudidia.",
+    "accept": "Dɔdzikpɔla {acceptor_id} gblɔe tso ɖe Dɔdzikpɔla {proposer_id} ɖe nuwɔwɔ.",
+    "proposal": "Aʋa {player_id} ɖe asiɖeɖe si tso Aʋa {opponent_id} gbɔ: Nuwo si wò ɖe: {offered} -> Nuwo si wò xɔ: {requested}"
+  },
+  "outcome": {
+    "win": "Fefewɔla {winner_id} ɖu dzi le esi eƒe adzɔnuwo ƒe asixɔxɔ de ŋgɔ wu ta.",
+    "draw": "Tɔmenuwo ƒe asi si trɔna le ame sia ame ŋu la ke. - Ði."
+  }
+}

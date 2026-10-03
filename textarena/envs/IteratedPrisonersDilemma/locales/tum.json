@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ndiwe Mchezaji {player_id} m' mpikisano wa Iterated Prisoner's Dilemma unaozingatia {num_rounds} midauri.\n\nMuundo wa Mpikisano:\n- Kabla ya kila uamuzi una {total_conversation_rounds} zunguliro la kuongea kwa uhuru.\n- Baada ya hapo, wachezaji wote wawili huchagua kushirikiana au kukataa kwa wakati mmoja.\n\nMatrix ya Zawadi (iliyowekwa kila mpinduko):\n- Wote Wawili Kushirikiana ➜ kila mmoja {cooperate_reward}\n- Wote Wawili Wakataa ➜ kila mmoja {mutual_defect_reward}\n- Mmoja Akataa, mmoja Akashirikiana ➜ Mkatili {defect_reward}, Mshirikishi {sucker_reward}\n\nJinsi ya Kucheza:\n- Wakati wa mazungumzo: andika maandishi yoyote unayotaka.\n- Wakati wa uamuzi: ongeza '[Cooperate]' au '[Defect]' (usiwe na wasiwasi wa herufi kubwa au ndogo). Unaweza kuongeza maandishi zaidi kabla/ baada ya kiashiria."
+  },
+  "phases": {
+    "conversation_finished": "Mazungumzo yamekwisha kwa mpinduko {round}. Tafadhali jibu na '[Cooperate]' au '[Defect]' ndani ya \\boxed{{}}.",
+    "starting_round": "--- Kuyamba kwa Mzere {round} ---",
+    "round_summary": "Matokeo ya mpinduko {round}:\n{outcome}\nMchezaji 0 alipata {r0} (jumla {score_0}), Mchezaji 1 alipata {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Mchezaji {winner} anashinda {win_score} - {lose_score}.",
+    "draw": "Ŵawiri wose ŵakalonga {s0}.",
+    "round_both_cooperate": "Wose ŵaŵiri ŵakakolerana.",
+    "round_both_defect": "Ŵalongozgi ŵaŵiri wose ŵakagaluka.",
+    "round_p0_cooperates_p1_defects": "Mulongozgi wa gulu la 0 wakawovwira, kweni mulongozgi 1 wakathera.",
+    "round_p0_defects_p1_cooperates": "Mulongozgi wa gulu la 0 wakaleka unenesko, ndipo mulongozgi 1 wakakolerana nayo."
+  }
+}

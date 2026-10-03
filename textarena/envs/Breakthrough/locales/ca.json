@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Estàs jugant amb {color} en un joc de Breakthrough. Et mou {direction} en un tauler de {board_size}x{board_size}.\nEn el teu torn, pots moure una sola peça un pas endavant o diagonalment endavant.\nUna peça només pot moure's diagonalment si hi ha una peça de l'oponent, i només pot moure's a una casella ocupada en un pas diagonal.\nQuan passes a una casella amb una peça de l'oponent, la captures i la peça de l'oponent és eliminada permanentment del tauler.\nUtilitza la notació UCI en claudàtors, per exemple [a2a3] per moure de a2 a a3.\n* 'a' correspon a la columna més a l'esquerra, '1' és la fila inferior (des de la perspectiva de les blanques).\n* La fila de casa de les negres és la fila superior (fila 8 per a un 8x8). La fila de casa de les blanques és la fila inferior (fila 1 per a un 8x8).\nEl primer jugador que aconsegueix que una peça arribi a la fila de casa de l'oponent guanya. Si totes les teves peces són capturades, perds."
+  },
+  "invalid_move": {
+    "wrong_format": "Si us plau, utilitza la notació algebraica en claudàtors com [a2a3].",
+    "out_of_bounds": "El moviment està fora dels límits del tauler.",
+    "illegal": "Aquest moviment no segueix les regles de Breakthrough o no és la teva peça."
+  },
+  "game_action": {
+    "moved": "El jugador {player_id} mou {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Les blanques han arribat a la fila de casa de les negres.",
+    "black_reached": "Les negres han arribat a la fila de casa de les blanques.",
+    "white_captured": "Totes les peces blanques han estat capturades.",
+    "black_captured": "Totes les peces negres han estat capturades.",
+    "no_moves": "El jugador {player_id} no té més moviments."
+  }
+}

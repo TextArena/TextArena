@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Брискола оюну башталды! Трамп костюму: {trump_suit} (Трамп картасы: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Сиз Брискола - Оюнчуну {player_id} ойноп жатасыз. Максат: Утуштарды утуп, эң көп упай топтоо (120 жалпы упай). Карта упайлары: A = 11, 3 = 10, K = 4, Q = 3, J = 2, башкалары = 0 Карта кубаттуулугу: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2 Трамп карталары кубаттуулугуна карабастан, Трамп эмес карталарды утуп алат. Иш-аракет: '[play X] ' бул жерде X сиздин колуңуздагы картанын (1-{max_pos}) абалы "
+  },
+  "hand": {
+    "none": "Карталар жок",
+    "empty": "Карталар жок",
+    "header": "Сиздин колуңуз:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(ТРУМП)"
+  },
+  "trick": {
+    "empty": "Бул оюнда азырынча эч кандай карталар ойнотулган эмес.",
+    "header": "Учурдагы ыкма:",
+    "line": "Оюнчу {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Оюнчу {player_id}: {points} б.",
+    "trump_info": "Трамптын костюму: {trump_suit}",
+    "trump_info_deck": "Трамп костюму: {trump_suit} │ Калган карталар: {deck_count}",
+    "board": "{hand} {trick} Упайлар: {scores} {trump_info} [play X] картаны колдонуп ойноңуз"
+  },
+  "invalid_move": {
+    "wrong_format": "[play X] колдонулат, мында X картанын орду (1, 2, 3, ж.б.)",
+    "out_of_range": "Карталардын жараксыз абалы. Сизде {count} карталар бар (1-{count})"
+  },
+  "action": {
+    "played": "Оюнчу {player_id} ойноду {card}",
+    "trick_win": "{winner} оюнчусу {card} менен оюнда утуп {points} упай алат!"
+  },
+  "outcome": {
+    "head": "Оюн бүттү! Оюнчу {winner} {points} упай менен утту!\n\nАкыркы упайлар:\n{scores}",
+    "player_line": "Оюнчу {player_id}: {points} упай ({tricks} трюк) "
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Berkas lokal Snake. JANGAN menerjemahkan kunci (sisi kiri). Hanya terjemahkan nilai (sisi kanan). Simpan setiap {placeholder} persis seperti yang ada. JANGAN menerjemahkan token gerakan/arah yang diketik pemain ([up], [down], [left], [right], w, s, a, d) atau papan ASCII yang dirender ke dalam {board}.",
+  "_slots": {
+    "{num_players}": "Jumlah pemain dalam pertandingan",
+    "{width}": "Lebar papan dalam sel",
+    "{height}": "Tinggi papan dalam sel",
+    "{max_turns}": "Batas giliran untuk pertandingan",
+    "{player_id}": "Nomor pemain (berbasis 0)",
+    "{board}": "Grid ASCII yang dirender; simpan netral, jangan pernah menerjemahkan karakternya",
+    "{reason}": "Alasan akhir permainan yang dirender",
+    "{groups}": "Data peringkat netral (daftar kelompok nomor pemain, dari terburuk ke terbaik); jangan menerjemahkan"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Pemain Snake pada grid {width}×{height}.\nAnda mengendalikan ular {player_id}. Gerakan yang valid: '[up]'/'[down]'/'[left]'/'[right]' (atau w/s/a/d).\nTujuan: bertahan paling lama atau menjadi yang terpanjang dan mendapatkan skor tertinggi (batas giliran {max_turns} giliran)."
+  },
+  "board": {
+    "current": "Papan Saat Ini:\n{board}",
+    "after_moves": "Kondisi Papan Saat Ini:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Ular {player_id} mati karena gerakan tidak valid."
+  },
+  "outcome": {
+    "survived_win": "Pemain {player_id} bertahan; semua yang lain mati.",
+    "all_dead_simul": "Semua ular mati secara bersamaan.",
+    "outlived": "Pemain bertahan lebih lama dari yang lain.",
+    "all_dead": "Semua ular mati.",
+    "turn_limit": "Batas giliran tercapai - skor terbaik memenangkan tie-break.",
+    "ranking": "{reason} Peringkat akhir (terburuk→terbaik): {groups}"
+  }
+}

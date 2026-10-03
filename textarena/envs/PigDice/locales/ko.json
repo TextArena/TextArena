@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "당신은 {player_id}번 플레이어로 피그 주사위 게임을 하고 있습니다.\n\n규칙:\n- 차례가 되면 '[roll]' 또는 '[hold]'를 선택할 수 있습니다.\n- 2-6을 굴리면: 차례 총점에 추가\n- 1을 굴리면: 차례 총점을 잃고 차례 종료\n- Hold: 차례 총점을 점수에 추가하고 차례 종료\n- 먼저 {winning_score}점을 얻는 사람이 승리합니다.\n\n차례가 되면 현재 점수와 차례 총점을 볼 수 있습니다.\n'[roll]'을 입력하여 주사위를 굴리거나 '[hold]'을 입력하여 점수를 저장할 수 있습니다."
+  },
+  "invalid_move": {
+    "invalid_action": "잘못된 행동 형식입니다. '[roll]' 또는 '[hold]'를 사용하세요."
+  },
+  "actions": {
+    "player_busted": "플레이어 {player_id}가 터졌습니다. {turn_total}점을 잃었습니다!",
+    "player_hold": "플레이어 {player_id}가 차례 총점 {turn_total}점을 저장했습니다."
+  },
+  "board": {
+    "player": "플레이어 0: '{score_0}'; 플레이어 1: '{score_1}'",
+    "current_total_scores": "현재 총 점수: {scores}\n현재 차례 총점은 {turn_total}입니다.",
+    "roll_history": "{observation}\n이 차례의 굴린 기록: {roll_history}",
+    "first_roll": "{observation}\n이 차례의 첫 굴림입니다.",
+    "available_actions": "{observation}\n가능한 행동: '[roll]' 또는 '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "플레이어 {winner_id}가 차례 제한에서 더 높은 점수로 승리했습니다 ({scores})",
+    "winner_by_score": "플레이어 {winner_id}가 목표 점수 {winning_score}를 달성하여 승리했습니다!",
+    "draw": "차례 제한이 도달했으며 모든 플레이어의 점수가 같습니다: {scores}"
+  }
+}

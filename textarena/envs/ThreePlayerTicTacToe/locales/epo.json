@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Vi estas Ludanto {player_id} en Tri-Ludanta Tik-Tak-To.\nVia simbolo estas '{symbol}'.\nVi prenas vicojn metante vian simbolon sur 5x5-tabulo por formi linion de kvar.\nLinioj povas esti horizontalaj, vertikalaj, aŭ diagonalaj.\nSendu vian movon uzante la formaton '[4]' por marki ĉelon 4."
+  },
+  "board": {
+    "current_board": "Nuna Tabulo:\n\n{board}\n\nHaveblaj Movoj: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Malvalida movo formato. Uzu \"[cell]\" kie ĉelo estas 0-{max_cell} .",
+    "out_of_range": "Malvalida ĉelnumero: {cell}. Devas esti inter 0 kaj {max_cell} .",
+    "already_occupied": "Ĉelo {cell} jam estas okupita.",
+    "made_invalid": "Ludanto {player_id} faris malvalidan movon."
+  },
+  "game_action": {
+    "placed": "Ludanto {player_id} metas sian simbolon ({symbol}) en kampo ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Ludanto {player_id} ({symbol}) gajnas!",
+    "draw": "La ludo estas remisa!"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire staðfærslu skrá. ÞÝÐA EKKI lykla (vinstri hlið). Þýða aðeins gildi (hægri hlið).",
+  "_slots": {
+    "{n}": "Virknireitur í kommu-aðskildri skipun, byggður á 1",
+    "{msg}": "Innri niðurstaða fyrir hverja aðgerð (þegar staðfærð)",
+    "{count}": "Fjöldi spila sem eru færðar",
+    "{src}": "Uppruni spilastokks, byggður á 1",
+    "{dst}": "Áfangastaður spilastokks, byggður á 1",
+    "{cmd}": "Óþekkt skipun sem leikmaður sló inn (ekki þýdd)",
+    "{max_turns}": "Hámarksfjöldi umferða áður en leikurinn endar",
+    "{score}": "Fjöldi spila sem eru í grunnstoðum",
+    "{board}": "Teiknað borð (aldrei þýtt)",
+    "{turn}": "Núverandi umferð",
+    "{stock}": "Fjöldi spila sem eru eftir í spilastokk",
+    "{waste}": "Efsti spili í ruslakörfu, eða '--' ef tóm (aldrei þýtt)",
+    "{cards}": "Spil í spilastokk sem hlutlaus merki, eða '--' ef tóm (aldrei þýtt)"
+  },
+  "player_prompt": {
+    "intro": "Þú ert að spila Klondike Solitaire. Markmið þitt er að færa allar spil í grunnstoðir.\n\nLeikreglur:\n- Grunnstoðir (F1-F4): Byggja upp frá Ási til Kóngs í lit\n- Spilastokkar (T1-T7): Byggja niður með skiftandi litum (rauður á svartan, svartur á rauðan)\n- Spilastokkur: Drega spil í ruslakörfu\n- Ruslakörfu (W): Efsti spili tiltækur fyrir leik\n\nSkipanir:\n- 'draw' - Drega spil frá spilastokk í ruslakörfu\n- 'move <uppruni> <áfangastaður> [fjöldi]' - Færa spil milli spilastokka\n  Dæmi: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Fjöldi getur líka verið 'all', sem mun reyna að færa allar spil sem eru sýnilegar.\n- 'forfeit' - Enda leikinn strax og læsa núverandi stig\n- Nöfn spilastokka: W (ruslakörfu), F1-F4 (grunnstoðir), T1-T7 (spilastokkar)\n\nÞú getur framkvæmt margar aðgerðir í einni umferð með því að aðskilja þær með kommu:\n  Dæmi: 'draw, move W T1, move T2 F1'\n\nAðeins Kóngar geta verið settir á tóma spilastokka.\nAðgerðir eru framkvæmdar í röð - ef ein mistekst, eru eftirstandandi aðgerðir slepptar.\nNotaðu 'forfeit' ef þú trúir að leikurinn sé ómögulegt að vinna."
+  },
+  "format_error": {
+    "no_brackets": "Ógild aðgerðarsnið. Aðgerð ætti að vera í svigum.",
+    "no_closing_bracket": "Ógild aðgerðarsnið. Vantar loka sviga ']'",
+    "empty_command": "Tóm skipun. Sláðu inn 'draw' eða 'move <uppruni> <áfangastaður> [fjöldi]'",
+    "empty_action": "Tóm aðgerð",
+    "move_needs_args": "Færslu skipun þarf uppruna og áfangastað. Notkun: 'move <uppruni> <áfangastaður> [fjöldi]'",
+    "count_positive": "Fjöldi verður að vera jákvæður eða 'all'",
+    "count_invalid": "Ógildur fjöldi. Notaðu tölu eða 'all'",
+    "unknown_command": "Óþekkt skipun '{cmd}'. Notaðu 'draw', 'move <uppruni> <áfangastaður> [fjöldi]', eða 'forfeit'",
+    "wrapped": "Aðgerð {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Aðgerð {n}: {msg}",
+    "before_failure": "Framkvæmd {n} aðgerð(ir) áður en mistókst.",
+    "failed": "Aðgerð {n} mistókst: {msg}"
+  },
+  "move_result": {
+    "drew": "Dregið spil frá spilastokk í ruslakörfu.",
+    "cannot_draw": "Get ekki dregið. Bæði spilastokkur og ruslakörfu eru tómar.",
+    "invalid_pile": "Ógilt nafn spilastokks. Notaðu W, F1-F4, eða T1-T7",
+    "foundation_one_card": "Get aðeins fært 1 spili í grunnstoð",
+    "waste_to_foundation_ok": "Fært spili frá ruslakörfu í grunnstoð F{dst}",
+    "waste_to_foundation_bad": "Get ekki fært spili frá ruslakörfu í þessa grunnstoð",
+    "tableau_to_foundation_ok": "Fært spili frá spilastokk T{src} í grunnstoð F{dst}",
+    "tableau_to_foundation_bad": "Get ekki fært spili frá spilastokk í þessa grunnstoð",
+    "foundation_to_foundation": "Get ekki fært frá grunnstoð í grunnstoð",
+    "waste_to_tableau_one_card": "Get aðeins fært 1 spili frá ruslakörfu í spilastokk",
+    "waste_to_tableau_ok": "Fært spili frá ruslakörfu í spilastokk T{dst}",
+    "waste_to_tableau_bad": "Get ekki sett spili frá ruslakörfu á þenna spilastokk",
+    "no_face_up": "Engin spil eru sýnileg til að færa",
+    "tableau_to_tableau_ok": "Fært {count} spil(i) frá spilastokk T{src} í T{dst}",
+    "tableau_to_tableau_bad": "Get ekki fært {count} spil(i) frá T{src} í T{dst}",
+    "foundation_to_tableau_one_card": "Get aðeins fært 1 spili frá grunnstoð í spilastokk",
+    "foundation_empty": "Grunnstoð F{src} er tóm",
+    "foundation_to_tableau_ok": "Fært spili frá grunnstoð F{src} í spilastokk T{dst}",
+    "foundation_to_tableau_bad": "Get ekki sett spili frá grunnstoð á spilastokk T{dst}",
+    "to_waste_or_stock": "Get ekki fært í ruslakörfu eða spilastokk"
+  },
+  "outcome": {
+    "forfeit": "Leikur gefinn upp. Lokastig: {score} spil í grunnstoðum.",
+    "won": "Til hamingju! Þú hefur unnið Klondike Solitaire!",
+    "turn_limit": "Leikurinn er búinn! Þú hefur náð hámarki {max_turns} umferða. Stig: {score} spil í grunnstoðum."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Umferð: {turn}/{max_turns}",
+    "stock": "Spilastokkur: {stock} spil",
+    "waste": "Ruslakörfu (W): {waste}",
+    "foundations_header": "Grunnstoðir:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Spilastokkar:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

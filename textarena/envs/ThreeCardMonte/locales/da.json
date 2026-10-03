@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte lokalisationsfil. Oversæt ikke nøgler (venstre side). Oversæt kun værdier (højre side).",
+  "_slots": {
+    "{line}": "Den tegnede række af kopper",
+    "{step}": "Det aktuelle shuffletrinnummer",
+    "{steps}": "Det samlede antal shuffletrin",
+    "{i}": "Den første kopindeks involveret i en ombytning",
+    "{j}": "Den anden kopindeks involveret i en ombytning",
+    "{prompt}": "Den lokaliserede promptfragment tilføjet efter kopperne",
+    "{max_index}": "Den højeste gyldige kopindeks, dvs. num_cups-1",
+    "{ball_pos}": "Kopindeksen, hvor bolden er under"
+  },
+  "player_prompt": {
+    "intro": "Følg den skjulte bold 'X', mens kopperne bliver blandet.\nEfter blandingen skal du gætte dens placering med `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Bolden starter: {line}",
+    "shuffle": "Blanding {step}/{steps}: byttede kopper {i} og {j}.",
+    "cups": "Kopper: {line}  {prompt}",
+    "guess_now": "(Gæt NU!)",
+    "reveal": "(Afslør: bold under {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Forkert handling. Brug `[k]`.",
+    "out_of_range": "Indeks uden for området 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Korrekt! Du fandt bolden.",
+    "lose": "Forkert — bolden var under kop {ball_pos}."
+  }
+}

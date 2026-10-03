@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Ste {role} v Colonel Blotto.\nVašim cieľom je vyhrať viac kôl ako váš súper.\nV každom kole prideľte presne {num_total_units} jednotiek cez polia {field_names}.\nHráč, ktorý prideľuje viac jednotiek do poľa, vyhráva to pole, a hráč, ktorý vyhráva viac polí, vyhráva kolo.\nNapríklad, '[A7 B7 C6]' prideľuje 7 jednotiek do A, 7 do B a 6 do C.",
+    "commander_alpha": "Veliteľ Alfa",
+    "commander_beta": "Veliteľ Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Kolo {current_round}/{num_rounds} ===\nKolá vyhrané - Veliteľ Alfa: {alpha_score}, Veliteľ Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nKolo {current_round}\nVeliteľ Alfa prideľoval: {p0_allocations}\nVeliteľ Beta prideľoval: {p1_allocations}\n",
+    "winner_alpha": "{message}Víťaz: Veliteľ Alfa",
+    "winner_beta": "{message}Víťaz: Veliteľ Beta",
+    "tie": "{message}Remíza!"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát vstupu. Použite: A:5, B:10, C:5",
+    "invalid_field": "Neplatné meno poľa. Platné polia: {field_names}",
+    "wrong_allocation_value": "Všetky prideľovania musia byť nezáporné celé čísla.",
+    "incorrect_total_units": "Musíte prideľovať presne {num_total_units} jednotiek. Aktuálna suma: {current_sum}",
+    "good_allocations": "Prideľovanie je dobré."
+  },
+  "outcome": {
+    "winner_alpha": "Veliteľ Alfa víťazí {score_0}-{score_1} po {num_rounds} kolách!",
+    "winner_beta": "Veliteľ Beta víťazí {score_1}-{score_0} po {num_rounds} kolách!",
+    "draw": "Hra končí remízou {score_0}-{score_1} po {num_rounds} kolách!",
+    "early_winner_alpha": "Veliteľ Alfa víťazí {scores_0}-{scores_1} (dosiahnutá väčšina)!",
+    "early_winner_beta": "Veliteľ Beta víťazí {scores_1}-{scores_0} (dosiahnutá väčšina)!"
+  }
+}

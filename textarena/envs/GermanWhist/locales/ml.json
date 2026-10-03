@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "കളി ആരംഭിക്കുന്നു. ട്രംപ് സ്യൂട്ട്: {trump_suit} (ട്രംപ് കാർഡ്: {trump_str}).",
+    "no_trump_card": "ഒന്നുമില്ല"
+  },
+  "player_prompt": {
+    "intro": "നിങ്ങൾ ജർമ്മൻ വിസ്റ്റിലെ കളിക്കാരൻ {player_id} ആണ്.\n{phase_info}\nനിങ്ങൾക്ക് {hand_size} കാർഡുകൾ ഉണ്ട്.\n'[play N]' ഉപയോഗിച്ച് ഒരു കാർഡ് കളിക്കുക, അത് നിങ്ങളുടെ കൈയ്യിലെ അതിന്റെ സ്ഥാനമാണ് (ഉദാഹരണത്തിന് '[play 3]').",
+    "phase_learning": "പഠന ഘട്ടം: ഓരോ തന്ത്രത്തിന്റെയും വിജയി മുഖം തുറന്ന കാർഡ് എടുക്കുന്നു, പരാജയപ്പെട്ടയാൾ ഡെക്കിൽ നിന്ന് അടുത്ത കാർഡ് എടുക്കുന്നു. ഈ ഘട്ടത്തിൽ നേടിയ തന്ത്രങ്ങൾ വിജയത്തിനായി കണക്കാക്കില്ല.",
+    "phase_playing": "കളി ഘട്ടം: ഡെക്ക് തീർന്നു. ഇനിമുതൽ എല്ലാ തന്ത്രങ്ങളും വിജയത്തിനായി കണക്കാക്കുന്നു."
+  },
+  "next_card": {
+    "playing_phase": "ഒരു കാർഡും ഓഫറില്ല - കളി ഘട്ടം ആരംഭിച്ചു.",
+    "deck_empty": "ഡെക്ക് ശൂന്യമാണ് - ഒരു കാർഡും ഓഫർ ചെയ്യുന്നില്ല.",
+    "available": "ഓഫറിലുള്ള കാർഡ്: {card}",
+    "available_trump": "കാർഡ് ഓഫർ: {card} (ട്രംപ്)"
+  },
+  "invalid_move": {
+    "wrong_format": "അസാധുവായ നീക്കം ഫോർമാറ്റ്. നിങ്ങളുടെ കൈയിലുള്ള Nth കാർഡ് കളിക്കാൻ '[play N]' ഉപയോഗിക്കുക.",
+    "bad_position": "ആ കാർഡ് സ്ഥാനം നിലവിലില്ല. നിങ്ങള് {hand_size} കാർഡുകള് കൈവശം വച്ചിരിക്കുന്നു.",
+    "must_follow_suit": "നിങ്ങൾ സ്യൂട്ട് പാലിക്കണം, ഒരു {lead_suit} കാർഡ് കളിക്കുക.",
+    "invalid_play": "ആ കാർഡ് കളിക്കാനാവില്ല."
+  },
+  "game_action": {
+    "played": "കളിക്കാരൻ {player_id} {card} കളിച്ചു."
+  },
+  "trick": {
+    "won": "{winner_id} എന്ന കളിക്കാരൻ {card} എന്ന തന്ത്രം ഉപയോഗിച്ച് വിജയിക്കുന്നു.",
+    "won_learning": "{winner_id} എന്ന കളിക്കാരൻ {card} എന്ന തന്ത്രം വിജയിക്കുകയും മുഖം മുകളിലേക്ക് കാർഡ് എടുക്കുകയും ചെയ്യുന്നു."
+  },
+  "phase": {
+    "learning_complete": "ഡെക്ക് തീർന്നു. പഠന ഘട്ടം കഴിഞ്ഞു - ബാക്കിയുള്ള ഓരോ തന്ത്രവും വിജയത്തിനായി കണക്കാക്കുന്നു."
+  },
+  "draw": {
+    "winner_received": "നിങ്ങൾ ജയിച്ചു, നിങ്ങൾക്ക് {card} ലഭിച്ചു.",
+    "loser_received": "നിങ്ങൾ തന്ത്രം നഷ്ടപ്പെടുത്തി ഡെക്കിൽ നിന്ന് {card} വരച്ചു.",
+    "winner_preview": "അടുത്ത കാർഡ് {card} ആണ്."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "ഇതുവരെ വിജയിച്ച തന്ത്രങ്ങൾ - കളിക്കാരൻ 0: {tricks0}, കളിക്കാരൻ 1: {tricks1}",
+    "scores_playing": "സ്കോറിംഗ് തന്ത്രങ്ങൾ - കളിക്കാരൻ 0: {tricks0}, കളിക്കാരൻ 1: {tricks1}",
+    "phase": "ഘട്ടം: {phase}",
+    "phase_learning": "ഘട്ടം: {phase} ({remaining_cards} ഡെക്കിൽ അവശേഷിക്കുന്ന കാർഡുകൾ)"
+  },
+  "hand": {
+    "no_cards": "കാർഡുകളില്ല.",
+    "no_cards_in_hand": "കൈയ്യിൽ കാർഡുകളില്ല",
+    "header": "നിങ്ങളുടെ കൈ:",
+    "trump_indicator": "(ട്രംപ്) ഒരു കാര്യം കൂടി പറയട്ടെ.",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "ഈ തന്ത്രം ഇതുവരെ ആരും കളിച്ചിട്ടില്ല.",
+    "header": "നിലവിലെ തന്ത്രം:",
+    "trump_indicator": "(ട്രംപ്) ഒരു കാര്യം കൂടി പറയട്ടെ.",
+    "card_line": "{observation} കളിക്കാരൻ {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "ഗെയിം ആരംഭിച്ചിട്ടില്ല",
+    "header": "=== ജർമൻ വിസ്റ്റ് ഗെയിം ===",
+    "phase": "{observation} ഘട്ടം: {phase}",
+    "trump_suit": "{observation} ട്രംപ് സ്യൂട്ട്: {trump_suit}",
+    "trump_card": "{observation} ട്രംപ് കാർഡ്: {card}",
+    "cards_left": "{observation} ഡെക്കിൽ അവശേഷിക്കുന്ന കാർഡുകൾ: {count}",
+    "next_card": "{observation} അടുത്ത കാർഡ് വിജയിക്ക്: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} നിലവിലെ തന്ത്രം:",
+    "trump_indicator": "(ട്രംപ്) ഒരു കാര്യം കൂടി പറയട്ടെ.",
+    "trick_line": "{observation} കളിക്കാരൻ {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} കളിക്കാരൻ {player_id}: {scoring} സ്കോറിംഗ് ട്രിക്കുകൾ ({tricks} ആകെ), {hand_size} കയ്യിലുള്ള കാർഡുകൾ"
+  },
+  "outcome": {
+    "summary": "പഠന ഘട്ടം - കളിക്കാരൻ 0: {l0}, കളിക്കാരൻ 1: {l1}. കളിക്കാരൻ ഘട്ടം - കളിക്കാരൻ 0: {p0}, കളിക്കാരൻ 1: {p1}. കളിക്കാരൻ {winner_id} {winner_tricks} സ്കോറിംഗ് തന്ത്രങ്ങളിലൂടെ വിജയിക്കുന്നു!"
+  }
+}

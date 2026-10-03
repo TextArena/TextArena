@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "İteratif Mahkumun İkilemi oyununda Oyuncu {player_id}'siniz. Oyun {num_rounds} turdan oluşuyor.\n\nOyun Yapısı:\n- Her karar öncesi {total_conversation_rounds} tur boyunca serbestçe iletişim kurabilirsiniz.\n- Ardından, her iki oyuncu da aynı anda işbirliği veya ihanet seçecektir.\n\nÖdül Matrisi (her tur sabit):\n- İkisi de İşbirliği Yapar ➜ her biri {cooperate_reward}\n- İkisi de İhanet Eder ➜ her biri {mutual_defect_reward}\n- Biri İhanet Eder, diğeri İşbirliği Yapar ➜ İhanet Eden {defect_reward}, İşbirliği Yapan {sucker_reward}\n\nNasıl Oynanır:\n- Konuşma sırasında: istediğiniz metni yazabilirsiniz.\n- Karar aşamasında: '[Cooperate]' veya '[Defect]' (büyük/küçük harf duyarsız) ekleyin. Jetonun önce/sonrasına ek metin ekleyebilirsiniz."
+  },
+  "phases": {
+    "conversation_finished": "Tur {round} için konuşma sona erdi. Lütfen \\boxed{{}} içinde '[Cooperate]' veya '[Defect]' ile yanıt verin.",
+    "starting_round": "--- Tur {round} Başlıyor ---",
+    "round_summary": "Tur {round} sonuçları:\n{outcome}\nOyuncu 0, {r0} kazandı (toplam {score_0}), Oyuncu 1, {r1} kazandı (toplam {score_1})."
+  },
+  "outcome": {
+    "winner": "Oyuncu {winner}, {win_score} - {lose_score} kazandı.",
+    "draw": "Berabere! Her iki oyuncu da {s0} puan aldı.",
+    "round_both_cooperate": "Her iki oyuncu da işbirliği yaptı.",
+    "round_both_defect": "Her iki oyuncu da ihanet etti.",
+    "round_p0_cooperates_p1_defects": "Oyuncu 0 işbirliği yaptı, Oyuncu 1 ihanet etti.",
+    "round_p0_defects_p1_cooperates": "Oyuncu 0 ihanet etti, Oyuncu 1 işbirliği yaptı."
+  }
+}

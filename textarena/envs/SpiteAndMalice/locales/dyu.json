@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "I ye Player {player_id} ye kɛlɛbaga dɔw lafɛni Spite and Malice. I ni kan ye kɛlɛbaga dɔw lafɛni kɔrɔ ye i kɔrɔ ye payoff pile kɔnɔ.\n\n### Kɛlɛbaga Dɔw Lafɛni Kɔrɔ:\n- Kɛlɛbaga dɔw lafɛni ye kɔrɔ ye i payoff pile kɔnɔ ka kɛlɛbaga dɔw lafɛni.\n- I ni kan ye kɛlɛbaga dɔw lafɛni kɛlɛbaga sɔrɔ:\n  1. I **bolo** (i bɛ kɛlɛbaga dɔw lafɛni kɔnɔ ka kɛlɛbaga dɔw lafɛni).\n  2. **Payoff pile kɔnɔ ka kɛlɛbaga dɔw lafɛni**.\n  3. **Discard pile kɔnɔ ka kɛlɛbaga dɔw lafɛni**.\n\n### Kɛlɛbaga Dɔw Lafɛni Siraba:\n- I ni kan ye kɛlɛbaga dɔw lafɛni ka kɛlɛbaga dɔw lafɛni kɔnɔ ka kɛlɛbaga dɔw lafɛni kɔrɔ ye **kelen kɔnɔ ka kɛlɛbaga dɔw lafɛni** (center pile bɛ kɔnɔ ka Ace kɔrɔ ka Queen kɔrɔ; Kings bɛ wild - i ni kan ye kɛlɛbaga dɔw lafɛni kɔnɔ ka kɛlɛbaga dɔw lafɛni kɔrɔ ka kɛlɛbaga dɔw lafɛni kɔnɔ ka kɛlɛbaga dɔw lafɛni kɔrɔ).\n- I ni kan ye kɛlɛbaga dɔw lafɛni ka kɛlɛbaga dɔw lafɛni kɔnɔ ka kɛlɛbaga dɔw lafɛni kɔrɔ ye **discard kɛlɛbaga dɔw lafɛni** kɔnɔ ka kɛlɛbaga dɔw lafɛni kɔrɔ ka kɛlɛbaga dɔw lafɛni kɔnɔ.\n- I ni kan ye center pile kɔnɔ ka Queen kɔrɔ ka kɛlɛbaga dɔw lafɛni kɔnɔ ka kɛlɛbaga dɔw lafɛni kɔrɔ.\n- Kɛlɛbaga dɔw lafɛni kɔrɔ ye: A=1, 2=2, ..., 9=9, J=10, Q=11, K ye wild.\n\n### Kɛlɛbaga Dɔw Lafɛni Kɛlɛbaga:\n1. **Draw**: Kɛlɛbaga dɔw lafɛni kɔnɔ ka kɛlɛbaga dɔw lafɛni kɔrɔ ka [draw] kɛlɛbaga.\n2. **Play kɛlɛbaga dɔw lafɛni**: Kɛlɛbaga dɔw lafɛni kɔnɔ ka kɛlɛbaga dɔw lafɛni kɔrɔ ka [play A♠ 0] kɛlɛbaga (kɔrɔ 'A♠' ye kɛlɛbaga dɔw lafɛni kɔnɔ ka '0' ye center pile kɔnɔ ka index).\n3. **Discard**: I ni kan ye kɛlɛbaga dɔw lafɛni ka kɛlɛbaga dɔw lafɛni kɔnɔ ka kɛlɛbaga dɔw lafɛni kɔrɔ ka [discard A♠ 1] kɛlɛbaga (kɔrɔ 'A♠' ye kɛlɛbaga dɔw lafɛni kɔnɔ ka '1' ye discard pile kɔnɔ ka index). I ni kan ye kɛlɛbaga dɔw lafɛni ka payoff pile kɔnɔ ka kɛlɛbaga dɔw lafɛni kɔrɔ ka discard kɛlɛbaga dɔw lafɛni kɔnɔ.\n\n"
+  },
+  "board": {
+    "current_board": "Kɛlɛ kɔnɔ kɔnɔ:\n\n{board}\nKɛlɛw kɔnɔ: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Kɔnɔ Sɔrɔ ---\n",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Player {player_id} kɔnɔ ---\n",
+    "payoff": "{observation}Kɛlɛ kɔnɔ kɔnɔ (Kɛlɛ kɔnɔ): {top_card}, Kɛlɛ kɔnɔ kɔnɔ: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Kɛlɛ kɔnɔ kɔnɔ: {discard}\n",
+    "empty": "Fɛɛn tɛ yen."
+  },
+  "game_message": {
+    "no_cards_left": "I be se ka tɛmɛ fɛɛrɛ nunu fɛ k'i ka desizɔnw latigɛ: 1. Walisa i bolo kana kɛ gwansan ye 2. Ka dakabana dɔ sɔrɔ 3. N'u y'a to a ma ɲɛ, n'a b'a la k'o tigi bena o koo ɲɔgɔn lo miiri."
+  },
+  "invalid_move": {
+    "wrong_format": "Jurusira man ɲi. Ɲininkɛla {player_id} ma jaabili kɛ ni jususira ɲuman ye sigilanw na.",
+    "invalid_play": "Kɔnɔ minɛnɛ. Mogɔ {player_id} ka kɛlɛ {card} kɔnɔ {index} na.",
+    "discard_from_payoff": "Kɛlɛ kɔnɔ bɛɛ kɔrɔ. Player {player_id} bɛɛ kɛlɛ kɔnɔ kɔnɔ kɔnɔ.",
+    "discard_not_in_hand": "Jurutigi {player_id} y'a ɲini ka kariti fifa min tɛ a bolo.",
+    "wrong_move_type": "Kɛɛtaa kɔnɔnw kɛɛ sɔrɔ. Jokelaso {player_id} ma kɛ a jɛkuluw kɔnɔ a la."
+  },
+  "game_action": {
+    "you_drew": "I ye karitiw bɔ.",
+    "opponent_drew": "Jurusɛbɛbaga {player_id} ye karitiw bɔ.",
+    "you_played": "I da {card} kɔnɔ kɛɛtaa kɔnɔntɔnw {index}.",
+    "opponent_played": "Jokelaso {player_id} da {card} kɔnɔ kɛɛtaa kɔnɔntɔnw {index}.",
+    "you_discarded": "I ma kɛ {card} kɔnɔ kɛɛtaa kɔnɔntɔnw {index}, o cɛsɛ kɛ a faama jɛkuluw ye. A bɛɛ kɔnɔnw jokelaso {next_player_id} bɛɛ na kɛ sɔrɔ.",
+    "opponent_discarded": "Jokelaso {player_id} ma kɛ {card} kɔnɔ kɛɛtaa kɔnɔntɔnw {index}, o cɛsɛ kɛ a faama jɛkuluw ye. A bɛɛ kɔnɔnw jokelaso {player_id} kɔnɔ kɛ sɔrɔ. Jokelaso {next_player_id}, n'i bɛɛ na kɛ sɔrɔ. Ala ka kɛ a jɛkuluw kɔnɔ a la: [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mogɔ {current_player} ka kɛlɛ kɔnɔ ka ban! Mogɔ {current_player} ka taga kɛlɛ!",
+    "deadlock_player_0": "A ka kɛlɛya! Mogɔ 0 ka taga kɛlɛ {player_0_payoff} kɔnɔ na Mogɔ 1 {player_1_payoff} kɔnɔ.",
+    "deadlock_player_1": "A ka kɛlɛya! Mogɔ 1 ka taga kɛlɛ {player_1_payoff} kɔnɔ na Mogɔ 0 {player_0_payoff} kɔnɔ.",
+    "deadlock_tie": "A ka kɛlɛya ka jɛlɛ! Mogɔ wɛrɛ bɛ {player_0_payoff} kɔnɔ. Mogɔ {current_player} ka taga kɛlɛ fɔɔ."
+  }
+}

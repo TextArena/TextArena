@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ang Player {player_id} sa Quantum Tic Tac Toe.\nAng imong simbolo mao ang '{symbol}', ug ang imong galaw numero ayaw kay siempre {parity} (e.g., X1, X3 o O2, O4).\n\nTuyo: Daog pinaagi sa pormasyon sa usa ka linya sa tulo ka classical mark (nagpasok gikan sa superpositions).\n\nUnsaon pagdula:\n- Sa matag turn, ipahigayon ang usa ka spooky mark sa duha ka lain-laing bakyaw nga mga kwadrado gamit ang format '[a,b]'.\n- Kining mga marka kay entangled, ug gilabel ingon 'X1 / X1' o 'O4 / O4'.\n- Dili ka makahigayon sa spooky mark sa usa ka kwadrado nga naa na ang collapse (nagpasok).\n\nPangcollapse nga Pulong:\n- Kon ang imong galaw nagmugna sa usa ka cycle sa entanglement graph, kini nag-collapse awtomatikamente.\n- Ang matag spooky mark sa cycle mahimong usa ka classical mark sa usa sa iyang duha ka posisyon.\n- Ang tanan nga dependent spooky mark usab nag-collapse.\n\nKadaugan:\n- Ang dula natapos kon ang usa ka player adunay tulo ka classical mark sa usa ka linya.\n- Kon ang duha ka mga player makadawat sa usa ka linya sa mao gihapon nga collapse, ang adunay ubos nga max galaw numero ang modaug.\n\nHalimbawa sa galaw: '[0,4]' nagpahigayon sa usa ka spooky mark sa mga cell 0 ug 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Board:\n\n{board}\n\nIsumite ang imong galaw sa '[a,b]' aron ipahigayon ang quantum mark sa duha ka lokasyon."
+  },
+  "invalid_move": {
+    "wrong_format": "Dili balido nga format. Gamita ang \"[a,b]\".",
+    "invalid_cells": "Dili-makataronganon o duplikadong mga index sa selula.",
+    "already_solidified": "Ang usa sa mga selula nag-init na."
+  },
+  "game_action": {
+    "placed": "Ang Player {player_id} nagpahigayon sa ilang simbolo sa superposition sa taliwala sa mga cell {pos_a} ug {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Giresolba ang dependent superposition. Ang cell ({r}, {c}) karon {symbol}.",
+    "last_cell_resolved": "Giresolba ang superposition alang sa katapusan nga cell. Ang cell ({r}, {c}) karon {symbol}.",
+    "superposition_resolved": "Giresolba ang superposition. Ang cell ({r}, {c}) karon {symbol}."
+  },
+  "outcome": {
+    "win": "Ang player {player_id} modaog uban sa solidified marks!",
+    "draw": "Ang dula maoy draw!"
+  }
+}

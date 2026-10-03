@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id}. Du spielst Battleship.\nDein Ziel ist es, alle Schiffe deines Gegners zu versenken, bevor dieser deine versenkt.\nIn deinem Zug kannst du Raketen auf bestimmte Koordinaten im folgenden Format abfeuern: '[a4]'. Trifft die Rakete ein Schiff, wird dies mit 'X' markiert. Verfehlt sie ihr Ziel, wird dies mit 'O' markiert. In beiden Fällen informiert dich die Spielumgebung über das Ergebnis. Wenn du ein Schiff versenkt hast, teilt dir die Spielumgebung dies ebenfalls mit!\nDas Spiel endet, wenn alle Schiffe eines Spielers versenkt wurden.\nDein anfängliches Spielfeld zeigt alle deine platzierten Schiffe und die Treffer deines Gegners auf deinem Feld sowie deine Treffer und Fehlschüsse auf dem gegnerischen Feld, ohne die Schiffe des Gegners anzuzeigen.\nHier ist das anfängliche Spielfeld:\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Der Spieler hat nicht mit einer gültigen Koordinate in eckigen Klammern geantwortet.",
+    "out_of_board": "Die Koordinate {coord} liegt außerhalb des Spielfelds.",
+    "already_fired": "Auf die Koordinate {coord} wurde bereits geschossen."
+  },
+  "game_action": {
+    "you_sunk": "Versenkt! Du hast bei {coord} ein Schiff versenkt! Dein aktualisiertes Spielfeld:\n{view}",
+    "opp_sunk": "Der Gegner hat dein Schiff bei {coord} versenkt! Dein aktualisiertes Spielfeld:\n{view}",
+    "you_hit": "Treffer! Du hast bei {coord} ein Schiff getroffen! Dein aktualisiertes Spielfeld:\n{view}",
+    "opp_hit": "Der Gegner hat dein Schiff bei {coord} getroffen! Dein aktualisiertes Spielfeld:\n{view}",
+    "you_miss": "Fehlschuss! Du hast das Schiff bei {coord} verfehlt! Dein aktualisiertes Spielfeld:\n{view}",
+    "opp_miss": "Der Gegner hat dein Schiff bei {coord} verfehlt! Dein aktualisiertes Spielfeld:\n{view}"
+  },
+  "outcome": {
+    "win": "Spieler {player_id} hat alle Schiffe des Gegners versenkt!"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_comment": "Liar's Dice oyunu üçün istifadəçi tərəfindən görünən sətirlər. Mötərizəli hərəkət tokenləri ('[Bid: X, Y]', '[Call]'), oyunçu indeksləri, zər üzü dəyərləri, miqdar və hesablar neytral yuvalardır və heç vaxt tərcümə edilməməlidir.",
+  "_slots": {
+    "player_id": "oyunçu indeksi (tam ədəd)",
+    "num_players": "oyunda olan oyunçu sayı (tam ədəd)",
+    "dice_summary": "hər oyunçu üçün qalan zər sayılarının '; '-birləşdirilmiş xülasəsi",
+    "your_dice": "bu oyunçunun zər üzü dəyərlərinin vergüllə birləşdirilmiş siyahısı",
+    "p": "oyunçu indeksi (tam ədəd)",
+    "d": "həmin oyunçu üçün qalan zər sayı (tam ədəd)",
+    "current_player_id": "çağırış edən oyunçu indeksi (tam ədəd)",
+    "face_value": "hesablanan zər üzü dəyəri (1-6)",
+    "count": "əslində uyğun gələn zər sayı (tam ədəd)",
+    "quantity": "təklif miqdarı (tam ədəd)",
+    "loser_id": "zər itirən oyunçu indeksi (tam ədəd)",
+    "new_quantity": "yeni təklif miqdarı (tam ədəd)",
+    "current_quantity": "cari təklif miqdarı (tam ədəd)",
+    "new_face_value": "yeni təklif üzü dəyəri (tam ədəd)",
+    "current_face_value": "cari təklif üzü dəyəri (tam ədəd)",
+    "action": "oyunçu tərəfindən göndərilən xam hərəkət sətri",
+    "reason": "iç-içə təklif-rədd səbəbi",
+    "winner": "qalib gələn oyunçu indeksi (tam ədəd)",
+    "final_ranking": "birinci uzaqlaşandan qalibə qədər oyunçu indekslərinin siyahısı"
+  },
+  "player_prompt": {
+    "intro": "Siz {num_players} oyunçu ilə Liar's Dice oyununda Oyunçu {player_id}-siniz.\nQaydalar:\n- Sizin növbənizdə, siz ya:\n  1) Cari təklifdən daha yüksək miqdar və ya daha yüksək üz (və ya hər ikisi) ilə yeni təklif edə bilərsiniz; məsələn, '[Bid: 3, 4]',\n  2) Son təklifi '[Call]' yazaraq çağıra bilərsiniz.\n\nƏgər siz çağırış edərsiniz:\n  - Əgər bütün zərlər arasında həqiqi hesablanan üz dəyəri təklifdən azdırsa, son təklifçi bir zər itirir.\n  - Əks halda, çağırış edən oyunçu bir zər itirir.\nZəri 0-a çatan oyunçu uzaqlaşır. Son qalan oyunçu qalib gəlir."
+  },
+  "board": {
+    "per_player": "\tOyunçu {p}: {d}",
+    "new_round": "\nYeni raund - Qalan zərlər: {dice_summary}\nSizin cari Zərləriniz: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Oyunçu {current_player_id} çağırış edir! Üz {face_value} üzü üçün həqiqi hesab {count}-dir, bu isə {quantity}-dən AZ-dır.\nOyunçu {loser_id} (son təklifçi) bir zər itirir.",
+    "caller_loses": "Oyunçu {current_player_id} çağırış edir! Üz {face_value} üzü üçün həqiqi hesab {count}-dir, bu isə {quantity}-dən ÇOX-dur və ya bərabərdir.\nOyunçu {loser_id} (çağırış edən) bir zər itirir."
+  },
+  "action": {
+    "bid_announce": "Oyunçu {player_id} üz {face_value} üzü üçün {quantity} təklif edir."
+  },
+  "invalid_move": {
+    "call_no_bid": "Çağırış edildiyi halda heç bir təklif edilməyib.",
+    "invalid_bid": "Yanlış təklif: {reason}",
+    "not_recognized": "Hərəkət ya '[Bid: X, Y]' ya da '[Call]' kimi tanınmır. Göndərilən hərəkət: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Yeni miqdar {new_quantity} cari {current_quantity}-dən azdır.",
+    "face_lower": "Yeni üz dəyəri {new_face_value} cari {current_face_value}-dən azdır.",
+    "identical": "Təklif cari təklif ilə eynidir.",
+    "face_range": "Üz dəyəri 1 və 6 arasında olmalıdır."
+  },
+  "message": {
+    "eliminated_invalid": "Oyunçu {player_id} yanlış hərəkətə görə uzaqlaşdırıldı."
+  },
+  "outcome": {
+    "win": "Oyunçu {winner} qalib gəldi! Final sıralaması: {final_ranking}"
+  }
+}

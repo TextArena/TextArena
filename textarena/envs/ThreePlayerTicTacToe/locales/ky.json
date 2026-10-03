@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Сиз {player_id} оюнчусуңуз Three-Player Tic Tac Toe оюндунда.\nСиздин символуңуз '{symbol}'.\nСиз өз символуңузду 5x5 тактага орнотуп, төрттөн кылып сап түзөт.\nСаптар горизонталдык, вертикалдык же диагоналдык болушу мүмкүн.\nКөчүңүздү '[4]' форматында берип, 4-целляны белгилейсиңиз."
+  },
+  "board": {
+    "current_board": "Учурдагы такта: {board} Колдо бар кадамдар: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Жарамсыз көчүрүү форматы. 0-{max_cell} уячасы бар жерде \"[cell]\" колдонуңуз.",
+    "out_of_range": "Жарамсыз уячанын номери: {cell}. 0 жана {max_cell} ортосунда болушу керек.",
+    "already_occupied": "{cell} уячасы эбак ээленген.",
+    "made_invalid": "Оюнчу {player_id} жараксыз оюн жасады"
+  },
+  "game_action": {
+    "placed": "Оюнчу {player_id} өзүнүн белгисин ({symbol}) талаага ({row}, {col}) жайгаштырат."
+  },
+  "outcome": {
+    "win": "Оюнчу {player_id} ({symbol}) утуп алат!",
+    "draw": "Оюн тең чыгуу менен аяктады!"
+  }
+}

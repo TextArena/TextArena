@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Du är spelare {player_id} i Nim.\nDitt mål är att ta det sista återstående objektet.\nI varje tur ska du välja exakt en hög och ta bort ett eller flera objekt från den.\nAnvänd formatet '[hög kvantitet]', där hög är högens index och kvantitet är antalet objekt som ska tas bort.\nTill exempel tar '[0 3]' bort 3 objekt från hög 0."
+  },
+  "state": {
+    "current_pile": "Aktuell hög:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Inget giltigt dragformat hittades. Använd '[hög kvantitet]'.",
+    "correct_format_wrong_fields": "Spelare {player_id}, Ogiltig åtgärd. Kolumn {col} är utanför gränserna.",
+    "out_of_range": "Högindex {pile_index} är utanför gränserna.",
+    "non_positive": "Måste ta bort minst 1 objekt.",
+    "exceeds_pile": "Kan inte ta bort {quantity} från hög {pile_index} (endast {pile_count} kvar)."
+  },
+  "observation": {
+    "removed_from_piles": "Spelare {player_id} spelade [{pile_index} {quantity}], och tog bort {quantity} objekt från hög {pile_index}."
+  },
+  "outcome": {
+    "win": "Spelare {player_id} tog det sista objektet!"
+  }
+}

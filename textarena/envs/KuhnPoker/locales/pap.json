@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Bo ta Hungadó {player_id} den un wega di {max_rounds} ronde di Kuhn Poker.\nReglanan di Wega:\n- Kuhn Poker ta usa un pak di 3 karta ku J, Q, K (J mas abou, K mas haltu)\n- Kada hungadó ta pone {ante} chip den antes i ta risibi 1 karta kada ronde (nota ku kartanan ta parti sin reemplaso, asina bo no por tin e mesun karta ku bo opponent).\n- Wega ta sigui pa {max_rounds} rondenan\n- E hungadó ku mas chip despues di tur rondenan ta gana\nReglanan di Akshon:\n- '[check]': Pasa sin apostá (solamente si no tin apostá riba mesa)\n- '[bet]': Agrega 1 chip na e pot (solamente si no tin apostá riba mesa)\n- '[call]': Iguala e apostá di bo opponent dor di agrega 1 chip na e pot\n- '[fold]': Entrega bo man i laga bo opponent gana e pot"
+  },
+  "init_round": {
+    "round_start": "### Kuminsando ronda {current_round} di {max_rounds} rondanan. Bo karti ta: '{player_card}'",
+    "available_actions": "Bo akshonnan disponibel ta: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksion mester ta [Check], [Bet], [Call], o [Fold].",
+    "not_legal": "E akshon mester ta {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Hungadó {player_id}, a entrega akshon: '[{move}]'.",
+    "valid_actions": "Bo akshonnan disponibel ta: {legal_actions}.",
+    "round_summary": "{reason} Puntuashon aktual: Hungadó 0: '{player_0_chips}'; Hungadó 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Hungadó {winner} su {winner_card} ta bati Hungadó {loser} su {loser_card}. Hungadó {winner} ta gana e pot di {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "Na final di e rondnan {max_rounds}, tur dos hungadó tabatin mesun kantidat di chip.",
+    "round_win": "E hungadó {player_id} a fold.",
+    "winner_player0": "E hungadó 0 a gana dor di tin mas chip na final di tur rondo {max_rounds}.",
+    "winner_player1": "E hungadó 1 a gana dor di tin mas chip na final di tur rondo {max_rounds}."
+  }
+}

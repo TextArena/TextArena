@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Oled Mängija {player_id}. Mängid Sudokut.\nSiin on praegune seis Sudokuvõrgustikus. Iga rida on nummerdatud 1-st 9-ni, ja iga veerg on samuti nummerdatud 1-st 9-ni.\nTühjad lahtrid on esindatud punktiga ('.'), ja eelnevalt täidetud lahtrid sisaldavad numbreid 1-st 9-ni.\n\nPraegune Sudokuvõrgustik:\nSinu eesmärk on täita tühjad lahtrid 9x9 võrgustikus numbritega 1-st 9-ni nii, et:\n1. Iga rida sisaldab kõiki numbreid 1-st 9-ni ilma kordusteta.\n2. Iga veerg sisaldab kõiki numbreid 1-st 9-ni ilma kordusteta.\n3. Iga üheksast 3x3 alamvõrgustikust sisaldab kõiki numbreid 1-st 9-ni ilma kordusteta.\n\nReeglid ja juhised:\n1. **Ära ülekirjuta** algseid numbreid, mis on võrgustikus ette antud.\n2. **Täida ainult** tühjad lahtrid, mis on esindatud punktiga ('.').\n3. Võid vastata mis tahes viisil, aga veendu, et sinu vastus sisaldab vormingut '[rida veerg number]'.\n4. **Veendu**, et sinu käik ei riku Sudokureegleid. Kehtetud käigud tulemuseks on karistused.\nNäited:\n- **Kehtiv käik**:\n  - Võrgustiku lõik enne käiku:\n  \n  - Käik: `[5 3 7]`\n  - Selgitus: Seadmise 7 reale 5, veerule 3 ei riku ühtegi Sudokureeglit.\n\n- **Kehtetu käik** (eelnevalt täidetud lahtri ülekirjutamine):\n  - Võrgustiku lõik enne käiku:\n  \n  - Käik: `[1 1 9]`\n  - Selgitus: Laher (1,1) on juba täidetud numbriga 5. Sa ei saa seda üle kirjutada.\n\n- **Kehtetu käik** (Sudokureeglite rikkumine):\n  - Võrgustiku lõik enne käiku:\n  \n  - Käik: `[1 3 5]`\n  - Selgitus: Seadmise 5 reale 1, veerule 3 rikub reeglit, kuna 5 on juba olemas real 1.\n\nSinu käikude ja mõtete ajalugu lisatakse, kui sa mängid rohkem voorusid. Kasuta oma käigu ajalugu, et parandada oma otsustusvõimet, vältides käike, mida sa oled proovinud. Head õnne!\n\n"
+  },
+  "board": {
+    "game_board": "Mänguvõrgustik:\n{board}",
+    "board_state": "Võrgustiku seisund: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Vale käivorming. Mängija {player_id} ei vastanud kehtiva 'rida veerg number' vorminguga.",
+    "out_of_bounds": "Kehtetu käik. Mängija {player_id} üritas paigutada {num} positsioonile ({row}, {col}), mis on võrgustiku piiridest väljas.",
+    "overwrite": "Kehtetu käik. Mängija {player_id} üritas üle kirjutada eelnevalt täidetud lahtri ({row}, {col}).",
+    "violates_rules": "Kehtetu käik. Mängija {player_id} üritas paigutada {num} positsioonile ({row}, {col}), mis rikub Sudokureegleid."
+  },
+  "outcome": {
+    "win": "Palju õnne! Mängija {player_id} täitis Sudokuvõrgustiku.",
+    "turn_limit": "Käikude limiit on saavutatud. Sa täitsid õigesti {percent}% tühjadest lahtritest."
+  }
+}

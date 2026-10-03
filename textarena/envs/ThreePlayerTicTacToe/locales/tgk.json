@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Шумо Бозигар {player_id} дар Сегона-Тик-Так-Туми Бозиҳои меҳмонӣ ҳастед.\nРамзи шумо '{symbol}' аст.\nШумо навбатҳои худ рамзҳои худро дар борди 5x5 гузошта, хатти чорякро ташкил мекунед.\nХаттҳои умумӣ, амудӣ ё қутбӣ мешаванд.\nХарокатҳои худро бо формати '[4]' истифода кунед, то халиғаи 4-умро ишора кунед."
+  },
+  "board": {
+    "current_board": "Борди кунунӣ:\n\n{board}\n\nХаркатҳои дастрас: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Формати ҳаракат ғайридуруст. '[cell]' истифода кунед, ҷо ки халиға 0-{max_cell} аст.",
+    "out_of_range": "Рақами халиғаи ғайридуруст: {cell}. Байни 0 ва {max_cell} бояд бошад.",
+    "already_occupied": "Ҳуҷраи {cell} аллакай ишғол шудааст.",
+    "made_invalid": "Бозингар {player_id} ҳаракати беэътибор содир кардааст."
+  },
+  "game_action": {
+    "placed": "Бозигар {player_id} рамзи худ ({symbol}) дар майдон ({row}, {col}) гузошт."
+  },
+  "outcome": {
+    "win": "Бозигар {player_id} ({symbol}) ғолиб меояд!",
+    "draw": "Бозӣ мусовӣ аст!"
+  }
+}

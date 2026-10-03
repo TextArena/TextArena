@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ou se Jwè {player_id} nan Tic Tac Toe Kwantik.\nSenbòl ou se '{symbol}', ak nimewo mouvman ou toujou {parity} (pa egzanp, X1, X3 oswa O2, O4).\n\nObjektif: Genyen pa fòme yon liy de mak klasik (solidifye soti nan sipèpozisyon).\n\nJan pou jwe:\n- Sou chak tou, mete yon mak espes nan de kare vid separe ak fòmat '[a,b]'.\n- Mak sa yo se antangle, ak etikete tankou 'X1 / X1' oswa 'O4 / O4'.\n- Ou pa ka mete mak espes nan yon kare ki deja tonbe (solidifye).\n\nReg sou kolaps:\n- Si mouvman ou kreye yon sik nan gwaf entanglement, li tonbe otomatikman.\n- Chak mak espes nan sik la vin yon mak klasik nan youn nan de pozisyon li.\n- Mak espes depandante yo tonbe tou.\n\nVictwa:\n- Jwè a fini lè yon jwè gen twa mak klasik an liy.\n- Si de jwè yo jwenn yon liy pandan menm kolaps la, youn ak nimewo mouvman maksimòm pi ba a genyen.\n\nEgzanp mouvman: '[0,4]' mete yon mak espes nan selil 0 ak 4."
+  },
+  "board": {
+    "current_board": "Tablo Tic Tac Toe Kwantik:\n\n{board}\n\nSoumèt mouvman ou tankou '[a,b]' pou mete yon mak kwantik nan de lokasyon."
+  },
+  "invalid_move": {
+    "wrong_format": "Pa valab fòma. Sèvi ak \"[a,b]\".",
+    "invalid_cells": "Envalid oswa endèks selil duplicate.",
+    "already_solidified": "Youn nan selil yo deja solidifye."
+  },
+  "game_action": {
+    "placed": "Jwè {player_id} mete senbòl li nan yon sipèpozisyon ant selil {pos_a} ak {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Sipèpozisyon depandante rezoud. Selil ({r}, {c}) kounye a {symbol}.",
+    "last_cell_resolved": "Sipèpozisyon pou dènye selil rezoud. Selil ({r}, {c}) kounye a {symbol}.",
+    "superposition_resolved": "Sipèpozisyon rezoud. Selil ({r}, {c}) kounye a {symbol}."
+  },
+  "outcome": {
+    "win": "Jwè {player_id} genyen ak mak solidifye!",
+    "draw": "Jwèt la se yon match nul!"
+  }
+}

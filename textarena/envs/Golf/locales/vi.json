@@ -1,0 +1,79 @@
+{
+  "_comment": "Tệp ngôn ngữ Golf (trò chơi bài). KHÔNG được dịch các khóa (bên trái). Chỉ dịch các giá trị (bên phải). Giữ mọi {placeholder} y như ban đầu. Không dịch các token hành động ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), các nhãn bài (A, 2-10, J, Q, K), các ký hiệu chất, các chữ cái X/Y được sử dụng làm placeholder hàng/cột trong token, hoặc các điểm số/vị trí số. Giữ nguyên bố cục ASCII (khoảng cách, số cột, '?', 'Col', 'Row' căn chỉnh) để bảng vẫn có thể đọc được.",
+  "_slots": {
+    "{player_id}": "Số thứ tự của người chơi, ví dụ 0 hoặc 1",
+    "{pid}": "Số thứ tự của người chơi, ví dụ 0 hoặc 1",
+    "{winner}": "Số thứ tự của người chơi có điểm số thấp nhất",
+    "{score}": "Tổng điểm số",
+    "{card}": "Nhãn bài như A♠, 10♥, K♦ hoặc Q♣",
+    "{new}": "Nhãn bài được đặt vào bảng",
+    "{old}": "Nhãn bài bị loại khỏi bảng",
+    "{row}": "Số hàng",
+    "{col}": "Số cột",
+    "{max_row}": "Số hàng lớn nhất hợp lệ",
+    "{max_col}": "Số cột lớn nhất hợp lệ",
+    "{reason}": "Một cụm từ đã được hiển thị mô tả lý do vòng cuối cùng bắt đầu",
+    "{n}": "Số hàng được hiển thị ở đầu hàng của bảng",
+    "{cards}": "Các ô của một hàng trong bảng đã được hiển thị",
+    "{hand}": "Khối bảng của người chơi đã được hiển thị",
+    "{discard}": "Nhãn bài trên đỉnh của chồng bài bỏ, hoặc từ 'none'",
+    "{options}": "Dòng liệt kê các hành động có thể thực hiện",
+    "{scores}": "Danh sách điểm số cuối cùng của mỗi người chơi"
+  },
+  "player_prompt": {
+    "intro": "Bạn đang chơi Golf (Trò chơi bài) - Người chơi {player_id}.\nMục tiêu: Đạt tổng điểm thấp nhất trong vòng chơi này. Nếu các cột có cùng giá trị, chúng sẽ được tính là 0.\nGiá trị bài: A=1, 2-10=gía trị trên bài, J/Q=10, K=0\n\nHành động (sử dụng chính xác các dấu ngoặc vuông):\n- '[draw]' - Rút từ bộ bài\n- '[take]' - Lấy từ chồng bài bỏ\n- '[swap X Y]' - Đổi bài rút được với vị trí X (hàng) Y (cột)\n- '[discard]' - Bỏ bài rút được\n"
+  },
+  "board": {
+    "drew": "Bạn rút được: {card}\nBây giờ bạn phải [swap X Y] hoặc [discard] nó.",
+    "took": "Bạn lấy được: {card} từ chồng bài bỏ\nBạn phải [swap X Y] với nó (không thể bỏ).\n",
+    "peeked": "Bạn đã xem vị trí ({row},{col}): {card}",
+    "turn_view": "Bàn tay của bạn:\n{hand}\nChồng bài bỏ: {discard}\n{options}",
+    "none": "Không có"
+  },
+  "options": {
+    "final_turns": "Vòng cuối cùng! Các lựa chọn của bạn: [draw], [take], [peek X Y]",
+    "draw": "Các lựa chọn của bạn: [draw], [take]",
+    "must_swap": "Bạn phải: [swap X Y] (không thể bỏ bài từ chồng bài bỏ)",
+    "swap_or_discard": "Bạn phải: [swap X Y] hoặc [discard]"
+  },
+  "hand": {
+    "no_cards": "Không có bài",
+    "header": "  Cột:   1    2    3",
+    "row": "Hàng {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Người chơi {pid} đã đổi {new} với {old} tại vị trí ({row},{col})",
+    "discarded": "Người chơi {pid} đã bỏ {card}"
+  },
+  "message": {
+    "deck_empty": "Bộ bài đã hết! Trò chơi kết thúc ngay lập tức.",
+    "knocked": "Người chơi {pid} đã gõ! Mỗi người chơi khác được thêm một lượt.",
+    "final_round": "Người chơi {pid} {reason}! Mỗi người chơi khác được thêm một lượt."
+  },
+  "reason": {
+    "all_revealed": "có tất cả các bài đã lật"
+  },
+  "invalid": {
+    "wrong_action": "Sử dụng chính xác MỘT hành động trong ngoặc vuông: [draw], [take], [swap X Y], [discard], [knock], hoặc [peek X Y]",
+    "discard_empty": "Chồng bài bỏ đã hết!",
+    "must_draw_first": "Bạn phải [draw], [take], [knock], hoặc [peek X Y] trước",
+    "cannot_discard_taken": "Bạn không thể bỏ bài lấy từ chồng bài bỏ. Bạn phải đổi nó.",
+    "have_drawn_card": "Bạn có một bài rút. Bạn phải [swap X Y] hoặc [discard] nó.",
+    "need_drawn_swap": "Bạn cần một bài rút để đổi.",
+    "need_drawn_discard": "Bạn cần một bài rút để bỏ.",
+    "out_of_bounds": "Vị trí ngoài giới hạn. Sử dụng hàng 1-{max_row}, cột 1-{max_col}",
+    "knock_with_card": "Bạn không thể gõ khi có bài rút. Hoàn thành lượt của bạn trước.",
+    "already_knocked": "Đã có người gõ trong vòng này.",
+    "already_revealed": "Bài đó đã được lật!"
+  },
+  "summary": {
+    "full": "Trò chơi kết thúc! Người chơi {winner} thắng với {score} điểm!\n\nĐiểm số cuối cùng:\n{scores}",
+    "line": "Người chơi {pid}: {score} điểm\n"
+  },
+  "board_str": {
+    "title": "=== TRÒ CHƠI GOLF ===",
+    "discard": "Chồng bài bỏ: {card}",
+    "knocked": "Người chơi {pid} đã gõ!",
+    "player_header": "Người chơi {pid} (Điểm: {score}):"
+  }
+}

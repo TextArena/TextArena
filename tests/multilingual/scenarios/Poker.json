@@ -1,0 +1,14 @@
+{
+  "entry": "textarena.envs.Poker.env:PokerEnv",
+  "num_players": 2,
+  "seed": 42,
+  "scenarios": {
+    "call_check_to_showdown": ["[call]", "[check]", "[check]", "[check]", "[check]", "[check]", "[check]", "[check]"],
+    "bet_and_fold_win": ["[call]", "[check]", "[bet 40]", "[fold]"],
+    "raise_and_call": ["[call]", "[check]", "[bet 40]", "[raise 40]", "[call]", "[check]", "[check]", "[check]", "[check]"],
+    "cannot_check_facing_bet": ["[check]", "[call]", "[check]"],
+    "raise_must_exceed": ["[call]", "[check]", "[bet 40]", "[raise 0]", "[call]", "[check]", "[check]", "[check]"],
+    "invalid_action": ["hello", "[call]", "[check]"],
+    "all_in_bust_game_over": ["[bet 980]", "[call]", "[check]", "[check]", "[check]", "[check]", "[check]", "[check]", "[check]", "[check]", "[check]", "[check]"]
+  }
+}

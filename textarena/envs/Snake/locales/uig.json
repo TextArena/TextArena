@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-ئويۇنچىلىق ئىلان تاختىسى {width}×{height}.\nسىز ئىلان {player_id} نى كونترول قىلىسىز. توغرا يۆنىلىش: '[up]'/'[down]'/'[left]'/'[right]' (ياكى w/s/a/d).\nمەقسەت: ئەڭ ئۇزۇن ياشاڭ ياكى ئەڭ ئۇزۇن بولۇڭ ۋە ئەڭ يۇقىرى نۇمۇرغا ئېرىشىڭ (دەۋر چەكلىمىسى {max_turns} دەۋر)."
+  },
+  "board": {
+    "current": "نۆۋەتتىكى ھەيئەت: {board}",
+    "after_moves": "ھازىرقى تاختا ھالىتى:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "يىلان {player_id} نامۇۋاپىق ھەرىكەت سەۋەبىدىن ئۆلدى."
+  },
+  "outcome": {
+    "survived_win": "ئويۇنچى {player_id} ھايات قالدى؛ قالغانلارنىڭ ھەممىسى ئۆلدى.",
+    "all_dead_simul": "بارلىق يىلانلار بىردىنلا ئۆلدى.",
+    "outlived": "ئويۇنچى باشقا ھەممىسىدىن ئۇزۇن ياشىدى.",
+    "all_dead": "ھەممىسى ئۆلىۋالدى.",
+    "turn_limit": "نۆۋەت چەكلىمىسىگە يەتكەن - ئەڭ ياخشى نومۇر تەڭلەش مۇسابىقىسىدە غەلىبە قىلىدۇ.",
+    "ranking": "{reason} تاماملاشقان گۇرۇپلارنىڭ ئاخىرلىشىش تەرتيبى (ئەڭ يامان→ئەڭ ياخشى): {groups}"
+  }
+}

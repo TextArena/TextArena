@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "당신은 닌의 플레이어 {player_id}입니다.\n당신의 목표는 마지막 남은 객체를 가져가는 것입니다.\n각 차례마다 정확히 하나의 더미를 선택하여 그로부터 하나 이상의 객체를 제거해야 합니다.\n'[더미 인덱스 객체수]' 형식을 사용하세요. 예를 들어, '[0 3]'은 더미 0에서 3개의 객체를 제거합니다."
+  },
+  "state": {
+    "current_pile": "현재 더미:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "유효한 수 형식을 찾을 수 없습니다. '[더미 인덱스 객체수]' 형식을 사용하세요.",
+    "correct_format_wrong_fields": "플레이어 {player_id}, 유효하지 않은 행동입니다. 열 {col}은 범위를 벗어났습니다.",
+    "out_of_range": "더미 인덱스 {pile_index}는 범위를 벗어났습니다.",
+    "non_positive": "최소 1개의 객체를 제거해야 합니다.",
+    "exceeds_pile": "더미 {pile_index}에서 {quantity}개를 제거할 수 없습니다 (남은 객체가 {pile_count}개입니다)."
+  },
+  "observation": {
+    "removed_from_piles": "플레이어 {player_id}가 [{pile_index} {quantity}]를 선택하여 더미 {pile_index}에서 {quantity}개의 객체를 제거했습니다."
+  },
+  "outcome": {
+    "win": "플레이어 {player_id}가 마지막 객체를 가져갔습니다!"
+  }
+}

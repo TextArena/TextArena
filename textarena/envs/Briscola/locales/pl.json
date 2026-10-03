@@ -1,0 +1,57 @@
+{
+  "_comment": "Plik językowy Briscola. NIE TŁUMACZ kluczy (lewa strona). Tłumacz tylko wartości (prawa strona). Zachowaj każdy {placeholder} dokładnie tak, jak jest. Nigdy nie tłumacz tokena akcji '[play X]', etykiet kart (A, 2..7, J, Q, K), symboli kolorów (przenoszonych w slotach {card}/{trump_card}) ani liczbowych liczników/punktów/wyników. Tekst znacznika '(TRUMP)' może być zlokalizowany.",
+  "_slots": {
+    "{player_id}": "Numer gracza, np. 0 lub 1",
+    "{trump_suit}": "Symbol koloru atutowego (♠♥♦♣) - nie tłumacz",
+    "{trump_card}": "Etykieta karty atutowej, np. '7♠' - nie tłumacz",
+    "{card}": "Etykieta karty, np. 'A♥' - nie tłumacz",
+    "{trump_mark}": "Wstępnie renderowany znacznik '(TRUMP)', lub pusty",
+    "{max_pos}": "Najwyższa prawidłowa pozycja karty w ręce gracza",
+    "{count}": "Liczba kart, które gracz trzyma",
+    "{pos}": "Numer pozycji karty w ręce",
+    "{points}": "Liczba punktów (wartość karty lub zebrany wynik)",
+    "{hand}": "Wstępnie renderowana, wieloliniowa lista kart w ręce",
+    "{trick}": "Wstępnie renderowana lista kart w obecnej lewie",
+    "{scores}": "Wstępnie renderowana linia wyników, lub blok końcowych wyników dla każdego gracza",
+    "{trump_info}": "Wstępnie renderowana linia koloru atutowego / liczby kart w talii",
+    "{winner}": "Numer gracza, który wygrał lewę lub grę",
+    "{tricks}": "Liczba lew wygranych przez gracza",
+    "{deck_count}": "Liczba kart pozostałych w talii"
+  },
+  "game": {
+    "start": "Gra w Briscolę rozpoczęta! Kolor atutowy: {trump_suit} (Karta atutowa: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Jesteś graczem Briscoli - Gracz {player_id}.\nCel: Wygrywaj lewy i zbieraj najwięcej punktów (łącznie 120 punktów w talii).\nPunkty za karty: A=11, 3=10, K=4, Q=3, J=2, inne=0\nSiła kart: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKarty atutowe biją karty nieatutowe niezależnie od siły.\n\nAkcja: '[play X]', gdzie X jest pozycją (1-{max_pos}) karty w Twojej ręce\n"
+  },
+  "hand": {
+    "none": "Brak kart",
+    "empty": "Brak kart w ręce",
+    "header": "Twoja ręka:",
+    "card_line": "  {pos}. {card} [{points} pkt]{trump_mark}",
+    "trump_mark": " (ATUT)"
+  },
+  "trick": {
+    "empty": "Brak kart zagranych w tej lewie.",
+    "header": "Obecna lewa:",
+    "line": "  Gracz {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Gracz {player_id}: {points} pkt",
+    "trump_info": "Kolor atutowy: {trump_suit}",
+    "trump_info_deck": "Kolor atutowy: {trump_suit} | Karty pozostałe w talii: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nWyniki: {scores}\n{trump_info}\n\nZagraj kartę za pomocą [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Użyj [play X], gdzie X jest pozycją karty (1, 2, 3 itd.)",
+    "out_of_range": "Nieprawidłowa pozycja karty. Masz {count} kart (1-{count})"
+  },
+  "action": {
+    "played": "Gracz {player_id} zagrał {card}",
+    "trick_win": "Gracz {winner} wygrywa lewę za pomocą {card} i zdobywa {points} punktów!"
+  },
+  "outcome": {
+    "head": "Gra skończona! Gracz {winner} wygrywa z {points} punktami!\n\nKońcowe wyniki:\n{scores}",
+    "player_line": "Gracz {player_id}: {points} punktów ({tricks} lew)\n"
+  }
+}

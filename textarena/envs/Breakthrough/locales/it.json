@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Stai giocando con il colore {color} in una partita di Breakthrough. Ti muovi {direction} su una tavola {board_size}x{board_size}.\nNel tuo turno puoi muovere una singola pedina un passo in avanti o diagonalmente in avanti.\nUna pedina può muoversi diagonalmente solo se c'è una pedina avversaria, e può muoversi in una casella già occupata solo con un passo diagonale.\nQuando entri in una casella con una pedina avversaria, la catturi e la pedina dell'avversario viene rimossa permanentemente dalla tavola.\nUsa la notazione UCI tra parentesi quadre, ad esempio [a2a3] per muovere da a2 a a3.\n* 'a' corrisponde alla colonna più a sinistra, '1' è la riga inferiore (dalla prospettiva del Bianco).\n* La riga di casa del Nero è la riga superiore (riga 8 per un 8x8). La riga di casa del Bianco è la riga inferiore (riga 1 per un 8x8).\nIl primo giocatore la cui pedina raggiunge la riga di casa dell'avversario vince. Se tutte le tue pedine vengono catturate, perdi."
+  },
+  "invalid_move": {
+    "wrong_format": "Per favore, utilizza la notazione algebrica tra parentesi quadre come [a2a3].",
+    "out_of_bounds": "La mossa è fuori dai limiti della tavola.",
+    "illegal": "Quella mossa non segue le regole di Breakthrough o non è la tua pedina."
+  },
+  "game_action": {
+    "moved": "Il giocatore {player_id} muove {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Il Bianco ha raggiunto la riga di casa del Nero.",
+    "black_reached": "Il Nero ha raggiunto la riga di casa del Bianco.",
+    "white_captured": "Tutte le pedine del Bianco sono state catturate.",
+    "black_captured": "Tutte le pedine del Nero sono state catturate.",
+    "no_moves": "Il giocatore {player_id} non ha più mosse."
+  }
+}

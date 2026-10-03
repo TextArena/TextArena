@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong trò chơi HighSociety (phiên bản 2 người chơi).\nLuồng trò chơi: Mười thẻ danh vọng được đấu giá lần lượt.\nĐấu giá: Mỗi lần đấu giá, chọn bí mật một thẻ tiền 1-11 và mở ra.\n            • Đấu giá cao hơn sẽ giành được thẻ danh vọng và loại bỏ thẻ tiền đó.\n            • Đấu giá thấp hơn giữ lại thẻ tiền của họ.\n            • Hòa -> cả hai đấu giá được trả lại và thẻ danh vọng đó được đấu giá lại.\nĐiểm số: Sau mười lần đấu giá, cộng **tiền còn lại + điểm danh vọng**.\n            Người có *tổng tài sản* cao hơn thắng (hòa chính xác -> hòa).\n\n**Cú pháp hành động**  →  đấu giá một thẻ duy nhất như '[7]' hoặc '[11]'."
+  },
+  "auction": {
+    "announce": "\n### Đấu giá {round}/10  |  Thẻ danh vọng: {prize}"
+  },
+  "board": {
+    "money_cards": "Thẻ tiền còn lại của bạn: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "Phải bao gồm chính xác một thẻ tiền [X].",
+    "card_not_held": "Bạn không còn thẻ tiền đó."
+  },
+  "message": {
+    "tie": "Hòa - đấu giá được trả lại. Đấu giá lại!",
+    "auction_result": "P0 đấu giá {bid0}, P1 đấu giá {bid1}. Người chơi {winner} giành được danh vọng {prize} (tổng {total})."
+  },
+  "outcome": {
+    "p0_wins": "Tổng tài sản {nw0} > {nw1}",
+    "p1_wins": "Tổng tài sản {nw1} > {nw0}",
+    "draw": "Cả hai tổng tài sản {nw0} – hòa chính xác."
+  }
+}

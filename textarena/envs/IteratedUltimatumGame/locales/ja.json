@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame ロケールファイル。キー（左側）は翻訳しないでください。値（右側）のみを翻訳します。すべての {placeholder} はそのままにして、アクショントークン [Offer: $X] / [Accept] / [Reject] も翻訳しないでください。通貨記号 '$' とすべての数字もそのままにしてください。",
+  "_slots": {
+    "{player_id}": "プレイヤーの番号、0 または 1",
+    "{other_id}": "他のプレイヤーの番号、1 または 0",
+    "{num_rounds}": "総ラウンド数",
+    "{pool}": "各ラウンドで利用可能な金額（数字）",
+    "{round_number}": "現在のラウンド番号",
+    "{proposer_id}": "提案者のプレイヤー番号、0 または 1",
+    "{responder_id}": "応答者のプレイヤー番号、0 または 1",
+    "{offer}": "提案された金額（数字）",
+    "{keep}": "提案者が保持する金額（数字）",
+    "{proposer_gain}": "提案者がこのラウンドで獲得した金額（数字）",
+    "{responder_gain}": "応答者がこのラウンドで獲得した金額（数字）",
+    "{total_0}": "プレイヤー 0 の累積合計（数字）",
+    "{total_1}": "プレイヤー 1 の累積合計（数字）",
+    "{winner}": "勝者のプレイヤー番号",
+    "{loser}": "敗者のプレイヤー番号",
+    "{winner_total}": "勝者の合計金額（数字）",
+    "{loser_total}": "敗者の合計金額（数字）",
+    "{total}": "各プレイヤーの最終的な同額合計（数字）"
+  },
+  "player_prompt": {
+    "intro": "あなたはプレイヤー {player_id} で、{num_rounds} ラウンドの繰り返し最終通牒ゲームに参加します。\nこのラウンドでは、${pool} を自分とプレイヤー {other_id} と分ける必要があります。\n\n提案者:\n  - 提案をします: [Offer: $X] (0 <= X <= pool)\n  - 受け入れられた場合 → あなたは $(pool - X)、他のプレイヤーは $X を獲得します\n  - 拒否された場合 → 両者とも $0 を獲得します\n  - 例: [Offer: $3] または 'これは公平だと思います。 [Offer: $5]'\n\n応答者:\n  - 提案を [Accept] または [Reject] で決定します\n  - 例: 'それは合理的に見えます。 [Accept]'\n            'あまりにも不公平です。 [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- ラウンド {round_number} が開始されました！ ---\nプレイヤー {proposer_id} が提案者、プレイヤー {responder_id} が応答者です。",
+    "offer": "ラウンド {round_number}: プレイヤー {proposer_id} がプレイヤー {responder_id} に ${offer} を提案しました（${keep} を保持）。",
+    "accepted": "プレイヤー {responder_id} が受け入れました！ ラウンド {round_number} の獲得: プレイヤー {proposer_id} +${proposer_gain}、プレイヤー {responder_id} +${responder_gain}。 新しい合計: プレイヤー 0: ${total_0}、プレイヤー 1: ${total_1}。",
+    "rejected": "プレイヤー {responder_id} が提案を拒否しました！ ラウンド {round_number} の獲得: 両者とも +$0。 合計は変わりません: プレイヤー 0: ${total_0}、プレイヤー 1: ${total_1}。"
+  },
+  "invalid_move": {
+    "no_offer_format": "提案者は [Offer: $X] の形式で提案する必要があります。",
+    "bad_integer": "提案額は有効な整数でなければなりません。",
+    "out_of_range": "提案額は $0 から ${pool} の間でなければなりません。",
+    "no_current_offer": "現在応答する提案がありません。",
+    "accept_or_reject": "応答者は [Accept] または [Reject] で応答する必要があります。"
+  },
+  "outcome": {
+    "win": "プレイヤー {winner} が ${winner_total} の合計で勝利しました。プレイヤー {loser} は ${loser_total} でした。",
+    "draw": "引き分け！ 両プレイヤーの合計は ${total} でした。"
+  }
+}

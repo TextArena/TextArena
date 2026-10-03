@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id}. Hrajete Paměťovou hru.\nVaším cílem je najít více párů karet na desce než váš soupeř.\nVe svém tahu vyberte dvě karty k otočení zadáním čísel řádku a sloupce první a druhé karty, například '[0 1 1 0]', kde první karta je v řádku 0 a sloupci 1 a druhá karta je v řádku 1 a sloupci 0.\nPokud dvě karty odpovídají, získáte bod a karty zůstanou otočené. Pokud neodpovídají, karty se otočí zpět lícem dolů, např. '.'.\nHra končí, když jsou všechny páry nalezeny."
+  },
+  "board": {
+    "current_board": "Aktuální deska:\n{board}",
+    "current_game_board": "Aktuální herní deska:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát tahu. Hráč {player_id} neodpověděl platným směrem v hranatých závorkách.",
+    "out_of_bounds": "Neplatný tah. Hráč {player_id} vybral pozici mimo desku.",
+    "same_card_twice": "Neplatný tah. Hráč {player_id} vybral stejnou kartu dvakrát.",
+    "already_matched": "Neplatný tah. Hráč {player_id} vybral jednu nebo obě karty, které již byly nalezeny."
+  },
+  "game_message": {
+    "cards_match": "Karty vybrané hráčem {player_id} na pozicích [{r1} {c1}] a [{r2} {c2}] odpovídají!",
+    "cards_no_match": "Karty vybrané hráčem {player_id} neodpovídají. Karty na pozicích [{r1} {c1}] a [{r2} {c2}] jsou {pos1} a {pos2}."
+  },
+  "outcome": {
+    "draw": "Oba hráči našli stejný počet párů karet.",
+    "win": "Hráč {winner_id} vyhrál!",
+    "turn_limit": "Byl dosažen limit tahů. Hra je u konce. Hráč 0 získal {score_0} bodů, hráč 1 získal {score_1} bodů.",
+    "turn_limit_win": "{reason} Hráč {winner_id} vyhrál!"
+  }
+}

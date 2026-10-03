@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Сез Уенчы {player_id} өч Уенчылык Тик Так Туеда.\nСезнең символыгыз '{symbol}'.\nСез үз символыгызны 5x5 тактасына куеп, дүрт символлы рәт барлыкка килтерәсең.\nРәтләр гorizontal, вертикаль яки диагональ булырга мөмкин.\n'[4]' форматын кулланып, 4 нче күзәнәкне билгеләү өчен хәрәкәтне кертегез."
+  },
+  "board": {
+    "current_board": "Хәзерге такта:\n\n{board}\n\nБулышлык хәрәкәтләр: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Күзәтелмәгән хәрәкәт форматы. Күзәнәк 0-{max_cell} булганда '[cell]' кулланыгыз.",
+    "out_of_range": "Күзәтелмәгән күзәнәк номеры: {cell}. 0 һәм {max_cell} арасында булырга тиеш.",
+    "already_occupied": "{cell} күзәнәге инде кулланышта.",
+    "made_invalid": "Уенчы {player_id} дөрес булмаган хәрәкәт ясаган."
+  },
+  "game_action": {
+    "placed": "Уенчы {player_id} үз символын ({symbol}) ({row}, {col}) кырына куя."
+  },
+  "outcome": {
+    "win": "Уенчы {player_id} ({symbol}) җиңә!",
+    "draw": "Уен тигез тәмамланды!"
+  }
+}

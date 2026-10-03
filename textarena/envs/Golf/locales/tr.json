@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (kart oyunu) dil dosyası. Anahtarları (sol taraf) çevirme. Yalnızca değerleri (sağ taraf) çevir.",
+  "_slots": {
+    "{player_id}": "Oyuncunun numarası, örneğin 0 veya 1",
+    "{pid}": "Oyuncunun numarası, örneğin 0 veya 1",
+    "{winner}": "En düşük puanı olan oyuncunun numarası",
+    "{score}": "Sayısal puan toplamı",
+    "{card}": "Bir kart etiketi, örneğin A, 10, K veya Q",
+    "{new}": "Karta yerleştirilen yeni kart etiketi",
+    "{old}": "Karttan kaldırılan eski kart etiketi",
+    "{row}": "Satır numarası",
+    "{col}": "Sütun numarası",
+    "{max_row}": "En büyük geçerli satır numarası",
+    "{max_col}": "En büyük geçerli sütun numarası",
+    "{reason}": "Son turun neden başladığını açıklayan önceden oluşturulmuş bir ifade",
+    "{n}": "Satır numarası, satırın başında gösterilir",
+    "{cards}": "Bir ızgara satırının önceden oluşturulmuş, düzen duyarlı hücreleri",
+    "{hand}": "Oyuncunun önceden oluşturulmuş ızgara bloğu",
+    "{discard}": "Atık yığınının üstündeki kart etiketi veya 'yok' kelimesi",
+    "{options}": "Kullanılabilir eylemlerin önceden oluşturulmuş listesi",
+    "{scores}": "Oyuncuların son puanlarının önceden oluşturulmuş listesi"
+  },
+  "player_prompt": {
+    "intro": "Golf (Kart Oyunu) oynuyorsunuz - Oyuncu {player_id}.\nHedef: Bu tek turda en düşük toplam puanı elde edin. Sütunlar aynı değeri paylaşırsa, 0 olarak toplanır.\nKart Değerleri: A=1, 2-10=yüz değeri, J/Q=10, K=0\n\nEylemler (tam parantezleri kullanın):\n- '[draw]' - Desteden çek\n- '[take]' - Atık yığından al\n- '[swap X Y]' - Çekilen kartı X (satır) Y (sütun) ile değiştir\n- '[discard]' - Çekilen kartı at"
+  },
+  "board": {
+    "drew": "Çektiniz: {card}\nŞimdi [swap X Y] veya [discard] yapmalısınız.",
+    "took": "Aldınız: {card} atık yığından\n[swap X Y] ile değiştirmelisiniz (atamazsınız).",
+    "peeked": "Konumuna baktınız ({row},{col}): {card}",
+    "turn_view": "Eliniz:\n{hand}\nAtık yığı: {discard}\n{options}",
+    "none": "Yok"
+  },
+  "options": {
+    "final_turns": "Son turlar! Seçenekleriniz: [draw], [take], [peek X Y]",
+    "draw": "Seçenekleriniz: [draw], [take]",
+    "must_swap": "Yapmalısınız: [swap X Y] (atık yığından kartları atamazsınız)",
+    "swap_or_discard": "Yapmalısınız: [swap X Y] veya [discard]"
+  },
+  "hand": {
+    "no_cards": "Kart yok",
+    "header": "  Sütun:   1    2    3",
+    "row": "Satır {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Oyuncu {pid} {new} ile {old} kartını ({row},{col}) konumunda değiştirdi",
+    "discarded": "Oyuncu {pid} {card} kartını attı"
+  },
+  "message": {
+    "deck_empty": "Destenin kartları bitti! Oyun hemen sona erer.",
+    "knocked": "Oyuncu {pid} vurdu! Her oyuncu bir tur daha alır.",
+    "final_round": "Oyuncu {pid} {reason}! Her oyuncu bir tur daha alır."
+  },
+  "reason": {
+    "all_revealed": "tüm kartları açtı"
+  },
+  "invalid": {
+    "wrong_action": "Tam olarak BİR parantezli eylem kullanın: [draw], [take], [swap X Y], [discard], [knock] veya [peek X Y]",
+    "discard_empty": "Atık yığı boş!",
+    "must_draw_first": "Önce [draw], [take], [knock] veya [peek X Y] yapmalısınız",
+    "cannot_discard_taken": "Atık yığından alınan kartı atamazsınız. Değiştirmelisiniz.",
+    "have_drawn_card": "Çekilen kartınız var. [swap X Y] veya [discard] yapmalısınız.",
+    "need_drawn_swap": "Değiştirmek için çekilen karta ihtiyacınız var.",
+    "need_drawn_discard": "Atmak için çekilen karta ihtiyacınız var.",
+    "out_of_bounds": "Konum sınırların dışında. 1-{max_row} satır, 1-{max_col} sütun kullanın",
+    "knock_with_card": "Çekilen kartla vuramazsınız. Turunuzu önce tamamlayın.",
+    "already_knocked": "Bu turda zaten biri vurdu.",
+    "already_revealed": "Bu kart zaten açıldı!"
+  },
+  "summary": {
+    "full": "Oyun Bitti! Oyuncu {winner} {score} puanla kazandı!\n\nSon Puanlar:\n{scores}",
+    "line": "Oyuncu {pid}: {score} puan\n"
+  },
+  "board_str": {
+    "title": "=== GOLF OYUNU ===",
+    "discard": "Atık yığı: {card}",
+    "knocked": "Oyuncu {pid} vurdu!",
+    "player_header": "Oyuncu {pid} (Puan: {score}):"
+  }
+}

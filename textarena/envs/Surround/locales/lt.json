@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround lokalės failas. NERVERSTI raktažodžius (kairė pusė). Versti tik reikšmes (dešinė pusė). Palikti kiekvieną {placeholder} lygiai taip pat, kaip yra. NERVERSTI žaidėjo įvestų judėjimo/krypties ženklų ([up], [down], [left], [right], w, s, a, d) arba ASCII lentos, sugeneruotos į {board}.",
+  "_slots": {
+    "{num_players}": "Žaidėjų skaičius mače",
+    "{width}": "Lentos plotis langeliuose",
+    "{height}": "Lentos aukštis langeliuose",
+    "{player_id}": "Žaidėjo numeris (0-bazė)",
+    "{board}": "Sugeneruota ASCII tinklelis; palikti neutralų, niekada nerversti jo simbolių",
+    "{reason}": "Sugeneruota žaidimo pabaigos priežasties frazė",
+    "{groups}": "Neutralus reitingo duomenys (žaidėjų ID grupės, geriausios iki blogiausių); nerversti"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-žaidėjų Surround žaidimas {width}x{height} tinklelyje.\nJūs esate žaidėjas {player_id}. Galimi ėjimai: '[up]' '[down]' '[left]' '[right]' arba w/s/a/d.\nTikslas: išgyventi visus kitus. Pėdsakai yra mirtini; sienų smūgiai žudo; susidūrimai žudo abu."
+  },
+  "board": {
+    "current": "Dabartinė lenta:\n{board}",
+    "after_moves": "Lenta po vienu metu atliktų ėjimų:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Žaidėjas {player_id} mirė dėl neteisingo ėjimo."
+  },
+  "outcome": {
+    "survived_win": "Žaidėjas {player_id} išgyveno; visi kiti susidūrė.",
+    "all_crashed": "Visi žaidėjai susidūrė vienu metu.",
+    "outlived": "Žaidėjas išgyveno visus kitus.",
+    "all_dead": "Visi žaidėjai mirę.",
+    "turn_limit": "Ėjimų limitas pasiektas - ilgiausiai išgyvenęs laimi.",
+    "ranking": "{reason} Galutinės reitingo grupės (geriausios→blogiausios): {groups}"
+  }
+}

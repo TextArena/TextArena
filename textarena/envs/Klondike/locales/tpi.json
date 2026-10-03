@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Yu wokim Klondike Solitaire. Yu lakim muvim olgeta kad i go long foundation piles.\n\nRul bilong Game:\n- Foundation piles (F1-F4): Bildim antap long Ace i go long King long suit\n- Tableau piles (T1-T7): Bildim daun long alternating kala (red i go antap long black, black i go antap long red)\n- Stock: Drawim kad i go long waste pile\n- Waste (W): Kad i stap antap long en i ken pley\n\nKomand:\n- 'draw' - Drawim kad long stock i go long waste\n- 'move <source> <destination> [count]' - Muvim kad namel long piles\n  Eg: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count i ken tu 'all', bai i traem muvim olgeta kad i stap we open.\n- 'forfeit' - Pinisim game kwiktaim na lukim skor bilong yu\n- Nem bilong pile: W (waste), F1-F4 (foundation), T1-T7 (tableau)\n\nYu ken wokim planti action long wanpela turn bai yu skelim ol long komma:\n  Eg: 'draw, move W T1, move T2 F1'\n\nKing tasol i ken stap long tableau pile i no gat kad.\nAction i wokim long oda - sapos wanpela i no wok, bai ol arapela action i no wok tu.\nYusim 'forfeit' sapos yu bilivim game i no inap win."
+  },
+  "format_error": {
+    "no_brackets": "Dispela tok i no stret. Em mas stap insait long brackets (olsem ol hap bilong en).",
+    "no_closing_bracket": "I no stret long wokim dispela tok. ']' i stap yet na em bai pinis taim yu putim mak bilong en \"\"",
+    "empty_command": "Komand i no gat samting. Taip 'draw' o 'move <source> <destination> [count]'",
+    "empty_action": "Wok i no gat wok long en",
+    "move_needs_args": "Movim komando i mas gat ples bilong kisim na rot. 'move <source> <destination> [count]'",
+    "count_positive": "Kaunt i mas positiv o 'all'",
+    "count_invalid": "Kaunt i no stret. Usim namba o 'all'",
+    "unknown_command": "Komanda i no save '{cmd}'. Yu usim 'draw', 'move <source> <destination> [count]', o 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Em i bin mekim {n} wok bilong em paslain long ol samting i no kamap.",
+    "failed": "Aksen {n} i no go: {msg}"
+  },
+  "move_result": {
+    "drew": "Ol i kisim ol dispela samting long han bilong ol na tromoi.",
+    "cannot_draw": "Ol i no inap pulim mani, ol samting bilong baim na pipia tu.",
+    "invalid_pile": "Nem bilong planti samting i no stret. Yusim W, F1-F4, o T1-T7",
+    "foundation_one_card": "Inap putim wanpela kat tasol long ples bilong wokim haus.",
+    "waste_to_foundation_ok": "Kirap long ol pipia samting na go insait long haus F{dst}",
+    "waste_to_foundation_bad": "I no inap putim ol karis i go long dispela hap bilong sait.",
+    "tableau_to_foundation_ok": "Muvim kad long tableau T{src} i go long foundation F{dst}",
+    "tableau_to_foundation_bad": "I no inap long putim wanpela kat bilong tabloim i go insait long dispela hap.",
+    "foundation_to_foundation": "I no inap go long narapela hap bilong haus.",
+    "waste_to_tableau_one_card": "Inap putim wanpela kat tasol long ol samting nogut na i go insait long plet.",
+    "waste_to_tableau_ok": "Kirap long ol samting nogut na go long tablo T{dst}",
+    "waste_to_tableau_bad": "I no inap putim ol karis i lus long dispela hap bilong tebol.",
+    "no_face_up": "No gat ol kat i stap antap bilong karim.",
+    "tableau_to_tableau_ok": "Muvim {count} kad(s) long tableau T{src} i go long T{dst}",
+    "tableau_to_tableau_bad": "No ken muvim {count} kad(s) long T{src} i go long T{dst}",
+    "foundation_to_tableau_one_card": "Inap putim wanpela kat tasol long ples bilong wokim ol samting na kisim i go insait long plet.",
+    "foundation_empty": "F{src} i no gat man long en.",
+    "foundation_to_tableau_ok": "Muvim kad long foundation F{src} i go long tableau T{dst}",
+    "foundation_to_tableau_bad": "I no inap putim foundation card long tableau T{dst}",
+    "to_waste_or_stock": "I no inap go long ol pipia o stok samting."
+  },
+  "outcome": {
+    "forfeit": "Gem i lus. Skor bilong yu: {score} kadi long ples bilong faundesen.",
+    "won": "Mi tok amamas long yu, nau yu winim Klondike Solitaire!",
+    "turn_limit": "Gem bai finis! Yu rikim makisim {max_turns} torn. Skor: {score} kard i go long foundation."
+  },
+  "board": {
+    "title": "=== KLONDIKE PASIN TAMBOL ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stok: {stock} kadi",
+    "waste": "Waste (W): {waste} Ol pipia samting i save go long ples bilong ol man.",
+    "foundations_header": "Ol Stiatok:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Piksa:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

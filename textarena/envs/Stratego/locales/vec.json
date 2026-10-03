@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ti sei Zogador {player_id} in Stratego.\nEl to obietivo xe caturar ła bandiera del aversario o eliminar tute łe so peze mosevoli.\nEl to esercito xe sta piazzà par ti so el tavolo, incluxo ła to bandiera, bombe e altre peze de vari gradi.\n\n### Istruzioni de zogo\n1. **Regole de mossa:**\n   - Soto el to turno, ti pol mossa na pezza de un paso a na casela adiacente (sora, soto, sanca o drita) che xa ocupada co łe tue peze.\n   - Esemio: Na pezza pol mossa da A1 a B1 o A1 a A2 se B1 e A2 no xe ocupadi co łe peze del zogador.\n   - Se ła pezza selta xe na bomba o na bandiera, no pol essar mossada.\n2. **Bataje:**\n   - Se ti te mossa so na casela ocupada da na pezza del aversario, alora na bataja ła se verifega:\n     - ła pezza co el grado pì alto vinse e elimina ła pezza del aversario.\n     - Se i gradi i xe stesi, tute e do peze łe xe eliminate dal tavolo.\n     - **Caxi spesiałi:**\n       - Bombe łe elimina tute łe peze atacanti fora che łe mine, che łe pol defar bombe.\n       - Spie łe pol vinser el maresciallo soło se łe ataca prima, ma łe perde co tute łe altre peze.\n3. **Obietivi strategici:**\n   - Identificar łe peze del aversario traverso łe so mosse e bataje.\n   - Protexar ła to bandiera intentando caturar ła bandiera del aversario.\n   - Usar esploratori strategicamente par otègnar informazioni so łe peze del aversario e atacar łe peze deboli.\n\n### Come far na mossa:\n1. Specifega łe coordinate de ła pezza che ti vol mossa e ła so destinasion.\n2. Usar el formato: [A0 B0], dove A0 xe ła posizion de partensa, e B0 xe ła destinasion.\n   - Esemio: Par mossa na pezza da ła riga 0, colona 0 a ła riga 1, colona 0, inserir [A0 B0].\n3. Asicurarse che ła destinasion xe valida secondo łe regole de mossa sopra.\n\n### Note inportanti:\n- El tavolo ło mostra łe tue peze e łe so posizion, par ex. MN, MS.\n- El tavolo ło mostra anca łe posizion conosude de łe peze del aversario senza revelar łe so gradi, par ex. ?.\n- Łe caselae co ~ xe laghi e no pol essar mossadi.\n- Come suggerimento, scumìnsia el zogo mossa łe tue peze che xe so ła prima linea par otègnar informazioni so łe peze del aversario. Łe prime linee del zogador 0 e del zogador 1 xe ła riga D e ła riga G rispetivamente.\n\nEcco el stato corente del tavolo:\n"
+  },
+  "board": {
+    "current_board": "Tavolo corente:\n\n{board}\nMossi disponibiłi: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de azion no valido. Zogador {player_id} no ga inserìo na mossa nel formato [A0 B0].",
+    "invalid_coordinates": "Formato de asion invàłido. El xugador {player_id} no el ga inserìo łe coordinade vałexi.",
+    "not_own_piece": "Formato de asion invàlida. El xugador {player_id} el ga da spostar una dei so fioi.",
+    "scout_through_pieces": "Formato de asion invàlida. El xugador {player_id} no pol spostar un scout tra i altri tochi.",
+    "scout_diagonal": "Formato de asion invàlida. El xugador {player_id} no pol spostar un scout diagonalmente.",
+    "non_scout_multi_square": "Formato de asion invàłido. I piezi, fora i scout, pol spostarse soło na caseta al momento.",
+    "move_into_lake": "Formato de azion invalido. El zugador {player_id} no pol mover nel lago.",
+    "move_onto_own_piece": "Formato de asion invàlida. El xugador {player_id} no pol spostarse so el proprio toco.",
+    "move_bomb_or_flag": "Formato de asion invàłido. El xugador {player_id} no pol spostar na bomba o bandiera."
+  },
+  "game_action": {
+    "you_moved": "Ti ga spostà ła to pezza da {source} a {dest}.",
+    "opponent_moved": "Zogador {player_id} ga spostà na pezza da {source} a {dest}.",
+    "you_equal_ranks": "Ti ga spostà ła to pezza da {source} a {dest}. La pezza atacante jera {attacking_rank} e ła pezza de destinasion jera {target_rank}. Co i gradi i jera stesi, tute e do peze łe ga perso.",
+    "opponent_equal_ranks": "Zogador {player_id} ga spostà na pezza da {source} a {dest}. La pezza atacante jera {attacking_rank} e ła pezza de destinasion jera {target_rank}. Co i gradi i jera stesi, tute e do peze łe ga perso.",
+    "you_miner_defused": "Ti ga spostà ła to pezza da {source} a {dest}. La pezza atacante jera {attacking_rank} e ła pezza de destinasion jera {target_rank}. Co łe mine łe pol defar bombe, ti ga vinto ła bataja.",
+    "opponent_miner_defused": "El zugador {player_id} ga mosso una pieza da {source} a {dest}. La pieza atacante xe sta {attacking_rank} e la pieza de destinazion xe sta {target_rank}. Come i Minatori pol desarmar le Bombe, ti ga perso la bataja.",
+    "you_bomb_lost": "Ti ga spostà ła to pezza da {source} a {dest}. La pezza atacante jera {attacking_rank} e ła pezza de destinasion jera {target_rank}. Co łe peze atacanti no jera na mina, ti ga perso ła bataja.",
+    "opponent_bomb_won": "Zogador {player_id} ga spostà na pezza da {source} a {dest}. La pezza atacante jera {attacking_rank} e ła pezza de destinasion jera {target_rank}. Co łe peze atacanti no jera na mina, ti ga vinto ła bataja.",
+    "you_spy_won": "Ti ga movesto la to pièza da {source} a {dest}. La pièza che atacava xera {attacking_rank} e la pièza destinasion xera {target_rank}. Dato che l'atacante xera na spia e la destinasion xera un maresial, ti ga vinto la bataja.",
+    "opponent_spy_lost": "Zogador {player_id} ga spostà na pezza da {source} a {dest}. La pezza atacante jera {attacking_rank} e ła pezza de destinasion jera {target_rank}. Co łe spie łe pol vinser el maresciallo soło se łe ataca prima, ti ga perso ła bataja.",
+    "you_higher_won": "Ti ga spostà ła to pezza da {source} a {dest}. La pezza atacante jera {attacking_rank} e ła pezza de destinasion jera {target_rank}. Co łe peze atacanti jera de grado pì alto de ła destinasion, ti ga vinto ła bataja.",
+    "opponent_higher_lost": "Zogador {player_id} ga spostà na pezza da {source} a {dest}. La pezza atacante jera {attacking_rank} e ła pezza de destinasion jera {target_rank}. Co łe peze atacanti jera de grado pì alto de ła destinasion, ti ga perso ła bataja.",
+    "you_lower_lost": "Ti ga spostà ła to pezza da {source} a {dest}. La pezza atacante jera {attacking_rank} e ła pezza de destinasion jera {target_rank}. Co łe peze atacanti jera de grado pì baso de ła destinasion, ti ga perso ła bataja.",
+    "opponent_lower_won": "Zogador {player_id} ga spostà na pezza da {source} a {dest}. La pezza atacante jera {attacking_rank} e ła pezza de destinasion jera {target_rank}. Co łe peze atacanti jera de grado pì baso de ła destinasion, ti ga vinto ła bataja."
+  },
+  "outcome": {
+    "flag_captured": "El xugador {player_id} el ga ciapà ła bandiera del avversario!",
+    "no_movable_pieces": "Zogador {winner_id} vinse! Zogador {loser_id} no ga pì peze mosevoli."
+  }
+}

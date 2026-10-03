@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in 'n {max_rounds} rondte spel van Kuhn Poker.\nSpelreëls:\n- Kuhn Poker gebruik 'n 3-kaart pak met J, Q, K (J laagste, K hoogste)\n- Elke speler betaal {ante} skyfie en ontvang 1 kaart elke rondte (let op dat die kaarte sonder vervanging uitgedeel word, dus jy kan nie dieselfde kaart as jou teenstander hê nie).\n- Spel duur vir {max_rounds} rondtes\n- Die speler met die meeste skyfies na alle rondtes wen\nAksie Reëls:\n- '[check]': Verby sonder om te wed (slegs as geen wed op die tafel is)\n- '[bet]': Voeg 1 skyfie by die pot (slegs as geen wed op die tafel is)\n- '[call]': Ewen 'n teenstander se wed deur 1 skyfie by die pot te voeg\n- '[fold]': Gee jou hand oor en laat jou teenstander die pot wen"
+  },
+  "init_round": {
+    "round_start": "### Begin van rondte {current_round} uit {max_rounds} rondtes. Jou kaart is: '{player_card}'",
+    "available_actions": "Jou beskikbare aksies is: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksie moet [Check], [Bet], [Call], of [Fold] wees.",
+    "not_legal": "Aksie moet {legal_actions} wees."
+  },
+  "action": {
+    "submit_move": "Speler {player_id}, het aksie ingestuur: '[{move}]'.",
+    "valid_actions": "Jou beskikbare aksies is: {legal_actions}.",
+    "round_summary": "{reason} Huidige tellings: Speler 0: '{player_0_chips}'; Speler 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Uitslag: Speler {winner} se {winner_card} klop Speler {loser} se {loser_card}. Speler {winner} wen pot van {pot_value} skyfies."
+  },
+  "outcome": {
+    "draw": "Aan die einde van {max_rounds} rondtes, het beide spelers dieselfde aantal skyfies gehad.",
+    "round_win": "Speler {player_id} het opgegee.",
+    "winner_player0": "Speler 0 het gewen deur meer skyfies aan die einde van alle {max_rounds} rondtes te hê.",
+    "winner_player1": "Speler 1 het gewen deur meer skyfies aan die einde van alle {max_rounds} rondtes te hê."
+  }
+}

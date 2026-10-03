@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id}. Du spiller Memory-spillet.\nDit mål er at matche flere par kort på brættet end din modstander.\nPå din tur skal du vælge to kort at vende ved at indtaste række- og kolonnenumrene for det første og andet kort, f.eks. '[0 1 1 0]', hvor det første kort er i række 0 og kolonne 1, og det andet kort er i række 1 og kolonne 0.\nHvis de to kort matcher, får du et point, og kortene forbliver vendt opad. Hvis de ikke matcher, vendes kortene tilbage nedad, f.eks. '.'.\nSpillet slutter, når alle par er blevet matchet."
+  },
+  "board": {
+    "current_board": "Aktuelt bræt:\n{board}",
+    "current_game_board": "Aktuelt spilbræt:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldigt trækformat. Spiller {player_id} svarede ikke med en gyldig retning i firkantede parenteser.",
+    "out_of_bounds": "Ugyldigt træk. Spiller {player_id} valgte en position uden for grænserne.",
+    "same_card_twice": "Ugyldigt træk. Spiller {player_id} valgte samme kort to gange.",
+    "already_matched": "Ugyldigt træk. Spiller {player_id} valgte et eller begge kort, der allerede er blevet matchet."
+  },
+  "game_message": {
+    "cards_match": "Kortene valgt af Spiller {player_id} på positionerne [{r1} {c1}] og [{r2} {c2}] matcher!",
+    "cards_no_match": "Kortene valgt af Spiller {player_id} matcher ikke. Kort på positionerne [{r1} {c1}] og [{r2} {c2}] er {pos1} og {pos2} henholdsvis."
+  },
+  "outcome": {
+    "draw": "Begge spillere matchede samme antal par kort.",
+    "win": "Spiller {winner_id} har vundet!",
+    "turn_limit": "Tidsgrænsen er nået. Spillet er slut. Spiller 0 scorede {score_0} point, Spiller 1 scorede {score_1} point.",
+    "turn_limit_win": "{reason} Spiller {winner_id} har vundet!"
+  }
+}

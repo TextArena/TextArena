@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ti sei o Zugador {player_id} in Quantum Tic Tac Toe.\nO teu scimbolo o l'é '{symbol}', e i teu numeri de mòsso son sempre {parity} (p.e. X1, X3 oppure O2, O4).\n\nObiettivo: Vince formando una riga de tre segni classichi (solidificæ da superposizioni).\n\nCôme zugâ:\n- In ogni turno, metti un segno spettrâ in doi quadræ vöi differenti, usando o formato '[a,b]'.\n- Sti segni son entangoliæ e etichettæ comme 'X1 / X1' oppure 'O4 / O4'.\n- No pêu mette segni spettræ in un quadrato ch'o l'à za collassòu (solidificòu).\n\nRegola do collasso:\n- Se o teu mòsso o crea un ciclo in te l'entangolamento graffico, o collassa in moddo automatico.\n- Ogni segno spettrâ in te o ciclo o se trasforma in un segno classico in una de sò doe posizioni.\n- I segni spettræ dipendenti collassan ascì.\n\nVittoria:\n- O zugâ o finisce quand'un zugadô o l'à tre segni classichi in riga.\n- Se tutti doi i zugadôi gian unna riga in te o mæximo collasso, o zugadô con o numero de mòsso ciù basso o vince.\n\nEsempio de mòsso: '[0,4]' mette un segno spettrâ in celle 0 e 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Board:\n\n{board}\n\nInvia a ti mœuvi comme '[a,b]' pe placede 'n marchio quantico in doeux loxi."
+  },
+  "invalid_move": {
+    "wrong_format": "Formato invalido. Deuvia \"[a,b]\".",
+    "invalid_cells": "Indiçioin de çellole invalide ò duplicæ.",
+    "already_solidified": "Unna de quelle çellole a l'é za solidificâ."
+  },
+  "game_action": {
+    "placed": "Giœugadœ {player_id} a l'ha messo o seu simbolo in 'na superpoxiçion tra e celle {pos_a} e {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superpoxiçion dependente risolta. A cella ({r}, {c}) a l'è adessi {symbol}.",
+    "last_cell_resolved": "Superpoxiçion pe l'urtima cella risolta. A cella ({r}, {c}) a l'è adessi {symbol}.",
+    "superposition_resolved": "Superpoxiçion risolta. A cella ({r}, {c}) a l'è adessi {symbol}."
+  },
+  "outcome": {
+    "win": "O zugatô {player_id} o vinçe co-i segni solidificæ!",
+    "draw": "A partïa a l'é un pareggio!"
+  }
+}

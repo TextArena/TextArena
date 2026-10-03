@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Ga go ise go nne le dikarata dipe.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Motho a le mongwe vs Dealer\n\n📖 TAOLONG YA GAME:\n• O simolola ka {start_chips} tshipi\n• Deko le le lengwe la dikarata tse 52 (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• O tshameka kgatlhanong le dealer (ntlo)\n• Raundi e nngwe le e nngwe e latela tsamaiso ya Ultimate Texas Hold'em: o tshameka ANTE le BLIND bets, o amogela dikarata tse pedi tsa hole, o tlhopha PLAY bets tse di letlelelweng mo diphase tsa go bet, o senola dikarata tsa setshaba le o bapisa letsogo la gago le le letona la dikarata tse tlhano kgatlhanong le la dealer. Bokhoni ba gago ke go oketsa madi a gago (fa o na letsogo le letona), fa o fokotsa madi a gago (fa o na letsogo le mosesane).\n• Game e fela fa o fihla 0 tshipi kgotsa fa o fihla mo tlase ga 0 tshipi mo simolong ya raundi (LOSS) kgotsa fa o fihla 1000 raundi ka tshipi (WIN)\n\n💰 TSAMAISSO YA BET:\n• ANTE: Bet e e sa tlwaelegang ya ${ante} mo raundi e nngwe le e nngwe\n• BLIND: Bet e e sa tlwaelegang ya ${ante} mo raundi e nngwe le e nngwe\n• PLAY: Bet e e letlelelweng mo tshamekong. Mo raundi e nngwe le e nngwe, o ka tlhopha fela e le nngwe ya tsamaiso e e latelang: (${ante4} fa o e dira mo PRE-FLOP, ${ante2} fa o e dira mo FLOP, kgotsa ${ante} fa o e dira mo RIVER. O ka folda gape mo river, o tlogela letsogo, o sa dira bet.)\n\n🎴 TSAMAISSO YA DIKARATA:\n• O amogela dikarata tse pedi tse di bonwang (dikarata tsa gago tsa hole)\n• Dealer o amogela dikarata tse pedi tse di sa bonweng (tse di neng di sa bonwe ke wena)\n• Dikarata tse tlhano tsa setshaba di arogelwa mo tshimologong\n• Dikarata tsa setshaba di senolwa ka tsela e e tlhomileng mo diphase tsa game\n\n🏆 TSAMAISSO YA DEALER:\n• Dealer o tlhoka go nna le letsogo la PAIR (dikarata tse pedi tsa mofuta o le mongwe) go tlhoka, a dirisa dikarata tse pedi tsa letsogo la gagwe le dikarata tse tlhano tsa setshaba.\n• Tsamaiso ya dealer e ama matokeo a bet, jaaka e tla tlhalosiwa ka morago.\n\n🎮 DIPHASE TSA GAME LE DITIRO:\n📋 PRE-FLOP:\n  • Ditiro: [4x] (${ante4}) kgotsa [check]\n  • [4x]: Tshameka ${ante4} PLAY bet, senola dikarata tse tlhano tsa setshaba\n  • [check]: O se ke wa tshameka bet, senola dikarata tse tlhano tsa setshaba\n\n📋 FLOP:\n  • Fa o tshamekile bet ya 4x: Fela [skip] e letlelelweng (senola dikarata tse pedi tsa setshaba ka boomo)\n  • Fa o se ka wa tshameka bet ya 4x: [2x] (${ante2}) kgotsa [check]\n  • [2x]: Tshameka ${ante2} PLAY bet, senola dikarata tse pedi tsa setshaba\n  • [check]: O se ke wa tshameka bet, senola dikarata tse pedi tsa setshaba\n\n📋 RIVER:\n  • Fa o tshamekile bet ya 4x kgotsa 2x: Fela [skip] e letlelelweng (senola dikarata tsa setshaba ka boomo)\n  • Fa o se ka wa tshameka bet ya PLAY: [1x] (${ante}) kgotsa [fold]\n  • [1x]: Tshameka ${ante} PLAY bet, senola dikarata tsa setshaba\n  • [fold]: Tlogela letsogo, lahleha ANTE le BLIND bets\n\n📋 SHOWDOWN:\n  • Dikarata tse di senolwang le di lekolwang\n  • Letsogo le letona la dikarata tse tlhano (2 hole + 5 setshaba)\n  • Madi a bet a a tlhomilweng go ya ka matokeo a payout\n\n💎 MADI A BET:\n📊 ANTE BET:\n  • Dealer ga a tlhoke: PUSH (bet e busetswa)\n  • Dealer o tlhoka & o wina: 1:1 payout (bet + madi a wina)\n  • Dealer o tlhoka & o lahleha: Bet e lahlehiwa\n  • Tie: PUSH (bet e busetswa)\n\n📊 BLIND BET:\n  • E sa tlwaelegang ke tsamaiso ya dealer\n  • O wina: Bet e busetswa le madi a oketsegileng a go ya ka bokhoni ba gago\n  • O lahleha: Bet e lahlehiwa\n  • Tie: PUSH (bet e busetswa)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Ga go na madi a oketsegileng\n\n📊 PLAY BET:\n  • E sa tlwaelegang ke tsamaiso ya dealer\n  • Bapisa letsogo la gago le la dealer\n  • O wina: 1:1 payout (bet + madi a wina)\n  • O lahleha: Bet e lahlehiwa\n  • Tie: PUSH (bet e busetswa)\n\n🎯 DIKGATO TSA LETSOGO LA POKER (Bokhoni go ya ka Bokhoni):\n  1. Royal Flush: A-K-Q-J-10 ya mofuta o le mongwe\n  2. Straight Flush: Dikarata tse tlhano tse di latelang tsa mofuta o le mongwe\n  3. Four of a Kind: Dikarata tse nne tsa mofuta o le mongwe\n  4. Full House: Dikarata tse tlhano tsa mofuta o le mongwe le dikarata tse pedi tsa mofuta o le mongwe\n  5. Flush: Dikarata tse tlhano tsa mofuta o le mongwe\n  6. Straight: Dikarata tse tlhano tse di latelang\n  7. Three of a Kind: Dikarata tse tlhano tsa mofuta o le mongwe\n  8. Two Pair: Dikarata tse pedi tsa mofuta o le mongwe le dikarata tse pedi tsa mofuta o le mongwe\n  9. One Pair: Dikarata tse pedi tsa mofuta o le mongwe\n  10. High Card: Karata e e kwa godimo e wina\n\n⌨️  DITIRO TSA DITIRO:\n• [4x] kgotsa [play bet 4x]: Tshameka ${{self.ante_amount*4}} PLAY bet\n• [2x] kgotsa [play bet 2x]: Tshameka ${{self.ante_amount*2}} PLAY bet\n• [1x] kgotsa [play bet 1x]: Tshameka ${{self.ante_amount*1}} PLAY bet\n• [check] kgotsa [c]: Check (o se ke wa tshameka bet)\n• [fold] kgotsa [f]: Fold (tlogela letsogo)\n• [skip] kgotsa [s]: Skip (senola dikarata tsa setshaba ka boomo)\n\n💡 DITIRO TSA STRATEGY:\n• Dikarata tse di kwa godimo (pairs, high cards) di tlhoka 4x bets\n• Bapisa tsamaiso ya dealer - dikarata tse di mosesane di ka pusha fa dealer ga a tlhoke\n• BLIND bet e ka ba e le madi a oketsegileng ka dikarata tse di kwa godimo (Royal Flush = 500:1!)\n• Bona tshipi ya gago! Fa e fihla 0 kgotsa fa e fihla mo tlase ga 0 mo simolong ya raundi, o lahleha.\n\n⚠️  DITIRO TSA TLHOKOMELO:\n• ANTE le BLIND bets di sa tlwaelegang mo raundi e nngwe le e nngwe\n• PLAY bets di letlelelweng le di strategic\n• Bona gore o tlhoma ditiro tse di sa tlwaelegang, le fela e le nngwe ya ditiro mo nako e le nngwe.\n\n",
+    "state": "🎯 RAUNDI {round}\n💰 Tshipi: {chips}\n🎴 Letsogo la gago: {hand}\n📊 Madi a bet: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Phase: {phase}\n🎯 Ditiro tse di letlelelweng: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Raundi {round} e simolotse! Madi a bet: ANTE ${ante}, BLIND ${blind}. O na {chips} tshipi e seseng.",
+    "your_hand": " Seatla sa gago: {hand}",
+    "flop_revealed": " FLOP e ne ya senolwa: {cards}",
+    "river_revealed": " RIVER o ne a senola: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Kgato e sa amogelesegang mo kgatong ya ga jaana. Dikgato tse di leng teng: {available}",
+    "message": " Kgato e e sa siamang! Dikgato tse di leng teng: {available}"
+  },
+  "action": {
+    "folded": " O ne wa ineela."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! Letsogo la morekisi: {cards}",
+    "community_cards": " Dikarata tsa setšhaba: {cards}",
+    "player_best": "🎴 Letsogo le letona la gago: {name} ({cards})",
+    "dealer_best": "🎴 Modiri's best hand: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (o a menwa)",
+    "blind_lost_folded": " BET e FELETSWE! -${blind} (e menotswe)",
+    "ante_won": "✅ ANTE bet WON! +${amount} Go go go.",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} e ne ya busediwa morago.",
+    "ante_lost": " ANTE bet LOST! -${ante} Ke ne ke sa batle go tshameka ka di-video tsa batho ba bangwe.",
+    "blind_won": "✅ BET E KGONA! +${amount}",
+    "blind_pushed": " BET E KGATLHA! ${blind} e ne ya busediwa morago.",
+    "blind_lost": " KGANG ya BORARO E FETILWE! -${blind}",
+    "play_won": "✅ PLAY bet WON! +${amount} Go go go.",
+    "play_pushed": " PLAY bet PUSHED! ${play} e ne ya busediwa morago.",
+    "play_lost": " PLAY bet LOST! -${play} Go go go.",
+    "net_gain": "🎉 Raundi {round} e feditse! Net gain: +${net}",
+    "net_loss": "💸 Raundi {round} e feditse! Net loss: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 GAME OVER! {max_turns} rounds completed. O na le ${chips} chips - O MENWA!",
+    "game_over_lose": "O feletse ka ditšhipisi, morekisi o a fenya!",
+    "reward_win": "Modiri o ntshitswe {winner_rounds} rounds ka ${chips} chips",
+    "reward_lose": "Motshameki o ne a felelwa ke ditšhipisi mo mothalong wa {round}",
+    "reward_win_max": "Modiri o ntshitswe {max_turns} rounds ka ${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush (Go Tsokotsa Mmala wa Kgosi)",
+    "straight_flush": "Go Tsamaisa Metsi ka Tsela e e Siameng",
+    "four_of_a_kind": "Ba Banè ba Mofuta o le Mongwe Fela",
+    "full_house": "Ntlo e Tletse ka Batho ba le Bantsi",
+    "flush": "Go tshologa metsi a pula",
+    "straight": "E tlhamaletse fela.",
+    "three_of_a_kind": "Tse Tharo Tsa Mofuta wa Tsone",
+    "two_pair": "Tse Pedi Tsa Dipae",
+    "one_pair": "Molekane a le Mongwe Fela wa Lenyalo",
+    "high_card": "Karata e Kgolo",
+    "unknown": "Seatla se se sa Itsegeng"
+  }
+}

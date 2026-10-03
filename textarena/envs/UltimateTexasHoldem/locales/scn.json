@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Ancora nun c'è carta.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Giocatore singolo contro il dealer\n\n📖 PANORAMICA DEL GIOCO:\n• Inizi con {start_chips} chip\n• Un mazzo di 52 carte (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Giochi contro il dealer (casa)\n• Ogni round segue la struttura di Ultimate Texas Hold'em: posti le scommesse ANTE e BLIND, ricevi 2 carte coperte, decidi se fare scommesse PLAY opzionali nelle fasi di scommessa, quindi riveli le carte comunitarie e confronti la tua miglior mano di 5 carte con quella del dealer. Il tuo obiettivo è massimizzare le tue vincite (quando hai la mano migliore), mentre minimizzi le tue perdite (quando hai la mano peggiore).\n• Il gioco termina quando raggiungi 0 chip o meno all'inizio del round (PERDITA) o completi 1000 round con chip (VITTORIA)\n\n💰 STRUTTURA DELLE SCOMMESSE:\n• ANTE: Scommessa obbligatoria di ${ante} ogni round\n• BLIND: Scommessa obbligatoria di ${ante} ogni round\n• PLAY: Scommessa opzionale durante il gioco. Durante il round, puoi scegliere SOLO UNA delle seguenti: (${ante4} se fatto al PRE-FLOP, ${ante2} se fatto al FLOP, o ${ante} se fatto al RIVER. Puoi anche rinunciare al fiume, rinunciando alla mano e non facendo alcuna scommessa.)\n\n🎴 DISTRIBUZIONE DELLE CARTE:\n• Ricevi 2 carte coperte (le tue carte coperte)\n• Il dealer riceve 2 carte coperte (nascoste da te)\n• 5 carte comunitarie sono distribuite coperte inizialmente\n• Le carte comunitarie sono rivelate progressivamente attraverso le fasi del gioco\n\n🏆 QUALIFICAZIONE DEL DEALER:\n• Il dealer deve avere almeno una coppia (2 carte dello stesso rango) per qualificarsi, utilizzando le 2 carte nella sua mano e le 5 carte comunitarie.\n• La qualificazione del dealer influenza gli esiti delle scommesse, come verrà spiegato in seguito.\n\n🎮 FASI DEL GIOCO E AZIONI:\n📋 PRE-FLOP:\n  • Azioni: [4x] (${ante4}) o [check]\n  • [4x]: Piazza la scommessa PLAY di ${ante4}, rivela le prime 3 carte comunitarie\n  • [check]: Nessuna scommessa aggiuntiva, rivela le prime 3 carte comunitarie\n\n📋 FLOP:\n  • Se la scommessa 4x è stata fatta: solo [skip] disponibile (rivela automaticamente le ultime 2 carte comunitarie)\n  • Se non è stata fatta la scommessa 4x: [2x] (${ante2}) o [check]\n  • [2x]: Piazza la scommessa PLAY di ${ante2}, rivela le ultime 2 carte comunitarie\n  • [check]: Nessuna scommessa aggiuntiva, rivela le ultime 2 carte comunitarie\n\n📋 RIVER:\n  • Se la scommessa 4x o 2x è stata fatta: solo [skip] disponibile (procede automaticamente allo showdown)\n  • Se non è stata fatta alcuna scommessa PLAY: [1x] (${ante}) o [fold]\n  • [1x]: Piazza la scommessa PLAY di ${ante}, procede allo showdown\n  • [fold]: Rinuncia alla mano, perde le scommesse ANTE e BLIND\n\n📋 SHOWDOWN:\n  • Tutte le carte sono rivelate e valutate\n  • La miglior mano di 5 carte dalle 7 carte (2 coperte + 5 comunitarie)\n  • Le scommesse sono regolate secondo le regole di pagamento\n\n💎 PAGAMENTI DELLE SCOMMESSE:\n📊 SCOMMESSA ANTE:\n  • Il dealer non si qualifica: PUSH (scommessa restituita)\n  • Il dealer si qualifica e vinci: pagamento 1:1 (scommessa + vincita)\n  • Il dealer si qualifica e perdi: scommessa persa\n  • Pareggio: PUSH (scommessa restituita)\n\n📊 SCOMMESSA BLIND:\n  • Non influenzata dalla qualificazione del dealer\n  • Vinci: scommessa restituita e pagamento aggiuntivo basato sulla forza della tua mano\n  • Perdi: scommessa persa\n  • Pareggio: PUSH (scommessa restituita)\n\n📊 TABELLA DI PAGAMENTO DELLA SCOMMESSA BLIND:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Quattro di un tipo: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Meno di Straight: nessun pagamento aggiuntivo\n\n📊 SCOMMESSA PLAY:\n  • Non influenzata dalla qualificazione del dealer\n  • Confronto diretto: la tua miglior mano contro la miglior mano del dealer\n  • Vinci: pagamento 1:1 (scommessa + vincita)\n  • Perdi: scommessa persa\n  • Pareggio: PUSH (scommessa restituita)\n\n🎯 CLASSIFICHE DELLE MANI DI POKER (Migliore-Peggio):\n  1. Royal Flush: A-K-Q-J-10 dello stesso seme\n  2. Straight Flush: 5 carte consecutive dello stesso seme\n  3. Quattro di un tipo: 4 carte dello stesso rango\n  4. Full House: 3 di un tipo + 2 di un tipo\n  5. Flush: 5 carte dello stesso seme\n  6. Straight: 5 carte consecutive\n  7. Tre di un tipo: 3 carte dello stesso rango\n  8. Due coppie: 2 coppie di ranghi diversi\n  9. Una coppia: 2 carte dello stesso rango\n  10. Carta alta: la carta più alta vince\n\n⌨️ COMANDI DI AZIONE:\n• [4x] o [play bet 4x]: piazza la scommessa PLAY di ${{self.ante_amount*4}}\n• [2x] o [play bet 2x]: piazza la scommessa PLAY di ${{self.ante_amount*2}}\n• [1x] o [play bet 1x]: piazza la scommessa PLAY di ${{self.ante_amount*1}}\n• [check] o [c]: controlla (nessuna scommessa aggiuntiva)\n• [fold] o [f]: rinuncia (rinuncia alla mano)\n• [skip] o [s]: salta alla fase successiva (quando non è necessaria alcuna azione)\n\n💡 CONSIGLI DI STRATEGIA:\n• Le mani di partenza forti (coppie, carte alte) spesso giustificano le scommesse 4x\n• Considera la qualificazione del dealer - le mani deboli possono spingere se il dealer non si qualifica\n• La scommessa BLIND può essere molto redditizia con mani forti (Royal Flush = 500:1!)\n• Tieni d'occhio il tuo stack di chip! Se scende a 0 o meno all'inizio del round, perdi.\n\n⚠️ NOTE IMPORTANTI:\n• Le scommesse ANTE e BLIND sono obbligatorie ogni round\n• Le scommesse PLAY sono opzionali e strategiche\n• Assicurati di inserire l'azione corretta e solo un'azione alla volta.\n\n",
+    "state": "🎯 ROUND {round}\n💰 Chip: {chips}\n🎴 La tua mano: {hand}\n📊 Scommesse attuali: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fase: {phase}\n🎯 Azioni disponibili: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Round {round} iniziato! Scommesse: ANTE ${ante}, BLIND ${blind}. Hai {chips} chip rimanenti.",
+    "your_hand": " La tò manu: {hand}",
+    "flop_revealed": " FLOP rivelatu: {cards}",
+    "river_revealed": " RIVER rivelatu: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Azione invalida pè a fase currente. Attività dispunibuli: {available}",
+    "message": " Azione invalida! Attività dispunibili: {available}"
+  },
+  "action": {
+    "folded": "- Ti si' arrubbatu."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! La manu dû mazzieri: {cards}",
+    "community_cards": " Carti comunitari: {cards}",
+    "player_best": "🎴 Miglior mano del giocatore: {name} ({cards})",
+    "dealer_best": "🎴 Miglior mano del dealer: {name} ({cards})",
+    "ante_lost_folded": " ANTE BET LOST! -${ante} (scattu)",
+    "blind_lost_folded": " BETTA A CEGUCCI PERSA! -${blind} (scattu)",
+    "ante_won": "✅ ANTE scommessa vinciuta! +${amount}",
+    "ante_pushed": " ANTE scommessa PUSHED! ${ante} ritornu",
+    "ante_lost": " ANTE BET LOST! -${ante} (Cù u so' scumparsu)",
+    "blind_won": "✅ La puntata BLIND vinciuta! +${amount}",
+    "blind_pushed": "🔄 La puntata BLIND è stata SPINTA! ${blind} restituitu",
+    "blind_lost": " BETTA A CEGUCCI PERSA! -${blind} (Cù u so' capu)",
+    "play_won": "✅ GIOCARE la scommessa VINTU! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} turnatu",
+    "play_lost": " GIOCA BETTA PERSA! -${play} (Cù u so' picculu)",
+    "net_gain": "🎉 Round {round} completato! Guadagno netto: +${net}",
+    "net_loss": "💸 Round {round} completato! Perdita netta: ${net}",
+    "separator": "- E' un granni disgraziatu. - Ma chi dici?"
+  },
+  "outcome": {
+    "game_over_win": "🏁 FINE DEL GIOCO! {max_turns} round completati. Hai ${chips} chip - HAI VINTO!",
+    "game_over_lose": "- 'Nca nun c'è cchiù fichi, vinci lu mazziere!",
+    "reward_win": "Giocatore ha completato {winner_rounds} round con ${chips} chip",
+    "reward_lose": "Lu jucaturi finìu li fichi ntô round {round}",
+    "reward_win_max": "Giocatore ha completato {max_turns} round con ${chips} chip"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush (Crusca di lu Re)",
+    "straight_flush": "Straight Flush (Cancinu di flussu)",
+    "four_of_a_kind": "Quattru di na speci",
+    "full_house": "Full House (Casa piena)",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Trè di na speci",
+    "two_pair": "Dui pari di pirsuni",
+    "one_pair": "Una coppia",
+    "high_card": "Carti cchiù forti.",
+    "unknown": "Manu scunnisciuta."
+  }
+}

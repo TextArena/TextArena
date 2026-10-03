@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "O kile wa Bapadi {player_id} Iterated Prisoner's Dilemma e fetang {num_rounds} di raundi.\n\nMokgwa wa Tshwantshiso:\n- Pele ga tsela e nngwe le e nngwe la tshwetso, o na le {total_conversation_rounds} di raundi tsa go buisana ka tsela yeo o ratang.\n- Ka morago ga moo, bapadi bobedi ba kgetha go tshwaraganelana goba go kgelosetsa ka nako e tee.\n\nTafelase ya Phediso (e sa fetogego ka moka raundi):\n- Bobedi ba Tshwaraganelana ➜ mongwana a amogele {cooperate_reward}\n- Bobedi ba Kgelosetsa ➜ mongwana a amogele {mutual_defect_reward}\n- Moja a Kgelosetsa, moja a Tshwaraganelana ➜ Mokgelosetsi a amogele {defect_reward}, Motshwaraganelani a amogele {sucker_reward}\n\nKao le Rata go Bapala:\n- Nakong ya puisano: ngwala sengwalwa se sengwe se o se ratang.\n- Nakong ya tsela ya tshwetso: kenya '[Cooperate]' goba '[Defect]' (o se ke wa ela hloko mokgwa wa go ngwala). O ka oketsa sengwalwa se sengwe pele goba ka morago ga token."
+  },
+  "phases": {
+    "conversation_finished": "Polelo e feditse ka round {round}. Le ka araba '[Cooperate]' kana '[Defect]' ka nako e kwadilwego \\boxed{{}}.",
+    "starting_round": "--- Kgato ya go Thoma {round} ---",
+    "round_summary": "Matokeo a Raundi {round}:\n{outcome}\nPlayer 0 o ile a huma {r0} (kakaretso {score_0}), Player 1 o ile a huma {r1} (kakaretso {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} o ile a hlola {win_score} - {lose_score}.",
+    "draw": "Bobedi bja bona ba ile ba dira {s0}.",
+    "round_both_cooperate": "Bapetšhi ka bobedi ba ile ba dirišana.",
+    "round_both_defect": "Bapadiši bobedi ba ile ba hloka.",
+    "round_p0_cooperates_p1_defects": "Sebapadi 0 se ile sa dirišana le rena, sebapadi 1 sona se ile tša tšhaba.",
+    "round_p0_defects_p1_cooperates": "Sebapadi 0 se ile sa hlanogela mmušo, sebapadi 1 se ile tša dirišana le sona."
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "هێشتا هیچ کاردێک نییە.",
+    "rules": "🎯 تێکساس ھۆڵدێم - یاریزانێک دژ بە دێلەر\n\n📖 ڕۆشنبیریی یاری:\n• تۆ دەست پێ دەکەیت لەگەڵ {start_chips} چیپ\n• دێکێکی تاکە لە ٥٢ کارت (٢♠-A♠, ٢♥-A♥, ٢♦-A♦, ٢♣-A♣)\n• تۆ دژی دێلەر (ماڵ) یاری دەکەیت\n• ھەر قۆناغێک شوێنی پێکھاتەی تێکساس ھۆڵدێمی کۆتایی دەگرێت: تۆ BETی ANTE و BLIND دادەنێیت، ٢ کارت لە دەستت وەردەگریت، بڕیاری لەسەر BETی PLAY دەدەیت لە قۆناغەکانی یاریکردن، پاشان کارتەکانی کۆمەڵگە ئاشکرا دەکەیت و دەستت بەرامبەر بە دەستی دێلەر بەراورد دەکەیت. ئامانجت بریتییە لە زیادکردنی بردنەوەکانت (کاتێک دەستێکی باشترت ھەیە)، لە کاتێکدا کەمکردنەوەی دۆڕاندنەکانت (کاتێک دەستێکی خراپترت ھەیە).\n• یاری کۆتایی دێت کاتێک تۆ دەگەیت بە ٠ چیپ یان کەمتر لە سەرەتای قۆناغ (دۆڕان) یان ١٠٠٠ قۆناغ تەواو دەکەیت لەگەڵ چیپ (بردنەوە)\n\n💰 پێکھاتەی BET:\n• ANTE: BETی ناچاری ${ante} لە ھەر قۆناغێک\n• BLIND: BETی ناچاری ${ante} لە ھەر قۆناغێک\n• PLAY: BETی ھەڵبژاردە لە کاتی یاریکردن. لە سەرتاسەری قۆناغەکە، تۆ تەنھا یەکێک لەمانە ھەڵدەبژێری: (${ante4} ئەگەر لە PRE-FLOP کرابێت، ${ante2} ئەگەر لە FLOP کرابێت، یان ${ante} ئەگەر لە RIVER کرابێت. دەتوانی لە RIVERیشدا تەسلیم ببی، دەستت بدەیتەوە، و BETی نەکەیت.)\n\n🎴 کارتکردن:\n• تۆ ٢ کارت لە دەستت وەردەگریت (کارتەکانی دەستت)\n• دێلەر ٢ کارت وەردەگرێت (ڕووی خوارەوە، نادیار بۆ تۆ)\n• ٥ کارت لە کۆمەڵگە دادەنرێن (ڕووی خوارەوە، نادیار)\n• کارتەکانی کۆمەڵگە لە سەرتاسەری قۆناغەکانی یاریکردن ئاشکرا دەکرێن\n\n🏆 شایستەیی دێلەر:\n• دێلەر پێویستی بە کەمترین جووتێک (٢ کارت لە ھەمان پلە) ھەیە بۆ شایستەیی، بە بەکارھێنانی ٢ کارت لە دەستیان و ٥ کارت لە کۆمەڵگە.\n• شایستەیی دێلەر کاریگەری لەسەر ئەنجامەکانی BET دەکات، وەک لە دوای ئەمە ڕوون دەکرێتەوە.\n\n🎮 قۆناغەکانی یاری و کردارەکان:\n📋 PRE-FLOP:\n  • کردارەکان: [4x] (${ante4}) یان [check]\n  • [4x]: BETی ${ante4} PLAY دادەنێیت، ٣ کارت یەکەمی کۆمەڵگە ئاشکرا دەکات\n  • [check]: BETی زیادە نادات، ٣ کارت یەکەمی کۆمەڵگە ئاشکرا دەکات\n\n📋 FLOP:\n  • ئەگەر BETی 4x کرابێت: تەنھا [skip] بەردەستە (بە ئۆتۆماتیکی ٢ کارت کۆتایی کۆمەڵگە ئاشکرا دەکات)\n  • ئەگەر BETی 4x نەکرابێت: [2x] (${ante2}) یان [check]\n  • [2x]: BETی ${ante2} PLAY دادەنێیت، ٢ کارت کۆتایی کۆمەڵگە ئاشکرا دەکات\n  • [check]: BETی زیادە نادات، ٢ کارت کۆتایی کۆمەڵگە ئاشکرا دەکات\n\n📋 RIVER:\n  • ئەگەر BETی 4x یان 2x کرابێت: تەنھا [skip] بەردەستە (بە ئۆتۆماتیکی بەرەو بەرھەڵستیکردن دەڕوات)\n  • ئەگەر BETی PLAY پێشتر نەکرابێت: [1x] (${ante}) یان [fold]\n  • [1x]: BETی ${ante} PLAY دادەنێیت، بەرەو بەرھەڵستیکردن دەڕوات\n  • [fold]: دەستت دەدەیتەوە، BETی ANTE و BLIND دەدەیتەوە\n\n📋 SHOWDOWN:\n  • ھەموو کارتەکان ئاشکرا دەکرێن و ھەڵدەسەنگێنرێن\n  • دەستێکی ٥ کارت لە ٧ کارت (٢ کارت لە دەست + ٥ کارت لە کۆمەڵگە)\n  • BETەکان بە پێی یاسای پارەدانەوە دادەنرێن\n\n💎 پارەدانەوەی BET:\n📊 BETی ANTE:\n  • دێلەر شایستە نییە: PUSH (BET دەگەڕێتەوە)\n  • دێلەر شایستەیە و تۆ بردی: ١:١ پارەدانەوە (BET + بردنەوە)\n  • دێلەر شایستەیە و تۆ دۆڕاندی: BET دەدەیتەوە\n  • یەکسان: PUSH (BET دەگەڕێتەوە)\n\n📊 BETی BLIND:\n  • ناچاریی شایستەیی دێلەر نییە\n  • تۆ بردی: BET دەگەڕێتەوە و پارەدانەوەیەک بە پێی ھێزی دەستت\n  • تۆ دۆڕاندی: BET دەدەیتەوە\n  • یەکسان: PUSH (BET دەگەڕێتەوە)\n\n📊 خشتەی پارەدانەوەی BETی BLIND:\n  • ڕۆیال فلەش: ٥٠٠:١ (${{self.ante_amount * 500}})\n  • سترەیت فلەش: ٥٠:١ (${{self.ante_amount * 50}})\n  • چوار لە جۆری یەک: ١٠:١ (${{self.ante_amount * 10}})\n  • فول ھاوس: ٣:١ (${{self.ante_amount * 3}})\n  • فلەش: ٣:١ (${{self.ante_amount * 3}})\n  • سترەیت: ١:١ (${{self.ante_amount * 1}})\n  • کەمتر لە سترەیت: پارەدانەوەی زیادە نییە\n\n📊 BETی PLAY:\n  • ناچاریی شایستەیی دێلەر نییە\n  • بەراوردی ڕاستەوخۆ: دەستێکی باشترت لەگەڵ دەستی دێلەر\n  • تۆ بردی: ١:١ پارەدانەوە (BET + بردنەوە)\n  • تۆ دۆڕاندی: BET دەدەیتەوە\n  • یەکسان: PUSH (BET دەگەڕێتەوە)\n\n🎯 ڕیزبەندیی دەستی پۆکەر (باشتر بۆ خراپتر):\n  ١. ڕۆیال فلەش: A-K-Q-J-١٠ لە ھەمان سووت\n  ٢. سترەیت فلەش: ٥ کارت لەسەر یەک لە ھەمان سووت\n  ٣. چوار لە جۆری یەک: ٤ کارت لە ھەمان پلە\n  ٤. فول ھاوس: ٣ کارت لە جۆری یەک + ٢ کارت لە جۆری یەک\n  ٥. فلەش: ٥ کارت لە ھەمان سووت\n  ٦. سترەیت: ٥ کارت لەسەر یەک\n  ٧. سێ لە جۆری یەک: ٣ کارت لە ھەمان پلە\n  ٨. جووتە جووت: ٢ جووت لە جۆری جیاواز\n  ٩. جووت: ٢ کارت لە ھەمان پلە\n  ١٠. کارتێکی بەرز: کارتێکی بەرز بردی دەکات\n\n⌨️  فەرمانەکانی کردار:\n• [4x] یان [play bet 4x]: BETی ${{self.ante_amount*4}} PLAY دادەنێیت\n• [2x] یان [play bet 2x]: BETی ${{self.ante_amount*2}} PLAY دادەنێیت\n• [1x] یان [play bet 1x]: BETی ${{self.ante_amount*1}} PLAY دادەنێیت\n• [check] یان [c]: چێک دەکەیت (BETی زیادە نادات)\n• [fold] یان [f]: تەسلیم دەبی (دەستت دەدەیتەوە)\n• [skip] یان [s]: بە سکیپ دەڕوات بۆ قۆناغی داھاتوو (کاتێک ھیچ کردارێک پێویست نییە)\n\n💡 پێشنیارەکانی ستراتێژی:\n• دەستە سەرەتاییە بەھێزەکان (جووتەکان، کارتە بەرزەکان) زۆرجار ٤x BET دادەنێن\n• شایستەیی دێلەر بە ئەنقەست بکە - دەستە لاوازەکان دەتوانن بەرەو پێش بڕۆن ئەگەر دێلەر شایستە نەبێت\n• BETی BLIND دەتوانێت زۆر قازانج بەدەست بھێنێت لەگەڵ دەستە بەھێزەکان (ڕۆیال فلەش = ٥٠٠:١!)\n• چاوەڕوانی ستێکی چیپەکانت بکە! ئەگەر بڕوات بۆ ٠ یان کەمتر لە سەرەتای قۆناغ، دۆڕانی.\n\n⚠️  تێبینییە گرنگەکان:\n• BETی ANTE و BLIND ناچارییە لە ھەر قۆناغێک\n• BETی PLAY ھەڵبژاردەیە و ستراتێژیکە\n• دڵنیا ببە لە فەرمانی دروست، و تەنھا یەک فەرمان لە کاتێکدا.",
+    "state": "🎯 قۆناغ {round}\n💰 چیپەکان: {chips}\n🎴 دەستەکەت: {hand}\n📊 بەتەکان: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 قۆناغ: {phase}\n🎯 چالاکییە بەردەستەکان: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 قۆناغ {round} دەستپێکرا! بەتەکان: ANTE ${ante}, BLIND ${blind}. {chips} چیپ لەباقی ماوە.",
+    "your_hand": " دەستی تۆ: {hand}",
+    "flop_revealed": " فڵۆپ ئاشکرا کرا: {cards}",
+    "river_revealed": " ڕووبار ئاشکرا کرا: {cards}"
+  },
+  "invalid_move": {
+    "reason": "هەڵە کرداری بۆ قۆناغی ئێستا. کارەکانی بەردەست: {available}",
+    "message": " هەڵە کرداری! کارەکانی بەردەست: {available}"
+  },
+  "action": {
+    "folded": "تۆ ڕەتتکردەوە."
+  },
+  "showdown": {
+    "dealer_hand": " نیشان بدە! دەستی فرۆشیار: {cards}",
+    "community_cards": " کارتی کۆمەڵگا: {cards}",
+    "player_best": "🎴 دەستی باشترت: {name} ({cards})",
+    "dealer_best": "🎴 دەستی باشتری دیلەر: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (دابەشکراو)",
+    "blind_lost_folded": " گرەوی کوێر دۆڕاوە! -${blind} (دابڕاو)",
+    "ante_won": "✅ بەتی ANTE بردرا! +${amount}",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} گەڕێنرایەوە.",
+    "ante_lost": " ANTE bet LOST! -${ante}",
+    "blind_won": "✅ گرەوەکەی بلینگ براوە بوو! +${amount}",
+    "blind_pushed": " دانانی کوێر PUSHED! ${blind} گەڕێنراوەتەوە.",
+    "blind_lost": " گرەوی کوێر دۆڕاوە! -${blind}",
+    "play_won": "✅ تەواودانی PLAY براوە! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} گەڕێنرایەوە.",
+    "play_lost": " یاریی گرەوەکە دۆڕاوە! -${play}",
+    "net_gain": "🎉 قۆناغ {round} تەواو کرا! قازانجی خالص: +${net}",
+    "net_loss": "💸 قۆناغ {round} تەواو کرا! لەدەستدانی خالص: ${net}",
+    "separator": "- ـ ــ ـــ ــ ــ ــ ــــ ــ ــــ ــ ــ ـ ــ ــ _ ــ ـــ ــ ـــــ ــ ــ ـــ ـــ ــ ـ ـ ــ ـ ـــ ــ ـــ ـ ــ ـــــ ــ ــ"
+  },
+  "outcome": {
+    "game_over_win": "🏁 یاری کۆتایی ھات! {max_turns} قۆناغ تەواو کرا. {chips} چیپ لەباقی ماوە - تۆ بردی!",
+    "game_over_lose": "یاری کۆتاییە، چیتان نەماوە. فرۆشیار براوەیە!",
+    "reward_win": "یاریزان {winner_rounds} قۆناغ تەواو کرد بە {chips} چیپ",
+    "reward_lose": "یاریزانەکە لە گەڕی {round}دا چیپەکانی تەواو بوو.",
+    "reward_win_max": "یاریزان {max_turns} قۆناغ تەواو کرد بە {chips} چیپ"
+  },
+  "hand_names": {
+    "royal_flush": "ڕەشایی شاھانە.",
+    "straight_flush": "ڕەوشتێکی ڕاست و دروست.",
+    "four_of_a_kind": "چوار لە جۆرێک",
+    "full_house": "خانووی پڕ لە کەس.",
+    "flush": "فلاش (ڕێژەی ئاو)",
+    "straight": "ڕاستەوخۆ.",
+    "three_of_a_kind": "سێ لە جۆرێک",
+    "two_pair": "دوو جووت",
+    "one_pair": "جووتێک",
+    "high_card": "کارتی بەرز",
+    "unknown": "دەستی نەناسراو"
+  }
+}

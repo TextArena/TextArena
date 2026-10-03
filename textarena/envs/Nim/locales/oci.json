@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Èssatz Jogador {player_id} al Jòc de Nim.\nVòstre objectiu es de prendre l'objècte darrièr demorant.\nA cada torn, causissètz exactament un monton e retiratz un o mai objèctes de aquel.\nUtilizatz lo format '[pile quantity]', ont monton es l'index del monton e quantitat es lo nombre d'objèctes a retirar.\nPer exemple, '[0 3]' retira 3 objèctes del monton 0."
+  },
+  "state": {
+    "current_pile": "Corrent de la pila: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Cap de format valid per la mòda trobat. Utilizar \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Jogador {player_id}, Accion invalida. La colomna {col} es fòra dels limits.",
+    "out_of_range": "L'indici de pila {pile_index} es fòra del camp.",
+    "non_positive": "Deu levar al mens un objècte.",
+    "exceeds_pile": "Impossible de retirar {quantity} del monton {pile_index} (només {pile_count} demòran)."
+  },
+  "observation": {
+    "removed_from_piles": "Jogaire {player_id} a jogat [{pile_index} {quantity}], suprimissent {quantity} objècte(s) del molon {pile_index}."
+  },
+  "outcome": {
+    "win": "Lo jogaire {player_id} prenguèt lo darrièr objècte (s)!"
+  }
+}

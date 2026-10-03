@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw si Player {player_id} sa usa ka dula sa Indian Poker.\n- 52-ka kartang baraha; makita mo lang ang kartang sa kontra.\n- Ante {ante} chip(s) kada ronda, {max_rounds} ronda(s) sa tanan.\n- Mga gipapahiangay nga lihok: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (Ang X usa ka positibong integer <= sa imong ihap sa chip.)\n- Ang pinakataas nga kartang tago maoy mananaog sa pot sa showdown.\n"
+  },
+  "round": {
+    "announce": "### Round {current_round}/{max_rounds}\nAng card sa imong kalaban mao: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Ihatag ang eksaktong usa ka aksyon nga naka-bracket, pananglitan '[check]', '[bet 2]', '[call]', '[raise 3]', o '[fold]'.",
+    "cannot_check": "Dili [check] - ikaw nag-atubang ug usa ka sugal.",
+    "amount_min": "Ang kantidad sa bet / raise kinahanglang ≥ 1.",
+    "cannot_bet": "Dili ka pwede mag-[bet] - kinahanglan mag-[call] / [raise] / [fold].",
+    "nothing_to_call": "Walay bisan unsa nga tawgon; ikaw mahimo [check] sa baylo.",
+    "no_bet_to_raise": "Paggamit [bet X] sa pag-abli; walay bet nga ipataas.",
+    "insufficient": "Dili igo ang mga chip alang nianang maong aksiyon."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (gasto {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Ang imong posible nga mga lihok: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Manlalaro {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Player {player_id} mi-fold.",
+    "showdown_win": "Showdown: {card_win} nag-beats sa {card_lose}.",
+    "showdown_tie": "Showdown nga draw: pareho {card}. Pot split  matag usa nakadawat sa {split} ."
+  },
+  "outcome": {
+    "p0_wins": "Player 0 midaog ({bank0} > {bank1})",
+    "p1_wins": "Player 1 midaog ({bank1} > {bank0})",
+    "draw": "Parehas nga mga chips human sa tanan nga round."
+  }
+}

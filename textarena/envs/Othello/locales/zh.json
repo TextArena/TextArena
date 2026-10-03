@@ -1,0 +1,34 @@
+{
+  "player_prompt": {
+    "intro": "你是玩家 {player_id}，在奥赛罗棋游戏中执 {colour}（{piece}）。\n你的目标是在游戏结束时，使棋盘上你方颜色的棋子多于对方。\n在你的回合中，放置一枚棋子，使一枚或多枚对手棋子在任意方向上，包括水平、垂直或对角线方向，被夹在你的新棋子与你已有的另一枚棋子之间。所有被夹住的对手棋子都会翻转为你的颜色。\n请以 '[row, col]' 格式提供你的移动。"
+  },
+
+  "board": {
+    "game_board": "游戏棋盘：\n{board}",
+    "valid_moves": "{observation}\n有效移动：{moves}",
+    "no_valid_moves_reset": "{observation}\n没有有效移动 - 你可能需要跳过回合。",
+    "no_valid_moves_step": "{observation}\n没有有效移动 – 你可能需要跳过回合。",
+    "scores_reset": "{observation}\n当前得分 - 黑方：{black_count}，白方：{white_count}\n",
+    "scores_step": "{observation}\n得分 - 黑方：{black_count}，白方：{white_count}\n"
+  },
+
+  "invalid_move": {
+    "wrong_format": "移动必须采用 [row, col] 格式。",
+    "illegal": "非法移动。有效移动：{valid}"
+  },
+
+  "game_action": {
+    "skipped": "玩家 {pid} 必须跳过本回合",
+    "played": "玩家 {pid}（{piece}）在 [{r}, {c}] 落子，翻转了 {flipped} 枚棋子"
+  },
+
+  "game_message": {
+    "must_skip": "玩家 {pid}（{piece}）没有有效移动，必须跳过本回合。"
+  },
+
+  "outcome": {
+    "black_wins": "黑方以 {black_count}-{white_count} 获胜。",
+    "white_wins": "白方以 {white_count}-{black_count} 获胜。",
+    "draw": "平局 {black_count}-{white_count}。"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "Skedari i lokalizimit për ThreePlayerTicTacToe. MOS përkthej çelësat (ana e majtë). Përkthej vetëm vlerat (ana e djathtë). Mbaj çdo {placeholder} të njëjtë ashtu siç është.",
+  "_slots": {
+    "{player_id}": "Numri i lojtarit, p.sh. 0, 1 ose 2",
+    "{symbol}": "Shenja e lojtarit, një nga A, B ose C",
+    "{cell}": "Numri i qelizës së bordit",
+    "{max_cell}": "Numri më i lartë i qelizës së vlefshme (madhësia_e_bordit^2 - 1)",
+    "{row}": "Indeksi i rreshtit të bordit të shenjës së vendosur",
+    "{col}": "Indeksi i kolonës së bordit të shenjës së vendosur",
+    "{board}": "Bordi i ASCII i vizatuar (mos përkthej)",
+    "{moves}": "Lista e lëvizjeve të disponueshme të ndara me presje si '[4]' (mos përkthej)"
+  },
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në Tic Tac Toe për tre lojtarë.\nShenja juaj është '{symbol}'.\nJu merrni radhë duke vendosur shenjën tuaj në një bord 5x5 për të formuar një linjë të katër.\nLinjat mund të jenë horizontale, vertikale ose diagonale.\nDërgoni lëvizjen tuaj duke përdorur formatin '[4]' për të shënuar qelizën 4."
+  },
+  "board": {
+    "current_board": "Bordi aktual:\n\n{board}\n\nLëvizjet e disponueshme: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format i gabuar i lëvizjes. Përdorni '[qelizë]' ku qeliza është 0-{max_cell}.",
+    "out_of_range": "Numri i qelizës së gabuar: {cell}. Duhet të jetë midis 0 dhe {max_cell}.",
+    "already_occupied": "Qeliza {cell} është tashmë e zënë.",
+    "made_invalid": "Lojtari {player_id} bëri një lëvizje të pavlefshme"
+  },
+  "game_action": {
+    "placed": "Lojtari {player_id} vendos shenjën e tyre ({symbol}) në fushën ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Lojtari {player_id} ({symbol}) fiton!",
+    "draw": "Loja është një barazim!"
+  }
+}

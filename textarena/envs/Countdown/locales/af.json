@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Jy speel nou die Countdown-syferspel!\nDoel: Kombineer syfers deur +, -, *, / te gebruik om die teiken te bereik.\nAksieformaat: [i j op] waar i,j indekse is en op die operasie is.\nVoorbeeld: [0 2 *] vermenigvuldig die syfer by indeks 0 met die syfer by indeks 2.\nDeling moet net heelgetalle oplewer."
+  },
+  "board": {
+    "header": "TEIKEN: {target}\n\nBeskikbare syfers:\n{numbers}",
+    "best": "{observation}\n\nBeste tot dusver: {best_value} (afstand: {distance})\nBeste uitdrukking: {best_expression}",
+    "history": "{observation}\n\nSkuifgeskiedenis:\n{moves}",
+    "progress": "{observation}\nHuidige vorderingstelling: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldige aksieformaat. Gebruik `[i j op]` waar i,j indekse is en op +,-,*,/ is",
+    "invalid_indices": "Ongeldige indekse. Moet verskillend wees en in die reeks 0-{max_index} wees",
+    "invalid_operation": "Ongeldige operasie (deling deur nul of nie-heelgetalresultaat)"
+  },
+  "outcome": {
+    "win": "Perfek! Die presiese teiken is gevind: {target}",
+    "no_moves": "Geen skuif is meer moontlik. Beste resultaat: {best_value} (teiken: {target})",
+    "turn_limit": "Beurtlimiet is bereik. Beste resultaat: {best_value} (teiken: {target})"
+  }
+}

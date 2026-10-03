@@ -1,0 +1,32 @@
+{
+  "_comment": "Háromjátékos Tic Tac Toe nyelvi fájl. NE fordítsa le a kulcsokat (bal oldal). Csak a értékeket fordítsa le (jobb oldal).",
+  "_slots": {
+    "{player_id}": "A játékos száma, pl. 0, 1 vagy 2",
+    "{symbol}": "A játékos jele, A, B vagy C",
+    "{cell}": "A tábla egyik cellájának száma",
+    "{max_cell}": "A legmagasabb érvényes cellaszám (tábla_méret^2 - 1)",
+    "{row}": "A tábla sorindexe, ahova a jelet elhelyezték",
+    "{col}": "A tábla oszlopindexe, ahova a jelet elhelyezték",
+    "{board}": "A megjelenített ASCII tábla (ne fordítsa le)",
+    "{moves}": "Az elérhető lépések vesszővel elválasztott listája, pl. '[4]' (ne fordítsa le)"
+  },
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a Háromjátékos Tic Tac Toe-ban.\nAz Ön jele '{symbol}'.\nÖn és a többi játékos felváltva helyezik el jeleiket egy 5x5-ös táblán, hogy egy négy jelet tartalmazó sort alakítsanak ki.\nA sorok vízszintesek, függőlegesek vagy átlósak lehetnek.\nAdja meg lépését a '[4]' formátumban, hogy megjelölje a 4. cellát."
+  },
+  "board": {
+    "current_board": "Aktuális tábla:\n\n{board}\n\nElérhető lépések: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Érvénytelen lépésformátum. Használja a '[cell]' formátumot, ahol cella 0-{max_cell}.",
+    "out_of_range": "Érvénytelen cellaszám: {cell}. 0 és {max_cell} között kell lennie.",
+    "already_occupied": "A {cell} cella már foglalt.",
+    "made_invalid": "A {player_id}. játékos érvénytelen lépést tett"
+  },
+  "game_action": {
+    "placed": "A {player_id}. játékos elhelyezte jelet ({symbol}) a ({row}, {col}) mezőben."
+  },
+  "outcome": {
+    "win": "A {player_id}. játékos ({symbol}) nyert!",
+    "draw": "A játék döntetlen!"
+  }
+}

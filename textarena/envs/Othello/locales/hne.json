@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "खेल बोर्ड:\n{board}",
+    "valid_moves": "{observation}\nमान्य चालें: {moves}",
+    "no_valid_moves_reset": "{observation} कोई वैध चाल नी - आप ल छोड़ना पड़ सकत हवय।",
+    "no_valid_moves_step": "{observation} कोई वैध चाल नी हवय आप ल छोड़ना पड़ सकत हवय।",
+    "scores_reset": "{observation}\nवर्तमान स्कोर - काला: {black_count}, सफेद: {white_count}\n",
+    "scores_step": "{observation}\nस्कोर - काला: {black_count}, सफेद: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "चाल [row, col] के रूप म होए बर चाहि।",
+    "illegal": "अवैध चाल। मान्य चालें: {valid}"
+  },
+  "game_action": {
+    "skipped": "खिलाड़ी {pid} ल अपन बारी छोड़ना रहिस ।",
+    "played": "खेलाड़ी {pid} ({piece}) ने [{r}, {c}] पर खेला और {flipped} टुकड़े पलट दिए"
+  },
+  "game_message": {
+    "must_skip": "खेलाड़ी {pid} ({piece}) के पास कोई मान्य चाल नहीं है और उन्हें छोड़ना होगा।"
+  },
+  "outcome": {
+    "black_wins": "काला जीतता है {black_count}-{white_count}।",
+    "white_wins": "सफेद जीतता है {white_count}-{black_count}।",
+    "draw": "ड्रा {black_count}-{white_count}。"
+  }
+}

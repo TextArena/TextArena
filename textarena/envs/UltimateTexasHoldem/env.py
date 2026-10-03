@@ -101,137 +101,35 @@ class UltimateTexasHoldemEnv(ta.Env):
         gs["current_phase"] = "pre_flop"
         gs["legal_actions"] = self.legal_action_tree["pre_flop"][:]
         
-        self.state.add_observation(message=f"🎮 Round {gs['current_round']} started! Bets: ANTE ${gs['ante_bet']}, BLIND ${gs['blind_bet']}. You have {gs['chips']} chips remaining.", observation_type=ta.ObservationType.GAME_MESSAGE)
-        hand_str = ", ".join([f"{c['rank']}{c['suit']}" for c in gs["player_hand"]])
-        self.state.add_observation(message=f"🎴 Your hand: {hand_str}", observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(message=self.m("board", "round_start", round=gs['current_round'], ante=gs['ante_bet'], blind=gs['blind_bet'], chips=gs['chips']), observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(message=self.m("board", "your_hand", hand=self._cards_str(gs["player_hand"])), observation_type=ta.ObservationType.GAME_BOARD)
 
     def _create_deck(self) -> List[Dict[str, str]]:
         return [{"rank": r, "suit": s} for s in self.suits for r in self.ranks]
 
+    @staticmethod
+    def _cards_str(cards: List[Dict[str, str]]) -> str:
+        return ", ".join(f"{c['rank']}{c['suit']}" for c in cards)
+
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
         gs = self.state.game_state
         phase = gs["current_phase"]
-        
-        # Game rules and instructions
-        rules = (
-            "🎯 ULTIMATE TEXAS HOLD'EM - Single Player vs Dealer\n\n"
-            "📖 GAME OVERVIEW:\n"
-            f"• You start with {self.start_chips} chips\n"
-            "• Single deck of 52 cards (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n"
-            "• You play against the dealer (house)\n"
-            "• Each round follows the Ultimate Texas Hold'em structure: you post ANTE and BLIND bets, receive 2 hole cards, decide on optional PLAY bets across the betting phases, then reveal community cards and compare your best 5-card hand against the dealer’s. Your goal is to maximize your winnings (when you have the better hand), while minimizing your losses (when you have the worse hand).\n"
-            "• Game ends when you reach 0 chips or below at start of round (LOSS) or complete 1000 rounds with chips (WIN)\n\n"
-            
-            "💰 BETTING STRUCTURE:\n"
-            f"• ANTE: Mandatory ${self.ante_amount} bet every round\n"
-            f"• BLIND: Mandatory ${self.ante_amount} bet every round\n"
-            f"• PLAY: Optional bet during gameplay. Throughout the round, you may choose ONLY ONE of the following: (${self.ante_amount*4} if done at PRE-FLOP, ${self.ante_amount*2} if done at FLOP, or ${self.ante_amount} if done at RIVER. Can also fold at river, giving up on the hand, and making no bet.)\n\n"
-            
-            "🎴 CARD DEALING:\n"
-            "• You receive 2 face-up cards (your hole cards)\n"
-            "• Dealer receives 2 face-down cards (hidden from you)\n"
-            "• 5 community cards are dealt face-down initially\n"
-            "• Community cards are revealed progressively through the game phases\n\n"
-            
-            "🏆 DEALER QUALIFICATION:\n"
-            "• Dealer must have at least a PAIR (2 cards of same rank) to qualify, using the 2 cards in their hand and the 5 community cards.\n"
-            "• Dealer qualification affects the betting outcomes, as will be explained later.\n\n"
-            
-            "🎮 GAME PHASES & ACTIONS:\n"
-            "📋 PRE-FLOP:\n"
-            f"  • Actions: [4x] (${self.ante_amount*4}) or [check]\n"
-            f"  • [4x]: Place ${self.ante_amount*4} PLAY bet, reveals first 3 community cards\n"
-            f"  • [check]: No additional bet, reveals first 3 community cards\n\n"
-            
-            "📋 FLOP:\n"
-            f"  • If 4x bet placed: Only [skip] available (auto-reveals last 2 community cards)\n"
-            f"  • If no 4x bet: [2x] (${self.ante_amount*2}) or [check]\n"
-            f"  • [2x]: Place ${self.ante_amount*2} PLAY bet, reveals last 2 community cards\n"
-            f"  • [check]: No additional bet, reveals last 2 community cards\n\n"
-            
-            "📋 RIVER:\n"
-            f"  • If 4x or 2x bet placed: Only [skip] available (auto-proceeds to showdown)\n"
-            f"  • If no prior PLAY bet: [1x] (${self.ante_amount}) or [fold]\n"
-            f"  • [1x]: Place ${self.ante_amount} PLAY bet, proceeds to showdown\n"
-            f"  • [fold]: Give up hand, lose ANTE and BLIND bets\n\n"
-            
-            "📋 SHOWDOWN:\n"
-            "  • All cards revealed and evaluated\n"
-            "  • Best 5-card hand from 7 cards (2 hole + 5 community)\n"
-            "  • Bets settled according to payout rules\n\n"
-            
-            "💎 BET PAYOUTS:\n"
-            "📊 ANTE BET:\n"
-            "  • Dealer doesn't qualify: PUSH (bet returned)\n"
-            "  • Dealer qualifies & you win: 1:1 payout (bet + winnings)\n"
-            "  • Dealer qualifies & you lose: Bet lost\n"
-            "  • Tie: PUSH (bet returned)\n\n"
-            
-            "📊 BLIND BET:\n"
-            "  • Unaffected by dealer qualification\n"
-            "  • You win: Bet returned and additional payout based on your hand strength\n"
-            "  • You lose: Bet lost\n"
-            "  • Tie: PUSH (bet returned)\n\n"
-            
-            "📊 BLIND BET PAY TABLE:\n"
-            "  • Royal Flush: 500:1 (${self.ante_amount * 500})\n"
-            "  • Straight Flush: 50:1 (${self.ante_amount * 50})\n"
-            "  • Four of a Kind: 10:1 (${self.ante_amount * 10})\n"
-            "  • Full House: 3:1 (${self.ante_amount * 3})\n"
-            "  • Flush: 3:1 (${self.ante_amount * 3})\n"
-            "  • Straight: 1:1 (${self.ante_amount * 1})\n"
-            "  • Less than Straight: No additional payout\n\n"
-            
-            "📊 PLAY BET:\n"
-            "  • Unaffected by dealer qualification\n"
-            "  • Direct comparison: Your best hand vs Dealer's best hand\n"
-            "  • You win: 1:1 payout (bet + winnings)\n"
-            "  • You lose: Bet lost\n"
-            "  • Tie: PUSH (bet returned)\n\n"
-            
-            "🎯 POKER HAND RANKINGS (Best to Worst):\n"
-            "  1. Royal Flush: A-K-Q-J-10 of same suit\n"
-            "  2. Straight Flush: 5 consecutive cards of same suit\n"
-            "  3. Four of a Kind: 4 cards of same rank\n"
-            "  4. Full House: 3 of a kind + 2 of a kind\n"
-            "  5. Flush: 5 cards of same suit\n"
-            "  6. Straight: 5 consecutive cards\n"
-            "  7. Three of a Kind: 3 cards of same rank\n"
-            "  8. Two Pair: 2 pairs of different ranks\n"
-            "  9. One Pair: 2 cards of same rank\n"
-            "  10. High Card: Highest card wins\n\n"
-            
-            "⌨️  ACTION COMMANDS:\n"
-            "• [4x] or [play bet 4x]: Place ${self.ante_amount*4} PLAY bet\n"
-            "• [2x] or [play bet 2x]: Place ${self.ante_amount*2} PLAY bet\n"
-            "• [1x] or [play bet 1x]: Place ${self.ante_amount*1} PLAY bet\n"
-            "• [check] or [c]: Check (no additional bet)\n"
-            "• [fold] or [f]: Fold (give up hand)\n"
-            "• [skip] or [s]: Skip to next phase (when no action needed)\n\n"
-            
-            "💡 STRATEGY TIPS:\n"
-            "• Strong starting hands (pairs, high cards) often justify 4x bets\n"
-            "• Consider dealer qualification - weak hands may push if dealer doesn't qualify\n"
-            "• BLIND bet can be very profitable with strong hands (Royal Flush = 500:1!)\n"
-            "• Watch your chip stack! If it goes to 0 or below at start of round, you lose.\n\n"
-            
-            "⚠️  IMPORTANT NOTES:\n"
-            "• ANTE and BLIND bets are mandatory every round\n"
-            "• PLAY bets are optional and strategic\n"
-            "• Make sure you input the correct action, and only one action at a time.\n\n"
+
+        rules = self.m("player_prompt", "rules", start_chips=self.start_chips, ante=self.ante_amount, ante4=self.ante_amount*4, ante2=self.ante_amount*2)
+
+        hand = self._cards_str(gs['player_hand']) if gs['player_hand'] else self.m("player_prompt", "no_cards")
+        state_info = self.m(
+            "player_prompt", "state",
+            round=gs['current_round'],
+            chips=gs['chips'],
+            hand=hand,
+            ante=gs['ante_bet'],
+            blind=gs['blind_bet'],
+            play=gs['play_bet'],
+            phase=self.game_phases[phase],
+            actions=', '.join([f'[{action}]' for action in gs.get('legal_actions', [])]),
         )
-        
-        # Current game state
-        state_info = (
-            f"🎯 ROUND {gs['current_round']}\n"
-            f"💰 Chips: {gs['chips']}\n"
-            f"🎴 Your hand: {', '.join([f"{card['rank']}{card['suit']}" for card in gs['player_hand']]) if gs['player_hand'] else 'No cards yet'}\n"
-            f"📊 Current bets: Ante ${gs['ante_bet']}, Blind ${gs['blind_bet']}, Play ${gs['play_bet']}\n"
-            f"📋 Phase: {self.game_phases[phase]}\n"
-            f"🎯 Available actions: {', '.join([f'[{action}]' for action in gs.get('legal_actions', [])])}\n\n"
-        )
-        
-        return rules + state_info
+        return rules.render(_pid=player_id) + state_info.render(_pid=player_id)
 
     def step(self, action: str) -> Tuple[bool, Dict[str, Any]]:
         gs = self.state.game_state
@@ -242,38 +140,39 @@ class UltimateTexasHoldemEnv(ta.Env):
         # Check for game completion from showdown
         if gs.get("game_complete", False):
             if gs.get("winner") == "player":
-                self.state.set_outcome(reward=1.0, reason=f"Player completed {gs['current_round']} rounds with ${gs['chips']} chips")
+                self.state.set_outcome(reward=1.0, reason=self.m("outcome", "reward_win", winner_rounds=gs['current_round'], chips=gs['chips']))
             else:
-                self.state.set_outcome(reward=-1.0, reason=f"Player ran out of chips in round {gs['current_round']}")
+                self.state.set_outcome(reward=-1.0, reason=self.m("outcome", "reward_lose", round=gs['current_round']))
             return self.state.step()
         
         # Only check round completion at the start of each step (not chip depletion)
         if gs["current_round"] >= self.max_turns:
             # Player won - completed all rounds with chips
-            self.state.add_observation(message=f"🏁 GAME OVER! {self.max_turns} rounds completed. You have ${gs['chips']} chips - YOU WIN!", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.state.set_outcome(reward=1.0, reason=f"Player completed {self.max_turns} rounds with ${gs['chips']} chips")
+            self.state.add_observation(message=self.m("outcome", "game_over_win", max_turns=self.max_turns, chips=gs['chips']), observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.set_outcome(reward=1.0, reason=self.m("outcome", "reward_win_max", max_turns=self.max_turns, chips=gs['chips']))
             return self.state.step()
-        
+
         self.state.add_observation(from_id=0, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
         parsed = self._parse_action(action)
-        
+
         if parsed is None:
             # Get current legal actions for better error feedback
             current_actions = gs.get("legal_actions", [])
             available_actions = ", ".join([f"[{action}]" for action in current_actions])
-            
-            error_reason = f"Invalid action for current phase. Available actions: {available_actions}"
+
+            error_reason = self.m("invalid_move", "reason", available=available_actions)
             self.state.set_invalid_move(reason=error_reason)
-            
+            error_reason_text = error_reason.render(_pid=0)
+
             # Add observation about invalid move with available actions
             self.state.add_observation(
-                message=f"❌ Invalid action! Available actions: {available_actions}", 
+                message=self.m("invalid_move", "message", available=available_actions),
                 observation_type=ta.ObservationType.GAME_MESSAGE
             )
-            
+
             # Don't call self.state.step() here as it would reset made_invalid_move
             # Instead, return a tuple indicating the game should continue
-            return (False, {"invalid_move": True, "reason": error_reason})
+            return (False, {"invalid_move": True, "reason": error_reason_text})
         
         self._execute_action(parsed)
         return self.state.step()
@@ -312,13 +211,13 @@ class UltimateTexasHoldemEnv(ta.Env):
                 gs["total_bet"] += 100
                 # reveal flop
                 gs["visible_community_cards"] = gs["community_cards"][:3]
-                self.state.add_observation(message=f"🃏 FLOP revealed: {', '.join(f"{c['rank']}{c['suit']}" for c in gs['visible_community_cards'])}", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=self.m("board", "flop_revealed", cards=self._cards_str(gs['visible_community_cards'])), observation_type=ta.ObservationType.GAME_MESSAGE)
                 gs["current_phase"] = "flop"
                 gs["legal_actions"] = self.legal_action_tree["flop_no_action"][:]
             elif parsed == "check":
                 # reveal flop
                 gs["visible_community_cards"] = gs["community_cards"][:3]
-                self.state.add_observation(message=f"🃏 FLOP revealed: {', '.join(f"{c['rank']}{c['suit']}" for c in gs['visible_community_cards'])}", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=self.m("board", "flop_revealed", cards=self._cards_str(gs['visible_community_cards'])), observation_type=ta.ObservationType.GAME_MESSAGE)
                 gs["current_phase"] = "flop"
                 gs["legal_actions"] = self.legal_action_tree["flop"][:]
             return
@@ -327,7 +226,7 @@ class UltimateTexasHoldemEnv(ta.Env):
             if parsed == "skip":
                 # reveal remaining two and move to river
                 gs["visible_community_cards"] = gs["community_cards"]
-                self.state.add_observation(message=f"🃏 RIVER revealed: {', '.join(f"{c['rank']}{c['suit']}" for c in gs['community_cards'][3:])}", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=self.m("board", "river_revealed", cards=self._cards_str(gs['community_cards'][3:])), observation_type=ta.ObservationType.GAME_MESSAGE)
                 gs["current_phase"] = "river"
                 # Set correct legal actions based on play bet
                 if gs["play_bet"] >= 50:  # 4x or 2x bet already placed
@@ -341,14 +240,14 @@ class UltimateTexasHoldemEnv(ta.Env):
                 gs["total_bet"] += 50
                 # reveal remaining two and move to river
                 gs["visible_community_cards"] = gs["community_cards"]
-                self.state.add_observation(message=f"🃏 RIVER revealed: {', '.join(f"{c['rank']}{c['suit']}" for c in gs['community_cards'][3:])}", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=self.m("board", "river_revealed", cards=self._cards_str(gs['community_cards'][3:])), observation_type=ta.ObservationType.GAME_MESSAGE)
                 gs["current_phase"] = "river"
                 gs["legal_actions"] = self.legal_action_tree["river_no_action"][:]
                 return
             if parsed == "check":
                 # move to river without play bet
                 gs["visible_community_cards"] = gs["community_cards"]
-                self.state.add_observation(message=f"🃏 RIVER revealed: {', '.join(f"{c['rank']}{c['suit']}" for c in gs['community_cards'][3:])}", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=self.m("board", "river_revealed", cards=self._cards_str(gs['community_cards'][3:])), observation_type=ta.ObservationType.GAME_MESSAGE)
                 gs["current_phase"] = "river"
                 gs["legal_actions"] = self.legal_action_tree["river"][:]
                 return
@@ -369,7 +268,7 @@ class UltimateTexasHoldemEnv(ta.Env):
                 return
             if parsed == "fold":
                 # mark folded by setting play_bet=0 and annotating
-                self.state.add_observation(message="🃏 You folded.", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=self.m("action", "folded"), observation_type=ta.ObservationType.GAME_MESSAGE)
                 gs["folded"] = True  # Mark that player folded
                 gs["current_phase"] = "showdown"
                 # Immediately resolve showdown - no waiting for player input
@@ -397,8 +296,8 @@ class UltimateTexasHoldemEnv(ta.Env):
         player_hand_name = self._get_hand_name(player_best_hand)
         dealer_hand_name = self._get_hand_name(dealer_best_hand)
         
-        self.state.add_observation(message=f"🏁 SHOWDOWN! Dealer's hand: {dealer_cards}", observation_type=ta.ObservationType.GAME_MESSAGE)
-        self.state.add_observation(message=f"🃏 Community cards: {community_cards}", observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(message=self.m("showdown", "dealer_hand", cards=dealer_cards), observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(message=self.m("showdown", "community_cards", cards=community_cards), observation_type=ta.ObservationType.GAME_MESSAGE)
         # Get the best 5-card combination for display
         player_best_cards = self._get_best_five_cards(gs["player_hand"] + gs["community_cards"])
         dealer_best_cards = self._get_best_five_cards(gs["dealer_hand"] + gs["community_cards"])
@@ -406,8 +305,8 @@ class UltimateTexasHoldemEnv(ta.Env):
         player_cards_str = ", ".join([f"{c['rank']}{c['suit']}" for c in player_best_cards])
         dealer_cards_str = ", ".join([f"{c['rank']}{c['suit']}" for c in dealer_best_cards])
         
-        self.state.add_observation(message=f"🎴 Player's best hand: {player_hand_name} ({player_cards_str})", observation_type=ta.ObservationType.GAME_MESSAGE)
-        self.state.add_observation(message=f"🎴 Dealer's best hand: {dealer_hand_name} ({dealer_cards_str})", observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(message=self.m("showdown", "player_best", name=player_hand_name, cards=player_cards_str), observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(message=self.m("showdown", "dealer_best", name=dealer_hand_name, cards=dealer_cards_str), observation_type=ta.ObservationType.GAME_MESSAGE)
         
         # Calculate results using separate functions (now return chip amounts)
         if gs.get("folded", False):
@@ -428,50 +327,50 @@ class UltimateTexasHoldemEnv(ta.Env):
         # Report results with proper categorization
         if gs.get("folded", False):
             # Player folded - report losses
-            self.state.add_observation(message=f"❌ ANTE bet LOST! -${gs['ante_bet']} (folded)", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.state.add_observation(message=f"❌ BLIND bet LOST! -${gs['blind_bet']} (folded)", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=self.m("showdown", "ante_lost_folded", ante=gs['ante_bet']), observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=self.m("showdown", "blind_lost_folded", blind=gs['blind_bet']), observation_type=ta.ObservationType.GAME_MESSAGE)
         else:
             # Normal showdown - report results
             if ante_winnings > gs["ante_bet"]:
-                self.state.add_observation(message=f"✅ ANTE bet WON! +${ante_winnings - gs['ante_bet']}", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=self.m("showdown", "ante_won", amount=ante_winnings - gs['ante_bet']), observation_type=ta.ObservationType.GAME_MESSAGE)
             elif ante_winnings == gs["ante_bet"]:
-                self.state.add_observation(message=f"🔄 ANTE bet PUSHED! ${gs['ante_bet']} returned", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=self.m("showdown", "ante_pushed", ante=gs['ante_bet']), observation_type=ta.ObservationType.GAME_MESSAGE)
             else:
-                self.state.add_observation(message=f"❌ ANTE bet LOST! -${gs['ante_bet']}", observation_type=ta.ObservationType.GAME_MESSAGE)
-            
+                self.state.add_observation(message=self.m("showdown", "ante_lost", ante=gs['ante_bet']), observation_type=ta.ObservationType.GAME_MESSAGE)
+
             if blind_winnings > gs["blind_bet"]:
-                self.state.add_observation(message=f"✅ BLIND bet WON! +${blind_winnings - gs['blind_bet']}", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=self.m("showdown", "blind_won", amount=blind_winnings - gs['blind_bet']), observation_type=ta.ObservationType.GAME_MESSAGE)
             elif blind_winnings == gs["blind_bet"]:
-                self.state.add_observation(message=f"🔄 BLIND bet PUSHED! ${gs['blind_bet']} returned", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=self.m("showdown", "blind_pushed", blind=gs['blind_bet']), observation_type=ta.ObservationType.GAME_MESSAGE)
             else:
-                self.state.add_observation(message=f"❌ BLIND bet LOST! -${gs['blind_bet']}", observation_type=ta.ObservationType.GAME_MESSAGE)
-        
+                self.state.add_observation(message=self.m("showdown", "blind_lost", blind=gs['blind_bet']), observation_type=ta.ObservationType.GAME_MESSAGE)
+
         if gs["play_bet"] > 0:
             if play_winnings > gs["play_bet"]:
-                self.state.add_observation(message=f"✅ PLAY bet WON! +${play_winnings - gs['play_bet']}", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=self.m("showdown", "play_won", amount=play_winnings - gs['play_bet']), observation_type=ta.ObservationType.GAME_MESSAGE)
             elif play_winnings == gs["play_bet"]:
-                self.state.add_observation(message=f"🔄 PLAY bet PUSHED! ${gs['play_bet']} returned", observation_type=ta.ObservationType.GAME_MESSAGE)
+                self.state.add_observation(message=self.m("showdown", "play_pushed", play=gs['play_bet']), observation_type=ta.ObservationType.GAME_MESSAGE)
             else:
-                self.state.add_observation(message=f"❌ PLAY bet LOST! -${gs['play_bet']}", observation_type=ta.ObservationType.GAME_MESSAGE)
-        
+                self.state.add_observation(message=self.m("showdown", "play_lost", play=gs['play_bet']), observation_type=ta.ObservationType.GAME_MESSAGE)
+
         # Calculate net result
         net = total_winnings - gs["total_bet"]
-        self.state.add_observation(message=(f"🎉 Round {gs['current_round']} completed! Net gain: +${net}" if net>0 else f"💸 Round {gs['current_round']} completed! Net loss: ${net}"), observation_type=ta.ObservationType.GAME_MESSAGE)
-        
+        self.state.add_observation(message=(self.m("showdown", "net_gain", round=gs['current_round'], net=net) if net>0 else self.m("showdown", "net_loss", round=gs['current_round'], net=net)), observation_type=ta.ObservationType.GAME_MESSAGE)
+
         # Add a small separator to ensure showdown output is visible
-        self.state.add_observation(message="─" * 50, observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.state.add_observation(message=self.m("showdown", "separator"), observation_type=ta.ObservationType.GAME_MESSAGE)
         
         # Check end conditions BEFORE starting new round to ensure showdown output is visible
         if gs["chips"] <= 0:
             # Player lost - out of chips
-            self.state.add_observation(message="🏁 GAME OVER! You're out of chips. Dealer wins!", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=self.m("outcome", "game_over_lose"), observation_type=ta.ObservationType.GAME_MESSAGE)
             # Mark game as complete but don't call set_outcome yet to ensure messages are visible
             gs["game_complete"] = True
             gs["winner"] = "dealer"
             return
         if gs["current_round"] >= self.max_turns:
             # Player won - completed all rounds with chips
-            self.state.add_observation(message=f"🏁 GAME OVER! {self.max_turns} rounds completed. You have ${gs['chips']} chips - YOU WIN!", observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.add_observation(message=self.m("outcome", "game_over_win", max_turns=self.max_turns, chips=gs['chips']), observation_type=ta.ObservationType.GAME_MESSAGE)
             # Mark game as complete but don't call set_outcome yet to ensure messages are visible
             gs["game_complete"] = True
             gs["winner"] = "player"
@@ -705,19 +604,19 @@ class UltimateTexasHoldemEnv(ta.Env):
             String representation of the hand
         """
         category, tiebreaks = hand_score
-        hand_names = {
-            10: "Royal Flush",
-            9: "Straight Flush",
-            8: "Four of a Kind", 
-            7: "Full House",
-            6: "Flush",
-            5: "Straight",
-            4: "Three of a Kind",
-            3: "Two Pair",
-            2: "One Pair",
-            1: "High Card"
+        hand_name_keys = {
+            10: "royal_flush",
+            9: "straight_flush",
+            8: "four_of_a_kind",
+            7: "full_house",
+            6: "flush",
+            5: "straight",
+            4: "three_of_a_kind",
+            3: "two_pair",
+            2: "one_pair",
+            1: "high_card"
         }
-        return hand_names.get(category, "Unknown Hand")
+        return self.m("hand_names", hand_name_keys.get(category, "unknown"))
     
     def _get_best_five_cards(self, cards: List[Dict[str, str]]) -> List[Dict[str, str]]:
         """

@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "Você está em uma sala com {num_buttons} botões: {buttons}. Cada botão está associado a uma distribuição de Bernoulli com uma média fixa, mas desconhecida; as médias para os botões podem ser diferentes.\nPara cada botão, quando você o pressiona, você receberá uma recompensa que é amostrada da distribuição associada.\nVocê tem {num_turns} passos de tempo e, em cada passo de tempo, você pode escolher qualquer botão e receber a recompensa.\nSeu objetivo é escolher estrategicamente os botões em cada passo de tempo para coletar informações sobre a distribuição de recompensas, o que permitirá que você escolha o botão com a recompensa média mais alta corretamente no final de {num_turns} turnos."
+  },
+  "board": {
+    "stat_line": "{button}: {reward} (jogado {count} vezes)",
+    "summary": "Resumo:\n{stats}"
+  },
+  "invalid_move": {
+    "wrong_format": "O jogador não respondeu com um formato de ação válido.",
+    "invalid_button": "Um botão inválido foi selecionado."
+  },
+  "game_action": {
+    "pressed": "Você pressionou o botão {button} e recebeu uma recompensa de {reward}."
+  },
+  "game_message": {
+    "final_decision": "Você esgotou seu orçamento para testar diferentes escolhas e observar suas recompensas. Agora, faça uma dedução sobre qual é a melhor escolha."
+  },
+  "outcome": {
+    "win": "Parabéns! Você escolheu o botão correto.",
+    "lose": "Você escolheu um botão incorreto."
+  }
+}

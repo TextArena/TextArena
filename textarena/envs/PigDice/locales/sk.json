@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} hrajúci hru Pig Dice.\n\nPravidlá:\n- Počas svojej ťahy môžete buď '[roll]' alebo '[hold]'\n- Hodnota 2-6: Pridajte k svojmu ťahu\n- Hodnota 1: Stratíte ťah a ukončíte ťah\n- Hold: Pridajte ťah k svojmu skóre a ukončíte ťah\n- Prvý hráč, ktorý dosiahne {winning_score} bodov, vyhrá\n\nKeď je na vás ťah, uvidíte aktuálne skóre a ťah.\nOdpovedajte s '[roll]' pre hodenie kocky alebo '[hold]' pre uloženie bodov."
+  },
+  "invalid_move": {
+    "invalid_action": "Neplatný formát akcie. Použite '[roll]' alebo '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Hráč {player_id} prehral, stratil {turn_total} bodov!",
+    "player_hold": "Hráč {player_id} drží a ukladá {turn_total} bodov."
+  },
+  "board": {
+    "player": "Hráč 0: '{score_0}'; Hráč 1: '{score_1}'",
+    "current_total_scores": "Aktuálne celkové skóre: {scores}\nVáš aktuálny ťah je {turn_total}.",
+    "roll_history": "{observation}\nHistória vášho hodenia pre tento ťah: {roll_history}",
+    "first_roll": "{observation}\nToto je prvé hodenie vášho ťahu.",
+    "available_actions": "{observation}\nDostupné akcie: '[roll]' alebo '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Hráč {winner_id} vyhral, pretože mal vyššie skóre na konci ťahu ({scores})",
+    "winner_by_score": "Hráč {winner_id} vyhral, pretože dosiahol cieľové skóre {winning_score}!",
+    "draw": "Bol dosiahnutý limit ťahu a všetci hráči majú rovnaké skóre: {scores}"
+  }
+}

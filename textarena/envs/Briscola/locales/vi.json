@@ -1,0 +1,57 @@
+{
+  "_comment": "Tệp ngôn ngữ Briscola. KHÔNG được dịch các khóa (bên trái). Chỉ dịch các giá trị (bên phải). Giữ mọi {placeholder} y như ban đầu. Không dịch các token hành động '[play X]', các nhãn bài (A, 2..7, J, Q, K), các biểu tượng chất (♠♥♦♣), hoặc số điểm/bài.",
+  "_slots": {
+    "{player_id}": "Số thứ tự của người chơi, ví dụ 0 hoặc 1",
+    "{trump_suit}": "Biểu tượng chất chủ (♠♥♦♣) - không dịch",
+    "{trump_card}": "Nhãn bài chủ, ví dụ '7♠' - không dịch",
+    "{card}": "Nhãn bài, ví dụ 'A♥' - không dịch",
+    "{trump_mark}": "Dấu '(TRUMP)' đã được hiển thị, hoặc trống",
+    "{max_pos}": "Vị trí hợp pháp cao nhất của bài trong tay người chơi",
+    "{count}": "Số bài mà người chơi đang giữ",
+    "{pos}": "Vị trí số của bài trong tay",
+    "{points}": "Số điểm (giá trị bài hoặc tổng điểm)",
+    "{hand}": "Danh sách bài tay đã được hiển thị, nhiều dòng",
+    "{trick}": "Danh sách trick hiện tại đã được hiển thị",
+    "{scores}": "Dòng điểm số đã được hiển thị, hoặc khối điểm cuối cùng của mỗi người chơi",
+    "{trump_info}": "Dòng chất chủ / số bài còn lại trong bộ bài đã được hiển thị",
+    "{winner}": "Số thứ tự của người chơi thắng trick hoặc trò chơi",
+    "{tricks}": "Số trick mà người chơi đã thắng",
+    "{deck_count}": "Số bài còn lại trong bộ bài"
+  },
+  "game": {
+    "start": "Trò chơi Briscola đã bắt đầu! Chất chủ: {trump_suit} (Bài chủ: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Bạn đang chơi Briscola - Người chơi {player_id}.\nMục tiêu: Thắng trick và thu thập nhiều điểm nhất (120 điểm tổng cộng trong bộ bài).\nĐiểm bài: A=11, 3=10, K=4, Q=3, J=2, các bài khác=0\nSức mạnh bài: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nBài chủ đánh bại các bài không phải chủ bất kể sức mạnh.\n\nHành động: '[play X]' trong đó X là vị trí (1-{max_pos}) của bài trong tay bạn\n"
+  },
+  "hand": {
+    "none": "Không có bài",
+    "empty": "Không có bài trong tay",
+    "header": "Bài tay của bạn:",
+    "card_line": "  {pos}. {card} [{points} điểm]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Chưa có bài nào được đánh trong trick này.",
+    "header": "Trick hiện tại:",
+    "line": "  Người chơi {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Người chơi {player_id}: {points} điểm",
+    "trump_info": "Chất chủ: {trump_suit}",
+    "trump_info_deck": "Chất chủ: {trump_suit} | Số bài còn lại trong bộ: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nĐiểm số: {scores}\n{trump_info}\n\nĐánh một bài bằng [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Sử dụng [play X] trong đó X là vị trí của bài (1, 2, 3, v.v.)",
+    "out_of_range": "Vị trí bài không hợp lệ. Bạn có {count} bài (1-{count})"
+  },
+  "action": {
+    "played": "Người chơi {player_id} đã đánh {card}",
+    "trick_win": "Người chơi {winner} thắng trick với {card} và giành được {points} điểm!"
+  },
+  "outcome": {
+    "head": "Trò chơi kết thúc! Người chơi {winner} thắng với {points} điểm!\n\nĐiểm số cuối cùng:\n{scores}",
+    "player_line": "Người chơi {player_id}: {points} điểm ({tricks} trick)\n"
+  }
+}

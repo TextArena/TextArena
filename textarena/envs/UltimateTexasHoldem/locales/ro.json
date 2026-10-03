@@ -1,0 +1,81 @@
+{
+  "_comment": "Fișier de localizare pentru Ultimate Texas Hold'em. NU traduceți cheile (partea stângă). Traduceți doar valorile (partea dreaptă).",
+  "_slots": {
+    "{start_chips}": "Numărul inițial de jetoane, de exemplu 1000",
+    "{ante}": "Miza obligatorie, de exemplu 25",
+    "{ante4}": "Patru ori miza obligatorie, de exemplu 100",
+    "{ante2}": "De două ori miza obligatorie, de exemplu 50",
+    "{round}": "Numărul rundei curente",
+    "{chips}": "Numărul curent de jetoane ale jucătorului",
+    "{hand}": "O listă de etichete de cărți, separate prin virgulă, de exemplu 'A♠, K♥', sau textul localizat pentru 'nici o carte'",
+    "{phase}": "Eticheta fazei curente (PRE-RUNDĂ, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "O listă de acțiuni disponibile, separate prin virgulă, de exemplu '[play_bet_4x], [check]'",
+    "{available}": "O listă de acțiuni disponibile în prezent, separate prin virgulă",
+    "{blind}": "Miza obligatorie a orbilor",
+    "{play}": "Miza jocului",
+    "{cards}": "O listă de etichete de cărți, separate prin virgulă, de exemplu 'Q♣, 7♦, 2♠'",
+    "{name}": "Numele unei mâini de poker, inserat exact",
+    "{amount}": "O sumă de jetoane",
+    "{net}": "Schimbarea netă de jetoane pentru rundă (poate fi negativă)",
+    "{max_turns}": "Numărul maxim de runde",
+    "{winner_rounds}": "Numărul de runde completate"
+  },
+  "player_prompt": {
+    "no_cards": "Nici o carte încă",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Un singur jucător vs Dealer\n\n📖 PREZENTARE GENERALĂ A JOCULUI:\n• Începeți cu {start_chips} jetoane\n• Un singur pachet de 52 de cărți (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Jucați împotriva dealerului (casă)\n• Fiecare rundă urmează structura Ultimate Texas Hold'em: postați mizele ANTE și BLIND, primiți 2 cărți de bază, decideți asupra mizelor PLAY opționale în fazele de pariere, apoi dezvăluiți cărțile comune și comparați cea mai bună mână de 5 cărți cu cea a dealerului. Scopul dvs. este de a maximiza câștigurile (când aveți mâna mai bună), în timp ce minimizați pierderile (când aveți mâna mai slabă).\n• Jocul se termină când ajungeți la 0 jetoane sau sub la începutul rundei (PIERDERE) sau completați 1000 de runde cu jetoane (CÂȘTIG)\n\n💰 STRUCTURA DE PARIERE:\n• ANTE: Miza obligatorie de ${ante} la fiecare rundă\n• BLIND: Miza obligatorie de ${ante} la fiecare rundă\n• PLAY: Miza opțională în timpul jocului. De-a lungul rundei, puteți alege DOAR UNA dintre următoarele: (${ante4} dacă este făcută la PRE-FLOP, ${ante2} dacă este făcută la FLOP, sau ${ante} dacă este făcută la RIVER. De asemenea, puteți renunța la RIVER, renunțând la mână și fără a face nicio miză.)\n\n🎴 ÎMPĂRȚIREA CĂRȚILOR:\n• Primire 2 cărți cu fața în sus (cărțile dvs. de bază)\n• Dealerul primește 2 cărți cu fața în jos (ascunse de dvs.)\n• 5 cărți comune sunt împărțite cu fața în jos inițial\n• Cărțile comune sunt dezvăluite progresiv în fazele jocului\n\n🏆 CALIFICAREA DEALERULUI:\n• Dealerul trebuie să aibă cel puțin o pereche (2 cărți de același rang) pentru a se califica, folosind cele 2 cărți din mâna lor și cele 5 cărți comune.\n• Calificarea dealerului afectează rezultatele pariului, așa cum va fi explicat mai târziu.\n\n🎮 FAZELE JOCULUI ȘI ACȚIUNILE:\n📋 PRE-FLOP:\n  • Acțiuni: [4x] (${ante4}) sau [check]\n  • [4x]: Plasați miza PLAY de ${ante4}, dezvăluiți primele 3 cărți comune\n  • [check]: Fără miză suplimentară, dezvăluiți primele 3 cărți comune\n\n📋 FLOP:\n  • Dacă miza 4x este plasată: Doar [skip] disponibil (dezvăluiți automat ultimele 2 cărți comune)\n  • Dacă nu este plasată miza 4x: [2x] (${ante2}) sau [check]\n  • [2x]: Plasați miza PLAY de ${ante2}, dezvăluiți ultimele 2 cărți comune\n  • [check]: Fără miză suplimentară, dezvăluiți ultimele 2 cărți comune\n\n📋 RIVER:\n  • Dacă miza 4x sau 2x este plasată: Doar [skip] disponibil (procedați automat la showdown)\n  • Dacă nu a fost plasată nicio miză PLAY: [1x] (${ante}) sau [fold]\n  • [1x]: Plasați miza PLAY de ${ante}, procedați la showdown\n  • [fold]: Renunțați la mână, pierdeți mizele ANTE și BLIND\n\n📋 SHOWDOWN:\n  • Toate cărțile sunt dezvăluite și evaluate\n  • Cea mai bună mână de 5 cărți din 7 cărți (2 cărți de bază + 5 cărți comune)\n  • Mizele sunt stabilite conform regulilor de plată\n\n💎 PLĂȚILE PENTRU MIZE:\n📊 MIZA ANTE:\n  • Dealerul nu se califică: PUSH (miza returnată)\n  • Dealerul se califică și câștigați: 1:1 plată (miză + câștig)\n  • Dealerul se califică și pierdeți: Miza pierdută\n  • Egalitate: PUSH (miza returnată)\n\n📊 MIZA BLIND:\n  • Nu este afectată de calificarea dealerului\n  • Câștigați: Miza returnată și plată suplimentară bazată pe puterea mâinii\n  • Pierdeți: Miza pierdută\n  • Egalitate: PUSH (miza returnată)\n\n📊 TABELUL DE PLĂȚI PENTRU MIZA BLIND:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Mai puțin de Straight: Fără plată suplimentară\n\n📊 MIZA PLAY:\n  • Nu este afectată de calificarea dealerului\n  • Comparare directă: Cea mai bună mână a dvs. vs cea mai bună mână a dealerului\n  • Câștigați: 1:1 plată (miză + câștig)\n  • Pierdeți: Miza pierdută\n  • Egalitate: PUSH (miza returnată)\n\n🎯 CLASAMENTUL MÂINILOR DE POKER (Cel mai bun la cel mai slab):\n  1. Royal Flush: A-K-Q-J-10 de aceeași culoare\n  2. Straight Flush: 5 cărți consecutive de aceeași culoare\n  3. Four of a Kind: 4 cărți de același rang\n  4. Full House: 3 cărți de același rang + 2 cărți de același rang\n  5. Flush: 5 cărți de aceeași culoare\n  6. Straight: 5 cărți consecutive\n  7. Three of a Kind: 3 cărți de același rang\n  8. Two Pair: 2 perechi de ranguri diferite\n  9. One Pair: 2 cărți de același rang\n  10. High Card: Cea mai mare carte câștigă\n\n⌨️  COMENZI DE ACȚIUNE:\n• [4x] sau [play bet 4x]: Plasați miza PLAY de ${{self.ante_amount*4}}\n• [2x] sau [play bet 2x]: Plasați miza PLAY de ${{self.ante_amount*2}}\n• [1x] sau [play bet 1x]: Plasați miza PLAY de ${{self.ante_amount*1}}\n• [check] sau [c]: Verificați (fără miză suplimentară)\n• [fold] sau [f]: Renunțați la mână\n• [skip] sau [s]: Săriți la faza următoare (când nu este necesară nicio acțiune)\n\n💡 SFATURI DE STRATEGIE:\n• Mâinile puternice de start (perechi, cărți mari) justifică adesea mizele 4x\n• Luați în considerare calificarea dealerului - mâinile slabe pot duce la PUSH dacă dealerul nu se califică\n• Miza BLIND poate fi foarte profitabilă cu mâini puternice (Royal Flush = 500:1!)\n• Urmăriți-vă stiva de jetoane! Dacă ajunge la 0 sau sub la începutul rundei, pierdeți.\n\n⚠️  NOTE IMPORTANTE:\n• Mizele ANTE și BLIND sunt obligatorii la fiecare rundă\n• Mizele PLAY sunt opționale și strategice\n• Asigurați-vă că introduceți acțiunea corectă și doar o singură acțiune la un moment dat.\n\n",
+    "state": "🎯 RUNDĂ {round}\n💰 Jetoane: {chips}\n🎴 Mâna dvs.: {hand}\n📊 Mize curente: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fază: {phase}\n🎯 Acțiuni disponibile: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Rundă {round} începută! Mize: ANTE ${ante}, BLIND ${blind}. Aveți {chips} jetoane rămase.",
+    "your_hand": "🎴 Mâna dvs.: {hand}",
+    "flop_revealed": "🃏 FLOP dezvăluit: {cards}",
+    "river_revealed": "🃏 RIVER dezvăluit: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Acțiune invalidă pentru faza curentă. Acțiuni disponibile: {available}",
+    "message": "❌ Acțiune invalidă! Acțiuni disponibile: {available}"
+  },
+  "action": {
+    "folded": "🃏 Ați renunțat."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Mâna dealerului: {cards}",
+    "community_cards": "🃏 Cărțile comune: {cards}",
+    "player_best": "🎴 Cea mai bună mână a jucătorului: {name} ({cards})",
+    "dealer_best": "🎴 Cea mai bună mână a dealerului: {name} ({cards})",
+    "ante_lost_folded": "❌ Miza ANTE pierdută! -${ante} (renunțat)",
+    "blind_lost_folded": "❌ Miza BLIND pierdută! -${blind} (renunțat)",
+    "ante_won": "✅ Miza ANTE câștigată! +${amount}",
+    "ante_pushed": "🔄 Miza ANTE returnată! ${ante} returnat",
+    "ante_lost": "❌ Miza ANTE pierdută! -${ante}",
+    "blind_won": "✅ Miza BLIND câștigată! +${amount}",
+    "blind_pushed": "🔄 Miza BLIND returnată! ${blind} returnat",
+    "blind_lost": "❌ Miza BLIND pierdută! -${blind}",
+    "play_won": "✅ Miza PLAY câștigată! +${amount}",
+    "play_pushed": "🔄 Miza PLAY returnată! ${play} returnat",
+    "play_lost": "❌ Miza PLAY pierdută! -${play}",
+    "net_gain": "🎉 Rundă {round} completată! Câștig net: +${net}",
+    "net_loss": "💸 Rundă {round} completată! Pierdere netă: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 JOCUL S-A TERMINAT! {max_turns} runde completate. Aveți ${chips} jetoane - AȚI CÂȘTIGAT!",
+    "game_over_lose": "🏁 JOCUL S-A TERMINAT! Ați rămas fără jetoane. Dealerul câștigă!",
+    "reward_win": "Jucătorul a completat {winner_rounds} runde cu ${chips} jetoane",
+    "reward_lose": "Jucătorul a rămas fără jetoane în runda {round}",
+    "reward_win_max": "Jucătorul a completat {max_turns} runde cu ${chips} jetoane"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Patru de un fel",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Trei de un fel",
+    "two_pair": "Două perechi",
+    "one_pair": "O pereche",
+    "high_card": "Cartea cea mai mare",
+    "unknown": "Mână necunoscută"
+  }
+}

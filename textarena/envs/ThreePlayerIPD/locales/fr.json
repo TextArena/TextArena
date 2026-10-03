@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le joueur {player_id} dans un dilemme du prisonnier itéré à 3 joueurs. La partie dure {num_rounds} manches.\nStructure d'une manche :\n• {conv_rounds} tours de discussion libre\n• 1 tour de décision — envoyez un jeton par adversaire : '[<opp-id> cooperate]' ou '[<opp-id> defect]' (par exemple, '[1 defect] [2 cooperate]' ; le choix par défaut est 'cooperate').\nMatrice des gains par paire (appliquée à chaque paire non ordonnée) :\n  - Les deux choisissent cooperate  ->  {reward}\n  - Les deux choisissent defect     ->  {punishment}\n  - Vous choisissez defect, l'autre joueur choisit cooperate -> {temptation}\n  - Vous choisissez cooperate, l'autre joueur choisit defect -> {sucker}\nLe ou les joueurs ayant le score le plus élevé à la fin de toutes les manches remportent la partie."
+  },
+
+  "round": {
+    "start": "─── Début de la manche {round} ───\tVous pouvez discuter librement pendant les {conv_rounds} prochains tours.",
+    "chat_finished": "La discussion de la manche {round} est terminée. Envoyez vos décisions, un jeton par adversaire : `[pid cooperate]` ou `[pid defect]`."
+  },
+
+  "results": {
+    "header": "### Manche {round} — Résultats :",
+    "pair_line": "{observation}\n\t Le joueur {i} et le joueur {j} ont respectivement choisi {choice_i} et {choice_j} (le joueur {i} a gagné {gain_i} points et le joueur {j} a gagné {gain_j} points)",
+    "scores_open": "{observation}\n-> Scores actuels : ",
+    "score_first": "{observation}Joueur {player_id} ({score})",
+    "score_next": "{observation} ; Joueur {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+
+  "outcome": {
+    "final": "Scores finaux : {scores}. Groupes de classement (moins bon→meilleur) : {groups}"
+  }
+}

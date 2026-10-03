@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Yes el xugador {player_id} nel xuegu de LinesOfAction.\nLes tos pieces son '{side}', les pieces del oponente son '{other}'.\nFormatu de movimientu: `[b1b3]` (coordenada d'orixe a coordenada de destín). Un movimientu llegal viaxa horizontalmente, verticalmente o en diagonal un númberu de cuadraos igual al total de pieces (de cualquier color) nesa llinia. Puedes saltar sobre les tos propies pieces, pero non sobre les pieces del oponente; aterrizar sobre una pieza del oponente captúrala.  Ganes cuando toles tos pieces tán coneutaes en 8 direiciones."
+  },
+  "board": {
+    "current_board": "Tableru:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "El formatu tien de ser e2e4 (de,a coordenades).",
+    "no_piece": "Nun hai {side} pieza en {coord}.",
+    "identical": "La fonte y el destín son idénticos.",
+    "not_straight_or_diagonal": "El movimientu tien de ser rectu o diagonal.",
+    "wrong_distance": "Tien que mover una distancia igual al númberu de pieces en llinia.",
+    "enemy_blocks": "La pieza enemiga ta bloqueando'l camín.",
+    "destination_own": "El destín ocupáu por un pieza propia."
+  },
+  "game_action": {
+    "moved": "Xugador {player_id} movió {from} -> {to}",
+    "captured_suffix": "Xugador {player_id} movió {from} -> {to} prindando un enemigu."
+  },
+  "outcome": {
+    "win": "Tolos pedazos conectaos.",
+    "draw_no_capture": "60 movimientos ensin captura.",
+    "draw_repetition": "La posición repitióse tres veces."
+  }
+}

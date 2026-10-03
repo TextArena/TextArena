@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Zu zara Jokalaria {player_id} Stratego jokoan.\nZure helburua etsaiaren Bandera harrapatzea edo bere pieza mugikor guztiak eliminatzea da.\nZure armada jada kokatuta dago taulan, Bandera, Bonbak eta maila desberdinetako piezak barne.\n\n### Jokalariaren Intrukzioak\n1. **Mugimenduaren Arauak:**\n   - Zure txandan, zure pieza bat mugitu dezakezu urratsez bete taulako koadro auzokoa (gora, behea, ezkerra edo eskuina) zure piezekin beteta dagoen koadroa.\n   - Adibidea: Pieza bat A1 tiketatik B1 edo A1 tiketatik A2 ra mugitu daiteke, B1 eta A2 koadroak jokalariaren piezekin beteta ez badaude.\n   - Aukeratutako pieza Bonba edo Bandera bada, ezin da mugitu.\n2. **Borroka:**\n   - Zure pieza etsaiaren piezak okupatutako koadro batera mugitzen baduzu, borroka gertatuko da:\n     - Maila altuagoa duen piezak irabazten du eta etsaiaren pieza eliminatzen du.\n     - Mailak berdinak badira, bi piezak taulatik kenduak dira.\n     - **Kasu Berezia:**\n       - Bonbak erasotzaile gehienak eliminatzen dituzte, Meategiak izan ezik, bonbak desaktibatzen dituzte.\n       - Espioiak Mariskala garaitzen dute Espioia lehenengo erasotzen bada, baina gainerako piezek garaitzen dute.\n3. **Helburu Estrategikoak:**\n   - Identifikatu etsaiaren piezak haien mugimenduen eta borroken bidez.\n   - Babestu zure Bandera etsaiaren Bandera harrapatzen saiatzen zara bitartean.\n   - Erabili Esploratzaileak estrategikoki etsaiaren piezei buruzko informazioa lortzeko eta pieza ahulak erasotzeko.\n\n### Nola Egin Mugimendua:\n1. Zure pieza mugitzeko eta helmugako koordenatuak zehaztu.\n2. Formatua erabili: [A0 B0], non A0 jatorrizko posizioa den eta B0 helmuga.\n   - Adibidea: Pieza bat 0. errenkadatik, 0. zutabetik 1. errenkadara, 0. zutabera mugitzeko, sartu [A0 B0].\n3. Helmuga baliozkoa dela ziurtatu mugimenduaren arauak betetzen dituen.\n\n### Ohar Garrantzitsuak:\n- Taulak zure piezak eta haien posizioak erakutsiko dizkizu, adib. MN, MS.\n- Taulak etsaiaren piezen posizio ezagunak ere erakutsiko dizkizu, haien mailak ezagutarazteko, adib. ?.\n- ~ sinboloa duen koadroa aintzira da eta ezin da mugitu.\n- Jokoaren hasieran, aholkatzen dizugu zure piezak aurreko lerroetan mugitzea etsaiaren piezei buruzko informazioa lortzeko. Jokalari 0 eta jokalari 1-ren aurreko lerroak hurrenez hurren D eta G ilarak dira.\n\nHemen dago taularen egoera aktuala:\n"
+  },
+  "board": {
+    "current_board": "Egungo taula: {board} Eskainitako mugimenduak: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Akzio formatu ezegokia. {player_id} jokalariak ez zuen mugimendurik sartu [A0 B0] formatuan.",
+    "invalid_coordinates": "Akzioaren formatu ezegokia. {player_id} jokalariak ez zituen koordenatu egokiak sartu.",
+    "not_own_piece": "Akzio-formatu ezegokia. {player_id} jokalariak bere pieza bat mugitu behar du.",
+    "scout_through_pieces": "Akzio-formatu ezegokia. {player_id} jokalariak ezin du esploratzaile bat beste piezen artean mugitu.",
+    "scout_diagonal": "Akzio-formatu ezegokia. {player_id} jokalariak ezin du esploratzaile bat diagonalean mugitu.",
+    "non_scout_multi_square": "Ekintza formatu baliogabea. Zaldunak ez diren piezak karratu bakarra mugitu dezakete aldi berean.",
+    "move_into_lake": "Akzio-formatu ezegokia. {player_id} jokalariak ezin du lakuan sartu.",
+    "move_onto_own_piece": "Akzio-formatu ezegokia. {player_id} jokalariak ezin du bere pieza gainean mugitu.",
+    "move_bomb_or_flag": "Akzio-formatu ezegokia. {player_id} jokalariak ezin du bonba edo bandera mugitu."
+  },
+  "game_action": {
+    "you_moved": "Pieza {source}-tik {dest}-ra mugitu duzu.",
+    "opponent_moved": "{player_id} jokalariak pieza bat {source}etik {dest}era mugitu du.",
+    "you_equal_ranks": "Zure pieza {source}-tik {dest}-ra mugitu duzu. Eraso pieza {attacking_rank} zen eta helmuga pieza {target_rank} zen.",
+    "opponent_equal_ranks": "Jokalariak {player_id} pieza bat mugitu du {source} tiketatik {dest} ra. Erasotzailearen pieza {attacking_rank} zen eta helmugako pieza {target_rank} zen. Mailak berdinak direnez, bi piezak galdu dituzte.",
+    "you_miner_defused": "Zure pieza {source}-tik {dest}-ra mugitu duzu. Eraso pieza {attacking_rank} zen eta helmuga pieza {target_rank} zen. Meatzariek bonbak desaktiba ditzakete, eta borroka irabazi duzu.",
+    "opponent_miner_defused": "Jokalariak {player_id} pieza bat mugitu du {source} tiketatik {dest} ra. Erasotzailearen pieza {attacking_rank} zen eta helmugako pieza {target_rank} zen. Meategiak bonbak desaktibatu ditzakeenez, galdu duzu borroka.",
+    "you_bomb_lost": "Zure pieza {source}-tik {dest}-ra mugitu duzu. Eraso pieza {attacking_rank} zen eta helmuga pieza {target_rank} zen. Erasolaria ez denez meatzari, borroka galdu duzu.",
+    "opponent_bomb_won": "Jokalariak {player_id} pieza bat mugitu du {source} tiketatik {dest} ra. Erasotzailearen pieza {attacking_rank} zen eta helmugako pieza {target_rank} zen. Erasotzailea meategi bat ez denez, garaipena lortu duzu borrokan.",
+    "you_spy_won": "Zure pieza {source}-tik {dest}-ra mugitu duzu. Eraso pieza {attacking_rank} zen eta helmuga pieza {target_rank} zen. Erasolaria espioi bat denez eta helmuga marshal bat, borroka irabazi duzu.",
+    "opponent_spy_lost": "Jokalariak {player_id} pieza bat mugitu du {source} tiketatik {dest} ra. Erasotzailearen pieza {attacking_rank} zen eta helmugako pieza {target_rank} zen. Erasotzailea espioia da eta helmuga mariskala denez, galdu duzu borroka.",
+    "you_higher_won": "Zure pieza {source}-tik {dest}-ra mugitu duzu. Eraso pieza {attacking_rank} zen eta helmuga pieza {target_rank} zen. Erasolaria helmuga pieza baino maila handiagoa denez, borroka irabazi duzu.",
+    "opponent_higher_lost": "Jokalariak {player_id} pieza bat mugitu du {source} tiketatik {dest} ra. Erasotzailearen pieza {attacking_rank} zen eta helmugako pieza {target_rank} zen. Erasotzailea helmugako maila baino altuagoa denez, galdu duzu borroka.",
+    "you_lower_lost": "Zure pieza {source}-tik {dest}-ra mugitu duzu. Eraso pieza {attacking_rank} zen eta helmuga pieza {target_rank} zen. Erasolaria helmuga pieza baino maila baxuagoa denez, borroka galdu duzu.",
+    "opponent_lower_won": "Jokalariak {player_id} pieza bat mugitu du {source} tiketatik {dest} ra. Erasotzailearen pieza {attacking_rank} zen eta helmugako pieza {target_rank} zen. Erasotzailea helmugako maila baino apalagoa denez, irabazi duzu borroka."
+  },
+  "outcome": {
+    "flag_captured": "Jokalariak {player_id} etsaiaren bandera harrapatu du!",
+    "no_movable_pieces": "{winner_id} jokalariak irabazi du! {loser_id} jokalariak ez du pieza mugikorrik."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {role} a Colonel Blotto-ban.\nCélja, hogy több kört nyerjen, mint az ellenfele.\nMinden körben ossza el pontosan {num_total_units} egységet a {field_names} mezők között.\nA játékos, aki több egységet oszt egy mezőre, megnyeri azt a mezőt, és a játékos, aki több mezőt nyer, megnyeri a kört.\nPéldául, '[A7 B7 C6]' 7 egységet oszt az A mezőre, 7-et a B-re és 6-ot a C-re.",
+    "commander_alpha": "Parancsnok Alfa",
+    "commander_beta": "Parancsnok Béta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - {current_round}/{num_rounds}. kör ===\nMegnyert körök - Parancsnok Alfa: {alpha_score}, Parancsnok Béta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\n{current_round}. kör\nParancsnok Alfa elosztása: {p0_allocations}\nParancsnok Béta elosztása: {p1_allocations}\n",
+    "winner_alpha": "{message}Győztes: Parancsnok Alfa",
+    "winner_beta": "{message}Győztes: Parancsnok Béta",
+    "tie": "{message}Döntetlen!"
+  },
+  "invalid_move": {
+    "wrong_format": "Érvénytelen bemeneti formátum. Használja: A:5, B:10, C:5",
+    "invalid_field": "Érvénytelen mezőnév(ek). Érvényes mezők: {field_names}",
+    "wrong_allocation_value": "Minden elosztásnak nem-negatív egész számnak kell lennie.",
+    "incorrect_total_units": "Pontosan {num_total_units} egységet kell elosztania. Aktuális összeg: {current_sum}",
+    "good_allocations": "Az elosztás jó."
+  },
+  "outcome": {
+    "winner_alpha": "Parancsnok Alfa nyer {score_0}-{score_1}-re {num_rounds} kör után!",
+    "winner_beta": "Parancsnok Béta nyer {score_1}-{score_0}-re {num_rounds} kör után!",
+    "draw": "A játék {score_0}-{score_1}-es döntetlennel ér véget {num_rounds} kör után!",
+    "early_winner_alpha": "Parancsnok Alfa nyer {scores_0}-{scores_1}-re (többség elérve)!",
+    "early_winner_beta": "Parancsnok Béta nyer {scores_1}-{scores_0}-re (többség elérve)!"
+  }
+}

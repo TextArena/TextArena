@@ -1,0 +1,20 @@
+{
+    "player_prompt": {
+      "intro": "Vous êtes le joueur {player_id} dans SimpleTak.\nSur le plateau, vos pierres apparaissent sous la forme '{player_stone}' et celles de votre adversaire sous la forme '{opponent_stone}'.\n\nÀ votre tour, choisissez une case vide à l’aide de son numéro et placez-y votre pierre.\nPar exemple, '[12]' place votre pierre dans la case 12.\n\nVotre objectif est de former un chemin continu avec vos pierres reliant deux bords opposés du plateau, soit de haut en bas, soit de gauche à droite."
+    },
+    "invalid_move": {
+      "invalid_move_format": "Format de coup invalide",
+      "cell_out_of_range": "Numéro de case {cell_num} invalide. Il doit être compris entre 0 et {max_board_num}.",
+      "cell_already_occupied": "La case {cell_num} est déjà occupée. Choisissez une case vide."
+    },
+    "board": {
+      "current_state": "État actuel du plateau :\n\n{rendered_board}\nCoups disponibles : {available_moves}"
+    },
+    "action": {
+      "placement": "Le joueur {current_player_id} a placé son symbole ({symbol}) dans la case {cell_num}."
+    },
+    "outcome": {
+      "winner": "Le joueur {current_player_id} ('{symbol}') a relié deux bords opposés !",
+      "draw": "Le plateau est plein. C’est une égalité !"
+    }
+  }

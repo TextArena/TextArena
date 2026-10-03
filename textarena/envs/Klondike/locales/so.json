@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Waxaad ciyaaraysaa Klondike Solitaire. Ujeedadu waa inaad guudisid dhammaan kaararka ugu foundation piles.\n\nQawaaniinta Ciyaarta:\n- Kooxdaha foundation (F1-F4): Dhis kor ugu Ace ilaa King suuqa\n- Kooxdaha tableau (T1-T7): Dhis hoos ugu midabka isbeddelka (guduud ku guduud, madow ku madow)\n- Stock: Kaararka sawirka ugu waste pile\n- Waste (W): Kaararka sare ee ugu ciyaarta\n\nAmarada:\n- 'draw' - Kaararka sawirka ugu stock ilaa waste\n- 'move <source> <destination> [count]' - Guudisid kaararka ugu kooxda\n  Tusaalooyin: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count sidoo kale waa 'all', oo ay ku doonaysa inay guudiso dhammaan kaararka muuqa.\n- 'forfeit' - Ciyaarta dhamaan si degdeg ah oo ku qulqul score hadda\n- Magacyada kooxdaha: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nWaxaad fulin kartaa falka badan oo amarada kuwa komma-ku-jarjaran:\n  Tusaale: 'draw, move W T1, move T2 F1'\n\nKings kaliya ayaa la saari karaa kooxdaha tableau faaruur.\nFalku wuxuu fulinayaa si tartiib ah - haddii mid ka mid ah fashilo, falka soo socda waa la tirtiray.\nIsticmaal 'forfeit' haddii aad u maleyso in ciyaarta ay tahay adag in la guuleysto."
+  },
+  "format_error": {
+    "no_brackets": "Qaabka ficilku waa mid aan sax ahayn.",
+    "no_closing_bracket": "Formatka awooddaa waa khaldan. Gacma-qaboob xidhkeedu ']' waa laga waayay",
+    "empty_command": "Amarada faaruur. Qor 'draw' ama 'move <source> <destination> [count]'",
+    "empty_action": "Waxqabadka madhan",
+    "move_needs_args": "Amarada 'move' waxay u baahan tahay asal iyo u socota. Isticmaal: 'move <source> <destination> [count]'",
+    "count_positive": "Tirada waa inay tahay taban ama 'all'",
+    "count_invalid": "Tirada waa khaldan. Isticmaal tirada ama 'all'",
+    "unknown_command": "Amarada '{cmd}' aan la aqoon. Isticmaal 'draw', 'move <source> <destination> [count]', ama 'forfeit'",
+    "wrapped": "Waxqabadka {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Waxqabadka {n}: {msg}",
+    "before_failure": "Waxqabadka la fuliyay {n} ka hor inta uusan dhicin.",
+    "failed": "Dacwad {n} lagu fashilmay: {msg}"
+  },
+  "move_result": {
+    "drew": "Kaadhka ka soo jiidashada (ka soo jiidashada) kaydka ilaa qashinka.",
+    "cannot_draw": "Ma soo saari karo. Labada kayd iyo qashinka waa faaruq.",
+    "invalid_pile": "Magaca xidhka oo aan sax ahayn. Isticmaal W, F1-F4, ama T1-T7",
+    "foundation_one_card": "Hal kaar oo kaliya ayaa loo rari karaa aasaaska",
+    "waste_to_foundation_ok": "Kaadhka laga soo qaaday qashinka oo loo wareejiyay aasaaska F{dst}",
+    "waste_to_foundation_bad": "Kaadhka qashinka laguma wareejin karo tuulmadaas aasaasiga ah",
+    "tableau_to_foundation_ok": "Kaadhka laga soo wareejiyay miiska T{src} ilaa aasaaska F{dst}",
+    "tableau_to_foundation_bad": "Kaarka taambuugga laguma wareejin karo tiirka aasaasiga ah",
+    "foundation_to_foundation": "Ma dhaqaajin karo aasaaska ilaa aasaaska",
+    "waste_to_tableau_one_card": "Kaliya hal kaar ayaa ka dhaqaajin kara qashinka ilaa miiska",
+    "waste_to_tableau_ok": "Kaadhka laga soo saaray qashinka oo loo wareejiyay miiska T{dst}",
+    "waste_to_tableau_bad": "Kaarka qashinka kuma qori karo tuulmadaas",
+    "no_face_up": "Kaararka aan la jeedin karin si loo dhaqaajiyo",
+    "tableau_to_tableau_ok": "Kaadhka {count} ka soo wareejiyay shaxda T{src} oo loo wareejiyay T{dst}",
+    "tableau_to_tableau_bad": "Kaarka {count} (s) kama guuri karo T{src} ilaa T{dst}",
+    "foundation_to_tableau_one_card": "Hal kaar oo kaliya ayaa laga soo rari karaa salka ilaa miiska",
+    "foundation_empty": "Mu'asasada F{src} waa madhan tahay",
+    "foundation_to_tableau_ok": "Kaadhka laga soo wareejiyay aasaaska F{src} loona wareejiyay miiska T{dst}",
+    "foundation_to_tableau_bad": "Kaarka aasaaska lama dhigi karo miiska T{dst}",
+    "to_waste_or_stock": "Laguma wareejin karo qashinka ama kaydka"
+  },
+  "outcome": {
+    "forfeit": "Ciyaarta waa la waayay. Dhibcaha ugu dambeeya: {score} kaararka aasaaska.",
+    "won": "Hambalyo, waxaad ku guuleysatay ciyaarta Klondike Solitaire!",
+    "turn_limit": "Ciyaarta ayaa dhamaatay! Waxaad gaadhay ugu badnaan {max_turns} wareeg. Dhibcaha: {score} kaararka aasaaska."
+  },
+  "board": {
+    "title": "=== SOLITAIRE-ka KLONDIKE ===",
+    "turn": "Ku soo jeesashada: {turn}/{max_turns}",
+    "stock": "Baakad: {stock} kaararka",
+    "waste": "Qashinka (W): {waste}",
+    "foundations_header": "Mu'asasada",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Sawirka:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Snake kei runga i te {width}×{height} taratoha.\nKo koe te kaitīaki o te snake {player_id}. Neke whai mana: '[up]'/'[down]'/'[left]'/'[right]' (ki te whai rānei w/s/a/d).\nWhāinga: ora roa rawa atu, ki te whai rānei te roa rawa atu me te puna haupū teitei (te whakapumautanga whakautu {max_turns} whakautu)."
+  },
+  "board": {
+    "current": "Poari o nāianei: {board}",
+    "after_moves": "Kāwanatanga o te Poari i tēnei wā: {board}"
+  },
+  "game_action": {
+    "invalid_death": "I mate a Snake {player_id} nā te nekehanga kāore i tika."
+  },
+  "outcome": {
+    "survived_win": "I ora te kaitākaro {player_id}; i mate katoa ētahi atu.",
+    "all_dead_simul": "I mate katoa ngā nakahi i te wā kotahi.",
+    "outlived": "I ora ake te kaitākaro i ētahi atu katoa.",
+    "all_dead": "Kua mate katoa ngā nakahi.",
+    "turn_limit": "Kua tae te rohe huri - ko te kaute pai rawa atu e wikitoria ana i te wehenga.",
+    "ranking": "{reason} Urutapanga whakamutunga o ngā rōpū (kino ki te pai rawa): {groups}"
+  }
+}

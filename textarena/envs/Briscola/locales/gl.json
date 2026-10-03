@@ -1,0 +1,57 @@
+{
+  "_comment": "Ficheiro de localización de Briscola. NON traduzas as claves (lado esquerdo). Só traduce os valores (lado dereito). Mantén cada {placeholder} exactamente como está. Nunca traduzas o token de acción '[play X]', as etiquetas das cartas (A, 2..7, J, Q, K), os símbolos de palo (levados nos slots {card}/{trump_card}) ou contas/puntos/puntuacións numéricas. O texto do marcador '(TRUMP)' pode ser localizado.",
+  "_slots": {
+    "{player_id}": "O número do xogador, por exemplo, 0 ou 1",
+    "{trump_suit}": "O símbolo do palo de triunfo (♠♥♦♣) - non traduzas",
+    "{trump_card}": "A etiqueta da carta de triunfo, por exemplo, '7♠' - non traduzas",
+    "{card}": "Unha etiqueta de carta, por exemplo, 'A♥' - non traduzas",
+    "{trump_mark}": "O marcador pre-renderizado '(TRUMP)', ou baleiro",
+    "{max_pos}": "A posición máxima legal da carta na man do xogador",
+    "{count}": "O número de cartas que ten un xogador",
+    "{pos}": "O número de posición da carta na man",
+    "{points}": "Un número de puntos (valor da carta ou puntuación acumulada)",
+    "{hand}": "A lista pre-renderizada da man do xogador, en varias liñas",
+    "{trick}": "A lista pre-renderizada da baza actual",
+    "{scores}": "A liña pre-renderizada de puntuación, ou o bloque de puntuación final por xogador",
+    "{trump_info}": "A liña pre-renderizada do palo de triunfo / contaxe de cartas",
+    "{winner}": "O número do xogador que gañou a baza ou o xogo",
+    "{tricks}": "Un número de bazas gañadas por un xogador",
+    "{deck_count}": "Número de cartas que quedan no mazo"
+  },
+  "game": {
+    "start": "Xogo de Briscola iniciado! Palo de triunfo: {trump_suit} (Carta de triunfo: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Estás xogando a Briscola - Xogador {player_id}.\nObxectivo: Gañar bazas e recoller os puntos máis altos (120 puntos totais no mazo).\nPuntos das cartas: A=11, 3=10, K=4, Q=3, J=2, outros=0\nPoder das cartas: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nAs cartas de triunfo gañan ás cartas non triunfo independentemente do poder.\n\nAcción: '[play X]' onde X é a posición (1-{max_pos}) da carta na túa man\n"
+  },
+  "hand": {
+    "none": "Non hai cartas",
+    "empty": "Non hai cartas na man",
+    "header": "A túa man:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": " (TRIUNFO)"
+  },
+  "trick": {
+    "empty": "Non se xogaron cartas nesta baza.",
+    "header": "Baza actual:",
+    "line": "  Xogador {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Xogador {player_id}: {points} pts",
+    "trump_info": "Palo de triunfo: {trump_suit}",
+    "trump_info_deck": "Palo de triunfo: {trump_suit} | Cartas que quedan no mazo: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPuntuacións: {scores}\n{trump_info}\n\nXoga unha carta usando [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Usa [play X] onde X é a posición da carta (1, 2, 3, etc.)",
+    "out_of_range": "Posición de carta non válida. Tes {count} cartas (1-{count})"
+  },
+  "action": {
+    "played": "Xogador {player_id} xogou {card}",
+    "trick_win": "Xogador {winner} gaña a baza con {card} e gaña {points} puntos!"
+  },
+  "outcome": {
+    "head": "Xogo rematado! Xogador {winner} gaña con {points} puntos!\n\nPuntuacións finais:\n{scores}",
+    "player_line": "Xogador {player_id}: {points} puntos ({tricks} bazas)\n"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "ನೀವು ಮೂರು ಆಟಗಾರರ ಟಿಕ್ ಟಾಕ್ ಟೋದಲ್ಲಿ ಆಟಗಾರ {player_id} ಆಗಿದ್ದೀರಿ. ನಿಮ್ಮ ಚಿಹ್ನೆ '{symbol}'. ನಿಮ್ಮ ಚಿಹ್ನೆಯನ್ನು 5x5 ಬೋರ್ಡ್ನಲ್ಲಿ ನಾಲ್ಕು ಸಾಲುಗಳನ್ನು ರೂಪಿಸಲು ನೀವು ತಿರುಗುತ್ತೀರಿ. ಸಾಲುಗಳು ಸಮತಲ, ಲಂಬ ಅಥವಾ ಕರ್ಣೀಯವಾಗಿರಬಹುದು. ಕೋಶ 4 ಅನ್ನು ಗುರುತಿಸಲು '[4]' ಸ್ವರೂಪವನ್ನು ಬಳಸಿಕೊಂಡು ನಿಮ್ಮ ಚಲನೆಯನ್ನು ಸಲ್ಲಿಸಿ."
+  },
+  "board": {
+    "current_board": "ಪ್ರಸ್ತುತ ಮಂಡಳಿ: {board} ಲಭ್ಯವಿರುವ ಚಲನೆಗಳು: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "ಅಮಾನ್ಯವಾದ ಚಲಿಸುವ ಸ್ವರೂಪ. ಸೆಲ್ 0-{max_cell} ಆಗಿರುವಲ್ಲಿ \"[cell]\" ಅನ್ನು ಬಳಸಿ.",
+    "out_of_range": "ಅಮಾನ್ಯ ಸೆಲ್ ಸಂಖ್ಯೆ: {cell}. 0 ಮತ್ತು {max_cell} ನಡುವೆ ಇರಬೇಕು.",
+    "already_occupied": "ಸೆಲ್ {cell} ಈಗಾಗಲೇ ಆಕ್ರಮಿಸಿಕೊಂಡಿದೆ.",
+    "made_invalid": "ಆಟಗಾರ {player_id} ಅಮಾನ್ಯವಾದ ಚಲನೆಯನ್ನು ಮಾಡಿದ್ದಾನೆ"
+  },
+  "game_action": {
+    "placed": "ಆಟಗಾರ {player_id} ತಮ್ಮ ಚಿಹ್ನೆಯನ್ನು ({symbol}) ಕ್ಷೇತ್ರದಲ್ಲಿ ({row}, {col}) ಇರಿಸುತ್ತಾರೆ."
+  },
+  "outcome": {
+    "win": "ಆಟಗಾರ {player_id} ({symbol}) ಗೆಲ್ಲುತ್ತಾನೆ!",
+    "draw": "ಆಟವು ಡ್ರಾ ಆಗಿದೆ!"
+  }
+}

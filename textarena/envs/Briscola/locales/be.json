@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Гульня ў Брысколы пачалася! Коўдру Трампа: {trump_suit} (Карты Трампа: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Вы граеце ў Briscola - Гулец {player_id}.\nМэта: Выйграць хады і назбіраць найбольшую колькасць балаў (120 балаў у калодзе).\nБалы карт: A=11, 3=10, K=4, Q=3, J=2, іншыя=0\nСіла карт: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nКарты козыраў б'юць неказырныя карты незалежна ад сілы.\n\nДзеянне: '[play X]', дзе X - пазіцыя (1-{max_pos}) карты ў вашай руцэ\n"
+  },
+  "hand": {
+    "none": "Ніякіх карт",
+    "empty": "Няма карт у руцэ",
+    "header": "Ваша рука:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(Трамп)"
+  },
+  "trick": {
+    "empty": "Ніякіх карт гулялі яшчэ гэты трук.",
+    "header": "Цяперашні трук:",
+    "line": "Гулец {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Гулец {player_id}: {points} pts",
+    "trump_info": "Коўдру Трампа: {trump_suit}",
+    "trump_info_deck": "Колір: {trump_suit} │ Карты, якія засталіся ў калодзежы: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nЛікі: {scores}\n{trump_info}\n\nЗаграйце карту, выкарыстоўваючы [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Выкарыстоўвайце [play X] дзе X - гэта становішча карты (1, 2, 3, і г.д.)",
+    "out_of_range": "Несапраўдная пазіцыя карты. У вас ёсць {count} карты (1-{count})"
+  },
+  "action": {
+    "played": "Гулец {player_id} гуляў {card}",
+    "trick_win": "Гулец {winner} выйграе ўдар з {card} і набывае {points} ачкоў!"
+  },
+  "outcome": {
+    "head": "Гульня скончана! Гулец {winner} перамагае з {points} баламі! Канчатковы лік: {scores}",
+    "player_line": "Гулец {player_id}: {points} балы ({tricks} хітрыкі) "
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í 3-leikmanna endurtekinu Fangelsisdilemmu. Leikurinn stendur yfir {num_rounds} umferðir.\nUmferðarstrúktúr:\n• {conv_rounds} frjálsir spjallsvendingar\n• 1 ákvarðanaturn - sendu eitt merki per andstæðing: '[<opp-id> cooperate]' eða '[<opp-id> defect]' (t.d. '[1 defect] [2 cooperate]'; sjálfgefið er 'samstarfa'). \nPar-vísu útborgunar matrix (notuð á hverja óraðaða tvíeyki):\n  - Báðir samstarfa  ->  {reward}\n  - Báðir svíkja     ->  {punishment}\n  - Þú svíkjar, þeir samstarfa -> {temptation}\n  - Þú samstarfar, þeir svíkja -> {sucker}\nLeikmaður/leikmenn með hæstu stigum í lok allra umferða vinnur."
+  },
+  "round": {
+    "start": "─── Byrja umferð {round} ───\tÞú getur spjallað frjálst næstu {conv_rounds} umferðir.",
+    "chat_finished": "Spjall lokið fyrir umferð {round}. Sendu ákvarðanir þínar, eitt merki per andstæðing: `[pid cooperate]` eða `[pid defect]`."
+  },
+  "results": {
+    "header": "### Umferð {round} - Niðurstöður:",
+    "pair_line": "{observation}\n\t Leikmaður {i} vs Leikmaður {j} kusu að {choice_i} og {choice_j} hvort um sig (Leikmaður {i} fékk {gain_i}, Leikmaður {j} fékk {gain_j})",
+    "scores_open": "{observation}\n-> Núverandi stig: ",
+    "score_first": "{observation}Leikmaður {player_id} ({score})",
+    "score_next": "{observation}; Leikmaður {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Lokastig: {scores}.  Röðunarhópar (verst→best): {groups}"
+  }
+}

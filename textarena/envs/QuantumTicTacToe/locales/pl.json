@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w Kwantowym Tic Tac Toe.\nTwój symbol to '{symbol}', a numery Twoich ruchów są zawsze {parity} (np. X1, X3 lub O2, O4).\n\nCel: Wygraj, tworząc linię trzech klasycznych znaków (zastygłych ze stanów splątanych).\n\nJak grać:\n- W każdej turze umieść tajemniczy znak w dwóch różnych pustych kwadratach, używając formatu '[a,b]'.\n- Te znaki są splątane i oznaczone jak 'X1 / X1' lub 'O4 / O4'.\n- Nie możesz umieścić tajemniczych znaków w kwadracie, który już się zastygł (zastygł).\n\nReguła zastygnięcia:\n- Jeśli Twój ruch tworzy cykl w grafie splątania, zastyga automatycznie.\n- Każdy tajemniczy znak w cyklu zmienia się w klasyczny znak w jednej z dwóch pozycji.\n- Wszelkie zależne tajemnicze znaki również zastygają.\n\nZwycięstwo:\n- Gra kończy się, gdy gracz ma trzy klasyczne znaki w rzędzie.\n- Jeśli obaj gracze dostaną linię podczas tego samego zastygnięcia, ten z niższym maksymalnym numerem ruchu wygrywa.\n\nPrzykładowy ruch: '[0,4]' umieszcza tajemniczy znak w komórkach 0 i 4."
+  },
+  "board": {
+    "current_board": "Plansza Kwantowego Tic Tac Toe:\n\n{board}\n\nPrześlij swój ruch jako '[a,b]', aby umieścić kwantowy znak w dwóch miejscach."
+  },
+  "invalid_move": {
+    "wrong_format": "Nieprawidłowy format. Użyj '[a,b]'.",
+    "invalid_cells": "Nieprawidłowe lub zduplikowane indeksy komórek.",
+    "already_solidified": "Jedna z komórek jest już zastygła."
+  },
+  "game_action": {
+    "placed": "Gracz {player_id} umieścił swój symbol w superpozycji między komórkami {pos_a} i {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Zależna superpozycja rozwiązana. Komórka ({r}, {c}) jest teraz {symbol}.",
+    "last_cell_resolved": "Superpozycja dla ostatniej komórki rozwiązana. Komórka ({r}, {c}) jest teraz {symbol}.",
+    "superposition_resolved": "Superpozycja rozwiązana. Komórka ({r}, {c}) jest teraz {symbol}."
+  },
+  "outcome": {
+    "win": "Gracz {player_id} wygrywa z zastygłymi znakami!",
+    "draw": "Gra jest remisem!"
+  }
+}

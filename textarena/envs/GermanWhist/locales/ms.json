@@ -1,0 +1,88 @@
+{
+  "game_start": {
+    "intro": "Permainan bermula. Sut trump: {trump_suit} (kad trump: {trump_str}).",
+    "no_trump_card": "tiada"
+  },
+
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam German Whist.\n{phase_info}\nAnda memegang {hand_size} kad.\nMainkan kad dengan '[play N]', dengan N ialah kedudukannya dalam tangan anda, contohnya '[play 3]'.",
+    "phase_learning": "FASA PEMBELAJARAN: pemenang setiap trik mengambil kad terbuka dan pihak yang kalah mengambil kad seterusnya daripada dek. Trik yang dimenangi dalam fasa ini tidak dikira untuk kemenangan.",
+    "phase_playing": "FASA PERMAINAN: dek telah habis. Setiap trik mulai sekarang dikira untuk kemenangan."
+  },
+
+  "next_card": {
+    "playing_phase": "Tiada kad ditawarkan - fasa permainan telah bermula.",
+    "deck_empty": "Dek kosong - tiada kad ditawarkan.",
+    "available": "Kad yang ditawarkan: {card}",
+    "available_trump": "Kad yang ditawarkan: {card} (TRUMP)"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format langkah tidak sah. Gunakan '[play N]' untuk memainkan kad ke-N dalam tangan anda.",
+    "bad_position": "Kedudukan kad itu tidak wujud. Anda memegang {hand_size} kad.",
+    "must_follow_suit": "Anda mesti mengikut sut dan memainkan kad {lead_suit}.",
+    "invalid_play": "Kad itu tidak boleh dimainkan."
+  },
+
+  "game_action": {
+    "played": "Pemain {player_id} memainkan {card}."
+  },
+
+  "trick": {
+    "won": "Pemain {winner_id} memenangi trik dengan {card}.",
+    "won_learning": "Pemain {winner_id} memenangi trik dengan {card} dan mengambil kad terbuka."
+  },
+
+  "phase": {
+    "learning_complete": "Dek telah habis. Fasa pembelajaran telah tamat - setiap trik yang tinggal dikira untuk kemenangan."
+  },
+
+  "draw": {
+    "winner_received": "Anda memenangi trik dan menerima {card}.",
+    "loser_received": "Anda kalah dalam trik dan mengambil {card} daripada dek.",
+    "winner_preview": "Kad seterusnya yang ditawarkan ialah {card}."
+  },
+
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Trik yang dimenangi setakat ini - Pemain 0: {tricks0}, Pemain 1: {tricks1}",
+    "scores_playing": "Trik pemarkahan - Pemain 0: {tricks0}, Pemain 1: {tricks1}",
+    "phase": "Fasa: {phase}",
+    "phase_learning": "Fasa: {phase} ({remaining_cards} kad masih berada dalam dek)"
+  },
+
+  "hand": {
+    "no_cards": "Tiada kad",
+    "no_cards_in_hand": "Tiada kad dalam tangan",
+    "header": "Tangan anda:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+
+  "trick_view": {
+    "empty": "Belum ada kad dimainkan dalam trik ini.",
+    "header": "Trik semasa:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Pemain {player_id}: {card}{trump_indicator}"
+  },
+
+  "board_str": {
+    "not_started": "Permainan belum bermula",
+    "header": "=== PERMAINAN GERMAN WHIST ===",
+    "phase": "{observation}\nFasa: {phase}",
+    "trump_suit": "{observation}\nSut trump: {trump_suit}",
+    "trump_card": "{observation}\nKad trump: {card}",
+    "cards_left": "{observation}\nKad yang tinggal dalam dek: {count}",
+    "next_card": "{observation}\nKad seterusnya untuk pemenang: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nTrik semasa:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Pemain {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nPemain {player_id}: {scoring} trik pemarkahan ({tricks} jumlah), {hand_size} kad dalam tangan"
+  },
+
+  "outcome": {
+    "summary": "Fasa pembelajaran - Pemain 0: {l0}, Pemain 1: {l1}. Fasa permainan - Pemain 0: {p0}, Pemain 1: {p1}. Pemain {winner_id} menang dengan {winner_tricks} trik pemarkahan!"
+  }
+}

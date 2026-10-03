@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} în Chopsticks. La rândul dvs., alegeți una dintre:\n  + Atac:  '[attack M O]'  unde M=mâna dvs. (0 sau 1), O=mâna adversarului (0 sau 1).\n    - Numărul degetelor din mâna adversarului crește cu numărul degetelor din mâna dvs.; dacă >=5, devine 0.\n  + Împărțire:   '[split L R]'  pentru a redistribui numărul total de degete în L și R (L+R = numărul dvs. total).\nRăspundeți cu exact una dintre aceste comenzi."
+  },
+  "board": {
+    "current_board": "Tablă curentă:\nJucătorul 0: {hands_0}\nJucătorul 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Mâna dvs. {my_idx} este moartă.",
+    "opp_hand_dead": "Mâna adversarului {opp_idx} este deja moartă.",
+    "split_sum": "Împărțirea trebuie să aibă suma {total}.",
+    "split_no_change": "Împărțirea trebuie să schimbe distribuția mâinilor dvs.",
+    "invalid_command": "Mutare invalidă. Folosiți “[attack M O]” sau “[split L R]”."
+  },
+  "game_action": {
+    "attack": "J{player_id} atacă mâna {opp_idx} a J{opp_id}: trece de la {opp_val} la {new_val}.",
+    "split": "J{player_id} se împarte în [{L}, {R}]."
+  },
+  "history": {
+    "entry": "J{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Ambele mâini ale adversarului sunt moarte.",
+    "draw": "Limita de runde a fost atinsă."
+  }
+}

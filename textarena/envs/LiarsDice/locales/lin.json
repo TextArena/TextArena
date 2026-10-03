@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Oyo wewe Mchezaji {player_id} oyo azali na michezo ya Liar's Dice na bato {num_players}.\nMikano:\n- Siku wewe ozali na wakati wa kucheza, wewe angaye:\n  1) Tunga mbele mpya na wingi mwingi au uso wa juu (tangu wote mawili) kuliko mbele wa sasa; ndenge '[Bid: 3, 4]',\n  2) Ita mbele ya mwisho kwa kutunga '[Call]'.\n\nSiku wewe ita:\n  - Siku idadi ya kweli ya thamani ya uso kati ya dice zote ni chini ya mbele, mchezaji wa mwisho anapoteza die mmoja.\n  - Vinginevyo, mtoa ita anapoteza die mmoja.\nMchezaji anayefikia 0 dice anatolewa. Mchezaji wa mwisho aliyesalia anashinda."
+  },
+  "board": {
+    "per_player": "\tMokeli {p}: {d}",
+    "new_round": "\nMwaka mpepa - Likolo lya malu: {dice_summary}\nMalu ma mabele na yo eza: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Joueur {current_player_id} oyoka! Kiasi kinene cha kasi {face_value} ni {count}, nde ni chini ya {quantity}.\nJoueur {loser_id} (meneur ya mwisho) akpwaka ndenge moko.",
+    "caller_loses": "Joueur {current_player_id} oyébi! Nombre ya face {face_value} ezali {count}, nde ezali >= {quantity}.\nJoueur {loser_id} (moyébi) akopona die moko."
+  },
+  "action": {
+    "bid_announce": "Mchezaji {player_id} atunga {quantity} ya uso {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Moto oyo abengaki te azalaki na mposa ya kopesa mbongo.",
+    "invalid_bid": "Motango ya lifuti oyo ekoki te: {reason}",
+    "not_recognized": "Ebandeli te ekeli kojelwa kama '[Bid: X, Y]' to '[Call]'. Ebandeli ilingi: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Motango ya sika {new_quantity} ezali moke koleka motángo oyo tozali na yango sikoyo {current_quantity}.",
+    "face_lower": "Ntalo ya sika {new_face_value} ezali moke koleka oyo ya lelo {current_face_value}.",
+    "identical": "Motángo ya bato oyo bazali kopesa likabo ekokani na motángo oyo ezali kopesama sikoyo.",
+    "face_range": "Ntalo ya nkombo esengeli kozala kati na 1 mpe 6."
+  },
+  "message": {
+    "eliminated_invalid": "Joueur {player_id} akopona na mvité ya makoki mabé."
+  },
+  "outcome": {
+    "win": "Mokeli {winner} ekeli ! Mwanda wa mwisho: {final_ranking}"
+  }
+}
