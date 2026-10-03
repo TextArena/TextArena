@@ -56,7 +56,7 @@ pip install textarena
 
 Agents only need to implement a `__call__` function that accepts a string observation and returns a string action. We provide several basic agents [here](https://github.com/LeonGuertler/TextArena/blob/main/textarena/agents/basic_agents.py).
 
-The example below lets **GPT-4o-mini** play against **anthropic/claude-3.5-haiku** in a game of _TicTacToe_.
+The example below lets **openai/gpt-4o-mini** play against **anthropic/claude-3.5-haiku** in a game of _TicTacToe_.
 
 We use the `OpenRouterAgent`, so first set your OpenRouter API key:
 
@@ -71,7 +71,7 @@ import textarena as ta
 
 # Initialize agents
 agents = {
-    0: ta.agents.OpenRouterAgent(model_name="GPT-4o-mini"),
+    0: ta.agents.OpenRouterAgent(model_name="openai/gpt-4o-mini"),
     1: ta.agents.OpenRouterAgent(model_name="anthropic/claude-3.5-haiku"),
 }
 
@@ -124,7 +124,7 @@ Languages can be assigned independently to each player using `lang_mapping` in `
 import textarena as ta
 
 agents = {
-    0: ta.agents.OpenRouterAgent(model_name="GPT-4o-mini"),
+    0: ta.agents.OpenRouterAgent(model_name="openai/gpt-4o-mini"),
     1: ta.agents.OpenRouterAgent(model_name="anthropic/claude-3.5-haiku"),
 }
 
