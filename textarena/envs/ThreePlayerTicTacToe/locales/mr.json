@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "आपण तीन-खेळाडू टिक टॅक टो मध्ये खेळाडू {player_id} आहात. आपला चिन्ह '{symbol}' आहे. आपण आपल्या चिन्हाला 5x5 बोर्डवर ठेवून चारची ओळ तयार करण्यासाठी वळण घेता. रेषा क्षैतिज, उभ्या किंवा तिर्यक असू शकतात. सेल 4 चिन्हांकित करण्यासाठी '[4]' स्वरूपात आपला हलवा सबमिट करा."
+  },
+  "board": {
+    "current_board": "चालू बोर्ड: {board} उपलब्ध चाल: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "अवैध हलवा स्वरूप. सेल 0-{max_cell} आहे तेथे \"[cell]\" वापरा.",
+    "out_of_range": "अवैध सेल क्रमांक: {cell}. 0 ते {max_cell} दरम्यान असावा.",
+    "already_occupied": "सेल {cell} आधीच भरलेली आहे.",
+    "made_invalid": "खेळाडू {player_id}ने अवैध हालचाल केली"
+  },
+  "game_action": {
+    "placed": "खेळाडू {player_id} आपला चिन्ह ({symbol}) फील्ड ({row}, {col}) मध्ये ठेवतो."
+  },
+  "outcome": {
+    "win": "खेळाडू {player_id} ({symbol}) जिंकतो!",
+    "draw": "खेळ बरोबरीचा आहे!"
+  }
+}

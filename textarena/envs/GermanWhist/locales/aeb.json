@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "تبدأ اللعبة. الورقة الرئيسية: {trump_suit} (البطاقة الرئيسية: {trump_str}).",
+    "no_trump_card": "ما فما."
+  },
+  "player_prompt": {
+    "intro": "أنت لاعب {player_id} في الويس الألماني.\n{phase_info}\nأنت تمتلك {hand_size} كارت.\nالعب كارت مع '[play N]', حيث N هو موقعه في يدك (على سبيل المثال '[play 3]').",
+    "phase_learning": "مرحلة التعلم: الرابح في كل ريك ياخذ الورقة الظاهرة والخاسر ياخذ الورقة الجاية من السباق. الريكات اللي ربحها في هذي المرحلة ما تتحسبش في النصر.",
+    "phase_playing": "المرحلة لعب: الكارطة تخلصت. كل حيلة من هوني تعتبر نصرك."
+  },
+  "next_card": {
+    "playing_phase": "ما فيش ورقة عروض - مرحلة اللعب بدأت.",
+    "deck_empty": "الديك فارغ، ما فما كارت.",
+    "available": "الكارت الي نجمو نعرضوه: {card}",
+    "available_trump": "الكارت الي نجمو نعرضه: {card} (ترامب)"
+  },
+  "invalid_move": {
+    "wrong_format": "لا يصلحش. استخدم \"[play N]\" لتلعب الكارتة الـ نث في يدك.",
+    "bad_position": "الموضع هذا ما فما. عندك {hand_size} بطاقات.",
+    "must_follow_suit": "يلزمك تتبعو وتلعب كارت {lead_suit}.",
+    "invalid_play": "لا يمكن نلعبو الكارت هذي."
+  },
+  "game_action": {
+    "played": "لعب اللاعب {player_id} {card}."
+  },
+  "trick": {
+    "won": "يفوز اللاعب {winner_id} بالدور مع {card}.",
+    "won_learning": "يفوز اللاعب {winner_id} بالدور مع {card} ويأخذ البطاقة المواجهة."
+  },
+  "phase": {
+    "learning_complete": "الكارطة تُخْفِي. مرحلة التعلّم إنتهت - كل حيلة متبقية تحسب للنصر."
+  },
+  "draw": {
+    "winner_received": "فزت في الحيلة و تلقيت {card}.",
+    "loser_received": "ضيعت الحيلة و جبت {card} من الطاولة.",
+    "winner_preview": "الكارت التالي الي نجمو نعرضه هو {card}."
+  },
+  "turn": {
+    "board": "〕{phase}\n〕{scores}\n〕{next_card}\n\n〕{trick}\n\n〕{hand}",
+    "scores_learning": "أدوار الفوز حتى الآن - اللاعب 0: {tricks0}، اللاعب 1: {tricks1}",
+    "scores_playing": "نقاط الفوز - اللاعب 0: {tricks0}، اللاعب 1: {tricks1}",
+    "phase": "مرحلة: {phase}",
+    "phase_learning": "المرحلة: {phase} (〕{remaining_cards} بطاقات متبقية في العقد)"
+  },
+  "hand": {
+    "no_cards": "ما فماش كروت.",
+    "no_cards_in_hand": "ما فماش كروت في يدنا.",
+    "header": "يديك:",
+    "trump_indicator": "(ترامب)",
+    "suit_line": "{observation}\n  {suit}〕{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "ما زِلْتْشْ نَمِّرْ الحُجَّة هَاذِي.",
+    "header": "حيلة توا:",
+    "trump_indicator": "(ترامب)",
+    "card_line": "〕{observation}\n  اللاعب {player_id}: {card}〕{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "لعبة ما تبداش.",
+    "header": "=== لعبة المانش وايت===",
+    "phase": "{observation}\nالمرحلة: {phase}",
+    "trump_suit": "{observation}\nالورقة الرئيسية: {trump_suit}",
+    "trump_card": "{observation}\nالبطاقة الرئيسية: {card}",
+    "cards_left": "{observation}\nالبطاقات المتبقية في العقد: {count}",
+    "next_card": "{observation}\nالبطاقة التالية للفائز: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} الحيلة الحالية:",
+    "trump_indicator": "(ترامب)",
+    "trick_line": "{observation}\n  اللاعب {player_id}: {card}〕{trump_indicator}",
+    "player_line": "{observation}\nلاعب {player_id}: {scoring} ريكات فوز ({tricks} مجموع)، {hand_size} أوراق في اليد"
+  },
+  "outcome": {
+    "summary": "مرحلة التعلم - اللاعب 0: {l0}، اللاعب 1: {l1}. مرحلة اللعب - اللاعب 0: {p0}، اللاعب 1: {p1}. اللاعب {winner_id} يفوز بـ {winner_tricks} نقاط فوز!"
+  }
+}

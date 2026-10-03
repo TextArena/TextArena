@@ -1,0 +1,31 @@
+{
+  "_comment": "Hrvatska lokalizacija za Hangman. Ključevi (lijeva strana) su fiksni; prevodite samo vrijednosti (desna strana). Zadržite svaki {placeholder} kao što je.",
+  "_slots": {
+    "{board}": "Neutralna prikazana ploča (C00/C01 zaglavlja stupaca, otkrivene slova, '_' praznine); nemojte prevoditi",
+    "{tries_left}": "Preostali pogrešni pokušaji (cijeli broj)",
+    "{guessed}": "Popis već pogodjenih slova, odvojenih zarezom",
+    "{letter}": "Pogodjeno slovo ili cijela riječ (zadržano kao što je upisano)",
+    "{pct}": "Postotak točno pogodjenih znakova, formatiran na 2 decimale",
+    "{target_word}": "Skrivena ciljna riječ"
+  },
+  "prompt": {
+    "intro": "Igrate Hangman. Cilj igre je pogoditi riječ tako što ćete dati jednoslovne pogodke ili cijelu riječ.\nSvaki stupac je numeriran. Ćelije koje trebaju biti popunjene slovima su predstavljene sa '_'.\n\nPostoje dva načina kako možete odgovoriti. Možete dati jednoslovne pogodke u formatu '[L]', ili možete pogoditi cijelu riječ u formatu '[LIGHT]'.\nAko je dato slovo u riječi, bit će otkriveno u mreži.\nAko je data riječ točna, pobijedili ste.\nKako igrate, povijest vaših izbora će biti dodana ispod. Koristite informacije kako biste pogodili riječ i pobijedili.\nImate 6 pogrešnih pokušaja prije nego što igra završi.\n\n"
+  },
+  "board": {
+    "status": "Trenutna ploča:\n{board}\nImate {tries_left} pokušaja preostalih.\nPogodjena slova: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Neispravan format poteza. Niste odgovorili sa važećim 'slovom' ili 'riječju'.",
+    "already_guessed": "Pogodili ste slovo '{letter}' koje je već bilo pogodjeno."
+  },
+  "message": {
+    "wrong_word": "Vaša pogodka '{letter}' nije ciljna riječ.",
+    "letter_in": "Vaša pogodka {letter} je u riječi",
+    "letter_not_in": "Vaša pogodka {letter} nije u riječi. Imate {tries_left} života preostalih."
+  },
+  "outcome": {
+    "win_word": "Čestitamo! Završili ste Hangman slagalicu.",
+    "win_board": "Čestitamo! Završili ste Hangman slagalicu.",
+    "out_of_tries": "Niste više imali pokušaja. Pogodili ste {pct} postotak znakova točno. Ciljna riječ bila je: {target_word}"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ètz jogador {player_id} en Stratego.\nVòstra objectiu es de capturar la bandièra de vòstre adversari o d'eliminar totes sos pèças mobils.\nVòstra armada a estat plaçada per vos sus la taula, inclús vòstra bandièra, bombas e autras pèças de rengs variats.\n\n### Instruccions de jòc\n1. **Reglas de movement:**\n   - A cada torn, podètz desplaçar una pèça d'un pas cap a una carra adjacenta (amont, avall, esquèrra o drecha) que es ja ocupada per vòstras pèças.\n   - Exemple: Una pèça pòt se desplaçar de A1 a B1 o A1 a A2 se B1 e A2 son pas plaçadas amb las pèças del jogaire.\n   - Se la pèça seleccionada es una bomba o una bandièra, pòt pas èsser desplaçada.\n2. **Batalhas:**\n   - Se vos desplaçatz sus una carra ocupada per una pèça de l'adversari, alora una batalha aurà luòc:\n     - La pèça amb lo reng superior ganha e elimina la pèça de l'adversari.\n     - Se los rengs son egals, ambedoas pèças son levadas de la taula.\n     - **Causas especialas:**\n       - Las bombas eliminan la mai granda part de las pèças atacantas levat los minaires, que pòdon desactivar las bombas.\n       - Los espions pòdon batre lo marshall se l'espion ataca lo primièr mas pèrdon contra totes las autras pèças.\n3. **Objectius estrategics:**\n   - Identificar las pèças de l'adversari a travèrs de sos movements e batalhas.\n   - Protegir vostra bandièra mentre ensajatz de capturar la bandièra de l'adversari.\n   - Utilizar los Scouts estrategicament per ganhar d'informacions sus las pèças de l'adversari e atacar las febles.\n\n### Coma far un movement:\n1. Especificatz las coordenadas de la pèça que volètz desplaçar e sa destinacion.\n2. Utilizatz lo format: [A0 B0], ont A0 es la posicion de la font, e B0 es la destinacion.\n   - Exemple: Per desplaçar una pèça de la linha 0, colomna 0 a la linha 1, colomna 0, introduïtz [A0 B0].\n3. Asseguratz-vos que la destinacion es valida segon las reglas de movement dessús.\n\n### Notas importantas:\n- La taula mostrará vosas pèças e lors posicions, per exemple MN, MS.\n- La taula mostrará tanben las posicions conegudas de las pèças de l'adversari sens revelar lors rengs, per exemple ?.\n- Las grilhas amb ~ son de lacs e pòdon pas èsser desplaçadas.\n- Coma suggeriment, començatz vòstre jòc en desplaçant vosas pèças que son sus las linhas de davant per ganhar d'informacions sus las pèças de l'adversari. Las linhas de davant del jogaire 0 e del jogaire 1 son respectivament la linha D e la linha G.\n\nAqui es l'estat actual de la taula:\n"
+  },
+  "board": {
+    "current_board": "Taula actual:\n\n{board}\nMovements disponibles: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format d'accion invalid. Joguèt {player_id} intrèt pas un movement dins lo format [A0 B0].",
+    "invalid_coordinates": "Format d'accion invalid. Lo jogaire {player_id} a pas introdusit de coordenadas validas.",
+    "not_own_piece": "Format d'accion invalid. Lo jogaire {player_id} deu mòure una de sas pròprias pèças.",
+    "scout_through_pieces": "Format d'accion invalid. Lo jogaire {player_id} pòt pas desplaçar un explorator per las autras pèças.",
+    "scout_diagonal": "Format d'accion invalid. Lo jogaire {player_id} pòt pas desplaçar un explorator en diagonala.",
+    "non_scout_multi_square": "Format d'accion invalid. Las pèças, levat los escauts, pòdon pas se desplaçar qu'un carrat a la vegada.",
+    "move_into_lake": "Format d'accion invalid. Lo jogaire {player_id} pòt pas se desplaçar dins lo lac.",
+    "move_onto_own_piece": "Format d'accion invalid. Lo jogaire {player_id} pòt pas se desplaçar sus sa pròpria pèça.",
+    "move_bomb_or_flag": "Format d'accion invalid. Lo jogaire {player_id} pòt pas desplaçar una bomba o bandièra."
+  },
+  "game_action": {
+    "you_moved": "Avètz desplaçat vostra pèça de {source} a {dest}.",
+    "opponent_moved": "Jogador {player_id} a desplaçat una pèça de {source} a {dest}.",
+    "you_equal_ranks": "Avètz desplaçat vostra pèça de {source} a {dest}. La pèça atacanta èra {attacking_rank} e la pèça de destinacion èra {target_rank}. Coma los rengs son los meteis, ambedoas pèças an perdut.",
+    "opponent_equal_ranks": "Jogador {player_id} a desplaçat una pèça de {source} a {dest}. La pèça atacanta èra {attacking_rank} e la pèça de destinacion èra {target_rank}. Coma los rengs son los meteis, ambedoas pèças an perdut.",
+    "you_miner_defused": "Avètz desplaçat vostra pèça de {source} a {dest}. La pèça atacanta èra {attacking_rank} e la pèça de destinacion èra {target_rank}. Coma los minaires pòdon desactivar las bombas, avètz ganhat la batalha.",
+    "opponent_miner_defused": "Jogador {player_id} a desplaçat una pèça de {source} a {dest}. La pèça atacanta èra {attacking_rank} e la pèça de destinacion èra {target_rank}. Coma los minaires pòdon desactivar las bombas, avètz perdut la batalha.",
+    "you_bomb_lost": "Avètz desplaçat vostra pèça de {source} a {dest}. La pèça atacanta èra {attacking_rank} e la pèça de destinacion èra {target_rank}. Coma l'atacant es pas un minaire, avètz perdut la batalha.",
+    "opponent_bomb_won": "Jogador {player_id} a desplaçat una pèça de {source} a {dest}. La pèça atacanta èra {attacking_rank} e la pèça de destinacion èra {target_rank}. Coma l'atacant es pas un minaire, avètz ganhat la batalha.",
+    "you_spy_won": "Avètz desplaçat vostra pèça de {source} a {dest}. La pèça atacanta èra {attacking_rank} e la pèça de destinacion èra {target_rank}. Coma l'atacant es un espion e la destinacion es un marshall, avètz ganhat la batalha.",
+    "opponent_spy_lost": "Jogador {player_id} a desplaçat una pèça de {source} a {dest}. La pèça atacanta èra {attacking_rank} e la pèça de destinacion èra {target_rank}. Coma l'atacant es un espion e la destinacion es un marshall, avètz perdut la batalha.",
+    "you_higher_won": "Avètz desplaçat vostra pèça de {source} a {dest}. La pèça atacanta èra {attacking_rank} e la pèça de destinacion èra {target_rank}. Coma l'atacant es un reng superior a la destinacion, avètz ganhat la batalha.",
+    "opponent_higher_lost": "Jogador {player_id} a desplaçat una pèça de {source} a {dest}. La pèça atacanta èra {attacking_rank} e la pèça de destinacion èra {target_rank}. Coma l'atacant es un reng superior a la destinacion, avètz perdut la batalha.",
+    "you_lower_lost": "Avètz desplaçat vostra pèça de {source} a {dest}. La pèça atacanta èra {attacking_rank} e la pèça de destinacion èra {target_rank}. Coma l'atacant es un reng inferior a la destinacion, avètz perdut la batalha.",
+    "opponent_lower_won": "Jogador {player_id} a desplaçat una pèça de {source} a {dest}. La pèça atacanta èra {attacking_rank} e la pèça de destinacion èra {target_rank}. Coma l'atacant es un reng inferior a la destinacion, avètz ganhat la batalha."
+  },
+  "outcome": {
+    "flag_captured": "Lo jogaire {player_id} a capturat la bandièra de l'adversari!",
+    "no_movable_pieces": "Lo jogaire {winner_id} ganha! Lo jogaire {loser_id} a pas mai de pèças de movement."
+  }
+}

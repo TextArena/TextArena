@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "O kele na kuzana Klondike Solitaire. Kimuntu kiyako kele kupindula maboko yonso na ndako ya mfunu.\n\nMvutu ya Mbanza:\n- Ndako ya mfunu (F1-F4): Kuzenga kutoka Ace tii King na mvuala\n- Ndako ya kuboko (T1-T7): Kuzenga kusuka mvuala ya kusukama (mvuala nyama na mvuala ndombe, mvuala ndombe na mvuala nyama)\n- Mvuala ya maboko: Pindula maboko na ndako ya kusukama\n- Ndako ya kusukama (W): Maboko ya juu kele ya kuzana\n\nMawete:\n- 'draw' - Pindula maboko kutoka mvuala ya maboko na ndako ya kusukama\n- 'move <source> <destination> [count]' - Pindula maboko kati ya ndako\n  Mifano: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count kele pia 'all', ambayo kele kupindula maboko yonso ya kusukama.\n- 'forfeit' - Koma mbanza ya kuzana na kubika kimeni kiyako\n- Mavulu ya ndako: W (ndako ya kusukama), F1-F4 (ndako ya mfunu), T1-T7 (ndako ya kuboko)\n\nO kele kupindula mawete mengi na mbanza moja kwa kusukama na vigula:\n  Mfano: 'draw, move W T1, move T2 F1'\n\nKings pekee kele ya kupindula na ndako ya kuboko ya kusukama.\nMawete kele kupindula na utaratibu - kama moja kele kufwila, mawete ya kusalia kele kusukama.\nTumina 'forfeit' kama o kele kuzana kele ya kufwila."
+  },
+  "format_error": {
+    "no_brackets": "Kisalu ya mbote kele ve. Yo fwete vanda na kati ya bibaka (parentes).",
+    "no_closing_bracket": "Kisalu ya mbote ve. Kimpwanza yina kele na nsuka ']' ke konda yo\"",
+    "empty_command": "Mambu ya kikoleleka. Tumia 'draw' au 'move <source> <destination> [count]'",
+    "empty_action": "Mambu ya kikoleleka",
+    "move_needs_args": "Makano ya kuweka yanahitaji chanzo na lengo. Matumizi: 'move <source> <destination> [count]'",
+    "count_positive": "Kuhesabu lazima liwe chanya au 'all'",
+    "count_invalid": "Kuhesabu kibaya. Tumia nambari au 'all'",
+    "unknown_command": "Kieleka kisukulu '{cmd}'. Utuma 'draw', 'move <source> <destination> [count]', or 'forfeit'",
+    "wrapped": "Kieseza {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Kieseza {n}: {msg}",
+    "before_failure": "Bo me sala mambu {n} ya bo salaka na ntwala nde kisalu kumana.",
+    "failed": "Kieseza {n} kufwila: {msg}"
+  },
+  "move_result": {
+    "drew": "Sambulwa makáti ku mizizi ya kikole.",
+    "cannot_draw": "Beto lenda baka ve ata kima mosi, sambu bima yonso ya beto kele na yo me mana.",
+    "invalid_pile": "Zina ya kisadilu kele mbote ve. Sadila W, F1-F4, to T1-T7",
+    "foundation_one_card": "Yandi lenda tula kaka karte mosi na fondasio.",
+    "waste_to_foundation_ok": "Bo me katula karti na bima ya kubeba mpi bo me tula yo na fondasio F{dst}",
+    "waste_to_foundation_bad": "Mono lenda ve kunata karte ya bima yina kele na fondasio awa.",
+    "tableau_to_foundation_ok": "Sambulwa makáti ku mizizi ya mambu T{src} ku mizizi ya ntete F{dst}",
+    "tableau_to_foundation_bad": "Nge lenda ve kunata karte ya tableau na fondasio yina.",
+    "foundation_to_foundation": "Ekoki kusonga kutoka na nsinga kwenda na nsinga",
+    "waste_to_tableau_one_card": "Yandi lenda katula kaka karte mosi na kati ya karto yina kele ve mfunu mpi kutula yo na tableau.",
+    "waste_to_tableau_ok": "Bo me katula karte na kisika ya bo vandaka kutula yo mpi bo me tula yo na tableau T{dst}",
+    "waste_to_tableau_bad": "Mono lenda tula ve karte ya mono me zola na zulu ya kisika yina beto ke tulaka tablo.",
+    "no_face_up": "Bo ta katula ve bakarti yina kele ya kukangula.",
+    "tableau_to_tableau_ok": "Sambilisanga {count} kadi(s) ku tableau T{src} ku T{dst}",
+    "tableau_to_tableau_bad": "Kibeni kuweka {count} bileti ku T{src} ku T{dst}",
+    "foundation_to_tableau_one_card": "Yandi lenda katula kaka karte mosi na fondasio sambu yo kuma na tableau.",
+    "foundation_empty": "Fondasio F{src} kele mpamba.",
+    "foundation_to_tableau_ok": "Sambulwa makáti ku mizizi ya ntete F{src} ku mizizi ya mambu T{dst}",
+    "foundation_to_tableau_bad": "Nge lenda tula ve karte ya fondasio na tableau T{dst}",
+    "to_waste_or_stock": "Bo lenda tula yo ve na kisika ya mvindu to bisika yina bo ke bumbaka bima."
+  },
+  "outcome": {
+    "forfeit": "Mambu ya mambu yakoma. Nsongi ya mwisho: {score} makáti ku mizizi ya ntete.",
+    "won": "Beno me nunga na nsaka ya Klondike Solitaire!",
+    "turn_limit": "Mambu ya mambu yakoma! O kubaka kiwango cha {max_turns} mambu. Nsongi: {score} makáti ku mizizi ya ntete."
+  },
+  "board": {
+    "title": "=== KABWANGA YA KLONDIKE ===",
+    "turn": "Mvula: {turn}/{max_turns}",
+    "stock": "Banimero ya mikanda: {stock} bakarti.",
+    "waste": "Bima ya kubeba (W): {waste}",
+    "foundations_header": "Bimvuka ya ketwadisaka:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tablo: Bantu ya Izraele.",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

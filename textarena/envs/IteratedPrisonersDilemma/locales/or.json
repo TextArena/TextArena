@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "ଆପଣ Player {player_id} ଅଛନ୍ତି {num_rounds} ରାଉଣ୍ଡ ଧରି ଚାଲୁଥିବା Iterated Prisoner's Dilemma ରେ।\n\nଗେମ କାଠାମୋ:\n- ପ୍ରତ୍ୟେକ ସିଦ୍ଧାନ୍ତ ପୂର୍ବରୁ ଆପଣକୁ {total_conversation_rounds} ମୋଡ଼ ଅଛି ସ୍ୱାଧୀନ ଭାବରେ ସମ୍ବାଦ କରିବା ପାଇଁ।\n- ତା ପରେ, ଉଭୟ ଖେଳାଳି ଏକାକୀ ସହଯୋଗ କରିବା କିମ୍ବା ଅପମାନ କରିବା ପସନ୍ଦ କରନ୍ତି।\n\nପେ ଅଫ ମେଟ୍ରିକ୍ସ (ପ୍ରତ୍ୟେକ ରାଉଣ୍ଡ ପାଇଁ ସ୍ଥିର):\n- ଉଭୟ ସହଯୋଗ କରନ୍ତି ➜ ପ୍ରତ୍ୟେକ {cooperate_reward}\n- ଉଭୟ ଅପମାନ କରନ୍ତି ➜ ପ୍ରତ୍ୟେକ {mutual_defect_reward}\n- ଏକ ଅପମାନ କରେ, ଏକ ସହଯୋଗ କରେ ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nକିଭାବେ ଖେଳିବେ:\n- ସମ୍ବାଦ ସମୟ: ଯେ କୌଣସି ପାଠ୍ୟ ଟାଇପ କର।\n- ସିଦ୍ଧାନ୍ତ ପର୍ଯ୍ୟାୟ: '[Cooperate]' କିମ୍ବା '[Defect]' (case-insensitive) ଅନ୍ତର୍ଭୁକ୍ତ କର। ଆପଣ ଅତିରିକ୍ତ ପାଠ୍ୟ ଟକନ ପୂର୍ବରୁ/ପରେ ଯୋଡ଼ାଇ ପାରିବେ।"
+  },
+  "phases": {
+    "conversation_finished": "ସମ୍ବାଦ ଶେଷ ହୋଇଛି {round} ରାଉଣ୍ଡ ପାଇଁ। ଦୟାକରି '[Cooperate]' କିମ୍ବା '[Defect]' ସହ \\boxed{{}} ମଧ୍ୟରେ ଉତ୍ତର ଦିଅନ୍ତୁ।",
+    "starting_round": "--- ପ୍ରାରମ୍ଭିକ ରାଉଣ୍ଡ {round} ---",
+    "round_summary": "ରାଉଣ୍ଡ {round} ଫଳାଫଳ:\n{outcome}\nPlayer 0 ନେ {r0} ପାଇଛି (ମୋଟ {score_0}), Player 1 ନେ {r1} ପାଇଛି (ମୋଟ {score_1})."
+  },
+  "outcome": {
+    "winner": "ଖେଳାଳି {winner} ଜିତନ୍ତି {win_score} - {lose_score} ।",
+    "draw": "ଉଭୟ ଖେଳାଳି {s0} ଗୋଲ୍ କରିଥିଲେ ।",
+    "round_both_cooperate": "ଉଭୟ ଖେଳାଳି ସହଯୋଗ କରିଥିଲେ ।",
+    "round_both_defect": "ଉଭୟ ଖେଳାଳୀ ବିଶ୍ୱାସ ଭଂଗ କରିଥିଲେ.",
+    "round_p0_cooperates_p1_defects": "ଖେଳାଳୀ 0 ସହଯୋଗ କରିଥିଲେ, ଖେଳାଳୀ 1 ବିଶ୍ୱାସ ଭଂଗ କରିଥିଲେ.",
+    "round_p0_defects_p1_cooperates": "ଖେଳାଳି ୦ ବିଦ୍ରୋହୀ, ଖେଳାଳି ୧ ସହଯୋଗୀ ।"
+  }
+}

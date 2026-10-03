@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Тоглоомын тасалбар: {board}",
+    "valid_moves": "{observation} Зөвлөмжтэй хөдөлгөөн: {moves}",
+    "no_valid_moves_reset": "{observation} Ажиллагаа нь хүчин төгөлдөр биш - та давж явах хэрэгтэй болно.",
+    "no_valid_moves_step": "{observation}\nХүчин түгээмэл алхам байхгүй – та алхамдаа тавихгүй байж болох юм.",
+    "scores_reset": "{observation} Curren Scores - Хар: {black_count}, Цагаан: {white_count} ",
+    "scores_step": "{observation}\nОноо - Хар: {black_count}, Цагаан: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Хөдөлгөөн нь [row, col] хэлбэртэй байх ёстой.",
+    "illegal": "Хууль бус зөрчлийн үйлдэл. Хууль ёсны зөрчлүүд: {valid}"
+  },
+  "game_action": {
+    "skipped": "Тоглогч {pid} ээлжээ алгасах хэрэгтэй байв",
+    "played": "Тоглогч {pid} ({piece}) [{r}, {c}] нүүдэл хийж {flipped} хэсэг(үүд)-ийг хүрээлүүлэв"
+  },
+  "game_message": {
+    "must_skip": "Тоглогч {pid} ({piece}) нь хүчин төгөлдөр алхмуудгүй бөгөөд давж явах ёстой."
+  },
+  "outcome": {
+    "black_wins": "Хар ялалт {black_count}-{white_count}.",
+    "white_wins": "Цагаан ялалт {white_count}-{black_count}.",
+    "draw": "{black_count}-{white_count} зурах."
+  }
+}

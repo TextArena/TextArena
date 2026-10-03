@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "اللعبة تبدأ. الورقة الرئيسية: {trump_suit} (البطاقة الرئيسية: {trump_str}).",
+    "no_trump_card": "لا شيء."
+  },
+  "player_prompt": {
+    "intro": "انت لاعب {player_id} في الويست الألماني.\n{phase_info}\nانت ممسك {hand_size} بطاقات.\nالعب بطاقة مع '[play N]'، حيث N هو موقعها في يدك (على سبيل المثال '[play 3]').",
+    "phase_learning": "مرحلة التعلم: الفائز في كل خدعة ياخد البطاقة المفتوحة والخاسر يجر بطاقة بعد من الطاولة. الحيل التي تمكنت منها خلال هذه المرحلة ما بتحسب للنصر.",
+    "phase_playing": "مرحلة اللعب: الطابق استنفد. كل خدعة من الان فصاعداً بتحسب للفوز."
+  },
+  "next_card": {
+    "playing_phase": "ما في بطاقة عرضت، مرحلة اللعب بدأت.",
+    "deck_empty": "الطابق فاضي - ما في بطاقة عرضت.",
+    "available": "البطاقة المعروضة: {card}",
+    "available_trump": "البطاقة المعروضة: {card} (ترامب)"
+  },
+  "invalid_move": {
+    "wrong_format": "صيغة الحركة غير صحيحة. استخدم '[play N]' للعب البطاقة رقم N في يدك.",
+    "bad_position": "موقف البطاقة ده ما بيوجد. عندك بطاقات {hand_size} .",
+    "must_follow_suit": "لازم تلعب ورقة بنفس لون الورقة اللي بدأت اللعب، يعني ورقة {lead_suit}.",
+    "invalid_play": "هذه البطاقة لا يمكن لعبها."
+  },
+  "game_action": {
+    "played": "اللاعب {player_id} لعب {card}."
+  },
+  "trick": {
+    "won": "اللاعب {winner_id} بيفوز بالخدعة مع {card}.",
+    "won_learning": "اللاعب {winner_id} يفوز بالدور مع {card} ويتحصل على البطاقة المواجهة"
+  },
+  "phase": {
+    "learning_complete": "الطابق استنفد. مرحلة التعلم انتهت - كل خدعة متبقية بتحسب للفوز."
+  },
+  "draw": {
+    "winner_received": "انت ربحت الحيلة و حصلت على {card}.",
+    "loser_received": "خسرت الحيلة و سحبت {card} من الطابق.",
+    "winner_preview": "البطاقة التالية اللي بتعرض هي {card}."
+  },
+  "turn": {
+    "board": "{phase}\n〕{scores}\n〕{next_card}\n\n〕{trick}\n\n〕{hand}",
+    "scores_learning": "الأدوار الفوز حتى الآن - اللاعب 0: {tricks0}، اللاعب 1: {tricks1}",
+    "scores_playing": "نقاط الفوز - اللاعب 0: {tricks0}، اللاعب 1: {tricks1}",
+    "phase": "المرحلة: {phase}",
+    "phase_learning": "المرحلة: {phase} ({remaining_cards} بطاقات متبقية في الكومة)"
+  },
+  "hand": {
+    "no_cards": "بلا بطاقات.",
+    "no_cards_in_hand": "ما في بطاقات بيدك.",
+    "header": "يدك:",
+    "trump_indicator": "(ترامب)",
+    "suit_line": "{observation}\n  {suit}〕{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "ما في بطاقات لعبت بعد هاد الخدعة.",
+    "header": "خدعة حالية:",
+    "trump_indicator": "(ترامب)",
+    "card_line": "{observation}\n  اللاعب {player_id}: {card}〕{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "اللعبة ما بتبدأش.",
+    "header": "=== لعبة الويست الألماني ===",
+    "phase": "{observation}\nالمرحلة: {phase}",
+    "trump_suit": "{observation}\nالورقة الرئيسية: {trump_suit}",
+    "trump_card": "{observation}\nالبطاقة الرئيسية: {card}",
+    "cards_left": "{observation}\nالبطاقات المتبقية في الكومة: {count}",
+    "next_card": "{observation}\nالبطاقة التالية للفائز: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} الحيلة الحالية:",
+    "trump_indicator": "(ترامب)",
+    "trick_line": "{observation}\n  اللاعب {player_id}: {card}〕{trump_indicator}",
+    "player_line": "{observation}\nاللاعب {player_id}: {scoring} خدع تسجيلية ({tricks} مجموع)، {hand_size} بطاقات في اليد"
+  },
+  "outcome": {
+    "summary": "مرحلة التعلم - لاعب 0: {l0}, لاعب 1: {l1}. مرحلة اللعب - لاعب 0: {p0}, لاعب 1: {p1}. لاعب {winner_id} يفوز بـ {winner_tricks} خدع تحسب في النصر!"
+  }
+}

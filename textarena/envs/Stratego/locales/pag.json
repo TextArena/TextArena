@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Sika'y Manag-ayam {player_id} ed Stratego.\nSay tuyo mo'y mangkapot ed bandera na kalaban mo o mangilako'y amin da'y naiyakar na piraso.\nSay impan mo'y inayakar ed sakey ya tabla para sika, kaiba'y bandera mo, bomba, tan piraso na saray ranggo.\n\n### Panag-ayam\n1. **Panag-ayam:**\n   - Ed say oras mo, sika'y makapan-ayam na sakey ya piraso na sakey ya agew ed sakey ya kuwadro (baba, ngato, kawigi, o kawanan) ya inayakar na saray piraso mo.\n   - Halimbawa: Sakey ya piraso'y makapan-ayam ed A1 to B1 o A1 to A2 no B1 tan A2 et ag-inaayakar na saray piraso na manag-ayam.\n   - No say napili'y bomba o bandera, ag-makapan-ayam.\n2. **Labanan:**\n   - No sika'y makapan-ayam ed sakey ya kuwadro ya inayakar na kalaban mo, say labanan'y maganap:\n     - Say piraso ya mas mataas ya ranggo'y manalo tan mangilako'y piraso na kalaban.\n     - No say ranggo'y pareho, saray piraso'y maalis ed tabla.\n     - **Saray Kaso:**\n       - Saray bomba'y mangilako'y saray piraso ya man-ataki maliban ed Miner, ya makapan-defuse bomba.\n       - Saray Spy'y makapan-ayam ed Marshal no say Spy'y una'y man-ataki pero matalo ed amin da'y piraso.\n3. **Tuyo:**\n   - I-identify mo'y saray piraso na kalaban mo ed saray panag-ayam da tan labanan.\n   - Protektahan mo'y bandera mo mientras sika'y mang-ataki ed bandera na kalaban mo.\n   - Usaren mo'y saray Scout strategically para mangala'y impormasyon ed saray piraso na kalaban mo tan mang-ataki'y maluya.\n\n### Panag-ayam:\n1. I-specify mo'y koordinado na piraso ya sika'y man-ayam tan destinasyon to.\n2. Usaren mo'y format: [A0 B0], no A0 so source position, tan B0 so destinasyon.\n   - Halimbawa: Para man-ayam ed piraso ed row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Sigurado'y destinasyon ya valid ed panag-ayam ed baba.\n\n### Mahalaga:\n- Say tabla'y ipapakita'y saray piraso mo tan posisyon da, e.g. MN, MS.\n- Say tabla'y ipapakita'y saray posisyon ya kalaban mo ya kilala, e.g. ?.\n- Saray grid ya ~ et danaw tan ag-makapan-ayam.\n- Bilang suhestiyon, umpisa'y man-ayam mo'y saray piraso ya sika'y naiyakar ed frontline para mangala'y impormasyon ed saray piraso na kalaban mo. Manag-ayam 0 tan manag-ayam 1's frontline so row D tan G, respectively.\n\nSaya'y kurrenti tabla:\n"
+  },
+  "board": {
+    "current_board": "Kasalanan a Bangon:\n\n{board}\nMabali a Mabalikas: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Say aksyon et sali. Say {player_id} player et diad input so move ed format [A0 B0].",
+    "invalid_coordinates": "Invalid action format. Player {player_id} did not input valid coordinates. Ag-inmakar so player ed say dugan koordinat na saray gawa to, tan agmet inmakto iray kodidata ya walad listaan da ray gagala ra.",
+    "not_own_piece": "Say format na aksion et aliwan valid. Kaukolan ya iyalis na sakey ed saray piraso to so manlalaban {player_id} .",
+    "scout_through_pieces": "Invalid action format. Say player {player_id} so agnayarin mangiyalis na scout ed arum ya piraso.",
+    "scout_diagonal": "Invalid action format. Manag-ayam {player_id} ag-makapan-ayam ed Scout diagonally.",
+    "non_scout_multi_square": "Aliwan dugan format na aksion. Saray piraso, likud ed saray espiya, so nayarin mangiyalis labat na sakey a kuwadro kada pankanawnawa.",
+    "move_into_lake": "Invalid action format. Manag-ayam {player_id} ag-makapan-ayam ed danaw.",
+    "move_onto_own_piece": "Aliwan dugan format na kiwas. Say manlalaban {player_id} so agnayarin onalis ed mismon piraso to.",
+    "move_bomb_or_flag": "Invalid action format. Player {player_id} can't move a bomb or flag. Say player ya agga makatilak na bomba odino bandira so nayarin man-switch ed sakey tan sakey diad loob na pigay minuto, balet say player ya agak makaalis et walay pankanawnawan mangibaki na bala to."
+  },
+  "game_action": {
+    "you_moved": "Nayun mo so piece mo manlapud {source} ed {dest}.",
+    "opponent_moved": "Say manlalako {player_id} so angiyalis na piraso manlapud {source} ya anggad {dest}.",
+    "you_equal_ranks": "Nayun mo so piece mo manlapud {source} ed {dest}. Say atakeng piece et {attacking_rank} tan say destinasyon piece et {target_rank}. No say ranggo da et saman, duara so piece et napan.",
+    "opponent_equal_ranks": "Say {player_id} player et nanayun ed saray piece manlapud {source} ed {dest}. Say atakeng piece et {attacking_rank} tan say destinasyon piece et {target_rank}. No say ranggo da et saman, duara so piece et napan.",
+    "you_miner_defused": "Nayun mo so piece mo manlapud {source} ed {dest}. Say atakeng piece et {attacking_rank} tan say destinasyon piece et {target_rank}. No say miner et makapag-defuse ed bomb, kaiban mo so laban.",
+    "opponent_miner_defused": "Say ogawad si {player_id} na iyakar so piece to manlapas {source} ed {dest}. Say ogawad a piece et {attacking_rank} tan say destinasyon a piece et {target_rank}. Lapu ed miner so kaya danuman so bomba, abayag ka la so laban.",
+    "you_bomb_lost": "Inyalis mo so pirasom manlapud {source} papuntang {dest}. Say piraso a nan-ataki et {attacking_rank} tan say piraso a dinatayan et {target_rank}. Diad ta say nan-ataki et aliwa sakey a minero, natalo kay ed say laban.",
+    "opponent_bomb_won": "Say player {player_id} inyalis na sakey a piraso manlapud {source} papuntang {dest}. Say piraso a nan-ataki et {attacking_rank} tan say piraso a dinatayan et {target_rank}. Diad ta say nan-ataki et aliwa sakey a minero, sikatoy nanalo ed say laban.",
+    "you_spy_won": "Nayun mo so piece mo manlapud {source} ed {dest}. Say atakeng piece et {attacking_rank} tan say destinasyon piece et {target_rank}. No diad ataker so spy tan say destinasyon so marshall, kaiban mo so laban.",
+    "opponent_spy_lost": "Say ogawad si {player_id} na iyakar so piece to manlapas {source} ed {dest}. Say ogawad a piece et {attacking_rank} tan say destinasyon a piece et {target_rank}. Lapu ed ogawad et ispy tan say destinasyon et marshall, abayag ka la so laban.",
+    "you_higher_won": "Nayun mo so piece mo manlapud {source} ed {dest}. Say atakeng piece et {attacking_rank} tan say destinasyon piece et {target_rank}. No diad ataker so masanto ed ranggo ed say destinasyon, kaiban mo so laban.",
+    "opponent_higher_lost": "Say ogawad si {player_id} na iyakar so piece to manlapas {source} ed {dest}. Say ogawad a piece et {attacking_rank} tan say destinasyon a piece et {target_rank}. Lapu ed ogawad et mas atagey so rango to kumpara ed destinasyon, abayag ka la so laban.",
+    "you_lower_lost": "Nayun mo so piece mo manlapud {source} ed {dest}. Say atakeng piece et {attacking_rank} tan say destinasyon piece et {target_rank}. No diad ataker so abalo ed ranggo ed say destinasyon, kaiban mo so laban.",
+    "opponent_lower_won": "Say player {player_id} inyalis na sakey a piraso manlapud {source} papuntang {dest}. Say piraso a nan-ataki et {attacking_rank} tan say piraso a dinatayan et {target_rank}. Diad ta say nan-ataki et mas baba so ranggo to ed say dinatayan, sikatoy nanalo ed say laban."
+  },
+  "outcome": {
+    "flag_captured": "Say manlalaban {player_id} so angala ed bandira na kalaban!",
+    "no_movable_pieces": "Manangaro ya si Manlalaro {winner_id}! Say Manlalaro {loser_id} walay natan saray pieza ya makakalaw."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Bo é Jogadör {player_id} na Jogo di Negosiasaon.\nBo tin algums rezursu, i bo tarefa é troka pa bo rezursu tin valor total aumenta.\nRezursu i valor asosia bo tin aktualmente é:\n\t+ {resource_value_list}\nNa kada turnu, bo podi fala ku oponènti i fizé proposta di troka.\nUsa token spesial siguinti pa aksion:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': Pa asetá proposta di entrada.\n  - '[Deny]': Pa negá proposta di entrada (padrão).\nJogo dura pa {max_turns} turnu na total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Jogador tenta aseita un troka sen ten rekursus nisisáriu.",
+    "out_of_range": "Jogadör {player_id}, Aksion invalida. Kolona {col} ta fuera di limiti.",
+    "already_full": "Jogadör {player_id}, Aksion invalida. Kolona {col} ta kompletu.",
+    "proposing_with_no_resource": "Jogu {player_id} tenta faze un oferta di troxa sen ten rekursus nesesariu.",
+    "incorrect_offer_format": "Jogu {player_id} faze un oferta di troxa na formatu inkorretu.",
+    "no_new_offer": "Jogador {player_id} ka faze ninhun novu oférta di troxa."
+  },
+  "offers": {
+    "reject": "Jogu {player_id} rejeita oferta di mudansa.",
+    "accept": "Jogadör {acceptor_id} asetou proposta di troka di Jogadör {proposer_id}.",
+    "proposal": "Jogadör {player_id} fizé proposta siguinti pa Jogadör {opponent_id}: Artikulu oferiu: {offered} -> Artikulu pediu: {requested}"
+  },
+  "outcome": {
+    "win": "Jogu {winner_id} ganha pamodi el tinha un maior valor di inventu.",
+    "draw": "Mudansas na valor di inventarus é igual pa tudu jogadoris."
+  }
+}

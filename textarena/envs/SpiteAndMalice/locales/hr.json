@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} u igri Spite and Malice za dva igrača. Vaš cilj je biti prvi koji očisti svoju nagradnu gomilu.\n\n### Pregled igre:\n- Cilj je očistiti svoju nagradnu gomilu tako što ćete igrati karte na središnje gomile.\n- Možete igrati karte iz tri izvora:\n  1. Vaša **ruka** (početkom svakog poteza imate do 5 karata u ruci).\n  2. **Gornja karta vaše nagradne gomile**.\n  3. **Gornja karta bilo koje od vaših otpadnih gomila**.\n\n### Pravila igre:\n- Možete igrati kartu na središnju gomilu ako je **jedan rang viša** od gornje karte na toj gomili (središnje gomile počinju s Asom i idu do Kraljice; Kralji su divlji - mogu se igrati na bilo koju kartu, ali ne mijenjaju redoslijed ranga. To znači da ako se Kralj koristi nakon 4, onda je taj Kralj rangiran kao 5, a sljedeća karta mora biti 6).\n- Ako ne možete igrati više karata, morate **odbaciti kartu** u jednu od vaših otpadnih gomila kako biste završili potez.\n- Ako središnja gomila dosegne Kraljicu, automatski će se očistiti.\n- Redoslijed ranga je: A=1, 2=2, ..., 9=9, J=10, Q=11, K kao divlji.\n\n### Akcije:\n1. **Vuci**: Na početku svog poteza, vucite karte kako biste popunili ruku do 5 karata. Unesite **[draw]** kako biste započeli.\n2. **Igraj kartu**: Da biste igrali kartu, navedite kartu i središnju gomilu ovako: **[play A♠ 0]** (gdje je 'A♠' karta, a '0' je indeks središnje gomile).\n3. **Odbaci**: Ako ne možete igrati više karata, odbacite kartu iz ruke u otpadnu gomilu kako biste završili potez. Unesite **[discard A♠ 1]** (gdje je 'A♠' karta, a '1' je indeks otpadne gomile). Imajte na umu da ne možete odbaciti bilo koju kartu iz nagradne gomile. Možete odbaciti samo karte iz ruke.\n\n"
+  },
+  "board": {
+    "current_board": "Trenutna ploča:\n\n{board}\nDostupni potezi: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Središnje gomile ---\n",
+    "pile": "{observation}Gomila {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Prikaz igrača {player_id} ---\n",
+    "payoff": "{observation}Nagradna gomila (Gornja karta): {top_card}, Duljina nagradne gomile: {payoff_length}\n",
+    "hand": "{observation}Ruka: {hand}\n",
+    "discard": "{observation}Otpadne gomile: {discard}\n",
+    "empty": "Prazno"
+  },
+  "game_message": {
+    "no_cards_left": "Nema više karata za vući. Sjetite se da možete igrati karte iz ovih izvora:\n  1. Vaša **ruka**.\n  2. **Gornja karta vaše nagradne gomile**.\n  3. **Gornja karta bilo koje od vaših otpadnih gomila**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Neispravan format poteza. Igrač {player_id} nije odgovorio s ispravnim potezom u uglatim zagradama.",
+    "invalid_play": "Neispravna igra. Igrač {player_id} je pokušao igrati {card} na središnjoj gomili {index}.",
+    "discard_from_payoff": "Neispravno odbacivanje. Igrač {player_id} je pokušao odbaciti kartu iz nagradne gomile.",
+    "discard_not_in_hand": "Neispravno odbacivanje. Igrač {player_id} je pokušao odbaciti kartu koja nije u ruci.",
+    "wrong_move_type": "Neispravan tip poteza. Igrač {player_id} nije odgovorio s ispravnim tipom poteza."
+  },
+  "game_action": {
+    "you_drew": "Vukli ste karte.",
+    "opponent_drew": "Igrač {player_id} je vukao karte.",
+    "you_played": "Igrali ste {card} na središnjoj gomili {index}.",
+    "opponent_played": "Igrač {player_id} je igrao {card} na središnjoj gomili {index}.",
+    "you_discarded": "Odbacili ste {card} u otpadnu gomilu {index}, što također znači da ste završili potez. Nema daljnjih akcija za ovaj potez. Igrač {next_player_id} će ići sljedeći.",
+    "opponent_discarded": "Igrač {player_id} je odbacio {card} u otpadnu gomilu {index}, što također znači da je završio potez. Nema daljnjih akcija za Igrača {player_id} za ovaj potez. Igrač {next_player_id}, vi ćete ići sljedeći. Molimo unesite vašu akciju u formatu [akcija karta središnji_indeks]."
+  },
+  "outcome": {
+    "payoff_cleared": "Igrač {current_player} je očistio svoju nagradnu gomilu! Igrač {current_player} pobjeđuje!",
+    "deadlock_player_0": "Dostignut je mrtvi položaj! Igrač 0 pobjeđuje s {player_0_payoff} kartama preostalim u odnosu na {player_1_payoff} karata Igrača 1.",
+    "deadlock_player_1": "Dostignut je mrtvi položaj! Igrač 1 pobjeđuje s {player_1_payoff} kartama preostalim u odnosu na {player_0_payoff} karata Igrača 0.",
+    "deadlock_tie": "Dostignut je mrtvi položaj s izjednačenim rezultatom! Oba igrača imaju {player_0_payoff} karata preostalih. Igrač {current_player} pobjeđuje po zadanim pravilima."
+  }
+}

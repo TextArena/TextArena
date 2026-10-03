@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Ni sa bula vinaka! O sa taura na {size}x{size} grid ni lights.\nO na goal ko ya na qai kua ni turn ALL lights OFF (e na vakatokai na '.')\nKe o tekivu na light, e na qai toggle itself AND na adjacent neighbors (up/down/left/right).\nType [row col] me tekivu na light (0-indexed, so valid range is 0-{max_index}).\nO sa taura na up to {max_turns} moves me soli na puzzle.\nLegend: 'O' = light ON, '.' = light OFF"
+  },
+  "board": {
+    "current_state": "Na yavala ni grid tiko nikua (Move {moves_made}, {moves_left} moves se vo, {completion}% vakacavara):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Na cakacaka e dodonu me tiko ena kena ituvatuva [row col] na vanua era sa integer mai 0 ki na {max_index}.",
+    "out_of_range": "Na veicoordinate sa dodonu me vakati na 0 kei {max_index}. O sa volavola [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Vinaka! O sa vakaoti kina na puzzle ena {moves_used} moves!",
+    "loss": "Game over! O sa vakayacora na {max_turns} moves kei na sega ni soli na puzzle. Final completion: {completion}%\nFinal state:\n{grid}"
+  }
+}

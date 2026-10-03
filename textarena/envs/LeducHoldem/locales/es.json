@@ -1,0 +1,54 @@
+{
+  "_comment": "Archivo de idioma de Leduc Hold'em. NO traduzcas las claves (lado izquierdo). Traduce solo los valores (lado derecho). Mantén cada {placeholder} exactamente igual. Nunca traduzcas los tokens de acción ('[check]', '[bet]', '[call]', '[raise]', '[fold]'), las etiquetas de las cartas (J/Q/K) ni las cantidades numéricas de fichas/bote.",
+  "_slots": {
+    "{player_id}": "Un número de jugador, 0 o 1",
+    "{pid}": "Un número de jugador, 0 o 1",
+    "{winner}": "El número del jugador que gana el showdown",
+    "{busted}": "El número del jugador que se quedó sin fichas",
+    "{card}": "Una etiqueta de carta: J, Q o K",
+    "{amount}": "Una cantidad de fichas, p. ej. 2 o 4",
+    "{legal}": "Una lista separada por comas de tokens de acción legales, p. ej. '[check]', '[bet]'",
+    "{allowed}": "El conjunto de movimientos actualmente legales, p. ej. ['call', 'fold']",
+    "{reason}": "Un motivo de resultado ya renderizado, insertado tal cual",
+    "{b0}": "Las fichas actuales del Jugador 0",
+    "{b1}": "Las fichas actuales del Jugador 1",
+    "{hi}": "El montón de fichas del ganador",
+    "{lo}": "El montón de fichas del perdedor"
+  },
+
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id} en Leduc Hold'em.\nResponde con un único token de acción como '[check]', '[bet]', '[call]', '[raise]' o '[fold]' cuando sea tu turno.\nTamaños de apuesta fijos: 2 fichas pre-flop, 4 fichas post-flop (máx. 2 subidas por ronda)."
+  },
+
+  "board": {
+    "new_hand":      "### Nueva mano - tu carta privada: {card}",
+    "valid_actions": "Acciones válidas: {legal}",
+    "flop":          "Carta del flop revelada: {card}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Proporciona exactamente un token de acción válido.",
+    "illegal_now":  "No permitido ahora. Permitido: {allowed}"
+  },
+
+  "action": {
+    "check": "El Jugador {pid} pasa.",
+    "bet":   "El Jugador {pid} apuesta {amount}.",
+    "raise": "El Jugador {pid} sube {amount}.",
+    "call":  "El Jugador {pid} iguala {amount}.",
+    "fold":  "El Jugador {pid} se retira."
+  },
+
+  "showdown": {
+    "wins": "Showdown - el Jugador {winner} gana. ",
+    "tie":  "Empate exacto."
+  },
+
+  "outcome": {
+    "banks":        "{reason}Fichas actuales: Jugador 0: {b0}; Jugador 1: {b1}\n",
+    "hand_limit":   "Límite de manos alcanzado",
+    "busted":       "El Jugador {busted} se quedó sin fichas.",
+    "match_winner": "{reason} | fichas {hi}>{lo}",
+    "match_draw":   "{reason} | fichas iguales"
+  }
+}

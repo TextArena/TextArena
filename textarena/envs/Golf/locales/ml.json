@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "നിങ്ങൾ ഗോൾഫ് കളിക്കുന്നു - കളിക്കാരൻ {player_id}. ലക്ഷ്യം: ഈ റൌണ്ടിൽ ഏറ്റവും കുറഞ്ഞ സ്കോർ നേടുക. നിരകൾ ഒരേ മൂല്യം പങ്കിടുന്നുവെങ്കിൽ അവ 0. കാർഡ് മൂല്യങ്ങൾ: A = 1, 2-10 = മുഖമൂല്യം, J / Q = 10, K = 0 പ്രവർത്തനങ്ങൾ (കൃത്യമായ ബ്രാക്കറ്റുകളിൽ ഉപയോഗിക്കുക): - '[draw]' - ഡെക്കിൽ നിന്ന് വരയ്ക്കുക - '[take]' - നിരസിച്ച കൂമ്പിൽ നിന്ന് എടുക്കുക - '[swap X Y]' - സ്ഥാനമുള്ള വരച്ച കാർഡ് കൈമാറുക X (വരി) Y (നിര) - '[discard] - വരച്ച കാർഡ് ഉപേക്ഷിക്കുക "
+  },
+  "board": {
+    "drew": "നീ വരച്ചത്: {card} ഇപ്പോൾ നീ [swap X Y] അല്ലെങ്കിൽ [discard] അത് വരയ്ക്കണം.",
+    "took": "നിങ്ങൾ എടുത്തു: {card} ഒഴിവാക്കുന്ന കൂമ്പാരത്തിൽ നിന്ന്\nനിങ്ങൾ [swap X Y] അതിനൊപ്പം മാറ്റേണ്ടതുണ്ട് (ഒഴിവാക്കാൻ കഴിയില്ല).",
+    "peeked": "നീ സ്ഥാനം ({row},{col}) യിൽ നോക്കിഃ {card}",
+    "turn_view": "നിങ്ങളുടെ കൈ:\n{hand}\nഒഴിവാക്കുന്ന കൂമ്പാരം: {discard}\n{options}",
+    "none": "ഒന്നുമില്ല"
+  },
+  "options": {
+    "final_turns": "അവസാനത്തെ വളവുകൾ! നിങ്ങളുടെ ഓപ്ഷനുകൾ: [draw], [take], [peek X Y]",
+    "draw": "നിങ്ങളുടെ ഓപ്ഷനുകൾ: [draw], [take]",
+    "must_swap": "നിങ്ങൾ ചെയ്യേണ്ടത്: [swap X Y] (അവഗണന പാക്കിൽ നിന്ന് കാർഡുകൾ ഒഴിവാക്കാൻ കഴിയില്ല)",
+    "swap_or_discard": "നിങ്ങള് ക്ക്: [swap X Y] അഥവാ [discard]"
+  },
+  "hand": {
+    "no_cards": "കാർഡുകളില്ല.",
+    "header": "കൊളോ: 1 2 3",
+    "row": "വരി {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "കളിക്കാരൻ {pid} സ്ഥാനം ({row},{col})-ൽ {new}നെ {old}നൊപ്പം മാറ്റി",
+    "discarded": "കളിക്കാരൻ {pid} ഒഴിവാക്കി {card}"
+  },
+  "message": {
+    "deck_empty": "ഡെക്ക് ശൂന്യമാണ്! കളി ഉടനടി അവസാനിക്കുന്നു.",
+    "knocked": "കളിക്കാരന് {pid} തട്ടി! ഓരോ കളിക്കാരനും ഒരു തവണ കൂടി ലഭിക്കുന്നു.",
+    "final_round": "കളിക്കാരന് {pid} {reason}! ഓരോ കളിക്കാരനും ഒരു തവണ കൂടി കളിക്കാം."
+  },
+  "reason": {
+    "all_revealed": "എല്ലാ കാർഡുകളും വെളിപ്പെടുത്തിയിരിക്കുന്നു"
+  },
+  "invalid": {
+    "wrong_action": "കൃത്യമായി ഒരു ബ്രാക്കറ്റിലുള്ള പ്രവർത്തനം ഉപയോഗിക്കുക: [draw], [take], [swap X Y], [discard], [knock], അല്ലെങ്കിൽ [peek X Y]",
+    "discard_empty": "മാലിന്യം ശൂന്യമായിരിക്കുന്നു!",
+    "must_draw_first": "ആദ്യം [draw], [take], [knock], അല്ലെങ്കിൽ [peek X Y] എന്നീ അക്ഷരങ്ങൾ ഉപയോഗിക്കണം",
+    "cannot_discard_taken": "നിങ്ങൾക്ക് ഒഴിവാക്കുന്ന കൂമ്പാരത്തിൽ നിന്ന് എടുത്ത കാർഡ് ഒഴിവാക്കാൻ കഴിയില്ല. അത് മാറ്റേണ്ടതുണ്ട്.",
+    "have_drawn_card": "നിങ്ങൾക്ക് ഒരു വരച്ച കാർഡ് ഉണ്ട്. നിങ്ങൾ [swap X Y] അല്ലെങ്കിൽ [discard] അത് ചെയ്യേണ്ടതുണ്ട്.",
+    "need_drawn_swap": "കൈമാറാൻ ഒരു കാർഡ് വേണം.",
+    "need_drawn_discard": "കളയാൻ ഒരു കാർഡ് വേണം.",
+    "out_of_bounds": "പരിധിക്കു പുറത്തുള്ള സ്ഥാനം. വരി 1-{max_row}, നിര 1-{max_col} ഉപയോഗിക്കുക",
+    "knock_with_card": "ഒരു കാർഡ് വരച്ചുകൊണ്ട് തട്ടാനാവില്ല. ആദ്യം നിങ്ങളുടെ ഊഴം പൂർത്തിയാക്കുക.",
+    "already_knocked": "ഈ റൌണ്ട് ഇതിനകം തന്നെ ആരോ അടിച്ചു.",
+    "already_revealed": "ആ കാർഡ് ഇതിനകം വെളിപ്പെടുത്തിയിരിക്കുന്നു!"
+  },
+  "summary": {
+    "full": "ഗെയിം ഓവർ! {winner} കളിക്കാരൻ {score} പോയിന്റ് നേടി വിജയിക്കുന്നു! അവസാന സ്കോറുകൾ: {scores}",
+    "line": "കളിക്കാരൻ {pid}: {score} പോയിന്റുകൾ "
+  },
+  "board_str": {
+    "title": "=== ഗോൾഫ് കളി ===",
+    "discard": "ഒഴിവാക്കുന്ന കൂമ്പാരം: {card}",
+    "knocked": "കളിക്കാരന് {pid} മുട്ടി!",
+    "player_header": "കളിക്കാരൻ {pid} (സ്കോർ: {score}):"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Ti se Giugador {player_id} in del zöch de LinesOfAction.\nI tuoi pezzi i è '{side}', i pezzi de l'avversari i è '{other}'.\nFormat de la mossa: `[b1b3]` (coordinad de partenza - coordinad de destinazion). Una mossa valida la viaggia orizontalment, verticalment o diagonalment un numer de quadrad ugual al numer total de pezzi (de qualsiasi color) in quella linia. Te pödet saltà sora i tuoi pezzi, ma no sora i pezzi de l'avversari; aterà sora un pezzo de l'avversari el lo ciapa.  Vens quand tucc i tuoi pezzi i è conligad in del 8-vicin."
+  },
+  "board": {
+    "current_board": "Board: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "El format el dev vess e2e4 (da,a coordinate).",
+    "no_piece": "No {side} piece on {coord}.",
+    "identical": "Fonte e destinazion identich.",
+    "not_straight_or_diagonal": "La mossa la dev esercitàss drita o diagonal.",
+    "wrong_distance": "A gh'ha de spostà la distansa uguala a i pezzi in fila.",
+    "enemy_blocks": "La pèsa nemìga la bloca el camin.",
+    "destination_own": "Destinazion ocupada da la soa propia arma."
+  },
+  "game_action": {
+    "moved": "Giugador {player_id} l'ha spostaa {from} -> {to}",
+    "captured_suffix": "Giugador {player_id} l'ha spostaa {from} -> {to} e l'ha ciapaa on nemis."
+  },
+  "outcome": {
+    "win": "Tutt i pezz hinn staa ligà.",
+    "draw_no_capture": "60 mosse senza fà 'na cattura.",
+    "draw_repetition": "Posizion ripetiu tri volt."
+  }
+}

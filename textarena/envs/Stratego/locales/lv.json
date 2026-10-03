@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} Stratēģijā.\nJūsu mērķis ir sagrābt pretinieka Karogu vai iznīcināt visas viņu pārvietojamās figūras.\nJūsu armija ir izvietota uz galdiņa, ieskaitot jūsu Karogu, Bombas un citas figūras ar dažādiem rangiem.\n\n### Spēles instrukcijas\n1. **Pārvietošanas noteikumi:**\n   - Savā gājienā jūs varat pārvietot vienu figūru par vienu soli uz blakus esošo kvadrātu (augšup, lejup, pa kreisi vai pa labi), kas jau ir aizņemts ar jūsu figūrām.\n   - Piemērs: Figūra var pārvietoties no A1 uz B1 vai no A1 uz A2, ja B1 un A2 nav aizņemti ar spēlētāja paša figūrām.\n   - Ja izvēlētā figūra ir Bumba vai Karogs, to nevar pārvietot.\n2. **Kaujas:**\n   - Ja jūs pārvietojaties uz kvadrātu, kas ir aizņemts ar pretinieka figūru, tad notiks kauja:\n     - Figūra ar augstāku rangu uzvar un iznīcina pretinieka figūru.\n     - Ja rangi ir vienādi, abas figūras tiek noņemtas no galdiņa.\n     - **Īpašie gadījumi:**\n       - Bombas iznīcina lielāko daļu uzbrūkošo figūru, izņemot Kalnrači, kas atslābina Bombas.\n       - Spiegi var uzvarēt Maršalu, ja Spiegs uzbrūk pirmā, bet zaudē visām citām figūrām.\n3. **Stratēģiskie mērķi:**\n   - Identificējiet pretinieka figūras, izmantojot viņu kustības un kaujas.\n   - Aizsargājiet savu Karogu, mēģinot sagrābt pretinieka Karogu.\n   - Izmantojiet Skautus stratēģiski, lai iegūtu informāciju par pretinieka figūrām un uzbruktu vājākām.\n\n### Kā veikt gājienu:\n1. Norādiet koordinātas figūrai, kuru vēlaties pārvietot, un tās galamērķi.\n2. Izmantojiet formātu: [A0 B0], kur A0 ir sākuma pozīcija, un B0 ir galamērķis.\n   - Piemērs: Lai pārvietotu figūru no rindas 0, kolonnas 0 uz rindu 1, kolonnu 0, ievadiet [A0 B0].\n3. Pārliecinieties, ka galamērķis ir derīgs saskaņā ar pārvietošanas noteikumiem augšup.\n\n### Svarīgi piezīmējumi:\n- Galdiņš parādīs jūsu figūras un viņu pozīcijas, piemēram, MN, MS.\n- Galdiņš arī parādīs zināmās pozīcijas pretinieka figūrām bez to rangu atklāšanas, piemēram, ?.\n- Režģi ar ~ ir ezeri un nevar būt pārvietoti uz tiem.\n- Kā ieteikums, sāciet spēli, pārvietojot figūras, kas atrodas uz frontes līnijām, lai iegūtu informāciju par pretinieka figūrām. Spēlētāja 0 un spēlētāja 1 frontes līnijas ir rinda D un G attiecīgi.\n\nŠeit ir pašreizējais galdiņa stāvoklis:\n"
+  },
+  "board": {
+    "current_board": "Pašreizējais galdiņš:\n\n{board}\nPieejamie gājieni: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nederīgs darbības formāts. Spēlētājs {player_id} neievadīja gājienu formātā [A0 B0].",
+    "invalid_coordinates": "Nederīgs darbības formāts. Spēlētājs {player_id} neievadīja derīgas koordinātas.",
+    "not_own_piece": "Nederīgs darbības formāts. Spēlētājs {player_id} ir jāpārvieto viena no savām figūrām.",
+    "scout_through_pieces": "Nederīgs darbības formāts. Spēlētājs {player_id} nevar pārvietot Skautu caur citām figūrām.",
+    "scout_diagonal": "Nederīgs darbības formāts. Spēlētājs {player_id} nevar pārvietot Skautu diagonāli.",
+    "non_scout_multi_square": "Nederīgs darbības formāts. Figūras, izņemot Skautus, var pārvietoties tikai par vienu kvadrātu reizē.",
+    "move_into_lake": "Nederīgs darbības formāts. Spēlētājs {player_id} nevar pārvietoties uz ezeru.",
+    "move_onto_own_piece": "Nederīgs darbības formāts. Spēlētājs {player_id} nevar pārvietoties uz savu paša figūru.",
+    "move_bomb_or_flag": "Nederīgs darbības formāts. Spēlētājs {player_id} nevar pārvietot Bumbu vai Karogu."
+  },
+  "game_action": {
+    "you_moved": "Jūs esat pārvietojis savu figūru no {source} uz {dest}.",
+    "opponent_moved": "Spēlētājs {player_id} ir pārvietojis figūru no {source} uz {dest}.",
+    "you_equal_ranks": "Jūs esat pārvietojis savu figūru no {source} uz {dest}. Uzbrūkošā figūra bija {attacking_rank} un mērķa figūra bija {target_rank}. Tā kā rangi ir vienādi, abas figūras zaudēja.",
+    "opponent_equal_ranks": "Spēlētājs {player_id} ir pārvietojis figūru no {source} uz {dest}. Uzbrūkošā figūra bija {attacking_rank} un mērķa figūra bija {target_rank}. Tā kā rangi ir vienādi, abas figūras zaudēja.",
+    "you_miner_defused": "Jūs esat pārvietojis savu figūru no {source} uz {dest}. Uzbrūkošā figūra bija {attacking_rank} un mērķa figūra bija {target_rank}. Tā kā Kalnračiem var atslābināt Bombas, jūs uzvarējāt kaujā.",
+    "opponent_miner_defused": "Spēlētājs {player_id} ir pārvietojis figūru no {source} uz {dest}. Uzbrūkošā figūra bija {attacking_rank} un mērķa figūra bija {target_rank}. Tā kā Kalnračiem var atslābināt Bombas, jūs zaudējāt kaujā.",
+    "you_bomb_lost": "Jūs esat pārvietojis savu figūru no {source} uz {dest}. Uzbrūkošā figūra bija {attacking_rank} un mērķa figūra bija {target_rank}. Tā kā uzbrucējs nav Kalnraču, jūs zaudējāt kaujā.",
+    "opponent_bomb_won": "Spēlētājs {player_id} ir pārvietojis figūru no {source} uz {dest}. Uzbrūkošā figūra bija {attacking_rank} un mērķa figūra bija {target_rank}. Tā kā uzbrucējs nav Kalnraču, jūs uzvarējāt kaujā.",
+    "you_spy_won": "Jūs esat pārvietojis savu figūru no {source} uz {dest}. Uzbrūkošā figūra bija {attacking_rank} un mērķa figūra bija {target_rank}. Tā kā uzbrucējs ir Spiegs un mērķis ir Maršals, jūs uzvarējāt kaujā.",
+    "opponent_spy_lost": "Spēlētājs {player_id} ir pārvietojis figūru no {source} uz {dest}. Uzbrūkošā figūra bija {attacking_rank} un mērķa figūra bija {target_rank}. Tā kā uzbrucējs ir Spiegs un mērķis ir Maršals, jūs zaudējāt kaujā.",
+    "you_higher_won": "Jūs esat pārvietojis savu figūru no {source} uz {dest}. Uzbrūkošā figūra bija {attacking_rank} un mērķa figūra bija {target_rank}. Tā kā uzbrucējs ir augstāka ranga nekā mērķis, jūs uzvarējāt kaujā.",
+    "opponent_higher_lost": "Spēlētājs {player_id} ir pārvietojis figūru no {source} uz {dest}. Uzbrūkošā figūra bija {attacking_rank} un mērķa figūra bija {target_rank}. Tā kā uzbrucējs ir augstāka ranga nekā mērķis, jūs zaudējāt kaujā.",
+    "you_lower_lost": "Jūs esat pārvietojis savu figūru no {source} uz {dest}. Uzbrūkošā figūra bija {attacking_rank} un mērķa figūra bija {target_rank}. Tā kā uzbrucējs ir zemāka ranga nekā mērķis, jūs zaudējāt kaujā.",
+    "opponent_lower_won": "Spēlētājs {player_id} ir pārvietojis figūru no {source} uz {dest}. Uzbrūkošā figūra bija {attacking_rank} un mērķa figūra bija {target_rank}. Tā kā uzbrucējs ir zemāka ranga nekā mērķis, jūs uzvarējāt kaujā."
+  },
+  "outcome": {
+    "flag_captured": "Spēlētājs {player_id} ir sagrābis pretinieka Karogu!",
+    "no_movable_pieces": "Spēlētājs {winner_id} uzvar! Spēlētājam {loser_id} nav vairāk pārvietojamo figūru."
+  }
+}

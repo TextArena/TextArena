@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Droe neu Player {player_id} lam Dilema Tahanan Ulèe-Ulèe nyang geutempat {num_rounds} thôn.\n\nStruktur Geumeu:\n- Sigohlom keuputusan, droe neu {total_conversation_rounds} giliran keu meutakrib bebas.\n- Lheueh nyan, duwa pemain keuputusan bak giliran nan saban keu bekerja sama atawa mangkir.\n\nMatriks Bayaran (tetap saban thôn):\n- Duwa bekerja sama ➜ saban {cooperate_reward}\n- Duwa mangkir ➜ saban {mutual_defect_reward}\n- Saboh mangkir, saboh bekerja sama ➜ nan mangkir {defect_reward}, nan bekerja sama {sucker_reward}\n\nPeuneugah Geumeu:\n- Sareu konversasi: ketik teks nyang droe neu keuneuk.\n- Sareu keuputusan: tamah '[Cooperate]' atawa '[Defect]' (h'eut peuduli besar-keut). Droe neu jeuët tambah teks la'én sigohlom/saboh token."
+  },
+  "phases": {
+    "conversation_finished": "Marit uroe lé konversasi thôn {round}. Silakan jaweuek '[Cooperate]' atawa '[Defect]' lam \\boxed{{}}.",
+    "starting_round": "--- Mulai Ronde {round} ---",
+    "round_summary": "Hasélat thôn {round}:\n{outcome}\nPemain 0 meuhasil {r0} (total {score_0}), Pemain 1 meuhasil {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Pemain {winner} meunang {win_score} - {lose_score}.",
+    "draw": "Draw! Mandua peunampilan geu peutamong {s0}.",
+    "round_both_cooperate": "Duwa droe player beusaboh.",
+    "round_both_defect": "Mandua pemain nyan ka jiplueng.",
+    "round_p0_cooperates_p1_defects": "Pemain 0 bekerja sama, Pemain 1 mangkir.",
+    "round_p0_defects_p1_cooperates": "Pemain 0 meulinteung, pemain 1 bekerja sama."
+  }
+}

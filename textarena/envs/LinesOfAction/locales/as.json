@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "আপনি LinesOfAction গেমের খেলোয়াড় {player_id}।\nআপনার টুকরোগুলি '{side}', প্রতিপক্ষের টুকরোগুলি '{other}'।\nচাল বিন্যাস: `[b1b3]` (উৎস-স্থানাঙ্ক থেকে গন্তব্য-স্থানাঙ্ক)। একটি বৈধ চাল অনুভূমিক, উল্লম্ব, বা তির্যকভাবে সেই লাইনে মোট টুকরোর (যেকোনো রঙ) সমান সংখ্যক বর্গ ভ্রমণ করে। আপনি নিজের টুকরোর উপর দিয়ে লাফ দিতে পারেন, কিন্তু প্রতিপক্ষের টুকরোর উপর দিয়ে নয়; প্রতিপক্ষের উপর অবতরণ করলে তা ক্যাপচার হয়ে যায়।  সমস্ত টুকরো 8-প্রতিবেশী সংযুক্ত হলে জয় হয়।"
+  },
+  "board": {
+    "current_board": "পৰিষদঃ {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "বিন্যাস e2e4 হ'ব লাগিব (সংকেতসমূহৰ পৰা,লৈ) ।",
+    "no_piece": "{side}ৰ ওপৰত {coord}ৰ কোনো অংশ নাই।",
+    "identical": "উৎস আৰু গন্তব্য একে।",
+    "not_straight_or_diagonal": "সোজা বা তিৰ্যকভাবে চাল চলাব লাগিব।",
+    "wrong_distance": "এটা শাৰীত থকা টুকুৰাবোৰৰ সমান দূৰত্বত চলিব লাগিব।",
+    "enemy_blocks": "শত্ৰুৰ টুকুৰাটোৱে বাটটো বন্ধ কৰি দিছে।",
+    "destination_own": "নিজৰ টুকুৰা লৈ গন্তব্যস্থান।"
+  },
+  "game_action": {
+    "moved": "খেলুৱৈ {player_id} আগবাঢ়িছে {from} -> {to}",
+    "captured_suffix": "খেলুৱৈ {player_id}য়ে {from} -> {to}লৈ আগবাঢ়ি গৈ শত্ৰুক বন্দী কৰে।"
+  },
+  "outcome": {
+    "win": "সকলো টুকুৰা সংযুক্ত।",
+    "draw_no_capture": "৬০টা পদক্ষেপত কোনো ধৰা নপৰিল।",
+    "draw_repetition": "স্থিতি তিনি বাৰ পুনৰাবৃত্তি কৰা হৈছে।"
+  }
+}

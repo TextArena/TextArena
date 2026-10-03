@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "നിങ്ങൾ ക്ലോണ്ടൈക്ക് സോളിയർ കളിക്കുന്നു. നിങ്ങളുടെ ലക്ഷ്യം എല്ലാ കാർഡുകളും ഫൌണ്ടേഷൻ സ്റ്റാക്കുകളിലേക്ക് നീക്കുക എന്നതാണ്. ഗെയിം നിയമങ്ങൾഃ - ഫൌണ്ടേഷൻ സ്റ്റാക്കുകൾ (F1-F4): സ്യൂട്ട് എസിൽ നിന്ന് കിംഗ് വരെ നിർമ്മിക്കുക - ടേബിൾ സ്റ്റാക്കുകൾ (T1-T7): മാറിമാറി നിറങ്ങൾ (ചുവപ്പ് കറുപ്പിൽ, കറുപ്പ് ചുവപ്പിൽ) നിർമ്മിക്കുക - സ്റ്റോക്ക്ഃ കാർഡുകൾ മാലിന്യ സ്റ്റാക്കിലേക്ക് വരയ്ക്കുക - മാലിന്യങ്ങൾ (W): കളിക്കാൻ ലഭ്യമായ ഏറ്റവും മുകളിലുള്ള കാർഡ് കമാൻഡുകൾഃ - 'draw' - സ്റ്റോക്കിൽ നിന്ന് കാർഡുകൾ മാലിന്യത്തിലേക്ക് വരയ്ക്കുക - 'move <source> <destination> [count]' - സ്റ്റാക്കുകൾക്കിടയിൽ കാർഡുകൾ നീക്കുക ഉദാഹരണങ്ങൾഃ 'move W T1', 'move T1 F2', 'move T3 T5 2'. എണ്ണാനും 'all' ആകാം, ഇത് എല്ലാ മുഖംമൂടിഞ്ഞ കാർഡുകളും ഉടനടി നീക്കാൻ ശ്രമിക്കും. - 'forfeit' - ഗെയിം അവസാനിപ്പിക്കുകയും നിങ്ങളുടെ നിലവിലെ സ്കോർ ലോക്കുചെയ്യുകയും ചെയ്യുക - പൈൽ പ്രവർത്തനങ്ങൾഃ W (മാലിനു മുകളിൽ), ടേജുകൾ (T1-T7): സ്റ്റോക്ക് ചുവപ്പ് ചെയ്യുക - മുകളിൽ ചുവപ്പ് സ്റ്റോക്ക് (ചുവപ്പ് സ്റ്റാക്കുകൾ) - മാലിന് മുകളിലേക്ക് വരയ്ക്കുക - മാലിന് (W): കളിക്കാൻ ലഭ്യമായ ഏറ്റവും മുകളിലേക്ക് കളിക്കാൻ ലഭ്യമായ ഏറ്റവും മുകളിലുള്ള കാർഡുകൾ വരയ്ക്കുക കമാറ്റുക കമാൻ കമാൻ കമാൻഡുകൾഃ 'draw' - കളിക്കാൻ ലഭ്യമായ ഏറ്റവും മുകളിലേക്ക് കാർഡുകൾ 'draw' - 'draw' കമാൻ കമാൻ കമാൻ കമാൻ കമാൻഡുകൾ' - സ്റ്റോഡുകൾ - സ്റ്റോപ്പ് 'draw' - സ്റ്റോപ്പ്' ഉദാഹരണങ്ങൾ ഉപയോഗിച്ച് സ്റ്റാക്കുകൾ മാലിനുള്ള കാർഡുകൾ മാറ്റി സ്റ്റാക്കുകഃ 'm' T1', ടേജുകൾക്കിടയിൽ കാർഡുകൾ നീക്കുക, സ്റ്റാക്കുക, സ്റ്റാക്കുക, ടേജുകൾക്കിടയിൽ അവയെല്ലാം നീക്കം, ബാക്കിയവയാൽ, ടേജുകൾ നീക്കം ചെയ്താൽ, ബാക്കിയവയാൽ, കളിമാത്രം ബാക്കിയവ"
+  },
+  "format_error": {
+    "no_brackets": "അസാധുവായ ആക്ഷൻ ഫോർമാറ്റ്. ആക്ഷൻ അറ്റകുറ്റപ്പണികൾക്കുള്ളിലായിരിക്കണം.",
+    "no_closing_bracket": "അസാധുവായ ആക്ഷൻ ഫോർമാറ്റ്. അടയ്ക്കുന്ന ബ്രാക്കറ്റ് കാണുന്നില്ല ']'",
+    "empty_command": "ശൂന്യമായ കമാൻഡ്. 'draw' അല്ലെങ്കിൽ 'move <source> <destination> [count]' എന്ന് ടൈപ്പ് ചെയ്യുക",
+    "empty_action": "ശൂന്യമായ നടപടി",
+    "move_needs_args": "നീക്കുക കമാൻഡിന് ഉറവിടവും ലക്ഷ്യസ്ഥാനവും ആവശ്യമാണ്. ഉപയോഗം: 'move <source> <destination> [count]'",
+    "count_positive": "എണ്ണം ധനാത്മകമോ 'all' ആയിരിക്കണം",
+    "count_invalid": "അസാധുവായ എണ്ണം. ഒരു സംഖ്യ അല്ലെങ്കിൽ 'all' ഉപയോഗിക്കുക",
+    "unknown_command": "അജ്ഞാത കമാൻഡ് '{cmd}'. 'draw', 'move <source> <destination> [count]', അല്ലെങ്കിൽ 'forfeit' ഉപയോഗിക്കുക",
+    "wrapped": "നടപടി {n}: {msg}"
+  },
+  "action_result": {
+    "success": "നടപടി {n}: {msg}",
+    "before_failure": "പരാജയത്തിന് മുമ്പ് നടപ്പാക്കിയ {n} നടപടി.",
+    "failed": "നടപടി {n} പരാജയപ്പെട്ടു: {msg}"
+  },
+  "move_result": {
+    "drew": "സ്റ്റോക്കിൽ നിന്നും മാലിന്യത്തിലേക്ക് മാറ്റി.",
+    "cannot_draw": "ഓഹരിയും മാലിന്യവും ഒഴിഞ്ഞു.",
+    "invalid_pile": "അസാധുവായ പൈൽ നാമം. W, F1-F4, അല്ലെങ്കിൽ T1-T7 ഉപയോഗിക്കുക",
+    "foundation_one_card": "ഒരു കാർഡ് മാത്രമേ ഫൌണ്ടേഷന് നീക്കാൻ കഴിയൂ.",
+    "waste_to_foundation_ok": "മാലിന്യത്തിൽ നിന്നും ഫൌണ്ടേഷനിലേക്കു മാറ്റി വച്ച കാർഡ് F{dst}",
+    "waste_to_foundation_bad": "ആ ഫൌണ്ടേഷൻ കൂമ്പാരത്തിലേക്ക് മാലിന്യ കാർഡ് നീക്കാൻ കഴിയില്ല",
+    "tableau_to_foundation_ok": "കാർഡ് ടേബിൾ T{src} ൽ നിന്നും ഫൌണ്ടേഷൻ F{dst} ലേക്ക് നീക്കി",
+    "tableau_to_foundation_bad": "ആ ഫൌണ്ടേഷൻ പൈലിലേക്ക് ടോബ്ലെ കാർഡ് നീക്കാൻ കഴിയില്ല",
+    "foundation_to_foundation": "ഫൌണ്ടേഷന് നിന്നും ഫൌണ്ടേഷന് മാറാന് കഴിയില്ല",
+    "waste_to_tableau_one_card": "ഒരു കാർഡ് മാത്രമേ മാലിന്യത്തിൽ നിന്ന് ടേബിളിലേക്ക് മാറ്റാൻ കഴിയൂ.",
+    "waste_to_tableau_ok": "മാലിന്യത്തിൽ നിന്നും T{dst} പട്ടികയിലേക്ക് മാറ്റി",
+    "waste_to_tableau_bad": "ആ ടാബ്ലൂ സ്റ്റാക്കിൽ മാലിന്യ കാർഡ് സ്ഥാപിക്കാൻ കഴിയില്ല",
+    "no_face_up": "മുഖം തുറന്നിരിക്കുന്ന കാർഡുകളൊന്നും നീക്കാൻ പാടില്ല.",
+    "tableau_to_tableau_ok": "{count} കാർഡ് (കൾ) പട്ടികയിൽ നിന്ന് T{src} ലേക്ക് T{dst} ലേക്ക് നീക്കി",
+    "tableau_to_tableau_bad": "T{src} നിന്ന് T{dst} ലേക്ക് {count} കാർഡ്(കൾ) മാറ്റില്ല",
+    "foundation_to_tableau_one_card": "ഫൌണ്ടേഷനിൽ നിന്നും ടേബിളിലേക്ക് ഒരു കാർഡ് മാത്രമേ നീക്കാൻ കഴിയൂ.",
+    "foundation_empty": "ഫൌണ്ടേഷൻ F{src} ശൂന്യമാണ്",
+    "foundation_to_tableau_ok": "കാർഡ് F{src} ഫൗണ്ടേഷനിൽ നിന്ന് ടേബുൾടോയിൽ T{dst}ൽ മാറ്റി",
+    "foundation_to_tableau_bad": "ഫൗണ്ടേഷൻ കാർഡ് ടേബുൾടോയിൽ T{dst}ൽ വയ്ക്കില്ല",
+    "to_waste_or_stock": "മാലിന്യത്തിലേക്കോ സ്റ്റോക്കിലേക്കോ മാറ്റാനാവില്ല"
+  },
+  "outcome": {
+    "forfeit": "കളി നഷ്ടപ്പെട്ടു. അവസാന സ്കോർ: {score} ഫൌണ്ടേഷനിലെ കാർഡുകൾ.",
+    "won": "അഭിനന്ദനങ്ങൾ, നിങ്ങൾ ക്ലോണ്ടൈക്ക് സോളിറ്റയർ നേടി!",
+    "turn_limit": "ഗെയിം ഓവർ! നിങ്ങൾ പരമാവധി {max_turns} തിരിവുകളിൽ എത്തി. സ്കോർഃ ഫൌണ്ടേഷനുകളിൽ {score} കാർഡുകൾ."
+  },
+  "board": {
+    "title": "=== ക്ലോണ് ഡൈക്ക് സോളിറ്റയർ ===",
+    "turn": "തിരിവ്: {turn}/{max_turns}",
+    "stock": "സ്റ്റോക്ക്: {stock} കാർഡുകൾ",
+    "waste": "മാലിന്യം (W): {waste}",
+    "foundations_header": "ഫൌണ്ടേഷനുകൾ",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "പട്ടിക:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

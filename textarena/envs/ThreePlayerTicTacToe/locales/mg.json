@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Ianao no mpilalao {player_id} ao amin'ny lalao Tic Tac Toe ho an'ny mpilalao telo. Ny marikao dia '{symbol}'. Mifandimby mametraka ny marikao eo amin'ny solaitrabe 5x5 ianao mba hamoronana tsipika efatra. Ny tsipika dia mety marindrano, mitsangana, na diagonal. Alefaso ny hetsikao amin'ny alàlan'ny endrika '[4] hanamarihana ny sela 4."
+  },
+  "board": {
+    "current_board": "Birao ankehitriny: {board} Hetsika azo atao: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Tsy mety ny endrika famindrana. Ampiasao ny \"[cell]\" raha 0-{max_cell} ny sela.",
+    "out_of_range": "Nomeraon-telefaona tsy mety: {cell}. Tsy maintsy eo anelanelan'ny 0 sy {max_cell}.",
+    "already_occupied": "Efa misy olona ao amin'ny sela {cell}.",
+    "made_invalid": "Mpilalao {player_id} nanao hetsika tsy manan-kery"
+  },
+  "game_action": {
+    "placed": "Ny mpilalao {player_id} dia mametraka ny marika ({symbol}) ao amin'ny saha ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Mandresy ny mpilalao {player_id} ({symbol})!",
+    "draw": "Tsy nisy nifanditra ny lalao!"
+  }
+}

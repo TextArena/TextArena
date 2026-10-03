@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "I Player {player_id} i nih LinesOfAction game-ah.\nI piece '{side}' an ni, opponent piece '{other}' an ni.\nMove format: `[b1b3]` (from-coord to-coord). Move dan a ni - horizontally, vertically, emaw diagonally, a line-a piece zawng zawng (colour chi pawh) a ni. I piece i jump thei, mahse opponent piece i jump thei lo; opponent piece i capture thei.  I piece zawng zawng 8-neighbour connect a nih chuan i win."
+  },
+  "board": {
+    "current_board": "Board: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "A format chu e2e4 (from,to coordinates) a ni tur a ni.",
+    "no_piece": "No {side} piece on {coord}. A ni chuan, a tihtur chu:",
+    "identical": "A chhuahna leh a thlenna hmun chu inang vek.",
+    "not_straight_or_diagonal": "A kalna chu a dik emaw, diagonal-a awm tûr a ni.",
+    "wrong_distance": "A tlâng ang lek a kal tûr a ni.",
+    "enemy_blocks": "Thuneitute'n kawng an lo dâl a.",
+    "destination_own": "A tumna hmun chu mahni inrinchhanin a luah."
+  },
+  "game_action": {
+    "moved": "Player {player_id} a ṭulh {from} -> {to}",
+    "captured_suffix": "Player {player_id} chuan {from} atangin {to} ah kal in, sipai dushman a man."
+  },
+  "outcome": {
+    "win": "A pêng zawng zawngte chu a inzawm vek.",
+    "draw_no_capture": "60 a kalin an hmu lo.",
+    "draw_repetition": "A hmun chu vawi thum a sawi nawn leh."
+  }
+}

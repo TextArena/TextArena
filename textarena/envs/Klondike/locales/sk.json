@@ -1,0 +1,74 @@
+{
+  "_comment": "Súbor lokalizácie Klondike Solitaire. NEPREKLADAJTE kľúče (ľavá strana). Prekladajte iba hodnoty (pravá strana).",
+  "_slots": {
+    "{n}": "Index akcie v rámci čiarového príkazu oddeleného čiarkami, 1-založený",
+    "{msg}": "Vnorená správa o výsledku akcie (už lokalizovaná)",
+    "{count}": "Počet lízancov, ktoré sa pohybujú",
+    "{src}": "Číslo zdrojového stĺpca, 1-založený",
+    "{dst}": "Číslo cieľového stĺpca, 1-založený",
+    "{cmd}": "Neznámy príkaz, ktorý hráč napísal (nepreložený)",
+    "{max_turns}": "Maximálny počet ťahov pred koncom hry",
+    "{score}": "Počet kariet v základoch",
+    "{board}": "Vykreslená ASCII doska (nikdy neprekladať)",
+    "{turn}": "Aktuálny ťah",
+    "{stock}": "Počet kariet v zásobe",
+    "{waste}": "Horná karta v odpadku, alebo '--' ak je prázdna (nikdy neprekladať)",
+    "{cards}": "Karty v stĺpci ako neutrálne štítky, alebo '--' ak je prázdna (nikdy neprekladať)"
+  },
+  "player_prompt": {
+    "intro": "Hrajete Klondike Solitaire. Váš cieľ je presunúť všetky karty do základoch.\n\nPravidlá hry:\n- Základy (F1-F4): Stavajte od esa po kráľa v rámci farby\n- Stĺpce (T1-T7): Stavajte dolu striedajúc farby (červená na čiernu, čierna na červenú)\n- Zásoba: Ťahajte karty do odpadu\n- Odpad (W): Horná karta je k dispozícii pre hranie\n\nPríkazy:\n- 'draw' - Ťahajte karty zo zásoby do odpadu\n- 'move <zdroj> <cieľ> [počet]' - Presúvajte karty medzi stĺpcami\n  Príklady: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Počet môže byť tiež 'all', čo sa pokúsi presunúť všetky lízance.\n- 'forfeit' - Ukončite hru okamžite a uzamknite svoje aktuálne skóre\n- Názvy stĺpcov: W (odpad), F1-F4 (základy), T1-T7 (stĺpce)\n\nMôžete vykonať viacero akcií v jednom ťahu oddelením ich čiarkami:\n  Príklad: 'draw, move W T1, move T2 F1'\n\nIba králi môžu byť umiestnení na prázdne stĺpce.\nAkcie sa vykonávajú v poradí - ak jedna zlyhá, zostávajúce akcie sa preskočia.\nPoužite 'forfeit', ak veríte, že hra je nemožná vyhrať."
+  },
+  "format_error": {
+    "no_brackets": "Neplatný formát akcie. Akcia by mala byť v zátvorkách.",
+    "no_closing_bracket": "Neplatný formát akcie. Chýba uzatvárajúca zátvorka ']'",
+    "empty_command": "Prázdny príkaz. Napíšte 'draw' alebo 'move <zdroj> <cieľ> [počet]'",
+    "empty_action": "Prázdna akcia",
+    "move_needs_args": "Príkaz move vyžaduje zdroj a cieľ. Použitie: 'move <zdroj> <cieľ> [počet]'",
+    "count_positive": "Počet musí byť kladný alebo 'all'",
+    "count_invalid": "Neplatný počet. Použite číslo alebo 'all'",
+    "unknown_command": "Neznámy príkaz '{cmd}'. Použite 'draw', 'move <zdroj> <cieľ> [počet]', alebo 'forfeit'",
+    "wrapped": "Akcia {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Akcia {n}: {msg}",
+    "before_failure": "Vykonané {n} akcie pred zlyhaním.",
+    "failed": "Akcia {n} zlyhala: {msg}"
+  },
+  "move_result": {
+    "drew": "Ťahané karty zo zásoby do odpadu.",
+    "cannot_draw": "Nemôžete ťahať. Obe zásoba aj odpad sú prázdne.",
+    "invalid_pile": "Neplatný názov stĺpca. Použite W, F1-F4, alebo T1-T7",
+    "foundation_one_card": "Môžete presunúť iba jednu kartu do základu",
+    "waste_to_foundation_ok": "Presunutá karta z odpadu do základu F{dst}",
+    "waste_to_foundation_bad": "Nemôžete presunúť kartu z odpadu do tohto základu",
+    "tableau_to_foundation_ok": "Presunutá karta zo stĺpca T{src} do základu F{dst}",
+    "tableau_to_foundation_bad": "Nemôžete presunúť kartu zo stĺpca do tohto základu",
+    "foundation_to_foundation": "Nemôžete presunúť kartu zo základu do základu",
+    "waste_to_tableau_one_card": "Môžete presunúť iba jednu kartu z odpadu do stĺpca",
+    "waste_to_tableau_ok": "Presunutá karta z odpadu do stĺpca T{dst}",
+    "waste_to_tableau_bad": "Nemôžete umiestniť kartu z odpadu na tento stĺpec",
+    "no_face_up": "Žiadne lízance na presunutie",
+    "tableau_to_tableau_ok": "Presunuté {count} karty zo stĺpca T{src} do T{dst}",
+    "tableau_to_tableau_bad": "Nemôžete presunúť {count} kariet zo stĺpca T{src} do T{dst}",
+    "foundation_to_tableau_one_card": "Môžete presunúť iba jednu kartu zo základu do stĺpca",
+    "foundation_empty": "Základ F{src} je prázdny",
+    "foundation_to_tableau_ok": "Presunutá karta zo základu F{src} do stĺpca T{dst}",
+    "foundation_to_tableau_bad": "Nemôžete umiestniť kartu zo základu na stĺpec T{dst}",
+    "to_waste_or_stock": "Nemôžete presunúť kartu do odpadu alebo zásoby"
+  },
+  "outcome": {
+    "forfeit": "Hra bola ukončená. Konečné skóre: {score} kariet v základoch.",
+    "won": "Gratulujeme! Vyhráli ste Klondike Solitaire!",
+    "turn_limit": "Hra skončila! Dosiahli ste maximálny počet {max_turns} ťahov. Skóre: {score} kariet v základoch."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Ťah: {turn}/{max_turns}",
+    "stock": "Zásoba: {stock} kariet",
+    "waste": "Odpad (W): {waste}",
+    "foundations_header": "Základy:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Stĺpce:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

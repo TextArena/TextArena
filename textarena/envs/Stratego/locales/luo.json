@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Inwe Jaduong' {player_id} gi Stratego.\nDhumo luo inwe neno gi kawuono moko ma jaduongo.\nJaduong' inwe gi moko ma oketo, Bomu, gi moko ma wawuonoi moko.\n\n### Luo Moko\n1. **Moko ma Oketo:**\n   - Ka inwe odwaro moko, inwe oketo moko dhi e thim.\n   - Mfano: Moko ma oketo dhi A1 to B1 or A1 to A2 ka B1 gi A2 onge moko ma inwe.\n   - Ka moko ma oketo ni Bomu or Jend, inwe oketo.\n2. **Moko ma Otimo:**\n   - Ka inwe odwaro moko dhi e thim ma jaduongo, moko ma otimo moko:\n     - Moko ma wawuonoi ochiel gi moko ma kawuono.\n     - Ka moko wawuonoi gi moko kawuonoi wawuonoi, moko wawuonoi ochiel.\n     - **Moko Ma Wawuonoi:**\n       - Bomu ochiel moko ma otimo moko ma Miner, ma Miner gi defuse Bomu.\n       - Jend ochiel moko ma otimo moko ma Marshal ka Jend otimo kwanza, lakini Jend ochiel gi moko ma wawuonoi.\n3. **Dhumo Luo:**\n   - Neno moko ma jaduongo dhi moko ma oketo gi moko ma otimo.\n   - Konyo moko ma inwe gi kawuono moko ma jaduongo.\n   - Dhumo Scouts gi neno moko ma jaduongo gi moko ma oketo.\n\n### Neno Moko Ma Oketo:\n1. Neno moko ma oketo dhi e thim ma inwe.\n2. Dhumo format: [A0 B0], ka A0 ni thim ma oketo, gi B0 ni thim ma kawuono.\n   - Mfano: Oketo moko dhi row 0, column 0 to row 1, column 0, input [A0 B0].\n3. Neno moko ma kawuono ni valid dhi moko ma oketo.\n\n### Neno Ma Wawuonoi:\n- Jaduong' inwe gi moko ma oketo gi thim, e.g. MN, MS.\n- Jaduong' inwe gi moko ma jaduongo gi thim onge moko ma wawuonoi, e.g. ?.\n- Thim gi ~ ni lakes gi onge oketo.\n- Ka dhumo, konyo moko ma inwe gi moko ma oketo dhi front lines gi neno moko ma jaduongo. Jaduong' 0 gi jaduongo 1's frontlines ni row D gi G respectively.\n\nMoko ma Jaduong' inwe:\n"
+  },
+  "board": {
+    "current_board": "Jaduong' Inwe:\n\n{board}\nMoko Ma Oketo: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Yo ma ok owinjore mar tim. Jalo {player_id} ne ok odonjo e yo mochanore ni [A0 B0] .",
+    "invalid_coordinates": "Yo ma ok owinjore mar tim. Jalo {player_id} ne ok odonjo kod co-ordinates mowinjore.",
+    "not_own_piece": "Yo ma ok owinjore mar timo gimoro. Jalo {player_id} nyaka gol achiel kuom gige mag tugo mare owuon.",
+    "scout_through_pieces": "Yo ma ok owinjore mar timo gimoro. Jalo {player_id} ok nyal loko ng'at machielo e kidienje mamoko.",
+    "scout_diagonal": "Yo ma ok owinjore mar tim. Jalo {player_id} ok nyal loko jang'icho e yo mong'iyo malo.",
+    "non_scout_multi_square": "Yo ma ok owinjore mar timo gimoro. Ng'ato ka ng'ato, mak mana joma nono gik moko nyalo loko kidieny achiel kende e kinde moro.",
+    "move_into_lake": "Yo ma ok owinjore mar timo tim. Jalo {player_id} ok nyal dhi e nam.",
+    "move_onto_own_piece": "Yo ma ok owinjore mar timo gimoro. Jalo {player_id} ok nyal dhi e kidieny margi giwegi.",
+    "move_bomb_or_flag": "Yo ma ok owinjore mar tim. Jalo {player_id} ok nyal loko bom kata bendera."
+  },
+  "game_action": {
+    "you_moved": "Idwaro wach moko dhi {source} to {dest}.",
+    "opponent_moved": "Jalo {player_id} oseloko kidieny mar {source} e {dest}.",
+    "you_equal_ranks": "Idwaro wach moko dhi {source} to {dest}. Moko ma otimo moko {attacking_rank} gi moko ma kawuono moko {target_rank}. Kwa kuwa moko wawuonoi gi moko kawuonoi wawuonoi, moko wawuonoi ochiel.",
+    "opponent_equal_ranks": "Jaduong' {player_id} odwaro moko dhi {source} to {dest}. Moko ma otimo moko {attacking_rank} gi moko ma kawuono moko {target_rank}. Kwa kuwa moko wawuonoi gi moko kawuonoi wawuonoi, moko wawuonoi ochiel.",
+    "you_miner_defused": "Idwaro wach moko dhi {source} to {dest}. Moko ma otimo moko {attacking_rank} gi moko ma kawuono moko {target_rank}. Kwa kuwa Miner gi defuse Bomu, inwe ochiel.",
+    "opponent_miner_defused": "Jaduong' {player_id} odwaro moko dhi {source} to {dest}. Moko ma otimo moko {attacking_rank} gi moko ma kawuono moko {target_rank}. Kwa kuwa Miner gi defuse Bomu, inwe ochiel.",
+    "you_bomb_lost": "Idwaro wach moko dhi {source} to {dest}. Moko ma otimo moko {attacking_rank} gi moko ma kawuono moko {target_rank}. Kwa kuwa otimo ni Bomu, inwe ochiel.",
+    "opponent_bomb_won": "Jaduong' {player_id} odwaro moko dhi {source} to {dest}. Moko ma otimo moko {attacking_rank} gi moko ma kawuono moko {target_rank}. Kwa kuwa otimo ni Bomu, inwe ochiel.",
+    "you_spy_won": "Idwaro wach moko dhi {source} to {dest}. Moko ma otimo moko {attacking_rank} gi moko ma kawuono moko {target_rank}. Kwa kuwa Jend gi otimo kwanza, inwe ochiel.",
+    "opponent_spy_lost": "Jaduong' {player_id} odwaro moko dhi {source} to {dest}. Moko ma otimo moko {attacking_rank} gi moko ma kawuono moko {target_rank}. Kwa kuwa Jend gi otimo kwanza, inwe ochiel.",
+    "you_higher_won": "Idwaro wach moko dhi {source} to {dest}. Moko ma otimo moko {attacking_rank} gi moko ma kawuono moko {target_rank}. Kwa kuwa otimo ni wawuonoi, inwe ochiel.",
+    "opponent_higher_lost": "Jaduong' {player_id} odwaro moko dhi {source} to {dest}. Moko ma otimo moko {attacking_rank} gi moko ma kawuono moko {target_rank}. Kwa kuwa otimo ni wawuonoi, inwe ochiel.",
+    "you_lower_lost": "Idwaro wach moko dhi {source} to {dest}. Moko ma otimo moko {attacking_rank} gi moko ma kawuono moko {target_rank}. Kwa kuwa otimo ni kawuonoi, inwe ochiel.",
+    "opponent_lower_won": "Jaduong' {player_id} odwaro moko dhi {source} to {dest}. Moko ma otimo moko {attacking_rank} gi moko ma kawuono moko {target_rank}. Kwa kuwa otimo ni kawuonoi, inwe ochiel."
+  },
+  "outcome": {
+    "flag_captured": "Jalo {player_id} osekawo bendera mar jasike!",
+    "no_movable_pieces": "Jaduong' {winner_id} owino! Jaduong' {loser_id} onge moko ma oketo."
+  }
+}

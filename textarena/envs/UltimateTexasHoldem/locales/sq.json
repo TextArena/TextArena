@@ -1,0 +1,81 @@
+{
+  "_comment": "Skedari i lokalizimit për Ultimate Texas Hold'em. MOS përkthej çelësat (ana e majtë). Përkthej vetëm vlerat (ana e djathtë). Mbaj çdo {placeholder} të njëjtë.",
+  "_slots": {
+    "{start_chips}": "Numri fillestar i çipave, p.sh. 1000",
+    "{ante}": "Shuma e ante/blind bet, p.sh. 25",
+    "{ante4}": "Katër herë shuma e ante, p.sh. 100",
+    "{ante2}": "Dy herë shuma e ante, p.sh. 50",
+    "{round}": "Numri aktual i raundit",
+    "{chips}": "Numri aktual i çipave të lojtarit",
+    "{hand}": "Lista e etiketave të kartave të ndara me presje, p.sh. 'A♠, K♥', ose teksti i lokalizuar për 'asnjë kartë'",
+    "{phase}": "Etiketa e fazës aktuale (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Lista e veprimeve të disponueshme të ndara me presje, p.sh. '[play_bet_4x], [check]'",
+    "{available}": "Lista e veprimeve të disponueshme të ndara me presje",
+    "{blind}": "Shuma e blind bet",
+    "{play}": "Shuma e play bet",
+    "{cards}": "Lista e etiketave të kartave të ndara me presje, p.sh. 'Q♣, 7♦, 2♠'",
+    "{name}": "Emri i lokalizuar i një dorë pokeri, futur fjalë për fjalë",
+    "{amount}": "Shuma e çipave",
+    "{net}": "Ndryshimi net i çipave për raundin (mund të jetë negativ)",
+    "{max_turns}": "Numri maksimal i raundeve",
+    "{winner_rounds}": "Numri i raundeve të përfunduara"
+  },
+  "player_prompt": {
+    "no_cards": "Asnjë kartë ende",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Lojtar i vetëm kundër dealerit\n\n📖 PËRMBLEDHJE E LOJËS:\n• Filloni me {start_chips} çipave\n• Një dekë e vetme prej 52 kartash (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Luani kundër dealerit (shtëpisë)\n• Çdo raund ndjek strukturën e Ultimate Texas Hold'em: postoni ANTE dhe BLIND bet, merrni 2 kartat e fshehura, vendosni në PLAY bet gjatë fazave të betimit, pastaj zbuloni kartat e komunitetit dhe krahasoni dorën tuaj më të mirë me atë të dealerit. Qëllimi juaj është të maksimizoni fitimet tuaja (kur keni dorën më të mirë), ndërsa minimizoni humbjet tuaja (kur keni dorën më të keqe).\n• Loja përfundon kur arrini 0 çipave ose më pak në fillim të raundit (HUMBJE) ose përfundoni 1000 raunde me çipave (FITORE)\n\n💰 STRUKTURA E BETIMIT:\n• ANTE: Bet i detyrueshëm ${ante} çdo raund\n• BLIND: Bet i detyrueshëm ${ante} çdo raund\n• PLAY: Bet opsional gjatë lojës. Gjatë raundit, mund të zgjidhni VETËM NJË nga të mëposhtmet: (${ante4} nëse bëhet në PRE-FLOP, ${ante2} nëse bëhet në FLOP, ose ${ante} nëse bëhet në RIVER. Mund të palosni në RIVER, duke hequr dorë nga loja, dhe duke mos bërë asnjë bet.)\n\n🎴 SHPËRNDARJA E KARTAVE:\n• Merrni 2 kartat e fshehura (kartat tuaja të fshehura)\n• Dealeri merr 2 kartat e fshehura (të fshehura nga ju)\n• 5 kartat e komunitetit shpërndahen të fshehura në fillim\n• Kartat e komunitetit zbulohen progresivisht gjatë fazave të lojës\n\n🏆 KUALIFIKIMI I DEALERIT:\n• Dealeri duhet të ketë të paktën një ÇIFT (2 kartat e të njëjtit rang) për të kualifikuar, duke përdorur 2 kartat në dorën e tyre dhe 5 kartat e komunitetit.\n• Kualifikimi i dealerit ndikon në rezultatet e betimit, siç do të shpjegohet më vonë.\n\n🎮 FAZAT E LOJËS & VEPRIMET:\n📋 PRE-FLOP:\n  • Veprimet: [4x] (${ante4}) ose [check]\n  • [4x]: Vendos ${ante4} PLAY bet, zbulon 3 kartat e para të komunitetit\n  • [check]: Asnjë bet shtesë, zbulon 3 kartat e para të komunitetit\n\n📋 FLOP:\n  • Nëse është vendosur bet 4x: Vetëm [skip] disponueshëm (zbulon automatikisht 2 kartat e fundit të komunitetit)\n  • Nëse nuk është vendosur bet 4x: [2x] (${ante2}) ose [check]\n  • [2x]: Vendos ${ante2} PLAY bet, zbulon 2 kartat e fundit të komunitetit\n  • [check]: Asnjë bet shtesë, zbulon 2 kartat e fundit të komunitetit\n\n📋 RIVER:\n  • Nëse është vendosur bet 4x ose 2x: Vetëm [skip] disponueshëm (procedon automatikisht në showdown)\n  • Nëse nuk është vendosur asnjë PLAY bet: [1x] (${ante}) ose [fold]\n  • [1x]: Vendos ${ante} PLAY bet, procedon në showdown\n  • [fold]: Heq dorë nga loja, humbet ANTE dhe BLIND bet\n\n📋 SHOWDOWN:\n  • Të gjitha kartat zbulohen dhe vlerësohen\n  • Dora më e mirë nga 7 kartat (2 kartat e fshehura + 5 kartat e komunitetit)\n  • Betet vendosen sipas rregullave të pagimit\n\n💎 PAGUJT E BETEVE:\n📊 ANTE BET:\n  • Dealeri nuk kualifikon: PUSH (bet i kthyer)\n  • Dealeri kualifikon dhe fiton: 1:1 pagim (bet + fitim)\n  • Dealeri kualifikon dhe humbet: Bet humbur\n  • Barazim: PUSH (bet i kthyer)\n\n📊 BLIND BET:\n  • Nuk ndikohet nga kualifikimi i dealerit\n  • Fiton: Bet i kthyer dhe pagim shtesë bazuar në forcën e dorës\n  • Humbet: Bet humbur\n  • Barazim: PUSH (bet i kthyer)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Më pak se Straight: Asnjë pagim shtesë\n\n📊 PLAY BET:\n  • Nuk ndikohet nga kualifikimi i dealerit\n  • Krahasim direkt: Dora juaj më e mirë kundër dorës më të mirë të dealerit\n  • Fiton: 1:1 pagim (bet + fitim)\n  • Humbet: Bet humbur\n  • Barazim: PUSH (bet i kthyer)\n\n🎯 RANKINGU I DORËVE POKER (Më e mira në më të keqen):\n  1. Royal Flush: A-K-Q-J-10 të të njëjtit suit\n  2. Straight Flush: 5 kartat të njëpasnjëshme të të njëjtit suit\n  3. Four of a Kind: 4 kartat të të njëjtit rang\n  4. Full House: 3 kartat të njëjtit rang + 2 kartat të njëjtit rang\n  5. Flush: 5 kartat të të njëjtit suit\n  6. Straight: 5 kartat të njëpasnjëshme\n  7. Three of a Kind: 3 kartat të të njëjtit rang\n  8. Two Pair: 2 çifte të kartave të ndryshme\n  9. One Pair: 2 kartat të të njëjtit rang\n  10. High Card: Karta më e lartë fiton\n\n⌨️  KOMANDAT E VEPRIMËVE:\n• [4x] ose [play bet 4x]: Vendos ${{self.ante_amount*4}} PLAY bet\n• [2x] ose [play bet 2x]: Vendos ${{self.ante_amount*2}} PLAY bet\n• [1x] ose [play bet 1x]: Vendos ${{self.ante_amount*1}} PLAY bet\n• [check] ose [c]: Check (asnjë bet shtesë)\n• [fold] ose [f]: Fold (heq dorë nga loja)\n• [skip] ose [s]: Skip në fazën e radhës (kur nuk është nevojë për veprim)\n\n💡 KËSHILLA STRATEGJIKE:\n• Dorët e forta fillestare (çifte, kartat e larta) shpesh justifikojnë betet 4x\n• Konsideroni kualifikimin e dealerit - dorët e dobëta mund të pushojnë nëse dealeri nuk kualifikon\n• BLIND bet mund të jetë shumë fitimprurës me dorë të fortë (Royal Flush = 500:1!)\n• Mbajeni në mend çipat tuaj! Nëse shkon në 0 ose më pak në fillim të raundit, humbet.\n\n⚠️  SHËNIME TË RËNDËSISHME:\n• ANTE dhe BLIND bet janë të detyrueshme çdo raund\n• PLAY bet janë opsionale dhe strategjike\n• Sigurohuni që të futni veprimin e saktë, dhe vetëm një veprim në të njëjtën kohë.\n\n",
+    "state": "🎯 RAUND {round}\n💰 Çipat: {chips}\n🎴 Dora juaj: {hand}\n📊 Betet aktuale: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Faza: {phase}\n🎯 Veprimet e disponueshme: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Raundi {round} filloi! Betet: ANTE ${ante}, BLIND ${blind}. Kini {chips} çipave të mbetura.",
+    "your_hand": "🎴 Dora juaj: {hand}",
+    "flop_revealed": "🃏 FLOP zbulua: {cards}",
+    "river_revealed": "🃏 RIVER zbulua: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Veprim i pavlefshëm për fazën aktuale. Veprimet e disponueshme: {available}",
+    "message": "❌ Veprim i pavlefshëm! Veprimet e disponueshme: {available}"
+  },
+  "action": {
+    "folded": "🃏 Ju palosët."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Dora e dealerit: {cards}",
+    "community_cards": "🃏 Kartat e komunitetit: {cards}",
+    "player_best": "🎴 Dora më e mirë e lojtarit: {name} ({cards})",
+    "dealer_best": "🎴 Dora më e mirë e dealerit: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE bet HUMBUR! -${ante} (palosur)",
+    "blind_lost_folded": "❌ BLIND bet HUMBUR! -${blind} (palosur)",
+    "ante_won": "✅ ANTE bet FITUE! +${amount}",
+    "ante_pushed": "🔄 ANTE bet PUSHUAR! ${ante} i kthyer",
+    "ante_lost": "❌ ANTE bet HUMBUR! -${ante}",
+    "blind_won": "✅ BLIND bet FITUE! +${amount}",
+    "blind_pushed": "🔄 BLIND bet PUSHUAR! ${blind} i kthyer",
+    "blind_lost": "❌ BLIND bet HUMBUR! -${blind}",
+    "play_won": "✅ PLAY bet FITUE! +${amount}",
+    "play_pushed": "🔄 PLAY bet PUSHUAR! ${play} i kthyer",
+    "play_lost": "❌ PLAY bet HUMBUR! -${play}",
+    "net_gain": "🎉 Raundi {round} përfundoi! Fitim net: +${net}",
+    "net_loss": "💸 Raundi {round} përfundoi! Humbje net: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 LOJA PËRFUNDOI! {max_turns} raunde përfunduan. Kini ${chips} çipave - JU FITUAT!",
+    "game_over_lose": "🏁 LOJA PËRFUNDOI! JU HUMBËT! Dealeri fitoi!",
+    "reward_win": "Lojtari përfundoi {winner_rounds} raunde me ${chips} çipave",
+    "reward_lose": "Lojtari humbi çipat në raundin {round}",
+    "reward_win_max": "Lojtari përfundoi {max_turns} raunde me ${chips} çipave"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Katër të njëjtit",
+    "full_house": "Shtëpi e plotë",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Tre të njëjtit",
+    "two_pair": "Dy çifte",
+    "one_pair": "Një çift",
+    "high_card": "Karta e lartë",
+    "unknown": "Dorë e panjohur"
+  }
+}

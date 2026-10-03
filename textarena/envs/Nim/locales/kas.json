@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "تُسی Player {player_id} ہو Nim وچ۔\nتہاڈا مقصد آخری بچیا वसتا لینا ہے۔\nہر واری، سِر्फ اک پائل چنیں تے اس توں اک یا اک توں زیادہ वसتاں ہٹاؤ۔\nفارمیٹ '[pile quantity]' ورتیں، جتھے پائل پائل انڈیکس ہے تے مقدار ہٹائی گئی वसتوں دی گنتی ہے۔\nउदाहरण دے لئی، '[0 3]' پائل 0 توں 3 वसتاں ہٹا دیندی ہے۔"
+  },
+  "state": {
+    "current_pile": "ہُنٛز ڈھیر:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "کوئی وازن موو فارمیٹ نہ ملیو۔ '[pile quantity]' استعمال کرو۔",
+    "correct_format_wrong_fields": "Player {player_id}, اہل نہیں۔ سٹونب {col} حدوں سے باہر ہے۔",
+    "out_of_range": "{pile_index} ڈھیر انڈیکس حد سے باہر چھُ۔",
+    "non_positive": "کم از کم ۱ شیئ ہٹاوُن۔",
+    "exceeds_pile": "پائل {pile_index} توں {quantity} ہٹایا نہیں جاسکدا (فقط {pile_count} بچے ہوئے ہن)۔"
+  },
+  "observation": {
+    "removed_from_piles": "کھلاڑی {player_id} نے [{pile_index} {quantity}] کھیلا، {quantity} شیئن (شیئن) کو {pile_index} پائیل سے ہٹا دیا۔"
+  },
+  "outcome": {
+    "win": "{player_id} खिलाड़ीنے آخری شیئ(ن) لیہِ!"
+  }
+}

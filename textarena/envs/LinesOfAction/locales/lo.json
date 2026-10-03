@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "ທ່ານເປັນຜູ້ຫຼີ້ນ {player_id} ໃນການຫຼີ້ນ LinesOfAction.\nຫຼີ້ນຂອງທ່ານເປັນ '{side}', ຫຼີ້ນຂອງຜູ້ຫຼີ້ນທີ່ຂັດຂວາເປັນ '{other}'.\nຮູບແບບຂອງການຍ້າຍ: `[b1b3]` (ພີມຊັ້ນຂວາຂອງການຍ້າຍ). ການຍ້າຍທີ່ຖືກຕ້ອງຕ້ອງຍ້າຍຫຼືຊັ້ນ, ຫຼືຊັ້ນຂວາ, ຫຼືຊັ້ນຂວາຂອງຫຼີ້ນ. ທ່ານອາດຈະຍ້າຍຫຼີ້ນຂອງທ່ານເອງ, ແຕ່ບໍ່ຕ້ອງການຍ້າຍຫຼີ້ນຂອງຜູ້ຫຼີ້ນທີ່ຂັດຂວາ; ການຍ້າຍຫຼີ້ນຂອງຜູ້ຫຼີ້ນທີ່ຂັດຂວາຈະຖືກຍິງ. ຊະນະການຫຼີ້ນຖືກຕ້ອງທ່ານຕ້ອງມີຫຼີ້ນທັງໝົດ 8 ຊັ້ນຂວາຂອງການຫຼີ້ນ."
+  },
+  "board": {
+    "current_board": "ຄະນະກໍາມະການ: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "ຮູບແບບຕ້ອງແມ່ນ e2e4 (ຈາກ,to coordinates).",
+    "no_piece": "ບໍ່ມີ {side} ບົດຂຽນກ່ຽວກັບ {coord}.",
+    "identical": "ແຫຼ່ງທີ່ມາ ແລະ ຈຸດຫມາຍປາຍທາງ ແມ່ນຄືກັນ.",
+    "not_straight_or_diagonal": "ການເຄື່ອນໄຫວຕ້ອງເປັນເສັ້ນດຽວກັບເສັ້ນລ່ຽມ.",
+    "wrong_distance": "ຕ້ອງຍ້າຍໄລຍະຫ່າງເທົ່າກັບສິ້ນໃນແຖວ.",
+    "enemy_blocks": "ເຄື່ອງມືຂອງສັດຕູປິດເສັ້ນທາງ.",
+    "destination_own": "ຈຸດຫມາຍປາຍທາງທີ່ຖືກຄວບຄຸມໂດຍເຄື່ອງມືຂອງຕົນເອງ."
+  },
+  "game_action": {
+    "moved": "ຜູ້ນ {player_id} ຍ້າຍ {from} -> {to}",
+    "captured_suffix": "ຜູ້ນ {player_id} ຍ້າຍ {from} -> {to} ຈັບສັດຕູ."
+  },
+  "outcome": {
+    "win": "ທຸກຊິ້ນສ່ວນເຊື່ອມຕໍ່ກັນ.",
+    "draw_no_capture": "60 ເຄື່ອນໄຫວໂດຍບໍ່ມີການຈັບ.",
+    "draw_repetition": "ຕໍາແຫນ່ງຊ້ໍາສາມຄັ້ງ."
+  }
+}

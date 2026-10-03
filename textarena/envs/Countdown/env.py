@@ -45,20 +45,20 @@ class CountdownEnv(ta.Env):
         # Parse and validate action
         parsed_action = self._parse_action(action)
         if parsed_action is None:
-            self.state.set_invalid_move(self._calculate_progress(), "Invalid action format. Use `[i j op]` where i,j are indices and op is +,-,*,/")
+            self.state.set_invalid_move(self._calculate_progress(), self.m("invalid_move", "wrong_format"))
             return self.state.step()
         
         i, j, op = parsed_action
         
         # Validate indices
         if not self._validate_indices(i, j):
-            self.state.set_invalid_move(self._calculate_progress(), f"Invalid indices. Must be different and in range 0-{len(self.numbers)-1}")
+            self.state.set_invalid_move(self._calculate_progress(), self.m("invalid_move", "invalid_indices", max_index=len(self.numbers)-1))
             return self.state.step()
 
         # Execute operation
         result = self._execute_operation(i, j, op)
         if result is None:
-            self.state.set_invalid_move(self._calculate_progress(), "Invalid operation (division by zero or non-integer result)")
+            self.state.set_invalid_move(self._calculate_progress(), self.m("invalid_move", "invalid_operation"))
             return self.state.step()
 
         # Update game state
@@ -66,9 +66,9 @@ class CountdownEnv(ta.Env):
         self._add_board_observation()
 
         # Check win/end conditions
-        if result == self.target:           self.state.set_outcome(1.0, f"Perfect! Found exact target: {self.target}")
-        elif len(self.numbers) == 1:        self.state.set_outcome(self._calculate_progress(), f"No more moves. Best result: {self.best_value} (target: {self.target})")
-        elif self.state.check_turn_limit(): self.state.set_outcome(self._calculate_progress(), f"Turn limit reached. Best result: {self.best_value} (target: {self.target})")
+        if result == self.target:           self.state.set_outcome(1.0, self.m("outcome", "win", target=self.target))
+        elif len(self.numbers) == 1:        self.state.set_outcome(self._calculate_progress(), self.m("outcome", "no_moves", best_value=self.best_value, target=self.target))
+        elif self.state.check_turn_limit(): self.state.set_outcome(self._calculate_progress(), self.m("outcome", "turn_limit", best_value=self.best_value, target=self.target))
         return self.state.step()
 
     def _parse_action(self, action: str) -> Optional[Tuple[int, int, str]]:
@@ -141,24 +141,17 @@ class CountdownEnv(ta.Env):
         return max(0.0, 1.0 - distance / 1000.0)
 
     def _get_player_prompt(self, player_id, game_state) -> str:
-        return (
-            "You are playing Countdown numbers game!\n"
-            "Goal: Combine numbers using +, -, *, / to reach the target.\n"
-            "Action format: [i j op] where i,j are indices and op is the operation.\n"
-            "Example: [0 2 *] multiplies number at index 0 with number at index 2.\n"
-            "Division must result in whole numbers only."
-        )
+        return self.m("player_prompt", "intro")
 
     def _add_board_observation(self):
-        self.state.add_observation(message=f"{self._render_board()}\nCurrent progress score: {self._calculate_progress():.3f}", observation_type=ta.ObservationType.GAME_BOARD)
+        observation = self.m("board", "header", target=self.target, numbers=self._render_numbers())
+        observation = self.m("board", "best", observation=observation, best_value=self.best_value, distance=abs(self.best_value - self.target), best_expression=self.best_expression)
+        observation = self.m("board", "history", observation=observation, moves=self._render_moves()) if self.move_history else observation
+        observation = self.m("board", "progress", observation=observation, progress=f"{self._calculate_progress():.3f}")
+        self.state.add_observation(message=observation, observation_type=ta.ObservationType.GAME_BOARD)
 
-    def _render_board(self) -> str:
-        lines = [f"TARGET: {self.target}", "", "Available numbers:"]
-        for idx, (num, expr) in enumerate(zip(self.numbers, self.expressions)):
-            lines.append(f"  [{idx}] {num}   (from: {expr})")
-        lines.extend(["", f"Best so far: {self.best_value} (distance: {abs(self.best_value - self.target)})", f"Best expression: {self.best_expression}"])
-        if self.move_history:
-            lines.extend(["", "Move history:"])
-            for i, move in enumerate(self.move_history, 1):
-                lines.append(f"  {i}. {move}")
-        return "\n".join(lines)
+    def _render_numbers(self) -> str:
+        return "\n".join(f"  [{idx}] {num}   (from: {expr})" for idx, (num, expr) in enumerate(zip(self.numbers, self.expressions)))
+
+    def _render_moves(self) -> str:
+        return "\n".join(f"  {i}. {move}" for i, move in enumerate(self.move_history, 1))

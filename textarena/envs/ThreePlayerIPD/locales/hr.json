@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} u 3-igračkom Ponavljanom zatvorenikovom dilemi. Utakmica traje {num_rounds} rundi.\nStruktura runde:\n• {conv_rounds} slobodnih razgovornih poteza\n• 1 odlučujući potez - predajte jedan token po protivniku: '[<opp-id> cooperate]' ili '[<opp-id> defect]' (npr. '[1 defect] [2 cooperate]'; zadano je 'surađuj').\nParovi matrice isplate (primijenjeno na svaki neuređeni par):\n  - Oboje surađuju  ->  {reward}\n  - Oboje iznevjeravaju     ->  {punishment}\n  - Vi iznevjeravate, oni surađuju -> {temptation}\n  - Vi surađujete, oni iznevjeravaju -> {sucker}\nIgrač(i) s najvišim rezultatom na kraju svih rundi pobjeđuju."
+  },
+  "round": {
+    "start": "─── Početak runde {round} ───\tMožete slobodno razgovarati sljedećih {conv_rounds} rundi.",
+    "chat_finished": "Razgovor završen za rundu {round}. Predajte svoje odluke, jedan token po protivniku: `[pid cooperate]` ili `[pid defect]`."
+  },
+  "results": {
+    "header": "### Runda {round} - Rezultati:",
+    "pair_line": "{observation}\n\t Igrač {i} protiv Igrača {j} je izabrao {choice_i} i {choice_j} (Igrač {i} je dobio {gain_i}, Igrač {j} je dobio {gain_j})",
+    "scores_open": "{observation}\n-> Trenutni rezultati: ",
+    "score_first": "{observation}Igrač {player_id} ({score})",
+    "score_next": "{observation}; Igrač {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Konačni rezultati: {scores}.  Rangiranje skupina (najgori→najbolji): {groups}"
+  }
+}

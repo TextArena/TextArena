@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in una partita di {max_rounds} round di Kuhn Poker.\nRegole del Gioco:\n- Il Kuhn Poker utilizza un mazzo di 3 carte con J, Q, K (J il più basso, K il più alto)\n- Ogni giocatore mette {ante} gettoni e riceve 1 carta ogni round (nota che le carte sono distribuite senza sostituzione, quindi non puoi avere la stessa carta del tuo avversario).\n- Il gioco continua per {max_rounds} round\n- Il giocatore con il maggior numero di gettoni dopo tutti i round vince\nRegole delle Azioni:\n- '[check]': Passa senza scommettere (solo se non ci sono scommesse sul tavolo)\n- '[bet]': Aggiungi 1 gettone al piatto (solo se non ci sono scommesse sul tavolo)\n- '[call]': Pareggia la scommessa dell'avversario aggiungendo 1 gettone al piatto\n- '[fold]': Rinuncia alla tua mano e lascia che il tuo avversario vinca il piatto"
+  },
+  "init_round": {
+    "round_start": "### Inizio del round {current_round} su {max_rounds} round. La tua carta è: '{player_card}'",
+    "available_actions": "Le tue azioni disponibili sono: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'azione deve essere [Check], [Bet], [Call] o [Fold].",
+    "not_legal": "L'azione deve essere {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Giocatore {player_id}, mossa inviata: '[{move}]'.",
+    "valid_actions": "Le tue azioni disponibili sono: {legal_actions}.",
+    "round_summary": "{reason} Punteggi attuali: Giocatore 0: '{player_0_chips}'; Giocatore 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Sfida: la carta {winner_card} del Giocatore {winner} batte la carta {loser_card} del Giocatore {loser}. Il Giocatore {winner} vince il piatto di {pot_value} gettoni."
+  },
+  "outcome": {
+    "draw": "Alla fine di {max_rounds} round, entrambi i giocatori avevano lo stesso numero di gettoni.",
+    "round_win": "Il Giocatore {player_id} si è ritirato.",
+    "winner_player0": "Il Giocatore 0 ha vinto avendo più gettoni alla fine di tutti i {max_rounds} round.",
+    "winner_player1": "Il Giocatore 1 ha vinto avendo più gettoni alla fine di tutti i {max_rounds} round."
+  }
+}

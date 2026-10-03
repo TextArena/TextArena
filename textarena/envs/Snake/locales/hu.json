@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake nyelvi fájl. NE fordítsa le a kulcsokat (bal oldal). Csak a értékeket fordítsa le (jobb oldal). Tartsa meg minden {placeholder}-t pontosan úgy, ahogy van. NE fordítsa le a játékos által beírt mozgás/irány tokeneket ([up], [down], [left], [right], w, s, a, d) vagy az ASCII táblát, amelyet a {board} tartalmaz.",
+  "_slots": {
+    "{num_players}": "A mérkőzésben részt vevő játékosok száma",
+    "{width}": "A tábla szélessége cellákban",
+    "{height}": "A tábla magassága cellákban",
+    "{max_turns}": "A mérkőzésre vonatkozó lépésszám-korlát",
+    "{player_id}": "A játékos száma (0-alapú)",
+    "{board}": "A megjelenített ASCII rács; tartsa semlegesnek, soha ne fordítsa le karaktereit",
+    "{reason}": "A játék végének okát megjelenítő kifejezés",
+    "{groups}": "Semleges rangsoradatok (a játékos-azonosító csoportok listája, a legrosszabbtól a legjobbig); ne fordítsa le"
+  },
+  "player_prompt": {
+    "intro": "{num_players} játékosos Snake egy {width}×{height} méretű rácsban.\nÖn irányítja a {player_id}. számú kígyót. Érvényes lépések: '[up]'/'[down]'/'[left]'/'[right]' (vagy w/s/a/d).\nCél: túlélje a leghosszabb ideig, vagy legyen a leghosszabb és érje el a legmagasabb pontszámot (lépésszám-korlát: {max_turns} lépés)."
+  },
+  "board": {
+    "current": "Aktuális tábla:\n{board}",
+    "after_moves": "Aktuális táblaállapot:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "A {player_id}. számú kígyó érvénytelen lépés miatt halt meg."
+  },
+  "outcome": {
+    "survived_win": "A {player_id}. játékos túlélte; mindenki más elpusztult.",
+    "all_dead_simul": "Az összes kígyó egyszerre halt meg.",
+    "outlived": "A játékos túlélte az összes többi játékost.",
+    "all_dead": "Az összes kígyó meghalt.",
+    "turn_limit": "A lépésszám-korlát elérésével a legjobb pontszám nyeri a döntetlent.",
+    "ranking": "{reason} Végső rangsor csoportok (a legrosszabbtól a legjobbig): {groups}"
+  }
+}

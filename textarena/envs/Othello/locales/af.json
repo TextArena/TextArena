@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} wat {colour} ({piece}) in 'n spel van Othello speel.\nJou doel is om meer stukke van jou kleur op die bord te hê teen die einde van die spel.\nOp jou beurt, plaas 'n stuk sodat dit een of meer van jou teenstander se stukke-in enige rigting (horisontaal, vertikaal of diagonaal)-tussen jou nuwe stuk en 'n ander van jou bestaande stukke flankeer. Alle geflankeerde teenstanderstukke sal na jou kleur omgedraai word.\nVerskaf jou skuif in die formaat '[ry, kol]'."
+  },
+  "board": {
+    "game_board": "Spelbord:\n{board}",
+    "valid_moves": "{observation}\nGeldige skuiwe: {moves}",
+    "no_valid_moves_reset": "{observation}\nGeen geldige skuiwe - jy mag dalk moet oorslaan.",
+    "no_valid_moves_step": "{observation}\nGeen geldige skuiwe – jy mag dalk moet oorslaan.",
+    "scores_reset": "{observation}\nHuidige Tellings - Swart: {black_count}, Wit: {white_count}\n",
+    "scores_step": "{observation}\nTellings - Swart: {black_count}, Wit: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Skuif moet in die vorm [ry, kol] wees.",
+    "illegal": "Ongeldige skuif. Geldige skuiwe: {valid}"
+  },
+  "game_action": {
+    "skipped": "Speler {pid} moes hul beurt oorslaan",
+    "played": "Speler {pid} ({piece}) het [{r}, {c}] gespeel en {flipped} stuk(ke) omgedraai"
+  },
+  "game_message": {
+    "must_skip": "Speler {pid} ({piece}) het geen geldige skuiwe en moet oorslaan."
+  },
+  "outcome": {
+    "black_wins": "Swart wen {black_count}-{white_count}.",
+    "white_wins": "Wit wen {white_count}-{black_count}.",
+    "draw": "Gelykop {black_count}-{white_count}."
+  }
+}

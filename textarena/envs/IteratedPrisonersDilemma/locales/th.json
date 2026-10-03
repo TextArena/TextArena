@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "คุณคือผู้เล่นหมายเลข {player_id} ในเกม Iterated Prisoner's Dilemma ที่มี {num_rounds} รอบ\n\nโครงสร้างเกม:\n- ก่อนการตัดสินใจแต่ละครั้ง คุณมี {total_conversation_rounds} รอบในการสื่อสารอย่างอิสระ\n- หลังจากนั้น ผู้เล่นทั้งสองจะเลือกที่จะร่วมมือหรือทรยศพร้อมกัน\n\nตารางผลตอบแทน (คงที่ในแต่ละรอบ):\n- ทั้งสองร่วมมือ ➜ แต่ละคนได้ {cooperate_reward}\n- ทั้งสองทรยศ ➜ แต่ละคนได้ {mutual_defect_reward}\n- หนึ่งทรยศ อีกคนร่วมมือ ➜ ผู้ทรยศได้ {defect_reward} ผู้ร่วมมือได้ {sucker_reward}\n\nวิธีการเล่น:\n- ระหว่างการสนทนา: พิมพ์ข้อความที่คุณต้องการ\n- ระหว่างการตัดสินใจ: ใส่ '[Cooperate]' หรือ '[Defect]' (ไม่ต้องคำนึงถึงตัวพิมพ์เล็ก/ใหญ่) คุณสามารถเพิ่มข้อความก่อน/หลังโทเค็นได้"
+  },
+  "phases": {
+    "conversation_finished": "การสนทนาสำหรับรอบ {round} เสร็จสิ้น กรุณาตอบกลับด้วย '[Cooperate]' หรือ '[Defect]' ภายใน \\boxed{{}}.",
+    "starting_round": "--- เริ่มรอบ {round} ---",
+    "round_summary": "ผลลัพธ์ของรอบ {round}:\n{outcome}\nผู้เล่น 0 ได้รับ {r0} (รวม {score_0}) ผู้เล่น 1 ได้รับ {r1} (รวม {score_1})."
+  },
+  "outcome": {
+    "winner": "ผู้เล่น {winner} ชนะ {win_score} - {lose_score}.",
+    "draw": "เสมอ! ผู้เล่นทั้งสองได้คะแนน {s0}.",
+    "round_both_cooperate": "ผู้เล่นทั้งสองร่วมมือ",
+    "round_both_defect": "ผู้เล่นทั้งสองทรยศ",
+    "round_p0_cooperates_p1_defects": "ผู้เล่น 0 ร่วมมือ ผู้เล่น 1 ทรยศ",
+    "round_p0_defects_p1_cooperates": "ผู้เล่น 0 ทรยศ ผู้เล่น 1 ร่วมมือ"
+  }
+}

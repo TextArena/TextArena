@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le Joueur {player_id} ({piece}). L'adversaire est ({opp}).\nSoumettez les mouvements au format '[a2 a3]' (de → vers).\n- Un mouvement normal consiste à avancer d'un pas vers un sommet vide adjacent.\n- Une capture consiste à sauter par-dessus un pion adverse adjacent pour atterrir sur le nœud vide situé derrière.\nChaque capture rapporte {score_per_capture} points.\nLa partie se termine après {max_moves} mouvements ou lorsqu'un joueur ne dispose d'aucun mouvement légal."
+  },
+  "board": {
+    "current_board": "Mouvement n° {move_count}\n\n{board}"
+  },
+  "invalid_move": {
+    "bad_format": "Format incorrect. Utilisez '[a2 a3]'.",
+    "unknown_square": "Case inconnue.",
+    "not_your_piece": "La case de départ ne contient pas votre pion.",
+    "dest_not_empty": "La destination n'est pas vide.",
+    "illegal": "Mouvement illégal."
+  },
+  "game_action": {
+    "captured": "Le Joueur {player_id} a capturé un pion ! (+{score_per_capture})"
+  },
+  "outcome": {
+    "no_pieces": "Le Joueur {player_id} n'a plus de pions.",
+    "cannot_move": "Le Joueur {player_id} ne peut pas jouer.",
+    "higher_score": "Score de capture plus élevé.",
+    "move_limit": "La limite de mouvements a été atteinte."
+  }
+}

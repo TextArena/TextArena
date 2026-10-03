@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Tha thu a' cluich Klondike Solitaire. Am miann agad gus gluasad a h-uile cairt gu na cruachan bunaiteach.\n\nRiaghailtean a' Gheama:\n- Cruachan bunaiteach (F1-F4): Tog suas bho Ace gu Rìgh ann an dath\n- Cruachan clàr (T1-T7): Tog sìos a' ghluasad dathan (dearg air dubh, dubh air dearg)\n- Stoc: Tarraing cairtean gu mòr-chosg\n- Mòr-chosg (W): Cairt bhàrr airson cluich\n\nÀithnean:\n- 'draw' - Tarraing cairtean bho stoc gu mòr-chosg\n- 'move <source> <destination> [count]' - Gluais cairtean eadar cruachan\n  Eisimpleirean: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Faodaidh count cuideachd a bhith 'all', a dh'fheuchas gluasad a h-uile cairt a tha a' coimhead suas.\n- 'forfeit' - Crìochnaich a' gheama gu luath agus glas a' sgòr làithreach agad\n- Ainmean cruachan: W (mòr-chosg), F1-F4 (bunaiteach), T1-T7 (clàr)\n\nFaodaidh tu gnìomhan ioma a dh'fhàgail ann an aon turas le bhith gan dealachadh le commaichean:\n  Eisimpleir: 'draw, move W T1, move T2 F1'\n\nCha ghabh càird a chur air cruachan clàr falamh ach Rìgh.\nGnìomhan a' dol an òrdugh - mura h-eilear aon, thèid na gnìomhan eile a leigeil seachad.\nCleachd 'forfeit' ma tha thu a' smaointinn gu bheil a' gheama do-dh'fhàgail."
+  },
+  "format_error": {
+    "no_brackets": "Cruth gnìomh neo-dhligheach. Bu chòir an gnìomh a bhith ann am bragantaichean.",
+    "no_closing_bracket": "Cruth gnìomh neo-dhligheach. Braceal dùnadh a dhìth ']'",
+    "empty_command": "Àithne falamh. Clò-bhualadh 'draw' no 'move <source> <destination> [count]'.",
+    "empty_action": "Gnìomh falamh",
+    "move_needs_args": "Feumar àite-tòiseachaidh agus àite-ruighinn airson àithne gluasaid. Cleachdadh: 'move <source> <destination> [count]'",
+    "count_positive": "Feumaidh an àireamh a bhith dearbhach no 'all'",
+    "count_invalid": "Àireamhair neo-dhligheach. Cleachd àireamh no 'all'",
+    "unknown_command": "Àithne gun aithne '{cmd}'. Cleachd 'draw', 'move <source> <destination> [count]', no 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Gnìomh {n} a chaidh a chur an gnìomh (s) mus do dh 'fhàillig e.",
+    "failed": "Theagamh gnìomh {n}: {msg}"
+  },
+  "move_result": {
+    "drew": "Tharraing cairt (s) bho stoc gu sgudal.",
+    "cannot_draw": "Chan urrainn a tharraing. Tha an dà chuid stòras agus sgudal falamh.",
+    "invalid_pile": "Ainm stac neo-dhligheach. Cleachd W, F1-F4, no T1-T7",
+    "foundation_one_card": "Chan urrainn ach aon chairt a ghluasad gu bunait.",
+    "waste_to_foundation_ok": "Cardaich bho sgudal gu bunait F{dst}",
+    "waste_to_foundation_bad": "Chan urrainn do chairt sgudal a ghluasad chun stac bunaiteach sin",
+    "tableau_to_foundation_ok": "Gluasad cairt bho tòiseachaidh tòiseachaidh T{src} gu bun-stèidh F{dst}",
+    "tableau_to_foundation_bad": "Chan urrainn do chairt tableau a ghluasad chun stac bunaiteach sin",
+    "foundation_to_foundation": "Chan urrainn gluasad bho bhun-stèidh gu bun-stéidheadh",
+    "waste_to_tableau_one_card": "Chan urrainn ach aon chairt a ghluasad bho sgudal gu tableau.",
+    "waste_to_tableau_ok": "Cardaich bho sgudal gu clàr T{dst}",
+    "waste_to_tableau_bad": "Chan urrainn do chairt sgudal a chur air an stac tableau sin",
+    "no_face_up": "Chan eil cairtean aghaidh suas ri gluasad.",
+    "tableau_to_tableau_ok": "Gluasad {count} cairt(ean) bho tòiseachaidh tòiseachaidh T{src} gu T{dst}",
+    "tableau_to_tableau_bad": "Cha ghabh gluasad {count} cairt(ean) bho T{src} gu T{dst}",
+    "foundation_to_tableau_one_card": "Chan urrainn ach aon chairt a ghluasad bho bhunait gu tableau.",
+    "foundation_empty": "Tha bunait F{src} falamh.",
+    "foundation_to_tableau_ok": "Gluasad cairt bho bun-stèidh F{src} gu tòiseachaidh tòiseachaidh T{dst}",
+    "foundation_to_tableau_bad": "Chan urrainn do chairt bunait a chur air clàr T{dst}",
+    "to_waste_or_stock": "Chan fhaod a bhith air an gluasad gu sgudal no stoc."
+  },
+  "outcome": {
+    "forfeit": "Tha an geama air a chall. Score deireannach: {score} cairtean ann am bunaitean.",
+    "won": "Tapadh leibh, tha thu air Klondike Solitaire a bhuannachadh!",
+    "turn_limit": "Tha an geama seachad! Ràinig thu uiread de {max_turns} turasan. Sgòr: {score} cairtean ann am bun-stèidhean."
+  },
+  "board": {
+    "title": "=== SOLITAIRE CHLONDAIKE ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stoc: {stock} cairtean",
+    "waste": "Sgaoileadh: {waste}",
+    "foundations_header": "Stèitean:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Clàr:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

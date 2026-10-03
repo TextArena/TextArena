@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Jy speel {color} in 'n spel van Deurbraak. Jy beweeg {direction} op 'n {board_size}x{board_size} bord.\nIn jou beurt kan jy 'n enkele stuk een stap vorentoe of diagonaal vorentoe beweeg.\n'n Stuk mag slegs diagonaal beweeg as 'n teenstanderstuk daar is, en slegs in so 'n vooraf besette vierkant in 'n diagonale stap beweeg.\nWanneer jy in 'n vierkant met 'n teenstanderstuk stap, vang jy dit en die teenstander se stuk word permanent van die bord verwyder.\nGebruik UCI-agtige notasie in hakies, bv. [a2a3] om van a2 na a3 te beweeg.\n* 'a' stem ooreen met die mees linkerkolom, '1' is die onderste ry (vanuit Wit se perspektief).\n* Swart se tuisry is die boonste ry (ry 8 vir 'n 8x8). Wit se tuisry is die onderste ry (ry 1 vir 'n 8x8).\nDie eerste speler wie se stuk die teenstander se tuisry bereik, wen. As jou stukke almal gevange is, verloor jy."
+  },
+  "invalid_move": {
+    "wrong_format": "Gebruik asseblief hakies algebraïese notasie soos [a2a3].",
+    "out_of_bounds": "Die skuif is buite die bord se grense.",
+    "illegal": "Daardie skuif volg nie die Deurbraakreëls nie of is nie jou stuk nie."
+  },
+  "game_action": {
+    "moved": "Speler {player_id} skuif {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Wit het Swart se tuisry bereik.",
+    "black_reached": "Swart het Wit se tuisry bereik.",
+    "white_captured": "Alle Wit stukke is gevange.",
+    "black_captured": "Alle Swart stukke is gevange.",
+    "no_moves": "Speler {player_id} het geen skuif meer oor nie."
+  }
+}

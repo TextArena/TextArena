@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "카운트다운 숫자 게임을 하고 있습니다!\n목표: +, -, *, / 연산자를 사용하여 숫자를 조합하여 목표 값을 만드세요.\n행동 형식: [i j op] 여기서 i, j는 인덱스이고 op는 연산자입니다.\n예: [0 2 *]는 인덱스 0의 숫자와 인덱스 2의 숫자를 곱합니다.\n나눗셈은 반드시 정수 결과만 허용됩니다."
+  },
+  "board": {
+    "header": "목표: {target}\n\n사용 가능한 숫자:\n{numbers}",
+    "best": "{observation}\n\n현재까지 최고: {best_value} (차이: {distance})\n최고 표현식: {best_expression}",
+    "history": "{observation}\n\n이동 기록:\n{moves}",
+    "progress": "{observation}\n현재 진행 점수: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "잘못된 행동 형식입니다. `[i j op]` 형식을 사용하세요. 여기서 i, j는 인덱스이고 op는 +, -, *, / 중 하나입니다.",
+    "invalid_indices": "잘못된 인덱스입니다. 서로 다르고 0-{max_index} 범위 내여야 합니다.",
+    "invalid_operation": "잘못된 연산 (0으로 나누기 또는 정수 결과가 아닌 경우)"
+  },
+  "outcome": {
+    "win": "완벽! 정확한 목표 값을 찾았습니다: {target}",
+    "no_moves": "더 이상 이동할 수 없습니다. 최고 결과: {best_value} (목표: {target})",
+    "turn_limit": "턴 제한에 도달했습니다. 최고 결과: {best_value} (목표: {target})"
+  }
+}

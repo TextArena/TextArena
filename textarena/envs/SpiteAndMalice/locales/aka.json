@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Wo ne Player {player_id} wɔ agorɔ a ɛyɛ Spite ne Malice a wɔn baanu bɛdi. Wo botae ne sɛ wo bɛyɛ ɔhene a wobɛwie wo payoff pile.\n\n### Agorɔ Ho Nhwehwɛmu:\n- Botae ne sɛ wo bɛwie wo payoff pile denam kaado bɔɔ wɔ center piles.\n- Wo betumi abɔ kaado afi mmeaɛ abiɛsa:\n  1. Wo **nsam** (wo hyɛ aseɛ kwaada biara a wo wɔ nsam).\n  2. **Kaado a ɛwɔ wo payoff pile so**.\n  3. **Kaado a ɛwɔ wo discard piles biara so**.\n\n### Agorɔ Mmara:\n- Wo betumi abɔ kaado wɔ center pile so sɛ ɛyɛ **baako kɔ soro** sen kaado a ɛwɔ pile no so (center piles hyɛ aseɛ Ace na ɛkɔ soro kosi Queen; Kings yɛ wild - wɔbetumi abɔ wɔ kaado biara so nanso wɔnnyɛ rank sequence no. Eyi kyerɛ sɛ sɛ King bi wɔdi dwuma akyiri 4, na King no yɛ ranked 5 na kaado a edi akyire no yɛ 6).\n- Sɛ wo ntumi nni kaado biara, wo dwuma ne sɛ wo **bɔ kaado** wɔ wo discard piles biara mu sɛ wo bɛwie wo turn.\n- Sɛ center pile du Queen, wobɛwie no automatic.\n- Rank order no yɛ: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n### Nnwuma:\n1. **Draw**: Wɔ aseɛ wo turn, bɔ kaado sɛ wɔbɛwie wo nsam kosi 5 kaado. Kɔ **[draw]** sɛ wobɛhyɛ aseɛ.\n2. **Bɔ Kaado**: Sɛ wobɛbɔ kaado, kyerɛ kaado no ne center pile no sɛ: **[play A♠ 0]** (kaado 'A♠' ne center pile index '0').\n3. **Discard**: Sɛ wuntumi nni kaado biara, bɔ kaado wɔ wo nsam mu sɛ wobɛwie wo turn. Kɔ **[discard A♠ 1]** (kaado 'A♠' ne discard pile index '1'). Hwɛ sɛ wuntumi nni kaado biara wɔ payoff pile mu. Wo betumi nni kaado biara wɔ wo nsam mu.\n\n"
+  },
+  "board": {
+    "current_board": "Bɔɔde akyɛ sen:\n\n{board}\nAdeyɛ nhyehyɛe: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Center Piles --  no ho mmrԑ a w'atwe mu.",
+    "pile": "{observation}Ntɔsoo {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- ɔkɔmhyɛni {player_id} view ---\n",
+    "payoff": "{observation}Adeyɛ no ntɔsoo (Tɛ krataa a ɛwɔ hɔ): {top_card}, Adeyɛ no ntɔsoo mu kɔma dodoɔ: {payoff_length}\n",
+    "hand": "{observation}Nsa: {hand}\n",
+    "discard": "{observation}Asɔre ntɔsoo: {discard}\n",
+    "empty": "Nkyene biara nni hɔ."
+  },
+  "game_message": {
+    "no_cards_left": "Nni kaadi foforo a wobetumi adraw. Ka wɔn ho sɛ wobetumi di kaadi firi:\n  1. Wo **nsam**.\n  2. **Kaadi a ɛwɔ wo payoff pile no so**.\n  3. **Kaadi a ɛwɔ wo discard piles no mu biara so**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Nkyerεkyerεmu a enni mu. Agorɔfoɔ {player_id} antumi ammua na ɔde ɔkwapa bi adi dwuma wɔ ntweaso anan no so.",
+    "invalid_play": "Bɔ a wobɔ no yɛ saa. Player {player_id} kɔ sɛ ɔbɔ {card} wɔ center pile {index} so.",
+    "discard_from_payoff": "Ɔbɔadeɛ {player_id} bɔɔ mmɔden sɛ ɔbɛtu kaade bi afiri nkontaabu a wɔtua no so.",
+    "discard_not_in_hand": "Ɔbɔadeɛ {player_id} bɔɔ mmɔden sɛ ɔbɛtow krataa a ɔnni ne nsam.",
+    "wrong_move_type": "Agorɔ a enni mu. Ɔbɔadeɛ {player_id} antumi amfa agodie pa ammua no ho."
+  },
+  "game_action": {
+    "you_drew": "Woyii nkrataa.",
+    "opponent_drew": "Ɔbɔadeɛ {player_id} twee nkrataa.",
+    "you_played": "Wode {card} wɔ abɛdeɛ ntɔsoo {index}.",
+    "opponent_played": "ɔkɔmhyɛni {player_id} de {card} wɔ abɛdeɛ ntɔsoo {index}.",
+    "you_discarded": "Woabɔ {card} wɔ discard pile {index} mu, a ɛkyerɛ sɛ woawie wo turn. Nnwuma a edi akyire no, Player {next_player_id} bɛkɔ.",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Odwumanyɛni {current_player} awie ne payoff pile no! Odwumanyɛni {current_player} na ɔdi nkunim!",
+    "deadlock_player_0": "Agorɔ no ayɛ deadlock! Player 0 di nkunim wɔ {player_0_payoff} kaado a ɛrekɔ so vs Player 1 {player_1_payoff} kaado.",
+    "deadlock_player_1": "Agorɔ no ayɛ deadlock! Player 1 di nkunim wɔ {player_1_payoff} kaado a ɛrekɔ so vs Player 0 {player_0_payoff} kaado.",
+    "deadlock_tie": "Agorɔ no ayɛ deadlock wɔ tie! Wɔn baanu wɔ {player_0_payoff} kaado a ɛrekɔ so. Player {current_player} di nkunim denam default."
+  }
+}

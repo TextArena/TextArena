@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Син уйынсы {player_id} {num_players}-уынсы Лжец-кубик уйынында.\nҠағиҙәләр:\n- Һеҙҙең йөрөшөндә, һеҙ либо:\n  1) Яңы телдәүҙе эләктерегеҙ, хәҙерге телдәүҙән юғары күләмле йәки юғары ҡыяғы (йәки икеһе лә); мәҫәлән, '[Bid: 3, 4]',\n  2) Һуңғы телдәүҙе '[Call]' тип әйтеп, шылтыратырға мөмкин.\n\nӘгәр һеҙ шылтыратһағыҙ:\n  - Әгәр шул уҡ ҡыяғының реаль һаны бөтә күңелдәр араһында телдәүҙән кәм булһа, һуңғы телдәүсе бер күңел юғалта.\n  - Икенсе осраҡта, шылтыратыусы бер күңел юғалта.\nУйынсы, нулгә еткән уйынсы, элиминирланған. Һуңғы ҡалған уйынсы еңә."
+  },
+  "board": {
+    "per_player": "\tУйынсы {p}: {d}",
+    "new_round": "\nЯңы раунд - Ҡалған һөйәктәр: {dice_summary}\nҺеҙҙең хәҙерге һөйәктәр: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Уйынсы {current_player_id} тип әйтә! {face_value} ҡыяғының реаль йөҙө {count}, ул {quantity}ҡыяғынан кәм. \nУйынсы {loser_id} (һуңғы телдәүсе) бер күңел юғалта.",
+    "caller_loses": "Уйынсы {current_player_id} тип әйтә! {face_value} ҡыяғының реаль йөҙө {count}, ул {quantity}ҡыяғына >= . \nУйынсы {loser_id} (телдәүсе) бер күңел юғалта."
+  },
+  "action": {
+    "bid_announce": "Уйынсы {player_id} {quantity} ҡыяғын{face_value} тип телдәй."
+  },
+  "invalid_move": {
+    "call_no_bid": "Алдан тәҡдимдәр яһамайынса шылтыратыу.",
+    "invalid_bid": "Яуапһыҙ тәҡдим: {reason}",
+    "not_recognized": "Ғәмәл танылмай '[Bid: X, Y]' йәки '[Call]' тип. Тәҡдим ителгән ғәмәл: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Яңы күләм {new_quantity} хәҙерге {current_quantity}күләменән түбән.",
+    "face_lower": "Яңы ҡыяғы {new_face_value} хәҙерге {current_face_value}ҡыяғынан түбән.",
+    "identical": "Тәҡдим ғәмәлдәге тәҡдим менән бер төрлө.",
+    "face_range": "Аҡсаның номиналь хаҡы 1-ҙән 6-ға тиклем булырға тейеш."
+  },
+  "message": {
+    "eliminated_invalid": "Уйынсы {player_id} юҡҡа сығарыла."
+  },
+  "outcome": {
+    "win": "Уйынсы {winner} еңә! Төп рейтинг: {final_ranking}"
+  }
+}

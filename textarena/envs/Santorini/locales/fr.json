@@ -1,0 +1,43 @@
+{
+  "_comment": "Fichier de langue Santorini en français. NE traduis PAS les clés, seulement les valeurs. Conserve chaque {marqueur}. Ne traduis jamais le {board} ASCII, les noms de couleur passés en {color}/{winner_color}/etc. (Navy/White/Grey), les étiquettes de pion (N1, N2, W1, W2, G1, G2), le format du jeton de coup [worker_id source dest build] / les exemples comme [N1C1C2B2], les coordonnées du plateau (A-E, 1-5) ni les numéros de niveau.",
+  "_slots": {
+    "{color}": "Nom de couleur/rôle du joueur (Navy, White ou Grey) - ne pas traduire",
+    "{color_initial}": "Première lettre de la couleur, utilisée pour le jeton de coup (N, W ou G) - ne pas traduire",
+    "{board}": "Le plateau ASCII rendu - insérer tel quel, ne pas traduire",
+    "{valid_moves}": "Liste de jetons de coups valides séparés par des virgules - ne pas traduire",
+    "{expected_color}": "Couleur du pion visé - ne pas traduire",
+    "{player_color}": "Couleur propre du joueur qui agit - ne pas traduire",
+    "{worker_num}": "Un numéro de pion, 1 ou 2",
+    "{source}": "Coordonnée d'origine, p. ex. C2 - ne pas traduire",
+    "{dest}": "Coordonnée de destination, p. ex. C3 - ne pas traduire",
+    "{build}": "Coordonnée de construction, p. ex. B2 - ne pas traduire",
+    "{player_id}": "Le numéro d'un joueur, p. ex. 0 ou 1",
+    "{winner_id}": "Le numéro du joueur gagnant",
+    "{winner_color}": "La couleur du joueur gagnant - ne pas traduire",
+    "{loser_id}": "Le numéro du joueur perdant",
+    "{loser_color}": "La couleur du joueur perdant - ne pas traduire"
+  },
+
+  "player_prompt": {
+    "intro":       "Tu joues {color} dans une partie de Santorini.\n\nRègles du jeu :\n1. Déplacement :\n   - Les pions ne peuvent se déplacer que vers des cases adjacentes (y compris en diagonale)\n   - Ne peuvent pas se déplacer vers des cases occupées par d'autres pions ou par des dômes\n   - Peuvent monter d'un niveau au maximum, mais peuvent descendre d'autant de niveaux que voulu\n\n2. Construction :\n   - Tu dois construire sur une case adjacente à celle où ton pion s'est déplacé\n   - Tu ne peux pas construire là où se trouve un pion\n   - Tu ne peux pas construire au sommet d'un dôme (niveau 4)\n   - Construire ajoute un niveau (ou crée un dôme au niveau 3)\n\n3. Conditions de victoire :\n   - Gagne en déplaçant un pion au niveau 3\n   - Gagne si l'adversaire n'a aucun coup valide\n\nJoue ton coup au format [worker_id source dest build]\nExemple : [{color_initial}1C1C2B2] signifie déplacer le pion 1 de {color} de C1 à C2 et construire en B2\nTu peux inclure du texte supplémentaire dans tes messages, mais tu ne dois mentionner le motif de coup valide qu'une seule fois.\n",
+    "board_state": "\nÉtat actuel du plateau :\n{board}\n",
+    "valid_moves": "\nCoups valides : {valid_moves}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format de coup invalide. Format attendu : [worker_id source dest build], p. ex. [N1C1C2B2]",
+    "wrong_player": "Tu ne peux pas déplacer le pion {expected_color} (tu es {player_color})",
+    "no_worker":    "Aucun pion {worker_num} à la position {source}",
+    "bad_move":     "Coup invalide de {source} à {dest}",
+    "bad_build":    "Construction invalide en {build}"
+  },
+
+  "game_action": {
+    "moved":        "Le joueur {player_id} ({color}) a déplacé le pion {worker_num} de {source} à {dest} et a construit en {build}"
+  },
+
+  "outcome": {
+    "win_level3":   "Le joueur {winner_id} ({winner_color}) a gagné en déplaçant un pion au niveau 3 !",
+    "no_moves":     "Le joueur {loser_id} ({loser_color}) n'a aucun coup valide. Le joueur {winner_id} ({winner_color}) gagne !"
+  }
+}

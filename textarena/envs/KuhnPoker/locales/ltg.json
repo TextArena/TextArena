@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} {max_rounds} kārtu spēlē Kuhn Poker.\nSpēles noteikumi:\n- Kuhn Poker izmanto 3 kārtu kalpu ar J, Q, K (J zemākais, K augstākais)\n- Katrs spēlētājs iemaksā {ante} čipu un saņem 1 kārti katrā kārtā (piezīme, ka kārtis tiek izdalītas bez aizstāšanas, tādēļ jūs nevarat būt vienādi ar savu oponentu).\n- Spēle turpinās {max_rounds} kārtas\n- Spēlētājs ar visvairāk čipiem pēc visām kārtām uzvar\nDarbības noteikumi:\n- '[check]': Atkāpties bez likmes (tikai ja nav likme uz galda)\n- '[bet]': Pievienot 1 čipu uzlikumam (tikai ja nav likme uz galda)\n- '[call]': Atbilstot oponenta likmei, pievienojot 1 čipu uzlikumam\n- '[fold]': Atteikties no savas rokass un atļaut oponentam uzvarēt uzlikumu"
+  },
+  "init_round": {
+    "round_start": "### Sākas {current_round}. kārta no {max_rounds} kārtām. Jūsu kārts ir: '{player_card}'",
+    "available_actions": "Tovi īspiejamī darbeibi ir: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Darbība jābūt [Check], [Bet], [Call], vai [Fold].",
+    "not_legal": "Darbeibai juobyut {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Spēlētājs {player_id} iesniedza gājienu: '[{move}]'.",
+    "valid_actions": "Tovi īspiejamī darbeibi ir: {legal_actions}.",
+    "round_summary": "{reason} Pašreizējie punkti: Spēlētājs 0: '{player_0_chips}'; Spēlētājs 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Šovs: Spēlētāja {winner} {winner_card} pārspēj Spēlētāja {loser} {loser_card}. Spēlētājs {winner} uzvar banku ar {pot_value} žetoniem."
+  },
+  "outcome": {
+    "draw": "Piec {max_rounds} raunda obejim spēlnīkim beja vīnaids cipu skaits.",
+    "round_win": "Spālātuojs {player_id} ir izlaidīs.",
+    "winner_player0": "Spālātuojs 0 uzvarēja, jam beja vaira žetonim vysūs {max_rounds} raundā.",
+    "winner_player1": "Spālātuojs 1 uzvarēja, jam beja vaira žetonim vysūs {max_rounds} raundā."
+  }
+}

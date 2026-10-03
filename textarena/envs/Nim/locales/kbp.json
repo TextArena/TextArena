@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "Kɩ-tɛ kɩlabɩm: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Pɩtɛ kɩlɛlʋʋ nakʋyʋ fɛyɩ. Tɩŋna \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Piloto {player_id}, Aktion ɛɛna ɛyaa pɩlɩɣ. Kolɔmʊ {col} kɛ ɖoŋ ñɩŋʊ.",
+    "out_of_range": "Pile index {pile_index} fɛyɩ pɩ-taa.",
+    "non_positive": "Pʋpɔzʋʋ se ɖɩlɩzɩ wondu natʋyʋ.",
+    "exceeds_pile": "Pɩwɛɛza se pama {quantity} kɛ pile {pile_index} (pɩwɛɛza ɖooo {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "Kpɛlɛɛ {player_id} tɔm '[{pile_index} {quantity}]', kɩtɛzɩ {quantity} kɩkɛyɛ kɔyɔ {pile_index}."
+  },
+  "outcome": {
+    "win": "Aleɣya {player_id} kpaɣ kɛdɛzaɣ wonuu ((s)!"
+  }
+}

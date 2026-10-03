@@ -219,7 +219,6 @@ class LogicPuzzleEnv(ta.Env):
                         if player_mark == solution_mark:
                             correct += 1
 
-        print(f"Correct: {correct}, Total: {total}")  # Debugging line to check counts
         return correct / total if total > 0 else 0.0
 
 

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Stai giocando a Mastermind.\nDevi trovare il codice che è lungo {code_length} cifre, ogni cifra da 1 a {num_numbers}, {repeats}.\nNella tua risposta, puoi inviare la tua ipotesi nel seguente formato: '[2 1 4 5]'.\nDopo ogni ipotesi, riceverai un feedback sotto forma di pioli neri e bianchi.\nUn piolo nero indica una cifra corretta nella posizione corretta, mentre un piolo bianco indica una cifra corretta nella posizione sbagliata.\nHai {max_turns} turni per indovinare il codice.\n",
+    "with_repeats": "con possibili ripetizioni",
+    "no_duplicates": "senza duplicati"
+  },
+  "invalid_move": {
+    "wrong_format": "Non hai risposto con un elenco di numeri separati da spazi racchiusi in parentesi quadre.",
+    "not_integers": "Tutte le voci devono essere numeri interi validi.",
+    "wrong_length": "L'ipotesi dovrebbe contenere esattamente {code_length} numeri.",
+    "out_of_range": "Tutti i numeri devono essere compresi tra 1 e {num_numbers}.",
+    "duplicates_not_allowed": "I numeri duplicati non sono consentiti.",
+    "repeated_guess": "Hai già indovinato {guess}. Prova con un'altra ipotesi."
+  },
+  "game_action": {
+    "feedback": "Inviato [{guess}]. Feedback: {black_pegs} piolo(i) nero(i), {white_pegs} piolo(i) bianco(i)."
+  },
+  "outcome": {
+    "win": "Hai decifrato il codice, risolvendo {black_pegs} su {code_length} pioli correttamente",
+    "turn_limit": "Limite di turni raggiunto. Hai indovinato il {percent} percento dei numeri correttamente."
+  }
+}

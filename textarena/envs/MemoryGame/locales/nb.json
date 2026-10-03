@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id}. Du spiller Memory-spillet.\nMålet ditt er å matche flere par med kort på brettet enn motstanderen din.\nPå din tur, velg to kort å snu ved å skrive inn rad- og kolonnenummerene til det første og andre kortet, slik som '[0 1 1 0]', hvor det første kortet er i rad 0 og kolonne 1, og det andre kortet er i rad 1 og kolonne 0.\nHvis de to kortene matcher, får du et poeng og kortene forblir vendt opp. Hvis de ikke matcher, snus kortene tilbake ned, f.eks. '.'.\nSpillet slutter når alle par har blitt matchet."
+  },
+  "board": {
+    "current_board": "Nåværende brett:\n{board}",
+    "current_game_board": "Nåværende spillbrett:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldig trekkformat. Spiller {player_id} svarte ikke med en gyldig retning i firkantede parenteser.",
+    "out_of_bounds": "Ugyldig trekk. Spiller {player_id} valgte en posisjon utenfor grensene.",
+    "same_card_twice": "Ugyldig trekk. Spiller {player_id} valgte samme kort to ganger.",
+    "already_matched": "Ugyldig trekk. Spiller {player_id} valgte ett eller begge kort som allerede har blitt matchet."
+  },
+  "game_message": {
+    "cards_match": "Kortene valgt av Spiller {player_id} på posisjonene [{r1} {c1}] og [{r2} {c2}] matcher!",
+    "cards_no_match": "Kortene valgt av Spiller {player_id} matcher ikke. Kortene på posisjonene [{r1} {c1}] og [{r2} {c2}] er {pos1} og {pos2} henholdsvis."
+  },
+  "outcome": {
+    "draw": "Begge spillere matchet samme antall par med kort.",
+    "win": "Spiller {winner_id} har vunnet!",
+    "turn_limit": "Turtaksgrensen har blitt nådd. Spillet er over. Spiller 0 scoret {score_0} poeng, Spiller 1 scoret {score_1} poeng.",
+    "turn_limit_win": "{reason} Spiller {winner_id} har vunnet!"
+  }
+}

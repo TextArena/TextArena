@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Du är spelare {player_id} i ett tvåspelarspel av Spite and Malice. Ditt mål är att vara den första att tömma din utbetalningshög.\n\n### Spelöversikt:\n- Målet är att rensa din utbetalningshög genom att spela kort till mittens högar.\n- Du kan spela kort från tre källor:\n  1. Din **hand** (du börjar varje tur med upp till 5 kort i handen).\n  2. Det **översta kortet i din utbetalningshög**.\n  3. Det **översta kortet i någon av dina kasthögar**.\n\n### Spelregler:\n- Du kan spela ett kort till en mittens hög om det är **en rang högre** än det översta kortet på den högen (mittens högar börjar med Ess och går upp till Drottning; Kungar är vilda - de kan spelas på vilket kort som helst men ändrar inte rangsekvensen. Detta innebär att om en Kung används efter 4, så är den Kungen rang 5 och nästa kort måste vara en 6).\n- Om du inte kan spela fler kort, måste du **kasta ett kort** till en av dina kasthögar för att avsluta din tur.\n- Om en mittens hög når Drottning, kommer den att rensas automatiskt.\n- Rangordningen är: A=1, 2=2, ..., 9=9, J=10, Q=11, K som vild.\n\n### Åtgärder:\n1. **Dra**: I början av din tur, dra kort för att fylla din hand upp till 5 kort. Ange **[draw]** för att börja.\n2. **Spela ett kort**: För att spela ett kort, ange kortet och mittens högindex så här: **[play A♠ 0]** (där 'A♠' är kortet och '0' är mittens högindex).\n3. **Kasta**: Om du inte kan spela fler kort, kasta ett kort från din hand till en kasthög för att avsluta din tur. Ange **[discard A♠ 1]** (där 'A♠' är kortet och '1' är kasthögindex). Observera att du inte kan kasta något kort från utbetalningshögen. Du kan bara kasta kort från din hand.\n\n"
+  },
+  "board": {
+    "current_board": "Aktuell bräda:\n\n{board}\nTillgängliga drag: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Mittens högar ---\n",
+    "pile": "{observation}Hög {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Spelare {player_id}s vy ---\n",
+    "payoff": "{observation}Utbetalningshög (Översta kort): {top_card}, Utbetalningshög Längd: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Kasthögar: {discard}\n",
+    "empty": "Tom"
+  },
+  "game_message": {
+    "no_cards_left": "Det finns inga fler kort att dra från. Kom ihåg att du kan spela kort från dessa källor:\n  1. Din **hand**.\n  2. Det **översta kortet i din utbetalningshög**.\n  3. Det **översta kortet i någon av dina kasthögar**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Ogiltigt dragformat. Spelare {player_id} svarade inte med ett giltigt drag i hakparenteser.",
+    "invalid_play": "Ogiltigt spel. Spelare {player_id} försökte spela {card} på mittens hög {index}.",
+    "discard_from_payoff": "Ogiltigt kast. Spelare {player_id} försökte kasta ett kort från utbetalningshögen.",
+    "discard_not_in_hand": "Ogiltigt kast. Spelare {player_id} försökte kasta ett kort som inte är i handen.",
+    "wrong_move_type": "Ogiltig dragtyp. Spelare {player_id} svarade inte med en giltig dragtyp."
+  },
+  "game_action": {
+    "you_drew": "Du drog kort.",
+    "opponent_drew": "Spelare {player_id} drog kort.",
+    "you_played": "Du spelade {card} på mittens hög {index}.",
+    "opponent_played": "Spelare {player_id} spelade {card} på mittens hög {index}.",
+    "you_discarded": "Du har kastat {card} till kasthög {index}, vilket också innebär att du har avslutat din tur. Inga ytterligare åtgärder från dig beaktas för denna tur. Spelare {next_player_id} kommer att gå nästa.",
+    "opponent_discarded": "Spelare {player_id} kastade {card} till kasthög {index}, vilket också innebär att de avslutade sin tur. Inga ytterligare åtgärder från Spelare {player_id} beaktas för denna tur. Spelare {next_player_id}, du kommer att gå nästa. Ange din åtgärd i formatet [åtgärd kort mittens_högindex]."
+  },
+  "outcome": {
+    "payoff_cleared": "Spelare {current_player} har tömt sin utbetalningshög! Spelare {current_player} vinner!",
+    "deadlock_player_0": "Dödläge nått! Spelare 0 vinner med {player_0_payoff} kort kvar vs Spelare 1s {player_1_payoff} kort.",
+    "deadlock_player_1": "Dödläge nått! Spelare 1 vinner med {player_1_payoff} kort kvar vs Spelare 0s {player_0_payoff} kort.",
+    "deadlock_tie": "Dödläge nått med oavgjort! Båda spelarna har {player_0_payoff} kort kvar. Spelare {current_player} vinner som standard."
+  }
+}

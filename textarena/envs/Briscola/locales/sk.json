@@ -1,0 +1,57 @@
+{
+  "_comment": "Súbor lokalizácie Briscola. NEPREKLADAJTE kľúče (ľavá strana). Prekladajte iba hodnoty (pravá strana).",
+  "_slots": {
+    "{player_id}": "Číslo hráča, napr. 0 alebo 1",
+    "{trump_suit}": "Symbol trumfovej farby (♠♥♦♣) - neprekládať",
+    "{trump_card}": "Označenie trumfovej karty, napr. '7♠' - neprekládať",
+    "{card}": "Označenie karty, napr. 'A♥' - neprekládať",
+    "{trump_mark}": "Predrenderovaná značka '(TRUMP)', alebo prázdne",
+    "{max_pos}": "Najvyšší povolený počet kariet v ruke hráča",
+    "{count}": "Počet kariet, ktoré hráč drží",
+    "{pos}": "Číslo pozície karty v ruke",
+    "{points}": "Počet bodov (hodnota karty alebo akumulovaný skóre)",
+    "{hand}": "Predrenderovaný, viacriadkový zoznam kariet v ruke",
+    "{trick}": "Predrenderovaný zoznam kariet v aktuálnom ťahu",
+    "{scores}": "Predrenderovaný riadok so skóre, alebo konečným blokom skóre pre hráča",
+    "{trump_info}": "Predrenderovaný riadok s trumfovou farbou / počtom kariet v balíku",
+    "{winner}": "Číslo hráča, ktorý vyhral ťah alebo hru",
+    "{tricks}": "Počet ťahov, ktoré hráč vyhral",
+    "{deck_count}": "Počet kariet zostávajúcich v balíku"
+  },
+  "game": {
+    "start": "Hra Briscola začala! Trumfová farba: {trump_suit} (Trumfová karta: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Hrajete Briscolu - Hráč {player_id}.\nCieľ: Vyhrajte ťahy a zozbierajte najviac bodov (celkom 120 bodov v balíku).\nBody za karty: A=11, 3=10, K=4, Q=3, J=2, ostatné=0\nSila kariet: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTrumfové karty porážajú ne-trumfové karty bez ohľadu na silu.\n\nAkcia: '[play X]' kde X je pozícia (1-{max_pos}) karty v ruke\n"
+  },
+  "hand": {
+    "none": "Žiadne karty",
+    "empty": "Žiadne karty v ruke",
+    "header": "Vaša ruka:",
+    "card_line": "  {pos}. {card} [{points} b]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Žiadne karty zahrané v tomto ťahu.",
+    "header": "Aktuálny ťah:",
+    "line": "  Hráč {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Hráč {player_id}: {points} b",
+    "trump_info": "Trumfová farba: {trump_suit}",
+    "trump_info_deck": "Trumfová farba: {trump_suit} | Počet kariet v balíku: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nSkóre: {scores}\n{trump_info}\n\nZahrajte kartu pomocou [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Použite [play X] kde X je pozícia karty (1, 2, 3, atď.)",
+    "out_of_range": "Neplatná pozícia karty. Máte {count} kariet (1-{count})"
+  },
+  "action": {
+    "played": "Hráč {player_id} zahral {card}",
+    "trick_win": "Hráč {winner} vyhral ťah s kartou {card} a získal {points} bodov!"
+  },
+  "outcome": {
+    "head": "Hra skončila! Hráč {winner} vyhral s {points} bodmi!\n\nKonečné skóre:\n{scores}",
+    "player_line": "Hráč {player_id}: {points} bodov ({tricks} ťahov)\n"
+  }
+}

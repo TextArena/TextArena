@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Nde reiko Player {player_id} LinesOfAction ñembosarái-me.\nNe'ĩra'ã kuéra '{side}', ñande ruvicha kuéra '{other}'.\nMbogue jehasa: `[b1b3]` (kuégui-ko'águi). Teku'a mbogue ohasa teku'a, yvatéte, térã diagonalmente kuadrado papapy kuéra peteĩcha oĩva kuéra opaite sa'y (mayma sa'y). Nde reikua mbogue rei nde rei ñande, hákatu nde rei ruvicha; ñande ruvicha ári reho, reñakãramo."
+  },
+  "board": {
+    "current_board": "Junta: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato ha'eva'erã e2e4 (oúva, ohóva coordinada-pe).",
+    "no_piece": "Ndaipóri {side} pehẽngue oĩva {coord}-pe.",
+    "identical": "Moõguipa ou ha moôgotopa.",
+    "not_straight_or_diagonal": "Ñemongu'e oiko va'erã reínte térã diagonal-pe.",
+    "wrong_distance": "Ogueraha va'erã distancia ojoajúva umi pieza en línea ndive.",
+    "enemy_blocks": "Pe enemigo mba'e omboty tape.",
+    "destination_own": "Destino ojeiporuva'ekue ijeheguiete."
+  },
+  "game_action": {
+    "moved": "Player {player_id} ohasa {from} -> {to}",
+    "captured_suffix": "Player {player_id} ohasa {from} -> {to} oñakãramo peteĩ ñande ruvicha."
+  },
+  "outcome": {
+    "win": "Opaite mba'e ojoaju.",
+    "draw_no_capture": "60 movimiento ojeipysóva.",
+    "draw_repetition": "Posición oje'e jey mbohapy jevy."
+  }
+}

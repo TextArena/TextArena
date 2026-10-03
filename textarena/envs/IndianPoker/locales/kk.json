@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Сіз Индий покері ойынындағы Ойыншы {player_id} сыңары.\n- 52-карталық колода; сіз тек қарсылас картасын көресіз.\n- Анте {ante} чип(тер) әр раундта, {max_rounds} раунд(тар) жиыны.\n- Жарамды қимылдар: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X - әрбір оң整, сіздің чип есебіңізден асатын емес.)\n- Жасырын карталардың ең жоғарғысы шоу-даунда пұлды жеңеді.\n"
+  },
+  "round": {
+    "announce": "### Раунд {current_round}/{max_rounds} Сіздің қарсыласыңыздың картасы: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Бiр ғана iшiнде \"[check]\", \"[bet 2]\", \"[call]\", \"[raise 3]\" немесе \"[fold]\" деген сияқты iшiнде бiр ғана iшi бар.",
+    "cannot_check": "[check] жасауға болмайды - сізге салым қойылған.",
+    "amount_min": "Салым / көтеру мөлшері ≥ 1 болуы тиіс.",
+    "cannot_bet": "Мүмкін емес [bet] - міндетті [call] / [raise] / [fold].",
+    "nothing_to_call": "Шақыруға ештеңе жоқ; сіз [check] орнына шақыра аласыз.",
+    "no_bet_to_raise": "Ашу үшін [bet X] қолданыңыз; көтеру үшін ставка жоқ.",
+    "insufficient": "Бұл әрекетке жетерлік чиптер жоқ."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "\"[check]\", \"[bet X]\"",
+    "actions_facing_bet": "\"[call]\" (бағасы {to_call}), \"[raise X]\", \"[fold]\"",
+    "possible_actions": "Мүмкін болатын әрекеттеріңіз: {legal}"
+  },
+  "message": {
+    "round_result": "{reason} Тоста {pot} → Ойыншы {winner}. (Банкролл P0:{p0}, P1:{p1})",
+    "folded": "Ойыншы {player_id} қайтты.",
+    "showdown_win": "Көрініс: {card_win} {card_lose} соққысына ұшырады.",
+    "showdown_tie": "Көрініс тең: екеуі де {card}. Күллі бөлік  әрқайсысы {split} алады."
+  },
+  "outcome": {
+    "p0_wins": "0 ойыншы жеңді ({bank0} > {bank1})",
+    "p1_wins": "1-ші ойыншы жеңді ({bank1} > {bank0})",
+    "draw": "Барлық турдан кейін тең фишкалар"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Sika'y Managpapat {player_id} ed Iterated Prisoner's Dilemma ya miyayaliwa'y {num_rounds} rounds.\n\nStruktura na Laro:\n- Baya'y kada desisyon sika'y wala'y {total_conversation_rounds} turno ya komunikasyon libre.\n- Kasumpal to, saray duaran agtago'y kada kumpitensya o defection.\n\nPayoff Matrix (tetep ya kada round):\n- Saray duaran Kumpitensya ➜ kada {cooperate_reward}\n- Saray duaran Defection ➜ kada {mutual_defect_reward}\n- Say maysa'y Defection, say maysa'y Kumpitensya ➜ Defector {defect_reward}, Kumpitensya {sucker_reward}\n\nPanon ya Laro:\n- Diad konbersasyon: itype so anuman ya texto ya ipapabatik.\n- Diad desisyon phase: ilakip so '[Cooperate]' o '[Defect]' (case-insensitive). Sika'y nayarin managdugang texto baybay/kaudian so token."
+  },
+  "phases": {
+    "conversation_finished": "Konbersasyon tinapos ya round {round}. Ireply so '[Cooperate]' o '[Defect]' ed loob na \\boxed{{}}.",
+    "starting_round": "--- Gapoan a Panag-alimpag {round} ---",
+    "round_summary": "Resulta na Round {round}:\n{outcome}\nManagpapat 0 akakawat {r0} (total {score_0}), Managpapat 1 akakawat {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Managpapat {winner} manalo {win_score} - {lose_score}.",
+    "draw": "Parehon nan-goal so duaran manlalaban {s0}.",
+    "round_both_cooperate": "Nankimey iran dua.",
+    "round_both_defect": "Amin ya manlalaban et tinmaynan.",
+    "round_p0_cooperates_p1_defects": "Managpapat 0 kumpitensya, Managpapat 1 defection.",
+    "round_p0_defects_p1_cooperates": "Managpapat 0 defection, Managpapat 1 kumpitensya."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam Permainan Rundingan.\nAnda mempunyai beberapa sumber, dan tugas anda adalah untuk berdagang supaya jumlah nilai sumber anda meningkat.\nSumber dan nilai berkaitan yang anda miliki sekarang ialah:\n\t+ {resource_value_list}\nPada setiap giliran, anda boleh bercakap dengan lawan anda dan membuat tawaran dagangan.\nGunakan token khas berikut untuk tindakan:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': Untuk menerima tawaran yang masuk.\n  - '[Deny]': Untuk menolak tawaran yang masuk (lalai).\nPermainan berlangsung selama {max_turns} giliran secara keseluruhan."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Pemain cuba menerima dagangan tanpa mempunyai sumber yang diperlukan.",
+    "out_of_range": "Pemain {player_id}, tindakan tidak sah. Lajur {col} di luar julat.",
+    "already_full": "Pemain {player_id}, tindakan tidak sah. Lajur {col} sudah penuh.",
+    "proposing_with_no_resource": "Pemain {player_id} cuba membuat tawaran tanpa sumber yang diperlukan.",
+    "incorrect_offer_format": "Pemain {player_id} membuat tawaran dalam format yang salah.",
+    "no_new_offer": "Pemain {player_id} tidak membuat tawaran baharu."
+  },
+  "offers": {
+    "reject": "Pemain {player_id} menolak tawaran dagangan.",
+    "accept": "Pemain {acceptor_id} menerima tawaran dagangan daripada Pemain {proposer_id}.",
+    "proposal": "Pemain {player_id} membuat tawaran berikut kepada Pemain {opponent_id}: Item yang ditawarkan: {offered} -> Item yang diminta: {requested}"
+  },
+  "outcome": {
+    "win": "Pemain {winner_id} menang dengan pertambahan nilai inventori yang lebih besar.",
+    "draw": "Perubahan nilai inventori yang sama untuk semua pemain. Seri."
+  }
+}

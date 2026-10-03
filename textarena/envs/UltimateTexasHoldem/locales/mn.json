@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Карт байхгүй байна",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Ганцаарчилсан тоглогч vs Дилер\n\n📖 ТОГЛОМЫН ТОВЧ ТАНИЛЦУУЛГА:\n• Та {start_chips} чипстэй эхлэнэ\n• 52 картын нэг тоглогчийн цуглуулга (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Та дилертэй (гэр) тоглоно\n• Бүх раунд Ultimate Texas Hold'em бүтэцтэй байна: та ANTE болон BLIND тавьж, 2 нууц карт авч, үйлдлийн фазуудад PLAY тавихаа шийднэ, дараа нь нийтийн картуудыг ил болгоно, гарыг харьцуулж, дилерийн гарыг харьцуулна. Таны зорилго бол ялалтыг нэмэгдүүлэх (та илүү сайн гар байхад), алдагдлыг бууруулах (та муу гар байхад) юм.\n• Тоглом эхлэхэд 0 чипс буюу доогуур байхад (ЯLAGDAH) эсвэл 1000 раундийг чипстэй гүйцэтгэхэд (ЯЛАЛТ) дуусна\n\n💰 ТАВИХ БҮТЭЦ:\n• ANTE: Бүх раундад үнэмлэхүй ${ante} тавьж байна\n• BLIND: Бүх раундад үнэмлэхүй ${ante} тавьж байна\n• PLAY: Тоглоомын үед сонголттой тавьж болно. Раундийн турш, дараах ганцхан сонголтыг хийж болно: (${ante4} PRE-FLOP-д хийсэн бол, ${ante2} FLOP-д хийсэн бол, эсвэл ${ante} RIVER-д хийсэн бол. Мөн RIVER-д хийж, гарыг орхиж, тавьж болно.)\n\n🎴 КАРТЫН ТАВИХ:\n• Та 2 ил карт авна (та гарын картууд)\n• Дилер 2 нууц карт авна (танд нуугдсан)\n• 5 нийтийн картууд эхлээд нуугдсан байна\n• Нийтийн картууд фазуудын турш ил болно\n\n🏆 ДИЛЕРИЙН ШАЛГУУР:\n• Дилер хамгийн багадаа нэг хос карт (2 ижил зэрэгтэй карт) ашиглах ёстой, 2 гарын карт болон 5 нийтийн карт ашиглан.\n• Дилерийн шалгуур тавих үр дүнг нөлөөлнө, хожим тайлбарлах болно.\n\n🎮 ТОГЛОМЫН ФАЗУУД & ҮЙЛДЛҮҮД:\n📋 PRE-FLOP:\n  • Үйлдлүүд: [4x] (${ante4}) эсвэл [check]\n  • [4x]: ${ante4} PLAY тавьж, эхний 3 нийтийн картыг ил болгоно\n  • [check]: Нэмэлт тавьж байхгүй, эхний 3 нийтийн картыг ил болгоно\n\n📋 FLOP:\n  • 4x тавьсан бол: Зөвхөн [skip] байна (сүүлийн 2 нийтийн картыг auto-ил болгоно)\n  • 4x тавьсангүй бол: [2x] (${ante2}) эсвэл [check]\n  • [2x]: ${ante2} PLAY тавьж, сүүлийн 2 нийтийн картыг ил болгоно\n  • [check]: Нэмэлт тавьж байхгүй, сүүлийн 2 нийтийн картыг ил болгоно\n\n📋 RIVER:\n  • 4x эсвэл 2x тавьсан бол: Зөвхөн [skip] байна (auto-шоудаунд үргэлжлүүлнэ)\n  • Өмнөх PLAY тавьсангүй бол: [1x] (${ante}) эсвэл [fold]\n  • [1x]: ${ante} PLAY тавьж, шоудаунд үргэлжлүүлнэ\n  • [fold]: Гарыг орхиж, ANTE болон BLIND тавьсан дүнг алдана\n\n📋 SHOWDOWN:\n  • Бүх картууд ил болон үнэлэгдэнэ\n  • 7 картуудаас (2 гар + 5 нийтийн) хамгийн сайн 5-картын гарыг сонгоно\n  • Тавьсан дүнгийн дагуу тооцоолно\n\n💎 ТАВИХ ШАН:\n📊 ANTE ТАВИХ:\n  • Дилер шалгуур хангахгүй бол: PUSH (тавьсан дүн буцаагдана)\n  • Дилер шалгуур хангаж, та ялсан бол: 1:1 шан (тавьсан дүн + ялалт)\n  • Дилер шалгуур хангаж, та ялагдсан бол: Тавьсан дүн алдагдана\n  • Тэнцсэн бол: PUSH (тавьсан дүн буцаагдана)\n\n📊 BLIND ТАВИХ:\n  • Дилерийн шалгуураас үл хамаарах\n  • Та ялсан бол: Тавьсан дүн буцаагдаж, гарын хүчнээс хамааран нэмэлт шан авна\n  • Та ялагдсан бол: Тавьсан дүн алдагдана\n  • Тэнцсэн бол: PUSH (тавьсан дүн буцаагдана)\n\n📊 BLIND ТАВИХЫН ШАН ХҮСНЭГТ:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Нэмэлт шан байхгүй\n\n📊 PLAY ТАВИХ:\n  • Дилерийн шалгуураас үл хамаарах\n  • Шууд харьцуулалт: Таны хамгийн сайн гар vs Дилерийн хамгийн сайн гар\n  • Та ялсан бол: 1:1 шан (тавьсан дүн + ялалт)\n  • Та ялагдсан бол: Тавьсан дүн алдагдана\n  • Тэнцсэн бол: PUSH (тавьсан дүн буцаагдана)\n\n🎯 ПОКЕР ГАРЫН ЧИНГЭЛЭГ (Хамгийн сайнаас муухай руу):\n  1. Royal Flush: A-K-Q-J-10 ижил өнгөтэй\n  2. Straight Flush: 5 дараалсан карт ижил өнгөтэй\n  3. Four of a Kind: 4 ижил зэрэгтэй карт\n  4. Full House: 3 ижил зэрэгтэй карт + 2 ижил зэрэгтэй карт\n  5. Flush: 5 ижил өнгөтэй карт\n  6. Straight: 5 дараалсан карт\n  7. Three of a Kind: 3 ижил зэрэгтэй карт\n  8. Two Pair: 2 хос ижил зэрэгтэй карт\n  9. One Pair: 2 ижил зэрэгтэй карт\n  10. High Card: Хамгийн өндөр карт ялна\n\n⌨️  ҮЙЛДЛИЙН КОМАНДУУД:\n• [4x] эсвэл [play bet 4x]: ${{self.ante_amount*4}} PLAY тавьж байна\n• [2x] эсвэл [play bet 2x]: ${{self.ante_amount*2}} PLAY тавьж байна\n• [1x] эсвэл [play bet 1x]: ${{self.ante_amount*1}} PLAY тавьж байна\n• [check] эсвэл [c]: Шалга (нэмэлт тавьж байхгүй)\n• [fold] эсвэл [f]: Гарыг орхиж байна\n• [skip] эсвэл [s]: Дараагийн фаз руу үсрэнэ (үйлдлийн хэрэггүй байхад)\n\n💡 СТРАТЕГИЙН ЗӨВЛӨГӨӨ:\n• Хүчтэй гараар эхлэхэд (хос, өндөр карт) 4x тавих нь зөв байж болно\n• Дилерийн шалгуурыг харгалзана - сул гаруудад дилер шалгуур хангахгүй бол тэнцсэн байж болно\n• BLIND тавих нь хүчтэй гаруудад маш ашигтай байж болно (Royal Flush = 500:1!)\n• Чипсийн тоогоо харгалзана! Эхлэхэд 0 чипс буюу доогуур байхад та ялагдана.\n\n⚠️  ЧУХАЛ ЗӨВЛӨГӨӨ:\n• ANTE болон BLIND тавих нь бүх раундад үнэмлэхүй байна\n• PLAY тавих нь сонголттой байна\n• Үйлдлийг зөв хийж, нэг үйлдэл хийхэд хязгаарлахгүй байхыг анхаарна уу.",
+    "state": " ТАЙРЛАН {round}  Чипс: {chips}  Таны гар: {hand}  Одоогийн бооцоо: Анте ${ante}, Бинд ${blind}, Play ${play}  Фаз: {phase}  Боломжтой үйлдэл: {actions} "
+  },
+  "board": {
+    "round_start": "🎮 РАУНД {round} эхэллээ! Тавьсан дүн: ANTE ${ante}, BLIND ${blind}. Та {chips} чипстэй үлдсэн байна.",
+    "your_hand": " Таны гар: {hand}",
+    "flop_revealed": " FLOP илрүүлсэн: {cards}",
+    "river_revealed": " RIVER илрүүлсэн: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Одоогийн фазад хийж болохгүй үйлдэл. Боломжит үйлдлүүд: {available}",
+    "message": " Ашиглалтын хүчингүй байдал! Ашиглалтын боломжтой байдал: {available}"
+  },
+  "action": {
+    "folded": "- Та бууж өгсөн."
+  },
+  "showdown": {
+    "dealer_hand": " ШОУД! Дилерийн гар: {cards}",
+    "community_cards": " Нийгмийн карт: {cards}",
+    "player_best": " Тоглогчийн хамгийн сайн гар: {name} ({cards})",
+    "dealer_best": " Дилерийн хамгийн сайн гар: {name} ({cards})",
+    "ante_lost_folded": " ANTE бооцоо алдсан! -${ante} (хүссэн)",
+    "blind_lost_folded": " БИЛДЭЙН БЭТГЭЭЛДЭЙ! -${blind} (уулгарсан)",
+    "ante_won": "✅ АНТ-ийн бооцоо УУРЛАВ! +${amount}",
+    "ante_pushed": " ANTE бооцоо НАЙЛГААА! ${ante} буцаасан",
+    "ante_lost": "-${ante}",
+    "blind_won": "✅ БИЛЛИНД БЕТ АМЖЛАХ! +${amount}",
+    "blind_pushed": " БИЛДЭЙН БЭТЭЙН БОЛГОД! ${blind} буцаасан",
+    "blind_lost": "❌ BLIND тавьсан дүн алдагдлаа! -${blind}",
+    "play_won": "✅ БОЛЖЛАХ БОЛЖ УДАР! +${amount}",
+    "play_pushed": " PLAY бооцоо НАЙЛГААА! ${play} буцаасан",
+    "play_lost": "❌ PLAY тавьсан дүн алдагдлаа! -${play}",
+    "net_gain": "🎉 РАУНД {round} дууслаа! Чипсийн тоо нэмэгдлээ: +${net}",
+    "net_loss": "💸 РАУНД {round} дууслаа! Чипсийн тоо алдагдлаа: ${net}",
+    "separator": "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+  },
+  "outcome": {
+    "game_over_win": "🏁 ТОГЛОМ ДУУСЛАА! {max_turns} раундийг гүйцэтгэсэн байна. Та ${chips} чипстэй байна - ТА ЯЛАЛАА!",
+    "game_over_lose": "🏁 ТОГЛОО ДУУСЛАА! Чи чипсээ алдлаа. Дилер яллаа!",
+    "reward_win": "Тоглогч ${chips} чипстэй {winner_rounds} тойрог дууссан",
+    "reward_lose": "Тоглогч нь тойрогт чипс дууссан {round}",
+    "reward_win_max": "Тоглогч ${chips} чипстэй {max_turns} тойрог дууссан"
+  },
+  "hand_names": {
+    "royal_flush": "Хаан хааны цом",
+    "straight_flush": "Шууд угаах",
+    "four_of_a_kind": "Дөрвөн төрлийн",
+    "full_house": "Бүрэн өрөө",
+    "flush": "Угаалгын",
+    "straight": "Шууд",
+    "three_of_a_kind": "Гурван төрлийн",
+    "two_pair": "Хоёр хос",
+    "one_pair": "Нэг хос",
+    "high_card": "Өндөр карт",
+    "unknown": "Мэдэхгүй гар"
+  }
+}

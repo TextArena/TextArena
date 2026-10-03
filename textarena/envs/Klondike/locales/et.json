@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire keelefail. ÄRGE tõlgige võtmeid (vasak pool). Tõlgige ainult väärtused (parem pool).",
+  "_slots": {
+    "{n}": "Tegevuse indeks komakohaga eraldatud käsu sees, 1-põhine",
+    "{msg}": "Pesastatud iga tegevuse tulemuse sõnum (juba lokaliseeritud)",
+    "{count}": "Ülaltvaadatavate kaartide arv, mida liigutatakse",
+    "{src}": "Lähtetabeli pinu number, 1-põhine",
+    "{dst}": "Sihtpinu number, 1-põhine",
+    "{cmd}": "Tundmatu käsk, mille mängija sisestas (mitte tõlgitud)",
+    "{max_turns}": "Maksimaalne käikude arv enne mängu lõppu",
+    "{score}": "Kaartide arv aluspinudes",
+    "{board}": "Renderdatud ASCII laud (mitte tõlgitud)",
+    "{turn}": "Praegune käigu number",
+    "{stock}": "Kaartide arv varus",
+    "{waste}": "Ülemine jäätmete kaardi silt või '--', kui tühi (mitte tõlgitud)",
+    "{cards}": "Pinus olevad kaardid neutraalsete siltidena või '--', kui tühi (mitte tõlgitud)"
+  },
+  "player_prompt": {
+    "intro": "Mängid Klondike Solitaire'i. Sinu eesmärk on liigutada kõik kaardid aluspinudesse.\n\nMängu reeglid:\n- Aluspinud (F1-F4): Ehitada üles alates Ässast Kuningani masti järgi\n- Tabelipinud (T1-T7): Ehitada alla vahelduvate värvidega (punane mustal, must punasel)\n- Varu: Tõmmata kaarte jäätmete pinusse\n- Jäätmed (W): Ülemine kaart on saadaval mängimiseks\n\nKäsud:\n- 'draw' - Tõmmata kaarte varust jäätmetesse\n- 'move <allikas> <sihtkoht> [count]' - Liigutada kaarte pinude vahel\n  Näited: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count võib olla ka 'all', mis proovib liigutada kõik ülaltvaadatavad kaardid.\n- 'forfeit' - Lõpetada mäng kohe ja fikseerida praegune skoor\n- Pinude nimed: W (jäätmed), F1-F4 (aluspinud), T1-T7 (tabelipinud)\n\nSaad teostada mitu tegevust ühes käigus, eraldades need komadega:\n  Näide: 'draw, move W T1, move T2 F1'\n\nAinult Kuningad saavad asetada tühjadele tabelipinudele.\nTegevused teostatakse järjekorras - kui üks neist ebaõnnestub, jäävad ülejäänud tegevused vahele.\nKasuta 'forfeit', kui usud, et mäng on võimatu võita."
+  },
+  "format_error": {
+    "no_brackets": "Vigane tegevuse vorming. Tegevus peaks olema sulgudes.",
+    "no_closing_bracket": "Vigane tegevuse vorming. Puudub sulgev sulg ']'",
+    "empty_command": "Tühi käsk. Sisesta 'draw' või 'move <allikas> <sihtkoht> [count]'",
+    "empty_action": "Tühi tegevus",
+    "move_needs_args": "Liigutamise käsk nõuab allikat ja sihtkohta. Kasutamine: 'move <allikas> <sihtkoht> [count]'",
+    "count_positive": "Count peab olema positiivne või 'all'",
+    "count_invalid": "Vigane count. Kasuta arvu või 'all'",
+    "unknown_command": "Tundmatu käsk '{cmd}'. Kasuta 'draw', 'move <allikas> <sihtkoht> [count]' või 'forfeit'",
+    "wrapped": "Tegevus {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Tegevus {n}: {msg}",
+    "before_failure": "Teostati {n} tegevust enne ebaõnnestumist.",
+    "failed": "Tegevus {n} ebaõnnestus: {msg}"
+  },
+  "move_result": {
+    "drew": "Tõmmati kaart(e) varust jäätmetesse.",
+    "cannot_draw": "Ei saa tõmmata. Nii varu kui ka jäätmed on tühjad.",
+    "invalid_pile": "Vigane pinu nimi. Kasuta W, F1-F4 või T1-T7",
+    "foundation_one_card": "Saab liigutada ainult 1 kaarti aluspinusse",
+    "waste_to_foundation_ok": "Liigutati kaart jäätmetest aluspinusse F{dst}",
+    "waste_to_foundation_bad": "Ei saa liigutada jäätmete kaarti selle aluspinusse",
+    "tableau_to_foundation_ok": "Liigutati kaart tabelipinust T{src} aluspinusse F{dst}",
+    "tableau_to_foundation_bad": "Ei saa liigutada tabelipinu kaarti selle aluspinusse",
+    "foundation_to_foundation": "Ei saa liigutada aluspinust aluspinusse",
+    "waste_to_tableau_one_card": "Saab liigutada ainult 1 kaarti jäätmetest tabelipinusse",
+    "waste_to_tableau_ok": "Liigutati kaart jäätmetest tabelipinusse T{dst}",
+    "waste_to_tableau_bad": "Ei saa asetada jäätmete kaarti selle tabelipinule",
+    "no_face_up": "Ei ole ülaltvaadatavaid kaarte, mida liigutada",
+    "tableau_to_tableau_ok": "Liigutati {count} kaarti tabelipinust T{src} tabelipinule T{dst}",
+    "tableau_to_tableau_bad": "Ei saa liigutada {count} kaarti T{src} tabelipinule T{dst}",
+    "foundation_to_tableau_one_card": "Saab liigutada ainult 1 kaarti aluspinust tabelipinusse",
+    "foundation_empty": "Aluspinu F{src} on tühi",
+    "foundation_to_tableau_ok": "Liigutati kaart aluspinust F{src} tabelipinule T{dst}",
+    "foundation_to_tableau_bad": "Ei saa asetada aluspinu kaarti tabelipinule T{dst}",
+    "to_waste_or_stock": "Ei saa liigutada jäätmetesse või varusse"
+  },
+  "outcome": {
+    "forfeit": "Mäng katkestati. Lõplik skoor: {score} kaarti aluspinudes.",
+    "won": "Palju õnne! Oled võitnud Klondike Solitaire'i!",
+    "turn_limit": "Mäng on lõppenud! Jõudsid maksimaalse {max_turns} käiguni. Skoor: {score} kaarti aluspinudes."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Käik: {turn}/{max_turns}",
+    "stock": "Varu: {stock} kaarti",
+    "waste": "Jäätmed (W): {waste}",
+    "foundations_header": "Aluspinud:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabelipinud:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

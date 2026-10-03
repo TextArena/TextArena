@@ -1,0 +1,31 @@
+{
+  "_comment": "Datoteka s prevodom za Snake. NE PREVADIJ ključev (levo), samo vrednosti (desno).",
+  "_slots": {
+    "{num_players}": "Število igralcev v tekmi",
+    "{width}": "Širina plošče v celicah",
+    "{height}": "Višina plošče v celicah",
+    "{max_turns}": "Omejitev potez za tekmo",
+    "{player_id}": "Številka igralca (0-temeljena)",
+    "{board}": "Izrisana ASCII mreža; ohrani nevtralno, nikoli ne prevajaj znakov",
+    "{reason}": "Izrisana fraza razloga za konec igre",
+    "{groups}": "Nevtralni podatki o uvrstitvi (seznam skupin igralcev, od najslabših do najboljših); ne prevajaj"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Igralec Snake na {width}×{height} mreži.\nVi kontrolirate kačo {player_id}. Veljavne poteze: '[up]'/'[down]'/'[left]'/'[right]' (ali w/s/a/d).\nCilj: preživeti najdlje ali biti najdaljši in dobiti najvišji rezultat (omejitev potez {max_turns} potez)."
+  },
+  "board": {
+    "current": "Trenutna plošča:\n{board}",
+    "after_moves": "Trenutno stanje plošče:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Kača {player_id} je umrla zaradi neveljavne poteze."
+  },
+  "outcome": {
+    "survived_win": "Igralec {player_id} je preživel; vsi ostali so umrli.",
+    "all_dead_simul": "Vse kače so umrle hkrati.",
+    "outlived": "Igralec je preživel vse ostale.",
+    "all_dead": "Vse kače so mrtve.",
+    "turn_limit": "Omejitev potez je bila dosežena - najboljši rezultat zmaga v primeru izenačenja.",
+    "ranking": "{reason} Končne skupine uvrstitve (od najslabših do najboljših): {groups}"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id} em uma partida de Jogo de Estratégia Pura.\n- Você tem as 13 cartas A-K; cada uma pode ser usada uma vez.\n- Em cada rodada, uma carta-prêmio é revelada. Jogue exatamente UMA carta escrevendo algo que contenha um token entre colchetes, como '[Q]', '[10]', '[2]' ...\n- A carta mais alta vence o prêmio (mais o acúmulo). Empates rolam o prêmio para o pote da próxima rodada.\n- O total mais alto após 13 rodadas vence."
+  },
+  "round": {
+    "announce": "### Rodada {round}/13 - Prêmio: {prize}  (vale {worth})"
+  },
+  "board": {
+    "hand": "Sua mão restante: {hand}"
+  },
+  "invalid_move": {
+    "wrong_format": "A ação deve conter exatamente UM token de carta entre colchetes.",
+    "card_not_held": "Você não tem mais essa carta."
+  },
+  "message": {
+    "bids": "Lances: P0 {card0} vs P1 {card1} - ",
+    "p0_wins": "{observation}Jogador 0 vence {pot_value}.",
+    "p1_wins": "{observation}Jogador 1 vence {pot_value}.",
+    "tie": "{observation}Empate -> pote agora {carry_pot}.",
+    "scores": "Pontuações -> P0:{score0}  P1:{score1}"
+  },
+  "outcome": {
+    "p0_wins": "P0 {s0} vs P1 {s1}",
+    "p1_wins": "P1 {s1} vs P0 {s0}",
+    "draw": "Ambos pontuaram {s0}"
+  }
+}

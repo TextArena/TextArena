@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-spēlētāju Ielūcis uz {width}x{height} režģa.\nJūs esat spēlētājs {player_id}. Derīgi gājieni: '[up]' '[down]' '[left]' '[right]' vai w/s/a/d.\nMērķis: pārdzīvot visus pārējos. Takas ir nāvējošas; sienas triecieni nogalina; tiešie sadursmes nogalina abus."
+  },
+  "board": {
+    "current": "Niu asūšuo vaļde: {board}",
+    "after_moves": "Pīeja piec vīnlaiceigim kusteibom: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Spālātuojs {player_id} nūmyra naīcīteigys kusteibys deļ."
+  },
+  "outcome": {
+    "survived_win": "Spālātuojs {player_id} izdzeivuoja; vysi cyti nūkrita.",
+    "all_crashed": "Vysi spēlētāji nūkryta vīnlaiceigi.",
+    "outlived": "Spēlnīks puorsavierte vysu.",
+    "all_dead": "Vysi dalinīki nūmyra.",
+    "turn_limit": "Izguojušais, kurs dzeivoj ilgok - uzvar.",
+    "ranking": "{reason} Pašāmāt final ranking grupas (labākais→sliktākais): {groups}"
+  }
+}

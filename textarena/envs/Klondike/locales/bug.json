@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Miu ri laleng Klondike Solitaire. Tujuanmu iya ri menggeserang kartu-kartu ngaseng ri tumpukan fondasi.\n\nPaturu Game:\n- Tumpukan fondasi (F1-F4): Bangun ngaseng ri As ngaseng ri Raja ri warna\n- Tumpukan tableau (T1-T7): Bangun turun selang-seling warna (mera ri itang, itang ri mera)\n- Stok: Menggambar kartu-kartu ri tumpukan limbah\n- Limbah (W): Kartu paling atas riada ri main\n\nPerintah:\n- 'draw' - Menggambar kartu-kartu ri stok ri limbah\n- 'move <source> <destination> [count]' - Menggeserang kartu-kartu ri antara tumpukan\n  Contoh: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count bisa juga 'all', iya ri coba menggeserang kartu-kartu ngaseng ri muka.\n- 'forfeit' - Mengakhiri game langsung ri mengunci skor muatang\n- Nama tumpukan: W (limbah), F1-F4 (fondasi), T1-T7 (tableau)\n\nMiu bisa melaksanakan aksi-aksi banyak ri satu giliran ri memisahkan ri koma:\n  Contoh: 'draw, move W T1, move T2 F1'\n\nRaja-raja bisa ditempatkan ri tumpukan tableau kosong.\nAksi-aksi melaksanakan ri urutan - jika satu gagal, aksi-aksi lainnya dilewati.\nGunakan 'forfeit' jika muatang percaya game iya ri mustahil ri menang."
+  },
+  "format_error": {
+    "no_brackets": "Format aksi de'na ulle. Aksi waji engka ri laleng kurung-kurung.",
+    "no_closing_bracket": "Format aksi de'na valid. kurangngi kurung paccapureng ']'",
+    "empty_command": "Komando kosong. tipe 'draw' iyarega 'move <source><destination> [count]'.",
+    "empty_action": "Aksi kosongnge",
+    "move_needs_args": "Parenta palecce'e parellu assaleng sibawa pattujung. Pakkeguna: 'move <source> <destination> [count]'",
+    "count_positive": "Jumlah harus ri positif atau 'all'",
+    "count_invalid": "Jumlah tidak sah. Gunakan angka atau 'all'",
+    "unknown_command": "Perintah tidak dikenal '{cmd}'. Gunakan 'draw', 'move <source> <destination> [count]', atau 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Aksi ripugau'e {n} (s) riwettu depa naullei.",
+    "failed": "Aksi {n} gagal: {msg}"
+  },
+  "move_result": {
+    "drew": "Dibawa kartu (s) dari stok ke limbah.",
+    "cannot_draw": "De'na ullei mappassu. sewwa-sewwae stok na wassele kosongni.",
+    "invalid_pile": "Aseng tumpukan de'na magello. Pakkegunai W, F1-F4, iyarega T1-T7",
+    "foundation_one_card": "wedding iyami napalettukeng seddi kartu ri pondasi'e.",
+    "waste_to_foundation_ok": "Karet dipindah pole limbah ke yayasan F{dst}",
+    "waste_to_foundation_bad": "De'na ulle ripalecce kartu mappolo ri dasarna.",
+    "tableau_to_foundation_ok": "Pindahkan kartu dari tableau T{src} ke fondasi F{dst}",
+    "tableau_to_foundation_bad": "De'na ulle ripalecce kartu tabul lao ri tumpukan yayasangge",
+    "foundation_to_foundation": "De'na ulle ripalecce pole ri pandameng lao ri pandammeng laingnge.",
+    "waste_to_tableau_one_card": "wedding iyami napalettukeng seddi kartu pole ri wasselena lao ri tableau'e.",
+    "waste_to_tableau_ok": "Dipalessu'i kartu pole ri wassele lao tabel T{dst}",
+    "waste_to_tableau_bad": "De'na ulle nataro kartu sisa ri tumpukan tableau-e.",
+    "no_face_up": "Degaga kartu riase'na untu' ripalecce.",
+    "tableau_to_tableau_ok": "Pindahkan {count} kartu dari tableau T{src} ke T{dst}",
+    "tableau_to_tableau_bad": "Tidak dapat memindahkan {count} kartu dari T{src} ke T{dst}",
+    "foundation_to_tableau_one_card": "wedding bawang napalettukeng seddi kartu pole ri pondasi lao ri tabel.",
+    "foundation_empty": "Pammulanna F{src} kosong.",
+    "foundation_to_tableau_ok": "Pindahkan kartu dari fondasi F{src} ke tableau T{dst}",
+    "foundation_to_tableau_bad": "De'na ulle nataro kartu assaleng ri tabel T{dst}",
+    "to_waste_or_stock": "De'na ulle ripalecce ri wassele iyarega stok."
+  },
+  "outcome": {
+    "forfeit": "Gamer'e ripassu. Pungkasanna: {score} kartu rilaleng pondasi.",
+    "won": "Sukkuru'ki, purani mucau Klondike Solitaire!",
+    "turn_limit": "Permainan berakhir! Anda mencapai batas maksimum {max_turns} giliran. Skor: {score} kartu di fondasi."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== (Klondike: tau mappakatau-tau)",
+    "turn": "Giliran: {turn}/{max_turns}",
+    "stock": "Stok: {stock} kartu-kartu mappadae",
+    "waste": "Waste (W): {waste} Wastage: rippaseng, ripappappiang.",
+    "foundations_header": "Pammulang:",
+    "foundation_row": "F{n}: {cards} ripasisompungngi sibawa asseddingeng.",
+    "tableau_header": "Tabel: ripaseng.",
+    "tableau_row": "T{n}: {cards} (maccangkangeng)"
+  }
+}

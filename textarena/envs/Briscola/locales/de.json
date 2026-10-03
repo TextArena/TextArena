@@ -1,0 +1,65 @@
+{
+  "_comment": "Briscola-Sprachdatei. Übersetze KEINE Schlüssel (linke Seite). Übersetze nur Werte (rechte Seite). Behalte jeden {placeholder} exakt bei. Übersetze niemals das Aktions-Token '[play X]', die Kartenbezeichnungen (A, 2..7, J, Q, K), die Farbsymbole (in den Slots {card}/{trump_card}) oder numerische Zählungen/Punkte/Punktzahlen. Der Marker-Text '(TRUMP)' darf lokalisiert werden.",
+  "_slots": {
+    "{player_id}": "Eine Spielernummer, z. B. 0 oder 1",
+    "{trump_suit}": "Das Trumpffarbe-Symbol (♠♥♦♣) - nicht übersetzen",
+    "{trump_card}": "Die Trumpfkarten-Bezeichnung, z. B. '7♠' - nicht übersetzen",
+    "{card}": "Eine Kartenbezeichnung, z. B. 'A♥' - nicht übersetzen",
+    "{trump_mark}": "Der bereits gerenderte '(TRUMP)'-Marker oder leer",
+    "{max_pos}": "Die höchste gültige Kartenposition in der Hand des Spielers",
+    "{count}": "Die Anzahl der Karten, die ein Spieler hält",
+    "{pos}": "Die Positionsnummer einer Karte in der Hand",
+    "{points}": "Eine Anzahl von Punkten (Kartenwert oder Gesamtpunktzahl)",
+    "{hand}": "Die bereits gerenderte, mehrzeilige Handauflistung",
+    "{trick}": "Die bereits gerenderte Auflistung des aktuellen Stichs",
+    "{scores}": "Die bereits gerenderte Punktezeile oder der abschließende Punkteblock je Spieler",
+    "{trump_info}": "Die bereits gerenderte Trumpffarbe-/Stapelzeile",
+    "{winner}": "Die Nummer des Spielers, der den Stich oder das Spiel gewinnt",
+    "{tricks}": "Eine Anzahl der von einem Spieler gewonnenen Stiche",
+    "{deck_count}": "Anzahl der im Stapel verbleibenden Karten"
+  },
+
+  "game": {
+    "start": "Briscola-Spiel gestartet! Trumpffarbe: {trump_suit} (Trumpfkarte: {trump_card})"
+  },
+
+  "prompt": {
+    "intro": "Du spielst Briscola - Spieler {player_id}.\nZiel: Gewinne Stiche und sammle die meisten Punkte (120 Punkte insgesamt im Stapel).\nKartenpunkte: A=11, 3=10, K=4, Q=3, J=2, andere=0\nKartenstärke: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTrumpfkarten schlagen Nicht-Trumpfkarten unabhängig von ihrer Stärke.\n\nAktion: '[play X]', wobei X die Position (1-{max_pos}) der Karte in deiner Hand ist\n"
+  },
+
+  "hand": {
+    "none": "Keine Karten",
+    "empty": "Keine Karten in der Hand",
+    "header": "Deine Hand:",
+    "card_line": "  {pos}. {card} [{points} Pkt.]{trump_mark}",
+    "trump_mark": " (TRUMPF)"
+  },
+
+  "trick": {
+    "empty": "In diesem Stich wurden noch keine Karten gespielt.",
+    "header": "Aktueller Stich:",
+    "line": "  Spieler {player_id}: {card}{trump_mark}"
+  },
+
+  "turn": {
+    "score_entry": "Spieler {player_id}: {points} Pkt.",
+    "trump_info": "Trumpffarbe: {trump_suit}",
+    "trump_info_deck": "Trumpffarbe: {trump_suit} | Karten im Stapel übrig: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPunkte: {scores}\n{trump_info}\n\nSpiele eine Karte mit [play X]"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Verwende [play X], wobei X die Kartenposition ist (1, 2, 3 usw.)",
+    "out_of_range": "Ungültige Kartenposition. Du hast {count} Karten (1-{count})"
+  },
+
+  "action": {
+    "played": "Spieler {player_id} spielte {card}",
+    "trick_win": "Spieler {winner} gewinnt den Stich mit {card} und erhält {points} Punkte!"
+  },
+
+  "outcome": {
+    "head": "Spiel vorbei! Spieler {winner} gewinnt mit {points} Punkten!\n\nEndstand:\n{scores}",
+    "player_line": "Spieler {player_id}: {points} Punkte ({tricks} Stiche)\n"
+  }
+}

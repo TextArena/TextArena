@@ -1,0 +1,79 @@
+{
+  "_comment": "Archivo de idioma de Golf (juego de cartas). NO traduzcas las claves (lado izquierdo). Traduce solo los valores (lado derecho). Conserva cada {placeholder} exactamente igual. Nunca traduzcas los tokens de acción ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), las etiquetas de las cartas (A, 2-10, J, Q, K), los símbolos de palo, las letras X/Y usadas como marcadores de fila/columna en los tokens, ni las puntuaciones/posiciones numéricas. Mantén intacto el diseño de la cuadrícula ASCII (espaciado, números de columna, '?', alineación de 'Col', 'Row') para que el tablero siga siendo legible.",
+  "_slots": {
+    "{player_id}": "Un número de jugador, p. ej. 0 o 1",
+    "{pid}": "Un número de jugador, p. ej. 0 o 1",
+    "{winner}": "El número de jugador con la puntuación más baja",
+    "{score}": "Un total de puntos numérico",
+    "{card}": "Una etiqueta de carta como A♠, 10♥, K♦ o Q♣",
+    "{new}": "La etiqueta de la carta que se colocó en la cuadrícula",
+    "{old}": "La etiqueta de la carta que se retiró de la cuadrícula",
+    "{row}": "Un número de fila",
+    "{col}": "Un número de columna",
+    "{max_row}": "El número de fila válido más alto",
+    "{max_col}": "El número de columna válido más alto",
+    "{reason}": "Una frase pre-renderizada que describe por qué comenzó la ronda final",
+    "{n}": "Un número de fila mostrado al inicio de una fila de la cuadrícula",
+    "{cards}": "Las celdas pre-renderizadas y sensibles al diseño de una fila de la cuadrícula",
+    "{hand}": "El bloque de cuadrícula del jugador pre-renderizado",
+    "{discard}": "La etiqueta de la carta en la parte superior de la pila de descarte, o la palabra para 'ninguna'",
+    "{options}": "La línea pre-renderizada que enumera las acciones disponibles",
+    "{scores}": "La lista pre-renderizada de puntuaciones finales por jugador"
+  },
+  "player_prompt": {
+    "intro": "Estás jugando a Golf (juego de cartas) - Jugador {player_id}.\nObjetivo: Consigue la puntuación total más baja en esta única ronda. Si las columnas comparten el mismo valor, se suman como 0.\nValores de las cartas: A=1, 2-10=valor nominal, J/Q=10, K=0\n\nAcciones (usa los corchetes exactos):\n- '[draw]' - Robar del mazo\n- '[take]' - Tomar de la pila de descarte\n- '[swap X Y]' - Intercambiar la carta robada con la posición X (fila) Y (columna)\n- '[discard]' - Descartar la carta robada\n"
+  },
+  "board": {
+    "drew": "Robaste: {card}\nAhora debes [swap X Y] o [discard].",
+    "took": "Tomaste: {card} de la pila de descarte\nDebes [swap X Y] con ella (no puedes descartar).",
+    "peeked": "Miraste en la posición ({row},{col}): {card}",
+    "turn_view": "Tu mano:\n{hand}\nPila de descarte: {discard}\n{options}",
+    "none": "Ninguna"
+  },
+  "options": {
+    "final_turns": "¡Turnos finales! Tus opciones: [draw], [take], [peek X Y]",
+    "draw": "Tus opciones: [draw], [take]",
+    "must_swap": "Debes: [swap X Y] (no puedes descartar cartas de la pila de descarte)",
+    "swap_or_discard": "Debes: [swap X Y] o [discard]"
+  },
+  "hand": {
+    "no_cards": "Sin cartas",
+    "header": "  Col:   1    2    3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "El Jugador {pid} intercambió {new} con {old} en la posición ({row},{col})",
+    "discarded": "El Jugador {pid} descartó {card}"
+  },
+  "message": {
+    "deck_empty": "¡El mazo está vacío! El juego termina de inmediato.",
+    "knocked": "¡El Jugador {pid} tocó! Los demás jugadores tienen un turno más.",
+    "final_round": "¡El Jugador {pid} {reason}! Los demás jugadores tienen un turno más."
+  },
+  "reason": {
+    "all_revealed": "tiene todas las cartas reveladas"
+  },
+  "invalid": {
+    "wrong_action": "Usa exactamente UNA acción entre corchetes: [draw], [take], [swap X Y], [discard], [knock] o [peek X Y]",
+    "discard_empty": "¡La pila de descarte está vacía!",
+    "must_draw_first": "Primero debes [draw], [take], [knock] o [peek X Y]",
+    "cannot_discard_taken": "No puedes descartar una carta tomada de la pila de descarte. Debes intercambiarla.",
+    "have_drawn_card": "Tienes una carta robada. Debes [swap X Y] o [discard].",
+    "need_drawn_swap": "Necesitas una carta robada para intercambiar.",
+    "need_drawn_discard": "Necesitas una carta robada para descartar.",
+    "out_of_bounds": "Posición fuera de los límites. Usa fila 1-{max_row}, columna 1-{max_col}",
+    "knock_with_card": "No puedes tocar con una carta robada. Completa tu turno primero.",
+    "already_knocked": "Alguien ya tocó en esta ronda.",
+    "already_revealed": "¡Esa carta ya está revelada!"
+  },
+  "summary": {
+    "full": "¡Juego terminado! ¡El Jugador {winner} gana con una puntuación de {score} puntos!\n\nPuntuaciones finales:\n{scores}",
+    "line": "Jugador {pid}: {score} puntos\n"
+  },
+  "board_str": {
+    "title": "=== JUEGO DE GOLF ===",
+    "discard": "Pila de descarte: {card}",
+    "knocked": "¡El Jugador {pid} ha tocado!",
+    "player_header": "Jugador {pid} (Puntuación: {score}):"
+  }
+}

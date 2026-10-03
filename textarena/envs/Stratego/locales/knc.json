@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Káma {player_id} tíyá Stratego.\nKáma tíyá lára Flag tíyá lára opponent tíyá.\nKáma tíyá lára army tíyá board, lára Flag, Bomb, lára piece tíyá rank.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - Káma tíyá turn, káma tíyá piece tíyá step tíyá adjacent square (up, down, left, or right) tíyá occupied lára piece tíyá.\n   - Example: Piece tíyá move A1 tíyá B1 or A1 tíyá A2 if B1 and A2 tíyá occupied lára piece tíyá.\n   - If piece tíyá Bomb or Flag, tíyá lára move.\n2. **Battles:**\n   - Káma tíyá move onto square occupied lára opponent piece, tíyá battle occur:\n     - Piece tíyá higher rank tíyá eliminate opponent piece.\n     - If rank tíyá equal, both piece tíyá remove lára board.\n     - **Special Cases:**\n       - Bomb tíyá eliminate most attacking piece except Miner, tíyá defuse Bomb.\n       - Spy tíyá defeat Marshal if Spy attack first but lose lára all other piece.\n3. **Strategic Goals:**\n   - Identify opponent piece through movement lára battle.\n   - Protect Flag while attempting capture opponent Flag.\n   - Use Scout strategically gain information lára opponent piece and attack weak one.\n\n### How to Make a Move:\n1. Specify coordinate piece tíyá move and destination.\n2. Use format: [A0 B0], where A0 tíyá source position, and B0 tíyá destination.\n   - Example: Move piece from row 0, column 0 tíyá row 1, column 0, input [A0 B0].\n3. Ensure destination valid according lára movement rule above.\n\n### Important Notes:\n- Board show piece and position, e.g. MN, MS.\n- Board show known position opponent piece without revealing rank, e.g. ?.\n- Grid tíyá ~ tíyá lake and cannot move onto.\n- As suggestion, start game by moving piece tíyá front line gain information lára opponent piece. Player 0 and player 1 front line tíyá row D and G respectively.\n\nHere is current board state:\n"
+  },
+  "board": {
+    "current_board": "Borti Kala:\n\n{board}\nKadi Kono: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kәndobe kәla diwal gәnyi. Kamzәm {player_id} dәye futu suro formatdәyen kowo sәdin ba shima [A0 B0] wo.",
+    "invalid_coordinates": "Fasal awobe kalkal gənyi. Kambo {player_id}ye coordinates kalkal gənatəgə ba.",
+    "not_own_piece": "Kәndobe kalkal gǝnyi. Kam kərmaidә {player_id} falnza dәye gozanyi ro waljin.",
+    "scout_through_pieces": "Fasal awobe kalkal gənyi. Kambiwu {player_id} dә raksә biskewa gade so'a koljin ba.",
+    "scout_diagonal": "Káma {player_id} ngárdi scout tíyá ngárdi diagonal, káma lára.",
+    "non_scout_multi_square": "Fasal awobe kalkal gǝnyi. Karewa, scouts lan ba son yayi, kare fal loktu fallin bas kolzayin.",
+    "move_into_lake": "Fasal awobe kalkal gənyi. Kambo {player_id} dә suro kuluwuye ro letimba ba.",
+    "move_onto_own_piece": "Kǝndaram awobe kalkal gǝnyi. Karapka {player_id} dǝ raksә na nzaye ro lejin ba.",
+    "move_bomb_or_flag": "Fasal awobe kalkal gənyi. Kam kərmaidǝ {player_id} raksa bumboso au alama so faljinba."
+  },
+  "game_action": {
+    "you_moved": "I woni kadi yonki kono {source} to {dest}.",
+    "opponent_moved": "Kadi {player_id} woni kadi yonki kono {source} to {dest}.",
+    "you_equal_ranks": "Ká wane ɗo ɗumma ɗo ɗumma ɗo {source} ɗo {dest}. Ɗumma ɗo ɗumma ɗo {attacking_rank} ɗo ɗumma ɗo {target_rank}. Ɗo ɗumma ɗo ɗumma ɗo ɗumma ɗo ɗumma, ɗo ɗumma ɗo ɗumma ɗo ɗumma.",
+    "opponent_equal_ranks": "Player {player_id} ɗo ɗumma ɗo ɗumma ɗo ɗumma ɗo {source} ɗo {dest}. Ɗumma ɗo ɗumma ɗo {attacking_rank} ɗo ɗumma ɗo {target_rank}. Ɗo ɗumma ɗo ɗumma ɗo ɗumma ɗo ɗumma, ɗo ɗumma ɗo ɗumma ɗo ɗumma.",
+    "you_miner_defused": "Káma ngárdi {source} ngárdi {dest} tíyá. Ngárdi {attacking_rank} tíyá ngárdi {target_rank}. Ngárdi miner tíyá ngárdi bomb, káma tíyá.",
+    "opponent_miner_defused": "Káma {player_id} ngárdi {source} ngárdi {dest} tíyá. Ngárdi {attacking_rank} tíyá ngárdi {target_rank}. Ngárdi miner tíyá ngárdi bomb, káma ngárdi.",
+    "you_bomb_lost": "Ká wane ɗo ɗumma ɗo ɗumma ɗo {source} ɗo {dest}. Ɗumma ɗo ɗumma ɗo {attacking_rank} ɗo ɗumma ɗo {target_rank}. Ɗo ɗumma ɗo ɗumma ɗo ɗumma ɗo ɗumma, ɗo ɗumma ɗo ɗumma ɗo ɗumma.",
+    "opponent_bomb_won": "Player {player_id} ɗo ɗumma ɗo ɗumma ɗo ɗumma ɗo {source} ɗo {dest}. Ɗumma ɗo ɗumma ɗo {attacking_rank} ɗo ɗumma ɗo {target_rank}. Ɗo ɗumma ɗo ɗumma ɗo ɗumma ɗo ɗumma, ɗo ɗumma ɗo ɗumma ɗo ɗumma.",
+    "you_spy_won": "Káma ngárdi {source} ngárdi {dest} tíyá. Ngárdi {attacking_rank} tíyá ngárdi {target_rank}. Ngárdi spy tíyá ngárdi marshal, káma tíyá.",
+    "opponent_spy_lost": "Káma {player_id} ngárdi {source} ngárdi {dest} tíyá. Ngárdi {attacking_rank} tíyá ngárdi {target_rank}. Ngárdi spy tíyá ngárdi marshal, káma ngárdi.",
+    "you_higher_won": "Káma kálíyè {source} kú {dest} káma. Kálíyè fánná {attacking_rank} yè kálíyè {target_rank} kú. Kálíyè fánná kúrà kálíyè, káma káwú.",
+    "opponent_higher_lost": "Player {player_id} ɗo ɗumma ɗo ɗumma ɗo ɗumma ɗo {source} ɗo {dest}. Ɗumma ɗo ɗumma ɗo {attacking_rank} ɗo ɗumma ɗo {target_rank}. Ɗo ɗumma ɗo ɗumma ɗo ɗumma ɗo ɗumma, ɗo ɗumma ɗo ɗumma ɗo ɗumma.",
+    "you_lower_lost": "Ká wane ɗo ɗumma ɗo ɗumma ɗo {source} ɗo {dest}. Ɗumma ɗo ɗumma ɗo {attacking_rank} ɗo ɗumma ɗo {target_rank}. Ɗo ɗumma ɗo ɗumma ɗo ɗumma ɗo ɗumma, ɗo ɗumma ɗo ɗumma ɗo ɗumma.",
+    "opponent_lower_won": "Player {player_id} ɗo ɗumma ɗo ɗumma ɗo ɗumma ɗo {source} ɗo {dest}. Ɗumma ɗo ɗumma ɗo {attacking_rank} ɗo ɗumma ɗo {target_rank}. Ɗo ɗumma ɗo ɗumma ɗo ɗumma ɗo ɗumma, ɗo ɗumma ɗo ɗumma ɗo ɗumma."
+  },
+  "outcome": {
+    "flag_captured": "Kambiwu {player_id}ye alama kәlabe dәga gozǝna!",
+    "no_movable_pieces": "Kàsú {winner_id} àjà wúlì! Kàsú {loser_id} bà àndí kə̀nzə̀nə̀ màànà."
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "አንተ ጌልፍ (ካርድ ጌም) ተጫዋች {player_id} ነህ።\nግብ: አንድ ረድ ውስጥ አዳኝ ድምር ነጥብ አግኝት። አምዶች አንድ እኩል ነጥብ ካላቸው እኩል አድርገው 0 ነጥብ እንደ ደረሰበት እርግጠኛ ነው።\nካርድ ነጥቦች: A=1, 2-10=ነጥብ እንደርሱ, J/Q=10, K=0\n\nእርምጃዎች (እንደ ተጣማለሁ ማጣራት ተጠቅማል):\n- '[draw]' - ካርድ ማውጣት\n- '[take]' - ካርድ ከማጣራት ስብስብ ማውጣት\n- '[swap X Y]' - ማውጣት ካርድ ከቦታ X (ረድ) Y (አምድ) አለወጠ።\n- '[discard]' - ማውጣት ካርድ ማጣራት\n"
+  },
+  "board": {
+    "drew": "እርስዎ ጨረሰው: �{card}\nአሁን እርስዎ መልሰው �[swap X Y] ወይም ጨረሱዋት �[discard]",
+    "took": "አንድ ካርድ ይወስዱ: {card} ከጥረግ አንድ\nአንድ [swap X Y] እንደሚኖሩ (አልባል ጥረግ).",
+    "peeked": "እርስዎ አየው በማዕዘን ({row},{col}): �{card}",
+    "turn_view": "እርስዎ እጅ:\n{hand}\nአስወጡ ማዕዘን: �{discard}\n{options}",
+    "none": "የለም"
+  },
+  "options": {
+    "final_turns": "መጨረሻ እንቅስቃሴ! እርስዎ እይታ: ጨረስ መስራት አስፈልጋል �[draw], ቦታ መለወጥ መስራት አስፈልጋል �[take], አስወጡ መስራት አስፈልጋል �[peek X Y]",
+    "draw": "እርስዎ እይታ: ጨረስ መስራት አስፈልጋል �[draw], ቦታ መለወጥ መስራት አስፈልጋል �[take]",
+    "must_swap": "አንተ: [swap X Y] (የተጣሉ ክምር ከ ካርዶች መጣል አይችልም)",
+    "swap_or_discard": "አንድ [swap X Y] ወይ [discard]"
+  },
+  "hand": {
+    "no_cards": "ካርዶች የሉም",
+    "header": "ኮል: 1 2 3",
+    "row": "መስመር �{n}: �{cards}"
+  },
+  "action_desc": {
+    "swapped": "ተጫዋች {pid} በቦታው ({row},{col}) {new} ከ {old} ቦዮ አለወጠ።",
+    "discarded": "ተጫዋች {pid} {card} ካርድ ማጣራት አለወጠ።"
+  },
+  "message": {
+    "deck_empty": "የመርከቧ መርከብ ባዶ ነው! ጨዋታው ወዲያውኑ ያበቃል።",
+    "knocked": "ተጫዋች {pid} ተደበደበ! እያንዳንዱ ሌላ ተጫዋች አንድ ተጨማሪ ተራ ያገኛል.",
+    "final_round": "ተጫዋች {pid} {reason}! ሌላ ተጫዋች እንደገና አንድ እርምጃ አለው።"
+  },
+  "reason": {
+    "all_revealed": "ሁሉ ካርዶች ታይቷል"
+  },
+  "invalid": {
+    "wrong_action": "አንድ ብቻ ያለ አውነተ እርምጃ ተጠቅማል። [draw], [take], [swap X Y], [discard], [knock], ወይም [peek X Y] እንደ ተጣማለሁ።",
+    "discard_empty": "የቁሳቁስ ክምር ባዶ ነው!",
+    "must_draw_first": "አስራት ለማስጀመር አንዴ [draw], [take], [knock], ወይም [peek X Y] ማድረግ ያስፈልጋል",
+    "cannot_discard_taken": "ከቀድሞው የተወሰደውን ካርድ ማስወገድ አይቻልም። መለዋወጥ አለብህ።",
+    "have_drawn_card": "አንድ ማውጣት ካርድ አለህ። አለወጠ። [swap X Y] ወይም [discard] እንደ ተጣማለሁ ማድረግ አለብህ።",
+    "need_drawn_swap": "ለመለዋወጥ የተሳለ ካርዶች ያስፈልግሃል።",
+    "need_drawn_discard": "ለመጣል የተሳለ ካርታ ያስፈልግሃል።",
+    "out_of_bounds": "ቦታ ከግሪድ ውስጥ. ሰል 1-{max_row}, አምድ 1-{max_col} እንደሚኖሩ.",
+    "knock_with_card": "በወረቀት ካርድ መደርደሪያ ላይ መታ ማድረግ አይቻልም። መጀመሪያ ተራህን ጨርስ።",
+    "already_knocked": "አንድ ሰው ይህን ዙር ቀድሞውኑ አንኳኩቷል.",
+    "already_revealed": "ይህ ካርድ ቀድሞውኑ ተገልጧል!"
+  },
+  "summary": {
+    "full": "ጌም አብቅቷል! ተጫዋች {winner} {score} ነጥቦች አሸንፏል!\n\nየመጨረሻ ነጥቦች:\n{scores}",
+    "line": "ተጫዋች {pid}: {score} ነጥቦች\n"
+  },
+  "board_str": {
+    "title": "=== የጎልፍ ጨዋታ===",
+    "discard": "የተጣራ ክምር: {card}",
+    "knocked": "ተጫዋቹ {pid} አንኳኩ!",
+    "player_header": "ኤሌሞን �{pid} (ደረጃ: �{score}):"
+  }
+}

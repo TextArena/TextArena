@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ko oonaa Player {player_id} e Quantum Tic Tac Toe.\nSimboolu maa ko '{symbol}', e numbeeru lesdi maa ko {parity} (e.g., X1, X3 or O2, O4).\n\nMaksa: Kuutoro e jonta lesdi marks (solidified from superpositions) tati.\n\nKuutoro Foofoo:\n- E kala saa, waɗa spooky mark e squares ɗiɗi ɗuuɗɗi e format '[a,b]'.\n- Marks ɗin ɗuuɗɗi, e labeled like 'X1 / X1' or 'O4 / O4'.\n- A jaɓa waɗa spooky marks e square ɗin ɗuuɗɗi collapsed (solidified).\n\nKuuɓal Rule:\n- So tawon maa ɓalɗa cycle e entanglement graph, ɗum collapsed automatically.\n- Kala spooky mark e cycle ɗin ɓalɗa classical mark e position ɗin ɗiɗi.\n- Kala dependent spooky marks ɗin ɓalɗa collapsed.\n\nVictory:\n- Kuutoro ɓalɗa so player ɓalɗa classical marks tati e jonta.\n- So ɓe players ɓalɗa line e saa collapse, ɗon ɓalɗa max move number ɓuri.\n\nMisal move: '[0,4]' waɗa spooky mark e cells 0 e 4."
+  },
+  "board": {
+    "current_board": "Kwamitin Tic Tac Toe na Quantum:\n\n{board}\n\nAika kuɓe aikinka a matsayin '[a,b]' don saka alama ta quantum a cikin sassan biyu."
+  },
+  "invalid_move": {
+    "wrong_format": "Dabare je wala naffuda. Naftir \"[a,b]\".",
+    "invalid_cells": "Limooreji je wala kuje mala ɗi ɗon mari ko hauti.",
+    "already_solidified": "Cellal go'o ɗon maɓɓiti."
+  },
+  "game_action": {
+    "placed": "Dan wasa {player_id} ya saka alamarta a cikin superposition tsakanin sel {pos_a} da {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposition mai kula da hukunci. Sel ({r}, {c}) yanzu {symbol}.",
+    "last_cell_resolved": "Superposition don sel na ƙarshe an warware shi. Sel ({r}, {c}) yanzu {symbol}.",
+    "superposition_resolved": "Superposition an warware shi. Sel ({r}, {c}) yanzu {symbol}."
+  },
+  "outcome": {
+    "win": "Jaawal {player_id} heɓan jaholji je ɗon ɓadake!",
+    "draw": "Fijirde man ɗon foofta!"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Kamu bamain {color} dalam sabuah gim Breakthrough. Kamu mangalihkan {direction} di atas papan {board_size}x{board_size}.\nDalam giliranmu, kamu kawa mangalihkan sabuah potongan satu langkah maju atawa miring maju.\nSabuah potongan hanyar kawa mangalihkan miring jika potongan lawan ada di sana, dan hanyar kawa masuk ka dalam kotak yang sudah dihuni lawan dalam langkah miring.\nKetika melangkah ka dalam kotak lawan, kamu manguasai potongan lawan dan potongan lawan dihilangkan sacara permanent dari papan.\nGunakan notasi UCI-like di dalam kurung, contohnya [a2a3] untuk mangalihkan dari a2 ka a3.\n* 'a' mangacu ka kolom paling kiri, '1' adalah baris bawah (dari perspektif Putih).\n* Baris rumah Hitam adalah baris atas (baris 8 untuk 8x8). Baris rumah Putih adalah baris bawah (baris 1 untuk 8x8).\nPemain pertama yang potongannya mencapai baris rumah lawan menang. Jika potonganmu semua kena tangkap, kamu kalah."
+  },
+  "invalid_move": {
+    "wrong_format": "Silakan pakai notasi aljabar dalam kurung kaya [a2a3].",
+    "out_of_bounds": "Pindah kada kawa diulah.",
+    "illegal": "Gerakan itu kada maumpati aturan Breakthrough atawa lain alatmu."
+  },
+  "game_action": {
+    "moved": "Pemain {player_id} mangalihkan {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Putih sampai di barisan rumah Hitam.",
+    "black_reached": "Hitam sampai di barisan rumah Putih.",
+    "white_captured": "Sabarataan pacahan Putih nang ditangkap.",
+    "black_captured": "Sabarataan pacahan Hitam nang ditangkap.",
+    "no_moves": "Pamain {player_id} kada baisi lagi langkah."
+  }
+}

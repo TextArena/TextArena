@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "あなたはオセロのプレイヤー {player_id} で、{colour} ({piece}) を使用しています。\nあなたの目標は、ゲーム終了時にボード上に自分の色の駒をより多く持つことです。\nあなたの番になったら、相手の駒を挟むように新しい駒を置きます。挟まれた相手の駒はすべてあなたの色に変わります。\n手を提供する形式は '[row, col]' です。"
+  },
+  "board": {
+    "game_board": "ゲームボード:\n{board}",
+    "valid_moves": "{observation}\n有効な手: {moves}",
+    "no_valid_moves_reset": "{observation}\n有効な手がありません - スキップする必要があります。",
+    "no_valid_moves_step": "{observation}\n有効な手がありません – スキップする必要があります。",
+    "scores_reset": "{observation}\n現在のスコア - 黒: {black_count}, 白: {white_count}\n",
+    "scores_step": "{observation}\nスコア - 黒: {black_count}, 白: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "手は [row, col] の形式でなければなりません。",
+    "illegal": "無効な手です。有効な手: {valid}"
+  },
+  "game_action": {
+    "skipped": "プレイヤー {pid} はスキップしました",
+    "played": "プレイヤー {pid} ({piece}) が [{r}, {c}] に駒を置き、{flipped} 個の駒を反転させました"
+  },
+  "game_message": {
+    "must_skip": "プレイヤー {pid} ({piece}) には有効な手がなく、スキップする必要があります。"
+  },
+  "outcome": {
+    "black_wins": "黒が勝利しました {black_count}-{white_count}。",
+    "white_wins": "白が勝利しました {white_count}-{black_count}。",
+    "draw": "引き分け {black_count}-{white_count}。"
+  }
+}

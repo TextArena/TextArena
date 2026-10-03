@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "သင်သည် ကစားသမား {player_id} ဖြစ်ပါသည် Three-Player Tic Tac Toe ၌။\nသင့် သင်္ကေတ သည် '{symbol}' ဖြစ်ပါသည်။\nသင် လိုင်းတစ်ခု ဖွဲ့စည်းရန် ၅x၅ ဘုတ်ပေါ်တွင် သင့် သင်္ကေတ ကို တပ်ဆင်ရန် အပြောင်းအလဲများ ယူပါ။\nလိုင်းများ အလျား၊ အနိမ့် သို့မဟုတ် တိမ်းစောင်း ဖြစ်နိုင်ပါသည်။\n'[4]' ပုံစံ အသုံးပြု၍ ဆဲလ် ၄ ကို မှတ်တမ်းရန် သင့် လှုပ်ရှားမှု ကို တင်ပါ။"
+  },
+  "board": {
+    "current_board": "လက်ရှိဘုတ်:\n\n{board}\n\nလှုပ်ရှားမှုများစွာ: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "ဢမ်ႇမႅၼ်ႈၸွမ်း ပိူင်ၶၢႆႉလၢႆႈ ဢၼ်ၸႂ်ႉ \"[cell]\" တီႈဢၼ် သႄး (လ်) မၼ်းပဵၼ် 0-{max_cell}။",
+    "out_of_range": "လျှောက်လွှားသော ဆဲလ် နံပါတ်: {cell}။ ၀ နှင့် {max_cell} ကြားတွင် ဖြစ်ရမည်။",
+    "already_occupied": "ၶႅပ်း {cell} ၼႆႉ မၼ်းလႆႈထုၵ်ႇဢဝ်ဝႆႉယဝ်ႉ။",
+    "made_invalid": "ၽူႈလဵၼ်ႈ {player_id} ႁဵတ်းႁႂ်ႈ လွင်ႈၶၢႆႉဢၼ်ဢမ်ႇမႅၼ်ႈၼၼ်ႉပဵၼ်မႃး။"
+  },
+  "game_action": {
+    "placed": "ကစားသမား {player_id} သူ၏ သင်္ကေတ ({symbol}) ကို ဖီးဒ် ({row}, {col}) တွင် ချထားခဲ့သည်။"
+  },
+  "outcome": {
+    "win": "ကစားသမား {player_id} ({symbol}) အနိုင်ရ!",
+    "draw": "လွင်ႈလဵၼ်ႈၼႆႉ ပဵၼ်လွင်ႈၽဵင်ႇပဵင်းၵၼ်ယဝ်ႉ။"
+  }
+}

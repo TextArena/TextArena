@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "إنت تلعب لعبة الأرقام ديال Countdown!\nالهدف: خلط الأرقام باستعمال +, -, *, / باش توصل للعدد المطلوب.\nصيغة الفعل: [i j op] حيث i، j هما مؤشرات و op هي العملية.\nمثال: [0 2 *] يضرب الرقم في المؤشر 0 بالرقم في المؤشر 2.\nالقسمة لازم تكون ناتجها أرقام كاملة فقط."
+  },
+  "board": {
+    "header": "الهدف: {target}\n\nالأرقام المتاحة:\n{numbers}",
+    "best": "{observation}\n\nالأفضل حتى الآن: {best_value} (المسافة: {distance})\nأفضل تعبير: {best_expression}",
+    "history": "{observation}\n\nتاريخ الحركات:\n{moves}",
+    "progress": "{observation}\nدرجة التقدم الحالية: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "صيغة الفعل غير صحيحة. استخدم `[i j op]` حيث i، j هما فهرسا الأرقام و op هي +، -، *، /",
+    "invalid_indices": "مؤشرات مش صالحة. لازم تكون مختلفة و في حدود 0-{max_index}",
+    "invalid_operation": "عمل غير صحيح (قسمة على الصفر أو نتيجة مش عددا كاملا)"
+  },
+  "outcome": {
+    "win": "العجيب! لقيتو هدف بالضبط: {target}",
+    "no_moves": "لا مزيد من الحركات. أفضل نتيجة: {best_value} (الهدف: {target})",
+    "turn_limit": "تم الوصول إلى حد الدورات. أفضل نتيجة: {best_value} (الهدف: {target})"
+  }
+}

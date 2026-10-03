@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në një lojë {max_rounds} raunde të Kuhn Poker.\nRregullat e Lojës:\n- Kuhn Poker përdor një dekë 3-kartash me J, Q, K (J më e ulët, K më e lartë)\n- Çdo lojtar parabën {ante} çip dhe merr 1 kartë çdo raund (vini re se kartat ndahen pa zëvendësim, kështu që nuk mund të keni të njëjtën kartë si kundërshtari juaj).\n- Loja vazhdon për {max_rounds} raunde\n- Lojtari me çipet më të shumta pas të gjitha raundeve fiton\nRregullat e Veprimit:\n- '[check]': Kalo pa bërë bast (vetëm nëse nuk ka bast në tryezë)\n- '[bet]': Shto 1 çip në pot (vetëm nëse nuk ka bast në tryezë)\n- '[call]': Përputh bastin e kundërshtarit duke shtuar 1 çip në pot\n- '[fold]': Dorëzo dorën tuaj dhe lër kundërshtarin tuaj të fitojë potin"
+  },
+  "init_round": {
+    "round_start": "### Fillimi i raundit {current_round} nga {max_rounds} raunde. Karta juaj është: '{player_card}'",
+    "available_actions": "Veprimet tuaja të disponueshme janë: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Veprimi duhet të jetë [Check], [Bet], [Call], ose [Fold].",
+    "not_legal": "Veprimi duhet të jetë {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Lojtari {player_id}, dërgoi lëvizjen: '[{move}]'.",
+    "valid_actions": "Veprimet tuaja të disponueshme janë: {legal_actions}.",
+    "round_summary": "{reason} Rezultatet aktuale: Lojtari 0: '{player_0_chips}'; Lojtari 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Karta {winner_card} e Lojtarit {winner} mposht kartën {loser_card} të Lojtarit {loser}. Lojtari {winner} fiton potin prej {pot_value} çipeve."
+  },
+  "outcome": {
+    "draw": "Në fund të {max_rounds} raundeve, të dy lojtarët kishin të njëjtin numër çipeshe.",
+    "round_win": "Lojtari {player_id} ka dorëzuar.",
+    "winner_player0": "Lojtari 0 fitoi duke pasur më shumë çipe në fund të të gjitha {max_rounds} raundeve.",
+    "winner_player1": "Lojtari 1 fitoi duke pasur më shumë çipe në fund të të gjitha {max_rounds} raundeve."
+  }
+}

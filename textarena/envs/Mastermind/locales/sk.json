@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Hrajete Mastermind.\nMusíte nájsť kód, ktorý je {code_length} číslic dlhý, každé číslo od 1 do {num_numbers}, {repeats}.\nVo vašej odpovedi môžete odoslať svoj tip v nasledujúcom formáte: '[2 1 4 5]'.\nPo každom tipe dostanete spätnú väzbu vo forme čiernych a bielych kolíkov.\nČierny kolík označuje správne číslo na správnom mieste, kým biely kolík označuje správne číslo na nesprávnom mieste.\nMáte {max_turns} ťahov na uhádnutie kódu.\n",
+    "with_repeats": "s možnými opakovaniami",
+    "no_duplicates": "bez duplikátov"
+  },
+  "invalid_move": {
+    "wrong_format": "Nevyplnili ste odpoveď ako zoznam čísel oddelených medzerami v hranatých zátvorkách.",
+    "not_integers": "Všetky položky musia byť platné celé čísla.",
+    "wrong_length": "Tip by mal obsahovať presne {code_length} čísel.",
+    "out_of_range": "Všetky čísla musia byť medzi 1 a {num_numbers}.",
+    "duplicates_not_allowed": "Duplikáty čísel nie sú povolené.",
+    "repeated_guess": "Už ste hádali {guess}. Skúste iný tip."
+  },
+  "game_action": {
+    "feedback": "Odoslané [{guess}]. Spätná väzba: {black_pegs} čierny kolík(ov), {white_pegs} biely kolík(ov)."
+  },
+  "outcome": {
+    "win": "Uhádli ste kód, vyriešili ste {black_pegs} z {code_length} kolíkov správne",
+    "turn_limit": "Dosiahnutý limit ťahov. Uhádli ste {percent} percent čísel správne."
+  }
+}

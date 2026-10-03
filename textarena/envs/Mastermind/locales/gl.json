@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Estás xogando a Mastermind.\nNecesitas atopar o código que ten {code_length} díxitos de lonxitude, cada dígito de 1 a {num_numbers}, {repeats}.\nNa túa resposta, podes enviar o teu intento no seguinte formato: '[2 1 4 5]'.\nDespois de cada intento, recibirás retroalimentación en forma de pezas negras e brancas.\nUnha peza negra indica un dígito correcto na posición correcta, mentres que unha peza branca indica un dígito correcto na posición incorrecta.\nTes {max_turns} turnos para adiviñar o código.\n",
+    "with_repeats": "con posibles repeticións",
+    "no_duplicates": "sen duplicados"
+  },
+  "invalid_move": {
+    "wrong_format": "Non respondiches cunha lista de números separados por espazos e rodeados de corchetes.",
+    "not_integers": "Todas as entradas deben ser números enteiros válidos.",
+    "wrong_length": "O intento debe conter exactamente {code_length} números.",
+    "out_of_range": "Todos os números deben estar entre 1 e {num_numbers}.",
+    "duplicates_not_allowed": "Non se permiten números duplicados.",
+    "repeated_guess": "Xa adiviñaches {guess}. Por favor, intenta unha adiviñanza diferente."
+  },
+  "game_action": {
+    "feedback": "Enviado [{guess}]. Retroalimentación: {black_pegs} peza(s) negra(s), {white_pegs} peza(s) branca(s)."
+  },
+  "outcome": {
+    "win": "Adiviñaches o código, resolvendo {black_pegs} de {code_length} pezas correctamente",
+    "turn_limit": "Límite de turnos alcanzado. Adiviñaches o {percent} por cento dos números correctamente."
+  }
+}

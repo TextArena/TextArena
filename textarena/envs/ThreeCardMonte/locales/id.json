@@ -1,0 +1,31 @@
+{
+  "_comment": "Berkas lokal ThreeCardMonte. JANGAN menerjemahkan kunci (sisi kiri). Hanya terjemahkan nilai (sisi kanan).",
+  "_slots": {
+    "{line}": "Baris cangkir yang dirender",
+    "{step}": "Nomor langkah pengocokan saat ini",
+    "{steps}": "Jumlah total langkah pengocokan",
+    "{i}": "Indeks cangkir pertama yang terlibat dalam pertukaran",
+    "{j}": "Indeks cangkir kedua yang terlibat dalam pertukaran",
+    "{prompt}": "Pecahan prompt yang diterjemahkan yang ditambahkan setelah cangkir",
+    "{max_index}": "Indeks cangkir yang paling tinggi, yaitu num_cups-1",
+    "{ball_pos}": "Indeks cangkir di bawah mana bola berada"
+  },
+  "player_prompt": {
+    "intro": "Lacak bola tersembunyi 'X' saat cangkir dikocok.\nSetelah pengocokan, tebak lokasinya dengan `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Bola mulai: {line}",
+    "shuffle": "Pengocokan {step}/{steps}: pertukaran cangkir {i} dan {j}.",
+    "cups": "Cangkir: {line}  {prompt}",
+    "guess_now": "(Tebak SEKARANG!)",
+    "reveal": "(Reveal: bola di bawah {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Tindakan salah. Gunakan `[k]`.",
+    "out_of_range": "Indeks di luar rentang 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Benar! Anda menemukan bola.",
+    "lose": "Salah — bola berada di bawah cangkir {ball_pos}."
+  }
+}

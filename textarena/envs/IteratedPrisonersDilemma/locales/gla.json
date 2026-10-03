@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Is tu Player {player_id} ann an Dilemma a' Phrìosanaich Ath-chuairteach a tha a' dol seachad {num_rounds} cuairtean.\n\nStructar a' Gheama:\n- Mus tèid thu do dh'fhàgail ro gach co-dhùnadh, tha {total_conversation_rounds} tionndaidhean agad airson conaltradh gu saor.\n- An dèidh sin, tha an dà chluicheadair a' taghadh a bhith ag obair còmhla no a' dol an aghaidh a chèile aig an aon àm.\n\nMatris a' Phàigh (seasmhach gach cuairt):\n- An dà chluicheadair ag obair còmhla ➜ gach {cooperate_reward}\n- An dà chluicheadair a' dol an aghaidh a chèile ➜ gach {mutual_defect_reward}\n- Aon dhiubh a' dol an aghaidh a chèile, fear eile ag obair còmhla ➜ an neach a tha a' dol an aghaidh a chèile {defect_reward}, an neach a tha ag obair còmhla {sucker_reward}\n\nCiamar a Chluicheas tu:\n- Rè conaltradh: sgrìobh teacsa sam bith a tha thu ag iarraidh.\n- Rè a' phàis a' dh'fhàgail: cuir '[Cooperate]' no '[Defect]' (neo-sensiteach do litreachadh). Faodaidh tu teacsa a bharrachd a chur an àite roimhe/no às dèidh an token."
+  },
+  "phases": {
+    "conversation_finished": "Tha conaltradh a' dol a dh'fhàgail airson cuairt {round}. Cuir freagairt le '[Cooperate]' no '[Defect]' a dh'fhàsdaichear \\boxed{{}}.",
+    "starting_round": "--- Cuirm Tòiseachaidh {round} ---",
+    "round_summary": "Toraidhean cuairt {round}:\n{outcome}\nTha Cluicheadair 0 air {r0} a thogail (iomlan {score_0}), tha Cluicheadair 1 air {r1} a thogail (iomlan {score_1})."
+  },
+  "outcome": {
+    "winner": "Tha Cluicheadair {winner} a' buannachd {win_score} - {lose_score}.",
+    "draw": "Dealbhaich! Chòrd an dà chluicheadair ri {s0}.",
+    "round_both_cooperate": "Bha an dà chluicheadair a' co-obrachadh.",
+    "round_both_defect": "Dh'fhàilnich an dà chluicheadair.",
+    "round_p0_cooperates_p1_defects": "Chobraich cluicheadair 0, dh'fhàg Player 1 e.",
+    "round_p0_defects_p1_cooperates": "Chluich cluicheadair 0, cho-obrachadh Player 1."
+  }
+}

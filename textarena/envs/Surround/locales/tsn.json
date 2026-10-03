@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Player Surround mo {width}x{height} grid.\nO o player {player_id}. Ditshwanelo tsa kgwebo: '[up]' '[down]' '[left]' '[right]' kgotsa w/s/a/d.\nThelelo: tswelela pele go ba bangwe botlalo. Trails ke maswe; go thulana le lebala go robala; go thulana ka kgwoba go robala bobedi."
+  },
+  "board": {
+    "current": "Boto ya ga jaana: {board}",
+    "after_moves": "Boto morago ga go tsamaya ka nako e le nngwe: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Motshameki {player_id} o tlhokafetse ka ntlha ya go sa dire sentle."
+  },
+  "outcome": {
+    "survived_win": "Motshameki {player_id} o ne a falola; ba bangwe botlhe ba ile ba wa.",
+    "all_crashed": "Batshameki botlhe ba ne ba wa ka nako e le nngwe.",
+    "outlived": "Motshameki mongwe o ne a tshela go feta ba bangwe botlhe.",
+    "all_dead": "Batshameki botlhe ba sule.",
+    "turn_limit": "Fa go fitlhetswe tekanyetso ya nako e o ka kgonang go falola mo motshamekong oo, ke ene a fenyang.",
+    "ranking": "{reason} Tlhokomelo ya kgwebokgwebo ya boraro (e kgona ka botlalo→e sa kgone): {groups}"
+  }
+}

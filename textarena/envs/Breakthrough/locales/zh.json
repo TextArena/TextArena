@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "你在 Breakthrough 游戏中执 {color}。你在一个 {board_size}x{board_size} 的棋盘上朝 {direction} 方向移动。\n在你的回合中，可以将一个棋子向前移动一步，或向前斜走一步。\n只有目标位置有对手棋子时，棋子才可以斜走；棋子也只能通过斜走进入已被占据的格子。\n当你进入一个有对手棋子的格子时，你会吃掉该棋子，并将其永久移出棋盘。\n请使用方括号内类似 UCI 的记法，例如 [a2a3] 表示从 a2 移动到 a3。\n* 'a' 对应最左侧一列，'1' 是最下方一行（从 White 的视角看）。\n* Black 的本方底线是最上方一行（8x8 棋盘中的第 8 行）。White 的本方底线是最下方一行（8x8 棋盘中的第 1 行）。\n最先让棋子到达对手本方底线的玩家获胜。如果你的所有棋子都被吃掉，你将失败。"
+  },
+  "invalid_move": {
+    "wrong_format": "请使用方括号内的代数记法，例如 [a2a3]。",
+    "out_of_bounds": "移动超出棋盘范围。",
+    "illegal": "该移动不符合 Breakthrough 规则，或该棋子不属于你。"
+  },
+  "game_action": {
+    "moved": "玩家 {player_id} 移动 {move_str}（{piece}）。"
+  },
+  "outcome": {
+    "white_reached": "White 到达了 Black 的本方底线。",
+    "black_reached": "Black 到达了 White 的本方底线。",
+    "white_captured": "所有 White 棋子都被吃掉。",
+    "black_captured": "所有 Black 棋子都被吃掉。",
+    "no_moves": "玩家 {player_id} 已无可用移动。"
+  }
+}

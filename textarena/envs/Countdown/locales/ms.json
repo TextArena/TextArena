@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Anda sedang bermain permainan nombor Countdown!\nMatlamat: Gabungkan nombor menggunakan +, -, *, / untuk mencapai sasaran.\nFormat tindakan: [i j op], dengan i dan j ialah indeks manakala op ialah operasi.\nContoh: [0 2 *] mendarabkan nombor pada indeks 0 dengan nombor pada indeks 2.\nPembahagian mesti menghasilkan nombor bulat sahaja."
+  },
+
+  "board": {
+    "header": "SASARAN: {target}\n\nNombor tersedia:\n{numbers}",
+    "best": "{observation}\n\nKeputusan terbaik setakat ini: {best_value} (jarak: {distance})\nUngkapan terbaik: {best_expression}",
+    "history": "{observation}\n\nSejarah langkah:\n{moves}",
+    "progress": "{observation}\nSkor kemajuan semasa: {progress}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format tindakan tidak sah. Gunakan `[i j op]`, dengan i dan j ialah indeks manakala op ialah +,-,*,/",
+    "invalid_indices": "Indeks tidak sah. Indeks mestilah berbeza dan berada dalam julat 0-{max_index}",
+    "invalid_operation": "Operasi tidak sah (pembahagian dengan sifar atau hasil bukan nombor bulat)"
+  },
+
+  "outcome": {
+    "win": "Sempurna! Sasaran tepat berjaya dicapai: {target}",
+    "no_moves": "Tiada lagi langkah. Keputusan terbaik: {best_value} (sasaran: {target})",
+    "turn_limit": "Had giliran telah dicapai. Keputusan terbaik: {best_value} (sasaran: {target})"
+  }
+}

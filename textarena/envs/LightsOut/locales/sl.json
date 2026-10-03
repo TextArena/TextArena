@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Dobrodošli v Igre Luči! Imate {size}x{size} mrežo luči.\nVaš cilj je ugasniti VSE luči (označene z '.').\nKo pritisnete luč, se preklopi sama in njene sosednje luči (gor/dol/levo/desno).\nVpišite [vrstica stolpec], da pritisnete luč (0-indeksirano, zato je veljavno območje od 0 do {max_index}).\nImate do {max_turns} potez za rešitev ugank.\nLegenda: 'O' = luč VKLOPLJENA, '.' = luč IZKLOPLJENA"
+  },
+  "board": {
+    "current_state": "Trenutno stanje mreže (Poteza {moves_made}, {moves_left} potez preostalih, {completion}% zaključeno):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Dejanje mora biti v formatu [vrstica stolpec], kjer sta vrstica in stolpec cela števila od 0 do {max_index}.",
+    "out_of_range": "Koordinate morajo biti med 0 in {max_index}. Vnesli ste [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Čestitke! Rešili ste uganko v {moves_used} potezah!",
+    "loss": "Igra je končana! Uporabili ste vse {max_turns} poteze brez rešitve ugank. Končno zaključenost: {completion}%\nKončno stanje:\n{grid}"
+  }
+}

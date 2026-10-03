@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Mo ke na Golf (Koti ti Jeux) - Joueur {player_id}.\nMokonzonzo: Få ndo ti mo ke na score ya basse so mo ke na tour unique. Si colonne e partager valeur mêmé, a e sommer na 0.\nValeur ti Koti: A=1, 2-10=valeur ti figure, J/Q=10, K=0\n\nActions (utiliser crochets exacts):\n- '[draw]' - Tirer na pioche\n- '[take]' - Prendre na pile ti défausse\n- '[swap X Y]' - Échanger carte tirée na position X (ligne) Y (colonne)\n- '[discard]' - Défausser carte tirée\n"
+  },
+  "board": {
+    "drew": "Mo ke tirer: {card}\nMo ke doit [swap X Y] ou [discard] li.",
+    "took": "Mo kôsi: {card} na pile ya kôsi\nMo loké na [swap X Y] na yé (mo pêpê kôsi yé).",
+    "peeked": "Zɛ na kɔzo kɔlɔ kwa pozisiɔn ({row},{col}): {card}",
+    "turn_view": "Maboko to:\n{hand}\nPile ya kité: {discard}\n{options}",
+    "none": "Mbeni oko pëpe."
+  },
+  "options": {
+    "final_turns": "Kɔlɔ kɔlɔ kɔlɔ! Sɔnzɔ ŋɔ: [draw], [take], [peek X Y]",
+    "draw": "Sɔnzɔ ŋɔ: [draw], [take]",
+    "must_swap": "A lingbi mo: [swap X Y] (mo peut ti zi carte na yâ molongo ni pëpe)",
+    "swap_or_discard": "Zɛ na kɛ mbɛnɛ: [swap X Y] ɛzɛnɛ [discard]"
+  },
+  "hand": {
+    "no_cards": "A yeke wara carte na yâ ni ape.",
+    "header": "Col: 1 2 3 ti",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Atiki {pid} akiri {new} na {old} na ndö ({row},{col})",
+    "discarded": "Joueur {pid} défausser {card}"
+  },
+  "message": {
+    "deck_empty": "A zi yâ ti ndo ni kue awe! Ngia ni ahunzi fade fadeso.",
+    "knocked": "Zo ti pikango ye {pid} atï na sese! Mbeni zo oko ayeke kiri ande.",
+    "final_round": "Atiki {pid} {reason}! Atiki ôko ôko na ndö môko."
+  },
+  "reason": {
+    "all_revealed": "a gba zîa kpakpa"
+  },
+  "invalid": {
+    "wrong_action": "Utiliser exactement UN action entre crochets: [draw], [take], [swap X Y], [discard], [knock], ou [peek X Y]",
+    "discard_empty": "A zia mbeni ye na yâ ti gbâ ni pëpe!",
+    "must_draw_first": "Mo ke doit d'abord [draw], [take], [knock], ou [peek X Y]",
+    "cannot_discard_taken": "Mo lingbi pëpe ti bi mbeni carte so a mû ni na yâ molongo ti acarte, me mo doit ti changé ni.",
+    "have_drawn_card": "Zɛ na kɔzo kɔlɔ. Zɛ na kɛ mbɛnɛ [swap X Y] ɛzɛnɛ [discard] ɛzɛnɛ.",
+    "need_drawn_swap": "Mo yeke na bezoin ti mbeni carte so a gboto ni awe si mo lingbi ti changé.",
+    "need_drawn_discard": "A hunda ti tene mo bi mbeni carte na lê ni.",
+    "out_of_bounds": "Position hors limites. Utiliser ligne 1-{max_row}, colonne 1-{max_col}",
+    "knock_with_card": "Mo lingbi pëpe ti pika yanga na mbeni carte so a gboto ni awe.",
+    "already_knocked": "Mbeni zo ahon awe na yâ ti molongo so.",
+    "already_revealed": "Kâri ôko e yé révélé!"
+  },
+  "summary": {
+    "full": "Kɔlɔ kɔlɔ kɔlɔ! Lokuta {winner} kɛ mbɛnɛ na kɔlɔ kɔlɔ {score} pwa!\n\nKɔlɔ kɔlɔ kɔlɔ:\n{scores}",
+    "line": "Lokuta {pid}: {score} pwa\n"
+  },
+  "board_str": {
+    "title": "=== GAMÉ DE GOLF=== Lo yeke na yâ ti mbeni kota da so a leke ni nzoni.",
+    "discard": "Kete ndo so a lingbi ti bi ni na gigi: {card}",
+    "knocked": "Zo ti pikango ndembo ni {pid} apika yanga-da!",
+    "player_header": "Lokuta {pid} (Skɔr: {score}):"
+  }
+}

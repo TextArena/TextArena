@@ -1,0 +1,47 @@
+{
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam permainan Spite and Malice untuk dua pemain. Matlamat anda adalah untuk menjadi pemain pertama yang mengosongkan longgokan sasaran anda.\n\n### Gambaran Keseluruhan Permainan:\n- Objektifnya adalah untuk mengosongkan longgokan sasaran anda dengan memainkan kad ke longgokan tengah.\n- Anda boleh memainkan kad daripada tiga sumber:\n  1. **Kad dalam tangan anda** (anda memulakan setiap giliran dengan sehingga 5 kad dalam tangan).\n  2. **Kad teratas longgokan sasaran anda**.\n  3. **Kad teratas mana-mana longgokan buangan anda**.\n\n### Peraturan Permainan:\n- Anda boleh memainkan kad ke longgokan tengah jika kad itu **satu pangkat lebih tinggi** daripada kad teratas longgokan tersebut (longgokan tengah bermula dengan Ace dan meningkat sehingga Queen; King ialah kad liar: ia boleh dimainkan di atas mana-mana kad tetapi tidak mengubah urutan pangkat. Ini bermakna jika King digunakan selepas 4, King tersebut dianggap sebagai 5 dan kad seterusnya mestilah 6).\n- Jika anda tidak boleh memainkan sebarang kad lagi, anda mesti **membuang satu kad** ke salah satu longgokan buangan anda untuk menamatkan giliran.\n- Jika longgokan tengah mencapai Queen, longgokan itu akan dikosongkan secara automatik.\n- Susunan pangkat ialah: A=1, 2=2, ..., 9=9, J=10, Q=11 dan K sebagai kad liar.\n\n### Tindakan:\n1. **Tarik**: Pada permulaan giliran anda, tarik kad sehingga tangan anda mempunyai 5 kad. Masukkan **[draw]** untuk bermula.\n2. **Mainkan Kad**: Untuk memainkan kad, nyatakan kad dan longgokan tengah seperti ini: **[play A♠ 0]** (dengan 'A♠' ialah kad dan '0' ialah indeks longgokan tengah).\n3. **Buang**: Jika anda tidak boleh memainkan sebarang kad lagi, buang satu kad daripada tangan anda ke longgokan buangan untuk menamatkan giliran. Masukkan **[discard A♠ 1]** (dengan 'A♠' ialah kad dan '1' ialah indeks longgokan buangan). Harap maklum bahawa anda tidak boleh membuang kad daripada longgokan sasaran. Anda hanya boleh membuang kad daripada tangan anda.\n\n"
+  },
+
+  "board": {
+    "current_board": "Papan Semasa:\n\n{board}\nGerakan Tersedia: {moves}"
+  },
+
+  "render": {
+    "center_piles_header": "--- Longgokan Tengah ---\n",
+    "pile": "{observation}Longgokan {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Pandangan Pemain {player_id} ---\n",
+    "payoff": "{observation}Longgokan Sasaran (Kad Teratas): {top_card}, Panjang Longgokan Sasaran: {payoff_length}\n",
+    "hand": "{observation}Tangan: {hand}\n",
+    "discard": "{observation}Longgokan Buangan: {discard}\n",
+    "empty": "Kosong"
+  },
+
+  "game_message": {
+    "no_cards_left": "Tiada lagi kad untuk ditarik. Ingat bahawa anda boleh memainkan kad daripada sumber berikut:\n  1. **Kad dalam tangan anda**.\n  2. **Kad teratas longgokan sasaran anda**.\n  3. **Kad teratas mana-mana longgokan buangan anda**.\n\n"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format gerakan tidak sah. Pemain {player_id} tidak memberikan gerakan sah dalam kurungan siku.",
+    "invalid_play": "Permainan tidak sah. Pemain {player_id} cuba memainkan {card} pada longgokan tengah {index}.",
+    "discard_from_payoff": "Buangan tidak sah. Pemain {player_id} cuba membuang kad daripada longgokan sasaran.",
+    "discard_not_in_hand": "Buangan tidak sah. Pemain {player_id} cuba membuang kad yang tiada dalam tangan.",
+    "wrong_move_type": "Jenis gerakan tidak sah. Pemain {player_id} tidak memberikan jenis gerakan yang sah."
+  },
+
+  "game_action": {
+    "you_drew": "Anda telah menarik kad.",
+    "opponent_drew": "Pemain {player_id} telah menarik kad.",
+    "you_played": "Anda memainkan {card} pada longgokan tengah {index}.",
+    "opponent_played": "Pemain {player_id} memainkan {card} pada longgokan tengah {index}.",
+    "you_discarded": "Anda telah membuang {card} ke longgokan buangan {index}, yang juga bermakna anda telah menamatkan giliran anda. Tiada tindakan lanjut daripada anda akan dipertimbangkan untuk giliran ini. Pemain {next_player_id} akan bermain seterusnya.",
+    "opponent_discarded": "Pemain {player_id} membuang {card} ke longgokan buangan {index}, yang juga bermakna mereka telah menamatkan giliran. Tiada tindakan lanjut daripada Pemain {player_id} akan dipertimbangkan untuk giliran ini. Pemain {next_player_id}, anda akan bermain seterusnya. Sila masukkan tindakan anda dalam format [action card center_index]."
+  },
+
+  "outcome": {
+    "payoff_cleared": "Pemain {current_player} telah menghabiskan longgokan sasaran mereka! Pemain {current_player} menang!",
+    "deadlock_player_0": "Kebuntuan dicapai! Pemain 0 menang dengan baki {player_0_payoff} kad berbanding {player_1_payoff} kad Pemain 1.",
+    "deadlock_player_1": "Kebuntuan dicapai! Pemain 1 menang dengan baki {player_1_payoff} kad berbanding {player_0_payoff} kad Pemain 0.",
+    "deadlock_tie": "Kebuntuan dicapai dengan keputusan seri! Kedua-dua pemain mempunyai baki {player_0_payoff} kad. Pemain {current_player} menang secara lalai."
+  }
+}

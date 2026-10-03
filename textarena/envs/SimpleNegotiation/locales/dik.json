@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Raan ye gam acï them bï ya lɔ̈ɔ̈m ke cïn kä lëu benëke looi.",
+    "out_of_range": "Raan {player_id}, Kɛɛc kuɛ̈ɛ̈c acɛ̈ɛ̈c. Kɔlɔm {col} acɛ̈ɛ̈c wɛ̈ɛ̈r ciɛl.",
+    "already_full": "Raan {player_id}, Kɛɛc kuɛ̈ɛ̈c acɛ̈ɛ̈c. Kɔlɔm {col} ee kɛɛc.",
+    "proposing_with_no_resource": "Raan ye cɔl {player_id} acï bɛ̈n them bï kɔc ya gäm wëëu ke cïn kä lëu kek.",
+    "incorrect_offer_format": "Raan ye cɔl {player_id} acï wɛ̈t cï lueel bɛ̈n looi në tɛ̈ cïï yen path.",
+    "no_new_offer": "Raan ye cɔl {player_id} akëc këdɛ̈t yam looi."
+  },
+  "offers": {
+    "reject": "Raan ye gɔ̈ɔ̈r {player_id} acï kë cï gam bɛ̈n kuec.",
+    "accept": "Raan {acceptor_id} ee kɛɛc kuɛ̈ɛ̈c wɛ̈ɛ̈r ciɛl raan {proposer_id}.",
+    "proposal": "Wär {player_id} cɔl luɔi kɛn ë wär {opponent_id}: Luɔi bïk: {offered} -> Luɔi ë bɛn: {requested}"
+  },
+  "outcome": {
+    "win": "Raan ye gɔ̈ɔ̈r {winner_id} acï bɛ̈n tiaam në kë cï yen kä juëc apɛi yök.",
+    "draw": "Kë thöŋ ë kä tɔ̈u thïn në akuma yic tënë kɔc kedhiɛ."
+  }
+}

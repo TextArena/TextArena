@@ -1,0 +1,31 @@
+{
+  "_comment": "Datoteka s lokalizacijom za Snake. NE PREVODITE ključeve (lijeva strana). Samo prevodite vrijednosti (desna strana). Zadržite svaki {placeholder} točno kao što jest.",
+  "_slots": {
+    "{num_players}": "Broj igrača u utakmici",
+    "{width}": "Širina ploče u ćelijama",
+    "{height}": "Visina ploče u ćelijama",
+    "{max_turns}": "Ograničenje poteza za utakmicu",
+    "{player_id}": "Broj igrača (0-baziran)",
+    "{board}": "Iscrtana ASCII mreža; zadržite neutralno, nikad ne prevodite njene znakove",
+    "{reason}": "Iscrtani razlog kraja igre",
+    "{groups}": "Neutralni podaci o rangiranju (lista skupina igrača, od najgoreg do najboljeg); ne prevodite"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Igrački Snake na {width}×{height} mreži.\nVi kontrolirate zmiju {player_id}. Valjani potezi: '[up]'/'[down]'/'[left]'/'[right]' (ili w/s/a/d).\nCilj: preživjeti najduže ili biti najduži i dobiti najviši rezultat (ograničenje poteza {max_turns} poteza)."
+  },
+  "board": {
+    "current": "Trenutna ploča:\n{board}",
+    "after_moves": "Trenutno stanje ploče:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Zmija {player_id} je umrla zbog nevaljanog poteza."
+  },
+  "outcome": {
+    "survived_win": "Igrač {player_id} je preživio; svi ostali su izginuli.",
+    "all_dead_simul": "Sve zmije su umrle istovremeno.",
+    "outlived": "Igrač je nadživio sve ostale.",
+    "all_dead": "Sve zmije su mrtve.",
+    "turn_limit": "Ograničenje poteza je dosegnuto - najbolji rezultat pobjeđuje u slučaju izjednačenja.",
+    "ranking": "{reason} Konačne skupine rangiranja (od najgoreg do najboljeg): {groups}"
+  }
+}

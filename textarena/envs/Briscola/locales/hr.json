@@ -1,0 +1,57 @@
+{
+  "_comment": "Datoteka s lokalizacijom za Briscola. NE PREVODITE ključeve (lijeva strana). Samo prevodite vrijednosti (desna strana).",
+  "_slots": {
+    "{player_id}": "Broj igrača, npr. 0 ili 1",
+    "{trump_suit}": "Simbol adut pika (♠♥♦♣) - nemojte prevoditi",
+    "{trump_card}": "Oznaka adut karte, npr. '7♠' - nemojte prevoditi",
+    "{card}": "Oznaka karte, npr. 'A♥' - nemojte prevoditi",
+    "{trump_mark}": "Pre-renderirani marker '(ADUT)' ili prazno",
+    "{max_pos}": "Najviša zakonska pozicija karte u ruci igrača",
+    "{count}": "Broj karata koje igrač drži",
+    "{pos}": "Broj pozicije karte u ruci",
+    "{points}": "Broj bodova (vrijednost karte ili akumulirani rezultat)",
+    "{hand}": "Pre-renderirani, višeredni popis ruku",
+    "{trick}": "Pre-renderirani popis trenutnog trika",
+    "{scores}": "Pre-renderirani redak rezultata ili konačni blok rezultata po igraču",
+    "{trump_info}": "Pre-renderirani redak informacija o adutu / broju karata u špilu",
+    "{winner}": "Broj igrača koji je pobijedio trik ili igru",
+    "{tricks}": "Broj trikova koji je igrač pobijedio",
+    "{deck_count}": "Broj karata koje su ostale u špilu"
+  },
+  "game": {
+    "start": "Igra Briscola je počela! Adut pika: {trump_suit} (Adut karta: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Igrate Briscola - Igrač {player_id}.\nCilj: Pobijediti trikove i skupiti najviše bodova (ukupno 120 bodova u špilu).\nBodovi karata: A=11, 3=10, K=4, Q=3, J=2, ostalo=0\nSnaga karata: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nAdut karte pobjeđuju ne-adut karte bez obzira na snagu.\n\nAkcija: '[play X]' gdje je X pozicija (1-{max_pos}) karte u vašoj ruci\n"
+  },
+  "hand": {
+    "none": "Nema karata",
+    "empty": "Nema karata u ruci",
+    "header": "Vaša ruka:",
+    "card_line": "  {pos}. {card} [{points} bod]{trump_mark}",
+    "trump_mark": " (ADUT)"
+  },
+  "trick": {
+    "empty": "Još nema karata odigranih u ovom triku.",
+    "header": "Trenutni trik:",
+    "line": "  Igrač {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Igrač {player_id}: {points} bod",
+    "trump_info": "Adut pika: {trump_suit}",
+    "trump_info_deck": "Adut pika: {trump_suit} | Karata ostalo u špilu: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nRezultati: {scores}\n{trump_info}\n\nOdigrate kartu koristeći [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Koristite [play X] gdje je X pozicija karte (1, 2, 3, itd.)",
+    "out_of_range": "Nevažeća pozicija karte. Imate {count} karata (1-{count})"
+  },
+  "action": {
+    "played": "Igrač {player_id} je odigrao {card}",
+    "trick_win": "Igrač {winner} pobjeđuje trik s {card} i osvaja {points} bodova!"
+  },
+  "outcome": {
+    "head": "Igra je gotova! Igrač {winner} pobjeđuje s {points} bodova!\n\nKonačni rezultati:\n{scores}",
+    "player_line": "Igrač {player_id}: {points} bodova ({tricks} trikova)\n"
+  }
+}

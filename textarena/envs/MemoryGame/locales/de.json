@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id}. Du spielst das Memory-Spiel.\nDein Ziel ist es, mehr Kartenpaare auf dem Spielfeld aufzudecken als dein Gegner.\nWähle in deinem Zug zwei Karten zum Aufdecken aus, indem du die Zeilen- und Spaltennummern der ersten und zweiten Karte in dieser Reihenfolge eingibst, zum Beispiel '[0 1 1 0]'. Dabei befindet sich die erste Karte in Zeile 0 und Spalte 1 und die zweite Karte in Zeile 1 und Spalte 0.\nWenn die beiden Karten übereinstimmen, erhältst du einen Punkt und die Karten bleiben aufgedeckt. Wenn sie nicht übereinstimmen, werden sie wieder verdeckt, zum Beispiel als '.'.\nDas Spiel endet, sobald alle Paare gefunden wurden."
+  },
+
+  "board": {
+    "current_board": "Aktuelles Spielfeld:\n{board}",
+    "current_game_board": "Aktuelles Spielbrett:\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Ungültiges Zugformat. Spieler {player_id} hat keine gültige Richtung in eckigen Klammern angegeben.",
+    "out_of_bounds": "Ungültiger Zug. Spieler {player_id} hat eine Position außerhalb des Spielfelds ausgewählt.",
+    "same_card_twice": "Ungültiger Zug. Spieler {player_id} hat dieselbe Karte zweimal ausgewählt.",
+    "already_matched": "Ungültiger Zug. Spieler {player_id} hat eine oder beide Karten ausgewählt, die bereits als Paar gefunden wurden."
+  },
+
+  "game_message": {
+    "cards_match": "Die von Spieler {player_id} an den Positionen [{r1} {c1}] und [{r2} {c2}] ausgewählten Karten stimmen überein!",
+    "cards_no_match": "Die von Spieler {player_id} ausgewählten Karten stimmen nicht überein. Die Karten an den Positionen [{r1} {c1}] und [{r2} {c2}] sind {pos1} beziehungsweise {pos2}."
+  },
+
+  "outcome": {
+    "draw": "Beide Spieler haben gleich viele Kartenpaare gefunden.",
+    "win": "Spieler {winner_id} hat gewonnen!",
+    "turn_limit": "Das Zuglimit wurde erreicht. Das Spiel ist beendet. Spieler 0 erzielte {score_0} Punkte und Spieler 1 erzielte {score_1} Punkte.",
+    "turn_limit_win": "{reason} Spieler {winner_id} hat gewonnen!"
+  }
+}

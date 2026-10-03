@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "आप प्लेयर {player_id} हैं एक {num_players}-प्लेयर लायर डाइस गेम में।\nनियम:\n- अपनी बारी पर, आप या तो:\n  1) एक नई बोली बना सकते हैं जो वर्तमान बोली से अधिक मात्रा या अधिक मुख (या दोनों) के साथ; अर्थात '[Bid: 3, 4]',\n  2) '[Call]' टाइप करके अंतिम बोली को कॉल कर सकते हैं।\n\nयदि आप कॉल करते हैं:\n  - यदि उस मुख मूल्य की वास्तविक गणना सभी पासों के बीच बोली से कम है, तो अंतिम बोली लगाने वाला एक पासा खो देता है।\n  - अन्यथा, कॉलर एक पासा खो देता है।\nएक खिलाड़ी जो 0 पासों तक पहुंच जाता है वह समाप्त हो जाता है। अंतिम शेष खिलाड़ी जीतता है।"
+  },
+  "board": {
+    "per_player": "\tप्लेयर {p}: {d}",
+    "new_round": "\nनया राउंड - शेष पासे: {dice_summary}\nआपके वर्तमान पासे हैं: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "प्लेयर {current_player_id} कॉल करता है! मुख {face_value} की वास्तविक गणना {count} है, जो {quantity} से कम है।\nप्लेयर {loser_id} (अंतिम बोली लगाने वाला) एक पासा खो देता है.",
+    "caller_loses": "प्लेयर {current_player_id} कॉल करता है! मुख {face_value} की वास्तविक गणना {count} है, जो {quantity} से >= है।\nप्लेयर {loser_id} (कॉलर) एक पासा खो देता है."
+  },
+  "action": {
+    "bid_announce": "प्लेयर {player_id} {quantity} फेस {face_value} की बिड लगाता है।"
+  },
+  "invalid_move": {
+    "call_no_bid": "बिना कवनो बोली के कइल गइल कॉल.",
+    "invalid_bid": "अमान्य बोली: {reason}",
+    "not_recognized": "कार्रवाई को न तो एक वैध '[Bid: X, Y]' और न ही '[Call]' के रूप में मान्यता प्राप्त है। जमा की गई कार्रवाई: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "नया मात्रा {new_quantity} वर्तमान {current_quantity} से कम है.",
+    "face_lower": "नया मुख मूल्य {new_face_value} वर्तमान {current_face_value} से कम है.",
+    "identical": "बोली वर्तमान में जेतना बा ओतना ही बाटे.",
+    "face_range": "अंकित मूल्य 1 से 6 के बीच होवेला."
+  },
+  "message": {
+    "eliminated_invalid": "खिलाड़ी {player_id} अमान्य चाल से बाहर हो गइल."
+  },
+  "outcome": {
+    "win": "प्लेयर {winner} जीतता है! अंतिम रैंकिंग: {final_ranking}"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_comment": "Archivo de idioma de ThreePlayerGOPS. NO traduzcas las claves (lado izquierdo). Traduce solo los valores (lado derecho). Conserva cada {marcador} exactamente igual. Nunca traduzcas los tokens de carta entre corchetes (p. ej. [A], [10], [Q], [K]), los fragmentos neutrales de puja/puntuación como 'P0:10', la marca '### ' ni los símbolos '»' y '→'.",
+  "_slots": {
+    "{player_id}": "El número del jugador, 0, 1 o 2",
+    "{round}": "El número de la ronda actual, 1..13",
+    "{prize}": "La etiqueta de la carta premio revelada (A, 2..10, J, Q, K) - no traducir",
+    "{worth}": "El valor total del premio incluyendo cualquier bote acumulado",
+    "{hand}": "Las cartas restantes del jugador, mostradas como tokens entre corchetes como '[A]' '[2]' - no traducir",
+    "{bids}": "La lista neutral de cartas jugadas separadas por comas como 'P0:10, P1:J, P2:Q' - no traducir",
+    "{winner}": "El número del jugador que ganó la ronda",
+    "{pot}": "El valor del bote otorgado o acumulado esta ronda",
+    "{scoreline}": "El marcador acumulado neutral como 'P0:0  P1:0  P2:11' - no traducir",
+    "{pid}": "El número del jugador que fue eliminado",
+    "{scores}": "Las puntuaciones finales como asignación en bruto de número de jugador a puntuación - no traducir"
+  },
+  "player_prompt": {
+    "intro": "Eres el Jugador {player_id} en Three-Player GOPS.\n- Tienes las 13 cartas A-K (cada una exactamente una vez).\n- Cada ronda se revela un premio. Envía UNA carta como `[Q]`, `[10]`, `[2]` …\n- La carta más alta gana el premio (+ cualquier bote acumulado). Los empates pasan el premio a la siguiente ronda.\n- Tras 13 rondas, gana el total más alto. Movimientos inválidos = eliminación."
+  },
+  "round": {
+    "header": "### Ronda {round}/13 - Premio: {prize} (vale {worth})",
+    "hand": "Tu mano restante: {hand}"
+  },
+  "reveal": {
+    "win": "Pujas » {bids} - El Jugador {winner} gana {pot}.",
+    "tie": "Pujas » {bids} - empate, bote ahora {pot}.",
+    "scores": "Puntuaciones → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "la acción necesita una carta entre corchetes como '[Q]'",
+    "bad_card": "carta ya usada o inválida"
+  },
+  "elimination": {
+    "player": "Jugador {pid} eliminado tras movimientos inválidos repetidos."
+  },
+  "outcome": {
+    "auto_win": "Dos jugadores eliminados - victoria automática.",
+    "final": "Puntuaciones finales: {scores}"
+  }
+}

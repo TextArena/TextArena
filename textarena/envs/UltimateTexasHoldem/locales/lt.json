@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em lokalizacijos failas. NERVERSIKITE raktažodžių (kairėje pusėje). Vertikite tik reikšmes (dešinėje pusėje). Palikite kiekvieną {placeholder} lygiai taip, kaip yra. NERVERSIKITE veiksmų žetonų ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), kortų etikečių/švarkų (pvz. 'A♠', 'K♥', '10♦'), fazės etikečių, perduotų {phase}, arba bet kokių skaitinių čipų/statymų/išmokų sumų. Ištrinti literalai '${{...}}' fragmentai taisyklėse atkartoja prieš tai buvusią ekraną klaidą tiksliai ir turi būti palikti lygiai taip pat (dvigubi skliaustai yra sąmoningi).",
+  "_slots": {
+    "{start_chips}": "Pradinių čipų skaičius, pvz. 1000",
+    "{ante}": "Antės/statymo suma, pvz. 25",
+    "{ante4}": "Keturi kartus antė, pvz. 100",
+    "{ante2}": "Du kartus antė, pvz. 50",
+    "{round}": "Dabartinis raundas",
+    "{chips}": "Žaidėjo dabartinis čipų skaičius",
+    "{hand}": "Kortų sąrašas, atskirtas kableliais, pvz. 'A♠, K♥', arba lokalizuotas tekstas be kortų",
+    "{phase}": "Dabartinės fazės etiketė (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Veiksmų sąrašas, atskirtas kableliais, pvz. '[play_bet_4x], [check]'",
+    "{available}": "Šiuo metu galimi veiksmai, atskirti kableliais",
+    "{blind}": "Aklas statymas",
+    "{play}": "Žaidimo statymas",
+    "{cards}": "Kortų sąrašas, atskirtas kableliais, pvz. 'Q♣, 7♦, 2♠'",
+    "{name}": "Lokalizuotas pokerio rankos pavadinimas, įterptas tiesiogiai",
+    "{amount}": "Čipų suma",
+    "{net}": "Grynoji čipų suma šiam raundui (gali būti neigiamas)",
+    "{max_turns}": "Maksimalus raundų skaičius",
+    "{winner_rounds}": "Žaidėjo laimėtų raundų skaičius"
+  },
+  "player_prompt": {
+    "no_cards": "Dar nėra kortų",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Vienas žaidėjas prieš dilerį\n\n📖 ŽAIDIMO APŽVALGA:\n• Pradėsite su {start_chips} čipais\n• Vienas kaladė iš 52 kortų (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Žaisite prieš dilerį (namus)\n• Kiekvienas raundas seka Ultimate Texas Hold'em struktūrą: jūs statote ANTE ir BLIND statymus, gaunate 2 skyles, sprendžiate apie papildomus PLAY statymus per statymų fases, tada atskleidžiate bendruomenės kortas ir palyginate savo geriausią 5-kortų ranką su dilerio. Jūsų tikslas yra maksimizuoti savo laimėjimus (kai turite geresnę ranką), o minimizuoti savo nuostolius (kai turite blogesnę ranką).\n• Žaidimas baigiasi, kai jūs pasiekiate 0 čipų arba žemiau pradžioje raundo (PRALAIMĖJIMAS) arba užbaigiate 1000 raundų su čipais (LAIMĖJIMAS)\n\n💰 STATYMO STRUKTŪRA:\n• ANTE: Privalomas ${ante} statymas kiekviename raunde\n• BLIND: Privalomas ${ante} statymas kiekviename raunde\n• PLAY: Papildomas statymas žaidimo metu. Per visą raundą, jūs galite pasirinkti TIK VIENĄ iš šių: (${ante4} jei atlikta PRE-FLOP, ${ante2} jei atlikta FLOP, arba ${ante} jei atlikta RIVER. Taip pat galite pasiduoti RIVER, atsisakant rankos ir nebeturint statymo.)\n\n🎴 KORTŲ DALIJIMAS:\n• Jūs gaunate 2 atviras kortas (jūsų skyles)\n• Dileris gauna 2 uždaras kortas (paslėptas nuo jūsų)\n• 5 bendruomenės kortos yra dalijamos uždaromis iš pradžių\n• Bendruomenės kortos yra atskleidžiamos progresyviai per žaidimo fases\n\n🏆 DILERIO KVALIFIKACIJA:\n• Dileris privalo turėti bent PORĄ (2 kortos to paties rango) kvalifikuotis, naudodamas 2 kortas savo rankoje ir 5 bendruomenės kortas.\n• Dilerio kvalifikacija paveikia statymų rezultatus, kaip bus paaiškinta vėliau.\n\n🎮 ŽAIDIMO FAZĖS & VEIKSMAI:\n📋 PRE-FLOP:\n  • Veiksmai: [4x] (${ante4}) arba [check]\n  • [4x]: Statykite ${ante4} PLAY statymą, atskleidžia pirmas 3 bendruomenės kortas\n  • [check]: Jokių papildomų statymų, atskleidžia pirmas 3 bendruomenės kortas\n\n📋 FLOP:\n  • Jei 4x statymas atliktas: Tik [skip] galimas (automatiškai atskleidžia paskutines 2 bendruomenės kortas)\n  • Jei nėra 4x statymo: [2x] (${ante2}) arba [check]\n  • [2x]: Statykite ${ante2} PLAY statymą, atskleidžia paskutines 2 bendruomenės kortas\n  • [check]: Jokių papildomų statymų, atskleidžia paskutines 2 bendruomenės kortas\n\n📋 RIVER:\n  • Jei 4x arba 2x statymas atliktas: Tik [skip] galimas (automatiškai pereina į showdown)\n  • Jei nėra ankstesnio PLAY statymo: [1x] (${ante}) arba [fold]\n  • [1x]: Statykite ${ante} PLAY statymą, pereina į showdown\n  • [fold]: Atsisakykite rankos, praraskite ANTE ir BLIND statymus\n\n📋 SHOWDOWN:\n  • Visos kortos atskleidžiamos ir įvertinamos\n  • Geriausia 5-kortų ranka iš 7 kortų (2 skyles + 5 bendruomenės)\n  • Statymai sudaromi pagal išmokų taisykles\n\n💎 STATYMO IŠMOKOS:\n📊 ANTE STATYMAS:\n  • Dileris ne kvalifikuojasi: PUSH (statymas grąžinamas)\n  • Dileris kvalifikuojasi ir jūs laimėjote: 1:1 išmoka (statymas + laimėjimas)\n  • Dileris kvalifikuojasi ir jūs pralaimėjote: Statymas prarastas\n  • Lygiosios: PUSH (statymas grąžinamas)\n\n📊 BLIND STATYMAS:\n  • Neįtakoja dilerio kvalifikacijos\n  • Jūs laimėjote: Statymas grąžinamas ir papildoma išmoka pagal jūsų rankos stiprumą\n  • Jūs pralaimėjote: Statymas prarastas\n  • Lygiosios: PUSH (statymas grąžinamas)\n\n📊 BLIND STATYMO IŠMOKŲ LENTELĖ:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Mažiau nei Straight: Jokia papildoma išmoka\n\n📊 PLAY STATYMAS:\n  • Neįtakoja dilerio kvalifikacijos\n  • Tiesioginis palyginimas: Jūsų geriausia ranka prieš dilerio geriausią ranką\n  • Jūs laimėjote: 1:1 išmoka (statymas + laimėjimas)\n  • Jūs pralaimėjote: Statymas prarastas\n  • Lygiosios: PUSH (statymas grąžinamas)\n\n🎯 POKERIO RANKŲ REITINGAI (Geriausias į Blogiausias):\n  1. Royal Flush: A-K-Q-J-10 to paties švarko\n  2. Straight Flush: 5 iš eilės kortos to paties švarko\n  3. Four of a Kind: 4 kortos to paties rango\n  4. Full House: 3 to paties rango + 2 to paties rango\n  5. Flush: 5 kortos to paties švarko\n  6. Straight: 5 iš eilės kortos\n  7. Three of a Kind: 3 kortos to paties rango\n  8. Two Pair: 2 poros skirtingų rangų\n  9. One Pair: 2 kortos to paties rango\n  10. High Card: Aukščiausia karta laimi\n\n⌨️  VEIKSMŲ KOMANDOS:\n• [4x] arba [play bet 4x]: Statykite ${{self.ante_amount*4}} PLAY statymą\n• [2x] arba [play bet 2x]: Statykite ${{self.ante_amount*2}} PLAY statymą\n• [1x] arba [play bet 1x]: Statykite ${{self.ante_amount*1}} PLAY statymą\n• [check] arba [c]: Patikrinkite (jokių papildomų statymų)\n• [fold] arba [f]: Pasiduokite (atsisakykite rankos)\n• [skip] arba [s]: Pereikite į kitą fazę (kai nėra veiksmų)\n\n💡 STRATEGIJOS PATARIMAI:\n• Stiprios pradžios rankos (poros, aukštos kortos) dažnai pateisina 4x statymus\n• Svarstykite dilerio kvalifikaciją - silpnos rankos gali būti stumiamos, jei dileris ne kvalifikuojasi\n• BLIND statymas gali būti labai pelningas su stipriomis rankomis (Royal Flush = 500:1!)\n• Stebėkite savo čipų krūvą! Jei ji nueina iki 0 arba žemiau pradžioje raundo, jūs pralaimėjote.\n\n⚠️  SVARBŪS PASTEBĖJIMAI:\n• ANTE ir BLIND statymai yra privalomi kiekviename raunde\n• PLAY statymai yra papildomi ir strateginiai\n• Įsitikinkite, kad įvedate teisingą veiksmą, ir tik vieną veiksmą vienu metu.\n\n",
+    "state": "🎯 RAUNDAS {round}\n💰 Čipai: {chips}\n🎴 Jūsų ranka: {hand}\n📊 Dabartiniai statymai: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fazė: {phase}\n🎯 Galimi veiksmai: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Raundas {round} prasidėjo! Statymai: ANTE ${ante}, BLIND ${blind}. Jūs turite {chips} čipų.",
+    "your_hand": "🎴 Jūsų ranka: {hand}",
+    "flop_revealed": "🃏 FLOP atskleistas: {cards}",
+    "river_revealed": "🃏 RIVER atskleistas: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Neteisingas veiksmas dabartinėje fazėje. Galimi veiksmai: {available}",
+    "message": "❌ Netinkamas veiksmas! Galimi veiksmai: {available}"
+  },
+  "action": {
+    "folded": "🃏 Jūs pasidavėte."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Dilerio ranka: {cards}",
+    "community_cards": "🃏 Bendruomenės kortos: {cards}",
+    "player_best": "🎴 Žaidėjo geriausia ranka: {name} ({cards})",
+    "dealer_best": "🎴 Dilerio geriausia ranka: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE statymas PRARASTAS! -${ante} (pasiduota)",
+    "blind_lost_folded": "❌ BLIND statymas PRARASTAS! -${blind} (pasiduota)",
+    "ante_won": "✅ ANTE statymas LAIMĖTAS! +${amount}",
+    "ante_pushed": "🔄 ANTE statymas PUSHINTAS! ${ante} grąžintas",
+    "ante_lost": "❌ ANTE statymas PRARASTAS! -${ante}",
+    "blind_won": "✅ BLIND statymas LAIMĖTAS! +${amount}",
+    "blind_pushed": "🔄 BLIND statymas PUSHINTAS! ${blind} grąžintas",
+    "blind_lost": "❌ BLIND statymas PRARASTAS! -${blind}",
+    "play_won": "✅ PLAY statymas LAIMĖTAS! +${amount}",
+    "play_pushed": "🔄 PLAY statymas PUSHINTAS! ${play} grąžintas",
+    "play_lost": "❌ PLAY statymas PRARASTAS! -${play}",
+    "net_gain": "🎉 Raundas {round} užbaigtas! Grynoji čipų suma: +${net}",
+    "net_loss": "💸 Raundas {round} užbaigtas! Grynoji čipų suma: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 ŽAIDIMAS BAIGĖSI! {max_turns} raundų užbaigta. Jūs turite ${chips} čipų - JŪS LAIMĖJOTE!",
+    "game_over_lose": "🏁 ŽAIDIMAS BAIGĖSI! Jūs neturite čipų. Dileris laimėjo!",
+    "reward_win": "Žaidėjas užbaigė {winner_rounds} raundus su ${chips} čipais",
+    "reward_lose": "Žaidėjas prarado čipus {round} raunde",
+    "reward_win_max": "Žaidėjas užbaigė {max_turns} raundus su ${chips} čipais"
+  },
+  "hand_names": {
+    "royal_flush": "Karališkas Flush",
+    "straight_flush": "Eilinis Flush",
+    "four_of_a_kind": "Keturi to paties rango",
+    "full_house": "Pilnas namas",
+    "flush": "Flush",
+    "straight": "Eilė",
+    "three_of_a_kind": "Trys to paties rango",
+    "two_pair": "Dvi poros",
+    "one_pair": "Viena pora",
+    "high_card": "Aukščiausia karta",
+    "unknown": "Nežinoma ranka"
+  }
+}

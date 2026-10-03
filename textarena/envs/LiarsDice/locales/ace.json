@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Droe neuh Pemain {player_id} lam permainan Liar's Dice ngon {num_players} pemain.\nAturan:\n- Bak giliran droe, droe jeuheut:\n  1) Bikin tawaran baru ngon kuantitas nyang leubeh tinggi atawa nilai muka nyang leubeh tinggi (atawa duwa-duwa) dari tawaran nyang atra; mis. '[Bid: 3, 4]',\n  2) Neupanggil tawaran nyang atra ngon mengetik '[Call]'.\n\nJika droe neupanggil:\n  - Jika jumeulah dadu nyang sesuai ngon nilai muka nyan kurang dari tawaran, pemain nyang neutawar atra kehilangan dadu.\n  - Laen, pemain nyang neupanggil kehilangan dadu.\nPemain nyang jumeulah dadu nyan 0 tereliminasi. Pemain nyang tinggai menang."
+  },
+  "board": {
+    "per_player": "\tPemain {p}: {d}",
+    "new_round": "\nRonde baru - Dadu nyang sisa: {dice_summary}\nDadu droe atra: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Pemain {current_player_id} neupanggil! Jumeulah dadu ngon nilai muka {face_value} nyan {count}, nyang kurang dari {quantity}.\nPemain {loser_id} (pemain nyang neutawar atra) kehilangan dadu.",
+    "caller_loses": "Pemain {current_player_id} neupanggil! Jumeulah dadu ngon nilai muka {face_value} nyan {count}, nyang leubeh dari atawa sama ngon {quantity}.\nPemain {loser_id} (pemain nyang neupanggil) kehilangan dadu."
+  },
+  "action": {
+    "bid_announce": "Pemain {player_id} neutawar {quantity} ngon nilai muka {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Meuhôi hana na tawaran.",
+    "invalid_bid": "Peubida hana sah: {reason}",
+    "not_recognized": "Aksi hana diakui sebagai '[Bid: X, Y]' atawa '[Call]' nyang sah. Aksi nyang diserah: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Kuantitas baru {new_quantity} kurang dari kuantitas atra {current_quantity}.",
+    "face_lower": "Nilai nominal baro {new_face_value} leubeh rendah dari nilai saat nyo {current_face_value}.",
+    "identical": "Tawar nyan identik deungen tawar saat nyo.",
+    "face_range": "Nilai nominal harus antara 1 ngen 6."
+  },
+  "message": {
+    "eliminated_invalid": "Peunampilan {player_id} ji eliminasi le langkah hana sah."
+  },
+  "outcome": {
+    "win": "Pemain {winner} menang! Peringkat akhir: {final_ranking}"
+  }
+}

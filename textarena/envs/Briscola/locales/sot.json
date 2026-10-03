@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Papadi ya Briscola e qadile! Suti ya Trump: {trump_suit} (Karete ya Trump: {trump_card})"
+  },
+  "prompt": {
+    "intro": "O sebelisa Pati ya Briscola - Player {player_id}.\nMosebetsi: Fenya tricks hore o fumane points e ngata (120 points e feletseng kateng tsa karte).\nPoints ya Karte: A=11, 3=10, K=4, Q=3, J=2, tse ling=0\nMahemo ya Karte: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKarte ya Trump e hlola karte e ngoe e seng Trump bonyane ho feta mahemo.\n\nMosebetsi: '[play X]' ha X e be position (1-{max_pos}) ya karte kateng ya hao"
+  },
+  "hand": {
+    "none": "Ha ho likarete.",
+    "empty": "Ha ho na likarete tse ka letsohong la hao.",
+    "header": "Letsoho la hao:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP) Ke nahana hore ke ' nete."
+  },
+  "trick": {
+    "empty": "Ha ho likarete tse bapalang thetso ena.",
+    "header": "Leqheka la hona joale:",
+    "line": "  Player {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Mmoledi {player_id}: {points} ditekanyetso",
+    "trump_info": "Sutu ea Trump: {trump_suit}",
+    "trump_info_deck": "Suit ya Trump: {trump_suit} | Karte tse setseng kateng: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nMafahleng: {scores}\n{trump_info}\n\nSebelisa karte ka [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Sebelisa [play X] moo X e leng boemo ba karete (1, 2, 3, joalo-joalo)",
+    "out_of_range": "Sehlopha sa karte ha sebetse. O na le {count} karte (1-{count})"
+  },
+  "action": {
+    "played": "Player {player_id} e sebelisa {card}",
+    "trick_win": "Mmoledi {winner} o hlola kgato ka {card} le kgobokanya {points} ditekanyetso!"
+  },
+  "outcome": {
+    "head": "Pati e fihlile qeto! Player {winner} o fenya ka {points} points!\n\nMafahleng a qeto:\n{scores}",
+    "player_line": "Mmoledi {player_id}: {points} ditekanyetso ({tricks} dikgato)\n"
+  }
+}

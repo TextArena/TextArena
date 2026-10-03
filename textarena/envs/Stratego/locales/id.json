@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam Stratego.\nTujuan Anda adalah menangkap Bendera lawan atau mengeliminasi semua potongan yang dapat bergerak milik lawan.\nPasukan Anda telah ditempatkan di papan, termasuk Bendera, Bom, dan potongan lainnya dengan peringkat yang berbeda.\n\n### Instruksi Permainan\n1. **Aturan Gerakan:**\n   - Pada giliran Anda, Anda dapat memindahkan satu potongan satu langkah ke kotak yang bersebelahan (ke atas, ke bawah, ke kiri, atau ke kanan) yang sudah ditempati oleh potongan Anda sendiri.\n   - Contoh: Potongan dapat bergerak dari A1 ke B1 atau A1 ke A2 jika B1 dan A2 belum ditempati oleh potongan Anda sendiri.\n   - Jika potongan yang dipilih adalah Bom atau Bendera, potongan tersebut tidak dapat dipindahkan.\n2. **Pertempuran:**\n   - Jika Anda bergerak ke kotak yang ditempati oleh potongan lawan, maka akan terjadi pertempuran:\n     - Potongan dengan peringkat lebih tinggi menang dan mengeliminasi potongan lawan.\n     - Jika peringkat sama, kedua potongan dihilangkan dari papan.\n     - **Kasus Khusus:**\n       - Bom mengeliminasi sebagian besar potongan serangan kecuali Penambang, yang dapat menonaktifkan Bom.\n       - Spion dapat mengalahkan Marsekal jika Spion menyerang terlebih dahulu, tetapi kalah dari semua potongan lainnya.\n3. **Tujuan Strategis:**\n   - Kenali potongan lawan melalui gerakan dan pertempuran mereka.\n   - Lindungi Bendera Anda sambil berusaha menangkap Bendera lawan.\n   - Gunakan Penjelajah secara strategis untuk mendapatkan informasi tentang potongan lawan dan menyerang yang lemah.\n\n### Cara Melakukan Gerakan:\n1. Tentukan koordinat potongan yang ingin Anda pindahkan dan tujuannya.\n2. Gunakan format: [A0 B0], di mana A0 adalah posisi sumber, dan B0 adalah tujuan.\n   - Contoh: Untuk memindahkan potongan dari baris 0, kolom 0 ke baris 1, kolom 0, masukkan [A0 B0].\n3. Pastikan tujuan valid sesuai dengan aturan gerakan di atas.\n\n### Catatan Penting:\n- Papan akan menampilkan potongan Anda dan posisinya, misalnya MN, MS.\n- Papan juga akan menampilkan posisi yang diketahui dari potongan lawan tanpa mengungkapkan peringkatnya, misalnya ?.\n- Kotak dengan ~ adalah danau dan tidak dapat dipindahkan ke sana.\n- Sebagai saran, mulai permainan Anda dengan memindahkan potongan yang berada di garis depan untuk mendapatkan informasi tentang potongan lawan. Garis depan Pemain 0 dan Pemain 1 adalah baris D dan G masing-masing.\n\nBerikut adalah kondisi papan saat ini:\n"
+  },
+  "board": {
+    "current_board": "Papan Saat Ini:\n\n{board}\nGerakan Tersedia: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format aksi tidak valid. Pemain {player_id} tidak memasukkan gerakan dalam format [A0 B0].",
+    "invalid_coordinates": "Format aksi tidak valid. Pemain {player_id} tidak memasukkan koordinat yang valid.",
+    "not_own_piece": "Format aksi tidak valid. Pemain {player_id} harus memindahkan salah satu potongan mereka sendiri.",
+    "scout_through_pieces": "Format aksi tidak valid. Pemain {player_id} tidak dapat memindahkan penjelajah melalui potongan lain.",
+    "scout_diagonal": "Format aksi tidak valid. Pemain {player_id} tidak dapat memindahkan penjelajah secara diagonal.",
+    "non_scout_multi_square": "Format aksi tidak valid. Potongan, kecuali penjelajah, hanya dapat bergerak satu kotak sekaligus.",
+    "move_into_lake": "Format aksi tidak valid. Pemain {player_id} tidak dapat bergerak ke danau.",
+    "move_onto_own_piece": "Format aksi tidak valid. Pemain {player_id} tidak dapat bergerak ke potongan mereka sendiri.",
+    "move_bomb_or_flag": "Format aksi tidak valid. Pemain {player_id} tidak dapat memindahkan bom atau bendera."
+  },
+  "game_action": {
+    "you_moved": "Anda telah memindahkan potongan Anda dari {source} ke {dest}.",
+    "opponent_moved": "Pemain {player_id} telah memindahkan potongan dari {source} ke {dest}.",
+    "you_equal_ranks": "Anda telah memindahkan potongan Anda dari {source} ke {dest}. Potongan serangan adalah {attacking_rank} dan potongan tujuan adalah {target_rank}. Karena peringkat sama, kedua potongan hilang.",
+    "opponent_equal_ranks": "Pemain {player_id} telah memindahkan potongan dari {source} ke {dest}. Potongan serangan adalah {attacking_rank} dan potongan tujuan adalah {target_rank}. Karena peringkat sama, kedua potongan hilang.",
+    "you_miner_defused": "Anda telah memindahkan potongan Anda dari {source} ke {dest}. Potongan serangan adalah {attacking_rank} dan potongan tujuan adalah {target_rank}. Karena penambang dapat menonaktifkan bom, Anda menang dalam pertempuran.",
+    "opponent_miner_defused": "Pemain {player_id} telah memindahkan potongan dari {source} ke {dest}. Potongan serangan adalah {attacking_rank} dan potongan tujuan adalah {target_rank}. Karena penambang dapat menonaktifkan bom, Anda kalah dalam pertempuran.",
+    "you_bomb_lost": "Anda telah memindahkan potongan Anda dari {source} ke {dest}. Potongan serangan adalah {attacking_rank} dan potongan tujuan adalah {target_rank}. Karena penyerang bukan penambang, Anda kalah dalam pertempuran.",
+    "opponent_bomb_won": "Pemain {player_id} telah memindahkan potongan dari {source} ke {dest}. Potongan serangan adalah {attacking_rank} dan potongan tujuan adalah {target_rank}. Karena penyerang bukan penambang, Anda menang dalam pertempuran.",
+    "you_spy_won": "Anda telah memindahkan potongan Anda dari {source} ke {dest}. Potongan serangan adalah {attacking_rank} dan potongan tujuan adalah {target_rank}. Karena penyerang adalah spion dan tujuan adalah marsekal, Anda menang dalam pertempuran.",
+    "opponent_spy_lost": "Pemain {player_id} telah memindahkan potongan dari {source} ke {dest}. Potongan serangan adalah {attacking_rank} dan potongan tujuan adalah {target_rank}. Karena penyerang adalah spion dan tujuan adalah marsekal, Anda kalah dalam pertempuran.",
+    "you_higher_won": "Anda telah memindahkan potongan Anda dari {source} ke {dest}. Potongan serangan adalah {attacking_rank} dan potongan tujuan adalah {target_rank}. Karena penyerang memiliki peringkat lebih tinggi dari tujuan, Anda menang dalam pertempuran.",
+    "opponent_higher_lost": "Pemain {player_id} telah memindahkan potongan dari {source} ke {dest}. Potongan serangan adalah {attacking_rank} dan potongan tujuan adalah {target_rank}. Karena penyerang memiliki peringkat lebih tinggi dari tujuan, Anda kalah dalam pertempuran.",
+    "you_lower_lost": "Anda telah memindahkan potongan Anda dari {source} ke {dest}. Potongan serangan adalah {attacking_rank} dan potongan tujuan adalah {target_rank}. Karena penyerang memiliki peringkat lebih rendah dari tujuan, Anda kalah dalam pertempuran.",
+    "opponent_lower_won": "Pemain {player_id} telah memindahkan potongan dari {source} ke {dest}. Potongan serangan adalah {attacking_rank} dan potongan tujuan adalah {target_rank}. Karena penyerang memiliki peringkat lebih rendah dari tujuan, Anda menang dalam pertempuran."
+  },
+  "outcome": {
+    "flag_captured": "Pemain {player_id} telah menangkap Bendera lawan!",
+    "no_movable_pieces": "Pemain {winner_id} menang! Pemain {loser_id} tidak memiliki potongan yang dapat bergerak lagi."
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (spilakortaleikur) staðfærslu skrá. ÞÝÐA EKKI lykla (vinstri hlið). Þýða aðeins gildi (hægri hlið).",
+  "_slots": {
+    "{player_id}": "Leikmannsnúmer, t.d. 0 eða 1",
+    "{pid}": "Leikmannsnúmer, t.d. 0 eða 1",
+    "{winner}": "Leikmaðurinn með lægsta stigagjöld",
+    "{score}": "Tölulegt stigagjöld",
+    "{card}": "Spilakortamerki, t.d. A♠, 10♥, K♦ eða Q♣",
+    "{new}": "Spilakortamerki sem var sett í grindina",
+    "{old}": "Spilakortamerki sem var fjarlægt úr grindinni",
+    "{row}": "Röðunúmer",
+    "{col}": "Dálkunúmer",
+    "{max_row}": "Hæsta gilt röðunúmer",
+    "{max_col}": "Hæsta gilt dálkunúmer",
+    "{reason}": "Fyrirfram gerð lýsing á því hvers vegna síðasta umferðin hófst",
+    "{n}": "Röðunúmer sem sýnt er í upphafi röðu",
+    "{cards}": "Fyrirfram gerðar, útlitsviðnar reitur einnar röðu",
+    "{hand}": "Fyrirfram gerður leikmannsgrindablokkur",
+    "{discard}": "Spilakortamerki efst á á Chapman rúninni, eða orðið fyrir 'ekkert'",
+    "{options}": "Fyrirfram gerð lína sem listar tiltækar aðgerðir",
+    "{scores}": "Fyrirfram gerður lista yfir lokastig fyrir hvern leikmann"
+  },
+  "player_prompt": {
+    "intro": "Þú ert að spila Golf (Spilakortaleik) - Leikmaður {player_id}.\nMarkmið: Fá lægsta heildarstigagjöld í þessari einu umferð. Ef dálkar deila sama gildi, eru þeir lagðir saman sem 0.\nSpilakortagildi: A=1, 2-10=andlit gildi, J/Q=10, K=0\n\nAðgerðir (notaðu nákvæmar klæðningar):\n- '[draw]' - Draga frá spilastokk\n- '[take]' - Taka frá Chapman rúninni\n- '[swap X Y]' - Skipta um spilakort með staðsetningu X (röð) Y (dálkur)\n- '[discard]' - Farga spilakortinu"
+  },
+  "board": {
+    "drew": "Þú dróst: {card}\nNú verður þú að [swap X Y] eða [discard] það.",
+    "took": "Þú tókst: {card} frá Chapman rúninni\nÞú verður að [swap X Y] með því (getur ekki fargað).",
+    "peeked": "Þú kíktir á staðsetningu ({row},{col}): {card}",
+    "turn_view": "Þín hönd:\n{hand}\nChapman rúna: {discard}\n{options}",
+    "none": "Ekkert"
+  },
+  "options": {
+    "final_turns": "Síðustu umferðir! Þínar aðgerðir: [draw], [take], [peek X Y]",
+    "draw": "Þínar aðgerðir: [draw], [take]",
+    "must_swap": "Þú verður að: [swap X Y] (getur ekki fargað spilakort frá Chapman rúninni)",
+    "swap_or_discard": "Þú verður að: [swap X Y] eða [discard]"
+  },
+  "hand": {
+    "no_cards": "Engin spilakort",
+    "header": "  Dálkur:   1    2    3",
+    "row": "Röð {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Leikmaður {pid} skipti {new} með {old} á staðsetningu ({row},{col})",
+    "discarded": "Leikmaður {pid} fargaði {card}"
+  },
+  "message": {
+    "deck_empty": "Spilastokkurinn er tómur! Leikurinn endar strax.",
+    "knocked": "Leikmaður {pid} bankaði! Hver annar leikmaður fær einn umferð til.",
+    "final_round": "Leikmaður {pid} {reason}! Hver annar leikmaður fær einn umferð til."
+  },
+  "reason": {
+    "all_revealed": "hefur öll spilakort opinber"
+  },
+  "invalid": {
+    "wrong_action": "Notaðu nákvæma einnar klæðningar aðgerð: [draw], [take], [swap X Y], [discard], [knock], eða [peek X Y]",
+    "discard_empty": "Chapman rúnan er tóm!",
+    "must_draw_first": "Þú verður fyrst að [draw], [take], [knock], eða [peek X Y]",
+    "cannot_discard_taken": "Þú getur ekki fargað spilakort tekið frá Chapman rúninni. Þú verður að skipta um það.",
+    "have_drawn_card": "Þú hefur dregið spilakort. Þú verður að [swap X Y] eða [discard] það.",
+    "need_drawn_swap": "Þú þarft dregið spilakort til að skipta.",
+    "need_drawn_discard": "Þú þarft dregið spilakort til að farga.",
+    "out_of_bounds": "Staðsetning utan marka. Notaðu röð 1-{max_row}, dálkur 1-{max_col}",
+    "knock_with_card": "Þú getur ekki bankað með dregnu spilakorti. Ljúkaðu umferðinni fyrst.",
+    "already_knocked": "Einver annar hefur þegar bankað í þessari umferð.",
+    "already_revealed": "Það spilakort er þegar opinbert!"
+  },
+  "summary": {
+    "full": "Leikurinn er búinn! Leikmaður {winner} vinnur með stigagjöld {score} stig!\n\nLokastig:\n{scores}",
+    "line": "Leikmaður {pid}: {score} stig\n"
+  },
+  "board_str": {
+    "title": "=== GOLF LEIKUR ===",
+    "discard": "Chapman rúna: {card}",
+    "knocked": "Leikmaður {pid} hefur bankað!",
+    "player_header": "Leikmaður {pid} (Stig: {score}):"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Oled Mängija {player_id}. Mängid Mälu Mängu.\nSinu eesmärk on leida rohkem kaardipare laualt kui vastane.\nOma käigu ajal vali kaks kaarti, mida soovid pöörata, sisestades esimese ja teise kaardi rea- ja veerunumbrid vastavalt nagu '[0 1 1 0]', kus esimene kaart on reas 0 ja veerus 1, ning teine kaart on reas 1 ja veerus 0.\nKui kaks kaarti sobivad, saad punkti ja kaardid jäävad nähtavale. Kui nad ei sobi, kaardid pööratakse tagasi nähtamatuks, nt '.'.\nMäng lõpeb, kui kõik paarid on leitud."
+  },
+  "board": {
+    "current_board": "Praegune laud:\n{board}",
+    "current_game_board": "Praegune Mängulaud:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Vigane käigu vorming. Mängija {player_id} ei vastanud õige suunaga ruudusulgudes.",
+    "out_of_bounds": "Vigane käik. Mängija {player_id} valis positsiooni, mis on väljaspool piire.",
+    "same_card_twice": "Vigane käik. Mängija {player_id} valis sama kaardi kaks korda.",
+    "already_matched": "Vigane käik. Mängija {player_id} valis ühe või mõlemad kaardid, mis on juba sobitatud."
+  },
+  "game_message": {
+    "cards_match": "Mängija {player_id} poolt valitud kaardid positsioonidel [{r1} {c1}] ja [{r2} {c2}] sobivad!",
+    "cards_no_match": "Mängija {player_id} poolt valitud kaardid ei sobi. Kaardid positsioonidel [{r1} {c1}] ja [{r2} {c2}] on vastavalt {pos1} ja {pos2}."
+  },
+  "outcome": {
+    "draw": "Mõlemad mängijad leidsid sama arvu kaardipare.",
+    "win": "Mängija {winner_id} on võitnud!",
+    "turn_limit": "Käikude piir on ületatud. Mäng on lõppenud. Mängija 0 skooris {score_0} punkti, Mängija 1 skooris {score_1} punkti.",
+    "turn_limit_win": "{reason} Mängija {winner_id} on võitnud!"
+  }
+}

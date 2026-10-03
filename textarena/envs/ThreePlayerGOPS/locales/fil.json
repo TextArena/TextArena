@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS file ng lokasyon. HUWAG isalin ang mga susi (kaliwang bahagi). Isalin lamang ang mga halaga (kanang bahagi).",
+  "_slots": {
+    "{player_id}": "Ang numero ng manlalaro, 0, 1 o 2",
+    "{round}": "Ang kasalukuyang bilang ng round, 1..13",
+    "{prize}": "Ang label ng mukha ng kartang premyo (A, 2..10, J, Q, K) - huwag isalin",
+    "{worth}": "Ang kabuuang halaga ng premyo kabilang ang anumang dala-dalang pot",
+    "{hand}": "Ang mga natitirang kartang hawak ng manlalaro, na-render bilang mga token na nasa bracket gaya ng '[A]' '[2]' - huwag isalin",
+    "{bids}": "Ang neutral na listahan ng mga kartang nilaro na pinaghihiwalay ng koma gaya ng 'P0:10, P1:J, P2:Q' - huwag isalin",
+    "{winner}": "Ang numero ng manlalaro na nanalo sa round",
+    "{pot}": "Ang halaga ng pot na iginawad o dinala sa round na ito",
+    "{scoreline}": "Ang neutral na scoreboard na tumatakbo gaya ng 'P0:0  P1:0  P2:11' - huwag isalin",
+    "{pid}": "Ang numero ng manlalaro na na-eliminate",
+    "{scores}": "Ang mga final na iskor bilang isang raw na pag-mapping ng numero ng manlalaro sa iskor - huwag isalin"
+  },
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa Three-Player GOPS.\n- Ikaw ay hawak ang 13 na kartang A-K (bawat isa ay eksaktong isang beses).\n- Sa bawat round, isang premyo ay ipinakita. Magsumite ng ISANG kartang gaya ng `[Q]`, `[10]`, `[2]` …\n- Ang pinakamataas na kartang nanalo ng premyo (+ anumang dala-dalang pot). Ang mga tie ay nagpapalit ng premyo sa susunod na round.\n- Pagkatapos ng 13 na round, ang pinakamataas na kabuuang nanalo. Ang mga hindi wastong pagkilos = eliminasyon."
+  },
+  "round": {
+    "header": "### Round {round}/13 - Premyo: {prize} (na may halagang {worth})",
+    "hand": "Ang iyong natitirang hawak: {hand}"
+  },
+  "reveal": {
+    "win": "Mga taya » {bids} - Ang Player {winner} ay nanalo ng {pot}.",
+    "tie": "Mga taya » {bids} - tie, ang pot ay ngayon {pot}.",
+    "scores": "Mga iskor → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "ang pagkilos ay nangangailangan ng isang kartang nasa bracket gaya ng '[Q]'",
+    "bad_card": "ang kartang ay ginamit na o hindi wasto"
+  },
+  "elimination": {
+    "player": "Ang Player {pid} ay na-eliminate pagkatapos ng paulit-ulit na mga hindi wastong pagkilos."
+  },
+  "outcome": {
+    "auto_win": "Dalawang manlalaro ang na-eliminate - awtomatikong panalo.",
+    "final": "Mga final na iskor: {scores}"
+  }
+}

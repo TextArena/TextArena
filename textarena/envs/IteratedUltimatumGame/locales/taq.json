@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Kemmini d umarir {player_id}, kaḍḍan {num_rounds} n imiriren n Iterated Ultimatum Game.\nTesɛedda ${pool} i wakken ad tḥulfu ɣef umirir-agi gar kemm d umarir {other_id}.\n\nUmarir n usudu:\n  - Sudd tiddi: [Offer: $X] (0 <= X <= pool)\n  - Ma d-yettwaqbel → Kemmini tesɛedda $(pool - X), umarir nniḍen tesɛedda $X\n  - Ma d-yettwafen → Kray kemm d umarir nniḍen tesɛedda $0\n  - Amedya: [Offer: $3]  neɣ  'Kemmini ḥsebɣa-d akken meqqer. [Offer: $5]'\n\nUmarir n usentem:\n  - Ṣṣayen ɣef tiddi s [Accept] neɣ [Reject]\n  - Amedya: 'Yettban-d akken meqqer. [Accept]'\n            'Ur yezmir ara. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Twizi {round_number} tettaɣ! ---\nAnemhal {proposer_id} d asakad, Anemhal {responder_id} d asemmad.",
+    "offer": "Umirir {round_number}: Umarir {proposer_id} iɛerḍen ${offer} i umarir {responder_id} (iḥafaḍen ${keep}).",
+    "accepted": "Umarir {responder_id} yeqbel! Umirir {round_number} ikeccmen: Umarir {proposer_id} +${proposer_gain}, umarir {responder_id} +${responder_gain}. Tiddi tameẓẓyant: Umarir 0: ${total_0}, umarir 1: ${total_1}.",
+    "rejected": "Umarir {responder_id} yefsen tiddi! Umirir {round_number} ikeccmen: Kray kemm d umarir +$0. Tiddi tameẓẓyant tesɛedda: Umarir 0: ${total_0}, umarir 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "ⵉⵇⵇⴰⵏ ⴷ ⴰⴷ ⵉⵙⴽⵔ ⵓⵎⵙⴽⴰⵏ ⵜⴰⵏⵏⴰⵢⵜ ⵙ ⵓⵙⵙⵎⵔⵙ ⵏ ⵓⵙⴽⴽⵉⵍ [Offer: $X].",
+    "bad_integer": "ⵉⵇⵇⴰⵏⴷ ⴰⴷ ⵉⴳ ⵡⴰⵜⵉⴳ ⵏ ⵓⵙⵙⵓⵎⵔ ⴰⵎⴹⴰⵏ ⵉⵎⵙⴷⴰⵡⵏ.",
+    "out_of_range": "Tamazirt tettwali d imɣan 0 d ${pool}.",
+    "no_current_offer": "ⵓⴰⵔ ⵉⵍⵍⴰ ⴰⵍⵓⴰⵣⴰⴱ ⵉ ⴰⴷ ⵏⵔⵎⵙ.",
+    "accept_or_reject": "Asakad ad ihana anɣa [Accept] neɣ [Reject] tamazirt."
+  },
+  "outcome": {
+    "win": "Umarir {winner} iɛerḍen s ${winner_total} n tiddi vs umarir {loser} s ${loser_total}.",
+    "draw": "ⵟⴰⵎⴰⵛⴰⵍⵜ! ⵉⵏⴰⵙⴾⴰⵍⴰⵏ ⵓⵉⵏ ⵙⴰⵏⴰⵜ ⴰⵎⵎⵓⵜⴰⵉ ⴷⴰⵗ ${total} ⴰⴶⵓⴷⵉⵉⴰⵏ."
+  }
+}

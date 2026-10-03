@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Você é {role} no Coronel Blotto.\nSeu objetivo é vencer mais rodadas do que seu oponente.\nEm cada rodada, aloque exatamente {num_total_units} unidades nos campos {field_names}.\nO jogador que alocar mais unidades em um campo vence aquele campo, e o jogador que vencer mais campos vence a rodada.\nPor exemplo, '[A7 B7 C6]' aloca 7 unidades para A, 7 para B e 6 para C.",
+    "commander_alpha": "Comandante Alfa",
+    "commander_beta": "Comandante Beta"
+  },
+  "game_state": {
+    "header_round": "=== CORONEL BLOTTO - Rodada {current_round}/{num_rounds} ===\nRodadas Vencidas - Comandante Alfa: {alpha_score}, Comandante Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRodada {current_round}\nComandante Alfa alocou: {p0_allocations}\nComandante Beta alocou: {p1_allocations}\n",
+    "winner_alpha": "{message}Vencedor: Comandante Alfa",
+    "winner_beta": "{message}Vencedor: Comandante Beta",
+    "tie": "{message}Empate!"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de entrada inválido. Use: A:5, B:10, C:5",
+    "invalid_field": "Nome(s) de campo inválido(s). Campos válidos: {field_names}",
+    "wrong_allocation_value": "Todas as alocações devem ser números inteiros não negativos.",
+    "incorrect_total_units": "Você precisa alocar exatamente {num_total_units} unidades. Soma atual: {current_sum}",
+    "good_allocations": "A alocação está correta."
+  },
+  "outcome": {
+    "winner_alpha": "Comandante Alfa vence {score_0}-{score_1} após {num_rounds} rodadas!",
+    "winner_beta": "Comandante Beta vence {score_1}-{score_0} após {num_rounds} rodadas!",
+    "draw": "Jogo termina em um empate {score_0}-{score_1} após {num_rounds} rodadas!",
+    "early_winner_alpha": "Comandante Alfa vence {scores_0}-{scores_1} (maioria alcançada)!",
+    "early_winner_beta": "Comandante Beta vence {scores_1}-{scores_0} (maioria alcançada)!"
+  }
+}

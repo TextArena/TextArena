@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} care joacă cu {colour} ({piece}) într-un joc de Othello.\nScopul dvs. este să aveți mai multe piese de culoarea dvs. pe tablă la sfârșitul jocului.\nLa rândul dvs., plasați o piesă astfel încât să flancheze una sau mai multe piese ale adversarului dvs. - în orice direcție (orizontală, verticală sau diagonală) - între piesa dvs. nouă și o altă piesă existentă a dvs. Toate piesele adversarului flancate vor fi întoarse la culoarea dvs.\nFurnizați mutarea dvs. în formatul '[row, col]'."
+  },
+  "board": {
+    "game_board": "Tablă de joc:\n{board}",
+    "valid_moves": "{observation}\nMutări valide: {moves}",
+    "no_valid_moves_reset": "{observation}\nNu există mutări valide - este posibil să trebuiască să săriți.",
+    "no_valid_moves_step": "{observation}\nNu există mutări valide – este posibil să trebuiască să săriți.",
+    "scores_reset": "{observation}\nScoruri curente - Negru: {black_count}, Alb: {white_count}\n",
+    "scores_step": "{observation}\nScoruri - Negru: {black_count}, Alb: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Mutarea trebuie să fie în formatul [row, col].",
+    "illegal": "Mutare ilegală. Mutări valide: {valid}"
+  },
+  "game_action": {
+    "skipped": "Jucătorul {pid} a trebuit să sară rândul",
+    "played": "Jucătorul {pid} ({piece}) a jucat [{r}, {c}] întorcând {flipped} piesă(e)"
+  },
+  "game_message": {
+    "must_skip": "Jucătorul {pid} ({piece}) nu are mutări valide și trebuie să sară."
+  },
+  "outcome": {
+    "black_wins": "Negru câștigă {black_count}-{white_count}.",
+    "white_wins": "Alb câștigă {white_count}-{black_count}.",
+    "draw": "Remiză {black_count}-{white_count}."
+  }
+}

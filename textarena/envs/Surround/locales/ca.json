@@ -1,0 +1,30 @@
+{
+  "_comment": "Fitxer de localització de Surround. NO tradueixis les claus (costat esquerre). Només tradueix els valors (costat dret). Mantén cada {placeholder} exactament com està.",
+  "_slots": {
+    "{num_players}": "Nombre de jugadors a la partida",
+    "{width}": "Amplada del tauler en cel·les",
+    "{height}": "Alçada del tauler en cel·les",
+    "{player_id}": "Número del jugador (basat en 0)",
+    "{board}": "La quadrícula ASCII renderitzada; mantén-la neutral, mai tradueix els seus caràcters",
+    "{reason}": "La frase de motiu de final de joc renderitzada",
+    "{groups}": "Dades de classificació neutrals (una llista de grups d'ID de jugador, de millor a pitjor); no tradueixis"
+  },
+  "player_prompt": {
+    "intro": "Surround de {num_players} jugadors en una quadrícula de {width}x{height}.\nEts el jugador {player_id}. Moviments vàlids: '[up]' '[down]' '[left]' '[right]' o w/s/a/d.\nObjectiu: sobreviure a tots els altres. Les trajectòries són mortals; els cops a la paret maten; les col·lisions frontals maten a tots dos."
+  },
+  "board": {
+    "current": "Tauler actual:\n{board}",
+    "after_moves": "Tauler després de moviments simultanis:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "El jugador {player_id} va morir a causa d'un moviment invàlid."
+  },
+  "outcome": {
+    "survived_win": "El jugador {player_id} va sobreviure; tots els altres van xocar.",
+    "all_crashed": "Tots els jugadors van xocar simultàniament.",
+    "outlived": "El jugador va sobreviure a tots els altres.",
+    "all_dead": "Tots els jugadors són morts.",
+    "turn_limit": "S'ha assolit el límit de torns - el supervivent més llarg guanya.",
+    "ranking": "{reason} Grups de classificació finals (de millor a pitjor): {groups}"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Nanhte Player {player_id} shani 3-player Iterated Prisoner's Dilemma na ahkying. Ahkying {num_rounds} round shani.\nRound masing:\n• {conv_rounds} free-chat turns\n• 1 decision turn - submit one token per opponent: '[<opp-id> cooperate]' shani '[<opp-id> defect]' (i.e. '[1 defect] [2 cooperate]'; default na 'cooperate'). \nPair-wise payoff matrix (applied to each unordered pair):\n  - Anhte cooperate  ->  {reward}\n  - Anhte defect     ->  {punishment}\n  - Nanhte defect, anhte cooperate -> {temptation}\n  - Nanhte cooperate, anhte defect -> {sucker}\nAhkying taw shani player(s) highest score na ahkying taw shani masat."
+  },
+  "round": {
+    "start": "─── Ahkying Round {round} ───\tNanhte converse freely for the next {conv_rounds} rounds.",
+    "chat_finished": "Chat finished for round {round}. Submit nanhte decisions, one token per opponent: `[pid cooperate]` shani `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Jaw ai lam:",
+    "pair_line": "{observation}\n\t Player {i} vs Player {j} chose to {choice_i} and {choice_j} respectively (Player {i} gained {gain_i}, Player {j} gained {gain_j})",
+    "scores_open": "{observation} -> Ya aten na awng dazik ni: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation}  hpe mu lu ai."
+  },
+  "outcome": {
+    "final": "Kawp shang na hpunau shang: {scores}.  Kawp shang na mi kaba wa shang shaga ai hpunau shang (worst→best): {groups}"
+  }
+}

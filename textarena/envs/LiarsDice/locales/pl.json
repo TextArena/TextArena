@@ -1,0 +1,55 @@
+{
+  "_comment": "Ciągi znaków dla użytkownika w grze Liar's Dice. Tokeny akcji w nawiasach ('[Bid: X, Y]', '[Call]'), identyfikatory graczy, wartości kostek, ilości i liczniki są neutralnymi slotami i nigdy nie powinny być tłumaczone.",
+  "_slots": {
+    "player_id": "indeks gracza (liczba całkowita)",
+    "num_players": "liczba graczy w grze (liczba całkowita)",
+    "dice_summary": "wstępnie wyrenderowane podsumowanie ilości kostek pozostałych dla każdego gracza, oddzielone średnikami",
+    "your_dice": "wstępnie wyrenderowana lista wartości kostek tego gracza, oddzielona przecinkami",
+    "p": "indeks gracza (liczba całkowita)",
+    "d": "ilość kostek pozostałych dla tego gracza (liczba całkowita)",
+    "current_player_id": "indeks gracza, który wywołał (liczba całkowita)",
+    "face_value": "wartość kostki będąca liczbą (1-6)",
+    "count": "rzeczywista liczba pasujących kostek (liczba całkowita)",
+    "quantity": "ilość licytacji (liczba całkowita)",
+    "loser_id": "indeks gracza, który traci kostkę (liczba całkowita)",
+    "new_quantity": "nowa ilość licytacji (liczba całkowita)",
+    "current_quantity": "obecna ilość licytacji (liczba całkowita)",
+    "new_face_value": "nowa wartość kostki licytacji (liczba całkowita)",
+    "current_face_value": "obecna wartość kostki licytacji (liczba całkowita)",
+    "action": "surowy ciąg znaków akcji wprowadzony przez gracza",
+    "reason": "zagnieżdżony powód odrzucenia licytacji",
+    "winner": "indeks gracza, który wygrywa (liczba całkowita)",
+    "final_ranking": "lista indeksów graczy od pierwszego wyeliminowanego do zwycięzcy"
+  },
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w grze Liar's Dice z {num_players} graczami.\nZasady:\n- W swojej turze możesz albo:\n  1) Złożyć nową licytację z wyższą ilością lub wyższą wartością kostki (lub obie) niż obecna licytacja; np. '[Bid: 3, 4]',\n  2) Wywołać ostatnią licytację wpisując '[Call]'.\n\nJeśli wywołasz:\n  - Jeśli rzeczywista liczba kostek o tej wartości wśród wszystkich kostek jest mniejsza niż licytacja, ostatni licytujący traci jedną kostkę.\n  - W przeciwnym razie, wywołujący traci jedną kostkę.\nGracz, który osiągnie 0 kostek, zostaje wyeliminowany. Ostatni pozostały gracz wygrywa."
+  },
+  "board": {
+    "per_player": "\tGracz {p}: {d}",
+    "new_round": "\nNowa runda - Pozostałe kostki: {dice_summary}\nTwoje obecne kostki to: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Gracz {current_player_id} wywołuje! Rzeczywista liczba kostek o wartości {face_value} wynosi {count}, która jest MNIEJSZA niż {quantity}.\nGracz {loser_id} (ostatni licytujący) traci jedną kostkę.",
+    "caller_loses": "Gracz {current_player_id} wywołuje! Rzeczywista liczba kostek o wartości {face_value} wynosi {count}, która jest >= {quantity}.\nGracz {loser_id} (wywołujący) traci jedną kostkę."
+  },
+  "action": {
+    "bid_announce": "Gracz {player_id} licytuje {quantity} kostek o wartości {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Wywołanie bez poprzedniej licytacji.",
+    "invalid_bid": "Nieprawidłowa licytacja: {reason}",
+    "not_recognized": "Akcja nie rozpoznana jako prawidłowa '[Bid: X, Y]' lub '[Call]'. Wprowadzona akcja: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nowa ilość {new_quantity} jest niższa niż obecna {current_quantity}.",
+    "face_lower": "Nowa wartość kostki {new_face_value} jest niższa niż obecna {current_face_value}.",
+    "identical": "Licytacja jest identyczna z obecną licytacją.",
+    "face_range": "Wartość kostki musi być między 1 a 6."
+  },
+  "message": {
+    "eliminated_invalid": "Gracz {player_id} został wyeliminowany przez nieprawidłowy ruch."
+  },
+  "outcome": {
+    "win": "Gracz {winner} wygrywa! Ostateczna klasyfikacja: {final_ranking}"
+  }
+}

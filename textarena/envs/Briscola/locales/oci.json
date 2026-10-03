@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Jòc de Briscola començat! Color de trumfa: {trump_suit} (Carta de trumfa: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Jogatz lo jòc de Briscola - Jogador {player_id}.\nObjèctiu: Ganhar de trucs e reculhir los punts mai nombroses (120 punts totals dins lo sabòt).\nPunts de cartas: A=11, 3=10, R=4, D=3, V=2, las autras=0\nPoder de cartas: A > 3 > R > D > V > 7 > 6 > 5 > 4 > 2\nLas cartas de trumfa baton las cartas non trumfa, sens considerar lo poder.\n\nAccions: '[play X]' ont X es la posicion (1-{max_pos}) de la carta dins vòstra man\n"
+  },
+  "hand": {
+    "none": "Pas de cartas.",
+    "empty": "Pas de cartas en man.",
+    "header": "Ta man:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Pas de cartas jogadas encara aqueste truc.",
+    "header": "Tròca actuala:",
+    "line": "  Jogador {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Jogador {player_id}: {points} pts",
+    "trump_info": "Trump: {trump_suit}",
+    "trump_info_deck": "Color de trumfa: {trump_suit} | Cartas demoradas dins lo sabòt: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPunts: {scores}\n{trump_info}\n\nJogatz una carta utilizant [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Utiliza [play X] ont X es la posicion de las cartas (1, 2, 3, etc.)",
+    "out_of_range": "Posicion de carta invalida. Avètz {count} cartas (1-{count})"
+  },
+  "action": {
+    "played": "Jogador {player_id} jogat {card}",
+    "trick_win": "Lo jogaire {winner} ganha lo torn amb {card} e obtèn {points} punts !"
+  },
+  "outcome": {
+    "head": "Partida acabada ! Lo jogaire {winner} ganha amb {points} ponchs !\n\nPuntuacions finalas :\n{scores}",
+    "player_line": "Jogador {player_id}: {points} punts ({tricks} trucs)\n"
+  }
+}

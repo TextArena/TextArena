@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Estás jugando con {color} en una partida de Breakthrough. Te mueves hacia {direction} en un tablero de {board_size}x{board_size}.\nEn tu turno, puedes mover una sola ficha una casilla hacia delante o en diagonal hacia delante.\nUna ficha solo puede moverse en diagonal si hay una ficha del oponente y solo puede entrar en una casilla ocupada mediante un movimiento diagonal.\nAl entrar en una casilla con una ficha del oponente, la capturas y la ficha del oponente se retira permanentemente del tablero.\nUsa una notación similar a UCI entre corchetes, p. ej., [a2a3] para mover de a2 a a3.\n* 'a' corresponde a la columna situada más a la izquierda, y '1' es la fila inferior (desde la perspectiva de White).\n* La fila de inicio de Black es la fila superior (fila 8 en un tablero 8x8). La fila de inicio de White es la fila inferior (fila 1 en un tablero 8x8).\nGana el primer jugador cuya ficha alcance la fila de inicio del oponente. Si todas tus fichas son capturadas, pierdes."
+  },
+  "invalid_move": {
+    "wrong_format": "Usa notación algebraica entre corchetes, como [a2a3].",
+    "out_of_bounds": "El movimiento está fuera de los límites del tablero.",
+    "illegal": "Ese movimiento no sigue las reglas de Breakthrough o la ficha no es tuya."
+  },
+  "game_action": {
+    "moved": "El Jugador {player_id} mueve {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "White alcanzó la fila de inicio de Black.",
+    "black_reached": "Black alcanzó la fila de inicio de White.",
+    "white_captured": "Todas las fichas de White fueron capturadas.",
+    "black_captured": "Todas las fichas de Black fueron capturadas.",
+    "no_moves": "El Jugador {player_id} no tiene más movimientos."
+  }
+}

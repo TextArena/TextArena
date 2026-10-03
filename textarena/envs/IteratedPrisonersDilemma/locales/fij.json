@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "O iko Player {player_id} ena Prisoner's Dilemma ni Iterated e tini kina na round {num_rounds}.\n\nNa kena itavi:\n- Ni vei au mai vei kena veidusimai, o ni sa na tini kina na gauna {total_conversation_rounds} me vaka na nomuni itavi.\n- Ni sa oti e rau vei kena veivakavulici, e rau vei kena vakatulewa me vaka na kena dui veivakavulici se me vaka na kena dui veivakasauri.\n\nNa kena iwasewase ni veivakavulici (e tini kina na round):\n- Rau vei kena dui veivakavulici ➜ rau na {cooperate_reward}\n- Rau vei kena dui veivakasauri ➜ rau na {mutual_defect_reward}\n- Dua na veivakasauri, dua na veivakavulici ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nNa iveda ni kena tavi:\n- Ena gauna ni veidusimai: mo ni vola na nomuni itavi.\n- Ena gauna ni veivakavulici: mo ni taroga '[Cooperate]' se '[Defect]' (e sega ni kena ibalebale). O na vakavulica na nomuni itavi ena maliwa na nomuni taro."
+  },
+  "phases": {
+    "conversation_finished": "Na veitalano tukuna oti me baleta na veidusimai {round}. Mo ni veivakaturaga vinaka me vaka na '[Cooperate]' se '[Defect]' ena \boxed{{}}.",
+    "starting_round": "--- Tekivu ni Raundi {round} ---",
+    "round_summary": "Na iwasewase ni round {round}:\n{outcome}\nPlayer 0 e dau veivakavulici {r0} (kotoi {score_0}), Player 1 e dau veivakavulici {r1} (kotoi {score_1})."
+  },
+  "outcome": {
+    "winner": "Na dauqito {winner} e qaqa ena {win_score} - {lose_score}.",
+    "draw": "E rau a sikoa ruarua na dauqito {s0}.",
+    "round_both_cooperate": "Erau cakacaka vata ruarua na dauqito.",
+    "round_both_defect": "Erau druka ruarua na dauqito.",
+    "round_p0_cooperates_p1_defects": "A cakacaka vata o Dauvakatulewa 0 qai druka na dauvakatu lewa 1.",
+    "round_p0_defects_p1_cooperates": "Na Vakalotu 0 a beca, Na Vakalotu 1 a veikauyaki."
+  }
+}

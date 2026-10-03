@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "თქვენ თამაშობთ გოლფს (ბარათის თამაში) - მოთამაშე {player_id}. მიზანი: მიიღეთ ყველაზე დაბალი საერთო ქულა ამ ერთ რაუნდში. თუ სვეტები ერთნაირ ღირებულებას აზიარებენ, ისინი შეჯამდება 0. ბარათის ღირებულებები: A = 1, 2-10 = სახის ღირებულება, J / Q = 10, K = 0 მოქმედებები (გამოიყენეთ ზუსტი კრეტჩანჯები): - '[draw] ' - მოხსნა დეკიდან - '[take] ' - ამოღება უგროვებელი ქვაბიდან - '[swap X Y] ' - გაცვლა მოხსნილი ბარათი პოზიციით X (რიდი) Y (სვეტი) - '[discard] ' - უგროვებელი ბარათი "
+  },
+  "board": {
+    "drew": "შენ დახატე: {card} ახლა შენ უნდა [swap X Y] ან [discard] ის.",
+    "took": "შენ წაიღე: {card} ნარჩენების ურდოსგან შენ უნდა [swap X Y] მასთან ერთად (არ შეიძლება ნარჩენების გადაყრა).",
+    "peeked": "თქვენ დაათვალიერეთ პოზიცია ({row},{col}): {card}",
+    "turn_view": "თქვენი ხელი:\n{hand}\nგადაგდებული ბანქოები: {discard}\n{options}",
+    "none": "არცერთი"
+  },
+  "options": {
+    "final_turns": "ფინალური რგოლები! თქვენი ვარიანტები: [draw], [take], [peek X Y]",
+    "draw": "თქვენი ვარიანტები: [draw], [take]",
+    "must_swap": "თქვენ უნდა: [swap X Y] (არ შეიძლება კარტების გატანა გატანილი ქვაბიდან)",
+    "swap_or_discard": "თქვენ უნდა: [swap X Y] ან [discard]"
+  },
+  "hand": {
+    "no_cards": "კარტებს არ ვცემ.",
+    "header": "კოლ: 1 2 3",
+    "row": "რიგში {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "მოთამაშე {pid} შეცვალა {new} {old}-სთან პოზიციაზე ({row},{col})",
+    "discarded": "მოთამაშე {pid} გაშვებული {card}"
+  },
+  "message": {
+    "deck_empty": "კოლოდა ცარიელია! თამაში სასწრაფოდ სრულდება.",
+    "knocked": "მოთამაშე {pid} დაარტყა! ყველა სხვა მოთამაშეს ერთი დამატებითი რაუნდი აქვს.",
+    "final_round": "მოთამაშე {pid} {reason}! ყველა სხვა მოთამაშეს ერთი დამატებითი რაუნდი აქვს."
+  },
+  "reason": {
+    "all_revealed": "თმა გჟთფკთ კარდა."
+  },
+  "invalid": {
+    "wrong_action": "გამოიყენეთ ზუსტად ერთი კოლოფის ფარგლებში: [draw], [take], [swap X Y], [discard], [knock], ან [peek X Y]",
+    "discard_empty": "გადაყრილი დაფა ცარიელია!",
+    "must_draw_first": "თქვენ უნდა [draw], [take], [knock], ან [peek X Y]",
+    "cannot_discard_taken": "თქვენ ვერ გადაგდებთ ბანქოს, რომელიც გადაგდებული ბანქოებიდან აიღეთ. თქვენ უნდა გაცვალოთ იგი.",
+    "have_drawn_card": "რპწბგა ეა [swap X Y] თლთ [discard] დჲ.",
+    "need_drawn_swap": "რპწბგა ეა ჟთ თჱდლვეა ნაჟკალთრვ კარტარა ჱა ეა ჟვ ოპჲმჲრთქ.",
+    "need_drawn_discard": "რპწბგა ეა ჟთ თჱდლვეა ნაჟკალჲ.",
+    "out_of_bounds": "პოზიცია საზღვრებს გარეთაა. გამოიყენეთ რიგი 1-{max_row}, სვეტი 1-{max_col}",
+    "knock_with_card": "თქვენ ვერ დაარტყავთ გათამაშებული ბანქოთი. ჯერ დაასრულეთ თქვენი რაუნდი.",
+    "already_knocked": "ვინმე უკვე დაარტყა ამ რაუნდში.",
+    "already_revealed": "ეს ბანქო უკვე გახსნილია!"
+  },
+  "summary": {
+    "full": "თამაშის დასრულება! {winner} მოთამაშე {score} ქულით იგებს! საბოლოო ქულები: {scores}",
+    "line": "მოთამაშე {pid}: {score} ქულები "
+  },
+  "board_str": {
+    "title": "=== გოლფის თამაში ===",
+    "discard": "გადაყრის ურნა: {card}",
+    "knocked": "{pid}-ის მოთამაშემ დააკაკუნა!",
+    "player_header": "მოთამაშე {pid} (გული: {score}):"
+  }
+}

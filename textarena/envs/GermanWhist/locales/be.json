@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Гульня пачынаецца. Козыр: {trump_suit} (козырная картка: {trump_str}).",
+    "no_trump_card": "ніякіх"
+  },
+  "player_prompt": {
+    "intro": "Вы гулец {player_id} у нямецкім віст. {phase_info} Вы трымаеце {hand_size} карты. Гуляйце карту з [play N], дзе N - гэта яе становішча ў вашай руцэ (напрыклад, [play 3]).",
+    "phase_learning": "ФАЗА НАВУЧАННЯ: пераможца кожнага ўдару бярэ карту, якая ляжыць вярхам, а прайграўшы цягне наступную карту з калоды. Удары, выйграныя ў гэтай фазе, не ідзе ў залік перамогі.",
+    "phase_playing": "ФАЗА ГУЛЬНІ: калода вычарпана. Кожны ўдар з гэтага часу ідзе ў залік перамогі."
+  },
+  "next_card": {
+    "playing_phase": "Ніякай карты не прапануецца - гульнявая фаза пачалася.",
+    "deck_empty": "У калодзежы пустыя карты - ніводнай.",
+    "available": "Карта прапановы: {card}",
+    "available_trump": "Карта прапановы: {card} (Трамп)"
+  },
+  "invalid_move": {
+    "wrong_format": "Несапраўдны фармат ходу. Выкарыстоўвайце \"[play N]\" для гульні з Н-й картай у вашай руцэ.",
+    "bad_position": "Гэтая пазіцыя не існуе. Вы трымаеце {hand_size} карт.",
+    "must_follow_suit": "Вы павінны прытрымлівацца прыкладу і гуляць {lead_suit} карту.",
+    "invalid_play": "Гэтую карту нельга разыграць."
+  },
+  "game_action": {
+    "played": "Гулец {player_id} гуляў {card}."
+  },
+  "trick": {
+    "won": "Гулец {winner_id} выйграе ўдар з {card}.",
+    "won_learning": "Гулец {winner_id} выйграе трук з {card} і бярэ адкрытую карту."
+  },
+  "phase": {
+    "learning_complete": "Калода вычарпана. Фаза навучання скончылася - кожны астатні ўдар ідзе ў залік перамогі."
+  },
+  "draw": {
+    "winner_received": "Вы выйгралі і атрымалі {card}.",
+    "loser_received": "Вы прайгралі і выцягнулі {card} з калоды.",
+    "winner_preview": "Наступная карта ў прапанове {card}."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "Трыкі, выйграныя да гэтага часу - Гулец 0: {tricks0}, Гулец 1: {tricks1}",
+    "scores_playing": "Трыкі для забівання - гулец 0: {tricks0}, гулец 1: {tricks1}",
+    "phase": "Фаза: {phase}",
+    "phase_learning": "Фаза: {phase} ({remaining_cards} карткі, пакінутыя ў калодзежы)"
+  },
+  "hand": {
+    "no_cards": "Ніякіх карт",
+    "no_cards_in_hand": "Няма карт у руцэ",
+    "header": "Ваша рука:",
+    "trump_indicator": "(Трамп)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Ніякіх карт гулялі яшчэ гэты трук.",
+    "header": "Цяперашні трук:",
+    "trump_indicator": "(Трамп)",
+    "card_line": "{observation} Гулец {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Гульня не пачалася",
+    "header": "=== нямецкая гульня ===",
+    "phase": "{observation} Фаза: {phase}",
+    "trump_suit": "{observation}\nКозырная масть: {trump_suit}",
+    "trump_card": "{observation} Трамп-карта: {card}",
+    "cards_left": "{observation} Карты, пакінутыя ў калодзежы: {count}",
+    "next_card": "{observation} Наступная карта для пераможцы: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Цяперашні трук:",
+    "trump_indicator": "(Трамп)",
+    "trick_line": "{observation} Гулец {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nГулец {player_id}: {scoring} ачковых удараў ({tricks} усяго), {hand_size} карт у руцэ"
+  },
+  "outcome": {
+    "summary": "Фаза навучання - гулец 0: {l0}, гулец 1: {l1}. Фаза гульні - гулец 0: {p0}, гулец 1: {p1}. Гулец {winner_id} перамагае з {winner_tricks} забіваючых трукаў!"
+  }
+}

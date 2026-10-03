@@ -1,0 +1,32 @@
+{
+  "_comment": "Archivo de idioma de ThreePlayerTicTacToe en español. NO traduzcas las claves, solo los valores. Mantén cada {marcador} tal cual.",
+  "_slots": {
+    "{player_id}": "El número del jugador, por ejemplo 0, 1 o 2",
+    "{symbol}": "La marca del jugador, A, B o C",
+    "{cell}": "Un número de casilla",
+    "{max_cell}": "El número de casilla válido más alto",
+    "{row}": "El índice de fila de la marca colocada",
+    "{col}": "El índice de columna de la marca colocada",
+    "{board}": "El tablero ASCII renderizado (no traducir)",
+    "{moves}": "La lista separada por comas de movimientos disponibles como '[4]' (no traducir)"
+  },
+  "player_prompt": {
+    "intro": "Eres el jugador {player_id} en Tres en Raya para tres jugadores.\nTu símbolo es '{symbol}'.\nPor turnos, colocáis vuestro símbolo en un tablero de 5x5 para formar una línea de cuatro.\nLas líneas pueden ser horizontales, verticales o diagonales.\nEnvía tu jugada con el formato '[4]' para marcar la casilla 4."
+  },
+  "board": {
+    "current_board": "Tablero actual:\n\n{board}\n\nMovimientos disponibles: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movimiento inválido. Utilice '[cell]' donde cell es 0-{max_cell}.",
+    "out_of_range": "Número de casilla no válido: {cell}. Debe estar entre 0 y {max_cell}.",
+    "already_occupied": "La casilla {cell} ya está ocupada.",
+    "made_invalid": "El jugador {player_id} hizo una jugada no válida"
+  },
+  "game_action": {
+    "placed": "El jugador {player_id} coloca su símbolo ({symbol}) en la casilla ({row}, {col})."
+  },
+  "outcome": {
+    "win": "¡El jugador {player_id} ({symbol}) gana!",
+    "draw": "¡La partida terminó en empate!"
+  }
+}

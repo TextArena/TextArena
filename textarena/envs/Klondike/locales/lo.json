@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "ທ່ານກຳລັງຫຼິ້ນການຫຼິ້ນ Klondike Solitaire. ປະເພດຂອງທ່ານຄືການຍ້າຍບັດທັງໝົດໄປຫາກຸ່ມມູນຄ້າຍ.\n\nກົດຫມາຍສະມາຊິກ:\n- ກຸ່ມມູນຄ້າຍ (F1-F4): ສ້າງຂຶ້ນຈາກ Ace ໄປຫາ King ໃນສີ\n- ກຸ່ມໂຕະ (T1-T7): ສ້າງລົງໃນສີສະຫຼັບ (ສີແດງສີດຳ, ສີດຳສີແດງ)\n- ສະຕ໋ອກ: ຈັບບັດໄປຫາກຸ່ມຂີ້ຕາມ\n- ກຸ່ມຂີ້ຕາມ (W): ບັດສູງສຸດທີ່ສາມາດຫຼິ້ນໄດ້\n\nຄຳສັ່ງ:\n- 'draw' - ຈັບບັດຈາກສະຕ໋ອກໄປຫາກຸ່ມຂີ້ຕາມ\n- 'move <source> <destination> [count]' - ຍ້າຍບັດລະຫວ່າງກຸ່ມ\n  ຕົວຢ່າງ: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count ຍັງສາມາດເປັນ 'all', ທີ່ຈະພະຍາຍາມຍ້າຍບັດທັງໝົດທີ່ເບິ່ງເຫັນ.\n- 'forfeit' - ສິ້ນສຸດການຫຼິ້ນທັນທີ ແລະ ກັກຂັງຄະແນນປັດຈຸບັນ\n- ຊື່ກຸ່ມ: W (ຂີ້ຕາມ), F1-F4 (ມູນຄ້າຍ), T1-T7 (ໂຕະ)\n\nທ່ານສາມາດຫຼິ້ນການຫຼິ້ນຫຼາຍຢ່າງໃນຮອບດຽວໃນການແບ່ງອອກດ້ວຍຈຸດຫຼັງຂາດ:\n  ຕົວຢ່າງ: 'draw, move W T1, move T2 F1'\n\nພຽງ King ສາມາດຂະເບີຍຢູ່ໂຕະວ່າງ.\nການຫຼິ້ນສະເຫຼີມໃນລຳດັບ - ຖ້າຫາກຫຼິ້ນຫາຍ, ການຫຼິ້ນທີ່ຫຼິ່ມລົງຈະຖືກຂັງ.\nໃຊ້ 'forfeit' ຖ້າທ່ານເຊື່ອວ່າການຫຼິ້ນນີ້ບໍ່ສາມາດໄດ້ຊະນະ."
+  },
+  "format_error": {
+    "no_brackets": "ຮູບແບບການກະ ທໍາ ທີ່ບໍ່ຖືກຕ້ອງ. ການກະ ທໍາ ຄວນຢູ່ໃນແຖບ.",
+    "no_closing_bracket": "ຮູບແບບການກະ ທໍາ ທີ່ບໍ່ຖືກຕ້ອງ. ຂາດຂາດຂາປິດ ']'",
+    "empty_command": "ຄຳສັ່ງບໍ່ມີ. ກະລຸນາພີມ 'draw' ຫຼື 'move <source> <destination> [count]'",
+    "empty_action": "ການກະທໍາທີ່ບໍ່ມີ",
+    "move_needs_args": "ຄຳສັ່ງ 'move' ຕ້ອງການຊື່ຂອງກຸ່ມບັດ ແລະ ຕຳແໜ່ງ. ກະລຸນາພີມ 'move <source> <destination> [count]'",
+    "count_positive": "ຈຳນວນຕ້ອງເປັນຈຳນວນບວກ ຫຼື 'all'",
+    "count_invalid": "ຈຳນວນບໍ່ຖືກຕ້ອງ. ກະລຸນາພີມຈຳນວນ ຫຼື 'all'",
+    "unknown_command": "ຄໍາສັ່ງທີ່ບໍ່ຮູ້ຈັກ '{cmd}'. ໃຊ້ 'draw', 'move <source> <destination> [count]', ຫຼື 'forfeit'",
+    "wrapped": "ການກະທໍາ {n}: {msg}"
+  },
+  "action_result": {
+    "success": "ການກະທໍາ {n}: {msg}",
+    "before_failure": "ສຳເລັດ {n} ການປະຕິບັດກ່ອນການລົ້ມລ້າງ.",
+    "failed": "ການຮ້ອງຂໍ {n} ປະຕິເສດ: {msg}"
+  },
+  "move_result": {
+    "drew": "ດຶງບັດ (s) ຈາກຫຼັກຊັບໄປຫາສິ່ງເສດເຫຼືອ.",
+    "cannot_draw": "ບໍ່ສາມາດດຶງໄດ້ ທັງຫຼັກຊັບ ແລະ ສິ່ງເສດເຫຼືອແມ່ນເປົ່າ.",
+    "invalid_pile": "ຊື່ຄັງບໍ່ຖືກຕ້ອງ. ໃຊ້ W, F1-F4, ຫຼື T1-T7",
+    "foundation_one_card": "ສາມາດຍ້າຍບັດ 1 ບັດເທົ່ານັ້ນໄປຫາພື້ນຖານ",
+    "waste_to_foundation_ok": "ບັດທີ່ຖືກຍ້າຍຈາກສິ່ງເສດເຫຼືອໄປຫາພື້ນຖານ F{dst}",
+    "waste_to_foundation_bad": "ບໍ່ສາມາດຍ້າຍບັດຂີ້ເຫຍື້ອໄປທີ່ຄັງພື້ນຖານ",
+    "tableau_to_foundation_ok": "ການເຄື່ອນຍ້າຍບັດຈາກຕາຕະລາງ T{src} ໄປຫາພື້ນຖານ F{dst}",
+    "tableau_to_foundation_bad": "ບໍ່ສາມາດຍ້າຍບັດ tableau ໄປທີ່ຄັງພື້ນຖານ",
+    "foundation_to_foundation": "ບໍ່ສາມາດຍ້າຍຈາກພື້ນຖານໄປຫາພື້ນຖານ",
+    "waste_to_tableau_one_card": "ສາມາດຍ້າຍບັດ 1 ບັດເທົ່ານັ້ນຈາກຂີ້ເຫຍື້ອໄປຫາຕາຕະລາງ",
+    "waste_to_tableau_ok": "ການເຄື່ອນຍ້າຍບັດຈາກສິ່ງເສດເຫຼືອໄປທີ່ຕາຕະລາງ T{dst}",
+    "waste_to_tableau_bad": "ບໍ່ສາມາດວາງບັດຂີ້ເຫຍື້ອໃສ່ກະຕ່າ tableau ນັ້ນ",
+    "no_face_up": "ບໍ່ມີບັດທີ່ເປີດຂຶ້ນມາທີ່ຈະຍ້າຍ",
+    "tableau_to_tableau_ok": "ຍ້າຍບັດ {count} (((s) ຈາກຕາຕະລາງ T{src} ໄປ T{dst}",
+    "tableau_to_tableau_bad": "ບໍ່ສາມາດຍ້າຍບັດ {count} (s) ຈາກ T{src} ໄປ T{dst}",
+    "foundation_to_tableau_one_card": "ສາມາດຍ້າຍບັດ 1 ບັດຈາກພື້ນຖານໄປຫາຕາຕະລາງ",
+    "foundation_empty": "ພື້ນຖານ F{src} ແມ່ນເປົ່າ",
+    "foundation_to_tableau_ok": "ການເຄື່ອນຍ້າຍບັດຈາກພື້ນຖານ F{src} ໄປທີ່ຕາຕະລາງ T{dst}",
+    "foundation_to_tableau_bad": "ບໍ່ສາມາດວາງບັດພື້ນຖານໃສ່ຕາຕະລາງ T{dst}",
+    "to_waste_or_stock": "ບໍ່ສາມາດຍ້າຍໄປຫາຂີ້ເຫຍື້ອຫຼືຫຸ້ນ"
+  },
+  "outcome": {
+    "forfeit": "ເກມຖືກປະຖິ້ມ. ຄະແນນສຸດທ້າຍ: {score} ບັດໃນພື້ນຖານ.",
+    "won": "ຊົມເຊີຍ! ເຈົ້າໄດ້ຊະນະ Klondike Solitaire!",
+    "turn_limit": "ເກມສິ້ນສຸດລົງ! ທ່ານໄດ້ບັນລຸສູງສຸດຂອງ {max_turns} ຫັນ. ຄະແນນ: {score} ບັດໃນພື້ນຖານ."
+  },
+  "board": {
+    "title": "=== ເກມຄລອນໄດກ ===",
+    "turn": "ຫັນ: {turn}/{max_turns}",
+    "stock": "Stock: {stock} ບັດ",
+    "waste": "ສິ່ງເສດເຫຼືອ (W): {waste}",
+    "foundations_header": "ພື້ນຖານ:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "ຕາຕະລາງ:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

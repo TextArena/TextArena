@@ -1,0 +1,941 @@
+{
+  "invalid_reasons": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 3
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 3
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Golf (Card Game) - Player 0.\nGoal: Get the lowest total score in this single round. If columns share the same value, they are summed as 0.\nCard Values: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (use exact brackets):\n- '[draw]' - Draw from deck\n- '[take]' - Take from discard pile\n- '[swap X Y]' - Swap drawn card with position X (row) Y (column)\n- '[discard]' - Discard the drawn card\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   2♣   ?    ?  \nRow 2:   9♣   ?    ?  \nDiscard pile: 2♦\nYour options: [draw], [take]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "zzz",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "zzz",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Use exactly ONE bracketed action: [draw], [take], [swap X Y], [discard], [knock], or [peek X Y] Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You drew: 3♠\nNow you must [swap X Y] or [discard] it.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   2♣   ?    ?  \nRow 2:   9♣   ?    ?  \nDiscard pile: 2♦\nYou must: [swap X Y] or [discard]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: You have a drawn card. You must [swap X Y] or [discard] it. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[swap 1 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are playing Golf (Card Game) - Player 1.\nGoal: Get the lowest total score in this single round. If columns share the same value, they are summed as 0.\nCard Values: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (use exact brackets):\n- '[draw]' - Draw from deck\n- '[take]' - Take from discard pile\n- '[swap X Y]' - Swap drawn card with position X (row) Y (column)\n- '[discard]' - Discard the drawn card\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "zzz",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[swap 1 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 swapped 3♠ with 2♣ at position (1,1)",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   ?    ?    7♠ \nRow 2:   ?    6♠   ?  \nDiscard pile: 2♣\nYour options: [draw], [take]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[swap 2 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[swap 2 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 attempted an invalid move. Reason: You must first [draw], [take], [knock], or [peek X Y] Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 1,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[take]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[take]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You took: 2♣ from discard pile\nYou must [swap X Y] with it (cannot discard).",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   ?    ?    7♠ \nRow 2:   ?    6♠   ?  \nDiscard pile: 2♦\nYou must: [swap X Y] (cannot discard cards from discard pile)",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[discard]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[discard]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 attempted an invalid move. Reason: You cannot discard a card taken from the discard pile. You must swap it. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 1,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[swap 1 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[swap 1 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 swapped 3♠ with 2♣ at position (1,1)",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[swap 2 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "[take]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "[discard]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "[swap 1 1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 swapped 2♣ with 2♥ at position (1,1)",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   3♠   ?    ?  \nRow 2:   9♣   ?    ?  \nDiscard pile: 2♥\nYour options: [draw], [take]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You drew: J♣\nNow you must [swap X Y] or [discard] it.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   3♠   ?    ?  \nRow 2:   9♣   ?    ?  \nDiscard pile: 2♥\nYou must: [swap X Y] or [discard]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[swap 9 9]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[swap 9 9]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Position out of bounds. Use row 1-2, column 1-3 Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[discard]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[swap 1 1]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 swapped 2♣ with 2♥ at position (1,1)",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[swap 9 9]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[discard]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 discarded J♣",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   2♣   ?    7♠ \nRow 2:   ?    6♠   ?  \nDiscard pile: J♣\nYour options: [draw], [take]",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "reveal_all_and_end": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Game Over! Player 0 wins with a score of 24 points!\n\nFinal Scores:\nPlayer 0: 24 points\nPlayer 1: 43 points\n",
+        "role": "Player 0",
+        "turn_count": 8
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Game Over! Player 0 wins with a score of 24 points!\n\nFinal Scores:\nPlayer 0: 24 points\nPlayer 1: 43 points\n",
+        "role": "Player 1",
+        "turn_count": 6
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Golf (Card Game) - Player 0.\nGoal: Get the lowest total score in this single round. If columns share the same value, they are summed as 0.\nCard Values: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (use exact brackets):\n- '[draw]' - Draw from deck\n- '[take]' - Take from discard pile\n- '[swap X Y]' - Swap drawn card with position X (row) Y (column)\n- '[discard]' - Discard the drawn card\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   2♣   ?    ?  \nRow 2:   9♣   ?    ?  \nDiscard pile: 2♦\nYour options: [draw], [take]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You drew: 3♠\nNow you must [swap X Y] or [discard] it.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   2♣   ?    ?  \nRow 2:   9♣   ?    ?  \nDiscard pile: 2♦\nYou must: [swap X Y] or [discard]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[swap 1 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are playing Golf (Card Game) - Player 1.\nGoal: Get the lowest total score in this single round. If columns share the same value, they are summed as 0.\nCard Values: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (use exact brackets):\n- '[draw]' - Draw from deck\n- '[take]' - Take from discard pile\n- '[swap X Y]' - Swap drawn card with position X (row) Y (column)\n- '[discard]' - Discard the drawn card\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[swap 1 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 swapped 3♠ with 8♠ at position (1,2)",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   ?    ?    7♠ \nRow 2:   ?    6♠   ?  \nDiscard pile: 8♠\nYour options: [draw], [take]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[draw]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You drew: J♣\nNow you must [swap X Y] or [discard] it.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   ?    ?    7♠ \nRow 2:   ?    6♠   ?  \nDiscard pile: 8♠\nYou must: [swap X Y] or [discard]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[discard]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[swap 1 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 swapped 3♠ with 8♠ at position (1,2)",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "[discard]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 discarded J♣",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   2♣   3♠   ?  \nRow 2:   9♣   ?    ?  \nDiscard pile: J♣\nYour options: [draw], [take]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You drew: 3♣\nNow you must [swap X Y] or [discard] it.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   2♣   3♠   ?  \nRow 2:   9♣   ?    ?  \nDiscard pile: J♣\nYou must: [swap X Y] or [discard]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[swap 1 3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[discard]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 discarded J♣",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[swap 1 3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 swapped 3♣ with 2♠ at position (1,3)",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   ?    ?    7♠ \nRow 2:   ?    6♠   ?  \nDiscard pile: 2♠\nYour options: [draw], [take]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[draw]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You drew: A♥\nNow you must [swap X Y] or [discard] it.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   ?    ?    7♠ \nRow 2:   ?    6♠   ?  \nDiscard pile: 2♠\nYou must: [swap X Y] or [discard]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[discard]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[swap 1 3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 swapped 3♣ with 2♠ at position (1,3)",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "[discard]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 discarded A♥",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   2♣   3♠   3♣ \nRow 2:   9♣   ?    ?  \nDiscard pile: A♥\nYour options: [draw], [take]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You drew: 7♣\nNow you must [swap X Y] or [discard] it.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   2♣   3♠   3♣ \nRow 2:   9♣   ?    ?  \nDiscard pile: A♥\nYou must: [swap X Y] or [discard]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[swap 2 2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[discard]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 discarded A♥",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[swap 2 2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 swapped 7♣ with 5♥ at position (2,2)",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   ?    ?    7♠ \nRow 2:   ?    6♠   ?  \nDiscard pile: 5♥\nYour options: [draw], [take]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[draw]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You drew: 7♦\nNow you must [swap X Y] or [discard] it.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   ?    ?    7♠ \nRow 2:   ?    6♠   ?  \nDiscard pile: 5♥\nYou must: [swap X Y] or [discard]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[discard]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[swap 2 2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 swapped 7♣ with 5♥ at position (2,2)",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "[discard]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 discarded 7♦",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   2♣   3♠   3♣ \nRow 2:   9♣   7♣   ?  \nDiscard pile: 7♦\nYour options: [draw], [take]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[draw]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You drew: K♣\nNow you must [swap X Y] or [discard] it.",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   2♣   3♠   3♣ \nRow 2:   9♣   7♣   ?  \nDiscard pile: 7♦\nYou must: [swap X Y] or [discard]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[swap 2 3]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[swap 2 3]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 swapped K♣ with 3♥ at position (2,3)",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 has all cards revealed! Each other player gets one more turn.",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": {
+      "0": 1,
+      "1": -1
+    }
+  },
+  "take_then_swap": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 2
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 2
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Golf (Card Game) - Player 0.\nGoal: Get the lowest total score in this single round. If columns share the same value, they are summed as 0.\nCard Values: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (use exact brackets):\n- '[draw]' - Draw from deck\n- '[take]' - Take from discard pile\n- '[swap X Y]' - Swap drawn card with position X (row) Y (column)\n- '[discard]' - Discard the drawn card\n",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   2♣   ?    ?  \nRow 2:   9♣   ?    ?  \nDiscard pile: 2♦\nYour options: [draw], [take]",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[take]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[take]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You took: 2♦ from discard pile\nYou must [swap X Y] with it (cannot discard).",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   2♣   ?    ?  \nRow 2:   9♣   ?    ?  \nDiscard pile: None\nYou must: [swap X Y] (cannot discard cards from discard pile)",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[swap 1 1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are playing Golf (Card Game) - Player 1.\nGoal: Get the lowest total score in this single round. If columns share the same value, they are summed as 0.\nCard Values: A=1, 2-10=face value, J/Q=10, K=0\n\nActions (use exact brackets):\n- '[draw]' - Draw from deck\n- '[take]' - Take from discard pile\n- '[swap X Y]' - Swap drawn card with position X (row) Y (column)\n- '[discard]' - Discard the drawn card\n",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "[take]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[swap 1 1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 swapped 2♦ with 2♣ at position (1,1)",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   ?    ?    7♠ \nRow 2:   ?    6♠   ?  \nDiscard pile: 2♣\nYour options: [draw], [take]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[draw]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[draw]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "You drew: 3♠\nNow you must [swap X Y] or [discard] it.",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   ?    ?    7♠ \nRow 2:   ?    6♠   ?  \nDiscard pile: 2♣\nYou must: [swap X Y] or [discard]",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[discard]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[swap 1 1]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 swapped 2♦ with 2♣ at position (1,1)",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": 1,
+        "text": "[draw]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 1,
+        "text": "[discard]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 discarded 3♠",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "Your hand:\n  Col:   1    2    3\nRow 1:   2♦   ?    ?  \nRow 2:   9♣   ?    ?  \nDiscard pile: 3♠\nYour options: [draw], [take]",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  }
+}

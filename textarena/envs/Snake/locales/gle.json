@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Imreoir Snake ar ghréasán {width}×{height}.\nTá tú i gceannas ar an nathair {player_id}. Gluaiseachtaí bailí: '[up]'/'[down]'/'[left]'/'[right]' (nó w/s/a/d).\nCuspóir: maireachtáil don tréimhse is faide nó bualadh don scór is airde (teorainn {max_turns} uathroisc)."
+  },
+  "board": {
+    "current": "Bord reatha: {board}",
+    "after_moves": "Stát an Bhoird reatha: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Fuair Snake {player_id} bás mar gheall ar ghluaiseacht neamhbhailí."
+  },
+  "outcome": {
+    "survived_win": "D'éirigh leis an imreoir {player_id} maireachtáil; fuair na daoine eile bás.",
+    "all_dead_simul": "Fuair na nathair go léir bás ag an am céanna.",
+    "outlived": "D'éirigh le himreoir maireachtáil don tréimhse is faide.",
+    "all_dead": "Gach nathair marbh.",
+    "turn_limit": "Tá an teorainn tiontaithe bainte amach - is é an scór is fearr a bhuaigh na comhréiteach.",
+    "ranking": "{reason} Grúpaí rangaithe deiridh (don laghad→don fearr): {groups}"
+  }
+}

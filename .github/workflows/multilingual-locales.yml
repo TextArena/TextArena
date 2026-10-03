@@ -1,0 +1,44 @@
+name: multilingual-locales
+
+# Validates localized envs: locale-file integrity + English golden identity +
+# cross-lingual smoke. Scoped to locale/tooling paths so it does not overlap with
+# other CI.
+on:
+  # The suite exercises localized env code + the word-data backend, not just the
+  # locale JSON, so trigger on env/tooling/deps changes too (not only locales/**).
+  pull_request:
+    paths:
+      - "textarena/envs/**"
+      - "textarena/utils/locales/**"
+      - "scripts/check_locales.py"
+      - "tests/multilingual/**"
+      - "pyproject.toml"
+      - ".github/workflows/multilingual-locales.yml"
+  push:
+    paths:
+      - "textarena/envs/**"
+      - "textarena/utils/locales/**"
+      - "scripts/check_locales.py"
+      - "tests/multilingual/**"
+      - "pyproject.toml"
+      - ".github/workflows/multilingual-locales.yml"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install package
+        # Include the optional [wordgames] extra (wordfreq) so the multilingual
+        # word games (Wordle, Hangman, ...) are exercised in non-English langs.
+        run: python -m pip install -e .[wordgames]
+      - name: Locale integrity (games covered by this suite)
+        run: |
+          GAMES=$(PYTHONPATH=tests/multilingual python -c "from game_scenarios import GAMES; print(' '.join(GAMES))")
+          echo "Checking: $GAMES"
+          python scripts/check_locales.py $GAMES
+      - name: Golden identity + cross-lingual smoke
+        run: python tests/multilingual/test_multilingual.py

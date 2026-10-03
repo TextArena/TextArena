@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ame wò {player_id} le Stratego.\nDɔ wò nye be awoe agbale awoe dzidzi alo awoe dzidziwoe nye wu agbalewoe.\nAwoe dzidziwoe wò ku le bɔɖɔdzi, gake agbalewoe, Bomwoe, kple dzidziwoe bubuwoe.\n\n### Agbalewoe Xɔxɔ\n1. **Dzidziwoe Dɔwɔwɔ:**\n   - Le wò dzidzi gome, awoe afe dzidzi aɖe gbeɖeɖe le afɔdzi aɖe (dzi, gɔ, eve, alo tɔ) si wò dzidziwoe le.\n   - Fiafia: Dzidzi aɖe afe gbeɖeɖe tso A1 yi B1 alo A1 yi A2 ne B1 kple A2 me wò dzidziwoe le.\n   - Ne dzidzi si wò ɖeɖe nye Bomb alo Flag, efe gbeɖeɖe o.\n2. **Aʋaʋawo:**\n   - Ne awoe gbeɖeɖe le afɔdzi si awoe dzidziwoe le, aʋaʋa awoe:\n     - Dzidzi si ɖeɖe ɖe kɔ wu agbalewoe dzidzi si.\n     - Ne ɖeɖewo ɖe kɔ wu, dzidziwoe eve awoe ku le bɔɖɔdzi.\n     - **Nukpɔwoe Xɔxɔ:**\n       - Bomwoe ku dzidziwoe ɖeɖewo gbeɖeɖe tso Miners, siwoe ku Bomwoe.\n       - Spies afe dzidzi si Marshal ne Spies ɖeɖe gbeɖeɖe ɖeɖeɖe, gake ku le dzidziwoe bubuwoe.\n3. **Dɔwɔwɔwoe:**\n   - Ɖe awoe dzidziwoe tso wò dzidziwoe kple aʋaʋawo.\n   - Ku wò Flag le awoe ɖeɖe wò dzidziwoe Flag.\n   - Dze Scouts dɔwɔwɔ be awoe dzidziwoe kple aʋaʋa dzidzi siwoe le.\n\n### Ne Afe Dzidzi Gbeɖeɖe:\n1. Ɖe dzidzi si afe gbeɖeɖe kple dzidzi si afe yi.\n2. Dze fɔɖu: [A0 B0], ne A0 nye dzidzi si afe gbeɖeɖe, kple B0 nye dzidzi si afe yi.\n   - Fiafia: Ne afe dzidzi gbeɖeɖe tso dzidzi 0, dzidzi 0 yi dzidzi 1, dzidzi 0, dze [A0 B0].\n3. Ku dzidzi si afe yi nye dɔwɔwɔ tso dzidzi dɔwɔwɔwoe gome.\n\n### Nukpɔwoe:\n- Bɔɖɔdzi awoe dzidziwoe kple wò dzidziwoe, e.g. MN, MS.\n- Bɔɖɔdzi awoe dzidziwoe siwoe le wò dzidziwoe gbeɖeɖe o, e.g. ?.\n- Grids si ~ nye tɔdziwoe kple afe gbeɖeɖe o.\n- Ne fiafia, afe wò dzidziwoe siwoe le dzidzi gome gbeɖeɖe be awoe dzidziwoe siwoe le.\n\nEyi nye bɔɖɔdzi dzidzi gbeɖeɖe:\n"
+  },
+  "board": {
+    "current_board": "Dɔwɔlawo Hɛɛ:\n\n{board}\nDɔwɔlawo Kɛ: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Madzedze ƒe ɖoɖo. Fefewɔla {player_id} mede afɔɖeɖe aɖe le mɔ̃a me o [A0 B0] .",
+    "invalid_coordinates": "Eʋevi ƒe ɖoɖo. Fefewɔla {player_id} mede dzesi si sɔ o.",
+    "not_own_piece": "Mɔnu si ŋu womeɖe mɔ ɖo o. Ele be fefewɔla {player_id} naʋu eƒe kpeawo dometɔ ɖeka.",
+    "scout_through_pieces": "Madzedze o. Fefewɔla {player_id} mate ŋu aʋu akpoxɔnu aɖe to kpe bubuwo dzi o.",
+    "scout_diagonal": "Madzedze o. Ŋutɔŋutɔ {player_id} mate ŋu aʋu akplɔla le dzogoe dzi o.",
+    "non_scout_multi_square": "Agbagbadzedze ƒe ɖoɖo si mesɔ o. Kpewo, negbe Scouts ko la, ate ŋu aʋu akpa ɖeka le ɣeyiɣi ɖeka me.",
+    "move_into_lake": "Mɔnu si mesɔ o. Fefewɔla {player_id} mate ŋu ayi ɖe ta la me o.",
+    "move_onto_own_piece": "Mɔnu si ŋu womeɖe mɔ ɖo o. Fefewɔla {player_id} mate ŋu ayi eƒe akpa dzi o.",
+    "move_bomb_or_flag": "Madzedze o. Ŋutaƒola {player_id} mate ŋu aʋu bɔmb alo aflaga o."
+  },
+  "game_action": {
+    "you_moved": "Mia wɔ dze dɔwɔla mia fo {source} si na {dest}.",
+    "opponent_moved": "Dɔza {player_id} wɔ dze dɔwɔla yi fo {source} si na {dest}.",
+    "you_equal_ranks": "Mia wɔ dze dɔwɔla mia fo {source} si na {dest}. Dɔwɔla si wɔ dze na yi ebe {attacking_rank}, na dɔwɔla he si wɔ na yi ebe {target_rank}. Esi ɖokui si wɔ dze na yi ebe ɖe nyɔnu, mia nyɔnu wɔ dɔwɔla yi.",
+    "opponent_equal_ranks": "Dɔza {player_id} wɔ dze dɔwɔla yi fo {source} si na {dest}. Dɔwɔla si wɔ dze na yi ebe {attacking_rank}, na dɔwɔla he si wɔ na yi ebe {target_rank}. Esi ɖokui si wɔ dze na yi ebe ɖe nyɔnu, mia nyɔnu wɔ dɔwɔla yi.",
+    "you_miner_defused": "Mia wɔ dze dɔwɔla mia fo {source} si na {dest}. Dɔwɔla si wɔ dze na yi ebe {attacking_rank}, na dɔwɔla he si wɔ na yi ebe {target_rank}. Esi miners nyɔnu wɔ dɔwɔla kɛ, mia wɔ dɔwɔla kɛ.",
+    "opponent_miner_defused": "Dɔza {player_id} wɔ dze dɔwɔla yi fo {source} si na {dest}. Dɔwɔla si wɔ dze na yi ebe {attacking_rank}, na dɔwɔla he si wɔ na yi ebe {target_rank}. Esi miners nyɔnu wɔ dɔwɔla kɛ, mia wɔ dɔwɔla kɛ.",
+    "you_bomb_lost": "Mia wɔ dze dɔwɔla mia fo {source} si na {dest}. Dɔwɔla si wɔ dze na yi ebe {attacking_rank}, na dɔwɔla he si wɔ na yi ebe {target_rank}. Esi dɔwɔla si wɔ dze na yi ebe enye bomb, mia wɔ dɔwɔla kɛ.",
+    "opponent_bomb_won": "Aʋa {player_id} atsɔ aʋa ɖeka tso {source} yi {dest}. Aʋa si wɔ dɔ aʋa la ɖe {attacking_rank} eye aʋa si wɔ dɔ aʋa la ɖe {target_rank}. Elɔ sia aʋa si wɔ dɔ aʋa la ɖe nye miner, woaɖe aʋawɔ.",
+    "you_spy_won": "Mia wɔ dze dɔwɔla mia fo {source} si na {dest}. Dɔwɔla si wɔ dze na yi ebe {attacking_rank}, na dɔwɔla he si wɔ na yi ebe {target_rank}. Esi dɔwɔla si wɔ dze na yi ebe enye spy, na dɔwɔla he si wɔ na yi ebe enye marshall, mia wɔ dɔwɔla kɛ.",
+    "opponent_spy_lost": "Aʋatsɔ {player_id} atɔ̃ aʋa gbɔ̃ sɛ {source} yi {dest}. Aʋa si wɔ̃na la, eɖeɖeɛ {attacking_rank} kple eɖeɖeɛ si wɔ̃na gbɔ̃ la, eɖeɖeɛ {target_rank}. Elɛ etsɔ la, eɖeɖeɛ si wɔ̃na la, eɖeɖeɛ sɔɖɔmɛtɔ kple eɖeɖeɛ si wɔ̃na gbɔ̃ la, woaɖeɛ.",
+    "you_higher_won": "Mia wɔ dze dɔwɔla mia fo {source} si na {dest}. Dɔwɔla si wɔ dze na yi ebe {attacking_rank}, na dɔwɔla he si wɔ na yi ebe {target_rank}. Esi dɔwɔla si wɔ dze na yi ebe ɖe ɖokui tsɔ, mia wɔ dɔwɔla kɛ.",
+    "opponent_higher_lost": "Dɔza {player_id} wɔ dze dɔwɔla yi fo {source} si na {dest}. Dɔwɔla si wɔ dze na yi ebe {attacking_rank}, na dɔwɔla he si wɔ na yi ebe {target_rank}. Esi dɔwɔla si wɔ dze na yi ebe ɖe ɖokui tsɔ, mia wɔ dɔwɔla kɛ.",
+    "you_lower_lost": "Mia wɔ dze dɔwɔla mia fo {source} si na {dest}. Dɔwɔla si wɔ dze na yi ebe {attacking_rank}, na dɔwɔla he si wɔ na yi ebe {target_rank}. Esi dɔwɔla si wɔ dze na yi ebe ɖe ɖokui ɖe, mia wɔ dɔwɔla kɛ.",
+    "opponent_lower_won": "Dɔza {player_id} wɔ dze dɔwɔla yi fo {source} si na {dest}. Dɔwɔla si wɔ dze na yi ebe {attacking_rank}, na dɔwɔla he si wɔ na yi ebe {target_rank}. Esi dɔwɔla si wɔ dze na yi ebe ɖe ɖokui ɖe, mia wɔ dɔwɔla kɛ."
+  },
+  "outcome": {
+    "flag_captured": "Fefewɔla {player_id} xɔ futɔ ƒe aflaga!",
+    "no_movable_pieces": "Dɔza {winner_id} di be! Dɔza {loser_id} ɖo dɔwɔlawo tsɔ."
+  }
+}

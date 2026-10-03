@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "သင်သည်ကစားသမား {player_id}တွင် {num_players}-ကစားသမား Liar's Dice ဂိမ်းတွင်စည်းမျဉ်းများ: - သင်၏လှည့်ကွက်တွင်သင်သည်: 1) လက်ရှိတင်ဒါထက်ပိုမိုမြင့်မားသောပမာဏ သို့မဟုတ် ပိုမြင့်မားသောမျက်နှာ (သို့မဟုတ်) နှစ်ခုစလုံးဖြင့်တင်ဒါအသစ်ပြုလုပ်နိုင်သည်; ဆိုလိုသည်မှာ '[Bid: 3, 4]'၊ 2) နောက်ဆုံးတင်ဒါကို '[Call]' ရိုက်ထည့်၍ခေါ်ဆိုပါ။ သင်ခေါ်ဆိုပါက - အကယ်၍ အလုံးစုံအကြားရှိ မျက်နှာတန်ဖိုး၏လက်တွေ့အရေအတွက်သည်တင်ဒါထက်နည်းပါကနောက်ဆုံးတင်ဒါသည်တစ်လုံးဆုံးရှုံးသည်။ - မဟုတ်ပါကခေါ်ဆိုသူသည်တစ်လုံးဆုံးရှုံးသည်။ အလုံး ၀ ကိုရောက်ရှိသည့်ကစားသမားကိုပယ်ဖျက်သည်။ နောက်ဆုံးကျန်ရစ်သူကစားသမားသည်နိုင်သည်။"
+  },
+  "board": {
+    "per_player": "ကစားသမား {p}: {d}",
+    "new_round": "အလှည့်သစ် - ကျန်ရစ်သော Dice: {dice_summary} သင်၏လက်ရှိ Dice သည်: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "ကစားသမား {current_player_id} ခေါ်ယူသည်! မျက်နှာ၏လက်တွေ့ရေတွက်ချက်မှု {face_value} သည် {count} ဖြစ်ပြီး {quantity} ထက်လျော့နည်းသည်။ ကစားသမား {loser_id} (နောက်ဆုံးတင်သွင်းသူ) သည် ဒိုင်တစ်ခုဆုံးရှုံးသည်။",
+    "caller_loses": "ကစားသမား {current_player_id} ခေါ်ယူသည်! မျက်နှာ၏လက်တွေ့ရေတွက်ချက်မှု {face_value} သည် {count} ဖြစ်ပြီး >= {quantity} ဖြစ်သည်။ ကစားသမား {loser_id} (ခေါ်ယူသူ) သည် ဒိုင်တစ်ခုဆုံးရှုံးသည်။"
+  },
+  "action": {
+    "bid_announce": "ကစားသမား {player_id}က မျက်နှာ {face_value}ကို {quantity} ကမ်းလှမ်းသည်။"
+  },
+  "invalid_move": {
+    "call_no_bid": "ကြိုတင် မဲပေးခြင်းမရှိဘဲ ခေါ်ယူခဲ့တာပါ။",
+    "invalid_bid": "မမှန်ကန်သော တင်ဒါ: {reason}",
+    "not_recognized": "တရားဝင် \"[Bid: X, Y]\" သို့မဟုတ် \"[Call]\" အဖြစ် အသိအမှတ်ပြုခြင်းမပြုသော အယူခံ။ တင်ပြထားသော အယူခံ: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "အသစ်ထုတ်လုပ်သော ပမာဏ {new_quantity} သည် လက်ရှိထုတ်လုပ်သော ပမာဏ {current_quantity} ထက် နည်းသည်။",
+    "face_lower": "အသစ်သော face value {new_face_value} သည် လက်ရှိ {current_face_value} ထက် ပိုနည်းသည်။",
+    "identical": "ကမ်းလှမ်းချက်က လက်ရှိ ကမ်းလှမ်းချက်နဲ့ ထပ်တူကျပါတယ်။",
+    "face_range": "အမည်ပေါက်တန်ဖိုးက ၁ နဲ့ ၆ ကြားမှာရှိရမယ်။"
+  },
+  "message": {
+    "eliminated_invalid": "ကစားသမား {player_id} သည် မမှန်ကန်သော လှုပ်ရှားမှုဖြင့် ရှုံးနိမ့်ခဲ့သည်။"
+  },
+  "outcome": {
+    "win": "ကစားသမား {winner} နိုင်ပွဲ! နောက်ဆုံးအဆင့်: {final_ranking}"
+  }
+}

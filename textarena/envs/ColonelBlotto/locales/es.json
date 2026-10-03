@@ -1,0 +1,34 @@
+{
+    "player_prompt": {
+        "intro": "Eres {role} en Colonel Blotto.\nTu objetivo es ganar más rondas que tu oponente.\nEn cada ronda, distribuye exactamente {num_total_units} unidades entre los campos {field_names}.\nEl jugador que asigna más unidades a un campo gana ese campo, y el jugador que gana más campos gana la ronda.\nPor ejemplo, '[A7 B7 C6]' asigna 7 unidades a A, 7 a B y 6 a C.",
+        "commander_alpha": "Comandante Alfa",
+        "commander_beta": "Comandante Beta"
+    },
+
+    "game_state": {
+        "header_round": "=== COLONEL BLOTTO - Ronda {current_round}/{num_rounds} ===\nRondas ganadas - Comandante Alfa: {alpha_score}, Comandante Beta: {beta_score}"
+    },
+
+    "round_battle": {
+        "field_result": "\nRonda {current_round}\nComandante Alfa asignó: {p0_allocations}\nComandante Beta asignó: {p1_allocations}\n",
+        "winner_alpha": "{message}Ganador: Comandante Alfa",
+        "winner_beta": "{message}Ganador: Comandante Beta",
+        "tie": "{message}¡Empate!"
+    },
+
+    "invalid_move": {
+        "wrong_format": "Formato de entrada inválido. Usa: A:5, B:10, C:5",
+        "invalid_field": "Nombre(s) de campo inválido(s). Campos válidos: {field_names}",
+        "wrong_allocation_value": "Todas las asignaciones deben ser números enteros no negativos.",
+        "incorrect_total_units": "Debes asignar exactamente {num_total_units} unidades. Suma actual: {current_sum}",
+        "good_allocations": "La asignación es válida."
+    },
+
+    "outcome": {
+        "winner_alpha": "¡Comandante Alfa gana {score_0}-{score_1} después de {num_rounds} rondas!",
+        "winner_beta": "¡Comandante Beta gana {score_1}-{score_0} después de {num_rounds} rondas!",
+        "draw": "¡El juego termina en empate {score_0}-{score_1} después de {num_rounds} rondas!",
+        "early_winner_alpha": "¡Comandante Alfa gana {scores_0}-{scores_1} (mayoría alcanzada)!",
+        "early_winner_beta": "¡Comandante Beta gana {scores_1}-{scores_0} (mayoría alcanzada)!"
+    }
+}

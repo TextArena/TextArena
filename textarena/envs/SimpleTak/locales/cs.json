@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} v SimpleTak.\nNa desce se vaše kameny zobrazují jako '{player_stone}' a kameny vašeho soupeře se zobrazují jako '{opponent_stone}'.\n\nVe svém tahu vyberte jednu prázdnou buňku (podle jejího číslovaného indexu) a umístěte tam svůj kámen.\nNapříklad '[12]' umístí váš kámen do buňky 12.\n\nVaším cílem je vytvořit souvislou cestu svých kamenů, která spojí dvě protilehlé hrany desky (shora dolů nebo zleva doprava)."
+  },
+  "invalid_move": {
+    "invalid_move_format": "Neplatný formát tahu",
+    "cell_out_of_range": "Neplatné číslo buňky {cell_num}. Musí být mezi 0 a {max_board_num}.",
+    "cell_already_occupied": "Buňka {cell_num} je již obsazena. Vyberte prázdnou buňku."
+  },
+  "board": {
+    "current_state": "Aktuální deska:\n\n{rendered_board}\nDostupné tahy: {available_moves}"
+  },
+  "action": {
+    "placement": "Hráč {current_player_id} umístil svou značku ({symbol}) do buňky {cell_num}."
+  },
+  "outcome": {
+    "winner": "Hráč {current_player_id} ('{symbol}') spojil dvě protilehlé hrany!",
+    "draw": "Deska je plná. Je to remíza!"
+  }
+}

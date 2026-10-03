@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Kaulinan Briscola geus dimimitian! Pakéan trump: {trump_suit} (Kartu trump: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Anjeun keur maén Briscola - Pamaén {player_id}.\nTujuan: Meunang trik sarta ngalakon poin panglobana (120 poin total dina dék).\nPoin Kartu: A=11, 3=10, K=4, Q=3, J=2, lianna=0\nKakuatan Kartu: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKartu truf ngaleuwihan kartu non-truf tanpa memandang kakuatan.\n\nAksi: '[play X]' di mana X nyaét posisi (1-{max_pos}) kartu dina leungeun anjeun"
+  },
+  "hand": {
+    "none": "Teu aya kartu.",
+    "empty": "Teu aya kartu di leungeun.",
+    "header": "Leungeun anjeun:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP) Dina taun-taun ka tukang,"
+  },
+  "trick": {
+    "empty": "Teu kartu dicoo acan trik ieu.",
+    "header": "Trik ayeuna:",
+    "line": "  Pamaén {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Pamaén {player_id}: {points} poin",
+    "trump_info": "Pakéan trump: {trump_suit}",
+    "trump_info_deck": "Lambang trump: {trump_suit} | Kartu nu sésa dina dek: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nSkor: {scores}\n{trump_info}\n\nMaénkeun kartu maké [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Paké [play X] di mana X nyaéta posisi kartu (1, 2, 3, jsb.)",
+    "out_of_range": "Posisi kartu teu sah. Anjeun boga {count} kartu (1-{count})"
+  },
+  "action": {
+    "played": "Pamaén {player_id} ngalakon {card}",
+    "trick_win": "Pamaén {winner} meunang trik kalawan {card} sarta meunang {points} poin!"
+  },
+  "outcome": {
+    "head": "Pigura rampung! Pamaén {winner} meunang kalawan {points} poin!\n\nSkor Ahir:\n{scores}",
+    "player_line": "Pamaén {player_id}: {points} poin ({tricks} trik)\n"
+  }
+}

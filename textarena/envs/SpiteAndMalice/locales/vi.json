@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong trò chơi Spite and Malice hai người chơi. Mục tiêu của bạn là trở thành người đầu tiên làm trống chồng bài trả.\n\n### Tổng quan Trò chơi:\n- Mục tiêu là làm trống chồng bài trả của bạn bằng cách chơi các lá bài vào các chồng bài ở giữa.\n- Bạn có thể chơi các lá bài từ ba nguồn:\n  1. **Bàn tay** (bạn bắt đầu mỗi lượt với tối đa 5 lá bài trong tay).\n  2. **Lá bài trên cùng của chồng bài trả**.\n  3. **Lá bài trên cùng của bất kỳ chồng bài bỏ**.\n\n### Quy tắc Chơi:\n- Bạn có thể chơi một lá bài vào một chồng bài ở giữa nếu nó **cao hơn một cấp** so với lá bài trên cùng của chồng bài đó (các chồng bài ở giữa bắt đầu bằng Át và đi lên đến Q; Vua là lá bài hoang dã - có thể chơi trên bất kỳ lá bài nào nhưng không thay đổi trình tự cấp. Điều này có nghĩa là nếu Vua được sử dụng sau 4, thì Vua đó có cấp 5 và lá bài tiếp theo phải là 6).\n- Nếu bạn không thể chơi thêm lá bài nào, bạn phải **bỏ một lá bài** vào một trong các chồng bài bỏ để kết thúc lượt của bạn.\n- Nếu một chồng bài ở giữa đạt đến Q, nó sẽ tự động được làm trống.\n- Thứ tự cấp là: A=1, 2=2, ..., 9=9, J=10, Q=11, K là hoang dã.\n\n### Hành động:\n1. **Rút bài**: Đầu mỗi lượt, rút bài để lấp đầy bàn tay của bạn lên 5 lá bài. Nhập **[draw]** để bắt đầu.\n2. **Chơi một lá bài**: Để chơi một lá bài, chỉ định lá bài và chồng bài ở giữa như sau: **[play A♠ 0]** (trong đó 'A♠' là lá bài và '0' là chỉ số chồng bài ở giữa).\n3. **Bỏ bài**: Nếu bạn không thể chơi thêm lá bài nào, bỏ một lá bài từ bàn tay của bạn vào một chồng bài bỏ để kết thúc lượt của bạn. Nhập **[discard A♠ 1]** (trong đó 'A♠' là lá bài và '1' là chỉ số chồng bài bỏ). Lưu ý rằng bạn không thể bỏ bất kỳ lá bài nào từ chồng bài trả. Bạn chỉ có thể bỏ các lá bài từ bàn tay của bạn.\n\n"
+  },
+  "board": {
+    "current_board": "Bàn cờ hiện tại:\n\n{board}\nCác nước đi có thể thực hiện: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Chồng bài ở giữa ---\n",
+    "pile": "{observation}Chồng bài {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Quan điểm của Người chơi {player_id} ---\n",
+    "payoff": "{observation}Chồng bài trả (Lá bài trên cùng): {top_card}, Độ dài chồng bài trả: {payoff_length}\n",
+    "hand": "{observation}Bàn tay: {hand}\n",
+    "discard": "{observation}Chồng bài bỏ: {discard}\n",
+    "empty": "Trống"
+  },
+  "game_message": {
+    "no_cards_left": "Không còn bài để rút. Hãy nhớ rằng bạn có thể chơi bài từ các nguồn sau:\n  1. **Bàn tay**.\n  2. **Lá bài trên cùng của chồng bài trả**.\n  3. **Lá bài trên cùng của bất kỳ chồng bài bỏ**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Định dạng nước đi không hợp lệ. Người chơi {player_id} không phản hồi với một nước đi hợp lệ trong dấu ngoặc vuông.",
+    "invalid_play": "Chơi không hợp lệ. Người chơi {player_id} đã cố gắng chơi {card} trên chồng bài ở giữa {index}.",
+    "discard_from_payoff": "Bỏ bài không hợp lệ. Người chơi {player_id} đã cố gắng bỏ một lá bài từ chồng bài trả.",
+    "discard_not_in_hand": "Bỏ bài không hợp lệ. Người chơi {player_id} đã cố gắng bỏ một lá bài không có trong bàn tay.",
+    "wrong_move_type": "Loại nước đi không hợp lệ. Người chơi {player_id} không phản hồi với một loại nước đi hợp lệ."
+  },
+  "game_action": {
+    "you_drew": "Bạn đã rút bài.",
+    "opponent_drew": "Người chơi {player_id} đã rút bài.",
+    "you_played": "Bạn đã chơi {card} trên chồng bài ở giữa {index}.",
+    "opponent_played": "Người chơi {player_id} đã chơi {card} trên chồng bài ở giữa {index}.",
+    "you_discarded": "Bạn đã bỏ {card} vào chồng bài bỏ {index}, điều này cũng có nghĩa là bạn đã kết thúc lượt của mình. Không có hành động nào khác của bạn được xem xét trong lượt này. Người chơi {next_player_id} sẽ đi tiếp.",
+    "opponent_discarded": "Người chơi {player_id} đã bỏ {card} vào chồng bài bỏ {index}, điều này cũng có nghĩa là họ đã kết thúc lượt của mình. Không có hành động nào khác của Người chơi {player_id} được xem xét trong lượt này. Người chơi {next_player_id}, bạn sẽ đi tiếp. Hãy nhập hành động của bạn theo định dạng [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Người chơi {current_player} đã làm trống chồng bài trả! Người chơi {current_player} thắng!",
+    "deadlock_player_0": "Bế tắc! Người chơi 0 thắng với {player_0_payoff} lá bài còn lại so với {player_1_payoff} lá bài của Người chơi 1.",
+    "deadlock_player_1": "Bế tắc! Người chơi 1 thắng với {player_1_payoff} lá bài còn lại so với {player_0_payoff} lá bài của Người chơi 0.",
+    "deadlock_tie": "Bế tắc hòa! Cả hai người chơi đều còn {player_0_payoff} lá bài. Người chơi {current_player} thắng theo mặc định."
+  }
+}

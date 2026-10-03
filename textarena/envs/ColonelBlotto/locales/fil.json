@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay {role} sa Colonel Blotto.\nAng iyong layunin ay manalo ng higit pang mga round kaysa sa iyong kalaban.\nSa bawat round, maglaan ng eksaktong {num_total_units} yunit sa mga larangan {field_names}.\nAng manlalaro na naglaan ng higit pang mga yunit sa isang larangan ay mananalo sa larangang iyon, at ang manlalaro na nanalo ng higit pang mga larangan ay mananalo sa round.\nHalimbawa, '[A7 B7 C6]' ay naglaan ng 7 yunit sa A, 7 sa B, at 6 sa C.",
+    "commander_alpha": "Komander Alpha",
+    "commander_beta": "Komander Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Round {current_round}/{num_rounds} ===\nMga Round na Napanalunan - Komander Alpha: {alpha_score}, Komander Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRound {current_round}\nKomander Alpha ay naglaan ng: {p0_allocations}\nKomander Beta ay naglaan ng: {p1_allocations}\n",
+    "winner_alpha": "{message}Nanalo: Komander Alpha",
+    "winner_beta": "{message}Nanalo: Komander Beta",
+    "tie": "{message}Tabla!"
+  },
+  "invalid_move": {
+    "wrong_format": "Hindi wastong format ng input. Gamitin: A:5, B:10, C:5",
+    "invalid_field": "Hindi wastong pangalan ng larangan. Mga wastong larangan: {field_names}",
+    "wrong_allocation_value": "Lahat ng mga alokasyon ay dapat na mga hindi negatibong integer.",
+    "incorrect_total_units": "Dapat mong maglaan ng eksaktong {num_total_units} yunit. Kasalukuyang suma: {current_sum}",
+    "good_allocations": "Ang alokasyon ay mabuti."
+  },
+  "outcome": {
+    "winner_alpha": "Komander Alpha ay nanalo {score_0}-{score_1} pagkatapos ng {num_rounds} mga round!",
+    "winner_beta": "Komander Beta ay nanalo {score_1}-{score_0} pagkatapos ng {num_rounds} mga round!",
+    "draw": "Ang laro ay nagtapos sa isang {score_0}-{score_1} tabla pagkatapos ng {num_rounds} mga round!",
+    "early_winner_alpha": "Komander Alpha ay nanalo {scores_0}-{scores_1} (nakamit ang mayorya)!",
+    "early_winner_beta": "Komander Beta ay nanalo {scores_1}-{scores_0} (nakamit ang mayorya)!"
+  }
+}

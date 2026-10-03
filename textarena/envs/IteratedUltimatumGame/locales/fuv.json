@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "A si Player {player_id}, o jokkondir {num_rounds} yari e Iterated Ultimatum Game.\nA wa'i ${pool} e jangin e yari ko e nde Player {other_id}.\n\nProposer:\n  - Yari waylu: [Offer: $X] (0 <= X <= pool)\n  - Ina woni → A wa'i $(pool - X), janngirde wa'i $X\n  - Ina yi'i → Both wa'i $0\n  - Misaal: [Offer: $3]  walla  'A tawi ko woni. [Offer: $5]'\n\nResponder:\n  - Tawi e waylu e ko [Accept] walla [Reject]\n  - Misaal: 'Ko tawi e. [Accept]'\n            'Ko yi'i e. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Raundi {round_number} ta fara! ---\nMakon {proposer_id} ndiye makon, Makon {responder_id} ndiye mayimfa.",
+    "offer": "Raundi {round_number}: Makon {proposer_id} yiɓa ${offer} ga Makon {responder_id} (yiɓugo ${keep}).",
+    "accepted": "Makon {responder_id} njaɓi! Raundi {round_number} njaram: Makon {proposer_id} +${proposer_gain}, Makon {responder_id} +${responder_gain}. Ɗiyanke: Makon 0: ${total_0}, Makon 1: ${total_1}.",
+    "rejected": "Makon {responder_id} yiɓa mayimfa! Raundi {round_number} njaram: Makon ɓebe +$0. Ɗiyanke ɓe ngoni: Makon 0: ${total_0}, Makon 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Jaɓɓoowo footi waɗa jaɓol be naftira dabareji [Offer: $X].",
+    "bad_integer": "Limgal ko ɓe hokkata haani laato limngal je ɗon.",
+    "out_of_range": "Jaɓɓorgo haani hawta $0 be ${pool}.",
+    "no_current_offer": "Wala ko ɓe ɗon wi'a ha jonta.",
+    "accept_or_reject": "Responder dole ne yi ama [Accept] ko [Reject] proposition."
+  },
+  "outcome": {
+    "win": "Makon {winner} jaɓi e sara ${winner_total} kwa gaba, Makon {loser} e woodi ${loser_total}.",
+    "draw": "Jaɓɓorgo! Ɗiɗo fuu ɓe timmi be ${total}."
+  }
+}

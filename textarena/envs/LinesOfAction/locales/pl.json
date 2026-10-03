@@ -1,0 +1,36 @@
+{
+  "_comment": "Plik językowy LinesOfAction. NIE TŁUMACZ kluczy (lewa strona). Tłumacz tylko wartości (prawa strona).",
+  "_slots": {
+    "{player_id}": "Numer gracza, 0 lub 1",
+    "{side}": "Litera pionka gracza, O lub X",
+    "{other}": "Litera pionka przeciwnika, O lub X",
+    "{board}": "Wizualizacja planszy w ASCII; pozostaw bez zmian",
+    "{coord}": "Współrzędna planszy, np. b1 lub a3",
+    "{from}": "Współrzędna źródłowa ruchu, np. b1",
+    "{to}": "Współrzędna docelowa ruchu, np. b3"
+  },
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w grze LinesOfAction.\nTwoje pionki to '{side}', pionki przeciwnika to '{other}'.\nFormat ruchu: `[b1b3]` (od-współrzędna do-współrzędna). Prawidłowy ruch przebiega poziomo, pionowo lub ukośnie o liczbę pól równą łącznej liczbie pionków (dowolnego koloru) w tej linii. Możesz przeskoczyć przez własne pionki, ale nie przez pionki przeciwnika; lądowanie na pionku przeciwnika oznacza jego schwytanie. Wygrywasz, gdy wszystkie twoje pionki są połączone jako 8-sąsiedzi."
+  },
+  "board": {
+    "current_board": "Plansza:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format musi być e2e4 (współrzędne od-do).",
+    "no_piece": "Brak pionka {side} na {coord}.",
+    "identical": "Współrzędne źródłowa i docelowa są identyczne.",
+    "not_straight_or_diagonal": "Ruch musi być prosty lub ukośny.",
+    "wrong_distance": "Należy przemieścić się o odległość równą liczbie pionków w linii.",
+    "enemy_blocks": "Pionek przeciwnika blokuje ścieżkę.",
+    "destination_own": "Miejsce docelowe zajęte przez własny pionek."
+  },
+  "game_action": {
+    "moved": "Gracz {player_id} przesunął {from} -> {to}",
+    "captured_suffix": "Gracz {player_id} przesunął {from} -> {to} schwytając pionek przeciwnika."
+  },
+  "outcome": {
+    "win": "Wszystkie pionki połączone.",
+    "draw_no_capture": "60 ruchów bez schwytania.",
+    "draw_repetition": "Pozycja powtórzona trzy razy."
+  }
+}

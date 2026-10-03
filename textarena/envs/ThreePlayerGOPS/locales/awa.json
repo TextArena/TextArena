@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "आप तीन-खिलाड़ी GOPS में खिलाड़ी {player_id} हैं।\n- आपके पास 13 कार्ड A-K (प्रत्येक ठीक एक बार) हैं।\n- प्रत्येक राउंड एक पुरस्कार प्रकट किया जाता है। एक कार्ड जैसे `[Q]`, `[10]`, `[2]` … जमा करें\n- उच्चतम कार्ड पुरस्कार (+ कोई भी आगे बढ़ाया गया बर्तन) जीतता है। टाई पुरस्कार को अगले राउंड में रोल करता है।\n- 13 राउंड के बाद, उच्चतम कुल जीतता है। अमान्य चालें = समाप्ति।"
+  },
+  "round": {
+    "header": "### राउंड {round}/13 - पुरस्कार: {prize} (मूल्य {worth})",
+    "hand": "आपका शेष हाथ: {hand}"
+  },
+  "reveal": {
+    "win": "बोलियाँ » {bids} - खिलाड़ी {winner} {pot} जीतता है।",
+    "tie": "बोलियाँ » {bids} - टाई, बर्तन अब {pot} है।",
+    "scores": "स्कोर → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "क्रिया कय '[Q]' जइसन कोष्ठक वाले कार्ड की आवश्यकता होत है।",
+    "bad_card": "पहिले से प्रयोग करल गवा या गलत तरीका से लिखा गा है"
+  },
+  "elimination": {
+    "player": "खिलाड़ी {pid} बार-बार अमान्य चालों के बाद समाप्त हो गया है।"
+  },
+  "outcome": {
+    "auto_win": "दुइ खिलाड़ी बाहर भागे - स्वचालित रूप से जीत हासिल कीहिन।",
+    "final": "अंतिम स्कोर: {scores}"
+  }
+}

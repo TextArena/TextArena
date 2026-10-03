@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Du är Spelare {player_id} och spelar ett spel av Pig Dice.\n\nRegler:\n- På din tur kan du antingen '[roll]' eller '[hold]'\n- Rulla en 2-6: Lägg till din turtotal\n- Rulla en 1: Förlora turtotal och avsluta tur\n- Håll: Lägg till turtotal till din poäng och avsluta tur\n- Först till {winning_score} poäng vinner\n\nNär det är din tur ser du de aktuella poängerna och turtotalen.\nSvara med '[roll]' för att rulla tärningen eller '[hold]' för att spara dina poäng."
+  },
+  "invalid_move": {
+    "invalid_action": "Ogiltigt åtgärdsformat. Använd '[roll]' eller '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Spelare {player_id} gick i konkurs och förlorade {turn_total} poäng!",
+    "player_hold": "Spelare {player_id} håller och sparar {turn_total} poäng."
+  },
+  "board": {
+    "player": "Spelare 0: '{score_0}'; Spelare 1: '{score_1}'",
+    "current_total_scores": "Aktuella totalpoäng: {scores}\nDin aktuella turtotal är {turn_total}.",
+    "roll_history": "{observation}\nDin rullhistorik för den här turen: {roll_history}",
+    "first_roll": "{observation}\nDetta är den första rullen av din tur.",
+    "available_actions": "{observation}\nTillgängliga åtgärder: '[roll]' eller '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Spelare {winner_id} vann genom att ha en högre poäng vid turgränsen ({scores})",
+    "winner_by_score": "Spelare {winner_id} vann genom att nå målpoängen på {winning_score}!",
+    "draw": "Turgränsen har nåtts och alla spelare har samma poäng: {scores}"
+  }
+}

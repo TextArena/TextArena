@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "आप खिलाड़ी {player_id} हैं ३-खिलाड़ी इटरेटेड प्रिजनर्स डाइलेमा में। मैच {num_rounds} राउंड तक चलता है।\nराउंड संरचना:\n• {conv_rounds} मुफ्त-चैट टर्न\n• १ निर्णय टर्न - प्रति प्रतिद्वंद्वी एक टोकन जमा करें: '[<opp-id> cooperate]' या '[<opp-id> defect]' (अर्थात '[1 defect] [2 cooperate]'; डिफ़ॉल्ट 'सहयोग' है)। \nजोड़ी-वार पेआफ मैट्रिक्स (प्रत्येक अनक्रमित जोड़ी पर लागू किया जाता है):\n  - दोनों सहयोग  ->  {reward}\n  - दोनों द्रोह  ->  {punishment}\n  - आप द्रोह, वे सहयोग -> {temptation}\n  - आप सहयोग, वे द्रोह -> {sucker}\nअंत में सभी राउंड के अंत में उच्चतम स्कोर वाले खिलाड़ी(यों) जीतते हैं।"
+  },
+  "round": {
+    "start": "─── राउंड {round} शुरू हो रहा है ───\tआप अगले {conv_rounds} राउंड के लिए स्वतंत्र रूप से बातचीत कर सकते हैं।",
+    "chat_finished": "राउन्ड {round} खातिर गप्प संपूर्ण भइ गइ। अपने निर्णय जमा करा, एक टोकन प्रति प्रतिद्वंद्वी: `[pid cooperate]` या `[pid defect]`।"
+  },
+  "results": {
+    "header": "### राउंड {round} - परिणाम:",
+    "pair_line": "{observation}\n\t खिलाड़ी {i} बनाम खिलाड़ी {j} ने {choice_i} और {choice_j} का चयन किया (खिलाड़ी {i} को {gain_i} मिला, खिलाड़ी {j} को {gain_j} मिला)",
+    "scores_open": "{observation} -> वर्तमान स्कोर: मा",
+    "score_first": "{observation}खिलाड़ी {player_id} ({score})",
+    "score_next": "{observation}; खिलाड़ी {player_id} ({score})",
+    "finalize": "{observation}  मा"
+  },
+  "outcome": {
+    "final": "अंतिम स्कोर: {scores}.  रैंकिंग समूह (सबसे खराब→सबसे अच्छा): {groups}"
+  }
+}

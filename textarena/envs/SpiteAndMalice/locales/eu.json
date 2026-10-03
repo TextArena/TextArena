@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Jokalari {player_id} zara bi jokalarirentzako Spite eta Malice jokoan. Zure helburua zure ordainketa piloa hustea da lehenengo.\n\n### Jokoaren Laburpena:\n- Helburua zure ordainketa piloa garbitzea da, karta zentralen piloetan kartak jokatuz.\n- Hiru iturritatik joka dezakezu kartak:\n  1. Zure **esku** (turno bakoitzean 5 kartarekin hasten duzu).\n  2. Zure **ordainketa piloaren karta gorena**.\n  3. Zure **baztertze piloaren karta gorena** edozein.\n\n### Jokatzeko Arauak:\n- Kartak joka dezakezu zentralen pilo batean, baldin eta pilo horretako karta gorena baino **maila bat altuagoa** bada (zentralen piloak As batekin hasten dira eta Erreginarekin bukatzen dira; Erregeak basatiak dira - edozein kartatan joka daitezke, baina ez dute maila sekuentzia aldatzen. Honek esan nahi du, Errege bat 4.aren ondoren erabiltzen bada, Errege hori 5. mailan dago eta hurrengo karta 6 izan behar du).\n- Ezin baduzu kartarik gehiago jokatu, **karta bat baztertu** behar duzu zure baztertze piloetako batean turno amaitzeko.\n- Zentralen piloa Erreginara iristen bada, automatikoki garbituko da.\n- Maila ordena hau da: A=1, 2=2, ..., 9=9, J=10, Q=11, K basati gisa.\n\n### Ekintzak:\n1. **Marraztu**: Turnoaren hasieran, marraztu kartak zure eskua 5 kartarekin betetzeko. Sartu **[draw]** hasteko.\n2. **Jokatu karta**: Karta bat jokatzeko, zehaztu karta eta zentralen piloa honela: **[play A♠ 0]** (non 'A♠' karta den eta '0' zentralen piloaren indizea den).\n3. **Baztertu**: Ezin baduzu kartarik gehiago jokatu, baztertu karta bat zure eskuetik baztertze pilo batean turno amaitzeko. Sartu **[discard A♠ 1]** (non 'A♠' karta den eta '1' baztertze piloaren indizea den). Kontuan izan ezin duzula baztertu karta bat ordainketa pilotik. Zure eskuetik soilik baztertu dezakezu kartak.\n\n"
+  },
+  "board": {
+    "current_board": "Egungo taula: {board} Eskainitako mugimenduak: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Erdialdeko piloak --- ",
+    "pile": "{observation}Zutabea {i}: {pile} ",
+    "player_view_header": "{observation} --- Jokalariaren ikuspegia {player_id} --- ",
+    "payoff": "{observation}Ordainketa pila (Goiko karta): {top_card}, Ordainketa pila luzera: {payoff_length} ",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Bota pila: {discard} ",
+    "empty": "Hutsik dago."
+  },
+  "game_message": {
+    "no_cards_left": "Ez dago kartarik marrazteko. Gogoratu karta hauek joka ditzakezula iturri hauetatik:\n  1. Zure **esku**-tik.\n  2. Zure **ordainketa pilako goiko kartatik**.\n  3. Zure **bazterketa pila baten goiko kartatik**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Mugimendu baliogabea. {player_id} jokalariak ez zuen mugimendu baliorik erantzuten.",
+    "invalid_play": "Jokalariak {player_id} jokatu nahi izan zuen {card} erdialdeko piloan {index}.",
+    "discard_from_payoff": "Karta baztertzea baliogabea da. Jokalari {player_id}-k saiatu da karta bat baztertzen ordainketa pilatik.",
+    "discard_not_in_hand": "Ez-baliozko jaurtiketa. {player_id} jokalariak ez duen karta bat jaurtitzen saiatu zen.",
+    "wrong_move_type": "Mugimendu mota baliogabea. Jokalari {player_id}k ez du erantzun mugimendu mota baliogabearekin."
+  },
+  "game_action": {
+    "you_drew": "Kartak atera zenituen.",
+    "opponent_drew": "Jokalariak {player_id} kartak atera zituen.",
+    "you_played": "Zu {card} jokatu duzu zentralen pila {index}ean.",
+    "opponent_played": "Jokalariak {player_id} jokatu zuen {card} erdialdeko piloan {index}.",
+    "you_discarded": "Zu {card} deseinatu duzu deseinatzeko pila {index}ean, eta horrek esan nahi du zure txanda amaitu duzu. Ez da kontuan hartuko zure ekintzarik gehiago txanda honetan. Jokalari {next_player_id}k joango du hurrengo.",
+    "opponent_discarded": "Jokalariak {player_id} bota zuen {card} pila {index} bota zuen, eta horrek bere txanda bukatu zuela esan nahi du. Jokalariaren {player_id} ekintza gehiago ez dira kontuan hartuko txanda honetan. Jokalariaren {next_player_id} hurrengoa izango zara. Sartu zure ekintza [action card center_index] formatuan."
+  },
+  "outcome": {
+    "payoff_cleared": "Jokalari {current_player}k bere ordainketa pila amaitu du! Jokalari {current_player} irabazi du!",
+    "deadlock_player_0": "Blokeoa iritsi da! 0 jokalariak irabazten du {player_0_payoff} karta geratzen direnean 1 jokalariaren {player_1_payoff} karta.",
+    "deadlock_player_1": "Blokeoa iritsi da! 1 jokalariak irabazten du geratzen diren {player_1_payoff} karta eta 0 jokalariaren {player_0_payoff} karta.",
+    "deadlock_tie": "Bakoitzak {player_0_payoff} karta ditu, eta {current_player} jokalariak irabazten du."
+  }
+}

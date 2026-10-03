@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Tusa an tImreoir {player_id} i gcluiche LinesOfAction.\nPíosaí '{side}' atá agat, píosaí '{other}' atá ag an bhfreasúra.\nFormáid gluaiseachta: `[b1b3]` (comhordanáid ó -> comhordanáid go). Gluaisfidh gluaiseacht dlíthiúil go cothrománach, ingearach, nó trasnaíochtach líon cearnóg atá comhionann le líon na bpíosaí (dath ar bith) sa líne sin. Féadfaidh tú léim thar do phíosaí féin, ach ní féidir léim thar phíosaí an fhreasúra; má thuirlingíonn tú ar phíosa an fhreasúra, ghabhfaidh tú é.  Buaigh nuair atá do phíosaí go léir ceangailte le 8-nachar."
+  },
+  "board": {
+    "current_board": "Bord: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ní mór go mbeadh an t-oideas e2e4 (ó,go comhordanáidí).",
+    "no_piece": "Níl aon {side} píosa ar an {coord}.",
+    "identical": "Foinse agus ceann scríbe comhionann.",
+    "not_straight_or_diagonal": "Ní mór an t-aistriú a bheith díreach nó ar dhiagonal.",
+    "wrong_distance": "Ní mór a chur ar shiúl cothrom le píosaí i líne.",
+    "enemy_blocks": "Tá píosa namhaid ag blocáil an cosáin.",
+    "destination_own": "Críochnaithe á n-ocáid ag píosa féin."
+  },
+  "game_action": {
+    "moved": "Imreoir {player_id} a bhog {from} -> {to}",
+    "captured_suffix": "Imreoir {player_id} a bhog {from} -> {to} ag gabháil namhad."
+  },
+  "outcome": {
+    "win": "Tá gach píosa ceangailte.",
+    "draw_no_capture": "60 gluaiseacht gan ghabháil.",
+    "draw_repetition": "Athaigh an seasamh trí huaire."
+  }
+}

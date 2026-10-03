@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í Chopsticks. Á þinni rönd skalt þú velja eitt af eftirfarandi:\n  + Árás:  '[attack M O]'  þar sem M=þín hönd (0 eða 1), O=andstæðings hönd (0 eða 1).\n    - Fjöldi á andstæðings hönd eykst um fjölda á þinni hönd; ef >=5, verður það 0.\n  + Skipting:   '[split L R]'  til að endurdreifa heildarfjölda fingra þinna í L og R (L+R = heildarfjöldi þinn).\nSvara með nákvæmlega einu af þessum skipunum."
+  },
+  "board": {
+    "current_board": "Núverandi Borð:\nLeikmaður 0: {hands_0}\nLeikmaður 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Hönd þín {my_idx} er dauð.",
+    "opp_hand_dead": "Andstæðings hönd {opp_idx} er þegar dauð.",
+    "split_sum": "Skipting verður að vera jöfn {total}.",
+    "split_no_change": "Skipting verður að breyta dreifingu hönd þinnar.",
+    "invalid_command": "Ógilt leik. Nota “[attack M O]” eða “[split L R]”."
+  },
+  "game_action": {
+    "attack": "L{player_id} árásar á L{opp_id} hönd {opp_idx}: hún fer frá {opp_val} til {new_val}.",
+    "split": "L{player_id} skiptir í [{L}, {R}]."
+  },
+  "history": {
+    "entry": "L{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Báðar andstæðings hendur eru dauðar.",
+    "draw": "Tímamörk leiksins hafa verið náð."
+  }
+}

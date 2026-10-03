@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "አንተ ተጫዋች {player_id} እስር ውስጥ የተጣበቀ ተደጋጋሚ እስር ውስጥ የተጣበቀ ተደጋጋሚ የስምምነት ትርኢት ላይ አለህ። ይህ ትርኢት {num_rounds} አካላት ይዟል።\n\nየትርኢት አሰራር፦\n- ከየትኛውም ውሳኔ በፊት ለ {total_conversation_rounds} ጊዜ አግባብ አለህ እንድትወያይ።\n- በኋላ ሁለቱ ተጫዋቾች አንድ ላይ እንደ ስምምነት ወይም እንደ እስር ሊወስኑ ይገባል።\n\nየሽልማት ማጥፊያ (በየአካል የተደረገ)፦\n- ሁለቱ እንደ ስምምነት ➜ እንደ {cooperate_reward}\n- ሁለቱ እንደ እስር ➜ እንደ {mutual_defect_reward}\n- አንዱ እንደ እስር፣ አንዱ እንደ ስምምነት ➜ እስረኛ {defect_reward}፣ እንደ ስምምነት {sucker_reward}\n\nእንዴት እንደ ትጫወት፦\n- በወያይት ወቅት፦ እንደሚፈልግህ አንድ ጽሑፍ ጻፍ።\n- በውሳኔ ወቅት፦ '[Cooperate]' ወይም '[Defect]' (አንድ ላይ ለውጥ የለም) አካት። ከስምምነት በፊት/ከስምምነት በኋላ ተጨማሪ ጽሑፍ ማካተት ትችላለህ።"
+  },
+  "phases": {
+    "conversation_finished": "ውይ ውይን ተዛረበት ለማዕረ ሮንድ {round}. እቲ ምስራዕ ቃልስን '[Cooperate]' ወይ '[Defect]' ኣብ ቦክስድ{{}}.",
+    "starting_round": "--- ናይ መጀመርያ ዙር {round} ---",
+    "round_summary": "ሮንድ {round} ውጽኢት:\n{outcome}\nሰራዊት 0 {r0} ኣሰበ (ብዙሕ ሓላ {score_0}), ሰራዊት 1 {r1} ኣሰበ (ብዙሕ ሓላ {score_1})."
+  },
+  "outcome": {
+    "winner": "ተጫዋች {winner} {win_score} - {lose_score} አሸነፈ።",
+    "draw": "ክልቲኦም ተጻወትቲ ሸቶ ኣመዝጊቦም {s0}።",
+    "round_both_cooperate": "ክልቲኦም ተጻወትቲ ተሓባበርቲ እዮም።",
+    "round_both_defect": "ክልቲኦም ተጻወትቲ ወሪሮም እዮም።",
+    "round_p0_cooperates_p1_defects": "ተጻዋታይ 0 ተሓባባሪ ኮይኑ፡ ተጻወቲ 1 ድማ ወጺኡ።",
+    "round_p0_defects_p1_cooperates": "ተጻዋታይ 0 ዓሊሙ፡ ተጻወቲ 1 ድማ ተሓባበረ።"
+  }
+}

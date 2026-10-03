@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id}. Du spielst Sudoku.\nHier ist der aktuelle Zustand des Sudoku-Rasters. Jede Zeile ist von 1 bis 9 nummeriert, und jede Spalte ist ebenfalls von 1 bis 9 nummeriert.\nLeere Felder werden durch '.' dargestellt, und vorgegebene Felder enthalten Ziffern von 1 bis 9.\n\nAktuelles Sudoku-Raster:\nDein Ziel ist es, die leeren Felder im 9x9-Raster mit Ziffern von 1 bis 9 zu füllen, sodass:\n1. Jede Zeile alle Ziffern von 1 bis 9 ohne Wiederholung enthält.\n2. Jede Spalte alle Ziffern von 1 bis 9 ohne Wiederholung enthält.\n3. Jedes der neun 3x3-Untergitter alle Ziffern von 1 bis 9 ohne Wiederholung enthält.\n\nRegeln und Anweisungen:\n1. **Überschreibe nicht** die ursprünglich vorgegebenen Zahlen im Raster.\n2. **Fülle nur** leere Felder aus, die durch '.' dargestellt werden.\n3. Du kannst auf beliebige Weise antworten, aber stelle sicher, dass deine Antwort das Format '[row column number]' enthält.\n4. **Stelle sicher**, dass dein Zug keine Sudoku-Regel verletzt. Ungültige Züge führen zu Strafen.\nBeispiele:\n- **Gültiger Zug**:\n  - Rasterausschnitt vor dem Zug:\n  \n  - Zug: `[5 3 7]`\n  - Erklärung: Das Eintragen der 7 in Zeile 5, Spalte 3 verletzt keine Sudoku-Regel.\n\n- **Ungültiger Zug** (Überschreiben eines vorgegebenen Feldes):\n  - Rasterausschnitt vor dem Zug:\n  \n  - Zug: `[1 1 9]`\n  - Erklärung: Das Feld (1,1) ist bereits mit 5 ausgefüllt. Du darfst es nicht überschreiben.\n\n- **Ungültiger Zug** (Verletzung der Sudoku-Regeln):\n  - Rasterausschnitt vor dem Zug:\n  \n  - Zug: `[1 3 5]`\n  - Erklärung: Das Eintragen der 5 in Zeile 1, Spalte 3 verletzt die Regel, da die 5 bereits in Zeile 1 vorhanden ist.\n\nDer Verlauf deiner Züge und Überlegungen wird im Laufe weiterer Runden ergänzt. Nutze den Verlauf deiner Züge, um bessere Entscheidungen zu treffen und bereits versuchte Züge zu vermeiden. Viel Glück!\n\n"
+  },
+  "board": {
+    "game_board": "Spielfeld:\n{board}",
+    "board_state": "Spielfeldzustand: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ungültiges Zugformat. Spieler {player_id} hat nicht mit einem gültigen Format 'row column number' geantwortet.",
+    "out_of_bounds": "Ungültiger Zug. Spieler {player_id} hat versucht, {num} bei ({row}, {col}) einzutragen; diese Position liegt außerhalb des Spielfelds.",
+    "overwrite": "Ungültiger Zug. Spieler {player_id} hat versucht, ein vorgegebenes Feld bei ({row}, {col}) zu überschreiben.",
+    "violates_rules": "Ungültiger Zug. Spieler {player_id} hat versucht, {num} bei ({row}, {col}) einzutragen; dies verletzt die Sudoku-Regeln."
+  },
+  "outcome": {
+    "win": "Glückwunsch! Spieler {player_id} hat das Sudoku-Puzzle abgeschlossen.",
+    "turn_limit": "Das Zuglimit wurde erreicht. Du hast {percent}% der leeren Felder korrekt ausgefüllt."
+  }
+}

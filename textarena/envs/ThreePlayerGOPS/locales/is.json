@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS staðfærslu skrá. ÞÝÐA EKKI lykla (vinstri hlið). Þýða aðeins gildi (hægri hlið).",
+  "_slots": {
+    "{player_id}": "Leikmannsnúmer, 0, 1 eða 2",
+    "{round}": "Núverandi umferð, 1..13",
+    "{prize}": "Verðlaunakortsmerki (A, 2..10, J, Q, K) - ekki þýða",
+    "{worth}": "Heildarverð verðlaunanna, þar á meðal hvaða pottur sem er",
+    "{hand}": "Leikmanns eftirstandandi spil, sýnd sem hakaklömmur eins og '[A]' '[2]' - ekki þýða",
+    "{bids}": "Hlutlaus lista yfir spiluð spil, eins og 'P0:10, P1:J, P2:Q' - ekki þýða",
+    "{winner}": "Leikmannsnúmerið sem vann umferðina",
+    "{pot}": "Potturinn sem var veittur eða varðveittur í þessari umferð",
+    "{scoreline}": "Hlutlaus stigatafla eins og 'P0:0  P1:0  P2:11' - ekki þýða",
+    "{pid}": "Leikmannsnúmerið sem var útskotið",
+    "{scores}": "Lokastig sem hrátt leikmannsnúmer til stigamapping - ekki þýða"
+  },
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í Three-Player GOPS.\n- Þú heldur 13 spilum A-K (hvert nákvæmlega einu sinni).\n- Hver umferð er verðlaun kynnt. Skráðu EITT spil eins og `[Q]`, `[10]`, `[2]` …\n- Hæsta spilið vinnur verðlaunin (+ hvaða pott sem er). Jafntefli rúllar verðlaunin yfir í næstu umferð.\n- Eftir 13 umferðir vinnur hæsta heild. Ógildir leikir = útskot."
+  },
+  "round": {
+    "header": "### Umferð {round}/13 - Verðlaun: {prize} (verð {worth})",
+    "hand": "Þín eftirstandandi hönd: {hand}"
+  },
+  "reveal": {
+    "win": "Boð » {bids} - Leikmaður {winner} vinnur {pot}.",
+    "tie": "Boð » {bids} - jafntefli, pottur nú {pot}.",
+    "scores": "Stig → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "aðgerð þarf hakaklömmuð spil eins og '[Q]'",
+    "bad_card": "spilið er þegar notað eða ógilt"
+  },
+  "elimination": {
+    "player": "Leikmaður {pid} útskotið eftir endurtekin ógilda leiki."
+  },
+  "outcome": {
+    "auto_win": "Tveir leikmenn útskotið - sjálfkrafa sigur.",
+    "final": "Lokastig: {scores}"
+  }
+}

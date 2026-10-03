@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id}. Anda sedang bermain Sudoku.\nBerikut ialah keadaan semasa grid Sudoku. Setiap baris dinomborkan dari 1 hingga 9, dan setiap lajur juga dinomborkan dari 1 hingga 9.\nPetak kosong diwakili oleh '.', manakala petak yang telah diisi mengandungi digit dari 1 hingga 9.\n\nGrid Sudoku Semasa:\nObjektif anda adalah untuk mengisi petak kosong dalam grid 9x9 dengan digit dari 1 hingga 9 supaya:\n1. Setiap baris mengandungi semua digit dari 1 hingga 9 tanpa pengulangan.\n2. Setiap lajur mengandungi semua digit dari 1 hingga 9 tanpa pengulangan.\n3. Setiap satu daripada sembilan subgrid 3x3 mengandungi semua digit dari 1 hingga 9 tanpa pengulangan.\n\nPeraturan dan Arahan:\n1. **Jangan ganti** nombor awal yang diberikan dalam grid.\n2. **Isi hanya** petak kosong yang diwakili oleh '.'.\n3. Anda boleh menjawab dengan apa-apa cara yang anda suka, tetapi pastikan respons anda mengandungi format '[row column number]'.\n4. **Pastikan** langkah anda tidak melanggar peraturan Sudoku. Langkah yang tidak sah akan dikenakan penalti.\nContoh:\n- **Langkah Sah**:\n  - Petikan Grid Sebelum Langkah:\n  \n  - Langkah: `[5 3 7]`\n  - Penjelasan: Meletakkan 7 pada baris 5, lajur 3 tidak melanggar mana-mana peraturan Sudoku.\n\n- **Langkah Tidak Sah** (Mengganti petak yang telah diisi):\n  - Petikan Grid Sebelum Langkah:\n  \n  - Langkah: `[1 1 9]`\n  - Penjelasan: Petak (1,1) telah diisi dengan 5. Anda tidak boleh menggantikannya.\n\n- **Langkah Tidak Sah** (Melanggar peraturan Sudoku):\n  - Petikan Grid Sebelum Langkah:\n  \n  - Langkah: `[1 3 5]`\n  - Penjelasan: Meletakkan 5 pada baris 1, lajur 3 melanggar peraturan kerana 5 sudah wujud dalam baris 1.\n\nSejarah langkah dan pemikiran anda akan ditambahkan apabila anda bermain lebih banyak pusingan. Gunakan sejarah langkah anda untuk memperbaik pembuatan keputusan dengan mengelakkan langkah yang telah anda cuba. Semoga berjaya!\n\n"
+  },
+  "board": {
+    "game_board": "Papan Permainan:\n{board}",
+    "board_state": "Keadaan papan: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format langkah tidak sah. Pemain {player_id} tidak memberikan format 'row column number' yang sah.",
+    "out_of_bounds": "Langkah tidak sah. Pemain {player_id} cuba meletakkan {num} pada ({row}, {col}), yang berada di luar sempadan.",
+    "overwrite": "Langkah tidak sah. Pemain {player_id} cuba mengganti petak yang telah diisi pada ({row}, {col}).",
+    "violates_rules": "Langkah tidak sah. Pemain {player_id} cuba meletakkan {num} pada ({row}, {col}), yang melanggar peraturan Sudoku."
+  },
+  "outcome": {
+    "win": "Tahniah! Pemain {player_id} telah menyelesaikan teka-teki Sudoku.",
+    "turn_limit": "Had giliran telah dicapai. Anda mengisi {percent}% petak kosong dengan betul."
+  }
+}

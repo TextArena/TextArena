@@ -1,0 +1,32 @@
+{
+  "player_prompt": {
+    "intro": "你是 **Ultimate Tic Tac Toe** 对局中的玩家 {player_id}。\n请以 **[macro  micro]** 的格式提交你的落子，即两个 0 至 8 的数字：\n• *macro* = 你要落子的小棋盘\n• *micro* = 该小棋盘内的格子\n示例：`[7 8]` ➜ 将你的棋子放在小棋盘 7 的格子 8，并\n迫使对手下一步在小棋盘 8 中落子。\n\n你的棋子是 `{symbol}`。\n"
+  },
+
+  "board": {
+    "current_board": "当前棋盘：\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "落子必须采用 [macro micro] 格式，并使用 0 至 8 的数字。",
+    "out_of_range": "两个索引都必须介于 0 和 8 之间。",
+    "index_out_of_range": "micro_board、行号或列号超出范围。",
+    "cell_occupied": "该格子已被占用。",
+    "wrong_micro_board": "玩家必须在指定的下一个小棋盘中落子。",
+    "micro_board_won": "该小棋盘已经分出胜负。"
+  },
+
+  "next_board": {
+    "any": "任意小棋盘",
+    "specific": "小棋盘 {nxt}"
+  },
+
+  "game_action": {
+    "played": "玩家 {player_id} 在小棋盘 {macro_idx} 的格子 {micro_idx} 落子（行 {row}，列 {col}）。玩家 {opponent_id} 现在必须在{nxt_txt}中落子。"
+  },
+
+  "outcome": {
+    "win": "玩家 {player_id} 赢得 Ultimate Tic Tac Toe！",
+    "draw": "本局游戏平局！"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Oled mängija {player_id} korduvas vangide dilemmamängus, mis kestab {num_rounds} vooru.\n\nMängu struktuur:\n- Enne iga otsust on sul {total_conversation_rounds} käiku vabalt suhelda.\n- Seejärel valivad mõlemad mängijad üheaegselt, kas koostööd teha või üle mängida.\n\nTasumise maatriks (iga vooru jaoks fikseeritud):\n- Mõlemad koostööd teevad ➜ igaüks saab {cooperate_reward}\n- Mõlemad üle mängivad ➜ igaüks saab {mutual_defect_reward}\n- Üks üle mängib, teine koostööd teeb ➜ üle mängija saab {defect_reward}, koostööd teinud saab {sucker_reward}\n\nKuidas mängida:\n- Suhtlemise käigus: tüüpige soovitud tekst.\n- Otsusefaasis: sisaldage '[Cooperate]' või '[Defect]' (kirjatähtede suurusest sõltumata). Võite lisada lisateksti enne või pärast märki."
+  },
+  "phases": {
+    "conversation_finished": "Suhtlus vooru {round} jaoks on lõppenud. Palun vastake '[Cooperate]' või '[Defect]' sees \\boxed{{}}.",
+    "starting_round": "--- Vooru {round} algus ---",
+    "round_summary": "Vooru {round} tulemused:\n{outcome}\nMängija 0 teenis {r0} (kokku {score_0}), mängija 1 teenis {r1} (kokku {score_1})."
+  },
+  "outcome": {
+    "winner": "Mängija {winner} võitis {win_score} - {lose_score}.",
+    "draw": "Viik! Mõlemad mängijad said {s0}.",
+    "round_both_cooperate": "Mõlemad mängijad tegid koostööd.",
+    "round_both_defect": "Mõlemad mängijad üle mängisid.",
+    "round_p0_cooperates_p1_defects": "Mängija 0 tegi koostööd, mängija 1 üle mängis.",
+    "round_p0_defects_p1_cooperates": "Mängija 0 üle mängis, mängija 1 tegi koostööd."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Вие сте Играч {player_id} во игра на Индиски Покер.\n- 52-картичка шпил; гледате само картата на противникот.\n- Анте {ante} чип(ови) секој круг, {max_rounds} круг(ови) вкупно.\n- Валидни потези: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X е позитивен цел број ≤ вашиот број на чипови.)\n- Највисоката скриена карта го освојува џекпотот на шоудаун.\n"
+  },
+  "round": {
+    "announce": "### Круг {current_round}/{max_rounds}\nКартата на противникот е: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Наведете точно ЕДНА акција во загради, на пр. '[check]', '[bet 2]', '[call]', '[raise 3]', или '[fold]'.",
+    "cannot_check": "Не можете да [check] - се соочувате со облог.",
+    "amount_min": "Износот на облогот / повишувањето мора да биде ≥ 1.",
+    "cannot_bet": "Не можете да [bet] - мора да [call] / [raise] / [fold].",
+    "nothing_to_call": "Нема што да се повика; можете да [check] наместо тоа.",
+    "no_bet_to_raise": "Користете [bet X] за да отворите; нема облог за да се повишува.",
+    "insufficient": "Недоволно чипови за таа акција."
+  },
+  "game_action": {
+    "action": "Играч {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (цена {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Ваши можни акции: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Џекпот {pot} → Играч {winner}. (Банкарски сметки P0:{p0}, P1:{p1})",
+    "folded": "Играч {player_id} се предаде.",
+    "showdown_win": "Шоудаун: {card_win} го победи {card_lose}.",
+    "showdown_tie": "Шоудаун нерешено: и двата {card}. Џекпот поделен – секој добива {split}."
+  },
+  "outcome": {
+    "p0_wins": "Играч 0 победи ({bank0} > {bank1})",
+    "p1_wins": "Играч 1 победи ({bank1} > {bank0})",
+    "draw": "Еднакви чипови по сите кругови"
+  }
+}

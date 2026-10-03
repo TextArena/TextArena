@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Сіз Klondike Солитер ойынын ойнап жатырсыз. Сіздің мақсатыңыз - барлық карталарды негізгі түрлердің үстіне қойу.\n\nОйын ережелері:\n- Негізгі түрлер (F1-F4): Түс бойынша Асадан Патшаға дейін құру\n- Жұмыс столының түрлері (T1-T7): Алмасып түс бойынша төмен қарай құру (қызыл - қара, қара - қызыл)\n- Қор: Карталарды қордан алып, заявкалау\n- Заявка (W): Ойынға қатысуға мүмкін карталар\n\nКомандалар:\n- 'draw' - Карталарды қордан заявкалауға алу\n- 'move <source> <destination> [count]' - Карталарды түрлер арасында қозғалу\n  Мысалы: 'move W T1', 'move T1 F2', 'move T3 T5 2'. саны 'all' деп те аталуы мүмкін, бұл барлық ашық карталарды қозғалтуға тырысады.\n- 'forfeit' - Ойынды дереу тоқтату және азып барып, қазіргі есепті қуаттау\n- Түр атаулары: W (заявка), F1-F4 (негізгі түрлер), T1-T7 (жұмыс столы)\n\nСіз бір мәрте ішінде бірнеше әрекеттерді орындауыңызға болады, олардың арасындағы ویرгульмен бөлу:\n  Мысалы: 'draw, move W T1, move T2 F1'\n\nТек Патшалар ғана бос жұмыс столының түрлерінде орналасуы мүмкін.\nӘрекеттер ретімен орындалады - егер бір әрекет сәтсіз болса, қалған әрекеттер тоқтатылады.\nЕгер сіз ойынның жеңілуі мүмкін емес деп ойласаңыз, 'forfeit' командасын пайдаланыңыз."
+  },
+  "format_error": {
+    "no_brackets": "Жарамсыз іс-әрекет пішімі. Іс-әрекет жақшалар арасында болуы тиіс.",
+    "no_closing_bracket": "Жарамсыз әрекет пішімі. Жабылу жақшасы жоқ ']'",
+    "empty_command": "Бос команда. \"draw\" немесе \"move <source> <destination> [count]\" деп теріңіз.",
+    "empty_action": "Бос әрекет",
+    "move_needs_args": "Жылжыту командасы көзін және мақсатын талап етеді. Пайдалануы: 'move <source> <destination> [count]'",
+    "count_positive": "Сан оң болуы керек немесе 'all'",
+    "count_invalid": "Жарамсыз сан. Сан немесе 'all' пайдаланыңыз",
+    "unknown_command": "Беймәлім команда '{cmd}'. 'draw', 'move <source> <destination> [count]', немесе 'forfeit' қолданыңыз",
+    "wrapped": "Іс-әрекет {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Іс-әрекет {n}: {msg}",
+    "before_failure": "Атқарылған {n} іс-әрекет ((() сәтсіздікке дейін.",
+    "failed": "Іс-әрекет {n} өтпеді: {msg}"
+  },
+  "move_result": {
+    "drew": "Карталарды қордан қалдыққа тарту.",
+    "cannot_draw": "Алып шығаруға болмайды.",
+    "invalid_pile": "Жарамсыз жинақ атауы. W, F1-F4 немесе T1-T7 түрлерін пайдаланыңыз",
+    "foundation_one_card": "Негізгі картаға тек 1 картаны ғана жылжытуға болады",
+    "waste_to_foundation_ok": "Қалдықтардан қорға көшірілген карта F{dst}",
+    "waste_to_foundation_bad": "Қалдық картаны сол негізгі үйіндіге қоюға болмайды",
+    "tableau_to_foundation_ok": "Картаны T{src} кестесінен F{dst} негізге көшірді",
+    "tableau_to_foundation_bad": "Тақташа картасын осы қорғанның қатарына жылжытуға болмайды",
+    "foundation_to_foundation": "Негізгі элементтерден екіншісіне ауыса алмайды",
+    "waste_to_tableau_one_card": "Тек 1 картаны қоқыстан табельге жылжыта алады",
+    "waste_to_tableau_ok": "Картаны қалдықтардан Т{dst} кестесіне көшірді",
+    "waste_to_tableau_bad": "Карталарды таблицаның үстіне қоюға болмайды",
+    "no_face_up": "Асылған карталар жылжымайды",
+    "tableau_to_tableau_ok": "Т{src} кестесінен Т{dst} кестесіне көшірілген {count} карта",
+    "tableau_to_tableau_bad": "{count} картасын T{src}-тен T{dst}-ке жылжыта алмайды",
+    "foundation_to_tableau_one_card": "Негізгі картадан тақтаға тек 1 картаны ғана жылжытуға болады",
+    "foundation_empty": "F{src} қоры бос",
+    "foundation_to_tableau_ok": "Картаны F{src} негізінен T{dst} кестеге көшірді",
+    "foundation_to_tableau_bad": "Таблетка T{dst}-ге негіз картасын орналастыру мүмкін емес",
+    "to_waste_or_stock": "Қалдықтарға немесе қорларға жылжытуға болмайды"
+  },
+  "outcome": {
+    "forfeit": "Ойын бұзылды. Соңғы ұпай: {score} карточкалар іргетастарда.",
+    "won": "Құттықтап отырмын, сіз Клондайк пассионарлық ойынында жеңіп шықтың!",
+    "turn_limit": "Ойын аяқталды! Сіз ең көп {max_turns} айналымға жеттіңіз. Нысан: {score} карточкалар іргетаста."
+  },
+  "board": {
+    "title": "=== KLONDIKE СОЛИТЕРІ ===",
+    "turn": "Ауысым: {turn}/{max_turns}",
+    "stock": "Қор: {stock} карточкалар",
+    "waste": "Қалдықтар (W): {waste}",
+    "foundations_header": "Негізгі құралдар:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Кесте:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

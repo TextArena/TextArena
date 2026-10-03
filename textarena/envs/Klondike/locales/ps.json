@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "تاسو د کلونډایک سولیټر لوبه کوی. ستاسو موخه دا ده چې ټول کارتونه د بنسټ ټیبلونو ته ولېږدوي.\n\nد لوبې قواعد:\n- بنسټ ټیبلونه (F1-F4): د ایس څخه پاچا پورې په سوټ کې جوړ کړئ\n- ټیبل ټیبلونه (T1-T7): د رنګونو په بدلولو سره ښکته جوړ کړئ (سور پر تور، تور پر سور)\n- سټاک: د کارتونه د ویست ټیبل ته راښکته کړئ\n- ویست (W): د لوبې لپاره د ویست ټاپ کارټ\n\nکړنې:\n- 'draw' - د کارتونه د سټاک څخه ویست ټیبل ته راښکته کړئ\n- 'move <source> <destination> [count]' - د کارتونه د ټیبلونو تر مینځ ولېږدوي\n  بیلګې: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count کیدای شي 'all' هم وي، چې به ټول مخکې شوی کارتونه ولېږدوي.\n- 'forfeit' - د لوبې په ځانګړي ډول پای ته ورکړئ او ستاسو اوسنی سکور تثبیت کړئ\n- ټیبل نومونه: W (ویست)، F1-F4 (بنسټونه)، T1-T7 (ټیبلونه)\n\nتاسو کولی شئ په یوه ټرن کې څو کړنې ترسره کړئ په دې ډول چې دوی د کوما په واسطه جلا کړئ:\n  بیلګه: 'draw, move W T1, move T2 F1'\n\nیوازې پاچایان کولی شي په خالي ټیبل ټیبلونو کې ځای په ځای شي.\nکړنې په ترتیب سره ترسره کیږي - که یوه پاتې شي، پاتې کړنې څخه تیریږي.\n'draw' کړنه که تاسو باور لری چې لوبه د ګټلو وړ نه ده."
+  },
+  "format_error": {
+    "no_brackets": "د عمل غیرقانوني بڼه. عمل باید په قوسونو کې وي.",
+    "no_closing_bracket": "د عمل ناسم بڼه. د تړلو قوس ورک دی ']'",
+    "empty_command": "خالي کمانډ. ټایپ کړئ \"draw\" یا \"move <source> <destination> [count]\"",
+    "empty_action": "خالي عمل",
+    "move_needs_args": "د 'move' کړنې لپاره سرچینه او مقصد اړین دي. کارونه: 'move <source> <destination> [count]'",
+    "count_positive": "شمیره باید مثبته یا 'all' وي",
+    "count_invalid": "ناسم شمیره. یو شمیره یا 'all' کاروئ",
+    "unknown_command": "نامعلوم کمانډ \"{cmd}\". د \"draw\" ، \"move <source> <destination> [count]\" ، یا \"forfeit\" کارولو څخه کار واخلئ",
+    "wrapped": "د عمل {n}: {msg}"
+  },
+  "action_result": {
+    "success": "د عمل {n}: {msg}",
+    "before_failure": "د ناکامۍ دمخه اجرا شوي {n} عملونه.",
+    "failed": "د {n} دعوه ناکامه شوه: {msg}"
+  },
+  "move_result": {
+    "drew": "له سټاک څخه د ضایعاتو لپاره کارتونه واخیستل.",
+    "cannot_draw": "نه شي کولای چې وځنډوي. دواړه ذخیره او ضایع خالي دي.",
+    "invalid_pile": "د پایل نامناسب نوم. W، F1-F4، یا T1-T7 وکاروئ",
+    "foundation_one_card": "یوازې یو کارت بنسټ ته لیږدولی شي",
+    "waste_to_foundation_ok": "له ضایعاتو څخه بنسټ ته د کارت لیږدول F{dst}",
+    "waste_to_foundation_bad": "د بیکار کارت د بنسټ ډنډ ته نه شي لیږدول کیدی",
+    "tableau_to_foundation_ok": "د T{src} جدول څخه د F{dst} بنسټ ته د کارت لیږدول",
+    "tableau_to_foundation_bad": "د ټابلیو کارت دې بنسټ ته نه شي لېږدولای",
+    "foundation_to_foundation": "نه شي کولای له بنسټ څخه بنسټ ته لاړ شي",
+    "waste_to_tableau_one_card": "يواځې يو کارت له زيان څخه ټيبلو ته ليږدول شي",
+    "waste_to_tableau_ok": "د ضایعاتو څخه T{dst} جدول ته د کارت لیږدول",
+    "waste_to_tableau_bad": "د تابلې پر دې ډله کې د ضایعاتو کارت نه شي اچولای",
+    "no_face_up": "د حرکت لپاره هیڅ مخ پورته کارتونه نشته",
+    "tableau_to_tableau_ok": "د T{src} جدول څخه T{dst} ته {count} کارتونه لیږدول شوي",
+    "tableau_to_tableau_bad": "نه شي کولای {count} کارت (((s) له T{src} څخه T{dst} ته انتقال کړي",
+    "foundation_to_tableau_one_card": "يواځې يو کارت له بنسټ څخه ټيبل ته ليږدول شي",
+    "foundation_empty": "بنسټ F{src} خالي دی",
+    "foundation_to_tableau_ok": "د بنسټ څخه کارت لیږدول شوی F{src} د جدول T{dst} ته",
+    "foundation_to_tableau_bad": "شما نه شي کولای foundation card پر tableau T{dst} ځای کړی",
+    "to_waste_or_stock": "د فاضله موادو یا ذخیره کولو لپاره نه لیږدول کیدی شي"
+  },
+  "outcome": {
+    "forfeit": "لوبه له لاسه ورکړه. وروستی سکور: {score} کارتونه په بنسټونو کې.",
+    "won": "مبارک شه، تاسو د کلونډایک سولیټیر ګټلی دی!",
+    "turn_limit": "د لوبې پای! تاسو د {max_turns} ګرځیدو اعظمي حد ته رسیدلي. سکور: {score} کارتونه په بنسټونو کې."
+  },
+  "board": {
+    "title": "=== د کلونډيک د یواځېتوب ===",
+    "turn": "په ګوته کړئ: {turn}/{max_turns}",
+    "stock": "د ذخیره: {stock} کارتونه",
+    "waste": "د کثافاتو د (W): {waste}",
+    "foundations_header": "بنسټونه:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "د ډاکټرې:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "شما {role} در بازی کلنل بلوتو هستید.\nهدف شما برنده شدن در دورهای بیشتری نسبت به حریف است.\nدر هر دور، دقیقاً {num_total_units} واحد را در زمینه‌های {field_names} تخصیص دهید.\nبازیکنی که واحدهای بیشتری را به یک زمینه اختصاص می‌دهد، آن زمینه را برنده می‌شود و بازیکنی که زمینه‌های بیشتری را برنده می‌شود، دور را برنده می‌شود.\nبه عنوان مثال، '[A7 B7 C6]' 7 واحد را به A، 7 واحد را به B و 6 واحد را به C اختصاص می‌دهد.",
+    "commander_alpha": "فرمانده آلفا",
+    "commander_beta": "فرمانده بتا"
+  },
+  "game_state": {
+    "header_round": "=== کلنل بلوتو - دور {current_round}/{num_rounds} ===\nدورهای برنده - فرمانده آلفا: {alpha_score}، فرمانده بتا: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nدور {current_round}\nفرمانده آلفا تخصیص داد: {p0_allocations}\nفرمانده بتا تخصیص داد: {p1_allocations}\n",
+    "winner_alpha": "{message}برنده: فرمانده آلفا",
+    "winner_beta": "{message}برنده: فرمانده بتا",
+    "tie": "{message}مساوی!"
+  },
+  "invalid_move": {
+    "wrong_format": "فرمت ورودی نامعتبر است. از فرمت زیر استفاده کنید: A:5, B:10, C:5",
+    "invalid_field": "نام زمینه نامعتبر است. زمینه‌های معتبر: {field_names}",
+    "wrong_allocation_value": "همه تخصیص‌ها باید اعداد صحیح غیرمنفی باشند.",
+    "incorrect_total_units": "شما باید دقیقاً {num_total_units} واحد را تخصیص دهید. مجموع فعلی: {current_sum}",
+    "good_allocations": "تخصیص خوب است."
+  },
+  "outcome": {
+    "winner_alpha": "فرمانده آلفا با نتیجه {score_0}-{score_1} پس از {num_rounds} دور برنده می‌شود!",
+    "winner_beta": "فرمانده بتا با نتیجه {score_1}-{score_0} پس از {num_rounds} دور برنده می‌شود!",
+    "draw": "بازی با نتیجه {score_0}-{score_1} پس از {num_rounds} دور به پایان می‌رسد!",
+    "early_winner_alpha": "فرمانده آلفا با نتیجه {scores_0}-{scores_1} (اکثریت به دست آمد) برنده می‌شود!",
+    "early_winner_beta": "فرمانده بتا با نتیجه {scores_1}-{scores_0} (اکثریت به دست آمد) برنده می‌شود!"
+  }
+}

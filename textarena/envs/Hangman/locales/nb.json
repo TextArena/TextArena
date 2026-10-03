@@ -1,0 +1,31 @@
+{
+  "_comment": "Norsk Bokmål-lokaliseringsfil for Hangman. Oversett bare verdier (høyre side).",
+  "_slots": {
+    "{board}": "Nøytralt tegnet brett (C00/C01-kolonnetitler, avslørte bokstaver, '_'-blanke felt); oversett ikke",
+    "{tries_left}": "Gjenstående feil forsøk (heltall)",
+    "{guessed}": "Kommaseparert liste over allerede gjettede bokstaver",
+    "{letter}": "Den gjettede bokstaven eller hele ordet (beholdt som skrevet)",
+    "{pct}": "Prosentandel av tegn som er gjettet riktig, formatert til 2 desimaler",
+    "{target_word}": "Det skjulte målordet"
+  },
+  "prompt": {
+    "intro": "Du spiller Hangman. Målet med spillet er å gjette ordet ved å gi ett-bokstavs-gjetninger eller hele ordet.\nHver kolonne er nummerert. Celler som må fylles med bokstaver, er representert med '_'.\n\nDet er to måter du kan svare på. Du kan gi ett-bokstavs-gjetninger i formatet '[L]', eller du kan gjette hele ordet i formatet '[LIGHT]'.\nHvis den gitte bokstaven er i ordet, vil den bli avslørt i rutenettet.\nHvis det gitte ordet er riktig, vinner du.\nMens du spiller, vil historien over dine valg bli lagt til nedenfor. Bruk informasjonen til å finne ut ordet og vinne.\nDu har 6 feil forsøk før spillet slutter.\n\n"
+  },
+  "board": {
+    "status": "Nåværende brett:\n{board}\nDu har {tries_left} forsøk igjen.\nGjettede bokstaver: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Ugyldig trekkformat. Du svarte ikke med en gyldig 'bokstav' eller 'ord'.",
+    "already_guessed": "Du gjettet bokstaven '{letter}' som allerede er gjettet."
+  },
+  "message": {
+    "wrong_word": "Ditt gjett av '{letter}' er ikke målordet.",
+    "letter_in": "Ditt gjett av {letter} er i ordet",
+    "letter_not_in": "Ditt gjett av {letter} er ikke i ordet. Du har {tries_left} liv igjen."
+  },
+  "outcome": {
+    "win_word": "Gratulerer! Du fullførte Hangman-gåten.",
+    "win_board": "Gratulerer! Du har fullført Hangman-gåten.",
+    "out_of_tries": "Du er tom for forsøk. Du gjettet {pct} prosent av tegnene riktig. Målordet var: {target_word}"
+  }
+}

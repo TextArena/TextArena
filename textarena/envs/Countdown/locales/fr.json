@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Vous jouez au jeu de nombres Countdown !\nObjectif : combinez les nombres à l’aide de +, -, *, / afin d’atteindre la cible.\nFormat de l’action : [i j op], où i et j sont des indices et op est l’opération.\nExemple : [0 2 *] multiplie le nombre à l’indice 0 par le nombre à l’indice 2.\nLes divisions doivent uniquement produire des nombres entiers."
+  },
+
+  "board": {
+    "header": "CIBLE : {target}\n\nNombres disponibles :\n{numbers}",
+    "best": "{observation}\n\nMeilleur résultat jusqu’à présent : {best_value} (distance : {distance})\nMeilleure expression : {best_expression}",
+    "history": "{observation}\n\nHistorique des coups :\n{moves}",
+    "progress": "{observation}\nScore de progression actuel : {progress}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format d’action invalide. Utilisez `[i j op]`, où i et j sont des indices et op vaut +,-,*,/",
+    "invalid_indices": "Indices invalides. Ils doivent être différents et compris entre 0 et {max_index}",
+    "invalid_operation": "Opération invalide (division par zéro ou résultat non entier)"
+  },
+
+  "outcome": {
+    "win": "Parfait ! La cible exacte a été trouvée : {target}",
+    "no_moves": "Plus aucun coup possible. Meilleur résultat : {best_value} (cible : {target})",
+    "turn_limit": "Limite de tours atteinte. Meilleur résultat : {best_value} (cible : {target})"
+  }
+}

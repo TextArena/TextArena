@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} u Chopsticks. Na vašoj šansi, odaberite jednu od sljedećih naredbi:\n  + Napad:  '[attack M O]'  gdje M=vaša ruka (0 ili 1), O=protivnikova ruka (0 ili 1).\n    - Broj prstiju protivnikove ruke se povećava za broj prstiju vaše ruke; ako je >=5, postaje 0.\n  + Podjela:   '[split L R]'  za redistribuciju ukupnog broja prstiju u L i R (L+R = vaš ukupni broj prstiju).\nOdgovorite s točno jednom od tih naredbi."
+  },
+  "board": {
+    "current_board": "Trenutna ploča:\nIgrač 0: {hands_0}\nIgrač 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Vaša ruka {my_idx} je mrtva.",
+    "opp_hand_dead": "Protivnikova ruka {opp_idx} je već mrtva.",
+    "split_sum": "Podjela mora biti jednaka {total}.",
+    "split_no_change": "Podjela mora promijeniti raspodjelu vaših ruku.",
+    "invalid_command": "Neispravan potez. Koristite “[attack M O]” ili “[split L R]”."
+  },
+  "game_action": {
+    "attack": "Igrač {player_id} napada ruku {opp_idx} Igrača {opp_id}: ide od {opp_val} do {new_val}.",
+    "split": "Igrač {player_id} dijeli u [{L}, {R}]."
+  },
+  "history": {
+    "entry": "Igrač {player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Obje protivnikove ruke su mrtve.",
+    "draw": "Dosegnuta je granica poteza."
+  }
+}

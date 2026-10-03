@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Mithu uka Snake ku {width}×{height} dikwesa.\nO kontrolla mithu {player_id}. Mbinu zinazohitajika: '[up]'/'[down]'/'[left]'/'[right]' (kana w/s/a/d).\nNdinga: zinga muthu mukulu zaidi au kuwa muthu mukulu zaidi na kupata pontu ya juu zaidi (mpaka zamu {max_turns} zamu)."
+  },
+  "board": {
+    "current": "Kibuka kia Utuminu: {board}",
+    "after_moves": "Kibuka kia Utuminu: {board}"
+  },
+  "game_action": {
+    "invalid_death": "O nhoka {player_id} iafú mu ku kamba o nguzu."
+  },
+  "outcome": {
+    "survived_win": "Mithu {player_id} akumukila; wengine wote akufa.",
+    "all_dead_simul": "O ji-anju joso ja fuile mu kithangana kimoxi.",
+    "outlived": "Mithu akumukila wengine wote.",
+    "all_dead": "O ji nhoka joso ja fu.",
+    "turn_limit": "Mpaka wa zamu umefikiwa - pontu bora inashinda usawa.",
+    "ranking": "{reason} Klasa ya mwisho ya vikundi (mbaya→bora): {groups}"
+  }
+}

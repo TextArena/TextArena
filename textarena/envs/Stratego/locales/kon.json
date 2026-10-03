@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "O wewe Mwana {player_id} na Stratego.\nKolokoso kwaku i kubaka bendera ya mpangi waku au kuzinga biloko bya mpangi waku byonso bya kusogea.\nKolokoso kwaku kuzingwa na bendera, bombi na biloko bikwama bya kolokoso kwaku bya ngazi zitofauti.\n\n### Mafundisho ya Kolokoso\n1. **Mafundisho ya Kuendesha:**\n   - Na zamu yako, unaweza kusogeza biloko kimoja kwa hatua moja hadi mraba ulio karibu (juu, chini, kushoto, au kulia) ambao tayari umejaa na biloko byako.\n   - Mfano: Biloko linaweza kusogeza kutoka A1 hadi B1 au A1 hadi A2 ikiwa B1 na A2 hazijawekwa na biloko bya mchezaji mwenyewe.\n   - Ikiwa biloko lililochaguliwa ni bombi au bendera, halinawezi kusogezwa.\n2. **Mapigano:**\n   - Ikiwa utasogeza hadi mraba uliochukuliwa na biloko la mpangi wako, basi mapigano yatatokea:\n     - Biloko lenye ngazi ya juu linashinda na kuzinga biloko la mpangi wako.\n     - Ikiwa ngazi ni sawa, biloko zote mbili zitatolewa kwenye ubao.\n     - **Matukio Maalum:**\n       - Bombi zinazima biloko zinazoshambulia isipokuwa Wachimbaji, ambao hutengeneza bombi.\n       - Vipelelezi vinaweza kushinda Marechal ikiwa Mpelelezi atashambulia kwanza lakini kupoteza kwa biloko zingine zote.\n3. **Malengo ya Kimkakati:**\n   - Tambua biloko la mpangi wako kupitia harakati zao na mapigano.\n   - Linda bendera yako wakati unajaribu kubaka bendera ya mpangi wako.\n   - Tumia Wapelelezi kwa ujanja ili kupata habari kuhusu biloko la mpangi wako na kushambulia zile dhaifu.\n\n### Jinsi ya Kufanya Hatua:\n1. Bainisha viwianishi vya biloko unalotaka kusogeza na sehemu yake ya kwenda.\n2. Tumia fomu: [A0 B0], ambapo A0 ni nafasi ya chanzo, na B0 ni sehemu ya kwenda.\n   - Mfano: Ili kusogeza biloko kutoka safu 0, safu 0 hadi safu 1, safu 0, ingiza [A0 B0].\n3. Hakikisha sehemu ya kwenda ni halali kulingana na sheria za kuendesha hapo juu.\n\n### Kumbukumbu Muhimu:\n- Ubao utaonyesha biloko byako na nafasi zao, mfano MN, MS.\n- Ubao pia utaonyesha nafasi zinazojulikana za biloko la mpangi wako bila kufichua ngazi zao, mfano ?.\n- Gridi zenye ~ ni maziwa na haziwezi kusogezwa.\n- Kama pendekezo, anza mchezo wako kwa kusogeza biloko linaloongoza ili kupata habari kuhusu biloko la mpangi wako. Mchezaji 0 na mchezaji 1 wana mstari wa mbele katika safu D na G mtawalia.\n\nHii ni hali ya sasa ya ubao:\n"
+  },
+  "board": {
+    "current_board": "Tala ya Bongwanza:\n\n{board}\nMikono Inayowezekana: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Fomu isiyofaa ya hatua. Mwana {player_id} hakuweka hatua kwa fomu [A0 B0].",
+    "invalid_coordinates": "Mbiso ya kuleka makasi. Mbazikisi {player_id} kasi panga mbone na nkolwa zilizo.",
+    "not_own_piece": "Muntu yina kebula {player_id} fwete balula mosi ya bitini na yandi.",
+    "scout_through_pieces": "Mutindu ya kusala mambu kele mbote ve. Muntu yina ke sala {player_id} lenda nata ve muntu na yandi na bitini yankaka.",
+    "scout_diagonal": "Fomati ya kisalu kele mbote ve. Muntu yina kebula {player_id} lenda nata ve muntu na nzila mosi ti yandi (scout) sambu na kuzenga nsinga to dikunzi.",
+    "non_scout_multi_square": "Ba-pièce yonso, katula kaka ba scout lenda tambula na konso mbala mosi.",
+    "move_into_lake": "Mutindu ya kusala mambu kele mbote ve. Muntu yina ke sala {player_id} lenda kota na dizanga ve.",
+    "move_onto_own_piece": "Mutindu ya kusala mambu kele mbote ve. Muntu yina ke sala yo {player_id} lenda kwenda na kitini na yandi mosi ve.",
+    "move_bomb_or_flag": "Fomati ya kisalu kele na ndilu ve. Muntu yina ke sala {player_id} lenda katula bombe to drapo mosi ve."
+  },
+  "game_action": {
+    "you_moved": "Umehamisha biloko kutoka {source} hadi {dest}.",
+    "opponent_moved": "Mwana {player_id} amehamisha biloko kutoka {source} hadi {dest}.",
+    "you_equal_ranks": "Umehamisha biloko kutoka {source} hadi {dest}. Biloko lililoshamulia lilikuwa {attacking_rank} na biloko la sehemu lilikuwa {target_rank}. Kwa kuwa ngazi ni sawa, biloko zote mbili zimepotea.",
+    "opponent_equal_ranks": "Mwana {player_id} amehamisha biloko kutoka {source} hadi {dest}. Biloko lililoshamulia lilikuwa {attacking_rank} na biloko la sehemu lilikuwa {target_rank}. Kwa kuwa ngazi ni sawa, biloko zote mbili zimepotea.",
+    "you_miner_defused": "Umehamisha biloko kutoka {source} hadi {dest}. Biloko lililoshamulia lilikuwa {attacking_rank} na biloko la sehemu lilikuwa {target_rank}. Kwa kuwa Wachimbaji wanaweza kutengeneza bombi, umeshinda mapigano.",
+    "opponent_miner_defused": "Mwana {player_id} amehamisha biloko kutoka {source} hadi {dest}. Biloko lililoshamulia lilikuwa {attacking_rank} na biloko la sehemu lilikuwa {target_rank}. Kwa kuwa Wachimbaji wanaweza kutengeneza bombi, umepoteza mapigano.",
+    "you_bomb_lost": "Umehamisha biloko kutoka {source} hadi {dest}. Biloko lililoshamulia lilikuwa {attacking_rank} na biloko la sehemu lilikuwa {target_rank}. Kwa kuwa biloko lililoshamulia si Mchimbaji, umepoteza mapigano.",
+    "opponent_bomb_won": "Mwana {player_id} amehamisha biloko kutoka {source} hadi {dest}. Biloko lililoshamulia lilikuwa {attacking_rank} na biloko la sehemu lilikuwa {target_rank}. Kwa kuwa biloko lililoshamulia si Mchimbaji, umeshinda mapigano.",
+    "you_spy_won": "Umehamisha biloko kutoka {source} hadi {dest}. Biloko lililoshamulia lilikuwa {attacking_rank} na biloko la sehemu lilikuwa {target_rank}. Kwa kuwa Mpelelezi alishambulia kwanza na sehemu ni Marechal, umeshinda mapigano.",
+    "opponent_spy_lost": "Mwana {player_id} amehamisha biloko kutoka {source} hadi {dest}. Biloko lililoshamulia lilikuwa {attacking_rank} na biloko la sehemu lilikuwa {target_rank}. Kwa kuwa Mpelelezi alishambulia kwanza lakini kupoteza kwa Marechal, umepoteza mapigano.",
+    "you_higher_won": "Umehamisha biloko kutoka {source} hadi {dest}. Biloko lililoshamulia lilikuwa {attacking_rank} na biloko la sehemu lilikuwa {target_rank}. Kwa kuwa biloko lililoshamulia lina ngazi ya juu kuliko sehemu, umeshinda mapigano.",
+    "opponent_higher_lost": "Mwana {player_id} amehamisha biloko kutoka {source} hadi {dest}. Biloko lililoshamulia lilikuwa {attacking_rank} na biloko la sehemu lilikuwa {target_rank}. Kwa kuwa biloko lililoshamulia lina ngazi ya juu kuliko sehemu, umepoteza mapigano.",
+    "you_lower_lost": "Umehamisha biloko kutoka {source} hadi {dest}. Biloko lililoshamulia lilikuwa {attacking_rank} na biloko la sehemu lilikuwa {target_rank}. Kwa kuwa biloko lililoshamulia lina ngazi ya chini kuliko sehemu, umepoteza mapigano.",
+    "opponent_lower_won": "Mwana {player_id} amehamisha biloko kutoka {source} hadi {dest}. Biloko lililoshamulia lilikuwa {attacking_rank} na biloko la sehemu lilikuwa {target_rank}. Kwa kuwa biloko lililoshamulia lina ngazi ya chini kuliko sehemu, umeshinda mapigano."
+  },
+  "outcome": {
+    "flag_captured": "Muntu ya kebula {player_id} mebaka drapo ya mbeni!",
+    "no_movable_pieces": "Mwana {winner_id} anashinda! Mwana {loser_id} hana biloko zaidi za kusogea."
+  }
+}

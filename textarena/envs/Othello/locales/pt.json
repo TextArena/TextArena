@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id} jogando com {colour} ({piece}) em um jogo de Othello.\nSeu objetivo é ter mais peças da sua cor no tabuleiro no final do jogo.\nNa sua vez, coloque uma peça de forma que ela flanqueie uma ou mais peças do seu oponente - em qualquer direção (horizontal, vertical ou diagonal) - entre a sua nova peça e outra peça sua existente. Todas as peças do oponente flanqueadas serão viradas para a sua cor.\nForneça sua jogada no formato '[row, col]'."
+  },
+  "board": {
+    "game_board": "Tabuleiro do Jogo:\n{board}",
+    "valid_moves": "{observation}\nJogadas válidas: {moves}",
+    "no_valid_moves_reset": "{observation}\nNenhuma jogada válida - você pode ter que pular.",
+    "no_valid_moves_step": "{observation}\nNenhuma jogada válida – você pode ter que pular.",
+    "scores_reset": "{observation}\nPlacar Atual - Preto: {black_count}, Branco: {white_count}\n",
+    "scores_step": "{observation}\nPlacar - Preto: {black_count}, Branco: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "A jogada deve ser do formato [row, col].",
+    "illegal": "Jogada ilegal. Jogadas válidas: {valid}"
+  },
+  "game_action": {
+    "skipped": "O Jogador {pid} teve que pular sua vez",
+    "played": "O Jogador {pid} ({piece}) jogou [{r}, {c}] virando {flipped} peça(s)"
+  },
+  "game_message": {
+    "must_skip": "O Jogador {pid} ({piece}) não tem jogadas válidas e deve pular."
+  },
+  "outcome": {
+    "black_wins": "Preto vence {black_count}-{white_count}.",
+    "white_wins": "Branco vence {white_count}-{black_count}.",
+    "draw": "Empate {black_count}-{white_count}."
+  }
+}

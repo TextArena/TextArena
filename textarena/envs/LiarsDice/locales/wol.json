@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Yaa ngone jàngoro {player_id} ci àdduna jàngoro {num_players} ci xeexu Liar's Dice.\nYëngu-yënguy xeex bi:\n- Ci tàmbali gi nga, am na ñaar:\n  1) Sakkal bidd bu bees, bu ñuul ci kaw gi walla bu ñuul ci wàll (walla ñaar ñepp) ci bidd bi ñeel; mbaa '[Bid: 3, 4]',\n  2) Woote bidd bi jiite ci nataal '[Call]'.\n\nBu la wootee:\n  - Bu limu ñaari wàll wi ci wàll wii ñeel bidd bi, jiite bidd bi jiiteel benn die.\n  - Ndaxte, jiite bidd bi jiiteel benn die.\nJàngoro ji ñeel 0 die dañu koo xeexal. Jàngoro ji ñeel ci xeex bi ngone moo jànge."
+  },
+  "board": {
+    "per_player": "\tJigéen {p}: {d}",
+    "new_round": "\nRonu bees - Wajj yu nekk: {dice_summary}\nWajj yu nekk ci sa xeex: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Player {current_player_id} woote! Limu wajj bi ñu yabal ci mboolaani wajj {face_value} mooy {count}, te duñu kawe ci {quantity}.\nPlayer {loser_id} (bidder bi ñu nekk) xaje wajj wi.",
+    "caller_loses": "Joueur {current_player_id} wax na! Limu ëmbaaru bopp {face_value} mooy {count}, ndax ≥ {quantity}.\nJoueur {loser_id} (ki wax) dañu ko ñakk benn dee."
+  },
+  "action": {
+    "bid_announce": "Jigéen {player_id} defar {quantity} bu nekk bu mel ni {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Dañu ko woo ci lu dul benn joxe-réew.",
+    "invalid_bid": "Jëfandikukat: {reason}",
+    "not_recognized": "Defar buñu dàkkibu ko, ndax ku ñu xam ko wëy di '[Bid: X, Y]' ni '[Call]'. Defar buñu jox: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Wàcce bu ñaari {new_quantity} iñuñu wëy di wàcce bu ñaari {current_quantity}.",
+    "face_lower": "Wàcce bu mel ni {new_face_value} iñuñu wëy di wàcce bu mel ni {current_face_value}.",
+    "identical": "Jëfandikukat bu nekk mooy jël li ñu joxe.",
+    "face_range": "Wàll wi ñu gis war a nekk ci diggante 1 ak 6."
+  },
+  "message": {
+    "eliminated_invalid": "Jëfandikukat {player_id} dañu ko génne ci jëf ju amul solo."
+  },
+  "outcome": {
+    "win": "Jigéen {winner} toy! Defar bu mel ni: {final_ranking}"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id}. Jy speel Sudoku.\nHier is die huidige staat van die Sudoku-rooster. Elke ry is genommer van 1 tot 9, en elke kolom is ook genommer van 1 tot 9.\nLeë selle word deur '.' verteenwoordig, en voorafgevulde selle bevat syfers van 1 tot 9.\n\nHuidige Sudoku-rooster:\nJou doel is om die leë selle in die 9x9-rooster te vul met syfers van 1 tot 9 sodat:\n1. Elke ry al die syfers van 1 tot 9 sonder herhaling bevat.\n2. Elke kolom al die syfers van 1 tot 9 sonder herhaling bevat.\n3. Elkeen van die nege 3x3-subroosters al die syfers van 1 tot 9 sonder herhaling bevat.\n\nReëls en Instruksies:\n1. **Moenie die aanvanklike getalle** in die rooster oorskryf nie.\n2. **Vul slegs** leë selle wat deur '.' verteenwoordig word.\n3. Jy mag op enige manier reageer wat jy verkies, maar maak seker dat jou reaksie die formaat van '[ry kolom getal]' bevat.\n4. **Maak seker** dat jou skuif nie teen die Sudoku-reëls oortree nie. Ongeldige skuif sal lei tot strawwe.\nVoorbeelde:\n- **Geldige Skuif**:\n  - Rooster-snippet voor skuif:\n  \n  - Skuif: `[5 3 7]`\n  - Verklaring: Die plasing van 7 by ry 5, kolom 3 oortree geen Sudoku-reëls nie.\n\n- **Ongeldige Skuif** (Oorskryf van 'n voorafgevulde sel):\n  - Rooster-snippet voor skuif:\n  \n  - Skuif: `[1 1 9]`\n  - Verklaring: Sel (1,1) is reeds gevul met 5. Jy kan dit nie oorskryf nie.\n\n- **Ongeldige Skuif** (Oortreding van Sudoku-reëls):\n  - Rooster-snippet voor skuif:\n  \n  - Skuif: `[1 3 5]`\n  - Verklaring: Die plasing van 5 in ry 1, kolom 3 oortree die reël aangesien 5 reeds in ry 1 bestaan.\n\nDie geskiedenis van jou skuif en gedagtes sal bygevoeg word soos jy meer rondtes speel. Gebruik die geskiedenis van jou skuif om jou besluitneming te verbeter deur die skuif wat jy al probeer het, te vermy. Sterkte!\n\n"
+  },
+  "board": {
+    "game_board": "Speelbord:\n{board}",
+    "board_state": "Bordstaat: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldige skuif-formaat. Speler {player_id} het nie met 'n geldige 'ry kolom getal' geantwoord nie.",
+    "out_of_bounds": "Ongeldige skuif. Speler {player_id} het probeer om {num} by ({row}, {col}) te plaas, wat buite die grense is.",
+    "overwrite": "Ongeldige skuif. Speler {player_id} het probeer om 'n voorafgevulde sel ({row}, {col}) oor te skryf.",
+    "violates_rules": "Ongeldige skuif. Speler {player_id} het probeer om {num} by ({row}, {col}) te plaas, wat teen die Sudoku-reëls oortree."
+  },
+  "outcome": {
+    "win": "Gelukwensing! Speler {player_id} het die Sudoku-raaisel voltooi.",
+    "turn_limit": "Die beurtgrens is bereik. Jy het {percent}% van die leë selle korrek gevul."
+  }
+}

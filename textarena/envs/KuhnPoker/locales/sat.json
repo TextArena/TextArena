@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Am ạdmi Player {player_id} menạ Kuhn Poker khelạrẹ tẹnạ {max_rounds} round khelạrẹ.\nKhelạrẹ niyam:\n- Kuhn Poker 3-card deck ạkhor J, Q, K ạkhor ạkhre (J sabse niche, K sabse upar)\n- Pratyek player {ante} chip ạnte ạdmi 1 card pratyek round ạpạw (not kạrạb, card ạkhor bina pratisthapan, tẹnạ ạpnạ opponent ạkhor saman card ạkhor nahi pạw ạskte).\n- Khelạrẹ {max_rounds} round tẹnạ chạlta rẹhẹ\n- Sabse ạdhi chip ạkhor ạpnạr ạkhor sange jite\nKriya Niyam:\n- '[check]': Bina bet ạkhor table ạpar pass kạr (kebạl bina bet ạkhor table ạpar)\n- '[bet]': 1 chip pot ạkhor ạdd kạr (kebạl bina bet ạkhor table ạpar)\n- '[call]': Virodhi ạkhor bet ạkhor 1 chip pot ạkhor ạdd kạr\n- '[fold]': Ạpnạr ạkhor hạth ạkhor chor ạdmi virodhi ạkhor win pot ạkhor dene"
+  },
+  "init_round": {
+    "round_start": "### {current_round} ᱨᱟᱣᱱᱰ ᱮᱦᱚᱵ ᱠᱟᱛᱮ {max_rounds} ᱨᱟᱣᱱᱰ ᱨᱮ. ᱟᱢᱟᱜ ᱠᱟᱨᱰ ᱫᱚ: '{player_card}'",
+    "available_actions": "ᱟᱢᱟᱜ ᱟᱞᱜᱟ ᱠᱟᱹᱢᱤ ᱠᱚ ᱫᱚ ᱦᱩᱭᱩᱜ ᱠᱟᱱᱟ: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "ᱮᱠᱥᱚᱱ ᱫᱚ [Check], [Bet], [Call], ᱟᱨ [Fold] ᱦᱩᱭ ᱟᱢᱟ.",
+    "not_legal": "ᱠᱟᱹᱢᱤ {legal_actions} ᱦᱩᱭᱩᱜ ᱞᱟᱹᱠᱛᱤ ᱾"
+  },
+  "action": {
+    "submit_move": "Player {player_id}, ᱠᱟᱹᱢᱤ ᱠᱚ ᱥᱚᱫᱚᱨ ᱠᱮᱫᱟᱭ: '[{move}]'.",
+    "valid_actions": "ᱟᱢᱟᱜ ᱟᱞᱜᱟ ᱠᱟᱹᱢᱤ ᱠᱚ ᱫᱚ ᱦᱩᱭᱩᱜ ᱠᱟᱱᱟ: {legal_actions}.",
+    "round_summary": "{reason} ᱱᱤᱛᱟᱜ ᱥᱠᱳᱨ: ᱯᱞᱮᱭᱟᱨ 0: '{player_0_chips}'; ᱯᱞᱮᱭᱟᱨ 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "ᱪᱷᱟᱰᱟᱣ: ᱠᱷᱮᱞᱚᱸᱰᱤ {winner} ᱨᱮᱭᱟᱜ {winner_card} ᱠᱷᱮᱞᱚᱸᱰᱤ {loser} ᱨᱮᱭᱟᱜ {loser_card} ᱠᱚ ᱦᱟᱨᱟᱣ ᱮᱫᱟ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤ {winner} {pot_value} ᱪᱤᱯᱥ ᱨᱮᱭᱟᱜ ᱯᱚᱴ ᱡᱤᱛᱟ᱾"
+  },
+  "outcome": {
+    "draw": "{max_rounds} ᱨᱩᱰ ᱨᱮᱱᱟᱜ ᱢᱟᱹᱪᱤ ᱨᱮ, ᱵᱟᱱᱟᱨ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ ᱠᱚᱣᱟᱜ ᱢᱤᱫ ᱞᱮᱠᱟᱱ ᱪᱤᱠᱤᱥ ᱛᱟᱦᱮᱸ ᱠᱟᱱᱟ ᱾",
+    "round_win": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱯᱷᱚᱞᱰ ᱟᱠᱟᱱᱟ ᱾",
+    "winner_player0": "ᱡᱚᱛᱚ {max_rounds} ᱨᱩᱰ ᱨᱮ ᱢᱟᱨᱮ ᱪᱤᱯᱥ ᱧᱟᱢ ᱠᱟᱛᱮ ᱠᱷᱮᱞᱚᱱᱰᱤᱭᱟᱹ 0 ᱫᱚᱭ ᱵᱚᱞ ᱟᱫᱟ ᱾",
+    "winner_player1": "ᱡᱚᱛᱚ {max_rounds} ᱨᱩᱰ ᱨᱮ ᱢᱟᱨᱮ ᱪᱤᱯᱥ ᱧᱟᱢ ᱠᱟᱛᱮᱜ ᱠᱷᱮᱞᱚᱱᱰᱤᱭᱟᱹ 1 ᱫᱚᱭ ᱵᱚᱞ ᱟᱫᱟ ᱾"
+  }
+}

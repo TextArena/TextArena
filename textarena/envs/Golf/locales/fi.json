@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (korttipeli) lokaalitiedosto. ÄLÄ käännä avaimia (vasen puoli). Käännä vain arvot (oikea puoli). Säilytä jokainen {placeholder} täsmälleen sellaisenaan. Älä koskaan käännä toimintotokeneja ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), korttien etikettejä (A, 2-10, J, Q, K), maan symboleja, kirjaimia X/Y käytettyjä rivi/sarakepaikkojen tokenina tai numeerisia pistemääriä/paikkoja. Säilytä ASCII-ruudukon asettelu (väli, sarakkeiden numerot, '?', 'Col', 'Row' -kohdistus) ehjänä, jotta pelilauta pysyy luettavana.",
+  "_slots": {
+    "{player_id}": "Pelaajan numero, esim. 0 tai 1",
+    "{pid}": "Pelaajan numero, esim. 0 tai 1",
+    "{winner}": "Pelaajan numero, jolla on alin pistemäärä",
+    "{score}": "Numeerinen pistemäärä",
+    "{card}": "Kortin etiketti, kuten A, 10, K tai Q",
+    "{new}": "Kortin etiketti, joka asetettiin ruudukkoon",
+    "{old}": "Kortin etiketti, joka poistettiin ruudukosta",
+    "{row}": "Rivinumero",
+    "{col}": "Sarakkeen numero",
+    "{max_row}": "Suurin kelvollinen rivinumero",
+    "{max_col}": "Suurin kelvollinen sarakkeen numero",
+    "{reason}": "Valmiiksi renderöity lause, joka kuvaa, miksi viimeinen kierros alkoi",
+    "{n}": "Rivinumero, joka näytetään ruudukon rivin alussa",
+    "{cards}": "Valmiiksi renderöidyt, asettelultaan herkät solut yhdestä ruudukkorivistä",
+    "{hand}": "Valmiiksi renderöity pelaajan ruudukkolohko",
+    "{discard}": "Kortin etiketti, joka on päällimmäisenä poistopinossa, tai sana 'ei mitään'",
+    "{options}": "Valmiiksi renderöity rivi, joka lukee käytettävissä olevat toiminnot",
+    "{scores}": "Valmiiksi renderöity, pelaajakohtainen lista lopullisista pistemääristä"
+  },
+  "player_prompt": {
+    "intro": "Pelaat Golf (Korttipeli) -peliä - Pelaaja {player_id}.\nTavoite: Saavuta alin kokonaispistemäärä tässä yksittäisessä kierroksessa. Jos sarakkeet jakavat saman arvon, ne lasketaan yhteen nollana.\nKorttien arvot: A=1, 2-10=kasvon arvo, J/Q=10, K=0\n\nToiminnot (käytä tarkalleen oikeita sulkuja):\n- '[draw]' - Nosta pakasta\n- '[take]' - Ota poistopinosta\n- '[swap X Y]' - Vaihda nostettu kortti paikkaan X (rivi) Y (sarake)\n- '[discard]' - Hylkää nostettu kortti\n"
+  },
+  "board": {
+    "drew": "Nostit: {card}\nNyt sinun täytyy [swap X Y] tai [discard] se.",
+    "took": "Otitsit: {card} poistopinosta\nSinun täytyy [swap X Y] sen kanssa (et voi hylätä).",
+    "peeked": "Kurkistit paikkaan ({row},{col}): {card}",
+    "turn_view": "Kätesi:\n{hand}\nPoistopino: {discard}\n{options}",
+    "none": "Ei mitään"
+  },
+  "options": {
+    "final_turns": "Viimeiset vuorot! Vaihtoehdot: [draw], [take], [peek X Y]",
+    "draw": "Vaihtoehdot: [draw], [take]",
+    "must_swap": "Sinun täytyy: [swap X Y] (et voi hylätä kortteja poistopinosta)",
+    "swap_or_discard": "Sinun täytyy: [swap X Y] tai [discard]"
+  },
+  "hand": {
+    "no_cards": "Ei kortteja",
+    "header": "  Sarake:   1    2    3",
+    "row": "Rivi {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Pelaaja {pid} vaihtoi kortin {old} korttiin {new} paikassa ({row},{col})",
+    "discarded": "Pelaaja {pid} hylkäsi {card}"
+  },
+  "message": {
+    "deck_empty": "Pakka on tyhjä! Peli päättyy välittömästi.",
+    "knocked": "Pelaaja {pid} koputti! Jokainen muu pelaaja saa yhden vuoron lisää.",
+    "final_round": "Pelaaja {pid} {reason}! Jokainen muu pelaaja saa yhden vuoron lisää."
+  },
+  "reason": {
+    "all_revealed": "on paljastanut kaikki korttinsa"
+  },
+  "invalid": {
+    "wrong_action": "Käytä tarkalleen yhtä sulkeista toimintoa: [draw], [take], [swap X Y], [discard], [knock] tai [peek X Y]",
+    "discard_empty": "Poistopino on tyhjä!",
+    "must_draw_first": "Sinun täytyy ensin [draw], [take], [knock] tai [peek X Y]",
+    "cannot_discard_taken": "Et voi hylätä korttia, jonka otit poistopinosta. Sinun täytyy vaihtaa se.",
+    "have_drawn_card": "Sinulla on nostettu kortti. Sinun täytyy [swap X Y] tai [discard] se.",
+    "need_drawn_swap": "Sinun tarvitsee nostettu kortti vaihtaa.",
+    "need_drawn_discard": "Sinun tarvitsee nostettu kortti hylätä.",
+    "out_of_bounds": "Paikka on ulkopuolella. Käytä riviä 1-{max_row}, saraketta 1-{max_col}",
+    "knock_with_card": "Et voi koputtaa nostetun kortin kanssa. Täytä vuorosi ensin.",
+    "already_knocked": "Joku on jo koputtanut tässä kierroksessa.",
+    "already_revealed": "Tuo kortti on jo paljastettu!"
+  },
+  "summary": {
+    "full": "Peli on päättynyt! Pelaaja {winner} voittaa {score} pisteellä!\n\nLopulliset pisteet:\n{scores}",
+    "line": "Pelaaja {pid}: {score} pistettä\n"
+  },
+  "board_str": {
+    "title": "=== GOLF-PELI ===",
+    "discard": "Poistopino: {card}",
+    "knocked": "Pelaaja {pid} on koputtanut!",
+    "player_header": "Pelaaja {pid} (Pisteet: {score}):"
+  }
+}

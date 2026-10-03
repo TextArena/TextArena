@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ön {color} színnel játszik a Breakthrough játékban. Ön {direction} irányban mozog egy {board_size}x{board_size} méretű táblán.\nA következő lépésnél egyetlen bábut mozgathat egy lépést előre vagy átlósan előre.\nEgy bábu csak akkor mozoghat átlósan, ha egy ellenfél bábuja van ott, és csak egy ilyen elfoglalt négyzetbe léphet be átlós lépéssel.\nAmikor egy olyan négyzetbe lép be, ahol egy ellenfél bábuja van, elfogja azt, és az ellenfél bábuja véglegesen eltűnik a tábláról.\nHasználjon UCI-szerű jelölést zárójelekben, például [a2a3] a a2-ről a3-ra való mozgáshoz.\n* Az 'a' a bal szélső oszlopnak felel meg, az '1' az alsó sor (a fehér szemszögéből).\n* A fekete kezdősora a felső sor (8. sor egy 8x8-as táblán), a fehér kezdősora az alsó sor (1. sor egy 8x8-as táblán).\nAz első játékos, akinek a bábuja eléri az ellenfél kezdősorát, nyer. Ha az összes bábuja elfogásra kerül, veszít."
+  },
+  "invalid_move": {
+    "wrong_format": "Kérjük, használjon zárójeles algebrai jelölést, például [a2a3].",
+    "out_of_bounds": "A lépés a tábla határain kívül van.",
+    "illegal": "Ez a lépés nem követi a Breakthrough szabályait, vagy nem az Ön bábuja."
+  },
+  "game_action": {
+    "moved": "A {player_id}. játékos {move_str} ({piece}) lépést tesz."
+  },
+  "outcome": {
+    "white_reached": "A fehér elérte a fekete kezdősorát.",
+    "black_reached": "A fekete elérte a fehér kezdősorát.",
+    "white_captured": "Az összes fehér bábu elfogásra került.",
+    "black_captured": "Az összes fekete bábu elfogásra került.",
+    "no_moves": "A {player_id}. játékosnak nincs több lépése."
+  }
+}

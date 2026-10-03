@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Siz Chopsticks-də Oyunçu {player_id}-siniz. Sizin növbənizdə, aşağıdakılardan birini seçin:\n  + Hücum:  '[attack M O]'  burada M=sizin əliniz (0 və ya 1), O=rəqib əli (0 və ya 1).\n    - Rəqibin əlindəki say artar, əgər >=5 olsa, 0 olur.\n  + Bölünmə:   '[split L R]'  barmaqlarınızı L və R-yə yenidən paylamaq üçün (L+R = sizin ümumi).\nCavab verin, məhz bu əmrlərdən birini."
+  },
+  "board": {
+    "current_board": "Cari Taxta:\nOyunçu 0: {hands_0}\nOyunçu 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Sizin əliniz {my_idx} ölüdür.",
+    "opp_hand_dead": "Rəqib əli {opp_idx} artıq ölüdür.",
+    "split_sum": "Bölünmə {total}-a bərabər olmalıdır.",
+    "split_no_change": "Bölünmə əlinizdəki paylanmanı dəyişdirməlidir.",
+    "invalid_command": "Yanlış hərəkət. “[attack M O]” və ya “[split L R]” istifadə edin."
+  },
+  "game_action": {
+    "attack": "P{player_id} P{opp_id}-in əlinə {opp_idx} hücum edir: {opp_val}-dan {new_val}-a gedir.",
+    "split": "P{player_id} [{L}, {R}] bölünür."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Hər iki rəqib əli ölüdür.",
+    "draw": "Növbə limiti çatdırıldı."
+  }
+}

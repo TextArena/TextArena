@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Jokoaren hasiera: Tronpeten jantzia: {trump_suit} (tronpeten karta: {trump_str}).",
+    "no_trump_card": "Ez dago"
+  },
+  "player_prompt": {
+    "intro": "Jokalari {player_id} zara Alemaniar Whisten.\n{phase_info}\n{hand_size} karta daukazu.\nKarta bat joka ezazu '[play N]'rekin, non N zure eskuaren posizioa den (adibidez '[play 3]').",
+    "phase_learning": "Ikasketa FASEA: trikimailu bakoitzaren irabazleak karta irekia hartzen du eta galtzaileak hurrengo karta ateratzen du.",
+    "phase_playing": "JOKATZEKO FASEA: karta-sorta agortuta dago. Oraindik aurrera egindako triku guztiak garaipenerantz kontatzen dira."
+  },
+  "next_card": {
+    "playing_phase": "Ez dago eskaintzako kartarik - jokatzeko fasea hasi da.",
+    "deck_empty": "Mahaiak hutsik daude, ez dago karta bakar bat ere.",
+    "available": "Txartel bat eskaintzen dizut: {card}",
+    "available_trump": "Eskainitako karta: {card} (TRIUNFO)"
+  },
+  "invalid_move": {
+    "wrong_format": "Mugimendu ezegokia. Erabili '[play N]' zure eskuetan dagoen N-garren karta jokatzeko.",
+    "bad_position": "Karta posizio hori ez dago. {hand_size} karta daukazu.",
+    "must_follow_suit": "Pala jarraitu behar duzu eta {lead_suit} karta jokatu.",
+    "invalid_play": "Kartel hori ezin da erabili."
+  },
+  "game_action": {
+    "played": "{player_id} jokalariak {card} jokatu zuen."
+  },
+  "trick": {
+    "won": "{winner_id} jokalariak irabazten du {card} jokalariarekin.",
+    "won_learning": "{winner_id} jokalariak {card}arekin irabazten du eta karta aurpegia gorantz hartzen du."
+  },
+  "phase": {
+    "learning_complete": "Karta-sorta agortuta dago. Ikasketa-fasea amaitu da - gainerako triku guztiak garaipenerantz kontatzen dira."
+  },
+  "draw": {
+    "winner_received": "Trikimaila irabazi duzu eta {card} jaso duzu.",
+    "loser_received": "Trikimaila galdu duzu eta {card} karta atera duzu barajetik.",
+    "winner_preview": "Hurrengo karta {card} da."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Orain arte irabazitako trikimailuak - 0 jokalari: {tricks0}, 1 jokalari: {tricks1}",
+    "scores_playing": "Puntuazio trikimailuak - Jokalari 0: {tricks0}, Jokalari 1: {tricks1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Fase: {phase} ({remaining_cards} karta kartetan geratzen dira)"
+  },
+  "hand": {
+    "no_cards": "Ez dago txartelik.",
+    "no_cards_in_hand": "Ez dago txartelik.",
+    "header": "Zure eskua.",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation} {suit} {trump_indicator}: ez da ezertarako balio.",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Ez da kartarik jokatu oraindik triku honetan.",
+    "header": "Uneko trikua:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Jokalari {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Jokoa ez da hasi.",
+    "header": "=== ALEMANIAR WHIST JOKOA ===",
+    "phase": "{observation} Fase: {phase}",
+    "trump_suit": "{observation} Trump jantzia: {trump_suit}",
+    "trump_card": "{observation} Tronpetako txartel bat: {card}",
+    "cards_left": "{observation} Kartak utziak: {count}",
+    "next_card": "{observation} Hurrengo karta irabazlearentzat: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nUneko trikimaila:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Jokalari {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} Jokalari {player_id}: {scoring} puntuazio trikimailuak ({tricks} guztira), {hand_size} kartak eskuan"
+  },
+  "outcome": {
+    "summary": "Ikasketa fasea - Jokalari 0: {l0}, Jokalari 1: {l1}. Jokatzeko fasea - Jokalari 0: {p0}, Jokalari 1: {p1}. Jokalari {winner_id} irabazten du {winner_tricks} puntuaketa trikimailuekin!"
+  }
+}

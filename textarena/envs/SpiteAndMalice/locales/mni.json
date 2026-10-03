@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Nangdi Player {player_id} ni two-player game Spite and Malice da khelgi khongjang. Nangdi lakpa ni payoff pile khongjang amta da khelgi khongjang.\n\n### Khelgi Khongjang:\n- Lakpa ni payoff pile khongjang amta da center piles da khelgi khongjang.\n- Nangdi khelgi khongjang amta da mang khang thum da:\n  1. Nangdi **hand** (nangdi khongjang amta 5 khang amta da).\n  2. **Payoff pile da top card**.\n  3. **Discard piles da top card**.\n\n### Khelgi Rules:\n- Nangdi khelgi khongjang amta da center pile da khelgi khongjang amta **one rank higher** da top card da (center piles Ace da khelgi khongjang amta Queen da; Kings da wild - amta da khelgi khongjang amta card da amta rank sequence da changba. Amuk Kings da 4 da khelgi khongjang amta, amta Kings da 5 da rank da amta 6 da khelgi khongjang amta).\n- Nangdi khelgi khongjang amta da mang khang khelgi khongjang amta, nangdi **discard khang** da discard piles da khelgi khongjang amta.\n- Center pile da Queen da khelgi khongjang amta, amta da khelgi khongjang amta.\n- Rank order da: A=1, 2=2, ..., 9=9, J=10, Q=11, K da wild.\n\n### Actions:\n1. **Draw**: Nangdi khongjang amta da, draw khang da fill hand da 5 khang. Enter **[draw]** da begin.\n2. **Play khang**: Khelgi khang da, specify khang da center pile da: **[play A♠ 0]** (khang 'A♠' da khang da '0' da center pile index).\n3. **Discard**: Nangdi khelgi khongjang amta da mang khang khelgi khongjang amta, discard khang da hand da discard pile da khelgi khongjang amta. Enter **[discard A♠ 1]** (khang 'A♠' da khang da '1' da discard pile index). Amuk khang da payoff pile da discard khongjang amta. Nangdi khelgi khongjang amta da hand da khang da discard khongjang amta.\n\n"
+  },
+  "board": {
+    "current_board": "ꯍꯧꯈꯤꯕ ꯊꯣꯡꯒꯥꯜ:\n\n{board}\nꯃꯤꯆꯠ ꯇꯧꯕ ꯌꯥꯕ ꯊꯧꯔꯝꯁꯤꯡ: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- সেন্তর পাইলশিং -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- ꯃꯤꯆꯠ {player_id} ꯒꯤ ꯌꯦꯠ ---\n",
+    "payoff": "{observation}ꯄꯦꯌꯣꯐ ꯊꯥꯔꯝ (ꯃꯊꯛ ꯊꯥꯕ): {top_card}, ꯄꯦꯌꯣꯐ ꯊꯥꯔꯝ ꯆꯥꯎꯕ: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}ꯗꯤꯁꯀꯥꯔꯗ ꯊꯥꯔꯝꯁꯤꯡ: {discard}\n",
+    "empty": "মশিং য়াওদে"
+  },
+  "game_message": {
+    "no_cards_left": "অদোম্না শেল পীবা য়াবগী কার্দশিং লৈতে। নহাক্কী মখুৎতা লৈবা কার্দনা মখাগী অসিদগী লৌথোকপা য়াই হায়বসি নিংশিংবীয়ু: 1. নঙোন্দা লৈরিবা ** হাত**, 2. নখোয়না ফংলিবশিংগী পিল অদুদা য়াওরিবা খ্বাইদগী ৱাংবা কার্দ্দু. 3. নখোয়গী দিস্কর্প তৌরবা পিল অমহেক্তগী খ্বাইদগী ৱাংনা লৈবা কার্ডদি৷ "
+  },
+  "invalid_move": {
+    "wrong_format": "শান্নরোই {player_id}না স্ক্বার ব্রেকেটতা ভেলিদ ওইবা খোঙথাং অমগা লোয়ননা পাউখুম পীখিদে।",
+    "invalid_play": "ꯃꯤꯆꯠ ꯇꯧꯕ ꯌꯥꯕ ꯊꯧꯔꯝ ꯅꯠꯇꯦ. ꯃꯤꯆꯠ {player_id} ꯂꯦꯇꯕ {card} ꯊꯥꯕ {index} ꯊꯥꯔꯝ ꯃꯊꯛꯇ.",
+    "discard_from_payoff": "শান্নরোই {player_id}না পেয়ফ পিলদগী কার্দ অমা লৌথোক্নবা হোৎনখি।",
+    "discard_not_in_hand": "শান্নরোই {player_id}না খুৎতা য়াওদবা কার্দ অমা লৌথোক্নবা হোৎনখি।",
+    "wrong_move_type": "চৎনদবা খোঙথাং মখল। শান্নরোই {player_id}না চৎনবা য়াবা খোঙচৎ অমগা লোয়ননা পাউখুম পীদে."
+  },
+  "game_action": {
+    "you_drew": "Nangna card-tu khoidi hanbi.",
+    "opponent_drew": "শান্নরোই {player_id}না কার্দশিং লৌখি।",
+    "you_played": "Nangdi khelgi {card} da center pile {index} da.",
+    "opponent_played": "Player {player_id} na khelgi {card} da center pile {index} da.",
+    "you_discarded": "অহান তুমি {card} কাৰ্ডশীনা ডিস্কাৰ্ড পাইল {index} তা পোখিবা অহান্বা, অমসুং অহান তুমি নং খেলোইগী টার্ন পুক্খিবা অহান্বা। অহান টার্ন তুমি অন্য কোনো কার্যবিধি গৃহীত করা হবে না। খেলোই {next_player_id} পরবর্তী টার্ন পাইবা অহান্বা।",
+    "opponent_discarded": "Player {player_id} discarded {card} to discard pile {index}, which also means they finished their turn. No further actions of Player {player_id} is considered for this turn. Player {next_player_id}, you will go next. Please enter your action in the format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "ꯃꯤꯆꯠ {current_player} ꯂꯦꯇꯕ ꯄꯦꯌꯣꯐ ꯊꯥꯔꯝ ꯂꯣꯏꯔꯕ! ꯃꯤꯆꯠ {current_player} ꯂꯦꯟꯕꯦ!",
+    "deadlock_player_0": "ꯗꯦꯗꯂꯣꯛ ꯊꯤꯡꯈꯤ! ꯃꯤꯆꯠ 0 ꯂꯦꯟꯕꯦ {player_0_payoff} ꯊꯥꯕ ꯂꯣꯏꯔꯕ ꯃꯤꯆꯠ 1 ꯒꯤ {player_1_payoff} ꯊꯥꯕ ꯃꯊꯛꯇ.",
+    "deadlock_player_1": "ꯗꯦꯗꯂꯣꯛ ꯊꯤꯡꯈꯤ! ꯃꯤꯆꯠ 1 ꯂꯦꯟꯕꯦ {player_1_payoff} ꯊꯥꯕ ꯂꯣꯏꯔꯕ ꯃꯤꯆꯠ 0 ꯒꯤ {player_0_payoff} ꯊꯥꯕ ꯃꯊꯛꯇ.",
+    "deadlock_tie": "ডেডলক পৌছাইবা অহান টাই অহান্বা! অনিংগী খেলোইদি {player_0_payoff} কাৰ্ডশীনা অচুম্বা অহান্বা। খেলোই {current_player} ফলস্বরূপ জয় পাইবা অহান্বা।"
+  }
+}

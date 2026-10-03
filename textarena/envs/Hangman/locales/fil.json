@@ -1,0 +1,31 @@
+{
+  "_comment": "Filipino na lokasyon para sa Hangman. Ang mga susi (kaliwang bahagi) ay nakapirme; isalin lamang ang mga halaga (kanang bahagi). Panatilihin ang bawat {placeholder} nang walang pagbabago.",
+  "_slots": {
+    "{board}": "Neutral na rendered na board (C00/C01 na mga header ng column, nabunyag na mga letra, '_' blanks); huwag isalin",
+    "{tries_left}": "Natitirang mga maling pagtatangka (integer)",
+    "{guessed}": "Listahan ng mga letra na naka-comma na nauna nang naka-guess",
+    "{letter}": "Ang letra na naka-guess o buong salita (napanatili bilang naka-type)",
+    "{pct}": "Porsyento ng mga karakter na naka-guess nang wasto, na na-format sa 2 desimal",
+    "{target_word}": "Ang nakatagong target na salita"
+  },
+  "prompt": {
+    "intro": "Ikaw ay naglalaro ng Hangman. Ang layunin ng laro ay mahulaan ang salita sa pamamagitan ng pagbibigay ng mga isang letra na mga hula o ang buong salita.\nAng bawat column ay may numero. Ang mga cell na kailangang mapunan ng mga letra ay kinakatawan ng '_'.\n\nMay dalawang paraan ka na maaaring sumagot. Maaari kang magbigay ng mga isang letra na mga hula sa format ng '[L]', o maaari kang hulaan ang buong salita sa format ng '[LIGHT]'.\nKung ang ibinigay na letra ay nasa salita, ito ay mabubunyag sa grid.\nKung ang ibinigay na salita ay wasto, ikaw ay panalo.\nHabang naglalaro ka, ang kasaysayan ng iyong mga pagpipilian ay idaragdag sa ibaba. Gamitin ang impormasyon upang mahulaan ang salita at manalo.\nMayroon kang 6 na maling pagtatangka bago matapos ang laro.\n\n"
+  },
+  "board": {
+    "status": "Kasalukuyang board:\n{board}\nMayroon kang {tries_left} na pagtatangka pa.\nMga letra na naka-guess: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Hindi wastong format ng pagkilos. Hindi ka sumagot ng wastong 'letra' o 'salita'.",
+    "already_guessed": "Hulaan mo ang letra '{letter}' na nauna nang naka-guess."
+  },
+  "message": {
+    "wrong_word": "Ang iyong hula ng '{letter}' ay hindi ang target na salita.",
+    "letter_in": "Ang iyong hula ng {letter} ay nasa salita",
+    "letter_not_in": "Ang iyong hula ng {letter} ay hindi nasa salita. Mayroon kang {tries_left} na buhay pa."
+  },
+  "outcome": {
+    "win_word": "Binabati kita! Nakumpleto mo ang puzzle ng Hangman.",
+    "win_board": "Binabati kita! Nakumpleto mo ang puzzle ng Hangman.",
+    "out_of_tries": "Ubos ka na ng pagtatangka. Hulaan mo ang {pct} porsyento ng mga karakter nang wasto. Ang target na salita ay: {target_word}"
+  }
+}

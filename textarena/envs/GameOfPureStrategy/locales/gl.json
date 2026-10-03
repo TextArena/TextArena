@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Eres o Xogador {player_id} nun partido de GameOfPureStrategy.\n- Tes as 13 cartas A-K; cada unha pode ser usada unha vez.\n- Cada rolda revélase unha carta de premio. Xoga exactamente UNHA carta escribindo algo que conteña un token entre corchetes como '[Q]', '[10]', '[2]' ...\n- A carta máis alta gaña o premio (máis o acumulado). Os empates envían o premio ao bote para a seguinte rolda.\n- O total máis alto despois de 13 roldas gaña."
+  },
+  "round": {
+    "announce": "### Rolda {round}/13 - Premio: {prize}  (valor {worth})"
+  },
+  "board": {
+    "hand": "A túa man restante: {hand}"
+  },
+  "invalid_move": {
+    "wrong_format": "A acción debe conter exactamente UN token de carta entre corchetes.",
+    "card_not_held": "Xa non tes esa carta."
+  },
+  "message": {
+    "bids": "Ofertas: P0 {card0} vs P1 {card1} - ",
+    "p0_wins": "{observation}O Xogador 0 gaña {pot_value}.",
+    "p1_wins": "{observation}O Xogador 1 gaña {pot_value}.",
+    "tie": "{observation}Empate -> bote agora {carry_pot}.",
+    "scores": "Puntuacións -> P0:{score0}  P1:{score1}"
+  },
+  "outcome": {
+    "p0_wins": "P0 {s0} vs P1 {s1}",
+    "p1_wins": "P1 {s1} vs P0 {s0}",
+    "draw": "Ambos puntuaron {s0}"
+  }
+}

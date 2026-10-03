@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Ndaipóri gueteri kuatia'atã.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Teku'aíva vs Dealer\n\n📖 TEMBI'U OVERVIEW:\n• Ore reko {start_chips} ficha\n• Teku'aíva peteĩ deck 52 carta (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Ore ñañepyrũ Dealer (casa)\n• Oreko rire oiko Ultimate Texas Hold'em estructura: ore post ANTE ha BLIND bets, reko 2 carta oculta, oiko PLAY bets opytáva, ore revela carta comunitaria ha comparo ore mejor 5-carta mano contra Dealer. Ore objetivo ore maximizar ganancias (oreko mejor mano), ore minimizar pérdidas (oreko peor mano).\n• Tembi'u opa oreko 0 ficha térã below oreko rire round (DERROTA) térã oreko 1000 round ficha (VICTORIA)\n\n💰 BETTING STRUCTURA:\n• ANTE: Obligatorio ${ante} bet oreko round\n• BLIND: Obligatorio ${ante} bet oreko round\n• PLAY: Opcional bet gameplay. Oreko rire round, ore pudi oreko SOLO UNA ore siguiente: (${ante4} si oreko PRE-FLOP, ${ante2} si oreko FLOP, térã ${ante} si oreko RIVER. Ore pudi oreko fold RIVER, ore renuncio ore mano, ha ore no bet.)\n\n🎴 CARTA DEALING:\n• Ore reko 2 carta visible (ore carta oculta)\n• Dealer reko 2 carta oculta (oculta ore)\n• 5 carta comunitaria oreko face-down inicialmente\n• Carta comunitaria ore revela progresivamente gameplay\n\n🏆 DEALER CALIFICACIÓN:\n• Dealer oreko tener al menos un PAR (2 carta misma categoría) calificar, usando 2 carta ore mano ha 5 carta comunitaria.\n• Dealer calificación afecta betting resultados, como ore explico después.\n\n🎮 TEMBI'U FASES & ACCIONES:\n📋 PRE-FLOP:\n  • Acciones: [4x] (${ante4}) térã [check]\n  • [4x]: Coloca ${ante4} PLAY bet, revela primera 3 carta comunitaria\n  • [check]: No coloca bet adicional, revela primera 3 carta comunitaria\n\n📋 FLOP:\n  • Si 4x bet coloca: Solo [skip] disponible (auto-revela última 2 carta comunitaria)\n  • Si no 4x bet: [2x] (${ante2}) térã [check]\n  • [2x]: Coloca ${ante2} PLAY bet, revela última 2 carta comunitaria\n  • [check]: No coloca bet adicional, revela última 2 carta comunitaria\n\n📋 RIVER:\n  • Si 4x térã 2x bet coloca: Solo [skip] disponible (auto-procede showdown)\n  • Si no PLAY bet anterior: [1x] (${ante}) térã [fold]\n  • [1x]: Coloca ${ante} PLAY bet, procede showdown\n  • [fold]: Renuncia mano, pierde ANTE ha BLIND bets\n\n📋 SHOWDOWN:\n  • Todas cartas reveladas ha evaluadas\n  • Mejor 5-carta mano desde 7 cartas (2 carta oculta + 5 carta comunitaria)\n  • Bets liquidados según reglas pago\n\n💎 BET PAGO:\n📊 ANTE BET:\n  • Dealer no califica: EMPATE (bet devuelto)\n  • Dealer califica ha ore gana: 1:1 pago (bet + ganancias)\n  • Dealer califica ha ore pierde: Bet perdido\n  • Empate: EMPATE (bet devuelto)\n\n📊 BLIND BET:\n  • No afectado por Dealer calificación\n  • Ore gana: Bet devuelto ha pago adicional según mano fuerza\n  • Ore pierde: Bet perdido\n  • Empate: EMPATE (bet devuelto)\n\n📊 BLIND BET PAGO TABLA:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Menos que Straight: No pago adicional\n\n📊 PLAY BET:\n  • No afectado por Dealer calificación\n  • Comparación directa: Ore mejor mano vs Dealer mejor mano\n  • Ore gana: 1:1 pago (bet + ganancias)\n  • Ore pierde: Bet perdido\n  • Empate: EMPATE (bet devuelto)\n\n🎯 POKER MANO RANKINGS (Mejor a Peor):\n  1. Royal Flush: A-K-Q-J-10 misma categoría\n  2. Straight Flush: 5 carta consecutiva misma categoría\n  3. Four of a Kind: 4 carta misma categoría\n  4. Full House: 3 carta misma categoría + 2 carta misma categoría\n  5. Flush: 5 carta misma categoría\n  6. Straight: 5 carta consecutiva\n  7. Three of a Kind: 3 carta misma categoría\n  8. Two Pair: 2 par diferente categoría\n  9. One Pair: 2 carta misma categoría\n  10. High Card: Carta más alta gana\n\n⌨️  ACCIÓN COMANDOS:\n• [4x] térã [play bet 4x]: Coloca ${{self.ante_amount*4}} PLAY bet\n• [2x] térã [play bet 2x]: Coloca ${{self.ante_amount*2}} PLAY bet\n• [1x] térã [play bet 1x]: Coloca ${{self.ante_amount*1}} PLAY bet\n• [check] térã [c]: Check (no coloca bet adicional)\n• [fold] térã [f]: Renuncia mano\n• [skip] térã [s]: Salta fase siguiente (cuando no acción necesaria)\n\n💡 ESTRATEGIA TIPS:\n• Manos fuertes iniciales (pares, cartas altas) justifican 4x bets\n• Considera Dealer calificación - manos débiles pueden empatar si Dealer no califica\n• BLIND bet puede ser muy rentable con manos fuertes (Royal Flush = 500:1!)\n• Observa ficha stack! Si llega 0 o debajo al inicio round, pierdes.\n\n⚠️  NOTAS IMPORTANTES:\n• ANTE ha BLIND bets son obligatorios cada round\n• PLAY bets son opcionales ha estratégicos\n• Asegúrate input acción correcta, ha solo una acción vez.",
+    "state": "🎯 TURNO {round}\n💰 Fichas: {chips}\n🎴 Eñembohovái: {hand}\n📊 Apuestas actuales: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fase: {phase}\n🎯 Acciones disponibles: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 TURNO {round} iniciado! Apuestas: ANTE ${ante}, BLIND ${blind}. Quedan {chips} fichas.",
+    "your_hand": " Nde po: {hand}",
+    "flop_revealed": " FLOP ojehechauka: {cards}",
+    "river_revealed": " RIVER ohechauka: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Acción noĩporãva fase ko'agãgua. Acciones disponibles: {available}",
+    "message": " Acción noĩporãva! Acciones disponibles: {available}"
+  },
+  "action": {
+    "folded": "Nde reñemondýi."
+  },
+  "showdown": {
+    "dealer_hand": " Ehechauka! Mbojovakehára po: {cards}",
+    "community_cards": "🃏 Cartas comunitarias: {cards}",
+    "player_best": "🎴 Ñande póker iporãve: {name} ({cards})",
+    "dealer_best": "🎴 Ñemuhára póker iporãve: {name} ({cards})",
+    "ante_lost_folded": " ANTE apuesta ojeperde! -${ante} (oñemboja'óva)",
+    "blind_lost_folded": " ÑE'Ê TEMIMBOJAHA OÑEPYRÒVA! -${blind} (oñemboja)",
+    "ante_won": "✅ ANTE apuesta ogana! +${amount} ha'e peteĩ mba'e porã.",
+    "ante_pushed": " ANTE apuesta PUSHED! ${ante} ojevy jeyva'ekue.",
+    "ante_lost": " ANTE apuesta ojeperde! -${ante}",
+    "blind_won": "✅ ÑE'Ê TEMIMBOHAJEREKO OGANÁVA! +${amount}",
+    "blind_pushed": " JE'AHAGUA ÑEMBOHETÉVA OÑEPYRŨ! ${blind} ojevyjey.",
+    "blind_lost": " ÑE'Ê TEMIMBOHAYHÁRA OÑEPUTA! -${blind}",
+    "play_won": "✅ JE'UPY apopyre OGANHA! +${amount}",
+    "play_pushed": " PLAY apuesta PUSHED! ${play} ojevy jey",
+    "play_lost": " JE'UPYRÃ OJEHAGUAI! -${play}",
+    "net_gain": "🎉 TURNO {round} completado! Ganancia neta: +${net}",
+    "net_loss": "💸 TURNO {round} completado! Pérdida neta: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 JUEGO TERMINADO! {max_turns} turnos completados. Quedan ${chips} fichas - ¡GANASTE!",
+    "game_over_lose": "🏁 ÑEMBYAHY! Nde ndarekoichipa chip-i. Ñemuhára ojeporu!",
+    "reward_win": "Jugador ojapó {winner_rounds} vuelta ndive ${chips} ficha",
+    "reward_lose": "Jokuaihára ndoguerekovéima ficha ronda {round}-pe.",
+    "reward_win_max": "Jugador ojapó {max_turns} vuelta ndive ${chips} ficha"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush-pe guarã",
+    "straight_flush": "Tapykuehoha hekopete'ỹva",
+    "four_of_a_kind": "Irundyha peteĩchaiteva",
+    "full_house": "Óga Hetereíva",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Mbohapy iñambuéva ojuehegui",
+    "two_pair": "Mokõi paraguái",
+    "one_pair": "Peteĩ paréntepe g̃uarã",
+    "high_card": "Jurujái yvatevéva",
+    "unknown": "Téra ndojeikuaáiva"
+  }
+}

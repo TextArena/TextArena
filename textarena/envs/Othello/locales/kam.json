@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Kĩmanyĩthya: {board}",
+    "valid_moves": "{observation}\nHatua zinazokubalika: {moves}",
+    "no_valid_moves_reset": "{observation}\nHakuna hatua zinazokubalika - unaweza kuhitaji kuduka.",
+    "no_valid_moves_step": "{observation}\n Hakuna njia ya kwenda – unaweza kulazimika kupuuza.",
+    "scores_reset": "{observation}\nAlama za Sasa - Mweusi: {black_count}, Mweupe: {white_count}\n",
+    "scores_step": "{observation}\nAlama - Nyeusi: {black_count}, Nyeupe: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Move must be of the form [row, col].",
+    "illegal": "Kũthama kwa ĩvia na moko: {valid}"
+  },
+  "game_action": {
+    "skipped": "Mũthaũki {pid} aĩle kũlea kwosa ĩtambya ya mbee",
+    "played": "Mchezaji {pid} ({piece}) alicheza [{r}, {c}] akibadilisha {flipped} kipande (s)"
+  },
+  "game_message": {
+    "must_skip": "Mchezaji {pid} ({piece}) hana hatua zinazokubalika na lazima aduke."
+  },
+  "outcome": {
+    "black_wins": "Mweusi anashinda {black_count}-{white_count}.",
+    "white_wins": "Mweupe anashinda {white_count}-{black_count}.",
+    "draw": "Sawa {black_count}-{white_count}."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id}. Du spiller 15-Puzzle-spillet.\nMålet med spillet er at arrangere de nummererede felter i stigende rækkefølge fra 1 til 15, med det tomme felt placeret i nederste højre hjørne.\nFor at foretage et træk kan du flytte et felt ind i det tomme felt (repræsenteret af dobbelt understregning, f.eks. __) ved at bruge en af følgende kommandoer:\n- 'up': Flyt feltet under det tomme felt op.\n- 'down': Flyt feltet over det tomme felt ned.\n- 'left': Flyt feltet til højre for det tomme felt til venstre.\n- 'right': Flyt feltet til venstre for det tomme felt til højre.\nFor at indsende dit træk, skriv retningen (f.eks. 'up', 'down', 'left' eller 'right') i firkantede parenteser, f.eks. [up].\nDen aktuelle brætlayout vises nedenfor. Brug oplysningerne til at løse puslespillet.\n"
+  },
+  "board": {
+    "current_board": "Aktuelt bræt:\n\n{board}\nTilgængelige træk: {moves}",
+    "game_board": "Spilbræt:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldigt trækformat. Spiller {player_id} svarede ikke med en gyldig retning i firkantede parenteser.",
+    "illegal_move": "Ugyldigt træk. Feltet kan ikke flyttes i den angivne retning."
+  },
+  "outcome": {
+    "win": "Tillykke! Spiller {player_id} har løst 15-Puzzle-spillet.",
+    "turn_limit": "Trækgrænsen er nået. Modellen har gennemført {percent} procent af puslespillet"
+  }
+}

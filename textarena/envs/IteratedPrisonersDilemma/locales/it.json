@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in un Dilemma del Prigioniero Iterato che si estende per {num_rounds} round.\n\nStruttura del Gioco:\n- Prima di ogni decisione hai {total_conversation_rounds} turni per comunicare liberamente.\n- Dopo di che, entrambi i giocatori scelgono simultaneamente di cooperare o defezionare.\n\nMatrice di Ricompensa (fissa ogni round):\n- Entrambi Cooperano ➜ ognuno {cooperate_reward}\n- Entrambi Defezionano ➜ ognuno {mutual_defect_reward}\n- Uno Defeziona, uno Cooperà ➜ Defezionatore {defect_reward}, Cooperatore {sucker_reward}\n\nCome Giocare:\n- Durante la conversazione: digita qualsiasi testo desideri.\n- Durante la fase di decisione: includi '[Cooperate]' o '[Defect]' (senza distinzione tra maiuscole e minuscole). Puoi aggiungere testo extra prima/dopo il token."
+  },
+  "phases": {
+    "conversation_finished": "Conversazione terminata per il round {round}. Rispondi con '[Cooperate]' o '[Defect]' all'interno di \\boxed{{}}.",
+    "starting_round": "--- Inizio Round {round} ---",
+    "round_summary": "Risultati del round {round}:\n{outcome}\nIl Giocatore 0 ha guadagnato {r0} (totale {score_0}), il Giocatore 1 ha guadagnato {r1} (totale {score_1})."
+  },
+  "outcome": {
+    "winner": "Il Giocatore {winner} vince {win_score} - {lose_score}.",
+    "draw": "Pareggio! Entrambi i giocatori hanno segnato {s0}.",
+    "round_both_cooperate": "Entrambi i giocatori hanno cooperato.",
+    "round_both_defect": "Entrambi i giocatori hanno defezionato.",
+    "round_p0_cooperates_p1_defects": "Il Giocatore 0 ha cooperato, il Giocatore 1 ha defezionato.",
+    "round_p0_defects_p1_cooperates": "Il Giocatore 0 ha defezionato, il Giocatore 1 ha cooperato."
+  }
+}

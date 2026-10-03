@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} u Igra pregovora.\nImate neke resurse, a vaš zadatak je trgovati tako da ukupna vrijednost vaših resursa poraste.\nResursi i povezane vrijednosti koje trenutno imate su:\n\t+ {resource_value_list}\nU svakom krugu, možete razgovarati sa svojim protivnikom i učiniti ponudu za trgovinu.\nKoristite sljedeće specijalne tokena za radnje:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Ponuđeni resursi -> Traženi resursi]\n  - '[Accept]': Da biste prihvatili dolaznu ponudu.\n  - '[Deny]': Da biste odbili dolaznu ponudu (zadano).\nIgra traje ukupno {max_turns} krugova."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Igrač je pokušao prihvatiti trgovinu bez potrebnih resursa.",
+    "out_of_range": "Igrač {player_id}, Nevaljana radnja. Stupac {col} je izvan granica.",
+    "already_full": "Igrač {player_id}, Nevaljana radnja. Stupac {col} je pun.",
+    "proposing_with_no_resource": "Igrač {player_id} je pokušao učiniti ponudu za trgovinu bez potrebnih resursa.",
+    "incorrect_offer_format": "Igrač {player_id} je učinio ponudu za trgovinu u neispravnom formatu.",
+    "no_new_offer": "Igrač {player_id} nije učinio novu ponudu za trgovinu."
+  },
+  "offers": {
+    "reject": "Igrač {player_id} je odbio ponudu za trgovinu.",
+    "accept": "Igrač {acceptor_id} je prihvatio ponudu za trgovinu od Igrača {proposer_id}.",
+    "proposal": "Igrač {player_id} je učinio sljedeću ponudu Igraču {opponent_id}: Ponuđeni predmeti: {offered} -> Traženi predmeti: {requested}"
+  },
+  "outcome": {
+    "win": "Igrač {winner_id} je pobijedio jer je imao veći porast vrijednosti inventara.",
+    "draw": "Isti porast vrijednosti inventara za sve igrače. Neriješeno."
+  }
+}

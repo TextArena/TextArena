@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Nim'de Oyuncu {player_id}'siniz.\nHedefiniz, son kalan nesneyi almak.\nHer turda, tam bir yığından bir veya daha fazla nesneyi kaldırın.\n'[yığın miktarı]' formatını kullanın, burada yığın yığın dizinidir ve miktar kaldırılacak nesne sayısıdır.\nÖrneğin, '[0 3]' yığın 0'dan 3 nesneyi kaldırır."
+  },
+  "state": {
+    "current_pile": "Mevcut Yığın:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Geçerli bir hamle formatı bulunamadı. '[yığın miktarı]' formatını kullanın.",
+    "correct_format_wrong_fields": "Oyuncu {player_id}, geçersiz eylem. Sütun {col} sınırların dışında.",
+    "out_of_range": "Yığın dizini {pile_index} sınırların dışında.",
+    "non_positive": "En az 1 nesne kaldırmalısınız.",
+    "exceeds_pile": "Yığın {pile_index}'den {quantity} nesne kaldırılamaz (sadece {pile_count} kaldı)."
+  },
+  "observation": {
+    "removed_from_piles": "Oyuncu {player_id}, [{pile_index} {quantity}] oynadı ve yığın {pile_index}'den {quantity} nesne(leri) kaldırdı."
+  },
+  "outcome": {
+    "win": "Oyuncu {player_id} son nesne(leri) aldı!"
+  }
+}

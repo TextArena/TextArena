@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Nang Player {player_id} Three-Player Tic Tac Toe da leiriktre. \nNang gi symbol '{symbol}' ni. \nNang na 5x5 board ta nang gi symbol thoknaba hourakpa thouram ama leiri. \nHourakpa thouram horizontal, vertical, amasung diagonal oina thoknaba yaodre. \nNang gi thouram '[4]' style da submit touba nang cell 4 bu thoknaba hourakpa."
+  },
+  "board": {
+    "current_board": "Lanjen Board:\n\n{board}\n\nKhara Thouram: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "সেল অসি 0-{max_cell} ওইরিবা মফমদা \"[cell]\" শিজিন্নৌ।",
+    "out_of_range": "অবৈধ কোষ সংখ্যা: {cell}। 0 এবং {max_cell} এর মধ্যে হতে হবে।",
+    "already_occupied": "সেল {cell} অসি হান্ননা ওকুপেন্দ তৌরে.",
+    "made_invalid": "শান্নরোই {player_id}না অশোয়বা খোঙথাং অমা তৌরে"
+  },
+  "game_action": {
+    "placed": "Player {player_id} na ama symbol ({symbol}) field ({row}, {col}) da thokhibe."
+  },
+  "outcome": {
+    "win": "{player_id} ( {symbol} ) na thungne!",
+    "draw": "Game hi khara khangdre!"
+  }
+}

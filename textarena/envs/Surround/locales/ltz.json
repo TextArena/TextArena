@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Spiller Ëmgéigend op engem {width}x{height} Gitter.\nDir sidd Spiller {player_id}. Gültig Zich: '[up]' '[down]' '[left]' '[right]' oder w/s/a/d.\nZil: iwwerliewe jiddereen aneren. Spueren sinn déidlech; Wandtreffer maachen ëmbréngen; Frontalkollisiounen maachen déi zwee ëm."
+  },
+  "board": {
+    "current": "Aktuell Board: {board}",
+    "after_moves": "Board no gläichzäiteg Bewegungen: {board}"
+  },
+  "game_action": {
+    "invalid_death": "De Spiller {player_id} ass wéinst engem ongültege Schrëtt gestuerwen."
+  },
+  "outcome": {
+    "survived_win": "De Spiller {player_id} huet iwwerlieft; all déi aner si gefall.",
+    "all_crashed": "All Spiller hunn gläichzäiteg gefall.",
+    "outlived": "De Spiller huet all déi aner iwwerlieft.",
+    "all_dead": "All Spiller gestuerwen.",
+    "turn_limit": "D'Récklimit ass erreecht - dee längsten iwwerliewt gewënnt.",
+    "ranking": "{reason} Definitiv Ranking Gruppen (bescht→schlechzt): {groups}"
+  }
+}

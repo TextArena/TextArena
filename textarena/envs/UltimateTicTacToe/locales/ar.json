@@ -1,0 +1,32 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في **Ultimate Tic Tac Toe**.\nأرسل حركتك بالصيغة **[macro  micro]**، أي رقمين من 0 إلى 8:\n• *macro* = اللوحة المصغرة التي ستلعب فيها\n• *micro* = الخانة داخل تلك اللوحة المصغرة\nمثال: `[7 8]` ➜ ضع رمزك في اللوحة المصغرة 7، في الخانة 8، ثم\nأجبر خصمك على اللعب في اللوحة المصغرة 8 بعد ذلك.\n\nرمزك هو `{symbol}`.\n"
+  },
+
+  "board": {
+    "current_board": "اللوحة الحالية:\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "يجب أن تكون الحركة بالصيغة [macro micro] باستخدام رقمين من 0 إلى 8.",
+    "out_of_range": "يجب أن يكون كل فهرس بين 0 و8.",
+    "index_out_of_range": "قيمة micro_board أو الصف أو العمود خارج النطاق.",
+    "cell_occupied": "الخانة مشغولة بالفعل.",
+    "wrong_micro_board": "يجب على اللاعب أن يلعب في اللوحة المصغرة التالية.",
+    "micro_board_won": "تم الفوز بهذه اللوحة المصغرة بالفعل."
+  },
+
+  "next_board": {
+    "any": "أي لوحة مصغرة",
+    "specific": "اللوحة المصغرة {nxt}"
+  },
+
+  "game_action": {
+    "played": "لعب اللاعب {player_id} في اللوحة المصغرة {macro_idx}، الخانة {micro_idx} (الصف {row}، العمود {col}). يجب على اللاعب {opponent_id} الآن أن يلعب في {nxt_txt}."
+  },
+
+  "outcome": {
+    "win": "يفوز اللاعب {player_id} في Ultimate Tic Tac Toe!",
+    "draw": "انتهت اللعبة بالتعادل!"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Anda adolah Pemain {player_id} di Chopsticks. Pado giliran, pilih salah satu:\n  + Sarang:  '[attack M O]'  di mano M=tangan awak (0 atau 1), O=tangan lawan (0 atau 1).\n    - Jumlah tangan lawan batambah jo tangan awak; jiko >=5, inyo manjadi 0.\n  + Bagi:   '[split L R]'  untuak mambagi jari-jari awak manjadi L jo R (L+R = total awak).\nBalas jo persis salah satu parintah itu."
+  },
+  "board": {
+    "current_board": "Papan Saikini:\nPamain 0: {hands_0}\nPamain 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Tangan nyo {my_idx} lah mati.",
+    "opp_hand_dead": "Tangan lawan {opp_idx} alah mati.",
+    "split_sum": "Jumlah nan dibagi harus {total}.",
+    "split_no_change": "Split pasti maubah distribusi tangan awak.",
+    "invalid_command": "Gerakan indak bapaten. Gunakan “[attack M O]” atau “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} manarang P{opp_id} tangan {opp_idx}: inyo baganti dari {opp_val} ka {new_val}.",
+    "split": "P{player_id} mambagi manjadi [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Kaduo tangan lawan mati.",
+    "draw": "Bateh giliran lah digunoan."
+  }
+}

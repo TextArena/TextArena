@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id}. Anda sedang bermain Permainan Memori.\nMatlamat anda adalah untuk memadankan lebih banyak pasangan kad di atas papan berbanding lawan anda.\nPada giliran anda, pilih dua kad untuk diterbalikkan dengan memasukkan nombor baris dan lajur bagi kad pertama dan kedua mengikut turutan, seperti '[0 1 1 0]'. Dalam contoh ini, kad pertama berada pada baris 0 dan lajur 1, manakala kad kedua berada pada baris 1 dan lajur 0.\nJika kedua-dua kad sepadan, anda mendapat satu mata dan kad tersebut kekal menghadap ke atas. Jika tidak sepadan, kad tersebut akan diterbalikkan semula menghadap ke bawah, contohnya '.'.\nPermainan berakhir apabila semua pasangan telah dipadankan."
+  },
+
+  "board": {
+    "current_board": "Papan semasa:\n{board}",
+    "current_game_board": "Papan permainan semasa:\n{board}"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Format langkah tidak sah. Pemain {player_id} tidak memberikan arah yang sah dalam kurungan siku.",
+    "out_of_bounds": "Langkah tidak sah. Pemain {player_id} memilih kedudukan di luar sempadan.",
+    "same_card_twice": "Langkah tidak sah. Pemain {player_id} memilih kad yang sama sebanyak dua kali.",
+    "already_matched": "Langkah tidak sah. Pemain {player_id} memilih satu atau kedua-dua kad yang telah dipadankan."
+  },
+
+  "game_message": {
+    "cards_match": "Kad yang dipilih oleh Pemain {player_id} pada kedudukan [{r1} {c1}] dan [{r2} {c2}] sepadan!",
+    "cards_no_match": "Kad yang dipilih oleh Pemain {player_id} tidak sepadan. Kad pada kedudukan [{r1} {c1}] dan [{r2} {c2}] masing-masing ialah {pos1} dan {pos2}."
+  },
+
+  "outcome": {
+    "draw": "Kedua-dua pemain memadankan jumlah pasangan kad yang sama.",
+    "win": "Pemain {winner_id} telah menang!",
+    "turn_limit": "Had giliran telah dicapai. Permainan telah tamat. Pemain 0 memperoleh {score_0} mata, manakala Pemain 1 memperoleh {score_1} mata.",
+    "turn_limit_win": "{reason} Pemain {winner_id} telah menang!"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Hues i Sèrpiente na un {width}×{height} grid.\nBo kontrola sèrpiente {player_id}. Muevenan válido: '[up]'/'[down]'/'[left]'/'[right]' (òf w/s/a/d).\nObjetivo: sobreviví mas largo òf ta e mas largo i obtene e puntaje mas haltu (limite di turno {max_turns} turnonan)."
+  },
+  "board": {
+    "current": "Tablero Akta:\n{board}",
+    "after_moves": "Estado di e Konseho aktual: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Snake {player_id} a muri pa motibu di un move invalido."
+  },
+  "outcome": {
+    "survived_win": "E hungadó {player_id} a sobrebibí; tur otro persona a pèrdè nan bida.",
+    "all_dead_simul": "Tur e serpentenan a muri simultáneamente.",
+    "outlived": "E hungadó a sobreviví na tur otro.",
+    "all_dead": "Tur e serpentanan a muri.",
+    "turn_limit": "E limite di turno a yega - e mihó skor ta gana den tie-break.",
+    "ranking": "{reason} Klasementu final (peor→mihó): {groups}"
+  }
+}

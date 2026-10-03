@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Tu Lîstikvan {player_id} yî di Tri-Player Tic Tac Toe yî.\nNîşana te '{symbol}' ye.\nTu car car di warê xwe de nîşana xwe dike yê di 5x5 taqetê de rêzeya çar çêbike.\nRêzeyên dikarin aşikî, amûdî an jî qoqandî bin.\nBîra xwe bi şêweya '[4]' pêşniyar bike da hûn qada 4 binîse."
+  },
+  "board": {
+    "current_board": "Taqeta Heyîn:\n\n{board}\n\nBirînên Berfireh: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatê veguhastinê neheq e. '[cell]' bikar bîne ku hucre 0-{max_cell} ye.",
+    "out_of_range": "Hejmara hucreyê ya neheq: {cell}. Divê di navbera 0 û {max_cell} de be.",
+    "already_occupied": "Cell {cell} ji niha ve dagirtî ye.",
+    "made_invalid": "Lîstikvan {player_id} tevgereke neqanûnî kir."
+  },
+  "game_action": {
+    "placed": "Lîstikvan {player_id} nîşana xwe ({symbol}) di qada ({row}, {col}) de dihêle."
+  },
+  "outcome": {
+    "win": "Lîstikvan {player_id} ({symbol}) bi ser dikeve!",
+    "draw": "Lîstik wekhev e!"
+  }
+}

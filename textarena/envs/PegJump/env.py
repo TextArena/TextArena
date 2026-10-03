@@ -28,10 +28,7 @@ class PegJumpEnv(ta.Env):
         self._observe_state()
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            "You are playing PegJump. Jump one peg over another into an empty hole, removing the jumped peg.\n"
-            "Goal: finish with exactly **one** peg left. Action format: e.g. '[4 1]'."
-        )
+        return self.m("player_prompt", "intro")
 
     def _render_board(self) -> str:
         """Return a string visualising the triangle with hole numbers."""
@@ -52,19 +49,19 @@ class PegJumpEnv(ta.Env):
     
 
     def _observe_state(self):
-        self.state.add_observation(message=f"Pegs left: {self.state.game_state['board'].count(True)}\n" + self._render_board(), observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(message=self.m("board", "current_board", count=self.state.game_state['board'].count(True), board=self._render_board()), observation_type=ta.ObservationType.GAME_BOARD)
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
         match = self.ACTION_RE.fullmatch(action.strip())
         if not match:
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason="Invalid syntax. Use [i->j].")
+            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "wrong_format"))
             return self.state.step()
         frm, to = int(match.group(1)), int(match.group(2))
         board = self.state.game_state["board"]
         over = self._get_over(frm, to)
         if over is None or (frm, over, to) not in self.ALLOWED_MOVES or not board[frm] or not board[over] or board[to]:
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason="Illegal move.")
+            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "illegal_move"))
             return self.state.step()
         # Execute move
         board[frm] = False
@@ -72,8 +69,8 @@ class PegJumpEnv(ta.Env):
         board[to] = True
         # Check terminal conditions
         peg_cnt = board.count(True)
-        if peg_cnt == 1:            self.state.set_outcome(reward=1.0, reason="Solved with one peg remaining!")
-        elif not self._has_move():  self.state.set_outcome(reward=self._get_percentage_completion(), reason="No moves left.")
+        if peg_cnt == 1:            self.state.set_outcome(reward=1.0, reason=self.m("outcome", "win"))
+        elif not self._has_move():  self.state.set_outcome(reward=self._get_percentage_completion(), reason=self.m("outcome", "no_moves"))
         else:                       self._observe_state()
         return self.state.step()
 

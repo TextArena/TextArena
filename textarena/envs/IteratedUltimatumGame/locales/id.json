@@ -1,0 +1,43 @@
+{
+  "_comment": "Berkas lokal IteratedUltimatumGame. JANGAN menerjemahkan kunci (sisi kiri). Hanya terjemahkan nilai (sisi kanan). Simpan setiap {placeholder} persis seperti yang ada; jangan menerjemahkan token aksi [Offer: $X] / [Accept] / [Reject]. Simpan simbol mata uang '$' dan semua angka persis seperti yang ada.",
+  "_slots": {
+    "{player_id}": "Nomor pemain, 0 atau 1",
+    "{other_id}": "Nomor pemain lain, 1 atau 0",
+    "{num_rounds}": "Jumlah total putaran",
+    "{pool}": "Jumlah uang yang tersedia setiap putaran (angka)",
+    "{round_number}": "Nomor putaran saat ini",
+    "{proposer_id}": "Nomor pemain yang mengajukan penawaran, 0 atau 1",
+    "{responder_id}": "Nomor pemain yang merespons, 0 atau 1",
+    "{offer}": "Jumlah yang ditawarkan (angka)",
+    "{keep}": "Jumlah yang disimpan oleh proposer (angka)",
+    "{proposer_gain}": "Uang yang diperoleh proposer pada putaran ini (angka)",
+    "{responder_gain}": "Uang yang diperoleh responder pada putaran ini (angka)",
+    "{total_0}": "Total uang yang terakumulasi oleh Pemain 0 (angka)",
+    "{total_1}": "Total uang yang terakumulasi oleh Pemain 1 (angka)",
+    "{winner}": "Nomor pemain yang menang",
+    "{loser}": "Nomor pemain yang kalah",
+    "{winner_total}": "Total uang yang dimiliki pemenang (angka)",
+    "{loser_total}": "Total uang yang dimiliki yang kalah (angka)",
+    "{total}": "Total uang akhir yang sama untuk setiap pemain (angka)"
+  },
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id}, bermain {num_rounds} putaran dari Permainan Ultimatum Berulang.\nAnda memiliki ${pool} untuk dibagi pada putaran ini antara Anda dan Pemain {other_id}.\n\nProposer:\n  - Buat penawaran: [Offer: $X] (0 <= X <= pool)\n  - Jika diterima → Anda mendapatkan $(pool - X), pemain lain mendapatkan $X\n  - Jika ditolak → Keduanya mendapatkan $0\n  - Contoh: [Offer: $3]  atau  'Saya rasa ini adil. [Offer: $5]'\n\nResponder:\n  - Putuskan penawaran dengan [Accept] atau [Reject]\n  - Contoh: 'Itu terlihat wajar. [Accept]'\n            'Terlalu tidak adil. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Putaran {round_number} dimulai! ---\nPemain {proposer_id} adalah proposer, Pemain {responder_id} adalah responder.",
+    "offer": "Putaran {round_number}: Pemain {proposer_id} menawarkan ${offer} kepada Pemain {responder_id} (menyimpan ${keep}).",
+    "accepted": "Pemain {responder_id} menerima! Putaran {round_number} mendapatkan: Pemain {proposer_id} +${proposer_gain}, Pemain {responder_id} +${responder_gain}. Total baru: Pemain 0: ${total_0}, Pemain 1: ${total_1}.",
+    "rejected": "Pemain {responder_id} menolak penawaran! Putaran {round_number} mendapatkan: Keduanya +$0. Total tetap: Pemain 0: ${total_0}, Pemain 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Proposer harus membuat penawaran menggunakan format [Offer: $X].",
+    "bad_integer": "Jumlah penawaran harus berupa bilangan bulat yang valid.",
+    "out_of_range": "Penawaran harus antara $0 dan ${pool}.",
+    "no_current_offer": "Tidak ada penawaran saat ini untuk direspon.",
+    "accept_or_reject": "Responder harus [Accept] atau [Reject] penawaran."
+  },
+  "outcome": {
+    "win": "Pemain {winner} menang dengan ${winner_total} total vs Pemain {loser}'s ${loser_total}.",
+    "draw": "Seri! Kedua pemain selesai dengan ${total} total."
+  }
+}

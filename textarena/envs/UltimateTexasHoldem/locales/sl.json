@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em datoteka s prevodom. NE PREVADIJ ključev (levo), samo vrednosti (desno).",
+  "_slots": {
+    "{start_chips}": "Začetno število žetonov, npr. 1000",
+    "{ante}": "Obvezna stava ante/blind, npr. 25",
+    "{ante4}": "Štirikratnik ante, npr. 100",
+    "{ante2}": "Dvokratnik ante, npr. 50",
+    "{round}": "Trenutno kolo",
+    "{chips}": "Trenutno število žetonov igralca",
+    "{hand}": "Seznam kart, npr. 'A♠, K♥', ali lokalizirano besedilo brez kart",
+    "{phase}": "Trenutna faza igre (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Seznam dovoljenih akcij, npr. '[play_bet_4x], [check]'",
+    "{available}": "Seznam trenutno dovoljenih akcij",
+    "{blind}": "Stava blind",
+    "{play}": "Stava play",
+    "{cards}": "Seznam kart, npr. 'Q♣, 7♦, 2♠'",
+    "{name}": "Ime roke, vstavljeno kot je",
+    "{amount}": "Količina žetonov",
+    "{net}": "Neto sprememba žetonov v krogu (lahko je negativna)",
+    "{max_turns}": "Maksimalno število krogov",
+    "{winner_rounds}": "Število krogov, ki jih je igralec dokončal"
+  },
+  "player_prompt": {
+    "no_cards": "Še brez kart",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Igralec proti delavcu\n\n📖 PREGLED IGRE:\n• Začnete z {start_chips} žetoni\n• Ena karta z 52 kartami (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Igrate proti delavcu (hiši)\n• Vsak krog sledi strukturi Ultimate Texas Hold'em: postavite stave ANTE in BLIND, prejmite 2 karti, odločite o stavi PLAY v fazah stave, nato razkrijte skupne karte in primerjajte svojo najboljšo 5-kartno kombinacijo s kombinacijo delavca. Vaš cilj je maksimirati vaše dobitke (ko imate boljšo kombinacijo), medtem ko minimirate vaše izgube (ko imate slabšo kombinacijo).\n• Igra se konča, ko dosežete 0 žetonov ali manj na začetku kroga (PORAZ) ali dokončate 1000 krogov z žetoni (ZMAGA)\n\n💰 STRUKTURA STAVE:\n• ANTE: Obvezna stava ${ante} vsak krog\n• BLIND: Obvezna stava ${ante} vsak krog\n• PLAY: Izbirna stava med igro. Skozi krog lahko izberete samo eno od naslednjih: (${ante4} če storite v fazi PRE-FLOP, ${ante2} če storite v fazi FLOP ali ${ante} če storite v fazi RIVER. Lahko tudi foldate v fazi RIVER, s čimer se odpovedate roki in ne stavite ničesar.)\n\n🎴 KARTANJE:\n• Prejmite 2 karti (vaši hole karti)\n• Delavec prejme 2 karti (skriti od vas)\n• 5 skupnih kart je razdeljenih licem navzdol na začetku\n• Skupne karte so razkrite postopoma skozi faze igre\n\n🏆 KVALIFIKACIJA DELAVCA:\n• Delavec mora imeti vsaj PAR (2 karti iste vrste) za kvalifikacijo, uporabljajoč 2 karti v svoji roki in 5 skupnih kart.\n• Kvalifikacija delavca vpliva na izid stave, kot bo pojasnjeno kasneje.\n\n🎮 FAZE IGRE & AKCIJE:\n📋 PRE-FLOP:\n  • Akcije: [4x] (${ante4}) ali [check]\n  • [4x]: Postavite stavo ${ante4} PLAY, razkrijte prve 3 skupne karte\n  • [check]: Brez dodatne stave, razkrijte prve 3 skupne karte\n\n📋 FLOP:\n  • Če je stavka 4x postavljena: samo [skip] na voljo (samodejno razkrije zadnje 2 skupne karte)\n  • Če ni stavke 4x: [2x] (${ante2}) ali [check]\n  • [2x]: Postavite stavo ${ante2} PLAY, razkrijte zadnje 2 skupne karte\n  • [check]: Brez dodatne stave, razkrijte zadnje 2 skupne karte\n\n📋 RIVER:\n  • Če je stavka 4x ali 2x postavljena: samo [skip] na voljo (samodejno nadaljuje do showdowna)\n  • Če ni predhodne stave PLAY: [1x] (${ante}) ali [fold]\n  • [1x]: Postavite stavo ${ante} PLAY, nadaljujte do showdowna\n  • [fold]: Odpoved se roki, izgubite stave ANTE in BLIND\n\n📋 SHOWDOWN:\n  • Vse karte so razkrite in ovrednotene\n  • Najboljša 5-kartna kombinacija iz 7 kart (2 hole + 5 skupnih)\n  • Stave so poravnane glede na pravila izplačila\n\n💎 IZPLAČILA STAVE:\n📊 ANTE STAVA:\n  • Delavec se ne kvalificira: PUSH (stava vrne)\n  • Delavec se kvalificira in vi zmagate: izplačilo 1:1 (stava + dobitki)\n  • Delavec se kvalificira in vi izgubite: stava izgubljena\n  • Izenačenje: PUSH (stava vrne)\n\n📊 BLIND STAVA:\n  • Neodvisna od kvalifikacije delavca\n  • Vi zmagate: stava vrne in dodatno izplačilo glede na moč vaše kombinacije\n  • Vi izgubite: stava izgubljena\n  • Izenačenje: PUSH (stava vrne)\n\n📊 BLIND STAVA - IZPLAČILA:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Manj kot Straight: brez dodatnega izplačila\n\n📊 PLAY STAVA:\n  • Neodvisna od kvalifikacije delavca\n  • Direktna primerjava: vaša najboljša kombinacija proti kombinaciji delavca\n  • Vi zmagate: izplačilo 1:1 (stava + dobitki)\n  • Vi izgubite: stava izgubljena\n  • Izenačenje: PUSH (stava vrne)\n\n🎯 RANGIRANJE KOMBINACIJ (Najboljše proti najslabšim):\n  1. Royal Flush: A-K-Q-J-10 iste barve\n  2. Straight Flush: 5 zaporednih kart iste barve\n  3. Four of a Kind: 4 karte iste vrste\n  4. Full House: 3 karte iste vrste + 2 karte iste vrste\n  5. Flush: 5 kart iste barve\n  6. Straight: 5 zaporednih kart\n  7. Three of a Kind: 3 karte iste vrste\n  8. Two Pair: 2 para kart različnih vrst\n  9. One Pair: 2 karte iste vrste\n  10. High Card: Najvišja karta zmaga\n\n⌨️  UKAZI AKCIJ:\n• [4x] ali [play bet 4x]: Postavite stavo ${{self.ante_amount*4}} PLAY\n• [2x] ali [play bet 2x]: Postavite stavo ${{self.ante_amount*2}} PLAY\n• [1x] ali [play bet 1x]: Postavite stavo ${{self.ante_amount*1}} PLAY\n• [check] ali [c]: Check (brez dodatne stave)\n• [fold] ali [f]: Fold (odpoved se roki)\n• [skip] ali [s]: Preskoči do naslednje faze (ko ni akcije potrebna)\n\n💡 NAMIGI STRATEGIJE:\n• Močne začetne kombinacije (pari, visoke karte) pogosto upravičujejo stave 4x\n• Upoštevajte kvalifikacijo delavca - šibke kombinacije lahko pripeljejo do izenačenja, če se delavec ne kvalificira\n• Stava BLIND lahko prinese velike dobitke pri močnih kombinacijah (Royal Flush = 500:1!)\n• Pazite na svoj števec žetonov! Če pade na 0 ali manj na začetku kroga, izgubite.\n\n⚠️  POMEMBNE OPOMBE:\n• Stave ANTE in BLIND so obvezne vsak krog\n• Stave PLAY so izbirne in strateške\n• Pazite, da vnesete pravilno akcijo, in samo eno akcijo naenkrat.\n\n",
+    "state": "🎯 KROG {round}\n💰 Žetoni: {chips}\n🎴 Vaša kombinacija: {hand}\n📊 Trenutne stave: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Faza: {phase}\n🎯 Razpoložljive akcije: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Krog {round} se je začel! Stave: ANTE ${ante}, BLIND ${blind}. Imate {chips} žetonov.",
+    "your_hand": "🎴 Vaša kombinacija: {hand}",
+    "flop_revealed": "🃏 FLOP razkrito: {cards}",
+    "river_revealed": "🃏 RIVER razkrito: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Neveljavna akcija za trenutno fazo. Razpoložljive akcije: {available}",
+    "message": "❌ Neveljavna akcija! Razpoložljive akcije: {available}"
+  },
+  "action": {
+    "folded": "🃏 Ste odpovedali se roki."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Kombinacija delavca: {cards}",
+    "community_cards": "🃏 Skupne karte: {cards}",
+    "player_best": "🎴 Najboljša kombinacija igralca: {name} ({cards})",
+    "dealer_best": "🎴 Najboljša kombinacija delavca: {name} ({cards})",
+    "ante_lost_folded": "❌ Stava ANTE IZGUBLJENA! -${ante} (odpoved se roki)",
+    "blind_lost_folded": "❌ Stava BLIND IZGUBLJENA! -${blind} (odpoved se roki)",
+    "ante_won": "✅ Stava ANTE ZMAGALA! +${amount}",
+    "ante_pushed": "🔄 Stava ANTE VRNJENA! ${ante} vrnjena",
+    "ante_lost": "❌ Stava ANTE IZGUBLJENA! -${ante}",
+    "blind_won": "✅ Stava BLIND ZMAGALA! +${amount}",
+    "blind_pushed": "🔄 Stava BLIND VRNJENA! ${blind} vrnjena",
+    "blind_lost": "❌ Stava BLIND IZGUBLJENA! -${blind}",
+    "play_won": "✅ Stava PLAY ZMAGALA! +${amount}",
+    "play_pushed": "🔄 Stava PLAY VRNJENA! ${play} vrnjena",
+    "play_lost": "❌ Stava PLAY IZGUBLJENA! -${play}",
+    "net_gain": "🎉 Krog {round} zaključen! Neto dobitki: +${net}",
+    "net_loss": "💸 Krog {round} zaključen! Neto izguba: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 IGRA KONČANA! {max_turns} krogov zaključenih. Imate ${chips} žetonov - VI STE ZMAGALI!",
+    "game_over_lose": "🏁 IGRA KONČANA! Ste brez žetonov. Delavec zmaga!",
+    "reward_win": "Igralec je zaključil {winner_rounds} krogov z ${chips} žetoni",
+    "reward_lose": "Igralec je izgubil vse žetone v krogu {round}",
+    "reward_win_max": "Igralec je zaključil {max_turns} krogov z ${chips} žetoni"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Štiri iste vrste",
+    "full_house": "Polna hiša",
+    "flush": "Ista barva",
+    "straight": "Zaporedje",
+    "three_of_a_kind": "Tri iste vrste",
+    "two_pair": "Dva para",
+    "one_pair": "En par",
+    "high_card": "Najvišja karta",
+    "unknown": "Neznana kombinacija"
+  }
+}

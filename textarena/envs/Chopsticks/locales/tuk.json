@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Siz Chopsticks oyundaky {player_id}-nji oýunçysyňyz. Öz gezeginizde, aşakdakylardan birini saýlaň:\n  + Hüjüm: '[attack M O]'  ýerine M= size degişli el (0 ýa-da 1), O=duşmanyň eli (0 ýa-da 1).\n    - Duşmanyň elinde bar bolan san ýene size degişli eliň sanyna barabar artýar; eger >=5 bolsa, ol 0-a öwrülýär.\n  + Bölüň:   '[split L R]'  size degişli eliňizdäki bar bolan sanlary L we R (L+R = size degişli eliňizdäki jemi san) ýaly ýerlere paýlaň.\nJogap üçin ýalňyz bir komandany ulanýaň."
+  },
+  "board": {
+    "current_board": "Şuňkur häzirki tahta:\nOýunçy 0: {hands_0}\nOýunçy 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Eliň {my_idx} öli.",
+    "opp_hand_dead": "Duşman eli {opp_idx} eýýäm öldi.",
+    "split_sum": "Bölümiň somasy {total} bolmaly.",
+    "split_no_change": "Split seniň eliňi bölüşdirmegi üýtgetmeli.",
+    "invalid_command": "Nadyr hereket. “[attack M O]” ýa “[split L R]” ulanyp gör."
+  },
+  "game_action": {
+    "attack": "P{player_id} P{opp_id}’nyň eli {opp_idx}’ne hüjüm edýär: ol {opp_val}’den {new_val}’e geçýär.",
+    "split": "{player_id}-nji oýunçy [{L}, {R}] ýaly bölüniş edýär."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Duşmanlaryň iki eli-de öldi.",
+    "draw": "Çäklendirmäniň çäkli derejesine ýetildi."
+  }
+}

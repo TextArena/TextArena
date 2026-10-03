@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "คุณคือผู้เล่นหมายเลข {player_id} ในเกม Iterated Prisoner's Dilemma สำหรับ 3 ผู้เล่น การแข่งขันจะดำเนินไป {num_rounds} รอบ\nโครงสร้างของรอบ:\n• {conv_rounds} รอบที่สามารถคุยกันได้โดยอิสระ\n• 1 รอบการตัดสินใจ - ส่งโทเค็นหนึ่งตัวต่อคู่แข่ง: '[<opp-id> cooperate]' หรือ '[<opp-id> defect]' (เช่น '[1 defect] [2 cooperate]'; ค่าเริ่มต้นคือ 'cooperate'). \nเมทริกซ์ผลตอบแทนคู่ (ใช้กับคู่ที่ไม่เรียงลำดับ):\n  - ทั้งคู่ร่วมมือ  ->  {reward}\n  - ทั้งคู่ไม่ร่วมมือ  ->  {punishment}\n  - คุณไม่ร่วมมือ พวกเขาร่วมมือ -> {temptation}\n  - คุณร่วมมือ พวกเขาไม่ร่วมมือ -> {sucker}\nผู้เล่นที่มีคะแนนสูงสุดเมื่อสิ้นสุดทุกรอบจะเป็นผู้ชนะ"
+  },
+  "round": {
+    "start": "─── เริ่มรอบ {round} ───\tคุณสามารถคุยกันได้โดยอิสระใน {conv_rounds} รอบถัดไป",
+    "chat_finished": "การคุยในรอบ {round} เสร็จสิ้นแล้ว ส่งการตัดสินใจของคุณ หนึ่งโทเค็นต่อคู่แข่ง: `[pid cooperate]` หรือ `[pid defect]`."
+  },
+  "results": {
+    "header": "### ผลลัพธ์ของรอบ {round}:",
+    "pair_line": "{observation}\n\t ผู้เล่น {i} พบกับผู้เล่น {j} ตัดสินใจ {choice_i} และ {choice_j} ตามลำดับ (ผู้เล่น {i} ได้รับ {gain_i}, ผู้เล่น {j} ได้รับ {gain_j})",
+    "scores_open": "{observation}\n-> คะแนนปัจจุบัน: ",
+    "score_first": "{observation}ผู้เล่น {player_id} ({score})",
+    "score_next": "{observation}; ผู้เล่น {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "คะแนนสุดท้าย: {scores}. กลุ่มอันดับ (แย่สุด→ดีสุด): {groups}"
+  }
+}

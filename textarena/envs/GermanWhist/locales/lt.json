@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Žaidimas prasideda. Trumpų šalis: {trump_suit} (trumpų korta: {trump_str}).",
+    "no_trump_card": "nėra"
+  },
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} vokiečių viskio žaidime.\n{phase_info}\nJūsų rankoje yra {hand_size} kortų.\nŽaiskite kortą su '[play N]', kur N yra jos pozicija jūsų rankoje (pavyzdžiui, '[play 3]').",
+    "phase_learning": "MOKYMOSI FAZĖ: kiekvienos partijos laimėtojas gauna atverstą kortą, o pralaimėtojas traukia kitą kortą iš kaladės. Šioje fazėje laimėtos partijos neįskaitomos į pergalę.",
+    "phase_playing": "ŽAIDIMO FAZĖ: kaladė išsemta. Kiekviena partija nuo šiol įskaitoma į pergalę."
+  },
+  "next_card": {
+    "playing_phase": "Nėra kortos pasiūlymo - žaidimo faza prasidėjo.",
+    "deck_empty": "Kaladė tuščia - nėra kortos pasiūlymo.",
+    "available": "Korta pasiūlyme: {card}",
+    "available_trump": "Korta pasiūlyme: {card} (TRUMPAS)"
+  },
+  "invalid_move": {
+    "wrong_format": "Neteisingas ėjimo formatas. Naudokite '[play N]', kad žaisti N-tą kortą jūsų rankoje.",
+    "bad_position": "Tokia kortos pozicija neegzistuoja. Jūsų rankoje yra {hand_size} kortų.",
+    "must_follow_suit": "Jūs turite sekti šalį ir žaisti {lead_suit} kortą.",
+    "invalid_play": "Tą kortą negalima žaisti."
+  },
+  "game_action": {
+    "played": "Žaidėjas {player_id} žaidė {card}."
+  },
+  "trick": {
+    "won": "Žaidėjas {winner_id} laimėjo partiją su {card}.",
+    "won_learning": "Žaidėjas {winner_id} laimėjo partiją su {card} ir gavo atverstą kortą."
+  },
+  "phase": {
+    "learning_complete": "Kaladė išsemta. Mokymosi faza baigėsi - kiekviena likusi partija įskaitoma į pergalę."
+  },
+  "draw": {
+    "winner_received": "Jūs laimėjote partiją ir gavote {card}.",
+    "loser_received": "Jūs pralaimėjote partiją ir traukėte {card} iš kaladės.",
+    "winner_preview": "Kita korta pasiūlyme yra {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Partijos laimėtos iki šiol - Žaidėjas 0: {tricks0}, Žaidėjas 1: {tricks1}",
+    "scores_playing": "Įskaitomos partijos - Žaidėjas 0: {tricks0}, Žaidėjas 1: {tricks1}",
+    "phase": "Faza: {phase}",
+    "phase_learning": "Faza: {phase} ({remaining_cards} kortų liko kaladėje)"
+  },
+  "hand": {
+    "no_cards": "Nėra kortų",
+    "no_cards_in_hand": "Nėra kortų rankoje",
+    "header": "Jūsų ranka:",
+    "trump_indicator": " (TRUMPAS)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Dar nėra sužaistų kortų šioje partijoje.",
+    "header": "Dabartinė partija:",
+    "trump_indicator": " (TRUMPAS)",
+    "card_line": "{observation}\n  Žaidėjas {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Žaidimas dar neprasidėjo",
+    "header": "=== VOKIEČIŲ VISKIO ŽAIDIMAS ===",
+    "phase": "{observation}\nFaza: {phase}",
+    "trump_suit": "{observation}\nTrumpų šalis: {trump_suit}",
+    "trump_card": "{observation}\nTrumpų korta: {card}",
+    "cards_left": "{observation}\nKortų liko kaladėje: {count}",
+    "next_card": "{observation}\nKita korta pasiūlyme: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nDabartinė partija:",
+    "trump_indicator": " (TRUMPAS)",
+    "trick_line": "{observation}\n  Žaidėjas {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nŽaidėjas {player_id}: {scoring} įskaitomos partijos ({tricks} iš viso), {hand_size} kortų rankoje"
+  },
+  "outcome": {
+    "summary": "Mokymosi faza - Žaidėjas 0: {l0}, Žaidėjas 1: {l1}. Žaidimo faza - Žaidėjas 0: {p0}, Žaidėjas 1: {p1}. Žaidėjas {winner_id} laimėjo su {winner_tricks} įskaitomomis partijomis!"
+  }
+}

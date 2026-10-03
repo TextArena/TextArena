@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola staðfærslu skrá. ÞÝÐA EKKI lykla (vinstri hlið). Þýða aðeins gildi (hægri hlið).",
+  "_slots": {
+    "{player_id}": "Leikmannsnúmer, t.d. 0 eða 1",
+    "{trump_suit}": "Merki ásins (♠♥♦♣) - ekki þýða",
+    "{trump_card}": "Ásmerki, t.d. '7♠' - ekki þýða",
+    "{card}": "Spilamerki, t.d. 'A♥' - ekki þýða",
+    "{trump_mark}": "Fyrirframrendra '(ÁS)' merki, eða tómt",
+    "{max_pos}": "Hæsta löglega spilastöðu í leikmanns hendi",
+    "{count}": "Fjöldi spila sem leikmaður heldur",
+    "{pos}": "Spilastöðu númer í hendi",
+    "{points}": "Fjöldi stiga (spilagildi eða safnað stig)",
+    "{hand}": "Fyrirframrendra, marglínur handarlisti",
+    "{trick}": "Fyrirframrendra núverandi-trikk listar",
+    "{scores}": "Fyrirframrendra stigalína, eða loka stigablokk fyrir hvern leikmann",
+    "{trump_info}": "Fyrirframrendra ás-merki / spilafjöldi lína",
+    "{winner}": "Leikmannsnúmer sem vann trikkið eða leikinn",
+    "{tricks}": "Fjöldi trikkja sem leikmaður vann",
+    "{deck_count}": "Fjöldi spila eftir í spilastokknum"
+  },
+  "game": {
+    "start": "Briscola leikur byrjaður! Ás-merki: {trump_suit} (Ás-spil: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Þú ert að spila Briscola - Leikmaður {player_id}.\nMarkmið: Vinn trikkja og safna flestum stigum (120 heildarstig í spilastokknum).\nSpilastig: A=11, 3=10, K=4, Q=3, J=2, aðrir=0\nSpilavaldi: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nÁs-spil vinna ekki-ás spil óháð völdu.\n\nAðgerð: '[play X]' þar sem X er spilastöðu (1-{max_pos}) í hendi þinni\n"
+  },
+  "hand": {
+    "none": "Engin spil",
+    "empty": "Engin spil í hendi",
+    "header": "Hendi þín:",
+    "card_line": "  {pos}. {card} [{points} stig]{trump_mark}",
+    "trump_mark": " (ÁS)"
+  },
+  "trick": {
+    "empty": "Engin spil spiluð ennþá í þessu trikki.",
+    "header": "Núverandi trikk:",
+    "line": "  Leikmaður {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Leikmaður {player_id}: {points} stig",
+    "trump_info": "Ás-merki: {trump_suit}",
+    "trump_info_deck": "Ás-merki: {trump_suit} | Spil eftir í spilastokknum: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nStig: {scores}\n{trump_info}\n\nSpilaðu spil með [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Notaðu [play X] þar sem X er spilastöðu (1, 2, 3, o.s.frv.)",
+    "out_of_range": "Ógild spilastöðu. Þú hefur {count} spil (1-{count})"
+  },
+  "action": {
+    "played": "Leikmaður {player_id} spilaði {card}",
+    "trick_win": "Leikmaður {winner} vinnur trikkið með {card} og fær {points} stig!"
+  },
+  "outcome": {
+    "head": "Leikurinn er búinn! Leikmaður {winner} vinnur með {points} stigum!\n\nLoka stig:\n{scores}",
+    "player_line": "Leikmaður {player_id}: {points} stig ({tricks} trikkja)\n"
+  }
+}

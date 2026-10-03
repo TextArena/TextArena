@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Το παιχνίδι αρχίζει. Χρώμα τράπουλας: {trump_suit} (κάρτα τράπουλας: {trump_str}).",
+    "no_trump_card": "κανένα"
+  },
+  "player_prompt": {
+    "intro": "Είστε ο Παίκτης {player_id} στο Γερμανικό Γουίστ.\n{phase_info}\nΚρατάτε {hand_size} κάρτες.\nΠαίξτε μια κάρτα με '[play N]', όπου N είναι η θέση της κάρτας στο χέρι σας (για παράδειγμα '[play 3]').",
+    "phase_learning": "ΦΑΣΗ ΜΑΘΗΣΗΣ: ο νικητής κάθε γύρου παίρνει την κάρτα που είναι ανοιχτή και ο χαμένος τραβάει την επόμενη κάρτα από την τράπουλα. Οι γύροι που κερδίζονται σε αυτή τη φάση δεν μετρούν για τη νίκη.",
+    "phase_playing": "ΦΑΣΗ ΠΑΙΧΝΙΔΙΟΥ: η τράπουλα έχει εξαντληθεί. Κάθε γύρος από τώρα και στο εξής μετράει για τη νίκη."
+  },
+  "next_card": {
+    "playing_phase": "Δεν υπάρχει κάρτα για να παιχτεί - η φάση παιχνιδιού έχει αρχίσει.",
+    "deck_empty": "Η τράπουλα είναι άδεια - δεν υπάρχει κάρτα για να παιχτεί.",
+    "available": "Κάρτα για να παιχτεί: {card}",
+    "available_trump": "Κάρτα για να παιχτεί: {card} (ΤΡΟΥΠΑ)"
+  },
+  "invalid_move": {
+    "wrong_format": "Λάθος μορφή κίνησης. Χρησιμοποιήστε '[play N]' για να παίξετε την Nη κάρτα στο χέρι σας.",
+    "bad_position": "Αυτή η θέση κάρτας δεν υπάρχει. Κρατάτε {hand_size} κάρτες.",
+    "must_follow_suit": "Πρέπει να ακολουθήσετε το χρώμα και να παίξετε μια κάρτα {lead_suit}.",
+    "invalid_play": "Αυτή η κάρτα δεν μπορεί να παιχτεί."
+  },
+  "game_action": {
+    "played": "Ο Παίκτης {player_id} έπαιξε {card}."
+  },
+  "trick": {
+    "won": "Ο Παίκτης {winner_id} κέρδισε τον γύρο με {card}.",
+    "won_learning": "Ο Παίκτης {winner_id} κέρδισε τον γύρο με {card} και πήρε την κάρτα που ήταν ανοιχτή."
+  },
+  "phase": {
+    "learning_complete": "Η τράπουλα έχει εξαντληθεί. Η φάση μάθησης έχει τελειώσει - κάθε επόμενος γύρος μετράει για τη νίκη."
+  },
+  "draw": {
+    "winner_received": "Κερδίσατε τον γύρο και λάβατε {card}.",
+    "loser_received": "Χασατε τον γύρο και τραβάτε {card} από την τράπουλα.",
+    "winner_preview": "Η επόμενη κάρτα για να παιχτεί είναι {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Γύροι που έχουν κερδηθεί μέχρι τώρα - Παίκτης 0: {tricks0}, Παίκτης 1: {tricks1}",
+    "scores_playing": "Γύροι που μετρούν για τη νίκη - Παίκτης 0: {tricks0}, Παίκτης 1: {tricks1}",
+    "phase": "Φάση: {phase}",
+    "phase_learning": "Φάση: {phase} ({remaining_cards} κάρτες απομένουν στην τράπουλα)"
+  },
+  "hand": {
+    "no_cards": "Κανένα χέρι",
+    "no_cards_in_hand": "Κανένα χέρι στο χέρι σας",
+    "header": "Το χέρι σας:",
+    "trump_indicator": " (ΤΡΟΥΠΑ)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Κανένα χέρι δεν έχει παιχτεί ακόμα σε αυτό τον γύρο.",
+    "header": "Τρέχων γύρος:",
+    "trump_indicator": " (ΤΡΟΥΠΑ)",
+    "card_line": "{observation}\n  Παίκτης {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Το παιχνίδι δεν έχει αρχίσει",
+    "header": "=== ΓΕΡΜΑΝΙΚΟ ΓΟΥΙΣΤ ΠΑΙΧΝΙΔΙ ===",
+    "phase": "{observation}\nΦάση: {phase}",
+    "trump_suit": "{observation}\nΧρώμα τράπουλας: {trump_suit}",
+    "trump_card": "{observation}\nΚάρτα τράπουλας: {card}",
+    "cards_left": "{observation}\nΚάρτες που απομένουν στην τράπουλα: {count}",
+    "next_card": "{observation}\nΕπόμενη κάρτα για τον νικητή: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nΤρέχων γύρος:",
+    "trump_indicator": " (ΤΡΟΥΠΑ)",
+    "trick_line": "{observation}\n  Παίκτης {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nΠαίκτης {player_id}: {scoring} γύροι που μετρούν ({tricks} συνολικά), {hand_size} κάρτες στο χέρι"
+  },
+  "outcome": {
+    "summary": "Φάση μάθησης - Παίκτης 0: {l0}, Παίκτης 1: {l1}. Φάση παιχνιδιού - Παίκτης 0: {p0}, Παίκτης 1: {p1}. Ο Παίκτης {winner_id} κέρδισε με {winner_tricks} γύρους που μετρούν!"
+  }
+}

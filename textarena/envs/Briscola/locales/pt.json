@@ -1,0 +1,57 @@
+{
+  "_comment": "Arquivo de localização do Briscola. NÃO traduza as chaves (lado esquerdo). Traduza apenas os valores (lado direito). Mantenha cada {placeholder} exatamente como está.",
+  "_slots": {
+    "{player_id}": "O número do jogador, por exemplo, 0 ou 1",
+    "{trump_suit}": "O símbolo do naipe de truques (♠♥♦♣) - não traduza",
+    "{trump_card}": "O rótulo da carta de truques, por exemplo, '7♠' - não traduza",
+    "{card}": "Um rótulo de carta, por exemplo, 'A♥' - não traduza",
+    "{trump_mark}": "O marcador pré-renderizado '(TRUMP)', ou vazio",
+    "{max_pos}": "A posição mais alta da carta na mão do jogador",
+    "{count}": "O número de cartas que um jogador tem",
+    "{pos}": "O número da posição da carta na mão",
+    "{points}": "Um número de pontos (valor da carta ou pontuação acumulada)",
+    "{hand}": "A lista pré-renderizada da mão, em várias linhas",
+    "{trick}": "A lista pré-renderizada do truque atual",
+    "{scores}": "A linha pré-renderizada da pontuação, ou o bloco final da pontuação por jogador",
+    "{trump_info}": "A linha pré-renderizada do naipe de truques / contagem do baralho",
+    "{winner}": "O número do jogador que ganhou o truque ou o jogo",
+    "{tricks}": "Um número de truques ganhos por um jogador",
+    "{deck_count}": "Número de cartas restantes no baralho"
+  },
+  "game": {
+    "start": "Jogo de Briscola iniciado! Naipe de truques: {trump_suit} (Carta de truques: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Você está jogando Briscola - Jogador {player_id}.\nObjetivo: Ganhar truques e coletar o máximo de pontos (120 pontos totais no baralho).\nPontos das cartas: A=11, 3=10, K=4, Q=3, J=2, outros=0\nPoder das cartas: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nCartas de truques batem cartas não-truques independentemente do poder.\n\nAção: '[play X]' onde X é a posição (1-{max_pos}) da carta na sua mão\n"
+  },
+  "hand": {
+    "none": "Nenhuma carta",
+    "empty": "Nenhuma carta na mão",
+    "header": "Sua mão:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": " (TRUQUE)"
+  },
+  "trick": {
+    "empty": "Nenhuma carta jogada ainda neste truque.",
+    "header": "Truque atual:",
+    "line": "  Jogador {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Jogador {player_id}: {points} pts",
+    "trump_info": "Naipe de truques: {trump_suit}",
+    "trump_info_deck": "Naipe de truques: {trump_suit} | Cartas restantes no baralho: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPontuações: {scores}\n{trump_info}\n\nJogue uma carta usando [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Use [play X] onde X é a posição da carta (1, 2, 3, etc.)",
+    "out_of_range": "Posição de carta inválida. Você tem {count} cartas (1-{count})"
+  },
+  "action": {
+    "played": "Jogador {player_id} jogou {card}",
+    "trick_win": "Jogador {winner} ganha o truque com {card} e ganha {points} pontos!"
+  },
+  "outcome": {
+    "head": "Jogo Terminado! Jogador {winner} ganha com {points} pontos!\n\nPontuações Finais:\n{scores}",
+    "player_line": "Jogador {player_id}: {points} pontos ({tricks} truques)\n"
+  }
+}

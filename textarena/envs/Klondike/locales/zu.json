@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Udlala Klondike Solitaire. Inhloso yakho ukususa amakhasi wonke kwenqaba.\n\nImithetho yeMdlalo:\n- Iqaba (F1-F4): Yakha phezulu kusuka kwa-Ace kwa-King ngosuthu\n- I-Tableau (T1-T7): Yakha phansi ngokuhamba kwezimbala (ebomvu phezu kwekala, ikala phezu kwe-bomvu)\n- I-Stokhi: Draya amakhasi kwenye stokhi ya-waste\n- I-Waste (W): Ikhadi eliphezulu elikhona ukudlala\n\nIzwi:\n- 'draw' - Draya amakhasi kusuka kwenye stokhi kwenye stokhi ya-waste\n- 'move <source> <destination> [count]' - Susa amakhasi phakathi kwenye mpahla\n  Imizekelo: 'move W T1', 'move T1 F2', 'move T3 T5 2'. inombolo inaweza nayo 'all', okuyohlola ukususa amakhasi wonke abheke phezulu.\n- 'forfeit' - Qeda umdlalo manje nje futhi uqine iskoru yakho manje\n- Amagama empahla: W (waste), F1-F4 (iqaba), T1-T7 (itableau)\n\nUnaweza ukusebenza izwi eziningi kwenye maphinde amanye ngokuzihambanisa ngama-comma:\n  Umzekelo: 'draw, move W T1, move T2 F1'\n\nAbakhozi kuphela abaweza ukubekwa kwenye itableau eyingenanto.\nIzwi zisebenza ngokulandelana - ukuba eyodwa ifele, izwi ezisale ziyashiywa.\nSebenzisa 'forfeit' ukuba ukholelwa umdlalo uwezekana ukunqoba."
+  },
+  "format_error": {
+    "no_brackets": "Ifomethi yesenzo engekho emthethweni. Isenzo kufanele sibe phakathi kwama-brackets.",
+    "no_closing_bracket": "Ifomethi yesenzo engavumelekile.",
+    "empty_command": "Ikhomandi iliyomile. Thayipha 'draw' noma 'move <source> <destination> [count]'",
+    "empty_action": "Isenzo esingenalutho",
+    "move_needs_args": "Umyalo we-move udinga umthombo nendawo okuyiwa kuyo. Ukusetshenziswa: 'move <source> <destination> [count]'",
+    "count_positive": "Inombolo kumele ibe ngempela noma 'all'",
+    "count_invalid": "Inombolo ayilungile. Sebenzisa inombolo noma 'all'",
+    "unknown_command": "Ikhomandi isiyaziwa '{cmd}'. Sebenzisa 'draw', 'move <source> <destination> [count]', noma 'forfeit'",
+    "wrapped": "Isenzo {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Isenzo {n}: {msg}",
+    "before_failure": "Isenzo esiqediwe {n} ngaphambi kokwehluleka.",
+    "failed": "Isenzo {n} sehlulekile: {msg}"
+  },
+  "move_result": {
+    "drew": "Wadonsa ikhadi (s) kusukela esitokisini kuya imfucuza.",
+    "cannot_draw": "Ayikwazi ukudonswa. Kokubili isitoko nemfucumfucu kuphelile.",
+    "invalid_pile": "Igama lenqwaba elingalungile. Sebenzisa u-W, F1-F4, noma u-T1-T7",
+    "foundation_one_card": "Ungakwazi ukuhambisa ikhadi elilodwa kuphela esisekelweni",
+    "waste_to_foundation_ok": "Ikhadi elifakwe emgqonyeni F{dst}",
+    "waste_to_foundation_bad": "Ayikwazi ukuhambisa ikhadi elilahliwe kuleyo nqwaba yesisekelo",
+    "tableau_to_foundation_ok": "Ikhadi elifakwe kusuka etafuleni T{src} kuya esisekelweni F{dst}",
+    "tableau_to_foundation_bad": "Ayikwazi ukuhambisa ikhadi le-tableau kuleyo nqwaba yesisekelo",
+    "foundation_to_foundation": "Ayikwazi ukuhambisa isisekelo isisekelo",
+    "waste_to_tableau_one_card": "Kungahanjiswa ikhadi elilodwa kuphela kusuka ku-waste kuya ku-tableau",
+    "waste_to_tableau_ok": "Ikhadi elifakwe kusuka emfucumfucwini kuya ku-table T{dst}",
+    "waste_to_tableau_bad": "Ayikwazi ukubeka ikhadi elilahliwe kuleyo nqwaba yethebhu",
+    "no_face_up": "Awekho amakhadi abheke phezulu okufanele ahambe",
+    "tableau_to_tableau_ok": "Kususwe {count} ikhadi (s) kusuka etafuleni T{src} kuya ku-T{dst}",
+    "tableau_to_tableau_bad": "Ayikwazi ukuhambisa {count} ikhadi (s) kusuka ku-T{src} kuya ku-T{dst}",
+    "foundation_to_tableau_one_card": "Kungahanjiswa ikhadi elilodwa kuphela kusuka esisekelweni kuya etafuleni",
+    "foundation_empty": "Isisekelo F{src} asinalutho",
+    "foundation_to_tableau_ok": "Ikhadi elifakwe esisekelweni F{src} liye etafuleni T{dst}",
+    "foundation_to_tableau_bad": "Ayikwazi ukubeka ikhadi lesisekelo etafuleni T{dst}",
+    "to_waste_or_stock": "Ayikwazi ukuthuthelwa emfucumfucwini noma esitokisini"
+  },
+  "outcome": {
+    "forfeit": "Umdlalo ulahliwe. Isilinganiso sokugcina: {score} amakhadi ezisekelweni.",
+    "won": "Ngiyanihalalisela, ninqobile emdlalweni we-Klondike Solitaire!",
+    "turn_limit": "Umdlalo uphelile! Usufinyelele inani eliphakeme le-{max_turns} ukuphenduka. Umphumela: {score} amakhadi ezisekelweni."
+  },
+  "board": {
+    "title": "=== I-Klondike Solitaire ===",
+    "turn": "Ukuphenduka: {turn}/{max_turns}",
+    "stock": "Isikhala: {stock} amakhadi",
+    "waste": "Imfucuza (W): {waste}",
+    "foundations_header": "Izisekelo:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Isithombe:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Sika'y Managbaybay {player_id} ed laro na LinesOfAction.\nSaray piraso mo so '{side}', saray piraso na kalaban so '{other}'.\nFormat na iyakar: `[b1b3]` (koordinado na pinagmulan - koordinado na destinasyon). Saray iyakar ya legal so naglalakbay ed abong, patayo, o diagonal ya numero na kuadrado ya parehas na bilang na piraso (aruman ya kulay) ed saya linya. Saray iyakar mo so saray piraso mo, balet agmo iyakar ed saray piraso na kalaban; no onla ed kalaban, sayan piraso so masakop mo.  Manalo ka no saray piraso mo so konektado ed 8-kaibigan."
+  },
+  "board": {
+    "current_board": "Board: {board} Say so"
+  },
+  "invalid_move": {
+    "wrong_format": "Say format et e2e4 (manlapud,onla ed saray coordinate).",
+    "no_piece": "Anggapoy {side} ya artikulo ed {coord}.",
+    "identical": "Pareho so nanlapuan tan anggaan.",
+    "not_straight_or_diagonal": "Nepeg ya aka-diretso odino diadadagon so iyalis.",
+    "wrong_distance": "Nepeg a say distansia na iyalis et mipara ed saray piraso ya akolkol.",
+    "enemy_blocks": "Say kalaban a piraso so mangisebel ed dalan.",
+    "destination_own": "Say destinasyon et walad sarili ton armas."
+  },
+  "game_action": {
+    "moved": "Player {player_id} inilarawan {from} -> {to}",
+    "captured_suffix": "Player {player_id} inilarawan {from} -> {to} a naka-capture metung a kaeneman."
+  },
+  "outcome": {
+    "win": "Amin a kabiangan et mankonektaan.",
+    "draw_no_capture": "60 ya taktika balet anggapoy naala to.",
+    "draw_repetition": "Aminpigan na mamitlo so posisyon."
+  }
+}

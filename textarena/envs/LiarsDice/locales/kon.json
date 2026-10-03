@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "O wina Mwana nkanda {player_id} na nkanda ya {num_players} ya LiarsDice.\nMvutu:\n- Na ntangu yako, o lenda kufua:\n  1) Fua bid mpya na wingi mwingi au uso mwinene (kwa mbili zote) kuluta bid ya sasa; yaani '[Bid: 3, 4]',\n  2) Yambula bid ya mwisho kwa kutipa '[Call]'.\n\nO yambula:\n  - O mwana nkanda alua wingi wa uso huo kati ya nkuku zote ni chini ya bid, mfuasi wa mwisho ahulua nkuku moja.\n  - Mbala zingine, yambuli ahulua nkuku moja.\nMwana nkanda alua nkuku 0 ahulua. Mwana nkanda wa mwisho usala."
+  },
+  "board": {
+    "per_player": "\tMwana {p}: {d}",
+    "new_round": "\nMviringi mushya - Madadu masalia: {dice_summary}\nMadadu yaku ya sasa ni: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Mchezaji {current_player_id} abinga! Kukwama kweli kwa uso {face_value} ni {count}, ambayo ni CHINI ya {quantity}.\nMchezaji {loser_id} (mchezaji wa nsaka ya mwisho) atakosa dado mmoja.",
+    "caller_loses": "Mchezaji {current_player_id} abinga! Kukwama kweli kwa uso {face_value} ni {count}, ambayo ni >= {quantity}.\nMchezaji {loser_id} (mubinga) atakosa dado mmoja."
+  },
+  "action": {
+    "bid_announce": "Mchezaji {player_id} anasaka {quantity} ya uso {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Bo bingaka yandi kukonda kulomba ntete mbongo.",
+    "invalid_bid": "Bo pesaka ve mbongo ya bo lombaka: {reason}",
+    "not_recognized": "Kikumwa kiaku si kimosi na kimfumu kimo, '[Bid: X, Y]' to '[Call]'. Kikumwa kiaku kya kutumwa: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Ntalu ya mpa {new_quantity} kele fioti kuluta ntalu yina bo ke sadilaka ntangu yai {current_quantity}.",
+    "face_lower": "Ntalu ya mpa {new_face_value} kele fioti kuluta ntalu yai {current_face_value}.",
+    "identical": "Bo ta pesa mbongo kiteso mosi ti yina bo ke lomba ntangu yai.",
+    "face_range": "Ntalu ya bo ke tangaka fwete vanda na kati ya 1 mpi 6."
+  },
+  "message": {
+    "eliminated_invalid": "Muntu yina kebula {player_id} bo katulaka yandi na nsaka sambu yo vandaka ve mbote."
+  },
+  "outcome": {
+    "win": "Mwana nkanda {winner} usala! Mfululizo wa mwisho: {final_ranking}"
+  }
+}

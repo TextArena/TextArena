@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "U iwe Mpira {player_id} eka Tic Tac Toe ya Vanhu vatatu.\nSinbolo ya wena i '{symbol}'.\nU tshama tshama u fayela sinbolo ya wena eka bodo ya 5x5 ku endla mstari wa mune.\nMistari yi nga va ya mokhwa, ya ximatsi, kumbe ya diagonal.\nYisa ku humesiwa ka wena kwa ku tirhisa muundo '[4]' ku veka seli ya 4."
+  },
+  "board": {
+    "current_board": "Bhoza ra Lehagu:\n\n{board}\n\nSwiviko swa ku Heta: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Fomete ya ku rhurha leyi nga tirhiki. Tirhisa \"[cell]\" laha sele yi nga 0-{max_cell} .",
+    "out_of_range": "Nomboro ya seli yi ngati: {cell}. Ina fanele ku va kwalomu 0 na {max_cell}.",
+    "already_occupied": "Sele {cell} yi tele.",
+    "made_invalid": "Mutlangi {player_id} u endle ku famba loku nga riki enawini"
+  },
+  "game_action": {
+    "placed": "Muteri {player_id} u chela simbolo yakwe ({symbol}) eka ndhawu ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Mchavi {player_id} ({symbol}) uhlula!",
+    "draw": "Ntlangu wu ve na ku ringana!"
+  }
+}
