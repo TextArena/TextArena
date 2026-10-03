@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id}. Igrate igro 15-Puzzle.\nCilj igre je razporediti številčne ploščice v naraščajočem vrstnem redu od 1 do 15, s praznim prostorom v desnem spodnjem kotu.\nDa opravite potezo, lahko premaknete ploščico v prazni prostor (označen z dvojnim podčrtajem, npr. __) z uporabo ene od naslednjih ukazov:\n- 'up': Premaknite ploščico pod praznim prostorom navzgor.\n- 'down': Premaknite ploščico nad praznim prostorom navzdol.\n- 'left': Premaknite ploščico desno od praznega prostora levo.\n- 'right': Premaknite ploščico levo od praznega prostora desno.\nDa oddate svojo potezo, vpišite smer (npr. 'up', 'down', 'left' ali 'right') v oglatih oklepajih, npr. [up].\nTrenutna razporeditev plošče je prikazana spodaj. Uporabite informacije za reševanje uganke.\n"
+  },
+  "board": {
+    "current_board": "Trenutna plošča:\n\n{board}\nRazpoložljive poteze: {moves}",
+    "game_board": "Igralna plošča:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neveljaven format poteze. Igralec {player_id} ni odgovoril z veljavnim smernim ukazom v oglatih oklepajih.",
+    "illegal_move": "Neveljavna poteza. Ploščica se ne more premakniti v določeni smeri."
+  },
+  "outcome": {
+    "win": "Čestitke! Igralec {player_id} je uspešno rešil 15-Puzzle.",
+    "turn_limit": "Dosežen je bil limit potez. Model je dokončal {percent} odstotkov uganke."
+  }
+}

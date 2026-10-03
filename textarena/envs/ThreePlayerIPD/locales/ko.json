@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "당신은 3명의 플레이어가 참여하는 반복된 죄수의 딜레마 게임의 플레이어 {player_id}입니다. 매치는 {num_rounds} 라운드 동안 진행됩니다.\n라운드 구조:\n• {conv_rounds} 개의 자유 대화 턴\n• 1 개의 결정 턴 - 각 상대방에게 하나의 토큰을 제출: '[<opp-id> cooperate]' 또는 '[<opp-id> defect]' (예: '[1 defect] [2 cooperate]'; 기본값은 'cooperate'). \n쌍별 점수 행렬 (각 순서쌍에 적용):\n  - 둘 다 협력  ->  {reward}\n  - 둘 다 배신     ->  {punishment}\n  - 당신이 배신하고, 상대방이 협력 -> {temptation}\n  - 당신이 협력하고, 상대방이 배신 -> {sucker}\n모든 라운드가 끝난 후 가장 높은 점수를 얻은 플레이어가 승리합니다."
+  },
+  "round": {
+    "start": "─── 라운드 {round} 시작 ───\t다음 {conv_rounds} 라운드 동안 자유롭게 대화할 수 있습니다.",
+    "chat_finished": "라운드 {round}의 대화가 끝났습니다. 각 상대방에 대해 결정을 제출하세요: `[pid cooperate]` 또는 `[pid defect]`."
+  },
+  "results": {
+    "header": "### 라운드 {round} - 결과:",
+    "pair_line": "{observation}\n\t 플레이어 {i}와 플레이어 {j}는 각각 {choice_i}와 {choice_j}를 선택했습니다 (플레이어 {i}는 {gain_i}를 얻고, 플레이어 {j}는 {gain_j}를 얻었습니다)",
+    "scores_open": "{observation}\n-> 현재 점수: ",
+    "score_first": "{observation}플레이어 {player_id} ({score})",
+    "score_next": "{observation}; 플레이어 {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "최종 점수: {scores}.  순위 그룹 (가장 낮은 순위→가장 높은 순위): {groups}"
+  }
+}

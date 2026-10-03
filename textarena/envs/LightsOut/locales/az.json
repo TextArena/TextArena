@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "İşıqları Söndürənə xoş gəlmisiniz! Sizin {size}x{size} ölçülü işıq şəbəkəniz var.\nHədəfiniz BÜTÜN işıqları SÖNDÜRMƏK ('.' ilə təmsil olunur)\nBir işığa basanda, özü və yanındakı qonşuları (yuxarı/aşağı/sol/sağ) dəyişir.\n[Row col] formatında işığın koordinatlarını yazın (0-ındeksli, beləliklə etibarlı diapazon 0-{max_index}-dir).\nSizə puzzle-i həll etmək üçün {max_turns} gediş verilib.\nƏfsanə: 'O' = işıq YANIB, '.' = işıq SÖNÜB"
+  },
+  "board": {
+    "current_state": "Cari şəbəkə vəziyyəti (Gediş {moves_made}, qalan gedişlər {moves_left}, {completion}% tamamlanıb):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hərəkət [row col] formatında olmalıdır, burada row və col 0-dan {max_index}-ə qədər olan tam ədədlərdir.",
+    "out_of_range": "Koordinatlar 0 və {max_index} arasında olmalıdır. Siz [{row},{col}] daxil etdiniz."
+  },
+  "outcome": {
+    "win": "Təbriklər! Siz puzzle-i {moves_used} gedişdə həll etdiniz!",
+    "loss": "Oyun bitdi! Siz puzzle-i həll etmədən bütün {max_turns} gedişləri istifadə etdiniz. Son tamamlama: {completion}%\nSon vəziyyət:\n{grid}"
+  }
+}

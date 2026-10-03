@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Sampeyan Pemain {player_id} ring permainan {max_rounds} babak saking Kuhn Poker.\nAturan Permainan:\n- Kuhn Poker nganggén dék 3-kartu kalih J, Q, K (J paling cendhèk, K paling tegeh)\n- Saben pemain maringi {ante} chip lan nampa 1 kartu saben babak (catet yén kartu-kartu dipasrah tanpa panggalih, mula sampeyan ora saged madué kartu sami kalih musuh).\n- Permainan berlangsung selama {max_rounds} babak\n- Pemain kalih chip paling akhir saben babak menang\nAturan Aksi:\n- '[check]': Lewat tanpa taruhan (mung yén ora ana taruhan ring meja)\n- '[bet]': Tambah 1 chip ring pot (mung yén ora ana taruhan ring meja)\n- '[call]': Nyocoth taruhan musuh kanthi nambah 1 chip ring pot\n- '[fold]': Nyerahaken tangan lan maringi kemenangan pot ring musuh"
+  },
+  "init_round": {
+    "round_start": "### Miwiti babak {current_round} saking {max_rounds} babak. Kartu mu: '{player_card}'",
+    "available_actions": "Lakarane sane wenten inggih punika: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aksi kudu [Check], [Bet], [Call], utawi [Fold].",
+    "not_legal": "Pamarginé patut {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, nyerahang aksi: '[{move}]'.",
+    "valid_actions": "Pamargin sané prasida kamargiang inggih punika: {legal_actions}.",
+    "round_summary": "{reason} Skor sajeroning: Pemain 0: '{player_0_chips}'; Pemain 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Pertarungan: {winner_card} Pemain {winner} ngalahaké {loser_card} Pemain {loser}. Pemain {winner} menang pot saking {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "Ring panguntat ronde {max_rounds}, makakalih pamain madué akéh chip sané pateh.",
+    "round_win": "Pamain {player_id} sampun gulung tikar.",
+    "winner_player0": "Pemain 0 menang krana madué chip langkung akhir saking kabeh {max_rounds} babak.",
+    "winner_player1": "Pamain 1 menang antuk madué akéh chip ring ungkur makasami ronde {max_rounds}."
+  }
+}

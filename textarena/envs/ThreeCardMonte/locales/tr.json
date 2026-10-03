@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte dil dosyası. Anahtarları (sol taraf) çevirme. Yalnızca değerleri (sağ taraf) çevir.",
+  "_slots": {
+    "{line}": "Kupaların oluşturduğu satır",
+    "{step}": "Mevcut karıştırma adım numarası",
+    "{steps}": "Toplam karıştırma adım sayısı",
+    "{i}": "Takas edilen ilk kupanın indeksi",
+    "{j}": "Takas edilen ikinci kupanın indeksi",
+    "{prompt}": "Kupaların ardından eklenen yerel istem parçası",
+    "{max_index}": "Geçerli en yüksek kupa indeksi, yani num_cups-1",
+    "{ball_pos}": "Topun bulunduğu kupa indeksi"
+  },
+  "player_prompt": {
+    "intro": "Kupalar karıştırılırken gizli top 'X'i takip edin.\nKarıştırma işleminden sonra, `[k]` ile konumunu tahmin edin."
+  },
+  "game_message": {
+    "ball_starts": "Top başlangıçta: {line}",
+    "shuffle": "Karıştırma {step}/{steps}: kupalar {i} ve {j} takas edildi.",
+    "cups": "Kupalar: {line}  {prompt}",
+    "guess_now": "(Şimdi tahmin edin!)",
+    "reveal": "(Açığa çıkarma: top {ball_pos} altında)"
+  },
+  "invalid_move": {
+    "wrong_format": "Hatalı eylem. `[k]` kullanın.",
+    "out_of_range": "İndeks aralığı dışında 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Doğru! Topu buldunuz.",
+    "lose": "Yanlış — top {ball_pos} numaralı kupanın altındaydı."
+  }
+}

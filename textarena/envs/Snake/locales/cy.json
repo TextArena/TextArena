@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Chwaraewr Snake ar grid {width}×{height}.\nRydych yn rheoli neidr {player_id}. Symudiadau dilys: '[up]'/'[down]'/'[left]'/'[right]' (neu w/s/a/d).\nAmcan: goroesi hiraf neu bod y hiraf a chael y sgôr uchaf (terfyn troeon {max_turns} troeon)."
+  },
+  "board": {
+    "current": "Bwrdd presennol: {board}",
+    "after_moves": "Gwladwriaeth y Bwrdd presennol: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Bu farw Snake {player_id} oherwydd symud anghywir."
+  },
+  "outcome": {
+    "survived_win": "Gweithiwr {player_id} a oroesodd; bu farw pawb arall.",
+    "all_dead_simul": "Bu farw'r holl sarphiau ar yr un pryd.",
+    "outlived": "Chwaraewr yn byw allan o'r holl eraill.",
+    "all_dead": "Mae'r holl sarphiau wedi marw.",
+    "turn_limit": "Cyfyngiad tro wedi'i gyrraedd - mae'r sgôr gorau yn ennill y taith-drin.",
+    "ranking": "{reason} Grwpiau safle terfynol (waeth→gorau): {groups}"
+  }
+}

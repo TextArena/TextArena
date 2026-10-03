@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Oli omuzannyi {player_id} mu Tic Tac Toe ya bazannyi batatu.\nEkitebezo kyo kye '{symbol}'.\nOzina okukola kuza kuwanga ekitebezo kyo ku bodi ya 5x5 okuzza ekifo ekimu.\nEkifo kino kizza kuva ku mulyango, waggulu, oba ku kisulo.\nTuma kuza kwo usinga mu ngeri '[4]' okwawula kifo cha 4."
+  },
+  "board": {
+    "current_board": "Ubao wa sasa:\n\n{board}\n\nVitendo Vinavyopatikana: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Enkola y'okutambula si nnungi. Kozesa \"[cell]\" nga cell 0-{max_cell}.",
+    "out_of_range": "Ennamba ya kasirise etakkirizibwa: {cell}. Erina okubeera wakati wa 0 ne {max_cell}.",
+    "already_occupied": "Akasenge {cell} kale kabadde kajjuddwamu.",
+    "made_invalid": "Omuzannyo {player_id} gukoze ekikolwa ekitakkirizibwa."
+  },
+  "game_action": {
+    "placed": "Omuzannyi {player_id} azza amakubiro ge ({symbol}) mu kifo ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Omuzannyi {player_id} ({symbol}) awangula!",
+    "draw": "Omupiira gukubiddwa!"
+  }
+}

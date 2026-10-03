@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} u Kvantnom Tic Tac Toe.\nVaš simbol je '{symbol}', a vaši brojevi poteza su uvijek {parity} (npr. X1, X3 ili O2, O4).\n\nCilj: Pobijediti tako što ćete formirati liniju od tri klasična znaka (solidificirana iz superpozicija).\n\nKako igrati:\n- U svakom potezu, postavite sablasni znak u dva različita prazna kvadrata koristeći format '[a,b]'.\n- Ti znakovi su zapleteni i označeni kao 'X1 / X1' ili 'O4 / O4'.\n- Ne možete postaviti sablasne znakove u kvadrat koji je već kolabirao (solidificiran).\n\nPravilo kolapsa:\n- Ako vaš potez stvori ciklus u grafu zapletenosti, on automatski kolapsira.\n- Svaki sablasni znak u ciklusu se pretvara u klasičan znak u jednoj od dvije pozicije.\n- Bilo koji ovisni sablasni znakovi također kolapsiraju.\n\nPobjeda:\n- Igra završava kada jedan igrač ima tri klasična znaka u nizu.\n- Ako oba igrača dobiju liniju tijekom istog kolapsa, onaj s nižim maksimalnim brojem poteza pobjeđuje.\n\nPrimjer poteza: '[0,4]' postavlja sablasni znak u ćelije 0 i 4."
+  },
+  "board": {
+    "current_board": "Kvantna ploča Tic Tac Toe:\n\n{board}\n\nPredajte vaš potez kao '[a,b]' da biste postavili kvantni znak na dva mjesta."
+  },
+  "invalid_move": {
+    "wrong_format": "Neispravan format. Koristite '[a,b]'.",
+    "invalid_cells": "Neispravni ili duplicirani indeksi ćelija.",
+    "already_solidified": "Jedna od ćelija je već solidificirana."
+  },
+  "game_action": {
+    "placed": "Igrač {player_id} je postavio svoj simbol u superpoziciju između ćelija {pos_a} i {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Ovisna superpozicija riješena. Ćelija ({r}, {c}) je sada {symbol}.",
+    "last_cell_resolved": "Superpozicija za zadnju ćeliju riješena. Ćelija ({r}, {c}) je sada {symbol}.",
+    "superposition_resolved": "Superpozicija riješena. Ćelija ({r}, {c}) je sada {symbol}."
+  },
+  "outcome": {
+    "win": "Igrač {player_id} pobjeđuje s solidificiranim znakovima!",
+    "draw": "Igra je neriješena!"
+  }
+}

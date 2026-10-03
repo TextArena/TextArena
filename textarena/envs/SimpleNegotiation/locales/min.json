@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Pamain mancubo manarimo parubahan tanpa punyo sumber daya nan diparaluan.",
+    "out_of_range": "Pamain {player_id}, Tindakan indak bapaten. Kolom {col} di luar jangkauan.",
+    "already_full": "Pemain {player_id}, Aksi indak valid. Kolom {col} alah panuah.",
+    "proposing_with_no_resource": "Pamain {player_id} mancubo untuak mambuek tawaran pardagangan tanpa mampunyoi sumber daya nan diparaluan.",
+    "incorrect_offer_format": "Pamain {player_id} mambuek tawaran dagang dalam format nan salah.",
+    "no_new_offer": "Pamain {player_id} indak mangadokan tawaran dagang baru."
+  },
+  "offers": {
+    "reject": "Pamain {player_id} indak manarimo tawaran tu.",
+    "accept": "Pamain {acceptor_id} manyatujui tawaran dagang dari Pamain {proposer_id}.",
+    "proposal": "Pamain {player_id} mangajukan tawaran barikuik ka Pamain {opponent_id}: Barang nan ditawaran: {offered} -> Barang nan diminta: {requested}"
+  },
+  "outcome": {
+    "win": "Pamain {winner_id} manang jo mandapek kauntungan nan labiah gadang dalam nilai inventaris.",
+    "draw": "Paubahan nan samo dalam nilai inventaris untuak sadonyo pamain."
+  }
+}

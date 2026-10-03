@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Tú ert Spælar {player_id} í Quantum Tic Tac Toe.\nTítt symbol er '{symbol}', og tínar leikar tøl eru altíð {parity} (t.d. X1, X3 ella O2, O4).\n\nMál: Vinn við at skapa ein línu av trimum klassiskum merkjum (solidifiserað frá superpositión).\n\nHvussu at Spæla:\n- Á hvørjum túri, set ein spooky merki í tveimum ymiskum tómum rútmum við at brúka formatið '[a,b]'.\n- Hesi merki eru entangled, og merkt sum 'X1 / X1' ella 'O4 / O4'.\n- Tú kanst ikki setja spooky merki í einum rútmu, sum longu er kollapsað (solidifiserað).\n\nKollaps Regel:\n- Um tín leik skapar ein syklus í entanglement grafikkinum, so kollapsar hann sjálvur.\n- Hvør spooky merki í syklusinum vendir sær til ein klassiskt merki í einum av sínum báðum støðum.\n- Øll avhengandi spooky merki kollapsa eisini.\n\nSigur:\n- Leikurin endar, tá ein spælar hevur tríggjar klassiskar merkir í rað.\n- Um báðir spælarar fáa ein línu undir sama kollapsinum, so vinnur tann við lægsta max leikar tali.\n\nDømi um leik: '[0,4]' setur ein spooky merki í rútmunum 0 og 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Borð:\n\n{board}\n\nSenda inn tíðina þína sem '[a,b]' til að setja einn quantum merki í tveimur staðsetningum."
+  },
+  "invalid_move": {
+    "wrong_format": "Ógilda sniðið. Brúka \"[a,b]\".",
+    "invalid_cells": "Ógildig ella dupulerað telduindeks.",
+    "already_solidified": "Ein av kyknunum er longu vorðin fastur."
+  },
+  "game_action": {
+    "placed": "Leikari {player_id} setti sína tákn í einum superposition millum cellur {pos_a} og {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Dependent superposition útløst. Sellan ({r}, {c}) er nú {symbol}.",
+    "last_cell_resolved": "Superposition fyri seinastu sellu útløst. Sellan ({r}, {c}) er nú {symbol}.",
+    "superposition_resolved": "Superposition útløst. Sellan ({r}, {c}) er nú {symbol}."
+  },
+  "outcome": {
+    "win": "Spælarin {player_id} vinnur við at hava fastar metir!",
+    "draw": "Dysturin er javnur!"
+  }
+}

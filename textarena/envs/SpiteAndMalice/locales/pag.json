@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Sika'y Player {player_id} ed sakey a duaran-player a palaro na Spite tan Malice. Say tuyo mo'y iya'y mauna'y ag-awat na payoff pile mo.\n\n### Paka-sabi na Palaro:\n- Say tuyo'y ag-awat na payoff pile mo'y paagi na palaro na karta ed sentro a pilay.\n- Sika'y makapalaro na karta manlapas sakey a tulo a pinagkuanan:\n  1. Say **lima mo** (sika'y mag-umpisa'y kada turno mo'y anggad 5 a karta ed lima mo).\n  2. Say **karta ed bokig na payoff pile mo**.\n  3. Say **karta ed bokig na sakey a discard pile mo**.\n\n### Palaruan a Panagalan:\n- Sika'y makapalaro na karta ed sakey a sentro a pilay no say karta'y **sakey a ranggo ed bokig** na karta ed bokig na pilay (say sentro a pilay'y mag-umpisa'y Ace tan tumagos ed Queen; say Kings'y wild - sika'y makapalaro ed sakey a karta pero ag-iya'y paag-iba na ranggo. Say ibig sabien no say King'y magamit ed 4, say King'y ranggo 5 tan say sumunod a karta'y dapat 6).\n- No sika'y ag-makapalaro na sakey a karta, sika'y kailangan **mag-discards a karta** ed sakey a discard pile mo'y tapos na turno mo.\n- No say sentro a pilay'y abot ed Queen, say pilay'y ma-awat a otomatiko.\n- Say ranggo'y: A=1, 2=2, ..., 9=9, J=10, Q=11, K a wild.\n\n### Paka-aksyon:\n1. **Draw**: Ed umpisa na turno mo, draw a karta'y pang-llen na lima mo'y anggad 5 a karta. I-enter **[draw]** y tapos.\n2. **Palaro a Karta**: Ed palaro a karta, i-specify a karta tan say sentro a pilay a singa ini: **[play A♠ 0]** (no 'A♠' say karta tan '0' say sentro a pilay index).\n3. **Discard**: No sika'y ag-makapalaro na sakey a karta, discard a karta ed lima mo'y sakey a discard pile'y tapos na turno mo. I-enter **[discard A♠ 1]** (no 'A♠' say karta tan '1' say discard pile index). Ibangat a sika'y ag-makadiscard a karta ed payoff pile. Sika'y makadiscard a karta ed lima mo la.\n\n"
+  },
+  "board": {
+    "current_board": "Kasalukuyan a Board:\n\n{board}\nMakapalaro a Galaw: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Center Piles --  Saray Pile ed Sentro na Bildo",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Player {player_id}'y Panagalan ---\n",
+    "payoff": "{observation}Payoff Pile (Karta ed Bokig): {top_card}, Payoff Pile'y Labay: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Discard Pilay: {discard}\n",
+    "empty": "Anggapoy karga to."
+  },
+  "game_message": {
+    "no_cards_left": "Anggapo lay kaardan naala yo. Tandaan ya sarag yon usaren irayan kargaan: 1. Say \"hand\" mo 2. Say sankaatageyan a kard ed saray aka-discard mon pila.* 3. Say sankatagyan a karta diad anggan dinan iran inusar mod pila.* "
+  },
+  "invalid_move": {
+    "wrong_format": "Mali a format na galaw. Player {player_id} ag-nanung ed sakey a mali a galaw ed square brackets.",
+    "invalid_play": "Mali a palaro. Player {player_id} sinubukan palaro {card} ed sentro a pilay {index}.",
+    "discard_from_payoff": "Mali a discard. Player {player_id} sinubukan mag-discards a karta ed payoff pile.",
+    "discard_not_in_hand": "Ag-agawa so inekal. Say manlalaban {player_id} et sinali ton ibasura so sakey a kard ya anggapo ed lima to.",
+    "wrong_move_type": "Mali a tipo na galaw. Player {player_id} ag-nanung ed sakey a mali a tipo na galaw."
+  },
+  "game_action": {
+    "you_drew": "Nansagpot ka.",
+    "opponent_drew": "Say sakey a manlalaban et {player_id} so angala na saray kard.",
+    "you_played": "Tinogtogen moy {card} diad center pile {index}.",
+    "opponent_played": "Say manlalaban {player_id} so akilabanan na {card} diad sentro a pila {index}.",
+    "you_discarded": "Indiscard mo na {card} ed discard pile {index}, a kaibat na ibagam a natan la na turn mo. No further actions diad yo is considered para ed this turn. Player {next_player_id} anggan to na.",
+    "opponent_discarded": "Say manggagawa {player_id} inyakar so {card} ed samay discard pile {index}, a mangibaga met a tapos da so turn da. Anggapoy arum a gawa'y Say manggagawa {player_id} a pablien para sayan turn. Say manggagawa {next_player_id}, sika so ontey. Paki-enter moy gawa'y mo ed format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Say manggagawa {current_player} inmaliw so payoff pile da! Say manggagawa {current_player} so nangabak!",
+    "deadlock_player_0": "Deadlock na abot! Player 0 y manalo ed {player_0_payoff} a karta'y labay vs Player 1'y {player_1_payoff} a karta.",
+    "deadlock_player_1": "Deadlock na abot! Player 1 y manalo ed {player_1_payoff} a karta'y labay vs Player 0'y {player_0_payoff} a karta.",
+    "deadlock_tie": "Deadlock na abot ed tie! Duaran a player y {player_0_payoff} a karta'y labay. Player {current_player} y manalo ed default."
+  }
+}

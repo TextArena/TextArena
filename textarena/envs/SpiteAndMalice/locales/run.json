@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Uri umukinnyi {player_id} muri muzunguruko wa kabiri wa Spite na Malice. Inshingano yawe ni ukwezi kugera kuwa wa mbere wuzuye umurongo wawe wa malipo.\n\n### Isesengura ry'Umukino:\n- Inshingano ni ukureho umurongo wawe wa malipo ukijisha amakarata kuri mirongo ya katikati.\n- Ushobora kujisha amakarata aturuka kuri nyenzo zitatu:\n  1. **Igikapu cawe** (utangira kila zamu ukagira amakarata 5 muri igikapu cawe).\n  2. **Ikarata ya juu ya umurongo wawe wa malipo**.\n  3. **Ikarata ya juu ya umwe mu mirongo yawe ya kureho**.\n\n### Imisemo y'Umukino:\n- Ushobora kujisha ikarata kuri umurongo wa katikati iyo ari **imwe ryari hejuru** ya ikarata ya juu kuri uwo murongo (imirongo ya katikati itangira na Ace ikajya kugeza kuri Queen; Abami ni amakarata y'ubwenge - bashobora kujishwa kuri ikarata yose ariko ntibahindure umurongo wa ryari. Ibi bisobanura iyo Mwami akoreshejwe nyuma ya 4, Mwami uwo ari 5 na ikarata ikurikirwa igomba kuba 6).\n- Iyo utashobora kujisha amakarata y'indi, ugomba **kureho ikarata** kuri umwe mu mirongo yawe ya kureho ukarangiza zamu yawe.\n- Iyo umurongo wa katikati ugeze kuri Queen, uzoshwirwa wenyine.\n- Umurongo wa ryari ni: A=1, 2=2, ..., 9=9, J=10, Q=11, Mwami ari ubwenge.\n\n### Ibikorwa:\n1. **Kurasa**: Ku ntangiriro za zamu yawe, rasira amakarata ukayejuru igikapu cawe kugeza kuri amakarata 5. Jandika **[draw]** ukatangira.\n2. **Kujisha Ikarata**: Kujisha ikarata, sosha ikarata na umurongo wa katikati uti: **[play A♠ 0]** (aho 'A♠' ni ikarata na '0' ni indeksi ya umurongo wa katikati).\n3. **Kureho**: Iyo utashobora kujisha amakarata y'indi, reho ikarata muri igikapu cawe kuri umurongo wa kureho ukarangiza zamu yawe. Jandika **[discard A♠ 1]** (aho 'A♠' ni ikarata na '1' ni indeksi ya umurongo wa kureho). Jandika kwamba ntuwakiri kureho ikarata yose muri umurongo wa malipo. Ushobora kureho amakarata muri igikapu cawe gusa.\n\n"
+  },
+  "board": {
+    "current_board": "Kibao cha sasa:\n\n{board}\nMikikio iliyopatikana: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Mikundiro ya Kati ---\n",
+    "pile": "{observation}Kifurushi {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Mtazamo wa Mchezaji {player_id} ---\n",
+    "payoff": "{observation}Kifurushi cha Malipo (Kadi ya Juu): {top_card}, Urefu wa Kifurushi cha Malipo: {payoff_length}\n",
+    "hand": "{observation}Mkono: {hand}\n",
+    "discard": "{observation}Vifurushi vya Taka: {discard}\n",
+    "empty": "Itagira ikintu na kimwe kirimwo."
+  },
+  "game_message": {
+    "no_cards_left": "Nta karata zimesalia kuunganishwa. Wibuke kwamba unaweza kuteka karata kutoka kwa masoko haya:\n  1. **Mkono wawe**.\n  2. **Karata ya juu ya mchango wa malipo**.\n  3. **Karata ya juu ya kundi lolote la kutaya karata**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Umukinnyi {player_id} ntiyishuye n'ingingo yemewe mu nkingi z'imfuruka.",
+    "invalid_play": "Iteka ry'ubisha. Mchezaji {player_id} yagerageje kuteka {card} kwenye kundi la kati {index}.",
+    "discard_from_payoff": "Kutaya karata kuriya. Mchezaji {player_id} yagerageje kutaya karata mu mchango wa malipo.",
+    "discard_not_in_hand": "Umukinyi {player_id} yagerageje guta ikarata itari mu kuboko.",
+    "wrong_move_type": "Ishusho ry'ugendo siriyo. Mchezaji {player_id} ntiyakoresheje ishusho ry'ugendo lenye maana."
+  },
+  "game_action": {
+    "you_drew": "Waratwaye udukarata.",
+    "opponent_drew": "Umukinyi {player_id} yarakuye amakarata.",
+    "you_played": "Wakinishije {card} ku murwi wo hagati {index}.",
+    "opponent_played": "Umukinyi {player_id} yakina {card} ku murwi wo hagati {index}.",
+    "you_discarded": "Wakoresheje {card} kwa kuyishira kwenye rivuru {index}, ikima ngo wumaze umwanya wawe. Nta kazi nyingine ya wewe itazokorwa muri uyu mwanya. Umukinnyi {next_player_id} azakina ukurikira.",
+    "opponent_discarded": "Mchezaji {player_id} amefuta {card} hadi kifurushi cha taka {index}, ambacho pia ina maana kwamba amemaliza mchezo wake. Hatua zaidi za Mchezaji {player_id} hazizingatiwi kwa mchezo huu. Mchezaji {next_player_id}, utacheza mchezo ujao. Tafadhali ingiza hatua yako kwa muundo [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mchezaji {current_player} amemaliza kifurushi cha malipo! Mchezaji {current_player} anashinda!",
+    "deadlock_player_0": "Kufikia kikomo kimefikiwa! Mchezaji 0 anashinda na {player_0_payoff} kadi zimesalia dhidi ya Mchezaji 1 {player_1_payoff} kadi.",
+    "deadlock_player_1": "Kufikia kikomo kimefikiwa! Mchezaji 1 anashinda na {player_1_payoff} kadi zimesalia dhidi ya Mchezaji 0 {player_0_payoff} kadi.",
+    "deadlock_tie": "Kutobesana kw'umuhigo kwabereye! Mchezaji wese w'ombi wabo wose wana {player_0_payoff} karata zimesalia. Mchezaji {current_player} atsinzwe kwa kawaida."
+  }
+}

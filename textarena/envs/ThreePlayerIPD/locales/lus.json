@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "I Player {player_id} i ni, 3-player Iterated Prisoner's Dilemma khelhna ah. He match hi {num_rounds} round a awh dawn.\nRound structure:\n• {conv_rounds} free-chat turns\n• 1 decision turn - opponent pakhat tan token pakhat theh lut: '[<opp-id> cooperate]' emaw '[<opp-id> defect]' (entirnan '[1 defect] [2 cooperate]'; default chu 'cooperate' a ni). \nPair-wise payoff matrix (unordered pair tinah hman tur):\n  - An pahnihin an cooperate  ->  {reward}\n  - An pahnihin an defect     ->  {punishment}\n  - I defect, an cooperate -> {temptation}\n  - I cooperate, an defect -> {sucker}\nRound zawng zawng zawh taka score sang ber neitu chu a chak."
+  },
+  "round": {
+    "start": "─── Round {round} tan ───\tI hnuai {conv_rounds} round chhungin inbiakna free i nei thei.",
+    "chat_finished": "Round {round} a inbiakna zawh tawh. I thutlukna theh lut, opponent pakhat tan token pakhat: `[pid cooperate]` emaw `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Chanchin:",
+    "pair_line": "{observation}\n\t Player {i} vs Player {j} chose to {choice_i} and {choice_j} respectively (Player {i} gained {gain_i}, Player {j} gained {gain_j})",
+    "scores_open": "{observation} -> Tunlai score: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Tun thlenga score: {scores}.  Ranking group (chheber→thaiber): {groups}"
+  }
+}

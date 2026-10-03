@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Qiegħed tilgħab Solitaire Klondike. L-għan tiegħek hu li tmexxi l-karti kollha fil-fondazzjonijiet.\n\nRegoli tal-Logħba:\n- Fondazzjonijiet (F1-F4): Bini sal-Aċi sal-Re fil-kulur\n- Mejjelin tal-tableau (T1-T7): Bini 'l isfel bil-kuluri alternati (aħmar fuq iswed, iswed fuq aħmar)\n- Stock: Mexxa karti għall-waste pile\n- Waste (W): Karta fuq għall-logħba\n\nKmandi:\n- 'draw' - Mexxa karti mill-stock għall-waste\n- 'move <source> <destination> [count]' - Mexxa karti bejn il-mejjel\n  Eżempji: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Il-kont kannu wkoll 'all', li se jipprova jmixxi l-karti kollha b'wiċċhom 'l fuq.\n- 'forfeit' - Iġġelab il-logħba immedjatament u tħallas is-skor attwali\n- Isemijiet tal-mejjel: W (waste), F1-F4 (fondazzjonijiet), T1-T7 (tableau)\n\nTista' twettaq azzjonijiet multipli f'dawra waħda billi tsepara bi kommi:\n  Eżempju: 'draw, move W T1, move T2 F1'\n\nBiss ir-Rejiet jistgħu jitpoġġew fuq mejjel tal-tableau vojt.\nL-azzjonijiet jitwettqu fl-ordni - jekk wieħed jikkompri, l-azzjonijiet li jmissu jitqiegħdu.\nUża 'forfeit' jekk temmen li l-logħba huwa impossibbli li tirbaħ."
+  },
+  "format_error": {
+    "no_brackets": "Format ta' azzjoni invalidu. L-azzjoni għandha tkun bejn il-parentesiji.",
+    "no_closing_bracket": "Format ta' azzjoni invalidu. Brakketta tal-għeluq nieqsa ']'",
+    "empty_command": "Kmand vojt. Ittajpja 'draw' jew 'move <source> <destination> [count]'.",
+    "empty_action": "Azzjoni vojta",
+    "move_needs_args": "Il-kmand Move jeħtieġ is-sors u d-destinazzjoni. Użu: 'move <source> <destination> [count]'",
+    "count_positive": "In-numru għandu jkun pożittiv jew 'all'",
+    "count_invalid": "In-numru invalidu. Uża numru jew 'all'",
+    "unknown_command": "Kmand unknown '{cmd}'. Uża 'draw', 'move <source> <destination> [count]', jew 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Azzjoni eżegwita {n} qabel il-falliment.",
+    "failed": "Azzjoni {n} faillet: {msg}"
+  },
+  "move_result": {
+    "drew": "Ħa karta/i mill-ħażna għall-iskart.",
+    "cannot_draw": "Ma nistgħux inġibdu, kemm l-ħażna kif ukoll il-iskart huma vojta.",
+    "invalid_pile": "Isem tal-pil mhux validu. Uża W, F1-F4, jew T1-T7",
+    "foundation_one_card": "Jista ' jimxi biss karta 1 għall-bażi",
+    "waste_to_foundation_ok": "Karta mċaqilqa mill-iskart għall-fondazzjoni F{dst}",
+    "waste_to_foundation_bad": "Ma tistax timxi karta skart għal dik il- pil fondament",
+    "tableau_to_foundation_ok": "Mexxa karta mit-tableau T{src} għall-fondazzjoni F{dst}",
+    "tableau_to_foundation_bad": "Ma tistax timxi bil- karti tal- tabella għal dik il- pillola ta ' l- isfond .",
+    "foundation_to_foundation": "Ma jistax jimxi minn fondazzjoni għal oħra.",
+    "waste_to_tableau_one_card": "Jista ' jiċċaqlaq biss karta 1 mill-iskart għall tableau",
+    "waste_to_tableau_ok": "Il-karta mċaqilqa mill-iskart għat-tabella T{dst}",
+    "waste_to_tableau_bad": "Ma tistax tpoġġi karta skart fuq dik il- munzell tableau",
+    "no_face_up": "Ebda karti wiċċ fuq biex jinġiebu.",
+    "tableau_to_tableau_ok": "Mexxa {count} karta/i mit-tableau T{src} għat-T{dst}",
+    "tableau_to_tableau_bad": "Mhuwiex possibbli tmexxi {count} karta/i mit-T{src} għat-T{dst}",
+    "foundation_to_tableau_one_card": "Jista ' biss jimxi karta 1 mill- bażi għall tableau",
+    "foundation_empty": "Il-Fondazzjoni F{src} hija vojta.",
+    "foundation_to_tableau_ok": "Mexxa karta minn fondazzjoni F{src} għat-tableau T{dst}",
+    "foundation_to_tableau_bad": "Ma jistax jitqiegħed karta tal-fondazzjoni fuq it-tabella T{dst}",
+    "to_waste_or_stock": "Ma jistax jitneħħa għal skart jew ħażna."
+  },
+  "outcome": {
+    "forfeit": "Il-logħba ġiet miċħuda. Punteġġ finali: {score} karti fil-fondazzjonijiet.",
+    "won": "Prosit! Rebħejt il-Klondike Solitaire!",
+    "turn_limit": "Logħba spiċċat! Wwasalt il-massimu ta' {max_turns} dawriet. Punteġġ: {score} karti fil-fondazzjonijiet."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== Il-Kuntatt tal-Milied ta 'Settembru 2009",
+    "turn": "Dwir: {turn}/{max_turns}",
+    "stock": "Stokk: {stock} kartijiet",
+    "waste": "L-iskart (W): {waste}",
+    "foundations_header": "Fondazzjonijiet:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Tabella:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

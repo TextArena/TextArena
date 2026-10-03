@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Nang Player {player_id} oiba Iterated Prisoner's Dilemma {num_rounds} round sagatpa.\n\nGame Structure:\n- Decision okchari koina {total_conversation_rounds} turns ta chat leibak oiradi.\n- Aduga, khara player na cooperate leiba defect leibada eikhoi thokpa.\n\nPayoff Matrix (prati round eikhoi):\n- Khara Cooperate ➜ prati {cooperate_reward}\n- Khara Defect ➜ prati {mutual_defect_reward}\n- Oka Defects, oka Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nKinba Paibi:\n- Chat hourak: nang chat leibak oiradi.\n- Decision hourak: '[Cooperate]' emba '[Defect]' (case-insensitive) shaoradi. Nang text shaorakpa adu thokpa."
+  },
+  "phases": {
+    "conversation_finished": "Chat leibak oiradi round {round}. '[Cooperate]' emba '[Defect]' \\boxed{{}} shaoradi.",
+    "starting_round": "--- Round {round} Shuru ---",
+    "round_summary": "{round}  রাউন্ডগী ফলাফল:\n{outcome}\n ০  খেলোয়াড় {r0} লাভ করে (মোট {score_0}), ১  খেলোয়াড় {r1} লাভ করে (মোট {score_1})।"
+  },
+  "outcome": {
+    "winner": "Player {winner} {win_score} - {lose_score} jite.",
+    "draw": "ড্র! দুই খেলোয়াড়ই {s0} স্কোর করে।",
+    "round_both_cooperate": "দুই খেলোয়াড়ই সহযোগিতা করে।",
+    "round_both_defect": "দুই খেলোয়াড়ই প্রত্যাখ্যান করে।",
+    "round_p0_cooperates_p1_defects": " ০  খেলোয়াড় সহযোগিতা করে, ১  খেলোয়াড় প্রত্যাখ্যান করে।",
+    "round_p0_defects_p1_cooperates": " ০  খেলোয়াড় প্রত্যাখ্যান করে, ১  খেলোয়াড় সহযোগিতা করে।"
+  }
+}

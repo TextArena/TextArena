@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "คุณคือ {role} ในเกม Colonel Blotto.\nเป้าหมายของคุณคือการชนะรอบมากกว่าคู่แข่งของคุณ.\nในแต่ละรอบ จัดสรรหน่วย {num_total_units} หน่วยอย่างแม่นยำไปยังสนาม {field_names}.\nผู้เล่นที่จัดสรรหน่วยมากกว่าในสนามนั้น ๆ จะเป็นผู้ชนะสนามนั้น และผู้เล่นที่ชนะสนามมากกว่าจะเป็นผู้ชนะรอบ.\nตัวอย่างเช่น '[A7 B7 C6]' จัดสรร 7 หน่วยให้กับ A, 7 หน่วยให้กับ B และ 6 หน่วยให้กับ C.",
+    "commander_alpha": "ผู้บัญชาการ Alpha",
+    "commander_beta": "ผู้บัญชาการ Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - รอบ {current_round}/{num_rounds} ===\nรอบที่ชนะ - ผู้บัญชาการ Alpha: {alpha_score}, ผู้บัญชาการ Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nรอบ {current_round}\nผู้บัญชาการ Alpha จัดสรร: {p0_allocations}\nผู้บัญชาการ Beta จัดสรร: {p1_allocations}\n",
+    "winner_alpha": "{message}ผู้ชนะ: ผู้บัญชาการ Alpha",
+    "winner_beta": "{message}ผู้ชนะ: ผู้บัญชาการ Beta",
+    "tie": "{message}เสมอ!"
+  },
+  "invalid_move": {
+    "wrong_format": "รูปแบบการป้อนไม่ถูกต้อง ใช้: A:5, B:10, C:5",
+    "invalid_field": "ชื่อสนามไม่ถูกต้อง สนามที่ถูกต้อง: {field_names}",
+    "wrong_allocation_value": "การจัดสรรทั้งหมดต้องเป็นจำนวนเต็มไม่ติดลบ",
+    "incorrect_total_units": "คุณต้องจัดสรรหน่วย {num_total_units} หน่วยอย่างแม่นยำ ผลรวมปัจจุบัน: {current_sum}",
+    "good_allocations": "การจัดสรรเป็นไปอย่างดี"
+  },
+  "outcome": {
+    "winner_alpha": "ผู้บัญชาการ Alpha ชนะ {score_0}-{score_1} หลังจาก {num_rounds} รอบ!",
+    "winner_beta": "ผู้บัญชาการ Beta ชนะ {score_1}-{score_0} หลังจาก {num_rounds} รอบ!",
+    "draw": "เกมจบลงด้วยผลเสมอ {score_0}-{score_1} หลังจาก {num_rounds} รอบ!",
+    "early_winner_alpha": "ผู้บัญชาการ Alpha ชนะ {scores_0}-{scores_1} (ได้รับเสียงข้างมาก)!",
+    "early_winner_beta": "ผู้บัญชาการ Beta ชนะ {scores_1}-{scores_0} (ได้รับเสียงข้างมาก)!"
+  }
+}

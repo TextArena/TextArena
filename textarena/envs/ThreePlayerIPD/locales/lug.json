@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Oli Player {player_id} mu mizannyo ya 3 eya Iterated Prisoner's Dilemma. Omupiira guwa {num_rounds} round.\nNkola ya round:\n• {conv_rounds} zamu za kuwagamanya\n• 1 zamu ya kufanya ndagiriro - sonyeza token moja kwa buli mukwano: '[<opp-id> cooperate]' oba '[<opp-id> defect]' (nga '[1 defect] [2 cooperate]'; ekisinga kye kya 'cooperate').\nMatiriisi ya mapato ya kuwaganya (egagibwa ku buli kikundi ekitasosole):\n  - Bombi bwegassi  ->  {reward}\n  - Bombi bwenyigiri     ->  {punishment}\n  - Oli wenya, be gassi -> {temptation}\n  - Oli gassi, be wenya -> {sucker}\nOmuzannyi (aba muzannyi) ali na akala za juu zaidi ku nkomerero ya round zote azawangula."
+  },
+  "round": {
+    "start": "─── Ekivvula kya Round {round} ───\tOsiibye kuwuliriza bulijjo kwa {conv_rounds} emizannyo ejja.",
+    "chat_finished": "Lutalo lwa njogera lusaze lwakati lwa luzunguko {round}. Saba kufanya maamuzi yo, etiketi emu buli mudduki: `[pid cooperate]` oba `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Ebivuddemu:",
+    "pair_line": "{observation}\n\t Muzannyi {i} vs Muzannyi {j} yalonda {choice_i} na {choice_j} (Muzannyi {i} yegatta {gain_i}, Muzannyi {j} yegatta {gain_j})",
+    "scores_open": "{observation} -> Ebivvulu ebikoleddwa: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Muzannyi {player_id} ({score})",
+    "finalize": "{observation}  ebikozesebwa mu by'obufuzi."
+  },
+  "outcome": {
+    "final": "Akala za mwisho: {scores}.  Makundi ga ndagiririko (mbi→nze): {groups}"
+  }
+}

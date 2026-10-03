@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround-lokaliseringsfil. OVERSETT IKKE nøkler (venstre side). Oversett bare verdier (høyre side). Behold hver {placeholder} eksakt som den er.",
+  "_slots": {
+    "{num_players}": "Antall spillere i kampen",
+    "{width}": "Bredde på brettet i celler",
+    "{height}": "Høyde på brettet i celler",
+    "{player_id}": "Spillerens nummer (0-basert)",
+    "{board}": "Det tegnede ASCII-rutenettet; behold nøytralt, oversett aldri tegnene",
+    "{reason}": "Den tegnede slutten-av-spill-årsaksfrasen",
+    "{groups}": "Nøytral rangeringsdata (en liste over spiller-id-grupper, best til verst); oversett ikke"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-spiller Surround på et {width}x{height}-rutenett.\nDu er spiller {player_id}. Gyldige trekk: '[up]' '[down]' '[left]' '[right]' eller w/s/a/d.\nMål: overleve alle andre. Spor er dødelige; veggtreff dreper; frontkollisjoner dreper begge."
+  },
+  "board": {
+    "current": "Nåværende brett:\n{board}",
+    "after_moves": "Brett etter samtidige trekk:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Spiller {player_id} døde på grunn av ugyldig trekk."
+  },
+  "outcome": {
+    "survived_win": "Spiller {player_id} overlevde; alle andre krasjet.",
+    "all_crashed": "Alle spillere krasjet samtidig.",
+    "outlived": "Spiller overlevde alle andre.",
+    "all_dead": "Alle spillere er døde.",
+    "turn_limit": "Tidsbegrensning nådd - den lengste overlevende vinner.",
+    "ranking": "{reason} Endelig rangeringsgrupper (best→verst): {groups}"
+  }
+}

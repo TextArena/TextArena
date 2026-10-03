@@ -1,0 +1,817 @@
+{
+  "p0_sweeps_10_auctions": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Net-worth 55 > 0",
+        "role": "Player 0",
+        "turn_count": 10
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Net-worth 55 > 0",
+        "role": "Player 1",
+        "turn_count": 10
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a game of HighSociety (2-player version).\nGame flow:  Ten prestige cards are auctioned one after another.\nBidding:    Each auction, secretly choose a money card 1-11 and reveal.\n            • Higher bid wins the prestige card and discards that money card.\n            • Lower bid keeps their money card.\n            • Tie -> both bids are returned and the same prestige card is re-auctioned.\nScoring:    After all ten auctions, add **remaining cash + prestige points**.\n            Higher *net-worth* wins (exact tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 1/10  |  Prestige card: 2",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a game of HighSociety (2-player version).\nGame flow:  Ten prestige cards are auctioned one after another.\nBidding:    Each auction, secretly choose a money card 1-11 and reveal.\n            • Higher bid wins the prestige card and discards that money card.\n            • Lower bid keeps their money card.\n            • Tie -> both bids are returned and the same prestige card is re-auctioned.\nScoring:    After all ten auctions, add **remaining cash + prestige points**.\n            Higher *net-worth* wins (exact tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 1/10  |  Prestige card: 2",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 2, P1 bid 1. Player 0 wins prestige 2 (total 2).",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 2/10  |  Prestige card: 1",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 2, P1 bid 1. Player 0 wins prestige 2 (total 2).",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 2/10  |  Prestige card: 1",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 3, P1 bid 1. Player 0 wins prestige 1 (total 3).",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 3/10  |  Prestige card: 5",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 3, P1 bid 1. Player 0 wins prestige 1 (total 3).",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 3/10  |  Prestige card: 5",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 4, P1 bid 1. Player 0 wins prestige 5 (total 8).",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 4/10  |  Prestige card: 10",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 4, P1 bid 1. Player 0 wins prestige 5 (total 8).",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 4/10  |  Prestige card: 10",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 5, P1 bid 1. Player 0 wins prestige 10 (total 18).",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 5/10  |  Prestige card: 7",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[6]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 5, P1 bid 1. Player 0 wins prestige 10 (total 18).",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 5/10  |  Prestige card: 7",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 6, P1 bid 1. Player 0 wins prestige 7 (total 25).",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 6/10  |  Prestige card: 6",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[6]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 6, P1 bid 1. Player 0 wins prestige 7 (total 25).",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 6/10  |  Prestige card: 6",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[7]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[7]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 7, P1 bid 1. Player 0 wins prestige 6 (total 31).",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 7/10  |  Prestige card: 9",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[8]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 7, P1 bid 1. Player 0 wins prestige 6 (total 31).",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 7/10  |  Prestige card: 9",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 8, P1 bid 1. Player 0 wins prestige 9 (total 40).",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 8/10  |  Prestige card: 3",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[8]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 8, P1 bid 1. Player 0 wins prestige 9 (total 40).",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 8/10  |  Prestige card: 3",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[9]' '[10]' '[11]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[9]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[9]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 9, P1 bid 1. Player 0 wins prestige 3 (total 43).",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 9/10  |  Prestige card: 4",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[10]' '[11]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[10]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 9, P1 bid 1. Player 0 wins prestige 3 (total 43).",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 9/10  |  Prestige card: 4",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 10, P1 bid 1. Player 0 wins prestige 4 (total 47).",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 10/10  |  Prestige card: 8",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[10]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 10, P1 bid 1. Player 0 wins prestige 4 (total 47).",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 10/10  |  Prestige card: 8",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[11]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[11]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[11]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 11, P1 bid 1. Player 0 wins prestige 8 (total 55).",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      }
+    ],
+    "rewards": {
+      "0": 1,
+      "1": -1
+    }
+  },
+  "tie_and_invalids": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 3
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 3
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are Player 0 in a game of HighSociety (2-player version).\nGame flow:  Ten prestige cards are auctioned one after another.\nBidding:    Each auction, secretly choose a money card 1-11 and reveal.\n            • Higher bid wins the prestige card and discards that money card.\n            • Lower bid keeps their money card.\n            • Tie -> both bids are returned and the same prestige card is re-auctioned.\nScoring:    After all ten auctions, add **remaining cash + prestige points**.\n            Higher *net-worth* wins (exact tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'.",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 1/10  |  Prestige card: 2",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "bad",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "bad",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Must include exactly one [X] money card. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are Player 1 in a game of HighSociety (2-player version).\nGame flow:  Ten prestige cards are auctioned one after another.\nBidding:    Each auction, secretly choose a money card 1-11 and reveal.\n            • Higher bid wins the prestige card and discards that money card.\n            • Lower bid keeps their money card.\n            • Tie -> both bids are returned and the same prestige card is re-auctioned.\nScoring:    After all ten auctions, add **remaining cash + prestige points**.\n            Higher *net-worth* wins (exact tie -> draw).\n\n**Action syntax**  →  bid a single card like '[7]' or '[11]'.",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 1/10  |  Prestige card: 2",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Tie - bids returned. Rebid!",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[6]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Tie - bids returned. Rebid!",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "action": "[3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 6, P1 bid 3. Player 0 wins prestige 2 (total 2).",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 2/10  |  Prestige card: 1",
+        "to": 1,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[6]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[6]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 6, P1 bid 3. Player 0 wins prestige 2 (total 2).",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 2/10  |  Prestige card: 1",
+        "to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[7]' '[8]' '[9]' '[10]' '[11]'",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[6]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[6]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: You no longer have that money card. Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[7]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[7]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "P0 bid 7, P1 bid 1. Player 0 wins prestige 1 (total 3).",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "\n### Auction 3/10  |  Prestige card: 5",
+        "trailing_to": 0,
+        "type": "GAME_MESSAGE"
+      },
+      {
+        "from": -1,
+        "text": "Your remaining money cards: '[1]' '[2]' '[3]' '[4]' '[5]' '[8]' '[9]' '[10]' '[11]'",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  }
+}

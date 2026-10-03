@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Olet Pelaaja {player_id} pelaamassa {colour} ({piece}) Othello-pelissä.\nTavoitteesi on saada enemmän omia värisiä paloja pelilaudalle pelin loppuun mennessä.\nVuorollasi aseta palanen siten, että se reunustaa yhden tai useamman vastustajasi palasen - missä tahansa suunnassa (vaakasuunnassa, pystysuunnassa tai diagonaalisesti) - uuden palasen ja toisen jo olemassa olevan palasen välille. Kaikki reunustetut vastustajan palaset kääntyvät sinun väriksi.\nAnna siirtosi muodossa '[rivi, sarake]'."
+  },
+  "board": {
+    "game_board": "Pelilauta:\n{board}",
+    "valid_moves": "{observation}\nKelvolliset siirrot: {moves}",
+    "no_valid_moves_reset": "{observation}\nEi kelvollisia siirtoja - sinun täytyy ehkä ohittaa.",
+    "no_valid_moves_step": "{observation}\nEi kelvollisia siirtoja – sinun täytyy ehkä ohittaa.",
+    "scores_reset": "{observation}\nNykyiset pisteet - Musta: {black_count}, Valkoinen: {white_count}\n",
+    "scores_step": "{observation}\nPisteet - Musta: {black_count}, Valkoinen: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Siirron on oltava muodossa [rivi, sarake].",
+    "illegal": "Laiton siirto. Kelvolliset siirrot: {valid}"
+  },
+  "game_action": {
+    "skipped": "Pelaaja {pid} joutui ohittamaan vuoronsa",
+    "played": "Pelaaja {pid} ({piece}) pelasi [{r}, {c}] kääntäen {flipped} palasen/palasia"
+  },
+  "game_message": {
+    "must_skip": "Pelaaja {pid} ({piece}) ei ole kelvollisia siirtoja ja joutuu ohittamaan."
+  },
+  "outcome": {
+    "black_wins": "Musta voittaa {black_count}-{white_count}.",
+    "white_wins": "Valkoinen voittaa {white_count}-{black_count}.",
+    "draw": "Tasapeli {black_count}-{white_count}."
+  }
+}

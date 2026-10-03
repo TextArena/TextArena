@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "あなたはカウントダウンの数字ゲームをプレイしています！\n目標: +, -, *, / を使用して数字を組み合わせて目標に到達します。\nアクション形式: [i j op] ここで i, j はインデックス、op は演算子です。\n例: [0 2 *] はインデックス 0 の数字とインデックス 2 の数字を掛け合わせます。\n除算は整数の結果でなければなりません。"
+  },
+  "board": {
+    "header": "TARGET: {target}\n\n利用可能な数字:\n{numbers}",
+    "best": "{observation}\n\nこれまでの最高: {best_value} (差: {distance})\n最高の式: {best_expression}",
+    "history": "{observation}\n\n手の履歴:\n{moves}",
+    "progress": "{observation}\n現在の進行スコア: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "無効なアクション形式。 `[i j op]` を使用してください。ここで i, j はインデックス、op は +,-,*,/ です。",
+    "invalid_indices": "無効なインデックス。異なるもので、0-{max_index} の範囲内である必要があります。",
+    "invalid_operation": "無効な演算 (0 で除算または非整数の結果)"
+  },
+  "outcome": {
+    "win": "パーフェクト！目標に正確に到達しました: {target}",
+    "no_moves": "手がありません。最高の結果: {best_value} (目標: {target})",
+    "turn_limit": "ターン制限に達しました。最高の結果: {best_value} (目標: {target})"
+  }
+}

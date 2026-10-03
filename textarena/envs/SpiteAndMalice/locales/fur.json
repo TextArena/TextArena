@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Tu sês Zugador {player_id} in un zûc a doi zugador di Spite e Malice. Il tô obietîf al è di jessi il prin a svuadagnâ la tô pile di paje.\n\n### Panoramiche dal Zûc:\n- L'obietîf al è di svuadagnâ la tô pile di paje zughìn cartis tes pilis centrâls.\n- Tu puedis zughâ cartis di trê sorgjentis:\n  1. La tô **man** (tu scomencis ogni volte cun fint a 5 cartis in man).\n  2. La **carte in cime de tô pile di paje**.\n  3. La **carte in cime di cualsiasi des tôs pilis di scart**.\n\n### Regulis di Zûc:\n- Tu puedis zughâ une carte in une pile centrâl se e je **di un rang plui alt** de carte in cime di chê pile (lis pilis centrâls a scomencin cun l'As e a van fin ae Regjine; i Re a son cartis joker - a puedin jessi zughadis su cualsiasi carte ma no cambin la sequenze dai rangs. Chest al vûl dî che se un Re al ven doprât dopo un 4, allore chel Re al è di rang 5 e la prossime carte e à di jessi un 6).\n- Se tu no puedis zughâ altris cartis, tu âs di **scartâ une carte** in une des tôs pilis di scart par finî la tô volte.\n- Se une pile centrâl a rive ae Regjine, e sarà svuadagnade in automatic.\n- La ordine dai rangs e je: A=1, 2=2, ..., 9=9, J=10, Q=11, K come joker.\n\n### Azions:\n1. **Pescje**: A l'inizi de tô volte, pescje cartis par jemplâ la tô man fint a 5 cartis. Inserìs **[draw]** par scomençâ.\n2. **Zûcje une Carte**: Par zughâ une carte, specifiche la carte e la pile centrâl cussì: **[play A♠ 0]** (dulà 'A♠' e je la carte e '0' e je l'indice de pile centrâl).\n3. **Scart**: Se tu no puedis zughâ altris cartis, scart une carte de la tô man in une pile di scart par finî la tô volte. Inserìs **[discard A♠ 1]** (dulà 'A♠' e je la carte e '1' e je l'indice de pile di scart). Nota che tu no puedis scartâ altris cartis de la pile di paje. Tu puedis dome scartâ lis cartis de la tô man.\n\n"
+  },
+  "board": {
+    "current_board": "Tavoliere corrent:\n\n{board}\nMozions disponibils: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pielis centrâls -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Viodude di Zogador {player_id} ---\n",
+    "payoff": "{observation}Pile di pene (carte alte): {top_card}, Lungjece de pile di pene: {payoff_length}\n",
+    "hand": "{observation}Man: {hand}\n",
+    "discard": "{observation}Pilis di discjart: {discard}\n",
+    "empty": "Vuadagn no doprât."
+  },
+  "game_message": {
+    "no_cards_left": "No 'ndi son plui cjartis di tirâ fûr. Visiti che tu puedis zuiâ cjartis di chescj fonts:\n  1. La **tue man**.\n  2. La **cjarte parsore de pile dal to pagament**.\n  3. La **cjarte parsore di cualsisei de tôs pilis di scart**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Format di mosse invalide. Il zuiadôr {player_id} nol à rispuindût cuntune mosse valide tra parentesi cuadrade.",
+    "invalid_play": "Zuanghe no valide. Zogador {player_id} al à provât a zuiâ {card} su pile centri {index}.",
+    "discard_from_payoff": "Discart invalid. Il zuiadôr {player_id} al à cirût di discardâ une carte dal pay-off pile (cluster).",
+    "discard_not_in_hand": "Scart invalid. Il giocadôr {player_id} al à provât a scartâ une cjarte che nol è in man.",
+    "wrong_move_type": "Gjucadôr {player_id} nol à rispuindût cuntun moviment valide."
+  },
+  "game_action": {
+    "you_drew": "Tu âs tirât lis schedis.",
+    "opponent_drew": "Il zuiadôr {player_id} al tirà lis schedis.",
+    "you_played": "Tu âs zuiât {card} su la pile centrâl {index}.",
+    "opponent_played": "Zogador {player_id} al à zuiât {card} su pile centri {index}.",
+    "you_discarded": "Tu âs discjart {card} te pile di discjart {index}, ce che al vûl dî che tu âs finît la tô volte. Nissune azion ulteriore de tô e je considerade par cheste volte. Zogador {next_player_id} al sarà il prossim.",
+    "opponent_discarded": "Zogador {player_id} al à discjart {card} te pile di discjart {index}, ce che al vûl dî che al à finît la sô volte. Nissune azion ulteriore di Zogador {player_id} e je considerade par cheste volte. Zogador {next_player_id}, tu sarâs il prossim. Inserìs la tô azion tal format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Zogador {current_player} al à finît la sô pile di pene! Zogador {current_player} al vinç!",
+    "deadlock_player_0": "Stât di blocc reached! Zogador 0 al vinç cun {player_0_payoff} cartis rimasti vs {player_1_payoff} cartis di Zogador 1.",
+    "deadlock_player_1": "Stât di blocc reached! Zogador 1 al vinç cun {player_1_payoff} cartis rimasti vs {player_0_payoff} cartis di Zogador 0.",
+    "deadlock_tie": "Impat atignût cun paritât! I doi zugadôrs a àn {player_0_payoff} cjartis restantis. Il Zugadôr {current_player} al vinç par default."
+  }
+}

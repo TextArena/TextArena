@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "تہوہی کلونڈیک سولیٹیئر کھیلتھ ہوہی۔ توہی目标 چھے سارے کارڈ فاؤنڈیشن پائیلسس منز منتقل کرنا۔\n\nکھیل دے اصول:\n- فاؤنڈیشن پائیلسس (F1-F4): ایس توں کنگ تک سوٹس منز بناو\n- ٹیبلو پائیلسس (T1-T7): ریڈ توں بلیک، بلیک توں ریڈ رنگس منز بناو\n- سٹاک: ڈرا کارڈز توےسٹ پائیلسس منز\n- ویسٹ (W): ٹاپ کارڈ کھیلنے لئی تیار\n\nکمانڈز:\n- 'draw' - سٹاک توں ویسٹ پائیلسس منز ڈرا کرنا\n- 'move <source> <destination> [count]' - کارڈز پائیلسس منز منتقل کرنا\n  مثال: 'move W T1', 'move T1 F2', 'move T3 T5 2'۔ کاؤنٹ 'all' وی ہو سکدا، جو سارے فیس اپ کارڈز منتقل کرنے کی کوشش کرے گا۔\n- 'forfeit' - کھیل فوراً ختم کرنا اور موجودہ سکور لاک کرنا\n- پائیلسس نام: W (ویسٹ)، F1-F4 (فاؤنڈیشن)، T1-T7 (ٹیبلو)\n\nتہوہی ایک ٹرن منز کئی ایکشنز کر سکدے ہو، انہیں کوما توں الگ کرکے:\n  مثال: 'draw, move W T1, move T2 F1'\n\nصرف کنگز ایمپٹی ٹیبلو پائیلسس منز رکھے جا سکدے ہیں۔\nایکشنز ترتیب منز چلدے ہیں - اگر ایک ناکام ہو جائے، تو باقی ایکشنز سکیپ کر دیے جاتے ہیں۔\n'forfeit' استعمال کرو اگر تہوہی سمجھدے ہو کہ کھیل جیتنا ناممکن ہے۔"
+  },
+  "format_error": {
+    "no_brackets": "غیر معتبر ایکشن فارمیٹ۔ ایکشن کو بریکٹس منز ہونا چاہیے",
+    "no_closing_bracket": "غیر معتبر ایکشن فارمیٹ۔ بند بریکٹ ']' گم ہے",
+    "empty_command": "خالی کمانڈ۔ 'draw' یا 'move <source> <destination> [count]' ٹائپ کرو",
+    "empty_action": "خالی ایکشن",
+    "move_needs_args": "موو کمانڈ لئی سورس اور ڈسٹینیشن درکار ہیں۔ استعمال: 'move <source> <destination> [count]'",
+    "count_positive": "کاؤنٹ مثبت یا 'all' ہونا چاہیے",
+    "count_invalid": "غیر معتبر کاؤنٹ۔ ایک نمبر یا 'all' استعمال کرو",
+    "unknown_command": "نامعلوم کمانڈ '{cmd}'۔ 'draw'، 'move <source> <destination> [count]'، یا 'forfeit' استعمال کرو",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "{n} ایکشن(ز) کو ناکامی سے پہلے انجام دیا گیا۔",
+    "failed": "ایکشن {n} ناکام: {msg}"
+  },
+  "move_result": {
+    "drew": "اسٹاک سے فضلے پر کارڈ(ز) کھینچا۔",
+    "cannot_draw": "کھینچا نہیں جا سکتا. اسٹاک اور فضلہ دونوں خالی ہیں۔",
+    "invalid_pile": "غلط پائیل ناو. ڈبلیو، ایف 1-ایف 4، یا ٹی 1-ٹی 7 استعمال کرو",
+    "foundation_one_card": "بنیاد پر صرف 1 کارڈ منتقل کیا جا سکتا ہے",
+    "waste_to_foundation_ok": "कार्ड आव मूव्ड फ्रॉम वेस्ट टू फाउंडेशन F{dst}",
+    "waste_to_foundation_bad": "فضلہ کارڈ کو اس بنیاد پل پر منتقل نہیں کیا جا سکتا",
+    "tableau_to_foundation_ok": "کارڈ ٹیبلو T{src} توں فاؤنڈیشن F{dst} منز منتقل",
+    "tableau_to_foundation_bad": "ٹیبلو کارڈ کو اس بنیاد پل پر منتقل نہیں کیا جا سکتا",
+    "foundation_to_foundation": "بنیاد سے بنیاد پر منتقل نہیں کیا جا سکتا",
+    "waste_to_tableau_one_card": "فضلہ سے ٹیبلو پر صرف 1 کارڈ منتقل کیا جا سکتا ہے",
+    "waste_to_tableau_ok": "कार्ड आव मूव्ड फ्रॉम वेस्ट टू टेबल T{dst}",
+    "waste_to_tableau_bad": "فضلہ کارڈ کو اس ٹیبلو پل پر نہیں رکھا جا سکتا",
+    "no_face_up": "منتقل کرنے کے لیے کوئی اوپر والے کارڈ نہیں ہیں",
+    "tableau_to_tableau_ok": "{count} کارڈ(ز) ٹیبلو T{src} توں T{dst} منز منتقل",
+    "tableau_to_tableau_bad": "{count} کارڈ(ز) ٹیبلو T{src} توں T{dst} منز منتقل نہیں جا سکدے",
+    "foundation_to_tableau_one_card": "بنیاد سے ٹیبلو پر صرف 1 کارڈ منتقل کیا جا سکتا ہے",
+    "foundation_empty": "फाउंडेशन F{src} छू रिक्त.",
+    "foundation_to_tableau_ok": "کارڈ فاؤنڈیشن F{src} توں ٹیبلو T{dst} منز منتقل",
+    "foundation_to_tableau_bad": "ٹی{dst} ٹیبلو پر بنیاد کارڈ نہیں رکھا جا سکتا",
+    "to_waste_or_stock": "فضلہ یا اسٹاک پر منتقل نہیں کیا جا سکتا"
+  },
+  "outcome": {
+    "forfeit": "کھیل ترک کر دیا گیا ہے۔ آخری سکور: {score} بنیادوں میں کارڈز۔",
+    "won": "बधाई. तुं'हे छे क्लोन्डाइक सोलिटेयर जीतनेवालो!",
+    "turn_limit": "کھیل ختم! تہوہی {max_turns} ٹرنز دے زیادہ سے زیادہ حد تک پہنچ گئے۔ سکور: {score} کارڈز فاؤنڈیشن منز"
+  },
+  "board": {
+    "title": "=== کلونڈائیک سولیٹیئر ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "स्टॉक: {stock} कार्ड्स",
+    "waste": "Waste (W): {waste} कचराः W: [%]",
+    "foundations_header": "फाउंडेशन:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "पटेऊ:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

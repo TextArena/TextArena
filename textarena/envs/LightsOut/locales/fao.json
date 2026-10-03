@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Velkomin til Lights Out! Tú hevur ein {size}x{size} borð av ljósum.\nTíni mál er at sløkkja ØLL ljós AV (umritað við '.')\nTá tú trýst á eitt ljós, skiftir tað sjálvt og síni nærmastu grannar (upp/n niður/vinstra/høgra).\nTýp [row col] at trýsta á eitt ljós (0-viðurkent, so gildandi røða er 0-{max_index}).\nTú hevur upp til {max_turns} leikir at løysa puzzle-in.\nLest: 'O' = ljós Á, '.' = ljós AV"
+  },
+  "board": {
+    "current_state": "Núverandi røða á borði (Før {moves_made}, {moves_left} leikir eftir, {completion}% liðugur):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Action must be in format [row col] where row and col are integers from 0 to {max_index}.",
+    "out_of_range": "Koordinatar má vera millum 0 og {max_index}. Tú skrivaði [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Til lukku, tú hevur loyst gátuna í {moves_used} rørslum!",
+    "loss": "Leikur liðugur! Tú nýtti allar {max_turns} leikir utan at løysa puzzle-in. Endaliga liðugleiki: {completion}%\nEndaliga støða:\n{grid}"
+  }
+}

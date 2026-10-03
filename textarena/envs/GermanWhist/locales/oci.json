@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Lo jòc comença. Color de trufa : {trump_suit} (carta de trufa : {trump_str}).",
+    "no_trump_card": "pas cap de nom"
+  },
+  "player_prompt": {
+    "intro": "Ètz jogaire {player_id} al Whist alemand.\n{phase_info}\nTenètz {hand_size} cartas.\nJogatz una carta amb '[play N]', ont N es sa posicion dins vòstra man (per exemple '[play 3]').",
+    "phase_learning": "FASE D'APRENHAMENT: lo ganhaire de cada truc pren la carta dobèrta e lo perdent tira la seguida. Los trucs obtenguts dins aquesta fasa comptan pas per ganhar.",
+    "phase_playing": "Cada truc d'ara enlà compta per la victòria."
+  },
+  "next_card": {
+    "playing_phase": "Cap carta es pas ofèrta - la fasa de jòc a començat.",
+    "deck_empty": "Lo deck es void - pas cap carta en ofèrta.",
+    "available": "Carta en ofèrta: {card}",
+    "available_trump": "Carta en ofèrta: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de movement invalid. Utiliza \"[play N]\" per jogar la n-en carta dins ta man.",
+    "bad_position": "Aquela posicion de cartas existís pas. Tenètz {hand_size} cartas.",
+    "must_follow_suit": "Vos cal seguir e jogar una carta {lead_suit}.",
+    "invalid_play": "Aquela carta se pòt pas jogar."
+  },
+  "game_action": {
+    "played": "Lo jogaire {player_id} jogèt {card}."
+  },
+  "trick": {
+    "won": "Lo jogaire {winner_id} ganha lo truc amb {card}.",
+    "won_learning": "Jogaire {winner_id} venç lo combat amb {card} e pren la carta visibla."
+  },
+  "phase": {
+    "learning_complete": "Lo deck es agotat. La fasa d'aprendissatge s'acaba - cada truc restant compta per la victòria."
+  },
+  "draw": {
+    "winner_received": "Ganhaste lo truc e recebèt {card}.",
+    "loser_received": "Perdiguèretz lo truc e tirèt {card} del deck.",
+    "winner_preview": "La carta seguenta qu'es ofèrta es {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Combats ganhats fins a uèi - Jogaire 0 : {tricks0}, Jogaire 1 : {tricks1}",
+    "scores_playing": "Combats de marcatge - Jogaire 0 : {tricks0}, Jogaire 1 : {tricks1}",
+    "phase": "Fasa: {phase}",
+    "phase_learning": "Fasa : {phase} ({remaining_cards} cartas demoradas dins lo sabòt)"
+  },
+  "hand": {
+    "no_cards": "Pas de cartas.",
+    "no_cards_in_hand": "Pas de cartas en man.",
+    "header": "Ta man:",
+    "trump_indicator": "(Trump) Lo vòte es en linha.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator} :",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Pas de cartas jogadas encara aqueste truc.",
+    "header": "Tròca actuala:",
+    "trump_indicator": "(Trump) Lo vòte es en linha.",
+    "card_line": "{observation}\n  Jogaire {player_id} : {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "La partida es pas començada.",
+    "header": "=== Jòc de la pòrta alemanda ===",
+    "phase": "{observation}\nFasa : {phase}",
+    "trump_suit": "{observation}\nColor de trufa : {trump_suit}",
+    "trump_card": "{observation}\nCarta de trionf : {card}",
+    "cards_left": "{observation}\nCartas demoradas dins lo sabòt : {count}",
+    "next_card": "{observation}\nCarta seguenta per lo venceire : {card}",
+    "blank": "{observation}  lo",
+    "current_trick": "{observation} Tròca actuala:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Jogaire {player_id} : {card}{trump_indicator}",
+    "player_line": "{observation}\nJogaire {player_id} : {scoring} combats ({tricks} au total), {hand_size} cartas en man"
+  },
+  "outcome": {
+    "summary": "Fasa d'aprendissatge - Jogaire 0 : {l0}, Jogaire 1 : {l1}. Fasa de jòc - Jogaire 0 : {p0}, Jogaire 1 : {p1}. Lo jogaire {winner_id} ganha amb {winner_tricks} presas comptant per punt!"
+  }
+}

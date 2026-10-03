@@ -1,0 +1,81 @@
+{
+  "_comment": "File di localizzazione di Ultimate Texas Hold'em. NON tradurre le chiavi (lato sinistro). Tradurre solo i valori (lato destro).",
+  "_slots": {
+    "{start_chips}": "Numero iniziale di gettoni, ad esempio 1000",
+    "{ante}": "Importo della scommessa ANTE/BLIND, ad esempio 25",
+    "{ante4}": "Quattro volte l'importo della scommessa ANTE, ad esempio 100",
+    "{ante2}": "Due volte l'importo della scommessa ANTE, ad esempio 50",
+    "{round}": "Numero del round corrente",
+    "{chips}": "Numero di gettoni attuali del giocatore",
+    "{hand}": "Elenco di etichette di carte separate da virgole, ad esempio 'A♠, K♥', o il testo di nessuna carta",
+    "{phase}": "Etichetta della fase corrente (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Elenco di azioni disponibili tra parentesi quadre, ad esempio '[play_bet_4x], [check]'",
+    "{available}": "Elenco di azioni disponibili tra parentesi quadre",
+    "{blind}": "Importo della scommessa BLIND",
+    "{play}": "Importo della scommessa PLAY",
+    "{cards}": "Elenco di etichette di carte separate da virgole, ad esempio 'Q♣, 7♦, 2♠'",
+    "{name}": "Nome di una mano di poker localizzata, inserito letteralmente",
+    "{amount}": "Importo di gettoni",
+    "{net}": "Variazione netta di gettoni per il round (può essere negativa)",
+    "{max_turns}": "Numero massimo di round",
+    "{winner_rounds}": "Numero di round completati"
+  },
+  "player_prompt": {
+    "no_cards": "Nessuna carta ancora",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Giocatore singolo contro il banco\n\n📖 PANORAMICA DEL GIOCO:\n• Inizi con {start_chips} gettoni\n• Un mazzo di 52 carte (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Giochi contro il banco (casa)\n• Ogni round segue la struttura di Ultimate Texas Hold'em: posti le scommesse ANTE e BLIND, ricevi 2 carte coperte, decidi se effettuare scommesse PLAY opzionali nelle fasi di scommessa, quindi riveli le carte comuni e confronti la tua migliore mano di 5 carte con quella del banco. Il tuo obiettivo è massimizzare le tue vincite (quando hai la mano migliore), mentre minimizzi le tue perdite (quando hai la mano peggiore).\n• Il gioco termina quando raggiungi 0 gettoni o meno all'inizio del round (PERDITA) o completi 1000 round con gettoni (VITTORIA)\n\n💰 STRUTTURA DELLE SCOMMESSE:\n• ANTE: Scommessa obbligatoria di ${ante} ogni round\n• BLIND: Scommessa obbligatoria di ${ante} ogni round\n• PLAY: Scommessa opzionale durante il gioco. Durante il round, puoi scegliere SOLO UNA delle seguenti: (${ante4} se fatto al PRE-FLOP, ${ante2} se fatto al FLOP, o ${ante} se fatto al RIVER. Puoi anche abbandonare al fiume, rinunciando alla mano, e non effettuando alcuna scommessa.)\n\n🎴 DISTRIBUZIONE DELLE CARTE:\n• Ricevi 2 carte coperte (le tue carte coperte)\n• Il banco riceve 2 carte coperte (nascoste da te)\n• 5 carte comuni sono distribuite coperte inizialmente\n• Le carte comuni sono rivelate progressivamente attraverso le fasi del gioco\n\n🏆 QUALIFICAZIONE DEL BANCO:\n• Il banco deve avere almeno una coppia (2 carte dello stesso rango) per qualificarsi, utilizzando le 2 carte nella sua mano e le 5 carte comuni.\n• La qualificazione del banco influenza gli esiti delle scommesse, come sarà spiegato in seguito.\n\n🎮 FASI DEL GIOCO & AZIONI:\n📋 PRE-FLOP:\n  • Azioni: [4x] (${ante4}) o [check]\n  • [4x]: Piazza la scommessa PLAY di ${ante4}, rivela le prime 3 carte comuni\n  • [check]: Nessuna scommessa aggiuntiva, rivela le prime 3 carte comuni\n\n📋 FLOP:\n  • Se la scommessa 4x è stata piazzata: solo [skip] disponibile (rivela automaticamente le ultime 2 carte comuni)\n  • Se non è stata piazzata la scommessa 4x: [2x] (${ante2}) o [check]\n  • [2x]: Piazza la scommessa PLAY di ${ante2}, rivela le ultime 2 carte comuni\n  • [check]: Nessuna scommessa aggiuntiva, rivela le ultime 2 carte comuni\n\n📋 RIVER:\n  • Se la scommessa 4x o 2x è stata piazzata: solo [skip] disponibile (procede automaticamente allo showdown)\n  • Se non è stata piazzata alcuna scommessa PLAY: [1x] (${ante}) o [fold]\n  • [1x]: Piazza la scommessa PLAY di ${ante}, procede allo showdown\n  • [fold]: Abbandona la mano, perde le scommesse ANTE e BLIND\n\n📋 SHOWDOWN:\n  • Tutte le carte sono rivelate e valutate\n  • La migliore mano di 5 carte dalle 7 carte (2 coperte + 5 comuni)\n  • Le scommesse sono regolate secondo le regole di pagamento\n\n💎 PAGAMENTI DELLE SCOMMESSE:\n📊 SCOMMESSA ANTE:\n  • Il banco non si qualifica: PUSH (scommessa restituita)\n  • Il banco si qualifica e vinci: pagamento 1:1 (scommessa + vincita)\n  • Il banco si qualifica e perdi: scommessa persa\n  • Pareggio: PUSH (scommessa restituita)\n\n📊 SCOMMESSA BLIND:\n  • Non influenzata dalla qualificazione del banco\n  • Vinci: scommessa restituita e pagamento aggiuntivo basato sulla forza della tua mano\n  • Perdi: scommessa persa\n  • Pareggio: PUSH (scommessa restituita)\n\n📊 TABELLA DEI PAGAMENTI DELLA SCOMMESSA BLIND:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Meno di Straight: nessun pagamento aggiuntivo\n\n📊 SCOMMESSA PLAY:\n  • Non influenzata dalla qualificazione del banco\n  • Confronto diretto: la tua migliore mano contro la migliore mano del banco\n  • Vinci: pagamento 1:1 (scommessa + vincita)\n  • Perdi: scommessa persa\n  • Pareggio: PUSH (scommessa restituita)\n\n🎯 CLASSIFICHE DELLE MANI DI POKER (Migliore-Peggio):\n  1. Royal Flush: A-K-Q-J-10 dello stesso seme\n  2. Straight Flush: 5 carte consecutive dello stesso seme\n  3. Four of a Kind: 4 carte dello stesso rango\n  4. Full House: 3 carte dello stesso rango + 2 carte dello stesso rango\n  5. Flush: 5 carte dello stesso seme\n  6. Straight: 5 carte consecutive\n  7. Three of a Kind: 3 carte dello stesso rango\n  8. Two Pair: 2 coppie di carte di ranghi diversi\n  9. One Pair: 2 carte dello stesso rango\n  10. High Card: carta più alta vince\n\n⌨️ COMANDI AZIONE:\n• [4x] o [play bet 4x]: piazza la scommessa PLAY di ${{self.ante_amount*4}}\n• [2x] o [play bet 2x]: piazza la scommessa PLAY di ${{self.ante_amount*2}}\n• [1x] o [play bet 1x]: piazza la scommessa PLAY di ${{self.ante_amount*1}}\n• [check] o [c]: check (nessuna scommessa aggiuntiva)\n• [fold] o [f]: abbandona la mano\n• [skip] o [s]: salta alla fase successiva (quando non è necessaria alcuna azione)\n\n💡 CONSIGLI DI STRATEGIA:\n• Mani di partenza forti (coppie, carte alte) spesso giustificano scommesse 4x\n• Considera la qualificazione del banco - mani deboli possono spingere se il banco non si qualifica\n• La scommessa BLIND può essere molto redditizia con mani forti (Royal Flush = 500:1!)\n• Tieni d'occhio il tuo stack di gettoni! Se scende a 0 o meno all'inizio del round, perdi.\n\n⚠️ NOTE IMPORTANTI:\n• Le scommesse ANTE e BLIND sono obbligatorie ogni round\n• Le scommesse PLAY sono opzionali e strategiche\n• Assicurati di inserire l'azione corretta e solo un'azione alla volta.\n\n",
+    "state": "🎯 ROUND {round}\n💰 Gettoni: {chips}\n🎴 La tua mano: {hand}\n📊 Scommesse attuali: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fase: {phase}\n🎯 Azioni disponibili: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Round {round} iniziato! Scommesse: ANTE ${ante}, BLIND ${blind}. Hai {chips} gettoni rimanenti.",
+    "your_hand": "🎴 La tua mano: {hand}",
+    "flop_revealed": "🃏 FLOP rivelato: {cards}",
+    "river_revealed": "🃏 RIVER rivelato: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Azione non valida per la fase corrente. Azioni disponibili: {available}",
+    "message": "❌ Azione non valida! Azioni disponibili: {available}"
+  },
+  "action": {
+    "folded": "🃏 Hai abbandonato la mano."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Mano del banco: {cards}",
+    "community_cards": "🃏 Carte comuni: {cards}",
+    "player_best": "🎴 Migliore mano del giocatore: {name} ({cards})",
+    "dealer_best": "🎴 Migliore mano del banco: {name} ({cards})",
+    "ante_lost_folded": "❌ Scommessa ANTE persa! -${ante} (abbandonata)",
+    "blind_lost_folded": "❌ Scommessa BLIND persa! -${blind} (abbandonata)",
+    "ante_won": "✅ Scommessa ANTE vinta! +${amount}",
+    "ante_pushed": "🔄 Scommessa ANTE spinta! ${ante} restituita",
+    "ante_lost": "❌ Scommessa ANTE persa! -${ante}",
+    "blind_won": "✅ Scommessa BLIND vinta! +${amount}",
+    "blind_pushed": "🔄 Scommessa BLIND spinta! ${blind} restituita",
+    "blind_lost": "❌ Scommessa BLIND persa! -${blind}",
+    "play_won": "✅ Scommessa PLAY vinta! +${amount}",
+    "play_pushed": "🔄 Scommessa PLAY spinta! ${play} restituita",
+    "play_lost": "❌ Scommessa PLAY persa! -${play}",
+    "net_gain": "🎉 Round {round} completato! Guadagno netto: +${net}",
+    "net_loss": "💸 Round {round} completato! Perdita netta: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 FINE DEL GIOCO! {max_turns} round completati. Hai ${chips} gettoni - HAI VINTO!",
+    "game_over_lose": "🏁 FINE DEL GIOCO! Sei rimasto senza gettoni. Il banco vince!",
+    "reward_win": "Giocatore ha completato {winner_rounds} round con ${chips} gettoni",
+    "reward_lose": "Giocatore è rimasto senza gettoni al round {round}",
+    "reward_win_max": "Giocatore ha completato {max_turns} round con ${chips} gettoni"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Four of a Kind",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Three of a Kind",
+    "two_pair": "Two Pair",
+    "one_pair": "One Pair",
+    "high_card": "High Card",
+    "unknown": "Mano sconosciuta"
+  }
+}

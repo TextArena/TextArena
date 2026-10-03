@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i et to-spiller-spil af Spite and Malice. Dit mål er at være den første til at tømme din payoff-bunke.\n\n### Spiloversigt:\n- Målet er at rydde din payoff-bunke ved at spille kort til center-bunkerne.\n- Du kan spille kort fra tre kilder:\n  1. Din **hånd** (du starter hver tur med op til 5 kort på hånden).\n  2. Det **øverste kort på din payoff-bunke**.\n  3. Det **øverste kort på en af dine discard-bunker**.\n\n### Spileregler:\n- Du må spille et kort til en center-bunke, hvis det er **en rang højere** end det øverste kort på den bunke (center-bunker starter med Es og går op til Dronning; Konger er vilde - de kan spilles på ethvert kort, men ændrer ikke rangsekvensen. Dette betyder, at hvis en Konge bruges efter 4, så er den Konge rangeret som 5, og næste kort skal være en 6).\n- Hvis du ikke kan spille flere kort, skal du **kassere et kort** til en af dine discard-bunker for at afslutte din tur.\n- Hvis en center-bunke når Dronning, vil den automatisk blive ryddet.\n- Rangordenen er: A=1, 2=2, ..., 9=9, J=10, Q=11, K som vilde.\n\n### Handlinger:\n1. **Træk**: Ved starten af din tur, træk kort for at fylde din hånd op til 5 kort. Indtast **[draw]** for at begynde.\n2. **Spil et kort**: For at spille et kort, specificér kortet og center-bunken således: **[play A♠ 0]** (hvor 'A♠' er kortet og '0' er center-bunkens indeks).\n3. **Kassér**: Hvis du ikke kan spille flere kort, kassér et kort fra din hånd til en discard-bunke for at afslutte din tur. Indtast **[discard A♠ 1]** (hvor 'A♠' er kortet og '1' er discard-bunkens indeks). Bemærk, at du ikke kan kassere noget kort fra payoff-bunken. Du må kun kassere kort fra din hånd.\n\n"
+  },
+  "board": {
+    "current_board": "Aktuel bræt:\n\n{board}\nTilgængelige træk: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Center-bunker ---\n",
+    "pile": "{observation}Bunke {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Spiller {player_id}'s visning ---\n",
+    "payoff": "{observation}Payoff-bunke (Øverste kort): {top_card}, Payoff-bunkens længde: {payoff_length}\n",
+    "hand": "{observation}Hånd: {hand}\n",
+    "discard": "{observation}Discard-bunker: {discard}\n",
+    "empty": "Tom"
+  },
+  "game_message": {
+    "no_cards_left": "Der er ingen flere kort at trække fra. Husk, at du kan spille kort fra disse kilder:\n  1. Din **hånd**.\n  2. Det **øverste kort på din payoff-bunke**.\n  3. Det **øverste kort på en af dine discard-bunker**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldig trækformat. Spiller {player_id} svarede ikke med et gyldigt træk i firkantede parenteser.",
+    "invalid_play": "Ugyldigt spil. Spiller {player_id} forsøgte at spille {card} på center-bunke {index}.",
+    "discard_from_payoff": "Ugyldig kassering. Spiller {player_id} forsøgte at kassere et kort fra payoff-bunken.",
+    "discard_not_in_hand": "Ugyldig kassering. Spiller {player_id} forsøgte at kassere et kort, der ikke er på hånden.",
+    "wrong_move_type": "Ugyldig træktype. Spiller {player_id} svarede ikke med en gyldig træktype."
+  },
+  "game_action": {
+    "you_drew": "Du trak kort.",
+    "opponent_drew": "Spiller {player_id} trak kort.",
+    "you_played": "Du spillede {card} på center-bunke {index}.",
+    "opponent_played": "Spiller {player_id} spillede {card} på center-bunke {index}.",
+    "you_discarded": "Du har kasseret {card} til discard-bunke {index}, hvilket også betyder, at du har afsluttet din tur. Ingen yderligere handlinger fra dig vil blive overvejet i denne tur. Spiller {next_player_id} vil gå næste.",
+    "opponent_discarded": "Spiller {player_id} kasserede {card} til discard-bunke {index}, hvilket også betyder, at de har afsluttet deres tur. Ingen yderligere handlinger fra Spiller {player_id} vil blive overvejet i denne tur. Spiller {next_player_id}, du vil gå næste. Indtast din handling i formatet [handling kort center_indeks]."
+  },
+  "outcome": {
+    "payoff_cleared": "Spiller {current_player} har færdiggjort deres payoff-bunke! Spiller {current_player} vinder!",
+    "deadlock_player_0": "Dødvande nået! Spiller 0 vinder med {player_0_payoff} kort tilbage vs Spiller 1's {player_1_payoff} kort.",
+    "deadlock_player_1": "Dødvande nået! Spiller 1 vinder med {player_1_payoff} kort tilbage vs Spiller 0's {player_0_payoff} kort.",
+    "deadlock_tie": "Dødvande nået med uafgjort! Begge spillere har {player_0_payoff} kort tilbage. Spiller {current_player} vinder som standard."
+  }
+}

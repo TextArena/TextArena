@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w 3-osobowym Iterated Prisoner's Dilemma. Mecz trwa {num_rounds} rund.\nStruktura rundy:\n• {conv_rounds} tur swobodnej rozmowy\n• 1 tura decyzji - podaj jeden token na przeciwnika: '[<opp-id> cooperate]' lub '[<opp-id> defect]' (tj. '[1 defect] [2 cooperate]'; domyślnie 'cooperate'). \nMacierz wypłat parowych (stosowana do każdej nieuporządkowanej pary):\n  - Obydwaj współpracują  ->  {reward}\n  - Obydwaj zdradzają     ->  {punishment}\n  - Ty zdradzasz, oni współpracują -> {temptation}\n  - Ty współpracujesz, oni zdradzają -> {sucker}\nGracz(e) z najwyższym wynikiem na koniec wszystkich rund wygrywa."
+  },
+  "round": {
+    "start": "─── Rozpoczęcie rundy {round} ───\tMożesz rozmawiać swobodnie przez następne {conv_rounds} rund.",
+    "chat_finished": "Czat zakończony dla rundy {round}. Prześlij swoje decyzje, jeden token na przeciwnika: `[pid cooperate]` lub `[pid defect]`."
+  },
+  "results": {
+    "header": "### Runda {round} - Wyniki:",
+    "pair_line": "{observation}\n\t Gracz {i} vs Gracz {j} zdecydował się {choice_i} i {choice_j} odpowiednio (Gracz {i} zyskał {gain_i}, Gracz {j} zyskał {gain_j})",
+    "scores_open": "{observation}\n-> Aktualne wyniki: ",
+    "score_first": "{observation}Gracz {player_id} ({score})",
+    "score_next": "{observation}; Gracz {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Końcowe wyniki: {scores}.  Grupy rankingowe (najgorsze→najlepsze): {groups}"
+  }
+}

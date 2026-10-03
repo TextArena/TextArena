@@ -1,0 +1,57 @@
+{
+  "_comment": "Faili ya lugha ya Briscola. USITAFSIRI funguo (upande wa kushoto). Tafsiri maadili tu (upande wa kulia).",
+  "_slots": {
+    "{player_id}": "Nambari ya mchezaji, mfano 0 au 1",
+    "{trump_suit}": "Alama ya suti ya trump (♠♥♦♣) - usitafsiri",
+    "{trump_card}": "Lebo ya kadi ya trump, mfano '7♠' - usitafsiri",
+    "{card}": "Lebo ya kadi, mfano 'A♥' - usitafsiri",
+    "{trump_mark}": "Alama ya '(TRUMP)' iliyotayarishwa, au tupu",
+    "{max_pos}": "Nafasi ya juu zaidi ya kadi katika mkono wa mchezaji",
+    "{count}": "Idadi ya kadi zinazoshikiliwa na mchezaji",
+    "{pos}": "Nambari ya nafasi ya kadi katika mkono",
+    "{points}": "Idadi ya pointi (thamani ya kadi au alama iliyokusanywa)",
+    "{hand}": "Orodha ya mkono iliyotayarishwa, yenye mistari mingi",
+    "{trick}": "Orodha ya trick ya sasa iliyotayarishwa",
+    "{scores}": "Mstari wa alama uliotayarishwa, au kizuizi cha alama za mwisho kwa kila mchezaji",
+    "{trump_info}": "Mstari wa suti ya trump / idadi ya kadi uliotayarishwa",
+    "{winner}": "Nambari ya mchezaji aliyeshinda trick au mchezo",
+    "{tricks}": "Idadi ya trick zilizoshinda na mchezaji",
+    "{deck_count}": "Idadi ya kadi zilizobaki kwenye sitaha"
+  },
+  "game": {
+    "start": "Mchezo wa Briscola umeanza! Suti ya trump: {trump_suit} (Kadi ya trump: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Unacheza Briscola - Mchezaji {player_id}.\nLengo: Shinda trick na kukusanya pointi nyingi zaidi (jumla ya pointi 120 kwenye sitaha).\nPointi za Kadi: A=11, 3=10, K=4, Q=3, J=2, zingine=0\nNguvu ya Kadi: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKadi za trump huzidi kadi zisizo za trump bila kujali nguvu.\n\nKitendo: '[play X]' ambapo X ni nafasi (1-{max_pos}) ya kadi katika mkono wako\n"
+  },
+  "hand": {
+    "none": "Hakuna kadi",
+    "empty": "Hakuna kadi katika mkono",
+    "header": "Mkono wako:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Hakuna kadi zilizochezwa bado katika trick hii.",
+    "header": "Trick ya sasa:",
+    "line": "  Mchezaji {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Mchezaji {player_id}: {points} pts",
+    "trump_info": "Suti ya trump: {trump_suit}",
+    "trump_info_deck": "Suti ya trump: {trump_suit} | Kadi zilizobaki kwenye sitaha: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nAlama: {scores}\n{trump_info}\n\nCheza kadi kwa kutumia [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Tumia [play X] ambapo X ni nafasi ya kadi (1, 2, 3, n.k.)",
+    "out_of_range": "Nafasi ya kadi batili. Una {count} kadi (1-{count})"
+  },
+  "action": {
+    "played": "Mchezaji {player_id} amecheza {card}",
+    "trick_win": "Mchezaji {winner} anashinda trick na {card} na kupata {points} pointi!"
+  },
+  "outcome": {
+    "head": "Mchezo Umeisha! Mchezaji {winner} anashinda na {points} pointi!\n\nAlama za Mwisho:\n{scores}",
+    "player_line": "Mchezaji {player_id}: {points} pointi ({tricks} trick)\n"
+  }
+}

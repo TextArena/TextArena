@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in an Iterated Prisoner's Dilemma spanning {num_rounds} rounds.\n\nGame Structure:\n- Before each decision you have {total_conversation_rounds} turns to communicate freely.\n- After that, both players simultaneously choose to cooperate or defect.\n\nPayoff Matrix (fixed each round):\n- Both Cooperate ➜ each {cooperate_reward}\n- Both Defect ➜ each {mutual_defect_reward}\n- One Defects, one Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nHow to Play:\n- During conversation: type any text you wish.\n- During decision phase: include '[Cooperate]' or '[Defect]' (case-insensitive). You may add extra text before/after the token."
+  },
+  "phases": {
+    "conversation_finished": "Conversation finished for round {round}. Please reply with '[Cooperate]' or '[Defect]' within \\boxed{{}}.",
+    "starting_round": "--- باشلىنىش ئايلانمىسى {round} -----",
+    "round_summary": "{round} راوندىنىڭ نەتىجىسى:\n{outcome}\nئوينىغۇچى 0 {r0} (جەمئىي {score_0})، ئوينىغۇچى 1 {r1} (جەمئىي {score_1}) قازاندى."
+  },
+  "outcome": {
+    "winner": "ئوينىغۇچى {winner} {win_score} - {lose_score} ھەسسىلەندى.",
+    "draw": "تەڭلەشتى! ھەر ئىككى توپچى {s0} نومۇر ئالدى.",
+    "round_both_cooperate": "ئىككىسى ھەمكارلىشىپ ئىشلىدى.",
+    "round_both_defect": "ئىككىسىلا ۋاز كەچتى.",
+    "round_p0_cooperates_p1_defects": "ئويۇنچى 0 ھەمكارلىشىپ، ئويۇنچى 1 خىيانەت قىلدى.",
+    "round_p0_defects_p1_cooperates": "ئويۇنچى 0 خىيانەت قىلدى، ئويۇنچى 1 ھەمكارلىشىپ."
+  }
+}

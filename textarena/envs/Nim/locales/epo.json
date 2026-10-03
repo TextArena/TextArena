@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Vi estas Ludanto {player_id} en Nim.\nVia celo estas preni la lastan restantan objekton.\nĈiun fojon, elektu ekzakte unu amason kaj forigu unu aŭ pli da objektoj el ĝi.\nUzu la formaton '[pile quantity]', kie amaso estas la amasa indekso kaj kvanto estas la nombro da objektoj forigendaj.\nEkzemple, '[0 3]' forigas 3 objektojn el amaso 0."
+  },
+  "state": {
+    "current_pile": "Nuntempa Stako: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neniu valida movoformato trovita. Uzu \"[pile quantity]\".",
+    "correct_format_wrong_fields": "Ludanto {player_id}, Nevalida ago. Kolono {col} estas ekster la limoj.",
+    "out_of_range": "Piloindekso {pile_index} estas ekster la intervalo.",
+    "non_positive": "Necesas forigi almenaŭ unu objekton.",
+    "exceeds_pile": "Ne eblas forigi {quantity} el amaso {pile_index} (nur {pile_count} restas)."
+  },
+  "observation": {
+    "removed_from_piles": "Ludanto {player_id} ludis [{pile_index} {quantity}], forigante {quantity} objekton(jn) el stako {pile_index}."
+  },
+  "outcome": {
+    "win": "Ludanto {player_id} prenis la lastan objekton (s)!"
+  }
+}

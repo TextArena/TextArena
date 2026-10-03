@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "게임이 시작됩니다. 트럼프 무늬: {trump_suit} (트럼프 카드: {trump_str}).",
+    "no_trump_card": "없음"
+  },
+  "player_prompt": {
+    "intro": "당신은 독일 휘스트의 플레이어 {player_id}입니다.\n{phase_info}\n당신은 {hand_size}장의 카드를 가지고 있습니다.\n'[play N]'를 사용하여 카드를 냅니다. 여기서 N은 카드의 위치를 의미합니다 (예: '[play 3]').",
+    "phase_learning": "학습 단계: 각 트릭의 승자가 오픈된 카드를 가져가고, 패배자는 덱에서 다음 카드를 뽑습니다. 이 단계에서 이긴 트릭은 승리에 포함되지 않습니다.",
+    "phase_playing": "플레이 단계: 덱이 모두 소진되었습니다. 이제부터 모든 트릭이 승리에 포함됩니다."
+  },
+  "next_card": {
+    "playing_phase": "제시할 카드가 없습니다 - 플레이 단계가 시작되었습니다.",
+    "deck_empty": "덱이 비었습니다 - 제시할 카드가 없습니다.",
+    "available": "제시할 카드: {card}",
+    "available_trump": "제시할 카드: {card} (트럼프)"
+  },
+  "invalid_move": {
+    "wrong_format": "잘못된 수 형식입니다. '[play N]'를 사용하여 손에서 N번째 카드를 내세요.",
+    "bad_position": "해당 카드 위치가 존재하지 않습니다. 당신은 {hand_size}장의 카드를 가지고 있습니다.",
+    "must_follow_suit": "무늬를 맞춰야 합니다. {lead_suit} 무늬의 카드를 내세요.",
+    "invalid_play": "해당 카드는 낼 수 없습니다."
+  },
+  "game_action": {
+    "played": "플레이어 {player_id}가 {card}를 냈습니다."
+  },
+  "trick": {
+    "won": "플레이어 {winner_id}가 {card}로 트릭을 이겼습니다.",
+    "won_learning": "플레이어 {winner_id}가 {card}로 트릭을 이기고 오픈된 카드를 가져갔습니다."
+  },
+  "phase": {
+    "learning_complete": "덱이 소진되었습니다. 학습 단계가 끝났습니다 - 남은 모든 트릭이 승리에 포함됩니다."
+  },
+  "draw": {
+    "winner_received": "당신이 트릭을 이기고 {card}를 받았습니다.",
+    "loser_received": "당신이 트릭을 잃고 덱에서 {card}를 뽑았습니다.",
+    "winner_preview": "다음으로 제시할 카드는 {card}입니다."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "지금까지 이긴 트릭 - 플레이어 0: {tricks0}, 플레이어 1: {tricks1}",
+    "scores_playing": "점수 트릭 - 플레이어 0: {tricks0}, 플레이어 1: {tricks1}",
+    "phase": "단계: {phase}",
+    "phase_learning": "단계: {phase} (덱에 {remaining_cards}장의 카드가 남았습니다)"
+  },
+  "hand": {
+    "no_cards": "카드가 없습니다",
+    "no_cards_in_hand": "손에 카드가 없습니다",
+    "header": "당신의 손:",
+    "trump_indicator": " (트럼프)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "이 트릭에서 아직 카드가 나지 않았습니다.",
+    "header": "현재 트릭:",
+    "trump_indicator": " (트럼프)",
+    "card_line": "{observation}\n  플레이어 {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "게임이 시작되지 않았습니다",
+    "header": "=== 독일 휘스트 게임 ===",
+    "phase": "{observation}\n단계: {phase}",
+    "trump_suit": "{observation}\n트럼프 무늬: {trump_suit}",
+    "trump_card": "{observation}\n트럼프 카드: {card}",
+    "cards_left": "{observation}\n덱에 남은 카드: {count}",
+    "next_card": "{observation}\n승자가 받을 다음 카드: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\n현재 트릭:",
+    "trump_indicator": " (트럼프)",
+    "trick_line": "{observation}\n  플레이어 {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\n플레이어 {player_id}: {scoring} 점수 트릭 ({tricks} 총 트릭), 손에 {hand_size}장의 카드"
+  },
+  "outcome": {
+    "summary": "학습 단계 - 플레이어 0: {l0}, 플레이어 1: {l1}. 플레이 단계 - 플레이어 0: {p0}, 플레이어 1: {p1}. 플레이어 {winner_id}가 {winner_tricks} 점수 트릭으로 승리했습니다!"
+  }
+}

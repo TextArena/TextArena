@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "בריסקאָלאַ שפּיל האָט זיך אָנגעהויבן! טראָמפּ קאָלעטשקע: {trump_suit} (טראָמפּ קאַרט: {trump_card})"
+  },
+  "prompt": {
+    "intro": "דו שפּילסט בריסקאָלאַ - שפּילער {player_id}.\nציל: געווין טריקס און זאַמלען די מערסטע פּונקטן (120 פּונקטן אין דעם קאַרט-דעק).\nקאַרט-פּונקטן: A=11, 3=10, K=4, Q=3, J=2, אַנדערע=0\nקאַרט-כּוח: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nטראָמפּ-קאַרטן שלאָגן ניט-טראָמפּ-קאַרטן, אומגעזען פֿון כּוח.\n\nאַקציע: '[play X]' וווּ דער X איז די פּאָזיציע (1-{max_pos}) פֿון דער קאַרט אין דיין האַנט\n"
+  },
+  "hand": {
+    "none": "קיין קאַרדס.",
+    "empty": "קיין קאַרדס אין האַנט.",
+    "header": "דיין האַנט:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(טראמפ)"
+  },
+  "trick": {
+    "empty": "קיין קאַרדס געשפילט נאָך דעם טריק.",
+    "header": "דער איצטיקער טריק:",
+    "line": "  שפּילער {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "שפּילער {player_id}: {points} פּונקטן",
+    "trump_info": "טראָמפּ סוט: {trump_suit}",
+    "trump_info_deck": "טראָמפּ-קאָלעטשקע: {trump_suit} | קאַרטן איבעריג אין דעם דעק: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nסקאָרס: {scores}\n{trump_info}\n\nשפּיל אַ קאַרט מיט [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "ניצן [play X] וואו X איז די קארט שטעלע (1, 2, 3, א.א.)",
+    "out_of_range": "אומגילטיקע קאַרט פּאָזיציע. דו האָסט {count} קאַרטן (1-{count})"
+  },
+  "action": {
+    "played": "שפּילער {player_id} האָט געשפּילט {card}",
+    "trick_win": "שפּילער {winner} געווינט דעם טריק מיט {card} און געווינט {points} פּונקטן!"
+  },
+  "outcome": {
+    "head": "שפּיל איז פֿאַראָווער! שפּילער {winner} געווינט מיט {points} פּונקטן!\n\nפֿינאַלע סקאָרס:\n{scores}",
+    "player_line": "שפּילער {player_id}: {points} פּונקטן ({tricks} טריקס)\n"
+  }
+}

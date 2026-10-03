@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id} w Iterowanym Dylemacie Więźnia, który rozciąga się na {num_rounds} rund.\n\nStruktura gry:\n- Przed każdą decyzją masz {total_conversation_rounds} tur, aby swobodnie komunikować się.\n- Po tym obaj gracze jednocześnie wybierają współpracę lub zdradę.\n\nMacierz wypłat (stała każdej rundy):\n- Obaj współpracują ➜ każdy {cooperate_reward}\n- Obaj zdradzają ➜ każdy {mutual_defect_reward}\n- Jeden zdradza, jeden współpracuje ➜ Zdradzający {defect_reward}, Współpracujący {sucker_reward}\n\nJak grać:\n- Podczas rozmowy: wpisz dowolny tekst, jaki chcesz.\n- Podczas fazy decyzji: dołącz '[Cooperate]' lub '[Defect]' (niezależnie od wielkości liter). Możesz dodać dodatkowy tekst przed/za tokenem."
+  },
+  "phases": {
+    "conversation_finished": "Konwersacja zakończona dla rundy {round}. Proszę odpowiedzieć z '[Cooperate]' lub '[Defect]' w \\boxed{{}}.",
+    "starting_round": "--- Rozpoczynanie rundy {round} ---",
+    "round_summary": "Wyniki rundy {round}:\n{outcome}\nGracz 0 zarobił {r0} (łącznie {score_0}), Gracz 1 zarobił {r1} (łącznie {score_1})."
+  },
+  "outcome": {
+    "winner": "Gracz {winner} wygrywa {win_score} - {lose_score}.",
+    "draw": "Remis! Obaj gracze zdobyli {s0}.",
+    "round_both_cooperate": "Obaj gracze współpracowali.",
+    "round_both_defect": "Obaj gracze zdradzili.",
+    "round_p0_cooperates_p1_defects": "Gracz 0 współpracował, Gracz 1 zdradził.",
+    "round_p0_defects_p1_cooperates": "Gracz 0 zdradził, Gracz 1 współpracował."
+  }
+}

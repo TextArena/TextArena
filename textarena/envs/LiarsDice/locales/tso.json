@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "U ngi Mdzani {player_id} eka mchezo wa Liar's Dice wa vanhu {num_players}.\nMilawu:\n- Loko i kuwe na wena, u nga endla yin'wana ya mintsonga mi mbirhi leyi:\n  1) U endla mbilu yintsha na ntsengo wo antswa, wo tlhela wa komba (kumbe zombili) ku tlula mbilu leyikulu; hi ku komba '[Bid: 3, 4]',\n  2) U vitana mbilu ya mahlamukelana hi ku tsala '[Call]'.\n\nLoko u vitana:\n  - Loko ku hlayiwa ka nomboro ya mahlamukelana eka taya hinkwato i tlhela i nyana ku tlula mbilu, muddabi wa mahlamukelana wa mabomu a celerwa taya.\n  - Kumbe, muddabi wa mahlamukelana a celerwa taya.\nMdzani loyi a fikaka eka taya dzu i kumiwa. Mdzani wa mahlamukelana u hlula."
+  },
+  "board": {
+    "per_player": "\tMfiri {p}: {d}",
+    "new_round": "\nMudziko wu tsipa - Swiveli swa tifasi: {dice_summary}\nTifasi ta wena leti ri: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Mdzani {current_player_id} u vitana! Ku hlayiwa ka mahlamukelana ya {face_value} i {count}, leyi i nyana ku tlula {quantity}.\nMdzani {loser_id} (muddabi wa mahlamukelana wa mabomu) a celerwa taya.",
+    "caller_loses": "Mfiri {current_player_id} u khoma! Kuxoma kwale ka tifasi {face_value} ku ❗️{count}, ku fana na ku >= {quantity}.\nMfiri {loser_id} (yo khoma) u fela tifasi rimwe."
+  },
+  "action": {
+    "bid_announce": "Mfiri {player_id} u chela {quantity} ra tifasi {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Ku endla xikombelo handle ko rhanga hi ku kombela.",
+    "invalid_bid": "Bindzu leri nga riki enawini: {reason}",
+    "not_recognized": "Ntlango wo chuma swi ra hari ku ❗️'[Bid: X, Y]' ni '[Call]'. Ntlango lowu ngariweke: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nhlayo yintshwa {new_quantity} yi le hansi ka ya sweswi {current_quantity}.",
+    "face_lower": "Nxavo lowuntshwa {new_face_value} wu le hansi ka wa sweswi {current_face_value}.",
+    "identical": "Nxavo wa yona wu fana ni lowu xavisiwaka sweswi.",
+    "face_range": "Nhlayo ya kona yi fanele ku va exikarhi ka 1 na 6."
+  },
+  "message": {
+    "eliminated_invalid": "Mutlangi {player_id} u humile hikwalaho ka ku va a nga ri na mfanelo."
+  },
+  "outcome": {
+    "win": "Mfiri {winner} u winga! Vuno ra masipala: {final_ranking}"
+  }
+}

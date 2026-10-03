@@ -1,0 +1,81 @@
+{
+  "_comment": "Plik językowy Ultimate Texas Hold'em. NIE TŁUMACZ kluczy (lewa strona). Tłumacz tylko wartości (prawa strona). Zachowaj każdy {placeholder} dokładnie tak, jak jest.",
+  "_slots": {
+    "{start_chips}": "Początkowa liczba żetonów, np. 1000",
+    "{ante}": "Wysokość zakładu ante/blind, np. 25",
+    "{ante4}": "Czterokrotność ante, np. 100",
+    "{ante2}": "Podwójna wysokość ante, np. 50",
+    "{round}": "Numer obecnej rundy",
+    "{chips}": "Aktualna liczba żetonów gracza",
+    "{hand}": "Lista kart gracza, np. 'A♠, K♥', lub tekst 'Brak kart'",
+    "{phase}": "Etykieta obecnej fazy (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Lista dostępnych akcji w nawiasach, np. '[play_bet_4x], [check]'",
+    "{available}": "Lista obecnie dostępnych akcji w nawiasach",
+    "{blind}": "Wysokość zakładu blind",
+    "{play}": "Wysokość zakładu play",
+    "{cards}": "Lista kart, np. 'Q♣, 7♦, 2♠'",
+    "{name}": "Nazwa ręki pokerowej, wstawiana dosłownie",
+    "{amount}": "Kwota żetonów",
+    "{net}": "Zmiana liczby żetonów w rundzie (może być ujemna)",
+    "{max_turns}": "Maksymalna liczba rund",
+    "{winner_rounds}": "Liczba rund ukończonych przez zwycięzcę"
+  },
+  "player_prompt": {
+    "no_cards": "Brak kart",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Gra jednoosobowa przeciwko krupierowi\n\n📖 PRZEGLĄD GRY:\n• Zaczynasz z {start_chips} żetonami\n• Jedna talia 52 kart (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Gramy przeciwko krupierowi (dom)\n• Każda runda przebiega według struktury Ultimate Texas Hold'em: stawiasz zakłady ANTE i BLIND, otrzymujesz 2 karty własne, decydujesz o opcjonalnych zakładach PLAY w fazach licytacji, a następnie ujawniasz karty wspólne i porównujesz swoją najlepszą rękę z ręką krupiera. Twoim celem jest maksymalizacja wygranych (gdy masz lepszą rękę), przy jednoczesnej minimalizacji strat (gdy masz gorszą rękę).\n• Gra kończy się, gdy osiągniesz 0 żetonów lub mniej na początku rundy (PRZEGRANA) lub ukończysz 1000 rund z żetonami (WYGRANA)\n\n💰 STRUKTURA ZAKŁADÓW:\n• ANTE: Obowiązkowy zakład ${ante} w każdej rundzie\n• BLIND: Obowiązkowy zakład ${ante} w każdej rundzie\n• PLAY: Opcjonalny zakład podczas gry. W całej rundzie możesz wybrać TYLKO JEDNĄ z następujących opcji: (${ante4} jeśli zrobisz to w fazie PRE-FLOP, ${ante2} jeśli zrobisz to w fazie FLOP, lub ${ante} jeśli zrobisz to w fazie RIVER. Możesz również spasować w fazie RIVER, rezygnując z ręki i nie stawiając zakładu.)\n\n🎴 ROZDANIE KART:\n• Otrzymujesz 2 karty własne (Twoje karty)\n• Krupier otrzymuje 2 karty zakryte (niewidoczne dla Ciebie)\n• 5 kart wspólnych jest rozdawanych zakrytych na początku\n• Karty wspólne są odkrywane stopniowo w fazach gry\n\n🏆 KWALIFIKACJA KRUPIERA:\n• Krupier musi mieć co najmniej PARĘ (2 karty tego samego rangi), aby się zakwalifikować, używając 2 kart w swojej ręce i 5 kart wspólnych.\n• Kwalifikacja krupiera wpływa na wyniki zakładów, jak zostanie wyjaśnione później.\n\n🎮 FAZY GRY I AKCJE:\n📋 PRE-FLOP:\n  • Akcje: [4x] (${ante4}) lub [check]\n  • [4x]: Staw ${ante4} zakładu PLAY, odkrywa pierwsze 3 karty wspólne\n  • [check]: Bez dodatkowego zakładu, odkrywa pierwsze 3 karty wspólne\n\n📋 FLOP:\n  • Jeśli postawiono zakład 4x: Tylko [skip] dostępne (automatycznie odkrywa ostatnie 2 karty wspólne)\n  • Jeśli nie postawiono zakładu 4x: [2x] (${ante2}) lub [check]\n  • [2x]: Staw ${ante2} zakładu PLAY, odkrywa ostatnie 2 karty wspólne\n  • [check]: Bez dodatkowego zakładu, odkrywa ostatnie 2 karty wspólne\n\n📋 RIVER:\n  • Jeśli postawiono zakład 4x lub 2x: Tylko [skip] dostępne (automatycznie przechodzi do rozstrzygnięcia)\n  • Jeśli nie postawiono wcześniej zakładu PLAY: [1x] (${ante}) lub [fold]\n  • [1x]: Staw ${ante} zakładu PLAY, przechodzi do rozstrzygnięcia\n  • [fold]: Zrezygnuj z ręki, strać zakłady ANTE i BLIND\n\n📋 SHOWDOWN:\n  • Wszystkie karty są odkrywane i oceniane\n  • Najlepsza ręka z 7 kart (2 własne + 5 wspólnych)\n  • Zakłady są rozstrzygane zgodnie z zasadami wypłat\n\n💎 WYPŁATY ZAKŁADÓW:\n📊 ZAKŁAD ANTE:\n  • Krupier nie zakwalifikował się: PUSH (zakład jest zwracany)\n  • Krupier zakwalifikował się i Ty wygrałeś: wypłata 1:1 (zakład + wygrana)\n  • Krupier zakwalifikował się i Ty przegrałeś: Zakład jest tracony\n  • Remis: PUSH (zakład jest zwracany)\n\n📊 ZAKŁAD BLIND:\n  • Niezależny od kwalifikacji krupiera\n  • Ty wygrałeś: Zakład jest zwracany i dodatkowa wypłata oparta na sile Twojej ręki\n  • Ty przegrałeś: Zakład jest tracony\n  • Remis: PUSH (zakład jest zwracany)\n\n📊 TABELA WYPŁAT ZAKŁADU BLIND:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Mniej niż Straight: Brak dodatkowej wypłaty\n\n📊 ZAKŁAD PLAY:\n  • Niezależny od kwalifikacji krupiera\n  • Bezpośrednie porównanie: Twoja najlepsza ręka vs najlepsza ręka krupiera\n  • Ty wygrałeś: wypłata 1:1 (zakład + wygrana)\n  • Ty przegrałeś: Zakład jest tracony\n  • Remis: PUSH (zakład jest zwracany)\n\n🎯 RANKING RĄK POKEROWYCH (Najlepsza do najgorszej):\n  1. Royal Flush: A-K-Q-J-10 w tym samym kolorze\n  2. Straight Flush: 5 kolejnych kart w tym samym kolorze\n  3. Four of a Kind: 4 karty tego samego rangi\n  4. Full House: 3 karty tego samego rangi + 2 karty tego samego rangi\n  5. Flush: 5 kart w tym samym kolorze\n  6. Straight: 5 kolejnych kart\n  7. Three of a Kind: 3 karty tego samego rangi\n  8. Two Pair: 2 pary kart różnych rang\n  9. One Pair: 2 karty tego samego rangi\n  10. High Card: Najwyższa karta wygrywa\n\n⌨️  KOMENDY AKCJI:\n• [4x] lub [play bet 4x]: Staw ${{self.ante_amount*4}} zakładu PLAY\n• [2x] lub [play bet 2x]: Staw ${{self.ante_amount*2}} zakładu PLAY\n• [1x] lub [play bet 1x]: Staw ${{self.ante_amount*1}} zakładu PLAY\n• [check] lub [c]: Sprawdź (bez dodatkowego zakładu)\n• [fold] lub [f]: Zrezygnuj z ręki\n• [skip] lub [s]: Pomiń do następnej fazy (gdy nie jest wymagana akcja)\n\n💡 PORADY STRATEGICZNE:\n• Silne ręce startowe (pary, wysokie karty) często uzasadniają zakłady 4x\n• Rozważ kwalifikację krupiera - słabe ręce mogą przynieść PUSH, jeśli krupier nie zakwalifikuje się\n• Zakład BLIND może być bardzo zyskowny przy silnych rękach (Royal Flush = 500:1!)\n• Uważaj na swoją stawkę! Jeśli spadnie do 0 lub poniżej na początku rundy, przegrywasz.\n\n⚠️  WAŻNE UWAGI:\n• Zakłady ANTE i BLIND są obowiązkowe w każdej rundzie\n• Zakłady PLAY są opcjonalne i strategiczne\n• Upewnij się, że wprowadzasz poprawną akcję i tylko jedną akcję na raz.\n\n",
+    "state": "🎯 Runda {round}\n💰 Żetony: {chips}\n🎴 Twoja ręka: {hand}\n📊 Aktualne zakłady: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Faza: {phase}\n🎯 Dostępne akcje: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Runda {round} rozpoczęta! Zakłady: ANTE ${ante}, BLIND ${blind}. Masz {chips} żetonów pozostałych.",
+    "your_hand": "🎴 Twoja ręka: {hand}",
+    "flop_revealed": "🃏 FLOP odkryty: {cards}",
+    "river_revealed": "🃏 RIVER odkryty: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Nieprawidłowa akcja dla obecnej fazy. Dostępne akcje: {available}",
+    "message": "❌ Nieprawidłowa akcja! Dostępne akcje: {available}"
+  },
+  "action": {
+    "folded": "🃏 Zrezygnowałeś z ręki."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Ręka krupiera: {cards}",
+    "community_cards": "🃏 Karty wspólne: {cards}",
+    "player_best": "🎴 Najlepsza ręka gracza: {name} ({cards})",
+    "dealer_best": "🎴 Najlepsza ręka krupiera: {name} ({cards})",
+    "ante_lost_folded": "❌ Zakład ANTE przegrany! -${ante} (zrezygnowano z ręki)",
+    "blind_lost_folded": "❌ Zakład BLIND przegrany! -${blind} (zrezygnowano z ręki)",
+    "ante_won": "✅ Zakład ANTE wygrany! +${amount}",
+    "ante_pushed": "🔄 Zakład ANTE zwrócony! ${ante} zwrócone",
+    "ante_lost": "❌ Zakład ANTE przegrany! -${ante}",
+    "blind_won": "✅ Zakład BLIND wygrany! +${amount}",
+    "blind_pushed": "🔄 Zakład BLIND zwrócony! ${blind} zwrócone",
+    "blind_lost": "❌ Zakład BLIND przegrany! -${blind}",
+    "play_won": "✅ Zakład PLAY wygrany! +${amount}",
+    "play_pushed": "🔄 Zakład PLAY zwrócony! ${play} zwrócone",
+    "play_lost": "❌ Zakład PLAY przegrany! -${play}",
+    "net_gain": "🎉 Runda {round} zakończona! Zysk netto: +${net}",
+    "net_loss": "💸 Runda {round} zakończona! Strata netto: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 KONIEC GRY! {max_turns} rund ukończonych. Masz ${chips} żetonów - WYGRAŁEŚ!",
+    "game_over_lose": "🏁 KONIEC GRY! Skończyły Ci się żetony. Krupier wygrywa!",
+    "reward_win": "Gracz ukończył {winner_rounds} rund z ${chips} żetonami",
+    "reward_lose": "Gracz stracił wszystkie żetony w rundzie {round}",
+    "reward_win_max": "Gracz ukończył {max_turns} rund z ${chips} żetonami"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Cztery te same",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Trzy te same",
+    "two_pair": "Dwie pary",
+    "one_pair": "Jedna para",
+    "high_card": "Wysoka karta",
+    "unknown": "Nieznana ręka"
+  }
+}

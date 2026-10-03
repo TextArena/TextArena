@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Rydych chi'n chwarae Gwlff (Gêm Cerdyn) - Chwaraewr {player_id}. Nod: Cael y sgôr cyfanswm isaf yn y rownd sengl hwn. Os yw'r cologau'n rhannu'r un gwerth, maent yn cael eu cyfanswm fel 0. Gwerthiau cardiau: A=1, 2-10=werth wyneb, J/Q=10, K=0 Y gweithredoedd (defnyddio bracsiau union): - '[draw]' - Tynnu o deic - '[take]' - Cymryd o'r pentwr dileu - '[swap X Y]' - Troi'r cerdyn dileu gyda safle X (rhwng) Y (colwm) - '[discard]' - Dileu'r cerdyn dileu "
+  },
+  "board": {
+    "drew": "Rydych yn tynnu: {card} Nawr mae'n rhaid i chi [swap X Y] neu [discard] ei.",
+    "took": "Rydych yn cymryd: {card} o garreg gwastraff Rhaid i chi [swap X Y] gyda hi (nid yw'n gallu gwastraff).",
+    "peeked": "Fe wnaethoch chi gymryd cip ar y safle ({row},{col}): {card}",
+    "turn_view": "Eich llaw: {hand} Tynnwch y pentwr: {discard} {options}",
+    "none": "Dim un"
+  },
+  "options": {
+    "final_turns": "Mae'r tro olaf! Eich opsiynau: [draw], [take], [peek X Y]",
+    "draw": "Eich opsiynau: [draw], [take]",
+    "must_swap": "Rhaid i chi: [swap X Y] (ni ellir gwthio cardiau o'r pentwr gwthio)",
+    "swap_or_discard": "Rhaid i chi: [swap X Y] neu [discard]"
+  },
+  "hand": {
+    "no_cards": "Dim cardiau",
+    "header": "Col: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Chwaraewr {pid} yn cyfnewid {new} gyda {old} yn y sefyllfa ({row},{col})",
+    "discarded": "Chwaraewr {pid} wedi'i gollwng {card}"
+  },
+  "message": {
+    "deck_empty": "Mae'r deic yn wag! Gêm yn dod i ben ar unwaith.",
+    "knocked": "Chwaraewr {pid} wedi'i guro! Mae pob chwaraewr arall yn cael un tro arall.",
+    "final_round": "Chwaraewr {pid} {reason}! Mae pob chwaraewr arall yn cael un tro arall."
+  },
+  "reason": {
+    "all_revealed": "wedi datgelu pob cerdyn"
+  },
+  "invalid": {
+    "wrong_action": "Defnyddiwch un un o'r camau canlynol: [draw], [take], [swap X Y], [discard], [knock], neu [peek X Y]",
+    "discard_empty": "Mae'r pentwr gwisgo yn wag!",
+    "must_draw_first": "Rhaid i chi gyntaf [draw], [take], [knock], neu [peek X Y]",
+    "cannot_discard_taken": "Ni allwch daflu cerdyn a gymerwyd o'r pentwr daflu. Rhaid ei gyfnewid.",
+    "have_drawn_card": "Mae gennych chi gard dynodedig. Rhaid i chi [swap X Y] neu [discard] ei.",
+    "need_drawn_swap": "Mae angen cerdyn wedi'i dynnu i gyfnewid.",
+    "need_drawn_discard": "Mae angen cerdyn wedi'i dynnu i'w daflu.",
+    "out_of_bounds": "Safle allan o ffiniau. Defnyddiwch rhes 1-{max_row}, colofn 1-{max_col}",
+    "knock_with_card": "Ni allwch guro gyda cherdyn wedi'i dynnu. Cwblhawch eich tro yn gyntaf.",
+    "already_knocked": "Mae rhywun eisoes wedi taro rownd hwn.",
+    "already_revealed": "Mae'r cerdyn hwnnw eisoes wedi'i datgelu!"
+  },
+  "summary": {
+    "full": "Gêm drosodd! Chwaraewr {winner} yn ennill gyda sgôr o {score} pwyntiau! Sgôr Terfynol: {scores}",
+    "line": "Chwaraewr {pid}: {score} pwyntiau "
+  },
+  "board_str": {
+    "title": "=== GÊM GÔLFF ===",
+    "discard": "Pyl gwastraff: {card}",
+    "knocked": "Mae chwaraewr {pid} wedi curo!",
+    "player_header": "Chwaraewr {pid} (Score: {score}):"
+  }
+}

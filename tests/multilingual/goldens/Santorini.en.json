@@ -1,0 +1,1400 @@
+{
+  "bad_build": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Navy in a game of Santorini.\n\nGame Rules:\n1. Movement:\n   - Workers can only move to adjacent squares (including diagonals)\n   - Cannot move to squares occupied by other workers or domes\n   - Can move up maximum one level, but can move down any number of levels\n\n2. Building:\n   - Must build in a square adjacent to where your worker moved to\n   - Cannot build where any worker is standing\n   - Cannot build on top of a dome (level 4)\n   - Building adds one level (or creates a dome on level 3)\n\n3. Win Conditions:\n   - Win by moving a worker to level 3\n   - Win if opponent has no valid moves\n\nMake your move in the format [worker_id source dest build]\nExample: [N1C1C2B2] means move Navy worker 1 from C1 to C2 and build at B2\nYou can include additional text in your messages, but you must only mention the valid move pattern once.\n\nCurrent board state:\n\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n\n\nValid moves: [N2B3A2A1], [N2B3A2A3], [N2B3A2B1], [N2B3A2B2], [N2B3A2B3], [N2B3A3A2], [N2B3A3A4], [N2B3A3B2], [N2B3A3B3], [N2B3A3B4], [N2B3A4A3], [N2B3A4A5], [N2B3A4B3], [N2B3A4B4], [N2B3A4B5], [N2B3B2A1], [N2B3B2A2], [N2B3B2A3], [N2B3B2B1], [N2B3B2B3], [N2B3B2C1], [N2B3B2C3], [N2B3B4A3], [N2B3B4A4], [N2B3B4A5], [N2B3B4B3], [N2B3B4B5], [N2B3B4C3], [N2B3B4C5], [N2B3C3B2], [N2B3C3B3], [N2B3C3B4], [N2B3C3D2], [N2B3C3D4], [N1C2B1A1], [N1C2B1A2], [N1C2B1B2], [N1C2B1C1], [N1C2B1C2], [N1C2B2A1], [N1C2B2A2], [N1C2B2A3], [N1C2B2B1], [N1C2B2C1], [N1C2B2C2], [N1C2B2C3], [N1C2C1B1], [N1C2C1B2], [N1C2C1C2], [N1C2C1D1], [N1C2C1D2], [N1C2C3B2], [N1C2C3B4], [N1C2C3C2], [N1C2C3D2], [N1C2C3D4], [N1C2D1C1], [N1C2D1C2], [N1C2D1D2], [N1C2D1E1], [N1C2D1E2], [N1C2D2C1], [N1C2D2C2], [N1C2D2C3], [N1C2D2D1], [N1C2D2E1], [N1C2D2E2], [N1C2D2E3]",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "action": "[N1C2C3E5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N1C2C3E5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid build at E5 Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[N1C2C3B2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are playing White in a game of Santorini.\n\nGame Rules:\n1. Movement:\n   - Workers can only move to adjacent squares (including diagonals)\n   - Cannot move to squares occupied by other workers or domes\n   - Can move up maximum one level, but can move down any number of levels\n\n2. Building:\n   - Must build in a square adjacent to where your worker moved to\n   - Cannot build where any worker is standing\n   - Cannot build on top of a dome (level 4)\n   - Building adds one level (or creates a dome on level 3)\n\n3. Win Conditions:\n   - Win by moving a worker to level 3\n   - Win if opponent has no valid moves\n\nMake your move in the format [worker_id source dest build]\nExample: [W1C1C2B2] means move White worker 1 from C1 to C2 and build at B2\nYou can include additional text in your messages, but you must only mention the valid move pattern once.\n\nCurrent board state:\n\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n\n\nValid moves: [N2B3A2A1], [N2B3A2A3], [N2B3A2B1], [N2B3A2B2], [N2B3A2B3], [N2B3A3A2], [N2B3A3A4], [N2B3A3B2], [N2B3A3B3], [N2B3A3B4], [N2B3A4A3], [N2B3A4A5], [N2B3A4B3], [N2B3A4B4], [N2B3A4B5], [N2B3B2A1], [N2B3B2A2], [N2B3B2A3], [N2B3B2B1], [N2B3B2B3], [N2B3B2C1], [N2B3B2C3], [N2B3B4A3], [N2B3B4A4], [N2B3B4A5], [N2B3B4B3], [N2B3B4B5], [N2B3B4C3], [N2B3B4C5], [N2B3C3B2], [N2B3C3B3], [N2B3C3B4], [N2B3C3D2], [N2B3C3D4], [N1C2B1A1], [N1C2B1A2], [N1C2B1B2], [N1C2B1C1], [N1C2B1C2], [N1C2B2A1], [N1C2B2A2], [N1C2B2A3], [N1C2B2B1], [N1C2B2C1], [N1C2B2C2], [N1C2B2C3], [N1C2C1B1], [N1C2C1B2], [N1C2C1C2], [N1C2C1D1], [N1C2C1D2], [N1C2C3B2], [N1C2C3B4], [N1C2C3C2], [N1C2C3D2], [N1C2C3D4], [N1C2D1C1], [N1C2D1C2], [N1C2D1D2], [N1C2D1E1], [N1C2D1E2], [N1C2D2C1], [N1C2D2C2], [N1C2D2C3], [N1C2D2D1], [N1C2D2E1], [N1C2D2E2], [N1C2D2E3]",
+        "trailing_to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "[N1C2C3E5]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[N1C2C3B2]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 1 from C2 to C3 and built at B2",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 1   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0   │ 0 N1│ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "bad_move": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Navy in a game of Santorini.\n\nGame Rules:\n1. Movement:\n   - Workers can only move to adjacent squares (including diagonals)\n   - Cannot move to squares occupied by other workers or domes\n   - Can move up maximum one level, but can move down any number of levels\n\n2. Building:\n   - Must build in a square adjacent to where your worker moved to\n   - Cannot build where any worker is standing\n   - Cannot build on top of a dome (level 4)\n   - Building adds one level (or creates a dome on level 3)\n\n3. Win Conditions:\n   - Win by moving a worker to level 3\n   - Win if opponent has no valid moves\n\nMake your move in the format [worker_id source dest build]\nExample: [N1C1C2B2] means move Navy worker 1 from C1 to C2 and build at B2\nYou can include additional text in your messages, but you must only mention the valid move pattern once.\n\nCurrent board state:\n\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n\n\nValid moves: [N2B3A2A1], [N2B3A2A3], [N2B3A2B1], [N2B3A2B2], [N2B3A2B3], [N2B3A3A2], [N2B3A3A4], [N2B3A3B2], [N2B3A3B3], [N2B3A3B4], [N2B3A4A3], [N2B3A4A5], [N2B3A4B3], [N2B3A4B4], [N2B3A4B5], [N2B3B2A1], [N2B3B2A2], [N2B3B2A3], [N2B3B2B1], [N2B3B2B3], [N2B3B2C1], [N2B3B2C3], [N2B3B4A3], [N2B3B4A4], [N2B3B4A5], [N2B3B4B3], [N2B3B4B5], [N2B3B4C3], [N2B3B4C5], [N2B3C3B2], [N2B3C3B3], [N2B3C3B4], [N2B3C3D2], [N2B3C3D4], [N1C2B1A1], [N1C2B1A2], [N1C2B1B2], [N1C2B1C1], [N1C2B1C2], [N1C2B2A1], [N1C2B2A2], [N1C2B2A3], [N1C2B2B1], [N1C2B2C1], [N1C2B2C2], [N1C2B2C3], [N1C2C1B1], [N1C2C1B2], [N1C2C1C2], [N1C2C1D1], [N1C2C1D2], [N1C2C3B2], [N1C2C3B4], [N1C2C3C2], [N1C2C3D2], [N1C2C3D4], [N1C2D1C1], [N1C2D1C2], [N1C2D1D2], [N1C2D1E1], [N1C2D1E2], [N1C2D2C1], [N1C2D2C2], [N1C2D2C3], [N1C2D2D1], [N1C2D2E1], [N1C2D2E2], [N1C2D2E3]",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "action": "[N1C2E5D5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N1C2E5D5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid move from C2 to E5 Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[N1C2C3B2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are playing White in a game of Santorini.\n\nGame Rules:\n1. Movement:\n   - Workers can only move to adjacent squares (including diagonals)\n   - Cannot move to squares occupied by other workers or domes\n   - Can move up maximum one level, but can move down any number of levels\n\n2. Building:\n   - Must build in a square adjacent to where your worker moved to\n   - Cannot build where any worker is standing\n   - Cannot build on top of a dome (level 4)\n   - Building adds one level (or creates a dome on level 3)\n\n3. Win Conditions:\n   - Win by moving a worker to level 3\n   - Win if opponent has no valid moves\n\nMake your move in the format [worker_id source dest build]\nExample: [W1C1C2B2] means move White worker 1 from C1 to C2 and build at B2\nYou can include additional text in your messages, but you must only mention the valid move pattern once.\n\nCurrent board state:\n\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n\n\nValid moves: [N2B3A2A1], [N2B3A2A3], [N2B3A2B1], [N2B3A2B2], [N2B3A2B3], [N2B3A3A2], [N2B3A3A4], [N2B3A3B2], [N2B3A3B3], [N2B3A3B4], [N2B3A4A3], [N2B3A4A5], [N2B3A4B3], [N2B3A4B4], [N2B3A4B5], [N2B3B2A1], [N2B3B2A2], [N2B3B2A3], [N2B3B2B1], [N2B3B2B3], [N2B3B2C1], [N2B3B2C3], [N2B3B4A3], [N2B3B4A4], [N2B3B4A5], [N2B3B4B3], [N2B3B4B5], [N2B3B4C3], [N2B3B4C5], [N2B3C3B2], [N2B3C3B3], [N2B3C3B4], [N2B3C3D2], [N2B3C3D4], [N1C2B1A1], [N1C2B1A2], [N1C2B1B2], [N1C2B1C1], [N1C2B1C2], [N1C2B2A1], [N1C2B2A2], [N1C2B2A3], [N1C2B2B1], [N1C2B2C1], [N1C2B2C2], [N1C2B2C3], [N1C2C1B1], [N1C2C1B2], [N1C2C1C2], [N1C2C1D1], [N1C2C1D2], [N1C2C3B2], [N1C2C3B4], [N1C2C3C2], [N1C2C3D2], [N1C2C3D4], [N1C2D1C1], [N1C2D1C2], [N1C2D1D2], [N1C2D1E1], [N1C2D1E2], [N1C2D2C1], [N1C2D2C2], [N1C2D2C3], [N1C2D2D1], [N1C2D2E1], [N1C2D2E2], [N1C2D2E3]",
+        "trailing_to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "[N1C2E5D5]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[N1C2C3B2]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 1 from C2 to C3 and built at B2",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 1   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0   │ 0 N1│ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "no_worker": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Navy in a game of Santorini.\n\nGame Rules:\n1. Movement:\n   - Workers can only move to adjacent squares (including diagonals)\n   - Cannot move to squares occupied by other workers or domes\n   - Can move up maximum one level, but can move down any number of levels\n\n2. Building:\n   - Must build in a square adjacent to where your worker moved to\n   - Cannot build where any worker is standing\n   - Cannot build on top of a dome (level 4)\n   - Building adds one level (or creates a dome on level 3)\n\n3. Win Conditions:\n   - Win by moving a worker to level 3\n   - Win if opponent has no valid moves\n\nMake your move in the format [worker_id source dest build]\nExample: [N1C1C2B2] means move Navy worker 1 from C1 to C2 and build at B2\nYou can include additional text in your messages, but you must only mention the valid move pattern once.\n\nCurrent board state:\n\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n\n\nValid moves: [N2B3A2A1], [N2B3A2A3], [N2B3A2B1], [N2B3A2B2], [N2B3A2B3], [N2B3A3A2], [N2B3A3A4], [N2B3A3B2], [N2B3A3B3], [N2B3A3B4], [N2B3A4A3], [N2B3A4A5], [N2B3A4B3], [N2B3A4B4], [N2B3A4B5], [N2B3B2A1], [N2B3B2A2], [N2B3B2A3], [N2B3B2B1], [N2B3B2B3], [N2B3B2C1], [N2B3B2C3], [N2B3B4A3], [N2B3B4A4], [N2B3B4A5], [N2B3B4B3], [N2B3B4B5], [N2B3B4C3], [N2B3B4C5], [N2B3C3B2], [N2B3C3B3], [N2B3C3B4], [N2B3C3D2], [N2B3C3D4], [N1C2B1A1], [N1C2B1A2], [N1C2B1B2], [N1C2B1C1], [N1C2B1C2], [N1C2B2A1], [N1C2B2A2], [N1C2B2A3], [N1C2B2B1], [N1C2B2C1], [N1C2B2C2], [N1C2B2C3], [N1C2C1B1], [N1C2C1B2], [N1C2C1C2], [N1C2C1D1], [N1C2C1D2], [N1C2C3B2], [N1C2C3B4], [N1C2C3C2], [N1C2C3D2], [N1C2C3D4], [N1C2D1C1], [N1C2D1C2], [N1C2D1D2], [N1C2D1E1], [N1C2D1E2], [N1C2D2C1], [N1C2D2C2], [N1C2D2C3], [N1C2D2D1], [N1C2D2E1], [N1C2D2E2], [N1C2D2E3]",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "action": "[N1A1A2A3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N1A1A2A3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: No worker 1 at position A1 Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[N1C2C3B2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are playing White in a game of Santorini.\n\nGame Rules:\n1. Movement:\n   - Workers can only move to adjacent squares (including diagonals)\n   - Cannot move to squares occupied by other workers or domes\n   - Can move up maximum one level, but can move down any number of levels\n\n2. Building:\n   - Must build in a square adjacent to where your worker moved to\n   - Cannot build where any worker is standing\n   - Cannot build on top of a dome (level 4)\n   - Building adds one level (or creates a dome on level 3)\n\n3. Win Conditions:\n   - Win by moving a worker to level 3\n   - Win if opponent has no valid moves\n\nMake your move in the format [worker_id source dest build]\nExample: [W1C1C2B2] means move White worker 1 from C1 to C2 and build at B2\nYou can include additional text in your messages, but you must only mention the valid move pattern once.\n\nCurrent board state:\n\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n\n\nValid moves: [N2B3A2A1], [N2B3A2A3], [N2B3A2B1], [N2B3A2B2], [N2B3A2B3], [N2B3A3A2], [N2B3A3A4], [N2B3A3B2], [N2B3A3B3], [N2B3A3B4], [N2B3A4A3], [N2B3A4A5], [N2B3A4B3], [N2B3A4B4], [N2B3A4B5], [N2B3B2A1], [N2B3B2A2], [N2B3B2A3], [N2B3B2B1], [N2B3B2B3], [N2B3B2C1], [N2B3B2C3], [N2B3B4A3], [N2B3B4A4], [N2B3B4A5], [N2B3B4B3], [N2B3B4B5], [N2B3B4C3], [N2B3B4C5], [N2B3C3B2], [N2B3C3B3], [N2B3C3B4], [N2B3C3D2], [N2B3C3D4], [N1C2B1A1], [N1C2B1A2], [N1C2B1B2], [N1C2B1C1], [N1C2B1C2], [N1C2B2A1], [N1C2B2A2], [N1C2B2A3], [N1C2B2B1], [N1C2B2C1], [N1C2B2C2], [N1C2B2C3], [N1C2C1B1], [N1C2C1B2], [N1C2C1C2], [N1C2C1D1], [N1C2C1D2], [N1C2C3B2], [N1C2C3B4], [N1C2C3C2], [N1C2C3D2], [N1C2C3D4], [N1C2D1C1], [N1C2D1C2], [N1C2D1D2], [N1C2D1E1], [N1C2D1E2], [N1C2D2C1], [N1C2D2C2], [N1C2D2C3], [N1C2D2D1], [N1C2D2E1], [N1C2D2E2], [N1C2D2E3]",
+        "trailing_to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "[N1A1A2A3]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[N1C2C3B2]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 1 from C2 to C3 and built at B2",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 1   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0   │ 0 N1│ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "win_level3": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "reason": "Player 0 (Navy) won by moving a worker to level 3!",
+        "role": "Player 0",
+        "turn_count": 13
+      },
+      "1": {
+        "invalid_move": false,
+        "reason": "Player 0 (Navy) won by moving a worker to level 3!",
+        "role": "Player 1",
+        "turn_count": 12
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Navy in a game of Santorini.\n\nGame Rules:\n1. Movement:\n   - Workers can only move to adjacent squares (including diagonals)\n   - Cannot move to squares occupied by other workers or domes\n   - Can move up maximum one level, but can move down any number of levels\n\n2. Building:\n   - Must build in a square adjacent to where your worker moved to\n   - Cannot build where any worker is standing\n   - Cannot build on top of a dome (level 4)\n   - Building adds one level (or creates a dome on level 3)\n\n3. Win Conditions:\n   - Win by moving a worker to level 3\n   - Win if opponent has no valid moves\n\nMake your move in the format [worker_id source dest build]\nExample: [N1C1C2B2] means move Navy worker 1 from C1 to C2 and build at B2\nYou can include additional text in your messages, but you must only mention the valid move pattern once.\n\nCurrent board state:\n\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n\n\nValid moves: [N2B3A2A1], [N2B3A2A3], [N2B3A2B1], [N2B3A2B2], [N2B3A2B3], [N2B3A3A2], [N2B3A3A4], [N2B3A3B2], [N2B3A3B3], [N2B3A3B4], [N2B3A4A3], [N2B3A4A5], [N2B3A4B3], [N2B3A4B4], [N2B3A4B5], [N2B3B2A1], [N2B3B2A2], [N2B3B2A3], [N2B3B2B1], [N2B3B2B3], [N2B3B2C1], [N2B3B2C3], [N2B3B4A3], [N2B3B4A4], [N2B3B4A5], [N2B3B4B3], [N2B3B4B5], [N2B3B4C3], [N2B3B4C5], [N2B3C3B2], [N2B3C3B3], [N2B3C3B4], [N2B3C3D2], [N2B3C3D4], [N1C2B1A1], [N1C2B1A2], [N1C2B1B2], [N1C2B1C1], [N1C2B1C2], [N1C2B2A1], [N1C2B2A2], [N1C2B2A3], [N1C2B2B1], [N1C2B2C1], [N1C2B2C2], [N1C2B2C3], [N1C2C1B1], [N1C2C1B2], [N1C2C1C2], [N1C2C1D1], [N1C2C1D2], [N1C2C3B2], [N1C2C3B4], [N1C2C3C2], [N1C2C3D2], [N1C2C3D4], [N1C2D1C1], [N1C2D1C2], [N1C2D1D2], [N1C2D1E1], [N1C2D1E2], [N1C2D2C1], [N1C2D2C2], [N1C2D2C3], [N1C2D2D1], [N1C2D2E1], [N1C2D2E2], [N1C2D2E3]",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "action": "[N2B3A2A1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are playing White in a game of Santorini.\n\nGame Rules:\n1. Movement:\n   - Workers can only move to adjacent squares (including diagonals)\n   - Cannot move to squares occupied by other workers or domes\n   - Can move up maximum one level, but can move down any number of levels\n\n2. Building:\n   - Must build in a square adjacent to where your worker moved to\n   - Cannot build where any worker is standing\n   - Cannot build on top of a dome (level 4)\n   - Building adds one level (or creates a dome on level 3)\n\n3. Win Conditions:\n   - Win by moving a worker to level 3\n   - Win if opponent has no valid moves\n\nMake your move in the format [worker_id source dest build]\nExample: [W1C1C2B2] means move White worker 1 from C1 to C2 and build at B2\nYou can include additional text in your messages, but you must only mention the valid move pattern once.\n\nCurrent board state:\n\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n\n\nValid moves: [N2B3A2A1], [N2B3A2A3], [N2B3A2B1], [N2B3A2B2], [N2B3A2B3], [N2B3A3A2], [N2B3A3A4], [N2B3A3B2], [N2B3A3B3], [N2B3A3B4], [N2B3A4A3], [N2B3A4A5], [N2B3A4B3], [N2B3A4B4], [N2B3A4B5], [N2B3B2A1], [N2B3B2A2], [N2B3B2A3], [N2B3B2B1], [N2B3B2B3], [N2B3B2C1], [N2B3B2C3], [N2B3B4A3], [N2B3B4A4], [N2B3B4A5], [N2B3B4B3], [N2B3B4B5], [N2B3B4C3], [N2B3B4C5], [N2B3C3B2], [N2B3C3B3], [N2B3C3B4], [N2B3C3D2], [N2B3C3D4], [N1C2B1A1], [N1C2B1A2], [N1C2B1B2], [N1C2B1C1], [N1C2B1C2], [N1C2B2A1], [N1C2B2A2], [N1C2B2A3], [N1C2B2B1], [N1C2B2C1], [N1C2B2C2], [N1C2B2C3], [N1C2C1B1], [N1C2C1B2], [N1C2C1C2], [N1C2C1D1], [N1C2C1D2], [N1C2C3B2], [N1C2C3B4], [N1C2C3C2], [N1C2C3D2], [N1C2C3D4], [N1C2D1C1], [N1C2D1C2], [N1C2D1D2], [N1C2D1E1], [N1C2D1E2], [N1C2D2C1], [N1C2D2C2], [N1C2D2C3], [N1C2D2D1], [N1C2D2E1], [N1C2D2E2], [N1C2D2E3]",
+        "to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "[N2B3A2A1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from B3 to A2 and built at A1",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 1   │ 0 N2│ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[W2C4B3A3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N2B3A2A1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from B3 to A2 and built at A1",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 1   │ 0 N2│ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[W2C4B3A3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from C4 to B3 and built at A3",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 1   │ 0 N2│ 1   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 W2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[N2A2A1A2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[W2C4B3A3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from C4 to B3 and built at A3",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 1   │ 0 N2│ 1   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 W2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[N2A2A1A2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from A2 to A1 and built at A2",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 1 N2│ 1   │ 1   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 W2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[W2B3A2A3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N2A2A1A2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from A2 to A1 and built at A2",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 1 N2│ 1   │ 1   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 W2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[W2B3A2A3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from B3 to A2 and built at A3",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 1 N2│ 1 W2│ 2   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[N2A1B2A3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[W2B3A2A3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from B3 to A2 and built at A3",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 1 N2│ 1 W2│ 2   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[N2A1B2A3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from A1 to B2 and built at A3",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 1   │ 1 W2│ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0 N2│ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[W2A2A1A2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N2A1B2A3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from A1 to B2 and built at A3",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 1   │ 1 W2│ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0 N2│ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[W2A2A1A2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from A2 to A1 and built at A2",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 1 W2│ 2   │ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0 N2│ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[N2B2B1A2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[W2A2A1A2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from A2 to A1 and built at A2",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 1 W2│ 2   │ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0 N2│ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[N2B2B1A2]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from B2 to B1 and built at A2",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 1 W2│ 3   │ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0 N2│ 0   │ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[W2A1B2A1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N2B2B1A2]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from B2 to B1 and built at A2",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 1 W2│ 3   │ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0 N2│ 0   │ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[W2A1B2A1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from A1 to B2 and built at A1",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 2   │ 3   │ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0 N2│ 0 W2│ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[N2B1C1B1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[W2A1B2A1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from A1 to B2 and built at A1",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 2   │ 3   │ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0 N2│ 0 W2│ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[N2B1C1B1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from B1 to C1 and built at B1",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 2   │ 3   │ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 1   │ 0 W2│ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0 N2│ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[W2B2B1A1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N2B1C1B1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from B1 to C1 and built at B1",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 2   │ 3   │ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 1   │ 0 W2│ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0 N2│ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[W2B2B1A1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from B2 to B1 and built at A1",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 1 W2│ 0   │ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0 N2│ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[N2C1B2B3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[W2B2B1A1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from B2 to B1 and built at A1",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 1 W2│ 0   │ 0   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0 N2│ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[N2C1B2B3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from C1 to B2 and built at B3",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 1 W2│ 0 N2│ 1   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[W2B1C1B1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N2C1B2B3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from C1 to B2 and built at B3",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 1 W2│ 0 N2│ 1   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[W2B1C1B1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from B1 to C1 and built at B1",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 2   │ 0 N2│ 1   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0 W2│ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[N2B2B3A4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[W2B1C1B1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from B1 to C1 and built at B1",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 2   │ 0 N2│ 1   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0 W2│ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[N2B2B3A4]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from B2 to B3 and built at A4",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 1   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 2   │ 0   │ 1 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0 W2│ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[W2C1B2B1]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N2B2B3A4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from B2 to B3 and built at A4",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 1   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 2   │ 0   │ 1 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0 W2│ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[W2C1B2B1]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from C1 to B2 and built at B1",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 1   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0 W2│ 1 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[N2B3A4B3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[W2C1B2B1]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from C1 to B2 and built at B1",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 1   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0 W2│ 1 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[N2B3A4B3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from B3 to A4 and built at B3",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 1 N2│ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0 W2│ 2   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[W2B2C3B3]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N2B3A4B3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from B3 to A4 and built at B3",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 1 N2│ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0 W2│ 2   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[W2B2C3B3]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from B2 to C3 and built at B3",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 1 N2│ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0 W2│ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[N2A4A5A4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[W2B2C3B3]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from B2 to C3 and built at B3",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 1 N2│ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0 W2│ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[N2A4A5A4]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from A4 to A5 and built at A4",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 2   │ 0 N2│ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0 W2│ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[W2C3B4A4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N2A4A5A4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from A4 to A5 and built at A4",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 2   │ 0 N2│ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0 W2│ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[W2C3B4A4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from C3 to B4 and built at A4",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 3   │ 0 N2│ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 0 W2│ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[N2A5B5A5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[W2C3B4A4]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from C3 to B4 and built at A4",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 3   │ 0 N2│ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 0 W2│ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[N2A5B5A5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from A5 to B5 and built at A5",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 3   │ 1   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 0 W2│ 0 N2│ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[W2B4A5B4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N2A5B5A5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from A5 to B5 and built at A5",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 3   │ 1   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 0 W2│ 0 N2│ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[W2B4A5B4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from B4 to A5 and built at B4",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 3   │ 1 W2│ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 1   │ 0 N2│ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[N2B5B4B5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[W2B4A5B4]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from B4 to A5 and built at B4",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 3   │ 1 W2│ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 1   │ 0 N2│ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[N2B5B4B5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from B5 to B4 and built at B5",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 3   │ 1 W2│ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 1 N2│ 1   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[W2A5B5A5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N2B5B4B5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from B5 to B4 and built at B5",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 3   │ 1 W2│ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 1 N2│ 1   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[W2A5B5A5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from A5 to B5 and built at A5",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 3   │ 2   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 1 N2│ 1 W2│ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[N2B4A5B4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 1,
+        "text": "[W2A5B5A5]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from A5 to B5 and built at A5",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 3   │ 2   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 1 N2│ 1 W2│ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 0,
+        "text": "[N2B4A5B4]",
+        "to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from B4 to A5 and built at B4",
+        "to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 3   │ 2 N2│ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 2   │ 1 W2│ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 1,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[W2B5B4B5]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N2B4A5B4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from B4 to A5 and built at B4",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 3   │ 2 N2│ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 2   │ 1 W2│ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "from": 1,
+        "text": "[W2B5B4B5]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 1 (White) moved worker 2 from B5 to B4 and built at B5",
+        "to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 3   │ 2 N2│ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 2 W2│ 2   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "to": 0,
+        "type": "GAME_BOARD"
+      },
+      {
+        "action": "[N2A5A4A5]",
+        "done": true,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[N2A5A4A5]",
+        "trailing_to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 2 from A5 to A4 and built at A5",
+        "trailing_to": 0,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 3   │ 3   │ 3   │ 3 N2│ 3   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 3   │ 0   │ 3   │ 2 W2│ 2   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0   │ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "trailing_to": 0,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": {
+      "0": 1,
+      "1": -1
+    }
+  },
+  "wrong_format": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Navy in a game of Santorini.\n\nGame Rules:\n1. Movement:\n   - Workers can only move to adjacent squares (including diagonals)\n   - Cannot move to squares occupied by other workers or domes\n   - Can move up maximum one level, but can move down any number of levels\n\n2. Building:\n   - Must build in a square adjacent to where your worker moved to\n   - Cannot build where any worker is standing\n   - Cannot build on top of a dome (level 4)\n   - Building adds one level (or creates a dome on level 3)\n\n3. Win Conditions:\n   - Win by moving a worker to level 3\n   - Win if opponent has no valid moves\n\nMake your move in the format [worker_id source dest build]\nExample: [N1C1C2B2] means move Navy worker 1 from C1 to C2 and build at B2\nYou can include additional text in your messages, but you must only mention the valid move pattern once.\n\nCurrent board state:\n\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n\n\nValid moves: [N2B3A2A1], [N2B3A2A3], [N2B3A2B1], [N2B3A2B2], [N2B3A2B3], [N2B3A3A2], [N2B3A3A4], [N2B3A3B2], [N2B3A3B3], [N2B3A3B4], [N2B3A4A3], [N2B3A4A5], [N2B3A4B3], [N2B3A4B4], [N2B3A4B5], [N2B3B2A1], [N2B3B2A2], [N2B3B2A3], [N2B3B2B1], [N2B3B2B3], [N2B3B2C1], [N2B3B2C3], [N2B3B4A3], [N2B3B4A4], [N2B3B4A5], [N2B3B4B3], [N2B3B4B5], [N2B3B4C3], [N2B3B4C5], [N2B3C3B2], [N2B3C3B3], [N2B3C3B4], [N2B3C3D2], [N2B3C3D4], [N1C2B1A1], [N1C2B1A2], [N1C2B1B2], [N1C2B1C1], [N1C2B1C2], [N1C2B2A1], [N1C2B2A2], [N1C2B2A3], [N1C2B2B1], [N1C2B2C1], [N1C2B2C2], [N1C2B2C3], [N1C2C1B1], [N1C2C1B2], [N1C2C1C2], [N1C2C1D1], [N1C2C1D2], [N1C2C3B2], [N1C2C3B4], [N1C2C3C2], [N1C2C3D2], [N1C2C3D4], [N1C2D1C1], [N1C2D1C2], [N1C2D1D2], [N1C2D1E1], [N1C2D1E2], [N1C2D2C1], [N1C2D2C2], [N1C2D2C3], [N1C2D2D1], [N1C2D2E1], [N1C2D2E2], [N1C2D2E3]",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "action": "hello there",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "hello there",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Invalid move format. Expected format: [worker_id source dest build], e.g. [N1C1C2B2] Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[N1C2C3B2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are playing White in a game of Santorini.\n\nGame Rules:\n1. Movement:\n   - Workers can only move to adjacent squares (including diagonals)\n   - Cannot move to squares occupied by other workers or domes\n   - Can move up maximum one level, but can move down any number of levels\n\n2. Building:\n   - Must build in a square adjacent to where your worker moved to\n   - Cannot build where any worker is standing\n   - Cannot build on top of a dome (level 4)\n   - Building adds one level (or creates a dome on level 3)\n\n3. Win Conditions:\n   - Win by moving a worker to level 3\n   - Win if opponent has no valid moves\n\nMake your move in the format [worker_id source dest build]\nExample: [W1C1C2B2] means move White worker 1 from C1 to C2 and build at B2\nYou can include additional text in your messages, but you must only mention the valid move pattern once.\n\nCurrent board state:\n\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n\n\nValid moves: [N2B3A2A1], [N2B3A2A3], [N2B3A2B1], [N2B3A2B2], [N2B3A2B3], [N2B3A3A2], [N2B3A3A4], [N2B3A3B2], [N2B3A3B3], [N2B3A3B4], [N2B3A4A3], [N2B3A4A5], [N2B3A4B3], [N2B3A4B4], [N2B3A4B5], [N2B3B2A1], [N2B3B2A2], [N2B3B2A3], [N2B3B2B1], [N2B3B2B3], [N2B3B2C1], [N2B3B2C3], [N2B3B4A3], [N2B3B4A4], [N2B3B4A5], [N2B3B4B3], [N2B3B4B5], [N2B3B4C3], [N2B3B4C5], [N2B3C3B2], [N2B3C3B3], [N2B3C3B4], [N2B3C3D2], [N2B3C3D4], [N1C2B1A1], [N1C2B1A2], [N1C2B1B2], [N1C2B1C1], [N1C2B1C2], [N1C2B2A1], [N1C2B2A2], [N1C2B2A3], [N1C2B2B1], [N1C2B2C1], [N1C2B2C2], [N1C2B2C3], [N1C2C1B1], [N1C2C1B2], [N1C2C1C2], [N1C2C1D1], [N1C2C1D2], [N1C2C3B2], [N1C2C3B4], [N1C2C3C2], [N1C2C3D2], [N1C2C3D4], [N1C2D1C1], [N1C2D1C2], [N1C2D1D2], [N1C2D1E1], [N1C2D1E2], [N1C2D2C1], [N1C2D2C2], [N1C2D2C3], [N1C2D2D1], [N1C2D2E1], [N1C2D2E2], [N1C2D2E3]",
+        "trailing_to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "hello there",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[N1C2C3B2]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 1 from C2 to C3 and built at B2",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 1   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0   │ 0 N1│ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  },
+  "wrong_player": {
+    "game_info": {
+      "0": {
+        "invalid_move": false,
+        "role": "Player 0",
+        "turn_count": 1
+      },
+      "1": {
+        "invalid_move": false,
+        "role": "Player 1",
+        "turn_count": 0
+      }
+    },
+    "observations": [
+      {
+        "from": -1,
+        "text": "You are playing Navy in a game of Santorini.\n\nGame Rules:\n1. Movement:\n   - Workers can only move to adjacent squares (including diagonals)\n   - Cannot move to squares occupied by other workers or domes\n   - Can move up maximum one level, but can move down any number of levels\n\n2. Building:\n   - Must build in a square adjacent to where your worker moved to\n   - Cannot build where any worker is standing\n   - Cannot build on top of a dome (level 4)\n   - Building adds one level (or creates a dome on level 3)\n\n3. Win Conditions:\n   - Win by moving a worker to level 3\n   - Win if opponent has no valid moves\n\nMake your move in the format [worker_id source dest build]\nExample: [N1C1C2B2] means move Navy worker 1 from C1 to C2 and build at B2\nYou can include additional text in your messages, but you must only mention the valid move pattern once.\n\nCurrent board state:\n\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n\n\nValid moves: [N2B3A2A1], [N2B3A2A3], [N2B3A2B1], [N2B3A2B2], [N2B3A2B3], [N2B3A3A2], [N2B3A3A4], [N2B3A3B2], [N2B3A3B3], [N2B3A3B4], [N2B3A4A3], [N2B3A4A5], [N2B3A4B3], [N2B3A4B4], [N2B3A4B5], [N2B3B2A1], [N2B3B2A2], [N2B3B2A3], [N2B3B2B1], [N2B3B2B3], [N2B3B2C1], [N2B3B2C3], [N2B3B4A3], [N2B3B4A4], [N2B3B4A5], [N2B3B4B3], [N2B3B4B5], [N2B3B4C3], [N2B3B4C5], [N2B3C3B2], [N2B3C3B3], [N2B3C3B4], [N2B3C3D2], [N2B3C3D4], [N1C2B1A1], [N1C2B1A2], [N1C2B1B2], [N1C2B1C1], [N1C2B1C2], [N1C2B2A1], [N1C2B2A2], [N1C2B2A3], [N1C2B2B1], [N1C2B2C1], [N1C2B2C2], [N1C2B2C3], [N1C2C1B1], [N1C2C1B2], [N1C2C1C2], [N1C2C1D1], [N1C2C1D2], [N1C2C3B2], [N1C2C3B4], [N1C2C3C2], [N1C2C3D2], [N1C2C3D4], [N1C2D1C1], [N1C2D1C2], [N1C2D1D2], [N1C2D1E1], [N1C2D1E2], [N1C2D2C1], [N1C2D2C2], [N1C2D2C3], [N1C2D2D1], [N1C2D2E1], [N1C2D2E2], [N1C2D2E3]",
+        "to": 0,
+        "type": "PROMPT"
+      },
+      {
+        "action": "[W1D3C3C4]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": 0,
+        "text": "[W1D3C3C4]",
+        "to": 0,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 attempted an invalid move. Reason: Cannot move White worker (you are Navy) Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+        "to": 0,
+        "type": "GAME_ADMIN"
+      },
+      {
+        "action": "[N1C2C3B2]",
+        "done": false,
+        "info": {}
+      },
+      {
+        "from": -1,
+        "text": "You are playing White in a game of Santorini.\n\nGame Rules:\n1. Movement:\n   - Workers can only move to adjacent squares (including diagonals)\n   - Cannot move to squares occupied by other workers or domes\n   - Can move up maximum one level, but can move down any number of levels\n\n2. Building:\n   - Must build in a square adjacent to where your worker moved to\n   - Cannot build where any worker is standing\n   - Cannot build on top of a dome (level 4)\n   - Building adds one level (or creates a dome on level 3)\n\n3. Win Conditions:\n   - Win by moving a worker to level 3\n   - Win if opponent has no valid moves\n\nMake your move in the format [worker_id source dest build]\nExample: [W1C1C2B2] means move White worker 1 from C1 to C2 and build at B2\nYou can include additional text in your messages, but you must only mention the valid move pattern once.\n\nCurrent board state:\n\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 0   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0 N1│ 0   │ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n\n\nValid moves: [N2B3A2A1], [N2B3A2A3], [N2B3A2B1], [N2B3A2B2], [N2B3A2B3], [N2B3A3A2], [N2B3A3A4], [N2B3A3B2], [N2B3A3B3], [N2B3A3B4], [N2B3A4A3], [N2B3A4A5], [N2B3A4B3], [N2B3A4B4], [N2B3A4B5], [N2B3B2A1], [N2B3B2A2], [N2B3B2A3], [N2B3B2B1], [N2B3B2B3], [N2B3B2C1], [N2B3B2C3], [N2B3B4A3], [N2B3B4A4], [N2B3B4A5], [N2B3B4B3], [N2B3B4B5], [N2B3B4C3], [N2B3B4C5], [N2B3C3B2], [N2B3C3B3], [N2B3C3B4], [N2B3C3D2], [N2B3C3D4], [N1C2B1A1], [N1C2B1A2], [N1C2B1B2], [N1C2B1C1], [N1C2B1C2], [N1C2B2A1], [N1C2B2A2], [N1C2B2A3], [N1C2B2B1], [N1C2B2C1], [N1C2B2C2], [N1C2B2C3], [N1C2C1B1], [N1C2C1B2], [N1C2C1C2], [N1C2C1D1], [N1C2C1D2], [N1C2C3B2], [N1C2C3B4], [N1C2C3C2], [N1C2C3D2], [N1C2C3D4], [N1C2D1C1], [N1C2D1C2], [N1C2D1D2], [N1C2D1E1], [N1C2D1E2], [N1C2D2C1], [N1C2D2C2], [N1C2D2C3], [N1C2D2D1], [N1C2D2E1], [N1C2D2E2], [N1C2D2E3]",
+        "trailing_to": 1,
+        "type": "PROMPT"
+      },
+      {
+        "from": 0,
+        "text": "[W1D3C3C4]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": 0,
+        "text": "[N1C2C3B2]",
+        "trailing_to": 1,
+        "type": "PLAYER_ACTION"
+      },
+      {
+        "from": -1,
+        "text": "Player 0 (Navy) moved worker 1 from C2 to C3 and built at B2",
+        "trailing_to": 1,
+        "type": "GAME_ACTION_DESCRIPTION"
+      },
+      {
+        "from": -1,
+        "text": "\n     1     2     3     4     5\n  ┌─────┬─────┬─────┬─────┬─────┐\nA │ 0   │ 0   │ 0   │ 0   │ 0   │ A\n  ├─────┼─────┼─────┼─────┼─────┤\nB │ 0   │ 1   │ 0 N2│ 0   │ 0   │ B\n  ├─────┼─────┼─────┼─────┼─────┤\nC │ 0   │ 0   │ 0 N1│ 0 W2│ 0   │ C\n  ├─────┼─────┼─────┼─────┼─────┤\nD │ 0   │ 0   │ 0 W1│ 0   │ 0   │ D\n  ├─────┼─────┼─────┼─────┼─────┤\nE │ 0   │ 0   │ 0   │ 0   │ 0   │ E\n  └─────┴─────┴─────┴─────┴─────┘\n     1     2     3     4     5\n\nLegend:\n- Cell format is [height worker]\n- Height: 0-3 for building levels, 4 for dome\n- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)\n",
+        "trailing_to": 1,
+        "type": "GAME_BOARD"
+      }
+    ],
+    "rewards": null
+  }
+}

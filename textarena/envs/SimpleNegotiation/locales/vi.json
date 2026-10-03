@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong Trò chơi Đàm phán.\nBạn có một số tài nguyên, và nhiệm vụ của bạn là giao dịch sao cho tổng giá trị tài nguyên của bạn tăng lên.\nCác tài nguyên và giá trị liên quan mà bạn hiện có là:\n\t+ {resource_value_list}\nTại mỗi lượt, bạn có thể nói chuyện với đối thủ và đưa ra một đề nghị giao dịch.\nSử dụng các token đặc biệt sau cho hành động:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Tài nguyên đề nghị -> Tài nguyên yêu cầu]\n  - '[Accept]': Để chấp nhận một đề nghị đến.\n  - '[Deny]': Để từ chối một đề nghị đến (mặc định).\nTrò chơi kéo dài {max_turns} lượt."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Người chơi đã cố chấp nhận một giao dịch mà không có tài nguyên cần thiết.",
+    "out_of_range": "Người chơi {player_id}, Hành động không hợp lệ. Cột {col} nằm ngoài giới hạn.",
+    "already_full": "Người chơi {player_id}, Hành động không hợp lệ. Cột {col} đã đầy.",
+    "proposing_with_no_resource": "Người chơi {player_id} đã cố đưa ra một đề nghị giao dịch mà không có tài nguyên cần thiết.",
+    "incorrect_offer_format": "Người chơi {player_id} đã đưa ra một đề nghị giao dịch không đúng định dạng.",
+    "no_new_offer": "Người chơi {player_id} không đưa ra đề nghị giao dịch mới."
+  },
+  "offers": {
+    "reject": "Người chơi {player_id} đã từ chối đề nghị giao dịch.",
+    "accept": "Người chơi {acceptor_id} đã chấp nhận đề nghị giao dịch từ Người chơi {proposer_id}.",
+    "proposal": "Người chơi {player_id} đã đưa ra đề nghị sau cho Người chơi {opponent_id}: Tài nguyên đề nghị: {offered} -> Tài nguyên yêu cầu: {requested}"
+  },
+  "outcome": {
+    "win": "Người chơi {winner_id} đã thắng bằng cách có sự tăng giá trị kho hàng lớn hơn.",
+    "draw": "Sự thay đổi giá trị kho hàng của tất cả người chơi là như nhau. Hòa."
+  }
+}

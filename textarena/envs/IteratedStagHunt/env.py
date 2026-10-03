@@ -36,19 +36,10 @@ class IteratedStagHuntEnv(ta.Env):
     
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
         """Generate the initial prompt for a player."""
-        return (
-            f"You are Player {player_id} in an {game_state['num_rounds']} round game of Iterated Stag Hunt.\n\n"
-            f"Game Structure:\n"
-            f"- The game consists of {self.num_rounds} decision rounds\n"
-            f"- Before each decision, you have {game_state['total_conversation_rounds']} turns to communicate\n"
-            f"- After communication, both players simultaneously choose to hunt a Stag or Hare\n\n"
-            f"Rewards:\n"
-            f"- The rewards associated with hunting stags and hares may differ between rounds\n"
-            f"- The rewards are presented at the start of each round\n\n"
-            f"How to Play:\n"
-            f"- During communication: Simply type your message\n"
-            f"- During decision phase: Use '[Stag]' or '[Hare]'\n"
-            f"You can include additional text before or after these tokens.\n"
+        return self.m(
+            "player_prompt", "intro",
+            player_id=player_id, num_rounds=game_state['num_rounds'],
+            decision_rounds=self.num_rounds, conversation_rounds=game_state['total_conversation_rounds']
         )
     
     def _create_round_payoff_matrix(self) -> None:
@@ -63,12 +54,12 @@ class IteratedStagHuntEnv(ta.Env):
             self.single_hare_payoff = np.random.randint(self.mutual_hare_payoff, self.single_hare_reward+1)
             self.mutual_stag_payoff = np.random.randint(self.single_hare_payoff+1, self.mutual_stag_reward+1)
 
-        message = (
-            f"Starting Round {self.state.game_state['round']} with payoff matrix:\n"
-            f"- Both hunt a Stag: Both get {self.mutual_stag_payoff} points\n"
-            f"- Both hunt a Hare: Both get {self.mutual_hare_payoff} points\n"
-            f"- One hunts a Hare, One hunts a Stag: The hunter of the Hare gets {self.single_hare_payoff} points, the hunter of the Stag gets {self.single_stag_payoff} points\n"
-            f"You can freely communicate with your opponent for {self.state.game_state['total_conversation_rounds']} rounds before making a decision."
+        message = self.m(
+            "round", "payoff_matrix",
+            round=self.state.game_state['round'],
+            mutual_stag=self.mutual_stag_payoff, mutual_hare=self.mutual_hare_payoff,
+            single_hare=self.single_hare_payoff, single_stag=self.single_stag_payoff,
+            conversation_rounds=self.state.game_state['total_conversation_rounds']
         )
         self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
 
@@ -92,7 +83,7 @@ class IteratedStagHuntEnv(ta.Env):
             # check if we have completed all conversation rounds
             if self.state.game_state["conversation_round"] >= self.state.game_state["total_conversation_rounds"]:
                 self.state.game_state["phase"] = "decision" # rotate phase
-                self.state.add_observation(message=f"The decision phase for round {self.state.game_state['round']} has started. Please reply with either '[stag]' or '[hare]'.", observation_type=ta.ObservationType.GAME_BOARD) # send decision prompt to everybody
+                self.state.add_observation(message=self.m("round", "decision_phase", round=self.state.game_state['round']), observation_type=ta.ObservationType.GAME_BOARD) # send decision prompt to everybody
 
     def _handle_decision_phase(self, action: str):
         # extraction decision
@@ -108,10 +99,14 @@ class IteratedStagHuntEnv(ta.Env):
                 round_payoffs[0] = self.single_stag_payoff if self.state.game_state["decisions"][0]=="stag" else self.single_hare_payoff
                 round_payoffs[1] = self.single_stag_payoff if self.state.game_state["decisions"][1]=="stag" else self.single_hare_payoff
             
-            message=f"Round {self.state.game_state['round']} complete. Results:"
             for pid in [0,1]:
                 self.state.game_state['total_payoff'][pid] += round_payoffs[pid]
-                message+= f"\n\tPlayer {pid} picked '{self.state.game_state["decisions"][pid]}' (payoff: {round_payoffs[pid]}; total: {self.state.game_state['total_payoff'][pid]})"
+            message = self.m(
+                "round", "results",
+                round=self.state.game_state['round'],
+                decision0=self.state.game_state["decisions"][0], payoff0=round_payoffs[0], total0=self.state.game_state['total_payoff'][0],
+                decision1=self.state.game_state["decisions"][1], payoff1=round_payoffs[1], total1=self.state.game_state['total_payoff'][1]
+            )
             self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
 
 
@@ -128,13 +123,12 @@ class IteratedStagHuntEnv(ta.Env):
     def _determine_winner(self):
         if self.state.game_state["total_payoff"][0] > self.state.game_state["total_payoff"][1]:
             winner_id = 0
-            reason = f"Final scores: Player 0: {self.state.game_state['total_payoff'][0]}, Player 1: {self.state.game_state['total_payoff'][1]}\nPlayer {winner_id} won!"
+            reason = self.m("outcome", "win", p0=self.state.game_state['total_payoff'][0], p1=self.state.game_state['total_payoff'][1], winner_id=winner_id)
             self.state.set_winner(player_id=winner_id, reason=reason)
         elif self.state.game_state["total_payoff"][1] > self.state.game_state["total_payoff"][0]:
             winner_id = 1
-            reason = f"Final scores: Player 0: {self.state.game_state['total_payoff'][0]}, Player 1: {self.state.game_state['total_payoff'][1]}\nPlayer {winner_id} won!"
+            reason = self.m("outcome", "win", p0=self.state.game_state['total_payoff'][0], p1=self.state.game_state['total_payoff'][1], winner_id=winner_id)
             self.state.set_winner(player_id=winner_id, reason=reason)
         else:
-            reason = f"Final scores: Player 0: {self.state.game_state['total_payoff'][0]}, Player 1: {self.state.game_state['total_payoff'][1]}\nIt's a Tie!"
+            reason = self.m("outcome", "draw", p0=self.state.game_state['total_payoff'][0], p1=self.state.game_state['total_payoff'][1])
             self.state.set_draw(reason=reason)
-

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Nga ni Player {player_id} mu mupila wa {max_rounds} wa Kuhn Poker.\nMikwai ya Mupila:\n- Kuhn Poker ukwai kwa kutumia kadi 3 za J, Q, K (J ndiyo ya kung'ara, K ndiyo ya juu zaidi)\n- Kila mupili akwai {ante} chip na akwata kadi 1 kila round (kumbuka kwamba kadi zikwata bila kubadilishwa, kwa hivyo huwezi kuwa na kadi moja na mpinzani wako).\n- Mupila ukwai kwa {max_rounds} round\n- Mupili aliye na chip nyingi zaidi baada ya round zote akwai\nMikwai ya Vitendo:\n- '[check]': Pita bila kubet (ni kwa mpangilio tu hakuna bet iko kwenye meza)\n- '[bet]': Ongeza chip 1 kwenye pot (ni kwa mpangilio tu hakuna bet iko kwenye meza)\n- '[call]': Linganisha bet ya mpinzani wako kwa kuongeza chip 1 kwenye pot\n- '[fold]': Achilia mkono wako na acha mpinzani wako akwai pot"
+  },
+  "init_round": {
+    "round_start": "### Kuanza round {current_round} kati ya {max_rounds} rounds. Kadi yako ni: '{player_card}'",
+    "available_actions": "Ifyo mwingacita ni fi: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Shughuli inabidi iwe [Check], [Bet], [Call], au [Fold].",
+    "not_legal": "Icintu cifwile ukuba {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Player {player_id}, alitoa kitendo: '[{move}]'.",
+    "valid_actions": "Ifyo mwingacita ni fi: {legal_actions}.",
+    "round_summary": "{reason} Vikwati vya sasa: Mchezaji 0: '{player_0_chips}'; Mchezaji 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Kupambana: Kalata ya Mchezaji {winner} {winner_card} inashinda Kalata ya Mchezaji {loser} {loser_card}. Mchezaji {winner} akashinda ng'anda ya {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Pa mpela ya {max_rounds} round, aba bwangalo bonse babili balikwete impendwa imo ine iya fipe.",
+    "round_win": "Umulashi {player_id} alileka.",
+    "winner_player0": "Umulashi 0 alicimfishe pa kukwata ifipuna ifingi mu mpela ya mikuulile yonse {max_rounds}.",
+    "winner_player1": "Umulashi 1 alicimfishe pa kukwata ifipuna ifingi mu mpela ya mikuulile yonse {max_rounds}."
+  }
+}

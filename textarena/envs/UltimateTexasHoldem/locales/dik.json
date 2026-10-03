@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Acïn kaar kɔ̈k cï kek bɛ̈n yök.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Raan kuɔɔny vs Dealer\n\n📖 GAME OVERVIEW:\n• Yi ciɛl kuɔny {start_chips}\n• Kuɔɔny 52 kɔ̈ɔ̈c (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Raan kuɔɔny vs Dealer\n• Thiɛ̈ɛ̈l kɔ̈ɔ̈c Ultimate Texas Hold'em: yi ciɛl ANTE kuɔɔny, BLIND kuɔɔny, yi ciɛl 2 kɔ̈ɔ̈c, kuɔɔny PLAY kuɔɔny, kuɔɔny community kɔ̈ɔ̈c, yi ciɛl kɔ̈ɔ̈c thiɛ̈ɛ̈l.\n• Yi ciɛl kɔ̈ɔ̈c kuɔɔny ciɛl (LOSS) kuɔɔny yi ciɛl 1000 thiɛ̈ɛ̈l (WIN)\n\n💰 BETTING STRUCTURE:\n• ANTE: Kuɔɔny ${ante} kuɔɔny thiɛ̈ɛ̈l\n• BLIND: Kuɔɔny ${ante} kuɔɔny thiɛ̈ɛ̈l\n• PLAY: Kuɔɔny kuɔɔny. Thiɛ̈ɛ̈l kɔ̈ɔ̈c, yi ciɛl kuɔɔny ciɛl (${ante4} PRE-FLOP, ${ante2} FLOP, ${ante} RIVER. Kuɔɔny kuɔɔny fold RIVER, kuɔɔny kuɔɔny hand, kuɔɔny kuɔɔny bet.)\n\n🎴 CARD DEALING:\n• Yi ciɛl 2 kɔ̈ɔ̈c (yi ciɛl kɔ̈ɔ̈c)\n• Dealer ciɛl 2 kɔ̈ɔ̈c (kuɔɔny yi ciɛl)\n• 5 community kɔ̈ɔ̈c ciɛl kuɔɔny\n• Community kɔ̈ɔ̈c ciɛl thiɛ̈ɛ̈l kɔ̈ɔ̈c\n\n🏆 DEALER QUALIFICATION:\n• Dealer ciɛl PAIR (2 kɔ̈ɔ̈c ciɛl) kuɔɔny, 2 kɔ̈ɔ̈c ciɛl kuɔɔny 5 community kɔ̈ɔ̈c.\n• Dealer qualification ciɛl kuɔɔny betting outcomes.\n\n🎮 GAME PHASES & ACTIONS:\n📋 PRE-FLOP:\n  • Actions: [4x] (${ante4}) kuɔɔny [check]\n  • [4x]: Kuɔɔny ${ante4} PLAY kuɔɔny, ciɛl 3 community kɔ̈ɔ̈c\n  • [check]: Kuɔɔny kuɔɔny, ciɛl 3 community kɔ̈ɔ̈c\n\n📋 FLOP:\n  • 4x kuɔɔny: Kuɔɔny [skip] ciɛl (auto-ciɛl last 2 community kɔ̈ɔ̈c)\n  • Kuɔɔny 4x kuɔɔny: [2x] (${ante2}) kuɔɔny [check]\n  • [2x]: Kuɔɔny ${ante2} PLAY kuɔɔny, ciɛl last 2 community kɔ̈ɔ̈c\n  • [check]: Kuɔɔny kuɔɔny, ciɛl last 2 community kɔ̈ɔ̈c\n\n📋 RIVER:\n  • 4x kuɔɔny kuɔɔny 2x kuɔɔny: Kuɔɔny [skip] ciɛl (auto-proceeds kuɔɔny showdown)\n  • Kuɔɔny prior PLAY kuɔɔny: [1x] (${ante}) kuɔɔny [fold]\n  • [1x]: Kuɔɔny ${ante} PLAY kuɔɔny, proceeds kuɔɔny showdown\n  • [fold]: Kuɔɔny hand, kuɔɔny ANTE kuɔɔny BLIND kuɔɔny\n\n📋 SHOWDOWN:\n  • Kɔ̈ɔ̈c ciɛl kuɔɔny evaluated\n  • Best 5 kɔ̈ɔ̈c ciɛl 7 kɔ̈ɔ̈c (2 kɔ̈ɔ̈c + 5 community kɔ̈ɔ̈c)\n  • Bets settled kuɔɔny payout rules\n\n💎 BET PAYOUTS:\n📊 ANTE BET:\n  • Dealer ciɛl qualify: PUSH (kuɔɔny returned)\n  • Dealer qualify & yi ciɛl win: 1:1 payout (kuɔɔny + winnings)\n  • Dealer qualify & yi ciɛl lose: Kuɔɔny lost\n  • Tie: PUSH (kuɔɔny returned)\n\n📊 BLIND BET:\n  • Unaffected kuɔɔny dealer qualification\n  • Yi ciɛl win: Kuɔɔny returned kuɔɔny additional payout kuɔɔny hand strength\n  • Yi ciɛl lose: Kuɔɔny lost\n  • Tie: PUSH (kuɔɔny returned)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Kuɔɔny additional payout\n\n📊 PLAY BET:\n  • Unaffected kuɔɔny dealer qualification\n  • Direct comparison: Yi ciɛl best hand vs Dealer's best hand\n  • Yi ciɛl win: 1:1 payout (kuɔɔny + winnings)\n  • Yi ciɛl lose: Kuɔɔny lost\n  • Tie: PUSH (kuɔɔny returned)\n\n🎯 POKER HAND RANKINGS (Best kuɔɔny Worst):\n  1. Royal Flush: A-K-Q-J-10 ciɛl suit\n  2. Straight Flush: 5 consecutive kɔ̈ɔ̈c ciɛl suit\n  3. Four of a Kind: 4 kɔ̈ɔ̈c ciɛl rank\n  4. Full House: 3 ciɛl kind + 2 ciɛl kind\n  5. Flush: 5 kɔ̈ɔ̈c ciɛl suit\n  6. Straight: 5 consecutive kɔ̈ɔ̈c\n  7. Three of a Kind: 3 kɔ̈ɔ̈c ciɛl rank\n  8. Two Pair: 2 pairs ciɛl different ranks\n  9. One Pair: 2 kɔ̈ɔ̈c ciɛl rank\n  10. High Card: Highest kɔ̈ɔ̈c wins\n\n⌨️  ACTION COMMANDS:\n• [4x] kuɔɔny [play bet 4x]: Kuɔɔny ${{self.ante_amount*4}} PLAY kuɔɔny\n• [2x] kuɔɔny [play bet 2x]: Kuɔɔny ${{self.ante_amount*2}} PLAY kuɔɔny\n• [1x] kuɔɔny [play bet 1x]: Kuɔɔny ${{self.ante_amount*1}} PLAY kuɔɔny\n• [check] kuɔɔny [c]: Check (kuɔɔny additional bet)\n• [fold] kuɔɔny [f]: Fold (kuɔɔny hand)\n• [skip] kuɔɔny [s]: Skip kuɔɔny next phase (kuɔɔny action needed)\n\n💡 STRATEGY TIPS:\n• Strong starting hands (pairs, high kɔ̈ɔ̈c) ciɛl justify 4x kuɔɔny\n• Consider dealer qualification - weak hands ciɛl push kuɔɔny dealer ciɛl qualify\n• BLIND kuɔɔny ciɛl profitable kuɔɔny strong hands (Royal Flush = 500:1!)\n• Watch yi ciɛl kuɔɔny stack! Kuɔɔny ciɛl 0 kuɔɔny below kuɔɔny start kuɔɔny round, yi ciɛl lose.\n\n⚠️  IMPORTANT NOTES:\n• ANTE kuɔɔny BLIND kuɔɔny ciɛl mandatory kuɔɔny round\n• PLAY kuɔɔny ciɛl optional kuɔɔny strategic\n• Make sure yi ciɛl input correct action, kuɔɔny one action kuɔɔny time.\n\n",
+    "state": "🎯 DUŊË {round}\n💰 Apï̈th: {chips}\n🎴 Ciɛ̈ŋëmë: {hand}\n📊 Këmë kuɔ̈ɔ̈m: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Akutëmë: {phase}\n🎯 Kuɔ̈ɔ̈më këpëë: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Round {round} started! Kuɔɔny: ANTE ${ante}, BLIND ${blind}. Yi ciɛl {chips} kuɔɔny remaining.",
+    "your_hand": " Cɔ̈tdu: {hand}",
+    "flop_revealed": " FLOP ye nyuɔɔth: {cards}",
+    "river_revealed": " RIVER acï bɛ̈n nyuɔɔth: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Kë cë luɔ̈ɔ̈i ëtën ee kë cï looi. Kä lëu bï keek ya looi: {available}",
+    "message": " Acïï luɔ̈i! Kä lëu bë looi: {available}"
+  },
+  "action": {
+    "folded": " Yïn acï bɛ̈n cuɛt wei."
+  },
+  "showdown": {
+    "dealer_hand": " Wäär ye kɔc käŋ ɣaac piny! Ciin de raan ë wëu gam: {cards}",
+    "community_cards": " Akutnhom de kɔc: {cards}",
+    "player_best": "🎴 Yi ciɛl best hand: {name} ({cards})",
+    "dealer_best": "🎴 Dealer's best hand: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (ye duɛ̈l)",
+    "blind_lost_folded": " BET BLIND LOST! -${blind} (ye duɛ̈r)",
+    "ante_won": "✅ ANTE bet WON! +${amount} ye ke?",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} acï dhuk ciëën.",
+    "ante_lost": " ANTE bet LOST! -${ante} ye ke?",
+    "blind_won": "✅ Ɣɔ̈n cï kɔc ye thɔ̈ɔ̈ŋ në kë cïï kek bï tïŋ acï bɛ̈n tiaam! +${amount}",
+    "blind_pushed": " BET BLIND PUSHED! ${blind} acï dhuk ciëën.",
+    "blind_lost": " Ɣɔn cï yïn gam! -${blind}",
+    "play_won": "✅ PLAY bet WON! +${amount} ye ke?",
+    "play_pushed": " PLAY bet PUSHED! ${play} bɛ̈n dhuk ciëën",
+    "play_lost": " PLAY bet LOST! -${play} ye ke?",
+    "net_gain": "🎉 Round {round} completed! Net gain: +${net}",
+    "net_loss": "💸 Round {round} completed! Net loss: ${net}",
+    "separator": "- ë ¥¬ë ¬ì¦- ë ì¡±í ̧ êμ°ê3⁄4©ï1⁄4 ï\"¿ã ̄ç¶ ç1⁄2ðoâ \"é÷Æ îËñ ÇÕÃÁÅÇÔî ̈a."
+  },
+  "outcome": {
+    "game_over_win": "🏁 DUŊË AYE! {max_turns} duŋë aye ciɛ̈l. Yïnë apï̈th ${chips} - YÏNË AYE!",
+    "game_over_lose": " GAME OVER! yïn acï käkë thök. raan ye käŋ ɣaac ee tiaam!",
+    "reward_win": "Yi ciɛl completed {winner_rounds} rounds kuɔɔny ${chips} kuɔɔny",
+    "reward_lose": "Raan ye piöc acï puur ë chips në runde {round}",
+    "reward_win_max": "Yi ciɛl completed {max_turns} rounds kuɔɔny ${chips} kuɔɔny"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush (Roi ë piny)",
+    "straight_flush": "Lɔ̈k ë cök yic.",
+    "four_of_a_kind": "Kɔc Ke Dhorou ke Wëlken",
+    "full_house": "Ɣön cï thiäŋ apɛi.",
+    "flush": "Lɔ̈k ë nhom piny.",
+    "straight": "Cɔl rot cuɔ̈ɔ̈t.",
+    "three_of_a_kind": "Käŋ kadiäk cï kek ya looi në ye tök yic.",
+    "two_pair": "Kä karou ë rou",
+    "one_pair": "Käk ke Kuɔ̈t",
+    "high_card": "Akutdït cï gɔ̈ɔ̈r piny.",
+    "unknown": "Käc kucku keek."
+  }
+}

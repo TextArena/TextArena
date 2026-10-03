@@ -1,0 +1,28 @@
+{
+  "_comment": "Cryptarithm Sprachdatei auf Deutsch. Übersetze NICHT die Schlüssel, nur die Werte. Behalte jeden {platzhalter}; übersetze das Zuweisungstoken `[A 5]`, Buchstaben und Ziffern nicht.",
+  "_slots": {
+    "{letter}": "Ein Rätselbuchstabe, z. B. S oder E",
+    "{digit}": "Eine Ziffer 0-9",
+    "{used_letter}": "Der Buchstabe, der die Ziffer bereits belegt",
+    "{assigned}": "Wie viele Buchstaben bisher zugeordnet sind",
+    "{total}": "Gesamtzahl verschiedener Buchstaben",
+    "{pct}": "Fortschritt in Prozent, z. B. 50%"
+  },
+  "player_prompt": { "intro": "Ordne jedem Buchstaben eine eindeutige Ziffer zu, sodass die Rechnung aufgeht.\nWeise mit `[A 5]` zu, jederzeit neu zuweisbar.\n" },
+  "invalid_move": {
+    "wrong_format": "Ungültiges Aktionsformat. Verwende `[A 5]`.",
+    "letter_not_in_puzzle": "Buchstabe {letter} ist nicht im Rätsel.",
+    "digit_used": "Ziffer {digit} wird bereits von {used_letter} verwendet.",
+    "leading_zero": "Die erste Ziffer eines Wortes darf nicht 0 sein."
+  },
+  "outcome": {
+    "correct": "Richtig! Gleichung erfüllt.",
+    "incorrect": "Zuordnung vollständig, aber Gleichung falsch.",
+    "limit": "Zuglimit erreicht."
+  },
+  "board": {
+    "mapping_header": "Zuordnung:",
+    "none_yet": "  (noch keine)",
+    "assigned": "\nZugewiesen: {assigned}/{total} ({pct})"
+  }
+}

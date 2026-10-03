@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "O wena Player {player_id} mo papading ya Spite and Malice ya barati ba babedi. Bokhutlo jwa gago ke go nna wa ntlha go tlhatswa payoff pile ya gago.\n\n### Tshimologo ya Papadi:\n- Bokhutlo ke go tlhatswa payoff pile ya gago ka go bapatsa dikarata kwa dikarata tsa kati.\n- O ka bapatsa dikarata go tswa kwa ditswammung tse tharo:\n  1. **Letsogo la gago** (o simolola ka go nna le dikarata tse 5 mo letsogong la gago).\n  2. **Karata ya godimo ya payoff pile ya gago**.\n  3. **Karata ya godimo ya nngwe ya dikarata tsa gago tse di latlhegileng**.\n\n### Melao ya Papadi:\n- O ka bapatsa karata kwa karata ya kati fa e le **nngwe ya godimo** go na karata ya godimo ya karata eo (dikarata tsa kati di simolola ka Ace mme di ya go fitlha Queen; Kings ke wild - ba ka bapatswa mo karata nngwe le fa ba sa fetole rank sequence. Seo se raya gore fa King e dirisiwa morago ga 4, gona King eo e ranked 5 mme karata e e latelang e tshwanetse e bo e le 6).\n- Fa o sa kgone go bapatsa dikarata tse dingwe, o tshwanetse **go latlhega karata** kwa nngwe ya dikarata tsa gago tse di latlhegileng go fedisa tshimologo ya gago.\n- Fa karata ya kati e fitlha Queen, e tlaa tlhatswa ka bonako.\n- Rank order ke: A=1, 2=2, ..., 9=9, J=10, Q=11, K e le wild.\n\n### Ditiro:\n1. **Draw**: Kwa simolodi ya tshimologo ya gago, bapatsa dikarata go tlatsa letsogo la gago go fitlha dikarata tse 5. Tsena **[draw]** go simolola.\n2. **Bapatsa Karata**: Go bapatsa karata, tlhalosa karata le karata ya kati jaana: **[play A♠ 0]** (kwa 'A♠' e le karata le '0' e le index ya karata ya kati).\n3. **Latlhega**: Fa o sa kgone go bapatsa dikarata tse dingwe, latlhega karata go tswa kwa letsogo la gago kwa nngwe ya dikarata tsa gago tse di latlhegileng go fedisa tshimologo ya gago. Tsena **[discard A♠ 1]** (kwa 'A♠' e le karata le '1' e le index ya karata e e latlhegileng). Tsela ya gore o sa kgone go latlhega karata nngwe go tswa kwa payoff pile. O ka latlhega fela dikarata go tswa kwa letsogo la gago.\n\n"
+  },
+  "board": {
+    "current_board": "Boro ya kgwedi:\n\n{board}\nDitshelelo tse di kwagalelang: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Dipilara tsa Bogare --- ",
+    "pile": "{observation}Lepateng {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Tshelelo ya Modiri {player_id} ---\n",
+    "payoff": "{observation}Lepateng la Tshwaro (Pino ya Godimo): {top_card}, Bolelelwang bja Lepateng la Tshwaro: {payoff_length}\n",
+    "hand": "{observation}Lepata: {hand}\n",
+    "discard": "{observation}Dipileng tse di Tshwarwang: {discard}\n",
+    "empty": "Ga go na sepe mo teng ga yone."
+  },
+  "game_message": {
+    "no_cards_left": "Ga go na dikarata tse dingwe gape tsa go goga. Gakologelwa gore o ka tshameka dikarata mo metsweding e: 1. Letsogo la gago 2. Karata ya kwa godimo ga mokoa wa madi a gago 3. Kharata ya fa pele ya mongwe le mongwe wa mekgobo ya gago ya go latlha.  Go tswa foo, dira tiro eno mme o boele morago gangwe fela ke gone o tla bonang karata eo."
+  },
+  "invalid_move": {
+    "wrong_format": "Mokgweleo o sa amogelesegang. Motshameki {player_id} ga a araba ka motsamao wa boammaaruri mo dikhurumelong tsa sekwere.",
+    "invalid_play": "Tshelelo e si sa kgonega. Modiri {player_id} o ile a tsaya tshelelo la {card} mo center pile {index}.",
+    "discard_from_payoff": "Go latlha go sa amogelesege.Motshameki {player_id} o ne a leka go latlhela karata e nngwe mo mokgokoloseng wa tuelo.",
+    "discard_not_in_hand": "Go latlha go sa amogelesege.Motshameki {player_id} o ne a leka go latlhela karata e e seng mo seatleng.",
+    "wrong_move_type": "Tiro ya mofuta o e sa siamang. Player {player_id} ga a akgone go araba ka tiro ya mofuta o e siameng."
+  },
+  "game_action": {
+    "you_drew": "O ne wa betšha.",
+    "opponent_drew": "Motshameki {player_id} o ne a goga dikarata.",
+    "you_played": "O ne wa tshameka {card} mo moleng o mogolo {index}.",
+    "opponent_played": "Motshameki {player_id} o ne a tshameka {card} mo moleng wa bogare {index}.",
+    "you_discarded": "O ile wa tshwara {card} go ya go tshwarwa mo dipileng {index}, mme seo gape se bolela gore o fetile turn ya gago. Ga go na tshelelo e nngwe ya gago e ye e kgathwiwiwa mo turn eno. Modiri {next_player_id} o tlaa tsena a go ya ka morago.",
+    "opponent_discarded": "Modiri {player_id} o ile a tshwara {card} go ya go tshwarwa mo dipileng {index}, mme seo gape se bolela gore o fetile turn ya gagwe. Ga go na tshelelo e nngwe ya Modiri {player_id} e ye e kgathwiwiwa mo turn eno. Modiri {next_player_id}, o tlaa tsena a go ya ka morago. Tswela ka aksi yotlhe ka tsela [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Modiri {current_player} o ile a fetsa dipino tsa gagwe tse di salelang! Modiri {current_player} o a fenya!",
+    "deadlock_player_0": "Deadlock e fitlhile! Modiri 0 o a fenya le {player_0_payoff} dipino tse di salelang vs Modiri 1's {player_1_payoff} dipino.",
+    "deadlock_player_1": "Deadlock e fitlhile! Modiri 1 o a fenya le {player_1_payoff} dipino tse di salelang vs Modiri 0's {player_0_payoff} dipino.",
+    "deadlock_tie": "Deadlock e fitlhile le tie! Batsheli ba babedi ba na {player_0_payoff} dipino tse di salelang. Modiri {current_player} o a fenya ka fa tlase."
+  }
+}

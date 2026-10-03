@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Kuwa kuwa a yin Golf (Kad Kadi) - Mai kadi {player_id}.\nManufa: Samu ƙananan maki a wannan zagaye. Idan ginshi yakan raba ɗaya daraja, ana ƙididdige su azaman 0.\nDaraja Kadi: A=1, 2-10=daraja fuska, J/Q=10, K=0\n\nAyyuka (amfani da mabugu daidai):\n- '[draw]' - Jawo daga ɗan kadi\n- '[take]' - ɗauka daga tariyar wandon kadi\n- '[swap X Y]' - Mubaya kadi jawo da matsayi X (safu) Y (ɗangali)\n- '[discard]' - Wandon kadi jawo."
+  },
+  "board": {
+    "drew": "Ka jawo: {card}\nYanzu ka wajibi [swap X Y] ko [discard] shi.",
+    "took": "Ka ɗauka: {card} daga tariyar wandon kadi\nKa wajibi [swap X Y] da shi (ba za ka iya wandon).",
+    "peeked": "Ka duba matsayi ({row},{col}): {card}",
+    "turn_view": "Mɛn ɓɛlɛnɛnɛ:\n{hand}\nɗɛnɛ ɓɛlɛnɛnɛ: {discard}\n{options}",
+    "none": "Nduma ba."
+  },
+  "options": {
+    "final_turns": "Zagaye na ƙarshe! Ka zaɓi: [draw], [take], [peek X Y]",
+    "draw": "Ka zaɓi: [draw], [take]",
+    "must_swap": "Nyiye: [swap X Y] (kərtəwa gәnyi raksa koltǝgǝn)",
+    "swap_or_discard": "Ka wajibi: [swap X Y] ko [discard]"
+  },
+  "hand": {
+    "no_cards": "Karta ba ro waljin.",
+    "header": "Col: 1 2 3 kǝrma-a kuru njiye.",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Mɑɑlɛm {pid} ɓɛɛlɛnɛnɛ {new} kɛrɛnɛ {old} ɓɛ ɗɛnɛ ({row}, {col})",
+    "discarded": "Mai kadi {pid} wandon {card}"
+  },
+  "message": {
+    "deck_empty": "Kәla dәn ba! Tambo dǝ dawunaro dawono.",
+    "knocked": "Kambiwu {pid} dǝga kǝla fuwunna! Kam ndasoye fallo waljin.",
+    "final_round": "Mai kadi {pid} {reason}! Kowane mai kadi yaɗa zagaye ɗaya."
+  },
+  "reason": {
+    "all_revealed": "yè kár ásụ̀ zíyè"
+  },
+  "invalid": {
+    "wrong_action": "Mɛn ɗon ɓɛ ɓɛlɛnɛnɛ ɓɛ ɓɛ: [draw], [take], [swap X Y], [discard], [knock], ɓe [peek X Y]",
+    "discard_empty": "Kәmbu karewa kәltabe dә ba!",
+    "must_draw_first": "Ka wajibi kuwa [draw], [take], [knock], ko [peek X Y] farko",
+    "cannot_discard_taken": "Karta do suro karәgәwa bannabe dәn gozanyi ma ba. Shima faljinna.",
+    "have_drawn_card": "A ɓɛɛlɛnɛnɛ kɛrɛnɛ. Mɛn ɗon ɓɛ [swap X Y] ɓe ɓɛ [discard]",
+    "need_drawn_swap": "Kaadi fǝlejin ma murtәgǝna.",
+    "need_drawn_discard": "Kawuwa gǝnatǝna mәradin.",
+    "out_of_bounds": "ɗɛnɛ ɓɛ ɓɛlɛnɛnɛ. Mɛn ɗon ɓɛ row 1-{max_row}, column 1-{max_col}",
+    "knock_with_card": "Karta fәlejin dәn gәnyi kәrtube sәdin. Kәla buroye lan cida nәm kamma ro yikkәmin.",
+    "already_knocked": "Kam laa dǝ buron kǝla adǝyen zauro zortǝna.",
+    "already_revealed": "Karta adǝ tǝdǝna!"
+  },
+  "summary": {
+    "full": "Kɛrtɛ ɓɛ ɓɛ! Mɑɑlɛm {winner} ɓɛ ɓɛlɛnɛnɛ ɓɛ ɓɛ ɓɛ {score} points!\n\nKɔɔlɛ ɓɛ ɓɛlɛnɛnɛ:\n{scores}",
+    "line": "Kashe {pid}: {score} ramu\n"
+  },
+  "board_str": {
+    "title": "=== WASAN GOLF ===",
+    "discard": "Kǝla awowa gәnatǝnabe: {card}",
+    "knocked": "Kambiwu {pid}ye bǝla gǝna!",
+    "player_header": "Mɑɑlɛm {pid} (Kɔɔlɛ: {score}):"
+  }
+}

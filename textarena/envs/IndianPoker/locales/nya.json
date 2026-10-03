@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Ndinu Player {player_id} m'mwendo wa Indian Poker.\n- Deki la khadi 52; mumuona khadi ya mnzako.\n- Ante {ante} chip(s) kila mwendo, {max_rounds} mwendo (s) wathunthu.\n- Zomwe zingatheka: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ndi nambari chanya <= ndalama zanu za chip.)\n- Khadi iliyo juu ambayo haionekani imenyeza pot pa showdown.\n"
+  },
+  "round": {
+    "announce": "### Raundi {current_round}/{max_rounds}\nKadi ya mpinzani wako ni: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Pelekani kitendo kimoja cha mabano, kwa mfano '[check]', '[bet 2]', '[call]', '[raise 3]', au '[fold]'.",
+    "cannot_check": "Simungathe [check] - mukukumana ndi kubetcha.",
+    "amount_min": "Ndalama zimene amaika kapena kukweza ziyenera kukhala ≥ 1.",
+    "cannot_bet": "Sungatheka kuchita [bet] - muyenera kuchita [call] / [raise] / [fold].",
+    "nothing_to_call": "Palibe choitana; inu mukhoza [check] m'malo.",
+    "no_bet_to_raise": "Gwiritsani ntchito [bet X] kutsegula; palibe kubetcha kuti muwonjezere.",
+    "insufficient": "Ma tchipisi osakwanira kaamba ka mchitidwe umenewo."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (ghada {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Zimene mungachite: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Mchezaji {winner}. (Hesabu za benki P0:{p0}, P1:{p1})",
+    "folded": "Wosewera {player_id} anagwa.",
+    "showdown_win": "Kulimbana: {card_win} kumenyana ndi {card_lose}.",
+    "showdown_tie": "Kuwonetsera kwa tie: onse {card}. Mphika wogawanika  aliyense amalandira {split} ."
+  },
+  "outcome": {
+    "p0_wins": "Mchezaji 0 anashinda ({bank0} > {bank1})",
+    "p1_wins": "Mchezaji 1 anashinda ({bank1} > {bank0})",
+    "draw": "Chips zofanana pambuyo pa ma raundi onse"
+  }
+}

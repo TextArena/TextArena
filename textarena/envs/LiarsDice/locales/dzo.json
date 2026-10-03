@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "ཁྱེད་མི་གཞི་ {player_id} རྩེད་རིགས་ Liar's Dice ནང་མི་མང་ {num_players} རེད།\nསྒྲིག་གཞི་རྣམས་:\n- ཁྱེད་ཀྱི་སྐབས་སུ་ཁྱེད་རང་གིས་འགྲེམ་གྲངས་གསར་པ་བཟོ་བ་དང་འགྲེམ་གྲངས་ད་ལྟའི་ལས་མང་བ་དང་ཤོ་གྲངས་མང་བ་དང་གཉིས་ཀ་མང་བ་བཟོ་བ་དཔེར་ན་ '[Bid: 3, 4]',\n  2) འགྲེམ་གྲངས་མཇུག་མ་འབོད་པ་བྱེད་པ་ '[Call]' བྱས་པ་བཞིན།\n\nཁྱེད་འབོད་པ་བྱེད་པ་ན་:\n  - ཤོ་གྲངས་གྲངས་ཚབ་དེ་དག་གི་གཞི་གྲངས་དེ་འགྲེམ་གྲངས་ལས་ཉུང་བ་ན་མི་གཞི་གྲངས་ཀྱི་གྲངས་ཚབ་གང་ཞིག་འགྲེམ་གྲངས་མཇུག་མ་བཟོས་པ་ཤོ་གྲངས་གཅིག་པོ་འཐོབ་པ་རེད།\n  - གཞན་དུ་འབོད་པ་བྱེད་མཁན་ཤོ་གྲངས་གཅིག་པོ་འཐོབ་པ་རེད།\nམི་གཞི་གྲངས་ཀྱི་གྲངས་ཚབ་གང་ཞིག་ཤོ་གྲངས་ 0 ལ་སླེབས་པ་དེ་མེད་པར་བཟོས་པ་རེད། མི་གཞི་གྲངས་ཀྱི་གྲངས་ཚབ་གང་ཞིག་ལྷག་པ་དེ་རྒྱལ་བ་རེད།"
+  },
+  "board": {
+    "per_player": "\tམིའོ་{p}: {d}",
+    "new_round": "\nརྫ་མིག་གསར་པ་- ལྷག་པའི་ཤོ་: {dice_summary}\nཁྱེད་ཀྱི་ད་ལྟའི་ཤོ་ནི་: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "རྩེད་མཁན་ {current_player_id} ཡིས་ འབོད་བསྐུལ་བྱས་སོང་། {face_value} གཟུགས་བརྙན་གྱི་དངོས་གྲངས་ {count} དེ་ {quantity} ལས་ ཉུང་བས།\nརྩེད་མཁན་ {loser_id} (རྒྱབ་བསྐྱར་མཁན་) གྱིས་ ཤོ་གང་རྗེས་སོང་།",
+    "caller_loses": "མི་གཞི་ {current_player_id} འབོད་པ་བྱེད་པ་རེད། ཤོ་གྲངས་ {face_value} གྲངས་ཚབ་དེ་ {count} རེད་པ་དང་དེ་འགྲེམ་གྲངས་ {quantity} ལས་མང་བ་རེད།\nམི་གཞི་ {loser_id} (འབོད་པ་བྱེད་མཁན་) ཤོ་གྲངས་གཅིག་པོ་འཐོབ་པ་རེད།"
+  },
+  "action": {
+    "bid_announce": "མི་གཞི་ {player_id} འགྲེམ་གྲངས་ {quantity} ཤོ་གྲངས་ {face_value} རེད།"
+  },
+  "invalid_move": {
+    "call_no_bid": "གོང་ལས་སླབ་མི་མེད་པར་ འགྲུལ་འཕྲིན་བཏང་ནུག",
+    "invalid_bid": "ཆ་མེད་བཏང་མི་གན་ཡིག་: {reason}",
+    "not_recognized": "བྱ་སྤྱོད་ངོས་འཛིན་པ་མ་རེད་'[Bid: X, Y]' དང་'[Call]' གྱི་ནང་ནས། བཏང་བའི་བྱ་སྤྱོད་: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "གསར་པའི་གྲངས་ཀ་{new_quantity} དེ་ད་ལྟའི་{current_quantity} ལས་དམ་པ།",
+    "face_lower": "གསར་པའི་ངོ་རྩིས་{new_face_value} དེ་ད་ལྟའི་{current_face_value} ལས་དམ་པ།",
+    "identical": "གོང་ཚད་འདི་ ད་རེས་ཀྱི་གོང་ཚད་དང་འདྲན་འདྲ་ཨིན།",
+    "face_range": "མིང་རྟགས་དེ་ ༡ དང་༦ གི་བར་ན་དགོཔ་ཨིན།"
+  },
+  "message": {
+    "eliminated_invalid": "རྩེད་འགྲན་པ་ {player_id} གིས་ ཆ་མེད་བཏང་ཡོད་པའི་ གྲོས་འདེབས་བཀོད་ནུག།"
+  },
+  "outcome": {
+    "win": "མིའོ་{winner} རྒྱལ་ཁ་ཐོབ་པ། མཐའ་མའི་གོ་རིམ་: {final_ranking}"
+  }
+}

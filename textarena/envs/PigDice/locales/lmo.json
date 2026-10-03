@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Ti seet Giugador {player_id} che giuga a 'n gioco de Dadi de Pig.\n\nRegol:\n- In su la tua volta, podet '[roll]' o '[hold]'\n- Tirà 'n 2-6: Agiunta al total de la tua volta\n- Tirà 'n 1: Perd el total de la volta e finiss la volta\n- Tien: Agiunta el total de la volta al score e finiss la volta\n- El primm a {winning_score} punt el venc.\n\nQuand l'è la tua volta, te vedaret i score e 'l total de la volta actual.\nRispond con '[roll]' per tirà el dee o '[hold]' per deposità i tu punt."
+  },
+  "invalid_move": {
+    "invalid_action": "Format d'azzion no valid. Dovraa doperà '[roll]' o '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Giugador {player_id} busta, perdend {turn_total} punt!",
+    "player_hold": "Giugador {player_id} el tien e deposita {turn_total} punt."
+  },
+  "board": {
+    "player": "Giugador 0: '{score_0}'; Giugador 1: '{score_1}'",
+    "current_total_scores": "Puntazzion Total Actual: {scores}\nEl total de la tua volta actual a l'è {turn_total}.",
+    "roll_history": "{observation}\nLa storia di tu roll per sta volta: {roll_history}",
+    "first_roll": "{observation}\nQuesta l'è la prima tirada del tò turn.",
+    "available_actions": "{observation}\nAzzion disponibil: '[roll]' o '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Giugador {winner_id} a venciuu per avè un score pussee alt al limit de volta ({scores})",
+    "winner_by_score": "Giugador {winner_id} a venciuu raggiungend el score target de {winning_score}!",
+    "draw": "Al è rivà al limit de turn e tücc i giugador gh'hann la stessa puntegaa: {scores}"
+  }
+}

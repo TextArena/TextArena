@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Mo ye Player {player_id} na lê ndo mbili zo Spite na Malice. Butu mo ye kôzo na ndo ti mo bêsi pile mo.\n\n### Kôzo na Jê:\n- Butu mo ye kôzo na ndo ti mo bêsi pile na kôzo karta ti centre piles.\n- Mo pêsi karta ti miti ndo:\n  1. **Mo ti maboko** (mo kôzi kila tourne na karta 5 ti maboko).\n  2. **Karta ti ndo ti mo bêsi pile**.\n  3. **Karta ti ndo ti yômbi ti mo discard piles**.\n\n### Miti zo Kôzo:\n- Mo pêsi karta ti centre pile si mo ye **ndege moko ôko** ti karta ti ndo ti pile (centre piles kôzi na Ace na kôzi ti Queen; Kings ye wild - mo pêsi yé ti karta yômbi mais mo bêsi ndege sequence. Mo kôzi si King ye ndege 5 na karta ti ndo ti mo bêsi 6).\n- Si mo pêsi karta yômbi, mo bêsi **karta ti discard** ti yômbi ti mo discard piles ti kôzi tourne.\n- Si centre pile kôzi Queen, mo bêsi ti kôzi automatiquement.\n- Ndege ti kôzo ye: A=1, 2=2, ..., 9=9, J=10, Q=11, K ye wild.\n\n### Miti zo Action:\n1. **Draw**: Na kôzi ti tourne, draw karta ti kôzi maboko ti 5 karta. Enter **[draw]** ti kôzi.\n2. **Play a Card**: Ti pêsi karta, spécifie karta na centre pile ti yômbi: **[play A♠ 0]** (ti 'A♠' ye karta na '0' ye centre pile index).\n3. **Discard**: Si mo pêsi karta yômbi, discard karta ti maboko ti yômbi ti mo discard piles ti kôzi tourne. Enter **[discard A♠ 1]** (ti 'A♠' ye karta na '1' ye discard pile index). Note si mo pêsi discard karta ti bêsi pile. Mo pêsi discard karta ti maboko yê.\n\n"
+  },
+  "board": {
+    "current_board": "Sängö Ködörö:\n\n{board}\nKödörö Tî Ngî: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Akete ndo ti yâ ni so ayeke na popo-ti-gbâ -- ",
+    "pile": "{observation}Ködörö {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Mgböngö {player_id}'s View ---\n",
+    "payoff": "{observation}Kötä tî kötä gbätä (Kötä tî gbätä ôko): {top_card}, Kötä tî kötä gbätä tî ôko: {payoff_length}\n",
+    "hand": "{observation}Mbeni maboko: {hand} ",
+    "discard": "{observation}Ködörö Tî Ngî: {discard}\n",
+    "empty": "A yeke senge."
+  },
+  "game_message": {
+    "no_cards_left": "A yeke wara ande mbeni carte ti gboto na ni pëpe. Girisa ape so mo lingbi ti pika alettre so: 1. Mo bâ maboko ti mo 2. Kota mbeti ti kota da-mbeti ti nginza so a futa mo dä 3. Kozo fiche ti kota Da-mbete kue so zo azia.* "
+  },
+  "invalid_move": {
+    "wrong_format": "A yeke na lege ni pëpe ti sara ye so a hunda. Zo ti pikango ndembo {player_id} akiri tënë nzoni ape, nga lo zia mbeni sioni sarango ye tongaso na yâ ti acouche-feuille (so ayeke tongana encadré).",
+    "invalid_play": "Ngî tî ködörö âzû. Mgböngö {player_id} a ngî {card} na ködörö tî ngî {index}.",
+    "discard_from_payoff": "Zo ti pikango carte ni {player_id} atara lani ti zi mbeni carte na yâ ti gbâ ti acarte so a futa.",
+    "discard_not_in_hand": "Zo ti pikango carte ni {player_id} atara lani ti bi mbeni carte so ayeke na maboko ti lo pëpe.",
+    "wrong_move_type": "A yeke na lege ni pëpe. Zo ti pikango ye {player_id} akiri tënë nzoni ape."
+  },
+  "game_action": {
+    "you_drew": "Mo pika carte.",
+    "opponent_drew": "Zo ti pikango ye {player_id} agboto ale-carte.",
+    "you_played": "Âkûî ngî {card} na ködörö tî ngî {index}.",
+    "opponent_played": "Mgböngö {player_id} a ngî {card} na ködörö tî ngî {index}.",
+    "you_discarded": "Mo o tî âla {card} na gbätä tî ânzembe {index}, ôko mo o tî fini gbâ tî âla. Tî pëpë tî âla tî mo abêla ka mo tî âla pëpë tî gbâ tî âla ôko. Âla {next_player_id} tî gbâ tî âla tî ôko.",
+    "opponent_discarded": "Kötä {player_id} a kpë {card} na pile kpëkpë {index}, mbï na kpë so a kûaka mbï na kûaka tî {player_id} na lêgë tî sängö. Kötä {next_player_id}, ïka mï na ndo. Tînda mbï na kpë na formati [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Kötä {current_player} a kpë kpëkpë tî mbï! Kötä {current_player} a sängö!",
+    "deadlock_player_0": "Ködörö tî ngî âzû! Mgböngö 0 âkûî ngî tî ködörö na {player_0_payoff} kârt na ye, vs Mgböngö 1 na {player_1_payoff} kârt.",
+    "deadlock_player_1": "A si na mbeni ndao! Zo ti pikango ye 1 asö benda tongana a ngbâ {player_1_payoff} carte so angbâ, nga akarte ti zo ti pikingo ye 0 ayeke {player_0_payoff}.",
+    "deadlock_tie": "Ködörö tî ngî âzû na ngî tî ködörö! Mgböngö âzû na {player_0_payoff} kârt na ye. Mgböngö {current_player} âkûî ngî tî ködörö na ngî tî ködörö."
+  }
+}

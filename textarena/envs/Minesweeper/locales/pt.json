@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Você está jogando o jogo Campo Minado.\nO objetivo do jogo é revelar todas as células que não contêm minas.\nPara fazer uma jogada, basta especificar as coordenadas de linha e coluna que você deseja revelar usando o formato:\n- `[row col]`: Revelar a célula na linha e coluna especificadas.\nPor exemplo:\n- `[3 2]` para revelar a célula na Linha 3, Coluna 2.\n- `[5 6]` para revelar a célula na Linha 5, Coluna 6.\nNa sua primeira jogada, você revelará uma área ao redor da célula que você escolher para garantir um início seguro.\nO layout atual do tabuleiro é mostrado abaixo. As células que não foram reveladas são representadas por um ponto ('.'), números revelados mostram a contagem de minas adjacentes.\nTenha cuidado para não escolher células já reveladas.\nAqui está o layout atual do tabuleiro:\n"
+  },
+  "board": {
+    "game_board": "Tabuleiro do Jogo:\n\n{board}",
+    "current_board": "Tabuleiro Atual:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Você não respondeu com coordenadas válidas entre colchetes.",
+    "out_of_bounds": "As coordenadas de linha e coluna especificadas estão fora dos limites.",
+    "already_revealed": "A célula em ({row}, {col}) já foi revelada.",
+    "hit_mine": "Você atingiu uma mina em ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Você revelou a célula em ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Parabéns! Você limpou com sucesso o tabuleiro do Campo Minado.",
+    "turn_limit": "O limite de turnos foi alcançado. Você descobriu com sucesso {percent}% das células seguras."
+  }
+}

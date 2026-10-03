@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Sî siti lu Jucaturi {player_id} 'n nu jocu di LinesOfAction.\nLi vostri pezzi su '{side}', li pezzi di l'avversariu su '{other}'.\nFormatu di mossa: `[b1b3]` (di la coordinata di partenza a la coordinata di arrivo). Na mossa lèggita si sposta urizzontalmenti, virticalmenti, o diagonalmenti di nu nummiru di quadrati uguali a lu nummiru tutali di pezzi (di qualsiasi culuri) 'n ddà linia. Putiti saltari supra li vostri stessi pezzi, ma no supra li pezzi di l'avversariu; atterrannu supra nu pezzu di l'avversariu lu catturati. Vinciti quannu tutti li vostri pezzi su cunnittati 'n modu 8-vicinu."
+  },
+  "board": {
+    "current_board": "Cunsigliu: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "U furmatu deve esse e2e4 (da,a coordinate).",
+    "no_piece": "Nu {side} pezzu supra lu {coord}.",
+    "identical": "Fonte e destinazzione identiche.",
+    "not_straight_or_diagonal": "U muvimentu deve esse drittu o diagonale.",
+    "wrong_distance": "Bisogna muvimenti distanza pari a pezzi in ligna.",
+    "enemy_blocks": "Un'arma nemica blocca u caminu.",
+    "destination_own": "Lu destinu è occupatu di nu so' figghiu."
+  },
+  "game_action": {
+    "moved": "Jucaturi {player_id} si movìu {from} -> {to}",
+    "captured_suffix": "Jucaturi {player_id} si movìu {from} -> {to} catturannu n'emergiu."
+  },
+  "outcome": {
+    "win": "Tutti li pezzi si cunnettanu.",
+    "draw_no_capture": "60 mosse senza cattura.",
+    "draw_repetition": "Posizioni ripetuta tri voti."
+  }
+}

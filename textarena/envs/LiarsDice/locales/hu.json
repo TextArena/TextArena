@@ -1,0 +1,55 @@
+{
+  "_comment": "Felhasználó felé forduló szövegek a Liar's Dice játékhoz. A zárójelben lévő műveleti tokenek ('[Bid: X, Y]', '[Call]'), játékos azonosítók, kocka értékek, mennyiségek és számlálók semleges helyek és soha nem fordíthatók le.",
+  "_slots": {
+    "player_id": "játékos index (egész szám)",
+    "num_players": "játékosok száma a játékban (egész szám)",
+    "dice_summary": "előre megjelenített '; '-vel elválasztott, játékosonkénti megmaradt kockák száma",
+    "your_dice": "előre megjelenített, vesszővel elválasztott lista a játékos kockáinak értékeiről",
+    "p": "játékos index (egész szám)",
+    "d": "megmaradt kockák száma az adott játékosnál (egész szám)",
+    "current_player_id": "játékos index, aki hívott (egész szám)",
+    "face_value": "számolt kocka értéke (1-6)",
+    "count": "tényleges szám a megegyező kockákról (egész szám)",
+    "quantity": "licit mennyisége (egész szám)",
+    "loser_id": "játékos index, aki elveszít egy kockát (egész szám)",
+    "new_quantity": "licit mennyisége, amelyet éppen benyújtottak (egész szám)",
+    "current_quantity": "aktuális licit mennyisége (egész szám)",
+    "new_face_value": "licit értéke, amelyet éppen benyújtottak (egész szám)",
+    "current_face_value": "aktuális licit értéke (egész szám)",
+    "action": "a játékos által benyújtott nyers műveleti sztring",
+    "reason": "egy beágyazott licit-elutasítási ok",
+    "winner": "játékos index, aki nyer (egész szám)",
+    "final_ranking": "játékosok indexeinek listája az első kiesőtől a nyertesig"
+  },
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos egy {num_players} játékosos Liar's Dice játékban.\nSzabályok:\n- A köre során kétféle lehetősége van:\n  1) Új licit tétel magasabb mennyiséggel vagy magasabb értékkel (vagy mindkettővel) a jelenlegi licitnél; pl. '[Bid: 3, 4]',\n  2) Az utolsó licit hívása a '[Call]' beírásával.\n\nHa hív:\n  - Ha a tényleges szám a kockák között kevesebb, mint a licit, az utolsó licitáló elveszít egy kockát.\n  - Ellenkező esetben a hívó elveszít egy kockát.\nA játékos, aki eléri a 0 kockát, kiesik. Az utolsó megmaradt játékos nyer."
+  },
+  "board": {
+    "per_player": "\t{p}. játékos: {d}",
+    "new_round": "\nÚj kör - Megmaradt kockák: {dice_summary}\nAktuális kockái: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "{current_player_id}. játékos hív! A tényleges szám az {face_value} értékű kockákról {count}, ami KEVESEBB, mint {quantity}.\n{loser_id}. játékos (az utolsó licitáló) elveszít egy kockát.",
+    "caller_loses": "{current_player_id}. játékos hív! A tényleges szám az {face_value} értékű kockákról {count}, ami >= {quantity}.\n{loser_id}. játékos (a hívó) elveszít egy kockát."
+  },
+  "action": {
+    "bid_announce": "{player_id}. játékos licitál {quantity} db {face_value} értékű kockára."
+  },
+  "invalid_move": {
+    "call_no_bid": "Hívás történt licit nélkül.",
+    "invalid_bid": "Érvénytelen licit: {reason}",
+    "not_recognized": "A művelet nem ismert fel sem érvényes '[Bid: X, Y]', sem '[Call]' műveletként. Benyújtott művelet: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Az új mennyiség {new_quantity} alacsonyabb, mint a jelenlegi {current_quantity}.",
+    "face_lower": "Az új érték {new_face_value} alacsonyabb, mint a jelenlegi {current_face_value}.",
+    "identical": "A licit megegyezik a jelenlegi licittel.",
+    "face_range": "Az értéknek 1 és 6 között kell lennie."
+  },
+  "message": {
+    "eliminated_invalid": "{player_id}. játékos érvénytelen lépés miatt kiesett."
+  },
+  "outcome": {
+    "win": "{winner}. játékos nyert! Végső rangsor: {final_ranking}"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "Faili ya lugha ya LinesOfAction. USITAFSIRI funguo (upande wa kushoto). Tafsiri maadili tu (upande wa kulia).",
+  "_slots": {
+    "{player_id}": "Nambari ya mchezaji, ama 0 au 1",
+    "{side}": "Barua ya kipande cha mchezaji, ama O au X",
+    "{other}": "Barua ya kipande cha mpinzani, ama O au X",
+    "{board}": "Uchoraji wa ASCII wa ubao; weka kama ilivyo",
+    "{coord}": "Kuratibu ya ubao kama vile b1 au a3",
+    "{from}": "Kuratibu ya chanzo cha hatua, kama vile b1",
+    "{to}": "Kuratibu ya lengo la hatua, kama vile b3"
+  },
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika mchezo wa LinesOfAction.\nVipande vyako ni '{side}', vipande vya mpinzani ni '{other}'.\nMuundo wa hatua: `[b1b3]` (kuratibu ya chanzo hadi kuratibu ya lengo). Hatua halali husafiri kwa usawa, wima, au diagonally idadi ya miraba sawa na jumla ya vipande (rangi yoyote) katika mstari huo. Unaweza kuruka juu ya vipande vyako, lakini si vipande vya mpinzani; kutua kwenye mpinzani humkamata.  Ushinde wakati vipande vyote vimeunganishwa kwa 8-jirani."
+  },
+  "board": {
+    "current_board": "Ubao:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Muundo lazima uwe e2e4 (kuratibu za chanzo na lengo).",
+    "no_piece": "Hakuna kipande cha {side} kwenye {coord}.",
+    "identical": "Chanzo na lengo ni sawa.",
+    "not_straight_or_diagonal": "Hatua lazima iwe moja kwa moja au diagonal.",
+    "wrong_distance": "Lazima usoge umbali sawa na vipande katika mstari.",
+    "enemy_blocks": "Kipande cha mpinzani kinazuia njia.",
+    "destination_own": "Lengo limekaliwa na kipande chako."
+  },
+  "game_action": {
+    "moved": "Mchezaji {player_id} alisonga {from} -> {to}",
+    "captured_suffix": "Mchezaji {player_id} alisonga {from} -> {to} akikamata adui."
+  },
+  "outcome": {
+    "win": "Vipande vyote vimeunganishwa.",
+    "draw_no_capture": "Hatua 60 bila kukamata.",
+    "draw_repetition": "Nafasi imejirudia mara tatu."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} dalam Permainan Negosiasi.\nAnda memiliki beberapa sumber daya, dan tugas Anda adalah melakukan perdagangan sehingga nilai total sumber daya Anda bertambah.\nSumber daya dan nilai yang terkait yang Anda miliki saat ini adalah:\n\t+ {resource_value_list}\nPada setiap giliran, Anda dapat berbicara dengan lawan Anda dan menawarkan perdagangan.\nGunakan token khusus berikut untuk aksi:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Sumber Daya yang Ditawarkan -> Sumber Daya yang Diminta]\n  - '[Accept]': Untuk menerima penawaran masuk.\n  - '[Deny]': Untuk menolak penawaran masuk (default).\nPermainan berlangsung selama {max_turns} giliran secara total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Pemain mencoba menerima perdagangan tanpa memiliki sumber daya yang diperlukan.",
+    "out_of_range": "Pemain {player_id}, Aksi tidak valid. Kolom {col} di luar batas.",
+    "already_full": "Pemain {player_id}, Aksi tidak valid. Kolom {col} sudah penuh.",
+    "proposing_with_no_resource": "Pemain {player_id} mencoba menawarkan perdagangan tanpa memiliki sumber daya yang diperlukan.",
+    "incorrect_offer_format": "Pemain {player_id} menawarkan perdagangan dalam format yang tidak benar.",
+    "no_new_offer": "Pemain {player_id} tidak menawarkan perdagangan baru."
+  },
+  "offers": {
+    "reject": "Pemain {player_id} menolak penawaran perdagangan.",
+    "accept": "Pemain {acceptor_id} menerima penawaran perdagangan dari Pemain {proposer_id}.",
+    "proposal": "Pemain {player_id} menawarkan perdagangan berikut kepada Pemain {opponent_id}: Barang yang ditawarkan: {offered} -> Barang yang diminta: {requested}"
+  },
+  "outcome": {
+    "win": "Pemain {winner_id} menang dengan memiliki peningkatan nilai inventaris yang lebih besar.",
+    "draw": "Perubahan nilai inventaris yang sama untuk semua pemain. Seri."
+  }
+}

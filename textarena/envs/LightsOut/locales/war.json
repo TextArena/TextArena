@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Malipayon nga pag-abot ha Lights Out! Mayda ka {size}x{size} grid hin mga suga.\nAn imo panuyo amo an pagpatay han NGATANAN nga mga suga (ginsusumatan han '.').\nKun ika pipindoton an usa ka suga, ini nagpipinutok ha iya kalugaringon NGAN ha iya mga hagrani nga kagrupo (igbaw/ibaba/wala/tuo).\nI-type an [row col] agod pipindoton an usa ka suga (0-indexed, kaya an balido nga saklaw amo an 0-{max_index}).\nMayda ka hin tubtob {max_turns} mga kiwa agod masulbad an puzzle.\nLegend: 'O' = suga ON, '.' = suga OFF"
+  },
+  "board": {
+    "current_state": "Karuhaan nga kahimtang han grid (Lihok {moves_made}, {moves_left} nga lihok natindog, {completion}% kompleto):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "An aksyon kinahanglan ha format [row col] diin an mga hilera ngan col amo an integers tikang 0 ngadto han {max_index}.",
+    "out_of_range": "An mga koordinado dapat anay ha butnga han 0 ngan {max_index}. Ika nag-enter hin [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Pakpak han kamot! Naka-solbar ka han puzzle ha {moves_used} mga kiwa!",
+    "loss": "Katapusan han larô! Ginamit mo anngatan {max_turns} nga lihok bago malunsad an puzzle. Panghaharan nga pagkumpleto: {completion}%\nPanghaharan nga kahimtang:\n{grid}"
+  }
+}

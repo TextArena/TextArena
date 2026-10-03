@@ -15,7 +15,10 @@ class DebateEnv(ta.Env):
             topics_path (str, optional): Path to the JSON file containing debate topics. Defaults to "textarena/envs/two_player/Debate/topics.json".
         """
         if jury_class is None:
-            from textarena.envs.utils import OpenRouterJury  # or from your local import
+            # Import from the submodule: OpenRouterJury is not re-exported from the
+            # utils package __init__, so `from textarena.envs.utils import ...` raises
+            # ImportError. This matches how textarena.envs.__init__ imports it.
+            from textarena.envs.utils.jury import OpenRouterJury
             jury_class = OpenRouterJury
         assert max_turns % 2 == 0, f"Please use an even number of max turns. Current: {max_turns}"
         self.max_turns = max_turns

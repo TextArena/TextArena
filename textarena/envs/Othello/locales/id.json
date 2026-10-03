@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Pemain {player_id} bermain {colour} ({piece}) dalam permainan Othello.\nTujuan Anda adalah memiliki lebih banyak potongan berwarna Anda di papan pada akhir permainan.\nPada giliran Anda, tempatkan sebuah potongan sedemikian rupa sehingga ia mengapit satu atau lebih potongan lawan Anda - dalam arah apa pun (horizontal, vertikal, atau diagonal) - antara potongan baru Anda dan potongan lain yang sudah ada. Semua potongan lawan yang diapit akan dibalik menjadi warna Anda.\nBerikan gerakan Anda dalam format '[row, col]'."
+  },
+  "board": {
+    "game_board": "Papan Permainan:\n{board}",
+    "valid_moves": "{observation}\nGerakan yang valid: {moves}",
+    "no_valid_moves_reset": "{observation}\nTidak ada gerakan yang valid - Anda mungkin harus melewatkan giliran.",
+    "no_valid_moves_step": "{observation}\nTidak ada gerakan yang valid - Anda mungkin harus melewatkan giliran.",
+    "scores_reset": "{observation}\nSkor Saat Ini - Hitam: {black_count}, Putih: {white_count}\n",
+    "scores_step": "{observation}\nSkor - Hitam: {black_count}, Putih: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Gerakan harus berformat [row, col].",
+    "illegal": "Gerakan ilegal. Gerakan yang valid: {valid}"
+  },
+  "game_action": {
+    "skipped": "Pemain {pid} harus melewatkan giliran mereka",
+    "played": "Pemain {pid} ({piece}) memainkan [{r}, {c}] dan membalik {flipped} potongan"
+  },
+  "game_message": {
+    "must_skip": "Pemain {pid} ({piece}) tidak memiliki gerakan yang valid dan harus melewatkan giliran."
+  },
+  "outcome": {
+    "black_wins": "Hitam menang {black_count}-{white_count}.",
+    "white_wins": "Putih menang {white_count}-{black_count}.",
+    "draw": "Seri {black_count}-{white_count}."
+  }
+}

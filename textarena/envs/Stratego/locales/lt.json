@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate Žaidėjas {player_id} žaidime Stratego.\nJūsų tikslas yra užgrobti oponento Vėliavą arba eliminuoti visus jų judrius kareivius.\nJūsų armija jau yra išdėstyta ant lentos, įskaitant jūsų Vėliavą, Bombas ir kitus kareivius įvairių rangų.\n\n### Žaidimo instrukcijos\n1. **Judėjimo taisyklės:**\n   - Savo ėjimo metu galite judėti vienu žingsniu į gretimą langelį (į viršų, žemyn, į kairę arba į dešinę), kuris jau yra užimtas jūsų kareiviais.\n   - Pavyzdys: kareivis gali judėti iš A1 į B1 arba A1 į A2, jei B1 ir A2 nėra užimti žaidėjo paties kareiviais.\n   - Jei pasirinktas kareivis yra Bomba arba Vėliava, jis negali būti judinamas.\n2. **Mūšiai:**\n   - Jei judėsite į langelį, kurį užima oponento kareivis, tada įvyks mūšis:\n     - Kareivis su aukštesniu rangu laimi ir eliminuoja oponento kareivį.\n     - Jei rangai yra lygūs, abu kareiviai yra pašalinami iš lentos.\n     - **Specialūs atvejai:**\n       - Bombos eliminuoja daugumą puolančių kareivių, išskyrus Kalnakasius, kurie neutralizuoja Bombas.\n       - Šnipai gali nugalėti Maršalą, jei Šnipas puola pirmas, bet pralaimi visiems kitiems kareiviams.\n3. **Strateginiai tikslai:**\n   - Atpažinkite oponento kareivius pagal jų judėjimus ir mūšius.\n   - Saugokite savo Vėliavą, bandydami užgrobti oponento Vėliavą.\n   - Naudokite Žvalgus strategiškai, kad gautumėte informaciją apie oponento kareivius ir puolę silpnus.\n\n### Kaip padaryti ėjimą:\n1. Nurodykite kareivio, kurį norite judinti, ir jo paskirties koordinates.\n2. Naudokite formatą: [A0 B0], kur A0 yra šaltinio pozicija, o B0 yra paskirties pozicija.\n   - Pavyzdys: norėdami judinti kareivį iš eilės 0, stulpelio 0 į eilę 1, stulpelį 0, įveskite [A0 B0].\n3. Įsitikinkite, kad paskirties pozicija yra galima pagal judėjimo taisykles aukščiau.\n\n### Svarbūs pastabos:\n- Lenta rodys jūsų kareivius ir jų pozicijas, pvz., MN, MS.\n- Lenta taip pat rodys žinomas oponento kareivių pozicijas be jų rangų atskleidimo, pvz., ?.\n- Tinkleliai su ~ yra ežerai ir negali būti judėjimo objektu.\n- Kaip pasiūlymas, pradėkite žaidimą judindami kareivius, kurie yra fronto linijose, kad gautumėte informaciją apie oponento kareivius. Žaidėjo 0 ir žaidėjo 1 fronto linijos yra eilės D ir G atitinkamai.\n\nČia yra dabartinės lentos būklė:\n"
+  },
+  "board": {
+    "current_board": "Dabartinė Lenta:\n\n{board}\nGalimi Ėjimai: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neteisingas veiksmo formatas. Žaidėjas {player_id} neįvedė ėjimo formato [A0 B0].",
+    "invalid_coordinates": "Neteisingas veiksmo formatas. Žaidėjas {player_id} neįvedė galimų koordinačių.",
+    "not_own_piece": "Neteisingas veiksmo formatas. Žaidėjas {player_id} turi judinti vieną iš savo kareivių.",
+    "scout_through_pieces": "Neteisingas veiksmo formatas. Žaidėjas {player_id} negali judinti žvalgo per kitus kareivius.",
+    "scout_diagonal": "Neteisingas veiksmo formatas. Žaidėjas {player_id} negali judinti žvalgo įstrižai.",
+    "non_scout_multi_square": "Neteisingas veiksmo formatas. Kareiviai, išskyrus žvalgus, gali judėti tik per vieną langelį.",
+    "move_into_lake": "Neteisingas veiksmo formatas. Žaidėjas {player_id} negali judėti į ežerą.",
+    "move_onto_own_piece": "Neteisingas veiksmo formatas. Žaidėjas {player_id} negali judėti ant savo paties kareivio.",
+    "move_bomb_or_flag": "Neteisingas veiksmo formatas. Žaidėjas {player_id} negali judinti bombos arba vėliavos."
+  },
+  "game_action": {
+    "you_moved": "Jūs judėjote savo kareivį iš {source} į {dest}.",
+    "opponent_moved": "Žaidėjas {player_id} judėjo kareivį iš {source} į {dest}.",
+    "you_equal_ranks": "Jūs judėjote savo kareivį iš {source} į {dest}. Puolantis kareivis buvo {attacking_rank} ir paskirties kareivis buvo {target_rank}. Kadangi rangai yra lygūs, abu kareiviai pralaimėjo.",
+    "opponent_equal_ranks": "Žaidėjas {player_id} judėjo kareivį iš {source} į {dest}. Puolantis kareivis buvo {attacking_rank} ir paskirties kareivis buvo {target_rank}. Kadangi rangai yra lygūs, abu kareiviai pralaimėjo.",
+    "you_miner_defused": "Jūs judėjote savo kareivį iš {source} į {dest}. Puolantis kareivis buvo {attacking_rank} ir paskirties kareivis buvo {target_rank}. Kadangi kalnakasiai gali neutralizuoti bombas, jūs laimėjote mūšį.",
+    "opponent_miner_defused": "Žaidėjas {player_id} judėjo kareivį iš {source} į {dest}. Puolantis kareivis buvo {attacking_rank} ir paskirties kareivis buvo {target_rank}. Kadangi kalnakasiai gali neutralizuoti bombas, jūs pralaimėjote mūšį.",
+    "you_bomb_lost": "Jūs judėjote savo kareivį iš {source} į {dest}. Puolantis kareivis buvo {attacking_rank} ir paskirties kareivis buvo {target_rank}. Kadangi puolantis kareivis nėra kalnakasys, jūs pralaimėjote mūšį.",
+    "opponent_bomb_won": "Žaidėjas {player_id} judėjo kareivį iš {source} į {dest}. Puolantis kareivis buvo {attacking_rank} ir paskirties kareivis buvo {target_rank}. Kadangi puolantis kareivis nėra kalnakasys, jūs laimėjote mūšį.",
+    "you_spy_won": "Jūs judėjote savo kareivį iš {source} į {dest}. Puolantis kareivis buvo {attacking_rank} ir paskirties kareivis buvo {target_rank}. Kadangi puolantis kareivis yra šnipas ir paskirties kareivis yra maršalas, jūs laimėjote mūšį.",
+    "opponent_spy_lost": "Žaidėjas {player_id} judėjo kareivį iš {source} į {dest}. Puolantis kareivis buvo {attacking_rank} ir paskirties kareivis buvo {target_rank}. Kadangi puolantis kareivis yra šnipas ir paskirties kareivis yra maršalas, jūs pralaimėjote mūšį.",
+    "you_higher_won": "Jūs judėjote savo kareivį iš {source} į {dest}. Puolantis kareivis buvo {attacking_rank} ir paskirties kareivis buvo {target_rank}. Kadangi puolantis kareivis yra aukštesnio rango, jūs laimėjote mūšį.",
+    "opponent_higher_lost": "Žaidėjas {player_id} judėjo kareivį iš {source} į {dest}. Puolantis kareivis buvo {attacking_rank} ir paskirties kareivis buvo {target_rank}. Kadangi puolantis kareivis yra aukštesnio rango, jūs pralaimėjote mūšį.",
+    "you_lower_lost": "Jūs judėjote savo kareivį iš {source} į {dest}. Puolantis kareivis buvo {attacking_rank} ir paskirties kareivis buvo {target_rank}. Kadangi puolantis kareivis yra žemesnio rango, jūs pralaimėjote mūšį.",
+    "opponent_lower_won": "Žaidėjas {player_id} judėjo kareivį iš {source} į {dest}. Puolantis kareivis buvo {attacking_rank} ir paskirties kareivis buvo {target_rank}. Kadangi puolantis kareivis yra žemesnio rango, jūs laimėjote mūšį."
+  },
+  "outcome": {
+    "flag_captured": "Žaidėjas {player_id} užgrobė oponento vėliavą!",
+    "no_movable_pieces": "Žaidėjas {winner_id} laimėjo! Žaidėjas {loser_id} nebeturi judrių kareivių."
+  }
+}

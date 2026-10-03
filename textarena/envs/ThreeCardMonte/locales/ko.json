@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte 지역화 파일. 키(왼쪽)는 번역하지 마세요. 값(오른쪽)만 번역하세요.",
+  "_slots": {
+    "{line}": "컵의 렌더링된 행",
+    "{step}": "현재 섞는 단계 번호",
+    "{steps}": "총 섞는 단계 수",
+    "{i}": "스왑에 참여하는 첫 번째 컵 인덱스",
+    "{j}": "스왑에 참여하는 두 번째 컵 인덱스",
+    "{prompt}": "컵 뒤에 추가되는 로케일화된 프롬프트 조각",
+    "{max_index}": "가장 높은 유효한 컵 인덱스, 즉 num_cups-1",
+    "{ball_pos}": "공이 있는 컵 인덱스"
+  },
+  "player_prompt": {
+    "intro": "컵이 섞이는 동안 숨겨진 공 'X'를 추적하세요.\n섞인 후, 공의 위치를 `[k]`로 추측하세요."
+  },
+  "game_message": {
+    "ball_starts": "공 시작: {line}",
+    "shuffle": "섞기 {step}/{steps}: 컵 {i}와 {j}를 교환했습니다.",
+    "cups": "컵: {line}  {prompt}",
+    "guess_now": "(지금 추측하세요!)",
+    "reveal": "(공개: 공이 {ball_pos} 컵 아래에 있습니다)"
+  },
+  "invalid_move": {
+    "wrong_format": "잘못된 행동. `[k]`를 사용하세요.",
+    "out_of_range": "인덱스 범위 0-{max_index}를 벗어났습니다."
+  },
+  "outcome": {
+    "win": "정답! 공을 찾았습니다.",
+    "lose": "틀렸습니다 — 공은 {ball_pos} 컵 아래에 있었습니다."
+  }
+}

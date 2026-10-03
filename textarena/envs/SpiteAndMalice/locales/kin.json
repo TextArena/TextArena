@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ni wewe Mugenzi {player_id} muri kinyarwanda cha kabiri cya Spite na Malice. Iradukunda ni ukwiriye kuba wa mbere kujyana ibitabo vyawe vy'ishyura.\n\n### Isesengura ry'Umukino:\n- Inshingano ni ukureho ibitabo vy'ishyura kwa kujyana ibitabo kuri mirongo ya kati.\n- Ushobora kujyana ibitabo kutoka kuri misoko mitatu:\n  1. **Igitabo cyawe** (utangira kila zamu na ibitabo kugeza 5 mu gitabo cyawe).\n  2. **Igitabo cya juu cya ibitabo vy'ishyura**.\n  3. **Igitabo cya juu cya ibitabo vy'ibitabo vyawe**.\n\n### Amategeko yo Gujyana:\n- Ushobora kujyana igatabo kuri murongo wa kati iyo ari **imwe ya juu** kurusha igatabo cya juu kuri uwo murongo (imirongo ya kati itangira na Ace kugeza Queen; Mfalme ni igatabo cy'ubwoko bwose - gishobora kujyanywa kuri igatabo cyose ariko gitajya gihindura umurongo wa daraja. Ibi birashimisha iyo Mfalme akoreshejwe nyuma ya 4, Mfalme uwo ari 5 na igatabo gikurikirwa kigomba kuba 6).\n- Iyo utashobora kujyana ibitabo byinshi, ugomba **kujyana igatabo** kuri kimwe cya ibitabo vyawe vya kujyana kujyana zamu yawe.\n- Iyo murongo wa kati ugeze Queen, ujyanywa wenyine.\n- Umurongo wa daraja ni: A=1, 2=2, ..., 9=9, J=10, Q=11, Mfalme nk'igatabo cy'ubwoko bwose.\n\n### Ibikorwa:\n1. **Kurasa**: Ku ntangiriro za zamu yawe, rasira ibitabo kujaza igatabo cyawe kugeza 5. Andika **[draw]** kujyana.\n2. **Kujyana igatabo**: Kujyana igatabo, sosha igatabo na murongo wa kati nka: **[play A♠ 0]** (aho 'A♠' ni igatabo na '0' ni indeksi ya murongo wa kati).\n3. **Kujyana**: Iyo utashobora kujyana ibitabo byinshi, jyana igatabo kutoka kuri igatabo cyawe kuri kimwe cya ibitabo vyawe vya kujyana kujyana zamu yawe. Andika **[discard A♠ 1]** (aho 'A♠' ni igatabo na '1' ni indeksi ya murongo wa kujyana). Mbega ko utashobora kujyana igatabo kutoka kuri ibitabo vy'ishyura. Ushobora kujyana ibitabo kutoka kuri igatabo cyawe gusa.\n\n"
+  },
+  "board": {
+    "current_board": "Buhalarire bw'Umuganda:\n\n{board}\nImyitozo Irakwiye: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Ibikingi byo hagati mu nzu (Center Piles) --- ",
+    "pile": "{observation}Gicege {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Ibitekerezo by'Umukino {player_id} ---\n",
+    "payoff": "{observation}Icayi ry'Icungamutse (Icayi Kirenga): {top_card}, Urefu wa Icayi ry'Icungamutse: {payoff_length}\n",
+    "hand": "{observation}Icayi: {hand}\n",
+    "discard": "{observation}Kigega cy'Inyitozo: {discard}\n",
+    "empty": "Ibirimo ubusa"
+  },
+  "game_message": {
+    "no_cards_left": "Nta bitabo byinshi bisigaye kuraswa. Mbega ko utashobora kujyana ibitabo kutoka kuri misoko iyi:\n  1. **Igitabo cyawe**.\n  2. **Igitabo cya juu cya ibitabo vy'ishyura**.\n  3. **Igitabo cya juu cya ibitabo vy'ibitabo vyawe**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Imyitozo idakwiriye. Umukinnyi {player_id} ntabwo yitabiriye hamwe n'imyitozo yemewe mu nkingi z'imfuruka.",
+    "invalid_play": "Ntabwo ari umwito mwiza. Umukino {player_id} yariyeze {card} kuri gicege cy'umuhanda {index}.",
+    "discard_from_payoff": "Umukinnyi {player_id} yagerageje kureka ikarita yo mu murwi w'ibihembo.",
+    "discard_not_in_hand": "Umukinnyi {player_id} yagerageje guterera ikarita itari mu ntoki.",
+    "wrong_move_type": "Ubwoko bwimikorere butemewe. Umukinnyi {player_id} ntiyitabiriye hamwe nuburyo bwo kwimika bukwiye."
+  },
+  "game_action": {
+    "you_drew": "Wari ufite amakarita.",
+    "opponent_drew": "Umukinnyi {player_id} yashyize amakarita.",
+    "you_played": "Wakinze {card} ku ikinamico yo hagati {index}.",
+    "opponent_played": "Umukino {player_id} aryeze {card} kuri gicege cy'umuhanda {index}.",
+    "you_discarded": "Wamaze kujyana {card} kuri murongo wa kujyana {index}, kandi kandi wamaze kujyana zamu yawe. Nta kikorwa cya wawe kitazajywa kuri iyi zamu. Mugenzi {next_player_id} azajya ariko.",
+    "opponent_discarded": "Mugenzi {player_id} yabishyuye {card} ku igikapu cya kubishyura {index}, ikima n'aho yarangije umwaka we. Nta kibikorwa cya Mugenzi {player_id} kizashobora kuzingatiwa muri uyu mwaka. Mugenzi {next_player_id}, ni wowe uza kujya. Nsabira wandike ibikorwa byawe muri mfumo wa [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Umukino {current_player} yashije icayi ry'icungamutse! Umukino {current_player} yatsinze!",
+    "deadlock_player_0": "Kwakira kwa kizima! Mugenzi 0 atsindiye na {player_0_payoff} amakarita asigaye vs {player_1_payoff} amakarita ya Mugenzi 1.",
+    "deadlock_player_1": "Kwakira kwa kizima! Mugenzi 1 atsindiye na {player_1_payoff} amakarita asigaye vs {player_0_payoff} amakarita ya Mugenzi 0.",
+    "deadlock_tie": "Kwakira kwa kizima na kusiganwa! Abagenzi bombi bafite {player_0_payoff} amakarita asigaye. Mugenzi {current_player} atsindiye by'otomatiki."
+  }
+}

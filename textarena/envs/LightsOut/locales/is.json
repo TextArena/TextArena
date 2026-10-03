@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Velkomin í Lights Out! Þú hefur {size}x{size} grind af ljósaperum.\nMarkmið þitt er að slökkva ÁLLA ljósaperurnar (táknaðar með '.').\nÞegar þú ýtir á ljósaperu, víxlar hún sjálfri sér OG nágrönnum sínum (upp/niður/vinstri/hægri).\nSkrifaðu [röð dálk] til að ýta á ljósaperu (0-vísat, svo gildur bili er 0-{max_index}).\nÞú hefur allt að {max_turns} leiki til að leysa þrautina.\nSkýring: 'O' = ljósaperan er Á, '.' = ljósaperan er AF"
+  },
+  "board": {
+    "current_state": "Núverandi stöða grindar (Leik {moves_made}, {moves_left} leikir eftir, {completion}% lokið):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Aðgerðin verður að vera á forminu [röð dálk] þar sem röð og dálkur eru heiltölur frá 0 til {max_index}.",
+    "out_of_range": "Hnit verða að vera á milli 0 og {max_index}. Þú skrifaðir [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Til hamingju! Þú leystir þrautina á {moves_used} leikum!",
+    "loss": "Leik lokið! Þú notaðir alla {max_turns} leiki án þess að leysa þrautina. Lokaða lokun: {completion}%\nLokaða stöða:\n{grid}"
+  }
+}

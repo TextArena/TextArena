@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Golf (Geejjiba Kaardii) - Geejjibaa {player_id}.\nKa'uun: Walitti lakkoofsa xiqqoo kana raundii tokkoo keessatti argachuu. Yoo kolomiin walii qixxeessan, 0 jedhamuun walitti lakkoofsa.\nIlaalchaa Kaardii: A=1, 2-10=ilaalchaa, J/Q=10, K=0\n\nRaawwiilee (tuqaalee akka-jiruutti fayyadami):\n- '[draw]' - Kuusaa irraa kaardii fuudhu\n- '[take]' - Kaardii kuusa irraa fuudhu\n- '[swap X Y]' - Kaardii fuudhamee bakka X (safuu) Y (kolomii) waliin jijjiiru\n- '[discard]' - Kaardii fuudhamee gubbaa kuusaa buusu\n"
+  },
+  "board": {
+    "drew": "Ati {card} argite\nAmma ati [swap X Y] ykn [discard]",
+    "took": "Ati {card} discard pile irraa argite\nAmma ati [swap X Y] wajjin (discard maaliif)",
+    "peeked": "Ati ({row},{col}) ilaale: {card}",
+    "turn_view": "Mee irraa:\n{hand}\nDiscard pile: {discard}\n{options}",
+    "none": "Hin jiru."
+  },
+  "options": {
+    "final_turns": "Turni dhufaa! Fayyadamu: [draw], [take], [peek X Y]",
+    "draw": "Fayyadamu: [draw], [take]",
+    "must_swap": "Ati: [swap X Y] (kaardiiwwan kuusaa irraa baasuu hin dandeessu)",
+    "swap_or_discard": "[swap X Y] ykn [discard] godhuu qabda"
+  },
+  "hand": {
+    "no_cards": "Kaardii hin qabu.",
+    "header": "Kol: 1 2 3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} {new} {old} wajjin ({row},{col}) jedhamte",
+    "discarded": "Player {pid} {card} irraa buuse"
+  },
+  "message": {
+    "deck_empty": "Dekiin duwwa! Taphiin dhumarra oola.",
+    "knocked": "Taphachiisaa {pid} dhabamsiise! taphattoonni kaanis dabaree tokko dabalataa qabu.",
+    "final_round": "Taphataa {pid} {reason}! Taphataa kanniin biraa gara tokko deebii argata."
+  },
+  "reason": {
+    "all_revealed": "kaardi hundi ifa baheera"
+  },
+  "invalid": {
+    "wrong_action": "Tokkummaa bracket ilaali: [draw], [take], [swap X Y], [discard], [knock], ykn [peek X Y]",
+    "discard_empty": "Kaardii dhiibbaa dhumate!",
+    "must_draw_first": "Ati jalqaba [draw], [take], [knock], ykn [peek X Y]",
+    "cannot_discard_taken": "Kaardii kutaawwan gatii hin qabne keessaa fudhatame dhiisuu hin dandeessu. Jijjiiruu qabda.",
+    "have_drawn_card": "Ati kaartii argite. Ati [swap X Y] ykn [discard]",
+    "need_drawn_swap": "Kaardii wal jijjiiruudhaaf kaardii qabatamaa taʼe argachuu qabdu.",
+    "need_drawn_discard": "Kaardiin fudhatan qabachuun dirqama, osoo gadi buqqisuuf.",
+    "out_of_bounds": "Guddina ala. Row 1-{max_row}, column 1-{max_col} fayyadamu",
+    "knock_with_card": "Kaardii qabatteen wal rukutuun hin dandaʼamu. Duraan dursee sochii kee xumuri.",
+    "already_knocked": "Namni tokko marsaa kana duraanuu ni mo'a.",
+    "already_revealed": "Kaardiin sun amma iyyuu banameera!"
+  },
+  "summary": {
+    "full": "Geejjibaan Dhume! Geejjibaa {winner} moo'ate lakkoofsa {score}!\n\nWalitti Lakkoofsota Dhumaati:\n{scores}",
+    "line": "Player {pid}: {score} poiniti"
+  },
+  "board_str": {
+    "title": "=== GOLF GAAM===",
+    "discard": "Gosa gatii: {card}",
+    "knocked": "Taphattuun {pid} balbala rukute!",
+    "player_header": "Player {pid} (Lammi: {score}):"
+  }
+}

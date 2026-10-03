@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Abou ta Hungadó {player_id} den un wega di dos hungadó di Spite i Malice. Bou meta ta pa bou sera e promé pa kita bou pila di pago.\n\n### Resumen di Wega:\n- E objektivo ta pa kita bou pila di pago dor di hunga kartanan na e pilanan di sentro.\n- Abou por hunga kartanan for di tres fuentenan:\n  1. Bou **man** (abou kuminsa kada turno ku te 5 kartanan na man).\n  2. E **karta ariba di bou pila di pago**.\n  3. E **karta ariba di kualke un di bou pilanan di desecha**.\n\n### Reglanan di Hunga:\n- Abou por hunga un karta na un pila di sentro si e ta **un rango mas haltu** ku e karta ariba di e pila (e pilanan di sentro kuminsa ku As i Bai te ku Reina; e Rei ta 'wild' - nan por wòrdu hunga ariba kualke un karta pero no kambia e sekvensia di rango. Esei nifiká ku si un Rei wòrdu usá despues di 4, e Rei ei ta rango 5 i e siguiente karta mester ta un 6).\n- Si abou no por hunga mas kartanan, abou mester **desecha un karta** na un di bou pilanan di desecha pa termina bou turno.\n- Si un pila di sentro alkansa Reina, e lo wòrdu kita awtomátikamente.\n- E orden di rango ta: A=1, 2=2, ..., 9=9, J=10, Q=11, K komo 'wild'.\n\n### Akshonnan:\n1. **Tira**: Na kuminsamentu di bou turno, tira kartanan pa yena bou man te ku 5 kartanan. Introdusí **[draw]** pa kuminsa.\n2. **Hunga un Karta**: Pa hunga un karta, spesifiká e karta i e pila di sentro manera aki: **[play A♠ 0]** (unda 'A♠' ta e karta i '0' ta e index di pila di sentro).\n3. **Desecha**: Si abou no por hunga mas kartanan, desecha un karta for di bou man na un pila di desecha pa termina bou turno. Introdusí **[discard A♠ 1]** (unda 'A♠' ta e karta i '1' ta e index di pila di desecha). Nota ku abou no por desecha karta nengun for di e pila di pago. Abou por desecha solamente e kartanan for di bou man.\n\n"
+  },
+  "board": {
+    "current_board": "Tablero Aktual:\n\n{board}\nMovimentu Disponibel: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pilenan di Centro --- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Bista di Hungador {player_id} ---\n",
+    "payoff": "{observation}Pilha di Paga (Karton Ariba): {top_card}, Largo di Pilha di Paga: {payoff_length}\n",
+    "hand": "{observation}Man: {hand} ",
+    "discard": "{observation}Pilhanan di Deskarte: {discard}\n",
+    "empty": "Empty"
+  },
+  "game_message": {
+    "no_cards_left": "No tin mas kartanan pa tira for di. Rekorda ku bo por hunga kartanan for di e siguiente fuentenan:\n  1. Bo **man**.\n  2. E **kart di ariba di bo pila di pago**.\n  3. E **kart di ariba di kualke un di bo pilanan di desecha**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "E forma di move no ta válido. Jugador {player_id} a kontestá ku un move valido den paréntesis kuadrátiko.",
+    "invalid_play": "Un wega invalido. hungadó {player_id} a purba di hunga {card} riba e pila sentral {index} .",
+    "discard_from_payoff": "Un hungadó {player_id} a purba di kita un karta for di e pila.",
+    "discard_not_in_hand": "Un hungadó {player_id} a purba di kita un karta ku no ta den su man.",
+    "wrong_move_type": "Un move invalido. E hungadó {player_id} no a kontestá ku un move válido."
+  },
+  "game_action": {
+    "you_drew": "Bo a tira karchinan.",
+    "opponent_drew": "E hungadó {player_id} a tira karchinan.",
+    "you_played": "Bo a hunga {card} riba e pila sentral {index}.",
+    "opponent_played": "Hungador {player_id} a hunga {card} riba pilha sentral {index}.",
+    "you_discarded": "Bo a deskarta {card} pa pilha di deskarte {index}, ku ta nifiká ku bo a terminá bo turno. Ningun akshon adishonal di bo lo keda konsiderá pa e turno aki. Hungador {next_player_id} lo ta bai despues.",
+    "opponent_discarded": "Hungador {player_id} a deskarta {card} pa pilha di deskarte {index}, ku ta nifiká ku e tambe a terminá su turno. Ningun akshon adishonal di Hungador {player_id} lo keda konsiderá pa e turno aki. Hungador {next_player_id}, bo lo ta bai despues. Por favor, entrada bo akshon den formato [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Hungador {current_player} a kaba e pila di pago! Hungador {current_player} a gana!",
+    "deadlock_player_0": "Deadlock a ser alcanzá! Hungador 0 ta gana ku {player_0_payoff} karton nan sobra vs Hungador 1 su {player_1_payoff} karton.",
+    "deadlock_player_1": "Deadlock a ser alcanzá! Hungador 1 ta gana ku {player_1_payoff} karton nan sobra vs Hungador 0 su {player_0_payoff} karton.",
+    "deadlock_tie": "Deadlock a ser alcanzá ku empate! Tur dos hungadónan tin {player_0_payoff} karton nan sobra. Hungador {current_player} ta gana pa defekto."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Du er Spelar {player_id} i Tre-spelar-GOPS.\n- Du held dei 13 korta A-K (kvart nøyaktig ein gong).\n- Kvar runde blir ein premie avdekt. Send inn EITT kort som `[Q]`, `[10]`, `[2]` …\n- Høgaste kort vinn premien (+ eventuell overført pot). Uavgjort rullar premien over til neste runde.\n- Etter 13 rundar vinn spelaren med høgaste totale poengsum. Ugyldige trekk = eliminering."
+  },
+  "round": {
+    "header": "### Runde {round}/13 - Premie: {prize} (verdt {worth})",
+    "hand": "Din gjenværende hand: {hand}"
+  },
+  "reveal": {
+    "win": "Bud » {bids} - Spelar {winner} vinn {pot}.",
+    "tie": "Bud » {bids} - uavgjort, potten er no {pot}.",
+    "scores": "Skore → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "handling treng eit kort i parentes som \"[Q]\"",
+    "bad_card": "Kort som er brukt eller ugyldig."
+  },
+  "elimination": {
+    "player": "Spelar {pid} blei utvist etter fleire ugyldige røringar."
+  },
+  "outcome": {
+    "auto_win": "To spelare utelukka - ein automatisk seier.",
+    "final": "Avslutningspoengsum: {scores}"
+  }
+}

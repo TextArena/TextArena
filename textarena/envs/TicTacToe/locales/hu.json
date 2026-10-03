@@ -1,0 +1,27 @@
+{
+  "_comment": "TicTacToe nyelvi fájl. NE fordítsa le a kulcsokat (bal oldal). Csak a értékeket fordítsa le (jobb oldal).",
+  "_slots": {
+    "{player_id}": "A játékos száma, pl. 0 vagy 1",
+    "{symbol}": "A játékos jele, X vagy O",
+    "{opponent_symbol}": "Az ellenfél jele, X vagy O",
+    "{cell}": "A tábla egyik cellájának száma 0 és 8 között"
+  },
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a Tic Tac Toe-ban.\nCélja, hogy három jelet sorban (vízszintesen, függőlegesen vagy átlósan) helyezzen el a táblán.\nA következő lépésnél meg kell adnia a tábla cellájának számát (0-8), ahova a jelet el szeretné helyezni.\nPéldául, '[4]' a jelet a tábla középső cellájába helyezi.\n{player_id}. játékosként Ön '{symbol}' lesz, míg az ellenfele '{opponent_symbol}'."
+  },
+  "board": {
+    "current_board": "Aktuális tábla:\n\n{board}\n\nElérhető lépések: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "A beküldött lépés nem követi a megfelelő formátumot.",
+    "out_of_range": "{cell} nem érvényes cella. 0 és 8 között kell lennie.",
+    "already_occupied": "{cell} cella már foglalt."
+  },
+  "game_action": {
+    "placed": "{player_id}. játékos elhelyezte a jelet ({symbol}) a {cell} cellában."
+  },
+  "outcome": {
+    "win": "{player_id}. játékos nyert!",
+    "draw": "A játék döntetlen!"
+  }
+}

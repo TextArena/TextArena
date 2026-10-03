@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action token '[play X]', the card labels (A, 2..7, J, Q, K), the suit symbols (carried in the {card}/{trump_card} slots), or numeric counts/points/scores. The '(TRUMP)' marker text may be localized.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{trump_suit}": "The trump suit symbol (♠♥♦♣) - do not translate",
+    "{trump_card}": "The trump card label, e.g. '7♠' - do not translate",
+    "{card}": "A card label, e.g. 'A♥' - do not translate",
+    "{trump_mark}": "The pre-rendered '(TRUMP)' marker, or empty",
+    "{max_pos}": "The highest legal card position in the player's hand",
+    "{count}": "The number of cards a player holds",
+    "{pos}": "A card's position number in the hand",
+    "{points}": "A number of points (card value or accumulated score)",
+    "{hand}": "The pre-rendered, multi-line hand listing",
+    "{trick}": "The pre-rendered current-trick listing",
+    "{scores}": "The pre-rendered score line, or the final per-player score block",
+    "{trump_info}": "The pre-rendered trump-suit / deck-count line",
+    "{winner}": "The player number who won the trick or game",
+    "{tricks}": "A number of tricks won by a player",
+    "{deck_count}": "Number of cards left in the deck"
+  },
+  "game": {
+    "start": "Briscola-speul is gestart! Troefkleur: {trump_suit} (Troefkaart: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Dich speel Briscola - Speler {player_id}.\nDoel: Wint trucs en vergaor de meiste punte (120 totaal punte in 't deck).\nKaartpunten: A=11, 3=10, K=4, Q=3, J=2, angere=0\nKaartkrach: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTroefkaarte slaon netroefkaarte, ongeach krach.\n\nActie: '[play X]' woa X de posisie (1-{max_pos}) is van de kaart in dien hand\n"
+  },
+  "hand": {
+    "none": "Gein kaarten.",
+    "empty": "Gein kaarte in de hand.",
+    "header": "Je handje:",
+    "card_line": "  {pos}. {card} [{points} pts]{trump_mark}",
+    "trump_mark": "(TRUMP) ' t Is neet te vergaete."
+  },
+  "trick": {
+    "empty": "Noch nie 'n kaartje gespeeld.",
+    "header": "Huidige truc:",
+    "line": "  Speler {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Speler {player_id}: {points} pte",
+    "trump_info": "Trump pak: {trump_suit}",
+    "trump_info_deck": "Troefkleur: {trump_suit} | Kaarte in 't deck: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nScores: {scores}\n{trump_info}\n\nSpeel 'n kaart mit [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Gebroek [play X] wo X de kaartpositie is (1, 2, 3, enz.)",
+    "out_of_range": "Ongeldige kaartposisie. Dich heb {count} kaarte (1-{count})"
+  },
+  "action": {
+    "played": "Speler {player_id} haet {card} gespeeld",
+    "trick_win": "Speler {winner} wint de truc met {card} en verkriet {points} punte!"
+  },
+  "outcome": {
+    "head": "Speul aaf! Speler {winner} wint mit {points} punte!\n\nFinale scores:\n{scores}",
+    "player_line": "Speler {player_id}: {points} punte ({tricks} trucs)\n"
+  }
+}

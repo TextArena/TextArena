@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Mwalandiridwa ku Lights Out! Muli na gridi ya {size}x{size} ya miyaya.\nLengo lanu ni kuzima miyaya YOTE (inawakilishwa na '.').\nMukanyamula miyaya, inazima yenyewe NA majirani ake (juu/chini/kushoto/kulia).\nLemba [row col] kukanyamula miyaya (0-indexed, kwa hivyo masafa sahihi ni 0-{max_index}).\nMuli na mpaka wa {max_turns} zilandila kutatua fumbo.\nMaelezo: 'O' = miyaya ya kuwasha, '.' = miyaya ya kuzima"
+  },
+  "board": {
+    "current_state": "Hali ya sasa ya gridi (Zamu {moves_made}, {moves_left} zamu zimesalia, {completion}% ikamilika):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Chiwerengero cha zilembo chiyenera kukhala mu mtundu wa [row col] pomwe mzere ndi ndime zili pakati pa 0 mpaka {max_index}.",
+    "out_of_range": "Viwianishi vinayenera kuwa pakati pa 0 na {max_index}. Mwaweka [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Wawa, watonda mu nthowa ya {moves_used}!",
+    "loss": "Mchezo umemalizika! Muliwatumia zamu zote {max_turns} bila kutatua fumbo. Ukamilishaji wa mwisho: {completion}%\nHali ya mwisho:\n{grid}"
+  }
+}

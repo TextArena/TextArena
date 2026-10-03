@@ -1,0 +1,55 @@
+{
+  "_comment": "Kasutaja poole pööratud sõned Liar's Dice'i jaoks. Sulgudes olevad tegevuse märgid ('[Bid: X, Y]', '[Call]'), mängija id-d, täringu näo väärtused, kogused ja loendused on neutraalsed pesad ja ei tohi kunagi tõlkida.",
+  "_slots": {
+    "player_id": "mängija indeks (täisarv)",
+    "num_players": "mängijate arv mängus (täisarv)",
+    "dice_summary": "eelrenderdatud '; '-ühendatud iga mängija järelejäänud täringute arv",
+    "your_dice": "eelrenderdatud komaga ühendatud loend selle mängija täringu näo väärtustest",
+    "p": "mängija indeks (täisarv)",
+    "d": "selle mängija järelejäänud täringute arv (täisarv)",
+    "current_player_id": "mängija indeks, kes kutsus (täisarv)",
+    "face_value": "täringu näo väärtus, mida loendatakse (1-6)",
+    "count": "täringute tegelik arv, mis vastab (täisarv)",
+    "quantity": "pakkumise kogus (täisarv)",
+    "loser_id": "mängija indeks, kes kaotab ühe täringu (täisarv)",
+    "new_quantity": "just esitatud pakkumise kogus (täisarv)",
+    "current_quantity": "praegune pakkumise kogus (täisarv)",
+    "new_face_value": "just esitatud pakkumise näo väärtus (täisarv)",
+    "current_face_value": "praegune pakkumise näo väärtus (täisarv)",
+    "action": "mängija esitatud toor tegevuse string",
+    "reason": "pesastatud pakkumise tagasilükkamise põhjus",
+    "winner": "mängija indeks, kes võidab (täisarv)",
+    "final_ranking": "mängijate indeksite loend esimesest elimineeritust võitjani"
+  },
+  "player_prompt": {
+    "intro": "Oled mängija {player_id} {num_players}-mängija Liar's Dice mängus.\nReeglid:\n- Oma käigu ajal võid kas:\n  1) Teha uue pakkumise suurema koguse või suurema näo väärtusega (või mõlemaga) kui praegune pakkumine; nt '[Bid: 3, 4]',\n  2) Kutsuda viimast pakkumist tippides '[Call]'.\n\nKui kutsud:\n  - Kui täringute tegelik arv, mis vastab sellele näo väärtusele, on väiksem kui pakkumine, siis viimane pakkujakaotab ühe täringu.\n  - Muidu kaotab kutsuja ühe täringu.\nMängija, kes jõuab 0 täringuni, on elimineeritud. Viimane allesjäänud mängija võidab."
+  },
+  "board": {
+    "per_player": "\tMängija {p}: {d}",
+    "new_round": "\nUus voor - Järelejäänud täringud: {dice_summary}\nSinu praegused täringud on: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Mängija {current_player_id} kutsus! Täringute tegelik arv, mis vastab näo väärtusele {face_value}, on {count}, mis on VÄIKSEM kui {quantity}.\nMängija {loser_id} (viimane pakkujakaotab ühe täringu.",
+    "caller_loses": "Mängija {current_player_id} kutsus! Täringute tegelik arv, mis vastab näo väärtusele {face_value}, on {count}, mis on >= {quantity}.\nMängija {loser_id} (kutsujakaotab ühe täringu."
+  },
+  "action": {
+    "bid_announce": "Mängija {player_id} pakub {quantity} näo väärtusega {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Kutsutud ilma eelneva pakkumiseta.",
+    "invalid_bid": "Vigane pakkumine: {reason}",
+    "not_recognized": "Tegevus ei ole tunnustatud kui kas '[Bid: X, Y]' või '[Call]'. Esitatud tegevus: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Uus kogus {new_quantity} on väiksem kui praegune {current_quantity}.",
+    "face_lower": "Uus näo väärtus {new_face_value} on väiksem kui praegune {current_face_value}.",
+    "identical": "Pakkumine on identne praeguse pakkumisega.",
+    "face_range": "Näo väärtus peab olema vahemikus 1-6."
+  },
+  "message": {
+    "eliminated_invalid": "Mängija {player_id} elimineeriti vigase käigu tõttu."
+  },
+  "outcome": {
+    "win": "Mängija {winner} võidab! Lõplik järjestus: {final_ranking}"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "ཁྱེད་མི་སྒེར་ {player_id} ཡིན། {num_rounds} འཁོར་བསྐྱོད་ཀྱི་རྩེད་མོ་འཁྲབ་བཞིན་པ་རེད།\nཁྱེད་ལ་ ${pool} དངུལ་ཀྲམ་ཡོད་པ་རེད། དེ་ཁྱེད་དང་མི་སྒེར་ {other_id} བར་དུ་བགོ་བཤའ་བྱེད་པ་རེད།\n\nའགྲེལ་བཤད་མཁན།\n  - འབྲེལ་བཤད་བྱེད་པ། [Offer: $X] (0 <= X <= pool)\n  - བྱམས་པ་ཡིན་ན་ཁྱེད་ལ་ $(pool - X) དངུལ་ཀྲམ་ཐོབ་པ་རེད། མི་སྒེར་གཞན་ལ་ $X དངུལ་ཀྲམ་ཐོབ་པ་རེད།\n  - མ་བྱམས་ན་མི་སྒེར་གཉིས་ཀར་ $0 དངུལ་ཀྲམ་ཐོབ་པ་རེད།\n  - དཔེ་མཚོན། [Offer: $3]  ཡང་ན་ 'འདི་འདྲ་ཡིན་པ་སྙམ། [Offer: $5]'\n\nལན་འདེབས་མཁན།\n  - འབྲེལ་བཤད་ལ་ [Accept] ཡང་ན་ [Reject] བྱེད་པ།\n  - དཔེ་མཚོན། 'འདི་འདྲ་ཡིན་པ་སྙམ། [Accept]'\n            'མི་འདྲ་བ་ཡིན་པ་སྙམ། [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- འགྲོ་གྲོན་{round_number}འགྲོ་གྲོན་བྱེད་པ་ཡིན། ---\nམི་སྣ་{proposer_id}ནི་སྤྲོད་པ་པོ་ཡིན། མི་སྣ་{responder_id}ནི་ལེགས་སྦྱར་མཁན་ཡིན།",
+    "offer": "འགྲོ་གྲོན་{round_number}: མི་སྣ་{proposer_id}གྱིས་མི་སྣ་{responder_id}ལ་{offer}དངུལ་སྤྲོད་པ་ཡིན། (རང་ཉིད་{keep}དངུལ་བཟུང་ཡོད།)",
+    "accepted": "མི་སྣ་{responder_id}གྱིས་ལེགས་པར་བཟུང་བ་ཡིན། འགྲོ་གྲོན་{round_number}ལ་རྒྱལ་ཁ་ཡོད། མི་སྣ་{proposer_id}ལ་{proposer_gain}དངུལ་ཐོབ། མི་སྣ་{responder_id}ལ་{responder_gain}དངུལ་ཐོབ། གསར་པའི་རྗེས་ལ། མི་སྣ་0: ${total_0} མི་སྣ་1: ${total_1}",
+    "rejected": "མི་སྣ་{responder_id}གྱིས་སྤྲོད་པ་འཐད་པར་མ་བརྩིས། འགྲོ་གྲོན་{round_number}ལ་རྒྱལ་ཁ་མེད། གཉིས་ཀ་ལ་དངུལ་0 ཐོབ། རྗེས་ལ། མི་སྣ་0: ${total_0} མི་སྣ་1: ${total_1}"
+  },
+  "invalid_move": {
+    "no_offer_format": "འགྲེལ་བཤད་མཁན་གྱིས་འབྲེལ་བཤད་བྱེད་པའི་རྣམ་པ་ [Offer: $X] བྱེད་དགོས།",
+    "bad_integer": "འབུལ་བའི་དངུལ་འབོར་ནི་གྲངས་ཆ་ཆ་ཚང་ལྡན་པ་ཞིག་ཡིན་དགོས།",
+    "out_of_range": "འབུལ་བའི་རིན་གོང་ནི་ $0 དང་ ${pool} བར་ཡིན་དགོས།",
+    "no_current_offer": "ད་ལྟའི་ལན་འདེབས་བྱ་རྒྱུའི་གྲོས་མོལ་མེད།",
+    "accept_or_reject": "ལས་འགུལ་མི་འཐད་པ་དེ་ལེགས་སྦྱར་མཁན་གྱིས་སྤྲོད་པ་དེ་ཉིད་ལ་[Accept]ཡང་ན་[Reject]བྱེད་དགོས།"
+  },
+  "outcome": {
+    "win": "རྩེད་འགྲན་པ་ {winner}གིས་ཐོབ་པའི་དངུལ་ཀྲམ་ཡོངས་བསྡོམས་ ${winner_total}དང་། རྩེད་མི་ {loser}གི་ དངུལ་ཀྲམ་ཚང་བ་ནི་ ${loser_total}ཡིན།",
+    "draw": "འདྲན་བསྡུར་བྱས་པ། རྩེད་པ་གཉིས་ཆ་རང་ ${total} ཡོངས་སུ་ཐོབ་པ་ཡིན།"
+  }
+}

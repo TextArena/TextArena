@@ -1,0 +1,39 @@
+{
+  "_comment": "Skedari i lokalizimit për ThreePlayerGOPS. MOS përkthej çelësat (ana e majtë). Përkthej vetëm vlerat (ana e djathtë).",
+  "_slots": {
+    "{player_id}": "Numri i lojtarit, 0, 1 ose 2",
+    "{round}": "Numri i raundit aktual, 1..13",
+    "{prize}": "Etiketa e kartës së çmimit të zbuluar (A, 2..10, J, Q, K) - mos e përkthej",
+    "{worth}": "Vlera totale e çmimit duke përfshirë çdo pot të mbartur",
+    "{hand}": "Kartat e mbetura të lojtarit, të paraqitura si tokena të kllapëzuara si '[A]' '[2]' - mos i përkthej",
+    "{bids}": "Lista e neutrave të kartave të luajtura të ndara me presje si 'P0:10, P1:J, P2:Q' - mos e përkthej",
+    "{winner}": "Numri i lojtarit që fitoi raundin",
+    "{pot}": "Vlera e potit të dhënë ose të mbartur në këtë raund",
+    "{scoreline}": "Tabela e rezultateve të vazhdueshme si 'P0:0  P1:0  P2:11' - mos e përkthej",
+    "{pid}": "Numri i lojtarit që u eliminua",
+    "{scores}": "Rezultatet përfundimtare si një hartë e numrit të lojtarit në rezultat - mos e përkthej"
+  },
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në Three-Player GOPS.\n- Ju mbani 13 kartat A-K (secila saktësisht një herë).\n- Çdo raund një çmim zbulohet. Dorëzojë NJË kartë si `[Q]`, `[10]`, `[2]` …\n- Karta më e lartë fiton çmimin (+ çdo pot të mbartur). Barazimet e rrotullojnë çmimin në raundin e radhës.\n- Pas 13 raundeve, totali më i lartë fiton. Lëvizjet e pavlefshme = eliminim."
+  },
+  "round": {
+    "header": "### Raundi {round}/13 - Çmim: {prize} (vlerë {worth})",
+    "hand": "Dora juaj e mbetur: {hand}"
+  },
+  "reveal": {
+    "win": "Ofertat » {bids} - Lojtari {winner} fiton {pot}.",
+    "tie": "Ofertat » {bids} - barazim, poti tani {pot}.",
+    "scores": "Rezultatet → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "veprimi ka nevojë për një kartë të kllapëzuar si '[Q]'",
+    "bad_card": "karta tashmë është përdorur ose është e pavlefshme"
+  },
+  "elimination": {
+    "player": "Lojtari {pid} u eliminua pas lëvizjeve të përsëritura të pavlefshme."
+  },
+  "outcome": {
+    "auto_win": "Dy lojtarë u eliminuan - fitore automatike.",
+    "final": "Rezultatet përfundimtare: {scores}"
+  }
+}

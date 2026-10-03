@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Sveiki atvykę į Žibintų išjungimą! Jūs turite {size}x{size} žibintų tinklą.\nJūsų tikslas yra išjungti VISUS žibintus (žymimi '.').\nKai paspaudžiate žibintą, jis perjungia save IR gretimus kaimynus (į viršų/žemyn/į kairę/į dešinę).\nĮveskite [eilė stulpelis], kad paspaudžiate žibintą (0-indeksuotas, todėl galiojantis diapazonas yra 0-{max_index}).\nJūs turite iki {max_turns} ėjimų, kad išsprendžiate galvosūkį.\nLegenda: 'O' = žibintas įjungtas, '.' = žibintas išjungtas"
+  },
+  "board": {
+    "current_state": "Dabartinė tinklo būsena (Ėjimas {moves_made}, {moves_left} ėjimų liko, {completion}% užbaigta):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Veiksmas turi būti [eilė stulpelis] formato, kur eilė ir stulpelis yra sveikieji skaičiai nuo 0 iki {max_index}.",
+    "out_of_range": "Koordinatės turi būti tarp 0 ir {max_index}. Jūs įvedėte [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Sveikiname! Jūs išsprendėte galvosūkį per {moves_used} ėjimus!",
+    "loss": "Žaidimas baigtas! Jūs panaudojote visus {max_turns} ėjimus, bet negalėjote išsprendžiant galvosūkio. Galutinė užbaigimo procentinė dalis: {completion}%\nGalutinė būsena:\n{grid}"
+  }
+}

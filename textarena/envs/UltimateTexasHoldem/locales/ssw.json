@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Akukho khadi okwamanje",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Umdlali oyedwa vs Dealer\n\n📖 ISIQALO SESKRINI:\n• Uqala usebenza namachiphi {start_chips}\n• Sekheberu sinye se-52 malebula (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Umdlali usebenza na dealer (indlu)\n• Zingatia zonke izingeni zokusebenza Ultimate Texas Hold'em: uposte imali yokubheja ANTE na BLIND, ufikie malebula 2 asekheberu, uthathe isinqumo sokubheja PLAY, bese ufikie malebula asekheberu asemphakathini na ulinganise lebula lakho elihle kakhulu na le dealer. Inhloso yakho ukukhulisa imali yakho yokunqoba (lapho una lebula elihle kakhulu), ukunciphisa hasara yakho (lapho una lebula elibi kakhulu).\n• Umdlalo uthatha umlando lapho ufikile 0 machiphi noma usezansi kwesobunxele kwenye zingeni zokusebenza (HASARA) noma ukamilise izingeni zokusebenza 1000 namachiphi (INQOBA)\n\n💰 ISIQALO SOKUBHEJA:\n• ANTE: Imali yokubheja ${ante} kwenye zonke izingeni zokusebenza\n• BLIND: Imali yokubheja ${ante} kwenye zonke izingeni zokusebenza\n• PLAY: Imali yokubheja isiyofuneka. Ngokwesobunxele kwenye zingeni zokusebenza, unaweza kuthatha isinqumo sokubheja PLAY mara nne (${ante4} kwenye PRE-FLOP, ${ante2} kwenye FLOP, noma ${ante} kwenye RIVER. Unaweza phelekezela kwenye river, ukususa isandla, na ukungenisa imali yokubheja.)\n\n🎴 UKWAZI KWA MALEBULA:\n• Ufikia malebula 2 asekheberu (malebula akho asekheberu)\n• Dealer ufikia malebula 2 asekheberu (afihliwe kuye)\n• Malebula 5 asekheberu afikwa asemphakathini\n• Malebula asekheberu afikwa kwenye zingeni zokusebenza\n\n🏆 UKWAZI KWA DEALER:\n• Dealer kumele abe nalebula elilodwa (malebula 2 asekheberu) ukwazi ukusebenza, akusebenzisa malebula 2 asekheberu na malebula 5 asekheberu asemphakathini.\n• Ukufaneleka kwa dealer kuholela kwenye matokeo yokubheja, njengoba kuzosetshenziswa kamva.\n\n🎮 ZINGENI ZOKUSEBENZA & MIDLAZO:\n📋 PRE-FLOP:\n  • Midlalo: [4x] (${ante4}) noma [check]\n  • [4x]: Bheja ${ante4} PLAY, ufikise malebula 3 asekheberu asemphakathini\n  • [check]: Ungenisi imali yokubheja, ufikise malebula 3 asekheberu asemphakathini\n\n📋 FLOP:\n  • Uma ubheje 4x: [skip] kuphela (auto-ufikisa malebula 2 asekheberu asemphakathini)\n  • Uma ungabheji 4x: [2x] (${ante2}) noma [check]\n  • [2x]: Bheja ${ante2} PLAY, ufikise malebula 2 asekheberu asemphakathini\n  • [check]: Ungenisi imali yokubheja, ufikise malebula 2 asekheberu asemphakathini\n\n📋 RIVER:\n  • Uma ubheje 4x noma 2x: [skip] kuphela (auto-uthathe umlando)\n  • Uma ungabheji PLAY: [1x] (${ante}) noma [fold]\n  • [1x]: Bheja ${ante} PLAY, uthathe umlando\n  • [fold]: Susa isandla, ulahle imali yokubheja ANTE na BLIND\n\n📋 SHOWDOWN:\n  • Malebula yonke afikwa na kuhlolwa\n  • Lebula elihle kakhulu kwenye malebula 7 (2 asekheberu + 5 asemphakathini)\n  • Imali yokubheja ithathwe njengezindlela zokukhokha\n\n💎 UKUKHOKHA KWEMALI YOKUBHEJA:\n📊 ANTE BET:\n  • Dealer akafaneleki: PUSH (imali yokubheja ibuyiselwe)\n  • Dealer afaneleki na unqoba: 1:1 ukhokhwa (imali yokubheja + imali yokunqoba)\n  • Dealer afaneleki na ulahle: Imali yokubheja ilahlekiwe\n  • Tie: PUSH (imali yokubheja ibuyiselwe)\n\n📊 BLIND BET:\n  • Ayathintwa ukufaneleka kwa dealer\n  • Unqoba: Imali yokubheja ibuyiselwe na imali yokunqoba kulingana nalebula lakho\n  • Ulahle: Imali yokubheja ilahlekiwe\n  • Tie: PUSH (imali yokubheja ibuyiselwe)\n\n📊 BLIND BET PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Akuna imali yokunqoba\n\n📊 PLAY BET:\n  • Ayathintwa ukufaneleka kwa dealer\n  • Ulolanisa: Lebula lakho elihle kakhulu na le dealer\n  • Unqoba: 1:1 ukhokhwa (imali yokubheja + imali yokunqoba)\n  • Ulahle: Imali yokubheja ilahlekiwe\n  • Tie: PUSH (imali yokubheja ibuyiselwe)\n\n🎯 UKWAZI KWA MALEBULA APOKER (Elihle kakhulu hadi elibi kakhulu):\n  1. Royal Flush: A-K-Q-J-10 asekheberu sinye\n  2. Straight Flush: Malebula 5 asekheberu asemphakathini\n  3. Four of a Kind: Malebula 4 asekheberu asemphakathini\n  4. Full House: Malebula 3 asekheberu asemphakathini + malebula 2 asekheberu asemphakathini\n  5. Flush: Malebula 5 asekheberu asemphakathini\n  6. Straight: Malebula 5 asekheberu asemphakathini\n  7. Three of a Kind: Malebula 3 asekheberu asemphakathini\n  8. Two Pair: Malebula 2 asekheberu asemphakathini + malebula 2 asekheberu asemphakathini\n  9. One Pair: Malebula 2 asekheberu asemphakathini\n  10. High Card: Malebula aphakeme kakhulu\n\n⌨️  AMAGAMA EMIDLALO:\n• [4x] noma [play bet 4x]: Bheja ${{self.ante_amount*4}} PLAY\n• [2x] noma [play bet 2x]: Bheja ${{self.ante_amount*2}} PLAY\n• [1x] noma [play bet 1x]: Bheja ${{self.ante_amount*1}} PLAY\n• [check] noma [c]: Check (ungalisi imali yokubheja)\n• [fold] noma [f]: Fold (susa isandla)\n• [skip] noma [s]: Skip (lapho akunamidlalo inayohitajika)\n\n💡 IZINHLOSO ZOKUSEBENZA:\n• Malebula asekheberu amandla (malebula asekheberu, malebula aphakeme) mara nyingi aholela kubheja 4x\n• Ulinde ukufaneleka kwa dealer - malebula amabi angaholela kubheja 4x\n• Imali yokubheja BLIND inaweza kuholela kwenye imali yokunqoba kakhulu (Royal Flush = 500:1!)\n• Ulinde imali yakho! Uma ifikile 0 noma isezansi kwesobunxele kwenye zingeni zokusebenza, ulahle.\n\n⚠️  IZINHLOSO EZIKHULU:\n• Imali yokubheja ANTE na BLIND inahitajika kwenye zonke izingeni zokusebenza\n• Imali yokubheja PLAY isiyofuneka na yokusebenza\n• Ulinde ukuthatha isinqumo sokusebenza, na isinqumo kuphela kwenye zingeni zokusebenza.\n\n",
+    "state": "🎯 ZINGENI {round}\n💰 Machiphi: {chips}\n🎴 Isandla lakho: {hand}\n📊 Imali yokubheja: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Izingeni: {phase}\n🎯 Midlalo inayopatikana: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Zingeni {round} ziqalile! Imali yokubheja: ANTE ${ante}, BLIND ${blind}. Una {chips} machiphi asale.",
+    "your_hand": " Sandla sakho: {hand}",
+    "flop_revealed": " Kwehluleka kwemdlalo: {cards}",
+    "river_revealed": " RIVER uveta: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Sinyatselo lesingasebenti sesigaba sanyalo. Tindlela letitfolakalako: {available}",
+    "message": " Sento lesingasebenti! Tintfo letingaba khona: {available}"
+  },
+  "action": {
+    "folded": " Wena wavele wadlala."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Isandla la dealer: {cards}",
+    "community_cards": " Emakhadi e-Community: {cards}",
+    "player_best": "🎴 Lebula elihle kakhulu la player: {name} ({cards})",
+    "dealer_best": "🎴 Lebula elihle kakhulu la dealer: {name} ({cards})",
+    "ante_lost_folded": " KUBHEKISELWA KUNYE NEMABHOYELO! - ${ante} (kuhlanganisiwe)",
+    "blind_lost_folded": " KUBHEKISWA KULOKUHLANGAKILE! - ${blind} (kuhlanganisiwe)",
+    "ante_won": "✅ KUNGENAKUBA BET WON! +${amount}",
+    "ante_pushed": " KUNGEKWAKHULISELWANI! ${ante} kubuyiselwe emuva",
+    "ante_lost": " KUBHEKIWE kubheja! -${ante}",
+    "blind_won": "✅ IMALI YEMBUZA inqobile! +${amount}",
+    "blind_pushed": " BET BLIND PUSHED! ${blind} kubuyiselwe emuva",
+    "blind_lost": " KUBHALIWA KUNCABELA! - ${blind}",
+    "play_won": "✅ IMALI YOKUDLALA inqobile! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} kubuyiselwe emuva",
+    "play_lost": " KUBHEKISWA KUKUGEMBUKA! - ${play}",
+    "net_gain": "🎉 Zingeni {round} zikamilile! Imali yokunqoba: +${net}",
+    "net_loss": "💸 Zingeni {round} zikamilile! Imali ilahlekiwe: ${net}",
+    "separator": " -  - :  Lelulove, Lelilulu."
+  },
+  "outcome": {
+    "game_over_win": "🏁 Umdlalo uthathe umlando! {max_turns} izingeni zokusebenza zikamilile. Una ${chips} machiphi - UNQOBA!",
+    "game_over_lose": " KUPHELA KWEMIDLALO! Sewaphela emasheke. Umtsengisi uyawina!",
+    "reward_win": "Umdlali ukamilise {winner_rounds} izingeni zokusebenza namachiphi ${chips}",
+    "reward_lose": "Umdlali uphelelwe ngemachips emjikeni {round}",
+    "reward_win_max": "Umdlali ukamilise {max_turns} izingeni zokusebenza namachiphi ${chips}"
+  },
+  "hand_names": {
+    "royal_flush": "I-Royal Flush (Ligcolo lelikhulu)",
+    "straight_flush": "I-Straight Flush (Kuhlanta Lokuphelele)",
+    "four_of_a_kind": "Tintfo Letine Letiyingoti Kakhulu",
+    "full_house": "Indlu legcwele",
+    "flush": "Flush",
+    "straight": "Ngemavi lacondzile",
+    "three_of_a_kind": "Tintsatfu Letihlukile Kuletinye Tinhlobo Tetilwane",
+    "two_pair": "Emacembu Lamabili",
+    "one_pair": "Linye Lijaha Nalelinye",
+    "high_card": "Likhadi leliphezulu",
+    "unknown": "Sandla Lesingatiwa"
+  }
+}

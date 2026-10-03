@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} đang chơi trò Pig Dice.\n\nLuật chơi:\n- Khi lượt của bạn, bạn có thể '[roll]' hoặc '[hold]'\n- Quăng ra 2-6: Thêm vào tổng điểm lượt\n- Quăng ra 1: Mất tổng điểm lượt và kết thúc lượt\n- Giữ: Thêm tổng điểm lượt vào điểm số của bạn và kết thúc lượt\n- Người đầu tiên đạt {winning_score} điểm thắng\n\nKhi lượt của bạn, bạn sẽ thấy điểm số hiện tại và tổng điểm lượt.\nTrả lời với '[roll]' để quăng xúc xắc hoặc '[hold]' để giữ điểm của bạn."
+  },
+  "invalid_move": {
+    "invalid_action": "Định dạng hành động không hợp lệ. Sử dụng '[roll]' hoặc '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Người chơi {player_id} bị thua, mất {turn_total} điểm!",
+    "player_hold": "Người chơi {player_id} giữ và thêm {turn_total} điểm vào điểm số."
+  },
+  "board": {
+    "player": "Người chơi 0: '{score_0}'; Người chơi 1: '{score_1}'",
+    "current_total_scores": "Tổng điểm hiện tại: {scores}\nTổng điểm lượt hiện tại của bạn là {turn_total}.",
+    "roll_history": "{observation}\nLịch sử quăng xúc xắc của lượt này: {roll_history}",
+    "first_roll": "{observation}\nĐây là lần quăng xúc xắc đầu tiên của lượt bạn.",
+    "available_actions": "{observation}\nHành động có thể thực hiện: '[roll]' hoặc '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Người chơi {winner_id} thắng bằng cách có điểm số cao hơn khi hết lượt ({scores})",
+    "winner_by_score": "Người chơi {winner_id} thắng bằng cách đạt điểm số mục tiêu {winning_score}!",
+    "draw": "Hạn chế lượt đã hết và tất cả người chơi có cùng điểm số: {scores}"
+  }
+}

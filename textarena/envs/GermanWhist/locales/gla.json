@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Tha an geama a' tòiseachadh. Suith thrumpa: {trump_suit} (cairt thrumpa: {trump_str}).",
+    "no_trump_card": "chan eil gin ann"
+  },
+  "player_prompt": {
+    "intro": "Tha thu na Chluicheadair {player_id} ann an Whist Ghearmailteach.\n{phase_info}\nTha thu a' giùlan {hand_size} cairtean.\nCluich cairt le '[play N]', far a bheil N na shiostam aice ann an do lamh (mar eisimpleir '[play 3]').",
+    "phase_learning": "GUS A 'GHAOIL: bidh an neach a bhuannaicheas gach cleas a' gabhail cairt aghaidh suas agus am fear a chailleas na ath chàrta bho deck. Cleasan air choisinn anns an ìre seo chan eil iad gan cunntadh airson buannachd.",
+    "phase_playing": "Tha gach cleas a-nis air cunntadh gu buannachadh."
+  },
+  "next_card": {
+    "playing_phase": "Chan eil cairt air a thabhann - thòisich an ìre cluich.",
+    "deck_empty": "Tha an deic falamh - chan eil cairt air a thabhann.",
+    "available": "Cairt air a thabhann: {card}",
+    "available_trump": "Tha cairt air a thabhann: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Foirm gluasad neo-dhligheach. Cleachd '[play N]' gus an Nth cairt a tha nad làimh a chluich.",
+    "bad_position": "Chan eil an suidheachadh cairt sin ann. Tha thu a' cumail {hand_size} chairtean.",
+    "must_follow_suit": "Feumaidh tu an cois a leantainn agus cairt {lead_suit} a chluich.",
+    "invalid_play": "Chan urrainnear an cairt sin a chluich."
+  },
+  "game_action": {
+    "played": "Chluich cluicheadair {player_id} le {card}."
+  },
+  "trick": {
+    "won": "Bidh cluicheadair {winner_id} a 'buannachadh an cleas le {card}.",
+    "won_learning": "Cluicheadair {winner_id} a' buannachd an t-earrann le {card} agus a' gabhail a' chairt a tha fosgailte"
+  },
+  "phase": {
+    "learning_complete": "Tha an deic air a bhith sgìth. Tha am ìre ionnsachaidh seachad - tha gach cleas eile a 'cunntadh airson buannachadh."
+  },
+  "draw": {
+    "winner_received": "Bhuannaich thu an cleas agus fhuair tu {card}.",
+    "loser_received": "Chaill thu an cleas agus tharraing {card} bhon deic.",
+    "winner_preview": "Is e an ath chairt a tha air a thabhann {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Earrannan a bhuail thusa gu ruige seo - Cluicheadair 0: {tricks0}, Cluicheadair 1: {tricks1}",
+    "scores_playing": "Earrannan a' cur às - Cluicheadair 0: {tricks0}, Cluicheadair 1: {tricks1}",
+    "phase": "Àrd-ìre: {phase}",
+    "phase_learning": "Roinn: {phase} ({remaining_cards} cairtean a dh'fhàgail sa chlò)"
+  },
+  "hand": {
+    "no_cards": "Gun chairtean.",
+    "no_cards_in_hand": "Chan eil cairtean ann an làimh.",
+    "header": "Do làmh:",
+    "trump_indicator": "(TRUMP) Tha mi a 'smaoineachadh gu bheil e coltach.",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Chan eil cairtean a chluich fhathast an cleas seo.",
+    "header": "Trèic gnàthach:",
+    "trump_indicator": "(TRUMP) Tha mi a 'smaoineachadh gu bheil e coltach.",
+    "card_line": "{observation}\n  Cluicheadair {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Cha do thòisich an geama",
+    "header": "=== Gearmailtis Whist Game===",
+    "phase": "{observation}\nRoinn: {phase}",
+    "trump_suit": "{observation}\nSuith thrumpa: {trump_suit}",
+    "trump_card": "{observation}\nCairt thrumpa: {card}",
+    "cards_left": "{observation}\nCairtean a dh'fhàgail sa chlò: {count}",
+    "next_card": "{observation}\nCairt an ath uair don bhuaiteach: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Trick gnàthach:",
+    "trump_indicator": "(TRUMP) Tha mi a 'smaoineachadh gu bheil e coltach.",
+    "trick_line": "{observation}\n  Cluicheadair {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nCluicheadair {player_id}: {scoring} earrannan a' cur às ({tricks} gu lèir), {hand_size} cairtean ann an lamh"
+  },
+  "outcome": {
+    "summary": "Roinn ionnsachaidh - Cluicheadair 0: {l0}, Cluicheadair 1: {l1}. Roinn a' cluich - Cluicheadair 0: {p0}, Cluicheadair 1: {p1}. Cluicheadair {winner_id} a' buannachd le {winner_tricks} earrannan a' cur às!"
+  }
+}

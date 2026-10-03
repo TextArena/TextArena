@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Bakisi ba Surround o mapi {width}x{height}.\nOle oy'owu mukisi {player_id}. Mikeno ya kuziya: '[up]' '[down]' '[left]' '[right]' to w/s/a/d.\nKisalu: kuyikala kwa bakisi bansi. Miketo ya nzila ikala; kuponda mapi ikala; kukwata kwa mikanda ikala bansi."
+  },
+  "board": {
+    "current": "Nto-Kimvuka ya ntangu yai: {board}",
+    "after_moves": "Boti na nima ya kusala kitambi mosi: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Muntu yina vandaka kubula {player_id} kufwaka sambu yandi salaka kitambi ya kukonda mfunu."
+  },
+  "outcome": {
+    "survived_win": "Muntu yina vandaka kubula {player_id} gulukaka; bantu yonso ya nkaka fwaka.",
+    "all_crashed": "Bantu yonso yina vandaka kusala bansaka yango kufwaka na mbala mosi.",
+    "outlived": "Muntu yina vandaka kusala bansaka yango kuzingaka bamvula mingi kuluta bantu yonso yankaka.",
+    "all_dead": "Bantu yonso ya vandaka kusala nsaka yina kufwaka.",
+    "turn_limit": "Muntu yina me guluka na kitamina ya nda kuluta, yandi muntu ke nungaka.",
+    "ranking": "{reason} Mvuala ya mwana (malu→mabe): {groups}"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Siti lu Giucaturi {player_id} 'n nu jocu a dui giucatura di Spite and Malice. Lu vostru scopu è di essiri lu primu a svacantari la vostra pila di pagamentu.\n\n### Panurama dû Jocu:\n- L'obbiettivu è di pulizziari la vostra pila di pagamentu jucannu carti ntê pili di centru.\n- Putiti jucari carti di tri fonti:\n  1. La vostra **manu** (accuminciati ogni tornu cu finu a 5 carti 'n manu).\n  2. La **carta supiriuri dâ vostra pila di pagamentu**.\n  3. La **carta supiriuri di una dî vostri pili di scartu**.\n\n### Reguli di Jocu:\n- Putiti jucari na carta ntâ pila di centru si è **unu gradu cchiù àutu** dâ carta supiriuri ntâ pila (li pili di centru accumincianu cu l'Assu e vanu finu â Regina; li Re sunnu jucàbbili - ponnu essiri jucati supra a ogni carta ma nun càncianu la sequenza di gradu. Chistu signìfica ca si un Re veni usatu doppu lu 4, allura chiddu Re è graduatu 5 e la carta succissiva devi essiri un 6).\n- Si nun putiti jucari cchiù carti, divi **scartari na carta** ntâ una dî vostri pili di scartu pi finiri lu vostru tornu.\n- Si na pila di centru raggiungi la Regina, veni pulizziata automaticamenti.\n- L'òrdini di gradu è: A=1, 2=2, ..., 9=9, J=10, Q=11, K comu jucàbbili.\n\n### Azioni:\n1. **Pigghia**: Ntô principiu dû vostru tornu, pigghiatu carti pi jinchiri la vostra manu finu a 5 carti. Trasi **[draw]** pi accuminciari.\n2. **Joca na Carta**: Pi jucari na carta, spicificati la carta e la pila di centru comu chistu: **[play A♠ 0]** (unni 'A♠' è la carta e '0' è l'ìndici dâ pila di centru).\n3. **Scarta**: Si nun putiti jucari cchiù carti, scartati na carta dâ vostra manu ntâ na pila di scartu pi finiri lu vostru tornu. Trasi **[discard A♠ 1]** (unni 'A♠' è la carta e '1' è l'ìndici dâ pila di scartu). Notati ca nun putiti scartari nudda carta dâ pila di pagamentu. Putiti scartari sulu li carti dâ vostra manu.\n\n"
+  },
+  "board": {
+    "current_board": "Tabelluni Attuali:\n\n{board}\nMossi Disponibbili: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pioli Centrali -- ",
+    "pile": "{observation}Mucchiu {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Visita di Jucaturi {player_id} ---\n",
+    "payoff": "{observation}Mucchiu di Paga (Carta Supra): {top_card}, Lunghezza di Mucchiu di Paga: {payoff_length}\n",
+    "hand": "{observation}Manu: {hand}\n",
+    "discard": "{observation}Mucchi di Scartu: {discard}\n",
+    "empty": "Vattiu"
+  },
+  "game_message": {
+    "no_cards_left": "Nun cc'è cchiù carti a pijari. Arricurdàtivi ca putiti jucari carti di sti fonti:\n  1. La vostra **manu**.\n  2. La **carta cchiù àuta dû vostru mucchju di pagamentu**.\n  3. La **carta cchiù àuta di unu di li vostri mucchja di scartu**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatu di mossa nvaliddu. Lu jucaturi {player_id} nun rispunniu cu na mossa valida ntê parentizzi quadratici.",
+    "invalid_play": "Jocu invalidu. Jucaturi {player_id} ha tentatu di jucari {card} supra lu mucchiu cintrali {index}.",
+    "discard_from_payoff": "Discartu nvalidu. Lu jucaturi {player_id} pruvò a scartari na carta dâ pila di pagamentu.",
+    "discard_not_in_hand": "Discartu nvalidu: Lu jucaturi {player_id} pruvò a scartari na carta ca nun era 'n manu.",
+    "wrong_move_type": "Tippu di mossa nvaliddu. Lu jucaturi {player_id} nun rispunniu cu nu tipu di mossi validi."
+  },
+  "game_action": {
+    "you_drew": "Tu tirasti li carti.",
+    "opponent_drew": "Lu jucaturi {player_id} tirava li carti.",
+    "you_played": "Ju jucavi {card} supra la pila cintrali {index}.",
+    "opponent_played": "Jucaturi {player_id} ha jucatu {card} supra lu mucchiu cintrali {index}.",
+    "you_discarded": "Tu hai scartatu {card} a lu mucchiu di scartu {index}, cu lu significatu ca hai finitu lu tu turnu. Nudda azziuni ulteriu tua è cunziddirata pi stu turnu. Jucaturi {next_player_id} va a jiri doppu.",
+    "opponent_discarded": "Jucaturi {player_id} ha scartatu {card} a lu mucchiu di scartu {index}, cu lu significatu ca ha finitu lu sò turnu. Nudda azziuni ulteriu di Jucaturi {player_id} è cunziddirata pi stu turnu. Jucaturi {next_player_id}, tu vai a jiri doppu. Si prega di inseriri la tua azziuni nel formatu [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Jucaturi {current_player} ha finitu lu sò mucchiu di paga! Jucaturi {current_player} vinci!",
+    "deadlock_player_0": "Stallo raggiuntu! Jucaturi 0 vinci cu {player_0_payoff} carti rimanenti vs Jucaturi 1 cu {player_1_payoff} carti.",
+    "deadlock_player_1": "Stallo raggiuntu! Jucaturi 1 vinci cu {player_1_payoff} carti rimanenti vs Jucaturi 0 cu {player_0_payoff} carti.",
+    "deadlock_tie": "Stallo raggiuntu cu parità! Tutti dui li giucatura hannu {player_0_payoff} carti rimanenti. Lu Giucaturi {current_player} vinci pi difautu."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "سیز اویونچو {player_id} ایکی اویونچولو Spite and Malice اویونوندا اویناییرسینیز. هدفینیز، اؤدول پیلینیزی ایلک بوشالتماقدیر.\n\n### اویون گؤره:\n- هدف، کارت‌لاری مرکز پیللرینه اوینایاراق اؤدول پیلینیزی تمیزله‌مکدیر.\n- اوچ منبع‌دن کارت اوینایا بیلرسینیز:\n  1. **الینیز** (هر دوردا 5 کارت‌لا باشلاییرسینیز).\n  2. **اؤدول پیلینیزین اوست کارت‌لاری**.\n  3. **هر هانسی آتیلمیش پیللرینیزین اوست کارت‌لاری**.\n\n### اویناما قایدالاری:\n- مرکز پیللرینه کارت اوینایا بیلرسینیز اگر او کارت پیلین اوست کارتیندان **بیر درجه یوخاری** اولسا (مرکز پیللری Ace-دن باشلاییر و Queen-ا چاتیر; Kral-لار ویلد-دیرلر - هر هانسی کارت اوستونه اوینایا بیلرلر، اما درجه سیراسینی دییشدیرمیرلر. بونون معناسی اگر Kral 4-دن سونرا ایستیفاده اولسا، او Kral 5 درجه‌سی اولار و سونراکی کارت 6 اولمالی‌دیر).\n- اگر داها کارت اوینایا بیلمسینیز، دورونوزو بیتیرمک اوچون **کارت آتیلمالیدیر**.\n- اگر مرکز پیللری Queen-ا چاتسا، اوتوماتیک اولاراق تمیزله‌نیر.\n- درجه سیراسی: A=1, 2=2, ..., 9=9, J=10, Q=11, K ویلد کیمی.\n\n### حرکت‌لر:\n1. **چکمه**: دورونوزون باشیندا، الینیزی 5 کارت‌لا دولدورماق اوچون کارت‌لار چکین. **[draw]** ایله باشلایین.\n2. **کارت اویناما**: کارت اویناماق اوچون، کارت و مرکز پیلینی بئله گؤسترمه‌لیدیر: **[play A♠ 0]** (بورادا 'A♠' کارت و '0' مرکز پیلینین ایندکسی‌دیر).\n3. **آتیلما**: اگر داها کارت اوینایا بیلمسینیز، دورونوزو بیتیرمک اوچون الینیزدن کارت آتیلمالیدیر. **[discard A♠ 1]** ایله آتیلین (بورادا 'A♠' کارت و '1' آتیلمیش پیلین ایندکسی‌دیر). دیققت ائدین کی اؤدول پیلیندن کارت آتیلا بیلمز. یالنیز الینیزدن کارت آتیلا بیلر.\n\n"
+  },
+  "board": {
+    "current_board": "ایندیکی اویون تاختی:\n\n{board}\nمومکون حرکت‌لر: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- مرکزي پايل -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Oyuncu {player_id}'in Baxışı ---\n",
+    "payoff": "{observation}Mənfəət Yığını (Üst Kart): {top_card}, Mənfəət Yığınının Uzunluğu: {payoff_length}\n",
+    "hand": "{observation}Əl: {hand}\n",
+    "discard": "{observation}آتیلمیش پیللر: {discard}\n",
+    "empty": "بوشدور."
+  },
+  "game_message": {
+    "no_cards_left": "بیر داها کارت یوخدور. یادینیزدا قالسین کی، بو قایناقلاردان کارتا اوینایا بیلرسینیز: 1. الینیز 2. اؤدول توپونون باشلیغی 3. آتدیغینیز هر بیری نین ایلک کاستی . ️"
+  },
+  "invalid_move": {
+    "wrong_format": "غیر معتبر حرکت فورماتی. اویونچو {player_id} بیر صحیفه لی حرکته جواب وئرمه دی .",
+    "invalid_play": "Yanlış oynama. Oyuncu {player_id} {card} kartını mərkəzi yığın {index}'ə oynamağa cəhd etdi.",
+    "discard_from_payoff": "یالان آتیلما. اویونچو {player_id} اؤدول پیلیندن بیر کارت آتماغا چالیشدی.",
+    "discard_not_in_hand": "باطل رد. اویونچو {player_id} الده اولمایان بیر کارتین رد ائتمه یه چالیشیر.",
+    "wrong_move_type": "یالان حرکت نوعو. اویونچو {player_id} گئچرلی بیر حرکت نوعو ایله جواب وئرمه‌دی."
+  },
+  "game_action": {
+    "you_drew": "کارت چکدی.",
+    "opponent_drew": "اویونچو {player_id} کارت چکدی.",
+    "you_played": "Siz {card} kartını mərkəzi yığın {index}'ə oynadınız.",
+    "opponent_played": "Oyuncu {player_id} {card} kartını mərkəzi yığın {index}'ə oynadı.",
+    "you_discarded": "سیز {card} کارتینی آتیلمیش پیل {index}-ده آتیلدینیز، بونون معناسی دورونوز بیتدی. سونراکی حرکت‌لرینیز بونون اوچون نظرده آلینمایاجاق. اویونچو {next_player_id} سونراکی دورونو باشلایاجاق.",
+    "opponent_discarded": "Oyuncu {player_id} {card} kartını atma yığını {index}'ye atdı, bu da onların dövrünü bitirdiği anlamına gəlir. Oyuncu {player_id}'ün bu dövr üçün daha sonra heç bir hərəkəti nəzərə alınmır. Oyuncu {next_player_id}, siz növbəti olacaqsınız. Zəhmət olmasa, hərəkətinizi [action card center_index] formatında daxil edin."
+  },
+  "outcome": {
+    "payoff_cleared": "Oyuncu {current_player} öz mənfəət yığınını tamamladı! Oyuncu {current_player} qalib gəldi!",
+    "deadlock_player_0": "قفلانما الده ائدیلدی! اویونچو ۰ {player_0_payoff} کارتلا قازاندی، اویونچو ۱ ایسه {player_1_payoff} کارتلا.",
+    "deadlock_player_1": "قفلانما الده ائدیلدی! اویونچو ۱ {player_1_payoff} کارتلا قازاندی، اویونچو ۰ ایسه {player_0_payoff} کارتلا.",
+    "deadlock_tie": "Deadlock reached with tie! Hər iki oyunçu {player_0_payoff} kartı qaldı. Oyuncu {current_player} default olaraq qalib gəldi."
+  }
+}

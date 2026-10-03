@@ -23,10 +23,7 @@ class BlackjackEnv(ta.Env):
         self.state.game_state["dealer_hand"] = [self._draw_card(), self._draw_card()]
 
     def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            "You are playing Blackjack against the dealer.\nYour goal is to get as close to 21 as possible without going over.\n"
-            "On your turn, choose '[Hit]' to draw another card or '[Stand]' to hold.\nJ/Q/K = 10 points; A = 11 or 1, whichever is better.\n"
-        )
+        return self.m("player_prompt", "intro")
 
     def _hand_score(self, hand: List[str]) -> int:
         total, aces = 0, 0
@@ -49,7 +46,7 @@ class BlackjackEnv(ta.Env):
             self._handle_stand()
             self._observe_state()  # only observe if valid
         else:
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason="Invalid action. Use '[Hit]' or '[Stand]'.")
+            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "wrong_format"))
             # Do not call _observe_state()
         return self.state.step()
 
@@ -72,7 +69,7 @@ class BlackjackEnv(ta.Env):
 
     def _advance_or_finish(self, outcome: str):
         """After a hand ends, either start the next one or finish env."""
-        message = f"Hand {self.state.game_state['hand_number']}: you {outcome}. Your final {self._hand_score(self.state.game_state['player_hand'])}, Dealer {self._hand_score(self.state.game_state['dealer_hand'])}."
+        message = self.m("game_message", "hand_result", hand_number=self.state.game_state['hand_number'], outcome=outcome, player_score=self._hand_score(self.state.game_state['player_hand']), dealer_score=self._hand_score(self.state.game_state['dealer_hand']))
         self.state.add_observation(from_id=ta.GAME_ID, to_id=-1, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
         if self.state.game_state["hand_number"] < self.state.game_state["num_hands"]: # prepare next hand
             self.state.game_state["hand_number"] += 1
@@ -83,13 +80,13 @@ class BlackjackEnv(ta.Env):
             wins = self.state.game_state["results_summary"]["win"]
             losses= self.state.game_state["results_summary"]["lose"]
             draws = self.state.game_state["results_summary"]["draw"]
-            self.state.add_observation(to_id=-1, message=f"=== All {self.state.game_state['num_hands']} hands complete ===\nWins: {wins}, Losses: {losses}, Draws: {draws}\n", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.state.set_outcome(reward=wins/(losses+wins+draws), reason=f"The game has concluded. Final scores: Dealer: {losses}, You: {wins}, Draws: {draws}")
+            self.state.add_observation(to_id=-1, message=self.m("game_message", "all_complete", num_hands=self.state.game_state['num_hands'], wins=wins, losses=losses, draws=draws), observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.state.set_outcome(reward=wins/(losses+wins+draws), reason=self.m("outcome", "game_over", losses=losses, wins=wins, draws=draws))
 
     def _observe_state(self):
         gs = self.state.game_state
         score = self._hand_score(gs['player_hand'])
-        msg = f"Hand {gs['hand_number']}/{gs['num_hands']}\nYour hand: {', '.join(gs['player_hand'])} (Score: {score})\nDealer shows: {gs['dealer_hand'][0]}"
+        msg = self.m("board", "current_state", hand_number=gs['hand_number'], num_hands=gs['num_hands'], player_hand=', '.join(gs['player_hand']), score=score, dealer_card=gs['dealer_hand'][0])
         self.state.add_observation(to_id=-1, message=msg, observation_type=ta.ObservationType.GAME_MESSAGE)
 
     def _get_percentage_completion(self) -> float:
@@ -97,5 +94,3 @@ class BlackjackEnv(ta.Env):
         gs = self.state.game_state
         if gs["num_hands"] == 0: return 0.0  # fallback safeguard
         return (gs["results_summary"]["win"] + 0.5 * gs["results_summary"]["draw"]) / gs["num_hands"]
-
-

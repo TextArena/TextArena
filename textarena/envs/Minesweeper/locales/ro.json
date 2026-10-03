@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Jucați jocul Minesweeper.\nObiectivul jocului este de a dezvălui toate celulele care nu conțin mine.\nPentru a face o mutare, specificați pur și simplu coordonatele rândului și coloanei pe care doriți să le dezvăluiți folosind formatul:\n- `[row col]`: Dezvăluiți celula de la rândul și coloana specificate.\nDe exemplu:\n- `[3 2]` pentru a dezvălui celula din Rândul 3, Coloana 2.\n- `[5 6]` pentru a dezvălui celula din Rândul 5, Coloana 6.\nLa prima mutare, veți dezvălui o zonă în jurul celulei pe care o alegeți pentru a asigura un start sigur.\nConfigurația actuală a tablei este afișată mai jos. Celulele care nu sunt dezvăluite sunt reprezentate de un punct ('.'), numerele dezvăluite arată numărul de mine adiacente.\nAveți grijă să nu alegeți celule deja dezvăluite.\nIată configurația actuală a tablei:\n"
+  },
+  "board": {
+    "game_board": "Tablă de joc:\n\n{board}",
+    "current_board": "Tablă curentă:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nu ați răspuns cu coordonate valide în paranteze pătrate.",
+    "out_of_bounds": "Coordonatele rândului și coloanei specificate sunt în afara limitelor.",
+    "already_revealed": "Celula de la ({row}, {col}) a fost deja dezvăluită.",
+    "hit_mine": "Ați lovit o mină la ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Ați dezvăluit celula de la ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Felicitări! Ați curățat cu succes tabla Minesweeper.",
+    "turn_limit": "Limita de mutări a fost atinsă. Ați descoperit cu succes {percent}% din celulele sigure."
+  }
+}

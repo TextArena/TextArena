@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola-lokaalitiedosto. ÄLÄ käännä avaimia (vasen puoli). Käännä vain arvot (oikea puoli).",
+  "_slots": {
+    "{player_id}": "Pelaajan numero, esim. 0 tai 1",
+    "{trump_suit}": "Valttikortin symboli (♠♥♦♣) - älä käännä",
+    "{trump_card}": "Valttikortin tunniste, esim. '7♠' - älä käännä",
+    "{card}": "Kortin tunniste, esim. 'A♥' - älä käännä",
+    "{trump_mark}": "Esi-renderöity '(VALTTI)' -merkki tai tyhjä",
+    "{max_pos}": "Korkein laillinen korttipaikka pelaajan kädessä",
+    "{count}": "Korttien määrä, jonka pelaaja pitää",
+    "{pos}": "Kortin paikkatunnus kädessä",
+    "{points}": "Pisteiden määrä (kortin arvo tai kertynyt pistemäärä)",
+    "{hand}": "Esi-renderöity, monirivinen käden lista",
+    "{trick}": "Esi-renderöity nykyinen temppu -lista",
+    "{scores}": "Esi-renderöity pistelinja tai lopullinen pelaajan pisteblokki",
+    "{trump_info}": "Esi-renderöity valttikortin / pakka -laskurivi",
+    "{winner}": "Pelaajan numero, joka voitti temppun tai pelin",
+    "{tricks}": "Pelaajan voittamien tempun määrä",
+    "{deck_count}": "Pakassa jäljellä olevien korttien määrä"
+  },
+  "game": {
+    "start": "Briscola-peli käynnistyi! Valttikortti: {trump_suit} (Valttikortti: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Pelaat Briscolaa - Pelaaja {player_id}.\nTavoite: Voita temppuja ja kerää eniten pisteitä (120 pistettä pakassa).\nKorttipisteet: A=11, 3=10, K=4, Q=3, J=2, muut=0\nKorttivoima: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nValttikortit voittavat ei-valttikortit riippumatta voimasta.\n\nToiminto: '[play X]', jossa X on kortin paikka (1-{max_pos}) kädessäsi\n"
+  },
+  "hand": {
+    "none": "Ei kortteja",
+    "empty": "Ei kortteja kädessä",
+    "header": "Kätesi:",
+    "card_line": "  {pos}. {card} [{points} pistettä]{trump_mark}",
+    "trump_mark": " (VALTTI)"
+  },
+  "trick": {
+    "empty": "Ei kortteja pelattu vielä tällä temppulla.",
+    "header": "Nykyinen temppu:",
+    "line": "  Pelaaja {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Pelaaja {player_id}: {points} pistettä",
+    "trump_info": "Valttikortti: {trump_suit}",
+    "trump_info_deck": "Valttikortti: {trump_suit} | Kortteja pakassa: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPisteet: {scores}\n{trump_info}\n\nPelaa kortti käyttämällä [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Käytä [play X], jossa X on kortin paikka (1, 2, 3, jne.)",
+    "out_of_range": "Virheellinen korttipaikka. Sinulla on {count} korttia (1-{count})"
+  },
+  "action": {
+    "played": "Pelaaja {player_id} pelasi {card}",
+    "trick_win": "Pelaaja {winner} voittaa temppun {card} -kortilla ja saa {points} pistettä!"
+  },
+  "outcome": {
+    "head": "Peli päättyi! Pelaaja {winner} voittaa {points} pisteellä!\n\nLopulliset pisteet:\n{scores}",
+    "player_line": "Pelaaja {player_id}: {points} pistettä ({tricks} temppua)\n"
+  }
+}

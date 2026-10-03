@@ -1,0 +1,27 @@
+{
+  "_comment": "TicTacToe-lokaalleêr. MAAK NIE sleutels (linkerkant) oor nie. Vertaal net waardes (regterkant).",
+  "_slots": {
+    "{player_id}": "Die speler se nommer, bv. 0 of 1",
+    "{symbol}": "Die speler se merk, óf X óf O",
+    "{opponent_symbol}": "Die teenstander se merk, óf X óf O",
+    "{cell}": " 'n Bord-selnommer tussen 0 en 8"
+  },
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in Tic Tac Toe.\nJou doel is om drie in 'n ry (horisontaal, vertikaal of diagonaal) op die bord te wen.\nOp jou beurt moet jy die vierkantnommer (0-8) kies waarin jy jou merk volgende wil plaas.\nByvoorbeeld, '[4]' plaas jou merk in die middelste sel van die bord.\nAs Speler {player_id}, sal jy '{symbol}' wees, terwyl jou teenstander '{opponent_symbol}' is."
+  },
+  "board": {
+    "current_board": "Huidige Bord:\n\n{board}\n\nBeskikbare Skuiwe: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Die ingediende skuif volg nie die korrekte formaat nie.",
+    "out_of_range": "{cell} is nie 'n geldige sel nie. Moet tussen 0 en 8 wees.",
+    "already_occupied": "Sel {cell} is reeds beset."
+  },
+  "game_action": {
+    "placed": "Speler {player_id} het hul simbool ({symbol}) in sel {cell} geplaas."
+  },
+  "outcome": {
+    "win": "Speler {player_id} het gewen!",
+    "draw": "Die spel is 'n gelykopuitslag!"
+  }
+}

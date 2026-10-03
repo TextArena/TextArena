@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Estás xogando con {color} nun xogo de Avance. Móvete {direction} nun taboleiro de {board_size}x{board_size}.\nNo teu turno podes mover unha soa peza un paso cara adiante ou diagonalmente cara adiante.\nUnha peza só pode moverse diagonalmente se hai unha peza do opoñente alí, e só pode moverse a un cadrado así ocupado nun paso diagonal.\nCando entras nun cadrado cunha peza do opoñente, captúrala e a peza do opoñente é eliminada permanentemente do taboleiro.\nUsa notación UCI no formato de corchetes, por exemplo, [a2a3] para mover de a2 a a3.\n* 'a' corresponde á columna máis á esquerda, '1' é a fila inferior (dende a perspectiva de Branco).\n* A fila de casa de Negro é a fila superior (fila 8 para un 8x8). A fila de casa de Branco é a fila inferior (fila 1 para un 8x8).\nO primeiro xogador cuxa peza alcanza a fila de casa do opoñente gaña. Se as túas pezas son todas capturadas, perdes."
+  },
+  "invalid_move": {
+    "wrong_format": "Por favor, usa notación alxébrica entre corchetes como [a2a3].",
+    "out_of_bounds": "O movemento está fóra dos límites do taboleiro.",
+    "illegal": "Ese movemento non segue as regras de Avance ou non é a túa peza."
+  },
+  "game_action": {
+    "moved": "O Xogador {player_id} move {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Branco alcanzou a fila de casa de Negro.",
+    "black_reached": "Negro alcanzou a fila de casa de Branco.",
+    "white_captured": "Todas as pezas de Branco foron capturadas.",
+    "black_captured": "Todas as pezas de Negro foron capturadas.",
+    "no_moves": "O Xogador {player_id} non ten máis movementos."
+  }
+}

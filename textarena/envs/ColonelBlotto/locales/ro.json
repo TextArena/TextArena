@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți {role} în Colonel Blotto.\nScopul dvs. este să câștigați mai multe runde decât adversarul dvs.\nÎn fiecare rundă, alocați exact {num_total_units} unități în câmpurile {field_names}.\nJucătorul care alocă mai multe unități într-un câmp câștigă acel câmp, iar jucătorul care câștigă mai multe câmpuri câștigă runda.\nDe exemplu, '[A7 B7 C6]' alocă 7 unități la A, 7 la B și 6 la C.",
+    "commander_alpha": "Comandantul Alpha",
+    "commander_beta": "Comandantul Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Runda {current_round}/{num_rounds} ===\nRunde câștigate - Comandantul Alpha: {alpha_score}, Comandantul Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nRunda {current_round}\nComandantul Alpha a alocat: {p0_allocations}\nComandantul Beta a alocat: {p1_allocations}\n",
+    "winner_alpha": "{message}Câștigător: Comandantul Alpha",
+    "winner_beta": "{message}Câștigător: Comandantul Beta",
+    "tie": "{message}Remiză!"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de intrare invalid. Utilizați: A:5, B:10, C:5",
+    "invalid_field": "Nume de câmp invalid(e). Câmpuri valide: {field_names}",
+    "wrong_allocation_value": "Toate alocările trebuie să fie numere întregi nenegative.",
+    "incorrect_total_units": "Trebuie să alocați exact {num_total_units} unități. Suma curentă: {current_sum}",
+    "good_allocations": "Alocarea este bună."
+  },
+  "outcome": {
+    "winner_alpha": "Comandantul Alpha câștigă {score_0}-{score_1} după {num_rounds} runde!",
+    "winner_beta": "Comandantul Beta câștigă {score_1}-{score_0} după {num_rounds} runde!",
+    "draw": "Jocul se termină într-o remiză {score_0}-{score_1} după {num_rounds} runde!",
+    "early_winner_alpha": "Comandantul Alpha câștigă {scores_0}-{scores_1} (majoritate obținută)!",
+    "early_winner_beta": "Comandantul Beta câștigă {scores_1}-{scores_0} (majoritate obținută)!"
+  }
+}

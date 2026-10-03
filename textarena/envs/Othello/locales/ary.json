@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} تلعب {colour} ({piece}) في لعبة أوتيلو.\nهدفك هو الحصول على المزيد من القطع بلونك على اللوحة بنهاية اللعبة.\nفي دورك، ضع قطعة بحيث تكون بين قطعة جديدة وواحدة من قطعك الحالية، في أي اتجاه (أفقي أو عمودي أو قطري). سيتم قلب جميع قطع الخصم المحاصرة إلى لونك.\nأدخل نقرتك بالتنسيق '[row, col]'."
+  },
+  "board": {
+    "game_board": "لعبة اللوحة: {board}",
+    "valid_moves": "{observation}\nالنقرات الصالحة: {moves}",
+    "no_valid_moves_reset": "{observation} ماشي حركات صالحة، يمكن ليك تتخطاها.",
+    "no_valid_moves_step": "{observation} ماشي حركات صالحة، يمكن ليك تتخطاها.",
+    "scores_reset": "{observation}\nالنقاط الحالية - الأسود: {black_count}، الأبيض: {white_count}\n",
+    "scores_step": "{observation}\nالنقاط - الأسود: {black_count}، الأبيض: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "التحرّك خاص يكون على شكل [row, col].",
+    "illegal": "حركات غير قانونية. تحركات صالحة: {valid}"
+  },
+  "game_action": {
+    "skipped": "اللاعب {pid} كان لازم يتخطى دورة اللعبة.",
+    "played": "Player {pid} ({piece}) played [{r}, {c}] flipping {flipped} piece(s)"
+  },
+  "game_message": {
+    "must_skip": "اللاعب {pid} ({piece}) ليس لديه نقرات صالحة ويتعين عليه التخطي."
+  },
+  "outcome": {
+    "black_wins": "فازو السود {black_count}-{white_count}.",
+    "white_wins": "الأبيض فاز {white_count}-{black_count}.",
+    "draw": "رسم {black_count}-{white_count}."
+  }
+}

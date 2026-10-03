@@ -1,0 +1,81 @@
+{
+  "_comment": "Tệp ngôn ngữ Ultimate Texas Hold'em. KHÔNG được dịch các khóa (bên trái). Chỉ dịch các giá trị (bên phải). Giữ nguyên mọi {placeholder}. Không dịch các token hành động ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), các nhãn/bộ bài (ví dụ 'A♠', 'K♥', '10♦'), các nhãn giai đoạn được truyền qua {phase}, hoặc bất kỳ số tiền chip/cược/thưởng nào. Các đoạn mã '${{...}}' trong bảng trả thưởng phải được giữ nguyên (cặp ngoặc kép là cố ý).",
+  "_slots": {
+    "{start_chips}": "Số chip ban đầu, ví dụ 1000",
+    "{ante}": "Số tiền cược ante/blind, ví dụ 25",
+    "{ante4}": "Bốn lần ante, ví dụ 100",
+    "{ante2}": "Hai lần ante, ví dụ 50",
+    "{round}": "Số vòng hiện tại",
+    "{chips}": "Số chip hiện tại của người chơi",
+    "{hand}": "Danh sách các lá bài, ví dụ 'A♠, K♥', hoặc văn bản không có bài",
+    "{phase}": "Nhãn giai đoạn hiện tại (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Danh sách các token hành động được bao trong dấu ngoặc vuông, ví dụ '[play_bet_4x], [check]'",
+    "{available}": "Danh sách các token hành động hợp lệ hiện tại",
+    "{blind}": "Số tiền cược blind",
+    "{play}": "Số tiền cược play",
+    "{cards}": "Danh sách các lá bài, ví dụ 'Q♣, 7♦, 2♠'",
+    "{name}": "Tên tay bài poker đã được dịch, chèn vào nguyên văn",
+    "{amount}": "Số tiền chip",
+    "{net}": "Số tiền chip thay đổi ròng cho vòng (có thể âm)",
+    "{max_turns}": "Số vòng tối đa",
+    "{winner_rounds}": "Số vòng đã hoàn thành"
+  },
+  "player_prompt": {
+    "no_cards": "Chưa có bài",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Đơn Đấu vs Nhà Cái\n\n📖 TỔNG QUAN TRÒ CHƠI:\n• Bạn bắt đầu với {start_chips} chip\n• Bộ bài 52 lá (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Bạn chơi với nhà cái (nhà cái)\n• Mỗi vòng theo cấu trúc Ultimate Texas Hold'em: bạn đặt cược ANTE và BLIND, nhận 2 lá bài kín, quyết định cược PLAY tùy chọn qua các giai đoạn cược, sau đó mở các lá bài chung và so sánh tay bài 5 lá tốt nhất của bạn với tay bài của nhà cái. Mục tiêu của bạn là tối đa hóa chiến thắng (khi bạn có tay bài tốt hơn) và tối thiểu hóa thua lỗ (khi bạn có tay bài kém hơn).\n• Trò chơi kết thúc khi bạn đạt 0 chip hoặc ít hơn vào đầu vòng (THUA) hoặc hoàn thành 1000 vòng với chip (THẮNG)\n\n💰 CẤU TRÚC CƯỢC:\n• ANTE: Cược bắt buộc ${ante} mỗi vòng\n• BLIND: Cược bắt buộc ${ante} mỗi vòng\n• PLAY: Cược tùy chọn trong quá trình chơi. Trong suốt vòng, bạn chỉ có thể chọn MỘT trong những điều sau: (${ante4} nếu đặt ở PRE-FLOP, ${ante2} nếu đặt ở FLOP, hoặc ${ante} nếu đặt ở RIVER. Cũng có thể bỏ cuộc ở RIVER, từ bỏ tay bài và không đặt cược.)\n\n🎴 PHÁT BÀI:\n• Bạn nhận 2 lá bài mở (bài kín của bạn)\n• Nhà cái nhận 2 lá bài úp (ẩn khỏi bạn)\n• 5 lá bài chung được úp ban đầu\n• Các lá bài chung được mở dần qua các giai đoạn của trò chơi\n\n🏆 ĐIỀU KIỆN NHÀ CÁI:\n• Nhà cái phải có ít nhất một ĐÔI (2 lá bài cùng hạng) để đủ điều kiện, sử dụng 2 lá bài trong tay và 5 lá bài chung.\n• Điều kiện nhà cái ảnh hưởng đến kết quả cược, sẽ được giải thích sau.\n\n🎮 GIAI ĐOẠN TRÒ CHƠI & HÀNH ĐỘNG:\n📋 PRE-FLOP:\n  • Hành động: [4x] (${ante4}) hoặc [check]\n  • [4x]: Đặt cược PLAY ${ante4}, mở 3 lá bài chung đầu tiên\n  • [check]: Không đặt cược thêm, mở 3 lá bài chung đầu tiên\n\n📋 FLOP:\n  • Nếu đã đặt cược 4x: Chỉ [skip] có sẵn (tự động mở 2 lá bài chung cuối cùng)\n  • Nếu chưa đặt cược 4x: [2x] (${ante2}) hoặc [check]\n  • [2x]: Đặt cược PLAY ${ante2}, mở 2 lá bài chung cuối cùng\n  • [check]: Không đặt cược thêm, mở 2 lá bài chung cuối cùng\n\n📋 RIVER:\n  • Nếu đã đặt cược 4x hoặc 2x: Chỉ [skip] có sẵn (tự động chuyển sang SHOWDOWN)\n  • Nếu chưa đặt cược PLAY: [1x] (${ante}) hoặc [fold]\n  • [1x]: Đặt cược PLAY ${ante}, chuyển sang SHOWDOWN\n  • [fold]: Từ bỏ tay bài, mất cược ANTE và BLIND\n\n📋 SHOWDOWN:\n  • Tất cả các lá bài được mở và đánh giá\n  • Tay bài 5 lá tốt nhất từ 7 lá (2 kín + 5 chung)\n  • Cược được thanh toán theo quy tắc trả thưởng\n\n💎 TRẢ THƯỞNG CƯỢC:\n📊 CƯỢC ANTE:\n  • Nhà cái không đủ điều kiện: HOÀ (cược được trả lại)\n  • Nhà cái đủ điều kiện & bạn thắng: Trả thưởng 1:1 (cược + tiền thắng)\n  • Nhà cái đủ điều kiện & bạn thua: Mất cược\n  • Hòa: HOÀ (cược được trả lại)\n\n📊 CƯỢC BLIND:\n  • Không bị ảnh hưởng bởi điều kiện nhà cái\n  • Bạn thắng: Cược được trả lại và trả thưởng thêm dựa trên sức mạnh tay bài\n  • Bạn thua: Mất cược\n  • Hòa: HOÀ (cược được trả lại)\n\n📊 BẢNG TRẢ THƯỞNG CƯỢC BLIND:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Dưới Straight: Không có trả thưởng thêm\n\n📊 CƯỢC PLAY:\n  • Không bị ảnh hưởng bởi điều kiện nhà cái\n  • So sánh trực tiếp: Tay bài tốt nhất của bạn vs tay bài tốt nhất của nhà cái\n  • Bạn thắng: Trả thưởng 1:1 (cược + tiền thắng)\n  • Bạn thua: Mất cược\n  • Hòa: HOÀ (cược được trả lại)\n\n🎯 XẾP HẠNG TAY BÀI POKER (Tốt nhất đến Kém nhất):\n  1. Royal Flush: A-K-Q-J-10 cùng chất\n  2. Straight Flush: 5 lá bài liên tiếp cùng chất\n  3. Four of a Kind: 4 lá bài cùng hạng\n  4. Full House: 3 lá cùng hạng + 2 lá cùng hạng\n  5. Flush: 5 lá bài cùng chất\n  6. Straight: 5 lá bài liên tiếp\n  7. Three of a Kind: 3 lá bài cùng hạng\n  8. Two Pair: 2 đôi khác hạng\n  9. One Pair: 2 lá bài cùng hạng\n  10. High Card: Lá bài cao nhất thắng\n\n⌨️  LỆNH HÀNH ĐỘNG:\n• [4x] hoặc [play bet 4x]: Đặt cược PLAY ${{self.ante_amount*4}}\n• [2x] hoặc [play bet 2x]: Đặt cược PLAY ${{self.ante_amount*2}}\n• [1x] hoặc [play bet 1x]: Đặt cược PLAY ${{self.ante_amount*1}}\n• [check] hoặc [c]: Check (không đặt cược thêm)\n• [fold] hoặc [f]: Fold (từ bỏ tay bài)\n• [skip] hoặc [s]: Bỏ qua sang giai đoạn tiếp theo (khi không cần hành động)\n\n💡 LỜI KHUYÊN CHIẾN THUẬT:\n• Tay bài mạnh ban đầu (đôi, lá cao) thường xứng đáng đặt cược 4x\n• Cân nhắc điều kiện nhà cái - tay bài yếu có thể hòa nếu nhà cái không đủ điều kiện\n• Cược BLIND có thể rất có lợi với tay bài mạnh (Royal Flush = 500:1!)\n• Theo dõi số chip của bạn! Nếu số chip giảm xuống 0 hoặc ít hơn vào đầu vòng, bạn thua.\n\n⚠️  LƯU Ý QUAN TRỌNG:\n• Cược ANTE và BLIND là bắt buộc mỗi vòng\n• Cược PLAY là tùy chọn và chiến lược\n• Đảm bảo bạn nhập hành động đúng và chỉ một hành động mỗi lần.\n\n",
+    "state": "🎯 VÒNG {round}\n💰 Chip: {chips}\n🎴 Tay bài của bạn: {hand}\n📊 Cược hiện tại: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Giai đoạn: {phase}\n🎯 Hành động có thể: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Vòng {round} bắt đầu! Cược: ANTE ${ante}, BLIND ${blind}. Bạn còn {chips} chip.",
+    "your_hand": "🎴 Tay bài của bạn: {hand}",
+    "flop_revealed": "🃏 FLOP được mở: {cards}",
+    "river_revealed": "🃏 RIVER được mở: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Hành động không hợp lệ cho giai đoạn hiện tại. Hành động có thể: {available}",
+    "message": "❌ Hành động không hợp lệ! Hành động có thể: {available}"
+  },
+  "action": {
+    "folded": "🃏 Bạn đã bỏ cuộc."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Tay bài của nhà cái: {cards}",
+    "community_cards": "🃏 Các lá bài chung: {cards}",
+    "player_best": "🎴 Tay bài tốt nhất của người chơi: {name} ({cards})",
+    "dealer_best": "🎴 Tay bài tốt nhất của nhà cái: {name} ({cards})",
+    "ante_lost_folded": "❌ Cược ANTE MẤT! -${ante} (bỏ cuộc)",
+    "blind_lost_folded": "❌ Cược BLIND MẤT! -${blind} (bỏ cuộc)",
+    "ante_won": "✅ Cược ANTE THẮNG! +${amount}",
+    "ante_pushed": "🔄 Cược ANTE HOÀ! ${ante} được trả lại",
+    "ante_lost": "❌ Cược ANTE MẤT! -${ante}",
+    "blind_won": "✅ Cược BLIND THẮNG! +${amount}",
+    "blind_pushed": "🔄 Cược BLIND HOÀ! ${blind} được trả lại",
+    "blind_lost": "❌ Cược BLIND MẤT! -${blind}",
+    "play_won": "✅ Cược PLAY THẮNG! +${amount}",
+    "play_pushed": "🔄 Cược PLAY HOÀ! ${play} được trả lại",
+    "play_lost": "❌ Cược PLAY MẤT! -${play}",
+    "net_gain": "🎉 Vòng {round} kết thúc! Lợi nhuận ròng: +${net}",
+    "net_loss": "💸 Vòng {round} kết thúc! Thua lỗ: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 GAME OVER! {max_turns} vòng đã hoàn thành. Bạn có ${chips} chip - BẠN THẮNG!",
+    "game_over_lose": "🏁 GAME OVER! Bạn đã hết chip. Nhà cái thắng!",
+    "reward_win": "Người chơi đã hoàn thành {winner_rounds} vòng với ${chips} chip",
+    "reward_lose": "Người chơi đã hết chip ở vòng {round}",
+    "reward_win_max": "Người chơi đã hoàn thành {max_turns} vòng với ${chips} chip"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Four of a Kind",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Three of a Kind",
+    "two_pair": "Two Pair",
+    "one_pair": "One Pair",
+    "high_card": "High Card",
+    "unknown": "Tay bài không xác định"
+  }
+}

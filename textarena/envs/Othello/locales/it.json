@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} che gioca con il colore {colour} ({piece}) in una partita di Othello.\nIl tuo obiettivo è avere più pezzi del tuo colore sulla tavola alla fine della partita.\nNel tuo turno, posiziona un pezzo in modo che si trovi ai lati di uno o più pezzi del tuo avversario - in qualsiasi direzione (orizzontale, verticale o diagonale) - tra il tuo nuovo pezzo e un altro dei tuoi pezzi esistenti. Tutti i pezzi dell'avversario accerchiati verranno ribaltati nel tuo colore.\nFornisci la tua mossa nel formato '[riga, colonna]'."
+  },
+  "board": {
+    "game_board": "Tavola di gioco:\n{board}",
+    "valid_moves": "{observation}\nMosse valide: {moves}",
+    "no_valid_moves_reset": "{observation}\nNessuna mossa valida - potresti dover saltare.",
+    "no_valid_moves_step": "{observation}\nNessuna mossa valida – potresti dover saltare.",
+    "scores_reset": "{observation}\nPunteggi attuali - Nero: {black_count}, Bianco: {white_count}\n",
+    "scores_step": "{observation}\nPunteggi - Nero: {black_count}, Bianco: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "La mossa deve essere nel formato [riga, colonna].",
+    "illegal": "Mossa illegale. Mosse valide: {valid}"
+  },
+  "game_action": {
+    "skipped": "Il Giocatore {pid} ha dovuto saltare il suo turno",
+    "played": "Il Giocatore {pid} ({piece}) ha giocato [{r}, {c}] ribaltando {flipped} pezzo(i)"
+  },
+  "game_message": {
+    "must_skip": "Il Giocatore {pid} ({piece}) non ha mosse valide e deve saltare."
+  },
+  "outcome": {
+    "black_wins": "Il Nero vince {black_count}-{white_count}.",
+    "white_wins": "Il Bianco vince {white_count}-{black_count}.",
+    "draw": "Pareggio {black_count}-{white_count}."
+  }
+}

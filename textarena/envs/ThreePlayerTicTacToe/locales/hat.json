@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Ou se Jwè {player_id} nan Tic Tac Toe pou twa jwè.\nSenbòl ou a se '{symbol}'.\nOu pran tou pou mete senbòl ou sou yon bwa 5x5 pou fòme yon liy de kat.\nLiy yo ka orizontal, vètikal, oswa dyagonal.\nSoumèt mouvman ou a nan fòma '[4]' pou make selil 4."
+  },
+  "board": {
+    "current_board": "Bwod Aktyèl:\n\n{board}\n\nDeplasman Disponib: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format mouvman ki pa valab. Sèvi ak \"[cell]\" kote selil la 0-{max_cell}.",
+    "out_of_range": "Nimewo selil ki pa valab: {cell}. Li dwe ant 0 ak {max_cell} .",
+    "already_occupied": "Selil {cell} deja okipe.",
+    "made_invalid": "Jwè {player_id} te fè yon mouvman ki pa valab."
+  },
+  "game_action": {
+    "placed": "Jwè {player_id} mete senbòl li ({symbol}) nan chan ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Jwè {player_id} ({symbol}) genyen!",
+    "draw": "Jwèt la se yon match nul!"
+  }
+}

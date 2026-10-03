@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Oled Mängija {player_id} Läbirääkimismängus.\nSul on mõned ressursid ja sinu ülesanne on kaubelda nii, et su ressursside koguväärtus suureneks.\nRessursid ja nendega seotud väärtused, mis sul praegu on, on järgmised:\n\t+ {resource_value_list}\nIgal käigul saad rääkida oma vastasega ja teha kaubapakkumise.\nKasuta järgmisi eritöötlusi tegevusteks:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Pakutud Ressursid -> Nõutud Ressursid]\n  - '[Accept]': Et vastu võtta sissetuleva pakkumise.\n  - '[Deny]': Et tagasi lükata sissetuleva pakkumine (vaikimisi).\nMäng kestab {max_turns} käiku kokku."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Mängija üritas vastu võtta kaubatehingut ilma vajalike ressurssidega.",
+    "out_of_range": "Mängija {player_id}, Vigane tegevus. Veerg {col} on väljaspool piire.",
+    "already_full": "Mängija {player_id}, Vigane tegevus. Veerg {col} on täis.",
+    "proposing_with_no_resource": "Mängija {player_id} üritas teha kaubapakkumist ilma vajalike ressurssidega.",
+    "incorrect_offer_format": "Mängija {player_id} tegi kaubapakkumise vigases vormingus.",
+    "no_new_offer": "Mängija {player_id} ei teinud uut kaubapakkumist."
+  },
+  "offers": {
+    "reject": "Mängija {player_id} lükkas tagasi kaubapakkumise.",
+    "accept": "Mängija {acceptor_id} võttis vastu kaubapakkumise Mängijalt {proposer_id}.",
+    "proposal": "Mängija {player_id} tegi järgmise pakkumise Mängijale {opponent_id}: Pakutud esemed: {offered} -> Nõutud esemed: {requested}"
+  },
+  "outcome": {
+    "win": "Mängija {winner_id} võitis, kuna tema varude väärtus suurenes rohkem.",
+    "draw": "Kõikide mängijate varude väärtuse muutus oli sama. Viik."
+  }
+}

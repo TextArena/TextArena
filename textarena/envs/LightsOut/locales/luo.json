@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Amor kwa Lights Out! Inu {size}x{size} grid ya taa.\nLengo lako ni kuweka taa ZOTE ZIMU (zinazowakilishwa na '.').\nInapoandika taa, inabadilisha yenyewe NA majirani yake waliopakana (juu/chini/kushoto/kulia).\nAndika [row col] ili kuandika taa (0-indexed, kwa hivyo safu halali ni 0-{max_index}).\nUna hadi {max_turns} hatua za kutatua tatizo.\nMaelezo: 'O' = taa IMEWASHWA, '.' = taa IMEZIMWA"
+  },
+  "board": {
+    "current_state": "Hali ya sasa ya gridi (Zamu {moves_made}, {moves_left} zamu zimesalia, {completion}% imekamilika):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kitendo lazima kiwe katika mfumo [row col] ambapo safu na safu wima ni nambari kutoka 0 hadi {max_index}.",
+    "out_of_range": "Kuratibu lazima ziwe kati ya 0 na {max_index}. Umeingiza [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Amor ahinya! Iseloso wach e okang' mar {moves_used}!",
+    "loss": "Mchezo umemalizika! Umepiga zamu zote {max_turns} bila kutatua fumbo. Ukamilishaji wa mwisho: {completion}%\nHali ya mwisho:\n{grid}"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id} un spēlājat {colour} ({piece}) Othello spēlē.\nJūsu mērķis ir pēc spēles beigām uz galdiņa būt vairāk jūsu krāsas kārtiņu.\nSavā gājienā novietojiet kārtiņu tā, lai tā no visām pusēm (horizontāli, vertikāli vai diagonāli) ielencētu vienu vai vairākas pretinieka kārtiņas starp jūsu jauno kārtiņu un citu jūsu esošo kārtiņu. Visas ielenktās pretinieka kārtiņas tiks pārvērstas jūsu krāsā.\nNorādiet savu gājienu '[rinda, kolonna]' formātā."
+  },
+  "board": {
+    "game_board": "Spēles galdiņš:\n{board}",
+    "valid_moves": "{observation}\nDerīgie gājieni: {moves}",
+    "no_valid_moves_reset": "{observation}\nNav derīgu gājienu - varbūt jums būs jāizlaiž gājiens.",
+    "no_valid_moves_step": "{observation}\nNav derīgu gājienu – varbūt jums būs jāizlaiž gājiens.",
+    "scores_reset": "{observation}\nPašreizējie rezultāti - Melnie: {black_count}, Baltie: {white_count}\n",
+    "scores_step": "{observation}\nRezultāti - Melnie: {black_count}, Baltie: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Gājiens jānorāda '[rinda, kolonna]' formātā.",
+    "illegal": "Nederīgs gājiens. Derīgie gājieni: {valid}"
+  },
+  "game_action": {
+    "skipped": "Spēlētājam {pid} bija jāizlaiž gājiens",
+    "played": "Spēlētājs {pid} ({piece}) spēlēja [{r}, {c}] un pārvērsa {flipped} kārtiņu"
+  },
+  "game_message": {
+    "must_skip": "Spēlētājam {pid} ({piece}) nav derīgu gājienu un viņam jāizlaiž gājiens."
+  },
+  "outcome": {
+    "black_wins": "Melnie uzvar {black_count}-{white_count}.",
+    "white_wins": "Baltie uzvar {white_count}-{black_count}.",
+    "draw": "Neizšķirts {black_count}-{white_count}."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "O mmoki {player_id} mo Stratego.\nYarona ya gago ke go tsaya bora ya mmoki wa gago kgotsa go senya setshwantsho sa gagwe se se ka tsamayang.\nPuso ya gago e ile ya tsenngwa mo borong, e bile e na le bora, bomu le setshwantsho se sengwe sa marumo.\n\n### Melao ya kgwele\n1. **Melao ya go tsamaya:**\n   - Ka nako ya gago, o ka tsamaya setshwantsho se le sengwe ka tsela e le nngwe (kwa godimo, kwa tlase, kwa ntlha kgakala) e e neng e tsamaya setshwantsho sa gago.\n   - Senao: Setshwantsho se ka tsamaya go tswa A1 go B1 kgotsa A1 go A2, fa B1 le A2 ha se na setshwantsho sa mmoki.\n   - Fa setshwantsho se o se entseng se le bomu kgotsa bora, ha se ka se tsamaye.\n2. **Matswela:**\n   - Fa o tsamaya mo setshwantshong se se neng se tsamaya setshwantsho sa mmoki wa gago, matswela a tla tshwarwa:\n     - Setshwantsho se se nang le kgaulo e kwa godimo se tla tsena kgwetlho mme se tla senya setshwantsho sa mmoki wa gago.\n     - Fa marumo a na le kgaulo e e tshwanang, setshwantsho pedi se tla senngwa mo borong.\n     - **Matswela a a kgethegileng:**\n       - Bomu e senya setshwantsho se sengwe se se lwelang, ha e le baeti ba kgwele, ba ba tsaya bomu.\n       - Mokgweetsi a ka tsena marasha fa a lwela pele, mme a senngwa ke setshwantsho se sengwe.\n3. **Yarona ya kgwele:**\n   - Bua setshwantsho sa mmoki wa gago ka go tsamaya le ka go lwela.\n   - Itshware bora ya gago mme o tsene bora ya mmoki wa gago.\n   - Tsaya setshwantsho sa kwa ntle ka tsela e e siameng mme o lwela setshwantsho se se senyang.\n\n### Tsela ya go tsaya tsela\n1. Bua koordinete ya setshwantsho se o se entseng le ya kgwetlho.\n2. Tsaya tsela ya [A0 B0], fa A0 ke setshwantsho sa gago mme B0 ke kgwetlho.\n   - Senao: Fa o tsamaya setshwantsho go tswa safu 0, koluma 0 go safu 1, koluma 0, o tsaya [A0 B0].\n3. Tsaya tsela e e siameng ka melao ya go tsamaya.\n\n### Dipotso tse di kgethegileng:\n- Boro e tla bontsha setshwantsho sa gago le ditsela tsa sone, e.g. MN, MS.\n- Boro e tla bontsha le setshwantsho sa mmoki wa gago se se tsamayang, ha e lebele marumo, e.g. ?.\n- Gridi e e neng e na le ~ e le mmiri mme ha e ka tsamaywa.\n- Fa o batla go simolola kgwele, tsamaya setshwantsho sa gago se se tsamayang mo maemong a pele go bua setshwantsho sa mmoki wa gago. Mmoki 0 le mmoki 1 o na le maemo a pele mo safu D le G respectively.\n\nEne ke boro ya kgwedi:"
+  },
+  "board": {
+    "current_board": "Boro ya kgwedi:\n\n{board}\nDitsheleke tse di kwagalwang: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Fomiti ya kgato e e sa siamang. Mmaba {player_id} o sa tlhagise kgato ka fomiti ya [A0 B0].",
+    "invalid_coordinates": "Mofuta wa tiro o sa amogelesegang. Motshameki {player_id} ga a tsenya dikopano tse di nepagetseng.",
+    "not_own_piece": "Mokgweleo o sa amogelesegang. Motshameki {player_id} o tshwanetse go tsamaisa nngwe ya dikarolwana tsa gagwe ka boene.",
+    "scout_through_pieces": "Mofuta wa tiro o sa amogelesegang. Motshameki {player_id} ga a kgone go tsamaisa scout ka dikarolwana tse dingwe.",
+    "scout_diagonal": "Mofuta wa tiro o sa amogelesegang. Motshameki {player_id} ga a kgone go tsamaisa scout ka tsela e e sekameng.",
+    "non_scout_multi_square": "Ditshwantsho tse di sa siamang tsa motshameko. Dithoto, kwantle ga baitseanape fela, di ka kgona go tsamaya sekwere se le sengwe fela mo nakong e le nngwe.",
+    "move_into_lake": "Mofuta wa motshameko o sa amogelesegang. Motshameki {player_id} ga a kgone go tsena mo letsheng.",
+    "move_onto_own_piece": "Mokgwa o sa siamang wa go dira tiro. Motshameki {player_id} ga a kgone go ya kwa setlhareng se e leng sa gagwe.",
+    "move_bomb_or_flag": "Mofuta wa tiro o sa amogelesegang. Motshameki {player_id} ga a kgone go tsamaisa bomo kgotsa folaga."
+  },
+  "game_action": {
+    "you_moved": "O ile wa tsere setshwantsho sa gago go tswa {source} go ya {dest}.",
+    "opponent_moved": "Mmoki {player_id} o ile a tsere setshwantsho sa gagwe go tswa {source} go ya {dest}.",
+    "you_equal_ranks": "O ile wa tsere setshwantsho sa gago go tswa {source} go ya {dest}. Setshwantsho sa go lwela se ne se {attacking_rank} mme setshwantsho sa kgwetlho se ne se {target_rank}. Jaaka marumo a na le kgaulo e e tshwanang, setshwantsho pedi se sena.",
+    "opponent_equal_ranks": "Mmoki {player_id} o ile a tsere setshwantsho sa gagwe go tswa {source} go ya {dest}. Setshwantsho sa go lwela se ne se {attacking_rank} mme setshwantsho sa kgwetlho se ne se {target_rank}. Jaaka marumo a na le kgaulo e e tshwanang, setshwantsho pedi se sena.",
+    "you_miner_defused": "O ile wa tsere setshwantsho sa gago go tswa {source} go ya {dest}. Setshwantsho sa go lwela se ne se {attacking_rank} mme setshwantsho sa kgwetlho se ne se {target_rank}. Jaaka baeti ba kgwele ba tsaya bomu, o ile wa tsena kgwetlho.",
+    "opponent_miner_defused": "Mmoki {player_id} o ile a tsere setshwantsho sa gagwe go tswa {source} go ya {dest}. Setshwantsho sa go lwela se ne se {attacking_rank} mme setshwantsho sa kgwetlho se ne se {target_rank}. Jaaka baeti ba kgwele ba tsaya bomu, o ile wa tsena kgwetlho.",
+    "you_bomb_lost": "O ile wa tsere setshwantsho sa gago go tswa {source} go ya {dest}. Setshwantsho sa go lwela se ne se {attacking_rank} mme setshwantsho sa kgwetlho se ne se {target_rank}. Jaaka mmoki wa go lwela ha a lwela, o ile wa tsena kgwetlho.",
+    "opponent_bomb_won": "Mmoki {player_id} o ile a tsere setshwantsho sa gagwe go tswa {source} go ya {dest}. Setshwantsho sa go lwela se ne se {attacking_rank} mme setshwantsho sa kgwetlho se ne se {target_rank}. Jaaka mmoki wa go lwela ha a lwela, o ile wa tsena kgwetlho.",
+    "you_spy_won": "O ile wa tsere setshwantsho sa gago go tswa {source} go ya {dest}. Setshwantsho sa go lwela se ne se {attacking_rank} mme setshwantsho sa kgwetlho se ne se {target_rank}. Jaaka mmoki wa go lwela ke mokgweetsi mme kgwetlho ke marasha, o ile wa tsena kgwetlho.",
+    "opponent_spy_lost": "Mmoki {player_id} o ile a tsere setshwantsho sa gagwe go tswa {source} go ya {dest}. Setshwantsho sa go lwela se ne se {attacking_rank} mme setshwantsho sa kgwetlho se ne se {target_rank}. Jaaka mmoki wa go lwela ke mokgweetsi mme kgwetlho ke marasha, o ile wa tsena kgwetlho.",
+    "you_higher_won": "O ile wa tsere setshwantsho sa gago go tswa {source} go ya {dest}. Setshwantsho sa go lwela se ne se {attacking_rank} mme setshwantsho sa kgwetlho se ne se {target_rank}. Jaaka mmoki wa go lwela ke wa kgaulo e kwa godimo ya kgwetlho, o ile wa tsena kgwetlho.",
+    "opponent_higher_lost": "Mmoki {player_id} o ile a tsere setshwantsho sa gagwe go tswa {source} go ya {dest}. Setshwantsho sa go lwela se ne se {attacking_rank} mme setshwantsho sa kgwetlho se ne se {target_rank}. Jaaka mmoki wa go lwela ke wa kgaulo e kwa godimo ya kgwetlho, o ile wa tsena kgwetlho.",
+    "you_lower_lost": "O ile wa tsere setshwantsho sa gago go tswa {source} go ya {dest}. Setshwantsho sa go lwela se ne se {attacking_rank} mme setshwantsho sa kgwetlho se ne se {target_rank}. Jaaka mmoki wa go lwela ke wa kgaulo e kwa tlase ya kgwetlho, o ile wa tsena kgwetlho.",
+    "opponent_lower_won": "Mmoki {player_id} o ile a tsere setshwantsho sa gagwe go tswa {source} go ya {dest}. Setshwantsho sa go lwela se ne se {attacking_rank} mme setshwantsho sa kgwetlho se ne se {target_rank}. Jaaka mmoki wa go lwela ke wa kgaulo e kwa tlase ya kgwetlho, o ile wa tsena kgwetlho."
+  },
+  "outcome": {
+    "flag_captured": "Motshameki {player_id} o tsere folaga ya mmaba!",
+    "no_movable_pieces": "Mmoki {winner_id} o ile a tsena! Mmoki {loser_id} ha a na le setshwantsho se se ka tsamayang."
+  }
+}

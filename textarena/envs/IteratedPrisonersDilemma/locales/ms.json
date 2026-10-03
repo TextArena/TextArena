@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id} dalam Dilema Banduan Berulang yang berlangsung selama {num_rounds} pusingan.\n\nStruktur Permainan:\n- Sebelum setiap keputusan, anda mempunyai {total_conversation_rounds} giliran untuk berkomunikasi secara bebas.\n- Selepas itu, kedua-dua pemain memilih secara serentak sama ada untuk bekerjasama atau berpaling tadah.\n\nMatriks Ganjaran, tetap bagi setiap pusingan:\n- Kedua-duanya bekerjasama ➜ setiap pemain mendapat {cooperate_reward}\n- Kedua-duanya berpaling tadah ➜ setiap pemain mendapat {mutual_defect_reward}\n- Seorang berpaling tadah, seorang bekerjasama ➜ pemain yang berpaling tadah mendapat {defect_reward}, pemain yang bekerjasama mendapat {sucker_reward}\n\nCara Bermain:\n- Semasa perbualan: taip apa-apa teks yang anda mahu.\n- Semasa fasa keputusan: sertakan '[Cooperate]' atau '[Defect]', tanpa mengira huruf besar atau kecil. Anda boleh menambah teks tambahan sebelum atau selepas token tersebut."
+  },
+  "phases": {
+    "conversation_finished": "Perbualan tamat untuk pusingan {round}. Sila balas dengan '[Cooperate]' atau '[Defect]' di dalam \\boxed{{}}.",
+    "starting_round": "--- Memulakan Pusingan {round} ---",
+    "round_summary": "Keputusan pusingan {round}:\n{outcome}\nPemain 0 memperoleh {r0} jumlah {score_0}, Pemain 1 memperoleh {r1} jumlah {score_1}."
+  },
+  "outcome": {
+    "winner": "Pemain {winner} menang {win_score} - {lose_score}.",
+    "draw": "Seri! Kedua-dua pemain mendapat {s0}.",
+    "round_both_cooperate": "Kedua-dua pemain bekerjasama.",
+    "round_both_defect": "Kedua-dua pemain berpaling tadah.",
+    "round_p0_cooperates_p1_defects": "Pemain 0 bekerjasama, Pemain 1 berpaling tadah.",
+    "round_p0_defects_p1_cooperates": "Pemain 0 berpaling tadah, Pemain 1 bekerjasama."
+  }
+}

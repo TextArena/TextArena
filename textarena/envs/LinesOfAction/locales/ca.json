@@ -1,0 +1,36 @@
+{
+  "_comment": "Fitxer de localització de LinesOfAction. NO tradueixis les claus (costat esquerre). Només tradueix els valors (costat dret). Mai tradueix les coordenades del tauler (a-h, 1-8), les lletres de les peces (O, X), el token de format de moviment o la quadrícula ASCII {board}.",
+  "_slots": {
+    "{player_id}": "El número del jugador, 0 o 1",
+    "{side}": "La lletra de la peça del jugador, O o X",
+    "{other}": "La lletra de la peça de l'oponent, O o X",
+    "{board}": "La representació ASCII del tauler; mantén-la tal com està",
+    "{coord}": "Una coordenada del tauler com b1 o a3",
+    "{from}": "La coordenada d'origen d'un moviment, com b1",
+    "{to}": "La coordenada de destinació d'un moviment, com b3"
+  },
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} en un joc de LinesOfAction.\nLes teves peces són '{side}', les peces de l'oponent són '{other}'.\nFormat de moviment: `[b1b3]` (des de la coordenada fins a la coordenada). Un moviment vàlid viatja horitzontalment, verticalment o diagonalment un nombre de quadrats igual al total de peces (de qualsevol color) en aquesta línia. Pots saltar sobre les teves pròpies peces, però no sobre les peces de l'oponent; aterrar sobre una peça de l'oponent la captura. Guanya quan totes les teves peces estiguin connectades en 8 direccions."
+  },
+  "board": {
+    "current_board": "Tauler:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "El format ha de ser e2e4 (des de, fins a coordenades).",
+    "no_piece": "No hi ha cap peça {side} a {coord}.",
+    "identical": "L'origen i la destinació són idèntics.",
+    "not_straight_or_diagonal": "El moviment ha de ser recte o diagonal.",
+    "wrong_distance": "Has de moure una distància igual al nombre de peces en línia.",
+    "enemy_blocks": "Una peça enemiga bloqueja el camí.",
+    "destination_own": "La destinació està ocupada per una peça pròpia."
+  },
+  "game_action": {
+    "moved": "El Jugador {player_id} ha mogut {from} -> {to}",
+    "captured_suffix": "El Jugador {player_id} ha mogut {from} -> {to} capturant una peça enemiga."
+  },
+  "outcome": {
+    "win": "Totes les peces estan connectades.",
+    "draw_no_capture": "60 moviments sense cap captura.",
+    "draw_repetition": "La posició s'ha repetit tres vegades."
+  }
+}

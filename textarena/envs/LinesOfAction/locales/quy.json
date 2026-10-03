@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Q'umir p'ukllaqmi kanki {player_id} LinesOfAction p'ukllapi.\nQ'umir p'ukllaykunaykiqa '{side}', huk p'ukllaqpa p'ukllaykunataq '{other}'.\nLl'ukuy formatu: `[b1b3]` (qallariy coordinata puriri coordinata). Ll'ukuyqa tiksi, saywa, icha ch'aska k'iti kanayuq k'itikunap maywiy kuti. Q'umir p'ukllaykunallatam ll'uk'iy atinki, ichataq huk p'ukllaqpa p'ukllaykunataq manam atinki; huk p'ukllaqpa p'ukllaykunata ch'askaykumuwanki.  Lliw q'umir p'ukllaykunayki 8-vecino q'aytu kaspa atawanki."
+  },
+  "board": {
+    "current_board": "Consejo: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kay formataqa e2e4 (manta,manam).",
+    "no_piece": "Mana {side} khuyay {coord} pi.",
+    "identical": "Qallariykiwan chayamusqa llalli.",
+    "not_straight_or_diagonal": "Chayqa, cheqanpi chayri diagonalman jina kanan tiyan.",
+    "wrong_distance": "Chay tʼaqa, maypichus kʼachata purinan tiyan.",
+    "enemy_blocks": "Mana allin runaqa ñanpi chinkaykun.",
+    "destination_own": "Chayamusqapi nuqap k'itillaymi."
+  },
+  "game_action": {
+    "moved": "Pukara {player_id} musuq {from} -> {to}",
+    "captured_suffix": "Pukara {player_id} musuq {from} -> {to} maskaykunapaq wak'ayta."
+  },
+  "outcome": {
+    "win": "Tukuy imakunaqa hukllachasqa.",
+    "draw_no_capture": "60 kutipi mana japʼiyta atinkuchu.",
+    "draw_repetition": "Kimsa kuti thakaylla tiyananpa."
+  }
+}

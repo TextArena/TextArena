@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em lokalizācijas fails. NEtulkojiet atslēgas (kreisā puse). Tulkojiet tikai vērtības (labā puse).",
+  "_slots": {
+    "{start_chips}": "Sākuma žetonu skaits, piemēram, 1000",
+    "{ante}": "Obligātā likme, piemēram, 25",
+    "{ante4}": "Četras reizes obligātā likme, piemēram, 100",
+    "{ante2}": "Divas reizes obligātā likme, piemēram, 50",
+    "{round}": "Pašreizējā kārta",
+    "{chips}": "Spēlētāja pašreizējais žetonu skaits",
+    "{hand}": "Kartis, piemēram, 'A♠, K♥', vai lokalizēts teksts, ja nav kartis",
+    "{phase}": "Pašreizējā fāze (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Pieejamās darbības, piemēram, '[play_bet_4x], [check]'",
+    "{available}": "Pieejamās darbības šajā fāzē",
+    "{blind}": "Aklā likme",
+    "{play}": "Spēles likme",
+    "{cards}": "Kartis, piemēram, 'Q♣, 7♦, 2♠'",
+    "{name}": "Poker rokas nosaukums, ievietots bez izmaiņām",
+    "{amount}": "Žetonu skaits",
+    "{net}": "Neto žetonu izmaiņas šajā kārtā (var būt negatīvas)",
+    "{max_turns}": "Maksimālais kāršu skaits",
+    "{winner_rounds}": "Kāršu skaits, kurus spēlētājs ir pabeidzis"
+  },
+  "player_prompt": {
+    "no_cards": "Vēl nav kartis",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Viens spēlētājs pret dīleri\n\n📖 SPĒLES PĀRSKATS:\n• Jūs sākat ar {start_chips} žetoniem\n• Viena kāršu kava ar 52 kartīm (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Jūs spēlējat pret dīleri (māju)\n• Katrā kārtā tiek izsekota Ultimate Texas Hold'em struktūra: jūs veicat obligāto likmi un aklā likmi, saņemat 2 kartis, izlemjat par izvēles spēles likmi visās fāzēs, tad atklājat kopienas kartis un salīdzināt savu labāko 5-karšu roku ar dīlera roku. Jūsu mērķis ir maksimāli palielināt savus laimestus (kad jums ir labāka roka), samazinot savus zaudējumus (kad jums ir sliktāka roka).\n• Spēle beidzas, kad jūs sasniedzat 0 žetonu vai zemāk kārtas sākumā (ZAUDĒJUMS) vai pabeidzat 1000 kārtas ar žetoniem (UZVARA)\n\n💰 LIKMEŠANAS STRUKTŪRA:\n• OBLIGĀTĀ LIKME: Obligāta ${ante} likme katrā kārtā\n• AKLĀ LIKME: Obligāta ${ante} likme katrā kārtā\n• SPĒLES LIKME: Izvēles likme spēles laikā. Visā kārtā jūs varat izvēlēties TIKAI VIENU no šīm: (${ante4} ja izdarīta pirms FLOP, ${ante2} ja izdarīta FLOP laikā, vai ${ante} ja izdarīta RIVER laikā. Var arī atcelt likmi RIVER laikā, atsakoties no rokas, un neveicot likmi.)\n\n🎴 KĀRŠU DALĪŠANA:\n• Jūs saņemat 2 kartis (jūsu kartis)\n• Dīlers saņem 2 kartis (paslēptas no jums)\n• 5 kopienas kartis tiek izdalītas sākumā\n• Kopienas kartis tiek atklātas progresīvi visās fāzēs\n\n🏆 DĪLERA KVALIFIKĀCIJA:\n• Dīleram jābūt vismaz PAIR (2 kartis ar vienu un to pašu vērtību), izmantojot 2 kartis savā rokā un 5 kopienas kartis.\n• Dīlera kvalifikācija ietekmē likmju iznākumus, kā tiks paskaidrots vēlāk.\n\n🎮 SPĒLES FĀZES UN DARBIJUMI:\n📋 PRE-FLOP:\n  • Darbības: [4x] (${ante4}) vai [check]\n  • [4x]: Veic ${ante4} spēles likmi, atklāj pirmās 3 kopienas kartis\n  • [check]: Nav papildus likmes, atklāj pirmās 3 kopienas kartis\n\n📋 FLOP:\n  • Ja 4x likme izdarīta: Tikai [skip] pieejama (automātiski atklāj pēdējās 2 kopienas kartis)\n  • Ja nav 4x likmes: [2x] (${ante2}) vai [check]\n  • [2x]: Veic ${ante2} spēles likmi, atklāj pēdējās 2 kopienas kartis\n  • [check]: Nav papildus likmes, atklāj pēdējās 2 kopienas kartis\n\n📋 RIVER:\n  • Ja 4x vai 2x likme izdarīta: Tikai [skip] pieejama (automātiski turpina uz showdown)\n  • Ja nav iepriekšējas spēles likmes: [1x] (${ante}) vai [fold]\n  • [1x]: Veic ${ante} spēles likmi, turpina uz showdown\n  • [fold]: Atsakās no rokas, zaudē obligāto likmi un aklā likmi\n\n📋 SHOWDOWN:\n  • Visas kartis tiek atklātas un novērtētas\n  • Labākā 5-karšu roka no 7 kartīm (2 kartis + 5 kopienas kartis)\n  • Likmes tiek izmaksātas atbilstoši izmaksu noteikumiem\n\n💎 LIKMEŠANAS IZMAKSAS:\n📊 OBLIGĀTĀ LIKME:\n  • Dīlers ne kvalificējas: PUSH (likme tiek atgriezta)\n  • Dīlers kvalificējas un jūs uzvarat: 1:1 izmaksas (likme + laimesti)\n  • Dīlers kvalificējas un jūs zaudējat: Likme tiek zaudēta\n  • Neizšķirts: PUSH (likme tiek atgriezta)\n\n📊 AKLĀ LIKME:\n  • Nav ietekmēta no dīlera kvalifikācijas\n  • Jūs uzvarat: Likme tiek atgriezta un papildus izmaksas atbilstoši jūsu rokas stiprumam\n  • Jūs zaudējat: Likme tiek zaudēta\n  • Neizšķirts: PUSH (likme tiek atgriezta)\n\n📊 AKLĀ LIKMEŠANAS TABULA:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Nav papildus izmaksu\n\n📊 SPĒLES LIKME:\n  • Nav ietekmēta no dīlera kvalifikācijas\n  • Tieša salīdzināšana: Jūsu labākā roka pret dīlera labāko roku\n  • Jūs uzvarat: 1:1 izmaksas (likme + laimesti)\n  • Jūs zaudējat: Likme tiek zaudēta\n  • Neizšķirts: PUSH (likme tiek atgriezta)\n\n🎯 POKER ROKAS RANGI (Labākais uz sliktāko):\n  1. Royal Flush: A-K-Q-J-10 vienā suitā\n  2. Straight Flush: 5 secīgas kartis vienā suitā\n  3. Four of a Kind: 4 kartis ar vienu un to pašu vērtību\n  4. Full House: 3 kartis ar vienu un to pašu vērtību + 2 kartis ar citu vērtību\n  5. Flush: 5 kartis vienā suitā\n  6. Straight: 5 secīgas kartis\n  7. Three of a Kind: 3 kartis ar vienu un to pašu vērtību\n  8. Two Pair: 2 pāri ar dažādām vērtībām\n  9. One Pair: 2 kartis ar vienu un to pašu vērtību\n  10. High Card: Augstākā karte uzvar\n\n⌨️  DARBIJUMU KOMANDAS:\n• [4x] vai [play bet 4x]: Veic ${{self.ante_amount*4}} spēles likmi\n• [2x] vai [play bet 2x]: Veic ${{self.ante_amount*2}} spēles likmi\n• [1x] vai [play bet 1x]: Veic ${{self.ante_amount*1}} spēles likmi\n• [check] vai [c]: Pārbauda (nav papildus likmes)\n• [fold] vai [f]: Atsakās no rokas\n• [skip] vai [s]: Izlaiž (kad nav darbības nepieciešamas)\n\n💡 STRATĒĢIJAS PADOMI:\n• Spēcīgas sākuma rokas (pāri, augstas kartis) bieži attaisno 4x likmes\n• Apsveriet dīlera kvalifikāciju - vājas rokas varētu būt neizšķirtas, ja dīlers ne kvalificējas\n• AKLĀ likme var būt ļoti ienesīga ar spēcīgām rokām (Royal Flush = 500:1!)\n• Uzraudzījiet savu žetonu krājumu! Ja tas nokrīt līdz 0 vai zemāk kārtas sākumā, jūs zaudējat.\n\n⚠️  SVARĪGI PIEZĪMI:\n• OBLIGĀTĀ un AKLĀ likmes ir obligātas katrā kārtā\n• SPĒLES likmes ir izvēles un stratēģiskas\n• Pārliecinieties, ka jūs ievadāt pareizu darbību, un tikai vienu darbību vienā laikā.\n\n",
+    "state": "🎯 KĀRTA {round}\n💰 Žetoni: {chips}\n🎴 Jūsu roka: {hand}\n📊 Pašreizējās likmes: OBLIGĀTĀ ${ante}, AKLĀ ${blind}, SPĒLES ${play}\n📋 Fāze: {phase}\n🎯 Pieejamās darbības: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Kārta {round} sākta! Likmes: OBLIGĀTĀ ${ante}, AKLĀ ${blind}. Jums ir {chips} žetoni atlikuši.",
+    "your_hand": "🎴 Jūsu roka: {hand}",
+    "flop_revealed": "🃏 FLOP atklāts: {cards}",
+    "river_revealed": "🃏 RIVER atklāts: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Nederīga darbība šajā fāzē. Pieejamās darbības: {available}",
+    "message": "❌ Nederīga darbība! Pieejamās darbības: {available}"
+  },
+  "action": {
+    "folded": "🃏 Jūs atsakāties no rokas."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Dīlera roka: {cards}",
+    "community_cards": "🃏 Kopienas kartis: {cards}",
+    "player_best": "🎴 Spēlētāja labākā roka: {name} ({cards})",
+    "dealer_best": "🎴 Dīlera labākā roka: {name} ({cards})",
+    "ante_lost_folded": "❌ OBLIGĀTĀ likme ZAUDĒTA! -${ante} (atsakāties no rokas)",
+    "blind_lost_folded": "❌ AKLĀ likme ZAUDĒTA! -${blind} (atsakāties no rokas)",
+    "ante_won": "✅ OBLIGĀTĀ likme UZVARĒTA! +${amount}",
+    "ante_pushed": "🔄 OBLIGĀTĀ likme ATGRIEZTA! ${ante} atgriezts",
+    "ante_lost": "❌ OBLIGĀTĀ likme ZAUDĒTA! -${ante}",
+    "blind_won": "✅ AKLĀ likme UZVARĒTA! +${amount}",
+    "blind_pushed": "🔄 AKLĀ likme ATGRIEZTA! ${blind} atgriezts",
+    "blind_lost": "❌ AKLĀ likme ZAUDĒTA! -${blind}",
+    "play_won": "✅ SPĒLES likme UZVARĒTA! +${amount}",
+    "play_pushed": "🔄 SPĒLES likme ATGRIEZTA! ${play} atgriezts",
+    "play_lost": "❌ SPĒLES likme ZAUDĒTA! -${play}",
+    "net_gain": "🎉 Kārta {round} pabeigta! Neto ienākumi: +${net}",
+    "net_loss": "💸 Kārta {round} pabeigta! Neto zaudējumi: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 SPĒLE PABEIGTA! {max_turns} kārtas pabeigtas. Jums ir ${chips} žetoni - JŪS UZVARĒJAT!",
+    "game_over_lose": "🏁 SPĒLE PABEIGTA! Jūs esat bez žetoniem. Dīlers uzvarēja!",
+    "reward_win": "Spēlētājs pabeidza {winner_rounds} kārtas ar ${chips} žetoniem",
+    "reward_lose": "Spēlētājs zaudēja visus žetonus {round} kārtā",
+    "reward_win_max": "Spēlētājs pabeidza {max_turns} kārtas ar ${chips} žetoniem"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Četri vienādi",
+    "full_house": "Trīs vienādi un divi vienādi",
+    "flush": "Flush",
+    "straight": "Secīgas kartis",
+    "three_of_a_kind": "Trīs vienādi",
+    "two_pair": "Divi pāri",
+    "one_pair": "Vienādi",
+    "high_card": "Augstākā karte",
+    "unknown": "Nezināma roka"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} {max_rounds} raundų Kuhno pokerio žaidime.\nŽaidimo taisyklės:\n- Kuhno pokeris naudoja 3 kortų kaladę su J, Q, K (J žemiausia, K aukščiausia)\n- Kiekvienas žaidėjas statija {ante} žetoną ir gauna po 1 kortą kiekviename raunde (pastaba: kortos dalinamos be pakeitimo, todėl negalite turėti tos pačios kortos kaip jūsų oponentas).\n- Žaidimas tęsiasi {max_rounds} raundų\n- Žaidėjas, turintis daugiausiai žetonų po visų raundų, laimi\nVeiksmų taisyklės:\n- '[check]': Praleisti be statymo (tik jei stalo neturi statymo)\n- '[bet]': Pridėti 1 žetoną prie banko (tik jei stalo neturi statymo)\n- '[call]': Atitikti oponento statymą, pridėdamas 1 žetoną prie banko\n- '[fold]': Atsisakyti rankos ir leisti oponentui laimėti banką"
+  },
+  "init_round": {
+    "round_start": "### Pradedamas {current_round} raundas iš {max_rounds} raundų. Jūsų korta yra: '{player_card}'",
+    "available_actions": "Jūsų galimi veiksmai yra: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Veiksmas turi būti [Check], [Bet], [Call] arba [Fold].",
+    "not_legal": "Veiksmas turi būti {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Žaidėjas {player_id} pateikė veiksmą: '[{move}]'.",
+    "valid_actions": "Jūsų galimi veiksmai yra: {legal_actions}.",
+    "round_summary": "{reason} Dabartinės rezultatai: Žaidėjas 0: '{player_0_chips}'; Žaidėjas 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Šoudaunas: Žaidėjo {winner} {winner_card} nugalėjo Žaidėjo {loser} {loser_card}. Žaidėjas {winner} laimi banką, kurio vertė yra {pot_value} žetonų."
+  },
+  "outcome": {
+    "draw": "Po {max_rounds} raundų abu žaidėjai turėjo tiek pat žetonų.",
+    "round_win": "Žaidėjas {player_id} pasidavė.",
+    "winner_player0": "Žaidėjas 0 laimėjo, nes turėjo daugiau žetonų po visų {max_rounds} raundų.",
+    "winner_player1": "Žaidėjas 1 laimėjo, nes turėjo daugiau žetonų po visų {max_rounds} raundų."
+  }
+}

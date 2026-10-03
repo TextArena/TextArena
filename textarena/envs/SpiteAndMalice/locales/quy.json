@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Qam kawki {player_id} kay pukllapi Spite and Malice nisqapi. Qam munasqaykiqa ñawpaqta q'umir q'ipita q'ipisqaykichu.\n\n### Pukllapaq Ñawiri:\n- Q'umir q'ipita q'ipisqaykichu pukllapi kartakunata chawpi q'ipikunaman pukllaspa.\n- Qam pukllayta atinki kartakunata kimsa ñawpakunamanta:\n  1. Qam **maki** (qam tukuy turnoykikunapi 5 kartakunaykichu makiykichu).\n  2. Qam **q'umir q'ipita ñawpa kartan**.\n  3. Qam **q'ipisqa q'ipikunata ñawpa kartan**.\n\n### Pukllapaq Kamachikuna:\n- Qam pukllayta atinki kartata chawpi q'ipiman pukllaspa ñawpa kartata **huk ranka aswan** (chawpi q'ipikuna Acewan qallarin, Queenkama; Kings wild kanku - ñawpa kartata pukllaspa mana ranka kutichu. Kayqa King 4 q'ipisqata q'ipisqa, chay King 5 rankata q'ipisqa, q'ipita 6 kartata pukllanapaq).\n- Qam mana pukllayta atinkichu kartakunata, qam **kartata q'ipisqaykichu** q'ipisqa q'ipikunaman tukuy turnoykichu.\n- Chawpi q'ipikuna Queenkama chayanku, q'ipikuna q'ipisqakunachu.\n- Ranka ñawpaq: A=1, 2=2, ..., 9=9, J=10, Q=11, K wild kanku.\n\n### Ruwaykuna:\n1. **Kartakunata Q'ipisqay**: Tukuy turnoykikunapi, kartakunata q'ipisqay makiykichu 5 kartakunaykichu. **[draw]** nisqata qallarinqa.\n2. **Kartata Pukllay**: Kartata pukllay, kartata chawpi q'ipiman nisqata: **[play A♠ 0]** (kartata 'A♠' chawpi q'ipiman '0' nisqata).\n3. **Kartata Q'ipisqay**: Qam mana pukllayta atinkichu kartakunata, kartata q'ipisqay makiykichu q'ipisqa q'ipikunaman tukuy turnoykichu. **[discard A♠ 1]** nisqata (kartata 'A♠' q'ipisqa q'ipiman '1' nisqata). Qam mana q'ipisqayta atinkichu kartata q'umir q'ipitamanta. Qam pukllayta atinki kartakunata makiykichumanta.\n\n"
+  },
+  "board": {
+    "current_board": "Kamayta P'unchay:\n\n{board}\nApu musyaqkuna: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pilota centralkuna , _ _ _ ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- P'unchay {player_id} View ---\n",
+    "payoff": "{observation}Q'umir Q'ipi (Ñawpa Kartan): {top_card}, Q'umir Q'ipi Suni: {payoff_length}\n",
+    "hand": "{observation}Maki: {hand} ",
+    "discard": "{observation}Discard Pilekuna: {discard}\n",
+    "empty": "Mana imapis kanchu."
+  },
+  "game_message": {
+    "no_cards_left": "Manan kartakuna kanchu p'achaymanta. Yaqaykanki kartakunata kay pukllaykunamanta pukllayta:\n  1. Qam **maki**.\n  2. **Qam q'umir q'oyti punku**.\n  3. **Qam q'umir q'oyti punkukunamanta huk punku**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Mana allin movimiento. Player {player_id} manan kutichirqanchu, mana allintaqa churarqataj (paréntesis cuadrados).",
+    "invalid_play": "Pukllay mana allinchu. Pukllaq {player_id} {card} kartata chawpi q'oyti {index}man pukllayta munarqa.",
+    "discard_from_payoff": "Mana allin q'ipisqa. {player_id} pukllaq, paypa atiyninmanta huk kartata churanampaq kallpachakurqan.",
+    "discard_not_in_hand": "Mana allin tarpuy. {player_id} pukllaq mana makipi kaq cartata t'ikrayta munarqa.",
+    "wrong_move_type": "Mana allin movimiento. {player_id} pukllaq mana allintachu kutichirqan, chayraykutaqmi huknin ch'usaq movimientowan atipanakurqa."
+  },
+  "game_action": {
+    "you_drew": "Qamqa cartata tarirqanki.",
+    "opponent_drew": "Chaypi {player_id} pukllaqtaq cartata q'ipirqan.",
+    "you_played": "Qam {card} kartata chawpi q'oyti {index}man pukllanki.",
+    "opponent_played": "Pukllaq {player_id} kartata {card} chawpimpi {index} p'ukllarqan.",
+    "you_discarded": "Qam {card} kartata q'umir q'oyti {index}man bot'unki, chaywanmi qam pukllaykita tukunki. Manan huk aksiyonkikunata qhawasunkichu chay pukllaykita. Pukllaq {next_player_id} q'ati qam qhipaq.",
+    "opponent_discarded": "P'unchay {player_id} q'awaqkuna {card} ch'iqanman discardpas {index}, chaymi p'unchayta q'awachkan. Mana p'unchay {player_id} q'awakunaqa kay p'unchaypiqa k'amiykuna. P'unchay {next_player_id}, q'umiraykikuna musyanikuna [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Puklla {current_player} q'umir q'ipita q'ipisqaykichu! Puklla {current_player} atirqaykichu!",
+    "deadlock_player_0": "Mana allin rurayqa tukurqan! 0 pukllaq atipan {player_0_payoff} cartakunawan, 1 pukllaqmi atipaspa {player_1_payoff} kartakunata.",
+    "deadlock_player_1": "Tasq'ay tukuku! Pukllaq 1 atipan {player_1_payoff} kartakunata saqispa Pukllaq 0 {player_0_payoff} kartakunawan.",
+    "deadlock_tie": "T'inkisqa p'unchay, p'unchaykuna! Iwrakuna {player_0_payoff} tarjeta k'askaspa. P'unchay {current_player}, allin p'unchaykuna."
+  }
+}

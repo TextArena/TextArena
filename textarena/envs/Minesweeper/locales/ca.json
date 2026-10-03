@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Estàs jugant al joc de Minesweeper.\nL'objectiu del joc és revelar totes les cel·les que no contenen mines.\nPer fer un moviment, simplement especifica les coordenades de fila i columna que vols revelar utilitzant el format:\n- `[row col]`: Revela la cel·la a la fila i columna especificades.\nPer exemple:\n- `[3 2]` per revelar la cel·la a la Fila 3, Columna 2.\n- `[5 6]` per revelar la cel·la a la Fila 5, Columna 6.\nEn el teu primer moviment, revelaràs una àrea al voltant de la cel·la que triïs per assegurar un inici segur.\nEl disseny actual del tauler es mostra a continuació. Les cel·les que no estan revelades estan representades per un punt ('.'), els números revelats mostren el compte de mines adjacents.\nVigila de no triar cel·les ja revelades.\nAquí tens el disseny actual del tauler:\n"
+  },
+  "board": {
+    "game_board": "Tauler del joc:\n\n{board}",
+    "current_board": "Tauler actual:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "No has respost amb coordenades vàlides entre claudàtors.",
+    "out_of_bounds": "Les coordenades de fila i columna especificades estan fora dels límits.",
+    "already_revealed": "La cel·la a ({row}, {col}) ja ha estat revelada.",
+    "hit_mine": "Has tocat una mina a ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Has revelat la cel·la a ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Felicitats! Has netejat amb èxit el tauler de Minesweeper.",
+    "turn_limit": "S'ha assolit el límit de torns. Has descobert amb èxit el {percent}% de les cel·les segures."
+  }
+}

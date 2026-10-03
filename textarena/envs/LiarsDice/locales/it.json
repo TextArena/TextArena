@@ -1,0 +1,55 @@
+{
+  "_comment": "Stringhe rivolte all'utente per Liar's Dice. I token di azione tra parentesi quadre ('[Bid: X, Y]', '[Call]'), gli indici dei giocatori, i valori delle facce dei dadi, le quantità e i conteggi sono slot neutri e non devono mai essere tradotti.",
+  "_slots": {
+    "player_id": "indice del giocatore (intero)",
+    "num_players": "numero di giocatori nel gioco (intero)",
+    "dice_summary": "conteggi dei dadi rimanenti per giocatore, uniti da ';'",
+    "your_dice": "elenco dei valori delle facce dei dadi del giocatore, uniti da virgole",
+    "p": "indice del giocatore (intero)",
+    "d": "conteggio dei dadi rimanenti per quel giocatore (intero)",
+    "current_player_id": "indice del giocatore che ha chiamato (intero)",
+    "face_value": "valore della faccia del dado contato (1-6)",
+    "count": "numero effettivo di dadi corrispondenti (intero)",
+    "quantity": "quantità dell'offerta (intero)",
+    "loser_id": "indice del giocatore che perde un dado (intero)",
+    "new_quantity": "quantità dell'offerta appena inviata (intero)",
+    "current_quantity": "quantità dell'offerta corrente (intero)",
+    "new_face_value": "valore della faccia dell'offerta appena inviata (intero)",
+    "current_face_value": "valore della faccia dell'offerta corrente (intero)",
+    "action": "stringa di azione grezza inviata dal giocatore",
+    "reason": "motivo di rifiuto dell'offerta nidificato",
+    "winner": "indice del giocatore che vince (intero)",
+    "final_ranking": "elenco degli indici dei giocatori, dall'ultimo eliminato al vincitore"
+  },
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in un gioco di Liar's Dice con {num_players} giocatori.\nRegole:\n- Nel tuo turno, puoi:\n  1) Fare un'offerta nuova con una quantità o un valore della faccia più alto (o entrambi) rispetto all'offerta corrente; ad esempio '[Bid: 3, 4]',\n  2) Chiamare l'ultima offerta digitando '[Call]'.\n\nSe chiami:\n  - Se il conteggio effettivo di quel valore della faccia tra tutti i dadi è inferiore all'offerta, l'ultimo offerente perde un dado.\n  - Altrimenti, il chiamante perde un dado.\nUn giocatore che raggiunge 0 dadi è eliminato. L'ultimo giocatore rimanente vince."
+  },
+  "board": {
+    "per_player": "\tGiocatore {p}: {d}",
+    "new_round": "\nNuovo round - Dadi rimanenti: {dice_summary}\nI tuoi dadi attuali sono: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Il Giocatore {current_player_id} chiama! Il conteggio effettivo del valore della faccia {face_value} è {count}, che è INFERIORE a {quantity}.\nIl Giocatore {loser_id} (l'ultimo offerente) perde un dado.",
+    "caller_loses": "Il Giocatore {current_player_id} chiama! Il conteggio effettivo del valore della faccia {face_value} è {count}, che è >= {quantity}.\nIl Giocatore {loser_id} (il chiamante) perde un dado."
+  },
+  "action": {
+    "bid_announce": "Il Giocatore {player_id} offre {quantity} del valore della faccia {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Chiamata effettuata senza un'offerta precedente.",
+    "invalid_bid": "Offerta non valida: {reason}",
+    "not_recognized": "Azione non riconosciuta come un'[Bid: X, Y]' o un '[Call]' valido. Azione inviata: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "La nuova quantità {new_quantity} è inferiore alla quantità corrente {current_quantity}.",
+    "face_lower": "Il nuovo valore della faccia {new_face_value} è inferiore al valore della faccia corrente {current_face_value}.",
+    "identical": "L'offerta è identica all'offerta corrente.",
+    "face_range": "Il valore della faccia deve essere compreso tra 1 e 6."
+  },
+  "message": {
+    "eliminated_invalid": "Il Giocatore {player_id} è stato eliminato a causa di una mossa non valida."
+  },
+  "outcome": {
+    "win": "Il Giocatore {winner} vince! Classifica finale: {final_ranking}"
+  }
+}

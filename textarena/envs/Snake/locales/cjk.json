@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Muntu akulwana Snake pa {width}×{height} gridi.\nUkongola nyoka {player_id}. Mipango ilowele: '[up]'/'[down]'/'[left]'/'[right]' (kapena w/s/a/d).\nLengo: kukula muda mrefu zaidi au uwe mrefu zaidi na kupata alama ya juu (kikomo cha zamu {max_turns} zamu)."
+  },
+  "board": {
+    "current": "Gridi ya Sasa:\n{board}",
+    "after_moves": "Hali ya Gridi ya Sasa:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Nyoka {player_id} afa kwa sababu ya mpango usio halali."
+  },
+  "outcome": {
+    "survived_win": "Mchezaji {player_id} akakula; wengine wote wafa.",
+    "all_dead_simul": "Kwena wote wakafa pamo.",
+    "outlived": "Wuye mupira wa nderi ye dǝ gǝna.",
+    "all_dead": "Kwena wote walikufa.",
+    "turn_limit": "Kikomo cha zamu kimefikia - alama bora hushinda kipindi cha usawa.",
+    "ranking": "{reason} Vikundi vya mwisho vya uwekaji wa nafasi (mbaya→bora): {groups}"
+  }
+}

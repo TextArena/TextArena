@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i **Ultimative Tic Tac Toe**.\nIndsend dit træk som **[macro  micro]** (to tal 0-8):\n• *macro*  = hvilket mini-bræt du spiller i\n• *micro* = hvilket kvadrat inden for det mini-bræt\nEksempel `[7 8]` ➜ placer dit mærke i mini-bræt 7, kvadrat 8, og\nfå din modstander til at spille i mini-bræt 8 næste gang.\n\nDu er `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Aktuelt bræt:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Trækket skal være i formen [macro micro] med tal 0-8.",
+    "out_of_range": "Indeksene skal hver være mellem 0 og 8.",
+    "index_out_of_range": "Micro-brættet, rækken eller kolonnen er uden for rækkevidde.",
+    "cell_occupied": "Cellen er allerede besat.",
+    "wrong_micro_board": "Spilleren skal spille i næste micro-bræt.",
+    "micro_board_won": "Micro-brættet er allerede vundet."
+  },
+  "next_board": {
+    "any": "hvilket som helst micro-bræt",
+    "specific": "micro-bræt {nxt}"
+  },
+  "game_action": {
+    "played": "Spiller {player_id} spillede i micro-bræt {macro_idx}, celle {micro_idx} (række {row}, kolonne {col}). Spiller {opponent_id} skal nu spille i {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Spiller {player_id} vinder Ultimative Tic Tac Toe!",
+    "draw": "Spillet er uafgjort!"
+  }
+}

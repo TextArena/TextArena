@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "你是玩家 {player_id}，正在进行一场持续 {num_rounds} 轮的重复囚徒困境游戏。\n\n游戏结构：\n- 在每次决策之前，你有 {total_conversation_rounds} 个回合可以自由交流。\n- 之后，双方玩家同时选择合作或背叛。\n\n收益矩阵，每轮固定：\n- 双方合作 ➜ 每人获得 {cooperate_reward}\n- 双方背叛 ➜ 每人获得 {mutual_defect_reward}\n- 一方背叛，一方合作 ➜ 背叛者获得 {defect_reward}，合作者获得 {sucker_reward}\n\n玩法说明：\n- 在交流阶段：输入任何你想说的文字。\n- 在决策阶段：包含 '[Cooperate]' 或 '[Defect]'，不区分大小写。你可以在该标记前后添加额外文本。"
+  },
+  "phases": {
+    "conversation_finished": "第 {round} 轮的交流已结束。请在 \\boxed{{}} 中回复 '[Cooperate]' 或 '[Defect]'。",
+    "starting_round": "--- 第 {round} 轮开始 ---",
+    "round_summary": "第 {round} 轮结果：\n{outcome}\n玩家 0 获得 {r0}，总分 {score_0}；玩家 1 获得 {r1}，总分 {score_1}。"
+  },
+  "outcome": {
+    "winner": "玩家 {winner} 以 {win_score} - {lose_score} 获胜。",
+    "draw": "平局！双方玩家都获得 {s0}。",
+    "round_both_cooperate": "双方玩家都选择了合作。",
+    "round_both_defect": "双方玩家都选择了背叛。",
+    "round_p0_cooperates_p1_defects": "玩家 0 选择合作，玩家 1 选择背叛。",
+    "round_p0_defects_p1_cooperates": "玩家 0 选择背叛，玩家 1 选择合作。"
+  }
+}

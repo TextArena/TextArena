@@ -1,0 +1,31 @@
+{
+  "_comment": "Svensk lokalisering för Hangman. Översätt endast värden (höger sida). Behåll varje {placeholder} oförändrad.",
+  "_slots": {
+    "{board}": "Neutralt återgivet bräde (C00/C01-kolumnrubriker, avslöjade bokstäver, '_'-tomrum); översätt inte",
+    "{tries_left}": "Återstående felaktiga försök (heltal)",
+    "{guessed}": "Kommaavgränsad lista över redan gissade bokstäver",
+    "{letter}": "Den gissade bokstaven eller hela ordet (behålls som skrivet)",
+    "{pct}": "Procentandel av korrekt gissade tecken, formaterad till 2 decimaler",
+    "{target_word}": "Det dolda målordet"
+  },
+  "prompt": {
+    "intro": "Du spelar Hangman. Målet med spelet är att gissa ordet genom att ange enstaka bokstäver eller hela ordet.\nVarje kolumn är numrerad. Cellerna som behöver fyllas med bokstäver representeras av '_'.\n\nDet finns två sätt att svara. Du kan ange enstaka bokstäver i formatet '[L]', eller så kan du gissa hela ordet i formatet '[LIGHT]'.\nOm den angivna bokstaven finns i ordet kommer den att avslöjas i rutnätet.\nOm det angivna ordet är korrekt vinner du.\nMedan du spelar kommer historiken över dina val att läggas till nedan. Använd informationen för att lista ut ordet och vinna.\nDu har 6 felaktiga försök innan spelet slutar.\n\n"
+  },
+  "board": {
+    "status": "Aktuellt bräde:\n{board}\nDu har {tries_left} försök kvar.\nGissade bokstäver: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Ogiltigt format för drag. Du svarade inte med en giltig 'bokstav' eller 'ord'.",
+    "already_guessed": "Du gissade bokstaven '{letter}' som redan har gissats."
+  },
+  "message": {
+    "wrong_word": "Ditt gissning av '{letter}' är inte målordet.",
+    "letter_in": "Ditt gissning av {letter} finns i ordet",
+    "letter_not_in": "Ditt gissning av {letter} finns inte i ordet. Du har {tries_left} liv kvar."
+  },
+  "outcome": {
+    "win_word": "Grattis! Du har slutfört Hangman-pusslet.",
+    "win_board": "Grattis! Du har slutfört Hangman-pusslet.",
+    "out_of_tries": "Du har slut på försök. Du gissade {pct} procent av tecknen korrekt. Målordet var: {target_word}"
+  }
+}

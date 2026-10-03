@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "Je bent Speler {player_id} in Drie-Speler GOPS.\n- Je hebt de 13 kaarten A-K (elk precies één keer).\n- Elke ronde wordt een prijs onthuld. Dien ÉÉN kaart in zoals `[Q]`, `[10]`, `[2]` …\n- De hoogste kaart wint de prijs (+ eventuele overgedragen pot). Gelijkspel rolt de prijs over naar de volgende ronde.\n- Na 13 rondes wint de hoogste totaal. Ongeldige zetten = eliminatie."
+  },
+  "round": {
+    "header": "### Runde {round}/13 - Pries: {prize} (wurd {worth})",
+    "hand": "Dien euvergebleve hand: {hand}"
+  },
+  "reveal": {
+    "win": "Bied  {bids} - Speler {winner} wint {pot}.",
+    "tie": "Bied  {bids} - tied, pot now {pot}.",
+    "scores": "Scores → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "'t Aktie heet ein kaart in haakjes, wie \"[Q]\"",
+    "bad_card": "Kaart al gebruuk of ongeldig."
+  },
+  "elimination": {
+    "player": "Speler {pid} oetgesjlaote nao herhaalde ongeldige beweginge."
+  },
+  "outcome": {
+    "auto_win": "Twieje spelers oetgesjlaote - automatisch winne.",
+    "final": "Eindscores: {scores}"
+  }
+}

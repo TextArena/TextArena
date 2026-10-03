@@ -1,0 +1,34 @@
+{
+    "player_prompt": {
+        "intro": "אתה {role} במשחק קולונל בלוטו.\nהמטרה שלך היא לנצח ביותר סיבובים מהיריב שלך.\nבכל סיבוב, הקצה בדיוק {num_total_units} יחידות בין השדות {field_names}.\nהשחקן שמקצה יותר יחידות לשדה מנצח באותו שדה, והשחקן שמנצח ביותר שדות מנצח בסיבוב.\nלדוגמה, '[A7 B7 C6]' מקצה 7 יחידות ל-A, 7 ל-B ו-6 ל-C.",
+        "commander_alpha": "המפקד אלפא",
+        "commander_beta": "המפקד בטא"
+    },
+
+    "game_state": {
+        "header_round": "=== COLONEL BLOTTO - סיבוב {current_round}/{num_rounds} ===\nסיבובים שנוצחו - המפקד אלפא: {alpha_score}, המפקד בטא: {beta_score}"
+    },
+
+    "round_battle": {
+        "field_result": "\nסיבוב {current_round}\nהמפקד אלפא הקצה: {p0_allocations}\nהמפקד בטא הקצה: {p1_allocations}\n",
+        "winner_alpha": "{message}המנצח: המפקד אלפא",
+        "winner_beta": "{message}המנצח: המפקד בטא",
+        "tie": "{message}תיקו!"
+    },
+
+    "invalid_move": {
+        "wrong_format": "פורמט קלט לא תקין. השתמש ב: A:5, B:10, C:5",
+        "invalid_field": "שם/שמות שדה לא חוקיים. שדות חוקיים: {field_names}",
+        "wrong_allocation_value": "כל ההקצאות חייבות להיות מספרים שלמים לא שליליים.",
+        "incorrect_total_units": "עליך להקצות בדיוק {num_total_units} יחידות. סכום נוכחי: {current_sum}",
+        "good_allocations": "ההקצאה תקינה."
+    },
+
+    "outcome": {
+        "winner_alpha": "המפקד אלפא מנצח {score_0}-{score_1} לאחר {num_rounds} סיבובים!",
+        "winner_beta": "המפקד בטא מנצח {score_1}-{score_0} לאחר {num_rounds} סיבובים!",
+        "draw": "המשחק מסתיים בתיקו {score_0}-{score_1} לאחר {num_rounds} סיבובים!",
+        "early_winner_alpha": "המפקד אלפא מנצח {scores_0}-{scores_1} (הושגה רוב)!",
+        "early_winner_beta": "המפקד בטא מנצח {scores_1}-{scores_0} (הושגה רוב)!"
+    }
+}

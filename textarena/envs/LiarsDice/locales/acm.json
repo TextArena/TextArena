@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في لعبة {num_players}-لاعب ليرز دايس.\nالقواعد:\n- في دورك، يمكنك إما:\n  1) تقديم عرض جديد مع كمية أعلى أو وجه أعلى (أو كلاهما) من العرض الحالي؛ أي '[Bid: 3, 4]',\n  2) استدعاء العرض الأخير عن طريق كتابة '[Call]'.\n\nإذا دعوت:\n  - إذا كان العدد الفعلي لتلك القيمة الوجهية بين جميع النرد أقل من العرض، يفقد المدعو الأخير نردًا واحدًا.\n  - وإلا، يفقد المدعو نردًا واحدًا.\nاللاعب الذي يصل إلى 0 نرد يتم إقصاؤه. اللاعب الأخير المتبقي يفوز."
+  },
+  "board": {
+    "per_player": "\tاللاعب {p}: {d}",
+    "new_round": "\nجولة جديدة - النرد المتبقي: {dice_summary}\nنردك الحالي هو: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "اللاعب {current_player_id} يدعو! العدد الفعلي للوجه {face_value} هو {count}، وهو أقل من {quantity}.\nاللاعب {loser_id} (المدعو الأخير) يفقد نردًا واحدًا.",
+    "caller_loses": "لاعب {current_player_id} يدعو! العدد الفعلي للوجه {face_value} هو {count}، وهو أكبر من أو يساوي {quantity}.\nلاعب {loser_id} (الداعي) يخسر حجر نرد واحد."
+  },
+  "action": {
+    "bid_announce": "اللاعب {player_id} يعرض {quantity} من وجه {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "اتصل بدون اي عرض مسبق.",
+    "invalid_bid": "عرض غير صالح: {reason}",
+    "not_recognized": "الحركة غير معترف بها كإما '[Bid: X, Y]' أو '[Call]' صالح. الإجراء المقدّم: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "الكمية الجديدة {new_quantity} أقل من الحالية {current_quantity}.",
+    "face_lower": "قيمة الوجه الجديدة {new_face_value} أقل من الحالية {current_face_value}.",
+    "identical": "العرض متطابق مع العرض الحالي.",
+    "face_range": "القيمة الاسمية لازم تكون بين 1 و 6."
+  },
+  "message": {
+    "eliminated_invalid": "لاعب {player_id} انزيل بسبب حركة غير صالحة."
+  },
+  "outcome": {
+    "win": "اللاعب {winner} يفوز! التصنيف النهائي: {final_ranking}"
+  }
+}

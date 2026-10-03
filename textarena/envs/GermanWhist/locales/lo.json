@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "ເກມເລີ່ມຕົ້ນ.ຊຸດ Trump: {trump_suit} (ບັດ trump: {trump_str}).",
+    "no_trump_card": "ບໍ່ມີ"
+  },
+  "player_prompt": {
+    "intro": "ທ່ານເປັນ Player {player_id} ໃນພາສາເຢຍລະມັນ Whist. {phase_info} ທ່ານຖືບັດ {hand_size}. ຫຼິ້ນບັດທີ່ມີ '[play N]', ບ່ອນທີ່ N ແມ່ນ ຕໍາ ແຫນ່ງ ຂອງມັນຢູ່ໃນມືຂອງທ່ານ (ຕົວຢ່າງ '[play 3]').",
+    "phase_learning": "ໄລຍະຮຽນຮູ້: ຜູ້ຊະນະຂອງແຕ່ລະ trick ໄດ້ເອົາບັດທີ່ເປີດແລະຜູ້ເສຍໄຊໄດ້ຖ່າຍບັດຕໍ່ໄປຈາກກະຕ່າ. Tricks ທີ່ໄດ້ຮັບໃນໄລຍະນີ້ບໍ່ໄດ້ນັບເຂົ້າໃນການຊະນະ.",
+    "phase_playing": "ໄລຍະການຫຼີ້ນ: ຊຸດແມ່ນ ຫມົດ ໄປທຸກການຫລອກລວງຈາກດຽວນີ້ນັບເຂົ້າສູ່ໄຊຊະນະ."
+  },
+  "next_card": {
+    "playing_phase": "ບໍ່ມີບັດທີ່ຖືກສະ ເຫນີ - ໄລຍະການຫຼີ້ນໄດ້ເລີ່ມຕົ້ນ.",
+    "deck_empty": "Deck ແມ່ນເປົ່າ - ບໍ່ມີບັດທີ່ຖືກສະເຫນີ.",
+    "available": "ບັດທີ່ສະເຫນີ: {card}",
+    "available_trump": "ບັດທີ່ສະເຫນີ: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "ຮູບແບບການຍ້າຍທີ່ບໍ່ຖືກຕ້ອງ. ໃຊ້ '[play N]' ເພື່ອຫຼີ້ນບັດ Nth ໃນມືຂອງທ່ານ.",
+    "bad_position": "ຕໍາແຫນ່ງບັດນັ້ນບໍ່ມີຢູ່. ທ່ານຖືບັດ {hand_size}.",
+    "must_follow_suit": "ທ່ານຕ້ອງເຮັດຕາມແລະຫຼິ້ນບັດ {lead_suit}.",
+    "invalid_play": "ບັດນັ້ນບໍ່ສາມາດໃຊ້ໄດ້."
+  },
+  "game_action": {
+    "played": "ນັກເຕະ {player_id} ໄດ້ຫຼິ້ນ {card}."
+  },
+  "trick": {
+    "won": "ຜູ້ນ {winner_id} ຊະນະການຫລອກລວງດ້ວຍ {card}.",
+    "won_learning": "ຜູ້ນ {winner_id} ຊະນະການຫລອກລວງດ້ວຍ {card} ແລະເອົາບັດທີ່ເປີດຂຶ້ນ."
+  },
+  "phase": {
+    "learning_complete": "ຊຸດແມ່ນຫມົດແລ້ວ. ໄລຍະການຮຽນຮູ້ແມ່ນສິ້ນສຸດລົງ - ທຸກໆການຫລອກລວງທີ່ຍັງເຫຼືອແມ່ນນັບເຂົ້າສູ່ໄຊຊະນະ."
+  },
+  "draw": {
+    "winner_received": "ທ່ານໄດ້ຊະນະການຫລອກລວງແລະໄດ້ຮັບ {card}.",
+    "loser_received": "ທ່ານໄດ້ສູນເສຍການຫລອກລວງແລະແຕ້ມ {card} ຈາກ deck.",
+    "winner_preview": "ບັດຕໍ່ໄປທີ່ຖືກສະ ເຫນີ ແມ່ນ {card}."
+  },
+  "turn": {
+    "board": "{phase} {scores} {next_card} {trick} {hand}",
+    "scores_learning": "Tricks ທີ່ໄດ້ຮັບຜົນສໍາເລັດມາຮອດປະຈຸບັນ - ຜູ້ນ 0: {tricks0}, ຜູ້ນ 1: {tricks1}",
+    "scores_playing": "ການລອກລວງການລອກລວງ - ຜູ້ນ 0: {tricks0}, ຜູ້ນ 1: {tricks1}",
+    "phase": "ໄລຍະ: {phase}",
+    "phase_learning": "ໄລຍະ: {phase} ({remaining_cards} ບັດທີ່ຍັງເຫຼືອຢູ່ໃນໂຖປັດສະວະ)"
+  },
+  "hand": {
+    "no_cards": "ບໍ່ມີບັດ",
+    "no_cards_in_hand": "ບໍ່ມີບັດໃນມື",
+    "header": "ມືຂອງທ່ານ:",
+    "trump_indicator": "(ທຣໍາ)",
+    "suit_line": "{observation} {suit} {trump_indicator}:",
+    "card_line": "{observation} {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "ບໍ່ມີບັດຫຼິ້ນຍັງ trick ນີ້.",
+    "header": "ການຫລອກລວງໃນປະຈຸບັນ:",
+    "trump_indicator": "(ທຣໍາ)",
+    "card_line": "{observation} ນັກເຕະ {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "ເກມບໍ່ໄດ້ເລີ່ມຕົ້ນ",
+    "header": "=== ເກມ GERMAN WHIST ===",
+    "phase": "{observation} ໄລຍະ: {phase}",
+    "trump_suit": "{observation}ຊຸດ Trump: {trump_suit}",
+    "trump_card": "{observation} ບັດ Trump: {card}",
+    "cards_left": "{observation} ບັດທີ່ຍັງເຫຼືອຢູ່ໃນຊັ້ນ: {count}",
+    "next_card": "{observation} ບັດຕໍ່ໄປສໍາລັບຜູ້ຊະນະ: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} ເຄັດລັບໃນປະຈຸບັນ:",
+    "trump_indicator": "(ທຣໍາ)",
+    "trick_line": "{observation} ນັກເຕະ {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation} ຜູ້ນ {player_id}: {scoring} ການລອກລວງຄະແນນ ({tricks} ລວມ), {hand_size} ບັດໃນມື"
+  },
+  "outcome": {
+    "summary": "ໄລຍະຮຽນຮູ້ - ຜູ້ນ 0: {l0}, ຜູ້ນ 1: {l1}. ໄລຍະຫຼິ້ນ - ຜູ້ນ 0: {p0}, ຜູ້ນ 1: {p1}. ຜູ້ນ {winner_id} ຊະນະດ້ວຍ {winner_tricks} ທຸລະກໍາການຄະແນນ!"
+  }
+}

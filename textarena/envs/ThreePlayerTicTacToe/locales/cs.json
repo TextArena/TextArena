@@ -1,0 +1,32 @@
+{
+  "_comment": "Soubor lokalizace pro ThreePlayerTicTacToe. NEpřekládávejte klíče (levá strana). Překládávejte pouze hodnoty (pravá strana).",
+  "_slots": {
+    "{player_id}": "Číslo hráče, např. 0, 1 nebo 2",
+    "{symbol}": "Značka hráče, jedna z A, B nebo C",
+    "{cell}": "Číslo buňky na desce",
+    "{max_cell}": "Nejvyšší platné číslo buňky (velikost_desky^2 - 1)",
+    "{row}": "Index řádku desky, kde je umístěna značka",
+    "{col}": "Index sloupce desky, kde je umístěna značka",
+    "{board}": "Vykreslená ASCII deska (nepřekládávejte)",
+    "{moves}": "Čárkami oddělený seznam dostupných tahů jako '[4]' (nepřekládávejte)"
+  },
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} ve Tříčlenném Tic Tac Toe.\nVaše značka je '{symbol}'.\nStřídavě umisťujete svou značku na desku 5x5, abyste vytvořili řádek čtyř.\nŘádky mohou být horizontální, vertikální nebo diagonální.\nOdešlete svůj tah ve formátu '[4]', aby jste označili buňku 4."
+  },
+  "board": {
+    "current_board": "Aktuální deska:\n\n{board}\n\nDostupné tahy: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát tahu. Použijte '[buňka]', kde buňka je 0-{max_cell}.",
+    "out_of_range": "Neplatné číslo buňky: {cell}. Musí být mezi 0 a {max_cell}.",
+    "already_occupied": "Buňka {cell} je již obsazena.",
+    "made_invalid": "Hráč {player_id} provedl neplatný tah"
+  },
+  "game_action": {
+    "placed": "Hráč {player_id} umisťuje svou značku ({symbol}) do pole ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Hráč {player_id} ({symbol}) vyhrál!",
+    "draw": "Hra skončila remízou!"
+  }
+}

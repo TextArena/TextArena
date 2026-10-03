@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} die {colour} ({piece}) speelt in een spel Othello.\nUw doel is om aan het einde van het spel meer stukken van uw kleur op het bord te hebben.\nOp uw beurt plaatst u een stuk zodat het een of meer stukken van uw tegenstander in elke richting (horizontaal, verticaal of diagonaal) tussen uw nieuwe stuk en een ander bestaand stuk van u flankt. Alle geflankeerde stukken van uw tegenstander worden omgedraaid naar uw kleur.\nGeef uw zet op in het formaat '[rij, kol]'."
+  },
+  "board": {
+    "game_board": "Spelbord:\n{board}",
+    "valid_moves": "{observation}\nGeldige zetten: {moves}",
+    "no_valid_moves_reset": "{observation}\nGeen geldige zetten - u moet mogelijk overslaan.",
+    "no_valid_moves_step": "{observation}\nGeen geldige zetten – u moet mogelijk overslaan.",
+    "scores_reset": "{observation}\nHuidige scores - Zwart: {black_count}, Wit: {white_count}\n",
+    "scores_step": "{observation}\nScores - Zwart: {black_count}, Wit: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "De zet moet in de vorm [rij, kol] zijn.",
+    "illegal": "Ongeldige zet. Geldige zetten: {valid}"
+  },
+  "game_action": {
+    "skipped": "Speler {pid} moest zijn beurt overslaan",
+    "played": "Speler {pid} ({piece}) speelde [{r}, {c}] en draaide {flipped} stuk(ken) om"
+  },
+  "game_message": {
+    "must_skip": "Speler {pid} ({piece}) heeft geen geldige zetten en moet overslaan."
+  },
+  "outcome": {
+    "black_wins": "Zwart wint {black_count}-{white_count}.",
+    "white_wins": "Wit wint {white_count}-{black_count}.",
+    "draw": "Gelijkspel {black_count}-{white_count}."
+  }
+}

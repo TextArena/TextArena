@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Woyɛ Odwumayɛni {player_id} wɔ Three-Player Tic Tac Toe.\nWo akyerɛ ne '{symbol}'.\nWɔbɛkyerɛ wɔn akyerɛ wɔ 5x5 board so sɛnea wɔbɛnya gyinabea a ɛyɛ anan.\nGyinabea no betumi ayɛ ɔfa, ɔfa a ɛyɛ nkyɛn, anaa ɔfa a ɛyɛ mɛnsa.\nFa w'akyi no wɔ '[4]' mu sɛnea wɔbɛkyerɛ kɔɔto 4."
+  },
+  "board": {
+    "current_board": "Board a ɛte sɛn:\n\n{board}\n\nNkrɔfoɔ a wɔbetumi ayɛ: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nkyerεkyerεmu a enni mu. Fa '[cell]' di dwuma bere a ɔfese no yɛ 0-{max_cell}.",
+    "out_of_range": "Nkutoo a ɛnsɛe: {cell}. Ɛtɔ mmere biara a ɛwɔ 0 ne {max_cell} ntam.",
+    "already_occupied": "Ntamadan {cell} no adi dwuma dada.",
+    "made_invalid": "Ɔgyinafo {player_id} yɛɛ ade a ɛmfata."
+  },
+  "game_action": {
+    "placed": "Ɔbɔfo {player_id} de ne ho agyirae ({symbol}) wɔ fie ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Ɔbɔfo {player_id} ({symbol}) di nkonim!",
+    "draw": "Agodie no yɛ agoru!"
+  }
+}

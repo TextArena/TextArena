@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Stai jucannu a Klondike Solitaire. Lu to obbiettivu è muviri tutti li carti a li funnazzioni.\n\nReguli di jocu:\n- Funnazzioni (F1-F4): Custruisci versu l'altu da Asso a Re 'n suti\n- Tableau (T1-T7): Custruisci versu lu bassu alternannu culura (rossu supra negru, negru supra rossu)\n- Stock: Tira carti a lu waste\n- Waste (W): Carta 'n cima disponibbili pî jocu\n\nComandi:\n- 'draw' - Tira carti da stock a waste\n- 'move <source> <destination> [count]' - Muviri carti tra li pile\n  Esempi: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Lu cuntu può essiri 'all', ca prova a muviri tutti li carti a facci 'n susu.\n- 'forfeit' - Finisci lu jocu subitu e blocca lu to punti attuali\n- Nomina di pile: W (waste), F1-F4 (funnazzioni), T1-T7 (tableau)\n\nPò eseguirì multipli azzioni 'n un solu turnu siparànnuli cu virguli:\n  Esempiu: 'draw, move W T1, move T2 F1'\n\nSulu li Re ponnu essiri misi supra li pile di tableau vacanti.\nL'azzioni si eseguì 'n ordini - si una fallisci, li azzioni rimanenti vennu saltati.\nUsa 'forfeit' si cridi ca lu jocu è impossibbili a vinciri."
+  },
+  "format_error": {
+    "no_brackets": "Formatu di l'azzioni nun validu. L'azzione deve esse in parentesi.",
+    "no_closing_bracket": "Formatu d'azzione invalidu. Manca u bracket di chiusura ']'",
+    "empty_command": "Cumanda vacanti. Type \"draw\" o \"move <source> <destination> [count]\".",
+    "empty_action": "Azioni vacanti",
+    "move_needs_args": "U cumandamentu move richiede origine è destinazione. Usage: 'move <source> <destination> [count]'",
+    "count_positive": "Lu contu havi a èssiri pusitivu o 'all'",
+    "count_invalid": "Contu invalidu. Usati un numiru o 'all'",
+    "unknown_command": "Comannu sconosciutu '{cmd}'. Usa 'draw', 'move <source> <destination> [count]', o 'forfeit'",
+    "wrapped": "Azzioni {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Azzioni {n}: {msg}",
+    "before_failure": "Attu eseguitu {n} prima di fallimentu.",
+    "failed": "Azzioni {n} fallita: {msg}"
+  },
+  "move_result": {
+    "drew": "Carte di carta s) da u stock à a scarta.",
+    "cannot_draw": "Non si pò tirari, sia la scorta ca li rifiuti sunnu vuoti.",
+    "invalid_pile": "Nomu di pila nvalid. Usari W, F1-F4, o T1-T7",
+    "foundation_one_card": "Pò muvimenti sulu 1 carta a funnazzioni.",
+    "waste_to_foundation_ok": "Carte trasfirita da u rifiutu à a fundazione F{dst}",
+    "waste_to_foundation_bad": "Nun si pò spustari la carta di scartamentu a ddu cumpunenti dâ funnazzioni.",
+    "tableau_to_foundation_ok": "Mossu carta da tableau T{src} a funnazzioni F{dst}",
+    "tableau_to_foundation_bad": "Nun si ponnu spustari la carta di tavulu a ddu cumpunenti dâ funnazzioni.",
+    "foundation_to_foundation": "Nun si pò spustari di funnazzioni a funnazioni.",
+    "waste_to_tableau_one_card": "Pò spustari sulu 1 carta di lu scartamentu a la tavula.",
+    "waste_to_tableau_ok": "Carte spustata da u scarti à a tavula T{dst}",
+    "waste_to_tableau_bad": "Nun si pò mettiri la scheda di scarti nta ddu cumpunenti.",
+    "no_face_up": "Nenti carti a vista pi muviriti.",
+    "tableau_to_tableau_ok": "Mossu {count} carta(i) da tableau T{src} a T{dst}",
+    "tableau_to_tableau_bad": "Nun po' muviri {count} carta(i) da T{src} a T{dst}",
+    "foundation_to_tableau_one_card": "Pò spustari sulu 1 carta dâ funnazzioni â tavula.",
+    "foundation_empty": "F{src} è vacanti.",
+    "foundation_to_tableau_ok": "Mossu carta da funnazzioni F{src} a tableau T{dst}",
+    "foundation_to_tableau_bad": "Nun si pò mettiri la carta di funnazzioni supra lu tavulinu T{dst}",
+    "to_waste_or_stock": "Nun pò èssiri spustatu a rimi o scorta."
+  },
+  "outcome": {
+    "forfeit": "Partita cunfusa. Punteggio finali: {score} carte in fundazioni.",
+    "won": "Congratulazioni, haiu vinciutu lu Klondike Solitaire!",
+    "turn_limit": "Jocu terminatu! Agghicisti al massimu di {max_turns} turni. Punti: {score} carti 'n funnazzioni."
+  },
+  "board": {
+    "title": "=== SOLITARIU KLONDIKE ===",
+    "turn": "Turnu: {turn}/{max_turns}",
+    "stock": "Carti di cuntrollu: {stock} carti",
+    "waste": "Rifiuti (W): {waste}",
+    "foundations_header": "Funnazzioni:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "Tabella:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

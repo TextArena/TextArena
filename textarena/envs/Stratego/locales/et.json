@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Oled mängija {player_id} Strategos.\nSinu eesmärk on vallutada vastase lipp või elimineerida kõik nende liikuvad tükid.\nSinu armee on paigutatud lauale, sealhulgas sinu lipp, pommid ja teised tükid erinevatel astmetel.\n\n### Mängu juhised\n1. **Liikumise reeglid:**\n   - Oma käigu ajal saad liigutada ühte tükki ühe sammu võrra kõrvuti asuvasse ruutu (üles, alla, vasakule või paremale), mis on juba hõivatud sinu tükkidega.\n   - Näide: Tükk võib liikuda A1-st B1-sse või A1-st A2-sse, kui B1 ja A2 pole paigutatud mängija enda tükkidega.\n   - Kui valitud tükk on pomm või lipp, seda ei saa liigutada.\n2. **Lahingud:**\n   - Kui liigud ruutu, mis on hõivatud vastase tükkiga, siis toimub lahing:\n     - Tükk kõrgema astmega võidab ja elimineerib vastase tüki.\n     - Kui astmed on võrdsed, siis mõlemad tükid eemaldatakse laualt.\n     - **Erijuhtumid:**\n       - Pommid elimineerivad enamiku ründavaid tükke, välja arvatud kaevurid, mis pomme kahjutuks teevad.\n       - Spioonid võivad võita marssali, kui spioon ründab esimesena, kuid kaotavad kõigile teistele tükkidele.\n3. **Strateegilised eesmärgid:**\n   - Tuvasta vastase tükid nende liikumiste ja lahingute kaudu.\n   - Kaitse oma lippu, samal ajal püüdes vallutada vastase lippu.\n   - Kasuta skautideid strateegiliselt, et saada teavet vastase tükkide kohta ja rünnata nõrku tükke.\n\n### Kuidas teha käik:\n1. Määra tüki koordinaadid, mida soovid liigutada, ja selle sihtkoht.\n2. Kasuta vormingut: [A0 B0], kus A0 on lähtepositsioon ja B0 on sihtkoht.\n   - Näide: Et liigutada tükk A0-st B0-sse, sisesta [A0 B0].\n3. Veendu, et sihtkoht on kehtiv liikumise reeglite järgi.\n\n### Tähtsad märkused:\n- Laud näitab sinu tükke ja nende positsioone, nt MN, MS.\n- Laud näitab ka teadaolevaid positsioone vastase tükkide kohta ilma nende astmeid avaldamata, nt ?.\n- Ruudud ~ on järved ja sinna ei saa liikuda.\n- Soovituseks on alustada mängu, liigutades tükke, mis on esimesel real, et saada teavet vastase tükkide kohta. Mängija 0 ja mängija 1 esimesed read on vastavalt D ja G.\n\nSiin on praegune laua seisund:\n"
+  },
+  "board": {
+    "current_board": "Praegune laud:\n\n{board}\nSaadaolevad käigud: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Vigane tegevuse vorming. Mängija {player_id} ei sisestanud käiku vormingus [A0 B0].",
+    "invalid_coordinates": "Vigane tegevuse vorming. Mängija {player_id} ei sisestanud kehtivaid koordinaate.",
+    "not_own_piece": "Vigane tegevuse vorming. Mängija {player_id} peab liigutama ühte oma tükkidest.",
+    "scout_through_pieces": "Vigane tegevuse vorming. Mängija {player_id} ei saa liigutada skauti teiste tükkide läbi.",
+    "scout_diagonal": "Vigane tegevuse vorming. Mängija {player_id} ei saa liigutada skauti diagonaalselt.",
+    "non_scout_multi_square": "Vigane tegevuse vorming. Tükid, välja arvatud skaudid, võivad liikuda ainult ühe ruudu korraga.",
+    "move_into_lake": "Vigane tegevuse vorming. Mängija {player_id} ei saa liikuda järvele.",
+    "move_onto_own_piece": "Vigane tegevuse vorming. Mängija {player_id} ei saa liikuda oma tüki peale.",
+    "move_bomb_or_flag": "Vigane tegevuse vorming. Mängija {player_id} ei saa liigutada pommi või lippu."
+  },
+  "game_action": {
+    "you_moved": "Oled liikunud oma tüki {source}-st {dest}-sse.",
+    "opponent_moved": "Mängija {player_id} on liikunud tüki {source}-st {dest}-sse.",
+    "you_equal_ranks": "Oled liikunud oma tüki {source}-st {dest}-sse. Ründav tükk oli {attacking_rank} ja sihttükk oli {target_rank}. Kuna astmed on võrdsed, siis mõlemad tükid kaotasid.",
+    "opponent_equal_ranks": "Mängija {player_id} on liikunud tüki {source}-st {dest}-sse. Ründav tükk oli {attacking_rank} ja sihttükk oli {target_rank}. Kuna astmed on võrdsed, siis mõlemad tükid kaotasid.",
+    "you_miner_defused": "Oled liikunud oma tüki {source}-st {dest}-sse. Ründav tükk oli {attacking_rank} ja sihttükk oli {target_rank}. Kuna kaevurid võivad pomme kahjutuks teha, siis võitsid lahingu.",
+    "opponent_miner_defused": "Mängija {player_id} on liikunud tüki {source}-st {dest}-sse. Ründav tükk oli {attacking_rank} ja sihttükk oli {target_rank}. Kuna kaevurid võivad pomme kahjutuks teha, siis kaotasid lahingu.",
+    "you_bomb_lost": "Oled liikunud oma tüki {source}-st {dest}-sse. Ründav tükk oli {attacking_rank} ja sihttükk oli {target_rank}. Kuna ründaja ei ole kaevur, siis kaotasid lahingu.",
+    "opponent_bomb_won": "Mängija {player_id} on liikunud tüki {source}-st {dest}-sse. Ründav tükk oli {attacking_rank} ja sihttükk oli {target_rank}. Kuna ründaja ei ole kaevur, siis võitis lahingu.",
+    "you_spy_won": "Oled liikunud oma tüki {source}-st {dest}-sse. Ründav tükk oli {attacking_rank} ja sihttükk oli {target_rank}. Kuna ründaja on spioon ja sihttükk on marssal, siis võitsid lahingu.",
+    "opponent_spy_lost": "Mängija {player_id} on liikunud tüki {source}-st {dest}-sse. Ründav tükk oli {attacking_rank} ja sihttükk oli {target_rank}. Kuna ründaja on spioon ja sihttükk on marssal, siis kaotasid lahingu.",
+    "you_higher_won": "Oled liikunud oma tüki {source}-st {dest}-sse. Ründav tükk oli {attacking_rank} ja sihttükk oli {target_rank}. Kuna ründaja on kõrgemal astmel kui sihttükk, siis võitsid lahingu.",
+    "opponent_higher_lost": "Mängija {player_id} on liikunud tüki {source}-st {dest}-sse. Ründav tükk oli {attacking_rank} ja sihttükk oli {target_rank}. Kuna ründaja on kõrgemal astmel kui sihttükk, siis kaotasid lahingu.",
+    "you_lower_lost": "Oled liikunud oma tüki {source}-st {dest}-sse. Ründav tükk oli {attacking_rank} ja sihttükk oli {target_rank}. Kuna ründaja on madalamal astmel kui sihttükk, siis kaotasid lahingu.",
+    "opponent_lower_won": "Mängija {player_id} on liikunud tüki {source}-st {dest}-sse. Ründav tükk oli {attacking_rank} ja sihttükk oli {target_rank}. Kuna ründaja on madalamal astmel kui sihttükk, siis võitis lahingu."
+  },
+  "outcome": {
+    "flag_captured": "Mängija {player_id} on vallutanud vastase lipu!",
+    "no_movable_pieces": "Mängija {winner_id} võitis! Mängijal {loser_id} pole enam liikuvaid tükke."
+  }
+}

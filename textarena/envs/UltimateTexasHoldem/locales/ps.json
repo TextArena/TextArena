@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "تر اوسه پورې کارتونه نه دي",
+    "rules": "🎯 د ټیکساس هولډم لوبه - یو لوبغاړی vs ډیلر\n\n📖 د لوبې لنډه کتنه:\n• تاسو د {start_chips} چیپس سره پیل کوئ\n• د 52 کارتونو یو ډیک (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• تاسو د ډیلر (کور) سره لوبه کوئ\n• هر ګرځ د ټیکساس هولډم د جوړښت تعقیبوي: تاسو د ANTE او BLIND شرطونه ږدي، 2 کارتونو ترلاسه کوئ، د لوبې په مختلفو مرحلو کې د PLAY شرطونو په اړه پریکړه کوئ، بیا د ټولنې کارتونو ښکاره کوئ او د ډیلر سره پرتله کوئ. ستاسو هدف دا دی چې ستاسو ګټلو (کله چې تاسو غوره لاس لری) زیات کړئ، په داسې حال کې چې ستاسو زیانونه (کله چې تاسو بدتر لاس لری) کم کړئ.\n• لوبه هغه وخت پای ته رسیږي کله چې تاسو د 0 چیپس یا لاندې په پیل کې ګرځ (LOSS) یا 1000 ګرځونه د چیپس سره تکمیل کوئ (WIN)\n\n💰 د شرط جوړښت:\n• ANTE: هر ګرځ د ${ante} اجباري شرط\n• BLIND: هر ګرځ د ${ante} اجباري شرط\n• PLAY: د لوبې په جریان کې اختیاري شرط. په ټول ګرځ کې، تاسو کولی شئ یوازې یو د لاندې څخه غوره کړئ: (${ante4} که په PRE-FLOP کې ترسره شي، ${ante2} که په FLOP کې ترسره شي، یا ${ante} که په RIVER کې ترسره شي. همدارنګه کولی شئ په RIVER کې لاس پرېږدي، لاس پریږدي، او هیڅ شرط نه کوي.)\n\n🎴 د کارتونو ویشل:\n• تاسو 2 مخ پورته کارتونو ترلاسه کوئ (ستاسو لاس کارتونو)\n• ډیلر 2 مخ ښکته کارتونو ترلاسه کوئ (ستاسو څخه پټ)\n• 5 د ټولنې کارتونو مخ ښکته ویشل کیږي\n• د ټولنې کارتونو په تدریجي ډول د لوبې په مرحلو کې ښکاره کیږي\n\n🏆 د ډیلر وړتیا:\n• ډیلر باید لږ تر لږه یو جوړه (2 کارتونو د ورته رتبه) ولري تر څو وړتیا ولري، د 2 کارتونو په لاس کې او 5 د ټولنې کارتونو کارولو سره.\n• د ډیلر وړتیا د شرطونو پایلې اغېزمنوي، لکه څنګه چې وروسته توضېح کیږي.\n\n🎮 د لوبې مرحلې او کړنې:\n📋 PRE-FLOP:\n  • کړنې: [4x] (${ante4}) یا [check]\n  • [4x]: د ${ante4} PLAY شرط ږدي، لومړي 3 د ټولنې کارتونو ښکاره کوي\n  • [check]: هیڅ اضافي شرط نه کوي، لومړي 3 د ټولنې کارتونو ښکاره کوي\n\n📋 FLOP:\n  • که 4x شرط ترسره شي: یوازې [skip] شتون لري (په اتومات ډول وروستي 2 د ټولنې کارتونو ښکاره کوي)\n  • که هیڅ 4x شرط ترسره نشي: [2x] (${ante2}) یا [check]\n  • [2x]: د ${ante2} PLAY شرط ږدي، وروستي 2 د ټولنې کارتونو ښکاره کوي\n  • [check]: هیڅ اضافي شرط نه کوي، وروستي 2 د ټولنې کارتونو ښکاره کوي\n\n📋 RIVER:\n  • که 4x یا 2x شرط ترسره شي: یوازې [skip] شتون لري (په اتومات ډول showdown ته ځي)\n  • که هیڅ پخواني PLAY شرط ترسره نشي: [1x] (${ante}) یا [fold]\n  • [1x]: د ${ante} PLAY شرط ږدي، showdown ته ځي\n  • [fold]: لاس پریږدي، ANTE او BLIND شرطونه بايللي\n\n📋 SHOWDOWN:\n  • ټول کارتونو ښکاره او ارزيابي کیږي\n  • غوره 5-کارتونو لاس د 7 کارتونو څخه (2 لاس + 5 د ټولنې)\n  • شرطونه د پايلو د اصولو سره سم حل کیږي\n\n💎 د شرط پايلې:\n📊 ANTE شرط:\n  • ډیلر وړتیا نه لري: PUSH (شرط بيرته راځي)\n  • ډیلر وړتیا لري او تاسو ګټلي: 1:1 پايلا (شرط + ګټلي)\n  • ډیلر وړتیا لري او تاسو بايللي: شرط بايللي\n  • Tie: PUSH (شرط بيرته راځي)\n\n📊 BLIND شرط:\n  • د ډیلر وړتیا څخه متاثر نه کیږي\n  • تاسو ګټلي: شرط بيرته راځي او اضافي پايلا د لاس د ځواک په اساس\n  • تاسو بايللي: شرط بايللي\n  • Tie: PUSH (شرط بيرته راځي)\n\n📊 BLIND شرط د پايلو جدول:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: هیڅ اضافي پايلا\n\n📊 PLAY شرط:\n  • د ډیلر وړتیا څخه متاثر نه کیږي\n  • مستقیم پرتله: ستاسو غوره لاس vs ډیلر غوره لاس\n  • تاسو ګټلي: 1:1 پايلا (شرط + ګټلي)\n  • تاسو بايللي: شرط بايللي\n  • Tie: PUSH (شرط بيرته راځي)\n\n🎯 د پوکر لاس رتبه بندی (غوره تر بدتر):\n  1. Royal Flush: A-K-Q-J-10 د ورته سوټ\n  2. Straight Flush: 5 په ترتیب کارتونو د ورته سوټ\n  3. Four of a Kind: 4 کارتونو د ورته رتبه\n  4. Full House: 3 د یو ډول + 2 د یو ډول\n  5. Flush: 5 کارتونو د ورته سوټ\n  6. Straight: 5 په ترتیب کارتونو\n  7. Three of a Kind: 3 کارتونو د ورته رتبه\n  8. Two Pair: 2 جوړې د مختلف رتبه\n  9. One Pair: 2 کارتونو د ورته رتبه\n  10. High Card: لوړ کارت ګټلي\n\n⌨️  د کړنې 命令ونه:\n• [4x] یا [play bet 4x]: د ${{self.ante_amount*4}} PLAY شرط ږدي\n• [2x] یا [play bet 2x]: د ${{self.ante_amount*2}} PLAY شرط ږدي\n• [1x] یا [play bet 1x]: د ${{self.ante_amount*1}} PLAY شرط ږدي\n• [check] یا [c]: چیک (هیڅ اضافي شرط نه کوي)\n• [fold] یا [f]: لاس پریږدي (لاس پریږدي)\n• [skip] یا [s]: سکیپ (هیڅ کړنه نه کوي)\n\n💡 د ستراتيژي لارښوونې:\n• قوي پیل لاسونه (جوړې، لوړ کارتونو) اکثر 4x شرطونه توجیه کوي\n• د ډیلر وړتیا په نظر کې نیسي - کمزوري لاسونه کولی شي که ډیلر وړتیا نه لري\n• BLIND شرط کولی شي د قوي لاسونو سره ډیر ګټور وي (Royal Flush = 500:1!)\n• ستاسو چیپس سټیک ګوري! که دا 0 یا لاندې په پیل کې ګرځ ته ځي، تاسو بايللي.\n\n⚠️  مهم یادداشتونه:\n• ANTE او BLIND شرطونه هر ګرځ اجباري دي\n• PLAY شرطونه اختیاري او ستراتيژي دي\n• ډاډ ترلاسه کړئ چې تاسو د کړنې په اړه سم معلومات ورکوئ، او یوازې یو کړنه په یو وخت کې.\n\n",
+    "state": "🎯 ګرځ {round}\n💰 چیپسونه: {chips}\n🎴 ستا لاس: {hand}\n📊 اوسني شرطونه: انټي ${ante}، بلیټ ${blind}، لوبه ${play}\n📋 مرحله: {phase}\n🎯 شتون لرونکي کړنې: {actions}\n\n"
+  },
+  "board": {
+    "round_start": " دور {round} پیل شو! شرطونه: ANTE ${ante}، BLIND ${blind}. تاسو {chips} چپونه پاتې یاست.",
+    "your_hand": " ستاسو لاس: {hand}",
+    "flop_revealed": " د FLOP څرګندونه: {cards}",
+    "river_revealed": " د سیند څرګندونه: {cards}"
+  },
+  "invalid_move": {
+    "reason": "د اوسني پړاو لپاره غیر معتبر عمل. موجود عملونه: {available}",
+    "message": " د عمل بې اعتباره! د لاسرسي وړ عملونه: {available}"
+  },
+  "action": {
+    "folded": "تاسو په غاړه واچوله."
+  },
+  "showdown": {
+    "dealer_hand": " ښکته شو! د سوداګر لاس: {cards}",
+    "community_cards": " د ټولنې کارتونه: {cards}",
+    "player_best": " د لوبغاړي غوره لاس: {name} ({cards})",
+    "dealer_best": " د ډیلر غوره لاس: {name} ({cards})",
+    "ante_lost_folded": " د شرط له لاسه ورکولو دمخه! - $ {ante} (ګنډل شوی)",
+    "blind_lost_folded": " د ړوند شرط له لاسه ورکړ! - ${blind} (ګنډل شوی)",
+    "ante_won": "✅ د شرط په وړاندې ګټل! +${amount}",
+    "ante_pushed": " د ANTE شرط PUSHED! ${ante} بیرته راستون شو",
+    "ante_lost": "❌ انټی شرط بايلوئ! -${ante}",
+    "blind_won": "✅ د ړوند شرط ګټل شوی! +${amount}",
+    "blind_pushed": "🔄 بلیټ شرط بېرته راځي! ${blind} بېرته راځي",
+    "blind_lost": "❌ بلیټ شرط بايلوئ! -${blind}",
+    "play_won": "✅ د لوبې شرط وګټئ! +${amount}",
+    "play_pushed": " د لوبې شرط PUSHED! ${play} بیرته راستون شو",
+    "play_lost": "❌ پلی شرط بايلوئ! -${play}",
+    "net_gain": " د {round} پړاو بشپړ شو! خالص ګټه: +${net}",
+    "net_loss": " د {round} پړاو بشپړ شو! خالص زیان: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": " د لوبې پای! {max_turns} دورې بشپړې شوې. تاسو ${chips} چپس لرئ - تاسو ګټل!",
+    "game_over_lose": "د لوبې پای! تاسو د چپس څخه بهر یاست. سوداګر ګټلی!",
+    "reward_win": "لوبغاړی {winner_rounds} راؤنډونه د ${chips} چیپونو سره تکمیل کړل",
+    "reward_lose": "لوبغاړی په پړاو کې د چپسونو څخه وتښتید {round}",
+    "reward_win_max": "لوبغاړی {max_turns} راؤنډونه د ${chips} چیپونو سره تکمیل کړل"
+  },
+  "hand_names": {
+    "royal_flush": "د پاچا فلش",
+    "straight_flush": "سیدر مستقیم",
+    "four_of_a_kind": "څلور د یو ډول",
+    "full_house": "د کور ډک",
+    "flush": "د اوبو د څښلو",
+    "straight": "په مستقيم ډول",
+    "three_of_a_kind": "درې د یو ډول",
+    "two_pair": "دوه جوړه",
+    "one_pair": "یوه جوړه",
+    "high_card": "د لوړ کارت",
+    "unknown": "نامعلوم لاس"
+  }
+}

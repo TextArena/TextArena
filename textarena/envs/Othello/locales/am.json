@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "የጨዋታ ሰሌዳ: {board}",
+    "valid_moves": "{observation}\nተስማሚ ሂደቶች: {moves}",
+    "no_valid_moves_reset": "{observation} ትክክለኛ እንቅስቃሴ የለም - መዝለል ሊኖርብዎት ይችላል ።",
+    "no_valid_moves_step": "{observation} ምንም ትክክለኛ እንቅስቃሴ የለም  መተው ሊኖርብዎ ይችላል ።",
+    "scores_reset": "{observation}\nየአሁን ሸንጎሮች - ጥቁር: {black_count}, ነጭ: {white_count}\n",
+    "scores_step": "{observation}\nሸንጎሮች - ጥቁር: {black_count}, ነጭ: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "እንቅስቃሴው በ [row, col] መልክ መሆን አለበት።",
+    "illegal": "ህገወጥ እንቅስቃሴዎች: {valid}"
+  },
+  "game_action": {
+    "skipped": "ተጫዋቹ {pid} ተራውን መተው ነበረበት።",
+    "played": "ተጫዋች {pid} ({piece}) [{r}, {c}] ተጫወተ እና {flipped} ንክሻዎች አወጣ።"
+  },
+  "game_message": {
+    "must_skip": "ተጫዋች {pid} ({piece}) ተስማሚ እንቅስቃሴ የለውም እና ማለፍ አለበት።"
+  },
+  "outcome": {
+    "black_wins": "ጥቁር አሸነፈ {black_count}-{white_count}.",
+    "white_wins": "ነጭ አሸነፈ {white_count}-{black_count}.",
+    "draw": "አስተማማን ሸንጎር {black_count}-{white_count}."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "أنت لاعب {player_id} في لعبة البوكر الهندية.\n- 52 بطاقة؛ ترى فقط بطاقة الخصم.\n- الرهان {ante} شبه كل جولة, {max_rounds} جولة إجمالي.\n- الحركات الصالحة: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X هو عدد صحيح موجب <= عدد شبهاتك.)\n- أعلى بطاقة مخفية تفوز بالجائزة في المواجهة.\n"
+  },
+  "round": {
+    "announce": "### الجولة {current_round}/{max_rounds}\nبطاقة خصمك هي: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "إمداد بالضبط إجراء واحد بين قوسين، على سبيل المثال '[check]', '[bet 2]', '[call]', '[raise 3]', أو '[fold]'.",
+    "cannot_check": "مش ممكن [check] - انت بتواجه رهان.",
+    "amount_min": "المبلغ الرهان / الرفع لازم يكون 1 أو اكتر.",
+    "cannot_bet": "لا يمكن [bet] - يجب [call] / [raise] / [fold].",
+    "nothing_to_call": "ما في حاجة تتصل بها، ممكن [check] بدالها.",
+    "no_bet_to_raise": "استخدم [bet X] لفتح، ما في رهان لترفعه.",
+    "insufficient": "مافي فلوس كافية لهالحركة."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (كلفة {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "الإجراءات المحتملة: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  جائزة {pot} → اللاعب {winner}. (رصيد P0:{p0}، P1:{p1})",
+    "folded": "لاعب {player_id} انزل.",
+    "showdown_win": "العرض: {card_win} يضرب {card_lose}.",
+    "showdown_tie": "العرض متساوي: كلاهما {card}. القدر مقسم  كل واحد منهم يحصل على {split} ."
+  },
+  "outcome": {
+    "p0_wins": "لاعب 0 يفوز ({bank0} > {bank1})",
+    "p1_wins": "لاعب 1 يفوز ({bank1} > {bank0})",
+    "draw": "رقائق متساوية بعد كل الجولات."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} en un joc de {max_rounds} rondes de Kuhn Poker.\nRegles del joc:\n- El Kuhn Poker utilitza una baralla de 3 cartes amb J, Q, K (J la més baixa, K la més alta)\n- Cada jugador aposta {ante} fitxes i rep 1 carta cada ronda (tingueu en compte que les cartes es reparteixen sense reemplaçament, de manera que no podeu tenir la mateixa carta que el vostre oponent).\n- El joc continua durant {max_rounds} rondes\n- El jugador amb més fitxes després de totes les rondes guanya\nRegles d'acció:\n- '[check]': Passa sense apostar (només si no hi ha cap aposta a la taula)\n- '[bet]': Afegeix 1 fitxa al pot (només si no hi ha cap aposta a la taula)\n- '[call]': Coincideix amb l'aposta de l'oponent afegint 1 fitxa al pot\n- '[fold]': Rendir-se i deixar que l'oponent guanyi el pot"
+  },
+  "init_round": {
+    "round_start": "### Iniciant la ronda {current_round} de {max_rounds} rondes. La teva carta és: '{player_card}'",
+    "available_actions": "Les teves accions disponibles són: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "L'acció ha de ser [Check], [Bet], [Call] o [Fold].",
+    "not_legal": "L'acció ha de ser {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Jugador {player_id}, ha enviat la jugada: '[{move}]'.",
+    "valid_actions": "Les teves accions disponibles són: {legal_actions}.",
+    "round_summary": "{reason} Puntuacions actuals: Jugador 0: '{player_0_chips}'; Jugador 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Enfrontament: La carta {winner_card} del Jugador {winner} supera la carta {loser_card} del Jugador {loser}. El Jugador {winner} guanya el pot de {pot_value} fitxes."
+  },
+  "outcome": {
+    "draw": "Al final de les {max_rounds} rondes, tots dos jugadors tenien el mateix nombre de fitxes.",
+    "round_win": "El Jugador {player_id} s'ha rendit.",
+    "winner_player0": "El Jugador 0 ha guanyat per tenir més fitxes al final de totes les {max_rounds} rondes.",
+    "winner_player1": "El Jugador 1 ha guanyat per tenir més fitxes al final de totes les {max_rounds} rondes."
+  }
+}

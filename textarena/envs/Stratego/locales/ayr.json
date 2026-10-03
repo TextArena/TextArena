@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Jumaxa Jugador {player_id} Stratego ukatxa.\nJumaxa q’ara jayt’awinxa, qullasïwixa ukatxa, tukus jumaxa q’araxa jark’awixa.\nJumaxa ejércitoxa tablero ukatxa, q’ara wiphalaxa, bombaxa, ukatxa q’araxa jark’awixa.\n\n### Instrucciones de Juego\n1. **Reglas de Movimiento:**\n   - Jumaxa turno ukatxa, jumaxa q’araxa maya jaqi jall’ukipxi, q’ara tukusxa maya jaqi jall’ukipxi (patxa, p’iqi, kunka, ukatxa lara).\n   - Ejemplo: Q’ara A1 tukus B1 ukatxa, A1 tukus A2 ukatxa, B1 ukatxa A2 janiwa jumaxa q’araxa jark’awixa.\n   - Q’ara bombaxa ukatxa, q’ara wiphalaxa janiwa jall’ukipxi.\n2. **Batallas:**\n   - Jumaxa q’araxa jall’ukipt’atanxa, qullasïwixa q’araxa ukatxa, batalla jayt’awixa:\n     - Q’ara jark’awinxa q’araxa ukatxa, qullasïwixa q’araxa jayt’awixa.\n     - Q’ara jark’awinxa q’araxa janiwa, q’araxa jayt’awixa janiwa.\n     - **Casos Especiales:**\n       - Bombaxa qullasïwixa q’araxa jayt’awixa, qulliri q’araxa janiwa.\n       - Espías q’araxa jayt’awixa, Marshal q’araxa ukatxa, janiwa q’araxa jayt’awixa.\n3. **Objetivos Estratégicos:**\n   - Qullasïwixa q’araxa jall’ukipxi, jumaxa q’araxa jark’awinxa.\n   - Jumaxa q’ara wiphalaxa jark’awinxa, qullasïwixa q’ara wiphalaxa jayt’awinxa.\n   - Scout q’araxa jayt’awinxa, qullasïwixa q’araxa jark’awinxa, q’araxa jall’ukipxi.\n\n### Cómo Hacer un Movimiento:\n1. Q’ara jall’ukipxi, q’ara tukusxa maya jaqi jall’ukipxi.\n2. Formato: [A0 B0], A0 q’ara jall’ukipxi, B0 q’ara tukusxa maya jaqi jall’ukipxi.\n   - Ejemplo: Q’ara jall’ukipxi A0 tukus B0, fila 0, columna 0 tukus fila 1, columna 0.\n3. Q’ara tukusxa maya jaqi jall’ukipxi, reglas de movimiento ukatxa.\n\n### Notas Importantes:\n- Tablero ukatxa, q’ara jark’awinxa, q’ara wiphalaxa jark’awinxa.\n- Tablero ukatxa, qullasïwixa q’araxa jark’awinxa, ? ukatxa.\n- Cuadrículas ~ ukatxa, lagos ukatxa, janiwa jall’ukipxi.\n- Sugerencia, juego ukatxa, q’ara jall’ukipxi, qullasïwixa q’araxa jark’awinxa, fila D ukatxa, fila G ukatxa.\n\nEstado actual del tablero:\n"
+  },
+  "board": {
+    "current_board": "Taqi P'iqi:\n\n{board}\nJach'a Apthapi: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Jani wali lurata. {player_id} anatirixa janiw mä movimiento uka formato uksan mantkiti [A0 B0] .",
+    "invalid_coordinates": "Jani wali wakichata lurawi. {player_id} anatirixa janiw chiqapa coordinadas ukaru mantkiti.",
+    "not_own_piece": "Jani wali lurata. {player_id} anatirixa maya ch'uqipa apsuñapawa.",
+    "scout_through_pieces": "Jani wali lurata. {player_id} anatirixa janiw yaqha piqunakana mä uñakipiriru sartaykaspati.",
+    "scout_diagonal": "Jani wali lurata. {player_id} anatirixa janiw mä uñakipiru k'achachañjampix sartaykaspati.",
+    "non_scout_multi_square": "Jani wali suma luraña. Piesanakaxa, yaqha uñakipirinaka jani ukaxa mä cuadrado ukak sartapxaspa.",
+    "move_into_lake": "Jan wali lurawinaka. {player_id} anatirix janiw quta manqhar mantkaspati.",
+    "move_onto_own_piece": "Jani wali lurata. {player_id} anatirixa janiwa jupa pachpankir phusillaparu sarkaspati.",
+    "move_bomb_or_flag": "Jani wali wakichata lurawi. {player_id} anatirixa janiw mä bomba jan ukaxa bandera uksa apkatañ atkiti."
+  },
+  "game_action": {
+    "you_moved": "Jani ukhamaraki wakichirinakaxa {source} ukhamataki {dest}.",
+    "opponent_moved": "P'iqi {player_id} ukhamaraki wakichirinakaxa {source} ukhamataki {dest}.",
+    "you_equal_ranks": "Jani ukhamaraki wakichirinakaxa {source} ukhamataki {dest}. Wakichiri apnaqirinakaxa {attacking_rank}, ukhamataki wakichirinakaxa {target_rank}. Jani wakichiri apnaqirinakaxa jani ukhamataki wakichirinakaxa jani, jupanakaxa wakichirinakaxa p'itayasiña.",
+    "opponent_equal_ranks": "P'iqi {player_id} ukhamaraki wakichirinakaxa {source} ukhamataki {dest}. Wakichiri apnaqirinakaxa {attacking_rank}, ukhamataki wakichirinakaxa {target_rank}. Jani wakichiri apnaqirinakaxa jani ukhamataki wakichirinakaxa jani, jupanakaxa wakichirinakaxa p'itayasiña.",
+    "you_miner_defused": "Jumampi q'ara {source} uraq'it {dest} uraq'iru q'aritayna. Q'arayiri q'ara {attacking_rank} marka, q'arayiri q'ara {target_rank} marka. Q'arayiri q'ara q'ulliri, jumampi q'ara jayna.",
+    "opponent_miner_defused": "Q'ara {player_id} q'arayiri {source} uraq'it {dest} uraq'iru q'aritayna. Q'arayiri q'ara {attacking_rank} marka, q'arayiri q'ara {target_rank} marka. Q'arayiri q'ara q'ulliri, jumampi q'ara jayna.",
+    "you_bomb_lost": "Kamisarakiwa wak'a ukatxa {source} ukatxa, {dest} ukatxa mayt'asï ukatxa. Wak'a atakante ukatxa {attacking_rank} ukatxa, wak'a destino ukatxa {target_rank} ukatxa. Atakante ukatxa, mineräs ukatxa janiwa, lucha ukatxa.",
+    "opponent_bomb_won": "P'iqi {player_id} ukhamaraki wakichirinakaxa {source} ukhamataki {dest}. Wakichiri apnaqirinakaxa {attacking_rank}, ukhamataki wakichirinakaxa {target_rank}. Jani wakichiri apnaqirinakaxa bomba jaqinakaxa, chhaqhatixawaña.",
+    "you_spy_won": "Jumampi q'ara {source} uraq'it {dest} uraq'iru q'aritayna. Q'arayiri q'ara {attacking_rank} marka, q'arayiri q'ara {target_rank} marka. Q'arayiri q'ara ispi, jumampi q'ara jayna.",
+    "opponent_spy_lost": "Jugador {player_id} sarxatasiw q'ara {source} tukuy {dest}. Q'ara atajiri q'ara {attacking_rank} ukatwa q'ara tukuy {target_rank}. Juk'ampi atajiri q'ara espía ukatwa mariscal ukhamawa, jiwaspas q'ara.",
+    "you_higher_won": "Jumampi q'ara {source} uraq'it {dest} uraq'iru q'aritayna. Q'arayiri q'ara {attacking_rank} marka, q'arayiri q'ara {target_rank} marka. Q'arayiri q'ara janiw aka aka ch'axwa, jumampi q'ara jayna.",
+    "opponent_higher_lost": "Q'ara {player_id} q'arayiri {source} uraq'it {dest} uraq'iru q'aritayna. Q'arayiri q'ara {attacking_rank} marka, q'arayiri q'ara {target_rank} marka. Q'arayiri q'ara janiw aka aka ch'axwa, jumampi q'ara jayna.",
+    "you_lower_lost": "Jumaspas q'ara {source} tukuy {dest} sarxatasix. Q'ara atajiri q'ara {attacking_rank} ukatwa q'ara tukuy {target_rank}. Juk'ampi atajiri q'ara tukuy jach'a ukhamawa, jumaspas q'ara.",
+    "opponent_lower_won": "Jugador {player_id} sarxatasiw q'ara {source} tukuy {dest}. Q'ara atajiri q'ara {attacking_rank} ukatwa q'ara tukuy {target_rank}. Juk'ampi atajiri q'ara tukuy jach'a ukhamawa, jiwaspas q'ara."
+  },
+  "outcome": {
+    "flag_captured": "¡Jugador {player_id} jupax uñisirin wiphallap katuntaski!",
+    "no_movable_pieces": "Q'ara {winner_id} q'ara jayna! Q'ara {loser_id} janiw q'ulliri q'ara jayna."
+  }
+}

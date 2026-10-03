@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "O sa qito Klondike Solitaire tiko. Na nomu icakacaka me move taki na kad kece ki na foundation piles.\n\nNa lawa ni qito:\n- Foundation piles (F1-F4): Build up taka na Ace ki na King ena suit\n- Tableau piles (T1-T7): Build down taka na alternating colors (red ena black, black ena red)\n- Stock: Draw taka na kad ki na waste pile\n- Waste (W): Na kad sa tu ena top sa rawa me qito\n\nNa veikomandi:\n- 'draw' - Draw taka na kad taka na stock ki na waste\n- 'move <source> <destination> [count]' - Move taka na kad taka na piles\n  I-tukutuku: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Na count sa rawa me 'all', ka sa try me move taka na kad kece sa tu vakarau.\n- 'forfeit' - Vakacava na qito tiko ga kei na nomu score sa tu kina\n- Na yaca ni piles: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nO sa rawa me execute taka na actions kece ena turn e dua me veikataki ira na komata:\n  I-tukutuku: 'draw, move W T1, move T2 F1'\n\nNa Kings wale ga sa rawa me tu ena tableau piles sa empty.\nNa actions sa execute taka ena kena levu - kevaka e dua sa fail, na actions sa tu me baleta sa skip.\nVakayagataka 'forfeit' kevaka o sa nanuma na qito sa sega ni rawa me wini."
+  },
+  "format_error": {
+    "no_brackets": "Na ivakarau e sega ni dodonu me tiko ena brackets.",
+    "no_closing_bracket": "Na ivakarau ni cakacaka e sega ni dodonu. Sega na bracket ni icavacava ']'",
+    "empty_command": "Vakarau ni veika vakaloloma. Volavola 'draw' se 'move <source> <destination> [count]'",
+    "empty_action": "Cakacaka lala tu ga",
+    "move_needs_args": "Na komandi 'move' e gadrevi me tiko kina e dua na ivakatakata kei na kena i tavi. Vakayagataki: 'move <source> <destination> [count]'",
+    "count_positive": "Na count sa gadreva me positive se 'all'",
+    "count_invalid": "Na count sa sega ni dinau. Vakayagataka e dua na number se 'all'",
+    "unknown_command": "Na komandi sa unknown '{cmd}'. Vakayagataka 'draw', 'move <source> <destination> [count]', se 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Na cakacaka {n} sa vakayacori oti ni bera na druka.",
+    "failed": "Cakacaka {n} sa sega ni yaco: {msg}"
+  },
+  "move_result": {
+    "drew": "Sa draw taka na kad taka na stock ki na waste.",
+    "cannot_draw": "E sega ni rawa na droini, sa lala kece tu.",
+    "invalid_pile": "Na yaca ni iwiliwili e sega ni dodonu. Vakayagataka na W, F1-F4, se T1-T7",
+    "foundation_one_card": "E rawa ni toso ga e 1 na kadi ki na yavu.",
+    "waste_to_foundation_ok": "Na kadi e kau mai na benu ki na yavu F{dst}",
+    "waste_to_foundation_bad": "Sega ni rawa me toso na kadi ni benu ki na yavu tudei oqori",
+    "tableau_to_foundation_ok": "Kaciva na karo e tableau T{src} ki na foundation F{dst}",
+    "tableau_to_foundation_bad": "Sega ni rawa me toso na kadi tableau ki na yavu tudei oqori",
+    "foundation_to_foundation": "Sega ni rawa me toki mai na yavu ki na kena e dua tale.",
+    "waste_to_tableau_one_card": "E rawa ni toso ga 1 na kadi mai na benu ki na tableau.",
+    "waste_to_tableau_ok": "Na kadi e kau mai na benu ki na iyaloyalo T{dst}",
+    "waste_to_tableau_bad": "E sega ni rawa me biu na kadi e yali ena i binibini tabolo oya.",
+    "no_face_up": "Sega ni dua na kadi e laurai me toso tiko ga.",
+    "tableau_to_tableau_ok": "Kaciva {count} karo(s) e tableau T{src} ki T{dst}",
+    "tableau_to_tableau_bad": "E sega ni kacivi {count} karo(s) e T{src} ki T{dst}",
+    "foundation_to_tableau_one_card": "E rawa ni toso ga 1 na kadi mai na yavu ki tableau.",
+    "foundation_empty": "Na yavu F{src} e lala.",
+    "foundation_to_tableau_ok": "Kaciva na karo e foundation F{src} ki na tableau T{dst}",
+    "foundation_to_tableau_bad": "Sega ni rawa me biu na kadi yavu ena teveli T{dst}",
+    "to_waste_or_stock": "Sega ni rawa me biu ena benu se na iyaya e tu kina."
+  },
+  "outcome": {
+    "forfeit": "Na qito e sa na sega ni rawa. icavacava: {score} kadi ena yavu.",
+    "won": "Ni sa qaqa ena sotasota ni Klondike!",
+    "turn_limit": "Na qito sa oti! O sa rawa na {max_turns} turns. Na nomu score sa tu kina: {score} kad sa tu ena foundations."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== Na cava e yaco?",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stock: {stock} kad",
+    "waste": "Waste (W): {waste} Na ivoli e rawa ni vakayagataki me vaka na waiwai.",
+    "foundations_header": "Yavu:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "iTabataba:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

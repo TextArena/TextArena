@@ -1,0 +1,30 @@
+{
+  "_comment": "Berkas lokal Cryptarithm. JANGAN menerjemahkan kunci (sisi kiri). Hanya terjemahkan nilai (sisi kanan). Simpan setiap {placeholder} persis seperti yang ada; jangan menerjemahkan token penugasan `[A 5]`, huruf tunggal, atau angka.",
+  "_slots": {
+    "{letter}": "Huruf teka-teki, misalnya S atau E",
+    "{digit}": "Angka 0-9",
+    "{used_letter}": "Huruf yang sudah mengklaim angka",
+    "{assigned}": "Berapa banyak huruf yang sudah dipetakan",
+    "{total}": "Jumlah total huruf yang berbeda",
+    "{pct}": "Kemajuan sebagai string persen, misalnya 50%"
+  },
+  "player_prompt": {
+    "intro": "Peta setiap huruf ke angka unik sehingga aritmetikanya berlaku.\nTetapkan dengan `[A 5]`, ubah kapan saja.\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Format aksi salah. Gunakan `[A 5]`.",
+    "letter_not_in_puzzle": "Huruf {letter} tidak ada dalam teka-teki.",
+    "digit_used": "Angka {digit} sudah digunakan oleh {used_letter}.",
+    "leading_zero": "Angka pertama dari kata tidak boleh 0."
+  },
+  "outcome": {
+    "correct": "Benar! Persamaan terpenuhi.",
+    "incorrect": "Pemetaan lengkap tetapi persamaan salah.",
+    "limit": "Batas gerakan tercapai."
+  },
+  "board": {
+    "mapping_header": "Pemetaan:",
+    "none_yet": "  (belum ada)",
+    "assigned": "\nDitetapkan: {assigned}/{total} ({pct})"
+  }
+}

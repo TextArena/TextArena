@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Anda adalah Player {player_id} dalam Iterated Prisoner's Dilemma yang meliputi {num_rounds} putaran.\n\nStruktur Permainan:\n- Sebelum setiap keputusan, Anda memiliki {total_conversation_rounds} giliran untuk berkomunikasi secara bebas.\n- Setelah itu, kedua pemain secara bersamaan memilih untuk bekerja sama atau mengkhianati.\n\nMatriks Pembayaran (tetap setiap putaran):\n- Keduanya Bekerja Sama ➜ masing-masing {cooperate_reward}\n- Keduanya Mengkhianati ➜ masing-masing {mutual_defect_reward}\n- Satu Mengkhianati, satu Bekerja Sama ➜ Pengkhianat {defect_reward}, Pembantu {sucker_reward}\n\nCara Bermain:\n- Selama pembicaraan: ketik teks apa pun yang Anda inginkan.\n- Selama fase keputusan: sertakan '[Cooperate]' atau '[Defect]' (tidak peka huruf besar/kecil). Anda dapat menambahkan teks tambahan sebelum/di setelah token."
+  },
+  "phases": {
+    "conversation_finished": "Pembicaraan selesai untuk putaran {round}. Silakan balas dengan '[Cooperate]' atau '[Defect]' dalam \\boxed{{}}.",
+    "starting_round": "--- Ngawitin babak {round} ---",
+    "round_summary": "Hasil ronde {round}:\n{outcome}\nPemain 0 ngelah {r0} (total {score_0}), Pemain 1 ngelah {r1} (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} menang {win_score} - {lose_score}.",
+    "draw": "Draw! makakalih pamain nyetak {s0}.",
+    "round_both_cooperate": "Makakalih juru main punika sareng-sareng makarya.",
+    "round_both_defect": "Kalih pemain nyimpang.",
+    "round_p0_cooperates_p1_defects": "Pemain 0 nyarengin, Pemain 1 nyimpang.",
+    "round_p0_defects_p1_cooperates": "Pemain 0 nyimpang, Pemain 1 nyarengin."
+  }
+}

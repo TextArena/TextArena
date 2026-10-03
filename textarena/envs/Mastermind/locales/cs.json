@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Hrajete Mastermind.\nMusíte najít kód, který je {code_length} číslic dlouhý, každé číslo od 1 do {num_numbers}, {repeats}.\nVe své odpovědi můžete zadat svůj odhad v následujícím formátu: '[2 1 4 5]'.\nPo každém odhadu budete dostávat zpětnou vazbu ve formě černých a bílých kolíků.\nČerný kolík označuje správnou číslici na správném místě, zatímco bílý kolík označuje správnou číslici na nesprávném místě.\nMáte {max_turns} tahů, abyste uhodli kód.\n",
+    "with_repeats": "s možnými opakováními",
+    "no_duplicates": "bez duplicit"
+  },
+  "invalid_move": {
+    "wrong_format": "Neodpověděli jste seznamem čísel oddělených mezerami v hranatých závorkách.",
+    "not_integers": "Všechny položky musí být platná celá čísla.",
+    "wrong_length": "Odhad by měl obsahovat přesně {code_length} čísel.",
+    "out_of_range": "Všechna čísla musí být mezi 1 a {num_numbers}.",
+    "duplicates_not_allowed": "Duplicitní čísla nejsou povolena.",
+    "repeated_guess": "Už jste hádali {guess}. Zkuste prosím jiný odhad."
+  },
+  "game_action": {
+    "feedback": "Odesláno [{guess}]. Zpětná vazba: {black_pegs} černý(é) kolík(ů), {white_pegs} bílý(é) kolík(ů)."
+  },
+  "outcome": {
+    "win": "Rozluštili jste kód, vyřešili jste {black_pegs} z {code_length} kolíků správně",
+    "turn_limit": "Byl dosažen limit tahů. Uhodli jste {percent} procent čísel správně."
+  }
+}

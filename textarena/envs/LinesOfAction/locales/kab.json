@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "D kemm wemarir {player_id} deg urar n LinesOfAction.\nIɣallen-ik d '{side}', iɣallen n wemsebrir d '{other}'.\nFormat n usenqed: `[b1b3]` (tisurta n uẓeṭṭa n usenqed). Usenqed usrid yettawi s uḍḍun, s aɣella, neɣ s uɣella n iɣallen (nnayn n yini) deg wakal-ik. Tzemreḍ ad tɛeddiɣ ɣef iɣallen-ik, maca ur tɛeddiɣ ara ɣef iɣallen n wemsebrir; asenqed ɣef wemsebrir ad yeṭṭfeɣ-it.  Irem-d wemarir miṣaṣ iɣallen-ik d-qqnen ɣer 8 n iɣallen."
+  },
+  "board": {
+    "current_board": "Aɣawas: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Asebtar-a ilaq ad yili d e2e4 (si, ɣer tdukliwin).",
+    "no_piece": "Ulac {side} n uḥric deg {coord}.",
+    "identical": "Tawaɣit d wanida i ttekken.",
+    "not_straight_or_diagonal": "Azal-is ilaq ad yili d azegrar neɣ n tnezzut.",
+    "wrong_distance": "Ilaq ad yeddu s temnaḍt yemgaraden ɣer yiferrawen deg yiwet n tgara.",
+    "enemy_blocks": "Aɣawas n weɛdaw yeṭṭef abrid.",
+    "destination_own": "Uẓeṭṭa n usenqed yettwasenqed sɣur iɣallen-ik."
+  },
+  "game_action": {
+    "moved": "Amaynut {player_id} isewwḥi seg {from} -> {to}",
+    "captured_suffix": "Player {player_id} yefɣen {from} -> {to} akken ad yesselḥu aɣella n uɛdew."
+  },
+  "outcome": {
+    "win": "Kkint-d akk tɣawsiwin.",
+    "draw_no_capture": "60 n tikli ur d-nṭeq ara.",
+    "draw_repetition": "Tεawed-d talɣa tlata n tikwal."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "توهان پليئر {player_id} آهيو، Iterated Ultimatum Game جي {num_rounds} رائونڊ کيڏڻ وارا. توهان وٽ ${pool} آهي ته هن رائونڊ کي پنهنجي ۽ پليئر {other_id} جي وچ ۾ ورهايو وڃي. پروپوزر: - هڪ آڇ ڏيو: [Offer: $X] (0 <= X <= پول) - جيڪڏهن قبول ڪيو ويو → توهان $ ((پول - ايڪس) ، ٻيو پليئر $ ايڪس حاصل ڪري ٿو - جيڪڏهن رد ڪيو ويو → ٻئي $ 0 حاصل ڪريو - مثال: [Offer: $3] يا 'مان سمجهان ٿو ته اهو منصفاڻو آهي. [Offer: $5]' جواب ڏيندڙ: - پيشڪش تي فيصلو ڪريو يا ته [Accept] يا [Reject] - مثال: 'اهو مناسب لڳي ٿو. [Accept]' 'تمام غير منصفاڻو. [Reject]'"
+  },
+  "round": {
+    "begins": "--- گول {round_number} شروع ٿئي ٿو! --- پليئر {proposer_id} آهي پروپوزل ڪندڙ ، پليئر {responder_id} آهي جواب ڏيندڙ.",
+    "offer": "گول {round_number}: پليئر {proposer_id} پليئر {responder_id} کي ${offer} پيش ڪري ٿو (پڪ ${keep}).",
+    "accepted": "پليئر {responder_id} قبول ڪيو! گول {round_number} حاصلات: پليئر {proposer_id} + ${proposer_gain}، پليئر {responder_id} + ${responder_gain}. نئون مجموعو: پليئر 0: ${total_0}، پليئر 1: ${total_1}.",
+    "rejected": "رانديگر {responder_id} آڇ کي رد ڪري ڇڏيو! گول {round_number} حاصلات: ٻئي رانديگر + $ 0. مجموعي طور تي رهندا آهن: رانديگر 0: ${total_0}، رانديگر 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "تجويز ڪندڙ کي فارمٽ [Offer: $X] استعمال ڪندي هڪ آڇ ڪرڻ گهرجي.",
+    "bad_integer": "آڇ جي رقم هڪ صحيح عدد هجڻ گهرجي.",
+    "out_of_range": "پيشکش $0 ۽ ${pool} جي وچ ۾ هوندي آهي.",
+    "no_current_offer": "جواب ڏيڻ لاءِ ڪا موجوده آڇ ناهي.",
+    "accept_or_reject": "جواب دهندڙ کي پيشکش [Accept] يا [Reject] ڪرڻي آهي."
+  },
+  "outcome": {
+    "win": "پليئر {winner} ${winner_total} جي مجموعي مقابلي ۾ پليئر {loser} جي ${loser_total} سان کٽي ويو.",
+    "draw": "ڊرا! ٻنهي رانديگرن ${total} مجموعي سان ختم ڪيو."
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Yu pleyim Golf (Kad Gem) - Pleya {player_id}.\nGoel: Kamap na skor lais long dis wanpela raun. Sapos kolom i sharim sem vailu, ol i kamap 0.\nVailu bilong Kad: A=1, 2-10=vailu bilong em yet, J/Q=10, K=0\n\nAksions (usim breket eksak): \n- '[draw]' - Drawim long dek \n- '[take]' - Tekim long discard pil \n- '[swap X Y]' - Switim kard bilong yu drawim wantaim posisen X (row) Y (kolom) \n- '[discard]' - Rausim kard bilong yu drawim \n"
+  },
+  "board": {
+    "drew": "Yu drawim: {card}\nNau yu mas [swap X Y] o [discard] em.",
+    "took": "Yu kisim: {card} long ol samting yu tromoi, na nau yu mas [swap X Y] wantaim em (yu no inap rausim).",
+    "peeked": "Yu lukim long posisen ({row},{col}): {card}",
+    "turn_view": "Han bilong yu:\n{hand}\nDiscard pil: {discard}\n{options}",
+    "none": "I no gat wanpela."
+  },
+  "options": {
+    "final_turns": "Tans bilong las! Opshon bilong yu: [draw], [take], [peek X Y]",
+    "draw": "Opshon bilong yu: [draw], [take]",
+    "must_swap": "Yu mas: [swap X Y] (no ken rausim ol kat long hap bilong tromoi)",
+    "swap_or_discard": "Yu mas: [swap X Y] o [discard]"
+  },
+  "hand": {
+    "no_cards": "No gat ol kat.",
+    "header": "  Col:   1    2    3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Pleya {pid} switim {new} wantaim {old} long posisen ({row},{col})",
+    "discarded": "Pleya {pid} rausim {card}"
+  },
+  "message": {
+    "deck_empty": "Pail bilong kadi emti! Gem i pinis kwiktaim.",
+    "knocked": "Man {pid} i paitim em! Ol narapela man tu inap kisim wanpela taim moa.",
+    "final_round": "Pleya {pid} {reason}! Ol narapela pleya i gat wanpela turn moa."
+  },
+  "reason": {
+    "all_revealed": "i lukim ol kadi bilong em"
+  },
+  "invalid": {
+    "wrong_action": "Usim wanpela aktibiti bilong breket: [draw], [take], [swap X Y], [discard], [knock], o [peek X Y]",
+    "discard_empty": "Ol samting bilong rausim i no stap!",
+    "must_draw_first": "Yu mas [draw], [take], [knock], o [peek X Y] pastaim",
+    "cannot_discard_taken": "Yu no ken rausim kadi yu kisim long pail bilong kadi. Yu mas swip.",
+    "have_drawn_card": "Yu gat drawn kadi. Yu mas [swap X Y] o [discard] em.",
+    "need_drawn_swap": "Yu mas kisim wanpela kat bilong senisim.",
+    "need_drawn_discard": "Yu mas i gat wanpela samting bilong yu yet long mekim.",
+    "out_of_bounds": "Posisen i go longwe. Usim row 1-{max_row}, kolom 1-{max_col}",
+    "knock_with_card": "Yu no ken knock wantaim kadi yu kisim. Komplitim raun bilong yu pastaim.",
+    "already_knocked": "Wanpela i bin winim dispela pait.",
+    "already_revealed": "Dispela kat i stap pinis!"
+  },
+  "summary": {
+    "full": "Gem i pinis! Pleya {winner} winim wantaim skor bilong {score} poin!\n\nSkor bilong ol: \n{scores}",
+    "line": "Pleya {pid}: {score} poin\n"
+  },
+  "board_str": {
+    "title": "=== GEM BILONG GOLF ===",
+    "discard": "Pail hepi: {card}",
+    "knocked": "Pleia {pid} i knock pinis!",
+    "player_header": "Pleya {pid} (Skor: {score}):"
+  }
+}

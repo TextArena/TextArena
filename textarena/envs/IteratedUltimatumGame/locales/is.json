@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame staðfærslu skrá. ÞÝÐA EKKI lykla (vinstri hlið). Þýða aðeins gildi (hægri hlið).",
+  "_slots": {
+    "{player_id}": "Leikmannsnúmer, 0 eða 1",
+    "{other_id}": "Númer hins leikmanns, 1 eða 0",
+    "{num_rounds}": "Heildarfjöldi umferða",
+    "{pool}": "Upphæð peninga í boði hverju sinni (tala)",
+    "{round_number}": "Núverandi umferð",
+    "{proposer_id}": "Númer leikmanns sem gerir tilboð, 0 eða 1",
+    "{responder_id}": "Númer leikmanns sem svarar, 0 eða 1",
+    "{offer}": "Upphæð sem er boðin (tala)",
+    "{keep}": "Upphæð sem leikmaður heldur (tala)",
+    "{proposer_gain}": "Peningar sem leikmaður fékk í þessari umferð (tala)",
+    "{responder_gain}": "Peningar sem svarandi fékk í þessari umferð (tala)",
+    "{total_0}": "Safnaður fjöldi leikmanns 0 (tala)",
+    "{total_1}": "Safnaður fjöldi leikmanns 1 (tala)",
+    "{winner}": "Númer sigurvegara",
+    "{loser}": "Númer tapara",
+    "{winner_total}": "Heildarfjöldi sigurvegara (tala)",
+    "{loser_total}": "Heildarfjöldi tapara (tala)",
+    "{total}": "Jafntefli, fjöldi hverrar (tala)"
+  },
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id}, að spila {num_rounds} umferðir af Iterated Ultimatum Game.\nÞú hefur ${pool} til að skipta á milli þín og Leikmanns {other_id} í þessari umferð.\n\nTilboðsgerandi:\n  - Gerðu tilboð: [Offer: $X] (0 <= X <= pool)\n  - Ef samþykkt → Þú færð $(pool - X), hinn leikmaður fær $X\n  - Ef hafnað → Báðir fá $0\n  - Dæmi: [Offer: $3]  eða  'Mér líkar þetta. [Offer: $5]'\n\nSvarandi:\n  - Ákveðið hvort tilboðið er samþykkt með [Accept] eða [Reject]\n  - Dæmi: 'Þetta virðist rétt. [Accept]'\n            'Of órétt. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Umferð {round_number} hefst! ---\nLeikmaður {proposer_id} er tilboðsgerandi, Leikmaður {responder_id} er svarandi.",
+    "offer": "Umferð {round_number}: Leikmaður {proposer_id} býður ${offer} Leikmanni {responder_id} (heldur ${keep}).",
+    "accepted": "Leikmaður {responder_id} samþykkti! Umferð {round_number} fjölnir: Leikmaður {proposer_id} +${proposer_gain}, Leikmaður {responder_id} +${responder_gain}. Nýir fjöldar: Leikmaður 0: ${total_0}, Leikmaður 1: ${total_1}.",
+    "rejected": "Leikmaður {responder_id} hafnaði tilboðinu! Umferð {round_number} fjölnir: Báðir leikmenn +$0. Fjöldar eru enn: Leikmaður 0: ${total_0}, Leikmaður 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Tilboðsgerandi verður að gera tilboð með sniðinu [Offer: $X].",
+    "bad_integer": "Upphæð tilboðs verður að vera gilt heiltala.",
+    "out_of_range": "Tilboð verður að vera á milli $0 og ${pool}.",
+    "no_current_offer": "Ekkert tilboð er til að svara.",
+    "accept_or_reject": "Svarandi verður að velja annað hvort [Accept] eða [Reject] tilboðinu."
+  },
+  "outcome": {
+    "win": "Leikmaður {winner} vann með ${winner_total} heildarfjölda gegn Leikmanni {loser} sem fékk ${loser_total}.",
+    "draw": "Jafntefli! Báðir leikmenn luku með ${total} heildarfjölda."
+  }
+}

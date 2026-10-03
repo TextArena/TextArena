@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ty jesz Graczym {player_id} we Wtórzonym Dylemmie Więźnia, kery trwo {num_rounds} rund.\n\nStruktura Gry:\n- Przed każdym decyzyjnym masz {total_conversation_rounds} tur, coby swobodnie godoć.\n- Potym, uobaj gracze jednocześnie wybierają, czy współpracować, czy zdradzić.\n\nMacierz Wypłat (stała każdą rundę):\n- Uobaj Współpracujům ➜ każdy {cooperate_reward}\n- Uobaj Zdradzajům ➜ każdy {mutual_defect_reward}\n- Jedyn Zdradzo, drugi Współpracuje ➜ Zdradca {defect_reward}, Współpracownik {sucker_reward}\n\nJak Grać:\n- Podczas rozmowy: wpisz tekst, jaki chcesz.\n- Podczas fazy decyzyjny: włóż '[Cooperate]' abo '[Defect]' (bez wrażności na wjelkość liter). Możesz dodać ekstra tekst przed/po tokenie."
+  },
+  "phases": {
+    "conversation_finished": "Rozmowa skůńczůno lo rundy {round}. Odpowiedź proszům '[Cooperate]' abo '[Defect]' we \\boxed{{}}.",
+    "starting_round": "--- Runda ôd poczōntku {round} ---",
+    "round_summary": "Wyniki rundy {round}:\n{outcome}\nGracz 0 zarobił {r0} (w sumie {score_0}), Gracz 1 zarobił {r1} (w sumie {score_1})."
+  },
+  "outcome": {
+    "winner": "Gracz {winner} wygroł {win_score} - {lose_score}.",
+    "draw": "Ôba gracze strzelili {s0}.",
+    "round_both_cooperate": "Ôba gracze spōłpracowali.",
+    "round_both_defect": "Obaj gracze zdradzili.",
+    "round_p0_cooperates_p1_defects": "Szpiler 0 wspůłpracowoł, Szpiler 1 zdradźił.",
+    "round_p0_defects_p1_cooperates": "Gracz 0 uciyk, gracz 1 spōłpracowoł."
+  }
+}

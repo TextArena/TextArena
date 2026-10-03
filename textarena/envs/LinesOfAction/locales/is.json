@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction staðfærslu skrá. ÞÝÐA EKKI lykla (vinstri hlið). Þýða aðeins gildi (hægri hlið).",
+  "_slots": {
+    "{player_id}": "Leikmannsnúmer, annað hvort 0 eða 1",
+    "{side}": "Leikmannsmerki, annað hvort O eða X",
+    "{other}": "Andstæðingsmerki, annað hvort O eða X",
+    "{board}": "Borðið í ASCII sniði; halda eins",
+    "{coord}": "Borðhnit, t.d. b1 eða a3",
+    "{from}": "Upprunahnit fyrir leik, t.d. b1",
+    "{to}": "Áfangahnit fyrir leik, t.d. b3"
+  },
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í LinesOfAction leik.\nÞínar merkir eru '{side}', andstæðingsmerkir eru '{other}'.\nSnið fyrir leik: `[b1b3]` (frá-hnit til-hnit). Löglegur leikur fer lárétt, lóðrétt eða á skálínu eins margar reitur og fjöldi merkjanna (hvorugra lita) í þeirri línu. Þú mátt hoppa yfir eigin merki, en ekki andstæðingsmerki; lending á andstæðingi náir honum. Vinnur þú þegar allar þínar merkir eru 8-nágrannasambandi."
+  },
+  "board": {
+    "current_board": "Borð:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Snið verður að vera e2e4 (frá- og til-hnit).",
+    "no_piece": "Engin {side} merki á {coord}.",
+    "identical": "Uppruna- og áfangahnit eru eins.",
+    "not_straight_or_diagonal": "Leikur verður að vera lárétt eða á skálínu.",
+    "wrong_distance": "Verður að hreyfa sig eins langt og fjöldi merkjanna í línu.",
+    "enemy_blocks": "Andstæðingsmerki hindrar leiðina.",
+    "destination_own": "Áfangareiturinn er áttur af eigin merki."
+  },
+  "game_action": {
+    "moved": "Leikmaður {player_id} hreyfði {from} -> {to}",
+    "captured_suffix": "Leikmaður {player_id} hreyfði {from} -> {to} og náði andstæðingi."
+  },
+  "outcome": {
+    "win": "Allar merkir eru tengdar.",
+    "draw_no_capture": "60 leikir án náms.",
+    "draw_repetition": "Staðan er endurtekin þrisvar."
+  }
+}

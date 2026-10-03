@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} a Chopsticks. En el teu torn, tria una de les següents opcions:\n  + Atac:  '[attack M O]'  on M=la teva mà (0 o 1), O=la mà de l'oponent (0 o 1).\n    - El compte de la mà de l'oponent augmenta amb la teva mà; si és >=5, es converteix en 0.\n  + Divisió:   '[split L R]'  per redistribuir els teus dits totals en L i R (L+R = el teu total).\nRespon amb exactament una d'aquestes comandes."
+  },
+  "board": {
+    "current_board": "Tauler actual:\nJugador 0: {hands_0}\nJugador 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "La teva mà {my_idx} està morta.",
+    "opp_hand_dead": "La mà {opp_idx} de l'oponent ja està morta.",
+    "split_sum": "La divisió ha de sumar {total}.",
+    "split_no_change": "La divisió ha de canviar la distribució de les teves mans.",
+    "invalid_command": "Moviment invàlid. Utilitza “[attack M O]” o “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} ataca la mà {opp_idx} de P{opp_id}: passa de {opp_val} a {new_val}.",
+    "split": "P{player_id} es divideix en [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Les dues mans de l'oponent estan mortes.",
+    "draw": "S'ha assolit el límit de torns."
+  }
+}

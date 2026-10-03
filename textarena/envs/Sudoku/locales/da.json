@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id}. Du spiller Sudoku.\nHer er den aktuelle tilstand af Sudoku-gitteret. Hver række er nummereret fra 1 til 9, og hver kolonne er også nummereret fra 1 til 9.\nTomme celler repræsenteres af '.', og forudfyldte celler indeholder cifre fra 1 til 9.\n\nAktuelt Sudoku-gitter:\nDit mål er at udfylde de tomme celler i 9x9-gitteret med cifre fra 1 til 9 således, at:\n1. Hver række indeholder alle cifre fra 1 til 9 uden gentagelse.\n2. Hver kolonne indeholder alle cifre fra 1 til 9 uden gentagelse.\n3. Hver af de ni 3x3-undergitter indeholder alle cifre fra 1 til 9 uden gentagelse.\n\nRegler og instruktioner:\n1. **Overstyr ikke** de oprindelige tal, der er angivet i gitteret.\n2. **Udfyld kun** tomme celler repræsenteret af '.'.\n3. Du kan svare på enhver måde, du foretrækker, men sørg for, at dit svar indeholder formatet '[række kolonne nummer]'.\n4. **Sørg for**, at dit træk ikke overtræder Sudoku-reglerne. Ugyldige træk vil resultere i straf.\nEksempler:\n- **Gyldigt træk**:\n  - Gitterudsnit før træk:\n  \n  - Træk: `[5 3 7]`\n  - Forklaring: Placering af 7 på række 5, kolonne 3 overtræder ikke nogen Sudoku-regler.\n\n- **Ugyldigt træk** (Overstyring af en forudfyldt celle):\n  - Gitterudsnit før træk:\n  \n  - Træk: `[1 1 9]`\n  - Forklaring: Celle (1,1) er allerede fyldt med 5. Du kan ikke overstyre den.\n\n- **Ugyldigt træk** (Overtrædelse af Sudoku-regler):\n  - Gitterudsnit før træk:\n  \n  - Træk: `[1 3 5]`\n  - Forklaring: Placering af 5 på række 1, kolonne 3 overtræder reglen, da 5 allerede eksisterer på række 1.\n\nHistorien over dine træk og tanker vil blive føjet til, efterhånden som du spiller flere runder. Brug historien over dine træk til at forbedre din beslutningstagning ved at undgå de træk, du har prøvet. Held og lykke!\n\n"
+  },
+  "board": {
+    "game_board": "Spillebræt:\n{board}",
+    "board_state": "Brættets tilstand: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldigt trækformat. Spiller {player_id} svarede ikke med gyldigt 'række kolonne nummer'.",
+    "out_of_bounds": "Ugyldigt træk. Spiller {player_id} forsøgte at placere {num} på ({row}, {col}), som er uden for grænserne.",
+    "overwrite": "Ugyldigt træk. Spiller {player_id} forsøgte at overstyre en forudfyldt celle ({row}, {col}).",
+    "violates_rules": "Ugyldigt træk. Spiller {player_id} forsøgte at placere {num} på ({row}, {col}), som overtræder Sudoku-reglerne."
+  },
+  "outcome": {
+    "win": "Tillykke! Spiller {player_id} har færdiggjort Sudoku-puslespillet.",
+    "turn_limit": "Tidsgrænsen er nået. Du har korrekt udfyldt {percent}% af de tomme celler."
+  }
+}

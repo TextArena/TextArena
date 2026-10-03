@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le Joueur {player_id}. Vous jouez au taquin à 15 pièces.\nL'objectif du jeu est de disposer les tuiles numérotées dans l'ordre croissant de 1 à 15, avec la case vide située dans le coin inférieur droit.\nPour effectuer un mouvement, vous pouvez faire glisser une tuile dans la case vide (représentée par deux traits de soulignement, par ex. __) à l'aide de l'une des commandes suivantes :\n- 'up' : Déplacez vers le haut la tuile située sous la case vide.\n- 'down' : Déplacez vers le bas la tuile située au-dessus de la case vide.\n- 'left' : Déplacez vers la gauche la tuile située à droite de la case vide.\n- 'right' : Déplacez vers la droite la tuile située à gauche de la case vide.\nPour soumettre votre mouvement, saisissez la direction (par ex. 'up', 'down', 'left' ou 'right') entre crochets, par ex. [up].\nLa disposition actuelle du plateau est affichée ci-dessous. Utilisez ces informations pour résoudre le puzzle.\n"
+  },
+  "board": {
+    "current_board": "Plateau actuel :\n\n{board}\nMouvements disponibles : {moves}",
+    "game_board": "Plateau de jeu :\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de mouvement invalide. Le Joueur {player_id} n'a pas répondu avec une direction valide entre crochets.",
+    "illegal_move": "Mouvement invalide. La tuile ne peut pas être déplacée dans la direction indiquée."
+  },
+  "outcome": {
+    "win": "Félicitations ! Le Joueur {player_id} a réussi à résoudre le taquin à 15 pièces.",
+    "turn_limit": "La limite de tours a été atteinte. Le modèle a terminé {percent} pour cent du puzzle"
+  }
+}

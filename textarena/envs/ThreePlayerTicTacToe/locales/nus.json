@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Yin aa wäär {player_id} në Thre-Player Tic Tac Toe.\nThök ë yin ë bɛ̈n '{symbol}'.\nYin lɔ̈ thök ë yin në bɔ̈r 5x5 lɔ̈ cäth ë thök ë pɛ̈c 4.\nCäth ë thök lɔ̈ pɛ̈n ë bɔ̈r, wäär, ku jɔl ya pɛ̈n.\nLɔ̈ cäthke yin në '[4]' lɔ̈ thök ë pɛ̈c 4."
+  },
+  "board": {
+    "current_board": "Kɛmɛ̈thɛ̈rɛ̈k ë bɔ̈r:\n\n{board}\n\nCäthke wäär: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Cäthke ë lɔ̈k ë bɛ̈n. Lɔ̈  '[cell]' pɛ̈n ë bɔ̈r 0-{max_cell}.",
+    "out_of_range": "Kɛm ë bɔ̈r ë lɔ̈k: {cell}. Kɛn ë bɛ̈n 0 na {max_cell}.",
+    "already_occupied": "Thɛli̱ {cell} cɛ ku thuŋ cop.",
+    "made_invalid": "Ɛn ŋar {player_id} cɛ wɔ̱ kɛ mi /ci mɔ a jɛn."
+  },
+  "game_action": {
+    "placed": "Wäär {player_id} acë thök ({symbol}) në pɛ̈c ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Wäär {player_id} ({symbol}) wɛ̈c!",
+    "draw": "Ɛn duel ɛ mi̱ caa kuɛn!"
+  }
+}

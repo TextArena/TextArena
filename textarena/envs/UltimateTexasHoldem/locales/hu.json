@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em nyelvi fájl. NE fordítsa le a kulcsokat (bal oldal). Csak a értékeket fordítsa le (jobb oldal).",
+  "_slots": {
+    "{start_chips}": "Kezdő zsetonok száma, pl. 1000",
+    "{ante}": "Az ante/vak tét összege, pl. 25",
+    "{ante4}": "Négyszeres ante, pl. 100",
+    "{ante2}": "Kétszeres ante, pl. 50",
+    "{round}": "Az aktuális kör száma",
+    "{chips}": "A játékos aktuális zsetonjainak száma",
+    "{hand}": "A játékos lapjainak listája, pl. 'A♠, K♥', vagy a lokalizált 'nincs lap' szöveg",
+    "{phase}": "Az aktuális fázis címke (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A rendelkezésre álló akciók listája, pl. '[play_bet_4x], [check]'",
+    "{available}": "A jelenleg elérhető akciók listája",
+    "{blind}": "A vak tét összege",
+    "{play}": "A játék tét összege",
+    "{cards}": "A lapok listája, pl. 'Q♣, 7♦, 2♠'",
+    "{name}": "Egy lokalizált pókerkéz neve, szó szerint beillesztve",
+    "{amount}": "Egy zseton összeg",
+    "{net}": "A kör nettó zsetonváltozása (lehet negatív)",
+    "{max_turns}": "A maximális körök száma",
+    "{winner_rounds}": "A győztes körök száma"
+  },
+  "player_prompt": {
+    "no_cards": "Még nincsenek lapok",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Egyjátékos a krupié ellen\n\n📖 JÁTÉK ÁTTEKINTÉS:\n• {start_chips} zsetonnal kezd\n• Egy 52 lapos pakli (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• A krupié ellen játszik\n• Minden kör az Ultimate Texas Hold'em szerkezetét követi: ANTE és VAK téteket tesz, 2 lyuklapot kap, eldönti, hogy opcionálisan PLAY téteket tesz-e a fogadási fázisokban, majd felfedi a közösségi lapokat és összehasonlítja a legjobb 5 lapos kezét a krupiééval. A célja, hogy maximalizálja a nyereményét (ha jobb keze van), miközben minimalizálja a veszteségeit (ha rosszabb keze van).\n• A játék véget ér, ha 0 zsetonra vagy az alá kerül a kör elején (VESZTESÉG), vagy 1000 kört teljesít zsetonokkal (NYERÉS)\n\n💰 FOGADÁSI STRUKTÚRA:\n• ANTE: Kötelező ${ante} tét minden körben\n• VAK: Kötelező ${ante} tét minden körben\n• PLAY: Opcionális tét a játék során. A kör során csak egyet választhat az alábbiak közül: (${ante4} ha a PRE-FLOP-ban, ${ante2} ha a FLOP-ban, vagy ${ante} ha a RIVER-ben. A RIVER-ben fel is adhatja a kezet, ekkor nem tesz tétet.)\n\n🎴 LAPKIOSZTÁS:\n• 2 felfordított lapot kap (lyuklapok)\n• A krupié 2 lefordított lapot kap (rejtve)\n• 5 közösségi lapot osztanak lefordítva\n• A közösségi lapokat fokozatosan felfedik a játék fázisai során\n\n🏆 KRUPIÉ KVALIFIKÁCIÓ:\n• A krupiének legalább egy PÁR (2 azonos értékű lap) kell, hogy kvalifikáljon, a 2 lapját és az 5 közösségi lapot használva.\n• A krupié kvalifikációja befolyásolja a fogadási eredményeket, ahogy később el lesz magyarázva.\n\n🎮 JÁTÉKFÁZISOK ÉS AKCIÓK:\n📋 PRE-FLOP:\n  • Akciók: [4x] (${ante4}) vagy [check]\n  • [4x]: ${ante4} PLAY tétet tesz, felfedi az első 3 közösségi lapot\n  • [check]: Nem tesz további tétet, felfedi az első 3 közösségi lapot\n\n📋 FLOP:\n  • Ha 4x tétet tett: Csak [skip] érhető el (automatikusan felfedi az utolsó 2 közösségi lapot)\n  • Ha nem tett 4x tétet: [2x] (${ante2}) vagy [check]\n  • [2x]: ${ante2} PLAY tétet tesz, felfedi az utolsó 2 közösségi lapot\n  • [check]: Nem tesz további tétet, felfedi az utolsó 2 közösségi lapot\n\n📋 RIVER:\n  • Ha 4x vagy 2x tétet tett: Csak [skip] érhető el (automatikusan továbblép a leszámolásra)\n  • Ha nem tett PLAY tétet: [1x] (${ante}) vagy [fold]\n  • [1x]: ${ante} PLAY tétet tesz, továbblép a leszámolásra\n  • [fold]: Feladja a kezet, elveszíti az ANTE és VAK téteket\n\n📋 SHOWDOWN:\n  • Minden lap felfedésre kerül és értékelésre kerül\n  • A legjobb 5 lapos kéz a 7 lapból (2 lyuklap + 5 közösségi lap)\n  • A tétek rendezése a kifizetési szabályok szerint\n\n💎 FOGADÁSI KIFIZETÉSEK:\n📊 ANTE TÉT:\n  • A krupié nem kvalifikál: PUSH (tét visszatérítése)\n  • A krupié kvalifikál és nyer: 1:1 kifizetés (tét + nyeremény)\n  • A krupié kvalifikál és veszít: Tét elvesztése\n  • Döntetlen: PUSH (tét visszatérítése)\n\n📊 VAK TÉT:\n  • A krupié kvalifikációja nem befolyásolja\n  • Nyertes: Tét visszatérítése és további kifizetés a kéz ereje alapján\n  • Vesztes: Tét elvesztése\n  • Döntetlen: PUSH (tét visszatérítése)\n\n📊 VAK TÉT KIFIZETÉSI TÁBLÁZAT:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Nincs további kifizetés\n\n📊 PLAY TÉT:\n  • A krupié kvalifikációja nem befolyásolja\n  • Közvetlen összehasonlítás: A legjobb kéz a krupié legjobb kezével\n  • Nyertes: 1:1 kifizetés (tét + nyeremény)\n  • Vesztes: Tét elvesztése\n  • Döntetlen: PUSH (tét visszatérítése)\n\n🎯 PÓKERKÉZ RANGSOR (Legjobbtól a legrosszabbig):\n  1. Royal Flush: A-K-Q-J-10 azonos színben\n  2. Straight Flush: 5 egymást követő lap azonos színben\n  3. Four of a Kind: 4 azonos értékű lap\n  4. Full House: 3 azonos értékű lap + 2 azonos értékű lap\n  5. Flush: 5 azonos színű lap\n  6. Straight: 5 egymást követő lap\n  7. Three of a Kind: 3 azonos értékű lap\n  8. Two Pair: 2 különböző értékű pár\n  9. One Pair: 2 azonos értékű lap\n  10. High Card: A legmagasabb lap nyer\n\n⌨️  AKCIÓ PARANCSOK:\n• [4x] vagy [play bet 4x]: ${{self.ante_amount*4}} PLAY tétet tesz\n• [2x] vagy [play bet 2x]: ${{self.ante_amount*2}} PLAY tétet tesz\n• [1x] vagy [play bet 1x]: ${{self.ante_amount*1}} PLAY tétet tesz\n• [check] vagy [c]: Ellenőrzés (nincs további tét)\n• [fold] vagy [f]: Feladás (kéz feladása)\n• [skip] vagy [s]: Átugrás a következő fázisra (ha nincs szükség akcióra)\n\n💡 STRATÉGIAI TIPPEK:\n• Erős kezdő kezek (párok, magas lapok) gyakran indokolják a 4x téteket\n• Vegye figyelembe a krupié kvalifikációját - gyenge kezek esetén a krupié nem kvalifikálhat\n• A VAK tét nagyon jövedelmező lehet erős kezekkel (Royal Flush = 500:1!)\n• Figyelje a zsetonjait! Ha 0-ra vagy az alá kerül a kör elején, veszít.\n\n⚠️  FONTOS MEGJEGYZÉSEK:\n• ANTE és VAK tétek kötelezőek minden körben\n• PLAY tétek opcionálisak és stratégiaiak\n• Győződjön meg arról, hogy a helyes akciót adja meg, és csak egy akciót egyszerre.\n\n",
+    "state": "🎯 KÖR {round}\n💰 Zsetonok: {chips}\n🎴 Kéz: {hand}\n📊 Aktuális tétek: Ante ${ante}, Vak ${blind}, Play ${play}\n📋 Fázis: {phase}\n🎯 Elérhető akciók: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Kör {round} elkezdődött! Tétek: ANTE ${ante}, VAK ${blind}. {chips} zsetonja maradt.",
+    "your_hand": "🎴 Kéz: {hand}",
+    "flop_revealed": "🃏 FLOP felfedve: {cards}",
+    "river_revealed": "🃏 RIVER felfedve: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Érvénytelen akció az aktuális fázisban. Elérhető akciók: {available}",
+    "message": "❌ Érvénytelen akció! Elérhető akciók: {available}"
+  },
+  "action": {
+    "folded": "🃏 Feladtad a kezed."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 LESZÁMOLÁS! A krupié keze: {cards}",
+    "community_cards": "🃏 Közösségi lapok: {cards}",
+    "player_best": "🎴 Játékos legjobb keze: {name} ({cards})",
+    "dealer_best": "🎴 Krupié legjobb keze: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE tét ELVESZTETT! -${ante} (feladva)",
+    "blind_lost_folded": "❌ VAK tét ELVESZTETT! -${blind} (feladva)",
+    "ante_won": "✅ ANTE tét NYERT! +${amount}",
+    "ante_pushed": "🔄 ANTE tét VISSZATÉRÍTVE! ${ante} visszatérítve",
+    "ante_lost": "❌ ANTE tét ELVESZTETT! -${ante}",
+    "blind_won": "✅ VAK tét NYERT! +${amount}",
+    "blind_pushed": "🔄 VAK tét VISSZATÉRÍTVE! ${blind} visszatérítve",
+    "blind_lost": "❌ VAK tét ELVESZTETT! -${blind}",
+    "play_won": "✅ PLAY tét NYERT! +${amount}",
+    "play_pushed": "🔄 PLAY tét VISSZATÉRÍTVE! ${play} visszatérítve",
+    "play_lost": "❌ PLAY tét ELVESZTETT! -${play}",
+    "net_gain": "🎉 Kör {round} befejeződött! Nettó nyereség: +${net}",
+    "net_loss": "💸 Kör {round} befejeződött! Nettó veszteség: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 JÁTÉK VÉGE! {max_turns} kör befejeződött. {chips} zsetonja van - NYERT!",
+    "game_over_lose": "🏁 JÁTÉK VÉGE! Elfogyott a zsetonja. A krupié nyert!",
+    "reward_win": "A játékos {winner_rounds} kört teljesített {chips} zsetonnal",
+    "reward_lose": "A játékos kifogyott a zsetonból a {round} körben",
+    "reward_win_max": "A játékos {max_turns} kört teljesített {chips} zsetonnal"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Négy egyforma",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Sor",
+    "three_of_a_kind": "Három egyforma",
+    "two_pair": "Két pár",
+    "one_pair": "Egy pár",
+    "high_card": "Legmagasabb lap",
+    "unknown": "Ismeretlen kéz"
+  }
+}

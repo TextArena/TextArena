@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Դուք Խաղացող {player_id} եք LinesOfAction խաղում։\nՁեր խաղաքարերը '{side}' են, հակառակորդի խաղաքարերը '{other}' են։\nՏեղափոխման ֆորմատը՝ `[b1b3]` (սկզբնական կոորդինատ, վերջնական կոորդինատ)։ Օրինական տեղափոխում կատարվում է հորիզոնական, ուղղահայաց կամ անկյունագծային ուղղությամբ այն քանակությամբ քառակուսիներով, որ հավասար է այդ գծում գտնվող խաղաքարերի ընդհանուր քանակին (ցանկացած գույն)։ Դուք կարող եք ցատկել ձեր սեփական խաղաքարերի վրայով, բայց ոչ հակառակորդի խաղաքարերի վրայով, հակառակորդի խաղաքարի վրա վայրէջք կատարելով դուք այն գրավում եք։ Հաղթեք, երբ բոլոր ձեր խաղաքարերը 8 հարևան կապված են։"
+  },
+  "board": {
+    "current_board": "Խորհուրդ: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ֆորմատը պետք է լինի e2e4 (կոորդինատներից մինչեւ)",
+    "no_piece": "Չկա {side} կտոր {coord}-ի վրա:",
+    "identical": "Աղբյուրը եւ նպատակակետը նույնն են:",
+    "not_straight_or_diagonal": "Շարժումը պետք է լինի ուղիղ կամ շառավիղ:",
+    "wrong_distance": "Պետք է շարժվի մի շարք կտորների հավասար հեռավորության վրա:",
+    "enemy_blocks": "Թշնամու կտորը արգելափակում է ճանապարհը:",
+    "destination_own": "Նպատակակետը զբաղված է սեփական խաղաքարով։"
+  },
+  "game_action": {
+    "moved": "Խաղացողը {player_id} տեղափոխվել է {from} -> {to}",
+    "captured_suffix": "Խաղացողը {player_id} տեղափոխվեց {from} -> {to} ՝ գրավելով թշնամուն:"
+  },
+  "outcome": {
+    "win": "Բոլոր կտորները միացված են:",
+    "draw_no_capture": "60 քայլ առանց գրաքննության:",
+    "draw_repetition": "Պաշտոնը կրկնվել է երեք անգամ:"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Witaj w Lights Out! Masz {size}x{size} siatkę świateł.\nTwoim celem jest wyłączenie WSZYSTKICH świateł (reprezentowanych przez '.').\nGdy naciśniesz światło, przełącza się ono i jego sąsiedzi (góra/dół/lewo/prawo).\nWpisz [wiersz kolumna], aby nacisnąć światło (indeksowane od 0, więc ważny zakres to 0-{max_index}).\nMasz do {max_turns} ruchów, aby rozwiązać zagadkę.\nLegenda: 'O' = światło włączone, '.' = światło wyłączone"
+  },
+  "board": {
+    "current_state": "Aktualny stan siatki (Ruch {moves_made}, {moves_left} ruchów pozostałych, {completion}% ukończone):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Akcja musi być w formacie [wiersz kolumna], gdzie wiersz i kolumna są liczbami całkowitymi od 0 do {max_index}.",
+    "out_of_range": "Współrzędne muszą być między 0 a {max_index}. Wprowadziłeś [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Gratulacje! Rozwiązałeś zagadkę w {moves_used} ruchach!",
+    "loss": "Gra skończona! Wykorzystałeś wszystkie {max_turns} ruchy bez rozwiązania zagadki. Ostateczne ukończenie: {completion}%\nOstateczny stan:\n{grid}"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos egy kétjátékosos Spite and Malice játékban. A célja, hogy elsőként ürítse ki a kifizetési kupacot.\n\n### Játék áttekintése:\n- A cél, hogy a kifizetési kupacot a középső kupacokra játszott kártyákkal ürítse ki.\n- Három forrásból játszhat kártyát:\n  1. A **kezéből** (minden kör elején legfeljebb 5 kártyával kezd).\n  2. A **kifizetési kupac tetejéről**.\n  3. A **bármelyik eldobott kupac tetejéről**.\n\n### Játékszabályok:\n- Egy kártyát a középső kupacra játszhat, ha az **eggyel magasabb rangú**, mint a kupac tetején lévő kártya (a középső kupacok Ásszal kezdődnek és Királynőig mennek; a Királyok jokerkártyák - bármelyik kártyára játszhatók, de nem változtatják meg a rangsorrendet. Ez azt jelenti, hogy ha egy Királyt használnak egy 4-es után, akkor az a Király 5-ösnek számít, és a következő kártyának 6-osnak kell lennie).\n- Ha nem tud több kártyát játszani, **eldobni kell egy kártyát** az egyik eldobott kupacra, hogy befejezze a körét.\n- Ha egy középső kupac eléri a Királynőt, automatikusan kiürül.\n- A rangsorrend: Á=1, 2=2, ..., 9=9, J=10, Q=11, K jokerkártyaként.\n\n### Akciók:\n1. **Húzás**: A kör elején húzzon kártyákat, hogy a kezében legfeljebb 5 kártya legyen. Írja be a **[draw]**-t, hogy elkezdje.\n2. **Kártya játszása**: Egy kártya játszásához adja meg a kártyát és a középső kupacot, például: **[play A♠ 0]** (ahol 'A♠' a kártya és '0' a középső kupac indexe).\n3. **Eldobás**: Ha nem tud több kártyát játszani, dobjon el egy kártyát a kezéből az egyik eldobott kupacra, hogy befejezze a körét. Írja be a **[discard A♠ 1]**-et (ahol 'A♠' a kártya és '1' az eldobott kupac indexe). Vegye figyelembe, hogy nem dobhat el kártyát a kifizetési kupacból. Csak a kezében lévő kártyákat dobhatja el.\n\n"
+  },
+  "board": {
+    "current_board": "Aktuális tábla:\n\n{board}\nElérhető lépések: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Középső kupacok ---\n",
+    "pile": "{observation}Kupac {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- {player_id}. játékos nézete ---\n",
+    "payoff": "{observation}Kifizetési kupac (Legfelső kártya): {top_card}, Kifizetési kupac hossza: {payoff_length}\n",
+    "hand": "{observation}Kéz: {hand}\n",
+    "discard": "{observation}Eldobott kupacok: {discard}\n",
+    "empty": "Üres"
+  },
+  "game_message": {
+    "no_cards_left": "Nincsenek több kártyák, amelyeket húzhat. Ne feledje, hogy kártyákat játszhat a következő forrásokból:\n  1. A **kezéből**.\n  2. A **kifizetési kupac tetejéről**.\n  3. A **bármelyik eldobott kupac tetejéről**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Érvénytelen lépésformátum. A {player_id}. játékos nem válaszolt érvényes lépéssel a szögletes zárójelekben.",
+    "invalid_play": "Érvénytelen játék. A {player_id}. játékos megpróbálta játszani a {card} kártyát a {index} középső kupacra.",
+    "discard_from_payoff": "Érvénytelen eldobás. A {player_id}. játékos megpróbálta eldobni a kártyát a kifizetési kupacból.",
+    "discard_not_in_hand": "Érvénytelen eldobás. A {player_id}. játékos megpróbálta eldobni egy olyan kártyát, amely nincs a kezében.",
+    "wrong_move_type": "Érvénytelen lépéstípus. A {player_id}. játékos nem válaszolt érvényes lépéstípussal."
+  },
+  "game_action": {
+    "you_drew": "Kártyákat húzott.",
+    "opponent_drew": "A {player_id}. játékos kártyákat húzott.",
+    "you_played": "A {card} kártyát játszotta a {index} középső kupacra.",
+    "opponent_played": "A {player_id}. játékos a {card} kártyát játszotta a {index} középső kupacra.",
+    "you_discarded": "Eldobta a {card} kártyát az {index} eldobott kupacra, ami azt is jelenti, hogy befejezte a körét. Nem lesznek további akciói ebben a körben. A {next_player_id}. játékos következik.",
+    "opponent_discarded": "A {player_id}. játékos eldobta a {card} kártyát az {index} eldobott kupacra, ami azt is jelenti, hogy befejezte a körét. Nem lesznek további akciói a {player_id}. játékosnak ebben a körben. A {next_player_id}. játékos, most Ön következik. Kérjük, adja meg az akcióit a [akció kártya középső_index] formátumban."
+  },
+  "outcome": {
+    "payoff_cleared": "A {current_player} játékos befejezte a kifizetési kupacot! A {current_player} játékos nyert!",
+    "deadlock_player_0": "Döntetlen! A 0. játékos nyert {player_0_payoff} kártyával a 1. játékos {player_1_payoff} kártyájával szemben.",
+    "deadlock_player_1": "Döntetlen! Az 1. játékos nyert {player_1_payoff} kártyával a 0. játékos {player_0_payoff} kártyájával szemben.",
+    "deadlock_tie": "Döntetlen! Mindkét játékosnak {player_0_payoff} kártyája maradt. A {current_player} játékos nyert alapértelmezés szerint."
+  }
+}

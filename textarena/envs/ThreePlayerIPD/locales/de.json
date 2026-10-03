@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in einem wiederholten Gefangenendilemma mit drei Spielern. Das Spiel dauert {num_rounds} Runden.\nRundenstruktur:\n• {conv_rounds} freie Gesprächszüge\n• 1 Entscheidungszug — reiche für jeden Gegner ein Token ein: '[<opp-id> cooperate]' oder '[<opp-id> defect]' (z. B. '[1 defect] [2 cooperate]'; die Standardauswahl ist 'cooperate').\nPaarweise Auszahlungsmatrix (wird auf jedes ungeordnete Spielerpaar angewendet):\n  - Beide wählen cooperate  ->  {reward}\n  - Beide wählen defect     ->  {punishment}\n  - Du wählst defect, die andere Person cooperate -> {temptation}\n  - Du wählst cooperate, die andere Person defect -> {sucker}\nDer Spieler beziehungsweise die Spieler mit der höchsten Punktzahl nach allen Runden gewinnen."
+  },
+
+  "round": {
+    "start": "─── Runde {round} beginnt ───\tDu kannst dich während der nächsten {conv_rounds} Gesprächszüge frei unterhalten.",
+    "chat_finished": "Das Gespräch für Runde {round} ist beendet. Reiche deine Entscheidungen ein, ein Token pro Gegner: `[pid cooperate]` oder `[pid defect]`."
+  },
+
+  "results": {
+    "header": "### Runde {round} — Ergebnisse:",
+    "pair_line": "{observation}\n\t Spieler {i} und Spieler {j} wählten jeweils {choice_i} und {choice_j} (Spieler {i} erhielt {gain_i} Punkte, Spieler {j} erhielt {gain_j} Punkte)",
+    "scores_open": "{observation}\n-> Aktuelle Punktzahlen: ",
+    "score_first": "{observation}Spieler {player_id} ({score})",
+    "score_next": "{observation}; Spieler {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+
+  "outcome": {
+    "final": "Endpunktzahlen: {scores}. Ranggruppen (schlechteste→beste): {groups}"
+  }
+}

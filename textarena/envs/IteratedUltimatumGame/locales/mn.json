@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Та Тоглогч {player_id} байна, {num_rounds} тойргийн Iterated Ultimatum Game тоглож байна.\nТа энэ тойргийн төсөв ${pool}-ийг өөрөө болон Тоглогч {other_id}-тай хувааж байна.\n\nСанал гаргагч:\n  - Санал гарга: [Offer: $X] (0 <= X <= pool)\n  - Хүлээн зөвшөөрөгдсөн бол → Та $(pool - X) авна, нөгөө тоглогч $X авна\n  - Татгалзсан бол → Хоёулаа $0 авна\n  - Жишээ: [Offer: $3]  эсвэл  'Би энэ нь шударга гэж бодож байна. [Offer: $5]'\n\nХариулагч:\n  - Саналыг [Accept] эсвэл [Reject] гэж шийд\n  - Жишээ: 'Энэ нь шударга гэж байна. [Accept]'\n            'Хэтэрхий шударга бус. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Тойргийн {round_number} эхэллээ! ---\nТоглогч {proposer_id} санал гаргагч, Тоглогч {responder_id} хариулагч.",
+    "offer": "Тоглолт {round_number}: Тоглогч {proposer_id} нь Тоглогч {responder_id}-д ${offer} санал болгож (${keep} хадгалах).",
+    "accepted": "Тоглогч {responder_id} хүлээн зөвшөөрлөө! Тойргийн {round_number} орлого: Тоглогч {proposer_id} +${proposer_gain}, Тоглогч {responder_id} +${responder_gain}. Шинэ нийт дүн: Тоглогч 0: ${total_0}, Тоглогч 1: ${total_1}.",
+    "rejected": "Тоглогч {responder_id} хүсэлтийг зөвшөөрөөгүй! {round_number} тойргийн орлого: Хоёр тоглогч +$0. Нийт үлдэц: Тоглогч 0: ${total_0}, Тоглогч 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Суурин санал гаргагч нь [Offer: $X] хэлбэрээр санал өгөх ёстой.",
+    "bad_integer": "Тэмцээний хэмжээ нь хүчин төгөлдөр бүтэн тоо байх ёстой.",
+    "out_of_range": "Тэгэлт хийх ёсны дээд доод хязгаар $0 болон ${pool} хооронд байх ёстой.",
+    "no_current_offer": "Одоогийн санал асуулгад хариу өгөх боломжгүй.",
+    "accept_or_reject": "Хариулагч [Accept] эсвэл [Reject] саналыг сонгох ёстой."
+  },
+  "outcome": {
+    "win": "Тоглогч {winner} ${winner_total} нийт дүнгээр яллаа, Тоглогч {loser} ${loser_total} нийт дүнтэй байлаа.",
+    "draw": "Хоёр тоглогч ${total}-тай төгссөн."
+  }
+}

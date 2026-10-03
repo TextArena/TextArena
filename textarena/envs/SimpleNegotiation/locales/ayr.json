@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Mä anatirix mä turkakipañ yant'äna, jan kuna qullqis utjatap layku.",
+    "out_of_range": "Jichha {player_id}, Aksa jani wali. Tiya {col} jani manq'a.",
+    "already_full": "Jichha {player_id}, Aksa jani wali. Tiya {col} jani p'iqi.",
+    "proposing_with_no_resource": "{player_id} anatirix janiw kuna qullqis utjkänti.",
+    "incorrect_offer_format": "{player_id} anatirix mä oferta de intercambio ukx jan wali formato ukanwa luratayna.",
+    "no_new_offer": "Jisk'a anatirixa {player_id} janiw machaqa alakipasiñatak kuna oferta lurkiti."
+  },
+  "offers": {
+    "reject": "{player_id} anatirix janiw alakipasiñatak jayskiti.",
+    "accept": "Jichha {acceptor_id} jani q'awiri q'ala wakicht'ata Jichha {proposer_id}-ta.",
+    "proposal": "Jugador {player_id} uñt'ayäna aka oferta jugador {opponent_id} uka: Q'uñi ukanaka: {offered} -> Solicitado ukanaka: {requested}"
+  },
+  "outcome": {
+    "win": "{winner_id} anatirix atipt'iwa, juk'amp jilpachw inventaje ukanx jikxatasi.",
+    "draw": "Taqpach anatirinakatakix pachpakïskiwa."
+  }
+}

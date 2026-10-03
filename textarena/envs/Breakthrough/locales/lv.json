@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Jūs spēlējat {color} Breakthrough spēlē. Jūs pārvietojaties {direction} uz {board_size}x{board_size} galdiņa.\nSavā gājienā jūs varat pārvietot vienu figūru uz vienu soli uz priekšu vai diagonāli uz priekšu.\nFigūra var pārvietoties diagonāli tikai tad, ja pretinieka figūra atrodas tur, un var ienākt šādā aizņemtā lauciņā tikai diagonāli.\nIeietot lauciņā ar pretinieka figūru, jūs to sagūstāt un pretinieka figūra tiek noņemta no galdiņa uz visu laiku.\nIzmantojiet UCI līdzīgu notāciju iekavās, piemēram, [a2a3], lai pārvietotu no a2 uz a3.\n* 'a' atbilst kreisākajai kolonnai, '1' ir apakšējā rinda (no baltā skatupunkta).\n* Melnā sākuma rinda ir augšējā rinda (8. rinda 8x8 galdiņam). Baltā sākuma rinda ir apakšējā rinda (1. rinda 8x8 galdiņam).\nPirmais spēlētājs, kura figūra sasniedz pretinieka sākuma rindu, uzvar. Ja visas jūsu figūras tiek sagūstītas, jūs zaudējat."
+  },
+  "invalid_move": {
+    "wrong_format": "Lūdzu, izmantojiet iekavās algebraisko notāciju, piemēram, [a2a3].",
+    "out_of_bounds": "Gājiens ir ārpus galdiņa robežām.",
+    "illegal": "Šis gājiens neatbilst Breakthrough noteikumiem vai nav jūsu figūra."
+  },
+  "game_action": {
+    "moved": "Spēlētājs {player_id} pārvieto {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Baltie sasniedza melno sākuma rindu.",
+    "black_reached": "Melnie sasniedza baltā sākuma rindu.",
+    "white_captured": "Visas baltās figūras tika sagūstītas.",
+    "black_captured": "Visas melnās figūras tika sagūstītas.",
+    "no_moves": "Spēlētājam {player_id} vairs nav gājienu."
+  }
+}

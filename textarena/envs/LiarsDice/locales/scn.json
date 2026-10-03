@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Sìiti Jucaturi {player_id} nti nu jocu di Liar's Dice cu {num_players} jucatura.\nReguli:\n- Nti turnu tu, poi fàiri:\n  1) Fàiri na nova posta cu na quantità o facci cchìu àuta (o tutti e dui) di la posta attuali; zoè '[Bid: 3, 4]',\n  2) Chiàmmari l'ùrtimu posta tipiannu '[Call]'.\n\nSi chiàmati:\n  - Si la conta riali di valuri di facci tra tutti i dadi è minuri di la posta, l'ùrtimu jucaturi ca fici na posta pèrdi unu dadi.\n  - Nàutri, chi chiama pèrdi unu dadi.\nUn jucaturi ca raggiungi 0 dadi è eliminau. L'ùrtimu jucaturi rimanenti vinci."
+  },
+  "board": {
+    "per_player": "\tJucaturi {p}: {d}",
+    "new_round": "\nNuovu turnu - Dadi rimanenti: {dice_summary}\nI dadi attuali sunnu: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Jucaturi {current_player_id} chiama! La conta riali di facci {face_value} è {count}, ca è MINURI di {quantity}.\nJucaturi {loser_id} (l'ùrtimu jucaturi ca fici na posta) pèrdi unu dadi.",
+    "caller_loses": "Jucaturi {current_player_id} chiama! La conta riali di facci {face_value} è {count}, ca è >= {quantity}.\nJucaturi {loser_id} (chi chiama) pèrdi unu dadi."
+  },
+  "action": {
+    "bid_announce": "Jucaturi {player_id} fà na posta di {quantity} di facci {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Chiama fatta senza na offerta priuritiva.",
+    "invalid_bid": "Offerta invalida: {reason}",
+    "not_recognized": "Azzioni non ricanusciuti comu '[Bid: X, Y]' o '[Call]' validi. Azzioni prusenti: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "A nova quantità {new_quantity} hè più bassa chè l'attuale {current_quantity}.",
+    "face_lower": "U novu valore nominale {new_face_value} hè più bassu chè l'attuale {current_face_value}.",
+    "identical": "L'offerta è idintica a l'offerta currenti.",
+    "face_range": "Lu valuri nominali havi a èssiri tra 1 e 6."
+  },
+  "message": {
+    "eliminated_invalid": "Lu jucaturi {player_id} fu eliminatu pi muvimentu nvaliddu."
+  },
+  "outcome": {
+    "win": "Jucaturi {winner} vinci! Classifica finali: {final_ranking}"
+  }
+}

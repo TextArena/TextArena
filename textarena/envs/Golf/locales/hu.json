@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (kártyajáték) nyelvi fájl. NE fordítsa le a kulcsokat (bal oldal). Csak a értékeket fordítsa le (jobb oldal). Tartsa meg minden {placeholder}-t pontosan úgy, ahogy van. Soha ne fordítsa le a műveleti tokeneket ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), a kártyacímkéket (A, 2-10, J, Q, K), a színjelöléseket, az X/Y betűket, amelyeket sor/oszlop helyőrzőkként használnak a tokenekben, vagy numerikus pontszámokat/pozíciókat. Tartsa meg az ASCII rács elrendezést (szóközök, oszlop számok, '?', 'Col', 'Row' igazítás) érintetlenül, hogy a tábla olvasható maradjon.",
+  "_slots": {
+    "{player_id}": "A játékos száma, pl. 0 vagy 1",
+    "{pid}": "A játékos száma, pl. 0 vagy 1",
+    "{winner}": "A játékos száma a legalacsonyabb pontszámmal",
+    "{score}": "Egy numerikus pontösszeg",
+    "{card}": "Egy kártyacímké, például A♠, 10♥, K♦ vagy Q♣",
+    "{new}": "A kártyacímké, amelyet a rácsba helyeztek",
+    "{old}": "A kártyacímké, amelyet eltávolítottak a rácsból",
+    "{row}": "Egy sor száma",
+    "{col}": "Egy oszlop száma",
+    "{max_row}": "A legnagyobb érvényes sor száma",
+    "{max_col}": "A legnagyobb érvényes oszlop száma",
+    "{reason}": "Egy előre megjelenített kifejezés, amely leírja, miért kezdődött el a végső kör",
+    "{n}": "Egy sor száma, amely a rács sorának elején jelenik meg",
+    "{cards}": "A rács egy sorának előre megjelenített, elrendezés-érzékeny cellái",
+    "{hand}": "A játékos rácsának előre megjelenített blokkja",
+    "{discard}": "A kártyacímké a dobóhalom tetején, vagy a 'nincs' szó",
+    "{options}": "A rendelkezésre álló műveleteket felsoroló előre megjelenített sor",
+    "{scores}": "A végső pontszámokat felsoroló előre megjelenített lista játékosonként"
+  },
+  "player_prompt": {
+    "intro": "Ön a Golf (Kártyajáték) - {player_id}. játékos.\nCél: Érje el a legalacsonyabb összpontszámot ebben az egy körben. Ha az oszlopok ugyanazt az értéket osztják meg, akkor azokat 0-ként összegzik.\nKártyaértékek: A=1, 2-10=arcérték, J/Q=10, K=0\n\nMűveletek (használja a pontos zárójeleket):\n- '[draw]' - Húzás a pakliból\n- '[take]' - Vétel a dobóhalomból\n- '[swap X Y]' - A húzott kártya cseréje az X (sor) Y (oszlop) pozícióval\n- '[discard]' - A húzott kártya eldobása\n"
+  },
+  "board": {
+    "drew": "Ön húzott: {card}\nMost [swap X Y]-t vagy [discard]-t kell használnia.",
+    "took": "Ön vett: {card} a dobóhalomból\nÖnnek [swap X Y]-t kell használnia vele (nem dobhatja el).",
+    "peeked": "Ön bekukkantott a ({row},{col}) pozícióra: {card}",
+    "turn_view": "Keze:\n{hand}\nDobóhalom: {discard}\n{options}",
+    "none": "Nincs"
+  },
+  "options": {
+    "final_turns": "Végső körök! Lehetőségei: [draw], [take], [peek X Y]",
+    "draw": "Lehetőségei: [draw], [take]",
+    "must_swap": "Önnek [swap X Y]-t kell használnia (nem dobhatja el a kártyákat a dobóhalomból)",
+    "swap_or_discard": "Önnek [swap X Y]-t vagy [discard]-t kell használnia"
+  },
+  "hand": {
+    "no_cards": "Nincs kártya",
+    "header": "  Oszlop:   1    2    3",
+    "row": "Sor {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "{pid}. játékos cserélte {new}-t {old}-ra a ({row},{col}) pozícióban",
+    "discarded": "{pid}. játékos eldobta {card}-t"
+  },
+  "message": {
+    "deck_empty": "A pakli üres! A játék azonnal véget ér.",
+    "knocked": "{pid}. játékos kopogott! Minden más játékos kap egy extra kört.",
+    "final_round": "{pid}. játékos {reason}! Minden más játékos kap egy extra kört."
+  },
+  "reason": {
+    "all_revealed": "minden kártyát felfedett"
+  },
+  "invalid": {
+    "wrong_action": "Használjon pontosan egy zárójeles műveletet: [draw], [take], [swap X Y], [discard], [knock], vagy [peek X Y]",
+    "discard_empty": "A dobóhalom üres!",
+    "must_draw_first": "Önnek először [draw]-t, [take]-t, [knock]-t vagy [peek X Y]-t kell használnia",
+    "cannot_discard_taken": "Ön nem dobhatja el a kártyát, amelyet a dobóhalomból vett. Önnek cserélnie kell.",
+    "have_drawn_card": "Önnek van egy húzott kártyája. Önnek [swap X Y]-t vagy [discard]-t kell használnia.",
+    "need_drawn_swap": "Önnek szüksége van egy húzott kártyára a cseréhez.",
+    "need_drawn_discard": "Önnek szüksége van egy húzott kártyára az eldobáshoz.",
+    "out_of_bounds": "Pozíció a határokon kívül. Használja a sor 1-{max_row}, oszlop 1-{max_col} értékeket",
+    "knock_with_card": "Ön nem kopoghat egy húzott kártyával. Fejezze be a körét először.",
+    "already_knocked": "Valaki már kopogott ebben a körben.",
+    "already_revealed": "Az a kártya már felfedett!"
+  },
+  "summary": {
+    "full": "Játék vége! {winner}. játékos nyert {score} ponttal!\n\nVégső pontszámok:\n{scores}",
+    "line": "{pid}. játékos: {score} pont\n"
+  },
+  "board_str": {
+    "title": "=== GOLF JÁTÉK ===",
+    "discard": "Dobóhalom: {card}",
+    "knocked": "{pid}. játékos kopogott!",
+    "player_header": "{pid}. játékos (Pontszám: {score}):"
+  }
+}

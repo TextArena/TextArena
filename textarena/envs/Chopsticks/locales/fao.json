@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Tú ert Leikari {player_id} í Chopsticks. Á tínum leik, vel ein av:\n  + Álop:  '[attack M O]'  har M=tínir hendur (0 eller 1), O=mótmannahendur (0 eller 1).\n    - Mótmannahendur teljing veksur við tínar hendur; um >=5, verður tað 0.\n  + Split:   '[split L R]'  at endurskifta tínar samla fingur í V og H (V+H = tín samla).\nSvara við nákvæmlega einum av hesum boðum."
+  },
+  "board": {
+    "current_board": "Núverandi borð:\nLeikari 0: {hands_0}\nLeikari 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Hendur tínar {my_idx} eru deyðar.",
+    "opp_hand_dead": "Mótstøðuhandurin {opp_idx} er longu deyður.",
+    "split_sum": "Split skal geva summar upp á {total}.",
+    "split_no_change": "Split má broyta títt handilsbýti.",
+    "invalid_command": "Ógildig leik. Nýta “[attack M O]” eller “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} álops P{opp_id}’s hendur {opp_idx}: tað fer frá {opp_val} til {new_val}.",
+    "split": "P{player_id} kloyvir í [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Báðar hendur mótstøðuliðsins eru deyðar.",
+    "draw": "Tað er komið á tað avmarkaða sving."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Du är Spelare {player_id} som spelar {colour} ({piece}) i ett spel av Othello.\nDitt mål är att ha fler pjäser av din färg på brädet vid spelets slut.\nPå din tur, placera en pjäs så att den flankerar en eller flera av din motståndares pjäser - i vilken riktning som helst (horisontellt, vertikalt eller diagonalt) - mellan din nya pjäs och en annan av dina befintliga pjäser. Alla flankerade motståndarpjäser kommer att vändas till din färg.\nAnge ditt drag i formatet '[rad, kolumn]'."
+  },
+  "board": {
+    "game_board": "Spelbräde:\n{board}",
+    "valid_moves": "{observation}\nGiltiga drag: {moves}",
+    "no_valid_moves_reset": "{observation}\nInga giltiga drag - du kan behöva hoppa över.",
+    "no_valid_moves_step": "{observation}\nInga giltiga drag – du kan behöva hoppa över.",
+    "scores_reset": "{observation}\nAktuella poäng - Svart: {black_count}, Vit: {white_count}\n",
+    "scores_step": "{observation}\nPoäng - Svart: {black_count}, Vit: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Draget måste vara av formen [rad, kolumn].",
+    "illegal": "Ogiltigt drag. Giltiga drag: {valid}"
+  },
+  "game_action": {
+    "skipped": "Spelare {pid} var tvungen att hoppa över sin tur",
+    "played": "Spelare {pid} ({piece}) spelade [{r}, {c}] och vände {flipped} pjäs(er)"
+  },
+  "game_message": {
+    "must_skip": "Spelare {pid} ({piece}) har inga giltiga drag och måste hoppa över."
+  },
+  "outcome": {
+    "black_wins": "Svart vinner {black_count}-{white_count}.",
+    "white_wins": "Vit vinner {white_count}-{black_count}.",
+    "draw": "Oavgjort {black_count}-{white_count}."
+  }
+}

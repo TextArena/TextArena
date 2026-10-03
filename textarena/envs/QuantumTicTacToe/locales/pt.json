@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id} no Quantum Tic Tac Toe.\nSua marca é '{symbol}', e seus números de movimento são sempre {parity} (por exemplo, X1, X3 ou O2, O4).\n\nObjetivo: Ganhe formando uma linha de três marcas clássicas (solidificadas a partir de superposições).\n\nComo Jogar:\n- Em cada turno, coloque uma marca assustadora em dois quadrados vazios diferentes usando o formato '[a,b]'.\n- Essas marcas estão emaranhadas e rotuladas como 'X1 / X1' ou 'O4 / O4'.\n- Você não pode colocar marcas assustadoras em um quadrado que já tenha entrado em colapso (solidificado).\n\nRegra de Colapso:\n- Se seu movimento criar um ciclo no gráfico de emaranhamento, ele entra em colapso automaticamente.\n- Cada marca assustadora no ciclo se transforma em uma marca clássica em uma de suas duas posições.\n- Quaisquer marcas assustadoras dependentes também entram em colapso.\n\nVitória:\n- O jogo termina quando um jogador tiver três marcas clássicas em uma linha.\n- Se ambos os jogadores obtiverem uma linha durante o mesmo colapso, o que tiver o número máximo de movimento mais baixo vence.\n\nExemplo de movimento: '[0,4]' coloca uma marca assustadora nas células 0 e 4."
+  },
+  "board": {
+    "current_board": "Tabuleiro do Quantum Tic Tac Toe:\n\n{board}\n\nEnvie seu movimento como '[a,b]' para colocar uma marca quântica em dois locais."
+  },
+  "invalid_move": {
+    "wrong_format": "Formato inválido. Use '[a,b]'.",
+    "invalid_cells": "Índices de célula inválidos ou duplicados.",
+    "already_solidified": "Uma das células já está solidificada."
+  },
+  "game_action": {
+    "placed": "O Jogador {player_id} colocou sua marca em uma superposição entre as células {pos_a} e {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposição dependente resolvida. A célula ({r}, {c}) agora é {symbol}.",
+    "last_cell_resolved": "Superposição para a última célula resolvida. A célula ({r}, {c}) agora é {symbol}.",
+    "superposition_resolved": "Superposição resolvida. A célula ({r}, {c}) agora é {symbol}."
+  },
+  "outcome": {
+    "win": "O Jogador {player_id} vence com marcas solidificadas!",
+    "draw": "O jogo é um empate!"
+  }
+}

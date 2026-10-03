@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Siz Klondike Solitär oýnuňyz. Siz ýeňijilik üçin ähli kartlary fondasiýa hökmünde ýerleşdirmeli.\n\nOýun düzgünleri:\n- Fondasiýa hökmünde (F1-F4): Ace-den Koroľa ýetmek\n- Tablo hökmünde (T1-T7): Reňkleriň ýerine-yerine ýerleşdirilmegi\n- Stok: Kartlaryň Ýok ýerine ýerleşdirilmegi\n- Ýok (W): Ýok ýerine ýerleşdirilen kart\n\nKomandalar:\n- 'draw' - Stokdan Ýok ýerine kart ýerleşdirmek\n- 'move <source> <destination> [count]' - Kartlaryň ýerine-yerine ýerleşdirilmegi\n  Mysallar: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count hem 'all' bolup biler, ähli ýüzüni açyk kartlaryň ýerine ýerleşdirmäge synanyşýar.\n- 'forfeit' - Oýnuň ýeňijiligini ýitirmek\n- Hökmüň ady: W (Ýok), F1-F4 (fondasiýa), T1-T7 (tablo)\n\nSiz ýeke ýa-da köp komandalaryň ýerine ýerleşdirmek bilen ýeňijilik ýetdine bilersiňiz:\n  Mysal: 'draw, move W T1, move T2 F1'\n\nÝalňyz Koroľlar boş tablo hökmünde ýerleşdirilýär.\nKomandalar ýerine ýerleşdirilýär - ýeke ýalňyş bolsa, galan komandalar ýerine ýerleşdirilmeýär.\n'forfeit' ýeňijilik ýitirjek bolsaňyz."
+  },
+  "format_error": {
+    "no_brackets": "Nädogry hereket formati. Edilmeli işlemiň nusgasy çynjaga girmelidir.",
+    "no_closing_bracket": "Ýaramaz hereket formati. Galan gutaryş çakyrasy \"]\"",
+    "empty_command": "Boş buýruk. \"draw\" ýa-da \"move <source> <destination> [count]'i ýaz",
+    "empty_action": "Boş hereketler",
+    "move_needs_args": "Ýerine ýerleşdirmek komandasy çeşme we ýerleşdirilýän ýeri talap edýär. Ulanyş: 'move <source> <destination> [count]'",
+    "count_positive": "Sanawyň sany ýokary bolmaly ýa-da 'all'",
+    "count_invalid": "Nädogry san. San ýa-da 'all' ulanyň",
+    "unknown_command": "Näbelli komanda '{cmd}'. Ulanyň 'draw', 'move <source> <destination> [count]', ýa-da 'forfeit'",
+    "wrapped": "Amal {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Amal {n}: {msg}",
+    "before_failure": "Amal {n} işlemleri ýerine ýetirildi, soňy başarısızlyk.",
+    "failed": "Amal {n} başarısız boldy: {msg}"
+  },
+  "move_result": {
+    "drew": "Kartany çekip, gutaryşdan zyňyp goýberdik.",
+    "cannot_draw": "Çekip bolmaýar. Hamytlar we dökünçler boşadyldy.",
+    "invalid_pile": "peýdasyz hat üýşeme ad. W, F1-F4 ýa-da T1-T7 ullan",
+    "foundation_one_card": "Diňe bir kartany üýşürmek mümkin.",
+    "waste_to_foundation_ok": "Kartany zalyndan binä göçürdiler F{dst}",
+    "waste_to_foundation_bad": "Geditiň faýdasy bilen baglanşykly hata göçürip bolmaýar .",
+    "tableau_to_foundation_ok": "Kart tableau M{src} dan foundation N{dst} e geçirildi",
+    "tableau_to_foundation_bad": "Kadany faýdasyň astyna geçirmek bolmady .",
+    "foundation_to_foundation": "Esasyndan beýlekisine göçüp bolmaýar.",
+    "waste_to_tableau_one_card": "Diňe bir kartany zordan tablo göçürmek mümkin.",
+    "waste_to_tableau_ok": "Kartany zalyndan T{dst} sahypasyna göçürdi.",
+    "waste_to_tableau_bad": "Geditiň hataryny bu daşa ekläp bolmaýar .",
+    "no_face_up": "Ýüzügi açyk kartalar ýok .",
+    "tableau_to_tableau_ok": "Kartlar {count} tableau T{src} den T{dst} e geçirildi",
+    "tableau_to_tableau_bad": "Kartlar {count} T{src} den T{dst} e geçirilmedi",
+    "foundation_to_tableau_one_card": "Diňe bir kartany esasyndan tablo göçürmek mümkin.",
+    "foundation_empty": "F{src} binasy boş.",
+    "foundation_to_tableau_ok": "Kart foundation N{src} dan tableau M{dst} e geçirildi",
+    "foundation_to_tableau_bad": "T{dst} matalyna binany goýmaga rugsat berilmeýär.",
+    "to_waste_or_stock": "Çöp-çöri ýa hem stoklara göçürip bolmaýar."
+  },
+  "outcome": {
+    "forfeit": "Oýun gutarnykly netije: {score} kartlar esasda.",
+    "won": "Siz Klondike Solitaire-i ýeňdiňiz!",
+    "turn_limit": "Oýun gutardy! Siz maksimum {max_turns} gezek ýetdiniz. Ýeňijiler: {score} kartlary fondasiýalarda."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITERI ===",
+    "turn": "Döwür: {turn}/{max_turns}",
+    "stock": "Kartlar: {stock} kartlar",
+    "waste": "Çöp (W): {waste}",
+    "foundations_header": "Guramalar:",
+    "foundation_row": "  N{n}: {cards}",
+    "tableau_header": "Çap:",
+    "tableau_row": "  M{n}: {cards}"
+  }
+}

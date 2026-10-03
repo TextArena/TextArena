@@ -1,0 +1,39 @@
+{
+  "_comment": "Fichier de langue de ThreePlayerGOPS en français. NE traduis PAS les clés (côté gauche). Traduis uniquement les valeurs (côté droit). Conserve chaque {marqueur} exactement tel quel. Ne traduis jamais les jetons de carte entre crochets (p. ex. [A], [10], [Q], [K]), les fragments neutres de mise/score comme 'P0:10', la marque '### ' ni les symboles '»' et '→'.",
+  "_slots": {
+    "{player_id}": "Le numéro du joueur, 0, 1 ou 2",
+    "{round}": "Le numéro de la manche en cours, 1..13",
+    "{prize}": "L'étiquette de la carte prix révélée (A, 2..10, J, Q, K) - ne pas traduire",
+    "{worth}": "La valeur totale du prix, y compris toute cagnotte reportée",
+    "{hand}": "Les cartes restantes du joueur, affichées sous forme de jetons entre crochets comme '[A]' '[2]' - ne pas traduire",
+    "{bids}": "La liste neutre des cartes jouées séparées par des virgules comme 'P0:10, P1:J, P2:Q' - ne pas traduire",
+    "{winner}": "Le numéro du joueur qui a gagné la manche",
+    "{pot}": "La valeur de la cagnotte attribuée ou reportée cette manche",
+    "{scoreline}": "Le tableau des scores neutre en cours comme 'P0:0  P1:0  P2:11' - ne pas traduire",
+    "{pid}": "Le numéro du joueur qui a été éliminé",
+    "{scores}": "Les scores finaux sous forme d'association brute numéro de joueur vers score - ne pas traduire"
+  },
+  "player_prompt": {
+    "intro": "Tu es le Joueur {player_id} dans Three-Player GOPS.\n- Tu détiens les 13 cartes A-K (chacune exactement une fois).\n- À chaque manche, un prix est révélé. Soumets UNE carte comme `[Q]`, `[10]`, `[2]` …\n- La carte la plus haute remporte le prix (+ toute cagnotte reportée). Les égalités reportent le prix à la manche suivante.\n- Après 13 manches, le total le plus élevé l'emporte. Coups invalides = élimination."
+  },
+  "round": {
+    "header": "### Manche {round}/13 - Prix : {prize} (vaut {worth})",
+    "hand": "Ta main restante : {hand}"
+  },
+  "reveal": {
+    "win": "Mises » {bids} - Le Joueur {winner} remporte {pot}.",
+    "tie": "Mises » {bids} - égalité, cagnotte désormais {pot}.",
+    "scores": "Points → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "l'action nécessite une carte entre crochets comme '[Q]'",
+    "bad_card": "carte déjà utilisée ou invalide"
+  },
+  "elimination": {
+    "player": "Joueur {pid} éliminé après des coups invalides répétés."
+  },
+  "outcome": {
+    "auto_win": "Deux joueurs éliminés - victoire automatique.",
+    "final": "Scores finaux : {scores}"
+  }
+}

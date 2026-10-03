@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola-lokaalleêr. MAAK NIE sleutels (linkerkant) oor nie. Vertaal net waardes (regterkant).",
+  "_slots": {
+    "{player_id}": "Die speler se nommer, bv. 0 of 1",
+    "{trump_suit}": "Die troefkleur simbool (♠♥♦♣) - moenie vertaal nie",
+    "{trump_card}": "Die troefkaart etiket, bv. '7♠' - moenie vertaal nie",
+    "{card}": " 'n Kaart etiket, bv. 'A♥' - moenie vertaal nie",
+    "{trump_mark}": "Die vooraf gerenderde '(TROEF)' merker, of leeg",
+    "{max_pos}": "Die hoogste wettige kaart posisie in die speler se hand",
+    "{count}": "Die aantal kaarte wat 'n speler vashou",
+    "{pos}": " 'n Kaart se posisie nommer in die hand",
+    "{points}": " 'n Aantal punte (kaart waarde of geakkumuleerde telling)",
+    "{hand}": "Die vooraf gerenderde, multi-lyn hand lys",
+    "{trick}": "Die vooraf gerenderde huidige-truuk lys",
+    "{scores}": "Die vooraf gerenderde telling lyn, of die finale per-speler telling blok",
+    "{trump_info}": "Die vooraf gerenderde troefkleur / pakkaart telling lyn",
+    "{winner}": "Die speler nommer wat die truuk of spel gewen het",
+    "{tricks}": " 'n Aantal truuks gewen deur 'n speler",
+    "{deck_count}": "Aantal kaarte oor in die pakkaart"
+  },
+  "game": {
+    "start": "Briscola spel begin! Troefkleur: {trump_suit} (Troefkaart: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Jy speel Briscola - Speler {player_id}.\nDoel: Wen truuks en versamel die meeste punte (120 totale punte in die pakkaart).\nKaart Punte: A=11, 3=10, K=4, Q=3, J=2, ander=0\nKaart Krag: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTroefkaarte klop nie-troefkaarte ongeag krag.\n\nAksie: '[play X]' waar X die posisie (1-{max_pos}) van die kaart in jou hand is\n"
+  },
+  "hand": {
+    "none": "Geen kaarte",
+    "empty": "Geen kaarte in hand",
+    "header": "Jou hand:",
+    "card_line": "  {pos}. {card} [{points} pt]{trump_mark}",
+    "trump_mark": " (TROEF)"
+  },
+  "trick": {
+    "empty": "Geen kaarte gespeel nog hierdie truuk.",
+    "header": "Huidige truuk:",
+    "line": "  Speler {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Speler {player_id}: {points} pt",
+    "trump_info": "Troefkleur: {trump_suit}",
+    "trump_info_deck": "Troefkleur: {trump_suit} | Kaarte oor in pakkaart: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nTellings: {scores}\n{trump_info}\n\nSpeel 'n kaart met [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Gebruik [play X] waar X die kaart posisie (1, 2, 3, ens.) is",
+    "out_of_range": "Ongeldige kaart posisie. Jy het {count} kaarte (1-{count})"
+  },
+  "action": {
+    "played": "Speler {player_id} het {card} gespeel",
+    "trick_win": "Speler {winner} wen die truuk met {card} en kry {points} punte!"
+  },
+  "outcome": {
+    "head": "Spel Verby! Speler {winner} wen met {points} punte!\n\nFinale Tellings:\n{scores}",
+    "player_line": "Speler {player_id}: {points} punte ({tricks} truuks)\n"
+  }
+}

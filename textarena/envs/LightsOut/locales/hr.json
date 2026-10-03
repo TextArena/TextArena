@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Dobrodošli u Igre svjetala! Imate {size}x{size} mrežu svjetala.\nVaš cilj je ugasiti SVA svjetla (označena s '.').\nKada pritisnete svjetlo, ono mijenja stanje sebe i svojih susjednih svjetala (gore/dolje/lijevo/desno).\nUpišite [redak stupac] da pritisnete svjetlo (indeksirano od 0, tako da je valjani raspon od 0 do {max_index}).\nImate do {max_turns} poteza da riješite slagalicu.\nLegenda: 'O' = svjetlo UKLJUČENO, '.' = svjetlo ISKLJUČENO"
+  },
+  "board": {
+    "current_state": "Trenutno stanje mreže (Potez {moves_made}, {moves_left} poteza preostalo, {completion}% dovršeno):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Akcija mora biti u formatu [redak stupac] gdje su redak i stupac cijeli brojevi od 0 do {max_index}.",
+    "out_of_range": "Koordinate moraju biti između 0 i {max_index}. Unijeli ste [{row},{col}]."
+  },
+  "outcome": {
+    "win": "Čestitamo! Riješili ste slagalicu u {moves_used} poteza!",
+    "loss": "Igra gotova! Iskoristili ste sve {max_turns} poteze bez rješavanja slagalice. Konačno dovršenje: {completion}%\nKonačno stanje:\n{grid}"
+  }
+}

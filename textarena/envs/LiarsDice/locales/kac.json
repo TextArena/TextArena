@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Nang {player_id} u ga, {num_players} u ga shani LiarsDice galaw ga na.\nHpungdan:\n- Nang shani hta, nang gaw:\n  1) Shawng hte masum hkrat hte, shawng hte myit hkrat hte galaw ga, '[Bid: 3, 4]' ngu ai,\n  2) '[Call]' ngu ai.\n\nNang '[Call]' ngu ai shaloi:\n  - Si htum shawng hte myit hkrat hte shawng hte galaw ga, shawng hte masum shawng hte hkrat hte wa u ga si htum shawng hte masum shawng gaw e.\n  - Shawng hte, u wa u ga si htum shawng hte masum shawng gaw e.\nSi htum shawng hte masum shawng hte hkrat hte wa u ga galaw ga, shawng hte wa u ga shanhte e. Shawng hte wa u ga shani shawng hte shanhte e."
+  },
+  "board": {
+    "per_player": "\tPlayer {p}: {d}",
+    "new_round": "\nNew round - Remaining dice: {dice_summary}\nNang ai hpe dice {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Masha {current_player_id} kawp na shang ai! {face_value} ngut ai {count} hte {quantity} kaw na shang lawu ai.\nMasha {loser_id} (shanhte bidder wa) sai hte lakung hkrum ai.",
+    "caller_loses": "{current_player_id} wa u ga u! {face_value} myit hte {count} shawng hte {quantity} hte shawng hta e.\n{loser_id} u ga (u wa u ga) si htum shawng hte masum shawng gaw e."
+  },
+  "action": {
+    "bid_announce": "Masha {player_id} galaw {quantity} hte {face_value} ngut ai."
+  },
+  "invalid_move": {
+    "call_no_bid": "Kawp na shang ai hte bid shi ai.",
+    "invalid_bid": "N jaw ai bid: {reason}",
+    "not_recognized": "Kunglawp na re ai '[Bid: X, Y]' shi '[Call]' kawp na re ai. Kunglawp sha {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "{new_quantity} hte {current_quantity} kaw na shang lawu ai.",
+    "face_lower": "{new_face_value} hte {current_face_value} kaw na shang lawu ai.",
+    "identical": "Bid hte shanhte bid kawp na re ai.",
+    "face_range": "Nsen manu gaw 1 hte 6 lapran rai ra ai."
+  },
+  "message": {
+    "eliminated_invalid": "Player {player_id} gaw n htuk ai shamu shamawt lam hte pru mat wa sai."
+  },
+  "outcome": {
+    "win": "Shi kaw mi {winner} kaw shi kaw mi hta taw kaw shi taw kaw hta! Shi kaw mi hta taw kaw shi taw kaw hta kaw hti kaw kaw {final_ranking}"
+  }
+}

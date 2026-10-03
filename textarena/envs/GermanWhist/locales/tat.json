@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Уен башлана. Көй мае: {trump_suit} (көй картасы: {trump_str}).",
+    "no_trump_card": "юк (беркем дә)"
+  },
+  "player_prompt": {
+    "intro": "Сез Немец Вистында Уенчы {player_id} сыгыйсыз.\n{phase_info}\nСез {hand_size} картлар тотасыз.\n'[play N]' белән карт уйнагыз, монда N - сезнең кулыгыздагы картның позициясе (мәсәлән, '[play 3]').",
+    "phase_learning": "УУГЛАНЫШ ФАЗИЯСЕ: һәр трюкның җиңүчесе ачык карточканы ала, ә җиңелгән кеше икенче картаны төяп чыгара. Бу этапта яуланган трюклар җиңүгә исәпләнми.",
+    "phase_playing": "Уен этабы: палуба тәмамланган. Хәзердән башлап һәр трюк җиңүгә исәпләнә."
+  },
+  "next_card": {
+    "playing_phase": "Бернинди карта тәкъдим ителми - уен фазы башланды.",
+    "deck_empty": "Колода буш, тәкъдим ителә торган карта юк.",
+    "available": "Карта тәкъдим ителә: {card}",
+    "available_trump": "Карточка тәкъдим ителә: {card} (ТРУМП)"
+  },
+  "invalid_move": {
+    "wrong_format": "Хаксыз хәрәкәт форматы. Кулдагы Nth картаны уйнату өчен \"[play N]\" кулланыгыз.",
+    "bad_position": "Бу картаның урыны юк. Сездә {hand_size} карточкалар бар.",
+    "must_follow_suit": "Сез дә шулай ук {lead_suit} картасын уйнагыз.",
+    "invalid_play": "Бу картаны уйнап булмый."
+  },
+  "game_action": {
+    "played": "Уенчы {player_id} {card} уйный."
+  },
+  "trick": {
+    "won": "Уенчы {winner_id} {card} белән уенны җиңә.",
+    "won_learning": "Уенчы {winner_id} {card} белән уенны җиңә һәм ачык картны ала."
+  },
+  "phase": {
+    "learning_complete": "Өйрәнү фазы тәмамланды - һәр калган трюк җиңүгә исәпләнә."
+  },
+  "draw": {
+    "winner_received": "Сез җиңеп {card} алдыгыз.",
+    "loser_received": "Сез фокусны югалттыгыз һәм {card}не ясадыгыз.",
+    "winner_preview": "Алдагы карта {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Уеннар саны - Уенчы 0: {tricks0}, Уенчы 1: {tricks1}",
+    "scores_playing": "Уеннар саны - Уенчы 0: {tricks0}, Уенчы 1: {tricks1}",
+    "phase": "Фаза: {phase}",
+    "phase_learning": "Фаза: {phase} (колодада {remaining_cards} карта калган)"
+  },
+  "hand": {
+    "no_cards": "Карталар юк .",
+    "no_cards_in_hand": "Кулда карталар юк .",
+    "header": "Сезнең кулыгыз:",
+    "trump_indicator": "(ТРУМП)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Бу уенны әле беркем дә уйнамаган.",
+    "header": "Хәзерге алым:",
+    "trump_indicator": "(ТРУМП)",
+    "card_line": "{observation}\n  Уенчы {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Уен башланмаган .",
+    "header": "=== Алманча УЙНАШУ ГӘЛЕ===",
+    "phase": "{observation}\nФаза: {phase}",
+    "trump_suit": "{observation}\nКөй мае: {trump_suit}",
+    "trump_card": "{observation}\nКөй картасы: {card}",
+    "cards_left": "{observation}\nКалган картлар саны: {count}",
+    "next_card": "{observation}\nҖиңүченең киләсе карта: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} Хәзерге трюк:",
+    "trump_indicator": "(ТРУМП)",
+    "trick_line": "{observation}\n  Уенчы {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nУенчы {player_id}: {scoring} уеннар (〕{tricks} барлыгы), {hand_size} кулдагы картлар"
+  },
+  "outcome": {
+    "summary": "Өйрәнү фазасы - уенчы 0: {l0}, уенчы 1: {l1}. Уйнау фазасы - уенчы 0: {p0}, уенчы 1: {p1}. {winner_id} уенчысы {winner_tricks} откан трюклар белән җиңде!"
+  }
+}

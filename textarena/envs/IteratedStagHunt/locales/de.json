@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in einem Iterated-Stag-Hunt-Spiel über {num_rounds} Runden.\n\nSpielstruktur:\n- Das Spiel besteht aus {decision_rounds} Entscheidungsrunden\n- Vor jeder Entscheidung hast du {conversation_rounds} Züge zur Kommunikation\n- Nach der Kommunikation entscheiden sich beide Spieler gleichzeitig dafür, einen Hirsch oder einen Hasen zu jagen\n\nBelohnungen:\n- Die Belohnungen für die Jagd auf Hirsche und Hasen können sich zwischen den Runden unterscheiden\n- Die Belohnungen werden zu Beginn jeder Runde angezeigt\n\nSpielanleitung:\n- Während der Kommunikation: Schreibe einfach deine Nachricht\n- Während der Entscheidungsphase: Verwende '[Stag]' oder '[Hare]'\nDu kannst vor oder nach diesen Kürzeln zusätzlichen Text einfügen.\n"
+  },
+
+  "round": {
+    "payoff_matrix": "Runde {round} beginnt mit der folgenden Auszahlungsmatrix:\n- Beide jagen einen Hirsch: Beide erhalten {mutual_stag} Punkte\n- Beide jagen einen Hasen: Beide erhalten {mutual_hare} Punkte\n- Einer jagt einen Hasen, der andere einen Hirsch: Der Hasenjäger erhält {single_hare} Punkte, der Hirschjäger erhält {single_stag} Punkte\nDu kannst vor der Entscheidung {conversation_rounds} Runden lang frei mit deinem Gegner kommunizieren.",
+    "decision_phase": "Die Entscheidungsphase für Runde {round} hat begonnen. Bitte antworte entweder mit '[stag]' oder '[hare]'.",
+    "results": "Runde {round} ist abgeschlossen. Ergebnisse:\n\tSpieler 0 wählte '{decision0}' (Auszahlung: {payoff0}; Gesamt: {total0})\n\tSpieler 1 wählte '{decision1}' (Auszahlung: {payoff1}; Gesamt: {total1})"
+  },
+
+  "outcome": {
+    "win": "Endpunktzahlen: Spieler 0: {p0}, Spieler 1: {p1}\nSpieler {winner_id} hat gewonnen!",
+    "draw": "Endpunktzahlen: Spieler 0: {p0}, Spieler 1: {p1}\nUnentschieden!"
+  }
+}

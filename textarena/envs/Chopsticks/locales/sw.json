@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika Chopsticks. Katika zamu yako, chagua moja ya:\n  + Shambulia:  '[attack M O]'  ambapo M=mkono wako (0 au 1), O=mkono wa mpinzani (0 au 1).\n    - Idadi ya mkono wa mpinzani huongezeka kwa mkono wako; ikiwa >=5, inakuwa 0.\n  + Gawa:   '[split L R]'  ili kusambaza jumla ya vidole vyako katika L na R (L+R = jumla yako).\nJibu na amri moja haswa kati ya hizo."
+  },
+  "board": {
+    "current_board": "Ubao wa Sasa:\nMchezaji 0: {hands_0}\nMchezaji 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Mkono wako {my_idx} umekufa.",
+    "opp_hand_dead": "Mkono wa mpinzani {opp_idx} tayari umekufa.",
+    "split_sum": "Mgawanyiko lazima ujumuishe hadi {total}.",
+    "split_no_change": "Mgawanyiko lazima ubadilishe usambazaji wa mikono yako.",
+    "invalid_command": "Hatua batili. Tumia “[attack M O]” au “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} anashambulia mkono wa P{opp_id} {opp_idx}: inabadilika kutoka {opp_val} hadi {new_val}.",
+    "split": "P{player_id} anagawanya katika [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Mikono yote miwili ya mpinzani imekufa.",
+    "draw": "Kikomo cha zamu kimefikwa."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Igrate igro Minolovec.\nCilj igre je razkriti vse celice, ki ne vsebujejo min.\nDa opravite potezo, preprosto navedite vrstične in stolpčne koordinate, ki jih želite razkriti, z uporabo formata:\n- `[vrstica stolpec]`: Razkrijte celico na določeni vrstici in stolpcu.\nNa primer:\n- `[3 2]` za razkritje celice v vrstici 3, stolpcu 2.\n- `[5 6]` za razkritje celice v vrstici 5, stolpcu 6.\nPri prvi potezi boste razkrili območje okoli celice, ki jo izberete, da zagotovite varno začetek.\nTrenutna razporeditev plošče je prikazana spodaj. Celice, ki niso bile razkrite, so predstavljene s pikami ('.'), razkrite številke pa kažejo število sosednjih min.\nBodite pozorni, da ne izberete že razkritih celic.\nTukaj je trenutna razporeditev plošče:\n"
+  },
+  "board": {
+    "game_board": "Igralna plošča:\n\n{board}",
+    "current_board": "Trenutna plošča:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Niste odgovorili z veljavnimi koordinatami v oglatih oklepajih.",
+    "out_of_bounds": "Določene vrstične in stolpčne koordinate so zunaj meja.",
+    "already_revealed": "Celica na ({row}, {col}) je že bila razkrita.",
+    "hit_mine": "Zadeli ste mino na ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Razkrili ste celico na ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Čestitke! Uspelo vam je uspešno očistiti ploščo Minolovca.",
+    "turn_limit": "Dosegli ste mejno število potez. Uspelo vam je odkriti {percent}% varnih celic."
+  }
+}

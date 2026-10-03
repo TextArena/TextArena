@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} in Nim.\nIl tuo obiettivo è prendere l'ultimo oggetto rimanente.\nA ogni turno, scegli esattamente una pila e rimuovi uno o più oggetti da essa.\nUsa il formato '[pila quantità]', dove pila è l'indice della pila e quantità è il numero di oggetti da rimuovere.\nAd esempio, '[0 3]' rimuove 3 oggetti dalla pila 0."
+  },
+  "state": {
+    "current_pile": "Pila attuale:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nessun formato di mossa valido trovato. Usa '[pila quantità]'.",
+    "correct_format_wrong_fields": "Giocatore {player_id}, azione non valida. La colonna {col} è fuori dai limiti.",
+    "out_of_range": "L'indice della pila {pile_index} è fuori dai limiti.",
+    "non_positive": "Devi rimuovere almeno 1 oggetto.",
+    "exceeds_pile": "Non puoi rimuovere {quantity} dalla pila {pile_index} (solo {pile_count} rimasti)."
+  },
+  "observation": {
+    "removed_from_piles": "Il Giocatore {player_id} ha giocato [{pile_index} {quantity}], rimuovendo {quantity} oggetto/i dalla pila {pile_index}."
+  },
+  "outcome": {
+    "win": "Il Giocatore {player_id} ha preso l'ultimo oggetto/i!"
+  }
+}

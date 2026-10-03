@@ -1,0 +1,105 @@
+{
+  "_comment": "Hanabi-Sprachdatei auf Deutsch. Übersetze KEINE Schlüssel (linke Seite); übersetze nur die Werte. Behalte jeden {platzhalter} exakt bei. Übersetze niemals die Aktions-Token ('[Reveal]', '[Play]', '[Discard]'), die wörtlichen Eingabeformate 'player N card X color C' usw. oder die numerischen Ränge/Token-Zahlen. Die Kartenfarben-Wörter ('white', 'yellow', 'green', 'blue', 'red') erscheinen als Prosa und SOLLTEN über den 'color'-Block übersetzt werden; halte sie überall konsistent (Feuerwerks-Beschriftungen, Kartenbeschreibungen). In der Liste der gültigen Farben bleiben die Wörter englisch, weil sie die zulässige Eingabe sind.",
+  "_slots": {
+    "{player_id}": "Eine Spielernummer (Index), z. B. 0 oder 1",
+    "{num_players}": "Gesamtzahl der Spieler im Spiel",
+    "{pid}": "Eine Spielernummer (Index)",
+    "{player}": "Eine in einem Hinweis genannte Spielernummer (Index), als neutrale Zahl belassen",
+    "{color}": "Ein Kartenfarben-Wort oder die vom Spieler getippte rohe Farbzeichenkette (bei ungültiger Eingabe unverändert)",
+    "{rank}": "Ein Kartenrang 1-5 oder die vom Spieler getippte rohe Rangzeichenkette",
+    "{card}": "Eine gerenderte Kartenbeschreibung, z. B. 'a white card with rank 4'",
+    "{idx}": "Ein Kartenpositions-Index in einer Hand",
+    "{card_index}": "Ein Kartenpositions-Index",
+    "{fuse}": "Anzahl der verbleibenden Zündschnur-Token",
+    "{info}": "Anzahl der verbleibenden Info-Token",
+    "{fuse_tokens}": "Anzahl der Zündschnur-Token nach einem misslungenen Zug",
+    "{fw_white}": "Feuerwerks-Fortschritt (0-5) für die Farbe Weiß",
+    "{fw_yellow}": "Feuerwerks-Fortschritt für die Farbe Gelb",
+    "{fw_green}": "Feuerwerks-Fortschritt für die Farbe Grün",
+    "{fw_blue}": "Feuerwerks-Fortschritt für die Farbe Blau",
+    "{fw_red}": "Feuerwerks-Fortschritt für die Farbe Rot",
+    "{c_white}": "Das übersetzte Farbwort für Weiß (verschachtelt)",
+    "{c_yellow}": "Das übersetzte Farbwort für Gelb (verschachtelt)",
+    "{c_green}": "Das übersetzte Farbwort für Grün (verschachtelt)",
+    "{c_blue}": "Das übersetzte Farbwort für Blau (verschachtelt)",
+    "{c_red}": "Das übersetzte Farbwort für Rot (verschachtelt)",
+    "{visible_cards}": "Vorgerenderter Block mit den sichtbaren Karten der Mitspieler",
+    "{discard_pile}": "Vorgerenderter Block mit den abgeworfenen Karten",
+    "{count}": "Anzahl der hintereinander gemachten ungültigen Züge",
+    "{max_player}": "Der höchste gültige Spielerindex (num_players - 1)",
+    "{max_card}": "Der höchste gültige Kartenindex (hand_size - 1)"
+  },
+
+  "color": {
+    "white": "weiß",
+    "yellow": "gelb",
+    "green": "grün",
+    "blue": "blau",
+    "red": "rot"
+  },
+
+  "card": {
+    "desc": "eine {color}e Karte mit Rang {rank}"
+  },
+
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in einem Hanabi-Spiel mit {num_players} Spielern. Hanabi ist ein kooperatives Kartenspiel, in dem die Spieler zusammenarbeiten, um eine Reihe von Feuerwerken zu erzeugen, indem sie Karten in aufsteigender numerischer Reihenfolge beginnend bei 1 ausspielen. Jeder Spieler hält seine Karten nach außen, sodass alle Spieler die Karten aller anderen sehen können, aber nicht ihre eigenen.\n\nZiel:\nDas Ziel ist es, für jede Farbe Karten in der Reihenfolge (1 bis 5) auszuspielen, ohne Fehler zu machen. Es gibt 5 verschiedene Farben und jede Farbe hat Karten von 1 bis 5.\n\nWichtige Regeln:\nIn deinem Zug hast du drei Arten möglicher Aktionen:\n1. Einen Hinweis geben (Reveal): Gib einem anderen Spieler einen Hinweis zu seinen Karten und gib entweder eine Farbe oder eine Zahl in seiner Hand an. Hinweise müssen zutreffend sein und dürfen nur Positionen von Karten aufdecken, die zum Hinweis passen.\n2. Eine Karte abwerfen: Wirf eine deiner eigenen Karten ab, um eventuell einen Info-Token zu erhalten.\n3. Eine Karte ausspielen: Versuche, eine Karte aus deiner Hand auszuspielen. Wird sie korrekt in der Reihenfolge gespielt, wird sie dem Feuerwerk hinzugefügt; andernfalls reduziert sie einen Zündschnur-Token.\n\nToken:\nZündschnur-Token: Werden abgezogen, wenn eine falsche Karte gespielt wird.\nInfo-Token: Werden verwendet, um Hinweise zu geben.\n\nUnzulässige Züge:\nEine Karte auszuspielen, die nicht korrekt platziert werden kann, kostet einen Zündschnur-Token. Erreichen die Zündschnur-Token null, endet das Spiel mit einer Niederlage.\n\nSpielende:\nDas Spiel endet, wenn alle Feuerwerke vollendet sind (perfekte Punktzahl von 25), oder wenn der Nachziehstapel erschöpft ist und jeder Spieler einen letzten Zug gemacht hat, oder wenn den Spielern die Zündschnur-Token ausgehen.\n\nZustandsdarstellung:\nDer Spielzustand wird mit den folgenden Details dargestellt:\nZündschnur-Token: Anzahl der verbleibenden Zündschnur-Token.\nInfo-Token: Anzahl der verfügbaren Informations-Token.\nFeuerwerke: Aktueller Fortschritt bei jeder Feuerwerksfarbe.\nAbwürfe: Karten, die abgeworfen wurden.\n\nDeine Rolle:\nDu bist einer der Spieler und kooperierst mit den anderen, um die Gesamtpunktzahl der Feuerwerke zu maximieren (die Anzahl der korrekt in der Reihenfolge gespielten Karten).\nAuch wenn du deine eigenen Karten nicht sehen kannst, siehst du die Karten in den Händen deiner Mitspieler.\nSetze Hinweise, Abwürfe und Züge strategisch ein, um das Team zu erfolgreichen Reihenfolgen zu führen.\nWenn du am Zug bist, sollte deine Ausgabe in einem der folgenden Formate zwischen Anführungszeichen erfolgen:\n\n'[Reveal] player N card X color C', um einen Hinweis über die Farbe C von Karte X an den Spieler mit Index N zu geben.\n'[Reveal] player N card X rank R', um einen Hinweis über den Rang R von Karte X an den Spieler mit Index N zu geben.\n'[Play] X', um die Karte an Position X aus deiner Hand auszuspielen.\n'[Discard] X', um die Karte an Position X aus deiner Hand abzuwerfen.\n\nDenke daran: Die Kommunikation ist auf Hinweise über Farben oder Zahlen beschränkt, und das Teilen unzulässiger oder überflüssiger Informationen ist nicht erlaubt. Arbeitet zusammen, befolgt die Regeln und strebt nach der höchstmöglichen kooperativen Punktzahl!\n\n"
+  },
+
+  "state": {
+    "description": "Du bist Spieler {pid}. \n\nAktueller Spielzustand:\nZündschnur-Token: Es sind {fuse} Zündschnur-Token übrig.\nInfo-Token: Es sind {info} Info-Token übrig.\n\nFeuerwerke: Der aktuelle Fortschritt bei jeder Feuerwerksfarbe ist:\n\t{c_white}: {fw_white}.\n\t{c_yellow}: {fw_yellow}.\n\t{c_green}: {fw_green}.\n\t{c_blue}: {fw_blue}.\n\t{c_red}: {fw_red}.\n\nDeine Mitspieler haben die folgenden Karten in ihrer Hand:\n{visible_cards}\nAbwürfe: Die folgenden Karten wurden abgeworfen:\n{discard_pile}\n",
+    "player_cards_header": "- Spieler {pid} hat die Karten:\n",
+    "card_line": "\tKarte {idx}: {card}\n"
+  },
+
+  "reveal": {
+    "hint_color": "Karte {card_index} von Spieler {player} ist {color}.",
+    "hint_rank": "Karte {card_index} von Spieler {player} hat Rang {rank}."
+  },
+
+  "play": {
+    "success": "Spieler {pid} versucht, {card} auszuspielen. Die Karte wurde erfolgreich gespielt.",
+    "fail": "Spieler {pid} versucht, {card} auszuspielen. Die Karte passte nicht zum aktuellen Zustand der Feuerwerke. Das kostet einen Zündschnur-Token. Es sind noch {fuse_tokens} Zündschnur-Token übrig."
+  },
+
+  "discard": {
+    "replenished": "Spieler {pid} wirft {card} ab. Das füllt einen Info-Token wieder auf.",
+    "cap_reached": "Spieler {pid} wirft {card} ab. Das füllt keinen Info-Token wieder auf, da die Token-Obergrenze erreicht ist."
+  },
+
+  "skip_turn": "Spieler {pid} hat {count} ungültige Züge hintereinander gemacht und setzt einen Zug aus. ",
+  "final_round": "Es sind keine Karten mehr im Nachziehstapel. Dies ist die letzte Runde.",
+
+  "invalid": {
+    "generic_action_reason": "Der Spieler hat eine ungültige Aktion angegeben. Spieler können nur '[reveal]', '[play]' oder '[discard]'.",
+    "reveal_no_info_reason": "Der Spieler hat versucht, einen Hinweis zu geben, ohne Info-Token zu besitzen.",
+    "reveal_own_reason": "Der Spieler versucht, Informationen über seine eigenen Karten preiszugeben.",
+    "reveal_own_detail": "Du hast versucht, Informationen über deine eigenen Karten preiszugeben. Das ist nicht erlaubt.",
+    "reveal_bad_teammate_reason": "Der Spieler versucht, Informationen über einen nicht existierenden Mitspieler preiszugeben.",
+    "reveal_bad_teammate_detail": "Du hast versucht, Informationen über einen nicht existierenden Mitspieler preiszugeben. Berücksichtige bitte Mitspieler zwischen 0 und {max_player} (einschließlich). Beachte, dass du keine Informationen über dich selbst preisgeben kannst, du bist Spieler {pid}.",
+    "reveal_bad_card_reason": "Der Spieler versucht, Informationen über eine nicht existierende Karte preiszugeben.",
+    "reveal_bad_card_detail": "Du hast versucht, Informationen über eine nicht existierende Karte preiszugeben. Der Kartenindex sollte zwischen 0 und {max_card} (einschließlich) liegen. Du hast {card_index} angegeben. ",
+    "reveal_bad_color_reason": "Der Spieler hat eine Farbe angegeben, die es im Spiel nicht gibt.",
+    "reveal_bad_color_detail": "Du hast eine ungültige Farbe angegeben. Gültige Farben sind 'white', 'yellow', 'green', 'red' und 'blue'. Du hast versucht: '{color}'.",
+    "reveal_bad_rank_reason": "Der Spieler hat einen ungültigen Rang angegeben.",
+    "reveal_bad_rank_detail": "Du hast einen ungültigen Rang angegeben. Gültige Ränge liegen zwischen 1 und 5 (einschließlich). Du hast angegeben: '{rank}'.",
+    "reveal_bad_rank_format_reason": "Der Spieler hat ein ungültiges Rangformat angegeben.",
+    "reveal_bad_rank_format_detail": "Du hast ein ungültiges Rangformat angegeben. Gültige Ränge liegen zwischen 1 und 5 (einschließlich). Du hast angegeben: '{rank}'.",
+    "reveal_incomplete_reason": "Der Spieler hat einen unvollständigen Hinweis angegeben.",
+    "reveal_incomplete_detail": "Du hast eine ungültige Aktion angegeben. Wenn du eine Karte aufdecken möchtest, tippe:\n '[Reveal] player N card X color C', um einen Hinweis über die Farbe C von Karte X an den Spieler mit Index N zu geben.\noder\n'[Reveal] player N card X rank R', um einen Hinweis über den Rang R von Karte X an den Spieler mit Index N zu geben.\n\nZum Beispiel: '[Reveal] player 0 card 0 color green' deckt auf, dass Karte 0 von Spieler 0 green ist.",
+    "play_nonexist_reason": "Der Spieler versucht, eine nicht existierende Karte auszuspielen.",
+    "play_nonexist_detail": "Du hast versucht, eine nicht existierende Karte auszuspielen. Berücksichtige bitte Karten zwischen 0 und {max_card} (einschließlich). Du hast {card_index} angegeben.",
+    "play_parse_reason": "Der Spieler hat eine ungültige Aktion angegeben.",
+    "play_parse_detail": "Du hast eine ungültige Aktion angegeben. Wenn du eine Karte ausspielen möchtest, tippe:\n '[Play] X', um die Karte an Position X aus deiner Hand auszuspielen. Zum Beispiel: '[Play] 0' spielt die Karte an Position 0 aus.",
+    "discard_nonexist_reason": "Der Spieler versucht, eine nicht existierende Karte abzuwerfen.",
+    "discard_nonexist_detail": "Du hast versucht, eine nicht existierende Karte abzuwerfen. Berücksichtige bitte Karten zwischen 0 und {max_card} (einschließlich). Du hast {card_index} angegeben.",
+    "discard_parse_reason": "Der Spieler hat eine ungültige Aktion angegeben.",
+    "discard_parse_detail": "Du hast eine ungültige Aktion angegeben. Wenn du eine Karte abwerfen möchtest, tippe:\n '[Discard] X', um die Karte an Position X aus deiner Hand abzuwerfen. Zum Beispiel: '[Discard] 0' wirft die Karte an Position 0 ab."
+  },
+
+  "outcome": {
+    "deck_empty": "Der Nachziehstapel ist aufgebraucht.",
+    "fuse_empty": "Dem Team sind die Zündschnur-Token ausgegangen.",
+    "win": "Alle 5er wurden erfolgreich gespielt."
+  }
+}

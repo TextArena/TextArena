@@ -1,0 +1,42 @@
+{
+  "_comment": "ملف لغة Le Truc. لا تترجم المفاتيح (الجانب الأيسر). ترجم القيم فقط (الجانب الأيمن). احتفظ بكل {placeholder} كما هو تمامًا. لا تترجم أبدًا رموز الإجراءات ('[play]'، '[raise]'، '[accept]'، '[fold]') أو تسميات البطاقات ورموز الأنواع (مثل 3♠، A♥، K♦) أو تسميات اللاعبين (P0، P1) أو قيم النقاط الرقمية.",
+  "_slots": {
+    "{pid}": "A player number, 0 or 1",
+    "{winner}": "The player number who won the trick or hand",
+    "{points}": "A hand point value, e.g. 1, 2 or 4",
+    "{p0}": "Player 0's running match score",
+    "{p1}": "Player 1's running match score",
+    "{cards}": "A space-separated list of the player's card labels, e.g. 'A♦ 3♠ A♥'",
+    "{card}": "A single card label, e.g. '3♠'",
+    "{legal}": "A comma-separated list of the currently legal action tokens"
+  },
+  "player_prompt": {
+    "intro": "أنت تلعب Le Truc، وهي لعبة خدع للاعبَين بمجموعة من 40 بطاقة (الرتبة من الأعلى إلى الأدنى: 3 2 A K Q J 7 6 5 4).\nفي كل يد تحصل على 3 بطاقات وتلعب حتى ثلاث خدع بورقة واحدة. الرتبة الأعلى تفوز بالخدعة بغضّ النظر عن النوع؛ والرتب المتساوية تتعادل ('فاسدة'). اربح اليد بأخذ خدعتين، أو بالفوز بالخدعة الأولى عندما تتعادل الأخرى؛ الخدعة الفاسدة تُحتسب لمن فاز بالخدعة الأولى، وإذا تعادلت الثلاث جميعها فلا أحد يسجّل.\nتساوي اليد نقطة واحدة. في دورك يمكنك '[raise]' (truc) لزيادة الرهان: 1->2، ثم +2 لكل رفع إضافي حتى 12. على خصمك أن '[accept]' أو '[fold]' أو أن يعيد '[raise]'. من ينسحب يتنازل عن اليد، ويحصل الرافع على الرهان الذي كان قبل ذلك الرفع.\nالإجراءات: '[play <rank>]' (مثل '[play 3]')، '[raise]'، '[accept]'، '[fold]'. أول من يبلغ 12 نقطة يفوز بالمباراة."
+  },
+  "board": {
+    "new_hand": "### يد جديدة بقيمة {points} نقطة\nبطاقاتك: {cards}",
+    "valid_actions": "المتاح الآن: {legal}."
+  },
+  "invalid_move": {
+    "unrecognised": "إجراء غير معروف.",
+    "already_raised": "تم الرفع بالفعل.",
+    "no_raise_to_accept": "لا يوجد رفع لقبوله.",
+    "cannot_fold": "لا يمكن الانسحاب الآن.",
+    "wrong_rank": "أنت لا تملك تلك الرتبة (يتم تجاهل الأنواع في الإدخال).",
+    "must_respond": "هناك رفع معلّق - رُدّ بـ '[accept]' أو '[fold]' أو أعِد '[raise]' قبل لعب بطاقة.",
+    "max_stake": "قيمة اليد بلغت الحد الأقصى بالفعل (12)؛ لا يمكنك الرفع أكثر."
+  },
+  "action": {
+    "raise": "P{pid} يعلن truc - قيمة اليد الآن {points} نقاط. على الخصم أن '[accept]' أو '[fold]' أو أن يعيد '[raise]'.",
+    "accept": "P{pid} يقبل - اليد تساوي {points} نقاط.",
+    "lead": "P{pid} يبدأ بـ {card}.",
+    "play": "P{pid} يلعب {card}. الخدعة لـ P{winner}.",
+    "spoilt": "P{pid} يلعب {card}. الرتب متعادلة - الخدعة فاسدة."
+  },
+  "outcome": {
+    "folded": "انسحب الخصم.",
+    "hand_won": "فاز باليد P{winner} (+{points} نقاط). النتيجة - P0: {p0}، P1: {p1}.",
+    "void": "الخدع الثلاث جميعها فاسدة - لا نقاط في هذه اليد. النتيجة - P0: {p0}، P1: {p1}.",
+    "reached_twelve": "بلوغ 12 نقطة."
+  }
+}

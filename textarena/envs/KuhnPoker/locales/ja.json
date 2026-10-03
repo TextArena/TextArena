@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "あなたは {max_rounds} ラウンドのクーンポーカーでプレイヤー {player_id} です。\nゲームルール:\n- クーンポーカーは J, Q, K の3枚のカードを使用します（J が最も低く、K が最も高い）\n- 各プレイヤーは {ante} チップをアンティとして出し、各ラウンドで1枚ずつカードを受け取ります（カードは交換なしで配られるため、同じカードを持つことはありません）。\n- ゲームは {max_rounds} ラウンド続きます\n- 全てのラウンド終了後、最もチップを持っているプレイヤーが勝者となります\nアクションルール:\n- '[check]': ベットせずにパスする（テーブルにベットがない場合のみ）\n- '[bet]': 1チップをポットに追加する（テーブルにベットがない場合のみ）\n- '[call]': 相手のベットを1チップでマッチする\n- '[fold]': 手を降りて相手にポットを譲る"
+  },
+  "init_round": {
+    "round_start": "### {max_rounds} ラウンドのうち {current_round} ラウンドを開始します。あなたのカードは: '{player_card}' です。",
+    "available_actions": "あなたの利用可能なアクションは: {available_actions} です。"
+  },
+  "invalid_move": {
+    "wrong_format": "アクションは [Check], [Bet], [Call], または [Fold] でなければなりません。",
+    "not_legal": "アクションは {legal_actions} でなければなりません。"
+  },
+  "action": {
+    "submit_move": "プレイヤー {player_id} が次のアクションを実行しました: '[{move}]'。",
+    "valid_actions": "あなたの利用可能なアクションは: {legal_actions} です。",
+    "round_summary": "{reason} 現在のスコア: プレイヤー 0: '{player_0_chips}'; プレイヤー 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "ショーダウン: プレイヤー {winner} の {winner_card} がプレイヤー {loser} の {loser_card} を上回りました。プレイヤー {winner} が {pot_value} チップのポットを獲得しました。"
+  },
+  "outcome": {
+    "draw": "{max_rounds} ラウンド終了後、両プレイヤーのチップ数が同じでした。",
+    "round_win": "プレイヤー {player_id} が降りました。",
+    "winner_player0": "プレイヤー 0 が全 {max_rounds} ラウンド終了後に最も多くのチップを持ち、勝者となりました。",
+    "winner_player1": "プレイヤー 1 が全 {max_rounds} ラウンド終了後に最も多くのチップを持ち、勝者となりました。"
+  }
+}

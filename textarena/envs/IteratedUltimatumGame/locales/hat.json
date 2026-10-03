@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Ou se Jwè {player_id}, ap jwe {num_rounds} tou nan Iterated Ultimatum Game.\nOu gen ${pool} pou divize nan tou sa a ant ou menm ak Jwè {other_id}.\n\nPwopozè:\n  - Fè yon ofri: [Offer: $X] (0 <= X <= pool)\n  - Si aksepte → Ou pral gen $(pool - X), lòt jwè a pral gen $X\n  - Si rejte → De moun yo pral gen $0\n  - Egzanp: [Offer: $3]  oswa  'Mwen panse sa a egal. [Offer: $5]'\n\nRepondè:\n  - Deside sou ofri a ak [Accept] oswa [Reject]\n  - Egzanp: 'Sa bèl. [Accept]'\n            'Trop enpak. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Tou {round_number} kòmanse! ---\nJwè {proposer_id} se pwopozè a, Jwè {responder_id} se repondè a.",
+    "offer": "Tou {round_number}: Jwè {proposer_id} ofri ${offer} bay Jwè {responder_id} (kenbe ${keep}).",
+    "accepted": "Jwè {responder_id} aksepte! Tou {round_number} benefis: Jwè {proposer_id} +${proposer_gain}, Jwè {responder_id} +${responder_gain}. Nouvo total: Jwè 0: ${total_0}, Jwè 1: ${total_1}.",
+    "rejected": "Jwè {responder_id} rejte ofri a! Tou {round_number} benefis: De jwè +$0. Total yo rete: Jwè 0: ${total_0}, Jwè 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Pwopozan an dwe fè yon òf lè l sèvi avèk fòma a [Offer: $X].",
+    "bad_integer": "Kantite lajan òf la dwe yon nonm antye valab.",
+    "out_of_range": "Ofri a dwe ant $0 ak ${pool}.",
+    "no_current_offer": "Pa gen okenn òf aktyèl pou reponn a.",
+    "accept_or_reject": "Responder dwe chwazi [Accept] oswa [Reject] ofri a."
+  },
+  "outcome": {
+    "win": "Jwè {winner} genyen ak ${winner_total} total kont ${loser_total} Jwè {loser}.",
+    "draw": "Tou de jwè fini ak ${total} total."
+  }
+}

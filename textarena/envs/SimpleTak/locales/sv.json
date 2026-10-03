@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Du är spelare {player_id} i SimpleTak.\nPå brädet visas dina stenar som '{player_stone}' och din motståndares stenar visas som '{opponent_stone}'.\n\nPå din tur väljer du en tom ruta (genom dess numrerade index) och placerar din sten där.\nTill exempel placerar '[12]' din sten i ruta 12.\n\nDitt mål är att bilda en kontinuerlig väg av dina stenar som förbinder två motsatta kanter av brädet (uppifrån och ner eller från vänster till höger)."
+  },
+  "invalid_move": {
+    "invalid_move_format": "Ogiltigt dragformat",
+    "cell_out_of_range": "Ogiltigt rutnummer {cell_num}. Måste vara mellan 0 och {max_board_num}.",
+    "cell_already_occupied": "Ruta {cell_num} är redan upptagen. Välj en tom ruta."
+  },
+  "board": {
+    "current_state": "Aktuellt bräde:\n\n{rendered_board}\nTillgängliga drag: {available_moves}"
+  },
+  "action": {
+    "placement": "Spelare {current_player_id} placerade sin symbol ({symbol}) i ruta {cell_num}."
+  },
+  "outcome": {
+    "winner": "Spelare {current_player_id} ('{symbol}') förband två motsatta kanter!",
+    "draw": "Brädet är fullt. Det är oavgjort!"
+  }
+}

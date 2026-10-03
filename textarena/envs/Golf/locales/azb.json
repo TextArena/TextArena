@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "شما در حال بازی گولف (بازی کارت) - بازیکن {player_id} هستید.\nهدف: در این دور واحد، کمترین امتیاز کل را به دست آورید. اگر ستون‌ها دارای همان مقدار باشند، به عنوان 0 جمع می‌شوند.\nارزش کارت‌ها: A=1، 2-10=ارزش رو، J/Q=10، K=0\n\nاقدامات (از براکت‌های دقیق استفاده کنید):\n- '[draw]' - از عرشه کارت بکشید\n- '[take]' - از پشته دور انداخته شده کارت بگیرید\n- '[swap X Y]' - کارت کشیده شده را با موقعیت X (ردیف) Y (ستون) عوض کنید\n- '[discard]' - کارت کشیده شده را دور اندازید\n"
+  },
+  "board": {
+    "drew": "شما کشیدید: {card}\nالان باید آن را با [swap X Y] یا [discard] عوض کنید.",
+    "took": "شما گرفتید: {card} از پشته دور انداخته شده\nشما باید آن را با [swap X Y] عوض کنید (نمی‌توانید دور اندازید).",
+    "peeked": "شما به موقعیت ({row},{col}) نگاه کردید: {card}",
+    "turn_view": "ائلی‌نیز:\n{hand}\nآتیلمیش کارت‌لار: {discard}\n{options}",
+    "none": "یوخدور."
+  },
+  "options": {
+    "final_turns": "نوبت‌های نهایی! گزینه‌های شما: [draw]، [take]، [peek X Y]",
+    "draw": "سئچیملرینیز: [draw], [take]",
+    "must_swap": "سئچیمینیز اجباری‌دیر: [swap X Y] (آتیلمیش کارت‌لاردان کارت آتماخ اولماز)",
+    "swap_or_discard": "شما باید: [swap X Y] یا [discard]"
+  },
+  "hand": {
+    "no_cards": "کارت یوخدور.",
+    "header": "Col: 1 2 3",
+    "row": "Sira {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "بازیکن {pid} کارت {new} را با {old} در موقعیت ({row},{col}) عوض کرد",
+    "discarded": "بازیکن {pid} کارت {card} را دور انداخت"
+  },
+  "message": {
+    "deck_empty": "گئری بوشدور. اویون فورصتا سونا چاتیر.",
+    "knocked": "اویونچو {pid} ضربه ووروب! هر بیری بیر دؤنه داها یئر آلیر.",
+    "final_round": "Oyuncu {pid} {reason}! Hər bir digər oyunçu bir daha dövr alacaq."
+  },
+  "reason": {
+    "all_revealed": "بوتون کارتلار آچيلدي؟"
+  },
+  "invalid": {
+    "wrong_action": "از یک عمل براکت شده دقیقاً استفاده کنید: [draw]، [take]، [swap X Y]، [discard]، [knock]، یا [peek X Y]",
+    "discard_empty": "آتيش توپولو بوشدور!",
+    "must_draw_first": "Siz əvvəlcə [draw], [take], [knock] və ya [peek X Y] etməlisiniz",
+    "cannot_discard_taken": "رد ائتمه لر توپولوسوندان آلینان کارتلاری آتابیلمزسن. اونو آچیب یئرینه قویمالیسنسان.",
+    "have_drawn_card": "بیر کارت چکمیشسینیز. [swap X Y] یا دا [discard] ائتمه‌لی‌سیز.",
+    "need_drawn_swap": "آراشديريلماق اوچون بير کارت لازيمدير.",
+    "need_drawn_discard": "آتماق اوچون بير کارت لازيمدير.",
+    "out_of_bounds": "Mövqe sərhədlərdən kənarda. Sira 1-{max_row}, sütun 1-{max_col} istifadə edin",
+    "knock_with_card": "آچيقلانميش کارتلا قاپيني دؤيمه بئلرسن. اوّلجه اؤز نؤوبه ني تاماملاماليسان.",
+    "already_knocked": "بير نفر بو دورو آرتيق چكيب.",
+    "already_revealed": "بو کارت آرتيق آچيلميشدير!"
+  },
+  "summary": {
+    "full": "Oyun bitdi! Oyuncu {winner} {score} xalla qalib gəldi!\n\nFinal Xallar:\n{scores}",
+    "line": "Oyuncu {pid}: {score} xal\n"
+  },
+  "board_str": {
+    "title": "=== قولف اوینی ===",
+    "discard": "آتیلمیش کارت‌لار: {card}",
+    "knocked": "اوینوجو {pid} وورموش!",
+    "player_header": "Oyuncu {pid} (Xal: {score}):"
+  }
+}

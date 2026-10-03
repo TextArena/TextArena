@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "ຍັງບໍ່ມີບັດ",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - ຜູ້ຫຼິ້ນດຽວ vs ຜູ້ຂາຍ\n\n📖 ຂ່າວຂອງຮອບ:\n• ຈຳນວນຊິບທີ່ເລີ່ມຕົ້ນ {start_chips} ຊິບ\n• ບາດ 52 ຊິບ (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• ຜູ້ຫຼິ້ນດຽວ vs ຜູ້ຂາຍ (ບ້ານ)\n• ຮອບທີ່ກຳລັງເກີດຕາມຮອບ Ultimate Texas Hold'em: ຜູ້ຫຼິ້ນຕັດ ANTE ແລະ BLIND, ຮັບ 2 ບາດ, ຕັດ PLAY ຊິບ, ແລະສະແດງບາດທີ່ມີ\n• ຮອບທີ່ກຳລັງເກີດຈະສິ້ນສຸດທີ່ 0 ຊິບ ຫຼື ຕ່ຳນານ ທີ່ຕົ້ນຮອບ (LOSS) ຫຼື ສິ້ນສຸດ 1000 ຮອບ ທີ່ມີຊິບ (WIN)\n\n💰 ການຕັດຊິບ:\n• ANTE: ຕ້ອງຕັດ ${ante} ຊິບທຸກຮອບ\n• BLIND: ຕ້ອງຕັດ ${ante} ຊິບທຸກຮອບ\n• PLAY: ຕັດຊິບທີ່ສາມາດເຮັດໄດ້. ທຸກຮອບ, ຜູ້ຫຼິ້ນສາມາດເຮັດໄດ້ພຽງຊິບທີ່ຕ້ອງຕັດ (${ante4} ຖ້າຕ້ອງຕັດທີ່ PRE-FLOP, ${ante2} ຖ້າຕ້ອງຕັດທີ່ FLOP, ຫຼື ${ante} ຖ້າຕ້ອງຕັດທີ່ RIVER. ຍັງສາມາດຕັດຊິບທີ່ສາມາດເຮັດໄດ້ທີ່ RIVER, ບໍ່ຕ້ອງຕັດຊິບ)\n\n🎴 ການສະແດງບາດ:\n• ຜູ້ຫຼິ້ນຮັບ 2 ບາດ (ບາດຂອງຜູ້ຫຼິ້ນ)\n• ຜູ້ຂາຍຮັບ 2 ບາດ (ບາດຂອງຜູ້ຂາຍ)\n• 5 ບາດທີ່ມີຈະສະແດງທຸກຮອບ\n• ບາດທີ່ມີຈະສະແດງທຸກຮອບ\n\n🏆 ການຂາຍຊິບ:\n• ຜູ້ຂາຍຕ້ອງມີບາດທີ່ມີຢ່າງໜ້ອຍ 2 ບາດທີ່ມີຊະນິດດຽວກັນ\n• ການຂາຍຊິບຂອງຜູ້ຂາຍຈະສະແດງທຸກຮອບ\n\n🎮 ຮອບທີ່ກຳລັງເກີດ ແລະ ການກະທຳ:\n📋 PRE-FLOP:\n  • ການກະທຳ: [4x] (${ante4}) ຫຼື [check]\n  • [4x]: ຕັດ ${ante4} PLAY ຊິບ, ສະແດງ 3 ບາດທີ່ມີ\n  • [check]: ບໍ່ຕັດຊິບ, ສະແດງ 3 ບາດທີ່ມີ\n\n📋 FLOP:\n  • ຖ້າຕັດ 4x ຊິບ: ສາມາດເຮັດໄດ້ພຽງ [skip] (ສະແດງ 2 ບາດທີ່ມີທີ່ສຸດທ້າຍ)\n  • ຖ້າບໍ່ຕັດ 4x ຊິບ: [2x] (${ante2}) ຫຼື [check]\n  • [2x]: ຕັດ ${ante2} PLAY ຊິບ, ສະແດງ 2 ບາດທີ່ມີທີ່ສຸດທ້າຍ\n  • [check]: ບໍ່ຕັດຊິບ, ສະແດງ 2 ບາດທີ່ມີທີ່ສຸດທ້າຍ\n\n📋 RIVER:\n  • ຖ້າຕັດ 4x ຫຼື 2x ຊິບ: ສາມາດເຮັດໄດ້ພຽງ [skip] (ສະແດງບາດທີ່ມີທີ່ສຸດທ້າຍ)\n  • ຖ້າບໍ່ຕັດ PLAY ຊິບ: [1x] (${ante}) ຫຼື [fold]\n  • [1x]: ຕັດ ${ante} PLAY ຊິບ, ສະແດງບາດທີ່ມີທີ່ສຸດທ້າຍ\n  • [fold]: ບໍ່ຕັດຊິບ, ສິ້ນສຸດຮອບ\n\n📋 SHOWDOWN:\n  • ບາດທີ່ມີຈະສະແດງທຸກຮອບ\n  • ບາດທີ່ມີຈະສະແດງທຸກຮອບ\n  • ບາດທີ່ມີຈະສະແດງທຸກຮອບ\n\n💎 ການຈັດຊິບ:\n📊 ANTE ຊິບ:\n  • ຜູ້ຂາຍບໍ່ມີບາດ: PUSH (ຊິບຈະກັບຄືນ)\n  • ຜູ້ຂາຍມີບາດ ແລະ ຜູ້ຫຼິ້ນຊະນະ: 1:1 ຊິບ (ຊິບ + ຊິບທີ່ຊະນະ)\n  • ຜູ້ຂາຍມີບາດ ແລະ ຜູ້ຫຼິ້ນຫາຍ: ຊິບທີ່ຫາຍ\n  • ຜູ້ຂາຍມີບາດ ແລະ ຜູ້ຫຼິ້ນຫາຍ: ຊິບທີ່ຫາຍ\n\n📊 BLIND ຊິບ:\n  • ບໍ່ມີຜູ້ຂາຍ: ຊິບທີ່ຫາຍ\n  • ຜູ້ຫຼິ້ນຊະນະ: ຊິບທີ່ຊະນະ ແລະ ຊິບທີ່ຫາຍ\n  • ຜູ້ຫຼິ້ນຫາຍ: ຊິບທີ່ຫາຍ\n  • ຜູ້ຫຼິ້ນຫາຍ: ຊິບທີ່ຫາຍ\n\n📊 BLIND ຊິບ ທີ່ມີ:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: ບໍ່ມີຊິບທີ່ຫາຍ\n\n📊 PLAY ຊິບ:\n  • ບໍ່ມີຜູ້ຂາຍ: ຊິບທີ່ຫາຍ\n  • ຜູ້ຫຼິ້ນຊະນະ: 1:1 ຊິບ (ຊິບ + ຊິບທີ່ຊະນະ)\n  • ຜູ້ຫຼິ້ນຫາຍ: ຊິບທີ່ຫາຍ\n  • ຜູ້ຫຼິ້ນຫາຍ: ຊິບທີ່ຫາຍ\n\n🎯 ການຈັດຊິບຂອງຜູ້ຫຼິ້ນ (ຊະນິດທີ່ມີຫຼາຍທີ່ສຸດຫາຍທີ່ສຸດ):\n  1. Royal Flush: A-K-Q-J-10 ຂອງຊະນິດດຽວກັນ\n  2. Straight Flush: 5 ບາດຂອງຊະນິດດຽວກັນ\n  3. Four of a Kind: 4 ບາດຂອງຊະນິດດຽວກັນ\n  4. Full House: 3 ບາດຂອງຊະນິດດຽວກັນ + 2 ບາດຂອງຊະນິດດຽວກັນ\n  5. Flush: 5 ບາດຂອງຊະນິດດຽວກັນ\n  6. Straight: 5 ບາດຂອງຊະນິດດຽວກັນ\n  7. Three of a Kind: 3 ບາດຂອງຊະນິດດຽວກັນ\n  8. Two Pair: 2 ບາດຂອງຊະນິດດຽວກັນ\n  9. One Pair: 2 ບາດຂອງຊະນິດດຽວກັນ\n  10. High Card: ບາດທີ່ມີຫຼາຍທີ່ສຸດ\n\n⌨️  ການກະທຳຂອງຜູ້ຫຼິ້ນ:\n• [4x] ຫຼື [play bet 4x]: ຕັດ ${{self.ante_amount*4}} PLAY ຊິບ\n• [2x] ຫຼື [play bet 2x]: ຕັດ ${{self.ante_amount*2}} PLAY ຊິບ\n• [1x] ຫຼື [play bet 1x]: ຕັດ ${{self.ante_amount*1}} PLAY ຊິບ\n• [check] ຫຼື [c]: ບໍ່ຕັດຊິບ\n• [fold] ຫຼື [f]: ບໍ່ຕັດຊິບ\n• [skip] ຫຼື [s]: ບໍ່ຕັດຊິບ\n\n💡 ການຊະນະຂອງຜູ້ຫຼິ້ນ:\n• ບາດທີ່ມີຫຼາຍທີ່ສຸດຫາຍທີ່ສຸດ\n• ບາດທີ່ມີຫຼາຍທີ່ສຸດຫາຍທີ່ສຸດ\n• ບາດທີ່ມີຫຼາຍທີ່ສຸດຫາຍທີ່ສຸດ\n• ບາດທີ່ມີຫຼາຍທີ່ສຸດຫາຍທີ່ສຸດ\n\n⚠️  ການຊະນະຂອງຜູ້ຫຼິ້ນ:\n• ANTE ແລະ BLIND ຊິບທີ່ຕ້ອງຕັດທຸກຮອບ\n• PLAY ຊິບທີ່ສາມາດເຮັດໄດ້\n• ການຊະນະຂອງຜູ້ຫຼິ້ນຈະສິ້ນສຸດທີ່ 0 ຊິບ ຫຼື ຕ່ຳນານ ທີ່ຕົ້ນຮອບ (LOSS) ຫຼື ສິ້ນສຸດ 1000 ຮອບ ທີ່ມີຊິບ (WIN)\n\n",
+    "state": "🎯 ຮອບ {round}\n💰 ຊິບ: {chips}\n🎴 ບາດຂອງຜູ້ຫຼິ້ນ: {hand}\n📊 ການຕັດຊິບທີ່ກຳລັງເກີດ: ANTE ${ante}, BLIND ${blind}, PLAY ${play}\n📋 ຊະນິດຂອງຮອບ: {phase}\n🎯 ການກະທຳທີ່ສາມາດເຮັດໄດ້: {actions}\n\n"
+  },
+  "board": {
+    "round_start": " ຮອບ {round} ເລີ່ມຕົ້ນ! ການພະນັນ: ANTE ${ante}, BLIND ${blind}. ທ່ານມີ {chips} ຊິບທີ່ຍັງເຫຼືອ.",
+    "your_hand": " ມືຂອງທ່ານ: {hand}",
+    "flop_revealed": " FLOP ເປີດເຜີຍ: {cards}",
+    "river_revealed": " RIVER ເປີດເຜີຍ: {cards}"
+  },
+  "invalid_move": {
+    "reason": "ການກະ ທໍາ ທີ່ບໍ່ມີຜົນ ສໍາ ເລັດ ສໍາ ລັບໄລຍະປະຈຸບັນ. ການກະ ທໍາ ທີ່ສາມາດໃຊ້ໄດ້: {available}",
+    "message": " ການກະທໍາທີ່ບໍ່ຖືກຕ້ອງ! ການກະທໍາທີ່ມີຢູ່: {available}"
+  },
+  "action": {
+    "folded": "ທ່ານ folded."
+  },
+  "showdown": {
+    "dealer_hand": " SHOWDOWN! ມືຂອງຜູ້ຂາຍ: {cards}",
+    "community_cards": " ບັດຊຸມຊົນ: {cards}",
+    "player_best": " ມືທີ່ດີທີ່ສຸດຂອງຜູ້ນ: {name} ({cards})",
+    "dealer_best": " ມືທີ່ດີທີ່ສຸດຂອງຜູ້ຂາຍ: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (ໂພດ)",
+    "blind_lost_folded": " ການພະນັນ BLIND LOST! - ${blind} (folded)",
+    "ante_won": "✅ ANTE ຊິບທີ່ຊະນະ! +${amount}",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} ກັບຄືນມາ",
+    "ante_lost": " ANTE bet LOST! -${ante}",
+    "blind_won": "✅ ການພະນັນ BLIND WON! +${amount}",
+    "blind_pushed": " ການພະນັນ BLIND PUSHED! ${blind} ກັບຄືນມາ",
+    "blind_lost": " ການພະນັນ BLIND LOST! -${blind}",
+    "play_won": "✅ PLAY ຊິບທີ່ຊະນະ! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} ກັບຄືນມາ",
+    "play_lost": " PLAY bet LOST! -${play}",
+    "net_gain": " ຮອບ {round} ສໍາເລັດ! ຜົນກໍາໄລສຸດທິ: +${net}",
+    "net_loss": " ຮອບ {round} ສໍາເລັດ! ການສູນເສຍສະອາດ: ${net}",
+    "separator": "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+  },
+  "outcome": {
+    "game_over_win": " GAME OVER! {max_turns} ຮອບສໍາເລັດ. ທ່ານມີ ${chips} ຊິບ - ທ່ານ WIN!",
+    "game_over_lose": " ເກມສຸດ! ທ່ານໄດ້ອອກຈາກ chips. Dealer ຊະນະ!",
+    "reward_win": "ຜູ້ນໄດ້ສໍາເລັດຮອບ {winner_rounds} ກັບ ${chips} ຊິບ",
+    "reward_lose": "ນັກເຕະໄດ້ ຫມົດ ຊິບໃນຮອບ {round}",
+    "reward_win_max": "ຜູ້ນໄດ້ສໍາເລັດຮອບ {max_turns} ກັບ ${chips} ຊິບ"
+  },
+  "hand_names": {
+    "royal_flush": "ບາດທີ່ມີຫຼາຍທີ່ສຸດ",
+    "straight_flush": "ບາດທີ່ມີຫຼາຍທີ່ສຸດ",
+    "four_of_a_kind": "ສີ່ ປະ ເພດ",
+    "full_house": "ເຕັມເຮືອນ",
+    "flush": "ການຟລັສ",
+    "straight": "ກົງໄປກົງມາ",
+    "three_of_a_kind": "ສາມ ປະ ເພດ",
+    "two_pair": "ສອງຄູ່",
+    "one_pair": "ຄູ່ຫນຶ່ງ",
+    "high_card": "ບັດສູງ",
+    "unknown": "ມືບໍ່ຮູ້"
+  }
+}

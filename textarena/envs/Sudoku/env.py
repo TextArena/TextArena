@@ -110,41 +110,10 @@ class SudokuEnv(ta.Env):
         self.full_grid, self.game_board = self._generate_board()
         game_state={"board": copy.deepcopy(self.game_board), "rendered_board": self._get_grid_string_with_indices(self.game_board), "completed": False}
         self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
-        self.state.add_observation(message=f"Game Board:\n{self._get_grid_string_with_indices()}", observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(message=self.m("board", "game_board", board=self._get_grid_string_with_indices()), observation_type=ta.ObservationType.GAME_BOARD)
     
     def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
-        return (
-            f"You are Player {player_id}. You are playing Sudoku.\n"
-            "Here is the current state of the Sudoku grid. Each row is numbered from 1 to 9, and each column is also numbered from 1 to 9.\n"
-            "Empty cells are represented by '.', and pre-filled cells contain digits from 1 to 9.\n\n"
-            "Current Sudoku Grid:\n"
-            "Your objective is to fill the empty cells in the 9x9 grid with digits from 1 to 9 such that:\n"
-            "1. Each row contains all digits from 1 to 9 without repetition.\n"
-            "2. Each column contains all digits from 1 to 9 without repetition.\n"
-            "3. Each of the nine 3x3 subgrids contains all digits from 1 to 9 without repetition.\n\n"
-            "Rules and Instructions:\n"
-            "1. **Do not overwrite** the initial numbers provided in the grid.\n"
-            "2. **Only fill** empty cells represented by '.'.\n"
-            "3. You may respond in any manner you prefer, but ensure that your response includes the format of '[row column number]'.\n"
-            "4. **Ensure** that your move does not violate Sudoku rules. Invalid moves will result in penalties.\n"
-            "Examples:\n"
-            "- **Valid Move**:\n"
-            "  - Grid Snippet Before Move:\n"
-            "  \n"
-            "  - Move: `[5 3 7]`\n"
-            "  - Explanation: Placing 7 at row 5, column 3 does not violate any Sudoku rules.\n\n"
-            "- **Invalid Move** (Overwriting a pre-filled cell):\n"
-            "  - Grid Snippet Before Move:\n"
-            "  \n"
-            "  - Move: `[1 1 9]`\n"
-            "  - Explanation: Cell (1,1) is already filled with 5. You cannot overwrite it.\n\n"
-            "- **Invalid Move** (Violating Sudoku rules):\n"
-            "  - Grid Snippet Before Move:\n"
-            "  \n"
-            "  - Move: `[1 3 5]`\n"
-            "  - Explanation: Placing 5 in row 1, column 3 violates the rule since 5 already exists in row 1.\n\n"
-            "The history of your moves and thoughts will be appended as you play more rounds. Use the history of your move to improve your decision making by avoiding the moves you have tried. Good luck!\n\n"
-        )
+        return self.m("player_prompt", "intro", player_id=player_id)
 
 
     def step(self, action: str) -> Tuple[bool, ta.Info ]:
@@ -155,32 +124,32 @@ class SudokuEnv(ta.Env):
         action_search_pattern = re.compile(r"\[(\d+)\s(\d+)\s(\d+)\]")
         match = action_search_pattern.search(action)
 
-        if not match: self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"Invalid move format. Player {player_id} did not respond with valid 'row column number'.")
+        if not match: self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "wrong_format", player_id=player_id))
         else:
             row, col, num = map(int, match.groups())
             if row < 1 or row > 9 or col < 1 or col > 9 or num < 1 or num > 9:
-                self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"Invalid move. Player {player_id} attempted to place {num} at ({row}, {col}), which is out of bounds.")
+                self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "out_of_bounds", player_id=player_id, num=num, row=row, col=col))
             else:
                 row_idx, col_idx = row - 1, col - 1
                 ## check if the cell is already filled in the initial grid
                 if self.state.game_state["board"][row_idx][col_idx] != 0:
-                    self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"Invalid move. Player {player_id} attempted to overwrite a pre-filled cell ({row}, {col}).")
+                    self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "overwrite", player_id=player_id, row=row, col=col))
                 elif self._is_move_correct(row_idx, col_idx, num):
                     self.state.game_state["board"][row_idx][col_idx] = num ## update the grid
-                    self.state.add_observation(message=f"Board state: \n{self._get_grid_string_with_indices()}", observation_type=ta.ObservationType.GAME_BOARD) ## update the observation
+                    self.state.add_observation(message=self.m("board", "board_state", board=self._get_grid_string_with_indices()), observation_type=ta.ObservationType.GAME_BOARD) ## update the observation
                 else:
-                    self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"Invalid move. Player {player_id} attempted to place {num} at ({row}, {col}), which violates Sudoku rules.")
+                    self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "violates_rules", player_id=player_id, num=num, row=row, col=col))
 
                 ## check if the game is completed
                 if self._is_puzzle_complete():
                     self.state.game_state["completed"] = True
-                    self.state.set_outcome(reward=1, reason=f"Congratulations! Player {player_id} completed the Sudoku puzzle.")
+                    self.state.set_outcome(reward=1, reason=self.m("outcome", "win", player_id=player_id))
                 self.state.game_state["rendered_board"] = self._get_grid_string_with_indices(self.state.game_state["board"])
 
         # check turn count
         if self.state.check_turn_limit() and not self.state.done:
             pct_complete = self._get_percentage_completion()
-            self.state.set_outcome(reward=pct_complete, reason=f"The turn limit has been reached. You correctly filled {round(pct_complete * 100)}% of the empty cells.")
+            self.state.set_outcome(reward=pct_complete, reason=self.m("outcome", "turn_limit", percent=round(pct_complete * 100)))
         return self.state.step()
             
     def _get_grid_string_with_indices(self, game_board: Optional[List[int]] = None) -> str:

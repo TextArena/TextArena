@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id}. Ikaw ay naglalaro ng Memory Game.\nAng iyong layunin ay makahanap ng mas maraming pares ng mga kard sa board, kaysa sa iyong kalaban.\nSa iyong pagkakataon, piliin ang dalawang kard na ibaligtad sa pamamagitan ng pagpasok ng mga numero ng hilera at kolumna ng unang at pangalawang kard ayon sa pagkakabanggit tulad ng '[0 1 1 0]', kung saan ang unang kard ay nasa hilera 0 at kolumna 1, at ang pangalawang kard ay nasa hilera 1 at kolumna 0.\nKung ang dalawang kard ay tumutugma, ikaw ay nakakakuha ng isang punto at ang mga kard ay nananatiling nakaharap pataas. Kung hindi sila tumutugma, ang mga kard ay ibinabaligtad pabalik sa ibaba, hal. '.'.\nAng laro ay nagtatapos kapag lahat ng mga pares ay nahanap na."
+  },
+  "board": {
+    "current_board": "Kasalukuyang board:\n{board}",
+    "current_game_board": "Kasalukuyang Game Board:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hindi wastong format ng pagkilos. Ang Player {player_id} ay hindi tumugon ng isang wastong direksyon sa loob ng mga panaklong.",
+    "out_of_bounds": "Hindi wastong pagkilos. Ang Player {player_id} ay nagpili ng isang posisyon na nasa labas ng saklaw.",
+    "same_card_twice": "Hindi wastong pagkilos. Ang Player {player_id} ay nagpili ng parehong kard dalawang beses.",
+    "already_matched": "Hindi wastong pagkilos. Ang Player {player_id} ay nagpili ng isa o parehong mga kard na nahanap na."
+  },
+  "game_message": {
+    "cards_match": "Ang mga kard na pinili ng Player {player_id} sa mga posisyon [{r1} {c1}] at [{r2} {c2}] ay tumutugma!",
+    "cards_no_match": "Ang mga kard na pinili ng Player {player_id} ay hindi tumutugma. Ang mga kard sa mga posisyon [{r1} {c1}] at [{r2} {c2}] ay {pos1} at {pos2} ayon sa pagkakabanggit."
+  },
+  "outcome": {
+    "draw": "Ang parehong mga manlalaro ay nakahanap ng parehong bilang ng mga pares ng mga kard.",
+    "win": "Ang Player {winner_id} ay nanalo!",
+    "turn_limit": "Ang limitasyon sa pagkakataon ay naabot na. Ang laro ay tapos na. Ang Player 0 ay nakakuha ng {score_0} puntos, ang Player 1 ay nakakuha ng {score_1} puntos.",
+    "turn_limit_win": "{reason} Ang Player {winner_id} ay nanalo!"
+  }
+}

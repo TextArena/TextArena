@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Du spelar Countdown-nummerspelet!\nMål: Kombinera nummer med hjälp av +, -, *, / för att nå målet.\nÅtgärdsformat: [i j op] där i,j är index och op är operationen.\nExempel: [0 2 *] multiplicerar numret på index 0 med numret på index 2.\nDivisionen måste resultera i hela nummer endast."
+  },
+  "board": {
+    "header": "MÅL: {target}\n\nTillgängliga nummer:\n{numbers}",
+    "best": "{observation}\n\nBästa hittills: {best_value} (avstånd: {distance})\nBästa uttryck: {best_expression}",
+    "history": "{observation}\n\nDraghistorik:\n{moves}",
+    "progress": "{observation}\nAktuell framstegspoäng: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ogiltigt åtgärdsformat. Använd `[i j op]` där i,j är index och op är +,-,*,/",
+    "invalid_indices": "Ogiltiga index. Måste vara olika och inom intervallet 0-{max_index}",
+    "invalid_operation": "Ogiltig operation (division med noll eller icke-heltalsresultat)"
+  },
+  "outcome": {
+    "win": "Perfekt! Hittade exakt mål: {target}",
+    "no_moves": "Inga fler drag. Bästa resultat: {best_value} (mål: {target})",
+    "turn_limit": "Draggräns nådd. Bästa resultat: {best_value} (mål: {target})"
+  }
+}

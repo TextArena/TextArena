@@ -1,0 +1,57 @@
+{
+  "_comment": "Skedari i lokalizimit për Briscola. MOS përkthej çelësat (ana e majtë). Përkthej vetëm vlerat (ana e djathtë). Mbaj çdo {placeholder} saktësisht ashtu siç është. Mos përkthej tokenin e veprimit '[play X]', etiketat e kartave (A, 2..7, J, Q, K), simbolet e llojit të kartës (të mbajtura në slotet {card}/{trump_card}), ose numrat e pikëve/pikëve/rezultateve.",
+  "_slots": {
+    "{player_id}": "Numri i lojtarit, p.sh. 0 ose 1",
+    "{trump_suit}": "Simboli i llojit të kartës së triumfit (♠♥♦♣) - mos përkthej",
+    "{trump_card}": "Etiketa e kartës së triumfit, p.sh. '7♠' - mos përkthej",
+    "{card}": "Etiketa e kartës, p.sh. 'A♥' - mos përkthej",
+    "{trump_mark}": "Shënuesi i parapërgatitur '(TRUMP)', ose bosh",
+    "{max_pos}": "Pozicioni më i lartë i ligjshëm i kartës në dorën e lojtarit",
+    "{count}": "Numri i kartave që mban një lojtar",
+    "{pos}": "Numri i pozicionit të kartës në dorë",
+    "{points}": "Numri i pikëve (vlera e kartës ose rezultati i akumuluar)",
+    "{hand}": "Dorë e parapërgatitur, me shumë rreshta",
+    "{trick}": "Truku aktual i parapërgatitur",
+    "{scores}": "Rreshti i rezultatit të parapërgatitur, ose blloku final i rezultatit për lojtar",
+    "{trump_info}": "Rreshti i parapërgatitur i llojit të kartës së triumfit / numrit të kartave në paketë",
+    "{winner}": "Numri i lojtarit që fitoi trukun ose lojën",
+    "{tricks}": "Numri i trukëve të fituar nga një lojtar",
+    "{deck_count}": "Numri i kartave të mbetura në paketë"
+  },
+  "game": {
+    "start": "Loja e Briscolës ka filluar! Lloji i kartës së triumfit: {trump_suit} (Karta e triumfit: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Ju po luani Briscola - Lojtari {player_id}.\nQëllimi: Fitoni trukë dhe mblidhni pikët më të shumta (120 pikë të përgjithshme në paketë).\nPikët e kartës: A=11, 3=10, K=4, Q=3, J=2, të tjerat=0\nFuqia e kartës: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nKartat e triumfit mund të mposhtin kartat jo të triumfit pavarësisht nga fuqia.\n\nVeprimi: '[play X]' ku X është pozicioni (1-{max_pos}) i kartës në dorën tuaj\n"
+  },
+  "hand": {
+    "none": "Nuk ka karta",
+    "empty": "Nuk ka karta në dorë",
+    "header": "Dora juaj:",
+    "card_line": "  {pos}. {card} [{points} pikë]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Nuk ka karta të luajtura ende në këtë truk.",
+    "header": "Truku aktual:",
+    "line": "  Lojtari {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Lojtari {player_id}: {points} pikë",
+    "trump_info": "Lloji i kartës së triumfit: {trump_suit}",
+    "trump_info_deck": "Lloji i kartës së triumfit: {trump_suit} | Karta të mbetura në paketë: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nRezultatet: {scores}\n{trump_info}\n\nLuaj një kartë duke përdorur [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Përdorni [play X] ku X është pozicioni i kartës (1, 2, 3, etj.)",
+    "out_of_range": "Pozicion i pavlefshëm i kartës. Ju keni {count} karta (1-{count})"
+  },
+  "action": {
+    "played": "Lojtari {player_id} luajti {card}",
+    "trick_win": "Lojtari {winner} fiton trukun me {card} dhe fiton {points} pikë!"
+  },
+  "outcome": {
+    "head": "Loja mbaroi! Lojtari {winner} fiton me {points} pikë!\n\nRezultatet finale:\n{scores}",
+    "player_line": "Lojtari {player_id}: {points} pikë ({tricks} trukë)\n"
+  }
+}

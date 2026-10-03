@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} v Chopsticks. Počas svojej ťahy vyberte jednu z nasledujúcich možností:\n  + Útok: '[attack M O]' kde M=vaša ruka (0 alebo 1), O=ruka súpera (0 alebo 1).\n    - Počet prstov ruky súpera sa zvýši o počet prstov vašej ruky; ak >=5, stane sa 0.\n  + Rozdelenie: '[split L R]' pre redistribúciu celkového počtu prstov do L a R (L+R = váš celkový počet).\nOdpovedajte presne jednou z týchto príkazov."
+  },
+  "board": {
+    "current_board": "Aktuálna doska:\nHráč 0: {hands_0}\nHráč 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Vaša ruka {my_idx} je mŕtva.",
+    "opp_hand_dead": "Ruka súpera {opp_idx} je už mŕtva.",
+    "split_sum": "Rozdelenie musí mať súčet {total}.",
+    "split_no_change": "Rozdelenie musí zmeniť rozloženie vašich rúk.",
+    "invalid_command": "Neplatný ťah. Použite “[attack M O]” alebo “[split L R]”."
+  },
+  "game_action": {
+    "attack": "Hráč {player_id} útočí na ruku {opp_idx} hráča {opp_id}: zmení sa z {opp_val} na {new_val}.",
+    "split": "Hráč {player_id} rozdelí na [{L}, {R}]."
+  },
+  "history": {
+    "entry": "Hráč {player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Obidve ruky súpera sú mŕtve.",
+    "draw": "Bol dosiahnutý limit ťahov."
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Nde Player {player_id} Three-Player Tic Tac Toe-pe.\nNe símbolo '{symbol}'.\nNde ohasa ñembyaty ojapo línea irundyha rupi 5x5 tablero-pe.\nLínea ikatu horizontal, vertical térã diagonal.\nEmoĩ nde jugada-pe formato '[4]' ojapo celda 4-pe."
+  },
+  "board": {
+    "current_board": "Tablero Ag̃agua:\n\n{board}\n\nJugada Ikatúva: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato de movimiento ndoikóiva. Eipuru \"[cell]\" ha'ehápe celda 0-{max_cell}.",
+    "out_of_range": "Celda número he'ẽ: {cell}. Va'erã {max_cell} peve.",
+    "already_occupied": "Celdilla {cell} oĩma ocupada.",
+    "made_invalid": "Jokuaihára {player_id} ojapo peteĩ movimiento invalido."
+  },
+  "game_action": {
+    "placed": "Jugador {player_id} omba'e iñe'ẽ ({symbol}) kóva pe ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Player {player_id} ({symbol}) ipu'akai!",
+    "draw": "Pe juego ha'e peteî empate!"
+  }
+}

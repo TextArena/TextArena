@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v {max_rounds} rundnem igri Kuhn Pokerja.\nPravila igre:\n- Kuhn Poker uporablja 3-kartno kupček z J, Q, K (J najnižji, K najvišji)\n- Vsak igralec stavi {ante} žeton in prejme 1 karto vsako rundo (pazite, da se karte delijo brez zamenjave, tako da ne morete imeti iste karte kot vaš nasprotnik).\n- Igra se nadaljuje za {max_rounds} rund\n- Igralec z največ žetoni po vseh rundah zmaga\nPravila akcij:\n- '[check]': Preložite brez stave (samo če ni stave na mizi)\n- '[bet]': Dodajte 1 žeton v lonček (samo če ni stave na mizi)\n- '[call]': Ujemite nasprotnikovo stavo z dodajanjem 1 žetona v lonček\n- '[fold]': Odložite roko in pustite nasprotnika, da zmaga lonček"
+  },
+  "init_round": {
+    "round_start": "### Začetek runde {current_round} od {max_rounds} rund. Vaša karta je: '{player_card}'",
+    "available_actions": "Vaše razpoložljive akcije so: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Akcija mora biti [Check], [Bet], [Call] ali [Fold].",
+    "not_legal": "Akcija mora biti {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Igralec {player_id} je oddal potezo: '[{move}]'.",
+    "valid_actions": "Vaše razpoložljive akcije so: {legal_actions}.",
+    "round_summary": "{reason} Trenutni rezultati: Igralec 0: '{player_0_chips}'; Igralec 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Pokazovanje kart: Igralec {winner}jeva {winner_card} premaga Igralec {loser}jevo {loser_card}. Igralec {winner} zmaga lonček v vrednosti {pot_value} žetonov."
+  },
+  "outcome": {
+    "draw": "Na koncu {max_rounds} rund sta imela oba igralca enako število žetonov.",
+    "round_win": "Igralec {player_id} se je umaknil.",
+    "winner_player0": "Igralec 0 je zmagal, ker je imel več žetonov na koncu vseh {max_rounds} rund.",
+    "winner_player1": "Igralec 1 je zmagal, ker je imel več žetonov na koncu vseh {max_rounds} rund."
+  }
+}

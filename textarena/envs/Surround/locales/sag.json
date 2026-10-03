@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Mbeni Surround na ngbanga {width}x{height}.\nMo ye mbeni {player_id}. Matakï gbï: '[up]' '[down]' '[left]' '[right]' ôla w/s/a/d.\nGbïa: kiri so mo na ngbanga ôzo. nzïngö ayeke zo bï; ngbanga î gbëtï zo bï; bïngö nzönî zo bïngö ôzo."
+  },
+  "board": {
+    "current": "Ndokua ti a-ancien: {board}",
+    "after_moves": "A yeke wara na yâ ti tableau ni aye so a sara gi fani oko: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Zo ti pikango ndembo {player_id} akui ndali ti so lo gue na mbeni ye ni ayeke nzoni pëpe."
+  },
+  "outcome": {
+    "survived_win": "Zo ti pikango ye {player_id} asö kuâ; tanga ni kue atï.",
+    "all_crashed": "Azo kue so ayeke sara ngia ni atï na lê ti sese legeoko.",
+    "outlived": "Zo ti pikango ndembo ni angbâ na fini ahon tanga ti azo kue.",
+    "all_dead": "Azo ti pikango ndembo ni kue akui.",
+    "turn_limit": "A si na ndo so a lingbi ti changé ni dä awe. Zo so angbâ aninga ahon atanga ni kue ayeke sö benda.",
+    "ranking": "{reason} Kôtaï ngûi (lêndû→kûê): {groups}"
+  }
+}

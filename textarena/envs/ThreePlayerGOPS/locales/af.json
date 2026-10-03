@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS-lokaalleêr. MAAK NIE sleutels (linkerkant) oor nie. Vertaal net waardes (regterkant).",
+  "_slots": {
+    "{player_id}": "Die speler se nommer, 0, 1 of 2",
+    "{round}": "Die huidige rondte-nommer, 1..13",
+    "{prize}": "Die onthulde pryskaart se gesig-etiket (A, 2..10, J, Q, K) - vertaal nie",
+    "{worth}": "Die prys se totale waarde, insluitend enige oorgedraagde pot",
+    "{hand}": "Die speler se oorblywende kaarte, weergegee as hakie-tokens soos '[A]' '[2]' - vertaal nie",
+    "{bids}": "Die neutrale komma-geskeide lys van gespeelde kaarte soos 'P0:10, P1:J, P2:Q' - vertaal nie",
+    "{winner}": "Die speler-nommer wat die rondte gewen het",
+    "{pot}": "Die pot-waarde wat toegeken of oorgedra word in hierdie rondte",
+    "{scoreline}": "Die neutrale lopende tellingbord soos 'P0:0  P1:0  P2:11' - vertaal nie",
+    "{pid}": "Die speler-nommer wat uitgeskakel is",
+    "{scores}": "Die finale tellings as 'n rou speler-nommer na telling-toewysing - vertaal nie"
+  },
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in Drie-Speler GOPS.\n- Jy hou die 13 kaarte A-K (elk presies een keer).\n- Elke rondte word 'n prys onthul. Dien EEN kaart in soos `[Q]`, `[10]`, `[2]` …\n- Die hoogste kaart wen die prys (+ enige oorgedraagde pot). Gelykop rol die prys oor na die volgende rondte.\n- Na 13 rondtes wen die hoogste totaal. Ongeldige skuif = uitskakeling."
+  },
+  "round": {
+    "header": "### Rondte {round}/13 - Prys: {prize} (waarde {worth})",
+    "hand": "Jou oorblywende hand: {hand}"
+  },
+  "reveal": {
+    "win": "Biedinge » {bids} - Speler {winner} wen {pot}.",
+    "tie": "Biedinge » {bids} - gelykop, pot nou {pot}.",
+    "scores": "Tellings → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "aksie het 'n hakie-kaart nodig soos '[Q]'",
+    "bad_card": "kaart reeds gebruik of ongeldig"
+  },
+  "elimination": {
+    "player": "Speler {pid} uitgeskakel na herhaalde ongeldige skuif."
+  },
+  "outcome": {
+    "auto_win": "Twee spelers uitgeskakel - outomatiese wen.",
+    "final": "Finale tellings: {scores}"
+  }
+}

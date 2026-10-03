@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Uri Player {player_id} muri Iterated Prisoner's Dilemma ikagira {num_rounds} mizunguko.\n\nMuundo wa Mchezo:\n- Mbere ya kila uamuzi ufite {total_conversation_rounds} mizunguko ya kujadiliana kwa uhuru.\n- Nyuma yayo, wachezaji wote wawili huchagua kushirikiana au kutoroka wakati huo huo.\n\nMatrix ya Payoff (imehifadhiwa kila mzunguko):\n- Wote wawili Wanaushirikiano ➜ kila {cooperate_reward}\n- Wote wawili Wanatoroka ➜ kila {mutual_defect_reward}\n- Mmoja Anatoka, mmoja Anaushirikiano ➜ Mtoroki {defect_reward}, Mshirikishi {sucker_reward}\n\nJinsi ya Kucheza:\n- Wakati wa mazungumzo: andika maandishi yoyote unayotaka.\n- Wakati wa uamuzi: ongeza '[Cooperate]' au '[Defect]' (bila kujali herufi kubwa au ndogo). Unaweza kuongeza maandishi ya ziada kabla/nyuma ya token."
+  },
+  "phases": {
+    "conversation_finished": "Igutanura ryaratanze kwa mukondo {round}. Hitamo kujya na '[Cooperate]' canke '[Defect]' mu {{}}.",
+    "starting_round": "--- Gutangira Mzunguko {round} ---",
+    "round_summary": "Emiziki ya mukondo {round}:\n{outcome}\nKinnyi 0 yashitse {r0} (jumla {score_0}), Kinnyi 1 yashitse {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Kinnyi {winner} ashindye {win_score} - {lose_score}.",
+    "draw": "Tasindika! Abakinnyi bose bashitse {s0}.",
+    "round_both_cooperate": "Abo bakinyi bompi barakorana.",
+    "round_both_defect": "Abo bakinyi bompi barahunze.",
+    "round_p0_cooperates_p1_defects": "Mchezaji 0 yashirikishije, Mchezaji 1 yamwagiye.",
+    "round_p0_defects_p1_cooperates": "Umukinnyi wa 0 yarahunze, uw'1 arakorana."
+  }
+}

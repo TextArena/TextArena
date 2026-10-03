@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Kəmə tətanja Klondike Solitaire. Kəmə ndolo ndoja kərəwa karta zəga foundation piles.\n\nKəmə kaga:\n- Foundation piles (F1-F4): Kərəwa karta ndoja Ace ndolo King kərəwa suit\n- Tableau piles (T1-T7): Kərəwa karta ndoja alternating colors (red kərəwa black, black kərəwa red)\n- Stock: Kərəwa karta ndoja waste pile\n- Waste (W): Karta ndoja ndolo available kərəwa play\n\nKəmə komandi:\n- 'draw' - Kərəwa karta ndoja stock kərəwa waste\n- 'move <source> <destination> [count]' - Kərəwa karta ndoja piles\n  Misali: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count kətanja 'all', ndoja kətanja kərəwa karta zəga face-up.\n- 'forfeit' - Kəmə ndolo ndoja game ndolo ndolo score\n- Pile names: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nKəmə kətanja actions ndolo ndolo turn ndolo separating ndolo commas:\n  Misali: 'draw, move W T1, move T2 F1'\n\nKəmə Kings kətanja kərəwa empty tableau piles.\nActions kətanja ndolo order - ndolo kətanja fails, ndolo actions kətanja skipped.\nKətanja 'forfeit' ndolo kəmə kətanja game ndolo impossible ndolo win."
+  },
+  "format_error": {
+    "no_brackets": "Fasal cidabe kalkal gǝnyi. Cida dǝ suro kurtəyen kara.",
+    "no_closing_bracket": "Kǝla awo laa diwo dǝ kalkal gǝnazanyi. Karapka datәgәbe ba ']'",
+    "empty_command": "Kәrma banna. Type 'draw' au 'move <source> <destination> [count]'",
+    "empty_action": "Cida laa kalkal gǝnyi.",
+    "move_needs_args": "Umarni 'move' yakamata kuwa na tushen da kujulikana. Amfani: 'move <source> <destination> [count]'",
+    "count_positive": "Count dǝ kǝla-a au \"all\" lan kara.",
+    "count_invalid": "Kəmə count ndolo. Kətanja number ndolo 'all'",
+    "unknown_command": "Ko e komanda '{cmd}'. Cine 'draw', 'move <source> <destination> [count]', ko 'forfeit'",
+    "wrapped": "Yaɓɓe {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Yaɓɓe {n}: {msg}",
+    "before_failure": "Ai watar da {n} aiki(s) kafin kasa.",
+    "failed": "Yaɓɓe {n} kufewuno: {msg}"
+  },
+  "move_result": {
+    "drew": "Kәrtuwa sәdibe dәn kәla awo laa bannazayin ro.",
+    "cannot_draw": "Kәnda-a karewa kәnzabe-aye samma so bannazayin.",
+    "invalid_pile": "Su pilebe kalkal gənyi. W, F1-F4, au T1-T7 faidatəyin",
+    "foundation_one_card": "Kәrtu falma bas ro letin.",
+    "waste_to_foundation_ok": "Karta do karewa fәlezǝna dǝga cidi ro kalakciwo F{dst}",
+    "waste_to_foundation_bad": "Kәrtuwa karebe gәnyi matinne ro sakkin ba",
+    "tableau_to_foundation_ok": "Ɗon kati kadi e tableau T{src} zuɓɓe foundation F{dst}",
+    "tableau_to_foundation_bad": "Kәrtu tableaube dәga kәla furum shimadәro lejinba",
+    "foundation_to_foundation": "Sandiya cidiya gade ro lejinba.",
+    "waste_to_tableau_one_card": "Kәrtu falma bas ro letin daga awowa bannazayin dәn suro tablebe lan.",
+    "waste_to_tableau_ok": "Kat dǝga awowa bannabe lan table T{dst} ro kalakǝtǝna.",
+    "waste_to_tableau_bad": "Kәrtuwa karebe gәnyi raksa kәla tableau dә ro yaktin ba",
+    "no_face_up": "Karta kǝla-kǝlanzǝn ba ro letәgәnyi.",
+    "tableau_to_tableau_ok": "Ɗon {count} kadi e tableau T{src} zuɓɓe T{dst}",
+    "tableau_to_tableau_bad": "Ba za a iya motsa {count} katin(s) daga T{src} zuwa T{dst}",
+    "foundation_to_tableau_one_card": "Kәrtu falma basro letin daga cidi ro lejin.",
+    "foundation_empty": "Foundation F{src} də bowo.",
+    "foundation_to_tableau_ok": "Ɗon kati kadi e foundation F{src} zuɓɓe tableau T{dst}",
+    "foundation_to_tableau_bad": "Kәrtu funduye dәga table T {dst} ro gәnyi.",
+    "to_waste_or_stock": "Awowa gǝnatǝna dǝga letinmba au kǝnzan ro."
+  },
+  "outcome": {
+    "forfeit": "Bikke dәga koltǝ. Sawu dareye: {score} katiwa suro foundationsben.",
+    "won": "Congratulations! Nyiye kǝnasar Klondike Solitairebe dә suwono.",
+    "turn_limit": "Wuni ko! I ɓe turn ɓe ko ɓe {max_turns}. Score: {score} kadi e foundation."
+  },
+  "board": {
+    "title": "=== KÀNDÌKÌ SÒLÌTÈRÌ ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stock: {stock} kartǝwa",
+    "waste": "Awowa gǝnatǝna dǝ (W): {waste}",
+    "foundations_header": "Foundations:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau: Kǝla awowabe.",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

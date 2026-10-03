@@ -42,6 +42,8 @@ class ActionFormattingWrapper(ActionWrapper):
         Returns:
             str: The formatted action, with brackets added if necessary.
         """
+        action = action.strip().strip("'\"")
+        
         if "[" not in action and "]" not in action:
             return f"[{action}]"
         else:

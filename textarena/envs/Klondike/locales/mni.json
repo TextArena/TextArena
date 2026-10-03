@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "သင် Klondike Solitaire ကစား ခြင်း. သင်၏ ရည်မှန်းချက် ဖဲ အားလုံး အခြေခံ ဖဲ တိုက် အတွင်း ပြောင်းရွှေ့ ခြင်း.\n\nကစားနည်း စည်းမျဉ်း:\n- အခြေခံ ဖဲ တိုက် (F1-F4): အေစ် မှ ကင်း အထိ ဖဲ အမှတ် အတိုင်း တည်ဆောက် ခြင်း\n- ဖဲ တိုက် (T1-T7): အရောင် အမျိုး အတိုင်း တည်ဆောက် ခြင်း (အနီ အမဲ အပေါ်, အမဲ အနီ အပေါ်)\n- ဖဲ ရင်း: ဖဲ အရေအတွက် အပေါ် ဖဲ တိုက် အတွင်း ဆွဲ ခြင်း\n- ဖဲ အပေါ် (W): ဖဲ အမှတ် အပေါ် ဖဲ တိုက် အတွင်း ကစား ခြင်း\n\nအမိန့်:\n- 'draw' - ဖဲ ရင်း အပေါ် ဖဲ တိုက် အတွင်း ဆွဲ ခြင်း\n- 'move <source> <destination> [count]' - ဖဲ တိုက် အတွင်း ဖဲ အမှတ် ပြောင်းရွှေ့ ခြင်း\n  ဥပမာ: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count ကို 'all' အဖြစ် သတ်မှတ် ခြင်း လုပ်နိုင် ပါသည်, ဖဲ အမှတ် အားလုံး ပြောင်းရွှေ့ ခြင်း ကို ကြိုးစား ပါသည်.\n- 'forfeit' - ကစားနည်း အပြီး အချိန် အတွင်း ရပ်တန့် ခြင်း လုပ်နိုင် ပါသည် သင်၏ လက်ရှိ အမှတ် အတွက် သတ်မှတ် ခြင်း\n- ဖဲ တိုက် အမှတ်: W (ဖဲ အပေါ်), F1-F4 (အခြေခံ ဖဲ တိုက်), T1-T7 (ဖဲ တိုက်)\n\nသင် အမိန့် အမျိုး အတွက် ကော်မာ ခြား အမိန့် အတွင်း ကစား နိုင် ပါသည်:\n  ဥပမာ: 'draw, move W T1, move T2 F1'\n\nဖဲ တိုက် အမှတ် အဖဲ မရှိ အပေါ် ဖဲ အမှတ် ကင်း အဖြစ် သတ်မှတ် ခြင်း လုပ်နိုင် ပါသည်.\nအမိန့် အလိုက် ကစား ခြင်း - အမိန့် တစ်ခု မအောင်မြင် ပါက, အမိန့် အလိုက် ကစား ခြင်း အမှတ် အပေါ် ရပ်တန့် ခြင်း လုပ်နိုင် ပါသည်.\n'forfeit' အမိန့် အသုံး ပြုပါ သင် ကစားနည်း အောင်မြင် မည် မဟုတ် ယုံကြည် ပါက."
+  },
+  "format_error": {
+    "no_brackets": "Action format khongde ema. Bracket  da khongu",
+    "no_closing_bracket": "Action format khongde ema. Closing bracket ']'  khongde",
+    "empty_command": "Command khongde ema. 'draw'  ema leh 'move <source> <destination> [count]'  khongu",
+    "empty_action": "Action khongde ema",
+    "move_needs_args": "'move <source> <destination> [count]'  ema khongde. Source leh destination pao khongu",
+    "count_positive": "Count khongde ema positive leh 'all'  khongu",
+    "count_invalid": "Count khongde ema. Number ema leh 'all'  khongu",
+    "unknown_command": "Command '{cmd}'  khongde ema. 'draw', 'move <source> <destination> [count]', leh 'forfeit'  khongu",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "{n} থৌরাগী কার্য পুর্ন করে বিফল হওঅর আগে",
+    "failed": "Action {n}  failed: {msg}"
+  },
+  "move_result": {
+    "drew": "Stock  gan waste  da card (s) drew",
+    "cannot_draw": "লৌশিনবা য়াদে। স্তোক অমসুং ৱেস্ত অনিমক মচি ওইবা ঙম্মি।",
+    "invalid_pile": "য়াদবা পাইল মমিং. W, F1-F4, নত্রগা T1-T7 শিজিন্নৌ",
+    "foundation_one_card": "ফাউন্দেসনদা কার্দ 1 খক্তমক হোংদোকপা য়াগনি.",
+    "waste_to_foundation_ok": "ফুদরেৎতগী কার্দতা য়ুমফমদা হোংদোকপা F{dst}",
+    "waste_to_foundation_bad": "Waste kaad foundation pile  da thokpa khongde",
+    "tableau_to_foundation_ok": "Tableau T{src}  gan foundation F{dst}  da kaad thokkhi",
+    "tableau_to_foundation_bad": "ফাউন্দেসন পিলদা তেবল্যু কার্দ হোংহনবা ঙমদে",
+    "foundation_to_foundation": "Foundation gan foundation da thokpa khongde",
+    "waste_to_tableau_one_card": "ওয়েস্ট থেকে টেবিলে ১টা কাৰ্ডহে লৈনা পারি",
+    "waste_to_tableau_ok": "Waste  gan tableau T{dst}  da kaad thokkhi",
+    "waste_to_tableau_bad": "Waste kaad tableau pile  da thokpa khongde",
+    "no_face_up": "হোংদোক-হোংশিনবা য়াদবা কার্দশিং লৈতে",
+    "tableau_to_tableau_ok": "{count}  kaad (s) tableau T{src}  gan T{dst}  da thokkhi",
+    "tableau_to_tableau_bad": "Tableau T{src}  gan T{dst}  da {count}  kaad (s) thokpa khongde",
+    "foundation_to_tableau_one_card": "ফাউন্ডেশন থেকে টেবিলে ১টা কাৰ্ডহে লৈনা পারি",
+    "foundation_empty": "ফাউন্দেসন F{src} অসি খক্তা লৈরে.",
+    "foundation_to_tableau_ok": "Foundation F{src}  gan tableau T{dst}  da kaad thokkhi",
+    "foundation_to_tableau_bad": "তেবল T{dst}দা ফাউন্দেসন কার্দ হাপচিনবা য়াদে",
+    "to_waste_or_stock": "Waste leh stock  da thokpa khongde"
+  },
+  "outcome": {
+    "forfeit": "মতা খল্লি চাওরি। ফাইনাল স্কোর: {score} কাৰ্ড ফাউন্ডেশনে",
+    "won": "নুংঙাইবা ফোংদোকচরি! অদোম্না ক্লোন্দাইক সোলিতেয়রদা মাই পাকখ্রে।",
+    "turn_limit": "ကစားနည်း အပြီး! သင် {max_turns} အချိန် အမြောက် အမြာက် အပြီး အချိန် အတွင်း ရောက်ရှိ ပါ. အမှတ်: {score} ဖဲ အမှတ် အခြေခံ ဖဲ တိုက် အတွင်း."
+  },
+  "board": {
+    "title": "=== ক্লোন্ডাইক সোলিটেয়ার ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stock: {stock}  kaad",
+    "waste": "ৱেস্ত (W): {waste}",
+    "foundations_header": "ফাউন্দেসনশিং:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "তেবল:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

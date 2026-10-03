@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-ተጻዋሪ ሱራውንድ በ {width}x{height} ግሪድ.\nአንተ ተጻዋሪ {player_id} ኢኻ። ሓለዋት ምዕባለታት፦ '[up]' '[down]' '[left]' '[right]' ወይ w/s/a/d.\nንዕናድ፦ ካልኦት ሕያው ከም ሂወካ ንኽሃወል። ጥፍኣት ሞት ይገብራሉ። ግድግዳ ሃውልሲ ሞት ይገብራሉ። ሓለዋ ክራሽ ክልቴ ሞት ይገብራሉ።"
+  },
+  "board": {
+    "current": "ናይ ሕጂ ቦርድ: {board}",
+    "after_moves": "ድሕሪ ሓደ ግዜ ምንቅስቓስ ቦርድ: {board}"
+  },
+  "game_action": {
+    "invalid_death": "ተጻዋታይ {player_id} ብሰንኪ ዘይቅኑዕ ስጉምቲ ሞይቱ።"
+  },
+  "outcome": {
+    "survived_win": "ተጻዋታይ {player_id} ብህይወት ተረፈ፤ ካልኦት ኩሎም ድማ ወዲቖም።",
+    "all_crashed": "ኩሎም ተጻወትቲ ብሓንሳብ ተበላሽዮም።",
+    "outlived": "እቲ ተጻዋታይ ካብ ካልኦት ኩሎም ብህይወት ተሪፉ።",
+    "all_dead": "ኩሎም ተጻወትቲ ሞይቶም እዮም።",
+    "turn_limit": "እቲ ኣብ ሓደ ዙርያ ዘሎ ገደብ በጺሑ - ዝሓየለ ዝጸንሐ ይዕወት።",
+    "ranking": "{reason} ኣብ መደብ ምዕራፍ መግቢ እትርከብ (እቲ ምርጋሕ→እቲ መጻኢ): {groups}"
+  }
+}

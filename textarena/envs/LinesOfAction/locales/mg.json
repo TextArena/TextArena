@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Ianao no Mpilalao {player_id} ao amin'ny lalao LinesOfAction.\nNy pions ao anjanonao dia '{side}', ary ny pions ao anjanon'ny mpifanandrina dia '{other}'.\nFomba fihetsika : `[b1b3]` (avy amin'ny toerana mankany amin'ny toerana). Mihetsika ara-dalàna ihany no azo atao, na anaty, na an-tongotra, na an-katry, ary mandeha amin'ny isan-tsokosoko mitovy amin'ny isan'ny pions rehetra (na volon-koditra na inona) ao amin'ilay andiany. Afaka mitsambikina amin'ny pions ao anjanonao ihany ianao, fa tsy azo atao amin'ny pions ao anjanon'ny mpifanandrina ; raha mihetsika amin'ny toeran'ny mpifanandrina dia azonao."
+  },
+  "board": {
+    "current_board": "Birao: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ny endrika dia tsy maintsy e2e4 (avy amin'ny,to coordinates).",
+    "no_piece": "Tsy misy {side} ampahany amin'ny {coord}.",
+    "identical": "Mitovy ny toerana niaviany sy ny toerana alehany.",
+    "not_straight_or_diagonal": "Tsy maintsy mahitsy na miolakolaka ny fihetsika.",
+    "wrong_distance": "Tsy maintsy mihetsika amin'ny halavirana mitovy amin'ny sombin-javatra milahatra.",
+    "enemy_blocks": "Manakana ny lalana ny zana-tsipìka fahavalo.",
+    "destination_own": "Toerana iray izay nolalovan'ny fitaovam-piadiana manokana."
+  },
+  "game_action": {
+    "moved": "Mpilalao {player_id} nifindra {from} -> {to}",
+    "captured_suffix": "Mpilalao {player_id} nifindra {from} -> {to} nisambotra fahavalo."
+  },
+  "outcome": {
+    "win": "Mifandray daholo ny zavatra rehetra.",
+    "draw_no_capture": "60 ny hetsika tsy misy fisamborana.",
+    "draw_repetition": "Naverina intelo ny toerana."
+  }
+}

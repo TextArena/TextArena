@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "त्वम् लाइन्सऑफ़एक्शन इति क्रीडायां खिलाडी {player_id} असि।\nतव गणाः '{side}' सन्ति, प्रतिद्वन्द्विनः गणाः '{other}' सन्ति।\nगति-प्रारूपं: `[b1b3]` (प्रारम्भिक-स्थानात् लक्ष्य-स्थानम्)। विधिसम्मतगतिः क्षैतिजतः, ऊर्ध्वतः, वा तिर्यक् वर्गानां संख्यया समाना भवति, यत्र सर्वे गणाः (यः कोऽपि वर्णः) तिष्ठन्ति। स्वगणान् अतिक्रम्य गन्तुं शक्नोषि, परन्तु प्रतिद्वन्द्विगणान् न अतिक्रम्य; प्रतिद्वन्द्विगणे अवतीर्णः सन् तं गृह्णासि। जयः तदा भवति यदा तव सर्वे गणाः अष्ट-संलग्नाः भवन्ति।"
+  },
+  "board": {
+    "current_board": "बोर्डः {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "स्वरूपं ई-२ई४ (अन्तर्देशात्,संयोजकान् प्रति) भवेत् ।",
+    "no_piece": "न {side} पाशः {coord} अस्ति",
+    "identical": "उत्पत्तिः गन्तव्यश्च समानं भवति।",
+    "not_straight_or_diagonal": "गतिः सरळ अथवा विकर्णरूपेण भवितव्या।",
+    "wrong_distance": "पङ्क्तिगतकेषु तुल्यः दूरादेशो भवितुम् अर्हति ।",
+    "enemy_blocks": "शत्रूणां कूटं मार्गम् अवरोधयति।",
+    "destination_own": "गन्तव्यस्थानं स्वयमेव विहितम्।"
+  },
+  "game_action": {
+    "moved": "खिलाडी {player_id} गतः {from} -> {to}",
+    "captured_suffix": "खिलाडी {player_id} {from} -> {to} गत्वा शत्रुं गृहीतवान्।"
+  },
+  "outcome": {
+    "win": "सर्वेषां खण्डानां सम्बन्धः अस्ति।",
+    "draw_no_capture": "६० गतिं विना कैप्चरः।",
+    "draw_repetition": "स्थितिः त्रिवारं पुनरावर्तते।"
+  }
+}

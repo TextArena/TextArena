@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Tai giogande a su Golf (Giogu de Cartas) - Giogadore {player_id}.\nObietivu: Otènnere su puntuatzione prus bassa in custa singola borta. Si sas columnas sunt de su matessi balore, sunt contadas comente 0.\nBalores de cartas: A=1, 2-10=balore de fàtzia, J/Q=10, K=0\n\nAtziones (imprea brackets esatos):\n- '[draw]' - Pitire da su mazzu\n- '[take]' - Tòllere da su muntone de cartas atzintadas\n- '[swap X Y]' - Scambiare cartas pitidas cun positzione X (filera) Y (colonna)\n- '[discard]' - Atzintare sa cartas pitida"
+  },
+  "board": {
+    "drew": "Tai pitidu: {card}\nAra devi [swap X Y] o [discard] lu.",
+    "took": "As leadu: {card} dae sa pila de iscadèntzia Deves [swap X Y] cun issa (non podes iscarrigare).",
+    "peeked": "Tai controlladu in positzione ({row},{col}): {card}",
+    "turn_view": "Sa tua manu:\n{hand}\nPila de scartu: {discard}\n{options}",
+    "none": "Nemos, mancu unu."
+  },
+  "options": {
+    "final_turns": "Bortas finales! Sas tuas optziones: [draw], [take], [peek X Y]",
+    "draw": "Sas tuas optziones: [draw], [take]",
+    "must_swap": "Deves: [swap X Y] (non podes iscarrigare cartas dae su muntone de iscartamentos)",
+    "swap_or_discard": "Devi: [swap X Y] o [discard]"
+  },
+  "hand": {
+    "no_cards": "No b'at carteddos.",
+    "header": "  Col:   1    2    3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Giogadore {pid} at scambiatu {new} cun {old} in positzione ({row},{col})",
+    "discarded": "Giogadore {pid} atzintu {card}"
+  },
+  "message": {
+    "deck_empty": "Sa piata est bòida! Su giogu acabbat in presse.",
+    "knocked": "Giogadore {pid} batidu! Ogni àteru giogadore tenet unu turnu de prus.",
+    "final_round": "Giogadore {pid} {reason}! Cada àteru giogadore tenet un'àtera borta."
+  },
+  "reason": {
+    "all_revealed": "at isveladu totu sas cartas?"
+  },
+  "invalid": {
+    "wrong_action": "Imprea un'atzione cun bracket: [draw], [take], [swap X Y], [discard], [knock], o [peek X Y]",
+    "discard_empty": "Sa pila de iscadidos est bòida!",
+    "must_draw_first": "Devi prima [draw], [take], [knock], o [peek X Y]",
+    "cannot_discard_taken": "Non si podet iscarrigare una carta pigada dae sa pila de sos iscartados. Si depet cambiare.",
+    "have_drawn_card": "Tai unu cartas pitida. Devi [swap X Y] o [discard] la.",
+    "need_drawn_swap": "Ti serbit una carta iscavada pro cambiare.",
+    "need_drawn_discard": "Bisòngiat una carta disinnada pro la bogare.",
+    "out_of_bounds": "Positzione foras de limites. Imprea filera 1-{max_row}, colonna 1-{max_col}",
+    "knock_with_card": "Non si podet batire cun una carta disinnada. Cumpilai su turnu tuo in antis.",
+    "already_knocked": "Calicunu at giai fatu custu giru.",
+    "already_revealed": "Custa carta est giai istada isvelada!"
+  },
+  "summary": {
+    "full": "Giogu Acabau! Giogadore {winner} binchet cun unu puntuatzione de {score} puntos!\n\nPuntuatziones finales:\n{scores}",
+    "line": "Giogadore {pid}: {score} puntos\n"
+  },
+  "board_str": {
+    "title": "=== GIOGU DE GOLF ===",
+    "discard": "Pianta de iscadèntzia: {card}",
+    "knocked": "Su giogadore {pid} at tocadu!",
+    "player_header": "Giogadore {pid} (Puntuatzione: {score}):"
+  }
+}

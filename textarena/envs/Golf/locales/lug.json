@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Oli mukino wa Golf (Omuzanyo gw'Ekadi) - Omuzanyi {player_id}.\nGwe: Funa omuwendo gw'amaanyi asinga wansi mu mwezi guno. Bw'oba ntiisa za kikumi zina muwendo gwe gumu, zisibwa za sifuri.\nMaanyi g'Ekadi: A=1, 2-10=muwendo wa kikumi, J/Q=10, K=0\n\nEmikono (kozesa kawandi za kubaliza):\n- '[draw]' - Kuwa ekadi ku kikwata\n- '[take]' - Kuwa ekadi ku kikwata kya kikomya\n- '[swap X Y]' - Kukyusa ekadi eyawudde na nafasi ya X (mukwata) Y (mukwata wa kikumi)\n- '[discard]' - Kukomya ekadi eyawudde\n"
+  },
+  "board": {
+    "drew": "Oyawudde: {card}\nKati wakati ono oteekwa okukozesa '[swap X Y]' oba '[discard]' ekadi eyo.",
+    "took": "Oyawudde: {card} ku kikwata kya kikomya\nOteekwa okukozesa '[swap X Y]' nayo (tokozesa kukomya).",
+    "peeked": "Owafulidde ku kifo ({row},{col}): {card}",
+    "turn_view": "Lukubo lwange:\n{hand}\nKifo ky'okwawula: {discard}\n{options}",
+    "none": "Tewali."
+  },
+  "options": {
+    "final_turns": "Mikono ya mwisho! Emikono gyo: [draw], [take], [peek X Y]",
+    "draw": "Chaguo lyange: [draw], [take]",
+    "must_swap": "Olina: [swap X Y] (tosobola kusuula kaadi okuva mu kasasiro)",
+    "swap_or_discard": "Lyawe ku [swap X Y] oba [discard]"
+  },
+  "hand": {
+    "no_cards": "Tewali kaadi.",
+    "header": "Col: 1 2 3 Obubonero bw'omusaayi.",
+    "row": "Safu {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Mchezaji {pid} alibadilisha {new} na {old} katika nafasi ({row},{col})",
+    "discarded": "Mchezaji {pid} alisuula {card}"
+  },
+  "message": {
+    "deck_empty": "Emizannyo gikoma mangu.",
+    "knocked": "Omuzannyo {pid} gukubiddwa! Buli muzannya omulala afuna omutendera gumu.",
+    "final_round": "Mchezaji {pid} {reason}! Kila mchezaji mwingine anapata mzunguko mmoja zaidi."
+  },
+  "reason": {
+    "all_revealed": "kaadi zonna zaabikkulwa?"
+  },
+  "invalid": {
+    "wrong_action": "Guna kitondekiko kimu kimu: [draw], [take], [swap X Y], [discard], [knock], oba [peek X Y]",
+    "discard_empty": "Ekisenge ky'ebintu ebyokebwa tekirina kintu kyonna!",
+    "must_draw_first": "Lyawe kwanza ku [draw], [take], [knock], oba [peek X Y]",
+    "cannot_discard_taken": "Toyinza kusuula kaadi eyaggibwa mu mpeke y'okuzuulibwa, olina okugiwa omulala.",
+    "have_drawn_card": "Oli na kadi eyawudde. Oteekwa okukozesa '[swap X Y]' oba '[discard]' ekadi eyo.",
+    "need_drawn_swap": "Weetaaga kaadi ey'ekikopo okukyusakyusa.",
+    "need_drawn_discard": "Unahitaji kadi iliyochorwa ili kuisuula.",
+    "out_of_bounds": "Kifo kisukka mbuga. Guna safu 1-{max_row}, safu 1-{max_col}",
+    "knock_with_card": "Tosobola kukomya kaadi ng'ogikuba, sooka omaliriza okukyusa.",
+    "already_knocked": "Waliwo eyawangula dda omupiira guno.",
+    "already_revealed": "Kaadi eyo yamala dda okubikkulwa!"
+  },
+  "summary": {
+    "full": "Ludubo lulise! Omuzannyi {winner} awangula ne kikomo cha {score} pointi!\n\nEkikomo kya buli muzannyi:\n{scores}",
+    "line": "Omuzannyi {pid}: {score} pointi\n"
+  },
+  "board_str": {
+    "title": "=== GOLF GAME === (Oluganda)",
+    "discard": "Kundi la kadi zilizosutwa: {card}",
+    "knocked": "Omuzannyi {pid} akubye!",
+    "player_header": "Omuzannyi {pid} (Ekikomo: {score}):"
+  }
+}

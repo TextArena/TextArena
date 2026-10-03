@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Kai ne Dan wasa {player_id} a wasan Spite and Malice na 'yan wasa biyu. Burin ka shine ka zama na farko a kwato dukkan katin daga pila ka.\n\n### Bayanin Wasa:\n- Manufar shine a kwato dukkan katin daga pila ka ta hanyar buga katin zuwa pila tsakiya.\n- Zaka iya buga katin daga mabarori uku:\n  1. **Kannen ka** (kana farawa kowane zagaye da katin har zuwa 5 a kannen ka).\n  2. **Katin sama na pila ka**.\n  3. **Katin sama na dukkan pila ka zubar da**.\n\n### Ka'idojin Wasa:\n- Zaka iya buga katin zuwa pila tsakiya idan yana da **daraja guda** fiye da katin sama a pila (pila tsakiya suna farawa da Ace kuma suna zuwa har zuwa Sarauniya; Sarakuna basu da daraja - zasu iya bugawa a katin kowane amma basu canza tsarin daraja. Haka nan idan Sarki ya buguwa bayan 4, to Sarki ya na daraja 5 kuma katin gaba zai wajaba ya zama 6).\n- Idan kana da katin da zaka iya bugawa, zaka **zubar da katin** zuwa dukkan pila ka zubar da domin kare zagayen ka.\n- Idan pila tsakiya ta kai Sarauniya, zata kwato kanta.\n- Tsarin daraja shine: A=1, 2=2, ..., 9=9, J=10, Q=11, K a matsayin Sarki.\n\n### Ayyuka:\n1. **Ja**: A farkon zagayen ka, ja katin domin cike kannen ka har zuwa katin 5. Shigar **[draw]** domin fara.\n2. **Buga Katin**: Domin buga katin, bayyana katin da pila tsakiya kamar haka: **[play A♠ 0]** (inda 'A♠' katin ne kuma '0' index ne na pila tsakiya).\n3. **Zubar da**: Idan kana da katin da zaka iya bugawa, zubar da katin daga kannen ka zuwa pila zubar da domin kare zagayen ka. Shigar **[discard A♠ 1]** (inda 'A♠' katin ne kuma '1' index ne na pila zubar da). Lura cewa kana da katin daga pila ka, basu da izinin ka zubar da katin daga kannen ka.\n\n"
+  },
+  "board": {
+    "current_board": "Kwamitin yanzu: {board} Akwai Matsayi: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Cibiyar Gidajen --- ",
+    "pile": "{observation}Taka {i}: {pile} ",
+    "player_view_header": "{observation} --- Ra'ayin Mai kunnawa {player_id} --- ",
+    "payoff": "{observation}Kayan biyan kuɗi (Katin Sama): {top_card}, Tsawon Gwanin Biyan Kuɗi: {payoff_length} ",
+    "hand": "{observation}Hand: {hand} ",
+    "discard": "{observation}Kashe Tarin: {discard} ",
+    "empty": "Babu komai"
+  },
+  "game_message": {
+    "no_cards_left": "Babu katin wasa da za a ja daga cikinsa. Ka tuna cewa za ka iya buga katin wasa daga wadannan tushe:\n  1. **Hannunka**.\n  2. **Katin wasa na sama a kan tarihin biyan ka**.\n  3. **Katin wasa na sama a kan tarihin zubar da ka**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Tsarin motsawa mara inganci. Mai kunnawa {player_id} bai amsa da ingantaccen motsi a cikin masu kare murabba'i ba.",
+    "invalid_play": "Mai kunnawa {player_id} yayi ƙoƙarin wasa {card} a kan tsakiya na tsakiya {index} .",
+    "discard_from_payoff": "Rashin amfani da kuskure. Mai kunnawa {player_id} yayi ƙoƙarin yin watsi da katin daga tarin biya.",
+    "discard_not_in_hand": "Rashin amfani da kuskure. Mai kunnawa {player_id} yayi ƙoƙarin yin watsi da katin da ba a hannunsa ba.",
+    "wrong_move_type": "Nau'in motsawa mara inganci. Mai kunnawa {player_id} bai amsa da nau'in motsawa mai inganci ba."
+  },
+  "game_action": {
+    "you_drew": "Ka ja katin wasa.",
+    "opponent_drew": "Mai kunnawa {player_id} ya zana katunan.",
+    "you_played": "Ka buga {card} a kan tumbin tsakiya {index}.",
+    "opponent_played": "Dan wasa {player_id} ya buga {card} a kan tarihin tsakiya {index}.",
+    "you_discarded": "Ka yi watsi da {card} don yin watsi da tari {index}, wanda kuma yana nufin kun gama jujjuyawar su. Ba a ƙara yin la'akari da ayyukanku na wannan jujjuyawar ba. Mai kunnawa {next_player_id} zai ci gaba.",
+    "opponent_discarded": "Mai kunnawa {player_id} ya watsar da {card} don watsar da tari {index}, wanda kuma yana nufin sun gama jujjuyawar su. Babu ƙarin ayyukan Mai kunnawa {player_id} da ake la'akari da wannan juzu'i. Mai kunnawa {next_player_id}, za ku ci gaba. Da fatan za a shigar da aikinku a cikin tsari [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mai kunnawa {current_player} ya gama tarin kuɗin su! Mai kunnawa {current_player} ya ci nasara!",
+    "deadlock_player_0": "An kai ga kulle! Mai kunnawa 0 ya ci nasara tare da {player_0_payoff} katunan da suka rage vs. Mai kunnawa 1 {player_1_payoff} katunan.",
+    "deadlock_player_1": "An kai ga kulle! Mai kunnawa 1 ya ci nasara tare da {player_1_payoff} katunan da suka rage vs. Mai kunnawa 0's {player_0_payoff} katunan.",
+    "deadlock_tie": "An kai ga kulle tare da daidaitawa! 'Yan wasan biyu suna da {player_0_payoff} katunan da suka rage. Mai kunnawa {current_player} ya ci nasara ta tsohuwa."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "_comment": "Súbor lokalizácie TicTacToe. NEPREKLADAJTE kľúče (ľavá strana). Prekladajte iba hodnoty (pravá strana).",
+  "_slots": {
+    "{player_id}": "Číslo hráča, napr. 0 alebo 1",
+    "{symbol}": "Značka hráča, buď X alebo O",
+    "{opponent_symbol}": "Značka súpera, buď X alebo O",
+    "{cell}": "Číslo bunky na doske medzi 0 a 8"
+  },
+  "player_prompt": {
+    "intro": "Ste Hráč {player_id} v Tic Tac Toe.\nVašim cieľom je vyhrať tri v rade (horizontálne, vertikálne alebo diagonálne) na doske.\nPočas svojej ťahy by ste mali vybrať číslo štvorca (0-8), do ktorého chcete umiestniť svoju značku.\nNapríklad, '[4]' umiestňuje vašu značku do stredu dosky.\nAko Hráč {player_id}, budete '{symbol}', kým váš súper bude '{opponent_symbol}'."
+  },
+  "board": {
+    "current_board": "Aktuálna doska:\n\n{board}\n\nDostupné ťahy: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Odoslaný ťah nemá správny formát.",
+    "out_of_range": "{cell} nie je platná bunka. Musí byť medzi 0 a 8.",
+    "already_occupied": "Bunka {cell} je už obsadená."
+  },
+  "game_action": {
+    "placed": "Hráč {player_id} umiestnil svoju značku ({symbol}) do bunky {cell}."
+  },
+  "outcome": {
+    "win": "Hráč {player_id} vyhral!",
+    "draw": "Hra skončila remízou!"
+  }
+}

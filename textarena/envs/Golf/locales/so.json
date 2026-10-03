@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Waxaad ciyaareysaa Golf (Card Game) - Ciyaaryahanka {player_id}. Goal: Hel dhibcaha ugu hooseeya ee wareegaan. Haddii tiirarka ay wadaagaan isla qiimaha, waxaa lagu darayaa 0. Qiimaha Kaararka: A = 1, 2-10 = qiimaha wajiga, J / Q = 10, K = 0 Waxqabadyada (isticmaal qaybaha saxda ah): - '[draw]' - Ka soo qaado dekedda - '[take]' - Ka soo qaado tuubada la tuuray - '[swap X Y]' - Kaarka la saaray la beddelo booska X (sagaar) Y (tiir) - '[discard]' - Tuur kaarka la saaray "
+  },
+  "board": {
+    "drew": "Waxaad soo jiidatay: {card} Hadda waa inaad [swap X Y] ama [discard] ku dhejisaa.",
+    "took": "Waxaad ka soo qaadatay: {card} ka tuuro tuulinta Waa inaad [swap X Y] la (ma tuuri karo).",
+    "peeked": "Waxaad ku eegtay booska ({row},{col}): {card}",
+    "turn_view": "Gacantaada: {hand} Tuurida tuurka: {discard} {options}",
+    "none": "Waxba ma jiraan"
+  },
+  "options": {
+    "final_turns": "Xulashadaada: [draw], [take], [peek X Y]",
+    "draw": "Doorashooyinkaaga: [draw], [take]",
+    "must_swap": "Waa inaad: [swap X Y] (ma tuuri kartid kaararka ka soo baxa tuurka tuurka)",
+    "swap_or_discard": "Waa inaad: [swap X Y] ama [discard]"
+  },
+  "hand": {
+    "no_cards": "Kaararka ma jiraan",
+    "header": "  Col:   1    2    3",
+    "row": "Safka {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Ciyaaryahanka {pid} wuxuu beddelay {new} oo leh {old} booska ({row},{col}))",
+    "discarded": "Ciyaaryahanka {pid} la tuuray {card}"
+  },
+  "message": {
+    "deck_empty": "Ciyaarta waa lasoo gaba gabeeyay.",
+    "knocked": "Ciyaaryahanka {pid} waa la garaacay! Ciyaaryahan kasta oo kale wuxuu helayaa hal wareeg oo dheeraad ah.",
+    "final_round": "Ciyaaryahanka {pid} {reason}! Ciyaaryahan kasta oo kale wuxuu helayaa hal wareeg oo dheeraad ah."
+  },
+  "reason": {
+    "all_revealed": "kaararka oo dhan ma la muujiyey"
+  },
+  "invalid": {
+    "wrong_action": "Isticmaal si sax ah hal ficil oo ku jira qaybo ka mid ah: [draw], [take], [swap X Y], [discard], [knock], ama [peek X Y]",
+    "discard_empty": "Saxaafada ayaa ka baxday!",
+    "must_draw_first": "Waa in aad marka hore [draw], [take], [knock], ama [peek X Y]",
+    "cannot_discard_taken": "Kaarka aad ka soo qaadatay faraha aad iska tuurtay ma tuuri kartid. Waa inaad bedeshaa.",
+    "have_drawn_card": "Waxaad haysataa kaar aad soo jiidatay. Waa inaad [swap X Y] ama [discard] ku darto.",
+    "need_drawn_swap": "Waxaad u baahan tahay kaar aad ku badasho.",
+    "need_drawn_discard": "Waxaad u baahan tahay kaar aad ku qanci karto si aad u tuurto.",
+    "out_of_bounds": "Meel bannaan oo bannaanka ah. Isticmaal safka 1-{max_row}, safka 1-{max_col}",
+    "knock_with_card": "Ma garaaci kartid kaar la soo saaray. marka hore dhammeystir wareegaaga.",
+    "already_knocked": "Qof ayaa durba garaacay wareegaan.",
+    "already_revealed": "Kaarkaasi waa la furay!"
+  },
+  "summary": {
+    "full": "Ciyaarta ayaa dhamaatay! Ciyaaryahanka {winner} ayaa ku guuleysta dhibcaha {score} dhibcood! Dhibcaha ugu dambeeya: {scores}",
+    "line": "Ciyaaryahanka {pid}: {score} dhibco "
+  },
+  "board_str": {
+    "title": "=== Ciyaarta GOLFka ===",
+    "discard": "Dabaalada loo tuuray: {card}",
+    "knocked": "Ciyaaryahanka {pid} ayaa garaacay!",
+    "player_header": "Ciyaaryahanka {pid} (Dhibcaha: {score}):"
+  }
+}

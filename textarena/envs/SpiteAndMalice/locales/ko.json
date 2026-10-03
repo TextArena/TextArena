@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "당신은 두 명의 플레이어가 참여하는 Spite and Malice 게임의 플레이어 {player_id}입니다. 당신의 목표는 먼저 보상 카드 더미를 비우는 것입니다.\n\n### 게임 개요:\n- 목표는 카드를 중앙 더미에 놓아서 보상 카드 더미를 비우는 것입니다.\n- 카드를 놓을 수 있는 세 가지 출처가 있습니다:\n  1. **손패** (턴 시작 시 손패에 최대 5장의 카드가 있습니다).\n  2. **보상 카드 더미의 맨 위 카드**.\n  3. **당신의 버려진 카드 더미의 맨 위 카드**.\n\n### 플레이 규칙:\n- 중앙 더미의 맨 위 카드보다 **한 단계 높은 카드**를 중앙 더미에 놓을 수 있습니다 (중앙 더미는 에이스로 시작하여 퀸까지 올라갑니다. 킹은 와일드 카드로, 어떤 카드 위에도 놓을 수 있지만 순서를 바꾸지 않습니다. 예를 들어, 4 위에 킹을 사용하면 그 킹은 5로 취급되고 다음 카드는 6이어야 합니다).\n- 더 이상 카드를 놓을 수 없으면, 턴을 마치기 위해 버려진 카드 더미에 카드를 버려야 합니다.\n- 중앙 더미가 퀸에 도달하면 자동으로 비워집니다.\n- 카드 순서는: A=1, 2=2, ..., 9=9, J=10, Q=11, K는 와일드입니다.\n\n### 행동:\n1. **카드 뽑기**: 턴 시작 시 손패를 5장으로 채우기 위해 카드를 뽑습니다. **[draw]**를 입력하여 시작하세요.\n2. **카드 놓기**: 카드를 놓으려면 카드와 중앙 더미를 지정하세요: **[play A♠ 0]** (여기서 'A♠'는 카드이고 '0'은 중앙 더미 인덱스입니다).\n3. **카드 버리기**: 더 이상 카드를 놓을 수 없으면, 턴을 마치기 위해 손패에서 카드를 버려진 카드 더미에 버려야 합니다. **[discard A♠ 1]** (여기서 'A♠'는 카드이고 '1'은 버려진 카드 더미 인덱스입니다). 보상 카드 더미에서 카드를 버릴 수 없습니다. 손패에서만 카드를 버릴 수 있습니다.\n\n"
+  },
+  "board": {
+    "current_board": "현재 보드:\n\n{board}\n가능한 행동: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- 중앙 더미 ---\n",
+    "pile": "{observation}더미 {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- 플레이어 {player_id}의 시점 ---\n",
+    "payoff": "{observation}보상 더미 (맨 위 카드): {top_card}, 보상 더미 길이: {payoff_length}\n",
+    "hand": "{observation}손패: {hand}\n",
+    "discard": "{observation}버려진 카드 더미: {discard}\n",
+    "empty": "비어 있음"
+  },
+  "game_message": {
+    "no_cards_left": "더 이상 뽑을 카드가 없습니다. 다음 출처에서 카드를 놓을 수 있습니다:\n  1. **손패**.\n  2. **보상 카드 더미의 맨 위 카드**.\n  3. **당신의 버려진 카드 더미의 맨 위 카드**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "잘못된 행동 형식입니다. 플레이어 {player_id}가 유효한 행동을 대괄호 안에 입력하지 않았습니다.",
+    "invalid_play": "잘못된 플레이입니다. 플레이어 {player_id}가 중앙 더미 {index}에 {card}를 놓으려고 했습니다.",
+    "discard_from_payoff": "잘못된 버리기입니다. 플레이어 {player_id}가 보상 카드 더미에서 카드를 버리려고 했습니다.",
+    "discard_not_in_hand": "잘못된 버리기입니다. 플레이어 {player_id}가 손패에 없는 카드를 버리려고 했습니다.",
+    "wrong_move_type": "잘못된 행동 유형입니다. 플레이어 {player_id}가 유효한 행동 유형을 입력하지 않았습니다."
+  },
+  "game_action": {
+    "you_drew": "카드를 뽑았습니다.",
+    "opponent_drew": "플레이어 {player_id}가 카드를 뽑았습니다.",
+    "you_played": "중앙 더미 {index}에 {card}를 놓았습니다.",
+    "opponent_played": "플레이어 {player_id}가 중앙 더미 {index}에 {card}를 놓았습니다.",
+    "you_discarded": "버려진 카드 더미 {index}에 {card}를 버렸습니다. 이는 당신의 턴이 끝났음을 의미합니다. 이 턴 동안 당신의 추가 행동은 고려되지 않습니다. 플레이어 {next_player_id} 차례입니다.",
+    "opponent_discarded": "플레이어 {player_id}가 버려진 카드 더미 {index}에 {card}를 버렸습니다. 이는 그들의 턴이 끝났음을 의미합니다. 이 턴 동안 플레이어 {player_id}의 추가 행동은 고려되지 않습니다. 플레이어 {next_player_id}, 당신 차례입니다. [action card center_index] 형식으로 행동을 입력하세요."
+  },
+  "outcome": {
+    "payoff_cleared": "플레이어 {current_player}가 보상 카드 더미를 비웠습니다! 플레이어 {current_player}가 승리했습니다!",
+    "deadlock_player_0": "교착 상태에 도달했습니다! 플레이어 0이 {player_0_payoff}장의 카드가 남아 있는 반면, 플레이어 1은 {player_1_payoff}장의 카드가 남아 있어 플레이어 0이 승리했습니다.",
+    "deadlock_player_1": "교착 상태에 도달했습니다! 플레이어 1이 {player_1_payoff}장의 카드가 남아 있는 반면, 플레이어 0은 {player_0_payoff}장의 카드가 남아 있어 플레이어 1이 승리했습니다.",
+    "deadlock_tie": "교착 상태에 도달하여 무승부입니다! 두 플레이어 모두 {player_0_payoff}장의 카드가 남아 있습니다. 플레이어 {current_player}가 디폴트로 승리합니다."
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Ozali komona Golf (Jeux ya Carte) - Moyambi {player_id}.\nMokono: Fanda na ntalo mokuse ya koleka oyo na ronde oyo. Soki ba colonne bazwaka valeur moko, bazongwa na 0.\nValeur ya Carte: A=1, 2-10=valeur ya kati, J/Q=10, K=0\n\nMikakatano (tia bracket moko moko):\n- '[draw]' - Pesa fiche na jeu\n- '[take]' - Keba fiche na pile ya kotala\n- '[swap X Y]' - Kondima fiche ya pesa na position X (ligne) Y (colonne)\n- '[discard]' - Kotala fiche ya pesa\n"
+  },
+  "board": {
+    "drew": "Olingi: {card}\nSasa olingi [swap X Y] au [discard]",
+    "took": "Olingi: {card} kutoka kwenye chungu la kuacha\nOlingi [swap X Y] nayo (hauwezi kuacha)",
+    "peeked": "Olingi nakazi kwa nafasi ({row},{col}): {card}",
+    "turn_view": "Mkono wako:\n{hand}\nChungu la kuacha: {discard}\n{options}",
+    "none": "Ezali te."
+  },
+  "options": {
+    "final_turns": "Mizunguko ya mwisho! Chaguo zako: [draw], [take], [peek X Y]",
+    "draw": "Chaguo zako: [draw], [take]",
+    "must_swap": "Osengeli: [swap X Y] (kokoka te kobwaka bakarte oyo ezali na liboke ya babwakaka)",
+    "swap_or_discard": "Olingi: [swap X Y] au [discard]"
+  },
+  "hand": {
+    "no_cards": "Ba karte ezali te.",
+    "header": "Kol: 1 2 3",
+    "row": "Safu {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Mokeli {pid} asili {new} na {old} kwa nafasi ({row},{col})",
+    "discarded": "Moyambi {pid} akotala {card}"
+  },
+  "message": {
+    "deck_empty": "Kasí ya káté ezali límbe! Líla ekokíka lisúsu.",
+    "knocked": "Mobalani {pid} abetami! Molandi mosusu nyonso azwi libaku moko lisusu.",
+    "final_round": "Mwána {pid} {reason}! Mwána mosúsu bakokíka lisúsu ntango mósí."
+  },
+  "reason": {
+    "all_revealed": "azali na kadi zote zikundami"
+  },
+  "invalid": {
+    "wrong_action": "Tumia hatua moja iliyo na mabano: [draw], [take], [swap X Y], [discard], [knock], au [peek X Y]",
+    "discard_empty": "Biloko oyo babwakaka ezali lisusu te!",
+    "must_draw_first": "Olingi kwanza [draw], [take], [knock], au [peek X Y]",
+    "cannot_discard_taken": "Okoki te kobwaka karte oyo olongolaki na liboke ya babuku, kasi osengeli kokɔtisa mosusu.",
+    "have_drawn_card": "Olingi kadi iliyoangaliwa. Olingi [swap X Y] au [discard]",
+    "need_drawn_swap": "Mpo na kofuta, esengeli ozala kaka na mokanda ya libala.",
+    "need_drawn_discard": "Ozali komona fiche ya pesa po na kotala.",
+    "out_of_bounds": "Nafasi imepita kikomo. Tumia safu 1-{max_row}, safu wima 1-{max_col}",
+    "knock_with_card": "Okoki te kobɛta na karte oyo obimisi, osengeli naino kosilisa mosala.",
+    "already_knocked": "Moto moko asilaki kobeta mbala oyo.",
+    "already_revealed": "Mokanda yango emonisami!"
+  },
+  "summary": {
+    "full": "Mchezo Umekwisha! Mokeli {winner} anashinda na alama ya {score} pointi!\n\nAlama za Mwisho:\n{scores}",
+    "line": "Mokeli {pid}: {score} pointi\n"
+  },
+  "board_str": {
+    "title": "=== Lisano ya Golf===",
+    "discard": "Biloko ya kobwaka: {card}",
+    "knocked": "{pid} abɛtaki na ekuke!",
+    "player_header": "Mokeli {pid} (Alama: {score}):"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Tqṣeḍ Golf (Uraru n tɣṛmt) - Amurar {player_id}.\nInzwi: Awi asɣim aqṛan deg uḍfur-agi. Ma tɣawsa tɣawsen s uṭṭun amezwaru, tettwasummen s 0.\nTazwara n tɣṛmt: A=1, 2-10=uṭṭun, J/Q=10, K=0\n\nTɣawsa (seqdec kan d tɣawsa-nni):\n- '[draw]' - Awi seg wadda\n- '[take]' - Awi seg wadda n tɣṛmt\n- '[swap X Y]' - Msebḍi tɣṛmt tamaynut s tɣṛmt n ussaɣ X (assaɣ) Y (tasga)\n- '[discard]' - Sers tɣṛmt tamaynut\n"
+  },
+  "board": {
+    "drew": "Tekkiḍ: {card}\nTura d ṭṭafḍeḍ [swap X Y] neɣ [discard]",
+    "took": "Tekkiḍ: {card} seg tɣessa n tufka\nTura d ṭṭafḍeḍ [swap X Y] s wayen (ur tẓriḍ)",
+    "peeked": "Teffeɣ deg tama ({row},{col}): {card}",
+    "turn_view": "Aḍar nnek:\n{hand}\nTɣessa n tufka: {discard}\n{options}",
+    "none": "ⵓⵔ ⵉⵍⵍⵉ ⴽⵔⴰ."
+  },
+  "options": {
+    "final_turns": "Tesɛa n uhud! Iṭṭafaten nnek: [draw], [take], [peek X Y]",
+    "draw": "Iṭṭafaten nnek: [draw], [take]",
+    "must_swap": "Illa kra: [swap X Y] (ur tzemmareḍ ad d-tḥezneḍ tkeṛṛiḍin seg uɣṛaḍ n tkeṛṛiḍin ḥeznin)",
+    "swap_or_discard": "Tura d ṭṭafḍeḍ [swap X Y] neɣ [discard]"
+  },
+  "hand": {
+    "no_cards": "ⵓⵔ ⵉⵍⵍⵉ ⴽⵔⴰ ⵏ ⵜⴽⴰⵔⴹⴰ.",
+    "header": "ⵔⴱⴱⵉ: 1 2 3",
+    "row": "Tasert {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Player {pid} beddel {new} s {old} deg {row}, {col}",
+    "discarded": "Player {pid} tufka {card}"
+  },
+  "message": {
+    "deck_empty": "ⵜⴰⵡⴰⵍⵜ ⵜⵓⵎⵥ, ⵜⴰⵎⵏⵢⵓⴳⴰⵔⵜ ⵜⵙⵉⵔⴰ ⵙ ⵜⵉⵣⵉ.",
+    "knocked": "ⵓⵎⵓⵔⴰⵔ {pid} ⵉⵜⵜⵓⵙⴽⴰⵙ! ⴽⵓ ⴰⵎⵓⵔⴰⵔ ⵢⴰⴹⵏⵉⵏ ⴷⴰ ⵉⵟⵟⴰⴼ ⵢⴰⵏ ⵓⴹⴼⴰⵕ.",
+    "final_round": "Player {pid} {reason}! Maḍi yiwet n tesɛa tura"
+  },
+  "reason": {
+    "all_revealed": "iɣṛaḍ akkʷ tkeṛṛiḍin"
+  },
+  "invalid": {
+    "wrong_action": "Sken yiwen uṭṭun n tuṭṭfa: [draw], [take], [swap X Y], [discard], [knock], neɣ [peek X Y]",
+    "discard_empty": "ⵜⴰⴳⵔⵓⵎⵎⴰ ⵏ ⵓⵙⵙⵓⴼⵖ ⵜⴳⴰ ⵜⵍⴻⵍⵍⵉ!",
+    "must_draw_first": "Tura d ṭṭafḍeḍ [draw], [take], [knock], neɣ [peek X Y]",
+    "cannot_discard_taken": "ⵓⵔ ⵜⵣⵎⵔⴷ ⴰⴷ ⵜⴰⵡⵙⴷ ⵢⴰⵜ ⵜⵡⵔⵉⵔⵜ ⵉⵜⵜⵓⵙⴽⵔⵏ ⵙⴳ ⵓⴱⴰⵔⴰⵣ ⵏ ⵓⵙⴼⵍⵓⵍ. ⵅⵚⵚⴰ ⴰⴷ ⵜⵙⵏⴼⴰⵍⵜ.",
+    "have_drawn_card": "Tekkiḍ kart. Tura d ṭṭafḍeḍ [swap X Y] neɣ [discard]",
+    "need_drawn_swap": "Yessefk aɣ-k d yiwen n ukarḍ yuran akken ad t-cekkeḍ.",
+    "need_drawn_discard": "Illa kra n tkeṛṛiḍ aɣṛaḍ ad d-tḥezneḍ.",
+    "out_of_bounds": "Taddart ur illi deg wadda. Seqdec uɣṛaḍ 1-{max_row}, tawlaft 1-{max_col}",
+    "knock_with_card": "Ur tzemmareḍ ad tḥezneḍ s tkeṛṛiḍt taɣṛaḍt. Ɣrez tukkist nnun.",
+    "already_knocked": "Wid ɛḍlan ṛaḍ ḥeznin tukkist nna.",
+    "already_revealed": "Tkeṛṛiḍt nna ɣṛaḍ ṛaḍ!"
+  },
+  "summary": {
+    "full": "Aseɣwen! Player {winner} yettwafkeḍ s tasmekta n {score} n point!\n\nTasmekta n uhud:\n{scores}",
+    "line": "Player {pid}: {score} n point\n"
+  },
+  "board_str": {
+    "title": "=== ⵜⴰⵡⴰⵍⵜ ⵏ ⵓⴳⵓⵍⴼ===",
+    "discard": "ⴰⵖⵔⴹⴰ ⵏ ⵓⵥⵕⵓ: {card}",
+    "knocked": "ⵢⵓⵡⵉ ⵓⵎⵓⵔⴰⵔ {pid} ⵜⴰⴽⵕⴹⴰ!",
+    "player_header": "Amurar {pid} (Asɣim: {score}):"
+  }
+}

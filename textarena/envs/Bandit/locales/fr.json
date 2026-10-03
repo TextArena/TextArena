@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "Vous vous trouvez dans une pièce avec {num_buttons} boutons : {buttons}. Chaque bouton est associé à une distribution de Bernoulli dont la moyenne est fixe mais inconnue ; les moyennes peuvent différer d’un bouton à l’autre.\nChaque fois que vous appuyez sur un bouton, vous recevez une récompense tirée de la distribution qui lui est associée.\nVous disposez de {num_turns} étapes de temps et, à chaque étape, vous pouvez choisir n’importe quel bouton et recevoir la récompense correspondante.\nVotre objectif est de choisir stratégiquement les boutons à chaque étape afin de recueillir des informations sur leurs distributions de récompense. Ces informations doivent vous permettre d’identifier correctement le bouton ayant la récompense moyenne la plus élevée à la fin des {num_turns} tours."
+  },
+  "board": {
+    "stat_line": "{button} : {reward} (choisi {count} fois)",
+    "summary": "Résumé :\n{stats}"
+  },
+  "invalid_move": {
+    "wrong_format": "Le joueur n’a pas répondu dans un format d’action valide.",
+    "invalid_button": "Un bouton non valide a été sélectionné."
+  },
+  "game_action": {
+    "pressed": "Vous avez appuyé sur le bouton {button} et reçu une récompense de {reward}."
+  },
+  "game_message": {
+    "final_decision": "Vous avez épuisé votre budget pour essayer les différentes options et observer leurs récompenses. Déduisez maintenant quelle est la meilleure option."
+  },
+  "outcome": {
+    "win": "Félicitations ! Vous avez choisi le bon bouton.",
+    "lose": "Vous avez choisi un bouton incorrect."
+  }
+}

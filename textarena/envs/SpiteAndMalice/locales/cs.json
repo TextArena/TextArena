@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} ve hře Spite and Malice pro dva hráče. Vaším cílem je být první, kdo vyprázdní svou výplatní hromádku.\n\n### Přehled hry:\n- Cílem je vyčistit svou výplatní hromádku hraním karet do středních hromádek.\n- Můžete hrát karty ze tří zdrojů:\n  1. Vaše **ruka** (začínáte každý tah s až 5 kartami v ruce).\n  2. **Horní karta vaší výplatní hromádky**.\n  3. **Horní karta kterékoliv z vašich odhazovacích hromádek**.\n\n### Pravidla hry:\n- Můžete hrát kartu do střední hromádky, pokud je **o jednu hodnotu vyšší** než horní karta na této hromádce (střední hromádky začínají esem a jdou až po královnu; králové jsou divocí - mohou být hrány na jakoukoli kartu, ale nemění pořadí hodnot. To znamená, že pokud je král použit po 4, pak je tento král hodnocen jako 5 a další karta musí být 6).\n- Pokud nemůžete hrát žádné další karty, musíte **odhodit kartu** do jedné ze svých odhazovacích hromádek, aby jste ukončili svůj tah.\n- Pokud střední hromádka dosáhne královny, bude automaticky vyčištěna.\n- Pořadí hodnot je: A=1, 2=2, ..., 9=9, J=10, Q=11, K jako divoký.\n\n### Akce:\n1. **Tah**: Na začátku svého tahu, táhněte karty, aby jste naplnili svou ruku až na 5 karet. Zadejte **[draw]**, aby jste začali.\n2. **Hrajte kartu**: Chcete-li hrát kartu, zadejte kartu a střední hromádku takto: **[play A♠ 0]** (kde 'A♠' je karta a '0' je index střední hromádky).\n3. **Odhodit**: Pokud nemůžete hrát žádné další karty, odhoďte kartu ze své ruky do odhazovací hromádky, aby jste ukončili svůj tah. Zadejte **[discard A♠ 1]** (kde 'A♠' je karta a '1' je index odhazovací hromádky). Všimněte si, že nemůžete odhodit žádnou kartu z výplatní hromádky. Můžete odhodit pouze karty ze své ruky.\n\n"
+  },
+  "board": {
+    "current_board": "Aktuální deska:\n\n{board}\nDostupné tahy: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Střední hromádky ---\n",
+    "pile": "{observation}Hromádka {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Pohled hráče {player_id} ---\n",
+    "payoff": "{observation}Výplatní hromádka (horní karta): {top_card}, délka výplatní hromádky: {payoff_length}\n",
+    "hand": "{observation}Ruka: {hand}\n",
+    "discard": "{observation}Odhazovací hromádky: {discard}\n",
+    "empty": "Prázdný"
+  },
+  "game_message": {
+    "no_cards_left": "Nejsou zde žádné další karty k tahání. Nezapomeňte, že můžete hrát karty ze tří zdrojů:\n  1. Vaše **ruka**.\n  2. **Horní karta vaší výplatní hromádky**.\n  3. **Horní karta kterékoliv z vašich odhazovacích hromádek**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát tahu. Hráč {player_id} neodpověděl platným tahem v hranatých závorkách.",
+    "invalid_play": "Neplatný tah. Hráč {player_id} se pokusil hrát {card} na střední hromádku {index}.",
+    "discard_from_payoff": "Neplatný odhoz. Hráč {player_id} se pokusil odhodit kartu z výplatní hromádky.",
+    "discard_not_in_hand": "Neplatný odhoz. Hráč {player_id} se pokusil odhodit kartu, která není v ruce.",
+    "wrong_move_type": "Neplatný typ tahu. Hráč {player_id} neodpověděl platným typem tahu."
+  },
+  "game_action": {
+    "you_drew": "Táhli jste karty.",
+    "opponent_drew": "Hráč {player_id} táhl karty.",
+    "you_played": "Hráli jste {card} na střední hromádku {index}.",
+    "opponent_played": "Hráč {player_id} hrál {card} na střední hromádku {index}.",
+    "you_discarded": "Odhodili jste {card} do odhazovací hromádky {index}, což také znamená, že jste ukončili svůj tah. Žádné další akce od vás nebudou pro tento tah brány v úvahu. Hráč {next_player_id} půjde dál.",
+    "opponent_discarded": "Hráč {player_id} odhodil {card} do odhazovací hromádky {index}, což také znamená, že ukončil svůj tah. Žádné další akce od hráče {player_id} nebudou pro tento tah brány v úvahu. Hráč {next_player_id}, budete pokračovat. Zadejte prosím svou akci ve formátu [akce karta index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Hráč {current_player} vyčistil svou výplatní hromádku! Hráč {current_player} vyhrál!",
+    "deadlock_player_0": "Dosáhli jste patové situace! Hráč 0 vyhrál s {player_0_payoff} kartami zbývajícími proti {player_1_payoff} kartám hráče 1.",
+    "deadlock_player_1": "Dosáhli jste patové situace! Hráč 1 vyhrál s {player_1_payoff} kartami zbývajícími proti {player_0_payoff} kartám hráče 0.",
+    "deadlock_tie": "Dosáhli jste patové situace s remízou! Oba hráči mají {player_0_payoff} karet zbývajících. Hráč {current_player} vyhrál výchozím způsobem."
+  }
+}
