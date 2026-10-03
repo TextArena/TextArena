@@ -153,9 +153,16 @@ class Env(ABC):
         
         parameters = inspect.signature(original_reset).parameters
         lang_mapping_in_reset = "lang_mapping" in parameters
+        num_players_param = parameters.get("num_players")
+        default_num_players = None if num_players_param is None or num_players_param.default is inspect.Parameter.empty else num_players_param.default
 
         @functools.wraps(original_reset)
-        def reset_with_lang_mapping(self, num_players, seed=None, lang_mapping=None, *args, **kwargs):
+        def reset_with_lang_mapping(self, num_players=None, seed=None, lang_mapping=None, *args, **kwargs):
+            if num_players is None:
+                # Fall back to the env's own default (e.g. single-player envs declare num_players=1)
+                if default_num_players is None:
+                    raise TypeError(f"{cls.__name__}.reset() missing required argument: 'num_players'")
+                num_players = default_num_players
             assert len(lang_mapping) == num_players if lang_mapping is not None else True, (f"Length of lang_mapping ({len(lang_mapping)}) does not match num_players ({num_players}).")
             if lang_mapping is None:
                 lang_mapping = {pid: self.lang for pid in range(num_players)}
