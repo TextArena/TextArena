@@ -563,9 +563,13 @@ That is a fair deal for both off us.
                 rewards[pid] = -1
             self.state.step_info["draw_reason"] = "Survival conditions not met"
         
+        reason = self.state.step_info.get("winner_reason") or self.state.step_info.get("draw_reason")
+        for pid in range(self.num_players):
+            self.state.game_info[pid]["reason"] = reason
+
         self.state.rewards = rewards
         self.state.done = True
-    
+
     def get_observation(self):
         """Get observation for current player."""
         player_id = self.state.current_player_id

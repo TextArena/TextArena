@@ -470,6 +470,17 @@ class TestNegotiateToSurviveEnv:
         assert not self.env_distributive._is_valid_accept("[Accept] 1")
 
 
+    def test_game_end_reason_is_reported(self):
+        """close() returns the end reason in every player's info."""
+        for variant in ("distributive", "integrative"):
+            env = NegotiateToSurviveEnv(game_variant=variant)
+            env.reset(num_players=5, seed=0)
+            done = False
+            while not done:
+                done, _ = env.step("[Pass]")
+            _, info = env.close()
+            assert all(info[pid]["reason"] for pid in range(5))
+
 if __name__ == "__main__":
     # Run tests when script is executed directly
     pytest.main([__file__, "-v"])
