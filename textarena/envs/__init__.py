@@ -50,6 +50,9 @@ register_with_versions(id="Cryptarithm-v0", entry_point="textarena.envs.Cryptari
 # FifteenPuzzle [1 Player]
 register_with_versions(id="FifteenPuzzle-v0", entry_point="textarena.envs.FifteenPuzzle.env:FifteenPuzzleEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameBoardObservationWrapper, ActionFormattingWrapper]}, max_turns=200)
 
+# RetroSpaceDuel [2 Player]
+register_with_versions(id="RetroSpaceDuel-v0", entry_point="textarena.envs.RetroSpaceDuel.env:RetroSpaceDuelEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS}, max_turns=100)
+
 # FrozenLake [1 Player]
 register_with_versions(id="FrozenLake-v0",          entry_point="textarena.envs.FrozenLake.env:FrozenLakeEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper]}, size=4, num_holes=3, randomize_start_goal=False  )
 register_with_versions(id="FrozenLake-v0-random",   entry_point="textarena.envs.FrozenLake.env:FrozenLakeEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameMessagesAndCurrentBoardObservationWrapper, ActionFormattingWrapper]}, size=4, num_holes=3, randomize_start_goal=True   )
