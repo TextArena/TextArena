@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "당신은 {player_id}번 플레이어입니다.\n디스크 기호: {symbol}.\n게임 보드는 {num_rows}행과 {num_cols}열로 구성되어 있습니다.\n플레이어들은 차례로 디스크를 열(0부터 {end_col}까지) 중 하나에 떨어뜨립니다.\n가장 먼저 디스크를 수직, 수평 또는 대각선으로 네 개 연결한 플레이어가 이깁니다.\n당신의 차례에는 다음에 디스크를 떨어뜨릴 열 번호를 대괄호 안에 입력하여 움직임을 수행합니다.\n예를 들어: '[col 4]' 또는 '[col 1]'."
+  },
+  "board": {
+    "board_visible_state": "보드 상태:\n{board_visual}",
+    "board_notvisible_state": "게임 보드는 플레이어에게 보이지 않습니다."
+  },
+  "invalid_move": {
+    "wrong_format": "{player_id}번 플레이어, 올바르지 않은 액션 형식입니다. 예상 형식: '[col x]'.",
+    "out_of_range": "{player_id}번 플레이어, 올바르지 않은 액션입니다. 열 {col}은 범위를 벗어났습니다.",
+    "already_full": "{player_id}번 플레이어, 올바르지 않은 액션입니다. 열 {col}은 이미 가득 차 있습니다."
+  },
+  "action": {
+    "dropped_disk": "{player_id}번 플레이어가 열 {col}에 디스크({player_symbol})를 떨어뜨렸습니다."
+  },
+  "outcome": {
+    "win": "{player_id}번 플레이어가 네 개를 연결하여 승리했습니다!",
+    "draw": "게임이 무승부로 끝났습니다."
+  }
+}

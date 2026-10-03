@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Aweyi kpeɣu {player_id} le Stratego.\nƉɔɖɛɛ kpeɣu nyi be kpeɣu ɖɔɖɔ ɖeɖe tɛm le e-Flag kɔnɔ kɔyɔ kpeɣu ɖɔɖɔ ɖeɖe tɛm le e-movable pieces zaa.\nƉɔɖɛɛ kpeɣu nyi be kpeɣu ɖɔɖɔ ɖeɖe tɛm le e-Bombs, e-Flag, kɔyɔ e-pieces ɖɔɖɔ ɖeɖe tɛm le e-varying ranks.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - Le kpeɣu ɖɔɖɔ ɖeɖe tɛm, a kpeɣu be kpeɣu ɖɔɖɔ ɖeɖe tɛm le e-piece ɖɔɖɔ kɔyɔ e-adjacent square (up, down, left, kɔyɔ right) ɖɔɖɔ ɖeɖe tɛm le e-pieces.\n   - Example: E-piece be kpeɣu ɖɔɖɔ ɖeɖe tɛm le A1 kɔyɔ B1 kɔyɔ A1 kɔyɔ A2 ɖɔɖɔ B1 kɔyɔ A2 ɖɔɖɔ ɖeɖe tɛm le kpeɣu ɖɔɖɔ ɖeɖe tɛm.\n   - Ɖɔɖɛɛ e-piece ɖɔɖɔ ɖeɖe tɛm le e-Bomb kɔyɔ e-Flag, a kpeɣu be kpeɣu ɖɔɖɔ ɖeɖe tɛm.\n2. **Battles:**\n   - Ɖɔɖɛɛ a kpeɣu ɖɔɖɔ ɖeɖe tɛm le e-square ɖɔɖɔ ɖeɖe tɛm le e-opponent's piece, ɖɔɖɔ ɖeɖe tɛm le e-battle ɖɔɖɔ ɖeɖe tɛm:\n     - E-piece ɖɔɖɔ ɖeɖe tɛm le e-higher rank ɖɔɖɔ ɖeɖe tɛm le e-opponent's piece.\n     - Ɖɔɖɛɛ e-ranks ɖɔɖɔ ɖeɖe tɛm, e-pieces zaa ɖɔɖɔ ɖeɖe tɛm le e-board.\n     - **Special Cases:**\n       - E-Bombs ɖɔɖɔ ɖeɖe tɛm le e-attacking pieces ɖɔɖɔ ɖeɖe tɛm le e-Miners, ɖɔɖɔ ɖeɖe tɛm le e-Bombs.\n       - E-Spies be kpeɣu ɖɔɖɔ ɖeɖe tɛm le e-Marshal ɖɔɖɔ ɖeɖe tɛm le e-Spy ɖɔɖɔ ɖeɖe tɛm kɔyɔ ɖɔɖɔ ɖeɖe tɛm le e-pieces zaa.\n3. **Strategic Goals:**\n   - Ɖɔɖɛɛ e-opponent's pieces ɖɔɖɔ ɖeɖe tɛm le e-movements kɔyɔ e-battles.\n   - Kpeɣu e-Flag ɖɔɖɔ ɖeɖe tɛm le e-opponent's Flag.\n   - Ɖɔɖɛɛ e-Scouts ɖɔɖɔ ɖeɖe tɛm le e-opponent's pieces kɔyɔ e-weak ones.\n\n### How to Make a Move:\n1. Specify e-coordinates ɖɔɖɔ ɖeɖe tɛm le e-piece ɖɔɖɔ ɖeɖe tɛm le e-destination.\n2. Use e-format: [A0 B0], ɖɔɖɔ A0 ɖɔɖɔ ɖeɖe tɛm le e-source position, kɔyɔ B0 ɖɔɖɔ ɖeɖe tɛm le e-destination.\n   - Example: To kpeɣu e-piece ɖɔɖɔ ɖeɖe tɛm le row 0, column 0 kɔyɔ row 1, column 0, input [A0 B0].\n3. Ensure e-destination ɖɔɖɔ ɖeɖe tɛm le e-movement rules ɖɔɖɔ ɖeɖe tɛm.\n\n### Important Notes:\n- E-board ɖɔɖɔ ɖeɖe tɛm le e-pieces kɔyɔ e-positions, e.g. MN, MS.\n- E-board ɖɔɖɔ ɖeɖe tɛm le e-known positions ɖɔɖɔ ɖeɖe tɛm le e-opponent's pieces ɖɔɖɔ ɖeɖe tɛm le e-ranks, e.g. ?.\n- Grids ɖɔɖɔ ~ ɖɔɖɔ ɖeɖe tɛm le e-lakes kɔyɔ ɖɔɖɔ ɖeɖe tɛm le e-moved onto.\n- Ɖɔɖɛɛ e-game ɖɔɖɔ ɖeɖe tɛm le e-front lines kɔyɔ ɖɔɖɔ ɖeɖe tɛm le e-opponent's pieces. Player 0 kɔyɔ player 1's frontlines ɖɔɖɔ row D kɔyɔ G respectively.\n\nƉɔɖɛɛ e-current board state:\n"
+  },
+  "board": {
+    "current_board": "Takayaɣ fɛyɛ:\n\n{board}\nYɛɣ sɔsɔwɛ: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "E-action format ɖɔɖɔ ɖeɖe tɛm. Player {player_id} ɖɔɖɔ ɖeɖe tɛm le e-move ɖɔɖɔ ɖeɖe tɛm le e-format [A0 B0].",
+    "invalid_coordinates": "Tʊma wena palakaɣ yɔ, a-tɛ wɛtʊ tɩna. Ɛyʊ {player_id} ɛɛpɩzɩ nɛ ɛlɩzɩ tɔm ndʊ pɩpɔzʋʋ se pala tʊmɩyɛ nɖɩ ɖɩ-taa yɔ.",
+    "not_own_piece": "Tʋma wena palakaɣ yɔ, a-taa lɛɛkʋ kɔyɔ se: Ɛyʋ {player_id} ɛɖɔɔnɩ e-kiɖe taa wonuu nakʋyʋ.",
+    "scout_through_pieces": "Tʋma wena palakaɣ yɔ, a-taa nabʋyʋ fɛyɩ ɖeu. Ɛyʋ {player_id} ɛɛpɩzɩɣ nɛ ɛɖɔɔnɩ e-kiɖe naɖɩyɛ lɛɛɖɛ taa.",
+    "scout_diagonal": "Tʋma wena palakaɣ yɔ, a-taa nabʋyʋ fɛyɩ ɖeu: Aleewaa {player_id} ɛɛpɩzɩɣ nɛ ɛɖɔɔnɩ weyi ɛsɩŋna se ɛna mbʋ pɩlakɩ yɔ.",
+    "non_scout_multi_square": "Pɩtɛ kpɛlɛkʋʋ nʋmɔʋ fɛyɩ ɖeu. Kpaŋnaŋ, pɩtasɩnɩ cɔcɩyaa lɛ, papɩzɩɣ nɛ pɛɖɛzɩ tɔm kʋɖʋmtʋ tam nabʋlɛ taa ɖeke.",
+    "move_into_lake": "Kɔna yɔɔ pɩnaɣ tɛm wɛɛ. Kɛɖɛɣ {player_id} pɩɣa kɔna piyaŋ sɔŋ pɩnaɣ tɛm.",
+    "move_onto_own_piece": "Tʋma wena palakaɣ yɔ, a-taa nabʋyʋ fɛyɩ ɖeu. Ɛyʋ {player_id} ɛɛpɩzɩɣ nɛ ewolo ɛ-maɣmaɣ e-kiɖe yɔɔ.",
+    "move_bomb_or_flag": "Tɛtʊ tʊnɛ tɩ-taa lɛ, ɛyʊ {player_id} ɛɛpɩzɩɣ nɛ ɛkpaɣ pombo yaa kɩɖaɣlɩm."
+  },
+  "game_action": {
+    "you_moved": "A kɔna piyaŋ sɔŋ pɩnaɣ {source} nɛ pɩɖɛɣ {dest}.",
+    "opponent_moved": "Kɛɖɛɣ {player_id} kɔna piyaŋ sɔŋ pɩnaɣ {source} nɛ pɩɖɛɣ {dest}.",
+    "you_equal_ranks": "A kpeɣu ɖɔɖɔ ɖeɖe tɛm le e-piece ɖɔɖɔ ɖeɖe tɛm le {source} kɔyɔ {dest}. E-attacking piece ɖɔɖɔ {attacking_rank} kɔyɔ e-destination piece ɖɔɖɔ {target_rank}. Ɖɔɖɛɛ e-ranks ɖɔɖɔ ɖeɖe tɛm, e-pieces zaa ɖɔɖɔ ɖeɖe tɛm.",
+    "opponent_equal_ranks": "Player {player_id} ɖɔɖɔ ɖeɖe tɛm le e-piece ɖɔɖɔ ɖeɖe tɛm le {source} kɔyɔ {dest}. E-attacking piece ɖɔɖɔ {attacking_rank} kɔyɔ e-destination piece ɖɔɖɔ {target_rank}. Ɖɔɖɛɛ e-ranks ɖɔɖɔ ɖeɖe tɛm, e-pieces zaa ɖɔɖɔ ɖeɖe tɛm.",
+    "you_miner_defused": "A kɔna piyaŋ sɔŋ pɩnaɣ {source} nɛ pɩɖɛɣ {dest}. Piyaŋ ŋga kɔna yɔɔ kaawɛ {attacking_rank} nɛ piyaŋ ŋga lɛɣ yɔɔ kaawɛ {target_rank}. Kɔna yɔɔ piyaŋ ŋga kaawɛ tɩŋgaɣɖɛɣɩɣ nɛ lɛɣ yɔɔ piyaŋ ŋga kaawɛ kɩtɛm, a kɔna piyaŋ ŋga.",
+    "opponent_miner_defused": "Kɛɖɛɣ {player_id} kɔna piyaŋ sɔŋ pɩnaɣ {source} nɛ pɩɖɛɣ {dest}. Piyaŋ ŋga kɔna yɔɔ kaawɛ {attacking_rank} nɛ piyaŋ ŋga lɛɣ yɔɔ kaawɛ {target_rank}. Kɔna yɔɔ piyaŋ ŋga kaawɛ tɩŋgaɣɖɛɣɩɣ nɛ lɛɣ yɔɔ piyaŋ ŋga kaawɛ kɩtɛm, a pɩɣa piyaŋ ŋga.",
+    "you_bomb_lost": "A kɔna piyaŋ sɔŋ pɩnaɣ {source} nɛ pɩɖɛɣ {dest}. Piyaŋ ŋga kɔna yɔɔ kaawɛ {attacking_rank} nɛ piyaŋ ŋga lɛɣ yɔɔ kaawɛ {target_rank}. Kɔna yɔɔ piyaŋ ŋga kaawɛ kɩtɛm nɛ lɛɣ yɔɔ piyaŋ ŋga kaawɛ kɩkpaɣ, a pɩɣa piyaŋ ŋga.",
+    "opponent_bomb_won": "Kɛɖɛɣ {player_id} kɔna piyaŋ sɔŋ pɩnaɣ {source} nɛ pɩɖɛɣ {dest}. Piyaŋ ŋga kɔna yɔɔ kaawɛ {attacking_rank} nɛ piyaŋ ŋga lɛɣ yɔɔ kaawɛ {target_rank}. Kɔna yɔɔ piyaŋ ŋga kaawɛ kɩtɛm nɛ lɛɣ yɔɔ piyaŋ ŋga kaawɛ kɩkpaɣ, a kɔna piyaŋ ŋga.",
+    "you_spy_won": "A kpeɣu ɖɔɖɔ ɖeɖe tɛm le e-piece ɖɔɖɔ ɖeɖe tɛm le {source} kɔyɔ {dest}. E-attacking piece ɖɔɖɔ {attacking_rank} kɔyɔ e-destination piece ɖɔɖɔ {target_rank}. Ɖɔɖɛɛ e-attacker ɖɔɖɔ ɖeɖe tɛm le e-spy kɔyɔ e-destination ɖɔɖɔ ɖeɖe tɛm le e-marshal, a kpeɣu ɖɔɖɔ ɖeɖe tɛm.",
+    "opponent_spy_lost": "Player {player_id} ɖɔɖɔ ɖeɖe tɛm le e-piece ɖɔɖɔ ɖeɖe tɛm le {source} kɔyɔ {dest}. E-attacking piece ɖɔɖɔ {attacking_rank} kɔyɔ e-destination piece ɖɔɖɔ {target_rank}. Ɖɔɖɛɛ e-attacker ɖɔɖɔ ɖeɖe tɛm le e-spy kɔyɔ e-destination ɖɔɖɔ ɖeɖe tɛm le e-marshal, a kpeɣu ɖɔɖɔ ɖeɖe tɛm.",
+    "you_higher_won": "A kɔna piyaŋ sɔŋ pɩnaɣ {source} nɛ pɩɖɛɣ {dest}. Piyaŋ ŋga kɔna yɔɔ kaawɛ {attacking_rank} nɛ piyaŋ ŋga lɛɣ yɔɔ kaawɛ {target_rank}. Kɔna yɔɔ piyaŋ ŋga kaawɛ kɩkpaɣ nɛ lɛɣ yɔɔ piyaŋ ŋga kaawɛ kɩtɛm, a kɔna piyaŋ ŋga.",
+    "opponent_higher_lost": "Kɛɖɛɣ {player_id} kɔna piyaŋ sɔŋ pɩnaɣ {source} nɛ pɩɖɛɣ {dest}. Piyaŋ ŋga kɔna yɔɔ kaawɛ {attacking_rank} nɛ piyaŋ ŋga lɛɣ yɔɔ kaawɛ {target_rank}. Kɔna yɔɔ piyaŋ ŋga kaawɛ kɩkpaɣ nɛ lɛɣ yɔɔ piyaŋ ŋga kaawɛ kɩtɛm, a pɩɣa piyaŋ ŋga.",
+    "you_lower_lost": "A kɔna piyaŋ sɔŋ pɩnaɣ {source} nɛ pɩɖɛɣ {dest}. Piyaŋ ŋga kɔna yɔɔ kaawɛ {attacking_rank} nɛ piyaŋ ŋga lɛɣ yɔɔ kaawɛ {target_rank}. Kɔna yɔɔ piyaŋ ŋga kaawɛ kɩtɛm nɛ lɛɣ yɔɔ piyaŋ ŋga kaawɛ kɩkpaɣ, a pɩɣa piyaŋ ŋga.",
+    "opponent_lower_won": "Kɛɖɛɣ {player_id} kɔna piyaŋ sɔŋ pɩnaɣ {source} nɛ pɩɖɛɣ {dest}. Piyaŋ ŋga kɔna yɔɔ kaawɛ {attacking_rank} nɛ piyaŋ ŋga lɛɣ yɔɔ kaawɛ {target_rank}. Kɔna yɔɔ piyaŋ ŋga kaawɛ kɩtɛm nɛ lɛɣ yɔɔ piyaŋ ŋga kaawɛ kɩkpaɣ, a kɔna piyaŋ ŋga."
+  },
+  "outcome": {
+    "flag_captured": "Aleɣya {player_id} kpaɣ ɛ-kaɖɩyʋ kɩɖaʋ!",
+    "no_movable_pieces": "Kɛɖɛɣ {winner_id} kɔna piyaŋ! Kɛɖɛɣ {loser_id} pɩɣa piyaŋ ŋga kɔna."
+  }
+}

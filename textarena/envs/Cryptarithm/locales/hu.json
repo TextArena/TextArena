@@ -1,0 +1,30 @@
+{
+  "_comment": "Kriptaritmus nyelvi fájl. NE fordítsa le a kulcsokat (bal oldal). Csak a értékeket fordítsa le (jobb oldal).",
+  "_slots": {
+    "{letter}": "A rejtvény betűje, pl. S vagy E",
+    "{digit}": "Egy számjegy 0-9",
+    "{used_letter}": "A betű, amely már hozzá van rendelve egy számjegyhez",
+    "{assigned}": "Hány betű van már hozzárendelve",
+    "{total}": "Az egyedi betűk teljes száma",
+    "{pct}": "A haladás százalékos formában, pl. 50%"
+  },
+  "player_prompt": {
+    "intro": "Rendelje hozzá minden betűhöz egy egyedi számjegyet, hogy az aritmetika érvényes legyen.\nRendelje hozzá a `[A 5]` formátummal, és bármikor módosíthatja."
+  },
+  "invalid_move": {
+    "wrong_format": "Rossz formátumú művelet. Használja a `[A 5]` formátumot.",
+    "letter_not_in_puzzle": "A(z) {letter} betű nem szerepel a rejtvényben.",
+    "digit_used": "A(z) {digit} számjegyet már használja a(z) {used_letter} betű.",
+    "leading_zero": "Egy szó első számjegye nem lehet 0."
+  },
+  "outcome": {
+    "correct": "Helyes! Az egyenlet teljesül.",
+    "incorrect": "A hozzárendelés teljes, de az egyenlet helytelen.",
+    "limit": "A lépésszám korlátja elérve."
+  },
+  "board": {
+    "mapping_header": "Hozzárendelés:",
+    "none_yet": "  (még nincs)",
+    "assigned": "\nHozzárendelve: {assigned}/{total} ({pct})"
+  }
+}

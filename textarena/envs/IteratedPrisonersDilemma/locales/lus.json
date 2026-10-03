@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Nin hi Player {player_id} ni, Iterated Prisoner's Dilemma khelhna, round {num_rounds} awh tur.\n\nGame Structure:\n- Decision na awm hma in, inbiakna hun {total_conversation_rounds} an nei.\n- Hnuah erawh, player pahnih hian cooperation emaw defect emaw an thlang ṭhut ṭhut.\n\nPayoff Matrix (round reng reng a fixed):\n- Cooperation pahnih ➜ mitin {cooperate_reward}\n- Defect pahnih ➜ mitin {mutual_defect_reward}\n- Pakhat defect, pakhat cooperation ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nKhelin Dan:\n- Inbiakna hun ah: i duh ang i ziak ṭha.\n- Decision phase ah: '[Cooperate]' emaw '[Defect]' (case-insensitive) i hman ṭha. I duh chuan, token chhungte hian text dang i ziak thei."
+  },
+  "phases": {
+    "conversation_finished": "Round {round} atan inbiakna zawh a ni. '[Cooperate]' emaw '[Defect]' i rawn chhawn ngei ang \\boxed{{}}.",
+    "starting_round": "--- Starting Round {round} ---- a ni .",
+    "round_summary": "Round {round} result:\n{outcome}\nPlayer 0 hian {r0} a hmu (total {score_0}), Player 1 hian {r1} a hmu (total {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} hian {win_score} - {lose_score} a chak.",
+    "draw": "Inkhelh a inhnehtawk! Player pahnih in {s0} an hmu ve ve.",
+    "round_both_cooperate": "Player pahnihte chuan an thawhpui a.",
+    "round_both_defect": "Player pahnihte chuan an tlânsan a.",
+    "round_p0_cooperates_p1_defects": "Player 0 chuan a thawhpui a, player 1 chu a tlânchhe ta.",
+    "round_p0_defects_p1_cooperates": "Player 0-a chu a tlânchhe ta, player 1-na chuan thawhpuiin."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "_comment": "Fitxer de localització de ThreePlayerGOPS. NO tradueixis les claus (costat esquerre). Només tradueix els valors (costat dret).",
+  "_slots": {
+    "{player_id}": "El número del jugador, 0, 1 o 2",
+    "{round}": "El número de la ronda actual, 1..13",
+    "{prize}": "L'etiqueta de la carta premi revelada (A, 2..10, J, Q, K) - no tradueixis",
+    "{worth}": "El valor total del premi, incloent-hi qualsevol pot acumulat",
+    "{hand}": "Les cartes restants del jugador, representades com a tokens entre claudàtors com '[A]' '[2]' - no tradueixis",
+    "{bids}": "La llista neutral de cartes jugades, separades per comes, com 'P0:10, P1:J, P2:Q' - no tradueixis",
+    "{winner}": "El número del jugador que ha guanyat la ronda",
+    "{pot}": "El valor del pot atorgat o acumulat en aquesta ronda",
+    "{scoreline}": "La puntuació en curs, com 'P0:0  P1:0  P2:11' - no tradueixis",
+    "{pid}": "El número del jugador que ha estat eliminat",
+    "{scores}": "Les puntuacions finals com a assignació de número de jugador a puntuació - no tradueixis"
+  },
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id} a Three-Player GOPS.\n- Tens les 13 cartes A-K (cada una exactament una vegada).\n- Cada ronda es revela un premi. Envia UNA carta com `[Q]`, `[10]`, `[2]` …\n- La carta més alta guanya el premi (+ qualsevol pot acumulat). Les empatades fan que el premi es traslladi a la següent ronda.\n- Després de 13 rondes, la puntuació més alta guanya. Moviments invàlids = eliminació."
+  },
+  "round": {
+    "header": "### Ronda {round}/13 - Premi: {prize} (valor {worth})",
+    "hand": "La teva mà restant: {hand}"
+  },
+  "reveal": {
+    "win": "Ofertes » {bids} - El Jugador {winner} guanya {pot}.",
+    "tie": "Ofertes » {bids} - empat, pot ara {pot}.",
+    "scores": "Puntuacions → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "l'acció necessita una carta entre claudàtors com '[Q]'",
+    "bad_card": "la carta ja s'ha utilitzat o és invàlida"
+  },
+  "elimination": {
+    "player": "El Jugador {pid} ha estat eliminat després de moviments invàlids repetits."
+  },
+  "outcome": {
+    "auto_win": "Dos jugadors eliminats - victòria automàtica.",
+    "final": "Puntuacions finals: {scores}"
+  }
+}

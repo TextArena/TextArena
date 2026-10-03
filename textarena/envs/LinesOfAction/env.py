@@ -32,11 +32,7 @@ class LinesOfActionEnv(ta.Env):
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
         side  = 'O' if player_id == 0 else 'X'
         other = 'X' if side == 'O' else 'O'
-        return (
-            f"You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\n"
-            "Move format: `[b1b3]` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. "
-            "You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
-        )
+        return self.m("player_prompt", "intro", player_id=player_id, side=side, other=other)
     def _render_board(self) -> str:
         hline = "  +" + "+".join(["---"] * self.BOARD_N) + "+"        # row separator
         rows: List[str] = []
@@ -55,7 +51,7 @@ class LinesOfActionEnv(ta.Env):
         return "\n".join(rows)
 
     def _observe(self):
-        self.state.add_observation(message=f"Board:\n\n{self._render_board()}", observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(message=self.m("board", "current_board", board=self._render_board()), observation_type=ta.ObservationType.GAME_BOARD)
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         side, enemy  = ('O','X') if self.state.current_player_id==0 else ('X','O')
@@ -65,7 +61,7 @@ class LinesOfActionEnv(ta.Env):
         
         m = self.MOVE_RE.search(action)
         if not m:
-            self.state.set_invalid_move("Format must be e2e4 (from,to coordinates).")
+            self.state.set_invalid_move(self.m("invalid_move", "wrong_format"))
             self._observe()
             return self.state.step()
 
@@ -75,20 +71,20 @@ class LinesOfActionEnv(ta.Env):
 
         # Origin piece present?
         if self.state.game_state["board"][fr][fc] != side:
-            self.state.set_invalid_move(f"No {side} piece on {frm_coord}.")
+            self.state.set_invalid_move(self.m("invalid_move", "no_piece", side=side, coord=frm_coord))
             self._observe()
             return self.state.step()
 
         # Direction & distance checks
         dr, dc = tr - fr, tc - fc
         if dr == dc == 0:
-            self.state.set_invalid_move("Source and destination identical.")
+            self.state.set_invalid_move(self.m("invalid_move", "identical"))
             self._observe()
             return self.state.step()
 
         # Must be straight or diagonal
         if not (dr == 0 or dc == 0 or abs(dr) == abs(dc)):
-            self.state.set_invalid_move("Move must be straight or diagonal.")
+            self.state.set_invalid_move(self.m("invalid_move", "not_straight_or_diagonal"))
             self._observe()
             return self.state.step()
 
@@ -96,7 +92,7 @@ class LinesOfActionEnv(ta.Env):
         step_r, step_c = (dr > 0) - (dr < 0), (dc > 0) - (dc < 0)
         distance = max(abs(dr), abs(dc))
         if distance != self._count_pieces_on_line(fr, fc, step_r, step_c):
-            self.state.set_invalid_move("Must move distance equal to pieces in line.")
+            self.state.set_invalid_move(self.m("invalid_move", "wrong_distance"))
             self._observe()
             return self.state.step()
 
@@ -104,7 +100,7 @@ class LinesOfActionEnv(ta.Env):
         r, c = fr + step_r, fc + step_c
         while (r, c) != (tr, tc):
             if self.state.game_state["board"][r][c] == enemy:
-                self.state.set_invalid_move("Enemy piece blocks the path.")
+                self.state.set_invalid_move(self.m("invalid_move", "enemy_blocks"))
                 self._observe()
                 return self.state.step()
             r += step_r
@@ -112,7 +108,7 @@ class LinesOfActionEnv(ta.Env):
 
         # Can't land on own piece
         if self.state.game_state["board"][tr][tc] == side:
-            self.state.set_invalid_move("Destination occupied by own piece.")
+            self.state.set_invalid_move(self.m("invalid_move", "destination_own"))
             self._observe()
             return self.state.step()
 
@@ -123,14 +119,13 @@ class LinesOfActionEnv(ta.Env):
 
         self.state.game_state["halfmove_clock"] = 0 if captured else self.state.game_state["halfmove_clock"] + 1
         self._update_repetition_hash()
-        msg = f"Player {self.state.current_player_id} moved {frm_coord} -> {to_coord}"
-        if captured: msg += " capturing an enemy."
-        self.state.add_observation(msg, ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        msg_key = "captured_suffix" if captured else "moved"
+        self.state.add_observation(self.m("game_action", msg_key, player_id=self.state.current_player_id, **{"from": frm_coord, "to": to_coord}), ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
         # Win/Draw checks
-        if self._connected(side):                                           self.state.set_winner(self.state.current_player_id, reason="All pieces connected.")
-        elif self.state.game_state["halfmove_clock"] >= 60:                 self.state.set_draw(reason="60 moves without capture.")
-        elif self.state.game_state["rep_counter"][self._pos_hash()] >= 3:   self.state.set_draw(reason="Position repeated three times.")
+        if self._connected(side):                                           self.state.set_winner(self.state.current_player_id, reason=self.m("outcome", "win"))
+        elif self.state.game_state["halfmove_clock"] >= 60:                 self.state.set_draw(reason=self.m("outcome", "draw_no_capture"))
+        elif self.state.game_state["rep_counter"][self._pos_hash()] >= 3:   self.state.set_draw(reason=self.m("outcome", "draw_repetition"))
 
         self._observe()
         return self.state.step()

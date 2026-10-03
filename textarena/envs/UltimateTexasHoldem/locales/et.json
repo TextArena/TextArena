@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em keelefail. ÄRGE tõlgige võtmeid (vasak pool). Tõlgige ainult väärtused (parem pool).",
+  "_slots": {
+    "{start_chips}": "Algseid žetoneid, näiteks 1000",
+    "{ante}": "Pakolline panus, näiteks 25",
+    "{ante4}": "Neli korda pakolline panus, näiteks 100",
+    "{ante2}": "Kaks korda pakolline panus, näiteks 50",
+    "{round}": "Praegune vooru number",
+    "{chips}": "Mängija praegune žetoonide arv",
+    "{hand}": "Mängija käsi, näiteks 'A♠, K♥', või tõlgitud tekst, kui käsi puudub",
+    "{phase}": "Praegune faasi silt (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Komaga eraldatud loend toimingutest, näiteks '[play_bet_4x], [check]'",
+    "{available}": "Komaga eraldatud loend lubatud toimingutest",
+    "{blind}": "Pime panus",
+    "{play}": "Mängu panus",
+    "{cards}": "Komaga eraldatud loend kaartidest, näiteks 'Q♣, 7♦, 2♠'",
+    "{name}": "Tõlgitud pokkerikäe nimi, sisestatakse sõna-sõnalt",
+    "{amount}": "Žetoonide arv",
+    "{net}": "Neto muutus voorus (võib olla negatiivne)",
+    "{max_turns}": "Maksimaalne voorude arv",
+    "{winner_rounds}": "Voorude arv, mis on võidetud"
+  },
+  "player_prompt": {
+    "no_cards": "Pole kaarte",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Üks mängija vs diiler\n\n📖 MÄNGU ÜLEVAADE:\n• Sa alustad {start_chips} žetooniga\n• Üks 52 kaardist koosnev pakk (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Sa mängid diileri (maja) vastu\n• Iga voor järgib Ultimate Texas Hold'em struktuuri: sa paned ANTE ja BLIND panused, saad 2 auke kaarti, otsustad valikuliselt PLAY panuste üle kihlveo faasides, siis avaldab kogukonnakaardid ja võrdleb oma parimat 5-kaardist kätt diileri omaga. Sinu eesmärk on maksimeerida oma võite (kui sul on parem käsi), samas kui minimeerida oma kaotusi (kui sul on halvem käsi).\n• Mäng lõpeb, kui sa jõuad 0 žetoonini või alla vooru alguses (KAOTUS) või lõpetad 1000 vooru žetoonidega (VÕIT)\n\n💰 KIHLVEO STRUKTUUR:\n• ANTE: Pakolline ${ante} panus iga vooru eest\n• BLIND: Pakolline ${ante} panus iga vooru eest\n• PLAY: Valikuline panus mängu ajal. Kogu vooru jooksul saad valida ainult ühe järgmistest: (${ante4} kui tehtud PRE-FLOP-is, ${ante2} kui tehtud FLOP-is või ${ante} kui tehtud RIVER-is. Saad ka kõrvale heita RIVER-is, loobudes käest, ja mitte midagi panustades.)\n\n🎴 KAARTIDE JAGAMINE:\n• Sa saad 2 nähtavat kaarti (su auke kaardid)\n• Diiler saab 2 peidetud kaarti (peidetud sinu eest)\n• 5 kogukonnakaarti jagatakse alguses peidetult\n• Kogukonnakaardid avaldatakse progressiivselt läbi mängu faaside\n\n🏆 DIILERI KVALIFIKATSIOON:\n• Diiler peab omama vähemalt ühte PAARI (2 kaarti sama astme), kasutades 2 kaarti oma käes ja 5 kogukonnakaarti.\n• Diileri kvalifikatsioon mõjutab kihlveo tulemusi, nagu selgitatakse hiljem.\n\n🎮 MÄNGU FAASID & TEgevUSED:\n📋 PRE-FLOP:\n  • Tegevused: [4x] (${ante4}) või [check]\n  • [4x]: Pane ${ante4} PLAY panus, avaldab esimesed 3 kogukonnakaarti\n  • [check]: Mitte midagi panustada, avaldab esimesed 3 kogukonnakaarti\n\n📋 FLOP:\n  • Kui 4x panus tehtud: Ainult [skip] saadaval (automaatselt avaldab viimased 2 kogukonnakaarti)\n  • Kui mitte 4x panust: [2x] (${ante2}) või [check]\n  • [2x]: Pane ${ante2} PLAY panus, avaldab viimased 2 kogukonnakaarti\n  • [check]: Mitte midagi panustada, avaldab viimased 2 kogukonnakaarti\n\n📋 RIVER:\n  • Kui 4x või 2x panus tehtud: Ainult [skip] saadaval (automaatselt jätkab SHOWDOWN-i)\n  • Kui mitte ühtegi PLAY panust: [1x] (${ante}) või [fold]\n  • [1x]: Pane ${ante} PLAY panus, jätkab SHOWDOWN-i\n  • [fold]: Loobu käest, kaota ANTE ja BLIND panused\n\n📋 SHOWDOWN:\n  • Kõik kaardid avaldatud ja hinnatud\n  • Parim 5-kaardine käsi 7 kaardist (2 auke + 5 kogukonnakaarti)\n  • Panused lahendatakse vastavalt väljamakse reeglitele\n\n💎 VÄLJAMAKSE REEGlid:\n📊 ANTE PANUS:\n  • Diiler ei kvalifitseeru: PUSH (panus tagastatakse)\n  • Diiler kvalifitseerub & sa võidad: 1:1 väljamakse (panus + võit)\n  • Diiler kvalifitseerub & sa kaotad: Panus kaotatud\n  • Viik: PUSH (panus tagastatakse)\n\n📊 BLIND PANUS:\n  • Diileri kvalifikatsioon ei mõjuta\n  • Sa võidad: Panus tagastatakse ja lisaks väljamakse vastavalt käe tugevusele\n  • Sa kaotad: Panus kaotatud\n  • Viik: PUSH (panus tagastatakse)\n\n📊 BLIND PANUSE VÄLJAMAKSE TABEL:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Mitte midagi lisaks\n\n📊 PLAY PANUS:\n  • Diileri kvalifikatsioon ei mõjuta\n  • Otsene võrdlus: Sinu parim käsi vs Diileri parim käsi\n  • Sa võidad: 1:1 väljamakse (panus + võit)\n  • Sa kaotad: Panus kaotatud\n  • Viik: PUSH (panus tagastatakse)\n\n🎯 POKKERI KÄE RANGID (Parimast halvimani):\n  1. Royal Flush: A-K-Q-J-10 sama mast\n  2. Straight Flush: 5 järjestikust kaarti sama mast\n  3. Four of a Kind: 4 kaarti sama astme\n  4. Full House: 3 sama astme + 2 sama astme\n  5. Flush: 5 kaarti sama mast\n  6. Straight: 5 järjestikust kaarti\n  7. Three of a Kind: 3 kaarti sama astme\n  8. Two Pair: 2 paari erinevast astmest\n  9. One Pair: 2 kaarti sama astme\n  10. High Card: Kõrgeim kaart võidab\n\n⌨️  TEgevuse KÄSKLUSED:\n• [4x] või [play bet 4x]: Pane ${{self.ante_amount*4}} PLAY panus\n• [2x] või [play bet 2x]: Pane ${{self.ante_amount*2}} PLAY panus\n• [1x] või [play bet 1x]: Pane ${{self.ante_amount*1}} PLAY panus\n• [check] või [c]: Kontrolli (mitte midagi panustada)\n• [fold] või [f]: Loobu käest\n• [skip] või [s]: Jäta vahele (kui mitte midagi teha ei ole)\n\n💡 STRATEEGIA TIPS:\n• Tugevad algkäed (paarid, kõrged kaardid) õigustavad sageli 4x panuseid\n• Arvesta diileri kvalifikatsiooniga - nõrgad käed võivad viia PUSH-i, kui diiler ei kvalifitseeru\n• BLIND panus võib olla väga kasulik tugevate kätega (Royal Flush = 500:1!)\n• Jälgi oma žetoonide arvu! Kui see langeb 0 või alla vooru alguses, sa kaotad.\n\n⚠️  TÄHTSAD MÄRKUSED:\n• ANTE ja BLIND panused on pakollised iga vooru eest\n• PLAY panused on valikulised ja strateegilised\n• Veendu, et sisestad õige tegevuse, ja ainult ühe tegevuse korraga.\n\n",
+    "state": "🎯 VOOR {round}\n💰 Žetoonid: {chips}\n🎴 Sinu käsi: {hand}\n📊 Praegused panused: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Faas: {phase}\n🎯 Saadaval tegevused: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Voor {round} algas! Panused: ANTE ${ante}, BLIND ${blind}. Sul on {chips} žetooni jäänud.",
+    "your_hand": "🎴 Sinu käsi: {hand}",
+    "flop_revealed": "🃏 FLOP avaldatud: {cards}",
+    "river_revealed": "🃏 RIVER avaldatud: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Vigane tegevus praeguses faasis. Saadaval tegevused: {available}",
+    "message": "❌ Vigane tegevus! Saadaval tegevused: {available}"
+  },
+  "action": {
+    "folded": "🃏 Sa loobusid käest."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Diileri käsi: {cards}",
+    "community_cards": "🃏 Kogukonnakaardid: {cards}",
+    "player_best": "🎴 Mängija parim käsi: {name} ({cards})",
+    "dealer_best": "🎴 Diileri parim käsi: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE panus KAOTATUD! -${ante} (loobusid käest)",
+    "blind_lost_folded": "❌ BLIND panus KAOTATUD! -${blind} (loobusid käest)",
+    "ante_won": "✅ ANTE panus VÕIT! +${amount}",
+    "ante_pushed": "🔄 ANTE panus PUSH! ${ante} tagastatud",
+    "ante_lost": "❌ ANTE panus KAOTATUD! -${ante}",
+    "blind_won": "✅ BLIND panus VÕIT! +${amount}",
+    "blind_pushed": "🔄 BLIND panus PUSH! ${blind} tagastatud",
+    "blind_lost": "❌ BLIND panus KAOTATUD! -${blind}",
+    "play_won": "✅ PLAY panus VÕIT! +${amount}",
+    "play_pushed": "🔄 PLAY panus PUSH! ${play} tagastatud",
+    "play_lost": "❌ PLAY panus KAOTATUD! -${play}",
+    "net_gain": "🎉 Voor {round} lõpetatud! Neto võit: +${net}",
+    "net_loss": "💸 Voor {round} lõpetatud! Neto kaotus: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 MÄNG LÕPETATUD! {max_turns} vooru lõpetatud. Sul on ${chips} žetooni - SA VÕITSID!",
+    "game_over_lose": "🏁 MÄNG LÕPETATUD! Sa oled žetoonidest ilma. Diiler võitis!",
+    "reward_win": "Mängija lõpetas {winner_rounds} vooru ${chips} žetooniga",
+    "reward_lose": "Mängija jooksis žetoonidest ilma voorus {round}",
+    "reward_win_max": "Mängija lõpetas {max_turns} vooru ${chips} žetooniga"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Neli sama astme",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Kolm sama astme",
+    "two_pair": "Kaks paari",
+    "one_pair": "Üks paar",
+    "high_card": "Kõrgeim kaart",
+    "unknown": "Tundmatu käsi"
+  }
+}

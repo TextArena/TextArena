@@ -1,0 +1,57 @@
+{
+  "_comment": "Fitxer de localització de Briscola. NO tradueixis les claus (costat esquerre). Només tradueix els valors (costat dret). Mantén cada {placeholder} exactament com està.",
+  "_slots": {
+    "{player_id}": "El número del jugador, per exemple 0 o 1",
+    "{trump_suit}": "El símbol de la colla triomfant (♠♥♦♣) - no tradueixis",
+    "{trump_card}": "L'etiqueta de la carta triomfant, per exemple '7♠' - no tradueixis",
+    "{card}": "L'etiqueta d'una carta, per exemple 'A♥' - no tradueixis",
+    "{trump_mark}": "El marcador pre-renderitzat '(TRUMP)', o buit",
+    "{max_pos}": "La posició màxima legal d'una carta a la mà del jugador",
+    "{count}": "El nombre de cartes que té un jugador",
+    "{pos}": "El número de posició d'una carta a la mà",
+    "{points}": "Un nombre de punts (valor de la carta o puntuació acumulada)",
+    "{hand}": "La llista de cartes pre-renderitzada, multilínia",
+    "{trick}": "La llista de cartes pre-renderitzada del truc actual",
+    "{scores}": "La línia de puntuació pre-renderitzada, o el bloc de puntuació final per jugador",
+    "{trump_info}": "La línia pre-renderitzada de la colla triomfant / compte de cartes",
+    "{winner}": "El número del jugador que va guanyar el truc o el joc",
+    "{tricks}": "Un nombre de trucs guanyats per un jugador",
+    "{deck_count}": "Nombre de cartes que queden al paquet"
+  },
+  "game": {
+    "start": "S'ha iniciat el joc de Briscola! Colla triomfant: {trump_suit} (Carta triomfant: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Estàs jugant a Briscola - Jugador {player_id}.\nObjectiu: Guanya trucs i recull els punts més alts (120 punts totals al paquet).\nPunts de carta: A=11, 3=10, K=4, Q=3, J=2, altres=0\nPoder de carta: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nLes cartes triomfants superen les cartes no triomfants independentment del poder.\n\nAcció: '[play X]' on X és la posició (1-{max_pos}) de la carta a la teva mà\n"
+  },
+  "hand": {
+    "none": "No hi ha cartes",
+    "empty": "No hi ha cartes a la mà",
+    "header": "La teva mà:",
+    "card_line": "  {pos}. {card} [{points} punts]{trump_mark}",
+    "trump_mark": " (TRIOMFANT)"
+  },
+  "trick": {
+    "empty": "No s'han jugat cartes encara en aquest truc.",
+    "header": "Truc actual:",
+    "line": "  Jugador {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Jugador {player_id}: {points} punts",
+    "trump_info": "Colla triomfant: {trump_suit}",
+    "trump_info_deck": "Colla triomfant: {trump_suit} | Cartes que queden al paquet: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nPuntuacions: {scores}\n{trump_info}\n\nJuga una carta utilitzant [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Utilitza [play X] on X és la posició de la carta (1, 2, 3, etc.)",
+    "out_of_range": "Posició de carta no vàlida. Tens {count} cartes (1-{count})"
+  },
+  "action": {
+    "played": "El jugador {player_id} ha jugat {card}",
+    "trick_win": "El jugador {winner} guanya el truc amb {card} i guanya {points} punts!"
+  },
+  "outcome": {
+    "head": "S'ha acabat el joc! El jugador {winner} guanya amb {points} punts!\n\nPuntuacions finals:\n{scores}",
+    "player_line": "Jugador {player_id}: {points} punts ({tricks} trucs)\n"
+  }
+}

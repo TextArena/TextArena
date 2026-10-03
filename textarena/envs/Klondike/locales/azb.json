@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "سیز کلاندایک پاسینج اویونون اویناییرسینیز. سیزین هدفه‌نیز بۆتۆن کارت‌لاری فؤنداسیون قؤشاغینا کؤچورمکدیر.\n\nاویون قایدالاری:\n- فؤنداسیون قؤشاغی (F1-F4): آستدان کینقا قدر هم رنگده قۇرولور\n- پاسینج قؤشاغی (T1-T7): رنگلری نؤوبه‌لشدره قۇرولور (قیرمیزی قارایا، قارا قیرمیزییا)\n- ستؤک: کارت‌لاری وئیست قؤشاغینا چکین\n- وئیست (W): اۆست کارت اوینایا حاضیردیر\n\nکؤماندالار:\n- 'draw' - ستؤکدن کارت‌لاری وئیست قؤشاغینا چکین\n- 'move <source> <destination> [count]' - قؤشاغلار آراسیندا کارت‌لاری کؤچورون\n  میثال‌لار: 'move W T1', 'move T1 F2', 'move T3 T5 2'. سای هم 'all' اولا بیلر کی، بۆتۆن اۆزۆ کارت‌لاری کؤچورماغا جهد ائده‌جک.\n- 'forfeit' - اویونو دئرhal بیتیرین و ایندیکی حسابینیزی قیلین\n- قؤشاغ آدلاری: W (وئیست)، F1-F4 (فؤنداسیون)، T1-T7 (پاسینج)\n\nسیز بیر دؤورده چوخلو حرکتلری ویرگوللا آییراراق ایجرا ائده بیلرسینیز:\n  میثال: 'draw, move W T1, move T2 F1'\n\nصرف کینقلر بوش پاسینج قؤشاغینا یئرلشدیریله بیلر.\nحرکتلر سیرا ایله ایجرا ائدیلیر - اگر بیریسینده خطا اولارسا، قالان حرکتلر آتیلیر.\nاگر اویونون قازانماق اۆچۆن ایمکانسیز اولدوغونو دۆشۆنۆرسینیز، 'forfeit' کؤمانداسیندان ایستیفاده ائدین."
+  },
+  "format_error": {
+    "no_brackets": "غیر معتبر عمل فورماسی.عمل قوسلار آراسیندا اولمالیدیر.",
+    "no_closing_bracket": "غلط عمل فورمات. غائب قوس بند ']'",
+    "empty_command": "بوش امر. \"draw\" و یا \"move <source><destination> [count]' تایپ ائدین.",
+    "empty_action": "بوش عمل.",
+    "move_needs_args": "فرمان move به منبع و مقصد نیاز دارد. استفاده: 'move <source> <destination> [count]'",
+    "count_positive": "تعداد باید مثبت یا 'all' باشد",
+    "count_invalid": "تعداد نامعتبر است. از یک عدد یا 'all' استفاده کنید",
+    "unknown_command": "فرمان ناشناخته '{cmd}'. از 'draw'، 'move <source> <destination> [count]'، یا 'forfeit' استفاده کنید",
+    "wrapped": "Əməliyyat {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Əməliyyat {n}: {msg}",
+    "before_failure": "{n} آکسیا(لار)ی باخیلمادان اؤنجه ایجرا ائدیلدی.",
+    "failed": "Əməliyyat {n} uğursuz oldu: {msg}"
+  },
+  "move_result": {
+    "drew": "استوکدان کارت(لار)ی آتیلدی.",
+    "cannot_draw": "چکمه یه بیلمیرم. هم مخزن و هم ده زباله بوشدورلار.",
+    "invalid_pile": "نامعتبر پایل آدی. W، F1-F4 یا T1-T7 ایستیفاده ائدین",
+    "foundation_one_card": "فقط بیر کارت یئرینه آپارابیلر.",
+    "waste_to_foundation_ok": "قالیقدان فونداتا کؤچورولدو F{dst}",
+    "waste_to_foundation_bad": "بو زباله کارتین بناغی فونداسیونا قویولماسی مومکون دئیل.",
+    "tableau_to_foundation_ok": "Kart tableau T{src}-dan foundation F{dst}-ə köçürüldü",
+    "tableau_to_foundation_bad": "بو تابلوی کارتین بناغی فونداسیونا قویولماسی مومکون دئیل.",
+    "foundation_to_foundation": "فؤنداسیوندان فؤنداسیونا کؤچورمک اولماز",
+    "waste_to_tableau_one_card": "زبالهدان تابلویا تکجه ۱ کارت یئرلشدیریلر.",
+    "waste_to_tableau_ok": "زبالهدان کارت تابلویا T{dst} یئرلشدیریلدی.",
+    "waste_to_tableau_bad": "بو زباله کارتین او تابلویا قویولماسی مومکون دئیل.",
+    "no_face_up": "حرکت ائتمک اوچون اوز-اوسته کارتلار یوخدور.",
+    "tableau_to_tableau_ok": "T{src}-dən T{dst}-ə {count} kart(s) köçürüldü",
+    "tableau_to_tableau_bad": "T{src}-dən T{dst}-ə {count} kart(s) köçürmək mümkün deyil",
+    "foundation_to_tableau_one_card": "آنجاق بیر کارتین اساسدان تابلوه کؤچورولمه سی مومکوندور.",
+    "foundation_empty": "Foundation F{src} خالي است.",
+    "foundation_to_tableau_ok": "Kart foundation F{src}-dan tableau T{dst}-ə köçürüldü",
+    "foundation_to_tableau_bad": "T{dst} جدولینه اساس کارت یئرلشدیریلمه دی.",
+    "to_waste_or_stock": "قایناقلارا و یا مخزنلره یئرلشمه یه بیلمز."
+  },
+  "outcome": {
+    "forfeit": "اویون سلب ائدیلدی. سون نومره: {score} کارتلار اساسلاردا .",
+    "won": "تبریک، کلوندیک سولیترینی قازانمیشسیز!",
+    "turn_limit": "Oyun bitdi! Maksimum {max_turns} tərəfə çattınız. Xal: {score} kart fondlarda."
+  },
+  "board": {
+    "title": "=== کلوندایک تک اوینان ===",
+    "turn": "دؤنه: {turn}/{max_turns}",
+    "stock": "خال: {stock} کارتلار.",
+    "waste": "قالی (W): {waste}",
+    "foundations_header": "مؤسسه لر:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "تابلو:",
+    "tableau_row": "T{n}: {cards}"
+  }
+}

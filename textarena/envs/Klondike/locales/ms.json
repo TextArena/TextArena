@@ -1,0 +1,80 @@
+{
+  "_comment": "Fail bahasa Klondike Solitaire dalam bahasa Melayu. JANGAN terjemahkan kunci (sebelah kiri), hanya nilai (sebelah kanan). Kekalkan setiap {ruang letak} betul-betul sama. JANGAN sekali-kali terjemahkan label/sut kad (cth. A, 10, K, ♣️, ♦️, ♥️, ♠️), token longgokan W, F1-F4, T1-T7, papan ASCII dalam {board}, atau arahan 'draw', 'move', 'forfeit', 'all'. Sintaks kurungan seperti 'move W T1' mesti kekal dalam tulisan Latin seadanya.",
+  "_slots": {
+    "{n}": "Indeks tindakan dalam arahan yang dipisahkan koma, bermula dari 1",
+    "{msg}": "Mesej hasil bersarang bagi setiap tindakan (sudah dilokalkan)",
+    "{count}": "Bilangan kad terbuka yang dipindahkan",
+    "{src}": "Nombor longgokan tableau sumber, bermula dari 1",
+    "{dst}": "Nombor longgokan destinasi, bermula dari 1",
+    "{cmd}": "Arahan tidak dikenali yang ditaip pemain (jangan terjemah)",
+    "{max_turns}": "Bilangan maksimum giliran sebelum permainan tamat",
+    "{score}": "Bilangan kad yang kini berada dalam longgokan asas",
+    "{board}": "Papan ASCII yang dipaparkan (jangan sekali-kali terjemah)",
+    "{turn}": "Nombor giliran semasa",
+    "{stock}": "Bilangan kad yang tinggal dalam stok",
+    "{waste}": "Kad teratas buangan, atau '--' jika kosong (jangan sekali-kali terjemah)",
+    "{cards}": "Kad dalam satu longgokan sebagai label neutral, atau '--' jika kosong (jangan sekali-kali terjemah)"
+  },
+
+  "player_prompt": {
+    "intro": "Anda sedang bermain Klondike Solitaire. Matlamat anda adalah memindahkan semua kad ke longgokan asas.\n\nPeraturan Permainan:\n- Longgokan asas (F1-F4): Bina menaik dari Sat ke Raja mengikut sut\n- Longgokan tableau (T1-T7): Bina menurun dengan warna berselang-seli (merah atas hitam, hitam atas merah)\n- Stok: Cabut kad ke longgokan buangan\n- Buangan (W): Kad teratas tersedia untuk dimainkan\n\nArahan:\n- 'draw' - Cabut kad dari stok ke buangan\n- 'move <source> <destination> [count]' - Pindahkan kad antara longgokan\n  Contoh: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count juga boleh 'all', yang akan cuba memindahkan semua kad terbuka.\n- 'forfeit' - Tamatkan permainan serta-merta dan kunci skor semasa anda\n- Nama longgokan: W (buangan), F1-F4 (asas), T1-T7 (tableau)\n\nAnda boleh melaksanakan beberapa tindakan dalam satu giliran dengan memisahkannya menggunakan koma:\n  Contoh: 'draw, move W T1, move T2 F1'\n\nHanya Raja boleh diletakkan pada longgokan tableau yang kosong.\nTindakan dilaksanakan mengikut urutan - jika satu gagal, tindakan selebihnya dilangkau.\nGunakan 'forfeit' jika anda percaya permainan mustahil dimenangi."
+  },
+
+  "format_error": {
+    "no_brackets": "Format tindakan tidak sah. Tindakan sepatutnya dalam kurungan.",
+    "no_closing_bracket": "Format tindakan tidak sah. Kurungan penutup ']' hilang",
+    "empty_command": "Arahan kosong. Taip 'draw' atau 'move <source> <destination> [count]'",
+    "empty_action": "Tindakan kosong",
+    "move_needs_args": "Arahan move memerlukan sumber dan destinasi. Penggunaan: 'move <source> <destination> [count]'",
+    "count_positive": "count mesti positif atau 'all'",
+    "count_invalid": "count tidak sah. Gunakan nombor atau 'all'",
+    "unknown_command": "Arahan tidak dikenali '{cmd}'. Gunakan 'draw', 'move <source> <destination> [count]', atau 'forfeit'",
+    "wrapped": "Tindakan {n}: {msg}"
+  },
+
+  "action_result": {
+    "success": "Tindakan {n}: {msg}",
+    "before_failure": "{n} tindakan dilaksanakan sebelum kegagalan.",
+    "failed": "Tindakan {n} gagal: {msg}"
+  },
+
+  "move_result": {
+    "drew": "Kad dicabut dari stok ke buangan.",
+    "cannot_draw": "Tidak boleh cabut. Stok dan buangan kedua-duanya kosong.",
+    "invalid_pile": "Nama longgokan tidak sah. Gunakan W, F1-F4, atau T1-T7",
+    "foundation_one_card": "Hanya 1 kad boleh dipindahkan ke asas",
+    "waste_to_foundation_ok": "Kad dipindahkan dari buangan ke asas F{dst}",
+    "waste_to_foundation_bad": "Tidak boleh memindahkan kad buangan ke longgokan asas itu",
+    "tableau_to_foundation_ok": "Kad dipindahkan dari tableau T{src} ke asas F{dst}",
+    "tableau_to_foundation_bad": "Tidak boleh memindahkan kad tableau ke longgokan asas itu",
+    "foundation_to_foundation": "Tidak boleh memindahkan dari asas ke asas",
+    "waste_to_tableau_one_card": "Hanya 1 kad boleh dipindahkan dari buangan ke tableau",
+    "waste_to_tableau_ok": "Kad dipindahkan dari buangan ke tableau T{dst}",
+    "waste_to_tableau_bad": "Tidak boleh meletakkan kad buangan pada longgokan tableau itu",
+    "no_face_up": "Tiada kad terbuka untuk dipindahkan",
+    "tableau_to_tableau_ok": "{count} kad dipindahkan dari tableau T{src} ke T{dst}",
+    "tableau_to_tableau_bad": "Tidak boleh memindahkan {count} kad dari T{src} ke T{dst}",
+    "foundation_to_tableau_one_card": "Hanya 1 kad boleh dipindahkan dari asas ke tableau",
+    "foundation_empty": "Asas F{src} kosong",
+    "foundation_to_tableau_ok": "Kad dipindahkan dari asas F{src} ke tableau T{dst}",
+    "foundation_to_tableau_bad": "Tidak boleh meletakkan kad asas pada tableau T{dst}",
+    "to_waste_or_stock": "Tidak boleh memindahkan ke buangan atau stok"
+  },
+
+  "outcome": {
+    "forfeit": "Permainan diserah kalah. Skor akhir: {score} kad dalam asas.",
+    "won": "Tahniah! Anda telah memenangi Klondike Solitaire!",
+    "turn_limit": "Permainan tamat! Anda mencapai maksimum {max_turns} giliran. Skor: {score} kad dalam asas."
+  },
+
+  "board": {
+    "title": "=== SOLITAIRE KLONDIKE ===",
+    "turn": "Giliran: {turn}/{max_turns}",
+    "stock": "Stok: {stock} kad",
+    "waste": "Buangan (W): {waste}",
+    "foundations_header": "Asas:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

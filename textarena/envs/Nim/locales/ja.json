@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "あなたは Nim のプレイヤー {player_id} です。\nあなたの目標は、最後の残りのオブジェクトを取り去ることです。\n各ターンでは、1つの山を選んで、その山から1つ以上のオブジェクトを取り去ります。\n'[pile quantity]' の形式を使用してください。ここで、pile は山のインデックス、quantity は取り去るオブジェクトの数です。\n例えば、'[0 3]' は山 0 から 3 つのオブジェクトを取り去ります。"
+  },
+  "state": {
+    "current_pile": "現在の山:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "有効な手の形式が見つかりません。'[pile quantity]' を使用してください。",
+    "correct_format_wrong_fields": "プレイヤー {player_id}、無効なアクションです。列 {col} は範囲外です。",
+    "out_of_range": "山のインデックス {pile_index} は範囲外です。",
+    "non_positive": "少なくとも 1 つのオブジェクトを取り去る必要があります。",
+    "exceeds_pile": "山 {pile_index} から {quantity} を取り去ることはできません（残りは {pile_count} です）。"
+  },
+  "observation": {
+    "removed_from_piles": "プレイヤー {player_id} が [{pile_index} {quantity}] をプレイし、山 {pile_index} から {quantity} のオブジェクトを取り去りました。"
+  },
+  "outcome": {
+    "win": "プレイヤー {player_id} が最後のオブジェクトを取り去りました！"
+  }
+}

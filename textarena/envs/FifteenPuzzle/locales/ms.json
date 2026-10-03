@@ -1,0 +1,17 @@
+{
+  "player_prompt": {
+    "intro": "Anda ialah Pemain {player_id}. Anda sedang bermain permainan Teka-Teki 15.\nObjektif permainan ini adalah untuk menyusun jubin bernombor dalam tertib menaik dari 1 hingga 15, dengan ruang kosong terletak di penjuru kanan bawah.\nUntuk membuat langkah, anda boleh menggelongsorkan jubin ke ruang kosong (diwakili oleh dua garis bawah, contohnya __) menggunakan salah satu arahan berikut:\n- 'up': Gerakkan jubin di bawah ruang kosong ke atas.\n- 'down': Gerakkan jubin di atas ruang kosong ke bawah.\n- 'left': Gerakkan jubin di sebelah kanan ruang kosong ke kiri.\n- 'right': Gerakkan jubin di sebelah kiri ruang kosong ke kanan.\nUntuk menghantar langkah anda, taip arah (contohnya 'up', 'down', 'left' atau 'right') dalam kurungan siku, contohnya [up].\nSusun atur papan semasa ditunjukkan di bawah. Gunakan maklumat ini untuk menyelesaikan teka-teki.\n"
+  },
+  "board": {
+    "current_board": "Papan Semasa:\n\n{board}\nLangkah Tersedia: {moves}",
+    "game_board": "Papan Permainan:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format langkah tidak sah. Pemain {player_id} tidak memberikan arah yang sah dalam kurungan siku.",
+    "illegal_move": "Langkah tidak sah. Jubin tidak boleh digerakkan ke arah yang ditentukan."
+  },
+  "outcome": {
+    "win": "Tahniah! Pemain {player_id} telah berjaya menyelesaikan Teka-Teki 15.",
+    "turn_limit": "Had giliran telah dicapai. Model telah menyelesaikan {percent} peratus teka-teki"
+  }
+}

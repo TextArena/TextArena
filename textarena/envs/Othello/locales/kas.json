@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\nOn your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. All flanked opponent pieces will be flipped to your color.\nProvide your move in the format '[row, col]'."
+  },
+  "board": {
+    "game_board": "کھیل بورڈ:\n{board}",
+    "valid_moves": "{observation}\nمعتبر موو: {moves}",
+    "no_valid_moves_reset": "{observation}\nکوئی معتبر موو نہیں - تہو موڑ چھوڑنا پڑ سکتا ہے۔",
+    "no_valid_moves_step": "{observation}\nکوئی معتبر موو نہیں – تہو موڑ چھوڑنا پڑ سکتا ہے۔",
+    "scores_reset": "{observation}\nموجودہ اسکور - کالے: {black_count}, سفید: {white_count}\n",
+    "scores_step": "{observation}\nاسکور - کالے: {black_count}, سفید: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": " Move chu [row, col] sanrachnā hund format asan.",
+    "illegal": "غیر قانونی موو۔ معتبر موو: {valid}"
+  },
+  "game_action": {
+    "skipped": "کھلاڑی {pid} نے اپنا موڑ چھوڑنا پڑا",
+    "played": "کھلاڑی {pid} ({piece}) نے [{r}, {c}] کھیلا تے {flipped} ٹکڑے(اں) پلٹے"
+  },
+  "game_message": {
+    "must_skip": "کھلاڑی {pid} ({piece}) دے پاس کوئی معتبر موو نہیں ہے تے موڑ چھوڑنا پڑے گا۔"
+  },
+  "outcome": {
+    "black_wins": "کالے جیت گئے {black_count}-{white_count}۔",
+    "white_wins": "سفید جیت گئے {white_count}-{black_count}۔",
+    "draw": "{black_count}-{white_count} त्राव करो।"
+  }
+}

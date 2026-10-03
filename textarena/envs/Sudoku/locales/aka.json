@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Wo ne Player {player_id}. Wo reko Sudoku.\nSaa ha yi ne Sudoku grid no mu te. Row biara wɔ number 1 kosi 9, na column biara nso wɔ number 1 kosi 9.\nCells a wɔntumi nnyi wɔ '.' ase, na cells a wɔde digits 1 kosi 9 ahyɛ no mu.\n\nSudoku Grid a wɔde di dwuma seesei:\nWo botae ne sɛ wo de digits 1 kosi 9 bɛhyɛ cells a wɔntumi nnyi wɔ 9x9 grid no mu, sɛ:\n1. Row biara mu wɔ digits 1 kosi 9 nyinaa, na wɔntumi nnyi mprenu.\n2. Column biara mu wɔ digits 1 kosi 9 nyinaa, na wɔntumi nnyi mprenu.\n3. 3x3 subgrids a wɔwɔ no mu biara wɔ digits 1 kosi 9 nyinaa, na wɔntumi nnyi mprenu.\n\nMmara ne Nkyerɛkyerɛ:\n1. **Mma wɔnnsakra** numbers a wɔde maa wɔ grid no mu.\n2. **Mma wɔnhyɛ** cells a wɔntumi nnyi a wɔde '.' ase.\n3. Wo betumi abɔ mu sɛ wopɛ, nanso gyina sɛ w'abɔ no mu wɔ format '[row column number]'.\n4. **Gyina sɛ** w'abɔ no mu mma wɔnnsakra Sudoku mmara. Abɔ a wɔnnsakra no bɛma wɔnhyɛ penalty.\nNhwɛsoɔ:\n- **Abɔ a wɔde tumi**:\n  - Grid Snippet Ansana Abɔ:\n  \n  - Abɔ: `[5 3 7]`\n  - Nkyerɛkyerɛ: Sɛ wɔde 7 bɛhyɛ row 5, column 3 a, ɛno mma wɔnnsakra Sudoku mmara biara.\n\n- **Abɔ a wɔnnsakra** (Sakra cell a wɔde digits ahyɛ mu):\n  - Grid Snippet Ansana Abɔ:\n  \n  - Abɔ: `[1 1 9]`\n  - Nkyerɛkyerɛ: Cell (1,1) wɔ digits 5 ahyɛ mu. Wo mma wɔnsakra.\n\n- **Abɔ a wɔnnsakra** (Sakra Sudoku mmara):\n  - Grid Snippet Ansana Abɔ:\n  \n  - Abɔ: `[1 3 5]`\n  - Nkyerɛkyerɛ: Sɛ wɔde 5 bɛhyɛ row 1, column 3 a, ɛno bɛsakra mmara no, efisɛ 5 wɔ row 1 mu.\n\nAbɔ a w'abɔ no mu ne adwene a wɔwɔ no bɛka sɛ wɔbɔ nneɛma pii. Fa abɔ a w'abɔ no mu sɛ wopɛ, na wɔnnsakra abɔ a w'abɔ no mu. Ɛno bɛboa wo ma wo yɛ nneɛma pii.\n\n"
+  },
+  "board": {
+    "game_board": "Agorɔ a wɔde di agoru: {board}",
+    "board_state": "Adwumayɛbea no man: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nkyerεkyerεmu a enni mu. Agorɔfoɔ {player_id} antumi ammua na ɔde 'row column number' no dii dwuma yie.",
+    "out_of_bounds": "Abɔ a wɔnnsakra. Player {player_id} pɛ sɛ wɔde {num} bɛhyɛ ({row}, {col}), nanso ɛno wɔ bounds no mu.",
+    "overwrite": "Abɔ a wɔnnsakra. Player {player_id} pɛ sɛ wɔsakras cell a wɔde digits ahyɛ mu ({row}, {col}).",
+    "violates_rules": "Abɔ a wɔnnsakra. Player {player_id} pɛ sɛ wɔde {num} bɛhyɛ ({row}, {col}), nanso ɛno bɛsakra Sudoku mmara."
+  },
+  "outcome": {
+    "win": "Anigyesɛm! Agorɔ {player_id} wiee Sudoku mu asɛm no.",
+    "turn_limit": "W'aso ntentan no mu. Woahyehyɛ {percent}% a ɛnni hwee yiye wɔ nkwammoaa biara so."
+  }
+}

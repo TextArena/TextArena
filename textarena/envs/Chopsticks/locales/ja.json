@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "あなたは Chopsticks のプレイヤー {player_id} です。あなたの番になったら、次のいずれかのアクションを選択してください:\n  + 攻撃:  '[attack M O]'  ここで M=自分の手 (0 または 1), O=相手の手 (0 または 1)。\n    - 相手の手の数はあなたの手の数分増加します。5 以上になると 0 になります。\n  + 分割:  '[split L R]'  自分の指の合計を L と R に再分配します (L+R = あなたの合計)。\nこれらのコマンドのいずれかを正確に1つ返信してください。"
+  },
+  "board": {
+    "current_board": "現在のボード:\nプレイヤー 0: {hands_0}\nプレイヤー 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "あなたの手 {my_idx} はすでに死んでいます。",
+    "opp_hand_dead": "相手の手 {opp_idx} はすでに死んでいます。",
+    "split_sum": "分割の合計は {total} でなければなりません。",
+    "split_no_change": "分割は手の配分を変更する必要があります。",
+    "invalid_command": "無効な手です。'[attack M O]' または '[split L R]' を使用してください。"
+  },
+  "game_action": {
+    "attack": "P{player_id} が P{opp_id} の手 {opp_idx} を攻撃: その手の数は {opp_val} から {new_val} に変わります。",
+    "split": "P{player_id} が手を [{L}, {R}] に分割しました。"
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "相手の両手が死んでいます。",
+    "draw": "ターンの制限に達しました。"
+  }
+}

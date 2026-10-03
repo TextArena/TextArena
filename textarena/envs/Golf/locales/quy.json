@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Golf (Karta Pukllay) pukllanayki - Pukara {player_id}.\nWakichikay: Aswan p'unchayuq puntuashunyata q'awaspa, huk ruwaypi.\nIcha k'uska ukhupiqa, p'asñakunaqa 0-man sumakunku.\nKarta Q'ellanakuna: A=1, 2-10=ukhupi, J/Q=10, K=0\n\nRuwachinkuna (k'usqa ruwachinayki):\n- '[draw]' - Q'awaspa k'uska p'akasqamanta\n- '[take]' - Q'usqo p'akasqamanta\n- '[swap X Y]' - Q'awasqa k'usqa X (p'asña) Y (k'uska)wan rantikuspa\n- '[discard]' - Q'awachkay k'usqa"
+  },
+  "board": {
+    "drew": "Qam hurquykanki: {card}\nKunan qam [swap X Y] icha [discard] wakichiy atinki.",
+    "took": "Qam hurquykanki: {card} q'umiraya ukhumanta\nQam [swap X Y] wakichiy atinki (mana q'umirayman wakichiy atiykichu).",
+    "peeked": "Qhawaykita rikurqanki chawpita ({row},{col}): {card}",
+    "turn_view": "Kamaykuna:\n{hand}\nQ'awachkay wasi: {discard}\n{options}",
+    "none": "Mana kanchu."
+  },
+  "options": {
+    "final_turns": "Tukuy ruwaykuna! Kamaykuna: [draw], [take], [peek X Y]",
+    "draw": "Kamaykuna: [draw], [take]",
+    "must_swap": "Qamqa: [swap X Y] (mana atiwaqchu tarpuymanta kartayta ch'usaqyachinaykipaq)",
+    "swap_or_discard": "Kunankama: [swap X Y] icha [discard]"
+  },
+  "hand": {
+    "no_cards": "Mana tarjetakunachu.",
+    "header": "Col: 1 2 3 Qhichwa simipi willakuy.",
+    "row": "P'asña {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Pukllaq {pid} wakichirqan {new} {old} siqi ({row},{col}) ukhupi",
+    "discarded": "Pukllaq {pid} q'umirayman wakichirqan {card}"
+  },
+  "message": {
+    "deck_empty": "Q'uñi qhatunqa, pukllaykuna tukukun.",
+    "knocked": "Pukllaq {pid} wakichirqan! Wakinqa pukllaqkunaqa huk pukllay atiykun.",
+    "final_round": "Pukllakamayuq {pid} {reason}! Wakin pukllakamayuq huk t'urnuwan yapakunku."
+  },
+  "reason": {
+    "all_revealed": "tukuy cartakunata rikuchinchu."
+  },
+  "invalid": {
+    "wrong_action": "Huklla q'umir qillqata wakichi: [draw], [take], [swap X Y], [discard], [knock], icha [peek X Y]",
+    "discard_empty": "¡Manan imapis kanchu!",
+    "must_draw_first": "Q'umirlla [draw], [take], [knock], icha [peek X Y] ruway",
+    "cannot_discard_taken": "Mana atiwaqchu, mana allin tarjetataqa cambianayki tiyan.",
+    "have_drawn_card": "Qam hurqusqa karta qillqayuqmi. Qam [swap X Y] icha [discard] wakichiy atinki.",
+    "need_drawn_swap": "Chaypaqqa cartata churaykunan tiyan.",
+    "need_drawn_discard": "Q'ipita hap'isqa kartata q'illuykichu churakunaykipaq.",
+    "out_of_bounds": "Allin p'asña mana lluqsiyachkachu. P'asña 1-{max_row}, k'uska 1-{max_col}",
+    "knock_with_card": "Mana atiwaqchu, mana tarisqayki cartata churaspa.",
+    "already_knocked": "Huk runa kay t'urnupi llap'inkunataq.",
+    "already_revealed": "Chay cartataqa, ña rikuchishanña."
+  },
+  "summary": {
+    "full": "Pukllay tukukun! Pukllaq {winner} atirqan {score} yupaykunawan!\n\nTukukuypi yupaykuna:\n{scores}",
+    "line": "Pukara {pid}: {score} puntu"
+  },
+  "board_str": {
+    "title": "=== GOLF KAQ YACHAY===",
+    "discard": "Q'ala qhatasqa: {card}",
+    "knocked": "¡Piluta {pid} qaparichkan!",
+    "player_header": "Pukllakamayuq {pid} (Tarjeta: {score}):"
+  }
+}

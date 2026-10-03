@@ -1,0 +1,55 @@
+{
+  "_comment": "Gebruikersgerichte strings voor Liar's Dice. Ingekaderde actietokens ('[Bid: X, Y]', '[Call]'), speler-id's, dobbelsteenwaarden, hoeveelheden en tellingen zijn neutrale slots en mogen nooit worden vertaald.",
+  "_slots": {
+    "player_id": "spelerindex (geheel getal)",
+    "num_players": "aantal spelers in het spel (geheel getal)",
+    "dice_summary": "vooraf gerenderde '; '-samengevoegde tellingen van de overgebleven dobbelstenen per speler",
+    "your_dice": "vooraf gerenderde komma-gescheiden lijst van de dobbelsteenwaarden van deze speler",
+    "p": "spelerindex (geheel getal)",
+    "d": "overgebleven dobbelsteentelling voor die speler (geheel getal)",
+    "current_player_id": "spelerindex die heeft geboden (geheel getal)",
+    "face_value": "dobbelsteenwaarde die wordt geteld (1-6)",
+    "count": "werkelijke aantal overeenkomende dobbelstenen (geheel getal)",
+    "quantity": "bodhoeveelheid (geheel getal)",
+    "loser_id": "spelerindex die een dobbelsteen verliest (geheel getal)",
+    "new_quantity": "zojuist ingediende bodhoeveelheid (geheel getal)",
+    "current_quantity": "huidige bodhoeveelheid (geheel getal)",
+    "new_face_value": "zojuist ingediende dobbelsteenwaarde (geheel getal)",
+    "current_face_value": "huidige dobbelsteenwaarde (geheel getal)",
+    "action": "de onbewerkte actiestring die de speler heeft ingediend",
+    "reason": "een geneste reden voor afwijzing van het bod",
+    "winner": "spelerindex die wint (geheel getal)",
+    "final_ranking": "lijst van spelerindices van eerst geëlimineerd tot winnaar"
+  },
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in een Liar's Dice-spel met {num_players} spelers.\nRegels:\n- Op uw beurt kunt u:\n  1) Een nieuw bod doen met een hogere hoeveelheid of hogere dobbelsteenwaarde (of beide) dan het huidige bod; bijv. '[Bid: 3, 4]',\n  2) Het laatste bod oproepen door '[Call]' in te typen.\n\nAls u oproept:\n  - Als het werkelijke aantal dobbelstenen met die dobbelsteenwaarde onder alle dobbelstenen lager is dan het bod, verliest de laatste bieder een dobbelsteen.\n  - Anders verliest de oproeper een dobbelsteen.\nEen speler die 0 dobbelstenen bereikt, wordt geëlimineerd. De laatst overgebleven speler wint."
+  },
+  "board": {
+    "per_player": "\tSpeler {p}: {d}",
+    "new_round": "\nNieuwe ronde - Overgebleven dobbelstenen: {dice_summary}\nUw huidige dobbelstenen zijn: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Speler {current_player_id} roept! Het werkelijke aantal dobbelstenen met dobbelsteenwaarde {face_value} is {count}, wat LAGER is dan {quantity}.\nSpeler {loser_id} (de laatste bieder) verliest een dobbelsteen.",
+    "caller_loses": "Speler {current_player_id} roept! Het werkelijke aantal dobbelstenen met dobbelsteenwaarde {face_value} is {count}, wat >= {quantity} is.\nSpeler {loser_id} (de oproeper) verliest een dobbelsteen."
+  },
+  "action": {
+    "bid_announce": "Speler {player_id} biedt {quantity} dobbelstenen met dobbelsteenwaarde {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Oproep gedaan zonder eerder bod.",
+    "invalid_bid": "Ongeldig bod: {reason}",
+    "not_recognized": "Actie niet herkend als een geldig '[Bid: X, Y]' of '[Call]'. Ingediende actie: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nieuwe hoeveelheid {new_quantity} is lager dan huidige {current_quantity}.",
+    "face_lower": "Nieuwe dobbelsteenwaarde {new_face_value} is lager dan huidige {current_face_value}.",
+    "identical": "Bod is identiek aan het huidige bod.",
+    "face_range": "Dobbelsteenwaarde moet tussen 1 en 6 liggen."
+  },
+  "message": {
+    "eliminated_invalid": "Speler {player_id} is geëlimineerd door een ongeldige zet."
+  },
+  "outcome": {
+    "win": "Speler {winner} wint! Eindranking: {final_ranking}"
+  }
+}

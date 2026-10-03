@@ -6,7 +6,7 @@ import textarena as ta
 from textarena.envs.TruthAndDeception.renderer import create_board_str
 
 class TruthAndDeceptionEnv(ta.Env):
-    def __init__(self, max_turns: Optional[int]=5, data_path: Optional[str]=None):
+    def __init__(self, max_turns: Optional[int]=6, data_path: Optional[str]=None):
         assert max_turns%2==0, f"Please use an even number of max turns. Current max_turns: {max_turns}"
         self.max_turns = max_turns
         self._load_facts(data_path=data_path)

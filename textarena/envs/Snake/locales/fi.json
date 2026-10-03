@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake-lokaalitiedosto. ÄLÄ käännä avaimia (vasen puoli). Käännä vain arvot (oikea puoli). Säilytä jokainen {placeholder} täsmälleen sellaisenaan.",
+  "_slots": {
+    "{num_players}": "Pelaajien määrä ottelussa",
+    "{width}": "Pelilaudan leveys ruutuina",
+    "{height}": "Pelilaudan korkeus ruutuina",
+    "{max_turns}": "Vuorojen rajoitus ottelussa",
+    "{player_id}": "Pelaajan numero (0-pohjainen)",
+    "{board}": "Renderöity ASCII-ruudukko; pidä neutraalina, älä koskaan käännä sen merkkejä",
+    "{reason}": "Renderöity pelin loppumisen syy",
+    "{groups}": "Neutraali ranking-tieto (lista pelaajaryhmistä, huonoin paras); älä käännä"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-pelaajan Snake {width}×{height}-ruudukolla.\nOhjaat käärmettä {player_id}. Kelpoiset siirrot: '[up]'/'[down]'/'[left]'/'[right]' (tai w/s/a/d).\nTavoite: selviytyä pisimpään tai olla pisimmän ja saada korkein pistemäärä (vuororajoitus {max_turns} vuoroa)."
+  },
+  "board": {
+    "current": "Nykyinen pelilauta:\n{board}",
+    "after_moves": "Nykyinen pelilauta:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Käärme {player_id} kuoli virheellisen siirron vuoksi."
+  },
+  "outcome": {
+    "survived_win": "Pelaaja {player_id} selviytyi; kaikki muut menehtyivät.",
+    "all_dead_simul": "Kaikki käärmeet kuolivat samanaikaisesti.",
+    "outlived": "Pelaaja eli kaikkia muita pidempään.",
+    "all_dead": "Kaikki käärmeet ovat kuolleita.",
+    "turn_limit": "Vuororajoitus saavutettu - paras pistemäärä voittaa tasapelin.",
+    "ranking": "{reason} Lopulliset ranking-ryhmät (huonoin→paras): {groups}"
+  }
+}

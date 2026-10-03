@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Yes el xugador {player_id} en Chopsticks. Nel to tornu, escueyi una de:\n  + Atacar:  '[attack M O]'  onde M=la to mano (0 o 1), O=mano del oponente (0 o 1).\n    - El recuentu de la mano del oponente aumenta cola to mano; si >=5, conviértese en 0.\n  + Estremar:   '[split L R]'  pa redistribuyir los tos deos totales en L y R (L+R = el to total).\nRespuende con esautamente una d'eses órdenes."
+  },
+  "board": {
+    "current_board": "Tableru actual:\nXugador 0: {hands_0}\nXugador 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "La to mano {my_idx} ta muerta.",
+    "opp_hand_dead": "La mano del oponente {opp_idx} yá ta muerta.",
+    "split_sum": "La suma de la división ye {total}.",
+    "split_no_change": "Split debe de cambiar la distribución de les to manes.",
+    "invalid_command": "Movimientu inválidu. Usa “[attack M O]” o “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} ataca la mano de P{opp_id} {opp_idx}: va dende {opp_val} a {new_val}.",
+    "split": "P{player_id} estrema en [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Les dos manos del oponente muertes.",
+    "draw": "El llende de vuelta algamóse."
+  }
+}

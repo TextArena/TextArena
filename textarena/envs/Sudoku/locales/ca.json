@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Ets el Jugador {player_id}. Estàs jugant a Sudoku.\nAquí tens l'estat actual de la quadrícula de Sudoku. Cada fila està numerada de l'1 al 9, i cada columna també està numerada de l'1 al 9.\nLes cel·les buides estan representades per '.', i les cel·les preomplertes contenen dígits de l'1 al 9.\n\nQuadrícula de Sudoku actual:\nEl teu objectiu és omplir les cel·les buides de la quadrícula 9x9 amb dígits de l'1 al 9 de manera que:\n1. Cada fila contingui tots els dígits de l'1 al 9 sense repetició.\n2. Cada columna contingui tots els dígits de l'1 al 9 sense repetició.\n3. Cada una de les nou subquadrícules 3x3 contingui tots els dígits de l'1 al 9 sense repetició.\n\nRegles i instruccions:\n1. **No sobreescrius** els números inicials proporcionats a la quadrícula.\n2. **Només omple** les cel·les buides representades per '.'.\n3. Pots respondre de qualsevol manera que prefereixis, però assegura't que la teva resposta inclogui el format de '[fila columna número]'.\n4. **Assegura't** que el teu moviment no violi les regles de Sudoku. Els moviments invàlids resultaran en penalitzacions.\nExemples:\n- **Moviment vàlid**:\n  - Fragment de quadrícula abans del moviment:\n  \n  - Moviment: `[5 3 7]`\n  - Explicació: Col·locar 7 a la fila 5, columna 3 no viola cap regla de Sudoku.\n\n- **Moviment invàlid** (Sobreescriure una cel·la preomplerta):\n  - Fragment de quadrícula abans del moviment:\n  \n  - Moviment: `[1 1 9]`\n  - Explicació: La cel·la (1,1) ja està omplerta amb 5. No pots sobreescriure-la.\n\n- **Moviment invàlid** (Violació de les regles de Sudoku):\n  - Fragment de quadrícula abans del moviment:\n  \n  - Moviment: `[1 3 5]`\n  - Explicació: Col·locar 5 a la fila 1, columna 3 viola la regla, ja que 5 ja existeix a la fila 1.\n\nL'historial dels teus moviments i pensaments s'afegirà a mesura que juguis més rondes. Utilitza l'historial dels teus moviments per millorar la teva presa de decisions evitant els moviments que has provat. Bona sort!\n\n"
+  },
+  "board": {
+    "game_board": "Tauler de joc:\n{board}",
+    "board_state": "Estat del tauler: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de moviment invàlid. El jugador {player_id} no ha respost amb un 'fila columna número' vàlid.",
+    "out_of_bounds": "Moviment invàlid. El jugador {player_id} ha intentat col·locar {num} a ({row}, {col}), que està fora dels límits.",
+    "overwrite": "Moviment invàlid. El jugador {player_id} ha intentat sobreescriure una cel·la preomplerta ({row}, {col}).",
+    "violates_rules": "Moviment invàlid. El jugador {player_id} ha intentat col·locar {num} a ({row}, {col}), que viola les regles de Sudoku."
+  },
+  "outcome": {
+    "win": "Felicitats! El jugador {player_id} ha completat el trencaclosques de Sudoku.",
+    "turn_limit": "S'ha assolit el límit de torns. Has omplert correctament el {percent}% de les cel·les buides."
+  }
+}

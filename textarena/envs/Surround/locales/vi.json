@@ -1,0 +1,30 @@
+{
+  "_comment": "Tệp ngôn ngữ Surround. KHÔNG được dịch các khóa (bên trái). Chỉ dịch các giá trị (bên phải). Giữ nguyên mọi {placeholder} như hiện tại. KHÔNG dịch các token di chuyển/hướng mà người chơi nhập ([up], [down], [left], [right], w, s, a, d) hoặc bảng ASCII được hiển thị trong {board}.",
+  "_slots": {
+    "{num_players}": "Số lượng người chơi trong trận đấu",
+    "{width}": "Chiều rộng của bàn cờ (số ô)",
+    "{height}": "Chiều cao của bàn cờ (số ô)",
+    "{player_id}": "Số thứ tự của người chơi (bắt đầu từ 0)",
+    "{board}": "Bảng ASCII được hiển thị; giữ trung lập, không dịch các ký tự của nó",
+    "{reason}": "Lý do kết thúc trò chơi được hiển thị",
+    "{groups}": "Dữ liệu xếp hạng trung lập (danh sách các nhóm người chơi, từ tốt nhất đến kém nhất); không dịch"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Người chơi Surround trên lưới {width}x{height}.\nBạn là người chơi {player_id}. Các nước đi hợp lệ: '[up]' '[down]' '[left]' '[right]' hoặc w/s/a/d.\nMục tiêu: sống sót lâu hơn mọi người khác. Dấu vết là nguy hiểm; va chạm vào tường gây chết; va chạm trực diện khiến cả hai chết."
+  },
+  "board": {
+    "current": "Bàn cờ hiện tại:\n{board}",
+    "after_moves": "Bàn cờ sau khi di chuyển đồng thời:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Người chơi {player_id} chết do nước đi không hợp lệ."
+  },
+  "outcome": {
+    "survived_win": "Người chơi {player_id} sống sót; tất cả người chơi khác va chạm.",
+    "all_crashed": "Tất cả người chơi va chạm đồng thời.",
+    "outlived": "Người chơi sống sót lâu hơn tất cả người chơi khác.",
+    "all_dead": "Tất cả người chơi đã chết.",
+    "turn_limit": "Hạn chế lượt đã đạt - người sống sót lâu nhất thắng.",
+    "ranking": "{reason} Xếp hạng cuối cùng (tốt nhất→kém nhất): {groups}"
+  }
+}

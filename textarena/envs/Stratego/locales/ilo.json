@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Sika ti Player {player_id} iti Stratego.\nTi gannuatmo ket ti agkapkapto ti wagayway ti kalabanmo wenno ti paltogan amin dagiti mabalin a yanna dagiti piraso.\nTi buyotmo ket naitinga kadakam iti tabla, mairaman ti wagaywaymo, bomba, ken dadduma pay a piraso ti nadumaduma a ranggo.\n\n### Instruksion ti Panagpukpukaw\n1. **Regla ti Panagpukpukaw:**\n   - Iti tukadmo, mabalinmo a pukpukawan ti maysa a piraso ti maysa a daras iti kaarruba a kuadrado (ngato, baba, kanigid, wenno kawanan) a saan a natagtagin iti pirasomo.\n   - Halimbawa: Ti maysa a piraso mabalin a pukpukawan manipud A1 agingga B1 wenno A1 agingga A2 no B1 ken A2 ket saan a natagtagin iti bukod a pirasomo.\n   - No ti napili a piraso ket bomba wenno wagayway, saan a mabalin a pukpukawan.\n2. **Gubat:**\n   - No pukpukawanmo ti maysa a kuadrado a natagtagin iti piraso ti kalabanmo, agpukpukawanto ti gubat:\n     - Ti piraso a nangatngato a ranggo ti mangabak ken paltogan ti piraso ti kalabanmo.\n     - No agpada ti ranggo, paltogan amin dagiti piraso manipud iti tabla.\n     - **Naisangsangayan a Kaso:**\n       - Dagiti bomba ket paltogan amin dagiti umatak a piraso malaksid ti Miners, a makapukpukaw iti bomba.\n       - Dagiti Spies ket mangabak iti Marshal no ti Spy ti umatak iti immuna ngem paltogan iti amin dadduma a piraso.\n3. **Gannuat a Strategiko:**\n   - Ammuen ti piraso ti kalabanmo babaen ti panagpukpukawda ken gubat.\n   - Salakniban ti wagaywaymo bayat a pukpukawanmo ti wagayway ti kalabanmo.\n   - Usaren dagiti Scouts iti estratehiko a panagpukpukaw tapno makagun-od ka iti impormasion maipanggep ti piraso ti kalabanmo ken umatak kadagiti nakaradkad a piraso.\n\n### Panagpukpukaw ti Maysa a Daras:\n1. Sebali ti koordinado ti piraso a kayatmo a pukpukawan ken ti papananna.\n2. Usaren ti format: [A0 B0], a ti A0 ket ti posisyon ti taudan, ken B0 ket ti papanan.\n   - Halimbawa: Tapno pukpukawan ti maysa a piraso manipud iti daras 0, kolumna 0 agingga daras 1, kolumna 0, ipan iti [A0 B0].\n3. Siguradu a ti papanan ket balido segun iti regla ti panagpukpukaw ngato.\n\n### Naisangsangayan a Nota:\n- Ti tabla ket ipakita ti pirasomo ken ti posisyon da, halimbawa MN, MS.\n- Ti tabla ket ipakita pay ti ammuen a posisyon ti piraso ti kalabanmo a saan a makita ti ranggoda, halimbawa ?.\n- Dagiti grid a ~ ket danaw ken saan a mabalin a pukpukawan.\n- A kas suhestion, rugian ti pukpukawmo babaen ti panagpukpukaw dagiti pirasomo a naitinga iti umuna a linia tapno makagun-od ka iti impormasion maipanggep ti piraso ti kalabanmo. Player 0 ken player 1 ket naitinga iti umuna a linia iti daras D ken G, iti panagsasaruno.\n\nDitoy ket ti agdama a kasasaad ti tabla:\n"
+  },
+  "board": {
+    "current_board": "Agdama a Tabla:\n\n{board}\nMabalin a Daras: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Saan a wasto a pormat iti aksion. Player {player_id} ket saan a nangibaga iti maysa a pagbaliw iti pormat [A0 B0].",
+    "invalid_coordinates": "Saan a maitutop nga action format. Ti agay-ayam {player_id} ket saan a nangipatulod kadagiti husto a koordinada.",
+    "not_own_piece": "Saan a maitutop nga aksion. Ti agay-ayam {player_id} ket masapul nga agtignay iti maysa kadagiti bukodna a piesa.",
+    "scout_through_pieces": "Saan a nasayaat a pormat ti pag-aramid. Ti player {player_id} saan a makamania a iyalis ti scout babaen dagiti sabali a piraso.",
+    "scout_diagonal": "Saan a nasayaat a pormat ti pag-aramid. Ti player {player_id} saan a makamania a iyalis ti scout iti diagonal.",
+    "non_scout_multi_square": "Saan a mabalin ti agtignay. Dagiti piesa, malaksid kadagiti scout, ket mabalinda laeng nga iyakar iti maysa a kuadro tunggal maminsan.",
+    "move_into_lake": "Saan a balido a format ti panagpukpukaw. Player {player_id} saan a mabalin a pukpukawan iti danaw.",
+    "move_onto_own_piece": "Saan a mabalin nga ag-play ti player {player_id} iti bukodna a piesa.",
+    "move_bomb_or_flag": "Saan a nasayaat a pormat ti pag-aramid. Ti player {player_id} saan a makamania a iyalis ti bomba wenno wagayway."
+  },
+  "game_action": {
+    "you_moved": "Nagbaliw ka iti sarito a piraso manipud {source} iti {dest}.",
+    "opponent_moved": "Player {player_id} ket nagbaliw iti maysa a piraso manipud {source} iti {dest}.",
+    "you_equal_ranks": "Nagbaliw ka iti sarito a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti ranggo ket maysa, dagitoy a dua a piraso ket napukaw.",
+    "opponent_equal_ranks": "Player {player_id} ket nagbaliw iti maysa a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti ranggo ket maysa, dagitoy a dua a piraso ket napukaw.",
+    "you_miner_defused": "Nagbaliw ka iti sarito a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti minero ket makadefuse iti bomba, kaadayo ka iti gubat.",
+    "opponent_miner_defused": "Player {player_id} pukpukawan ti maysa a piraso manipud {source} agingga {dest}. Ti umatak a piraso ket {attacking_rank} ken ti papanan a piraso ket {target_rank}. A kas dagiti Miners ket makapukpukaw iti bomba, paltoganmo ti gubat.",
+    "you_bomb_lost": "Nagbaliw ka iti sarito a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti atakante ket saan a minero, kaadayo ka iti gubat.",
+    "opponent_bomb_won": "Ti player {player_id} ket inyalis ti maysa a piraso manipud {source} agingga {dest}. Ti umatak a piraso ket {attacking_rank} ken ti piraso a destinasion ket {target_rank}. Gapu ta ti umatak ket saan a maysa a miner, ikaw ti nangabak iti gubat.",
+    "you_spy_won": "Nagbaliw ka iti sarito a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti atakante ket espia ken ti destinasyon ket marshall, kaadayo ka iti gubat.",
+    "opponent_spy_lost": "Ti player {player_id} ket inyalis ti maysa a piraso manipud {source} agingga {dest}. Ti umatak a piraso ket {attacking_rank} ken ti piraso a destinasion ket {target_rank}. Gapu ta ti umatak ket maysa a spy ken ti destinasion ket maysa a marshall, ikaw ti natalo iti gubat.",
+    "you_higher_won": "Nagbaliw ka iti sarito a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti atakante ket ranggo a nangato ngem ti destinasyon, kaadayo ka iti gubat.",
+    "opponent_higher_lost": "Player {player_id} ket nagbaliw iti maysa a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti atakante ket ranggo a nangato ngem ti destinasyon, kaadayo ka iti gubat.",
+    "you_lower_lost": "Nagbaliw ka iti sarito a piraso manipud {source} iti {dest}. Ti atakeng piraso ket {attacking_rank} ken ti destinasyon a piraso ket {target_rank}. Kas ti atakante ket ranggo a nababa ngem ti destinasyon, kaadayo ka iti gubat.",
+    "opponent_lower_won": "Ti player {player_id} ket inyalis ti maysa a piraso manipud {source} agingga {dest}. Ti umatak a piraso ket {attacking_rank} ken ti piraso a destinasion ket {target_rank}. Gapu ta ti umatak ket mababa a ranggo ngem ti destinasion, ikaw ti nangabak iti gubat."
+  },
+  "outcome": {
+    "flag_captured": "Ti agay-ayam {player_id} ket nakagun-od ti wagayway iti kalaban!",
+    "no_movable_pieces": "Player {winner_id} ket nanalo! Player {loser_id} ket awan iti ania man a piraso a mabalin a maibaliw."
+  }
+}

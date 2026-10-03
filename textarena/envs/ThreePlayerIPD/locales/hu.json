@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos egy 3 játékosos Iterált Fogolydilemmában. A mérkőzés {num_rounds} körből áll.\nKör struktúra:\n• {conv_rounds} szabad beszélgetési forduló\n• 1 döntési forduló - küldjön be egy tokent ellenfélként: '[<opp-id> cooperate]' vagy '[<opp-id> defect]' (pl. '[1 defect] [2 cooperate]'; az alapértelmezett 'együttműködik'). \nPáros fizetési mátrix (alkalmazva minden rendezetlen párra):\n  - Mindketten együttműködnek  ->  {reward}\n  - Mindketten dezertálnak     ->  {punishment}\n  - Ön dezertál, ők együttműködnek -> {temptation}\n  - Ön együttműködik, ők dezertálnak -> {sucker}\nA legmagasabb pontszámot elérő játékos (ok) nyer a körök végén."
+  },
+  "round": {
+    "start": "─── A {round}. kör kezdete ───\tSzabadon beszélgethet a következő {conv_rounds} körben.",
+    "chat_finished": "A beszélgetés véget ért a {round}. körben. Küldje be döntéseit, egy tokent ellenfélként: `[pid cooperate]` vagy `[pid defect]`."
+  },
+  "results": {
+    "header": "### A {round}. kör eredményei:",
+    "pair_line": "{observation}\n\t A {i}. játékos és a {j}. játékos úgy döntött, hogy {choice_i} és {choice_j} (a {i}. játékos {gain_i} pontot, a {j}. játékos {gain_j} pontot szerzett)",
+    "scores_open": "{observation}\n-> Aktuális pontszámok: ",
+    "score_first": "{observation}{player_id}. játékos ({score})",
+    "score_next": "{observation}; {player_id}. játékos ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Végső pontszámok: {scores}.  Rangsorolási csoportok (legrosszabb→legjobb): {groups}"
+  }
+}

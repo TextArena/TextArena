@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "I nih hi Player {player_id} ni e, HighSociety game (2-player version) ah.\nGame flow:  Prestige card 10 te auction vek vek a ni.\nBidding:    Auction zana ah, money card 1-11 zinga pakhat thlang fel a, entir hrawh.\n            • Higher bid chu prestige card a lo dawng a, money card chu a chawlh.\n            • Lower bid chu a money card a nei reng.\n            • Tie -> bid pahnih a let leh, prestige card chungah re-auction a ni.\nScoring:    Auction 10 zinga a tawp ah, **cash dang + prestige points** keng tel.\n            *Net-worth* sang zawk chu a chak (a in ang reng -> draw).\n\n**Action syntax**  →  card pakhat  '[7]' emaw '[11]' emaw bid rawh."
+  },
+  "auction": {
+    "announce": "\n### Zuam {round}/10  |  Lungphun card: {prize}"
+  },
+  "board": {
+    "money_cards": "I pawisa card awm chhunte: {money}"
+  },
+  "invalid_move": {
+    "wrong_format": "[X] pawisa card pakhat chauh a ni.",
+    "card_not_held": "Chu pawisa card chu i nei tawh lo."
+  },
+  "message": {
+    "tie": "Tie - bid kir leh. Rebid rawh!",
+    "auction_result": "P0 chuan {bid0} a bid, P1 chuan {bid1} a bid. Player {winner} chuan prestige {prize} a dawn (total {total})."
+  },
+  "outcome": {
+    "p0_wins": "Neihsak {nw0} > {nw1}",
+    "p1_wins": "Neihsak {nw1} > {nw0}",
+    "draw": "Net-worth {nw0}  exact tie ve tho a ni."
+  }
+}

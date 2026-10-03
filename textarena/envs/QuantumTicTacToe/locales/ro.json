@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} în Quantum Tic Tac Toe.\nSimbolul dvs. este '{symbol}', iar numerele de mutare sunt întotdeauna {parity} (de exemplu, X1, X3 sau O2, O4).\n\nScop: Câștigați prin formarea unei linii de trei marcaje clasice (solidificate din suprapuneri).\n\nCum să jucați:\n- La fiecare tură, plasați o marcă misterioasă în două pătrate goale diferite folosind formatul '[a,b]'.\n- Aceste marcaje sunt încâlcite și etichetate ca 'X1 / X1' sau 'O4 / O4'.\n- Nu puteți plasa marcaje misterioase într-un pătrat care s-a prăbușit deja (solidificat).\n\nRegula de prăbușire:\n- Dacă mutarea dvs. creează un ciclu în graficul de încâlcire, se prăbușește automat.\n- Fiecare marcă misterioasă din ciclu se transformă într-o marcă clasică în una dintre cele două poziții.\n- Orice marcaje misterioase dependente se prăbușesc și ele.\n\nVictoria:\n- Jocul se termină când un jucător are trei marcaje clasice în linie.\n- Dacă ambii jucători obțin o linie în timpul aceleiași prăbușiri, cel cu numărul de mutare maxim mai mic câștigă.\n\nExemplu de mutare: '[0,4]' plasează o marcă misterioasă în celulele 0 și 4."
+  },
+  "board": {
+    "current_board": "Tablă de Quantum Tic Tac Toe:\n\n{board}\n\nTrimiteți mutarea dvs. ca '[a,b]' pentru a plasa o marcă cuantică în două locații."
+  },
+  "invalid_move": {
+    "wrong_format": "Format invalid. Utilizați '[a,b]'.",
+    "invalid_cells": "Indici de celule invalizi sau duplicați.",
+    "already_solidified": "Una dintre celule este deja solidificată."
+  },
+  "game_action": {
+    "placed": "Jucătorul {player_id} a plasat simbolul său într-o suprapunere între celulele {pos_a} și {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Suprapunerea dependentă rezolvată. Celula ({r}, {c}) este acum {symbol}.",
+    "last_cell_resolved": "Suprapunerea pentru ultima celulă rezolvată. Celula ({r}, {c}) este acum {symbol}.",
+    "superposition_resolved": "Suprapunerea rezolvată. Celula ({r}, {c}) este acum {symbol}."
+  },
+  "outcome": {
+    "win": "Jucătorul {player_id} câștigă cu marcaje solidificate!",
+    "draw": "Jocul este o remiză!"
+  }
+}

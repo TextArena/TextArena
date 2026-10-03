@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} v Indickém Pokeru.\n- 52 karet v balíčku; vidíte pouze kartu soupeře.\n- Ante {ante} žeton(ů) v každém kole, celkem {max_rounds} kol.\n- Platné tahy: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X je kladné celé číslo ≤ počtu vašich žetonů.)\n- Nejvyšší skrytá karta vyhrává bank v závěrečné konfrontaci.\n"
+  },
+  "round": {
+    "announce": "### Kolo {current_round}/{max_rounds}\nKarta vašeho soupeře je: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Zadejte přesně JEDNU akci v závorkách, např. '[check]', '[bet 2]', '[call]', '[raise 3]' nebo '[fold]'.",
+    "cannot_check": "Nemůžete [check] - čelíte sázce.",
+    "amount_min": "Částka sázky / zvýšení musí být ≥ 1.",
+    "cannot_bet": "Nemůžete [bet] - musíte [call] / [raise] / [fold].",
+    "nothing_to_call": "Není co call; můžete místo toho [check].",
+    "no_bet_to_raise": "Použijte [bet X] k otevření; není žádná sázka ke zvýšení.",
+    "insufficient": "Nedostatek žetonů pro tuto akci."
+  },
+  "game_action": {
+    "action": "Hráč {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cena {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Vaše možné akce: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Bank {pot} → Hráč {winner}. (Bankrolly P0:{p0}, P1:{p1})",
+    "folded": "Hráč {player_id} složil.",
+    "showdown_win": "Závěrečná konfrontace: {card_win} poráží {card_lose}.",
+    "showdown_tie": "Závěrečná konfrontace skončila remízou: obě {card}. Bank rozdělen – každý obdrží {split}."
+  },
+  "outcome": {
+    "p0_wins": "Hráč 0 vyhrává ({bank0} > {bank1})",
+    "p1_wins": "Hráč 1 vyhrává ({bank1} > {bank0})",
+    "draw": "Rovné žetony po všech kolech"
+  }
+}

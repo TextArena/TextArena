@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Nun hai cartes.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Un xugador contra'l crupier\n\n📖 RESUMEN DEL XUEGU:\n• Empieces con {start_chips} fiches\n• Baraxa única de 52 cartes (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Xuegues contra'l crupier (casa)\n• Cada ronda sigue la estructura d'Ultimate Texas Hold'em: publicas apuestes de ANTE y CIEGA, recibes 2 cartes de bazuca, decides sobre apuestes de XUEGU opcionales nes fases de apuesta, y depués revelas les cartes comunes y comparas la to meyor mano de 5 cartes cola del crupier. El to oxetivu ye maximizar les tos ganancies (cuando tienes la meyor mano), mientres minimizas les tos perdes (cuando tienes la peor mano).\n• El xuegu termina cuando llegues a 0 fiches o menos al entamu de la ronda (DERROTA) o completes 1000 rondes con fiches (VICTORIA)\n\n💰 ESTRUCTURA DE APUESTES:\n• ANTE: Apuesta obligatoria de ${ante} cada ronda\n• CIEGA: Apuesta obligatoria de ${ante} cada ronda\n• XUEGU: Apuesta opcional mientres el xuegu. A lo llargo de la ronda, puedes escoyer NAMÁS UNA de les siguientes: (${ante4} si se fai en PRE-FLOP, ${ante2} si se fai en FLOP, o ${ante} si se fai en RIVER. Tamién puedes doblar en river, arrenunciando a la mano, y ensin faer nenguna apuesta.)\n\n🎴 REPARTU DE CARTES:\n• Recibes 2 cartes boca arriba (les tos cartes de bazuca)\n• El crupier recibe 2 cartes boca abaxo (ocultes pa ti)\n• 5 cartes comunes son repartíes boca abaxo inicialmente\n• Les cartes comunes son revelaes progresivamente a lo llargo de les fases del xuegu\n\n🏆 CALIFICACIÓN DEL CRUPIER:\n• El crupier debe tener a lo menos un PAR (2 cartes del mesmu rangu) pa calificar, utilizando les 2 cartes de la so mano y les 5 cartes comunes.\n• La calificación del crupier afecta a les resultaos de les apuestes, como se va esplicar más tarde.\n\n🎮 FASES DEL XUEGU Y ACCIONES:\n📋 PRE-FLOP:\n  • Aiciones: [4x] (${ante4}) o [check]\n  • [4x]: Fai una apuesta de XUEGU de ${ante4}, revela les primeres 3 cartes comunes\n  • [check]: Nun faigas nenguna apuesta adicional, revela les primeres 3 cartes comunes\n\n📋 FLOP:\n  • Si se fizo una apuesta de 4x: Namái [skip] disponible (revela automáticamente les últimes 2 cartes comunes)\n  • Si nun se fizo una apuesta de 4x: [2x] (${ante2}) o [check]\n  • [2x]: Fai una apuesta de XUEGU de ${ante2}, revela les últimes 2 cartes comunes\n  • [check]: Nun faigas nenguna apuesta adicional, revela les últimes 2 cartes comunes\n\n📋 RIVER:\n  • Si se fizo una apuesta de 4x o 2x: Namái [skip] disponible (pasa automáticamente a la siguiente fase)\n  • Si nun se fizo nenguna apuesta de XUEGU: [1x] (${ante}) o [fold]\n  • [1x]: Fai una apuesta de XUEGU de ${ante}, pasa a la siguiente fase\n  • [fold]: Arrenuncia a la mano, pierdes les apuestes de ANTE y CIEGA\n\n📋 SHOWDOWN:\n  • Toles cartes son revelaes y evaluaes\n  • La meyor mano de 5 cartes de les 7 cartes (2 de bazuca + 5 comunes)\n  • Les apuestes son resueltes según les regles de pagu\n\n💎 PAGOS DE APUESTES:\n📊 APUESTA DE ANTE:\n  • El crupier nun califica: EMPATE (apuesta devuelta)\n  • El crupier califica y tu ganas: 1:1 (apuesta + ganancies)\n  • El crupier califica y tu pierdes: Apuesta perdida\n  • Empate: EMPATE (apuesta devuelta)\n\n📊 APUESTA DE CIEGA:\n  • Nun ye afeutada pola calificación del crupier\n  • Tu ganas: Apuesta devuelta y pagu adicional según la fuercia de la to mano\n  • Tu pierdes: Apuesta perdida\n  • Empate: EMPATE (apuesta devuelta)\n\n📊 TABLA DE PAGOS DE CIEGA:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Menos que Straight: Nun hai pagu adicional\n\n📊 APUESTA DE XUEGU:\n  • Nun ye afeutada pola calificación del crupier\n  • Comparanza direuta: La to meyor mano contra la meyor mano del crupier\n  • Tu ganas: 1:1 (apuesta + ganancies)\n  • Tu pierdes: Apuesta perdida\n  • Empate: EMPATE (apuesta devuelta)\n\n🎯 CLASIFICACIÓN DE MANOS DE PÓKER (De meyor a peor):\n  1. Royal Flush: A-K-Q-J-10 del mesmu palu\n  2. Straight Flush: 5 cartes consecutives del mesmu palu\n  3. Four of a Kind: 4 cartes del mesmu rangu\n  4. Full House: 3 del mesmu rangu + 2 del mesmu rangu\n  5. Flush: 5 cartes del mesmu palu\n  6. Straight: 5 cartes consecutives\n  7. Three of a Kind: 3 cartes del mesmu rangu\n  8. Two Pair: 2 pares de rangos diferentes\n  9. One Pair: 2 cartes del mesmu rangu\n  10. High Card: La carta más alta gana\n\n⌨️ COMANDOS DE ACCIÓN:\n• [4x] o [play bet 4x]: Fai una apuesta de XUEGU de ${{self.ante_amount*4}}\n• [2x] o [play bet 2x]: Fai una apuesta de XUEGU de ${{self.ante_amount*2}}\n• [1x] o [play bet 1x]: Fai una apuesta de XUEGU de ${{self.ante_amount*1}}\n• [check] o [c]: Comprueba (nun faigas nenguna apuesta adicional)\n• [fold] o [f]: Dobla (arrenuncia a la mano)\n• [skip] o [s]: Salta a la siguiente fase (cuando nun hai nenguna aición necesaria)\n\n💡 CONSEYOS DE ESTRATÉGIA:\n• Les manes fuertes de partida (pares, cartes altes) xustifiquen apuestes de 4x\n• Considera la calificación del crupier - les manes débiles pueden empatar si'l crupier nun califica\n• La apuesta de CIEGA puede ser bien rentable con manes fuertes (Royal Flush = 500:1!)\n• ¡Vixila'l to montón de fiches! Si baxa a 0 o menos al entamu de la ronda, pierdes.\n\n⚠️  NOTES IMPORTANTES:\n• Les apuestes de ANTE y CIEGA son obligatories cada ronda\n• Les apuestes de XUEGU son opcionales y estratéxiques\n• Asegúrate de qu'introduzcas la aición correcta, y namái una aición al empar.\n\n",
+    "state": "🎯 RONDA {round}\n💰 Fiches: {chips}\n🎴 La to mano: {hand}\n📊 Apuestes actuales: Ante ${ante}, Ciega ${blind}, Xuegu ${play}\n📋 Fase: {phase}\n🎯 Aiciones disponibles: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Ronda {round} empecipiada! Apuestes: ANTE ${ante}, CIEGA ${blind}. Tienes {chips} fiches restantes.",
+    "your_hand": "La so mano: {hand}",
+    "flop_revealed": " FLOP revelado: {cards}",
+    "river_revealed": "🃏 RIVER reveláu: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Acción inválida pa la fase actual. {available} Aciones disponibles:",
+    "message": "❌ Aición inválida! Aiciones disponibles: {available}"
+  },
+  "action": {
+    "folded": "🃏 Doblaste."
+  },
+  "showdown": {
+    "dealer_hand": "La mano del repartidor: {cards}",
+    "community_cards": " Tarxetes comunitaries: {cards}",
+    "player_best": "🎴 La meyor mano del xugador: {name} ({cards})",
+    "dealer_best": "🎴 La meyor mano del crupier: {name} ({cards})",
+    "ante_lost_folded": "❌ Apuesta ANTE PERDIDA! -${ante} (retiráu)",
+    "blind_lost_folded": "❌ Apuesta CIEGA PERDIDA! -${blind} (retiráu)",
+    "ante_won": "✅ ANTE apuesta GANADA! +${amount}",
+    "ante_pushed": " ANTE apuesta PUSHED! ${ante} devuelta.",
+    "ante_lost": "❌ Apuesta de ANTE PERDIDA! -${ante}",
+    "blind_won": "✅ ¡Ganó la apuesta de ciegos! +${amount}",
+    "blind_pushed": " ¡Puxada la apuesta ciega! ${blind} devuelta.",
+    "blind_lost": "❌ Apuesta de CIEGA PERDIDA! -${blind}",
+    "play_won": "✅ Apuesta PLAY GANADA! +${amount}",
+    "play_pushed": " PLAY apuesta PUSHED! ${play} devueltu.",
+    "play_lost": "❌ Apuesta PLAY PERDIDA! -${play}",
+    "net_gain": "🎉 Ronda {round} completada! Ganancia neta: +${net}",
+    "net_loss": "💸 Ronda {round} completada! Pérdida neta: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 XUEGU REMATÓ! {max_turns} rondes completes. Tienes ${chips} fiches - GANAS!",
+    "game_over_lose": "🏁 XUEGU TERMINÁU! Te quedasti ensin fiches. ¡El crupier gana!",
+    "reward_win": "Xugador completó {winner_rounds} rondes con ${chips} fiches",
+    "reward_lose": "El xugador quedó ensin fiches na ronda {round}.",
+    "reward_win_max": "Xugador completó {max_turns} rondes con ${chips} fiches"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Cuatro d'una sola especie.",
+    "full_house": "La casa llena.",
+    "flush": "La so temperatura ye de -10 °C.",
+    "straight": "Esti ye'l mio.",
+    "three_of_a_kind": "Tres d'una sola especie.",
+    "two_pair": "Dos pares.",
+    "one_pair": "Un par.",
+    "high_card": "La carta alta.",
+    "unknown": "La mano desconocida."
+  }
+}

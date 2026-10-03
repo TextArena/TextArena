@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Mai kunnawa kewaye da grid {width}x{height} kai dan wasa ne {player_id}. Matsayi mai inganci: '[up]' '[down]' '[left]' '[right]' ko w / s / a / d. Manufa: tsira da kowa. Hanyoyi suna da lahani; ganuwar ta kashe; faduwar kai tsaye ta kashe duka biyun."
+  },
+  "board": {
+    "current": "Kwamitin yanzu: {board}",
+    "after_moves": "Kwamitin bayan motsawa lokaci guda: {board}"
+  },
+  "game_action": {
+    "invalid_death": "Mai kunnawa {player_id} ya mutu saboda ƙaura mara inganci."
+  },
+  "outcome": {
+    "survived_win": "Mai kunnawa {player_id} ya tsira; duk wasu sun yi hadari.",
+    "all_crashed": "Dukkan 'yan wasan sun yi hadari a lokaci guda.",
+    "outlived": "Mai kunnawa ya rayu fiye da sauran.",
+    "all_dead": "Dukkan 'yan wasa sun mutu.",
+    "turn_limit": "An kai iyakar juyawa - wanda ya fi tsayi ya yi nasara.",
+    "ranking": "{reason} Ƙungiyoyin matsayi na ƙarshe (mafi kyau→mafi muni): {groups}"
+  }
+}

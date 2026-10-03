@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Estás xogando ao xogo Buscaminas.\nO obxectivo do xogo é revelar todas as celas que non conteñen minas.\nPara facer un movemento, simplemente especifica as coordenadas de fila e columna que queres revelar usando o formato:\n- `[row col]`: Revela a cela na fila e columna especificadas.\nPor exemplo:\n- `[3 2]` para revelar a cela na Fila 3, Columna 2.\n- `[5 6]` para revelar a cela na Fila 5, Columna 6.\nNo teu primeiro movemento, revelarás unha área ao redor da cela que elixas para asegurar un comezo seguro.\nO deseño actual do taboleiro móstrase abaixo. As celas que non están reveladas están representadas por un punto ('.'), os números revelados mostran a conta de minas adxacentes.\nTen coidado de non elixir celas xa reveladas.\nAquí está o deseño actual do taboleiro:\n"
+  },
+  "board": {
+    "game_board": "Taboleiro do xogo:\n\n{board}",
+    "current_board": "Taboleiro actual:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Non respondiches con coordenadas válidas entre corchetes.",
+    "out_of_bounds": "As coordenadas de fila e columna especificadas están fóra dos límites.",
+    "already_revealed": "A cela en ({row}, {col}) xa foi revelada.",
+    "hit_mine": "Golpeaches unha mina en ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Revelaches a cela en ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Parabéns! Despejaches con éxito o taboleiro de Buscaminas.",
+    "turn_limit": "O límite de quendas foi alcanzado. Despejaches con éxito o {percent}% das celas seguras."
+  }
+}

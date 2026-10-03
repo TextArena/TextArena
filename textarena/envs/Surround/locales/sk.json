@@ -1,0 +1,30 @@
+{
+  "_comment": "Súbor lokalizácie Surround. NEPREKLADAJTE kľúče (ľavá strana). Prekladajte iba hodnoty (pravá strana).",
+  "_slots": {
+    "{num_players}": "Počet hráčov v zápase",
+    "{width}": "Šírka dosky v bunkách",
+    "{height}": "Výška dosky v bunkách",
+    "{player_id}": "Číslo hráča (0-založené)",
+    "{board}": "Vykreslená ASCII mriežka; zachovajte neutrálne, nikdy neprekladajte jej znaky",
+    "{reason}": "Vykreslená hláška dôvodu konca hry",
+    "{groups}": "Neutrálny rebríček (zoznam skupín hráčov, od najlepšieho po najhorší); neprekladajte"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-hráčov Surround na {width}x{height} mriežke.\nSte hráč {player_id}. Platné ťahy: '[up]' '[down]' '[left]' '[right]' alebo w/s/a/d.\nCieľ: prežiť všetkých ostatných. Chvosty sú smrteľné; nárazy do steny zabíjajú; čelné zrážky zabíjajú obidvoch."
+  },
+  "board": {
+    "current": "Aktuálna doska:\n{board}",
+    "after_moves": "Doska po simultánnych ťahoch:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Hráč {player_id} zomrel kvôli neplatnému ťahu."
+  },
+  "outcome": {
+    "survived_win": "Hráč {player_id} prežil; všetci ostatní sa zrazili.",
+    "all_crashed": "Všetci hráči sa zrazili súčasne.",
+    "outlived": "Hráč prežil všetkých ostatných.",
+    "all_dead": "Všetci hráči sú mŕtvi.",
+    "turn_limit": "Bol dosiahnutý limit ťahov - najdlhšie preživší hráč vyhráva.",
+    "ranking": "{reason} Konečné rebríčkové skupiny (od najlepšieho po najhorší): {groups}"
+  }
+}

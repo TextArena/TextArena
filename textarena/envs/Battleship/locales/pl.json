@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Jesteś Graczem {player_id}. Grajesz w grę Battleship.\nTwoim celem jest zatopienie wszystkich statków przeciwnika, zanim on zatopi twoje.\nW swojej turze możesz wystrzelić pociski w określone współrzędne w następującym formacie: '[a4]'. Jeśli pocisk trafi w statek, zostanie oznaczony 'X'. Jeśli chybi, zostanie oznaczony 'O'. W obu przypadkach środowisko gry poinformuje cię o trafieniach. Jeśli zatopiłeś statek, środowisko gry powiadomi cię o tym!\nGra kończy się, gdy wszystkie statki jednego gracza zostaną zatopione.\nTwoja początkowa plansza pokaże wszystkie twoje statki umieszczone i trafienia przeciwnika w ciebie, a także twoje trafienia i pudła na planszy przeciwnika bez pokazywania statków przeciwnika.\nOto początkowa plansza:\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Gracz nie odpowiedział prawidłowymi współrzędnymi w nawiasach kwadratowych.",
+    "out_of_board": "Współrzędna {coord} znajduje się poza planszą.",
+    "already_fired": "Współrzędna {coord} została już ostrzelana."
+  },
+  "game_action": {
+    "you_sunk": "Zatopiony! Zatopiłeś statek w {coord}! Twoja zaktualizowana plansza:\n{view}",
+    "opp_sunk": "Przeciwnik zatopił twój statek w {coord}! Twoja zaktualizowana plansza:\n{view}",
+    "you_hit": "Trafiony! Trafiłeś statek w {coord}! Twoja zaktualizowana plansza:\n{view}",
+    "opp_hit": "Przeciwnik trafił twój statek w {coord}! Twoja zaktualizowana plansza:\n{view}",
+    "you_miss": "Pudło! Chybione trafienie w statek w {coord}! Twoja zaktualizowana plansza:\n{view}",
+    "opp_miss": "Przeciwnik chybił twój statek w {coord}! Twoja zaktualizowana plansza:\n{view}"
+  },
+  "outcome": {
+    "win": "Gracz {player_id} zatopił wszystkie statki przeciwnika!"
+  }
+}

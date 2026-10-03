@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Willkommen bei Lights Out! Du hast ein {size}×{size}-Raster aus Lichtern.\nDein Ziel ist es, ALLE Lichter AUSZUSCHALTEN (dargestellt durch '.').\nWenn du ein Licht drückst, wird sein Zustand sowie der Zustand seiner direkt benachbarten Lichter umgeschaltet (oben/unten/links/rechts).\nGib [row col] ein, um ein Licht zu drücken (0-basiert, der gültige Bereich ist also 0-{max_index}).\nDu hast bis zu {max_turns} Züge, um das Puzzle zu lösen.\nLegende: 'O' = Licht AN, '.' = Licht AUS"
+  },
+  "board": {
+    "current_state": "Aktueller Rasterzustand (Zug {moves_made}, {moves_left} Züge verbleiben, {completion}% abgeschlossen):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "Die Aktion muss das Format [row col] haben, wobei row und col ganze Zahlen von 0 bis {max_index} sind.",
+    "out_of_range": "Die Koordinaten müssen zwischen 0 und {max_index} liegen. Du hast [{row},{col}] eingegeben."
+  },
+  "outcome": {
+    "win": "Glückwunsch! Du hast das Puzzle in {moves_used} Zügen gelöst!",
+    "loss": "Spiel vorbei! Du hast alle {max_turns} Züge verbraucht, ohne das Puzzle zu lösen. Endgültiger Fertigstellungsgrad: {completion}%\nEndzustand:\n{grid}"
+  }
+}

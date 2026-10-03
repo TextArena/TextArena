@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Uyimdlali {player_id} kwi-Tic Tac Toe yeethu eMdlali ezintathu.\nIsithombe sakho sithi '{symbol}'.\nUvula imizuzu yokwenza isithombe sakho kwenkqubo yama-5x5 ukwenzela uluhlu oluqaqa oluqaqa.\nOluhlu lunokwenzeka ngokwezintlobo, ngokwempu, nangokwezicaphelo.\nNikela umovo wakho ngendlela '[4]' ukumka iceli yenombolo 4."
+  },
+  "board": {
+    "current_board": "Bhoja Eliyingo:\n\n{board}\n\nIimovo Ezikhethekileyo: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ifomathi yokunyusa engekho semthethweni. Sebenzisa '[cell]' apho iseli ingu-0-{max_cell} .",
+    "out_of_range": "Inombolo yeceli engahalali: {cell}. Ingakufuneka ibe phakathi kwama-0 na {max_cell}.",
+    "already_occupied": "Iseli {cell} sele igcwele.",
+    "made_invalid": "Umdlali {player_id} wenze intshukumo engekho mthethweni"
+  },
+  "game_action": {
+    "placed": "Mdlali {player_id} uqhaqa isithombe sakhe ({symbol}) kwiqhina ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Mdlali {player_id} ({symbol}) ushaye!",
+    "draw": "Umdlalo uyafana!"
+  }
+}

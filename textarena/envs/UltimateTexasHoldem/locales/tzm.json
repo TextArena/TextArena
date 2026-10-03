@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "ⵓⵔ ⵜⵍⵍⵉ ⴽⵔⴰ ⵏ ⵜⵡⵍⴰⴼⵜ.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Imɣuren d-azwel vs Dealer\n\n📖 AḍRIS N UḌRIS:\n• Tazwara s {start_chips} ikarḍiyen\n• Kuẓ n tikkelt n yikarḍiyen (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Imɣuren d-azwel vs Dealer (axxam)\n• Kuẓ n tikkelt n tuneggarut tazwara: tazwara n ANTE d BLIND, tazwara n 2 ikarḍiyen, taneggarut n PLAY, taneggarut n yikarḍiyen n yidrimen, d-azwel n yikarḍiyen n yimɣuren d-azwel. Aɣilif n imɣuren d-azwel ad yili d-azwel n yikarḍiyen n yimɣuren d-azwel.\n• Tazwara n uḍris tazwara tettaɣ imɣuren d-azwel ad yaweḍ 0 ikarḍiyen neɣ ad yili d-azwel n yikarḍiyen n yimɣuren d-azwel.\n\n💰 AḍRIS N YIDRIMEN:\n• ANTE: Yidrimen ${ante} yal tuneggarut\n• BLIND: Yidrimen ${ante} yal tuneggarut\n• PLAY: Yidrimen i yellan deg uḍris n yikarḍiyen. Kuẓ n tikkelt n yidrimen i yellan: (${ante4} ɣef PRE-FLOP, ${ante2} ɣef FLOP, neɣ ${ante} ɣef RIVER. Yebɣa ad yili d-azwel n yikarḍiyen n yimɣuren d-azwel.)\n\n🎴 AḍRIS N YIKARḌIYEN:\n• Tazwara n 2 ikarḍiyen (yikarḍiyen n tazwara)\n• Dealer tazwara n 2 ikarḍiyen (yikarḍiyen n yimɣuren d-azwel)\n• 5 ikarḍiyen n yidrimen tazwara\n• Yikarḍiyen n yidrimen tazwara deg uḍris n yikarḍiyen\n\n🏆 AḍRIS N YIDRIMEN N DEALER:\n• Dealer iɣil ad yili d-azwel n yikarḍiyen n yimɣuren d-azwel, s-azwel n yikarḍiyen n yimɣuren d-azwel d-azwel n yikarḍiyen n yidrimen.\n• Aḍris n yidrimen n Dealer iɣil ad yili d-azwel n yikarḍiyen n yimɣuren d-azwel.\n\n🎮 AḍRIS N YIKARḌIYEN & TAZWARA:\n📋 PRE-FLOP:\n  • Tazwara: [4x] (${ante4}) neɣ [check]\n  • [4x]: Tazwara ${ante4} PLAY, tazwara n 3 ikarḍiyen n yidrimen\n  • [check]: Ulac tazwara, tazwara n 3 ikarḍiyen n yidrimen\n\n📋 FLOP:\n  • ɣef 4x tazwara: [skip] i yellan (tazwara n yikarḍiyen n yidrimen)\n  • ɣef ulac 4x tazwara: [2x] (${ante2}) neɣ [check]\n  • [2x]: Tazwara ${ante2} PLAY, tazwara n yikarḍiyen n yidrimen\n  • [check]: Ulac tazwara, tazwara n yikarḍiyen n yidrimen\n\n📋 RIVER:\n  • ɣef 4x neɣ 2x tazwara: [skip] i yellan (tazwara n yikarḍiyen n yidrimen)\n  • ɣef ulac PLAY tazwara: [1x] (${ante}) neɣ [fold]\n  • [1x]: Tazwara ${ante} PLAY, tazwara n yikarḍiyen n yidrimen\n  • [fold]: Tazwara n yikarḍiyen n yimɣuren d-azwel, tazwara n yidrimen\n\n📋 SHOWDOWN:\n  • Yikarḍiyen n yidrimen tazwara d-azwel\n  • Aḍris n yikarḍiyen n yimɣuren d-azwel\n  • Yidrimen n yikarḍiyen n yimɣuren d-azwel\n\n💎 AḍRIS N YIDRIMEN:\n📊 ANTE:\n  • Dealer ur iɣil ad yili d-azwel n yikarḍiyen n yimɣuren d-azwel: PUSH (yidrimen tazwara)\n  • Dealer iɣil ad yili d-azwel n yikarḍiyen n yimɣuren d-azwel & imɣuren d-azwel iɣil ad yaweḍ: 1:1 payout (yidrimen + yidrimen)\n  • Dealer iɣil ad yili d-azwel n yikarḍiyen n yimɣuren d-azwel & imɣuren d-azwel ur iɣil ad yaweḍ: Yidrimen tazwara\n  • Tie: PUSH (yidrimen tazwara)\n\n📊 BLIND:\n  • Ur iɣil ad yili d-azwel n yikarḍiyen n yimɣuren d-azwel\n  • Imɣuren d-azwel iɣil ad yaweḍ: Yidrimen tazwara d-azwel n yidrimen\n  • Imɣuren d-azwel ur iɣil ad yaweḍ: Yidrimen tazwara\n  • Tie: PUSH (yidrimen tazwara)\n\n📊 BLIND PAY TABLE:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Ulac yidrimen\n\n📊 PLAY:\n  • Ur iɣil ad yili d-azwel n yikarḍiyen n yimɣuren d-azwel\n  • Taneggarut n yikarḍiyen n yimɣuren d-azwel vs Dealer\n  • Imɣuren d-azwel iɣil ad yaweḍ: 1:1 payout (yidrimen + yidrimen)\n  • Imɣuren d-azwel ur iɣil ad yaweḍ: Yidrimen tazwara\n  • Tie: PUSH (yidrimen tazwara)\n\n🎯 AḍRIS N YIKARḌIYEN N POKER (Aḍil d-azwel):\n  1. Royal Flush: A-K-Q-J-10 n yikarḍiyen n yimɣuren d-azwel\n  2. Straight Flush: 5 ikarḍiyen n yimɣuren d-azwel\n  3. Four of a Kind: 4 ikarḍiyen n yimɣuren d-azwel\n  4. Full House: 3 ikarḍiyen n yimɣuren d-azwel + 2 ikarḍiyen n yimɣuren d-azwel\n  5. Flush: 5 ikarḍiyen n yimɣuren d-azwel\n  6. Straight: 5 ikarḍiyen n yimɣuren d-azwel\n  7. Three of a Kind: 3 ikarḍiyen n yimɣuren d-azwel\n  8. Two Pair: 2 ikarḍiyen n yimɣuren d-azwel\n  9. One Pair: 2 ikarḍiyen n yimɣuren d-azwel\n  10. High Card: Aḍris n yikarḍiyen n yimɣuren d-azwel\n\n⌨️  TAZWARA N YISALEN:\n• [4x] neɣ [play bet 4x]: Tazwara ${{self.ante_amount*4}} PLAY\n• [2x] neɣ [play bet 2x]: Tazwara ${{self.ante_amount*2}} PLAY\n• [1x] neɣ [play bet 1x]: Tazwara ${{self.ante_amount*1}} PLAY\n• [check] neɣ [c]: Check (ulac tazwara)\n• [fold] neɣ [f]: Fold (tazwara n yikarḍiyen n yimɣuren d-azwel)\n• [skip] neɣ [s]: Skip (tazwara n yikarḍiyen n yidrimen)\n\n💡 AḍRIS N YISALEN:\n• Aḍris n yikarḍiyen n tazwara iɣil ad yili d-azwel n yidrimen\n• Aḍris n yikarḍiyen n yimɣuren d-azwel iɣil ad yili d-azwel n yidrimen\n• BLIND iɣil ad yili d-azwel n yidrimen s-azwel n yikarḍiyen n yimɣuren d-azwel\n• Aḍris n yikarḍiyen n yimɣuren d-azwel! ɣef 0 neɣ ad yili d-azwel n yikarḍiyen n yimɣuren d-azwel, imɣuren d-azwel ur iɣil ad yaweḍ.\n\n⚠️  AḍRIS N YISALEN:\n• ANTE d BLIND iɣil ad yili d-azwel n yidrimen yal tuneggarut\n• PLAY iɣil ad yili d-azwel n yidrimen s-azwel n yikarḍiyen n yimɣuren d-azwel\n• Aḍris n yisalen, d-azwel n yisalen i yellan.\n\n",
+    "state": "🎯 TUNEGGARUT {round}\n💰 Ikariḍiyen: {chips}\n🎴 Aḍris n yikarḍiyen: {hand}\n📊 Yidrimen n tazwara: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Taneggarut: {phase}\n🎯 Tazwara n yisalen: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Tuneggarut {round} tazwara! Yidrimen: ANTE ${ante}, BLIND ${blind}. {chips} ikariḍiyen i yellan.",
+    "your_hand": " ⵜⴰⴳⴰⴼⵜ ⵏⵏⴽ: {hand}",
+    "flop_revealed": " FLOP ⵉⴼⴼⵖ: {cards}",
+    "river_revealed": " RIVER ⵉⴼⴼⵖ: {cards}"
+  },
+  "invalid_move": {
+    "reason": "ⵜⵉⴳⴰⵡⵜ ⵓⵔ ⵜⵓⵙⵍⵉⴳⵏ ⵉ ⵜⵙⴽⴼⵍⵜ ⵏ ⵖⵉⵍ ⴰⴷ. ⵜⵉⵎⴳⴳⵉⵜⵉⵏ ⵉⵍⵍⴰⵏ: {available}",
+    "message": " ⵜⴰⵖⵓⵔⵉ ⵓⵔ ⵜⵓⵙⵍⵉⴷ! ⵜⵉⴳⴰⵡⵉⵏ ⵉⵍⵍⴰⵏ: {available}"
+  },
+  "action": {
+    "folded": " ⵜⵙⵙⴰⵖⵜ."
+  },
+  "showdown": {
+    "dealer_hand": " ⵙⵓⴷⴰⵓⵏ! ⵜⴰⴳⴰⴼⵜ ⵏ ⵓⵎⵙⴱⴹⴰ: {cards}",
+    "community_cards": " ⵜⴰⴽⴰⵕⴹⴰ ⵏ ⵜⴳⵔⴰⵡⵜ: {cards}",
+    "player_best": "🎴 Aḍris n yikarḍiyen n imɣuren d-azwel: {name} ({cards})",
+    "dealer_best": "🎴 Aḍris n yikarḍiyen n Dealer: {name} ({cards})",
+    "ante_lost_folded": " ⴰⵏⵜⴻ ⴱⴰⵛⴻⵏ ⵜⵀⴻⵔ! -${ante} (ⴼⵓⵍⴷ)",
+    "blind_lost_folded": " ⵜⴰⴳⴳⴰⵢⵜ ⵏ ⵡⴰⵔⵔⴰⵜⵏ ⵜⵔⵡⵙ! -${blind} (ⵜⵉⴽⵍⵉ)",
+    "ante_won": "✅ ⴰⵏⵜⵢ ⴱⵓⵜ ⵡⵓⵏ! +${amount}",
+    "ante_pushed": " ANTE bet PUSHED! ${ante} ⵉⴽⴽⴰ ⵜⵜ ⵢⵓⵔⴰⵔ.",
+    "ante_lost": " ⴰⵏⵜⴻ ⴱⴰⵛ ⴰⴱⵓ ⵍⵓⵙ! -${ante}",
+    "blind_won": "✅ ⵜⴰⴳⴳⴰⵢⵜ ⵏ ⵡⴰⵔⵔⴰⵜⵏ ⵜⵔⵏⴰ! +${amount}",
+    "blind_pushed": " ⵜⴰⴳⴳⴰⵢⵜ ⵏ ⵡⴰⵔⵔⴰⵜⵏ ⵜⵓⵙⴷⵉⴷ! ${blind} ⵉⵜⵜⵡⴰⵍⴰ.",
+    "blind_lost": " ⴰⵛⵏⵢⴰⵍ ⵏ ⵡⴰⵔⵔⴰⵜⵏ ⵉⵅⵡⴰⵏ! -${blind}",
+    "play_won": "✅ Tuccda n PLAY ira! +${amount}",
+    "play_pushed": " PLAY bet PUSHED! ${play} ⵉⵜⵜⵓⵙⵏⴼⵍⵓⵍⵏ",
+    "play_lost": " ⵙⵙⵓⵔⴼ ⵏ ⵓⵛⵏⵢⴰⵍ ⵉⵔⵡⵍ! -${play}",
+    "net_gain": "🎉 Tuneggarut {round} tazwara! Aḍris n yikarḍiyen: +${net}",
+    "net_loss": "💸 Tuneggarut {round} tazwara! Aḍris n yikarḍiyen: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 TAZWARA TAZWARA! {max_turns} tuneggarut tazwara. {chips} ikariḍiyen i yellan - IMƔUREN D-AZWEL Iɣil ad yaweḍ!",
+    "game_over_lose": " GAME OVER! ⵓⵔ ⵖⵓⵔⴽ ⵉⵙⵏⴼⴰⵔⵏ. ⵢⵉⵡⵉ ⴷ ⵓⵎⵙⴱⴹⴰ!",
+    "reward_win": "Imɣuren d-azwel tazwara {winner_rounds} tuneggarut s-azwel {chips} ikariḍiyen",
+    "reward_lose": "ⵢⵓⵡⵉ ⵓⵎⵓⵔⴰⵔ ⵜⵉⴱⵔⵔⴰⵣⵉⵏ ⴳ ⵜⵙⵓⵜⵍⵜ {round}.",
+    "reward_win_max": "Imɣuren d-azwel tazwara {max_turns} tuneggarut s-azwel {chips} ikariḍiyen"
+  },
+  "hand_names": {
+    "royal_flush": "ⵜⴰⵡⵔⵉⵔⵜ ⵏ ⵜⴳⵍⴷⵉⵜ.",
+    "straight_flush": "ⵙⵜⵔⴰⵢⵜ ⴼⵍⵓⵙⵀ",
+    "four_of_a_kind": "ⴽⴽⵓⵥ ⵏ ⵡⴰⵏⴰⵡⵏ",
+    "full_house": "ⵜⴰⴷⴷⴰⵔⵜ ⵜⵓⵎⵍⵉⵍⵜ.",
+    "flush": "ⴰⵥⵕⵓ ⵏ ⵓⴳⴰⴷⵉⵔ",
+    "straight": "ⵙ ⵓⵖⵣⵓ",
+    "three_of_a_kind": "ⴽⵕⴰⴹ ⵏ ⵡⴰⵏⴰⵡⵏ",
+    "two_pair": "ⵙⵉⵏ ⵉⵎⴷⴷⵓⴽⴽⴰⵍ.",
+    "one_pair": "ⵢⴰⵏ ⵓⴽⵣⴰⵥ.",
+    "high_card": "ⵜⴰⴽⴰⵕⴹⴰ ⵢⴰⵜⵜⵓⵢⵏ.",
+    "unknown": "ⵜⴰⴳⴰⴼⵜ ⵓⵔ ⵉⵜⵜⵡⴰⵙⵙⵏⴻⵏ"
+  }
+}

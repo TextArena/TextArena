@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} în **Ultimate Tic Tac Toe**.\nTrimiteți mutarea dvs. sub forma **[macro  micro]** (două numere 0-8):\n• *macro*  = în care mini-tablă jucați\n• *micro* = care pătrat din interiorul acelei mini-tablă\nExemplu `[7 8]` ➜ plasați marca dvs. în mini-tablă 7, pătrat 8, și\nforțați adversarul dvs. să joace în mini-tablă 8 următoarea.\n\nSunteți `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Tablă curentă:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Mutarea trebuie să fie în forma [macro micro] cu numere 0-8.",
+    "out_of_range": "Indicii trebuie să fie fiecare între 0 și 8.",
+    "index_out_of_range": "Micro-tablă, rândul sau coloana este în afara intervalului.",
+    "cell_occupied": "Celula este deja ocupată.",
+    "wrong_micro_board": "Jucătorul trebuie să joace în următoarea micro-tablă.",
+    "micro_board_won": "Micro-tablă este deja câștigată."
+  },
+  "next_board": {
+    "any": "orice micro-tablă",
+    "specific": "micro-tablă {nxt}"
+  },
+  "game_action": {
+    "played": "Jucătorul {player_id} a jucat în micro-tablă {macro_idx}, celulă {micro_idx} (rând {row}, coloană {col}). Jucătorul {opponent_id} trebuie acum să joace în {nxt_txt}."
+  },
+  "outcome": {
+    "win": "Jucătorul {player_id} câștigă Ultimate Tic Tac Toe!",
+    "draw": "Jocul este o remiză!"
+  }
+}

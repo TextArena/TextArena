@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "你是四子棋游戏中的玩家 {player_id}。\n你的棋子符号：{symbol}。\n棋盘有 {num_rows} 行和 {num_cols} 列。\n玩家轮流将自己的棋子放入其中一列（0 到 {end_col}）。\n率先将自己的四个棋子在纵向、横向或对角线上连成一线的玩家获胜。\n轮到你时，请在方括号中输入列号来落子。\n例如：'[col 4]' 或 '[col 1]'。"
+  },
+
+  "board": {
+    "board_visible_state": "棋盘状态：\n{board_visual}",
+    "board_notvisible_state": "玩家无法看到棋盘。"
+  },
+
+  "invalid_move": {
+    "wrong_format": "玩家 {player_id}，操作格式无效。预期格式：'[col x]'。",
+    "out_of_range": "玩家 {player_id}，无效操作。列 {col} 超出范围。",
+    "already_full": "玩家 {player_id}，无效操作。列 {col} 已满。"
+  },
+
+  "action": {
+    "dropped_disk": "玩家 {player_id} 将棋子（{player_symbol}）投入第 {col} 列。"
+  },
+
+  "outcome": {
+    "win": "玩家 {player_id} 通过连成四子获胜！",
+    "draw": "游戏以平局结束。"
+  }
+}

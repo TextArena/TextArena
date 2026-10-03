@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Oli mukino Klondike Solitaire. Eriyo lyo ni kulongoose kaadi zonna ku foundation piles.\n\nEmirimu gy'Omukino:\n- Foundation piles (F1-F4): Zimba okuva Ace okutuuka King mu suit\n- Tableau piles (T1-T7): Zimba okuva wansi ng'erinnya ly'ekika kikiriranye (ekika ekyo ku kiragala, kiragala ku kyo)\n- Stock: Longoose kaadi ku waste pile\n- Waste (W): Kaadi ya juu esobole okukolera\n\nOkuyita:\n- 'draw' - Longoose kaadi okuva stock ku waste\n- 'move <source> <destination> [count]' - Longoose kaadi wakati wa piles\n  Amatenderezo: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count ayinza kuba 'all', ekitegeza kulongoose kaadi zonna eziri waggulu.\n- 'forfeit' - Komola omukino butereevu n'ekitandise ekyo kya sika\n- Amannya g'ebijanja: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nOyinza kukola ebikolwa bingi mu kiseera kimo nga obikolera wakati wa commas:\n  Ekyokulabirako: 'draw, move W T1, move T2 F1'\n\nKings pekee ndizo zisobola kuwekwa ku bijanja ebiriko bya tableau.\nEbibikolwa bikolera mu mpangula - singa kimu kikyuka, ebibikolwa ebisigadde biyitibwa.\nYita 'forfeit' bwekiri okukkiriza nti omukino tegusobola kuguwangula."
+  },
+  "format_error": {
+    "no_brackets": "Enkola ya kikolwa si nnungi. Ekikolwa kirina okubeera mu buwangwa (brackets).",
+    "no_closing_bracket": "Enkola ya kikolwa etagasa. Okuggulawo kwa ']' tekuliiwo\"",
+    "empty_command": "Lugambo lwekkalu. Gwandika 'draw' oba 'move <source> <destination> [count]'",
+    "empty_action": "Ekikolwa ekitaliimu kintu kyonna.",
+    "move_needs_args": "Okuyita kwa move kyeetaaga source na destination. Enkozesa: 'move <source> <destination> [count]'",
+    "count_positive": "Count esabe kuba chanya oba 'all'",
+    "count_invalid": "Count si sahihi. Yita nambari oba 'all'",
+    "unknown_command": "Kibuzo kisichojulikana '{cmd}'. Tumia 'draw', 'move <source> <destination> [count]', or 'forfeit'",
+    "wrapped": "Ekintu {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Ekintu {n}: {msg}",
+    "before_failure": "Kuteekebwako {n} kikolwa oba bikolwa kabla ya kutawanyika.",
+    "failed": "Ekintu {n} kifailye: {msg}"
+  },
+  "move_result": {
+    "drew": "Baawangudde kaadi okuva ku bintu ne bifuuka kasasiro.",
+    "cannot_draw": "Tetusobola kusika. Byonna ebiri mu buwunga n'ebisasiro tebirina kintu kyonna.",
+    "invalid_pile": "Erinnya ly'ekibinja ekitali kituufu. Kozesa W, F1-F4, oba T1-T7",
+    "foundation_one_card": "Asobola okusengula kaadi emu yokka ku musingi.",
+    "waste_to_foundation_ok": "Kaadi eyasengulwa okuva mu kasasiro okudda ku musingi F{dst}",
+    "waste_to_foundation_bad": "Temuyinza kusengula kaadi y'ebisasiro ku kibinja ky'omusingi ekyo",
+    "tableau_to_foundation_ok": "Ilifua kadi kutoka kwenye tableau T{src} hadi msingi F{dst}",
+    "tableau_to_foundation_bad": "Temuyinza kusengula kaadi ya tableau ku kibinja ekyo eky'omusingi",
+    "foundation_to_foundation": "Tayinza kusenguka okuva ku musingi okudda mu musingi omulala.",
+    "waste_to_tableau_one_card": "Asobola okusengula kaadi emu yokka okuva mu kasasiro okudda ku kipande.",
+    "waste_to_tableau_ok": "Kaadi esindikiddwa okuva mu kasasiro okudda ku kipande T{dst}",
+    "waste_to_tableau_bad": "Temuyinza kuteeka kaadi y'ebisasiro ku kibinja ekyo eky'ebipande",
+    "no_face_up": "Tewali kaadi z'okuyisa ku maaso.",
+    "tableau_to_tableau_ok": "Ilifua {count} kadi(s) kutoka kwenye tableau T{src} hadi T{dst}",
+    "tableau_to_tableau_bad": "Haiwezi kusogea {count} kadi(s) kutoka T{src} hadi T{dst}",
+    "foundation_to_tableau_one_card": "Asobola okusengula kaadi emu yokka okuva ku musingi okutuuka mu kipande.",
+    "foundation_empty": "F{src} ya msingi mwekkalu",
+    "foundation_to_tableau_ok": "Kadhi kagiddwa ku F{src} akafuluma akasogezwa ku T{dst}",
+    "foundation_to_tableau_bad": "Temuyinza kuteeka kaadi y'omusingi ku kipande T{dst}",
+    "to_waste_or_stock": "Tetusobola kutwalibwa mu kasasiro oba ku bugagga."
+  },
+  "outcome": {
+    "forfeit": "Omupiira gwaggwa. Empaka ez'enkomerero: {score} kaadi mu misingi.",
+    "won": "Mwebale nnyo, muwangudde Klondike Solitaire!",
+    "turn_limit": "Mchezo umemaliza! Umeifikia kiwango cha juu cha {max_turns} mudumu. Alama: {score} kadi kwenye misingi."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== (Omusajja ow'ekika kya Ssebulime)",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Ebitundu: {stock} kaadi.",
+    "waste": "Ebyabufu (W): {waste}",
+    "foundations_header": "Ebisigamiziddwa:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Ekifaananyi:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

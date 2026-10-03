@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ia dados Pemain {player_id} ring Stratego.\nTatujon Iraga punika ngerebut Bendera lawan utawi ngapusang samian potongan sané prasida kagingsirang.\nTentara Iraga sampun kagenahang ring papan, rumasuk Bendera, Bom, miwah potongan liyanan sané madué wasta.\n\n### Instruksi Main\n1. **Aturan Gerakan:**\n   - Ring giliran Iraga, Iraga prasida ngingsirang satunggal potongan asiki langkah nuju kotak sané nampek (duur, betén, kiwa, utawi tengen) sané sampun kagenahang antuk potongan Iraga.\n   - Conto: Potongan prasida ngingsirang saking A1 nuju B1 utawi A1 nuju A2 yéning B1 miwah A2 nénten kagenahang antuk potongan Iraga.\n   - Yéning potongan sané kapilih punika Bom utawi Bendera, ipun nénten prasida kagingsirang.\n2. **Pertempuran:**\n   - Yéning Iraga ngingsirang nuju kotak sané kagenahang antuk potongan lawan, pertempuran pacang kamargiang:\n     - Potongan sané madué wasta sané tegeh menang miwah ngapusang potongan lawan.\n     - Yéning wasta sané sami, makakalih potongan pacang kahapus saking papan.\n     - **Kasus Khusus:**\n       - Bom ngapusang makasami potongan sané nyerang kecuali Penambang, sané ngilangin Bom.\n       - Mata-mata prasida ngalahin Marshal yéning Mata-mata nyerang pertama nanging kalah ring makasami potongan liyanan.\n3. **Tatujon Strategis:**\n   - Identifikasi potongan lawan liwat gerakan miwah pertempuran ipun.\n   - Lindungi Bendera Iraga ri kala nyoba ngerebut Bendera lawan.\n   - Anggén Pengintai strategis antuk ngamolihang informasi indik potongan lawan miwah nyerang sané lemah.\n\n### Cara Ngingsirang:\n1. Tentukan koordinat potongan sané Iraga jagi ngingsirang miwah tujuan ipun.\n2. Anggén format: [A0 B0], sané A0 punika posisi sumber, miwah B0 punika tujuan.\n   - Conto: Antuk ngingsirang potongan saking baris 0, kolom 0 nuju baris 1, kolom 0, input [A0 B0].\n3. Pastika tujuan punika valid manut aturan gerakan ring duur.\n\n### Catetan Penting:\n- Papan pacang nuduhang potongan Iraga miwah posisi ipun, conto MN, MS.\n- Papan pacang nuduhang posisi sané kauningin saking potongan lawan tanpa ngungkap wasta ipun, conto ?.\n- Grid sané ~ punika danau miwah nénten prasida kagingsirang.\n- Sebagai saran, wiwit main Iraga antuk ngingsirang potongan sané ring garis depan antuk ngamolihang informasi indik potongan lawan. Pemain 0 miwah pemain 1 ngelah garis depan ring baris D miwah G.\n\nPuniki status papan sané mangkin:\n"
+  },
+  "board": {
+    "current_board": "Papan Mangkin:\n\n{board}\nGerakan Sané Tersedia: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format aksi nénten sah. Pemain {player_id} nénten nginput aksi ring format [A0 B0].",
+    "invalid_coordinates": "Format aksi nénten valid. Pamain {player_id} nenten ngenahang koordinat sané patut.",
+    "not_own_piece": "Format aksi nénten valid. Pamain {player_id} patut ngingsirang silih tunggil geginannyané soang-soang.",
+    "scout_through_pieces": "Format aksi nénten valid. Pamain {player_id} nenten dados ngingsirang pramuka saking potongan sané lianan.",
+    "scout_diagonal": "Format aksi nénten valid. Pamain {player_id} nenten dados ngingsirang pramuka diagonal.",
+    "non_scout_multi_square": "Format aksi nénten valid. Pilem, sajabaning pramuka, wantah prasida magingsir siki kotak ring galahnyané.",
+    "move_into_lake": "Format aksi nénten valid. Pamain {player_id} nenten dados mamargi ka danu.",
+    "move_onto_own_piece": "Format aksi nénten valid. Pamain {player_id} nenten prasida ngingsirang sikiangnyané ring pahan ipuné soang-soang.",
+    "move_bomb_or_flag": "Format aksi nénten valid. Pamain {player_id} nenten dados ngingsirang bom utawi panji."
+  },
+  "game_action": {
+    "you_moved": "Iraga sampun ngingsirang potongan saking {source} nuju {dest}.",
+    "opponent_moved": "Pemain {player_id} sampun ngingsirang potongan saking {source} nuju {dest}.",
+    "you_equal_ranks": "Iraga sampun ngingsirang potongan saking {source} nuju {dest}. Potongan sané nyerang punika {attacking_rank} miwah potongan sané kaserang punika {target_rank}. Karena wasta sané sami, makakalih potongan kalah.",
+    "opponent_equal_ranks": "Pemain {player_id} sampun ngingsirang potongan saking {source} nuju {dest}. Potongan sané nyerang punika {attacking_rank} miwah potongan sané kaserang punika {target_rank}. Karena wasta sané sami, makakalih potongan kalah.",
+    "you_miner_defused": "Iraga sampun ngingsirang potongan saking {source} nuju {dest}. Potongan sané nyerang punika {attacking_rank} miwah potongan sané kaserang punika {target_rank}. Karena penambang prasida ngilangin bom, Iraga menang pertempuran.",
+    "opponent_miner_defused": "Pemain {player_id} sampun ngingsirang potongan saking {source} nuju {dest}. Potongan sané nyerang punika {attacking_rank} miwah potongan sané kaserang punika {target_rank}. Karena penambang prasida ngilangin bom, Iraga kalah pertempuran.",
+    "you_bomb_lost": "Iraga sampun ngingsirang potongan saking {source} nuju {dest}. Potongan sané nyerang punika {attacking_rank} miwah potongan sané kaserang punika {target_rank}. Karena penyerang nénten penambang, Iraga kalah pertempuran.",
+    "opponent_bomb_won": "Pemain {player_id} sampun ngingsirang potongan saking {source} nuju {dest}. Potongan sané nyerang punika {attacking_rank} miwah potongan sané kaserang punika {target_rank}. Karena penyerang nénten penambang, Iraga menang pertempuran.",
+    "you_spy_won": "Iraga sampun ngingsirang potongan saking {source} nuju {dest}. Potongan sané nyerang punika {attacking_rank} miwah potongan sané kaserang punika {target_rank}. Karena penyerang punika mata-mata miwah kaserang punika marshal, Iraga menang pertempuran.",
+    "opponent_spy_lost": "Pemain {player_id} sampun ngingsirang potongan saking {source} nuju {dest}. Potongan sané nyerang punika {attacking_rank} miwah potongan sané kaserang punika {target_rank}. Karena penyerang punika mata-mata miwah kaserang punika marshal, Iraga kalah pertempuran.",
+    "you_higher_won": "Iraga sampun ngingsirang potongan saking {source} nuju {dest}. Potongan sané nyerang punika {attacking_rank} miwah potongan sané kaserang punika {target_rank}. Karena penyerang madué wasta sané tegeh, Iraga menang pertempuran.",
+    "opponent_higher_lost": "Pemain {player_id} sampun ngingsirang potongan saking {source} nuju {dest}. Potongan sané nyerang punika {attacking_rank} miwah potongan sané kaserang punika {target_rank}. Karena penyerang madué wasta sané tegeh, Iraga kalah pertempuran.",
+    "you_lower_lost": "Iraga sampun ngingsirang potongan saking {source} nuju {dest}. Potongan sané nyerang punika {attacking_rank} miwah potongan sané kaserang punika {target_rank}. Karena penyerang madué wasta sané éndép, Iraga kalah pertempuran.",
+    "opponent_lower_won": "Pemain {player_id} sampun ngingsirang potongan saking {source} nuju {dest}. Potongan sané nyerang punika {attacking_rank} miwah potongan sané kaserang punika {target_rank}. Karena penyerang madué wasta sané éndép, Iraga menang pertempuran."
+  },
+  "outcome": {
+    "flag_captured": "Pamain {player_id} sampun ngambil panji musuh!",
+    "no_movable_pieces": "Pemain {winner_id} menang! Pemain {loser_id} nénten madué potongan sané prasida kagingsirang."
+  }
+}

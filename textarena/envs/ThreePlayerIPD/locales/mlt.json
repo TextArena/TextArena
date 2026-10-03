@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Inti Player {player_id} f'Iterated Prisoner's Dilemma ta' 3 plejers. Il-partita tidum {num_rounds} rawnds.\nStruttura tar-rawnd:\n• {conv_rounds} darbiet ta' chat b'xejn\n• 1 rawnd ta' deċiżjoni - ibgħat token wieħed għal kull avversarju: '[<opp-id> cooperate]' jew '[<opp-id> defect]' (pereżempju '[1 defect] [2 cooperate]'; il-default hu 'kooperazzjoni'). \nMatrizza ta' payoff pair-wise (applikata għal kull par non-ordinat):\n  - Ż-Żwieġ jaħdmu flimkien  ->  {reward}\n  - Ż-Żwieġ jibdew il-ġlieda     ->  {punishment}\n  - Inti tbid il-ġlieda, huma jaħdmu flimkien ->  {temptation}\n  - Inti taħdem flimkien, huma jibdew il-ġlieda ->  {sucker}\nIl-plejers (s) bl-ogħla skor fl-aħħar tar-rawnds kollha jirbħu."
+  },
+  "round": {
+    "start": "─── Bidu tar-Rawnd {round} ───\tTista' tikkonversa b'xejn għall- {conv_rounds} rawnds li ġejjin.",
+    "chat_finished": "Ċhat lest għar-rawnd {round}. Ibqa' jissottometti d-deċiżjonijiet tiegħek, token waħda għal kull avversarju: `[pid cooperate]` jew `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Riżultati:",
+    "pair_line": "{observation}\n\t Plejer {i} vs Plejer {j} għażlu li {choice_i} u {choice_j} rispettivament (Plejer {i} kiseb {gain_i}, Plejer {j} kiseb {gain_j})",
+    "scores_open": "{observation} -> Punteġġi attwali: ",
+    "score_first": "{observation}Player {player_id} ({score})",
+    "score_next": "{observation}; Player {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "Punteġġi finali: {scores}.  Gruppi ta' klassifika (l-agħar→l-aħjar): {groups}"
+  }
+}

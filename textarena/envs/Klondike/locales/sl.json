@@ -1,0 +1,74 @@
+{
+  "_comment": "Datoteka s prevodom za Klondike Solitaire. NE PREVADIJ ključev (levo), samo vrednosti (desno).",
+  "_slots": {
+    "{n}": "Indeks akcije znotraj vejice-ločene komande, 1-temeljeno",
+    "{msg}": "Ugnezdeno sporočilo o rezultatu akcije (že lokalizirano)",
+    "{count}": "Število kart, ki se premikajo",
+    "{src}": "Številka izvorne karte, 1-temeljeno",
+    "{dst}": "Številka ciljne karte, 1-temeljeno",
+    "{cmd}": "Neznana komanda, ki jo je igralec vnesel (ni prevedena)",
+    "{max_turns}": "Maksimalno število potez pred koncem igre",
+    "{score}": "Število kart trenutno v temeljnih kupcih",
+    "{board}": "Izrisana ASCII plošča (nikoli ne prevajaj)",
+    "{turn}": "Trenutna poteza",
+    "{stock}": "Število kart, ki so še v zalogi",
+    "{waste}": "Zgornja karta odpadkov, ali '--' če je prazna (nikoli ne prevajaj)",
+    "{cards}": "Karte v kupcu kot nevtralni oznaki, ali '--' če je prazna (nikoli ne prevajaj)"
+  },
+  "player_prompt": {
+    "intro": "Igrate Klondike Solitaire. Vaš cilj je premakniti vse karte v temeljne kupce.\n\nPravila igre:\n- Temeljni kupci (F1-F4): Gradite od Asa do Kralja v barvi\n- Kupci na mizi (T1-T7): Gradite navzdol z izmeničnimi barvami (rdeča na črno, črna na rdečo)\n- Zaloga: Potegnite karte v odpadke\n- Odpadki (W): Zgornja karta na voljo za igro\n\nKomande:\n- 'draw' - Potegnite karte iz zaloge v odpadke\n- 'move <izvor> <cilj> [število]' - Premaknite karte med kupci\n  Primeri: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Število lahko tudi 'all', ki bo poskušalo premakniti vse karte, ki so obrnjene navzgor.\n- 'forfeit' - Končajte igro takoj in zaklenite trenutno število točk\n- Imena kupcev: W (odpadki), F1-F4 (temeljni kupci), T1-T7 (kupci na mizi)\n\nLahko izvršite več akcij v eni potezi z ločevanjem z vejicami:\n  Primer: 'draw, move W T1, move T2 F1'\n\nSamo kralji lahko postavite na prazne kupce na mizi.\nAkcije se izvršujejo po vrsti - če ena ne uspe, se preostale akcije preskočijo.\nUporabite 'forfeit', če verjamete, da je igra nemogoče dobiti."
+  },
+  "format_error": {
+    "no_brackets": "Neveljavna oblika akcije. Akcija mora biti v oklepajih.",
+    "no_closing_bracket": "Neveljavna oblika akcije. Manjka zaključni oklepaj ']'",
+    "empty_command": "Prazna komanda. Vnesite 'draw' ali 'move <izvor> <cilj> [število]'",
+    "empty_action": "Prazna akcija",
+    "move_needs_args": "Komanda 'move' zahteva izvor in cilj. Uporaba: 'move <izvor> <cilj> [število]'",
+    "count_positive": "Število mora biti pozitivno ali 'all'",
+    "count_invalid": "Neveljavno število. Uporabite število ali 'all'",
+    "unknown_command": "Neznana komanda '{cmd}'. Uporabite 'draw', 'move <izvor> <cilj> [število]', ali 'forfeit'",
+    "wrapped": "Akcija {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Akcija {n}: {msg}",
+    "before_failure": "Izvršene {n} akcije pred neuspehom.",
+    "failed": "Akcija {n} ni uspela: {msg}"
+  },
+  "move_result": {
+    "drew": "Potegnil sem karto(e) iz zaloge v odpadke.",
+    "cannot_draw": "Ne morem potegniti. Obe zaloga in odpadki sta prazni.",
+    "invalid_pile": "Neveljavno ime kupca. Uporabite W, F1-F4, ali T1-T7",
+    "foundation_one_card": "Lahko premaknete samo eno karto v temeljni kupac",
+    "waste_to_foundation_ok": "Premaknil sem karto iz odpadkov v temeljni kupac F{dst}",
+    "waste_to_foundation_bad": "Ne morem premakniti karte iz odpadkov v ta temeljni kupac",
+    "tableau_to_foundation_ok": "Premaknil sem karto iz kupca na mizi T{src} v temeljni kupac F{dst}",
+    "tableau_to_foundation_bad": "Ne morem premakniti karte iz kupca na mizi v ta temeljni kupac",
+    "foundation_to_foundation": "Ne morem premakniti iz temeljnega kupca v drug temeljni kupac",
+    "waste_to_tableau_one_card": "Lahko premaknete samo eno karto iz odpadkov v kupac na mizi",
+    "waste_to_tableau_ok": "Premaknil sem karto iz odpadkov v kupac na mizi T{dst}",
+    "waste_to_tableau_bad": "Ne morem postaviti karte iz odpadkov na ta kupac na mizi",
+    "no_face_up": "Ni kart, ki bi bile obrnjene navzgor",
+    "tableau_to_tableau_ok": "Premaknil sem {count} karto(e) iz kupca na mizi T{src} v T{dst}",
+    "tableau_to_tableau_bad": "Ne morem premakniti {count} karto(e) iz T{src} v T{dst}",
+    "foundation_to_tableau_one_card": "Lahko premaknete samo eno karto iz temeljnega kupca v kupac na mizi",
+    "foundation_empty": "Temeljni kupac F{src} je prazen",
+    "foundation_to_tableau_ok": "Premaknil sem karto iz temeljnega kupca F{src} v kupac na mizi T{dst}",
+    "foundation_to_tableau_bad": "Ne morem postaviti karte iz temeljnega kupca na kupac na mizi T{dst}",
+    "to_waste_or_stock": "Ne morem premakniti v odpadke ali zalogo"
+  },
+  "outcome": {
+    "forfeit": "Igra je prekinjena. Končno število točk: {score} kart v temeljnih kupcih.",
+    "won": "Čestitke! Zmagali ste v Klondike Solitaire!",
+    "turn_limit": "Igra je končana! Dosegli ste maksimalno število {max_turns} potez. Število točk: {score} kart v temeljnih kupcih."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Poteza: {turn}/{max_turns}",
+    "stock": "Zaloga: {stock} kart",
+    "waste": "Odpadki (W): {waste}",
+    "foundations_header": "Temeljni kupci:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Kupci na mizi:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

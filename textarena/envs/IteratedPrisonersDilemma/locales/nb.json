@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i et gjentatt Fangens Dilemma som spenner over {num_rounds} runder.\n\nSpillstruktur:\n- Før hver beslutning har du {total_conversation_rounds} omganger til å kommunisere fritt.\n- Deretter velger begge spillere samtidig å samarbeide eller svikte.\n\nUtbetalingsmatrise (fast hver runde):\n- Begge samarbeider ➜ hver {cooperate_reward}\n- Begge svikter ➜ hver {mutual_defect_reward}\n- En sviker, en samarbeider ➜ Sviker {defect_reward}, Samarbeider {sucker_reward}\n\nHvordan spille:\n- Under samtale: skriv inn tekst du ønsker.\n- Under beslutningsfasen: inkluder '[Cooperate]' eller '[Defect]' (stor/liten bokstav uavhengig). Du kan legge til ekstra tekst før/etter tokenet."
+  },
+  "phases": {
+    "conversation_finished": "Samtale ferdig for runde {round}. Vennligst svar med '[Cooperate]' eller '[Defect]' innen \\boxed{{}}.",
+    "starting_round": "--- Starter Runde {round} ---",
+    "round_summary": "Resultater for runde {round}:\n{outcome}\nSpiller 0 tjente {r0} (totalt {score_0}), Spiller 1 tjente {r1} (totalt {score_1})."
+  },
+  "outcome": {
+    "winner": "Spiller {winner} vinner {win_score} - {lose_score}.",
+    "draw": "Uavgjort! Begge spillere fikk {s0}.",
+    "round_both_cooperate": "Begge spillere samarbeidet.",
+    "round_both_defect": "Begge spillere sviktet.",
+    "round_p0_cooperates_p1_defects": "Spiller 0 samarbeidet, Spiller 1 sviktet.",
+    "round_p0_defects_p1_cooperates": "Spiller 0 sviktet, Spiller 1 samarbeidet."
+  }
+}

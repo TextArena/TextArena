@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Ti ê o Zugatô {player_id} into zugò de LinesOfAction.\nE teu peççe són '{side}', e peççe de l'avversâio són '{other}'.\nFormâto de mòssoa: `[b1b3]` (coordinæ de partensa-coordinæ de destinaçión). Unna mòssoa lègale a traversa orizontalmente, verticalmente ò in diagonâle un nùmero de cæ squæ a-o nùmero totâle de peççe (de quæsseun cô) in quella lìnia. Ti pêu saltâ in sce e teu peççe, ma no in sce e peççe de l'avversâio; aterâ in sce 'na peçça de l'avversâio a a cattûa.  Vinçi quande tùtte e teu peççe són conesse a-e 8 vixinançe."
+  },
+  "board": {
+    "current_board": "Commune: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "O formòu o deve êse e2e4 (da, a-a coordinæ).",
+    "no_piece": "No {side} peçça in sce {coord}.",
+    "identical": "A-a fonte e a destinaçion son pæge.",
+    "not_straight_or_diagonal": "A mossa a deve ëse drita ò diagonale.",
+    "wrong_distance": "L'é de beseugno che se spanteñe unna distansa pægia a-i tòcchi in linia.",
+    "enemy_blocks": "O fæto o l'é che unna peçça nemixa a blocca o cammin.",
+    "destination_own": "A destinaçion a l'é occupâ da-o seu pròpio pezo."
+  },
+  "game_action": {
+    "moved": "Giugou {player_id} o l'ha spostou {from} -> {to}",
+    "captured_suffix": "Giugou {player_id} o l'ha spostou {from} -> {to}, catturando un nemigo."
+  },
+  "outcome": {
+    "win": "Tutte e pòrte son ligæ.",
+    "draw_no_capture": "60 mosse sensa cattûa.",
+    "draw_repetition": "A poxiçion a l'é ripetiua træ vòtte."
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Mäng algab. Trumpi mast: {trump_suit} (trumpi kaart: {trump_str}).",
+    "no_trump_card": "puudub"
+  },
+  "player_prompt": {
+    "intro": "Sa oled Mängija {player_id} Saksa Visti mängus.\n{phase_info}\nSa hoiad {hand_size} kaarti.\nMängi kaarti käsuga '[play N]', kus N on kaardi positsioon sinu käes (näiteks '[play 3]').",
+    "phase_learning": "ÕPPEFAAS: iga tikki võitja võtab üles avatud kaardi ja kaotaja tõmbab järgmise kaardi pakist. Selle faasi võidetud tikkid ei loe võiduks.",
+    "phase_playing": "MÄNGIFAAS: pakk on ammendunud. Iga tikki alates nüüdsest loeb võiduks."
+  },
+  "next_card": {
+    "playing_phase": "Ühtegi kaarti pole pakkumisel - mängifaas on alanud.",
+    "deck_empty": "Pakk on tühi - ühtegi kaarti pole pakkumisel.",
+    "available": "Kaart pakkumisel: {card}",
+    "available_trump": "Kaart pakkumisel: {card} (TRUMP)"
+  },
+  "invalid_move": {
+    "wrong_format": "Vigane käigu vorming. Kasuta käsulist '[play N]', et mängida N-ndat kaarti sinu käes.",
+    "bad_position": "Sellist kaardi positsiooni pole olemas. Sa hoiad {hand_size} kaarti.",
+    "must_follow_suit": "Sa pead järgima masti ja mängima {lead_suit} kaarti.",
+    "invalid_play": "Seda kaarti ei saa mängida."
+  },
+  "game_action": {
+    "played": "Mängija {player_id} mängis {card}."
+  },
+  "trick": {
+    "won": "Mängija {winner_id} võitis tikki kaardiga {card}.",
+    "won_learning": "Mängija {winner_id} võitis tikki kaardiga {card} ja võttis üles avatud kaardi."
+  },
+  "phase": {
+    "learning_complete": "Pakk on ammendunud. Õppefaas on lõppenud - iga ülejäänud tikki loeb võiduks."
+  },
+  "draw": {
+    "winner_received": "Sa võitsid tikki ja said {card}.",
+    "loser_received": "Sa kaotasid tikki ja tõmbasid {card} pakist.",
+    "winner_preview": "Järgmine kaart pakkumisel on {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Seni võidetud tikkid - Mängija 0: {tricks0}, Mängija 1: {tricks1}",
+    "scores_playing": "Punkte andvad tikkid - Mängija 0: {tricks0}, Mängija 1: {tricks1}",
+    "phase": "Faas: {phase}",
+    "phase_learning": "Faas: {phase} ({remaining_cards} kaarti pakis)"
+  },
+  "hand": {
+    "no_cards": "Ühtegi kaarti pole",
+    "no_cards_in_hand": "Ühtegi kaarti pole käes",
+    "header": "Sinu käsi:",
+    "trump_indicator": " (TRUMP)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Ühtegi kaarti pole veel mängitud selle tikki.",
+    "header": "Praegune tikki:",
+    "trump_indicator": " (TRUMP)",
+    "card_line": "{observation}\n  Mängija {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Mäng pole alanud",
+    "header": "=== SAKSA VISTI MÄNG ===",
+    "phase": "{observation}\nFaas: {phase}",
+    "trump_suit": "{observation}\nTrumpi mast: {trump_suit}",
+    "trump_card": "{observation}\nTrumpi kaart: {card}",
+    "cards_left": "{observation}\nKaarte pakis: {count}",
+    "next_card": "{observation}\nJärgmine kaart võitjale: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nPraegune tikki:",
+    "trump_indicator": " (TRUMP)",
+    "trick_line": "{observation}\n  Mängija {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nMängija {player_id}: {scoring} punkte andvad tikkid ({tricks} kokku), {hand_size} kaarti käes"
+  },
+  "outcome": {
+    "summary": "Õppefaas - Mängija 0: {l0}, Mängija 1: {l1}. Mängifaas - Mängija 0: {p0}, Mängija 1: {p1}. Mängija {winner_id} võitis {winner_tricks} punkte andvate tikkidega!"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "Üç Oyunculu Tic Tac Toe dil dosyası. Anahtarları (sol taraf) çevirme. Yalnızca değerleri (sağ taraf) çevir.",
+  "_slots": {
+    "{player_id}": "Oyuncunun numarası, örneğin 0, 1 veya 2",
+    "{symbol}": "Oyuncunun işareti, A, B veya C",
+    "{cell}": "Tahta hücresi numarası",
+    "{max_cell}": "En yüksek geçerli hücre numarası (tahta boyutu^2 - 1)",
+    "{row}": "Tahtadaki yerleştirilen işaretin satır dizini",
+    "{col}": "Tahtadaki yerleştirilen işaretin sütun dizini",
+    "{board}": "Oluşturulan ASCII tahtası (çevirme)",
+    "{moves}": "Kullanılabilir hamle belirteçlerinin virgülle ayrılmış listesi, örneğin '[4]' (çevirme)"
+  },
+  "player_prompt": {
+    "intro": "Üç Oyunculu Tic Tac Toe'da Oyuncu {player_id}'siniz.\nSimgeniz '{symbol}'.\nSırayla, 5x5'lik bir tahtaya dört tane sıralı işaret koymaya çalışıyorsunuz.\nSatırlar yatay, dikey veya çapraz olabilir.\nHamlenizi '[4]' formatında göndererek 4 numaralı hücreyi işaretleyin."
+  },
+  "board": {
+    "current_board": "Mevcut Tahta:\n\n{board}\n\nKullanılabilir Hamleler: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Geçersiz hamle formatı. '[hücre]' formatını kullanın, burada hücre 0-{max_cell} aralığındadır.",
+    "out_of_range": "Geçersiz hücre numarası: {cell}. 0 ile {max_cell} arasında olmalıdır.",
+    "already_occupied": "{cell} hücresi zaten dolu.",
+    "made_invalid": "Oyuncu {player_id} geçersiz bir hamle yaptı"
+  },
+  "game_action": {
+    "placed": "Oyuncu {player_id}, işaretini ({symbol}) ({row}, {col}) alanına koydu."
+  },
+  "outcome": {
+    "win": "Oyuncu {player_id} ({symbol}) kazandı!",
+    "draw": "Oyun berabere!"
+  }
+}

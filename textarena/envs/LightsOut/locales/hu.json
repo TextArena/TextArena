@@ -1,0 +1,16 @@
+{
+  "player_prompt": {
+    "intro": "Üdvözöljük a Lights Out játékban! Egy {size}x{size} méretű rácsot kap, amelyen fények vannak.\nA cél az, hogy AZ ÖSSZES fényt lekapcsolja (amelyet '.' jelöl).\nAmikor egy fényt megnyom, az magát és a szomszédos fényeket (fel/le/bal/jobbra) is váltja.\nÍrja be [sor oszlop] formátumban, hogy egy fényt megnyomjon (0-indexelt, tehát az érvényes tartomány 0-{max_index}).\nLegfeljebb {max_turns} lépése van a rejtvény megoldására.\nJelkulcs: 'O' = fény be, '.' = fény ki"
+  },
+  "board": {
+    "current_state": "Aktuális rácsállapot (Lépés {moves_made}, {moves_left} lépés maradt, {completion}% kész):\n{grid}"
+  },
+  "invalid_move": {
+    "wrong_format": "A műveletnek [sor oszlop] formátumban kell lennie, ahol a sor és az oszlop 0 és {max_index} közötti egész számok.",
+    "out_of_range": "A koordinátáknak 0 és {max_index} között kell lenniük. Ön [{row},{col}] értéket adott meg."
+  },
+  "outcome": {
+    "win": "Gratulálunk! {moves_used} lépésben megoldotta a rejtvényt!",
+    "loss": "Vége a játéknak! {max_turns} lépést használt fel anélkül, hogy megoldotta volna a rejtvényt. Végső készültség: {completion}%\nVégső állapot:\n{grid}"
+  }
+}

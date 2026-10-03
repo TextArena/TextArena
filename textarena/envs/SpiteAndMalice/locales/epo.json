@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Vi estas Ludanto {player_id} en du-ludanta ludo de Malico kaj Malamikeco. Via celo estas esti la unua por malplenigi vian pagamason.\n\n### Ludo-Overview:\n- La celo estas malplenigi vian pagamason ludante kartojn al la centraj amasoj.\n- Vi povas ludi kartojn el tri fontoj:\n  1. Via **mano** (vi komencas ĉiun vicon kun ĝis 5 kartoj en mano).\n  2. La **supra karto de via pagamaso**.\n  3. La **supra karto de iu el viaj forĵetamasoj**.\n\n### Ludreguloj:\n- Vi povas ludi karton al centra amaso se ĝi estas **unu rango pli alta** ol la supra karto sur tiu amaso (centraj amasoj komenciĝas kun Aso kaj iras ĝis Reĝino; Reĝoj estas sovaĝaj - ili povas esti luditaj sur iu ajn karto sed ne ŝanĝas la rangosekvencon. Tio signifas se Reĝo estas uzita post 4, tiam tiu Reĝo estas rangita 5 kaj la sekva karto devas esti 6).\n- Se vi ne povas ludi pli da kartoj, vi devas **forĵeti karton** al unu el viaj forĵetamasoj por fini vian vicon.\n- Se centra amaso atingas Reĝinon, ĝi estos aŭtomate malplenigita.\n- La rango-ordo estas: A=1, 2=2, ..., 9=9, J=10, Q=11, K kiel sovaĝa.\n\n### Agadoj:\n1. **Preni**: Ĉe la komenco de via vico, prenu kartojn por plenigi vian manon ĝis 5 kartoj. Enigu **[draw]** por komenci.\n2. **Ludi Karton**: Por ludi karton, specifu la karton kaj la centran amason kiel tiel: **[play A♠ 0]** (kie 'A♠' estas la karto kaj '0' estas la centra amaso-indico).\n3. **Forĵeti**: Se vi ne povas ludi pli da kartoj, forĵetu karton el via mano al forĵeta amaso por fini vian vicon. Enigu **[discard A♠ 1]** (kie 'A♠' estas la karto kaj '1' estas la forĵeta amaso-indico). Notu ke vi ne povas forĵeti iun ajn karton el la pagamaso. Vi nur povas forĵeti kartojn el via mano.\n\n"
+  },
+  "board": {
+    "current_board": "Nuna Tabulo:\n\n{board}\nHaveblaj Movoj: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Centraj Pilaj -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vidpunkto de Ludanto {player_id} ---\n",
+    "payoff": "{observation}Pagamaso (Supra Karto): {top_card}, Pagamasa Longo: {payoff_length}\n",
+    "hand": "{observation}Mano: {hand} ",
+    "discard": "{observation}Forĵetamasoj: {discard}\n",
+    "empty": "Malplena."
+  },
+  "game_message": {
+    "no_cards_left": "Ne plu estas kartoj por tiri. Memoru ke vi povas ludi kartojn el ĉi tiuj fontoj:\n  1. Via **mano**.\n  2. La **supra karto de via pagopilo**.\n  3. La **supra karto de iu ajn el viaj forĵetpiloj**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Malvalida movo formato. Ludanto {player_id} ne respondis kun valida movado en kvadrataj krampoj.",
+    "invalid_play": "Malvalida ludo. Ludanto {player_id} provis ludi {card} sur centra stako {index} .",
+    "discard_from_payoff": "Malvalida forĵeto. Ludanto {player_id} provis forĵeti karton el la rekompenca stako.",
+    "discard_not_in_hand": "Malvalida forĵeto. Ludanto {player_id} provis forĵeti karton kiu ne estas en mano.",
+    "wrong_move_type": "Nevalida movo tipo. Ludanto {player_id} ne respondis kun valida movilo-tipo."
+  },
+  "game_action": {
+    "you_drew": "Vi tiris kartojn.",
+    "opponent_drew": "Ludanto {player_id} tiris kartojn.",
+    "you_played": "Vi ludis {card} sur la centra stako {index}.",
+    "opponent_played": "Ludanto {player_id} ludis {card} sur centra stako {index}.",
+    "you_discarded": "Vi forĵetis {card} al forĵeta amaso {index}, kio ankaŭ signifas ke vi finis vian vicon. Neniu plia ago de vi estas konsiderata por ĉi tiu vico. Ludanto {next_player_id} vicos sekve.",
+    "opponent_discarded": "Ludanto {player_id} forĵetis {card} al forĵeta amaso {index}, kio ankaŭ signifas ke ili finis sian vicon. Neniu plia ago de Ludanto {player_id} estas konsiderata por ĉi tiu vico. Ludanto {next_player_id}, vi vicos sekve. Bonvole enigu vian agon en la formato [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Ludanto {current_player} finis sian pagamason! Ludanto {current_player} gajnas!",
+    "deadlock_player_0": "Sindeteno atingita! Ludanto 0 gajnas kun {player_0_payoff} kartoj restantaj kontraŭ Ludanto 1 kun {player_1_payoff} kartoj.",
+    "deadlock_player_1": "Sindeteno atingita! Ludanto 1 gajnas kun {player_1_payoff} kartoj restantaj kontraŭ Ludanto 0 kun {player_0_payoff} kartoj.",
+    "deadlock_tie": "Sindeteno atingita kun egaleco! Ambaŭ ludantoj havas {player_0_payoff} kartojn restantajn. Ludanto {current_player} gajnas laŭdefaŭlte."
+  }
+}

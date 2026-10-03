@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "당신은 {max_rounds} 라운드 게임인 쿤 포커의 플레이어 {player_id}입니다.\n게임 규칙:\n- 쿤 포커는 J, Q, K (J가 가장 낮고, K가 가장 높음)의 3장짜리 덱을 사용합니다.\n- 각 플레이어는 {ante} 칩을 베팅하고 매 라운드마다 1장의 카드를 받습니다 (참고: 카드는 교체 없이 나눠지므로, 상대방과 같은 카드를 가질 수 없습니다).\n- 게임은 {max_rounds} 라운드 동안 계속됩니다.\n- 모든 라운드 후 가장 많은 칩을 가진 플레이어가 승리합니다.\n행동 규칙:\n- '[check]': 베팅 없이 패스합니다 (테이블에 베팅이 없는 경우에만 가능)\n- '[bet]': 1칩을 포트에 추가합니다 (테이블에 베팅이 없는 경우에만 가능)\n- '[call]': 상대방의 베팅을 맞추어 1칩을 포트에 추가합니다\n- '[fold]': 손을 포기하고 상대방에게 포트를 넘깁니다"
+  },
+  "init_round": {
+    "round_start": "### {max_rounds} 라운드 중 {current_round} 라운드를 시작합니다. 당신의 카드는: '{player_card}'입니다.",
+    "available_actions": "당신의 가능한 행동은: {available_actions}입니다."
+  },
+  "invalid_move": {
+    "wrong_format": "행동은 [Check], [Bet], [Call], 또는 [Fold]여야 합니다.",
+    "not_legal": "행동은 {legal_actions}여야 합니다."
+  },
+  "action": {
+    "submit_move": "플레이어 {player_id}, 제출한 행동: '[{move}]'.",
+    "valid_actions": "당신의 가능한 행동은: {legal_actions}입니다.",
+    "round_summary": "{reason} 현재 점수: 플레이어 0: '{player_0_chips}'; 플레이어 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "결승: 플레이어 {winner}의 {winner_card}가 플레이어 {loser}의 {loser_card}를 이겼습니다. 플레이어 {winner}가 {pot_value} 칩의 포트를 가져갑니다."
+  },
+  "outcome": {
+    "draw": "전체 {max_rounds} 라운드 후, 두 플레이어가 같은 수의 칩을 가지고 있습니다.",
+    "round_win": "플레이어 {player_id}가 포기했습니다.",
+    "winner_player0": "플레이어 0이 모든 {max_rounds} 라운드 후 가장 많은 칩을 가지고 승리했습니다.",
+    "winner_player1": "플레이어 1이 모든 {max_rounds} 라운드 후 가장 많은 칩을 가지고 승리했습니다."
+  }
+}

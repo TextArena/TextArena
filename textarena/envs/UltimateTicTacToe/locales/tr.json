@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ultimate Tic Tac Toe'da Oyuncu {player_id}'siniz.\nHamlenizi **[makro  mikro]** (iki sayı 0-8) olarak gönderin:\n• *makro* = hangi mini-tahtada oynayacağınız\n• *mikro* = o mini-tahtadaki hangi kare\nÖrneğin `[7 8]` ➜ işaretinizi mini-tahta 7, kare 8'e koyun ve rakibinizi bir sonraki turda mini-tahta 8'de oynamaya zorlayın.\n\nSiz `{symbol}`siniz.\n"
+  },
+  "board": {
+    "current_board": "Mevcut Tahta:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Hamle [makro mikro] formatında ve 0-8 aralığında olmalıdır.",
+    "out_of_range": "İndisler 0 ile 8 arasında olmalıdır.",
+    "index_out_of_range": "Mikro-tahta, satır veya sütun aralığı dışında.",
+    "cell_occupied": "Hücre zaten dolu.",
+    "wrong_micro_board": "Oyuncu bir sonraki mikro-tahtada oynamalıdır.",
+    "micro_board_won": "Mikro-tahta zaten kazanıldı."
+  },
+  "next_board": {
+    "any": "herhangi bir mikro-tahta",
+    "specific": "mikro-tahta {nxt}"
+  },
+  "game_action": {
+    "played": "Oyuncu {player_id}, mikro-tahta {macro_idx}'de, hücre {micro_idx}'de (satır {row}, sütun {col}) oynadı. Oyuncu {opponent_id} şimdi {nxt_txt}'de oynamalıdır."
+  },
+  "outcome": {
+    "win": "Oyuncu {player_id} Ultimate Tic Tac Toe'yu kazandı!",
+    "draw": "Oyun berabere!"
+  }
+}

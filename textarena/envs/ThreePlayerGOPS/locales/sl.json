@@ -1,0 +1,39 @@
+{
+  "_comment": "Datoteka s prevodom za ThreePlayerGOPS. NE PREVADIJ ključev (levo), samo vrednosti (desno).",
+  "_slots": {
+    "{player_id}": "Številka igralca, 0, 1 ali 2",
+    "{round}": "Številka trenutnega kroga, 1..13",
+    "{prize}": "Oznaka kartice nagrade (A, 2..10, J, Q, K) - ne prevajajte",
+    "{worth}": "Skupna vrednost nagrade, vključno s prenesenim denarjem",
+    "{hand}": "Preostale karte igralca, prikazane kot oznake v oglatih oklepajih, kot '[A]' '[2]' - ne prevajajte",
+    "{bids}": "Neodvisni seznam odigranih kart, kot 'P0:10, P1:J, P2:Q' - ne prevajajte",
+    "{winner}": "Številka igralca, ki je zmagal v krogu",
+    "{pot}": "Vrednost denarja, ki je bil podeljen ali prenesen v tem krogu",
+    "{scoreline}": "Neodvisna lestvica rezultatov, kot 'P0:0  P1:0  P2:11' - ne prevajajte",
+    "{pid}": "Številka igralca, ki je bil izločen",
+    "{scores}": "Končni rezultati kot surova preslikava številke igralca na rezultat - ne prevajajte"
+  },
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v Three-Player GOPS.\n- Držite 13 kart A-K (vsako točno enkrat).\n- Vsak krog se razkrije nagrada. Oddajte ENO karto, kot `[Q]`, `[10]`, `[2]` …\n- Najvišja karta zmaga nagrado (+ prenesen denar). Izenačenja prenesejo nagrado v naslednji krog.\n- Po 13 krogih zmaga najvišji skupni rezultat. Neveljavne poteze = izločitev."
+  },
+  "round": {
+    "header": "### Krog {round}/13 - Nagrada: {prize} (vredna {worth})",
+    "hand": "Vaša preostala roka: {hand}"
+  },
+  "reveal": {
+    "win": "Ponudbe » {bids} - Igralec {winner} zmaga {pot}.",
+    "tie": "Ponudbe » {bids} - izenačenje, denar zdaj {pot}.",
+    "scores": "Rezultati → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "akcija potrebuje oznako karte v oglatih oklepajih, kot '[Q]'",
+    "bad_card": "karta že uporabljena ali neveljavna"
+  },
+  "elimination": {
+    "player": "Igralec {pid} izločen po ponavljajočih se neveljavnih potezah."
+  },
+  "outcome": {
+    "auto_win": "Dva igralca izločena - samodejna zmaga.",
+    "final": "Končni rezultati: {scores}"
+  }
+}

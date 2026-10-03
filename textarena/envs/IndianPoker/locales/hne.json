@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "तुम्हर Player {player_id} हाव भारतीय पोकर के खेल में।\n- ५२ पत्तियों का डेक; तुम्हर केवल विपक्षी के पत्ती दिखाई देत है।\n- प्रति राउंड {ante} चिप्स के एंटे, कुल {max_rounds} राउंड।\n- वैध चाल: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X एक सकारात्मक पूर्णांक है, जो तुम्हर चिप गणना से कम या बराबर है।)\n- शोडाउन में सबसे ऊंचा छुपा हुआ पत्ती पॉट जीतत है।\n"
+  },
+  "round": {
+    "announce": "### राउंड {current_round}/{max_rounds}\nतुम्हारा विरोधी का कार्ड है: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "एक ही कार्रवाई को स्पष्ट रूप से दें, जैसे '[check]', '[bet 2]', '[call]', '[raise 3]', या '[fold]'।",
+    "cannot_check": "नी कर सकिस [check] - आप एक सट्टेबाजी के सामना करत हव।",
+    "amount_min": "बेट / रेज राशि ≥ 1 होनी चाहिए।",
+    "cannot_bet": "[bet] नहीं कर सकत - [call] / [raise] / [fold] में से एक करू.",
+    "nothing_to_call": "कॉल करे बर कुछु नी; आप एखर बजाय [check] कर सकत हव।",
+    "no_bet_to_raise": "खोले बर [bet X] के उपयोग करव; उठाए बर कोई शर्त नी हवय।",
+    "insufficient": "उस कार्रवाई के लिए पर्याप्त चिप नहीं हैं।"
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (लागत {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "तुम्हारी संभावित कार्रवाइयाँ: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  पॉट {pot} → खेलाड़ी {winner}। (बैंकरोल P0:{p0}, P1:{p1})",
+    "folded": "खेलाड़ी {player_id} ने फोल्ड किया।",
+    "showdown_win": "शोडाउन: {card_win} {card_lose} को हराता है।",
+    "showdown_tie": "शोडाउन टाई: दोनों {card}। पॉट विभाजित - प्रत्येक को {split} मिलता है।"
+  },
+  "outcome": {
+    "p0_wins": "खेलाड़ी 0 जीतता है ({bank0} > {bank1})",
+    "p1_wins": "खेलाड़ी 1 जीतता है ({bank1} > {bank0})",
+    "draw": "जम्मो राउंड के बाद समान चिप्स"
+  }
+}

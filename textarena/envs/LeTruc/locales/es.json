@@ -1,0 +1,42 @@
+{
+  "_comment": "Archivo de idioma de Le Truc. NO traduzcas las claves (lado izquierdo). Traduce solo los valores (lado derecho). Mantén cada {placeholder} exactamente igual. Nunca traduzcas los tokens de acción ('[play]', '[raise]', '[accept]', '[fold]'), las etiquetas de las cartas/palos (p. ej. 3♠, A♥, K♦), las etiquetas de jugador (P0, P1) ni los valores numéricos de puntos.",
+  "_slots": {
+    "{pid}": "A player number, 0 or 1",
+    "{winner}": "The player number who won the trick or hand",
+    "{points}": "A hand point value, e.g. 1, 2 or 4",
+    "{p0}": "Player 0's running match score",
+    "{p1}": "Player 1's running match score",
+    "{cards}": "A space-separated list of the player's card labels, e.g. 'A♦ 3♠ A♥'",
+    "{card}": "A single card label, e.g. '3♠'",
+    "{legal}": "A comma-separated list of the currently legal action tokens"
+  },
+  "player_prompt": {
+    "intro": "Estás jugando a Le Truc, un juego de bazas para 2 jugadores con una baraja de 40 cartas (rango de mayor a menor: 3 2 A K Q J 7 6 5 4).\nEn cada mano recibes 3 cartas y juegas hasta tres bazas de una carta. El rango más alto gana la baza sin importar el palo; los rangos iguales empatan ('anulada'). Gana la mano llevándote dos bazas, o ganando la primera baza cuando la otra empata; una baza anulada cuenta para quien ganó la primera baza, y si las tres empatan nadie puntúa.\nUna mano vale 1 punto. En tu turno puedes '[raise]' (truc) para aumentar la apuesta: 1->2, luego +2 por cada subida adicional hasta 12. Tu oponente debe '[accept]', '[fold]' o volver a '[raise]'. Quien se retira concede la mano, y quien subió se anota la apuesta anterior a esa subida.\nAcciones: '[play <rank>]' (p. ej. '[play 3]'), '[raise]', '[accept]', '[fold]'. El primero en llegar a 12 puntos gana la partida."
+  },
+  "board": {
+    "new_hand": "### Nueva mano valorada en {points} pt(s)\nTus cartas: {cards}",
+    "valid_actions": "Válidas ahora: {legal}."
+  },
+  "invalid_move": {
+    "unrecognised": "Acción no reconocida.",
+    "already_raised": "Ya se subió.",
+    "no_raise_to_accept": "No hay ninguna subida que aceptar.",
+    "cannot_fold": "No se puede retirar ahora.",
+    "wrong_rank": "No tienes ese rango (los palos se ignoran en la entrada).",
+    "must_respond": "Hay una subida pendiente - responde con '[accept]', '[fold]' o vuelve a '[raise]' antes de jugar una carta.",
+    "max_stake": "La mano ya vale el máximo (12); no puedes subir más."
+  },
+  "action": {
+    "raise": "P{pid} canta truc - la mano ahora vale {points} pto(s). El oponente debe '[accept]', '[fold]' o volver a '[raise]'.",
+    "accept": "P{pid} acepta - la mano vale {points} pto(s).",
+    "lead": "P{pid} abre con {card}.",
+    "play": "P{pid} juega {card}. Baza para P{winner}.",
+    "spoilt": "P{pid} juega {card}. Los rangos empatan - la baza queda anulada."
+  },
+  "outcome": {
+    "folded": "El oponente se retiró.",
+    "hand_won": "Mano ganada por P{winner} (+{points} pto(s)). Marcador - P0: {p0}, P1: {p1}.",
+    "void": "Las tres bazas anuladas - sin puntos esta mano. Marcador - P0: {p0}, P1: {p1}.",
+    "reached_twelve": "Se alcanzaron 12 puntos."
+  }
+}

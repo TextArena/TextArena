@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Adiga ciyaartoy {player_id} ugu jirta ciyaarta LinesOfAction.\nQaybahayga waa '{side}', qaybahayga shayga waa '{other}'.\nQaabka guusha: `[b1b3]` (koordinaatada-asal ilaa koordinaatada-socod). Guusha sharci ah ayaa socda si toosan, ama si kor-ama-hoose, ama si karo, idadi sawirada oo ah qaybaha (midab kasta) ee safkaas. Waxaad ka gudbi kartaa qaybahaygaaga, laakiin qaybahayga shayga ma gudbo; halka aad ku soo degto shayga waxaad qabto.  Guusho marka qaybahayga oo dhan ay yihiin kuwa 8-deriska xiriira."
+  },
+  "board": {
+    "current_board": "Guddiga: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Qaabka waa in uu ahaadaa e2e4 (ka,ilaa isku xirka).",
+    "no_piece": "Ma jiro {side} qayb ka mid ah {coord}.",
+    "identical": "Asalka iyo halka loo socdo waa isku mid.",
+    "not_straight_or_diagonal": "Dhaqdhaqaaqa waa in uu ahaadaa mid toos ah ama mid islaan ah.",
+    "wrong_distance": "Waa in uu u dhaqaaqaa masaafo u dhiganta xariiq.",
+    "enemy_blocks": "Cadowga ayaa jidka xiray.",
+    "destination_own": "Meel ay u socdaan waxaa ku sugan heybad u gaar ah."
+  },
+  "game_action": {
+    "moved": "Ciyaaryahanka {player_id} ayaa dhaqaaqay {from} -> {to}",
+    "captured_suffix": "Ciyaaryahanka {player_id} ayaa dhaqaaqay {from} -> {to} qabashada cadowga."
+  },
+  "outcome": {
+    "win": "Dhamaan qaybaha waxay isku xiran yihiin.",
+    "draw_no_capture": "60 lug oo aan la qabsan.",
+    "draw_repetition": "Booska waxaa lagu celiyaa sadex jeer."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction lokalizacijos failas. NERVERSTI raktų (kairė pusė). Tik vertės (dešinė pusė) turi būti verčiama. NERVERSTI lentos koordinačių (a-h, 1-8), figūrų raidžių (O, X), ėjimo formato žetono arba {board} ASCII tinklelio.",
+  "_slots": {
+    "{player_id}": "Žaidėjo numeris, arba 0, arba 1",
+    "{side}": "Žaidėjo figūros raidė, arba O, arba X",
+    "{other}": "Priešininko figūros raidė, arba O, arba X",
+    "{board}": "Lentos ASCII atvaizdavimas; palikti kaip yra",
+    "{coord}": "Lentos koordinatė, pvz., b1 arba a3",
+    "{from}": "Ėjimo pradžios koordinatė, pvz., b1",
+    "{to}": "Ėjimo pabaigos koordinatė, pvz., b3"
+  },
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} LinesOfAction žaidime.\nJūsų figūros yra '{side}', priešininko figūros yra '{other}'.\nĖjimo formatas: `[b1b3]` (nuo-koordinatė iki-koordinatė). Teisėtas ėjimas keliauja horizontaliai, vertikaliai arba įstrižai kvadratų skaičiumi, lygiu visų figūrų (bet kokios spalvos) skaičiui toje linijoje. Jūs galite peršokti savo figūras, bet ne priešininko figūras; nusileidimas ant priešininko figūros ją pagauna.  Laimėkite, kai visos jūsų figūros yra 8-kaimynų jungtos."
+  },
+  "board": {
+    "current_board": "Lenta:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatas turi būti e2e4 (nuo, iki koordinačių).",
+    "no_piece": "Nėra {side} figūros ant {coord}.",
+    "identical": "Pradžios ir pabaigos koordinatės yra identiškos.",
+    "not_straight_or_diagonal": "Ėjimas turi būti tiesus arba įstrižas.",
+    "wrong_distance": "Turi judėti atstumu, lygiu figūrų skaičiui linijoje.",
+    "enemy_blocks": "Priešininko figūra blokuoja kelią.",
+    "destination_own": "Pabaigos koordinatė užimta savo figūra."
+  },
+  "game_action": {
+    "moved": "Žaidėjas {player_id} pajudėjo {from} -> {to}",
+    "captured_suffix": "Žaidėjas {player_id} pajudėjo {from} -> {to} pagaudamas priešininką."
+  },
+  "outcome": {
+    "win": "Visos figūros sujungtos.",
+    "draw_no_capture": "60 ėjimų be pagavimo.",
+    "draw_repetition": "Padėtis kartojasi tris kartus."
+  }
+}

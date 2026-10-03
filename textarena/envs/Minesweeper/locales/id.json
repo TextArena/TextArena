@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Anda sedang memainkan permainan Minesweeper.\nTujuan permainan ini adalah untuk mengungkap semua sel yang tidak mengandung ranjau.\nUntuk melakukan gerakan, cukup tentukan koordinat baris dan kolom yang ingin Anda ungkap dengan format:\n- `[row col]`: Ungkap sel pada baris dan kolom yang ditentukan.\nContoh:\n- `[3 2]` untuk mengungkap sel di Baris 3, Kolom 2.\n- `[5 6]` untuk mengungkap sel di Baris 5, Kolom 6.\nPada gerakan pertama Anda, Anda akan mengungkap area di sekitar sel yang Anda pilih untuk memastikan awal yang aman.\nTata letak papan saat ini ditampilkan di bawah ini. Sel yang belum terungkap direpresentasikan oleh titik ('.'), angka yang terungkap menunjukkan jumlah ranjau yang berdekatan.\nPerhatikan untuk tidak memilih sel yang sudah terungkap.\nBerikut adalah tata letak papan saat ini:\n"
+  },
+  "board": {
+    "game_board": "Papan Permainan:\n\n{board}",
+    "current_board": "Papan Saat Ini:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Anda tidak merespons dengan koordinat yang valid dalam kurung siku.",
+    "out_of_bounds": "Koordinat baris dan kolom yang ditentukan berada di luar batas.",
+    "already_revealed": "Sel di ({row}, {col}) sudah terungkap.",
+    "hit_mine": "Anda menabrak ranjau di ({row}, {col})."
+  },
+  "game_action": {
+    "revealed": "Anda mengungkap sel di ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Selamat! Anda telah berhasil membersihkan papan Minesweeper.",
+    "turn_limit": "Batas giliran telah tercapai. Anda berhasil mengungkap {percent}% dari sel yang aman."
+  }
+}

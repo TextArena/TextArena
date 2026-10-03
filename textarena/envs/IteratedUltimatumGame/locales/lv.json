@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame lokalizācijas fails. NEtulkojiet atslēgas (kreisā puse). Tulkojiet tikai vērtības (labā puse).",
+  "_slots": {
+    "{player_id}": "Spēlētāja numurs, 0 vai 1",
+    "{other_id}": "Otra spēlētāja numurs, 1 vai 0",
+    "{num_rounds}": "Kopējais raundu skaits",
+    "{pool}": "Pieejamā naudas summa katrā raundā (skaitlis)",
+    "{round_number}": "Pašreizējā raunda numurs",
+    "{proposer_id}": "Piedāvājuma veidotāja spēlētāja numurs, 0 vai 1",
+    "{responder_id}": "Atbildētāja spēlētāja numurs, 0 vai 1",
+    "{offer}": "Piedāvātā summa (skaitlis)",
+    "{keep}": "Summa, ko piedāvājuma veidotājs saglabā (skaitlis)",
+    "{proposer_gain}": "Nauda, ko piedāvājuma veidotājs ieguva šajā raundā (skaitlis)",
+    "{responder_gain}": "Nauda, ko atbildētājs ieguva šajā raundā (skaitlis)",
+    "{total_0}": "Spēlētāja 0 kopējā summa (skaitlis)",
+    "{total_1}": "Spēlētāja 1 kopējā summa (skaitlis)",
+    "{winner}": "Uzvarētāja spēlētāja numurs",
+    "{loser}": "Zaudētāja spēlētāja numurs",
+    "{winner_total}": "Uzvarētāja kopējā naudas summa (skaitlis)",
+    "{loser_total}": "Zaudētāja kopējā naudas summa (skaitlis)",
+    "{total}": "Katru spēlētāju saistītā gala summa (skaitlis)"
+  },
+  "player_prompt": {
+    "intro": "Jūs esat Spēlētājs {player_id}, spēlējot {num_rounds} raundus Iterated Ultimatum Game.\nJums ir ${pool} lai sadalītu šo raundu starp sevi un Spēlētāju {other_id}.\n\nPiedāvājuma veidotājs:\n  - Izveido piedāvājumu: [Offer: $X] (0 <= X <= pool)\n  - Ja pieņemts → Jūs iegūstat $(pool - X), cits spēlētājs iegūst $X\n  - Ja noraidīts → Abi iegūst $0\n  - Piemērs: [Offer: $3]  vai  'Manuprāt, tas ir godīgi. [Offer: $5]'\n\nAtbildētājs:\n  - Lēmē par piedāvājumu ar [Accept] vai [Reject]\n  - Piemērs: 'Tas šķiet saprotams. [Accept]'\n            'Pārāk negodīgi. [Reject]'\n"
+  },
+  "round": {
+    "begins": "--- Raunds {round_number} sākas! ---\nSpēlētājs {proposer_id} ir piedāvājuma veidotājs, Spēlētājs {responder_id} ir atbildētājs.",
+    "offer": "Raunds {round_number}: Spēlētājs {proposer_id} piedāvā ${offer} Spēlētājam {responder_id} (saglabājot ${keep}).",
+    "accepted": "Spēlētājs {responder_id} pieņēma! Raunda {round_number} ieguvumi: Spēlētājs {proposer_id} +${proposer_gain}, Spēlētājs {responder_id} +${responder_gain}. Jaunās summas: Spēlētājs 0: ${total_0}, Spēlētājs 1: ${total_1}.",
+    "rejected": "Spēlētājs {responder_id} noraidīja piedāvājumu! Raunda {round_number} ieguvumi: Abi spēlētāji +$0. Summas paliek: Spēlētājs 0: ${total_0}, Spēlētājs 1: ${total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Piedāvājuma veidotājam jāveido piedāvājums, izmantojot formātu [Offer: $X].",
+    "bad_integer": "Piedāvājuma summai jābūt derīgam skaitlim.",
+    "out_of_range": "Piedāvājumam jābūt starp $0 un ${pool}.",
+    "no_current_offer": "Nav pašreizēja piedāvājuma, uz kuru atbildēt.",
+    "accept_or_reject": "Atbildētājam jāizvēlas vai [Accept] vai [Reject] piedāvājumu."
+  },
+  "outcome": {
+    "win": "Spēlētājs {winner} uzvarēja ar ${winner_total} summu pret Spēlētāja {loser} ${loser_total} summu.",
+    "draw": "Neizšķirts! Abi spēlētāji beidza ar ${total} summu."
+  }
+}

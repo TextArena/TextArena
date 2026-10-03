@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Nawe ngumdlali {player_id} emdlalweni we-Kuhn Poker we-{max_rounds}.\nImithetho yeMdlalo:\n- I-Kuhn Poker isebenzisa dekhi ye-3 yemakadi eJ, Q, K (iJ iyona ifuphi, iK iyona iphakeme)\n- Ngemdlalo ngamunye kubetwa {ante} chip futsi umdlali anikwe kadi 1 (kumbula kutsi makadi ayahlukaniswa, ngako-ke awukwati kuwa na kadi lefanana na leyomgadli wakho).\n- Mdlalo uyaqhubeka kuze kube {max_rounds} rounds\n- Umdlali lonemali eningi emvakwe kugcina kwemdlalo wona\nImithetho yeNchukumo:\n- '[check]': Dlula ngaphandle kubeta (nje kuphela uma kungekho beti etafileni)\n- '[bet]': Ongeza 1 chip ku-pot (nje kuphela uma kungekho beti etafileni)\n- '[call]': Lingana na beti ya mgadli wakho ongeza 1 chip ku-pot\n- '[fold]': Beka isandla lakho futsi uyivumele mgadli wakho atfole i-pot"
+  },
+  "init_round": {
+    "round_start": "### Kusuka round {current_round} kwezinto {max_rounds} zezinga. Ikadi yakho ni: '{player_card}'",
+    "available_actions": "Tintfo longatenta nguleti: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ixesha kufuneka [Check], [Bet], [Call], noma [Fold].",
+    "not_legal": "Lesento kumele sibe {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Umdlali {player_id}, wakhetse nchukumo: '[{move}]'.",
+    "valid_actions": "Tintfo longatenta nguleti: {legal_actions}.",
+    "round_summary": "{reason} Maphuzu lamanje: Umdlali 0: '{player_0_chips}'; Umdlali 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Kadi ya Umdlali {winner} {winner_card} ina tsandza kadi ya Umdlali {loser} {loser_card}. Umdlali {winner} utsandze i-pot ye-{pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Ekupheleni kwemijikelo {max_rounds}, bobabili labadlali bebaphetse linani lelilinganako lemasheke.",
+    "round_win": "Umdlali {player_id} uvele.",
+    "winner_player0": "Umdlali 0 uncobile ngekutsi abe nemachips lamanyenti ekugcineni kwawo onkhe ema-{max_rounds} round.",
+    "winner_player1": "Umdlali 1 uncobile ngekutsi abe nemachips lamanyenti ekugcineni kwawo onkhe ema-{max_rounds} round."
+  }
+}

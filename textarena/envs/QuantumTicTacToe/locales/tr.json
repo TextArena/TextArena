@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Quantum Tic Tac Toe'da Oyuncu {player_id}'siniz.\nSimgeniz '{symbol}' ve hamle numaralarınız her zaman {parity} (örneğin, X1, X3 veya O2, O4).\n\nHedef: Üç klasik işareti bir araya getirerek (süperpozisyonlardan katılaştırılmış) kazanmak.\n\nNasıl Oynanır:\n- Her turda, '[a,b]' formatını kullanarak iki farklı boş kareye ürkütücü bir işaret yerleştirin.\n- Bu işaretler birbirine bağlanmıştır ve 'X1 / X1' veya 'O4 / O4' gibi etiketlenmiştir.\n- Zaten çökmüş (katılaştırılmış) bir kareye ürkütücü işaretler yerleştiremezsiniz.\n\nÇökme Kuralı:\n- Hamleniz, bağlanma grafiğinde bir döngü oluşturursa, otomatik olarak çöker.\n- Döngüdeki her ürkütücü işaret, iki konumundan birinde klasik bir işarete dönüşür.\n- Herhangi bir bağımlı ürkütücü işaret de çöker.\n\nZafer:\n- Oyun, bir oyuncunun üç klasik işareti bir araya getirdiğinde sona erer.\n- Her iki oyuncu da aynı çökme sırasında bir satır elde ederse, daha düşük maksimum hamle numarasına sahip olan kazanır.\n\nÖrnek hamle: '[0,4]' 0 ve 4 numaralı hücrelere ürkütücü bir işaret yerleştirir."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Tahtası:\n\n{board}\n\nHamlenizi '[a,b]' formatında göndererek iki konumda bir kuantum işareti yerleştirin."
+  },
+  "invalid_move": {
+    "wrong_format": "Geçersiz format. '[a,b]' formatını kullanın.",
+    "invalid_cells": "Geçersiz veya yinelenen hücre dizinleri.",
+    "already_solidified": "Hücrelerden biri zaten katılaştırılmış."
+  },
+  "game_action": {
+    "placed": "Oyuncu {player_id}, simgesini {pos_a} ve {pos_b} hücreleri arasında bir süperpozisyona yerleştirdi."
+  },
+  "game_message": {
+    "dependent_resolved": "Bağımlı süperpozisyon çözüldü. Hücre ({r}, {c}) artık {symbol}.",
+    "last_cell_resolved": "Son hücrenin süperpozisyonu çözüldü. Hücre ({r}, {c}) artık {symbol}.",
+    "superposition_resolved": "Süperpozisyon çözüldü. Hücre ({r}, {c}) artık {symbol}."
+  },
+  "outcome": {
+    "win": "Oyuncu {player_id}, katılaştırılmış işaretlerle kazanır!",
+    "draw": "Oyun berabere!"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í leiknum Spite and Malice fyrir tvo leikmenn. Markmið þitt er að vera fyrstur til að tæma útborgunarstokkinn þinn.\n\n### Yfirlit leiks:\n- Markmiðið er að hreinsa útborgunarstokkinn þinn með því að spila spil á miðjuspilastokkana.\n- Þú getur spilað spil frá þremur áttum:\n  1. **Hendi** þinni (þú byrjar hverja umferð með allt að 5 spil í hendi).\n  2. **Efsta spili útborgunarstokksins þíns**.\n  3. **Efsta spili hverrar einnar af útreikningsstokkunum þínum**.\n\n### Spilareglur:\n- Þú mátt spila spil á miðjuspilastokk ef það er **einn tölustig hærra** en efsta spilið á þeim stokki (miðjuspilastokkar byrja á Ási og fara upp í Drottningu; Konungar eru villtir - þeir geta verið spilaðir á hvaða spil sem er en breyta ekki tölustigsröðinni. Þetta þýðir að ef Konungur er notaður eftir 4, þá er sá Konungur tölustigi 5 og næsta spil verður að vera 6).\n- Ef þú getur ekki spilað fleiri spil, verður þú að **útreikna spil** í einn af útreikningsstokkunum þínum til að ljúka umferðinni þinni.\n- Ef miðjuspilastokkur nær Drottningu, verður hann sjálfkrafa hreinsaður.\n- Tölustigsröðin er: Á=1, 2=2, ..., 9=9, J=10, Q=11, K sem villtur.\n\n### Aðgerðir:\n1. **Dra**: Í upphafi umferðar þinnar, dregðu spil til að fylla hendi þína upp í 5 spil. Sláðu inn **[draw]** til að byrja.\n2. **Spila spil**: Til að spila spil, tilgreindu spilið og miðjuspilastokkinn á þennan hátt: **[play A♠ 0]** (þar sem 'A♠' er spilið og '0' er vísitala miðjuspilastokksins).\n3. **Útreikna**: Ef þú getur ekki spilað fleiri spil, útreiknaðu spil frá hendi þinni í útreikningsstokk til að ljúka umferðinni þinni. Sláðu inn **[discard A♠ 1]** (þar sem 'A♠' er spilið og '1' er vísitala útreikningsstokksins). Athugaðu að þú getur ekki útreiknað neitt spil frá útborgunarstokknum. Þú mátt aðeins útreikna spil frá hendi þinni.\n\n"
+  },
+  "board": {
+    "current_board": "Núverandi Borð:\n\n{board}\nLausir Leikir: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Miðjuspilastokkar ---\n",
+    "pile": "{observation}Stokkur {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Sýn Leikmanns {player_id} ---\n",
+    "payoff": "{observation}Útborgunarstokkur (Efsta spil): {top_card}, Lengd útborgunarstokks: {payoff_length}\n",
+    "hand": "{observation}Hend: {hand}\n",
+    "discard": "{observation}Útreikningsstokkar: {discard}\n",
+    "empty": "Tómt"
+  },
+  "game_message": {
+    "no_cards_left": "Það eru engin fleiri spil til að drega frá. Munda að þú getur spilað spil frá þessum áttum:\n  1. **Hendi** þinni.\n  2. **Efsta spili útborgunarstokksins þíns**.\n  3. **Efsta spili hverrar einnar af útreikningsstokkunum þínum**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Rangt snið fyrir leik. Leikmaður {player_id} svaraði ekki með giltum leik í hornklosum.",
+    "invalid_play": "Ógilt spil. Leikmaður {player_id} reyndi að spila {card} á miðjuspilastokk {index}.",
+    "discard_from_payoff": "Ógilt útreikning. Leikmaður {player_id} reyndi að útreikna spil frá útborgunarstokknum.",
+    "discard_not_in_hand": "Ógilt útreikning. Leikmaður {player_id} reyndi að útreikna spil sem er ekki í hendi.",
+    "wrong_move_type": "Rangt gerð leiks. Leikmaður {player_id} svaraði ekki með giltum gerð leiks."
+  },
+  "game_action": {
+    "you_drew": "Þú dróst spil.",
+    "opponent_drew": "Leikmaður {player_id} dróst spil.",
+    "you_played": "Þú spilaðir {card} á miðjuspilastokk {index}.",
+    "opponent_played": "Leikmaður {player_id} spilaði {card} á miðjuspilastokk {index}.",
+    "you_discarded": "Þú hefur útreiknað {card} í útreikningsstokk {index}, sem einnig þýðir að þú hefur lokið umferðinni þinni. Engar frekari aðgerðir þínar verða taldar fyrir þessa umferð. Leikmaður {next_player_id} mun fara næst.",
+    "opponent_discarded": "Leikmaður {player_id} útreiknaði {card} í útreikningsstokk {index}, sem einnig þýðir að þeir hafa lokið umferðinni sinni. Engar frekari aðgerðir Leikmanns {player_id} verða taldar fyrir þessa umferð. Leikmaður {next_player_id}, þú munt fara næst. Vinsamlegast sláðu inn aðgerðina þína í sniðinu [aðgerð spil miðjuspilastokk]."
+  },
+  "outcome": {
+    "payoff_cleared": "Leikmaður {current_player} hefur lokið útborgunarstokknum sínum! Leikmaður {current_player} vinnur!",
+    "deadlock_player_0": "Jafntefli náð! Leikmaður 0 vinnur með {player_0_payoff} spilum eftir vs {player_1_payoff} spil Leikmanns 1.",
+    "deadlock_player_1": "Jafntefli náð! Leikmaður 1 vinnur með {player_1_payoff} spilum eftir vs {player_0_payoff} spil Leikmanns 0.",
+    "deadlock_tie": "Jafntefli náð með jafntefli! Báðir leikmenn hafa {player_0_payoff} spil eftir. Leikmaður {current_player} vinnur að sjálfsögðu."
+  }
+}

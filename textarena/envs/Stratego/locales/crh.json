@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Siz Stratego'da Oyuncu {player_id}sınız.\nAmacınız, rakibinizin Bayrağını ele geçirmek veya tüm taşınabilir parçalarını ortadan kaldırmaktır.\nOrdunuz, Bayrağınız, Bombalarınız ve çeşitli rütbelerde parçalarınızla birlikte size yerleştirildi.\n\n### Oyun Talimatları\n1. **Hareket Kuralları:**\n   - Sıranızda, parçalarınızı bir adımda bir komşu kareye (yukarı, aşağı, sola veya sağa) taşıyabilirsiniz.\n   - Örnek: Bir parça A1'den B1'e veya A1'den A2'ye taşınabilir, ancak B1 ve A2 sizin parçalarınızla dolu değilse.\n   - Seçilen parça bir Bomba veya Bayrak ise, taşınamaz.\n2. **Çatışmalar:**\n   - Rakibinizin parçasının bulunduğu bir kareye taşınırsanız, bir çatışma meydana gelir:\n     - Daha yüksek rütbeli parça kazanır ve rakibinizin parçasını ortadan kaldırır.\n     - Rütbeler eşitse, her iki parça da ortadan kaldırılır.\n     - **Özel Durumlar:**\n       - Bombalar, Madenciler hariç, çoğu hücum eden parçayı ortadan kaldırır.\n       - Casuslar, ilk olarak hücum ettikleri takdirde Mareşali yenebilir, ancak diğer tüm parçalara karşı kaybeder.\n3. **Stratejik Hedefler:**\n   - Rakibinizin parçalarını, hareketleri ve çatışmaları aracılığıyla tanımlayın.\n   - Bayrağınızı korurken, rakibinizin Bayrağını ele geçirmeye çalışın.\n   - İzciyi, rakibinizin parçaları hakkında bilgi edinmek ve zayıf parçalara saldırmak için stratejik olarak kullanın.\n\n### Nasıl Hareket Edebilirim:\n1. Taşımak istediğiniz parça ve hedefinin koordinatlarını belirtin.\n2. Formatı kullanın: [A0 B0], burada A0 kaynak konumu, B0 hedef konumudur.\n   - Örnek: 0. satırdan, 0. sütundan 1. satıra, 0. sütuna bir parça taşımak için [A0 B0] girin.\n3. Hedefin, yukarıdaki hareket kurallarına göre geçerli olduğundan emin olun.\n\n### Önemli Notlar:\n- Tahta, parçalarınızı ve konumlarını gösterecektir, örneğin MN, MS.\n- Tahta, parçalarının bilinen konumlarını, rütbelerini açığa vurmadan gösterecektir, örneğin ?.\n- ~ ile belirtilen ızgaralar göllerdir ve üzerine taşınamaz.\n- Oyununuzu, ön saflardaki parçalarınızı hareket ettirerek, rakibinizin parçaları hakkında bilgi edinerek başlamanızı öneririz. Oyuncu 0 ve oyuncu 1'in ön safları sırasıyla D ve G satırlarıdır.\n\nCariy tahtа durumu:"
+  },
+  "board": {
+    "current_board": "Cariy tahtа:\n\n{board}\nMumkin haraketler: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Geçersiz hareket formatı. Oyuncu {player_id} [A0 B0] formatında bir hareket girmediniz.",
+    "invalid_coordinates": "Yanlış areket formatı. Oyuncu {player_id} keçerli koordinatlar kirmegen.",
+    "not_own_piece": "Uquq bozulğan areket şekli. {player_id} oyuncısı öz parçalarından birini oynamalı.",
+    "scout_through_pieces": "Yanlış areket formatı. Oyuncu {player_id} keşifçisini diger piyesilerden keçiremegen.",
+    "scout_diagonal": "Ucuz areket formatı. {player_id} oyuncısı keşifçini şivede kötere bilmez.",
+    "non_scout_multi_square": "Uquq bozulğan areket şekli. Kâşiflerden ğayrı, parçalar tek bir kereden köçip ola bileler.",
+    "move_into_lake": "Yanlış areket formatı. Oyuncu {player_id} gölüne köçürip olamaz.",
+    "move_onto_own_piece": "Uquq bozulğan areket şekli. {player_id} oyuncısı öz parçalarına keçip olamay.",
+    "move_bomb_or_flag": "Uquqsız areket formatı. {player_id} oyuncısı bomba ya da bayraqnı avuştırıp olamay."
+  },
+  "game_action": {
+    "you_moved": "Siz parçasını {source} dan {dest} ye taşadiniz.",
+    "opponent_moved": "Oyuncu {player_id} bir parçasını {source} dan {dest} ye taşadı.",
+    "you_equal_ranks": "Siz parçasını {source} dan {dest} ye taşadiniz. Hücum eden parça {attacking_rank} ve hedef parça {target_rank} idi. Rütbe aynı olduğundan, her iki parça da kaybedildi.",
+    "opponent_equal_ranks": "Oyuncu {player_id} bir parçasını {source} dan {dest} ye taşadı. Hücum eden parça {attacking_rank} ve hedef parça {target_rank} idi. Rütbe aynı olduğundan, her iki parça da kaybedildi.",
+    "you_miner_defused": "Siz parçasını {source} dan {dest} ye taşadiniz. Hücum eden parça {attacking_rank} ve hedef parça {target_rank} idi. Madenciler bombaları devre dışı bırakabildiğinden, siz kazandınız.",
+    "opponent_miner_defused": "Oyuncu {player_id} {source}tan {dest}ke bir parça köçürdi. Hücum etken parça {attacking_rank} edi, destinatsiya parçası ise {target_rank} edi. Madenciler bombalarnı zararsızlandırğanda, siz bu cenkniñ ögünde qaldıñız.",
+    "you_bomb_lost": "Siz {source}tan {dest}ke piyesiniñizni köçürdiniz. Hücum etken piyesi {attacking_rank} edi, hedef piyesi ise {target_rank} edi. Hücum etken piyesi miner olmayıp, siz cenkni elgeçirdiñiz.",
+    "opponent_bomb_won": "Oyuncu {player_id} bir parçasını {source} dan {dest} ye taşadı. Hücum eden parça {attacking_rank} ve hedef parça {target_rank} idi. Hücum eden bir madenci olmadığından, siz kazandınız.",
+    "you_spy_won": "Siz parçasını {source} dan {dest} ye taşadiniz. Hücum eden parça {attacking_rank} ve hedef parça {target_rank} idi. Hücum eden bir casus ve hedef bir mareşalse, siz kazandınız.",
+    "opponent_spy_lost": "Oyuncu {player_id} {source}tan {dest}ke piyesini köçürdi. Hücum etken piyesi {attacking_rank} edi, hedef piyesi ise {target_rank} edi. Hücum etken piyesi casus, hedef piyesi ise marşal oldığı içün, siz cenkni elgeçirdiñiz.",
+    "you_higher_won": "Siz {source}tan {dest}ke piyesiniñizni köçürdiniz. Hücum etken piyesi {attacking_rank} edi, hedef piyesi ise {target_rank} edi. Hücum etken piyesi hedef piyesinden yuqarıda oldığı içün, siz cenkni qazandıñız.",
+    "opponent_higher_lost": "Oyuncu {player_id} {source}tan {dest}ke piyesini köçürdi. Hücum etken piyesi {attacking_rank} edi, hedef piyesi ise {target_rank} edi. Hücum etken piyesi hedef piyesinden yuqarıda oldığı içün, siz cenkni elgeçirdiñiz.",
+    "you_lower_lost": "Siz {source}tan {dest}ke piyesiniñizni köçürdiniz. Hücum etken piyesi {attacking_rank} edi, hedef piyesi ise {target_rank} edi. Hücum etken piyesi hedef piyesinden aşağıda oldığı içün, siz cenkni elgeçirdiñiz.",
+    "opponent_lower_won": "Oyuncu {player_id} bir parçasını {source} dan {dest} ye taşadı. Hücum eden parça {attacking_rank} ve hedef parça {target_rank} idi. Hücum eden hedeften daha düşük rütbedeyse, siz kazandınız."
+  },
+  "outcome": {
+    "flag_captured": "Oyuncı {player_id} raqipniñ bayrağını zapt etti!",
+    "no_movable_pieces": "Oyuncu {winner_id} kazandı! Oyuncu {loser_id} taşınabilir parçaları kalmadı."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Vous êtes le Joueur {player_id} dans Chopsticks. À votre tour, choisissez l'une des options suivantes :\n  + Attaquer : '[attack M O]', où M=votre main (0 ou 1) et O=la main adverse (0 ou 1).\n    - Le nombre de la main adverse augmente de celui de votre main ; s'il devient >=5, il passe à 0.\n  + Répartir : '[split L R]' pour redistribuer votre total de doigts entre L et R (L+R = votre total).\nRépondez avec exactement l'une de ces commandes."
+  },
+  "board": {
+    "current_board": "Plateau actuel :\nJoueur 0 : {hands_0}\nJoueur 1 : {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Votre main {my_idx} est morte.",
+    "opp_hand_dead": "La main adverse {opp_idx} est déjà morte.",
+    "split_sum": "La répartition doit avoir une somme égale à {total}.",
+    "split_no_change": "La répartition doit modifier la distribution de vos mains.",
+    "invalid_command": "Coup invalide. Utilisez “[attack M O]” ou “[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} attaque la main {opp_idx} de P{opp_id} : elle passe de {opp_val} à {new_val}.",
+    "split": "P{player_id} répartit ses doigts en [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Les deux mains adverses sont mortes.",
+    "draw": "La limite de tours a été atteinte."
+  }
+}

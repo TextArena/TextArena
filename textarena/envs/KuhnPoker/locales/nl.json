@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in een spel van {max_rounds} rondes Kuhn Poker.\nSpelregels:\n- Kuhn Poker gebruikt een kaartspel van 3 kaarten met J, Q, K (J laagst, K hoogst)\n- Elke speler zet {ante} chip in en ontvangt 1 kaart per ronde (houd er rekening mee dat de kaarten zonder vervanging worden gedeeld, dus u kunt niet dezelfde kaart hebben als uw tegenstander).\n- Het spel gaat {max_rounds} rondes door\n- De speler met de meeste chips na alle rondes wint\nActieregels:\n- '[check]': Pas zonder inzet (alleen als er geen inzet op tafel ligt)\n- '[bet]': Voeg 1 chip toe aan de pot (alleen als er geen inzet op tafel ligt)\n- '[call]': Kom overeen met de inzet van uw tegenstander door 1 chip toe te voegen aan de pot\n- '[fold]': Geef uw hand op en laat uw tegenstander de pot winnen"
+  },
+  "init_round": {
+    "round_start": "### Ronde {current_round} van {max_rounds} rondes begint. Uw kaart is: '{player_card}'",
+    "available_actions": "Uw beschikbare acties zijn: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Actie moet [Check], [Bet], [Call] of [Fold] zijn.",
+    "not_legal": "Actie moet {legal_actions} zijn."
+  },
+  "action": {
+    "submit_move": "Speler {player_id} heeft zet ingediend: '[{move}]'.",
+    "valid_actions": "Uw beschikbare acties zijn: {legal_actions}.",
+    "round_summary": "{reason} Huidige scores: Speler 0: '{player_0_chips}'; Speler 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Showdown: Kaart {winner_card} van Speler {winner} verslaat kaart {loser_card} van Speler {loser}. Speler {winner} wint pot van {pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Aan het einde van {max_rounds} rondes hadden beide spelers evenveel chips.",
+    "round_win": "Speler {player_id} heeft opgegeven.",
+    "winner_player0": "Speler 0 won door aan het einde van alle {max_rounds} rondes meer chips te hebben.",
+    "winner_player1": "Speler 1 won door aan het einde van alle {max_rounds} rondes meer chips te hebben."
+  }
+}

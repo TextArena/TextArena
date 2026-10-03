@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} u Strategu.\nVaš cilj je zarobiti zastavu protivnika ili eliminirati sve njihove pokretne figure.\nVaša vojska je postavljena za vas na ploči, uključujući vašu zastavu, bombe i druge figure različitih činova.\n\n### Upute za igru\n1. **Pravila kretanja:**\n   - Na vašoj šansi, možete pomaknuti jednu figuru za jedan korak u susjedni kvadrat (gore, dolje, lijevo ili desno) koji je već zauzet vašim figurama.\n   - Primjer: Figura se može pomaknuti iz A1 u B1 ili A1 u A2 ako B1 i A2 nisu postavljene s igračevim vlastitim figurama.\n   - Ako je odabrana figura bomba ili zastava, ne može se pomaknuti.\n2. **Bitke:**\n   - Ako se pomaknete na kvadrat koji je zauzet protivnikovom figurom, tada će se dogoditi bitka:\n     - Figura s višim činom pobjeđuje i eliminira protivnikovu figuru.\n     - Ako su činovi jednaki, obje figure se uklanjaju s ploče.\n     - **Posebni slučajevi:**\n       - Bombe eliminiraju većinu napadačkih figura osim rudara, koji razvlače bombe.\n       - Špijuni mogu pobijediti maršala ako špijun napadne prvi, ali gube od svih ostalih figura.\n3. **Strateški ciljevi:**\n   - Identificirajte protivnikove figure kroz njihova kretanja i bitke.\n   - Zaštitite vašu zastavu dok pokušavate zarobiti zastavu protivnika.\n   - Koristite izviđače strateški kako biste dobili informacije o protivnikovim figurama i napali slabije.\n\n### Kako napraviti potez:\n1. Navedite koordinate figure koju želite pomaknuti i njezine odredište.\n2. Koristite format: [A0 B0], gdje je A0 polazna pozicija, a B0 odredište.\n   - Primjer: Da biste pomaknuli figuru iz reda 0, stupca 0 u red 1, stupac 0, unesite [A0 B0].\n3. Obavezno provjerite da je odredište valjano prema pravilima kretanja gore.\n\n### Važne napomene:\n- Ploča će prikazati vaše figure i njihove pozicije, npr. MN, MS.\n- Ploča će također prikazati poznate pozicije protivnikovih figura bez otkrivanja njihovih činova, npr. ?.\n- Mreže s ~ su jezera i ne mogu se pomaknuti na njih.\n- Kao prijedlog, započnite igru tako što ćete pomaknuti vaše figure koje su na prvoj liniji kako biste dobili informacije o protivnikovim figurama. Igrač 0 i igrač 1 prve linije su red D i G.\n\nOvdje je trenutno stanje ploče:\n"
+  },
+  "board": {
+    "current_board": "Trenutna ploča:\n\n{board}\nDostupni potezi: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Nevaljani format akcije. Igrač {player_id} nije unio potez u formatu [A0 B0].",
+    "invalid_coordinates": "Nevaljani format akcije. Igrač {player_id} nije unio valjane koordinate.",
+    "not_own_piece": "Nevaljani format akcije. Igrač {player_id} mora pomaknuti jednu od svojih figura.",
+    "scout_through_pieces": "Nevaljani format akcije. Igrač {player_id} ne može pomaknuti izviđača kroz druge figure.",
+    "scout_diagonal": "Nevaljani format akcije. Igrač {player_id} ne može pomaknuti izviđača dijagonalno.",
+    "non_scout_multi_square": "Nevaljani format akcije. Figure, osim izviđača, mogu se pomaknuti samo za jedan kvadrat odjednom.",
+    "move_into_lake": "Nevaljani format akcije. Igrač {player_id} ne može se pomaknuti u jezero.",
+    "move_onto_own_piece": "Nevaljani format akcije. Igrač {player_id} ne može se pomaknuti na svoju vlastitu figuru.",
+    "move_bomb_or_flag": "Nevaljani format akcije. Igrač {player_id} ne može pomaknuti bombu ili zastavu."
+  },
+  "game_action": {
+    "you_moved": "Pomaknuli ste figuru iz {source} u {dest}.",
+    "opponent_moved": "Igrač {player_id} je pomaknuo figuru iz {source} u {dest}.",
+    "you_equal_ranks": "Pomaknuli ste figuru iz {source} u {dest}. Napadačka figura je bila {attacking_rank} i ciljana figura je bila {target_rank}. Kako su činovi jednaki, obje figure su izgubile.",
+    "opponent_equal_ranks": "Igrač {player_id} je pomaknuo figuru iz {source} u {dest}. Napadačka figura je bila {attacking_rank} i ciljana figura je bila {target_rank}. Kako su činovi jednaki, obje figure su izgubile.",
+    "you_miner_defused": "Pomaknuli ste figuru iz {source} u {dest}. Napadačka figura je bila {attacking_rank} i ciljana figura je bila {target_rank}. Kako rudari mogu razvlačiti bombe, pobijedili ste u bitci.",
+    "opponent_miner_defused": "Igrač {player_id} je pomaknuo figuru iz {source} u {dest}. Napadačka figura je bila {attacking_rank} i ciljana figura je bila {target_rank}. Kako rudari mogu razvlačiti bombe, izgubili ste u bitci.",
+    "you_bomb_lost": "Pomaknuli ste figuru iz {source} u {dest}. Napadačka figura je bila {attacking_rank} i ciljana figura je bila {target_rank}. Kako napadač nije rudar, izgubili ste u bitci.",
+    "opponent_bomb_won": "Igrač {player_id} je pomaknuo figuru iz {source} u {dest}. Napadačka figura je bila {attacking_rank} i ciljana figura je bila {target_rank}. Kako napadač nije rudar, pobijedili ste u bitci.",
+    "you_spy_won": "Pomaknuli ste figuru iz {source} u {dest}. Napadačka figura je bila {attacking_rank} i ciljana figura je bila {target_rank}. Kako je napadač špijun i ciljana figura je maršal, pobijedili ste u bitci.",
+    "opponent_spy_lost": "Igrač {player_id} je pomaknuo figuru iz {source} u {dest}. Napadačka figura je bila {attacking_rank} i ciljana figura je bila {target_rank}. Kako je napadač špijun i ciljana figura je maršal, izgubili ste u bitci.",
+    "you_higher_won": "Pomaknuli ste figuru iz {source} u {dest}. Napadačka figura je bila {attacking_rank} i ciljana figura je bila {target_rank}. Kako je napadač višeg čina od ciljane figure, pobijedili ste u bitci.",
+    "opponent_higher_lost": "Igrač {player_id} je pomaknuo figuru iz {source} u {dest}. Napadačka figura je bila {attacking_rank} i ciljana figura je bila {target_rank}. Kako je napadač višeg čina od ciljane figure, izgubili ste u bitci.",
+    "you_lower_lost": "Pomaknuli ste figuru iz {source} u {dest}. Napadačka figura je bila {attacking_rank} i ciljana figura je bila {target_rank}. Kako je napadač nižeg čina od ciljane figure, izgubili ste u bitci.",
+    "opponent_lower_won": "Igrač {player_id} je pomaknuo figuru iz {source} u {dest}. Napadačka figura je bila {attacking_rank} i ciljana figura je bila {target_rank}. Kako je napadač nižeg čina od ciljane figure, pobijedili ste u bitci."
+  },
+  "outcome": {
+    "flag_captured": "Igrač {player_id} je zarobio zastavu protivnika!",
+    "no_movable_pieces": "Igrač {winner_id} pobjeđuje! Igrač {loser_id} nema više pokretnih figura."
+  }
+}

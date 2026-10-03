@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ami Stratego re Player {player_id} achi.\nTomaar lakshya haachhi tomaar birodhi ke Flag dhorbaa ya tomaar birodhi ke sob movable pieces eliminate kora.\nTomaar sena board re rakhaa hoichhe, jodi aachhe tomaar Flag, Bombs, aar onyo pieces jini varrying ranks aachhe.\n\n### Gameplay Instructions\n1. **Movement Rules:**\n   - Tomaar turn re, tumi ek piece ke ek step diye adjacent square re move korte paro (up, down, left, aar right) jeta already occupied aachhe tomaar pieces diye.\n   - Example: Ek piece A1 theke B1 aar A1 theke A2 te move korte paro jodi B1 aar A2 te tomaar nijer pieces rakhaa na thake.\n   - Jodi select kora piece ek Bomb aar Flag hoy, tahole move kora jabe na.\n2. **Battles:**\n   - Jodi tumi ek square re move koro jeta occupied aachhe birodhi ke piece diye, tahole ek battle hobe:\n     - Piece jeta higher rank aachhe se win korbe aar birodhi ke piece eliminate korbe.\n     - Jodi ranks equal hoy, tahole dui piece remove hoye jabe board theke.\n     - **Special Cases:**\n       - Bombs eliminate kore most attacking pieces except Miners, jeta Bombs defuse kore.\n       - Spies defeat korte paro Marshal jodi Spy attack kore first, kintu lose kore onyo pieces ke.\n3. **Strategic Goals:**\n   - Tomaar birodhi ke pieces identify koro through movements aar battles.\n   - Tomaar Flag protect koro aar birodhi ke Flag capture korar chesta koro.\n   - Scouts strategically use koro birodhi ke pieces ke information gain korar jonno aar weak ones attack koro.\n\n### How to Make a Move:\n1. Piece ke coordinates specify koro jeta tumi move korte chao aar destination.\n2. Format use koro: [A0 B0], jeta A0 source position aar B0 destination.\n   - Example: Piece ke move korte row 0, column 0 theke row 1, column 0 te, input [A0 B0].\n3. Destination valid ensure koro movement rules anusare.\n\n### Important Notes:\n- Board show korbe tomaar pieces aar positions, e.g. MN, MS.\n- Board show korbe birodhi ke pieces ke known positions without revealing ranks, e.g. ?.\n- Grids ~ lakes aar move kora jabe na.\n- Suggestion hisabe, game start koro tomaar pieces ke front lines re move kore birodhi ke pieces ke information gain korar jonno. Player 0 aar player 1 ke frontlines row D aar G respectively.\n\nEkhan current board state aachhe:\n"
+  },
+  "board": {
+    "current_board": "ᱱᱤᱛᱚᱜ ᱯᱷᱚᱴᱚᱠ:\n\n{board}\nᱪᱟᱞᱟᱣ ᱨᱮ ᱛᱟᱦᱮᱸᱱ ᱪᱟᱞᱟᱣ: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "ᱵᱟᱹᱲᱤᱡ ᱠᱟᱹᱢᱤ ᱜᱚᱲᱦᱚᱱ. ᱠᱷᱮᱞᱚᱸᱰᱤ {player_id} ᱫᱚ [A0 B0] ᱜᱚᱲᱦᱚᱱ ᱨᱮ ᱪᱟᱞᱟᱣ ᱵᱟᱭ ᱮᱢᱟᱫᱟ.",
+    "invalid_coordinates": "ᱵᱟᱹᱞᱤ ᱠᱮᱨᱚᱲ ᱯᱷᱚᱨᱢᱮᱥᱚᱱ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱞᱟᱦᱟᱠᱟᱱ ᱠᱚᱳᱟᱨᱰᱤᱱᱚᱴ ᱵᱟᱭ ᱮᱱᱴᱤᱨ ᱟᱠᱟᱫᱼᱟ᱾",
+    "not_own_piece": "ᱵᱟᱹᱞᱤ ᱠᱮᱨᱚᱲ ᱯᱷᱚᱨᱢᱮᱥᱚᱱ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱟᱡᱟᱜ ᱢᱤᱫᱴᱮᱱ ᱡᱤᱱᱤᱥ ᱪᱟᱞᱟᱣ ᱦᱩᱭᱩᱜᱼᱟ᱾",
+    "scout_through_pieces": "ᱵᱟᱹᱞᱤ ᱠᱮᱨᱚᱲ ᱯᱷᱚᱨᱢᱮᱥᱚᱱ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱮᱴᱟᱜ ᱡᱤᱱᱤᱥ ᱠᱚᱨᱮ ᱥᱠᱟᱣᱩᱴ ᱵᱟᱭ ᱥᱮᱱ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ᱾",
+    "scout_diagonal": "ᱵᱟᱹᱞᱤ ᱠᱮᱨᱚᱲ ᱯᱷᱚᱨᱢᱮᱥᱚᱱ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱥᱠᱟᱣᱴ ᱰᱟᱭᱜᱳᱱᱟᱞ ᱞᱮᱠᱟᱛᱮ ᱵᱟᱭ ᱥᱮᱱ ᱫᱟᱲᱮᱭᱟᱜᱼᱟ᱾",
+    "non_scout_multi_square": "ᱵᱟᱹᱞᱤ ᱠᱮᱨᱚᱲ ᱯᱷᱚᱨᱢᱮᱥᱚᱱ ᱾ ᱥᱠᱟᱣᱩᱴ ᱵᱟᱦᱨᱮ ᱠᱟᱛᱷᱟ ᱠᱚ ᱢᱤᱫ ᱚᱠᱛᱮ ᱨᱮ ᱢᱤᱫ ᱪᱟᱱᱟᱪ ᱜᱮ ᱦᱤᱡᱩᱜᱼᱟ ᱾",
+    "move_into_lake": "ᱵᱟᱹᱞᱤ ᱠᱮᱨᱚᱲ ᱯᱷᱚᱨᱢᱮᱥᱚᱱ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱜᱟᱫᱽᱨᱟ ᱨᱮ ᱵᱟᱭ ᱥᱮᱱ ᱫᱟᱲᱮᱭᱟᱜᱼᱟ᱾",
+    "move_onto_own_piece": "ᱵᱟᱹᱞᱤ ᱠᱮᱨᱚᱲ ᱯᱷᱚᱨᱢᱮᱥᱚᱱ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱟᱡᱟᱜ ᱡᱟᱦᱟᱸᱭ ᱴᱷᱟᱶ ᱨᱮᱜᱮ ᱥᱮᱱᱚᱜ ᱵᱟᱠᱚ ᱫᱟᱲᱮᱭᱟᱜᱼᱟ᱾",
+    "move_bomb_or_flag": "ᱵᱟᱹᱞᱤ ᱠᱮᱨᱚᱲ ᱯᱷᱚᱨᱢᱮᱥᱚᱱ ᱾ ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱢᱤᱫ ᱵᱟᱵᱽᱱᱟ ᱟᱨ ᱵᱟᱝ ᱪᱤᱱᱦᱟ.ᱭ ᱫᱟᱲᱮᱭᱟᱜ-ᱟᱭ ।"
+  },
+  "game_action": {
+    "you_moved": "Tumi piece move korecho {source} theke {dest}.",
+    "opponent_moved": "ᱠᱷᱮᱞᱚᱸᱰᱤ {player_id} ᱫᱚ ᱢᱤᱫ ᱜᱚᱴᱤ ᱠᱷᱚᱱ {source} ᱠᱷᱚᱱ {dest} ᱥᱮᱱᱚᱜ ᱠᱟᱫᱟ.",
+    "you_equal_ranks": "Tumi piece move korecho {source} theke {dest}. Attacking piece {attacking_rank} aar destination piece {target_rank} aachhe. Ranks equal hoye, dui piece lost.",
+    "opponent_equal_ranks": "Player {player_id} piece move korecho {source} theke {dest}. Attacking piece {attacking_rank} aar destination piece {target_rank} aachhe. Ranks equal hoye, dui piece lost.",
+    "you_miner_defused": "Tumi piece move korecho {source} theke {dest}. Attacking piece {attacking_rank} aar destination piece {target_rank} aachhe. Miners bomb defuse kore, tumi battle win korecho.",
+    "opponent_miner_defused": "Player {player_id} piece move korecho {source} theke {dest}. Attacking piece {attacking_rank} aar destination piece {target_rank} aachhe. Miners bomb defuse kore, tumi battle lost.",
+    "you_bomb_lost": "Tumi piece move korecho {source} theke {dest}. Attacking piece {attacking_rank} aar destination piece {target_rank} aachhe. Attacker miner na, tumi battle lost.",
+    "opponent_bomb_won": "Player {player_id} piece move korecho {source} theke {dest}. Attacking piece {attacking_rank} aar destination piece {target_rank} aachhe. Attacker miner na, tumi battle win korecho.",
+    "you_spy_won": "Tumi piece move korecho {source} theke {dest}. Attacking piece {attacking_rank} aar destination piece {target_rank} aachhe. Attacker spy aar destination marshall, tumi battle win korecho.",
+    "opponent_spy_lost": "Player {player_id} piece move korecho {source} theke {dest}. Attacking piece {attacking_rank} aar destination piece {target_rank} aachhe. Attacker spy aar destination marshall, tumi battle lost.",
+    "you_higher_won": "Tumi piece move korecho {source} theke {dest}. Attacking piece {attacking_rank} aar destination piece {target_rank} aachhe. Attacker higher rank, tumi battle win korecho.",
+    "opponent_higher_lost": "Player {player_id} piece move korecho {source} theke {dest}. Attacking piece {attacking_rank} aar destination piece {target_rank} aachhe. Attacker higher rank, tumi battle lost.",
+    "you_lower_lost": "Tumi piece move korecho {source} theke {dest}. Attacking piece {attacking_rank} aar destination piece {target_rank} aachhe. Attacker lower rank, tumi battle lost.",
+    "opponent_lower_won": "Player {player_id} piece move korecho {source} theke {dest}. Attacking piece {attacking_rank} aar destination piece {target_rank} aachhe. Attacker lower rank, tumi battle win korecho."
+  },
+  "outcome": {
+    "flag_captured": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {player_id} ᱫᱚ ᱦᱩᱲᱟᱹᱜ ᱨᱮᱭᱟᱜ ᱪᱤᱱᱦᱟᱹᱭ ᱠᱚᱨᱟᱣ ᱟᱠᱟᱫᱟ!",
+    "no_movable_pieces": "ᱠᱷᱮᱞᱚᱸᱰᱤ {winner_id} ᱫᱚ ᱡᱤᱛᱟᱹᱣᱟᱠᱟᱫᱟ! ᱠᱷᱮᱞᱚᱸᱰᱤ {loser_id} ᱨᱮ ᱪᱟᱞᱟᱣ ᱨᱮ ᱛᱟᱦᱮᱸᱱ ᱜᱚᱴᱤ ᱵᱟᱹᱱᱩᱜᱼᱟ."
+  }
+}

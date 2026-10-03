@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "یارییەکە دەست پێدەکات. جۆری ترەمپ: {trump_suit} (کارتەکانی ترەمپ: {trump_str}).",
+    "no_trump_card": "هیچ نییە."
+  },
+  "player_prompt": {
+    "intro": "تو یاریکەر {player_id}ی تێدا. \n{phase_info}\nتو {hand_size} کارتەکانت ھەیە.\nکارتێک بە '〕[play N]' بەکاربێنە، لێرەدا N شوێنی کارتەکەتە لە دەستت (بۆ وێنە '〕[play 3]').",
+    "phase_learning": "قۆناغی فێربوون: براوەی هەر فێڵێک کارتی ڕووخاو وەردەگرێت و دۆڕاویش کارتێکی تر لە کۆپەکە دەکێشێت. ئەو فێلانە کە لەم قۆناغەدا بەدەست دەهێنرێن هەژمار ناکرێن بۆ سەرکەوتن.",
+    "phase_playing": "قۆناغی یاریکردن: کۆی گەمەکە تەواو بووە. هەر فێڵێک لەمەودوا بۆ سەرکەوتن دەژمێردرێت."
+  },
+  "next_card": {
+    "playing_phase": "هیچ کاردێک پێشکەش ناکرێت - قۆناغی یاریکردن دەستی پێکردووە.",
+    "deck_empty": "کۆیەکە بەتاڵە هیچ کاردێک پێشکەش ناکرێت.",
+    "available": "کارتی پێشکەشکراو: {card}",
+    "available_trump": "کارتی پێشکەشکراو: {card} (ترەمپ)"
+  },
+  "invalid_move": {
+    "wrong_format": "شێوازی جوڵەی هەڵە. بەکاربێنە '[play N]' بۆ یاریکردنی کارتی نۆیەم لە دەستتدا.",
+    "bad_position": "ئەو شوێنەی کارت ناوێت. تو {hand_size} کارتەکانت ھەیە.",
+    "must_follow_suit": "پێویستە جۆری کارتەکان بکەی و {lead_suit} کارت بەکاربێنی.",
+    "invalid_play": "ئەو کارتە ناتوانرێت یاری پێ بکرێت."
+  },
+  "game_action": {
+    "played": "یاریزانی {player_id} کارتەکەی {card}ی بیلێ."
+  },
+  "trick": {
+    "won": "یاریکەر {winner_id} براوەی ترازوەکەیە لەگەڵ {card}.",
+    "won_learning": "یاریکەر {winner_id} براوەی ترازوەکەیە لەگەڵ {card} و کارتەکانی ڕووی بۆ سەرەوە دەگرێت."
+  },
+  "phase": {
+    "learning_complete": "کۆیەکە تەواو بووە قۆناغی فێربوون کۆتایی هاتووە هەر فێڵێکی ماوە بۆ سەرکەوتن دەژمێردرێت."
+  },
+  "draw": {
+    "winner_received": "تو براوەی ترازوەکەت و {card} وەرگرتووە.",
+    "loser_received": "فێڵەکەت لەدەستدا و {card}ت لە کۆڕی یارییەکان دەرهێنا.",
+    "winner_preview": "کارتی دواتر کە پێشکەش دەکرێت {card}ە."
+  },
+  "turn": {
+    "board": "〕{phase}\n〕{scores}\n〕{next_card}\n\n〕{trick}\n\n〕{hand}",
+    "scores_learning": "دەستەکان تا ئێستا - یاریزانی 0: {tricks0}, یاریزانی 1: {tricks1}",
+    "scores_playing": "ترازوەکانی خاڵ - یاریکەر 0: {tricks0}، یاریکەر 1: {tricks1}",
+    "phase": "قۆناغ: {phase}",
+    "phase_learning": "قۆناغ: {phase} (〕{remaining_cards} کارتەکان لە دەستەکدا ماوە)"
+  },
+  "hand": {
+    "no_cards": "هیچ کاردێک نییە.",
+    "no_cards_in_hand": "هیچ کاردێک لە دەستدا نییە.",
+    "header": "دەستەکەت:",
+    "trump_indicator": "(ترەمپ)",
+    "suit_line": "{observation}\n  {suit}〕{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "هیچ کارتێک هێشتا ئەم فێڵەی نەکردووە.",
+    "header": "فێڵێکی ئێستا:",
+    "trump_indicator": "(ترەمپ)",
+    "card_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "یاریەکە دەست پێ نەکردووە.",
+    "header": "=== یاریی گێرمان وایت===",
+    "phase": "{observation}\nقۆناغ: {phase}",
+    "trump_suit": "{observation}\nخەتەی ترەمپ: {trump_suit}",
+    "trump_card": "{observation}\nکارت ترومپ: {card}",
+    "cards_left": "{observation}\nکارتەکانی تر لە دەستەکدا: {count}",
+    "next_card": "{observation}\nکارتەکانی داھاتو بۆ براوە: {card}",
+    "blank": "{observation} ",
+    "current_trick": "{observation} فێڵی ئێستا:",
+    "trump_indicator": "(ترەمپ)",
+    "trick_line": "{observation}\n  Player {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nیاریزانی {player_id}: {scoring} دەستە سەرکەوتوو ({tricks} کۆی گشتی), {hand_size} کارت لە دەستەکەت"
+  },
+  "outcome": {
+    "summary": "قۆناغی فێربوون - یاریزانی 0: {l0}, یاریزانی 1: {l1}. قۆناغی یاریکردن - یاریزانی 0: {p0}, یاریزانی 1: {p1}. یاریزانی {winner_id} براوەیە بە {winner_tricks} دەستە سەرکەوتوو!"
+  }
+}

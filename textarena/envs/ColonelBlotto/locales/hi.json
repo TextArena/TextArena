@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "आप {role} के रूप में कर्नल ब्लोटो में हैं।\nआपका लक्ष्य अपने प्रतिद्वंद्वी से अधिक राउंड जीतना है।\nप्रत्येक राउंड पर, {field_names} फ़ील्ड में {num_total_units} इकाइयों को विभाजित करें।\nजो खिलाड़ी किसी फ़ील्ड में अधिक इकाइयों को आवंटित करता है, वह फ़ील्ड जीत जाता है, और जो खिलाड़ी अधिक फ़ील्ड जीतता है, वह राउंड जीत जाता है।\nउदाहरण के लिए, '[A7 B7 C6]' A में 7 इकाइयों, B में 7 इकाइयों, और C में 6 इकाइयों को आवंटित करता है।",
+    "commander_alpha": "कमांडर अल्फा",
+    "commander_beta": "कमांडर बीटा"
+  },
+  "game_state": {
+    "header_round": "=== कर्नल ब्लोटो - राउंड {current_round}/{num_rounds} ===\nराउंड जीते - कमांडर अल्फा: {alpha_score}, कमांडर बीटा: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nराउंड {current_round}\nकमांडर अल्फा ने आवंटित किया: {p0_allocations}\nकमांडर बीटा ने आवंटित किया: {p1_allocations}\n",
+    "winner_alpha": "{message}विजेता: कमांडर अल्फा",
+    "winner_beta": "{message}विजेता: कमांडर बीटा",
+    "tie": "{message}टाई!"
+  },
+  "invalid_move": {
+    "wrong_format": "अमान्य इनपुट प्रारूप। उपयोग करें: A:5, B:10, C:5",
+    "invalid_field": "अमान्य फ़ील्ड नाम। वैध फ़ील्ड: {field_names}",
+    "wrong_allocation_value": "सभी आवंटन गैर-नकारात्मक पूर्णांक होने चाहिए।",
+    "incorrect_total_units": "आपको ठीक {num_total_units} इकाइयों को आवंटित करना होगा। वर्तमान योग: {current_sum}",
+    "good_allocations": "आवंटन अच्छा है।"
+  },
+  "outcome": {
+    "winner_alpha": "कमांडर अल्फा {score_0}-{score_1} से जीतता है {num_rounds} राउंड के बाद!",
+    "winner_beta": "कमांडर बीटा {score_1}-{score_0} से जीतता है {num_rounds} राउंड के बाद!",
+    "draw": "गेम {score_0}-{score_1} टाई के साथ समाप्त होता है {num_rounds} राउंड के बाद!",
+    "early_winner_alpha": "कमांडर अल्फा {scores_0}-{scores_1} से जीतता है (बहुमत प्राप्त किया गया)!",
+    "early_winner_beta": "कमांडर बीटा {scores_1}-{scores_0} से जीतता है (बहुमत प्राप्त किया गया)!"
+  }
+}

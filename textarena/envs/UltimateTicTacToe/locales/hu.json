@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos az **Ultimate Tic Tac Toe**-ban.\nKüldje el a lépését **[macro  micro]** formátumban (két szám 0-8 között):\n• *macro*  = melyik mini-táblán játszik\n• *micro* = melyik négyzetben játszik a mini-táblán\nPéldául `[7 8]` ➜ helyezze el a jelet a 7. mini-táblán, a 8. négyzetben, és\nkényszerítse az ellenfelét, hogy a következő lépést a 8. mini-táblán tegye.\n\nÖn `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Aktuális tábla:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "A lépésnek [macro micro] formátumban kell lennie, 0-8 közötti számokkal.",
+    "out_of_range": "Az indexeknek 0 és 8 között kell lenniük.",
+    "index_out_of_range": "A micro-tábla, sor vagy oszlop túl van az érvényes tartományon.",
+    "cell_occupied": "A cella már foglalt.",
+    "wrong_micro_board": "A játékosnak a következő micro-táblán kell játszania.",
+    "micro_board_won": "A micro-tábla már meg van nyerve."
+  },
+  "next_board": {
+    "any": "bármely micro-tábla",
+    "specific": "micro-tábla {nxt}"
+  },
+  "game_action": {
+    "played": "A {player_id}. játékos a {macro_idx}. micro-táblán, a {micro_idx}. cellában (sor {row}, oszlop {col}) játszott. A {opponent_id}. játékosnak most a {nxt_txt}-ban kell játszania."
+  },
+  "outcome": {
+    "win": "A {player_id}. játékos nyerte az Ultimate Tic Tac Toe-t!",
+    "draw": "A játék döntetlen!"
+  }
+}

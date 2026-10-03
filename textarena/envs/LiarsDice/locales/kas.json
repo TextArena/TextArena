@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "تہوہ چھو پلیئر {player_id} انہ ایک {num_players}-پلیئر ڈائس دے کھیلس منز۔\nقاعدے:\n- توہندے دورس منز، تہوہ چھو یا:\n  1) نئی بڈ کروہ ایک بڑی مقدار یا بڑی چھےر (یا دونوں) پریویئس بڈس توں؛ یعنی '[Bid: 3, 4]',\n  2) آخری بڈس کال کروہ '[Call]' ٹائپ کروہ۔\n\nاگر تہوہ کال کروہ:\n  - اگر اوس چھےر والیو منز سارے ڈائسس منز کم چھے بڈس توں، آخری بڈر ایک ڈائس کم کرے۔\n  - ورنہ، کالر ایک ڈائس کم کرے۔\nپلیئر یس 0 ڈائسس تے پہنچے چھے اوسس ایلیمینیٹ کرے۔ آخری بچے ہوئے پلیئر جیتے۔"
+  },
+  "board": {
+    "per_player": "\tپلےَر {p}: {d}",
+    "new_round": "\nنَو راؤنڈ - بَقِیَ دِس: {dice_summary}\nتہٕنٛز دِس ہُنٛز: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "پلےَر {current_player_id} کۆلز! اِس فیشِ {face_value} اِس حَقِیقی گِناو ٔہِے {count}، جۆ ہِہہ کَم {quantity}.\nپلےَر {loser_id} (آخِر بِڈَر) یِوان دِس خۆتہہ.",
+    "caller_loses": "پلےَر {current_player_id} کۆلز! اِس فیشِ {face_value} اِس حَقِیقی گِناو ٔہِے {count}، جۆ ہِہہ >= {quantity}.\nپلےَر {loser_id} (کۆلَر) یِوان دِس خۆتہہ."
+  },
+  "action": {
+    "bid_announce": "پلیئر {player_id} بڈ کروہ {quantity} چھےر {face_value}۔"
+  },
+  "invalid_move": {
+    "call_no_bid": "کال کروہ بغیر پریویئس بڈس۔",
+    "invalid_bid": "غلط بڈ: {reason}",
+    "not_recognized": "اِس کَرنہِہ نہِہ تَمِیٖز دِتہِہ اِک وَلِد '[Bid: X, Y]' یا '[Call]'۔ سَبمِٹ کَرنہِہ: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "نَو کَمّیَت {new_quantity} ہِہہ مُقابِلہ مَۆجود {current_quantity}.",
+    "face_lower": "نَو فیشِ وَلُے {new_face_value} ہِہہ مُقابِلہ مَۆجود {current_face_value}.",
+    "identical": "بڈ آخری بڈس توں ایک جہے چھے۔",
+    "face_range": "چھےر والیو چھے 1 تے 6 منز ہونہ چاہیے۔"
+  },
+  "message": {
+    "eliminated_invalid": "پلیئر {player_id} غلط موو توں ایلیمینیٹ کرے گیا۔"
+  },
+  "outcome": {
+    "win": "پلےَر {winner} جِتتہہ! آخِر رینکِنگ: {final_ranking}"
+  }
+}

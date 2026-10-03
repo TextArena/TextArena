@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ndinu Player {player_id} m'mwendo wa wawili wa mchezo wa Spite na Malice. Cholinga chanu ndi kuchipa mwisho katundu lanu la malipiro.\n\n### Onenerana Mchezo:\n- Cholinga ndi kuchotsa katundu lanu la malipiro kwa kucheza khadi ku m'mphepete mwa katikati.\n- Mungathe kucheza khadi kuchokera kwa zina zitatu:\n  1. **Mkono wanu** (mumayamba kila zamu wanu ndi khadi zisoposa 5 m'mkono).\n  2. **Khadi ya juu ya katundu lanu la malipiro**.\n  3. **Khadi ya juu ya katundu lolilonse la zakhadi zanu zisizoche**.\n\n### Mwendo wa Mchezo:\n- Mungathe kucheza khadi ku m'mphepete wa katikati ngati iliyo **m'mwamba mmodzi** ya juu ya khadi iliyo pa mphepete uwo (mphete za katikati zinayamba na Ace ndi kupita mpaka Queen; Mafumu ndi ya ulemerero - inaweza kucheza pa khadi yoyose koma siyinazinziye mwendo wa m'mwamba. Izi zinachireni kuti ngati Mfumu imagwiritsidwa ntchito pambuyo pa 4, basi Mfumu uja ndi ya m'mwamba 5 ndi khadi inayofuata iyenera kuwa 6).\n- Ngati simungathe kucheza khadi zina, inabwana kuti **musiye khadi** ku katundu lolilonse la zakhadi zisizoche ili kumaliza zamu yanu.\n- Ngati mphepete wa katikati ukafikana na Queen, udzachotsedwa wokha.\n- Mwendo wa m'mwamba ndi: A=1, 2=2, ..., 9=9, J=10, Q=11, K ya ulemerero.\n\n### Zochitika:\n1. **Tenga**: Pa mwanzo wa zamu yanu, tenga khadi zikukwanilitseni mkono wanu mpaka khadi 5. Lowetseni **[draw]** kuti muyambe.\n2. **Cheza Khadi**: Kucheza khadi, fotsitsani khadi ndi mphepete wa katikati monga ili: **[play A♠ 0]** (kumene 'A♠' ndi khadi ndi '0' ndi nambala ya mphepete wa katikati).\n3. **Siyeni Khadi**: Ngati simungathe kucheza khadi zina, siyeni khadi kuchokera kwa mkono wanu ku katundu la zakhadi zisizoche ili kumaliza zamu yanu. Lowetseni **[discard A♠ 1]** (kumene 'A♠' ndi khadi ndi '1' ndi nambala ya katundu la zakhadi zisizoche). Chonde dzikumbutseni kuti simungathe kusiya khadi yoyose kuchokera kwa katundu la malipiro. Mungathe kusiya khadi zokha zochokera kwa mkono wanu.\n\n"
+  },
+  "board": {
+    "current_board": "Bodi Linalo:\n\n{board}\nMavuto Ang'amba: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Mikunjo ya Pakati ---\n",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Maonekedwe a Player {player_id} ---\n",
+    "payoff": "{observation}Tufe la Malipo (Kadi ya Juu): {top_card}, Urefu wa Tufe la Malipo: {payoff_length}\n",
+    "hand": "{observation}Mkono: {hand}\n",
+    "discard": "{observation}Mipaka ya Makadi Anu: {discard}\n",
+    "empty": "Zopanda kanthu"
+  },
+  "game_message": {
+    "no_cards_left": "Palibenso makadi oti muwatenge. Kumbukirani kuti mukhoza kusewera ndi makhadi ochokera ku zinthu izi: 1. ** dzanja lanu** 2. ** khadi lapamwamba la mulu wanu wopindulitsa ** 3. ** khodi yapamwamba ya iliyonse yamitolo yanu yotayika ** . "
+  },
+  "invalid_move": {
+    "wrong_format": "Chosayenera kusuntha mtundu. Player {player_id} sanali kuyankha ndi kuyenda chomveka m'makola lalikulu.",
+    "invalid_play": "Cheza lisilo halali. Mchezaji {player_id} alijaribu kucheza {card} kwenye tufe kuu {index}.",
+    "discard_from_payoff": "Wosewera {player_id} anayesa kutaya khadi kuchokera ku mulu wa malipiro.",
+    "discard_not_in_hand": "Wosewera {player_id} anayesa kutaya khadi lomwe silili m'manja.",
+    "wrong_move_type": "Mtundu wosagwira ntchito. Wosewera {player_id} sanayankhe ndi mtundu woyenera wa mayendedwe."
+  },
+  "game_action": {
+    "you_drew": "Munakoka makadi.",
+    "opponent_drew": "Wosewera {player_id} anatenga makadi.",
+    "you_played": "Inu munaseŵera {card} pa mulu wapakati {index}.",
+    "opponent_played": "Player {player_id} anasewera {card} pa mpaka wa kati {index}.",
+    "you_discarded": "Mwachita kuchosa {card} ku mikunjo ya zakhadi zosachoswa {index}, zomwe zinamaanisha mwachita kumaliza mpando wako. Palibe chitendo chako chinazolengwa kwa mpando uyu. Msewera {next_player_id} adzayende m'mbe.",
+    "opponent_discarded": "Mchezaji {player_id} anataya {card} ku khomo la zotayidwa {index}, kumanena kuti wamaliza zamu yao. Palibe zinafanya za Mchezaji {player_id} zikuzingatiwa mu zamu iyi. Mchezaji {next_player_id}, iwe mwezi wako. Lowetsa ntchito yako mu mfundo [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mchezaji {current_player} amemaliza tufe lake la malipo! Mchezaji {current_player} anashinda!",
+    "deadlock_player_0": "Kufikia kikomo kimefikiwa! Mchezaji 0 anashinda na {player_0_payoff} kadi zimesalia dhidi ya Mchezaji 1's {player_1_payoff} kadi.",
+    "deadlock_player_1": "Kufikia kikomo kimefikiwa! Mchezaji 1 anashinda na {player_1_payoff} kadi zimesalia dhidi ya Mchezaji 0's {player_0_payoff} kadi.",
+    "deadlock_tie": "Mpira ukafika mwisho na mpira uliopambanana! Wawili wa wapambana ali na {player_0_payoff} makadi asanu. Player {current_player} akupambana kwa mpangilio."
+  }
+}

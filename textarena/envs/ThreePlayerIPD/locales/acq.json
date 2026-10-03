@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "أنت لاعب {player_id} في لعبة سجناء معاد مع 3 لاعبين. المباراة تستمر {num_rounds} جولات.\nهيكل الجولة:\n• {conv_rounds} دورات دردشة مجانية\n• دور قرار واحد - قم بتقديم رمز واحد لكل خصم: '[<opp-id> cooperate]' أو '[<opp-id> defect]' (أي '[1 defect] [2 cooperate]'؛ الإعداد الافتراضي هو 'التعاون'). \nматрикс المكافأة الزوجي (تطبق على كل زوج غير منظم):\n  - كلاهما يتعاون  ->  {reward}\n  - كلاهما يخون     ->  {punishment}\n  - أنت تخون، ويتعاونون -> {temptation}\n  - أنت تتعاون، ويهونون -> {sucker}\nاللاعب (اللاعبون) الذين لديهم أعلى درجة في نهاية جميع الجولات يفوزون."
+  },
+  "round": {
+    "start": "─── بدء الجولة {round} ───\tيمكنك التحدث بحرية للجولات {conv_rounds} القادمة.",
+    "chat_finished": "انتهى الدردشة للجولة {round}. قدم قراراتك ، رمز واحد لكل خصم: `[pid cooperate]` أو `[pid defect]`."
+  },
+  "results": {
+    "header": "### جولة {round} - النتائج:",
+    "pair_line": "{observation}\n\t اللاعب {i} ضد اللاعب {j} اختار {choice_i} و {choice_j} على التوالي (اللاعب {i} حصل على {gain_i}، اللاعب {j} حصل على {gain_j})",
+    "scores_open": "{observation} -> الدرجات الحالية: ",
+    "score_first": "{observation}اللاعب {player_id} ({score})",
+    "score_next": "{observation}; اللاعب {player_id} ({score})",
+    "finalize": "{observation} "
+  },
+  "outcome": {
+    "final": "النتائج النهائية: {scores}.  تصنيف المجموعات (أسوأ → أفضل): {groups}"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "ThreeCardMonte-Sprachdatei. Schlüssel (linke Seite) NICHT übersetzen. Nur Werte (rechte Seite) übersetzen.",
+  "_slots": {
+    "{line}": "Die dargestellte Reihe der Becher",
+    "{step}": "Die Nummer des aktuellen Mischschritts",
+    "{steps}": "Die Gesamtzahl der Mischschritte",
+    "{i}": "Der Index des ersten am Tausch beteiligten Bechers",
+    "{j}": "Der Index des zweiten am Tausch beteiligten Bechers",
+    "{prompt}": "Das lokalisierte Eingabefragment, das nach den Bechern angefügt wird",
+    "{max_index}": "Der höchste gültige Becherindex, also num_cups-1",
+    "{ball_pos}": "Der Index des Bechers, unter dem sich der Ball befindet"
+  },
+  "player_prompt": {
+    "intro": "Verfolge den versteckten Ball 'X', während die Becher gemischt werden.\nRate nach dem Mischen seine Position mit `[k]`."
+  },
+  "game_message": {
+    "ball_starts": "Startposition des Balls: {line}",
+    "shuffle": "Mischen {step}/{steps}: Becher {i} und {j} wurden vertauscht.",
+    "cups": "Becher: {line}  {prompt}",
+    "guess_now": "(JETZT raten!)",
+    "reveal": "(Auflösung: Ball unter Becher {ball_pos})"
+  },
+  "invalid_move": {
+    "wrong_format": "Ungültige Aktion. Verwende `[k]`.",
+    "out_of_range": "Index außerhalb des Bereichs 0-{max_index}."
+  },
+  "outcome": {
+    "win": "Richtig! Du hast den Ball gefunden.",
+    "lose": "Falsch — der Ball war unter Becher {ball_pos}."
+  }
+}

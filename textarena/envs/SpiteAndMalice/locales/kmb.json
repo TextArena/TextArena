@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Nge ule Mwana-kalunga {player_id} mu joga-ya-bantu badi ya Spite na Malice. Dikwa ndako yawe kufuta pila ya malu ya ku ngoloka.\n\n### Jogo Ku Soneka:\n- Dikwa ndako ni kufuta pila ya malu ya ku ngoloka kwa ku tumba kadi ku pila za kati.\n- Nge ule mukue kadi ku matadi atatu:\n  1. **Moko** (nge ukala mwana kwa kadi 5 ku moko).\n  2. **Kadi ya neno ya pila ya malu ya ku ngoloka**.\n  3. **Kadi ya neno ya pila yoyi ya ku tumbuluka**.\n\n### Mwila ya Ku Tumba:\n- Nge ule mukue kadi ku pila ya kati nge ikele **kadi moxi ya ku lunduluka** kuliko kadi ya neno ya pila iya (pila za kati zinanza na Ase na zikwenda ku Regina; Mwana-kongo ikele kadi ya ku lunduluka - ikele mukue kadi yoyi kadi kansi ikele ku lunduluka mwila ya kadi. Ikiwa Mwana-kongo ikele mukue ku 4, kadi iya ikele 5 na kadi ina ku lunduluka ikele 6).\n- Ikiwa nge ule kueza ku tumba kadi yoyi, nge ule **ku tumbuluka kadi** ku pila yoyi ya ku tumbuluka ku mwaka.\n- Ikiwa pila ya kati ikala Regina, ikele ku futa mwine.\n- Mwila ya ku lunduluka ikele: A=1, 2=2, ..., 9=9, J=10, Q=11, K ikele kadi ya ku lunduluka.\n\n### Mwila:\n1. **Tumba**: Ku mwaka, tumba kadi ku zinga moko ku 5 kadi. Shuka **[draw]** ku mwaka.\n2. **Tumba Kadi**: Ku tumba kadi, sola kadi na pila ya kati nge: **[play A♠ 0]** (kadi 'A♠' ikele kadi na '0' ikele pila ya kati).\n3. **Tumbuluka**: Ikiwa nge ule kueza ku tumba kadi yoyi, tumbuluka kadi ku moko ku pila ya ku tumbuluka ku mwaka. Shuka **[discard A♠ 1]** (kadi 'A♠' ikele kadi na '1' ikele pila ya ku tumbuluka). Kumbuka nge ule kueza ku tumbuluka kadi yoyi ku pila ya malu ya ku ngoloka. Nge ule mukue ku tumbuluka kadi ku moko kansi.\n\n"
+  },
+  "board": {
+    "current_board": "Bodi ya Sasa:\n\n{board}\nVitendo Vinavyopatikana: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pilha za Katikati ---\n",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Mtazamo wa Mchezaji {player_id} ---\n",
+    "payoff": "{observation}Pilha ya Dyenu (Kadi ya Juu): {top_card}, Urefu wa Pilha ya Dyenu: {payoff_length}\n",
+    "hand": "{observation}Maku: {hand} ",
+    "discard": "{observation}Pilha za Kadi Zinazotupwa: {discard}\n",
+    "empty": "Empty"
+  },
+  "game_message": {
+    "no_cards_left": "Hakuna kadi zaidi za kuchora. Kumbuka kwamba nge ujoga kadi kutoka kwa majogo haya:\n  1. **Mwela wenu**.\n  2. **Kadi ya juu ya pilha ya dyenu**.\n  3. **Kadi ya juu ya pilha yoyi ya kadi zenu zinazotupwa**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Muundo usio sahihi wa kitendo. Mchezaji {player_id} hakujibu na kitendo sahihi katika mabano ya mraba.",
+    "invalid_play": "Kujoga kisicho sahihi. Mchezaji {player_id} alijaribu kujoga {card} kwenye pilha ya katikati {index}.",
+    "discard_from_payoff": "O muthu u jokala, a mu ixana {player_id} ua mesenene ku takula o ditadi dia kexile bhu kididi kia mukuá.",
+    "discard_not_in_hand": "O muthu u jokala, {player_id} ua mesenene ku takula o ditadi dia kambele-ku.",
+    "wrong_move_type": "O kijimbuete kia tokala, o muadikimi {player_id} ka tambuijila kiambote."
+  },
+  "game_action": {
+    "you_drew": "Eie ua kexile mu jokala.",
+    "opponent_drew": "Mchezaji {player_id} alichora kadi.",
+    "you_played": "Nge ujoga {card} kwenye pilha ya katikati {index}.",
+    "opponent_played": "Mchezaji {player_id} alichora {card} kwenye pilha ya katikati {index}.",
+    "you_discarded": "Nge utupa {card} ku pilha ya kadi zenu zinazotupwa {index}, ambayo pia inamaanisha nge umemaliza kilundu chenu. Hakuna vitendo vingine vya kwenu vinavyozingatiwa kwa kilundu hiki. Mchezaji {next_player_id} atajogea kisha.",
+    "opponent_discarded": "Mukishi {player_id} atikisa {card} ku mushitu wa makishi {index}, ina maana kele yamaliza n'genda yao. Kuna mwingiliano wowoze wa Mukishi {player_id} ukalanga mu n'genda yayi. Mukishi {next_player_id}, nge uya kwingila. Nge enda mwingiliano wenu mu fomu [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Mchezaji {current_player} amemaliza pilha ya dyenu! Mchezaji {current_player} anashinda!",
+    "deadlock_player_0": "Kufikia kizuizi! Mchezaji 0 anashinda na {player_0_payoff} kadi zilizobaki dhidi ya {player_1_payoff} kadi za Mchezaji 1.",
+    "deadlock_player_1": "Kufikia kizuizi! Mchezaji 1 anashinda na {player_1_payoff} kadi zilizobaki dhidi ya {player_0_payoff} kadi za Mchezaji 0.",
+    "deadlock_tie": "Kufikia kizuizi na usawa! Wachezaji wote wawili wana {player_0_payoff} kadi zilizobaki. Mchezaji {current_player} anashinda kwa chaguo-msingi."
+  }
+}

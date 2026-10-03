@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} hrající {colour} ({piece}) v Othellu.\nVaším cílem je mít na konci hry více kamenů své barvy na desce.\nVe svém tahu umístěte kámen tak, aby byl mezi ním a jiným vaším stávajícím kamenem alespoň jeden kámen soupeře - v libovolném směru (horizontálně, vertikálně nebo diagonálně). Všechny obklopené kameny soupeře budou otočeny na vaši barvu.\nZadejte svůj tah ve formátu '[řádek, sloupec]'."
+  },
+  "board": {
+    "game_board": "Herní deska:\n{board}",
+    "valid_moves": "{observation}\nPlatné tahy: {moves}",
+    "no_valid_moves_reset": "{observation}\nŽádné platné tahy - možná budete muset přeskočit.",
+    "no_valid_moves_step": "{observation}\nŽádné platné tahy – možná budete muset přeskočit.",
+    "scores_reset": "{observation}\nAktuální skóre - Černý: {black_count}, Bílý: {white_count}\n",
+    "scores_step": "{observation}\nSkóre - Černý: {black_count}, Bílý: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Tah musí být ve formátu [řádek, sloupec].",
+    "illegal": "Neplatný tah. Platné tahy: {valid}"
+  },
+  "game_action": {
+    "skipped": "Hráč {pid} musel přeskočit svůj tah",
+    "played": "Hráč {pid} ({piece}) zahrál [{r}, {c}] a otočil {flipped} kámen(ů)"
+  },
+  "game_message": {
+    "must_skip": "Hráč {pid} ({piece}) nemá žádné platné tahy a musí přeskočit."
+  },
+  "outcome": {
+    "black_wins": "Černý vyhrál {black_count}-{white_count}.",
+    "white_wins": "Bílý vyhrál {white_count}-{black_count}.",
+    "draw": "Remíza {black_count}-{white_count}."
+  }
+}

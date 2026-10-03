@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em staðfærslu skrá. ÞÝÐA EKKI lykla (vinstri hlið). Þýða aðeins gildi (hægri hlið).",
+  "_slots": {
+    "{start_chips}": "Upphafleg fjöldi peninga, t.d. 1000",
+    "{ante}": "Ante/blind veðlaup, t.d. 25",
+    "{ante4}": "Fjórfaldur ante, t.d. 100",
+    "{ante2}": "Tvöfaldur ante, t.d. 50",
+    "{round}": "Núverandi umferð",
+    "{chips}": "Núverandi fjöldi peninga",
+    "{hand}": "Listi af spilum, t.d. 'A♠, K♥', eða texti fyrir engin spil",
+    "{phase}": "Núverandi áfangaheitur (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "Listi af mögulegum aðgerðum, t.d. '[play_bet_4x], [check]'",
+    "{available}": "Listi af mögulegum aðgerðum í núverandi áfanga",
+    "{blind}": "Blind veðlaup",
+    "{play}": "Play veðlaup",
+    "{cards}": "Listi af spilum, t.d. 'Q♣, 7♦, 2♠'",
+    "{name}": "Heiti á pókerhend, sett inn óbreytt",
+    "{amount}": "Fjöldi peninga",
+    "{net}": "Nettóbreyting í peningum (getur verið neikvæð)",
+    "{max_turns}": "Hámarksfjöldi umferða",
+    "{winner_rounds}": "Fjöldi umferða sem leikmaður hefur unnið"
+  },
+  "player_prompt": {
+    "no_cards": "Engin spil enn",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Einhleikur gegn Dealer\n\n📖 YFIRLIT LEIKSINS:\n• Þú byrjar með {start_chips} peningum\n• Ein dekki af 52 spilum (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Þú leikir gegn dealer (húsi)\n• Hver umferð fylgir Ultimate Texas Hold'em strúktúr: þú leggur ANTE og BLIND veð, fær 2 holuspil, ákveður valfrjálsa PLAY veð í gegnum veðáfangana, og svo afhjúpar samfélagsspil og bera saman bestu 5-spila hendina þína við hendina dealer.\n• Markmið þitt er að hámarka vinninga þína (þegar þú hefur betri hendina), og lágmarka tapið þitt (þegar þú hefur verri hendina).\n• Leikurinn endar þegar þú ert með 0 peninga eða færri í upphafi umferðar (TAP) eða þegar þú hefur klárað 1000 umferðir með peningum (SIGUR)\n\n💰 VEÐÁFANGA:\n• ANTE: Ófrjáls {ante} veðlaup í hverri umferð\n• BLIND: Ófrjáls {ante} veðlaup í hverri umferð\n• PLAY: Valfrjálst veðlaup í gegnum leikinn. Í gegnum umferðina, getur þú aðeins valið EITT af eftirfarandi: ({ante4} ef gert í PRE-FLOP, {ante2} ef gert í FLOP, eða {ante} ef gert í RIVER. Getur líka foldað í river, gefið upp hendina, og gert ekkert veðlaup.)\n\n🎴 SPILADEILING:\n• Þú færð 2 spil opnuð (holuspilin þín)\n• Dealer fær 2 spil lokuð (fölgin frá þér)\n• 5 samfélagsspil eru deild opnuð í upphafi\n• Samfélagsspil eru afhjúpuð smám saman í gegnum leikáfangana\n\n🏆 DEALER VÖRUGERÐ:\n• Dealer verður að hafa að minnsta kosti PAR (2 spil af sama gildi) til að vera gildur, með því að nota 2 spilin í hendi sinni og 5 samfélagsspilin.\n• Vörugerð dealer hefur áhrif á veðáfangana, eins og verður útskýrt síðar.\n\n🎮 LEIKÁFANGAR & AÐGERÐIR:\n📋 PRE-FLOP:\n  • Aðgerðir: [4x] ({ante4}) eða [check]\n  • [4x]: Leggja {ante4} PLAY veð, afhjúpar fyrstu 3 samfélagsspilin\n  • [check]: Ekkert veðlaup, afhjúpar fyrstu 3 samfélagsspilin\n\n📋 FLOP:\n  • Ef 4x veðlaup gert: Aðeins [skip] í boði (sjálfkrafa afhjúpar síðustu 2 samfélagsspilin)\n  • Ef ekkert 4x veðlaup: [2x] ({ante2}) eða [check]\n  • [2x]: Leggja {ante2} PLAY veð, afhjúpar síðustu 2 samfélagsspilin\n  • [check]: Ekkert veðlaup, afhjúpar síðustu 2 samfélagsspilin\n\n📋 RIVER:\n  • Ef 4x eða 2x veðlaup gert: Aðeins [skip] í boði (sjálfkrafa heldur áfram í gegnum leikinn)\n  • Ef ekkert PLAY veðlaup gert: [1x] ({ante}) eða [fold]\n  • [1x]: Leggja {ante} PLAY veð, heldur áfram í gegnum leikinn\n  • [fold]: Gefa upp hendina, tapa ANTE og BLIND veðum\n\n📋 SHOWDOWN:\n  • Öll spil eru afhjúpuð og metin\n  • Besta 5-spila hendin úr 7 spilum (2 holuspil + 5 samfélagsspil)\n  • Veð eru sett samkvæmt útborgunarreglum\n\n💎 ÚTBORGUNARREGLUR:\n📊 ANTE VEÐ:\n  • Dealer er ekki gildur: PUSH (veðlaup skilað)\n  • Dealer er gildur og þú vinnur: 1:1 útborgun (veðlaup + vinningur)\n  • Dealer er gildur og þú tapar: Veðlaup tapað\n  • Jafntefli: PUSH (veðlaup skilað)\n\n📊 BLIND VEÐ:\n  • Óháð dealer gildi\n  • Þú vinnur: Veðlaup skilað og aukalegt útborgað samkvæmt hendistyrk\n  • Þú tapar: Veðlaup tapað\n  • Jafntefli: PUSH (veðlaup skilað)\n\n📊 BLIND VEÐ ÚTBORGUNARTAFLA:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Less than Straight: Ekkert aukalegt útborgað\n\n📊 PLAY VEÐ:\n  • Óháð dealer gildi\n  • Bein samanburður: Besta hendin þín vs besta hendin dealer\n  • Þú vinnur: 1:1 útborgun (veðlaup + vinningur)\n  • Þú tapar: Veðlaup tapað\n  • Jafntefli: PUSH (veðlaup skilað)\n\n🎯 PÓKERHENDIR (Best til Worst):\n  1. Royal Flush: A-K-Q-J-10 af sama lit\n  2. Straight Flush: 5 spil í röð af sama lit\n  3. Four of a Kind: 4 spil af sama gildi\n  4. Full House: 3 af sama gildi + 2 af sama gildi\n  5. Flush: 5 spil af sama lit\n  6. Straight: 5 spil í röð\n  7. Three of a Kind: 3 spil af sama gildi\n  8. Two Pair: 2 pör af ólíkum gildum\n  9. One Pair: 2 spil af sama gildi\n  10. High Card: Hæsta spilið vinnur\n\n⌨️  AÐGERÐIR:\n• [4x] eða [play bet 4x]: Leggja ${{self.ante_amount*4}} PLAY veð\n• [2x] eða [play bet 2x]: Leggja ${{self.ante_amount*2}} PLAY veð\n• [1x] eða [play bet 1x]: Leggja ${{self.ante_amount*1}} PLAY veð\n• [check] eða [c]: Check (ekkert veðlaup)\n• [fold] eða [f]: Fold (gefa upp hendina)\n• [skip] eða [s]: Skip (sjálfkrafa heldur áfram í gegnum leikinn)\n\n💡 ÁBENDINGAR:\n• Sterk byrjunarhend (pör, hæstu spil) réttlætir oft 4x veð\n• Hafa í huga dealer gildi - veikar hendur geta verið push ef dealer er ekki gildur\n• BLIND veð getur verið mjög arðbær með sterkum höndum (Royal Flush = 500:1!)\n• Fylgstu með peningastokknum! Ef hann fer niður í 0 eða færri í upphafi umferðar, tapar þú.\n\n⚠️  MIKILVÆGAR ÁBENDINGAR:\n• ANTE og BLIND veð eru ófrjáls í hverri umferð\n• PLAY veð eru valfrjáls og taktísk\n• Vertu viss um að þú slær rétt aðgerð, og aðeins eina aðgerð í einu.\n\n",
+    "state": "🎯 UMFERÐ {round}\n💰 Peningar: {chips}\n🎴 Hendin þín: {hand}\n📊 Núverandi veð: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Áfanga: {phase}\n🎯 Mögulegar aðgerðir: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Umferð {round} hefst! Veð: ANTE ${ante}, BLIND ${blind}. Þú hefur {chips} peninga eftir.",
+    "your_hand": "🎴 Hendin þín: {hand}",
+    "flop_revealed": "🃏 FLOP afhjúpað: {cards}",
+    "river_revealed": "🃏 RIVER afhjúpað: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Ógild aðgerð fyrir núverandi áfanga. Mögulegar aðgerðir: {available}",
+    "message": "❌ Ógild aðgerð! Mögulegar aðgerðir: {available}"
+  },
+  "action": {
+    "folded": "🃏 Þú foldaðir."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Hendin dealer: {cards}",
+    "community_cards": "🃏 Samfélagsspil: {cards}",
+    "player_best": "🎴 Besta hendin leikmanns: {name} ({cards})",
+    "dealer_best": "🎴 Besta hendin dealer: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE veð TAPAÐ! -${ante} (foldað)",
+    "blind_lost_folded": "❌ BLIND veð TAPAÐ! -${blind} (foldað)",
+    "ante_won": "✅ ANTE veð UNNIÐ! +${amount}",
+    "ante_pushed": "🔄 ANTE veð SKILAÐ! ${ante} skilað",
+    "ante_lost": "❌ ANTE veð TAPAÐ! -${ante}",
+    "blind_won": "✅ BLIND veð UNNIÐ! +${amount}",
+    "blind_pushed": "🔄 BLIND veð SKILAÐ! ${blind} skilað",
+    "blind_lost": "❌ BLIND veð TAPAÐ! -${blind}",
+    "play_won": "✅ PLAY veð UNNIÐ! +${amount}",
+    "play_pushed": "🔄 PLAY veð SKILAÐ! ${play} skilað",
+    "play_lost": "❌ PLAY veð TAPAÐ! -${play}",
+    "net_gain": "🎉 Umferð {round} kláruð! Nettoár: +${net}",
+    "net_loss": "💸 Umferð {round} kláruð! Nettoár: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 LEIKURINN ER ÚT! {max_turns} umferðir kláraðar. Þú hefur ${chips} peninga - ÞÚ VANNST!",
+    "game_over_lose": "🏁 LEIKURINN ER ÚT! Þú ert búinn að tapa öllum peningum. Dealer vinnur!",
+    "reward_win": "Leikmaður kláraði {winner_rounds} umferðir með ${chips} peningum",
+    "reward_lose": "Leikmaður tapaði öllum peningum í umferð {round}",
+    "reward_win_max": "Leikmaður kláraði {max_turns} umferðir með ${chips} peningum"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Fjórir af sama gildi",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Þrír af sama gildi",
+    "two_pair": "Tvö pör",
+    "one_pair": "Eitt par",
+    "high_card": "Hæsta spilið",
+    "unknown": "Óþekkt hend"
+  }
+}

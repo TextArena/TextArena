@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Du är Spelare {player_id}. Du spelar Sudoku.\nHär är det aktuella tillståndet för Sudokugriden. Varje rad är numrerad från 1 till 9, och varje kolumn är också numrerad från 1 till 9.\nTomma celler representeras av '.', och förifyllda celler innehåller siffror från 1 till 9.\n\nAktuell Sudokugrid:\nDitt mål är att fylla de tomma cellerna i 9x9-griden med siffror från 1 till 9 så att:\n1. Varje rad innehåller alla siffror från 1 till 9 utan upprepning.\n2. Varje kolumn innehåller alla siffror från 1 till 9 utan upprepning.\n3. Var och en av de nio 3x3-delgriderna innehåller alla siffror från 1 till 9 utan upprepning.\n\nRegler och instruktioner:\n1. **Skriv inte över** de initiala siffrorna som tillhandahålls i griden.\n2. **Fyll endast** tomma celler som representeras av '.'.\n3. Du kan svara på vilket sätt du föredrar, men se till att ditt svar innehåller formatet '[rad kolumn nummer]'.\n4. **Se till** att ditt drag inte bryter mot Sudokureglerna. Ogiltiga drag kommer att resultera i straff.\nExempel:\n- **Giltigt drag**:\n  - Gridutdrag före drag:\n  \n  - Drag: `[5 3 7]`\n  - Förklaring: Att placera 7 på rad 5, kolumn 3 bryter inte mot några Sudokuregler.\n\n- **Ogiltigt drag** (Skriva över en förifylld cell):\n  - Gridutdrag före drag:\n  \n  - Drag: `[1 1 9]`\n  - Förklaring: Cell (1,1) är redan fylld med 5. Du kan inte skriva över den.\n\n- **Ogiltigt drag** (Bryta mot Sudokuregler):\n  - Gridutdrag före drag:\n  \n  - Drag: `[1 3 5]`\n  - Förklaring: Att placera 5 på rad 1, kolumn 3 bryter mot regeln eftersom 5 redan finns på rad 1.\n\nHistoriken över dina drag och tankar kommer att läggas till när du spelar fler omgångar. Använd historiken över ditt drag för att förbättra ditt beslutsfattande genom att undvika de drag du har provat. Lycka till!\n\n"
+  },
+  "board": {
+    "game_board": "Spelbräde:\n{board}",
+    "board_state": "Brädetillstånd: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ogiltigt dragformat. Spelare {player_id} svarade inte med giltigt 'rad kolumn nummer'.",
+    "out_of_bounds": "Ogiltigt drag. Spelare {player_id} försökte placera {num} på ({row}, {col}), som är utanför gränserna.",
+    "overwrite": "Ogiltigt drag. Spelare {player_id} försökte skriva över en förifylld cell ({row}, {col}).",
+    "violates_rules": "Ogiltigt drag. Spelare {player_id} försökte placera {num} på ({row}, {col}), som bryter mot Sudokuregler."
+  },
+  "outcome": {
+    "win": "Grattis! Spelare {player_id} har slutfört Sudokupusslet.",
+    "turn_limit": "Tidsgränsen har nåtts. Du fyllde {percent}% av de tomma cellerna korrekt."
+  }
+}

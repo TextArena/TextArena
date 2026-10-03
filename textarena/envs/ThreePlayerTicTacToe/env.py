@@ -19,11 +19,7 @@ class ThreePlayerTicTacToeEnv(ta.Env):
         self._observer_current_state()
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are Player {player_id} in Three-Player Tic Tac Toe.\nYour symbol is '{self.symbols[player_id]}'.\n"
-            "You take turns placing your symbol on a 5x5 board to form a line of four.\nLines can be horizontal, vertical, or diagonal.\n"
-            "Submit your move using the format '[4]' to mark cell 4."
-        )
+        return self.m("player_prompt", "intro", player_id=player_id, symbol=self.symbols[player_id])
     
     def _render_board(self) -> str:
         cell_width = max(len(str(self.board_size * self.board_size - 1)), 2)  # ensures symbols like 'A', 'B', 'C' are well-centered
@@ -43,30 +39,31 @@ class ThreePlayerTicTacToeEnv(ta.Env):
             r, c = self.cell_mapping[i]
             if self.state.game_state["board"][r][c] == '':
                 available_moves.append(f"[{i}]")
-        self.state.add_observation(message=f"Current Board:\n\n{self._render_board()}\n\nAvailable Moves: " + ", ".join(available_moves), observation_type=ta.ObservationType.GAME_BOARD)
+        self.state.add_observation(message=self.m("board", "current_board", board=self._render_board(), moves=", ".join(available_moves)), observation_type=ta.ObservationType.GAME_BOARD)
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         player_id = self.state.current_player_id
         self.state.add_observation(from_id=player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
         match = re.search(r"\[(\d+)\]", action)
+        max_cell = self.board_size ** 2 - 1
         if not match:
-            if self.state.set_invalid_move(reason=f"Invalid move format. Use '[cell]' where cell is 0-{self.board_size ** 2 - 1}."):
-                self.state.set_winners(player_ids=[pid for pid in range(3) if pid!=player_id], reason=f"Player {player_id} made an invalid move")
+            if self.state.set_invalid_move(reason=self.m("invalid_move", "wrong_format", max_cell=max_cell)):
+                self.state.set_winners(player_ids=[pid for pid in range(3) if pid!=player_id], reason=self.m("invalid_move", "made_invalid", player_id=player_id))
         else:
             cell = int(match.group(1))
             if cell not in self.cell_mapping:
-                if self.state.set_invalid_move(reason=f"Invalid cell number: {cell}. Must be between 0 and {self.board_size ** 2 - 1}."):
-                    self.state.set_winners(player_ids=[pid for pid in range(3) if pid!=player_id], reason=f"Player {player_id} made an invalid move")
+                if self.state.set_invalid_move(reason=self.m("invalid_move", "out_of_range", cell=cell, max_cell=max_cell)):
+                    self.state.set_winners(player_ids=[pid for pid in range(3) if pid!=player_id], reason=self.m("invalid_move", "made_invalid", player_id=player_id))
             else:
                 row, col = self.cell_mapping[cell]
                 if self.state.game_state["board"][row][col] == '':
                     self.state.game_state["board"][row][col] = self.symbols[player_id]
-                    self.state.add_observation(message=f"Player {player_id} places their symbol ({self.symbols[player_id]}) in field ({row}, {col}).", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-                    if self._check_winner(self.symbols[player_id]): 
-                        self.state.set_winners(player_ids=[player_id], reason=f"Player {player_id} ({self.symbols[player_id]}) wins!")
-                    elif all(cell != '' for row in self.state.game_state["board"] for cell in row): self.state.set_draw(reason="The game is a draw!")
+                    self.state.add_observation(message=self.m("game_action", "placed", player_id=player_id, symbol=self.symbols[player_id], row=row, col=col), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+                    if self._check_winner(self.symbols[player_id]):
+                        self.state.set_winners(player_ids=[player_id], reason=self.m("outcome", "win", player_id=player_id, symbol=self.symbols[player_id]))
+                    elif all(cell != '' for row in self.state.game_state["board"] for cell in row): self.state.set_draw(reason=self.m("outcome", "draw"))
                 else:
-                    if self.state.set_invalid_move(reason=f"Cell {cell} is already occupied."): self.state.set_winners(player_ids=[pid for pid in range(3) if pid!=player_id], reason=f"Player {player_id} made an invalid move")
+                    if self.state.set_invalid_move(reason=self.m("invalid_move", "already_occupied", cell=cell)): self.state.set_winners(player_ids=[pid for pid in range(3) if pid!=player_id], reason=self.m("invalid_move", "made_invalid", player_id=player_id))
         self._observer_current_state()
         return self.state.step()
 

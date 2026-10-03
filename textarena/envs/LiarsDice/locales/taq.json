@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Keddaɣ ad tekkiɣ {player_id} ɣef waddad n {num_players} n uddaden n warraz n azar.\nTawuriwin:\n- Mi tekkiɣ dawed, zemreɣ ad tekkeɣ:\n  1) Aɣriɣ ayyawen s uɛdaw n uqariɣ uɛdaw neɣ uɛdaw n tafat (neɣ kunu) i uɛdaw n tawuri tura; i.e. '[Bid: 3, 4]',\n  2) Aɣriɣ ayyawen n uɛdaw aneggaru s tikti n '[Call]'.\n\nMi tekkiɣ aɣriɣ ayyawen:\n  - Mi tawuri n tafat n uɛdaw n tafat ɣef akk tuɣalin ɛeddaw n uɛdaw, uɛdaw aneggaru yettara azar.\n  - Wella, uɣriɣ ayyawen yettara azar.\nUddad yettawi 0 tuɣalin yettara. Uddad aneggaru yettawi."
+  },
+  "board": {
+    "per_player": "\tImellyan {p} : {d}",
+    "new_round": "\nAsaru amaynu - Ifsan iddan : {dice_summary}\nIfsan inu tetty ddan : {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Uddad {current_player_id} itekka! Tawuri n tafat n {face_value} ɛeddaw {count}, i ɛeddaw d aɣellaw n {quantity}.\nUddad {loser_id} (uɛdaw aneggaru) yettara azar.",
+    "caller_loses": "Uddad {current_player_id} itekka! Tawuri n tafat n {face_value} ɛeddaw {count}, i ɛeddaw d aɣellaw nɣ aɛdaw n {quantity}.\nUddad {loser_id} (uɣriɣ ayyawen) yettara azar."
+  },
+  "action": {
+    "bid_announce": "Imellyan {player_id} ikkis {quantity} n uffir {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "ⴰⵙⵉⵓⴰⴷ ⵉⵋⵋⴰⵏ ⵙ ⵓⴰⵔ ⵜ ⵉⵍⵍⴰ ⴰⵍⵎⵓⴷ ⵏ ⴰⵣⵣⴰⵎⴰⵏ ⴷⴰⵜⴰ.",
+    "invalid_bid": "ⵜⵓⵏⵖⵉⵍⵜ ⵓⵔ ⵉⵍⵍⵉⵏ: {reason}",
+    "not_recognized": "Aseɣwen ur tetty ittuskar s wa d aseɣwen amaynu '[Bid: X, Y]' neɣ '[Call]'. Aseɣwen ittin : {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Tanaffit tamenzut {new_quantity} tetty tafat tamenzut tamaɣt {current_quantity}.",
+    "face_lower": "Tafat tamaynut {new_face_value} ɛeddaw d aɣellaw n tafat tura {current_face_value}.",
+    "identical": "ⴰⵍⵓⴰⵈ ⵓⴻⵏ ⴻⵈⵈⴰⵍ ⴰ ⵉⵍⴰ ⵉⴷⴷⵉⴾⵓⴷ ⵏⴻⵜ.",
+    "face_range": "ⵉⵇⵇⴰⵏⴷ ⴰⴷ ⵢⵉⵍⵉ ⵡⴰⵜⵉⴳ ⵏ ⵓⵙⵙⵉⴹⵏ ⴳⵔ 1 ⴷ 6."
+  },
+  "message": {
+    "eliminated_invalid": "ⴰⵛⴰⵆⵉⵍ {player_id} ⵉⴾⵔⴰⵙ ⵙ ⵜⴰⵔⵂⴰⵜ ⵏⴰⵙⴰⵏ."
+  },
+  "outcome": {
+    "win": "Imellyan {winner} yekker ! Tanɣilt tamatut : {final_ranking}"
+  }
+}

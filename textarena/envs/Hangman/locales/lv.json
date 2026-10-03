@@ -1,0 +1,31 @@
+{
+  "_comment": "Latviešu lokalizācijas fails Hangman spēlei. Atslēgas (kreisā puse) ir fiksētas; tulkojiet tikai vērtības (labā puse). Saglabājiet katru {placeholder} tāpat kā ir.",
+  "_slots": {
+    "{board}": "Neitrāls atveidots galdiņš (C00/C01 kolonnu galvenes, atklātās burti, '_' tukšumi); netulkojiet",
+    "{tries_left}": "Atlikušās nepareizās mēģinājumu skaits (vesels skaitlis)",
+    "{guessed}": "Jau minēto burtu komatsaraksts",
+    "{letter}": "Minētais burts vai vārds (saglabāts tāpat kā ierakstīts)",
+    "{pct}": "Procentuālā daļa pareizi minēto rakstzīmju, formatēta līdz 2 decimālcipariem",
+    "{target_word}": "Slēptais mērķa vārds"
+  },
+  "prompt": {
+    "intro": "Jūs spēlējat Hangman. Spēles mērķis ir uzminēt vārdu, piedāvājot viena burta minējumus vai visu vārdu.\nKatrs stabs ir numurēts. Šūnas, kurām vajadzētu būt aizpildītām ar burtiem, tiek attēlotas ar '_'.\n\nIr divi veidi, kā jūs varat atbildēt. Jūs varat piedāvāt viena burta minējumus '[L]' formātā vai varat minēt visu vārdu '[LIGHT]' formātā.\nJa dots burts ir vārdā, tas tiks atklāts režģī.\nJa dots vārds ir pareizs, jūs uzvarējat.\nSpēlējot, jūsu izvēļu vēsture tiks pievienota zemāk. Izmantojiet informāciju, lai noskaidrotu vārdu un uzvarētu.\nJums ir 6 nepareizi mēģinājumi pirms spēles beigām.\n\n"
+  },
+  "board": {
+    "status": "Pašreizējais galdiņš:\n{board}\nJums ir {tries_left} mēģinājumi atlikuši.\nMinētie burti: {guessed}"
+  },
+  "invalid": {
+    "wrong_format": "Nepareizs gājiena formāts. Jūs neatbildējāt ar derīgu 'burtu' vai 'vārdu'.",
+    "already_guessed": "Jūs minējāt burtu '{letter}', kas jau ir minēts."
+  },
+  "message": {
+    "wrong_word": "Jūsu minējums '{letter}' nav mērķa vārds.",
+    "letter_in": "Jūsu minējums {letter} ir vārdā",
+    "letter_not_in": "Jūsu minējums {letter} nav vārdā. Jums ir {tries_left} dzīvības atlikušas."
+  },
+  "outcome": {
+    "win_word": "Apsveicam! Jūs pabeidzāt Hangman uzdevumu.",
+    "win_board": "Apsveicam! Jūs esat pabeiguši Hangman uzdevumu.",
+    "out_of_tries": "Jūs esat beiguši mēģinājumus. Jūs uzminējāt {pct} procentus rakstzīmju pareizi. Mērķa vārds bija: {target_word}"
+  }
+}

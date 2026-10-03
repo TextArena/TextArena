@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Du spelar {color} i ett spel av Breakthrough. Du flyttar {direction} på ett {board_size}x{board_size} bräde.\nI din tur kan du flytta en enda pjäs ett steg framåt eller diagonalt framåt.\nEn pjäs kan endast flytta diagonalt om en motståndarpjäs är där, och endast flytta in i en sådan företrädd ruta i ett diagonalt steg.\nNär du stiger in i en ruta med en motståndarpjäs, tillfångatar du den och motståndarens pjäs tas bort permanent från brädet.\nAnvänd UCI-liknande notation i hakparenteser, t.ex. [a2a3] för att flytta från a2 till a3.\n* 'a' motsvarar den vänstra kolumnen, '1' är den nedre raden (från vit spelares perspektiv).\n* Svarts hemrad är den övre raden (rad 8 för ett 8x8-bräde). Vits hemrad är den nedre raden (rad 1 för ett 8x8-bräde).\nDen första spelaren vars pjäs når motståndarens hemrad vinner. Om dina pjäser alla tillfångatas, förlorar du."
+  },
+  "invalid_move": {
+    "wrong_format": "Använd hakparenteser med algebraisk notation, t.ex. [a2a3].",
+    "out_of_bounds": "Draget är utanför brädet.",
+    "illegal": "Detta drag följer inte Breakthrough-reglerna eller är inte din pjäs."
+  },
+  "game_action": {
+    "moved": "Spelare {player_id} flyttar {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Vit nådde svarts hemrad.",
+    "black_reached": "Svart nådde vits hemrad.",
+    "white_captured": "Alla vita pjäser tillfångatogs.",
+    "black_captured": "Alla svarta pjäser tillfångatogs.",
+    "no_moves": "Spelare {player_id} har inga fler drag."
+  }
+}

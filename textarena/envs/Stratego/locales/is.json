@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í Stratego.\nMarkmið þitt er að ná fána andstæðingsins eða útrýma öllum hreyfanlegum pökkum hans.\nHer þinn hefur verið settur á borðið, þar á meðal fáninn þinn, sprengjur og aðrir pökkar af ýmsum stigum.\n\n### Leiðbeiningar um leik\n1. **Reglur um hreyfingu:**\n   - Á röndinni þinni getur þú fært einn pakk um einn skref í átt að nágrannareit (upp, niður, vinstri eða hægri) sem er þegar átt með pökkum þínum.\n   - Dæmi: Pakk getur færst frá A1 til B1 eða A1 til A2 ef B1 og A2 eru ekki settir með pökkum leikmannsins.\n   - Ef valinn pakk er sprengja eða fáni, má hann ekki færa.\n2. **Bardagar:**\n   - Ef þú færir þig á reit sem andstæðingurinn á, mun bardagi eiga sér stað:\n     - Pakk með hærra stigi vinnur og útrýmir pakk andstæðingsins.\n     - Ef stigin eru jöfn, eru báðir pakkir fjarlægðir af borðinu.\n     - **Sérstakar aðstæður:**\n       - Sprengjur útrýma flestum pökkum sem ráðast á þær, nema námuvinnur, sem afvirkja sprengjur.\n       - Njósnarar geta sigrað marskálk ef njósnarinn ráðast fyrst en tapa fyrir öllum öðrum pökkum.\n3. **Markmið strategísk:**\n   - Auðkenna pökk andstæðingsins með hreyfingum og bardögum.\n   - Vernda fánann þinn á meðan þú reynir að ná fána andstæðingsins.\n   - Nota njósnara strategískt til að afla upplýsinga um pökk andstæðingsins og ráðast á veika pökk.\n\n### Hvernig á að gera leik:\n1. Tilgreina hnit pakkans sem þú vilt færa og áfangastað hans.\n2. Nota sniðið: [A0 B0], þar sem A0 er upprunastaður og B0 er áfangastaður.\n   - Dæmi: Til að færa pakk frá röð 0, dálk 0 til röð 1, dálk 0, slá inn [A0 B0].\n3. Tryggja að áfangastaðurinn sé giltur samkvæmt reglum um hreyfingu hér að ofan.\n\n### Mikilvægar athugasemdir:\n- Borðið mun sýna pökk þína og staðsetningu þeirra, t.d. MN, MS.\n- Borðið mun einnig sýna þekkt staðsetningar pökk andstæðingsins án þess að sýna stig þeirra, t.d. ?.\n- Grids með ~ eru vötn og má ekki færa þangað.\n- Sem tillögu, byrja leikinn þinn með því að færa pökk sem eru á fremstu línunum til að afla upplýsinga um pökk andstæðingsins. Leikmaður 0 og leikmaður 1 hafa fremstu línurnar D og G.\n\nHér er núverandi staða borðsins:\n"
+  },
+  "board": {
+    "current_board": "Núverandi Borð:\n\n{board}\nLausir Leikir: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ógilt snið aðgerðar. Leikmaður {player_id} sláði ekki inn leik í sniðinu [A0 B0].",
+    "invalid_coordinates": "Ógilt snið aðgerðar. Leikmaður {player_id} sláði ekki inn gilt hnit.",
+    "not_own_piece": "Ógilt snið aðgerðar. Leikmaður {player_id} verður að færa einn af sínum eigin pökkum.",
+    "scout_through_pieces": "Ógilt snið aðgerðar. Leikmaður {player_id} má ekki færa njósnara í gegnum aðra pökk.",
+    "scout_diagonal": "Ógilt snið aðgerðar. Leikmaður {player_id} má ekki færa njósnara á skálínu.",
+    "non_scout_multi_square": "Ógilt snið aðgerðar. Pökk, aðrir en njósnarar, geta aðeins færst um einn reit í einu.",
+    "move_into_lake": "Ógilt snið aðgerðar. Leikmaður {player_id} má ekki færa pakk í vatn.",
+    "move_onto_own_piece": "Ógilt snið aðgerðar. Leikmaður {player_id} má ekki færa pakk á eigin pakk.",
+    "move_bomb_or_flag": "Ógilt snið aðgerðar. Leikmaður {player_id} má ekki færa sprengju eða fána."
+  },
+  "game_action": {
+    "you_moved": "Þú hefur fært pakkinn þinn frá {source} til {dest}.",
+    "opponent_moved": "Leikmaður {player_id} hefur fært pakk frá {source} til {dest}.",
+    "you_equal_ranks": "Þú hefur fært pakkinn þinn frá {source} til {dest}. Röð pakkans sem réðist var {attacking_rank} og röð pakkans sem var á áfangastaðnum var {target_rank}. Þar sem röðin eru jafnar, tapaði báðum pökkum.",
+    "opponent_equal_ranks": "Leikmaður {player_id} hefur fært pakk frá {source} til {dest}. Röð pakkans sem réðist var {attacking_rank} og röð pakkans sem var á áfangastaðnum var {target_rank}. Þar sem röðin eru jafnar, tapaði báðum pökkum.",
+    "you_miner_defused": "Þú hefur fært pakkinn þinn frá {source} til {dest}. Röð pakkans sem réðist var {attacking_rank} og röð pakkans sem var á áfangastaðnum var {target_rank}. Þar sem námuvinnar geta afvirkjað sprengjur, vannst bardaginn.",
+    "opponent_miner_defused": "Leikmaður {player_id} hefur fært pakk frá {source} til {dest}. Röð pakkans sem réðist var {attacking_rank} og röð pakkans sem var á áfangastaðnum var {target_rank}. Þar sem námuvinnar geta afvirkjað sprengjur, tapaði bardaginn.",
+    "you_bomb_lost": "Þú hefur fært pakkinn þinn frá {source} til {dest}. Röð pakkans sem réðist var {attacking_rank} og röð pakkans sem var á áfangastaðnum var {target_rank}. Þar sem réðandi er ekki námuvinnari, tapaði bardaginn.",
+    "opponent_bomb_won": "Leikmaður {player_id} hefur fært pakk frá {source} til {dest}. Röð pakkans sem réðist var {attacking_rank} og röð pakkans sem var á áfangastaðnum var {target_rank}. Þar sem réðandi er ekki námuvinnari, vannst bardaginn.",
+    "you_spy_won": "Þú hefur fært pakkinn þinn frá {source} til {dest}. Röð pakkans sem réðist var {attacking_rank} og röð pakkans sem var á áfangastaðnum var {target_rank}. Þar sem réðandi er njósnari og áfangastaðurinn er marskálkur, vannst bardaginn.",
+    "opponent_spy_lost": "Leikmaður {player_id} hefur fært pakk frá {source} til {dest}. Röð pakkans sem réðist var {attacking_rank} og röð pakkans sem var á áfangastaðnum var {target_rank}. Þar sem réðandi er njósnari og áfangastaðurinn er marskálkur, tapaði bardaginn.",
+    "you_higher_won": "Þú hefur fært pakkinn þinn frá {source} til {dest}. Röð pakkans sem réðist var {attacking_rank} og röð pakkans sem var á áfangastaðnum var {target_rank}. Þar sem réðandi er hærri röð en áfangastaðurinn, vannst bardaginn.",
+    "opponent_higher_lost": "Leikmaður {player_id} hefur fært pakk frá {source} til {dest}. Röð pakkans sem réðist var {attacking_rank} og röð pakkans sem var á áfangastaðnum var {target_rank}. Þar sem réðandi er hærri röð en áfangastaðurinn, tapaði bardaginn.",
+    "you_lower_lost": "Þú hefur fært pakkinn þinn frá {source} til {dest}. Röð pakkans sem réðist var {attacking_rank} og röð pakkans sem var á áfangastaðnum var {target_rank}. Þar sem réðandi er lægri röð en áfangastaðurinn, tapaði bardaginn.",
+    "opponent_lower_won": "Leikmaður {player_id} hefur fært pakk frá {source} til {dest}. Röð pakkans sem réðist var {attacking_rank} og röð pakkans sem var á áfangastaðnum var {target_rank}. Þar sem réðandi er lægri röð en áfangastaðurinn, vannst bardaginn."
+  },
+  "outcome": {
+    "flag_captured": "Leikmaður {player_id} hefur náð fána andstæðingsins!",
+    "no_movable_pieces": "Leikmaður {winner_id} vinnur! Leikmaður {loser_id} hefur ekki fleiri hreyfanlegir pökk."
+  }
+}

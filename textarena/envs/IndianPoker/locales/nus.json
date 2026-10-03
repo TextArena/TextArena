@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "Yin ee Player {player_id} ee kat geimei ee Indian Poker.\n- Dek kat 52; yin riŋ diɛɛt ke cieŋ ke kɔɔc.\n- Ante {ante} chip(s) ke kare kɔɔc, {max_rounds} kare kɔɔc pɛɛt.\n- Luui ke riɛɛl: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X ee aya deŋ ke kɔɔc ke riɛɛl <= chip ca ke yin.)\n- Kɔɔc ke nɔɔk aya ke kɔɔc ke riɛɛl ee kat ke kɔɔc ke showdown.\n"
+  },
+  "round": {
+    "announce": "### Koor {current_round}/{max_rounds}\nKadi oponeet yin ee: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Tik ke luui muor, e.g. '[check]', '[bet 2]', '[call]', '[raise 3]', ku '[fold]'.",
+    "cannot_check": "/Ciɛ [check] -duŋdɛ ɣöö ɛ mi̱ laar jɛ i̱ bi̱ ji̱n rɔ cu thöp.",
+    "amount_min": "Bet / Raise mi̱ ci̱ pekdɛ bi̱ tekɛ 1 kiɛ di̱t ni̱ jɛn.",
+    "cannot_bet": "Ayeer [bet] - ayeer [call] / [raise] / [fold].",
+    "nothing_to_call": "Thilɛ mi̱ bi̱ cɔl; deri̱ [check] la̱t ni̱ jɛ.",
+    "no_bet_to_raise": "La̱t kɛ [bet X] mi̱ bi̱ jiek; thiɛlɛ yiöw ti̱ ba kap nhial.",
+    "insufficient": "/Thiɛlɛ ji̱-piipni ti ro̱ŋ kɛ kui̱ la̱t ɛmɔ."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (cost {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Lät tin deri̱ la̱t: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Player {winner}. (Bankrolls P0:{p0}, P1:{p1})",
+    "folded": "Player {player_id} ɛ tɛ̱̈ɛ̱̈.",
+    "showdown_win": "Showdown: {card_win} beats {card_lose}. Kä min la̱tkɛ ɛ nɛy tin kɔ̱ŋ, laa jɛ a latkɛ kä gua̱th in ca naath yiath piny thi̱n i̱ bi̱ kɛn rɔ̱ ku lɛ luäk kɛ ɣöö /ci̱ kɛnɛ ti̱ dee tuɔɔk.",
+    "showdown_tie": "Showdown tie: ke {card}. Pot split – ke ke {split}."
+  },
+  "outcome": {
+    "p0_wins": "Riäk 0 kuɔ̈t ({bank0} > {bank1})",
+    "p1_wins": "Riäk 1 kuɔ̈t ({bank1} > {bank0})",
+    "draw": "Cäätni̱ ti̱ti̱ kɛ kɔr kä mëë ci̱kɛ diaal thuɔ̱k."
+  }
+}

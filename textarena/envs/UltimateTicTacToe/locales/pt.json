@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Você é o Jogador {player_id} no **Ultimate Tic Tac Toe**.\nEnvie sua jogada como **[macro  micro]** (dois números 0-8):\n• *macro*  = em qual mini-tabuleiro você joga\n• *micro* = em qual quadrado dentro desse mini-tabuleiro\nExemplo `[7 8]` ➜ coloque sua marca no mini-tabuleiro 7, quadrado 8, e\nforce seu oponente a jogar no mini-tabuleiro 8 em seguida.\n\nVocê é `{symbol}`.\n"
+  },
+  "board": {
+    "current_board": "Tabuleiro Atual:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "A jogada deve estar no formato [macro micro] com números 0-8.",
+    "out_of_range": "Os índices devem estar entre 0 e 8.",
+    "index_out_of_range": "O mini-tabuleiro, linha ou coluna está fora do alcance.",
+    "cell_occupied": "A célula já está ocupada.",
+    "wrong_micro_board": "O jogador deve jogar no próximo mini-tabuleiro.",
+    "micro_board_won": "O mini-tabuleiro já foi vencido."
+  },
+  "next_board": {
+    "any": "qualquer mini-tabuleiro",
+    "specific": "mini-tabuleiro {nxt}"
+  },
+  "game_action": {
+    "played": "O Jogador {player_id} jogou no mini-tabuleiro {macro_idx}, célula {micro_idx} (linha {row}, coluna {col}). O Jogador {opponent_id} deve agora jogar em {nxt_txt}."
+  },
+  "outcome": {
+    "win": "O Jogador {player_id} venceu o Ultimate Tic Tac Toe!",
+    "draw": "O jogo é um empate!"
+  }
+}

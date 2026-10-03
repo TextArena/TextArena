@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw an Player {player_id} ha Quantum Tic Tac Toe.\nAn inyong simbolo amo an '{symbol}', ngan an inyong mga numero han pagkilos pirmi {parity} (e.g., X1, X3 o O2, O4).\n\nTungtungan: Daogon pinaagi han pormasyon hin usa ka linya han tulo ka klasikal nga mga marka (nag-yelo tikang ha mga superposition).\n\nPaano Maglaro:\n- Ha tagsa turno, ipwesto an usa ka spooky mark ha duha ka laong mga kwadrado nga gwarentado gamit an formato '[a,b]'.\n- An mga marka amo an nagkakaintertwine, ngan ginlalarawan sugad 'X1 / X1' o 'O4 / O4'.\n- Diri ka makapwesto hin spooky mark ha usa ka kwadrado nga na-yelo na (nag-yelo).\n\nPangyelo nga Pamaagi:\n- Kon an inyong pagkilos nagpaporma hin usa ka siklo ha entanglement graph, ini nagyeyelo awtomatiko.\n- An tagsa spooky mark ha siklo nagiging klasikal nga marka ha usa ha ira duha ka mga posisyon.\n- An mga dependent nga spooky mark gihapon nagyeyelo.\n\nKadaugan:\n- An dula natatapos kon may-ada usa ka player nga may tulo ka klasikal nga mga marka ha linya.\n- Kon an duha ka mga player nakakuha hin linya ha sulod han usa ka pagyelo, an may pinakabubukon nga numero han pagkilos amo an nananaog.\n\nHalimbawa nga pagkilos: '[0,4]' nagpapwesto hin usa ka spooky mark ha mga selula 0 ngan 4."
+  },
+  "board": {
+    "current_board": "Quantum Tic Tac Toe Board:\n\n{board}\n\nIsumite an inyong pagkilos bilang '[a,b]' para magpwesto hin usa ka quantum mark ha duha ka mga lokasyon."
+  },
+  "invalid_move": {
+    "wrong_format": "Diri-makatuman nga pormat. Gamit an \"[a,b]\".",
+    "invalid_cells": "Waray-pagpugong o duplikado nga mga index han selyula.",
+    "already_solidified": "An usa han mga selula nag-anit na."
+  },
+  "game_action": {
+    "placed": "An Player {player_id} nagpwesto han ira simbolo ha superposition ha mga selula {pos_a} ngan {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Naresolba an dependent superposition. An selula ({r}, {c}) yana {symbol}.",
+    "last_cell_resolved": "Naresolba an superposition para han kataposan nga selula. An selula ({r}, {c}) yana {symbol}.",
+    "superposition_resolved": "Naresolba an superposition. An selula ({r}, {c}) yana {symbol}."
+  },
+  "outcome": {
+    "win": "Ang manlalaro {player_id} nagdaog pinaagi han mga solidong marka!",
+    "draw": "An dula waray mag-iba!"
+  }
+}

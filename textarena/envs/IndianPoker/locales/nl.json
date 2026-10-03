@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in een spel van Indiaas Poker.\n- 52-kaartspel; u ziet alleen de kaart van uw tegenstander.\n- Ante {ante} fiches per ronde, {max_rounds} ronde(s) in totaal.\n- Geldige zetten: '[check]'  |  '[bet X]'  |  '[call]'  |  '[raise X]'  |  '[fold]'  (X is een positief geheel getal ≤ uw fichetotaal.)\n- De hoogste verborgen kaart wint de pot bij de showdown.\n"
+  },
+  "round": {
+    "announce": "### Ronde {current_round}/{max_rounds}\nDe kaart van uw tegenstander is: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "Geef precies ÉÉN actie tussen haakjes op, bijv. '[check]', '[bet 2]', '[call]', '[raise 3]', of '[fold]'.",
+    "cannot_check": "Kan niet [check] - u staat tegenover een inzet.",
+    "amount_min": "Inzet / Verhogingsbedrag moet ≥ 1 zijn.",
+    "cannot_bet": "Kan niet [bet] - moet [call] / [raise] / [fold].",
+    "nothing_to_call": "Niets om te callen; u kunt in plaats daarvan [check] gebruiken.",
+    "no_bet_to_raise": "Gebruik [bet X] om te openen; er is geen inzet om te verhogen.",
+    "insufficient": "Onvoldoende fiches voor die actie."
+  },
+  "game_action": {
+    "action": "Speler {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "'[check]', '[bet X]'",
+    "actions_facing_bet": "'[call]' (kosten {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "Uw mogelijke acties: {legal}"
+  },
+  "message": {
+    "round_result": "{reason}  Pot {pot} → Speler {winner}. (Bankrollen P0:{p0}, P1:{p1})",
+    "folded": "Speler {player_id} heeft gefold.",
+    "showdown_win": "Showdown: {card_win} verslaat {card_lose}.",
+    "showdown_tie": "Showdown gelijkspel: beide {card}. Pot verdeeld – elk ontvangt {split}."
+  },
+  "outcome": {
+    "p0_wins": "Speler 0 wint ({bank0} > {bank1})",
+    "p1_wins": "Speler 1 wint ({bank1} > {bank0})",
+    "draw": "Gelijke fiches na alle rondes"
+  }
+}

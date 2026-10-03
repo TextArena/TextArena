@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "你身处一个有 {num_buttons} 个按钮的房间中：{buttons}。每个按钮都对应一个均值固定但未知的伯努利分布；不同按钮对应的均值可能不同。\n每当你按下一个按钮时，你都会获得一个从相应分布中采样得到的奖励。\n你共有 {num_turns} 个时间步。在每个时间步中，你可以选择任意按钮并获得相应的奖励。\n你的目标是在每个时间步中有策略地选择按钮，以收集有关其奖励分布的信息，从而在 {num_turns} 个回合结束时，正确选出平均奖励最高的按钮。"
+  },
+  "board": {
+    "stat_line": "{button}：{reward}（已选择 {count} 次）",
+    "summary": "汇总：\n{stats}"
+  },
+  "invalid_move": {
+    "wrong_format": "玩家未使用有效的动作格式进行回复。",
+    "invalid_button": "选择了无效的按钮。"
+  },
+  "game_action": {
+    "pressed": "你按下了 {button} 按钮，并获得了 {reward} 的奖励。"
+  },
+  "game_message": {
+    "final_decision": "你用于尝试不同选项并观察其奖励的预算已经用尽。现在，请判断哪个选项是最佳选项。"
+  },
+  "outcome": {
+    "win": "恭喜！你选择了正确的按钮。",
+    "lose": "你选择了错误的按钮。"
+  }
+}

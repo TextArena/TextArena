@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "आपण क्लोंडाइक सोलिटेअर खेळत आहात. आपले उद्दिष्ट सर्व कार्ड पाया पाइलमध्ये हलविणे आहे.\n\nगेम नियम:\n- पाया पाइल (F1-F4): सूटमध्ये एस ते किंगपर्यंत बांधा\n- टेबलो पाइल (T1-T7): रंगांच्या पर्यायाने खाली बांधा (लाल काळ्यावर, काळा लालवर)\n- स्टॉक: वेस्ट पाइलमध्ये कार्ड काढा\n- वेस्ट (W): वरचे कार्ड खेळण्यासाठी उपलब्ध आहे\n\nआज्ञा:\n- 'draw' - स्टॉकमधून वेस्ट पाइलमध्ये कार्ड काढा\n- 'move <source> <destination> [count]' - पाइलमध्ये कार्ड हलवा\n  उदाहरणे: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count 'all' देखील असू शकते, जे सर्व चेहरा-वर कार्ड हलवण्याचा प्रयत्न करेल.\n- 'forfeit' - गेम त्वरित समाप्त करा आणि आपला सध्याचा स्कोर लॉक करा\n- पाइल नावे: W (वेस्ट), F1-F4 (पाया), T1-T7 (टेबलो)\n\nआपण एका फेरीत अनेक क्रिया कार्यान्वित करू शकता त्यांना कॉम्याने विभक्त करून:\n  उदाहरण: 'draw, move W T1, move T2 F1'\n\nफक्त राजे रिक्त टेबलो पाइलवर ठेवू शकतात.\nक्रिया क्रमाने कार्यान्वित होतात - जर एक अयशस्वी झाले, तर उर्वरित क्रिया वगळल्या जातात.\n'forfeit' वापरा जर आपल्याला वाटत असेल की गेम जिंकणे अशक्य आहे."
+  },
+  "format_error": {
+    "no_brackets": "अमान्य क्रिया स्वरूप. क्रिया कंसात असावी.",
+    "no_closing_bracket": "अमान्य कृती स्वरूप. बंद होणारी कंस गहाळ आहे ']'",
+    "empty_command": "रिक्त आदेश. टाइप करा 'draw' किंवा 'move <source> <destination> [count]'",
+    "empty_action": "रिक्त कृती",
+    "move_needs_args": "मूव्ह कमांडला स्रोत आणि गंतव्य आवश्यक आहे. वापरः 'move <source> <destination> [count]'",
+    "count_positive": "मोजमाप सकारात्मक किंवा 'all' असावे",
+    "count_invalid": "अवैध मोजमाप. संख्या किंवा 'all' वापरा",
+    "unknown_command": "अज्ञात आदेश '{cmd}'. 'draw', 'move <source> <destination> [count]', किंवा 'forfeit' वापरा",
+    "wrapped": "कृती {n}: {msg}"
+  },
+  "action_result": {
+    "success": "कृती {n}: {msg}",
+    "before_failure": "अपयश येण्यापूर्वी अंमलात आणलेली {n} कृती.",
+    "failed": "कारवाई {n} अपयशी ठरली: {msg}"
+  },
+  "move_result": {
+    "drew": "कार्ड ड्रॉवर स्टॉकपासून कचऱ्यापर्यंत.",
+    "cannot_draw": "काढू शकत नाही. साठा आणि कचरा दोन्हीही रिक्त आहेत.",
+    "invalid_pile": "अवैध स्टॅक नाव. W, F1-F4, किंवा T1-T7 वापरा",
+    "foundation_one_card": "फक्त 1 कार्ड फाउंडेशनमध्ये हलवू शकतो",
+    "waste_to_foundation_ok": "कचऱ्यापासून फाउंडेशनमध्ये हलवलेले कार्ड F{dst}",
+    "waste_to_foundation_bad": "फाउंडेशनच्या या ढिगाऱ्यावर कार्ड हलवू शकत नाही",
+    "tableau_to_foundation_ok": "तक्ता T{src} मधून फाउंडेशन F{dst} मध्ये कार्ड हलविले",
+    "tableau_to_foundation_bad": "त्या फाउंडेशन स्टॅकवर टेबल कार्ड हलवू शकत नाही",
+    "foundation_to_foundation": "पायापासून पायापर्यंत जाऊ शकत नाही",
+    "waste_to_tableau_one_card": "कचऱ्यापासून फक्त 1 कार्ड टेबलवर हलवू शकतो",
+    "waste_to_tableau_ok": "वेस्टवरील कार्डला टेब्ल्यू T{dst}वर हलवले",
+    "waste_to_tableau_bad": "त्या टेबल स्टॅकवर कचरा कार्ड ठेवू शकत नाही",
+    "no_face_up": "पुढे जाण्यासाठी कोणतेही उघडलेले कार्ड नाहीत",
+    "tableau_to_tableau_ok": "तालिका T{src} मधून T{dst} मध्ये {count} कार्ड हलविले",
+    "tableau_to_tableau_bad": "{count} कार्ड (((s) T{src} पासून T{dst} पर्यंत हलवू शकत नाही",
+    "foundation_to_tableau_one_card": "फक्त 1 कार्ड फाउंडेशन पासून टेबलवर हलवू शकतो",
+    "foundation_empty": "फाउंडेशन F{src} रिक्त आहे",
+    "foundation_to_tableau_ok": "फाउंडेशन F{src} मधून तक्ता T{dst} मध्ये कार्ड हलविले",
+    "foundation_to_tableau_bad": "फाउंडेशन कार्डला टेब्ल्यू T{dst}वर ठेवता येत नाही",
+    "to_waste_or_stock": "कचरा किंवा स्टॉकमध्ये हलवू शकत नाही"
+  },
+  "outcome": {
+    "forfeit": "खेळ गमावला. अंतिम स्कोअरः {score} पायांमध्ये कार्ड.",
+    "won": "अभिनंदन. तुम्ही क्लोन्डाइक सोलिटेअर जिंकलात!",
+    "turn_limit": "खेळ संपला! तुम्ही जास्तीत जास्त {max_turns} वळण गाठले आहे. स्कोअर: {score} फाउंडेशनमधील कार्ड."
+  },
+  "board": {
+    "title": "=== क्लोंडाइक सॉलिटेअर ===",
+    "turn": "वळण: {turn}/{max_turns}",
+    "stock": "स्टॉक: {stock} कार्ड्स",
+    "waste": "कचरा (डब्ल्यू): {waste}",
+    "foundations_header": "पाया:",
+    "foundation_row": "F{n}: {cards}",
+    "tableau_header": "चित्र:",
+    "tableau_row": "टी {n}: {cards}"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw ay Player {player_id} sa Nim.\nAng iyong layunin ay makuha ang huling natitirang bagay.\nSa bawat pagkakataon, piliin ang eksaktong isang bunton at alisin ang isa o higit pang mga bagay mula dito.\nGumamit ng format na '[bunton dami]', kung saan ang bunton ay ang indeks ng bunton at ang dami ay ang bilang ng mga bagay na aalisin.\nHalimbawa, '[0 3]' ay nag-aalis ng 3 mga bagay mula sa bunton 0."
+  },
+  "state": {
+    "current_pile": "Kasalukuyang Bunton:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Walang wastong format ng pagkilos na natagpuan. Gumamit ng '[bunton dami]'.",
+    "correct_format_wrong_fields": "Player {player_id}, Hindi wastong pagkilos. Ang hanay {col} ay labas ng saklaw.",
+    "out_of_range": "Ang indeks ng bunton {pile_index} ay labas ng saklaw.",
+    "non_positive": "Dapat alisin ang hindi bababa sa 1 bagay.",
+    "exceeds_pile": "Hindi maaaring alisin ang {quantity} mula sa bunton {pile_index} (naiwan lamang ang {pile_count})."
+  },
+  "observation": {
+    "removed_from_piles": "Ang Player {player_id} ay naglaro ng [{pile_index} {quantity}], na nag-aalis ng {quantity} bagay(mga bagay) mula sa bunton {pile_index}."
+  },
+  "outcome": {
+    "win": "Ang Player {player_id} ay nakakuha ng huling bagay(mga bagay)!"
+  }
+}

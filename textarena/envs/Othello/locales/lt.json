@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} žaidžiantis {colour} ({piece}) Othello žaidime.\nJūsų tikslas yra turėti daugiau savo spalvos figūrų ant lentos žaidimo pabaigoje.\nSavo ėjimo metu, pastatykite figūrą taip, kad ji apsuptų vieną ar daugiau priešininko figūrų bet kuriame kryptimi (horizontaliai, vertikaliai ar įstrižai) tarp jūsų naujos figūros ir kitos jūsų esamos figūros. Visos apsuptos priešininko figūros bus apverstos į jūsų spalvą.\nNurodykite savo ėjimą formatu '[eilė, stulpelis]'."
+  },
+  "board": {
+    "game_board": "Žaidimo lenta:\n{board}",
+    "valid_moves": "{observation}\nLeidžiami ėjimai: {moves}",
+    "no_valid_moves_reset": "{observation}\nNėra leidžiamų ėjimų - jūs galbūt turite praleisti.",
+    "no_valid_moves_step": "{observation}\nNėra leidžiamų ėjimų – jūs galbūt turite praleisti.",
+    "scores_reset": "{observation}\nDabartinės rezultatai - Juodi: {black_count}, Balti: {white_count}\n",
+    "scores_step": "{observation}\nRezultatai - Juodi: {black_count}, Balti: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Ėjimas turi būti formato [eilė, stulpelis].",
+    "illegal": "Neteisėtas ėjimas. Leidžiami ėjimai: {valid}"
+  },
+  "game_action": {
+    "skipped": "Žaidėjas {pid} turėjo praleisti savo ėjimą",
+    "played": "Žaidėjas {pid} ({piece}) žaidė [{r}, {c}] apverdamas {flipped} figūrą(as)"
+  },
+  "game_message": {
+    "must_skip": "Žaidėjas {pid} ({piece}) neturi leidžiamų ėjimų ir privalo praleisti."
+  },
+  "outcome": {
+    "black_wins": "Juodi laimi {black_count}-{white_count}.",
+    "white_wins": "Balti laimi {white_count}-{black_count}.",
+    "draw": "Lygiosios {black_count}-{white_count}."
+  }
+}

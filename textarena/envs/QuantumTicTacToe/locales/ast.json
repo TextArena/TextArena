@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Yes el Xugador {player_id} en Tic Tac Toe Cuánticu.\nEl to símbolu ye '{symbol}', y los tos númberos de mou siempres son {parity} (p. ex., X1, X3 o O2, O4).\n\nOXetivu: Ganar formando una llinia de tres marques clásiques (solidificaes d'una superposición).\n\nCómo xugar:\n- En cada xugada, asitia una marca espeluznante en dos cuadraos vacíos distintos usando el formatu '[a,b]'.\n- Estes marques tán entrelazaes, y etiquetaes como 'X1 / X1' o 'O4 / O4'.\n- Nun puedes asitiar marques espeluznantes nun cuadráu que yá se derrumbó (solidificó).\n\nRegla de derrumbe:\n- Si la to xugada crea un ciclu nel grafu d'entrelazamientu, derrúmbase automáticamente.\n- Cada marca espeluznante nel ciclu conviértese nuna marca clásica n'unu de los dos allugues.\n- Cualquier marca espeluznante dependiente tamién se derrumba.\n\nVictoria:\n- El xuegu remata cuando un xugador tien tres marques clásiques en llinia.\n- Si dambos xugadores llogren una llinia mientres el mesmu derrumbe, el que tien el númberu de mou máximu más baxu gana.\n\nExemplu de mou: '[0,4]' asitia una marca espeluznante nes celles 0 y 4."
+  },
+  "board": {
+    "current_board": "Tableru de Tic Tac Toe Cuánticu:\n\n{board}\n\nUnvia la to mou como '[a,b]' pa colocar una marca cuántica en dos allugues."
+  },
+  "invalid_move": {
+    "wrong_format": "Formatu inválidu. Utiliza \"[a,b]\".",
+    "invalid_cells": "Los índices de cella son inválidos o duplicados.",
+    "already_solidified": "Una de les célules yá se solidificó."
+  },
+  "game_action": {
+    "placed": "El xugador {player_id} colocó'l so símbolu nuna superposición ente les celdes {pos_a} y {pos_b}."
+  },
+  "game_message": {
+    "dependent_resolved": "Superposición dependiente resuelta. Celda ({r}, {c}) agora ye {symbol}.",
+    "last_cell_resolved": "Superposición de la última celda resuelta. Celda ({r}, {c}) agora ye {symbol}.",
+    "superposition_resolved": "Superposición resuelta. Celda ({r}, {c}) agora ye {symbol}."
+  },
+  "outcome": {
+    "win": "El xugador {player_id} gana con marques consolidaes!",
+    "draw": "El partíu ye empate."
+  }
+}

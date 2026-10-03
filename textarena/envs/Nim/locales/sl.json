@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v Nimu.\nVaš cilj je vzeti zadnji preostali predmet.\nNa vsako vrsto morate izbrati točno en kup in odstraniti en ali več predmetov iz njega.\nUporabite format '[kup količina]', kjer je kup indeks kupa in količina je število predmetov, ki jih želite odstraniti.\nNa primer, '[0 3]' odstrani 3 predmete iz kupa 0."
+  },
+  "state": {
+    "current_pile": "Trenutni kup:\n{piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ni najden veljaven format poteze. Uporabite '[kup količina]'.",
+    "correct_format_wrong_fields": "Igralec {player_id}, Neveljavna akcija. Stolpec {col} je zunaj mej.",
+    "out_of_range": "Indeks kupa {pile_index} je zunaj obsega.",
+    "non_positive": "Morate odstraniti vsaj 1 predmet.",
+    "exceeds_pile": "Ne morete odstraniti {quantity} iz kupa {pile_index} (le {pile_count} ostalo)."
+  },
+  "observation": {
+    "removed_from_piles": "Igralec {player_id} je igral [{pile_index} {quantity}], odstranil {quantity} predmet(a) iz kupa {pile_index}."
+  },
+  "outcome": {
+    "win": "Igralec {player_id} je vzel zadnji predmet(e)!"
+  }
+}

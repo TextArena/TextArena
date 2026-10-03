@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Akópa Snake lórí àpapọ̀ {width}×{height}.\nÌwọ ni ó ń ṣàkóso snake {player_id}. Ìgbéyẹ̀wọ̀ tó wúlò: '[up]'/'[down]'/'[left]'/'[right]' (tàbí w/s/a/d).\nÈrò: gbé ìgbéyẹ̀wọ̀ tó pẹ́ jùlọ tàbí gbé ìgbéyẹ̀wọ̀ tó pẹ́ jùlọ àti gbà àwọn ìsọ̀rí tó ga jùlọ (ìdíwọ̀ ìgbà {max_turns} ìgbà)."
+  },
+  "board": {
+    "current": "Ìgbìmọ̀ tó wà nísinsìnyí: {board}",
+    "after_moves": "Ipo Ojúwọ̀n Lọ́wọ́:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Ejò {player_id} kú nítorí ìgbésẹ̀ tí kò bá ìlànà mu."
+  },
+  "outcome": {
+    "survived_win": "Ẹlẹsẹ {player_id} yè; gbogbo àwọn yòókù kú.",
+    "all_dead_simul": "Gbogbo àwọn ejò náà ló kú lẹ́ẹ̀kan náà.",
+    "outlived": "Ọ̀jáfáfá ni, kò sí ẹni tó kú.",
+    "all_dead": "Gbogbo àwọn ejò náà ti kú.",
+    "turn_limit": "Ìlà ìyí ti dé - ẹni tó bá ní ìlà tó dára jù lọ ló máa gba ìyàsọ́tọ̀.",
+    "ranking": "{reason} Awọn ẹgbẹ ipo ipari (ti o buru julọ→ti o dara julọ): {groups}"
+  }
+}

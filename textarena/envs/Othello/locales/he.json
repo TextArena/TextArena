@@ -1,0 +1,34 @@
+{
+  "player_prompt": {
+    "intro": "אתה שחקן {player_id}, המשחק בצבע {colour} ({piece}) במשחק אותלו.\nהמטרה שלך היא שיהיו על הלוח יותר כלים בצבע שלך בסיום המשחק.\nבתורך, הנח כלי כך שהוא יאגף כלי אחד או יותר של היריב בכל כיוון, אופקי, אנכי או אלכסוני, בין הכלי החדש שלך לבין כלי אחר שלך שכבר נמצא על הלוח. כל כלי היריב שאוגפו יתהפכו לצבע שלך.\nהזן את המהלך שלך בתבנית '[row, col]'."
+  },
+
+  "board": {
+    "game_board": "לוח המשחק:\n{board}",
+    "valid_moves": "{observation}\nמהלכים חוקיים: {moves}",
+    "no_valid_moves_reset": "{observation}\nאין מהלכים חוקיים - ייתכן שתצטרך לדלג על תורך.",
+    "no_valid_moves_step": "{observation}\nאין מהלכים חוקיים – ייתכן שתצטרך לדלג על תורך.",
+    "scores_reset": "{observation}\nהניקוד הנוכחי - שחור: {black_count}, לבן: {white_count}\n",
+    "scores_step": "{observation}\nניקוד - שחור: {black_count}, לבן: {white_count}\n"
+  },
+
+  "invalid_move": {
+    "wrong_format": "המהלך חייב להיות בתבנית [row, col].",
+    "illegal": "מהלך לא חוקי. מהלכים חוקיים: {valid}"
+  },
+
+  "game_action": {
+    "skipped": "שחקן {pid} נאלץ לדלג על תורו",
+    "played": "שחקן {pid} ({piece}) שיחק ב-[{r}, {c}] והפך {flipped} כלי משחק"
+  },
+
+  "game_message": {
+    "must_skip": "לשחקן {pid} ({piece}) אין מהלכים חוקיים והוא חייב לדלג על תורו."
+  },
+
+  "outcome": {
+    "black_wins": "השחור ניצח {black_count}-{white_count}.",
+    "white_wins": "הלבן ניצח {white_count}-{black_count}.",
+    "draw": "תיקו {black_count}-{white_count}."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "אתה שחקן {player_id} ב-Chopsticks. בתורך, בחר אחת מהאפשרויות הבאות:\n  + התקפה: '[attack M O]', כאשר M=היד שלך (0 או 1), ו-O=היד של היריב (0 או 1).\n    - מספר האצבעות ביד היריב גדל לפי מספר האצבעות ביד שלך; אם הוא נעשה >=5, הוא הופך ל-0.\n  + פיצול: '[split L R]' כדי לחלק מחדש את סך האצבעות שלך בין L ו-R (L+R = הסכום הכולל שלך).\nהשב בדיוק באחת מהפקודות האלה."
+  },
+  "board": {
+    "current_board": "הלוח הנוכחי:\nשחקן 0: {hands_0}\nשחקן 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "היד שלך {my_idx} מתה.",
+    "opp_hand_dead": "היד {opp_idx} של היריב כבר מתה.",
+    "split_sum": "סכום הפיצול חייב להיות {total}.",
+    "split_no_change": "הפיצול חייב לשנות את חלוקת הידיים שלך.",
+    "invalid_command": "מהלך לא תקין. השתמש ב-“[attack M O]” או ב-“[split L R]”."
+  },
+  "game_action": {
+    "attack": "P{player_id} תוקף את יד {opp_idx} של P{opp_id}: היא משתנה מ-{opp_val} ל-{new_val}.",
+    "split": "P{player_id} מפצל ל-[{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "שתי הידיים של היריב מתות.",
+    "draw": "הגעת למגבלת התורות."
+  }
+}

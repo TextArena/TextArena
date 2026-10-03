@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction 지역화 파일. 키(왼쪽)는 번역하지 마세요. 값(오른쪽)만 번역하세요. 보드 좌표(a-h, 1-8), 조각 문자(O, X), 수 형식 토큰, 또는 {board} ASCII 그리드는 그대로 유지하세요.",
+  "_slots": {
+    "{player_id}": "플레이어 번호, 0 또는 1",
+    "{side}": "플레이어의 조각 문자, O 또는 X",
+    "{other}": "상대방의 조각 문자, O 또는 X",
+    "{board}": "보드의 ASCII 렌더링; 그대로 유지하세요",
+    "{coord}": "보드 좌표, 예: b1 또는 a3",
+    "{from}": "수의 출발 좌표, 예: b1",
+    "{to}": "수의 도착 좌표, 예: b3"
+  },
+  "player_prompt": {
+    "intro": "당신은 LinesOfAction 게임의 플레이어 {player_id}입니다.\n당신의 조각은 '{side}'이고, 상대방의 조각은 '{other}'입니다.\n수 형식: `[b1b3]` (출발-좌표 도착-좌표). 합법적인 수는 수평, 수직, 또는 대각선으로 해당 선의 총 조각 수(색상 상관 없음)와 같은 칸 수만큼 이동합니다. 자신의 조각을 뛰어넘을 수 있지만, 상대방의 조각은 뛰어넘을 수 없습니다; 상대방의 조각 위에 착지하면 잡아먹습니다. 모든 조각이 8-인접 연결될 때 승리합니다."
+  },
+  "board": {
+    "current_board": "보드:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "형식은 e2e4 (출발,도착 좌표)여야 합니다.",
+    "no_piece": "{coord}에 {side} 조각이 없습니다.",
+    "identical": "출발지와 도착지가 동일합니다.",
+    "not_straight_or_diagonal": "수는 직선 또는 대각선으로 이동해야 합니다.",
+    "wrong_distance": "이동 거리는 해당 선의 조각 수와 같아야 합니다.",
+    "enemy_blocks": "적 조각이 경로를 막고 있습니다.",
+    "destination_own": "도착지가 자신의 조각에 의해 차지되어 있습니다."
+  },
+  "game_action": {
+    "moved": "플레이어 {player_id}가 {from} -> {to}로 이동했습니다",
+    "captured_suffix": "플레이어 {player_id}가 {from} -> {to}로 이동하여 적을 잡아먹었습니다."
+  },
+  "outcome": {
+    "win": "모든 조각이 연결되었습니다.",
+    "draw_no_capture": "60수 동안 잡아먹은 조각이 없습니다.",
+    "draw_repetition": "포지션이 세 번 반복되었습니다."
+  }
+}

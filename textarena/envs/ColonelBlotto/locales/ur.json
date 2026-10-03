@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "آپ {role} ہیں کرنل بلوٹو میں۔\nآپ کا مقصد اپنے مخالف سے زیادہ راؤنڈ جیتنا ہے۔\nہر راؤنڈ پر، {num_total_units} یونٹس کو {field_names} کے میدانوں میں تقسیم کریں۔\nوہ کھلاڑی جو کسی میدان میں زیادہ یونٹس مختص کرتا ہے وہ میدان جیتتا ہے، اور جو کھلاڑی زیادہ میدانوں میں جیتتا ہے وہ راؤنڈ جیتتا ہے۔\nمثال کے طور پر، '[A7 B7 C6]' A میں 7 یونٹس، B میں 7، اور C میں 6 مختص کرتا ہے۔",
+    "commander_alpha": "کمانڈر الفا",
+    "commander_beta": "کمانڈر بیٹا"
+  },
+  "game_state": {
+    "header_round": "=== کرنل بلوٹو - راؤنڈ {current_round}/{num_rounds} ===\nراؤنڈز جیتے - کمانڈر الفا: {alpha_score}، کمانڈر بیٹا: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nراؤنڈ {current_round}\nکمانڈر الفا نے مختص کیا: {p0_allocations}\nکمانڈر بیٹا نے مختص کیا: {p1_allocations}\n",
+    "winner_alpha": "{message}فاتح: کمانڈر الفا",
+    "winner_beta": "{message}فاتح: کمانڈر بیٹا",
+    "tie": "{message}ٹائی!"
+  },
+  "invalid_move": {
+    "wrong_format": "غلط ان پٹ فارمیٹ۔ استعمال کریں: A:5, B:10, C:5",
+    "invalid_field": "غلط میدان کا نام۔ درست میدانوں کے نام: {field_names}",
+    "wrong_allocation_value": "تمام مختص کردہ یونٹس غیر منفی عدد ہونے چاہئیں۔",
+    "incorrect_total_units": "آپ کو بالکل {num_total_units} یونٹس مختص کرنے ہیں۔ موجودہ مجموعہ: {current_sum}",
+    "good_allocations": "مختص کردہ یونٹس ٹھیک ہیں۔"
+  },
+  "outcome": {
+    "winner_alpha": "کمانڈر الفا {score_0}-{score_1} کے بعد {num_rounds} راؤنڈز میں جیتتا ہے!",
+    "winner_beta": "کمانڈر بیٹا {score_1}-{score_0} کے بعد {num_rounds} راؤنڈز میں جیتتا ہے!",
+    "draw": "کھیل {score_0}-{score_1} کے بعد {num_rounds} راؤنڈز میں ٹائی پر ختم ہوتا ہے!",
+    "early_winner_alpha": "کمانڈر الفا {scores_0}-{scores_1} (اکثریت حاصل کی)!",
+    "early_winner_beta": "کمانڈر بیٹا {scores_1}-{scores_0} (اکثریت حاصل کی)!"
+  }
+}

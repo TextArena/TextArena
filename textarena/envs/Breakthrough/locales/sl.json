@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Igrate {color} v igri Breakthrough. Premikate se {direction} na plošči velikosti {board_size}x{board_size}.\nV svoji vrsti lahko premaknete eno figuro en korak naprej ali diagonalo naprej.\nFigura se lahko premakne diagonalo samo, če je tam nasprotnikova figura, in samo premakne v takšno že zasedeno polje v diagonalnem koraku.\nKo stopite v polje z nasprotnikovo figuro, jo zajamete in nasprotnikova figura je trajno odstranjena iz plošče.\nUporabite notacijo podobno UCI v oklepajih, npr. [a2a3] za premik iz a2 v a3.\n* 'a' ustreza najbolj levi stolpcu, '1' je spodnja vrsta (iz bele perspektive).\n* Črna domača vrsta je zgornja vrsta (vrsta 8 za 8x8). Bela domača vrsta je spodnja vrsta (vrsta 1 za 8x8).\nPrvi igralec, katerega figura doseže nasprotnikovo domačo vrsto, zmaga. Če so vse vaše figure zajete, izgubite."
+  },
+  "invalid_move": {
+    "wrong_format": "Prosim, uporabite oklepajočo algebrsko notacijo kot [a2a3].",
+    "out_of_bounds": "Premik je zunaj meja plošče.",
+    "illegal": "Ta premik ne sledi pravilom Breakthrough ali ni vaša figura."
+  },
+  "game_action": {
+    "moved": "Igralec {player_id} premakne {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Bela je dosegla črno domačo vrsto.",
+    "black_reached": "Črna je dosegla belo domačo vrsto.",
+    "white_captured": "Vse bele figure so zajete.",
+    "black_captured": "Vse črne figure so zajete.",
+    "no_moves": "Igralec {player_id} nima več premikov."
+  }
+}

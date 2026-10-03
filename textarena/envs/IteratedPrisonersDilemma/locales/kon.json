@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "O wewe Mwana nkangu {player_id} na Nsangu ya Mfwa ya kulanda kwa {num_rounds} mikolo.\n\nMfumo ya Nsangu:\n- Liboso ya kulanda, una {total_conversation_rounds} mikolo ya kusolola malamu.\n- Sima ya kulonga, bantu babili bakulanda pamo na kusala kwa kusaidiana to kubina.\n\nTabela ya Mapato (ya kudikama kwa kila kolo):\n- Bantu babili Basaidiana ➜ kila mmo {cooperate_reward}\n- Bantu babili Babina ➜ kila mmo {mutual_defect_reward}\n- Mmo abina, mmo asaidiana ➜ Mbinina {defect_reward}, Msaidiani {sucker_reward}\n\nKusala Nsangu:\n- Na kusolola: koma malamu olingi.\n- Na kulonga: koma '[Cooperate]' to '[Defect]' (kisina kubadilisha). O wewe angaweza koma malamu liboso to sima ya token."
+  },
+  "phases": {
+    "conversation_finished": "Kuluka kwakuti kukomana kwame mwanda {round}. Nanga, andika '[Cooperate]' or '[Defect]' mu {{}} ilubuku.",
+    "starting_round": "--- Kuyantika ya Etape {round} ---",
+    "round_summary": "Mambu {round} matokeo:\n{outcome}\nMwana nkodi 0 alipata {r0} (jumla {score_0}), Mwana nkodi 1 alipata {r1} (jumla {score_1})."
+  },
+  "outcome": {
+    "winner": "Mwana nkodi {winner} alishinda {win_score} - {lose_score}.",
+    "draw": "Bo yonso zole bulaka but na {s0}.",
+    "round_both_cooperate": "Bantu yonso zole kusalaka kumosi.",
+    "round_both_defect": "Bo yonso zole kutinaka.",
+    "round_p0_cooperates_p1_defects": "Muntu ya ntete kusalaka kumosi ti bo, kansi muntu ya zole kutinaka.",
+    "round_p0_defects_p1_cooperates": "Mwana nkodi 0 akikata, Mwana nkodi 1 alisalisa."
+  }
+}

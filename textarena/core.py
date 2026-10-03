@@ -2,6 +2,9 @@ import random
 from abc import ABC, abstractmethod
 from enum import Enum, auto
 from typing import Any, Dict, List, Tuple, Optional, Callable
+import inspect, functools
+
+from textarena.utils.locales import LocalizedMessage, build_locale
 
 class ObservationType(Enum):
     PROMPT = auto() # the player prompts
@@ -20,11 +23,19 @@ Info = Dict[str, Any]  # additional information about the environment
 
 
 class State:
+    lang = "en"
     def __init__(self, num_players: int, seed: Optional[int]=None, max_turns: Optional[int]=None):
         if seed is not None: random.seed(seed) # set the random seed
         self.max_turns = max_turns 
         self.num_players = num_players
         self.current_player_id = 0
+
+    def t(self, *keys, _pid: int = None, **kwargs) -> str:
+        assert self._locale is not None, f"{self.__class__.__name__} has no locales/ folder."
+        return self._locale.t(*keys, _pid=_pid, **kwargs)
+    
+    def m(self, *keys, **kwargs):
+        return LocalizedMessage(key=keys, kwargs=kwargs, loader=self._locale)
 
     def check_turn_limit(self):
         return self.turn >= self.max_turns and self.done == False
@@ -34,13 +45,13 @@ class State:
 
     def standard_resets(self, game_state: Optional[Dict[str, Any]]=None, player_prompt_function: Optional[Callable]=None, role_mapping: Optional[Dict[int, str]]={}, secret_roles: Optional[Dict[int, str]]=None):
         self.game_state = game_state
-        self.role_mapping = role_mapping
+        self._locale = build_locale(lang=self.lang)
         
         # reset standard game parameters
         self.turn = 0
         self.done = False 
         self.step_info = {} # returned and reset every step.
-        self.game_info = {pid: {"role": f"Player {pid}", "invalid_move": False, "turn_count": 0} for pid in range(self.num_players)} # returned at the end of the game
+        self.game_info = {pid: {"role": self.t("PlayerRoleMapping", "player", player_id=pid, _pid=pid), "invalid_move": False, "turn_count": 0} for pid in range(self.num_players)} # returned at the end of the game
         # the role is intentionally a string so ppl don't use it as an index for role advantage calculation, as some environments will return str based roles and then crash their code
         # invalid moves should be returned on a per-player basis since in most multiplayer games an invalid move won't end the game
         # same with the turn-count. It's not always symmetric, so no point having a global one, esp. for multiplayer games.
@@ -53,9 +64,9 @@ class State:
         self.logs = []
 
         # set role mapping
+        self.role_mapping = role_mapping
         if self.role_mapping is None:
-            for pid in range(self.num_players):
-                self.role_mapping[pid] = f"Player {pid}"
+            self.role_mapping = {pid: self.t("PlayerRoleMapping", "player", player_id=pid, _pid=pid) for pid in range(self.num_players)}
         self.role_mapping[GAME_ID] = self.role_mapping.get(GAME_ID, "GAME") # add if not provided
 
         # generate the player prompts
@@ -63,16 +74,45 @@ class State:
             for player_id in range(self.num_players):
                 self.add_observation(to_id=player_id, message=player_prompt_function(player_id=player_id, game_state=self.game_state), observation_type=ObservationType.PROMPT)
 
-    def add_observation(self, message: str, observation_type: ObservationType, from_id: int=GAME_ID, to_id: int=-1):
-        if observation_type==ObservationType.PLAYER_ACTION:
-            for role_tag in self.role_mapping.values(): message = message.replace(f"[{role_tag}]", "") # filter out role tags from message
-        self.logs.append((from_id, message))
-        if to_id == -1:
-            for pid in range(self.num_players):
-                self.observations[pid].append((from_id, message, observation_type))
-        else:
-            assert to_id in self.observations, f"The provided 'to_id' {to_id} does not exists. ({list(self.observations.keys())})"
-            self.observations[to_id].append((from_id, message, observation_type))
+    def add_observation(self, message, observation_type: ObservationType,
+                        from_id: int = GAME_ID, to_id: int = -1):
+        recipients = range(self.num_players) if to_id == -1 else [to_id]
+        if to_id != -1:
+            assert to_id in self.observations, (
+                f"The provided 'to_id' {to_id} does not exist. "
+                f"({list(self.observations.keys())})"
+            )
+
+        for pid in recipients:
+            rendered = self._resolve_message(message, recipient_id=pid,
+                                            from_id=from_id,
+                                            observation_type=observation_type)
+            if observation_type == ObservationType.PLAYER_ACTION:
+                for role_tag in self.role_mapping.values():
+                    rendered = rendered.replace(f"[{role_tag}]", "")
+            self.observations[pid].append((from_id, rendered, observation_type))
+
+        # Logs: one canonical entry. Use sender's language for player actions,
+        # default language otherwise. Choose what's most useful for replay/debug.
+        log_text = self._resolve_message(
+            message,
+            recipient_id=from_id if observation_type == ObservationType.PLAYER_ACTION else None,
+            from_id=from_id,
+            observation_type=observation_type,
+        )
+        if observation_type == ObservationType.PLAYER_ACTION:
+            for role_tag in self.role_mapping.values():
+                log_text = log_text.replace(f"[{role_tag}]", "")
+        self.logs.append((from_id, log_text))
+
+
+    # core.py — inside class State
+    def _resolve_message(self, message, recipient_id, from_id, observation_type) -> str:
+        from textarena.utils.locales import LocalizedMessage
+        if not isinstance(message, LocalizedMessage):
+            return message
+        pid_for_lang = from_id if observation_type == ObservationType.PLAYER_ACTION else recipient_id
+        return message.render(_pid=pid_for_lang)   # <-- not self._locale.t(...)
 
     def get_current_player_observation(self):
         current_player_observation = self.observations[self.current_player_id]
@@ -94,10 +134,69 @@ class Env(ABC):
     """
     Abstract base class for text-based game environments.
 
-    This class outlines the interface for the environment, including methods for resetting the environment,
-    stepping through the environment (taking actions), and rendering the environment state.
+    The base class transparently loads the appropriate locale (via set_lang)
+    *before* the subclass's reset body runs, so self.m()/self.t() are safe to use
+    inside player-prompt callbacks invoked synchronously by State.reset.
     """
-    game_state: State  # the state of the environment
+    allow_common_locale_fallback = False
+    game_state: State
+
+    lang = "en"
+    _locale = None
+
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
+
+        original_reset = cls.__dict__.get("reset", None)
+        if original_reset is None:
+            return
+        
+        parameters = inspect.signature(original_reset).parameters
+        lang_mapping_in_reset = "lang_mapping" in parameters
+
+        @functools.wraps(original_reset)
+        def reset_with_lang_mapping(self, num_players, seed=None, lang_mapping=None, *args, **kwargs):
+            assert len(lang_mapping) == num_players if lang_mapping is not None else True, (f"Length of lang_mapping ({len(lang_mapping)}) does not match num_players ({num_players}).")
+            if lang_mapping is None:
+                lang_mapping = {pid: self.lang for pid in range(num_players)}
+            self.set_lang(lang_mapping)
+            if lang_mapping_in_reset:
+                kwargs.setdefault("lang_mapping", lang_mapping)
+            return original_reset(self, num_players, seed=seed, *args, **kwargs)
+        
+        cls.reset = reset_with_lang_mapping
+    
+    def set_lang(self, lang):
+        self.lang = lang
+        self._locale = build_locale(self.__class__, lang=lang)
+
+        if (self._locale is None and self.allow_common_locale_fallback):
+            self._locale = build_locale(lang=lang)
+
+        all_en = (
+            lang == "en"
+            or (
+                isinstance(lang, dict)
+                and all(value == "en" for value in lang.values())
+            )
+        )
+
+        if self._locale is None and not all_en:
+            raise FileNotFoundError(
+                f"{self.__class__.__name__} does not support lang='{lang}'. "
+                f"Please add a locales/ folder with a '<lang>.json' file."
+            )
+        
+        State.lang = lang
+        Agent.lang = lang
+
+    def t(self, *keys: str, _pid: int = None, **kwargs: Any) -> str:
+        if self._locale is None:
+            raise ValueError(f"Environment {self.__class__.__name__} has no locale data. Cannot call t() for translation. Please ensure there is a locales/ directory with the appropriate language files, or set lang='en' to use the default (which is just the keys).")
+        return self._locale.t(*keys, _pid=_pid, **kwargs)
+    
+    def m(self, *keys, **kwargs):
+        return LocalizedMessage(key=keys, kwargs=kwargs, loader=self._locale)
 
     @abstractmethod
     def reset(self, num_players: int, seed: Optional[int]=None):
@@ -133,19 +232,31 @@ class Env(ABC):
         rewards = self.state.close()
         return rewards
 
+
 class Wrapper(Env):
     """ Base class for environment wrappers. """
+    allow_common_locale_fallback = True
+    
     def __init__(self, env):
         # Confirm we are not double-wrapping with the same wrapper type
         if isinstance(env, Wrapper) and env.is_wrapped_with(type(self)):
             raise ValueError(f"Environment is already wrapped with {type(self).__name__}. Double-wrapping is not allowed.")
         self.env = env
 
+    def t(self, *keys, _pid: int = None, **kwargs) -> str:
+        assert self._locale is not None, f"{self.__class__.__name__} has no locales/ folder."
+        return self._locale.t(*keys, _pid=_pid, **kwargs)
+    
+    def m(self, *keys, **kwargs):
+        return LocalizedMessage(key=keys, kwargs=kwargs, loader=self._locale)
+
     def __getattr__(self, name):
         return getattr(self.env, name)
 
-    def reset(self, num_players: int , seed: Optional[int] = None):
-        return self.env.reset(num_players=num_players, seed=seed)
+    def reset(self, num_players: int , seed: Optional[int] = None, lang_mapping: Optional[Dict[int, str]] = None):
+        self.lang = lang_mapping
+        self._locale = build_locale(lang=self.lang)
+        return self.env.reset(num_players=num_players, seed=seed, lang_mapping=lang_mapping)
 
     def step(self, action: str) -> Tuple[bool, Info]:
         return self.env.step(action=action)
@@ -188,9 +299,9 @@ class RenderWrapper(Wrapper):
     def step(self, action: str) -> Tuple[bool, Optional[Info]]:
         return self.env.step(action=action)
     
-    def reset(self, num_players: int , seed: Optional[int] = None):
+    def reset(self, num_players: int , seed: Optional[int] = None, lang_mapping: Optional[Dict[int, str]] = None):
         self.reset_render()
-        return self.env.reset(num_players=num_players, seed=seed)
+        return self.env.reset(num_players=num_players, seed=seed, lang_mapping=lang_mapping)
 
     def reset_render(self):
         raise NotImplementedError
@@ -205,7 +316,20 @@ class ActionWrapper(Wrapper):
 
 
 class Agent(ABC):
-    """ Generic agent class that defines the basic structure of an agent """
+    lang = "en"
+    def __init__(self):
+        self._locale = None
+        self._loaded_lang = None
+
+    def t(self, *keys, **kwargs) -> str:
+        """Lazy-loading t() that reloads when Agent.lang changes."""
+        current_lang = self.__class__.lang
+        if self._locale is None or self._loaded_lang != current_lang:
+            self._locale = build_locale(lang=current_lang)
+            self._loaded_lang = current_lang
+        assert self._locale is not None, f"{self.__class__.__name__} has no locales/ folder."
+        return self._locale.t(*keys, **kwargs)
+
     @abstractmethod
     def __call__(self, observation: str) -> str:
         """

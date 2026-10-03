@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe staðfærslu skrá. ÞÝÐA EKKI lykla (vinstri hlið). Þýða aðeins gildi (hægri hlið).",
+  "_slots": {
+    "{player_id}": "Leikmannsnúmer, t.d. 0, 1 eða 2",
+    "{symbol}": "Leikmannsmerki, annað hvort A, B eða C",
+    "{cell}": "Borðreitur",
+    "{max_cell}": "Hæsta gilt borðreiturnúmer (borðstærð^2 - 1)",
+    "{row}": "Borðlínunúmer þar sem merki var sett",
+    "{col}": "Borðdálunúmer þar sem merki var sett",
+    "{board}": "Teiknað ASCII borð (þýða ekki)",
+    "{moves}": "Kommuskiptur listi yfir tiltæka leikja, t.d. '[4]' (þýða ekki)"
+  },
+  "player_prompt": {
+    "intro": "Þú ert Leikmaður {player_id} í Þriggja Leikmanna Tic Tac Toe.\nMerki þitt er '{symbol}'.\nÞú skiptir um að setja merki þitt á 5x5 borð til að mynda línu fjögurra.\nLínur geta verið láréttar, lóðréttar eða á skálínu.\nSendaðu leikinn þinn með sniðinu '[4]' til að merkja reit 4."
+  },
+  "board": {
+    "current_board": "Núverandi Borð:\n\n{board}\n\nTiltækir Leikir: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ógilt leikja snið. Notaðu '[cell]' þar sem cell er 0-{max_cell}.",
+    "out_of_range": "Ógilt borðreiturnúmer: {cell}. Verður að vera á milli 0 og {max_cell}.",
+    "already_occupied": "Borðreitur {cell} er þegar átt.",
+    "made_invalid": "Leikmaður {player_id} gerði ógilt leik"
+  },
+  "game_action": {
+    "placed": "Leikmaður {player_id} setur merki sitt ({symbol}) í reit ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Leikmaður {player_id} ({symbol}) hefur unnið!",
+    "draw": "Leikurinn er jafntefli!"
+  }
+}

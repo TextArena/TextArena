@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Pelaat Countdown-lukupeliä!\nTavoite: Yhdistä luvut käyttämällä +, -, *, / saavuttaaksesi kohdeluvun.\nToimintomuoto: [i j op], jossa i ja j ovat indeksejä ja op on operaatio.\nEsimerkki: [0 2 *] kertoo luvun indeksissä 0 luvulla indeksissä 2.\nJakolaskun tulos on oltava kokonaisluku."
+  },
+  "board": {
+    "header": "KOHTIO: {target}\n\nKäytettävissä olevat luvut:\n{numbers}",
+    "best": "{observation}\n\nParas tähän mennessä: {best_value} (etäisyys: {distance})\nParas lauseke: {best_expression}",
+    "history": "{observation}\n\nSiirtoloki:\n{moves}",
+    "progress": "{observation}\nNykyinen edistymispisteet: {progress}"
+  },
+  "invalid_move": {
+    "wrong_format": "Virheellinen toimintomuoto. Käytä `[i j op]`, jossa i ja j ovat indeksejä ja op on +, -, *, /",
+    "invalid_indices": "Virheelliset indeksit. Tulee olla erilaiset ja välillä 0-{max_index}",
+    "invalid_operation": "Virheellinen operaatio (nollalla jako tai ei-kokonaislukutulos)"
+  },
+  "outcome": {
+    "win": "Täydellistä! Löydettiin tarkka kohdeluku: {target}",
+    "no_moves": "Ei enempää siirtoja. Paras tulos: {best_value} (kohdeluku: {target})",
+    "turn_limit": "Vuororajan saavutettu. Paras tulos: {best_value} (kohdeluku: {target})"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Du spiller {color} i et spill av Breakthrough. Du flytter {direction} på et {board_size}x{board_size} brett.\nI din tur kan du flytte ett enkelt brikke ett steg frem eller diagonalt frem.\nEt brikke kan bare flytte diagonalt hvis en motstanderbrikke er der, og bare flytte inn i en slik forhåndsbesatt rute i et diagonalt steg.\nNår du stiger inn i en rute med en motstanderbrikke, tar du den og motstanderens brikke fjernes permanent fra brettet.\nBruk UCI-lignende notasjon i klammepar, f.eks. [a2a3] for å flytte fra a2 til a3.\n* 'a' tilsvarer den venstre kolonnen, '1' er nederste rad (fra hvits perspektiv).\n* Svarts hjemmerad er øverste rad (rad 8 for et 8x8-brett). Hvits hjemmerad er nederste rad (rad 1 for et 8x8-brett).\nDen første spilleren hvis brikke når motstanderens hjemmerad vinner. Hvis brikkene dine alle er tatt, taper du."
+  },
+  "invalid_move": {
+    "wrong_format": "Vennligst bruk klammepar med algebraisk notasjon som [a2a3].",
+    "out_of_bounds": "Trekket er utenfor brettets grenser.",
+    "illegal": "Det trekket følger ikke Breakthrough-reglene eller er ikke din brikke."
+  },
+  "game_action": {
+    "moved": "Spiller {player_id} flytter {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Hvit nådde Svarts hjemmerad.",
+    "black_reached": "Svart nådde Hvits hjemmerad.",
+    "white_captured": "Alle Hvits brikker er tatt.",
+    "black_captured": "Alle Svarts brikker er tatt.",
+    "no_moves": "Spiller {player_id} har ingen flere trekk."
+  }
+}

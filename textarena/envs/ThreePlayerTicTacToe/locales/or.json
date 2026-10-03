@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "ଆପଣ ତିନି-ଖେଳାଳି ଟିକ ଟକ୍ ଟୋ ରେ ଖେଳାଳି {player_id} ଅଟନ୍ତି । ଆପଣଙ୍କର ଚିହ୍ନ ହେଉଛି '{symbol} । ଆପଣ ଆପଣଙ୍କ ଚିହ୍ନକୁ 5x5 ବୋର୍ଡରେ ରଖି ଚାରିଟି ରେଖା ତିଆରି କରିବାକୁ ପାଳି ପାଳି କରନ୍ତି । ରେଖା ଗୁଡିକ ଭୂସମାନ୍ତର, ଭୂଲମ୍ବ କିମ୍ବା ଆନୁମାନିକ ହୋଇପାରେ । କୋଷ 4 କୁ ଚିହ୍ନିତ କରିବା ପାଇଁ '[4] ' ଫର୍ମାଟ୍ ବ୍ୟବହାର କରି ଆପଣଙ୍କର ଚାଲ ଦାଖଲ କରନ୍ତୁ ।"
+  },
+  "board": {
+    "current_board": "ବର୍ତ୍ତମାନ ବୋର୍ଡ: {board} ଉପଲବ୍ଧ ଚାଲ: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "ଅବୈଧ ସ୍ଥାନାନ୍ତରଣ ଫର୍ମାଟ୍. '[cell]' ବ୍ୟବହାର କରନ୍ତୁ ଯେଉଁଠାରେ ସେଲ୍ ହେଉଛି 0-{max_cell}.",
+    "out_of_range": "ଅବୈଧ ସେଲ ନମ୍ବର: {cell}. ଏହା 0 ରୁ {max_cell} ମଧ୍ୟରେ ହେବା ଆବଶ୍ୟକ.",
+    "already_occupied": "ସେଲ {cell} ଇତିମଧ୍ୟ ଅଧିକୃତ।",
+    "made_invalid": "ଖେଳାଳି {player_id} ଅମାନ୍ୟ ଚାଲାଣ କରିଛନ୍ତି"
+  },
+  "game_action": {
+    "placed": "ଖେଳାଳି {player_id} ନିଜ ଚିହ୍ନ ({symbol}) କୁ ଫିଲ୍ଡ ({row}, {col}) ରେ ରଖିଥାଏ ।"
+  },
+  "outcome": {
+    "win": "ଖେଳାଳି {player_id} ({symbol}) ଜିତିଛନ୍ତି !",
+    "draw": "ଖେଳ ଡ୍ର ରହିଛି!"
+  }
+}

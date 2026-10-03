@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Du bis Speler {player_id} in Drië-spelers Tic Tac Toe.\nDin symbool is '{symbol}'.\nDu nump beurtelings din symbool op 'n 5x5 bord om 'n rie van veer te vorme.\nRieë kènne horizontaal, verticaal of diagonaal zin.\nDein zèt inzènde mèt 't format '[4]' um cel 4 aon te gaeve."
+  },
+  "board": {
+    "current_board": "Hujig bord:\n\n{board}\n\nBesjtuurde zètte: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ongeldige zètformat. Gebruuk '[cell]' woa cell 0-{max_cell} is.",
+    "out_of_range": "Ongeldige celnummeer: {cell}. Moot tösse 0 en {max_cell} ligke.",
+    "already_occupied": "Cel {cell} is al bezet.",
+    "made_invalid": "Speler {player_id} haet 'ne óngeljige zèt gemaak"
+  },
+  "game_action": {
+    "placed": "Speler {player_id} zèt hun symbool ({symbol}) in veld ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Speler {player_id} ({symbol}) wint!",
+    "draw": "'t Spel is gelijkspel!"
+  }
+}

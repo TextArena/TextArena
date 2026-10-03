@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Tiririt da Klondike Solitaire. Lmeɛna-k inu d aselkem akken ad teskecem akk tikitiwin ɣer teɣziwin n tuzzma.\n\nTawurta n Ureqqas:\n- Teɣziwin n tuzzma (F1-F4): Rnu ɣef uɛeqqas seg Ace ɣer Tagellid s tɣawsa\n- Teɣziwin n tafla (T1-T7): Rnu ɣef uɛeqqas, azegzaw fell-as aberkan, aberkan fell-as azegzaw\n- Aɣraf: Ssekcem tikitiwin ɣer teɣzi n yifuɣaren\n- Ifuɣaren (W): Tikiti tis kraḍ taɛejbet i wureqqas\n\nIsemyifen:\n- 'draw' - Ssekcem tikitiwin seg uɣraf ɣer teɣzi n yifuɣaren\n- 'move <source> <destination> [count]' - Ssekcem tikitiwin seg yiwet teɣzi ɣer nniḍen\n  Imudiren: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count daɣen 'all', i d-yettanaf ad teskecem akk tikitiwin ttwafiren.\n- 'forfeit' - Freq ureqqas tura d tuqqnaḍ di tmaneɣt-k yimira\n- Isemawen n teɣziwin: W (ifuɣaren), F1-F4 (teɣziwin n tuzzma), T1-T7 (teɣziwin n tafla)\n\nTzemreḍ ad texdem aṭas n tigawin di yiwet n tukkirt s usenqed-nsent s ticomma:\n  Amedya: 'draw, move W T1, move T2 F1'\n\nKan Tagellid i zemren ad tt-rren ɣer teɣziwin n tafla ttwaggiz.\nTigawin tt-ureqqsen s leḥrir - ma yella yiwet ur teddi, tigawin nniḍen ad tt-rren.\nSeqdec 'forfeit' ma tettamneḍ d akken ureqqas ur yezmir ara ad yaweḍ."
+  },
+  "format_error": {
+    "no_brackets": "Ahil ur d-yusi ara deg uḍris. Ilaq ad yili gar yiferrawen n tneqlaft.",
+    "no_closing_bracket": "Asenfar n tigawt ur nelli ara d win. Ulac amrar i t-id-yettakken \"]\"",
+    "empty_command": "Asegraw d ilem. Seqdec 'draw' neɣ 'move <source> <destination> [count]'",
+    "empty_action": "Taɣawsa d-yexlan",
+    "move_needs_args": "Aɣawas n usikel yeḥwaǧ aselkim d tanzeɣt. Aseqdec: 'move <source> <destination> [count]'",
+    "count_positive": "Ḍḍayf yessefk ad yili d azayez neɣ 'all'",
+    "count_invalid": "Ḍḍayf aberkan. Seqdec ḍḍayf neɣ 'all'",
+    "unknown_command": "Aseɛtu yettwakem '{cmd}'. Sken 'draw', 'move <source> <destination> [count]', neɣ 'forfeit'",
+    "wrapped": "Asebter {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Asebter {n}: {msg}",
+    "before_failure": "{n} Tameɣra i d-yettwasegren uqbel ad yeɣli.",
+    "failed": "Asebter {n} yettwafed: {msg}"
+  },
+  "move_result": {
+    "drew": "Tekkseḍ-d takarḍa seg usekles ɣer useɣzef.",
+    "cannot_draw": "Ur nezmir ad d-nekkes. Iɣbula akked yiḥerqan akk rzanen.",
+    "invalid_pile": "Isem n tqacuct ur yelhi ara. Sseqdec W, F1-F4, neɣ T1-T7",
+    "foundation_one_card": "Yezmer ad yessiweḍ kan yiwet n tkarḍa ɣer lsas.",
+    "waste_to_foundation_ok": "Takarḍa i d-yettwaḥerzen seg useklu ɣer lsas F{dst}",
+    "waste_to_foundation_bad": "Ur yezmir ara ad yessiweḍ takarḍa n usegmi ɣer tqacuct-nni n tseddarin.",
+    "tableau_to_foundation_ok": "Nefka karti seg T{src} ar F{dst}",
+    "tableau_to_foundation_bad": "Ur yezmir ara ad yessiweḍ takarḍa n usebter ɣer tqacuct-nni n tseddart. 🔍",
+    "foundation_to_foundation": "Ur yezmir ara ad yeddu seg lsas ɣer wayeḍ.",
+    "waste_to_tableau_one_card": "Yezmer ad yessuqel kan yiwet n tkarḍa seg usefru ɣer umata.",
+    "waste_to_tableau_ok": "Tameẓla gar ileqman d usebter n t{dst}",
+    "waste_to_tableau_bad": "Ur yezmir ara ad yerr takarḍa n usegmi ɣef tqacuct-nni n uḍebsi.",
+    "no_face_up": "Ulac tikarḍiwin i d-yettwafernen akken ad ttḥerrikent.",
+    "tableau_to_tableau_ok": "Nefka {count} karti(s) seg T{src} ar T{dst}",
+    "tableau_to_tableau_bad": "Ur yeɣliḍ ad t-nejḍeḍ {count} karti(s) seg T{src} ar T{dst}",
+    "foundation_to_tableau_one_card": "Yezmer ad yessiweḍ kan yiwet n tkarḍa seg usebter ɣer uḍar.",
+    "foundation_empty": "Taɣult F{src} d tilemt.",
+    "foundation_to_tableau_ok": "Nefka karti seg F{src} ar T{dst}",
+    "foundation_to_tableau_bad": "Ur yezmir ara ad yerr takarḍa n usebded ɣef tmenḍawt T{dst}",
+    "to_waste_or_stock": "Ur yezmir ad yettwasekcem ɣer yiɣeblan neɣ i usentel."
+  },
+  "outcome": {
+    "forfeit": "Tazrawt n taggara: {score} tiqṛaḍ deg yisekla.",
+    "won": "Ayyuz, rebḥem deg Klondike Solitaire!",
+    "turn_limit": "Tagara n urar! Tewwiḍ ḍḍayf n {max_turns} tigawin. Ḍḍayf: {score} tkarḍiwin deg wadda n wakud."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== Tameɣra n usegmi d umennuγ.",
+    "turn": "Asseggas: {turn}/{max_turns}",
+    "stock": "Aɣawas: {stock} n tkarḍiwin.",
+    "waste": "Aɣeṭṭa (W): {waste}",
+    "foundations_header": "Tiɣbula:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabla:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

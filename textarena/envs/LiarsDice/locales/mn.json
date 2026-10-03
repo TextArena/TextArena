@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Та бол {player_id} тоглогч {num_players} тоглогчтой Хурдны хулгай тоглоомд. Хууль: - Та өөрийн эргэлтэд: 1) Одоогийн санал болгож байгаагаас илүү их хэмжээтэй эсвэл илүү өндөр нүүртэй (эсвэл аль аль нь) шинэ санал болгож болно; өөрөөр хэлбэл '[Bid: 3, 4]', 2) \"[Call]\" гэж бичэн сүүлийн санал болгож болно. Хэрэв та дуудвал: - Хэрэв бүх хулгай дунд дээрх үнэ цэнийн бодит тоо нь санал болгоноос бага бол сүүлийн санал өгөх хүн нэг хулгай алддаг. - Үгүй бол дуудсан нь нэг хулгай алддаг. 0 хулгай хүрсэн тоглогч хаягдана. Сүүлийн үлдсэн тоглогч ялалт байгуулна."
+  },
+  "board": {
+    "per_player": "Тоглоогч {p}: {d}",
+    "new_round": "Шинэ тойрог - үлдсэн мөч: {dice_summary} Таны өнөөгийн мөч нь: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Тоглогч {current_player_id} дуудаж байна! {face_value} нүүрний жинхэнэ тоо {count} бөгөөд энэ нь {quantity}-ээс БАГА.\nТоглогч {loser_id} (сүүлийн дуудагч) нэг шоо алдана.",
+    "caller_loses": "Тоглогч {current_player_id} дууддаг! Бодит тооны тоо {face_value} бол {count} бөгөөд энэ нь >= {quantity} юм. Тоглогч {loser_id} (цаг дууддагч) нэг талыг алдаж байна."
+  },
+  "action": {
+    "bid_announce": "Тоглогч {player_id} {quantity} тоо хэмжээний шооны нүүрийн утга {face_value} залгана."
+  },
+  "invalid_move": {
+    "call_no_bid": "Урьдчилсан саналгүйгээр дуудлага хийсэн.",
+    "invalid_bid": "Хууль бус санал: {reason}",
+    "not_recognized": "Үйлдлийг '[Bid: X, Y]' эсвэл '[Call]' гэж хүлээн зөвшөөрөхгүй. Оруулсан үйлдэл: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Шинэ тоо {new_quantity} нь одоогийн {current_quantity}-аас бага байна.",
+    "face_lower": "Шинэ нэр томъёо {new_face_value} нь одоогийн {current_face_value}-аас бага байна.",
+    "identical": "Өргөдлийн санал нь одоогийн өргөдлийн саналтай ижил.",
+    "face_range": "Нэрний үнэ нь 1-6 хооронд байх ёстой."
+  },
+  "message": {
+    "eliminated_invalid": "Тоглогч {player_id} хүчингүй хөдөлгөөнөөр шалгарсан."
+  },
+  "outcome": {
+    "win": "Тоглогч {winner} ялжээ! Түрүүний жагсаалт: {final_ranking}"
+  }
+}

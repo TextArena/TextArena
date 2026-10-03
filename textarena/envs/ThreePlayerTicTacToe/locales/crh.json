@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Siz Üç Oyunculu Tic Tac Toe de Oyuncu {player_id} siz.\nSizniñ simvoluñız '{symbol}'.\nSiz öz simvoluñızni 5x5 tahtasına qoyarak dörtliq sıra teşkil etesiñiz.\nSıralar yatay, tik ve diagonaldır.\nHaraketinizi '[4]' formatı ile gönderiñiz, 4 nomereli hücreni işaretlemek içün."
+  },
+  "board": {
+    "current_board": "Cariy tahtа:\n\n{board}\n\nMümkün haraketler: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Köterilgen haraket formatı. '[cell]' ni qullanıñız, hücre 0-{max_cell} arasında.",
+    "out_of_range": "Köterilgen hücre nomeresi: {cell}. 0 ve {max_cell} arasında olmalı.",
+    "already_occupied": "{cell} hüceyresi endi qullanıla.",
+    "made_invalid": "Oyuncı {player_id} qanunsız bir areket yaptı."
+  },
+  "game_action": {
+    "placed": "Oyuncu {player_id} öz simvolunu ({symbol}) ({row}, {col}) sahifasına qoydı."
+  },
+  "outcome": {
+    "win": "Oyuncu {player_id} ({symbol}) utdı!",
+    "draw": "Oyun teñ çıqtı!"
+  }
+}

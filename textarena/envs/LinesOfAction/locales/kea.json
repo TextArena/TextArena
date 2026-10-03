@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Bu é Djugadó {player_id} na djógu di LinesOfAction.\nPekas di bu é '{side}', pekas di adversáriu é '{other}'.\nFormatu di movimentu: `[b1b3]` (di-koordena pa-koordena). Movimentu lígal viaja horizontalmente, verticalmente ó diagonalmente númeru di kadrus igual na kantidadi di pekas (kualker kólor) na kel linha. Bu pode saltá sobri pekas di bu, ma ka sobri pekas di adversáriu; aterisa sobri adversáriu kaptura-l.  Gana óra ki todus pekas di bu é konektadu 8-vizinhu."
+  },
+  "board": {
+    "current_board": "Konsedju: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatu debe ser e2e4 (di,pa koordenadas).",
+    "no_piece": "Ka ten {side} artigu na {coord}.",
+    "identical": "Fonti i destinu é identiku.",
+    "not_straight_or_diagonal": "Mudansa debe ser na linha diretu ô diagonal.",
+    "wrong_distance": "Debe muda distánsia igual a kes pésa ki sta na linha.",
+    "enemy_blocks": "Un pé di inimigu sta ta barka kaminhu.",
+    "destination_own": "Destinason okupadu pa se própi arma."
+  },
+  "game_action": {
+    "moved": "Jogadör {player_id} movi {from} -> {to}",
+    "captured_suffix": "Jogadör {player_id} movi {from} -> {to} kapturando un inimigu."
+  },
+  "outcome": {
+    "win": "Tudu kes párti sta ligadu.",
+    "draw_no_capture": "60 mudansa sen ninhun arku.",
+    "draw_repetition": "Posiison ripiti três bês."
+  }
+}

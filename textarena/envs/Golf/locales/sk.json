@@ -1,0 +1,79 @@
+{
+  "_comment": "Súbor lokalizácie Golf (karetná hra). NEPREKLADAJTE kľúče (ľavá strana). Prekladajte iba hodnoty (pravá strana).",
+  "_slots": {
+    "{player_id}": "Číslo hráča, napr. 0 alebo 1",
+    "{pid}": "Číslo hráča, napr. 0 alebo 1",
+    "{winner}": "Číslo hráča s najnižším skóre",
+    "{score}": "Číselný bodový total",
+    "{card}": "Označenie karty, napr. A♠, 10♥, K♦ alebo Q♣",
+    "{new}": "Označenie karty, ktorá bola umiestnená do mriežky",
+    "{old}": "Označenie karty, ktorá bola odstránená z mriežky",
+    "{row}": "Číslo riadku",
+    "{col}": "Číslo stĺpca",
+    "{max_row}": "Najväčšie platné číslo riadku",
+    "{max_col}": "Najväčšie platné číslo stĺpca",
+    "{reason}": "Predrenderovaná fráza popisujúca, prečo sa začala konečná kolo",
+    "{n}": "Číslo riadku zobrazené na začiatku riadku mriežky",
+    "{cards}": "Predrenderované bunky jedného riadku mriežky",
+    "{hand}": "Predrenderovaný blok hráčskej mriežky",
+    "{discard}": "Označenie karty na vrchu odhodeného balíčka, alebo slovo pre 'žiadna'",
+    "{options}": "Predrenderovaný riadok so zoznamom dostupných akcií",
+    "{scores}": "Predrenderovaný zoznam konečných skóre pre každého hráča"
+  },
+  "player_prompt": {
+    "intro": "Hrajete Golf (Karetná Hra) - Hráč {player_id}.\nCieľ: Získajte najnižšie celkové skóre v tomto jedinom kole. Ak stĺpce zdieľajú rovnakú hodnotu, sú sčítané ako 0.\nHodnoty kariet: A=1, 2-10=tvárna hodnota, J/Q=10, K=0\n\nAkcie (použite presné hranaté zátvorky):\n- '[draw]' - Ťah z balíčka\n- '[take]' - Vziať z odhodeného balíčka\n- '[swap X Y]' - Vymeniť ťahanú kartu s pozíciou X (riadok) Y (stĺpec)\n- '[discard]' - Odhodiť ťahanú kartu\n"
+  },
+  "board": {
+    "drew": "Ťahli ste: {card}\nTeraz musíte [swap X Y] alebo [discard] ňu.",
+    "took": "Vzali ste: {card} z odhodeného balíčka\nMusíte [swap X Y] s ňou (nemožno odhodiť).",
+    "peeked": "Náhľadli ste na pozíciu ({row},{col}): {card}",
+    "turn_view": "Vaša ruka:\n{hand}\nOdhodený balíček: {discard}\n{options}",
+    "none": "Žiadna"
+  },
+  "options": {
+    "final_turns": "Konečné ťahy! Vaše možnosti: [draw], [take], [peek X Y]",
+    "draw": "Vaše možnosti: [draw], [take]",
+    "must_swap": "Musíte: [swap X Y] (nemožno odhodiť karty z odhodeného balíčka)",
+    "swap_or_discard": "Musíte: [swap X Y] alebo [discard]"
+  },
+  "hand": {
+    "no_cards": "Žiadne karty",
+    "header": "  Stĺpec:   1    2    3",
+    "row": "Riadok {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Hráč {pid} vymenil {new} s {old} na pozícii ({row},{col})",
+    "discarded": "Hráč {pid} odhodil {card}"
+  },
+  "message": {
+    "deck_empty": "Balíček je prázdny! Hra končí okamžite.",
+    "knocked": "Hráč {pid} zaklopal! Každý iný hráč dostane jeden ďalší ťah.",
+    "final_round": "Hráč {pid} {reason}! Každý iný hráč dostane jeden ďalší ťah."
+  },
+  "reason": {
+    "all_revealed": "má všetky karty odhalené"
+  },
+  "invalid": {
+    "wrong_action": "Použite presne jednu hranatú akciu: [draw], [take], [swap X Y], [discard], [knock], alebo [peek X Y]",
+    "discard_empty": "Odhodený balíček je prázdny!",
+    "must_draw_first": "Musíte najprv [draw], [take], [knock], alebo [peek X Y]",
+    "cannot_discard_taken": "Nemôžete odhodiť kartu vzatú z odhodeného balíčka. Musíte ju vymeniť.",
+    "have_drawn_card": "Máte ťahanú kartu. Musíte [swap X Y] alebo [discard] ňu.",
+    "need_drawn_swap": "Potrebujete ťahanú kartu na vymenenie.",
+    "need_drawn_discard": "Potrebujete ťahanú kartu na odhodenie.",
+    "out_of_bounds": "Pozícia mimo hraníc. Použite riadok 1-{max_row}, stĺpec 1-{max_col}",
+    "knock_with_card": "Nemôžete zaklopať s ťahanou kartou. Dokončite svoj ťah najprv.",
+    "already_knocked": "Niekto už zaklopal v tomto kole.",
+    "already_revealed": "Tá karta je už odhalená!"
+  },
+  "summary": {
+    "full": "Hra skončila! Hráč {winner} víťazí so skóre {score} bodov!\n\nKonečné skóre:\n{scores}",
+    "line": "Hráč {pid}: {score} bodov\n"
+  },
+  "board_str": {
+    "title": "=== GOLFOVÁ HRA ===",
+    "discard": "Odhodený balíček: {card}",
+    "knocked": "Hráč {pid} zaklopal!",
+    "player_header": "Hráč {pid} (Skóre: {score}):"
+  }
+}

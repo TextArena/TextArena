@@ -1,0 +1,88 @@
+{
+  "game_start": {
+    "intro": "Das Spiel beginnt. Trumpffarbe: {trump_suit} (Trumpfkarte: {trump_str}).",
+    "no_trump_card": "keine"
+  },
+
+  "player_prompt": {
+    "intro": "Du bist Spieler {player_id} in German Whist.\n{phase_info}\nDu hast {hand_size} Karten auf der Hand.\nSpiele eine Karte mit '[play N]', wobei N ihre Position auf deiner Hand ist, zum Beispiel '[play 3]'.",
+    "phase_learning": "LERNPHASE: Der Gewinner jedes Stichs erhält die offen liegende Karte, und der Verlierer zieht die nächste Karte vom Stapel. In dieser Phase gewonnene Stiche zählen nicht für den Sieg.",
+    "phase_playing": "SPIELPHASE: Der Stapel ist aufgebraucht. Ab jetzt zählt jeder Stich für den Sieg."
+  },
+
+  "next_card": {
+    "playing_phase": "Es wird keine Karte angeboten - die Spielphase hat begonnen.",
+    "deck_empty": "Der Stapel ist leer - es wird keine Karte angeboten.",
+    "available": "Angebotene Karte: {card}",
+    "available_trump": "Angebotene Karte: {card} (TRUMPF)"
+  },
+
+  "invalid_move": {
+    "wrong_format": "Ungültiges Zugformat. Verwende '[play N]', um die N-te Karte auf deiner Hand zu spielen.",
+    "bad_position": "Diese Kartenposition existiert nicht. Du hast {hand_size} Karten auf der Hand.",
+    "must_follow_suit": "Du musst die Farbe bedienen und eine Karte der Farbe {lead_suit} spielen.",
+    "invalid_play": "Diese Karte kann nicht gespielt werden."
+  },
+
+  "game_action": {
+    "played": "Spieler {player_id} spielte {card}."
+  },
+
+  "trick": {
+    "won": "Spieler {winner_id} gewinnt den Stich mit {card}.",
+    "won_learning": "Spieler {winner_id} gewinnt den Stich mit {card} und erhält die offen liegende Karte."
+  },
+
+  "phase": {
+    "learning_complete": "Der Stapel ist aufgebraucht. Die Lernphase ist beendet - jeder verbleibende Stich zählt für den Sieg."
+  },
+
+  "draw": {
+    "winner_received": "Du hast den Stich gewonnen und {card} erhalten.",
+    "loser_received": "Du hast den Stich verloren und {card} vom Stapel gezogen.",
+    "winner_preview": "Die nächste angebotene Karte ist {card}."
+  },
+
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Bisher gewonnene Stiche - Spieler 0: {tricks0}, Spieler 1: {tricks1}",
+    "scores_playing": "Wertende Stiche - Spieler 0: {tricks0}, Spieler 1: {tricks1}",
+    "phase": "Phase: {phase}",
+    "phase_learning": "Phase: {phase} ({remaining_cards} Karten im Stapel verbleibend)"
+  },
+
+  "hand": {
+    "no_cards": "Keine Karten",
+    "no_cards_in_hand": "Keine Karten auf der Hand",
+    "header": "Deine Hand:",
+    "trump_indicator": " (TRUMPF)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+
+  "trick_view": {
+    "empty": "In diesem Stich wurden noch keine Karten gespielt.",
+    "header": "Aktueller Stich:",
+    "trump_indicator": " (TRUMPF)",
+    "card_line": "{observation}\n  Spieler {player_id}: {card}{trump_indicator}"
+  },
+
+  "board_str": {
+    "not_started": "Spiel wurde noch nicht gestartet",
+    "header": "=== GERMAN-WHIST-SPIEL ===",
+    "phase": "{observation}\nPhase: {phase}",
+    "trump_suit": "{observation}\nTrumpffarbe: {trump_suit}",
+    "trump_card": "{observation}\nTrumpfkarte: {card}",
+    "cards_left": "{observation}\nVerbleibende Karten im Stapel: {count}",
+    "next_card": "{observation}\nNächste Karte für den Gewinner: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nAktueller Stich:",
+    "trump_indicator": " (TRUMPF)",
+    "trick_line": "{observation}\n  Spieler {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nSpieler {player_id}: {scoring} wertende Stiche ({tricks} insgesamt), {hand_size} Karten auf der Hand"
+  },
+
+  "outcome": {
+    "summary": "Lernphase - Spieler 0: {l0}, Spieler 1: {l1}. Spielphase - Spieler 0: {p0}, Spieler 1: {p1}. Spieler {winner_id} gewinnt mit {winner_tricks} wertenden Stichen!"
+  }
+}

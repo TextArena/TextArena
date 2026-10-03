@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Waxaad tahay ciyaaryahanka {player_id} ee ciyaarta saddex-ciyaaryahanka Tic Tac Toe. Calaamaddaadu waa '{symbol}'. Waxaad isku beddelaysaa adoo dhigaya astaantaada loox 5x5 ah si aad u sameyso khad afar ah. Khadadka waxay noqon karaan kuwa jiifka ah, kuwa toosan, ama kuwa iskutallaabta ku jira. U gudbi dhaqaaqidaada adoo adeegsanaya qaabka '[4]' si aad u calaamadeyso unugga 4."
+  },
+  "board": {
+    "current_board": "Guddiga hadda jira: {board} Dhaqdhaqaaqyada la heli karo: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Qaabka guuritaanka oo aan sax ahayn. Isticmaal '[cell]' halka ay unuggu tahay 0-{max_cell}.",
+    "out_of_range": "Lambarka unugyada aan sax ahayn: {cell}. Waa inuu u dhexeeyaa 0 ilaa {max_cell}.",
+    "already_occupied": "Qolka {cell} waa mid horay loo qabsaday.",
+    "made_invalid": "Ciyaaryahanka {player_id} wuxuu sameeyay dhaqaaq aan ansax ahayn"
+  },
+  "game_action": {
+    "placed": "Ciyaaryahanka {player_id} wuxuu dhigayaa astaantooda ({symbol}) garoonka ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Ciyaaryahanka {player_id} ({symbol}) ayaa guuleysta!",
+    "draw": "Ciyaarta waa barbaro!"
+  }
+}

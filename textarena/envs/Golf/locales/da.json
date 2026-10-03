@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (kortspil) lokalisationsfil. Oversæt ikke nøgler (venstre side). Oversæt kun værdier (højre side).",
+  "_slots": {
+    "{player_id}": "En spillernummer, f.eks. 0 eller 1",
+    "{pid}": "En spillernummer, f.eks. 0 eller 1",
+    "{winner}": "Spillernummer med den laveste score",
+    "{score}": "Et numerisk pointtotal",
+    "{card}": "Et kortlabel som f.eks. A♠, 10♥, K♦ eller Q♣",
+    "{new}": "Det kortlabel, der blev placeret i gitteret",
+    "{old}": "Det kortlabel, der blev fjernet fra gitteret",
+    "{row}": "En rækkenummer",
+    "{col}": "En kolonnennummer",
+    "{max_row}": "Den største gyldige rækkenummer",
+    "{max_col}": "Den største gyldige kolonnennummer",
+    "{reason}": "En forudrenderet frase, der beskriver hvorfor den sidste runde startede",
+    "{n}": "En rækkenummer vist i starten af en gitterrække",
+    "{cards}": "De forudrenderede, layout-sensitiv celle i en gitterrække",
+    "{hand}": "Den forudrenderede spiller-gitterblok",
+    "{discard}": "Kortlabel på toppen af discard-bunken eller ordet for 'ingen'",
+    "{options}": "Den forudrenderede linje, der viser tilgængelige handlinger",
+    "{scores}": "Den forudrenderede liste over slut-scorer pr. spiller"
+  },
+  "player_prompt": {
+    "intro": "Du spiller Golf (Kortspil) - Spiller {player_id}.\nMål: Få den laveste totale score i denne enkelte runde. Hvis kolonner deler samme værdi, summeres de som 0.\nKortværdier: A=1, 2-10=ansigtsværdi, J/Q=10, K=0\n\nHandlinger (brug nøjagtige parenteser):\n- '[draw]' - Træk fra bunken\n- '[take]' - Tag fra discard-bunken\n- '[swap X Y]' - Byt trukket kort med position X (række) Y (kolonne)\n- '[discard]' - Kasser det trukne kort\n"
+  },
+  "board": {
+    "drew": "Du trak: {card}\nNu må du [swap X Y] eller [discard] det.",
+    "took": "Du tog: {card} fra discard-bunken\nDu må [swap X Y] med det (kan ikke kasseres).",
+    "peeked": "Du kiggede på position ({row},{col}): {card}",
+    "turn_view": "Din hånd:\n{hand}\nDiscard-bunken: {discard}\n{options}",
+    "none": "Ingen"
+  },
+  "options": {
+    "final_turns": "Sidste ture! Dine muligheder: [draw], [take], [peek X Y]",
+    "draw": "Dine muligheder: [draw], [take]",
+    "must_swap": "Du må: [swap X Y] (kan ikke kassere kort fra discard-bunken)",
+    "swap_or_discard": "Du må: [swap X Y] eller [discard]"
+  },
+  "hand": {
+    "no_cards": "Ingen kort",
+    "header": "  Kol:   1    2    3",
+    "row": "Række {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Spiller {pid} byttede {new} med {old} på position ({row},{col})",
+    "discarded": "Spiller {pid} kasserede {card}"
+  },
+  "message": {
+    "deck_empty": "Bunken er tom! Spillet slutter øjeblikkeligt.",
+    "knocked": "Spiller {pid} bankede! Hver anden spiller får en tur mere.",
+    "final_round": "Spiller {pid} {reason}! Hver anden spiller får en tur mere."
+  },
+  "reason": {
+    "all_revealed": "har alle kort åbenbarede"
+  },
+  "invalid": {
+    "wrong_action": "Brug nøjagtig ÉN parentes-handling: [draw], [take], [swap X Y], [discard], [knock] eller [peek X Y]",
+    "discard_empty": "Discard-bunken er tom!",
+    "must_draw_first": "Du må først [draw], [take], [knock] eller [peek X Y]",
+    "cannot_discard_taken": "Du kan ikke kassere et kort taget fra discard-bunken. Du må bytte det.",
+    "have_drawn_card": "Du har et trukket kort. Du må [swap X Y] eller [discard] det.",
+    "need_drawn_swap": "Du har brug for et trukket kort at bytte.",
+    "need_drawn_discard": "Du har brug for et trukket kort at kassere.",
+    "out_of_bounds": "Position uden for grænser. Brug række 1-{max_row}, kolonne 1-{max_col}",
+    "knock_with_card": "Du kan ikke banke med et trukket kort. Færdiggør din tur først.",
+    "already_knocked": "Nogen har allerede banket denne runde.",
+    "already_revealed": "Det kort er allerede åbenbart!"
+  },
+  "summary": {
+    "full": "Spillet er slut! Spiller {winner} vinder med en score på {score} point!\n\nSlut-scorer:\n{scores}",
+    "line": "Spiller {pid}: {score} point\n"
+  },
+  "board_str": {
+    "title": "=== GOLF SPIL ===",
+    "discard": "Discard-bunken: {card}",
+    "knocked": "Spiller {pid} har banket!",
+    "player_header": "Spiller {pid} (Score: {score}):"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in Nim.\nYour goal is to take the last remaining object.\nOn each turn, choose exactly one pile and remove one or more objects from it.\nUse the format '[pile quantity]', where pile is the pile index and quantity is the number of objects to remove.\nFor example, '[0 3]' removes 3 objects from pile 0."
+  },
+  "state": {
+    "current_pile": "ናይ ሕጂ ፒል: {piles}"
+  },
+  "invalid_move": {
+    "wrong_format": "ቅቡል ዝኾነ ናይ ምንቅስቓስ ቅርጺ ኣይተረኽበን። '[pile quantity]' ተጠቐም።",
+    "correct_format_wrong_fields": "ርኢት ሽሕ መስለም፡ ርኢት {player_id}፡ ሽሕ ኣሳልት፡ ኮሎም {col} ኣብ ዙሪያ ኢያ።",
+    "out_of_range": "ናይ {pile_index} ጠቕላሊ ካብ ክምዝገብ ወፃኢ እዩ።",
+    "non_positive": "እንተወሓደ ሓደ ነገር ክውሰድ ኣለዎ።",
+    "exceeds_pile": "ኣካል {quantity} ካብ ክሊ {pile_index} ምውጻእ ኣይክእልን (ኣካል {pile_count} ብቕዓል ኢዩ)።"
+  },
+  "observation": {
+    "removed_from_piles": "ተጫዋች {player_id} አጫወተ፣ [{pile_index} {quantity}]፣ ከድንገት {pile_index} {quantity} ነገር(ነገሮች) አስወግዷል።"
+  },
+  "outcome": {
+    "win": "ተጻዋታይ {player_id} ነቲ ናይ መወዳእታ ነገር ወሰደ!"
+  }
+}

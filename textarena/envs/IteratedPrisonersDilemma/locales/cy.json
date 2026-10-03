@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Rydych yn Chwaraewr {player_id} mewn Dylemma'r Carcharor Ailddyfrifedig sy'n cwmpasu rowndiau {num_rounds} Strwythur y gêm: - Cyn pob penderfyniad mae gennych {total_conversation_rounds} droi i gyfathrebu'n rhydd. - Ar ôl hynny, mae'r ddau chwaraewr yn dewis cydweithio neu ddiffyg ar yr un pryd. Matrix Payoff (diweddedig bob rownd): - Mae'r ddau yn cydweithio ➜ pob {cooperate_reward} - Mae'r ddau yn ddiffyg ➜ pob {mutual_defect_reward} - Un yn Diffyg, un yn cydweithio ➜ Diffygydd {defect_reward}, Cydweithredwr {sucker_reward} Sut i Chwarae: - Yn ystod sgwrs: teip unrhyw destun rydych chi'n ei ddymuno. - Yn ystod cam penderfyniad: cynnwys '[Cooperate] neu '[Defect] (yn anymwybodol o'r lleiafrif). Gallwch ychwanegu testun ychwanegol cyn / ar ôl y token."
+  },
+  "phases": {
+    "conversation_finished": "Mae'r sgwrs wedi dod i ben ar gyfer rownd {round}. Atebwch gyda '[Cooperate]' neu '[Defect]' o fewn \\boxed{{}}.",
+    "starting_round": "--- Cyfnod Cychwyn {round} ---",
+    "round_summary": "Cyfnod {round} canlyniadau: {outcome} Chwaraewr 0 ennillodd {r0} (gyfanswm {score_0}), Chwaraewr 1 ennillodd {r1} (gyfanswm {score_1})."
+  },
+  "outcome": {
+    "winner": "Mae chwaraewr {winner} yn ennill {win_score} - {lose_score}.",
+    "draw": "Tynnwch! Mae'r ddau chwaraewr wedi sgorio {s0}.",
+    "round_both_cooperate": "Cydweithredodd y ddau chwaraewr.",
+    "round_both_defect": "Defectiodd y ddau chwaraewr.",
+    "round_p0_cooperates_p1_defects": "Chwaraewr 0 cydweithredol, chwaraewr 1 droseddol.",
+    "round_p0_defects_p1_cooperates": "Chwaraewr 0 yn dryllio, Chwaraewr 1 cydweithredu."
+  }
+}

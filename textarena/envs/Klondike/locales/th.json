@@ -1,0 +1,74 @@
+{
+  "_comment": "ไฟล์ภาษาสำหรับเกม Klondike Solitaire ห้ามแปลคีย์ (ด้านซ้าย) แปลเฉพาะค่า (ด้านขวา) เท่านั้น รักษา {placeholder} ทุกตัวให้เหมือนเดิม ห้ามแปลชื่อไพ่/สัญลักษณ์ (เช่น A, 10, K, ♣️, ♦️, ♥️, ♠️) หรือโทเค็นกองไพ่ W, F1-F4, T1-T7 หรือบอร์ด ASCII ใน {board} หรือคำสั่ง 'draw', 'move', 'forfeit', 'all' โทเค็นในรูปแบบ 'move W T1' ต้องคงอยู่ในภาษาละตินตามเดิม",
+  "_slots": {
+    "{n}": "ดัชนีการกระทำภายในคำสั่งที่แยกด้วยคอมม่า 1-based",
+    "{msg}": "ข้อความผลลัพธ์ของการกระทำแต่ละครั้ง (แปลเรียบร้อยแล้ว)",
+    "{count}": "จำนวนไพ่ที่หงายหน้าที่กำลังย้าย",
+    "{src}": "หมายเลขกองไพ่ tableau ต้นทาง 1-based",
+    "{dst}": "หมายเลขกองไพ่ปลายทาง 1-based",
+    "{cmd}": "คำสั่งที่ผู้เล่นป้อน (ไม่แปล)",
+    "{max_turns}": "จำนวนรอบสูงสุดก่อนเกมสิ้นสุด",
+    "{score}": "จำนวนไพ่ที่อยู่ในกอง foundation ปัจจุบัน",
+    "{board}": "บอร์ด ASCII ที่แสดงผล (ไม่แปล)",
+    "{turn}": "หมายเลขรอบปัจจุบัน",
+    "{stock}": "จำนวนไพ่ที่เหลืออยู่ในกอง stock",
+    "{waste}": "ป้ายชื่อไพ่บนสุดของกอง waste หรือ '--' ถ้ากองว่าง (ไม่แปล)",
+    "{cards}": "ไพ่ในกองเป็นป้ายชื่อที่เป็นกลาง หรือ '--' ถ้ากองว่าง (ไม่แปล)"
+  },
+  "player_prompt": {
+    "intro": "คุณกำลังเล่น Klondike Solitaire จุดมุ่งหมายของคุณคือการย้ายไพ่ทั้งหมดไปยังกอง foundation\n\nกติกาเกม:\n- กอง foundation (F1-F4): สร้างขึ้นจาก Ace ถึง King ในสีเดียวกัน\n- กอง tableau (T1-T7): สร้างลงมาสลับสี (แดงบนดำ ดำบนแดง)\n- กอง stock: จั่วไพ่ไปยังกอง waste\n- กอง waste (W): ไพ่บนสุดที่สามารถเล่นได้\n\nคำสั่ง:\n- 'draw' - จั่วไพ่จากกอง stock ไปยังกอง waste\n- 'move <source> <destination> [count]' - ย้ายไพ่ระหว่างกอง\n  ตัวอย่าง: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count สามารถเป็น 'all' ซึ่งจะพยายามย้ายไพ่ที่หงายหน้าทั้งหมด\n- 'forfeit' - สิ้นสุดเกมทันทีและล็อกคะแนนปัจจุบัน\n- ชื่อกอง: W (waste), F1-F4 (foundations), T1-T7 (tableau)\n\nคุณสามารถดำเนินการหลายอย่างในรอบเดียวโดยแยกด้วยคอมม่า:\n  ตัวอย่าง: 'draw, move W T1, move T2 F1'\n\nเฉพาะ King สามารถวางบนกอง tableau ที่ว่างได้\nการกระทำจะดำเนินการตามลำดับ - หากการกระทำใดล้มเหลว การกระทำที่เหลือจะถูกข้าม\nใช้ 'forfeit' หากคุณเชื่อว่าเกมเป็นไปไม่ได้ที่จะชนะ"
+  },
+  "format_error": {
+    "no_brackets": "รูปแบบการกระทำไม่ถูกต้อง การกระทำควรอยู่ในวงเล็บเหลี่ยม",
+    "no_closing_bracket": "รูปแบบการกระทำไม่ถูกต้อง ขาดวงเล็บปิด ']'",
+    "empty_command": "คำสั่งว่าง ป้อน 'draw' หรือ 'move <source> <destination> [count]'",
+    "empty_action": "การกระทำว่าง",
+    "move_needs_args": "คำสั่ง move ต้องการต้นทางและปลายทาง ใช้: 'move <source> <destination> [count]'",
+    "count_positive": "จำนวนต้องเป็นบวกหรือ 'all'",
+    "count_invalid": "จำนวนไม่ถูกต้อง ใช้ตัวเลขหรือ 'all'",
+    "unknown_command": "คำสั่ง '{cmd}' ไม่รู้จัก ใช้ 'draw', 'move <source> <destination> [count]', หรือ 'forfeit'",
+    "wrapped": "การกระทำ {n}: {msg}"
+  },
+  "action_result": {
+    "success": "การกระทำ {n}: {msg}",
+    "before_failure": "ดำเนินการ {n} ครั้งก่อนล้มเหลว",
+    "failed": "การกระทำ {n} ล้มเหลว: {msg}"
+  },
+  "move_result": {
+    "drew": "จั่วไพ่จากกอง stock ไปยังกอง waste",
+    "cannot_draw": "ไม่สามารถจั่วได้ ทั้งกอง stock และกอง waste ว่าง",
+    "invalid_pile": "ชื่อกองไม่ถูกต้อง ใช้ W, F1-F4, หรือ T1-T7",
+    "foundation_one_card": "สามารถย้ายไพ่เพียง 1 ใบไปยังกอง foundation เท่านั้น",
+    "waste_to_foundation_ok": "ย้ายไพ่จากกอง waste ไปยังกอง foundation F{dst}",
+    "waste_to_foundation_bad": "ไม่สามารถย้ายไพ่จากกอง waste ไปยังกอง foundation นั้นได้",
+    "tableau_to_foundation_ok": "ย้ายไพ่จากกอง tableau T{src} ไปยังกอง foundation F{dst}",
+    "tableau_to_foundation_bad": "ไม่สามารถย้ายไพ่จากกอง tableau ไปยังกอง foundation นั้นได้",
+    "foundation_to_foundation": "ไม่สามารถย้ายจากกอง foundation ไปยังกอง foundation ได้",
+    "waste_to_tableau_one_card": "สามารถย้ายไพ่เพียง 1 ใบจากกอง waste ไปยังกอง tableau เท่านั้น",
+    "waste_to_tableau_ok": "ย้ายไพ่จากกอง waste ไปยังกอง tableau T{dst}",
+    "waste_to_tableau_bad": "ไม่สามารถวางไพ่จากกอง waste บนกอง tableau นั้นได้",
+    "no_face_up": "ไม่มีไพ่ที่หงายหน้าให้ย้าย",
+    "tableau_to_tableau_ok": "ย้าย {count} ใบจากกอง tableau T{src} ไปยัง T{dst}",
+    "tableau_to_tableau_bad": "ไม่สามารถย้าย {count} ใบจาก T{src} ไปยัง T{dst} ได้",
+    "foundation_to_tableau_one_card": "สามารถย้ายไพ่เพียง 1 ใบจากกอง foundation ไปยังกอง tableau เท่านั้น",
+    "foundation_empty": "กอง foundation F{src} ว่าง",
+    "foundation_to_tableau_ok": "ย้ายไพ่จากกอง foundation F{src} ไปยังกอง tableau T{dst}",
+    "foundation_to_tableau_bad": "ไม่สามารถวางไพ่จากกอง foundation บนกอง tableau T{dst} ได้",
+    "to_waste_or_stock": "ไม่สามารถย้ายไปยังกอง waste หรือ stock ได้"
+  },
+  "outcome": {
+    "forfeit": "ยอมแพ้ เกมสิ้นสุด คะแนนสุดท้าย: {score} ใบในกอง foundation",
+    "won": "ยินดีด้วย! คุณชนะ Klondike Solitaire!",
+    "turn_limit": "เกมสิ้นสุด! คุณถึงจำนวนรอบสูงสุด {max_turns} รอบ คะแนน: {score} ใบในกอง foundation"
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "รอบ: {turn}/{max_turns}",
+    "stock": "กอง stock: {stock} ใบ",
+    "waste": "กอง waste (W): {waste}",
+    "foundations_header": "กอง foundation:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "กอง tableau:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

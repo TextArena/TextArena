@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Bo ta Hungador {player_id} den Stratego.\nBo meta ta kapura e bandera di bo oponente o elimina tur su piesa movibel.\nBo ehersito a wordu poni na e tablero pa bo, inkluyendo bo bandera, bomba i otro piesa di rango variá.\n\n### Instrukshon di Juego\n1. **Regla di Moveshon:**\n   - Na bo turno, bo por mové un piesa pa un paso na un kuadrado adyacente (ariba, abou, robez o drechi) ku ta okupá ku bo piesa.\n   - Ehempel: Un piesa por mové for di A1 pa B1 o A1 pa A2 si B1 i A2 no ta okupá ku bo piesa.\n   - Si e piesa selekta ta un bomba of un bandera, e no por wordu mové.\n2. **Bataya:**\n   - Si bo mové na un kuadrado okupá ku un piesa di bo oponente, e ta kousa un bataya:\n     - E piesa ku tin e rango mas haltu ta gana i elimina e piesa di bo oponente.\n     - Si e rangonan ta igual, tur dos piesa ta wordu retirá for di e tablero.\n     - **Kaso Espesial:**\n       - Bomba ta elimina mayoria di e piesa atakante eksepto minero, ku por desaktiva bomba.\n       - Espia por derrota e marshall si e espia ataka promé, pero perde kontra tur otro piesa.\n3. **Meta Estratehiko:**\n   - Identifiká e piesa di bo oponente durch nan moveshon i bataya.\n   - Protexé bo bandera mientras bo ta traha di kapura e bandera di bo oponente.\n   - Usá esplorador estratehikamente pa ganá informashon tokante e piesa di bo oponente i ataká e piesa débil.\n\n### Kon Bo Por Mové:\n1. Spesifiká e koordiná di e piesa ku bo ke mové i su destinashon.\n2. Usá e formato: [A0 B0], ku A0 ta e posishon fuente, i B0 ta e destinashon.\n   - Ehempel: Pa mové un piesa for di fila 0, kolón 0 pa fila 1, kolón 0, input [A0 B0].\n3. Asegurá ku e destinashon ta válido segun e regla di moveshon aki riba.\n\n### Nota Importante:\n- E tablero lo mustra bo piesa i nan posishon, p.ej. MN, MS.\n- E tablero lo mustra tambe e posishon konosí di e piesa di bo oponente sin revelá nan rango, p.ej. ?.\n- Grid ku ta marke ku ~ ta lago i no por wordu mové pa.\n- Komo sugestión, komienza bo juego moviendo bo piesa ku ta na e linia di frente pa ganá informashon tokante e piesa di bo oponente. E linia di frente di Hungador 0 i Hungador 1 ta fila D i G respektivamente.\n\nAki ta e estado aktual di e tablero:\n"
+  },
+  "board": {
+    "current_board": "Tablero Aktual:\n\n{board}\nMovimentu Disponibel: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato di aksion inválido. Hungador {player_id} no a input un move den e formato [A0 B0].",
+    "invalid_coordinates": "Formato di aksion inválido. Hungador {player_id} no a input koordinatanan válido.",
+    "not_own_piece": "E forma di akshon no ta válido. Hòmber {player_id} mester move un di su propio piezanan.",
+    "scout_through_pieces": "E forma di akshon no ta válido. Hòmber {player_id} no por move un scout pa otro pieza.",
+    "scout_diagonal": "E forma di akshon no ta válido. Jugador {player_id} no por move un scout diagonalmente.",
+    "non_scout_multi_square": "E forma di akshon no ta válido. Tur pieza, aparte di e scoutnan, por move solamente un kareda na biaha.",
+    "move_into_lake": "E forma di akshon no ta válido. Hòmber {player_id} no por drenta den e lago.",
+    "move_onto_own_piece": "E forma di akshon no ta válido. Hòmber {player_id} no por move riba su mes pieza.",
+    "move_bomb_or_flag": "E forma di akshon no ta válido. Hòmber {player_id} no por move un bomba òf bandera."
+  },
+  "game_action": {
+    "you_moved": "Bo a move bo pieza for di {source} pa {dest}.",
+    "opponent_moved": "E hungadó {player_id} a move un pieza for di {source} pa {dest}.",
+    "you_equal_ranks": "Bo a mové bo piesa for di {source} pa {dest}. E piesa atakante tabata {attacking_rank} i e destino piesa tabata {target_rank}. Komo e rangonan ta igual, tur dos piesa a perde.",
+    "opponent_equal_ranks": "Hungador {player_id} a mové un piesa for di {source} pa {dest}. E piesa atakante tabata {attacking_rank} i e destino piesa tabata {target_rank}. Komo e rangonan ta igual, tur dos piesa a perde.",
+    "you_miner_defused": "Bo a mové bo piesa for di {source} pa {dest}. E piesa atakante tabata {attacking_rank} i e destino piesa tabata {target_rank}. Komo mineronan por desaktiva bomba, bo a gana e bataya.",
+    "opponent_miner_defused": "Hungador {player_id} a mové un piesa for di {source} pa {dest}. E piesa atakante tabata {attacking_rank} i e destino piesa tabata {target_rank}. Komo mineronan por desaktiva bomba, bo a perde e bataya.",
+    "you_bomb_lost": "Bo a mové bo piesa for di {source} pa {dest}. E piesa atakante tabata {attacking_rank} i e destino piesa tabata {target_rank}. Komo e atakante no ta un minero, bo a perde e bataya.",
+    "opponent_bomb_won": "Hungador {player_id} a mové un piesa for di {source} pa {dest}. E piesa atakante tabata {attacking_rank} i e destino piesa tabata {target_rank}. Komo e atakante no ta un minero, bo a gana e bataya.",
+    "you_spy_won": "Bo a mové bo piesa for di {source} pa {dest}. E piesa atakante tabata {attacking_rank} i e destino piesa tabata {target_rank}. Komo e atakante ta un espia i e destino ta un marshall, bo a gana e bataya.",
+    "opponent_spy_lost": "Hungador {player_id} a mové un piesa for di {source} pa {dest}. E piesa atakante tabata {attacking_rank} i e destino piesa tabata {target_rank}. Komo e atakante ta un espia i e destino ta un marshall, bo a perde e bataya.",
+    "you_higher_won": "Bo a mové bo piesa for di {source} pa {dest}. E piesa atakante tabata {attacking_rank} i e destino piesa tabata {target_rank}. Komo e atakante ta di un rango mas haltu ku e destino, bo a gana e bataya.",
+    "opponent_higher_lost": "Hungador {player_id} a mové un piesa for di {source} pa {dest}. E piesa atakante tabata {attacking_rank} i e destino piesa tabata {target_rank}. Komo e atakante ta di un rango mas haltu ku e destino, bo a perde e bataya.",
+    "you_lower_lost": "Bo a mové bo piesa for di {source} pa {dest}. E piesa atakante tabata {attacking_rank} i e destino piesa tabata {target_rank}. Komo e atakante ta di un rango mas abou ku e destino, bo a perde e bataya.",
+    "opponent_lower_won": "Hungador {player_id} a mové un piesa for di {source} pa {dest}. E piesa atakante tabata {attacking_rank} i e destino piesa tabata {target_rank}. Komo e atakante ta di un rango mas abou ku e destino, bo a gana e bataya."
+  },
+  "outcome": {
+    "flag_captured": "E hungadó {player_id} a kapta e bandera di su oponente!",
+    "no_movable_pieces": "Hungador {winner_id} ta gana! Hungador {loser_id} no tin mas pidanan movibel."
+  }
+}

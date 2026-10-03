@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Rydych yn Chwaraewr {player_id} mewn Chopsticks. Ar eich tro, dewiswch un o: + Attack: '[attack M O]' lle mae M=ch llaw (0 neu 1), O= llaw y gwrthwynebydd (0 neu 1). - Mae cyfrif llaw y gwrthwynebydd yn cynyddu gan eich llaw; os >=5, mae'n dod yn 0. + Split: '[split L R] i ail-ddosbarthu eich bysedd cyfanswm i L ac R (L + R = eich cyfanswm). Atebwch gyda un o'r gorchmynion hynny yn union."
+  },
+  "board": {
+    "current_board": "Bwrdd presennol: Chwaraewr 0: {hands_0} Chwaraewr 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Mae eich llaw {my_idx} wedi marw.",
+    "opp_hand_dead": "Mae llaw y gwrthwynebydd {opp_idx} eisoes wedi marw.",
+    "split_sum": "Rhaid i gyfanswm y rhannau fod yn {total}.",
+    "split_no_change": "Rhaid i'r Rhannu newid eich dosbarthiad llaw.",
+    "invalid_command": "Symud anghywir. Defnyddiwch [attack M O] neu [split L R]."
+  },
+  "game_action": {
+    "attack": "Mae P{player_id} yn ymosod ar law P{opp_id} {opp_idx}: mae'n mynd o {opp_val} i {new_val}.",
+    "split": "P{player_id} yn rannu i [{L}, {R}]."
+  },
+  "history": {
+    "entry": "P{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Mae'r ddwy law yn farw.",
+    "draw": "Mae'r terfyn troi wedi'i gyrraedd."
+  }
+}

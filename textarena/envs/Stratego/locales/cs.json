@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Jste hráč {player_id} ve Strategu.\nVaším cílem je zachytit vlajku soupeře nebo eliminovat všechny jeho pohyblivé kousky.\nVaše armáda byla umístěna na desku, včetně vaší vlajky, bomb a dalších kousků různých hodností.\n\n### Pokyny k hraní\n1. **Pravidla pohybu:**\n   - Na vaši řadu můžete přesunout jeden kus o jeden krok na sousední čtverec (nahoru, dolů, doleva nebo doprava), který je již obsazen vašimi kusy.\n   - Příklad: Kus může přesunout z A1 do B1 nebo A1 do A2, pokud B1 a A2 nejsou umístěny s vlastními kusy hráče.\n   - Pokud je vybraný kus bombou nebo vlajkou, nemůže být přesunut.\n2. **Bitvy:**\n   - Pokud se přesunete na čtverec obsazený kusem soupeře, dojde k bitvě:\n     - Kus s vyšší hodností vyhraje a eliminuje kus soupeře.\n     - Pokud jsou hodnosti stejné, oba kusy jsou odstraněny z desky.\n     - **Speciální případy:**\n       - Bomby eliminují většinu útočících kusů kromě horníků, kteří rozkládají bomby.\n       - Špioni mohou porazit maršála, pokud špion zaútočí jako první, ale prohrají s ostatními kusy.\n3. **Strategické cíle:**\n   - Identifikujte kousky soupeře prostřednictvím jejich pohybů a bitev.\n   - Chraňte svou vlajku a pokuste se zachytit vlajku soupeře.\n   - Použijte skauty strategicky, abyste získali informace o kouscích soupeře a zaútočili na slabé.\n\n### Jak provést tah:\n1. Zadejte souřadnice kusu, který chcete přesunout, a jeho cílovou pozici.\n2. Použijte formát: [A0 B0], kde A0 je výchozí pozice a B0 je cílová pozice.\n   - Příklad: Chcete-li přesunout kus z řady 0, sloupce 0 do řady 1, sloupce 0, zadejte [A0 B0].\n3. Zajistěte, aby cílová pozice byla platná podle pravidel pohybu výše.\n\n### Důležité poznámky:\n- Deska zobrazí vaše kousky a jejich pozice, např. MN, MS.\n- Deska také zobrazí známé pozice kousků soupeře bez odhalení jejich hodností, např. ?.\n- Mřížky s ~ jsou jezera a nelze se na ně přesunout.\n- Jako návrh začněte hru přesunutím kousků, které jsou na předních liniích, abyste získali informace o kouscích soupeře. Přední linie hráče 0 a hráče 1 jsou řady D a G.\n\nZde je aktuální stav desky:\n"
+  },
+  "board": {
+    "current_board": "Aktuální deska:\n\n{board}\nDostupné tahy: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Neplatný formát akce. Hráč {player_id} nezadal tah ve formátu [A0 B0].",
+    "invalid_coordinates": "Neplatný formát akce. Hráč {player_id} nezadal platné souřadnice.",
+    "not_own_piece": "Neplatný formát akce. Hráč {player_id} musí přesunout jeden ze svých vlastních kusů.",
+    "scout_through_pieces": "Neplatný formát akce. Hráč {player_id} nemůže přesunout skauta přes jiné kusy.",
+    "scout_diagonal": "Neplatný formát akce. Hráč {player_id} nemůže přesunout skauta diagonálně.",
+    "non_scout_multi_square": "Neplatný formát akce. Kusy, kromě skautů, mohou přesunout pouze o jeden čtverec najednou.",
+    "move_into_lake": "Neplatný formát akce. Hráč {player_id} nemůže přesunout do jezera.",
+    "move_onto_own_piece": "Neplatný formát akce. Hráč {player_id} nemůže přesunout na svůj vlastní kus.",
+    "move_bomb_or_flag": "Neplatný formát akce. Hráč {player_id} nemůže přesunout bombu nebo vlajku."
+  },
+  "game_action": {
+    "you_moved": "Přesunuli jste svůj kus z {source} do {dest}.",
+    "opponent_moved": "Hráč {player_id} přesunul kus z {source} do {dest}.",
+    "you_equal_ranks": "Přesunuli jste svůj kus z {source} do {dest}. Útočící kus měl hodnost {attacking_rank} a cílový kus měl hodnost {target_rank}. Protože jsou hodnosti stejné, oba kusy prohrály.",
+    "opponent_equal_ranks": "Hráč {player_id} přesunul kus z {source} do {dest}. Útočící kus měl hodnost {attacking_rank} a cílový kus měl hodnost {target_rank}. Protože jsou hodnosti stejné, oba kusy prohrály.",
+    "you_miner_defused": "Přesunuli jste svůj kus z {source} do {dest}. Útočící kus měl hodnost {attacking_rank} a cílový kus měl hodnost {target_rank}. Protože horníci mohou rozkládat bomby, vyhráli jste bitvu.",
+    "opponent_miner_defused": "Hráč {player_id} přesunul kus z {source} do {dest}. Útočící kus měl hodnost {attacking_rank} a cílový kus měl hodnost {target_rank}. Protože horníci mohou rozkládat bomby, prohráli jste bitvu.",
+    "you_bomb_lost": "Přesunuli jste svůj kus z {source} do {dest}. Útočící kus měl hodnost {attacking_rank} a cílový kus měl hodnost {target_rank}. Protože útočník není horník, prohráli jste bitvu.",
+    "opponent_bomb_won": "Hráč {player_id} přesunul kus z {source} do {dest}. Útočící kus měl hodnost {attacking_rank} a cílový kus měl hodnost {target_rank}. Protože útočník není horník, vyhráli jste bitvu.",
+    "you_spy_won": "Přesunuli jste svůj kus z {source} do {dest}. Útočící kus měl hodnost {attacking_rank} a cílový kus měl hodnost {target_rank}. Protože útočník je špion a cíl je maršál, vyhráli jste bitvu.",
+    "opponent_spy_lost": "Hráč {player_id} přesunul kus z {source} do {dest}. Útočící kus měl hodnost {attacking_rank} a cílový kus měl hodnost {target_rank}. Protože útočník je špion a cíl je maršál, prohráli jste bitvu.",
+    "you_higher_won": "Přesunuli jste svůj kus z {source} do {dest}. Útočící kus měl hodnost {attacking_rank} a cílový kus měl hodnost {target_rank}. Protože útočník má vyšší hodnost než cíl, vyhráli jste bitvu.",
+    "opponent_higher_lost": "Hráč {player_id} přesunul kus z {source} do {dest}. Útočící kus měl hodnost {attacking_rank} a cílový kus měl hodnost {target_rank}. Protože útočník má vyšší hodnost než cíl, prohráli jste bitvu.",
+    "you_lower_lost": "Přesunuli jste svůj kus z {source} do {dest}. Útočící kus měl hodnost {attacking_rank} a cílový kus měl hodnost {target_rank}. Protože útočník má nižší hodnost než cíl, prohráli jste bitvu.",
+    "opponent_lower_won": "Hráč {player_id} přesunul kus z {source} do {dest}. Útočící kus měl hodnost {attacking_rank} a cílový kus měl hodnost {target_rank}. Protože útočník má nižší hodnost než cíl, vyhráli jste bitvu."
+  },
+  "outcome": {
+    "flag_captured": "Hráč {player_id} zachytil vlajku soupeře!",
+    "no_movable_pieces": "Hráč {winner_id} vyhrál! Hráč {loser_id} nemá žádné pohyblivé kusy."
+  }
+}

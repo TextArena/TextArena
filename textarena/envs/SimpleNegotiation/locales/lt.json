@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} Derybų žaidime.\nJūs turite tam tikrus resursus, ir jūsų užduotis yra prekiauti taip, kad jūsų resursų bendra vertė padidėtų.\nResursai ir jų vertės, kurias jūs dabar turite, yra:\n\t+ {resource_value_list}\nKiekvieną ėjimą jūs galite kalbėtis su savo oponentu ir pateikti prekybos pasiūlymą.\nNaudokite šiuos specialius žetonus veiksmams:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Pasiūlyti resursai -> Prašomi resursai]\n  - '[Accept]': Priimti įeinantį pasiūlymą.\n  - '[Deny]': Atmesti įeinantį pasiūlymą (numatytasis).\nŽaidimas trunka {max_turns} ėjimų iš viso."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Žaidėjas bandė priimti prekybą be reikalingų resursų.",
+    "out_of_range": "Žaidėjas {player_id}, neteisingas veiksmas. Stulpelis {col} yra už ribų.",
+    "already_full": "Žaidėjas {player_id}, neteisingas veiksmas. Stulpelis {col} yra pilnas.",
+    "proposing_with_no_resource": "Žaidėjas {player_id} bandė pateikti prekybos pasiūlymą be reikalingų resursų.",
+    "incorrect_offer_format": "Žaidėjas {player_id} pateikė prekybos pasiūlymą neteisingu formatu.",
+    "no_new_offer": "Žaidėjas {player_id} nepateikė naujo prekybos pasiūlymo."
+  },
+  "offers": {
+    "reject": "Žaidėjas {player_id} atmetė prekybos pasiūlymą.",
+    "accept": "Žaidėjas {acceptor_id} priėmė prekybos pasiūlymą iš žaidėjo {proposer_id}.",
+    "proposal": "Žaidėjas {player_id} pateikė šį pasiūlymą žaidėjui {opponent_id}: Pasiūlyti daiktai: {offered} -> Prašomi daiktai: {requested}"
+  },
+  "outcome": {
+    "win": "Žaidėjas {winner_id} laimėjo, nes jo inventoriaus vertės pokytis buvo didesnis.",
+    "draw": "Visiems žaidėjams inventoriaus vertės pokytis buvo vienodas. Lygiosios."
+  }
+}

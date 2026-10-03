@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Tú ert Spælari {player_id} í Tic Tac Toe fyri tríggjar spælarar.\nTíð sígild er '{symbol}'.\nTú skiftir um við að seta tíð sígild á ein 5x5 talv til at mynda ein línu av fýra.\nLínur kunnu vera vannligar, lodrar ella diagonalur.\nSenda tín tínasta við at brúka formatið '[4]' fyri at markera rútu 4."
+  },
+  "board": {
+    "current_board": "Núverandi borð:\n\n{board}\n\nFáa framleiðslur: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ógilda flytingarformatið. Brúka \"[cell]\" har teldilin er 0-{max_cell} .",
+    "out_of_range": "Ógildig sellu tal: {cell}. Verður at vera millum 0 og {max_cell}.",
+    "already_occupied": "Kelda {cell} er longu upptikin.",
+    "made_invalid": "Leikarin {player_id} hevur gjørt eitt ógilda tak."
+  },
+  "game_action": {
+    "placed": "Leikari {player_id} setir sínum merkja ({symbol}) á øki ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Leikari {player_id} ({symbol}) vinnur!",
+    "draw": "Dysturin er javnur!"
+  }
+}

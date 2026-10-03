@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\nThe resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\nUse the following special tokens for actions:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Offered Resources -> Requested Resources]\n  - '[Accept]': To accept an incoming offer.\n  - '[Deny]': To deny an incoming offer (default).\nThe game lasts for {max_turns} turns in total."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "Ɔbɔadeɛ no bɔɔ mmɔden sɛ obegye adwuma bi a na onni ho nimdeɛ.",
+    "out_of_range": "Player {player_id}, Adwuma a woyɛ no saa. Column {col} no wɔ akyirikyiri.",
+    "already_full": "Player {player_id}, Adwuma a woyɛ no saa. Column {col} no akyɛ.",
+    "proposing_with_no_resource": "Ɔbɔadeɛ {player_id} bɔɔ mmɔden sɛ ɔbɛma no sika a ɔde bɛsesa ne agyapadeɛ nanso na onni bi.",
+    "incorrect_offer_format": "Ɔbɔadeɛ {player_id} yɛɛ ne kyɛfa wɔ ɔfã a ɛntene mu.",
+    "no_new_offer": "Ɔpanyin {player_id} no amma wɔn nsesaeɛ foforɔ biara."
+  },
+  "offers": {
+    "reject": "Ɔbɔadeɛ {player_id} no antie n'akwanya.",
+    "accept": "Akwantufoɔ {acceptor_id} gyeɛ agyapadeeɛ a Akwantufoɔ {proposer_id} de bɔɔ no.",
+    "proposal": "Player {player_id} bɔɔ tɔn a ɛte sɛɛ: Nneɛma a wɔde bɔ: {offered} -> Nneɛma a wɔpɛ: {requested} ma Player {opponent_id}"
+  },
+  "outcome": {
+    "win": "Ɔbɔadeɛ {winner_id} no adi nkonim denam akatua a wanya wɔ nkrataa mu so.",
+    "draw": "Nsakrae koro no ara wɔ agyapade a ɛwɔ wɔn nyinaa ho."
+  }
+}

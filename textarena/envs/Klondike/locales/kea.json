@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Bo ta joga Solitariu Klondike. Bo meta e move tudu kartus pa pilha di fundasao.\n\nRegula di Jogu:\n- Pilha di fundasao (F1-F4): Konstrui pa riba de As pa Rei na kolor\n- Pilha di tableau (T1-T7): Konstrui pa baxu alternando kolor (vermelhu sobri pretu, pretu sobri vermelhu)\n- Estoku: Saí kartus pa pilha di lixo\n- Lixo (W): Kartu di riba disponivel pa joga\n\nKomandus:\n- 'draw' - Saí kartus de estoku pa lixo\n- 'move <source> <destination> [count]' - Move kartus entre pilhas\n  Exemplu: 'move W T1', 'move T1 F2', 'move T3 T5 2'. Konta tambe podi saí 'all', ku ta tenta move tudu kartus di riba.\n- 'forfeit' - Akaba jogu imediatamente i blokea pontuasion atuali\n- Nomi di pilha: W (lixo), F1-F4 (fundasaun), T1-T7 (tableau)\n\nBo podi esekuta aksion multiple den un turnu separando ku vigula:\n  Exemplu: 'draw, move W T1, move T2 F1'\n\nSó Rei podi saí koloká na pilha di tableau vaziu.\nAksion esekuta den ordem - si unu falha, aksion restante ta skipa.\nUsa 'forfeit' si bo krei ku jogu e imposivel pa gana."
+  },
+  "format_error": {
+    "no_brackets": "Formatu di azons é invalidu. Azons debe sta na paréntesis.",
+    "no_closing_bracket": "Formatu di ason invalidu. Falta un parénti pa kaba ']'",
+    "empty_command": "Komandu ka ta uzadu. Skrebe \"draw\" o \"move <source><destination> [count]\".",
+    "empty_action": "Ason sen faze nada",
+    "move_needs_args": "Manda pa otu algen meste di fonti i di destinason. Uza: 'move <source> <destination> [count]'",
+    "count_positive": "Konti devi séri pozitivu ou 'all'",
+    "count_invalid": "Konti inválidu. Uza númeru ou 'all'",
+    "unknown_command": "Komandu deskonhecido '{cmd}'. Usa 'draw', 'move <source> <destination> [count]', ou 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Ason {n} ki foi izatu antis di dizusperu.",
+    "failed": "Aksion {n} falhou: {msg}"
+  },
+  "move_result": {
+    "drew": "Nton, el tra karta di stadu pa skravu.",
+    "cannot_draw": "Nu ka pode traze, nen stoku i ninhun kuza di lixu.",
+    "invalid_pile": "Nómi di pila é invalidu. Uza W, F1-F4, ô T1-T7",
+    "foundation_one_card": "Só pode muda 1 karta pa fundason.",
+    "waste_to_foundation_ok": "Mudansa di kartidja pa fundason F{dst}",
+    "waste_to_foundation_bad": "Ka pode muda kartidja di resídu pa kel pilon di fundason.",
+    "tableau_to_foundation_ok": "Moviu kartu de tableau T{src} pa fundasao F{dst}",
+    "tableau_to_foundation_bad": "Ka pode muda karta di tabló na kel pilon fundason",
+    "foundation_to_foundation": "Ka pode muda di fundason pa fondason.",
+    "waste_to_tableau_one_card": "Só pode muda 1 karta di lixo pa tabéla.",
+    "waste_to_tableau_ok": "Mudansa di kartidja pa tabéla T{dst}",
+    "waste_to_tableau_bad": "N ka pode poi kartidja di skravu na kel pila di tablóri.",
+    "no_face_up": "Ka ten karton pa muda.",
+    "tableau_to_tableau_ok": "Moviu {count} kartu(s) de tableau T{src} pa T{dst}",
+    "tableau_to_tableau_bad": "Ka movi {count} karti(s) di T{src} pa T{dst}",
+    "foundation_to_tableau_one_card": "Só pode muda 1 karta di fundason pa tabéla.",
+    "foundation_empty": "Fondu F{src} é ka ten ninhun funson.",
+    "foundation_to_tableau_ok": "Moviu kartu de fundasao F{src} pa tableau T{dst}",
+    "foundation_to_tableau_bad": "Ka pode poi karta di fundason na tabéla T{dst}",
+    "to_waste_or_stock": "Ka pode ser mudadu pa lixo ô armazén."
+  },
+  "outcome": {
+    "forfeit": "Jogu perdedu. Pontu final: {score} kartas na fundason.",
+    "won": "Parabéns, dja bu ganha Klondike Solitaire!",
+    "turn_limit": "Jogu akaba! Bo atingiu limite maksimu di {max_turns} turn. Pontuasion: {score} kartus na fundasaun."
+  },
+  "board": {
+    "title": "=== SOLITÁRIU KLONDIKE ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stoku: {stock} karta",
+    "waste": "Lixo (W): {waste}",
+    "foundations_header": "Fundason:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tabela:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

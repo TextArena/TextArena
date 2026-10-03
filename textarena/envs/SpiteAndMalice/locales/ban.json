@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Ia dados Pemain {player_id} ring permainan Spite lan Malice antuk dua pemain. Tujuan Iraga dados pemain sané pertama ngosongin tumpukan payoff.\n\n### Gambaran Permainan:\n- Tujuan dados ngosongin tumpukan payoff antuk mainang kartu ring tumpukan tengah.\n- Iraga dados mainang kartu saking tiga sumber:\n  1. **Tangan** Iraga (Iraga ngawitin giliran antuk kartu 5 ring tangan).\n  2. **Kartu paling duur ring tumpukan payoff** Iraga.\n  3. **Kartu paling duur ring tumpukan buangan** Iraga.\n\n### Aturan Main:\n- Iraga dados mainang kartu ring tumpukan tengah yéning kartu punika **satu tingkat duur** saking kartu paling duur ring tumpukan punika (tumpukan tengah ngawitin Ace lan ngantos Queen; King dados liar - dados mainang ring kartu sakéwantah nanging nenten nguwahin urutan tingkat. Puniki dados artos yéning King dados mainang sasampun 4, dados King punika dados tingkat 5 lan kartu salantrut dados 6).\n- Yéning Iraga nenten dados mainang kartu malih, Iraga dados **mbuang kartu** ring tumpukan buangan Iraga dados puput giliran.\n- Yéning tumpukan tengah ngantos Queen, dados tumpukan punika dados kosong otomatis.\n- Urutan tingkat dados: A=1, 2=2, ..., 9=9, J=10, Q=11, K dados liar.\n\n### Tindakan:\n1. **Ngambil**: Ring awal giliran Iraga, ngambil kartu dados ngisi tangan Iraga ngantos kartu 5. Teken **[draw]** dados ngawitin.\n2. **Mainang Kartu**: Mainang kartu, tentenang kartu lan tumpukan tengah dados puniki: **[play A♠ 0]** (dados 'A♠' dados kartu lan '0' dados indeks tumpukan tengah).\n3. **Mbuang**: Yéning Iraga nenten dados mainang kartu malih, mbuang kartu saking tangan Iraga ring tumpukan buangan dados puput giliran. Teken **[discard A♠ 1]** (dados 'A♠' dados kartu lan '1' dados indeks tumpukan buangan). Perlu diingat yéning Iraga nenten dados mbuang kartu saking tumpukan payoff. Iraga dados mbuang kartu saking tangan Iraga wantah.\n\n"
+  },
+  "board": {
+    "current_board": "Papan Permainan Mangkin:\n\n{board}\nTindakan Mangkin: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Tumpukan Tengah ---\n",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Pemandangan Pemain {player_id} ---\n",
+    "payoff": "{observation}Tumpukan Payoff (Kartu Paling Duur): {top_card}, Panjang Tumpukan Payoff: {payoff_length}\n",
+    "hand": "{observation}Tangan: {hand} ",
+    "discard": "{observation}Tumpukan Buangan: {discard}\n",
+    "empty": "Empty"
+  },
+  "game_message": {
+    "no_cards_left": "Nénten wénten kartu sané prasida kaambil malih. Élingang yéning ragané dados maputer kartu saking sumber-sumber puniki: 1. tangannyané 2. kartu pinih duur tumpukan pikolih ipun 3. kartu paling luhur makudang-kudang tumpukan nénten kapikolihang. "
+  },
+  "invalid_move": {
+    "wrong_format": "Format move nenten valid. Pamain {player_id} nénten nyaurin antuk gerak sane patut ring kurung persegi.",
+    "invalid_play": "Mainang kartu salah. Pemain {player_id} dados mainang {card} ring tumpukan tengah {index}.",
+    "discard_from_payoff": "Invalid discard. Pamain {player_id} nyobak ngicalang kartu saking tumpukan pikolih.",
+    "discard_not_in_hand": "Invalid discard. Pamain {player_id} nyobak ngicalang kartu sané nénten wénten ring tangannyané.",
+    "wrong_move_type": "Jeroan sané nénten patut. Pamain {player_id} nenten masaut antuk jeroné sane valid."
+  },
+  "game_action": {
+    "you_drew": "Ragane ngambar kartu.",
+    "opponent_drew": "Pemain {player_id} ngambil kartu.",
+    "you_played": "Ragane maplalian {card} ring tumpukan tengah {index}.",
+    "opponent_played": "Pemain {player_id} mainang {card} ring tumpukan tengah {index}.",
+    "you_discarded": "Iraga mbuang {card} ring tumpukan buangan {index}, dados artos Iraga dados puput giliran. Nenten wénten tindakan Iraga malih dados dipertimbangkan ring giliran puniki. Pemain {next_player_id} dados mainang salantrut.",
+    "opponent_discarded": "Pemain {player_id} ngelahang {card} ka tumpukan buangan {index}, sané artiné ipun sampun puput giliran ipun. Nénten wénten tindakan sanès saking Pemain {player_id} sané pacang kacatet ring giliran puniki. Pemain {next_player_id}, ragané pacang dados giliran salanturné. Mangkin, tulis tindakan ragané ring format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Pemain {current_player} dados ngosongin tumpukan payoff! Pemain {current_player} dados jayanti!",
+    "deadlock_player_0": "Kondisi deadlock dados kacapai! Pemain 0 dados jayanti antuk {player_0_payoff} kartu ring tangan vs {player_1_payoff} kartu Pemain 1.",
+    "deadlock_player_1": "Kondisi deadlock dados kacapai! Pemain 1 dados jayanti antuk {player_1_payoff} kartu ring tangan vs {player_0_payoff} kartu Pemain 0.",
+    "deadlock_tie": "Kondisi deadlock dados kacapai antuk hasil seri! Kedua pemain dados {player_0_payoff} kartu ring tangan. Pemain {current_player} dados jayanti secara otomatis."
+  }
+}

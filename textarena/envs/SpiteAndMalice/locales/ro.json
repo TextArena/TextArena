@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} într-un joc de doi jucători de Spite și Malice. Scopul dvs. este să fiți primul care să-și golească pila de plată.\n\n### Prezentare generală a jocului:\n- Obiectivul este să curățați pila dvs. de plată prin jucarea cărților în pila centrală.\n- Puteți juca cărți din trei surse:\n  1. **Mâna** dvs. (începeți fiecare tură cu până la 5 cărți în mână).\n  2. **Cea mai de sus carte din pila dvs. de plată**.\n  3. **Cea mai de sus carte din oricare dintre pila dvs. de descărcare**.\n\n### Reguli de joc:\n- Puteți juca o carte într-o pila centrală dacă este **cu un rang mai mare** decât cea mai de sus carte din acea pila (pila centrală începe cu As și merge până la Regina; Regii sunt jucători sălbatici - pot fi jucați pe orice carte, dar nu schimbă secvența de rang. Acest lucru înseamnă că dacă un Rege este folosit după 4, atunci acel Rege este clasat 5 și următoarea carte trebuie să fie 6).\n- Dacă nu puteți juca nicio altă carte, trebuie să **descărcați o carte** într-una dintre pila dvs. de descărcare pentru a termina tura.\n- Dacă o pila centrală ajunge la Regina, va fi curățată automat.\n- Ordinea de rang este: A=1, 2=2, ..., 9=9, J=10, Q=11, K ca sălbatic.\n\n### Acțiuni:\n1. **Trageți**: La începutul turei, trageți cărți pentru a umple mâna până la 5 cărți. Introduceți **[draw]** pentru a începe.\n2. **Jucați o carte**: Pentru a juca o carte, specificați cartea și pila centrală astfel: **[play A♠ 0]** (unde 'A♠' este cartea și '0' este indicele pila centrală).\n3. **Descărcați**: Dacă nu puteți juca nicio altă carte, descărcați o carte din mână într-o pila de descărcare pentru a termina tura. Introduceți **[discard A♠ 1]** (unde 'A♠' este cartea și '1' este indicele pila de descărcare). Rețineți că nu puteți descărca nicio carte din pila de plată. Puteți descărca doar cărțile din mână.\n\n"
+  },
+  "board": {
+    "current_board": "Tablă curentă:\n\n{board}\nMutări disponibile: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Pile centrale ---\n",
+    "pile": "{observation}Pila {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Vedere jucătorului {player_id} ---\n",
+    "payoff": "{observation}Pila de plată (Cartea de sus): {top_card}, Lungimea pila de plată: {payoff_length}\n",
+    "hand": "{observation}Mână: {hand}\n",
+    "discard": "{observation}Pile de descărcare: {discard}\n",
+    "empty": "Gol"
+  },
+  "game_message": {
+    "no_cards_left": "Nu mai sunt cărți de tras. Rețineți că puteți juca cărți din următoarele surse:\n  1. **Mâna** dvs.\n  2. **Cea mai de sus carte din pila dvs. de plată**.\n  3. **Cea mai de sus carte din oricare dintre pila dvs. de descărcare**.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de mutare nevalid. Jucătorul {player_id} nu a răspuns cu o mutare validă în paranteze pătrate.",
+    "invalid_play": "Joc nevalid. Jucătorul {player_id} a încercat să joace {card} pe pila centrală {index}.",
+    "discard_from_payoff": "Descărcare nevalidă. Jucătorul {player_id} a încercat să descarce o carte din pila de plată.",
+    "discard_not_in_hand": "Descărcare nevalidă. Jucătorul {player_id} a încercat să descarce o carte care nu este în mână.",
+    "wrong_move_type": "Tip de mutare nevalid. Jucătorul {player_id} nu a răspuns cu un tip de mutare valid."
+  },
+  "game_action": {
+    "you_drew": "Ați tras cărți.",
+    "opponent_drew": "Jucătorul {player_id} a tras cărți.",
+    "you_played": "Ați jucat {card} pe pila centrală {index}.",
+    "opponent_played": "Jucătorul {player_id} a jucat {card} pe pila centrală {index}.",
+    "you_discarded": "Ați descărcat {card} în pila de descărcare {index}, ceea ce înseamnă că ați terminat tura. Nicio altă acțiune a dvs. nu este luată în considerare pentru această tură. Jucătorul {next_player_id} va juca următorul.",
+    "opponent_discarded": "Jucătorul {player_id} a descărcat {card} în pila de descărcare {index}, ceea ce înseamnă că a terminat tura. Nicio altă acțiune a Jucătorului {player_id} nu este luată în considerare pentru această tură. Jucătorul {next_player_id}, veți juca următorul. Vă rugăm să introduceți acțiunea în formatul [acțiune carte indice central]."
+  },
+  "outcome": {
+    "payoff_cleared": "Jucătorul {current_player} și-a terminat pila de plată! Jucătorul {current_player} câștigă!",
+    "deadlock_player_0": "S-a ajuns la un impas! Jucătorul 0 câștigă cu {player_0_payoff} cărți rămase vs {player_1_payoff} cărți ale Jucătorului 1.",
+    "deadlock_player_1": "S-a ajuns la un impas! Jucătorul 1 câștigă cu {player_1_payoff} cărți rămase vs {player_0_payoff} cărți ale Jucătorului 0.",
+    "deadlock_tie": "S-a ajuns la un impas cu egalitate! Ambii jucători au {player_0_payoff} cărți rămase. Jucătorul {current_player} câștigă prin default."
+  }
+}

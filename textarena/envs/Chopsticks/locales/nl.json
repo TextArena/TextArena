@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "U bent Speler {player_id} in Chopsticks. Op uw beurt, kies een van:\n  + Aanval:  '[attack M O]'  waar M=uw hand (0 of 1), O=hand van tegenstander (0 of 1).\n    - Aantal vingers van tegenstander neemt toe met uw hand; als >=5, wordt het 0.\n  + Splitsen:   '[split L R]'  om uw totale aantal vingers te herverdelen in L en R (L+R = uw totaal).\nAntwoord met exact een van die commando's."
+  },
+  "board": {
+    "current_board": "Huidig bord:\nSpeler 0: {hands_0}\nSpeler 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Uw hand {my_idx} is dood.",
+    "opp_hand_dead": "Hand {opp_idx} van tegenstander is al dood.",
+    "split_sum": "Splitsen moet optellen tot {total}.",
+    "split_no_change": "Splitsen moet uw handverdeling veranderen.",
+    "invalid_command": "Ongeldige zet. Gebruik “[attack M O]” of “[split L R]”."
+  },
+  "game_action": {
+    "attack": "Speler {player_id} valt hand {opp_idx} van Speler {opp_id} aan: het gaat van {opp_val} naar {new_val}.",
+    "split": "Speler {player_id} splitst in [{L}, {R}]."
+  },
+  "history": {
+    "entry": "Speler {player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Beide handen van tegenstander zijn dood.",
+    "draw": "De tijdslimiet is bereikt."
+  }
+}

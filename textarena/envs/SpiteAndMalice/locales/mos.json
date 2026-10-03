@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Yaa Player {player_id} kɛɛlɛ wɛɛrɛ Spite ɛtɛ Malice. Yɛɛrɛ wɛɛlɛ yɛɛ kɛɛlɛ wɛɛrɛ payoff pile la.\n\n### Wɛɛrɛ Overview:\n- Wɛɛrɛ wɛɛlɛ yɛɛ kɛɛlɛ payoff pile la ka wɛɛrɛ center piles la.\n- Yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ tɩɩɩ tɩɩɩ:\n  1. Yɛɛ **hand** (yɛɛ kɛɛlɛ wɛɛrɛ tɩɩɩ tɩɩɩ 5 ka wɛɛrɛ hand la).\n  2. Wɛɛ **top card of yɛɛ payoff pile** la.\n  3. Wɛɛ **top card of yɛɛ discard piles** la.\n\n### Wɛɛrɛ Rules:\n- Yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ center pile la ɛɛ **one rank higher** wɛɛ top card la pile la (center piles la kɛɛlɛ Ace ɛtɛ go up to Queen; Kings la wɛɛ wild - yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ card la pile la ɛɛ yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ rank sequence la). Yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ King la ɛɛ yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ 5 ɛtɛ yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ 6 la.\n- Yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ discard ka wɛɛrɛ discard pile la ɛɛ yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ turn la.\n- Yɛɛ center pile la kɛɛlɛ Queen la, yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ cleared automatically la.\n- Wɛɛ rank order la: A=1, 2=2, ..., 9=9, J=10, Q=11, K wɛɛ wild la.\n\n### Actions:\n1. **Draw**: Yɛɛ kɛɛlɛ wɛɛrɛ tɩɩɩ tɩɩɩ, draw cards ka wɛɛrɛ hand la up to 5 cards. Enter **[draw]** ka wɛɛrɛ begin la.\n2. **Play a Card**: Ka wɛɛrɛ play ka wɛɛrɛ card la, specify ka wɛɛrɛ card la ɛtɛ center pile la like this: **[play A♠ 0]** (wɛɛ 'A♠' la card la ɛtɛ '0' la center pile index la).\n3. **Discard**: Yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ discard ka wɛɛrɛ card la hand la ka wɛɛrɛ discard pile la ɛɛ yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ turn la. Enter **[discard A♠ 1]** (wɛɛ 'A♠' la card la ɛtɛ '1' la discard pile index la). Yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ discard ka wɛɛrɛ card la payoff pile la. Yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ discard ka wɛɛrɛ cards la hand la.\n\n"
+  },
+  "board": {
+    "current_board": "Bɛɛri lahaba:\n\n{board}\nZɛɛma lahaba: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Center Piles (Kãrãnd-rãmbã) -- ",
+    "pile": "{observation}Pile {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Jɛɛga {player_id}'s View ---\n",
+    "payoff": "{observation}Kɔlɛsɛnɛ wɩɩlɛ (Kɔlɛ kɔmɔkɛlɛ): {top_card}, Kɔlɛsɛnɛ tɩŋɛ: {payoff_length}\n",
+    "hand": "{observation}Hand: {hand}\n",
+    "discard": "{observation}Kɔlɛ fɔrɔmɩɩsɛnɛ: {discard}\n",
+    "empty": "Zĩigã yaa zaalem."
+  },
+  "game_message": {
+    "no_cards_left": "Y sã n wa rat tɩ y yãk kart a to, bɩ y tẽeg t'a tõeeme. A yaa: 1. Yãmb nugã 2. Kaart ning sẽn be yãmb zugẽ wã b sẽn na n yao-yã 3. La kaart nins fãa f sẽn da basdã me d sẽn pa segd ne ye. "
+  },
+  "invalid_move": {
+    "wrong_format": "Yaa so-toak sẽn pa zemse. Tãabd {player_id} ka leok ne so-tũudg sẽn zems ye, la b gʋls n ning a soab sɛkgo pʋgẽ wã.",
+    "invalid_play": "Kɔlɛ pɔʊ tɛɛmɛ. Kɔɔlɩɩ {player_id} yɛnɛ wɩɩlɛ {card} nɛ kɔlɛ kɔmɔkɛlɛ {index} yɛ.",
+    "discard_from_payoff": "Kɔlɛ fɔrɔmɩɩ tɛɛmɛ. Kɔɔlɩɩ {player_id} yɛnɛ wɩɩlɛ kɔlɛsɛnɛ wɩɩlɛ.",
+    "discard_not_in_hand": "B sẽn pa tõe n lobã. Tʋʋmdã {player_id} makame tɩ b bas kaar ning a sẽn ka tar wã ye.",
+    "wrong_move_type": "A sẽn wa n na n maan bũmb ningã pa zemse. Bõn-naandã {player_id} ka leok ne a soog ye."
+  },
+  "game_action": {
+    "you_drew": "Y ra wẽeda kaarã.",
+    "opponent_drew": "A {player_id} wã rɩka kaar-dãmb n kõ.",
+    "you_played": "I jɛla {card} kɛ́rɛ center pile {index}.",
+    "opponent_played": "Player {player_id} played {card} on center pile {index} la.",
+    "you_discarded": "Yɛɛ discarded {card} to discard pile {index} la, yɛɛ wɛɛlɛ wɛɛrɛ ka wɛɛrɛ turn la. Player {next_player_id} will go next la.",
+    "opponent_discarded": "Kɛɛnda {player_id} sɩɩ {card} kɩɩ tɩŋa sɩɩm {index}, wɛɛlɛ kɛɛnda wa sɩɩ tɩŋa la. Kɛɛnda {player_id} tɩ wɛɛlɛ tɩŋa kɩɩ tɩŋa la. Kɛɛnda {next_player_id}, i sɩɩ tɩŋa nɛɛ. Kɩɩ tɩŋa kaŋa [action card center_index] nɛɛ."
+  },
+  "outcome": {
+    "payoff_cleared": "Kɔɔlɩɩ {current_player} tɩŋɛ kɔlɛsɛnɛ wɩɩlɛ! Kɔɔlɩɩ {current_player} yɛɛ kɔlɛ!",
+    "deadlock_player_0": "Kɔlɛ kɔɔlɩɩ tɩŋɛɛ! Kɔɔlɩɩ 0 yɛɛ kɔlɛ {player_0_payoff} wɩɩlɛ nɛ kɔɔlɩɩ 1 {player_1_payoff} wɩɩlɛ.",
+    "deadlock_player_1": "Kɔlɛ kɔɔlɩɩ tɩŋɛɛ! Kɔɔlɩɩ 1 yɛɛ kɔlɛ {player_1_payoff} wɩɩlɛ nɛ kɔɔlɩɩ 0 {player_0_payoff} wɩɩlɛ.",
+    "deadlock_tie": "Kɔlɛ kɔɔlɩɩ tɩŋɛɛ nɛ kɔlɛ kɔɔlɩɩ tɩŋɛ! Kɔɔlɩɩ wɩɩlɛ {player_0_payoff} wɩɩlɛ. Kɔɔlɩɩ {current_player} yɛɛ kɔlɛ kɔɔlɩɩ."
+  }
+}

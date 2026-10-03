@@ -1,0 +1,36 @@
+{
+  "_comment": "Datoteka s prevodom za LinesOfAction. NE PREVADIJ ključev (levo), samo vrednosti (desno).",
+  "_slots": {
+    "{player_id}": "Številka igralca, 0 ali 1",
+    "{side}": "Znak igralca, O ali X",
+    "{other}": "Znak nasprotnika, O ali X",
+    "{board}": "ASCII prikaz plošče; pusti kot je",
+    "{coord}": "Koordinata na plošči, kot b1 ali a3",
+    "{from}": "Izvirna koordinata poteze, kot b1",
+    "{to}": "Ciljna koordinata poteze, kot b3"
+  },
+  "player_prompt": {
+    "intro": "Vi ste Igralec {player_id} v igri LinesOfAction.\nVaši znaki so '{side}', nasprotnikovi znaki so '{other}'.\nFormat poteze: `[b1b3]` (iz-koordinata v-koordinata). Veljavna poteza potuje vodoravno, navpično ali diagonalo toliko kvadratov, kot je skupno število znakov (katerihkoli barv) v tej vrsti. Lahko skačete čez svoje lastne znake, ne pa čez nasprotnikove; pristajanje na nasprotniku ga zajame. Zmagate, ko so vsi vaši znaki povezani kot 8-sosedi."
+  },
+  "board": {
+    "current_board": "Plošča:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format mora biti e2e4 (iz, v koordinate).",
+    "no_piece": "Ni {side} znaka na {coord}.",
+    "identical": "Izvorna in ciljna koordinata sta enaki.",
+    "not_straight_or_diagonal": "Poteza mora biti ravna ali diagonalna.",
+    "wrong_distance": "Mora se premakniti za razdaljo, ki je enaka številu znakov v vrsti.",
+    "enemy_blocks": "Nasprotnikov znak blokira pot.",
+    "destination_own": "Ciljna koordinata je zasedena z lastnim znakom."
+  },
+  "game_action": {
+    "moved": "Igralec {player_id} se je premaknil {from} -> {to}",
+    "captured_suffix": "Igralec {player_id} se je premaknil {from} -> {to} in zajel nasprotnika."
+  },
+  "outcome": {
+    "win": "Vsi znaki so povezani.",
+    "draw_no_capture": "60 potez brez zajetja.",
+    "draw_repetition": "Pozicija se je ponovila trikrat."
+  }
+}

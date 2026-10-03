@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction locale file. DO NOT translate keys (left side). Only translate values (right side). Never translate board coordinates (a-h, 1-8), piece letters (O, X), the move-format token, or the {board} ASCII grid.",
+  "_slots": {
+    "{player_id}": "The player's number, either 0 or 1",
+    "{side}": "The player's piece letter, either O or X",
+    "{other}": "The opponent's piece letter, either O or X",
+    "{board}": "The ASCII rendering of the board; keep as-is",
+    "{coord}": "A board coordinate such as b1 or a3",
+    "{from}": "The source coordinate of a move, such as b1",
+    "{to}": "The destination coordinate of a move, such as b3"
+  },
+  "player_prompt": {
+    "intro": "Ngwena uyi Mwana {player_id} mu joga ya LinesOfAction.\nMbilu ya kuwa ni '{side}', mbilu ya kudikana ni '{other}'.\nMfumo ya kusokela: `[b1b3]` (kutoka-kokozi kuenda-kokozi). Sokela ya kufweteke kusokela kwenda kwa mpimo, kwa kusokela, kwa kusokela diagonal, kwa mpimo ya mbilu zote (nge ya lolenge) mu mpimo uwo. Ngwena uyikwenda mbilu ya kuwa, kansi uyikwenda mbilu ya kudikana; kusokela ku mbilu ya kudikana ni kuikwata.  Uyikwata joga lene mbilu ya kuwa zote zikwata ku mpimo wa 8."
+  },
+  "board": {
+    "current_board": "Kibuka: {board}"
+  },
+  "invalid_move": {
+    "wrong_format": "O ukexilu ua tokala u kala e2e4 (ku tunda, ni kuenda ku kididi kimoxi).",
+    "no_piece": "No {side} piece on {coord}.",
+    "identical": "O kididi kua tundu o athu, ni ididi ia a tokala.",
+    "not_straight_or_diagonal": "O ku nhunga kua tokala ku kala ku nzôngo.",
+    "wrong_distance": "O jimbandu ja tokala ku kala kumoxi.",
+    "enemy_blocks": "O nguma ia dikota ua mu fidisa o njila.",
+    "destination_own": "O kididi kiki, a ki buika ku jinguma jetu."
+  },
+  "game_action": {
+    "moved": "Mwana {player_id} sakala {from} -> {to}",
+    "captured_suffix": "Mwana {player_id} asokelwa {from} -> {to} akwata mbilu ya kudikana."
+  },
+  "outcome": {
+    "win": "O jimbandu joso ja moneka.",
+    "draw_no_capture": "60 a ji ola ja ku jokala, sé-ku kijimbuete.",
+    "draw_repetition": "Mu veji jitatu, muéne ua londekesa o kididi."
+  }
+}

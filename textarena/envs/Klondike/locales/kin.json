@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Uri gukina Klondike Solitaire. Iradusha kwawe ni kuhimiza karata zote kwa mirongo ya msingi.\n\nAmategeko ya Mchezo:\n- Mirongo ya msingi (F1-F4): Tegura ukwira kuva Ace hadi King kwa sauti\n- Mirongo ya meza (T1-T7): Tegura ukaguka kwa rangi zinapishana (umutuku kwa umweru, umweru kwa umutuku)\n- Stock: Soma karata kwa mirongo ya taka\n- Taka (W): Karata ya juu irahari kwa gukina\n\nKomandi:\n- 'draw' - Soma karata kuva stock hadi taka\n- 'move <source> <destination> [count]' - Hamisha karata hagati ya mirongo\n  Urugero: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count kandi inaweza kuwa 'all', ishakora kuhimiza karata zote zigaragara.\n- 'forfeit' - Oza mchezo wawe utarikiye na ufunge alama yawe\n- Amazina ya mirongo: W (taka), F1-F4 (mirongo ya msingi), T1-T7 (mirongo ya meza)\n\nUshobora kuteza ibikorwa byinshi muri tour moja ukabitandukanya na vigatiti:\n  Urugero: 'draw, move W T1, move T2 F1'\n\nNi Abami gusa wabasha kuwekwa kuri mirongo ya meza itari.\nIbikorwa bitegurwa kwa mpanganyo - ico kimwe kitakayabura, ibikorwa bisigaye bitakayitabiriwa.\nTangira 'forfeit' ukiyumvisha mchezo utakayeza kugera kuwina."
+  },
+  "format_error": {
+    "no_brackets": "Imiterere y'ibikorwa idakwiriye. Ibikorwa bigomba kuba mu nkingi.",
+    "no_closing_bracket": "Imiterere y'ibikorwa idakwiriye. Gifite agace ka nyuma ']'",
+    "empty_command": "Komandi ishirini. Andika 'draw' cyangwa 'move <source> <destination> [count]'",
+    "empty_action": "Igikorwa cy'ubusa",
+    "move_needs_args": "Komandi ya kuhimisha karata isaba inkomoko na ujumuisho. Ikoreshwa: 'move <source> <destination> [count]'",
+    "count_positive": "Kubara kugaragara kuba chanya cyangwa 'all'",
+    "count_invalid": "Kubara si sahihi. Tumia nambari cyangwa 'all'",
+    "unknown_command": "Komandi isizwi '{cmd}'. Tumia 'draw', 'move <source> <destination> [count]', cyangwa 'forfeit'",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Bakoze {n} igikorwa ((s) mbere yo kunanirwa.",
+    "failed": "Action {n} yashitse: {msg}"
+  },
+  "move_result": {
+    "drew": "Imechora kadi (zi) kutoka kwa hisa hadi taka.",
+    "cannot_draw": "Ntibashobora gukusanya. Ibikoresho n'ibisigazwa byombi nta kintu birimo.",
+    "invalid_pile": "Izina ry'urutonde ridakwiriye. Koresha W, F1-F4, cyangwa T1-T7",
+    "foundation_one_card": "Ishobora kwimura ikarita 1 gusa ku rufatiro",
+    "waste_to_foundation_ok": "Ikarita yimuriwe mu isanduku y'ibishingwe F{dst}",
+    "waste_to_foundation_bad": "Ntushobora kwimura ikarita y'ibishingwe kuri iyo nkingi yo gushinga urufatiro",
+    "tableau_to_foundation_ok": "Yahamishe kati ya tableau T{src} ku foundation F{dst}",
+    "tableau_to_foundation_bad": "Ntushobora kwimura ikarita y'igiteranyo kuri iyo nkingi ya fondasiyo",
+    "foundation_to_foundation": "Ntibishobora kwimuka kuva ku rufatiro kugera ku rundi",
+    "waste_to_tableau_one_card": "Ishobora kwimura ikarita 1 gusa kuva mu byo yajugunye muri tableau",
+    "waste_to_tableau_ok": "Imehamisha kadi kutoka kwa taka hadi jedwali T{dst}",
+    "waste_to_tableau_bad": "Ntushobora gushyira ikarita y'ibishingwe kuri iyo miterere ya tableau",
+    "no_face_up": "Nta makarita yabaga afunguye ngo ajyanwe ahandi.",
+    "tableau_to_tableau_ok": "Yahamishe {count} kati ya tableau T{src} ku T{dst}",
+    "tableau_to_tableau_bad": "Oya kuhamisha {count} kati ya T{src} ku T{dst}",
+    "foundation_to_tableau_one_card": "Ishobora kwimura ikarita 1 gusa kuva ku rufatiro kugeza kuri tableau",
+    "foundation_empty": "Ikigo F{src} ni ubusa.",
+    "foundation_to_tableau_ok": "Yahamishe kati ya foundation F{src} ku tableau T{dst}",
+    "foundation_to_tableau_bad": "Ntushobora gushyira ikarita y'ishami ku meza T{dst}",
+    "to_waste_or_stock": "Ntushobora kwimurirwa mu myanda cyangwa ububiko"
+  },
+  "outcome": {
+    "forfeit": "Umukino warangiye. amanota ya nyuma: {score} amakarita mu bishingiro.",
+    "won": "Murakoze cyane, mwatsinze irushanwa rya Klondike Solitaire!",
+    "turn_limit": "Imara! Wize uwanya wose wa {max_turns}. Alama: {score} kuri foundation."
+  },
+  "board": {
+    "title": "=== Umunyamuryango w'umunyapolitiki KLONDIKE SOLITAIRE===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Ibikoresho: {stock} amakarita",
+    "waste": "Ibisigazwa (W): {waste}",
+    "foundations_header": "Imiryango:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Igishushanyo mbonera:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

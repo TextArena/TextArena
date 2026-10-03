@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Гра починається. Козирна масть: {trump_suit} (козирна карта: {trump_str}).",
+    "no_trump_card": "немає"
+  },
+  "player_prompt": {
+    "intro": "Ви є Гравець {player_id} у Німецькому Вісті.\n{phase_info}\nУ вас є {hand_size} карт.\nЗіграйте карту з '[play N]', де N — її позиція у вашій руці (наприклад '[play 3]').",
+    "phase_learning": "ФАЗА НАВЧАННЯ: переможець кожного ходу бере відкриту карту, а переможений бере наступну карту з колоди. Ходи, виграні в цій фазі, не зараховуються до перемоги.",
+    "phase_playing": "ФАЗА ГРИ: колода вичерпана. Кожен хід відтепер зараховується до перемоги."
+  },
+  "next_card": {
+    "playing_phase": "Немає карти для пропозиції - фаза гри почалася.",
+    "deck_empty": "Колода порожня - немає карти для пропозиції.",
+    "available": "Карта для пропозиції: {card}",
+    "available_trump": "Карта для пропозиції: {card} (КОЗИР)"
+  },
+  "invalid_move": {
+    "wrong_format": "Неправильний формат ходу. Використовуйте '[play N]', щоб зіграти N-ту карту у вашій руці.",
+    "bad_position": "Ця позиція карти не існує. У вас є {hand_size} карт.",
+    "must_follow_suit": "Ви повинні йти за мастью та зіграти карту {lead_suit}.",
+    "invalid_play": "Цю карту не можна зіграти."
+  },
+  "game_action": {
+    "played": "Гравець {player_id} зіграв карту {card}."
+  },
+  "trick": {
+    "won": "Гравець {winner_id} виграє хід з картою {card}.",
+    "won_learning": "Гравець {winner_id} виграє хід з картою {card} та бере відкриту карту."
+  },
+  "phase": {
+    "learning_complete": "Колода вичерпана. Фаза навчання закінчена - кожен наступний хід зараховується до перемоги."
+  },
+  "draw": {
+    "winner_received": "Ви виграли хід та отримали карту {card}.",
+    "loser_received": "Ви програли хід та взяли карту {card} з колоди.",
+    "winner_preview": "Наступна карта для пропозиції — {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Ходи, виграні досі - Гравець 0: {tricks0}, Гравець 1: {tricks1}",
+    "scores_playing": "Ходи, що зараховуються до перемоги - Гравець 0: {tricks0}, Гравець 1: {tricks1}",
+    "phase": "Фаза: {phase}",
+    "phase_learning": "Фаза: {phase} ({remaining_cards} карт залишилося в колоді)"
+  },
+  "hand": {
+    "no_cards": "Немає карт",
+    "no_cards_in_hand": "Немає карт у руці",
+    "header": "Ваша рука:",
+    "trump_indicator": " (КОЗИР)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Ще жодної карти не зіграно в цьому ході.",
+    "header": "Поточний хід:",
+    "trump_indicator": " (КОЗИР)",
+    "card_line": "{observation}\n  Гравець {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Гра не почалася",
+    "header": "=== НІМЕЦЬКИЙ ВІСТ ===",
+    "phase": "{observation}\nФаза: {phase}",
+    "trump_suit": "{observation}\nКозирна масть: {trump_suit}",
+    "trump_card": "{observation}\nКозирна карта: {card}",
+    "cards_left": "{observation}\nКарт залишилося в колоді: {count}",
+    "next_card": "{observation}\nНаступна карта для переможця: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nПоточний хід:",
+    "trump_indicator": " (КОЗИР)",
+    "trick_line": "{observation}\n  Гравець {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nГравець {player_id}: {scoring} ходи, що зараховуються до перемоги ({tricks} всього), {hand_size} карт у руці"
+  },
+  "outcome": {
+    "summary": "Фаза навчання - Гравець 0: {l0}, Гравець 1: {l1}. Фаза гри - Гравець 0: {p0}, Гравець 1: {p1}. Гравець {winner_id} виграє з {winner_tricks} ходами, що зараховуються до перемоги!"
+  }
+}

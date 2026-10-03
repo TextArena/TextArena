@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Ou ap jwe Klondike Solitaire. Objektif ou se deplase tout kat nan pil fondasyon yo.\n\nRèg Jwèt la:\n- Pil fondasyon yo (F1-F4): Bati soti nan As pou rive nan Wa nan menm koule\n- Pil tablo yo (T1-T7): Bati desann nan koule altenatif (wouj sou nwa, nwa sou wouj)\n- Stok: Tire kat nan pil fatra\n- Fatra (W): Kat anwo a disponib pou jwe\n\nKòmand:\n- 'draw' - Tire kat soti nan stok pou fatra\n- 'move <source> <destination> [count]' - Deplase kat ant pil yo\n  Egzanp: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count kapab tou 'all', ki pral eseye deplase tout kat ki vire anwo.\n- 'forfeit' - Fini jwèt la toutswit epi bloke skò ou aktyèl\n- Non pil yo: W (fatra), F1-F4 (fondasyon), T1-T7 (tablo)\n\nOu kapab ekzekite plizyè aksyon nan yon tou sèlman pa separe yo ak virgul:\n  Egzanp: 'draw, move W T1, move T2 F1'\n\nSèlman Wa kapab mete sou pil tablo vid.\nAksyon yo ekzekite nan òd - si yon moun echwe, aksyon ki rete yo prale eskipe.\nItilize 'forfeit' si ou kwè jwèt la enposib pou genyen."
+  },
+  "format_error": {
+    "no_brackets": "Fòma aksyon ki pa valab. Aksyon ta dwe nan parantès yo.",
+    "no_closing_bracket": "Format aksyon ki pa valab. manke fèmen bracket ']'",
+    "empty_command": "Kòmand vid. Tape 'draw' oswa 'move <source> <destination> [count]'",
+    "empty_action": "Aksyon vid",
+    "move_needs_args": "Move lòd mande pou sous ak destinasyon. Itilizasyon: 'move <source> <destination> [count]'",
+    "count_positive": "Kantite dwe pozitif oswa 'all'",
+    "count_invalid": "Kantite invalid. Itilize yon nimewo oswa 'all'",
+    "unknown_command": "Kòmand desconu '{cmd}'. Itilize 'draw', 'move <source> <destination> [count]', oswa 'forfeit'",
+    "wrapped": "Aksyon {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Aksyon {n}: {msg}",
+    "before_failure": "Egzekite {n} aksyon ((s) anvan echèk.",
+    "failed": "Aksyon {n} echwe: {msg}"
+  },
+  "move_result": {
+    "drew": "Trase kat nan stock pou dechè.",
+    "cannot_draw": "Nou pa ka tire, ni rezèv la ni fatra a vid.",
+    "invalid_pile": "Non pil ki pa valab. Sèvi ak W, F1-F4, oswa T1-T7",
+    "foundation_one_card": "Ka sèlman deplase 1 kat nan fondasyon an.",
+    "waste_to_foundation_ok": "Deplase kat soti nan fatra pou fondasyon F{dst}",
+    "waste_to_foundation_bad": "Pa ka deplase dechè kat pou ke pil fondasyon",
+    "tableau_to_foundation_ok": "Deplase kat nan tableau T{src} nan fondasyon F{dst}",
+    "tableau_to_foundation_bad": "Pa ka deplase tablo kat pou ke pil fondasyon",
+    "foundation_to_foundation": "Pa ka deplase de fondasyon pou fonde",
+    "waste_to_tableau_one_card": "Ka sèlman deplase 1 kat nan fatra pou tablo a.",
+    "waste_to_tableau_ok": "Deplase kat nan fatra a tablo T{dst}",
+    "waste_to_tableau_bad": "Pa ka mete kat dechè sou pil tablo sa a.",
+    "no_face_up": "Pa gen okenn kat figi-up pou avanse.",
+    "tableau_to_tableau_ok": "Deplase {count} kat(s) nan tableau T{src} nan T{dst}",
+    "tableau_to_tableau_bad": "Pa kapab deplase {count} kat(s) nan T{src} nan T{dst}",
+    "foundation_to_tableau_one_card": "Ka sèlman deplase 1 kat soti nan fondasyon pou tablo a.",
+    "foundation_empty": "Fondasyon F{src} se vid.",
+    "foundation_to_tableau_ok": "Deplase kat nan fondasyon F{src} nan tableau T{dst}",
+    "foundation_to_tableau_bad": "Pa ka mete fondasyon kat sou tablo T{dst}",
+    "to_waste_or_stock": "Pa ka deplase nan fatra oswa stock"
+  },
+  "outcome": {
+    "forfeit": "Jwèt la pèdi. nòt final: {score} kat nan fondasyon yo.",
+    "won": "Felisitasyon, ou te genyen Klondike Solitaire!",
+    "turn_limit": "Jwèt la fini! Ou rive nan maksimòm nan {max_turns} tounen. Skò: {score} kat nan fondasyon yo."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE ===",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Stock: {stock} kat yo",
+    "waste": "Dechè (W): {waste}",
+    "foundations_header": "Fondasyon:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Tablo:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

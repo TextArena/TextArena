@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "Ön a {player_id}. játékos a Tárgyalásos Játékban.\nÖnnek vannak erőforrásai, és a feladata az, hogy olyan kereskedelmet folytasson, hogy az erőforrásai értéke növekedjen.\nAz erőforrások és az azokhoz kapcsolódó értékek, amelyekkel jelenleg rendelkezik:\n\t+ {resource_value_list}\nMinden körben beszélhet az ellenfelével és kereskedelmi ajánlatot tehet.\nA következő speciális tokeneket használja a műveletekhez:\n  - '[Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep]': [Offer: Felajánlott Erőforrások -> Kért Erőforrások]\n  - '[Accept]': Az ajánlat elfogadásához.\n  - '[Deny]': Az ajánlat elutasításához (alapértelmezett).\nA játék összesen {max_turns} körből áll."
+  },
+  "invalid_move": {
+    "receiving_with_no_resource": "A játékos megpróbálta elfogadni a kereskedelmet anélkül, hogy rendelkezne a szükséges erőforrásokkal.",
+    "out_of_range": "{player_id}. játékos, érvénytelen művelet. Az {col} oszlop határon kívül van.",
+    "already_full": "{player_id}. játékos, érvénytelen művelet. Az {col} oszlop tele van.",
+    "proposing_with_no_resource": "{player_id}. játékos megpróbált kereskedelmi ajánlatot tenni anélkül, hogy rendelkezne a szükséges erőforrásokkal.",
+    "incorrect_offer_format": "{player_id}. játékos kereskedelmi ajánlatot tett helytelen formátumban.",
+    "no_new_offer": "{player_id}. játékos nem tett új kereskedelmi ajánlatot."
+  },
+  "offers": {
+    "reject": "{player_id}. játékos elutasította a kereskedelmi ajánlatot.",
+    "accept": "{acceptor_id}. játékos elfogadta a kereskedelmi ajánlatot a {proposer_id}. játékostól.",
+    "proposal": "{player_id}. játékos a következő ajánlatot tette a {opponent_id}. játékosnak: Felajánlott tételek: {offered} -> Kért tételek: {requested}"
+  },
+  "outcome": {
+    "win": "{winner_id}. játékos nyert, mivel nagyobb nyereséget ért el a leltár értékében.",
+    "draw": "Ugyanakkora változás a leltár értékében minden játékosnál. Döntetlen."
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Pasziánsz nyelvi fájl. NE fordítsa le a kulcsokat (bal oldal). Csak a értékeket fordítsa le (jobb oldal).",
+  "_slots": {
+    "{n}": "Művelet indexe egy vesszővel elválasztott parancson belül, 1-alapú",
+    "{msg}": "Egy beágyazott, műveletenkénti eredményüzenet (már lokalizált)",
+    "{count}": "A felfordított lapok száma, amelyeket áthelyeznek",
+    "{src}": "Forrás oszlop száma, 1-alapú",
+    "{dst}": "Cél oszlop száma, 1-alapú",
+    "{cmd}": "A játékos által beírt ismeretlen parancs (nem fordított)",
+    "{max_turns}": "A maximális lépésszám a játék vége előtt",
+    "{score}": "A jelenleg az alapozó oszlopokban lévő lapok száma",
+    "{board}": "A megjelenített ASCII tábla (soha ne fordítsa le)",
+    "{turn}": "Aktuális lépésszám",
+    "{stock}": "A talonban maradt lapok száma",
+    "{waste}": "A legfelső lap címke a hulladék kupacban, vagy '--' ha üres (soha ne fordítsa le)",
+    "{cards}": "Egy oszlopban lévő lapok semleges címkei, vagy '--' ha üres (soha ne fordítsa le)"
+  },
+  "player_prompt": {
+    "intro": "Klondike Pasziánszt játszik. A cél az, hogy az összes lapot az alapozó oszlopokba helyezze.\n\nJátékszabályok:\n- Alapozó oszlopok (F1-F4): Építse fel az Ásztól a Királyig színenként\n- Oszlopok (T1-T7): Építse le váltakozó színekkel (piros feketén, fekete pirosan)\n- Talon: Húzzon lapokat a hulladék kupacba\n- Hulladék (W): A legfelső lap elérhető a játékhoz\n\nParancsok:\n- 'draw' - Húzzon lapokat a talonból a hulladék kupacba\n- 'move <forrás> <cél> [szám]' - Mozgassa a lapokat az oszlopok között\n  Példák: 'move W T1', 'move T1 F2', 'move T3 T5 2'. A szám lehet 'all' is, amely megpróbálja áthelyezni az összes felfordított lapot.\n- 'forfeit' - Fejezze be a játékot azonnal és rögzítse az aktuális pontszámot\n- Oszlopnevek: W (hulladék), F1-F4 (alapozók), T1-T7 (oszlopok)\n\nTöbb műveletet is végrehajthat egy lépésben vesszővel elválasztva:\n  Példa: 'draw, move W T1, move T2 F1'\n\nCsak a Királyok helyezhetők el üres oszlopokra.\nA műveletek a megadott sorrendben hajtódnak végre - ha egy sikertelen, a fennmaradó műveletek kihagyásra kerülnek.\nHasználja a 'forfeit' parancsot, ha úgy gondolja, hogy a játék lehetetlen nyerni."
+  },
+  "format_error": {
+    "no_brackets": "Érvénytelen művelet formátum. A műveletnek szögletes zárójelekben kell lennie.",
+    "no_closing_bracket": "Érvénytelen művelet formátum. Hiányzó záró szögletes zárójel ']'",
+    "empty_command": "Üres parancs. Írja be a 'draw' vagy 'move <forrás> <cél> [szám]' parancsot",
+    "empty_action": "Üres művelet",
+    "move_needs_args": "A move parancsnak forrás és cél argumentumokra van szüksége. Használat: 'move <forrás> <cél> [szám]'",
+    "count_positive": "A számnak pozitívnak vagy 'all'-nak kell lennie",
+    "count_invalid": "Érvénytelen szám. Használjon egy számot vagy 'all'-t",
+    "unknown_command": "Ismeretlen parancs '{cmd}'. Használja a 'draw', 'move <forrás> <cél> [szám]', vagy 'forfeit' parancsot",
+    "wrapped": "Művelet {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Művelet {n}: {msg}",
+    "before_failure": "Végrehajtott {n} művelet(ek) a hiba előtt.",
+    "failed": "Művelet {n} sikertelen: {msg}"
+  },
+  "move_result": {
+    "drew": "Lapokat húzott a talonból a hulladék kupacba.",
+    "cannot_draw": "Nem lehet lapokat húzni. A talon és a hulladék kupac is üres.",
+    "invalid_pile": "Érvénytelen oszlopnév. Használja a W, F1-F4, vagy T1-T7 oszlopneveket",
+    "foundation_one_card": "Csak egy lapot lehet áthelyezni az alapozó oszlopba",
+    "waste_to_foundation_ok": "Lapot helyezett át a hulladék kupacból az alapozó oszlop F{dst}-be",
+    "waste_to_foundation_bad": "Nem lehet lapot áthelyezni a hulladék kupacból abba az alapozó oszlopba",
+    "tableau_to_foundation_ok": "Lapot helyezett át az oszlopból T{src} az alapozó oszlop F{dst}-be",
+    "tableau_to_foundation_bad": "Nem lehet lapot áthelyezni az oszlopból abba az alapozó oszlopba",
+    "foundation_to_foundation": "Nem lehet lapot áthelyezni az alapozó oszlopok között",
+    "waste_to_tableau_one_card": "Csak egy lapot lehet áthelyezni a hulladék kupacból az oszlopba",
+    "waste_to_tableau_ok": "Lapot helyezett át a hulladék kupacból az oszlop T{dst}-be",
+    "waste_to_tableau_bad": "Nem lehet lapot elhelyezni a hulladék kupacból arra az oszlopra",
+    "no_face_up": "Nincs felfordított lap, amelyet áthelyezhet",
+    "tableau_to_tableau_ok": "Áthelyezett {count} lapot az oszlopból T{src} az oszlop T{dst}-be",
+    "tableau_to_tableau_bad": "Nem lehet {count} lapot áthelyezni az oszlopból T{src} az oszlop T{dst}-be",
+    "foundation_to_tableau_one_card": "Csak egy lapot lehet áthelyezni az alapozó oszlopból az oszlopba",
+    "foundation_empty": "Az alapozó oszlop F{src} üres",
+    "foundation_to_tableau_ok": "Lapot helyezett át az alapozó oszlopból F{src} az oszlop T{dst}-be",
+    "foundation_to_tableau_bad": "Nem lehet lapot elhelyezni az alapozó oszlopból arra az oszlopra T{dst}",
+    "to_waste_or_stock": "Nem lehet lapot áthelyezni a hulladék kupacba vagy a talonba"
+  },
+  "outcome": {
+    "forfeit": "Játék feladva. Végső pontszám: {score} lap az alapozó oszlopokban.",
+    "won": "Gratulálunk! Megnyerte a Klondike Pasziánszt!",
+    "turn_limit": "Játék vége! Elérte a maximális {max_turns} lépésszámot. Pontszám: {score} lap az alapozó oszlopokban."
+  },
+  "board": {
+    "title": "=== KLONDIKE PASZIÁNSZ ===",
+    "turn": "Lépés: {turn}/{max_turns}",
+    "stock": "Talon: {stock} lap",
+    "waste": "Hulladék (W): {waste}",
+    "foundations_header": "Alapozó oszlopok:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Oszlopok:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

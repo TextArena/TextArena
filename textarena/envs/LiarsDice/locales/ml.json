@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "നിങ്ങൾ കളിക്കാരനാണ് {player_id} {num_players} കളിക്കാരന്റെ ഡൈസ് ഗെയിമിൽ. നിയമങ്ങൾ: - നിങ്ങളുടെ ഊഴത്തിൽ, നിങ്ങൾക്ക് ഒന്നുകിൽഃ 1) നിലവിലെ ബിഡിനേക്കാൾ ഉയർന്ന അളവിലോ ഉയർന്ന മുഖത്തോ (അല്ലെങ്കിൽ രണ്ടും) ഉള്ള ഒരു പുതിയ ബിഡ് ഉണ്ടാക്കുക; അതായത് '[Bid: 3, 4]', 2) '[Call]' എന്ന് ടൈപ്പുചെയ്ത് അവസാന ബിഡ് വിളിക്കുക. നിങ്ങൾ വിളിക്കുകയാണെങ്കിൽഃ - എല്ലാ ഡൈസുകളിലെയും മുഖവിലയുടെ യഥാർത്ഥ എണ്ണം ബിഡിനേക്കാൾ കുറവാണെങ്കിൽ, അവസാന ബിഡർക്ക് ഒരു ഡൈ നഷ്ടപ്പെടും. - അല്ലാത്തപക്ഷം, വിളിക്കുന്നയാൾക്ക് ഒരു ഡൈ നഷ്ടപ്പെടും. 0 ഡൈസിലെത്തുന്ന കളിക്കാരനെ പുറത്താക്കുന്നു. അവസാനത്തെ ശേഷിക്കുന്ന കളിക്കാരൻ വിജയിക്കുന്നു."
+  },
+  "board": {
+    "per_player": "കളിക്കാരൻ {p}: {d}",
+    "new_round": "പുതിയ റൌണ്ട് - ബാക്കിയുള്ള ഡൈസ്: {dice_summary} നിങ്ങളുടെ നിലവിലെ ഡൈസ്: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "{current_player_id} കളിക്കാരൻ വിളിക്കുന്നു! യഥാർത്ഥ മുഖം എണ്ണം {face_value} {count} ആണ്, അത് {quantity} ൽ കുറവാണ്. കളിക്കാരൻ {loser_id} (അവസാന ലേലം വിളിക്കുന്നയാൾ) ഒരു ഡൈസ് നഷ്ടപ്പെടുന്നു.",
+    "caller_loses": "കളിക്കാരൻ {current_player_id} വിളിക്കുന്നു! യഥാർത്ഥ മുഖം എണ്ണം {face_value} ആണ് {count}, അത് >= {quantity} ആണ്. കളിക്കാരൻ {loser_id} (കോളർ) ഒരു ഡൈ നഷ്ടപ്പെടുന്നു."
+  },
+  "action": {
+    "bid_announce": "കളിക്കാരൻ {player_id} {quantity} മുഖം {face_value} ബെഡ് ചെയ്യുന്നു."
+  },
+  "invalid_move": {
+    "call_no_bid": "മുൻകൂർ വിലപേശൽ ഇല്ലാതെ വിളിച്ചതാണ്.",
+    "invalid_bid": "അസാധുവായ വിലപേശൽ: {reason}",
+    "not_recognized": "നടപടി സാധുവായ ഒരു \"[Bid: X, Y]\" അല്ലെങ്കിൽ \"[Call]\" ആയി അംഗീകരിക്കപ്പെട്ടില്ല. സമർപ്പിച്ച നടപടി: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "പുതിയ അളവ് {new_quantity} നിലവിലുള്ളതിനെക്കാൾ കുറവാണ് {current_quantity}.",
+    "face_lower": "പുതിയ മൂല്യം {new_face_value} നിലവിലെ {current_face_value} നേക്കാൾ കുറവാണ്.",
+    "identical": "നിലവിലെ വിലയ്ക്ക് സമാനമാണ് വില.",
+    "face_range": "മൂല്യം 1 നും 6 നും ഇടയിലായിരിക്കണം."
+  },
+  "message": {
+    "eliminated_invalid": "കളിക്കാരൻ {player_id} അസാധുവായ നീക്കത്തിലൂടെ പുറത്തായി."
+  },
+  "outcome": {
+    "win": "കളിക്കാരൻ {winner} വിജയിക്കുന്നു! അവസാന റാങ്കിംഗ്: {final_ranking}"
+  }
+}

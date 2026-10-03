@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe-lokaliseringsfil. OVERSETT IKKE nøkler (venstre side). Oversett bare verdier (høyre side).",
+  "_slots": {
+    "{player_id}": "Spillerens nummer, f.eks. 0, 1 eller 2",
+    "{symbol}": "Spillerens merke, ett av A, B eller C",
+    "{cell}": "Et brett-celle-nummer",
+    "{max_cell}": "Det høyeste gyldige celle-nummeret (brettstørrelse^2 - 1)",
+    "{row}": "Brettets rad-indeks for det plasserte merket",
+    "{col}": "Brettets kolonne-indeks for det plasserte merket",
+    "{board}": "Det tegnede ASCII-brettet (oversett ikke)",
+    "{moves}": "Listen over tilgjengelige trekk-tokens som '[4]' (oversett ikke)"
+  },
+  "player_prompt": {
+    "intro": "Du er Spiller {player_id} i Tic Tac Toe for tre spillere.\nDitt symbol er '{symbol}'.\nDu tar tur om å plassere ditt symbol på et 5x5-brett for å danne en linje på fire.\nLinjer kan være horisontale, vertikale eller diagonale.\nSend inn ditt trekk med formatet '[4]' for å merke celle 4."
+  },
+  "board": {
+    "current_board": "Nåværende brett:\n\n{board}\n\nTilgjengelige trekk: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ugyldig trekk-format. Bruk '[celle]' hvor celle er 0-{max_cell}.",
+    "out_of_range": "Ugyldig celle-nummer: {cell}. Må være mellom 0 og {max_cell}.",
+    "already_occupied": "Celle {cell} er allerede opptatt.",
+    "made_invalid": "Spiller {player_id} gjorde et ugyldig trekk"
+  },
+  "game_action": {
+    "placed": "Spiller {player_id} plasserer sitt symbol ({symbol}) i felt ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Spiller {player_id} ({symbol}) vinner!",
+    "draw": "Spillet er uavgjort!"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "player_prompt": {
+    "intro": "ඔබ ඉන්දියානු පෝකර් ක් රීඩාවේ {player_id} ක් රීඩකයාය. - 52 කාඩ් තොගයක්; ඔබට පෙනෙන්නේ ප් රතිවාදියාගේ කාඩ්පත පමණි. - ඇන්ටේ {ante} චිප්ස් සෑම වටයකම, {max_rounds} වටය 〔s) මුළු. - වලංගු චලනයන්: '[check]' │ '[bet X]' │ '[call]' │ '[raise X] │ '[fold] (X යනු ධනාත්මක පූර්ණ සංඛ් යාවක් <= ඔබේ චිප්ස් ගණන.) - ඉහළම සැඟවුණු කාඩ්පත පෙන්වීමේදී පොට් එක දිනා ගනී. │"
+  },
+  "round": {
+    "announce": "### වටය {current_round}/{max_rounds} ඔබේ ප් රතිවාදියාගේ කාඩ්පත: {card}"
+  },
+  "invalid_move": {
+    "ambiguous": "හරියටම එක අකුරක් පමණක් ලබා දෙන්න, උදාහරණයක් ලෙස \"[check]\", \"[bet 2]\", \"[call]\", \"[raise 3]\", හෝ \"[fold]\".",
+    "cannot_check": "බෑ [check] - ඔයා ඔට්ටුවකට මුහුණ දෙනවා.",
+    "amount_min": "ඔබ තැන් තැබිය යුත්තේ / ඉහළ නැංවිය යුත්තේ 1 හෝ ඊට වැඩි මුදලකි.",
+    "cannot_bet": "[bet] කළ නොහැක - [call] / [raise] / [fold] කළ යුතුය.",
+    "nothing_to_call": "කෝල් කරන්න දෙයක් නෑ, ඔයා [check] කරන්න.",
+    "no_bet_to_raise": "[bet X] භාවිතා කරන්න විවෘත කිරීමට; ඔට්ටු වැඩි කිරීමට කිසිදු ඔට්ටුවක් නොමැත.",
+    "insufficient": "ඒ වගේ ක් රියාවකට ප් රමාණවත් චිප්ස් නෑ."
+  },
+  "game_action": {
+    "action": "Player {player_id} -> [{token}]"
+  },
+  "board": {
+    "actions_no_bet": "\"[check]\", \"[bet X]\"",
+    "actions_facing_bet": "'[call]' (වියදම {to_call}), '[raise X]', '[fold]'",
+    "possible_actions": "ඔබේ විය හැකි ක් රියාමාර්ග: {legal}"
+  },
+  "message": {
+    "round_result": "{reason} පොට් {pot} → ක් රීඩකයා {winner}. (බැංකු ගිණුම් P0:{p0}, P1:{p1})",
+    "folded": "ක් රීඩකයා {player_id} පැනලා.",
+    "showdown_win": "{card_win} පහර {card_lose}.",
+    "showdown_tie": "ප් රදර්ශන තීරුව: දෙකම {card}. පොට් බෙදීම  සෑම කෙනෙකුම {split} ලබා ගනී."
+  },
+  "outcome": {
+    "p0_wins": "ක් රීඩකයා 0 දිනයි ({bank0} > {bank1})",
+    "p1_wins": "1 වෙනි ක් රීඩකයා දිනයි ({bank1} > {bank0})",
+    "draw": "හැම වටයකින්ම සමාන චිප්ස්."
+  }
+}

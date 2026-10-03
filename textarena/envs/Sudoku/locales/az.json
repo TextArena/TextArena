@@ -1,0 +1,19 @@
+{
+  "player_prompt": {
+    "intro": "Siz Oyunçu {player_id}-siniz. Siz Sudoku oynuyursunuz.\nBurada Sudoku şəbəkəsinin cari vəziyyəti var. Hər sətir 1-dən 9-a qədər nömrələnir və hər sütun da 1-dən 9-a qədər nömrələnir.\nBoş hücrələr '.' ilə təmsil olunur və öncədən doldurulmuş hücrələr 1-dən 9-a qədər rəqəmləri ehtiva edir.\n\nCari Sudoku Şəbəkəsi:\nHədəfiniz 9x9 şəbəkədəki boş hücrələri 1-dən 9-a qədər rəqəmlərlə doldurmaqdır, belə ki:\n1. Hər sətir 1-dən 9-a qədər bütün rəqəmləri təkrarsız ehtiva edir.\n2. Hər sütun 1-dən 9-a qədər bütün rəqəmləri təkrarsız ehtiva edir.\n3. Doqquz 3x3 alt şəbəkədən hər biri 1-dən 9-a qədər bütün rəqəmləri təkrarsız ehtiva edir.\n\nQaydalar və Təlimatlar:\n1. **İlkin rəqəmləri** şəbəkədəki ilkin rəqəmləri yenidən yazmayın.\n2. **Yalnız boş** hücrələri '.' ilə təmsil olunmuş hücrələri doldurun.\n3. İstədiyiniz şəkildə cavab verə bilərsiniz, lakin cavabınızın '[sətir sütun nömrə]' formatını ehtiva etdiyinə əmin olun.\n4. **Əmin olun** ki, hərəkətiniz Sudoku qaydalarını pozmur. Qeyri-qanuni hərəkətlər cəzalara səbəb olacaq.\nNümunələr:\n- **Qanuni Hərəkət**:\n  - Şəbəkə Parçası Hərəkətdən Əvvəl:\n  \n  - Hərəkət: `[5 3 7]`\n  - İzahat: 7-ni 5-ci sətirdə, 3-cü sütunda yerləşdirmək Sudoku qaydalarını pozmur.\n\n- **Qeyri-qanuni Hərəkət** (Öncədən doldurulmuş hücrəni yenidən yazmaq):\n  - Şəbəkə Parçası Hərəkətdən Əvvəl:\n  \n  - Hərəkət: `[1 1 9]`\n  - İzahat: Hücrə (1,1) artıq 5 ilə doldurulub. Onu yenidən yazmaq olmaz.\n\n- **Qeyri-qanuni Hərəkət** (Sudoku qaydalarını pozmaq):\n  - Şəbəkə Parçası Hərəkətdən Əvvəl:\n  \n  - Hərəkət: `[1 3 5]`\n  - İzahat: 5-i 1-ci sətirdə, 3-cü sütunda yerləşdirmək qaydanı pozur, çünki 5 artıq 1-ci sətirdə mövcuddur.\n\nHərəkətlərinizin və düşüncələrinizin tarixçəsi daha çox raund oynadığınızda əlavə olunacaq. Hərəkətlərinizin tarixçəsini qərar qəbul etmənizi yaxşılaşdırmaq üçün sınadığınız hərəkətlərdən qaçınmaq üçün istifadə edin. Uğurlar!\n\n"
+  },
+  "board": {
+    "game_board": "Oyun Taxtası:\n{board}",
+    "board_state": "Taxta vəziyyəti: \n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Qeyri-qanuni hərəkət formatı. Oyunçu {player_id} 'sətir sütun nömrə' ilə qanuni cavab vermədi.",
+    "out_of_bounds": "Qeyri-qanuni hərəkət. Oyunçu {player_id} {num}-ni ({row}, {col})-də yerləşdirməyə çalışdı, lakin bu sərhədlərdən kənarda.",
+    "overwrite": "Qeyri-qanuni hərəkət. Oyunçu {player_id} öncədən doldurulmuş hücrəni ({row}, {col}) yenidən yazmağa çalışdı.",
+    "violates_rules": "Qeyri-qanuni hərəkət. Oyunçu {player_id} {num}-ni ({row}, {col})-də yerləşdirməyə çalışdı, lakin bu Sudoku qaydalarını pozur."
+  },
+  "outcome": {
+    "win": "Təbrik edirik! Oyunçu {player_id} Sudoku tapmacasını tamamladı.",
+    "turn_limit": "Gediş limiti çatdı. Siz boş hücrələrin {percent}% -ni düzgün doldurmusunuz."
+  }
+}

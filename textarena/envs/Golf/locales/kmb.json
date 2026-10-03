@@ -1,0 +1,79 @@
+{
+  "_comment": "Golf (card game) locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[draw]', '[take]', '[swap X Y]', '[discard]', '[knock]', '[peek X Y]'), the card labels (A, 2-10, J, Q, K), the suit symbols, the letters X/Y used as row/column placeholders in tokens, or numeric scores/positions. Keep the ASCII grid layout (spacing, column numbers, '?', 'Col', 'Row' alignment) intact so the board stays readable.",
+  "_slots": {
+    "{player_id}": "A player number, e.g. 0 or 1",
+    "{pid}": "A player number, e.g. 0 or 1",
+    "{winner}": "The player number with the lowest score",
+    "{score}": "A numeric point total",
+    "{card}": "A card label such as A♠, 10♥, K♦ or Q♣",
+    "{new}": "The card label that was placed into the grid",
+    "{old}": "The card label that was removed from the grid",
+    "{row}": "A row number",
+    "{col}": "A column number",
+    "{max_row}": "The largest valid row number",
+    "{max_col}": "The largest valid column number",
+    "{reason}": "A pre-rendered phrase describing why the final round started",
+    "{n}": "A row number shown at the start of a grid row",
+    "{cards}": "The pre-rendered, layout-sensitive cells of one grid row",
+    "{hand}": "The pre-rendered player grid block",
+    "{discard}": "The card label on top of the discard pile, or the word for 'none'",
+    "{options}": "The pre-rendered line listing available actions",
+    "{scores}": "The pre-rendered per-player list of final scores"
+  },
+  "player_prompt": {
+    "intro": "Wa kujoga Golf (Kadi ya Jogo) - Jogadori {player_id}.\nLengo: Kupata alama ya chini kabisa katika duru hii moja. Ikiwa safu wana thamani sawa, wanaongezwa kama 0.\nThamani za Kadi: A=1, 2-10=thamani ya uso, J/Q=10, K=0\n\nVitendo (tumia mabano kamili):\n- '[draw]' - Chora kutoka kadeti\n- '[take]' - Twala kutoka kadi zilizokulukwa\n- '[swap X Y]' - Badilisha kadi iliyochorwa na nafasi X (safu) Y (safu wima)\n- '[discard]' - Bulia kadi iliyochorwa\n"
+  },
+  "board": {
+    "drew": "O wewe usaka: {card}\nSasa wewe fwaya [swap X Y] au [discard] yake.",
+    "took": "Waboka: {card} ku kipande kya kusola\nKusola [swap X Y] na kipande ki (kisumbi kusola).",
+    "peeked": "Wa kazala ku kima kiakulu (ki{row},ki{col}): {card}",
+    "turn_view": "Kadi yako:\n{hand}\nSitaha ya kufuta: {discard}\n{options}",
+    "none": "Kana-ku kima kia iibha."
+  },
+  "options": {
+    "final_turns": "Vuka za mwisho! O vuka kwami: [draw], [take], [peek X Y]",
+    "draw": "O ima i u tena o kubhanga: [draw], [take]",
+    "must_swap": "Eie ua tokala: [swap X Y] (ku katula o ji kalatá ku kialu kia te kalu)",
+    "swap_or_discard": "Eie ua tokala: [swap X Y] mba [discard]"
+  },
+  "hand": {
+    "no_cards": "Kana kuta ji kalatá.",
+    "header": "  Col:   1    2    3",
+    "row": "Row {n}: {cards}"
+  },
+  "action_desc": {
+    "swapped": "Usaki {pid} usaki {new} na {old} kwenye nafasi ({row},{col})",
+    "discarded": "Usaki {pid} atupa {card}"
+  },
+  "message": {
+    "deck_empty": "O kididi kia kubhânga ki kiala-ku dingi!",
+    "knocked": "Jogadori {pid} kazala kubata! Kila jogador kiakulu kinafwako luzingu lumbakala.",
+    "final_round": "Jogadori {pid} {reason}! Kila jogador kiakukwa kimo vuka."
+  },
+  "reason": {
+    "all_revealed": "ana kadi zote zilizofichuliwa"
+  },
+  "invalid": {
+    "wrong_action": "Tumia hatua moja iliyo na mabano: [draw], [take], [swap X Y], [discard], [knock], au [peek X Y]",
+    "discard_empty": "Kipande kya kusola ki mwene kalembe!",
+    "must_draw_first": "Kewa kufwete kwanza [draw], [take], [knock], kana [peek X Y]",
+    "cannot_discard_taken": "Eie ku tena kueha ngó o kalatá, ua tokala u ka vutuila.",
+    "have_drawn_card": "Wewe una kadi iliyochorwa. Wewe fwaya [swap X Y] au [discard] yake.",
+    "need_drawn_swap": "Phala ku tambula o kamukanda kaka, eie ua tokala u kala ni mukanda mu dimi diê.",
+    "need_drawn_discard": "Phala ku jimba o iluezu, eie ua tokala u kala ni \"uhete\".",
+    "out_of_bounds": "Nafasi nje ya mipaka. Tumia safu 1-{max_row}, safu wima 1-{max_col}",
+    "knock_with_card": "Kewa kazala kubata neno kijogo kiakulwako. Kima luzingu lwako kwanza.",
+    "already_knocked": "Saí muthu ua nganhala kiá o ita íii.",
+    "already_revealed": "O kiteka kiki, a ki tungununa kiá!"
+  },
+  "summary": {
+    "full": "Mchezo Umekwisha! Mukala {winner} anashinda na alama ya {score} pointi!\n\nAlama za Mwisho:\n{scores}",
+    "line": "Mukala {pid}: {score} pointi\n"
+  },
+  "board_str": {
+    "title": "=== Jogo ya GOLF ===",
+    "discard": "Kujimuna o ima: {card}",
+    "knocked": "O muadikime {pid} u xika o mbangala!",
+    "player_header": "Mukala {pid} (Alama: {score}):"
+  }
+}

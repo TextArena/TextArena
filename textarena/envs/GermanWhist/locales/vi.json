@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Trò chơi bắt đầu. Mào: {trump_suit} (lá mào: {trump_str}).",
+    "no_trump_card": "không có"
+  },
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong Whist Đức.\n{phase_info}\nBạn đang giữ {hand_size} lá bài.\nChơi một lá bài bằng '[play N]', trong đó N là vị trí của lá bài trong tay bạn (ví dụ '[play 3]').",
+    "phase_learning": "GIAI ĐOẠN HỌC TẬP: người chiến thắng mỗi lượt chơi lấy lá bài úp và người thua rút lá bài tiếp theo từ bộ bài. Các lượt chơi thắng trong giai đoạn này không tính vào chiến thắng cuối cùng.",
+    "phase_playing": "GIAI ĐOẠN CHƠI: bộ bài đã cạn. Mọi lượt chơi từ giờ trở đi đều tính vào chiến thắng."
+  },
+  "next_card": {
+    "playing_phase": "Không có lá bài nào được đề nghị - giai đoạn chơi đã bắt đầu.",
+    "deck_empty": "Bộ bài đã cạn - không có lá bài nào được đề nghị.",
+    "available": "Lá bài được đề nghị: {card}",
+    "available_trump": "Lá bài được đề nghị: {card} (MÀO)"
+  },
+  "invalid_move": {
+    "wrong_format": "Định dạng nước đi không hợp lệ. Sử dụng '[play N]' để chơi lá bài thứ N trong tay bạn.",
+    "bad_position": "Vị trí lá bài đó không tồn tại. Bạn đang giữ {hand_size} lá bài.",
+    "must_follow_suit": "Bạn phải theo chất và chơi một lá bài {lead_suit}.",
+    "invalid_play": "Lá bài đó không thể chơi."
+  },
+  "game_action": {
+    "played": "Người chơi {player_id} đã chơi {card}."
+  },
+  "trick": {
+    "won": "Người chơi {winner_id} đã thắng lượt chơi với {card}.",
+    "won_learning": "Người chơi {winner_id} đã thắng lượt chơi với {card} và lấy lá bài úp."
+  },
+  "phase": {
+    "learning_complete": "Bộ bài đã cạn. Giai đoạn học tập đã kết thúc - mọi lượt chơi còn lại đều tính vào chiến thắng."
+  },
+  "draw": {
+    "winner_received": "Bạn đã thắng lượt chơi và nhận được {card}.",
+    "loser_received": "Bạn đã thua lượt chơi và rút {card} từ bộ bài.",
+    "winner_preview": "Lá bài tiếp theo được đề nghị là {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Các lượt chơi đã thắng - Người chơi 0: {tricks0}, Người chơi 1: {tricks1}",
+    "scores_playing": "Các lượt chơi tính điểm - Người chơi 0: {tricks0}, Người chơi 1: {tricks1}",
+    "phase": "Giai đoạn: {phase}",
+    "phase_learning": "Giai đoạn: {phase} ({remaining_cards} lá bài còn lại trong bộ bài)"
+  },
+  "hand": {
+    "no_cards": "Không có lá bài",
+    "no_cards_in_hand": "Không có lá bài trong tay",
+    "header": "Tay bài của bạn:",
+    "trump_indicator": " (MÀO)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Chưa có lá bài nào được chơi trong lượt chơi này.",
+    "header": "Lượt chơi hiện tại:",
+    "trump_indicator": " (MÀO)",
+    "card_line": "{observation}\n  Người chơi {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Trò chơi chưa bắt đầu",
+    "header": "=== TRÒ CHƠI WHIST ĐỨC ===",
+    "phase": "{observation}\nGiai đoạn: {phase}",
+    "trump_suit": "{observation}\nMào: {trump_suit}",
+    "trump_card": "{observation}\nLá mào: {card}",
+    "cards_left": "{observation}\nSố lá bài còn lại trong bộ bài: {count}",
+    "next_card": "{observation}\nLá bài tiếp theo cho người chiến thắng: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nLượt chơi hiện tại:",
+    "trump_indicator": " (MÀO)",
+    "trick_line": "{observation}\n  Người chơi {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nNgười chơi {player_id}: {scoring} lượt chơi tính điểm ({tricks} tổng cộng), {hand_size} lá bài trong tay"
+  },
+  "outcome": {
+    "summary": "Giai đoạn học tập - Người chơi 0: {l0}, Người chơi 1: {l1}. Giai đoạn chơi - Người chơi 0: {p0}, Người chơi 1: {p1}. Người chơi {winner_id} thắng với {winner_tricks} lượt chơi tính điểm!"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id}. Jucați Jocul Memoriei.\nScopul dvs. este să potriviți mai multe perechi de cărți pe tablă decât adversarul dvs.\nLa rândul dvs., selectați două cărți pentru a le întoarce introducând numerele de rând și coloană ale primei și celei de-a doua cărți, respectiv, ca '[0 1 1 0]', unde prima carte este în rândul 0 și coloana 1, iar a doua carte este în rândul 1 și coloana 0.\nDacă cele două cărți se potrivesc, obțineți un punct și cărțile rămân cu fața în sus. Dacă nu se potrivesc, cărțile sunt întoarse cu fața în jos, de exemplu '.'.\nJocul se termină când toate perechile au fost potrivite."
+  },
+  "board": {
+    "current_board": "Tablă curentă:\n{board}",
+    "current_game_board": "Tablă de joc curentă:\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de mutare invalid. Jucătorul {player_id} nu a răspuns cu o direcție validă în paranteze pătrate.",
+    "out_of_bounds": "Mutare invalidă. Jucătorul {player_id} a selectat o poziție în afara limitelor.",
+    "same_card_twice": "Mutare invalidă. Jucătorul {player_id} a selectat aceeași carte de două ori.",
+    "already_matched": "Mutare invalidă. Jucătorul {player_id} a selectat una sau ambele cărți care au fost deja potrivite."
+  },
+  "game_message": {
+    "cards_match": "Cărțile selectate de Jucătorul {player_id} la pozițiile [{r1} {c1}] și [{r2} {c2}] se potrivesc!",
+    "cards_no_match": "Cărțile selectate de Jucătorul {player_id} nu se potrivesc. Cărțile la pozițiile [{r1} {c1}] și [{r2} {c2}] sunt {pos1} și {pos2} respectiv."
+  },
+  "outcome": {
+    "draw": "Ambii jucători au potrivit același număr de perechi de cărți.",
+    "win": "Jucătorul {winner_id} a câștigat!",
+    "turn_limit": "Limita de runde a fost atinsă. Jocul s-a terminat. Jucătorul 0 a obținut {score_0} puncte, Jucătorul 1 a obținut {score_1} puncte.",
+    "turn_limit_win": "{reason} Jucătorul {winner_id} a câștigat!"
+  }
+}

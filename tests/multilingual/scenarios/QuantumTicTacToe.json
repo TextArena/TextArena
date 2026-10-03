@@ -1,0 +1,14 @@
+{
+  "entry": "textarena.envs.QuantumTicTacToe.env:QuantumTicTacToeEnv",
+  "num_players": 2,
+  "seed": 42,
+  "scenarios": {
+    "wrong_format": ["hello"],
+    "bad_indices": ["[3,3]", "[9,0]"],
+    "already_solid": ["[0,1]", "[1,2]", "[2,0]", "[0,4]"],
+    "cycle_collapse": ["[0,1]", "[1,2]", "[2,0]"],
+    "dependent_collapse": ["[0,8]", "[0,2]", "[2,5]", "[2,3]", "[1,8]", "[1,2]", "[0,7]", "[6,8]"],
+    "win": ["[1,6]", "[1,6]", "[2,8]", "[0,2]", "[0,4]", "[0,7]", "[4,8]"],
+    "draw_last_cell": ["[0,1]", "[1,2]", "[2,5]", "[5,8]", "[7,8]", "[6,7]", "[3,6]", "[3,4]", "[0,4]"]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "player_prompt": {
+    "intro": "আপনি খেলোয়াড় {player_id} হিসাবে {colour} ({piece}) খেলছেন ওথেলো গেমে।\nআপনার লক্ষ্য হল গেমের শেষে বোর্ডে আপনার রঙের বেশি টুকরা থাকা।\nআপনার পালা, এমনভাবে একটি টুকরা রাখুন যাতে এটি আপনার প্রতিপক্ষের এক বা একাধিক টুকরাকে যেকোন দিকে (অনুভূমিক, উল্লম্ব, বা তির্যক) আপনার নতুন টুকরা এবং আপনার অন্য বিদ্যমান টুকরার মধ্যে ফ্ল্যাঙ্ক করে। সমস্ত ফ্ল্যাঙ্কড প্রতিপক্ষের টুকরা আপনার রঙে ফ্লিপ করা হবে।\nআপনার চালটি '[সারি, কলাম]' বিন্যাসে প্রদান করুন।"
+  },
+  "board": {
+    "game_board": "গেম বোর্ড:\n{board}",
+    "valid_moves": "{observation}\nবৈধ চালগুলি: {moves}",
+    "no_valid_moves_reset": "{observation}\nকোন বৈধ চাল নেই - আপনাকে স্কিপ করতে হতে পারে।",
+    "no_valid_moves_step": "{observation}\nকোন বৈধ চাল নেই – আপনাকে স্কিপ করতে হতে পারে।",
+    "scores_reset": "{observation}\nবর্তমান স্কোর - কালো: {black_count}, সাদা: {white_count}\n",
+    "scores_step": "{observation}\nস্কোর - কালো: {black_count}, সাদা: {white_count}\n"
+  },
+  "invalid_move": {
+    "wrong_format": "চালটি অবশ্যই [সারি, কলাম] আকারে হতে হবে।",
+    "illegal": "অবৈধ চাল। বৈধ চালগুলি: {valid}"
+  },
+  "game_action": {
+    "skipped": "খেলোয়াড় {pid} তাদের পালা স্কিপ করতে হয়েছে",
+    "played": "খেলোয়াড় {pid} ({piece}) [{r}, {c}] খেলেছেন {flipped} টুকরা(গুলি) ফ্লিপ করে"
+  },
+  "game_message": {
+    "must_skip": "খেলোয়াড় {pid} ({piece}) এর কোন বৈধ চাল নেই এবং স্কিপ করতে হবে।"
+  },
+  "outcome": {
+    "black_wins": "কালো জয়ী {black_count}-{white_count}।",
+    "white_wins": "সাদা জয়ী {white_count}-{black_count}।",
+    "draw": "ড্র {black_count}-{white_count}।"
+  }
+}

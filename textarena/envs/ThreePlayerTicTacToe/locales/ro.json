@@ -1,0 +1,32 @@
+{
+  "_comment": "Fișier de localizare pentru ThreePlayerTicTacToe. NU traduceți cheile (partea stângă). Traduceți doar valorile (partea dreaptă).",
+  "_slots": {
+    "{player_id}": "Numărul jucătorului, de exemplu 0, 1 sau 2",
+    "{symbol}": "Marca jucătorului, una dintre A, B sau C",
+    "{cell}": "Numărul unei celule de pe tablă",
+    "{max_cell}": "Cel mai mare număr de celulă validă (mărimea_tablă^2 - 1)",
+    "{row}": "Indicele rândului de pe tablă al marcajului plasat",
+    "{col}": "Indicele coloanei de pe tablă al marcajului plasat",
+    "{board}": "Tablă ASCII redată (nu traduceți)",
+    "{moves}": "Lista de mutări disponibile, separate prin virgulă, cum ar fi '[4]' (nu traduceți)"
+  },
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} în Tic Tac Toe cu trei jucători.\nSimbolul dvs. este '{symbol}'.\nVă luați rândul plasând simbolul dvs. pe o tablă 5x5 pentru a forma o linie de patru.\nLiniile pot fi orizontale, verticale sau diagonale.\nTrimiteți mutarea dvs. folosind formatul '[4]' pentru a marca celula 4."
+  },
+  "board": {
+    "current_board": "Tablă curentă:\n\n{board}\n\nMutări disponibile: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format de mutare nevalid. Folosiți '[celulă]' unde celula este 0-{max_cell}.",
+    "out_of_range": "Număr de celulă nevalid: {cell}. Trebuie să fie între 0 și {max_cell}.",
+    "already_occupied": "Celula {cell} este deja ocupată.",
+    "made_invalid": "Jucătorul {player_id} a făcut o mutare nevalidă"
+  },
+  "game_action": {
+    "placed": "Jucătorul {player_id} plasează simbolul său ({symbol}) în câmpul ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Jucătorul {player_id} ({symbol}) câștigă!",
+    "draw": "Jocul este o remiză!"
+  }
+}

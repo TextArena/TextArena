@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "Ati tapha Klondike Solitaire. Galma kee akka kaardii hundumaa gara kuusaa bu'uuraa jijjiiruudha.\n\nSeerota Tapha:\n- Kuusaa bu'uuraa (F1-F4): Haga Kaatiinii haga Kiingii akka malkaa walitti qabu\n- Kuusaa baankoo (T1-T7): Haga gadii akka malkaa walitti qabu, halluu gara gurraacha, gurraacha gara halluu\n- Stock: Kaardii gara kuusaa bittaa'aatti argamu\n- Bittaa'aan (W): Kaardii ol'aanaa akka taphattuu\n\nAjaja:\n- 'draw' - Kaardii gara kuusaa bittaa'aatti argamu\n- 'move <source> <destination> [count]' - Kaardii gara kuusaa walitti jijjiiru\n  Fakkeenya: 'move W T1', 'move T1 F2', 'move T3 T5 2'. count 'all' yoo ta'e, kaardii hundumaa ol'aanaa akka taphattuu yaala.\n- 'forfeit' - Tapha darbee akka isin galma keetiif qabu\n- Maqaa kuusaa: W (bittaa'aan), F1-F4 (bu'uuraa), T1-T7 (baankoo)\n\nAti tapha hedduu tokkotti raawwachuu dandeessa tapha garagaraa commaan addaan baasuun:\n  Fakkeenya: 'draw, move W T1, move T2 F1'\n\nKaatiinii qofa akka kuusaa baankoo dhaabaa irratti kaa'uu danda'a.\nTapha raawwatu garaagarummaa irratti - tokko yoo dadhabaa, tapha hafan hundumaa akka hin raawwatamne.\n'forfeit' yoo fayyadamte, tapha akka hin mo'amu yaada."
+  },
+  "format_error": {
+    "no_brackets": "Foormatii sochii hin malle. Sochiin kun qubee jalatti ta'uu qaba.",
+    "no_closing_bracket": "Foormatii gocha hin ta'in. Kutaa xumuraa dhabuun ']'",
+    "empty_command": "Ajajaa duwwaa. 'draw' ykn 'move <source><destination> [count]' barreessi",
+    "empty_action": "Tarkaanfii duwwaa",
+    "move_needs_args": "Ajajni socho'u madda fi bakka dhaabbatu ni barbaada. Fayyadama: 'move <source> <destination> [count]'",
+    "count_positive": "Lakkoofsi lakkoofsa kanaa 'positive' ykn \"all\" ta'uu qaba.",
+    "count_invalid": "Lakkoofsa hin malle fayyadami ykn 'all' fayyadami.",
+    "unknown_command": "Komanda tunnoo '{cmd}' hin beeku. Gorsi 'draw', 'move <source> <destination> [count]', ykn 'forfeit' gargaara",
+    "wrapped": "Action {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Action {n}: {msg}",
+    "before_failure": "Hojiiwwan raawwatan {n} (s) utuu hin milkaa'in dura.",
+    "failed": "Action {n} failiire: {msg}"
+  },
+  "move_result": {
+    "drew": "Kaardii ka'ee (kaart) irraa gara kuufamaatti.",
+    "cannot_draw": "Qarshiifi mi'i gatii hin qabne hundi ni dhume.",
+    "invalid_pile": "Maqaa pilaanii hin ta'u. W, F1-F4 ykn T1-T7 fayyadami",
+    "foundation_one_card": "Kaardii 1 qofa gara bu'uuraatti sochoosuu ni danda'a.",
+    "waste_to_foundation_ok": "Kaardii irraa gara bu'uuraatti geeffame F{dst}",
+    "waste_to_foundation_bad": "Kaardii balleessaa gara tuullaa bu'uuraatti sochoosuu hin danda'u",
+    "tableau_to_foundation_ok": "Kaartii tableau T{src} irraa foundation F{dst} seene",
+    "tableau_to_foundation_bad": "Kaardii taabloor gara tuullaa bu'uuraatti sochoosuu hin danda'u",
+    "foundation_to_foundation": "Bu'uura irraa bu'uuraa deemuu hin danda'u.",
+    "waste_to_tableau_one_card": "Kaardii 1 qofa gara kaardii kaardiitti jijjiiruu ni danda'a.",
+    "waste_to_tableau_ok": "Kaardii irraa gara tarree T{dst}tti socho'e.",
+    "waste_to_tableau_bad": "Kaardii dhabamsiisaa kana tuullaa taableewweriirratti kaa'uu hin danda'u",
+    "no_face_up": "Kaardiiwwan fuula isaanii ol qaban sochoosuu hin danda'an.",
+    "tableau_to_tableau_ok": "Kaartii {count} irraa tableau T{src} seene T{dst}",
+    "tableau_to_tableau_bad": "Kaartii {count} irraa T{src} seene T{dst} keessa darbuu dhiisuu hin danda'u",
+    "foundation_to_tableau_one_card": "Kaardii 1 qofa bu'ura irraa gara taboretti sochoosuu ni danda'a.",
+    "foundation_empty": "Bu'uura F{src} duwwaa dha.",
+    "foundation_to_tableau_ok": "Kaartii foundation F{src} irraa tableau T{dst} seene",
+    "foundation_to_tableau_bad": "Kaardii bu'uura taablee T{dst} irratti kaa'uu hin danda'u.",
+    "to_waste_or_stock": "Gara gatii ykn kuusaa dhaquu hin danda'u."
+  },
+  "outcome": {
+    "forfeit": "Tapha dhabamsiise. Bu'aan xumuraa: {score} kaardii bu'uuraattii keessatti argamu.",
+    "won": "Gammachuu guddaa qabda! Tapha Klondike Solitaire injifatteetta.",
+    "turn_limit": "Tamsaasa! Turniin guddaa {max_turns} keessatti aarsi. Lammiinna: {score} kaartii foundation keessatti."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== (Qophii Afaan Oromoo)",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Kaardiiwwan: {stock} kaardiiwwan",
+    "waste": "Waste (W): {waste}",
+    "foundations_header": "Bu'uuraalee:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Taablood:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

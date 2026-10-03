@@ -1,0 +1,30 @@
+{
+  "_comment": "File di localizzazione di Surround. NON tradurre le chiavi (lato sinistro). Tradurre solo i valori (lato destro). Mantieni ogni {placeholder} esattamente com'è.",
+  "_slots": {
+    "{num_players}": "Numero di giocatori nella partita",
+    "{width}": "Larghezza della tavola in celle",
+    "{height}": "Altezza della tavola in celle",
+    "{player_id}": "Il numero del giocatore (a partire da 0)",
+    "{board}": "La griglia ASCII renderizzata; mantieni neutrale, non tradurre mai i suoi caratteri",
+    "{reason}": "La frase di fine partita renderizzata",
+    "{groups}": "Dati di classifica neutri (un elenco di gruppi di ID giocatore, dal migliore al peggiore); non tradurre"
+  },
+  "player_prompt": {
+    "intro": "Surround a {num_players} giocatori su una griglia {width}x{height}.\nSei il giocatore {player_id}. Mosse valide: '[up]' '[down]' '[left]' '[right]' o w/s/a/d.\nObiettivo: sopravvivere a tutti gli altri. Le scie sono letali; gli impatti contro il muro uccidono; le collisioni frontali uccidono entrambi."
+  },
+  "board": {
+    "current": "Tavola attuale:\n{board}",
+    "after_moves": "Tavola dopo mosse simultanee:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Il giocatore {player_id} è morto a causa di una mossa non valida."
+  },
+  "outcome": {
+    "survived_win": "Il giocatore {player_id} è sopravvissuto; tutti gli altri sono crashati.",
+    "all_crashed": "Tutti i giocatori sono crashati simultaneamente.",
+    "outlived": "Il giocatore ha sopravvissuto a tutti gli altri.",
+    "all_dead": "Tutti i giocatori sono morti.",
+    "turn_limit": "Raggiunto il limite di turni - vince il sopravvissuto più a lungo.",
+    "ranking": "{reason} Gruppi di classifica finali (migliore→peggiore): {groups}"
+  }
+}

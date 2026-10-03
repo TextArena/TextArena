@@ -1,0 +1,74 @@
+{
+  "_comment": "Klondike Solitaire locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. NEVER translate card labels/suits (e.g. A, 10, K, ♣️, ♦️, ♥️, ♠️), the pile tokens W, F1-F4, T1-T7, the ASCII board in {board}, or the commands 'draw', 'move', 'forfeit', 'all'. The bracket syntax like 'move W T1' must stay in Latin as-is.",
+  "_slots": {
+    "{n}": "Action index within a comma-separated command, 1-based",
+    "{msg}": "A nested per-action result message (already localized)",
+    "{count}": "Number of face-up cards being moved",
+    "{src}": "Source tableau pile number, 1-based",
+    "{dst}": "Destination pile number, 1-based",
+    "{cmd}": "The unknown command the player typed (not translated)",
+    "{max_turns}": "The maximum number of turns before the game ends",
+    "{score}": "Number of cards currently in the foundation piles",
+    "{board}": "The rendered ASCII board (never translate)",
+    "{turn}": "Current turn number",
+    "{stock}": "Number of cards left in the stock",
+    "{waste}": "The top waste card label, or '--' if empty (never translate)",
+    "{cards}": "The cards in a pile as neutral labels, or '--' if empty (never translate)"
+  },
+  "player_prompt": {
+    "intro": "O tshameka Klondike Solitaire. Sepheo sa gago ke go tsamaya dikarata tsotlhe kwa mafelo a thekiso.\n\nMelao ya Tshameko:\n- Mafelo a thekiso (F1-F4): Aga gore go tle go tloga ka Ace go ya go King ka letsogo\n- Mafelo a tafole (T1-T7): Aga kwa tlase ka go fetofetoga mebala (mokgwa o mosweu mo go mokgwa o moshibidu, mokgwa o moshibidu mo go mokgwa o mosweu)\n- Tsamaiso: Tshwara dikarata go ya kwa mafelo a makgwakgwa\n- Makgwakgwa (W): Karata e e godimo e kgona go tshamekiwa\n\nDitaelo:\n- 'draw' - Tshwara dikarata go tswa kwa tsamaiso go ya kwa makgwakgwa\n- 'move <source> <destination> [count]' - Tsamaya dikarata kwa gare ga mafelo\n  Mekwalo: 'move W T1', 'move T1 F2', 'move T3 T5 2'. palo e ka nna le 'all', e e tla leka go tsamaya dikarata tsotlhe tse di bonwang.\n- 'forfeit' - Khutlisa tshameko ka bonako le go kgwega sephelo sa gago sa jaanong\n- Maina a mafelo: W (makgwakgwa), F1-F4 (mafeldo a thekiso), T1-T7 (mafeldo a tafole)\n\nO ka dira ditiro tse dintsi ka go arola ka dikoma:\n  Sekwalo: 'draw, move W T1, move T2 F1'\n\nFela dikgosi fela tse di ka bewang kwa mafelo a tafole a a sa nang.\nDitiro di dirwa ka tatelano - fa e le gore e mongwe e palelwa, ditiro tse di setseng di tlaolwa.\nTumisa 'forfeit' fa o dumela gore tshameko e si ya kgonega go wina."
+  },
+  "format_error": {
+    "no_brackets": "Sebopego sa tiro se ne se le phoso. Tiro e tshwanetse go nna mo dikopaneng tse di fa gare ga ditshipi.",
+    "no_closing_bracket": "Sebopego sa tiro se se seng molaong. Go tlhaela kholomo ya go tswala ']'",
+    "empty_command": "Taelo e se na sepe. Tsenya 'draw' kgotsa 'move <source><destination> [count]'",
+    "empty_action": "Kgato e e senang sepe",
+    "move_needs_args": "Taelo ya tsamaya e tlhoka motswedi le legae la tsamaya. Tumiso: 'move <source> <destination> [count]'",
+    "count_positive": "Palo e tshwanetse go nna e e siameng kgotsa 'all'",
+    "count_invalid": "Palo e e sa siamang. Tumia palo kgotsa 'all'",
+    "unknown_command": "Taelo e seng tlhokegilego '{cmd}'. Tsaya 'draw', 'move <source> <destination> [count]', or 'forfeit'",
+    "wrapped": "Tshetso {n}: {msg}"
+  },
+  "action_result": {
+    "success": "Tshetso {n}: {msg}",
+    "before_failure": "Go diragatswa ga tiro ya {n} pele e retelelwa.",
+    "failed": "Tshetso {n} tshwarwa: {msg}"
+  },
+  "move_result": {
+    "drew": "O ne a ntsha karata ya gagwe go tswa mo lebokosong la dithoto tse di setseng.",
+    "cannot_draw": "Ga go na sepe se re ka se ntshang, ga go na dijo tse di setseng.",
+    "invalid_pile": "Leina la mokgobo ga le a dira. Dirisa W, F1-F4, kgotsa T1-T7",
+    "foundation_one_card": "O ka kgona go sutisa karata e le 1 fela mo mothong yo o nang le motheo.",
+    "waste_to_foundation_ok": "Karata e ne ya fudusiwa go tswa mo matlakaleng a mangwe mme ya isiwa kwa motheong F{dst}",
+    "waste_to_foundation_bad": "Ga o kake wa sutisetsa karata ya matlakala kwa thothobolong eo e kgolo",
+    "tableau_to_foundation_ok": "Karte e tsamaisitswe go tswa tableau T{src} go ya foundation F{dst}",
+    "tableau_to_foundation_bad": "Ga o kgone go sutisetsa karata ya tafole kwa thotobolong eo e kgolo.",
+    "foundation_to_foundation": "Ga e kgone go tsamaya fa gare ga motheo le o mongwe.",
+    "waste_to_tableau_one_card": "O ka kgona go sutisa karata e le nngwe fela mo tafoleng ya matlakala.",
+    "waste_to_tableau_ok": "Karata e ne ya fudusiwa go tswa mo matlakaleng a dilo tse di latlhilweng go ya kwa tafoleng T{dst}",
+    "waste_to_tableau_bad": "Ga o kgone go baya karata ya matlakala mo mokgokoloseng oo wa tafole.",
+    "no_face_up": "Ga go na dikarata tse di ka sutisiwang.",
+    "tableau_to_tableau_ok": "Tsamaisitswe {count} karte(s) go tswa tableau T{src} go ya T{dst}",
+    "tableau_to_tableau_bad": "Ga go kgonege go tsamaya dikarata {count} go T{src} go T{dst}",
+    "foundation_to_tableau_one_card": "O ka kgona go sutisa karata e le 1 fela go tswa mo setlhomong go ya kwa tafoleng.",
+    "foundation_empty": "Motheo F{src} ga o na sepe.",
+    "foundation_to_tableau_ok": "Karte e tsamaisitswe go tswa foundation F{src} go ya tableau T{dst}",
+    "foundation_to_tableau_bad": "Ga o kake wa baya karata ya motheo mo tafoleng T{dst}",
+    "to_waste_or_stock": "Ga o kake wa fudusediwa kwa matlakaleng kgotsa mo setokong."
+  },
+  "outcome": {
+    "forfeit": "Papadi e ne ya latlhwa.Palo ya bofelo: {score} dikarata mo metheong.",
+    "won": "O fentse kgaisano ya Klondike Solitaire!",
+    "turn_limit": "Metswedi e fedile! O tlhakane le palo ya {max_turns} ditlhogo. Legato: {score} dikarata mo mafundishong."
+  },
+  "board": {
+    "title": "=== KLONDIKE SOLITAIRE=== Ke ne ka bona gore ke na le bothata jwa go bua.",
+    "turn": "Turn: {turn}/{max_turns}",
+    "stock": "Setoko: {stock} dikarata",
+    "waste": "Matlakala (W): {waste}",
+    "foundations_header": "Motheo:",
+    "foundation_row": "  F{n}: {cards}",
+    "tableau_header": "Setshwantsho:",
+    "tableau_row": "  T{n}: {cards}"
+  }
+}

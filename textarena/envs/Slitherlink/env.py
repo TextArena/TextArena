@@ -101,34 +101,26 @@ class SlitherlinkEnv(ta.Env):
 
         m = self._ACTION_RE.fullmatch(action.strip().lower())
         if not m:
-            self.state.set_invalid_move(self._progress(), "Bad action format. Use [h row col] or [v row col].")
+            self.state.set_invalid_move(self._progress(), self.m("invalid_move", "wrong_format"))
             return self.state.step()
 
         kind, r, c = m.group(1), int(m.group(2)), int(m.group(3))
         if not self._valid_edge(kind, r, c):
-            self.state.set_invalid_move(self._progress(), "Edge outside board.")
+            self.state.set_invalid_move(self._progress(), self.m("invalid_move", "out_of_bounds"))
             return self.state.step()
 
         self._toggle_edge(kind, r, c)
         self._observe()
 
         if self._is_solved():                
-            self.state.set_outcome(1.0, "🎉 You formed a single loop! Puzzle solved!")
+            self.state.set_outcome(1.0, self.m("outcome", "win"))
         elif self.state.check_turn_limit():  
-            self.state.set_outcome(self._progress(), "Move limit reached. Puzzle unfinished.")
+            self.state.set_outcome(self._progress(), self.m("outcome", "turn_limit"))
 
         return self.state.step()
 
     def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return (
-            f"You are playing Slitherlink on a {self.R}x{self.C} grid!\n"
-            "Draw a single continuous loop so each numbered cell has that many bordering edges.\n"
-            "Toggle edges with:\n"
-            "  [h r c] - toggle horizontal edge above dots at row r, column c\n"
-            "  [v r c] - toggle vertical edge left of dots at row r, column c\n"
-            "Numbers show required edge count, '.' means no constraint.\n"
-            f"You have up to {self.max_turns} moves to solve the puzzle."
-        )
+        return self.m("player_prompt", "intro", R=self.R, C=self.C, max_turns=self.max_turns)
 
     def _valid_edge(self, kind: str, r: int, c: int) -> bool:
         if kind == 'h': return 0 <= r <= self.R and 0 <= c < self.C
@@ -247,5 +239,5 @@ class SlitherlinkEnv(ta.Env):
 
     def _observe(self):
         progress_pct = f"{self._progress():.0%}"
-        message = f"{self._render_board()}\nClues satisfied: {progress_pct}"
+        message = self.m("board", "current_board", board=self._render_board(), progress=progress_pct)
         self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_BOARD)

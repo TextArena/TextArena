@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "तपाईं {role} हुनुहुन्छ कोलोनेल ब्लोटोमा।\nतपाईंको लक्ष्य तपाईंको विरोधीले भन्दा धेरै राउन्ड जित्नु हो।\nप्रत्येक राउन्डमा, ठीक {num_total_units} इकाइहरू क्षेत्र {field_names} मा वितरण गर्नुहोस्。\nजुन खेलाडीले क्षेत्रमा धेरै इकाइहरू वितरण गर्छ, त्यो क्षेत्र जित्छ, र जुन खेलाडीले धेरै क्षेत्र जित्छ, त्यो राउन्ड जित्छ।\nउदाहरणका लागि, '[A7 B7 C6]' ले ए मा ७ इकाइ, बी मा ७ र सी मा ६ इकाइ वितरण गर्छ।",
+    "commander_alpha": "कमाण्डर अल्फा",
+    "commander_beta": "कमाण्डर बीटा"
+  },
+  "game_state": {
+    "header_round": "=== कर्नल ब्लोटो - राउन्ड {current_round}/{num_rounds} === राउन्ड जितेका - कमाण्डर अल्फा: {alpha_score}, कमाण्डर बीटा: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "राउन्ड {current_round} कमाण्डर अल्फा आवंटित: {p0_allocations} कमाण्डर बीटा आवंटित: {p1_allocations} ",
+    "winner_alpha": "{message}विजेता: कमाण्डर अल्फा",
+    "winner_beta": "{message}विजेता: कमाण्डर बीटा",
+    "tie": "{message}बाँध!"
+  },
+  "invalid_move": {
+    "wrong_format": "अमान्य इनपुट ढाँचा प्रयोग गर्नुहोस्ः A:5, B: 10, C: 5",
+    "invalid_field": "अवैध क्षेत्र नामहरू। वैध क्षेत्रहरूः {field_names}",
+    "wrong_allocation_value": "सबै आवंटनहरू गैर-नकारात्मक पूर्णांकहरू हुनुपर्छ।",
+    "incorrect_total_units": "तपाईंले ठीक {num_total_units} एकाइहरू छुट्याउनु पर्छ। हालको योगफल: {current_sum}",
+    "good_allocations": "विनियोजन राम्रो छ।"
+  },
+  "outcome": {
+    "winner_alpha": "कमान्डर अल्फा {score_0}-{score_1} पछि {num_rounds} राउन्डमा जित्छ!",
+    "winner_beta": "कमान्डर बेटा {score_1}-{score_0} पछि {num_rounds} राउन्डमा जित्छ!",
+    "draw": "खेल {score_0}-{score_1} राउन्ड पछि {num_rounds} टाईमा समाप्त हुन्छ!",
+    "early_winner_alpha": "कमाण्डर अल्फा विजयी {scores_0}-{scores_1} (बहुमत प्राप्त)!",
+    "early_winner_beta": "कमाण्डर बीटा विजयी {scores_1}-{scores_0} (बहुमत प्राप्त)!"
+  }
+}

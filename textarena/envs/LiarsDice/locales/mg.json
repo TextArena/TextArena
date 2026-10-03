@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Ianao no mpilalao {player_id} ao amin'ny lalao {num_players}-mpilalao Liar's Dice. Fitsipika: - Amin'ny fihodinana anao dia azonao atao: 1) Manaova tolotra vaovao miaraka amin'ny habetsaky ny habetsaky ny avo kokoa na ny tarehy (na ny roa) noho ny tolotra amin'izao fotoana izao; izany hoe '[Bid: 3, 4]', 2) Antsoy ny tolotra farany amin'ny alàlan'ny fanoratana '[Call]'. Raha miantso ianao: - Raha ny tena isa amin'ny sandan'ny tarehy eo amin'ny dice rehetra dia kely noho ny tolotra, ny mpivarotra farany dia very iray maty. - Raha tsy izany, ny mpiantso dia very iray maty. Ny mpilalao iray izay mahatratra 0 dice dia esorina. Ny mpilalao farany sisa tavela dia mandresy."
+  },
+  "board": {
+    "per_player": "Mpilalao {p}: {d}",
+    "new_round": "Fihodinana vaovao - Ny daosy sisa: {dice_summary} Ny daosy misy anao amin'izao fotoana izao dia: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Ny mpilalao {current_player_id} miantso! Ny tena isa ny tarehy {face_value} dia {count}, izay LESS noho ny {quantity}. Mpilalao {loser_id} (ny mpivarotra farany) very iray maty.",
+    "caller_loses": "Mpilalao {current_player_id} no mitsoaka! Ny isan'ny tarehin'ny {face_value} tena dia {count}, izay ≥ {quantity}.\nMpilalao {loser_id} (ilay nitsoaka) lasa kivy ny die iray."
+  },
+  "action": {
+    "bid_announce": "Mpilalao {player_id} manolotra {quantity} ny tarehiny {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Fividianana natao tsy nisy tolo-bidy mialoha.",
+    "invalid_bid": "Fampanoavana tsy mety: {reason}",
+    "not_recognized": "Fitsarana tsy ekena ho \"[Bid: X, Y]\" na \"[Call]\" manan-kery. Fitsarana natolotra: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Ny habetsahan'ny vaovao {new_quantity} dia ambany noho ny ankehitriny {current_quantity}.",
+    "face_lower": "Ny sandan'ny anarana vaovao {new_face_value} dia ambany noho ny ankehitriny {current_face_value}.",
+    "identical": "Mitovy amin'ny tolotra amin'izao fotoana izao ny tolotra.",
+    "face_range": "Tokony ho eo anelanelan'ny 1 sy 6 ny sanda."
+  },
+  "message": {
+    "eliminated_invalid": "Ny mpilalao {player_id} dia nesorina noho ny hetsika tsy manan-kery."
+  },
+  "outcome": {
+    "win": "Mandresy ny mpilalao {winner}! Laharana farany: {final_ranking}"
+  }
+}

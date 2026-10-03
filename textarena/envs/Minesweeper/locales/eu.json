@@ -1,0 +1,22 @@
+{
+  "player_prompt": {
+    "intro": "You are playing the Minesweeper game.\nThe objective of the game is to reveal all cells that do not contain mines.\nTo make a move, simply specify the row and column coordinates you want to reveal using the format:\n- `[row col]`: Reveal the cell at the specified row and column.\nFor example:\n- `[3 2]` to reveal the cell in Row 3, Column 2.\n- `[5 6]` to reveal the cell in Row 5, Column 6.\nOn your first move, you will reveal an area around the cell you choose to ensure a safe start.\nThe current board layout is shown below. Cells that are unrevealed are represented by a dot ('.'), revealed numbers show the count of adjacent mines.\nBe mindful not to choose already revealed cells.\nHere is the current board layout:\n"
+  },
+  "board": {
+    "game_board": "Joko taula: {board}",
+    "current_board": "Uneko Taula:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Ez duzu koordenatu zuzenik erantzun.",
+    "out_of_bounds": "Zehaztutako lerro eta zutabe koordenatuak mugen kanpo daude.",
+    "already_revealed": "Gelaxka ({row}, {col}) dagoeneko agerian dago.",
+    "hit_mine": "Mina jo duzu ({row}, {col}) kokalekuan."
+  },
+  "game_action": {
+    "revealed": "Zelula hau agerian utzi duzu ({row}, {col}) kokalekuan."
+  },
+  "outcome": {
+    "win": "Zorionak! Arrakastaz garbitu duzu Minesweeper taula.",
+    "turn_limit": "Txanda mugatua iritsi da. {percent}% seguru gelaxkak arrakastaz agerian utzi dituzu."
+  }
+}

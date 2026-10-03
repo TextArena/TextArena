@@ -1,0 +1,55 @@
+{
+  "_comment": "Korisnički okrenuti nizovi za Liar's Dice. Tokeni akcija u zagradama ('[Bid: X, Y]', '[Call]'), indeksi igrača, vrijednosti lica kockica, količine i brojevi su neutralni slotovi i nikad se ne prevode.",
+  "_slots": {
+    "player_id": "indeks igrača (cijeli broj)",
+    "num_players": "broj igrača u igri (cijeli broj)",
+    "dice_summary": "pregledani '; '-spojeni brojevi preostalih kockica po igraču",
+    "your_dice": "pregledani, zarezom odvojeni popis vrijednosti lica kockica ovog igrača",
+    "p": "indeks igrača (cijeli broj)",
+    "d": "preostali broj kockica za tog igrača (cijeli broj)",
+    "current_player_id": "indeks igrača koji je pozvao (cijeli broj)",
+    "face_value": "vrijednost lica kockice koja se broji (1-6)",
+    "count": "stvarni broj odgovarajućih kockica (cijeli broj)",
+    "quantity": "količina ponude (cijeli broj)",
+    "loser_id": "indeks igrača koji gubi kockicu (cijeli broj)",
+    "new_quantity": "količina ponude koja je upravo poslana (cijeli broj)",
+    "current_quantity": "trenutna količina ponude (cijeli broj)",
+    "new_face_value": "vrijednost lica kockice koja je upravo poslana (cijeli broj)",
+    "current_face_value": "trenutna vrijednost lica kockice (cijeli broj)",
+    "action": "sirovi niz akcije koji je igrač poslao",
+    "reason": "u gniježđenu razlog odbijanja ponude",
+    "winner": "indeks igrača koji pobjeđuje (cijeli broj)",
+    "final_ranking": "popis indeksa igrača od prvog eliminiranog do pobjednika"
+  },
+  "player_prompt": {
+    "intro": "Vi ste Igrač {player_id} u igri Liar's Dice s {num_players} igrača.\nPravila:\n- Na vašoj šansi, možete ili:\n  1) Napraviti novu ponudu s većom količinom ili većom vrijednošću lica (ili obje) od trenutne ponude; tj. '[Bid: 3, 4]',\n  2) Pozvati posljednju ponudu tako što ćete upisati '[Call]'.\n\nAko pozovete:\n  - Ako je stvarni broj te vrijednosti lica među svim kockicama manji od ponude, posljednji ponuditelj gubi jednu kockicu.\n  - Inače, pozivatelj gubi jednu kockicu.\nIgrač koji dosegne 0 kockica je eliminiran. Posljednji preostali igrač pobjeđuje."
+  },
+  "board": {
+    "per_player": "\tIgrač {p}: {d}",
+    "new_round": "\nNova runda - Preostale kockice: {dice_summary}\nVaše trenutne kockice su: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Igrač {current_player_id} poziva! Stvarni broj lica {face_value} je {count}, što je MANJE od {quantity}.\nIgrač {loser_id} (posljednji ponuditelj) gubi jednu kockicu.",
+    "caller_loses": "Igrač {current_player_id} poziva! Stvarni broj lica {face_value} je {count}, što je >= {quantity}.\nIgrač {loser_id} (pozivatelj) gubi jednu kockicu."
+  },
+  "action": {
+    "bid_announce": "Igrač {player_id} nudi {quantity} lica {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Poziv bez prethodne ponude.",
+    "invalid_bid": "Nevaljana ponuda: {reason}",
+    "not_recognized": "Akcija nije prepoznata kao valjana '[Bid: X, Y]' ili '[Call]'. Poslana akcija: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Nova količina {new_quantity} je niža od trenutne {current_quantity}.",
+    "face_lower": "Nova vrijednost lica {new_face_value} je niža od trenutne {current_face_value}.",
+    "identical": "Ponuda je identična trenutnoj ponudi.",
+    "face_range": "Vrijednost lica mora biti između 1 i 6."
+  },
+  "message": {
+    "eliminated_invalid": "Igrač {player_id} je eliminiran zbog nevaljane poteza."
+  },
+  "outcome": {
+    "win": "Igrač {winner} pobjeđuje! Konačni poredak: {final_ranking}"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Ви сте играч {player_id} у игри 3-играча Итеративна дилема затвореника. Меч траје {num_rounds} рунди.\nСтруктура рунде:\n• {conv_rounds} слободних разговора\n• 1 одлучујући потез - доставите један токен по противнику: '[<opp-id> cooperate]' или '[<opp-id> defect]' (нпр. '[1 defect] [2 cooperate]'; подразумевано је 'cooperate').\nПарна матрица исплате (примењује се на сваки неуређени пар):\n  - Обојица сарађују  ->  {reward}\n  - Обојица издају     ->  {punishment}\n  - Ви издајете, они сарађују -> {temptation}\n  - Ви сарађујете, они издају -> {sucker}\nИграч(и) са највишим резултатом на крају свих рунди побеђују."
+  },
+  "round": {
+    "start": "─── Почиње рунда {round} ───\tМожете слободно разговарати у наредних {conv_rounds} рунди.",
+    "chat_finished": "Разговор за рунду {round} је завршен. Доставите своје одлуке, један токен по противнику: `[pid cooperate]` или `[pid defect]`."
+  },
+  "results": {
+    "header": "### Рунда {round} - Резултати:",
+    "pair_line": "{observation}\n\t Играч {i} и Играч {j} су изабрали да {choice_i} и {choice_j} редом (Играч {i} је добио {gain_i}, Играч {j} је добио {gain_j})",
+    "scores_open": "{observation}\n-> Тренутни резултати: ",
+    "score_first": "{observation}Играч {player_id} ({score})",
+    "score_next": "{observation}; Играч {player_id} ({score})",
+    "finalize": "{observation}\n"
+  },
+  "outcome": {
+    "final": "Коначни резултати: {scores}.  Групе рангирања (најгори→најбољи): {groups}"
+  }
+}

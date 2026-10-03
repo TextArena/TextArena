@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ati Player {player_id} ta'a Iterated Prisoner's Dilemma keessa {num_rounds} raundi irraa gahu.\n\nGocha Qulqulluu:\n- Qarree hundaa dura, siif {total_conversation_rounds} gilgaalee marii bilisummaa godhu.\n- San booda, gareen lamaanuu waltajjii isaanii irratti walii galuu ykn haangawu.\n\nPayoff Matrix (raundi hundaa walii gala):\n- Lachuun Cooperate ➜ tokkoon tokkoon {cooperate_reward}\n- Lachuun Defect ➜ tokkoon tokkoon {mutual_defect_reward}\n- Tokko Defects, tokko Cooperates ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nAkkaa Taphachuu:\n- Marii keessa: qubeewwan marii bilisummaa barreessu.\n- Qarree murteeffannaa keessa: '[Cooperate]' ykn '[Defect]' (case-insensitive) dabaluu. Qubeewwan dabaluun danda'uu dura/fudhatu token."
+  },
+  "phases": {
+    "conversation_finished": "Haasaasa jiddutti {round} keessa bahee. Dhaga'a '[Cooperate]' ykn '[Defect]' በአባረረው መስጫ መስተንጽሮ ቁጽሮ{{}} ውስጥ.",
+    "starting_round": "--- Marsaa jalqabaa {round} ---",
+    "round_summary": "Raundi {round} bu'aa:\n{outcome}\nTaphattuu 0 {r0} argate (waliigalatti {score_0}), Taphattuu 1 {r1} argate (waliigalatti {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} injifate {win_score} - {lose_score}.",
+    "draw": "Taphattoonni lamaanuu galchii {s0}.",
+    "round_both_cooperate": "Taphattoonni lamaanuu waliin hojjetan.",
+    "round_both_defect": "Gamaa lamaanuu falmatan.",
+    "round_p0_cooperates_p1_defects": "Taphachi 0 waliin hojjete, taphattuun 1 garuu ni baqate.",
+    "round_p0_defects_p1_cooperates": "Taphachi 0 kan ofirraa bu'e, taphattuun 1 ammoo waliin hojjete."
+  }
+}

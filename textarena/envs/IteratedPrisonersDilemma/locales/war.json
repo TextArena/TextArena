@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Ikaw an Player {player_id} ha usa ka Iterated Prisoner's Dilemma nga nakaabot ha {num_rounds} ka mga round.\n\nEstruktura han Juego:\n- Bago an tagsa mga desisyon mayda kamí hin {total_conversation_rounds} ka mga higayon nga makipagkomunikar libre.\n- Katapos han, magkasabay nga magpili an mga player ha pagkooperar o pagbalewala.\n\nPayoff Matrix (nailaom ha tagsa round):\n- Nagkakasundo ha pagkooperar ➜ tagsa-tagsa {cooperate_reward}\n- Nagkakasundo ha pagbalewala ➜ tagsa-tagsa {mutual_defect_reward}\n- Mayda usa nga nagbalewala, mayda usa nga nagkooperar ➜ Defector {defect_reward}, Cooperator {sucker_reward}\n\nPaano Maglaro:\n- Ha panahon han konbersasyon: isurat an impo mahihinungdan nga teksto.\n- Ha panahon han desisyon: isama an '[Cooperate]' o '[Defect]' (diri pinaagi han kaso). Pwede kamí magdagdag hin ekstrang teksto bago o katapos han token."
+  },
+  "phases": {
+    "conversation_finished": "Natapos an konbersasyon para ha round {round}. Pakireplya kamí ha '[Cooperate]' o '[Defect]' sulod ha ⬜️{{}}.",
+    "starting_round": "--- Nagtitikang nga Round {round} ---",
+    "round_summary": "Mga resulta ha round {round}:\n{outcome}\nNakakuha an Player 0 hin {r0} (kabug-osan {score_0}), Nakakuha an Player 1 hin {r1} (kabug-osan {score_1})."
+  },
+  "outcome": {
+    "winner": "An manlalaro {winner} nagdaog han {win_score} - {lose_score}.",
+    "draw": "An duha nga magdudula nag-iskor {s0}.",
+    "round_both_cooperate": "Nagkooperar an duha nga magdudula.",
+    "round_both_defect": "Duha ka mga magmurulay nangalapas.",
+    "round_p0_cooperates_p1_defects": "Ang Manugdula 0 nagtinabangay, ang Manugdula 1 nagbulag.",
+    "round_p0_defects_p1_cooperates": "Ang Manugdula 0 nagbulag, ang Manugdula 1 nagtinabangay."
+  }
+}

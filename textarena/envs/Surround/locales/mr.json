@@ -1,0 +1,30 @@
+{
+  "_comment": "Surround locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, best to worst); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}- प्लेअर {width}x{height} ग्रिडवर घेराव. तुम्ही प्लेअर {player_id} आहात. वैध हालचाली: '[up]' '[down]' '[left]' '[right]' किंवा w/s/a/d. उद्दीष्ट: इतरांपेक्षा जास्त काळ जगणे. ट्रेल्स प्राणघातक आहेत; भिंतीला धडक मारतात; हेड-ऑन क्रॅश दोन्ही मारतात."
+  },
+  "board": {
+    "current": "चालू मंडळ: {board}",
+    "after_moves": "एकाचवेळी चालल्यानंतर बोर्ड: {board}"
+  },
+  "game_action": {
+    "invalid_death": "खेळाडू {player_id} अमान्य हालचालीमुळे मरण पावला."
+  },
+  "outcome": {
+    "survived_win": "खेळाडू {player_id} जिवंत राहिला; इतर सर्वजण क्रॅश झाले.",
+    "all_crashed": "सर्व खेळाडू एकाच वेळी क्रॅश झाले.",
+    "outlived": "खेळाडू इतरांपेक्षा जास्त काळ जगला.",
+    "all_dead": "सर्व खेळाडू मृत.",
+    "turn_limit": "वळण मर्यादा गाठली - सर्वात जास्त काळ जिवंत राहणारा जिंकतो.",
+    "ranking": "{reason} अंतिम क्रमवारी गट (सर्वोत्तम→सर्वात वाईट): {groups}"
+  }
+}

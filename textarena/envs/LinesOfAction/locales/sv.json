@@ -1,0 +1,36 @@
+{
+  "_comment": "LinesOfAction-lokaliseringsfil. ÖVERSÄTT INTE nycklar (vänster sida). Översätt endast värden (höger sida).",
+  "_slots": {
+    "{player_id}": "Spelarens nummer, antingen 0 eller 1",
+    "{side}": "Spelarens pjäs, antingen O eller X",
+    "{other}": "Motståndarens pjäs, antingen O eller X",
+    "{board}": "ASCII-återgivningen av brädet; behåll som den är",
+    "{coord}": "En brädkoordinat som t.ex. b1 eller a3",
+    "{from}": "Källkoordinaten för ett drag, t.ex. b1",
+    "{to}": "Destinationskoordinaten för ett drag, t.ex. b3"
+  },
+  "player_prompt": {
+    "intro": "Du är Spelare {player_id} i ett spel av LinesOfAction.\nDina pjäser är '{side}', motståndarens pjäser är '{other}'.\nFormat för drag: `[b1b3]` (från-koordinat till-koordinat). Ett giltigt drag reser horisontellt, vertikalt eller diagonalt ett antal rutor som är lika med det totala antalet pjäser (av vilken färg som helst) i den linjen. Du kan hoppa över dina egna pjäser, men inte motståndarens pjäser; landning på en motståndare fångar den. Vinn när alla dina pjäser är 8-grannar anslutna."
+  },
+  "board": {
+    "current_board": "Bräde:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formatet måste vara e2e4 (från-, till-koordinater).",
+    "no_piece": "Ingen {side}-pjäs på {coord}.",
+    "identical": "Källa och destination är identiska.",
+    "not_straight_or_diagonal": "Draget måste vara rakt eller diagonalt.",
+    "wrong_distance": "Måste flytta ett avstånd som är lika med antalet pjäser i linjen.",
+    "enemy_blocks": "Motståndarens pjäs blockerar vägen.",
+    "destination_own": "Destinationen är upptagen av egen pjäs."
+  },
+  "game_action": {
+    "moved": "Spelare {player_id} flyttade {from} -> {to}",
+    "captured_suffix": "Spelare {player_id} flyttade {from} -> {to} och fångade en motståndare."
+  },
+  "outcome": {
+    "win": "Alla pjäser är anslutna.",
+    "draw_no_capture": "60 drag utan fångst.",
+    "draw_repetition": "Positionen upprepades tre gånger."
+  }
+}

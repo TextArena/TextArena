@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në Stratego.\nQëllimi juaj është të kapni Flamurin e kundërshtarit tuaj ose të eliminoni të gjitha copat e tyre të lëvizshme.\nUshtria juaj është vendosur për ju në bord, duke përfshirë Flamurin tuaj, Bombat dhe copa të tjera të ndryshme rangesh.\n\n### Udhëzimet e Lojës\n1. **Rregullat e Lëvizjes:**\n   - Në radhën tuaj, mund të lëvizni një copë me një hap në një katror të afërt (lart, poshtë, majtas ose djathtas) që është tashmë i zënë me copat tuaja.\n   - Shembull: Një copë mund të lëvizë nga A1 në B1 ose A1 në A2 nëse B1 dhe A2 nuk janë vendosur me copat e lojtarit të vet.\n   - Nëse copa e zgjedhur është një Bombë ose një Flamur, ajo nuk mund të lëvizet.\n2. **Betejat:**\n   - Nëse lëvizni në një katror të zënë nga një copë e kundërshtarit, atëherë do të ndodhë një betejë:\n     - Copa me rangun më të lartë fiton dhe eliminon copën e kundërshtarit.\n     - Nëse rangjet janë të barabarta, të dy copat hiqen nga bordi.\n     - **Raste Speciale:**\n       - Bombat eliminon shumicën e copave sulmuese përveç Minatorëve, të cilët çarmatosin Bombat.\n       - Spiunët mund të mposhtin Marshallin nëse Spiuni sulmon së pari, por humbasin nga të gjitha copat e tjera.\n3. **Qëllimet Strategjike:**\n   - Identifikoni copat e kundërshtarit tuaj përmes lëvizjeve dhe betejave të tyre.\n   - Mbrojni Flamurin tuaj ndërsa përpiqeni të kapni Flamurin e kundërshtarit tuaj.\n   - Përdorni Scoutët në mënyrë strategjike për të marrë informacione për copat e kundërshtarit tuaj dhe sulmoni ato të dobëta.\n\n### Si të Bëni një Lëvizje:\n1. Specifikoni koordinatat e copës që dëshironi të lëvizni dhe destinacionin e saj.\n2. Përdorni formatin: [A0 B0], ku A0 është pozicioni i burimit dhe B0 është destinacioni.\n   - Shembull: Për të lëvizur një copë nga rreshti 0, kolona 0 në rreshtin 1, kolona 0, futni [A0 B0].\n3. Sigurohuni që destinacioni është i vlefshëm sipas rregullave të lëvizjes së mësipërme.\n\n### Shënime të Rëndësishme:\n- Bordi do të tregojë copat tuaja dhe pozicionet e tyre, p.sh. MN, MS.\n- Bordi gjithashtu do të tregojë pozicionet e njohura të copave të kundërshtarit tuaj pa zbuluar rangjet e tyre, p.sh. ?.\n- Rrjetat me ~ janë liqene dhe nuk mund të lëvizen në to.\n- Si një sugjerim, filloni lojën tuaj duke lëvizur copat që janë në vijën e parë për të marrë informacione për copat e kundërshtarit tuaj. Lojtari 0 dhe lojtari 1 kanë vijën e parë në rreshtin D dhe G përkatësisht.\n\nJa gjendja aktuale e bordit:\n"
+  },
+  "board": {
+    "current_board": "Bordi aktual:\n\n{board}\nLëvizjet e disponueshme: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format i gabuar i veprimit. Lojtari {player_id} nuk futi një lëvizje në formatin [A0 B0].",
+    "invalid_coordinates": "Format i gabuar i veprimit. Lojtari {player_id} nuk futi koordinata të vlefshme.",
+    "not_own_piece": "Format i gabuar i veprimit. Lojtari {player_id} duhet të lëvizë një nga copat e veta.",
+    "scout_through_pieces": "Format i gabuar i veprimit. Lojtari {player_id} nuk mund të lëvizë një scout përmes copave të tjera.",
+    "scout_diagonal": "Format i gabuar i veprimit. Lojtari {player_id} nuk mund të lëvizë një scout diagonalisht.",
+    "non_scout_multi_square": "Format i gabuar i veprimit. Copat, përveç scoutëve, mund të lëvizin vetëm një katror në të njëjtën kohë.",
+    "move_into_lake": "Format i gabuar i veprimit. Lojtari {player_id} nuk mund të lëvizë në liqen.",
+    "move_onto_own_piece": "Format i gabuar i veprimit. Lojtari {player_id} nuk mund të lëvizë në copën e vet.",
+    "move_bomb_or_flag": "Format i gabuar i veprimit. Lojtari {player_id} nuk mund të lëvizë një bombë ose flamur."
+  },
+  "game_action": {
+    "you_moved": "Ju keni lëvizur copën tuaj nga {source} në {dest}.",
+    "opponent_moved": "Lojtari {player_id} ka lëvizur një copë nga {source} në {dest}.",
+    "you_equal_ranks": "Ju keni lëvizur copën tuaj nga {source} në {dest}. Copa sulmuese ishte {attacking_rank} dhe copa e destinacionit ishte {target_rank}. Meqenëse rangjet janë të njëjta, të dy copat humbën.",
+    "opponent_equal_ranks": "Lojtari {player_id} ka lëvizur një copë nga {source} në {dest}. Copa sulmuese ishte {attacking_rank} dhe copa e destinacionit ishte {target_rank}. Meqenëse rangjet janë të njëjta, të dy copat humbën.",
+    "you_miner_defused": "Ju keni lëvizur copën tuaj nga {source} në {dest}. Copa sulmuese ishte {attacking_rank} dhe copa e destinacionit ishte {target_rank}. Meqenëse minatorët mund të çarmatosin bombat, ju fituat betejën.",
+    "opponent_miner_defused": "Lojtari {player_id} ka lëvizur një copë nga {source} në {dest}. Copa sulmuese ishte {attacking_rank} dhe copa e destinacionit ishte {target_rank}. Meqenëse minatorët mund të çarmatosin bombat, ju humbët betejën.",
+    "you_bomb_lost": "Ju keni lëvizur copën tuaj nga {source} në {dest}. Copa sulmuese ishte {attacking_rank} dhe copa e destinacionit ishte {target_rank}. Meqenëse sulmuesi nuk është një minator, ju humbët betejën.",
+    "opponent_bomb_won": "Lojtari {player_id} ka lëvizur një copë nga {source} në {dest}. Copa sulmuese ishte {attacking_rank} dhe copa e destinacionit ishte {target_rank}. Meqenëse sulmuesi nuk është një minator, ju fituat betejën.",
+    "you_spy_won": "Ju keni lëvizur copën tuaj nga {source} në {dest}. Copa sulmuese ishte {attacking_rank} dhe copa e destinacionit ishte {target_rank}. Meqenëse sulmuesi është një spiun dhe destinacioni është një marshall, ju fituat betejën.",
+    "opponent_spy_lost": "Lojtari {player_id} ka lëvizur një copë nga {source} në {dest}. Copa sulmuese ishte {attacking_rank} dhe copa e destinacionit ishte {target_rank}. Meqenëse sulmuesi është një spiun dhe destinacioni është një marshall, ju humbët betejën.",
+    "you_higher_won": "Ju keni lëvizur copën tuaj nga {source} në {dest}. Copa sulmuese ishte {attacking_rank} dhe copa e destinacionit ishte {target_rank}. Meqenëse sulmuesi është një rang më i lartë se destinacioni, ju fituat betejën.",
+    "opponent_higher_lost": "Lojtari {player_id} ka lëvizur një copë nga {source} në {dest}. Copa sulmuese ishte {attacking_rank} dhe copa e destinacionit ishte {target_rank}. Meqenëse sulmuesi është një rang më i lartë se destinacioni, ju humbët betejën.",
+    "you_lower_lost": "Ju keni lëvizur copën tuaj nga {source} në {dest}. Copa sulmuese ishte {attacking_rank} dhe copa e destinacionit ishte {target_rank}. Meqenëse sulmuesi është një rang më i ulët se destinacioni, ju humbët betejën.",
+    "opponent_lower_won": "Lojtari {player_id} ka lëvizur një copë nga {source} në {dest}. Copa sulmuese ishte {attacking_rank} dhe copa e destinacionit ishte {target_rank}. Meqenëse sulmuesi është një rang më i ulët se destinacioni, ju fituat betejën."
+  },
+  "outcome": {
+    "flag_captured": "Lojtari {player_id} ka kapur flamurin e kundërshtarit!",
+    "no_movable_pieces": "Lojtari {winner_id} fiton! Lojtari {loser_id} nuk ka më copa të lëvizshme."
+  }
+}

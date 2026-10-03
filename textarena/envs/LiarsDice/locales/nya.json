@@ -1,0 +1,55 @@
+{
+  "_comment": "User-facing strings for Liar's Dice. Bracketed action tokens ('[Bid: X, Y]', '[Call]'), player ids, dice face values, quantities and counts are neutral slots and must never be translated.",
+  "_slots": {
+    "player_id": "player index (integer)",
+    "num_players": "number of players in the game (integer)",
+    "dice_summary": "pre-rendered '; '-joined per-player remaining dice counts",
+    "your_dice": "pre-rendered comma-joined list of this player's dice face values",
+    "p": "player index (integer)",
+    "d": "remaining dice count for that player (integer)",
+    "current_player_id": "player index who called (integer)",
+    "face_value": "dice face value being counted (1-6)",
+    "count": "actual number of matching dice (integer)",
+    "quantity": "bid quantity (integer)",
+    "loser_id": "player index who loses a die (integer)",
+    "new_quantity": "bid quantity just submitted (integer)",
+    "current_quantity": "current bid quantity (integer)",
+    "new_face_value": "bid face value just submitted (integer)",
+    "current_face_value": "current bid face value (integer)",
+    "action": "the raw action string the player submitted",
+    "reason": "a nested bid-rejection reason",
+    "winner": "player index who wins (integer)",
+    "final_ranking": "list of player indices from first eliminated to winner"
+  },
+  "player_prompt": {
+    "intro": "Wewe ni Mchezaji {player_id} katika mchezo wa {num_players}-wachezaji wa Liar's Dice.\nSheria:\n- Kwenye mzunguko wako, unaweza kuchagua moja ya:\n  1) Fanya bidhi mpya na kiasi kikubwa zaidi au uso wa juu zaidi (au zote mbili) kuliko bidhi ya sasa; kwa mfano '[Bid: 3, 4]',\n  2) Ita bidhi ya mwisho kwa kuandika '[Call]'.\n\nIkiwa utaita:\n  - Ikiwa idadi halisi ya thamani ya uso huo kati ya faa zote ni chini ya bidhi, mabidi ya mwisho anapoteza faa moja.\n  - Vinginevyo, muitaji anapoteza faa moja.\nMchezaji ambaye anafikia faa 0 anatolewa nje. Mchezaji wa mwisho aliyesalia anashinda."
+  },
+  "board": {
+    "per_player": "\tMchezaji {p}: {d}",
+    "new_round": "\nMzunguko mpya - Faa za kuendelea: {dice_summary}\nFaa zako za sasa ni: {your_dice}"
+  },
+  "call": {
+    "bidder_loses": "Mchezaji {current_player_id} anaita! Idadi halisi ya uso {face_value} ni {count}, ambayo ni NYOI kuliko {quantity}.\nMchezaji {loser_id} (mabidi ya mwisho) anapoteza faa moja.",
+    "caller_loses": "Mchezaji {current_player_id} anaita! Idadi halisi ya uso {face_value} ni {count}, ambayo ni >= {quantity}.\nMchezaji {loser_id} (muitaji) anapoteza faa moja."
+  },
+  "action": {
+    "bid_announce": "Mchezaji {player_id} anabidi {quantity} ya uso {face_value}."
+  },
+  "invalid_move": {
+    "call_no_bid": "Kuitana kopangidwa popanda kupereka kwapanthaŵi yake.",
+    "invalid_bid": "Kupereka kopanda pake: {reason}",
+    "not_recognized": "Hatua siyo hatua inayotambulika kama '[Bid: X, Y]' au '[Call]' halali. Hatua iliyowasilishwa: {action}"
+  },
+  "bid_reason": {
+    "quantity_lower": "Kuchuluka kwatsopano {new_quantity} ndi kocheperako kuposa kwapanthawiyo {current_quantity}.",
+    "face_lower": "Mtengo watsopano {new_face_value} ndi wotsika kuposa womwe ulipo panopa {current_face_value}.",
+    "identical": "Bidding ndi chimodzimodzi monga panopa.",
+    "face_range": "Mtengo wa mtengo uyenera kukhala pakati pa 1 ndi 6."
+  },
+  "message": {
+    "eliminated_invalid": "Wosewera {player_id} anachotsedwa ndi kusuntha kosayenera."
+  },
+  "outcome": {
+    "win": "Mchezaji {winner} anashinda! Matokeo ya mwisho: {final_ranking}"
+  }
+}

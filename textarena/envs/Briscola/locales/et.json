@@ -1,0 +1,57 @@
+{
+  "_comment": "Briscola keelefail. ÄRGE tõlgige võtmeid (vasak pool). Tõlgige ainult väärtused (parem pool).",
+  "_slots": {
+    "{player_id}": "Mängija number, näiteks 0 või 1",
+    "{trump_suit}": "Trump masti sümbol (♠♥♦♣) - ära tõlgi",
+    "{trump_card}": "Trump kaardi silt, näiteks '7♠' - ära tõlgi",
+    "{card}": "Kaardi silt, näiteks 'A♥' - ära tõlgi",
+    "{trump_mark}": "Eelrenderdatud '(TRUMP)' marker, või tühi",
+    "{max_pos}": "Kõrgeim legaalne kaardi positsioon mängija käes",
+    "{count}": "Mängija käes olevate kaartide arv",
+    "{pos}": "Kaardi positsiooninumber käes",
+    "{points}": "Punktide arv (kaardi väärtus või kogutud skoor)",
+    "{hand}": "Eelrenderdatud, mitmerealine käe loend",
+    "{trick}": "Eelrenderdatud praegune-trükk loend",
+    "{scores}": "Eelrenderdatud skooririda, või lõplik mängija skooriblokk",
+    "{trump_info}": "Eelrenderdatud trump-masti / kaardipaki arvurida",
+    "{winner}": "Mängija number, kes võitis trüki või mängu",
+    "{tricks}": "Mängija võidetud trükkide arv",
+    "{deck_count}": "Kaartide arv pakis"
+  },
+  "game": {
+    "start": "Briscola mäng algas! Trump mast: {trump_suit} (Trump kaart: {trump_card})"
+  },
+  "prompt": {
+    "intro": "Sa mängid Briscolat - Mängija {player_id}.\nEesmärk: Võida trükke ja kogu kõige rohkem punkte (120 punkti pakis).\nKaardi punktid: A=11, 3=10, K=4, Q=3, J=2, teised=0\nKaardi võim: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\nTrump kaardid võidavad mitte-trump kaarte sõltumata võimust.\n\nTegevus: '[play X]' kus X on kaardi positsioon (1-{max_pos}) sinu käes\n"
+  },
+  "hand": {
+    "none": "Pole kaarte",
+    "empty": "Pole kaarte käes",
+    "header": "Sinu käsi:",
+    "card_line": "  {pos}. {card} [{points} punkti]{trump_mark}",
+    "trump_mark": " (TRUMP)"
+  },
+  "trick": {
+    "empty": "Pole kaarte veel mängitud selle trüki.",
+    "header": "Praegune trükk:",
+    "line": "  Mängija {player_id}: {card}{trump_mark}"
+  },
+  "turn": {
+    "score_entry": "Mängija {player_id}: {points} punkti",
+    "trump_info": "Trump mast: {trump_suit}",
+    "trump_info_deck": "Trump mast: {trump_suit} | Kaarte pakis: {deck_count}",
+    "board": "{hand}\n\n{trick}\n\nSkoorid: {scores}\n{trump_info}\n\nMängi kaarti kasutades [play X]"
+  },
+  "invalid_move": {
+    "wrong_format": "Kasuta [play X] kus X on kaardi positsioon (1, 2, 3, jne.)",
+    "out_of_range": "Vigane kaardi positsioon. Sul on {count} kaarte (1-{count})"
+  },
+  "action": {
+    "played": "Mängija {player_id} mängis {card}",
+    "trick_win": "Mängija {winner} võitis trüki {card} ja sai {points} punkti!"
+  },
+  "outcome": {
+    "head": "Mäng läbi! Mängija {winner} võitis {points} punktiga!\n\nLõplikud skoorid:\n{scores}",
+    "player_line": "Mängija {player_id}: {points} punkti ({tricks} trükkidega)\n"
+  }
+}

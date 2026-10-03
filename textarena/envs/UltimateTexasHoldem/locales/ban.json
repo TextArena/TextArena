@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the action tokens ('[4x]', '[2x]', '[1x]', '[check]', '[c]', '[fold]', '[f]', '[skip]', '[s]', '[play bet 4x]', ...), the card labels/suits (e.g. 'A♠', 'K♥', '10♦'), the phase labels passed in {phase}, or any numeric chip/bet/payout amounts. The escaped literal '${{...}}' fragments in the rules pay table reproduce a pre-existing display bug verbatim and must be kept exactly (double braces are intentional).",
+  "_slots": {
+    "{start_chips}": "Starting chip count, e.g. 1000",
+    "{ante}": "The ante/blind bet amount, e.g. 25",
+    "{ante4}": "Four times the ante, e.g. 100",
+    "{ante2}": "Twice the ante, e.g. 50",
+    "{round}": "The current round number",
+    "{chips}": "The player's current chip count",
+    "{hand}": "A comma-separated list of card labels, e.g. 'A♠, K♥', or the localized no-cards text",
+    "{phase}": "The current phase label token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "A comma-separated list of bracketed action tokens, e.g. '[play_bet_4x], [check]'",
+    "{available}": "A comma-separated list of currently legal bracketed action tokens",
+    "{blind}": "The blind bet amount",
+    "{play}": "The play bet amount",
+    "{cards}": "A comma-separated list of card labels, e.g. 'Q♣, 7♦, 2♠'",
+    "{name}": "A localized poker hand name, inserted verbatim",
+    "{amount}": "A chip amount",
+    "{net}": "The net chip change for the round (may be negative)",
+    "{max_turns}": "The maximum number of rounds",
+    "{winner_rounds}": "The number of rounds completed"
+  },
+  "player_prompt": {
+    "no_cards": "Durung wénten kartu.",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Pemain Tunggal vs Dealer\n\n📖 IKHTISAR PERMAINAN:\n• Anda mulai dengan {start_chips} chip\n• Satu dek 52 kartu (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Anda bermain melawan dealer (rumah)\n• Setiap putaran mengikuti struktur Ultimate Texas Hold'em: Anda memasang taruhan ANTE dan BLIND, menerima 2 kartu lubang, memutuskan taruhan PLAY opsional di seluruh fase taruhan, lalu mengungkap kartu komunitas dan membandingkan tangan 5 kartu terbaik Anda dengan dealer. Tujuan Anda adalah memaksimalkan kemenangan Anda (ketika Anda memiliki tangan yang lebih baik), sambil meminimalkan kerugian Anda (ketika Anda memiliki tangan yang lebih buruk).\n• Permainan berakhir ketika Anda mencapai 0 chip atau di bawah pada awal putaran (KEKALAHAN) atau menyelesaikan 1000 putaran dengan chip (MENANG)\n\n💰 STRUKTUR TARUHAN:\n• ANTE: Taruhan wajib ${ante} setiap putaran\n• BLIND: Taruhan wajib ${ante} setiap putaran\n• PLAY: Taruhan opsional selama permainan. Sepanjang putaran, Anda hanya dapat memilih SALAH SATU dari berikut ini: (${ante4} jika dilakukan pada PRE-FLOP, ${ante2} jika dilakukan pada FLOP, atau ${ante} jika dilakukan pada RIVER. Juga dapat melipat pada river, menyerah pada tangan, dan tidak membuat taruhan.)\n\n🎴 PENGGALIAN KARTU:\n• Anda menerima 2 kartu terbuka (kartu lubang Anda)\n• Dealer menerima 2 kartu tertutup (tersembunyi dari Anda)\n• 5 kartu komunitas dibagikan tertutup pada awalnya\n• Kartu komunitas diungkap secara progresif melalui fase permainan\n\n🏆 KUALIFIKASI DEALER:\n• Dealer harus memiliki setidaknya satu PASANG (2 kartu dengan peringkat yang sama) untuk memenuhi syarat, menggunakan 2 kartu di tangan mereka dan 5 kartu komunitas.\n• Kualifikasi dealer mempengaruhi hasil taruhan, seperti yang akan dijelaskan nanti.\n\n🎮 FASE PERMAINAN & AKSI:\n📋 PRE-FLOP:\n  • Aksi: [4x] (${ante4}) atau [check]\n  • [4x]: Pasang taruhan PLAY ${ante4}, mengungkap 3 kartu komunitas pertama\n  • [check]: Tidak ada taruhan tambahan, mengungkap 3 kartu komunitas pertama\n\n📋 FLOP:\n  • Jika taruhan 4x dipasang: Hanya [skip] tersedia (mengungkap 2 kartu komunitas terakhir secara otomatis)\n  • Jika tidak ada taruhan 4x: [2x] (${ante2}) atau [check]\n  • [2x]: Pasang taruhan PLAY ${ante2}, mengungkap 2 kartu komunitas terakhir\n  • [check]: Tidak ada taruhan tambahan, mengungkap 2 kartu komunitas terakhir\n\n📋 RIVER:\n  • Jika taruhan 4x atau 2x dipasang: Hanya [skip] tersedia (melanjutkan ke showdown secara otomatis)\n  • Jika tidak ada taruhan PLAY sebelumnya: [1x] (${ante}) atau [fold]\n  • [1x]: Pasang taruhan PLAY ${ante}, melanjutkan ke showdown\n  • [fold]: Menyerah pada tangan, kehilangan taruhan ANTE dan BLIND\n\n📋 SHOWDOWN:\n  • Semua kartu diungkap dan dievaluasi\n  • Tangan 5 kartu terbaik dari 7 kartu (2 lubang + 5 komunitas)\n  • Taruhan diselesaikan sesuai dengan aturan pembayaran\n\n💎 PEMBAYARAN TARUHAN:\n📊 TARUHAN ANTE:\n  • Dealer tidak memenuhi syarat: PUSH (taruhan dikembalikan)\n  • Dealer memenuhi syarat & Anda menang: pembayaran 1:1 (taruhan + kemenangan)\n  • Dealer memenuhi syarat & Anda kalah: Taruhan hilang\n  • Seri: PUSH (taruhan dikembalikan)\n\n📊 TARUHAN BLIND:\n  • Tidak terpengaruh oleh kualifikasi dealer\n  • Anda menang: Taruhan dikembalikan dan pembayaran tambahan berdasarkan kekuatan tangan Anda\n  • Anda kalah: Taruhan hilang\n  • Seri: PUSH (taruhan dikembalikan)\n\n📊 TABEL PEMBAYARAN TARUHAN BLIND:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Kurang dari Straight: Tidak ada pembayaran tambahan\n\n📊 TARUHAN PLAY:\n  • Tidak terpengaruh oleh kualifikasi dealer\n  • Perbandingan langsung: Tangan terbaik Anda vs Tangan terbaik Dealer\n  • Anda menang: pembayaran 1:1 (taruhan + kemenangan)\n  • Anda kalah: Taruhan hilang\n  • Seri: PUSH (taruhan dikembalikan)\n\n🎯 PERINGKAT TANGAN POKER (Terbaik ke Terburuk):\n  1. Royal Flush: A-K-Q-J-10 dengan setelan yang sama\n  2. Straight Flush: 5 kartu berurutan dengan setelan yang sama\n  3. Four of a Kind: 4 kartu dengan peringkat yang sama\n  4. Full House: 3 kartu dengan peringkat yang sama + 2 kartu dengan peringkat yang sama\n  5. Flush: 5 kartu dengan setelan yang sama\n  6. Straight: 5 kartu berurutan\n  7. Three of a Kind: 3 kartu dengan peringkat yang sama\n  8. Two Pair: 2 pasang kartu dengan peringkat yang berbeda\n  9. One Pair: 2 kartu dengan peringkat yang sama\n  10. High Card: Kartu tertinggi menang\n\n⌨️  PERINTAH AKSI:\n• [4x] atau [play bet 4x]: Pasang taruhan PLAY ${{self.ante_amount*4}}\n• [2x] atau [play bet 2x]: Pasang taruhan PLAY ${{self.ante_amount*2}}\n• [1x] atau [play bet 1x]: Pasang taruhan PLAY ${{self.ante_amount*1}}\n• [check] atau [c]: Check (tidak ada taruhan tambahan)\n• [fold] atau [f]: Fold (menyerah pada tangan)\n• [skip] atau [s]: Lewati ke fase berikutnya (ketika tidak ada aksi yang diperlukan)\n\n💡 TIPS STRATEGI:\n• Tangan awal yang kuat (pasang, kartu tinggi) sering kali membenarkan taruhan 4x\n• Pertimbangkan kualifikasi dealer - tangan lemah mungkin push jika dealer tidak memenuhi syarat\n• Taruhan BLIND dapat sangat menguntungkan dengan tangan yang kuat (Royal Flush = 500:1!)\n• Perhatikan tumpukan chip Anda! Jika mencapai 0 atau di bawah pada awal putaran, Anda kalah.\n\n⚠️  CATATAN PENTING:\n• Taruhan ANTE dan BLIND wajib setiap putaran\n• Taruhan PLAY opsional dan strategis\n• Pastikan Anda memasukkan aksi yang benar, dan hanya satu aksi pada satu waktu.\n\n",
+    "state": "🎯 PUTARAN {round}\n💰 Chip: {chips}\n🎴 Tangan Anda: {hand}\n📊 Taruhan saat ini: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fase: {phase}\n🎯 Aksi tersedia: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Putaran {round} dimulai! Taruhan: ANTE ${ante}, BLIND ${blind}. Anda memiliki {chips} chip tersisa.",
+    "your_hand": "🎴 Tangan caine: {hand}",
+    "flop_revealed": " FLOP kasinahang: {cards}",
+    "river_revealed": " RIVER nyihnayang: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Tindakan nénten valid antuk fase mangkin.Tindakan sané wénten: {available}",
+    "message": " Pakaryan nénten valid!Pakaryan sané wénten: {available}"
+  },
+  "action": {
+    "folded": "🃏 Iraga kampih."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Tangan dealer: {cards}",
+    "community_cards": "🃏 Kartu komunitas: {cards}",
+    "player_best": "🎴 Tangan terbaik pemain: {name} ({cards})",
+    "dealer_best": "🎴 Tangan terbaik dealer: {name} ({cards})",
+    "ante_lost_folded": " ANTE bet LOST! -${ante} (malet)",
+    "blind_lost_folded": " Taruhan Buta KAUANG! -${blind} (kawalik)",
+    "ante_won": "✅ Taruhan ANTE menang! +${amount}",
+    "ante_pushed": "🔄 Taruhan ANTE push! ${ante} dikembalikan",
+    "ante_lost": "❌ Taruhan ANTE hilang! -${ante}",
+    "blind_won": "✅ Taruhan BLIND menang! +${amount}",
+    "blind_pushed": "🔄 Taruhan BLIND push! ${blind} dikembalikan",
+    "blind_lost": "❌ Taruhan BLIND hilang! -${blind}",
+    "play_won": "✅ Taruhan PLAY menang! +${amount}",
+    "play_pushed": "🔄 Taruhan PLAY push! ${play} dikembalikan",
+    "play_lost": "❌ Taruhan PLAY hilang! -${play}",
+    "net_gain": "🎉 Putaran {round} selesai! Keuntungan bersih: +${net}",
+    "net_loss": "💸 Putaran {round} selesai! Kerugian bersih: ${net}",
+    "separator": "- ring, ringing-ring... ring, Ring, ring, raring... ring! ... ring!"
+  },
+  "outcome": {
+    "game_over_win": "🏁 PERMAINAN SELESAI! {max_turns} putaran selesai. Anda memiliki ${chips} chip - ANDA MENANG!",
+    "game_over_lose": "🏁 PERMAINAN SELESAI! Anda kehabisan chip. Dealer menang!",
+    "reward_win": "Pemain menyelesaikan {winner_rounds} putaran dengan ${chips} chip",
+    "reward_lose": "Pemain kehabisan chip pada putaran {round}",
+    "reward_win_max": "Pemain menyelesaikan {max_turns} putaran dengan ${chips} chip"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush (Ratu sané kaambil)",
+    "straight_flush": "Straight Flush (Surat sané nglangenin)",
+    "four_of_a_kind": "Papat saking Sorohnyané",
+    "full_house": "Genah sané jangkep.",
+    "flush": "Ngambus ring jeriji",
+    "straight": "Mateges lantur.",
+    "three_of_a_kind": "Telu saking Sorohnyané",
+    "two_pair": "Kalih Pasangan",
+    "one_pair": "Silih tunggil Pasangan",
+    "high_card": "Kartu sané tegeh.",
+    "unknown": "Tangan sané nénten kauningin"
+  }
+}

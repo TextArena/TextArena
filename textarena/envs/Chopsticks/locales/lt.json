@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} žaidime Chopsticks. Savo ėjimo metu pasirinkite vieną iš:\n  + Puolimas:  '[attack M O]'  kur M=jūsų ranka (0 arba 1), O=varžovo ranka (0 arba 1).\n    - Varžovo rankos skaičius padidėja jūsų rankos dydžiu; jei >=5, jis tampa 0.\n  + Skaidymas:   '[split L R]'  perdalinti jūsų bendrą pirštų skaičių į L ir R (L+R = jūsų bendras skaičius).\nAtsakykite tiksliai vienu iš šių komandų."
+  },
+  "board": {
+    "current_board": "Dabartinė lentelė:\nŽaidėjas 0: {hands_0}\nŽaidėjas 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Jūsų ranka {my_idx} yra mirusi.",
+    "opp_hand_dead": "Varžovo ranka {opp_idx} jau yra mirusi.",
+    "split_sum": "Skaidymas turi sudėti iki {total}.",
+    "split_no_change": "Skaidymas turi pakeisti jūsų rankų pasiskirstymą.",
+    "invalid_command": "Neteisingas ėjimas. Naudokite “[attack M O]” arba “[split L R]”."
+  },
+  "game_action": {
+    "attack": "Ž{player_id} puola Ž{opp_id} ranką {opp_idx}: ji keičiasi nuo {opp_val} iki {new_val}.",
+    "split": "Ž{player_id} skaido į [{L}, {R}]."
+  },
+  "history": {
+    "entry": "Ž{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Abi varžovo rankos mirusios.",
+    "draw": "Ėjimų limitas pasiektas."
+  }
+}

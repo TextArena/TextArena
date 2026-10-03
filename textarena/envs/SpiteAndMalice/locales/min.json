@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Awak adolah Pemain {player_id} dalam pamainan duo urang Spite and Malice. Tujuan awak adolah manjadi nan partamo kosongkan tumpukan payoff awak.\n\n### Panjalehan Pamainan:\n- Tujuan pamainan adolah mambarasih tumpukan payoff awak jo maambiak kartu ka tumpukan tangah.\n- Awak buliah maambiak kartu dari tigo sumber:\n  1. **Tangan awak** (awak mulai satiok giliran jo kartu di tangan awak, sampai 5 kartu).\n  2. **Kartu ateh tumpukan payoff awak**.\n  3. **Kartu ateh tumpukan buang awak**.\n\n### Aturan Pamainan:\n- Awak buliah maambiak kartu ka tumpukan tangah jikok kartu tu **satu tingkek labiah tinggi** dari kartu ateh tumpukan tu (tumpukan tangah dimulai jo Ace dan batas sampai Queen; King adolah kartu liar - inyo buliah dimainkan di ateh kartu apo pun, tapi indak mambuek parubahan urutan tingkek. Iko bararti jikok King digunokan sasudah 4, mako King tu dianggap tingkek 5 dan kartu salanjuiknyo harus 6).\n- Jikok awak indak buliah maambiak kartu lai, awak harus **membuang kartu** ka salah satu tumpukan buang awak untuak mangakhiri giliran awak.\n- Jikok tumpukan tangah mancapai Queen, inyo akan dibarasi sacaro otomatis.\n- Urutan tingkek adolah: A=1, 2=2, ..., 9=9, J=10, Q=11, K sabagai kartu liar.\n\n### Tindakan:\n1. **Mengundi**: Di awal giliran awak, undi kartu untuak mangisi tangan awak sampai 5 kartu. Masuakkan **[draw]** untuak mulai.\n2. **Maambiak Kartu**: Untuak maambiak kartu, tentukan kartu jo tumpukan tangah sarupo iko: **[play A♠ 0]** (dimano 'A♠' adolah kartu jo '0' adolah indeks tumpukan tangah).\n3. **Membuang**: Jikok awak indak buliah maambiak kartu lai, buang kartu dari tangan awak ka tumpukan buang untuak mangakhiri giliran awak. Masuakkan **[discard A♠ 1]** (dimano 'A♠' adolah kartu jo '1' adolah indeks tumpukan buang). Padohal awak indak buliah mambuang kartu dari tumpukan payoff. Awak anyo buliah mambuang kartu dari tangan awak.\n\n"
+  },
+  "board": {
+    "current_board": "Papan Saat Ini:\n\n{board}\nGerakan Tersedia: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- Bateh tangah -- ",
+    "pile": "{observation}Tumpukan {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Tampilan Pemain {player_id} ---\n",
+    "payoff": "{observation}Tumpukan Bayaran (Kartu Teratas): {top_card}, Panjang Tumpukan Bayaran: {payoff_length}\n",
+    "hand": "{observation}Tangan: {hand}\n",
+    "discard": "{observation}Tumpukan Buang: {discard}\n",
+    "empty": "Indak ado."
+  },
+  "game_message": {
+    "no_cards_left": "Indak ado lai kartu untuak digunoan. Ingek-ingeklah baso awak dapek maadoan kad dari sumber iko: 1. tangan anda 2. kartu ateh tumpukan pambayaran 3. kartu atas salah satu tumpukan dibuang "
+  },
+  "invalid_move": {
+    "wrong_format": "Format langkah indak sah. Pamain {player_id} indak manjawek jo suatu gerakan nan valid dalam kurung kotak.",
+    "invalid_play": "Gerakan tidak valid. Pemain {player_id} mencoba memainkan {card} di tumpukan pusat {index}.",
+    "discard_from_payoff": "Pambuang indak sah. Pemain {player_id} mancubo mambuang kartu dari tumpukan bayaran.",
+    "discard_not_in_hand": "Indak sah dibuang. Pamain {player_id} mancubo mambuang kartu nan indak ado di tangannyo.",
+    "wrong_move_type": "Tipe garakan indak sah. Pamain {player_id} indak manjawek jo tipe garakan nan valid."
+  },
+  "game_action": {
+    "you_drew": "Sanak kau maimbau kartu.",
+    "opponent_drew": "Pamain {player_id} manggambar kartu.",
+    "you_played": "Awak bamain {card} di tumpukan tangah {index}.",
+    "opponent_played": "Pemain {player_id} memainkan {card} di tumpukan pusat {index}.",
+    "you_discarded": "Anda telah membuang {card} ke tumpukan buang {index}, yang berarti Anda telah menyelesaikan giliran Anda. Tidak ada tindakan lebih lanjut dari Anda yang dipertimbangkan untuk giliran ini. Pemain {next_player_id} akan bermain selanjutnya.",
+    "opponent_discarded": "Pemain {player_id} membuang {card} ke tumpukan buang {index}, yang berarti mereka telah menyelesaikan giliran mereka. Tidak ada tindakan lebih lanjut dari Pemain {player_id} yang dipertimbangkan untuk giliran ini. Pemain {next_player_id}, giliran Anda selanjutnya. Silakan masukkan tindakan Anda dalam format [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Pemain {current_player} telah menyelesaikan tumpukan bayaran mereka! Pemain {current_player} menang!",
+    "deadlock_player_0": "Jalan buntu tercapai! Pemain 0 menang dengan {player_0_payoff} kartu tersisa vs Pemain 1's {player_1_payoff} kartu.",
+    "deadlock_player_1": "Jalan buntu tercapai! Pemain 1 menang dengan {player_1_payoff} kartu tersisa vs Pemain 0's {player_0_payoff} kartu.",
+    "deadlock_tie": "Jalan buntu tercapai dengan seri! Kedua pemain memiliki {player_0_payoff} kartu tersisa. Pemain {current_player} menang secara default."
+  }
+}

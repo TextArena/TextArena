@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Ngweji uyi Mwana {player_id} mwana wa mutamba wa Kuhn Poker wa {max_rounds}.\nMilinga ya Mutamba:\n- Kuhn Poker ukitamba na kadi 3 za J, Q, K (J ndio ya kwanza, K ndio ya mwisho)\n- Kila mwana atamba {ante} chip na kupokelela kadi 1 kwa kila mutamba (kumbuka kwamba kadi hazitambulwa bila kubadilishwa, kwa hivyo huwezi kuwa na kadi moja na mshindani wako).\n- Mutamba ukitamba kwa {max_rounds} mutamba\n- Mwana aliye na chip nyingi zaidi baada ya mutamba wote akashinda\nMilinga ya Kufanya:\n- '[check]': Pita bila kubeti (tu ikiwa hakuna beti kwenye meza)\n- '[bet]': Ongeza chip 1 kwenye poti (tu ikiwa hakuna beti kwenye meza)\n- '[call]': Linganisha beti ya mshindani wako kwa kuongeza chip 1 kwenye poti\n- '[fold]': Achilia mkono wako na mshindani wako akashinda poti"
+  },
+  "init_round": {
+    "round_start": "### Mutamba wa {current_round} kati ya {max_rounds} utamba. Kadi yako ni: '{player_card}'",
+    "available_actions": "O ima i u tena o kubhanga, íii: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Kufanya lazima liwe [Check], [Bet], [Call], au [Fold].",
+    "not_legal": "O kijimbuete kia tokala o ku ki soneka mu mukanda iú, {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Mwana {player_id}, atambulwa kufanya: '[{move}]'.",
+    "valid_actions": "O ima i u tena o kubhanga, íii: {legal_actions}.",
+    "round_summary": "{reason} Alama za sasa: Mwana 0: '{player_0_chips}'; Mwana 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Kukabiliana: Kadi ya Mwana {winner} {winner_card} inashinda kadi ya Mwana {loser} {loser_card}. Mwana {winner} akashinda poti ya {pot_value} chip."
+  },
+  "outcome": {
+    "draw": "Mwishoni mwa {max_rounds} mutamba, wote wawili walikuwa na idadi sawa ya chip.",
+    "round_win": "O jokala {player_id} ua xindi.",
+    "winner_player0": "Mwana 0 akashinda kwa kuwa na chip nyingi zaidi mwishoni mwa mutamba wote {max_rounds}.",
+    "winner_player1": "Mwana 1 akashinda kwa kuwa na chip nyingi zaidi mwishoni mwa mutamba wote {max_rounds}."
+  }
+}

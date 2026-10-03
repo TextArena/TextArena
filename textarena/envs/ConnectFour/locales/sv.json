@@ -1,0 +1,21 @@
+{
+  "player_prompt": {
+    "intro": "Du är spelare {player_id} i Connect Four.\nDin brickasymbol: {symbol}.\nSpelet har {num_rows} rader och {num_cols} kolumner.\nSpelare turas om att släppa sin bricka i en av kolumnerna (0 till {end_col}).\nDen första som kopplar (sina egna) fyra brickor vertikalt, horisontellt eller diagonalt vinner.\nPå din tur, ange kolumnnumret inom hakparenteser för att göra ditt drag.\nTill exempel: '[col 4]' eller '[col 1]'."
+  },
+  "board": {
+    "board_visible_state": "Brädet:\n{board_visual}",
+    "board_notvisible_state": "Spelet är inte synligt för spelare."
+  },
+  "invalid_move": {
+    "wrong_format": "Spelare {player_id}, Ogiltigt aktionsformat. Förväntat format: '[col x]'.",
+    "out_of_range": "Spelare {player_id}, Ogiltig åtgärd. Kolumn {col} är utanför gränserna.",
+    "already_full": "Spelare {player_id}, Ogiltig åtgärd. Kolumn {col} är full."
+  },
+  "action": {
+    "dropped_disk": "Spelare {player_id} släppte sin bricka ({player_symbol}) i kolumn {col}."
+  },
+  "outcome": {
+    "win": "Spelare {player_id} vinner genom att koppla fyra!",
+    "draw": "Spelet slutade oavgjort."
+  }
+}

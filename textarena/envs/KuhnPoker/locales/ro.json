@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Sunteți Jucătorul {player_id} într-un joc de {max_rounds} runde de Kuhn Poker.\nReguli de joc:\n- Kuhn Poker folosește un pachet de 3 cărți cu J, Q, K (J cea mai mică, K cea mai mare)\n- Fiecare jucător pariază {ante} jetoane și primește 1 carte în fiecare rundă (notați că cărțile sunt distribuite fără înlocuire, deci nu puteți avea aceeași carte ca și adversarul dvs.).\n- Jocul continuă pentru {max_rounds} runde\n- Jucătorul cu cele mai multe jetoane după toate rundele câștigă\nReguli de acțiune:\n- '[check]': Treceți fără a paria (doar dacă nu există pariuri pe masă)\n- '[bet]': Adăugați 1 jeton la pot (doar dacă nu există pariuri pe masă)\n- '[call]': Egalizați pariul adversarului dvs. adăugând 1 jeton la pot\n- '[fold]': Renunțați la mâna dvs. și lăsați adversarul dvs. să câștige potul"
+  },
+  "init_round": {
+    "round_start": "### Începe runda {current_round} din {max_rounds} runde. Cartea dvs. este: '{player_card}'",
+    "available_actions": "Acțiunile dvs. disponibile sunt: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Acțiunea trebuie să fie [Check], [Bet], [Call] sau [Fold].",
+    "not_legal": "Acțiunea trebuie să fie {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Jucătorul {player_id} a trimis mutarea: '[{move}]'.",
+    "valid_actions": "Acțiunile dvs. disponibile sunt: {legal_actions}.",
+    "round_summary": "{reason} Scorurile curente: Jucător 0: '{player_0_chips}'; Jucător 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Confruntare: Cartea Jucătorului {winner} '{winner_card}' bate cartea Jucătorului {loser} '{loser_card}'. Jucătorul {winner} câștigă potul de {pot_value} jetoane."
+  },
+  "outcome": {
+    "draw": "La sfârșitul celor {max_rounds} runde, ambii jucători aveau același număr de jetoane.",
+    "round_win": "Jucătorul {player_id} a renunțat.",
+    "winner_player0": "Jucătorul 0 a câștigat având mai multe jetoane la sfârșitul tuturor celor {max_rounds} runde.",
+    "winner_player1": "Jucătorul 1 a câștigat având mai multe jetoane la sfârșitul tuturor celor {max_rounds} runde."
+  }
+}

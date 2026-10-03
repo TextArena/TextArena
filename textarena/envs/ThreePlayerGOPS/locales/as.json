@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "আপনি তিন-খেলোয়াড় GOPS-এ খেলোয়াড় {player_id}।\n- আপনি 13টি কার্ড A-K (প্রতিটি ঠিক একবার) ধরে রাখুন।\n- প্রতিটি রাউন্ডে একটি পুরস্কার প্রকাশ করা হয়। একটি কার্ড জমা দিন যেমন `[Q]`, `[10]`, `[2]` …\n- সর্বোচ্চ কার্ড পুরস্কার জিতে (যেকোনো বহন-ওভার পাত্র সহ)। টাই পুরস্কারটিকে পরবর্তী রাউন্ডে রোল করে।\n- 13 রাউন্ডের পরে, সর্বোচ্চ মোট জিতে। অবৈধ চাল = নির্মূল।"
+  },
+  "round": {
+    "header": "### ৰাউণ্ড {round}/13 - পুৰস্কাৰঃ {prize} (মান {worth})",
+    "hand": "আপোনাৰ বাকী হাত: {hand}"
+  },
+  "reveal": {
+    "win": "বিড  {bids} - খেলুৱৈ {winner} বিজয়ী {pot}।",
+    "tie": "বিড  {bids} - টাই, পট এতিয়া {pot}।",
+    "scores": "স্ক'ৰসমূহ → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "কাৰ্য্যটো কৰিবলৈ এটা বন্ধকত থকা কাৰ্ডৰ প্ৰয়োজন হয় যেনে \"[Q]\"",
+    "bad_card": "কাৰ্ড ইতিমধ্যে ব্যৱহাৰ হৈছে বা অবৈধ"
+  },
+  "elimination": {
+    "player": "খেলুৱৈ {pid} বাৰে বাৰে অবৈধ পদক্ষেপৰ পিছত বাহিৰ হয়।"
+  },
+  "outcome": {
+    "auto_win": "দুটা খেলুৱৈক বাদ দিয়া হৈছে - স্বয়ংক্ৰিয় বিজয়।",
+    "final": "চূড়ান্ত নম্বৰসমূহঃ {scores}"
+  }
+}

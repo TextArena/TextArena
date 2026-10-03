@@ -1,0 +1,31 @@
+{
+  "_comment": "Ficheiro de localización de Snake. NON traduzas as claves (lado esquerdo). Só traduce os valores (lado dereito). Mantén cada {placeholder} exactamente como está.",
+  "_slots": {
+    "{num_players}": "Número de xogadores na partida",
+    "{width}": "Largura do taboleiro en celas",
+    "{height}": "Altura do taboleiro en celas",
+    "{max_turns}": "Límite de turnos para a partida",
+    "{player_id}": "Número do xogador (baseado en 0)",
+    "{board}": "A grella ASCII renderizada; mantén neutral, nunca traduzas os seus caracteres",
+    "{reason}": "A frase de razón de fin de xogo renderizada",
+    "{groups}": "Datos de clasificación neutrais (unha lista de grupos de ID de xogador, do peor ao mellor); non traduzas"
+  },
+  "player_prompt": {
+    "intro": "Snake de {num_players} xogadores nunha grella de {width}×{height}.\nControlas a serpe {player_id}. Movementos válidos: '[up]'/'[down]'/'[left]'/'[right]' (ou w/s/a/d).\nObxectivo: sobrevivir máis tempo ou ser o máis longo e obter a puntuación máis alta (límite de turnos {max_turns} turnos)."
+  },
+  "board": {
+    "current": "Taboleiro actual:\n{board}",
+    "after_moves": "Estado actual do taboleiro:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "A serpe {player_id} morreu debido a un movemento inválido."
+  },
+  "outcome": {
+    "survived_win": "O xogador {player_id} sobreviviu; todos os demais pereceron.",
+    "all_dead_simul": "Todas as serpes morreron simultaneamente.",
+    "outlived": "O xogador sobreviviu a todos os demais.",
+    "all_dead": "Todas as serpes están mortas.",
+    "turn_limit": "Límite de turnos alcanzado - a mellor puntuación gaña o desempate.",
+    "ranking": "{reason} Grupos de clasificación finais (do peor ao mellor): {groups}"
+  }
+}

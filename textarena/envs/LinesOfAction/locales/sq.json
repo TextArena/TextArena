@@ -1,0 +1,36 @@
+{
+  "_comment": "Skedari i lokalizimit për LinesOfAction. MOS përkthej çelësat (ana e majtë). Përkthej vetëm vlerat (ana e djathtë).",
+  "_slots": {
+    "{player_id}": "Numri i lojtarit, ose 0 ose 1",
+    "{side}": "Shenja e lojtarit, ose O ose X",
+    "{other}": "Shenja e kundërshtarit, ose O ose X",
+    "{board}": "Paraqitja ASCII e bordit; mbaj ashtu",
+    "{coord}": "Koordinata e bordit siç është b1 ose a3",
+    "{from}": "Koordinata e burimit të një lëvizjeje, siç është b1",
+    "{to}": "Koordinata e destinacionit të një lëvizjeje, siç është b3"
+  },
+  "player_prompt": {
+    "intro": "Ju jeni Lojtari {player_id} në lojën LinesOfAction.\nPjesët tuaja janë '{side}', pjesët e kundërshtarit janë '{other}'.\nFormati i lëvizjes: `[b1b3]` (nga-koordinata tek-koordinata). Një lëvizje e ligjshme udhëton në mënyrë horizontale, vertikale ose diagonale një numër të katrorëve të barabartë me numrin total të pjesëve (çdo ngjyrë) në atë linjë. Mund të hidhni mbi pjesët tuaja, por jo mbi pjesët e kundërshtarit; duke u ulur mbi një kundërshtar e kap. Fitoni kur të gjitha pjesët tuaja janë të lidhura 8-fishta."
+  },
+  "board": {
+    "current_board": "Bordi:\n\n{board}"
+  },
+  "invalid_move": {
+    "wrong_format": "Formati duhet të jetë e2e4 (koordinatat nga, tek).",
+    "no_piece": "Nuk ka pjesë {side} në {coord}.",
+    "identical": "Burimi dhe destinacioni janë identikë.",
+    "not_straight_or_diagonal": "Lëvizja duhet të jetë drejtë ose diagonale.",
+    "wrong_distance": "Duhet të lëvizni një distancë të barabartë me pjesët në linjë.",
+    "enemy_blocks": "Pjesa e armikut bllokon rrugën.",
+    "destination_own": "Destinacioni është i zënë nga pjesa juaj."
+  },
+  "game_action": {
+    "moved": "Lojtari {player_id} lëvizi {from} -> {to}",
+    "captured_suffix": "Lojtari {player_id} lëvizi {from} -> {to} duke kapur një armik."
+  },
+  "outcome": {
+    "win": "Të gjitha pjesët janë të lidhura.",
+    "draw_no_capture": "60 lëvizje pa kapje.",
+    "draw_repetition": "Pozicioni u përsërit tre herë."
+  }
+}

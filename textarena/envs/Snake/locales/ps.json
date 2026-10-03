@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Do NOT translate the move/direction tokens the player types ([up], [down], [left], [right], w, s, a, d) or the ASCII board rendered into {board}.",
+  "_slots": {
+    "{num_players}": "Number of players in the match",
+    "{width}": "Board width in cells",
+    "{height}": "Board height in cells",
+    "{max_turns}": "Turn limit for the match",
+    "{player_id}": "A player's number (0-based)",
+    "{board}": "The rendered ASCII grid; keep neutral, never translate its characters",
+    "{reason}": "The rendered end-of-game reason phrase",
+    "{groups}": "Neutral ranking data (a list of player-id groups, worst to best); do not translate"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-د سنېک په یو {width}×{height} ګرید کې دی.\nتاسو سنېک {player_id} کنټرولوي. د معتبر غورځونکي: '[up]'/'[down]'/'[left]'/'[right]' (یا w/s/a/d).\nموخه: تر اوږدمهال ژوندی پاتې کېدل یا تر اوږدوالي سنېک وي او لوړ امتیاز ترلاسه کول (د ګام محدودیت {max_turns} ګامونه)."
+  },
+  "board": {
+    "current": "اوسنی بورډ: {board}",
+    "after_moves": "د اوسني بورډ دولت: {board}"
+  },
+  "game_action": {
+    "invalid_death": "مار {player_id} د ناقانونه حرکت له امله مړ شو."
+  },
+  "outcome": {
+    "survived_win": "لوبغاړی {player_id} ژوندی پاتې شو؛ نور ټول مړه شول.",
+    "all_dead_simul": "ټول ماران په يو وخت کې مړه شول.",
+    "outlived": "لوبغاړی د نورو څخه ژوندی پاتې شو.",
+    "all_dead": "ټول ماران مړه شوي دي.",
+    "turn_limit": "د ګرځېدلو حد ته رسېدلی - تر ټولو ښه سکور د ټای بریک ګټونکی دی.",
+    "ranking": "{reason} د وروستي درجه بندي ډلې (بدترین→ غوره): {groups}"
+  }
+}

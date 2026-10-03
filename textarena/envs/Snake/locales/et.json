@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake'i keelefail. ÄRGE tõlgige võtmeid (vasak pool). Tõlgige ainult väärtused (parem pool). Jätke kõik {placeholder} täpselt samaks.",
+  "_slots": {
+    "{num_players}": "Mängijate arv matšis",
+    "{width}": "Laua laius ruutudes",
+    "{height}": "Laua kõrgus ruutudes",
+    "{max_turns}": "Matši käikude piir",
+    "{player_id}": "Mängija number (0-põhine)",
+    "{board}": "Renderdatud ASCII võre; jätke neutraalseks, ärge tõlgige selle märke",
+    "{reason}": "Renderdatud mängu lõpu põhjuse fraas",
+    "{groups}": "Neutraalne edetabeli andmed (mängijate numbrite grupid, halvimast parimani); ärge tõlgige"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-mängija Snake {width}×{height} võrel.\nSa juhtid ussi {player_id}. Kehtivad käigud: '[up]'/'[down]'/'[left]'/'[right]' (või w/s/a/d).\nEesmärk: ellu jääda kõige kauem või olla pikim ja saada kõrgeim skoor (käikude piir {max_turns} käiku)."
+  },
+  "board": {
+    "current": "Praegune laud:\n{board}",
+    "after_moves": "Praegune laua seisund:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Uss {player_id} suri kehtetu käigu tõttu."
+  },
+  "outcome": {
+    "survived_win": "Mängija {player_id} jäi ellu; kõik teised hukkusid.",
+    "all_dead_simul": "Kõik ussid surid samaaegselt.",
+    "outlived": "Mängija elas kõik teised üle.",
+    "all_dead": "Kõik ussid on surnud.",
+    "turn_limit": "Käikude piir saavutati - parim skoor võidab viigi.",
+    "ranking": "{reason} Lõplik edetabeli grupid (halvimast parimani): {groups}"
+  }
+}

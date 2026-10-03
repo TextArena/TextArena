@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Sidae makkunrai {player_id} ri olahraga Iterated Prisoner's Dilemma latettong {num_rounds} ronde.\n\nStruktur Olahraga:\n- Sibalunna kulleppa untu' makkedai {total_conversation_rounds} giliran untu' berkomunikasi mappatamma'.\n- Sipakalebbi', rua pammakkunrai annganri' makkedai untu' kooperasi atawa mengkhianati.\n\nMatriks Pembayaran (tetap saban ronde):\n- Rua pammakkunrai Kooperasi ➜ masing-masing {cooperate_reward}\n- Rua pammakkunrai Mengkhianati ➜ masing-masing {mutual_defect_reward}\n- Sese' Mengkhianati, sese' Kooperasi ➜ Pengkhianat {defect_reward}, Pammakkunrai {sucker_reward}\n\nCara Makkedai:\n- Ri masa kulleppa: katte' teks makkunrai.\n- Ri masa kulleppa keputusan: masukkan '[Cooperate]' atawa '[Defect]' (tidak peka huruf besar/kecil). Makkunrai bisa menambahkan teks ekstra sabalunna/battu token."
+  },
+  "phases": {
+    "conversation_finished": "Pappasangka tamat ri ronde {round}. Tolong balasna '[Cooperate]' atau '[Defect]' ri \\boxed{{}}.",
+    "starting_round": "--- Mappammulai Bulatna {round} ---",
+    "round_summary": "Hasili ripakale {round}:\n{outcome}\nTau 0 makkalu {r0} (tolu {score_0}), Tau 1 makkalu {r1} (tolu {score_1})."
+  },
+  "outcome": {
+    "winner": "Player {winner} menang {win_score} - {lose_score}.",
+    "draw": "Draw! Duanna tau maccule naccue {s0}.",
+    "round_both_cooperate": "Ri duwae tau maccule majjama.",
+    "round_both_defect": "Ri duwae tau maccule' e nalai.",
+    "round_p0_cooperates_p1_defects": "Tau 0 mappakkita, Tau 1 makkatolak.",
+    "round_p0_defects_p1_cooperates": "Tau 0 makkatolak, Tau 1 mappakkita."
+  }
+}

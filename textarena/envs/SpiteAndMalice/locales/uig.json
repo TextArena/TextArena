@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Siz Spite and Malice oyinining ikki oyunchiliq oyinida {player_id} nömrili oyunchisiz. Sizning maqsadingiz özüngizning payoff qىلىنىنى bo'shatqan birinchi bolush.\n\n### Oyin Xüläsisi:\n- Maqsad payoff qىلىنىنى markaziy qىلىنgha chiqirip bo'shatqan.\n- Siz uch xil manbadin kartochka oyniyalaysiz:\n  1. Sizning **qol** (siz har bir turda 5 kartochkagha qadar qol bashlaysiz).\n  2. Sizning **payoff qىلىنىنىng üstkartochkisi**.\n  3. Sizning **iscard qىلىنlarining üstkartochkisi**.\n\n### Oynash Qoidisi:\n- Siz markaziy qىلىnga kartochka oyniyalaysiz agar u **üstkartochkidan bir daraja yuqori** bolsa (markaziy qىلىnlar Ace bilan bashlanip Queen gha qadar baridu; Kinglar wild - ular hargha kartochkagha oynalsa bolup, lekin daraja tartibini üzgärtmeydu. Bu King 4 din keyin ishlitilsa, u King 5 darajasida bolup, keyingi kartochka 6 bolush kerek).\n- Agar siz kartochka oyniyalmaydu, siz turunuzu tugatish uchun **kartochkani iscard qىلىnga** tashlaysiz.\n- Agar markaziy qىلىn Queen gha yetse, u avtomatik ravishda bo'shatilidu.\n- Daraja tartibi: A=1, 2=2, ..., 9=9, J=10, Q=11, K wild.\n\n### Harakatlar:\n1. **Chiqir**: Turuniz bashida, qolingizni 5 kartochkagha qadar to'ldurush uchun kartochka chiqirish. **[draw]** ni kiriting.\n2. **Kartochka Oynash**: Kartochka oynash uchun, kartochkani markaziy qىلىnga bashqa kartochkagha oynash uchun: **[play A♠ 0]** (bu yerda 'A♠' kartochka, '0' bolsa markaziy qىلىn indeksi).\n3. **Iscard**: Agar siz kartochka oyniyalmaydu, qolingizdin kartochkani iscard qىلىnga tashlash uchun turunuzu tugatish. **[discard A♠ 1]** ni kiriting (bu yerda 'A♠' kartochka, '1' bolsa iscard qىلىn indeksi). Diqqat, siz payoff qىلىnidin kartochkani iscard qىلىnga tashlaysiz emes. Siz faqat qolingizdin kartochkalarni iscard qىلىnga tashlaysiz."
+  },
+  "board": {
+    "current_board": "ھازىرқى تاختاى:\n\n{board}\nئىشقا بولىدىغان қىммەتلەر: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- مەركىزىي تۈۋرۈكلەر -- ",
+    "pile": "{observation}تۇغۇن {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- ئويناشقۇ {player_id} نىڭ كۆرۈنۈشى ---\n",
+    "payoff": "{observation}توپلىمى تۇغۇنى (ئۈستىدىكى كارت): {top_card}، توپلىمى تۇغۇن ئۇزۇنلۇقى: {payoff_length}\n",
+    "hand": "{observation}قول: {hand}\n",
+    "discard": "{observation}تاشلاش تۇغۇنلارى: {discard}\n",
+    "empty": "بوش."
+  },
+  "game_message": {
+    "no_cards_left": "چېقىشقا بولىدىغان كارتا قالمىدى. شۇنى ئەسكەرتىش كېرەككى، سىز بۇ مەنبەلەردىن كارتا چېقىشقا بولىدۇ:\n  1. قولىڭىز.\n  2. پەيئوف پىلىڭىزنىڭ ئۈستىدىكى كارتا.\n  3. تاشلىغان پىلىڭىزنىڭ ئۈستىدىكى كارتا.\n\n"
+  },
+  "invalid_move": {
+    "wrong_format": "ئىناۋەتسىز ھەركەت شەكلى. {player_id} ئويۇنچىنىڭ قولىدىكى بىر قېتىملىق ھەرىكىتى توغرا ئەمەس .",
+    "invalid_play": "توغرا بولمىغان ھەرىكەت. ئويناشقۇ {player_id} {card} نى ئوتتۇرا تۇغۇن {index} گە قويۇپ بېرىشكە تىرىشىپ бақتى.",
+    "discard_from_payoff": "ئىناۋەتسىز تاشلاش. {player_id} ئويۇنچى مۇكاپات توپىدىن بىر كارتىنى تاشلىماقچى بولدى .",
+    "discard_not_in_hand": "ئىناۋەتسىز تاشلاش. {player_id} ئويۇنچى قولىدا بولمىغان بىر كارتىنى تاشلىماقچى بولدى .",
+    "wrong_move_type": "خاتا ھەركەت تىپى. {player_id} ئويۇنچى توغرا بىر ھەرىكەت تىپىنى كۆرسەتمىدى."
+  },
+  "game_action": {
+    "you_drew": "سەن كارتا تارتتىڭ.",
+    "opponent_drew": "ئويۇنچى {player_id} كارتا تارتتى.",
+    "you_played": "سىز {card} نى ئوتتۇرا تۇغۇن {index} گە قويдуڭىز.",
+    "opponent_played": "ئويناشقۇ {player_id} {card} نى ئوتتۇرا تۇغۇن {index} گە قويدى.",
+    "you_discarded": "سىز {card} نى تاشلاش تۇغۇنى {index} گە تاشلىدىڭىز، بۇنىڭ مەنىسى سىز ئۆز تۇرڭىزنى پۈتتۈردىڭىز. سىزنىڭ قوشقان ھېچقانداق ھەرىكەت سىز بۇ تۇردا ئېتىبارغا ئالمايدۇ. ئويناشقۇ {next_player_id} كېيىنكى بولىدۇ.",
+    "opponent_discarded": "ئويناشقۇ {player_id} {card} نى تاشلاش تۇغۇنى {index} گە تاشلىدى، بۇنىڭ مەنىسى ئۇ ئۆز تۇرنى پۈتتۈردى. بۇ تۇردا ئويناشقۇ {player_id} نىڭ قوشقان ھېچقانداق ھەرىكىتى ئېتىبارغا ئالمايدۇ. ئويناشقۇ {next_player_id}، سىز كېيىنكى بولىسىز. زۆرۇر ھەرىكەتنى [action card center_index] فېرماتى بويىچە كىرگۈزۈڭ."
+  },
+  "outcome": {
+    "payoff_cleared": "{current_player}-نۆمۇرلۇق ئويۇنچىنىڭ قەرزنى تۆلەش قارتىسى تۈگىدى! {current_player}-نۆمۇرلۇق ئويۇنچى يېڭىپ چىقتى!",
+    "deadlock_player_0": "تەڭلىشىش يېتىلدى! 0-نۆمۇرلۇق ئويۇنچى {player_0_payoff} قارتىنى قالدۇرۇپ، 1-نۆمۇرلۇق ئويۇنچىنىڭ {player_1_payoff} قارتىسىدىن يېڭىپ چىقتى.",
+    "deadlock_player_1": "تەڭلىشىش يېتىلدى! 1-نۆمۇرلۇق ئويۇنچى {player_1_payoff} قارتىنى قالدۇرۇپ، 0-نۆمۇرلۇق ئويۇنچىنىڭ {player_0_payoff} قارتىسىدىن يېڭىپ چىقتى.",
+    "deadlock_tie": "تەڭلىشىش يېتىلدى، نەتىجە تەڭ! ھەر ئىككى ئويۇنچى {player_0_payoff} قارتىنى قالدۇرۇپ، {current_player}-نۆمۇرلۇق ئويۇنچى سۈنئىي ھالدا يېڭىپ چىقتى."
+  }
+}

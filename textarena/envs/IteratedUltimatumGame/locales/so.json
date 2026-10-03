@@ -1,0 +1,43 @@
+{
+  "_comment": "IteratedUltimatumGame locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is; do not translate the action tokens [Offer: $X] / [Accept] / [Reject]. Keep the '$' currency symbol and all numbers as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, 0 or 1",
+    "{other_id}": "The other player's number, 1 or 0",
+    "{num_rounds}": "Total number of rounds",
+    "{pool}": "Amount of money available each round (a number)",
+    "{round_number}": "The current round number",
+    "{proposer_id}": "The proposer player's number, 0 or 1",
+    "{responder_id}": "The responder player's number, 0 or 1",
+    "{offer}": "The amount offered (a number)",
+    "{keep}": "The amount the proposer keeps (a number)",
+    "{proposer_gain}": "Money the proposer gained this round (a number)",
+    "{responder_gain}": "Money the responder gained this round (a number)",
+    "{total_0}": "Player 0's accumulated total (a number)",
+    "{total_1}": "Player 1's accumulated total (a number)",
+    "{winner}": "The winning player's number",
+    "{loser}": "The losing player's number",
+    "{winner_total}": "The winner's total money (a number)",
+    "{loser_total}": "The loser's total money (a number)",
+    "{total}": "Each player's tied final total (a number)"
+  },
+  "player_prompt": {
+    "intro": "Waxaad tahay ciyaaryahanka {player_id}, oo ciyaaraya {num_rounds} wareeg oo ah Ciyaarta Ultimatum ee la soo noqnoqday. Waxaad haysataa ${pool} si aad u kala qaybiso wareegaan adiga iyo ciyaaryahanka {other_id}. Soo jeediyaha: - U samee dalab: [Offer: $X] (0 <= X <= pool) - Haddii la aqbalo → Waxaad heleysaa $ ((pool - X), ciyaaryahan kale wuxuu helayaa $ X - Haddii la diido → Labaduba waxay helayaan $ 0 - Tusaale: [Offer: $3] ama 'Waxaan u maleynayaa inay taasi cadaalad tahay. [Offer: $5]' Jawaab bixiyaha: - Go'aanso dalabka midkood [Accept] ama [Reject] - Tusaale: 'Waxay umuuqataa mid macquul ah. [Accept]' 'Aad baa cadaalad darro ah. [Reject]'"
+  },
+  "round": {
+    "begins": "--- Wareega {round_number} ayaa bilaabmaya! --- Ciyaaryahanka {proposer_id} waa soo jeediyaha, Ciyaaryahanka {responder_id} waa jawaabiyaha.",
+    "offer": "Wareega {round_number}: Ciyaaryahanka {proposer_id} wuxuu ${offer} u soo bandhigayaa Ciyaaryahanka {responder_id} (wuxuu hayaa ${keep}).",
+    "accepted": "Ciyaaryahanka {responder_id} waa la aqbalay! Wareega {round_number} guulaha: Ciyaaryahanka {proposer_id} + ${proposer_gain}, Ciyaaryahanka {responder_id} + ${responder_gain}. Guud ahaan cusub: Ciyaaryahanka 0: ${total_0}, Ciyaaryahanka 1: ${total_1}.",
+    "rejected": "Ciyaartoyga {responder_id} diiday soo jeedin! Raundi {round_number} kasbo: Labaduba +$0. Jumla weli: Ciyaartoyga 0: $ {total_0}, ciyaartoyga 1: $ {total_1}."
+  },
+  "invalid_move": {
+    "no_offer_format": "Codsaduhu waa inuu soo gudbiyaa dalabka isagoo isticmaalaya foomka [Offer: $X].",
+    "bad_integer": "Lacagta la bixiyo waa inay ahaataa tiro dhan oo sax ah.",
+    "out_of_range": "Lacagta la bixinayo waa inay u dhaxaysaa $0 ilaa ${pool}",
+    "no_current_offer": "Wax dalab ah oo la soo jeediyay ma jiro.",
+    "accept_or_reject": "Jawaab bixiyuhu waa inuu soo gudbiyaa ama [Accept] ama [Reject] dalabka."
+  },
+  "outcome": {
+    "win": "Ciyaaryahanka {winner} ayaa ku guuleystay ${winner_total} wadarta vs Ciyaaryahanka {loser} ${loser_total}.",
+    "draw": "Isku dheelitir! Labada ciyaaryahanba waxay ku dhammeeyeen $ {total} wadarta."
+  }
+}

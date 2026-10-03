@@ -1,0 +1,39 @@
+{
+  "_comment": "ThreePlayerGOPS locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is. Never translate the bracketed card tokens (e.g. [A], [10], [Q], [K]), the neutral bid/score fragments like 'P0:10', the '### ' markdown, or the '»' and '→' symbols.",
+  "_slots": {
+    "{player_id}": "The player's number, 0, 1 or 2",
+    "{round}": "The current round number, 1..13",
+    "{prize}": "The revealed prize card's face label (A, 2..10, J, Q, K) - do not translate",
+    "{worth}": "The prize's total value including any carried-over pot",
+    "{hand}": "The player's remaining cards, rendered as bracketed tokens like '[A]' '[2]' - do not translate",
+    "{bids}": "The neutral comma-separated list of played cards like 'P0:10, P1:J, P2:Q' - do not translate",
+    "{winner}": "The player number who won the round",
+    "{pot}": "The pot value awarded or carried over this round",
+    "{scoreline}": "The neutral running scoreboard like 'P0:0  P1:0  P2:11' - do not translate",
+    "{pid}": "The player number that was eliminated",
+    "{scores}": "The final scores as a raw player-number to score mapping - do not translate"
+  },
+  "player_prompt": {
+    "intro": "ཁྱེད་ནི་མི་གསུམ་གྱི་ GOPS རྩེད་མོའི་མི་རྩེད་པ་ {player_id} ཡིན།\n- ཁྱེད་ཀྱིས་པར་ཏ་ A-K (རེ་རེ་ནས་ཐེངས་གཅིག་ལས་མེད་པའི་) 13 ཐོབ་ཡོད།\n- རེས་མོ་རེ་རེར་བྱ་དགའ་གཅིག་སྟོན་པ་ཡིན། [Q] དང་འདྲ་བའི་པར་ཏ་གཅིག་རྒྱུག་རོགས། [10], [2] …\n- པར་ཏ་མཐོ་ཤོས་ཀྱིས་བྱ་དགའ་ཐོབ་པ་ཡིན། (+ བསྒྱུར་བཅུག་པའི་བྱ་དགའ་གང་ཡོད་པ་) འོག་འདྲ་བའི་རེས་མོར་བྱ་དགའ་བསྒྱུར་བ་ཡིན།\n- 13 རེས་མོའི་རྗེས་སུ། བྱུང་བ་མཐོ་ཤོས་ཀྱིས་རྒྱལ་ཁ་ཐོབ་པ་ཡིན། རྩེད་ཐབས་ནུས་མེད་པ་དག་གིས་ཕམ་པར་གཏོང་བ་ཡིན།"
+  },
+  "round": {
+    "header": "### ར་བཅུ་གསུམ་གྱི་{round} - རིན་ཐང་：{prize} （རིན་ཐང་{worth}）",
+    "hand": "ཁྱོད་ཀྱི་ལག་ལྷག་པ། {hand}"
+  },
+  "reveal": {
+    "win": "གསང་འཕྲིན་ » {bids} - མི་སྒེར་ {winner} གིས་ {pot} ཐོབ་པ་རེད།",
+    "tie": " {bids} - ཐེ་ཚོམ་, ད་ལྟའི་བུམ་པ་ {pot}།",
+    "scores": "འབྲས་བསྡུས། → {scoreline}"
+  },
+  "invalid_move": {
+    "no_token": "ལས་འགན་འདི་ལ་ \"[Q]\" ལྟ་བའི་སྒོ་སྒྲིག་ནང་ཡོད་པའི་ལག་འཁྱེར་དགོས་པ་ཡིན།",
+    "bad_card": "ལག་ལེན་ཟིན་པའམ་ལག་འཁྱེར་མེད་པ།"
+  },
+  "elimination": {
+    "player": "རྩེད་འགྲན་པ་ {pid} གིས་ཐེངས་མང་པོར་ནོར་འཁྲུལ་གྱི་གོམ་སྤོས་བྱས་རྗེས་ཕྱིར་འཐེན་བྱས།"
+  },
+  "outcome": {
+    "auto_win": "རྩེད་འགྲན་པ་གཉིས་ཕྱིར་འཐེན་བྱས་ན། རང་བཞིན་གྱིས་རྒྱལ་ཁ་ཐོབ་པ་ཡིན།",
+    "final": "མཐའ་མའི་གྲུབ་འབྲས། {scores}"
+  }
+}

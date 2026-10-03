@@ -1,0 +1,32 @@
+{
+  "_comment": "ThreePlayerTicTacToe locale file. DO NOT translate keys (left side). Only translate values (right side). Keep every {placeholder} exactly as-is.",
+  "_slots": {
+    "{player_id}": "The player's number, e.g. 0, 1 or 2",
+    "{symbol}": "The player's mark, one of A, B or C",
+    "{cell}": "A board cell number",
+    "{max_cell}": "The highest valid cell number (board_size^2 - 1)",
+    "{row}": "The board row index of the placed mark",
+    "{col}": "The board column index of the placed mark",
+    "{board}": "The rendered ASCII board (do not translate)",
+    "{moves}": "The comma-separated list of available move tokens like '[4]' (do not translate)"
+  },
+  "player_prompt": {
+    "intro": "Ikaw so Player {player_id} ed Three-Player Tic Tac Toe.\nSay simbolo mo '{symbol}'.\nIkaw la takken turns na natangtan na simbolo mo ed saray 5x5 a papan balet line na upaya.\nLines pwede la horizontal, vertical, o diagonal.\nIsumite yo move yo using na format '[4]' balet marka cell 4."
+  },
+  "board": {
+    "current_board": "Kasalanan a Papan:\n\n{board}\n\nDakel a Mangusisa: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Mali a pormat na galaw. Usaren yo so '[cell]' no sika cell et 0-{max_cell}.",
+    "out_of_range": "Sala a numero na cell: {cell}. Kinmapo la between 0 and {max_cell}.",
+    "already_occupied": "Say selula {cell} et wala la.",
+    "made_invalid": "Say manlalaban {player_id} et nanggawa na aliwan valid a galaw."
+  },
+  "game_action": {
+    "placed": "Say Player {player_id} natangtan na saray simbolo ({symbol}) ed field ({row}, {col})."
+  },
+  "outcome": {
+    "win": "Say Player {player_id} ({symbol}) et nanalo!",
+    "draw": "Anggapoy analo ed sayan dula!"
+  }
+}

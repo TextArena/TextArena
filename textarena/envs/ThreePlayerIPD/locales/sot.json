@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "U ena le Player {player_id} khangellong ya Iterated Prisoner's Dilemma e nang le batšoantšisi ba 3. Mohlang oa mokgatlo o dula {num_rounds} mabapi.\nMokgatlo oa mabapi:\n• {conv_rounds} diroto tsa mahala\n• 1 kgato ya qeto - kenya token e le 'ngoe bakeng sa mmuso: '[<opp-id> cooperate]' kapa '[<opp-id> defect]' (haholo '[1 defect] [2 cooperate]'; default ke 'cooperate'). \nMatrix ya mpho e makgotleng (e etsoang ho tsoa sekgateng se seng sa mokgatlo):\n  - Ba babedi ba cooperate  ->  {reward}\n  - Ba babedi ba defect     ->  {punishment}\n  - U defect, ba cooperate -> {temptation}\n  - U cooperate, ba defect -> {sucker}\nMots'oantšisi (a) a nang le chelete e phahameng ka ho fetisisa mabapong a mokgatlo o qetile o hlotse."
+  },
+  "round": {
+    "start": "─── Tsoalo ya Pano {round} ───\tU ka puoa ka mahala katsening ya {conv_rounds} diphephetso.",
+    "chat_finished": "Puisano e qetile bakeng sa round {round}. Kenya dikgato tsa hao, token e le 'ngoe bakeng sa mmuso: `[pid cooperate]` kapa `[pid defect]`."
+  },
+  "results": {
+    "header": "### Round {round} - Liphetho:",
+    "pair_line": "{observation}\n\t Mohološi {i} vs Mohološi {j} a ile a {choice_i} le {choice_j} (Mohološi {i} a fumane {gain_i}, Mohološi {j} a fumane {gain_j})",
+    "scores_open": "{observation} -> Lintlha tsa hona joale: ",
+    "score_first": "{observation}Mohološi {player_id} ({score})",
+    "score_next": "{observation}; Mohološi {player_id} ({score})",
+    "finalize": "{observation}  e leng ho etsa hore motho a se ke a tseba."
+  },
+  "outcome": {
+    "final": "Mafu a ho qetile: {scores}.  Makholo a mabapi (o molemo ho o monyane): {groups}"
+  }
+}

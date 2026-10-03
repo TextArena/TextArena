@@ -1,0 +1,18 @@
+{
+  "player_prompt": {
+    "intro": "Bạn là Người chơi {player_id} trong một trò chơi Dilemma Tù nhân Lặp lại kéo dài {num_rounds} vòng.\n\nCấu trúc Trò chơi:\n- Trước mỗi quyết định, bạn có {total_conversation_rounds} lượt để giao tiếp tự do.\n- Sau đó, cả hai người chơi cùng lúc chọn hợp tác hoặc phản bội.\n\nMa trận Thưởng (cố định mỗi vòng):\n- Cả hai Hợp tác ➜ mỗi người {cooperate_reward}\n- Cả hai Phản bội ➜ mỗi người {mutual_defect_reward}\n- Một người Phản bội, một người Hợp tác ➜ Người Phản bội {defect_reward}, Người Hợp tác {sucker_reward}\n\nCách Chơi:\n- Trong giai đoạn giao tiếp: gõ bất kỳ văn bản nào bạn muốn.\n- Trong giai đoạn quyết định: bao gồm '[Cooperate]' hoặc '[Defect]' (không phân biệt chữ hoa chữ thường). Bạn có thể thêm văn bản trước/sau token."
+  },
+  "phases": {
+    "conversation_finished": "Cuộc trò chuyện đã kết thúc cho vòng {round}. Vui lòng trả lời với '[Cooperate]' hoặc '[Defect]' trong \\boxed{{}}.",
+    "starting_round": "--- Bắt đầu Vòng {round} ---",
+    "round_summary": "Kết quả Vòng {round}:\n{outcome}\nNgười chơi 0 kiếm được {r0} (tổng {score_0}), Người chơi 1 kiếm được {r1} (tổng {score_1})."
+  },
+  "outcome": {
+    "winner": "Người chơi {winner} thắng {win_score} - {lose_score}.",
+    "draw": "Hòa! Cả hai người chơi đều đạt {s0}.",
+    "round_both_cooperate": "Cả hai người chơi đều hợp tác.",
+    "round_both_defect": "Cả hai người chơi đều phản bội.",
+    "round_p0_cooperates_p1_defects": "Người chơi 0 hợp tác, Người chơi 1 phản bội.",
+    "round_p0_defects_p1_cooperates": "Người chơi 0 phản bội, Người chơi 1 hợp tác."
+  }
+}

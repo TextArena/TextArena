@@ -1,0 +1,41 @@
+{
+  "player_prompt": {
+    "intro": "Yin ee Player {player_id} ee game Spite and Malice ee raan dhiec. Yin ee lac ee kuɛɛr payoff pile yin.\n\n### Game Overview:\n- Kuɛɛr ee lac ee kuɛɛr payoff pile yin naŋ cards ee center piles.\n- Yin ee kuɛɛr cards ee kɛɛr:\n  1. Yin ee **hand** (yin ee kɛɛr turn ee up to 5 cards ee hand).\n  2. **Top card ee payoff pile yin**.\n  3. **Top card ee discard piles yin**.\n\n### Playing Rules:\n- Yin ee kuɛɛr card ee center pile ee **one rank higher** ee top card ee pile (center piles ee start ee Ace ee go up to Queen; Kings ee wild - ee kuɛɛr ee card ee but ee lac ee rank sequence. Yin ee kuɛɛr ee King ee 4, ee King ee ranked 5 ee next card ee lac ee 6).\n- Yin ee kɛɛr ee play ee cards, yin ee **discard card** ee discard piles yin ee end turn yin.\n- Yin ee center pile ee reaches Queen, ee ee cleared automatically.\n- Rank order ee: A=1, 2=2, ..., 9=9, J=10, Q=11, K ee wild.\n\n### Actions:\n1. **Draw**: Yin ee start turn yin, draw cards ee fill hand yin up to 5 cards. Enter **[draw]** ee begin.\n2. **Play Card**: Yin ee play card, specify card ee center pile ee this: **[play A♠ 0]** (ee 'A♠' ee card ee '0' ee center pile index).\n3. **Discard**: Yin ee kɛɛr ee play ee cards, discard card ee hand yin ee discard pile ee end turn yin. Enter **[discard A♠ 1]** (ee 'A♠' ee card ee '1' ee discard pile index). Yin ee note ee yin ee discard ee card ee payoff pile. Yin ee discard ee cards ee hand yin.\n\n"
+  },
+  "board": {
+    "current_board": "Kɛɛm de ŋɛ̈ɛ̈th:\n\n{board}\nWɛt cɔl tɔ̈u: {moves}"
+  },
+  "render": {
+    "center_piles_header": "--- CENTRE PILES (Käth mi̱ te däär) -- ",
+    "pile": "{observation}Wɛt kuɔny {i}: {pile}\n",
+    "player_view_header": "{observation}\n--- Wɛt de wɛt kuɔny {player_id} ---\n",
+    "payoff": "{observation}Kɔ̈ɔ̈c kɛ̈ɛ̈n ciɛ̈ɛ̈n (Kɔ̈ɔ̈c Kɛ̈ɛ̈n Nhial): {top_card}, Kɔ̈ɔ̈c kɛ̈ɛ̈n ciɛ̈ɛ̈n Nhial: {payoff_length}\n",
+    "hand": "{observation}Wɛt kuɔny: {hand}\n",
+    "discard": "{observation}Wɛt cɔl tɔ̈u: {discard}\n",
+    "empty": "Mi̱ /thiɛl ŋuänydɛ"
+  },
+  "game_message": {
+    "no_cards_left": "/Thiɛlɛ kaar ti̱ ŋuan kɛ ɣöö bi̱ kɛnkɛ ka̱m raar. Tiɛmɛ ɛn ɣöö deri̱ kuart ŋar kä tin te piny: 1. Kɛn karku 2. Ka̱p in di̱tni̱jɛn rɛy bunä mi̱ ci̱ duäc ji̱ thi̱n 3. Ka̱k min la duŋdɛ jɛn kä nɛy diaal tin ca yuɔr piny.* "
+  },
+  "invalid_move": {
+    "wrong_format": "Cär mi̱ /ci̱ gɔaa. Jɔk {player_id}/cɛ luɔc kɛ duɔ̱ɔ̱p in lot rɔ rɛy gua̱thdɛ min ca gɔ̱r ɛ la i̱thkuɛr bɛ̈ɛ̈l (square brackets).",
+    "invalid_play": "Kuɛ̈ɛ̈t aŋoot kuɛ̈ɛ̈t. Raan {player_id} ciɛ̈ɛ̈t aŋoot {card} wälä kaŋ pɛ̈ɛ̈i {index}.",
+    "discard_from_payoff": "Jäkni̱ min /ciɛ bi̱ lät. Ji̱ ŋarä {player_id} ɛ go̱o̱rɛ ɣöö bɛ kaar mi̱ ci̱ duɔth kä paybök paaypäl woc.",
+    "discard_not_in_hand": "Cuu ŋar ɛ /cɛ rɔ lot kɛ jɛ. Ŋar {player_id} cɛ ɣɔ̱n i̱ bɛ kaar mi ci te rɛy tetädɛ lo̱k, duŋni ɣöö cuɛ car ɛn ɣöö derɛ ku lɛ wɔ̱ raar kä bi̱kɛ kulɛ wä thi̱n ni̱ wal.",
+    "wrong_move_type": "Kɛɛm a lɔ̈k a wuɔ̈c. Raan {player_id} a ciëŋ a lɔ̈k a wuɔ̈c a kɛɛm."
+  },
+  "game_action": {
+    "you_drew": "Ji̱n ci jɛ la̱th tetdä.",
+    "opponent_drew": "Ji̱ ŋarä {player_id} cu kɛn kaarni̱ la̱th.",
+    "you_played": "Ji̱n ci ŋar {card} kä däär gua̱th in te jiɛn thi̱n {index}.",
+    "opponent_played": "Wɛt {player_id} acë kɔc {card} lɔn wɛt kuɔny {index}.",
+    "you_discarded": "Yɛ̈ɛ̈ wɛ̈ɛ̈ ciɛ̈ɛ̈n {card} kɛ̈ɛ̈n kɔ̈ɔ̈c kɛ̈ɛ̈n {index}, kɛ̈ɛ̈n ee ciɛ̈ɛ̈n tɛ̈ɛ̈ kɛ̈ɛ̈n. Kuɛ̈ɛ̈r kɔ̈ɔ̈c kɛ̈ɛ̈n ciɛ̈ɛ̈n kɛ̈ɛ̈n tɛ̈ɛ̈ kɛ̈ɛ̈n. Raan {next_player_id} ee kɛ̈ɛ̈n tɛ̈ɛ̈ kɛ̈ɛ̈n.",
+    "opponent_discarded": "Wɛt {player_id} acë kɔc {card} lɔn wɛt cɔl tɔ̈u {index}, ke ye cɔl wɛt tɔ̈u. Wɛt cɔl tɔ̈u de wɛt {player_id} acɔl kekë ye wɛt tɔ̈u. Wɛt {next_player_id}, yin acɔl wɛt tɔ̈u. Yinɛn wɛt cɔl tɔ̈u lɔn wɛt kuɔny [action card center_index]."
+  },
+  "outcome": {
+    "payoff_cleared": "Raan {current_player} a ciëŋ a thɔ̈ɔ̈ŋ a kɛɛm! Raan {current_player} a wɛ̈ɛ̈nɛ̈!",
+    "deadlock_player_0": "Kɛ̈ɛ̈i aŋoot! Raan 0 aŋic kɛ̈ɛ̈i {player_0_payoff} kaɛ̈ɛ̈t vs Raan 1 kɛ̈ɛ̈i {player_1_payoff} kaɛ̈ɛ̈t.",
+    "deadlock_player_1": "Kɛ̈ɛ̈i aŋoot! Raan 1 aŋic kɛ̈ɛ̈i {player_1_payoff} kaɛ̈ɛ̈t vs Raan 0 kɛ̈ɛ̈i {player_0_payoff} kaɛ̈ɛ̈t.",
+    "deadlock_tie": "Kɛɛm a lɔ̈k a ɣäät a pɛ̈ɛ̈l! Kɔ̈ɔ̈ŋ a raan a ɣäät {player_0_payoff} a kaɛ̈ɛ̈t a ciëŋ. Raan {current_player} a wɛ̈ɛ̈nɛ̈ a kɛɛm a lɔ̈k."
+  }
+}

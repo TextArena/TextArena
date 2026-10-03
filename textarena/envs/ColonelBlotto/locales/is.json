@@ -1,0 +1,30 @@
+{
+  "player_prompt": {
+    "intro": "Þú ert {role} í Colonel Blotto.\nMarkmið þitt er að vinna fleiri umferðir en andstæðingur þinn.\nÍ hverri umferð, úthlutaðu nákvæmlega {num_total_units} einingum yfir svið {field_names}.\nLeikmaðurinn sem úthlutar fleiri einingum til sviðs vinnur það svið, og leikmaðurinn sem vinnur fleiri svið vinnur umferðina.\nTil dæmis, '[A7 B7 C6]' úthlutar 7 einingum til A, 7 til B, og 6 til C.",
+    "commander_alpha": "Hermenni Alfa",
+    "commander_beta": "Hermenni Beta"
+  },
+  "game_state": {
+    "header_round": "=== COLONEL BLOTTO - Umferð {current_round}/{num_rounds} ===\nUmferðir Vunnar - Hermenni Alfa: {alpha_score}, Hermenni Beta: {beta_score}"
+  },
+  "round_battle": {
+    "field_result": "\nUmferð {current_round}\nHermenni Alfa úthlutaði: {p0_allocations}\nHermenni Beta úthlutaði: {p1_allocations}\n",
+    "winner_alpha": "{message}Sigurvegari: Hermenni Alfa",
+    "winner_beta": "{message}Sigurvegari: Hermenni Beta",
+    "tie": "{message}Jafntefli!"
+  },
+  "invalid_move": {
+    "wrong_format": "Rangt snið innsendar. Notaðu: A:5, B:10, C:5",
+    "invalid_field": "Ógilt sviðsnafn. Gild svið: {field_names}",
+    "wrong_allocation_value": "Allar úthlutir verða að vera óneikvæðar heilar tölur.",
+    "incorrect_total_units": "Þú verður að úthluta nákvæmlega {num_total_units} einingum. Núverandi summa: {current_sum}",
+    "good_allocations": "Úthlutun er góð."
+  },
+  "outcome": {
+    "winner_alpha": "Hermenni Alfa vinnur {score_0}-{score_1} eftir {num_rounds} umferðir!",
+    "winner_beta": "Hermenni Beta vinnur {score_1}-{score_0} eftir {num_rounds} umferðir!",
+    "draw": "Leikurinn endar í {score_0}-{score_1} jafntefli eftir {num_rounds} umferðir!",
+    "early_winner_alpha": "Hermenni Alfa vinnur {scores_0}-{scores_1} (meirihluti náð)!",
+    "early_winner_beta": "Hermenni Beta vinnur {scores_1}-{scores_0} (meirihluti náð)!"
+  }
+}

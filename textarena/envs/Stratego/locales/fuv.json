@@ -1,0 +1,39 @@
+{
+  "player_prompt": {
+    "intro": "Ko a yi Player {player_id} caggal Stratego.\nKo a guddiri mawɗo a yi kuɓuri flag din wuɗɗo mako ko kuɓuri dukkanin wuɗɗe mako din ɓe ɗaɓɓi.\nKo a yiɓi aɓantinki a yi ɓaɓɓe a yi ɓaɓɓe a yi kuɓuri flag, Bombs, e wuɗɗe ɗaɓɓe ɗaɓɓe.\n\n### Hidima Ɗalilu\n1. **Ɗalilu Ɓaɓɓe:**\n   - Caggal ɗinki, a yi kuɓuri wuɗɗo ɗaɓɓo ɗinki ɗaɓɓe ɗaɓɓe.\n   - Misali: Wuɗɗo ɗaɓɓo a yi kuɓuri daga A1 zuwa B1 ko A1 zuwa A2 idan B1 e A2 ɓa a yi kuɓuri wuɗɗe mako.\n   - Idan wuɗɗo ɗaɓɓo a yi kuɓuri a yi Bomb ko Flag, a ɓa kuɓuri.\n2. **Yaƙe-Yaƙe:**\n   - Idan a yi kuɓuri wuɗɗo ɗaɓɓo a yi kuɓuri wuɗɗo wuɗɗo mako, to a yi yaƙe-yaƙe:\n     - Wuɗɗo ɗaɓɓo a yi kuɓuri a yi nasara e kuɓuri wuɗɗo wuɗɗo mako.\n     - Idan ɗaɓɓe ɗaɓɓe a yi sawa, dukkanin wuɗɗe ɗaɓɓe a yi kuɓuri.\n     - **Lokaci Maɓɓitaki:**\n       - Bombs kuɓuri wuɗɗe ɗaɓɓe a yi kuɓuri, sai Miners, din ɓe ɗaɓɓi Bombs.\n       - Spies a yi nasara a yi Marshal idan Spy a yi kuɓuri a yi farko, amma a yi kashewa a yi wuɗɗe ɗaɓɓe.\n3. **Mawɗo Ɗalilu:**\n   - Yiɓi wuɗɗe wuɗɗo mako a yi kuɓuri a yi yaƙe-yaƙe.\n   - Kari flag din mako a yi kuɓuri a yi flag din wuɗɗo mako.\n   - Yiɓi Scouts a yi ɓaɓɓe a yi samu labari a yi wuɗɗe wuɗɗo mako e kuɓuri wuɗɗe ɗaɓɓe.\n\n### Yadda A Yi Kuɓuri:\n1. Yiɓi kuɓuri wuɗɗo ɗaɓɓo a yi kuɓuri e kuɓuri ɗinki.\n2. Yiɓi format: [A0 B0], idan A0 a yi kuɓuri ɗinki, e B0 a yi kuɓuri ɗinki.\n   - Misali: Yi kuɓuri wuɗɗo ɗaɓɓo daga safu 0, shafi 0 zuwa safu 1, shafi 0, input [A0 B0].\n3. Yiɓi kuɓuri ɗinki a yi kuɓuri a yi ɗalilu ɗaɓɓe a yi farko.\n\n### Labari Muhimmanci:\n- Ɓaɓɓe a yi nuna wuɗɗe mako e kuɓuri ɗinki, misali MN, MS.\n- Ɓaɓɓe a yi nuna wuɗɗe wuɗɗo mako a yi kuɓuri ɗinki ba tare da nuna ɗaɓɓe ɗaɓɓe ba, misali ?.\n- Grids a yi ~ a yi tabki e ɓa kuɓuri.\n- A yi shawara, farka wasa a yi kuɓuri wuɗɗe mako a yi safu farko a yi samu labari a yi wuɗɗe wuɗɗo mako. Player 0 e player 1 a yi safu D e G bi da bi.\n\nGa ɗan ɗalilu ɗalilu a yi kuɓuri ɗinki:\n"
+  },
+  "board": {
+    "current_board": "Borto Hafde:\n\n{board}\nHawuki Muhimman: {moves}"
+  },
+  "invalid_move": {
+    "wrong_format": "Format ɗalilu ɓa daidai. Player {player_id} ɓa yi input a yi format [A0 B0].",
+    "invalid_coordinates": "No waɗata ko fota. {player_id} moodiɗo wurtinaayi coordinateji je ɗon nafoda.",
+    "not_own_piece": "Njaɓɓorgal kuuɗe je wala bote. {player_id} moodijo haani yahra go'oto nder kujeji maako.",
+    "scout_through_pieces": "Naftirol kuuɗe je wala bote. Wojinɗo {player_id} footay yahra ɓandu maako nder kujeji feere.",
+    "scout_diagonal": "Naftirol kuuɗe je wala bote. {player_id} moodibo fotaayi yahugo scout ha diagonal.",
+    "non_scout_multi_square": "Dabare kuuɗe je wala bote. Kujeji, sey ni ɓikkon, footi yahra kare woore tan ha wakkere go'o.",
+    "move_into_lake": "Na'ura je ɗon nafota. {player_id} moodibo fotaa yahugo nder maayo man.",
+    "move_onto_own_piece": "Njaɓɓorgal kuuɗe je wala bote. {player_id} moodibo fotaayi yahugo dow kuje maako.",
+    "move_bomb_or_flag": "Njaɓɓorgal kuuɗe je wala bote. {player_id} moodibo fotaayi yahugo bomb malla flagji."
+  },
+  "game_action": {
+    "you_moved": "A yi kuɓuri wuɗɗo ɗaɓɓo daga {source} zuwa {dest}.",
+    "opponent_moved": "Player {player_id} a yi kuɓuri wuɗɗo ɗaɓɓo daga {source} zuwa {dest}.",
+    "you_equal_ranks": "A yi kuɓuri wuɗɗo ɗaɓɓo daga {source} zuwa {dest}. Wuɗɗo ɗaɓɓo a yi kuɓuri a yi {attacking_rank} e wuɗɗo ɗaɓɓo a yi kuɓuri a yi {target_rank}. Idan ɗaɓɓe ɗaɓɓe a yi sawa, dukkanin wuɗɗe ɗaɓɓe a yi kuɓuri.",
+    "opponent_equal_ranks": "Player {player_id} a yi kuɓuri wuɗɗo ɗaɓɓo daga {source} zuwa {dest}. Wuɗɗo ɗaɓɓo a yi kuɓuri a yi {attacking_rank} e wuɗɗo ɗaɓɓo a yi kuɓuri a yi {target_rank}. Idan ɗaɓɓe ɗaɓɓe a yi sawa, dukkanin wuɗɗe ɗaɓɓe a yi kuɓuri.",
+    "you_miner_defused": "A yi kuɓuri wuɗɗo ɗaɓɓo daga {source} zuwa {dest}. Wuɗɗo ɗaɓɓo a yi kuɓuri a yi {attacking_rank} e wuɗɗo ɗaɓɓo a yi kuɓuri a yi {target_rank}. Idan Miners a yi ɗaɓɓi Bombs, a yi nasara.",
+    "opponent_miner_defused": "Player {player_id} a yi kuɓuri wuɗɗo ɗaɓɓo daga {source} zuwa {dest}. Wuɗɗo ɗaɓɓo a yi kuɓuri a yi {attacking_rank} e wuɗɗo ɗaɓɓo a yi kuɓuri a yi {target_rank}. Idan Miners a yi ɗaɓɓi Bombs, a yi kashewa.",
+    "you_bomb_lost": "A yi kuɓuri wuɗɗo ɗaɓɓo daga {source} zuwa {dest}. Wuɗɗo ɗaɓɓo a yi kuɓuri a yi {attacking_rank} e wuɗɗo ɗaɓɓo a yi kuɓuri a yi {target_rank}. Idan a yi kuɓuri ɓa Miners, a yi kashewa.",
+    "opponent_bomb_won": "Player {player_id} a yi kuɓuri wuɗɗo ɗaɓɓo daga {source} zuwa {dest}. Wuɗɗo ɗaɓɓo a yi kuɓuri a yi {attacking_rank} e wuɗɗo ɗaɓɓo a yi kuɓuri a yi {target_rank}. Idan a yi kuɓuri ɓa Miners, a yi nasara.",
+    "you_spy_won": "A yi kuɓuri wuɗɗo ɗaɓɓo daga {source} zuwa {dest}. Wuɗɗo ɗaɓɓo a yi kuɓuri a yi {attacking_rank} e wuɗɗo ɗaɓɓo a yi kuɓuri a yi {target_rank}. Idan a yi kuɓuri a yi Spy e wuɗɗo ɗaɓɓo a yi kuɓuri a yi Marshal, a yi nasara.",
+    "opponent_spy_lost": "Player {player_id} a yi kuɓuri wuɗɗo ɗaɓɓo daga {source} zuwa {dest}. Wuɗɗo ɗaɓɓo a yi kuɓuri a yi {attacking_rank} e wuɗɗo ɗaɓɓo a yi kuɓuri a yi {target_rank}. Idan a yi kuɓuri a yi Spy e wuɗɗo ɗaɓɓo a yi kuɓuri a yi Marshal, a yi kashewa.",
+    "you_higher_won": "A yi kuɓuri wuɗɗo ɗaɓɓo daga {source} zuwa {dest}. Wuɗɗo ɗaɓɓo a yi kuɓuri a yi {attacking_rank} e wuɗɗo ɗaɓɓo a yi kuɓuri a yi {target_rank}. Idan a yi kuɓuri a yi ɗaɓɓo ɗaɓɓo, a yi nasara.",
+    "opponent_higher_lost": "Player {player_id} a yi kuɓuri wuɗɗo ɗaɓɓo daga {source} zuwa {dest}. Wuɗɗo ɗaɓɓo a yi kuɓuri a yi {attacking_rank} e wuɗɗo ɗaɓɓo a yi kuɓuri a yi {target_rank}. Idan a yi kuɓuri a yi ɗaɓɓo ɗaɓɓo, a yi kashewa.",
+    "you_lower_lost": "A yi kuɓuri wuɗɗo ɗaɓɓo daga {source} zuwa {dest}. Wuɗɗo ɗaɓɓo a yi kuɓuri a yi {attacking_rank} e wuɗɗo ɗaɓɓo a yi kuɓuri a yi {target_rank}. Idan a yi kuɓuri a yi ɗaɓɓo ɗaɓɓo, a yi kashewa.",
+    "opponent_lower_won": "Player {player_id} a yi kuɓuri wuɗɗo ɗaɓɓo daga {source} zuwa {dest}. Wuɗɗo ɗaɓɓo a yi kuɓuri a yi {attacking_rank} e wuɗɗo ɗaɓɓo a yi kuɓuri a yi {target_rank}. Idan a yi kuɓuri a yi ɗaɓɓo ɗaɓɓo, a yi nasara."
+  },
+  "outcome": {
+    "flag_captured": "Jaawal {player_id} nangi daande jaawaaɗo!",
+    "no_movable_pieces": "Toɓɓo {winner_id} jaŋngo! Toɓɓo {loser_id} ɗo ƴiʼi e ɓesɗitiiɗo ɓesɗe."
+  }
+}

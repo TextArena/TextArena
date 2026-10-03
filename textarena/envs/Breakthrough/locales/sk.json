@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "Hrajete {color} v hre Breakthrough. Pohybujete sa {direction} na {board_size}x{board_size} doske.\nPočas svojej ťahy môžete presunúť jednu figúrku jeden krok dopredu alebo diagonálne dopredu.\nFigúrka môže pohybovať diagonálne iba ak je tam súperova figúrka, a môže sa pohybovať iba do takého obsadeného štvorca v diagonálnom kroku.\nKeď vstupujete do štvorca so súperovou figúrkou, zachytíte ju a súperova figúrka je trvalo odstránená z dosky.\nPoužite UCI-like notáciu v zátvorkách, napr. [a2a3] na presun z a2 do a3.\n* 'a' zodpovedá najľavejšej stĺpci, '1' je spodný riadok (z pohľadu bieleho).\n* Čierna domovská rada je horná rada (riadok 8 pre 8x8). Biela domovská rada je spodná rada (riadok 1 pre 8x8).\nPrvý hráč, ktorého figúrka dosiahne súperovu domovskú radu, vyhrá. Ak sú vaše figúrky všetky zachytené, prehráte."
+  },
+  "invalid_move": {
+    "wrong_format": "Použite prosím zátvorkovanú algebrickú notáciu ako [a2a3].",
+    "out_of_bounds": "Ťah je mimo dosky.",
+    "illegal": "Tento ťah nenasleduje pravidlá Breakthrough alebo nie je vaša figúrka."
+  },
+  "game_action": {
+    "moved": "Hráč {player_id} sa pohybuje {move_str} ({piece})."
+  },
+  "outcome": {
+    "white_reached": "Biely dosiahol čiernu domovskú radu.",
+    "black_reached": "Čierny dosiahol bielu domovskú radu.",
+    "white_captured": "Všetky biele figúrky boli zachytené.",
+    "black_captured": "Všetky čierne figúrky boli zachytené.",
+    "no_moves": "Hráč {player_id} nemá žiadne ďalšie ťahy."
+  }
+}

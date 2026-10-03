@@ -1,0 +1,31 @@
+{
+  "_comment": "Snake-localebestand. Vertaal GEEN sleutels (linkerkant). Vertaal alleen waarden (rechterkant). Houd elke {placeholder} exact zoals het is.",
+  "_slots": {
+    "{num_players}": "Aantal spelers in de wedstrijd",
+    "{width}": "Bordbreedte in cellen",
+    "{height}": "Bordhoogte in cellen",
+    "{max_turns}": "Beurtenlimiet voor de wedstrijd",
+    "{player_id}": "Een speler's nummer (0-gebaseerd)",
+    "{board}": "Het gerenderde ASCII-raster; houd neutraal, vertaal nooit de tekens",
+    "{reason}": "De gerenderde einde-van-spel reden frase",
+    "{groups}": "Neutrale rangschikkingsgegevens (een lijst van speler-id-groepen, slechtst naar beste); vertaal niet"
+  },
+  "player_prompt": {
+    "intro": "{num_players}-Speler Snake op een {width}×{height} raster.\nU controleert slang {player_id}. Geldige zetten: '[up]'/'[down]'/'[left]'/'[right]' (of w/s/a/d).\nDoel: overleef het langst of wees de langste en behaal de hoogste score (beurtenlimiet {max_turns} beurten)."
+  },
+  "board": {
+    "current": "Huidig bord:\n{board}",
+    "after_moves": "Huidige bordstatus:\n{board}"
+  },
+  "game_action": {
+    "invalid_death": "Slang {player_id} stierf door een ongeldige zet."
+  },
+  "outcome": {
+    "survived_win": "Speler {player_id} overleefde; alle anderen stierven.",
+    "all_dead_simul": "Alle slangen stierven tegelijkertijd.",
+    "outlived": "Speler overleefde alle anderen.",
+    "all_dead": "Alle slangen dood.",
+    "turn_limit": "Beurtenlimiet bereikt - beste score wint gelijkspel.",
+    "ranking": "{reason} Eindelijke rangschikkingsgroepen (slechtst→beste): {groups}"
+  }
+}

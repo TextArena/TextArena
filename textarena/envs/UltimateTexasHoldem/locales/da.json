@@ -1,0 +1,81 @@
+{
+  "_comment": "Ultimate Texas Hold'em lokalisationsfil. Oversæt ikke nøgler (venstre side). Oversæt kun værdier (højre side).",
+  "_slots": {
+    "{start_chips}": "Start-chip-antal, f.eks. 1000",
+    "{ante}": "Ante/blind indsatsbeløb, f.eks. 25",
+    "{ante4}": "Fire gange ante, f.eks. 100",
+    "{ante2}": "To gange ante, f.eks. 50",
+    "{round}": "Aktuel runde-nummer",
+    "{chips}": "Spillerens aktuelle chip-antal",
+    "{hand}": "En komma-separeret liste af kort-labels, f.eks. 'A♠, K♥', eller den lokaliserede tekst for ingen kort",
+    "{phase}": "Aktuel fase-label-token (PRE-ROUND, PRE-FLOP, FLOP, RIVER, SHOWDOWN)",
+    "{actions}": "En komma-separeret liste af bracketede handlingstokens, f.eks. '[play_bet_4x], [check]'",
+    "{available}": "En komma-separeret liste af aktuelle lovlige bracketede handlingstokens",
+    "{blind}": "Blind indsatsbeløb",
+    "{play}": "Play indsatsbeløb",
+    "{cards}": "En komma-separeret liste af kort-labels, f.eks. 'Q♣, 7♦, 2♠'",
+    "{name}": "Et lokaliseret navn på en pokerhånd, indsættes ordret",
+    "{amount}": "Et chip-beløb",
+    "{net}": "Netto chip-ændring for runden (kan være negativ)",
+    "{max_turns}": "Maksimalt antal runder",
+    "{winner_rounds}": "Antal runder gennemført"
+  },
+  "player_prompt": {
+    "no_cards": "Ingen kort endnu",
+    "rules": "🎯 ULTIMATE TEXAS HOLD'EM - Single Player vs Dealer\n\n📖 SPIL OVERSIGT:\n• Du starter med {start_chips} chips\n• Enkelt deck af 52 kort (2♠-A♠, 2♥-A♥, 2♦-A♦, 2♣-A♣)\n• Du spiller mod dealeren (huset)\n• Hver runde følger Ultimate Texas Hold'em-strukturen: du poster ANTE og BLIND indsats, modtager 2 håndkort, beslutter om valgfri PLAY indsats gennem betting-faserne, og derefter afslører fællesskabskort og sammenligner din bedste 5-kort hånd med dealeren. Dit mål er at maksimere dine gevinster (når du har den bedre hånd), mens du minimerer dine tab (når du har den dårligere hånd).\n• Spillet slutter, når du når 0 chips eller under ved starten af runden (TAB) eller gennemfører 1000 runder med chips (GEVINST)\n\n💰 BETTING STRUKTUR:\n• ANTE: Obligatorisk ${ante} indsats hver runde\n• BLIND: Obligatorisk ${ante} indsats hver runde\n• PLAY: Valgfri indsats under spillet. Gennem runden kan du vælge KUN ÉN af følgende: (${ante4} hvis gjort ved PRE-FLOP, ${ante2} hvis gjort ved FLOP, eller ${ante} hvis gjort ved RIVER. Kan også fold ved river, opgive hånden og ikke indsætte noget.)\n\n🎴 KORTDEALING:\n• Du modtager 2 åbne kort (dine håndkort)\n• Dealeren modtager 2 lukkede kort (skjult for dig)\n• 5 fællesskabskort deles åbent først\n• Fællesskabskort afsløres progressivt gennem spilfaserne\n\n🏆 DEALER KVALIFIKATION:\n• Dealeren skal have mindst et PAR (2 kort af samme rang) for at kvalificere, ved hjælp af de 2 kort i deres hånd og de 5 fællesskabskort.\n• Dealer-kvalifikation påvirker indsats-udfaldene, som vil blive forklaret senere.\n\n🎮 SPIL FASER & HANDLINGER:\n📋 PRE-FLOP:\n  • Handlinger: [4x] (${ante4}) eller [check]\n  • [4x]: Placer ${ante4} PLAY indsats, afslører første 3 fællesskabskort\n  • [check]: Ingen yderligere indsats, afslører første 3 fællesskabskort\n\n📋 FLOP:\n  • Hvis 4x indsats placeret: Kun [skip] tilgængelig (auto-afslører sidste 2 fællesskabskort)\n  • Hvis ingen 4x indsats: [2x] (${ante2}) eller [check]\n  • [2x]: Placer ${ante2} PLAY indsats, afslører sidste 2 fællesskabskort\n  • [check]: Ingen yderligere indsats, afslører sidste 2 fællesskabskort\n\n📋 RIVER:\n  • Hvis 4x eller 2x indsats placeret: Kun [skip] tilgængelig (auto-fortsætter til showdown)\n  • Hvis ingen forudgående PLAY indsats: [1x] (${ante}) eller [fold]\n  • [1x]: Placer ${ante} PLAY indsats, fortsætter til showdown\n  • [fold]: Opgive hånd, tab ANTE og BLIND indsats\n\n📋 SHOWDOWN:\n  • Alle kort afsløres og evalueres\n  • Bedste 5-kort hånd fra 7 kort (2 hånd + 5 fællesskabskort)\n  • Indsatser afgøres efter udbetalingsregler\n\n💎 BET UDBETALINGER:\n📊 ANTE INDSATS:\n  • Dealeren kvalificerer ikke: PUSH (indsats returneres)\n  • Dealeren kvalificerer og du vinder: 1:1 udbetaling (indsats + gevinst)\n  • Dealeren kvalificerer og du taber: Indsats tabt\n  • Uafgjort: PUSH (indsats returneres)\n\n📊 BLIND INDSATS:\n  • Ikke påvirket af dealer-kvalifikation\n  • Du vinder: Indsats returneres og yderligere udbetaling baseret på din håndstyrke\n  • Du taber: Indsats tabt\n  • Uafgjort: PUSH (indsats returneres)\n\n📊 BLIND INDSATS UDBETALINGSTABEL:\n  • Royal Flush: 500:1 (${{self.ante_amount * 500}})\n  • Straight Flush: 50:1 (${{self.ante_amount * 50}})\n  • Four of a Kind: 10:1 (${{self.ante_amount * 10}})\n  • Full House: 3:1 (${{self.ante_amount * 3}})\n  • Flush: 3:1 (${{self.ante_amount * 3}})\n  • Straight: 1:1 (${{self.ante_amount * 1}})\n  • Mindre end Straight: Ingen yderligere udbetaling\n\n📊 PLAY INDSATS:\n  • Ikke påvirket af dealer-kvalifikation\n  • Direkte sammenligning: Din bedste hånd vs Dealerens bedste hånd\n  • Du vinder: 1:1 udbetaling (indsats + gevinst)\n  • Du taber: Indsats tabt\n  • Uafgjort: PUSH (indsats returneres)\n\n🎯 POKER HÅND RANGERING (Bedst til Værst):\n  1. Royal Flush: A-K-Q-J-10 af samme kulør\n  2. Straight Flush: 5 på hinanden følgende kort af samme kulør\n  3. Four of a Kind: 4 kort af samme rang\n  4. Full House: 3 af en slags + 2 af en slags\n  5. Flush: 5 kort af samme kulør\n  6. Straight: 5 på hinanden følgende kort\n  7. Three of a Kind: 3 kort af samme rang\n  8. Two Pair: 2 par af forskellige rang\n  9. One Pair: 2 kort af samme rang\n  10. High Card: Højeste kort vinder\n\n⌨️  HANDLING KOMMANDOER:\n• [4x] eller [play bet 4x]: Placer ${{self.ante_amount*4}} PLAY indsats\n• [2x] eller [play bet 2x]: Placer ${{self.ante_amount*2}} PLAY indsats\n• [1x] eller [play bet 1x]: Placer ${{self.ante_amount*1}} PLAY indsats\n• [check] eller [c]: Check (ingen yderligere indsats)\n• [fold] eller [f]: Fold (opgive hånd)\n• [skip] eller [s]: Skip til næste fase (når ingen handling er nødvendig)\n\n💡 STRATEGI TIPS:\n• Stærke start-hænder (par, høje kort) retfærdiggør ofte 4x indsats\n• Overvej dealer-kvalifikation - svage hænder kan skubbe hvis dealer ikke kvalificerer\n• BLIND indsats kan være meget profitable med stærke hænder (Royal Flush = 500:1!)\n• Hold øje på din chip-stak! Hvis den går til 0 eller under ved starten af runden, taber du.\n\n⚠️  VIGTIGE NOTER:\n• ANTE og BLIND indsats er obligatoriske hver runde\n• PLAY indsats er valgfri og strategisk\n• Sørg for at du indtaster den korrekte handling, og kun én handling ad gangen.\n\n",
+    "state": "🎯 Runde {round}\n💰 Chips: {chips}\n🎴 Din hånd: {hand}\n📊 Aktuelle indsats: Ante ${ante}, Blind ${blind}, Play ${play}\n📋 Fase: {phase}\n🎯 Tilgængelige handlinger: {actions}\n\n"
+  },
+  "board": {
+    "round_start": "🎮 Runde {round} startet! Indsatser: ANTE ${ante}, BLIND ${blind}. Du har {chips} chips tilbage.",
+    "your_hand": "🎴 Din hånd: {hand}",
+    "flop_revealed": "🃏 FLOP afsløret: {cards}",
+    "river_revealed": "🃏 RIVER afsløret: {cards}"
+  },
+  "invalid_move": {
+    "reason": "Ugyldig handling for aktuel fase. Tilgængelige handlinger: {available}",
+    "message": "❌ Ugyldig handling! Tilgængelige handlinger: {available}"
+  },
+  "action": {
+    "folded": "🃏 Du foldede."
+  },
+  "showdown": {
+    "dealer_hand": "🏁 SHOWDOWN! Dealerens hånd: {cards}",
+    "community_cards": "🃏 Fællesskabskort: {cards}",
+    "player_best": "🎴 Spillerens bedste hånd: {name} ({cards})",
+    "dealer_best": "🎴 Dealerens bedste hånd: {name} ({cards})",
+    "ante_lost_folded": "❌ ANTE indsats TABT! -${ante} (foldet)",
+    "blind_lost_folded": "❌ BLIND indsats TABT! -${blind} (foldet)",
+    "ante_won": "✅ ANTE indsats VUNDET! +${amount}",
+    "ante_pushed": "🔄 ANTE indsats PUSHET! ${ante} returneret",
+    "ante_lost": "❌ ANTE indsats TABT! -${ante}",
+    "blind_won": "✅ BLIND indsats VUNDET! +${amount}",
+    "blind_pushed": "🔄 BLIND indsats PUSHET! ${blind} returneret",
+    "blind_lost": "❌ BLIND indsats TABT! -${blind}",
+    "play_won": "✅ PLAY indsats VUNDET! +${amount}",
+    "play_pushed": "🔄 PLAY indsats PUSHET! ${play} returneret",
+    "play_lost": "❌ PLAY indsats TABT! -${play}",
+    "net_gain": "🎉 Runde {round} gennemført! Netto gevinst: +${net}",
+    "net_loss": "💸 Runde {round} gennemført! Netto tab: ${net}",
+    "separator": "──────────────────────────────────────────────────"
+  },
+  "outcome": {
+    "game_over_win": "🏁 SPILLET ER SLUT! {max_turns} runder gennemført. Du har ${chips} chips - DU VINDER!",
+    "game_over_lose": "🏁 SPILLET ER SLUT! Du er løbet tør for chips. Dealeren vinder!",
+    "reward_win": "Spilleren gennemførte {winner_rounds} runder med ${chips} chips",
+    "reward_lose": "Spilleren løb tør for chips i runde {round}",
+    "reward_win_max": "Spilleren gennemførte {max_turns} runder med ${chips} chips"
+  },
+  "hand_names": {
+    "royal_flush": "Royal Flush",
+    "straight_flush": "Straight Flush",
+    "four_of_a_kind": "Fire af en slags",
+    "full_house": "Full House",
+    "flush": "Flush",
+    "straight": "Straight",
+    "three_of_a_kind": "Tre af en slags",
+    "two_pair": "To par",
+    "one_pair": "Et par",
+    "high_card": "Højeste kort",
+    "unknown": "Ukendt hånd"
+  }
+}

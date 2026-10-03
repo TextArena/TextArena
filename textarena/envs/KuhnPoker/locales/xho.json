@@ -1,0 +1,27 @@
+{
+  "player_prompt": {
+    "intro": "Uyiyithonjana {player_id} kwi{max_rounds} ukusuka weKuhn Poker.\nIimfuno zesigame:\n- Kuhn Poker inisetyenziswa 3 ikhadi zomthwalo nezijika J, Q, K (J inencinci, K inempukani)\n- Iithonjana zonke zinikwa {ante} chip na zifumana ikhadi 1 kwi ukusuka (qaphela ukuthi ikhadi zisatyenziswanga zisonjululwe, kwaye awunakwazi ukuba nekhadi ofanayo na ithonjana yakho).\n- Isigame siya kudlula {max_rounds} ukusuka\n- Ithonjana enenomali encinci yachipu emva kwezona zonke ukusuka inqoba\nIimfuno zomngciphezo:\n- '[check]': Thumela ukuthini ngaphandle kokubaleka (ngokungathi akukho mabaleko kwi meza)\n- '[bet]': Nikela 1 chip kwi poti (ngokungathi akukho mabaleko kwi meza)\n- '[call]': Lunga umabaleko kaithonjana ngokunikeza 1 chip kwi poti\n- '[fold]': Nika ukhono lakho na mncekele ithonjana yakho ukunqoba poti"
+  },
+  "init_round": {
+    "round_start": "### Kwanza ukusuka {current_round} kwi{max_rounds} ukusuka. Ikhadi lakho liyi: '{player_card}'",
+    "available_actions": "Izenzo zakho ezikhoyo zezi: {available_actions}"
+  },
+  "invalid_move": {
+    "wrong_format": "Umngciphezo kufuneka [Check], [Bet], [Call], or [Fold].",
+    "not_legal": "Isenzo kufuneka sibe {legal_actions}."
+  },
+  "action": {
+    "submit_move": "Mdlali {player_id}, wathumela isenzo: '[{move}]'.",
+    "valid_actions": "Izenzo zakho ezikhoyo zezi: {legal_actions}.",
+    "round_summary": "{reason} Amaphuzu akhokhayo: Mdlali 0: '{player_0_chips}'; Mdlali 1: '{player_1_chips}'"
+  },
+  "showdown": {
+    "showdown_summary": "Kubonakala: Ithonjana {winner}'s {winner_card} ibetha Ithonjana {loser}'s {loser_card}. Ithonjana {winner} inqoba poti ye{pot_value} chips."
+  },
+  "outcome": {
+    "draw": "Ekupheleni kwemijikelo {max_rounds}, bobabini abadlali babenenani elifanayo leetshipsi.",
+    "round_win": "Umdlali {player_id} uvale.",
+    "winner_player0": "Umdlali 0 uphumelele ngokuba neetshipsi ezininzi ekupheleni kwazo zonke {max_rounds} iirandi.",
+    "winner_player1": "Umdlali 1 uphumelele ngokuba neetshipsi ezininzi ekupheleni kwazo zonke {max_rounds} iirandi."
+  }
+}

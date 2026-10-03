@@ -1,0 +1,20 @@
+{
+  "player_prompt": {
+    "intro": "أنت اللاعب {player_id} في SimpleTak.\nعلى اللوحة، تظهر أحجارك على شكل '{player_stone}' وتظهر أحجار خصمك على شكل '{opponent_stone}'.\n\nفي دورك، اختر خلية فارغة (برقمها) وضع حجرك هناك.\nعلى سبيل المثال، '[12]' يضع حجرك في الخلية 12.\n\nهدفك هو تكوين مسار متصل من أحجارك يربط بين حافتين متقابلتين من اللوحة (من أعلى إلى أسفل أو من اليسار إلى اليمين)."
+  },
+  "invalid_move": {
+    "invalid_move_format": "شكل نقل غير صحيح.",
+    "cell_out_of_range": "رقم الخلية {cell_num} غير صالح. يجب أن يكون بين 0 و {max_board_num}.",
+    "cell_already_occupied": "الخلية {cell_num} موجودة مسبقاً. اختار خليه فارغه."
+  },
+  "board": {
+    "current_state": "الحالة الحالية لللوحة:\n\n{rendered_board}\nالحركات المتاحة: {available_moves}"
+  },
+  "action": {
+    "placement": "اللاعب {current_player_id} وضع رمزه ({symbol}) في الخلية {cell_num}."
+  },
+  "outcome": {
+    "winner": "اللاعب {current_player_id} ('{symbol}') ربط حافتين متقابلتين!",
+    "draw": "المجلس مليء, انه تعادل!"
+  }
+}

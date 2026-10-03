@@ -1,0 +1,76 @@
+{
+  "game_start": {
+    "intro": "Il gioco inizia. Seme di briscola: {trump_suit} (carta di briscola: {trump_str}).",
+    "no_trump_card": "nessuna"
+  },
+  "player_prompt": {
+    "intro": "Sei il Giocatore {player_id} nel Whist tedesco.\n{phase_info}\nHai {hand_size} carte in mano.\nGioca una carta con '[play N]', dove N è la posizione della carta nella tua mano (ad esempio '[play 3]').",
+    "phase_learning": "FASE DI APPRENDIMENTO: il vincitore di ogni presa prende la carta scoperta e il perdente pesca la carta successiva dal mazzo. Le prese vinte in questa fase non contano per la vittoria.",
+    "phase_playing": "FASE DI GIOCO: il mazzo è esaurito. Ogni presa da ora in poi conta per la vittoria."
+  },
+  "next_card": {
+    "playing_phase": "Nessuna carta è disponibile - la fase di gioco è iniziata.",
+    "deck_empty": "Il mazzo è vuoto - nessuna carta è disponibile.",
+    "available": "Carta disponibile: {card}",
+    "available_trump": "Carta disponibile: {card} (BRISCOLA)"
+  },
+  "invalid_move": {
+    "wrong_format": "Formato di mossa non valido. Usa '[play N]' per giocare la carta N nella tua mano.",
+    "bad_position": "Quella posizione di carta non esiste. Hai {hand_size} carte in mano.",
+    "must_follow_suit": "Devi seguire il seme e giocare una carta di {lead_suit}.",
+    "invalid_play": "Quella carta non può essere giocata."
+  },
+  "game_action": {
+    "played": "Il Giocatore {player_id} ha giocato {card}."
+  },
+  "trick": {
+    "won": "Il Giocatore {winner_id} vince la presa con {card}.",
+    "won_learning": "Il Giocatore {winner_id} vince la presa con {card} e prende la carta scoperta."
+  },
+  "phase": {
+    "learning_complete": "Il mazzo è esaurito. La fase di apprendimento è terminata - ogni presa rimanente conta per la vittoria."
+  },
+  "draw": {
+    "winner_received": "Hai vinto la presa e ricevuto {card}.",
+    "loser_received": "Hai perso la presa e pescato {card} dal mazzo.",
+    "winner_preview": "La prossima carta disponibile è {card}."
+  },
+  "turn": {
+    "board": "{phase}\n{scores}\n{next_card}\n\n{trick}\n\n{hand}",
+    "scores_learning": "Prese vinte finora - Giocatore 0: {tricks0}, Giocatore 1: {tricks1}",
+    "scores_playing": "Prese di punteggio - Giocatore 0: {tricks0}, Giocatore 1: {tricks1}",
+    "phase": "Fase: {phase}",
+    "phase_learning": "Fase: {phase} ({remaining_cards} carte rimanenti nel mazzo)"
+  },
+  "hand": {
+    "no_cards": "Nessuna carta",
+    "no_cards_in_hand": "Nessuna carta in mano",
+    "header": "La tua mano:",
+    "trump_indicator": " (BRISCOLA)",
+    "suit_line": "{observation}\n  {suit}{trump_indicator}:",
+    "card_line": "{observation}\n    {index}. {card}"
+  },
+  "trick_view": {
+    "empty": "Nessuna carta giocata ancora in questa presa.",
+    "header": "Presa attuale:",
+    "trump_indicator": " (BRISCOLA)",
+    "card_line": "{observation}\n  Giocatore {player_id}: {card}{trump_indicator}"
+  },
+  "board_str": {
+    "not_started": "Gioco non iniziato",
+    "header": "=== GIOCO DI WHIST TEDESCO ===",
+    "phase": "{observation}\nFase: {phase}",
+    "trump_suit": "{observation}\nSeme di briscola: {trump_suit}",
+    "trump_card": "{observation}\nCarta di briscola: {card}",
+    "cards_left": "{observation}\nCarte rimanenti nel mazzo: {count}",
+    "next_card": "{observation}\nProssima carta per il vincitore: {card}",
+    "blank": "{observation}\n",
+    "current_trick": "{observation}\nPresa attuale:",
+    "trump_indicator": " (BRISCOLA)",
+    "trick_line": "{observation}\n  Giocatore {player_id}: {card}{trump_indicator}",
+    "player_line": "{observation}\nGiocatore {player_id}: {scoring} prese di punteggio ({tricks} totali), {hand_size} carte in mano"
+  },
+  "outcome": {
+    "summary": "Fase di apprendimento - Giocatore 0: {l0}, Giocatore 1: {l1}. Fase di gioco - Giocatore 0: {p0}, Giocatore 1: {p1}. Il Giocatore {winner_id} vince con {winner_tricks} prese di punteggio!"
+  }
+}

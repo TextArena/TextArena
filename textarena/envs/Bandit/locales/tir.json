@@ -1,0 +1,23 @@
+{
+  "player_prompt": {
+    "intro": "You are in a room with {num_buttons} buttons: {buttons}. Each button is associated with a Bernoulli distribution with a fixed but unknown mean; the means for the buttons could be different.\nFor each button, when you press it, you will get a reward that is sampled from associated distribution.\nYou have {num_turns} time steps and, on each time step, you can choose any button and receive the reward.\nYour goal is to strategically choose buttons at each time step to collect information about their reward distribution, that will let you choose the button with the highest mean reward correctly at the end of {num_turns} turns."
+  },
+  "board": {
+    "stat_line": "{button}: {reward} (played {count} times)",
+    "summary": "ሓጺር መግለጺ {stats}"
+  },
+  "invalid_move": {
+    "wrong_format": "እቲ ተጻዋታይ ብቑዕ ናይ ስጉምቲ ቅርጺ ኣይመለሰን።",
+    "invalid_button": "ዘይቅኑዕ ቁልፊ ተመሪጹ ኣሎ።"
+  },
+  "game_action": {
+    "pressed": "You pressed the {button} button and received a reward of {reward}."
+  },
+  "game_message": {
+    "final_decision": "ነቲ እተፈላለየ ምርጫታት ብምፍታንን ረብሓታቱ ብምርኣይን ዝገበርካዮ ወፈያ ምሉእ ብምሉእ ኣጥፊእካዮ ኢኻ። ሕጂኸ እቲ ዝበለጸ ምርጫ እንታይ ምዃኑ ፍለጥ።"
+  },
+  "outcome": {
+    "win": "እንኳዕ ደስ በለካ! ቅኑዕ ጠለባት መሪጽካ።",
+    "lose": "ግጉይ ጠለባት መሪጽካ ኢኻ።"
+  }
+}

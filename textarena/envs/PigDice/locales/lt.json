@@ -1,0 +1,24 @@
+{
+  "player_prompt": {
+    "intro": "Jūs esate žaidėjas {player_id} žaidžiant Pig Dice žaidimą.\n\nTaisyklės:\n- Savo ėjimo metu galite arba '[roll]', arba '[hold]'\n- Ridenti 2-6: Pridėti prie jūsų ėjimo sumos\n- Ridenti 1: Prarasti ėjimo sumą ir baigti ėjimą\n- Laikyti: Pridėti ėjimo sumą prie jūsų rezultato ir baigti ėjimą\n- Pirmasis, kuris pasiekia {winning_score} taškų, laimi\n\nKai ateina jūsų ėjimo metas, matysite dabartinius rezultatus ir ėjimo sumą.\nAtsakykite su '[roll]', kad ridėtumėte kauliuką, arba '[hold]', kad sutaupytumėte savo taškus."
+  },
+  "invalid_move": {
+    "invalid_action": "Neteisingas veiksmo formatas. Naudokite '[roll]' arba '[hold]'."
+  },
+  "actions": {
+    "player_busted": "Žaidėjas {player_id} pralaimėjo {turn_total} taškų!",
+    "player_hold": "Žaidėjas {player_id} laiko ir sutaupo {turn_total} taškų."
+  },
+  "board": {
+    "player": "Žaidėjas 0: '{score_0}'; Žaidėjas 1: '{score_1}'",
+    "current_total_scores": "Dabartiniai bendri rezultatai: {scores}\nJūsų dabartinė ėjimo suma yra {turn_total}.",
+    "roll_history": "{observation}\nJūsų ridėjimų istorija šio ėjimo metu: {roll_history}",
+    "first_roll": "{observation}\nTai yra pirmasis jūsų ėjimo ridėjimas.",
+    "available_actions": "{observation}\nGalimi veiksmai: '[roll]' arba '[hold]'"
+  },
+  "outcome": {
+    "winner_by_turn_limit": "Žaidėjas {winner_id} laimėjo, nes turėjo aukštesnį rezultatą ėjimų limite ({scores})",
+    "winner_by_score": "Žaidėjas {winner_id} laimėjo, pasiekęs taikinio rezultatą {winning_score}!",
+    "draw": "Ėjimų limitas buvo pasiektas, ir visi žaidėjai turi tą patį rezultatą: {scores}"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "player_prompt": {
+    "intro": "Jy is Speler {player_id} in Chopsticks. Op jou beurt, kies een van:\n  + Aanval:  '[attack M O]'  waar M=jou hand (0 of 1), O=teenstander se hand (0 of 1).\n    - Teenstander se handtelling verhoog met jou hand; as >=5, word dit 0.\n  + Verdeel:   '[split L R]'  om jou totale vingers te herverdeel in L en R (L+R = jou totaal).\nAntwoord met presies een van daardie bevele."
+  },
+  "board": {
+    "current_board": "Huidige Bord:\nSpeler 0: {hands_0}\nSpeler 1: {hands_1}"
+  },
+  "invalid_move": {
+    "my_hand_dead": "Jou hand {my_idx} is dood.",
+    "opp_hand_dead": "Teenstander se hand {opp_idx} is reeds dood.",
+    "split_sum": "Verdeel moet op {total} uitkom.",
+    "split_no_change": "Verdeel moet jou handverdeling verander.",
+    "invalid_command": "Ongeldige skuif. Gebruik “[attack M O]” of “[split L R]”."
+  },
+  "game_action": {
+    "attack": "Sp{player_id} val Sp{opp_id} se hand {opp_idx} aan: dit gaan van {opp_val} na {new_val}.",
+    "split": "Sp{player_id} verdeel in [{L}, {R}]."
+  },
+  "history": {
+    "entry": "Sp{player_id} {desc}"
+  },
+  "outcome": {
+    "win": "Albei teenstander se hande is dood.",
+    "draw": "Die beurtgrens is bereik."
+  }
+}
