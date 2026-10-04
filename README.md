@@ -45,8 +45,8 @@ Two models play TicTacToe through [OpenRouter](https://openrouter.ai) (set `OPEN
 import textarena as ta
 
 agents = {
-    0: ta.agents.OpenRouterAgent(model_name="openai/gpt-4o-mini"),
-    1: ta.agents.OpenRouterAgent(model_name="anthropic/claude-3.5-haiku"),
+    0: ta.agents.OpenRouterAgent(model_name="openai/gpt-5-mini"),
+    1: ta.agents.OpenRouterAgent(model_name="qwen/qwen3.8-27b"),
 }
 
 env = ta.make("TicTacToe-v1")
@@ -107,6 +107,25 @@ optionally stopping after a given number of actions:
 record = env.record()
 replayed = ta.replay(record, steps=10)  # the game after its first ten actions
 ```
+
+## Evaluating models
+
+`ta.evaluate` plays agents against each other and summarizes the results. Every agent plays every seat equally often
+on the same seeds, so first-mover advantage and lucky deals cancel out, and games run in parallel threads:
+
+```python
+evaluation = ta.evaluate(
+    {"gpt": ta.agents.OpenRouterAgent("openai/gpt-5-mini"), "qwen": ta.agents.OpenRouterAgent("qwen/qwen3.8-27b")},
+    ["TicTacToe-v1", "Chess-v1", "Wordle-v1"],
+    episodes=20,
+    workers=8,
+)
+evaluation.summary()  # per agent and game: games, mean reward, win rate, invalid-move rate, mean turns, errors
+```
+
+Each game in `evaluation.games` keeps its seed, seating, rewards, and `record`, so any game can be replayed, and
+`evaluation.to_rows()` gives one row per seat for analysis with pandas. A game that fails, for example because a
+model is unreachable, is recorded with its error instead of stopping the evaluation.
 
 ## Training
 

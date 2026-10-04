@@ -3,6 +3,7 @@
 from textarena.core import Env, Wrapper, ObservationWrapper, Agent, Message, Observations, Rewards, GAME_ID, ObservationType, extract_action
 from textarena.engine import GameEnv, GameState, Outcome, Invalid, Retryable, Param, replay
 from textarena.envs.registration import make, register
+from textarena.evaluation import evaluate
 from textarena import wrappers, agents, envs, utils
 
 __all__ = [
@@ -11,6 +12,7 @@ __all__ = [
     "GameEnv", "GameState", "Outcome", "Invalid", "Retryable", "Param", "replay", # engine
     "extract_action", # action-tag extraction (model output -> env action)
     "make", "register", # registration
+    "evaluate", # agents against each other
     "envs", "utils", "wrappers", "agents", # module folders
 ]
 

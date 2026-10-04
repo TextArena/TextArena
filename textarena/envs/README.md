@@ -12,8 +12,8 @@ them; follow a game's link for details.
 import textarena as ta
 
 agents = {
-    0: ta.agents.OpenRouterAgent(model_name="openai/gpt-4o-mini"),
-    1: ta.agents.OpenRouterAgent(model_name="anthropic/claude-3.5-haiku"),
+    0: ta.agents.OpenRouterAgent(model_name="openai/gpt-5-mini"),
+    1: ta.agents.OpenRouterAgent(model_name="qwen/qwen3.8-27b"),
 }
 
 env = ta.make(env_id="TicTacToe-v1")

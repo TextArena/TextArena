@@ -17,6 +17,8 @@ rules and rewards were corrected along the way, so every environment id moved to
   `<action>...</action>` tags, and `ta.extract_action` extracts it.
 - **Replays.** `env.record()` returns a JSON-serializable record of a game, and `ta.replay(record)` rebuilds it,
   including the answers of LLM judges.
+- **Evaluation.** `ta.evaluate(agents, env_ids, episodes)` plays agents against each other on paired seeds with
+  rotating seats and summarizes rewards, win rates, and invalid moves.
 - **No required dependencies.** `pip install textarena` installs only the games; the `agents`, `render`,
   `translations`, and `all` extras add model agents, the terminal renderer, and translations.
 - **Translations** into 192 languages ship as the separate `textarena-locales` package.
