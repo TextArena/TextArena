@@ -89,10 +89,10 @@ retired (`ta.make` names the replacement), so results are only comparable within
 - **External models**: Debate, ScenarioPlanning (LLM juries), GuessWho, and TwentyQuestions (LLM game
   masters) call `qwen/qwen3.8-27b` through OpenRouter and need `OPENROUTER_API_KEY` and
   `pip install "textarena[agents]"`. The model is part of these games' rules, so changing it is a version bump.
-  If the service
-  fails, the action is not counted and the player is asked to retry; after five failures in a row `env.step`
-  raises a `RuntimeError` instead of letting the episode stall. Records keep the models' answers, so replays
-  never call them again.
+  If the service fails, the action is not counted and the player is asked to retry, up to five times in a row;
+  the sixth failure makes `env.step` raise a `RuntimeError` instead of letting the episode stall. Each failure is
+  logged as a warning with its cause (such as a juror's invalid answer), which the player never sees. Records keep
+  the models' answers, so replays never call them again.
 - **Snapshots**: `env.snapshot()` and `env.restore(snapshot)` capture and restore the complete state,
   including hidden cards and answers, for search and replay. Never show a snapshot to a player.
 

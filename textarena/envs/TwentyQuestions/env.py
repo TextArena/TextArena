@@ -242,9 +242,9 @@ class TwentyQuestionsEnv(ta.GameEnv):
             checkpoint, copied = self._copy_resource(original_gamemaster)
             try:
                 gamemaster_response = self.get_gamemaster_response(question)
-            except Exception:
+            except Exception as error:
                 self._restore_gamemaster_checkpoint(original_gamemaster, checkpoint, copied)
-                return self.retryable("The gamemaster could not answer the question.")
+                return self.retryable("The gamemaster could not answer the question.", error)
             self.game_state["history"].append((question, gamemaster_response))
             if self.state.turn == self.max_turns - 2:
                 gamemaster_response += "\nYou have run out of questions. What is your final guess?"

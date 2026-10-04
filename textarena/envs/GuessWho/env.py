@@ -278,9 +278,9 @@ class GuessWhoEnv(ta.GameEnv):
             checkpoint, copied = self._copy_resource(original_gamemaster)
             try:
                 response = self.get_gamemaster_response(question)
-            except Exception:
+            except Exception as error:
                 self._restore_gamemaster_checkpoint(original_gamemaster, checkpoint, copied)
-                return self.retryable("The gamemaster could not answer the question.")
+                return self.retryable("The gamemaster could not answer the question.", error)
             if self.state.turn == self.max_turns - 2:
                 response += "\nYou have run out of questions. What is your final guess? Reply with 'guess <name>'."
             self.message(player_id, response, ta.ObservationType.GAME_MESSAGE)

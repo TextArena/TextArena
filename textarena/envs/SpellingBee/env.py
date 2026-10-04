@@ -80,8 +80,8 @@ class SpellingBeeEnv(ta.GameEnv):
         if not set(word).issubset(gs["allowed_letters"]): return self.invalid("The submitted word contains illegal characters.")
         try:
             valid = bool(self.is_word(word))
-        except Exception:
-            return self.retryable("The dictionary could not validate the word.")
+        except Exception as error:
+            return self.retryable("The dictionary could not validate the word.", error)
         if not valid: return self.invalid("The submitted word is not a valid English word.")
         gs["word_history"].append(word)
         self.broadcast(f"Player {player_id} submitted the word: {word}", ta.ObservationType.GAME_ACTION_DESCRIPTION)

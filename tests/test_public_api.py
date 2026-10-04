@@ -112,7 +112,7 @@ class _FlakyServiceEnv(ta.GameEnv):
 
     def apply(self, player_id, action):
         if self.outage:
-            return self.retryable("service unavailable")
+            return self.retryable("service unavailable", ValueError("invalid answer 'No, the word is dog'"))
         return self.outcome({0: 1}, reason="done")
 
 
@@ -122,8 +122,11 @@ def test_retryable_results_raise_after_the_consecutive_retry_limit():
     for _ in range(env.max_consecutive_retries):
         done = env.step("hello")
         assert not done
-    with pytest.raises(RuntimeError, match="external service is unavailable"):
+    _, observations = env.get_observation()
+    assert observations and not any("dog" in message for _, message, _ in observations)
+    with pytest.raises(RuntimeError, match="external service is unavailable") as raised:
         env.step("hello")
+    assert "the word is dog" in str(raised.value) and isinstance(raised.value.__cause__, ValueError)
 
 
 class _JudgedEnv(_FlakyServiceEnv):

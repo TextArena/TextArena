@@ -193,8 +193,8 @@ class DebateEnv(ta.GameEnv):
         if not self.game_state["pre_vote_recorded"]:
             try:
                 pre_votes = self._evaluate_debate(topic=self.game_state["topic"])
-            except Exception:
-                return self.retryable("The jury could not cast its pre-debate vote.")
+            except Exception as error:
+                return self.retryable("The jury could not cast its pre-debate vote.", error)
             self.game_state["votes"]["pre-debate"] = pre_votes
             self.game_state["pre_vote_recorded"] = True
 
@@ -205,8 +205,8 @@ class DebateEnv(ta.GameEnv):
         if self.state.turn >= self.max_turns - 1: # Check if the debate has ended
             try:
                 winner_id, post_votes = self._determine_debate_winner(proposed_arguments)
-            except Exception:
-                return self.retryable("The jury could not cast its post-debate vote.")
+            except Exception as error:
+                return self.retryable("The jury could not cast its post-debate vote.", error)
             self.game_state["arguments"] = proposed_arguments
             self.game_state["votes"]["post-debate"] = post_votes
             self.broadcast(argument, ta.ObservationType.PLAYER_ACTION, from_id=player_id)

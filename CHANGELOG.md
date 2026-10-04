@@ -91,6 +91,8 @@ of range raises `ValueError`, and an unknown name raises `TypeError`. Renamed or
   only a position where nobody can ever move again ends the game early. **RetroSpaceDuel**: the first mover is drawn
   at random. **SpellingBee**: a 50-turn limit ends in a draw.
 - **LLM juries and game masters** (Debate, ScenarioPlanning, GuessWho, TwentyQuestions) use `qwen/qwen3.8-27b`.
+  A juror's vote may come wrapped in quotes, bold, or a trailing period, but must name exactly one option. When a
+  model fails, the warning that is logged and the error raised after repeated failures include the cause.
 - **Word games** check words against frozen English word lists, identical on every machine, and never draw offensive
   words as secrets. Chess uses its own rules engine instead of python-chess.
 - Many other fixes from a full audit of every game; see each game's README for its exact rules.

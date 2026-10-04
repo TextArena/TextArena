@@ -13,11 +13,14 @@ import copy
 import json
 import math
 import random
+import logging
 import importlib
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 from textarena.core import Env, ObservationType, GAME_ID
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -39,8 +42,13 @@ class Invalid:
 
 @dataclass
 class Retryable:
-    """The action could not be processed because infrastructure was unavailable."""
+    """The action could not be processed because infrastructure was unavailable.
+
+    `reason` is shown to the player. `error`, the underlying exception, is only logged and attached to the error
+    raised once retries run out, because it may quote hidden information such as a game master's raw answer.
+    """
     reason: str
+    error: Optional[BaseException] = None
 
 
 @dataclass(frozen=True)
@@ -340,8 +348,8 @@ class GameEnv(Env):
     def invalid(self, reason: str) -> Invalid:
         return Invalid(reason=reason)
 
-    def retryable(self, reason: str) -> Retryable:
-        return Retryable(reason=reason)
+    def retryable(self, reason: str, error: Optional[BaseException] = None) -> Retryable:
+        return Retryable(reason=reason, error=error)
 
     # ------------------------------------------------------------ game helpers
     @property
@@ -502,12 +510,14 @@ class GameEnv(Env):
             self.state.actions.pop()
             del self.state.external_answers[answers_before:]
             self.state.retry_count += 1
+            cause = f" ({type(result.error).__name__}: {result.error})" if result.error is not None else ""
+            logger.warning("%s could not process an action: %s%s", type(self).__name__, result.reason, cause)
             if self.state.retry_count > self.max_consecutive_retries:
                 # A dead service would otherwise ask the player to retry forever.
                 raise RuntimeError(
                     f"{type(self).__name__} could not process {self.state.retry_count} actions in a row "
-                    f"because an external service is unavailable. Last reason: {result.reason}"
-                )
+                    f"because an external service is unavailable. Last reason: {result.reason}{cause}"
+                ) from result.error
             self.message(
                 pid,
                 f"The action could not be processed and was not counted. Please retry. Reason: {result.reason}",

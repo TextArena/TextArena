@@ -95,10 +95,10 @@ class ScenarioPlanningEnv(ta.GameEnv):
             rng_state = self.rng.getstate()
             try:
                 votes = self._evaluate_strategies(proposed_strategies)
-            except Exception:
+            except Exception as error:
                 self.rng.setstate(rng_state)
                 self.judge = None
-                return self.retryable("The jury could not evaluate the strategies.")
+                return self.retryable("The jury could not evaluate the strategies.", error)
             gs["strategies"] = proposed_strategies
             gs["votes"] = {0: {"Votes": votes["Player 0"]}, 1: {"Votes": votes["Player 1"]}}
             if votes["Player 0"] == votes["Player 1"]: return self.draw(reason="An equal number of judges voted for each option.") # check for draw first
