@@ -1,3 +1,3 @@
-from textarena.envs.registration import register_with_versions
+from textarena.envs.registration import register
 
-register_with_versions(id="SimpleTak-v1", entry_point="textarena.envs.SimpleTak.env:SimpleTakEnv", board_size=4)
+register(id="SimpleTak-v1", entry_point="textarena.envs.SimpleTak.env:SimpleTakEnv", board_size=4)

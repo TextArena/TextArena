@@ -21,7 +21,6 @@ class CoupEnv(ta.GameEnv):
 
     min_players = 2
     max_players = 6
-    error_allowance = 3
 
     def setup(self) -> Dict[str, Any]:
         # Create deck with three of each card
@@ -154,7 +153,6 @@ class CoupEnv(ta.GameEnv):
 
         winner = self._get_winner()
         if winner is not None:
-            self.step_info["winner"] = winner
             return self.winner(winner, reason=f"Player {winner} has won the game!")
         return self._advance_game_turn()
 
@@ -836,7 +834,6 @@ class CoupEnv(ta.GameEnv):
         # Check for winner
         winner = self._get_winner()
         if winner is not None:
-            self.step_info["winner"] = winner
             return self.winner(winner, reason=f"Player {winner} has won the game!")
         return None
 

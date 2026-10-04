@@ -58,7 +58,7 @@ def test_reset_is_silent(capsys):
 def test_nothing_action_ends_turn_and_rotates():
     env = _fresh()
     nothing_idx = len(env.game_moves)
-    done, _ = env.step(str(nothing_idx))
+    done = env.step(str(nothing_idx))
     assert not done
     assert env.state.current_player_id == 1
     assert env.state.game_state["turn_phase"] == "action"
@@ -72,7 +72,7 @@ def test_ten_victory_points_ends_game():
     scores[red]["total"] = 10
     env.board.get_scores = lambda: scores
 
-    done, _ = env.step(str(len(env.game_moves)))
+    done = env.step(str(len(env.game_moves)))
 
     assert done
     assert env.state.rewards[0] == 1.0
@@ -80,7 +80,7 @@ def test_ten_victory_points_ends_game():
 
 def test_out_of_bounds_action_is_invalid():
     env = _fresh()
-    done, _ = env.step("9999")
+    done = env.step("9999")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0  # no rotation on first invalid
@@ -88,7 +88,7 @@ def test_out_of_bounds_action_is_invalid():
 
 def test_non_index_action_is_invalid():
     env = _fresh()
-    done, _ = env.step("I would like to build something please")
+    done = env.step("I would like to build something please")
     assert not done
     assert env.state.error_count == 1
 
@@ -121,7 +121,7 @@ def test_conversation_does_not_implicitly_deny_active_offer():
     }
     env.set_current_player(1)
 
-    done, _ = env.step("Could you improve the offer?")
+    done = env.step("Could you improve the offer?")
 
     assert not done
     assert gs["current_offer"] is not None
@@ -149,7 +149,7 @@ def test_either_negotiator_can_finish_negotiation():
     gs["main_negotiator"] = 0
     env.set_current_player(1)
 
-    done, _ = env.step("Done")
+    done = env.step("Done")
 
     assert not done
     assert gs["turn_phase"] == "action"
@@ -167,7 +167,7 @@ def test_malformed_offer_is_atomic_and_private():
         event for event in env.state.events if event[3] == 1
     ]
 
-    done, _ = env.step("Offer: 1 Wood junk -> 1 Wheat trailing")
+    done = env.step("Offer: 1 Wood junk -> 1 Wheat trailing")
 
     assert not done
     assert env.state.error_count == 1
@@ -212,7 +212,7 @@ def test_invalid_negotiation_partner_is_rejected():
     env = _fresh()
     negotiate_idx = len(env.game_moves) - 1
     env.step(str(negotiate_idx))
-    done, _ = env.step("9")  # 9 is not a valid partner id
+    done = env.step("9")  # 9 is not a valid partner id
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["turn_phase"] == "negotiation_start"
@@ -275,7 +275,7 @@ def test_accept_plus_invalid_counteroffer_is_transactionally_invalid():
     hands_before = (red.hand.copy(), white.hand.copy())
     offer_before = dict(env.game_state["current_offer"])
 
-    done, _ = env.step("Accept\nOffer: 999 Wood -> 1 Ore")
+    done = env.step("Accept\nOffer: 999 Wood -> 1 Ore")
 
     assert not done
     assert env.state.error_count == 1
@@ -301,7 +301,7 @@ def test_malformed_negotiation_commands_are_atomic(malformed):
         event for event in env.state.events if event[3] == 1
     ]
 
-    done, _ = env.step(malformed)
+    done = env.step(malformed)
 
     assert not done
     assert env.state.error_count == 1
@@ -376,7 +376,7 @@ def test_stale_build_selection_is_invalid_without_consuming_move():
     env.board.edges[target_edge].owner = Color.BLUE
     hand_before = player.hand.copy()
 
-    done, _ = env.step(str(build_index))
+    done = env.step(str(build_index))
 
     assert not done
     assert env.state.error_count == 1
@@ -394,7 +394,7 @@ def test_eliminated_player_score_cannot_trigger_terminal():
     env.set_current_player(1)
     env.render(1)
 
-    done, _ = env.step(str(len(env.game_moves)))
+    done = env.step(str(len(env.game_moves)))
 
     assert not done
     assert env.state.current_player_id == 2
@@ -409,7 +409,7 @@ def test_eliminated_negotiation_responder_returns_turn_to_initiator():
     assert env.state.current_player_id == 1
 
     env.step("Accept")
-    done, _ = env.step("Accept")
+    done = env.step("Accept")
 
     assert not done
     assert not env.state.is_player_alive(1)
@@ -490,7 +490,7 @@ def test_turn_limit_ranks_three_active_players():
     scores[Color.BLUE]["total"] = 1
     env.board.get_scores = lambda: scores
 
-    done, _ = env.step(str(len(env.game_moves)))
+    done = env.step(str(len(env.game_moves)))
 
     assert done
     assert env.state.rewards == {0: 1.0, 1: 0.0, 2: -1.0}
@@ -511,7 +511,7 @@ def test_huge_numbers_are_invalid_moves_not_crashes(phase):
         action = "Offer: " + "9" * 5000 + " Wood -> 1 Ore"
     else:
         action = "9" * 5000
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.game_state["current_offer"] is None

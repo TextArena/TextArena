@@ -37,8 +37,10 @@ def test_equivalent_registration_is_idempotent_but_conflicts_fail():
         register(env_id, factory, marker=1)
         with pytest.raises(ValueError, match="different specification"):
             register(env_id, factory, marker=2)
+        assert f"{env_id}-mdp" in ENV_REGISTRY
     finally:
         ENV_REGISTRY.pop(env_id, None)
+        ENV_REGISTRY.pop(f"{env_id}-mdp", None)
 
 
 def test_default_observation_contains_only_unseen_messages():
@@ -118,7 +120,7 @@ def test_retryable_results_raise_after_the_consecutive_retry_limit():
     env = _FlakyServiceEnv()
     env.reset(num_players=1, seed=0)
     for _ in range(env.max_consecutive_retries):
-        done, _ = env.step("hello")
+        done = env.step("hello")
         assert not done
     with pytest.raises(RuntimeError, match="external service is unavailable"):
         env.step("hello")
@@ -188,7 +190,7 @@ def test_a_processed_action_resets_the_retry_count():
     for _ in range(env.max_consecutive_retries):
         env.step("hello")
     env.outage = False
-    done, _ = env.step("hello")
+    done = env.step("hello")
     assert done and env.state.retry_count == 0
 
 
@@ -221,7 +223,7 @@ def test_format_errors_describe_the_expected_action():
 def test_one_enclosing_bracket_pair_is_ignored(action, accepted):
     env = _CellEnv()
     env.reset(seed=0)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert done is accepted
     assert env.state.error_count == (0 if accepted else 1)
 
@@ -381,10 +383,10 @@ def test_terminal_action_is_counted_and_final_board_is_rendered():
     env = ta.make("TicTacToe-v1")
     env.reset(num_players=2, seed=1)
     for move in ("0", "3", "1", "4"):
-        done, _ = env.step(move)
+        done = env.step(move)
         assert not done
 
-    done, _ = env.step("2")
+    done = env.step("2")
 
     assert done
     assert env.state.turn == 5
@@ -402,7 +404,7 @@ def test_oversized_actions_are_rejected_before_event_logging():
     env.reset(num_players=2, seed=1)
     oversized = "x" * (env.max_action_chars + 1)
 
-    done, _ = env.step(oversized)
+    done = env.step(oversized)
 
     assert not done
     assert env.state.error_count == 1

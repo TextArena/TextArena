@@ -65,36 +65,6 @@ class WordLadderEnv(ta.GameEnv):
                         neighbours[word].append(candidate)
         return neighbours
 
-    def _find_valid_pairs(self, neighbours: Dict[str, List[str]], min_steps: int, max_steps: int) -> List[Tuple[str, str, List[str]]]:
-        """
-        BFS from each word to collect (start, target, path) triples whose
-        path length ∈ [min_steps, max_steps].  Stops early when distance limit
-        is exceeded.  Complexity is manageable because we work per word-length
-        bucket and cut off BFS at max_steps.
-        """
-        valid_pairs = []
-        for start in neighbours.keys():
-            visited = {start}
-            q = deque([(start, [start])])  # (current_word, path_so_far)
-
-            while q:
-                current, path = q.popleft()
-                dist = len(path) - 1
-                if dist > max_steps:
-                    continue
-                # Avoid (start, start) and enforce distance range
-                if start != current and min_steps <= dist <= max_steps:
-                    valid_pairs.append((start, current, path))
-
-                if dist == max_steps:
-                    continue  # No deeper search past distance cap
-
-                for nxt in neighbours[current]:
-                    if nxt not in visited:
-                        visited.add(nxt)
-                        q.append((nxt, path + [nxt]))
-        return valid_pairs
-
     def _sample_start_target(self) -> Tuple[str, str]:
         """ Pick word length, build neighbour map, then randomly select a (start, target) pair whose shortest path through `word_list` fits distance constraints """
         lengths = list(range(3, 12))

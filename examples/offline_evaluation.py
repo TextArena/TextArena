@@ -39,7 +39,7 @@ def run_game(env_id: str, num_players: int, model, opponent) -> dict:
     while not done:
         pid, obs = env.get_observation()
         action = model(obs) if pid == model_pid else opponent(obs)
-        done, _ = env.step(action=action)
+        done = env.step(action=action)
 
     rewards, game_info = env.close()
 

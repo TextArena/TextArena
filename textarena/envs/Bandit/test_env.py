@@ -35,14 +35,14 @@ def test_pressing_button_records_history():
 
 def test_invalid_format_increments_error_count():
     env = _fresh()
-    done, _ = env.step("I choose nothing")
+    done = env.step("I choose nothing")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_invalid_button_increments_error_count():
     env = _fresh()
-    done, _ = env.step("green")  # well formed but not a real button
+    done = env.step("green")  # well formed but not a real button
     assert not done
     assert env.state.error_count == 1
 
@@ -52,7 +52,7 @@ def test_game_ends_after_budget_and_returns_reward():
     best = _best_button(env)
     env.step(best)  # turn 0
     env.step(best)  # turn 1
-    done, _ = env.step(best)  # turn 2 -> final decision
+    done = env.step(best)  # turn 2 -> final decision
     assert done
     assert env.state.rewards is not None
     assert 0 in env.state.rewards
@@ -69,27 +69,32 @@ def test_correct_final_choice_should_reward_one():
     assert env.state.rewards == {0: 1.0}
 
 
-def test_incorrect_final_choice_returns_negative_regret():
+def test_incorrect_final_choice_scores_zero():
     env = _fresh(num_turns=0)
     best = _best_button(env)
     wrong = next(button for button in env.buttons if button != best)
-    expected = -env._regret(wrong)
-    done, _ = env.step(wrong)
+    done = env.step(wrong)
     assert done
-    assert expected < 0
-    assert env.state.rewards == {0: pytest.approx(expected)}
+    assert env.state.rewards == {0: 0.0}
     assert env.game_state["history"] == {"red": [], "blue": []}
+
+
+def test_second_consecutive_invalid_reply_scores_zero():
+    env = _fresh()
+    assert not env.step("green")
+    assert env.step("green")
+    assert env.state.rewards == {0: 0}
 
 
 @pytest.mark.parametrize(
     "choice,expected",
-    [("green", 1.0), ("red", -0.4), ("blue", -0.3)],
+    [("green", 1.0), ("red", 0.0), ("blue", 0.0)],
 )
 def test_final_choice_is_scored_against_the_argmax_button(choice, expected):
     env = BanditEnv(buttons=["red", "blue", "green"], num_turns=0)
     env.reset(num_players=1, seed=42)
     env.game_state["ground_truth"] = {"red": 0.2, "blue": 0.3, "green": 0.6}
-    done, _ = env.step(choice)
+    done = env.step(choice)
     assert done
     assert env.state.rewards == {0: pytest.approx(expected)}
 
@@ -97,18 +102,18 @@ def test_final_choice_is_scored_against_the_argmax_button(choice, expected):
 def test_invalid_final_choice_does_not_consume_a_turn():
     env = _fresh(num_turns=0)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("not-a-button")
+    done = env.step("not-a-button")
     assert not done
     assert env.state.turn == 0
     assert env.game_state == before
-    done, _ = env.step(_best_button(env))
+    done = env.step(_best_button(env))
     assert done and env.state.turn == 1
 
 
 @pytest.mark.parametrize("action", ["RED", "Red"])
 def test_button_names_are_case_insensitive(action):
     env = _fresh(num_turns=2)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 0
     assert len(env.game_state["history"]["red"]) == 1
@@ -116,7 +121,7 @@ def test_button_names_are_case_insensitive(action):
 
 def test_final_choice_is_case_insensitive():
     env = _fresh(num_turns=0)
-    done, _ = env.step(_best_button(env).upper())
+    done = env.step(_best_button(env).upper())
     assert done
     assert env.state.rewards == {0: 1.0}
 
@@ -124,7 +129,7 @@ def test_final_choice_is_case_insensitive():
 def test_case_variants_of_distinct_buttons_must_match_exactly():
     env = BanditEnv(buttons=["red", "Red"], num_turns=2)
     env.reset(num_players=1, seed=42)
-    done, _ = env.step("RED")
+    done = env.step("RED")
     assert not done
     assert env.state.error_count == 1
     env.step("Red")
@@ -151,7 +156,7 @@ def test_prompt_explains_the_final_answer_and_its_scoring():
 def test_unmatched_brackets_are_rejected_atomically(action):
     env = _fresh(num_turns=0)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.turn == 0
     assert env.game_state == before
@@ -160,11 +165,11 @@ def test_unmatched_brackets_are_rejected_atomically(action):
 def test_non_text_and_oversized_actions_are_rejected_atomically():
     env = _fresh(num_turns=0)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step(None)
+    done = env.step(None)
     assert not done
     assert env.game_state == before
     env.reset(num_players=1, seed=42)
-    done, _ = env.step("x" * (env.max_action_chars + 1))
+    done = env.step("x" * (env.max_action_chars + 1))
     assert not done
     assert env.game_state == before
 

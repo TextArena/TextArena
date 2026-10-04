@@ -52,15 +52,15 @@ question-and-answer history. The target's name appears on the board only after t
 
 | Outcome | Reward |
 | --- | --- |
-| Correct guess | `+1` |
+| Correct guess | `1` |
 | Wrong guess (another character from the lineup) | `0` |
-| Second consecutive invalid move (such as a question after the budget is used up, or two names outside the lineup) | `-1` |
+| Second consecutive invalid move (such as a question after the budget is used up, or two names outside the lineup) | `0` |
 
 ## Parameters
 
 <!-- BEGIN GENERATED: parameters -->
 - `max_turns` (default `40`): The total number of turns. The player may ask `max_turns - 1` questions, and the final turn is reserved for the guess. Accepts an integer of at least 2.
-- `gamemaster` (default `None`): Answers the player's questions. With None, OpenRouter `openai/gpt-4o` answers; inject one to play offline or with a different model. Accepts a callable that takes a prompt string and returns `Yes`, `No`, or `I don't know` or None.
+- `gamemaster` (default `None`): Answers the player's questions. With None, OpenRouter `qwen/qwen3.8-27b` answers; inject one to play offline or with a different model. Accepts a callable that takes a prompt string and returns `Yes`, `No`, or `I don't know` or None.
 - `characters_path` (default `None`): A JSON file with an alternative character list in the schema of the bundled `characters.json`, which None selects. Names must stay distinct once case, accents, punctuation, and spacing are ignored.
 <!-- END GENERATED: parameters -->
 

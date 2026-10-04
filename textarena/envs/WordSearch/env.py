@@ -1,5 +1,5 @@
 import re, copy, string
-from typing import Any, Dict, List, Optional, Set, Tuple, Union
+from typing import Any, Dict, Optional, Set, Tuple, Union
 
 import textarena as ta
 from textarena.envs.WordSearch.renderer import create_board_str
@@ -46,20 +46,12 @@ class WordSearchEnv(ta.GameEnv):
         return self.game_state["correct_words"]
 
     @property
-    def incorrect_attempts(self) -> List[Tuple[int, int, int, int]]:
-        return self.game_state["incorrect_attempts"]
-
-    @property
     def highlighted_positions(self) -> Set[Tuple[int, int]]:
         return self.game_state["highlighted_positions"]
 
     @property
     def num_incorrect_tries(self) -> int:
         return self.game_state["num_incorrect_tries"]
-
-    @property
-    def attempted_coordinates(self) -> Set[Tuple[int, int, int, int]]:
-        return self.game_state["attempted_coordinates"]
 
     def get_board_str(self):
         return create_board_str(game_state=self.state.game_state)

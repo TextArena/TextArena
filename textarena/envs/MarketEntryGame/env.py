@@ -57,7 +57,6 @@ class MarketEntryGameEnv(ta.GameEnv):
     max_players = 15
     mdp_includes_actions = False
     broadcast_actions = False  # raw actions stay private; the game reveals messages/decisions simultaneously
-    error_allowance = 2  # allow 2 errors before elimination
 
     num_rounds = ta.Param(5, "The number of rounds.", min=1, check=_is_renderable, rule="a positive integer")
     communication_turns = ta.Param(
@@ -159,7 +158,7 @@ class MarketEntryGameEnv(ta.GameEnv):
             f"  Example: 'I'm considering entering. {{I think only 2 of us should enter this round}}'\n"
             f"  Only the text in curly braces will be visible to other players.\n"
             f"- During decision phase: reply with 'E' to enter or 'S' to stay out.\n"
-            f"- Invalid moves (wrong format) will result in warnings, then elimination.\n"
+            f"- An invalid move (wrong format) gets a warning; a second one in a row eliminates you.\n"
             f"- If you don't send any public message during conversation (no {{}} format), others will see that you remained silent.\n\n"
         )
 

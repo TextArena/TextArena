@@ -235,6 +235,3 @@ class LinesOfActionEnv(ta.GameEnv):
     def _hash_position(board: List[List[str]], side_to_move: int) -> str:
         flat = ''.join(cell or '.' for row in board for cell in row)
         return flat + str(side_to_move)
-
-    def _pos_hash(self) -> str:
-        return self._hash_position(self.game_state["board"], self.state.current_player_id)

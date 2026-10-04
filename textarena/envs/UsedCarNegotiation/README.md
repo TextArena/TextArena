@@ -27,7 +27,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `UsedCarNegotiation
   must be between $7,000 and $10,000, and a new offer by either player replaces any pending offer.
 - Offers and statements pass the turn to the opponent. Rejecting does not, so the rejecting player then has to offer or
   make a statement.
-- The game ends when a player accepts the pending offer, or as a no-deal draw after `max_rounds` actions in total.
+- The game ends when a player accepts the pending offer, or with no deal after `max_rounds` actions in total.
 
 ## Actions
 
@@ -50,11 +50,13 @@ gets their raw reply echoed back. The opponent's background and alternative are 
 
 ## Rewards
 
+This is a mixed-motive game: each player gets their own score from `0` to `1`.
+
 | Outcome | Reward |
 | --- | --- |
 | Offer accepted at price `p` | Buyer `(10000 - p) / 3000`, seller `(p - 7000) / 3000` (each between `0` and `1`, summing to `1`) |
 | `max_rounds` actions without an accepted offer | Both `0` |
-| Second consecutive invalid move | Offender `-1`, opponent `+1` |
+| Second consecutive invalid move | Offender `0`, opponent `1` |
 
 ## Parameters
 

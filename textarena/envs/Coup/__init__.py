@@ -1,3 +1,3 @@
-from textarena.envs.registration import register_with_versions
+from textarena.envs.registration import register
 
-register_with_versions(id="Coup-v1", entry_point="textarena.envs.Coup.env:CoupEnv")
+register(id="Coup-v1", entry_point="textarena.envs.Coup.env:CoupEnv")

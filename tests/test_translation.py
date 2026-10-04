@@ -151,7 +151,7 @@ def _play(env, actions):
     seen = []
     for action in actions:
         seen.append(env.get_observation())
-        done, _ = env.step(action)
+        done = env.step(action)
         if done:
             break
     seen.append(env.get_observation())
@@ -259,7 +259,7 @@ def test_close_translates_each_players_reason(game):
     env = game(lang={0: "de", 1: "en"})
     for action in ["5", "1", "5"]:
         env.get_observation()
-        done, _ = env.step(action)
+        done = env.step(action)
     assert done
     rewards, info = env.close()
     assert rewards == {0: 1, 1: -1}
@@ -291,7 +291,7 @@ def test_translations_do_not_change_game_behavior():
             rng = random.Random(7)
             for _ in range(60):
                 env.get_observation()
-                done, _ = env.step(rng.choice(["0", "1", "4", "Bid: 2, 3", "call", "play 0", "discard 1", "x"]))
+                done = env.step(rng.choice(["0", "1", "4", "Bid: 2, 3", "call", "play 0", "discard 1", "x"]))
                 if done:
                     break
             rewards, _ = env.close()

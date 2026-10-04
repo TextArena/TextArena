@@ -81,10 +81,10 @@ assassinate (they have paid 3 coins) on you (claiming Assassin)").
 | Outcome | Reward |
 | --- | --- |
 | Last player with influence | Winner `+1`, every other player `-1` |
-| Fourth consecutive invalid move | Offender is out and ends with `-1` |
+| Second consecutive invalid move | Offender is out and ends with `-1` |
 
-There is no turn limit and no draw. The first three consecutive invalid moves only earn a private warning and a
-retry. On the fourth, the offender reveals all their cards and is out: their coins return to the Treasury and
+There is no turn limit and no draw. A first invalid move only earns a private warning and a retry. On the second
+in a row, the offender reveals all their cards and is out: their coins return to the Treasury and
 any action they were the source or target of is cancelled. If that leaves one player, the game ends and that
 player wins.
 

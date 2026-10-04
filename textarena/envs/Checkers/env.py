@@ -180,13 +180,6 @@ class CheckersEnv(ta.GameEnv):
     def _has_legal_move(self, player_id: int) -> bool:
         return bool(self._legal_moves(player_id))
 
-    def _can_piece_move(self, r: int, c: int) -> bool:
-        piece = self.game_state['board'][r][c]
-        if piece == '.':
-            return False
-        player_id = 0 if piece.lower() == 'r' else 1
-        return any(move[:2] == (r, c) for move in self._legal_move_tuples(player_id))
-
     def _capture_moves_from(self, r: int, c: int, board=None):
         board = self.game_state["board"] if board is None else board
         piece = board[r][c]

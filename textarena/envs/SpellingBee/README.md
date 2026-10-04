@@ -1,7 +1,7 @@
 # Spelling Bee
 
 Two players take turns naming English words built only from a shared set of letters, each word at least as long as the
-previous one, until one of them cannot continue.
+previous one, until one of them cannot continue or the turn limit is reached.
 
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
@@ -26,8 +26,8 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `SpellingBee-v1-mdp
   - not have been played before in the game.
 - An invalid word is rejected and the same player tries again. A second invalid word in a row loses the game, which is
   how a player who cannot find a word is eliminated.
-- There is no turn limit and no draw. The game always ends because words cannot repeat, but with many letters it can
-  run long: a set of 10 letters typically allows over a thousand dictionary words.
+- After `max_turns` accepted words (default 50, counting both players) the game ends in a draw. Rejected words do not
+  count toward the limit.
 
 ## Actions
 
@@ -44,11 +44,13 @@ submission, and each accepted word is announced as `Player 0 submitted the word:
 | Outcome | Reward |
 | --- | --- |
 | Second consecutive invalid word | Offender `-1`, opponent `+1` |
+| `max_turns` accepted words without a loss | Both `0` (draw) |
 
 ## Parameters
 
 <!-- BEGIN GENERATED: parameters -->
 - `num_letters` (default `7`): The size of the letter set. Accepts an integer from 1 to 26.
+- `max_turns` (default `50`): The number of accepted words, counting both players, before the game ends in a draw. Accepts an integer of at least 1.
 - `is_word` (default `is_english_word`): A function that receives a lowercase word and returns whether it counts, for example to use a custom word list. The default is `is_english_word` from `textarena/utils/word_lists.py`. If it raises an exception, the submission is not counted and the player is asked to retry. Accepts a function that takes a word and returns whether it counts.
 <!-- END GENERATED: parameters -->
 

@@ -72,7 +72,7 @@ def test_solver_wins():
     done = False
     for (r, c) in presses:
         assert done is False
-        done, _ = env.step(f"{r} {c}")
+        done = env.step(f"{r} {c}")
     assert done is True
     assert env.state.rewards == {0: 1.0}
     assert env.state.game_state["solved"] is True
@@ -87,7 +87,7 @@ def test_solver_wins_size5():
     done = False
     for (r, c) in presses:
         assert done is False
-        done, _ = env.step(f"{r} {c}")
+        done = env.step(f"{r} {c}")
     assert done is True
     assert env.state.rewards == {0: 1.0}
 
@@ -103,7 +103,7 @@ def test_prompt_example_is_on_the_board(size, example):
 
 def test_invalid_format():
     env = _fresh()
-    done, _ = env.step("press 0 0")  # not a bare 'row col' action
+    done = env.step("press 0 0")  # not a bare 'row col' action
     assert done is False
     assert env.state.error_count == 1
 
@@ -111,7 +111,7 @@ def test_invalid_format():
 def test_out_of_bounds_rejected():
     env = _fresh(size=3)
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step("9 9")
+    done = env.step("9 9")
     assert done is False
     assert env.state.error_count == 1
     assert env.state.game_state == before
@@ -120,7 +120,7 @@ def test_out_of_bounds_rejected():
 def test_oversized_coordinate_is_rejected_without_integer_conversion():
     env = _fresh(size=3)
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(f"{'9' * 1000} 0")
+    done = env.step(f"{'9' * 1000} 0")
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -139,7 +139,7 @@ def test_single_press_toggles_grid():
 def test_parser_rejects_noncanonical_actions_atomically(action):
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -147,7 +147,7 @@ def test_parser_rejects_noncanonical_actions_atomically(action):
 def test_comma_separated_coordinates_are_valid():
     env = _fresh()
     before = copy.deepcopy(env.state.game_state["grid"])
-    done, _ = env.step("1, 1")
+    done = env.step("1, 1")
     assert not done
     changed = sum(
         before[r][c] != env.state.game_state["grid"][r][c]
@@ -203,7 +203,7 @@ def test_turn_limit_counts_final_press_and_reward_is_bounded():
     env.reset(num_players=1, seed=42)
     env.state.game_state["grid"] = [[True] * 3 for _ in range(3)]
     env.state.game_state["initial_on"] = 9
-    done, _ = env.step("0 0")
+    done = env.step("0 0")
     assert done
     assert env.state.turn == 1
     assert env.state.game_info[0]["turn_count"] == 1

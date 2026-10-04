@@ -29,7 +29,8 @@ class TestScorableGamesEnv:
         assert env.unanimity_bonus_role == "p1"
         assert env.starting_role == "p1"
         assert env.invalid_move_default == "Accept"
-        assert env.error_allowance == 3
+        assert env.error_allowance == 1
+        assert "error_allowance" not in ScorableGamesEnv.parameters
         
         # Test custom initialization
         env = ScorableGamesEnv(
@@ -40,7 +41,6 @@ class TestScorableGamesEnv:
             unanimity_bonus_role="p2",
             starting_role="p2",
             invalid_move_default="Reject",
-            error_allowance=5
         )
         assert env.game_config == "game1"
         assert env.max_rounds == 50
@@ -49,7 +49,6 @@ class TestScorableGamesEnv:
         assert env.unanimity_bonus_role == "p2"
         assert env.starting_role == "p2"
         assert env.invalid_move_default == "Reject"
-        assert env.error_allowance == 5
 
     def test_reset(self, env):
         """Test environment reset functionality."""
@@ -57,7 +56,7 @@ class TestScorableGamesEnv:
         env.reset(num_players=6)
         assert env.state.num_players == 6
         assert env.state.max_turns == 120
-        assert env.state.error_allowance == 3
+        assert env.state.error_allowance == 1
         
         # Verify game configuration loaded
         assert len(env.player_configs) == 6
@@ -683,9 +682,9 @@ class TestScorableGamesEnv:
                 
             # Make actions that keep the game going
             if round_count % 6 == 0:  # Every 6th action, make a proposal
-                done, info = env.step("Propose A1 B2 C3 D1 E4")
+                done = env.step("Propose A1 B2 C3 D1 E4")
             else:  # Otherwise reject to keep game going
-                done, info = env.step("Reject")
+                env.step("Reject")
             
             round_count += 1
         
@@ -780,7 +779,7 @@ class TestScorableGamesEnv:
         initial_player = env.state.current_player_id
         
         # Make a valid proposal
-        done, info = env.step("Propose A1 B2 C3 D1 E4")
+        done = env.step("Propose A1 B2 C3 D1 E4")
         
         # Game should not be done, player should advance
         assert not done
@@ -793,7 +792,7 @@ class TestScorableGamesEnv:
         initial_player = env.state.current_player_id
         
         # Make an invalid action
-        done, info = env.step("invalid action")
+        done = env.step("invalid action")
         
         # Player should not advance on first invalid action
         assert not done
@@ -808,13 +807,13 @@ class TestScorableGamesEnv:
         assert env.state.current_player_id == p1_id
         
         # Player p1 makes a proposal
-        done, info = env.step("Propose A1 B2 C3 D1 E4")
+        done = env.step("Propose A1 B2 C3 D1 E4")
         assert not done
         assert env.current_deal is not None
         
         # All 6 players need to vote (including both veto players)
         for _ in range(6):  # All 6 players vote
-            done, info = env.step("Accept")
+            done = env.step("Accept")
             if done:
                 break
         
@@ -1115,25 +1114,25 @@ class TestScorableGamesEnv:
         env = reset_env
         
         # Phase 1: Initial proposal
-        done, info = env.step("I believe this is fair\nPropose A1 B2 C3 D1 E4")
+        done = env.step("I believe this is fair\nPropose A1 B2 C3 D1 E4")
         assert not done
         assert env.current_deal is not None
         
         # Phase 2: Some players accept, some reject
-        done, info = env.step("This works for us\nAccept")
+        done = env.step("This works for us\nAccept")
         assert not done
         
-        done, info = env.step("Environmental concerns\nReject")
+        done = env.step("Environmental concerns\nReject")
         assert not done
         
         # Phase 3: New proposal
-        done, info = env.step("Better environmental option\nPropose A3 B3 C3 D1 E4")
+        done = env.step("Better environmental option\nPropose A3 B3 C3 D1 E4")
         assert not done
         
         # Phase 4: Final voting
         for _ in range(5):  # Remaining players
             if not done:
-                done, info = env.step("Accept")
+                done = env.step("Accept")
         
         # Should eventually reach conclusion
         assert done or env.state.turn < env.max_rounds
@@ -1184,7 +1183,7 @@ class TestScorableGamesRegressions:
             "valid": env.valid_actions_this_round.copy(),
         }
 
-        done, _ = env.step(action)
+        done = env.step(action)
 
         assert not done
         assert env.state.turn == 0
@@ -1216,7 +1215,7 @@ class TestScorableGamesRegressions:
         valid_before = env.valid_actions_this_round.copy()
         turn_before = env.state.turn
 
-        done, _ = env.step(action)
+        done = env.step(action)
 
         assert not done
         assert env.state.turn == turn_before
@@ -1258,7 +1257,7 @@ class TestScorableGamesRegressions:
         env = ScorableGamesEnv(game_config="base", max_rounds=1)
         env.reset(num_players=6, seed=42)
 
-        done, _ = env.step("Propose A1 B2 C3 D1 E4")
+        done = env.step("Propose A1 B2 C3 D1 E4")
 
         assert done
         assert env.current_deal == {}
@@ -1286,7 +1285,7 @@ class TestScorableGamesRegressions:
         proposer = env.state.current_player_id
         env.step("Propose A1 B2 C3 D1 E4")
         accepter = env.state.current_player_id
-        done, _ = env.step("Accept")
+        done = env.step("Accept")
 
         assert done
         assert env.state.game_info[proposer]["turn_count"] == 1
@@ -1366,7 +1365,7 @@ class TestScorableGamesRegressions:
         env.reset(num_players=6, seed=42)
         env.step("Propose A2 B2 C2 D2 E3")
         env.step("Reject")
-        done, _ = env.step("Reject")
+        done = env.step("Reject")
 
         assert done
         assert env.state.rewards == {pid: 0 for pid in range(6)}
@@ -1377,7 +1376,7 @@ class TestScorableGamesRegressions:
         no_deal = ScorableGamesEnv(game_config=game_config, max_rounds=1)
         no_deal.reset(num_players=players, seed=0)
         proposal = "Propose " + " ".join(sorted(issue["options"])[0] for issue in no_deal.issues.values())
-        done, _ = no_deal.step(proposal)
+        done = no_deal.step(proposal)
         assert done
         assert no_deal.state.rewards == {pid: 0 for pid in range(players)}
 
@@ -1396,7 +1395,7 @@ class TestScorableGamesRegressions:
 
         env.step("Propose A1 B1 C1 D1 E1")
         assert env.player_votes == {proposer: "Accept"}
-        done, _ = env.step("Accept")
+        done = env.step("Accept")
 
         assert done
         assert env.state.turn == 2
@@ -1415,10 +1414,11 @@ class TestScorableGamesRegressions:
 
     @pytest.mark.parametrize("default_vote", ["Accept", "Reject"])
     def test_auto_proposal_records_the_configured_default_vote(self, default_vote):
-        env = ScorableGamesEnv(game_config="base", invalid_move_default=default_vote, error_allowance=0)
+        env = ScorableGamesEnv(game_config="base", invalid_move_default=default_vote)
         env.reset(num_players=6, seed=42)
         offender = env.state.current_player_id
 
+        env.step("nonsense")
         env.step("nonsense")
 
         assert env.current_deal == env._generate_optimal_proposal(offender)
@@ -1435,7 +1435,7 @@ class TestScorableGamesRegressions:
             assert env._parse_proposal(action) == expected
         assert not env._is_valid_action("Propose A1 B2 C3 D1 E4 A9")
 
-        done, _ = env.step("Propose A1 B2 C3 D1 E4 And this protects local jobs.")
+        done = env.step("Propose A1 B2 C3 D1 E4 And this protects local jobs.")
         assert not done
         assert env.state.error_count == 0
         assert env.current_deal == expected

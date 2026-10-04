@@ -28,10 +28,10 @@ def test_reset_state():
 def test_player0_wins_single_round():
     # g0=10, g1=20 -> avg=15, target=10 -> P0 exact, P0 wins.
     env = _fresh(num_rounds=1)
-    done, _ = env.step("10")
+    done = env.step("10")
     assert done is False
     assert env.state.current_player_id == 1  # rotated to P1
-    done, _ = env.step("20")
+    done = env.step("20")
     assert done is True
     assert env.state.rewards == {0: 1, 1: -1}
 
@@ -40,7 +40,7 @@ def test_player1_wins_single_round():
     # g0=20, g1=10 -> avg=15, target=10 -> P1 exact, P1 wins.
     env = _fresh(num_rounds=1)
     env.step("20")
-    done, _ = env.step("10")
+    done = env.step("10")
     assert done is True
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -49,26 +49,26 @@ def test_draw_equal_guesses():
     # Equal guesses -> equal distance -> round draw -> overall draw.
     env = _fresh(num_rounds=1)
     env.step("50")
-    done, _ = env.step("50")
+    done = env.step("50")
     assert done is True
     assert env.state.rewards == {0: 0, 1: 0}
 
 
 def test_invalid_format_then_recover():
     env = _fresh(num_rounds=1)
-    done, _ = env.step("not a number")
+    done = env.step("not a number")
     assert done is False
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0  # no rotation on invalid
     # Valid resubmission proceeds.
-    done, _ = env.step("10")
+    done = env.step("10")
     assert done is False
     assert env.state.current_player_id == 1
 
 
 def test_out_of_range_guess_rejected():
     env = _fresh(num_rounds=1)
-    done, _ = env.step("200")  # max_guess=100
+    done = env.step("200")  # max_guess=100
     assert done is False
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -77,7 +77,7 @@ def test_out_of_range_guess_rejected():
 def test_second_consecutive_invalid_loses():
     env = _fresh(num_rounds=1)
     env.step("garbage")
-    done, _ = env.step("still garbage")
+    done = env.step("still garbage")
     assert done is True
     # Offender is P0; invalid-move escalation gives the opponent the win.
     assert env.state.rewards == {0: -1, 1: 1}
@@ -93,7 +93,7 @@ def test_two_round_game_p0_sweeps():
     assert env.state.game_state["round"] == 2
     # round 2: P0 exact again
     env.step("10")
-    done, _ = env.step("20")
+    done = env.step("20")
     assert done is True
     assert env.state.rewards == {0: 1, 1: -1}
 
@@ -101,7 +101,7 @@ def test_two_round_game_p0_sweeps():
 def test_negative_decimal_and_exponent_guesses_supported_by_bounds():
     env = _fresh(min_guess=-10, max_guess=10)
     env.step("-1e0")
-    done, _ = env.step("+1.0")
+    done = env.step("+1.0")
     assert done
     assert env.state.game_state["history"] == [{0: -1.0, 1: 1.0}]
     assert env.state.rewards == {0: 0, 1: 0}
@@ -110,7 +110,7 @@ def test_negative_decimal_and_exponent_guesses_supported_by_bounds():
 def test_tiny_distinct_distances_do_not_collapse_to_a_draw():
     env = _fresh(min_guess=0, max_guess=1)
     env.step("0")
-    done, _ = env.step("1e-13")
+    done = env.step("1e-13")
     assert done
     assert env.state.game_state["points"] == {0: 1, 1: 0}
     assert env.state.rewards == {0: 1, 1: -1}
@@ -119,7 +119,7 @@ def test_tiny_distinct_distances_do_not_collapse_to_a_draw():
 def test_subnormal_distances_do_not_underflow_to_a_draw():
     env = _fresh(min_guess=0, max_guess=5e-324)
     env.step("0")
-    done, _ = env.step("5e-324")
+    done = env.step("5e-324")
     assert done
     assert env.state.game_state["points"] == {0: 1, 1: 0}
     assert env.state.rewards == {0: 1, 1: -1}
@@ -128,7 +128,7 @@ def test_subnormal_distances_do_not_underflow_to_a_draw():
 def test_extreme_finite_guesses_do_not_overflow_target_math():
     env = _fresh(min_guess=0, max_guess=1e308)
     env.step("9e307")
-    done, _ = env.step("1e308")
+    done = env.step("1e308")
     assert done
     assert env.state.game_state["points"] == {0: 1, 1: 0}
     assert env.state.rewards == {0: 1, 1: -1}
@@ -175,7 +175,7 @@ def test_unauthorized_guess_is_rejected_atomically(player_id):
 def test_terminal_state_keeps_last_round_and_turn_count():
     env = _fresh()
     env.step("10")
-    done, _ = env.step("20")
+    done = env.step("20")
     assert done
     assert env.state.game_state["round"] == 1
     assert env.state.turn == 2

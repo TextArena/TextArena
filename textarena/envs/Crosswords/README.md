@@ -53,7 +53,7 @@ and direction, and most clues state the word length, for example:
 
 | Outcome | Reward |
 | --- | --- |
-| Every letter cell filled | `+1` |
+| Every letter cell filled | `1` |
 | Second consecutive invalid move (including a wrong letter) | Fraction of letter cells filled, from `0` to `1` |
 
 ## Parameters

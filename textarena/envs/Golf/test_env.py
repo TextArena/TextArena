@@ -48,7 +48,7 @@ def test_draw_then_discard_advances_turn():
     env.step("draw")
     assert env.state.game_state["turn_phase"] == "action_with_card"
     assert env.state.current_player_id == 0
-    done, _ = env.step("discard")
+    done = env.step("discard")
     assert not done
     assert len(env.state.game_state["discard_pile"]) == discards_before + 1
     assert env.state.current_player_id == 1
@@ -58,7 +58,7 @@ def test_draw_then_discard_advances_turn():
 def test_draw_then_swap_reveals_position():
     env = _fresh()
     env.step("draw")
-    done, _ = env.step("swap 1 1")
+    done = env.step("swap 1 1")
     assert not done
     assert env.state.game_state["players"][0]["cards"][0]["revealed"] is True
     assert env.state.current_player_id == 1
@@ -68,14 +68,14 @@ def test_take_then_discard_is_illegal():
     env = _fresh()
     env.step("take")  # take from discard pile
     assert env.state.game_state.get("took_from_discard") is True
-    done, _ = env.step("discard")  # cannot discard a taken card
+    done = env.step("discard")  # cannot discard a taken card
     assert not done
     assert env.state.error_count == 1
 
 
 def test_invalid_format_does_not_end_game():
     env = _fresh()
-    done, _ = env.step("frobnicate")
+    done = env.step("frobnicate")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -84,7 +84,7 @@ def test_invalid_format_does_not_end_game():
 def test_swap_out_of_bounds_is_invalid():
     env = _fresh()
     env.step("draw")
-    done, _ = env.step("swap 9 9")
+    done = env.step("swap 9 9")
     assert not done
     assert env.state.error_count == 1
 
@@ -98,14 +98,14 @@ def test_full_game_terminal_lowest_score_wins():
         gs = env.state.game_state
         pid = env.state.current_player_id
         if gs["turn_phase"] == "draw":
-            done, _ = env.step("draw")
+            done = env.step("draw")
         else:
             if pid == 0:
                 rc = _first_unrevealed_rowcol(env, 0)
                 assert rc is not None
-                done, _ = env.step(f"swap {rc[0]} {rc[1]}")
+                done = env.step(f"swap {rc[0]} {rc[1]}")
             else:
-                done, _ = env.step("discard")
+                done = env.step("discard")
         if done:
             break
     assert done
@@ -119,7 +119,7 @@ def test_full_game_terminal_lowest_score_wins():
 
 def test_knock_gives_each_opponent_exactly_one_final_turn():
     env = _fresh()
-    done, _ = env.step("knock")
+    done = env.step("knock")
     gs = env.state.game_state
     assert not done
     assert gs["current_phase"] == "final_round"
@@ -127,7 +127,7 @@ def test_knock_gives_each_opponent_exactly_one_final_turn():
     assert gs["final_turns_remaining"] == 1
     assert env.state.current_player_id == 1
     env.step("draw")
-    done, _ = env.step("discard")
+    done = env.step("discard")
     assert done
     assert gs["current_phase"] == "finished"
 
@@ -140,14 +140,14 @@ def test_eliminated_opponent_forfeits_exactly_one_final_turn():
     assert env.state.current_player_id == 1
 
     env.step("bad")
-    done, _ = env.step("still bad")
+    done = env.step("still bad")
 
     assert not done
     assert env.state.eliminated == [1]
     assert gs["final_turns_remaining"] == 1
     assert env.state.current_player_id == 2
     row, col = _first_unrevealed_rowcol(env, 2)
-    done, _ = env.step(f"peek {row} {col}")
+    done = env.step(f"peek {row} {col}")
     assert done
     assert gs["current_phase"] == "finished"
 
@@ -158,7 +158,7 @@ def test_eliminated_player_does_not_hand_their_drawn_card_to_the_next_player():
     env.step("draw")
     drawn = gs["drawn_card"]
     env.step("bad")
-    done, _ = env.step("still bad")
+    done = env.step("still bad")
 
     assert not done
     assert env.state.eliminated == [0]
@@ -167,12 +167,12 @@ def test_eliminated_player_does_not_hand_their_drawn_card_to_the_next_player():
     assert "drawn_card" not in gs
     assert gs["discard_pile"][-1] == drawn
     assert "Your drawn card" not in env.render(1)
-    done, _ = env.step("swap 1 1")  # player 1 must start with draw/take
+    done = env.step("swap 1 1")  # player 1 must start with draw/take
     assert not done and env.state.error_count == 1
 
 
 def _column(*ranks):
-    values = {"A": 1, "J": 10, "Q": 10, "K": 0}
+    values = {"A": 1, "2": -2, "J": 10, "Q": 10, "K": 0}
     return [{"rank": rank, "suit": "♠", "value": values.get(rank, int(rank) if rank.isdigit() else 0)} for rank in ranks]
 
 
@@ -187,6 +187,22 @@ def test_only_equal_ranks_cancel_a_column():
     # Player 0: columns (10, Q), (J, 7), (Q, 7) -> no pairs. Player 1: (J, J), (Q, Q), (3, 4).
     assert gs["players"][0]["score"] == 20 + 17 + 17
     assert gs["players"][1]["score"] == 0 + 0 + 7
+
+
+def test_a_two_scores_minus_two_and_a_pair_of_twos_scores_zero():
+    env = _fresh()
+    gs = env.state.game_state
+    assert env._get_card_value("2") == -2
+    assert all(card["value"] == -2 for card in env.deck if card["rank"] == "2")
+    layouts = {0: ("2", "2", "K", "3", "2", "K"), 1: ("2", "A", "5", "2", "A", "5")}
+    for pid, ranks in layouts.items():
+        for info, card in zip(gs["players"][pid]["cards"], _column(*ranks)):
+            info["card"] = card
+    outcome = env._end_game()
+    # Player 0: columns (2, 3), (2, 2), (K, K) -> 1 + 0 + 0. Player 1: (2, 2), (A, A), (5, 5) -> all pairs.
+    assert gs["players"][0]["score"] == 1
+    assert gs["players"][1]["score"] == 0
+    assert outcome.rewards == {0: -1, 1: 1}
 
 
 def test_render_shows_cards_left_in_the_draw_pile():
@@ -204,7 +220,7 @@ def test_revealing_last_card_still_gives_opponent_a_final_turn():
         info["revealed"] = True
     gs["players"][0]["cards"][-1]["revealed"] = False
     env.step("draw")
-    done, _ = env.step("swap 2 3")
+    done = env.step("swap 2 3")
     assert not done
     assert gs["current_phase"] == "final_round"
     assert gs["final_turns_remaining"] == 1
@@ -219,7 +235,7 @@ def test_final_round_peek_is_private_and_consumes_turn():
     row, col = _first_unrevealed_rowcol(env, pid)
     idx = (row - 1) * env.num_columns + (col - 1)
     card_name = env._card_to_string(gs["players"][pid]["cards"][idx]["card"])
-    done, _ = env.step(f"peek {row} {col}")
+    done = env.step(f"peek {row} {col}")
     assert not done
     private_events = [
         event for event in env.state.events
@@ -266,7 +282,7 @@ def test_placing_final_stock_card_ends_without_a_dummy_draw_turn():
     gs["deck"] = [gs["deck"][-1]]
 
     env.step("draw")
-    done, _ = env.step("discard")
+    done = env.step("discard")
 
     assert done
     assert gs["current_phase"] == "finished"
@@ -331,10 +347,10 @@ def _play_take_swap_loop(env, max_steps=10_000):
     for _ in range(max_steps):
         pid = env.state.current_player_id
         if env.state.game_state["turn_phase"] == "draw":
-            done, _ = env.step("take")
+            done = env.step("take")
         else:
             row, col = _first_revealed_rowcol(env, pid)
-            done, _ = env.step(f"swap {row} {col}")
+            done = env.step(f"swap {row} {col}")
         if done:
             break
     return done
@@ -390,7 +406,7 @@ def test_cap_mid_turn_returns_drawn_card_and_conserves_cards():
     env.step("draw")
     row, col = _first_unrevealed_rowcol(env, 0)
     env.step(f"swap {row} {col}")
-    done, _ = env.step("draw")  # third accepted action: cap hits while holding a card
+    done = env.step("draw")  # third accepted action: cap hits while holding a card
     assert done
     gs = env.state.game_state
     assert "drawn_card" not in gs
@@ -410,7 +426,7 @@ def test_turn_cap_ties_follow_normal_tie_handling():
         for card_info in player["cards"]:
             card_info["card"] = {"rank": "K", "suit": "♠", "value": 0}
     env.step("draw")
-    done, _ = env.step("discard")
+    done = env.step("discard")
     assert done
     rewards, _ = env.close()
     assert rewards == {0: 0, 1: 0}
@@ -421,10 +437,10 @@ def test_invalid_moves_do_not_count_toward_turn_cap():
     env.reset(num_players=2, seed=42)
     env.step("draw")
     for _ in range(env.error_allowance):
-        done, _ = env.step("nonsense")
+        done = env.step("nonsense")
         assert not done
     assert env.state.turn == 1
-    done, _ = env.step("discard")
+    done = env.step("discard")
     assert done and env.state.turn == 2
     assert "Turn limit of 2 actions reached" in env.state.game_info[0]["reason"]
 
@@ -434,6 +450,7 @@ def test_prompt_and_render_mention_the_cap():
     _, observations = env.get_observation()
     text = "\n".join(str(o) for o in observations)
     assert "Turn limit: the game ends after 96 accepted actions" in text
+    assert "Card Values: A=1, 2=-2, 3-10=face value, J/Q=10, K=0" in text
     assert "Actions used: 0/96" in env.render(0)
 
 
@@ -458,7 +475,7 @@ def test_random_play_finishes_naturally_under_default_cap():
                         action = "discard"
                     else:
                         action = f"swap {rng.randint(1, env.num_rows)} {rng.randint(1, 3)}"
-                    done, _ = env.step(action)
+                    done = env.step(action)
                 total += 1
                 natural += "Turn limit" not in env.state.game_info[0]["reason"]
     assert natural / total >= 0.99

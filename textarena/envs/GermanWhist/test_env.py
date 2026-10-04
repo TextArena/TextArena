@@ -46,7 +46,7 @@ def test_reset_state():
 def test_single_trick_resolves_and_redraws():
     env = _fresh()
     env.step(f"play {_legal_index(env)}")   # player 0 leads
-    done, _ = env.step(f"play {_legal_index(env)}")  # player 1 follows -> resolve
+    done = env.step(f"play {_legal_index(env)}")  # player 1 follows -> resolve
     gs = env.state.game_state
     assert not done
     # Exactly one trick has been won in total.
@@ -61,7 +61,7 @@ def test_full_game_reaches_terminal_with_consistent_winner(seed):
     env = _fresh(seed)
     done = False
     for _ in range(200):
-        done, _ = env.step(f"play {_legal_index(env)}")
+        done = env.step(f"play {_legal_index(env)}")
         if done:
             break
     assert done
@@ -85,7 +85,7 @@ def test_full_game_reaches_terminal_with_consistent_winner(seed):
 
 def test_invalid_format_does_not_end_game():
     env = _fresh()
-    done, _ = env.step("I lead a card")
+    done = env.step("I lead a card")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -93,7 +93,7 @@ def test_invalid_format_does_not_end_game():
 
 def test_out_of_range_index_is_invalid():
     env = _fresh()
-    done, _ = env.step("play 99")
+    done = env.step("play 99")
     assert not done
     assert env.state.error_count == 1
 
@@ -109,13 +109,13 @@ def test_follow_suit_violation_is_invalid():
     has_lead = any(c["suit"] == lead_suit for c in p1_hand)
     off_idx = next((i for i, c in enumerate(p1_hand) if c["suit"] != lead_suit), None)
     if has_lead and off_idx is not None:
-        done, _ = env.step(f"play {off_idx + 1}")  # refuse to follow suit
+        done = env.step(f"play {off_idx + 1}")  # refuse to follow suit
         assert not done
         assert env.state.error_count == 1
     else:
         # Seed-dependent: player 1 is void in / all-in the lead suit; just make a
         # legal play so the test remains meaningful without a false failure.
-        done, _ = env.step(f"play {_legal_index(env)}")
+        done = env.step(f"play {_legal_index(env)}")
         assert not done
 
 
@@ -123,7 +123,7 @@ def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     offender = env.state.current_player_id
     env.step("garbage")
-    done, _ = env.step("more garbage")
+    done = env.step("more garbage")
     assert done
     assert env.state.rewards[offender] == -1
     assert env.state.rewards[1 - offender] == 1
@@ -146,7 +146,7 @@ def test_card_conservation_after_learning_trick():
 def test_learning_phase_transitions_after_exactly_thirteen_tricks():
     env = _fresh()
     for _ in range(26):
-        done, _ = env.step(f"play {_legal_index(env)}")
+        done = env.step(f"play {_legal_index(env)}")
         assert not done
     gs = env.state.game_state
     assert gs["phase"] == "playing"
@@ -176,7 +176,7 @@ def test_only_playing_phase_tricks_decide_the_winner():
     gs["players"][1]["hand"] = [{"rank": "2", "suit": "♠", "power": 2}]
 
     env.step("play 1")
-    done, _ = env.step("play 1")
+    done = env.step("play 1")
 
     assert done
     assert gs["playing_tricks_won"] == {0: 7, 1: 6}

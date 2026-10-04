@@ -40,7 +40,7 @@ def test_true_bid_makes_caller_lose():
     dice = env.state.game_state["dice_rolls"]
     face = dice[0][0]  # P0 owns this face, so quantity-1 bid is always true
     env.step(f"Bid: 1, {face}")   # P0 bids
-    done, _ = env.step("Call")     # P1 calls a true bid -> P1 loses die
+    done = env.step("Call")     # P1 calls a true bid -> P1 loses die
     assert done is True
     assert env.state.rewards == {0: 1.0, 1: -1.0}
 
@@ -48,14 +48,14 @@ def test_true_bid_makes_caller_lose():
 def test_false_bid_makes_bidder_lose():
     env = _fresh()
     env.step(_false_bid(env))       # P0 bluffs
-    done, _ = env.step("call")      # P1 calls the bluff -> P0 loses die
+    done = env.step("call")      # P1 calls the bluff -> P0 loses die
     assert done is True
     assert env.state.rewards == {0: -1.0, 1: 1.0}
 
 
 def test_call_with_no_bid_invalid():
     env = _fresh()
-    done, _ = env.step("Call")
+    done = env.step("Call")
     assert done is False
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0  # not rotated on invalid
@@ -66,7 +66,7 @@ def test_bidder_cannot_call_own_bid_if_turn_state_is_tampered():
     env.step("Bid: 1, 2")
     env.state.current_player_id = 0
     remaining_before = dict(env.state.game_state["remaining_dice"])
-    done, _ = env.step("Call")
+    done = env.step("Call")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["remaining_dice"] == remaining_before
@@ -76,7 +76,7 @@ def test_bid_not_higher_rejected():
     env = _fresh()
     env.step("Bid: 2, 6")          # P0 bids
     assert env.state.current_player_id == 1
-    done, _ = env.step("Bid: 1, 1")  # lower quantity & face -> invalid
+    done = env.step("Bid: 1, 1")  # lower quantity & face -> invalid
     assert done is False
     assert env.state.error_count == 1
     assert env.state.current_player_id == 1
@@ -84,14 +84,14 @@ def test_bid_not_higher_rejected():
 
 def test_invalid_format():
     env = _fresh()
-    done, _ = env.step("let me think")
+    done = env.step("let me think")
     assert done is False
     assert env.state.error_count == 1
 
 
 def test_huge_bid_numbers_are_rejected_without_integer_parse_failure():
     env = _fresh()
-    done, _ = env.step(f"Bid: {'9' * 5000}, 6")
+    done = env.step(f"Bid: {'9' * 5000}, 6")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["current_bid"] == {"quantity": 0, "face_value": 0}
@@ -100,14 +100,14 @@ def test_huge_bid_numbers_are_rejected_without_integer_parse_failure():
 def test_two_consecutive_invalids_eliminate():
     env = _fresh()
     env.step("Call")               # invalid #1 (no prior bid)
-    done, _ = env.step("Call")        # invalid #2 -> P0 eliminated, game ends
+    done = env.step("Call")        # invalid #2 -> P0 eliminated, game ends
     assert done is True
     assert env.state.rewards == {0: -1.0, 1: 1.0}
 
 
 def test_valid_bid_rotates_player():
     env = _fresh()
-    done, _ = env.step("Bid: 1, 2")
+    done = env.step("Bid: 1, 2")
     assert done is False
     assert env.state.game_state["current_bid"] == {"quantity": 1, "face_value": 2}
     assert env.state.game_state["last_bidder_id"] == 0
@@ -116,7 +116,7 @@ def test_valid_bid_rotates_player():
 
 def test_zero_quantity_bid_is_rejected():
     env = _fresh()
-    done, _ = env.step("Bid: 0, 1")
+    done = env.step("Bid: 0, 1")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["current_bid"] == {"quantity": 0, "face_value": 0}
@@ -125,7 +125,7 @@ def test_zero_quantity_bid_is_rejected():
 def test_higher_quantity_may_use_lower_face():
     env = _fresh(num_dice=2)
     env.step("Bid: 1, 6")
-    done, _ = env.step("Bid: 2, 1")
+    done = env.step("Bid: 2, 1")
     assert not done
     assert env.state.game_state["current_bid"] == {"quantity": 2, "face_value": 1}
 
@@ -135,7 +135,7 @@ def test_round_loser_starts_next_round():
     env.reset(num_players=3, seed=42)
     face = env.state.game_state["dice_rolls"][0][0]
     env.step(f"Bid: 1, {face}")
-    done, _ = env.step("Call")
+    done = env.step("Call")
     assert not done
     assert env.state.game_state["remaining_dice"][1] == 1
     assert env.state.current_player_id == 1
@@ -145,7 +145,7 @@ def test_eliminated_player_is_not_rolled_or_rendered_next_round():
     env = LiarsDiceEnv(num_dice=1)
     env.reset(num_players=3, seed=42)
     env.step(_false_bid(env))
-    done, _ = env.step("Call")
+    done = env.step("Call")
     assert not done
     assert 0 in env.state.eliminated
     assert set(env.state.game_state["dice_rolls"]) == {1, 2}
@@ -175,10 +175,10 @@ def test_scripted_three_player_game_has_rank_scaled_rewards():
     env = LiarsDiceEnv(num_dice=1)
     env.reset(num_players=3, seed=42)
     env.step(_false_bid(env))
-    done, _ = env.step("Call")
+    done = env.step("Call")
     assert not done and env.state.current_player_id == 1
     env.step(_false_bid(env))
-    done, _ = env.step("Call")
+    done = env.step("Call")
     assert done
     assert env.state.eliminated == [0, 1]
     assert env.state.rewards == {0: -1.0, 1: 0.0, 2: 1.0}
@@ -201,7 +201,7 @@ def test_repeat_reset_replays_private_rolls():
 def test_mixed_or_duplicate_actions_are_rejected_atomically(action):
     env = _fresh()
     before = dict(env.state.game_state["current_bid"])
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["current_bid"] == before
@@ -209,7 +209,7 @@ def test_mixed_or_duplicate_actions_are_rejected_atomically(action):
 
 def test_bid_quantity_cannot_exceed_dice_in_play():
     env = _fresh()  # two players with one die each
-    done, _ = env.step("Bid: 3, 6")
+    done = env.step("Bid: 3, 6")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["current_bid"] == {"quantity": 0, "face_value": 0}
@@ -223,9 +223,9 @@ def test_players_who_keep_raising_must_eventually_call():
     done = False
     for _ in range(500):
         quantity = env.state.game_state["current_bid"]["quantity"]
-        done, _ = env.step(f"Bid: {quantity + 1}, 6")
+        done = env.step(f"Bid: {quantity + 1}, 6")
         if not done and env.state.error_count:
-            done, _ = env.step("Call")
+            done = env.step("Call")
         if done:
             break
     assert done
@@ -264,5 +264,5 @@ def test_padded_valid_commands_are_still_accepted():
     env = _fresh(num_dice=2)
     env.step("  Bid : 1 , 2  ")
     assert env.state.game_state["current_bid"] == {"quantity": 1, "face_value": 2}
-    done, _ = env.step("\n call \n")
+    env.step("\n call \n")
     assert env.state.game_state["current_bid"] == {"quantity": 0, "face_value": 0}

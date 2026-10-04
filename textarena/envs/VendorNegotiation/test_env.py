@@ -63,7 +63,7 @@ class TestVendorNegotiationValidation:
         """Test that accepting without a proposal is invalid"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("I want to accept this.\nAccept")
+        done = env.step("I want to accept this.\nAccept")
         
         # Should be invalid move, game continues
         assert not done
@@ -73,7 +73,7 @@ class TestVendorNegotiationValidation:
         """Test that rejecting without a proposal is invalid"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("I want to reject this.\nReject")
+        done = env.step("I want to reject this.\nReject")
         
         # Should be invalid move, game continues
         assert not done
@@ -88,7 +88,7 @@ class TestVendorNegotiationValidation:
         env.step("Reject")
         # Now Player 0 tries to accept their own proposal (but there's no current proposal after reject)
         initial_error_count = env.state.error_count
-        done, step_info = env.step("I accept my own proposal.\nAccept")
+        done = env.step("I accept my own proposal.\nAccept")
         
         # Should be invalid move (no current proposal to accept)
         assert not done
@@ -105,7 +105,7 @@ class TestVendorNegotiationValidation:
             "proposer": env.current_proposal["proposer"],
         }
 
-        done, _ = env.step(decision)
+        done = env.step(decision)
 
         assert not done
         assert env.state.current_player_id == 0
@@ -116,7 +116,7 @@ class TestVendorNegotiationValidation:
         """Test that free text conversation is valid"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Hello, let's discuss the discount rates for our products")
+        done = env.step("Hello, let's discuss the discount rates for our products")
         
         # Should be valid
         assert not done
@@ -127,7 +127,7 @@ class TestVendorNegotiationValidation:
     def test_conversation_before_decision_captured(self, fresh_env):
         """Test that conversation before the decision line is captured"""
         env = fresh_env
-        done, step_info = env.step("I think moderate discounts work well\nPropose 15%, 20%, 15%")
+        done = env.step("I think moderate discounts work well\nPropose 15%, 20%, 15%")
         
         # Should capture conversation part
         assert not done
@@ -156,7 +156,7 @@ class TestVendorNegotiationValidation:
         """Test that wrong number of discount values is invalid"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Propose 10%, 5%")  # Only 2 values for 3 products
+        done = env.step("Propose 10%, 5%")  # Only 2 values for 3 products
         
         # Should be invalid move
         assert not done
@@ -166,7 +166,7 @@ class TestVendorNegotiationValidation:
         """Test that invalid discount rates are rejected"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Propose 10%, 5%, 25%")  # 10% and 25% not in allowed [0,15,20,30]
+        done = env.step("Propose 10%, 5%, 25%")  # 10% and 25% not in allowed [0,15,20,30]
         
         # Should be invalid move
         assert not done
@@ -176,7 +176,7 @@ class TestVendorNegotiationValidation:
         """Test that valid positional format works"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Propose 15%, 20%, 30%")
+        done = env.step("Propose 15%, 20%, 30%")
         
         # Should be valid
         assert not done
@@ -188,7 +188,7 @@ class TestVendorNegotiationValidation:
         """Test that multiple actions in same turn are invalid"""
         env = env_with_proposal
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Accept\nReject")
+        done = env.step("Accept\nReject")
         
         # Should be invalid move
         assert not done
@@ -229,11 +229,11 @@ class TestVendorNegotiationGameFlow:
         env = fresh_env
         
         # Player 0 proposes
-        done, _ = env.step("Propose 20%, 20%, 20%")
+        done = env.step("Propose 20%, 20%, 20%")
         assert not done
         
         # Player 1 accepts
-        done, _ = env.step("Accept")
+        done = env.step("Accept")
         assert done
         
         # Check proposal was accepted
@@ -248,7 +248,7 @@ class TestVendorNegotiationGameFlow:
         # Play until max rounds
         env.step("Propose 15%, 20%, 15%")  # Round 1
         env.step("Reject")                 # Round 2
-        done, _ = env.step("Propose 20%, 30%, 20%")  # Round 3
+        done = env.step("Propose 20%, 30%, 20%")  # Round 3
         
         # Should end due to max rounds
         assert done
@@ -287,6 +287,17 @@ class TestVendorNegotiationWinConditions:
 
         terminal = env.game_state["terminal_result"]
         assert terminal["brand_won"] and terminal["vendor_won"]
+        assert env.state.rewards == {0: 1, 1: 1}
+
+    def test_deal_meeting_neither_target_scores_zero_for_both(self):
+        env = VendorNegotiationEnv(num_products=3)
+        env.reset(num_players=2, seed=42)
+        discounts = _deal_with_outcome(env, brand_met=False, vendor_met=False)
+        assert discounts is not None
+
+        env.step(_propose(discounts))
+        env.step("Accept")
+
         assert env.state.rewards == {0: 0, 1: 0}
     
     def test_brand_wins_vendor_loses(self):
@@ -297,7 +308,7 @@ class TestVendorNegotiationWinConditions:
         env.step(_propose([max(env.allowed_discounts)] * 3))
         env.step("Accept")
         
-        assert env.state.rewards == {0: 1, 1: -1}
+        assert env.state.rewards == {0: 1, 1: 0}
     
     def test_vendor_wins_brand_loses(self):
         """No discount on any product meets only the Vendor's target (default settings)"""
@@ -307,19 +318,19 @@ class TestVendorNegotiationWinConditions:
         env.step("Propose 0%, 0%, 0%")
         env.step("Accept")
         
-        assert env.state.rewards == {0: -1, 1: 1}
+        assert env.state.rewards == {0: 0, 1: 1}
 
     @pytest.mark.parametrize(
         "kwargs", [{"num_products": 3, "max_rounds": 10}, {}, {"num_products": 8, "max_rounds": 30}]
     )
     def test_each_role_can_win_at_every_size(self, kwargs):
         for seed in range(15):
-            for discount, expected in ((0, {0: -1, 1: 1}), (30, {0: 1, 1: -1})):
+            for discount, expected in ((0, {0: 0, 1: 1}), (30, {0: 1, 1: 0})):
                 env = ta.make("VendorNegotiation-v1", **kwargs)
                 env.reset(num_players=2, seed=seed)
                 num_products = len(env.selected_products)
                 env.step(_propose([discount] * num_products))
-                done, _ = env.step("Accept")
+                done = env.step("Accept")
                 rewards, _ = env.close()
                 assert done
                 assert rewards == expected, (seed, discount)
@@ -339,7 +350,7 @@ class TestVendorNegotiationWinConditions:
         
         # Stubborn negotiation that fails
         env.step("Propose 20%, 20%, 20%")
-        done, _ = env.step("Too much\nReject")
+        done = env.step("Too much\nReject")
         
         # Should end with no deal
         assert done
@@ -440,23 +451,23 @@ class TestVendorNegotiationIntegration:
         env.reset(num_players=2, seed=42)
         
         # Player 0 starts conversation
-        done, _ = env.step("Hello, I'd like to discuss discount rates")
+        done = env.step("Hello, I'd like to discuss discount rates")
         assert not done
         assert len(env.conversation_history) == 1
         
         # Player 1 responds
-        done, _ = env.step("Sure, I'm open to reasonable discounts")
+        done = env.step("Sure, I'm open to reasonable discounts")
         assert not done
         assert len(env.conversation_history) == 2
         
         # Player 0 proposes with conversation
-        done, _ = env.step("I think moderate discounts work\nPropose 15%, 20%, 15%")
+        done = env.step("I think moderate discounts work\nPropose 15%, 20%, 15%")
         assert not done
         assert len(env.conversation_history) == 3
         assert env.current_proposal['discounts'] is not None
         
         # Player 1 accepts with conversation
-        done, _ = env.step("This looks good to me\nAccept")
+        done = env.step("This looks good to me\nAccept")
         assert done
         assert len(env.conversation_history) == 4
     
@@ -469,12 +480,12 @@ class TestVendorNegotiationIntegration:
         env.step("Propose 20%, 20%, 20%")  # Round 1
         env.step("Too much\nReject")                  # Round 2
         env.step("Propose 15%, 15%, 15%")  # Round 3
-        done, _ = env.step("Still too much\nReject")  # Round 4
+        done = env.step("Still too much\nReject")  # Round 4
         
         # Should end due to max rounds (check turn count)
         if not done:
             # May need one more action to trigger max rounds
-            done, _ = env.step("Final offer\nPropose 10%, 10%, 10%")
+            done = env.step("Final offer\nPropose 10%, 10%, 10%")
         
         assert done or env.state.turn >= env.max_rounds - 1
     
@@ -489,23 +500,22 @@ class TestVendorNegotiationIntegration:
         assert env.state.error_count > initial_error_count
         
         # Player 0 recovers with valid move
-        done, _ = env.step("Let me try again\nPropose 15%, 20%, 15%")
+        done = env.step("Let me try again\nPropose 15%, 20%, 15%")
         assert not done
         assert env.current_proposal['discounts'] is not None
     
-    def test_three_strikes_elimination(self):
-        """Test that exceeding error allowance affects game"""
-        env = VendorNegotiationEnv(num_products=3, error_allowance=2)  # Low allowance for testing
+    @pytest.mark.parametrize("offender", [0, 1])
+    def test_second_consecutive_invalid_move_forfeits(self, offender):
+        env = VendorNegotiationEnv(num_products=3)
         env.reset(num_players=2, seed=42)
-        
-        # Player 0 makes invalid moves (need actual invalid actions, not free text)
-        env.step("I want to accept this.\nAccept")  # Invalid - no proposal
-        env.step("I want to accept this.\nAccept")  # Invalid - no proposal
-        done, _ = env.step("I want to accept this.\nAccept")  # Should exceed allowance
-        
-        # Should handle according to TextArena's error system
-        # Free text conversation doesn't count as errors, so use actual invalid actions
-        assert env.state.error_count >= 2 or done
+        if offender == 1:
+            env.step("Hello")
+
+        # Free text is always valid conversation, so use decisions that need a standing proposal.
+        assert not env.step("I want to accept this.\nAccept")
+        assert env.state.error_count == 1
+        assert env.step("I want to accept this.\nAccept")
+        assert env.state.rewards == {offender: 0, 1 - offender: 1}
 
 
 class TestVendorNegotiationProductSelection:
@@ -674,7 +684,7 @@ class TestVendorNegotiationEdgeCases:
         assert len(env.selected_products) == 1
         
         # Should work with single product
-        done, _ = env.step("Propose 20%")
+        done = env.step("Propose 20%")
         assert not done
         assert env.current_proposal['discounts'] is not None
     
@@ -693,7 +703,7 @@ class TestVendorNegotiationEdgeCases:
         env.reset(num_players=2, seed=42)
         
         # Test with extra spaces
-        done, _ = env.step("   Propose   15%,   20%,   15%   ")
+        done = env.step("   Propose   15%,   20%,   15%   ")
         assert not done
         assert env.current_proposal['discounts'] is not None
     
@@ -715,7 +725,7 @@ class TestVendorNegotiationEdgeCases:
             "proposer": env.current_proposal["proposer"],
         }
 
-        done, _ = env.step(action)
+        done = env.step(action)
 
         assert not done
         assert env.state.error_count == 0
@@ -732,7 +742,7 @@ class TestVendorNegotiationEdgeCases:
 
         initial_error_count = env.state.error_count
         conversations_before = len(env.conversation_history)
-        done, _ = env.step("I cannot accept these rates yet, and I won't reject them either")
+        done = env.step("I cannot accept these rates yet, and I won't reject them either")
 
         # Treated as pure conversation: no error, no accept/reject processed
         assert not done
@@ -746,16 +756,16 @@ class TestVendorNegotiationEdgeCases:
         env = VendorNegotiationEnv(num_products=3)
         env.reset(num_players=2, seed=42)
 
-        done, _ = env.step("Propose 15%, 20%, 15%")
+        done = env.step("Propose 15%, 20%, 15%")
         assert not done
         assert env.current_proposal['discounts'] is not None
 
-        done, _ = env.step("Reject")
+        done = env.step("Reject")
         assert not done
         assert env.current_proposal['discounts'] is None
 
         env.step("Propose 20%, 20%, 20%")
-        done, _ = env.step("Accept")
+        done = env.step("Accept")
         assert done
         assert env._check_deal_accepted()
 
@@ -765,7 +775,7 @@ class TestVendorNegotiationEdgeCases:
         env.reset(num_players=2, seed=42)
         
         initial_error_count = env.state.error_count
-        done, _ = env.step("Here is my offer.\nPropose")
+        done = env.step("Here is my offer.\nPropose")
         
         # Should be invalid
         assert not done
@@ -787,7 +797,7 @@ class TestVendorNegotiationRegressions:
 
         monkeypatch.setattr(env, "_calculate_actual_sales", counted_calculate)
         env.step("Propose 20%, 20%, 20%")
-        done, _ = env.step("Accept")
+        done = env.step("Accept")
 
         assert done
         first_render = env.get_board_str()
@@ -829,7 +839,7 @@ class TestVendorNegotiationRegressions:
         events_before = len(env.state.events)
         turn_before = env.state.turn
 
-        done, _ = env.step(action)
+        done = env.step(action)
 
         assert not done
         assert env.state.turn == turn_before
@@ -846,7 +856,7 @@ class TestVendorNegotiationRegressions:
         env.reset(num_players=2, seed=42)
         events_before = len(env.state.events)
 
-        done, _ = env.step("This should not be recorded\nPropose 25%, 20%, 15%")
+        done = env.step("This should not be recorded\nPropose 25%, 20%, 15%")
 
         assert not done
         assert env.state.turn == 0
@@ -871,7 +881,7 @@ class TestVendorNegotiationRegressions:
         env.reset(num_players=2, seed=42)
         events_before = len(env.state.events)
 
-        done, _ = env.step(action)
+        done = env.step(action)
 
         assert not done
         assert env.state.turn == 0
@@ -888,7 +898,7 @@ class TestVendorNegotiationRegressions:
         env.reset(num_players=2, seed=42)
 
         env.step("Propose 20%, 20%, 20%")
-        done, _ = env.step("Accept")
+        done = env.step("Accept")
 
         assert done
         assert env.state.game_info[0]["turn_count"] == 1
@@ -931,7 +941,7 @@ class TestVendorNegotiationDecisionGrammar:
         ],
     )
     def test_trailing_punctuation_and_keyword_variants_are_proposals(self, env, action):
-        done, _ = env.step(action)
+        done = env.step(action)
         assert not done
         assert env.state.error_count == 0
         assert env.current_proposal == {
@@ -940,7 +950,7 @@ class TestVendorNegotiationDecisionGrammar:
         }
 
     def test_proposed_prefixed_line_is_conversation_before_the_decision(self, env):
-        done, _ = env.step("Proposed changes look fine to me.\nPropose 15%, 20%, 15%")
+        done = env.step("Proposed changes look fine to me.\nPropose 15%, 20%, 15%")
         assert not done
         assert env.state.error_count == 0
         assert env.current_proposal["proposer"] == 0
@@ -956,7 +966,7 @@ class TestVendorNegotiationDecisionGrammar:
         ],
     )
     def test_lines_that_only_start_like_commands_are_conversation(self, env, action):
-        done, _ = env.step(action)
+        done = env.step(action)
         assert not done
         assert env.state.error_count == 0
         assert env.current_proposal == {"discounts": None, "proposer": None}
@@ -980,7 +990,7 @@ class TestVendorNegotiationDecisionGrammar:
     )
     def test_malformed_proposal_attempts_are_atomic_invalids(self, env, action):
         events_before = len(env.state.events)
-        done, _ = env.step(action)
+        done = env.step(action)
         assert not done
         assert env.state.error_count == 1
         assert env.state.turn == 0
@@ -991,11 +1001,7 @@ class TestVendorNegotiationDecisionGrammar:
     def test_text_after_a_decision_is_invalid(self, env):
         env.step("Propose 15%, 20%, 15%")
         history_before = list(env.negotiation_history)
-        done, _ = env.step("Accept\nLooking forward to working with you!")
+        done = env.step("Accept\nLooking forward to working with you!")
         assert not done
         assert env.state.error_count == 1
         assert env.negotiation_history == history_before
-
-
-if __name__ == "__main__":
-    pytest.main([__file__, "-v"])

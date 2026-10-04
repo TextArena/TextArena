@@ -6,7 +6,7 @@ tests overwrite ``game_state['hands']`` to script tricks. Player 1 deals the
 first hand, so Player 0 (the non-dealer, "mano") leads it; the deal then
 alternates. A raise passes the turn to the opponent, who must 'accept', 'fold'
 or re-'raise'; accepting hands the turn back to the player whose card play the
-negotiation interrupted.
+negotiation interrupted, and only the accepting player may make the next raise.
 """
 import copy
 import random
@@ -30,7 +30,7 @@ def _deal(env, hand0, hand1):
 def _play(env, *actions):
     done = False
     for action in actions:
-        done, _ = env.step(action)
+        done = env.step(action)
     return done
 
 
@@ -227,12 +227,12 @@ def test_accepting_a_reraise_returns_the_turn_to_the_interrupted_player():
 def test_stake_is_capped_at_twelve():
     env = _fresh()
     gs = env.state.game_state
-    for expected in (2, 4, 6, 8, 10, 12):
-        _play(env, "raise", "accept")
-        assert gs["stake"] == expected
+    _play(env, "raise", "raise", "raise", "raise", "raise", "raise")  # 2, 4, 6, 8, 10, then 12 proposed
+    env.step("accept")
+    assert (gs["stake"], gs["raise_right"]) == (12, 0)
     assert env.state.current_player_id == 0
     assert "raise" not in env._legal_actions(0)
-    done, _ = env.step("raise")
+    done = env.step("raise")
     assert not done and env.state.error_count == 1
     assert (gs["stake"], gs["raiser"]) == (12, None)
 
@@ -240,16 +240,63 @@ def test_stake_is_capped_at_twelve():
 def test_a_raise_to_twelve_cannot_be_reraised():
     env = _fresh()
     gs = env.state.game_state
-    for _ in range(5):
-        _play(env, "raise", "accept")
-    env.step("raise")
-    assert (gs["stake"], gs["pending_raise_value"]) == (10, 12)
-    assert env._legal_actions(1) == ["accept", "fold"]
-    done, _ = env.step("raise")
+    _play(env, "raise", "raise", "raise", "raise", "raise", "raise")
+    assert (gs["stake"], gs["pending_raise_value"], gs["raiser"]) == (10, 12, 1)
+    assert env._legal_actions(0) == ["accept", "fold"]
+    done = env.step("raise")
     assert not done and env.state.error_count == 1
-    assert (gs["stake"], gs["pending_raise_value"], gs["raiser"]) == (10, 12, 0)
+    assert (gs["stake"], gs["pending_raise_value"], gs["raiser"]) == (10, 12, 1)
     env.step("fold")
-    assert gs["match_points"] == {0: 10, 1: 0}
+    assert gs["match_points"] == {0: 0, 1: 10}
+
+
+def test_the_raiser_cannot_raise_again_after_the_raise_is_accepted():
+    env = _fresh()
+    _play(env, "raise", "accept")
+    assert env.state.current_player_id == 0
+    assert "raise" not in env._legal_actions(0)
+    before = copy.deepcopy(env.state.game_state)
+    done = env.step("raise")
+    assert not done and env.state.error_count == 1
+    assert env.state.game_state == before
+    assert any("Only P1, who accepted the last raise, may raise next." in event[1] for event in env.state.events[-2:])
+
+
+def test_only_the_player_who_accepted_may_raise_next():
+    env = _fresh()
+    gs = env.state.game_state
+    _deal(env, ["4♣", "5♣", "6♣"], ["3♦", "5♦", "7♦"])
+    _play(env, "raise", "accept", "play 4")
+    assert env.state.current_player_id == 1
+    assert "raise" in env._legal_actions(1)
+    _play(env, "raise", "accept")  # Player 1 raises to 4; Player 0 accepts and now holds the next raise
+    assert (gs["stake"], gs["raise_right"]) == (4, 0)
+    assert env.state.current_player_id == 1
+    assert "raise" not in env._legal_actions(1)
+    env.step("play 3")  # Player 1 wins the trick and leads
+    assert env.state.current_player_id == 1
+    assert "raise" not in env._legal_actions(1)
+    env.step("play 5")
+    assert "raise" in env._legal_actions(0)
+
+
+def test_a_reraise_is_allowed_because_it_accepts_the_standing_raise():
+    env = _fresh()
+    gs = env.state.game_state
+    _play(env, "raise", "raise", "accept")  # Player 0 accepts Player 1's re-raise to 4
+    assert (gs["stake"], gs["raise_right"]) == (4, 0)
+    assert env.state.current_player_id == 0
+    assert "raise" in env._legal_actions(0)
+
+
+def test_raise_right_resets_every_hand():
+    env = _fresh()
+    gs = env.state.game_state
+    _deal(env, ["3♣", "3♦", "6♣"], ["4♦", "5♦", "6♦"])
+    _play(env, "raise", "accept", "play 3", "play 4", "play 3", "play 5")
+    assert gs["hand_number"] == 2 and gs["raise_right"] is None
+    assert env.state.current_player_id == 1
+    assert "raise" in env._legal_actions(1)
 
 
 # -- invalid moves -------------------------------------------------------------
@@ -257,7 +304,7 @@ def test_pending_raise_blocks_card_play_atomically():
     env = _fresh()
     env.step("raise")
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(f"play {before['hands'][1][0][:-1]}")
+    done = env.step(f"play {before['hands'][1][0][:-1]}")
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -266,7 +313,7 @@ def test_pending_raise_blocks_card_play_atomically():
 def test_accept_or_fold_without_a_raise_is_rejected(action):
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -277,7 +324,7 @@ def test_non_play_actions_reject_card_arguments(action):
     if action != "raise 3":
         env.step("raise")
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -287,7 +334,7 @@ def test_unplayable_actions_are_rejected_atomically(action):
     env = _fresh()
     _deal(env, ["3♣", "5♣", "6♣"], ["4♦", "5♦", "6♦"])
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -303,7 +350,7 @@ def test_actions_are_case_insensitive():
 def test_two_consecutive_invalid_moves_forfeit_the_match():
     env = _fresh()
     env.step("nonsense")
-    done, _ = env.step("nonsense")
+    done = env.step("nonsense")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -323,6 +370,11 @@ def test_render_shows_private_cards_negotiation_and_legal_actions():
     assert "Pending raise: P1 raised to 2." in board
     assert "Legal actions: 'accept', 'fold', 'raise'" in board
 
+    env.step("accept")
+    board = env.render(1)
+    assert "Next raise: only P0 may raise (they accepted the last raise)." in board
+    assert "'raise'" not in board.split("Legal actions: ")[1]
+
 
 def test_each_player_is_dealt_their_cards_privately():
     env = _fresh()
@@ -338,6 +390,7 @@ def test_prompt_teaches_bare_actions_and_the_rules():
     prompt = env.prompt(0)
     for token in ("'play <rank>'", "'play K'", "'raise'", "'accept'", "'fold'", "3 2 A K Q J 7 6 5 4"):
         assert token in prompt
+    assert "only the player who accepted it may make the next raise" in prompt
     assert "[" not in prompt
     assert "actions pass" not in prompt
     assert "If 40 actions pass" in _fresh(max_turns=40).prompt(1)
@@ -385,7 +438,7 @@ def test_turn_limit_awards_the_match_point_leader():
 
 def test_turn_limit_with_level_match_points_is_a_draw():
     env = _fresh(max_turns=1)
-    done, _ = env.step("raise")
+    done = env.step("raise")
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
 
@@ -402,7 +455,7 @@ def test_random_legal_play_keeps_invariants_and_terminates(seed):
         assert gs["stake"] in (1, 2, 4, 6, 8, 10, 12)
         assert all(gs["match_points"][pid] >= previous_points[pid] for pid in (0, 1))
         previous_points = dict(gs["match_points"])
-        done, _ = env.step(chooser.choice(env._legal_actions(env.state.current_player_id)))
+        done = env.step(chooser.choice(env._legal_actions(env.state.current_player_id)))
         assert env.state.error_count == 0
         if done:
             break

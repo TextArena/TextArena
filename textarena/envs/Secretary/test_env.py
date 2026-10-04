@@ -38,9 +38,9 @@ def test_accepting_the_maximum_wins():
     k = max(range(len(draws)), key=lambda i: draws[i])  # index of the max value
     done = False
     for _ in range(k):  # skip up to (but not including) the max
-        done, _ = env.step("continue")
+        done = env.step("continue")
         assert not done
-    done, _ = env.step("accept")
+    done = env.step("accept")
     assert done
     assert env.state.rewards == {0: 1.0}
     assert env.state.game_state["accepted_idx"] == k
@@ -52,9 +52,9 @@ def test_accepting_non_maximum_loses():
     k = min(range(len(draws)), key=lambda i: draws[i])  # index of the min value
     done = False
     for _ in range(k):
-        done, _ = env.step("continue")
+        done = env.step("continue")
         assert not done
-    done, _ = env.step("accept")
+    done = env.step("accept")
     assert done
     assert env.state.rewards == {0: 0.0}
     assert env.state.game_state["accepted_idx"] == k
@@ -66,7 +66,7 @@ def test_forced_to_take_final_value():
     # Continue through every value; the env auto-resolves on the final draw.
     done = False
     for _ in range(len(draws)):
-        done, _ = env.step("continue")
+        done = env.step("continue")
     assert done
     expected = 1.0 if draws[-1] == max(draws) else 0.0
     assert env.state.rewards == {0: expected}
@@ -75,7 +75,7 @@ def test_forced_to_take_final_value():
 
 def test_single_draw_continue_forces_acceptance_in_bounds():
     env = _fresh(N=1)
-    done, _ = env.step("continue")
+    done = env.step("continue")
     assert done
     assert env.state.game_state["accepted_idx"] == 0
     assert env.state.rewards == {0: 1.0}
@@ -83,7 +83,7 @@ def test_single_draw_continue_forces_acceptance_in_bounds():
 
 def test_actions_are_case_insensitive_but_strict():
     env = _fresh()
-    done, _ = env.step("ACCEPT")
+    done = env.step("ACCEPT")
     assert done
     assert env.state.game_state["accepted_idx"] == 0
 
@@ -91,7 +91,7 @@ def test_actions_are_case_insensitive_but_strict():
 def test_invalid_format_increments_error():
     env = _fresh()
     before_idx = env.state.game_state["current_idx"]
-    done, _ = env.step("skip")
+    done = env.step("skip")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["current_idx"] == before_idx
@@ -101,7 +101,7 @@ def test_invalid_format_increments_error():
 def test_repeated_invalid_moves_score_like_a_loss():
     env = _fresh()
     env.step("skip")
-    done, _ = env.step("skip")
+    done = env.step("skip")
     assert done
     assert env.state.rewards == {0: 0.0}
     assert env.state.game_info[0]["invalid_move"] is True

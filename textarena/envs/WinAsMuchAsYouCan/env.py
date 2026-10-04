@@ -31,12 +31,6 @@ class WinAsMuchAsYouCanEnv(ta.GameEnv):
     DEFAULT_TALK_ACTION = "Pass"
     DEFAULT_ACT_ACTION = "Choose Y"
 
-    error_allowance = ta.Param(
-        3, "The number of consecutive invalid moves that only receive a warning. The next one also gets feedback, sets "
-           "`invalid_move` in the player's game info, and applies the default decision. The count then starts over.",
-        min=0,
-    )
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         # Regex patterns for parsing actions. A message ends at its last non-space character,

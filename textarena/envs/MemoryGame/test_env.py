@@ -31,7 +31,7 @@ def test_single_player_wins_all_pairs():
     for (r1, c1), (r2, c2) in pairs:
         # Matching keeps the same player on turn (rotate_player=False).
         assert env.state.current_player_id == 0
-        done, _ = env.step(f"{r1} {c1} {r2} {c2}")
+        done = env.step(f"{r1} {c1} {r2} {c2}")
     assert done
     assert env.state.game_state["score"] == {0: 2, 1: 0}
     assert env.state.rewards == {0: 1, 1: -1}
@@ -48,7 +48,7 @@ def test_mismatch_rotates_player():
         for c in range(2)
         if (r, c) != (0, 0) and board[r][c] != s0
     )
-    done, _ = env.step(f"0 0 {target[0]} {target[1]}")
+    done = env.step(f"0 0 {target[0]} {target[1]}")
     assert not done
     assert env.state.current_player_id == 1
     assert env.state.game_state["score"] == {0: 0, 1: 0}
@@ -56,7 +56,7 @@ def test_mismatch_rotates_player():
 
 def test_invalid_format_increments_error():
     env = _fresh()
-    done, _ = env.step("flip some cards")
+    done = env.step("flip some cards")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -78,14 +78,14 @@ def test_format_error_describes_expected_action(grid_size):
 
 def test_out_of_bounds_rejected():
     env = _fresh(grid_size=2)
-    done, _ = env.step("0 0 5 5")
+    done = env.step("0 0 5 5")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_same_card_twice_rejected():
     env = _fresh(grid_size=2)
-    done, _ = env.step("0 0 0 0")
+    done = env.step("0 0 0 0")
     assert not done
     assert env.state.error_count == 1
 
@@ -110,7 +110,7 @@ def test_unbalanced_brackets_are_atomic_invalid_moves(action):
     env = _fresh(grid_size=2)
     before = copy.deepcopy(env.state.game_state)
 
-    done, _ = env.step(action)
+    done = env.step(action)
 
     assert not done
     assert env.state.error_count == 1
@@ -132,7 +132,7 @@ def test_huge_coordinate_is_rejected_without_integer_conversion(monkeypatch):
 
     monkeypatch.setattr(memory_module, "int", guarded_int, raising=False)
 
-    done, _ = env.step(f"{'9' * 100_000} 0 0 1")
+    done = env.step(f"{'9' * 100_000} 0 0 1")
 
     assert not done
     assert env.state.error_count == 1
@@ -184,7 +184,7 @@ def test_rich_renderer_reveals_only_matched_cards():
     (r1, c1), (r2, c2) = next(iter(_pairs(env).values()))
     symbol = env.state.game_state["board"][r1][c1]
 
-    done, _ = env.step(f"{r1} {c1} {r2} {c2}")
+    done = env.step(f"{r1} {c1} {r2} {c2}")
     rich_board = env.get_board_str()
 
     assert not done
@@ -200,7 +200,7 @@ def test_selecting_a_matched_card_is_atomic():
     before = copy.deepcopy(env.state.game_state)
     other = pairs[1][0]
 
-    done, _ = env.step(f"{r1} {c1} {other[0]} {other[1]}")
+    done = env.step(f"{r1} {c1} {other[0]} {other[1]}")
 
     assert not done
     assert env.state.error_count == 1
@@ -224,7 +224,7 @@ def test_completion_can_end_in_a_draw_and_renders_all_cards():
     env.state.current_player_id = 1
     (r1, c1), (r2, c2) = final_pair
 
-    done, _ = env.step(f"{r1} {c1} {r2} {c2}")
+    done = env.step(f"{r1} {c1} {r2} {c2}")
 
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
@@ -249,7 +249,7 @@ def test_exact_turn_limit_scores_a_win():
     )
     env.state.game_state["score"] = {0: 1, 1: 0}
 
-    done, _ = env.step(f"0 0 {mismatch[0]} {mismatch[1]}")
+    done = env.step(f"0 0 {mismatch[0]} {mismatch[1]}")
 
     assert done
     assert env.state.turn == 1
@@ -267,7 +267,7 @@ def test_exact_turn_limit_draws_tied_scores():
         if board[r][c] != board[0][0]
     )
 
-    done, _ = env.step(f"0 0 {mismatch[0]} {mismatch[1]}")
+    done = env.step(f"0 0 {mismatch[0]} {mismatch[1]}")
 
     assert done
     assert env.state.turn == 1

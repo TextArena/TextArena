@@ -15,7 +15,8 @@ class LeTrucEnv(ta.GameEnv):
     • The non-dealer ("mano") leads the first trick and the deal alternates every hand.
     • A hand is worth 1 point. On their turn a player may 'raise' ("truc"): 1 -> 2, then +2 per raise,
       capped at 12. The opponent must 'accept', 'fold' or re-'raise'; folding concedes the hand at the
-      stake as it stood before that raise.
+      stake as it stood before that raise. Once a raise is accepted, only the player who accepted it
+      may make the next raise.
     • First to 12 match points wins.
     """
     min_players = 2
@@ -70,7 +71,9 @@ class LeTrucEnv(ta.GameEnv):
             "Stakes:\n"
             f"- A hand is worth 1 point. On your turn you may raise ('truc'): 1 -> 2, then +2 per raise, up to {self.max_stake}.\n"
             "- Your opponent must then accept, fold, or raise again. Whoever folds concedes the hand, and the raiser "
-            f"scores the stake from before that raise.{turn_limit_rule}\n"
+            "scores the stake from before that raise.\n"
+            "- Once a raise is accepted, only the player who accepted it may make the next raise, so you cannot "
+            f"raise twice in a row.{turn_limit_rule}\n"
             "Actions (reply with exactly one; your legal actions are listed every turn):\n"
             "- 'play <rank>': play a card of that rank from your hand, e.g. 'play K' or 'play 3'\n"
             "- 'raise': raise the stake\n"
@@ -95,6 +98,8 @@ class LeTrucEnv(ta.GameEnv):
                 f"Pending raise: P{gs['raiser']} raised to {gs['pending_raise_value']}. 'accept' to play for "
                 f"{gs['pending_raise_value']}, 'fold' to concede {gs['stake']}{reraise}."
             )
+        elif gs["raise_right"] is not None and gs["stake"] < self.max_stake:
+            lines.append(f"Next raise: only P{gs['raise_right']} may raise (they accepted the last raise).")
         tricks = "; ".join(
             f"{number}) P{leader} {lead_card} vs P{1 - leader} {follow_card}: "
             + ("spoilt" if winner is None else f"P{winner} won")
@@ -152,7 +157,7 @@ class LeTrucEnv(ta.GameEnv):
                 actions.append("raise")
             return actions
         actions = list(dict.fromkeys(f"play {card[:-1]}" for card in gs["hands"][player_id]))
-        if gs["stake"] < self.max_stake:
+        if gs["stake"] < self.max_stake and gs["raise_right"] in (None, player_id):
             actions.append("raise")
         return actions
 
@@ -167,6 +172,7 @@ class LeTrucEnv(ta.GameEnv):
             "raiser": None,               # player whose raise is awaiting an answer
             "pending_raise_value": None,  # stake that raise proposes
             "raise_origin": None,         # player whose card turn the raise negotiation interrupted
+            "raise_right": None,          # player who accepted the last raise and alone may raise next; None = either
             "hands": {0: deck[:3], 1: deck[3:6]},
             "undealt_cards": deck[6:],
             "played_cards": [],
@@ -225,6 +231,10 @@ class LeTrucEnv(ta.GameEnv):
             return self.invalid(f"The pending raise is already the maximum of {self.max_stake} points; reply 'accept' or 'fold'.")
         if not reraise and gs["stake"] >= self.max_stake:
             return self.invalid(f"The hand is already worth the maximum of {self.max_stake} points; you cannot raise.")
+        if not reraise and gs["raise_right"] not in (None, pid):
+            return self.invalid(
+                f"Only P{gs['raise_right']}, who accepted the last raise, may raise next. Play a card instead."
+            )
         if reraise:
             gs["stake"] = gs["pending_raise_value"]  # a re-raise accepts the standing offer
         else:
@@ -247,9 +257,13 @@ class LeTrucEnv(ta.GameEnv):
         if gs["raiser"] is None:
             return self.invalid("There is no raise to accept.")
         origin = gs["raise_origin"]
-        gs.update({"stake": gs["pending_raise_value"], "raiser": None, "pending_raise_value": None, "raise_origin": None})
+        gs.update({
+            "stake": gs["pending_raise_value"], "raiser": None, "pending_raise_value": None, "raise_origin": None,
+            "raise_right": pid,
+        })
+        next_raise = f" Only P{pid} may raise next." if gs["stake"] < self.max_stake else ""
         self.broadcast(
-            f"P{pid} accepts: the hand is worth {gs['stake']} pts. P{origin} continues.",
+            f"P{pid} accepts: the hand is worth {gs['stake']} pts. P{origin} continues.{next_raise}",
             ta.ObservationType.GAME_ACTION_DESCRIPTION,
         )
         self.set_next_player(origin)

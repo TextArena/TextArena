@@ -82,8 +82,8 @@ def _rollout(env_id, num_players, seed, max_steps=300):
     for step_idx in range(max_steps):
         player_id, obs = env.get_observation()
         assert obs is not None
-        done, info = env.step(ACTION_POOL[step_idx % len(ACTION_POOL)])
-        assert isinstance(done, bool) and isinstance(info, dict)
+        done = env.step(ACTION_POOL[step_idx % len(ACTION_POOL)])
+        assert isinstance(done, bool)
         trace.append((step_idx, player_id, done))
         if done:
             break
@@ -161,7 +161,7 @@ def _trace(env, actions):
     trace = []
     for action in actions:
         trace.append(env.get_observation())
-        done, _ = env.step(action)
+        done = env.step(action)
         trace.append(done)
         if done:
             return trace + [env.state.rewards]
@@ -293,7 +293,7 @@ def test_no_progress_play_earns_no_reward(env_id, spec):
         done = False
         for _ in range(500):
             env.get_observation()
-            done, _ = env.step("@@@ not a move @@@")
+            done = env.step("@@@ not a move @@@")
             if done:
                 break
         assert done, "repeated invalid moves must end the game"

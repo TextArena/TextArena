@@ -31,7 +31,7 @@ def _start_from(env, board):
 def test_reaching_target_tile_wins():
     env = _fresh(target_tile=4, board_size=2)
     env.state.game_state["board"] = [[2, 2], [0, 0]]
-    done, _ = env.step("left")  # merges into a 4 -> reaches target
+    done = env.step("left")  # merges into a 4 -> reaches target
     assert done and env.state.rewards == {0: 1.0}
     assert sum(cell != 0 for row in env.state.game_state["board"] for cell in row) == 1
     assert env.state.turn == 1
@@ -41,13 +41,13 @@ def test_reaching_target_tile_wins():
 def test_merge_increases_score():
     env = _fresh(target_tile=2048, board_size=2)
     env.state.game_state["board"] = [[2, 2], [0, 0]]
-    done, _ = env.step("left")
+    done = env.step("left")
     assert not done and env.state.game_state["score"] == 4
 
 
 def test_invalid_format_increments_error_count():
     env = _fresh()
-    done, _ = env.step("no direction")
+    done = env.step("no direction")
     assert not done and env.state.error_count == 1
 
 
@@ -57,7 +57,7 @@ def test_no_change_move_rejected():
     env.state.game_state["board"] = [[2, 0], [0, 0]]
     before = copy.deepcopy(env.state.game_state)
     rng_before = env.rng.getstate()
-    done, _ = env.step("up")
+    done = env.step("up")
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
     assert env.rng.getstate() == rng_before
@@ -66,7 +66,7 @@ def test_no_change_move_rejected():
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     env.step("garbage")
-    done, _ = env.step("also garbage")
+    done = env.step("also garbage")
     assert done and env.state.game_info[0]["invalid_move"] is True
 
 
@@ -80,7 +80,7 @@ def test_each_tile_merges_at_most_once():
 def test_parser_rejects_noncanonical_actions(action):
     env = _fresh(target_tile=2048, board_size=2)
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -110,7 +110,7 @@ def test_losing_with_a_high_score_never_earns_the_win_reward():
     ]
     env.state.game_state["start_max_tile"] = 2
     env.state.game_state["score"] = 12000  # typical score for a game that built a 1024 tile
-    done, _ = env.step("right")
+    done = env.step("right")
     assert done and env._check_status() == "lose"
     # 2 -> 1024 is 9 of the 10 doublings to 2048; the score does not count.
     assert env.state.rewards == {0: pytest.approx(9 / 10)}
@@ -122,7 +122,7 @@ def test_immediate_invalid_policy_scores_zero_on_registered_configs(env_id, seed
     env = ta.make(env_id)
     env.reset(num_players=1, seed=seed)
     for _ in range(5):
-        done, _ = env.step("@@@ not a move @@@")
+        done = env.step("@@@ not a move @@@")
         if done:
             break
     assert done
@@ -133,17 +133,17 @@ def test_a_starting_4_tile_is_not_progress():
     env = _fresh(target_tile=32, board_size=4, seed=0)
     assert env.game_state["start_max_tile"] == 4
     env.step("garbage")
-    done, _ = env.step("garbage")
+    done = env.step("garbage")
     assert done and env.state.rewards == {0: 0}
 
 
 def test_partial_progress_counts_doublings_of_the_largest_tile():
     env = _fresh(target_tile=2048, board_size=2)
     _start_from(env, [[4, 4], [2, 0]])
-    done, _ = env.step("left")  # 4 + 4 = 8: one of the nine doublings from 4 to 2048
+    done = env.step("left")  # 4 + 4 = 8: one of the nine doublings from 4 to 2048
     assert not done and env._max_tile() == 8
     env.step("garbage")
-    done, _ = env.step("garbage")
+    done = env.step("garbage")
     assert done
     assert env.state.rewards == {0: pytest.approx(1 / 9)}
 
@@ -164,7 +164,7 @@ def test_spawned_full_board_without_merges_terminates_as_loss():
     env = _fresh(target_tile=2048, board_size=2)
     env.state.game_state["board"] = [[8, 16], [32, 0]]
     env.state.game_state["start_max_tile"] = 2
-    done, _ = env.step("down")
+    done = env.step("down")
     assert done
     assert env._check_status() == "lose"
     assert env.state.turn == 1

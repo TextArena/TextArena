@@ -84,7 +84,7 @@ def test_hit_marks_boards():
     # find a ship cell on the opponent's board
     target = next((r, c) for r in range(10) for c in range(10) if opp_board[r][c] in SHIP_INITIALS)
     r, c = target
-    done, _ = env.step(f"{chr(ord('A') + r)}{c}")
+    done = env.step(f"{chr(ord('A') + r)}{c}")
     assert not done
     assert env.state.game_state["board"][1][r][c] == "X"
     assert env.state.game_state["tracking_board"][0][r][c] == "X"
@@ -98,14 +98,14 @@ def test_sinking_last_ship_wins():
         for c in range(10):
             board[1][r][c] = "~"
     board[1][0][0] = "P"
-    done, _ = env.step("A0")
+    done = env.step("A0")
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
 
 
 def test_invalid_format_increments_error_count():
     env = _fresh()
-    done, _ = env.step("fire somewhere")
+    done = env.step("fire somewhere")
     assert not done
     assert env.state.error_count == 1
 
@@ -126,7 +126,7 @@ def test_format_error_describes_expected_action(grid_size, last_row):
 
 def test_out_of_bounds_increments_error_count():
     env = _fresh()
-    done, _ = env.step("Z9")  # row 'Z' is far outside a 10x10 board
+    done = env.step("Z9")  # row 'Z' is far outside a 10x10 board
     assert not done
     assert env.state.error_count == 1
 
@@ -135,7 +135,7 @@ def test_huge_column_is_rejected_without_mutation():
     env = _fresh()
     before = env.snapshot()
 
-    done, _ = env.step(f"A{'9' * 5000}")
+    done = env.step(f"A{'9' * 5000}")
 
     assert not done
     assert env.state.error_count == 1
@@ -145,7 +145,7 @@ def test_huge_column_is_rejected_without_mutation():
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     env.step("garbage")
-    done, _ = env.step("still garbage")
+    done = env.step("still garbage")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 

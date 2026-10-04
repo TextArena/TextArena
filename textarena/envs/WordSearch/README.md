@@ -51,7 +51,7 @@ found) or incorrect.
 
 | Outcome | Reward |
 | --- | --- |
-| All five words found | `+1` |
+| All five words found | `1` |
 | All 20 incorrect attempts used, or an explicit `max_turns` reached | Fraction of words found (`0` to `0.8`) |
 | Second consecutive invalid move | Fraction of words found |
 

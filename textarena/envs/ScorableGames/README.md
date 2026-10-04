@@ -66,7 +66,7 @@ no deal is reached, each player is told their fallback score privately.
 | --- | --- |
 | Deal passes | `+1` for every player whose score (including any bonus) reaches their minimum acceptable score, `-1` for every other player (everyone `-1` if nobody reaches it) |
 | No deal after `max_rounds` turns | Everyone `0` |
-| Invalid move after `error_allowance` warnings | No penalty: the player's vote is set to `invalid_move_default`; if no proposal is on the table, the deal that maximizes their own score is proposed for them first. The turn counts as a round |
+| Second consecutive invalid move (the first only earns a warning) | No penalty: the player's vote is set to `invalid_move_default`; if no proposal is on the table, the deal that maximizes their own score is proposed for them first. The turn counts as a round |
 
 A party's minimum acceptable score is its walk-away value: players are told that without a deal they receive exactly
 that score. A deal that reaches it is a success (`+1`), a deal below it leaves the party worse off than no deal (`-1`),
@@ -99,7 +99,6 @@ The class accepts 2–15 players in general, but each scenario has a fixed numbe
 - `unanimity_bonus_role` (default `"p1"`): The scenario role that earns the unanimity bonus. Accepts a non-empty role name or None.
 - `starting_role` (default `"p1"`): The scenario role that moves first. Player 0 starts if no party has that role. Accepts a non-empty role name or None.
 - `invalid_move_default` (default `"Accept"`): The vote cast for a player who exceeds the invalid-move allowance, including on a deal proposed for them. Accepts 'Accept' or 'Reject' (in any case).
-- `error_allowance` (default `3`): The consecutive invalid moves that only produce a warning. Accepts an integer of at least 0.
 <!-- END GENERATED: parameters -->
 
 ## Notes

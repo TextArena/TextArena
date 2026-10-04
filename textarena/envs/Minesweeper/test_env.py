@@ -42,21 +42,21 @@ def test_reset_initializes_board():
 
 def test_invalid_format_increments_error():
     env = _fresh()
-    done, _ = env.step("reveal 0 0")
+    done = env.step("reveal 0 0")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_out_of_bounds_rejected():
     env = _fresh(rows=4, cols=4, num_mines=2)
-    done, _ = env.step("99 99")
+    done = env.step("99 99")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_scripted_win_reveals_all_safe_cells():
     env = _scripted(_fresh(rows=2, cols=3, num_mines=0))
-    done, _ = env.step("0 2")  # flood-fill reveals (0,2) then (0,1)
+    done = env.step("0 2")  # flood-fill reveals (0,2) then (0,1)
     assert done
     assert env.state.rewards == {0: 1}
     assert env.revealed == [[False, True, True]]
@@ -64,7 +64,7 @@ def test_scripted_win_reveals_all_safe_cells():
 
 def test_hitting_mine_is_terminal_loss():
     env = _scripted(_fresh(rows=2, cols=3, num_mines=0))
-    done, _ = env.step("0 0")  # (0,0) is the mine
+    done = env.step("0 0")  # (0,0) is the mine
     assert done
     assert env.state.error_count == 0
     assert env.state.rewards == {0: 0.0}
@@ -74,14 +74,14 @@ def test_hitting_mine_is_terminal_loss():
 def test_already_revealed_cell_rejected():
     env = _fresh(rows=4, cols=4, num_mines=2)
     env.revealed[0][0] = True
-    done, _ = env.step("0 0")
+    done = env.step("0 0")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_first_move_is_always_safe():
     env = _fresh(rows=5, cols=5, num_mines=3)
-    done, _ = env.step("2 2")
+    done = env.step("2 2")
     assert not done  # first move can never detonate a mine
     assert env.grid[2][2] != -1
 
@@ -112,7 +112,7 @@ def test_mine_generation_is_exact_safe_and_seeded(seed):
 def test_exact_parser_rejects_malformed_coordinates_atomically(action):
     env = _fresh()
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.game_state == before
@@ -130,7 +130,7 @@ def test_comma_and_space_separated_coordinates_are_equivalent():
 
 def test_zero_mine_board_wins_on_first_reveal():
     env = _fresh(rows=3, cols=3, num_mines=0)
-    done, _ = env.step("1 1")
+    done = env.step("1 1")
     assert done
     assert env.state.rewards == {0: 1}
     assert all(all(row) for row in env.revealed)
@@ -148,7 +148,7 @@ def test_turn_limit_returns_safe_cell_completion():
     ]
     env.revealed = [[False] * 4 for _ in range(4)]
     env.flags = [[False] * 4 for _ in range(4)]
-    done, _ = env.step("0 1")
+    done = env.step("0 1")
     assert done
     assert 0.0 <= env.state.rewards[0] < 1.0
     assert "turn limit" in env.state.game_info[0]["reason"].lower()
@@ -187,7 +187,7 @@ def test_prompt_examples_fit_the_board_and_state_the_mine_count(rows, cols, num_
     assert all(int(r) < rows and int(c) < cols for r, c in examples)
     assert f"{num_mines} hidden mines" in prompt
     assert f"{env.max_turns} turns" in prompt
-    done, _ = env.step(" ".join(examples[0]))
+    env.step(" ".join(examples[0]))
     assert env.state.error_count == 0 and env.state.turn == 1
 
 

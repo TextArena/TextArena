@@ -50,7 +50,7 @@ def test_hare_hunter_beats_stag_hunter():
     env = _fresh(num_rounds=1, conversation_rounds=1)
     _play_conversation(env, turns=1)
     env.step("hare")          # player 0 -> hare (single_hare=8)
-    done, _ = env.step("stag")  # player 1 -> stag (single_stag=1)
+    done = env.step("stag")  # player 1 -> stag (single_stag=1)
     assert done
     assert env.state.game_state["total_payoff"] == {0: 8, 1: 1}
     assert env.state.rewards == {0: 1, 1: -1}
@@ -60,7 +60,7 @@ def test_mutual_stag_is_draw():
     env = _fresh(num_rounds=1, conversation_rounds=1)
     _play_conversation(env, turns=1)
     env.step("stag")
-    done, _ = env.step("stag")
+    done = env.step("stag")
     assert done
     assert env.state.game_state["total_payoff"] == {0: 10, 1: 10}
     assert env.state.rewards == {0: 0, 1: 0}
@@ -72,13 +72,13 @@ def test_malformed_decision_is_atomic_and_recoverable():
     env = _fresh(num_rounds=1, conversation_rounds=1)
     _play_conversation(env, turns=1)
     env.step("stag")
-    done, _ = env.step("whatever")
+    done = env.step("whatever")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 1
     assert env.state.game_state["decisions"] == {0: "stag", 1: None}
 
-    done, _ = env.step("hare")
+    done = env.step("hare")
     assert done
     assert env.state.game_state["total_payoff"] == {0: 1, 1: 8}
     assert env.state.rewards == {0: -1, 1: 1}
@@ -94,7 +94,7 @@ def test_reward_accumulation_across_rounds():
     # Round 2: both hare -> +5 each
     _play_conversation(env, turns=1)
     env.step("hare")
-    done, _ = env.step("hare")
+    done = env.step("hare")
     assert done
     assert env.state.game_state["total_payoff"] == {0: 13, 1: 6}
     assert env.state.rewards == {0: 1, 1: -1}
@@ -104,7 +104,7 @@ def test_zero_conversation_rounds_starts_in_decision_phase():
     env = _fresh(conversation_rounds=0)
     assert env.state.game_state["phase"] == "decision"
     env.step("stag")
-    done, _ = env.step("hare")
+    done = env.step("hare")
     assert done
 
 
@@ -146,7 +146,7 @@ def test_terminal_round_does_not_generate_phantom_payoffs():
     env = _fresh(conversation_rounds=0, randomize_payoff=True)
     initial_payoffs = env.state.game_state["payoffs"].copy()
     env.step("stag")
-    done, _ = env.step("hare")
+    done = env.step("hare")
     assert done
     assert env.state.game_state["round"] == 1
     assert env.state.game_state["payoffs"] == initial_payoffs
@@ -172,7 +172,7 @@ def test_signed_randomized_payoffs_stay_ordered_across_rounds_and_reset():
         assert -10 < matrix["mutual_hare"] <= matrix["single_hare"]
         assert matrix["single_hare"] < matrix["mutual_stag"]
         env.step("stag")
-        done, _ = env.step("hare")
+        done = env.step("hare")
     assert done
     assert len(env.state.game_state["history"]) == 3
 

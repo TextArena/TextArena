@@ -29,11 +29,11 @@ def test_reset_state():
 
 def test_accept_proposer_wins():
     env = _fresh()
-    done, _ = env.step("Offer: $3")
+    done = env.step("Offer: $3")
     assert done is False
     assert env.state.game_state["phase"] == "responding"
     assert env.state.current_player_id == 1
-    done, _ = env.step("Accept")
+    done = env.step("Accept")
     assert done is True
     # P0 keeps 7, P1 gets 3 -> P0 wins.
     assert env.state.game_state["player_totals"] == {0: 7, 1: 3}
@@ -46,7 +46,7 @@ def test_accept_proposer_wins():
 def test_accept_responder_wins():
     env = _fresh()
     env.step("Offer: $8")
-    done, _ = env.step("Accept")
+    done = env.step("Accept")
     assert done is True
     assert env.state.game_state["player_totals"] == {0: 2, 1: 8}
     assert env.state.rewards == {0: -1, 1: 1}
@@ -55,7 +55,7 @@ def test_accept_responder_wins():
 def test_reject_is_draw():
     env = _fresh()
     env.step("Offer: $3")
-    done, _ = env.step("Reject")
+    done = env.step("Reject")
     assert done is True
     assert env.state.game_state["player_totals"] == {0: 0, 1: 0}
     assert env.state.rewards == {0: 0, 1: 0}
@@ -65,7 +65,7 @@ def test_zero_pool_offer_resolves_and_survives_render_reset_cycle():
     env = _fresh(pool=0)
     env.step("Offer: $0")
     assert "offers: $0" in env.get_board_str()
-    done, _ = env.step("Accept")
+    done = env.step("Accept")
     assert done
     assert env.state.game_state["player_totals"] == {0: 0, 1: 0}
     assert env.state.rewards == {0: 0, 1: 0}
@@ -78,7 +78,7 @@ def test_zero_pool_offer_resolves_and_survives_render_reset_cycle():
 
 def test_proposer_invalid_format():
     env = _fresh()
-    done, _ = env.step("Accept")  # not a valid offer
+    done = env.step("Accept")  # not a valid offer
     assert done is False
     assert env.state.error_count == 1
     assert env.state.game_state["phase"] == "offering"
@@ -87,7 +87,7 @@ def test_proposer_invalid_format():
 
 def test_offer_above_pool_rejected():
     env = _fresh()
-    done, _ = env.step("Offer: $20")
+    done = env.step("Offer: $20")
     assert done is False
     assert env.state.error_count == 1
     assert env.state.game_state["phase"] == "offering"
@@ -96,7 +96,7 @@ def test_offer_above_pool_rejected():
 def test_responder_invalid_format():
     env = _fresh()
     env.step("Offer: $3")
-    done, _ = env.step("I am undecided")  # neither accept nor reject
+    done = env.step("I am undecided")  # neither accept nor reject
     assert done is False
     assert env.state.error_count == 1
     assert env.state.game_state["phase"] == "responding"
@@ -111,7 +111,7 @@ def test_two_round_game():
     assert env.state.done is False
     assert env.state.game_state["round_number"] == 2
     env.step("Offer: $2")   # round 2: P0 +8, P1 +2
-    done, _ = env.step("Accept")
+    done = env.step("Accept")
     assert done is True
     assert env.state.game_state["player_totals"] == {0: 16, 1: 4}
     assert env.state.rewards == {0: 1, 1: -1}
@@ -125,7 +125,7 @@ def test_alternating_roles_sets_next_actor_and_records_roles():
     assert env.state.game_state["current_proposer_id"] == 1
 
     env.step("Offer: $8")
-    done, _ = env.step("Accept")
+    done = env.step("Accept")
     assert done
     assert [item["proposer"] for item in env.state.game_state["round_history"]] == [0, 1]
     assert env.state.game_state["round_number"] == 2

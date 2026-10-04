@@ -19,7 +19,7 @@ done = False
 while not done:
     player_id, observation = env.get_observation()
     action = agents[player_id](observation)
-    done, step_info = env.step(action)
+    done = env.step(action)
 
 rewards, game_info = env.close()
 

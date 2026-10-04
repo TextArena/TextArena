@@ -1,11 +1,11 @@
-from textarena.envs.registration import register_with_versions
+from textarena.envs.registration import register
 
-register_with_versions(
+register(
     id="TwentyQuestions-v1",
     entry_point="textarena.envs.TwentyQuestions.env:TwentyQuestionsEnv",
     hardcore=False,
 )
-register_with_versions(
+register(
     id="TwentyQuestions-v1-hardcore",
     entry_point="textarena.envs.TwentyQuestions.env:TwentyQuestionsEnv",
     hardcore=True,

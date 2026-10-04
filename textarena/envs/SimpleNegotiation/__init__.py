@@ -1,6 +1,6 @@
-from textarena.envs.registration import register_with_versions
+from textarena.envs.registration import register
 
-register_with_versions(
+register(
     id="SimpleNegotiation-v1",
     entry_point="textarena.envs.SimpleNegotiation.env:SimpleNegotiationEnv",
     max_turns=10,

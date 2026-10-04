@@ -1,6 +1,6 @@
-from textarena.envs.registration import register_with_versions
+from textarena.envs.registration import register
 
-register_with_versions(
+register(
     id="PigDice-v1",
     entry_point="textarena.envs.PigDice.env:PigDiceEnv",
     winning_score=100, max_turns=100,

@@ -19,7 +19,7 @@ def make_env(num_players=3, seed=42, **kwargs):
 def run_conversation_phase(env):
     """Play out the conversation phase with plain broadcasts."""
     while env.state.game_state["phase"] == "conversation":
-        done, _ = env.step("Broadcast: hello")
+        done = env.step("Broadcast: hello")
         assert done is False
     assert env.state.game_state["phase"] == "bidding"
 
@@ -48,7 +48,7 @@ def test_num_players_bounds_enforced():
 
 def test_broadcast_reaches_all_players_and_turn_rotates():
     env = make_env()
-    done, _ = env.step("Broadcast: hello everyone")
+    done = env.step("Broadcast: hello everyone")
     assert done is False
     assert env.state.current_player_id == 1
     for pid in range(3):
@@ -58,7 +58,7 @@ def test_broadcast_reaches_all_players_and_turn_rotates():
 
 def test_whisper_only_reaches_target():
     env = make_env()
-    done, _ = env.step("Whisper 2: secret deal")
+    done = env.step("Whisper 2: secret deal")
     assert done is False
     assert env.state.current_player_id == 1
     p2_messages = [msg for _, msg, _ in env.state.observations[2]]
@@ -69,7 +69,7 @@ def test_whisper_only_reaches_target():
 
 def test_conversation_messages_may_contain_semicolons():
     env = make_env()
-    done, _ = env.step("Broadcast: hi all; who wants the vase?\nWhisper 2: skip Item 1; I'll skip Item 2")
+    done = env.step("Broadcast: hi all; who wants the vase?\nWhisper 2: skip Item 1; I'll skip Item 2")
     assert done is False
     assert env.state.error_count == 0
     p1_messages = [msg for _, msg, _ in env.state.observations[1]]
@@ -81,7 +81,7 @@ def test_conversation_messages_may_contain_semicolons():
 
 def test_semicolon_followed_by_a_command_still_separates_commands():
     env = make_env()
-    done, _ = env.step("Broadcast: deal?; Whisper 2: yes; really")
+    done = env.step("Broadcast: deal?; Whisper 2: yes; really")
     assert done is False
     p1_messages = [msg for _, msg, _ in env.state.observations[1]]
     p2_messages = [msg for _, msg, _ in env.state.observations[2]]
@@ -93,7 +93,7 @@ def test_semicolon_followed_by_a_command_still_separates_commands():
 def test_malformed_whisper_after_a_semicolon_is_rejected_instead_of_broadcast():
     env = make_env()
     events_before = len(env.state.events)
-    done, _ = env.step("Broadcast: hi; Whisper 2 I value the vase at 120")  # the whisper lacks its colon
+    done = env.step("Broadcast: hi; Whisper 2 I value the vase at 120")  # the whisper lacks its colon
     assert done is False
     assert env.state.error_count == 1
     assert env.game_state["conversations_completed"] == 0
@@ -106,7 +106,7 @@ def test_malformed_whisper_after_a_semicolon_is_rejected_instead_of_broadcast():
 
 def test_command_quoted_inside_a_message_is_not_executed():
     env = make_env()
-    done, _ = env.step("Broadcast: please do not Whisper 2: tell anyone")
+    done = env.step("Broadcast: please do not Whisper 2: tell anyone")
     assert done is False
     assert not any("(Private)" in message for _, message, _, _ in env.state.events)
     p1_messages = [msg for _, msg, _ in env.state.observations[1]]
@@ -115,7 +115,7 @@ def test_command_quoted_inside_a_message_is_not_executed():
 
 def test_oversized_whisper_target_is_invalid_not_a_crash():
     env = make_env()
-    done, _ = env.step("Whisper " + "9" * 5000 + ": hi")
+    done = env.step("Whisper " + "9" * 5000 + ": hi")
     assert done is False
     assert env.state.error_count == 1
     assert env.game_state["conversations_completed"] == 0
@@ -131,11 +131,11 @@ def test_full_game_highest_net_worth_wins():
     env = make_env(seed=42)
     run_conversation_phase(env)
 
-    done, _ = env.step("Bid Item 0: 100")   # player 0
+    done = env.step("Bid Item 0: 100")   # player 0
     assert done is False
-    done, _ = env.step("Bid Item 1: 250")   # player 1
+    done = env.step("Bid Item 1: 250")   # player 1
     assert done is False
-    done, _ = env.step("I will not bid on anything.")  # player 2 passes
+    done = env.step("I will not bid on anything.")  # player 2 passes
     assert done is True
     assert env.state.turn == 6
 
@@ -156,7 +156,7 @@ def test_full_game_highest_net_worth_wins():
 def test_multiple_bare_bids_can_use_separate_lines():
     env = make_env(seed=42)
     run_conversation_phase(env)
-    done, _ = env.step("Bid Item 0: 100\nBid Item 1: 200")
+    done = env.step("Bid Item 0: 100\nBid Item 1: 200")
     assert done is False
     assert env.state.game_state["player_bids"][0] == {0: 100, 1: 200}
     assert env.state.game_state["remaining_capital"][0] == 1000
@@ -164,11 +164,11 @@ def test_multiple_bare_bids_can_use_separate_lines():
 
 def test_bids_may_be_semicolon_separated_but_not_wrapped_in_prose():
     env = make_env(conversation_rounds=0)
-    done, _ = env.step("Bid Item 0: 100; Bid Item 1: 200;")
+    done = env.step("Bid Item 0: 100; Bid Item 1: 200;")
     assert done is False
     assert env.game_state["player_bids"][0] == {0: 100, 1: 200}
 
-    done, _ = env.step("I'll go with this:\nBid Item 2: 50")
+    done = env.step("I'll go with this:\nBid Item 2: 50")
     assert done is False
     assert env.state.error_count == 1
     assert env.game_state["player_bids"][1] == {}
@@ -177,7 +177,7 @@ def test_bids_may_be_semicolon_separated_but_not_wrapped_in_prose():
 def test_incidental_bid_in_prose_is_treated_as_no_bid():
     env = make_env(seed=42)
     run_conversation_phase(env)
-    done, _ = env.step("I may bid on Item 0 later, but not now.")
+    done = env.step("I may bid on Item 0 later, but not now.")
     assert done is False
     assert env.state.game_state["player_bids"][0] == {}
     assert env.state.current_player_id == 1
@@ -189,7 +189,7 @@ def test_all_players_passing_is_a_draw():
     done = False
     for _ in range(3):
         assert done is False
-        done, _ = env.step("no bids from me")
+        done = env.step("no bids from me")
     assert done is True
     assert env.state.game_state["auction_results"]["item_winners"] == {}
     assert env.state.rewards == {0: 0, 1: 0, 2: 0}
@@ -197,11 +197,11 @@ def test_all_players_passing_is_a_draw():
 
 def test_whisper_to_nonexistent_player_is_rejected():
     env = make_env()
-    done, _ = env.step("Whisper 99: hi")
+    done = env.step("Whisper 99: hi")
     assert done is False
     assert env.state.current_player_id == 0  # same player retries
     # a valid action afterwards moves the game along
-    done, _ = env.step("Broadcast: sorry, my mistake")
+    done = env.step("Broadcast: sorry, my mistake")
     assert done is False
     assert env.state.current_player_id == 1
 
@@ -209,7 +209,7 @@ def test_whisper_to_nonexistent_player_is_rejected():
 def test_self_whisper_rejects_entire_mixed_action_atomically():
     env = make_env()
     events_before = len(env.state.events)
-    done, _ = env.step("Broadcast: public; Whisper 0: private")
+    done = env.step("Broadcast: public; Whisper 0: private")
     assert not done
     assert env.state.error_count == 1
     assert env.game_state["conversations_completed"] == 0
@@ -222,13 +222,13 @@ def test_self_whisper_rejects_entire_mixed_action_atomically():
 def test_bid_exceeding_capital_is_rejected():
     env = make_env(seed=42)
     run_conversation_phase(env)
-    done, _ = env.step("Bid Item 0: 5000")
+    done = env.step("Bid Item 0: 5000")
     assert done is False
     assert env.state.current_player_id == 0  # same player retries
     assert env.state.game_state["player_bids"][0] == {}
     assert env.state.game_state["remaining_capital"][0] == 1000
     # a valid bid afterwards is accepted
-    done, _ = env.step("Bid Item 0: 500")
+    done = env.step("Bid Item 0: 500")
     assert done is False
     assert env.state.game_state["player_bids"][0] == {0: 500}
     assert env.state.game_state["remaining_capital"][0] == 1000  # sealed bid is reserved, not paid yet
@@ -238,7 +238,7 @@ def test_bid_exceeding_capital_is_rejected():
 def test_bid_on_nonexistent_item_is_rejected():
     env = make_env(seed=42)
     run_conversation_phase(env)
-    done, _ = env.step("Bid Item 7: 100")
+    done = env.step("Bid Item 7: 100")
     assert done is False
     assert env.state.current_player_id == 0
     assert env.state.game_state["player_bids"][0] == {}
@@ -248,7 +248,7 @@ def test_bid_on_nonexistent_item_is_rejected():
 def test_duplicate_item_bids_are_rejected_atomically():
     env = make_env(conversation_rounds=0, num_items=1, base_item_values=[100])
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("Bid Item 0: 10\nBid Item 0: 20")
+    done = env.step("Bid Item 0: 10\nBid Item 0: 20")
     assert not done
     assert env.game_state == before
     assert env.state.current_player_id == 0
@@ -257,14 +257,14 @@ def test_duplicate_item_bids_are_rejected_atomically():
 def test_pathologically_large_bid_is_invalid_not_an_exception():
     env = make_env(conversation_rounds=0, num_items=1, base_item_values=[100])
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("Bid Item 0: " + "9" * 5000)
+    done = env.step("Bid Item 0: " + "9" * 5000)
     assert not done
     assert env.game_state == before
 
 
 def test_phase_inappropriate_and_mixed_commands_are_rejected():
     env = make_env()
-    done, _ = env.step("Broadcast: hello; Bid Item 0: 10")
+    done = env.step("Broadcast: hello; Bid Item 0: 10")
     assert not done
     assert env.game_state["conversations_completed"] == 0
     assert not any(
@@ -272,7 +272,7 @@ def test_phase_inappropriate_and_mixed_commands_are_rejected():
         for _, message, _, _ in env.state.events
     )
 
-    done, _ = env.step("Broadcast: hello; Whisper 99: secret")
+    done = env.step("Broadcast: hello; Whisper 99: secret")
     assert not done
     assert env.game_state["conversations_completed"] == 1  # second invalid forfeits the phase turn
     assert not any(
@@ -292,7 +292,7 @@ def test_relayed_chat_cannot_impersonate_the_game():
 def test_repeated_invalid_move_forfeits_exactly_one_conversation_turn():
     env = make_env()
     env.step("Whisper 99: bad")
-    done, _ = env.step("Whisper 99: still bad")
+    done = env.step("Whisper 99: still bad")
     assert not done
     assert env.state.current_player_id == 1
     assert env.game_state["conversations_completed"] == 1
@@ -315,7 +315,7 @@ def test_only_winning_bid_is_paid():
     )
     env.step("Bid Item 0: 10")
     env.step("Bid Item 0: 20")
-    done, _ = env.step("no bid")
+    done = env.step("no bid")
     assert done
     assert env.game_state["remaining_capital"] == {0: 100, 1: 80, 2: 100}
     assert env.game_state["auction_results"]["player_spent"] == {1: 20, 0: 0, 2: 0}
@@ -343,7 +343,7 @@ def test_zero_conversation_rounds_and_maximum_player_count_full_game():
     done = False
     for _ in range(15):
         assert not done
-        done, _ = env.step("no bids")
+        done = env.step("no bids")
     assert done
     assert env.state.turn == 15
     assert env.state.rewards == {pid: 0 for pid in range(15)}
@@ -407,7 +407,7 @@ def test_base_item_values_must_be_positive_integers(values):
 def test_padded_messages_are_delivered_intact():
     env = make_env()
     gap = " " * 5000
-    done, _ = env.step(f"Broadcast: hello{gap}all\nWhisper 1: psst{gap}there")
+    done = env.step(f"Broadcast: hello{gap}all\nWhisper 1: psst{gap}there")
     assert not done
     assert env.state.error_count == 0
     p1_messages = [message for _, message, _ in env.state.observations[1]]

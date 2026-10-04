@@ -1,7 +1,7 @@
 # Public Goods Game
 
 Each round, players exchange public messages and then simultaneously decide how many tokens to put into a shared pot
-that is multiplied and split equally; the highest total payoff after all rounds wins
+that is multiplied and split equally; each player is scored on their own total payoff
 ([background](https://en.wikipedia.org/wiki/Public_goods_game)). It tests cooperation, free-riding, and persuasion over
 repeated rounds.
 
@@ -27,7 +27,8 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `PublicGoodsGame-v1
   (0 to `endowment`) to contribute. The amounts are revealed together once everyone has decided.
 - The pot is multiplied by `multiplication_factor` and split equally among the active players. A player's round payoff
   is the tokens they kept plus their share of the pot.
-- Round payoffs add up to a running total. After the last round, the highest total wins.
+- Round payoffs add up to a running total, which each player tries to maximize. There is no winner: every player is
+  scored on their own total (see Rewards).
 
 ## Actions
 
@@ -36,11 +37,13 @@ e.g. `Cooperation pays if everyone joins in. {Let's all contribute 15 tokens thi
 as remaining silent. Every reply is valid during communication.
 
 During the decision turn, reply with just the number of tokens you contribute, e.g. `15`. Anything else, including
-numbers above `endowment`, is invalid.
+numbers above `endowment`, is invalid. The first invalid contribution gets a warning; a second one in a row eliminates
+the player.
 
 ## Observations
 
-Each player first receives the rules, the payoff formula, and a worked example for the actual number of players.
+Each player first receives the rules, the payoff formula, a worked example for the actual number of players, and the
+maximum total payoff used to compute rewards.
 After each communication turn, every player sees what each player said publicly, or that they remained silent. Raw
 replies are never shown to other players. The start of every decision phase and of every new round is announced. After
 each decision turn, everyone sees every contribution, the size of the pot and of each share, and each player's payoff
@@ -48,17 +51,19 @@ and running total. The final scores are announced at the end.
 
 ## Rewards
 
+This is a mixed-motive game: each player gets their own score from `0` to `1`.
+
 | Outcome | Reward |
 | --- | --- |
-| Single highest total payoff | Winner `+1`, everyone else `-1` |
-| Several, but not all, players tie for the highest total | Each tied leader `+1`, everyone else `-1` |
-| All players tie (nobody eliminated) | Everyone `0` |
-| Third consecutive invalid contribution | Offender is eliminated, takes no further part, and receives `-1` at the end |
+| Game completed | Each remaining player gets their total payoff divided by the maximum total payoff (below) |
+| Second consecutive invalid contribution | Offender is eliminated, takes no further part, and receives `0` at the end |
 | Every player eliminated | Everyone `0` |
 
-Only the totals of players who are still in the game are compared, so an eliminated player always gets `-1` (unless
-every player is eliminated). If all remaining players tie after an elimination, they count as tied leaders and each
-gets `+1`.
+The maximum total payoff is the most any one player could earn: `num_rounds × endowment × (1 + (n − 1) ×
+multiplication_factor / n)` for `n` players, which is what a player earns by contributing nothing every round while
+everyone else contributes their whole endowment. When `multiplication_factor` is larger than `n`, contributing pays
+even for oneself, so the maximum is instead `num_rounds × endowment × multiplication_factor` (everyone contributing
+everything). With an `endowment` of 0 nobody can earn anything and every reward is `0`.
 
 ## Parameters
 
@@ -72,7 +77,8 @@ gets `+1`.
 
 ## Notes
 
-- Every active player receives the same share of the pot, so the final ranking depends only on total contributions:
-  among players who were never eliminated, the one who contributed the least overall wins. Contributing therefore
-  never improves a player's reward, even though contributions raise the group's total payoff whenever
-  `multiplication_factor` is above 1.
+- Rewards are absolute rather than rank-based, which keeps the social dilemma: free-riding on others raises a player's
+  own score, but whenever `multiplication_factor` is above 1 everyone scores more when all contribute than when nobody
+  does.
+- A player's share of the pot only counts the players still in the game, so eliminations change the shares of later
+  rounds.

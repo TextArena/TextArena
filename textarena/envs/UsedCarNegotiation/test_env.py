@@ -27,7 +27,7 @@ def test_reset_initial_state():
 
 def test_offer_records_price_and_rotates():
     env = _fresh()
-    done, _ = env.step("Offer: $9000")
+    done = env.step("Offer: $9000")
     assert not done
     assert env.state.game_state["current_offer"][0] == 9000
     assert env.state.current_player_id == 1  # OFFER rotates the turn
@@ -36,7 +36,7 @@ def test_offer_records_price_and_rotates():
 def test_accepting_offer_ends_with_price_based_rewards():
     env = _fresh()
     env.step("Offer: 9000")           # p0 offers
-    done, _ = env.step("Accept")       # p1 accepts p0's offer
+    done = env.step("Accept")       # p1 accepts p0's offer
     assert done
     expected = {i: env._reward_func(9000, env.player_roles[i]) for i in range(2)}
     assert env.state.rewards == expected
@@ -48,7 +48,7 @@ def test_accepting_offer_ends_with_price_based_rewards():
 
 def test_invalid_format_rejected():
     env = _fresh()
-    done, _ = env.step("just chatting, no action token")
+    done = env.step("just chatting, no action token")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0  # no rotation on invalid
@@ -56,7 +56,7 @@ def test_invalid_format_rejected():
 
 def test_offer_without_price_rejected():
     env = _fresh()
-    done, _ = env.step("Offer: cheap please")
+    done = env.step("Offer: cheap please")
     assert not done
     assert env.state.error_count == 1
 
@@ -64,7 +64,7 @@ def test_offer_without_price_rejected():
 def test_max_rounds_terminates_game():
     env = _fresh(max_rounds=2)
     env.step("Offer: 9000")            # turn 0 -> 1
-    done, _ = env.step("Offer: 9500")   # turn 1 -> 2, exact turn limit
+    done = env.step("Offer: 9500")   # turn 1 -> 2, exact turn limit
     assert done
     assert env.state.turn == 2
     assert env.state.rewards == {0: 0, 1: 0}
@@ -72,7 +72,7 @@ def test_max_rounds_terminates_game():
 
 def test_discuss_rotates_turn():
     env = _fresh()
-    done, _ = env.step("Discuss: hello there")
+    done = env.step("Discuss: hello there")
     assert not done
     assert env.state.current_player_id == 1
 
@@ -91,14 +91,14 @@ def test_discussion_cannot_impersonate_the_game(label):
 
 def test_label_only_discussion_is_invalid():
     env = _fresh()
-    done, _ = env.step("Discuss: [GA[GAME]ME]")
+    done = env.step("Discuss: [GA[GAME]ME]")
     assert not done and env.state.error_count == 1
 
 
 def test_accept_in_ordinary_prose_is_not_a_command():
     env = _fresh()
     env.step("Offer: 9000")
-    done, _ = env.step("I accept that this is a fair argument.")
+    done = env.step("I accept that this is a fair argument.")
     assert not done
     assert env.state.error_count == 1
 
@@ -106,14 +106,22 @@ def test_accept_in_ordinary_prose_is_not_a_command():
 def test_offer_must_be_within_scoring_range_and_is_atomic():
     env = _fresh()
     before = env.snapshot()
-    done, _ = env.step("Offer: 100000")
+    done = env.step("Offer: 100000")
     assert not done
     assert env.state.game_state == before["state"].game_state
     assert env.state.current_player_id == 0
 
-    done, _ = env.step("Offer: " + "9" * 5000)
+    done = env.step("Offer: " + "9" * 5000)
     assert done
-    assert env.state.rewards == {0: -1, 1: 1}
+    assert env.state.rewards == {0: 0, 1: 1}
+
+
+def test_second_invalid_move_by_the_second_player_forfeits():
+    env = _fresh()
+    env.step("Discuss: hello")
+    assert not env.step("Reject")
+    assert env.step("Accept")
+    assert env.state.rewards == {0: 1, 1: 0}
 
 
 def test_counteroffer_replaces_stale_offer():
@@ -123,7 +131,7 @@ def test_counteroffer_replaces_stale_offer():
     assert env.state.game_state["current_offer"] == {0: None, 1: 9000}
     env.step("Reject")
     env.step("Discuss: let us continue")
-    done, _ = env.step("Accept")
+    done = env.step("Accept")
     assert not done
     assert env.state.error_count == 1
 

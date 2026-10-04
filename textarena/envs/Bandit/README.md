@@ -44,9 +44,9 @@ name also gets the list of valid buttons.
 
 | Outcome | Reward |
 | --- | --- |
-| Final answer is the best button | `+1` |
-| Final answer is another button | Minus the gap between the best mean and the chosen button's mean, from `-p_gap` down to `-(0.4 + p_gap / 2)` |
-| Second consecutive rejected reply | `-1` |
+| Final answer is the best button | `1` |
+| Final answer is another button | `0` |
+| Second consecutive rejected reply | `0` |
 
 The final answer always ends the game, so there is no separate turn-limit outcome.
 

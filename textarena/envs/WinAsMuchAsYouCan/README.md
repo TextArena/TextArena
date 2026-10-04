@@ -37,8 +37,8 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `WinAsMuchAsYouCan-
 - In every act phase, players choose in order from Player 0 to Player 3, and no choice is revealed until all four are
   in.
 - After round 10, the player or players with the highest total score win.
-- Every invalid move is reported to its author. After `error_allowance + 1` consecutive invalid moves (four by
-  default), the player's pending decision is made for them and play moves on. In a talk phase they `Pass`, and in an
+- Every invalid move is reported to its author. The first one only earns a warning and a retry; after a second
+  invalid move in a row, the player's pending decision is made for them and play moves on. In a talk phase they `Pass`, and in an
   act phase they `Choose Y`. Only the offender is told that a default was applied, so a forced act-phase choice stays
   secret until the round is scored. `Choose Y` is the default because `Choose X` always scores more for the chooser,
   so the default never beats the offender's best valid move.
@@ -79,7 +79,7 @@ player has made their choice. All four choices and the resulting points are anno
 | --- | --- |
 | Highest total score after round 10 | `+1` for every player tied for the top score, even if it is negative |
 | Any lower total score | `-1` |
-| Repeated invalid moves | The default `Pass` or `Choose Y` is applied and the game continues, but that player can no longer win: they get `-1` at the end |
+| Second consecutive invalid move | The default `Pass` or `Choose Y` is applied and the game continues, but that player can no longer win: they get `-1` at the end |
 
 If everyone chooses Y in every round, all four players tie and each gets `+1`: cooperation is a shared victory. A
 player whose move ever had to be forced is excluded from the win and gets `-1` (their game info has `invalid_move`
@@ -88,15 +88,15 @@ set); the top score is decided among the remaining players, and if every player 
 ## Parameters
 
 <!-- BEGIN GENERATED: parameters -->
-- `error_allowance` (default `3`): The number of consecutive invalid moves that only receive a warning. The next one also gets feedback, sets `invalid_move` in the player's game info, and applies the default decision. The count then starts over. Accepts an integer of at least 0.
+This game has no parameters.
 <!-- END GENERATED: parameters -->
 
 ## Notes
 
 - Every game ends. Each decision, valid or forced, advances the fixed structure. A game has 40 act-phase choices, and
   each of the three talk phases has at most 40 talk actions, so a game takes at most 160 decisions. Each decision
-  takes at most `error_allowance + 1` steps. A game where every move is invalid ends after
-  52 × (`error_allowance` + 1) steps (208 by default). There is no separate turn limit, because the engine's turn
+  takes at most two steps. A game where every move is invalid ends after 104 steps (52 forced decisions: 40 choices
+  and four passes in each talk phase). There is no separate turn limit, because the engine's turn
   limit counts only valid turns, and the round structure already caps those at 160.
 - Credit: Pi Beta Phi, *Win as Much as You Can*
   ([exercise PDF](https://www.pibetaphi.org/Admin/PiBetaPhi/media/About-Us/Programs/Collegiate-Leading-With-Values/Win-as-Much-as-You-Can.pdf)).

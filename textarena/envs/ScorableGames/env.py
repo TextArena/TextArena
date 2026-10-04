@@ -72,7 +72,6 @@ class ScorableGamesEnv(ta.GameEnv):
                   "for them.", check=lambda vote: vote.strip().title() in {"Accept", "Reject"},
         rule="'Accept' or 'Reject' (in any case)",
     )
-    error_allowance = ta.Param(3, "The consecutive invalid moves that only produce a warning.", min=0)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -816,7 +815,6 @@ SCORING:
                 f"Deal accepted: {len(winners)} of {self.state.num_players} parties "
                 f"met their minimum acceptable score ({names})"
             )
-            self.state.step_info["winner_reason"] = reason
         else:
             reason = "Deal accepted, but no party met its minimum acceptable score"
         for pid in range(self.state.num_players):
@@ -872,7 +870,6 @@ SCORING:
         for pid in range(self.state.num_players):
             self.state.game_info[pid]["winner"] = False
         reason = "No agreement reached - players received minimum acceptable scores (draw)"
-        self.state.step_info["draw_reason"] = reason
 
         self.game_state["terminal_result"] = {
             "deal_accepted": False,

@@ -22,7 +22,7 @@ def _fresh(numbers=None, target=6):
 
 def test_exact_target_wins():
     env = _fresh(numbers=[2, 3], target=6)
-    done, _ = env.step("0 1 *")  # 2 * 3 = 6
+    done = env.step("0 1 *")  # 2 * 3 = 6
     assert done and env.state.rewards == {0: 1.0}
     assert env.state.turn == 1
     assert env.state.game_info[0]["turn_count"] == 1
@@ -30,32 +30,32 @@ def test_exact_target_wins():
 
 def test_valid_move_reduces_number_pool():
     env = _fresh(numbers=[10, 4, 2], target=999)
-    done, _ = env.step("0 1 +")  # 10 + 4 = 14, pool shrinks 3 -> 2
+    done = env.step("0 1 +")  # 10 + 4 = 14, pool shrinks 3 -> 2
     assert not done and len(env.game_state["numbers"]) == 2
 
 
 def test_invalid_format_increments_error_count():
     env = _fresh()
-    done, _ = env.step("0 1")  # missing operator
+    done = env.step("0 1")  # missing operator
     assert not done and env.state.error_count == 1
 
 
 def test_illegal_same_index_rejected():
     env = _fresh()
-    done, _ = env.step("0 0 +")  # indices must differ
+    done = env.step("0 0 +")  # indices must differ
     assert not done and env.state.error_count == 1
 
 
 def test_non_integer_division_rejected():
     env = _fresh(numbers=[2, 3], target=6)
-    done, _ = env.step("1 0 /")  # 3 / 2 is not an integer
+    done = env.step("1 0 /")  # 3 / 2 is not an integer
     assert not done and env.state.error_count == 1
 
 
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     env.step("garbage")
-    done, _ = env.step("0 0 +")  # second consecutive invalid
+    done = env.step("0 0 +")  # second consecutive invalid
     assert done and env.state.game_info[0]["invalid_move"] is True
 
 
@@ -63,7 +63,7 @@ def test_two_consecutive_invalid_moves_end_game():
 def test_unmatched_brackets_are_rejected_atomically(action):
     env = _fresh(numbers=[2, 3, 4], target=99)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.turn == 0
     assert env.game_state == before
@@ -72,7 +72,7 @@ def test_unmatched_brackets_are_rejected_atomically(action):
 def test_parser_rejects_trailing_text_atomically():
     env = _fresh(numbers=[2, 3, 4], target=99)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("0 1 + please")
+    done = env.step("0 1 + please")
     assert not done
     assert env.state.turn == 0
     assert env.game_state == before
@@ -82,7 +82,7 @@ def test_division_by_generated_zero_is_rejected_atomically():
     env = _fresh(numbers=[2, 2, 1], target=99)
     env.step("0 1 -")
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("0 1 /")
+    done = env.step("0 1 /")
     assert not done
     assert env.game_state == before
     assert env.state.turn == 1
@@ -91,18 +91,18 @@ def test_division_by_generated_zero_is_rejected_atomically():
 def test_non_text_action_and_oversized_result_are_rejected_atomically():
     env = _fresh(numbers=[1_000_000, 1], target=5)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step(None)
+    done = env.step(None)
     assert not done
     assert env.game_state == before
     env.reset(num_players=1, seed=42)
-    done, _ = env.step("0 1 +")
+    done = env.step("0 1 +")
     assert not done
     assert env.game_state == before
 
 
 def test_exhausting_numbers_uses_best_historical_value():
     env = _fresh(numbers=[10, 4], target=20)
-    done, _ = env.step("0 1 +")
+    done = env.step("0 1 +")
     assert done
     assert env.game_state["best_value"] == 14
     assert env.state.rewards == {0: pytest.approx((10 - 6) / 10)}  # 10 was 10 away, 14 is 6 away
@@ -114,7 +114,7 @@ def test_immediate_invalid_policy_scores_zero_on_registered_configs(env_id, seed
     env = ta.make(env_id)
     env.reset(num_players=1, seed=seed)
     for _ in range(5):
-        done, _ = env.step("@@@ not a move @@@")
+        done = env.step("@@@ not a move @@@")
         if done:
             break
     assert done
@@ -126,7 +126,7 @@ def test_immediate_invalid_policy_scores_zero_on_random_draws(seed):
     env = CountdownEnv()
     env.reset(num_players=1, seed=seed)
     env.step("garbage")
-    done, _ = env.step("garbage")
+    done = env.step("garbage")
     assert done and env.state.rewards == {0: 0}
 
 
@@ -137,7 +137,7 @@ def test_partial_progress_is_measured_from_the_closest_starting_number():
     env.step("0 2 *")  # 100 * 6 = 600, 68 away
     env.step("4 0 -")  # 600 - 75 = 525, 7 away
     env.step("garbage")
-    done, _ = env.step("garbage")
+    done = env.step("garbage")
     assert done
     # 100 is the closest starting number, 432 away from 532.
     assert env.state.rewards == {0: pytest.approx((432 - 7) / 432)}
@@ -148,7 +148,7 @@ def test_values_no_closer_than_the_starting_numbers_score_zero():
     env = CountdownEnv(**REGISTERED_KWARGS, max_turns=2)
     env.reset(num_players=1, seed=0)
     env.step("4 5 +")  # 3 + 2 = 5
-    done, _ = env.step("0 1 -")  # 100 - 75 = 25
+    done = env.step("0 1 -")  # 100 - 75 = 25
     assert done and "Turn limit" in env.state.game_info[0]["reason"]
     assert env.state.rewards == {0: 0}
 
@@ -157,14 +157,14 @@ def test_registered_puzzle_solved_still_scores_one():
     env = ta.make("Countdown-v1")
     env.reset(num_players=1, seed=0)
     for action in ["0 1 +", "0 3 /", "0 1 +", "0 1 *", "0 1 +"]:  # 175, 3, 7, 525, 532
-        done, _ = env.step(action)
+        done = env.step(action)
     assert done and env.close()[0] == {0: 1.0}
 
 
 def test_turn_limit_records_only_completed_valid_turns():
     env = CountdownEnv(numbers=[2, 3, 4], target=99, max_turns=1)
     env.reset(num_players=1, seed=42)
-    done, _ = env.step("0 1 +")
+    done = env.step("0 1 +")
     assert done
     assert env.state.turn == 1
     assert env.state.game_info[0]["turn_count"] == 1
@@ -190,7 +190,7 @@ def test_reset_snapshot_and_render_are_fresh_and_pure():
 
 def _invalid_reason(env, action):
     before = len(env.state.events)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     reasons = [message for _, message, _, _ in env.state.events[before:] if "attempted an invalid move" in message]
     assert len(reasons) == 1
@@ -230,7 +230,7 @@ def test_prompt_states_target_and_limit_and_its_example_is_legal():
     prompt = env.prompt(0)
     assert "target 7" in prompt and "after 5 moves" in prompt and "'0 1 +'" in prompt
     assert "fraction of the starting gap you closed" in prompt
-    done, _ = env.step("0 1 +")
+    done = env.step("0 1 +")
     assert done and env.state.error_count == 0 and env.game_state["numbers"] == [5]
 
 

@@ -21,18 +21,21 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `SpiteAndMalice-v1-
   are wild.
 - Each player has a 20-card payoff pile with only its top card face up, a hand of 5 cards, and four personal discard
   piles that start empty. There are four shared center piles. The remaining cards form the draw pile.
-- Player 0 goes first. Every turn starts with a draw, which refills your hand to 5 cards while the draw pile lasts.
+- The player whose payoff pile shows the higher card goes first (Aces low, Kings high); on equal cards Player 0 goes
+  first. Every turn starts with a draw, which refills your hand to 5 cards.
 - You may then play any number of cards onto the center piles, taken from your hand, the top of your payoff pile, or
   the top of any of your discard piles. An empty center pile must be started with an Ace; after that each card must
   be exactly one rank higher than the pile's top card, regardless of suit. A King can be played anywhere and counts as
-  the rank it replaces. A pile that reaches the Queen (11 cards) is cleared.
-- If you play every card in your hand, you immediately draw 5 more (while the draw pile lasts) and keep playing.
+  the rank it replaces. A pile that reaches the Queen (11 cards) is cleared and its cards are set aside.
+- Whenever a draw needs a card and the draw pile is empty, the cleared cards set aside so far are shuffled to form a
+  new draw pile, and the draw continues.
+- If you play every card in your hand, you immediately draw 5 more and keep playing.
 - You end your turn by moving one card from your hand onto one of your discard piles. If your hand is empty and you
   have no legal play, your turn ends automatically.
 - The first player to empty their payoff pile wins.
-- **Deadlock:** when the draw pile is empty, both hands are empty and neither player can play from their payoff or
-  discard piles, the player with fewer payoff cards left wins; equal counts are a draw. Because cleared center piles
-  are not reused, the draw pile only shrinks, so every game ends; there is no turn limit.
+- **Deadlock:** when no card is left to draw (the draw pile is empty and no cleared cards are waiting), both hands are
+  empty and neither player can play from their payoff or discard piles, nobody can ever move again. The player with
+  fewer payoff cards left then wins; equal counts are a draw. There is no turn limit.
 
 ## Actions
 
@@ -54,10 +57,10 @@ the reply counts as one invalid move. A turn may also be spread over several rep
 
 ## Observations
 
-Each player first receives the rules. Before every reply the acting player sees the size of the draw pile, the center
-piles, both players' payoff tops, payoff sizes and discard piles, their own hand (only the size of the opponent's),
-and a list of their available moves. Both players are told about every play, discard and refill; the opponent's
-draws are announced without revealing the cards.
+Each player first receives the rules and who goes first. Before every reply the acting player sees the size of the
+draw pile, the number of cleared cards waiting to be shuffled into it, the center piles, both players' payoff tops, payoff sizes and discard piles, their own hand (only the size of the opponent's),
+and a list of their available moves. Both players are told about every play, discard, refill and reshuffle; the
+opponent's draws are announced without revealing the cards.
 
 ## Rewards
 
@@ -70,7 +73,8 @@ draws are announced without revealing the cards.
 
 ## Notes
 
-- Differences from the standard game: cleared center piles are set aside instead of being shuffled back into the
-  draw pile, so long games often end by deadlock; Player 0 always starts (normally the higher payoff card starts);
-  there are four center piles (Pagat allows three); and no card ever has to be played (some groups force Aces to be
-  played at once).
+- Differences from the standard game: there are four center piles (Pagat allows three); no card ever has to be
+  played (some groups force Aces to be played at once); cleared piles wait until the draw pile runs out before they
+  are shuffled into it (Pagat shuffles each one in as soon as it is completed); on equal payoff top cards Player 0
+  starts (Pagat reshuffles the payoff piles); and a game in which nobody can move is decided by the payoff cards
+  left, as in Pagat's "Resolving Stalemates" variant (the standard game is a draw once the stock runs out).

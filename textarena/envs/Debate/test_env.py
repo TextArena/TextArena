@@ -52,7 +52,7 @@ def test_affirmative_side_wins_when_it_gains_support():
     aff_pid = next(pid for pid, side in env.state.game_state["sides"].items() if side == "Affirmative")
     done = False
     for _ in range(env.max_turns):
-        done, _ = env.step("Here is my argument.")
+        done = env.step("Here is my argument.")
     assert done and env.state.rewards == {aff_pid: 1, 1 - aff_pid: -1}
     assert env.state.turn == env.max_turns
     assert sum(info["turn_count"] for info in env.state.game_info.values()) == env.max_turns
@@ -62,7 +62,7 @@ def test_equal_support_gain_is_a_draw():
     env = _fresh(_TieJury)
     done = False
     for _ in range(env.max_turns):
-        done, _ = env.step("Here is my argument.")
+        done = env.step("Here is my argument.")
     assert done and env.state.rewards == {0: 0, 1: 0}
 
 
@@ -72,7 +72,7 @@ def test_negative_side_wins_when_it_gains_support():
         pid for pid, side in env.game_state["sides"].items() if side == "Negative"
     )
     for _ in range(env.max_turns):
-        done, _ = env.step("Argument.")
+        done = env.step("Argument.")
     assert done
     assert env.state.rewards == {negative_pid: 1, 1 - negative_pid: -1}
 
@@ -105,7 +105,7 @@ def test_empty_argument_is_invalid_without_constructing_jury():
     env = DebateEnv(jury_class=Jury)
     env.reset(num_players=2, seed=42)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step(" \n ")
+    done = env.step(" \n ")
     assert not done
     assert env.state.error_count == 1
     assert env.state.turn == 0
@@ -135,7 +135,7 @@ def test_pre_vote_failure_is_retryable_and_atomic():
     env = DebateEnv(jury_class=_FailingPreJury)
     env.reset(num_players=2, seed=42)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("First argument")
+    done = env.step("First argument")
     assert not done
     assert env.state.turn == 0
     assert env.state.error_count == 0
@@ -148,7 +148,7 @@ def test_post_vote_failure_does_not_commit_final_argument():
     env.reset(num_players=2, seed=42)
     env.step("First argument")
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("Final argument")
+    done = env.step("Final argument")
     assert not done
     assert env.state.current_player_id == 1
     assert env.state.turn == 1
@@ -191,7 +191,7 @@ def test_oversized_argument_is_rejected_before_jury_construction():
     env = DebateEnv(jury_class=Jury)
     env.reset(num_players=2, seed=42)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("x" * (env.max_argument_chars + 1))
+    done = env.step("x" * (env.max_argument_chars + 1))
     assert not done
     assert env.game_state == before
     assert constructions == []
@@ -287,7 +287,7 @@ def test_label_only_argument_is_invalid_without_constructing_jury():
 
     env = DebateEnv(jury_class=Jury)
     env.reset(num_players=2, seed=42)
-    done, _ = env.step("[GA[GAME]ME]")
+    done = env.step("[GA[GAME]ME]")
     assert not done and env.state.error_count == 1
     assert constructions == []
 

@@ -73,10 +73,6 @@ class TabooEnv(ta.GameEnv):
         super().__init__(**kwargs)
         self.categories = [self.categories] if isinstance(self.categories, str) else list(self.categories)
 
-    @property
-    def terminal_render_keys(self):
-        return ["word_to_guess", "taboo_words"]
-
     @staticmethod
     def _clean_text(value: str) -> str:
         """Normalize configured text while preserving its display casing."""

@@ -28,21 +28,21 @@ def test_reset_state():
 
 def test_invalid_format():
     env = _fresh()
-    done, _ = env.step("hello")
+    done = env.step("hello")
     assert done is False
     assert env.state.error_count == 1
 
 
 def test_bid_more_than_coins_rejected():
     env = _fresh()
-    done, _ = env.step("bid 101")  # only 100 coins
+    done = env.step("bid 101")  # only 100 coins
     assert done is False
     assert env.state.error_count == 1
 
 
 def test_pass_moves_to_opponent():
     env = _fresh()
-    done, _ = env.step("pass")  # P0 passes, opponent hasn't acted
+    done = env.step("pass")  # P0 passes, opponent hasn't acted
     assert done is False
     assert env.state.current_player_id == 1
     assert env.round_number == 0  # still same letter
@@ -50,7 +50,7 @@ def test_pass_moves_to_opponent():
 
 def test_valid_bid_sets_amount_and_rotates():
     env = _fresh()
-    done, _ = env.step("bid 5")
+    done = env.step("bid 5")
     assert done is False
     assert env.bid_amount == 5
     assert env.state.current_player_id == 1
@@ -60,7 +60,7 @@ def test_bid_then_win_when_opponent_passes():
     env = _fresh()
     letter = env.round_letter
     env.step("bid 5")             # P0 bids 5
-    done, _ = env.step("pass")     # P1 passes -> P0 wins the letter
+    done = env.step("pass")     # P1 passes -> P0 wins the letter
     assert done is False
     assert letter in env.player_states[0]["letters"]
     assert env.player_states[0]["coins"] == 95
@@ -76,10 +76,10 @@ def test_all_pass_then_invalid_words_terminal():
         guard += 1
     assert env.round_number == len(env.letters)
     offender = env.state.current_player_id
-    done, _ = env.step("zzzzq")   # invalid word #1
+    done = env.step("zzzzq")   # invalid word #1
     assert done is False
     assert env.state.error_count == 1
-    done, _ = env.step("zzzzq")   # invalid word #2 -> offender forfeits
+    done = env.step("zzzzq")   # invalid word #2 -> offender forfeits
     assert done is True
     assert env.state.rewards == {offender: -1, 1 - offender: 1}
 
@@ -87,7 +87,7 @@ def test_all_pass_then_invalid_words_terminal():
 def test_zero_bid_is_invalid_and_does_not_mutate_auction():
     env = _fresh()
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("bid 0")
+    done = env.step("bid 0")
     assert not done
     assert env.game_state == before
     assert env.state.current_player_id == 0
@@ -96,7 +96,7 @@ def test_zero_bid_is_invalid_and_does_not_mutate_auction():
 def test_pathologically_large_bid_is_invalid_not_an_exception():
     env = _fresh()
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("bid " + "9" * 5000)
+    done = env.step("bid " + "9" * 5000)
     assert not done
     assert env.game_state == before
 
@@ -108,7 +108,7 @@ def test_word_requires_the_owned_letter_multiplicity():
     gs["player_states"][0]["letters"] = ["A", "D"]
     gs["player_states"][0]["letter_values"] = [3, 5]
     before = copy.deepcopy(gs["player_states"][0])
-    done, _ = env.step("add")
+    done = env.step("add")
     assert not done
     assert env.state.error_count == 1
     assert gs["player_states"][0] == before
@@ -122,7 +122,7 @@ def test_words_outside_the_dictionary_are_rejected():
     gs["player_states"][0]["letter_values"] = [3, 5]
     env.step("da")
     assert env.state.error_count == 1 and gs["player_states"][0]["word"] is None
-    done, _ = env.step("ad")
+    done = env.step("ad")
     assert not done and env.state.error_count == 0
     assert gs["player_states"][0]["word"] == "AD" and gs["player_states"][0]["word_value"] == 8
 
@@ -146,9 +146,9 @@ def test_complete_valid_game_reaches_scored_draw():
     assert env.player_states[0]["letters"] == ["A"]
     assert env.player_states[1]["letters"] == ["I"]
     words = {0: "a", 1: "i"}
-    done, _ = env.step(words[env.state.current_player_id])
+    done = env.step(words[env.state.current_player_id])
     assert not done
-    done, _ = env.step(words[env.state.current_player_id])
+    done = env.step(words[env.state.current_player_id])
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
     assert env.state.turn == 54
@@ -157,7 +157,7 @@ def test_complete_valid_game_reaches_scored_draw():
 
 def test_mixed_auction_command_is_rejected():
     env = _fresh()
-    done, _ = env.step("bid 2\npass")
+    done = env.step("bid 2\npass")
     assert not done
     assert env.state.error_count == 1
     assert env.round_number == 0
@@ -188,7 +188,7 @@ def test_max_turns_ends_an_unfinished_game_as_a_draw():
         env.step("pass")
     assert env.state.turn == MIN_COMPLETE_GAME_TURNS - 1
 
-    done, _ = env.step("pass")  # first word submission is the last allowed turn
+    done = env.step("pass")  # first word submission is the last allowed turn
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
     assert "turn limit" in env.state.game_info[0]["reason"]
@@ -200,7 +200,7 @@ def test_game_finishing_on_the_last_allowed_turn_keeps_its_result():
     _auction(env, {"A": (0, 2), "I": (1, 1)})
     words = {0: "a", 1: "i"}
     env.step(words[env.state.current_player_id])
-    done, _ = env.step(words[env.state.current_player_id])
+    done = env.step(words[env.state.current_player_id])
     assert done
     assert env.state.turn == MIN_COMPLETE_GAME_TURNS
     assert env.state.rewards == {0: 1, 1: -1}
@@ -210,12 +210,12 @@ def test_passing_in_the_word_phase_submits_no_word():
     env = _fresh()
     _auction(env, {})
     first = env.state.current_player_id
-    done, _ = env.step("pass")
+    done = env.step("pass")
     assert not done
     assert env.state.error_count == 0
     assert env.player_states[first]["word"] == ""
     assert env.player_states[first]["word_value"] == 0
-    done, _ = env.step("PASS")
+    done = env.step("PASS")
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
 
@@ -225,7 +225,7 @@ def test_any_word_beats_submitting_no_word():
     _auction(env, {"A": (1, 1)})
     moves = {0: "pass", 1: "a"}
     env.step(moves[env.state.current_player_id])
-    done, _ = env.step(moves[env.state.current_player_id])
+    done = env.step(moves[env.state.current_player_id])
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 

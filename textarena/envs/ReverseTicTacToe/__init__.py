@@ -1,3 +1,3 @@
-from textarena.envs.registration import register_with_versions
+from textarena.envs.registration import register
 
-register_with_versions(id="ReverseTicTacToe-v1", entry_point="textarena.envs.ReverseTicTacToe.env:ReverseTicTacToeEnv")
+register(id="ReverseTicTacToe-v1", entry_point="textarena.envs.ReverseTicTacToe.env:ReverseTicTacToeEnv")

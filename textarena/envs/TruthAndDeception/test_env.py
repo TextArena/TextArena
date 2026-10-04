@@ -46,9 +46,9 @@ def test_reset_roles_and_single_correct_fact():
 def test_guesser_correct_guess_wins():
     env = _fresh()
     token = _correct_token(env)
-    done, _ = env.step("here is my deceptive message")  # deceiver turn
+    done = env.step("here is my deceptive message")  # deceiver turn
     assert not done and env.state.current_player_id == 1
-    done, _ = env.step(token)  # guesser guesses correctly
+    done = env.step(token)  # guesser guesses correctly
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -57,7 +57,7 @@ def test_guesser_wrong_guess_loses():
     env = _fresh()
     token = _wrong_token(env)
     env.step("trust me on this one")  # deceiver turn
-    done, _ = env.step(token)         # guesser guesses wrongly
+    done = env.step(token)         # guesser guesses wrongly
     assert done
     # Deceiver (player 0) wins.
     assert env.state.rewards == {0: 1, 1: -1}
@@ -66,7 +66,7 @@ def test_guesser_wrong_guess_loses():
 def test_guess_without_valid_token_is_invalid():
     env = _fresh()
     env.step("deceiver message")   # deceiver turn
-    done, _ = env.step("I think Fact 1 is correct")  # not an exact guess command
+    done = env.step("I think Fact 1 is correct")  # not an exact guess command
     assert not done
     assert env.state.error_count == 1
 
@@ -81,9 +81,9 @@ def test_default_configuration_is_playable():
     env = TruthAndDeceptionEnv()
     env.reset(num_players=2, seed=1)
     for _ in range(env.max_turns - 1):
-        done, _ = env.step("conversation")
+        done = env.step("conversation")
         assert not done
-    done, _ = env.step(_correct_token(env))
+    done = env.step(_correct_token(env))
     assert done and env.state.rewards == {0: -1, 1: 1}
 
 
@@ -107,11 +107,11 @@ def test_only_deceiver_receives_correctness_markers():
 def test_guess_tokens_are_conversation_until_final_turn():
     env = _fresh(max_turns=4)
     env.step("opening")
-    done, _ = env.step(_correct_token(env))
+    done = env.step(_correct_token(env))
     assert not done
     assert env.state.current_player_id == 0
     env.step("closing argument")
-    done, _ = env.step(_correct_token(env))
+    done = env.step(_correct_token(env))
     assert done
 
 
@@ -119,7 +119,7 @@ def test_case_insensitive_guess_is_accepted():
     env = _fresh()
     env.step("message")
     token = "fact 1" if env.state.game_state["fact1"]["is_correct"] else "FACT 2"
-    done, _ = env.step(token)
+    done = env.step(token)
     assert done and env.state.rewards[1] == 1
 
 
@@ -128,7 +128,7 @@ def test_unicode_compatibility_guess_is_normalized(fact1_token, fact2_token):
     env = _fresh()
     env.step("message")
     token = fact1_token if env.state.game_state["fact1"]["is_correct"] else fact2_token
-    done, _ = env.step(token)
+    done = env.step(token)
     assert done and env.state.rewards[1] == 1
 
 

@@ -40,9 +40,6 @@ class SokobanEnv(ta.GameEnv):
     def room_fixed(self) -> List[List[int]]: return self.game_state["room_fixed"]
 
     @property
-    def box_mapping(self) -> Dict: return self.game_state["box_mapping"]
-
-    @property
     def player_position(self) -> Tuple[int, int]: return self.game_state["player_position"]
 
     @player_position.setter
@@ -104,10 +101,6 @@ class SokobanEnv(ta.GameEnv):
         return board_str
 
     def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
-        if len(move) > self.max_action_chars:
-            return self.invalid(
-                f"Action is too long (maximum {self.max_action_chars} characters)."
-            )
         # Accept both full and alias directions (e.g., up, w)
         matches = re.fullmatch(
             r"(up|down|left|right|w|a|s|d)",
@@ -122,8 +115,6 @@ class SokobanEnv(ta.GameEnv):
         alias_to_action = {'w': 'up', 'a': 'left', 's': 'down', 'd': 'right'}
         action = alias_to_action.get(raw_action, raw_action)
 
-        if action not in self.action_space:
-            return self.invalid("The submitted move is not a valid action.")
         collision = self._collision_reason(action)
         if collision is not None:
             return self.invalid(collision)
@@ -208,9 +199,6 @@ class SokobanEnv(ta.GameEnv):
         can_push_box = self.room_state[new_position[0]][new_position[1]] in [3, 4]
         can_push_box &= self.room_state[new_box_position[0]][new_box_position[1]] in [1, 2]
         if can_push_box:
-            self.new_box_position = new_box_position
-            self.old_box_position = new_position
-
             # Move Player
             self.player_position = new_position
             self.room_state[new_position[0]][new_position[1]] = 5

@@ -5,7 +5,7 @@ Provides LLM-optimized display functions for game state, product data,
 and final results. All displays are minimal and structured for easy parsing.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Optional
 
 
 def render_product_data_for_brand(products: Dict, 
@@ -195,8 +195,8 @@ def render_final_results(simulation_results: Dict,
     
     # Outcomes
     lines.append(f"\nOUTCOMES:")
-    brand_status = "WON" if brand_won else "LOST"
-    vendor_status = "WON" if vendor_won else "LOST"
+    brand_status = "TARGET MET, score 1" if brand_won else "TARGET MISSED, score 0"
+    vendor_status = "TARGET MET, score 1" if vendor_won else "TARGET MISSED, score 0"
     lines.append(
         f"Brand Specialist: {brand_status} "
         f"(Target: ${brand_target:.0f}, Achieved: ${total_sales:.0f})"
@@ -213,6 +213,6 @@ def render_no_deal(brand_target: float, vendor_target: float) -> str:
     """Render result when no deal was reached."""
     lines = ["NO DEAL REACHED\n"]
     lines.append("OUTCOMES:")
-    lines.append(f"Brand Specialist: LOST (Target: ${brand_target:.0f}, Achieved: $0)")
-    lines.append(f"Vendor: LOST (Target: ${vendor_target:.0f}, Achieved: $0)")
+    lines.append(f"Brand Specialist: NO DEAL, score 0 (Target: ${brand_target:.0f}, Achieved: $0)")
+    lines.append(f"Vendor: NO DEAL, score 0 (Target: ${vendor_target:.0f}, Achieved: $0)")
     return "\n".join(lines)

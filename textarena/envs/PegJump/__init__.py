@@ -1,3 +1,3 @@
-from textarena.envs.registration import register_with_versions
+from textarena.envs.registration import register
 
-register_with_versions(id="PegJump-v1", entry_point="textarena.envs.PegJump.env:PegJumpEnv", initial_empty=5)
+register(id="PegJump-v1", entry_point="textarena.envs.PegJump.env:PegJumpEnv", initial_empty=5)

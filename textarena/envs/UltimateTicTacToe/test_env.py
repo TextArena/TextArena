@@ -43,7 +43,7 @@ def test_reset_initial_state():
 def test_scripted_replay_terminates_in_draw():
     env = _fresh()
     for i, action in enumerate(PREDEFINED_ACTIONS):
-        done, _ = env.step(action)
+        done = env.step(action)
         if i < len(PREDEFINED_ACTIONS) - 1:
             assert not done, f"Game ended early at move {i}"
     # This particular 66-move replay fills every micro board without a macro
@@ -54,7 +54,7 @@ def test_scripted_replay_terminates_in_draw():
 
 def test_invalid_format_rejected():
     env = _fresh()
-    done, _ = env.step("no move here")
+    done = env.step("no move here")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -76,7 +76,7 @@ def test_must_play_in_forced_micro_board():
     env = _fresh()
     env.step("0 0")            # p0 plays macro 0, micro 0 -> forces board 0
     assert env.state.game_state["next_micro_board"] == 0
-    done, _ = env.step("1 0")  # p1 tries a different macro board
+    done = env.step("1 0")  # p1 tries a different macro board
     assert not done
     assert env.state.error_count == 1
 
@@ -84,14 +84,14 @@ def test_must_play_in_forced_micro_board():
 def test_occupied_cell_rejected():
     env = _fresh()
     env.step("0 0")            # p0 occupies macro 0 / micro 0
-    done, _ = env.step("0 0")  # p1 forced into board 0, but cell is occupied
+    done = env.step("0 0")  # p1 forced into board 0, but cell is occupied
     assert not done
     assert env.state.error_count == 1
 
 
 def test_first_move_sets_next_board():
     env = _fresh()
-    done, _ = env.step("4 4")  # center board, center square -> forces board 4
+    done = env.step("4 4")  # center board, center square -> forces board 4
     assert not done
     assert env.state.game_state["next_micro_board"] == 4
     assert env.state.current_player_id == 1
@@ -103,7 +103,7 @@ def test_won_micro_board_preserves_played_cells():
     board = env.state.game_state["board"][0]
     board[0] = ["X", "X", " "]
     board[1][0] = "O"
-    done, _ = env.step("0 2")
+    done = env.step("0 2")
     assert not done
     assert env.state.game_state["macro_board"][0][0] == "X"
     assert board[1][0] == "O"  # closing a board must not overwrite its history
@@ -119,7 +119,7 @@ def test_drawn_micro_board_is_closed_and_releases_forced_board():
         ["O", "X", "O"],
     ]
     env.state.game_state["next_micro_board"] = 0
-    done, _ = env.step("0 0")
+    done = env.step("0 0")
     assert not done
     assert env.state.game_state["macro_board"][0][0] == "D"
     assert env.state.game_state["next_micro_board"] is None
@@ -130,7 +130,7 @@ def test_closed_micro_board_rejection_is_atomic():
     env = _fresh()
     env.state.game_state["macro_board"][0][0] = "D"
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step("0 0")
+    done = env.step("0 0")
     assert not done
     assert env.state.game_state == before
 
@@ -147,14 +147,14 @@ def test_macro_win_completes_short_staged_game():
     gs = env.state.game_state
     gs["macro_board"][0] = ["X", "X", " "]
     gs["board"][2][0] = ["X", "X", " "]
-    done, _ = env.step("2 2")
+    done = env.step("2 2")
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
 
 
 def test_concatenated_indices_are_rejected():
     env = _fresh()
-    done, _ = env.step("00")
+    done = env.step("00")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["board"][0][0][0] == " "
@@ -201,7 +201,7 @@ def test_game_ending_move_does_not_announce_a_next_board():
     gs["board"][2][0] = ["X", "X", " "]
     start = len(env.state.events)
 
-    done, _ = env.step("2 2")
+    done = env.step("2 2")
 
     assert done
     descriptions = [

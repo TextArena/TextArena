@@ -7,6 +7,7 @@ import unicodedata
 from typing import Any, Dict, List, Optional, Union
 
 import textarena as ta
+from textarena.utils.jury import DEFAULT_JUDGE_MODEL
 
 _ARTICLES = frozenset({"a", "an", "the"})
 
@@ -41,8 +42,8 @@ class GuessWhoEnv(ta.GameEnv):
             "for the guess.", min=2,
     )
     gamemaster = ta.Param(
-        None, "Answers the player's questions. With None, OpenRouter `openai/gpt-4o` answers; inject one to play "
-              "offline or with a different model.", type=object, check=callable,
+        None, f"Answers the player's questions. With None, OpenRouter `{DEFAULT_JUDGE_MODEL}` answers; inject one to "
+              "play offline or with a different model.", type=object, check=callable,
         rule="a callable that takes a prompt string and returns `Yes`, `No`, or `I don't know`",
     )
     characters_path = ta.Param(
@@ -177,10 +178,10 @@ class GuessWhoEnv(ta.GameEnv):
     def _ask_gamemaster(self, prompt: str):
         if self.gamemaster is None:
             try:
-                self.gamemaster = ta.agents.OpenRouterAgent(model_name="openai/gpt-4o")
+                self.gamemaster = ta.agents.OpenRouterAgent(model_name=DEFAULT_JUDGE_MODEL)
             except (ImportError, ValueError) as exc:
                 raise RuntimeError(
-                    "GuessWho questions require OpenRouter. Install the OpenAI dependency "
+                    'GuessWho questions require OpenRouter: pip install "textarena[agents]" '
                     "and set OPENROUTER_API_KEY, or inject a gamemaster."
                 ) from exc
         return self.gamemaster(prompt)

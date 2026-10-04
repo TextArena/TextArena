@@ -41,7 +41,7 @@ def test_reset_initial_state():
 def test_correct_guess_wins():
     env = _fresh()
     word = env.game_word
-    done, _ = env.step(f"Guess {word}")  # 'guess' keyword is case-insensitive
+    done = env.step(f"Guess {word}")  # 'guess' keyword is case-insensitive
     assert done
     assert env.state.rewards == {0: 1}
     assert env.state.turn == 1
@@ -53,7 +53,7 @@ def test_incorrect_guess_loses():
     # A 'guess <word>' guess that isn't the secret word ends the game.
     guess = "definitelynotthewordxyz"
     assert guess != env.game_word
-    done, _ = env.step(f"guess {guess}")
+    done = env.step(f"guess {guess}")
     assert done
     assert env.state.rewards == {0: 0}
 
@@ -61,7 +61,7 @@ def test_incorrect_guess_loses():
 def test_guess_requires_exact_normalized_target_not_substring():
     env = _fresh()
     env.game_state["target_word"] = "apple"
-    done, _ = env.step("guess pineapple")
+    done = env.step("guess pineapple")
     assert done
     assert env.state.rewards == {0: 0}
 
@@ -69,7 +69,7 @@ def test_guess_requires_exact_normalized_target_not_substring():
 def test_questions_use_injected_gamemaster_and_parse_safe_variants():
     gamemaster = _Gamemaster(("Answer: 'yes'.",))
     env = _fresh(gamemaster=gamemaster)
-    done, _ = env.step("Is it alive?")
+    done = env.step("Is it alive?")
     assert not done
     assert env.game_state["history"] == [("Is it alive?", "Yes")]
     assert env.game_word in gamemaster.prompts[0]
@@ -78,7 +78,7 @@ def test_questions_use_injected_gamemaster_and_parse_safe_variants():
 def test_malformed_gamemaster_output_is_retryable_and_atomic():
     env = _fresh(gamemaster=_Gamemaster(("Certainly",)))
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("Is it alive?")
+    done = env.step("Is it alive?")
     assert not done
     assert env.state.error_count == 0
     assert env.state.turn == 0
@@ -88,7 +88,7 @@ def test_malformed_gamemaster_output_is_retryable_and_atomic():
 def test_gamemaster_failure_is_retryable_and_atomic():
     env = _fresh(gamemaster=_Gamemaster((RuntimeError("offline"),)))
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("Is it alive?")
+    done = env.step("Is it alive?")
     assert not done
     assert env.state.error_count == 0
     assert env.state.turn == 0
@@ -100,7 +100,7 @@ def test_gamemaster_error_cannot_leak_the_secret():
     env = _fresh(gamemaster=gamemaster)
     gamemaster.responses = [RuntimeError(f"request contained {env.game_word}")]
     env.get_observation()
-    done, _ = env.step("Is it alive?")
+    done = env.step("Is it alive?")
     assert not done
     _, observations = env.get_observation()
     assert env.game_word not in "\n".join(message for _, message, _ in observations)
@@ -110,7 +110,7 @@ def test_gamemaster_error_cannot_leak_the_secret():
 def test_empty_guess_is_invalid_without_calling_gamemaster(action):
     gamemaster = _Gamemaster()
     env = _fresh(gamemaster=gamemaster)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.state.turn == 0
@@ -122,11 +122,22 @@ def test_question_budget_reserves_the_last_turn_for_a_guess():
     env.step("First question?")
     env.step("Second question?")
     assert env.state.turn == 2
-    done, _ = env.step("A forbidden third question?")
+    done = env.step("A forbidden third question?")
     assert not done
     assert env.state.turn == 2
-    done, _ = env.step(f"guess {env.game_word}")
+    done = env.step(f"guess {env.game_word}")
     assert done and env.state.turn == 3
+
+
+def test_second_consecutive_invalid_move_scores_zero_and_reveals_the_word():
+    env = _fresh(max_turns=2, gamemaster=_Gamemaster(("No",)))
+    env.step("Only question?")
+    env.step("A forbidden question?")
+    done = env.step("Another forbidden question?")
+    assert done
+    assert env.state.rewards == {0: 0}
+    assert env.state.game_info[0]["invalid_move"] is True
+    assert env.game_word in env.get_board_str()
 
 
 def test_reset_freshness_snapshot_and_renderer_purity():
@@ -166,7 +177,7 @@ def test_construction_and_local_guess_do_not_require_network(monkeypatch):
     monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
     env = TwentyQuestionsEnv()
     env.reset(num_players=1, seed=42)
-    done, _ = env.step(f"guess {env.game_word}")
+    done = env.step(f"guess {env.game_word}")
     assert done and env.state.rewards == {0: 1}
 
 
@@ -211,13 +222,13 @@ def test_non_text_and_oversized_actions_are_invalid_without_calling_gamemaster()
     gamemaster = _Gamemaster(("Yes",))
     env = _fresh(gamemaster=gamemaster)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step(None)
+    done = env.step(None)
     assert not done
     assert env.game_state == before
     assert gamemaster.prompts == []
 
     env.reset(num_players=1, seed=42)
-    done, _ = env.step("q" * (env.max_action_chars + 1))
+    done = env.step("q" * (env.max_action_chars + 1))
     assert not done
     assert env.game_state == before
     assert gamemaster.prompts == []
@@ -240,7 +251,7 @@ def test_snapshot_replays_stateful_gamemaster_responses():
 def test_messages_with_a_question_mark_are_questions_not_final_guesses(question):
     gamemaster = _Gamemaster(("No",))
     env = _fresh(gamemaster=gamemaster)
-    done, _ = env.step(question)
+    done = env.step(question)
     assert not done
     assert len(gamemaster.prompts) == 1
     assert env.game_state["history"] == [(question, "No")]
@@ -250,7 +261,7 @@ def test_messages_with_a_question_mark_are_questions_not_final_guesses(question)
 def test_text_without_the_guess_keyword_is_a_question(action, question):
     gamemaster = _Gamemaster(("No",))
     env = _fresh(gamemaster=gamemaster)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 0
     assert env.game_state["history"] == [(question, "No")]
@@ -261,7 +272,7 @@ def test_text_without_the_guess_keyword_is_a_question(action, question):
 )
 def test_guess_ignores_case_punctuation_quotes_and_a_leading_article(template):
     env = _fresh()
-    done, _ = env.step(template.format(word=env.game_word, WORD=env.game_word.upper()))
+    done = env.step(template.format(word=env.game_word, WORD=env.game_word.upper()))
     assert done
     assert env.state.rewards == {0: 1}
 
@@ -294,7 +305,7 @@ def test_questions_are_relayed_without_role_tags_or_line_breaks():
 def test_question_without_words_is_invalid_without_calling_gamemaster(action):
     gamemaster = _Gamemaster()
     env = _fresh(gamemaster=gamemaster)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert gamemaster.prompts == []

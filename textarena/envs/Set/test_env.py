@@ -44,7 +44,7 @@ def test_valid_set_scores_a_point():
     env = _fresh()
     indices = _find_set(env.state.game_state["board"])
     assert indices is not None, "seed 42 board should contain a Set"
-    done, _ = env.step(f"{indices[0]}, {indices[1]}, {indices[2]}")
+    done = env.step(f"{indices[0]}, {indices[1]}, {indices[2]}")
     assert not done
     assert env.state.game_state["score"] == 1
     assert env.state.game_state["num_turns"] == 1
@@ -54,7 +54,7 @@ def test_non_set_wastes_turn():
     env = _fresh()
     indices = _find_non_set(env.state.game_state["board"])
     assert indices is not None
-    done, _ = env.step(f"{indices[0]}, {indices[1]}, {indices[2]}")
+    done = env.step(f"{indices[0]}, {indices[1]}, {indices[2]}")
     assert not done
     assert env.state.game_state["score"] == 0
     assert env.state.game_state["num_turns"] == 1
@@ -62,7 +62,7 @@ def test_non_set_wastes_turn():
 
 def test_invalid_format_increments_error():
     env = _fresh()
-    done, _ = env.step("I pick no cards")
+    done = env.step("I pick no cards")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["num_turns"] == 0  # malformed => turn not consumed
@@ -71,7 +71,7 @@ def test_invalid_format_increments_error():
 def test_huge_numeric_indices_are_rejected_without_integer_parse_failure():
     env = _fresh()
     action = f"{'9' * 5000}, 1, 2"
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["num_turns"] == 0
@@ -79,12 +79,12 @@ def test_huge_numeric_indices_are_rejected_without_integer_parse_failure():
 
 def test_out_of_range_indices_rejected():
     env = _fresh()
-    done, _ = env.step("1, 2, 999")
+    done = env.step("1, 2, 999")
     assert not done
     assert env.state.error_count == 1
 
 
-def test_game_ends_after_20_turns_reward_equals_score():
+def test_game_ends_after_20_turns_reward_is_score_share():
     env = _fresh()
     # Repeatedly submit a valid-range but non-Set triple so the board never
     # changes (the board always contains a Set with this seed), guaranteeing a
@@ -94,17 +94,16 @@ def test_game_ends_after_20_turns_reward_equals_score():
     done = False
     for _ in range(20):
         assert not done
-        done, _ = env.step(f"{non_set[0]}, {non_set[1]}, {non_set[2]}")
+        done = env.step(f"{non_set[0]}, {non_set[1]}, {non_set[2]}")
     assert done
     assert env.state.game_state["num_turns"] == 20
-    assert env.state.rewards == {0: env.state.game_state["score"]}
     assert env.state.rewards == {0: 0}
 
 
 def test_duplicate_indices_are_invalid_and_atomic():
     env = _fresh()
     board_before = list(env.state.game_state["board"])
-    done, _ = env.step("1, 1, 1")
+    done = env.step("1, 1, 1")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["num_turns"] == 0
@@ -119,7 +118,7 @@ def test_malformed_action_does_not_trigger_no_set_deal():
     missing = ("three", "purple", "solid", "squiggle")
     env.state.game_state["board"] = [c1, c2]
     env.state.game_state["deck"] = [missing]
-    done, _ = env.step("not a selection")
+    done = env.step("not a selection")
     assert not done
     assert env.state.game_state["board"] == [c1, c2]
     assert env.state.game_state["deck"] == [missing]
@@ -146,10 +145,10 @@ def test_last_available_set_ends_game_early():
     )
     env.state.game_state["board"] = list(cards)
     env.state.game_state["deck"] = []
-    done, _ = env.step("1, 2, 3")
+    done = env.step("1, 2, 3")
     assert done
     assert env.state.game_state["score"] == 1
-    assert env.state.rewards == {0: 1}
+    assert env.state.rewards == {0: pytest.approx(1 / 20)}
 
 
 def test_cards_are_conserved_after_scoring():
@@ -168,8 +167,20 @@ def test_invalid_limit_preserves_points_already_earned():
     env.step(", ".join(map(str, indices)))
     assert env.state.game_state["score"] == 1
     env.step("not a selection")
-    done, _ = env.step("still not a selection")
+    done = env.step("still not a selection")
     assert done
+    assert env.state.rewards == {0: pytest.approx(1 / 20)}
+
+
+def test_finding_a_set_every_turn_scores_one():
+    env = _fresh()
+    done = False
+    for _ in range(20):
+        assert not done
+        indices = _find_set(env.state.game_state["board"])
+        done = env.step(", ".join(map(str, indices)))
+    assert done
+    assert env.state.game_state["score"] == 20
     assert env.state.rewards == {0: 1}
 
 
@@ -197,7 +208,7 @@ def test_valid_non_set_move_ends_when_no_sets_can_remain():
     assert not _is_set(tuple(board))
     env.state.game_state["board"] = board
     env.state.game_state["deck"] = []
-    done, _ = env.step("1, 2, 3")
+    done = env.step("1, 2, 3")
     assert done
     assert env.state.rewards == {0: 0}
 

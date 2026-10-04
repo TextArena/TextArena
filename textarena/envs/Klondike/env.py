@@ -11,7 +11,6 @@ class KlondikeEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
     mdp_includes_actions = False
-    error_allowance = 5
     max_action_chars = 4096
 
     max_turns = ta.Param(200, "The number of turns (replies) before the game ends.", min=1)
@@ -52,7 +51,7 @@ class KlondikeEnv(ta.GameEnv):
             "Only Kings can be placed on empty tableau piles.\n"
             "Actions execute in order - if one fails, the remaining actions are skipped.\n"
             f"You have {self.max_turns} turns; each reply counts as one turn, however many actions it contains.\n"
-            "Your score is the number of cards on the foundations (52 for a win). The game ends when you win, "
+            "Your score is the number of cards on the foundations divided by 52 (1 for a win). The game ends when you win, "
             "forfeit, or run out of turns.\n"
             "Use 'forfeit' if you believe the game is impossible to win."
         )
@@ -87,7 +86,7 @@ class KlondikeEnv(ta.GameEnv):
             # Player forfeited - end game with current score
             cards_in_foundations = self._cards_in_foundations()
             return self.outcome(
-                {0: cards_in_foundations},
+                {0: cards_in_foundations / 52},
                 reason=f"Game forfeited. Final score: {cards_in_foundations} cards in foundations.",
             )
 
@@ -99,21 +98,20 @@ class KlondikeEnv(ta.GameEnv):
         # Check if game is won
         if self.klondike.is_won():
             self.game_state["game_won"] = True
-            return self.outcome({0: 52}, reason="Congratulations! You've won Klondike Solitaire!")
+            return self.outcome({0: 1.0}, reason="Congratulations! You've won Klondike Solitaire!")
         return None
 
     def on_turn_limit(self) -> ta.Outcome:
-        # Partial reward based on cards in foundations (1 point per card)
         cards_in_foundations = self._cards_in_foundations()
         return self.outcome(
-            {0: cards_in_foundations},
+            {0: cards_in_foundations / 52},
             reason=f"Game over! You reached the maximum of {self.max_turns} turns. Score: {cards_in_foundations} cards in foundations.",
         )
 
     def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
         cards_in_foundations = self._cards_in_foundations()
         return self.outcome(
-            {0: cards_in_foundations},
+            {0: cards_in_foundations / 52},
             reason=f"Invalid Move: {reason} Final score: {cards_in_foundations} cards in foundations.",
         )
 

@@ -1,11 +1,11 @@
-from textarena.envs.registration import register_with_versions
+from textarena.envs.registration import register
 
-register_with_versions(
+register(
     id="LogicPuzzle-v1",
     entry_point="textarena.envs.LogicPuzzle.env:LogicPuzzleEnv",
     difficulty="easy",
 )
-register_with_versions(
+register(
     id="LogicPuzzle-v1-hard",
     entry_point="textarena.envs.LogicPuzzle.env:LogicPuzzleEnv",
     difficulty="hard",

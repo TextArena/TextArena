@@ -43,21 +43,6 @@ def pad_line(content: str, box_width: int) -> str:
     pad_spaces = box_width - 2 - disp_len
     return f"│ {content}{' ' * max(0, pad_spaces)} │"
 
-def wrap_display(text: str, width: int):
-    """Wrap text by display width instead of len()."""
-    lines, line, cur_width = [], "", 0
-    for ch in text:
-        w = char_display_width(ch)
-        if cur_width + w > width:
-            lines.append(line)
-            line, cur_width = ch, w
-        else:
-            line += ch
-            cur_width += w
-    if line:
-        lines.append(line)
-    return lines
-
 def create_board_str(game_state: dict) -> str:
     """Create a visual representation of the Market Entry Game state."""
     lines = []
@@ -65,11 +50,8 @@ def create_board_str(game_state: dict) -> str:
     # fixed box widths (match your original formatting)
     header_width = 59
     status_width = 59
-    fullmsg_width = 59
     market_width = 59
     standings_width = 59
-    history_width = 59
-    insights_width = 59
     quick_width = 59
     
     # Determine phase info

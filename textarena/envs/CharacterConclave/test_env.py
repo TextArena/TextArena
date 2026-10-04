@@ -95,7 +95,7 @@ def test_truncation_is_reported_privately_to_the_sender():
 def test_leading_whitespace_never_consumes_budget_or_truncates_to_blank():
     env = _fresh(budget=2)
     before_events = len(env.state.events)
-    done, _ = env.step("  hidden-after-budget")
+    done = env.step("  hidden-after-budget")
 
     assert not done
     assert env.state.error_count == 0
@@ -122,7 +122,7 @@ def test_discussion_messages_cannot_impersonate_the_game(label):
 
 def test_label_only_discussion_message_is_invalid():
     env = _fresh()
-    done, _ = env.step("[GA[GAME]ME]")
+    done = env.step("[GA[GAME]ME]")
     assert not done and env.state.error_count == 1
     assert env.state.game_state["budget_remaining"][0] == 5
 
@@ -130,7 +130,7 @@ def test_label_only_discussion_message_is_invalid():
 def test_empty_discussion_message_is_invalid_and_atomic():
     env = _fresh()
     before = env.state.game_state["budget_remaining"].copy()
-    done, _ = env.step("   ")
+    done = env.step("   ")
     assert not done
     assert env.state.game_state["budget_remaining"] == before
     assert env.state.current_player_id == 0
@@ -165,9 +165,9 @@ def test_full_game_winner_by_votes():
     assert env.state.game_state["phase"] == "voting"
     assert env.state.current_player_id == 2
     env.step("0")          # P2 votes for P0
-    done, _ = env.step("1")  # P0 votes for P1
+    done = env.step("1")  # P0 votes for P1
     assert not done
-    done, _ = env.step("0")  # P1 votes for P0 -> P0 has 2 votes, P1 has 1, P2 has 0
+    done = env.step("0")  # P1 votes for P0 -> P0 has 2 votes, P1 has 1, P2 has 0
     assert done
     assert env.state.game_state["votes"] == {2: 0, 0: 1, 1: 0}
     assert env.state.rewards[0] == 1.0   # most votes
@@ -180,7 +180,7 @@ def test_equal_vote_cycle_is_a_draw_not_a_collective_loss():
     for message in ("a", "b", "c"):
         env.step(message)
     for vote in ("0", "1", "2"):  # P2->P0, P0->P1, P1->P2
-        done, _ = env.step(vote)
+        done = env.step(vote)
     assert done
     assert env.state.rewards == {0: 0.0, 1: 0.0, 2: 0.0}
     board = env.get_board_str()
@@ -198,7 +198,7 @@ def test_players_tied_in_middle_receive_the_same_reward():
         env.step(message)
     # Voting order is P4, P0, P1, P2, P3. Counts: P0=2, P1=P2=P3=1, P4=0.
     for vote in ("3", "1", "0", "0", "2"):
-        done, _ = env.step(vote)
+        done = env.step(vote)
     assert done
     assert env.state.rewards == {0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: -1.0}
 
@@ -209,7 +209,7 @@ def test_vote_is_private_and_eliminated_target_is_rejected():
         env.step(message)
     env.eliminate(0)
     before_events = len(env.state.events)
-    done, _ = env.step("0")
+    done = env.step("0")
     assert not done
     assert env.state.game_state["votes"] == {}
     assert env.state.current_player_id == 2
@@ -243,7 +243,7 @@ def test_repeated_invalid_votes_eliminate_the_voter_publicly_and_void_votes_for_
     )
 
     env.step("2")             # P1 votes for P2.
-    done, _ = env.step("3")   # P2 votes for P3; P3's vote for P0 no longer counts.
+    done = env.step("3")   # P2 votes for P3; P3's vote for P0 no longer counts.
     assert done
     assert env.state.rewards == {0: -1.0, 1: -1.0, 2: 1.0, 3: 1.0}
 
@@ -265,7 +265,7 @@ def test_last_player_standing_wins_when_the_other_finalist_is_eliminated_while_v
     assert env.state.current_player_id == 1
 
     env.step("nonsense")
-    done, _ = env.step("nonsense")  # P1 is eliminated, leaving P2 with nobody to vote for.
+    done = env.step("nonsense")  # P1 is eliminated, leaving P2 with nobody to vote for.
 
     assert done
     assert env.state.rewards == {0: -1, 1: -1, 2: 1}
@@ -286,7 +286,7 @@ def test_valid_vote_confirmation_is_private_and_vote_cannot_be_replaced():
         (-1, "You have successfully voted for Player 0.", ta.ObservationType.GAME_MESSAGE, 2)
     ]
     env.set_current_player(2)
-    done, _ = env.step("1")
+    done = env.step("1")
     assert not done
     assert env.state.game_state["votes"][2] == 0
     assert env.state.error_count == 1

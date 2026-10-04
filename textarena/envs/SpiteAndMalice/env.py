@@ -14,10 +14,6 @@ class SpiteAndMaliceEnv(ta.GameEnv):
     broadcast_actions = False  # raw actions are echoed only to their author
 
     @property
-    def terminal_render_keys(self):
-        return ["rendered_board", "player_turn"]
-
-    @property
     def deck(self):
         return self.game_state["deck"]
 
@@ -52,23 +48,30 @@ class SpiteAndMaliceEnv(ta.GameEnv):
         self._draw_cards(0)
         self._draw_cards(1)
 
-        game_state["player_turn"] = 0
+        tops = [self._card_rank(game_state["players"][pid]["payoff"][-1]) for pid in (0, 1)]
+        game_state["first_player"] = 1 if tops[1] > tops[0] else 0
+        self.set_current_player(game_state["first_player"])
         game_state["rendered_board"] = self._render_board()
         return game_state
 
-    def _draw_cards(self, player_id: int, notify: bool = True):
-        """ Draw cards to maintain 5 cards in hand. """
-        while len(self.players[player_id]["hand"]) < 5 and self.deck:
-            self.players[player_id]["hand"].append(self.deck.pop())
+    def _draw_cards(self, player_id: int) -> int:
+        """Refill the hand to 5 cards, shuffling the cleared center piles into an empty draw pile.
 
-        if notify and not self.deck and len(self.players[player_id]["hand"]) < 5:
-            message = (
-                "There are no more cards to draw from. Remember that you can play cards from these sources:\n"
-                "  1. Your **hand**.\n"
-                "  2. The **top card of your payoff pile**.\n"
-                "  3. The **top card of any of your discard piles**.\n\n"
-            )
-            self.message(player_id, message, ta.ObservationType.GAME_MESSAGE)
+        Returns how many cleared cards were shuffled into the draw pile.
+        """
+        hand = self.players[player_id]["hand"]
+        completed = self.game_state["completed_cards"]
+        reshuffled = 0
+        while len(hand) < 5:
+            if not self.deck:
+                if not completed:
+                    break
+                reshuffled += len(completed)
+                self.deck.extend(completed)
+                completed.clear()
+                self.rng.shuffle(self.deck)
+            hand.append(self.deck.pop())
+        return reshuffled
 
     def prompt(self, player_id: int) -> str:
         return (
@@ -84,8 +87,13 @@ class SpiteAndMaliceEnv(ta.GameEnv):
             "### Playing Rules:\n"
             "- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n"
             "- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n"
-            "- If a center pile reaches Queen, it will be cleared automatically.\n"
-            "- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild. The deck has no 10s.\n\n"
+            "- If a center pile reaches Queen, it will be cleared automatically. When the draw pile runs out, the cleared "
+            "center piles are shuffled to form a new draw pile.\n"
+            "- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild. The deck has no 10s.\n"
+            "- The player whose payoff pile shows the higher card goes first (Aces low, Kings high; on equal cards "
+            f"Player 0 goes first). This game, Player {self.game_state['first_player']} goes first.\n"
+            "- If no cards are left to draw (none in the draw pile and none cleared), both hands are empty and neither "
+            "player can play, the player with fewer payoff cards left wins; equal counts are a draw.\n\n"
 
             "### Actions:\n"
             "1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **draw** to begin.\n"
@@ -135,6 +143,7 @@ class SpiteAndMaliceEnv(ta.GameEnv):
             return self.invalid("Discard ends the turn and must be the final command.")
 
         original_state = copy.deepcopy(self.game_state)
+        original_rng_state = self.rng.getstate()
         events = []
         rotate_player = False
         invalid_reason: Optional[str] = None
@@ -144,7 +153,9 @@ class SpiteAndMaliceEnv(ta.GameEnv):
                 if command_index != 0 or self.game_state["turn_has_drawn"][player_id]:
                     invalid_reason = "Draw is allowed exactly once, at the start of your turn."
                     break
-                self._draw_cards(player_id, notify=False)
+                reshuffled = self._draw_cards(player_id)
+                if reshuffled:
+                    events.append(("reshuffle", reshuffled, None))
                 self.game_state["turn_has_drawn"][player_id] = True
                 events.append(("draw", None, None))
                 continue
@@ -158,8 +169,10 @@ class SpiteAndMaliceEnv(ta.GameEnv):
                     events.append(("play", card, index))
                     if not self.players[player_id]["payoff"]:
                         break
-                    if not self.players[player_id]["hand"] and self.deck:
-                        self._draw_cards(player_id, notify=False)
+                    if not self.players[player_id]["hand"] and (self.deck or self.game_state["completed_cards"]):
+                        reshuffled = self._draw_cards(player_id)
+                        if reshuffled:
+                            events.append(("reshuffle", reshuffled, None))
                         events.append(("refill", None, None))
                 else:
                     invalid_reason = (
@@ -176,16 +189,21 @@ class SpiteAndMaliceEnv(ta.GameEnv):
                     break
                 self._discard_card(player_id, card, index)
                 self.game_state["turn_has_drawn"][player_id] = False
-                self.game_state["player_turn"] = 1 - player_id
                 events.append(("discard", card, index))
                 rotate_player = True
 
         if invalid_reason is not None:
             self.state.game_state = original_state
+            self.rng.setstate(original_rng_state)
             return self.invalid(invalid_reason)
 
         for action_type, card, index in events:
-            if action_type == "draw":
+            if action_type == "reshuffle":
+                self.broadcast(
+                    f"The draw pile ran out, so the {card} cleared center cards were shuffled to form a new draw pile.",
+                    ta.ObservationType.GAME_MESSAGE,
+                )
+            elif action_type == "draw":
                 self.message(player_id, "You drew cards.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
                 self.message(1 - player_id, f"Player {player_id} drew cards.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
             elif action_type == "refill":
@@ -216,7 +234,6 @@ class SpiteAndMaliceEnv(ta.GameEnv):
             and not self._player_has_valid_moves(player_id)
         ):
             self.game_state["turn_has_drawn"][player_id] = False
-            self.game_state["player_turn"] = 1 - player_id
             self.broadcast(
                 f"Player {player_id} has no card to discard and no legal play; "
                 f"their turn ends automatically.",
@@ -318,12 +335,12 @@ class SpiteAndMaliceEnv(ta.GameEnv):
         """
         Check if the game is in a deadlock state where no player can make valid moves.
         This happens when:
-        1. No more cards can be drawn from the deck
+        1. No more cards can be drawn from the deck, and no cleared center cards are left to shuffle into it
         2. Neither player can play any card from their hand, payoff pile, or discard piles
         3. Both players have empty hands (they've been forced to discard everything)
         """
-        # If there are still cards in the deck, not a deadlock
-        if self.deck:
+        # If there are still cards to draw, not a deadlock
+        if self.deck or self.game_state["completed_cards"]:
             return False
 
         # Check if both players have no cards in hand and no valid moves
@@ -383,7 +400,11 @@ class SpiteAndMaliceEnv(ta.GameEnv):
 
     def _render_board(self, player_id: Optional[int] = None) -> str:
         """ Render the game board """
-        board = f"Draw pile: {len(self.deck)} card(s)\n\n--- Center Piles ---\n"
+        board = (
+            f"Draw pile: {len(self.deck)} card(s)\n"
+            f"Cleared center cards (shuffled into the draw pile when it runs out): {len(self.game_state['completed_cards'])}\n"
+            "\n--- Center Piles ---\n"
+        )
         for i, pile in enumerate(self.center_piles):
             board += f"Pile {i}: {pile}\n"
 

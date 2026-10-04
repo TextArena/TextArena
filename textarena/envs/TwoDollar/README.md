@@ -37,8 +37,8 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `TwoDollar-v1-mdp`)
     was accepted within that many rounds. It doesn't matter who accepted, so having their own proposal accepted in
     time counts.
 - Two roles are enforced on every message instead, by treating a violation as an invalid move. The message is
-  rejected and the player must resend. Like any invalid move, `error_allowance + 1` rejected messages in a row (4 by
-  default) forfeit the game. Violations separated by a valid move don't add up. The role texts state this threshold.
+  rejected and the player must resend. Like any invalid move, two rejected messages in a row forfeit the game.
+  Violations separated by a valid move don't add up. The role texts state this threshold.
   - `say_little`: more than 15 words of persuasion text before the decision.
   - `high_tension`: lowering your own previous proposal by more than $0.01. Amounts are compared in whole cents, so
     a 1-cent concession is always allowed.
@@ -85,7 +85,9 @@ opponent. At the end, both players see the final amounts after role checks.
 | Deal with unequal final shares | Larger share `+1`, smaller share `-1` |
 | Deal with equal final shares (including both zeroed by role checks) | Both `0` |
 | No deal after `max_rounds` rounds | Both `0` |
-| Fourth consecutive invalid move (with the default `error_allowance=3`) | Offender `-1`, opponent `+1` |
+| Second consecutive invalid move | Offender `-1`, opponent `+1` |
+
+A first invalid move only earns a warning, and the player resends.
 
 Final shares are taken after role checks, so a player who fails a threshold or deadline role ends with $0 and cannot
 win, even if the agreed split favored them. A $2.00 / $0.00 split is a win for the player who keeps the $2.00.
@@ -96,7 +98,6 @@ win, even if the agreed split favored them. A $2.00 / $0.00 split is a win for t
 - `player_roles` (default `None`): Two role names, such as `["vanilla", "50_cents"]`, for Players 0 and 1. `None` draws two different roles at random. Requesting `x_rounds` with `max_rounds` below 4 raises a `ValueError`. Accepts a list of two role names or None.
 - `total_amount` (default `2.0`): The amount to split. Accepts a positive amount with at most two decimal places.
 - `max_rounds` (default `20`): The number of messages, counting both players, before the game ends without a deal. It also sets the `x_rounds` deadline to `max_rounds // 2`. Accepts an integer of at least 1.
-- `error_allowance` (default `3`): The number of consecutive invalid moves a player is warned about before the next one forfeits the game. Accepts an integer of at least 0.
 <!-- END GENERATED: parameters -->
 
 ## Notes

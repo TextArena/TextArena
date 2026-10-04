@@ -30,7 +30,7 @@ def test_solving_two_disks_wins():
     env = _fresh()
     done = False
     for move in ["A B", "A C", "B C"]:
-        done, _ = env.step(move)
+        done = env.step(move)
     assert done
     assert env.state.game_state["towers"]["C"] == [2, 1]
     assert env.state.rewards == {0: 1}
@@ -48,7 +48,7 @@ def test_prompt_and_board_state_the_limit_and_disk_order():
 
 def test_bad_format_is_invalid():
     env = _fresh()
-    done, _ = env.step("move from A to C")
+    done = env.step("move from A to C")
     assert not done
     assert env.state.error_count == 1
 
@@ -58,7 +58,7 @@ def test_larger_on_smaller_rejected():
     env.step("A B")  # disk 1 -> B
     # Now A's top is disk 2; placing it onto B (holding disk 1) is illegal.
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step("A B")
+    done = env.step("A B")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state == before
@@ -66,14 +66,14 @@ def test_larger_on_smaller_rejected():
 
 def test_move_from_empty_tower_rejected():
     env = _fresh()
-    done, _ = env.step("C A")  # C is empty at the start
+    done = env.step("C A")  # C is empty at the start
     assert not done
     assert env.state.error_count == 1
 
 
 def test_valid_move_updates_towers():
     env = _fresh()
-    done, _ = env.step("A C")  # disk 1 -> C
+    done = env.step("A C")  # disk 1 -> C
     assert not done
     assert env.state.game_state["towers"]["C"] == [1]
     assert env.state.game_state["towers"]["A"] == [2]
@@ -83,7 +83,7 @@ def test_valid_move_updates_towers():
 def test_parser_rejects_noncanonical_actions_atomically(action):
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -91,7 +91,7 @@ def test_parser_rejects_noncanonical_actions_atomically(action):
 @pytest.mark.parametrize("action", ["A, C", "A,C", "a, c"])
 def test_comma_separator_and_lowercase_are_valid(action):
     env = _fresh()
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.game_state["towers"] == {"A": [2], "B": [], "C": [1]}
 
@@ -99,7 +99,7 @@ def test_comma_separator_and_lowercase_are_valid(action):
 def test_same_tower_move_is_invalid_and_atomic():
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step("A A")
+    done = env.step("A A")
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
     assert env.state.turn == 0
@@ -120,7 +120,7 @@ def test_invalid_or_unsolvable_configuration_rejected(kwargs):
 def test_turn_limit_counts_final_legal_move_and_returns_partial_reward():
     env = _fresh(num_disks=2, max_turns=3)
     for move in ("A C", "A B", "C A"):
-        done, _ = env.step(move)
+        done = env.step(move)
     assert done
     assert env.state.turn == 3
     assert env.state.game_info[0]["turn_count"] == 3

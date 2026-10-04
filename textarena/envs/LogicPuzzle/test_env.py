@@ -41,14 +41,14 @@ def test_reset_state():
 def test_solve_in_one_action():
     env = _fresh()
     action = ", ".join(_solution_tokens(env))
-    done, _ = env.step(action)
+    done = env.step(action)
     assert done is True
     assert env.state.rewards == {0: 1}
 
 
 def test_invalid_format():
     env = _fresh()
-    done, _ = env.step("I have no idea")
+    done = env.step("I have no idea")
     assert done is False
     assert env.state.error_count == 1
 
@@ -68,7 +68,7 @@ def test_format_error_describes_expected_action(action):
 
 def test_out_of_bounds_rejected():
     env = _fresh()
-    done, _ = env.step("nobody nowhere O")
+    done = env.step("nobody nowhere O")
     assert done is False
     assert env.state.error_count == 1
 
@@ -76,9 +76,9 @@ def test_out_of_bounds_rejected():
 def test_repeated_mark_rejected():
     env = _fresh()
     token = _solution_tokens(env)[0]
-    done, _ = env.step(token)  # first mark: valid
+    done = env.step(token)  # first mark: valid
     assert done is False
-    done, _ = env.step(token)  # same mark again: repeated -> invalid
+    done = env.step(token)  # same mark again: repeated -> invalid
     assert done is False
     assert env.state.error_count == 1
 
@@ -86,7 +86,7 @@ def test_repeated_mark_rejected():
 def test_single_valid_mark_progresses():
     env = _fresh()
     token = _solution_tokens(env)[0]
-    done, _ = env.step(token)
+    done = env.step(token)
     assert done is False
     assert env.state.error_count == 0
 
@@ -214,7 +214,7 @@ def test_invalid_later_batch_mark_is_atomic():
     env = _fresh()
     before = copy.deepcopy(env.game_board)
     valid = _solution_tokens(env)[0]
-    done, _ = env.step(f"{valid}, nobody nowhere X")
+    done = env.step(f"{valid}, nobody nowhere X")
     assert not done
     assert env.state.error_count == 1
     assert env.game_board == before
@@ -236,7 +236,7 @@ def test_invalid_later_batch_mark_is_atomic():
 def test_exact_parser_rejects_malformed_input_without_marks(action):
     env = _fresh()
     before = copy.deepcopy(env.game_board)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.game_board == before
@@ -246,7 +246,7 @@ def test_duplicate_within_batch_is_atomic():
     env = _fresh()
     token = _solution_tokens(env)[0]
     before = copy.deepcopy(env.game_board)
-    done, _ = env.step(f"{token}, {token}")
+    done = env.step(f"{token}, {token}")
     assert not done
     assert env.state.error_count == 1
     assert env.game_board == before
@@ -255,7 +255,7 @@ def test_duplicate_within_batch_is_atomic():
 def test_oversized_action_is_invalid_without_marks():
     env = _fresh()
     before = copy.deepcopy(env.game_board)
-    done, _ = env.step("x" * (env.max_action_chars + 1))
+    done = env.step("x" * (env.max_action_chars + 1))
     assert not done
     assert env.state.error_count == 1
     assert env.game_board == before
@@ -266,7 +266,7 @@ def test_turn_limit_scores_only_correct_marks():
     env.reset(num_players=1, seed=42)
     row, col, expected = _solution_tokens(env)[0].split()
     wrong = "X" if expected == "O" else "O"
-    done, _ = env.step(f"{row} {col} {wrong}")
+    done = env.step(f"{row} {col} {wrong}")
     assert done
     assert env.state.rewards == {0: 0.0}
     assert "turn limit" in env.state.game_info[0]["reason"].lower()
@@ -288,7 +288,7 @@ def test_current_and_terminal_render_include_board_and_clues():
     current = env.render(0)
     assert "Current Board" in current
     assert "Available Clues" in current
-    done, _ = env.step(", ".join(_solution_tokens(env)))
+    done = env.step(", ".join(_solution_tokens(env)))
     assert done
     terminal = env.render(0)
     assert "O" in terminal and "X" in terminal

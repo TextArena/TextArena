@@ -40,7 +40,7 @@ def test_check_down_showdown():
     env.step("check")  # P1
     env.step("check")  # P0 -> flop revealed
     env.step("check")  # P1
-    done, _ = env.step("check")  # P0 -> showdown
+    done = env.step("check")  # P0 -> showdown
     assert done is True
     loser = 1 - winner
     assert env.state.rewards == {winner: 1, loser: -1}
@@ -50,7 +50,7 @@ def test_bet_fold():
     env = _fresh()
     starter = env.state.current_player_id  # P1
     env.step("bet")           # starter bets pre-flop
-    done, _ = env.step("fold")  # opponent folds
+    done = env.step("fold")  # opponent folds
     assert done is True
     other = 1 - starter
     assert env.state.rewards == {starter: 1, other: -1}
@@ -58,7 +58,7 @@ def test_bet_fold():
 
 def test_invalid_format():
     env = _fresh()
-    done, _ = env.step("thinking about it")
+    done = env.step("thinking about it")
     assert done is False
     assert env.state.error_count == 1
 
@@ -66,7 +66,7 @@ def test_invalid_format():
 def test_illegal_action_rejected():
     env = _fresh()
     # current_bet is 0, so only 'check'/'bet' are legal; 'call' is illegal.
-    done, _ = env.step("call")
+    done = env.step("call")
     assert done is False
     assert env.state.error_count == 1
 
@@ -74,7 +74,7 @@ def test_illegal_action_rejected():
 def test_bet_call_advances_to_flop():
     env = _fresh()
     env.step("bet")            # P1 bets pre-flop
-    done, _ = env.step("call")  # P0 calls -> flop round begins
+    done = env.step("call")  # P0 calls -> flop round begins
     assert done is False
     assert env.state.game_state["round"] == 1
     assert env.state.game_state["pot"] == 6  # 2 ante + 2 + 2
@@ -87,7 +87,7 @@ def test_raises_charge_only_each_players_unmatched_amount():
     env.step("raise")  # P0 commits 4 total
     assert gs["round_bets"] == {0: 4, 1: 2}
     assert gs["pot"] == 8
-    done, _ = env.step("call")  # P1 owes only 2
+    done = env.step("call")  # P1 owes only 2
     assert not done
     assert gs["round"] == 1
     assert gs["pot"] == 10
@@ -166,7 +166,7 @@ def test_short_stacks_cannot_go_negative():
     assert gs["player_bank"] == {0: 0, 1: 0}
     assert env._legal(gs, env.state.current_player_id) == ["check"]
     env.step("check")
-    done, _ = env.step("check")
+    done = env.step("check")
     assert done
     assert min(gs["player_bank"].values()) >= 0
     assert gs["pot"] == 0
@@ -176,7 +176,7 @@ def test_short_stacks_cannot_go_negative():
 def test_new_hand_clears_previous_check_state():
     env = _fresh(max_rounds=2)
     for _ in range(4):
-        done, _ = env.step("check")
+        done = env.step("check")
     assert not done
     assert env.state.game_state["hands_dealt"] == 2
     assert env.state.game_state["round"] == 0
@@ -192,7 +192,7 @@ def test_pair_beats_higher_unpaired_private_card():
     gs["board_card"] = 0
     for _ in range(3):
         env.step("check")
-    done, _ = env.step("check")
+    done = env.step("check")
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
 
@@ -204,7 +204,7 @@ def test_exact_tie_splits_pot_and_draws_match():
     gs["board_card"] = 2
     for _ in range(3):
         env.step("check")
-    done, _ = env.step("check")
+    done = env.step("check")
     assert done
     assert gs["pot"] == 0
     assert gs["player_bank"] == {0: 100, 1: 100}

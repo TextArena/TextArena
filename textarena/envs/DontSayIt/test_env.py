@@ -20,14 +20,14 @@ def test_saying_opponents_word_makes_opponent_win():
     env = _fresh()
     opponent_word = env.state.game_state["target_words"][1]
     # Player 0 blurts out player 1's secret word -> player 1 wins.
-    done, _ = env.step(f"I believe the answer is {opponent_word}.")
+    done = env.step(f"I believe the answer is {opponent_word}.")
     assert done and env.state.rewards == {1: 1, 0: -1}
 
 
 def test_turn_limit_ends_in_draw():
     env = _fresh(max_turns=2)
     env.step("zzz")
-    done, _ = env.step("zzz")
+    done = env.step("zzz")
     assert done and env.state.rewards == {0: 0, 1: 0}
 
 
@@ -35,13 +35,13 @@ def test_trigger_on_final_turn_takes_precedence_over_draw():
     env = _fresh(max_turns=2)
     env.state.game_state["target_words"] = {0: "apple", 1: "banana"}
     env.step("safe")
-    done, _ = env.step("apple")
+    done = env.step("apple")
     assert done and env.state.rewards == {0: 1, 1: -1}
 
 
 def test_safe_message_does_not_end_game():
     env = _fresh()
-    done, _ = env.step("zzz")
+    done = env.step("zzz")
     assert not done and env.state.current_player_id == 1
 
 
@@ -75,14 +75,14 @@ def test_each_secret_is_routed_only_to_its_owner():
 def test_secret_matching_uses_whole_words_not_substrings():
     env = _fresh()
     env.state.game_state["target_words"] = {0: "art", 1: "cat"}
-    done, _ = env.step("Concatenate these strings.")
+    done = env.step("Concatenate these strings.")
     assert not done
-    done, _ = env.step("harmless")
+    done = env.step("harmless")
     assert not done
-    done, _ = env.step("écat is still one Unicode word.")
+    done = env.step("écat is still one Unicode word.")
     assert not done
 
-    done, _ = env.step("That piece of ART!")
+    done = env.step("That piece of ART!")
     assert done and env.state.rewards == {0: 1, 1: -1}
 
 
@@ -90,14 +90,14 @@ def test_secret_matching_uses_whole_words_not_substrings():
 def test_secret_matching_normalizes_unicode_compatibility_forms(mention):
     env = _fresh()
     env.state.game_state["target_words"] = {0: "apple", 1: "cat"}
-    done, _ = env.step(f"Please say {mention}.")
+    done = env.step(f"Please say {mention}.")
     assert done and env.state.rewards == {0: -1, 1: 1}
 
 
 def test_saying_own_secret_is_safe():
     env = _fresh()
     env.state.game_state["target_words"] = {0: "apple", 1: "banana"}
-    done, _ = env.step("apple")
+    done = env.step("apple")
     assert not done
 
 

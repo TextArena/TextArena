@@ -1,9 +1,10 @@
-import os, time
+import logging, os, time
 from typing import Optional
 
 from textarena.core import Agent, extract_action
 
 __all__ = ["HumanAgent", "OpenAIAgent", "OpenRouterAgent", "TinkerAgent"]
+logger = logging.getLogger(__name__)
 STANDARD_GAME_PROMPT = (
     "You are a competitive game player. Make sure you read the game instructions carefully. "
     "You may reason freely in your response, but you must provide your final action inside "
@@ -41,12 +42,12 @@ class _ModelAgent(Agent):
                 response = self.generate(observation)
                 break
             except Exception as e:
-                print(f"Attempt {attempt} failed with error: {e}")
+                logger.warning("%s request attempt %d of %d failed: %s", type(self).__name__, attempt, self.retries, e)
                 if attempt == self.retries:
                     raise
                 time.sleep(self.retry_delay)
         if self.verbose:
-            print(f"\nObservation: {observation}\nResponse: {response}")
+            logger.info("Observation: %s\nResponse: %s", observation, response)
         return extract_action(response)
 
 
@@ -63,7 +64,7 @@ class OpenAIAgent(_ModelAgent):
                 Defaults to OpenAI's API.
             api_key (Optional[str]): The API key; read from the `api_key_env` environment variable if omitted.
             system_prompt (Optional[str]): The system prompt to use (default: STANDARD_GAME_PROMPT)
-            verbose (bool): If True, every observation and response is printed.
+            verbose (bool): If True, every observation and response is logged at INFO level.
             **kwargs: Additional keyword arguments passed to `chat.completions.create` (e.g. temperature).
         """
         super().__init__(system_prompt=system_prompt, verbose=verbose)
@@ -110,7 +111,7 @@ class TinkerAgent(_ModelAgent):
             system_prompt (Optional[str]): The system prompt to use (default: STANDARD_GAME_PROMPT).
             max_tokens (int): The maximum number of tokens to generate.
             temperature (float): The sampling temperature.
-            verbose (bool): If True, additional debug info will be printed.
+            verbose (bool): If True, every observation and response is logged at INFO level.
             **sampling_kwargs: Additional keyword arguments passed to tinker.types.SamplingParams (e.g. top_p, stop).
         """
         super().__init__(system_prompt=system_prompt, verbose=verbose)

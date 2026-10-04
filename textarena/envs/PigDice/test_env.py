@@ -20,10 +20,10 @@ def _fresh(winning_score=100, max_turns=500):
 
 def test_roll_then_hold_wins():
     env = _fresh(winning_score=6)
-    done, _ = env.step("roll")     # rolls a 6 -> turn total 6
+    done = env.step("roll")     # rolls a 6 -> turn total 6
     assert not done
     assert env.state.game_state["turn_total"] == 6
-    done, _ = env.step("hold")     # banks 6 >= winning_score
+    done = env.step("hold")     # banks 6 >= winning_score
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
 
@@ -32,7 +32,7 @@ def test_bust_rolls_one_rotates_player():
     env = _fresh()
     env.step("roll")               # 6
     assert env.state.current_player_id == 0
-    done, _ = env.step("roll")     # 1 -> bust, turn ends
+    done = env.step("roll")     # 1 -> bust, turn ends
     assert not done
     assert env.state.current_player_id == 1
     assert env.state.game_state["turn_total"] == 0
@@ -62,7 +62,7 @@ def test_roll_results_are_recorded_in_public_game_history():
 def test_hold_banks_points_and_rotates():
     env = _fresh()
     env.step("roll")               # 6
-    done, _ = env.step("hold")     # bank 6
+    done = env.step("hold")     # bank 6
     assert not done
     assert env.state.game_state["scores"][0] == 6
     assert env.state.current_player_id == 1
@@ -70,7 +70,7 @@ def test_hold_banks_points_and_rotates():
 
 def test_invalid_format_increments_error():
     env = _fresh()
-    done, _ = env.step("jump")
+    done = env.step("jump")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -91,9 +91,9 @@ def test_format_error_describes_expected_action():
 
 def test_two_consecutive_invalids_end_game():
     env = _fresh()
-    done, _ = env.step("nonsense")
+    done = env.step("nonsense")
     assert not done
-    done, _ = env.step("nonsense again")
+    done = env.step("nonsense again")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -103,7 +103,7 @@ def test_unbalanced_brackets_are_atomic_invalid_moves(action):
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
 
-    done, _ = env.step(action)
+    done = env.step(action)
 
     assert not done
     assert env.state.error_count == 1
@@ -115,7 +115,7 @@ def test_unbalanced_brackets_are_atomic_invalid_moves(action):
 def test_case_insensitive_action_is_accepted():
     env = _fresh()
 
-    done, _ = env.step("ROLL")
+    done = env.step("ROLL")
 
     assert not done
     assert env.state.game_state["turn_total"] == 6
@@ -126,13 +126,13 @@ def test_huge_invalid_action_is_atomic_and_does_not_consume_rng():
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
 
-    done, _ = env.step("r" * 100_000)
+    done = env.step("r" * 100_000)
 
     assert not done
     assert env.state.game_state == before
     assert env.roll_value is None
 
-    done, _ = env.step("roll")
+    done = env.step("roll")
 
     assert not done
     assert env.state.game_state["turn_total"] == 6
@@ -156,7 +156,7 @@ def test_winning_hold_clears_turn_state_and_renders_final_scores():
     env = _fresh(winning_score=6)
     env.step("roll")
 
-    done, _ = env.step("hold")
+    done = env.step("hold")
 
     assert done
     assert env.state.turn == 2
@@ -204,7 +204,7 @@ def test_exact_action_limit_uses_only_banked_scores():
     env = _fresh(max_turns=1)
     env.state.game_state["scores"] = [5, 0]
 
-    done, _ = env.step("roll")  # unbanked 6 does not alter the score
+    done = env.step("roll")  # unbanked 6 does not alter the score
 
     assert done
     assert env.state.turn == 1
@@ -217,7 +217,7 @@ def test_exact_action_limit_uses_only_banked_scores():
 def test_exact_action_limit_draws_tied_scores():
     env = _fresh(max_turns=1)
 
-    done, _ = env.step("roll")
+    done = env.step("roll")
 
     assert done
     assert env.state.turn == 1

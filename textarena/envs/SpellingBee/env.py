@@ -16,6 +16,7 @@ class SpellingBeeEnv(ta.GameEnv):
     _ACTION_RE = re.compile(rf"[A-Za-z]{{1,{max_word_chars}}}")
 
     num_letters = ta.Param(7, "The size of the letter set.", min=1, max=26)
+    max_turns = ta.Param(50, "The number of accepted words, counting both players, before the game ends in a draw.", min=1)
     is_word = ta.Param(
         is_english_word,
         "A function that receives a lowercase word and returns whether it counts, for example to use a custom word "
@@ -44,6 +45,7 @@ class SpellingBeeEnv(ta.GameEnv):
             "Words are checked against the game's English dictionary (UK and US spellings are accepted, proper nouns are not).\n"
             "Each word must be at least as long as the previous word.\nRepeated words are not allowed.\n"
             "If you submit two invalid words in a row, you lose.\n"
+            f"If {self.max_turns} words have been accepted (counting both players) and nobody has lost, the game is a draw.\n"
             "Reply with exactly one word, e.g., 'example'.\n"
         )
 

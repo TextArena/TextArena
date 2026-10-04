@@ -22,7 +22,7 @@ def test_initial_valid_moves_4x4():
 
 def test_valid_move_flips_pieces():
     env = _fresh(board_size=8)
-    done, _ = env.step("2, 3")  # Black flanks the white piece at (3,3)
+    done = env.step("2, 3")  # Black flanks the white piece at (3,3)
     assert not done
     assert env.state.game_state["black_count"] == 4
     assert env.state.game_state["white_count"] == 1
@@ -37,7 +37,7 @@ def test_forced_pass_keeps_actor_and_synchronizes_valid_moves():
     board[0][0], board[0][1] = "B", "W"
     board[1][0], board[1][1] = "B", "W"
 
-    done, _ = env.step("0, 2")
+    done = env.step("0, 2")
 
     assert not done
     assert env.state.current_player_id == 0
@@ -56,7 +56,7 @@ def test_full_game_white_wins_on_4x4():
     ]
     done = False
     for a in seq:
-        done, _ = env.step(a)
+        done = env.step(a)
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
     assert env.state.game_state["white_count"] == 10
@@ -65,7 +65,7 @@ def test_full_game_white_wins_on_4x4():
 
 def test_invalid_format_increments_error():
     env = _fresh()
-    done, _ = env.step("row two col three")
+    done = env.step("row two col three")
     assert not done
     assert env.state.error_count == 1
 
@@ -87,7 +87,7 @@ def test_compact_ambiguous_coordinates_are_rejected():
     env = _fresh()
     before = [row[:] for row in env.state.game_state["board"]]
 
-    done, _ = env.step("23")
+    done = env.step("23")
 
     assert not done
     assert env.state.game_state["board"] == before
@@ -98,7 +98,7 @@ def test_huge_coordinate_is_rejected_atomically():
     env = _fresh()
     before = env.snapshot()
 
-    done, _ = env.step(f"{'9' * 5000}, 0")
+    done = env.step(f"{'9' * 5000}, 0")
 
     assert not done
     assert env.state.error_count == 1
@@ -107,7 +107,7 @@ def test_huge_coordinate_is_rejected_atomically():
 
 def test_illegal_move_rejected():
     env = _fresh(board_size=8)
-    done, _ = env.step("0, 0")  # not a legal opening move
+    done = env.step("0, 0")  # not a legal opening move
     assert not done
     assert env.state.error_count == 1
 

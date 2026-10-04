@@ -34,7 +34,7 @@ class TestTwoDollarValidation:
         """Test that accepting without a proposal is invalid"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("I want to accept.\nAccept")
+        done = env.step("I want to accept.\nAccept")
         
         # Should be invalid move, game continues
         assert not done
@@ -44,7 +44,7 @@ class TestTwoDollarValidation:
         """Test that rejecting without a proposal is invalid"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("I want to reject.\nReject")
+        done = env.step("I want to reject.\nReject")
         
         # Should be invalid move, game continues
         assert not done
@@ -59,7 +59,7 @@ class TestTwoDollarValidation:
         env.step("I reject that.\nReject")
         # Now Player 0 tries to accept their own (still active) proposal
         initial_error_count = env.state.error_count
-        done, step_info = env.step("I accept my own proposal.\nAccept")
+        done = env.step("I accept my own proposal.\nAccept")
         
         # Should be invalid move
         assert not done
@@ -74,7 +74,7 @@ class TestTwoDollarValidation:
         env.step("I reject that.\nReject")
         # Now Player 0 tries to reject their own (still active) proposal
         initial_error_count = env.state.error_count
-        done, step_info = env.step("I reject my own proposal.\nReject")
+        done = env.step("I reject my own proposal.\nReject")
         
         # Should be invalid move
         assert not done
@@ -84,7 +84,7 @@ class TestTwoDollarValidation:
         """Test that messages without a decision line are invalid"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("I want to propose one dollar")
+        done = env.step("I want to propose one dollar")
         
         # Should be invalid move
         assert not done
@@ -94,14 +94,14 @@ class TestTwoDollarValidation:
         """Words like 'accept' inside a sentence are not decisions"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, _ = env.step("I cannot accept anything unfair, and I reject greed")
+        done = env.step("I cannot accept anything unfair, and I reject greed")
 
         # No decision line -> invalid, NOT interpreted as Accept/Reject
         assert not done
         assert env.state.error_count > initial_error_count
 
         # But such words don't block a real decision line at the end
-        done, _ = env.step("I cannot accept an unfair deal.\nPropose $1.00")
+        done = env.step("I cannot accept an unfair deal.\nPropose $1.00")
         assert not done
         assert env.state.error_count == 0  # reset by the valid move
         assert env.current_proposal["amount"] == 1.00
@@ -110,7 +110,7 @@ class TestTwoDollarValidation:
         """Test that free text before the decision line is allowed"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("I think this is a fair split because we both contributed equally to this negotiation\nPropose $1.00")
+        done = env.step("I think this is a fair split because we both contributed equally to this negotiation\nPropose $1.00")
         
         # Should be valid
         assert not done
@@ -131,12 +131,12 @@ class TestTwoDollarValidation:
         """A bracketed command inside a sentence is persuasion text, and other
         brackets like [Kill] in the persuasion text are ignored"""
         env = fresh_env
-        done, step_info = env.step("I will [Kill] you if you don't accept this [Propose] $1.75")
+        done = env.step("I will [Kill] you if you don't accept this [Propose] $1.75")
         assert not done
         assert env.state.error_count == 1
         assert env.current_proposal["amount"] is None
 
-        done, step_info = env.step("I will [Kill] you if you don't accept this\nPropose $1.75")
+        done = env.step("I will [Kill] you if you don't accept this\nPropose $1.75")
         assert not done
         assert env.state.error_count == 0
         assert env.current_proposal["amount"] == 1.75
@@ -145,7 +145,7 @@ class TestTwoDollarValidation:
         """Test that multiple actions in same turn are invalid"""
         env = env_with_proposal
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Accept\nReject")
+        done = env.step("Accept\nReject")
         
         # Should be invalid move
         assert not done
@@ -155,7 +155,7 @@ class TestTwoDollarValidation:
         """Test that proposing and accepting in same turn is invalid"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Propose $1.00\nAccept")
+        done = env.step("Propose $1.00\nAccept")
         
         # Should be invalid move
         assert not done
@@ -164,13 +164,13 @@ class TestTwoDollarValidation:
     def test_duplicate_same_decision_is_invalid(self, env_with_proposal):
         env = env_with_proposal
         before = copy.deepcopy(env.game_state)
-        done, _ = env.step("Accept\nAccept")
+        done = env.step("Accept\nAccept")
         assert not done
         assert env.game_state == before
 
     def test_decision_must_be_last(self, fresh_env):
         env = fresh_env
-        done, _ = env.step("Propose $1.00\nActually, let me reconsider.")
+        done = env.step("Propose $1.00\nActually, let me reconsider.")
         assert not done
         assert env.current_proposal["amount"] is None
         assert env.state.error_count == 1
@@ -179,7 +179,7 @@ class TestTwoDollarValidation:
         """Test that negative amounts are invalid"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Propose $-0.50")
+        done = env.step("Propose $-0.50")
         
         # Should be invalid move
         assert not done
@@ -189,7 +189,7 @@ class TestTwoDollarValidation:
         """Test that amounts over $2.00 are invalid"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Propose $3.00")
+        done = env.step("Propose $3.00")
         
         # Should be invalid move
         assert not done
@@ -199,7 +199,7 @@ class TestTwoDollarValidation:
         """Test that proposing $0.00 is valid"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Propose $0.00")
+        done = env.step("Propose $0.00")
         
         # Should be valid
         assert not done
@@ -210,7 +210,7 @@ class TestTwoDollarValidation:
         """Test that proposing exactly $2.00 is valid"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Propose $2.00")
+        done = env.step("Propose $2.00")
         
         # Should be valid
         assert not done
@@ -221,7 +221,7 @@ class TestTwoDollarValidation:
         """Test that decimal amounts work correctly"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Propose $1.25")
+        done = env.step("Propose $1.25")
         
         # Should be valid
         assert not done
@@ -230,14 +230,14 @@ class TestTwoDollarValidation:
 
     def test_sub_cent_amount_is_invalid(self, fresh_env):
         env = fresh_env
-        done, _ = env.step("Propose $1.999")
+        done = env.step("Propose $1.999")
         assert not done
         assert env.current_proposal["amount"] is None
         assert env.state.error_count == 1
 
     def test_pathologically_large_proposal_is_invalid_not_an_exception(self, fresh_env):
         env = fresh_env
-        done, _ = env.step("Propose $" + "9" * 5000)
+        done = env.step("Propose $" + "9" * 5000)
         assert not done
         assert env.current_proposal["amount"] is None
         assert env.state.error_count == 1
@@ -246,7 +246,7 @@ class TestTwoDollarValidation:
         """Test that whole dollar amounts work correctly"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Propose $1")
+        done = env.step("Propose $1")
         
         # Should be valid
         assert not done
@@ -257,7 +257,7 @@ class TestTwoDollarValidation:
         """Test that missing dollar sign is invalid"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Propose 1.50")
+        done = env.step("Propose 1.50")
         
         # Should be invalid move
         assert not done
@@ -267,7 +267,7 @@ class TestTwoDollarValidation:
         """Test that dollar sign after number is invalid"""
         env = fresh_env
         initial_error_count = env.state.error_count
-        done, step_info = env.step("Propose 1.50$")
+        done = env.step("Propose 1.50$")
         
         # Should be invalid move
         assert not done
@@ -322,11 +322,11 @@ class TestTwoDollarGameFlow:
         env = fresh_env
         
         # Player 0 proposes
-        done, _ = env.step("Propose $1.00")
+        done = env.step("Propose $1.00")
         assert not done
         
         # Player 1 accepts
-        done, _ = env.step("Accept")
+        done = env.step("Accept")
         assert done
         
         # Check final amounts
@@ -342,7 +342,7 @@ class TestTwoDollarGameFlow:
         # Play until max rounds
         env.step("Propose $1.00")  # Round 1
         env.step("Reject")          # Round 2
-        done, _ = env.step("Propose $1.50")  # Round 3
+        done = env.step("Propose $1.50")  # Round 3
         
         # Should end due to max rounds
         assert done
@@ -373,7 +373,7 @@ class TestTwoDollarRoles:
         # Try to exceed word limit (say_little allows max 15 words)
         long_message = "I really think that this proposal is very fair and reasonable and should be accepted by you immediately"
         initial_error_count = env.state.error_count
-        done, _ = env.step(f"{long_message}\nPropose $1.00")
+        done = env.step(f"{long_message}\nPropose $1.00")
         
         # Should be invalid due to word limit
         assert not done
@@ -386,7 +386,7 @@ class TestTwoDollarRoles:
         
         # Short message within limit
         initial_error_count = env.state.error_count
-        done, _ = env.step("Fair split\nPropose $1.00")
+        done = env.step("Fair split\nPropose $1.00")
         
         # Should be valid
         assert not done
@@ -403,7 +403,7 @@ class TestTwoDollarRoles:
         
         # Try to make large concession (high_tension allows max $0.01)
         initial_error_count = env.state.error_count
-        done, _ = env.step("Propose $1.00")  # $0.50 concession
+        done = env.step("Propose $1.00")  # $0.50 concession
         
         # Should be invalid due to concession limit
         assert not done
@@ -432,12 +432,12 @@ class TestTwoDollarIntegration:
         env.reset(num_players=2, seed=42)
         
         # Player 0 proposes
-        done, _ = env.step("I think we should split evenly\nPropose $1.00")
+        done = env.step("I think we should split evenly\nPropose $1.00")
         assert not done
         assert env.current_proposal["amount"] == 1.00
         
         # Player 1 accepts
-        done, _ = env.step("That sounds fair to me\nAccept")
+        done = env.step("That sounds fair to me\nAccept")
         assert done
         
         # Check final state
@@ -457,7 +457,7 @@ class TestTwoDollarIntegration:
         env.step("Propose $1.75")           # Round 1
         env.step("Too greedy\nReject")      # Round 2
         env.step("Propose $1.70")           # Round 3
-        done, _ = env.step("Still too much\nReject")  # Round 4
+        done = env.step("Still too much\nReject")  # Round 4
         
         # Should end with no deal
         assert done
@@ -475,22 +475,20 @@ class TestTwoDollarIntegration:
         assert env.state.error_count > initial_error_count
         
         # Player 0 recovers with valid move
-        done, _ = env.step("Let me try again\nPropose $1.00")
+        done = env.step("Let me try again\nPropose $1.00")
         assert not done
         # After valid move, player should be able to continue playing
         assert env.current_proposal["amount"] == 1.00
     
-    def test_three_strikes_elimination(self):
+    def test_second_consecutive_invalid_move_forfeits(self):
         """Test that exceeding error allowance eliminates a player"""
         env = TwoDollarEnv(player_roles=["dependent", "public_figure"])
         env.reset(num_players=2, seed=42)
         
-        # Player 0 makes invalid moves up to the error allowance (3) + 1
-        for expected_count in (1, 2, 3):
-            done, _ = env.step(f"Invalid move {expected_count}")
-            assert not done
-            assert env.state.error_count == expected_count
-        done, _ = env.step("Invalid move 4")  # This should exceed the allowance
+        done = env.step("Invalid move 1")
+        assert not done
+        assert env.state.error_count == 1
+        done = env.step("Invalid move 2")  # This should exceed the allowance
         
         # Should end game with player 0 losing
         assert done
@@ -506,21 +504,21 @@ class TestTwoDollarEdgeCases:
         env.reset(num_players=2, seed=42)
         
         # Test $0.00
-        done, _ = env.step("Propose $0.00")
+        done = env.step("Propose $0.00")
         assert not done
         assert env.current_proposal["amount"] == 0.00
         
         env.step("Reject")
         
         # Test $2.00
-        done, _ = env.step("Propose $2.00")
+        done = env.step("Propose $2.00")
         assert not done
         assert env.current_proposal["amount"] == 2.00
         
         env.step("Reject")
         
         # Test $0.01
-        done, _ = env.step("Propose $0.01")
+        done = env.step("Propose $0.01")
         assert not done
         assert env.current_proposal["amount"] == 0.01
     
@@ -529,16 +527,16 @@ class TestTwoDollarEdgeCases:
         env = TwoDollarEnv(player_roles=["dependent", "public_figure"])
         env.reset(num_players=2, seed=42)
 
-        done, _ = env.step("Propose $1.25")
+        done = env.step("Propose $1.25")
         assert not done
         assert env.current_proposal["amount"] == 1.25
 
-        done, _ = env.step("Reject")
+        done = env.step("Reject")
         assert not done
         assert env.current_proposal["amount"] is None
 
         env.step("Propose $1.00")
-        done, _ = env.step("Accept")
+        done = env.step("Accept")
         assert done
         assert env.final_amounts == {0: 1.00, 1: 1.00}
 
@@ -548,7 +546,7 @@ class TestTwoDollarEdgeCases:
         env.reset(num_players=2, seed=42)
         
         # Test with extra spaces
-        done, _ = env.step("   Propose   $1.50   ")
+        done = env.step("   Propose   $1.50   ")
         assert not done
         assert env.current_proposal["amount"] == 1.50
     
@@ -561,13 +559,11 @@ class TestTwoDollarEdgeCases:
         env.step("Propose $1.00")
         
         # Mid-sentence bracketed words are not a decision line -> invalid (no decision found).
-        initial_error_count = env.state.error_count
-        done, _ = env.step("I accept [Accept]")
-        assert env.state.error_count > initial_error_count
-        
-        initial_error_count = env.state.error_count
-        done, _ = env.step("I accept [accept]")
-        assert env.state.error_count > initial_error_count
+        for action in ("I accept [Accept]", "I accept [accept]"):
+            env.state.error_count = 0
+            done = env.step(action)
+            assert not done
+            assert env.state.error_count == 1
     
     def test_role_assignment_random(self):
         """Test random role assignment"""
@@ -630,7 +626,7 @@ class TestTwoDollarRegressions:
         env.reset(num_players=2, seed=0)
         env.step(f"Propose ${before}")
         env.step("Reject")
-        done, _ = env.step(f"Propose ${after}")
+        done = env.step(f"Propose ${after}")
         assert not done
         assert env.state.error_count == 0
         assert env.current_proposal == {"amount": float(after), "proposer": 0}
@@ -652,7 +648,7 @@ class TestTwoDollarRegressions:
         env.step("Propose $1.50")
         env.step("Too much.\nReject")
         env.step("Fine, one cent.\nPropose $1.49")
-        done, _ = env.step("Accept")
+        done = env.step("Accept")
         assert done
         assert env.final_amounts == {0: 1.49, 1: 0.51}
         assert env.state.rewards == {0: 1, 1: -1}
@@ -666,7 +662,7 @@ class TestTwoDollarRegressions:
         if x_rounds_player == 1:
             env.step("Let me hear your offer first.\nPropose $1.90")
         env.step("I need this settled quickly.\nPropose $1.20")
-        done, _ = env.step("Accept")
+        done = env.step("Accept")
         assert done
         assert env.final_amounts[x_rounds_player] == 1.20
         assert env.state.rewards[x_rounds_player] == 1
@@ -682,7 +678,7 @@ class TestTwoDollarRegressions:
         env.step("Propose $1.20")  # round 5
         if accepter_is_x_rounds:
             env.step("Propose $0.80")  # round 6: the opponent counter-offers
-        done, _ = env.step("Accept")  # round 7 (x_rounds accepts) or round 6 (opponent accepts)
+        done = env.step("Accept")  # round 7 (x_rounds accepts) or round 6 (opponent accepts)
         assert done
         assert env.final_amounts[0] == 0.0
         assert env.state.rewards == {0: -1, 1: 1}
@@ -707,7 +703,7 @@ class TestTwoDollarRegressions:
     def test_propose_prefixed_prose_and_trailing_punctuation(self, action, rationale):
         env = TwoDollarEnv(player_roles=["vanilla", "dependent"])
         env.reset(num_players=2, seed=0)
-        done, _ = env.step(action)
+        done = env.step(action)
         assert not done
         assert env.state.error_count == 0
         assert env.current_proposal == {"amount": 1.20, "proposer": 0}
@@ -727,7 +723,7 @@ class TestTwoDollarRegressions:
         env = TwoDollarEnv(player_roles=["vanilla", "dependent"])
         env.reset(num_players=2, seed=0)
         before = copy.deepcopy(env.game_state)
-        done, _ = env.step(action)
+        done = env.step(action)
         assert not done
         assert env.state.error_count == 1
         assert env.game_state == before
@@ -745,7 +741,7 @@ class TestTwoDollarRegressions:
         env = TwoDollarEnv(player_roles=["vanilla", "1_30_dollar"])
         env.reset(num_players=2, seed=0)
         env.step("Propose $0.70")
-        done, _ = env.step("Accept")
+        done = env.step("Accept")
         assert done
         assert env.game_state["final_cents"] == {0: 70, 1: 130}
         assert env.final_amounts == {0: 0.70, 1: 1.30}  # exactly at the $1.30 threshold
@@ -761,45 +757,41 @@ class TestTwoDollarRegressions:
         env.reset(num_players=2, seed=0)
         assert env.assigned_roles[0]["enforcement"] == "none"
         env.step("I want everything and I don't care how it looks.\nPropose $2.00")
-        done, _ = env.step("Accept")
+        done = env.step("Accept")
         assert done
         assert env.final_amounts == {0: 2.00, 1: 0.00}
         assert env.state.rewards == {0: 1, 1: -1}
 
     @pytest.mark.parametrize("role", ["say_little", "high_tension"])
-    @pytest.mark.parametrize("error_allowance", [0, 1, 3])
-    def test_rule_role_prompt_states_the_real_forfeit_threshold(self, role, error_allowance):
-        env = TwoDollarEnv(player_roles=[role, "vanilla"], error_allowance=error_allowance)
+    def test_rule_role_prompt_states_the_real_forfeit_threshold(self, role):
+        env = TwoDollarEnv(player_roles=[role, "vanilla"])
         env.reset(num_players=2, seed=0)
         prompt = env.prompt(0)
-        assert f"you send {error_allowance + 1} rejected messages in a row" in prompt
+        assert "you send 2 rejected messages in a row" in prompt
         assert "rejected and must be resent" in prompt
         assert "3+" not in prompt and "three times" not in prompt
         assert "{forfeit_after}" not in prompt
 
     def test_say_little_forfeits_exactly_at_the_stated_threshold(self):
-        env = TwoDollarEnv(player_roles=["say_little", "vanilla"], error_allowance=3)
+        env = TwoDollarEnv(player_roles=["say_little", "vanilla"])
         env.reset(num_players=2, seed=0)
-        assert "you send 4 rejected messages in a row" in env.prompt(0)
+        assert "you send 2 rejected messages in a row" in env.prompt(0)
         too_long = " ".join(["word"] * 16) + "\nPropose $1.50"
-        for _ in range(3):
-            done, _ = env.step(too_long)
-            assert not done
-        done, _ = env.step(too_long)
+        assert env.step(too_long) is False
+        done = env.step(too_long)
         assert done
         assert env.state.rewards == {0: -1, 1: 1}
 
     def test_say_little_violations_do_not_accumulate_across_valid_moves(self):
-        env = TwoDollarEnv(player_roles=["say_little", "vanilla"], error_allowance=3)
+        env = TwoDollarEnv(player_roles=["say_little", "vanilla"])
         env.reset(num_players=2, seed=0)
         too_long = " ".join(["word"] * 16) + "\nPropose $1.50"
         for _ in range(3):
-            for _ in range(3):
-                assert env.step(too_long)[0] is False
-            assert env.step("Propose $1.50")[0] is False
-            assert env.step("Reject")[0] is False
-        assert env.step("Propose $1.50")[0] is False
-        done, _ = env.step("Accept")
+            assert env.step(too_long) is False
+            assert env.step("Propose $1.50") is False
+            assert env.step("Reject") is False
+        assert env.step("Propose $1.50") is False
+        done = env.step("Accept")
         assert done
         assert env.state.rewards == {0: 1, 1: -1}
 
@@ -839,7 +831,7 @@ class TestTwoDollarRegressions:
         assert env.player_deadline == {x_rounds_player: 2}
         assert "within the first 2 rounds" in env.prompt(x_rounds_player)
         env.step("Propose $1.00")  # round 1
-        done, _ = env.step("Accept")  # round 2
+        done = env.step("Accept")  # round 2
         assert done
         assert env.final_amounts == {0: 1.00, 1: 1.00}
         assert env.state.rewards == {0: 0, 1: 0}

@@ -23,7 +23,7 @@ def test_reset_builds_starting_board():
 
 def test_forward_move_and_rotation():
     env = _fresh()
-    done, _ = env.step("a2a3")  # White pawn from row1 to empty row2
+    done = env.step("a2a3")  # White pawn from row1 to empty row2
     assert not done
     board = env.state.game_state["board"]
     assert board[2][0] == "W" and board[1][0] == ""
@@ -34,14 +34,14 @@ def test_diagonal_capture():
     env = _fresh()
     # Drop a black piece diagonally in front of a1 and capture it.
     env.state.game_state["board"][2][1] = "B"
-    done, _ = env.step("a2b3")
+    done = env.step("a2b3")
     assert not done
     assert env.state.game_state["board"][2][1] == "W"
 
 
 def test_diagonal_move_to_empty_square_is_legal():
     env = _fresh()
-    done, _ = env.step("a2b3")
+    done = env.step("a2b3")
     assert not done
     assert env.state.game_state["board"][2][1] == "W"
 
@@ -49,7 +49,7 @@ def test_diagonal_move_to_empty_square_is_legal():
 def test_illegal_destination_is_atomic():
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step("a1b2")  # occupied by another White piece
+    done = env.step("a1b2")  # occupied by another White piece
     assert not done
     assert env.state.game_state == before
     assert env.state.current_player_id == 0
@@ -60,7 +60,7 @@ def test_reaching_home_row_wins():
     board = env.state.game_state["board"]
     board[3][0] = "W"   # one step from Black's home row (row 4)
     board[4][0] = ""    # clear the destination
-    done, _ = env.step("a4a5")
+    done = env.step("a4a5")
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
 
@@ -74,7 +74,7 @@ def test_valid_moves_stay_synchronised_after_rotation():
 
 def test_invalid_format_increments_error_count():
     env = _fresh()
-    done, _ = env.step("move a pawn please")
+    done = env.step("move a pawn please")
     assert not done
     assert env.state.error_count == 1
 
@@ -99,14 +99,14 @@ def test_format_error_describes_expected_action(board_size):
 def test_leading_zero_coordinate_is_rejected_without_mutation():
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step("a02a03")
+    done = env.step("a02a03")
     assert not done
     assert env.state.game_state == before
 
 
 def test_illegal_move_increments_error_count():
     env = _fresh()
-    done, _ = env.step("a2a4")  # cannot advance two squares
+    done = env.step("a2a4")  # cannot advance two squares
     assert not done
     assert env.state.error_count == 1
 
@@ -149,6 +149,6 @@ def test_rearmost_piece_always_has_a_diagonal_move():
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     env.step("garbage")
-    done, _ = env.step("garbage")
+    done = env.step("garbage")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}

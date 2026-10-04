@@ -80,7 +80,9 @@ class RetroSpaceDuelEnv(ta.GameEnv):
         for kind in OBJECT_KINDS:
             for _ in range(self.object_counts[kind]):
                 objects[cells.pop()] = kind
-        return {"ships": ships, "objects": objects}
+        first_player = self.rng.randrange(2)
+        self.set_current_player(first_player)
+        return {"ships": ships, "objects": objects, "first_player": first_player}
 
     def _spawns(self) -> Tuple[Tuple[int, int], Tuple[int, int]]:
         return (1, 1), (self.width - 2, self.height - 2)
@@ -97,7 +99,8 @@ class RetroSpaceDuelEnv(ta.GameEnv):
         return (
             f"You are Player {player_id} in Retro Space Duel, a turn-based two-player space shooter on a "
             f"{self.width}x{self.height} grid. Your ship is shown as '{SHIP_SYMBOLS[player_id]}' and the enemy ship as "
-            f"'{SHIP_SYMBOLS[1 - player_id]}'. Players alternate turns and Player 0 moves first.\n"
+            f"'{SHIP_SYMBOLS[1 - player_id]}'. Players alternate turns and Player {self.game_state['first_player']} "
+            "moves first.\n"
             "Positions are (x, y): x is the column number and y the row number printed around the arena, so 'up' "
             "decreases y.\n\n"
             "On your turn, reply with exactly one action:\n"

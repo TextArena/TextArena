@@ -46,7 +46,7 @@ def test_reset_structure():
 
 def test_single_bid_records_and_rotates():
     env = _fresh()
-    done, _ = env.step("A")
+    done = env.step("A")
     assert not done
     assert env.state.game_state["pending_bids"] == {0: 1}
     assert 1 not in env.state.game_state["player_hands"][0]  # card A removed
@@ -64,7 +64,7 @@ def test_bid_is_private_until_every_alive_player_has_acted():
 def test_malformed_bid_is_atomic():
     env = _fresh()
     before_hand = env.state.game_state["player_hands"][0].copy()
-    done, _ = env.step("A K")
+    done = env.step("A K")
     assert not done
     assert env.state.game_state["pending_bids"] == {}
     assert env.state.game_state["player_hands"][0] == before_hand
@@ -76,7 +76,7 @@ def test_all_tie_game_ends_in_triple_draw():
     done = False
     for v in range(1, 14):
         for _ in range(3):
-            done, _ = env.step(_face(v))
+            done = env.step(_face(v))
     assert done
     assert env.state.game_state["player_scores"] == {0: 0, 1: 0, 2: 0}
     assert env.state.rewards == {0: 0, 1: 0, 2: 0}
@@ -89,7 +89,7 @@ def test_eliminated_player_cannot_share_final_draw_reward():
     assert env.state.eliminated == [0]
     for value in range(1, 14):
         env.step(_face(value))
-        done, _ = env.step(_face(value))
+        done = env.step(_face(value))
     assert done
     assert env.state.rewards == {0: -1, 1: 0, 2: 0}
 
@@ -122,11 +122,11 @@ def test_prompt_states_rank_rewards_and_elimination_rule():
 
 def test_repeated_invalid_eliminates_player():
     env = _fresh()
-    done, _ = env.step("z")  # unparsable card
+    done = env.step("z")  # unparsable card
     assert not done
     assert env.state.error_count == 1
     assert env.state.is_player_alive(0)
-    done, _ = env.step("z")  # second consecutive invalid -> elimination
+    done = env.step("z")  # second consecutive invalid -> elimination
     assert not done  # two players remain, game continues
     assert not env.state.is_player_alive(0)
     assert env.state.current_player_id != 0
@@ -138,7 +138,7 @@ def test_eliminating_final_bidder_resolves_survivors_without_rebidding():
     env.step("A")  # P0's sealed bid.
     env.step("2")  # P1's sealed bid.
     env.step("bad")
-    done, _ = env.step("still bad")  # P2 forfeits before bidding.
+    done = env.step("still bad")  # P2 forfeits before bidding.
 
     gs = env.state.game_state
     assert not done

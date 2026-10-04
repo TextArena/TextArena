@@ -103,10 +103,6 @@ class MinesweeperEnv(ta.GameEnv):
         return create_board_str(self.grid, self.revealed, self.flags)
 
     def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
-        if len(move) > self.max_action_chars:
-            return self.invalid(
-                f"Action is too long (maximum {self.max_action_chars} characters)."
-            )
         action_text = move.strip()
         match = re.fullmatch(r"(\d+)(?:\s*,\s*|\s+)(\d+)", action_text)
         if match is None:
@@ -196,25 +192,6 @@ class MinesweeperEnv(ta.GameEnv):
         if safe_total_after_initial == 0:
             return 1.0 if self._is_solved() else 0.0
         return revealed_safe_after_initial / safe_total_after_initial
-
-    def _was_in_initial_safe_zone(self, row: int, col: int) -> bool:
-        """ Check if a cell would have been revealed in the initial safe zone """
-        if self.initial_move_pos is None:
-            return False
-
-        initial_row, initial_col = self.initial_move_pos
-
-        # Check if the cell is within the 3x3 safe zone around the initial move
-        if (initial_row - 1 <= row <= initial_row + 1 and
-                initial_col - 1 <= col <= initial_col + 1):
-            return True
-
-        # Also check if it would have been auto-revealed due to flood-fill from a 0 cell
-        return self._would_be_revealed_initially(row, col, initial_row, initial_col)
-
-    def _would_be_revealed_initially(self, target_row: int, target_col: int, start_row: int, start_col: int) -> bool:
-        """ Simulate what cells would be revealed from the initial move """
-        return self._initial_reveal_mask(start_row, start_col)[target_row][target_col]
 
     def _initial_reveal_mask(
         self, start_row: int, start_col: int

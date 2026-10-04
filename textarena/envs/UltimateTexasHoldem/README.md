@@ -58,9 +58,9 @@ actions. At each showdown the dealer's cards, both best hands and the result of 
 
 | Outcome | Reward |
 | --- | --- |
-| Complete `max_rounds` rounds | `+1` |
-| A round leaves you unable to post the next Ante and Blind | `-1` |
-| Second consecutive invalid move | `-1` |
+| Complete `max_rounds` rounds | `1` |
+| A round leaves you unable to post the next Ante and Blind | `0` |
+| Second consecutive invalid move | `0` |
 
 ## Parameters
 

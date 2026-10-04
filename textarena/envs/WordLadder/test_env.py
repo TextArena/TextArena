@@ -71,7 +71,7 @@ def test_scripted_ladder_wins():
     assert path is not None
     done = False
     for word in path[1:]:  # skip the start word itself
-        done, _ = env.step(word)
+        done = env.step(word)
     assert done
     assert env.state.rewards == {0: 1}
 
@@ -82,7 +82,7 @@ def test_reaching_target_on_turn_limit_is_still_a_win():
     assert path is not None
     env.state.max_turns = len(path) - 1
     for word in path[1:]:
-        done, _ = env.step(word)
+        done = env.step(word)
     assert done
     assert env.state.turn == len(path) - 1
     assert env.state.rewards == {0: 1}
@@ -90,7 +90,7 @@ def test_reaching_target_on_turn_limit_is_still_a_win():
 
 def test_invalid_format_rejected():
     env = _fresh()
-    done, _ = env.step("not one word")
+    done = env.step("not one word")
     assert not done
     assert env.state.error_count == 1
 
@@ -111,7 +111,7 @@ def test_format_error_describes_expected_action():
 def test_wrong_length_rejected():
     env = _fresh()
     # A single-letter word cannot match a multi-letter target length.
-    done, _ = env.step("a")
+    done = env.step("a")
     assert not done
     assert env.state.error_count == 1
 
@@ -119,7 +119,7 @@ def test_wrong_length_rejected():
 def test_non_one_letter_change_rejected():
     env = _fresh()
     # Resubmitting the start word is 0 letters different -> rejected.
-    done, _ = env.step(env.start_word)
+    done = env.step(env.start_word)
     assert not done
     assert env.state.error_count == 1
 
@@ -127,7 +127,7 @@ def test_non_one_letter_change_rejected():
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     env.step("bad one")
-    done, _ = env.step("bad two")
+    done = env.step("bad two")
     assert done
     # Single-player: repeated invalid ends the game with a completion reward, nothing for the start word.
     assert env.state.rewards == {0: 0}
@@ -139,7 +139,7 @@ def test_immediate_invalid_policy_scores_zero_on_registered_configs(env_id, seed
     env = ta.make(env_id)
     env.reset(num_players=1, seed=seed)
     for _ in range(5):
-        done, _ = env.step("@@@ not a move @@@")
+        done = env.step("@@@ not a move @@@")
         if done:
             break
     assert done
@@ -152,10 +152,10 @@ def test_partial_progress_counts_ladder_moves_cut_from_the_start_distance():
     distance = len(path) - 1
     assert distance >= 2
     for word in path[1:-1]:  # stop one word short of the target
-        done, _ = env.step(word)
+        done = env.step(word)
         assert not done
     env.step("bad one")
-    done, _ = env.step("bad two")
+    done = env.step("bad two")
     assert done
     assert env.state.rewards == {0: pytest.approx((distance - 1) / distance)}
 
@@ -164,10 +164,10 @@ def test_moving_away_and_back_earns_nothing():
     env = _fresh()
     path = _bfs_path(env)
     for word in (path[1], path[0], path[1], path[0]):
-        done, _ = env.step(word)
+        done = env.step(word)
         assert not done and env.state.error_count == 0
     env.step("bad one")
-    done, _ = env.step("bad two")
+    done = env.step("bad two")
     assert done and env.state.rewards == {0: 0}
 
 
@@ -176,10 +176,10 @@ def test_matching_more_letters_of_the_target_is_not_progress_by_itself():
     env.state.game_state.update(start_word="boot", target_word="heat", current_word="boot", history=["boot"])
     # "hoot" matches the h and t of "heat" ("boot" only the t), but its ladder to "heat" is no shorter.
     assert len(_bfs_path(env, start="hoot")) >= len(_bfs_path(env))
-    done, _ = env.step("hoot")
+    done = env.step("hoot")
     assert not done
     env.step("bad one")
-    done, _ = env.step("bad two")
+    done = env.step("bad two")
     assert done and env.state.rewards == {0: 0}
 
 
@@ -189,10 +189,10 @@ def test_shortening_the_ladder_scores_without_matching_more_letters():
     start_distance = len(_bfs_path(env)) - 1
     distance = len(_bfs_path(env, start="food")) - 1
     assert distance < start_distance  # "food" matches the same o and d of "cord" as "good"
-    done, _ = env.step("food")
+    done = env.step("food")
     assert not done
     env.step("bad one")
-    done, _ = env.step("bad two")
+    done = env.step("bad two")
     assert done
     assert env.state.rewards == {0: pytest.approx((start_distance - distance) / start_distance)}
 
@@ -241,17 +241,17 @@ def test_dictionary_words_beyond_the_puzzle_vocabulary_are_accepted():
         start_word="fear", target_word="meal", current_word="fear", history=["fear"]
     )
     for word in ("bear", "hear", "heal"):
-        done, _ = env.step(word)
+        done = env.step(word)
         assert not done and env.state.error_count == 0
     assert env.history == ["fear", "bear", "hear", "heal"]
-    done, _ = env.step("meal")
+    done = env.step("meal")
     assert done and env.state.rewards == {0: 1}
 
 
 def test_non_dictionary_word_is_rejected_atomically():
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step("q" * len(env.target_word))
+    done = env.step("q" * len(env.target_word))
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -269,7 +269,7 @@ def test_prompt_states_which_words_count():
 def test_invalid_move_does_not_mutate_ladder():
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step("two words")
+    done = env.step("two words")
     assert not done
     assert env.state.game_state == before
     assert env.state.turn == 0
@@ -291,7 +291,7 @@ def test_turn_limit_counts_valid_moves_and_returns_bounded_reward():
     path = _bfs_path(env)
     assert path is not None and len(path) > 2
     env.state.max_turns = 1
-    done, _ = env.step(path[1])
+    done = env.step(path[1])
     assert done
     assert env.state.turn == 1
     distance = len(path) - 1
@@ -317,7 +317,7 @@ def test_snapshot_restores_history_and_static_vocabulary():
 @pytest.mark.parametrize("action", ["abc123", "abc_def", "word!", "[two words]"])
 def test_malformed_actions_are_rejected(action):
     env = _fresh()
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
 

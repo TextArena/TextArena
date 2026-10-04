@@ -51,7 +51,7 @@ def test_full_solve_wins():
     done = False
     for word, (row, col, direction) in placements.items():
         sr, sc, er, ec = _endpoints(word, row, col, direction)
-        done, _ = env.step(f"{sr} {sc} {er} {ec}")
+        done = env.step(f"{sr} {sc} {er} {ec}")
     assert done
     assert env.state.rewards == {0: 1.0}
     assert env.state.turn == len(placements)
@@ -60,7 +60,7 @@ def test_full_solve_wins():
 
 def test_invalid_format_rejected():
     env = _fresh()
-    done, _ = env.step("I have no coordinates")
+    done = env.step("I have no coordinates")
     assert not done
     assert env.state.error_count == 1
 
@@ -69,7 +69,7 @@ def test_out_of_bounds_rejected():
     env = _fresh()
     size = len(env.state.game_state["board"])
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(f"0 0 0 {size + 5}")
+    done = env.step(f"0 0 0 {size + 5}")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state == before
@@ -78,7 +78,7 @@ def test_out_of_bounds_rejected():
 def test_incorrect_attempt_decrements_tries():
     env = _fresh()
     # A zero-length selection can never match a placed word (all words len>=2).
-    done, _ = env.step("0 0 0 0")
+    done = env.step("0 0 0 0")
     assert not done
     assert env.num_incorrect_tries == 19
 
@@ -98,7 +98,7 @@ def test_finding_one_word_marks_it_correct():
 def test_parser_rejects_noncanonical_actions_atomically(action):
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -110,7 +110,7 @@ def test_repeated_successful_guess_in_either_direction_is_atomic_invalid():
     env.step(f"{sr} {sc} {er} {ec}")
     before = copy.deepcopy(env.state.game_state)
 
-    done, _ = env.step(f"{er} {ec} {sr} {sc}")
+    done = env.step(f"{er} {ec} {sr} {sc}")
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -125,7 +125,7 @@ def test_diagonal_selection_cannot_match_horizontal_word():
         pytest.skip("seed did not place a horizontal word")
     word, (row, col, _) = horizontal
     tries_before = env.num_incorrect_tries
-    done, _ = env.step(f"{row} {col} {row + 1} {col + len(word) - 1}")
+    done = env.step(f"{row} {col} {row + 1} {col + len(word) - 1}")
     assert not done
     assert word not in env.correct_words
     assert env.num_incorrect_tries == tries_before - 1
@@ -175,7 +175,7 @@ def test_explicit_guess_cap_counts_correct_guesses_and_awards_word_progress():
     env = _fresh(max_turns=1)
     word, (row, col, direction) = next(iter(env.placed_words.items()))
     action = " ".join(map(str, _endpoints(word, row, col, direction)))
-    done, _ = env.step(action)
+    done = env.step(action)
     assert done
     assert env.state.turn == 1
     assert env.state.game_info[0]["turn_count"] == 1
@@ -188,10 +188,10 @@ def test_default_game_allows_all_incorrect_attempts_after_finding_a_word():
     env.step(_correct_guesses(env)[0])
     misses = _incorrect_guesses(env, env.MAX_INCORRECT_TRIES)
     for miss in misses[:-1]:
-        done, _ = env.step(miss)
+        done = env.step(miss)
         assert not done
     assert env.num_incorrect_tries == 1
-    done, _ = env.step(misses[-1])
+    done = env.step(misses[-1])
     assert done
     assert env.state.turn == 1 + env.MAX_INCORRECT_TRIES
     assert env.state.rewards == {0: round(1 / env.num_words, 3)}
@@ -202,10 +202,10 @@ def test_default_guess_cap_is_never_reached_by_the_longest_game():
     env = _fresh()
     assert env.max_turns == env.num_words + env.MAX_INCORRECT_TRIES
     for guess in _correct_guesses(env)[:-1]:
-        done, _ = env.step(guess)
+        done = env.step(guess)
         assert not done
     for miss in _incorrect_guesses(env, env.MAX_INCORRECT_TRIES):
-        done, _ = env.step(miss)
+        done = env.step(miss)
     assert done
     assert env.state.turn == env.num_words - 1 + env.MAX_INCORRECT_TRIES < env.max_turns
     assert env.state.game_info[0]["reason"].startswith("No more incorrect tries remaining")
@@ -234,5 +234,5 @@ def test_words_come_from_the_common_words_or_headwords(hardcore):
     assert set(first.placed_words) <= set(first.word_list)
     done = False
     for guess in _correct_guesses(first):
-        done, _ = first.step(guess)
+        done = first.step(guess)
     assert done and first.state.rewards == {0: 1.0}

@@ -21,14 +21,14 @@ def _fresh(**kwargs):
 def test_correct_guess_wins():
     env = _fresh()
     target = env.state.game_state["game_number"]
-    done, _ = env.step(str(target))
+    done = env.step(str(target))
     assert done
     assert env.state.rewards[0] == 1
 
 
 def test_correct_guess_on_last_allowed_turn_wins():
     env = _fresh(min_number=7, max_number=7, max_turns=1)
-    done, _ = env.step("7")
+    done = env.step("7")
     assert done
     assert env.state.turn == 1
     assert env.state.rewards == {0: 1}
@@ -38,7 +38,7 @@ def test_wrong_guess_gives_hint_and_continues():
     env = _fresh()
     target = env.state.game_state["game_number"]
     wrong = target + 1 if target < env.max_number else target - 1
-    done, _ = env.step(str(wrong))
+    done = env.step(str(wrong))
     assert not done
     assert len(env.state.game_state["guess_history"]) == 1
     _, hint = env.state.game_state["guess_history"][-1]
@@ -55,14 +55,14 @@ def test_hint_direction_is_correct():
 
 def test_out_of_range_guess_is_invalid():
     env = _fresh()
-    done, _ = env.step(str(env.max_number + 5))
+    done = env.step(str(env.max_number + 5))
     assert not done
     assert env.state.error_count == 1
 
 
 def test_bad_format_is_invalid():
     env = _fresh()
-    done, _ = env.step("I think it is seven")
+    done = env.step("I think it is seven")
     assert not done
     assert env.state.error_count == 1
 
@@ -94,17 +94,17 @@ def test_invalid_bounds_are_rejected(kwargs):
 
 def test_negative_and_explicit_positive_guesses_are_parseable():
     env = _fresh(min_number=-2, max_number=-2, max_turns=1)
-    done, _ = env.step("-2")
+    done = env.step("-2")
     assert done and env.state.rewards == {0: 1}
 
     env = _fresh(min_number=2, max_number=2, max_turns=1)
-    done, _ = env.step("+2")
+    done = env.step("+2")
     assert done and env.state.rewards == {0: 1}
 
 
 def test_unicode_decimal_digits_are_parsed_consistently():
     env = _fresh(min_number=12, max_number=12, max_turns=1)
-    done, _ = env.step("١٢")
+    done = env.step("١٢")
     assert done and env.state.rewards == {0: 1}
 
 
@@ -151,7 +151,7 @@ def test_duplicate_guess_is_atomic():
     guess = target + 1 if target < env.max_number else target - 1
     env.step(str(guess))
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(str(guess))
+    done = env.step(str(guess))
     assert not done
     assert env.state.game_state == before
     assert env.state.turn == 1
@@ -161,7 +161,7 @@ def test_turn_limit_counts_guesses_exactly():
     env = _fresh(min_number=1, max_number=10, max_turns=2)
     env.state.game_state["game_number"] = 10
     env.step("1")
-    done, _ = env.step("2")
+    done = env.step("2")
     assert done
     assert env.state.turn == 2
     assert len(env.state.game_state["guess_history"]) == 2
@@ -170,7 +170,7 @@ def test_turn_limit_counts_guesses_exactly():
 
 def test_extremely_large_integer_is_invalid_not_an_exception():
     env = _fresh()
-    done, _ = env.step("9" * 5000)
+    done = env.step("9" * 5000)
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["guess_history"] == []
@@ -220,6 +220,6 @@ def test_step_after_terminal_is_idempotent():
     target = env.state.game_state["game_number"]
     env.step(str(target))
     before = copy.deepcopy(env.state.__dict__)
-    done, info = env.step(str(target))
-    assert done and info == {}
+    done = env.step(str(target))
+    assert done
     assert env.state.__dict__ == before

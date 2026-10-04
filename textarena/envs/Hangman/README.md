@@ -51,7 +51,7 @@ revealed when you run out of tries.
 
 | Outcome | Reward |
 | --- | --- |
-| Word completed or guessed | `+1` |
+| Word completed or guessed | `1` |
 | Out of tries | Fraction of the word's letters revealed (`0` up to just below `1`) |
 | Second consecutive rejected reply | Fraction of the word's letters revealed so far |
 

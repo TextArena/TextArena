@@ -3,6 +3,8 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
 
+TEAMS = ((0, 2), (1, 3))  # the fixed partnerships of a four-player game
+
 
 class BriscolaEnv(ta.GameEnv):
     min_players = 2
@@ -58,6 +60,19 @@ class BriscolaEnv(ta.GameEnv):
     def _card_to_string(self, card: Dict[str, Any]) -> str:
         """ Converts a card to a readable string """
         return f"{card['rank']}{card['suit']}"
+
+    def _team(self, player_id: int) -> Optional[Tuple[int, int]]:
+        """ The player's partnership in a four-player game, or None when everyone plays alone """
+        if self.state.num_players != 4:
+            return None
+        return next(team for team in TEAMS if player_id in team)
+
+    def _partner(self, player_id: int) -> Optional[int]:
+        team = self._team(player_id)
+        return None if team is None else next(pid for pid in team if pid != player_id)
+
+    def _team_points(self, team: Tuple[int, int]) -> int:
+        return sum(self.game_state['points_won'][pid] for pid in team)
 
     def _find_action_token(self, message: str) -> Optional[int]:
         """ Parse card play action from player message """
@@ -135,9 +150,24 @@ class BriscolaEnv(ta.GameEnv):
 
     def prompt(self, player_id: int) -> str:
         game_state = self.game_state
+        partner = self._partner(player_id)
+        if partner is None:
+            goal = "Goal: Win tricks and collect the most points (120 total points in the deck).\n"
+            ending = "When all cards have been played, the player(s) with the most points win; if everyone ties, it is a draw.\n\n"
+        else:
+            goal = (
+                f"You play in a partnership with Player {partner}: Players 0 and 2 play against Players 1 and 3, and "
+                "partners sit opposite each other, so the turn order alternates between the teams.\n"
+                "Goal: Win tricks so that your team collects the most points (120 total points in the deck). Partners' "
+                "card points are combined, and both partners receive their team's result.\n"
+            )
+            ending = (
+                "When all cards have been played, the team with more points wins; 60-60 is a draw. If a player makes "
+                "two invalid moves in a row, their team loses at once.\n\n"
+            )
         return (
             f"You are playing Briscola - Player {player_id}.\n"
-            f"Goal: Win tricks and collect the most points (120 total points in the deck).\n"
+            + goal +
             f"Card Points: A=11, 3=10, K=4, Q=3, J=2, others=0\n"
             f"Card Power: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\n"
             f"Trump cards beat non-trump cards regardless of power.\n"
@@ -146,7 +176,7 @@ class BriscolaEnv(ta.GameEnv):
             "After each trick, its winner draws first and the others follow in turn order; the face-up trump card is the "
             "last card drawn. The trick winner leads the next trick.\n"
             + ("With 3 players, the 2♣ is removed so the 39 cards divide evenly.\n" if self.state.num_players == 3 else "")
-            + "When all cards have been played, the player(s) with the most points win; if everyone ties, it is a draw.\n\n"
+            + ending +
             f"Action: reply with 'play X' where X is the position (1-{len(game_state['players'][player_id]['hand']) if player_id in game_state['players'] else 3}) of the card in your hand\n"
         )
 
@@ -170,7 +200,7 @@ class BriscolaEnv(ta.GameEnv):
 
         return "\n".join(output)
 
-    def _render_current_trick(self) -> str:
+    def _render_current_trick(self, viewer_id: int) -> str:
         """ Renders the current trick being played """
         gs = self.game_state
         if not gs['current_trick']:
@@ -178,9 +208,11 @@ class BriscolaEnv(ta.GameEnv):
 
         output = []
         output.append("Current trick:")
+        partner = self._partner(viewer_id)
         for player_id, card in gs['current_trick']:
             trump_indicator = " (TRUMP)" if card['suit'] == gs['trump_suit'] else ""
-            output.append(f"  Player {player_id}: {self._card_to_string(card)}{trump_indicator}")
+            partner_label = " (your partner)" if player_id == partner else ""
+            output.append(f"  Player {player_id}{partner_label}: {self._card_to_string(card)}{trump_indicator}")
 
         return "\n".join(output)
 
@@ -189,13 +221,21 @@ class BriscolaEnv(ta.GameEnv):
         gs = self.game_state
 
         hand_str = self._render_player_hand(player_id)
-        trick_str = self._render_current_trick()
+        trick_str = self._render_current_trick(player_id)
 
         # Show current scores
         scores = []
         for pid in range(self.state.num_players):
             scores.append(f"Player {pid}: {gs['points_won'][pid]} pts")
         scores_str = " | ".join(scores)
+        partner = self._partner(player_id)
+        if partner is not None:
+            own, other = self._team(player_id), next(team for team in TEAMS if player_id not in team)
+            scores_str += (
+                f"\nYour team (Players {own[0]} and {own[1]}, your partner is Player {partner}): "
+                f"{self._team_points(own)} pts | Opponents (Players {other[0]} and {other[1]}): "
+                f"{self._team_points(other)} pts"
+            )
 
         trump_info = f"Trump suit: {gs['trump_suit']}"
         if gs['deck']:
@@ -249,10 +289,11 @@ class BriscolaEnv(ta.GameEnv):
         gs['points_won'][winner_id] += trick_points
         gs['tricks_won'][winner_id].append(gs['current_trick'].copy())
 
-        self.broadcast(
-            f"Player {winner_id} wins the trick with {self._card_to_string(winning_card)} and gains {trick_points} points!",
-            ta.ObservationType.GAME_MESSAGE
-        )
+        message = f"Player {winner_id} wins the trick with {self._card_to_string(winning_card)} and gains {trick_points} points!"
+        team = self._team(winner_id)
+        if team is not None:
+            message += f" Players {team[0]} and {team[1]} now have {self._team_points(team)} points together."
+        self.broadcast(message, ta.ObservationType.GAME_MESSAGE)
 
         # Clear current trick
         gs['current_trick'] = []
@@ -331,8 +372,18 @@ class BriscolaEnv(ta.GameEnv):
             gs['players'][player_id]['hand'].append(new_card)
 
     def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
-        """Remove a forfeiting hand without corrupting future trick sizes."""
+        """Remove a forfeiting hand without corrupting future trick sizes; in a partnership game the team forfeits."""
         gs = self.game_state
+        team = self._team(player_id)
+        if team is not None:
+            opponents = next(other for other in TEAMS if other != team)
+            return self.winner(
+                list(opponents),
+                reason=(
+                    f"Player {player_id} made repeated invalid moves: {reason} Players {team[0]} and {team[1]} "
+                    f"forfeit, so Players {opponents[0]} and {opponents[1]} win."
+                ),
+            )
         self.eliminate(player_id)
         gs['removed_cards'].extend(gs['players'][player_id]['hand'])
         gs['players'][player_id]['hand'] = []
@@ -376,6 +427,9 @@ class BriscolaEnv(ta.GameEnv):
         gs = self.game_state
         gs['phase'] = 'finished'
 
+        if self.state.num_players == 4:
+            return self._end_partnership_game()
+
         active_players = self.state.alive_players
         winner_points = max(gs['points_won'][pid] for pid in active_players)
         winners = [pid for pid in active_players if gs['points_won'][pid] == winner_points]
@@ -398,6 +452,20 @@ class BriscolaEnv(ta.GameEnv):
             }
             return self.outcome(rewards, summary)
         return self.winner(winners, summary)
+
+    def _end_partnership_game(self) -> ta.Outcome:
+        """ Compare the combined points of the two partnerships """
+        gs = self.game_state
+        totals = {team: self._team_points(team) for team in TEAMS}
+        summary = "Game Over!\n\nFinal Scores:\n"
+        for team in TEAMS:
+            members = " + ".join(f"Player {pid} {gs['points_won'][pid]}" for pid in team)
+            summary += f"Players {team[0]} and {team[1]}: {totals[team]} points ({members})\n"
+        (team_a, points_a), (team_b, points_b) = totals.items()
+        if points_a == points_b:
+            return self.draw(summary + f"Both teams finished with {points_a} points. The game is a draw.")
+        winners = team_a if points_a > points_b else team_b
+        return self.winner(list(winners), summary + f"Players {winners[0]} and {winners[1]} win as a team.")
 
     def get_board_str(self) -> str:
         """ Get a string representation of the current game state """
@@ -432,5 +500,10 @@ class BriscolaEnv(ta.GameEnv):
                 tricks = len(gs['tricks_won'][player_id])
 
                 output.append(f"Player {player_id}: {points} points, {tricks} tricks, {hand_size} cards in hand")
+
+        if self.state.num_players == 4:
+            output.append("")
+            for team in TEAMS:
+                output.append(f"Team of Players {team[0]} and {team[1]}: {self._team_points(team)} points")
 
         return "\n".join(output)

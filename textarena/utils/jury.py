@@ -3,17 +3,10 @@ from typing import Callable, Optional, List, Dict
 
 import textarena as ta
 
-default_models = [
-    "amazon/nova-pro-v1",
-    "openai/gpt-4o-mini",
-    "anthropic/claude-3-haiku",
-    "meta-llama/llama-3.3-70b-instruct",
-    "meta-llama/llama-3.1-405b-instruct",
-    "qwen/qwen-turbo",
-    "minimax/minimax-01",
-    "microsoft/phi-4",
-    "deepseek/deepseek-chat"
-]
+# The OpenRouter model behind every LLM jury and game master. It decides game outcomes, so it is part of the rules
+# of the -v1 games that use it; changing it is a version bump for Debate, ScenarioPlanning, GuessWho and TwentyQuestions.
+DEFAULT_JUDGE_MODEL = "qwen/qwen3.8-27b"
+default_models = [DEFAULT_JUDGE_MODEL]
 
 JUROR_SYSTEM_PROMPT = (
     "You are a fair and impartial juror. You will be given a context and a list of "

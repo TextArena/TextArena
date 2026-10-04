@@ -54,10 +54,6 @@ class SudokuEnv(ta.GameEnv):
         return f"Board state: \n{self.get_board_str()}"
 
     def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
-        if len(move) > self.max_action_chars:
-            return self.invalid(
-                f"Action is too long (maximum {self.max_action_chars} characters)."
-            )
         action_text = move.strip()
         match = re.fullmatch(
             r"(\d+)(?:\s*,\s*|\s+)(\d+)(?:\s*,\s*|\s+)(\d+)",
@@ -166,22 +162,6 @@ class SudokuEnv(ta.GameEnv):
         return full_grid, puzzle_grid
 
     # ---------------------------------------------------------------- helpers
-    def _get_grid_string_with_indices(self, game_board: Optional[List[List[int]]] = None) -> str:
-        if game_board is None: game_board = self.game_state["board"]
-        header = "   " + " ".join([f"C{j+1}" + ("  " if (j + 1) % 3 == 0 else "") for j in range(9)])  # Column headers
-        lines = [header]
-        for i, row in enumerate(game_board):
-            row_str = f"R{i+1} "  # Row header
-            for j, num in enumerate(row):
-                cell = str(num) if num != 0 else "."
-                row_str += f" {cell} "
-                if (j + 1) % 3 == 0 and j < 8:
-                    row_str += "| "
-            lines.append(row_str.strip())
-            if (i + 1) % 3 == 0 and i < 8:
-                lines.append("   " + "- " * 16)
-        return "\n".join(lines)
-
     def _is_move_correct(self, row: int, col: int, num: int) -> bool:
         return self.full_grid[row][col] == num
 
@@ -200,12 +180,9 @@ class SudokuEnv(ta.GameEnv):
         for i in range(9):
             for j in range(9):
                 num = self.game_state["board"][i][j]
-                if num == 0 or not self._is_move_correct_complete(i, j, num):
+                if num == 0 or not self._is_move_correct(i, j, num):
                     return False
         return True
-
-    def _is_move_correct_complete(self, row: int, col: int, num: int) -> bool:
-        return self._is_move_correct(row, col, num)
 
     def _get_percentage_completion(self) -> float:
         correct = 0; total = 0

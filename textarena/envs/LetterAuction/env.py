@@ -30,10 +30,6 @@ class LetterAuctionEnv(ta.GameEnv):
         super().__init__(**kwargs)
         self.letter_values = [1 for _ in range(26)]
 
-    @property
-    def terminal_render_keys(self):
-        return ["rendered_text", "turn"]
-
     # Read-only accessors kept for renderers/tests that inspect the env directly.
     @property
     def player_states(self): return self.game_state["player_states"]

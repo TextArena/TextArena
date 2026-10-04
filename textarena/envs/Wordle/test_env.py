@@ -38,14 +38,14 @@ def test_reset_initial_state():
 def test_guessing_secret_word_wins():
     env = _fresh()
     secret = env.state.game_state["secret_word"]
-    done, _ = env.step(secret)
+    done = env.step(secret)
     assert done
     assert env.state.rewards == {0: 1}
 
 
 def test_correct_guess_on_last_allowed_turn_wins():
     env = _fresh(num_guesses=1)
-    done, _ = env.step(env.state.game_state["secret_word"])
+    done = env.step(env.state.game_state["secret_word"])
     assert done
     assert env.state.turn == 1
     assert env.state.rewards == {0: 1}
@@ -53,7 +53,7 @@ def test_correct_guess_on_last_allowed_turn_wins():
 
 def test_invalid_format_rejected():
     env = _fresh()
-    done, _ = env.step("not one word")
+    done = env.step("not one word")
     assert not done
     assert env.state.error_count == 1
 
@@ -74,14 +74,14 @@ def test_format_error_describes_expected_action(word_length):
 def test_wrong_length_rejected():
     env = _fresh()
     # Four-letter word cannot match a five-letter secret.
-    done, _ = env.step("abcd")
+    done = env.step("abcd")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_non_english_word_rejected():
     env = _fresh()
-    done, _ = env.step("zzzzz")
+    done = env.step("zzzzz")
     assert not done
     assert env.state.error_count == 1
 
@@ -89,7 +89,7 @@ def test_non_english_word_rejected():
 def test_repeated_invalid_moves_end_game():
     env = _fresh()
     env.step("not one word")         # first invalid
-    done, _ = env.step("still none")  # second consecutive invalid -> ends
+    done = env.step("still none")  # second consecutive invalid -> ends
     assert done
     assert 0 <= env.state.rewards[0] <= 1
 
@@ -98,7 +98,7 @@ def test_feedback_recorded_for_valid_non_winning_guess():
     env = _fresh()
     guess = _valid_nonsecret(env)
     assert guess is not None
-    done, _ = env.step(guess)
+    done = env.step(guess)
     assert not done
     assert len(env.state.game_state["guess_history"]) == 1
     word, feedback = env.state.game_state["guess_history"][0]
@@ -145,7 +145,7 @@ def test_seeded_setup_is_deterministic_and_normalized():
 def test_malformed_actions_do_not_consume_a_guess(action):
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.game_state == before
     assert env.state.turn == 0
@@ -157,7 +157,7 @@ def test_repeated_valid_guess_is_atomic():
     assert guess is not None
     env.step(guess)
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(guess)
+    done = env.step(guess)
     assert not done
     assert env.state.game_state == before
     assert env.state.turn == 1
@@ -174,7 +174,7 @@ def test_turn_limit_reward_uses_best_guess_not_latest_guess():
     env.state.game_state["secret_word"] = "apple"
     env._check_word = lambda word: True
     env.step("ample")
-    done, _ = env.step("zzzzz")
+    done = env.step("zzzzz")
     assert done
     assert env.state.turn == 2
     assert env.state.rewards == {0: 0.8}

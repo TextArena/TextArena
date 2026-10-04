@@ -32,7 +32,7 @@ def _solution_actions(env):
 
 def _end_with_invalid_moves(env):
     env.step("garbage one")
-    done, _ = env.step("garbage two")
+    done = env.step("garbage two")
     assert done
     return env.state.rewards[0]
 
@@ -77,7 +77,7 @@ def test_drawing_the_solution_loop_wins():
     done = False
     for a in actions:
         assert not done
-        done, _ = env.step(a)
+        done = env.step(a)
     assert done
     assert env.state.rewards == {0: 1.0}
 
@@ -93,14 +93,14 @@ def test_toggle_edge_mutates_state():
 
 def test_invalid_format_increments_error():
     env = _fresh()
-    done, _ = env.step("toggle horizontal 0 0")
+    done = env.step("toggle horizontal 0 0")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_edge_outside_board_is_rejected():
     env = _fresh(rows=2, cols=2)
-    done, _ = env.step("h 9 9")
+    done = env.step("h 9 9")
     assert not done
     assert env.state.error_count == 1
 
@@ -125,7 +125,7 @@ def test_immediate_invalid_policy_scores_zero_on_registered_configs(env_id, seed
     env = ta.make(env_id)
     env.reset(num_players=1, seed=seed)
     for _ in range(5):
-        done, _ = env.step("@@@ not a move @@@")
+        done = env.step("@@@ not a move @@@")
         if done:
             break
     assert done
@@ -144,7 +144,7 @@ def test_partial_loop_scores_its_share_of_the_hidden_loop():
     env = _fresh(rows=4, cols=4)
     actions = _solution_actions(env)
     for action in actions[:-1]:
-        done, _ = env.step(action)
+        done = env.step(action)
         assert not done
     assert _end_with_invalid_moves(env) == pytest.approx((len(actions) - 1) / len(actions))
 
@@ -164,7 +164,7 @@ def test_toggling_an_edge_back_and_forth_earns_nothing():
     env = _fresh(rows=4, cols=4, max_turns=6)
     on_loop = _solution_actions(env)[0]
     for _ in range(6):
-        done, _ = env.step(on_loop)
+        done = env.step(on_loop)
     assert done and "limit" in env.state.game_info[0]["reason"].lower()
     assert env.state.rewards == {0: 0}
 
@@ -184,7 +184,7 @@ def test_hidden_loop_plus_a_second_loop_scores_below_a_win():
     env.game_state["clues"] = [[2, 2, None, None], [2, 2, None, None], [None, None, None, None], [None, None, None, None]]
     env.h_edges.update(env.game_state["solution_h_edges"] | {(3, 3)})
     env.v_edges.update(env.game_state["solution_v_edges"] | {(3, 3), (3, 4)})
-    done, _ = env.step("h 4 3")  # closes a second loop around cell (3, 3)
+    done = env.step("h 4 3")  # closes a second loop around cell (3, 3)
     assert done and env._progress() == 1.0 and not env._is_solved()
     assert env.state.rewards == {0: pytest.approx((8 - 4) / 8)}
 
@@ -225,7 +225,7 @@ def test_exact_parser_rejects_malformed_actions_atomically(action):
     env = _fresh()
     before_h = set(env.h_edges)
     before_v = set(env.v_edges)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.h_edges == before_h
@@ -259,7 +259,7 @@ def test_disconnected_loops_do_not_solve_even_when_all_clues_match():
 
 def test_turn_limit_returns_partial_credit():
     env = _fresh(max_turns=1)  # on a 2x2 grid the hidden loop is the 8-edge outline
-    done, _ = env.step("h 0 0")
+    done = env.step("h 0 0")
     assert done
     assert env.state.rewards == {0: pytest.approx(1 / 8)}
     assert "limit" in env.state.game_info[0]["reason"].lower()
@@ -298,7 +298,7 @@ def test_current_and_terminal_render_show_edges_and_progress():
     ]
     done = False
     for action in actions:
-        done, _ = env.step(action)
+        done = env.step(action)
     assert done
     terminal = env.render(0)
     assert "───" in terminal and "│" in terminal

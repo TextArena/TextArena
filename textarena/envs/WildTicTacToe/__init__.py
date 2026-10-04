@@ -1,3 +1,3 @@
-from textarena.envs.registration import register_with_versions
+from textarena.envs.registration import register
 
-register_with_versions(id="WildTicTacToe-v1", entry_point="textarena.envs.WildTicTacToe.env:WildTicTacToeEnv")
+register(id="WildTicTacToe-v1", entry_point="textarena.envs.WildTicTacToe.env:WildTicTacToeEnv")

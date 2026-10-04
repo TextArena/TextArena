@@ -39,10 +39,6 @@ class SantoriniBaseFixedWorkerEnv(ta.GameEnv):
 
     is_open = ta.Param(True, "Whether the acting player is shown the board.")
     show_valid = ta.Param(True, "Whether the acting player is shown the list of their legal moves.")
-    error_allowance = ta.Param(
-        10, "The number of consecutive invalid moves a player may make; the next one counts as the escalation above.",
-        min=0,
-    )
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -117,7 +113,7 @@ class SantoriniBaseFixedWorkerEnv(ta.GameEnv):
             f"{blocked_rule}"
             "Make your move in the format 'worker_id source dest build', written as one token.\n"
             f"Example: {example} means move {color} worker {example[1]} from {example[2:4]} to {example[4:6]} and build at {example[6:8]}\n"
-            f"After more than {self.error_allowance} invalid moves in a row you lose{'' if num_players == 2 else ' (you are eliminated)'}.\n"
+            f"After {self.error_allowance + 1} invalid moves in a row you lose{'' if num_players == 2 else ' (you are eliminated)'}.\n"
         )
         if not self.is_open:
             prompt += "The board is not shown in this game: keep track of it from the announced moves.\n"

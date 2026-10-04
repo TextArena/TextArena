@@ -1,6 +1,6 @@
 import io, os, shutil, time
 from typing import Dict, Optional, Tuple
-from textarena.core import Env, Info, RenderWrapper
+from textarena.core import Env, Wrapper
 
 try:
     import rich.align, rich.box, rich.console, rich.layout, rich.markup, rich.panel, rich.text
@@ -9,7 +9,7 @@ except ImportError:  # rich is an optional dependency: pip install "textarena[re
 
 __all__ = ["SimpleRenderWrapper"]
 
-class SimpleRenderWrapper(RenderWrapper):
+class SimpleRenderWrapper(Wrapper):
     def __init__(
         self,
         env: Env,
@@ -143,21 +143,19 @@ class SimpleRenderWrapper(RenderWrapper):
             self.player_names = {pid: f"Player {pid}" for pid in range(self.state.num_players)}
         self.player_names.update(self.state.role_mapping)
         self.game_over = False
-
-        # assert render mode with num players
-        if self.render_mode in ["standard", "chat"]:
-            assert num_players==2, f"render_modes 'standard' and 'chat' can only be used with two players"
+        if self.render_mode in ["standard", "chat"] and self.state.num_players != 2:
+            raise ValueError("render_modes 'standard' and 'chat' can only be used with two players")
         return result
 
-    def step(self, action: str) -> Tuple[bool, Optional[Info]]:
-        step_results = self.env.step(action=action)
+    def step(self, action: str) -> bool:
+        done = self.env.step(action=action)
         if self.record_only:
             self._render(action)
-            return step_results
+            return done
         time.sleep(0.2)
         self._render(action)
         time.sleep(0.2)
-        return step_results
+        return done
 
     def close(self):
         return self.env.close()

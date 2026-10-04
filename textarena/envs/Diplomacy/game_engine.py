@@ -99,18 +99,6 @@ class Region:
         self.unit = unit 
         return True 
 
-    def remove_unit(self) -> Optional['Unit']:
-        """ Remove and return the unit from this region """
-        unit = self.unit 
-        self.unit = None 
-        return unit 
-
-    def dislodge_unit(self) -> Optional['Unit']:
-        """ Remove any disloged unit """
-        unit = self.dislodged_unit
-        self.dislodged_unit = None 
-        return unit 
-
     def set_owner(self, power) -> None:
         """ Set the owner of this supply center """
         if not self.is_supply_center:
@@ -139,24 +127,6 @@ class Unit:
             self.region = region 
             return True 
         return False 
-
-    def move_to_region(self, region: Region) -> bool:
-        """ Move this unit to a new region """
-        if not self.region:
-            return False 
-        
-        old_region = self.region 
-        if region.place_unit(self):
-            old_region.remove_unit()
-            self.region = region 
-            return True 
-        return False 
-
-    def dislodge(self) -> None:
-        """ Mark this unit as dislodged """
-        self.dislodged = True 
-        if self.region and self.region.unit is self:
-            self.region.unit = None 
 
     def retreat(self, region: Region, coast: Optional[str] = None) -> bool:
         """ Retreat this unit to a new region """
@@ -455,10 +425,6 @@ class Map:
     def get_region(self, name: str) -> Optional[Region]:
         """ Get a region by name """
         return self.regions.get(name)
-
-    def get_all_regions(self) -> List[Region]:
-        """ Get all regions on the map """
-        return list(self.regions.values())
 
     def get_supply_centers(self) -> List[str]:
         """ Get all dupply center names """
@@ -834,7 +800,6 @@ class DiplomacyGameEngine:
         self.winners: List[str] = []
         self.game_over: bool = False
         self.order_history: List[Dict[str, Any]] = [] # Track order history
-        self.game_state_history: List[Dict[str, Any]] = []  # Store game state history
         self._standoff_regions: Set[str] = set()
 
         # Initialize powers
@@ -1701,26 +1666,6 @@ class DiplomacyGameEngine:
 
         return True, self.get_state()
 
-    def _record_game_state(self):
-        """Record the current game state to history"""
-        state = {
-            "turn": self.turn_number,
-            "season": self.season.value,
-            "year": self.year,
-            "phase": self.phase.value,
-            "sc_counts": {power.name: len(power.controlled_centers) for power in self.powers.values()},
-            "unit_counts": {power.name: len(power.units) for power in self.powers.values()},
-            "territories": {
-                region.name: {
-                    "owner": region.unit.power if region.unit else None,
-                    "unit_type": region.unit.type.value if region.unit else None,
-                    "is_supply_center": region.is_supply_center,
-                }
-                for region in self.map.regions.values()
-            }
-        }
-        self.game_state_history.append(state)
-
     def _resolve_movement(
         self, valid_orders: Dict[str, List[Order]]
     ) -> Dict[str, List[List[str]]]:
@@ -2001,55 +1946,6 @@ class DiplomacyGameEngine:
 
         return True 
 
-    def _resolve_convoy_disruptions(
-        self,
-        convoys: Dict[Tuple[str, str], List[Unit]],
-        move_orders: Dict[Unit, str],
-        supports: Dict[Unit, List[Unit]],
-    ) -> Set[Tuple[str, str]]:
-        """ Determine which convoys are disrupted """
-        disrupted_convoys: Set[Tuple[str, str]] = set()
-        attackers_by_target: Dict[str, List[Unit]] = defaultdict(list)
-        for attacker, target in move_orders.items():
-            attackers_by_target[target].append(attacker)
-
-        for (start, end), fleet_list in convoys.items():
-            for fleet in fleet_list:
-                attackers = [
-                    attacker
-                    for attacker in attackers_by_target.get(fleet.region.name, [])
-                    if attacker.power != fleet.power
-                ]
-                if not attackers:
-                    continue
-                strengths = {
-                    attacker: 1 + len(supports.get(attacker, []))
-                    for attacker in attackers
-                }
-                highest = max(strengths.values())
-                strongest = [
-                    attacker for attacker, strength in strengths.items()
-                    if strength == highest
-                ]
-                fleet_strength = 1 + len(supports.get(fleet, []))
-                if len(strongest) == 1 and highest > fleet_strength:
-                    disrupted_convoys.add((start, end))
-                    break
-        return disrupted_convoys
-
-    def _resolve_movements(
-        self,
-        move_orders: Dict[Unit, str],
-        supports: Dict[Unit, List[Unit]],
-        disrupted_convoys: Set[Tuple[str, str]],
-    ) -> None:
-        """Resolve and apply one movement adjudication."""
-        successful_moves, dislodged_units, standoffs = self._calculate_movements(
-            move_orders, supports, disrupted_convoys
-        )
-        self._standoff_regions = standoffs
-        self._apply_movements(successful_moves, dislodged_units)
-
     def _calculate_movements(
         self,
         move_orders: Dict[Unit, str],
@@ -2244,7 +2140,7 @@ class DiplomacyGameEngine:
     def _prepare_retreats(self):
         """ Determine valid retreat locations for all dislodged units """
         # For each dislodged unit, find valid retreat locations
-        for power_name, power in self.powers.items():
+        for power in self.powers.values():
             for unit in power.units:
                 if unit.dislodged:
                     retreat_options = [] 
@@ -2508,9 +2404,6 @@ class DiplomacyGameEngine:
         for power in self.powers.values():
             power.is_waiting = True
             power.clear_orders()
-
-        # After advancing phase, record the new game state
-        self._record_game_state()
 
     def _check_victory(self):
         """ Check if any power has achieved victory """

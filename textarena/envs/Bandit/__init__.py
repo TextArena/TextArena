@@ -1,11 +1,11 @@
-from textarena.envs.registration import register_with_versions
+from textarena.envs.registration import register
 
-register_with_versions(
+register(
     id="Bandit-v1",
     entry_point="textarena.envs.Bandit.env:BanditEnv",
     buttons=["red", "blue", "green", "yellow", "purple"], p_gap=0.1, num_turns=20,
 )
-register_with_versions(
+register(
     id="Bandit-v1-hard",
     entry_point="textarena.envs.Bandit.env:BanditEnv",
     buttons=["red", "blue", "green", "yellow", "purple", "orange", "pink", "brown", "gray", "black"],

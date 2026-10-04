@@ -34,7 +34,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Klondike-v1-mdp`).
   and the turn still counts. If the last card reaches a foundation, the game ends at once and any remaining actions are
   ignored.
 - A reply with a syntax error anywhere (an unknown command or pile, a bad count, extra words, or `forfeit` combined with
-  other actions) is an invalid move: nothing in it is executed and no turn is used. Six invalid moves in a row end the
+  other actions) is an invalid move: nothing in it is executed and no turn is used. Two invalid moves in a row end the
   game.
 
 ## Actions
@@ -76,12 +76,14 @@ After each turn you are told what each action did, or why the first failing acti
 
 ## Rewards
 
+Every outcome scores the number of cards on the foundations divided by 52.
+
 | Outcome | Reward |
 | --- | --- |
-| All 52 cards on the foundations | `52` |
-| Forfeit | Number of cards on the foundations (`0` to `51`) |
-| `max_turns` turns used | Number of cards on the foundations |
-| Sixth consecutive invalid move | Number of cards on the foundations |
+| All 52 cards on the foundations | `1` |
+| Forfeit | Cards on the foundations / 52 (`0` to `51/52`) |
+| `max_turns` turns used | Cards on the foundations / 52 |
+| Second consecutive invalid move | Cards on the foundations / 52 |
 
 ## Parameters
 
@@ -93,4 +95,3 @@ After each turn you are told what each action did, or why the first failing acti
 ## Notes
 
 - Not every deal can be won; `forfeit` stops early and keeps the cards already scored.
-- `klondike.py` also contains a greedy auto-solver and a terminal version of the game; the environment uses neither.

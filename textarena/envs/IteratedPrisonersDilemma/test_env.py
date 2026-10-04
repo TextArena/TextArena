@@ -46,7 +46,7 @@ def test_defector_beats_cooperator():
     env = _fresh(num_rounds=1, communication_turns=1)
     _play_conversation(env, turns=1)
     env.step("defect")            # player 0 defects
-    done, _ = env.step("cooperate")  # player 1 cooperates
+    done = env.step("cooperate")  # player 1 cooperates
     assert done
     # defect_reward=5, sucker_reward=0
     assert env.state.game_state["scores"] == {0: 5, 1: 0}
@@ -57,7 +57,7 @@ def test_mutual_cooperation_is_draw():
     env = _fresh(num_rounds=1, communication_turns=1)
     _play_conversation(env, turns=1)
     env.step("cooperate")
-    done, _ = env.step("cooperate")
+    done = env.step("cooperate")
     assert done
     assert env.state.game_state["scores"] == {0: 3, 1: 3}
     assert env.state.rewards == {0: 0, 1: 0}
@@ -69,13 +69,13 @@ def test_malformed_decision_is_atomic_and_recoverable():
     env = _fresh(num_rounds=1, communication_turns=1)
     _play_conversation(env, turns=1)
     env.step("defect")
-    done, _ = env.step("um ok")
+    done = env.step("um ok")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 1
     assert env.state.game_state["decisions"] == {0: "defect", 1: None}
 
-    done, _ = env.step("cooperate")
+    done = env.step("cooperate")
     assert done
     assert env.state.game_state["scores"] == {0: 5, 1: 0}
     assert env.state.rewards == {0: 1, 1: -1}
@@ -92,7 +92,7 @@ def test_reward_accumulation_across_rounds():
     # Round 2: both defect -> +1 each
     _play_conversation(env, turns=1)
     env.step("defect")
-    done, _ = env.step("defect")
+    done = env.step("defect")
     assert done
     assert env.state.game_state["scores"] == {0: 6, 1: 1}
     assert env.state.rewards == {0: 1, 1: -1}
@@ -102,7 +102,7 @@ def test_zero_communication_turns_starts_in_decision_phase():
     env = _fresh(communication_turns=0)
     assert env.state.game_state["phase"] == "decision"
     env.step("defect")
-    done, _ = env.step("cooperate")
+    done = env.step("cooperate")
     assert done
 
 
@@ -160,7 +160,7 @@ def test_pending_decision_is_not_revealed_to_opponent_or_renderer():
 def test_terminal_state_keeps_last_round_and_history():
     env = _fresh(communication_turns=0)
     env.step("cooperate")
-    done, _ = env.step("defect")
+    done = env.step("defect")
     assert done
     gs = env.state.game_state
     assert gs["round"] == 1
@@ -181,7 +181,7 @@ def test_signed_payoffs_are_compared_without_assuming_nonnegative_scores():
         mutual_defect_reward=-20,
     )
     env.step("cooperate")
-    done, _ = env.step("defect")
+    done = env.step("defect")
     assert done
     assert env.state.game_state["scores"] == {0: -1, 1: -10}
     assert env.state.rewards == {0: 1, 1: -1}

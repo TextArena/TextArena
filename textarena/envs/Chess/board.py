@@ -390,12 +390,6 @@ class Board:
     def has_castling_rights(self, color: Color) -> bool:
         return bool(self._castling & _CASTLING_RIGHTS[color])
 
-    def has_kingside_castling_rights(self, color: Color) -> bool:
-        return bool(self._castling & _CASTLINGS[color][0].right)
-
-    def has_queenside_castling_rights(self, color: Color) -> bool:
-        return bool(self._castling & _CASTLINGS[color][1].right)
-
     def board_fen(self) -> str:
         rows = []
         for rank in range(7, -1, -1):
@@ -654,9 +648,6 @@ class Board:
                         break
         return False
 
-    def is_attacked_by(self, color: Color, square: Square) -> bool:
-        return self._is_attacked(square, color)
-
     def is_check(self) -> bool:
         king = self.king(self.turn)
         return king is not None and self._is_attacked(king, not self.turn)
@@ -842,9 +833,6 @@ class Board:
                 self.pop()
         return False
 
-    def can_claim_draw(self) -> bool:
-        return self.can_claim_fifty_moves() or self.can_claim_threefold_repetition()
-
     def outcome(self, *, claim_draw: bool = False) -> Optional[Outcome]:
         """The game's result, or ``None`` while it continues.
 
@@ -869,9 +857,6 @@ class Board:
             if self.can_claim_threefold_repetition():
                 return Outcome(Termination.THREEFOLD_REPETITION, None)
         return None
-
-    def is_game_over(self, *, claim_draw: bool = False) -> bool:
-        return self.outcome(claim_draw=claim_draw) is not None
 
     def result(self, *, claim_draw: bool = False) -> str:
         outcome = self.outcome(claim_draw=claim_draw)

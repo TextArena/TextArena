@@ -31,7 +31,7 @@ def test_successful_trade_mutates_resources():
     wheat_p1 = gs["player_resources"][1]["Wheat"]
     # P0 offers 1 Wheat for 1 Ore; P1 accepts.
     env.step("Here is my proposal:\nOffer: 1 Wheat -> 1 Ore")
-    done, _ = env.step("That works for me.\nAccept")
+    done = env.step("That works for me.\nAccept")
     assert not done
     assert gs["player_resources"][0]["Ore"] == ore_p0 + 1
     assert gs["player_resources"][1]["Wheat"] == wheat_p1 + 1
@@ -48,7 +48,7 @@ def test_favorable_trade_lets_player0_win_at_turn_limit():
     assert vals0["Ore"] > vals0["Wheat"]
     env.step("Offer: 1 Wheat -> 1 Ore")  # turn 0
     env.step("Accept")                    # turn 1, trade executes
-    done, _ = env.step("No further offers.")  # turn 2 == max_turns -> resolve
+    done = env.step("No further offers.")  # turn 2 == max_turns -> resolve
     assert done
     assert env.state.turn == 3
     assert env.state.rewards == {0: 1, 1: -1}
@@ -59,7 +59,7 @@ def test_no_trades_results_in_draw():
     done = False
     for _ in range(2):  # engine resolves the turn limit after exactly max_turns valid moves
         assert not done
-        done, _ = env.step("just chatting, no offers")
+        done = env.step("just chatting, no offers")
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
 
@@ -67,14 +67,14 @@ def test_no_trades_results_in_draw():
 def test_offer_without_resources_is_invalid():
     env = _fresh()
     # No player holds 100 Ore (resources are sampled in [5, 25]).
-    done, _ = env.step("Offer: 100 Ore -> 1 Wheat")
+    done = env.step("Offer: 100 Ore -> 1 Wheat")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_malformed_offer_is_invalid():
     env = _fresh()
-    done, _ = env.step("Offer: total nonsense with no arrow")
+    done = env.step("Offer: total nonsense with no arrow")
     assert not done
     assert env.state.error_count == 1
 
@@ -82,7 +82,7 @@ def test_malformed_offer_is_invalid():
 def test_accept_in_ordinary_prose_does_not_accept_offer():
     env = _fresh()
     env.step("Offer: 1 Wheat -> 1 Ore")
-    done, _ = env.step("I accept that this is an interesting proposal.")
+    done = env.step("I accept that this is an interesting proposal.")
     assert not done
     assert env.state.game_state["current_offer"] is None
     assert env.state.game_state["trade_history"][-1]["outcome"] == "Rejected"
@@ -90,9 +90,9 @@ def test_accept_in_ordinary_prose_does_not_accept_offer():
 
 def test_accept_and_deny_require_an_incoming_offer():
     env = _fresh()
-    done, _ = env.step("Accept")
+    done = env.step("Accept")
     assert not done and env.state.error_count == 1
-    done, _ = env.step("Deny")
+    done = env.step("Deny")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -101,12 +101,12 @@ def test_mixed_or_duplicate_commands_are_invalid_and_atomic():
     env = _fresh()
     env.step("Offer: 1 Wheat -> 1 Ore")
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("Accept\nOffer: 1 Wood -> 1 Brick")
+    done = env.step("Accept\nOffer: 1 Wood -> 1 Brick")
     assert not done
     assert env.game_state == before
     assert env.state.current_player_id == 1
 
-    done, _ = env.step("Accept\nAccept")
+    done = env.step("Accept\nAccept")
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
 
@@ -114,7 +114,7 @@ def test_mixed_or_duplicate_commands_are_invalid_and_atomic():
 def test_resource_parser_rejects_unconsumed_text():
     env = _fresh()
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("Offer: 1 Wheat plus unlimited Ore -> 1 Brick")
+    done = env.step("Offer: 1 Wheat plus unlimited Ore -> 1 Brick")
     assert not done
     assert env.game_state == before
 
@@ -124,7 +124,7 @@ def test_accept_revalidates_both_sides_atomically():
     env.step("Offer: 1 Wheat -> 1 Ore")
     env.game_state["player_resources"][0]["Wheat"] = 0
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("Accept")
+    done = env.step("Accept")
     assert not done
     assert env.game_state == before
 
@@ -183,7 +183,7 @@ def test_offer_may_start_with_i_give():
 @pytest.mark.parametrize("action", ["Offer 1 Wheat -> 1 Ore", "[Offer 1 Wheat -> 1 Ore]"])
 def test_offer_without_a_colon_is_malformed(action):
     env = _fresh()
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["current_offer"] is None
@@ -192,7 +192,7 @@ def test_offer_without_a_colon_is_malformed(action):
 def test_chat_lines_that_merely_mention_commands_are_chat():
     env = _fresh()
     env.step("Offer: 1 Wheat -> 1 Ore")
-    done, _ = env.step("Offering more later. I accepted your last idea.\nAccept")
+    done = env.step("Offering more later. I accepted your last idea.\nAccept")
     assert not done
     assert env.state.error_count == 0
     assert env.state.game_state["trade_history"][-1]["outcome"] == "Accepted"

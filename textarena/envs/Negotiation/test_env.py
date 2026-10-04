@@ -40,7 +40,7 @@ def test_reset_initial_state():
 
 def test_offer_creates_pending_offer_and_rotates():
     env = _fresh()
-    done, _ = env.step("Offer to 1: 2 Wheat -> 1 Ore")
+    done = env.step("Offer to 1: 2 Wheat -> 1 Ore")
     assert not done
     gs = env.state.game_state
     assert gs["pending_offers"] == {
@@ -55,7 +55,7 @@ def test_offer_creates_pending_offer_and_rotates():
 
 def test_bare_commands_can_be_combined_on_separate_lines():
     env = _fresh()
-    done, _ = env.step("Broadcast: I can trade Wheat\nOffer to 1: 2 Wheat -> 1 Ore")
+    done = env.step("Broadcast: I can trade Wheat\nOffer to 1: 2 Wheat -> 1 Ore")
     assert not done
     assert env.state.game_state["pending_offers"][1]["to"] == 1
 
@@ -67,7 +67,7 @@ def test_unrecognized_text_rejects_the_entire_action_atomically():
         for pid, resources in env.game_state["player_resources"].items()
     }
 
-    done, _ = env.step("Broadcast: valid message\nthis is not a command")
+    done = env.step("Broadcast: valid message\nthis is not a command")
 
     assert not done
     assert env.state.error_count == 1
@@ -78,7 +78,7 @@ def test_unrecognized_text_rejects_the_entire_action_atomically():
 
 def test_multiple_bare_offers_can_be_semicolon_separated():
     env = _fresh()
-    done, _ = env.step(
+    done = env.step(
         "Offer to 1: 1 Wheat -> 1 Ore; Offer to 2: 1 Wood -> 1 Brick"
     )
     assert not done
@@ -95,7 +95,7 @@ def test_relayed_messages_have_a_space_after_says():
 
 def test_messages_may_contain_semicolons():
     env = _fresh()
-    done, _ = env.step("Broadcast: Wheat for sale; Ore wanted; ping me\nWhisper 2: deal; but keep it quiet")
+    done = env.step("Broadcast: Wheat for sale; Ore wanted; ping me\nWhisper 2: deal; but keep it quiet")
     assert not done
     assert env.state.error_count == 0
     p1_messages = [message for _, message, _ in env.state.observations[1]]
@@ -107,14 +107,14 @@ def test_messages_may_contain_semicolons():
 
 def test_semicolon_followed_by_a_command_still_starts_a_new_command():
     env = _fresh()
-    done, _ = env.step("Whisper 1: Deal if you add a Brick; thanks.; Offer to 1: 3 Sheep -> 1 Brick; Broadcast: done;")
+    done = env.step("Whisper 1: Deal if you add a Brick; thanks.; Offer to 1: 3 Sheep -> 1 Brick; Broadcast: done;")
     assert not done
     assert env.game_state["pending_offers"][1]["requested_resources"] == {"Brick": 1}
     p1_messages = [message for _, message, _ in env.state.observations[1]]
     assert "(Private) Player 0 says: Deal if you add a Brick; thanks." in p1_messages
     assert "(Broadcast) Player 0 says: done" in p1_messages
 
-    done, _ = env.step("Deny #1;")
+    done = env.step("Deny #1;")
     assert not done
     assert env.game_state["pending_offers"] == {}
 
@@ -123,7 +123,7 @@ def test_malformed_command_after_a_semicolon_is_rejected_instead_of_broadcast():
     env = _fresh()
     before = copy.deepcopy(env.game_state)
     events_before = len(env.state.events)
-    done, _ = env.step("Broadcast: hi; Whisper 2 my Ore is worth 45 to me")  # the whisper lacks its colon
+    done = env.step("Broadcast: hi; Whisper 2 my Ore is worth 45 to me")  # the whisper lacks its colon
     assert not done
     assert env.state.error_count == 1
     assert env.game_state == before
@@ -138,7 +138,7 @@ def test_command_quoted_inside_a_message_is_not_executed():
     env = _fresh()
     env.step("Offer to 1: 1 Wheat -> 1 Wood")
     resources_before = copy.deepcopy(env.game_state["player_resources"])
-    done, _ = env.step("Broadcast: I would never Accept #1")
+    done = env.step("Broadcast: I would never Accept #1")
     assert not done
     assert 1 in env.game_state["pending_offers"]
     assert env.game_state["player_resources"] == resources_before
@@ -154,7 +154,7 @@ def test_bracketed_commands_are_rejected_atomically(action):
     env = _fresh()
     before = copy.deepcopy(env.game_state)
     events_before = len(env.state.events)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.game_state == before
@@ -173,7 +173,7 @@ def test_bracketed_commands_are_rejected_atomically(action):
 def test_oversized_numbers_are_invalid_moves_not_crashes(action):
     env = _fresh()
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.game_state == before
@@ -203,7 +203,7 @@ def test_accept_executes_trade():
     before = {pid: dict(gs["player_resources"][pid]) for pid in range(3)}
 
     env.step("Offer to 1: 2 Wheat -> 1 Ore")
-    done, _ = env.step("Accept #1")
+    done = env.step("Accept #1")
     assert not done
 
     res = gs["player_resources"]
@@ -222,7 +222,7 @@ def test_deny_removes_offer_without_trade():
     before = {pid: dict(gs["player_resources"][pid]) for pid in range(3)}
 
     env.step("Offer to 1: 2 Wheat -> 1 Ore")
-    done, _ = env.step("Deny #1")
+    done = env.step("Deny #1")
     assert not done
     assert gs["pending_offers"] == {}
     assert gs["player_resources"] == before
@@ -230,7 +230,7 @@ def test_deny_removes_offer_without_trade():
 
 def test_malformed_offer_rejected():
     env = _fresh()
-    done, _ = env.step("Offer to 1: some nonsense")  # missing '->'
+    done = env.step("Offer to 1: some nonsense")  # missing '->'
     assert not done
     assert env.state.error_count == 1
     # No rotation off the player after a single invalid move.
@@ -239,7 +239,7 @@ def test_malformed_offer_rejected():
 
 def test_offer_exceeding_resources_rejected():
     env = _fresh()
-    done, _ = env.step("Offer to 1: 999 Ore -> 1 Wheat")  # holdings are 5..25
+    done = env.step("Offer to 1: 999 Ore -> 1 Wheat")  # holdings are 5..25
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -248,7 +248,7 @@ def test_offer_exceeding_resources_rejected():
 
 def test_self_offer_is_rejected():
     env = _fresh()
-    done, _ = env.step("Offer to 0: 1 Wheat -> 1 Wood")
+    done = env.step("Offer to 0: 1 Wheat -> 1 Wood")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -259,7 +259,7 @@ def test_self_whisper_rejects_all_mixed_effects_atomically():
     env = _fresh()
     before = copy.deepcopy(env.game_state)
     events_before = len(env.state.events)
-    done, _ = env.step("Broadcast: hello\nWhisper 0: private")
+    done = env.step("Broadcast: hello\nWhisper 0: private")
     assert not done
     assert env.state.error_count == 1
     assert env.game_state == before
@@ -275,7 +275,7 @@ def test_self_whisper_rejects_all_mixed_effects_atomically():
 )
 def test_malformed_commands_are_rejected(action):
     env = _fresh()
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -284,16 +284,16 @@ def test_malformed_commands_are_rejected(action):
 def test_accepting_unaddressed_offer_rejected():
     env = _fresh()
     env.step("Offer to 2: 1 Wheat -> 1 Wood")  # offer #1, addressed to player 2
-    done, _ = env.step("Accept #1")  # player 1 tries to accept it
+    done = env.step("Accept #1")  # player 1 tries to accept it
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 1
     assert 1 in env.state.game_state["pending_offers"]  # offer still pending
 
     # Player 1 recovers with a valid action, then player 2 can accept.
-    done, _ = env.step("Broadcast: sorry, my bad")
+    done = env.step("Broadcast: sorry, my bad")
     assert env.state.current_player_id == 2
-    done, _ = env.step("Accept #1")
+    done = env.step("Accept #1")
     assert not done
     assert env.state.game_state["pending_offers"] == {}
 
@@ -301,7 +301,7 @@ def test_accepting_unaddressed_offer_rejected():
 def test_incidental_accept_in_prose_does_not_accept_offer():
     env = _fresh()
     env.step("Offer to 1: 1 Wheat -> 1 Wood")
-    done, _ = env.step("I cannot accept that trade right now.")
+    done = env.step("I cannot accept that trade right now.")
     assert not done
     assert 1 in env.state.game_state["pending_offers"]
     assert env.state.error_count == 1
@@ -323,7 +323,7 @@ def test_turn_limit_ends_game_with_portfolio_winner():
     done = False
     for turn in range(6):
         assert not done
-        done, _ = env.step("Broadcast: just chatting")
+        done = env.step("Broadcast: just chatting")
     assert done
     assert env.state.rewards == _expected_rewards(env)
 
@@ -332,12 +332,12 @@ def test_trade_then_turn_limit_winner():
     env = _fresh(num_players=2, turn_multiple=3)  # 6 total turns
     gs = env.state.game_state
     before = dict(gs["player_resources"][0])
-    done, _ = env.step("Offer to 1: 1 Wheat -> 1 Brick")
-    done, _ = env.step("Accept #1")
+    done = env.step("Offer to 1: 1 Wheat -> 1 Brick")
+    done = env.step("Accept #1")
     assert gs["player_resources"][0]["Brick"] == before["Brick"] + 1
     for _ in range(4):
         assert not done
-        done, _ = env.step("Broadcast: hold your positions")
+        done = env.step("Broadcast: hold your positions")
     assert done
     assert env.state.rewards == _expected_rewards(env)
 
@@ -345,7 +345,7 @@ def test_trade_then_turn_limit_winner():
 def test_padded_bare_commands_still_parse_and_keep_message_whitespace():
     env = _fresh()
     padded_message = "Wheat" + " " * 5000 + "for sale"
-    done, _ = env.step(f"Broadcast: {padded_message}\nOffer to 1: 2{' ' * 5000}Wheat and 1 Wood -> 1 Ore")
+    done = env.step(f"Broadcast: {padded_message}\nOffer to 1: 2{' ' * 5000}Wheat and 1 Wood -> 1 Ore")
     assert not done
     assert env.state.error_count == 0
     assert env.game_state["pending_offers"][1]["offered_resources"] == {"Wheat": 2, "Wood": 1}

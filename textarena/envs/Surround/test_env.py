@@ -1,8 +1,8 @@
 """Offline, deterministic tests for the Surround environment.
 
 Surround is an FFA "light-cycle" game with simultaneous moves. Players submit a
-direction token (``up/down/left/right`` or w/a/s/d); an unparsable action
-kills that player immediately. Ranking-based rewards span [-1, +1]. All spawns are
+direction token (``up/down/left/right`` or w/a/s/d); a first unparsable action
+gets a warning and a second one in a row crashes that player. Ranking-based rewards span [-1, +1]. All spawns are
 deterministic via ``seed=42``. We use a compact 5x5 board.
 """
 
@@ -28,9 +28,24 @@ def test_reset_spawns_distinct_and_interior():
         assert all(players[p].alive for p in players)
 
 
-def test_invalid_move_kills_and_ends_two_player_game():
+def test_first_invalid_move_only_warns_and_keeps_the_turn():
     env = _fresh()
-    done, _ = env.step("this is not a direction")
+    done = env.step("this is not a direction")
+    assert not done
+    assert env.game_state["players"][0].alive
+    assert env.state.current_player_id == 0
+    assert env.state.game_info[0]["invalid_move"] is False
+    assert any("attempted an invalid move" in m for _, m, _, to in env.state.events if to == 0)
+
+    env.step("up")
+    assert env.state.current_player_id == 1
+    assert env.pending_actions[0] == "up"
+
+
+def test_second_invalid_move_kills_and_ends_two_player_game():
+    env = _fresh()
+    env.step("this is not a direction")
+    done = env.step("still not a direction")
     assert done
     # The lone survivor (player 1) is ranked best (+1); the crasher worst (-1).
     assert env.state.rewards == {0: -1.0, 1: 1.0}
@@ -55,7 +70,7 @@ def test_turn_limit_results_in_draw():
     env = _fresh(max_turns=2)
     done = False
     for action in ["up", "up", "right", "right"]:
-        done, _ = env.step(action)
+        done = env.step(action)
         if done:
             break
     assert done
@@ -88,7 +103,7 @@ def test_head_on_collision_kills_both_and_keeps_old_heads_as_trails():
     players[1].position = (3, 2)
     env.game_state["board_state"] = env._ascii_board(env.game_state["board"], players)
     env.step("right")
-    done, _ = env.step("left")
+    done = env.step("left")
     assert done
     assert env.state.rewards == {0: 0.0, 1: 0.0}
     assert env.game_state["board"][2][1] == 0
@@ -102,7 +117,7 @@ def test_swapping_head_positions_is_a_collision_for_both():
     players[1].position = (2, 2)
     env.game_state["board_state"] = env._ascii_board(env.game_state["board"], players)
     env.step("right")
-    done, _ = env.step("left")
+    done = env.step("left")
     assert done
     assert not players[0].alive and not players[1].alive
 
@@ -111,7 +126,8 @@ def test_invalid_move_in_multiplayer_updates_board_immediately():
     env = _fresh(num_players=3)
     player = env.game_state["players"][0]
     old_position = player.position
-    done, _ = env.step("not-a-direction")
+    env.step("not-a-direction")
+    done = env.step("not-a-direction")
     assert not done
     assert not player.alive
     x, y = old_position
@@ -151,22 +167,24 @@ def test_oversized_action_kills_once_and_does_not_stall_round():
     env.game_state["board_state"] = env._ascii_board(env.game_state["board"], players)
 
     oversized = "x" * (env.max_action_chars + 1)
-    done, _ = env.step(oversized)
+    env.step(oversized)
+    done = env.step(oversized)
     assert not done
     assert env.state.eliminated == [0]
     assert not players[0].alive
     assert env.state.current_player_id == 1
 
     env.step("right")
-    done, _ = env.step("left")
+    done = env.step("left")
     assert not done
     assert env.game_state["round"] == 1
     assert env.game_state["pending_actions"] == {0: None, 1: None, 2: None}
 
 
-def test_non_string_action_is_an_immediate_consistent_death():
+def test_repeated_non_string_actions_are_a_consistent_death():
     env = _fresh()
-    done, _ = env.step(None)
+    env.step(None)
+    done = env.step(None)
     assert done
     assert env.state.eliminated == [0]
     assert not env.game_state["players"][0].alive
@@ -185,8 +203,10 @@ def test_fatal_action_by_last_submitter_resolves_round_instead_of_reopening_it()
     _place(env, {0: (1, 1), 1: (3, 3), 2: (5, 5)})
     env.step("up")
     env.step("up")
+    env.step("x" * (env.max_action_chars + 1))
+    assert env.game_state["round"] == 0
 
-    done, _ = env.step("x" * (env.max_action_chars + 1))
+    done = env.step("x" * (env.max_action_chars + 1))
 
     assert not done
     players = env.game_state["players"]
@@ -199,7 +219,8 @@ def test_fatal_action_by_last_submitter_resolves_round_instead_of_reopening_it()
 def test_invalid_move_uses_engine_escalation_bookkeeping():
     env = _fresh(num_players=3)
 
-    done, _ = env.step("north")
+    env.step("north")
+    done = env.step("north")
 
     assert not done
     assert env.state.game_info[0]["invalid_move"] is True
@@ -226,6 +247,7 @@ def test_round_results_reveal_moves_and_crashes_only_after_resolution():
 
 def test_render_reports_round_and_player_status():
     env = _fresh(num_players=3)
+    env.step("nonsense")
     env.step("nonsense")
 
     board = env.render(1)

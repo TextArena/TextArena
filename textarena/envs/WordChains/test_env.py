@@ -45,7 +45,7 @@ def test_valid_move_updates_state_and_rotates():
     word = _find_valid_word(env)
     assert word is not None
     prev_len = env.state.game_state["required_length"]
-    done, _ = env.step(word)
+    done = env.step(word)
     assert not done
     assert env.state.game_state["current_word"] == word
     assert env.state.game_state["required_length"] == prev_len + 1
@@ -54,7 +54,7 @@ def test_valid_move_updates_state_and_rotates():
 
 def test_invalid_format_rejected():
     env = _fresh()
-    done, _ = env.step("not a single word")
+    done = env.step("not a single word")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -64,7 +64,7 @@ def test_wrong_length_rejected():
     env = _fresh()
     letter = env.state.game_state["required_start_letter"]
     # Single-letter word starting with the required letter -> wrong length.
-    done, _ = env.step(letter)
+    done = env.step(letter)
     assert not done
     assert env.state.error_count == 1
 
@@ -76,7 +76,7 @@ def test_wrong_start_letter_rejected():
     letter = gs["required_start_letter"]
     # Build a word of the right length that starts with a different letter.
     other = "a" if letter != "a" else "b"
-    done, _ = env.step(other * length)
+    done = env.step(other * length)
     assert not done
     assert env.state.error_count == 1
 
@@ -84,7 +84,7 @@ def test_wrong_start_letter_rejected():
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     env.step("not a valid word format one")
-    done, _ = env.step("not a valid word format two")
+    done = env.step("not a valid word format two")
     assert done
     # Offender is player 0; opponent wins.
     assert env.state.rewards == {0: -1, 1: 1}
@@ -101,7 +101,7 @@ def test_parser_rejects_digits_underscores_and_adversarial_text():
     for action in ("abc123", "abc_def", "word\nsecond", "I choose apple"):
         env = _fresh()
         before = copy.deepcopy(env.state.game_state)
-        done, _ = env.step(action)
+        done = env.step(action)
         assert not done
         assert env.state.game_state == before
         assert env.state.current_player_id == 0
@@ -113,7 +113,7 @@ def test_repeated_word_invalid_is_atomic():
     assert word is not None
     env.state.game_state["used_words"].add(word)
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(word)
+    done = env.step(word)
     assert not done
     assert env.state.game_state == before
 

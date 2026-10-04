@@ -68,13 +68,14 @@ point table is never shown; the final result message reveals both scores.
 | Accepted proposal with a higher score | Winner `+1`, loser `-1` |
 | Accepted proposal with equal scores | Both `0` |
 | Turn limit without an accepted proposal | Both `0` |
-| Fourth consecutive invalid move (with the default `error_allowance=3`) | Offender `-1`, opponent `+1` |
+| Second consecutive invalid move | Offender `-1`, opponent `+1` |
+
+A first invalid move only earns a warning, and the player replies again.
 
 ## Parameters
 
 <!-- BEGIN GENERATED: parameters -->
 - `max_turns` (default `10`): The turns in the whole game, counting both players. Accepts an integer of at least 1.
-- `error_allowance` (default `3`): The consecutive invalid moves a player may make (and retry) before losing. Accepts an integer of at least 0.
 <!-- END GENERATED: parameters -->
 
 ## Notes

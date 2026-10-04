@@ -32,9 +32,9 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Golf-v1-mdp`). Par
   face-down cards instead of drawing.
 - The game also ends as soon as the turn that draws the last card of the draw pile is over; the discard pile is not
   reshuffled.
-- **Scoring:** all cards are turned face up. Ace = 1, 2–10 = face value, Jack and Queen = 10, King = 0. A column whose
-  cards all have the same rank scores 0 (a 10 and a Jack are both worth 10 but do not cancel). The lowest total wins,
-  and players tied for the lowest total share the win.
+- **Scoring:** all cards are turned face up. Ace = 1, 2 = −2, 3–10 = face value, Jack and Queen = 10, King = 0. A
+  column whose cards all have the same rank scores 0, even a column of 2s (a 10 and a Jack are both worth 10 but do not
+  cancel). The lowest total wins, and players tied for the lowest total share the win.
 - **Turn limit:** the game ends after `max_turns` accepted actions in total across all players; each `draw`, `take`,
   `swap`, `discard`, `knock` and `peek` counts as one and invalid moves do not count. At the limit, a card still in
   hand goes to the discard pile and the grids are scored as above.
@@ -79,7 +79,6 @@ had is forfeited. When only one player is left, that player wins.
 
 ## Notes
 
-- Differences from Pagat's six-card Golf: a 2 scores 2 points (Pagat scores it −2), the starting face-up cards are
-  chosen at random rather than by the player, knocking is borrowed from four-card Golf, and the game ends when the
-  draw pile runs out instead of reshuffling.
+- Differences from Pagat's six-card Golf: the starting face-up cards are chosen at random rather than by the player,
+  knocking is borrowed from four-card Golf, and the game ends when the draw pile runs out instead of reshuffling.
 - A peek happens on a player's last turn, so it does not change what they can do; it is effectively a pass.

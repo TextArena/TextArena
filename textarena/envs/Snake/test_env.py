@@ -39,18 +39,33 @@ def test_board_must_fit_apples_and_every_snake():
 
 def test_valid_moves_keep_game_running():
     env = _fresh(num_players=2)
-    done, _ = env.step("up")     # P0 acts; turn passes to P1
+    done = env.step("up")     # P0 acts; turn passes to P1
     assert not done
     assert env.state.current_player_id == 1
-    done, _ = env.step("down")   # both have acted -> simultaneous resolution
+    done = env.step("down")   # both have acted -> simultaneous resolution
     assert not done
     snakes = env.state.game_state["snakes"]
     assert all(s.alive for s in snakes.values())
 
 
-def test_invalid_move_kills_snake_and_opponent_wins():
+def test_first_invalid_move_only_warns_and_keeps_the_turn():
     env = _fresh(num_players=2)
-    done, _ = env.step("this has no direction token")
+    done = env.step("this has no direction token")
+    assert not done
+    assert env.state.game_state["snakes"][0].alive
+    assert env.state.current_player_id == 0
+    assert env.state.game_info[0]["invalid_move"] is False
+    assert any("attempted an invalid move" in m for _, m, _, to in env.state.events if to == 0)
+
+    env.step("up")
+    assert env.state.current_player_id == 1
+    assert env.pending_actions[0] == "up"
+
+
+def test_second_invalid_move_kills_snake_and_opponent_wins():
+    env = _fresh(num_players=2)
+    env.step("this has no direction token")
+    done = env.step("still no direction")
     # P0's snake dies; only P1 remains -> game ends immediately.
     assert done
     assert not env.state.game_state["snakes"][0].alive
@@ -63,7 +78,8 @@ def test_invalid_death_immediately_synchronizes_cached_board():
     env = _fresh(num_players=3, width=5, height=5, num_apples=2)
     dead_head = env.state.game_state["snakes"][0].head
 
-    done, _ = env.step("not a direction")
+    env.step("not a direction")
+    done = env.step("not a direction")
 
     assert not done
     assert env.state.game_state["board_state"] == env._get_board_string(
@@ -78,7 +94,7 @@ def test_pending_direction_is_private_until_round_resolution():
     env = _fresh(num_players=3, width=5, height=5, num_apples=2)
     env.get_observation()  # consume player 0's initial messages
 
-    done, _ = env.step("up")
+    done = env.step("up")
 
     assert not done
     assert not any(
@@ -136,13 +152,13 @@ def test_round_limit_waits_for_every_living_snake_to_move():
         gs["snakes"][pid].positions.append(position)
     gs["board_state"] = env._get_board_string(gs["snakes"], gs["apples"])
 
-    done, _ = env.step("up")
+    done = env.step("up")
     assert not done
-    done, _ = env.step("left")
+    done = env.step("left")
     assert not done
     assert {pid: snake.head for pid, snake in gs["snakes"].items()} == starts
 
-    done, _ = env.step("up")
+    done = env.step("up")
 
     assert done
     assert gs["round_count"] == 1
@@ -163,7 +179,7 @@ def test_body_of_wall_collision_still_causes_same_round_collision():
     gs["board_state"] = env._get_board_string(gs["snakes"], gs["apples"])
 
     env.step("up")
-    done, _ = env.step("right")
+    done = env.step("right")
 
     assert done
     assert not gs["snakes"][0].alive
@@ -182,7 +198,7 @@ def test_tail_of_doomed_snake_does_not_vacate():
     gs["board_state"] = env._get_board_string(gs["snakes"], gs["apples"])
 
     env.step("right")
-    done, _ = env.step("right")
+    done = env.step("right")
 
     assert done
     assert not gs["snakes"][0].alive
@@ -201,7 +217,7 @@ def test_vacating_tail_is_not_a_body_collision():
     gs["board_state"] = env._get_board_string(gs["snakes"], gs["apples"])
 
     env.step("up")
-    done, _ = env.step("right")
+    done = env.step("right")
 
     assert not done
     assert all(snake.alive for snake in gs["snakes"].values())
@@ -211,7 +227,7 @@ def test_vacating_tail_is_not_a_body_collision():
 
 def test_alias_direction_tokens_accepted():
     env = _fresh(num_players=2)
-    done, _ = env.step("w")  # alias for up
+    done = env.step("w")  # alias for up
     assert not done
     assert env.state.game_state["snakes"][0].alive
     # A recognised token is stored as a pending action for P0.
@@ -227,7 +243,7 @@ def test_turn_limit_finalises_rewards():
     for m in moves:
         if done:
             break
-        done, _ = env.step(m)
+        done = env.step(m)
     assert done
     assert env.state.rewards is not None
     assert set(env.state.rewards.keys()) == {0, 1}
@@ -242,10 +258,11 @@ def _place(env, positions, apples=()):
     gs["board_state"] = env._get_board_string(gs["snakes"], gs["apples"])
 
 
-def test_engine_rejected_action_kills_snake_and_rounds_keep_resolving():
+def test_engine_rejected_actions_kill_snake_and_rounds_keep_resolving():
     env = _fresh(num_players=3, width=10, height=10, num_apples=0)
 
-    done, _ = env.step("x" * (env.max_action_chars + 1))
+    env.step("x" * (env.max_action_chars + 1))
+    done = env.step("x" * (env.max_action_chars + 1))
 
     assert not done
     assert env.state.eliminated == [0]
@@ -259,7 +276,8 @@ def test_engine_rejected_action_kills_snake_and_rounds_keep_resolving():
 def test_invalid_move_uses_engine_escalation_bookkeeping():
     env = _fresh(num_players=3, width=5, height=5, num_apples=0)
 
-    done, _ = env.step("north")
+    env.step("north")
+    done = env.step("north")
 
     assert not done
     assert env.state.game_info[0]["invalid_move"] is True
@@ -273,8 +291,10 @@ def test_fatal_action_by_last_submitter_resolves_the_pending_round():
     _place(env, {0: [(1, 1)], 1: [(3, 3)], 2: [(5, 5)]})
     env.step("up")
     env.step("up")
+    env.step(None)
+    assert env.state.game_state["round_count"] == 0
 
-    done, _ = env.step(None)
+    done = env.step(None)
 
     assert not done
     gs = env.state.game_state
@@ -311,6 +331,7 @@ def test_round_results_reveal_moves_and_deaths_only_after_resolution():
 def test_render_reports_round_scores_and_dead_snakes():
     env = _fresh(num_players=3, width=5, height=5, num_apples=0)
     env.step("nonsense")
+    env.step("nonsense")
 
     board = env.render(1)
 
@@ -323,8 +344,9 @@ def test_last_survivor_wins_without_resolving_its_pending_move():
     env = _fresh(num_players=2, width=5, height=5, num_apples=0)
     _place(env, {0: [(0, 0)], 1: [(3, 3)]})
     env.step("left")  # would hit the wall if the round were resolved
+    env.step("sideways")
 
-    done, _ = env.step("sideways")
+    done = env.step("sideways")
 
     assert done
     assert env.state.rewards == {0: 1.0, 1: -1.0}

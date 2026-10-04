@@ -1,5 +1,4 @@
 import re
-import copy
 from typing import Any, Dict, Union
 
 import textarena as ta
@@ -50,27 +49,17 @@ class TowerOfHanoiEnv(ta.GameEnv):
         m = self._MOVE_RE.fullmatch(move.strip())
         if not m:
             return self.invalid("You did not respond with a valid 'source target' move (e.g. 'A C').")
-        matches = [(m.group("source"), m.group("target"))]
-
-        # Validate and execute on a copy so an invalid sub-move leaves the state untouched.
-        towers = copy.deepcopy(self.game_state['towers'])
-        moved = []
-        for source, target in matches:
-            source = source.upper(); target = target.upper()
-            if source not in towers or target not in towers:
-                return self.invalid("You specified an invalid source or target tower.")
-            elif source == target:
-                return self.invalid("The source and target towers must be different.")
-            elif not towers[source]:
-                return self.invalid("You tried to move a disk from an empty tower.")
-            elif towers[target] and towers[target][-1] < towers[source][-1]:
-                return self.invalid("You tried to place a larger disk on a smaller disk.")
-            towers[target].append(towers[source].pop())
-            moved.append((towers[target][-1], source, target))
-
-        self.game_state['towers'] = towers
-        for disk, source, target in moved:
-            self.broadcast(f"You moved disk {disk} from {source} to {target}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        source, target = m.group("source").upper(), m.group("target").upper()
+        towers = self.game_state['towers']
+        if source == target:
+            return self.invalid("The source and target towers must be different.")
+        elif not towers[source]:
+            return self.invalid("You tried to move a disk from an empty tower.")
+        elif towers[target] and towers[target][-1] < towers[source][-1]:
+            return self.invalid("You tried to place a larger disk on a smaller disk.")
+        disk = towers[source].pop()
+        towers[target].append(disk)
+        self.broadcast(f"You moved disk {disk} from {source} to {target}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
         if self.game_state['towers']["C"] == list(range(self.num_disks, 0, -1)):  # check if the game is over
             return self.outcome({0: 1}, reason="Congratulations! You solved the Tower of Hanoi puzzle.")

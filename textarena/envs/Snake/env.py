@@ -34,7 +34,6 @@ class SnakeEnv(ta.GameEnv):
     max_players = 15
     mdp_includes_actions = False
     broadcast_actions = False  # moves are sealed until the round resolves
-    error_allowance = 0  # an invalid move kills the snake immediately
 
     width = ta.Param(10, "The board width.", min=1)
     height = ta.Param(10, "The board height.", min=1)
@@ -112,7 +111,7 @@ class SnakeEnv(ta.GameEnv):
             "- A snake dies if it moves off the board, into a cell occupied by any snake (including itself and snakes that die this round), "
             "into the same cell as another head, or trades places with another head. A tail cell is free if its snake moves on this round "
             "without eating or dying.\n"
-            "- An invalid reply kills your snake immediately.\n"
+            "- An invalid reply gets a warning and you reply again; a second invalid reply in a row kills your snake.\n"
             f"The game ends when at most one snake is alive or after {self.max_turns} rounds. Living snakes rank above dead ones, "
             "dead snakes rank by the round they died in (later is better), and score breaks ties; snakes that are still tied share a rank. "
             "Rewards are spread evenly from +1 (best rank) to -1 (worst rank); if every snake ties, all get 0."

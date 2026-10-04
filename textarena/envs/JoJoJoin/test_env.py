@@ -23,7 +23,7 @@ def _play(env, *actions):
     done = False
     for action in actions:
         assert not done, f"game ended before {action!r}"
-        done, _ = env.step(action)
+        done = env.step(action)
         assert env.state.error_count == 0, f"{action!r} was rejected"
     return done
 
@@ -101,7 +101,7 @@ def test_occupied_cell_is_invalid_and_allows_resubmit():
     env = _fresh()
     _play(env, "12")
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("12")
+    done = env.step("12")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 1
@@ -113,7 +113,7 @@ def test_occupied_cell_is_invalid_and_allows_resubmit():
 def test_out_of_range_cells_are_invalid_and_atomic(action, shown):
     env = _fresh()
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
     assert env.game_state == before
     _, message, _, _ = env.state.events[-2]  # the invalid-move notice precedes the re-sent board
@@ -124,7 +124,7 @@ def test_out_of_range_cells_are_invalid_and_atomic(action, shown):
 def test_malformed_moves_are_rejected(action):
     env = _fresh()
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
     assert env.game_state == before
 
@@ -151,7 +151,7 @@ def test_lenient_but_unambiguous_formats_are_accepted(action, cell):
 def test_two_consecutive_invalid_moves_lose():
     env = _fresh()
     env.step("not a move")
-    done, _ = env.step("still bad")
+    done = env.step("still bad")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
     assert env.state.game_info[0]["invalid_move"]
@@ -192,5 +192,5 @@ def test_registered_variants():
     for env_id in ("JoJoJoin-v1", "JoJoJoin-v1-mdp"):
         env = ta.make(env_id)
         env.reset(num_players=2, seed=1)
-        done, _ = env.step("12")
+        done = env.step("12")
         assert not done and env.state.error_count == 0

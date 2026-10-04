@@ -69,7 +69,7 @@ _STRING_METHODS = {
 _KEY_METHODS = {"get", "pop", "setdefault"}
 _SKIP_CALLS = {
     "print", "getattr", "setattr", "hasattr", "delattr", "isinstance", "issubclass", "open",
-    "register", "register_with_versions", "import_module", "__import__", "TypeVar", "namedtuple",
+    "register", "register", "import_module", "__import__", "TypeVar", "namedtuple",
 }
 _SKIP_OWNERS = {"re", "os", "path", "logging", "logger", "log", "warnings", "json", "importlib", "sys", "subprocess", "shutil", "pathlib"}
 _PATTERN_TARGET = re.compile(r"(?i)pattern|regex|^re_|_re$")
@@ -421,7 +421,7 @@ class _Collector:
         method = isinstance(node.func, ast.Attribute)
         skip_all = (
             (not method and name in _SKIP_CALLS)
-            or (method and (name in _STRING_METHODS or name in ("register", "register_with_versions")))
+            or (method and (name in _STRING_METHODS or name in ("register", "register")))
             or any(owner in _SKIP_OWNERS for owner in owners)
         )
         skip_first = method and name in _KEY_METHODS
@@ -1035,7 +1035,7 @@ def coverage(game: str, lang: str, seeds: int = 3, steps: int = 150):
             player_id, _ = env.get_observation()
             options = _action_candidates(base.state, player_id)
             action = rng.choice(options) if options and rng.random() < 0.7 else rng.choice(ACTION_POOL)
-            done, _ = env.step(action)
+            done = env.step(action)
             if done:
                 break
         env.get_observation()

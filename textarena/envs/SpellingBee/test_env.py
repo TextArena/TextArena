@@ -55,7 +55,7 @@ def test_allowed_letters_are_weighted_by_english_letter_frequency():
 
 def test_valid_word_accepted_and_turn_rotates():
     env = _fresh()
-    done, _ = env.step("cat")
+    done = env.step("cat")
     assert not done
     assert env.state.game_state["word_history"] == ["cat"]
     # A valid, non-invalid move rotates to the other player.
@@ -66,7 +66,7 @@ def test_non_decreasing_length_enforced():
     env = _fresh()
     env.step("cats")  # length 4 by player 0
     # Player 1 submits a shorter word -> invalid (first offence, no termination).
-    done, _ = env.step("to")
+    done = env.step("to")
     assert not done
     assert env.state.error_count == 1
     # History unchanged after the invalid move.
@@ -75,7 +75,7 @@ def test_non_decreasing_length_enforced():
 
 def test_non_english_word_rejected():
     env = _fresh()
-    done, _ = env.step("zzzzz")
+    done = env.step("zzzzz")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["word_history"] == []
@@ -86,14 +86,14 @@ def test_repeated_word_rejected():
     env.step("cat")   # player 0
     env.step("cats")  # player 1 (len 4 >= 3, valid)
     # Player 0 repeats an already used word -> invalid.
-    done, _ = env.step("cat")
+    done = env.step("cat")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_bad_format_rejected():
     env = _fresh()
-    done, _ = env.step("two words")
+    done = env.step("two words")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["word_history"] == []
@@ -103,9 +103,9 @@ def test_two_consecutive_invalids_end_game():
     env = _fresh()
     env.step("cat")  # player 0 valid -> now player 1
     # Player 1 submits a too-short word twice in a row.
-    done, _ = env.step("to")
+    done = env.step("to")
     assert not done and env.state.error_count == 1
-    done, _ = env.step("to")
+    done = env.step("to")
     assert done
     # Offender (player 1) loses, player 0 wins.
     assert env.state.rewards == {0: 1, 1: -1}
@@ -114,13 +114,30 @@ def test_two_consecutive_invalids_end_game():
     assert env.state.game_info[1]["turn_count"] == 0
 
 
+def test_turn_limit_ends_in_a_draw():
+    env = SpellingBeeEnv(num_letters=26, is_word=_Dictionary(), max_turns=3)
+    env.reset(num_players=2, seed=42)
+    assert not env.step("cat")
+    assert not env.step("to")  # rejected words do not count toward the limit
+    assert not env.step("dog")
+    assert env.step("cats")
+    assert env.state.rewards == {0: 0, 1: 0}
+    assert env.state.turn == 3
+
+
+def test_default_turn_limit_is_50_and_must_be_positive():
+    assert SpellingBeeEnv(is_word=_Dictionary()).max_turns == 50
+    with pytest.raises(ValueError, match="max_turns"):
+        SpellingBeeEnv(is_word=_Dictionary(), max_turns=0)
+
+
 def test_illegal_letters_are_rejected_before_dictionary_lookup():
     dictionary = _Dictionary()
     env = SpellingBeeEnv(num_letters=3, is_word=dictionary)
     env.reset(num_players=2, seed=42)
     env.game_state["allowed_letters"] = {"c", "a", "t"}
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("dog")
+    done = env.step("dog")
     assert not done
     assert env.game_state == before
     assert dictionary.queries == []
@@ -167,7 +184,7 @@ def test_default_word_check_accepts_uk_and_us_spellings_and_inflections():
     env.reset(num_players=2, seed=42)
     words = ["cat", "color", "colour", "colors", "colours"]
     for word in words:
-        done, _ = env.step(word)
+        done = env.step(word)
         assert not done and env.state.error_count == 0
     env.step("zzzzzzz")
     assert env.state.error_count == 1
@@ -180,6 +197,7 @@ def test_prompt_states_the_word_rules_and_how_a_player_loses():
     assert "use only the allowed letters; each letter may be used any number of times" in prompt
     assert "checked against the game's English dictionary" in prompt
     assert "If you submit two invalid words in a row, you lose." in prompt
+    assert "If 50 words have been accepted (counting both players) and nobody has lost, the game is a draw." in prompt
 
 
 def test_dictionary_lookup_failure_is_retryable_and_atomic():
@@ -189,7 +207,7 @@ def test_dictionary_lookup_failure_is_retryable_and_atomic():
     env = SpellingBeeEnv(num_letters=26, is_word=failing_lookup)
     env.reset(num_players=2, seed=42)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("cat")
+    done = env.step("cat")
     assert not done
     assert env.state.error_count == 0
     assert env.state.turn == 0

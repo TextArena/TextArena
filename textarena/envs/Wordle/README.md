@@ -54,7 +54,7 @@ A rejected guess is answered with the reason. If you run out of guesses, the sec
 
 | Outcome | Reward |
 | --- | --- |
-| Secret word guessed | `+1` |
+| Secret word guessed | `1` |
 | All guesses used | Score of your best guess, (greens + 0.5 × yellows) / `word_length`, from `0` to `1` |
 | Second consecutive rejected guess | Score of your best guess so far (`0` before any accepted guess) |
 

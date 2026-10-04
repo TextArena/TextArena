@@ -20,7 +20,7 @@ def _secret(env):
 def test_win_by_cracking_code():
     env = _fresh()
     code = _secret(env)
-    done, _ = env.step(" ".join(map(str, code)))
+    done = env.step(" ".join(map(str, code)))
     assert done
     assert env.state.rewards == {0: 1}
 
@@ -30,7 +30,7 @@ def test_valid_nonwinning_guess_gives_feedback():
     # A well-formed, in-range, duplicate-free guess distinct from the secret.
     guess = [1, 2, 3, 4]
     assert guess != _secret(env)
-    done, _ = env.step(" ".join(map(str, guess)))
+    done = env.step(" ".join(map(str, guess)))
     assert not done
     hist = env.state.game_state["history"]
     assert len(hist) == 1
@@ -42,14 +42,14 @@ def test_valid_nonwinning_guess_gives_feedback():
 
 def test_invalid_format_increments_error_not_done():
     env = _fresh()
-    done, _ = env.step("not a guess at all")
+    done = env.step("not a guess at all")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_wrong_length_rejected():
     env = _fresh()
-    done, _ = env.step("1 2 3")
+    done = env.step("1 2 3")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["history"] == []
@@ -57,23 +57,23 @@ def test_wrong_length_rejected():
 
 def test_out_of_range_rejected():
     env = _fresh()  # num_numbers defaults to 6
-    done, _ = env.step("6 7 8 9")
+    done = env.step("6 7 8 9")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_duplicate_numbers_rejected_when_disallowed():
     env = _fresh()  # duplicate_numbers defaults to False
-    done, _ = env.step("1 1 2 3")
+    done = env.step("1 1 2 3")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_two_consecutive_invalids_end_game():
     env = _fresh()
-    done, _ = env.step("garbage")
+    done = env.step("garbage")
     assert not done
-    done, _ = env.step("still garbage")
+    done = env.step("still garbage")
     assert done
     # No successful guesses -> percentage completion is 0.0
     assert env.state.rewards == {0: 0.0}
@@ -113,7 +113,7 @@ def test_secret_generation_is_valid_and_deterministic(seed, duplicates):
 def test_exact_parser_rejects_malformed_guesses_atomically(action):
     env = _fresh()
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.game_state == before
@@ -122,7 +122,7 @@ def test_exact_parser_rejects_malformed_guesses_atomically(action):
 
 def test_comma_separated_guess_format():
     env = _fresh()
-    done, _ = env.step("1, 2, 3, 4")
+    done = env.step("1, 2, 3, 4")
     assert not done
     assert env.game_state["history"][0]["guess"] == [1, 2, 3, 4]
 
@@ -130,7 +130,7 @@ def test_comma_separated_guess_format():
 def test_oversized_numeric_guess_is_invalid_without_history():
     env = _fresh()
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step(f"{'9' * env.max_action_chars} 2 3 4")
+    done = env.step(f"{'9' * env.max_action_chars} 2 3 4")
     assert not done
     assert env.state.error_count == 1
     assert env.game_state == before
@@ -156,7 +156,7 @@ def test_repeated_guess_is_invalid_and_history_is_atomic():
     env = _fresh()
     env.step("1 2 3 4")
     before = copy.deepcopy(env.game_state["history"])
-    done, _ = env.step("1 2 3 4")
+    done = env.step("1 2 3 4")
     assert not done
     assert env.state.error_count == 1
     assert env.game_state["history"] == before
@@ -167,7 +167,7 @@ def test_turn_limit_returns_latest_weighted_feedback():
     guess = [1, 2, 3, 4]
     assert guess != _secret(env)
     black, white = env._evaluate_guess(guess)
-    done, _ = env.step("1 2 3 4")
+    done = env.step("1 2 3 4")
     assert done
     assert env.state.rewards == {0: pytest.approx((black + white * 0.5) / 4)}
     assert "turn limit" in env.state.game_info[0]["reason"].lower()
@@ -199,7 +199,7 @@ def test_secret_is_hidden_during_play_and_revealed_at_terminal():
     current = env.render(0)
     assert "Secret Code: [?] [?] [?] [?]" in current
     assert secret_text not in current
-    done, _ = env.step(" ".join(map(str, _secret(env))))
+    done = env.step(" ".join(map(str, _secret(env))))
     assert done
     assert secret_text in env.render(0)
     assert env.get_board_str() == env.render(0)

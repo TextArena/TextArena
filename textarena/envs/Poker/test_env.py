@@ -47,7 +47,7 @@ def test_reset_posts_blinds():
 
 def test_fold_ends_single_round_game():
     env = _fresh(num_rounds=1)
-    done, _ = env.step("fold")  # P0 folds; only P1 remains
+    done = env.step("fold")  # P0 folds; only P1 remains
     assert done
     assert env.state.rewards == {0: -1.0, 1: 1.0}
 
@@ -56,7 +56,7 @@ def test_call_playthrough_reaches_terminal_rewards():
     env = _fresh(num_rounds=1)
     done = False
     for _ in range(50):
-        done, _ = env.step("call")  # calling with nothing due behaves like check
+        done = env.step("call")  # calling with nothing due behaves like check
         if done:
             break
     assert done
@@ -65,7 +65,7 @@ def test_call_playthrough_reaches_terminal_rewards():
 
 def test_invalid_action_increments_error():
     env = _fresh()
-    done, _ = env.step("jump")
+    done = env.step("jump")
     assert not done
     assert env.state.error_count == 1
 
@@ -241,7 +241,7 @@ def test_invalid_actions_do_not_mutate_poker_gameplay_state(action):
     before = copy.deepcopy(env.state.game_state)
     current_player = env.state.current_player_id
 
-    done, _ = env.step(action)
+    done = env.step(action)
 
     assert not done
     assert env.state.game_state == before
@@ -253,7 +253,7 @@ def test_bet_cannot_be_used_to_call_an_existing_bet():
     env = _fresh()
     gs = env.state.game_state
 
-    done, _ = env.step("bet 10")
+    done = env.step("bet 10")
 
     assert not done
     assert env.state.error_count == 1
@@ -406,13 +406,13 @@ def test_short_all_in_raise_runs_out_without_extra_solo_betting():
     env.reset(num_players=2, seed=42)
     gs = env.state.game_state
 
-    done, _ = env.step("raise 20")
+    done = env.step("raise 20")
     assert not done
     assert gs["current_bet"] == 21
     assert gs["player_chips"][0] == 0
     assert 0 in gs["all_in_players"]
 
-    done, _ = env.step("call")
+    done = env.step("call")
     assert done
     assert gs["pot"] == 0
     assert sum(gs["player_chips"].values()) == 42
@@ -450,7 +450,7 @@ def test_cumulative_short_all_in_raises_reopen_prior_action():
 
     assert env.state.current_player_id == 0
     assert gs["current_bet"] == 40
-    done, _ = env.step("raise 20")
+    done = env.step("raise 20")
 
     assert done  # both opponents are all-in, so the accepted raise runs out
     assert env.state.error_count == 0
@@ -482,7 +482,7 @@ def test_fold_does_not_reveal_unreached_community_cards():
     gs = env.state.game_state
     assert gs["visible_community_cards"] == []
 
-    done, _ = env.step("fold")
+    done = env.step("fold")
 
     assert done
     assert gs["visible_community_cards"] == []
@@ -498,7 +498,7 @@ def test_invalid_move_elimination_forfeits_stack_without_losing_chips():
     initial_total = sum(gs["player_chips"].values()) + gs["pot"]
 
     env.step("garbage")
-    done, _ = env.step("still garbage")
+    done = env.step("still garbage")
 
     assert not done
     assert 0 in env.state.eliminated

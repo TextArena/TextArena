@@ -40,7 +40,7 @@ def test_reset_rejects_multiplayer():
 
 def test_four_x_bet_transitions_and_deducts():
     env = _fresh()
-    done, _ = env.step("4x")  # pre-flop 4x play bet -> flop
+    done = env.step("4x")  # pre-flop 4x play bet -> flop
     gs = env.state.game_state
     assert not done
     assert gs["play_bet"] == 100
@@ -50,7 +50,7 @@ def test_four_x_bet_transitions_and_deducts():
 
 def test_three_x_bet_is_legal_preflop_and_deducts():
     env = _fresh()
-    done, _ = env.step("3x")
+    done = env.step("3x")
     gs = env.state.game_state
     assert not done
     assert gs["play_bet"] == 75
@@ -66,7 +66,7 @@ def test_check_progresses_through_streets():
     env.step("check")  # flop -> river
     assert env.state.game_state["current_phase"] == "river"
     # A full round resolves at the river; a new round should begin.
-    done, _ = env.step("fold")
+    done = env.step("fold")
     assert not done
     assert env.state.game_state["current_round"] == 2
 
@@ -85,7 +85,7 @@ def test_every_betting_branch_completes_a_full_round(actions):
     done = False
     for action in actions:
         assert not done
-        done, _ = env.step(action)
+        done = env.step(action)
     assert done
     assert env.state.game_state["current_phase"] == "showdown"
     assert env.state.rewards == {0: 1.0}
@@ -104,7 +104,7 @@ def test_two_consecutive_invalid_moves_end_game():
     env.step("fold")  # invalid pre-flop (first)
     env.step("fold")  # invalid pre-flop (second) -> game over
     assert env.state.done
-    assert env.state.rewards == {0: -1}
+    assert env.state.rewards == {0: 0}
 
 
 def test_folding_until_bust_loses():
@@ -114,10 +114,10 @@ def test_folding_until_bust_loses():
     for _ in range(2):
         env.step("check")  # pre_flop -> flop
         env.step("check")  # flop -> river
-        done, _ = env.step("fold")   # forfeit ante+blind
+        done = env.step("fold")   # forfeit ante+blind
     assert env.state.game_state["chips"] <= 0
     assert done
-    assert env.state.rewards == {0: -1}
+    assert env.state.rewards == {0: 0}
 
 
 def test_completing_max_rounds_wins():
@@ -125,7 +125,7 @@ def test_completing_max_rounds_wins():
     env = _fresh(max_rounds=1)
     env.step("check")
     env.step("check")
-    done, _ = env.step("fold")
+    done = env.step("fold")
     assert done
     assert env.state.rewards == {0: 1.0}
 
@@ -144,7 +144,7 @@ def test_insufficient_play_bet_is_invalid_and_atomic():
     env = _fresh(start_chips=100)
     gs = env.state.game_state
     before = (gs["chips"], gs["play_bet"], gs["total_bet"], gs["current_phase"])
-    done, _ = env.step("4x")
+    done = env.step("4x")
     assert not done
     assert env.state.error_count == 1
     assert (gs["chips"], gs["play_bet"], gs["total_bet"], gs["current_phase"]) == before
@@ -213,7 +213,7 @@ def test_mixed_or_duplicate_actions_are_rejected_atomically(action):
         gs["current_phase"],
         list(gs["visible_community_cards"]),
     )
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert (

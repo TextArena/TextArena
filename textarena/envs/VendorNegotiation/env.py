@@ -54,10 +54,6 @@ class VendorNegotiationEnv(ta.GameEnv):
     max_rounds = ta.Param(
         20, "The number of messages, counting both players, before the game ends without a deal.", min=1,
     )
-    error_allowance = ta.Param(
-        3, "The number of consecutive invalid moves a player is warned about before the next one forfeits the game.",
-        min=0,
-    )
     brand_target_fraction = ta.Param(
         0.5, "Where the Brand's target sits between the lowest (`0`) and highest (`1`) total sales the drawn products "
              "can reach.", min=0, max=1,
@@ -206,7 +202,7 @@ class VendorNegotiationEnv(ta.GameEnv):
         self.products = {name: self.all_products[name] for name in self.selected_products}
 
         # Each target sits a fixed fraction of the way up the range the drawn
-        # products can reach, so every draw leaves both sides able to win or lose.
+        # products can reach, so every draw leaves both sides able to meet or miss them.
         self.sales_range = self._attainable_range('mean_sales')
         self.profit_range = self._attainable_range('mean_profit')
         sales_low, sales_high = self.sales_range
@@ -231,6 +227,7 @@ class VendorNegotiationEnv(ta.GameEnv):
             prompt = f"""ROLE: Brand Specialist at E-commerce Platform
 OBJECTIVE: Achieve total sales ≥ ${self.brand_target:.0f}
 (Depending on the discounts, total sales for these products range from ${sales_low:.0f} to ${sales_high:.0f}; your target is {self.brand_target_fraction:.0%} of the way up that range.)
+SCORING: You score 1 if an accepted deal meets your target and 0 if it misses it or no deal is reached.
 
 {self.brand_role_instructions}
 
@@ -255,6 +252,7 @@ ROUNDS: {self.max_rounds} maximum
             prompt = f"""ROLE: Vendor
 OBJECTIVE: Achieve total profit ≥ ${self.vendor_target:.0f}
 (Depending on the discounts, total profit for these products ranges from ${profit_low:.0f} to ${profit_high:.0f}; your target is {self.vendor_target_fraction:.0%} of the way up that range.)
+SCORING: You score 1 if an accepted deal meets your target and 0 if it misses it or no deal is reached.
 
 You must NEVER reveal information about your profit and cost.
 {self.vendor_role_instructions}
@@ -540,19 +538,25 @@ ROUNDS: {self.max_rounds} maximum
         }
         self.broadcast(results_str, ta.ObservationType.GAME_ADMIN)
 
-        # Both players lose
         return self._final_outcome(False, False)
 
     def _final_outcome(self, brand_won: bool, vendor_won: bool) -> ta.Outcome:
-        """Build the final Outcome based on win conditions."""
+        """Each side scores 1 if it met its own target and 0 otherwise."""
         if brand_won and vendor_won:
-            return self.draw(reason="Both players achieved their objectives")
-        elif brand_won and not vendor_won:
-            return self.winner(0, reason="Brand Specialist achieved sales target")
-        elif vendor_won and not brand_won:
-            return self.winner(1, reason="Vendor achieved profit target")
+            reason = "Both players achieved their objectives"
+        elif brand_won:
+            reason = "Only the Brand Specialist achieved its sales target"
+        elif vendor_won:
+            reason = "Only the Vendor achieved its profit target"
         else:
-            return self.draw(reason="Neither player achieved their objective")
+            reason = "Neither player achieved their objective"
+        return self.outcome({0: int(brand_won), 1: int(vendor_won)}, reason=reason)
+
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome(
+            {player_id: 0, 1 - player_id: 1},
+            reason=f"{self.roles()[player_id]} made repeated invalid moves. Reason: {reason}",
+        )
 
     def get_board_str(self) -> str:
         """Return the main board string for rendering."""

@@ -68,7 +68,7 @@ def test_non_string_action_is_an_invalid_move_not_a_crash(phase, action):
     before = copy.deepcopy(env.game_state)
     start = len(env.state.events)
 
-    done, _ = env.step(action)
+    done = env.step(action)
 
     assert not done
     assert env.state.current_player_id == actor
@@ -82,7 +82,7 @@ def test_repeated_none_actions_follow_the_invalid_move_policy():
     actor = env.state.current_player_id
 
     env.step(None)
-    done, _ = env.step(None)
+    done = env.step(None)
 
     assert not done
     assert actor not in env.game_state["alive_players"]
@@ -112,7 +112,7 @@ def test_night_mafia_invalid_vote_increments_error():
     env = _fresh(6)
     assert env.phase == Phase.NIGHT_MAFIA
     actor = env.state.current_player_id
-    done, _ = env.step("99")  # 99 is not an alive player
+    done = env.step("99")  # 99 is not an alive player
     assert not done
     assert env.state.error_count == 1
     # No rotation off the player after a single invalid move.
@@ -122,7 +122,7 @@ def test_night_mafia_invalid_vote_increments_error():
 def test_huge_vote_token_is_invalid_without_integer_conversion_crash():
     env = _fresh(6)
     actor = env.state.current_player_id
-    done, _ = env.step("9" * 10_000)
+    done = env.step("9" * 10_000)
 
     assert not done
     assert env.state.current_player_id == actor
@@ -152,7 +152,7 @@ def test_mafia_cannot_target_another_mafia_member():
     actor = env.state.current_player_id
     other_mafia = next(pid for pid, role in _roles(env).items() if role == "Mafia" and pid != actor)
 
-    done, _ = env.step(str(other_mafia))
+    done = env.step(str(other_mafia))
 
     assert not done
     assert env.state.error_count == 1
@@ -166,7 +166,7 @@ def test_doctor_and_detective_cannot_target_themselves():
         env.game_state["phase"] = phase
         env.set_current_player(actor)
 
-        done, _ = env.step(str(actor))
+        done = env.step(str(actor))
 
         assert not done
         assert env.state.error_count == 1
@@ -178,7 +178,7 @@ def test_invalid_limit_eliminates_player_from_state_and_queued_turns():
     actor = env.state.current_player_id
 
     env.step("99")
-    done, _ = env.step("99")
+    done = env.step("99")
 
     assert not done
     assert actor not in env.game_state["alive_players"]

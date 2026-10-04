@@ -1,5 +1,4 @@
-import re, string
-from math import sqrt
+import string
 from enum import Enum, auto
 from collections import Counter
 from dataclasses import dataclass, field
@@ -9,8 +8,6 @@ from typing import Dict, List, Tuple, Optional, Set
 HexCoord = Tuple[int, int] # (q, r)   axial
 CornerID = Tuple[HexCoord, HexCoord, HexCoord]  # sorted triple of tiles
 EdgeID = Tuple[CornerID, CornerID] # canonical edge key
-InterCoord = Tuple[int, int, int] # cube coords, uniquely identifies a corner
-EdgeCoord = Tuple[InterCoord, InterCoord]
 
 AXIAL_DIRS: list[HexCoord] = [(+1,  0), (+1, -1), ( 0, -1), (-1,  0), (-1, +1), ( 0, +1)]
 CORNER_DIR_PAIRS = [(2, 3), (1, 2), (0, 1), (5, 0), (4, 5), (3, 4)]
@@ -35,7 +32,6 @@ class Hex:
     terrain: Terrain
     token: Optional[int] # None for desert
     has_robber: bool = False
-    def produces(self) -> Optional[str]: return None if self.terrain is Terrain.DESERT else self.terrain.value
 
 @dataclass
 class Corner:
@@ -74,9 +70,6 @@ MAX_ROADS = 15
 MAX_SETTLEMENTS = 5
 MAX_CITIES = 4
 
-# regex helpers
-_desc_re = re.compile(r"\s*(\d+)?\s*([a-zA-Z]+)\s*", re.I)
-
 def corner_ids_of_tile(q: int, r: int) -> List[CornerID]:
     """ Return the six CornerIDs (triples of axial coords) for tile (q,r) """
     corners: list[CornerID] = []
@@ -86,20 +79,6 @@ def corner_ids_of_tile(q: int, r: int) -> List[CornerID]:
         triple = tuple(sorted(((q, r), t1, t2)))   # canonical ordering
         corners.append(triple)
     return corners
-
-def _parse_hex_descriptor(text: str) -> tuple[Terrain, Optional[int]] | None:
-    """ Accepts strings like '8 wood', 'wood 8', 'desert'. Returns (Terrain, token)  where token is int or None. """
-    text = text.lower()
-    if text.strip() == "desert": return Terrain.DESERT, None
-    m = _desc_re.fullmatch(text)
-    if not m: return None
-    a, b = m.group(1), m.group(2)
-    if a and b:                      # '8 wood' or 'wood 8'
-        token = int(a) if a.isdigit() else int(b)
-        word  = b if a.isdigit() else a
-    else: return None # just 'wood' or just '8'  (disallow)
-    try:                return Terrain[word.upper()], token
-    except KeyError:    return None
 
 def _corner_descr(cid: CornerID, board: "Board") -> str:
     parts = []
@@ -182,22 +161,6 @@ class Board:
                 return True
         return False
 
-    def _corner_from_triplet(self, descriptors: list[str]) -> tuple[CornerID | None, str | None]:
-        """Return CornerID matching the three token/terrain descriptors."""
-        if len(descriptors) != 3:
-            return None, "Need exactly three hex descriptors"
-        parsed = []
-        for txt in descriptors:
-            pair = _parse_hex_descriptor(txt)
-            if pair is None:
-                return None, f"Cannot parse descriptor '{txt}'"
-            parsed.append(pair)
-        key = frozenset(parsed)
-        cid = self._corner_lookup.get(key)
-        if cid is None:
-            return None, "No corner matches those three hexes"
-        return cid, None
-
     @classmethod
     def build_standard(cls) -> "Board":
         board = cls()
@@ -231,21 +194,6 @@ class Board:
                     elif i in (1, 4): edge.orient = 'F' #'F'  # ╱
                     else:             edge.orient = 'B' #'B'  # ╲
                     edge.i = i
-
-
-        board._corner_lookup = {}
-        for cid in board.corners:
-            triple = []
-            for coord in cid:
-                if coord not in board.hexes: # sea edge → skip
-                    break
-                terr, tok = board.hexes[coord].terrain, board.hexes[coord].token
-                triple.append((terr, tok))
-            else: # only if all 3 on-board
-                key = frozenset(triple)
-                # duplicates should not occur; assert for safety
-                assert key not in board._corner_lookup, "non-unique triplet!"
-                board._corner_lookup[key] = cid
 
         # 4) players
         for col in Color:                       # BLUE, ORANGE, WHITE, RED
@@ -343,17 +291,6 @@ class Board:
         corner.piece = Piece.CITY
         return True, None
 
-    def player_build_settlement_by_triplet(self, player: Player, triplet: list[str]) -> tuple[bool, str | None]:
-        cid, err = self._corner_from_triplet(triplet)
-        if cid is None: return False, err
-        return self.player_build_settlement(player, cid)
-
-    def player_build_city_by_triplet(self, player: Player, triplet: list[str]) -> tuple[bool, str | None]:
-        cid, err = self._corner_from_triplet(triplet)
-        if cid is None: return False, err
-        return self.player_build_city(player, cid)
-    
-
     def get_scores(self) -> dict[Color, dict[str, int]]:
         results: dict[Color, dict[str, int]] = {col: {"total": 0, "cities": 0, "settlements": 0, "roads": 0} for col in self.players}
         # count buildings directly from the board so we can't go out of sync
@@ -414,19 +351,6 @@ class Board:
                     moves.append((idx, desc, action))
                     idx += 1
         return moves
-
-    def render_player_view(self, colour: Color) -> str:
-        player = self.players[colour]
-        scores = self.get_scores()
-        score_lines = [f"{str(c):6} {rec['total']:>2} Victory Points   (Settlements:{rec['settlements']}  Cities:{rec['cities']}  Roads:{rec['roads']})" for c, rec in scores.items()]
-        moves = self._viable_moves(player)
-        move_block = "\n".join(f"{idx}. {desc}" for idx, desc, _ in moves) or "No legal moves."
-        parts = [
-            f"{'='*24}  {colour.name}  {'='*24}", f"Hand:  {{{', '.join(f'{k.name}:{v}' for k,v in player.hand.items())}}}", "", "Scores\n───────", 
-            "\n".join(score_lines), "", "Board \n──────", render_board(self), "", "Viable moves\n────────────", move_block,
-        ]
-        return "\n".join(parts)
-
 
     def execute_action(self, player: Player, action: Action) -> Tuple[bool, str | None]:
         kind, data = action
@@ -518,21 +442,3 @@ def render_board(board: 'Board') -> str:
     missing  = required - mapping.keys()
     assert not missing, f"still missing: {missing}"
     return _TEMPLATE.format_map(_SafeDict(mapping))
-
-
-if __name__ == "__main__":
-    board = Board.build_standard()
-
-    # give Blue some resources to make options interesting
-    blue = board.players[Color.BLUE]
-    blue.hand.update({Terrain.BRICK: 2, Terrain.WOOD: 2, Terrain.SHEEP: 1, Terrain.WHEAT: 1, Terrain.ORE: 3})
-
-    print(board.render_player_view(Color.BLUE))
-
-    moves = board._viable_moves(blue)  # list[Move]
-    choice = int(input("Pick a move number: "))
-    selected = next(m for m in moves if m[0] == choice)   # (idx, desc, action_spec)
-
-    ok, err = board.execute_action(blue, selected[2])
-    print("Success!" if ok else f"Failed: {err}")
-    print(board.render_player_view(Color.BLUE))

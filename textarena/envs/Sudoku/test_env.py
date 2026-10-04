@@ -69,7 +69,7 @@ def test_full_solution_wins():
     done = False
     for (i, j) in empties:
         num = env.full_grid[i][j]
-        done, _ = env.step(f"{i + 1} {j + 1} {num}")
+        done = env.step(f"{i + 1} {j + 1} {num}")
     assert done
     assert env.state.game_state["completed"] is True
     assert env.state.rewards == {0: 1}
@@ -77,14 +77,14 @@ def test_full_solution_wins():
 
 def test_bad_format_is_invalid():
     env = _fresh()
-    done, _ = env.step("row 1 col 1 = 5")
+    done = env.step("row 1 col 1 = 5")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_out_of_bounds_rejected():
     env = _fresh()
-    done, _ = env.step("10 10 5")
+    done = env.step("10 10 5")
     assert not done
     assert env.state.error_count == 1
 
@@ -94,7 +94,7 @@ def test_overwrite_prefilled_rejected():
     # Find a pre-filled cell and attempt to write to it.
     filled = next((i, j) for i in range(9) for j in range(9) if env.game_board[i][j] != 0)
     i, j = filled
-    done, _ = env.step(f"{i + 1} {j + 1} {env.full_grid[i][j]}")
+    done = env.step(f"{i + 1} {j + 1} {env.full_grid[i][j]}")
     assert not done
     assert env.state.error_count == 1
 
@@ -104,7 +104,7 @@ def test_wrong_number_rejected():
     (i, j) = _empty_cells(env)[0]
     correct = env.full_grid[i][j]
     wrong = 1 if correct != 1 else 2
-    done, _ = env.step(f"{i + 1} {j + 1} {wrong}")
+    done = env.step(f"{i + 1} {j + 1} {wrong}")
     assert not done
     assert env.state.error_count == 1
     # Board must not have been mutated by the rejected move.
@@ -122,7 +122,7 @@ def test_mismatched_brackets_are_invalid_and_atomic(brackets):
         else f"{row + 1} {col + 1} {number}]"
     )
     before = copy.deepcopy(env.game_state["board"])
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.game_state["board"] == before
@@ -198,7 +198,7 @@ def test_wrong_digit_feedback_distinguishes_conflicts_from_non_solution_digits()
 def test_turn_limit_scores_only_player_filled_cells():
     env = _fresh(clues=70, max_turns=1)
     row, col = _empty_cells(env)[0]
-    done, _ = env.step(f"{row + 1} {col + 1} {env.full_grid[row][col]}")
+    done = env.step(f"{row + 1} {col + 1} {env.full_grid[row][col]}")
     assert done
     assert env.state.rewards == {0: pytest.approx(1 / 11)}
     assert "turn limit" in env.state.game_info[0]["reason"].lower()

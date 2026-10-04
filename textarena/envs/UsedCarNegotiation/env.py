@@ -128,6 +128,12 @@ class UsedCarNegotiationEnv(ta.GameEnv):
     def on_turn_limit(self) -> ta.Outcome:
         return self.draw(reason="The maximum number of negotiation turns was reached without an accepted offer.")
 
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome(
+            {player_id: 0, 1 - player_id: 1},
+            reason=f"The {self.player_roles[player_id]} (Player {player_id}) made repeated invalid moves. Reason: {reason}",
+        )
+
     def _reward_func(self, price: int, role: str) -> float:
         if not price: return 0.0
         if role == "buyer": return min(1.0, max(0.0, (self.max_price-price) / (self.max_price-self.min_price)))

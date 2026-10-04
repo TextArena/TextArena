@@ -24,7 +24,8 @@
 TextArena puts board and card games, puzzles, negotiation, social deduction, and other multi-agent tasks behind
 one Gym-style interface. Every game enforces its own rules, shows each player only what they may see, and returns
 rewards, so models can be evaluated against each other or trained through self-play. A seed replays a game
-exactly, and observations can be translated into 192 languages.
+exactly, and observations can be translated into 192 languages. Upgrading from 0.x? See the
+[changelog](CHANGELOG.md) for what changed in 1.0 and how to migrate.
 
 ## Installation
 
@@ -55,13 +56,13 @@ done = False
 while not done:
     player_id, observation = env.get_observation()
     action = agents[player_id](observation)
-    done, step_info = env.step(action)
+    done = env.step(action)
 
 rewards, game_info = env.close()
 ```
 
-`get_observation()` returns the player who acts next and the text they see; `close()` returns each player's reward
-and game info. An agent is any callable that turns an observation string into an action string. TextArena ships
+`get_observation()` returns the player who acts next and the text they see, `step()` returns whether the game is
+over, and `close()` returns each player's reward and game info. An agent is any callable that turns an observation string into an action string. TextArena ships
 `OpenAIAgent` for any OpenAI-compatible API (OpenAI, a vLLM or other local server via `base_url`), its OpenRouter
 preset `OpenRouterAgent`, `TinkerAgent` for models trained with Tinker, and `HumanAgent` for playing in the terminal
 (try `python demo.py`).
@@ -71,7 +72,8 @@ preset `OpenRouterAgent`, `TinkerAgent` for models trained with Tinker, and `Hum
 Games take bare actions such as `4`, `roll`, or `e2e4`. Models are asked to reason freely and put their move inside
 `<action>...</action>` tags; the built-in agents pass only the tag contents to `env.step`, and
 `ta.extract_action(response)` does the same for your own agents. An invalid action is never applied: the player is
-told why and can try again, within a limit set by each game.
+told why and can try again once, and a second invalid action in a row ends their game (or their turn, depending on
+the game).
 
 ## Observations
 
@@ -87,6 +89,10 @@ Every configuration is registered twice:
 There are 30 single-player, 52 two-player, and 26 multi-player games. The [catalog](textarena/envs/README.md)
 lists them all, and each game's README covers its rules, actions, rewards, registered configurations, and
 parameters. Settings that are not registered are a keyword away: `ta.make("Chess-v1", max_turns=250)`.
+
+Rewards use one scale per kind of game: `+1` win, `-1` loss and `0` draw in competitive games; a score from `0` to
+`1` in single-player games; and each player's own score from `0` to `1` in cooperative and mixed-motive games such
+as Hanabi and PublicGoodsGame.
 
 Environment ids end in a version: when a game's rules change, the version goes up and the old id is retired, so
 scores reported for one version are only comparable with scores for the same version. All ids are currently `-v1`.

@@ -20,7 +20,7 @@ def test_capturing_last_enemy_piece_wins():
     gs["board"] = [["" for _ in range(8)] for _ in range(8)]
     gs["board"][0][0] = "W"   # a8
     gs["board"][2][1] = "B"   # b6 (a knight hop away)
-    done, _ = env.step("a8 b6")
+    done = env.step("a8 b6")
     assert done and env.state.rewards == {0: 1, 1: -1}
     assert gs["score"][0] == 1
 
@@ -29,13 +29,13 @@ def test_turn_rotation_after_valid_move():
     env = _fresh()
     assert env.state.current_player_id == 0
     # b2 -> c4 is a legal knight move on the default starting board.
-    done, _ = env.step("b2 c4")
+    done = env.step("b2 c4")
     assert not done and env.state.current_player_id == 1
 
 
 def test_invalid_format_increments_error_count():
     env = _fresh()
-    done, _ = env.step("no move here")
+    done = env.step("no move here")
     assert not done and env.state.error_count == 1
 
 
@@ -55,21 +55,21 @@ def test_format_error_describes_expected_action():
 def test_moving_opponent_piece_rejected():
     env = _fresh()
     # a8/b6 are Black pieces on the default board; player 0 controls White.
-    done, _ = env.step("a8 b6")
+    done = env.step("a8 b6")
     assert not done and env.state.error_count == 1
 
 
 def test_non_knight_move_rejected():
     env = _fresh()
     # a2 -> a3 is a single step forward, not a knight move.
-    done, _ = env.step("a2 a3")
+    done = env.step("a2 a3")
     assert not done and env.state.error_count == 1
 
 
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     env.step("garbage")
-    done, _ = env.step("a2 a3")  # illegal, second consecutive strike
+    done = env.step("a2 a3")  # illegal, second consecutive strike
     assert done and env.state.rewards == {0: -1, 1: 1}
 
 
@@ -78,7 +78,7 @@ def test_unbalanced_brackets_are_atomic_invalid_moves(action):
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
 
-    done, _ = env.step(action)
+    done = env.step(action)
 
     assert not done
     assert env.state.error_count == 1
@@ -100,7 +100,7 @@ def test_huge_numeric_square_is_rejected_without_integer_conversion(monkeypatch)
 
     monkeypatch.setattr(crusade_module, "int", guarded_int, raising=False)
 
-    done, _ = env.step(f"{'9' * 100_000} 0")
+    done = env.step(f"{'9' * 100_000} 0")
 
     assert not done
     assert env.state.error_count == 1
@@ -110,7 +110,7 @@ def test_huge_numeric_square_is_rejected_without_integer_conversion(monkeypatch)
 def test_numeric_cells_are_accepted():
     env = _fresh()
 
-    done, _ = env.step("00048 00042")  # a2 -> c3
+    done = env.step("00048 00042")  # a2 -> c3
 
     assert not done
     assert env.state.game_state["board"][6][0] == ""
@@ -122,7 +122,7 @@ def test_landing_on_own_piece_is_atomic():
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
 
-    done, _ = env.step("a2 c1")
+    done = env.step("a2 c1")
 
     assert not done
     assert env.state.error_count == 1
@@ -141,7 +141,7 @@ def test_capture_score_decides_exact_move_limit_and_renders_final_board():
     gs["board"][2][1] = "B"  # b6
     gs["board"][0][7] = "B"  # h8 keeps Black alive and mobile
 
-    done, _ = env.step("a8 b6")
+    done = env.step("a8 b6")
 
     assert done
     assert env.state.turn == 1
@@ -163,7 +163,7 @@ def test_tied_score_draws_at_exact_move_limit():
     env = OneMoveCrusade()
     env.reset(num_players=2, seed=42)
 
-    done, _ = env.step("b2 c4")
+    done = env.step("b2 c4")
 
     assert done
     assert env.state.turn == 1

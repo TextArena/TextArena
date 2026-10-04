@@ -39,7 +39,7 @@ def test_reaching_goal_wins():
     assert path is not None, "expected a solvable grid"
     done = False
     for move in path:
-        done, _ = env.step(move)
+        done = env.step(move)
     assert done and env.state.rewards == {0: 1.0}
 
 
@@ -47,20 +47,20 @@ def test_falling_into_hole_ends_game():
     env = _fresh()
     # Stage a hole directly to the right of the start for a deterministic loss.
     env.state.game_state["grid"][0][1] = "H"
-    done, _ = env.step("right")
+    done = env.step("right")
     assert done and env.state.rewards[0] < 1.0
 
 
 def test_invalid_format_increments_error_count():
     env = _fresh()
-    done, _ = env.step("no direction here")
+    done = env.step("no direction here")
     assert not done and env.state.error_count == 1
 
 
 def test_walking_into_wall_rejected():
     env = _fresh()
     # Start is the top-left corner; moving up steps off the board.
-    done, _ = env.step("up")
+    done = env.step("up")
     assert not done and env.state.error_count == 1
 
 
@@ -73,7 +73,7 @@ def test_wasd_alias_moves_player():
         nr, nc = dr, dc
         if gs["grid"][nr][nc] != "H":
             start = gs["player_pos"]
-            done, _ = env.step(key)
+            done = env.step(key)
             assert not done and gs["player_pos"] == (nr, nc) and gs["player_pos"] != start
             return
     raise AssertionError("expected at least one safe neighbour of the start")
@@ -107,7 +107,7 @@ def test_max_density_generation_is_direct_exact_and_solvable(seed, capsys):
 def test_parser_rejects_malformed_input_without_moving(action):
     env = _fresh(num_holes=0)
     before = env.game_state["player_pos"]
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.game_state["player_pos"] == before
@@ -123,9 +123,9 @@ def test_randomized_prompt_names_actual_endpoints():
 def test_turn_limit_uses_closeness_and_counts_only_valid_moves():
     env = _fresh(num_holes=0, max_turns=6)
     for move in ["right", "left"] * 2 + ["up", "right"]:  # 'up' hits the wall and does not count
-        done, _ = env.step(move)
+        done = env.step(move)
         assert not done
-    done, _ = env.step("left")
+    done = env.step("left")
     assert done
     assert env.state.turn == 6
     assert env.state.rewards == {0: 0.0}
@@ -142,7 +142,7 @@ def test_prompt_states_coordinates_walls_and_move_limit():
 def test_hole_loss_is_terminal_and_render_identifies_hole():
     env = _fresh(num_holes=0)
     env.game_state["grid"][0][1] = "H"
-    done, _ = env.step("right")
+    done = env.step("right")
     assert done
     assert 0.0 <= env.state.rewards[0] < 1.0
     assert "P/H" in env.render(0)
@@ -158,7 +158,7 @@ def test_render_does_not_alias_or_mutate_grid():
 def test_oversized_action_is_invalid_without_moving():
     env = _fresh(num_holes=0)
     before = env.game_state["player_pos"]
-    done, _ = env.step("x" * (env.max_action_chars + 1))
+    done = env.step("x" * (env.max_action_chars + 1))
     assert not done
     assert env.state.error_count == 1
     assert env.game_state["player_pos"] == before

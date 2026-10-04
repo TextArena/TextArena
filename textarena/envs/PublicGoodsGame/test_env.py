@@ -43,23 +43,23 @@ def test_conversation_advances_to_decision():
     assert env.state.game_state["phase"] == "decision"
 
 
-def test_free_rider_beats_full_contributor():
+def test_free_rider_earns_the_maximum_payoff():
     env = _fresh()
     _advance_to_decision(env)
     env.step("0")            # P0 keeps everything
-    done, _ = env.step("10")  # P1 contributes fully
+    done = env.step("10")  # P1 contributes fully
     assert done
-    # P0 payoff = 10 kept + 10 share = 20; P1 = 0 kept + 10 share = 10.
-    assert env.state.rewards == {0: 1, 1: -1}
+    # P0 payoff = 10 kept + 10 share = 20, the most possible; P1 = 0 kept + 10 share = 10.
+    assert env.state.rewards == {0: 1.0, 1: 0.5}
 
 
-def test_equal_contributions_tie():
+def test_equal_contributions_score_equally():
     env = _fresh()
     _advance_to_decision(env)
     env.step("5")
-    done, _ = env.step("5")
+    done = env.step("5")
     assert done
-    assert env.state.rewards == {0: 0, 1: 0}
+    assert env.state.rewards == {0: 0.75, 1: 0.75}
     assert env.state.game_state["phase"] == "complete"
     assert "Game Complete" in env.get_board_str()
     assert "ROUND CALCULATION" in env.get_board_str()
@@ -68,9 +68,10 @@ def test_equal_contributions_tie():
 def test_out_of_range_contribution_warns_before_elimination():
     env = _fresh()
     _advance_to_decision(env)
-    done, _ = env.step("999")  # exceeds endowment; error_allowance is 2
+    done = env.step("999")
     assert not done
     assert env.state.error_count == 1
+    assert env.state.alive_players == [0, 1]
 
 
 @pytest.mark.parametrize("label", ["[GAME]", "[GA[GAME]ME]"])
@@ -92,7 +93,7 @@ def test_zero_communication_turns_starts_in_decision_phase():
     env = _fresh(communication_turns=0)
     assert env.state.game_state["phase"] == "decision"
     env.step("0")
-    done, _ = env.step("10")
+    done = env.step("10")
     assert done
 
 
@@ -136,56 +137,79 @@ def test_pending_message_and_contribution_are_hidden_from_renderer():
     )
 
 
-def test_partial_first_place_tie_penalizes_lower_score():
+def test_rewards_are_payoffs_over_the_free_rider_maximum():
     env = _fresh(num_players=3, communication_turns=0)
     env.step("0")
     env.step("0")
-    done, _ = env.step("10")
+    done = env.step("10")
     assert done
-    assert env.state.rewards == {0: 1, 1: 1, 2: -1}
+    # Maximum = 10 kept + (2 * 10 * 2) / 3 shared = 70/3; P0 and P1 earn 50/3, P2 earns 20/3.
+    assert env.state.rewards == pytest.approx({0: 5 / 7, 1: 5 / 7, 2: 2 / 7})
 
 
-def test_all_players_tied_is_a_draw():
-    env = _fresh(num_players=3, communication_turns=0)
+def test_full_cooperation_beats_universal_free_riding():
+    cooperative = _fresh(num_players=3, communication_turns=0)
     for contribution in ("10", "10", "10"):
-        done, _ = env.step(contribution)
+        done = cooperative.step(contribution)
     assert done
-    assert env.state.game_state["total_scores"] == {0: 20, 1: 20, 2: 20}
-    assert env.state.rewards == {0: 0, 1: 0, 2: 0}
+    assert cooperative.state.game_state["total_scores"] == {0: 20, 1: 20, 2: 20}
+    assert cooperative.state.rewards == pytest.approx({0: 6 / 7, 1: 6 / 7, 2: 6 / 7})
+
+    selfish = _fresh(num_players=3, communication_turns=0)
+    for contribution in ("0", "0", "0"):
+        selfish.step(contribution)
+    assert selfish.state.rewards == pytest.approx({0: 3 / 7, 1: 3 / 7, 2: 3 / 7})
 
 
-def test_survivors_tied_after_an_elimination_share_the_win():
+def test_full_cooperation_scores_one_when_factor_exceeds_player_count():
+    env = _fresh(communication_turns=0, multiplication_factor=3)
+    env.step("10")
+    done = env.step("10")
+    assert done
+    assert env.state.rewards == {0: 1.0, 1: 1.0}
+
+
+def test_zero_endowment_scores_zero():
+    env = _fresh(communication_turns=0, endowment=0)
+    env.step("0")
+    done = env.step("0")
+    assert done
+    assert env.state.rewards == {0: 0, 1: 0}
+
+
+def test_eliminated_player_scores_zero_and_survivors_keep_their_share():
     env = _fresh(num_players=3, communication_turns=0)
-    for _ in range(3):
+    for _ in range(2):
         env.step("999")
     assert env.state.alive_players == [1, 2]
     env.step("4")
-    done, _ = env.step("4")
+    done = env.step("4")
     assert done
-    assert env.state.rewards == {0: -1, 1: 1, 2: 1}
+    # Survivors each earn 6 kept + 8 shared = 14 of the 70/3 maximum.
+    assert env.state.rewards == pytest.approx({0: 0, 1: 0.6, 2: 0.6})
 
 
 def test_invalid_limit_eliminates_then_resolves_with_remaining_player():
     env = _fresh(communication_turns=0)
     env.step("999")
-    env.step("999")
-    done, _ = env.step("999")
+    done = env.step("999")
     assert not done
     assert env.state.alive_players == [1]
     assert env.state.current_player_id == 1
 
-    done, _ = env.step("0")
+    done = env.step("0")
     assert done
-    assert env.state.rewards == {0: -1, 1: 1}
+    assert env.state.rewards == {0: 0, 1: 0.5}
 
 
-def test_extreme_finite_multiplier_preserves_exact_winner_math():
+def test_extreme_finite_multiplier_keeps_rewards_in_range():
     env = _fresh(communication_turns=0, multiplication_factor=1e308)
     env.step("0")
-    done, _ = env.step("10")
+    done = env.step("10")
     assert done
     assert env.state.game_state["total_scores"][0] > env.state.game_state["total_scores"][1]
-    assert env.state.rewards == {0: 1, 1: -1}
+    assert 0 <= env.state.rewards[1] <= env.state.rewards[0] <= 1
+    assert env.state.rewards[0] == pytest.approx(0.5)
     assert "inf" not in env.get_board_str().lower()
 
 
@@ -195,12 +219,13 @@ def test_prompt_example_uses_configured_endowment():
     assert "If everyone contributes 5 tokens:" in prompt
     assert "- Plus 0 tokens kept = 10.0 total" in prompt
     assert "contributes 10 tokens" not in prompt
+    assert "divided by 10.0, the most any player could earn" in prompt
 
 
 def test_terminal_round_and_payoff_history_are_exact():
     env = _fresh(communication_turns=0)
     env.step("0")
-    done, _ = env.step("10")
+    done = env.step("10")
     assert done
     gs = env.state.game_state
     assert gs["round"] == 1

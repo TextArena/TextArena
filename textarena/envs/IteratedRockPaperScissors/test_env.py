@@ -29,9 +29,9 @@ def test_player0_sweeps():
     env = _fresh(num_rounds=3)
     done = False
     for _ in range(3):
-        done, _ = env.step("rock")       # player 0
+        done = env.step("rock")       # player 0
         assert not done
-        done, _ = env.step("scissors")   # player 1
+        done = env.step("scissors")   # player 1
     assert done
     assert env.state.game_state["points"] == {0: 3, 1: 0}
     assert env.state.rewards == {0: 1, 1: -1}
@@ -42,8 +42,8 @@ def test_player1_sweeps():
     env = _fresh(num_rounds=3)
     done = False
     for _ in range(3):
-        done, _ = env.step("rock")   # player 0
-        done, _ = env.step("paper")  # player 1
+        done = env.step("rock")   # player 0
+        done = env.step("paper")  # player 1
     assert done
     assert env.state.game_state["points"] == {0: 0, 1: 3}
     assert env.state.rewards == {0: -1, 1: 1}
@@ -54,7 +54,7 @@ def test_all_draws_is_overall_draw():
     env = _fresh(num_rounds=2)
     for _ in range(2):
         env.step("rock")
-        done, _ = env.step("rock")
+        done = env.step("rock")
     assert done
     assert env.state.game_state["points"] == {0: 0, 1: 0}
     assert env.state.rewards == {0: 0, 1: 0}
@@ -63,14 +63,14 @@ def test_all_draws_is_overall_draw():
 def test_shorthand_tokens_accepted():
     env = _fresh(num_rounds=1)
     env.step("r")
-    done, _ = env.step("s")  # rock beats scissors -> P0 wins
+    done = env.step("s")  # rock beats scissors -> P0 wins
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
 
 
 def test_invalid_format_does_not_end_game():
     env = _fresh(num_rounds=3)
-    done, _ = env.step("no valid token here")
+    done = env.step("no valid token here")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -79,7 +79,7 @@ def test_invalid_format_does_not_end_game():
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh(num_rounds=3)
     env.step("nope")
-    done, _ = env.step("still nope")
+    done = env.step("still nope")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -128,7 +128,7 @@ def test_unauthorized_move_is_rejected_atomically(player_id):
 def test_terminal_state_and_renderer_keep_last_round():
     env = _fresh(num_rounds=1)
     env.step("rock")
-    done, _ = env.step("scissors")
+    done = env.step("scissors")
     assert done
     assert env.state.game_state["round"] == 1
     assert env.state.turn == 2

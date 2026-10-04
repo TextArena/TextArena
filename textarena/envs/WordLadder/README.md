@@ -55,7 +55,7 @@ closer to the target; letters that already match the target count only if they s
 
 | Outcome | Reward |
 | --- | --- |
-| Target word reached | `+1` |
+| Target word reached | `1` |
 | `max_turns` accepted words without reaching the target | Share of the ladder distance closed (`0` to below `1`) |
 | Second consecutive invalid move | Share of the ladder distance closed |
 

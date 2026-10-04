@@ -52,6 +52,8 @@ class GolfEnv(ta.GameEnv):
         """ Returns the point value of a card in Golf """
         if rank == 'A':
             return 1
+        elif rank == '2':
+            return -2
         elif rank in ['J', 'Q']:
             return 10
         elif rank == 'K':
@@ -126,8 +128,8 @@ class GolfEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         return (
             f"You are playing Golf (Card Game) - Player {player_id}.\n"
-            f"Goal: Get the lowest total score in this single round. A column whose cards all have the same rank (e.g. two 7s) scores 0.\n"
-            f"Card Values: A=1, 2-10=face value, J/Q=10, K=0\n"
+            f"Goal: Get the lowest total score in this single round. A column whose cards all have the same rank (e.g. two 7s, or even two 2s) scores 0.\n"
+            f"Card Values: A=1, 2=-2, 3-10=face value, J/Q=10, K=0\n"
             f"The round ends when a player has turned all of their cards face up or knocks: every other player then gets one final turn. "
             f"It also ends as soon as the turn that draws the last card of the draw pile is over.\n\n"
             f"Actions (reply with exactly one):\n"

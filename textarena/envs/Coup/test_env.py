@@ -15,11 +15,11 @@ def make_env(num_players=2, seed=42):
 
 
 def play(env, *actions):
-    done, info = False, {}
+    done = False
     for action in actions:
         assert done is False, f"game ended before {action!r}"
-        done, info = env.step(action)
-    return done, info
+        done = env.step(action)
+    return done
 
 
 def deal(env, hands, revealed=None):
@@ -80,7 +80,7 @@ def test_num_players_bounds_enforced():
 
 def test_income_gives_one_coin_and_advances_turn():
     env = make_env(num_players=3, seed=42)
-    done, _ = env.step("income")
+    done = env.step("income")
     assert done is False
     assert env.state.game_state["coins"][0] == 3
     assert env.state.current_player_id == 1
@@ -108,13 +108,12 @@ def test_full_game_tax_and_coup_last_player_standing():
     assert_awaiting_reveal(env, 0)
     play(env, f"reveal {gs['hidden_hand'][0][1]}")
 
-    done, info = play(env,
+    done = play(env,
                       "income",           # p0: 2 -> 3
                       "tax", "pass",      # p1: 4 -> 7
                       "income",           # p0: 3 -> 4
                       "coup 0")           # p1 coups p0's last card -> eliminated without a prompt, p1 wins
     assert done is True
-    assert info == {"winner": 1}
     assert gs["hidden_hand"][0] == []
     assert len(gs["revealed_hand"][0]) == 2
     assert env.state.rewards == {0: -1, 1: 1}
@@ -127,12 +126,12 @@ def test_honest_tax_challenge_costs_challenger_a_card():
     env.state.game_state["hidden_hand"][0] = ["Duke", "Contessa"]
     env.state.game_state["hidden_hand"][1] = ["Assassin", "Captain"]
     env.step("tax")
-    done, _ = env.step("BULLSHIT")
+    done = env.step("BULLSHIT")
     assert done is False
     # The challenger chooses the influence to lose before the proven tax resolves.
     assert_awaiting_reveal(env, 1)
     assert env.state.game_state["coins"][0] == 1
-    done, _ = env.step("reveal captain")
+    done = env.step("reveal captain")
     assert done is False
     # The tax succeeded, the challenger lost an influence, the honest player drew a replacement.
     assert env.state.game_state["coins"][0] == 4
@@ -149,10 +148,10 @@ def test_dishonest_tax_challenge_costs_bluffer_a_card():
     env.state.game_state["hidden_hand"][0] = ["Assassin", "Contessa"]
     env.state.game_state["hidden_hand"][1] = ["Duke", "Captain"]
     env.step("tax")
-    done, _ = env.step("BULLSHIT")
+    done = env.step("BULLSHIT")
     assert done is False
     assert_awaiting_reveal(env, 0)
-    done, _ = env.step("reveal contessa")
+    done = env.step("reveal contessa")
     assert done is False
     # The tax was cancelled and the bluffer lost the influence they chose.
     assert env.state.game_state["coins"][0] == 1
@@ -164,12 +163,12 @@ def test_dishonest_tax_challenge_costs_bluffer_a_card():
 
 def test_invalid_format_is_rejected_and_player_retries():
     env = make_env(num_players=2, seed=42)
-    done, info = env.step("not a real command")
+    done = env.step("not a real command")
     assert done is False
     assert env.state.current_player_id == 0  # same player retries
     assert env.state.game_state["coins"] == {0: 1, 1: 2}
     # then a valid move still works
-    done, _ = env.step("income")
+    done = env.step("income")
     assert done is False
     assert env.state.game_state["coins"][0] == 2
     assert env.state.current_player_id == 1
@@ -177,7 +176,7 @@ def test_invalid_format_is_rejected_and_player_retries():
 
 def test_coup_without_enough_coins_is_rejected():
     env = make_env(num_players=2, seed=42)
-    done, _ = env.step("coup 1")  # only has 1 coin, needs 7
+    done = env.step("coup 1")  # only has 1 coin, needs 7
     assert done is False
     assert env.state.current_player_id == 0
     assert env.state.game_state["coins"] == {0: 1, 1: 2}
@@ -186,11 +185,11 @@ def test_coup_without_enough_coins_is_rejected():
 
 def test_repeated_invalid_moves_eliminate_player():
     env = make_env(num_players=2, seed=42)
-    # error_allowance is 3: the 4th consecutive invalid move eliminates the player
+    # the 2nd consecutive invalid move eliminates the player
     done = False
-    for _ in range(4):
+    for _ in range(2):
         assert done is False
-        done, _ = env.step("gibberish without a command")
+        done = env.step("gibberish without a command")
     assert done is True
     assert 0 in env.state.eliminated
     assert env.state.game_state["hidden_hand"][0] == []
@@ -209,14 +208,14 @@ def _influence_card_count(env):
 def test_directed_actions_reject_self_and_eliminated_targets():
     env = make_env()
     env.state.game_state["coins"][0] = 7
-    done, _ = env.step("coup 0")
+    done = env.step("coup 0")
     assert not done and env.state.error_count == 1
     assert env.state.game_state["coins"][0] == 7
 
     env.state.error_count = 0
     env.state.game_state["hidden_hand"][1] = []
     env.eliminate(1)
-    done, _ = env.step("assassinate 1")
+    done = env.step("assassinate 1")
     assert not done and env.state.error_count == 1
     assert env.state.game_state["coins"][0] == 7
 
@@ -225,7 +224,7 @@ def test_only_target_can_block_targeted_action():
     env = make_env(num_players=3)
     env.step("steal 1")
     env.step("pass")  # target declines to block/challenge
-    done, _ = env.step("block steal captain")
+    done = env.step("block steal captain")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["phase"] == GamePhase.QueryForBlockOrChallenge
@@ -266,7 +265,7 @@ def test_steal_pays_out_before_dishonest_blocker_is_exiled_and_game_ends():
     treasury = gs["treasury_coins"]
     env.step("steal 1")
     env.step("block steal captain")
-    done, _ = env.step("bullshit")
+    done = env.step("bullshit")
     assert done
     # The blocker's last card is lost without a prompt; the steal is paid from the exiled
     # player's coins first and only the remainder returns to the Treasury.
@@ -310,7 +309,7 @@ def test_steal_target_forfeiting_returns_coins_without_paying_the_steal():
     give_coins(env, 1, 4)
     treasury = gs["treasury_coins"]
     env.step("steal 1")
-    for _ in range(4):
+    for _ in range(2):
         env.step("gibberish")
     assert 1 in env.state.eliminated
     assert gs["coins"] == {0: 2, 1: 0, 2: 2}
@@ -408,7 +407,7 @@ def test_ten_or_more_coins_forces_a_coup(command):
     gs = deal(env, {0: ["Duke", "Assassin"], 1: ["Captain", "Contessa"]})
     give_coins(env, 0, 10)
     before = copy.deepcopy(gs)
-    done, _ = env.step(command)
+    done = env.step(command)
     assert not done
     assert gs == before
     assert env.state.current_player_id == 0
@@ -434,7 +433,7 @@ def test_nine_coins_does_not_force_a_coup():
 def test_malformed_or_mixed_commands_are_rejected_without_crashing(command):
     env = make_env()
     before = dict(env.state.game_state["coins"])
-    done, _ = env.step(command)
+    done = env.step(command)
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["coins"] == before
@@ -463,7 +462,7 @@ def test_exchange_conserves_cards_and_keeps_selection_private():
 def test_invalid_limit_mid_query_skips_eliminated_responder_and_resolves():
     env = make_env(num_players=3)
     env.step("foreign aid")
-    for _ in range(4):
+    for _ in range(2):
         env.step("income")
     assert 1 in env.state.eliminated
     assert env.state.current_player_id == 2
@@ -532,7 +531,7 @@ def test_proven_action_claim_cannot_be_challenged_twice():
     assert env.state.current_player_id == 1
     assert gs["phase"] == GamePhase.QueryForBlockOrChallenge
     before = (dict(gs["coins"]), list(gs["hidden_hand"][1]), list(gs["revealed_hand"][1]))
-    done, _ = env.step("bullshit")
+    done = env.step("bullshit")
     assert not done
     assert env.state.error_count == 1
     assert (gs["coins"], gs["hidden_hand"][1], gs["revealed_hand"][1]) == before
@@ -564,7 +563,7 @@ def test_losing_last_influence_needs_no_choice_and_returns_coins():
     give_coins(env, 0, 7)
     give_coins(env, 1, 3)
     treasury = gs["treasury_coins"]
-    done, _ = play(env, "coup 1")
+    done = play(env, "coup 1")
     assert not done
     assert gs["phase"] == GamePhase.Play and gs["pending_influence_loss"] is None
     assert gs["revealed_hand"][1] == ["Captain", "Duke"]
@@ -656,8 +655,8 @@ def test_target_who_loses_challenge_and_passes_loses_both_influences():
     # The target keeps its separate chance to block before the assassination lands.
     assert gs["phase"] == GamePhase.QueryForBlockOrChallenge
     assert env.state.current_player_id == 1
-    done, info = play(env, "pass")
-    assert done and info == {"winner": 0}
+    done = play(env, "pass")
+    assert done
     assert gs["revealed_hand"][1] == ["Captain", "Contessa"]
     assert env.state.rewards == {0: 1, 1: -1}
     assert_conserved(env)
@@ -669,7 +668,7 @@ def test_assassination_fizzles_when_failed_challenge_eliminates_target():
     give_coins(env, 0, 3)
     give_coins(env, 1, 4)
     treasury = gs["treasury_coins"]
-    done, _ = play(env, "assassinate 1", "bullshit")
+    done = play(env, "assassinate 1", "bullshit")
     assert not done
     assert gs["revealed_hand"][1] == ["Contessa", "Captain"]
     assert 1 in env.state.eliminated
@@ -760,7 +759,7 @@ def test_bluffed_contessa_block_costs_two_influences():
     treasury = gs["treasury_coins"]
     play(env, "assassinate 1", "block assassinate", "bullshit")
     assert_awaiting_reveal(env, 1)
-    done, _ = play(env, "reveal duke")
+    done = play(env, "reveal duke")
     assert not done
     # The failed block lets the assassination through, which takes the last card automatically.
     assert gs["revealed_hand"][1] == ["Duke", "Captain"]
@@ -780,7 +779,7 @@ def test_bystander_eliminated_by_failed_challenge_is_skipped_in_turn_order():
     )
     give_coins(env, 1, 4)
     treasury = gs["treasury_coins"]
-    done, _ = play(env, "tax", "bullshit")
+    done = play(env, "tax", "bullshit")
     assert not done
     assert 1 in env.state.eliminated
     assert gs["revealed_hand"][1] == ["Contessa", "Captain"]
@@ -800,7 +799,7 @@ def test_invalid_reveals_are_atomic(command):
     give_coins(env, 0, 7)
     play(env, "coup 2")
     before = copy.deepcopy(gs)
-    done, _ = env.step(command)
+    done = env.step(command)
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state == before
@@ -821,8 +820,8 @@ def test_invalid_limit_during_challenge_reveal_still_resolves_proven_action():
     gs = deal(env, {0: ["Duke", "Contessa"], 1: ["Captain", "Assassin"], 2: ["Ambassador", "Captain"]})
     play(env, "tax", "bullshit")
     assert_awaiting_reveal(env, 1)
-    for _ in range(4):
-        done, _ = env.step("gibberish")
+    for _ in range(2):
+        done = env.step("gibberish")
     assert not done
     assert 1 in env.state.eliminated
     assert gs["revealed_hand"][1] == ["Captain", "Assassin"]
@@ -837,9 +836,8 @@ def test_invalid_limit_by_coup_target_during_reveal_ends_game():
     gs = deal(env, {0: ["Duke", "Contessa"], 1: ["Captain", "Assassin"]})
     give_coins(env, 0, 7)
     play(env, "coup 1")
-    for _ in range(3):
-        assert env.step("pass") == (False, {})
-    done, _ = env.step("pass")
+    assert env.step("pass") is False
+    done = env.step("pass")
     assert done
     assert gs["revealed_hand"][1] == ["Captain", "Assassin"]
     assert env.state.rewards == {0: 1, 1: -1}
@@ -851,7 +849,7 @@ def test_invalid_limit_by_caught_blocker_during_reveal_lets_action_resolve():
     gs = deal(env, {0: ["Captain", "Assassin"], 1: ["Contessa", "Ambassador"], 2: ["Duke", "Duke"]})
     play(env, "foreign aid", "block foreign aid", "bullshit")
     assert_awaiting_reveal(env, 1)
-    for _ in range(4):
+    for _ in range(2):
         env.step("reveal duke")  # they hold no Duke
     assert 1 in env.state.eliminated
     assert gs["coins"] == {0: 4, 1: 0, 2: 2}
@@ -919,7 +917,7 @@ def test_invalid_limit_during_exchange_forfeits_only_real_influence():
     gs = deal(env, {0: ["Ambassador", "Duke"], 1: ["Captain", "Contessa"], 2: ["Assassin", "Captain"]})
     play(env, "exchange", "pass", "pass")
     assert gs["phase"] == GamePhase.QueryWhichToKeep and len(gs["hidden_hand"][0]) == 4
-    for _ in range(4):
+    for _ in range(2):
         env.step("income")
     # The two drawn Court cards go back to the deck instead of being revealed.
     assert gs["revealed_hand"][0] == ["Ambassador", "Duke"]
@@ -933,7 +931,7 @@ def test_invalid_limit_during_exchange_forfeits_only_real_influence():
 def test_invalid_limit_by_targeted_player_passes_turn_after_source():
     env = make_env(num_players=4)
     play(env, "steal 2")
-    for _ in range(4):
+    for _ in range(2):
         env.step("income")
     assert 2 in env.state.eliminated
     assert env.state.game_state["coins"][0] == 2
@@ -988,7 +986,7 @@ def test_random_games_conserve_cards_and_coins_and_terminate(num_players):
         for _ in range(2000):
             gs = env.state.game_state
             before, errors = copy.deepcopy(gs), env.state.error_count
-            done, _ = env.step(_random_action(env, rng))
+            done = env.step(_random_action(env, rng))
             if env.state.error_count > errors:
                 assert env.state.game_state == before
             assert_conserved(env)

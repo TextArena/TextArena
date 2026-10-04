@@ -39,13 +39,13 @@ def test_correct_guess_wins_for_team():
     env.step("xxxx hint")
     assert env.state.current_player_id == 1  # rotated to the guesser
     word = env.state.game_state["word_to_guess"]
-    done, _ = env.step(word)
+    done = env.step(word)
     assert not done
     assert env.state.current_player_id == 2
 
     # A round contains one turn for each team, so Team 1 also gets to play.
     env.step("xxxx hint")
-    done, _ = env.step("definitely-not-the-target")
+    done = env.step("definitely-not-the-target")
     assert done
     assert env.state.game_state["score"][0] == 1
     assert env.state.rewards == {0: 1, 1: 1, 2: -1, 3: -1}
@@ -54,7 +54,7 @@ def test_correct_guess_wins_for_team():
 def test_guesser_bad_format_is_invalid():
     env = _fresh()
     env.step("xxxx hint")  # clue giver -> guesser
-    done, _ = env.step("!!!")  # punctuation alone is not a title-like guess
+    done = env.step("!!!")  # punctuation alone is not a title-like guess
     assert not done
     assert env.state.error_count == 1
 
@@ -63,7 +63,7 @@ def test_repeated_malformed_guess_forfeits_action_and_advances_team():
     env = _fresh()
     env.step("xxxx hint")
     env.step("!!!")
-    done, _ = env.step("\n")
+    done = env.step("\n")
     assert not done
     assert env.state.current_player_id == 2
     assert env.state.game_state["current_team"] == 1
@@ -72,7 +72,7 @@ def test_repeated_malformed_guess_forfeits_action_and_advances_team():
 def test_clue_giver_taboo_word_is_invalid():
     env = _fresh()
     taboo = env.state.game_state["taboo_words"][0]
-    done, _ = env.step(f"my clue mentions {taboo} oops")
+    done = env.step(f"my clue mentions {taboo} oops")
     assert not done
     assert env.state.error_count == 1
 
@@ -115,7 +115,7 @@ def test_invalid_clue_is_atomic_and_does_not_leak_to_guessers():
         event for event in env.state.events if event[2] == ta.ObservationType.PLAYER_ACTION
     ]
 
-    done, _ = env.step(f"The answer is {target}")
+    done = env.step(f"The answer is {target}")
 
     assert not done
     assert gs["turn_in_round"] == before_turn
@@ -156,7 +156,7 @@ def test_forbidden_words_use_token_boundaries(tmp_path):
     env.state.game_state["word_to_guess"] = "art"
     env.state.game_state["taboo_words"] = ["cat"]
 
-    done, _ = env.step("This concatenate clue is safe.")
+    done = env.step("This concatenate clue is safe.")
 
     assert not done
     assert env.state.error_count == 0
@@ -178,7 +178,7 @@ def test_forbidden_phrase_cannot_be_evaded_with_separator_or_unicode_variants(tm
     ):
         env = TabooEnv(categories="custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
         env.reset(num_players=4, seed=3)
-        done, _ = env.step(clue)
+        done = env.step(clue)
         assert not done
         assert env.state.error_count == 1
         assert env.state.current_player_id == 0
@@ -203,7 +203,7 @@ def test_guesser_can_submit_bundled_title_shapes_and_unicode(tmp_path):
     env.state.game_state["taboo_words"] = ["island"]
 
     env.step("A safe clue")
-    done, _ = env.step("RE\u0301UNION (U.S.), #1")
+    done = env.step("RE\u0301UNION (U.S.), #1")
 
     assert not done
     assert env.state.game_state["score"][0] == 1
@@ -275,7 +275,7 @@ def test_relayed_clues_and_guesses_cannot_impersonate_the_game_or_players(tmp_pa
 
 def test_role_tags_cannot_hide_a_forbidden_word(tmp_path):
     env = _custom(tmp_path, "Alpaca", ["camel"])
-    done, _ = env.step("It looks like a ca[GAME]mel")
+    done = env.step("It looks like a ca[GAME]mel")
     assert not done
     assert env.state.error_count == 1
     assert _relayed_to(env, 1) == []
@@ -292,7 +292,7 @@ def test_role_tags_cannot_hide_a_forbidden_word(tmp_path):
 )
 def test_significant_words_of_the_target_are_forbidden(tmp_path, target, clue):
     env = _custom(tmp_path, target, [])
-    done, _ = env.step(clue)
+    done = env.step(clue)
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -327,7 +327,7 @@ def test_function_words_and_qualifiers_of_the_target_stay_usable(tmp_path, targe
 )
 def test_forbidden_words_cannot_be_evaded_with_spelling_tricks(tmp_path, forbidden, clue):
     env = _custom(tmp_path, "Alpaca", [forbidden])
-    done, _ = env.step(clue)
+    done = env.step(clue)
     assert not done
     assert env.state.error_count == 1
     assert _relayed_to(env, 1) == []

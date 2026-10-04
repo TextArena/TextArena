@@ -8,6 +8,7 @@ from typing import Any, Dict, List, Optional, Union
 
 import textarena as ta
 from textarena.envs.TwentyQuestions.renderer import create_board_str
+from textarena.utils.jury import DEFAULT_JUDGE_MODEL
 
 _ARTICLES = frozenset({"a", "an", "the"})
 
@@ -37,7 +38,7 @@ class TwentyQuestionsEnv(ta.GameEnv):
     gamemaster = ta.Param(
         None, "The game master that answers the questions, called with a prompt string and returning `Yes`, `No`, or "
               "`I don't know`. Inject one to play offline or with a different model; without one, questions go to "
-              "OpenRouter `openai/gpt-4o`.",
+              f"OpenRouter `{DEFAULT_JUDGE_MODEL}`.",
         type=object, check=callable, rule="a callable",
     )
     words_path = ta.Param(
@@ -150,10 +151,10 @@ class TwentyQuestionsEnv(ta.GameEnv):
     def _get_gamemaster(self):
         if self.gamemaster is None:
             try:
-                self.gamemaster = ta.agents.OpenRouterAgent(model_name="openai/gpt-4o")
+                self.gamemaster = ta.agents.OpenRouterAgent(model_name=DEFAULT_JUDGE_MODEL)
             except (ImportError, ValueError) as exc:
                 raise RuntimeError(
-                    "TwentyQuestions questions require OpenRouter. Install the OpenAI dependency "
+                    'TwentyQuestions questions require OpenRouter: pip install "textarena[agents]" '
                     "and set OPENROUTER_API_KEY, or inject a gamemaster."
                 ) from exc
         return self.gamemaster
@@ -225,10 +226,8 @@ class TwentyQuestionsEnv(ta.GameEnv):
         return match.group("guess") if match else None
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
-        if not isinstance(action, str) or not action.strip():
+        if not action.strip():
             return self.invalid("Ask a non-empty question or submit 'guess <word>'.")
-        if len(action) > self.max_action_chars:
-            return self.invalid(f"Questions and guesses are limited to {self.max_action_chars} characters.")
         action = self.strip_role_tags(action)
         if self._EMPTY_GUESS_RE.fullmatch(action):
             return self.invalid("A guess must include a word after 'guess'.")

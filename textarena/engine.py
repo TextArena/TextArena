@@ -17,7 +17,7 @@ import importlib
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
-from textarena.core import Env, Info, ObservationType, GAME_ID
+from textarena.core import Env, ObservationType, GAME_ID
 
 
 @dataclass
@@ -149,7 +149,6 @@ class GameState:
         self.rewards: Optional[Dict[int, float]] = None
         self.game_state: Dict[str, Any] = {}
         self.role_mapping: Dict[int, str] = {}
-        self.step_info: Dict[str, Any] = {}
         self.game_info: Dict[int, Dict[str, Any]] = {
             pid: {"role": f"Player {pid}", "invalid_move": False, "turn_count": 0} for pid in range(num_players)
         }
@@ -306,12 +305,13 @@ class GameEnv(Env):
 
         If fewer than two players remain alive, the game ends (the offender
         loses; any remaining player wins). Otherwise the game continues
-        without the eliminated player. Override for custom semantics.
+        without the eliminated player. A single-player game ends with 0, the
+        bottom of its 0-to-1 score. Override for custom semantics.
         """
         self.eliminate(player_id)
         alive = self.state.alive_players
         if len(alive) == 0:  # single-player game
-            return Outcome(rewards={player_id: -1}, reason=f"Invalid Move: {reason}")
+            return Outcome(rewards={player_id: 0}, reason=f"Invalid Move: {reason}")
         if len(alive) == 1:
             return self.winner(alive[0], reason=f"Player {player_id} made an invalid move. Reason: {reason}")
         self.broadcast(f"Player {player_id} was eliminated for repeated invalid moves.", ObservationType.GAME_ADMIN)
@@ -351,10 +351,6 @@ class GameEnv(Env):
     @property
     def current_player_id(self) -> int:
         return self.state.current_player_id
-
-    @property
-    def step_info(self) -> Dict[str, Any]:
-        return self.state.step_info
 
     def message(self, player_id: int, message: str, observation_type: ObservationType = ObservationType.GAME_MESSAGE, from_id: int = GAME_ID):
         """Send a message visible to a single player."""
@@ -445,23 +441,24 @@ class GameEnv(Env):
         self.on_start()
         self._send_render()
 
-    def step(self, action: str) -> Tuple[bool, Info]:
+    def step(self, action: str) -> bool:
+        """Apply the acting player's action; returns whether the game is over."""
         if self.state.done:
-            return True, self._drain_step_info()
+            return True
         pid = self.state.current_player_id
         self.state.actions.append(action)
         answers_before = len(self.state.external_answers)
         if not isinstance(action, str):
             self._handle_invalid(pid, "Actions must be strings.")
             self._send_render()
-            return self.state.done, self._drain_step_info()
+            return self.state.done
         if len(action) > self.max_action_chars:
             self._handle_invalid(
                 pid,
                 f"Action exceeds the maximum length of {self.max_action_chars} characters.",
             )
             self._send_render()
-            return self.state.done, self._drain_step_info()
+            return self.state.done
 
         # Surrounding whitespace is never meaningful, and long whitespace runs make
         # patterns like r"^\s*(...)\s*$" backtrack quadratically.
@@ -523,7 +520,7 @@ class GameEnv(Env):
             self._advance_turn(pid)
 
         self._send_render()
-        return self.state.done, self._drain_step_info()
+        return self.state.done
 
     # (get_observation and close are inherited from Env)
 
@@ -647,11 +644,6 @@ class GameEnv(Env):
         board = self.render(player_id=self.state.current_player_id)
         if board is not None:
             self.message(self.state.current_player_id, board, ObservationType.GAME_BOARD)
-
-    def _drain_step_info(self) -> Info:
-        info = self.state.step_info
-        self.state.step_info = {}
-        return info
 
 
 def replay(record: Dict[str, Any], steps: Optional[int] = None, game: Optional[type] = None) -> GameEnv:

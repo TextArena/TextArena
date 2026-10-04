@@ -33,10 +33,6 @@ class StrategoEnv(ta.GameEnv):
         self.lakes = [(4, 2), (4, 3), (5, 2), (5, 3), (4, 6), (4, 7), (5, 6), (5, 7)]
 
     @property
-    def terminal_render_keys(self):
-        return ["rendered_board"]
-
-    @property
     def board(self):
         return self.game_state["board"]
 

@@ -41,7 +41,7 @@ def test_reset_initial_state():
 
 def test_first_strategy_does_not_end_game():
     env = _fresh()
-    done, _ = env.step("Build a shelter and ration food.")
+    done = env.step("Build a shelter and ration food.")
     assert not done
     assert env.state.game_state["strategies"][0] is not None
     assert env.state.current_player_id == 1
@@ -50,7 +50,7 @@ def test_first_strategy_does_not_end_game():
 def test_player0_wins_when_jury_favors_them():
     env = _fresh(votes={"Player 0": 4, "Player 1": 1})
     env.step("Strategy from player 0")
-    done, _ = env.step("Strategy from player 1")
+    done = env.step("Strategy from player 1")
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
     assert env.state.turn == 2
@@ -61,7 +61,7 @@ def test_player0_wins_when_jury_favors_them():
 def test_player1_wins_when_jury_favors_them():
     env = _fresh(votes={"Player 0": 1, "Player 1": 4})
     env.step("Strategy from player 0")
-    done, _ = env.step("Strategy from player 1")
+    done = env.step("Strategy from player 1")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -69,7 +69,7 @@ def test_player1_wins_when_jury_favors_them():
 def test_tie_is_a_draw():
     env = _fresh(votes={"Player 0": 2, "Player 1": 2})
     env.step("Strategy from player 0")
-    done, _ = env.step("Strategy from player 1")
+    done = env.step("Strategy from player 1")
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
 
@@ -77,7 +77,7 @@ def test_tie_is_a_draw():
 def test_empty_strategy_is_invalid_and_atomic():
     env = _fresh()
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step(" \n ")
+    done = env.step(" \n ")
     assert not done
     assert env.state.error_count == 1
     assert env.state.turn == 0
@@ -135,7 +135,7 @@ def test_jury_failure_does_not_commit_second_strategy(jury_class):
     env.reset(num_players=2, seed=42)
     env.step("First strategy")
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("Second strategy")
+    done = env.step("Second strategy")
     assert not done
     assert env.state.current_player_id == 1
     assert env.state.turn == 1
@@ -159,7 +159,7 @@ def test_jury_error_cannot_leak_the_other_players_strategy():
     env.get_observation()
     env.step(private_strategy)
     env.get_observation()
-    done, _ = env.step("Player one's strategy")
+    done = env.step("Player one's strategy")
     assert not done
     _, observations = env.get_observation()
     assert private_strategy not in "\n".join(message for _, message, _ in observations)
@@ -176,7 +176,7 @@ def test_oversized_strategy_is_rejected_before_jury_construction():
     env = ScenarioPlanningEnv(jury_class=Jury)
     env.reset(num_players=2, seed=42)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("x" * (env.max_strategy_chars + 1))
+    done = env.step("x" * (env.max_strategy_chars + 1))
     assert not done
     assert env.game_state == before
     assert constructions == []

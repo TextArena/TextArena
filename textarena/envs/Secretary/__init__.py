@@ -1,3 +1,3 @@
-from textarena.envs.registration import register_with_versions
+from textarena.envs.registration import register
 
-register_with_versions(id="Secretary-v1", entry_point="textarena.envs.Secretary.env:SecretaryEnv", N=5)
+register(id="Secretary-v1", entry_point="textarena.envs.Secretary.env:SecretaryEnv", N=5)

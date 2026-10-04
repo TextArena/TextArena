@@ -42,10 +42,10 @@ def test_scripted_player0_wins_all_auctions():
     for _ in range(40):
         pid = env.state.current_player_id
         if pid == 0:
-            done, _ = env.step(str(p0_bids[p0_idx]))
+            done = env.step(str(p0_bids[p0_idx]))
             p0_idx += 1
         else:
-            done, _ = env.step("1")
+            done = env.step("1")
         if done:
             break
     assert done
@@ -59,7 +59,7 @@ def test_scripted_player0_wins_all_auctions():
 def test_invalid_format_does_not_end_game():
     env = _fresh()
     pid = env.state.current_player_id
-    done, _ = env.step("no bid here")
+    done = env.step("no bid here")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == pid
@@ -78,7 +78,7 @@ def test_illegal_bid_of_spent_card():
     if env.state.current_player_id == 1:
         env.step("1")  # P1 opens auction 2
     assert env.state.current_player_id == 0
-    done, _ = env.step("11")  # P0 no longer has 11
+    done = env.step("11")  # P0 no longer has 11
     assert not done
     assert env.state.error_count == 1
 
@@ -87,7 +87,7 @@ def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     offender = env.state.current_player_id
     env.step("garbage")
-    done, _ = env.step("more garbage")
+    done = env.step("more garbage")
     assert done
     assert env.state.rewards[offender] == -1
     assert env.state.rewards[1 - offender] == 1
@@ -114,7 +114,7 @@ def test_tied_bids_stay_sealed_until_reveal_and_are_returned():
     env.step("7")
     p1_pending = [message for _, message, _ in env.state.observations[1]]
     assert not any(message.strip() == "7" for message in p1_pending)
-    done, _ = env.step("7")
+    done = env.step("7")
     assert not done
     assert env.game_state["player_money"] == before_money
     assert env.game_state["pending_bids"] == {}
@@ -125,7 +125,7 @@ def test_tied_bids_stay_sealed_until_reveal_and_are_returned():
 def test_mixed_or_duplicate_bid_text_is_invalid_and_atomic():
     env = _fresh()
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("7\n8")
+    done = env.step("7\n8")
     assert not done
     assert env.game_state == before
     assert env.state.current_player_id == 0
@@ -135,7 +135,7 @@ def test_identical_bids_forever_cannot_stall_the_game():
     env = _fresh()
     done = False
     for _ in range(1000):
-        done, _ = env.step("5")
+        done = env.step("5")
         if done:
             break
     assert done

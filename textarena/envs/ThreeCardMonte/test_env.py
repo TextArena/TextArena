@@ -38,7 +38,7 @@ def test_reset_emits_exact_shuffle_count_without_revealing_final_ball():
 
 def test_correct_guess_reward_one():
     env = _fresh()
-    done, _ = env.step(str(env.ball_pos))
+    done = env.step(str(env.ball_pos))
     assert done
     assert env.state.rewards == {0: 1.0}
 
@@ -46,30 +46,30 @@ def test_correct_guess_reward_one():
 def test_wrong_guess_reward_zero():
     env = _fresh()
     wrong = (env.ball_pos + 1) % env.num_cups
-    done, _ = env.step(str(wrong))
+    done = env.step(str(wrong))
     assert done
     assert env.state.rewards == {0: 0.0}
 
 
 def test_bad_format_first_invalid_not_terminal():
     env = _fresh()
-    done, _ = env.step("cup number two please")
+    done = env.step("cup number two please")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_out_of_range_guess_first_invalid_not_terminal():
     env = _fresh()
-    done, _ = env.step(str(env.num_cups + 5))
+    done = env.step(str(env.num_cups + 5))
     assert not done
     assert env.state.error_count == 1
 
 
 def test_second_invalid_move_ends_game_with_numeric_zero_reward():
     env = _fresh()
-    done, _ = env.step("cup number two please")
+    done = env.step("cup number two please")
     assert not done
-    done, _ = env.step("still not a guess")
+    done = env.step("still not a guess")
     assert done
     assert isinstance(env.state.rewards[0], float)
     assert env.state.rewards == {0: 0.0}

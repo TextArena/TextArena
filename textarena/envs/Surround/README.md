@@ -24,7 +24,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Surround-v1-mdp`).
 - A player crashes if they move off the board, onto a trail, onto a cell another player occupies at the start of the
   round, or onto the same cell as another player. Two players who swap cells both crash. Crashed players are out, and
   their trails stay.
-- An invalid reply counts as a crash; there is no retry.
+- An invalid reply gets a warning and the player replies again; a second invalid reply in a row counts as a crash.
 - The game ends when at most one player is left or after `max_turns` rounds.
 
 ## Actions
@@ -51,7 +51,7 @@ the worst, so three distinct ranks get `+1`, `0`, and `-1`.
 | One player left | Survivor `+1`; the others are ranked by when they crashed |
 | `max_turns` rounds reached | Players still in share the top rank, above everyone who crashed |
 | Every player tied (all crash in the same round, or nobody crashes before the round limit) | Everyone `0` |
-| Invalid move | The player crashes in that round and is ranked like any other crash |
+| Second invalid move in a row | The player crashes in that round and is ranked like any other crash |
 
 With two players, the survivor gets `+1` and the other `-1`, or both get `0` when they are tied.
 

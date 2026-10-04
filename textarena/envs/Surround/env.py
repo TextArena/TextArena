@@ -25,12 +25,10 @@ class _Player:
         self.death_reason: Optional[str] = None
 
 class SurroundEnv(ta.GameEnv):
-    MAX_PLAYERS = 15
     min_players = 2
     max_players = 15
     mdp_includes_actions = False
     broadcast_actions = False  # moves are sealed until the round resolves
-    error_allowance = 0  # every invalid action is immediately fatal
 
     width = ta.Param(10, "The board width.", min=3)
     height = ta.Param(10, "The board height.", min=3)
@@ -110,7 +108,7 @@ class SurroundEnv(ta.GameEnv):
             "- Every cell you leave becomes a permanent trail.\n"
             "- You crash if you move off the board, onto a trail, onto a cell another player occupies at the start of the round, "
             "or onto the same cell as another player. Crashed players are out and their trails stay.\n"
-            "- An invalid reply counts as a crash.\n"
+            "- An invalid reply gets a warning and you reply again; a second invalid reply in a row counts as a crash.\n"
             f"The game ends when at most one player is left or after {self.max_turns} rounds. Players are ranked by how long they "
             "survived (players still in the game rank highest); players who crash in the same round share a rank. "
             "Rewards are spread evenly from +1 (best rank) to -1 (worst rank); if every player ties, all get 0."

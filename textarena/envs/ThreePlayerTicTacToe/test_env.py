@@ -40,7 +40,7 @@ def test_player0_makes_a_line_of_four_and_wins():
              "3"]
     done = False
     for m in moves:
-        done, _ = env.step(m)
+        done = env.step(m)
     assert done
     assert env.state.rewards == {0: 1, 1: -1, 2: -1}
 
@@ -49,7 +49,7 @@ def test_player0_diagonal_line_wins_complete_game():
     env = _fresh()
     moves = ["0", "1", "4", "6", "2", "5", "12", "3", "7", "18"]
     for move in moves:
-        done, _ = env.step(move)
+        done = env.step(move)
     assert done
     assert env.state.rewards == {0: 1, 1: -1, 2: -1}
     assert env.state.game_state["board"][3][3] == "A"
@@ -58,14 +58,14 @@ def test_player0_diagonal_line_wins_complete_game():
 def test_occupied_cell_first_invalid_not_terminal():
     env = _fresh()
     env.step("0")          # P0 takes cell 0
-    done, _ = env.step("0")  # P1 tries the same cell
+    done = env.step("0")  # P1 tries the same cell
     assert not done
     assert env.state.error_count == 1
 
 
 def test_out_of_range_cell_first_invalid_not_terminal():
     env = _fresh()
-    done, _ = env.step("25")  # only 0-24 valid
+    done = env.step("25")  # only 0-24 valid
     assert not done
     assert env.state.error_count == 1
 
@@ -85,7 +85,7 @@ def test_format_error_describes_expected_action():
 def test_huge_numeric_cell_is_invalid_without_integer_conversion_crash():
     env = _fresh()
     before = [row.copy() for row in env.state.game_state["board"]]
-    done, _ = env.step("9" * 10_000)
+    done = env.step("9" * 10_000)
     assert not done
     assert env.state.game_state["board"] == before
     assert env.state.current_player_id == 0
@@ -94,9 +94,9 @@ def test_huge_numeric_cell_is_invalid_without_integer_conversion_crash():
 
 def test_two_consecutive_invalids_award_others():
     env = _fresh()
-    done, _ = env.step("not a number")
+    done = env.step("not a number")
     assert not done and env.state.error_count == 1
-    done, _ = env.step("still not a number")
+    done = env.step("still not a number")
     assert done
     # Offender (player 0) loses; the other two win.
     assert env.state.rewards == {0: -1, 1: 1, 2: 1}

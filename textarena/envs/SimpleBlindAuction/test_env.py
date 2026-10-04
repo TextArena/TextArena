@@ -46,9 +46,9 @@ def test_player0_wins_with_a_cheap_winning_bid():
     # P1 abstains. P0 net worth = 999 + value(item0) > 1000 = P1 net worth.
     assert env.state.game_state["player_item_values"][0][0] > 1
     assert env.state.current_player_id == 0
-    done, _ = env.step("Bid on Item 0: 1")
+    done = env.step("Bid on Item 0: 1")
     assert not done
-    done, _ = env.step("I pass, no bids")
+    done = env.step("I pass, no bids")
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
     assert env.state.turn == 4
@@ -58,7 +58,7 @@ def test_no_bids_from_either_player_is_a_draw():
     env = _fresh(conversation_rounds=1)
     _advance_to_bidding(env)
     env.step("no bids from me")
-    done, _ = env.step("no bids from me either")
+    done = env.step("no bids from me either")
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
 
@@ -66,7 +66,7 @@ def test_no_bids_from_either_player_is_a_draw():
 def test_bid_on_nonexistent_item_is_invalid():
     env = _fresh(conversation_rounds=1)
     _advance_to_bidding(env)
-    done, _ = env.step("Bid on Item 99: 50")
+    done = env.step("Bid on Item 99: 50")
     assert not done
     assert env.state.error_count == 1
 
@@ -74,7 +74,7 @@ def test_bid_on_nonexistent_item_is_invalid():
 def test_bid_exceeding_capital_is_invalid():
     env = _fresh(conversation_rounds=1)
     _advance_to_bidding(env)
-    done, _ = env.step("Bid on Item 0: 5000")
+    done = env.step("Bid on Item 0: 5000")
     assert not done
     assert env.state.error_count == 1
 
@@ -82,7 +82,7 @@ def test_bid_exceeding_capital_is_invalid():
 def test_multiple_bids_use_one_bare_command_per_line():
     env = _fresh(conversation_rounds=1)
     _advance_to_bidding(env)
-    done, _ = env.step("Bid on Item 0: 10\nBid on Item 1: 20")
+    done = env.step("Bid on Item 0: 10\nBid on Item 1: 20")
     assert not done
     assert env.state.game_state["player_bids"][0] == {0: 10, 1: 20}
 
@@ -90,11 +90,11 @@ def test_multiple_bids_use_one_bare_command_per_line():
 def test_bids_may_also_be_separated_by_semicolons():
     env = _fresh(conversation_rounds=1)
     _advance_to_bidding(env)
-    done, _ = env.step("Bid on Item 0: 10; Bid on Item 1: 20;")
+    done = env.step("Bid on Item 0: 10; Bid on Item 1: 20;")
     assert not done
     assert env.state.error_count == 0
     assert env.state.game_state["player_bids"][0] == {0: 10, 1: 20}
-    done, _ = env.step("Bid Item 0: 15; Bid Item 2: 5\nBid Item 3: 1")
+    done = env.step("Bid Item 0: 15; Bid Item 2: 5\nBid Item 3: 1")
     assert done
     assert env.state.game_state["player_bids"][1] == {0: 15, 2: 5, 3: 1}
 
@@ -102,12 +102,12 @@ def test_bids_may_also_be_separated_by_semicolons():
 def test_semicolon_separated_bid_mixed_with_prose_is_invalid_but_plain_prose_passes():
     env = _fresh(conversation_rounds=0, num_items=2)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("Bid on Item 0: 10; I hope that is enough")
+    done = env.step("Bid on Item 0: 10; I hope that is enough")
     assert not done
     assert env.state.error_count == 1
     assert env.game_state == before
 
-    done, _ = env.step("No bids from me; good luck")
+    done = env.step("No bids from me; good luck")
     assert not done
     assert env.state.error_count == 0
     assert env.game_state["bidding_done"][0] is True
@@ -124,7 +124,7 @@ def test_prompt_and_announcement_teach_both_bid_separators():
 def test_duplicate_item_bids_are_rejected_atomically():
     env = _fresh(conversation_rounds=0, num_items=1)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("Bid Item 0: 10\nBid Item 0: 20")
+    done = env.step("Bid Item 0: 10\nBid Item 0: 20")
     assert not done
     assert env.game_state == before
     assert env.state.current_player_id == 0
@@ -133,16 +133,16 @@ def test_duplicate_item_bids_are_rejected_atomically():
 def test_pathologically_large_bid_is_invalid_not_an_exception():
     env = _fresh(conversation_rounds=0, num_items=1)
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("Bid Item 0: " + "9" * 5000)
+    done = env.step("Bid Item 0: " + "9" * 5000)
     assert not done
     assert env.game_state == before
 
 
 def test_command_like_malformed_or_mixed_bid_is_invalid():
     env = _fresh(conversation_rounds=0, num_items=2)
-    done, _ = env.step("Bid Item zero: 10")
+    done = env.step("Bid Item zero: 10")
     assert not done and env.state.error_count == 1
-    done, _ = env.step("Bid Item 0: 10\n[Bid Item 1: 20]")
+    done = env.step("Bid Item 0: 10\n[Bid Item 1: 20]")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -150,14 +150,14 @@ def test_command_like_malformed_or_mixed_bid_is_invalid():
 def test_only_winning_bids_are_paid_and_ties_are_refunded():
     env = _fresh(conversation_rounds=0, num_items=1, starting_capital=100)
     env.step("Bid Item 0: 10")
-    done, _ = env.step("Bid Item 0: 20")
+    done = env.step("Bid Item 0: 20")
     assert done
     assert env.game_state["remaining_capital"] == {0: 100, 1: 80}
     assert env.game_state["auction_results"]["player_spent"] == {0: 0, 1: 20}
 
     tied = _fresh(conversation_rounds=0, num_items=1, starting_capital=100)
     tied.step("Bid Item 0: 10")
-    done, _ = tied.step("Bid Item 0: 10")
+    done = tied.step("Bid Item 0: 10")
     assert done
     assert tied.game_state["remaining_capital"] == {0: 100, 1: 100}
     assert tied.state.rewards == {0: 0, 1: 0}
@@ -167,7 +167,7 @@ def test_zero_conversation_rounds_starts_in_bidding_and_counts_terminal_action()
     env = _fresh(conversation_rounds=0, num_items=1)
     assert env.game_state["phase"] == "bidding"
     env.step("no bids")
-    done, _ = env.step("no bids")
+    done = env.step("no bids")
     assert done
     assert env.state.turn == 2
 

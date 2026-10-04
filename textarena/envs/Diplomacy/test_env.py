@@ -89,7 +89,7 @@ def _submit_orders_for_all(env: DiplomacyEnv, order_action_fn) -> bool:
     done = False
     for _ in range(len([pid for pid in env.player_power_map if env.state.is_player_alive(pid)])):
         pid = env.state.current_player_id
-        done, _info = env.step(order_action_fn(env, pid))
+        done = env.step(order_action_fn(env, pid))
     return done
 
 
@@ -148,7 +148,7 @@ def test_negotiation_round_advances_after_full_rotation():
 
     for pid in range(3):
         assert env.state.current_player_id == pid
-        done, _info = env.step("Broadcast: Hello everyone, let us keep the peace.")
+        done = env.step("Broadcast: Hello everyone, let us keep the peace.")
         assert done is False
 
     # After all three players acted, the (final) negotiation round begins
@@ -197,14 +197,14 @@ def test_invalid_action_is_rejected_without_ending_game():
     env.reset(num_players=3, seed=42)
 
     # Final negotiation round requires order submission; garbage is invalid
-    done, _info = env.step("I refuse to cooperate with this game.")
+    done = env.step("I refuse to cooperate with this game.")
     assert done is False
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0  # no rotation, player retries
     assert env.state.is_player_alive(0)
 
     # A valid submission afterwards is accepted and play moves on
-    done, _info = env.step(_hold_orders_action(env, 0))
+    done = env.step(_hold_orders_action(env, 0))
     assert done is False
     assert env.state.current_player_id == 1
 
@@ -213,11 +213,11 @@ def test_repeated_invalid_moves_eliminate_player():
     env = DiplomacyEnv(negotiations_per_phase=1)
     env.reset(num_players=3, seed=42)
 
-    done, _info = env.step("gibberish")
+    done = env.step("gibberish")
     assert done is False
     assert env.state.is_player_alive(0)
 
-    done, _info = env.step("more gibberish")
+    done = env.step("more gibberish")
     assert done is False
     assert not env.state.is_player_alive(0)
     assert env.state.eliminated == [0]
@@ -227,7 +227,7 @@ def test_repeated_invalid_moves_eliminate_player():
     # The remaining players can still play out the phase
     for pid in (1, 2):
         assert env.state.current_player_id == pid
-        done, _info = env.step(_hold_orders_action(env, pid))
+        done = env.step(_hold_orders_action(env, pid))
     assert done is False
     assert env.state.game_state["phase"] == "Retreats"
 
@@ -305,7 +305,7 @@ def test_malformed_orders_are_atomic_and_do_not_count_as_submitted(
     marker = "THIS-MESSAGE-MUST-NOT-LEAK"
     chat_before = list(env.chat_history)
 
-    done, _ = env.step(
+    done = env.step(
         f"Broadcast: {marker}\n"
         f"Whisper to 1: {marker}\n"
         f"Submit Orders:\n{malformed_order}\n"
@@ -571,7 +571,7 @@ def test_invalid_whisper_target_is_atomic():
     events_before = list(env.state.events)
     history_before = list(env.chat_history)
 
-    done, _ = env.step("Whisper to 99: secret")
+    done = env.step("Whisper to 99: secret")
 
     assert not done
     assert env.state.error_count == 1
@@ -764,7 +764,7 @@ def test_malformed_whisper_line_is_rejected_instead_of_joining_a_broadcast():
     env = DiplomacyEnv(negotiations_per_phase=2)
     env.reset(num_players=3, seed=42)
 
-    done, _ = env.step("Broadcast: hello all\nWhisper to 2 attack Russia tonight")
+    done = env.step("Broadcast: hello all\nWhisper to 2 attack Russia tonight")
 
     assert not done
     assert env.state.error_count == 1
@@ -781,7 +781,7 @@ def test_orders_before_the_final_round_are_not_recorded_and_the_author_is_told()
     env = DiplomacyEnv(negotiations_per_phase=2)
     env.reset(num_players=3, seed=42)
 
-    done, _ = env.step("Broadcast: opening\nSubmit Orders:\nA MOS - UKR\nA WAR - GAL")
+    done = env.step("Broadcast: opening\nSubmit Orders:\nA MOS - UKR\nA WAR - GAL")
 
     assert not done
     assert env.state.error_count == 0
@@ -992,7 +992,7 @@ def test_game_ends_in_a_draw_after_max_years_without_a_trailing_board():
             if env.engine.phase == PhaseType.MOVEMENT
             else "Submit Orders:"
         )
-        done, _ = env.step(action)
+        done = env.step(action)
         steps += 1
 
     assert steps == 15  # five phases, three players, one round each
@@ -1038,7 +1038,7 @@ def test_scripted_game_year_shows_each_player_the_board_and_nothing_private(num_
                 else []
             )
             action = "\n".join(["Submit Orders:", f"# {token}", *orders])
-        done, _ = env.step(action)
+        done = env.step(action)
         assert not done
 
     assert (env.engine.season, env.engine.year) == (Season.SPRING, 1902)
@@ -1053,7 +1053,7 @@ def test_padded_messages_are_delivered_intact():
     env = DiplomacyEnv()
     env.reset(num_players=3, seed=42)
     gap = " " * 5000
-    done, _ = env.step(f"Broadcast: hi{gap}all\nWhisper to 1: psst{gap}there\nBroadcast: bye{gap}now")
+    done = env.step(f"Broadcast: hi{gap}all\nWhisper to 1: psst{gap}there\nBroadcast: bye{gap}now")
     assert not done
     assert env.state.error_count == 0
     visible = _visible_to(env, 1)

@@ -39,7 +39,7 @@ def _play(env, *actions):
     done = False
     for action in actions:
         assert not done, f"game ended before {action!r}"
-        done, _ = env.step(action)
+        done = env.step(action)
         assert env.state.error_count == 0, f"{action!r} was rejected"
     return done
 
@@ -133,7 +133,7 @@ def test_blocked_moves_are_invalid_and_atomic(setup, action):
     gs["bombs"].append({"x": 2, "y": 3, "timer": 3, "owner": 1})
     before = copy.deepcopy(gs)
 
-    done, _ = env.step(action)
+    done = env.step(action)
 
     assert not done
     assert env.state.error_count == 1
@@ -143,7 +143,7 @@ def test_blocked_moves_are_invalid_and_atomic(setup, action):
 
 def test_outer_wall_blocks_moves_from_spawn():
     env = _fresh()
-    done, _ = env.step("up")
+    done = env.step("up")
     assert not done and env.state.error_count == 1
     assert env.game_state["positions"][0] == (1, 1)
 
@@ -152,7 +152,7 @@ def test_second_bomb_on_same_cell_is_invalid():
     env = _fresh()
     gs = _arena(env, (3, 3), (6, 6))
     _play(env, "bomb", "stay")
-    done, _ = env.step("bomb")
+    done = env.step("bomb")
     assert not done and env.state.error_count == 1
     assert len(gs["bombs"]) == 1
 
@@ -162,7 +162,7 @@ def test_player_can_walk_off_own_bomb_but_nobody_can_step_onto_it():
     gs = _arena(env, (3, 3), (5, 3))
     _play(env, "bomb", "left", "up")  # P0 drops a bomb and walks off it; P1 comes next to it
     assert gs["positions"] == [(3, 2), (4, 3)]
-    done, _ = env.step("left")  # P1 tries to step onto the bomb
+    done = env.step("left")  # P1 tries to step onto the bomb
     assert not done and env.state.error_count == 1
     assert gs["positions"][1] == (4, 3)
 
@@ -314,7 +314,7 @@ def test_non_bare_commands_are_rejected(action):
     env = _fresh()
     gs = _arena(env, (3, 3), (6, 6))
     before = copy.deepcopy(gs)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
     assert gs == before
 
@@ -322,7 +322,7 @@ def test_non_bare_commands_are_rejected(action):
 def test_two_consecutive_invalid_moves_lose():
     env = _fresh()
     env.step("jump")
-    done, _ = env.step("fly")
+    done = env.step("fly")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
     assert env.state.game_info[0]["invalid_move"]
@@ -331,7 +331,7 @@ def test_two_consecutive_invalid_moves_lose():
 def test_oversized_action_is_rejected_without_side_effects():
     env = _fresh()
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("u" * (env.max_action_chars + 1))
+    done = env.step("u" * (env.max_action_chars + 1))
     assert not done and env.state.error_count == 1
     assert env.game_state == before
 
@@ -390,7 +390,7 @@ def test_registered_variants_use_upstream_defaults():
         env = ta.make(env_id)
         env.reset(num_players=2, seed=1)
         assert (env.grid_size, env.max_turns, env.bomb_timer, env.bomb_radius) == (10, 100, 6, 2)
-        done, _ = env.step("right")
+        done = env.step("right")
         assert not done and env.state.error_count == 0
 
 

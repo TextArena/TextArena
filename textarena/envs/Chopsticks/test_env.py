@@ -23,7 +23,7 @@ def test_reset_requires_exactly_two_players(num_players):
 
 def test_attack_adds_fingers_and_rotates():
     env = _fresh()
-    done, _ = env.step("attack 0 0")
+    done = env.step("attack 0 0")
     assert not done
     assert env.state.game_state["hands"][1] == [2, 1]
     assert env.state.current_player_id == 1
@@ -34,7 +34,7 @@ def test_attack_adds_fingers_and_rotates():
 
 def test_split_redistributes_fingers():
     env = _fresh()
-    done, _ = env.step("split 2 0")
+    done = env.step("split 2 0")
     assert not done
     assert env.state.game_state["hands"][0] == [2, 0]
     assert env.state.current_player_id == 1
@@ -45,7 +45,7 @@ def test_split_cannot_stall_by_only_swapping_hand_indices():
     env.state.game_state["hands"][0] = [1, 2]
     before = env.state.game_state["hands"][0].copy()
 
-    done, _ = env.step("split 2 1")
+    done = env.step("split 2 1")
 
     assert not done
     assert env.state.game_state["hands"][0] == before
@@ -58,7 +58,7 @@ def test_split_cannot_create_hand_above_four_and_is_atomic():
     env = _fresh()
     env.state.game_state["hands"][0] = [4, 2]
     before = env.state.game_state["hands"][0].copy()
-    done, _ = env.step("split 6 0")
+    done = env.step("split 6 0")
     assert not done
     assert env.state.game_state["hands"][0] == before
     assert env.state.game_state["history"] == []
@@ -69,7 +69,7 @@ def test_split_cannot_create_hand_above_four_and_is_atomic():
 def test_out_of_range_split_explains_the_finger_limit():
     env = _fresh()
     env.state.game_state["hands"][0] = [4, 2]
-    done, _ = env.step("split 5 1")
+    done = env.step("split 5 1")
     assert not done
     assert env.state.game_state["hands"][0] == [4, 2]
     _, observations = env.get_observation()
@@ -87,7 +87,7 @@ def test_prompt_states_goal_split_limits_and_turn_limit():
 
 def test_large_split_token_is_invalid_without_integer_conversion():
     env = _fresh()
-    done, _ = env.step(f"split {'9' * 10_000} 0")
+    done = env.step(f"split {'9' * 10_000} 0")
     assert not done
     assert env.state.game_state["hands"][0] == [1, 1]
     assert env.state.error_count == 1
@@ -96,7 +96,7 @@ def test_large_split_token_is_invalid_without_integer_conversion():
 def test_killing_both_opponent_hands_wins():
     env = _fresh()
     env.state.game_state["hands"] = {0: [4, 1], 1: [0, 1]}
-    done, _ = env.step("attack 0 1")  # 4 + 1 = 5 -> opponent hand dies
+    done = env.step("attack 0 1")  # 4 + 1 = 5 -> opponent hand dies
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
     assert env.state.game_state["hands"][1] == [0, 0]
@@ -112,7 +112,7 @@ def test_deterministic_complete_game_without_state_injection():
         "attack 0 1",  # P1 [0,0]
     ]
     for move in moves:
-        done, _ = env.step(move)
+        done = env.step(move)
     assert done
     assert env.state.game_state["hands"] == {0: [4, 1], 1: [0, 0]}
     assert env.state.rewards == {0: 1, 1: -1}
@@ -121,23 +121,23 @@ def test_deterministic_complete_game_without_state_injection():
 def test_attacking_dead_hand_is_illegal():
     env = _fresh()
     env.state.game_state["hands"][1] = [0, 1]
-    done, _ = env.step("attack 0 0")  # opponent hand 0 is dead
+    done = env.step("attack 0 0")  # opponent hand 0 is dead
     assert not done
     assert env.state.error_count == 1
 
 
 def test_invalid_format_increments_error_count():
     env = _fresh()
-    done, _ = env.step("do a thing")
+    done = env.step("do a thing")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_turn_limit_results_in_draw():
     env = _fresh(max_turns=2)
-    done, _ = env.step("split 2 0")
+    done = env.step("split 2 0")
     assert not done
-    done, _ = env.step("split 2 0")
+    done = env.step("split 2 0")
     assert done
     assert env.state.turn == 2
     assert env.state.rewards == {0: 0, 1: 0}
@@ -146,6 +146,6 @@ def test_turn_limit_results_in_draw():
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     env.step("garbage")
-    done, _ = env.step("garbage")
+    done = env.step("garbage")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}

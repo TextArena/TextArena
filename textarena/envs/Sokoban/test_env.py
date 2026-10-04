@@ -74,7 +74,7 @@ def test_reset_initial_state():
 
 def test_invalid_format_increments_error():
     env = _fresh()
-    done, _ = env.step("do a barrel roll")
+    done = env.step("do a barrel roll")
     assert not done
     assert env.state.error_count == 1
 
@@ -83,7 +83,7 @@ def test_two_invalid_moves_end_game_with_completion_reward():
     env = _fresh()
     expected = env._get_percentage_completion()
     env.step("nonsense one")            # first invalid -> error_count 1
-    done, _ = env.step("nonsense two")  # second consecutive invalid ends game
+    done = env.step("nonsense two")  # second consecutive invalid ends game
     assert done
     assert env.state.rewards == {0: expected}
 
@@ -93,7 +93,7 @@ def test_wall_collision_is_rejected():
     colliding = [a for a in env.action_space if env._would_collide_with_wall(a)]
     if not colliding:
         return  # No wall-adjacent direction for this layout; nothing to assert.
-    done, _ = env.step(colliding[0])
+    done = env.step(colliding[0])
     assert not done
     assert env.state.error_count == 1
 
@@ -103,7 +103,7 @@ def test_valid_move_updates_board():
     legal = [a for a in env.action_space if not env._would_collide_with_wall(a)]
     assert legal, "player should have at least one legal move"
     before = env.player_position
-    done, _ = env.step(legal[0])
+    done = env.step(legal[0])
     assert not done
     # Either the player moved or pushed a box (position changes on a plain move).
     assert env.player_position != before or env.state.turn >= 1
@@ -116,7 +116,7 @@ def test_solving_puzzle_wins():
     done = False
     for move in solution:
         assert not done
-        done, _ = env.step(move)
+        done = env.step(move)
     assert done
     assert env.state.rewards == {0: 1.0}
 
@@ -226,7 +226,7 @@ def test_reverse_generation_honors_search_depth_budget(monkeypatch):
 def test_exact_parser_rejects_malformed_actions_atomically(action):
     env = _fresh()
     before = _board_signature(env)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.state.turn == 0
@@ -236,7 +236,7 @@ def test_exact_parser_rejects_malformed_actions_atomically(action):
 def test_oversized_action_is_invalid_without_board_mutation():
     env = _fresh()
     before = _board_signature(env)
-    done, _ = env.step("x" * (env.max_action_chars + 1))
+    done = env.step("x" * (env.max_action_chars + 1))
     assert not done
     assert env.state.error_count == 1
     assert _board_signature(env) == before
@@ -263,7 +263,7 @@ def test_push_box_onto_target_wins_and_terminal_render_updates():
     env.reset(num_players=1, seed=42)
     _install_scripted_room(env)
     assert "X" in env.render(0) and "O" in env.render(0)
-    done, _ = env.step("up")
+    done = env.step("up")
     assert done
     assert env.state.rewards == {0: 1}
     assert env.room_state[1][2] == 3
@@ -279,7 +279,7 @@ def test_player_standing_on_a_goal_keeps_the_goal_visible():
     env.reset(num_players=1, seed=42)
     _install_scripted_room(env)
     for move in ("left", "up", "up", "right"):
-        done, _ = env.step(move)
+        done = env.step(move)
         assert not done
     assert env.player_position == (1, 2) and env.room_fixed[1][2] == 2
     assert env.create_board_str(env.room_state).splitlines()[1] == "# _ + _ #"
@@ -304,7 +304,7 @@ def test_blocked_push_is_invalid_and_atomic():
     _install_scripted_room(env)
     env.room_state[1][2] = 0
     before = _board_signature(env)
-    done, _ = env.step("up")
+    done = env.step("up")
     assert not done
     assert env.state.error_count == 1
     assert _board_signature(env) == before
@@ -329,7 +329,7 @@ def test_turn_limit_returns_box_completion_reward():
     env = SokobanEnv(dim_room=(5, 5), num_boxes=1, max_turns=1)
     env.reset(num_players=1, seed=42)
     _install_scripted_room(env)
-    done, _ = env.step("left")
+    done = env.step("left")
     assert done
     assert env.state.rewards == {0: 0.0}
     assert "turn limit" in env.state.game_info[0]["reason"].lower()

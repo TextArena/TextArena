@@ -86,7 +86,9 @@ player who made them. Cards drawn in phase 4 are told only to the drawing player
 | --- | --- |
 | Game end (deck cycles done) | Most coins `+1`, everyone else `-1`; ties go to the tied player furthest clockwise from Player 0 |
 | Turn limit (`max_turns`) reached | Fields harvested and scored the same way |
-| Too many consecutive invalid moves | Offender `-1`, everyone else `0` (game ends) |
+| Second consecutive invalid move | Offender `-1`, everyone else `0` (game ends) |
+
+A first invalid move only earns a warning, and the player tries again.
 
 ## Parameters
 
@@ -94,7 +96,6 @@ player who made them. Cards drawn in phase 4 are told only to the drawing player
 - `deck_cycles` (default `3`): The game ends when the draw pile runs out this many times (3 in the official rules). Accepts an integer of at least 1.
 - `max_trade_rounds` (default `None`): If set, trading ends automatically after the floor has gone around the table this many times; None lets the active player decide, as in the official rules. Accepts an integer of at least 1 or None.
 - `max_turns` (default `3000`): The step budget; when it is used up, all fields are harvested and the game is scored. A full game takes about 200 steps without trading and up to about 1,500 with lively trading. Accepts an integer of at least 1 or None.
-- `error_allowance` (default `3`): The number of consecutive invalid moves allowed before the offender forfeits. Accepts an integer of at least 0.
 <!-- END GENERATED: parameters -->
 
 ## Notes

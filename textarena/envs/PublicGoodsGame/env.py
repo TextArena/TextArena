@@ -53,7 +53,6 @@ class PublicGoodsGameEnv(ta.GameEnv):
     max_players = 15
     mdp_includes_actions = False
     broadcast_actions = False  # raw actions stay private; messages/contributions are revealed simultaneously
-    error_allowance = 2  # allow 2 errors before elimination
 
     num_rounds = ta.Param(5, "The number of rounds.", min=1, check=_is_renderable, rule="a positive integer")
     communication_turns = ta.Param(
@@ -145,13 +144,15 @@ class PublicGoodsGameEnv(ta.GameEnv):
             f"- Plus {sample_kept} tokens kept = {_format_number(sample_payoff)} total\n\n"
             f"How to Play:\n"
             f"- You can think internally and reason about your strategy (this won't be shared).\n"
-            f"- Your goal is to maximize your total score across all rounds.\n"
+            f"- Your goal is to maximize your total score across all rounds. Your final reward is your total score "
+            f"divided by {_format_number(self._max_total_payoff())}, the most any player could earn in this game.\n"
             f"- During conversation: send public messages using {{message}} format.\n"
             f"  Example: 'I think we should cooperate. {{Let me propose we all contribute 15 tokens}}'\n"
             f"  Only the text in curly braces will be visible to other players.\n"
             f"- During decision phase: reply with the number of tokens you will contribute (0-{game_state['endowment']}).\n"
             f"  Example: '15'\n"
-            f"- Invalid moves (wrong format or out of range) will result in warnings, then elimination.\n"
+            f"- An invalid move (wrong format or out of range) gets a warning; a second one in a row eliminates you "
+            f"and your reward is 0.\n"
             f"- If you don't send any public message during conversation (no {{}} format), others will see that you remained silent.\n\n"
             f"Game Status: \n"
             f"{phase_round_description}\n"
@@ -232,7 +233,7 @@ class PublicGoodsGameEnv(ta.GameEnv):
         if outcome is not None:
             return outcome
         if not self.state.alive_players:
-            return self.draw(reason="All players eliminated!")
+            return self.outcome({pid: 0 for pid in range(self.state.num_players)}, reason="All players eliminated!")
         return None
 
     def _maybe_resolve_contributions(self) -> Optional[ta.Outcome]:
@@ -254,7 +255,7 @@ class PublicGoodsGameEnv(ta.GameEnv):
 
         if gs["round"] >= gs["num_rounds"]:
             gs["phase"] = "complete"
-            return self._determine_winner()
+            return self._final_outcome()
 
         # Reset for next round - clear both contributions and pending data
         gs["round"] += 1
@@ -322,35 +323,27 @@ class PublicGoodsGameEnv(ta.GameEnv):
         gs["history"].append(round_info)
         self.broadcast(result_message, ta.ObservationType.GAME_MESSAGE)
 
-    def _determine_winner(self) -> ta.Outcome:
+    def _max_total_payoff(self) -> Union[int, Fraction]:
+        """The most one player can earn over the game, the denominator of every reward."""
+        num_players = self.state.num_players
+        factor = _exact_number(self.multiplication_factor)
+        # Free-riding on everyone else is best unless the factor exceeds the player count, when full cooperation is.
+        best_round = self.endowment * max(1 + Fraction(num_players - 1, num_players) * factor, factor)
+        return _exact_number(self.num_rounds * best_round)
+
+    def _final_outcome(self) -> ta.Outcome:
         gs = self.game_state
-        alive_players = self.state.alive_players
-        scores = {p: gs["total_scores"][p] for p in alive_players}
-        if not scores:
-            return self.draw(reason="All players eliminated!")
-
-        max_score = max(scores.values())
-        winners = [p for p, s in scores.items() if s == max_score]
-
+        max_total = self._max_total_payoff()
+        rewards = {}
         final_message = "Game Over! Final scores:\n"
         for player_id in range(self.state.num_players):
             score = gs["total_scores"][player_id]
-            status = " (eliminated)" if not self.state.is_player_alive(player_id) else ""
+            if not self.state.is_player_alive(player_id):
+                rewards[player_id] = 0
+                status = " (eliminated, reward 0)"
+            else:
+                rewards[player_id] = float(Fraction(score) / max_total) if max_total else 0
+                status = f" (reward {rewards[player_id]:.3f})"
             final_message += f"Player {player_id}: {_format_number(score)}{status}\n"
-
-        if len(winners) == 1:
-            return self.winner(
-                winners[0],
-                reason=f"{final_message}\nPlayer {winners[0]} wins with {_format_number(max_score)} points!",
-            )
-        if len(winners) == self.state.num_players:
-            return self.draw(
-                reason=f"{final_message}\nAll players tied with {_format_number(max_score)} points. It's a draw!"
-            )
-        return self.winner(
-            winners,
-            reason=(
-                f"{final_message}\nPlayers {', '.join(map(str, winners))} tied for first "
-                f"with {_format_number(max_score)} points."
-            ),
-        )
+        final_message += f"Each reward is the total score divided by {_format_number(max_total)}, the most any player could earn."
+        return self.outcome(rewards, reason=final_message)

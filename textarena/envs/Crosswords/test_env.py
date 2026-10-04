@@ -54,7 +54,7 @@ def test_completing_puzzle_wins():
     env = _fresh()
     done = False
     for action in _all_correct_actions(env):
-        done, _ = env.step(action)
+        done = env.step(action)
     assert done and env.state.rewards == {0: 1}
     assert env.state.turn == len(_all_correct_actions(_fresh()))
 
@@ -63,13 +63,13 @@ def test_single_correct_letter_fills_cell():
     env = _fresh()
     r, c = _first_empty_cell(env)
     letter = env.state.game_state["solution"][r][c]
-    done, _ = env.step(f"{r} {c} {letter}")
+    done = env.step(f"{r} {c} {letter}")
     assert not done and env.state.game_state["board"][r][c] == letter.upper()
 
 
 def test_invalid_format_increments_error_count():
     env = _fresh()
-    done, _ = env.step("no valid guess here")
+    done = env.step("no valid guess here")
     assert not done and env.state.error_count == 1
 
 
@@ -79,21 +79,21 @@ def test_wrong_letter_rejected():
     correct = env.state.game_state["solution"][r][c].upper()
     wrong = "Z" if correct != "Z" else "Y"
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(f"{r} {c} {wrong}")
+    done = env.step(f"{r} {c} {wrong}")
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
 
 def test_out_of_bounds_cell_rejected():
     env = _fresh()
-    done, _ = env.step("99 99 a")
+    done = env.step("99 99 a")
     assert not done and env.state.error_count == 1
 
 
 def test_oversized_coordinate_is_atomic_invalid():
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(f"{'9' * 1000} 0 A")
+    done = env.step(f"{'9' * 1000} 0 A")
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -101,7 +101,7 @@ def test_oversized_coordinate_is_atomic_invalid():
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     env.step("garbage")
-    done, _ = env.step("still garbage")
+    done = env.step("still garbage")
     assert done and env.state.game_info[0]["invalid_move"] is True
 
 
@@ -109,7 +109,7 @@ def test_two_consecutive_invalid_moves_end_game():
 def test_parser_rejects_noncanonical_actions_atomically(action):
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -138,9 +138,9 @@ def test_games_finish_within_max_turns_guesses(env_id):
     done = False
     for action in actions:
         assert not done
-        done, _ = env.step("not a guess")  # an invalid move in between never counts as a turn
+        done = env.step("not a guess")  # an invalid move in between never counts as a turn
         assert not done
-        done, _ = env.step(action)
+        done = env.step(action)
     assert done and game.state.rewards == {0: 1}
     assert game.state.turn == len(actions) <= game.max_turns
 

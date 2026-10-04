@@ -1,6 +1,6 @@
-from textarena.envs.registration import register_with_versions
+from textarena.envs.registration import register
 
-register_with_versions(
+register(
     id="IteratedStagHunt-v1",
     entry_point="textarena.envs.IteratedStagHunt.env:IteratedStagHuntEnv",
     num_rounds=5,
@@ -11,7 +11,7 @@ register_with_versions(
     mutual_hare_reward=5,
     randomize_payoff=False,
 )
-register_with_versions(
+register(
     id="IteratedStagHunt-v1-randomized",
     entry_point="textarena.envs.IteratedStagHunt.env:IteratedStagHuntEnv",
     num_rounds=5,

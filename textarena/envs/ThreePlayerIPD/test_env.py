@@ -59,7 +59,7 @@ def test_prompt_example_is_a_legal_decision_for_every_player():
         example = re.search(r"\(i\.e\. '([^']+)'", env.prompt(player_id)).group(1)
         assert env.state.current_player_id == player_id
         turn = env.state.turn
-        done, _ = env.step(example)
+        done = env.step(example)
         assert env.state.turn == turn + 1  # accepted as a valid decision
     assert done
 
@@ -113,7 +113,7 @@ def test_all_cooperate_is_full_draw():
         env.step("let's cooperate")
     done = False
     for msg in ["1 cooperate 2 cooperate", "0 cooperate 2 cooperate", "0 cooperate 1 cooperate"]:
-        done, _ = env.step(msg)
+        done = env.step(msg)
     assert done
     assert env.state.game_state["scores"] == {0: 6, 1: 6, 2: 6}
     assert env.state.rewards == {0: 0.0, 1: 0.0, 2: 0.0}
@@ -123,7 +123,7 @@ def test_unspecified_opponent_defaults_to_cooperate():
     env = _fresh(communication_turns=0)
     env.step("1 defect")  # P0 defaults to cooperate against P2.
     env.step("")          # P1 cooperates with both by default.
-    done, _ = env.step("")
+    done = env.step("")
     assert done
     assert env.state.game_state["scores"] == {0: 8, 1: 3, 2: 6}
     assert env.state.rewards == {0: 1.0, 1: -1.0, 2: 0.0}
@@ -148,7 +148,7 @@ def test_unspecified_opponent_defaults_to_cooperate():
 def test_malformed_compound_decision_is_invalid_and_atomic(action):
     env = _fresh(communication_turns=0)
     before = env.state.game_state["decisions"][0].copy()
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.game_state["decisions"][0] == before
     assert env.state.game_state["acted"][0] is False
@@ -159,7 +159,7 @@ def test_malformed_compound_decision_is_invalid_and_atomic(action):
 def test_repeated_invalid_decision_forfeits_instead_of_breaking_pair_queue():
     env = _fresh(communication_turns=0)
     env.step("malformed")
-    done, _ = env.step("still malformed")
+    done = env.step("still malformed")
     assert done
     assert env.state.rewards == {0: -1, 1: 1, 2: 1}
     assert env.state.eliminated == []
@@ -180,11 +180,11 @@ def test_lone_defector_wins():
     env = _fresh()
     for _ in range(3):
         env.step("chatter")
-    done, _ = env.step("1 defect 2 defect")   # P0 defects on both
+    done = env.step("1 defect 2 defect")   # P0 defects on both
     assert not done
-    done, _ = env.step("0 cooperate 2 cooperate")  # P1 cooperates
+    done = env.step("0 cooperate 2 cooperate")  # P1 cooperates
     assert not done
-    done, _ = env.step("0 cooperate 1 cooperate")  # P2 cooperates
+    done = env.step("0 cooperate 1 cooperate")  # P2 cooperates
     assert done
     # P0: 5+5=10, P1: 0+3=3, P2: 0+3=3.
     assert env.state.game_state["scores"] == {0: 10, 1: 3, 2: 3}

@@ -51,7 +51,7 @@ def test_scripted_full_game_player0_wins():
         pid = env.state.current_player_id
         card = (p0_queue if pid == 0 else p1_queue)[idx[pid]]
         idx[pid] += 1
-        done, _ = env.step(_tok(card))
+        done = env.step(_tok(card))
         if done:
             break
     assert done
@@ -65,7 +65,7 @@ def test_scripted_full_game_player0_wins():
 def test_invalid_format_does_not_end_game():
     env = _fresh()
     pid = env.state.current_player_id
-    done, _ = env.step("I do not name a card")
+    done = env.step("I do not name a card")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == pid  # turn did not rotate
@@ -73,7 +73,7 @@ def test_invalid_format_does_not_end_game():
 
 def test_two_tokens_is_invalid():
     env = _fresh()
-    done, _ = env.step("A and also K")  # more than one card
+    done = env.step("A and also K")  # more than one card
     assert not done
     assert env.state.error_count == 1
 
@@ -89,7 +89,7 @@ def test_illegal_replay_of_spent_card():
     pid = env.state.current_player_id
     spent = 1 if pid == first else 13
     assert spent not in env.state.game_state["player_hands"][pid]
-    done, _ = env.step(_tok(spent))
+    done = env.step(_tok(spent))
     assert not done
     assert env.state.error_count == 1
 
@@ -98,7 +98,7 @@ def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     offender = env.state.current_player_id
     env.step("garbage")
-    done, _ = env.step("more garbage")
+    done = env.step("more garbage")
     assert done
     assert env.state.rewards[offender] == -1
     assert env.state.rewards[1 - offender] == 1
@@ -126,7 +126,7 @@ def test_final_tied_prize_remains_unclaimed_and_match_draws():
     done = False
     for card in range(1, 14):
         env.step(_tok(card))
-        done, _ = env.step(_tok(card))
+        done = env.step(_tok(card))
     assert done
     gs = env.state.game_state
     assert gs["player_scores"] == {0: 0, 1: 0}

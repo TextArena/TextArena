@@ -37,7 +37,7 @@ def _play_discussion(env, max_steps=100):
     """Play innocuous discussion turns until the phase changes."""
     steps = 0
     while env.state.game_state["current_phase"] == "Discussion" and steps < max_steps:
-        done, _ = env.step("hello everyone")
+        done = env.step("hello everyone")
         assert not done
         steps += 1
     return steps
@@ -140,13 +140,13 @@ def test_role_reveal_flow():
     room_idx = 0 if revealer in gs["rooms"][0] else 1
     target = next(p for p in gs["rooms"][room_idx] if p != revealer)
 
-    done, _ = env.step("reveal")
+    done = env.step("reveal")
     assert not done
     assert gs["current_phase"] == "Role_Reveal"
     # The revealing player selects the target themselves.
     assert env.state.current_player_id == revealer
 
-    done, _ = env.step(f"Player {target}")
+    done = env.step(f"Player {target}")
     assert not done
     assert revealer in gs["revealed_roles"][target]
     assert gs["reveal_counts"][revealer] == 1
@@ -166,7 +166,7 @@ def test_chat_mentioning_reveals_or_roles_is_delivered_to_the_room(message):
     listeners = [pid for pid in gs["rooms"][room_idx] if pid != speaker]
     start = len(env.state.events)
 
-    done, _ = env.step(message)
+    done = env.step(message)
 
     assert not done
     assert env.state.error_count == 0
@@ -183,7 +183,7 @@ def test_exact_reveal_command_starts_a_reveal_without_relaying_it(command):
     revealer = env.state.current_player_id
     start = len(env.state.events)
 
-    done, _ = env.step(command)
+    done = env.step(command)
 
     assert not done
     assert env.game_state["current_phase"] == "Role_Reveal"
@@ -199,14 +199,14 @@ def test_reveal_without_reveals_left_is_invalid_and_atomic():
     gs["reveal_counts"][speaker] = env.MAX_REVEALS_PER_PLAYER
     before = copy.deepcopy(gs)
 
-    done, _ = env.step("reveal")
+    done = env.step("reveal")
 
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == speaker
     assert gs == before
     # The turn is not lost: the player can still talk instead.
-    done, _ = env.step("Never mind, let's talk.")
+    done = env.step("Never mind, let's talk.")
     assert not done
     assert env.state.current_player_id != speaker
 
@@ -261,7 +261,7 @@ def test_huge_nonmatching_reveal_message_is_processed_without_backtracking():
     room_idx = 0 if speaker in gs["rooms"][0] else 1
     action = ("reveal " * 4_000) + "nothing"
 
-    done, _ = env.step(action)
+    done = env.step(action)
 
     assert not done
     assert gs["current_phase"] == "Discussion"
@@ -312,12 +312,12 @@ def test_reveal_is_private_and_preserves_discussion_schedule():
     expected_remaining = list(gs["next_player_ids"])
     start = len(env.state.events)
 
-    done, _ = env.step("reveal")
+    done = env.step("reveal")
     assert not done
     assert gs["current_phase"] == "Role_Reveal"
     assert gs["paused_discussion_player_ids"] == expected_remaining
 
-    done, _ = env.step(str(target))
+    done = env.step(str(target))
     assert not done
     assert gs["current_phase"] == "Discussion"
     assert gs["paused_discussion_player_ids"] is None
@@ -337,11 +337,11 @@ def test_self_reveal_is_invalid_and_atomic():
     env = _fresh(seed=23)
     gs = env.state.game_state
     revealer = env.state.current_player_id
-    done, _ = env.step("reveal")
+    done = env.step("reveal")
     assert not done
     before = copy.deepcopy(gs)
 
-    done, _ = env.step(str(revealer))
+    done = env.step(str(revealer))
 
     assert not done
     assert env.state.error_count == 1
@@ -357,7 +357,7 @@ def test_repeated_invalid_reveal_resumes_exact_paused_discussion_queue():
     env.step("reveal")
 
     env.step("not a player")
-    done, _ = env.step("still not a player")
+    done = env.step("still not a player")
 
     assert not done
     assert gs["current_phase"] == "Discussion"
@@ -409,7 +409,7 @@ def test_corrupted_state_ends_safely_without_mutating_game_state():
 def test_invalid_reveal_selection_is_atomic():
     env = _fresh(seed=41)
     revealer = env.state.current_player_id
-    done, _ = env.step("reveal")
+    done = env.step("reveal")
     assert not done
     before = copy.deepcopy(env.state.game_state)
 
@@ -426,14 +426,14 @@ def test_leader_invalid_format_rejected_then_valid_selection():
     leader = env.state.current_player_id
     room_idx = gs["leaders"].index(leader)
 
-    done, _ = env.step("I refuse to pick anyone")  # not a player-number selection
+    done = env.step("I refuse to pick anyone")  # not a player-number selection
     assert not done
     assert env.state.error_count == 1
     # No rotation off the player after a single invalid move.
     assert env.state.current_player_id == leader
 
     choice = next(p for p in gs["rooms"][room_idx] if p != leader)
-    done, _ = env.step(str(choice))
+    done = env.step(str(choice))
     assert not done
     assert gs["hostages_to_trade"][room_idx] == choice
     # Play moved on to the other leader.
@@ -444,7 +444,7 @@ def test_leader_cannot_select_self():
     env = _fresh(6, discussion_rounds=1)
     _play_discussion(env)
     leader = env.state.current_player_id
-    done, _ = env.step(str(leader))  # illegal: self-selection
+    done = env.step(str(leader))  # illegal: self-selection
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == leader
@@ -464,7 +464,7 @@ def test_red_team_wins_when_president_traded_to_bomber_room():
             choice = president  # ship the President to the Bomber's room
         else:
             choice = next(p for p in gs["rooms"][room_idx] if p not in (leader, bomber))
-        done, _ = env.step(str(choice))
+        done = env.step(str(choice))
 
     assert done
     # President and Bomber ended in the same room -> Red team wins.
@@ -485,7 +485,7 @@ def test_blue_team_wins_when_specials_stay_separated():
         room_idx = gs["leaders"].index(leader)
         # Trade only regular players so President and Bomber stay put.
         choice = next(p for p in gs["rooms"][room_idx] if p not in (leader, president, bomber))
-        done, _ = env.step(str(choice))
+        done = env.step(str(choice))
 
     assert done
     roles = gs["player_roles"]
@@ -502,7 +502,7 @@ def test_trade_starts_next_round_with_fresh_room_valid_queue():
         leader = env.state.current_player_id
         room_idx = gs["leaders"].index(leader)
         choice = next(pid for pid in gs["rooms"][room_idx] if pid != leader)
-        done, _ = env.step(str(choice))
+        done = env.step(str(choice))
         assert not done
 
     assert gs["round"] == 2

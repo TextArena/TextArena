@@ -35,7 +35,7 @@ e.g. `Entering looks risky with four players. {I think only two of us should ent
 counts as remaining silent. Every reply is valid during communication.
 
 During the decision turn, reply with exactly `E` to enter or `S` to stay out (case-insensitive). Anything else is
-invalid.
+invalid. The first invalid decision gets a warning; a second one in a row eliminates the player.
 
 ## Observations
 
@@ -52,7 +52,7 @@ payoff and running total. The final scores are announced at the end.
 | Single highest total score | Winner `+1`, everyone else `-1` |
 | Several, but not all, players tie for the highest total | Each tied leader `+1`, everyone else `-1` |
 | All players tie (nobody eliminated) | Everyone `0` |
-| Third consecutive invalid decision | Offender is eliminated, earns nothing in later rounds, and receives `-1` at the end |
+| Second consecutive invalid decision | Offender is eliminated, earns nothing in later rounds, and receives `-1` at the end |
 | Every player eliminated | Everyone `0` |
 
 Only the totals of players who are still in the game are compared, so an eliminated player always gets `-1` (unless

@@ -1,3 +1,3 @@
-from textarena.envs.registration import register_with_versions
+from textarena.envs.registration import register
 
-register_with_versions(id="SpiteAndMalice-v1", entry_point="textarena.envs.SpiteAndMalice.env:SpiteAndMaliceEnv")
+register(id="SpiteAndMalice-v1", entry_point="textarena.envs.SpiteAndMalice.env:SpiteAndMaliceEnv")

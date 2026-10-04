@@ -42,8 +42,11 @@ was a Set and when extra cards were dealt.
 
 ## Rewards
 
+The reward is the number of Sets found divided by 20, the most a game allows (one per turn), so a Set on every turn
+scores `1`.
+
 | Outcome | Reward |
 | --- | --- |
-| 20 turns used | Number of Sets found (`0` to `20`) |
-| No Set left and the deck is empty | Number of Sets found |
-| Second consecutive rejected pick | Number of Sets found so far |
+| 20 turns used | Sets found / 20 (`0` to `1`) |
+| No Set left and the deck is empty | Sets found / 20 |
+| Second consecutive rejected pick | Sets found so far / 20 |

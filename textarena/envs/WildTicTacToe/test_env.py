@@ -31,7 +31,7 @@ def test_player0_wins_with_three_x():
     env = _fresh()
     # p0 places X in the top row while p1 places O elsewhere.
     for a in ["X 0", "O 3", "X 1", "O 4", "X 2"]:
-        done, _ = env.step(a)
+        done = env.step(a)
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
 
@@ -46,21 +46,21 @@ def test_full_board_is_a_draw():
              "X 5", "X 6", "O 7", "X 8"]
     done = False
     for a in moves[:-1]:
-        done, _ = env.step(a)
+        done = env.step(a)
         assert not done
-    done, _ = env.step(moves[-1])
+    done = env.step(moves[-1])
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
 
 
 def test_invalid_format_is_rejected_but_game_continues():
     env = _fresh()
-    done, _ = env.step("Z 0")  # bad mark -> regex miss
+    done = env.step("Z 0")  # bad mark -> regex miss
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0  # no rotation on invalid
     # A valid resubmission is accepted and rotates the turn.
-    done, _ = env.step("X 0")
+    done = env.step("X 0")
     assert not done
     assert env.state.current_player_id == 1
 
@@ -80,7 +80,7 @@ def test_format_error_describes_expected_action():
 def test_occupied_cell_is_rejected():
     env = _fresh()
     env.step("X 0")           # p0 -> cell 0
-    done, _ = env.step("O 0")  # p1 tries the occupied cell
+    done = env.step("O 0")  # p1 tries the occupied cell
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 1
@@ -88,7 +88,7 @@ def test_occupied_cell_is_rejected():
 
 def test_out_of_range_cell_is_rejected():
     env = _fresh()
-    done, _ = env.step("X 9")
+    done = env.step("X 9")
     assert not done
     assert env.state.error_count == 1
 
@@ -96,7 +96,7 @@ def test_out_of_range_cell_is_rejected():
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     env.step("Z 0")            # first invalid (error_allowance=1)
-    done, _ = env.step("Z 1")  # second consecutive invalid -> loss
+    done = env.step("Z 1")  # second consecutive invalid -> loss
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -105,7 +105,7 @@ def test_player_wins_by_completing_marks_started_by_opponent():
     env = _fresh()
 
     for action in ("X 0", "X 1", "O 3", "X 2"):
-        done, _ = env.step(action)
+        done = env.step(action)
 
     assert done
     assert env.state.turn == 4
@@ -116,7 +116,7 @@ def test_anti_diagonal_win_branch():
     env = _fresh()
 
     for action in ("X 2", "O 0", "X 4", "O 1", "X 6"):
-        done, _ = env.step(action)
+        done = env.step(action)
 
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
@@ -126,7 +126,7 @@ def test_column_win_branch():
     env = _fresh()
 
     for action in ("X 0", "O 1", "X 3", "O 2", "X 6"):
-        done, _ = env.step(action)
+        done = env.step(action)
 
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
@@ -137,7 +137,7 @@ def test_unbalanced_brackets_are_atomic_invalid_moves(action):
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
 
-    done, _ = env.step(action)
+    done = env.step(action)
 
     assert not done
     assert env.state.error_count == 1
@@ -159,7 +159,7 @@ def test_huge_cell_is_rejected_without_integer_conversion(monkeypatch):
 
     monkeypatch.setattr(wild_module, "int", guarded_int, raising=False)
 
-    done, _ = env.step(f"X {'9' * 100_000}")
+    done = env.step(f"X {'9' * 100_000}")
 
     assert not done
     assert env.state.error_count == 1
@@ -175,7 +175,7 @@ def test_huge_cell_is_rejected_without_integer_conversion(monkeypatch):
 def test_lowercase_mark_is_accepted():
     env = _fresh()
 
-    done, _ = env.step("x 4")
+    done = env.step("x 4")
 
     assert not done
     assert env.state.game_state["board"][1][1] == "X"
@@ -185,7 +185,7 @@ def test_lowercase_mark_is_accepted():
 def test_terminal_action_is_counted_and_final_board_is_rendered():
     env = _fresh()
     for action in ("X 0", "O 3", "X 1", "O 4", "X 2"):
-        done, _ = env.step(action)
+        done = env.step(action)
 
     assert done
     assert env.state.turn == 5

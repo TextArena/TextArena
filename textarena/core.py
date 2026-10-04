@@ -31,7 +31,6 @@ GAME_ID = -1  # literal for use in game messages
 Message = Tuple[int, str, ObservationType]  # maps role to content
 Observations = List[Message]  # messages newly visible to the acting player
 Rewards = Dict[int, float]  # maps player ID to reward
-Info = Dict[str, Any]  # additional information about the environment
 
 
 class Env(ABC):
@@ -56,19 +55,8 @@ class Env(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def step(self, action: str) -> Tuple[bool, Info]:
-        """
-        Performs a single step in the environment.
-
-        Args:
-            player_id (int): The ID of the player taking the action.
-            action (str): The action to be taken by the player.
-
-        Returns:
-            Tuple containing:
-                - done (bool): Whether the episode has concluded
-                - info (Dict[str, Any]): Additional information about the environment.
-        """
+    def step(self, action: str) -> bool:
+        """Apply the acting player's action and return whether the game is over."""
         raise NotImplementedError
 
     def get_observation(self):
@@ -87,12 +75,14 @@ class Wrapper(Env):
         self.env = env
 
     def __getattr__(self, name):
+        if name == "env":  # not set yet, e.g. while copying
+            raise AttributeError(name)
         return getattr(self.env, name)
 
     def reset(self, num_players: Optional[int] = None, seed: Optional[int] = None):
         return self.env.reset(num_players=num_players, seed=seed)
 
-    def step(self, action: str) -> Tuple[bool, Info]:
+    def step(self, action: str) -> bool:
         return self.env.step(action=action)
 
     def get_observation(self):
@@ -121,14 +111,10 @@ class Wrapper(Env):
         self.__dict__.update(copy.deepcopy(snapshot["wrapper"]))
 
     def __deepcopy__(self, memo):
-        import copy
-        copied_env = copy.deepcopy(self.env, memo) # Deepcopy the wrapped environment
-        cls = self.__class__ # Create a new wrapper of the same type
-        copied_wrapper = cls(copied_env)
-        for k, v in self.__dict__.items(): # Copy any other attributes (excluding .env)
-            if k != "env":
-                setattr(copied_wrapper, k, copy.deepcopy(v, memo))
-        return copied_wrapper
+        copied = type(self).__new__(type(self))
+        memo[id(self)] = copied
+        copied.__dict__.update({name: copy.deepcopy(value, memo) for name, value in self.__dict__.items()})
+        return copied
 
     def is_wrapped_with(self, wrapper_class: type) -> bool:
         env = self
@@ -145,18 +131,6 @@ class ObservationWrapper(Wrapper):
         return player_id, self.observation(player_id, observation)
     
     def observation(self):
-        raise NotImplementedError
-
-
-class RenderWrapper(Wrapper):
-    def step(self, action: str) -> Tuple[bool, Optional[Info]]:
-        return self.env.step(action=action)
-    
-    def reset(self, num_players: Optional[int] = None, seed: Optional[int] = None):
-        self.reset_render()
-        return self.env.reset(num_players=num_players, seed=seed)
-
-    def reset_render(self):
         raise NotImplementedError
 
 

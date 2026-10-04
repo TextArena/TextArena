@@ -138,10 +138,6 @@ class SlitherlinkEnv(ta.GameEnv):
         return f"{self._render_board()}\nClues satisfied: {self._progress():.0%}"
 
     def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
-        if len(move) > self.max_action_chars:
-            return self.invalid(
-                f"Action is too long (maximum {self.max_action_chars} characters)."
-            )
         action_text = move.strip()
         m = self._ACTION_RE.fullmatch(action_text.lower())
         if not m:

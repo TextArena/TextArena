@@ -1,6 +1,7 @@
 """Deterministic tests for Retro Space Duel.
 
-Players alternate turns (Player 0 first). A turn is a bare direction key
+Players alternate turns; the first player is drawn at reset, but `_fresh` hands
+the first turn to Player 0 unless asked not to. A turn is a bare direction key
 (w/s/a/d/q/e/z/c) to move or 'f <key>' to shoot. Positions are (x, y) with y
 growing downward; the outer ring of the arena is the boundary. Most rule tests
 clear the random objects and place ships and objects explicitly.
@@ -26,9 +27,12 @@ class _FixedChoice(random.Random):
         return self.value
 
 
-def _fresh(seed=42, **kwargs):
+def _fresh(seed=42, player_0_first=True, **kwargs):
     env = RetroSpaceDuelEnv(**kwargs)
     env.reset(num_players=2, seed=seed)
+    if player_0_first:
+        env.set_current_player(0)
+        env.game_state["first_player"] = 0
     return env
 
 
@@ -48,7 +52,7 @@ def _play(env, *actions):
     done = False
     for action in actions:
         assert not done, f"game ended before {action!r}"
-        done, _ = env.step(action)
+        done = env.step(action)
         assert env.state.error_count == 0, f"{action!r} was rejected"
     return done
 
@@ -64,8 +68,34 @@ def test_reset_initial_state():
     assert [ship["pos"] for ship in ships] == [(1, 1), (13, 13)]
     for ship in ships:
         assert (ship["health"], ship["shields"], ship["speed"], ship["spread"]) == (100, 0, 1, False)
-    assert env.state.current_player_id == 0
     assert env.state.max_turns == 100
+
+
+def test_first_player_is_drawn_at_reset_and_named_in_both_prompts():
+    first_players = set()
+    for seed in range(20):
+        env = _fresh(seed=seed, player_0_first=False)
+        first = env.game_state["first_player"]
+        assert env.state.current_player_id == first
+        assert _fresh(seed=seed, player_0_first=False).game_state["first_player"] == first
+        prompts = [message for _, message, kind, _ in env.state.events if kind == ta.ObservationType.PROMPT]
+        assert len(prompts) == 2
+        assert all(f"Players alternate turns and Player {first} moves first." in prompt for prompt in prompts)
+        assert env.render(first).startswith(f"Turn 1/100: Player {first} to move.")
+        first_players.add(first)
+    assert first_players == {0, 1}
+
+
+def test_both_players_get_equal_turns_when_player_1_starts():
+    seed = next(s for s in range(50) if _fresh(seed=s, player_0_first=False).game_state["first_player"] == 1)
+    env = _fresh(seed=seed, player_0_first=False, max_turns=4)
+    _arena(env)
+    assert env.state.current_player_id == 1
+    assert not _play(env, "w", "s", "a")
+    assert env.state.current_player_id == 0
+    assert _play(env, "d")
+    assert all(env.state.game_info[pid]["turn_count"] == 2 for pid in range(2))
+    assert env.state.rewards == {0: 0, 1: 0}
 
 
 @pytest.mark.parametrize("seed", range(6))
@@ -109,7 +139,7 @@ def test_blocked_moves_are_invalid_and_atomic(p0, objects, p1, key):
     env = _fresh()
     gs = _arena(env, p0=p0, p1=p1, objects=objects, p0_speed=2)
     before = copy.deepcopy(gs)
-    done, _ = env.step(key)
+    done = env.step(key)
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -344,7 +374,7 @@ def test_malformed_actions_are_rejected(action):
     env = _fresh()
     gs = _arena(env)
     before = copy.deepcopy(gs)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
     assert gs == before
 
@@ -352,7 +382,7 @@ def test_malformed_actions_are_rejected(action):
 def test_two_consecutive_invalid_moves_lose():
     env = _fresh()
     env.step("jump")
-    done, _ = env.step("warp")
+    done = env.step("warp")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
     assert env.state.game_info[0]["invalid_move"]
@@ -361,7 +391,7 @@ def test_two_consecutive_invalid_moves_lose():
 def test_oversized_action_is_rejected_without_side_effects():
     env = _fresh()
     before = copy.deepcopy(env.game_state)
-    done, _ = env.step("w" * (env.max_action_chars + 1))
+    done = env.step("w" * (env.max_action_chars + 1))
     assert not done and env.state.error_count == 1
     assert env.game_state == before
 
@@ -396,9 +426,9 @@ def test_prompt_is_ascii_and_teaches_bare_actions():
 
 
 def test_initial_observation_contains_prompt_and_board():
-    env = _fresh()
+    env = _fresh(player_0_first=False)
     pid, observation = env.get_observation()
-    assert pid == 0
+    assert pid == env.game_state["first_player"]
     assert [kind for _, _, kind in observation] == [ta.ObservationType.PROMPT, ta.ObservationType.GAME_BOARD]
 
 
@@ -427,7 +457,7 @@ def test_registered_variants_use_upstream_defaults():
         env = ta.make(env_id)
         env.reset(num_players=2, seed=1)
         assert (env.grid_size, env.max_turns) == ((15, 15), 100)
-        done, _ = env.step("d")
+        done = env.step("d" if env.state.current_player_id == 0 else "a")
         assert not done and env.state.error_count == 0
 
 
@@ -452,7 +482,7 @@ def _legal_actions(env):
 
 
 def _random_game(seed, reckless):
-    env = _fresh(seed=seed, max_turns=60)
+    env = _fresh(seed=seed, player_0_first=False, max_turns=60)
     policy = random.Random(seed)
     trace = []
     while not env.state.done:

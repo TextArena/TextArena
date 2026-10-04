@@ -97,7 +97,7 @@ def test_generated_moves_are_parser_accepted():
 
 def test_bad_format_is_invalid():
     env = _fresh()
-    done, _ = env.step("move my piece forward")
+    done = env.step("move my piece forward")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -116,7 +116,7 @@ def test_format_error_describes_expected_action():
     _clear(staged)
     _place(staged, 0, "Captain", (0, 0), "captain-0")
     _place(staged, 1, "Captain", (9, 9), "captain-1")
-    done, _ = staged.step(example)
+    done = staged.step(example)
     assert not done and staged.state.turn == 1 and staged.state.error_count == 0
 
 
@@ -139,7 +139,7 @@ def test_moving_empty_or_enemy_source_rejected():
             break
     assert src is not None
     r, c, nr, nc = src
-    done, _ = env.step(f"{_coord(r, c)} {_coord(nr, nc)}")
+    done = env.step(f"{_coord(r, c)} {_coord(nr, nc)}")
     assert not done
     assert env.state.error_count == 1
 
@@ -149,7 +149,7 @@ def test_valid_move_updates_board_and_rotates():
     mv = _find_move_to_empty(env, 0)
     assert mv is not None
     r, c, nr, nc = mv
-    done, _ = env.step(f"{_coord(r, c)} {_coord(nr, nc)}")
+    done = env.step(f"{_coord(r, c)} {_coord(nr, nc)}")
     assert not done
     assert env.board[r][c] is None
     assert isinstance(env.board[nr][nc], dict) and env.board[nr][nc]["player"] == 0
@@ -183,7 +183,7 @@ def test_capturing_flag_wins():
     env.board[ar][ac] = {"rank": "Miner", "player": 0}
     env.player_pieces[0].append((ar, ac))
 
-    done, _ = env.step(f"{_coord(ar, ac)} {_coord(fr, fc)}")
+    done = env.step(f"{_coord(ar, ac)} {_coord(fr, fc)}")
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
     assert "?" not in env.render(1)
@@ -195,7 +195,7 @@ def test_miner_defuses_bomb_and_piece_lists_stay_synchronised():
     _clear(env)
     _place(env, 0, "Miner", (3, 0), "miner")
     _place(env, 1, "Bomb", (3, 1), "bomb")
-    done, _ = env.step("D0 D1")
+    done = env.step("D0 D1")
     assert done
     assert env.board[3][0] is None
     assert env.board[3][1]["rank"] == "Miner"
@@ -208,7 +208,7 @@ def test_spy_beats_attacking_marshal_but_equal_ranks_remove_both():
     _clear(env)
     _place(env, 0, "Spy", (3, 0), "spy")
     _place(env, 1, "Marshal", (3, 1), "marshal")
-    done, _ = env.step("D0 D1")
+    done = env.step("D0 D1")
     assert done
     assert env.board[3][1]["rank"] == "Spy"
 
@@ -216,7 +216,7 @@ def test_spy_beats_attacking_marshal_but_equal_ranks_remove_both():
     _clear(env)
     _place(env, 0, "Captain", (3, 0), "captain-0")
     _place(env, 1, "Captain", (3, 1), "captain-1")
-    done, _ = env.step("D0 D1")
+    done = env.step("D0 D1")
     assert done
     assert env.board[3][0] is None and env.board[3][1] is None
     assert env.player_pieces == {0: [], 1: []}
@@ -257,7 +257,7 @@ def test_moving_another_piece_interrupts_two_square_sequence():
     ]
     env.game_state["last_moved_piece"][0] = "miner"
 
-    done, _ = env.step("D4 E4")
+    done = env.step("D4 E4")
     assert not done
     assert env._validate_move(0, 3, 0, 4, 0) is None
     assert "D0 E0" in env._available_moves(0)
@@ -266,7 +266,7 @@ def test_moving_another_piece_interrupts_two_square_sequence():
 def test_turn_limit_draw_reveals_terminal_board():
     env = StrategoEnv(max_turns=1)
     env.reset(num_players=2, seed=42)
-    done, _ = env.step(env._available_moves(0)[0])
+    done = env.step(env._available_moves(0)[0])
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
     assert any(token in env.state.game_state["rendered_board"].upper() for token in ("FL", "BM"))
@@ -275,7 +275,7 @@ def test_turn_limit_draw_reveals_terminal_board():
 def test_invalid_forfeit_reveals_cached_terminal_board():
     env = _fresh()
     env.step("garbage")
-    done, _ = env.step("garbage")
+    done = env.step("garbage")
     assert done
     assert "?" not in env.game_state["rendered_board"]
 
@@ -288,7 +288,7 @@ def test_trade_of_the_last_movable_pieces_is_a_draw():
     _place(env, 0, "Flag", (0, 0), "flag-0")
     _place(env, 1, "Flag", (9, 9), "flag-1")
 
-    done, _ = env.step("D0 D1")
+    done = env.step("D0 D1")
 
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
@@ -303,7 +303,7 @@ def test_losing_your_last_movable_piece_loses_while_the_opponent_can_move():
     _place(env, 1, "Miner", (8, 8), "miner")
     _place(env, 0, "Flag", (0, 0), "flag-0")
 
-    done, _ = env.step("D0 D1")
+    done = env.step("D0 D1")
 
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
@@ -320,7 +320,7 @@ def test_blocked_opponent_loses_even_if_the_mover_cannot_move_again():
     _place(env, 1, "Bomb", (8, 9), "bomb-2")
     _place(env, 1, "Bomb", (9, 8), "bomb-3")
 
-    done, _ = env.step("D0 D1")
+    done = env.step("D0 D1")
 
     assert done
     assert env.state.rewards == {0: 1, 1: -1}

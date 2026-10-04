@@ -27,7 +27,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Snake-v1-mdp`). Pa
 - A snake dies if it moves off the board, into a cell occupied by any snake (its own body and snakes dying in the same
   round included), into the same cell as another head, or trades places with another head. A tail cell is free if its
   snake moves on this round without eating or dying. Dead snakes are removed from the board.
-- An invalid reply kills the snake at once; there is no retry.
+- An invalid reply gets a warning and the player replies again; a second invalid reply in a row kills the snake.
 - The game ends when at most one snake is alive or after `max_turns` rounds.
 
 ## Actions
@@ -55,7 +55,7 @@ better), and score (apples eaten) breaks ties; snakes that are still tied share 
 | All remaining snakes die in the same round | Ranked by score; equal scores share a rank |
 | `max_turns` rounds reached | Survivors ranked by score, above all dead snakes |
 | Every snake tied | Everyone `0` |
-| Invalid move | The snake dies in that round and is ranked like any other death |
+| Second invalid move in a row | The snake dies in that round and is ranked like any other death |
 
 With two players, the winner gets `+1` and the loser `-1`, or both get `0` when they are tied.
 

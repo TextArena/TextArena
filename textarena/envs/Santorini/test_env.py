@@ -89,7 +89,7 @@ def test_is_valid_build_rules():
 def test_valid_move_execution_and_rotation():
     env = _fresh(2)
     assert env.state.current_player_id == 0
-    done, _ = env.step("N1C2C3B2")  # Navy 1: C2 -> C3, build B2
+    done = env.step("N1C2C3B2")  # Navy 1: C2 -> C3, build B2
     assert not done
     assert env.board[2][1][1] is None       # source cleared
     assert env.board[2][2][1] == (0, 1)     # worker at C3
@@ -102,7 +102,7 @@ def test_scripted_win_by_reaching_level_three():
     # Stage a level-2 worker beside a level-3 cell; moving up wins.
     env.board[2][1] = (2, (0, 1))  # Navy 1 at C2, height 2
     env.board[2][2] = (3, None)    # C3 at height 3 (empty)
-    done, _ = env.step("N1C2C3B2")
+    done = env.step("N1C2C3B2")
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
     assert env.board[1][1][0] == 0  # winning ends before the submitted build
@@ -113,7 +113,7 @@ def test_winning_move_does_not_require_build_coordinate():
     env.board[2][1] = (2, (0, 1))
     env.board[2][2] = (3, None)
     assert "N1C2C3" in env._get_valid_moves(0).split(", ")
-    done, _ = env.step("N1C2C3")
+    done = env.step("N1C2C3")
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
 
@@ -122,7 +122,7 @@ def test_moving_from_level_three_does_not_win():
     env = _fresh(2)
     env.board[2][1] = (3, (0, 1))
     env.board[2][2] = (2, None)
-    done, _ = env.step("N1C2C3B2")
+    done = env.step("N1C2C3B2")
     assert not done
     assert env.state.current_player_id == 1
 
@@ -130,7 +130,7 @@ def test_moving_from_level_three_does_not_win():
 def test_invalid_build_is_atomic():
     env = _fresh(2)
     before = copy.deepcopy(env.board)
-    done, _ = env.step("N1C2C3E5")
+    done = env.step("N1C2C3E5")
     assert not done
     assert env.board == before
     assert env.state.current_player_id == 0
@@ -158,7 +158,7 @@ def test_three_player_blocked_player_is_eliminated_and_skipped():
             if env.board[row][col][1] is None:
                 env.board[row][col] = (4, None)
 
-    done, _ = env.step("N1A1B1A1")
+    done = env.step("N1A1B1A1")
     assert not done
     assert 1 in env.state.eliminated
     assert env.state.current_player_id == 2
@@ -232,7 +232,7 @@ def test_three_player_invalid_elimination_also_eliminates_a_blocked_next_player(
 
     done = False
     for _ in range(env.error_allowance + 1):
-        done, _ = env.step("garbage")
+        done = env.step("garbage")
 
     assert done
     assert env.state.rewards == {0: 1, 1: -1, 2: -1}
@@ -240,16 +240,25 @@ def test_three_player_invalid_elimination_also_eliminates_a_blocked_next_player(
 
 def test_invalid_format_increments_error():
     env = _fresh(2)
-    done, _ = env.step("I have no idea how to move")
+    done = env.step("I have no idea how to move")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0  # no rotation on invalid move
 
 
+def test_second_consecutive_invalid_move_loses_two_player_game():
+    env = _fresh(2)
+    assert "After 2 invalid moves in a row you lose." in env.prompt(0)
+    env.step("garbage")
+    done = env.step("garbage")
+    assert done
+    assert env.state.rewards == {0: -1, 1: 1}
+
+
 def test_moving_opponents_worker_is_invalid():
     env = _fresh(2)
     # Navy (P0) attempts to move a White worker.
-    done, _ = env.step("W1D3D2E2")
+    done = env.step("W1D3D2E2")
     assert not done
     assert env.state.error_count == 1
 
@@ -257,7 +266,7 @@ def test_moving_opponents_worker_is_invalid():
 def test_illegal_wellformed_move_is_rejected():
     env = _fresh(2)
     # Correct format but there is no Navy worker at A1.
-    done, _ = env.step("N1A1A2A3")
+    done = env.step("N1A1A2A3")
     assert not done
     assert env.state.error_count == 1
 
@@ -271,7 +280,7 @@ def test_random_play_reaches_a_winner():
         current = env.state.current_player_id
         valid_moves = env._get_valid_moves(current).split(", ")
         assert valid_moves, "current player should always have a move before game end"
-        done, _ = env.step(random.choice(valid_moves))
+        done = env.step(random.choice(valid_moves))
         turn_count += 1
     assert done
     assert 1 in env.state.rewards.values()

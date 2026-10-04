@@ -30,10 +30,6 @@ class TakEnv(ta.GameEnv):
     )
 
     @property
-    def terminal_render_keys(self):
-        return ["rendered_board"]
-
-    @property
     def action_format(self) -> str:
         player_id = self.state.current_player_id
         piece = f"F{1 - player_id}" if self.game_state["move_count"] < 2 else f"F{player_id}"

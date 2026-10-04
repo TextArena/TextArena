@@ -56,10 +56,6 @@ class TwoDollarEnv(ta.GameEnv):
         20, "The number of messages, counting both players, before the game ends without a deal. It also sets the "
             "`x_rounds` deadline to `max_rounds // 2`.", min=1,
     )
-    error_allowance = ta.Param(
-        3, "The number of consecutive invalid moves a player is warned about before the next one forfeits the game.",
-        min=0,
-    )
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

@@ -24,7 +24,7 @@ def _fresh():
 def _advance_to_first_talk_phase(env):
     for _ in range(4):
         for _ in range(4):
-            done, _ = env.step("Choose Y")
+            done = env.step("Choose Y")
             assert not done
     assert env.state.game_state["current_phase"] == "talk"
 
@@ -41,10 +41,10 @@ def _play_full_game(env, act_actions):
         if rnd in COMMUNICATION_ROUNDS:
             for _ in range(4):  # everyone passes -> talk phase ends
                 assert not done
-                done, _ = env.step("Pass")
+                done = env.step("Pass")
         for action in act_actions:
             assert not done
-            done, _ = env.step(action)
+            done = env.step(action)
     return done
 
 
@@ -66,7 +66,7 @@ def test_reset_requires_four_players():
 
 def test_act_phase_advances_to_next_chooser():
     env = _fresh()
-    done, _ = env.step("Choose X")
+    done = env.step("Choose X")
     assert not done
     assert env.state.game_state["player_choices"][0] == "X"
     assert env.state.current_player_id == 1  # advanced to next chooser
@@ -74,7 +74,7 @@ def test_act_phase_advances_to_next_chooser():
 
 def test_invalid_action_does_not_advance_turn():
     env = _fresh()
-    done, _ = env.step("this is not a valid choice")
+    done = env.step("this is not a valid choice")
     assert not done
     assert env.state.current_player_id == 0
     assert env.state.error_count == 1
@@ -84,11 +84,11 @@ def test_talk_phase_accepts_bare_broadcast_and_whisper_commands():
     env = _fresh()
     _advance_to_first_talk_phase(env)
 
-    done, _ = env.step("Broadcast: let's coordinate")
+    done = env.step("Broadcast: let's coordinate")
     assert not done
     assert env.state.game_state["talk_messages"][-1]["type"] == "broadcast"
 
-    done, _ = env.step("Whisper 2: I will choose Y")
+    done = env.step("Whisper 2: I will choose Y")
     assert not done
     whisper = env.state.game_state["talk_messages"][-1]
     assert whisper["type"] == "whisper"
@@ -98,7 +98,7 @@ def test_talk_phase_accepts_bare_broadcast_and_whisper_commands():
 def test_talk_phase_does_not_parse_incidental_prose_as_command():
     env = _fresh()
     _advance_to_first_talk_phase(env)
-    done, _ = env.step("I may broadcast a plan later")
+    done = env.step("I may broadcast a plan later")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -202,7 +202,7 @@ def test_broadcasts_and_whispers_cannot_impersonate_the_game(label):
 def test_label_only_broadcast_is_invalid():
     env = _fresh()
     _advance_to_first_talk_phase(env)
-    done, _ = env.step("Broadcast: [GA[GAME]ME]")
+    done = env.step("Broadcast: [GA[GAME]ME]")
     assert not done and env.state.error_count == 1
 
 
@@ -234,7 +234,7 @@ def test_whisper_target_must_be_another_existing_player(action):
     env = _fresh()
     _advance_to_first_talk_phase(env)
     before = list(env.state.game_state["talk_messages"])
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["talk_messages"] == before
@@ -251,7 +251,7 @@ DECISIONS_IN_ALL_DEFAULT_GAME = 10 * 4 + 3 * 4
 def _step_collecting(env, action):
     """Step and return (done, messages addressed to each player by this step)."""
     start = len(env.state.events)
-    done, _ = env.step(action)
+    done = env.step(action)
     seen = {pid: [m for _, m, _, to in env.state.events[start:] if to in (-1, pid)] for pid in range(4)}
     return done, seen
 
@@ -323,19 +323,19 @@ def test_forced_choice_that_completes_round_ten_ends_the_game():
     done = False
     for _ in range(env.error_allowance + 1):
         assert not done
-        done, _ = env.step("garbage")
+        done = env.step("garbage")
     assert done
     assert env.state.game_state["round_history"][-1]["choices"][3] == "Y"
     assert env.state.rewards == {0: 1, 1: 1, 2: 1, 3: -1}
 
 
-@pytest.mark.parametrize("error_allowance", [0, 3])
-def test_all_garbage_game_terminates_within_its_bound(error_allowance):
-    env = WinAsMuchAsYouCanEnv(error_allowance=error_allowance)
+def test_all_garbage_game_terminates_within_its_bound():
+    env = WinAsMuchAsYouCanEnv()
     env.reset(num_players=4, seed=0)
-    bound = DECISIONS_IN_ALL_DEFAULT_GAME * (error_allowance + 1)
+    bound = DECISIONS_IN_ALL_DEFAULT_GAME * 2
+    assert bound == 104
     for step in range(1, bound + 1):
-        done, _ = env.step("garbage")
+        done = env.step("garbage")
         if done:
             break
     assert done and step == bound
@@ -371,7 +371,7 @@ def test_random_play_always_terminates():
         env = WinAsMuchAsYouCanEnv()
         env.reset(num_players=4, seed=seed)
         for _ in range(bound):
-            done, _ = env.step(rng.choice(pool))
+            done = env.step(rng.choice(pool))
             if done:
                 break
         assert done, seed

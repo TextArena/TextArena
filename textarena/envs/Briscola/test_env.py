@@ -1,4 +1,4 @@
-"""Deterministic game-logic tests for Briscola-v1 (2-player Italian trick game)."""
+"""Deterministic game-logic tests for Briscola-v1 (Italian trick game for 2-4 players; 4 play as two teams)."""
 import copy
 
 from textarena.envs.Briscola.env import BriscolaEnv
@@ -32,14 +32,14 @@ def test_playing_card_removes_it_from_hand():
 
 def test_invalid_format_increments_error_count():
     env = _fresh()
-    done, _ = env.step("play a card")
+    done = env.step("play a card")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_out_of_range_card_index_increments_error_count():
     env = _fresh()
-    done, _ = env.step("play 9")  # only 3 cards in hand
+    done = env.step("play 9")  # only 3 cards in hand
     assert not done
     assert env.state.error_count == 1
 
@@ -49,7 +49,7 @@ def test_full_game_completes_with_winner():
     done = False
     steps = 0
     while not done and steps < 200:
-        done, _ = env.step("play 1")
+        done = env.step("play 1")
         steps += 1
     assert done
     gs = env.state.game_state
@@ -121,29 +121,29 @@ def test_tied_final_points_are_a_draw():
 
 
 def test_dealing_skips_eliminated_players():
-    env = _fresh(num_players=4)
+    env = _fresh(num_players=3)
     gs = env.state.game_state
     env.eliminate(1)
     eliminated_hand = copy.deepcopy(gs["players"][1]["hand"])
-    for pid in (0, 2, 3):
+    for pid in (0, 2):
         gs["players"][pid]["hand"] = []
     gs["deck"] = env.deck[:4]
     gs["trick_leader"] = 0
     env._deal_new_cards()
     assert gs["players"][1]["hand"] == eliminated_hand
-    assert all(len(gs["players"][pid]["hand"]) >= 1 for pid in (0, 2, 3))
+    assert all(len(gs["players"][pid]["hand"]) >= 1 for pid in (0, 2))
 
 
 def test_elimination_removes_forfeited_cards_without_forcing_more_eliminations():
-    env = _fresh(num_players=4)
+    env = _fresh(num_players=3)
     gs = env.state.game_state
     env.step("bad")
-    done, _ = env.step("still bad")
+    done = env.step("still bad")
     assert not done
     assert env.state.eliminated == [0]
 
     for _ in range(200):
-        done, _ = env.step("play 1")
+        done = env.step("play 1")
         if done:
             break
 
@@ -159,6 +159,71 @@ def test_elimination_removes_forfeited_cards_without_forcing_more_eliminations()
     assert played_cards + len(gs["removed_cards"]) == 40
     removed_points = sum(card["points"] for card in gs["removed_cards"])
     assert sum(gs["points_won"].values()) + removed_points == 120
+
+
+def test_four_player_prompts_name_each_partner():
+    env = _fresh(num_players=4)
+    prompts = {to_id: message for _, message, _, to_id in env.state.events[:4]}
+    for pid, partner in ((0, 2), (1, 3), (2, 0), (3, 1)):
+        assert f"You play in a partnership with Player {partner}: Players 0 and 2 play against Players 1 and 3" in prompts[pid]
+        assert "the team with more points wins; 60-60 is a draw" in prompts[pid]
+    for num_players in (2, 3):
+        assert "partnership" not in _fresh(num_players=num_players).state.events[0][1]
+
+
+def test_four_player_game_rewards_both_partners_with_the_team_result():
+    env = _fresh(num_players=4)
+    done = False
+    for _ in range(200):
+        done = env.step("play 1")
+        if done:
+            break
+    assert done
+    points = env.state.game_state["points_won"]
+    team_02, team_13 = points[0] + points[2], points[1] + points[3]
+    assert team_02 + team_13 == 120
+    assert env.state.rewards[0] == env.state.rewards[2]
+    assert env.state.rewards[1] == env.state.rewards[3]
+    if team_02 == team_13:
+        assert env.state.rewards == {0: 0, 1: 0, 2: 0, 3: 0}
+    else:
+        assert env.state.rewards[0] == (1 if team_02 > team_13 else -1)
+        assert env.state.rewards[1] == -env.state.rewards[0]
+
+
+def test_four_player_winner_is_decided_by_combined_points():
+    env = _fresh(num_players=4)
+    gs = env.state.game_state
+    gs["points_won"] = {0: 50, 1: 20, 2: 5, 3: 45}  # Player 0 scored most, but 55 < 65
+    outcome = env._end_game()
+    assert outcome.rewards == {0: -1, 1: 1, 2: -1, 3: 1}
+    assert "Players 1 and 3: 65 points (Player 1 20 + Player 3 45)" in outcome.reason
+
+    gs["points_won"] = {0: 60, 1: 0, 2: 0, 3: 60}
+    assert env._end_game().rewards == {0: 0, 1: 0, 2: 0, 3: 0}
+
+
+def test_four_player_invalid_limit_forfeits_for_the_team():
+    env = _fresh(num_players=4)
+    env.step("bad")
+    done = env.step("still bad")
+    assert done
+    assert env.state.rewards == {0: -1, 1: 1, 2: -1, 3: 1}
+    assert "Players 0 and 2 forfeit" in env.state.game_info[0]["reason"]
+
+
+def test_four_player_render_marks_the_partner_and_team_scores():
+    env = _fresh(num_players=4)
+    gs = env.state.game_state
+    env.step("play 1")
+    env.step("play 1")
+    board = env.render(2)
+    assert "Player 0 (your partner):" in board and "Player 1 (your partner)" not in board
+    gs["points_won"] = {0: 10, 1: 4, 2: 3, 3: 0}
+    board = env.render(2)
+    assert "Your team (Players 0 and 2, your partner is Player 0): 13 pts | Opponents (Players 1 and 3): 4 pts" in board
+    assert "Team of Players 0 and 2: 13 points" in env.get_board_str()
+    assert "your partner" not in _fresh().render(0)
 
 
 def test_huge_card_index_is_invalid_and_atomic():

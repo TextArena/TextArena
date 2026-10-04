@@ -67,13 +67,14 @@ command. Lines such as `Proposed changes look good`, `Propose that we keep talki
 conversation, and so are the words "accept" and "reject" inside a sentence. A `Propose` line whose remainder is empty
 or starts with a number is a proposal attempt, and it must be well-formed. A message is invalid if it has more than
 one decision or any text after the decision. A proposal is invalid if it has the wrong number of discounts, a
-discount other than 0/15/20/30, or any other malformed list, such as `Propose 15, 20, 15`.
+discount other than 0/15/20/30, or any other malformed list, such as `Propose 15, 20, 15`. The first invalid message
+gets a warning; a second one in a row forfeits the game.
 
 ## Observations
 
-Each player first receives their role, their own target with the attainable range it sits in, their style
-instructions, the forecast table for every product at every discount level, the product order, the action format, and
-the round limit. The forecast table shows units with a 95% interval, plus sales for the Brand or profit for the
+Each player first receives their role, their own target with the attainable range it sits in, how they are scored,
+their style instructions, the forecast table for every product at every discount level, the product order, the action
+format, and the round limit. The forecast table shows units with a 95% interval, plus sales for the Brand or profit for the
 Vendor. Neither player is shown the other's target.
 
 Before every move, the acting player sees the round counter (`ROUND 3/20`), the standing proposal, the last three
@@ -87,20 +88,22 @@ players see the simulated units, sales, and profit per product, the totals, and 
 
 ## Rewards
 
+This is a mixed-motive game: each side scores `1` if the final deal meets its own target and `0` otherwise, so a deal
+that meets both targets is better for both sides than no deal.
+
 | Outcome | Reward |
 | --- | --- |
-| Deal meeting both objectives | Both `0` |
-| Deal meeting only the Brand's target | Brand `+1`, Vendor `-1` |
-| Deal meeting only the Vendor's target | Vendor `+1`, Brand `-1` |
+| Deal meeting both objectives | Both `1` |
+| Deal meeting only the Brand's target | Brand `1`, Vendor `0` |
+| Deal meeting only the Vendor's target | Vendor `1`, Brand `0` |
 | Deal meeting neither objective, or no deal after `max_rounds` rounds | Both `0` |
-| Fourth consecutive invalid move (with the default `error_allowance=3`) | Offender `-1`, opponent `+1` |
+| Second consecutive invalid move | Offender `0`, opponent `1` |
 
 ## Parameters
 
 <!-- BEGIN GENERATED: parameters -->
 - `num_products` (default `5`): The number of products to negotiate over, capped at the 10 available. Accepts an integer of at least 1.
 - `max_rounds` (default `20`): The number of messages, counting both players, before the game ends without a deal. Accepts an integer of at least 1.
-- `error_allowance` (default `3`): The number of consecutive invalid moves a player is warned about before the next one forfeits the game. Accepts an integer of at least 0.
 - `brand_target_fraction` (default `0.5`): Where the Brand's target sits between the lowest (`0`) and highest (`1`) total sales the drawn products can reach. Accepts a number from 0 to 1.
 - `vendor_target_fraction` (default `0.5`): Where the Vendor's target sits between the lowest (`0`) and highest (`1`) total profit the drawn products can reach. Accepts a number from 0 to 1.
 - `num_simulations` (default `1000`): The number of Monte Carlo draws used to score a deal. Accepts an integer of at least 1.
@@ -117,6 +120,3 @@ players see the simulated units, sales, and profit per product, the totals, and 
 - In the bundled data, every product earns its highest profit at 0% and its lowest at 30%, and sells the most at 30%.
   Each product sells the least at 0%, except the luxury watch, which sells slightly less at 15% ($23,800) than at 0%
   ($24,000).
-- `brand_target_percentage` and `vendor_baseline_multiplier` were replaced by `brand_target_fraction` and
-  `vendor_target_fraction`. The old Vendor target, more than 1.2 times the all-0% profit, was unreachable with the
-  bundled data.

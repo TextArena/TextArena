@@ -20,7 +20,8 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `RetroSpaceDuel-v1-
 - The arena (15×15 by default) is ringed by a boundary (`#`). Player 0's ship (`0`) starts at `(1, 1)` and Player
   1's ship (`1`) in the opposite corner. Asteroids (`A`), debris (`D`), nebulas (`~`), mines (`M`) and power-ups
   (`+`) are scattered at random, never on or next to a spawn.
-- Players alternate turns, Player 0 first. Each turn is either a move or a shot.
+- The player who moves first is drawn at random at reset and named in both prompts. Players then alternate turns,
+  and because `max_turns` is even, both have had the same number of turns when the limit is reached. Each turn is either a move or a shot.
 - **Moving:** one cell in any of the 8 directions, or up to two cells after a speed power-up (only one when the move
   starts inside a nebula). The boundary, asteroids, debris and the enemy ship block movement: a move stops in front
   of a blocked cell, and a move whose first cell is blocked is invalid. Entering a nebula, mine or power-up ends the
@@ -49,7 +50,7 @@ Positions are `(x, y)`, where `x` is the column and `y` the row, so `w` decrease
 
 ## Observations
 
-Each player first receives the rules and legend. Before every turn, the acting player sees the turn counter, the
+Each player first receives the rules, the legend and who moves first. Before every turn, the acting player sees the turn counter, the
 arena with row and column numbers, and each ship's position, health, shields, speed and weapon. Both players see
 every action and its effects (hits, ricochets, mines, power-ups).
 

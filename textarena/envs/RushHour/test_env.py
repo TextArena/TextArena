@@ -30,7 +30,7 @@ def _start_from(env, *vehicles):
 
 def _end_with_invalid_moves(env):
     env.step("garbage")
-    done, _ = env.step("garbage")
+    done = env.step("garbage")
     assert done
     return env.state.rewards[0]
 
@@ -40,9 +40,9 @@ def test_scripted_win_drives_red_car_out():
     # Place the red car one step from the exit with a clear path.
     x = _Vehicle("X", 2, 3, 2, True)
     env.state.game_state["vehicles"] = {"X": x}
-    done, _ = env.step("X+")  # slides X to the exit edge
+    done = env.step("X+")  # slides X to the exit edge
     assert not done
-    done, _ = env.step("X+")  # crosses the board boundary
+    done = env.step("X+")  # crosses the board boundary
     assert done
     assert env.state.rewards == {0: 1.0}
 
@@ -57,7 +57,7 @@ def test_prompt_explains_directions_and_limit_as_the_rules_apply_them():
         "A": _Vehicle("A", 0, 4, 2, False),
     }
     for action in ("A+", "X+", "A-", "X-"):
-        done, _ = env.step(action)
+        done = env.step(action)
         assert not done and env.state.error_count == 0
         if action == "A+":
             assert (env.game_state["vehicles"]["A"].row, env.game_state["vehicles"]["A"].col) == (1, 4)
@@ -68,7 +68,7 @@ def test_prompt_explains_directions_and_limit_as_the_rules_apply_them():
 
 def test_invalid_format_increments_error():
     env = _fresh()
-    done, _ = env.step("move the red car")
+    done = env.step("move the red car")
     assert not done
     assert env.state.error_count == 1
 
@@ -76,7 +76,7 @@ def test_invalid_format_increments_error():
 def test_unknown_car_rejected():
     env = _fresh()
     # 'Z' matches the action regex but is never a real vehicle id.
-    done, _ = env.step("Z+")
+    done = env.step("Z+")
     assert not done
     assert env.state.error_count == 1
 
@@ -86,7 +86,7 @@ def test_blocked_move_rejected():
     x = _Vehicle("X", 2, 0, 2, True)
     blocker = _Vehicle("A", 2, 2, 2, False)  # occupies (2,2), blocking X forward
     env.state.game_state["vehicles"] = {"X": x, "A": blocker}
-    done, _ = env.step("X+")
+    done = env.step("X+")
     assert not done
     assert env.state.error_count == 1
 
@@ -148,7 +148,7 @@ def test_generated_solution_can_be_executed_for_win():
     assert solution
     done = False
     for action in solution:
-        done, _ = env.step(action)
+        done = env.step(action)
     assert done
     assert env.state.rewards == {0: 1.0}
 
@@ -170,7 +170,7 @@ def test_generation_is_solvable_by_construction_without_search(monkeypatch):
 def test_exact_parser_rejects_malformed_actions_atomically(action):
     env = _fresh()
     before = _positions(env)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert env.state.turn == 0
@@ -180,7 +180,7 @@ def test_exact_parser_rejects_malformed_actions_atomically(action):
 def test_turn_limit_returns_partial_reward():
     env = _fresh(max_turns=1)
     _start_from(env, _Vehicle("X", 2, 0, 2, True))  # 5 moves from a solution
-    done, _ = env.step("X+")  # 4 moves left
+    done = env.step("X+")  # 4 moves left
     assert done
     assert env.state.rewards == {0: pytest.approx(1 / 5)}
     assert "limit" in env.state.game_info[0]["reason"].lower()
@@ -192,7 +192,7 @@ def test_immediate_invalid_policy_scores_zero_on_registered_configs(env_id, seed
     env = ta.make(env_id)
     env.reset(num_players=1, seed=seed)
     for _ in range(5):
-        done, _ = env.step("@@@ not a move @@@")
+        done = env.step("@@@ not a move @@@")
         if done:
             break
     assert done
@@ -211,7 +211,7 @@ def test_partial_progress_counts_moves_cut_from_the_optimal_solution():
     solution = _solution(env)
     assert len(solution) >= 4
     for action in solution[:3]:
-        done, _ = env.step(action)
+        done = env.step(action)
         assert not done
     assert _end_with_invalid_moves(env) == pytest.approx(3 / len(solution))
 
@@ -220,7 +220,7 @@ def test_moving_back_and_forth_or_away_from_the_exit_earns_nothing():
     env = _fresh()
     _start_from(env, _Vehicle("X", 2, 2, 2, True), _Vehicle("A", 0, 0, 2, False))  # 3 moves from a solution
     for action in ("A+", "A-", "X+", "X-", "X-", "A+"):  # ends with X one square further from the exit
-        done, _ = env.step(action)
+        done = env.step(action)
         assert not done
     assert _end_with_invalid_moves(env) == 0
 
@@ -260,7 +260,7 @@ def test_snapshot_restore_recovers_vehicle_objects_and_render():
 def test_terminal_render_shows_red_car_crossing_exit():
     env = _fresh()
     env.game_state["vehicles"] = {"X": _Vehicle("X", 2, 4, 2, True)}
-    done, _ = env.step("X+")
+    done = env.step("X+")
     assert done
     terminal_board = env.render(0)
     assert "X" in terminal_board and ">" in terminal_board

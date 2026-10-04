@@ -22,7 +22,7 @@ def test_completing_a_line_loses():
     # P0 is forced to build the top row (0,1,2) and thus loses to P1.
     done = False
     for a in ["0", "3", "1", "4", "2"]:
-        done, _ = env.step(a)
+        done = env.step(a)
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -34,14 +34,14 @@ def test_full_board_without_line_is_draw():
     seq = ["0", "1", "2", "3", "5", "4", "6", "8", "7"]
     done = False
     for a in seq:
-        done, _ = env.step(a)
+        done = env.step(a)
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
 
 
 def test_invalid_format_increments_error():
     env = _fresh()
-    done, _ = env.step("place at four")
+    done = env.step("place at four")
     assert not done
     assert env.state.error_count == 1
 
@@ -61,7 +61,7 @@ def test_format_error_describes_expected_action():
 def test_occupied_cell_rejected():
     env = _fresh()
     env.step("0")               # P0 -> O at cell 0
-    done, _ = env.step("0")     # P1 tries the same cell
+    done = env.step("0")     # P1 tries the same cell
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 1
@@ -69,7 +69,7 @@ def test_occupied_cell_rejected():
 
 def test_out_of_range_cell_rejected():
     env = _fresh()
-    done, _ = env.step("99")
+    done = env.step("99")
     assert not done
     assert env.state.error_count == 1
 
@@ -78,7 +78,7 @@ def test_player_one_can_lose_by_completing_a_line():
     env = _fresh()
 
     for action in ("3", "0", "4", "1", "8", "2"):
-        done, _ = env.step(action)
+        done = env.step(action)
 
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
@@ -88,7 +88,7 @@ def test_anti_diagonal_loss_branch():
     env = _fresh()
 
     for action in ("2", "0", "4", "1", "6"):
-        done, _ = env.step(action)
+        done = env.step(action)
 
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
@@ -98,7 +98,7 @@ def test_column_loss_branch():
     env = _fresh()
 
     for action in ("0", "1", "3", "2", "6"):
-        done, _ = env.step(action)
+        done = env.step(action)
 
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
@@ -109,7 +109,7 @@ def test_unbalanced_brackets_are_atomic_invalid_moves(action):
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
 
-    done, _ = env.step(action)
+    done = env.step(action)
 
     assert not done
     assert env.state.error_count == 1
@@ -131,7 +131,7 @@ def test_huge_cell_is_rejected_without_integer_conversion(monkeypatch):
 
     monkeypatch.setattr(reverse_module, "int", guarded_int, raising=False)
 
-    done, _ = env.step("9" * 100_000)
+    done = env.step("9" * 100_000)
 
     assert not done
     assert env.state.error_count == 1
@@ -141,7 +141,7 @@ def test_huge_cell_is_rejected_without_integer_conversion(monkeypatch):
 def test_terminal_action_is_counted_and_final_board_is_rendered():
     env = _fresh()
     for action in ("0", "3", "1", "4", "2"):
-        done, _ = env.step(action)
+        done = env.step(action)
 
     assert done
     assert env.state.turn == 5

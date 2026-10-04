@@ -20,7 +20,7 @@ def test_scripted_win_one_peg_left():
     board[1] = True
     board[2] = True
     env.state.game_state["board"] = board
-    done, _ = env.step("1 4")
+    done = env.step("1 4")
     assert done
     assert env.state.rewards == {0: 1.0}
     assert env.state.game_state["board"].count(True) == 1
@@ -29,30 +29,30 @@ def test_scripted_win_one_peg_left():
 def test_valid_move_decrements_peg_count():
     env = _fresh()  # 14 pegs, hole 1 empty
     assert env.state.game_state["board"].count(True) == 14
-    done, _ = env.step("4 1")  # 4 jumps over 2 into empty 1
+    done = env.step("4 1")  # 4 jumps over 2 into empty 1
     assert not done
     assert env.state.game_state["board"].count(True) == 13
 
 
 def test_invalid_format_increments_error():
     env = _fresh()
-    done, _ = env.step("jump 4 to 1")
+    done = env.step("jump 4 to 1")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_illegal_move_from_empty_hole_rejected():
     env = _fresh()  # hole 1 is empty
-    done, _ = env.step("1 4")  # source hole 1 has no peg
+    done = env.step("1 4")  # source hole 1 has no peg
     assert not done
     assert env.state.error_count == 1
 
 
 def test_two_consecutive_invalids_end_game():
     env = _fresh()
-    done, _ = env.step("nonsense")
+    done = env.step("nonsense")
     assert not done
-    done, _ = env.step("more nonsense")
+    done = env.step("more nonsense")
     assert done
     # No legal jumps were completed, so the opening has no completion credit.
     assert env.state.rewards == {0: 0.0}
@@ -73,7 +73,7 @@ def test_full_legal_solution_from_standard_opening():
         (10, 3), (1, 6), (14, 12), (6, 13), (12, 14), (15, 13),
     ]
     for turn, (source, target) in enumerate(solution, start=1):
-        done, _ = env.step(f"{source} {target}")
+        done = env.step(f"{source} {target}")
         assert done is (turn == len(solution))
     assert env.state.rewards == {0: 1.0}
     assert env.state.turn == 13
@@ -122,7 +122,7 @@ def test_bottom_row_jump_is_legal_and_bent_jump_is_not():
     board = [False] * 16
     board[11] = board[12] = True
     env.state.game_state["board"] = board
-    done, _ = env.step("11 13")
+    done = env.step("11 13")
     assert done and env.state.game_state["board"][13]
 
     env = _fresh()
@@ -130,7 +130,7 @@ def test_bottom_row_jump_is_legal_and_bent_jump_is_not():
     board[7] = board[11] = True
     env.state.game_state["board"] = board
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step("7 13")
+    done = env.step("7 13")
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -139,14 +139,14 @@ def test_bottom_row_jump_is_legal_and_bent_jump_is_not():
 def test_parser_rejects_noncanonical_actions_atomically(action):
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
 
 def test_comma_separated_holes_are_valid():
     env = _fresh()
-    done, _ = env.step("4, 1")
+    done = env.step("4, 1")
     assert not done
     assert env.state.game_state["board"].count(True) == 13
 
@@ -157,7 +157,7 @@ def test_prompt_example_is_a_legal_opening_jump(initial_empty):
     _, observation = env.get_observation()
     prompt = observation[0][1]
     example = re.search(r"e\.g\. '(\d+ \d+)'", prompt).group(1)
-    done, _ = env.step(example)
+    done = env.step(example)
     assert not done and env.state.error_count == 0
     assert env.state.game_state["board"].count(True) == 13
 
@@ -198,7 +198,7 @@ def test_last_available_jump_terminates_with_partial_reward():
     board = [False] * 16
     board[1] = board[2] = board[15] = True
     env.state.game_state["board"] = board
-    done, _ = env.step("1 4")
+    done = env.step("1 4")
     assert done
     assert not env._has_move()
     assert env.state.turn == 1

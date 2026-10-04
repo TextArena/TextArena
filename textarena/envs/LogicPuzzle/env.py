@@ -347,15 +347,6 @@ class LogicPuzzleEnv(ta.GameEnv):
                     return True
         return False
 
-    def _is_repeated_mark(self, row: str, col: str, mark: str) -> bool:
-        """ Check if the specified item in the game board is already marked with the same value """
-        for grid_name, grid_data in self.game_board.items():
-            if row in grid_data:
-                if col in grid_data[row]:
-                    if grid_data[row][col] == mark:
-                        return True
-        return False
-
     def _get_mark(self, row: str, col: str) -> Optional[str]:
         """Return the current mark for a valid row/column pair."""
         for grid_data in self.game_board.values():

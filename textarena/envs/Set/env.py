@@ -132,28 +132,21 @@ class SetEnv(ta.GameEnv):
 
             self._ensure_set_available()
             self._observe_state()
-            if not _has_set(board) and not self.game_state["deck"]:
-                return self.outcome(
-                    {0: self.game_state["score"]},
-                    reason="No sets remain and the deck is empty.",
-                )
         else:
             self.broadcast("That is not a Set. No point for you.", ta.ObservationType.GAME_MESSAGE)
         if not _has_set(board) and not self.game_state["deck"]:
-            return self.outcome(
-                {0: self.game_state["score"]},
-                reason="No sets remain and the deck is empty.",
-            )
+            return self.outcome({0: self._reward()}, reason="No sets remain and the deck is empty.")
         return None
 
     def on_turn_limit(self) -> ta.Outcome:
-        return self.outcome({0: self.game_state["score"]}, reason="You've taken 20 turns. The game is over.")
+        return self.outcome({0: self._reward()}, reason="You've taken 20 turns. The game is over.")
 
     def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
-        return self.outcome(
-            {0: self.game_state["score"]},
-            reason=f"Invalid Move: {reason}",
-        )
+        return self.outcome({0: self._reward()}, reason=f"Invalid Move: {reason}")
+
+    def _reward(self) -> float:
+        """Sets found as a share of the most a game allows: one per turn."""
+        return self.game_state["score"] / self.max_turns
 
     def _observe_state(self):
         gs = self.game_state

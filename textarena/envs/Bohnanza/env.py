@@ -146,7 +146,6 @@ class BohnanzaEnv(ta.GameEnv):
         3000, "The step budget; when it is used up, all fields are harvested and the game is scored. A full game takes "
               "about 200 steps without trading and up to about 1,500 with lively trading.", min=1, optional=True,
     )
-    error_allowance = ta.Param(3, "The number of consecutive invalid moves allowed before the offender forfeits.", min=0)
 
     # ------------------------------------------------------------------ hooks
     def setup(self) -> Dict[str, Any]:

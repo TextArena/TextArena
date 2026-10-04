@@ -25,7 +25,6 @@ from textarena.envs.Bohnanza.renderer import harvest_coins, render_board
 # ----------------------------------------------------------------- helpers
 def make_env(num_players=3, seed=42, **kwargs):
     kwargs.setdefault("max_turns", 200)
-    kwargs.setdefault("error_allowance", 3)
     env = BohnanzaEnv(**kwargs)
     env.reset(num_players=num_players, seed=seed)
     return env
@@ -88,9 +87,9 @@ def finish_planting(env):
         bean = gs(env)["mandatory_plants"][pid][0]
         field = fitting_field(player, bean)
         if field is None:
-            done, _ = env.step(f"harvest {harvestable_field(player)}")
+            done = env.step(f"harvest {harvestable_field(player)}")
             continue
-        done, _ = env.step(f"plant {bean} {field}")
+        done = env.step(f"plant {bean} {field}")
     return done
 
 
@@ -100,27 +99,37 @@ def play_turn(env):
     return finish_planting(env)
 
 
+def simple_action(env):
+    """A valid, trade-free action: plant one card, end trading at once, plant the face-up cards."""
+    g = gs(env)
+    pid = env.state.current_player_id
+    player = g["players"][pid]
+    phase = g["current_phase"]
+    if phase == "plant":
+        if g["planted_from_hand"] >= 1 or not player["hand"]:
+            return "pass"
+        field = fitting_field(player, player["hand"][0])
+        return f"plant {field}" if field else f"harvest {harvestable_field(player)}"
+    if phase == "draw_trade":
+        return "end trading" if pid == g["active_player"] else "pass"
+    bean = g["mandatory_plants"][pid][0]
+    field = fitting_field(player, bean)
+    return f"plant {bean} {field}" if field else f"harvest {harvestable_field(player)}"
+
+
+def reject(env, action):
+    """Step an action that must be rejected; the error count starts clean so a probe never forfeits."""
+    env.state.error_count = 0
+    done = env.step(action)
+    assert not done and env.state.error_count == 1, action
+
+
 def play_simple_game(env, step_cap=5000):
-    """Valid, trade-free play: plant one card, end trading at once, plant the face-up cards."""
+    """Valid, trade-free play until the game ends or `step_cap` steps."""
     done, steps = False, 0
     while not done and steps < step_cap:
-        g = gs(env)
-        pid = env.state.current_player_id
-        player = g["players"][pid]
-        phase = g["current_phase"]
-        if phase == "plant":
-            if g["planted_from_hand"] >= 1 or not player["hand"]:
-                action = "pass"
-            else:
-                field = fitting_field(player, player["hand"][0])
-                action = f"plant {field}" if field else f"harvest {harvestable_field(player)}"
-        elif phase == "draw_trade":
-            action = "end trading" if pid == g["active_player"] else "pass"
-        else:
-            bean = g["mandatory_plants"][pid][0]
-            field = fitting_field(player, bean)
-            action = f"plant {bean} {field}" if field else f"harvest {harvestable_field(player)}"
-        done, _ = env.step(action)
+        action = simple_action(env)
+        done = env.step(action)
         assert env.state.error_count == 0, (action, env.state.events[-2][1])
         steps += 1
     return done, steps
@@ -134,21 +143,21 @@ def events_for(env, player_id, start=0):
 
 def test_init_defaults_and_custom_values():
     env = BohnanzaEnv()
-    assert (env.max_turns, env.error_allowance, env.deck_cycles, env.max_trade_rounds) == (3000, 3, 3, None)
-    env = BohnanzaEnv(max_turns=100, error_allowance=5, deck_cycles=1, max_trade_rounds=2)
-    assert (env.max_turns, env.error_allowance, env.deck_cycles, env.max_trade_rounds) == (100, 5, 1, 2)
+    assert (env.max_turns, env.error_allowance, env.deck_cycles, env.max_trade_rounds) == (3000, 1, 3, None)
+    env = BohnanzaEnv(max_turns=100, deck_cycles=1, max_trade_rounds=2)
+    assert (env.max_turns, env.deck_cycles, env.max_trade_rounds) == (100, 1, 2)
     assert len(env.BEAN_TYPES) == 8
     assert "Blue" in env.BEAN_TYPES and "Garden" in env.BEAN_TYPES
 
 
 def test_reset_valid_player_counts():
-    env = BohnanzaEnv(max_turns=200, error_allowance=3)
+    env = BohnanzaEnv(max_turns=200)
     for num_players in (3, 4, 5):
         env.reset(num_players=num_players, seed=42)
         g = gs(env)
         assert env.state.num_players == num_players
         assert env.state.max_turns == 200
-        assert env.state.error_allowance == 3
+        assert env.state.error_allowance == 1
         assert len(g["players"]) == num_players
         assert g["current_phase"] == "plant"
         assert g["deck_cycles_completed"] == 0
@@ -261,10 +270,8 @@ def test_plant_from_hand_valid():
 def test_plant_from_hand_invalid():
     env = make_env()
     hand = list(gs(env)["players"][0]["hand"])
-    env.step("plant 0")
-    assert env.state.error_count == 1
-    env.step("plant 10")
-    assert env.state.error_count == 2
+    reject(env, "plant 0")
+    reject(env, "plant 10")
     assert gs(env)["players"][0]["hand"] == hand
     assert gs(env)["players"][0]["fields"] == [None, None, None]
 
@@ -307,10 +314,8 @@ def test_bean_that_fits_no_field_requires_a_harvest_first():
     player = gs(env)["players"][0]
     player["hand"] = ["Green", "Soy", "Soy", "Soy", "Soy"]
     player["fields"] = [("Blue", 2), ("Red", 1), ("Soy", 1)]
-    env.step("plant 1")
-    assert env.state.error_count == 1
-    env.step("harvest 2")  # bean protection: single Red while Blue has two
-    assert env.state.error_count == 2
+    reject(env, "plant 1")
+    reject(env, "harvest 2")  # bean protection: single Red while Blue has two
     env.step("harvest 1")
     assert env.state.error_count == 0 and player["fields"][0] is None
     env.step("plant 1")
@@ -370,11 +375,9 @@ def test_trade_validation():
     to_trading(env)
     gs(env)["players"][0]["hand"] = ["Blue"]
     gs(env)["face_up_cards"] = ["Red", "Soy"]
-    env.step("trade Garden for Blue")
-    assert env.state.error_count == 1
+    reject(env, "trade Garden for Blue")
     assert gs(env)["active_trades"] == {}
-    env.step("trade 2 Red for Blue")  # only one Red available
-    assert env.state.error_count == 2
+    reject(env, "trade 2 Red for Blue")  # only one Red available
     assert gs(env)["active_trades"] == {}
 
 
@@ -412,12 +415,9 @@ def test_asking_for_a_gift():
 def test_invalid_trades():
     env = make_env(num_players=4)
     to_trading(env)
-    for action in ("trade for Blue", "trade Blue for", "trade Nothing for Nothing"):
-        env.step(action)
-        assert env.state.error_count >= 1
+    for action in ("trade for Blue", "trade Blue for", "trade Nothing for Nothing", "trade 0 Blue for Red"):
+        reject(env, action)
         assert gs(env)["active_trades"] == {}
-    env.step("trade 0 Blue for Red")
-    assert gs(env)["active_trades"] == {}
 
 
 def test_face_up_cards_trading():
@@ -612,11 +612,9 @@ def test_mandatory_plant_validation():
     g["players"][0]["fields"][0] = ("Blue", 2)
     g["mandatory_plants"][0] = ["Red"]
     g["current_phase"] = "plant_mandatory"
-    env.step("plant Red 1")
-    assert env.state.error_count == 1
+    reject(env, "plant Red 1")
     assert g["players"][0]["fields"][0] == ("Blue", 2)
-    env.step("plant Green 2")  # not one of the set-aside beans
-    assert env.state.error_count == 2
+    reject(env, "plant Green 2")  # not one of the set-aside beans
     assert g["mandatory_plants"][0] == ["Red"]
 
 
@@ -775,10 +773,8 @@ def test_draw_cards():
 
 def test_draw_action_is_not_needed():
     env = make_env()
-    env.step("draw")
-    assert env.state.error_count == 1
-    env.step("Draw")
-    assert env.state.error_count == 2
+    reject(env, "draw")
+    reject(env, "Draw")
 
 
 def test_deck_reshuffling():
@@ -912,9 +908,9 @@ def test_run_out_while_turning_over_finishes_phases_two_and_three():
     env.step("trade nothing for Red")  # trading still happens
     env.step("pass")
     env.step("pass")
-    done, _ = env.step("end trading")
+    done = env.step("end trading")
     assert not done and g["current_phase"] == "plant_mandatory"
-    done, _ = env.step("plant Garden 2")
+    done = env.step("plant Garden 2")
     assert done
     assert g["players"][0]["hand"] == hand  # no phase 4 draw
     assert g["players"][0]["fields"][1] is None  # harvested at the end
@@ -1015,7 +1011,7 @@ def test_other_command_parsing():
 def test_invalid_action_formats(action):
     env = make_env()
     before = copy.deepcopy(gs(env))
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.error_count == 1
     assert gs(env) == before
@@ -1026,7 +1022,7 @@ def test_huge_numbers_are_rejected_without_crashing(action):
     env = make_env()
     if action.startswith(("trade", "accept")):
         to_trading(env)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
 
 
@@ -1035,16 +1031,16 @@ def test_huge_numbers_are_rejected_without_crashing(action):
 def test_invalid_move_handling():
     env = make_env()
     hand = list(gs(env)["players"][0]["hand"])
-    env.step("plant 0")
-    assert env.state.error_count == 1 and gs(env)["players"][0]["hand"] == hand
-    env.step("harvest 1")
-    assert env.state.error_count == 2 and gs(env)["players"][0]["fields"][0] is None
+    reject(env, "plant 0")
+    assert gs(env)["players"][0]["hand"] == hand
+    reject(env, "harvest 1")
+    assert gs(env)["players"][0]["fields"][0] is None
 
 
 def test_error_allowance():
     env = make_env()
-    env.step("invalid action")
-    assert env.state.error_count == 1
+    done = env.step("invalid action")
+    assert not done and env.state.error_count == 1
     env.step("plant 1")
     assert env.state.error_count == 0
 
@@ -1052,10 +1048,10 @@ def test_error_allowance():
 def test_out_of_bounds_field_numbers():
     env = make_env()
     hand = list(gs(env)["players"][0]["hand"])
-    env.step("plant 10")
-    assert env.state.error_count == 1 and gs(env)["players"][0]["hand"] == hand
-    env.step("harvest 5")
-    assert env.state.error_count == 2 and gs(env)["players"][0]["coins"] == 0
+    reject(env, "plant 10")
+    assert gs(env)["players"][0]["hand"] == hand
+    reject(env, "harvest 5")
+    assert gs(env)["players"][0]["coins"] == 0
 
 
 def test_empty_field_harvest():
@@ -1215,8 +1211,7 @@ def test_malformed_command_during_trading_is_invalid_not_table_talk():
     to_trading(env)
     start = len(env.state.events)
     for action in ("trade some beans please", "accept the offer", "pass for now"):
-        env.step(action)
-        assert env.state.error_count >= 1
+        reject(env, action)
     assert not events_for(env, 1, start)
     assert env.state.current_player_id == 0
 
@@ -1380,9 +1375,9 @@ def test_registered_variants(env_id, deck_cycles, max_trade_rounds):
 def test_exhausting_error_allowance_forfeits():
     env = make_env()
     done = False
-    for _ in range(env.error_allowance + 1):
+    for _ in range(2):
         assert not done
-        done, _ = env.step("not a valid action")
+        done = env.step("not a valid action")
     assert done
     rewards, info = env.close()
     assert rewards == {0: -1, 1: 0, 2: 0}
@@ -1394,7 +1389,7 @@ def test_turn_limit_scores_game():
     to_trading(env)
     done = False
     while not done:
-        done, _ = env.step("Let us keep talking about beans.")  # trading never ends on its own
+        done = env.step("Let us keep talking about beans.")  # trading never ends on its own
     assert env.state.turn == 30
     rewards, info = env.close()
     assert sorted(rewards.values()) == [-1, -1, 1]
@@ -1418,7 +1413,9 @@ def test_full_game_terminates_with_valid_play(num_players):
 
 
 def _random_action(env, rng):
-    """A random, mostly legal action for whoever has the move."""
+    """A random, mostly legal action for whoever has the move; a rejected action is followed by a valid one."""
+    if env.state.error_count:
+        return simple_action(env)
     g = gs(env)
     pid = env.state.current_player_id
     player = g["players"][pid]
@@ -1461,7 +1458,7 @@ def test_random_play_conserves_cards_keeps_hands_private_and_terminates(num_play
     while not done:
         before_events = len(env.state.events)
         before_state = copy.deepcopy(gs(env))
-        done, _ = env.step(_random_action(env, rng))
+        done = env.step(_random_action(env, rng))
         g = gs(env)
         assert total_cards(g) == DECK_SIZE
         if env.state.error_count:

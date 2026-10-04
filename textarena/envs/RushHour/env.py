@@ -48,7 +48,7 @@ class RushHourEnv(ta.GameEnv):
     mdp_includes_actions = False
 
     BOARD_SIZE = 6
-    MAX_ACTION_CHARS = 4096
+    max_action_chars = 4096
     MAX_SEARCH_STATES = 50000  # Bound malformed/custom layouts without cutting off searches on generated puzzles.
     ACTION_RE = re.compile(r"(?P<id>[A-Z])\s*(?P<dir>[+-])", re.I)
 
@@ -154,31 +154,6 @@ class RushHourEnv(ta.GameEnv):
                 return False
 
         return True
-
-    def _remove_overlapping_vehicles(self, vehicles: List[_Vehicle]) -> List[_Vehicle]:
-        """Remove vehicles that overlap or are out of bounds."""
-        grid = [[None] * self.BOARD_SIZE for _ in range(self.BOARD_SIZE)]
-        valid_vehicles = []
-
-        for vehicle in vehicles:
-            cells = vehicle.cells()
-            # Check if all cells are in bounds and free
-            valid = True
-            for r, c in cells:
-                if not (0 <= r < self.BOARD_SIZE and 0 <= c < self.BOARD_SIZE):
-                    valid = False
-                    break
-                if grid[r][c] is not None:
-                    valid = False
-                    break
-
-            if valid:
-                # Mark cells as occupied
-                for r, c in cells:
-                    grid[r][c] = vehicle.vid
-                valid_vehicles.append(vehicle)
-
-        return valid_vehicles
 
     def _scramble_puzzle(self, vehicles: List[_Vehicle], num_moves: int, rng) -> List[_Vehicle]:
         """Apply random moves to create puzzle. Ensures red car is not at exit."""
@@ -333,10 +308,6 @@ class RushHourEnv(ta.GameEnv):
         return "\n" + "\n".join(lines)
 
     def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
-        if len(move) > self.MAX_ACTION_CHARS:
-            return self.invalid(
-                f"Action is too long (maximum {self.MAX_ACTION_CHARS} characters)."
-            )
         action_text = move.strip()
         match = self.ACTION_RE.fullmatch(action_text)
         if not match:

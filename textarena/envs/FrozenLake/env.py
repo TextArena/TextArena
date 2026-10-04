@@ -34,8 +34,6 @@ class FrozenLakeEnv(ta.GameEnv):
             raise ValueError(
                 f"max_turns must be at least {2 * (self.size - 1)}, the length of the shortest path to the goal"
             )
-        self.cell_mapping = {i: (i // self.size, i % self.size) for i in range(self.size * self.size)}
-
         # Action mappings
         self.actions = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}
 
@@ -46,23 +44,23 @@ class FrozenLakeEnv(ta.GameEnv):
     def _generate_grid(self, randomize_start_goal: bool = False) -> Tuple[List[List[str]], Tuple[int, int], Tuple[int, int]]:
         """Generate an exact-hole grid around a guaranteed random safe path."""
         if randomize_start_goal:
-            self.player_pos = self.rng.choice([(0, 0), (0, self.size-1), (self.size-1, 0), (self.size-1, self.size-1)])  # Choose a random corner for the player start
-            self.goal_pos = (self.size - 1 - self.player_pos[0], self.size - 1 - self.player_pos[1])  # Set goal to be diagonally opposite
+            player_pos = self.rng.choice([(0, 0), (0, self.size-1), (self.size-1, 0), (self.size-1, self.size-1)])  # Choose a random corner for the player start
+            goal_pos = (self.size - 1 - player_pos[0], self.size - 1 - player_pos[1])  # Set goal to be diagonally opposite
         else:
             # Default positions (top-left start, bottom-right goal)
-            self.player_pos = (0, 0)
-            self.goal_pos = (self.size - 1, self.size - 1)
+            player_pos = (0, 0)
+            goal_pos = (self.size - 1, self.size - 1)
 
-        row_step = 1 if self.goal_pos[0] > self.player_pos[0] else -1
-        col_step = 1 if self.goal_pos[1] > self.player_pos[1] else -1
+        row_step = 1 if goal_pos[0] > player_pos[0] else -1
+        col_step = 1 if goal_pos[1] > player_pos[1] else -1
         steps = (
-            [(row_step, 0)] * abs(self.goal_pos[0] - self.player_pos[0])
-            + [(0, col_step)] * abs(self.goal_pos[1] - self.player_pos[1])
+            [(row_step, 0)] * abs(goal_pos[0] - player_pos[0])
+            + [(0, col_step)] * abs(goal_pos[1] - player_pos[1])
         )
         self.rng.shuffle(steps)
 
-        safe_path = {self.player_pos}
-        row, col = self.player_pos
+        safe_path = {player_pos}
+        row, col = player_pos
         for dr, dc in steps:
             row, col = row + dr, col + dc
             safe_path.add((row, col))
@@ -76,67 +74,8 @@ class FrozenLakeEnv(ta.GameEnv):
         grid = [[' ' for _ in range(self.size)] for _ in range(self.size)]
         for row, col in self.rng.sample(available_positions, self.num_holes):
             grid[row][col] = 'H'
-        grid[self.goal_pos[0]][self.goal_pos[1]] = 'G'
-        return grid, self.player_pos, self.goal_pos
-
-    def _has_valid_path(self, grid: List[List[str]], start: Tuple[int, int], goal: Tuple[int, int]) -> bool:
-        """Check if there's a valid path from start to goal using BFS."""
-        if grid[start[0]][start[1]] == 'H' or grid[goal[0]][goal[1]] == 'H': return False
-        queue = deque([start])
-        visited = {start}
-        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  # up, down, left, right
-
-        while queue:
-            r, c = queue.popleft()
-            if (r, c) == goal: return True
-            for dr, dc in directions:
-                nr, nc = r + dr, c + dc
-                if (0 <= nr < self.size and 0 <= nc < self.size and
-                        (nr, nc) not in visited and grid[nr][nc] != 'H'):
-                    visited.add((nr, nc))
-                    queue.append((nr, nc))
-        return False
-
-    def _create_fallback_grid(self, num_holes: int) -> List[List[str]]:
-        grid = [[' ' for _ in range(self.size)] for _ in range(self.size)]
-        # Create safe path between self.player_pos and self.goal_pos (not hardcoded positions)
-        safe_path = set()
-        # Simple L-shaped path that works for any corner-to-corner movement
-        # Go from player_pos to goal_pos via an L-shape
-        pr, pc = self.player_pos
-        gr, gc = self.goal_pos
-        # Path 1: Move horizontally first, then vertically
-        current_r = pr
-        # Add horizontal movement
-        if pc < gc:  # Move right
-            for c in range(pc, gc + 1): safe_path.add((current_r, c))
-        else:  # Move left
-            for c in range(gc, pc + 1): safe_path.add((current_r, c))
-
-        # Add vertical movement from the corner
-        if pr < gr:  # Move down
-            for r in range(pr, gr + 1): safe_path.add((r, gc))
-        else:  # Move up
-            for r in range(gr, pr + 1): safe_path.add((r, gc))
-
-        # Get positions NOT on safe path for holes
-        available_for_holes = []
-        for r in range(self.size):
-            for c in range(self.size):
-                if ((r, c) not in safe_path):
-                    available_for_holes.append((r, c))
-
-        # Place holes
-        holes_to_place = min(num_holes, len(available_for_holes))
-        if holes_to_place > 0:
-            hole_positions = self.rng.sample(available_for_holes, holes_to_place)
-            for r, c in hole_positions:
-                grid[r][c] = 'H'
-
-        # Mark goal position DYNAMICALLY (not hardcoded!)
-        grid[self.goal_pos[0]][self.goal_pos[1]] = 'G'
-
-        return grid
+        grid[goal_pos[0]][goal_pos[1]] = 'G'
+        return grid, player_pos, goal_pos
 
     def prompt(self, player_id: int) -> str:
         start = self.game_state["start_pos"]

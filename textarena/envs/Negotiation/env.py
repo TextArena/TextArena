@@ -54,10 +54,6 @@ class NegotiationEnv(ta.GameEnv):
         self.resource_names = ["Wheat", "Wood", "Sheep", "Brick", "Ore"]
         self.base_values = {"Wheat": 5, "Wood": 10, "Sheep": 15, "Brick": 25, "Ore": 40}
 
-    @property
-    def terminal_render_keys(self):
-        return ["player_resources", "player_values", "pending_offers"]
-
     def setup(self) -> Dict[str, Any]:
         self.state.max_turns = self.state.num_players * self.turn_multiple
         # Initialize each player's resources to random amounts and each player's private resource values

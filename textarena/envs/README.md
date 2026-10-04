@@ -23,14 +23,14 @@ done = False
 while not done:
     player_id, observation = env.get_observation()
     action = agents[player_id](observation)
-    done, step_info = env.step(action=action)
+    done = env.step(action=action)
 
 rewards, game_info = env.close()
 ```
 
-`get_observation()` returns the id of the player who must act next and the text they should see. `close()`
-returns the reward per player and per-player game info (role, final reason, turn count, whether the game
-ended because of their invalid moves).
+`get_observation()` returns the id of the player who must act next and the text they should see, `step()` returns
+whether the game is over, and `close()` returns the reward per player and per-player game info (role, final
+reason, turn count, whether the game ended because of their invalid moves).
 
 ## Actions
 
@@ -67,13 +67,16 @@ retired (`ta.make` names the replacement), so results are only comparable within
 ## Rules shared by every game
 
 - **Hidden information** is only ever sent to the players allowed to see it.
-- **Invalid moves** are never applied. The player is told why and may try again; each game allows a number
-  of consecutive invalid attempts (one by default) before escalating. By default the offender is then
-  eliminated: in a two-player game they lose (`-1`, opponent `+1`), in a multi-player game play continues
-  without them, and a single-player game ends with `-1`. Games can override this (for example, scoring the
-  progress made so far); their README says so.
-- **Rewards** are `+1` win, `-1` loss, `0` draw in competitive games, and usually a score between `0` and
-  `1` in single-player games. Each README has the exact table.
+- **Invalid moves** are never applied. The player is told why and may try again once; a second invalid move in a
+  row escalates, the same in every game. By default the offender is then eliminated: in a two-player game they
+  lose (`-1`, opponent `+1`), in a multi-player game play continues without them, and a single-player game ends
+  with `0`. Some games escalate differently (a forfeited turn, a default vote, or the progress made so far); their
+  README says so.
+- **Rewards** follow one scale per kind of game, and each README has the exact table:
+  - competitive games: `+1` win, `-1` loss, `0` draw (multi-player rankings spread between `-1` and `+1`);
+  - single-player games: a score from `0` (nothing achieved) to `1` (solved);
+  - cooperative and mixed-motive games (Hanabi, PublicGoodsGame, VendorNegotiation, UsedCarNegotiation): each
+    player's own score from `0` to `1`.
 - **Turn limits** (`max_turns`) end the game as a draw unless the game defines another result, such as
   comparing scores.
 - **Player counts**: `env.reset` raises `ValueError` for a player count the game does not support (each
@@ -84,7 +87,9 @@ retired (`ta.make` names the replacement), so results are only comparable within
   captures the parameters, seed, and actions, and `ta.replay(record)` rebuilds the game from it. Environments
   never touch Python's global random state.
 - **External models**: Debate, ScenarioPlanning (LLM juries), GuessWho, and TwentyQuestions (LLM game
-  masters) call OpenRouter and need `OPENROUTER_API_KEY` and `pip install "textarena[agents]"`. If the service
+  masters) call `qwen/qwen3.8-27b` through OpenRouter and need `OPENROUTER_API_KEY` and
+  `pip install "textarena[agents]"`. The model is part of these games' rules, so changing it is a version bump.
+  If the service
   fails, the action is not counted and the player is asked to retry; after five failures in a row `env.step`
   raises a `RuntimeError` instead of letting the episode stall. Records keep the models' answers, so replays
   never call them again.
@@ -110,9 +115,9 @@ retired (`ta.make` names the replacement), so results are only comparable within
 2. Register its ids in `textarena/envs/<Game>/__init__.py`; every game folder is picked up automatically:
 
    ```python
-   from textarena.envs.registration import register_with_versions
+   from textarena.envs.registration import register
 
-   register_with_versions(id="MyGame-v1", entry_point="textarena.envs.MyGame.env:MyGameEnv", max_turns=50)
+   register(id="MyGame-v1", entry_point="textarena.envs.MyGame.env:MyGameEnv", max_turns=50)
    ```
 
 3. Add `test_env.py` with tests of the game's rules. `tests/test_conformance.py` already checks every registered
@@ -205,7 +210,7 @@ retired (`ta.make` names the replacement), so results are only comparable within
 | [Simple Blind Auction](SimpleBlindAuction/README.md) | 2 | Two players chat openly and then submit one round of sealed bids on items that each of them values differently; the higher final net worth wins. | `SimpleBlindAuction-v1` |
 | [Simple Negotiation](SimpleNegotiation/README.md) | 2 | Two players barter five resources that each of them values privately, and whoever increases the value of their own inventory more by the turn limit wins. | `SimpleNegotiation-v1` |
 | [Simple Tak](SimpleTak/README.md) | 2 | Two players take turns placing stones on a square grid; the first to connect two opposite edges with an orthogonally connected path of their own stones wins. | `SimpleTak-v1` |
-| [Spelling Bee](SpellingBee/README.md) | 2 | Two players take turns naming English words built only from a shared set of letters, each word at least as long as the previous one, until one of them cannot continue. | `SpellingBee-v1` |
+| [Spelling Bee](SpellingBee/README.md) | 2 | Two players take turns naming English words built only from a shared set of letters, each word at least as long as the previous one, until one of them cannot continue or the turn limit is reached. | `SpellingBee-v1` |
 | [Spite and Malice](SpiteAndMalice/README.md) | 2 | Two players race to empty their payoff piles by building shared center piles from Ace up to Queen, with Kings wild. | `SpiteAndMalice-v1` |
 | [Stratego](Stratego/README.md) | 2 | Two armies whose ranks are hidden from each other battle on a 10×10 board; capture the enemy Flag, or leave the opponent without a legal move, to win. | `Stratego-v1` |
 | [Tak](Tak/README.md) | 2 | Two players place and stack stones on a square board, racing to build a road of their own pieces that connects two opposite edges. | `Tak-v1`, `Tak-v1-hard` |
@@ -224,7 +229,7 @@ retired (`ta.make` names the replacement), so results are only comparable within
 | --- | :---: | --- | --- |
 | [Blind Auction](BlindAuction/README.md) | 3–15 | Players talk in public and in private, then submit sealed bids on items that each of them values differently; the player with the highest final net worth wins. | `BlindAuction-v1` |
 | [Bohnanza](Bohnanza/README.md) | 3–5 | Players plant, trade, and harvest beans for coins without ever rearranging their hand, so trading away awkward beans with the active player is the heart of the game. | `Bohnanza-v1`, `Bohnanza-v1-short` |
-| [Briscola](Briscola/README.md) | 2–4 | Two to four players play the Italian trick-taking card game Briscola with a 40-card deck, each trying to capture the most of its 120 card points. | `Briscola-v1` |
+| [Briscola](Briscola/README.md) | 2–4 | Two to four players play the Italian trick-taking card game Briscola with a 40-card deck, trying to capture the most of its 120 card points, alone or, with four players, in two partnerships. | `Briscola-v1` |
 | [Character Conclave](CharacterConclave/README.md) | 3–15 | Players hold a free-form discussion under a strict per-player character budget, then each secretly votes for the most impressive other player; the most-voted player wins. | `CharacterConclave-v1` |
 | [Codenames](Codenames/README.md) | 4 | Two teams of two race to uncover their own words on a 25-word board, with each team's Spymaster giving one-word clues that their Operative turns into guesses. | `Codenames-v1`, `Codenames-v1-hardcore` |
 | [Coup](Coup/README.md) | 2–6 | Players bluff about the court characters they secretly hold to gain coins and knock out rivals' influence; the last player with influence wins. | `Coup-v1` |
@@ -235,7 +240,7 @@ retired (`ta.make` names the replacement), so results are only comparable within
 | [Market Entry Game](MarketEntryGame/README.md) | 2–15 | Each round, players exchange public messages and then simultaneously decide whether to enter a market that only pays off if few enough of them enter; the highest total score after all rounds wins. | `MarketEntryGame-v1` |
 | [Negotiation](Negotiation/README.md) | 2–15 | Players trade five resources that each of them values differently, using public messages, private messages, and targeted trade offers; whoever holds the most valuable inventory when the turns run out wins. | `Negotiation-v1` |
 | [Texas Hold'em Poker](Poker/README.md) | 2–15 | Two to fifteen players play a fixed number of no-limit Texas Hold'em hands and are ranked by their final chip counts. | `Poker-v1` |
-| [Public Goods Game](PublicGoodsGame/README.md) | 2–15 | Each round, players exchange public messages and then simultaneously decide how many tokens to put into a shared pot that is multiplied and split equally; the highest total payoff after all rounds wins. | `PublicGoodsGame-v1` |
+| [Public Goods Game](PublicGoodsGame/README.md) | 2–15 | Each round, players exchange public messages and then simultaneously decide how many tokens to put into a shared pot that is multiplied and split equally; each player is scored on their own total payoff. | `PublicGoodsGame-v1` |
 | [Santorini](Santorini/README.md) | 2–3 | Two or three players move builders around a 5×5 island and raise towers, winning by stepping a worker up onto the third level. | `SantoriniBaseFixed-v1` |
 | [Scorable Games](ScorableGames/README.md) | 2–15 | Stakeholders with secret scoring sheets negotiate a multi-issue agreement by proposing complete deals and voting on them; a deal passes once enough parties, including every veto holder, accept it. | `ScorableGames-v1` |
 | [Secret Mafia](SecretMafia/README.md) | 6–15 | A hidden Mafia team kills off villagers at night while the village, helped by a Doctor and a Detective, tries to vote every Mafia member out by day. | `SecretMafia-v1` |

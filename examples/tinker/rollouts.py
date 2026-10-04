@@ -7,7 +7,6 @@ that keep games running. The training loop itself lives in train_selfplay.py.
 import json
 import time
 import random
-import asyncio
 import logging
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -97,7 +96,7 @@ async def play_game(
         transcript.append({"pid": pid, "policy": is_policy, "ckpt": ckpt, "obs": obs, "output": text, "action": action})
         if is_policy:
             trajs[pid].turns.append(Turn(prompt_tokens, list(seq.tokens), list(seq.logprobs), ckpt, has_action_tag))
-        done, _ = env.step(action)
+        done = env.step(action)
         if done:
             break
     rewards, game_info = env.close()

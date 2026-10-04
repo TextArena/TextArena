@@ -29,7 +29,7 @@ def test_reset_initial_board():
 def test_forward_move_mutates_board_and_rotates():
     env = _fresh()
     # cell 17 = row3,col2 (R) -> cell 12 = row2,col2 (empty), a legal forward step.
-    done, _ = env.step("17 12")
+    done = env.step("17 12")
     assert not done
     board = env.state.game_state["board"]
     assert board[2][2] == "R" and board[3][2] == ""
@@ -44,7 +44,7 @@ def test_capture_awards_score_and_removes_piece():
     board[2][2] = "R"  # cell 12
     board[2][1] = "B"  # cell 11 (adjacent enemy)
     # Jump R over B (cell 11) landing on cell 10 (row2,col0).
-    done, _ = env.step("12 10")
+    done = env.step("12 10")
     assert done  # Black now has no pieces -> Red wins
     assert env.state.rewards == {0: 1, 1: -1}
     assert env.state.game_state["score"] == [10, 0]
@@ -57,7 +57,7 @@ def test_disconnected_diagonal_is_rejected_atomically():
     board[4][1] = "R"  # b1 is not joined diagonally to a2.
     before = [row[:] for row in board]
 
-    done, _ = env.step("b1 a2")
+    done = env.step("b1 a2")
 
     assert not done
     assert board == before
@@ -72,7 +72,7 @@ def test_available_capture_is_mandatory():
     board[2][1] = "B"
     before = [row[:] for row in board]
 
-    done, _ = env.step("c3 c4")
+    done = env.step("c3 c4")
 
     assert not done
     assert board == before
@@ -87,11 +87,11 @@ def test_multi_capture_path_is_atomic_and_must_be_completed():
     board[3][1] = "B"  # b2
     before = [row[:] for row in board]
 
-    done, _ = env.step("c3 a3")
+    done = env.step("c3 a3")
     assert not done
     assert board == before
 
-    done, _ = env.step("c3 -> a3 -> c1")
+    done = env.step("c3 -> a3 -> c1")
     assert done
     assert board[4][2] == "R"
     assert board[2][1] == board[3][1] == ""
@@ -106,7 +106,7 @@ def test_mover_becoming_blocked_does_not_end_opponents_turn():
     board[1][2] = "R"  # c4 can make one final forward move to c5.
     board[0][0] = "B"  # Black still has a legal move from a5.
 
-    done, _ = env.step("c4 c5")
+    done = env.step("c4 c5")
 
     assert not done
     assert env.state.current_player_id == 1
@@ -124,7 +124,7 @@ def test_turn_limit_uses_capture_score_then_draws_ties():
 
 def test_invalid_format_increments_error_count():
     env = _fresh()
-    done, _ = env.step("not a move at all")
+    done = env.step("not a move at all")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0  # offender keeps the turn
@@ -150,7 +150,7 @@ def test_format_error_describes_expected_action():
 def test_illegal_but_wellformatted_move_rejected():
     env = _fresh()
     # cell 20 = row4,col0 (R) jumping to cell 10 over own piece at row3,col0 -> illegal.
-    done, _ = env.step("20 10")
+    done = env.step("20 10")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -160,7 +160,7 @@ def test_huge_numeric_coordinate_is_rejected_without_exception():
     env = _fresh()
     before = [row[:] for row in env.state.game_state["board"]]
 
-    done, _ = env.step(f"{'9' * 5000} 12")
+    done = env.step(f"{'9' * 5000} 12")
 
     assert not done
     assert env.state.error_count == 1
@@ -170,7 +170,7 @@ def test_huge_numeric_coordinate_is_rejected_without_exception():
 def test_non_ascii_digit_cell_ids_are_rejected():
     env = _fresh()
     before = [row[:] for row in env.state.game_state["board"]]
-    done, _ = env.step("\u0661\u0667 \u0661\u0662")  # Arabic-Indic "17 12"
+    done = env.step("\u0661\u0667 \u0661\u0662")  # Arabic-Indic "17 12"
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["board"] == before
@@ -179,7 +179,7 @@ def test_non_ascii_digit_cell_ids_are_rejected():
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     env.step("garbage")
-    done, _ = env.step("garbage again")
+    done = env.step("garbage again")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -222,7 +222,7 @@ def test_every_listed_move_is_accepted_and_others_are_rejected():
     env = _fresh()
     for _ in range(5):
         _assert_listed_moves_match_apply(env)
-        done, _ = env.step(env._legal_moves(env.state.current_player_id)[0])
+        done = env.step(env._legal_moves(env.state.current_player_id)[0])
         assert not done and env.state.error_count == 0
 
     staged = _fresh()

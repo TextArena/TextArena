@@ -31,7 +31,7 @@ def test_reset_state():
 def test_full_word_guess_wins():
     env = _fresh()
     word = env.state.game_state["target_word"]
-    done, _ = env.step(word)
+    done = env.step(word)
     assert done
     assert env.state.rewards == {0: 1}
 
@@ -41,7 +41,7 @@ def test_letter_by_letter_solve_wins():
     unique_letters = list(dict.fromkeys(env.state.game_state["target_letters"]))
     done = False
     for letter in unique_letters:
-        done, _ = env.step(letter)
+        done = env.step(letter)
     assert done
     assert env.state.game_state["current_board"] == env.state.game_state["target_letters"]
     assert env.state.rewards == {0: 1}
@@ -50,7 +50,7 @@ def test_letter_by_letter_solve_wins():
 def test_correct_letter_reveals_and_continues():
     env = _fresh()
     first = env.state.game_state["target_letters"][0]
-    done, _ = env.step(first)
+    done = env.step(first)
     assert not done
     assert env.state.game_state["current_board"][0] == first
     assert env.state.game_state["tries_left"] == 6  # no penalty for a correct letter
@@ -63,7 +63,7 @@ def test_running_out_of_tries_loses():
     done = False
     for letter in wrong:
         assert not done
-        done, _ = env.step(letter)
+        done = env.step(letter)
     assert done
     assert env.state.game_state["tries_left"] == 0
     # No letters revealed -> 0% completion -> reward 0.0
@@ -72,7 +72,7 @@ def test_running_out_of_tries_loses():
 
 def test_invalid_format_does_not_end_game():
     env = _fresh()
-    done, _ = env.step("not one word")
+    done = env.step("not one word")
     assert not done
     assert env.state.error_count == 1
 
@@ -94,7 +94,7 @@ def test_repeated_letter_is_invalid():
     env = _fresh()
     first = env.state.game_state["target_letters"][0]
     env.step(first)            # valid, reveals
-    done, _ = env.step(first)  # same letter again -> invalid
+    done = env.step(first)  # same letter again -> invalid
     assert not done
     assert env.state.error_count == 1
 
@@ -103,7 +103,7 @@ def test_wrong_full_word_consumes_a_try():
     env = _fresh()
     target = env.state.game_state["target_word"].upper()
     wrong = next(word for word in ("ALPHA", "BRAVO", "CHARLIE") if word != target)
-    done, _ = env.step(wrong)
+    done = env.step(wrong)
     assert not done
     assert env.state.game_state["tries_left"] == 5
     assert wrong in env.state.game_state["guessed_words"]
@@ -118,7 +118,7 @@ def test_six_wrong_full_words_reach_terminal_state():
         if word != target
     ][:6]
     for word in wrong_words:
-        done, _ = env.step(word)
+        done = env.step(word)
     assert done
     assert env.state.game_state["tries_left"] == 0
     assert env.state.turn == 6
@@ -131,7 +131,7 @@ def test_repeated_wrong_word_is_invalid_and_atomic():
     wrong = next(word for word in ("ALPHA", "BRAVO") if word != target)
     env.step(wrong)
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(wrong)
+    done = env.step(wrong)
     assert not done
     assert env.state.game_state == before
     assert env.state.turn == 1
@@ -141,7 +141,7 @@ def test_repeated_wrong_word_is_invalid_and_atomic():
 def test_malformed_actions_are_atomic(action):
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.game_state == before
     assert env.state.turn == 0
@@ -170,7 +170,7 @@ def test_long_adversarial_word_costs_only_one_try():
     action = "Z" * 10_000
     if action == env.state.game_state["target_word"].upper():
         pytest.skip("Impossible defensive guard")
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done
     assert env.state.game_state["tries_left"] == 5
 

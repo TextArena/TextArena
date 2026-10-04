@@ -1,9 +1,8 @@
-import os
 import copy
 import importlib.resources
 import json
 import re
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Union
 
 import textarena as ta
 from textarena.envs.Crosswords.renderer import create_board_str
@@ -37,16 +36,10 @@ class CrosswordsEnv(ta.GameEnv):
 
     def get_board_str(self): return create_board_str(game_state=self.state.game_state)
 
-    def _load_words(self, words_path: Optional[str] = None, hardcore: bool = False):
+    def _load_words(self, hardcore: bool = False):
         try:
-            if words_path is not None:
-                if not os.path.exists(words_path): # Use provided path
-                    raise FileNotFoundError(f"Words data file not found at: {words_path}")
-                with open(words_path, "r", encoding="utf-8") as file:
-                    word_data = file.readlines()
-            else: # Use package resource
-                with importlib.resources.files('textarena.envs.Crosswords').joinpath('words_clues.jsonl').open('r') as file:
-                    word_data = file.readlines()
+            with importlib.resources.files('textarena.envs.Crosswords').joinpath('words_clues.jsonl').open('r') as file:
+                word_data = file.readlines()
             parsed = [json.loads(line) for line in word_data]
             self.word_data = []
             seen_words = set()

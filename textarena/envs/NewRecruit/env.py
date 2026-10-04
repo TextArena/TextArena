@@ -23,9 +23,6 @@ class NewRecruitEnv(ta.GameEnv):
     _PROPOSE_WORD_RE = re.compile(r"propose\b", re.IGNORECASE)
 
     max_turns = ta.Param(10, "The turns in the whole game, counting both players.", min=1)
-    error_allowance = ta.Param(
-        3, "The consecutive invalid moves a player may make (and retry) before losing.", min=0,
-    )
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

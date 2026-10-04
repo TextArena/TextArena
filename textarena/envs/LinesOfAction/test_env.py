@@ -30,7 +30,7 @@ def test_reset_board():
 def test_valid_move_and_rotation():
     env = _fresh()
     # Column b has 2 pieces (b8, b1) -> vertical move distance must be 2.
-    done, _ = env.step("b8b6")
+    done = env.step("b8b6")
     assert done is False
     assert env.state.game_state["board"][0][1] == ""   # b8 vacated
     assert env.state.game_state["board"][2][1] == "O"  # b6 occupied
@@ -40,7 +40,7 @@ def test_valid_move_and_rotation():
 
 def test_invalid_format():
     env = _fresh()
-    done, _ = env.step("move b8 to b6")
+    done = env.step("move b8 to b6")
     assert done is False
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -65,7 +65,7 @@ def test_format_error_describes_expected_action():
 def test_no_piece_at_source():
     env = _fresh()
     # a1 (bottom-left corner) is empty for O.
-    done, _ = env.step("a1a3")
+    done = env.step("a1a3")
     assert done is False
     assert env.state.error_count == 1
 
@@ -73,7 +73,7 @@ def test_no_piece_at_source():
 def test_wrong_distance_rejected():
     env = _fresh()
     # Column b has 2 pieces so distance must be 2, not 3.
-    done, _ = env.step("b8b5")
+    done = env.step("b8b5")
     assert done is False
     assert env.state.error_count == 1
 
@@ -82,7 +82,7 @@ def test_recover_after_invalid():
     env = _fresh()
     env.step("bad")                 # invalid #1
     assert env.state.error_count == 1
-    done, _ = env.step("b8b6")     # valid resubmission
+    done = env.step("b8b6")     # valid resubmission
     assert done is False
     assert env.state.error_count == 0
     assert env.state.current_player_id == 1
@@ -91,7 +91,7 @@ def test_recover_after_invalid():
 def test_second_consecutive_invalid_loses():
     env = _fresh()
     env.step("b8b5")              # invalid #1 (wrong distance)
-    done, _ = env.step("garbage")    # invalid #2 -> P0 forfeits
+    done = env.step("garbage")    # invalid #2 -> P0 forfeits
     assert done is True
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -101,7 +101,7 @@ def test_player1_can_move():
     env.step("b8b6")             # P0 moves, now P1
     # Row 4 (rank 4/5 area): X on a5 and h5, row has 2 pieces -> horizontal dist 2.
     # Use column a: a2..a7 are X (6 pieces) -> vertical distance 6 from a7 to a1.
-    done, _ = env.step("a7a1")
+    done = env.step("a7a1")
     assert done is False
     assert env.state.current_player_id == 0
 
@@ -113,7 +113,7 @@ def test_generated_moves_are_legal_and_include_known_opening():
     assert moves == env.state.game_state["valid_moves"]
     for move in moves:
         clone = _fresh()
-        done, _ = clone.step(move)
+        clone.step(move)
         assert clone.state.error_count == 0
 
 
@@ -125,7 +125,7 @@ def test_enemy_blocking_rejection_is_atomic():
     board[0][1] = "X"
     board[0][3] = "X"  # line count is three; b8 blocks a8 -> d8
     before = copy.deepcopy(board)
-    done, _ = env.step("a8d8")
+    done = env.step("a8d8")
     assert not done
     assert board == before
     assert env.state.current_player_id == 0
@@ -139,7 +139,7 @@ def test_move_connecting_mover_wins_short_staged_game():
     board[0][2] = "O"  # c8
     board[6][7] = "X"
     board[4][7] = "X"
-    done, _ = env.step("a8b7")
+    done = env.step("a8b7")
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
 
@@ -152,7 +152,7 @@ def test_capture_that_leaves_only_opponent_connected_awards_opponent():
     board[7][0] = "O"  # a1, remains disconnected from c8
     board[0][2] = "X"  # c8, captured
     board[7][7] = "X"  # h1, the sole remaining X
-    done, _ = env.step("a8c8")
+    done = env.step("a8c8")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -166,7 +166,7 @@ def test_simultaneous_connection_awards_moving_player():
     board[0][2] = "X"  # captured, leaving one connected X piece
     board[7][7] = "X"
 
-    done, _ = env.step("a8c8")
+    done = env.step("a8c8")
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
     assert env.state.game_state["valid_moves"] == []
@@ -184,7 +184,7 @@ def test_repetition_hash_records_next_side_to_move():
 def test_pass_is_rejected_while_a_move_exists():
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step("pass")
+    done = env.step("pass")
     assert not done
     assert env.state.game_state == before
     assert env.state.current_player_id == 0
@@ -215,7 +215,7 @@ def test_player_without_moves_is_told_to_pass_and_can_pass():
     assert "pass" in env.prompt(0)
 
     assert env.render(0).rstrip().endswith("Legal moves: pass")
-    done, _ = env.step("pass")
+    done = env.step("pass")
 
     assert not done
     assert env.state.error_count == 0
@@ -224,9 +224,9 @@ def test_player_without_moves_is_told_to_pass_and_can_pass():
 
 def test_separated_coordinates_are_accepted_and_echoed_in_lowercase():
     env = _fresh()
-    done, _ = env.step("B8 b6")
+    done = env.step("B8 b6")
     assert not done and env.state.error_count == 0
-    done, _ = env.step("a7-a1")
+    done = env.step("a7-a1")
     assert not done and env.state.error_count == 0
     descriptions = [m for f, m, t, _ in env.state.events if m.startswith("Player 0 moved")]
     assert descriptions == ["Player 0 moved b8 -> b6"]

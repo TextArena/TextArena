@@ -256,10 +256,6 @@ class UltimateTexasHoldemEnv(ta.GameEnv):
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         gs = self.game_state
-
-        if gs.get("game_complete", False):
-            return self._final_outcome()
-
         parsed = self._parse_action(action)
 
         if parsed is None:
@@ -289,7 +285,7 @@ class UltimateTexasHoldemEnv(ta.GameEnv):
                 reason=f"Player completed {gs['current_round']} rounds with ${gs['chips']} chips",
             )
         return self.outcome(
-            {0: -1.0},
+            {0: 0.0},
             reason=f"Player could not continue after round {gs['current_round']}",
         )
 
@@ -313,8 +309,6 @@ class UltimateTexasHoldemEnv(ta.GameEnv):
             else:
                 if self._PLAY_BET_1X_RE.search(action): return "play_bet_1x"
                 if self._FOLD_RE.search(action): return "fold"
-        elif phase == "showdown":
-            if self._SKIP_RE.search(action): return "skip"
         return None
 
     def _execute_action(self, parsed: str):
@@ -392,9 +386,6 @@ class UltimateTexasHoldemEnv(ta.GameEnv):
                 # Immediately resolve showdown - no waiting for player input
                 self._resolve_showdown_and_maybe_continue()
                 return
-
-        # SHOWDOWN phase is now handled automatically in RIVER phase
-        # No need to wait for player input
 
     def _resolve_showdown_and_maybe_continue(self):
         gs = self.game_state

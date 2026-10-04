@@ -29,7 +29,7 @@ def test_reset_board_layout():
 
 def test_simple_move_and_rotation():
     env = _fresh()
-    done, _ = env.step("5 0 4 1")  # Red advances diagonally forward
+    done = env.step("5 0 4 1")  # Red advances diagonally forward
     assert not done
     board = env.state.game_state["board"]
     assert board[4][1] == "r" and board[5][0] == "."
@@ -40,7 +40,7 @@ def test_capture_removes_jumped_piece():
     env = _fresh()
     board = env.state.game_state["board"]
     board[4][3] = "b"  # place an enemy piece to jump
-    done, _ = env.step("5 2 3 4")
+    done = env.step("5 2 3 4")
     assert not done
     assert board[3][4] == "r"      # red landed here
     assert board[4][3] == "."      # jumped black removed
@@ -54,7 +54,7 @@ def test_capture_is_mandatory_and_invalid_move_is_atomic():
     board[5][2] = "r"
     board[4][3] = "b"
     before = copy.deepcopy(board)
-    done, _ = env.step("5 0 4 1")
+    done = env.step("5 0 4 1")
     assert not done
     assert board == before
     assert env.state.current_player_id == 0
@@ -67,12 +67,12 @@ def test_multi_jump_keeps_turn_and_forces_same_piece():
     board[5][0] = "r"
     board[4][1] = "b"
     board[2][3] = "b"
-    done, _ = env.step("5 0 3 2")
+    done = env.step("5 0 3 2")
     assert not done
     assert env.state.current_player_id == 0
     assert env.state.game_state["forced_piece"] == (3, 2)
     assert env.state.game_state["valid_moves"] == ["3 2 1 4"]
-    done, _ = env.step("3 2 1 4")
+    done = env.step("3 2 1 4")
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
 
@@ -86,12 +86,12 @@ def test_turn_limit_waits_for_forced_capture_chain_to_finish():
     board[2][3] = "b"
     board[0][1] = "b"  # keeps Black alive and mobile after the chain
 
-    done, _ = env.step("5 0 3 2")
+    done = env.step("5 0 3 2")
     assert not done
     assert env.state.current_player_id == 0
     assert env.state.game_state["forced_piece"] == (3, 2)
 
-    done, _ = env.step("3 2 1 4")
+    done = env.step("3 2 1 4")
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
 
@@ -111,7 +111,7 @@ def test_man_cannot_capture_backward_but_king_can():
     _clear(board)
     board[3][2] = "R"
     board[4][3] = "b"
-    done, _ = env.step("3 2 5 4")
+    done = env.step("3 2 5 4")
     assert done  # the only Black piece was captured
     assert board[5][4] == "R"
 
@@ -123,7 +123,7 @@ def test_promotion_ends_capture_turn():
     board[2][1] = "r"
     board[1][2] = "b"
     board[1][4] = "b"  # newly crowned king could jump this only on a later turn
-    done, _ = env.step("2 1 0 3")
+    done = env.step("2 1 0 3")
     assert not done
     assert board[0][3] == "R"
     assert env.state.game_state["forced_piece"] is None
@@ -133,7 +133,7 @@ def test_promotion_ends_capture_turn():
 def test_valid_move_generation_and_turn_limit_draw():
     env = _fresh(max_turns=1)
     assert "5 0 4 1" in env.state.game_state["valid_moves"]
-    done, _ = env.step("5 0 4 1")
+    done = env.step("5 0 4 1")
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
 
@@ -144,14 +144,14 @@ def test_capturing_last_piece_wins():
     _clear(board)
     board[3][2] = "r"
     board[2][3] = "b"  # black's only remaining piece
-    done, _ = env.step("3 2 1 4")
+    done = env.step("3 2 1 4")
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
 
 
 def test_invalid_format_increments_error_count():
     env = _fresh()
-    done, _ = env.step("move up")
+    done = env.step("move up")
     assert not done
     assert env.state.error_count == 1
 
@@ -170,7 +170,7 @@ def test_format_error_describes_expected_action():
 
 def test_illegal_move_increments_error_count():
     env = _fresh()
-    done, _ = env.step("5 0 3 0")  # straight two-square move is illegal
+    done = env.step("5 0 3 0")  # straight two-square move is illegal
     assert not done
     assert env.state.error_count == 1
 
@@ -178,7 +178,7 @@ def test_illegal_move_increments_error_count():
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     env.step("garbage")
-    done, _ = env.step("garbage")
+    done = env.step("garbage")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -257,7 +257,7 @@ def test_capture_that_ends_the_game_does_not_leave_a_continuation():
     board[2][3] = "b"  # Black's last pieces: the double jump captures both
 
     env.step("5 0 3 2")
-    done, _ = env.step("3 2 1 4")
+    done = env.step("3 2 1 4")
 
     assert done and env.state.rewards == {0: 1, 1: -1}
     assert env.state.game_state["forced_piece"] is None

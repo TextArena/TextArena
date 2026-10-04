@@ -51,9 +51,6 @@ class DiplomacyEnv(ta.GameEnv):
         self.current_negotiation_round = 0
         self.orders_submitted = set()  # Track which players submitted orders
         self.pending_orders = {}       # Store orders until processing
-        self.current_season = None
-        self.current_year = None
-        self.current_phase = None
         self.chat_history: List[Dict[str, Any]] = []
 
     def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
@@ -73,9 +70,6 @@ class DiplomacyEnv(ta.GameEnv):
         self.current_negotiation_round = 0
         self.orders_submitted = set()
         self.pending_orders = {}
-        self.current_season = self.engine.season
-        self.current_year = self.engine.year
-        self.current_phase = self.engine.phase
         self.chat_history: List[Dict[str, Any]] = []
 
         return self._build_game_state()
@@ -419,26 +413,11 @@ class DiplomacyEnv(ta.GameEnv):
                 ta.ObservationType.GAME_ADMIN,
             )
 
-        self.step_info.update({
-            'current_player': player_id,
-            'current_power': power_name,
-            'actions': {
-                "broadcasts": [message for recipient, message in commands["messages"] if recipient == -1],
-                "whispers": [
-                    {"to_player": recipient, "to_power": self.player_power_map[recipient], "message": message}
-                    for recipient, message in commands["messages"]
-                    if recipient != -1
-                ],
-                "orders_submitted": final_round,
-                "orders": list(orders),
-            },
-        })
-
         if final_round:
             if self._all_required_orders_submitted():
                 self._process_orders()
                 if self.engine.game_over:
-                    return self._game_over_outcome()
+                    return self._final_outcome()
         else:
             # Default round-robin rotation moves to the next alive player; if the
             # rotation wraps around, a full round of negotiations has completed.
@@ -567,7 +546,7 @@ class DiplomacyEnv(ta.GameEnv):
             if self._all_required_orders_submitted():
                 self._process_orders()
                 if self.engine.game_over:
-                    return self._game_over_outcome()
+                    return self._final_outcome()
         else:
             next_pid = self.state.next_alive_player(after=player_id)
             if next_pid is not None and next_pid <= player_id:
@@ -598,9 +577,6 @@ class DiplomacyEnv(ta.GameEnv):
         self.engine.resolve_orders(self.pending_orders)
         record = self.engine.order_history[-1]
 
-        self.current_season = self.engine.season
-        self.current_year = self.engine.year
-        self.current_phase = self.engine.phase
         self.orders_submitted = set()
         self.pending_orders = {}
         self.current_negotiation_round = 0
@@ -640,23 +616,6 @@ class DiplomacyEnv(ta.GameEnv):
         if self._is_final_round():
             message += " This is the final round: every power must submit its orders now."
         self.add_observation(from_id=ta.GAME_ID, to_id=-1, message=message)
-
-    def _game_over_outcome(self) -> ta.Outcome:
-        """Build the final Outcome; the engine announces its reason to everyone."""
-        outcome = self._final_outcome()
-        self.step_info.update({
-            'reason': "Game Over",
-            'detailed_reason': (
-                f"Game ended after {self.engine.completed_game_years} game years. "
-                f"The winners are {self.engine.winners}."
-            ),
-            'winners': self.engine.winners,
-            'winning_players': [self.power_player_map[power] for power in self.engine.winners] if self.engine.winners else [],
-            'final_sc_count': {power: len(self.engine.powers[power].controlled_centers) for power in self.engine.powers},
-            'turn_number': self.engine.turn_number,
-            'completed_game_years': self.engine.completed_game_years,
-        })
-        return outcome
 
     def _final_outcome(self) -> ta.Outcome:
         if self.engine.winners:
@@ -780,72 +739,3 @@ class DiplomacyEnv(ta.GameEnv):
             "to_power": self.player_power_map.get(to_id),
             "message": message
         })
-
-    def get_game_state(self):
-        game_state = {
-            # ===== Game State =====
-            "current_season": self.current_season.value,
-            "current_year": self.current_year,
-            "current_phase": self.current_phase.value,
-            "current_negotiation_round": self.current_negotiation_round,
-            "total_negotiation_rounds": self.negotiations_per_phase,
-            # ===== Players =====
-            "Players": [
-                {
-                    "id": player_id,
-                    "power": self.player_power_map[player_id],
-                    "controlled_centers": len(self.engine.powers[self.player_power_map[player_id]].controlled_centers),
-                    "units": len(self.engine.powers[self.player_power_map[player_id]].units)
-                }
-                for player_id in self.player_power_map.keys()
-            ],
-            # ===== Orders =====
-            "orders_submitted": list(self.orders_submitted),
-            "pending_orders_count": {power: len(orders) for power, orders in self.pending_orders.items()},
-            "sc_counts": {power: len(self.engine.powers[power].controlled_centers) for power in self.engine.powers},
-            "unit_counts": {power: len(self.engine.powers[power].units) for power in self.engine.powers},
-            "is_final_round": self.current_negotiation_round == self.negotiations_per_phase - 1,
-        }
-        
-        return game_state
-
-    def get_conversation_history(self) -> List[List[Dict[str, Any]]]:
-        """Log the current conversation history as a list indexed by turn"""
-        # Create a list-based conversation history organized by turn
-        max_turn = 0
-        turn_messages = {}
-        
-        # Use the dedicated chat_history attribute
-        for entry in self.chat_history:
-            turn = entry["turn"]
-            message = entry["message"]
-            
-            # Organize by turn
-            if turn not in turn_messages:
-                turn_messages[turn] = []
-            
-            # Add a cleaned version to the turn messages
-            clean_entry = {
-                "from": entry["from_power"] if entry["from_power"] else ("GAME" if entry["from"] == ta.GAME_ID else f"Player {entry['from']}"),
-                "to": entry["to_power"] if entry["to"] != -1 and entry["to_power"] else ("ALL" if entry["to"] == -1 else f"Player {entry['to']}"),
-                "message": message,
-                "turn": turn
-            }
-            turn_messages[turn].append(clean_entry)
-            
-            max_turn = max(max_turn, turn)
-        
-        # Convert dict to list with proper indexing
-        conversation_history = [[] for _ in range(max_turn + 1)]
-        for turn, messages in turn_messages.items():
-            conversation_history[turn] = messages
-        
-        return conversation_history
-    
-    def get_order_history(self) -> Dict[str, Any]:
-        """Get the current order history"""
-        return self.engine.order_history
-    
-    def get_game_state_history(self) -> List[Dict[str, Any]]:
-        """Get the game state history"""
-        return self.engine.game_state_history

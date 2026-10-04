@@ -1,3 +1,3 @@
-from textarena.envs.registration import register_with_versions
+from textarena.envs.registration import register
 
-register_with_versions(id="TwoDollar-v1", entry_point="textarena.envs.TwoDollar.env:TwoDollarEnv")
+register(id="TwoDollar-v1", entry_point="textarena.envs.TwoDollar.env:TwoDollarEnv")

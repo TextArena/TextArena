@@ -31,8 +31,8 @@ This is the base game without God Powers, with fixed starting positions instead 
 - Moving a worker up from level 2 onto level 3 wins immediately; the turn ends without a build. Moving between two
   level-3 squares does not win.
 - A player who cannot make a complete turn (a move followed by a build) loses. With three players, that player is
-  eliminated, their workers are removed, and play continues; the last player remaining wins. A player who exceeds the
-  invalid-move allowance is treated the same way.
+  eliminated, their workers are removed, and play continues; the last player remaining wins. A first invalid move
+  only earns a warning and a retry; a player who makes a second invalid move in a row is treated the same way.
 - Every turn that does not win includes a build, and the board can take at most 100 builds (three levels and a dome on
   each of the 25 squares), so the game always ends.
 
@@ -76,14 +76,13 @@ players have to track it from the announced moves.
 | --- | --- |
 | A worker moves up onto level 3 | Mover `+1`, every other player `-1` |
 | Every other player is blocked or eliminated | Last player `+1`, every other player `-1` |
-| More than `error_allowance` consecutive invalid moves | With one opponent left: that opponent `+1`, every other player `-1`. With two opponents left: the offender is eliminated and play continues |
+| Second consecutive invalid move | With one opponent left: that opponent `+1`, every other player `-1`. With two opponents left: the offender is eliminated and play continues |
 
 ## Parameters
 
 <!-- BEGIN GENERATED: parameters -->
 - `is_open` (default `True`): Whether the acting player is shown the board.
 - `show_valid` (default `True`): Whether the acting player is shown the list of their legal moves.
-- `error_allowance` (default `10`): The number of consecutive invalid moves a player may make; the next one counts as the escalation above. Accepts an integer of at least 0.
 <!-- END GENERATED: parameters -->
 
 ## Notes

@@ -3,7 +3,7 @@
 FFA multiplayer game with simultaneous communication + decision phases. We use 2
 players, ``market_capacity=1``, one round, and one communication turn to script
 short deterministic games. Decisions: ``E`` enter, ``S`` stay out.
-Communication uses ``{message}``. ``error_allowance=2`` (three invalids eliminate).
+Communication uses ``{message}``. A second consecutive invalid decision eliminates.
 """
 import pytest
 import textarena as ta
@@ -44,7 +44,7 @@ def test_enter_vs_stay_p0_wins():
     env = _fresh()
     _finish_conversation(env)
     env.step("E")            # P0 enters (within capacity -> profit)
-    done, _ = env.step("S")   # P1 stays out
+    done = env.step("S")   # P1 stays out
     assert done is True
     assert env.state.game_state["total_scores"] == {0: 15, 1: 5}
     assert env.state.rewards == {0: 1, 1: -1}
@@ -54,7 +54,7 @@ def test_both_stay_out_tie():
     env = _fresh()
     _finish_conversation(env)
     env.step("S")
-    done, _ = env.step("S")
+    done = env.step("S")
     assert done is True
     assert env.state.game_state["total_scores"] == {0: 5, 1: 5}
     # Everyone tied -> draw.
@@ -68,7 +68,7 @@ def test_both_enter_overcrowded_tie():
     env = _fresh()
     _finish_conversation(env)
     env.step("E")
-    done, _ = env.step("E")   # capacity=1, so 2 entrants overcrowd
+    done = env.step("E")   # capacity=1, so 2 entrants overcrowd
     assert done is True
     assert env.state.game_state["total_scores"] == {0: -5, 1: -5}
     assert env.state.rewards == {0: 0, 1: 0}
@@ -78,7 +78,7 @@ def test_all_players_tied_is_a_draw():
     env = _fresh(num_players=3, communication_turns=0, market_capacity=2)
     env.step("S")
     env.step("S")
-    done, _ = env.step("S")
+    done = env.step("S")
     assert done
     assert env.state.game_state["total_scores"] == {0: 5, 1: 5, 2: 5}
     assert env.state.rewards == {0: 0, 1: 0, 2: 0}
@@ -86,11 +86,11 @@ def test_all_players_tied_is_a_draw():
 
 def test_survivors_tied_after_an_elimination_share_the_win():
     env = _fresh(num_players=3, communication_turns=0, market_capacity=2)
-    for _ in range(3):
+    for _ in range(2):
         env.step("X")
     assert env.state.alive_players == [1, 2]
     env.step("S")
-    done, _ = env.step("S")
+    done = env.step("S")
     assert done
     assert env.state.rewards == {0: -1, 1: 1, 2: 1}
 
@@ -98,7 +98,7 @@ def test_survivors_tied_after_an_elimination_share_the_win():
 def test_invalid_decision_warns():
     env = _fresh()
     _finish_conversation(env)
-    done, _ = env.step("X")   # not E or S
+    done = env.step("X")   # not E or S
     assert done is False
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0  # not rotated on invalid
@@ -106,7 +106,7 @@ def test_invalid_decision_warns():
 
 def test_conversation_accepts_any_text():
     env = _fresh()
-    done, _ = env.step("no braces here")  # allowed during conversation
+    done = env.step("no braces here")  # allowed during conversation
     assert done is False
     assert env.state.error_count == 0
     assert env.state.current_player_id == 1
@@ -131,7 +131,7 @@ def test_zero_communication_turns_starts_in_decision_phase():
     env = _fresh(communication_turns=0)
     assert env.state.game_state["phase"] == "decision"
     env.step("E")
-    done, _ = env.step("S")
+    done = env.step("S")
     assert done
 
 
@@ -179,7 +179,7 @@ def test_partial_first_place_tie_penalizes_lower_score():
     env = _fresh(num_players=3, communication_turns=0, market_capacity=2)
     env.step("E")
     env.step("E")
-    done, _ = env.step("S")
+    done = env.step("S")
     assert done
     assert env.state.game_state["total_scores"] == {0: 15, 1: 15, 2: 5}
     assert env.state.rewards == {0: 1, 1: 1, 2: -1}
@@ -188,13 +188,12 @@ def test_partial_first_place_tie_penalizes_lower_score():
 def test_invalid_limit_eliminates_then_resolves_with_remaining_player():
     env = _fresh(communication_turns=0)
     env.step("X")
-    env.step("X")
-    done, _ = env.step("X")
+    done = env.step("X")
     assert not done
     assert env.state.alive_players == [1]
     assert env.state.current_player_id == 1
 
-    done, _ = env.step("S")
+    done = env.step("S")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -208,7 +207,7 @@ def test_extreme_float_payoffs_accumulate_without_overflowing_to_tie():
     )
     for _ in range(2):
         env.step("E")
-        done, _ = env.step("S")
+        done = env.step("S")
     assert done
     assert env.state.game_state["total_scores"][0] > env.state.game_state["total_scores"][1]
     assert env.state.rewards == {0: 1, 1: -1}
@@ -238,7 +237,7 @@ def test_large_capacity_renderer_is_bounded():
 def test_terminal_round_and_history_are_exact():
     env = _fresh(communication_turns=0)
     env.step("E")
-    done, _ = env.step("S")
+    done = env.step("S")
     assert done
     gs = env.state.game_state
     assert gs["round"] == 1
@@ -280,7 +279,7 @@ def test_snapshot_restores_pending_decision_and_queue_position():
     assert env.state.current_player_id == 1
     assert env.state.game_state["pending_decisions"] == {0: "E"}
     assert "Player 0: ✅ ENTER" not in env.get_board_str()
-    done, _ = env.step("E")
+    done = env.step("E")
     assert done
     assert env.state.game_state["history"][0]["decisions"] == {0: "E", 1: "E"}
 

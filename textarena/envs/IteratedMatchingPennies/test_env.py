@@ -30,9 +30,9 @@ def test_player0_matcher_sweeps():
     env = _fresh(num_rounds=3)
     done = False
     for _ in range(3):
-        done, _ = env.step("heads")  # player 0
+        done = env.step("heads")  # player 0
         assert not done
-        done, _ = env.step("heads")  # player 1
+        done = env.step("heads")  # player 1
     assert done
     assert env.state.game_state["points"] == {0: 3, 1: 0}
     assert env.state.rewards == {0: 1, 1: -1}
@@ -43,8 +43,8 @@ def test_player1_mismatcher_sweeps():
     env = _fresh(num_rounds=3)
     done = False
     for _ in range(3):
-        done, _ = env.step("heads")  # player 0
-        done, _ = env.step("tails")  # player 1
+        done = env.step("heads")  # player 0
+        done = env.step("tails")  # player 1
     assert done
     assert env.state.game_state["points"] == {0: 0, 1: 3}
     assert env.state.rewards == {0: -1, 1: 1}
@@ -54,8 +54,8 @@ def test_overall_draw():
     # Round 1 matches (P0 point), round 2 mismatches (P1 point) -> 1-1 draw.
     env = _fresh(num_rounds=2)
     env.step("heads"); env.step("heads")   # round 1: match
-    done, _ = env.step("heads")
-    done, _ = env.step("tails")              # round 2: mismatch
+    done = env.step("heads")
+    done = env.step("tails")              # round 2: mismatch
     assert done
     assert env.state.game_state["points"] == {0: 1, 1: 1}
     assert env.state.rewards == {0: 0, 1: 0}
@@ -64,28 +64,28 @@ def test_overall_draw():
 def test_shorthand_tokens_accepted():
     env = _fresh(num_rounds=1)
     env.step("h")
-    done, _ = env.step("t")  # mismatch -> P1 wins the single round
+    done = env.step("t")  # mismatch -> P1 wins the single round
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
 
 def test_invalid_format_does_not_end_game():
     env = _fresh(num_rounds=3)
-    done, _ = env.step("I refuse to choose")
+    done = env.step("I refuse to choose")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0  # turn did not rotate
     # A valid resubmission continues normally.
-    done, _ = env.step("heads")
+    done = env.step("heads")
     assert not done
     assert env.state.current_player_id == 1
 
 
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh(num_rounds=3)
-    done, _ = env.step("garbage")
+    done = env.step("garbage")
     assert not done
-    done, _ = env.step("still garbage")
+    done = env.step("still garbage")
     assert done
     # Offending player (0) loses.
     assert env.state.rewards == {0: -1, 1: 1}
@@ -132,7 +132,7 @@ def test_unauthorized_choice_is_rejected_atomically(player_id):
 def test_terminal_state_keeps_last_round_and_turn_count():
     env = _fresh(num_rounds=1)
     env.step("heads")
-    done, _ = env.step("heads")
+    done = env.step("heads")
     assert done
     assert env.state.game_state["round"] == 1
     assert env.state.turn == 2

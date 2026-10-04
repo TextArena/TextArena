@@ -31,7 +31,7 @@ def test_check_check_showdown_high_card_wins():
     cards = env.state.game_state["player_cards"]
     expected_winner = 0 if cards[0] > cards[1] else 1
     env.step("check")   # player 1 (starter)
-    done, _ = env.step("check")  # player 0 -> showdown
+    done = env.step("check")  # player 0 -> showdown
     assert done is True
     loser = 1 - expected_winner
     assert env.state.rewards == {expected_winner: 1, loser: -1}
@@ -42,7 +42,7 @@ def test_bet_fold_folder_loses():
     env = _fresh()
     starter = env.state.current_player_id  # player 1
     env.step("bet")            # starter bets
-    done, _ = env.step("fold")  # other player folds
+    done = env.step("fold")  # other player folds
     assert done is True
     other = 1 - starter
     # Folder (other) loses, starter wins the pot.
@@ -51,7 +51,7 @@ def test_bet_fold_folder_loses():
 
 def test_invalid_format_increments_error():
     env = _fresh()
-    done, _ = env.step("I check maybe")  # not a bare action token
+    done = env.step("I check maybe")  # not a bare action token
     assert done is False
     assert env.state.error_count == 1
 
@@ -59,7 +59,7 @@ def test_invalid_format_increments_error():
 def test_illegal_action_rejected():
     env = _fresh()
     # No bet on the table yet, so 'call' is not in the legal tree.
-    done, _ = env.step("call")
+    done = env.step("call")
     assert done is False
     assert env.state.error_count == 1
 
@@ -69,7 +69,7 @@ def test_bet_call_showdown():
     cards = env.state.game_state["player_cards"]
     expected_winner = 0 if cards[0] > cards[1] else 1
     env.step("bet")            # starter bets
-    done, _ = env.step("call")  # other calls -> showdown
+    done = env.step("call")  # other calls -> showdown
     assert done is True
     loser = 1 - expected_winner
     assert env.state.rewards == {expected_winner: 1, loser: -1}
@@ -90,7 +90,7 @@ def test_bet_and_call_move_chips_before_showdown():
 def test_round_starter_alternates_and_pot_is_conserved():
     env = _fresh(max_rounds=2)
     env.step("bet")
-    done, _ = env.step("fold")
+    done = env.step("fold")
     assert not done
     gs = env.state.game_state
     assert gs["current_round"] == 2
@@ -108,7 +108,7 @@ def test_final_round_ends_match_without_dealing_or_anteing_another(max_rounds, f
     gs = env.state.game_state
     for _ in range(max_rounds):
         env.step("bet")
-        done, _ = env.step("fold")  # the round's starter wins a pot of 3
+        done = env.step("fold")  # the round's starter wins a pot of 3
     assert done
     assert gs["current_round"] == max_rounds
     assert gs["pot"] == 0

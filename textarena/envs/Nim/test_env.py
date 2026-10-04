@@ -15,7 +15,7 @@ from textarena.envs.Nim.env import NimEnv
 def test_taking_last_object_wins():
     env = NimEnv(piles=[1])
     env.reset(num_players=2, seed=42)
-    done, _ = env.step("0 1")  # P0 takes the only object
+    done = env.step("0 1")  # P0 takes the only object
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
 
@@ -24,7 +24,7 @@ def test_second_player_can_win():
     env = NimEnv(piles=[2])
     env.reset(num_players=2, seed=42)
     env.step("0 1")            # P0 removes 1, one left
-    done, _ = env.step("0 1")  # P1 removes the last -> P1 wins
+    done = env.step("0 1")  # P1 removes the last -> P1 wins
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
 
@@ -32,7 +32,7 @@ def test_second_player_can_win():
 def test_removing_more_than_available_is_invalid():
     env = NimEnv(piles=[3])
     env.reset(num_players=2, seed=42)
-    done, _ = env.step("0 9")
+    done = env.step("0 9")
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["piles"] == [3]
@@ -41,7 +41,7 @@ def test_removing_more_than_available_is_invalid():
 def test_out_of_range_pile_is_invalid():
     env = NimEnv(piles=[3, 4])
     env.reset(num_players=2, seed=42)
-    done, _ = env.step("5 1")
+    done = env.step("5 1")
     assert not done
     assert env.state.error_count == 1
 
@@ -49,7 +49,7 @@ def test_out_of_range_pile_is_invalid():
 def test_bad_format_is_invalid():
     env = NimEnv(piles=[3])
     env.reset(num_players=2, seed=42)
-    done, _ = env.step("take one from pile zero")
+    done = env.step("take one from pile zero")
     assert not done
     assert env.state.error_count == 1
 
@@ -78,7 +78,7 @@ def test_zero_quantity_is_atomic_and_does_not_rotate():
     env.reset(num_players=2, seed=42)
     before = copy.deepcopy(env.state.game_state)
 
-    done, _ = env.step("0 0")
+    done = env.step("0 0")
 
     assert not done
     assert env.state.error_count == 1
@@ -91,7 +91,7 @@ def test_unbalanced_brackets_are_rejected(action):
     env = NimEnv(piles=[3])
     env.reset(num_players=2, seed=42)
 
-    done, _ = env.step(action)
+    done = env.step(action)
 
     assert not done
     assert env.state.error_count == 1
@@ -112,7 +112,7 @@ def test_huge_integer_is_rejected_without_conversion_or_mutation(monkeypatch):
 
     monkeypatch.setattr(nim_module, "int", guarded_int, raising=False)
 
-    done, _ = env.step(f"0 {'9' * 100_000}")
+    done = env.step(f"0 {'9' * 100_000}")
 
     assert not done
     assert env.state.error_count == 1
@@ -184,7 +184,7 @@ def test_terminal_action_is_counted_and_final_state_is_rendered():
     env = NimEnv(piles=[1])
     env.reset(num_players=2, seed=42)
 
-    done, _ = env.step("[0 1]")
+    done = env.step("[0 1]")
 
     assert done
     assert env.state.turn == 1

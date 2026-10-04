@@ -24,10 +24,10 @@ def _fresh(equation="A + B = C"):
 
 def _play_then_two_invalid_moves(env, actions):
     for action in actions:
-        done, _ = env.step(action)
+        done = env.step(action)
         assert not done and env.state.error_count == 0
     env.step("Z 1")
-    done, _ = env.step("Z 2")
+    done = env.step("Z 2")
     assert done
     return env.state.rewards[0]
 
@@ -35,36 +35,36 @@ def _play_then_two_invalid_moves(env, actions):
 def test_correct_mapping_wins():
     env = _fresh()  # A + B = C  ->  1 + 2 = 3
     for action in ["A 1", "B 2", "C 3"]:
-        done, _ = env.step(action)
+        done = env.step(action)
     assert done and env.state.rewards == {0: 1.0}
 
 
 def test_complete_but_wrong_mapping_can_be_corrected():
     env = _fresh()
     for action in ["A 1", "B 2", "C 9"]:  # 1 + 2 != 9
-        done, _ = env.step(action)
+        done = env.step(action)
     assert not done
     assert env.state.game_state["mapping"] == {"A": 1, "B": 2, "C": 9}
 
-    done, _ = env.step("C 3")
+    done = env.step("C 3")
     assert done and env.state.rewards == {0: 1.0}
 
 
 def test_invalid_format_increments_error_count():
     env = _fresh()
-    done, _ = env.step("A")  # missing digit
+    done = env.step("A")  # missing digit
     assert not done and env.state.error_count == 1
 
 
 def test_letter_not_in_puzzle_rejected():
     env = _fresh()
-    done, _ = env.step("Z 1")  # Z is not part of the equation
+    done = env.step("Z 1")  # Z is not part of the equation
     assert not done and env.state.error_count == 1
 
 
 def test_leading_digit_zero_rejected():
     env = _fresh()
-    done, _ = env.step("A 0")  # A is a leading letter, cannot be 0
+    done = env.step("A 0")  # A is a leading letter, cannot be 0
     assert not done and env.state.error_count == 1
 
 
@@ -72,7 +72,7 @@ def test_duplicate_digit_rejected():
     env = _fresh()
     env.step("A 1")  # valid assignment resets error count
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step("B 1")  # digit 1 already used by A
+    done = env.step("B 1")  # digit 1 already used by A
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -81,7 +81,7 @@ def test_invalid_move_reports_reason_and_escalation_awards_progress():
     env = _fresh()
     env.step("A 1")
     before = len(env.state.events)
-    done, _ = env.step("Z 1")
+    done = env.step("Z 1")
     assert not done
     new_events = env.state.events[before:]
     assert any(event[:3] == (0, "Z 1", ta.ObservationType.PLAYER_ACTION) for event in new_events)
@@ -90,7 +90,7 @@ def test_invalid_move_reports_reason_and_escalation_awards_progress():
         for _, message, kind, _ in new_events
     )
 
-    done, _ = env.step("Z 2")  # second consecutive invalid move escalates
+    done = env.step("Z 2")  # second consecutive invalid move escalates
     assert done
     assert env.state.rewards == {0: 1 / 3}
     assert env.state.game_info[0]["reason"] == "Invalid Move: Letter Z not in puzzle."
@@ -101,16 +101,16 @@ def test_clearing_a_letter_lets_a_full_ten_letter_mapping_be_corrected():
     solution = {"A": 2, "E": 9, "L": 6, "N": 3, "O": 8, "P": 4, "R": 0, "S": 1, "T": 7, "U": 5}
     wrong = dict(solution, A=7, T=2)  # every digit is now in use
     for letter, digit in wrong.items():
-        done, _ = env.step(f"{letter} {digit}")
+        done = env.step(f"{letter} {digit}")
         assert not done
     assert env.state.error_count == 0
 
-    done, _ = env.step("A -")
+    done = env.step("A -")
     assert not done and env.state.error_count == 0
     assert "A" not in env.game_state["mapping"] and 7 not in env.game_state["digit_used"]
-    done, _ = env.step("T 7")
+    done = env.step("T 7")
     assert not done
-    done, _ = env.step("a, 2")
+    done = env.step("a, 2")
     assert done and env.state.rewards == {0: 1.0}
 
 
@@ -118,7 +118,7 @@ def test_clearing_an_unassigned_letter_is_invalid_and_atomic():
     env = _fresh()
     env.step("A 1")
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step("B -")
+    done = env.step("B -")
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
@@ -131,7 +131,7 @@ def test_prompt_states_the_puzzle_rules_and_a_legal_example():
     assert "cannot be 0 (here: M, S)" in prompt
     assert "You have 100 moves." in prompt
     example = re.search(r"e\.g\. '([^']+)'", prompt).group(1)
-    done, _ = env.step(example)
+    done = env.step(example)
     assert not done and env.state.error_count == 0 and len(env.state.game_state["mapping"]) == 1
 
 
@@ -139,14 +139,14 @@ def test_prompt_states_the_puzzle_rules_and_a_legal_example():
 def test_parser_rejects_noncanonical_actions(action):
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(action)
+    done = env.step(action)
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
 
 
 def test_comma_separated_assignment_is_valid():
     env = _fresh()
-    done, _ = env.step("A, 1")
+    done = env.step("A, 1")
     assert not done
     assert env.state.game_state["mapping"] == {"A": 1}
 
@@ -182,7 +182,7 @@ def test_oversized_equations_are_rejected_before_solving(equation):
 def test_turn_limit_counts_last_action_and_awards_bounded_progress():
     env = CryptarithmEnv(equation="A + B = C", max_turns=1)
     env.reset(num_players=1, seed=42)
-    done, _ = env.step("A 1")
+    done = env.step("A 1")
     assert done
     assert env.state.turn == 1
     assert env.state.game_info[0]["turn_count"] == 1
@@ -195,7 +195,7 @@ def test_immediate_invalid_policy_scores_zero_on_registered_configs(env_id, seed
     env = ta.make(env_id)
     env.reset(num_players=1, seed=seed)
     for _ in range(5):
-        done, _ = env.step("@@@ not a move @@@")
+        done = env.step("@@@ not a move @@@")
         if done:
             break
     assert done
@@ -238,7 +238,7 @@ def test_assigning_and_clearing_a_letter_earns_nothing():
     env = CryptarithmEnv(max_turns=4)
     env.reset(num_players=1, seed=0)
     for action in ["S 9", "S -", "S 9", "S -"]:
-        done, _ = env.step(action)
+        done = env.step(action)
     assert done and env.state.game_info[0]["reason"] == "Move limit reached."
     assert env.state.rewards == {0: 0}
 

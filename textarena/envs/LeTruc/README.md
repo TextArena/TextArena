@@ -29,8 +29,9 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `LeTruc-v1-mdp`).
 - **Stakes:** a hand is worth 1 point. On your turn, before playing a card, you may raise ("truc"): from 1 to 2, then
   by 2 at a time up to 12. Your opponent must accept (the hand is now worth the new value and the player whose card
   play was interrupted continues), fold (conceding the hand, which scores the value from before that raise for the
-  raiser), or raise again (accepting the offer and proposing the next value). Either player may raise on any of their
-  turns, including right after their own raise was accepted.
+  raiser), or raise again (accepting the offer and proposing the next value). Either player may make the first raise of
+  a hand; after that, only the player who accepted the most recent raise may make the next one, so nobody can raise
+  twice in a row.
 - The winner of a hand scores its value. There is no turn limit unless `max_turns` is set; then, if that many actions
   pass before anyone reaches 12, the player with more match points wins and equal points are a draw.
 
@@ -48,9 +49,9 @@ While a raise is pending you must answer it before any card is played. There is 
 ## Observations
 
 Each player privately receives their three cards at every deal. Before every action the acting player sees the match
-points, the hand number with its dealer and leader, the value of the hand, any pending raise, the tricks played so far
-this hand, the card led to the current trick, their own cards, and their legal actions. Both players see every card
-played, every raise, acceptance and fold, and the result of each trick and hand.
+points, the hand number with its dealer and leader, the value of the hand, any pending raise or who alone may raise
+next, the tricks played so far this hand, the card led to the current trick, their own cards, and their legal actions.
+Both players see every card played, every raise, acceptance and fold, and the result of each trick and hand.
 
 ## Rewards
 
@@ -71,5 +72,6 @@ played, every raise, acceptance and fold, and the result of each trick and hand.
 
 - Truc is played with different regional rules. This version uses the Catalan card ranking on a French deck, but
   voids a hand whose three tricks are all spoilt as in French Trut (in Catalan Truc the non-dealer wins it). Its stake
-  ladder of 1, 2, 4, …, 12 differs from both Catalan Truc (2 and 3 only) and French Truc (raises of any size), and
-  unlike both it lets the same player raise twice in succession. The Catalan rule for a side on 11 points is not used.
+  ladder of 1, 2, 4, …, 12 differs from both Catalan Truc (2 and 3 only) and French Truc (raises of any size). As in
+  both, only the player who accepted the most recent raise may raise next. The Catalan rule for a side on 11 points is
+  not used.

@@ -8,11 +8,23 @@ class QuantumTicTacToeEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
     mdp_includes_actions = False
+    action_pattern = r"(?i)^(?:([0-9]+)\s*,\s*([0-9]+)|collapse\s+([0-9]+))$"
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.cell_mapping = {i * 3 + j: (i, j) for i in range(3) for j in range(3)}
         self.max_turns = 25
+
+    @property
+    def action_format(self) -> str:
+        move_id = self.game_state["pending_collapse"]
+        if move_id is None:
+            return "two different open cells separated by a comma, for example '0,4'"
+        player_id, a, b = self.game_state["superpositions"][move_id]
+        return (
+            f"'collapse' followed by cell {self._cell(a)} or {self._cell(b)}, the two cells of mark "
+            f"{self._mark(player_id, move_id)}, for example 'collapse {self._cell(a)}'"
+        )
 
     def setup(self) -> Dict[str, Any]:
         return {
@@ -21,6 +33,7 @@ class QuantumTicTacToeEnv(ta.GameEnv):
             "superpositions": {},
             "move_log": [],
             "move_count": 0,
+            "pending_collapse": None,  # id of the mark that closed a cycle, until the opponent chooses its cell
         }
 
     def prompt(self, player_id: int) -> str:
@@ -35,51 +48,78 @@ class QuantumTicTacToeEnv(ta.GameEnv):
             "- Both halves of a spooky mark are entangled and carry your symbol and the move number, e.g. 'O1' or 'X2'.\n"
             "- You cannot place spooky marks in a square that has already collapsed (solidified).\n\n"
             "Collapse Rule:\n"
-            "- If your move creates a cycle in the entanglement graph, it collapses automatically.\n"
-            "- The mark you just placed becomes a classical mark in the lower-numbered of its two cells.\n"
-            "- Every other spooky mark in a cell that collapses is pushed into its other cell, which can collapse further marks in turn.\n"
-            "- If a collapse leaves only one open cell, it is filled automatically with the next player's classical mark.\n\n"
+            "- If a move closes a cycle in the entanglement graph (for example, a second mark in the same two cells), the "
+            "cycle collapses, and the opponent of the player who closed it chooses how.\n"
+            "- The chooser replies 'collapse c', where c is one of the two cells of the mark that closed the cycle. That "
+            "mark becomes a classical mark in cell c.\n"
+            "- Every other spooky mark in a cell that collapses is pushed into its other cell, which can collapse further "
+            "marks in turn. The board lists what each choice would do.\n"
+            "- After the collapse, the chooser places their own spooky mark with a separate reply.\n"
+            "- If a collapse leaves only one open cell, it is filled automatically with the chooser's classical mark.\n\n"
             "Victory:\n"
             "- The game ends when a player has three classical marks in a row.\n"
             "- If both players get a line during the same collapse, the one with the lower max move number wins.\n"
             "- A full board without a line is a draw.\n\n"
-            "Example move: '0,4' places a spooky mark in cells 0 and 4."
+            "Examples: '0,4' places a spooky mark in cells 0 and 4. If Player 0 opens with '0,4' and Player 1 also "
+            "plays '0,4', Player 1 has closed a cycle, so Player 0 replies 'collapse 0' (X2 becomes classical in "
+            "cell 0 and O1 in cell 4) or 'collapse 4' (X2 in cell 4 and O1 in cell 0)."
         )
 
     def render(self, player_id: int) -> str:
-        return f"Quantum Tic Tac Toe Board:\n\n{self._render_board()}\n\nSubmit your move as 'a,b' to place a quantum mark in two locations."
+        board = f"Quantum Tic Tac Toe Board:\n\n{self._render_board()}\n\n"
+        move_id = self.game_state["pending_collapse"]
+        if move_id is None:
+            return board + "Submit your move as 'a,b' to place a quantum mark in two locations."
+        return board + f"{self._collapse_options(move_id)}\nSubmit 'collapse <cell>' to choose."
 
     def get_board_str(self) -> str:
         return self._render_board()
 
-    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
-        match = re.search(r"^([0-9]+)\s*,\s*([0-9]+)$", action)
-        if not match:
-            return self.invalid("Invalid format. Use 'a,b'.")
+    def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
+        gs = self.game_state
+        pending = gs["pending_collapse"]
         try:
-            a, b = int(match.group(1)), int(match.group(2))
+            cells = [int(group) for group in move.groups() if group is not None]
         except ValueError:
             return self.invalid("Cell indices are too large.")
+
+        if move.group(3) is not None:
+            if pending is None:
+                return self.invalid("No collapse is pending. Place a spooky mark in two open cells, e.g. '0,4'.")
+            _, a, b = gs["superpositions"][pending]
+            options = {self._cell(a): a, self._cell(b): b}
+            if cells[0] not in options:
+                return self.invalid(f"Choose cell {self._cell(a)} or {self._cell(b)}, e.g. 'collapse {self._cell(a)}'.")
+            return self._resolve_collapse(player_id, pending, options[cells[0]])
+
+        if pending is not None:
+            return self.invalid(f"A cycle is waiting to collapse. {self._collapse_options(pending)}")
+        a, b = cells
         if a == b or a not in self.cell_mapping or b not in self.cell_mapping:
             return self.invalid("Invalid or duplicate cell indices.")
-        # A spooky mark joins an unordered pair of cells. Canonicalize it so
-        # reversing the submitted coordinates cannot select a different
-        # automatic collapse.
+        # A spooky mark joins an unordered pair of cells; storing it in cell order makes '4,0' and '0,4' identical.
         pos_a, pos_b = sorted((self.cell_mapping[a], self.cell_mapping[b]))
-        gs = self.game_state
         board = gs["board"]
         if board[pos_a[0]][pos_a[1]] or board[pos_b[0]][pos_b[1]]:
             return self.invalid("One of the cells is already solidified.")
 
-        gs["superpositions"][gs["move_count"]] = (player_id, pos_a, pos_b)
-        gs["move_log"].append((gs["move_count"], player_id, pos_a, pos_b))
+        move_id = gs["move_count"]
+        gs["superpositions"][move_id] = (player_id, pos_a, pos_b)
+        gs["move_log"].append((move_id, player_id, pos_a, pos_b))
         gs["move_count"] += 1
         self.broadcast(
-            f"Player {player_id} placed spooky mark {self._mark(player_id, gs['move_count'] - 1)} "
+            f"Player {player_id} placed spooky mark {self._mark(player_id, move_id)} "
             f"in cells {self._cell(pos_a)} and {self._cell(pos_b)}.",
             ta.ObservationType.GAME_ACTION_DESCRIPTION,
         )
-        return self._resolve_cycles()
+        if self._closes_cycle(move_id):
+            gs["pending_collapse"] = move_id
+            self.broadcast(
+                f"Mark {self._mark(player_id, move_id)} closed a cycle. Player {1 - player_id} chooses how it "
+                f"collapses. {self._collapse_options(move_id)}",
+                ta.ObservationType.GAME_MESSAGE,
+            )
+        return None
 
     @staticmethod
     def _mark(player_id: int, move_id: int) -> str:
@@ -112,39 +152,68 @@ class QuantumTicTacToeEnv(ta.GameEnv):
             + f"\n\nSpooky marks: {spooky or 'none'}\nOpen cells: {open_cells or 'none'}"
         )
 
-    def _resolve_cycles(self) -> Optional[ta.Outcome]:
+    def _closes_cycle(self, move_id: int) -> bool:
+        """Whether the other spooky marks already connect the two cells of this mark."""
         superpositions = self.game_state["superpositions"]
-        if not superpositions:
-            return None
-
-        newest_id = max(superpositions)
-        _, start, target = superpositions[newest_id]
-        graph: Dict[Tuple[int, int], List[Tuple[Tuple[int, int], int]]] = {}
-        for move_id, (_, a, b) in superpositions.items():
-            if move_id == newest_id:
-                continue
-            graph.setdefault(a, []).append((b, move_id))
-            graph.setdefault(b, []).append((a, move_id))
-
-        queue = deque([start])
-        parent: Dict[Tuple[int, int], Tuple[Tuple[int, int], int]] = {}
-        seen = {start}
-        while queue:
-            node = queue.popleft()
+        _, start, target = superpositions[move_id]
+        graph: Dict[Tuple[int, int], List[Tuple[int, int]]] = {}
+        for other_id, (_, a, b) in superpositions.items():
+            if other_id != move_id:
+                graph.setdefault(a, []).append(b)
+                graph.setdefault(b, []).append(a)
+        seen, frontier = {start}, [start]
+        while frontier:
+            node = frontier.pop()
             if node == target:
-                path_ids: List[int] = []
-                while node != start:
-                    previous, move_id = parent[node]
-                    path_ids.append(move_id)
-                    node = previous
-                path_ids.reverse()
-                return self._collapse_superpositions(path_ids + [newest_id], seed_move_id=newest_id)
-            for neighbor, move_id in graph.get(node, []):
+                return True
+            for neighbor in graph.get(node, []):
                 if neighbor not in seen:
                     seen.add(neighbor)
-                    parent[neighbor] = (node, move_id)
-                    queue.append(neighbor)
-        return None
+                    frontier.append(neighbor)
+        return False
+
+    def _collapse_plan(self, move_id: int, chosen: Tuple[int, int]) -> List[Tuple[int, Tuple[int, int]]]:
+        """Where every affected spooky mark ends up if `move_id` collapses into `chosen`, in resolution order."""
+        superpositions = self.game_state["superpositions"]
+        plan: Dict[int, Tuple[int, int]] = {}
+        pending = deque([(move_id, chosen)])
+        while pending:
+            current_id, cell = pending.popleft()
+            if current_id in plan:
+                continue
+            plan[current_id] = cell
+            for dependent_id, (_, a, b) in superpositions.items():
+                if dependent_id not in plan and cell in (a, b):
+                    pending.append((dependent_id, b if cell == a else a))
+        return list(plan.items())
+
+    def _collapse_options(self, move_id: int) -> str:
+        player_id, a, b = self.game_state["superpositions"][move_id]
+        options = []
+        for cell in (a, b):
+            placements = ", ".join(
+                f"{self._mark(self.game_state['superpositions'][mid][0], mid)} in cell {self._cell(position)}"
+                for mid, position in self._collapse_plan(move_id, cell)
+            )
+            options.append(f"'collapse {self._cell(cell)}' puts {placements}")
+        return (
+            f"Collapse options for {self._mark(player_id, move_id)} (cells {self._cell(a)} and {self._cell(b)}): "
+            + "; ".join(options) + "."
+        )
+
+    def _resolve_collapse(self, player_id: int, move_id: int, chosen: Tuple[int, int]) -> Optional[ta.Outcome]:
+        gs = self.game_state
+        plan = self._collapse_plan(move_id, chosen)
+        gs["pending_collapse"] = None
+        self.broadcast(
+            f"Player {player_id} collapsed {self._mark(gs['superpositions'][move_id][0], move_id)} into cell "
+            f"{self._cell(chosen)}.",
+            ta.ObservationType.GAME_ACTION_DESCRIPTION,
+        )
+        for current_id, cell in plan:
+            self._collapse_move(current_id, cell)
+        self.set_next_player(player_id)
+        return self._finish_collapse(player_id)
 
     def _collapse_move(self, move_id: int, chosen: Tuple[int, int]) -> None:
         gs = self.game_state
@@ -164,45 +233,27 @@ class QuantumTicTacToeEnv(ta.GameEnv):
         board = self.game_state["board"]
         return [(r, c) for r in range(3) for c in range(3) if not board[r][c]]
 
-    def _collapse_last_empty_cell(self):
+    def _collapse_last_empty_cell(self, player_id: int):
         empty_cells = self._get_empty_cells()
         if len(empty_cells) != 1: return
 
         r, c = empty_cells[0]
-        next_player_symbol = 'X' if self.current_player_id == 0 else 'O'
-        self.game_state["board"][r][c] = next_player_symbol
+        symbol = 'X' if player_id == 1 else 'O'
+        self.game_state["board"][r][c] = symbol
         self.game_state["classical_moves"][r][c] = self.game_state["move_count"] + 1
         self.broadcast(
             f"Superposition for last cell resolved. Cell {self._cell((r, c))} is now "
-            f"{next_player_symbol}{self.game_state['move_count'] + 1}.",
+            f"{symbol}{self.game_state['move_count'] + 1}.",
             ta.ObservationType.GAME_MESSAGE,
         )
 
-    def _collapse_superpositions(self, move_ids: List[int], seed_move_id: Optional[int] = None) -> Optional[ta.Outcome]:
-        gs = self.game_state
-        superpositions = gs["superpositions"]
-        if move_ids:
-            seed_move_id = move_ids[-1] if seed_move_id is None else seed_move_id
-            if seed_move_id not in superpositions:
-                raise RuntimeError("Cycle seed is missing")
-            _, preferred, _ = superpositions[seed_move_id]
-            pending = deque([(seed_move_id, preferred)])
-            while pending:
-                move_id, chosen = pending.popleft()
-                if move_id not in superpositions:
-                    continue
-                self._collapse_move(move_id, chosen)
-                for dependent_id, (_, a, b) in list(superpositions.items()):
-                    if chosen == a:
-                        pending.append((dependent_id, b))
-                    elif chosen == b:
-                        pending.append((dependent_id, a))
-
+    def _finish_collapse(self, player_id: int) -> Optional[ta.Outcome]:
+        """Score the board after a collapse chosen by `player_id`, who would move next."""
         outcome = self._line_outcome()
         if outcome is not None:
             return outcome
 
-        self._collapse_last_empty_cell()
+        self._collapse_last_empty_cell(player_id)
         outcome = self._line_outcome()
         if outcome is not None:
             return outcome
@@ -243,13 +294,3 @@ class QuantumTicTacToeEnv(ta.GameEnv):
             if all(board[r][c] == symbol for r, c in line)
         ]
         return min(maxima) if maxima else None
-
-    def _check_winner(self, symbol: str) -> bool:
-        board = self.game_state["board"]
-        for i in range(3):
-            if board[i][0] == board[i][1] == board[i][2] == symbol: return True
-            if board[0][i] == board[1][i] == board[2][i] == symbol: return True
-        if board[0][0] == board[1][1] == board[2][2] == symbol: return True
-        if board[0][2] == board[1][1] == board[2][0] == symbol: return True
-
-        return False

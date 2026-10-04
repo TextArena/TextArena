@@ -50,7 +50,7 @@ class BanditEnv(ta.GameEnv):
             f'Your goal is to strategically choose buttons at each time step to collect information about their reward distribution, that will let you choose the button with the highest mean reward correctly at the end of {self.num_turns} turns.\n'
             f"On each turn, reply with the name of the button you want to press, e.g. '{self.buttons[0]}'.\n"
             f"After your {self.num_turns} presses, reply with the name of the button you believe has the highest mean reward. "
-            "That final answer ends the game: a correct answer scores 1, and a wrong one scores minus the gap between the best mean and the mean of the button you chose."
+            "That final answer ends the game: a correct answer scores 1, and a wrong one scores 0."
         )
 
     def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
@@ -68,7 +68,7 @@ class BanditEnv(ta.GameEnv):
         if self.state.turn >= self.num_turns:  # final decision turn
             if button == max(self.game_state['ground_truth'], key=self.game_state['ground_truth'].get):
                 return self.outcome({0: 1.0}, reason="Congratulations! You chose the correct button.")
-            return self.outcome({0: -self._regret(button)}, reason="You chose an incorrect button.")
+            return self.outcome({0: 0.0}, reason="You chose an incorrect button.")
 
         reward = 1.0 if self.rng.random() < self.game_state['ground_truth'][button] else 0.0
         self.game_state['history'][button].append(reward)
@@ -91,6 +91,3 @@ class BanditEnv(ta.GameEnv):
             N = len(self.game_state['history'][button]); R = sum(self.game_state['history'][button]) / N if N > 0 else 0.0
             lines.append(f"{button}: {R:.2f} (played {N} times)")
         return "\n".join(lines)
-
-    def _regret(self, button: str) -> float:
-        return max(self.game_state['ground_truth'].values()) - self.game_state['ground_truth'][button]

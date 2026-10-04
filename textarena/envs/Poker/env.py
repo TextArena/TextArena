@@ -450,14 +450,6 @@ class PokerEnv(ta.GameEnv):
             first_seat = self._next_seat(gs["button"], gs["hand_players"])
         return self._first_required_actor_from(first_seat)
 
-    def _get_next_active_player(self, cur: int) -> int:
-        n = self.state.num_players
-        for offset in range(1, n + 1):
-            i = (cur + offset) % n
-            if self._can_act(i):
-                return i
-        return cur
-
     def _is_hand_over(self) -> bool:
         gs = self.game_state
         contenders = [

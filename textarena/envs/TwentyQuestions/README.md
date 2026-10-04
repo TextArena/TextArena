@@ -51,16 +51,16 @@ history. When the game ends, the board reveals the target word.
 
 | Outcome | Reward |
 | --- | --- |
-| Correct guess | `+1` |
+| Correct guess | `1` |
 | Wrong guess | `0` |
-| Second consecutive invalid move (such as a question after the budget is used up) | `-1` |
+| Second consecutive invalid move (such as a question after the budget is used up) | `0` |
 
 ## Parameters
 
 <!-- BEGIN GENERATED: parameters -->
 - `hardcore` (default `False`): Draw from the hardcore list (150 uncommon words such as `astrolabe`, `sommelier`, or `catacombs`) instead of the basic list (257 everyday words such as `library`, `nurse`, or `banana`).
 - `max_turns` (default `21`): The total number of turns. The player may ask `max_turns - 1` questions, and the final turn is reserved for the guess. Accepts an integer of at least 2.
-- `gamemaster` (default `None`): The game master that answers the questions, called with a prompt string and returning `Yes`, `No`, or `I don't know`. Inject one to play offline or with a different model; without one, questions go to OpenRouter `openai/gpt-4o`. Accepts a callable or None.
+- `gamemaster` (default `None`): The game master that answers the questions, called with a prompt string and returning `Yes`, `No`, or `I don't know`. Inject one to play offline or with a different model; without one, questions go to OpenRouter `qwen/qwen3.8-27b`. Accepts a callable or None.
 - `words_path` (default `None`): An alternative word file with `basic` and `hardcore` sections, each mapping theme names to lists of words. Without it, the bundled `twenty_questions_words.json` is used.
 <!-- END GENERATED: parameters -->
 

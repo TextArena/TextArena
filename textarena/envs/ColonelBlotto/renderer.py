@@ -90,28 +90,3 @@ def create_game_str(game_state: dict) -> str:
     lines.append("└" + "─" * 50 + "┘")
     
     return "\n".join(lines)
-
-
-def create_simple_game_str(game_state: dict) -> str:
-    """Create a simple text representation for debugging"""
-    phase = game_state.get('phase', 'allocation')
-    current_round = game_state.get('current_round', 1)
-    scores = game_state.get('scores', {0: 0, 1: 0})
-    
-    lines = [
-        f"=== COLONEL BLOTTO - Round {current_round} ===",
-        f"Phase: {phase.title()}",
-        f"Score: Alpha {scores[0]} - Beta {scores[1]}",
-        ""
-    ]
-    
-    fields = game_state.get('fields', [])
-    if fields and phase == 'results':
-        lines.append("Battle Results:")
-        for field in fields:
-            alpha = field['player_0_units']
-            beta = field['player_1_units']
-            winner = "Alpha" if alpha > beta else "Beta" if beta > alpha else "Tie"
-            lines.append(f"  Field {field['name']}: Alpha {alpha} vs Beta {beta} -> {winner}")
-    
-    return "\n".join(lines)

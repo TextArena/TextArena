@@ -23,7 +23,7 @@ def _play(env, actions):
     done = False
     for action in actions:
         assert not done, "game ended before the scripted line finished"
-        done, _ = env.step(action)
+        done = env.step(action)
         assert env.state.error_count == 0, f"unexpected invalid move: {action}"
     return done
 
@@ -39,7 +39,7 @@ def test_reset_structure():
 
 def test_opening_placement_uses_opponents_flat_and_reserve():
     env = _fresh()
-    done, _ = env.step("place () {(0,0): [F1]}")
+    done = env.step("place () {(0,0): [F1]}")
     assert not done
     assert env.board[0][0] == ["F1"]
     assert env.players[1]["stones"] == 9
@@ -62,7 +62,7 @@ def test_opening_rejects_self_pieces_nonflats_and_movement(action):
     env = _fresh()
     before = env.snapshot()
 
-    done, _ = env.step(action)
+    done = env.step(action)
 
     assert not done
     assert env.board == before["state"].game_state["board"]
@@ -74,7 +74,7 @@ def test_malformed_placement_is_invalid_without_mutation():
     env = _fresh()
     before = env.snapshot()
 
-    done, _ = env.step("place () {(0,0): []}")
+    done = env.step("place () {(0,0): []}")
 
     assert not done
     assert env.board == before["state"].game_state["board"]
@@ -85,7 +85,7 @@ def test_huge_source_coordinate_is_rejected_atomically():
     env = _fresh()
     before = env.snapshot()
 
-    done, _ = env.step(f"move ({'9' * 5000},0) {{(0,0): [F0]}}")
+    done = env.step(f"move ({'9' * 5000},0) {{(0,0): [F0]}}")
 
     assert not done
     assert env.state.error_count == 1
@@ -97,7 +97,7 @@ def test_huge_allocation_coordinate_is_rejected_atomically():
     env = _fresh()
     before = env.snapshot()
 
-    done, _ = env.step(f"place () {{({'9' * 5000},0): [F0]}}")
+    done = env.step(f"place () {{({'9' * 5000},0): [F0]}}")
 
     assert not done
     assert env.state.error_count == 1
@@ -108,7 +108,7 @@ def test_huge_allocation_coordinate_is_rejected_atomically():
 def test_duplicate_allocation_target_is_rejected():
     env = _fresh()
 
-    done, _ = env.step("place () {(0,0): [F0], (0,0): [F0]}")
+    done = env.step("place () {(0,0): [F0], (0,0): [F0]}")
 
     assert not done
     assert env.board[0][0] == []
@@ -117,7 +117,7 @@ def test_duplicate_allocation_target_is_rejected():
 
 def test_bad_format_is_invalid():
     env = _fresh()
-    done, _ = env.step("place a stone somewhere")
+    done = env.step("place a stone somewhere")
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
@@ -147,7 +147,7 @@ def test_placement_on_occupied_square_rejected():
     env = _fresh()
     env.step("place () {(0,0): [F1]}")  # P0 places P1's opening flat.
     # P1 tries to place onto the same occupied square.
-    done, _ = env.step("place () {(0,0): [F0]}")
+    done = env.step("place () {(0,0): [F0]}")
     assert not done
     assert env.state.error_count == 1
 
@@ -165,7 +165,7 @@ def test_connecting_road_wins():
     ]
     done = False
     for action in sequence:
-        done, _ = env.step(action)
+        done = env.step(action)
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
 
@@ -176,11 +176,11 @@ def test_stack_spread_must_be_straight_and_within_carry_limit():
     env.board[1][1] = ["F0", "F0", "F0", "F0"]
     before = [[stack[:] for stack in row] for row in env.board]
 
-    done, _ = env.step("move (1,1) {(1,2): [F0], (2,2): [F0]}")
+    done = env.step("move (1,1) {(1,2): [F0], (2,2): [F0]}")
     assert not done
     assert env.board == before
 
-    done, _ = env.step("move (1,1) {(1,2): [F0, F0, F0, F0]}")
+    done = env.step("move (1,1) {(1,2): [F0, F0, F0, F0]}")
     assert done  # second consecutive invalid move
     assert env.board == before
 
@@ -191,7 +191,7 @@ def test_capstone_can_flatten_wall_only_as_final_single_drop():
     env.board[1][0] = ["F1", "C0"]
     env.board[1][2] = ["W1"]
 
-    done, _ = env.step("move (1,0) {(1,1): [F1], (1,2): [C0]}")
+    done = env.step("move (1,0) {(1,1): [F1], (1,2): [C0]}")
 
     assert not done
     assert env.board[1][0] == []
@@ -206,7 +206,7 @@ def test_movement_that_uncovers_opponent_road_awards_opponent():
     env.board[0][1] = ["F1", "F0"]
     env.board[0][2] = ["F1"]
 
-    done, _ = env.step("move (0,1) {(1,1): [F0]}")
+    done = env.step("move (0,1) {(1,1): [F0]}")
 
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
@@ -217,7 +217,7 @@ def test_exhausting_reserve_uses_visible_flat_count():
 
     env.step("place () {(0,0): [F1]}")
     env.step("place () {(2,2): [F0]}")
-    done, _ = env.step("place () {(1,2): [F0]}")
+    done = env.step("place () {(1,2): [F0]}")
 
     assert done
     assert env.state.rewards == {0: 1, 1: -1}
@@ -230,7 +230,7 @@ def test_exhausting_reserve_draws_on_tied_visible_flat_count():
     env.step("place () {(2,2): [F0]}")
     env.step("place () {(1,2): [F0]}")
     env.step("place () {(2,0): [F1]}")
-    done, _ = env.step("place () {(1,1): [W0]}")
+    done = env.step("place () {(1,1): [W0]}")
 
     assert done
     assert env.state.rewards == {0: 0, 1: 0}
@@ -243,7 +243,7 @@ def test_full_board_flat_count_ignores_walls_capstones_and_covered_flats():
     env.board[1][0], env.board[1][1], env.board[1][2] = ["C0"], ["W0"], ["F1"]
     env.board[2][0], env.board[2][2] = ["F0"], ["W1"]
 
-    done, _ = env.step("place () {(2,1): [W0]}")  # fills the board without completing a road
+    done = env.step("place () {(2,1): [W0]}")  # fills the board without completing a road
 
     assert done
     # Player 0 tops more squares and owns more flats overall, but only flats on top count.
@@ -259,7 +259,7 @@ def test_road_completed_by_filling_the_board_beats_the_flat_count():
     env.board[1][0], env.board[1][1], env.board[1][2] = ["F0"], ["F1"], ["W0"]
     env.board[2][1], env.board[2][2] = ["W0"], ["F1"]
 
-    done, _ = env.step("place () {(2,0): [F0]}")  # last empty square; completes column 0
+    done = env.step("place () {(2,0): [F0]}")  # last empty square; completes column 0
 
     assert done
     assert env._flat_counts() == {0: 2, 1: 4}
@@ -272,7 +272,7 @@ def test_move_completing_both_roads_awards_the_mover():
     env.board[0][0], env.board[0][1], env.board[0][2] = ["F1"], ["F1", "F0"], ["F1"]
     env.board[1][0], env.board[1][2] = ["F0"], ["F0"]
 
-    done, _ = env.step("move (0,1) {(1,1): [F0]}")  # uncovers row 0 for Player 1, completes row 1
+    done = env.step("move (0,1) {(1,1): [F0]}")  # uncovers row 0 for Player 1, completes row 1
 
     assert done
     assert env._check_win(0) and env._check_win(1)
