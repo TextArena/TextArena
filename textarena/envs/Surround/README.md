@@ -10,9 +10,9 @@ wall or a trail is out, and the last player moving wins ([background](https://en
 
 | Env ID | Parameters |
 | --- | --- |
-| `Surround-v0` | `width=5`, `height=5`, `max_turns=40` |
+| `Surround-v1` | `width=5`, `height=5`, `max_turns=40` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Surround-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Surround-v0", width=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Surround-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Surround-v1", width=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -57,7 +57,8 @@ With two players, the survivor gets `+1` and the other `-1`, or both get `0` whe
 
 ## Parameters
 
-- `width` and `height` (default `10` × `10`): board size, integers of at least 3. Spawns only use interior cells, so a
-  board fits at most `(width − 2) × (height − 2)` players: 9 on the 5×5 `Surround-v0`. Resetting with more players
-  raises a `ValueError`.
-- `max_turns` (default `100`): number of rounds, each one move by every living player, before the game ends.
+<!-- BEGIN GENERATED: parameters -->
+- `width` (default `10`): The board width. Accepts an integer of at least 3.
+- `height` (default `10`): The board height. Accepts an integer of at least 3.
+- `max_turns` (default `100`): The number of rounds, each one move by every living player, before the game ends. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->

@@ -11,10 +11,10 @@ planning toward an uncertain goal.
 
 | Env ID | Parameters |
 | --- | --- |
-| `LetterAuction-v0` | `starting_coins=100` |
-| `LetterAuction-v0-hard` | `starting_coins=25` |
+| `LetterAuction-v1` | `starting_coins=100` |
+| `LetterAuction-v1-hard` | `starting_coins=25` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `LetterAuction-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("LetterAuction-v0", starting_coins=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `LetterAuction-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("LetterAuction-v1", starting_coins=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -63,10 +63,10 @@ keep track of their coins and letters from these messages.
 
 ## Parameters
 
-- `starting_coins` (default `100`): coins each player starts with.
-- `max_turns` (default `None`): optional cap on the total number of turns (bids, passes, and word submissions; invalid
-  attempts do not count). `None` means no cap; the game always ends because bids must rise and coins are limited. A cap
-  must be at least `54`, the length of the shortest complete game (two turns per letter plus two word submissions).
+<!-- BEGIN GENERATED: parameters -->
+- `starting_coins` (default `100`): The coins each player starts with. Accepts an integer of at least 1.
+- `max_turns` (default `None`): An optional cap on the total number of turns (bids, passes, and word submissions; invalid attempts do not count). `None` means no cap; the game always ends because bids must rise and coins are limited. The minimum is the length of the shortest complete game (two turns per letter plus two word submissions). Accepts an integer of at least 54 or None.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

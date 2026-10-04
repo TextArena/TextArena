@@ -17,31 +17,30 @@ class DebateEnv(ta.GameEnv):
     max_argument_chars = 10_000
     max_jury_size = 100
 
-    def __init__(self, max_turns: Optional[int]=4, jury_class: Optional[Any]=None, jury_size: Optional[int]=5, topics_path: Optional[str]=None):
-        """
-        Args:
-            max_turns (int, optional): Number of turns total (for both players). Must be even.
-            jury_class (Any, optional): A Jury class or factory function that returns a Jury-like object. Defaults to OpenRouterJury if None.
-            jury_size (int, optional): Number of models in the jury. Defaults to 5.
-            topics_path (str, optional): Path to the JSON file containing debate topics. Defaults to "textarena/envs/two_player/Debate/topics.json".
-        """
-        if jury_class is None:
+    max_turns = ta.Param(
+        4, "The number of arguments in the whole debate. The players alternate, so each gets half of them.",
+        check=lambda turns: turns >= 2 and turns % 2 == 0, rule="an even integer of at least 2",
+    )
+    jury_size = ta.Param(5, "The number of jurors.", min=1, max=max_jury_size)
+    jury_class = ta.Param(
+        None, "The class or factory called with `options` and `jury_size` (and the env's seeded `rng` if it accepts "
+              "one). The object it returns must provide `evaluate(context)` returning "
+              "`{\"Affirmative\": votes, \"Negative\": votes}`. None uses `OpenRouterJury`.",
+        type=object, check=callable, rule="a callable",
+    )
+    topics_path = ta.Param(
+        None, "A JSON file of the form `{\"topics\": [\"...\", ...]}` with unique, non-empty topics. None uses the "
+              "bundled `topics.json`.", type=str,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.jury_class is None:
             from textarena.utils import OpenRouterJury
-            jury_class = OpenRouterJury
-        if isinstance(max_turns, bool) or not isinstance(max_turns, int) or max_turns < 2 or max_turns % 2:
-            raise ValueError(f"max_turns must be a positive even integer of at least 2. Received: {max_turns}")
-        if not callable(jury_class):
-            raise TypeError("jury_class must be callable.")
-        if (
-            isinstance(jury_size, bool)
-            or not isinstance(jury_size, int)
-            or not 1 <= jury_size <= self.max_jury_size
-        ):
-            raise ValueError(f"jury_size must be an integer from 1 through {self.max_jury_size}.")
-        self.max_turns = max_turns
-        self._load_topics(topics_path)
-        self._jury_class = jury_class
-        self._jury_size = jury_size
+            self._jury_class = OpenRouterJury
+        else:
+            self._jury_class = self.jury_class
+        self._load_topics(self.topics_path)
         self.jury = None
 
     def get_board_str(self): return create_board_str(game_state=self.game_state)
@@ -88,7 +87,7 @@ class DebateEnv(ta.GameEnv):
             f"You will have {self.max_turns} total turns (shared between both players) to present your arguments. "
             f"Player 0 speaks first and the players alternate, so each of you gets {self.max_turns // 2} turns. "
             f"On your turn, type your argument (at most {self.max_argument_chars} characters).\n"
-            f"Scoring: a jury of {self._jury_size} AI jurors votes Affirmative or Negative on the topic before the debate "
+            f"Scoring: a jury of {self.jury_size} AI jurors votes Affirmative or Negative on the topic before the debate "
             "and again after reading the full transcript. The side whose share of the vote grows more wins; equal gains "
             "are a draw.\n"
         )
@@ -135,7 +134,7 @@ class DebateEnv(ta.GameEnv):
 
     def _create_jury(self):
         jury_kwargs = {
-            "jury_size": self._jury_size,
+            "jury_size": self.jury_size,
             "options": ["Affirmative", "Negative"],
         }
         try:
@@ -149,6 +148,11 @@ class DebateEnv(ta.GameEnv):
             jury_kwargs["rng"] = self.rng
         return self._jury_class(**jury_kwargs)
 
+    def _ask_jury(self, prompt: str) -> Dict[str, float]:
+        if self.jury is None:
+            self.jury = self._create_jury()
+        return self.jury.evaluate(context=prompt)
+
     def _evaluate_debate(self, topic: str, debate_transcript: Optional[str]=None) -> Dict[str, float]:
         rng_state = self.rng.getstate()
         original_jury = self.jury
@@ -157,9 +161,7 @@ class DebateEnv(ta.GameEnv):
             prompt = f"Debate Topic: {topic}\n"
             if debate_transcript: prompt += f"Debate Transcript:\n{debate_transcript}\nPlease vote for either 'Affirmative' or 'Negative'."
             else: prompt += "No debate has occurred yet. Please vote based solely on the topic.\nVote for either 'Affirmative' or 'Negative'."
-            if self.jury is None:
-                self.jury = self._create_jury()
-            votes = self.jury.evaluate(context=prompt)
+            votes = self.ask(self._ask_jury, prompt)
             expected = {"Affirmative", "Negative"}
             if not isinstance(votes, dict) or set(votes) != expected:
                 raise ValueError("jury result must contain exactly Affirmative and Negative.")
@@ -172,7 +174,7 @@ class DebateEnv(ta.GameEnv):
             ):
                 raise ValueError("jury votes must be finite non-negative numbers.")
             vote_total = sum(float(vote) for vote in votes.values())
-            if not math.isfinite(vote_total) or not 0 < vote_total <= self._jury_size:
+            if not math.isfinite(vote_total) or not 0 < vote_total <= self.jury_size:
                 raise ValueError(
                     "jury vote total must be positive, finite, and no larger than jury_size."
                 )

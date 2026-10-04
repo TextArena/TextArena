@@ -217,13 +217,6 @@ def test_small_generated_puzzles_always_have_at_least_one_clue(seed):
     assert any(clue is not None for row in env.clues for clue in row)
 
 
-def test_reset_does_not_consume_global_rng():
-    random.seed(73)
-    expected = random.getstate()
-    env = _fresh()
-    assert random.getstate() == expected
-
-
 @pytest.mark.parametrize(
     "action",
     ["h 0 0 extra", "[h 0 0", "h 0 0]", "h -1 0", "x 0 0", "", "h 0"],
@@ -250,14 +243,6 @@ def test_edge_boundaries_accept_last_valid_and_reject_first_invalid():
     env.step("h 4 3")
     assert env.state.error_count == 1
     assert (env.h_edges, env.v_edges) == before
-
-
-def test_oversized_numeric_action_is_invalid_without_edges():
-    env = _fresh()
-    done, _ = env.step(f"h {'9' * env.max_action_chars} 0")
-    assert not done
-    assert env.state.error_count == 1
-    assert not env.h_edges and not env.v_edges
 
 
 def test_disconnected_loops_do_not_solve_even_when_all_clues_match():
@@ -323,10 +308,6 @@ def test_current_and_terminal_render_show_edges_and_progress():
 @pytest.mark.parametrize(
     "kwargs",
     [
-        {"rows": 1},
-        {"cols": 1},
-        {"max_turns": 0},
-        {"rows": True},
         {"rows": 101, "cols": 100},
     ],
 )

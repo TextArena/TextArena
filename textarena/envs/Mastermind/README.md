@@ -11,10 +11,10 @@ position; white pegs count correct numbers in the wrong position.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Mastermind-v0` | `code_length=4`, `num_numbers=6`, `max_turns=20`, `duplicate_numbers=False` |
-| `Mastermind-v0-hard` | `code_length=4`, `num_numbers=8`, `max_turns=30`, `duplicate_numbers=False` |
+| `Mastermind-v1` | `code_length=4`, `num_numbers=6`, `max_turns=20`, `duplicate_numbers=False` |
+| `Mastermind-v1-hard` | `code_length=4`, `num_numbers=8`, `max_turns=30`, `duplicate_numbers=False` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Mastermind-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Mastermind-v0", code_length=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Mastermind-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Mastermind-v1", code_length=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -33,7 +33,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Mastermind-v0-mdp`
 
 Reply with the guess as `code_length` numbers separated by spaces (commas also work).
 
-Examples: `1 2 3 4` for `Mastermind-v0`; `3 12 3 7 1 9` for six-number codes that use 1–12 and may repeat numbers
+Examples: `1 2 3 4` for `Mastermind-v1`; `3 12 3 7 1 9` for six-number codes that use 1–12 and may repeat numbers
 (`code_length=6`, `num_numbers=12`, `duplicate_numbers=True`).
 
 ## Observations
@@ -54,11 +54,12 @@ peg(s).` The final board reveals the code.
 
 ## Parameters
 
-- `code_length` (default `4`): the number of positions in the code, from 1 to 256.
-- `num_numbers` (default `6`): numbers range from 1 to this value, at most 1,000,000.
-- `duplicate_numbers` (default `False`): allow repeated numbers in the code and in guesses. When `False`,
-  `code_length` cannot exceed `num_numbers`.
-- `max_turns` (default `20`): the maximum number of guesses.
+<!-- BEGIN GENERATED: parameters -->
+- `code_length` (default `4`): The number of positions in the code. Accepts an integer from 1 to 256.
+- `num_numbers` (default `6`): The largest number in the code; numbers range from 1 to this value. Accepts an integer from 1 to 1000000.
+- `duplicate_numbers` (default `False`): Allow repeated numbers in the code and in guesses. When False, `code_length` cannot exceed `num_numbers`.
+- `max_turns` (default `20`): The maximum number of guesses. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

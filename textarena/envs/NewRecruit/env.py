@@ -22,25 +22,13 @@ class NewRecruitEnv(ta.GameEnv):
     _PROPOSE_LINE_RE = re.compile(r"propose\s+(?P<letters>[a-e](?:[ \t]*[a-e]){7})", re.IGNORECASE)
     _PROPOSE_WORD_RE = re.compile(r"propose\b", re.IGNORECASE)
 
-    def __init__(self, max_turns: int = 10, error_allowance: int = 3):
-        """
-        Initialize the New Recruit environment.
+    max_turns = ta.Param(10, "The turns in the whole game, counting both players.", min=1)
+    error_allowance = ta.Param(
+        3, "The consecutive invalid moves a player may make (and retry) before losing.", min=0,
+    )
 
-        Args:
-            max_turns (Optional[int]): Maximum number of turns before the game ends.
-            error_allowance (int): Number of invalid moves allowed before a player loses.
-        """
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
-        if (
-            not isinstance(error_allowance, int)
-            or isinstance(error_allowance, bool)
-            or error_allowance < 0
-        ):
-            raise ValueError("error_allowance must be a non-negative integer")
-        self.max_turns = max_turns
-        self.error_allowance = error_allowance
-
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         # Define the point value dictionary as provided in the task
         self.point_value_dict = {
             # distributive

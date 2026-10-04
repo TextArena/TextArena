@@ -11,9 +11,9 @@ trust in a repeated congestion game.
 
 | Env ID | Parameters |
 | --- | --- |
-| `MarketEntryGame-v0` | `num_rounds=5`, `communication_turns=3`, `market_capacity=2`, `entry_profit=15`, `overcrowding_penalty=-5`, `safe_payoff=5`, `default_num_players=4` |
+| `MarketEntryGame-v1` | `num_rounds=5`, `communication_turns=3`, `market_capacity=2`, `entry_profit=15`, `overcrowding_penalty=-5`, `safe_payoff=5`, `default_num_players=4` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `MarketEntryGame-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("MarketEntryGame-v0", num_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `MarketEntryGame-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("MarketEntryGame-v1", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -61,10 +61,12 @@ gets `+1`.
 
 ## Parameters
 
-- `num_rounds` (default `5`): number of rounds.
-- `communication_turns` (default `3`): simultaneous message turns before each decision; `0` skips communication.
-- `market_capacity` (default `2`): the largest number of entrants for which entering is profitable.
-- `entry_profit` (default `15`): payoff for entering a market that is not overcrowded.
-- `overcrowding_penalty` (default `-5`): payoff for entering an overcrowded market.
-- `safe_payoff` (default `5`): payoff for staying out.
-- `default_num_players` (default `4`): number of players used when `reset()` is called without `num_players`.
+<!-- BEGIN GENERATED: parameters -->
+- `num_rounds` (default `5`): The number of rounds. Accepts a positive integer.
+- `communication_turns` (default `3`): The simultaneous message turns before each decision. With 0, communication is skipped. Accepts a non-negative integer.
+- `market_capacity` (default `2`): The largest number of entrants for which entering is profitable. Accepts a non-negative integer.
+- `entry_profit` (default `15`): The payoff for entering a market that is not overcrowded. Accepts a finite number.
+- `overcrowding_penalty` (default `-5`): The payoff for entering an overcrowded market. Accepts a finite number.
+- `safe_payoff` (default `5`): The payoff for staying out. Accepts a finite number.
+- `default_num_players` (default `4`): The number of players used when `reset()` is called without `num_players`. Accepts an integer from 2 to 15.
+<!-- END GENERATED: parameters -->

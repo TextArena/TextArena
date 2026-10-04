@@ -18,15 +18,14 @@ class HighSocietyEnv(ta.GameEnv):
     mdp_includes_actions = False
     broadcast_actions = False  # sealed bids: raw actions are echoed only to their author
 
-    def __init__(self, max_ties: int = 3):
-        """
-        Args:
-            max_ties (int): Tied bids allowed in a row on one prestige card; the tie that reaches
-                this count discards the card so repeated ties cannot stall the game.
-        """
-        if not isinstance(max_ties, int) or isinstance(max_ties, bool) or max_ties < 1 or not _is_renderable(max_ties):
-            raise ValueError("max_ties must be a positive integer")
-        self.max_ties = max_ties
+    max_ties = ta.Param(
+        3, "The number of ties allowed in a row on one prestige card; the tie that reaches this number discards the "
+           "card, so a game has at most `10 × max_ties` rounds of bidding. With 1, every tie discards the card.",
+        min=1, check=_is_renderable, rule="a positive integer with at most 4300 digits",
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.money_cards = list(range(1, 12))   # 1-11
         self.action_space = re.compile(r"^(?P<bid>11|10|[1-9])$", re.IGNORECASE)
 

@@ -6,12 +6,14 @@
     python scripts/locales.py coverage [GAME ...] --lang de [--seeds 3] [--steps 150]
     python scripts/locales.py check
 
-extract   regenerate the ``"en"`` section (English line templates) of ``locales.json`` from the source of each
+Catalogs live in the textarena-locales package: ``locales/textarena_locales/envs/<Game>.json`` and ``shared.json``.
+
+extract   regenerate the ``"en"`` section (English line templates) of each game's catalog from the source of each
           env that already has a catalog, plus the shared catalog, and drop translations of
           lines that no longer exist. Name games (or pass ``--all``) to create catalogs;
           ``--check`` only reports stale catalogs.
 migrate   carry upstream (``origin/main``) translations over to the current templates and
-          write them as ``"<lang>"`` sections of ``locales.json``. Existing valid entries are
+          write them as ``"<lang>"`` sections of the catalogs. Existing valid entries are
           kept unless ``--fresh``.
 coverage  seeded random rollouts through the wrapper, reporting the share of non-board
           observation lines that get translated.
@@ -36,11 +38,12 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
-from textarena.wrappers.translation import (  # noqa: E402
-    CATALOG_FILE, CONFIDENCE_PATH, SHARED_CATALOG, SOURCE_LANG, join_template, split_template, template_id,
-)
+from textarena.wrappers.translation import SOURCE_LANG, join_template, split_template, template_id  # noqa: E402
 
 ENVS_DIR = os.path.join(ROOT, "textarena", "envs")
+LOCALES_DIR = os.path.join(ROOT, "locales", "textarena_locales")  # the textarena-locales package
+SHARED_CATALOG = os.path.join(LOCALES_DIR, "shared.json")
+CONFIDENCE_PATH = os.path.join(LOCALES_DIR, "confidence.json")
 SHARED = "shared"
 SHARED_SOURCES = [
     os.path.join(ROOT, "textarena", "engine.py"),
@@ -522,7 +525,7 @@ def game_names() -> List[str]:
 
 
 def catalog_path(name: str) -> str:
-    return SHARED_CATALOG if name == SHARED else os.path.join(ENVS_DIR, name, CATALOG_FILE)
+    return SHARED_CATALOG if name == SHARED else os.path.join(LOCALES_DIR, "envs", f"{name}.json")
 
 
 def source_files(name: str) -> List[str]:
@@ -536,7 +539,7 @@ def source_files(name: str) -> List[str]:
 
 
 def catalog_names() -> List[str]:
-    """The shared catalog plus every game that has a ``locales.json``."""
+    """The shared catalog plus every game that has a catalog."""
     return [SHARED] + [g for g in game_names() if os.path.isfile(catalog_path(g))]
 
 
@@ -1081,10 +1084,6 @@ def _percent(part: int, whole: int) -> str:
 
 def check_catalogs() -> List[str]:
     problems = []
-    for name in [SHARED] + game_names():
-        legacy = os.path.join(os.path.dirname(catalog_path(name)), "locales")
-        if os.path.isdir(legacy):
-            problems.append(f"{_rel(legacy)}: per-language folders are replaced by {CATALOG_FILE}")
     try:
         if not isinstance(read_json(CONFIDENCE_PATH), dict):
             problems.append(f"{_rel(CONFIDENCE_PATH)}: not a JSON object")

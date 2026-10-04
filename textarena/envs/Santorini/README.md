@@ -10,9 +10,9 @@ level ([rules](https://en.wikipedia.org/wiki/Santorini_%28game%29)).
 
 | Env ID | Parameters |
 | --- | --- |
-| `SantoriniBaseFixed-v0` | defaults |
+| `SantoriniBaseFixed-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `SantoriniBaseFixed-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `SantoriniBaseFixed-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -80,10 +80,11 @@ players have to track it from the announced moves.
 
 ## Parameters
 
-- `is_open` (default `True`): whether the acting player is shown the board.
-- `show_valid` (default `True`): whether the acting player is shown the list of their legal moves.
-- `error_allowance` (default `10`): consecutive invalid moves a player may make; the next one counts as the escalation
-  above. It must be a non-negative integer.
+<!-- BEGIN GENERATED: parameters -->
+- `is_open` (default `True`): Whether the acting player is shown the board.
+- `show_valid` (default `True`): Whether the acting player is shown the list of their legal moves.
+- `error_allowance` (default `10`): The number of consecutive invalid moves a player may make; the next one counts as the escalation above. Accepts an integer of at least 0.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

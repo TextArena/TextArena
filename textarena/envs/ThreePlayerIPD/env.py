@@ -14,39 +14,46 @@ def _is_renderable(value: Any) -> bool:
     return True
 
 
+def _is_payoff(value: Any) -> bool:
+    return (
+        not isinstance(value, bool) and isinstance(value, (int, float))
+        and (not isinstance(value, float) or math.isfinite(value)) and _is_renderable(value)
+    )
+
+
 class ThreePlayerIPDEnv(ta.GameEnv):
     min_players = 3
     max_players = 3
     broadcast_actions = False  # raw actions echoed only to their author; chat is re-broadcast cleaned
 
-    def __init__(self, num_rounds: int=5, communication_turns: int=3, cooperate_reward: int=3, defect_reward: int=5, sucker_reward: int=0, mutual_defect_reward: int=1):
-        if isinstance(num_rounds, bool) or not isinstance(num_rounds, int) or num_rounds < 1 or not _is_renderable(num_rounds):
-            raise ValueError("num_rounds must be a positive integer")
-        if isinstance(communication_turns, bool) or not isinstance(communication_turns, int) or communication_turns < 0 or not _is_renderable(communication_turns):
-            raise ValueError("communication_turns must be a non-negative integer")
-        payoffs = {
-            "cooperate_reward": cooperate_reward,
-            "defect_reward": defect_reward,
-            "sucker_reward": sucker_reward,
-            "mutual_defect_reward": mutual_defect_reward,
-        }
-        if any(
-            isinstance(value, bool)
-            or not isinstance(value, (int, float))
-            or (isinstance(value, float) and not math.isfinite(value))
-            or not _is_renderable(value)
-            for value in payoffs.values()
-        ):
-            raise ValueError("payoff values must be finite numbers")
-        self.num_rounds = num_rounds
-        self.conversation_rounds = communication_turns
-        self.R, self.T, self.S, self.P = (cooperate_reward, defect_reward, sucker_reward, mutual_defect_reward) # pay-off constants
-        self.token_pat = re.compile(r"(?<!\d)(\d+)\s+(cooperate|defect)", re.I)
+    token_pat = re.compile(r"(?<!\d)(\d+)\s+(cooperate|defect)", re.I)
+
+    num_rounds = ta.Param(5, "The number of rounds.", min=1, check=_is_renderable, rule="a positive integer")
+    communication_turns = ta.Param(
+        3, "The chat turns before each decision, each one message per player; 0 skips chat.",
+        min=0, check=_is_renderable, rule="a non-negative integer",
+    )
+    cooperate_reward = ta.Param(
+        3, "The payoff to each player of a pair when both cooperate.", type=object, check=_is_payoff, rule="a finite number",
+    )
+    defect_reward = ta.Param(
+        5, "The payoff to a defector whose opponent cooperates.", type=object, check=_is_payoff, rule="a finite number",
+    )
+    sucker_reward = ta.Param(
+        0, "The payoff to a cooperator whose opponent defects.", type=object, check=_is_payoff, rule="a finite number",
+    )
+    mutual_defect_reward = ta.Param(
+        1, "The payoff to each player of a pair when both defect.", type=object, check=_is_payoff, rule="a finite number",
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.R, self.T, self.S, self.P = (self.cooperate_reward, self.defect_reward, self.sucker_reward, self.mutual_defect_reward) # pay-off constants
 
     def setup(self) -> Dict[str, Any]:
         num_players = self.state.num_players
         return {
-            "round": 1, "num_rounds": self.num_rounds, "phase": "conversation", "conversation_round": 0, "total_conversation_rounds": self.conversation_rounds,
+            "round": 1, "num_rounds": self.num_rounds, "phase": "conversation", "conversation_round": 0, "total_conversation_rounds": self.communication_turns,
             "decisions": {p: {q: None for q in range(num_players) if q != p} for p in range(num_players)},
             "scores": {p: 0 for p in range(num_players)}, "acted": {p: False for p in range(num_players)},
         }

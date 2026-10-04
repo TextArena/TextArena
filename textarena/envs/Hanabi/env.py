@@ -48,14 +48,12 @@ class HanabiEnv(ta.GameEnv):
         re.IGNORECASE,
     )
 
-    def __init__(self, info_tokens: int = 8, fuse_tokens: int = 3,):
-        if not isinstance(info_tokens, int) or isinstance(info_tokens, bool) or info_tokens < 0:
-            raise ValueError("info_tokens must be a non-negative integer")
-        if not isinstance(fuse_tokens, int) or isinstance(fuse_tokens, bool) or fuse_tokens < 1:
-            raise ValueError("fuse_tokens must be a positive integer")
+    info_tokens = ta.Param(8, "The starting and maximum number of information tokens.", min=0)
+    fuse_tokens = ta.Param(3, "The number of fuse tokens; the game is lost when the last one is used.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.deck_size = 50
-        self.info_tokens = info_tokens
-        self.fuse_tokens = fuse_tokens
 
     def setup(self) -> Dict[str, Any]:
         self.num_players = self.state.num_players

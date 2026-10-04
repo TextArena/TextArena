@@ -14,22 +14,11 @@ class KlondikeEnv(ta.GameEnv):
     error_allowance = 5
     max_action_chars = 4096
 
-    def __init__(self, max_turns: int = 200, draw_count: int = 1):
-        """
-        Args:
-            max_turns: Maximum number of turns before game ends
-            draw_count: Number of cards to draw from stock (1 or 3)
-        """
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
-            raise ValueError("max_turns must be a positive integer")
-        if (
-            not isinstance(draw_count, int)
-            or isinstance(draw_count, bool)
-            or draw_count not in (1, 3)
-        ):
-            raise ValueError("draw_count must be either 1 or 3")
-        self.max_turns = max_turns
-        self.draw_count = draw_count
+    max_turns = ta.Param(200, "The number of turns (replies) before the game ends.", min=1)
+    draw_count = ta.Param(
+        1, "How many cards `draw` turns over. Only the top waste card is shown and playable. The deal is fixed by "
+           "the seed passed to `reset`.", choices=(1, 3),
+    )
 
     @property
     def klondike(self) -> KlondikeGame:

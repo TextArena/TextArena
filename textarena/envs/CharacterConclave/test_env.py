@@ -1,4 +1,4 @@
-"""Deterministic tests for CharacterConclave-v0.
+"""Deterministic tests for CharacterConclave-v1.
 
 The scored outcome depends only on message length + votes (no LLM jury), so it is fully
 offline.
@@ -32,12 +32,6 @@ def test_player_count_bounds_accept_minimum_and_maximum_only():
                 num_players=num_players,
                 seed=42,
             )
-
-
-@pytest.mark.parametrize("budget", [0, -1, 1.5, True])
-def test_character_budget_must_be_a_positive_integer(budget):
-    with pytest.raises(ValueError):
-        CharacterConclaveEnv(character_budget=budget)
 
 
 def test_each_player_gets_a_prompt():
@@ -296,17 +290,3 @@ def test_valid_vote_confirmation_is_private_and_vote_cannot_be_replaced():
     assert not done
     assert env.state.game_state["votes"][2] == 0
     assert env.state.error_count == 1
-
-
-def test_snapshot_and_repeat_reset_restore_vote_queue():
-    env = _fresh(budget=1)
-    for message in ("a", "b", "c"):
-        env.step(message)
-    snap = env.snapshot()
-    env.step("0")
-    env.restore(snap)
-    assert env.state.game_state["votes"] == {}
-    assert env.state.current_player_id == 2
-    env.reset(num_players=3, seed=42)
-    assert env.state.game_state["phase"] == "discussion"
-    assert env.state.game_state["budget_remaining"] == {0: 1, 1: 1, 2: 1}

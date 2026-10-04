@@ -6,8 +6,6 @@ assigned during reset, so we read ``env.player_roles`` to compute expected
 rewards. Actions: 'Offer: <price>', 'Accept', 'Reject', 'Discuss: ...'.
 Turns only rotate after OFFER/DISCUSS actions.
 """
-import time
-
 import pytest
 
 from textarena.envs.UsedCarNegotiation.env import UsedCarNegotiationEnv
@@ -97,14 +95,6 @@ def test_label_only_discussion_is_invalid():
     assert not done and env.state.error_count == 1
 
 
-@pytest.mark.parametrize("action", ["Discuss: a" + " " * 30_000 + "b", "Offer: 9000" + " " * 30_000 + "x"])
-def test_padded_input_is_parsed_quickly(action):
-    env = _fresh()
-    start = time.perf_counter()
-    env.step(action)
-    assert time.perf_counter() - start < 0.25
-
-
 def test_accept_in_ordinary_prose_is_not_a_command():
     env = _fresh()
     env.step("Offer: 9000")
@@ -136,21 +126,6 @@ def test_counteroffer_replaces_stale_offer():
     done, _ = env.step("Accept")
     assert not done
     assert env.state.error_count == 1
-
-
-def test_seeded_reset_and_snapshot_restore_roles_and_offers():
-    first = UsedCarNegotiationEnv()
-    second = UsedCarNegotiationEnv()
-    first.reset(num_players=2, seed=7)
-    second.reset(num_players=2, seed=7)
-    assert first.player_roles == second.player_roles
-    assert first.game_state["batna"] == second.game_state["batna"]
-
-    snap = first.snapshot()
-    first.step("Offer: 8500")
-    first.restore(snap)
-    assert first.game_state["current_offer"] == {0: None, 1: None}
-    assert first.state.turn == 0
 
 
 def test_configured_batna_strengths_follow_roles_not_player_ids():

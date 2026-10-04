@@ -14,37 +14,31 @@ def _is_renderable(value: Any) -> bool:
     return True
 
 
+def _is_finite_number(value: Any) -> bool:
+    try:
+        return isinstance(value, Real) and not isinstance(value, bool) and math.isfinite(float(value))
+    except (OverflowError, TypeError, ValueError):
+        return False
+
+
 class IteratedTwoThirdsAverageEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
     mdp_includes_actions = False
 
-    def __init__(self, num_rounds: int = 5, min_guess: float = 0.0, max_guess: float = 100.0):
-        if (
-            not isinstance(num_rounds, int)
-            or isinstance(num_rounds, bool)
-            or num_rounds <= 0
-            or not _is_renderable(num_rounds)
-        ):
-            raise ValueError("num_rounds must be a positive integer")
-        try:
-            bounds_are_finite = all(
-                isinstance(bound, Real)
-                and not isinstance(bound, bool)
-                and math.isfinite(float(bound))
-                for bound in (min_guess, max_guess)
-            )
-        except (OverflowError, TypeError, ValueError):
-            bounds_are_finite = False
-        if not bounds_are_finite:
-            raise ValueError("guess bounds must be finite numbers")
-        if min_guess > max_guess:
-            raise ValueError("min_guess must not exceed max_guess")
+    _guess_re = re.compile(r"^([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)$")
 
-        self.num_rounds = num_rounds
-        self.min_guess = min_guess
-        self.max_guess = max_guess
-        self._guess_re = re.compile(r"^([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)$")
+    num_rounds = ta.Param(5, "The number of rounds.", min=1, check=_is_renderable, rule="a positive integer")
+    min_guess = ta.Param(0.0, "The smallest allowed guess.", type=object, check=_is_finite_number, rule="a finite number")
+    max_guess = ta.Param(
+        100.0, "The largest allowed guess.", type=object, check=_is_finite_number,
+        rule="a finite number not below min_guess",
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.min_guess > self.max_guess:
+            raise ValueError(f"max_guess must be a finite number not below min_guess, received {self.max_guess!r}")
 
     def setup(self) -> Dict[str, Any]:
         return {

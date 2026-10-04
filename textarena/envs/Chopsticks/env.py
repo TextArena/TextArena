@@ -9,14 +9,9 @@ class ChopsticksEnv(ta.GameEnv):
     max_players = 2
     mdp_includes_actions = False
 
-    def __init__(self, max_turns: int = 40):
-        """
-        args:
-            max_turns (int): num of turns before draw.
-        """
-        if isinstance(max_turns, bool) or not isinstance(max_turns, int) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
-        self.max_turns = max_turns
+    max_turns = ta.Param(
+        40, "The number of valid moves, counting both players, before the game is declared a draw.", min=1,
+    )
 
     def setup(self) -> Dict[str, Any]:
         return {"hands": {0: [1, 1], 1: [1, 1]}, "history": []}

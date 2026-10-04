@@ -11,10 +11,10 @@ most but only if both hunt it, a hare pays less but safely, and the higher total
 
 | Env ID | Parameters |
 | --- | --- |
-| `IteratedStagHunt-v0` | `num_rounds=5`, `conversation_rounds=3`, `mutual_stag_reward=10`, `single_hare_reward=8`, `single_stag_reward=1`, `mutual_hare_reward=5`, `randomize_payoff=False` |
-| `IteratedStagHunt-v0-randomized` | `num_rounds=5`, `conversation_rounds=3`, `mutual_stag_reward=10`, `single_hare_reward=8`, `single_stag_reward=1`, `mutual_hare_reward=5`, `randomize_payoff=True` |
+| `IteratedStagHunt-v1` | `num_rounds=5`, `conversation_rounds=3`, `mutual_stag_reward=10`, `single_hare_reward=8`, `single_stag_reward=1`, `mutual_hare_reward=5`, `randomize_payoff=False` |
+| `IteratedStagHunt-v1-randomized` | `num_rounds=5`, `conversation_rounds=3`, `mutual_stag_reward=10`, `single_hare_reward=8`, `single_stag_reward=1`, `mutual_hare_reward=5`, `randomize_payoff=True` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedStagHunt-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedStagHunt-v0", num_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedStagHunt-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedStagHunt-v1", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -60,20 +60,19 @@ echoed only to you. Once both players have decided, both see each player's choic
 
 ## Parameters
 
-- `num_rounds` (default `5`): number of rounds.
-- `conversation_rounds` (default `3`): conversation turns before each decision, each one message per player; `0`
-  skips conversation.
-- `mutual_stag_reward` (default `10`): payoff to each player when both hunt the stag (the upper bound when randomized).
-- `single_hare_reward` (default `8`): payoff to a lone hare hunter (the upper bound when randomized).
-- `single_stag_reward` (default `1`): payoff to a lone stag hunter (fixed even when randomized).
-- `mutual_hare_reward` (default `5`): payoff to each player when both hunt hares (the upper bound when randomized).
-- `randomize_payoff` (default `False`): draw a new payoff matrix every round, as described above. It requires
-  `single_stag_reward < mutual_hare_reward <= single_hare_reward < mutual_stag_reward`.
-
-The payoffs may be any integers; without randomization their ordering is not checked.
+<!-- BEGIN GENERATED: parameters -->
+- `num_rounds` (default `5`): The number of rounds. Accepts a positive integer.
+- `conversation_rounds` (default `3`): The conversation turns before each decision, each one message per player; 0 skips conversation. Accepts a non-negative integer.
+- `mutual_stag_reward` (default `10`): The payoff to each player when both hunt the stag (the upper bound when randomized). Accepts an integer.
+- `single_hare_reward` (default `8`): The payoff to a lone hare hunter (the upper bound when randomized). Accepts an integer.
+- `single_stag_reward` (default `1`): The payoff to a lone stag hunter (fixed even when randomized). Accepts an integer.
+- `mutual_hare_reward` (default `5`): The payoff to each player when both hunt hares (the upper bound when randomized). Accepts an integer.
+- `randomize_payoff` (default `False`): Draw a new payoff matrix every round, as described above. It requires single_stag_reward < mutual_hare_reward <= single_hare_reward < mutual_stag_reward.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 
+- Without randomization the ordering of the payoffs is not checked.
 - Only the comparison of totals decides the reward, so a round only changes the standings when one player hunts a hare
   while the other hunts a stag; mutual stag hunts keep the score level.
 - The stag hunt goes back to Jean-Jacques Rousseau, *Discourse on the Origin of Inequality*, translated by Donald A.

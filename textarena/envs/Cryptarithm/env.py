@@ -3,28 +3,34 @@ from typing import Any, Callable, Dict, List, Set, Union
 
 import textarena as ta
 
+MAX_EQUATION_LENGTH = 512
+
 
 class CryptarithmEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
     mdp_includes_actions = False
-    MAX_EQUATION_LENGTH = 512
+    MAX_EQUATION_LENGTH = MAX_EQUATION_LENGTH
     MAX_ADDENDS = 20
     MAX_WORD_LENGTH = 64
     MAX_SOLVER_DEPTH = 500
 
     _ACTION_RE = re.compile(r"(?P<letter>[A-Za-z])(?:\s*,\s*|\s+)(?P<digit>\d|-)")
 
-    def __init__(self, equation: str = "SEND + MORE = MONEY", max_turns: int = 100):
-        """ equation : string of the form 'WORD [+ WORD …] = WORD' """
-        if not isinstance(equation, str):
-            raise ValueError("equation must be a string")
-        if len(equation) > self.MAX_EQUATION_LENGTH:
-            raise ValueError(f"equation cannot exceed {self.MAX_EQUATION_LENGTH} characters")
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
+    equation = ta.Param(
+        "SEND + MORE = MONEY",
+        "The puzzle, written as words of letters joined by `+`, then one `=` and the result (spaces optional, "
+        "case-insensitive). It may use at most 10 distinct letters, 20 addends and 64 letters per word, and must have "
+        "at least one solution without leading zeros; otherwise the constructor raises `ValueError`. Very long sums "
+        "with many addends are also rejected, so that the solvability check stays fast.",
+        check=lambda equation: len(equation) <= MAX_EQUATION_LENGTH,
+        rule=f"a string of at most {MAX_EQUATION_LENGTH} characters",
+    )
+    max_turns = ta.Param(100, "The number of valid moves allowed.", min=1)
 
-        self.equation_raw = re.sub(r"\s+", "", equation.upper())
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.equation_raw = re.sub(r"\s+", "", self.equation.upper())
         if self.equation_raw.count("=") != 1:
             raise ValueError("equation must contain exactly one '='")
         lhs, rhs = self.equation_raw.split("=")
@@ -45,7 +51,6 @@ class CryptarithmEnv(ta.GameEnv):
         self.first_letters: Set[str] = {w[0] for w in self.addends + [self.result]}
         if len(self.letters) > 10:
             raise ValueError("equation cannot contain more than 10 distinct letters")
-        self.max_turns = max_turns
         if not self._has_solution():
             raise ValueError("equation has no valid digit assignment")
 

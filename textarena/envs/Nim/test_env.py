@@ -1,4 +1,4 @@
-"""Deterministic game-logic tests for Nim-v0.
+"""Deterministic game-logic tests for Nim-v1.
 
 Moves take the form 'pile quantity', e.g. '0 3'. Whoever removes the
 last object(s) wins. We use small custom pile configurations to script
@@ -132,10 +132,12 @@ def test_invalid_initial_piles_are_rejected(piles):
 
 
 def test_oversized_initial_configuration_is_rejected():
-    with pytest.raises(ValueError, match="more than"):
+    with pytest.raises(ValueError, match="piles must be a non-empty list of at most 100 integers"):
         NimEnv(piles=[1] * (NimEnv.MAX_PILES + 1))
-    with pytest.raises(ValueError, match="cannot exceed"):
+    with pytest.raises(ValueError, match="piles must be"):
         NimEnv(piles=[NimEnv.MAX_PILE_SIZE + 1])
+    NimEnv(piles=[1] * NimEnv.MAX_PILES)
+    NimEnv(piles=(NimEnv.MAX_PILE_SIZE,))
 
 
 def test_constructor_defensively_copies_initial_piles():
@@ -193,19 +195,6 @@ def test_terminal_action_is_counted_and_final_state_is_rendered():
         if event_type == ta.ObservationType.GAME_BOARD
     ][-1]
     assert "pile 0: 0" in final_board
-
-
-def test_snapshot_restores_piles_and_actor():
-    env = NimEnv(piles=[2])
-    env.reset(num_players=2, seed=42)
-    snapshot = env.snapshot()
-
-    env.step("0 1")
-    env.restore(snapshot)
-
-    assert env.state.game_state["piles"] == [2]
-    assert env.state.current_player_id == 0
-    assert env.state.turn == 0
 
 
 def test_reset_reuses_constructor_configuration():

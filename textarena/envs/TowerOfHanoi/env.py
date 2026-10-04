@@ -12,22 +12,16 @@ class TowerOfHanoiEnv(ta.GameEnv):
     MAX_DISKS = 20
     _MOVE_RE = re.compile(r"(?P<source>[ABCabc])(?:\s*,\s*|\s+)(?P<target>[ABCabc])")
 
-    def __init__(self, num_disks: int=3, max_turns: int=100):
-        """
-        Args:
-            num_disks (int): The number of disks
-            max_turns (int): The max number of turns
-        """
-        if not isinstance(num_disks, int) or isinstance(num_disks, bool) or num_disks < 1:
-            raise ValueError("num_disks must be a positive integer")
-        if num_disks > self.MAX_DISKS:
-            raise ValueError(f"num_disks cannot exceed {self.MAX_DISKS}")
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
-        if max_turns < 2**num_disks - 1:
+    num_disks = ta.Param(3, "The number of disks.", min=1, max=MAX_DISKS)
+    max_turns = ta.Param(
+        100, "The number of valid moves allowed. It must be at least `2^num_disks − 1`, the length of the shortest "
+             "solution. The registered variants allow about twice that (`2^(num_disks + 1) − 2`).", min=1,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.max_turns < 2**self.num_disks - 1:
             raise ValueError("max_turns is too small for this number of disks")
-        self.num_disks = num_disks
-        self.max_turns = max_turns
 
     def get_board_str(self):
         return create_board_str(towers=self.game_state['towers'])

@@ -10,9 +10,9 @@ impressive other player; the most-voted player wins. It tests concise, persuasiv
 
 | Env ID | Parameters |
 | --- | --- |
-| `CharacterConclave-v0` | `character_budget=1000` |
+| `CharacterConclave-v1` | `character_budget=1000` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `CharacterConclave-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("CharacterConclave-v0", character_budget=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `CharacterConclave-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("CharacterConclave-v1", character_budget=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -60,7 +60,9 @@ Rewards are spread evenly between `-1` and `+1` by rank, where players with the 
 
 ## Parameters
 
-- `character_budget` (default `1000`): total number of characters each player may use during the discussion.
+<!-- BEGIN GENERATED: parameters -->
+- `character_budget` (default `1000`): The total number of characters each player may use during the discussion. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

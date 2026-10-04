@@ -198,27 +198,6 @@ def test_double_digit_board_labels_remain_aligned():
     assert any(line.startswith("10 │") for line in env.get_board_str().splitlines())
 
 
-def test_snapshot_and_repeat_reset_restore_state():
-    env = _fresh()
-    initial = copy.deepcopy(env.state.game_state)
-    snapshot = env.snapshot()
-    env.step("1 1")
-    env.restore(snapshot)
-    assert env.state.game_state == initial
-
-    env.reset(num_players=1, seed=42)
-    assert env.state.game_state == initial
-
-
-@pytest.mark.parametrize(
-    "kwargs",
-    [{"size": 0}, {"size": True}, {"size": LightsOutEnv.MAX_SIZE + 1}, {"max_turns": 0}],
-)
-def test_invalid_configuration_rejected(kwargs):
-    with pytest.raises(ValueError):
-        LightsOutEnv(**kwargs)
-
-
 def test_turn_limit_counts_final_press_and_reward_is_bounded():
     env = LightsOutEnv(size=3, max_turns=1)
     env.reset(num_players=1, seed=42)

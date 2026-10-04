@@ -42,9 +42,8 @@ class SetEnv(ta.GameEnv):
     max_players = 1
     mdp_includes_actions = False
 
-    def __init__(self):
-        self.deck = list(itertools.product(_NUMBERS, _COLORS, _FILLS, _SHAPES))
-        self.max_turns = 20
+    deck = list(itertools.product(_NUMBERS, _COLORS, _FILLS, _SHAPES))
+    max_turns = 20
 
     def setup(self) -> Dict[str, Any]:
         _initial_deck = copy.deepcopy(self.deck)

@@ -1296,17 +1296,13 @@ class TestScorableGamesRegressions:
         "kwargs",
         [
             {"game_config": "../base"},
-            {"max_rounds": 0},
-            {"max_rounds": True},
-            {"required_votes": 0},
-            {"required_votes": True},
-            {"veto_roles": None},
+            {"game_config": ".."},
             {"veto_roles": [""]},
+            {"veto_roles": ["p1", 2]},
             {"unanimity_bonus_role": ""},
             {"starting_role": ""},
             {"invalid_move_default": "Maybe"},
             {"invalid_move_default": "[Reject]"},
-            {"error_allowance": -1},
         ],
     )
     def test_invalid_configuration_is_rejected(self, kwargs):

@@ -11,9 +11,9 @@ snakes that survive to the round limit are ranked by apples eaten
 
 | Env ID | Parameters |
 | --- | --- |
-| `Snake-v0` | `width=5`, `height=5`, `num_apples=2`, `max_turns=40` |
+| `Snake-v1` | `width=5`, `height=5`, `num_apples=2`, `max_turns=40` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Snake-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Snake-v0", width=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Snake-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Snake-v1", width=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -61,7 +61,9 @@ With two players, the winner gets `+1` and the loser `-1`, or both get `0` when 
 
 ## Parameters
 
-- `width` and `height` (default `10` × `10`): board size, positive integers with `width × height` at least
-  `num_apples + 15`.
-- `num_apples` (default `3`): number of apples kept on the board (fewer only when no empty cell is left).
-- `max_turns` (default `100`): number of rounds, each one move by every living snake, before the game ends.
+<!-- BEGIN GENERATED: parameters -->
+- `width` (default `10`): The board width. Accepts an integer of at least 1.
+- `height` (default `10`): The board height. Accepts an integer of at least 1.
+- `num_apples` (default `3`): The number of apples kept on the board (fewer only when no empty cell is left). Accepts an integer of at least 0.
+- `max_turns` (default `100`): The number of rounds, each one move by every living snake, before the game ends. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->

@@ -32,19 +32,14 @@ class SurroundEnv(ta.GameEnv):
     broadcast_actions = False  # moves are sealed until the round resolves
     error_allowance = 0  # every invalid action is immediately fatal
 
-    def __init__(self, width: int = 10, height: int = 10, max_turns: int = 100):
-        if (
-            not isinstance(width, int) or isinstance(width, bool)
-            or not isinstance(height, int) or isinstance(height, bool)
-        ):
-            raise ValueError("Board dimensions must be integers")
-        if width < 3 or height < 3:
-            raise ValueError("Board dimensions must each be at least 3")
-        if (width - 2) * (height - 2) < self.min_players:
+    width = ta.Param(10, "The board width.", min=3)
+    height = ta.Param(10, "The board height.", min=3)
+    max_turns = ta.Param(100, "The number of rounds, each one move by every living player, before the game ends.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if (self.width - 2) * (self.height - 2) < self.min_players:
             raise ValueError("Board interior must have room for at least two players")
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
-        self.width, self.height, self.max_turns = width, height, max_turns
 
     @property
     def pending_actions(self) -> Dict[int, Optional[str]]:

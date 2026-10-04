@@ -10,9 +10,9 @@ previous one, until one of them cannot continue.
 
 | Env ID | Parameters |
 | --- | --- |
-| `SpellingBee-v0` | `num_letters=7` |
+| `SpellingBee-v1` | `num_letters=7` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `SpellingBee-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("SpellingBee-v0", num_letters=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `SpellingBee-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("SpellingBee-v1", num_letters=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -47,10 +47,10 @@ submission, and each accepted word is announced as `Player 0 submitted the word:
 
 ## Parameters
 
-- `num_letters` (required, from 1 to 26): the size of the letter set.
-- `is_word` (default: `is_english_word` from `textarena/utils/word_lists.py`): a function that receives a lowercase
-  word and returns whether it counts, for example to use a custom word list. If it raises an exception, the submission
-  is not counted and the player is asked to retry.
+<!-- BEGIN GENERATED: parameters -->
+- `num_letters` (default `7`): The size of the letter set. Accepts an integer from 1 to 26.
+- `is_word` (default `is_english_word`): A function that receives a lowercase word and returns whether it counts, for example to use a custom word list. The default is `is_english_word` from `textarena/utils/word_lists.py`. If it raises an exception, the submission is not counted and the player is asked to retry. Accepts a function that takes a word and returns whether it counts.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

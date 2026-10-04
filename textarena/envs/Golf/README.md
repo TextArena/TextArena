@@ -10,10 +10,10 @@ Two to four players draw and swap cards to build the lowest-scoring grid, where 
 
 | Env ID | Parameters |
 | --- | --- |
-| `Golf-v0` | `num_cards=6`, `num_columns=3` |
-| `Golf-v0-medium` | `num_cards=9`, `num_columns=3` |
+| `Golf-v1` | `num_cards=6`, `num_columns=3` |
+| `Golf-v1-medium` | `num_cards=9`, `num_columns=3` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Golf-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Golf-v0", num_cards=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Golf-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Golf-v1", num_cards=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -71,10 +71,11 @@ had is forfeited. When only one player is left, that player wins.
 
 ## Parameters
 
-- `num_cards` (default `6`): cards per player, from 2 to 12; it also sets the number of decks.
-- `num_columns` (default `3`): columns in each grid; it must divide `num_cards`.
-- `max_turns` (default `None`): the action limit. `None` uses `2 × num_players × 4 × num_cards`, about four full rounds
-  per grid card (96 actions for two players on the default grid), which normal games finish well within.
+<!-- BEGIN GENERATED: parameters -->
+- `num_cards` (default `6`): The number of cards per player; it also sets the number of decks. Accepts an integer from 2 to 12.
+- `num_columns` (default `3`): The number of columns in each grid; it must divide `num_cards`. Accepts an integer of at least 1.
+- `max_turns` (default `None`): The total number of accepted actions before the game is scored as it stands. None uses `2 × num_players × 4 × num_cards`, about four full rounds per grid card (96 actions for two players on the default grid), which normal games finish well within. Accepts an integer of at least 1 or None.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

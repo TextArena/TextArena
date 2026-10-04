@@ -14,7 +14,7 @@ from tqdm import tqdm
 import textarena as ta
 
 NUM_EPISODES = 8
-EVAL_ENV_IDS = [("TicTacToe-v0", 2), ("Snake-v0", 4)]  # (env-id, num_players)
+EVAL_ENV_IDS = [("TicTacToe-v1", 2), ("Snake-v1", 4)]  # (env-id, num_players)
 OPPONENT_NAME = "moonshotai/kimi-k2:free"
 FILE_NAME = "eval_summary.csv"
 
@@ -115,8 +115,8 @@ print(df.to_markdown(index=False, floatfmt=".3f"))
 Should look like this:
 | env_id       |   win_rate |   loss_rate |   draw_rate |   invalid_rate |   avg_turns |   avg_model_reward |   avg_opponent_reward |
 |:-------------|-----------:|------------:|------------:|---------------:|------------:|-------------------:|----------------------:|
-| TicTacToe-v0 |      0.500 |       0.375 |       0.125 |          0.000 |       4.125 |              0.125 |                -0.125 |
-| Snake-v0     |      0.250 |       0.625 |       0.125 |          0.000 |       3.875 |             -0.458 |                 0.028 |
+| TicTacToe-v1 |      0.500 |       0.375 |       0.125 |          0.000 |       4.125 |              0.125 |                -0.125 |
+| Snake-v1     |      0.250 |       0.625 |       0.125 |          0.000 |       3.875 |             -0.458 |                 0.028 |
 """
 
 # Persist to CSV

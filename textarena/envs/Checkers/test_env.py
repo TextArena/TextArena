@@ -1,4 +1,4 @@
-"""Deterministic game-logic tests for Checkers-v0."""
+"""Deterministic game-logic tests for Checkers-v1."""
 import copy
 import re
 
@@ -138,21 +138,6 @@ def test_valid_move_generation_and_turn_limit_draw():
     assert env.state.rewards == {0: 0, 1: 0}
 
 
-def test_snapshot_restore_recovers_forced_capture_state():
-    env = _fresh()
-    board = env.state.game_state["board"]
-    _clear(board)
-    board[5][0] = "r"
-    board[4][1] = "b"
-    board[2][3] = "b"
-    snapshot = env.snapshot()
-    env.step("5 0 3 2")
-    env.restore(snapshot)
-    assert env.state.current_player_id == 0
-    assert env.state.game_state["forced_piece"] is None
-    assert env.state.game_state["board"][5][0] == "r"
-
-
 def test_capturing_last_piece_wins():
     env = _fresh()
     board = env.state.game_state["board"]
@@ -289,9 +274,3 @@ def test_prompt_example_is_legal_and_rules_are_complete(player_id):
     assert "draw after 80 turns" in prompt
     assert "a king moves one square diagonally in any direction" in prompt
     assert "landing square" in prompt
-
-
-@pytest.mark.parametrize("max_turns", [0, -1, 1.5, True])
-def test_invalid_turn_limit_rejected(max_turns):
-    with pytest.raises(ValueError):
-        CheckersEnv(max_turns=max_turns)

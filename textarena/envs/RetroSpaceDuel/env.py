@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
 
@@ -43,31 +43,27 @@ class RetroSpaceDuelEnv(ta.GameEnv):
     max_players = 2
     mdp_includes_actions = False
 
-    def __init__(self, grid_size: Sequence[int] = (15, 15), max_turns: int = 100,
-                 num_asteroids: int = 5, num_debris: int = 8, num_nebulas: int = 3,
-                 num_mines: int = 4, num_powerups: int = 3):
-        """
-        Args:
-            grid_size ((int, int)): Arena width and height, including the boundary ring (each at least 5).
-            max_turns (int): Total number of turns (both players combined) before the duel is decided on health.
-                Must be even so both ships get the same number of turns.
-            num_asteroids, num_debris, num_nebulas, num_mines, num_powerups (int): How many of each object to scatter.
-        """
-        if not isinstance(grid_size, (tuple, list)) or len(grid_size) != 2 or not all(_is_int(v) for v in grid_size):
-            raise ValueError("grid_size must be a (width, height) pair of integers")
-        if min(grid_size) < 5:
-            raise ValueError("grid_size dimensions must each be at least 5")
-        if not _is_int(max_turns) or max_turns < 2 or max_turns % 2:
-            raise ValueError("max_turns must be a positive even integer so both ships get the same number of turns")
-        counts = {"asteroid": num_asteroids, "debris": num_debris, "nebula": num_nebulas, "mine": num_mines, "powerup": num_powerups}
-        for kind, count in counts.items():
-            if not _is_int(count) or count < 0:
-                raise ValueError(f"the number of {kind} objects must be a non-negative integer")
-        self.grid_size = tuple(grid_size)
+    grid_size = ta.Param(
+        (15, 15), "The arena width and height, including the boundary ring.",
+        check=lambda size: len(size) == 2 and all(_is_int(v) and v >= 5 for v in size),
+        rule="a (width, height) pair of integers of at least 5",
+    )
+    max_turns = ta.Param(
+        100, "The total number of turns, counting both players, before the duel is decided on health.",
+        check=lambda turns: _is_int(turns) and turns >= 2 and turns % 2 == 0,
+        rule="a positive even integer, so both ships get the same number of turns",
+    )
+    num_asteroids = ta.Param(5, "The number of asteroids to scatter.", min=0)
+    num_debris = ta.Param(8, "The number of debris objects to scatter.", min=0)
+    num_nebulas = ta.Param(3, "The number of nebulas to scatter.", min=0)
+    num_mines = ta.Param(4, "The number of mines to scatter.", min=0)
+    num_powerups = ta.Param(3, "The number of power-ups to scatter.", min=0)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.width, self.height = self.grid_size
-        self.max_turns = max_turns
-        self.num_asteroids, self.num_debris, self.num_nebulas = num_asteroids, num_debris, num_nebulas
-        self.num_mines, self.num_powerups = num_mines, num_powerups
+        counts = {"asteroid": self.num_asteroids, "debris": self.num_debris, "nebula": self.num_nebulas,
+                  "mine": self.num_mines, "powerup": self.num_powerups}
         self.object_counts = counts
         free_cells = len(self._placeable_cells())
         if sum(counts.values()) > free_cells:

@@ -11,10 +11,10 @@ for `n` disks), so it tests long, exact sequential planning.
 
 | Env ID | Parameters |
 | --- | --- |
-| `TowerOfHanoi-v0` | `num_disks=3`, `max_turns=14` |
-| `TowerOfHanoi-v0-hard` | `num_disks=5`, `max_turns=62` |
+| `TowerOfHanoi-v1` | `num_disks=3`, `max_turns=14` |
+| `TowerOfHanoi-v1-hard` | `num_disks=5`, `max_turns=62` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `TowerOfHanoi-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("TowerOfHanoi-v0", num_disks=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `TowerOfHanoi-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("TowerOfHanoi-v1", num_disks=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -60,9 +60,10 @@ the first disk that is out of place.
 
 ## Parameters
 
-- `num_disks` (default `3`): the number of disks, from 1 to 20.
-- `max_turns` (default `100`): the number of valid moves allowed. It must be at least `2^num_disks − 1`, the length of
-  the shortest solution. The registered variants allow about twice that (`2^(num_disks + 1) − 2`).
+<!-- BEGIN GENERATED: parameters -->
+- `num_disks` (default `3`): The number of disks. Accepts an integer from 1 to 20.
+- `max_turns` (default `100`): The number of valid moves allowed. It must be at least `2^num_disks − 1`, the length of the shortest solution. The registered variants allow about twice that (`2^(num_disks + 1) − 2`). Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

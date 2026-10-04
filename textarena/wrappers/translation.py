@@ -2,13 +2,14 @@
 
 Environments only produce English. `TranslationWrapper` rewrites the final
 observation strings line by line into each player's language, using message
-catalogs that live next to the code producing the text:
+catalogs from the separate ``textarena-locales`` package (``pip install "textarena[translations]"``):
 
-- ``textarena/envs/<Game>/locales.json`` is ``{"en": {id: template}, "<lang>": {id: translation}}``.
+- ``textarena_locales/envs/<Game>.json`` is ``{"en": {id: template}, "<lang>": {id: translation}}``.
   Each id is a short hash of an English *line template* extracted from the env source,
   e.g. ``"Player {player_id} placed their symbol ({symbol}) in cell {cell}."``, and
-  translations use the same ``{slot}`` names.
-- ``textarena/wrappers/locales.json`` holds the strings shared by all games (engine
+  translations use the same ``{slot}`` names. A ``locales.json`` next to a game's own
+  code (for games outside TextArena) is used the same way.
+- ``textarena_locales/shared.json`` holds the strings shared by all games (engine
   messages, sender labels) in the same format.
 
 An observation line is rendered from the most specific English template that
@@ -19,6 +20,7 @@ editing an English line orphans its old translation instead of showing a stale
 one. Catalogs are generated and validated with ``scripts/locales.py``.
 """
 import hashlib
+import importlib.util
 import inspect
 import json
 import os
@@ -30,9 +32,16 @@ from textarena.core import GAME_ID, ObservationType, ObservationWrapper, Wrapper
 
 __all__ = ["TranslationWrapper"]
 
-CATALOG_FILE = "locales.json"
-SHARED_CATALOG = os.path.join(os.path.dirname(os.path.abspath(__file__)), CATALOG_FILE)
-CONFIDENCE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "locale_confidence.json")
+
+def _package_dir() -> Optional[str]:
+    spec = importlib.util.find_spec("textarena_locales")
+    return os.path.dirname(spec.origin) if spec is not None and spec.origin else None
+
+
+CATALOG_FILE = "locales.json"  # a game outside TextArena can keep its catalog next to its code
+PACKAGE_DIR = _package_dir()
+SHARED_CATALOG = os.path.join(PACKAGE_DIR, "shared.json") if PACKAGE_DIR else None
+CONFIDENCE_PATH = os.path.join(PACKAGE_DIR, "confidence.json") if PACKAGE_DIR else None
 SOURCE_LANG = "en"
 ID_LENGTH = 10
 MAX_DEPTH = 3  # nesting depth for slot values that are template lines themselves
@@ -307,14 +316,19 @@ def _unwrap(env):
 
 
 def _env_catalog_files(env) -> List[str]:
-    """``locales.json`` files next to the modules defining the env class and its game base classes."""
+    """Catalogs for the env class and its game base classes: a ``locales.json`` next to the class's module, or
+    else the class's TextArena game in the textarena-locales package."""
     files = []
     for cls in type(env).__mro__:
-        path = getattr(inspect.getmodule(cls), "__file__", None)
+        module = inspect.getmodule(cls)
+        path = getattr(module, "__file__", None)
         if not path:
             continue
         f = os.path.join(os.path.dirname(os.path.abspath(path)), CATALOG_FILE)
-        if f != SHARED_CATALOG and f not in files and os.path.isfile(f):
+        parts = module.__name__.split(".")
+        if not os.path.isfile(f) and PACKAGE_DIR and parts[:2] == ["textarena", "envs"] and len(parts) > 2:
+            f = os.path.join(PACKAGE_DIR, "envs", f"{parts[2]}.json")
+        if f not in files and os.path.isfile(f):
             files.append(f)
     return files
 
@@ -332,7 +346,7 @@ _CONFIDENCE: Optional[Dict[str, Dict[str, Any]]] = None
 def _confidence() -> Dict[str, Dict[str, Any]]:
     global _CONFIDENCE
     if _CONFIDENCE is None:
-        data = _read_json(CONFIDENCE_PATH)
+        data = _read_json(CONFIDENCE_PATH) if CONFIDENCE_PATH else {}
         _CONFIDENCE = {k: v for k, v in data.items() if not k.startswith("_") and isinstance(v, dict)}
     return _CONFIDENCE
 
@@ -356,7 +370,7 @@ def _warn_if_uncertified(lang: str, game: str):
 class TranslationWrapper(ObservationWrapper):
     """Show observations in each player's language.
 
-    Apply it on top of a made env, e.g. ``TranslationWrapper(ta.make("TicTacToe-v0"), lang="de")``
+    Apply it on top of a made env, e.g. ``TranslationWrapper(ta.make("TicTacToe-v1"), lang="de")``
     or ``lang={0: "de", 1: "en"}`` (players not listed see English). It works with every
     observation variant because it rewrites the final observation string; the env
     itself, the actions players type, and game behavior are unchanged.
@@ -373,20 +387,22 @@ class TranslationWrapper(ObservationWrapper):
         super().__init__(env)
         base = _unwrap(env)
         self.game_name = _game_name(base)
-        if locales_file is None:
-            env_files = _env_catalog_files(base)
-        else:
-            env_files = [locales_file] if isinstance(locales_file, str) else list(locales_file)
-        shared_file = SHARED_CATALOG if shared_locales_file is None else shared_locales_file
-        self.catalog = load_catalog(env_files + [shared_file])
-        # a language without a section in this env's catalog is an exact passthrough, shared strings included
-        self._env_langs = frozenset(set().union(*self.catalog.languages[: len(env_files)]))
         if isinstance(lang, str):
             default, per_player = lang, {}
         elif isinstance(lang, dict) and all(isinstance(k, int) and isinstance(v, str) for k, v in lang.items()):
             default, per_player = SOURCE_LANG, dict(lang)
         else:
             raise TypeError("lang must be a language code or a {player_id: language code} dict")
+        shared_file = SHARED_CATALOG if shared_locales_file is None else shared_locales_file
+        if shared_file is None and {default, *per_player.values()} != {SOURCE_LANG}:
+            raise ImportError('Translations need the textarena-locales package: pip install "textarena[translations]"')
+        if locales_file is None:
+            env_files = _env_catalog_files(base)
+        else:
+            env_files = [locales_file] if isinstance(locales_file, str) else list(locales_file)
+        self.catalog = load_catalog(env_files + ([shared_file] if shared_file else []))
+        # a language without a section in this env's catalog is an exact passthrough, shared strings included
+        self._env_langs = frozenset(set().union(*self.catalog.languages[: len(env_files)]))
         known = set(self._env_langs).union(*self.catalog.languages)
         for code in sorted({default, *per_player.values()} - {SOURCE_LANG}):
             if code not in known:

@@ -16,17 +16,11 @@ class PegJumpEnv(ta.GameEnv):
         (5, 8, 12), (5, 9, 14), (6, 9, 13), (6, 10, 15), (7, 8, 9), (8, 9, 10),
         (11, 12, 13), (12, 13, 14), (13, 14, 15),
     ]
-    def __init__(self, initial_empty: int = 1):
-        if (
-            not isinstance(initial_empty, int)
-            or isinstance(initial_empty, bool)
-            or not 1 <= initial_empty <= self.BOARD_SIZE
-        ):
-            raise ValueError("initial_empty must be an integer from 1 to 15")
-        self.ALLOWED_MOVES: List[Tuple[int, int, int]] = self._BASE_TRIPLES + [
-            (target, over, source) for source, over, target in self._BASE_TRIPLES
-        ]
-        self.initial_empty = initial_empty
+    ALLOWED_MOVES: List[Tuple[int, int, int]] = _BASE_TRIPLES + [
+        (target, over, source) for source, over, target in _BASE_TRIPLES
+    ]
+
+    initial_empty = ta.Param(1, "The hole that starts empty.", min=1, max=15)
 
     def setup(self) -> Dict[str, Any]:
         board = [False] + [True] * self.BOARD_SIZE

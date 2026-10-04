@@ -12,7 +12,8 @@ class WordChainsEnv(ta.GameEnv):
     mdp_includes_actions = False
     snapshot_excluded_attributes = ("word_list",)
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         basic_words = sorted(word for word in get_basic_english_words() if len(word) <= 5)
         next_shapes = {(word[0], len(word)) for word in get_english_words()}
         # Never start from a word for which the first player has no legal move.

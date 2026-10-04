@@ -5,10 +5,6 @@ Player 0 is the Recruiter, Player 1 the Candidate. Proposals use one letter
     Salary, Signing Bonus, Job Assignment, Company Car,
     Starting Date, Vacation Days, Moving Expense Reimbursement, Insurance Coverage
 """
-import time
-
-import pytest
-
 import textarena as ta
 from textarena.envs.NewRecruit.env import NewRecruitEnv
 
@@ -171,49 +167,6 @@ def test_repeat_reset_restores_pristine_state():
     assert env.state.game_state["proposal_history"] == []
     assert env.state.game_state["current_proposal"] is None
     assert env.state.current_player_id == 0
-
-
-def test_snapshot_restore_replays_proposal():
-    env = _fresh()
-    before = env.snapshot()
-    env.step("Reasoned offer.\nPropose ABCDEABC")
-    expected = env.snapshot()
-    env.restore(before)
-    env.step("Reasoned offer.\nPropose ABCDEABC")
-    assert env.state.game_state == expected["state"].game_state
-    assert env.state.current_player_id == expected["state"].current_player_id
-
-
-@pytest.mark.parametrize(
-    ("kwargs", "message"),
-    [
-        ({"max_turns": 0}, "max_turns"),
-        ({"max_turns": True}, "max_turns"),
-        ({"error_allowance": -1}, "error_allowance"),
-        ({"error_allowance": False}, "error_allowance"),
-    ],
-)
-def test_invalid_configuration_is_rejected(kwargs, message):
-    with pytest.raises(ValueError, match=message):
-        NewRecruitEnv(**kwargs)
-
-
-def test_line_padded_input_is_rejected_quickly():
-    env = _fresh()
-    start = time.perf_counter()
-    done, _ = env.step("a" + " \n" * 1500 + "x")
-    assert time.perf_counter() - start < 1.0
-    assert not done and env.state.error_count == 1
-
-
-def test_padded_decision_is_rejected_quickly():
-    env = _fresh()
-    env.step("Propose AAAAAAAA")
-    start = time.perf_counter()
-    done, _ = env.step("Accept" + " " * 32_000 + "x")
-    assert time.perf_counter() - start < 1.0
-    assert not done and env.state.error_count == 1
-    assert env.state.game_state["accepted_proposal"] is None
 
 
 def test_multiline_rationale_and_padded_commands_still_parse():

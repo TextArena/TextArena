@@ -10,10 +10,10 @@ word. It tests scanning a text grid and reporting coordinates precisely.
 
 | Env ID | Parameters |
 | --- | --- |
-| `WordSearch-v0` | `hardcore=False` |
-| `WordSearch-v0-hardcore` | `hardcore=True` |
+| `WordSearch-v1` | `hardcore=False` |
+| `WordSearch-v1-hardcore` | `hardcore=True` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `WordSearch-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("WordSearch-v0", hardcore=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `WordSearch-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("WordSearch-v1", hardcore=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -57,11 +57,10 @@ found) or incorrect.
 
 ## Parameters
 
-- `hardcore` (default `False`): draw the words from every dictionary headword (about 38,700 words, many of them rare)
-  instead of the 14,700 common words.
-- `max_turns` (default `None`): an optional cap on the total number of guesses, correct or incorrect. The default cap
-  is 25 (five words plus 20 incorrect attempts), which a game can never reach; it only guarantees termination. A
-  smaller value can end the game while incorrect attempts remain, and the prompt then states it.
+<!-- BEGIN GENERATED: parameters -->
+- `hardcore` (default `False`): Draw the words from every dictionary headword (about 38,700 words, many of them rare) instead of the 14,700 common words.
+- `max_turns` (default `None`): An optional cap on the total number of guesses, correct or incorrect. Without it the cap is 25 (five words plus 20 incorrect attempts), which a game can never reach; it only guarantees termination. A smaller value can end the game while incorrect attempts remain, and the prompt then states it. Accepts an integer of at least 1 or None.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

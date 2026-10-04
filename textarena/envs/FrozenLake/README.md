@@ -12,11 +12,11 @@ safe route.
 
 | Env ID | Parameters |
 | --- | --- |
-| `FrozenLake-v0` | `size=4`, `num_holes=3`, `randomize_start_goal=False` |
-| `FrozenLake-v0-hardcore` | `size=5`, `num_holes=6`, `randomize_start_goal=False` |
-| `FrozenLake-v0-random` | `size=4`, `num_holes=3`, `randomize_start_goal=True` |
+| `FrozenLake-v1` | `size=4`, `num_holes=3`, `randomize_start_goal=False` |
+| `FrozenLake-v1-hardcore` | `size=5`, `num_holes=6`, `randomize_start_goal=False` |
+| `FrozenLake-v1-random` | `size=4`, `num_holes=3`, `randomize_start_goal=True` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `FrozenLake-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("FrozenLake-v0", size=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `FrozenLake-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("FrozenLake-v1", size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -74,13 +74,12 @@ to the goal, ignoring holes. Progress is capped at `0.95`.
 
 ## Parameters
 
-- `size` (default `4`): the width and height of the grid, from 2 to 100.
-- `num_holes` (default `3`): the exact number of holes, from 0 to `(size − 1)²`, which fills every cell off the safe
-  route.
-- `randomize_start_goal` (default `False`): start in a random corner instead of the top-left one, with the goal in the
-  opposite corner.
-- `max_turns` (default `100`): the number of valid moves allowed. It must be at least `2 × (size − 1)`, the length of
-  the shortest route, so grids larger than 51 × 51 need a higher limit.
+<!-- BEGIN GENERATED: parameters -->
+- `size` (default `4`): The width and height of the grid. Accepts an integer from 2 to 100.
+- `num_holes` (default `3`): The exact number of holes. At most `(size - 1)²`, which fills every cell off the safe route. Accepts an integer of at least 0.
+- `randomize_start_goal` (default `False`): Start in a random corner instead of the top-left one, with the goal in the opposite corner.
+- `max_turns` (default `100`): The number of valid moves allowed. It must be at least `2 × (size - 1)`, the length of the shortest route, so grids larger than 51 × 51 need a higher limit. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

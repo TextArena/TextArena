@@ -4,7 +4,6 @@ Puzzles are randomly generated, so win/blocked scenarios are scripted by editing
 the vehicle layout directly after reset.
 """
 from collections import deque
-import random
 
 import pytest
 
@@ -154,13 +153,6 @@ def test_generated_solution_can_be_executed_for_win():
     assert env.state.rewards == {0: 1.0}
 
 
-def test_construction_and_reset_do_not_consume_global_rng():
-    random.seed(90210)
-    expected = random.getstate()
-    _fresh(seed=3)
-    assert random.getstate() == expected
-
-
 def test_generation_is_solvable_by_construction_without_search(monkeypatch):
     def fail_if_called(*args, **kwargs):
         raise AssertionError("setup must not run exhaustive solvability search")
@@ -182,15 +174,6 @@ def test_exact_parser_rejects_malformed_actions_atomically(action):
     assert not done
     assert env.state.error_count == 1
     assert env.state.turn == 0
-    assert _positions(env) == before
-
-
-def test_oversized_action_is_invalid_without_vehicle_mutation():
-    env = _fresh()
-    before = _positions(env)
-    done, _ = env.step("X" * (env.MAX_ACTION_CHARS + 1))
-    assert not done
-    assert env.state.error_count == 1
     assert _positions(env) == before
 
 
@@ -281,12 +264,3 @@ def test_terminal_render_shows_red_car_crossing_exit():
     assert done
     terminal_board = env.render(0)
     assert "X" in terminal_board and ">" in terminal_board
-
-
-@pytest.mark.parametrize(
-    "kwargs",
-    [{"difficulty": "impossible"}, {"max_turns": 0}, {"max_turns": True}],
-)
-def test_invalid_configuration_rejected(kwargs):
-    with pytest.raises(ValueError):
-        RushHourEnv(**kwargs)

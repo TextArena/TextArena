@@ -1,7 +1,7 @@
 from textarena.envs.registration import register_with_versions
 
 register_with_versions(
-    id="MarketEntryGame-v0",
+    id="MarketEntryGame-v1",
     entry_point="textarena.envs.MarketEntryGame.env:MarketEntryGameEnv",
     num_rounds=5,
     communication_turns=3,

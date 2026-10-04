@@ -18,15 +18,13 @@ class LeducHoldemEnv(ta.GameEnv):
     mdp_includes_actions = False
     max_bets_per_round = 2  # the opening bet plus one raise, as in the standard game
 
-    def __init__(self, starting_bank: int = 100, max_rounds: int = 5):
-        if not isinstance(starting_bank, int) or isinstance(starting_bank, bool) or starting_bank < 1:
-            raise ValueError("starting_bank must be a positive integer")
-        if not isinstance(max_rounds, int) or isinstance(max_rounds, bool) or max_rounds < 1:
-            raise ValueError("max_rounds must be a positive integer")
-        self.starting_bank = starting_bank
+    starting_bank = ta.Param(100, "The number of chips each player starts the match with.", min=1)
+    max_rounds = ta.Param(5, "The number of hands in the match.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.deck = [r for r in range(3) for _ in range(2)] # deck = two of each rank 0-2  (0=J, 1=Q, 2=K)
         self.bet_sizes = [2, 4] # round-0 / round-1 fixed bet
-        self.max_rounds = max_rounds
         self.action_space = re.compile(r"^(check|call|bet|raise|fold)$", re.I)
 
     @staticmethod

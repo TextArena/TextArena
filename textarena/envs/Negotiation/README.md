@@ -11,9 +11,9 @@ persuasion, and trading under private valuations.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Negotiation-v0` | `turn_multiple=8` |
+| `Negotiation-v1` | `turn_multiple=8` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Negotiation-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Negotiation-v0", turn_multiple=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Negotiation-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Negotiation-v1", turn_multiple=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -67,7 +67,9 @@ track their own holdings, and other players' valuations and inventories are neve
 
 ## Parameters
 
-- `turn_multiple` (default `3`): turns per player, so the game lasts `num_players × turn_multiple` turns.
+<!-- BEGIN GENERATED: parameters -->
+- `turn_multiple` (default `3`): The turns per player, so the game lasts `num_players × turn_multiple` turns. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

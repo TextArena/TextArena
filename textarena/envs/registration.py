@@ -50,25 +50,6 @@ def register_with_versions(id: str, entry_point: Callable, **kwargs: Any):
         EnvSpec(id=f"{id}-mdp", entry_point=entry_point, default_wrappers=[MDPObservationWrapper], kwargs=kwargs),
     ])
 
-def pprint_registry_detailed():
-    """Pretty print the registry with additional details like kwargs."""
-    if not ENV_REGISTRY:
-        print("No environments registered.")
-    else:
-        print("Detailed Registered Environments:")
-        for env_id, env_spec in ENV_REGISTRY.items():
-            print(f"  - {env_id}:")
-            print(f"      Entry Point: {env_spec.entry_point}")
-            print(f"      Kwargs:      {env_spec.kwargs}")
-            print(f"      Wrappers:    {env_spec.default_wrappers}")
-
-def check_env_exists(env_id: str):
-    """Check if an environment exists in the registry."""
-    if env_id not in ENV_REGISTRY:
-        raise ValueError(f"Environment {env_id} is not registered.")
-    else:
-        print(f"Environment {env_id} is registered.")
-
 def make(env_id: Union[str, List[str]], **kwargs) -> Any:
     """Create an environment instance using the registered ID."""
     # If env_id is a list, randomly select one environment ID
@@ -77,10 +58,12 @@ def make(env_id: Union[str, List[str]], **kwargs) -> Any:
             raise ValueError("Empty list of environment IDs provided.")
         env_id = random.choice(env_id)
     
-    # Continue with the existing implementation
     if env_id not in ENV_REGISTRY:
+        current = env_id.replace("-v0", "-v1", 1)
+        if "-v0" in env_id and current in ENV_REGISTRY:
+            raise ValueError(f"{env_id} was retired because its rules changed; use {current} (scores are not comparable).")
         raise ValueError(f"Environment {env_id} not found in registry.")
-    
+
     env_spec = ENV_REGISTRY[env_id]
     
     # Resolve the entry point if it's a string

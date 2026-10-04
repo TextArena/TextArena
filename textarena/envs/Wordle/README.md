@@ -10,10 +10,10 @@ misplaced, or absent ([rules](https://en.wikipedia.org/wiki/Wordle)).
 
 | Env ID | Parameters |
 | --- | --- |
-| `Wordle-v0` | `hardcore=False`, `word_length=5`, `num_guesses=6` |
-| `Wordle-v0-hardcore` | `hardcore=True`, `word_length=5`, `num_guesses=6` |
+| `Wordle-v1` | `hardcore=False`, `word_length=5`, `num_guesses=6` |
+| `Wordle-v1-hardcore` | `hardcore=True`, `word_length=5`, `num_guesses=6` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Wordle-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Wordle-v0", hardcore=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Wordle-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Wordle-v1", hardcore=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -60,9 +60,11 @@ A rejected guess is answered with the reason. If you run out of guesses, the sec
 
 ## Parameters
 
-- `word_length` (default `5`): the number of letters in the secret word and in every guess.
-- `num_guesses` (default `6`): the number of accepted guesses allowed.
-- `hardcore` (default `False`): draw the secret word from every headword of the dictionary instead of Basic English.
+<!-- BEGIN GENERATED: parameters -->
+- `word_length` (default `5`): The number of letters in the secret word and in every guess. Accepts an integer of at least 1.
+- `num_guesses` (default `6`): The number of accepted guesses allowed. Accepts an integer of at least 1.
+- `hardcore` (default `False`): Draw the secret word from every headword of the dictionary instead of Basic English.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

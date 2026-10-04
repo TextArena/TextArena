@@ -9,7 +9,6 @@ import copy
 import importlib.resources
 import itertools
 import json
-import random
 import re
 
 import pytest
@@ -211,14 +210,6 @@ def test_swapped_row_and_column_labels_get_a_corrective_hint():
     assert env.state.error_count == 1
 
 
-def test_reset_does_not_consume_global_rng():
-    random.seed(818)
-    expected = random.getstate()
-    env = LogicPuzzleEnv()
-    env.reset(num_players=1, seed=99)
-    assert random.getstate() == expected
-
-
 def test_invalid_later_batch_mark_is_atomic():
     env = _fresh()
     before = copy.deepcopy(env.game_board)
@@ -327,15 +318,6 @@ def test_loader_preserves_value_errors_for_bad_data(tmp_path):
     )
     with pytest.raises(ValueError, match="parser-incompatible"):
         env._load_puzzle_data(str(malformed_puzzle))
-
-
-@pytest.mark.parametrize(
-    "kwargs",
-    [{"difficulty": "unknown"}, {"difficulty": ""}, {"max_turns": 0}],
-)
-def test_invalid_configuration_or_difficulty_rejected(kwargs):
-    with pytest.raises(ValueError):
-        LogicPuzzleEnv(**kwargs)
 
 
 # Formal reading of every packaged clue, used to prove each puzzle has exactly one

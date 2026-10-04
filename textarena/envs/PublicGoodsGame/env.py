@@ -55,62 +55,25 @@ class PublicGoodsGameEnv(ta.GameEnv):
     broadcast_actions = False  # raw actions stay private; messages/contributions are revealed simultaneously
     error_allowance = 2  # allow 2 errors before elimination
 
-    def __init__(self,
-                 num_rounds: int = 5,
-                 communication_turns: int = 3,
-                 endowment: int = 20,
-                 multiplication_factor: float = 1.5,
-                 num_players: int = 4):
-        """
-        Initialize the Public Goods Game environment.
+    num_rounds = ta.Param(5, "The number of rounds.", min=1, check=_is_renderable, rule="a positive integer")
+    communication_turns = ta.Param(
+        3, "The simultaneous message turns before each decision. With 0, communication is skipped.",
+        min=0, check=_is_renderable, rule="a non-negative integer",
+    )
+    endowment = ta.Param(
+        20, "The tokens each player receives every round, which is also the maximum contribution.",
+        min=0, check=_is_renderable, rule="a non-negative integer",
+    )
+    multiplication_factor = ta.Param(
+        1.5, "The factor applied to the pot before it is shared.", type=Real, min=0,
+        check=lambda value: _is_finite_real(value) and _is_renderable(value), rule="a finite non-negative number",
+    )
+    default_num_players = ta.Param(
+        4, "The number of players used when `reset()` is called without `num_players`.", min=2, max=15,
+    )
 
-        Args:
-            num_rounds: Number of rounds to play
-            communication_turns: Number of communication turns before each decision
-            endowment: Number of tokens each player starts with each round
-            multiplication_factor: Factor by which total contributions are multiplied
-            num_players: Number of players in the game (default 4)
-        """
-        if (
-            not isinstance(num_rounds, int)
-            or isinstance(num_rounds, bool)
-            or num_rounds <= 0
-            or not _is_renderable(num_rounds)
-        ):
-            raise ValueError("num_rounds must be a positive integer")
-        if (
-            not isinstance(communication_turns, int)
-            or isinstance(communication_turns, bool)
-            or communication_turns < 0
-            or not _is_renderable(communication_turns)
-        ):
-            raise ValueError("communication_turns must be a non-negative integer")
-        if (
-            not isinstance(endowment, int)
-            or isinstance(endowment, bool)
-            or endowment < 0
-            or not _is_renderable(endowment)
-        ):
-            raise ValueError("endowment must be a non-negative integer")
-        if (
-            not _is_finite_real(multiplication_factor)
-            or multiplication_factor < 0
-            or not _is_renderable(multiplication_factor)
-        ):
-            raise ValueError("multiplication_factor must be a finite non-negative number")
-        if (
-            not isinstance(num_players, int)
-            or isinstance(num_players, bool)
-            or not self.min_players <= num_players <= self.max_players
-        ):
-            raise ValueError(f"num_players must be between {self.min_players} and {self.max_players}")
-
-        self.num_rounds = num_rounds
-        self.communication_turns = communication_turns
-        self.endowment = endowment
-        self.multiplication_factor = multiplication_factor
-        self.default_num_players = num_players
-
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         # Contribution regex - bare number.
         self.contribution_pattern = re.compile(r"^\s*(\d+)\s*$", re.IGNORECASE)
         # Public message regex - matches messages in curly braces like {Hello everyone!}

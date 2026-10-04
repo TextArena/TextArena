@@ -10,14 +10,9 @@ class IndianPokerEnv(ta.GameEnv):
     max_players = 2
     mdp_includes_actions = False
 
-    def __init__(self, max_rounds: int=1, starting_chips: int=100):
-        if not isinstance(max_rounds, int) or isinstance(max_rounds, bool) or max_rounds < 1:
-            raise ValueError("max_rounds must be a positive integer")
-        if not isinstance(starting_chips, int) or isinstance(starting_chips, bool) or starting_chips < 1:
-            raise ValueError("starting_chips must be a positive integer")
-        self.ante = 1
-        self.max_rounds = max_rounds
-        self.starting_bank = starting_chips
+    ante = 1
+    max_rounds = ta.Param(1, "The number of rounds in the match.", min=1)
+    starting_chips = ta.Param(100, "The number of chips each player starts with.", min=1)
 
     @staticmethod
     def _rank(card: int) -> int: return (card % 13) + 2 # 0-51 → 2-14
@@ -26,7 +21,7 @@ class IndianPokerEnv(ta.GameEnv):
     # def get_board_str(self): return create_board_str(self.state.game_state)
 
     def setup(self) -> Dict[str, Any]:
-        return {"player_chips": {0: self.starting_bank, 1: self.starting_bank}, "current_round": 0, "starting_player": 0}
+        return {"player_chips": {0: self.starting_chips, 1: self.starting_chips}, "current_round": 0, "starting_player": 0}
 
     def on_start(self):
         self._init_round()  # never ends the game here (current_round starts at 0)
@@ -65,7 +60,7 @@ class IndianPokerEnv(ta.GameEnv):
         return (
             f"You are Player {player_id} in a game of Indian Poker.\n- 52-card deck; you see only the opponent's card.\n- Ante {self.ante} chip(s) each round, {self.max_rounds} round(s) total.\n"
             f"- Valid moves: 'check'  |  'bet X'  |  'call'  |  'raise X'  |  'fold'  (X is a positive integer <= your chip count.)\n- Highest hidden card wins the pot at showdown.\n"
-            f"- Both players start with {self.starting_bank} chips. 'raise X' adds X chips on top of the bet you face; a bet or raise "
+            f"- Both players start with {self.starting_chips} chips. 'raise X' adds X chips on top of the bet you face; a bet or raise "
             f"can never exceed what your opponent has left to call it. There is no limit on the number of raises.\n"
             f"- Cards rank 2 (low) to A (high); suits do not matter and equal ranks split the pot.\n"
             f"- After {self.max_rounds} round(s), or as soon as a player cannot pay the ante, the player with more chips wins.\n"

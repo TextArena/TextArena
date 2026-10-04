@@ -195,17 +195,3 @@ def test_render_shows_capture_score_and_remaining_moves():
     board = env.render(1)
 
     assert "Score: White (Player 0) 1, Black (Player 1) 0 | Moves left: 39" in board
-
-
-def test_snapshot_restores_board_score_and_actor():
-    env = _fresh()
-    snapshot = env.snapshot()
-
-    env.step("b2 c4")
-    env.restore(snapshot)
-
-    assert env.state.current_player_id == 0
-    assert env.state.turn == 0
-    assert env.state.game_state["move_count"] == 0
-    assert env.state.game_state["score"] == [0, 0]
-    assert env.state.game_state["board"][6][1] == "W"

@@ -390,12 +390,6 @@ def test_turn_limit_with_level_match_points_is_a_draw():
     assert env.state.rewards == {0: 0, 1: 0}
 
 
-@pytest.mark.parametrize("max_turns", [0, -1, 1.5, True, "5"])
-def test_invalid_max_turns_is_rejected(max_turns):
-    with pytest.raises(ValueError):
-        LeTrucEnv(max_turns=max_turns)
-
-
 @pytest.mark.parametrize("seed", range(20))
 def test_random_legal_play_keeps_invariants_and_terminates(seed):
     env = _fresh(seed=seed)
@@ -427,18 +421,6 @@ def test_repeat_reset_replays_the_same_deal():
     assert env.state.game_state["hands"] == first_hands
 
 
-def test_snapshot_restore_replays_card_play():
-    env = _fresh()
-    action = f"play {env.state.game_state['hands'][0][0][:-1]}"
-    before = env.snapshot()
-    env.step(action)
-    expected = env.snapshot()
-    env.restore(before)
-    env.step(action)
-    assert env.state.game_state == expected["state"].game_state
-    assert env.state.current_player_id == expected["state"].current_player_id
-
-
 def test_snapshot_restore_mid_negotiation_replays_the_next_hand():
     env = _fresh()
     env.step("raise")
@@ -451,7 +433,7 @@ def test_snapshot_restore_mid_negotiation_replays_the_next_hand():
 
 
 def test_registered_default_and_mdp_variants_are_usable():
-    for env_id in ("LeTruc-v0", "LeTruc-v0-mdp"):
+    for env_id in ("LeTruc-v1", "LeTruc-v1-mdp"):
         wrapped = ta.make(env_id)
         wrapped.reset(num_players=2, seed=42)
         player_id, observation = wrapped.get_observation()

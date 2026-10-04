@@ -132,25 +132,6 @@ def test_unicode_compatibility_guess_is_normalized(fact1_token, fact2_token):
     assert done and env.state.rewards[1] == 1
 
 
-def test_invalid_final_guess_is_atomic_and_snapshot_restores_phase():
-    env = _fresh(max_turns=4)
-    for message in ("one", "two", "three"):
-        env.step(message)
-    facts_data = env.facts_data
-    snapshot = env.snapshot()
-    done, _ = env.step("Fact 1 plus extra text")
-    assert not done
-    assert env.state.turn == 3
-    assert env.state.current_player_id == 1
-
-    env.restore(snapshot)
-    assert env.state.turn == 3
-    assert env.state.current_player_id == 1
-    assert env.facts_data is facts_data
-    done, _ = env.step(_correct_token(env))
-    assert done and env.state.rewards[1] == 1
-
-
 def test_renderer_hides_answer_until_terminal():
     env = _fresh()
     board = env.get_board_str()

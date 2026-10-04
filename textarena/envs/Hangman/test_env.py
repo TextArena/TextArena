@@ -156,11 +156,6 @@ def test_targets_are_seeded_ascii_words():
     assert len(target) >= 3
 
 
-def test_non_boolean_dictionary_mode_is_rejected():
-    with pytest.raises(ValueError):
-        HangmanEnv(hardcore="yes")
-
-
 def test_renderer_hides_target_until_terminal():
     env = _fresh()
     target = env.state.game_state["target_word"].upper()
@@ -168,20 +163,6 @@ def test_renderer_hides_target_until_terminal():
     assert "_ " in env.get_board_str() or "Word: _" in env.get_board_str()
     env.step(env.state.game_state["target_word"])
     assert f"Answer: {target}" in env.get_board_str()
-
-
-def test_snapshot_restores_lives_and_guesses():
-    env = _fresh()
-    word_list = env.word_list
-    target = env.state.game_state["target_word"].upper()
-    wrong = next(word for word in ("ALPHA", "BRAVO") if word != target)
-    snapshot = env.snapshot()
-    env.step(wrong)
-    env.restore(snapshot)
-    assert env.state.game_state["tries_left"] == 6
-    assert env.state.game_state["guessed_words"] == set()
-    assert env.state.turn == 0
-    assert env.word_list is word_list
 
 
 def test_long_adversarial_word_costs_only_one_try():

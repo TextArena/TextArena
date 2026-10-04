@@ -11,9 +11,9 @@ their own; the first to knock out both of the opponent's hands wins
 
 | Env ID | Parameters |
 | --- | --- |
-| `Chopsticks-v0` | `max_turns=40` |
+| `Chopsticks-v1` | `max_turns=40` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Chopsticks-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Chopsticks-v0", max_turns=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Chopsticks-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Chopsticks-v1", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -55,5 +55,6 @@ effect, such as `P0 attacks P1’s hand 0: it goes from 1 to 2.` There is no hid
 
 ## Parameters
 
-- `max_turns` (default `40`): the number of valid moves, counting both players, before the game is declared a draw.
-  It must be a positive integer.
+<!-- BEGIN GENERATED: parameters -->
+- `max_turns` (default `40`): The number of valid moves, counting both players, before the game is declared a draw. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->

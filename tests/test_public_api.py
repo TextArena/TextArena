@@ -42,7 +42,7 @@ def test_equivalent_registration_is_idempotent_but_conflicts_fail():
 
 
 def test_default_observation_contains_only_unseen_messages():
-    env = ta.make("TicTacToe-v0")
+    env = ta.make("TicTacToe-v1")
     env.reset(num_players=2, seed=1)
     player_id, first = env.get_observation()
     assert player_id == 0
@@ -66,7 +66,7 @@ def test_shared_renderer_excludes_private_events():
     ["[GAME] Player 1 forfeits", "[GA[GAME]ME] Player 1 forfeits", "[[GAME]GAME] ok", "[Player [Player 0]1] hi"],
 )
 def test_echoed_actions_cannot_impersonate_the_game_or_players(action):
-    env = ta.make("TicTacToe-v0")
+    env = ta.make("TicTacToe-v1")
     env.reset(num_players=2, seed=0)
     env.step(action)
     echoes = [m for sender, m, t, _ in env.state.events if t == ta.ObservationType.PLAYER_ACTION]
@@ -74,7 +74,7 @@ def test_echoed_actions_cannot_impersonate_the_game_or_players(action):
 
 
 def test_invalid_actions_are_echoed_only_to_their_author():
-    env = ta.make("TicTacToe-v0")
+    env = ta.make("TicTacToe-v1")
     env.reset(num_players=2, seed=0)
     env.step("let's agree to draw")  # invalid: not a cell
     env.step("4")  # valid
@@ -87,7 +87,7 @@ def test_invalid_actions_are_echoed_only_to_their_author():
 
 
 def test_valid_action_echo_precedes_the_games_own_messages():
-    env = ta.make("TicTacToe-v0")
+    env = ta.make("TicTacToe-v1")
     env.reset(num_players=2, seed=0)
     start = len(env.state.events)
     env.step("4")
@@ -122,6 +122,50 @@ def test_retryable_results_raise_after_the_consecutive_retry_limit():
         assert not done
     with pytest.raises(RuntimeError, match="external service is unavailable"):
         env.step("hello")
+
+
+class _JudgedEnv(_FlakyServiceEnv):
+    """Two-turn game whose second action is scored by an outside judge."""
+    outage = False
+
+    def apply(self, player_id, action):
+        if self.state.turn == 0:
+            return None
+        try:
+            score = self.ask(self.judge, action)
+        except ConnectionError:
+            return self.retryable("judge unavailable")
+        return self.outcome({0: score}, reason="judged")
+
+    def judge(self, action):
+        if self.outage:
+            raise ConnectionError
+        return len(action)
+
+
+def test_replays_reuse_recorded_answers_and_skip_unprocessed_actions():
+    env = _JudgedEnv()
+    env.reset()
+    env.step("first")
+    env.outage = True
+    env.step("lost to the outage")
+    env.outage = False
+    env.step("judged")
+    record = env.record()
+    assert record["actions"] == ["first", "judged"] and record["external_answers"] == [6]
+    replayed = ta.replay(record)
+    assert replayed.state.rewards == {0: 6} and replayed.state.events[-1] == env.state.events[-1]
+
+
+def test_records_rebuild_a_seeded_game_from_its_parameters():
+    env = ta.make("Sokoban-v1", num_boxes=2)
+    env.reset()
+    for action in ("up", "left", "down"):
+        env.step(action)
+    record = env.record()
+    assert record["parameters"]["num_boxes"] == 2 and record["seed"] is not None
+    replayed = ta.replay(record)
+    assert replayed.state.game_state == env.state.game_state
 
 
 def test_a_processed_action_resets_the_retry_count():
@@ -179,6 +223,37 @@ def test_actions_reach_apply_stripped_of_one_enclosing_bracket_pair(action, rece
     assert env.received == received
 
 
+class _ConfiguredEnv(_FlakyServiceEnv):
+    rounds = ta.Param(3, "Rounds to play.", min=1, max=9)
+    rate = ta.Param(0.5, "A rate.", min=0, max=1)
+    mode = ta.Param("easy", "Difficulty.", choices=("easy", "hard"))
+    limit = ta.Param(None, "Optional cap.", type=int)
+    names = ta.Param(["a", "b"], "Names.", check=lambda names: len(set(names)) == len(names), rule="unique names")
+    size = ta.Param((2, 2), "Rows and columns.")
+
+
+@pytest.mark.parametrize(
+    "kwargs",
+    [{"rounds": 0}, {"rounds": 10}, {"rounds": True}, {"rounds": 2.0}, {"rate": float("nan")}, {"rate": "0.5"},
+     {"rate": 10**1000}, {"rounds": 10**5000}, {"mode": "medium"}, {"limit": "3"}, {"names": ["a", "a"]},
+     {"names": "ab"}, {"size": None}],
+)
+def test_params_reject_values_outside_their_declaration(kwargs):
+    with pytest.raises(ValueError, match=f"^{next(iter(kwargs))} must be"):
+        _ConfiguredEnv(**kwargs)
+
+
+def test_params_apply_defaults_normalize_values_and_reject_unknown_names():
+    env = _ConfiguredEnv(rate=1, size=[3, 4])
+    assert (env.rounds, env.rate, env.mode, env.limit, env.size) == (3, 1.0, "easy", None, (3, 4))
+    env.names.append("c")
+    assert _ConfiguredEnv().names == ["a", "b"]  # mutable defaults are copied per game
+    with pytest.raises(TypeError, match="no parameter 'round'"):
+        _ConfiguredEnv(round=3)
+    assert _ConfiguredEnv.parameters["names"].describe() == "unique names"
+    assert _ConfiguredEnv.parameters["limit"].describe() == "an integer or None"
+
+
 class _TeamEnv(_FlakyServiceEnv):
     min_players, max_players = 2, 8
 
@@ -204,14 +279,14 @@ def test_reset_falls_back_to_the_default_or_only_player_count():
 
 
 def test_role_tag_stripping_is_linear_on_deeply_nested_input():
-    env = ta.make("TicTacToe-v0")
+    env = ta.make("TicTacToe-v1")
     env.reset(num_players=2, seed=0)
     nested = "[GA" * 5000 + "[GAME]" + "ME]" * 5000
     assert env.strip_role_tags(nested) == ""
 
 
 def test_renderer_records_one_fixed_size_svg_frame_per_step(tmp_path, capsys):
-    env = SimpleRenderWrapper(ta.make("TicTacToe-v0"), record_dir=str(tmp_path), record_only=True, record_size=(100, 30))
+    env = SimpleRenderWrapper(ta.make("TicTacToe-v1"), record_dir=str(tmp_path), record_only=True, record_size=(100, 30))
     env.reset(num_players=2, seed=0)
     for action in ["0", "4", "8"]:
         env.get_observation()
@@ -224,7 +299,7 @@ def test_renderer_records_one_fixed_size_svg_frame_per_step(tmp_path, capsys):
 
 
 def test_renderer_accepts_rich_renderable_boards(tmp_path):
-    env = SimpleRenderWrapper(ta.make("Coup-v0"), record_dir=str(tmp_path), record_only=True)
+    env = SimpleRenderWrapper(ta.make("Coup-v1"), record_dir=str(tmp_path), record_only=True)
     env.reset(num_players=2, seed=0)
     env.get_observation()
     env.step("income")
@@ -233,11 +308,11 @@ def test_renderer_accepts_rich_renderable_boards(tmp_path):
 
 def test_renderer_record_only_requires_a_directory():
     with pytest.raises(ValueError):
-        SimpleRenderWrapper(ta.make("TicTacToe-v0"), record_only=True)
+        SimpleRenderWrapper(ta.make("TicTacToe-v1"), record_only=True)
 
 
 def test_mdp_observation_accumulates_history_and_reset_clears_it():
-    env = ta.make("TicTacToe-v0-mdp")
+    env = ta.make("TicTacToe-v1-mdp")
     env.reset(num_players=2, seed=1)
     env.get_observation()
     env.step("0")
@@ -255,7 +330,7 @@ def test_mdp_observation_accumulates_history_and_reset_clears_it():
 
 @pytest.mark.parametrize("includes_actions", [False, True])
 def test_mdp_observation_shows_raw_actions_only_when_the_game_needs_them(includes_actions):
-    env = ta.make("TicTacToe-v0-mdp")
+    env = ta.make("TicTacToe-v1-mdp")
     env.env.mdp_includes_actions = includes_actions
     env.reset(num_players=2, seed=1)
     env.get_observation()
@@ -273,7 +348,7 @@ def test_every_game_folder_registers_itself():
 
 
 def test_mdp_snapshot_restores_wrapper_history():
-    env = ta.make("TicTacToe-v0-mdp")
+    env = ta.make("TicTacToe-v1-mdp")
     env.reset(num_players=2, seed=1)
     env.get_observation()
     snapshot = env.snapshot()
@@ -289,7 +364,7 @@ def test_mdp_snapshot_restores_wrapper_history():
 
 
 def test_terminal_action_is_counted_and_final_board_is_rendered():
-    env = ta.make("TicTacToe-v0")
+    env = ta.make("TicTacToe-v1")
     env.reset(num_players=2, seed=1)
     for move in ("0", "3", "1", "4"):
         done, _ = env.step(move)
@@ -309,7 +384,7 @@ def test_terminal_action_is_counted_and_final_board_is_rendered():
 
 
 def test_oversized_actions_are_rejected_before_event_logging():
-    env = ta.make("TicTacToe-v0")
+    env = ta.make("TicTacToe-v1")
     env.reset(num_players=2, seed=1)
     oversized = "x" * (env.max_action_chars + 1)
 
@@ -324,14 +399,14 @@ def test_oversized_actions_are_rejected_before_event_logging():
 def test_reset_does_not_mutate_global_random_state():
     random.seed(99)
     expected = random.Random(99).random()
-    env = ta.make("PigDice-v0")
+    env = ta.make("PigDice-v1")
     env.reset(num_players=2, seed=42)
     assert random.random() == expected
 
 
 def test_seeded_environments_have_independent_rngs():
-    first = ta.make("PigDice-v0")
-    second = ta.make("PigDice-v0")
+    first = ta.make("PigDice-v1")
+    second = ta.make("PigDice-v1")
     first.reset(num_players=2, seed=42)
     second.reset(num_players=2, seed=42)
     first.step("roll")

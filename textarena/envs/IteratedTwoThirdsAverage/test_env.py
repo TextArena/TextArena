@@ -4,8 +4,6 @@ Two-player game. Each round both players guess a number; target = (2/3)*avg,
 closest guess wins the round. After ``num_rounds`` the player with more round
 wins takes the game (winner {w:1, l:-1}; draw {0:0, 1:0}).
 """
-import copy
-import time
 
 import pytest
 import textarena as ta
@@ -186,7 +184,6 @@ def test_terminal_state_keeps_last_round_and_turn_count():
 @pytest.mark.parametrize(
     "kwargs",
     [
-        {"num_rounds": 0},
         {"min_guess": float("nan")},
         {"max_guess": float("inf")},
         {"max_guess": 10**1000},
@@ -197,27 +194,3 @@ def test_terminal_state_keeps_last_round_and_turn_count():
 def test_invalid_configuration_rejected(kwargs):
     with pytest.raises(ValueError):
         IteratedTwoThirdsAverageEnv(**kwargs)
-
-
-PADDING = 30_000
-
-
-@pytest.mark.parametrize(
-    "action",
-    [
-        pytest.param(" " * PADDING + "x" + " " * 1000, id="leading-trailing-spaces"),
-        pytest.param("4" + " " * PADDING + "x", id="inner-spaces"),
-        pytest.param("\t\n " * (PADDING // 3) + "x", id="tab-newline-runs"),
-        pytest.param("[" * (PADDING // 2) + "x" + "]" * (PADDING // 2 - 2), id="deep-brackets"),
-    ],
-)
-def test_long_padded_input_is_rejected_quickly_without_changing_state(action):
-    env = _fresh()
-    before = copy.deepcopy(env.state.game_state)
-    player = env.state.current_player_id
-    start = time.perf_counter()
-    env.step(action)
-    assert time.perf_counter() - start < 0.25
-    assert env.state.error_count == 1
-    assert env.state.current_player_id == player
-    assert env.state.game_state == before

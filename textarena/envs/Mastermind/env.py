@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
 import textarena as ta
 from textarena.envs.Mastermind.renderer import create_board_str
@@ -13,41 +13,21 @@ class MastermindEnv(ta.GameEnv):
     max_number_options = 1_000_000
     max_action_chars = 4096
 
-    def __init__(self, code_length: Optional[int] = 4, num_numbers: Optional[int] = 6, max_turns: Optional[int] = 20, duplicate_numbers: Optional[bool] = False):
-        """
-        Args:
-            code_length (int): the number of options to get right
-            max_turns (int): the number of turns until draw
-            duplicate_numbers (bool): whether numbers can be duplicates
-        """
-        if (
-            not isinstance(code_length, int)
-            or isinstance(code_length, bool)
-            or not 1 <= code_length <= self.max_code_length
-        ):
-            raise ValueError(
-                f"code_length must be between 1 and {self.max_code_length}"
-            )
-        if (
-            not isinstance(num_numbers, int)
-            or isinstance(num_numbers, bool)
-            or not 1 <= num_numbers <= self.max_number_options
-        ):
-            raise ValueError(
-                f"num_numbers must be between 1 and {self.max_number_options}"
-            )
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
-            raise ValueError("max_turns must be a positive integer")
-        if not isinstance(duplicate_numbers, bool):
-            raise ValueError("duplicate_numbers must be a boolean")
-        if not duplicate_numbers and code_length > num_numbers:
+    code_length = ta.Param(4, "The number of positions in the code.", min=1, max=max_code_length)
+    num_numbers = ta.Param(6, "The largest number in the code; numbers range from 1 to this value.", min=1,
+                           max=max_number_options)
+    duplicate_numbers = ta.Param(
+        False, "Allow repeated numbers in the code and in guesses. When False, `code_length` cannot exceed "
+               "`num_numbers`.",
+    )
+    max_turns = ta.Param(20, "The maximum number of guesses.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if not self.duplicate_numbers and self.code_length > self.num_numbers:
             raise ValueError(
                 "code_length cannot exceed num_numbers when duplicates are disabled"
             )
-        self.max_turns = max_turns
-        self.code_length = code_length
-        self.num_numbers = num_numbers
-        self.duplicate_numbers = duplicate_numbers
 
     def get_board_str(self):
         return create_board_str(

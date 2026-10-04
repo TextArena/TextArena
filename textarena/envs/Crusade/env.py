@@ -38,7 +38,8 @@ class CrusadeEnv(ta.GameEnv):
     )
     action_format = "a move 'from to' in board coordinates, for example 'b1 c3' as White or 'b8 c6' as Black"
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.CELL_TO_RC = {i: (i // self.BOARD_N, i % self.BOARD_N) for i in range(self.BOARD_N ** 2)}
         self.RC_TO_CELL = {(r, c): i for i, (r, c) in self.CELL_TO_RC.items()}
         self.KNIGHT_DIRS = [(2, 1), (2, -1), (-2, 1), (-2, -1), (1, 2), (1, -2), (-1, 2), (-1, -2)]

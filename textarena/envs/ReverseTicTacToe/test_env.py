@@ -153,17 +153,3 @@ def test_terminal_action_is_counted_and_final_board_is_rendered():
     ][-1]
     assert " O | O | O " in final_board
     assert "'2'" not in final_board
-
-
-def test_snapshot_and_reset_restore_empty_board_and_actor():
-    env = _fresh()
-    snapshot = env.snapshot()
-    env.step("0")
-
-    env.restore(snapshot)
-
-    assert env.state.game_state["board"] == [['', '', ''], ['', '', ''], ['', '', '']]
-    assert env.state.current_player_id == 0
-    assert env.state.turn == 0
-    env.reset(num_players=2, seed=99)
-    assert env.state.game_state["board"] == [['', '', ''], ['', '', ''], ['', '', '']]

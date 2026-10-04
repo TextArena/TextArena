@@ -10,21 +10,14 @@ class BreakthroughEnv(ta.GameEnv):
     max_players = 2
     mdp_includes_actions = False
 
-    def __init__(self, is_open: bool = True, board_size: int = 8):
-        """
-        Args:
-            is_open: If True, the board state is revealed after every move to both players.
-            board_size: Dimension of the board, default 8x8.
-        """
-        if not isinstance(is_open, bool):
-            raise ValueError("is_open must be a boolean")
-        if not isinstance(board_size, int) or isinstance(board_size, bool) or not 4 <= board_size <= 26:
-            raise ValueError("board_size must be an integer between 4 and 26")
-        self.is_open = is_open
-        self.board_size = board_size
-        self._file_to_col = {chr(ord('a') + i): i for i in range(board_size)}
+    is_open = ta.Param(True, "Whether the acting player is shown the board before each move.")
+    board_size = ta.Param(8, "The side length of the board.", min=4, max=26)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self._file_to_col = {chr(ord('a') + i): i for i in range(self.board_size)}
         self._col_to_file = {v: k for k, v in self._file_to_col.items()}
-        last_file = chr(ord('a') + board_size - 1)
+        last_file = chr(ord('a') + self.board_size - 1)
         self.action_pattern = rf"(?i)^([a-{last_file}])([1-9]\d?)([a-{last_file}])([1-9]\d?)$"
 
     @property

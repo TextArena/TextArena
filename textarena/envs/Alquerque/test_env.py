@@ -1,4 +1,4 @@
-"""Deterministic game-logic tests for Alquerque-v0."""
+"""Deterministic game-logic tests for Alquerque-v1."""
 import re
 
 from textarena.envs.Alquerque.env import AlquerqueEnv

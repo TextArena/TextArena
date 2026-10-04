@@ -10,9 +10,9 @@ going over ([rules](https://en.wikipedia.org/wiki/Blackjack)).
 
 | Env ID | Parameters |
 | --- | --- |
-| `Blackjack-v0` | `num_hands=5` |
+| `Blackjack-v1` | `num_hands=5` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Blackjack-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Blackjack-v0", num_hands=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Blackjack-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Blackjack-v1", num_hands=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -58,4 +58,6 @@ pushes.
 
 ## Parameters
 
-- `num_hands` (required): the number of hands in a game, a positive integer.
+<!-- BEGIN GENERATED: parameters -->
+- `num_hands` (default `5`): The number of hands in a game. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->

@@ -11,27 +11,14 @@ class GuessTheNumberEnv(ta.GameEnv):
     mdp_includes_actions = False
     action_pattern = r"^([+-]?\d+)$"
 
-    def __init__(self, min_number: int = 1, max_number: int = 20, max_turns: int = 20):
-        """
-        Args:
-           min_number: The lower bound
-           max_number: The upper bound
-           max_turns: The number of guesses
-        """
-        if (
-            not isinstance(min_number, int)
-            or isinstance(min_number, bool)
-            or not isinstance(max_number, int)
-            or isinstance(max_number, bool)
-        ):
-            raise ValueError("min_number and max_number must be integers.")
-        if min_number > max_number:
+    min_number = ta.Param(1, "The smallest possible target. It must not exceed `max_number`.")
+    max_number = ta.Param(20, "The largest possible target.")
+    max_turns = ta.Param(20, "The number of valid guesses allowed. Both registered variants use `10`.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.min_number > self.max_number:
             raise ValueError("min_number must not exceed max_number.")
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer.")
-        self.min_number = min_number
-        self.max_number = max_number
-        self.max_turns = max_turns
 
     @property
     def action_format(self) -> str:

@@ -11,10 +11,10 @@ tests strategic questioning that narrows a large space of candidates.
 
 | Env ID | Parameters |
 | --- | --- |
-| `TwentyQuestions-v0` | `hardcore=False` |
-| `TwentyQuestions-v0-hardcore` | `hardcore=True` |
+| `TwentyQuestions-v1` | `hardcore=False` |
+| `TwentyQuestions-v1-hardcore` | `hardcore=True` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `TwentyQuestions-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("TwentyQuestions-v0", hardcore=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `TwentyQuestions-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("TwentyQuestions-v1", hardcore=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -57,14 +57,12 @@ history. When the game ends, the board reveals the target word.
 
 ## Parameters
 
-- `hardcore` (default `False`): draw from the hardcore list (150 uncommon words such as `astrolabe`, `sommelier`, or
-  `catacombs`) instead of the basic list (257 everyday words such as `library`, `nurse`, or `banana`).
-- `max_turns` (default `21`, minimum `2`): the total number of turns. The player may ask `max_turns - 1` questions,
-  and the final turn is reserved for the guess.
-- `gamemaster` (default: OpenRouter `openai/gpt-4o`): any callable that takes a prompt string and returns `Yes`,
-  `No`, or `I don't know`. Inject one to play offline or with a different model.
-- `words_path` (default: the bundled `twenty_questions_words.json`): an alternative word file with `basic` and
-  `hardcore` sections, each mapping theme names to lists of words.
+<!-- BEGIN GENERATED: parameters -->
+- `hardcore` (default `False`): Draw from the hardcore list (150 uncommon words such as `astrolabe`, `sommelier`, or `catacombs`) instead of the basic list (257 everyday words such as `library`, `nurse`, or `banana`).
+- `max_turns` (default `21`): The total number of turns. The player may ask `max_turns - 1` questions, and the final turn is reserved for the guess. Accepts an integer of at least 2.
+- `gamemaster` (default `None`): The game master that answers the questions, called with a prompt string and returning `Yes`, `No`, or `I don't know`. Inject one to play offline or with a different model; without one, questions go to OpenRouter `openai/gpt-4o`. Accepts a callable or None.
+- `words_path` (default `None`): An alternative word file with `basic` and `hardcore` sections, each mapping theme names to lists of words. Without it, the bundled `twenty_questions_words.json` is used.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

@@ -109,13 +109,6 @@ def parse_bean_list(text: str) -> Tuple[Optional[List[str]], Optional[str]]:
     return beans, None
 
 
-def _check_int(name: str, value: Any, minimum: int, optional: bool = False):
-    if value is None and optional:
-        return
-    if not isinstance(value, int) or isinstance(value, bool) or value < minimum:
-        raise ValueError(f"{name} must be an integer >= {minimum}{' or None' if optional else ''}, received {value!r}")
-
-
 def _join_players(player_ids: List[int]) -> str:
     names = [str(pid) for pid in player_ids]
     if len(names) == 1:
@@ -144,22 +137,16 @@ class BohnanzaEnv(ta.GameEnv):
     CARDS_DRAWN = 3
     MAX_PLANTS_FROM_HAND = 2
 
-    def __init__(self, max_turns: Optional[int] = 3000, error_allowance: int = 3, deck_cycles: int = 3, max_trade_rounds: Optional[int] = None):
-        """
-        Args:
-            max_turns: Step budget. When it is used up, all fields are harvested and the game is scored.
-            error_allowance: Consecutive invalid moves allowed before the offender forfeits the game.
-            deck_cycles: The game ends when the draw pile runs out for this many times (3 in the official rules).
-            max_trade_rounds: If set, trading ends automatically once the floor has gone around the table this many times.
-        """
-        _check_int("max_turns", max_turns, minimum=1, optional=True)
-        _check_int("error_allowance", error_allowance, minimum=0)
-        _check_int("deck_cycles", deck_cycles, minimum=1)
-        _check_int("max_trade_rounds", max_trade_rounds, minimum=1, optional=True)
-        self.max_turns = max_turns
-        self.error_allowance = error_allowance
-        self.deck_cycles = deck_cycles
-        self.max_trade_rounds = max_trade_rounds
+    deck_cycles = ta.Param(3, "The game ends when the draw pile runs out this many times (3 in the official rules).", min=1)
+    max_trade_rounds = ta.Param(
+        None, "If set, trading ends automatically after the floor has gone around the table this many times; None "
+              "lets the active player decide, as in the official rules.", type=int, min=1,
+    )
+    max_turns = ta.Param(
+        3000, "The step budget; when it is used up, all fields are harvested and the game is scored. A full game takes "
+              "about 200 steps without trading and up to about 1,500 with lively trading.", min=1, optional=True,
+    )
+    error_allowance = ta.Param(3, "The number of consecutive invalid moves allowed before the offender forfeits.", min=0)
 
     # ------------------------------------------------------------------ hooks
     def setup(self) -> Dict[str, Any]:

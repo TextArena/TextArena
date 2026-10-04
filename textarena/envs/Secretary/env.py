@@ -8,11 +8,9 @@ class SecretaryEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
 
-    def __init__(self, N: int = 20):
-        if isinstance(N, bool) or not isinstance(N, int) or N < 1:
-            raise ValueError("N must be a positive integer")
-        self.N = N
-        self.action_space = re.compile(r'(accept|continue)', re.IGNORECASE)
+    action_space = re.compile(r'(accept|continue)', re.IGNORECASE)
+
+    N = ta.Param(20, "The number of values.", min=1)
 
     def setup(self) -> Dict[str, Any]:
         # Values are kept at the 4 decimals shown to the player, so the comparisons they see are exact.

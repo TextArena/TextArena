@@ -14,26 +14,19 @@ class GolfEnv(ta.GameEnv):
     # about num_cards rounds, so this leaves at least 4x slack for normal play.
     default_rounds_per_card = 4
 
-    def __init__(self, num_cards: int = 6, num_columns: int = 3, max_turns: Optional[int] = None):
-        """ Initializes the Golf card game environment
+    num_cards = ta.Param(6, "The number of cards per player; it also sets the number of decks.", min=2, max=12)
+    num_columns = ta.Param(3, "The number of columns in each grid; it must divide `num_cards`.", min=1)
+    max_turns = ta.Param(
+        None, "The total number of accepted actions before the game is scored as it stands. None uses "
+              "`2 × num_players × 4 × num_cards`, about four full rounds per grid card (96 actions for two players "
+              "on the default grid), which normal games finish well within.", type=int, min=1,
+    )
 
-        Args:
-            max_turns: Total number of accepted actions (engine turns) before the game is
-                scored as it stands. ``None`` derives the cap from the grid size and the
-                player count: 2 actions x num_players x default_rounds_per_card x num_cards.
-        """
-        if not isinstance(num_cards, int) or isinstance(num_cards, bool) or not 2 <= num_cards <= 12:
-            raise ValueError("num_cards must be an integer between 2 and 12")
-        if not isinstance(num_columns, int) or isinstance(num_columns, bool) or num_columns < 1:
-            raise ValueError("num_columns must be a positive integer")
-        if num_cards % num_columns != 0:
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.num_cards % self.num_columns != 0:
             raise ValueError("num_cards must be divisible by num_columns")
-        if max_turns is not None and (not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1):
-            raise ValueError("max_turns must be a positive integer or None")
-        self.max_turns = max_turns
-        self.num_cards = num_cards
-        self.num_columns = num_columns
-        self.num_rows = num_cards // num_columns
+        self.num_rows = self.num_cards // self.num_columns
         self.deck = self._create_deck()
 
     def _create_deck(self) -> List[Dict[str, Any]]:

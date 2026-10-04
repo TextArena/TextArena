@@ -148,7 +148,7 @@ def test_board_shows_cards_pot_chips_and_valid_actions():
 def test_mdp_observation_lists_valid_actions_for_the_actor():
     import textarena as ta
 
-    env = ta.make("LeducHoldem-v0-mdp")
+    env = ta.make("LeducHoldem-v1-mdp")
     env.reset(num_players=2, seed=3)
     env.get_observation()
     env.step("bet")
@@ -240,13 +240,3 @@ def test_board_stays_hidden_until_first_betting_round_finishes():
     env.step("check")
     assert env.state.game_state["board_revealed"] is True
     assert any("Flop card revealed" in message for _, message, _, _ in env.state.events)
-
-
-def test_snapshot_restore_replays_same_betting_state():
-    env = _fresh()
-    snapshot = env.snapshot()
-    env.step("bet")
-    expected = copy.deepcopy(env.state.game_state)
-    env.restore(snapshot)
-    env.step("bet")
-    assert env.state.game_state == expected

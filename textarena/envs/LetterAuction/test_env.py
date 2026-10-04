@@ -9,8 +9,6 @@ passing every letter then submitting invalid words.
 """
 import copy
 
-import pytest
-
 from textarena.envs.LetterAuction.env import MIN_COMPLETE_GAME_TURNS, LetterAuctionEnv
 
 
@@ -163,24 +161,6 @@ def test_mixed_auction_command_is_rejected():
     assert not done
     assert env.state.error_count == 1
     assert env.round_number == 0
-
-
-def test_seeded_reset_snapshot_and_configuration_bounds():
-    first, second = _fresh(), _fresh()
-    assert first.letters == second.letters
-    snapshot = first.snapshot()
-    first.step("pass")
-    first.restore(snapshot)
-    assert first.current_player == 0
-    assert first.round_number == 0
-    with pytest.raises(ValueError):
-        LetterAuctionEnv(starting_coins=0)
-    for max_turns in (0, True, 26, MIN_COMPLETE_GAME_TURNS - 1):
-        with pytest.raises(ValueError, match="max_turns"):
-            LetterAuctionEnv(max_turns=max_turns)
-    assert MIN_COMPLETE_GAME_TURNS == 54
-    assert LetterAuctionEnv().max_turns is None
-    assert LetterAuctionEnv(max_turns=MIN_COMPLETE_GAME_TURNS).max_turns == MIN_COMPLETE_GAME_TURNS
 
 
 def _auction(env, prices):

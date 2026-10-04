@@ -7,7 +7,6 @@ digit. We use a high clue count (few empty cells) to keep the test fast.
 Moves use 1-indexed bare ``row col number``.
 """
 import copy
-import random
 
 import pytest
 
@@ -61,13 +60,6 @@ def test_generated_boards_are_valid_and_deterministic(seed):
                 for row in range(box_row, box_row + 3)
                 for col in range(box_col, box_col + 3)
             } == expected
-
-
-def test_reset_does_not_consume_global_rng():
-    random.seed(551)
-    expected = random.getstate()
-    _fresh()
-    assert random.getstate() == expected
 
 
 def test_full_solution_wins():
@@ -135,15 +127,6 @@ def test_mismatched_brackets_are_invalid_and_atomic(brackets):
     assert env.state.error_count == 1
     assert env.game_state["board"] == before
     assert env.state.turn == 0
-
-
-def test_oversized_numeric_action_is_invalid_without_mutation():
-    env = _fresh()
-    before = copy.deepcopy(env.game_state["board"])
-    done, _ = env.step(f"{'9' * env.max_action_chars} 1 1")
-    assert not done
-    assert env.state.error_count == 1
-    assert env.game_state["board"] == before
 
 
 def test_runtime_renderer_reflects_moves_and_uses_numeric_rows():
@@ -231,20 +214,3 @@ def test_snapshot_restore_recovers_live_board_without_aliasing_initial_board():
     assert env.game_state["board"][row][col] == 0
     assert env.game_board[row][col] == 0
     assert env.get_board_str() in env.render(0)
-
-
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"clues": 16},
-        {"clues": 81},
-        {"clues": 17.5},
-        {"clues": True},
-        {"max_turns": 0},
-        {"max_turns": True},
-        {"max_turns": None},
-    ],
-)
-def test_invalid_configuration_rejected(kwargs):
-    with pytest.raises(ValueError):
-        SudokuEnv(**kwargs)

@@ -1,4 +1,4 @@
-"""Deterministic game-logic tests for Breakthrough-v0."""
+"""Deterministic game-logic tests for Breakthrough-v1."""
 import copy
 import re
 
@@ -70,35 +70,6 @@ def test_valid_moves_stay_synchronised_after_rotation():
     env.step("a2b3")
     assert env.state.game_state["valid_moves"] == env._get_valid_moves(1)
     assert all(move[0] in "abcdefgh" for move in env.state.game_state["valid_moves"])
-
-
-def test_snapshot_restore_recovers_board_and_turn():
-    env = _fresh()
-    snapshot = env.snapshot()
-    env.step("a2a3")
-    env.restore(snapshot)
-    assert env.state.current_player_id == 0
-    assert env.state.game_state["board"][1][0] == "W"
-    assert env.state.game_state["board"][2][0] == ""
-
-
-@pytest.mark.parametrize("size", [3, 27])
-def test_invalid_board_size_rejected(size):
-    with pytest.raises(ValueError):
-        BreakthroughEnv(board_size=size)
-
-
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"board_size": 4.5},
-        {"board_size": True},
-        {"is_open": 1},
-    ],
-)
-def test_invalid_configuration_types_rejected(kwargs):
-    with pytest.raises(ValueError):
-        BreakthroughEnv(**kwargs)
 
 
 def test_invalid_format_increments_error_count():

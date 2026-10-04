@@ -1,4 +1,4 @@
-"""Deterministic game-logic tests for TicTacToe-v0.
+"""Deterministic game-logic tests for TicTacToe-v1.
 
 Player 0 plays 'O' and moves first; Player 1 plays 'X'. Moves are the
 bare cell index 0-8, e.g. '4'.

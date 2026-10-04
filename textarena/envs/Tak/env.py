@@ -21,30 +21,13 @@ class TakEnv(ta.GameEnv):
         r"(\{.*\})$"              # Match allocation dictionary
     )  # Example: move (2,2) {(2,3): [F1], (2,4): [F0, C0]}
 
-    def __init__(self, board_size, stones, capstones, max_turns: int = 100):
-        """
-        Initialize the Tak game environment
-
-        Args:
-            board_size: Size of the (square) board.
-            stones: Number of flat/wall stones per player.
-            capstones: Number of capstones per player.
-            max_turns: Safeguard cap on the total number of moves. Real Tak has no
-                turn limit, but stack moves alone can continue forever; when the cap
-                is reached the flat count decides the game.
-        """
-        if not isinstance(board_size, int) or isinstance(board_size, bool) or not 3 <= board_size <= 8:
-            raise ValueError("board_size must be an integer from 3 through 8")
-        if not isinstance(stones, int) or isinstance(stones, bool) or stones < 1:
-            raise ValueError("stones must be a positive integer")
-        if not isinstance(capstones, int) or isinstance(capstones, bool) or capstones < 0:
-            raise ValueError("capstones must be a non-negative integer")
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
-        self.board_size = board_size
-        self.stones = stones
-        self.capstones = capstones
-        self.max_turns = max_turns
+    board_size = ta.Param(4, "The side length of the board. It is also the carry limit.", min=3, max=8)
+    stones = ta.Param(15, "The number of stones per player, each placed as a flat stone or a wall.", min=1)
+    capstones = ta.Param(1, "The number of capstones per player.", min=0)
+    # Real Tak has no turn limit, but stack moves alone can continue forever.
+    max_turns = ta.Param(
+        100, "The safeguard on the total number of turns, after which the flat count decides the game.", min=1,
+    )
 
     @property
     def terminal_render_keys(self):

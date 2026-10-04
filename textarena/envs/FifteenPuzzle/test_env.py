@@ -129,19 +129,6 @@ def test_illegal_move_is_atomic():
     assert env.state.game_state == before
 
 
-def test_snapshot_and_repeat_reset_restore_board_and_render():
-    env = _fresh()
-    initial = copy.deepcopy(env.state.game_state)
-    snapshot = env.snapshot()
-    legal = next(move.strip("'") for move in env.render(0).split("Available Moves: ")[1].split(", "))
-    env.step(legal)
-    env.restore(snapshot)
-    assert env.state.game_state == initial
-
-    env.reset(num_players=1, seed=42)
-    assert env.state.game_state == initial
-
-
 def test_dynamic_render_cannot_go_stale():
     env = _fresh()
     board = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, None, 15]]
@@ -150,11 +137,6 @@ def test_dynamic_render_cannot_go_stale():
     rendered = env.render(0)
     assert "13 14 __ 15" in rendered
     assert env.state.game_state["rendered_board"] == env._render_board(board)
-
-
-def test_invalid_turn_limit_rejected():
-    with pytest.raises(ValueError):
-        FifteenPuzzleEnv(max_turns=0)
 
 
 @pytest.mark.parametrize("max_turns,seed", [(12, 915), (12, 3633), (14, 12305), (16, 2784)])

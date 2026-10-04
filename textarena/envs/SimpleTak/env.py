@@ -12,15 +12,12 @@ class SimpleTakEnv(ta.GameEnv):
     mdp_includes_actions = False
     action_pattern = r"^(\d+)$"
 
-    def __init__(self, board_size: int = 5):
-        """
-        Args:
-            board_size (int): The size of the NxN board (default 5).
-        """
-        if not isinstance(board_size, int) or isinstance(board_size, bool) or board_size < 1:
-            raise ValueError("board_size must be a positive integer")
-        self.board_size = board_size
-        self.cell_mapping = {i: (i // board_size, i % board_size) for i in range(board_size * board_size)}
+    board_size = ta.Param(5, "The side length of the board.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        size = self.board_size
+        self.cell_mapping = {i: (i // size, i % size) for i in range(size * size)}
 
     @property
     def action_format(self) -> str:

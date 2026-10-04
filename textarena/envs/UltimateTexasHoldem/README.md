@@ -10,9 +10,9 @@ survive a fixed number of rounds without going broke ([rules](https://wizardofod
 
 | Env ID | Parameters |
 | --- | --- |
-| `UltimateTexasHoldem-v0` | `max_turns=1000`, `start_chips=1000`, `ante_amount=25` |
+| `UltimateTexasHoldem-v1` | `max_rounds=1000`, `start_chips=1000`, `ante_amount=25` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `UltimateTexasHoldem-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("UltimateTexasHoldem-v0", max_turns=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `UltimateTexasHoldem-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("UltimateTexasHoldem-v1", max_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -35,7 +35,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `UltimateTexasHolde
   - Folding loses the Ante and the Blind.
 - **Blind pay table:** royal flush 500:1, straight flush 50:1, four of a kind 10:1, full house 3:1, flush 3:2,
   straight 1:1. Flush payouts can leave you with half chips.
-- **End of the game:** you win by completing `max_turns` rounds; you lose as soon as a round leaves you with less than
+- **End of the game:** you win by completing `max_rounds` rounds; you lose as soon as a round leaves you with less than
   twice the ante, the cost of the next Ante and Blind.
 
 ## Actions
@@ -58,15 +58,17 @@ actions. At each showdown the dealer's cards, both best hands and the result of 
 
 | Outcome | Reward |
 | --- | --- |
-| Complete `max_turns` rounds | `+1` |
+| Complete `max_rounds` rounds | `+1` |
 | A round leaves you unable to post the next Ante and Blind | `-1` |
 | Second consecutive invalid move | `-1` |
 
 ## Parameters
 
-- `max_turns` (default `1000`): the number of rounds to survive. It counts rounds, not individual actions.
-- `start_chips` (default `1000`): starting chips; it must cover at least one Ante and Blind.
-- `ante_amount` (default `25`): the Ante and the Blind; Play bets are multiples of it.
+<!-- BEGIN GENERATED: parameters -->
+- `max_rounds` (default `1000`): The number of rounds to survive. Accepts an integer of at least 1.
+- `start_chips` (default `1000`): The starting chips. They must cover at least one Ante and Blind. Accepts an integer of at least 1.
+- `ante_amount` (default `25`): The Ante and the Blind. Play bets are multiples of it. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

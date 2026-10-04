@@ -12,9 +12,9 @@ following private constraints.
 
 | Env ID | Parameters |
 | --- | --- |
-| `TwoDollar-v0` | defaults |
+| `TwoDollar-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `TwoDollar-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `TwoDollar-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -92,13 +92,12 @@ win, even if the agreed split favored them. A $2.00 / $0.00 split is a win for t
 
 ## Parameters
 
-- `player_roles` (default `None`): two role names, such as `["vanilla", "50_cents"]`, for Players 0 and 1. `None`
-  draws two different roles at random. Requesting `x_rounds` with `max_rounds` below 4 raises a `ValueError`.
-- `total_amount` (default `2.00`): the amount to split. It must be positive, with at most two decimals.
-- `max_rounds` (default `20`): the number of messages, counting both players, before the game ends without a deal.
-  It also sets the `x_rounds` deadline to `max_rounds // 2`.
-- `error_allowance` (default `3`): the number of consecutive invalid moves a player is warned about before the next
-  one forfeits the game.
+<!-- BEGIN GENERATED: parameters -->
+- `player_roles` (default `None`): Two role names, such as `["vanilla", "50_cents"]`, for Players 0 and 1. `None` draws two different roles at random. Requesting `x_rounds` with `max_rounds` below 4 raises a `ValueError`. Accepts a list of two role names or None.
+- `total_amount` (default `2.0`): The amount to split. Accepts a positive amount with at most two decimal places.
+- `max_rounds` (default `20`): The number of messages, counting both players, before the game ends without a deal. It also sets the `x_rounds` deadline to `max_rounds // 2`. Accepts an integer of at least 1.
+- `error_allowance` (default `3`): The number of consecutive invalid moves a player is warned about before the next one forfeits the game. Accepts an integer of at least 0.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

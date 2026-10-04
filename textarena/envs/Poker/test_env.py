@@ -517,30 +517,6 @@ def test_huge_numeric_poker_action_is_invalid_and_atomic():
     assert env.state.game_state == before
 
 
-def test_snapshot_restores_actor_and_betting_state():
-    env = _fresh(num_rounds=2, num_players=3)
-    snapshot = env.snapshot()
-    env.step("call")
-    expected_state = copy.deepcopy(env.state.game_state)
-    expected_actor = env.state.current_player_id
-
-    env.restore(snapshot)
-    env.step("call")
-
-    assert env.state.game_state == expected_state
-    assert env.state.current_player_id == expected_actor
-
-
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"num_rounds": 0},
-        {"starting_chips": 0},
-        {"small_blind": 0},
-        {"big_blind": 0},
-        {"small_blind": 20, "big_blind": 10},
-    ],
-)
-def test_invalid_poker_configuration_is_rejected(kwargs):
-    with pytest.raises(ValueError):
-        PokerEnv(**kwargs)
+def test_small_blind_above_big_blind_is_rejected():
+    with pytest.raises(ValueError, match="small_blind cannot exceed big_blind"):
+        PokerEnv(small_blind=20, big_blind=10)

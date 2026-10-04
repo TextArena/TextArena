@@ -12,7 +12,8 @@ class UltimateTicTacToeEnv(ta.GameEnv):
     action_pattern = r"^([0-8])(?:\s*,\s*|\s+)([0-8])$"
     action_format = "two numbers from 0 to 8, the mini-board and then the square inside it, for example '7 8'"
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.cell = {i: (i // 3, i % 3) for i in range(9)} # convert 0-8 → (row, col)
 
     def setup(self) -> Dict[str, Any]:

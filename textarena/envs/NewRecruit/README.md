@@ -11,9 +11,9 @@ table, and once a proposal is accepted the player with the higher score wins
 
 | Env ID | Parameters |
 | --- | --- |
-| `NewRecruit-v0` | defaults |
+| `NewRecruit-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `NewRecruit-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `NewRecruit-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -72,8 +72,10 @@ point table is never shown; the final result message reveals both scores.
 
 ## Parameters
 
-- `max_turns` (default `10`): turns in the whole game, counting both players.
-- `error_allowance` (default `3`): consecutive invalid moves a player may make (and retry) before losing.
+<!-- BEGIN GENERATED: parameters -->
+- `max_turns` (default `10`): The turns in the whole game, counting both players. Accepts an integer of at least 1.
+- `error_allowance` (default `3`): The consecutive invalid moves a player may make (and retry) before losing. Accepts an integer of at least 0.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

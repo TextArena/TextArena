@@ -9,12 +9,10 @@ class BlackjackEnv(ta.GameEnv):
     mdp_includes_actions = False
     _ACTION_RE = re.compile(r"(hit|stand)", re.I)
 
-    def __init__(self, num_hands: int):
-        if not isinstance(num_hands, int) or isinstance(num_hands, bool) or num_hands < 1:
-            raise ValueError("num_hands must be a positive integer")
-        self.num_hands = num_hands
-        self.ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A']
-        self.suits = ['♠','♥','♦','♣']
+    ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A']
+    suits = ['♠','♥','♦','♣']
+
+    num_hands = ta.Param(5, "The number of hands in a game.", min=1)
 
     def setup(self) -> Dict[str, Any]:
         game_state = {"hand_number": 1, "num_hands": self.num_hands, "player_hand": [], "dealer_hand": [], "results_summary": {"win":0, "lose":0, "draw":0}}

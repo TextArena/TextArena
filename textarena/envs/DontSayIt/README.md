@@ -10,10 +10,10 @@ saying the opponent's word. It tests conversational steering, subtlety, and infe
 
 | Env ID | Parameters |
 | --- | --- |
-| `DontSayIt-v0` | `hardcore=False`, `max_turns=20` |
-| `DontSayIt-v0-hardcore` | `hardcore=True`, `max_turns=30` |
+| `DontSayIt-v1` | `hardcore=False`, `max_turns=20` |
+| `DontSayIt-v1-hardcore` | `hardcore=True`, `max_turns=30` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `DontSayIt-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("DontSayIt-v0", hardcore=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `DontSayIt-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("DontSayIt-v1", hardcore=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -49,11 +49,10 @@ opponent's word is never shown. On each turn, the acting player sees the opponen
 
 ## Parameters
 
-- `max_turns` (required): the total number of messages, counting both players, before the game is a draw. It must be
-  an even integer of at least 2, or `None` for no limit.
-- `hardcore` (default `False`): draw secret words from every headword of the bundled dictionaries (about 38,700 base
-  words of 3 or more letters, many of them rare, such as `oakum` or `glyceride`) instead of the Basic English list
-  (750 everyday words, such as `apple`, `bridge`, or `angry`).
+<!-- BEGIN GENERATED: parameters -->
+- `max_turns` (default `20`): The total number of messages, counting both players, before the game is a draw. `None` means no limit. Accepts an even integer of at least 2 or None.
+- `hardcore` (default `False`): Draw secret words from every headword of the bundled dictionaries (about 38,700 base words of 3 or more letters, many of them rare, such as `oakum` or `glyceride`) instead of the Basic English list (750 everyday words, such as `apple`, `bridge`, or `angry`).
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

@@ -3,6 +3,7 @@ import copy
 import json
 
 import pytest
+import textarena as ta
 from textarena.envs.ScenarioPlanning.env import ScenarioPlanningEnv
 from textarena.utils.jury import OpenRouterJury
 
@@ -259,11 +260,33 @@ def test_default_jury_class_resolves_without_building_a_jury():
     assert env.judge is None
 
 
-def test_configuration_and_player_bounds_are_validated():
-    with pytest.raises(ValueError):
-        ScenarioPlanningEnv(jury_class=_FakeJury, jury_size=0)
-    with pytest.raises(ValueError):
-        ScenarioPlanningEnv(jury_class=_FakeJury, jury_size=101)
+def test_jury_class_must_be_callable():
+    with pytest.raises(ValueError, match="jury_class must be a callable or None"):
+        ScenarioPlanningEnv(jury_class="OpenRouterJury")
+
+
+def test_replay_reuses_recorded_votes_without_calling_the_jury():
+    calls = []
+
+    class Jury(_FakeJury):
+        def evaluate(self, context):
+            calls.append(context)
+            return super().evaluate(context)
+
+    env = ScenarioPlanningEnv(jury_class=Jury)
+    env.reset(num_players=2, seed=42)
+    env.step("Build a shelter.")
+    env.step("Find water.")
+    assert len(calls) == 1
+    record = json.loads(json.dumps(env.record()))
+    replayed = ta.replay(record)
+    assert len(calls) == 1
+    assert replayed.judge is None
+    assert replayed.state.rewards == env.state.rewards == {0: 1, 1: -1}
+    assert replayed.game_state == env.game_state
+
+
+def test_player_bounds_are_validated():
     env = ScenarioPlanningEnv(jury_class=_FakeJury)
     with pytest.raises(ValueError):
         env.reset(num_players=1)

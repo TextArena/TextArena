@@ -14,28 +14,18 @@ class SlitherlinkEnv(ta.GameEnv):
     max_action_chars = 4096
     _ACTION_RE = re.compile(r"([hv])\s+(\d+)\s+(\d+)", re.I)
 
-    def __init__(self, rows: int = 4, cols: int = 4, max_turns: int = 200):
-        """
-        Initialize Slitherlink environment with configurable grid size.
+    rows = ta.Param(4, "The number of rows of cells. The grid can have at most 10,000 cells.", min=2)
+    cols = ta.Param(4, "The number of columns of cells.", min=2)
+    max_turns = ta.Param(200, "The maximum number of toggles.", min=1)
 
-        Args:
-            rows: Number of rows in the grid
-            cols: Number of columns in the grid
-            max_turns: Maximum number of moves allowed
-        """
-        if not isinstance(rows, int) or isinstance(rows, bool) or rows < 2:
-            raise ValueError("rows must be an integer of at least 2")
-        if not isinstance(cols, int) or isinstance(cols, bool) or cols < 2:
-            raise ValueError("cols must be an integer of at least 2")
-        if rows * cols > self.max_grid_cells:
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.rows * self.cols > self.max_grid_cells:
             raise ValueError(
                 f"rows and cols create more than {self.max_grid_cells} cells"
             )
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
-            raise ValueError("max_turns must be a positive integer")
-        self.R = rows
-        self.C = cols
-        self.max_turns = max_turns
+        self.R = self.rows
+        self.C = self.cols
 
     @property
     def clues(self) -> List[List[Optional[int]]]: return self.game_state["clues"]

@@ -7,9 +7,6 @@ players bid the same value every round, producing 13 ties, zero scores, and a
 triple-tie outcome (all rewards 0).
 """
 
-import copy
-import time
-
 import pytest
 
 import textarena as ta
@@ -97,20 +94,6 @@ def test_eliminated_player_cannot_share_final_draw_reward():
     assert env.state.rewards == {0: -1, 1: 0, 2: 0}
 
 
-def test_repeat_reset_and_snapshot_restore_sealed_round_state():
-    env = _fresh()
-    original_deck = env.state.game_state["prize_deck"].copy()
-    env.step("A")
-    snap = env.snapshot()
-    env.step("2")
-    env.restore(snap)
-    assert env.state.game_state["pending_bids"] == {0: 1}
-    assert env.state.current_player_id == 1
-    env.reset(num_players=3, seed=42)
-    assert env.state.game_state["prize_deck"] == original_deck
-    assert env.state.game_state["pending_bids"] == {}
-
-
 @pytest.mark.parametrize(
     "scores, eliminated, expected",
     [
@@ -166,27 +149,3 @@ def test_eliminating_final_bidder_resolves_survivors_without_rebidding():
     assert gs["player_hands"][0] == list(range(2, 14))
     assert gs["player_hands"][1] == [1] + list(range(3, 14))
     assert env.state.current_player_id == 0
-
-
-PADDING = 30_000
-
-
-@pytest.mark.parametrize(
-    "action",
-    [
-        pytest.param(" " * PADDING + "x" + " " * 1000, id="leading-trailing-spaces"),
-        pytest.param("4" + " " * PADDING + "x", id="inner-spaces"),
-        pytest.param("\t\n " * (PADDING // 3) + "x", id="tab-newline-runs"),
-        pytest.param("[" * (PADDING // 2) + "x" + "]" * (PADDING // 2 - 2), id="deep-brackets"),
-    ],
-)
-def test_long_padded_input_is_rejected_quickly_without_changing_state(action):
-    env = _fresh()
-    before = copy.deepcopy(env.state.game_state)
-    player = env.state.current_player_id
-    start = time.perf_counter()
-    env.step(action)
-    assert time.perf_counter() - start < 0.25
-    assert env.state.error_count == 1
-    assert env.state.current_player_id == player
-    assert env.state.game_state == before

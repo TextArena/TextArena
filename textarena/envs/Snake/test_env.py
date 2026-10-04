@@ -31,19 +31,10 @@ def test_reset_places_unique_apples_and_supports_declared_player_limit():
     assert len(heads) == len(set(heads)) == 15
 
 
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"width": 5.5},
-        {"height": True},
-        {"num_apples": 1.5},
-        {"num_apples": -1},
-        {"max_turns": 0},
-    ],
-)
-def test_invalid_configuration_rejected(kwargs):
-    with pytest.raises(ValueError):
-        SnakeEnv(**kwargs)
+def test_board_must_fit_apples_and_every_snake():
+    SnakeEnv(width=4, height=4, num_apples=1)
+    with pytest.raises(ValueError, match="too small"):
+        SnakeEnv(width=4, height=4, num_apples=2)
 
 
 def test_valid_moves_keep_game_running():

@@ -11,9 +11,9 @@ tightens every turn.
 
 | Env ID | Parameters |
 | --- | --- |
-| `WordChains-v0` | defaults |
+| `WordChains-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `WordChains-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `WordChains-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

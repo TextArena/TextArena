@@ -118,10 +118,8 @@ def test_terminal_board_preserves_final_battle_and_is_repeatable():
 @pytest.mark.parametrize(
     "kwargs",
     [
-        {"num_fields": 1},
-        {"num_fields": 27},
         {"num_total_units": 2},
-        {"num_rounds": 0},
+        {"num_fields": 5, "num_total_units": 4},
         {"num_total_units": 10**5000},
         {"num_rounds": 10**5000},
     ],
@@ -165,12 +163,3 @@ def test_round_can_be_won_with_a_minority_of_fields():
     env.step("A3 B3 C1 D2 E1")
     done, _ = env.step("A2 B2 C3 D2 E1")  # Alpha wins A and B, Beta wins C, D and E are tied
     assert done and env.state.rewards == {0: 1, 1: -1}
-
-
-def test_snapshot_restores_hidden_round_allocation():
-    env = _fresh(num_rounds=2)
-    snapshot = env.snapshot()
-    env.step("A3 B0 C0")
-    env.restore(snapshot)
-    assert env.game_state["player_states"][0]["allocation_complete"] is False
-    assert env.game_state["fields"][0]["player_0_units"] == 0

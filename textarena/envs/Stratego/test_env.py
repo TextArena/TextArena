@@ -9,8 +9,6 @@ Manipulating the runtime board/state from a test is fine; we never edit env code
 import re
 from collections import Counter
 
-import pytest
-
 from textarena.envs.Stratego.env import StrategoEnv
 
 
@@ -274,20 +272,6 @@ def test_turn_limit_draw_reveals_terminal_board():
     assert any(token in env.state.game_state["rendered_board"].upper() for token in ("FL", "BM"))
 
 
-def test_snapshot_restore_recovers_board_piece_index_and_history():
-    env = _fresh()
-    move = env._available_moves(0)[0]
-    original_board = env.snapshot()["state"].game_state["board"]
-    original_index = list(env.player_pieces[0])
-    snapshot = env.snapshot()
-    env.step(move)
-    env.restore(snapshot)
-    assert env.board == original_board
-    assert env.player_pieces[0] == original_index
-    assert env.game_state["move_history"] == {}
-    assert env.game_state["last_moved_piece"] == {}
-
-
 def test_invalid_forfeit_reveals_cached_terminal_board():
     env = _fresh()
     env.step("garbage")
@@ -354,9 +338,3 @@ def test_prompt_lists_ranks_scout_movement_and_end_conditions():
     assert "more than three turns in a row" in prompt
     assert "draw after 321 turns" in prompt
     assert not prompt.rstrip().endswith("board state:")
-
-
-@pytest.mark.parametrize("max_turns", [0, -1, 1.5, True])
-def test_invalid_turn_limit_rejected(max_turns):
-    with pytest.raises(ValueError):
-        StrategoEnv(max_turns=max_turns)

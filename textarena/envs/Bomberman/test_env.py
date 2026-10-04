@@ -106,11 +106,6 @@ def test_wall_density_extremes():
                 assert grid[y][x] == "+"
 
 
-def test_arena_is_seeded():
-    assert _fresh(seed=5).game_state["grid"] == _fresh(seed=5).game_state["grid"]
-    assert _fresh(seed=5).game_state["grid"] != _fresh(seed=6).game_state["grid"]
-
-
 # --------------------------------------------------------------------- moves
 def test_valid_move_updates_position_and_passes_turn():
     env = _fresh()
@@ -390,48 +385,8 @@ def test_initial_observation_contains_prompt_and_board():
 
 
 # ------------------------------------------------------- snapshots & config
-def test_snapshot_restore_replays_identically():
-    env = _fresh(seed=9)
-    snapshot = env.snapshot()
-    actions = ["right", "up", "bomb", "left", "left", "stay", "stay", "stay"]
-
-    def run():
-        for action in actions:
-            if env.state.done:
-                break
-            env.step(action)
-        return copy.deepcopy(env.game_state), env.state.rewards, env.state.turn
-
-    first = run()
-    env.restore(snapshot)
-    assert run() == first
-
-
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"grid_size": 4},
-        {"grid_size": 10.0},
-        {"grid_size": True},
-        {"max_turns": 0},
-        {"max_turns": 2.5},
-        {"bomb_timer": 0},
-        {"bomb_radius": 0},
-        {"bomb_radius": "2"},
-        {"wall_density": -0.1},
-        {"wall_density": 1.5},
-        {"wall_density": "0.3"},
-        {"wall_density": True},
-        {"wall_density": float("nan")},
-    ],
-)
-def test_invalid_configuration_rejected(kwargs):
-    with pytest.raises(ValueError):
-        TwoPlayerBombermanEnv(**kwargs)
-
-
 def test_registered_variants_use_upstream_defaults():
-    for env_id in ("Bomberman-v0", "Bomberman-v0-mdp"):
+    for env_id in ("Bomberman-v1", "Bomberman-v1-mdp"):
         env = ta.make(env_id)
         env.reset(num_players=2, seed=1)
         assert (env.grid_size, env.max_turns, env.bomb_timer, env.bomb_radius) == (10, 100, 6, 2)

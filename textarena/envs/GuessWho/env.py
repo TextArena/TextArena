@@ -34,21 +34,26 @@ class GuessWhoEnv(ta.GameEnv):
         re.IGNORECASE,
     )
 
-    def __init__(
-        self,
-        max_turns: int = 40,
-        gamemaster: Optional[Any] = None,
-        characters_path: Optional[str] = None,
-    ):
-        if isinstance(max_turns, bool) or not isinstance(max_turns, int) or max_turns < 2:
-            raise ValueError("max_turns must be an integer of at least 2 (questions plus a final guess).")
-        if gamemaster is not None and not callable(gamemaster):
-            raise TypeError("gamemaster must be callable.")
-        self.max_turns = max_turns
-        # Delay creation of the network-backed default until a question is asked.
-        self.gamemaster = gamemaster
-        self.gamemaster_options = ["Yes", "No", "I don't know"]
-        self.characters = self._load_characters(characters_path)
+    gamemaster_options = ["Yes", "No", "I don't know"]
+
+    max_turns = ta.Param(
+        40, "The total number of turns. The player may ask `max_turns - 1` questions, and the final turn is reserved "
+            "for the guess.", min=2,
+    )
+    gamemaster = ta.Param(
+        None, "Answers the player's questions. With None, OpenRouter `openai/gpt-4o` answers; inject one to play "
+              "offline or with a different model.", type=object, check=callable,
+        rule="a callable that takes a prompt string and returns `Yes`, `No`, or `I don't know`",
+    )
+    characters_path = ta.Param(
+        None, "A JSON file with an alternative character list in the schema of the bundled `characters.json`, which "
+              "None selects. Names must stay distinct once case, accents, punctuation, and spacing are ignored.",
+        type=str,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.characters = self._load_characters(self.characters_path)
 
     def _load_characters(self, characters_path: Optional[str] = None):
         try:
@@ -169,7 +174,7 @@ class GuessWhoEnv(ta.GameEnv):
     def render(self, player_id: int) -> str:
         return self.get_board_str()
 
-    def _get_gamemaster(self):
+    def _ask_gamemaster(self, prompt: str):
         if self.gamemaster is None:
             try:
                 self.gamemaster = ta.agents.OpenRouterAgent(model_name="openai/gpt-4o")
@@ -178,7 +183,7 @@ class GuessWhoEnv(ta.GameEnv):
                     "GuessWho questions require OpenRouter. Install the OpenAI dependency "
                     "and set OPENROUTER_API_KEY, or inject a gamemaster."
                 ) from exc
-        return self.gamemaster
+        return self.gamemaster(prompt)
 
     def get_gamemaster_response(self, action: str) -> str:
         """ Get the gamemaster's response based on the provided action """
@@ -189,7 +194,7 @@ class GuessWhoEnv(ta.GameEnv):
         options = ", ".join(f"'{opt}'" for opt in self.gamemaster_options) # Format available response options
         history = "\n".join(f"Q: {q}\nA: {a}" for q, a in self.gamemaster_history) # Construct conversation history
         prompt = f"{self.gamemaster_context}\n{history}\n\nQ: {action}\nOptions: {options}\n\nPlease respond with the most appropriate option." # Create prompt
-        response = self._get_gamemaster()(prompt)
+        response = self.ask(self._ask_gamemaster, prompt)
         if not isinstance(response, str) or len(response) > self.max_gamemaster_response_chars:
             raise ValueError("gamemaster returned an invalid answer")
         match = self._GAMEMASTER_RESPONSE_RE.fullmatch(response)

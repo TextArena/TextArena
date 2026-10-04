@@ -10,9 +10,9 @@ stock, and a waste pile ([rules](https://en.wikipedia.org/wiki/Klondike_%28solit
 
 | Env ID | Parameters |
 | --- | --- |
-| `Klondike-v0` | `max_turns=200`, `draw_count=1` |
+| `Klondike-v1` | `max_turns=200`, `draw_count=1` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Klondike-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Klondike-v0", max_turns=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Klondike-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Klondike-v1", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -85,9 +85,10 @@ After each turn you are told what each action did, or why the first failing acti
 
 ## Parameters
 
-- `max_turns` (default `200`): the number of turns (replies) before the game ends.
-- `draw_count` (default `1`): how many cards `draw` turns over, `1` or `3`. Only the top waste card is shown and
-  playable. The deal is fixed by the seed passed to `reset`.
+<!-- BEGIN GENERATED: parameters -->
+- `max_turns` (default `200`): The number of turns (replies) before the game ends. Accepts an integer of at least 1.
+- `draw_count` (default `1`): How many cards `draw` turns over. Only the top waste card is shown and playable. The deal is fixed by the seed passed to `reset`. Accepts one of 1, 3.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

@@ -12,17 +12,14 @@ class LightsOutEnv(ta.GameEnv):
     MAX_SIZE = 20
     MAX_COORDINATE_DIGITS = 6
 
-    def __init__(self, size: int = 5, max_turns: int = 50):
-        if not isinstance(size, int) or isinstance(size, bool) or size < 1:
-            raise ValueError("size must be a positive integer")
-        if size > self.MAX_SIZE:
-            raise ValueError(f"size cannot exceed {self.MAX_SIZE}")
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
-        self.size = size
-        self.max_turns = max_turns
-        # Action format: 'row col' where row and col are 0-indexed
-        self.action_space = re.compile(r"(?P<row>\d+)(?:\s*,\s*|\s+)(?P<col>\d+)")
+    # Action format: 'row col' where row and col are 0-indexed
+    action_space = re.compile(r"(?P<row>\d+)(?:\s*,\s*|\s+)(?P<col>\d+)")
+
+    size = ta.Param(5, "The width and height of the grid.", min=1, max=MAX_SIZE)
+    max_turns = ta.Param(
+        50, "The number of valid presses allowed. It also caps the number of scrambling presses at reset, so the "
+            "puzzle stays solvable within the limit.", min=1,
+    )
 
     def setup(self) -> Dict[str, Any]:
         grid = [[False for _ in range(self.size)] for _ in range(self.size)]

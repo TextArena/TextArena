@@ -11,9 +11,9 @@ tests information-efficient questioning and deduction over a structured set of c
 
 | Env ID | Parameters |
 | --- | --- |
-| `GuessWho-v0` | `max_turns=20` |
+| `GuessWho-v1` | `max_turns=20` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `GuessWho-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("GuessWho-v0", max_turns=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `GuessWho-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("GuessWho-v1", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -58,12 +58,11 @@ question-and-answer history. The target's name appears on the board only after t
 
 ## Parameters
 
-- `max_turns` (default `40`, minimum `2`): the total number of turns. The player may ask `max_turns - 1` questions,
-  and the final turn is reserved for the guess.
-- `gamemaster` (default: OpenRouter `openai/gpt-4o`): any callable that takes a prompt string and returns `Yes`,
-  `No`, or `I don't know`. Inject one to play offline or with a different model.
-- `characters_path` (default: the bundled `characters.json`): an alternative character list with the same schema.
-  Names must stay distinct once case, accents, punctuation, and spacing are ignored.
+<!-- BEGIN GENERATED: parameters -->
+- `max_turns` (default `40`): The total number of turns. The player may ask `max_turns - 1` questions, and the final turn is reserved for the guess. Accepts an integer of at least 2.
+- `gamemaster` (default `None`): Answers the player's questions. With None, OpenRouter `openai/gpt-4o` answers; inject one to play offline or with a different model. Accepts a callable that takes a prompt string and returns `Yes`, `No`, or `I don't know` or None.
+- `characters_path` (default `None`): A JSON file with an alternative character list in the schema of the bundled `characters.json`, which None selects. Names must stay distinct once case, accents, punctuation, and spacing are ignored.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

@@ -31,21 +31,14 @@ class WinAsMuchAsYouCanEnv(ta.GameEnv):
     DEFAULT_TALK_ACTION = "Pass"
     DEFAULT_ACT_ACTION = "Choose Y"
 
-    def __init__(self, error_allowance: int = 3):
-        """
-        Initialize the Win as Much as You Can environment.
+    error_allowance = ta.Param(
+        3, "The number of consecutive invalid moves that only receive a warning. The next one also gets feedback, sets "
+           "`invalid_move` in the player's game info, and applies the default decision. The count then starts over.",
+        min=0,
+    )
 
-        Args:
-            error_allowance: Number of invalid moves allowed per player
-        """
-        if (
-            not isinstance(error_allowance, int)
-            or isinstance(error_allowance, bool)
-            or error_allowance < 0
-        ):
-            raise ValueError("error_allowance must be a non-negative integer")
-        self.error_allowance = error_allowance
-
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         # Regex patterns for parsing actions. A message ends at its last non-space character,
         # so a long whitespace run inside it is scanned only once.
         self.broadcast_pattern = re.compile(r"^\s*Broadcast\s*:\s*(.*\S)\s*$", re.IGNORECASE | re.DOTALL)

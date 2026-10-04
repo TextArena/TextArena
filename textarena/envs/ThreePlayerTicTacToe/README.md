@@ -10,9 +10,9 @@ vertically, or diagonally wins. With two opponents, blocking one of them can ope
 
 | Env ID | Parameters |
 | --- | --- |
-| `ThreePlayerTicTacToe-v0` | defaults |
+| `ThreePlayerTicTacToe-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `ThreePlayerTicTacToe-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `ThreePlayerTicTacToe-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

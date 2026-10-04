@@ -1,4 +1,4 @@
-"""Deterministic game-logic tests for Blackjack-v0 (single player vs dealer)."""
+"""Deterministic game-logic tests for Blackjack-v1 (single player vs dealer)."""
 import copy
 
 from textarena.envs.Blackjack.env import BlackjackEnv

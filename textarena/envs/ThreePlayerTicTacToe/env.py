@@ -11,7 +11,8 @@ class ThreePlayerTicTacToeEnv(ta.GameEnv):
     mdp_includes_actions = False
     action_pattern = r"^([0-9]{1,2})$"
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.board_size = 5
         self.cell_mapping = {i * self.board_size + j: (i, j) for i in range(self.board_size) for j in range(self.board_size)}
         self.symbols = {0: 'A', 1: 'B', 2: 'C'}

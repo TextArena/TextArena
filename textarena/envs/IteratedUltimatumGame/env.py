@@ -28,40 +28,16 @@ class IteratedUltimatumGameEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
 
-    def __init__(self, pool: int = 10, max_turns: Optional[int] = 4, alternate_roles: bool = False):
-        """
-        Initialize the Iterated Ultimatum Game environment.
+    offer_pattern = re.compile(r"^Offer:\s*\$?(\d+)$", re.IGNORECASE)
+    accept_pattern = re.compile(r"^Accept$", re.IGNORECASE)
+    reject_pattern = re.compile(r"^Reject$", re.IGNORECASE)
 
-        Args:
-            pool (int): Amount of money available each round
-            max_turns (int): Maximum number of turns (should be even for balanced gameplay)
-        """
-        if (
-            not isinstance(pool, int)
-            or isinstance(pool, bool)
-            or pool < 0
-            or not _is_renderable(pool)
-        ):
-            raise ValueError("pool must be a non-negative integer")
-        if (
-            not isinstance(max_turns, int)
-            or isinstance(max_turns, bool)
-            or max_turns <= 0
-            or max_turns % 2
-            or not _is_renderable(max_turns)
-        ):
-            raise ValueError("max_turns must be a positive even integer")
-        if not isinstance(alternate_roles, bool):
-            raise ValueError("alternate_roles must be a boolean")
-
-        self.pool = pool
-        self.max_turns = max_turns
-        self.alternate_roles = alternate_roles
-
-        # Regex patterns for parsing player actions
-        self.offer_pattern = re.compile(r"^Offer:\s*\$?(\d+)$", re.IGNORECASE)
-        self.accept_pattern = re.compile(r"^Accept$", re.IGNORECASE)
-        self.reject_pattern = re.compile(r"^Reject$", re.IGNORECASE)
+    pool = ta.Param(10, "The money split each round.", min=0, check=_is_renderable, rule="a non-negative integer")
+    max_turns = ta.Param(
+        4, "The total number of turns; the game has max_turns / 2 rounds.", min=1,
+        check=lambda value: value % 2 == 0 and _is_renderable(value), rule="a positive even integer",
+    )
+    alternate_roles = ta.Param(False, "Swap the proposer and responder after every round.")
 
     def get_board_str(self):
         """Get the current board state as a string."""

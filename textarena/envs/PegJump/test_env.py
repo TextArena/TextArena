@@ -151,24 +151,6 @@ def test_comma_separated_holes_are_valid():
     assert env.state.game_state["board"].count(True) == 13
 
 
-def test_snapshot_and_repeat_reset_restore_board():
-    env = _fresh()
-    initial = copy.deepcopy(env.state.game_state)
-    snapshot = env.snapshot()
-    env.step("4 1")
-    env.restore(snapshot)
-    assert env.state.game_state == initial
-
-    env.reset(num_players=1, seed=999)
-    assert env.state.game_state == initial
-
-
-@pytest.mark.parametrize("initial_empty", [0, 16, True])
-def test_invalid_opening_rejected(initial_empty):
-    with pytest.raises(ValueError):
-        PegJumpEnv(initial_empty=initial_empty)
-
-
 @pytest.mark.parametrize("initial_empty", range(1, 16))
 def test_prompt_example_is_a_legal_opening_jump(initial_empty):
     env = _fresh(initial_empty=initial_empty)

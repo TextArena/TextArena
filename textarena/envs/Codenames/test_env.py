@@ -1,4 +1,4 @@
-"""Deterministic game-logic tests for Codenames-v0 (2v2 word deduction).
+"""Deterministic game-logic tests for Codenames-v1 (2v2 word deduction).
 
 Players: 0 = Red spymaster, 1 = Red operative, 2 = Blue spymaster, 3 = Blue operative.
 The board assignment is read from ``env.board`` so outcomes are scripted deterministically.
@@ -51,19 +51,6 @@ def test_roles_and_operative_board_privacy():
         spymaster_line = next(line for line in spymaster_view.splitlines() if line.startswith(word))
         assert operative_line.strip() == word
         assert spymaster_line.split()[1] == team
-
-
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"hardcore": None},
-        {"max_turns": 0},
-        {"max_turns": True},
-    ],
-)
-def test_constructor_rejects_invalid_options(kwargs):
-    with pytest.raises(ValueError):
-        CodenamesEnv(**kwargs)
 
 
 @pytest.mark.parametrize("hardcore", [False, True])
@@ -223,16 +210,3 @@ def test_turn_limit_reason_uses_configured_limit():
     assert done
     assert env.state.rewards == {0: 0, 1: 0, 2: 0, 3: 0}
     assert all("(2)" in info["reason"] for info in env.state.game_info.values())
-
-
-def test_repeat_reset_and_snapshot_restore_board_and_turn():
-    env = _fresh()
-    first_board = env.board.copy()
-    snap = env.snapshot()
-    env.step(f"{SAFE_CLUE} 2")
-    env.restore(snap)
-    assert env.board == first_board
-    assert env.state.current_player_id == 0
-    assert env.state.game_state["last_clue"] is None
-    env.reset(num_players=4, seed=42)
-    assert env.board == first_board

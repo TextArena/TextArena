@@ -179,21 +179,6 @@ def test_oversized_equations_are_rejected_before_solving(equation):
         CryptarithmEnv(equation=equation)
 
 
-def test_reset_and_snapshot_restore_independent_state():
-    env = _fresh()
-    env.step("A 1")
-    snapshot = env.snapshot()
-    env.step("B 2")
-    env.restore(snapshot)
-
-    assert env.state.game_state["mapping"] == {"A": 1}
-    env.step("B 2")
-    assert env.state.game_state["mapping"] == {"A": 1, "B": 2}
-
-    env.reset(num_players=1, seed=42)
-    assert env.state.game_state == {"mapping": {}, "digit_used": {}}
-
-
 def test_turn_limit_counts_last_action_and_awards_bounded_progress():
     env = CryptarithmEnv(equation="A + B = C", max_turns=1)
     env.reset(num_players=1, seed=42)

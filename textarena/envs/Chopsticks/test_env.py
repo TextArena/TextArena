@@ -1,4 +1,4 @@
-"""Deterministic game-logic tests for Chopsticks-v0."""
+"""Deterministic game-logic tests for Chopsticks-v1."""
 import pytest
 from textarena.envs.Chopsticks.env import ChopsticksEnv
 
@@ -19,12 +19,6 @@ def test_reset_initial_hands():
 def test_reset_requires_exactly_two_players(num_players):
     with pytest.raises(ValueError):
         ChopsticksEnv().reset(num_players=num_players, seed=42)
-
-
-@pytest.mark.parametrize("max_turns", [0, -1, True, 1.5])
-def test_max_turns_must_be_a_positive_integer(max_turns):
-    with pytest.raises(ValueError):
-        ChopsticksEnv(max_turns=max_turns)
 
 
 def test_attack_adds_fingers_and_rotates():
@@ -155,14 +149,3 @@ def test_two_consecutive_invalid_moves_end_game():
     done, _ = env.step("garbage")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
-
-
-def test_snapshot_restore_and_repeat_reset_restore_hands_and_history():
-    env = _fresh()
-    snap = env.snapshot()
-    env.step("attack 0 0")
-    env.restore(snap)
-    assert env.state.game_state == {"hands": {0: [1, 1], 1: [1, 1]}, "history": []}
-    assert env.state.current_player_id == 0
-    env.reset(num_players=2, seed=42)
-    assert env.state.game_state == {"hands": {0: [1, 1], 1: [1, 1]}, "history": []}

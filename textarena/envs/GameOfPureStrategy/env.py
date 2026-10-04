@@ -10,7 +10,8 @@ class GameOfPureStrategyEnv(ta.GameEnv):
     mdp_includes_actions = False
     broadcast_actions = False  # bids are secret: raw actions echoed only to their author
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.full_hand = list(range(1, 14))
         self.action_space = re.compile(r"^(?P<card>a|k|q|j|10|[2-9])$", re.IGNORECASE)
 

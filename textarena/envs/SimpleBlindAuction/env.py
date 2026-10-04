@@ -10,31 +10,20 @@ class SimpleBlindAuctionEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
 
-    def __init__(self, starting_capital: int = 1000, num_items: int = 5, conversation_rounds: int = 3, base_item_values: Optional[List[int]] = None):
-        """
-        Args:
-            starting_capital (int): Starting capital for each player.
-            num_items (int): Number of items to auction.
-            conversation_rounds (int): Number of rounds for conversation phase.
-            base_item_values (Optional[List[int]]): Base values for items. If None, will be generated.
-        """
-        if not isinstance(starting_capital, int) or isinstance(starting_capital, bool) or starting_capital <= 0:
-            raise ValueError("starting_capital must be a positive integer")
-        if not isinstance(num_items, int) or isinstance(num_items, bool) or num_items <= 0:
-            raise ValueError("num_items must be a positive integer")
-        if not isinstance(conversation_rounds, int) or isinstance(conversation_rounds, bool) or conversation_rounds < 0:
-            raise ValueError("conversation_rounds must be a non-negative integer")
-        if base_item_values is not None:
-            if not isinstance(base_item_values, (list, tuple)) or any(
-                not isinstance(value, int) or isinstance(value, bool) or value <= 0
-                for value in base_item_values
-            ):
-                raise ValueError("base_item_values must be a sequence of positive integers")
-        self.starting_capital = starting_capital
-        self.num_items = num_items
-        self.conversation_rounds = conversation_rounds
-        self.base_item_values = list(base_item_values) if base_item_values is not None else None
-        self.max_turns = conversation_rounds * 2 + 2
+    starting_capital = ta.Param(1000, "The coins per player, which also cap the total of a player's bids.", min=1)
+    num_items = ta.Param(5, "The number of items up for auction.", min=1)
+    conversation_rounds = ta.Param(
+        3, "The messages each player sends before bidding. With 0, the game starts directly with bidding.", min=0,
+    )
+    base_item_values = ta.Param(
+        None, "Fixed base values for the items. Missing entries are drawn at random and extra entries are ignored.",
+        type=list, check=lambda values: all(isinstance(v, int) and not isinstance(v, bool) and v > 0 for v in values),
+        rule="a list of positive integers",
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.max_turns = self.conversation_rounds * 2 + 2
         self.item_names = [ # Item names for flavor
             "Ancient Vase", "Diamond Necklace", "Antique Clock", "Signed Painting", "Gold Statue", "Rare Manuscript", "Silver Chalice", "Vintage Watch",
             "Jade Figurine", "Bronze Sculpture", "Crystal Decanter", "Royal Tapestry", "Emerald Ring", "Ivory Chess Set", "Pearl Earrings"

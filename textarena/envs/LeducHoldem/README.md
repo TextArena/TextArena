@@ -10,9 +10,9 @@ imperfect-information games ([rules](https://openspiel.readthedocs.io/en/latest/
 
 | Env ID | Parameters |
 | --- | --- |
-| `LeducHoldem-v0` | `max_rounds=5` |
+| `LeducHoldem-v1` | `max_rounds=5` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `LeducHoldem-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("LeducHoldem-v0", max_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `LeducHoldem-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("LeducHoldem-v1", max_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -54,8 +54,10 @@ showdown both private cards are revealed, while a folded hand stays hidden.
 
 ## Parameters
 
-- `starting_bank` (default `100`): chips each player starts the match with.
-- `max_rounds` (default `5`): number of hands in the match.
+<!-- BEGIN GENERATED: parameters -->
+- `starting_bank` (default `100`): The number of chips each player starts the match with. Accepts an integer of at least 1.
+- `max_rounds` (default `5`): The number of hands in the match. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

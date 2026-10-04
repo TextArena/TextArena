@@ -124,11 +124,7 @@ def test_guess_is_logged_and_broadcast_as_coming_from_the_player():
 @pytest.mark.parametrize(
     "kwargs",
     [
-        {"word_length": 0, "num_guesses": 6},
-        {"word_length": 5, "num_guesses": 0},
-        {"word_length": True, "num_guesses": 6},
         {"word_length": 100, "num_guesses": 6},
-        {"word_length": 5, "num_guesses": 6, "hardcore": "yes"},
     ],
 )
 def test_invalid_or_unavailable_configuration_is_rejected(kwargs):

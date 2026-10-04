@@ -4,6 +4,7 @@ import json
 
 import pytest
 
+import textarena as ta
 from textarena.envs.TwentyQuestions.env import TwentyQuestionsEnv
 
 
@@ -55,16 +56,6 @@ def test_incorrect_guess_loses():
     done, _ = env.step(f"guess {guess}")
     assert done
     assert env.state.rewards == {0: 0}
-
-
-def test_guess_is_offline_and_deterministic():
-    # Two independent envs with the same seed pick the same secret word, and the
-    # guess resolution never touches the network.
-    env1 = _fresh()
-    env2 = _fresh()
-    assert env1.game_word == env2.game_word
-    done, _ = env1.step(f"guess {env1.game_word}")
-    assert done and env1.state.rewards == {0: 1}
 
 
 def test_guess_requires_exact_normalized_target_not_substring():
@@ -186,8 +177,34 @@ def test_bundled_words_are_unique_within_each_theme():
 
 
 def test_non_callable_gamemaster_is_rejected():
-    with pytest.raises(TypeError, match="callable"):
+    with pytest.raises(ValueError, match="callable"):
         TwentyQuestionsEnv(gamemaster=object())
+
+
+def test_replay_reuses_recorded_gamemaster_answers():
+    calls = []
+    answers = iter(["Yes", RuntimeError("offline"), "No"])
+
+    def gamemaster(prompt):
+        calls.append(prompt)
+        answer = next(answers)
+        if isinstance(answer, Exception):
+            raise answer
+        return answer
+
+    env = _fresh(gamemaster=gamemaster)
+    env.step("Is it alive?")
+    env.step("Is it big?")
+    env.step("Is it big?")
+    env.step(f"guess {env.game_word}")
+    assert len(calls) == 3
+
+    replayed = ta.replay(env.record())
+    assert len(calls) == 3
+    assert replayed.gamemaster is None
+    assert replayed.game_state["history"] == [("Is it alive?", "Yes"), ("Is it big?", "No")]
+    assert replayed.state.rewards == env.state.rewards == {0: 1}
+    assert replayed.game_state == env.game_state
 
 
 def test_non_text_and_oversized_actions_are_invalid_without_calling_gamemaster():

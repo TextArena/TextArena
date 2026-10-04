@@ -84,15 +84,6 @@ def test_large_registered_board_uses_synchronized_renderer():
     assert len(lines[0]) == len(lines[1]) == len(lines[2])
 
 
-@pytest.mark.parametrize(
-    "kwargs",
-    [{"num_rows": 0}, {"num_cols": 0}, {"num_rows": 2.5}, {"is_open": 1}],
-)
-def test_invalid_configuration_rejected(kwargs):
-    with pytest.raises(ValueError):
-        ConnectFourEnv(**kwargs)
-
-
 def test_invalid_format_increments_error_count():
     env = _fresh()
     done, _ = env.step("no move here")

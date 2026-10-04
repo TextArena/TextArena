@@ -11,10 +11,10 @@ and following up on hits under hidden information.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Battleship-v0` | `grid_size=5` |
-| `Battleship-v0-standard` | `grid_size=10` |
+| `Battleship-v1` | `grid_size=5` |
+| `Battleship-v1-standard` | `grid_size=10` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Battleship-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Battleship-v0", grid_size=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Battleship-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Battleship-v1", grid_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -64,5 +64,6 @@ positions are never shown.
 
 ## Parameters
 
-- `grid_size` (default `10`): the side length of both grids, from 5 to 26 (rows use the letters `A` to `Z`). The fleet
-  is the same on every grid size, so on the 5×5 grid it fills 17 of the 25 cells.
+<!-- BEGIN GENERATED: parameters -->
+- `grid_size` (default `10`): The side length of both grids (rows use the letters A to Z). The fleet is the same on every grid size, so on the 5×5 grid it fills 17 of the 25 cells. Accepts an integer from 5 to 26.
+<!-- END GENERATED: parameters -->

@@ -16,29 +16,23 @@ class CrosswordsEnv(ta.GameEnv):
     MAX_COORDINATE_DIGITS = 6
     _ACTION_RE = re.compile(r"(?P<row>\d+)\s+(?P<col>\d+)\s+(?P<letter>[A-Za-z])")
 
-    def __init__(self, hardcore: Optional[bool] = False, max_turns: Optional[int] = 100, num_words: Optional[int] = 5):
-        """
-        Args:
-            hardcore (Optional[bool]): Whether to use hardcore mode.
-            max_turns (Optional[int]): Maximum total length of the sampled words, i.e. the most turns a game can take.
-            num_words (Optional[int]): Number of words to use in the game.
-        """
-        if not isinstance(hardcore, bool):
-            raise ValueError("hardcore must be a boolean")
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
-        if not isinstance(num_words, int) or isinstance(num_words, bool) or num_words < 1:
-            raise ValueError("num_words must be a positive integer")
-        self.hardcore = hardcore
-        # `max_turns` caps the puzzle size. Every accepted guess fills one letter cell, so a game can
-        # never outlast it, and it is intentionally NOT assigned to self.max_turns (no engine turn limit).
-        self.max_letters = max_turns
-        self.num_words = num_words
-        self._load_words(hardcore=hardcore)
+    hardcore = ta.Param(
+        False, "Draw from the hardcore half of the word list (rare or technical words such as `palinurid` or "
+               "`deambulatory`) instead of everyday vocabulary.",
+    )
+    max_turns = ta.Param(
+        100, "The puzzle size cap. The sampled words' total length never exceeds it, so every game finishes within "
+             "`max_turns` correct guesses. Construction fails if the `num_words` shortest words do not fit.", min=1,
+    )
+    num_words = ta.Param(5, "The number of words placed on the grid.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self._load_words(hardcore=self.hardcore)
         if self.num_words > len(self.word_data):
             raise ValueError("num_words exceeds the available word data")
         minimum_cells = sum(sorted(len(entry["word"]) for entry in self.word_data)[: self.num_words])
-        if minimum_cells > self.max_letters:
+        if minimum_cells > self.max_turns:
             raise ValueError("max_turns is too small for the requested number of words")
 
     def get_board_str(self): return create_board_str(game_state=self.state.game_state)
@@ -124,7 +118,7 @@ class CrosswordsEnv(ta.GameEnv):
         sampled_word_data = None
         for _ in range(1000):
             candidate = self.rng.sample(self.word_data, self.num_words)
-            if sum(len(entry["word"]) for entry in candidate) <= self.max_letters:
+            if sum(len(entry["word"]) for entry in candidate) <= self.max_turns:
                 sampled_word_data = candidate
                 break
         if sampled_word_data is None:

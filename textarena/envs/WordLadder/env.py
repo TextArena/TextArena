@@ -17,32 +17,24 @@ class WordLadderEnv(ta.GameEnv):
     action_pattern = r"^([a-zA-Z]+)$"
     snapshot_excluded_attributes = ("universal_word_list", "word_list")
 
-    def __init__(self, min_distance: int = 5, max_distance: int = 7, max_turns: int = 100):
-        """
-        Args:
-            min_distance: minimum length of the shortest ladder from start to target through Basic English words
-            max_distance: maximum length of the shortest ladder from start to target through Basic English words
-            max_turns:    maximum turns before the game ends in a loss
-        """
-        if (
-            not isinstance(min_distance, int)
-            or isinstance(min_distance, bool)
-            or min_distance < 1
-        ):
-            raise ValueError("min_distance must be a positive integer.")
-        if (
-            not isinstance(max_distance, int)
-            or isinstance(max_distance, bool)
-            or max_distance < min_distance
-        ):
+    min_distance = ta.Param(
+        5, "The minimum length, in single-letter changes, of the shortest ladder between the start and the target that "
+           "uses only Basic English words. Ladders through other dictionary words can be shorter.", min=1,
+    )
+    max_distance = ta.Param(
+        7, "The maximum length of that shortest ladder. It must be at least `min_distance`.", min=1,
+    )
+    max_turns = ta.Param(
+        100, "The number of accepted words allowed. It must be at least `max_distance`, so every puzzle is solvable "
+             "within the limit.", min=1,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.max_distance < self.min_distance:
             raise ValueError("max_distance must be an integer greater than or equal to min_distance.")
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer.")
-        if max_turns < max_distance:
+        if self.max_turns < self.max_distance:
             raise ValueError("max_turns must be at least max_distance so every sampled puzzle is solvable.")
-        self.min_distance = min_distance
-        self.max_distance = max_distance
-        self.max_turns = max_turns
         self.word_list = sorted(word for word in get_basic_english_words() if 3 <= len(word) <= 11)
         self.universal_word_list = self._load_universal_word_list()
 

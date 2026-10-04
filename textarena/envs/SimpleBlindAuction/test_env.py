@@ -1,6 +1,5 @@
 """Offline deterministic tests for the SimpleBlindAuction environment."""
 import copy
-import time
 
 import pytest
 
@@ -139,14 +138,6 @@ def test_pathologically_large_bid_is_invalid_not_an_exception():
     assert env.game_state == before
 
 
-@pytest.mark.parametrize("action", ["Bid" + " " * 30_000 + "x", "x" + " " * 30_000 + "x"])
-def test_long_inner_whitespace_in_a_bid_reply_is_parsed_quickly(action):
-    env = _fresh(conversation_rounds=0)
-    start = time.perf_counter()
-    env.step(action)
-    assert time.perf_counter() - start < 0.25
-
-
 def test_command_like_malformed_or_mixed_bid_is_invalid():
     env = _fresh(conversation_rounds=0, num_items=2)
     done, _ = env.step("Bid Item zero: 10")
@@ -203,26 +194,10 @@ def test_sealed_bid_amount_is_not_routed_to_opponent():
     assert not any("777" in message for message in opponent_messages)
 
 
-def test_seeded_reset_snapshot_and_configuration_bounds():
-    env = SimpleBlindAuctionEnv(conversation_rounds=0, num_items=2)
-    env.reset(num_players=2, seed=7)
-    first_values = copy.deepcopy(env.game_state["base_item_values"])
-    snapshot = env.snapshot()
-    env.step("Bid Item 0: 1")
-    env.restore(snapshot)
-    assert env.game_state["player_bids"] == {0: {}, 1: {}}
-    env.reset(num_players=2, seed=7)
-    assert env.game_state["base_item_values"] == first_values
-
-    for kwargs in (
-        {"starting_capital": 0},
-        {"num_items": 0},
-        {"conversation_rounds": -1},
-        {"base_item_values": [0]},
-        {"base_item_values": 100},
-    ):
-        with pytest.raises(ValueError):
-            SimpleBlindAuctionEnv(**kwargs)
+@pytest.mark.parametrize("values", [[0], [100, True], ["100"]])
+def test_base_item_values_must_be_positive_integers(values):
+    with pytest.raises(ValueError, match="base_item_values must be a list of positive integers"):
+        SimpleBlindAuctionEnv(base_item_values=values)
 
 
 def test_extremely_large_integer_base_value_does_not_overflow():

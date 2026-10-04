@@ -97,12 +97,6 @@ def test_starting_word_always_has_a_legal_successor():
         assert _find_valid_word(env) is not None
 
 
-def test_seeded_reset_is_deterministic():
-    first = _fresh()
-    second = _fresh()
-    assert first.state.game_state == second.state.game_state
-
-
 def test_parser_rejects_digits_underscores_and_adversarial_text():
     for action in ("abc123", "abc_def", "word\nsecond", "I choose apple"):
         env = _fresh()
@@ -122,19 +116,6 @@ def test_repeated_word_invalid_is_atomic():
     done, _ = env.step(word)
     assert not done
     assert env.state.game_state == before
-
-
-def test_snapshot_restores_word_history_and_word_list():
-    env = _fresh()
-    word_list = env.word_list
-    snapshot = env.snapshot()
-    word = _find_valid_word(env)
-    assert word is not None
-    env.step(word)
-    env.restore(snapshot)
-    assert env.state.game_state["used_words"] == {env.state.game_state["current_word"]}
-    assert env.state.current_player_id == 0
-    assert env.word_list is word_list
 
 
 def test_renderer_order_is_stable_for_equal_length_words():

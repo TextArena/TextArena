@@ -18,52 +18,42 @@ class IteratedStagHuntEnv(ta.GameEnv):
     max_players = 2
     broadcast_actions = False  # raw action echoed only to its author
 
-    def __init__(self, num_rounds: int=5, conversation_rounds: int=3, mutual_stag_reward: int=10, single_hare_reward: int=8, single_stag_reward: int=1, mutual_hare_reward: int=5, randomize_payoff: bool=False):
-        if (
-            not isinstance(num_rounds, int)
-            or isinstance(num_rounds, bool)
-            or num_rounds <= 0
-            or not _is_renderable(num_rounds)
-        ):
-            raise ValueError("num_rounds must be a positive integer")
-        if (
-            not isinstance(conversation_rounds, int)
-            or isinstance(conversation_rounds, bool)
-            or conversation_rounds < 0
-            or not _is_renderable(conversation_rounds)
-        ):
-            raise ValueError("conversation_rounds must be a non-negative integer")
-        rewards = (mutual_stag_reward, single_hare_reward, single_stag_reward, mutual_hare_reward)
-        if any(
-            not isinstance(reward, int)
-            or isinstance(reward, bool)
-            or not _is_renderable(reward)
-            for reward in rewards
-        ):
-            raise ValueError("all rewards must be integers")
-        if not isinstance(randomize_payoff, bool):
-            raise ValueError("randomize_payoff must be a boolean")
-        if randomize_payoff and not (
-            single_stag_reward < mutual_hare_reward <= single_hare_reward < mutual_stag_reward
+    stag_pattern = re.compile(r"^Stag$", re.IGNORECASE)
+    hare_pattern = re.compile(r"^Hare$", re.IGNORECASE)
+
+    num_rounds = ta.Param(5, "The number of rounds.", min=1, check=_is_renderable, rule="a positive integer")
+    conversation_rounds = ta.Param(
+        3, "The conversation turns before each decision, each one message per player; 0 skips conversation.",
+        min=0, check=_is_renderable, rule="a non-negative integer",
+    )
+    mutual_stag_reward = ta.Param(
+        10, "The payoff to each player when both hunt the stag (the upper bound when randomized).",
+        check=_is_renderable, rule="an integer",
+    )
+    single_hare_reward = ta.Param(
+        8, "The payoff to a lone hare hunter (the upper bound when randomized).", check=_is_renderable, rule="an integer",
+    )
+    single_stag_reward = ta.Param(
+        1, "The payoff to a lone stag hunter (fixed even when randomized).", check=_is_renderable, rule="an integer",
+    )
+    mutual_hare_reward = ta.Param(
+        5, "The payoff to each player when both hunt hares (the upper bound when randomized).",
+        check=_is_renderable, rule="an integer",
+    )
+    randomize_payoff = ta.Param(
+        False, "Draw a new payoff matrix every round, as described above. It requires "
+               "single_stag_reward < mutual_hare_reward <= single_hare_reward < mutual_stag_reward.",
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.randomize_payoff and not (
+            self.single_stag_reward < self.mutual_hare_reward <= self.single_hare_reward < self.mutual_stag_reward
         ):
             raise ValueError(
                 "randomized payoff bounds must satisfy "
                 "single_stag < mutual_hare <= single_hare < mutual_stag"
             )
-
-        self.num_rounds = num_rounds
-        self.conversation_rounds = conversation_rounds
-
-        # payoffs
-        self.mutual_stag_reward = mutual_stag_reward
-        self.single_hare_reward = single_hare_reward
-        self.single_stag_reward = single_stag_reward
-        self.mutual_hare_reward = mutual_hare_reward
-        self.randomize_payoff = randomize_payoff
-
-        # Action pattern
-        self.stag_pattern = re.compile(r"^Stag$", re.IGNORECASE)
-        self.hare_pattern = re.compile(r"^Hare$", re.IGNORECASE)
 
     def setup(self) -> Dict[str, Any]:
         return {

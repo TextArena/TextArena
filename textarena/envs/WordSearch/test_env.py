@@ -75,14 +75,6 @@ def test_out_of_bounds_rejected():
     assert env.state.game_state == before
 
 
-def test_oversized_coordinate_is_atomic_invalid():
-    env = _fresh()
-    before = copy.deepcopy(env.state.game_state)
-    done, _ = env.step(f"{'9' * 1000} 0 0 0")
-    assert not done and env.state.error_count == 1
-    assert env.state.game_state == before
-
-
 def test_incorrect_attempt_decrements_tries():
     env = _fresh()
     # A zero-length selection can never match a placed word (all words len>=2).
@@ -162,34 +154,6 @@ def test_nonoverlapping_short_words_are_all_placeable_across_seeds():
             assert env._extract_word(env.game_state["board"], *endpoints) == word
 
 
-def test_seeded_instances_repeat_without_state_leakage():
-    first = _fresh()
-    second = _fresh()
-    assert first.state.game_state == second.state.game_state
-    old_board = first.state.game_state["board"]
-
-    word, (row, col, direction) = next(iter(first.placed_words.items()))
-    first.step(" ".join(map(str, _endpoints(word, row, col, direction))))
-    first.reset(num_players=1, seed=42)
-    assert first.state.game_state == second.state.game_state
-    assert first.state.game_state["board"] is not old_board
-
-
-def test_snapshot_restores_attempt_history_and_highlights():
-    env = _fresh()
-    snapshot = env.snapshot()
-    word, (row, col, direction) = next(iter(env.placed_words.items()))
-    action = " ".join(map(str, _endpoints(word, row, col, direction)))
-    env.step(action)
-    assert env.highlighted_positions
-
-    env.restore(snapshot)
-    assert not env.highlighted_positions
-    assert not env.attempted_coordinates
-    env.step(action)
-    assert word in env.correct_words
-
-
 def test_renderer_tracks_highlighted_positions():
     env = _fresh()
     word, (row, col, direction) = next(iter(env.placed_words.items()))
@@ -205,12 +169,6 @@ def test_helpers_reject_bad_bounds_and_direction():
     assert not env._can_place_word(grid, "DOG", "down", 0, -1)
     assert not env._can_place_word(grid, "DOG", "diagonal", 0, 0)
     assert not env._can_place_word(grid, "DOG", "across", 0, 3)
-
-
-@pytest.mark.parametrize("kwargs", [{"max_turns": 0}, {"max_turns": True}, {"hardcore": "yes"}])
-def test_invalid_configuration_rejected(kwargs):
-    with pytest.raises(ValueError):
-        WordSearchEnv(**kwargs)
 
 
 def test_explicit_guess_cap_counts_correct_guesses_and_awards_word_progress():

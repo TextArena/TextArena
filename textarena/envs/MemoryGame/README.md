@@ -11,10 +11,10 @@ known as Concentration, it tests remembering every card that has been revealed, 
 
 | Env ID | Parameters |
 | --- | --- |
-| `MemoryGame-v0` | `grid_size=4`, `max_turns=30` |
-| `MemoryGame-v0-hard` | `grid_size=8`, `max_turns=80` |
+| `MemoryGame-v1` | `grid_size=4`, `max_turns=30` |
+| `MemoryGame-v1-hard` | `grid_size=8`, `max_turns=80` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `MemoryGame-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("MemoryGame-v0", grid_size=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `MemoryGame-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("MemoryGame-v1", grid_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -57,10 +57,10 @@ players.
 
 ## Parameters
 
-- `grid_size` (default `4`): the side length of the board; an even number from 2 to 20, giving `grid_size² / 2`
-  pairs.
-- `max_turns` (default `100`): the total number of attempts by both players before the game is decided by score.
-  `None` removes the limit, so the game only ends when every pair is matched.
+<!-- BEGIN GENERATED: parameters -->
+- `grid_size` (default `4`): The side length of the board, giving `grid_size² / 2` pairs. Accepts an even integer from 2 to 20.
+- `max_turns` (default `100`): The total number of attempts by both players before the game is decided by score. `None` removes the limit, so the game only ends when every pair is matched. Accepts an integer of at least 1 or None.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

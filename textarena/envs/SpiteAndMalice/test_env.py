@@ -261,16 +261,3 @@ def test_private_render_includes_opponent_public_piles_but_not_hand():
     assert "Player 1 (Public View)" in board
     assert f"Hand: {len(opponent_hand)} hidden card(s)" in board
     assert f"Hand: {opponent_hand}" not in board
-
-
-def test_snapshot_restore_replays_draw_and_discard_chain():
-    env = _fresh()
-    card = env.players[0]["hand"][0]
-    action = f"draw discard {card} 0"
-    before = env.snapshot()
-    env.step(action)
-    expected = env.snapshot()
-    env.restore(before)
-    env.step(action)
-    assert env.state.game_state == expected["state"].game_state
-    assert env.state.current_player_id == expected["state"].current_player_id

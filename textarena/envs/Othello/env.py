@@ -15,18 +15,16 @@ class OthelloEnv(ta.GameEnv):
     mdp_includes_actions = False
     action_pattern = r"^(\d+)(?:\s*,\s*|\s+)(\d+)$"
 
-    def __init__(self, board_size: int = 8, show_valid: bool = True):
-        if (
-            not isinstance(board_size, int)
-            or isinstance(board_size, bool)
-            or board_size % 2
-            or board_size < 4
-        ):
-            raise ValueError("board_size must be an even integer ≥ 4")
-        if not isinstance(show_valid, bool):
-            raise ValueError("show_valid must be a boolean")
-        self.N = board_size
-        self.show_valid = show_valid
+    board_size = ta.Param(
+        8, "The side length of the board.", min=4, check=lambda size: size % 2 == 0, rule="an even integer of at least 4",
+    )
+    show_valid = ta.Param(
+        True, "Whether the acting player is shown the list of valid moves, both before each move and after an illegal one.",
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.N = self.board_size
 
     @property
     def action_format(self) -> str:

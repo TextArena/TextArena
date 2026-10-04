@@ -5,8 +5,6 @@ road/army - see the TODOs in env.py), so these tests cover only the implemented
 paths: reset/config, turn ending & rotation, negotiation phase transitions, and
 invalid-move handling.
 """
-import time
-
 import pytest
 
 import textarena as ta
@@ -19,19 +17,6 @@ def _fresh():
     env = SettlersOfCatanEnv()
     env.reset(num_players=4, seed=42)
     return env
-
-
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"player_move_allowance": 0},
-        {"max_turns": 0},
-        {"winning_score": 0},
-    ],
-)
-def test_constructor_rejects_nonpositive_limits(kwargs):
-    with pytest.raises(ValueError):
-        SettlersOfCatanEnv(**kwargs)
 
 
 def test_reset_rejects_unsupported_player_counts():
@@ -445,31 +430,6 @@ def test_renderer_marks_eliminated_player():
     assert "RED (eliminated)" in rendered
 
 
-def test_seed_and_snapshot_restore_replay_next_dice_roll():
-    env = _fresh()
-    snapshot = env.snapshot()
-    nothing = str(len(env.game_moves))
-    env.step(nothing)
-    first_replay = (
-        env.state.current_player_id,
-        list(env.state.events),
-        {
-            color: player.hand.copy()
-            for color, player in env.board.players.items()
-        },
-    )
-
-    env.restore(snapshot)
-    env.step(nothing)
-
-    assert env.state.current_player_id == first_replay[0]
-    assert env.state.events == first_replay[1]
-    assert {
-        color: player.hand
-        for color, player in env.board.players.items()
-    } == first_replay[2]
-
-
 def test_piece_limits_reject_builds_without_charging_resources():
     env = _fresh()
     board = env.board
@@ -557,35 +517,6 @@ def test_huge_numbers_are_invalid_moves_not_crashes(phase):
     assert env.game_state["current_offer"] is None
 
 
-@pytest.mark.parametrize(
-    "action",
-    [
-        "Offer: 1 Wood" + " " * 4000 + "x",
-        "Offer: 1 Wood -> 1 Ore" + " \t" * 2000 + "x",
-        "Accept" + " " * 32_000 + "x",
-        " " * 32_000 + "x",
-    ],
-)
-def test_padded_negotiation_messages_are_handled_quickly(action):
-    env = _fresh()
-    _start_negotiation(env)
-    start = time.perf_counter()
-    env.step(action)
-    assert time.perf_counter() - start < 1.0
-    assert env.game_state["current_offer"] is None
-
-
-@pytest.mark.parametrize("phase", ["action", "negotiation_start"])
-def test_padded_selections_are_handled_quickly(phase):
-    env = _fresh()
-    if phase == "negotiation_start":
-        env.step(str(len(env.game_moves) - 1))
-    start = time.perf_counter()
-    done, _ = env.step(" " * 32_000 + "x")
-    assert time.perf_counter() - start < 1.0
-    assert not done and env.state.error_count == 1
-
-
 def test_negotiation_partner_sees_current_hand_and_open_offer():
     env = _fresh()
     white = env.board.players[Color.WHITE]
@@ -623,15 +554,6 @@ def test_negotiation_message_is_not_duplicated_for_its_author():
     to_author = [m for _, m, _, to in env.state.events[start:] if to == 0 and m == "Hello there"]
     to_partner = [m for _, m, _, to in env.state.events[start:] if to == 1 and m == "Hello there"]
     assert len(to_author) == 1 and len(to_partner) == 1
-
-
-@pytest.mark.parametrize(
-    "kwargs",
-    [{"winning_score": 2}, {"winning_score": 2.5}, {"max_turns": True}, {"player_move_allowance": "3"}],
-)
-def test_constructor_rejects_degenerate_or_mistyped_settings(kwargs):
-    with pytest.raises(ValueError):
-        SettlersOfCatanEnv(**kwargs)
 
 
 def test_prompt_mentions_turn_limit_and_missing_bank_trade():

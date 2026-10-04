@@ -13,22 +13,9 @@ class ChessEnv(ta.GameEnv):
     action_pattern = r"(?i)^([a-h][1-8][a-h][1-8][qrbn]?)$"
     action_format = "a move in UCI format, the start square followed by the end square (add q, r, b or n to promote a pawn), for example 'e2e4'"
 
-    def __init__(self, is_open: bool=True, max_turns: int=30, show_valid: bool=True):
-        """
-        Args:
-            is_open (bool): If True, both players can see the current board state. If False, players receive minimal information.
-            max_turns (int): Maximum number of turns before the game ends.
-            show_valid (bool): If True, players can see a list of valid moves.
-        """
-        if not isinstance(is_open, bool):
-            raise ValueError("is_open must be a boolean")
-        if not isinstance(show_valid, bool):
-            raise ValueError("show_valid must be a boolean")
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
-        self.max_turns = max_turns
-        self.is_open = is_open
-        self.show_valid = show_valid
+    is_open = ta.Param(True, "Show the board to the acting player before each move.")
+    max_turns = ta.Param(30, "The total number of moves (both players combined) before the game is drawn.", min=1)
+    show_valid = ta.Param(True, "Show the list of legal moves before each move.")
 
     def setup(self) -> Dict[str, Any]:
         board = Board()

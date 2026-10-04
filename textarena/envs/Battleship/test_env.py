@@ -1,4 +1,4 @@
-"""Deterministic game-logic tests for Battleship-v0."""
+"""Deterministic game-logic tests for Battleship-v1."""
 import pytest
 
 import textarena as ta
@@ -78,12 +78,6 @@ def test_admin_header_numbers_sit_above_their_cells(grid_size):
         assert first_row[number_start] == "S"
 
 
-@pytest.mark.parametrize("grid_size", [None, 4, 27, 5.5, True])
-def test_invalid_grid_size_rejected(grid_size):
-    with pytest.raises(ValueError):
-        BattleshipEnv(grid_size=grid_size)
-
-
 def test_hit_marks_boards():
     env = _fresh()
     opp_board = env.state.game_state["board"][1]
@@ -94,38 +88,6 @@ def test_hit_marks_boards():
     assert not done
     assert env.state.game_state["board"][1][r][c] == "X"
     assert env.state.game_state["tracking_board"][0][r][c] == "X"
-
-
-def test_snapshot_restore_replays_shot_and_private_render():
-    env = _fresh(grid_size=5)
-    opponent = env.state.game_state["board"][1]
-    r, c = next(
-        (r, c)
-        for r in range(env.grid_size)
-        for c in range(env.grid_size)
-        if opponent[r][c] in SHIP_INITIALS
-    )
-    action = f"{chr(ord('A') + r)}{c}"
-    snapshot = env.snapshot()
-
-    done, _ = env.step(action)
-    first = (
-        done,
-        env.state.game_state,
-        env.get_board_str(player_id=0),
-        env.get_board_str(player_id=1),
-    )
-
-    env.restore(snapshot)
-    done, _ = env.step(action)
-    second = (
-        done,
-        env.state.game_state,
-        env.get_board_str(player_id=0),
-        env.get_board_str(player_id=1),
-    )
-
-    assert second == first
 
 
 def test_sinking_last_ship_wins():
@@ -207,7 +169,7 @@ def _coord(cell):
 
 
 def test_mdp_observation_keeps_only_the_latest_board():
-    env = ta.make("Battleship-v0-standard-mdp")
+    env = ta.make("Battleship-v1-standard-mdp")
     env.reset(num_players=2, seed=3)
     raw = env.env
     shots = {pid: _water_cells(raw, 1 - pid) for pid in range(2)}

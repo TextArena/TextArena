@@ -9,14 +9,9 @@ class CharacterConclaveEnv(ta.GameEnv):
     min_players = 3
     max_players = 15
 
-    def __init__(self, character_budget: int = 1_000):
-        """
-        Args:
-            character_budget (int): Maximum number of characters each player can use during discussion.
-        """
-        if isinstance(character_budget, bool) or not isinstance(character_budget, int) or character_budget < 1:
-            raise ValueError("character_budget must be a positive integer")
-        self.character_budget = character_budget
+    character_budget = ta.Param(
+        1_000, "The total number of characters each player may use during the discussion.", min=1,
+    )
 
     def get_board_str(self):
         return create_board_str(game_state=self.state.game_state)

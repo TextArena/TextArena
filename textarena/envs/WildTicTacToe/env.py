@@ -20,7 +20,8 @@ class WildTicTacToeEnv(ta.GameEnv):
     action_pattern = r"(?i)^(?P<mark>[XO])\s+(?P<cell>[0-9]+)$"
     action_format = "the mark X or O followed by a cell number from 0 to 8, for example 'X 4'"
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.cell_mapping = {i * 3 + j: (i, j) for i in range(3) for j in range(3)}
 
     def setup(self) -> Dict[str, Any]:

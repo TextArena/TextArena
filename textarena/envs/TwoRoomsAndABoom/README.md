@@ -10,9 +10,9 @@ ends up in the same room as the Blue Team's President. It tests social deduction
 
 | Env ID | Parameters |
 | --- | --- |
-| `TwoRoomsAndABoom-v0` | `num_rounds=3`, `cards_per_room=3`, `discussion_rounds=2` |
+| `TwoRoomsAndABoom-v1` | `num_rounds=3`, `cards_per_room=3`, `discussion_rounds=2` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `TwoRoomsAndABoom-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("TwoRoomsAndABoom-v0", num_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `TwoRoomsAndABoom-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("TwoRoomsAndABoom-v1", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -66,9 +66,11 @@ ends by announcing the final rooms and who the President and the Bomber were.
 
 ## Parameters
 
-- `num_rounds` (default `3`): number of rounds, each ending with an exchange.
-- `cards_per_room` (default `3`, between 3 and 10): players per room; the game requires exactly twice this many players.
-- `discussion_rounds` (default `2`): messages each player sends per round; `0` skips the discussion.
+<!-- BEGIN GENERATED: parameters -->
+- `num_rounds` (default `3`): The number of rounds, each ending with an exchange. Accepts an integer of at least 1.
+- `cards_per_room` (default `3`): The number of players per room; the game requires exactly twice this many players. Accepts an integer from 3 to 10.
+- `discussion_rounds` (default `2`): The number of messages each player sends per round; `0` skips the discussion. Accepts an integer of at least 0.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

@@ -37,24 +37,13 @@ class DiplomacyEnv(ta.GameEnv):
     min_players = 3
     max_players = 7
 
-    def __init__(self, max_turns: int = 30, 
-                negotiations_per_phase: int = 3):
-        """
-        Initialize the Diplomacy game environment
+    max_game_years = ta.Param(30, "The number of complete game years before the game ends in a draw.", min=1)
+    negotiations_per_phase = ta.Param(
+        3, "The turns each player takes per phase. Orders are due in the last one.", min=1,
+    )
 
-        Args:
-            max_turns (int): Maximum number of game years before ending in a draw
-            negotiations_per_phase (int): How many negotiation rounds per game phase
-        """
-        if max_turns < 1:
-            raise ValueError("max_turns must be at least one game year")
-        if negotiations_per_phase < 1:
-            raise ValueError("negotiations_per_phase must be at least one")
-        # NOTE: `max_turns` counts game YEARS and is enforced by DiplomacyGameEngine;
-        # it is NOT an engine-step limit, so it must not be stored as self.max_turns.
-        self.max_game_years = max_turns
-        self.negotiations_per_phase = negotiations_per_phase
-        
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         # Game state
         self.engine = None
         self.player_power_map = {}

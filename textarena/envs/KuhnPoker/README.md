@@ -10,9 +10,9 @@ betting round ([rules](https://en.wikipedia.org/wiki/Kuhn_poker)).
 
 | Env ID | Parameters |
 | --- | --- |
-| `KuhnPoker-v0` | `max_rounds=3` |
+| `KuhnPoker-v1` | `max_rounds=3` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `KuhnPoker-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("KuhnPoker-v0", max_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `KuhnPoker-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("KuhnPoker-v1", max_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -48,7 +48,9 @@ showdown reveals both cards, while a folded hand stays hidden.
 
 ## Parameters
 
-- `max_rounds` (default `1`): number of rounds in the match.
+<!-- BEGIN GENERATED: parameters -->
+- `max_rounds` (default `1`): The number of rounds in the match. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

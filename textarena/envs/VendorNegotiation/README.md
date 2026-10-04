@@ -11,9 +11,9 @@ with numeric data.
 
 | Env ID | Parameters |
 | --- | --- |
-| `VendorNegotiation-v0` | `num_products=5`, `max_rounds=20` |
+| `VendorNegotiation-v1` | `num_products=5`, `max_rounds=20` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `VendorNegotiation-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("VendorNegotiation-v0", num_products=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `VendorNegotiation-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("VendorNegotiation-v1", num_products=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -97,22 +97,17 @@ players see the simulated units, sales, and profit per product, the totals, and 
 
 ## Parameters
 
-- `num_products` (default `5`): the number of products to negotiate over, capped at the 10 available.
-- `max_rounds` (default `20`): the number of messages, counting both players, before the game ends without a deal.
-- `error_allowance` (default `3`): the number of consecutive invalid moves a player is warned about before the next
-  one forfeits the game.
-- `brand_target_fraction` (default `0.5`): where the Brand's target sits between the lowest (`0`) and highest (`1`)
-  total sales the drawn products can reach.
-- `vendor_target_fraction` (default `0.5`): where the Vendor's target sits between the lowest (`0`) and highest (`1`)
-  total profit the drawn products can reach.
-- `num_simulations` (default `1000`): the number of Monte Carlo draws used to score a deal.
-- `brand_role` (default `"default"`): the Brand's style file in `data/roles/brand/`: `default`, `aggressive`,
-  `collaborative`, or `data_driven`.
-- `vendor_role` (default `"default"`): the Vendor's style file in `data/roles/vendor/`: `default`, `profit_focused`,
-  `volume_seeker`, or `relationship_builder`. Unknown names for either role fall back to `default`.
-- `product_list_path` (default `data/product_list.csv`): an alternative product file in the same format, with one
-  row per product and discount rate. Only the discount rates shared by every product can be proposed, and 0% must be
-  one of them.
+<!-- BEGIN GENERATED: parameters -->
+- `num_products` (default `5`): The number of products to negotiate over, capped at the 10 available. Accepts an integer of at least 1.
+- `max_rounds` (default `20`): The number of messages, counting both players, before the game ends without a deal. Accepts an integer of at least 1.
+- `error_allowance` (default `3`): The number of consecutive invalid moves a player is warned about before the next one forfeits the game. Accepts an integer of at least 0.
+- `brand_target_fraction` (default `0.5`): Where the Brand's target sits between the lowest (`0`) and highest (`1`) total sales the drawn products can reach. Accepts a number from 0 to 1.
+- `vendor_target_fraction` (default `0.5`): Where the Vendor's target sits between the lowest (`0`) and highest (`1`) total profit the drawn products can reach. Accepts a number from 0 to 1.
+- `num_simulations` (default `1000`): The number of Monte Carlo draws used to score a deal. Accepts an integer of at least 1.
+- `brand_role` (default `"default"`): The Brand's style file in `data/roles/brand/`: `default`, `aggressive`, `collaborative`, or `data_driven`. Unknown names fall back to `default`.
+- `vendor_role` (default `"default"`): The Vendor's style file in `data/roles/vendor/`: `default`, `profit_focused`, `volume_seeker`, or `relationship_builder`. Unknown names fall back to `default`.
+- `product_list_path` (default `"data/product_list.csv"`): An alternative product file in the same format, with one row per product and discount rate. Only the discount rates shared by every product can be proposed, and 0% must be one of them.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

@@ -15,10 +15,6 @@ _MOVES = {"up": (0, -1), "down": (0, 1), "left": (-1, 0), "right": (1, 0)}
 _ACTION_RE = re.compile(r"^(up|down|left|right|stay|bomb)$", re.IGNORECASE)
 
 
-def _is_int(value: Any) -> bool:
-    return isinstance(value, int) and not isinstance(value, bool)
-
-
 def _format_grid(canvas: List[List[str]]) -> str:
     """Grid with column numbers (x) on top and row numbers (y) on the left."""
     width = len(str(max(len(canvas), len(canvas[0])) - 1))
@@ -33,30 +29,13 @@ class TwoPlayerBombermanEnv(ta.GameEnv):
     max_players = 2
     mdp_includes_actions = False
 
-    def __init__(self, grid_size: int = 10, max_turns: int = 100, bomb_timer: int = 6, bomb_radius: int = 2, wall_density: float = 0.3):
-        """
-        Args:
-            grid_size (int): Side length of the square arena, including its outer wall (at least 5).
-            max_turns (int): Number of rounds (one move by each player) before the game ends in a draw.
-            bomb_timer (int): Fuse length in moves, counting the move that drops the bomb; both players' moves count.
-            bomb_radius (int): Number of cells a blast reaches in each of the four directions.
-            wall_density (float): Probability (0.0 to 1.0) that a free cell starts as a destructible wall.
-        """
-        if not _is_int(grid_size) or grid_size < 5:
-            raise ValueError("grid_size must be an integer of at least 5")
-        if not _is_int(max_turns) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
-        if not _is_int(bomb_timer) or bomb_timer < 1:
-            raise ValueError("bomb_timer must be a positive integer")
-        if not _is_int(bomb_radius) or bomb_radius < 1:
-            raise ValueError("bomb_radius must be a positive integer")
-        if isinstance(wall_density, bool) or not isinstance(wall_density, (int, float)) or not 0 <= wall_density <= 1:
-            raise ValueError("wall_density must be a number between 0 and 1")
-        self.grid_size = grid_size
-        self.max_turns = max_turns
-        self.bomb_timer = bomb_timer
-        self.bomb_radius = bomb_radius
-        self.wall_density = float(wall_density)
+    grid_size = ta.Param(10, "The side length of the square arena, including its outer wall.", min=5)
+    max_turns = ta.Param(100, "The number of rounds (one move by each player) before the game ends in a draw.", min=1)
+    bomb_timer = ta.Param(
+        6, "The fuse length in moves, counting the move that drops the bomb; both players' moves count.", min=1,
+    )
+    bomb_radius = ta.Param(2, "The number of cells a blast reaches in each of the four directions.", min=1)
+    wall_density = ta.Param(0.3, "The probability that a free cell starts as a destructible wall.", min=0, max=1)
 
     # ------------------------------------------------------------------ setup
     def setup(self) -> Dict[str, Any]:

@@ -15,14 +15,10 @@ class CheckersEnv(ta.GameEnv):
         "for example '5 0 4 1' as Red or '2 1 3 2' as Black"
     )
 
-    def __init__(self, max_turns: int = 50):
-        """
-        Args:
-            max_turns (int): Maximum number of turns before the game ends in a draw.
-        """
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
-        self.max_turns = max_turns
+    max_turns = ta.Param(
+        50, "The number of turns, counting both players and treating a multi-jump as one turn, before the game is a "
+            "draw.", min=1,
+    )
 
     def setup(self) -> Dict[str, Any]:
         board = self._initialize_board()

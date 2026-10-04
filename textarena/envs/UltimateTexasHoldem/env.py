@@ -22,29 +22,12 @@ class UltimateTexasHoldemEnv(ta.GameEnv):
     _FOLD_RE = re.compile(r"^(?:fold|f)$", re.IGNORECASE)
     _SKIP_RE = re.compile(r"^(?:skip|s)$", re.IGNORECASE)
 
-    def __init__(self, max_turns: int = 1000, start_chips: int = 1000, ante_amount: int = 25):
-        # `max_turns` counts rounds, not engine steps, so it is deliberately not assigned to self.max_turns.
-        self.max_rounds = max_turns
-        self.start_chips = start_chips
-        self.ante_amount = ante_amount
-        if (
-            not isinstance(self.max_rounds, int)
-            or isinstance(self.max_rounds, bool)
-            or self.max_rounds < 1
-        ):
-            raise ValueError("max_turns must be a positive integer")
-        if (
-            not isinstance(self.start_chips, int)
-            or isinstance(self.start_chips, bool)
-            or self.start_chips < 1
-        ):
-            raise ValueError("start_chips must be a positive integer")
-        if (
-            not isinstance(self.ante_amount, int)
-            or isinstance(self.ante_amount, bool)
-            or self.ante_amount < 1
-        ):
-            raise ValueError("ante_amount must be a positive integer")
+    max_rounds = ta.Param(1000, "The number of rounds to survive.", min=1)
+    start_chips = ta.Param(1000, "The starting chips. They must cover at least one Ante and Blind.", min=1)
+    ante_amount = ta.Param(25, "The Ante and the Blind. Play bets are multiples of it.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         if self.start_chips < 2 * self.ante_amount:
             raise ValueError("start_chips must cover the initial ante and blind")
 

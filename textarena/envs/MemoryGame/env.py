@@ -38,19 +38,14 @@ class MemoryGameEnv(ta.GameEnv):
         r"(?P<r2>[0-9]+)\s+(?P<c2>[0-9]+)$"
     )
 
-    def __init__(self, grid_size: Optional[int] = 4, max_turns: Optional[int] = 100):
-        """
-        Args:
-            grid_size (int): The grid size used
-        """
-        if type(grid_size) is not int or grid_size < 2 or grid_size % 2 != 0:
-            raise ValueError("grid_size must be an even integer of at least 2.")
-        if grid_size > self.MAX_GRID_SIZE:
-            raise ValueError(f"grid_size cannot exceed {self.MAX_GRID_SIZE}.")
-        if max_turns is not None and (type(max_turns) is not int or max_turns < 1):
-            raise ValueError("max_turns must be None or a positive integer.")
-        self.grid_size = grid_size
-        self.max_turns = max_turns
+    grid_size = ta.Param(
+        4, "The side length of the board, giving `grid_size² / 2` pairs.", min=2, max=MAX_GRID_SIZE,
+        check=lambda size: size % 2 == 0, rule=f"an even integer from 2 to {MAX_GRID_SIZE}",
+    )
+    max_turns = ta.Param(
+        100, "The total number of attempts by both players before the game is decided by score. `None` removes the "
+             "limit, so the game only ends when every pair is matched.", min=1, optional=True,
+    )
 
     @property
     def action_format(self) -> str:

@@ -31,10 +31,13 @@ class LeTrucEnv(ta.GameEnv):
         re.IGNORECASE,
     )
 
-    def __init__(self, max_turns: Optional[int] = None):
-        if max_turns is not None and (type(max_turns) is not int or max_turns < 1):
-            raise ValueError("max_turns must be None or a positive integer.")
-        self.max_turns = max_turns
+    max_turns = ta.Param(
+        None, "If set, the total number of accepted actions (every `play`, `raise`, `accept` and `fold` by either "
+              "player) after which the match is decided on match points.", type=int, min=1,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         suits = "♣♦♥♠"
         self.deck = [rank + suit for rank in self.order for suit in suits]
 

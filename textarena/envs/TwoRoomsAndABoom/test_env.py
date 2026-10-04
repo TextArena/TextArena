@@ -84,26 +84,6 @@ def test_cards_per_room_is_enforced_and_controls_room_size():
     env.reset(num_players=8, seed=42)
     assert [len(room) for room in env.state.game_state["rooms"]] == [4, 4]
 
-    for cards_per_room in (0, 1, 11, True, 1.5):
-        with pytest.raises(ValueError, match="between 3 and 10"):
-            TwoRoomsAndABoomEnv(cards_per_room=cards_per_room)
-
-
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"num_rounds": 0},
-        {"num_rounds": True},
-        {"num_rounds": 1.5},
-        {"discussion_rounds": -1},
-        {"discussion_rounds": True},
-        {"discussion_rounds": 1.5},
-    ],
-)
-def test_round_configuration_requires_bounded_integers(kwargs):
-    with pytest.raises(ValueError):
-        TwoRoomsAndABoomEnv(**kwargs)
-
 
 def test_zero_discussion_rounds_and_maximum_player_count_are_supported():
     env = TwoRoomsAndABoomEnv(
@@ -134,12 +114,6 @@ def test_role_assignment_is_balanced_randomized_and_seeded():
     # No player ID is permanently tied to either team across seeds.
     for pid in range(6):
         assert {teams[pid] for teams in team_by_seed} == {"Red Team", "Blue Team"}
-
-    env_a = _fresh(seed=777)
-    env_b = _fresh(seed=777)
-    assert env_a.state.game_state["player_roles"] == env_b.state.game_state["player_roles"]
-    assert env_a.state.game_state["rooms"] == env_b.state.game_state["rooms"]
-    assert env_a.state.game_state["leaders"] == env_b.state.game_state["leaders"]
 
 
 def test_secret_roles_are_recorded_in_game_info():
@@ -537,26 +511,3 @@ def test_trade_starts_next_round_with_fresh_room_valid_queue():
     assert sorted(gs["rooms"][0] + gs["rooms"][1]) == list(range(6))
     assert env.state.current_player_id in gs["rooms"][0] + gs["rooms"][1]
     assert all(pid in gs["rooms"][0] + gs["rooms"][1] for pid in gs["next_player_ids"])
-
-
-def test_snapshot_and_repeat_reset_restore_private_assignments_and_queue():
-    env = _fresh(seed=61, num_rounds=2, discussion_rounds=2)
-    initial_roles = env.game_state["player_roles"].copy()
-    initial_rooms = copy.deepcopy(env.game_state["rooms"])
-    initial_leaders = env.game_state["leaders"].copy()
-    initial_actor = env.state.current_player_id
-    initial_queue = env.game_state["next_player_ids"].copy()
-    snap = env.snapshot()
-
-    env.step("temporary discussion")
-    env.restore(snap)
-
-    assert env.game_state["player_roles"] == initial_roles
-    assert env.game_state["rooms"] == initial_rooms
-    assert env.game_state["leaders"] == initial_leaders
-    assert env.state.current_player_id == initial_actor
-    assert env.game_state["next_player_ids"] == initial_queue
-    env.reset(num_players=6, seed=61)
-    assert env.game_state["player_roles"] == initial_roles
-    assert env.game_state["rooms"] == initial_rooms
-    assert env.game_state["leaders"] == initial_leaders

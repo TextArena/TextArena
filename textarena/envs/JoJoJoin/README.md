@@ -10,9 +10,9 @@ horizontally, vertically or diagonally wins.
 
 | Env ID | Parameters |
 | --- | --- |
-| `JoJoJoin-v0` | defaults |
+| `JoJoJoin-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `JoJoJoin-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `JoJoJoin-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

@@ -4,8 +4,6 @@ import textarena as ta
 from textarena.envs.Coup import base_coup_prompts
 from textarena.envs.Coup.coup_types import ActionMetadata, CoupActionType, GamePhase
 
-from rich.text import Text
-
 CARDS = ("Duke", "Assassin", "Ambassador", "Captain", "Contessa")
 
 
@@ -1130,5 +1128,7 @@ class CoupEnv(ta.GameEnv):
 
         out_lines.append("")
         out_lines.append("")
+        from rich.text import Text  # only the terminal renderer, which requires rich, shows this board
+
         # from_ansi is used to ensure that the ANSI codes are properly padded while rendering
         return Text.from_ansi("\n".join(out_lines))

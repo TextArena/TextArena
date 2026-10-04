@@ -10,9 +10,9 @@ Two armies of sixteen pieces that all move like chess knights try to capture as 
 
 | Env ID | Parameters |
 | --- | --- |
-| `Crusade-v0` | defaults |
+| `Crusade-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Crusade-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Crusade-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

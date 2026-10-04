@@ -11,9 +11,9 @@ prestige won) after ten auctions wins. It is a streamlined two-player take on Re
 
 | Env ID | Parameters |
 | --- | --- |
-| `HighSociety-v0` | defaults |
+| `HighSociety-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `HighSociety-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `HighSociety-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -50,8 +50,9 @@ many ties the card has had, or that the card was discarded.
 
 ## Parameters
 
-- `max_ties` (default `3`): ties allowed in a row on one prestige card; the tie that reaches this number discards the
-  card, so a game has at most `10 × max_ties` rounds of bidding. With `1`, every tie discards the card.
+<!-- BEGIN GENERATED: parameters -->
+- `max_ties` (default `3`): The number of ties allowed in a row on one prestige card; the tie that reaches this number discards the card, so a game has at most `10 × max_ties` rounds of bidding. With 1, every tie discards the card. Accepts a positive integer with at most 4300 digits.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

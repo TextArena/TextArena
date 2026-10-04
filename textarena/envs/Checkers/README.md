@@ -10,9 +10,9 @@ or blocking every enemy piece ([rules](https://en.wikipedia.org/wiki/English_dra
 
 | Env ID | Parameters |
 | --- | --- |
-| `Checkers-v0` | `max_turns=100` |
+| `Checkers-v1` | `max_turns=100` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Checkers-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Checkers-v0", max_turns=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Checkers-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Checkers-v1", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -73,8 +73,9 @@ information. Otherwise legal moves are not listed.
 
 ## Parameters
 
-- `max_turns` (default `50`): the number of turns, counting both players and treating a multi-jump as one turn, before
-  the game is a draw. It must be a positive integer.
+<!-- BEGIN GENERATED: parameters -->
+- `max_turns` (default `50`): The number of turns, counting both players and treating a multi-jump as one turn, before the game is a draw. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

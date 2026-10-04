@@ -10,9 +10,9 @@ moves, and be the last player standing ([background](https://en.wikipedia.org/wi
 
 | Env ID | Parameters |
 | --- | --- |
-| `Bomberman-v0` | `grid_size=10`, `max_turns=100` |
+| `Bomberman-v1` | `grid_size=10`, `max_turns=100` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Bomberman-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Bomberman-v0", grid_size=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Bomberman-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Bomberman-v1", grid_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -59,8 +59,10 @@ players see every move and explosion.
 
 ## Parameters
 
-- `grid_size` (default `10`): side length of the square arena, including the outer wall; an integer of at least 5.
-- `max_turns` (default `100`): number of rounds (one move by each player) before the game is drawn.
-- `bomb_timer` (default `6`): fuse length in moves, counting the move that drops the bomb.
-- `bomb_radius` (default `2`): how far a blast reaches in each direction.
-- `wall_density` (default `0.3`): probability, between 0 and 1, that a free cell starts as a destructible wall.
+<!-- BEGIN GENERATED: parameters -->
+- `grid_size` (default `10`): The side length of the square arena, including its outer wall. Accepts an integer of at least 5.
+- `max_turns` (default `100`): The number of rounds (one move by each player) before the game ends in a draw. Accepts an integer of at least 1.
+- `bomb_timer` (default `6`): The fuse length in moves, counting the move that drops the bomb; both players' moves count. Accepts an integer of at least 1.
+- `bomb_radius` (default `2`): The number of cells a blast reaches in each of the four directions. Accepts an integer of at least 1.
+- `wall_density` (default `0.3`): The probability that a free cell starts as a destructible wall. Accepts a number from 0 to 1.
+<!-- END GENERATED: parameters -->

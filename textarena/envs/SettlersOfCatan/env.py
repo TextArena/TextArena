@@ -106,19 +106,14 @@ class SettlersOfCatanEnv(ta.GameEnv):
     role_colors = {0: "Red", 1: "White", 2: "Blue", 3: "Orange"}
     pids_from_roles = {"red": 0, "white": 1, "blue": 2, "orange": 3}
 
-    def __init__(self, player_move_allowance: int = 10, max_turns: int = 200, winning_score: int = 10):
-        # Every player starts with two settlements (2 VP), so a lower target would end the game on the first move.
-        for name, value, minimum in (
-            ("player_move_allowance", player_move_allowance, 1),
-            ("max_turns", max_turns, 1),
-            ("winning_score", winning_score, 3),
-        ):
-            if isinstance(value, bool) or not isinstance(value, int) or value < minimum:
-                raise ValueError(f"{name} must be an integer of at least {minimum}, received {value!r}")
+    player_move_allowance = ta.Param(10, "The number of actions per turn.", min=1)
+    max_turns = ta.Param(200, "The number of moves in the whole game, counting every valid reply from any player.", min=1)
+    # Every player starts with two settlements (2 VP), so a lower target would end the game on the first move.
+    winning_score = ta.Param(10, "The victory points needed to win; everyone starts with 2.", min=3)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.game_moves = None
-        self.player_move_allowance = player_move_allowance
-        self.max_turns = max_turns
-        self.winning_score = winning_score
 
     def roles(self) -> Dict[int, str]:
         return {

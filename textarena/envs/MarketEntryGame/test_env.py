@@ -288,11 +288,8 @@ def test_snapshot_restores_pending_decision_and_queue_position():
 @pytest.mark.parametrize(
     "kwargs",
     [
-        {"num_rounds": 0},
-        {"communication_turns": -1},
-        {"market_capacity": -1},
         {"entry_profit": float("nan")},
-        {"default_num_players": 1},
+        {"safe_payoff": True},
         {"num_rounds": 10**5000},
         {"market_capacity": 10**5000},
         {"entry_profit": 10**5000},

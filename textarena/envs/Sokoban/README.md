@@ -11,10 +11,10 @@ the wrong wall can never be recovered.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Sokoban-v0` | `dim_room=(6, 6)`, `max_turns=30`, `num_boxes=3` |
-| `Sokoban-v0-medium` | `dim_room=(8, 8)`, `max_turns=50`, `num_boxes=5` |
+| `Sokoban-v1` | `dim_room=(6, 6)`, `max_turns=30`, `num_boxes=3` |
+| `Sokoban-v1-medium` | `dim_room=(8, 8)`, `max_turns=50`, `num_boxes=5` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Sokoban-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Sokoban-v0", dim_room=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Sokoban-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Sokoban-v1", dim_room=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -72,12 +72,12 @@ board and the accepted directions; after each valid move, they are told what hap
 
 ## Parameters
 
-- `dim_room` (default `(6, 6)`): the room size as a `(rows, columns)` tuple. Both must be at least 4, with at most 400
-  cells in total; the outer ring is always wall.
-- `num_boxes` (default `3`): the number of boxes and goals. It must leave room for the player inside the outer walls.
-- `max_turns` (default `100`): the number of valid moves allowed. Generated rooms are always solvable within it.
-- `max_retries` (default `50`): the number of generation attempts (1 to 100) before `reset` gives up with
-  `RuntimeError`.
+<!-- BEGIN GENERATED: parameters -->
+- `dim_room` (default `(6, 6)`): The room size as (rows, columns); the outer ring is always wall. Accepts two integers of at least 4 with at most 400 cells in total.
+- `num_boxes` (default `3`): The number of boxes and goals. It must leave room for the player inside the walls. Accepts an integer of at least 1.
+- `max_turns` (default `100`): The number of valid moves allowed. Generated rooms are always solvable within it. Accepts an integer of at least 1.
+- `max_retries` (default `50`): Generation attempts before reset gives up with RuntimeError. Accepts an integer from 1 to 100.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

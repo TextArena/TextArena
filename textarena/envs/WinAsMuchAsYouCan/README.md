@@ -11,9 +11,9 @@ It tests the tension between individual gain and group benefit, coalition buildi
 
 | Env ID | Parameters |
 | --- | --- |
-| `WinAsMuchAsYouCan-v0` | defaults |
+| `WinAsMuchAsYouCan-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `WinAsMuchAsYouCan-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `WinAsMuchAsYouCan-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -87,9 +87,9 @@ set); the top score is decided among the remaining players, and if every player 
 
 ## Parameters
 
-- `error_allowance` (default `3`): the number of consecutive invalid moves that only receive a warning. The next one
-  also gets feedback, sets `invalid_move` in the player's game info, and applies the default decision. The count then
-  starts over.
+<!-- BEGIN GENERATED: parameters -->
+- `error_allowance` (default `3`): The number of consecutive invalid moves that only receive a warning. The next one also gets feedback, sets `invalid_move` in the player's game info, and applies the default decision. The count then starts over. Accepts an integer of at least 0.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

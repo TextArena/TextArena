@@ -17,23 +17,22 @@ class WordSearchEnv(ta.GameEnv):
     MAX_COORDINATE_DIGITS = 6
     _ACTION_RE = re.compile(r"(?P<start_row>\d+)\s+(?P<start_col>\d+)\s+(?P<end_row>\d+)\s+(?P<end_col>\d+)")
 
-    def __init__(self, hardcore: Optional[bool] = False, max_turns: Optional[int] = None):
-        """
-        Initialize the Word Search environment.
+    hardcore = ta.Param(
+        False, "Draw the words from every dictionary headword (about 38,700 words, many of them rare) instead of the "
+               "14,700 common words.",
+    )
+    max_turns = ta.Param(
+        None, "An optional cap on the total number of guesses, correct or incorrect. Without it the cap is 25 (five "
+              "words plus 20 incorrect attempts), which a game can never reach; it only guarantees termination. A "
+              "smaller value can end the game while incorrect attempts remain, and the prompt then states it.",
+        type=int, min=1,
+    )
 
-        Args:
-            hardcore: Draw the words from every dictionary headword instead of the common words.
-            max_turns: Optional cap on the total number of guesses, correct or not. The default,
-                num_words + MAX_INCORRECT_TRIES, is never reached: the game ends at the last word
-                or the last incorrect attempt first.
-        """
-        if not isinstance(hardcore, bool):
-            raise ValueError("hardcore must be a boolean")
-        if max_turns is not None and (not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1):
-            raise ValueError("max_turns must be a positive integer or None")
-        self.hardcore = hardcore
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.num_words = 5
-        self.max_turns = self.num_words + self.MAX_INCORRECT_TRIES if max_turns is None else max_turns
+        if self.max_turns is None:
+            self.max_turns = self.num_words + self.MAX_INCORRECT_TRIES
 
         self.word_list = [word.upper() for word in sorted(get_headwords() if self.hardcore else get_common_words())]
 

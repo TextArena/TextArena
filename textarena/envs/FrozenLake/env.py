@@ -9,47 +9,32 @@ class FrozenLakeEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
     mdp_includes_actions = False
-    max_grid_cells = 10_000
     max_action_chars = 4096
 
-    def __init__(
-        self,
-        size: int = 4,
-        num_holes: int = 3,
-        randomize_start_goal: bool = False,
-        max_turns: int = 100,
-    ):
-        """
-        Args:
-            size (int): The size of the NxN grid (default 4).
-            num_holes (int): The exact number of holes to place on the grid (default 3).
-        """
-        if not isinstance(size, int) or isinstance(size, bool) or size < 2:
-            raise ValueError("size must be an integer of at least 2")
-        if size * size > self.max_grid_cells:
+    size = ta.Param(4, "The width and height of the grid.", min=2, max=100)
+    num_holes = ta.Param(
+        3, "The exact number of holes. At most `(size - 1)²`, which fills every cell off the safe route.", min=0,
+    )
+    randomize_start_goal = ta.Param(
+        False, "Start in a random corner instead of the top-left one, with the goal in the opposite corner.",
+    )
+    max_turns = ta.Param(
+        100, "The number of valid moves allowed. It must be at least `2 × (size - 1)`, the length of the shortest "
+             "route, so grids larger than 51 × 51 need a higher limit.", min=1,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        max_holes = (self.size - 1) ** 2
+        if self.num_holes > max_holes:
             raise ValueError(
-                f"size creates more than {self.max_grid_cells} grid cells"
+                f"num_holes must be at most {max_holes} for a solvable {self.size}x{self.size} grid"
             )
-        if not isinstance(num_holes, int) or isinstance(num_holes, bool) or num_holes < 0:
-            raise ValueError("num_holes must be a non-negative integer")
-        max_holes = (size - 1) ** 2
-        if num_holes > max_holes:
+        if self.max_turns < 2 * (self.size - 1):
             raise ValueError(
-                f"num_holes must be at most {max_holes} for a solvable {size}x{size} grid"
+                f"max_turns must be at least {2 * (self.size - 1)}, the length of the shortest path to the goal"
             )
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
-            raise ValueError("max_turns must be a positive integer")
-        if max_turns < 2 * (size - 1):
-            raise ValueError(
-                f"max_turns must be at least {2 * (size - 1)}, the length of the shortest path to the goal"
-            )
-        if not isinstance(randomize_start_goal, bool):
-            raise ValueError("randomize_start_goal must be a boolean")
-        self.size = size
-        self.num_holes = num_holes
-        self.cell_mapping = {i: (i // size, i % size) for i in range(size * size)}
-        self.randomize_start_goal = randomize_start_goal
-        self.max_turns = max_turns
+        self.cell_mapping = {i: (i // self.size, i % self.size) for i in range(self.size * self.size)}
 
         # Action mappings
         self.actions = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}

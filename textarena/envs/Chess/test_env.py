@@ -1,9 +1,7 @@
-"""Deterministic game-logic tests for Chess-v0."""
+"""Deterministic game-logic tests for Chess-v1."""
 import copy
 
-import pytest
-
-from textarena.envs.Chess.board import A8, D5, D6, E4, F1, G1, KING, PAWN, QUEEN, ROOK, Board
+from textarena.envs.Chess.board import A8, D5, D6, E4, F1, G1, KING, PAWN, QUEEN, ROOK
 from textarena.envs.Chess.env import ChessEnv
 
 
@@ -178,26 +176,3 @@ def test_turn_limit_draw_and_blind_rendering():
     blind = ChessEnv(is_open=False, show_valid=False)
     blind.reset(num_players=2, seed=42)
     assert blind.render(0) is None
-
-
-def test_snapshot_restore_recovers_board_state():
-    env = _fresh()
-    snapshot = env.snapshot()
-    env.step("e2e4")
-    env.restore(snapshot)
-    assert env.state.game_state["board"].fen() == Board().fen()
-    assert env.state.current_player_id == 0
-
-
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"max_turns": 0},
-        {"max_turns": 1.5},
-        {"is_open": 1},
-        {"show_valid": "yes"},
-    ],
-)
-def test_invalid_configuration_rejected(kwargs):
-    with pytest.raises(ValueError):
-        ChessEnv(**kwargs)

@@ -14,37 +14,23 @@ class SokobanEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
     mdp_includes_actions = False
-    max_room_cells = 400
     max_action_chars = 4096
 
-    def __init__(self, dim_room=(6, 6), max_turns=100, num_boxes=3, max_retries=50):
-        if (
-            not isinstance(dim_room, tuple)
-            or len(dim_room) != 2
-            or any(not isinstance(v, int) or isinstance(v, bool) or v < 4 for v in dim_room)
-        ):
-            raise ValueError("dim_room must be a (rows, cols) tuple with both dimensions at least 4")
-        if dim_room[0] * dim_room[1] > self.max_room_cells:
-            raise ValueError(
-                f"dim_room creates more than {self.max_room_cells} room cells"
-            )
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
-            raise ValueError("max_turns must be a positive integer")
-        if not isinstance(num_boxes, int) or isinstance(num_boxes, bool) or num_boxes <= 0:
-            raise ValueError("num_boxes must be a positive integer")
-        if num_boxes + 1 >= (dim_room[0] - 2) * (dim_room[1] - 2):
+    dim_room = ta.Param(
+        (6, 6), "The room size as (rows, columns); the outer ring is always wall.",
+        check=lambda dim: len(dim) == 2 and all(isinstance(v, int) and not isinstance(v, bool) and v >= 4 for v in dim)
+        and dim[0] * dim[1] <= 400,
+        rule="two integers of at least 4 with at most 400 cells in total",
+    )
+    num_boxes = ta.Param(3, "The number of boxes and goals. It must leave room for the player inside the walls.", min=1)
+    max_turns = ta.Param(100, "The number of valid moves allowed. Generated rooms are always solvable within it.", min=1)
+    max_retries = ta.Param(50, "Generation attempts before reset gives up with RuntimeError.", min=1, max=100)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.num_boxes + 1 >= (self.dim_room[0] - 2) * (self.dim_room[1] - 2):
             raise ValueError("num_boxes is too large for the room dimensions")
-        if (
-            not isinstance(max_retries, int)
-            or isinstance(max_retries, bool)
-            or not 1 <= max_retries <= 100
-        ):
-            raise ValueError("max_retries must be an integer between 1 and 100")
-        self.dim_room = dim_room
-        self.num_gen_steps = int(1.7 * (dim_room[0] + dim_room[1]))
-        self.num_boxes = num_boxes
-        self.max_turns = max_turns
-        self.max_retries = max_retries
+        self.num_gen_steps = int(1.7 * (self.dim_room[0] + self.dim_room[1]))
         self.action_space = ['up', 'down', 'left', 'right']
 
     @property

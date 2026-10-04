@@ -10,10 +10,10 @@ guess. It tests systematic search, since halving the remaining range with each g
 
 | Env ID | Parameters |
 | --- | --- |
-| `GuessTheNumber-v0` | `min_number=1`, `max_number=20`, `max_turns=10` |
-| `GuessTheNumber-v0-hardcore` | `min_number=1`, `max_number=50`, `max_turns=10` |
+| `GuessTheNumber-v1` | `min_number=1`, `max_number=20`, `max_turns=10` |
+| `GuessTheNumber-v1-hardcore` | `min_number=1`, `max_number=50`, `max_turns=10` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `GuessTheNumber-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("GuessTheNumber-v0", min_number=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `GuessTheNumber-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("GuessTheNumber-v1", min_number=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -46,9 +46,11 @@ when the game ends.
 
 ## Parameters
 
-- `min_number` (default `1`) and `max_number` (default `20`): the inclusive range of the target; any integers with
-  `min_number <= max_number`.
-- `max_turns` (default `20`): the number of valid guesses allowed. Both registered variants use `10`.
+<!-- BEGIN GENERATED: parameters -->
+- `min_number` (default `1`): The smallest possible target. It must not exceed `max_number`.
+- `max_number` (default `20`): The largest possible target.
+- `max_turns` (default `20`): The number of valid guesses allowed. Both registered variants use `10`. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

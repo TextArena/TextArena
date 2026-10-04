@@ -10,9 +10,9 @@ bluff or press an advantage ([rules](https://www.pagat.com/put/truc.html)).
 
 | Env ID | Parameters |
 | --- | --- |
-| `LeTruc-v0` | defaults |
+| `LeTruc-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `LeTruc-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `LeTruc-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -63,8 +63,9 @@ played, every raise, acceptance and fold, and the result of each trick and hand.
 
 ## Parameters
 
-- `max_turns` (default `None`): if set, the total number of accepted actions (every `play`, `raise`, `accept` and
-  `fold` by either player) after which the match is decided on match points.
+<!-- BEGIN GENERATED: parameters -->
+- `max_turns` (default `None`): If set, the total number of accepted actions (every `play`, `raise`, `accept` and `fold` by either player) after which the match is decided on match points. Accepts an integer of at least 1 or None.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

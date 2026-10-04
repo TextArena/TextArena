@@ -10,8 +10,17 @@ suite only verifies the contracts every game must satisfy:
 - rewards and game_info have the documented shape once the game is done.
 - identical seeds and action streams produce identical outcomes (determinism).
 - the observation stream is consumed exactly once (no duplicates, no losses).
+- a rejected action changes nothing, snapshot/restore replays identically, and `ta.replay(env.record())`
+  rebuilds the same game.
+- long pathological inputs are handled quickly, and Python's global random state is never touched.
+
+Per-game tests do not need to repeat these checks.
 """
+import enum
 import importlib
+import json
+import random
+import re
 
 import pytest
 
@@ -115,6 +124,154 @@ def test_observations_consumed_exactly_once(env_id, spec):
     _, second = env.get_observation()
     assert first, "first observation for a player must not be empty"
     assert second == [], "calling get_observation twice must not replay messages"
+
+
+def _comparable(value, seen=None):
+    """A structure that compares equal for equal game states, including deep copies of them."""
+    seen = set() if seen is None else seen
+    if isinstance(value, (str, bytes, int, float, bool, type(None), enum.Enum, type)):
+        return value
+    if isinstance(value, random.Random):
+        return ("rng", value.getstate())
+    if isinstance(value, dict):
+        return ("dict", tuple(sorted((repr(key), _comparable(item, seen)) for key, item in value.items())))
+    if isinstance(value, (list, tuple)):
+        return (type(value).__name__, tuple(_comparable(item, seen) for item in value))
+    if isinstance(value, (set, frozenset)):
+        return ("set", tuple(sorted(repr(_comparable(item, seen)) for item in value)))
+    if callable(value):
+        return ("callable", getattr(value, "__qualname__", type(value).__qualname__))
+    if hasattr(value, "__dict__"):
+        if id(value) in seen:
+            return ("cycle", type(value).__qualname__)
+        seen.add(id(value))
+        return (type(value).__qualname__, _comparable(vars(value), seen))
+    return repr(value)
+
+
+def _game_view(env):
+    """Everything a rejected action must leave untouched: the game state, the game's attributes and its rng."""
+    excluded = {"state", "rng", *env.snapshot_excluded_attributes}
+    attributes = {name: value for name, value in vars(env).items() if name not in excluded}
+    return _comparable((env.state.game_state, attributes, env.rng))
+
+
+
+def _trace(env, actions):
+    trace = []
+    for action in actions:
+        trace.append(env.get_observation())
+        done, _ = env.step(action)
+        trace.append(done)
+        if done:
+            return trace + [env.state.rewards]
+    return trace
+
+
+# Common action shapes across the games, used to find accepted moves.
+PROBE_ACTIONS = ACTION_POOL + [
+    "e2e4", "d2d4", "4", "3", "5", "up", "down", "left", "right", "draw", "pass", "fold", "check", "raise 10",
+    "bet 10", "hit", "stand", "cooperate", "defect", "rock", "paper", "E", "S", "10", "1 1 1", "1 2 3 4", "0 1",
+    "A1", "a1 a2", "move W T1", "Broadcast: hello", "Accept", "accept 0", "guess apple", "stay", "play 0", "reveal 0 0",
+]
+
+
+_QUOTED = re.compile(r"'([^'\n]{1,40})'|\"([^\"\n]{1,40})\"|`([^`\n]{1,40})`|\[([^\]\n]{1,40})\]")
+
+
+def _candidates(env, seen_text):
+    """The common shapes above plus anything quoted in what the acting player has seen, where prompts give
+    examples and boards often list the legal moves."""
+    snapshot = env.snapshot()
+    _, observation = env.get_observation()
+    env.restore(snapshot)
+    seen_text.extend(message for _, message, _ in observation)
+    quoted = [next(group for group in match.groups() if group) for text in seen_text for match in _QUOTED.finditer(text)]
+    return list(dict.fromkeys(list(reversed(quoted)) + PROBE_ACTIONS))
+
+
+def _accepted_moves(env, steps):
+    """Play up to `steps` actions the game accepts, undoing rejected attempts; returns the actions played."""
+    played, seen_text = [], []
+    for _ in range(steps):
+        if env.state.done:
+            break
+        for action in _candidates(env, seen_text):
+            snapshot, errors = env.snapshot(), env.state.error_count
+            env.get_observation()
+            env.step(action)
+            if env.state.error_count <= errors:
+                played.append(action)
+                break
+            env.restore(snapshot)
+        else:
+            break
+    return played
+
+
+@pytest.mark.parametrize("env_id,spec", _representative_specs(), ids=lambda v: v if isinstance(v, str) else "")
+def test_rejected_actions_change_nothing(env_id, spec):
+    """At several positions of a game, every candidate action the game rejects must leave it untouched."""
+    cls, num_players = _load_env_or_skip(env_id, spec)
+    rejected = 0
+    for seed in range(2):
+        env = cls(**spec.kwargs)
+        env.reset(num_players=num_players, seed=seed)
+        seen_text = []
+        for _ in range(8):
+            if env.state.done:
+                break
+            snapshot = env.snapshot()
+            for action in _candidates(env, seen_text):
+                env.get_observation()
+                before, errors = _game_view(env), env.state.error_count
+                env.step(action)
+                if env.state.error_count == errors + 1 and env.state.error_count <= env.state.error_allowance:
+                    rejected += 1
+                    assert _game_view(env) == before, f"rejected {action!r} changed the game (seed {seed})"
+                env.restore(snapshot)
+            if not _accepted_moves(env, 1):
+                break
+    if not rejected:
+        pytest.skip("the game accepted every candidate action")
+
+
+@pytest.mark.parametrize("env_id,spec", _representative_specs(), ids=lambda v: v if isinstance(v, str) else "")
+def test_snapshot_restore_replays_identically(env_id, spec):
+    cls, num_players = _load_env_or_skip(env_id, spec)
+    env = cls(**spec.kwargs)
+    env.reset(num_players=num_players, seed=5)
+    _accepted_moves(env, 5)
+    snapshot = env.snapshot()
+    actions = _accepted_moves(env, 20) + ACTION_POOL
+    env.restore(snapshot)
+    first = _trace(env, actions)
+    env.restore(snapshot)
+    assert _trace(env, actions) == first
+
+
+@pytest.mark.parametrize("env_id,spec", _representative_specs(), ids=lambda v: v if isinstance(v, str) else "")
+def test_records_replay_the_same_game(env_id, spec):
+    cls, num_players = _load_env_or_skip(env_id, spec)
+    env = cls(**spec.kwargs)
+    env.reset(num_players=num_players)
+    _accepted_moves(env, 15)
+    _trace(env, ACTION_POOL)
+    record = json.loads(json.dumps(env.record()))
+    replayed = ta.replay(record)
+    assert replayed.state.events == env.state.events
+    assert (replayed.state.done, replayed.state.rewards) == (env.state.done, env.state.rewards)
+
+
+@pytest.mark.parametrize("env_id,spec", _representative_specs(), ids=lambda v: v if isinstance(v, str) else "")
+def test_global_random_state_is_never_touched(env_id, spec):
+    cls, num_players = _load_env_or_skip(env_id, spec)
+    random.seed(1234)
+    expected = random.getstate()
+    env = cls(**spec.kwargs)
+    env.reset(num_players=num_players, seed=3)
+    _trace(env, ACTION_POOL * 2)
+    assert random.getstate() == expected
 
 
 @pytest.mark.parametrize(

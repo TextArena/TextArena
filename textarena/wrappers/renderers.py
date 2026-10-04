@@ -1,7 +1,11 @@
-from rich.markup import escape
-import io, os, shutil, time, rich, rich.layout
+import io, os, shutil, time
 from typing import Dict, Optional, Tuple
 from textarena.core import Env, Info, RenderWrapper
+
+try:
+    import rich.align, rich.box, rich.console, rich.layout, rich.markup, rich.panel, rich.text
+except ImportError:  # rich is an optional dependency: pip install "textarena[render]"
+    rich = None
 
 __all__ = ["SimpleRenderWrapper"]
 
@@ -21,6 +25,8 @@ class SimpleRenderWrapper(RenderWrapper):
             record_only: Render off-screen at ``record_size`` (columns, lines) instead of drawing to the
                 terminal, so every recorded frame has identical dimensions. Requires ``record_dir``.
         """
+        if rich is None:
+            raise ImportError('SimpleRenderWrapper needs the rich package: pip install "textarena[render]"')
         super().__init__(env)
         self.player_names = player_names
         self.render_mode = render_mode
@@ -64,7 +70,7 @@ class SimpleRenderWrapper(RenderWrapper):
         logs = self._public_logs(self.env.state)
         board = f"No game board provided by {self.env.env_id}\n(not implemented / not available)" if board is None else board
         # Boards may already be rich renderables (e.g. coloured Text); only plain strings need markup escaping.
-        board_panel = rich.panel.Panel.fit(escape(board) if isinstance(board, str) else board, title="Game Board", border_style="white", box=rich.box.SQUARE)
+        board_panel = rich.panel.Panel.fit(rich.markup.escape(board) if isinstance(board, str) else board, title="Game Board", border_style="white", box=rich.box.SQUARE)
 
         # Separate logs by player
         logs_by_player = {}

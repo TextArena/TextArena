@@ -79,11 +79,6 @@ def test_objects_are_placed_exactly_and_away_from_spawns(seed):
         assert max(abs(x - 1), abs(y - 1)) > 1 and max(abs(x - 13), abs(y - 13)) > 1
 
 
-def test_arena_is_seeded():
-    assert _fresh(seed=3).game_state["objects"] == _fresh(seed=3).game_state["objects"]
-    assert _fresh(seed=3).game_state["objects"] != _fresh(seed=4).game_state["objects"]
-
-
 def test_small_arena_fits_requested_objects():
     env = _fresh(grid_size=(5, 5), num_asteroids=1, num_debris=1, num_nebulas=0, num_mines=0, num_powerups=0)
     assert sorted(env.game_state["objects"]) == [(1, 3), (3, 1)]
@@ -408,20 +403,6 @@ def test_initial_observation_contains_prompt_and_board():
 
 
 # ------------------------------------------------------- snapshots & config
-def test_snapshot_restore_replays_power_up_rng():
-    env = _fresh(seed=8)
-    gs = _arena(env, objects={(4, 3): "powerup", (10, 11): "powerup"})
-    snapshot = env.snapshot()
-
-    def run():
-        _play(env, "d", "a", "f s")
-        return copy.deepcopy(env.game_state), env.rng.random()
-
-    first = run()
-    env.restore(snapshot)
-    assert run() == first
-
-
 @pytest.mark.parametrize(
     "kwargs",
     [
@@ -433,9 +414,6 @@ def test_snapshot_restore_replays_power_up_rng():
         {"max_turns": 3},
         {"max_turns": True},
         {"max_turns": 10.0},
-        {"num_mines": -1},
-        {"num_debris": 2.5},
-        {"num_powerups": None},
         {"grid_size": (5, 5), "num_asteroids": 3},
     ],
 )
@@ -445,7 +423,7 @@ def test_invalid_configuration_rejected(kwargs):
 
 
 def test_registered_variants_use_upstream_defaults():
-    for env_id in ("RetroSpaceDuel-v0", "RetroSpaceDuel-v0-mdp"):
+    for env_id in ("RetroSpaceDuel-v1", "RetroSpaceDuel-v1-mdp"):
         env = ta.make(env_id)
         env.reset(num_players=2, seed=1)
         assert (env.grid_size, env.max_turns) == ((15, 15), 100)

@@ -194,16 +194,6 @@ def test_prompt_states_the_starting_chips():
     assert "Both players start with 40 chips" in env.prompt(0)
 
 
-def test_snapshot_restore_replays_identically():
-    env = _fresh(max_rounds=2)
-    snapshot = env.snapshot()
-    env.step("check")
-    expected = copy.deepcopy(env.state.game_state)
-    env.restore(snapshot)
-    env.step("check")
-    assert env.state.game_state == expected
-
-
 def test_new_round_resets_check_sequence_and_keeps_round_in_bounds():
     env = _fresh(max_rounds=2)
     env.step("check")

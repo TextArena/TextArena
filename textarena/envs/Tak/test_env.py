@@ -81,21 +81,6 @@ def test_malformed_placement_is_invalid_without_mutation():
     assert env.players == before["state"].game_state["players"]
 
 
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"board_size": 2, "stones": 10, "capstones": 1},
-        {"board_size": 9, "stones": 10, "capstones": 1},
-        {"board_size": 3, "stones": 0, "capstones": 1},
-        {"board_size": 3, "stones": 10, "capstones": 1, "max_turns": 0},
-        {"board_size": 3, "stones": 10, "capstones": 1, "max_turns": True},
-    ],
-)
-def test_unplayable_configuration_is_rejected(kwargs):
-    with pytest.raises(ValueError):
-        TakEnv(**kwargs)
-
-
 def test_huge_source_coordinate_is_rejected_atomically():
     env = _fresh()
     before = env.snapshot()
@@ -348,7 +333,7 @@ def test_road_completed_on_the_capped_turn_beats_the_flat_count():
 def test_registered_variant_uses_default_turn_cap():
     import textarena as ta
 
-    env = ta.make("Tak-v0")
+    env = ta.make("Tak-v1")
     env.reset(num_players=2, seed=0)
 
     assert env.state.max_turns == 100

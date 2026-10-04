@@ -14,7 +14,6 @@ every product:
 import os
 import re
 import csv
-import math
 import statistics
 from typing import Any, Dict, List, Optional, Tuple, Union
 from collections import defaultdict
@@ -51,50 +50,39 @@ class VendorNegotiationEnv(ta.GameEnv):
     _PROPOSE_LINE_RE = re.compile(r"propose(?![^\s:.!])\s*:?\s*(?P<args>.*)", re.IGNORECASE)
     _DISCOUNT_LIST_RE = re.compile(r"[0-9]+%(?:\s*,\s*[0-9]+%)*")
 
-    def __init__(self,
-                 num_products: int = 5,
-                 max_rounds: int = 20,
-                 error_allowance: int = 3,
-                 brand_target_fraction: float = 0.5,
-                 vendor_target_fraction: float = 0.5,
-                 num_simulations: int = 1000,
-                 brand_role: Optional[str] = None,
-                 vendor_role: Optional[str] = None,
-                 product_list_path: Optional[str] = None):
-        """
-        Initialize the Vendor Negotiation environment.
+    num_products = ta.Param(5, "The number of products to negotiate over, capped at the 10 available.", min=1)
+    max_rounds = ta.Param(
+        20, "The number of messages, counting both players, before the game ends without a deal.", min=1,
+    )
+    error_allowance = ta.Param(
+        3, "The number of consecutive invalid moves a player is warned about before the next one forfeits the game.",
+        min=0,
+    )
+    brand_target_fraction = ta.Param(
+        0.5, "Where the Brand's target sits between the lowest (`0`) and highest (`1`) total sales the drawn products "
+             "can reach.", min=0, max=1,
+    )
+    vendor_target_fraction = ta.Param(
+        0.5, "Where the Vendor's target sits between the lowest (`0`) and highest (`1`) total profit the drawn "
+             "products can reach.", min=0, max=1,
+    )
+    num_simulations = ta.Param(1000, "The number of Monte Carlo draws used to score a deal.", min=1)
+    brand_role = ta.Param(
+        "default", "The Brand's style file in `data/roles/brand/`: `default`, `aggressive`, `collaborative`, or "
+                   "`data_driven`. Unknown names fall back to `default`.",
+    )
+    vendor_role = ta.Param(
+        "default", "The Vendor's style file in `data/roles/vendor/`: `default`, `profit_focused`, `volume_seeker`, or "
+                   "`relationship_builder`. Unknown names fall back to `default`.",
+    )
+    product_list_path = ta.Param(
+        "data/product_list.csv",
+        "An alternative product file in the same format, with one row per product and discount rate. Only the "
+        "discount rates shared by every product can be proposed, and 0% must be one of them.",
+    )
 
-        Args:
-            num_products: Number of products to negotiate (default: 5)
-            max_rounds: Maximum negotiation rounds (default: 20)
-            error_allowance: Invalid moves allowed before penalty (default: 3)
-            brand_target_fraction: Brand's sales target as a position (0-1) between the lowest
-                and highest total sales the drawn products can reach (default: 0.5)
-            vendor_target_fraction: Vendor's profit target as a position (0-1) between the lowest
-                and highest total profit the drawn products can reach (default: 0.5)
-            num_simulations: Monte Carlo simulation runs (default: 1000)
-            brand_role: Role file name for Player 0 (default: "default")
-            vendor_role: Role file name for Player 1 (default: "default")
-            product_list_path: Path to product CSV file (default: "data/product_list.csv")
-        """
-        if not isinstance(num_products, int) or isinstance(num_products, bool) or num_products <= 0:
-            raise ValueError("num_products must be a positive integer")
-        if not isinstance(max_rounds, int) or isinstance(max_rounds, bool) or max_rounds <= 0:
-            raise ValueError("max_rounds must be a positive integer")
-        if not isinstance(error_allowance, int) or isinstance(error_allowance, bool) or error_allowance < 0:
-            raise ValueError("error_allowance must be a non-negative integer")
-        if not isinstance(num_simulations, int) or isinstance(num_simulations, bool) or num_simulations <= 0:
-            raise ValueError("num_simulations must be a positive integer")
-        self.num_products = num_products
-        self.max_rounds = max_rounds
-        self.error_allowance = error_allowance
-        self.brand_target_fraction = self._validate_fraction(brand_target_fraction, "brand_target_fraction")
-        self.vendor_target_fraction = self._validate_fraction(vendor_target_fraction, "vendor_target_fraction")
-        self.num_simulations = num_simulations
-        self.brand_role_name = brand_role or "default"
-        self.vendor_role_name = vendor_role or "default"
-        self.product_list_path = product_list_path or "data/product_list.csv"
-
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         # Load product data and roles
         self.all_products = self._load_product_data()
         if not self.all_products:
@@ -102,8 +90,8 @@ class VendorNegotiationEnv(ta.GameEnv):
 
         # Always infer allowed discounts from product data
         self.allowed_discounts = self._infer_allowed_discounts()
-        self.brand_role_instructions = self._load_role_instructions("brand", self.brand_role_name)
-        self.vendor_role_instructions = self._load_role_instructions("vendor", self.vendor_role_name)
+        self.brand_role_instructions = self._load_role_instructions("brand", self.brand_role)
+        self.vendor_role_instructions = self._load_role_instructions("vendor", self.vendor_role)
 
         # Per-game data (initialized in setup)
         self.selected_products = []
@@ -207,21 +195,6 @@ class VendorNegotiationEnv(ta.GameEnv):
             default_path = os.path.join(os.path.dirname(__file__), "data", "roles", player_type, "default.txt")
             with open(default_path, 'r') as f:
                 return f.read().strip()
-
-    @staticmethod
-    def _validate_fraction(value: float, name: str) -> float:
-        try:
-            normalized = float(value)
-        except (TypeError, ValueError, OverflowError):
-            normalized = math.nan
-        if (
-            not isinstance(value, (int, float))
-            or isinstance(value, bool)
-            or not math.isfinite(normalized)
-            or not 0 <= normalized <= 1
-        ):
-            raise ValueError(f"{name} must be a finite number between 0 and 1")
-        return normalized
 
     def roles(self) -> Dict[int, str]:
         return {0: "Brand Specialist", 1: "Vendor"}

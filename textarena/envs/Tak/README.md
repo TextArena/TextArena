@@ -10,10 +10,10 @@ opposite edges ([rules](https://en.wikipedia.org/wiki/Tak_%28game%29)).
 
 | Env ID | Parameters |
 | --- | --- |
-| `Tak-v0` | `board_size=4`, `stones=15`, `capstones=1`, `max_turns=100` |
-| `Tak-v0-hard` | `board_size=6`, `stones=30`, `capstones=1`, `max_turns=200` |
+| `Tak-v1` | `board_size=4`, `stones=15`, `capstones=1`, `max_turns=100` |
+| `Tak-v1-hard` | `board_size=6`, `stones=30`, `capstones=1`, `max_turns=200` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Tak-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Tak-v0", board_size=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Tak-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Tak-v1", board_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -93,11 +93,12 @@ moves are not listed.
 
 ## Parameters
 
-- `board_size`: side length of the board, from 3 to 8. It is also the carry limit.
-- `stones`: stones per player (each placed as a flat stone or a wall); a positive integer.
-- `capstones`: capstones per player; a non-negative integer.
-- `max_turns` (default `100`): safeguard on the total number of turns, after which the flat count decides the game. It
-  must be a positive integer.
+<!-- BEGIN GENERATED: parameters -->
+- `board_size` (default `4`): The side length of the board. It is also the carry limit. Accepts an integer from 3 to 8.
+- `stones` (default `15`): The number of stones per player, each placed as a flat stone or a wall. Accepts an integer of at least 1.
+- `capstones` (default `1`): The number of capstones per player. Accepts an integer of at least 0.
+- `max_turns` (default `100`): The safeguard on the total number of turns, after which the flat count decides the game. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

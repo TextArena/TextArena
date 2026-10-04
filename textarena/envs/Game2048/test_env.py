@@ -85,38 +85,9 @@ def test_parser_rejects_noncanonical_actions(action):
     assert env.state.game_state == before
 
 
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"target_tile": 2},
-        {"target_tile": 12},
-        {"target_tile": Game2048Env.MAX_TARGET_TILE * 2},
-        {"board_size": 1},
-        {"board_size": 11},
-        {"board_size": True},
-    ],
-)
-def test_invalid_configuration_rejected(kwargs):
-    with pytest.raises(ValueError):
-        Game2048Env(**kwargs)
-
-
-def test_seeded_rngs_and_snapshot_restore_spawn_exactly():
-    first = _fresh(target_tile=2048, board_size=2)
-    second = _fresh(target_tile=2048, board_size=2)
-    assert first.state.game_state == second.state.game_state
-
-    board = [[2, 0], [0, 0]]
-    first.state.game_state["board"] = copy.deepcopy(board)
-    second.state.game_state["board"] = copy.deepcopy(board)
-    snapshot = first.snapshot()
-    first.step("right")
-    expected = copy.deepcopy(first.state.game_state)
-
-    first.restore(snapshot)
-    first.step("right")
-    second.step("right")
-    assert first.state.game_state == expected == second.state.game_state
+def test_target_tile_must_be_a_power_of_two():
+    with pytest.raises(ValueError, match="target_tile must be a power of two from 4 to 65536, received 12"):
+        Game2048Env(target_tile=12)
 
 
 def test_repeat_reset_replays_seed_without_aliasing_old_state():

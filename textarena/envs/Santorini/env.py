@@ -37,27 +37,15 @@ class SantoriniBaseFixedWorkerEnv(ta.GameEnv):
     # Player colors
     PLAYER_COLORS = ["Navy", "White", "Grey"]
 
-    def __init__(self, is_open: bool=True, show_valid: bool=True, error_allowance: int=10):
-        """Initialize the Santorini game environment.
+    is_open = ta.Param(True, "Whether the acting player is shown the board.")
+    show_valid = ta.Param(True, "Whether the acting player is shown the list of their legal moves.")
+    error_allowance = ta.Param(
+        10, "The number of consecutive invalid moves a player may make; the next one counts as the escalation above.",
+        min=0,
+    )
 
-        Args:
-            is_open (bool): If True, all players can see the current board state.
-            show_valid (bool): If True, players can see a list of valid moves.
-            error_allowance (int): Number of invalid moves allowed before a player loses.
-        """
-        if not isinstance(is_open, bool):
-            raise ValueError("is_open must be a boolean")
-        if not isinstance(show_valid, bool):
-            raise ValueError("show_valid must be a boolean")
-        if (
-            not isinstance(error_allowance, int)
-            or isinstance(error_allowance, bool)
-            or error_allowance < 0
-        ):
-            raise ValueError("error_allowance must be a non-negative integer")
-        self.is_open = is_open
-        self.show_valid = show_valid
-        self.error_allowance = error_allowance
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
         # The build coordinate is optional only for a winning move onto level 3.
         self.move_pattern = re.compile(

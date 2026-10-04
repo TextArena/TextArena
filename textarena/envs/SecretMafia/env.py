@@ -124,26 +124,12 @@ class SecretMafiaEnv(ta.GameEnv):
         "Doctor":    Doctor,
         "Detective": Detective,
     }
-    def __init__(self, mafia_ratio: float = 0.25, discussion_rounds: int = 3):
-        """
-        Args:
-            mafia_ratio (float): Ratio of Mafia members to total players (default: 0.25)
-            discussion_rounds (int): The number of discussion rounds
-        """
-        if (
-            isinstance(mafia_ratio, bool)
-            or not isinstance(mafia_ratio, (int, float))
-            or not 0 < mafia_ratio < 1
-        ):
-            raise ValueError(f"mafia_ratio must be between 0 and 1, received {mafia_ratio}")
-        if (
-            isinstance(discussion_rounds, bool)
-            or not isinstance(discussion_rounds, int)
-            or discussion_rounds < 1
-        ):
-            raise ValueError(f"discussion_rounds must be at least 1, received {discussion_rounds}")
-        self.mafia_ratio = mafia_ratio
-        self.discussion_rounds = discussion_rounds
+    mafia_ratio = ta.Param(
+        0.25, "The share of players who are Mafia, rounded to the nearest whole number (at least 1). It must leave "
+              "room for the Doctor and Detective and keep the Mafia in the minority, otherwise `reset` raises an error.",
+        check=lambda ratio: 0 < ratio < 1, rule="a number greater than 0 and less than 1",
+    )
+    discussion_rounds = ta.Param(3, "The discussion rounds before each day vote.", min=1)
 
     def setup(self) -> Dict[str, Any]:
         num_players = self.state.num_players

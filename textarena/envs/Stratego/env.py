@@ -15,12 +15,10 @@ class StrategoEnv(ta.GameEnv):
     )
     broadcast_actions = False  # raw actions are echoed only to their author
 
-    def __init__(self, max_turns: int = 1000):
-        """
-        Initialize the environment.
-        """
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
+    max_turns = ta.Param(1000, "The total number of turns, counting both players, before the game is a draw.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         ## set up the board items
         self.piece_counts = {
             'Flag': 1, 'Bomb': 6, 'Spy': 1, 'Scout': 8, 'Miner': 5,
@@ -33,7 +31,6 @@ class StrategoEnv(ta.GameEnv):
             'Colonel': 8, 'General': 9, 'Marshal': 10
         }
         self.lakes = [(4, 2), (4, 3), (5, 2), (5, 3), (4, 6), (4, 7), (5, 6), (5, 7)]
-        self.max_turns = max_turns
 
     @property
     def terminal_render_keys(self):

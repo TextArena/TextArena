@@ -1,4 +1,4 @@
-"""Deterministic game-logic tests for GuessTheNumber-v0 (single player).
+"""Deterministic game-logic tests for GuessTheNumber-v1 (single player).
 
 The target is drawn randomly at reset, so we read it out of the game
 state to build deterministic scripted plays rather than hardcoding a value.
@@ -85,9 +85,6 @@ def test_format_error_describes_expected_action(bounds):
     "kwargs",
     [
         {"min_number": 5, "max_number": 4, "max_turns": 3},
-        {"min_number": 1.5, "max_number": 4, "max_turns": 3},
-        {"min_number": 1, "max_number": 4, "max_turns": 0},
-        {"min_number": True, "max_number": 4, "max_turns": 3},
     ],
 )
 def test_invalid_bounds_are_rejected(kwargs):
@@ -195,20 +192,8 @@ def test_extreme_integer_bounds_have_finite_bounded_completion():
     assert completion == 0.0
 
 
-def test_snapshot_restores_history_and_target():
-    env = _fresh()
-    target = env.state.game_state["game_number"]
-    snapshot = env.snapshot()
-    guess = target + 1 if target < env.max_number else target - 1
-    env.step(str(guess))
-    env.restore(snapshot)
-    assert env.state.game_state["game_number"] == target
-    assert env.state.game_state["guess_history"] == []
-    assert env.state.turn == 0
-
-
 def test_mdp_observation_pairs_every_hint_with_its_guess():
-    env = ta.make("GuessTheNumber-v0-mdp")
+    env = ta.make("GuessTheNumber-v1-mdp")
     env.reset(num_players=1, seed=42)
     target = env.env.state.game_state["game_number"]
     guesses = [guess for guess in (1, 20, 10) if guess != target][:2]

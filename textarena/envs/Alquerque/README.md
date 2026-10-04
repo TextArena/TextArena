@@ -10,9 +10,9 @@ player who captures more within 60 moves wins ([rules](http://games.stanford.edu
 
 | Env ID | Parameters |
 | --- | --- |
-| `Alquerque-v0` | defaults |
+| `Alquerque-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Alquerque-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Alquerque-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

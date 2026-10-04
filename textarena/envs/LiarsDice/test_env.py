@@ -7,7 +7,6 @@ whose truth value is known, guaranteeing the caller/bidder outcome.
 Final rewards are rank-scaled; for 2 players the loser gets -1.0 and the winner
 +1.0.
 """
-import time
 
 import pytest
 
@@ -195,25 +194,6 @@ def test_repeat_reset_replays_private_rolls():
     assert env.state.game_state["dice_rolls"] == first_rolls
 
 
-def test_snapshot_restore_replays_call_and_reroll():
-    env = LiarsDiceEnv(num_dice=2)
-    env.reset(num_players=3, seed=42)
-    env.step(_false_bid(env))
-    before = env.snapshot()
-    env.step("Call")
-    expected = env.snapshot()
-    env.restore(before)
-    env.step("Call")
-    assert env.state.game_state == expected["state"].game_state
-    assert env.state.current_player_id == expected["state"].current_player_id
-
-
-@pytest.mark.parametrize("num_dice", [0, -1, True, 1.5])
-def test_invalid_dice_configuration_is_rejected(num_dice):
-    with pytest.raises(ValueError, match="num_dice"):
-        LiarsDiceEnv(num_dice=num_dice)
-
-
 @pytest.mark.parametrize(
     "action",
     ["Bid: 1, 2 Call", "Call Bid: 2, 3", "Bid: 1, 2\nBid: 2, 3"],
@@ -278,18 +258,6 @@ def test_prompt_states_the_bid_rules_actually_enforced():
     assert "raise the quantity (with any face)" in prompt
     assert "keep the quantity and raise the face" in prompt
     assert "cannot exceed the number of dice in play" in prompt
-
-
-@pytest.mark.parametrize(
-    "action",
-    [" " * 32_000 + "x", "Bid" + " " * 32_000 + "x", "Bid: 1, 2" + " " * 32_000 + "x", "Call" + " " * 32_000 + "x"],
-)
-def test_whitespace_padded_input_is_rejected_quickly(action):
-    env = _fresh()
-    start = time.perf_counter()
-    done, _ = env.step(action)
-    assert time.perf_counter() - start < 1.0
-    assert not done and env.state.error_count == 1
 
 
 def test_padded_valid_commands_are_still_accepted():

@@ -14,21 +14,12 @@ class LogicPuzzleEnv(ta.GameEnv):
     mdp_includes_actions = False
     max_action_chars = 4096
 
-    def __init__(self, difficulty: Optional[str] = "easy", max_turns: int = 30):
-        """
-        Initialize the Logic Puzzle environment with the specified difficulty level.
+    difficulty = ta.Param("easy", "The set of bundled puzzles to draw from.", choices=("easy", "hard"))
+    max_turns = ta.Param(30, "The maximum number of submissions.", min=1)
 
-        Args:
-            difficulty (str): The difficulty level of the bundled puzzles, "easy" or "hard".
-            max_turns (int): The maximum number of submissions allowed.
-        """
-        if not isinstance(difficulty, str) or not difficulty.strip():
-            raise ValueError("difficulty must be a non-empty string")
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
-            raise ValueError("max_turns must be a positive integer")
-        self.difficulty = difficulty.lower()
-        self.max_turns = max_turns
-        self.game_board_data = self._load_puzzle_data()  # Load the puzzle data
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.game_board_data = self._load_puzzle_data()
 
     def _load_puzzle_data(self, puzzle_path: Optional[str] = None):
         """

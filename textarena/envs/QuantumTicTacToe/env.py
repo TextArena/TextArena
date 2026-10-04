@@ -9,7 +9,8 @@ class QuantumTicTacToeEnv(ta.GameEnv):
     max_players = 2
     mdp_includes_actions = False
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.cell_mapping = {i * 3 + j: (i, j) for i in range(3) for j in range(3)}
         self.max_turns = 25
 

@@ -11,9 +11,9 @@ sums and carries.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Cryptarithm-v0` | `equation="SEND + MORE = MONEY"`, `max_turns=100` |
+| `Cryptarithm-v1` | `equation="SEND + MORE = MONEY"`, `max_turns=100` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Cryptarithm-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Cryptarithm-v0", equation=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Cryptarithm-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Cryptarithm-v1", equation=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -69,11 +69,10 @@ letters, and the score stays below `1` unless the equation is solved.
 
 ## Parameters
 
-- `equation` (default `"SEND + MORE = MONEY"`): the puzzle, written as words of letters joined by `+`, then one `=`
-  and the result (spaces optional, case-insensitive). It may use at most 10 distinct letters, 20 addends, 64 letters
-  per word, and 512 characters, and must have at least one solution without leading zeros; otherwise the constructor
-  raises `ValueError`. Very long sums with many addends are also rejected, so that the solvability check stays fast.
-- `max_turns` (default `100`): the number of valid moves allowed.
+<!-- BEGIN GENERATED: parameters -->
+- `equation` (default `"SEND + MORE = MONEY"`): The puzzle, written as words of letters joined by `+`, then one `=` and the result (spaces optional, case-insensitive). It may use at most 10 distinct letters, 20 addends and 64 letters per word, and must have at least one solution without leading zeros; otherwise the constructor raises `ValueError`. Very long sums with many addends are also rejected, so that the solvability check stays fast. Accepts a string of at most 512 characters.
+- `max_turns` (default `100`): The number of valid moves allowed. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

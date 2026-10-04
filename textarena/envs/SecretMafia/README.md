@@ -10,9 +10,9 @@ every Mafia member out by day ([rules](https://en.wikipedia.org/wiki/Mafia_%28pa
 
 | Env ID | Parameters |
 | --- | --- |
-| `SecretMafia-v0` | `mafia_ratio=0.25`, `discussion_rounds=3` |
+| `SecretMafia-v1` | `mafia_ratio=0.25`, `discussion_rounds=3` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `SecretMafia-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("SecretMafia-v0", mafia_ratio=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `SecretMafia-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("SecretMafia-v1", mafia_ratio=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -67,10 +67,10 @@ targets).
 
 ## Parameters
 
-- `mafia_ratio` (default `0.25`): share of players who are Mafia, rounded to the nearest whole number (at least 1).
-  It must leave room for the Doctor and Detective and keep the Mafia in the minority, otherwise `reset` raises an
-  error.
-- `discussion_rounds` (default `3`): discussion rounds before each day vote.
+<!-- BEGIN GENERATED: parameters -->
+- `mafia_ratio` (default `0.25`): The share of players who are Mafia, rounded to the nearest whole number (at least 1). It must leave room for the Doctor and Detective and keep the Mafia in the minority, otherwise `reset` raises an error. Accepts a number greater than 0 and less than 1.
+- `discussion_rounds` (default `3`): The discussion rounds before each day vote. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

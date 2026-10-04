@@ -10,10 +10,10 @@ It tests vocabulary, clue interpretation, and keeping track of positions on a te
 
 | Env ID | Parameters |
 | --- | --- |
-| `Crosswords-v0` | `hardcore=False`, `max_turns=30`, `num_words=3` |
-| `Crosswords-v0-hardcore` | `hardcore=True`, `max_turns=30`, `num_words=3` |
+| `Crosswords-v1` | `hardcore=False`, `max_turns=30`, `num_words=3` |
+| `Crosswords-v1-hardcore` | `hardcore=True`, `max_turns=30`, `num_words=3` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Crosswords-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Crosswords-v0", hardcore=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Crosswords-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Crosswords-v1", hardcore=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -26,9 +26,9 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Crosswords-v0-mdp`
 - A wrong letter, a blocked or out-of-bounds cell, or a cell that is already filled is an invalid move and leaves the
   board unchanged. Two invalid moves in a row end the game.
 - You win by filling every letter cell.
-- There is no turn limit. Each correct guess fills one cell and counts as a turn, so a game takes exactly as many
-  turns as the puzzle has letter cells, which is never more than `max_turns` (see Parameters). Invalid moves do not
-  count as turns.
+- Each correct guess fills one cell and counts as a turn, so a game takes exactly as many turns as the puzzle has
+  letter cells, which is never more than `max_turns` (see Parameters); the turn limit is therefore never reached.
+  Invalid moves do not count as turns.
 
 ## Actions
 
@@ -58,12 +58,11 @@ and direction, and most clues state the word length, for example:
 
 ## Parameters
 
-- `hardcore` (default `False`): draw from the hardcore half of the word list (rare or technical words such as
-  `palinurid` or `deambulatory`) instead of everyday vocabulary.
-- `max_turns` (default `100`): caps the puzzle size. The sampled words' total length never exceeds it, so every game
-  finishes within `max_turns` correct guesses. It is not enforced as a separate turn limit, which could never be
-  reached. Construction fails if the `num_words` shortest words do not fit.
-- `num_words` (default `5`): the number of words placed on the grid.
+<!-- BEGIN GENERATED: parameters -->
+- `hardcore` (default `False`): Draw from the hardcore half of the word list (rare or technical words such as `palinurid` or `deambulatory`) instead of everyday vocabulary.
+- `max_turns` (default `100`): The puzzle size cap. The sampled words' total length never exceeds it, so every game finishes within `max_turns` correct guesses. Construction fails if the `num_words` shortest words do not fit. Accepts an integer of at least 1.
+- `num_words` (default `5`): The number of words placed on the grid. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

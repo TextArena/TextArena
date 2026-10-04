@@ -11,9 +11,9 @@ picks match, the Mismatcher (Player 1) wins when they differ, and whoever wins m
 
 | Env ID | Parameters |
 | --- | --- |
-| `IteratedMatchingPennies-v0` | `num_rounds=10` |
+| `IteratedMatchingPennies-v1` | `num_rounds=10` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedMatchingPennies-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedMatchingPennies-v0", num_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedMatchingPennies-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedMatchingPennies-v1", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -45,7 +45,9 @@ round (for example `Score after round 2/10: Player 0 1, Player 1 1.`).
 
 ## Parameters
 
-- `num_rounds` (default `5`): number of rounds.
+<!-- BEGIN GENERATED: parameters -->
+- `num_rounds` (default `5`): The number of rounds. Accepts a positive integer.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

@@ -11,9 +11,9 @@ wins the round; whoever wins more rounds wins the game
 
 | Env ID | Parameters |
 | --- | --- |
-| `IteratedTwoThirdsAverage-v0` | `num_rounds=10`, `min_guess=0.0`, `max_guess=100.0` |
+| `IteratedTwoThirdsAverage-v1` | `num_rounds=10`, `min_guess=0.0`, `max_guess=100.0` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedTwoThirdsAverage-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedTwoThirdsAverage-v0", num_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedTwoThirdsAverage-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedTwoThirdsAverage-v1", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -45,9 +45,11 @@ decimals), the round winner or a draw, and the score after that round.
 
 ## Parameters
 
-- `num_rounds` (default `5`): number of rounds.
-- `min_guess` (default `0.0`): smallest allowed guess; a finite number.
-- `max_guess` (default `100.0`): largest allowed guess; a finite number not below `min_guess`.
+<!-- BEGIN GENERATED: parameters -->
+- `num_rounds` (default `5`): The number of rounds. Accepts a positive integer.
+- `min_guess` (default `0.0`): The smallest allowed guess. Accepts a finite number.
+- `max_guess` (default `100.0`): The largest allowed guess. Accepts a finite number not below min_guess.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

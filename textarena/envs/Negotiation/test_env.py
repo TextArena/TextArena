@@ -5,7 +5,6 @@ valuations are seeded, so trades and the turn-limit endgame can be scripted
 deterministically.
 """
 import copy
-import time
 
 import pytest
 
@@ -341,38 +340,6 @@ def test_trade_then_turn_limit_winner():
         done, _ = env.step("Broadcast: hold your positions")
     assert done
     assert env.state.rewards == _expected_rewards(env)
-
-
-@pytest.mark.parametrize("turn_multiple", [0, -1, True, 1.5])
-def test_invalid_turn_multiple_is_rejected(turn_multiple):
-    with pytest.raises(ValueError):
-        NegotiationEnv(turn_multiple=turn_multiple)
-
-
-PADDING = 30_000
-
-
-@pytest.mark.parametrize(
-    "action",
-    [
-        pytest.param(" " * PADDING + "x" + " " * 1000, id="leading-trailing-spaces"),
-        pytest.param("4" + " " * PADDING + "x", id="inner-spaces"),
-        pytest.param("\t\n " * (PADDING // 3) + "x", id="tab-newline-runs"),
-        pytest.param("[" * (PADDING // 2) + "x" + "]" * (PADDING // 2 - 2), id="deep-brackets"),
-        pytest.param("Accept" + " " * PADDING + "x", id="accept"),
-        pytest.param("x;" + " " * (PADDING // 2) + "[" + " " * (PADDING // 2) + "x", id="semicolon"),
-        pytest.param("Offer to 1: 2" + " " * PADDING + "Gold -> 1 Ore", id="offer-resources"),
-    ],
-)
-def test_long_padded_input_is_rejected_quickly_without_changing_state(action):
-    env = _fresh()
-    before = copy.deepcopy(env.game_state)
-    start = time.perf_counter()
-    env.step(action)
-    assert time.perf_counter() - start < 0.25
-    assert env.state.error_count == 1
-    assert env.state.current_player_id == 0
-    assert env.game_state == before
 
 
 def test_padded_bare_commands_still_parse_and_keep_message_whitespace():

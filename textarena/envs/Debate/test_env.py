@@ -3,6 +3,7 @@ import copy
 import json
 
 import pytest
+import textarena as ta
 from textarena.envs.Debate.env import DebateEnv
 from textarena.utils.jury import OpenRouterJury
 
@@ -337,11 +338,33 @@ def test_invalid_turn_count_is_rejected(max_turns):
         DebateEnv(max_turns=max_turns, jury_class=_TieJury)
 
 
-def test_jury_size_and_player_bounds_are_validated():
-    with pytest.raises(ValueError):
-        DebateEnv(jury_class=_TieJury, jury_size=0)
-    with pytest.raises(ValueError):
-        DebateEnv(jury_class=_TieJury, jury_size=101)
+def test_jury_class_must_be_callable():
+    with pytest.raises(ValueError, match="jury_class must be a callable or None"):
+        DebateEnv(jury_class="OpenRouterJury")
+
+
+def test_replay_reuses_recorded_votes_without_calling_the_jury():
+    calls = []
+
+    class Jury(_AffirmativeJury):
+        def evaluate(self, context):
+            calls.append(context)
+            return super().evaluate(context)
+
+    env = DebateEnv(max_turns=2, jury_class=Jury)
+    env.reset(num_players=2, seed=42)
+    env.step("Opening")
+    env.step("Closing")
+    assert len(calls) == 2
+    record = json.loads(json.dumps(env.record()))
+    replayed = ta.replay(record)
+    assert len(calls) == 2
+    assert replayed.jury is None
+    assert replayed.state.rewards == env.state.rewards
+    assert replayed.game_state == env.game_state
+
+
+def test_player_bounds_are_validated():
     env = DebateEnv(jury_class=_TieJury)
     with pytest.raises(ValueError):
         env.reset(num_players=1)

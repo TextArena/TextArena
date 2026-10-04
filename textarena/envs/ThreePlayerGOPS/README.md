@@ -12,9 +12,9 @@ rounds ([rules](https://en.wikipedia.org/wiki/Goofspiel)). It is the three-playe
 
 | Env ID | Parameters |
 | --- | --- |
-| `ThreePlayerGOPS-v0` | defaults |
+| `ThreePlayerGOPS-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `ThreePlayerGOPS-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `ThreePlayerGOPS-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

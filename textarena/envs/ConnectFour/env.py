@@ -11,22 +11,12 @@ class ConnectFourEnv(ta.GameEnv):
     mdp_includes_actions = False
     action_pattern = r"(?i)^(?:col\s*)?([0-9]+)$"
 
-    def __init__(self, is_open: bool = True, num_rows: int = 6, num_cols: int = 7):
-        """
-        Args:
-            is_open (bool): If True, the game state is visible to the players.
-            num_rows (int): Number of rows in the game board.
-            num_cols (int): Number of columns in the game board.
-        """
-        if not isinstance(is_open, bool):
-            raise ValueError("is_open must be a boolean")
-        if not isinstance(num_rows, int) or isinstance(num_rows, bool) or num_rows < 1:
-            raise ValueError("num_rows must be a positive integer")
-        if not isinstance(num_cols, int) or isinstance(num_cols, bool) or num_cols < 1:
-            raise ValueError("num_cols must be a positive integer")
-        self.is_open = is_open
-        self.num_rows = num_rows
-        self.num_cols = num_cols
+    is_open = ta.Param(True, "Show the board before every move. False gives the blind variant.")
+    num_rows = ta.Param(
+        6, "The number of rows on the board. A board shorter than four cells in both directions can only end in a draw.",
+        min=1,
+    )
+    num_cols = ta.Param(7, "The number of columns on the board.", min=1)
 
     @property
     def action_format(self) -> str:

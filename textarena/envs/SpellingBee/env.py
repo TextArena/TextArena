@@ -1,5 +1,5 @@
 import re
-from typing import Any, Callable, Dict, Optional, Union
+from typing import Any, Dict, Optional, Union
 
 import textarena as ta
 from textarena.envs.SpellingBee.renderer import create_board_str
@@ -15,18 +15,14 @@ class SpellingBeeEnv(ta.GameEnv):
     max_action_chars = 128
     _ACTION_RE = re.compile(rf"[A-Za-z]{{1,{max_word_chars}}}")
 
-    def __init__(self, num_letters: int, is_word: Callable[[str], bool] = is_english_word):
-        """
-        Args:
-            num_letters (int): Number of unique allowed letters.
-            is_word (Callable[[str], bool]): Decides whether a lowercase word counts as English.
-        """
-        if isinstance(num_letters, bool) or not isinstance(num_letters, int) or not 1 <= num_letters <= 26:
-            raise ValueError("num_letters must be an integer from 1 through 26.")
-        if not callable(is_word):
-            raise TypeError("is_word must be a function that takes a word and returns whether it is valid.")
-        self.num_letters = num_letters
-        self.is_word = is_word
+    num_letters = ta.Param(7, "The size of the letter set.", min=1, max=26)
+    is_word = ta.Param(
+        is_english_word,
+        "A function that receives a lowercase word and returns whether it counts, for example to use a custom word "
+        "list. The default is `is_english_word` from `textarena/utils/word_lists.py`. If it raises an exception, the "
+        "submission is not counted and the player is asked to retry.",
+        type=object, check=callable, rule="a function that takes a word and returns whether it counts",
+    )
 
     def get_board_str(self): return create_board_str(game_state=self.game_state)
 

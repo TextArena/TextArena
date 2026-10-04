@@ -200,11 +200,9 @@ def test_shortening_the_ladder_scores_without_matching_more_letters():
 @pytest.mark.parametrize(
     "kwargs",
     [
-        {"min_distance": 0, "max_distance": 2, "max_turns": 3},
         {"min_distance": 4, "max_distance": 3, "max_turns": 4},
         {"min_distance": 4, "max_distance": 5, "max_turns": 3},
         {"min_distance": 3, "max_distance": 5, "max_turns": 4},
-        {"min_distance": 1, "max_distance": 2, "max_turns": 0},
     ],
 )
 def test_invalid_distance_and_turn_bounds_are_rejected(kwargs):

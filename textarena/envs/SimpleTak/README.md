@@ -10,9 +10,9 @@ connected path of their own stones wins.
 
 | Env ID | Parameters |
 | --- | --- |
-| `SimpleTak-v0` | `board_size=4` |
+| `SimpleTak-v1` | `board_size=4` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `SimpleTak-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("SimpleTak-v0", board_size=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `SimpleTak-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("SimpleTak-v1", board_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -57,7 +57,9 @@ show their number) and the list of available cells. Both players see every place
 
 ## Parameters
 
-- `board_size` (default `5`): side length of the board; a positive integer.
+<!-- BEGIN GENERATED: parameters -->
+- `board_size` (default `5`): The side length of the board. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

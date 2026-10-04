@@ -13,21 +13,16 @@ class PigDiceEnv(ta.GameEnv):
     action_pattern = r"(?i)^(?P<action>roll|hold)$"
     action_format = "either 'roll' to roll the die or 'hold' to bank your turn total"
 
-    def __init__(self, winning_score: int = 100, max_turns: int = 500):
-        """
-        Args:
-            winning_score (int): The score needed to win.
-            max_turns (int): Maximum number of turns before the game ends.
-        """
-        if type(winning_score) is not int or winning_score < 1:
-            raise ValueError("winning_score must be a positive integer.")
-        if winning_score > self.MAX_WINNING_SCORE:
-            raise ValueError(f"winning_score cannot exceed {self.MAX_WINNING_SCORE}.")
-        # A cap is required: two players who only hold (or only roll) would otherwise never finish.
-        if type(max_turns) is not int or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer.")
-        self.winning_score = winning_score
-        self.max_turns = max_turns
+    winning_score = ta.Param(100, "The banked score needed to win.", min=1, max=MAX_WINNING_SCORE)
+    # A cap is required: two players who only hold (or only roll) would otherwise never finish.
+    max_turns = ta.Param(
+        500, "The total number of actions, counting every roll and hold by both players, before the game is decided "
+             "by banked score. Since rolls count as well, a configuration whose `max_turns` is small relative to "
+             "`winning_score` is usually decided at the limit rather than by reaching the target.", min=1,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.roll_value = None
 
     def setup(self) -> Dict[str, Any]:

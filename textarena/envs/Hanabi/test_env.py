@@ -30,12 +30,12 @@ def test_reset_state():
 
 
 def test_registered_default_and_mdp_variants():
-    assert ta.make("Hanabi-v0").env.__class__ is HanabiEnv
-    assert ta.make("Hanabi-v0-mdp").env.__class__ is HanabiEnv
+    assert ta.make("Hanabi-v1").env.__class__ is HanabiEnv
+    assert ta.make("Hanabi-v1-mdp").env.__class__ is HanabiEnv
 
 
 def test_registered_env_starts_with_three_fuse_tokens():
-    env = ta.make("Hanabi-v0")
+    env = ta.make("Hanabi-v1")
     env.reset(num_players=2, seed=0)
     assert env.state.game_state["fuse_tokens"] == 3
 
@@ -327,17 +327,3 @@ def test_card_count_is_conserved_across_play_and_discard():
     gs["info_tokens"] = max(0, gs["info_tokens"] - 1)
     env.step("Discard 0")
     assert represented_cards() == 50
-
-
-@pytest.mark.parametrize(
-    ("kwargs", "message"),
-    [
-        ({"info_tokens": -1}, "info_tokens"),
-        ({"info_tokens": True}, "info_tokens"),
-        ({"fuse_tokens": 0}, "fuse_tokens"),
-        ({"fuse_tokens": False}, "fuse_tokens"),
-    ],
-)
-def test_invalid_token_configuration_is_rejected(kwargs, message):
-    with pytest.raises(ValueError, match=message):
-        HanabiEnv(**kwargs)

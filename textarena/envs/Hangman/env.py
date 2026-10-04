@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Union
 
 import textarena as ta
 from textarena.envs.Hangman.renderer import create_board_str
@@ -14,15 +14,11 @@ class HangmanEnv(ta.GameEnv):
     action_format = "a single letter or the entire word, for example 'L' or 'LIGHT'"
     snapshot_excluded_attributes = ("word_list",)
 
-    def __init__(self, hardcore: Optional[bool] = False):
-        """
-        Args:
-            hardcore: Draw the secret word from every dictionary headword instead of Basic English.
-        """
-        if not isinstance(hardcore, bool):
-            raise ValueError("hardcore must be a boolean.")
-        self.hardcore = hardcore
-        source_words = get_headwords() if hardcore else get_basic_english_words()
+    hardcore = ta.Param(False, "Draw the secret word from every dictionary headword instead of Basic English.")
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        source_words = get_headwords() if self.hardcore else get_basic_english_words()
         self.word_list = sorted(word for word in source_words if len(word) >= 3)
         if not self.word_list:
             raise ValueError("The selected dictionary contains no playable Hangman words.")

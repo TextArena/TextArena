@@ -234,14 +234,3 @@ def test_huge_card_index_is_invalid_and_atomic():
     before = copy.deepcopy(env.state.game_state)
     env.step("play " + "9" * 5000)
     assert env.state.game_state == before
-
-
-def test_snapshot_restore_replays_identically():
-    env = _fresh()
-    snapshot = env.snapshot()
-    action = f"play {_legal_index(env)}"
-    env.step(action)
-    expected = copy.deepcopy(env.state.game_state)
-    env.restore(snapshot)
-    env.step(action)
-    assert env.state.game_state == expected

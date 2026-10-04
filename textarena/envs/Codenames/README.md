@@ -11,10 +11,10 @@ word association, modelling a teammate's reasoning, and risk management.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Codenames-v0` | `hardcore=False` |
-| `Codenames-v0-hardcore` | `hardcore=True` |
+| `Codenames-v1` | `hardcore=False` |
+| `Codenames-v1-hardcore` | `hardcore=True` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Codenames-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Codenames-v0", hardcore=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Codenames-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Codenames-v1", hardcore=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -61,9 +61,10 @@ also shows the active clue and how many guesses are left, and every board shows 
 
 ## Parameters
 
-- `hardcore` (default `False`): draws board words from the list built from NLTK's full English word list (29,406
-  words) instead of the one built from its Basic English list (423 words), which produces rarer words.
-- `max_turns` (default `80`): total number of moves (clues and guesses) before the turn-limit result applies.
+<!-- BEGIN GENERATED: parameters -->
+- `hardcore` (default `False`): Draw board words from the list built from NLTK's full English word list (29,406 words) instead of the one built from its Basic English list (423 words), which produces rarer words.
+- `max_turns` (default `80`): The total number of moves (clues and guesses) before the turn-limit result applies. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

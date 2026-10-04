@@ -51,7 +51,7 @@ class Config:
     lora_rank: int = 32
 
     # environments (during training every seat is played by the current policy)
-    train_envs: list[EnvSpec] = field(default_factory=lambda: [EnvSpec("SimpleTak-v0-mdp")])
+    train_envs: list[EnvSpec] = field(default_factory=lambda: [EnvSpec("SimpleTak-v1-mdp")])
     eval_envs: list[EnvSpec] = field(default_factory=list)  # policy vs. frozen step-0 weights
 
     # optimization
@@ -216,7 +216,7 @@ async def train(cfg: Config) -> None:
 if __name__ == "__main__":
     asyncio.run(train(Config(
         model_name="thinkingmachines/Inkling-Small",
-        train_envs=[EnvSpec("SimpleTak-v0-mdp", num_players=2)],
-        eval_envs=[EnvSpec("SimpleTak-v0-mdp", num_players=2), EnvSpec("KuhnPoker-v0-mdp", num_players=2)],
+        train_envs=[EnvSpec("SimpleTak-v1-mdp", num_players=2)],
+        eval_envs=[EnvSpec("SimpleTak-v1-mdp", num_players=2), EnvSpec("KuhnPoker-v1-mdp", num_players=2)],
         wandb_project=None,  # set to a project name to enable wandb logging
     )))

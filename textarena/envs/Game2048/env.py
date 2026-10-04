@@ -9,32 +9,16 @@ class Game2048Env(ta.GameEnv):
     min_players = 1
     max_players = 1
     mdp_includes_actions = False
-    DEFAULT_BOARD_SIZE = 4
     MAX_TARGET_TILE = 65536
     CELL_W = 6
     ACTIONS = {"UP": 0, "DOWN": 1, "LEFT": 2, "RIGHT": 3}
     _ACTION_RE = re.compile(r"(?P<direction>[A-Za-z]+)")
 
-    def __init__(self, target_tile: int = 2048, board_size: int = None):
-        if (
-            not isinstance(target_tile, int)
-            or isinstance(target_tile, bool)
-            or target_tile < 4
-            or target_tile & (target_tile - 1)
-        ):
-            raise ValueError("target_tile must be a power of two greater than or equal to 4")
-        if target_tile > self.MAX_TARGET_TILE:
-            raise ValueError(f"target_tile cannot exceed {self.MAX_TARGET_TILE}")
-        self.target_tile = target_tile
-        self.board_size = board_size if board_size is not None else self.DEFAULT_BOARD_SIZE
-
-        # Validate board size
-        if not isinstance(self.board_size, int) or isinstance(self.board_size, bool):
-            raise ValueError("Board size must be an integer")
-        if self.board_size < 2:
-            raise ValueError("Board size must be at least 2")
-        if self.board_size > 10:
-            raise ValueError("Board size cannot exceed 10 for practical reasons")
+    target_tile = ta.Param(
+        2048, "The tile that wins.", min=4, max=MAX_TARGET_TILE, check=lambda tile: tile & (tile - 1) == 0,
+        rule=f"a power of two from 4 to {MAX_TARGET_TILE}",
+    )
+    board_size = ta.Param(4, "The board's side length.", min=2, max=10)
 
     def setup(self) -> Dict[str, Any]:
         board = [[0] * self.board_size for _ in range(self.board_size)]

@@ -10,9 +10,9 @@ majority of those last tricks wins ([rules](https://www.pagat.com/whist/german_w
 
 | Env ID | Parameters |
 | --- | --- |
-| `GermanWhist-v0` | defaults |
+| `GermanWhist-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `GermanWhist-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `GermanWhist-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

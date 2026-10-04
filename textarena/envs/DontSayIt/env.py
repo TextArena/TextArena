@@ -1,6 +1,6 @@
 import re
 import unicodedata
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Union
 
 import textarena as ta
 from textarena.utils.word_lists import get_basic_english_words, get_headwords
@@ -31,29 +31,22 @@ class DontSayItEnv(ta.GameEnv):
             char for char in normalized if unicodedata.category(char) != "Cf"
         )
 
-    def __init__(self, max_turns: Optional[int], hardcore: Optional[bool] = False):
-        """
-        Args:
-            hardcore (bool): If True, draw secret words from every headword of the bundled dictionaries;
-                otherwise from the 750 nouns and adjectives of Ogden's Basic English. Both lists are
-                bundled, so a seed picks the same words on every machine.
-            max_turns (int): Maximum number of turns before the game ends in a draw.
-        """
-        if max_turns is not None and (
-            not isinstance(max_turns, int)
-            or isinstance(max_turns, bool)
-            or max_turns < 2
-            or max_turns % 2 != 0
-        ):
-            raise ValueError("max_turns must be an even integer of at least 2, or None.")
-        if not isinstance(hardcore, bool):
-            raise ValueError("hardcore must be a boolean.")
-        self.hardcore = hardcore
-        if hardcore:
+    max_turns = ta.Param(
+        20, "The total number of messages, counting both players, before the game is a draw. `None` means no limit.",
+        min=2, optional=True, check=lambda turns: turns % 2 == 0, rule="an even integer of at least 2",
+    )
+    hardcore = ta.Param(
+        False, "Draw secret words from every headword of the bundled dictionaries (about 38,700 base words of 3 or more "
+               "letters, many of them rare, such as `oakum` or `glyceride`) instead of the Basic English list (750 "
+               "everyday words, such as `apple`, `bridge`, or `angry`).",
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.hardcore:
             self.word_list = sorted(get_headwords())
         else:
             self.word_list = sorted(word for word in get_basic_english_words() if word not in OGDEN_OPERATIONS)
-        self.max_turns = max_turns
 
     def setup(self) -> Dict[str, Any]:
         first, second = self.rng.sample(self.word_list, 2)

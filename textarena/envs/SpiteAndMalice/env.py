@@ -13,10 +13,6 @@ class SpiteAndMaliceEnv(ta.GameEnv):
     mdp_includes_actions = False
     broadcast_actions = False  # raw actions are echoed only to their author
 
-    def __init__(self):
-        """ Initialize the Spite and Malice environment """
-        pass
-
     @property
     def terminal_render_keys(self):
         return ["rendered_board", "player_turn"]

@@ -17,21 +17,15 @@ class PokerEnv(ta.GameEnv):
     _BET_RE = re.compile(r"^bet\s+(\d+)$", re.IGNORECASE)
     _RAISE_RE = re.compile(r"^raise\s+(\d+)$", re.IGNORECASE)
 
-    def __init__(self, num_rounds: int = 10, starting_chips: int = 1_000, small_blind: int = 10, big_blind: int = 20):
-        for name, value in (
-            ("num_rounds", num_rounds),
-            ("starting_chips", starting_chips),
-            ("small_blind", small_blind),
-            ("big_blind", big_blind),
-        ):
-            if not isinstance(value, int) or isinstance(value, bool) or value < 1:
-                raise ValueError(f"{name} must be a positive integer")
-        if small_blind > big_blind:
+    num_rounds = ta.Param(10, "The number of hands.", min=1)
+    starting_chips = ta.Param(1_000, "The number of chips per player at the start.", min=1)
+    small_blind = ta.Param(10, "The small blind; it may not exceed the big blind.", min=1)
+    big_blind = ta.Param(20, "The big blind.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.small_blind > self.big_blind:
             raise ValueError("small_blind cannot exceed big_blind")
-        self.num_rounds = num_rounds
-        self.starting_chips = starting_chips
-        self.small_blind = small_blind
-        self.big_blind = big_blind
 
         self.suits = ["♠", "♥", "♦", "♣"]
         self.ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]

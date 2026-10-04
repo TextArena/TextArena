@@ -12,9 +12,9 @@ repeated rounds.
 
 | Env ID | Parameters |
 | --- | --- |
-| `PublicGoodsGame-v0` | `num_rounds=3`, `communication_turns=3`, `endowment=20`, `multiplication_factor=1.5`, `num_players=3` |
+| `PublicGoodsGame-v1` | `num_rounds=3`, `communication_turns=3`, `endowment=20`, `multiplication_factor=1.5`, `default_num_players=3` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `PublicGoodsGame-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("PublicGoodsGame-v0", num_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `PublicGoodsGame-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("PublicGoodsGame-v1", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -62,11 +62,13 @@ gets `+1`.
 
 ## Parameters
 
-- `num_rounds` (default `5`): number of rounds.
-- `communication_turns` (default `3`): simultaneous message turns before each decision; `0` skips communication.
-- `endowment` (default `20`): tokens each player receives every round, which is also the maximum contribution.
-- `multiplication_factor` (default `1.5`): factor applied to the pot before it is shared.
-- `num_players` (default `4`): number of players used when `reset()` is called without `num_players`.
+<!-- BEGIN GENERATED: parameters -->
+- `num_rounds` (default `5`): The number of rounds. Accepts a positive integer.
+- `communication_turns` (default `3`): The simultaneous message turns before each decision. With 0, communication is skipped. Accepts a non-negative integer.
+- `endowment` (default `20`): The tokens each player receives every round, which is also the maximum contribution. Accepts a non-negative integer.
+- `multiplication_factor` (default `1.5`): The factor applied to the pot before it is shared. Accepts a finite non-negative number.
+- `default_num_players` (default `4`): The number of players used when `reset()` is called without `num_players`. Accepts an integer from 2 to 15.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

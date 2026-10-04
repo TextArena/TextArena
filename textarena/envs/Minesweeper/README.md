@@ -11,10 +11,10 @@ always safe.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Minesweeper-v0` | `rows=8`, `cols=8`, `num_mines=10`, `max_turns=100` |
-| `Minesweeper-v0-hard` | `rows=12`, `cols=12`, `num_mines=30`, `max_turns=100` |
+| `Minesweeper-v1` | `rows=8`, `cols=8`, `num_mines=10`, `max_turns=100` |
+| `Minesweeper-v1-hard` | `rows=12`, `cols=12`, `num_mines=30`, `max_turns=100` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Minesweeper-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Minesweeper-v0", rows=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Minesweeper-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Minesweeper-v1", rows=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -58,10 +58,12 @@ Partial credit is the fraction of safe cells revealed, not counting the area ope
 
 ## Parameters
 
-- `rows`, `cols` (defaults `8`, `8`): the board size, at most 10,000 cells.
-- `num_mines` (default `10`): the number of mines. It must leave room for the mine-free area around the first reveal,
-  so it can be at most `rows × cols − 9` on boards of at least 3×3.
-- `max_turns` (default `100`): the maximum number of reveals.
+<!-- BEGIN GENERATED: parameters -->
+- `rows` (default `8`): The number of rows. The board can have at most 10,000 cells. Accepts an integer of at least 1.
+- `cols` (default `8`): The number of columns. Accepts an integer of at least 1.
+- `num_mines` (default `10`): The number of mines. It must leave room for the mine-free area around the first reveal, so it can be at most `rows × cols − 9` on boards of at least 3×3. Accepts an integer of at least 0.
+- `max_turns` (default `100`): The maximum number of reveals. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

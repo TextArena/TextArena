@@ -10,9 +10,9 @@ last player with influence wins ([rules](https://www.qugs.org/rules/r131357.pdf)
 
 | Env ID | Parameters |
 | --- | --- |
-| `Coup-v0` | defaults |
+| `Coup-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Coup-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Coup-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

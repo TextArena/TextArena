@@ -11,9 +11,9 @@ coordinates.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Slitherlink-v0` | `rows=4`, `cols=4`, `max_turns=200` |
+| `Slitherlink-v1` | `rows=4`, `cols=4`, `max_turns=200` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Slitherlink-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Slitherlink-v0", rows=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Slitherlink-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Slitherlink-v1", rows=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -80,8 +80,11 @@ ends and is never shown during play, since it would reveal the hidden loop.
 
 ## Parameters
 
-- `rows`, `cols` (defaults `4`, `4`): the grid size in cells, each at least 2, at most 10,000 cells in total.
-- `max_turns` (default `200`): the maximum number of toggles.
+<!-- BEGIN GENERATED: parameters -->
+- `rows` (default `4`): The number of rows of cells. The grid can have at most 10,000 cells. Accepts an integer of at least 2.
+- `cols` (default `4`): The number of columns of cells. Accepts an integer of at least 2.
+- `max_turns` (default `200`): The maximum number of toggles. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

@@ -1,16 +1,16 @@
 """ Root __init__ of textarena """
 
-from textarena.core import Env, Wrapper, ObservationWrapper, RenderWrapper, ActionWrapper, Agent, AgentWrapper, Message, Observations, Rewards, Info, GAME_ID, ObservationType, extract_action
-from textarena.engine import GameEnv, GameState, Outcome, Invalid, Retryable
-from textarena.envs.registration import make, register, pprint_registry_detailed, check_env_exists
+from textarena.core import Env, Wrapper, ObservationWrapper, RenderWrapper, Agent, Message, Observations, Rewards, Info, GAME_ID, ObservationType, extract_action
+from textarena.engine import GameEnv, GameState, Outcome, Invalid, Retryable, Param, replay
+from textarena.envs.registration import make, register
 from textarena import wrappers, agents, envs, utils
 
 __all__ = [
-    "Env", "Wrapper", "ObservationWrapper", "RenderWrapper", "ActionWrapper", "Agent", "AgentWrapper",
+    "Env", "Wrapper", "ObservationWrapper", "RenderWrapper", "Agent",
     "Message", "Observations", "Rewards", "Info", "GAME_ID", "ObservationType", # core
-    "GameEnv", "GameState", "Outcome", "Invalid", "Retryable", # engine
+    "GameEnv", "GameState", "Outcome", "Invalid", "Retryable", "Param", "replay", # engine
     "extract_action", # action-tag extraction (model output -> env action)
-    "make", "register", "pprint_registry_detailed", "check_env_exists", # registration
+    "make", "register", # registration
     "envs", "utils", "wrappers", "agents", # module folders
 ]
 

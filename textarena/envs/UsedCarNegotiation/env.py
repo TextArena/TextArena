@@ -1,5 +1,5 @@
 import os, re
-from typing import Any, Dict, Optional, Tuple, Union
+from typing import Any, Dict, Optional, Union
 
 import textarena as ta
 
@@ -8,21 +8,22 @@ class UsedCarNegotiationEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
 
-    def __init__(self, max_rounds: int = 10, batna: Optional[Tuple[str, str]] = None):
-        if not isinstance(max_rounds, int) or isinstance(max_rounds, bool) or max_rounds <= 0:
-            raise ValueError("max_rounds must be a positive integer")
-        if batna is not None and (
-            not isinstance(batna, (tuple, list))
-            or len(batna) != 2
-            or any(
-                not isinstance(position, str) or position not in {"strong", "weak"}
-                for position in batna
-            )
-        ):
-            raise ValueError("batna must contain exactly two values chosen from 'strong' and 'weak'")
-        self.max_rounds = max_rounds; self.max_turns = max_rounds
+    max_rounds = ta.Param(
+        10, "The total number of actions by both players (including rejections) before the game ends without a deal.",
+        min=1,
+    )
+    batna = ta.Param(
+        None,
+        "The `(buyer, seller)` strength of each role's alternative. `None` picks `(\"strong\", \"weak\")`, "
+        "`(\"weak\", \"strong\")`, or `(\"strong\", \"strong\")` at random.",
+        type=tuple, check=lambda batna: len(batna) == 2 and all(position in ("strong", "weak") for position in batna),
+        rule="two values, each \"strong\" or \"weak\"",
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.max_turns = self.max_rounds
         self.max_price = 10_000; self.min_price = 7_000
-        self._configured_batna = tuple(batna) if batna is not None else None
         self.game_dir = os.path.dirname(__file__)
         with open(os.path.join(self.game_dir, "instructions", "blue_book.txt"), "r") as f: self.blue_book = f.read()
         self.offer_pattern = re.compile(r"\s*Offer\s*:\s*\$?(?P<price>\d+)\s*", re.IGNORECASE)
@@ -40,7 +41,7 @@ class UsedCarNegotiationEnv(ta.GameEnv):
         return self.game_state["player_instructions"]
 
     def setup(self) -> Dict[str, Any]:
-        batna = self._configured_batna or self.rng.choice([("strong", "weak"), ("weak", "strong"), ("strong", "strong")])
+        batna = self.batna or self.rng.choice([("strong", "weak"), ("weak", "strong"), ("strong", "strong")])
         batna_by_role = {"buyer": batna[0], "seller": batna[1]}
         roles = ["buyer", "seller"]
         player_roles = {0: roles.pop(self.rng.randint(0, 1)), 1: roles.pop()}

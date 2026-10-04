@@ -1,6 +1,5 @@
 """Offline deterministic tests for the SimpleNegotiation environment."""
 import copy
-import time
 
 import pytest
 
@@ -147,25 +146,6 @@ def test_private_board_is_pure_and_offer_labels_are_dynamic():
         assert str(p0_ore_value) not in hidden_section
 
 
-def test_seeded_reset_snapshot_and_configuration_bounds():
-    first, second = _fresh(), _fresh()
-    assert first.game_state["player_resources"] == second.game_state["player_resources"]
-    assert first.game_state["player_values"] == second.game_state["player_values"]
-    snapshot = first.snapshot()
-    first.step("Offer: 1 Wheat -> 1 Ore")
-    first.restore(snapshot)
-    assert first.game_state["current_offer"] is None
-    assert first.state.turn == 0
-    with pytest.raises(ValueError):
-        SimpleNegotiationEnv(max_turns=0)
-
-
-@pytest.mark.parametrize("max_turns", [None, -1, True, 2.5])
-def test_max_turns_must_be_a_positive_integer_so_the_game_ends(max_turns):
-    with pytest.raises(ValueError, match="max_turns"):
-        SimpleNegotiationEnv(max_turns=max_turns)
-
-
 def _latest_board(env):
     _, observation = env.get_observation()
     return [message for _, message, kind in observation if kind == ta.ObservationType.GAME_BOARD][-1]
@@ -216,23 +196,3 @@ def test_chat_lines_that_merely_mention_commands_are_chat():
     assert not done
     assert env.state.error_count == 0
     assert env.state.game_state["trade_history"][-1]["outcome"] == "Accepted"
-
-
-@pytest.mark.parametrize(
-    "action",
-    [
-        " " * 32_000 + "x",
-        "Offer: 1 Wheat" + " " * 32_000 + "x",
-        "Offer: " + "9" * 32_000 + "x -> 1 Ore",
-        "Offer: " + "!" * 32_000 + "x -> 1 Ore",
-        "[" + " " * 32_000 + "x",
-    ],
-)
-def test_huge_or_padded_input_is_handled_quickly(action):
-    env = _fresh()
-    before = copy.deepcopy(env.game_state)
-    start = time.perf_counter()
-    env.step(action)
-    assert time.perf_counter() - start < 1.0
-    assert env.game_state["current_offer"] is None
-    assert env.game_state["player_resources"] == before["player_resources"]

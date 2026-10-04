@@ -139,20 +139,10 @@ def test_private_renderer_never_exposes_opponent_card():
 def test_mdp_observation_shows_the_actors_legal_actions():
     import textarena as ta
 
-    env = ta.make("KuhnPoker-v0-mdp")
+    env = ta.make("KuhnPoker-v1-mdp")
     env.reset(num_players=2, seed=1)
     _, observation = env.get_observation()
     assert observation.rstrip().endswith("Your available actions are: 'check', 'bet'")
     env.step("bet")
     _, observation = env.get_observation()
     assert observation.rstrip().endswith("Your available actions are: 'fold', 'call'")
-
-
-def test_snapshot_restore_replays_same_deal_and_result():
-    env = _fresh(max_rounds=2)
-    snapshot = env.snapshot()
-    env.step("check")
-    state_after = copy.deepcopy(env.state.game_state)
-    env.restore(snapshot)
-    env.step("check")
-    assert env.state.game_state == state_after

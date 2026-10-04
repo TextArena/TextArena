@@ -10,11 +10,11 @@ class KuhnPokerEnv(ta.GameEnv):
     max_players = 2
     mdp_includes_actions = False
 
-    def __init__(self, max_rounds: int = 1):
-        if not isinstance(max_rounds, int) or isinstance(max_rounds, bool) or max_rounds < 1:
-            raise ValueError("max_rounds must be a positive integer")
+    max_rounds = ta.Param(1, "The number of rounds in the match.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.ante = 1
-        self.max_rounds = max_rounds
         self.legal_action_tree = {"check": {"check": "showdown", "bet": {"fold": "loser", "call": "showdown"}}, "bet": {"fold": "loser", "call": "showdown"}}
 
     def get_board_str(self):

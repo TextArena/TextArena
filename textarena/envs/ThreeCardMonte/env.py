@@ -10,13 +10,8 @@ class ThreeCardMonteEnv(ta.GameEnv):
     mdp_includes_actions = False
     _ACTION_RE = re.compile(r"(\d+)")
 
-    def __init__(self, num_cups: int = 3, steps: int = 10):
-        if isinstance(num_cups, bool) or not isinstance(num_cups, int) or num_cups < 3:
-            raise ValueError("num_cups must be an integer of at least 3")
-        if isinstance(steps, bool) or not isinstance(steps, int) or steps < 0:
-            raise ValueError("steps must be a non-negative integer")
-        self.num_cups = num_cups
-        self.steps = steps
+    num_cups = ta.Param(3, "The number of cups.", min=3)
+    steps = ta.Param(10, "The number of swaps.", min=0)
 
     @property
     def ball_pos(self) -> int:

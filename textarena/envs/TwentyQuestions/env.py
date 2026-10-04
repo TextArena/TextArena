@@ -26,34 +26,30 @@ class TwentyQuestionsEnv(ta.GameEnv):
         re.IGNORECASE,
     )
 
-    def __init__(
-        self,
-        hardcore: bool = False,
-        max_turns: int = 21,
-        gamemaster: Optional[Any] = None,
-        words_path: Optional[str] = None,
-    ):
-        """
-        Args:
-            hardcore: Whether to use more challenging words
-            max_turns: Maximum number of turns allowed in the game
-        """
-        if not isinstance(hardcore, bool):
-            raise TypeError("hardcore must be a boolean.")
-        if isinstance(max_turns, bool) or not isinstance(max_turns, int) or max_turns < 2:
-            raise ValueError("max_turns must be an integer of at least 2 (questions plus a final guess).")
-        if gamemaster is not None and not callable(gamemaster):
-            raise TypeError("gamemaster must be callable.")
-        self.hardcore = hardcore
-        self.max_turns = max_turns
+    hardcore = ta.Param(
+        False, "Draw from the hardcore list (150 uncommon words such as `astrolabe`, `sommelier`, or `catacombs`) "
+               "instead of the basic list (257 everyday words such as `library`, `nurse`, or `banana`).",
+    )
+    max_turns = ta.Param(
+        21, "The total number of turns. The player may ask `max_turns - 1` questions, and the final turn is reserved "
+            "for the guess.", min=2,
+    )
+    gamemaster = ta.Param(
+        None, "The game master that answers the questions, called with a prompt string and returning `Yes`, `No`, or "
+              "`I don't know`. Inject one to play offline or with a different model; without one, questions go to "
+              "OpenRouter `openai/gpt-4o`.",
+        type=object, check=callable, rule="a callable",
+    )
+    words_path = ta.Param(
+        None, "An alternative word file with `basic` and `hardcore` sections, each mapping theme names to lists of "
+              "words. Without it, the bundled `twenty_questions_words.json` is used.",
+        type=str,
+    )
 
-        # The default network agent is created only when a question is asked. This
-        # keeps construction/reset and locally-scored guesses usable offline.
-        self.gamemaster = gamemaster
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.gamemaster_options = ["Yes", "No", "I don't know"]
-
-        # Load the word list
-        self.word_list = self._load_words(words_path)
+        self.word_list = self._load_words(self.words_path)
 
     def _load_words(self, words_path: Optional[str] = None):
         try:
@@ -162,6 +158,9 @@ class TwentyQuestionsEnv(ta.GameEnv):
                 ) from exc
         return self.gamemaster
 
+    def _ask_gamemaster(self, prompt: str) -> Any:
+        return self._get_gamemaster()(prompt)
+
     def get_gamemaster_response(self, action: str) -> str:
         # Validate gamemaster state
         if self.gamemaster_context is None: raise ValueError("Gamemaster context is not set.")
@@ -170,7 +169,7 @@ class TwentyQuestionsEnv(ta.GameEnv):
         options = ", ".join(f"'{opt}'" for opt in self.gamemaster_options) # Format available response options
         history = "\n".join(f"Q: {q}\nA: {a}" for q, a in self.gamemaster_history) # Construct conversation history
         prompt = (f"{self.gamemaster_context}\n{history}\n\nQ: {action}\nOptions: {options}\n\nPlease respond with the most appropriate option.") # Create prompt
-        response = self._get_gamemaster()(prompt)
+        response = self.ask(self._ask_gamemaster, prompt)
         if not isinstance(response, str) or len(response) > self.max_gamemaster_response_chars:
             raise ValueError("gamemaster returned an invalid answer")
         match = self._GAMEMASTER_RESPONSE_RE.fullmatch(response)

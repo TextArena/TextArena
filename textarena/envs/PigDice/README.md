@@ -11,9 +11,9 @@ risk management under chance and adapting to the opponent's score.
 
 | Env ID | Parameters |
 | --- | --- |
-| `PigDice-v0` | `winning_score=100`, `max_turns=100` |
+| `PigDice-v1` | `winning_score=100`, `max_turns=100` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `PigDice-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("PigDice-v0", winning_score=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `PigDice-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("PigDice-v1", winning_score=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -51,8 +51,7 @@ roll, bust, and hold, followed by the updated scores whenever a turn ends. There
 
 ## Parameters
 
-- `winning_score` (default `100`): the banked score needed to win, up to 1,000,000.
-- `max_turns` (default `500`): the total number of actions, counting every roll and hold by both players, before the
-  game is decided by banked score. It must be a positive integer, so every game ends even if both players only hold
-  (or only roll). Since rolls count as well, a configuration whose `max_turns` is small relative to `winning_score` is
-  usually decided at the limit rather than by reaching the target.
+<!-- BEGIN GENERATED: parameters -->
+- `winning_score` (default `100`): The banked score needed to win. Accepts an integer from 1 to 1000000.
+- `max_turns` (default `500`): The total number of actions, counting every roll and hold by both players, before the game is decided by banked score. Since rolls count as well, a configuration whose `max_turns` is small relative to `winning_score` is usually decided at the limit rather than by reaching the target. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->

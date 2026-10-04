@@ -12,11 +12,9 @@ class FifteenPuzzleEnv(ta.GameEnv):
     action_pattern = r"^(?P<direction>[a-zA-Z]+)$"
     action_format = "one of the directions 'up', 'down', 'left' or 'right'"
 
-    def __init__(self, max_turns: int = 50):
-        """ Initialize the Fifteen Puzzle environment """
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
-        self.max_turns = max_turns
+    max_turns = ta.Param(
+        50, "The maximum number of slides. It also sets the scramble length, `min(max_turns, 100)`.", min=1,
+    )
 
     @property
     def board(self):

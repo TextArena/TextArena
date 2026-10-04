@@ -10,7 +10,8 @@ class ThreePlayerGOPSEnv(ta.GameEnv):
     mdp_includes_actions = False
     broadcast_actions = False  # sealed bids: raw actions echoed only to their author
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.full_hand: List[int] = list(range(1, 14))
         self.action_space = re.compile(r"^(a|k|q|j|10|[2-9])$", re.I)
 

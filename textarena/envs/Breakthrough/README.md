@@ -10,10 +10,10 @@ capture every opposing piece, wins ([rules](https://en.wikipedia.org/wiki/Breakt
 
 | Env ID | Parameters |
 | --- | --- |
-| `Breakthrough-v0` | `board_size=8`, `is_open=True` |
-| `Breakthrough-v0-blind` | `board_size=8`, `is_open=False` |
+| `Breakthrough-v1` | `board_size=8`, `is_open=True` |
+| `Breakthrough-v1-blind` | `board_size=8`, `is_open=False` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Breakthrough-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Breakthrough-v0", board_size=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Breakthrough-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Breakthrough-v1", board_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -61,8 +61,10 @@ from the starting setup and the announced moves. Legal moves are not listed.
 
 ## Parameters
 
-- `board_size` (default `8`): side length of the board, from 4 to 26.
-- `is_open` (default `True`): whether the acting player is shown the board before each move.
+<!-- BEGIN GENERATED: parameters -->
+- `is_open` (default `True`): Whether the acting player is shown the board before each move.
+- `board_size` (default `8`): The side length of the board. Accepts an integer from 4 to 26.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

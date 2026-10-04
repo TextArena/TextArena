@@ -16,27 +16,26 @@ class ScenarioPlanningEnv(ta.GameEnv):
     max_strategy_chars = 10_000
     max_jury_size = 100
 
-    def __init__(self, jury_class: Optional[Any] = None, jury_size: Optional[int] = 5, scenarios_path: Optional[str] = None,):
-        """
-        Args:
-            num_judges (int): Number of judges evaluating the strategies.
-            judge_class (ta.JudgeVote): The judge evaluation class.
-            scenarios_path (str): Path to the JSON file containing scenarios.
-        """
-        if jury_class is None:
+    jury_size = ta.Param(5, "The number of judges.", min=1, max=max_jury_size)
+    jury_class = ta.Param(
+        None, "The class or factory called with `options` and `jury_size` (and the env's seeded `rng` if it accepts "
+              "one). The object it returns must provide `evaluate(context)` returning "
+              "`{\"Player 0\": votes, \"Player 1\": votes}`. None uses `OpenRouterJury`.",
+        type=object, check=callable, rule="a callable",
+    )
+    scenarios_path = ta.Param(
+        None, "A JSON file of the form `{\"scenarios\": [\"...\", ...]}` with unique, non-empty scenarios. None uses "
+              "the bundled `scenarios.json`.", type=str,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.jury_class is None:
             from textarena.utils import OpenRouterJury
-            jury_class = OpenRouterJury
-        if not callable(jury_class):
-            raise TypeError("jury_class must be callable.")
-        if (
-            isinstance(jury_size, bool)
-            or not isinstance(jury_size, int)
-            or not 1 <= jury_size <= self.max_jury_size
-        ):
-            raise ValueError(f"jury_size must be an integer from 1 through {self.max_jury_size}.")
-        self._load_scenarios(scenarios_path) # Load scenarios
-        self._jury_class = jury_class
-        self._jury_size = jury_size
+            self._jury_class = OpenRouterJury
+        else:
+            self._jury_class = self.jury_class
+        self._load_scenarios(self.scenarios_path)
         self.judge = None
         self.max_turns = 2
 
@@ -76,7 +75,7 @@ class ScenarioPlanningEnv(ta.GameEnv):
             "Your goal is to propose a strategy for survival in this scenario.\n"
             f"Each player submits exactly one strategy (Player 0 first), at most {self.max_strategy_chars} characters; "
             "the other player never sees it.\n"
-            f"After both players submit their strategies, a panel of {self._jury_size} AI judges votes for the more "
+            f"After both players submit their strategies, a panel of {self.jury_size} AI judges votes for the more "
             "effective and feasible one. The strategy with more votes wins; equal votes are a draw.\n"
             "On your turn, simply type your strategy."
         )
@@ -114,21 +113,7 @@ class ScenarioPlanningEnv(ta.GameEnv):
             f"Player 1's Strategy:\n{strategies[1]}\n\nBased on the above strategies, which player's strategy is more effective and feasible for survival?\n"
             f"Vote for 'Player 0' or 'Player 1'. Provide only the player you vote for."
         )
-        jury_kwargs = {
-            "jury_size": self._jury_size,
-            "options": ["Player 0", "Player 1"],
-        }
-        try:
-            parameters = inspect.signature(self._jury_class).parameters.values()
-        except (TypeError, ValueError):
-            parameters = ()
-        if any(
-            parameter.name == "rng" or parameter.kind is inspect.Parameter.VAR_KEYWORD
-            for parameter in parameters
-        ):
-            jury_kwargs["rng"] = self.rng
-        self.judge = self._jury_class(**jury_kwargs)
-        votes = self.judge.evaluate(context=prompt)
+        votes = self.ask(self._ask_jury, prompt)
         expected = {"Player 0", "Player 1"}
         if not isinstance(votes, dict) or set(votes) != expected:
             raise ValueError("jury result must contain exactly Player 0 and Player 1.")
@@ -141,6 +126,23 @@ class ScenarioPlanningEnv(ta.GameEnv):
         ):
             raise ValueError("jury votes must be finite non-negative numbers.")
         vote_total = sum(float(vote) for vote in votes.values())
-        if not math.isfinite(vote_total) or not 0 < vote_total <= self._jury_size:
+        if not math.isfinite(vote_total) or not 0 < vote_total <= self.jury_size:
             raise ValueError("jury vote total must be positive, finite, and no larger than jury_size.")
         return votes
+
+    def _ask_jury(self, prompt: str) -> Dict[str, float]:
+        jury_kwargs = {
+            "jury_size": self.jury_size,
+            "options": ["Player 0", "Player 1"],
+        }
+        try:
+            parameters = inspect.signature(self._jury_class).parameters.values()
+        except (TypeError, ValueError):
+            parameters = ()
+        if any(
+            parameter.name == "rng" or parameter.kind is inspect.Parameter.VAR_KEYWORD
+            for parameter in parameters
+        ):
+            jury_kwargs["rng"] = self.rng
+        self.judge = self._jury_class(**jury_kwargs)
+        return self.judge.evaluate(context=prompt)

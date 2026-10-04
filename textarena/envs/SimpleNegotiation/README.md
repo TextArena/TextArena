@@ -10,9 +10,9 @@ inventory more by the turn limit wins.
 
 | Env ID | Parameters |
 | --- | --- |
-| `SimpleNegotiation-v0` | `max_turns=10` |
+| `SimpleNegotiation-v1` | `max_turns=10` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `SimpleNegotiation-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("SimpleNegotiation-v0", max_turns=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `SimpleNegotiation-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("SimpleNegotiation-v1", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -69,7 +69,9 @@ full messages and the game's announcements of every offer, acceptance, and rejec
 
 ## Parameters
 
-- `max_turns` (default `10`): turns in the whole game, counting both players.
+<!-- BEGIN GENERATED: parameters -->
+- `max_turns` (default `10`): The turns in the whole game, counting both players. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

@@ -10,9 +10,9 @@ lost challenge costs a die, and the last player with dice wins ([rules](https://
 
 | Env ID | Parameters |
 | --- | --- |
-| `LiarsDice-v0` | `num_dice=5` |
+| `LiarsDice-v1` | `num_dice=5` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `LiarsDice-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("LiarsDice-v0", num_dice=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `LiarsDice-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("LiarsDice-v1", num_dice=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -65,7 +65,9 @@ call removes a die.
 
 ## Parameters
 
-- `num_dice` (default `5`): dice each player starts with.
+<!-- BEGIN GENERATED: parameters -->
+- `num_dice` (default `5`): The number of dice each player starts with. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

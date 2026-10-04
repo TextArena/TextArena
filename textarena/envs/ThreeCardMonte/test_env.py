@@ -29,20 +29,6 @@ def test_reset_requires_exactly_one_player(num_players):
         ThreeCardMonteEnv().reset(num_players=num_players, seed=42)
 
 
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"num_cups": 2},
-        {"num_cups": True},
-        {"steps": -1},
-        {"steps": 1.5},
-    ],
-)
-def test_constructor_rejects_invalid_bounds(kwargs):
-    with pytest.raises(ValueError):
-        ThreeCardMonteEnv(**kwargs)
-
-
 def test_reset_emits_exact_shuffle_count_without_revealing_final_ball():
     env = _fresh(steps=4)
     messages = [message for _, message, _, _ in env.state.events]
@@ -79,16 +65,6 @@ def test_out_of_range_guess_first_invalid_not_terminal():
     assert env.state.error_count == 1
 
 
-def test_huge_numeric_guess_is_invalid_without_integer_conversion_crash():
-    env = _fresh()
-    before = env.ball_pos
-    done, _ = env.step("9" * 10_000)
-    assert not done
-    assert env.ball_pos == before
-    assert env.state.current_player_id == 0
-    assert env.state.error_count == 1
-
-
 def test_second_invalid_move_ends_game_with_numeric_zero_reward():
     env = _fresh()
     done, _ = env.step("cup number two please")
@@ -97,15 +73,3 @@ def test_second_invalid_move_ends_game_with_numeric_zero_reward():
     assert done
     assert isinstance(env.state.rewards[0], float)
     assert env.state.rewards == {0: 0.0}
-
-
-def test_repeat_reset_and_snapshot_restore_rng_state():
-    env = _fresh(num_cups=5, steps=7)
-    first_ball = env.ball_pos
-    snap = env.snapshot()
-    env.step(str((first_ball + 1) % env.num_cups))
-    env.restore(snap)
-    assert not env.state.done
-    assert env.ball_pos == first_ball
-    env.reset(num_players=1, seed=42)
-    assert env.ball_pos == first_ball

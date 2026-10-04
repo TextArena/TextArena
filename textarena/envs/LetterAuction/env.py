@@ -17,27 +17,18 @@ class LetterAuctionEnv(ta.GameEnv):
     mdp_includes_actions = False
     broadcast_actions = False
 
-    def __init__(self, starting_coins: int = 100, max_turns: Optional[int] = None):
-        """
-        Initialize the environment for Letter Auction Game.
+    starting_coins = ta.Param(100, "The coins each player starts with.", min=1)
+    max_turns = ta.Param(
+        None,
+        "An optional cap on the total number of turns (bids, passes, and word submissions; invalid attempts do not "
+        "count). `None` means no cap; the game always ends because bids must rise and coins are limited. The minimum "
+        "is the length of the shortest complete game (two turns per letter plus two word submissions).",
+        type=int, min=MIN_COMPLETE_GAME_TURNS,
+    )
 
-        Args:
-            starting_coins (int): Coins each player starts with.
-            max_turns (Optional[int]): Optional cap on the total number of turns; reaching it ends the game
-                as a draw. Must be at least MIN_COMPLETE_GAME_TURNS, the length of the shortest complete game.
-        """
-        if not isinstance(starting_coins, int) or isinstance(starting_coins, bool) or starting_coins <= 0:
-            raise ValueError("starting_coins must be a positive integer")
-        if max_turns is not None and (
-            not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < MIN_COMPLETE_GAME_TURNS
-        ):
-            raise ValueError(
-                f"max_turns must be None or an integer of at least {MIN_COMPLETE_GAME_TURNS} "
-                "(the length of the shortest complete game)"
-            )
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.letter_values = [1 for _ in range(26)]
-        self.starting_coins = starting_coins
-        self.max_turns = max_turns
 
     @property
     def terminal_render_keys(self):

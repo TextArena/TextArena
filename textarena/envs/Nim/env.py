@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, Optional, Union
 
 import textarena as ta
 from textarena.envs.Nim.renderer import create_board_str
@@ -16,43 +16,41 @@ def _parse_bounded_uint(text: str, maximum: int) -> Optional[int]:
     return int(normalized)
 
 
+MAX_PILES = 100
+MAX_PILE_SIZE = 1_000_000
+
+
+def _valid_piles(piles) -> bool:
+    return 0 < len(piles) <= MAX_PILES and any(piles) and all(
+        type(pile) is int and 0 <= pile <= MAX_PILE_SIZE for pile in piles
+    )
+
+
 class NimEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
     mdp_includes_actions = False
-    MAX_PILES = 100
-    MAX_PILE_SIZE = 1_000_000
+    MAX_PILES = MAX_PILES
+    MAX_PILE_SIZE = MAX_PILE_SIZE
     action_pattern = r"^(?P<pile>[0-9]+)\s+(?P<quantity>[0-9]+)$"
 
-    def __init__(self, piles: List[int] = None):
-        """
-        Args:
-            piles (List[int]): Initial sizes of the piles (e.g. [3, 5, 7]). If None, defaults to [3,4,5].
-        """
-        initial_piles = [3, 4, 5] if piles is None else piles
-        if not isinstance(initial_piles, list) or not initial_piles:
-            raise ValueError("piles must be a non-empty list of non-negative integers.")
-        if any(type(pile) is not int or pile < 0 for pile in initial_piles):
-            raise ValueError("piles must contain only non-negative integers.")
-        if len(initial_piles) > self.MAX_PILES:
-            raise ValueError(f"piles cannot contain more than {self.MAX_PILES} piles.")
-        if any(pile > self.MAX_PILE_SIZE for pile in initial_piles):
-            raise ValueError(f"pile sizes cannot exceed {self.MAX_PILE_SIZE}.")
-        if not any(initial_piles):
-            raise ValueError("At least one pile must contain an object.")
-        self.initial_piles = initial_piles.copy()
+    piles = ta.Param(
+        [3, 4, 5], "The starting pile sizes.", check=_valid_piles,
+        rule=f"a non-empty list of at most {MAX_PILES} integers from 0 to {MAX_PILE_SIZE:,}, holding at least one "
+             "object in total",
+    )
 
     @property
     def action_format(self) -> str:
-        pile = next(index for index, size in enumerate(self.initial_piles) if size)
-        quantity = min(3, self.initial_piles[pile])
+        pile = next(index for index, size in enumerate(self.piles) if size)
+        quantity = min(3, self.piles[pile])
         return (
-            f"a pile number from 0 to {len(self.initial_piles) - 1} and how many objects to remove from it, "
+            f"a pile number from 0 to {len(self.piles) - 1} and how many objects to remove from it, "
             f"separated by a space, for example '{pile} {quantity}'"
         )
 
     def setup(self) -> Dict[str, Any]:
-        return {"piles": self.initial_piles.copy()}
+        return {"piles": list(self.piles)}
 
     def prompt(self, player_id: int) -> str:
         return (

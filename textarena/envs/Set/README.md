@@ -10,9 +10,9 @@ different ([rules](https://en.wikipedia.org/wiki/Set_%28card_game%29)).
 
 | Env ID | Parameters |
 | --- | --- |
-| `Set-v0` | defaults |
+| `Set-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Set-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Set-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

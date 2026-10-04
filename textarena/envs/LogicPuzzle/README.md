@@ -11,10 +11,10 @@ use conditional clues.
 
 | Env ID | Parameters |
 | --- | --- |
-| `LogicPuzzle-v0` | `difficulty="easy"` |
-| `LogicPuzzle-v0-hard` | `difficulty="hard"` |
+| `LogicPuzzle-v1` | `difficulty="easy"` |
+| `LogicPuzzle-v1-hard` | `difficulty="hard"` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `LogicPuzzle-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("LogicPuzzle-v0", difficulty=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `LogicPuzzle-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("LogicPuzzle-v1", difficulty=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -64,8 +64,10 @@ per mark, such as `Marked 'pizza alice O'.`, which does not say whether the mark
 
 ## Parameters
 
-- `difficulty` (default `"easy"`): `"easy"` or `"hard"`, the set of bundled puzzles to draw from.
-- `max_turns` (default `30`): the maximum number of submissions.
+<!-- BEGIN GENERATED: parameters -->
+- `difficulty` (default `"easy"`): The set of bundled puzzles to draw from. Accepts one of 'easy', 'hard'.
+- `max_turns` (default `30`): The maximum number of submissions. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

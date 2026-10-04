@@ -1,8 +1,8 @@
 """The two ways a player can see a game.
 
-- `CurrentTurnObservationWrapper` (``Game-v0``): only the messages produced since the player's previous turn,
+- `CurrentTurnObservationWrapper` (``Game-v1``): only the messages produced since the player's previous turn,
   for agents that keep the conversation history themselves.
-- `MDPObservationWrapper` (``Game-v0-mdp``): everything needed to act in a single observation, so each step is
+- `MDPObservationWrapper` (``Game-v1-mdp``): everything needed to act in a single observation, so each step is
   an MDP step: the prompt, every game message so far and the latest board. Raw player actions are included unless
   the game sets ``mdp_includes_actions = False`` because its board and messages already capture the state.
 """

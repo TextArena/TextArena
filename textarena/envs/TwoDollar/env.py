@@ -10,7 +10,6 @@ Based on the original Two Dollar game used in negotiation research and education
 
 import os
 import json
-import math
 import re
 from typing import Any, Dict, List, Optional, Tuple, Union
 
@@ -42,55 +41,37 @@ class TwoDollarEnv(ta.GameEnv):
     _PROPOSE_LINE_RE = re.compile(r"propose(?![^\s:.!])\s*:?\s*(?P<args>.*)", re.IGNORECASE)
     _AMOUNT_RE = re.compile(r"\$(?P<dollars>[0-9]+)(?:\.(?P<cents>[0-9]{1,2}))?")
 
-    def __init__(self,
-                 player_roles: Optional[List[str]] = None,
-                 total_amount: float = 2.00,
-                 max_rounds: int = 20,
-                 error_allowance: int = 3):
-        """
-        Initialize the Two Dollar environment.
+    player_roles = ta.Param(
+        None,
+        'Two role names, such as `["vanilla", "50_cents"]`, for Players 0 and 1. `None` draws two different roles at '
+        "random. Requesting `x_rounds` with `max_rounds` below 4 raises a `ValueError`.",
+        type=list, check=lambda roles: len(roles) == 2 and all(isinstance(role, str) for role in roles),
+        rule="a list of two role names",
+    )
+    total_amount = ta.Param(
+        2.00, "The amount to split.", check=lambda amount: amount > 0 and round(amount, 2) == amount,
+        rule="a positive amount with at most two decimal places",
+    )
+    max_rounds = ta.Param(
+        20, "The number of messages, counting both players, before the game ends without a deal. It also sets the "
+            "`x_rounds` deadline to `max_rounds // 2`.", min=1,
+    )
+    error_allowance = ta.Param(
+        3, "The number of consecutive invalid moves a player is warned about before the next one forfeits the game.",
+        min=0,
+    )
 
-        Args:
-            player_roles: List of 2 role names, or None for random assignment
-            total_amount: Total money to be split (default: $2.00)
-            max_rounds: Maximum number of negotiation rounds
-            error_allowance: Number of invalid moves allowed before applying default action
-        """
-        if player_roles is not None and (
-            not isinstance(player_roles, (list, tuple))
-            or len(player_roles) != 2
-            or any(not isinstance(role_name, str) for role_name in player_roles)
-        ):
-            raise ValueError("player_roles must contain exactly 2 role names")
-        try:
-            normalized_total = float(total_amount)
-        except (TypeError, ValueError, OverflowError):
-            raise ValueError("total_amount must be a positive amount with at most two decimal places") from None
-        if (
-            not isinstance(total_amount, (int, float))
-            or isinstance(total_amount, bool)
-            or not math.isfinite(normalized_total)
-            or normalized_total <= 0
-            or round(normalized_total, 2) != normalized_total
-        ):
-            raise ValueError("total_amount must be a positive amount with at most two decimal places")
-        if not isinstance(max_rounds, int) or isinstance(max_rounds, bool) or max_rounds <= 0:
-            raise ValueError("max_rounds must be a positive integer")
-        if not isinstance(error_allowance, int) or isinstance(error_allowance, bool) or error_allowance < 0:
-            raise ValueError("error_allowance must be a non-negative integer")
-        self.player_roles_config = list(player_roles) if player_roles is not None else None
-        self.total_amount = normalized_total
-        self.total_cents = round(normalized_total * 100)
-        self.max_rounds = max_rounds
-        self.error_allowance = error_allowance
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.total_cents = round(self.total_amount * 100)
 
         # Load all available roles
         self.available_roles = self._load_available_roles()
-        for role_name in self.player_roles_config or []:
+        for role_name in self.player_roles or []:
             self._check_role_feasible(role_name)
 
         # Assigned per reset
-        self.player_roles = {}
+        self.assigned_roles = {}
         self.player_deadline = {}  # For x_rounds role
 
     # -- dollar views of the cent-valued game_state (for renderers/analysis) --
@@ -140,16 +121,14 @@ class TwoDollarEnv(ta.GameEnv):
 
     def setup(self) -> Dict[str, Any]:
         # Assign roles
-        if self.player_roles_config is None:
-            self.player_roles = self._assign_random_roles()
+        if self.player_roles is None:
+            self.assigned_roles = self._assign_random_roles()
         else:
-            if len(self.player_roles_config) != 2:
-                raise ValueError("player_roles must contain exactly 2 role names")
-            self.player_roles = self._assign_specific_roles(self.player_roles_config)
+            self.assigned_roles = self._assign_specific_roles(self.player_roles)
 
         # Set deadlines for x_rounds role
         self.player_deadline = {}
-        for player_id, role in self.player_roles.items():
+        for player_id, role in self.assigned_roles.items():
             if role.get("name") == "x_rounds":
                 self.player_deadline[player_id] = self.max_rounds // 2
 
@@ -197,7 +176,7 @@ class TwoDollarEnv(ta.GameEnv):
 
     def prompt(self, player_id: int) -> str:
         """Generate initial prompt for a player."""
-        role = self.player_roles[player_id]
+        role = self.assigned_roles[player_id]
 
         prompt = f"""TWO DOLLAR NEGOTIATION GAME
 
@@ -346,7 +325,7 @@ Propose $1.00
 
     def _role_violation(self, player_id: int, decision: Dict[str, Any]) -> Optional[str]:
         """Reason the action breaks the player's per-message role rules, if it does."""
-        role = self.player_roles[player_id]
+        role = self.assigned_roles[player_id]
         if role.get("enforcement") != "action_validation":
             return None
         rules = role["behavioral_rules"]
@@ -446,7 +425,7 @@ Propose $1.00
 
         # Check role compliance for each player
         for player_id in [0, 1]:
-            role = self.player_roles[player_id]
+            role = self.assigned_roles[player_id]
 
             if role.get("enforcement") == "end_game_check":
                 if role.get("threshold") is not None:
@@ -515,7 +494,7 @@ Propose $1.00
             )
             results = render_final_results(
                 final_amounts=self.final_amounts,
-                player_roles=self.player_roles,
+                player_roles=self.assigned_roles,
                 total_amount=self.total_amount,
             )
             return f"{summary}\n\n{results}"

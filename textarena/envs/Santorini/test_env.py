@@ -26,21 +26,6 @@ def test_init():
     assert env.is_open is False and env.show_valid is False
 
 
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"is_open": 1},
-        {"show_valid": "yes"},
-        {"error_allowance": -1},
-        {"error_allowance": 1.5},
-        {"error_allowance": True},
-    ],
-)
-def test_invalid_configuration_rejected(kwargs):
-    with pytest.raises(ValueError):
-        SantoriniBaseFixedWorkerEnv(**kwargs)
-
-
 def test_reset_player_counts():
     env = SantoriniBaseFixedWorkerEnv()
     with pytest.raises(ValueError):
@@ -251,17 +236,6 @@ def test_three_player_invalid_elimination_also_eliminates_a_blocked_next_player(
 
     assert done
     assert env.state.rewards == {0: 1, 1: -1, 2: -1}
-
-
-def test_snapshot_restore_recovers_board_valid_moves_and_turn():
-    env = _fresh(2)
-    snapshot = env.snapshot()
-    env.step("N1C2C3B2")
-    env.restore(snapshot)
-    assert env.state.current_player_id == 0
-    assert env.board[2][1][1] == (0, 1)
-    assert env.board[1][1][0] == 0
-    assert env.game_state["valid_moves"] == env._get_valid_moves(0)
 
 
 def test_invalid_format_increments_error():

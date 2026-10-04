@@ -1,7 +1,7 @@
 from textarena.envs.registration import register_with_versions
 
 register_with_versions(
-    id="ScorableGames-v0",
+    id="ScorableGames-v1",
     entry_point="textarena.envs.ScorableGames.env:ScorableGamesEnv",
     game_config="base", max_rounds=120, invalid_move_default="Accept",
 )

@@ -45,18 +45,14 @@ class NegotiationEnv(ta.GameEnv):
     # whitespace run, which is quadratic.
     segment_padding = re.compile(r"^[\s;]+|(?<![\s;])[\s;]+$")
 
-    def __init__(self, turn_multiple: int = 3):
-        """
-        Initialize the N-player Negotiation Game environment.
+    turn_multiple = ta.Param(
+        3, "The turns per player, so the game lasts `num_players × turn_multiple` turns.", min=1,
+    )
 
-        Args:
-            turn_multiple (int): Number of turns per player
-        """
-        if not isinstance(turn_multiple, int) or isinstance(turn_multiple, bool) or turn_multiple <= 0:
-            raise ValueError("turn_multiple must be a positive integer")
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.resource_names = ["Wheat", "Wood", "Sheep", "Brick", "Ore"]
         self.base_values = {"Wheat": 5, "Wood": 10, "Sheep": 15, "Brick": 25, "Ore": 40}
-        self.turn_multiple = turn_multiple
 
     @property
     def terminal_render_keys(self):

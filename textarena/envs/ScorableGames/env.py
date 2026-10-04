@@ -45,77 +45,45 @@ class ScorableGamesEnv(ta.GameEnv):
     min_players = 2
     max_players = 15
 
-    def __init__(self, game_config: str = "base", max_rounds: int = 120,
-                 required_votes: Optional[int] = None,
-                 veto_roles: Tuple[str, ...] = ("p1", "p2"),
-                 unanimity_bonus_role: Optional[str] = "p1",
-                 starting_role: Optional[str] = "p1",
-                 invalid_move_default: str = "Accept",
-                 error_allowance: int = 3
-                 ):
-        """
-        Initialize the ScorableGames environment.
+    game_config = ta.Param(
+        "base", "The scenario folder under `games_descriptions/`, listed in the table above.",
+        check=lambda name: bool(name) and os.path.basename(name) == name and name not in {".", ".."},
+        rule="a configuration directory name",
+    )
+    max_rounds = ta.Param(120, "The total number of turns before the game ends without a deal.", min=1)
+    required_votes = ta.Param(
+        None, "The acceptances needed for a deal to pass. None means all players but one.", type=int, min=1,
+    )
+    veto_roles = ta.Param(
+        ["p1", "p2"], "The scenario roles whose acceptance is mandatory.",
+        check=lambda roles: all(isinstance(role, str) and role for role in roles),
+        rule="a list of non-empty role names",
+    )
+    unanimity_bonus_role = ta.Param(
+        "p1", "The scenario role that earns the unanimity bonus.", optional=True, check=bool,
+        rule="a non-empty role name",
+    )
+    starting_role = ta.Param(
+        "p1", "The scenario role that moves first. Player 0 starts if no party has that role.", optional=True,
+        check=bool, rule="a non-empty role name",
+    )
+    invalid_move_default = ta.Param(
+        "Accept", "The vote cast for a player who exceeds the invalid-move allowance, including on a deal proposed "
+                  "for them.", check=lambda vote: vote.strip().title() in {"Accept", "Reject"},
+        rule="'Accept' or 'Reject' (in any case)",
+    )
+    error_allowance = ta.Param(3, "The consecutive invalid moves that only produce a warning.", min=0)
 
-        Args:
-            game_config: Name of game configuration folder in games_descriptions/
-            max_rounds: Maximum number of negotiation rounds
-            required_votes: Number of accept votes needed (default: num_players - 1)
-            veto_roles: List of roles with veto power (default: ["p1", "p2"])
-            unanimity_bonus_role: Role that gets +10 bonus for unanimity (default: "p1")
-            starting_role: Role that starts the negotiation (default: "p1")
-            invalid_move_default: Default vote ("Accept" or "Reject") for a player who plays an invalid move.
-            error_allowance: Number of invalid moves allowed before applying default action (default: 3)
-        """
-        if (
-            not isinstance(game_config, str)
-            or not game_config
-            or os.path.basename(game_config) != game_config
-            or game_config in {".", ".."}
-        ):
-            raise ValueError("game_config must be a configuration directory name")
-        if not isinstance(max_rounds, int) or isinstance(max_rounds, bool) or max_rounds <= 0:
-            raise ValueError("max_rounds must be a positive integer")
-        if required_votes is not None and (
-            not isinstance(required_votes, int)
-            or isinstance(required_votes, bool)
-            or required_votes <= 0
-        ):
-            raise ValueError("required_votes must be a positive integer or None")
-        if not isinstance(veto_roles, (list, tuple)) or any(
-            not isinstance(role, str) or not role for role in veto_roles
-        ):
-            raise ValueError("veto_roles must be a sequence of non-empty role names")
-        if unanimity_bonus_role is not None and (
-            not isinstance(unanimity_bonus_role, str) or not unanimity_bonus_role
-        ):
-            raise ValueError("unanimity_bonus_role must be a non-empty role name or None")
-        if starting_role is not None and (
-            not isinstance(starting_role, str) or not starting_role
-        ):
-            raise ValueError("starting_role must be a non-empty role name or None")
-        if not isinstance(invalid_move_default, str):
-            raise ValueError("invalid_move_default must be 'Accept' or 'Reject'")
-        normalized_default = invalid_move_default.strip().title()
-        if normalized_default not in {"Accept", "Reject"}:
-            raise ValueError("invalid_move_default must be 'Accept' or 'Reject'")
-        if not isinstance(error_allowance, int) or isinstance(error_allowance, bool) or error_allowance < 0:
-            raise ValueError("error_allowance must be a non-negative integer")
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.max_turns = self.max_rounds  # engine turn limit
+        self.invalid_move_default = self.invalid_move_default.strip().title()
 
-        self.game_config = game_config
-        self.max_rounds = max_rounds
-        self.max_turns = max_rounds  # engine turn limit
-        self.required_votes = required_votes
-        self.veto_roles = list(veto_roles)
-        self.unanimity_bonus_role = unanimity_bonus_role
-        self.starting_role = starting_role
-        self.invalid_move_default = normalized_default
-        self.error_allowance = error_allowance
-
-        self.game_dir = os.path.join(os.path.dirname(__file__), "games_descriptions", game_config)
+        self.game_dir = os.path.join(os.path.dirname(__file__), "games_descriptions", self.game_config)
         self._load_game_configuration()
         # Each scenario has a fixed cast of parties.
         self.min_players = self.max_players = len(self.player_configs)
-        if required_votes is not None and required_votes > self.max_players:
+        if self.required_votes is not None and self.required_votes > self.max_players:
             raise ValueError(f"required_votes cannot exceed the configured player count ({self.max_players})")
 
     # game_state is the canonical owner of all mutable gameplay containers.

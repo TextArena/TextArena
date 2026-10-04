@@ -12,9 +12,9 @@ everything seen so far.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Secretary-v0` | `N=5` |
+| `Secretary-v1` | `N=5` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Secretary-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Secretary-v0", N=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Secretary-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Secretary-v1", N=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -49,7 +49,9 @@ value and the largest value overall.
 
 ## Parameters
 
-- `N` (default `20`): the number of values, any positive integer.
+<!-- BEGIN GENERATED: parameters -->
+- `N` (default `20`): The number of values. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

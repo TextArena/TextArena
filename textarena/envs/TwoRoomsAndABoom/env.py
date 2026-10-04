@@ -51,34 +51,14 @@ class TwoRoomsAndABoomEnv(ta.GameEnv):
         }
     }
 
-    def __init__(self, num_rounds: int = 3, cards_per_room: int = 3, discussion_rounds: int = 2):
-        """
-        Initialize the Two Rooms and a Boom environment.
-
-        Args:
-            num_rounds (int): Number of rounds to play (default: 3)
-            cards_per_room (int): Number of cards to initially place in each room (default: 3)
-            discussion_rounds (int): Number of discussion turns per player per round (default: 2)
-        """
-        if isinstance(num_rounds, bool) or not isinstance(num_rounds, int) or num_rounds < 1:
-            raise ValueError("num_rounds must be a positive integer")
-        if (
-            isinstance(cards_per_room, bool)
-            or not isinstance(cards_per_room, int)
-            or not self.min_players // 2 <= cards_per_room <= self.max_players // 2
-        ):
-            raise ValueError("cards_per_room must be an integer between 3 and 10")
-        if (
-            isinstance(discussion_rounds, bool)
-            or not isinstance(discussion_rounds, int)
-            or discussion_rounds < 0
-        ):
-            raise ValueError("discussion_rounds must be a non-negative integer")
-
-        # Game configuration parameters
-        self.num_rounds = num_rounds
-        self.cards_per_room = cards_per_room
-        self.discussion_rounds = discussion_rounds
+    num_rounds = ta.Param(3, "The number of rounds, each ending with an exchange.", min=1)
+    cards_per_room = ta.Param(
+        3, "The number of players per room; the game requires exactly twice this many players.",
+        min=min_players // 2, max=max_players // 2,
+    )
+    discussion_rounds = ta.Param(
+        2, "The number of messages each player sends per round; `0` skips the discussion.", min=0,
+    )
 
     def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
         # Actions are never echoed globally: discussion messages are routed only to

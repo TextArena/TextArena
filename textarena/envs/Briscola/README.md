@@ -10,9 +10,9 @@ most of its 120 card points ([rules](https://en.wikipedia.org/wiki/Briscola)).
 
 | Env ID | Parameters |
 | --- | --- |
-| `Briscola-v0` | defaults |
+| `Briscola-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Briscola-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Briscola-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

@@ -8,7 +8,7 @@ agents = {
 }
 
 # Initialize the environment
-env = ta.make(env_id="TicTacToe-v0")
+env = ta.make(env_id="TicTacToe-v1")
 
 # Optionally, show each player the game in their own language
 # env = ta.wrappers.TranslationWrapper(env, lang={0: "en", 1: "de"})

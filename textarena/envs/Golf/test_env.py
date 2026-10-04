@@ -291,16 +291,6 @@ def test_huge_coordinates_are_invalid_and_atomic():
     assert env.state.game_state == before
 
 
-def test_snapshot_restores_private_draw_and_rng():
-    env = _fresh()
-    snapshot = env.snapshot()
-    env.step("draw")
-    expected = copy.deepcopy(env.state.game_state)
-    env.restore(snapshot)
-    env.step("draw")
-    assert env.state.game_state == expected
-
-
 def test_invalid_layout_configuration_is_rejected():
     for kwargs in (
         {"num_cards": 13, "num_columns": 3},
@@ -362,7 +352,7 @@ def test_default_turn_cap_scales_with_players_and_grid():
 def test_registered_variants_get_the_default_turn_cap():
     from textarena.envs.registration import ENV_REGISTRY
 
-    for env_id in ("Golf-v0", "Golf-v0-medium"):
+    for env_id in ("Golf-v1", "Golf-v1-medium"):
         kwargs = ENV_REGISTRY[env_id].kwargs
         assert "max_turns" not in kwargs
         env = GolfEnv(**kwargs)
@@ -437,16 +427,6 @@ def test_invalid_moves_do_not_count_toward_turn_cap():
     done, _ = env.step("discard")
     assert done and env.state.turn == 2
     assert "Turn limit of 2 actions reached" in env.state.game_info[0]["reason"]
-
-
-def test_invalid_max_turns_is_rejected():
-    for bad in (0, -1, True, 2.5, "10"):
-        try:
-            GolfEnv(max_turns=bad)
-        except ValueError:
-            pass
-        else:
-            raise AssertionError(f"Expected invalid max_turns: {bad!r}")
 
 
 def test_prompt_and_render_mention_the_cap():

@@ -2,7 +2,7 @@ import functools
 import importlib.resources
 import json
 import re
-from typing import Any, Dict, Optional, Tuple, Union
+from typing import Any, Dict, Tuple, Union
 import textarena as ta
 from textarena.utils.word_lists import get_blocked_words
 
@@ -28,13 +28,15 @@ class CodenamesEnv(ta.GameEnv):
     _CLUE_RE = re.compile(r"([a-z]+)\s+([0-9]{1,2})", re.IGNORECASE)
     _GUESS_RE = re.compile(r"([a-z]+)", re.IGNORECASE)
 
-    def __init__(self, hardcore: Optional[bool] = False, max_turns: int = 80):
-        if not isinstance(hardcore, bool):
-            raise ValueError("hardcore must be a boolean")
-        if isinstance(max_turns, bool) or not isinstance(max_turns, int) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
-        self._load_word_list(hardcore=hardcore)
-        self.max_turns = max_turns
+    hardcore = ta.Param(
+        False, "Draw board words from the list built from NLTK's full English word list (29,406 words) instead of the "
+               "one built from its Basic English list (423 words), which produces rarer words.",
+    )
+    max_turns = ta.Param(80, "The total number of moves (clues and guesses) before the turn-limit result applies.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self._load_word_list(hardcore=self.hardcore)
 
     def _load_word_list(self, hardcore: bool = False) -> None:
         candidates = _bundled_word_lists()["hardcore" if hardcore else "basic"]

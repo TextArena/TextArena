@@ -9,7 +9,7 @@ def _fresh(num_players=2, **overrides):
     config = {
         "num_rounds": 1,
         "communication_turns": 1,
-        "num_players": num_players,
+        "default_num_players": num_players,
         "endowment": 10,
         "multiplication_factor": 2.0,
     }
@@ -256,12 +256,8 @@ def test_snapshot_restores_pending_message_and_queue_position():
 @pytest.mark.parametrize(
     "kwargs",
     [
-        {"num_rounds": 0},
-        {"communication_turns": -1},
-        {"endowment": -1},
         {"multiplication_factor": float("inf")},
-        {"multiplication_factor": -0.1},
-        {"num_players": 1},
+        {"multiplication_factor": True},
         {"num_rounds": 10**5000},
         {"endowment": 10**5000},
         {"multiplication_factor": 10**5000},

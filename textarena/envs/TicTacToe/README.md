@@ -10,9 +10,9 @@ own marks wins ([rules](https://en.wikipedia.org/wiki/Tic-tac-toe)).
 
 | Env ID | Parameters |
 | --- | --- |
-| `TicTacToe-v0` | defaults |
+| `TicTacToe-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `TicTacToe-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `TicTacToe-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

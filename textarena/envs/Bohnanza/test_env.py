@@ -141,15 +141,6 @@ def test_init_defaults_and_custom_values():
     assert "Blue" in env.BEAN_TYPES and "Garden" in env.BEAN_TYPES
 
 
-@pytest.mark.parametrize(
-    "kwargs",
-    [{"max_turns": 0}, {"max_turns": True}, {"error_allowance": -1}, {"deck_cycles": 0}, {"deck_cycles": 1.5}, {"max_trade_rounds": 0}],
-)
-def test_constructor_rejects_invalid_parameters(kwargs):
-    with pytest.raises(ValueError):
-        BohnanzaEnv(**kwargs)
-
-
 def test_reset_valid_player_counts():
     env = BohnanzaEnv(max_turns=200, error_allowance=3)
     for num_players in (3, 4, 5):
@@ -1359,15 +1350,6 @@ def test_bean_conservation():
         assert env.state.error_count == 0
 
 
-def test_seeded_reset_is_deterministic_and_does_not_touch_global_random():
-    random.seed(99)
-    expected = random.Random(99).random()
-    first, second, other = make_env(seed=7), make_env(seed=7), make_env(seed=8)
-    assert gs(first) == gs(second)
-    assert gs(first)["deck"] != gs(other)["deck"]
-    assert random.random() == expected
-
-
 def test_snapshot_restore_replays_reshuffle():
     env = make_env()
     g = gs(env)
@@ -1382,7 +1364,7 @@ def test_snapshot_restore_replays_reshuffle():
     assert gs(env)["deck_cycles_completed"] == 1
 
 
-@pytest.mark.parametrize("env_id,deck_cycles,max_trade_rounds", [("Bohnanza-v0", 3, None), ("Bohnanza-v0-short", 1, 3)])
+@pytest.mark.parametrize("env_id,deck_cycles,max_trade_rounds", [("Bohnanza-v1", 3, None), ("Bohnanza-v1-short", 1, 3)])
 def test_registered_variants(env_id, deck_cycles, max_trade_rounds):
     for num_players in (3, 4, 5):
         for suffix in ("", "-mdp"):

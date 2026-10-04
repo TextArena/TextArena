@@ -12,10 +12,10 @@ allocations revealed after each round.
 
 | Env ID | Parameters |
 | --- | --- |
-| `ColonelBlotto-v0` | `num_fields=3`, `num_total_units=20`, `num_rounds=9` |
-| `ColonelBlotto-v0-large` | `num_fields=5`, `num_total_units=50`, `num_rounds=15` |
+| `ColonelBlotto-v1` | `num_fields=3`, `num_total_units=20`, `num_rounds=9` |
+| `ColonelBlotto-v1-large` | `num_fields=5`, `num_total_units=50`, `num_rounds=15` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `ColonelBlotto-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ColonelBlotto-v0", num_fields=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `ColonelBlotto-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ColonelBlotto-v1", num_fields=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -59,9 +59,11 @@ have allocated, both see every field's allocation for both sides and the round w
 
 ## Parameters
 
-- `num_fields` (default `3`): number of battlefields, from 2 to 26.
-- `num_total_units` (default `20`): units each commander allocates every round; at least `num_fields`.
-- `num_rounds` (default `10`): maximum number of rounds.
+<!-- BEGIN GENERATED: parameters -->
+- `num_fields` (default `3`): The number of battlefields. Accepts an integer from 2 to 26.
+- `num_total_units` (default `20`): The units each commander allocates every round. Accepts an integer at least as large as num_fields.
+- `num_rounds` (default `10`): The maximum number of rounds. Accepts a positive integer.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

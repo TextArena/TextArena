@@ -12,16 +12,20 @@ class TruthAndDeceptionEnv(ta.GameEnv):
     max_players = 2
     snapshot_excluded_attributes = ("facts_data",)
 
-    def __init__(self, max_turns: int = 6, data_path: Optional[str] = None):
-        if (
-            not isinstance(max_turns, int)
-            or isinstance(max_turns, bool)
-            or max_turns < 2
-            or max_turns % 2 != 0
-        ):
-            raise ValueError("max_turns must be an even integer of at least 2 so the Guesser takes the final turn.")
-        self.max_turns = max_turns
-        self._load_facts(data_path=data_path)
+    max_turns = ta.Param(
+        6, "The number of turns in the whole game. The Guesser takes the final turn.", min=2,
+        check=lambda turns: turns % 2 == 0, rule="an even integer of at least 2",
+    )
+    data_path = ta.Param(
+        None,
+        'A JSON list of entries of the form `{"facts": {"fact1": "...", "fact2": "..."}, "correct_fact": "fact1"}` '
+        "with two distinct facts each, replacing the bundled `facts.json`.",
+        type=str,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self._load_facts(data_path=self.data_path)
         self.guess_fact1_pattern = re.compile(r"^\s*Fact\s+1\s*$", re.IGNORECASE)
         self.guess_fact2_pattern = re.compile(r"^\s*Fact\s+2\s*$", re.IGNORECASE)
 

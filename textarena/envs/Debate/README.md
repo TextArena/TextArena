@@ -10,9 +10,9 @@ the debate decides the winner: the side that gains more of the jury's support.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Debate-v0` | `max_turns=6`, `jury_size=7` |
+| `Debate-v1` | `max_turns=6`, `jury_size=7` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Debate-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Debate-v0", max_turns=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Debate-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Debate-v1", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -48,13 +48,12 @@ every accepted argument. The jury's votes are never shown during the game; the f
 
 ## Parameters
 
-- `max_turns` (default `4`): arguments in the whole debate; must be an even number of at least 2.
-- `jury_size` (default `5`, at most `100`): number of jurors.
-- `jury_class` (default `OpenRouterJury`): class or factory called with `options` and `jury_size` (and the env's
-  seeded `rng` if it accepts one). The object it returns must provide `evaluate(context)` returning
-  `{"Affirmative": votes, "Negative": votes}`.
-- `topics_path` (default: the bundled `topics.json`): JSON file of the form `{"topics": ["...", ...]}` with unique,
-  non-empty topics.
+<!-- BEGIN GENERATED: parameters -->
+- `max_turns` (default `4`): The number of arguments in the whole debate. The players alternate, so each gets half of them. Accepts an even integer of at least 2.
+- `jury_size` (default `5`): The number of jurors. Accepts an integer from 1 to 100.
+- `jury_class` (default `None`): The class or factory called with `options` and `jury_size` (and the env's seeded `rng` if it accepts one). The object it returns must provide `evaluate(context)` returning `{"Affirmative": votes, "Negative": votes}`. None uses `OpenRouterJury`. Accepts a callable or None.
+- `topics_path` (default `None`): A JSON file of the form `{"topics": ["...", ...]}` with unique, non-empty topics. None uses the bundled `topics.json`.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

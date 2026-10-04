@@ -10,9 +10,9 @@ wins ([rules](https://en.wikipedia.org/wiki/Rock_paper_scissors)).
 
 | Env ID | Parameters |
 | --- | --- |
-| `IteratedRockPaperScissors-v0` | `num_rounds=9` |
+| `IteratedRockPaperScissors-v1` | `num_rounds=9` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedRockPaperScissors-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedRockPaperScissors-v0", num_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedRockPaperScissors-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedRockPaperScissors-v1", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -43,4 +43,6 @@ that round.
 
 ## Parameters
 
-- `num_rounds` (default `5`): number of rounds.
+<!-- BEGIN GENERATED: parameters -->
+- `num_rounds` (default `5`): The number of rounds. Accepts a positive integer.
+<!-- END GENERATED: parameters -->

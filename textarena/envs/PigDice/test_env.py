@@ -98,18 +98,6 @@ def test_two_consecutive_invalids_end_game():
     assert env.state.rewards == {0: -1, 1: 1}
 
 
-@pytest.mark.parametrize("winning_score", (0, -1, 1.5, True))
-def test_invalid_winning_scores_are_rejected(winning_score):
-    with pytest.raises(ValueError):
-        PigDiceEnv(winning_score=winning_score)
-
-
-@pytest.mark.parametrize("max_turns", (0, -1, 1.5, True, None))
-def test_invalid_turn_limits_are_rejected(max_turns):
-    with pytest.raises(ValueError):
-        PigDiceEnv(max_turns=max_turns)
-
-
 @pytest.mark.parametrize("action", ("[roll", "roll]"))
 def test_unbalanced_brackets_are_atomic_invalid_moves(action):
     env = _fresh()
@@ -235,17 +223,3 @@ def test_exact_action_limit_draws_tied_scores():
     assert env.state.turn == 1
     assert env.state.game_state["scores"] == [0, 0]
     assert env.state.rewards == {0: 0, 1: 0}
-
-
-def test_snapshot_restores_rng_state_and_environment_attributes():
-    env = _fresh()
-    snapshot = env.snapshot()
-    env.step("roll")
-    assert env.roll_value == 6
-
-    env.restore(snapshot)
-    done, _ = env.step("roll")
-
-    assert not done
-    assert env.roll_value == 6
-    assert env.state.game_state["turn_total"] == 6

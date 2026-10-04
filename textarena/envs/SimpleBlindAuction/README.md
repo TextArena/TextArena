@@ -11,9 +11,9 @@ private messages, and tests negotiation and bidding under private valuations.
 
 | Env ID | Parameters |
 | --- | --- |
-| `SimpleBlindAuction-v0` | `starting_capital=1000`, `num_items=5`, `conversation_rounds=3` |
+| `SimpleBlindAuction-v1` | `starting_capital=1000`, `num_items=5`, `conversation_rounds=3` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `SimpleBlindAuction-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("SimpleBlindAuction-v0", starting_capital=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `SimpleBlindAuction-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("SimpleBlindAuction-v1", starting_capital=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -66,8 +66,9 @@ worth. No board is shown to players during the game.
 
 ## Parameters
 
-- `starting_capital` (default `1000`): coins per player, which also caps the total of a player's bids.
-- `num_items` (default `5`): number of items up for auction.
-- `conversation_rounds` (default `3`): messages each player sends before bidding; `0` starts directly with bidding.
-- `base_item_values` (default `None`): optional fixed base values; missing entries are drawn at random and extra entries
-  are ignored.
+<!-- BEGIN GENERATED: parameters -->
+- `starting_capital` (default `1000`): The coins per player, which also cap the total of a player's bids. Accepts an integer of at least 1.
+- `num_items` (default `5`): The number of items up for auction. Accepts an integer of at least 1.
+- `conversation_rounds` (default `3`): The messages each player sends before bidding. With 0, the game starts directly with bidding. Accepts an integer of at least 0.
+- `base_item_values` (default `None`): Fixed base values for the items. Missing entries are drawn at random and extra entries are ignored. Accepts a list of positive integers or None.
+<!-- END GENERATED: parameters -->

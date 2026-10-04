@@ -10,9 +10,9 @@ Slide numbered tiles around a 4×4 board until they read 1 to 15 in order with t
 
 | Env ID | Parameters |
 | --- | --- |
-| `FifteenPuzzle-v0` | `max_turns=200` |
+| `FifteenPuzzle-v1` | `max_turns=200` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `FifteenPuzzle-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("FifteenPuzzle-v0", max_turns=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `FifteenPuzzle-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("FifteenPuzzle-v1", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -62,4 +62,6 @@ number of positions that started wrong and floored at `0`. Only a solved board r
 
 ## Parameters
 
-- `max_turns` (default `50`): the maximum number of slides. It also sets the scramble length, `min(max_turns, 100)`.
+<!-- BEGIN GENERATED: parameters -->
+- `max_turns` (default `50`): The maximum number of slides. It also sets the scramble length, `min(max_turns, 100)`. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->

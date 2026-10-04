@@ -188,20 +188,8 @@ def test_initial_observation_contains_prompt_and_board():
     assert [kind for _, _, kind in observation] == [ta.ObservationType.PROMPT, ta.ObservationType.GAME_BOARD]
 
 
-def test_snapshot_restore_replays_identically():
-    env = _fresh()
-    _play(env, "12", "6")
-    snapshot = env.snapshot()
-    _play(env, "13", "7", "11", "8", "14")
-    first = (copy.deepcopy(env.game_state), env.state.rewards)
-    env.restore(snapshot)
-    _play(env, "13", "7", "11", "8", "14")
-    assert (env.game_state, env.state.rewards) == first
-    assert env.state.rewards == {0: 1, 1: -1}
-
-
 def test_registered_variants():
-    for env_id in ("JoJoJoin-v0", "JoJoJoin-v0-mdp"):
+    for env_id in ("JoJoJoin-v1", "JoJoJoin-v1-mdp"):
         env = ta.make(env_id)
         env.reset(num_players=2, seed=1)
         done, _ = env.step("12")

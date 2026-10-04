@@ -10,9 +10,9 @@ on whose card is higher ([rules](https://en.wikipedia.org/wiki/Blind_man%27s_blu
 
 | Env ID | Parameters |
 | --- | --- |
-| `IndianPoker-v0` | `max_rounds=5` |
+| `IndianPoker-v1` | `max_rounds=5` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `IndianPoker-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IndianPoker-v0", max_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `IndianPoker-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IndianPoker-v1", max_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -55,5 +55,7 @@ player before the showdown.
 
 ## Parameters
 
-- `max_rounds` (default `1`): number of rounds in the match.
-- `starting_chips` (default `100`): chips each player starts with.
+<!-- BEGIN GENERATED: parameters -->
+- `max_rounds` (default `1`): The number of rounds in the match. Accepts an integer of at least 1.
+- `starting_chips` (default `100`): The number of chips each player starts with. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->

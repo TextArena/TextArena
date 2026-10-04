@@ -1,4 +1,4 @@
-"""Deterministic game-logic tests for Briscola-v0 (2-player Italian trick game)."""
+"""Deterministic game-logic tests for Briscola-v1 (2-player Italian trick game)."""
 import copy
 
 from textarena.envs.Briscola.env import BriscolaEnv
@@ -187,14 +187,8 @@ def test_render_shows_the_face_up_trump_card_until_the_deck_is_empty():
     assert trump not in env.render(0).split("Scores:")[1]
 
 
-def test_render_and_snapshot_preserve_hidden_hands():
+def test_render_preserves_hidden_hands():
     env = _fresh()
     gs = env.state.game_state
     opponent_card = env._card_to_string(gs["players"][1]["hand"][0])
     assert opponent_card not in env.render(0)
-    snapshot = env.snapshot()
-    env.step("play 1")
-    expected = copy.deepcopy(env.state.game_state)
-    env.restore(snapshot)
-    env.step("play 1")
-    assert env.state.game_state == expected

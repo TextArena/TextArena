@@ -11,10 +11,10 @@ a graph of word neighbors.
 
 | Env ID | Parameters |
 | --- | --- |
-| `WordLadder-v0` | `min_distance=5`, `max_distance=7`, `max_turns=100` |
-| `WordLadder-v0-hard` | `min_distance=13`, `max_distance=15`, `max_turns=100` |
+| `WordLadder-v1` | `min_distance=5`, `max_distance=7`, `max_turns=100` |
+| `WordLadder-v1-hard` | `min_distance=13`, `max_distance=15`, `max_turns=100` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `WordLadder-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("WordLadder-v0", min_distance=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `WordLadder-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("WordLadder-v1", min_distance=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -61,11 +61,11 @@ closer to the target; letters that already match the target count only if they s
 
 ## Parameters
 
-- `min_distance` (default `5`) and `max_distance` (default `7`): the range for the length, in single-letter changes,
-  of the shortest ladder between the start and the target that uses only Basic English words. Ladders through other
-  dictionary words can be shorter.
-- `max_turns` (default `100`): the number of accepted words allowed. It must be at least `max_distance`, so every
-  puzzle is solvable within the limit.
+<!-- BEGIN GENERATED: parameters -->
+- `min_distance` (default `5`): The minimum length, in single-letter changes, of the shortest ladder between the start and the target that uses only Basic English words. Ladders through other dictionary words can be shorter. Accepts an integer of at least 1.
+- `max_distance` (default `7`): The maximum length of that shortest ladder. It must be at least `min_distance`. Accepts an integer of at least 1.
+- `max_turns` (default `100`): The number of accepted words allowed. It must be at least `max_distance`, so every puzzle is solvable within the limit. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

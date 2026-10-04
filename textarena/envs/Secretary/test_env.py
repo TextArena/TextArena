@@ -24,12 +24,6 @@ def test_reset_requires_exactly_one_player(num_players):
         SecretaryEnv().reset(num_players=num_players, seed=42)
 
 
-@pytest.mark.parametrize("N", [0, -1, True, 1.5])
-def test_N_must_be_a_positive_integer(N):
-    with pytest.raises(ValueError):
-        SecretaryEnv(N=N)
-
-
 def test_only_current_value_is_revealed():
     env = _fresh()
     draws = env.state.game_state["draws"]
@@ -131,16 +125,3 @@ def test_draws_are_exactly_the_displayed_values(seed):
     env = SecretaryEnv(N=10)
     env.reset(num_players=1, seed=seed)
     assert all(value == float(f"{value:.4f}") for value in env.state.game_state["draws"])
-
-
-def test_snapshot_restore_and_repeat_reset_restore_sequence_position():
-    env = _fresh()
-    original_draws = env.state.game_state["draws"].copy()
-    snap = env.snapshot()
-    env.step("continue")
-    env.restore(snap)
-    assert env.state.game_state["current_idx"] == 1
-    assert env.state.game_state["accepted_idx"] is None
-    env.reset(num_players=1, seed=42)
-    assert env.state.game_state["draws"] == original_draws
-    assert env.state.game_state["current_idx"] == 1

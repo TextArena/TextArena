@@ -13,9 +13,9 @@ compromises under private preferences.
 
 | Env ID | Parameters |
 | --- | --- |
-| `ScorableGames-v0` | `game_config="base"`, `max_rounds=120`, `invalid_move_default="Accept"` |
+| `ScorableGames-v1` | `game_config="base"`, `max_rounds=120`, `invalid_move_default="Accept"` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `ScorableGames-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ScorableGames-v0", game_config=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `ScorableGames-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ScorableGames-v1", game_config=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -73,7 +73,7 @@ that score. A deal that reaches it is a success (`+1`), a deal below it leaves t
 and no deal leaves every party exactly at its minimum (`0`). The raw points are recorded in `game_info` (`score`,
 `threshold`, `deal_accepted`).
 
-## Parameters
+## Scenarios
 
 | `game_config` | Players | Scenario |
 | --- | :---: | --- |
@@ -89,14 +89,18 @@ and no deal leaves every party exactly at its minimum (`0`). The raw points are 
 The class accepts 2–15 players in general, but each scenario has a fixed number of parties: `reset()` raises a
 `ValueError` naming the expected count for any other `num_players`.
 
-- `max_rounds` (default `120`): total number of turns before the game ends without a deal.
-- `required_votes` (default `None`): acceptances needed for a deal to pass; `None` means all players but one.
-- `veto_roles` (default `("p1", "p2")`): scenario roles whose acceptance is mandatory.
-- `unanimity_bonus_role` (default `"p1"`): scenario role that earns the unanimity bonus.
-- `starting_role` (default `"p1"`): scenario role that moves first; Player 0 starts if no party has that role.
-- `invalid_move_default` (default `"Accept"`): vote cast for a player who exceeds the invalid-move allowance, including
-  on a deal proposed for them.
-- `error_allowance` (default `3`): consecutive invalid moves that only produce a warning.
+## Parameters
+
+<!-- BEGIN GENERATED: parameters -->
+- `game_config` (default `"base"`): The scenario folder under `games_descriptions/`, listed in the table above. Accepts a configuration directory name.
+- `max_rounds` (default `120`): The total number of turns before the game ends without a deal. Accepts an integer of at least 1.
+- `required_votes` (default `None`): The acceptances needed for a deal to pass. None means all players but one. Accepts an integer of at least 1 or None.
+- `veto_roles` (default `['p1', 'p2']`): The scenario roles whose acceptance is mandatory. Accepts a list of non-empty role names.
+- `unanimity_bonus_role` (default `"p1"`): The scenario role that earns the unanimity bonus. Accepts a non-empty role name or None.
+- `starting_role` (default `"p1"`): The scenario role that moves first. Player 0 starts if no party has that role. Accepts a non-empty role name or None.
+- `invalid_move_default` (default `"Accept"`): The vote cast for a player who exceeds the invalid-move allowance, including on a deal proposed for them. Accepts 'Accept' or 'Reject' (in any case).
+- `error_allowance` (default `3`): The consecutive invalid moves that only produce a warning. Accepts an integer of at least 0.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

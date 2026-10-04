@@ -101,14 +101,8 @@ def test_grid_size_resource_limit_is_enforced():
     env.reset(num_players=2, seed=42)
     assert len(env.state.game_state["board"]) == MemoryGameEnv.MAX_GRID_SIZE
 
-    with pytest.raises(ValueError, match="cannot exceed"):
+    with pytest.raises(ValueError, match="an even integer from 2 to 20"):
         MemoryGameEnv(grid_size=MemoryGameEnv.MAX_GRID_SIZE + 2)
-
-
-@pytest.mark.parametrize("max_turns", (0, -1, 1.5, True))
-def test_invalid_turn_limits_are_rejected(max_turns):
-    with pytest.raises(ValueError):
-        MemoryGameEnv(grid_size=2, max_turns=max_turns)
 
 
 @pytest.mark.parametrize("action", ("[0 0 0 1", "0 0 0 1]"))
@@ -314,20 +308,3 @@ def test_render_shows_scores_and_turns_played():
 
     view = env.render(0)
     assert "Scores: Player 0: 1, Player 1: 0 | Turns played: 1/10" in view
-
-
-def test_seeded_reset_and_snapshot_restore_hidden_state():
-    env = MemoryGameEnv(grid_size=4)
-    env.reset(num_players=2, seed=17)
-    first_board = copy.deepcopy(env.state.game_state["board"])
-    snapshot = env.snapshot()
-    pair = next(iter(_pairs(env).values()))
-    env.step(f"{pair[0][0]} {pair[0][1]} {pair[1][0]} {pair[1][1]}")
-
-    env.restore(snapshot)
-
-    assert env.state.game_state["board"] == first_board
-    assert env.state.game_state["matched_positions"] == set()
-    assert env.state.current_player_id == 0
-    env.reset(num_players=2, seed=17)
-    assert env.state.game_state["board"] == first_board

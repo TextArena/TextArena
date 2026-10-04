@@ -10,9 +10,9 @@ Two players race to empty their payoff piles by building shared center piles fro
 
 | Env ID | Parameters |
 | --- | --- |
-| `SpiteAndMalice-v0` | defaults |
+| `SpiteAndMalice-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `SpiteAndMalice-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `SpiteAndMalice-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

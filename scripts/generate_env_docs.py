@@ -6,7 +6,8 @@ Hand-written prose lives in ``textarena/envs/README.md`` (the catalog) and in ea
 ``<!-- BEGIN GENERATED: ... -->`` and ``<!-- END GENERATED: ... -->`` markers:
 
 - per environment: player count, every registered env id with its parameters,
-  and what the ``-mdp`` observation contains;
+  what the ``-mdp`` observation contains, and the parameter list built from the
+  game's ``ta.Param`` declarations;
 - in the catalog: one table per player-count category, linking every game.
 
 Usage:
@@ -123,6 +124,18 @@ def env_block(doc: EnvDoc) -> str:
     return "\n".join(lines)
 
 
+def parameters_block(doc: EnvDoc) -> str:
+    if not doc.cls.parameters:
+        return "This game has no parameters.\n"
+    lines = []
+    for name, param in doc.cls.parameters.items():
+        line = f"- `{name}` (default `{_format_value(param.default)}`): {param.description}"
+        if param.rule or param.choices is not None or param.min is not None or param.max is not None or param.optional:
+            line += f" Accepts {param.describe()}."
+        lines.append(line)
+    return "\n".join(lines) + "\n"
+
+
 def _readme_title_and_summary(doc: EnvDoc):
     title, summary = doc.directory, ""
     if not os.path.exists(doc.readme_path):
@@ -188,20 +201,28 @@ def main() -> int:
     args = parser.parse_args()
 
     docs = collect()
-    targets = {os.path.join(ENVS_DIR, "README.md"): ("catalog", catalog_block(docs))}
+    # path -> [(block name, body, whether the file must contain the block)]
+    targets = {os.path.join(ENVS_DIR, "README.md"): [("catalog", catalog_block(docs), True)]}
     missing = [doc.directory for doc in docs if not os.path.exists(doc.readme_path)]
     for doc in docs:
         if doc.directory not in missing:
-            targets[doc.readme_path] = ("variants", env_block(doc))
+            targets[doc.readme_path] = [
+                ("variants", env_block(doc), True),
+                ("parameters", parameters_block(doc), bool(doc.cls.parameters)),
+            ]
 
     stale, problems = [], [f"missing README: textarena/envs/{d}/README.md" for d in missing]
-    for path, (name, body) in targets.items():
+    for path, blocks in targets.items():
         with open(path, encoding="utf-8") as handle:
             current = handle.read()
-        updated = _replace_block(current, name, body)
-        if updated is None:
-            problems.append(f"no '{name}' generated block: {os.path.relpath(path, REPO_ROOT)}")
-        elif updated != current:
+        updated = current
+        for name, body, required in blocks:
+            replaced = _replace_block(updated, name, body)
+            if replaced is not None:
+                updated = replaced
+            elif required:
+                problems.append(f"no '{name}' generated block: {os.path.relpath(path, REPO_ROOT)}")
+        if updated != current:
             stale.append(os.path.relpath(path, REPO_ROOT))
             if not args.check:
                 with open(path, "w", encoding="utf-8") as handle:

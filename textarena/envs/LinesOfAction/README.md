@@ -10,9 +10,9 @@ player to join all of their pieces into one connected group wins ([rules](https:
 
 | Env ID | Parameters |
 | --- | --- |
-| `LinesOfAction-v0` | defaults |
+| `LinesOfAction-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `LinesOfAction-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `LinesOfAction-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

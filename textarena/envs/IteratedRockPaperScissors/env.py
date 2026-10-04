@@ -19,15 +19,7 @@ class IteratedRockPaperScissorsEnv(ta.GameEnv):
     mdp_includes_actions = False
     broadcast_actions = False  # submissions stay hidden until the round resolves
 
-    def __init__(self, num_rounds: int = 5):
-        if (
-            not isinstance(num_rounds, int)
-            or isinstance(num_rounds, bool)
-            or num_rounds <= 0
-            or not _is_renderable(num_rounds)
-        ):
-            raise ValueError("num_rounds must be a positive integer")
-        self.num_rounds = num_rounds
+    num_rounds = ta.Param(5, "The number of rounds.", min=1, check=_is_renderable, rule="a positive integer")
 
     def get_board_str(self):
         return create_board_str(game_state=self.state.game_state)

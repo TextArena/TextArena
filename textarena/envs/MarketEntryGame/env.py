@@ -28,6 +28,10 @@ def _is_finite_real(value: Any) -> bool:
         return False
 
 
+def _is_payoff(value: Any) -> bool:
+    return _is_finite_real(value) and _is_renderable(value)
+
+
 def _exact_number(value: Real) -> Union[int, Fraction]:
     fraction = Fraction(value) if isinstance(value, Rational) else Fraction.from_float(float(value))
     return fraction.numerator if fraction.denominator == 1 else fraction
@@ -55,70 +59,29 @@ class MarketEntryGameEnv(ta.GameEnv):
     broadcast_actions = False  # raw actions stay private; the game reveals messages/decisions simultaneously
     error_allowance = 2  # allow 2 errors before elimination
 
-    def __init__(self,
-                 num_rounds: int = 5,
-                 communication_turns: int = 3,
-                 market_capacity: int = 2,
-                 entry_profit: int = 15,
-                 overcrowding_penalty: int = -5,
-                 safe_payoff: int = 5,
-                 default_num_players: int = 4):
-        """
-        Initialize the Market Entry Game environment.
+    num_rounds = ta.Param(5, "The number of rounds.", min=1, check=_is_renderable, rule="a positive integer")
+    communication_turns = ta.Param(
+        3, "The simultaneous message turns before each decision. With 0, communication is skipped.",
+        min=0, check=_is_renderable, rule="a non-negative integer",
+    )
+    market_capacity = ta.Param(
+        2, "The largest number of entrants for which entering is profitable.",
+        min=0, check=_is_renderable, rule="a non-negative integer",
+    )
+    entry_profit = ta.Param(
+        15, "The payoff for entering a market that is not overcrowded.",
+        type=Real, check=_is_payoff, rule="a finite number",
+    )
+    overcrowding_penalty = ta.Param(
+        -5, "The payoff for entering an overcrowded market.", type=Real, check=_is_payoff, rule="a finite number",
+    )
+    safe_payoff = ta.Param(5, "The payoff for staying out.", type=Real, check=_is_payoff, rule="a finite number")
+    default_num_players = ta.Param(
+        4, "The number of players used when `reset()` is called without `num_players`.", min=2, max=15,
+    )
 
-        Args:
-            num_rounds: Number of rounds to play
-            communication_turns: Number of communication turns before each decision
-            market_capacity: Maximum number of players that can profitably enter
-            entry_profit: Profit when market is not overcrowded
-            overcrowding_penalty: Loss when market is overcrowded
-            safe_payoff: Guaranteed payoff for staying out
-            default_num_players: Number of players in the game (default 4)
-        """
-        if (
-            not isinstance(num_rounds, int)
-            or isinstance(num_rounds, bool)
-            or num_rounds <= 0
-            or not _is_renderable(num_rounds)
-        ):
-            raise ValueError("num_rounds must be a positive integer")
-        if (
-            not isinstance(communication_turns, int)
-            or isinstance(communication_turns, bool)
-            or communication_turns < 0
-            or not _is_renderable(communication_turns)
-        ):
-            raise ValueError("communication_turns must be a non-negative integer")
-        if (
-            not isinstance(market_capacity, int)
-            or isinstance(market_capacity, bool)
-            or market_capacity < 0
-            or not _is_renderable(market_capacity)
-        ):
-            raise ValueError("market_capacity must be a non-negative integer")
-        payoffs = (entry_profit, overcrowding_penalty, safe_payoff)
-        if any(
-            not _is_finite_real(payoff) or not _is_renderable(payoff)
-            for payoff in payoffs
-        ):
-            raise ValueError("payoffs must be finite numbers")
-        if (
-            not isinstance(default_num_players, int)
-            or isinstance(default_num_players, bool)
-            or not self.min_players <= default_num_players <= self.max_players
-        ):
-            raise ValueError(
-                f"default_num_players must be between {self.min_players} and {self.max_players}"
-            )
-
-        self.num_rounds = num_rounds
-        self.communication_turns = communication_turns
-        self.market_capacity = market_capacity
-        self.entry_profit = entry_profit
-        self.overcrowding_penalty = overcrowding_penalty
-        self.safe_payoff = safe_payoff
-        self.default_num_players = default_num_players
-
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         # Decision regex - bare E/S.
         self.decision_pattern = re.compile(r"^\s*(E|S)\s*$", re.IGNORECASE)
         # Public message regex - matches messages in curly braces like {Hello everyone!}

@@ -10,10 +10,10 @@ when neither side can move wins ([rules](https://en.wikipedia.org/wiki/Reversi))
 
 | Env ID | Parameters |
 | --- | --- |
-| `Othello-v0` | `board_size=8`, `show_valid=True` |
-| `Othello-v0-hard` | `board_size=8`, `show_valid=False` |
+| `Othello-v1` | `board_size=8`, `show_valid=True` |
+| `Othello-v1-hard` | `board_size=8`, `show_valid=False` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Othello-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Othello-v0", board_size=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Othello-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Othello-v1", board_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -66,6 +66,7 @@ moves only when `show_valid` is on.
 
 ## Parameters
 
-- `board_size` (default `8`): side length of the board; an even integer of at least 4.
-- `show_valid` (default `True`): whether the acting player is shown the list of valid moves, both before each move and
-  after an illegal one.
+<!-- BEGIN GENERATED: parameters -->
+- `board_size` (default `8`): The side length of the board. Accepts an even integer of at least 4.
+- `show_valid` (default `True`): Whether the acting player is shown the list of valid moves, both before each move and after an illegal one.
+<!-- END GENERATED: parameters -->

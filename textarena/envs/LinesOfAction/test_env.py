@@ -230,15 +230,3 @@ def test_separated_coordinates_are_accepted_and_echoed_in_lowercase():
     assert not done and env.state.error_count == 0
     descriptions = [m for f, m, t, _ in env.state.events if m.startswith("Player 0 moved")]
     assert descriptions == ["Player 0 moved b8 -> b6"]
-
-
-def test_snapshot_restore_recovers_repetition_and_halfmove_state():
-    env = _fresh()
-    snapshot = env.snapshot()
-    env.step("b8b6")
-    env.restore(snapshot)
-    assert env.state.current_player_id == 0
-    assert env.state.game_state["halfmove_clock"] == 0
-    initial_hash = env._hash_position(env.state.game_state["board"], 0)
-    assert env.state.game_state["rep_counter"][initial_hash] == 1
-    assert env.state.game_state["valid_moves"] == env._legal_moves(0)

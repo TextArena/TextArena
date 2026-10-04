@@ -10,9 +10,9 @@ without a legal move, to win ([rules](https://en.wikipedia.org/wiki/Stratego)).
 
 | Env ID | Parameters |
 | --- | --- |
-| `Stratego-v0` | defaults |
+| `Stratego-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Stratego-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Stratego-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -98,8 +98,9 @@ pieces in lowercase and Player 1's in uppercase.
 
 ## Parameters
 
-- `max_turns` (default `1000`): total turns, counting both players, before the game is a draw. It must be a positive
-  integer.
+<!-- BEGIN GENERATED: parameters -->
+- `max_turns` (default `1000`): The total number of turns, counting both players, before the game is a draw. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

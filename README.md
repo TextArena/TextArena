@@ -29,10 +29,12 @@ exactly, and observations can be translated into 192 languages.
 ## Installation
 
 ```bash
-pip install textarena
+pip install "textarena[agents]"
 ```
 
-TextArena needs Python 3.10 or newer and depends only on `openai` and `rich`.
+TextArena needs Python 3.10 or newer. The games themselves have no dependencies, so `pip install textarena` installs
+nothing else; the extras add the optional parts: `agents` (model agents, via `openai`), `render` (the terminal
+renderer, via `rich`), `translations` (the `textarena-locales` catalogs), and `all`.
 
 ## Quick start
 
@@ -46,7 +48,7 @@ agents = {
     1: ta.agents.OpenRouterAgent(model_name="anthropic/claude-3.5-haiku"),
 }
 
-env = ta.make("TicTacToe-v0")
+env = ta.make("TicTacToe-v1")
 env.reset(num_players=len(agents), seed=42)
 
 done = False
@@ -59,9 +61,10 @@ rewards, game_info = env.close()
 ```
 
 `get_observation()` returns the player who acts next and the text they see; `close()` returns each player's reward
-and game info. An agent is any callable that turns an observation string into an action string. Besides
-`OpenRouterAgent`, TextArena ships `HumanAgent` for playing in the terminal (try `python demo.py`) and
-`TinkerAgent` for models trained with Tinker.
+and game info. An agent is any callable that turns an observation string into an action string. TextArena ships
+`OpenAIAgent` for any OpenAI-compatible API (OpenAI, a vLLM or other local server via `base_url`), its OpenRouter
+preset `OpenRouterAgent`, `TinkerAgent` for models trained with Tinker, and `HumanAgent` for playing in the terminal
+(try `python demo.py`).
 
 ## Actions
 
@@ -76,14 +79,28 @@ Every configuration is registered twice:
 
 | ID | Each observation contains | Use it when |
 | --- | --- | --- |
-| `TicTacToe-v0` | only the messages since the player's last turn | the agent keeps the conversation history itself |
-| `TicTacToe-v0-mdp` | everything needed to act: the prompt, the game's messages, and the latest board | each step should stand on its own, as in RL training |
+| `TicTacToe-v1` | only the messages since the player's last turn | the agent keeps the conversation history itself |
+| `TicTacToe-v1-mdp` | everything needed to act: the prompt, the game's messages, and the latest board | each step should stand on its own, as in RL training |
 
 ## Games
 
 There are 30 single-player, 52 two-player, and 26 multi-player games. The [catalog](textarena/envs/README.md)
-lists them all, and each game's README covers its rules, actions, rewards, and registered configurations. Settings
-that are not registered are a keyword away: `ta.make("Chess-v0", max_turns=250)`.
+lists them all, and each game's README covers its rules, actions, rewards, registered configurations, and
+parameters. Settings that are not registered are a keyword away: `ta.make("Chess-v1", max_turns=250)`.
+
+Environment ids end in a version: when a game's rules change, the version goes up and the old id is retired, so
+scores reported for one version are only comparable with scores for the same version. All ids are currently `-v1`.
+
+## Replaying games
+
+Every game can be rebuilt from its seed and actions. `env.record()` returns a JSON-serializable record of the game
+(its parameters, player count, seed, actions, and the answers of any LLM judge), and `ta.replay(record)` rebuilds it,
+optionally stopping after a given number of actions:
+
+```python
+record = env.record()
+replayed = ta.replay(record, steps=10)  # the game after its first ten actions
+```
 
 ## Training
 
@@ -106,17 +123,17 @@ below were made.
 ## Multilingual games
 
 Games are written in English. `TranslationWrapper` translates each player's observations into that player's
-language, even when players in the same match use different languages:
+language, even when players in the same match use different languages. The translations ship separately
+(`pip install "textarena[translations]"`):
 
 ```python
-env = ta.make("TicTacToe-v0")
+env = ta.make("TicTacToe-v1")
 env = ta.wrappers.TranslationWrapper(env, lang={0: "en", 1: "de"})
 ```
 
-Actions always stay in English, since that is what the games parse. Each game keeps its translations in a
-`locales.json` next to its code, keyed by the exact English line, so a line whose English wording changes falls
-back to English instead of showing an outdated translation. `python scripts/locales.py coverage --lang de` reports
-how much of each game is translated.
+Actions always stay in English, since that is what the games parse. Translations are keyed by the exact English
+line, so a line whose English wording changes falls back to English instead of showing an outdated translation.
+`python scripts/locales.py coverage --lang de` reports how much of each game is translated.
 
 <div align="center">
 
@@ -146,7 +163,7 @@ Languages fall into two confidence tiers:
   substantially more machine correction.
 
 All shipped low-resource localizations reach at least 94% measured fidelity after repair. Per-language scores are
-in [`textarena/wrappers/locale_confidence.json`](textarena/wrappers/locale_confidence.json), and the pipeline that
+in [`locales/textarena_locales/confidence.json`](locales/textarena_locales/confidence.json), and the pipeline that
 translated, verified, and repaired them is on the
 [`multilingual`](https://github.com/TextArena/TextArena/tree/multilingual) branch. Research using these
 localizations should report each language's confidence tier and distinguish machine-verified from native-reviewed
@@ -159,14 +176,14 @@ translations.
 Contributions of all kinds are welcome: new games, fixes, documentation, and translations. To work on TextArena:
 
 ```bash
-pip install -e ".[test]"
+pip install -e ./locales -e ".[test]"
 pytest
 ```
 
 [Adding a game](textarena/envs/README.md#adding-a-game) describes the folder layout and the engine hooks. After
 changing a game, `python scripts/generate_env_docs.py` updates the generated parts of the docs and
-`python scripts/locales.py extract` updates the translation catalogs. Questions and ideas are welcome on
-[Discord](https://discord.gg/dnScm47kNq).
+`python scripts/locales.py extract` updates the translation catalogs in [`locales/`](locales), the source of the
+`textarena-locales` package. Questions and ideas are welcome on [Discord](https://discord.gg/dnScm47kNq).
 
 ## Citation
 

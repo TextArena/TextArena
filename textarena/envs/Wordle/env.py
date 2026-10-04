@@ -1,5 +1,5 @@
 import re
-from typing import Optional, List, Dict, Any, Union
+from typing import List, Dict, Any, Union
 
 import textarena as ta
 from textarena.envs.Wordle.renderer import create_board_str
@@ -12,18 +12,14 @@ class WordleEnv(ta.GameEnv):
     action_pattern = r"^([a-zA-Z]+)$"
     snapshot_excluded_attributes = ("word_list",)
 
-    def __init__(self, word_length: int = 5, num_guesses: int = 6, hardcore: Optional[bool] = False):
-        """ Initializes the Wordle environment """
-        if not isinstance(word_length, int) or isinstance(word_length, bool) or word_length < 1:
-            raise ValueError("word_length must be a positive integer.")
-        if not isinstance(num_guesses, int) or isinstance(num_guesses, bool) or num_guesses < 1:
-            raise ValueError("num_guesses must be a positive integer.")
-        if not isinstance(hardcore, bool):
-            raise ValueError("hardcore must be a boolean.")
-        self.word_length = word_length
-        self.num_guesses = num_guesses
-        self.max_turns = num_guesses
-        self._load_word_list(hardcore=hardcore)
+    word_length = ta.Param(5, "The number of letters in the secret word and in every guess.", min=1)
+    num_guesses = ta.Param(6, "The number of accepted guesses allowed.", min=1)
+    hardcore = ta.Param(False, "Draw the secret word from every headword of the dictionary instead of Basic English.")
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.max_turns = self.num_guesses
+        self._load_word_list(hardcore=self.hardcore)
 
     def _check_word(self, word: str) -> bool:
         return is_english_word(word)

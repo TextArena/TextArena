@@ -12,10 +12,10 @@ repeated play.
 
 | Env ID | Parameters |
 | --- | --- |
-| `IteratedUltimatumGame-v0` | `pool=50`, `max_turns=10`, `alternate_roles=False` |
-| `IteratedUltimatumGame-v0-alternate` | `pool=50`, `max_turns=12`, `alternate_roles=True` |
+| `IteratedUltimatumGame-v1` | `pool=50`, `max_turns=10`, `alternate_roles=False` |
+| `IteratedUltimatumGame-v1-alternate` | `pool=50`, `max_turns=12`, `alternate_roles=True` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedUltimatumGame-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedUltimatumGame-v0", pool=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedUltimatumGame-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedUltimatumGame-v1", pool=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -51,10 +51,11 @@ gain for the round, and the running totals.
 
 ## Parameters
 
-- `pool` (default `10`): money split each round; a non-negative integer.
-- `max_turns` (default `4`): total number of turns, which must be a positive even number; the game has `max_turns / 2`
-  rounds.
-- `alternate_roles` (default `False`): swap the proposer and responder after every round.
+<!-- BEGIN GENERATED: parameters -->
+- `pool` (default `10`): The money split each round. Accepts a non-negative integer.
+- `max_turns` (default `4`): The total number of turns; the game has max_turns / 2 rounds. Accepts a positive even integer.
+- `alternate_roles` (default `False`): Swap the proposer and responder after every round.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

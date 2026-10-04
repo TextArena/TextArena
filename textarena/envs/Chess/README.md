@@ -11,10 +11,10 @@ full FIDE move rules; draws that a player could claim are applied automatically,
 
 | Env ID | Parameters |
 | --- | --- |
-| `Chess-v0` | `is_open=True`, `max_turns=100`, `show_valid=True` |
-| `Chess-v0-blind` | `is_open=False`, `max_turns=100`, `show_valid=False` |
+| `Chess-v1` | `is_open=True`, `max_turns=100`, `show_valid=True` |
+| `Chess-v1-blind` | `is_open=False`, `max_turns=100`, `show_valid=False` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Chess-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Chess-v0", is_open=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Chess-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Chess-v1", is_open=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -71,7 +71,7 @@ Before each move, the acting player also receives:
   uppercase (`K Q R B N P`), Black in lowercase, and `.` for empty squares;
 - with `show_valid=True`, the full list of legal moves in UCI notation.
 
-With both disabled (`Chess-v0-blind`), players must track the position from the move history alone.
+With both disabled (`Chess-v1-blind`), players must track the position from the move history alone.
 
 ## Rewards
 
@@ -86,11 +86,11 @@ The first invalid move only triggers a retry message; a valid move resets the co
 
 ## Parameters
 
-| Parameter | Default | Description |
-| --- | --- | --- |
-| `is_open` | `True` | Show the board to the acting player before each move. |
-| `show_valid` | `True` | Show the list of legal moves before each move. |
-| `max_turns` | `30` | Total moves (both players combined) before the game is drawn; must be a positive integer. |
+<!-- BEGIN GENERATED: parameters -->
+- `is_open` (default `True`): Show the board to the acting player before each move.
+- `max_turns` (default `30`): The total number of moves (both players combined) before the game is drawn. Accepts an integer of at least 1.
+- `show_valid` (default `True`): Show the list of legal moves before each move.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

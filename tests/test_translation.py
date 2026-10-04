@@ -160,9 +160,21 @@ def _play(env, actions):
 
 # --------------------------------------------------------------------------- runtime
 
+def test_without_the_locales_package_only_english_is_available(monkeypatch):
+    from textarena.wrappers import translation
+
+    monkeypatch.setattr(translation, "PACKAGE_DIR", None)
+    monkeypatch.setattr(translation, "SHARED_CATALOG", None)
+    env = TranslationWrapper(ta.make("TicTacToe-v1"), lang="en")
+    env.reset(num_players=2, seed=0)
+    assert env.get_observation()[1].startswith("[GAME] You are Player 0")
+    with pytest.raises(ImportError, match="textarena-locales"):
+        TranslationWrapper(ta.make("TicTacToe-v1"), lang={1: "de"})
+
+
 def test_english_is_an_exact_passthrough():
     actions = ["4", "0", "nonsense", "8", "1", "2", "6", "3", "5", "7"]
-    plain, wrapped = ta.make("TicTacToe-v0"), TranslationWrapper(ta.make("TicTacToe-v0"), lang="en")
+    plain, wrapped = ta.make("TicTacToe-v1"), TranslationWrapper(ta.make("TicTacToe-v1"), lang="en")
     plain.reset(num_players=2, seed=3)
     wrapped.reset(num_players=2, seed=3)
     assert _play(wrapped, actions) == _play(plain, actions)
@@ -269,7 +281,7 @@ def test_unknown_language_lists_available_ones(game):
 
 
 def test_translations_do_not_change_game_behavior():
-    for env_id, players in [("TicTacToe-v0", 2), ("LiarsDice-v0", 3), ("Hanabi-v0-mdp", 2)]:
+    for env_id, players in [("TicTacToe-v1", 2), ("LiarsDice-v1", 3), ("Hanabi-v1-mdp", 2)]:
         outcomes = []
         for lang in ("en", "de"):
             with warnings.catch_warnings():
@@ -291,7 +303,7 @@ def test_real_catalogs_translate_the_mdp_variant():
     game_label = json.loads(Path(SHARED_CATALOG).read_text(encoding="utf-8"))["de"][template_id("GAME")]
     observations = []
     for lang in ("en", "de"):
-        env = TranslationWrapper(ta.make("TicTacToe-v0-mdp"), lang=lang)
+        env = TranslationWrapper(ta.make("TicTacToe-v1-mdp"), lang=lang)
         env.reset(num_players=2, seed=0)
         env.step("4")
         observations.append(env.get_observation()[1])
@@ -383,20 +395,22 @@ def test_committed_catalogs_are_fresh_and_valid(capsys):
 
 
 def test_extract_drops_translations_of_removed_lines_and_is_idempotent(tmp_path, monkeypatch, capsys):
-    monkeypatch.setattr(tool, "ENVS_DIR", str(tmp_path))
-    game = tmp_path / "Game"
-    game.mkdir()
+    monkeypatch.setattr(tool, "ENVS_DIR", str(tmp_path / "envs"))
+    monkeypatch.setattr(tool, "LOCALES_DIR", str(tmp_path / "locales"))
+    game = tmp_path / "envs" / "Game"
+    game.mkdir(parents=True)
     (game / "__init__.py").write_text("", encoding="utf-8")
     (game / "env.py").write_text('def a(x):\n    return f"Kept {x}."\n\n\ndef b():\n    return "New line."\n', encoding="utf-8")
     old, kept, new = template_id("Old line."), template_id("Kept {x}."), template_id("New line.")
-    _write(game / "locales.json", {
+    catalog = tmp_path / "locales" / "envs" / "Game.json"
+    _write(catalog, {
         "fr": {old: "Ancienne ligne."},
         "en": {old: "Old line.", kept: "Kept {x}."},
         "de": {old: "Alte Zeile.", kept: "Bleibt {x}."},
     })
     assert tool.main(["extract", "--check", "Game"]) == 1
     assert tool.main(["extract", "Game"]) == 0
-    text = (game / "locales.json").read_text(encoding="utf-8")
+    text = catalog.read_text(encoding="utf-8")
     data = json.loads(text)
     assert list(data) == ["en", "de"]
     assert data["en"] == dict(sorted({kept: "Kept {x}.", new: "New line."}.items()))
@@ -404,7 +418,7 @@ def test_extract_drops_translations_of_removed_lines_and_is_idempotent(tmp_path,
     capsys.readouterr()
     assert tool.main(["extract", "Game"]) == 0 and tool.main(["extract", "--check", "Game"]) == 0
     assert "updated" not in capsys.readouterr().out
-    assert (game / "locales.json").read_text(encoding="utf-8") == text
+    assert catalog.read_text(encoding="utf-8") == text
 
 
 def test_extraction_rules(tmp_path):

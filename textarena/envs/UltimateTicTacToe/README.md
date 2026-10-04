@@ -12,9 +12,9 @@ not just the small one in front of you.
 
 | Env ID | Parameters |
 | --- | --- |
-| `UltimateTicTacToe-v0` | defaults |
+| `UltimateTicTacToe-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `UltimateTicTacToe-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `UltimateTicTacToe-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

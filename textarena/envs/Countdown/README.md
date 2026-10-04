@@ -12,14 +12,14 @@ planning with a shrinking set of numbers.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Countdown-v0` | `numbers=[100, 75, 6, 4, 3, 2]`, `target=532` |
+| `Countdown-v1` | `numbers=[100, 75, 6, 4, 3, 2]`, `target=532` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Countdown-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Countdown-v0", numbers=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Countdown-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Countdown-v1", numbers=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
 
-- The registered `Countdown-v0` always uses the numbers `100 75 6 4 3 2` and the target 532. Without configured
+- The registered `Countdown-v1` always uses the numbers `100 75 6 4 3 2` and the target 532. Without configured
   `numbers`, six are drawn at reset: two "large" numbers from 25, 50, 75, and 100, and four "small" numbers from two
   cards each of 1–10. Without a configured `target`, it is drawn from 100–999 and redrawn if it equals a starting
   number.
@@ -81,15 +81,14 @@ negative; it is `0` until a result gets closer than every starting number, and b
 
 ## Parameters
 
-- `numbers` (default `None`): the starting numbers, 2 to 100 positive integers up to 1,000,000. `None` draws two large
-  and four small numbers at reset.
-- `target` (default `None`): a positive integer up to 1,000,000 that is not one of `numbers`. `None` draws a target
-  from 100–999 at reset.
-- `max_turns` (default `12`): the number of valid moves allowed. Each move uses up a number, so with six numbers the
-  game always ends within five moves and the default limit is never reached.
+<!-- BEGIN GENERATED: parameters -->
+- `numbers` (default `None`): The starting numbers. With None, two large and four small numbers are drawn at reset. Accepts a list of 2 to 100 integers from 1 to 1000000 or None.
+- `target` (default `None`): The number to reach. It must not be one of the starting numbers. With None, a target from 100 to 999 is drawn at reset. Accepts an integer from 1 to 1000000 or None.
+- `max_turns` (default `12`): The number of valid moves allowed. Each move uses up a number, so with six numbers the game always ends within five moves and the default limit is never reached. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 
-- Progress is measured against the starting numbers. In `Countdown-v0`, 100 is the closest starting number, 432 away
+- Progress is measured against the starting numbers. In `Countdown-v1`, 100 is the closest starting number, 432 away
   from 532, so making 525 (7 away) scores `(432 − 7) / 432 ≈ 0.984`, and making no move scores `0`.
 - Not every target can be made with the drawn numbers, as on the show.

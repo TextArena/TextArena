@@ -11,9 +11,9 @@ order of presses does not matter, and pressing a light twice undoes it.
 
 | Env ID | Parameters |
 | --- | --- |
-| `LightsOut-v0` | `size=5`, `max_turns=20` |
+| `LightsOut-v1` | `size=5`, `max_turns=20` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `LightsOut-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("LightsOut-v0", size=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `LightsOut-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("LightsOut-v1", size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -62,9 +62,10 @@ number on now, divided by the number on at the start, clamped between `0` and `1
 
 ## Parameters
 
-- `size` (default `5`): the width and height of the grid, from 1 to 20.
-- `max_turns` (default `50`): the number of valid presses allowed. It also caps the number of scrambling presses at
-  reset, so the puzzle stays solvable within the limit.
+<!-- BEGIN GENERATED: parameters -->
+- `size` (default `5`): The width and height of the grid. Accepts an integer from 1 to 20.
+- `max_turns` (default `50`): The number of valid presses allowed. It also caps the number of scrambling presses at reset, so the puzzle stays solvable within the limit. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

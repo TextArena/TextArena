@@ -10,10 +10,10 @@ discs horizontally, vertically, or diagonally wins ([rules](https://en.wikipedia
 
 | Env ID | Parameters |
 | --- | --- |
-| `ConnectFour-v0` | `is_open=True`, `num_rows=6`, `num_cols=7` |
-| `ConnectFour-v0-blind` | `is_open=False`, `num_rows=6`, `num_cols=7` |
+| `ConnectFour-v1` | `is_open=True`, `num_rows=6`, `num_cols=7` |
+| `ConnectFour-v1-blind` | `is_open=False`, `num_rows=6`, `num_cols=7` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `ConnectFour-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ConnectFour-v0", is_open=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `ConnectFour-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ConnectFour-v1", is_open=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -50,6 +50,8 @@ such as `Player 0 dropped their disk (X) into column 3.`
 
 ## Parameters
 
-- `is_open` (default `True`): show the board before every move; `False` gives the blind variant.
-- `num_rows` (default `6`) and `num_cols` (default `7`): board size, positive integers. A board shorter than four
-  cells in both directions can only end in a draw.
+<!-- BEGIN GENERATED: parameters -->
+- `is_open` (default `True`): Show the board before every move. False gives the blind variant.
+- `num_rows` (default `6`): The number of rows on the board. A board shorter than four cells in both directions can only end in a draw. Accepts an integer of at least 1.
+- `num_cols` (default `7`): The number of columns on the board. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->

@@ -2,7 +2,6 @@
 import itertools
 import random
 import re
-import time
 
 import pytest
 
@@ -163,28 +162,6 @@ def test_cards_are_conserved_after_scoring():
     assert len(set(all_cards)) == 81
 
 
-def test_repeat_reset_replays_same_board():
-    env = _fresh()
-    first_board = list(env.state.game_state["board"])
-    indices = _find_set(first_board)
-    env.step(", ".join(map(str, indices)))
-    env.reset(num_players=1, seed=42)
-    assert env.state.game_state["board"] == first_board
-
-
-def test_snapshot_restore_replays_scoring_move():
-    env = _fresh()
-    indices = _find_set(env.state.game_state["board"])
-    action = ", ".join(map(str, indices))
-    before = env.snapshot()
-    env.step(action)
-    expected = env.snapshot()
-    env.restore(before)
-    env.step(action)
-    assert env.state.game_state == expected["state"].game_state
-    assert env.state.current_player_id == expected["state"].current_player_id
-
-
 def test_invalid_limit_preserves_points_already_earned():
     env = _fresh()
     indices = _find_set(env.state.game_state["board"])
@@ -240,13 +217,3 @@ def test_tokenized_parser_accepts_exactly_what_the_reference_regex_accepts():
     for _ in range(20000):
         action = "".join(rng.choice(alphabet) for _ in range(rng.randint(0, 9)))
         assert env._parse_action(action) == _reference_parse(action), repr(action)
-
-
-def test_long_whitespace_runs_are_parsed_in_linear_time():
-    env = _fresh()
-    before = env.state.game_state["num_turns"]
-    for action in ("4" + " " * 30000 + "x", " " * 30000 + "1 2 3x", "1" + " ," * 15000 + "2"):
-        start = time.perf_counter()
-        env.step(action)
-        assert time.perf_counter() - start < 0.25, repr(action[:20])
-    assert env.state.game_state["num_turns"] == before

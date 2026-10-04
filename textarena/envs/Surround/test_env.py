@@ -173,20 +173,6 @@ def test_non_string_action_is_an_immediate_consistent_death():
     assert env.state.rewards == {0: -1.0, 1: 1.0}
 
 
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"width": 5.5},
-        {"height": "5"},
-        {"max_turns": 0},
-        {"max_turns": 1.5},
-    ],
-)
-def test_invalid_configuration_rejected(kwargs):
-    with pytest.raises(ValueError):
-        SurroundEnv(**kwargs)
-
-
 def _place(env, positions):
     players = env.game_state["players"]
     for pid, position in positions.items():

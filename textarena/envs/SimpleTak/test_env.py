@@ -47,12 +47,6 @@ def test_player0_connects_left_to_right_and_wins():
     assert env.state.rewards == {0: 1, 1: -1}
 
 
-@pytest.mark.parametrize("board_size", [0, -1, 2.5, True])
-def test_invalid_board_size_rejected(board_size):
-    with pytest.raises(ValueError):
-        SimpleTakEnv(board_size=board_size)
-
-
 def test_invalid_format_increments_error_not_done():
     env = _fresh()
     done, _ = env.step("not a move")

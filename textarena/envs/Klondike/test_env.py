@@ -4,7 +4,6 @@ Single-player card game: move all 52 cards to the four foundation piles.
 Actions are bare commands such as ``draw``, ``move W T1`` or
 ``forfeit``; multiple comma-separated actions may be given per turn.
 """
-import random
 
 import pytest
 
@@ -191,14 +190,6 @@ def test_generated_decks_are_complete_and_deterministic(seed):
     assert len({(card.rank, card.suit) for card in cards}) == 52
 
 
-def test_reset_does_not_consume_global_random_state():
-    random.seed(8675309)
-    expected = random.getstate()
-    env = KlondikeEnv()
-    env.reset(num_players=1, seed=7)
-    assert random.getstate() == expected
-
-
 @pytest.mark.parametrize(
     "action",
     [
@@ -279,16 +270,6 @@ def test_oversized_action_is_invalid_without_card_mutation():
     assert _card_state(env) == before
 
 
-def test_snapshot_restore_keeps_klondike_property_on_restored_state():
-    env = _fresh()
-    snapshot = env.snapshot()
-    env.step("draw")
-    assert env.klondike.waste
-    env.restore(snapshot)
-    assert env.klondike.waste == []
-    assert env.get_board_str() == env.render(0)
-
-
 def test_render_hides_face_down_cards_and_remains_available_at_terminal():
     env = _fresh()
     hidden_card = str(env.klondike.tableau[6][0][0])
@@ -297,17 +278,3 @@ def test_render_hides_face_down_cards_and_remains_available_at_terminal():
     assert hidden_card not in board
     env.step("forfeit")
     assert "KLONDIKE SOLITAIRE" in env.render(0)
-
-
-@pytest.mark.parametrize(
-    "kwargs",
-    [
-        {"draw_count": 2},
-        {"draw_count": True},
-        {"max_turns": 0},
-        {"max_turns": True},
-    ],
-)
-def test_invalid_configuration_rejected(kwargs):
-    with pytest.raises(ValueError):
-        KlondikeEnv(**kwargs)

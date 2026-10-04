@@ -12,9 +12,9 @@ the next round.
 
 | Env ID | Parameters |
 | --- | --- |
-| `GameOfPureStrategy-v0` | defaults |
+| `GameOfPureStrategy-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `GameOfPureStrategy-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `GameOfPureStrategy-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

@@ -12,9 +12,9 @@ every move must avoid leaving the opponent a finishing move with either mark.
 
 | Env ID | Parameters |
 | --- | --- |
-| `WildTicTacToe-v0` | defaults |
+| `WildTicTacToe-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `WildTicTacToe-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `WildTicTacToe-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

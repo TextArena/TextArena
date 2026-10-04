@@ -14,10 +14,10 @@ class SimpleNegotiationEnv(ta.GameEnv):
     _COMMAND_WORD_RE = re.compile(r"(?:accept|deny|offer)\b", re.IGNORECASE)
     max_command_chars = 500
 
-    def __init__(self, max_turns: int = 10):
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
-            raise ValueError("max_turns must be a positive integer")
-        self.max_turns = max_turns
+    max_turns = ta.Param(10, "The turns in the whole game, counting both players.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.resource_names = ["Wheat", "Wood", "Sheep", "Brick", "Ore"]
         self.base_values = {"Wheat": 5, "Wood": 10, "Sheep": 15, "Brick": 25, "Ore": 40}
 

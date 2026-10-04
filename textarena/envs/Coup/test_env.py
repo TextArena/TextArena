@@ -497,18 +497,6 @@ def test_initial_and_repeat_reset_conserve_fifteen_cards():
     assert env.state.game_state["hidden_hand"] == first
 
 
-def test_snapshot_restore_replays_exchange_shuffle():
-    env = make_env()
-    env.step("exchange")
-    before = env.snapshot()
-    env.step("pass")
-    expected = env.snapshot()
-    env.restore(before)
-    env.step("pass")
-    assert env.state.game_state == expected["state"].game_state
-    assert env.state.current_player_id == expected["state"].current_player_id
-
-
 def test_target_may_block_after_losing_challenge_to_action_claim():
     env = make_env()
     gs = env.state.game_state

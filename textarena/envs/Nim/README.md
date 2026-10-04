@@ -10,9 +10,9 @@ Players take turns removing one or more objects from a single pile, and whoever 
 
 | Env ID | Parameters |
 | --- | --- |
-| `Nim-v0` | `piles=[3, 4, 5]` |
+| `Nim-v1` | `piles=[3, 4, 5]` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Nim-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Nim-v0", piles=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Nim-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Nim-v1", piles=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -41,8 +41,9 @@ see every removal.
 
 ## Parameters
 
-- `piles` (default `[3, 4, 5]`): starting pile sizes. A non-empty list of at most 100 non-negative integers, each at
-  most 1,000,000, holding at least one object in total.
+<!-- BEGIN GENERATED: parameters -->
+- `piles` (default `[3, 4, 5]`): The starting pile sizes. Accepts a non-empty list of at most 100 integers from 0 to 1,000,000, holding at least one object in total.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

@@ -40,48 +40,38 @@ def _phrase_pattern(tokens: Tuple[str, ...]) -> "re.Pattern[str]":
     return re.compile(r"(?<![^\W_])" + "".join(parts) + r"(?![^\W_])")
 
 
+def _valid_categories(categories) -> bool:
+    if isinstance(categories, str):
+        categories = [categories]
+    return isinstance(categories, (list, tuple)) and bool(categories) and all(
+        isinstance(category, str) and category.strip() for category in categories
+    )
+
+
 class TabooEnv(ta.GameEnv):
     """ Environment for Taboo Game. """
     min_players = 4
     max_players = None  # any even count >= 4 (two teams)
     snapshot_excluded_attributes = ("data",)
 
-    def __init__(
-        self,
-        categories: Union[str, List[str]],
-        max_rounds: int,
-        max_attempts_per_player: int,
-        data_path: Optional[str] = None,
-    ):
-        """
-        Initialize the Taboo game environment.
-        Args:
-            categories (Union[str, List[str]]): Either a single category or a list of categories to include in the game.
-            max_rounds (int): Maximum number of rounds.
-            max_attempts_per_player (int): Attempts per player per round.
-            data_path (str, optional): Path to the JSON file containing the taboo words.
-        """
-        if isinstance(categories, str):
-            categories = [categories]
-        elif isinstance(categories, list):
-            categories = list(categories)
-        else:
-            raise ValueError("categories must be a category name or a list of category names.")
-        if not categories or any(not isinstance(category, str) or not category.strip() for category in categories):
-            raise ValueError("At least one non-empty category must be provided.")
-        if not isinstance(max_rounds, int) or isinstance(max_rounds, bool) or max_rounds < 1:
-            raise ValueError("max_rounds must be a positive integer.")
-        if (
-            not isinstance(max_attempts_per_player, int)
-            or isinstance(max_attempts_per_player, bool)
-            or max_attempts_per_player < 1
-        ):
-            raise ValueError("max_attempts_per_player must be a positive integer.")
+    categories = ta.Param(
+        ["things"],
+        "One category or a list whose words are combined, chosen from `animals`, `cars`, `city/country`, `food`, "
+        "`literature`, `people`, `things`, and `tv` (84 to 495 targets each).",
+        type=object, check=_valid_categories, rule="a category name or a non-empty list of category names",
+    )
+    max_rounds = ta.Param(4, "The number of rounds, i.e. turns per team.", min=1)
+    max_attempts_per_player = ta.Param(6, "The actions each player takes during each of their team's turns.", min=1)
+    data_path = ta.Param(
+        None,
+        'An optional JSON file of the form `{"category": {"target": ["taboo", ...]}}` that replaces the bundled '
+        "`words.json`. Every target must contain at least one letter or digit.",
+        type=str,
+    )
 
-        self.categories = categories
-        self.max_rounds = max_rounds
-        self.max_attempts_per_player = max_attempts_per_player
-        self.data_path = data_path
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.categories = [self.categories] if isinstance(self.categories, str) else list(self.categories)
 
     @property
     def terminal_render_keys(self):

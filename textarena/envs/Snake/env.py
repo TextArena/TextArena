@@ -36,19 +36,15 @@ class SnakeEnv(ta.GameEnv):
     broadcast_actions = False  # moves are sealed until the round resolves
     error_allowance = 0  # an invalid move kills the snake immediately
 
-    def __init__(self, width: int = 10, height: int = 10, num_apples: int = 3, max_turns: int = 100):
-        if any(not isinstance(value, int) or isinstance(value, bool) for value in (width, height)):
-            raise ValueError("width and height must be integers")
-        if width <= 0 or height <= 0:
-            raise ValueError("width and height must be positive")
-        if not isinstance(num_apples, int) or isinstance(num_apples, bool) or num_apples < 0:
-            raise ValueError("num_apples must be a non-negative integer")
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
-        if width * height < (num_apples + 15): raise ValueError(f"Board {width}x{height} too small for {num_apples} apples and up to {15} snakes")
-        self.width, self.height = width, height
-        self.num_apples = num_apples
-        self.max_turns = max_turns
+    width = ta.Param(10, "The board width.", min=1)
+    height = ta.Param(10, "The board height.", min=1)
+    num_apples = ta.Param(3, "The number of apples kept on the board (fewer only when no empty cell is left).", min=0)
+    max_turns = ta.Param(100, "The number of rounds, each one move by every living snake, before the game ends.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.width * self.height < self.num_apples + 15:
+            raise ValueError(f"Board {self.width}x{self.height} too small for {self.num_apples} apples and up to 15 snakes")
 
     @property
     def pending_actions(self) -> Dict[int, Optional[str]]:

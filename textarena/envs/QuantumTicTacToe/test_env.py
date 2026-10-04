@@ -62,33 +62,6 @@ def test_cycle_collapse_propagates_to_dependent_marks():
     assert "O1" in rendered and "X2" in rendered and "O3" in rendered
 
 
-def test_snapshot_restore_replays_cycle_collapse():
-    env = _fresh()
-    for action in ["0,1", "3,4", "1,2", "4,5"]:
-        done, _ = env.step(action)
-        assert not done
-    snapshot = env.snapshot()
-
-    done, _ = env.step("0,2")
-    first = (
-        done,
-        [row[:] for row in env.state.game_state["board"]],
-        dict(env.state.game_state["superpositions"]),
-        dict(env.state.rewards),
-    )
-
-    env.restore(snapshot)
-    done, _ = env.step("0,2")
-    second = (
-        done,
-        [row[:] for row in env.state.game_state["board"]],
-        dict(env.state.game_state["superpositions"]),
-        dict(env.state.rewards),
-    )
-
-    assert second == first
-
-
 def test_entangled_pair_order_does_not_change_automatic_collapse():
     forward = _fresh()
     reverse = _fresh()

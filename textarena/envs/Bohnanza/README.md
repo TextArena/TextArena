@@ -10,10 +10,10 @@ awkward beans with the active player is the heart of the game ([rules](https://w
 
 | Env ID | Parameters |
 | --- | --- |
-| `Bohnanza-v0` | `deck_cycles=3`, `max_trade_rounds=None`, `max_turns=3000` |
-| `Bohnanza-v0-short` | `deck_cycles=1`, `max_trade_rounds=3`, `max_turns=1000` |
+| `Bohnanza-v1` | `deck_cycles=3`, `max_trade_rounds=None`, `max_turns=3000` |
+| `Bohnanza-v1-short` | `deck_cycles=1`, `max_trade_rounds=3`, `max_turns=1000` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Bohnanza-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Bohnanza-v0", deck_cycles=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Bohnanza-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Bohnanza-v1", deck_cycles=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -90,12 +90,12 @@ player who made them. Cards drawn in phase 4 are told only to the drawing player
 
 ## Parameters
 
-- `deck_cycles` (default `3`): the game ends when the draw pile runs out this many times.
-- `max_trade_rounds` (default `None`): if set, trading ends automatically after the floor has gone around the
-  table this many times; `None` lets the active player decide, as in the official rules.
-- `max_turns` (default `3000`): step budget before the game is scored early. A full game takes about 200
-  steps without trading and up to about 1,500 with lively trading.
-- `error_allowance` (default `3`): consecutive invalid moves allowed before the offender forfeits.
+<!-- BEGIN GENERATED: parameters -->
+- `deck_cycles` (default `3`): The game ends when the draw pile runs out this many times (3 in the official rules). Accepts an integer of at least 1.
+- `max_trade_rounds` (default `None`): If set, trading ends automatically after the floor has gone around the table this many times; None lets the active player decide, as in the official rules. Accepts an integer of at least 1 or None.
+- `max_turns` (default `3000`): The step budget; when it is used up, all fields are harvested and the game is scored. A full game takes about 200 steps without trading and up to about 1,500 with lively trading. Accepts an integer of at least 1 or None.
+- `error_allowance` (default `3`): The number of consecutive invalid moves allowed before the offender forfeits. Accepts an integer of at least 0.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

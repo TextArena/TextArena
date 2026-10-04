@@ -13,36 +13,27 @@ class MinesweeperEnv(ta.GameEnv):
     max_grid_cells = 10_000
     max_action_chars = 4096
 
-    def __init__(self, rows: int = 8, cols: int = 8, num_mines: int = 10, max_turns: int = 100):
-        """
-        Args:
-            rows (int): the number of rows
-            cols (int): the number of columns
-            num_mines (int): the number of mines
-        """
-        if not isinstance(rows, int) or isinstance(rows, bool) or rows <= 0:
-            raise ValueError("rows must be a positive integer")
-        if not isinstance(cols, int) or isinstance(cols, bool) or cols <= 0:
-            raise ValueError("cols must be a positive integer")
-        if rows * cols > self.max_grid_cells:
+    rows = ta.Param(8, "The number of rows. The board can have at most 10,000 cells.", min=1)
+    cols = ta.Param(8, "The number of columns.", min=1)
+    num_mines = ta.Param(
+        10, "The number of mines. It must leave room for the mine-free area around the first reveal, so it can be at "
+            "most `rows × cols − 9` on boards of at least 3×3.", min=0,
+    )
+    max_turns = ta.Param(100, "The maximum number of reveals.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.rows * self.cols > self.max_grid_cells:
             raise ValueError(
                 f"rows and cols create more than {self.max_grid_cells} cells"
             )
-        if not isinstance(num_mines, int) or isinstance(num_mines, bool) or num_mines < 0:
-            raise ValueError("num_mines must be a non-negative integer")
-        max_safe_zone = min(3, rows) * min(3, cols)
-        max_mines = rows * cols - max_safe_zone
-        if num_mines > max_mines:
+        max_safe_zone = min(3, self.rows) * min(3, self.cols)
+        max_mines = self.rows * self.cols - max_safe_zone
+        if self.num_mines > max_mines:
             raise ValueError(
                 f"num_mines must be at most {max_mines} so every first move "
                 "can have a mine-free 3x3 safe zone"
             )
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
-            raise ValueError("max_turns must be a positive integer")
-        self.rows = rows
-        self.cols = cols
-        self.num_mines = num_mines
-        self.max_turns = max_turns
 
     # Tests (and the renderer) access these as attributes; they live in game_state.
     @property

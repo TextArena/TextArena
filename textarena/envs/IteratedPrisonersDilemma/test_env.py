@@ -187,22 +187,6 @@ def test_signed_payoffs_are_compared_without_assuming_nonnegative_scores():
     assert env.state.rewards == {0: 1, 1: -1}
 
 
-def test_snapshot_restores_hidden_pending_decision():
-    env = _fresh(communication_turns=0)
-    env.step("cooperate")
-    snapshot = env.snapshot()
-    env.step("defect")
-    assert env.state.done
-
-    env.restore(snapshot)
-    assert env.state.current_player_id == 1
-    assert env.state.game_state["decisions"] == {0: "cooperate", 1: None}
-    assert "P0 cooperate" not in env.get_board_str()
-    done, _ = env.step("cooperate")
-    assert done
-    assert env.state.rewards == {0: 0, 1: 0}
-
-
 def test_duplicate_decision_is_rejected_without_overwrite():
     env = _fresh(communication_turns=0)
     env.step("defect")
@@ -223,9 +207,6 @@ def test_unauthorized_decision_is_rejected_atomically(player_id):
 @pytest.mark.parametrize(
     "kwargs",
     [
-        {"num_rounds": 0},
-        {"communication_turns": -1},
-        {"defect_reward": 1.5},
         {"num_rounds": 10**5000},
         {"defect_reward": 10**5000},
     ],

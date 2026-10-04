@@ -12,9 +12,9 @@ and multi-unit tactical planning.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Diplomacy-v0` | `max_turns=30` |
+| `Diplomacy-v1` | `max_game_years=30` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Diplomacy-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Diplomacy-v0", max_turns=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Diplomacy-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Diplomacy-v1", max_game_years=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -39,7 +39,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Diplomacy-v0-mdp`)
   Unordered builds are waived; if a power orders too few disbands, the units farthest from its home centers are
   disbanded automatically.
 - A power with no units and no centers is eliminated. The game ends when a power controls 18 or more supply centers
-  (checked after every phase), when only one power remains, or after `max_turns` complete game years.
+  (checked after every phase), when only one power remains, or after `max_game_years` complete game years.
 
 ## Actions
 
@@ -103,14 +103,15 @@ counts. The game ends with an announcement of every power's final center count.
 | --- | --- |
 | A power controls 18 or more supply centers | Winner `+1`, everyone else `-1` |
 | Only one power remains | Survivor `+1`, everyone else `-1` |
-| `max_turns` game years completed without a winner | Everyone `0` |
+| `max_game_years` game years completed without a winner | Everyone `0` |
 | Second consecutive invalid move | Offender is eliminated: they stop acting and their units hold in place, but they still receive the final result (`-1` if anyone wins, `0` in a draw) |
 
 ## Parameters
 
-- `max_turns` (default `30`): number of complete game years before the game ends in a draw. It counts game years, not
-  individual player turns.
-- `negotiations_per_phase` (default `3`): turns each player takes per phase; orders are due in the last one.
+<!-- BEGIN GENERATED: parameters -->
+- `max_game_years` (default `30`): The number of complete game years before the game ends in a draw. Accepts an integer of at least 1.
+- `negotiations_per_phase` (default `3`): The turns each player takes per phase. Orders are due in the last one. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

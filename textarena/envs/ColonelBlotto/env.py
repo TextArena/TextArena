@@ -19,23 +19,20 @@ class ColonelBlottoEnv(ta.GameEnv):
     mdp_includes_actions = False
     broadcast_actions = False  # allocations are hidden: raw actions echoed only to their author
 
-    def __init__(self, num_fields: int = 3, num_total_units: int = 20, num_rounds: int = 10):
-        """
-        Args:
-            num_fields (int): Number of fields to fight over (2-26).
-            num_total_units (int): Total units each player can allocate per round.
-            num_rounds (int): Maximum number of rounds before the game ends.
-        """
-        if not isinstance(num_fields, int) or isinstance(num_fields, bool) or not 2 <= num_fields <= 26:
-            raise ValueError("num_fields must be an integer between 2 and 26")
-        if not isinstance(num_total_units, int) or isinstance(num_total_units, bool) or num_total_units < num_fields or not _is_renderable(num_total_units):
-            raise ValueError("num_total_units must be an integer at least as large as num_fields")
-        if not isinstance(num_rounds, int) or isinstance(num_rounds, bool) or num_rounds <= 0 or not _is_renderable(num_rounds):
-            raise ValueError("num_rounds must be a positive integer")
-        self.num_fields = num_fields
+    num_fields = ta.Param(3, "The number of battlefields.", min=2, max=26)
+    num_total_units = ta.Param(
+        20, "The units each commander allocates every round.", min=2, check=_is_renderable,
+        rule="an integer at least as large as num_fields",
+    )
+    num_rounds = ta.Param(10, "The maximum number of rounds.", min=1, check=_is_renderable, rule="a positive integer")
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.num_total_units < self.num_fields:
+            raise ValueError(
+                f"num_total_units must be an integer at least as large as num_fields, received {self.num_total_units!r}"
+            )
         self.field_names = list(string.ascii_uppercase[:self.num_fields])
-        self.num_total_units = num_total_units
-        self.num_rounds = num_rounds
 
     def get_board_str(self):  # TODO have to re-check
         return create_game_str(game_state=self.game_state)

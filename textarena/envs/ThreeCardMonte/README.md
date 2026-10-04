@@ -11,9 +11,9 @@ tracking: perfect bookkeeping always wins.
 
 | Env ID | Parameters |
 | --- | --- |
-| `ThreeCardMonte-v0` | `num_cups=3`, `steps=10` |
+| `ThreeCardMonte-v1` | `num_cups=3`, `steps=10` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `ThreeCardMonte-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ThreeCardMonte-v0", num_cups=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `ThreeCardMonte-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ThreeCardMonte-v1", num_cups=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -46,8 +46,10 @@ row of cup numbers to choose from. After the guess, the ball's final position is
 
 ## Parameters
 
-- `num_cups` (default `3`): the number of cups, at least 3.
-- `steps` (default `10`): the number of swaps, 0 or more.
+<!-- BEGIN GENERATED: parameters -->
+- `num_cups` (default `3`): The number of cups. Accepts an integer of at least 3.
+- `steps` (default `10`): The number of swaps. Accepts an integer of at least 0.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

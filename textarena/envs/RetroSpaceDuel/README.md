@@ -10,9 +10,9 @@ enemy ship down without ever firing into a wall.
 
 | Env ID | Parameters |
 | --- | --- |
-| `RetroSpaceDuel-v0` | `max_turns=100` |
+| `RetroSpaceDuel-v1` | `max_turns=100` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `RetroSpaceDuel-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("RetroSpaceDuel-v0", max_turns=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `RetroSpaceDuel-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("RetroSpaceDuel-v1", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -64,8 +64,12 @@ every action and its effects (hits, ricochets, mines, power-ups).
 
 ## Parameters
 
-- `grid_size` (default `(15, 15)`): arena width and height, including the boundary ring; each at least 5.
-- `max_turns` (default `100`): total turns counting both players; must be even so both ships get the same number of
-  turns.
-- `num_asteroids` (`5`), `num_debris` (`8`), `num_nebulas` (`3`), `num_mines` (`4`), `num_powerups` (`3`): how many
-  of each object to scatter; they must fit on the arena outside the spawn neighbourhoods.
+<!-- BEGIN GENERATED: parameters -->
+- `grid_size` (default `(15, 15)`): The arena width and height, including the boundary ring. Accepts a (width, height) pair of integers of at least 5.
+- `max_turns` (default `100`): The total number of turns, counting both players, before the duel is decided on health. Accepts a positive even integer, so both ships get the same number of turns.
+- `num_asteroids` (default `5`): The number of asteroids to scatter. Accepts an integer of at least 0.
+- `num_debris` (default `8`): The number of debris objects to scatter. Accepts an integer of at least 0.
+- `num_nebulas` (default `3`): The number of nebulas to scatter. Accepts an integer of at least 0.
+- `num_mines` (default `4`): The number of mines to scatter. Accepts an integer of at least 0.
+- `num_powerups` (default `3`): The number of power-ups to scatter. Accepts an integer of at least 0.
+<!-- END GENERATED: parameters -->

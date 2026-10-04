@@ -11,26 +11,8 @@ class SudokuEnv(ta.GameEnv):
     mdp_includes_actions = False
     max_action_chars = 4096
 
-    def __init__(self, clues: int = 30, max_turns: Optional[int] = 100):
-        """
-        Args:
-            clues (int): The exact number of initially filled cells.
-            max_turns (int): The maximum number of moves allowed.
-        """
-        if (
-            not isinstance(clues, int)
-            or isinstance(clues, bool)
-            or not 17 <= clues <= 80
-        ):
-            raise ValueError(f"clues must be between 17 and 80, received {clues}")
-        if (
-            not isinstance(max_turns, int)
-            or isinstance(max_turns, bool)
-            or max_turns <= 0
-        ):
-            raise ValueError("max_turns must be a positive integer")
-        self.clues = clues
-        self.max_turns = max_turns
+    clues = ta.Param(30, "The number of filled cells at the start. Fewer clues make a harder puzzle.", min=17, max=80)
+    max_turns = ta.Param(100, "The maximum number of accepted digits.", min=1)
 
     @property
     def full_grid(self) -> List[List[int]]:

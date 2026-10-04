@@ -10,9 +10,9 @@ cycle of entanglements collapses ([rules](https://en.wikipedia.org/wiki/Quantum_
 
 | Env ID | Parameters |
 | --- | --- |
-| `QuantumTicTacToe-v0` | defaults |
+| `QuantumTicTacToe-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `QuantumTicTacToe-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `QuantumTicTacToe-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

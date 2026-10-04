@@ -11,9 +11,9 @@ planning a sequence of moves in a crowded grid.
 
 | Env ID | Parameters |
 | --- | --- |
-| `RushHour-v0` | defaults |
+| `RushHour-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `RushHour-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `RushHour-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -68,9 +68,10 @@ vehicle back and forth earns nothing.
 
 ## Parameters
 
-- `difficulty` (default `"medium"`): `"easy"`, `"medium"`, or `"hard"`, which scramble the lot with 12, 20, or 35
-  random moves.
-- `max_turns` (default `100`): the number of valid moves allowed.
+<!-- BEGIN GENERATED: parameters -->
+- `difficulty` (default `"medium"`): How scrambled the lot is: easy, medium and hard apply 12, 20 and 35 random moves. Accepts one of 'easy', 'medium', 'hard'.
+- `max_turns` (default `100`): The number of valid moves allowed. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

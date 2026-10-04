@@ -11,9 +11,9 @@ points ([rules](https://www.catan.com/understand-catan/game-rules)).
 
 | Env ID | Parameters |
 | --- | --- |
-| `SettlersOfCatan-v0` | defaults |
+| `SettlersOfCatan-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `SettlersOfCatan-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `SettlersOfCatan-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -100,9 +100,11 @@ spread evenly from `-1` (fewest points) to `+1` (most). For example, four player
 
 ## Parameters
 
-- `player_move_allowance` (default `10`): actions per turn.
-- `max_turns` (default `200`): moves in the whole game, counting every valid reply from any player.
-- `winning_score` (default `10`, at least `3`): victory points needed to win; everyone starts with 2.
+<!-- BEGIN GENERATED: parameters -->
+- `player_move_allowance` (default `10`): The number of actions per turn. Accepts an integer of at least 1.
+- `max_turns` (default `200`): The number of moves in the whole game, counting every valid reply from any player. Accepts an integer of at least 1.
+- `winning_score` (default `10`): The victory points needed to win; everyone starts with 2. Accepts an integer of at least 3.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

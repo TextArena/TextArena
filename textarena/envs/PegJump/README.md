@@ -11,9 +11,9 @@ Cracker Barrel peg game.
 
 | Env ID | Parameters |
 | --- | --- |
-| `PegJump-v0` | `initial_empty=5` |
+| `PegJump-v1` | `initial_empty=5` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `PegJump-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("PegJump-v0", initial_empty=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `PegJump-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("PegJump-v1", initial_empty=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -42,7 +42,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `PegJump-v0-mdp`). 
 Reply with `source target`: the hole the jumping peg starts in and the empty hole it lands in, separated by a space or
 a comma.
 
-Examples: `12 5` and `14 5` are the two legal openings of `PegJump-v0`, where hole 5 starts empty.
+Examples: `12 5` and `14 5` are the two legal openings of `PegJump-v1`, where hole 5 starts empty.
 
 ## Observations
 
@@ -70,4 +70,6 @@ Legal jumps: 12 5, 14 5
 
 ## Parameters
 
-- `initial_empty` (default `1`): the hole that starts empty, from 1 to 15.
+<!-- BEGIN GENERATED: parameters -->
+- `initial_empty` (default `1`): The hole that starts empty. Accepts an integer from 1 to 15.
+<!-- END GENERATED: parameters -->

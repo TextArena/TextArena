@@ -31,7 +31,8 @@ class AlquerqueEnv(ta.GameEnv):
         "for example 'c2 c3' as Red or 'c4 c3' as Black"
     )
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.cell_to_rc = {i: (i // self.BOARD_N, i % self.BOARD_N) for i in range(self.BOARD_N ** 2)}
         self.rc_to_cell = {(r, c): i for i, (r, c) in self.cell_to_rc.items()}
         self.neighbours = [(dr, dc) for dr in (-1, 0, 1) for dc in (-1, 0, 1) if not (dr == dc == 0)]

@@ -11,9 +11,9 @@ of players scores a prisoner's dilemma each round, and players are ranked by the
 
 | Env ID | Parameters |
 | --- | --- |
-| `ThreePlayerIPD-v0` | `num_rounds=5`, `communication_turns=1`, `cooperate_reward=3`, `defect_reward=5`, `sucker_reward=0`, `mutual_defect_reward=1` |
+| `ThreePlayerIPD-v1` | `num_rounds=5`, `communication_turns=1`, `cooperate_reward=3`, `defect_reward=5`, `sucker_reward=0`, `mutual_defect_reward=1` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `ThreePlayerIPD-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ThreePlayerIPD-v0", num_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `ThreePlayerIPD-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ThreePlayerIPD-v1", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -65,16 +65,17 @@ within each pair, what each player gained, and the running totals.
 
 ## Parameters
 
-- `num_rounds` (default `5`): number of rounds.
-- `communication_turns` (default `3`): chat turns before each decision, each one message per player; `0` skips chat.
-- `cooperate_reward` (default `3`): payoff to each player of a pair when both cooperate.
-- `defect_reward` (default `5`): payoff to a defector whose opponent cooperates.
-- `sucker_reward` (default `0`): payoff to a cooperator whose opponent defects.
-- `mutual_defect_reward` (default `1`): payoff to each player of a pair when both defect.
-
-The payoffs may be any finite numbers; their ordering is not checked.
+<!-- BEGIN GENERATED: parameters -->
+- `num_rounds` (default `5`): The number of rounds. Accepts a positive integer.
+- `communication_turns` (default `3`): The chat turns before each decision, each one message per player; 0 skips chat. Accepts a non-negative integer.
+- `cooperate_reward` (default `3`): The payoff to each player of a pair when both cooperate. Accepts a finite number.
+- `defect_reward` (default `5`): The payoff to a defector whose opponent cooperates. Accepts a finite number.
+- `sucker_reward` (default `0`): The payoff to a cooperator whose opponent defects. Accepts a finite number.
+- `mutual_defect_reward` (default `1`): The payoff to each player of a pair when both defect. Accepts a finite number.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 
+- The ordering of the payoffs is not checked.
 - A forfeit ends the game instead of eliminating the player, because every remaining round would still need the
   forfeiting player's decisions towards the other two.

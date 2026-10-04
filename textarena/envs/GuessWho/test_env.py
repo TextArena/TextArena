@@ -3,7 +3,9 @@ import copy
 import json
 
 import pytest
-from textarena.envs.GuessWho.env import GuessWhoEnv  # noqa: E402
+
+import textarena as ta
+from textarena.envs.GuessWho.env import GuessWhoEnv
 
 
 class _Gamemaster:
@@ -269,12 +271,6 @@ def test_prompt_states_question_budget_and_single_guess():
     assert "Questions Asked: 0 / 19" in env.get_board_str()
 
 
-@pytest.mark.parametrize("max_turns", [0, 1, True, 2.5])
-def test_max_turns_must_leave_room_for_a_question_and_a_guess(max_turns):
-    with pytest.raises(ValueError):
-        GuessWhoEnv(max_turns=max_turns, gamemaster=_Gamemaster())
-
-
 def test_invalid_character_data_has_clear_error(tmp_path):
     path = tmp_path / "characters.json"
     path.write_text(json.dumps([{"name": "Incomplete"}]), encoding="utf-8")
@@ -325,7 +321,7 @@ def test_construction_and_local_guess_do_not_require_network(monkeypatch):
 
 
 def test_non_callable_gamemaster_is_rejected():
-    with pytest.raises(TypeError, match="callable"):
+    with pytest.raises(ValueError, match="gamemaster must be a callable"):
         GuessWhoEnv(gamemaster=object())
 
 
@@ -354,3 +350,22 @@ def test_snapshot_replays_stateful_gamemaster_responses():
     env.restore(snapshot)
     env.step("Second?")
     assert env.game_state == expected
+
+
+def test_replay_reuses_recorded_answers_without_calling_the_gamemaster(monkeypatch):
+    env = _fresh(gamemaster=_Gamemaster(("Yes", RuntimeError("offline"))))
+    env.step("First?")
+    env.step("Second?")
+    env.gamemaster.responses = ["No"]
+    env.step("Second?")
+    done, _ = env.step(f"guess {env.target_character['name']}")
+    assert done
+    record = env.record()
+    assert record["external_answers"] == ["Yes", "No"]
+
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    replayed = ta.replay(record)
+    assert replayed.gamemaster is None
+    assert replayed.gamemaster_history == [("First?", "Yes"), ("Second?", "No")]
+    assert replayed.state.rewards == env.state.rewards
+    assert replayed.game_state == env.game_state

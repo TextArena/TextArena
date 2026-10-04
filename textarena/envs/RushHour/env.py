@@ -52,13 +52,14 @@ class RushHourEnv(ta.GameEnv):
     MAX_SEARCH_STATES = 50000  # Bound malformed/custom layouts without cutting off searches on generated puzzles.
     ACTION_RE = re.compile(r"(?P<id>[A-Z])\s*(?P<dir>[+-])", re.I)
 
-    def __init__(self, difficulty: str = "medium", max_turns: int = 100):
-        if difficulty not in {"easy", "medium", "hard"}:
-            raise ValueError("difficulty must be 'easy', 'medium', or 'hard'")
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
-            raise ValueError("max_turns must be a positive integer")
-        self.difficulty = difficulty  # "easy", "medium", "hard"
-        self.max_turns = max_turns
+    difficulty = ta.Param(
+        "medium", "How scrambled the lot is: easy, medium and hard apply 12, 20 and 35 random moves.",
+        choices=("easy", "medium", "hard"),
+    )
+    max_turns = ta.Param(100, "The number of valid moves allowed.", min=1)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.initial_layout: List[_Vehicle] = []
 
     def setup(self) -> Dict[str, Any]:

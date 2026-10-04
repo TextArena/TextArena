@@ -1,61 +1,39 @@
-import math
-from numbers import Real
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, Optional, Union
 
 import textarena as ta
+
+
+def _valid_buttons(buttons) -> bool:
+    return bool(buttons) and len(set(buttons)) == len(buttons) and all(
+        isinstance(button, str) and button and button == button.strip() and len(button) <= 128
+        and not any(char in button for char in "[]\n\r")
+        for button in buttons
+    )
 
 
 class BanditEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
     mdp_includes_actions = False
-    max_button_chars = 128
     max_action_chars = 256
 
-    def __init__(
-        self,
-        buttons: Optional[List[str]] = None,
-        p_gap: float = 0.2,
-        num_turns: int = 20,
-        include_summary: bool = False,
-    ):
-        if buttons is None:
-            buttons = ["red", "blue", "green", "yellow", "purple"]
-        if (
-            not isinstance(buttons, (list, tuple))
-            or not buttons
-            or any(
-                not isinstance(button, str)
-                or not button.strip()
-                or button != button.strip()
-                or "\n" in button
-                or "\r" in button
-                or len(button) > self.max_button_chars
-                for button in buttons
-            )
-            or len(set(buttons)) != len(buttons)
-            or any("[" in button or "]" in button for button in buttons)
-        ):
-            raise ValueError(
-                "buttons must be a non-empty sequence of unique, non-empty names "
-                f"of at most {self.max_button_chars} characters without brackets."
-            )
-        if (
-            isinstance(p_gap, bool)
-            or not isinstance(p_gap, Real)
-            or not math.isfinite(float(p_gap))
-            or not 0 <= p_gap <= 0.8
-        ):
-            raise ValueError("p_gap must be a finite number between 0 and 0.8.")
-        if isinstance(num_turns, bool) or not isinstance(num_turns, int) or num_turns < 0:
-            raise ValueError("num_turns must be a non-negative integer.")
-        if not isinstance(include_summary, bool):
-            raise TypeError("include_summary must be a boolean.")
-        self.buttons = list(buttons)
-        self.num_turns = num_turns
-        self.max_turns = num_turns + 1  # exploration pulls plus one final decision
-        self.p_gap = float(p_gap)
-        self.include_summary = include_summary
+    buttons = ta.Param(
+        ["red", "blue", "green", "yellow", "purple"], "The button names.", check=_valid_buttons,
+        rule="a list of unique, non-empty names of at most 128 characters, without square brackets, line breaks, "
+             "or leading or trailing spaces",
+    )
+    p_gap = ta.Param(
+        0.2, "The minimum lead of the best button's mean over every other button. Smaller gaps make the best button "
+             "harder to identify.", min=0, max=0.8,
+    )
+    num_turns = ta.Param(
+        20, "The number of presses before the final answer. With 0, your first reply is the final answer.", min=0,
+    )
+    include_summary = ta.Param(False, "Show the per-button averages after every press.")
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.max_turns = self.num_turns + 1  # exploration pulls plus one final decision
 
     def setup(self) -> Dict[str, Any]:
         ground_truth = self.rng.choice(self.buttons)

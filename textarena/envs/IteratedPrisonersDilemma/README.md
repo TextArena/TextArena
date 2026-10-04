@@ -12,9 +12,9 @@ repeated play.
 
 | Env ID | Parameters |
 | --- | --- |
-| `IteratedPrisonersDilemma-v0` | `num_rounds=10`, `communication_turns=1`, `cooperate_reward=3`, `defect_reward=5`, `sucker_reward=0`, `mutual_defect_reward=1` |
+| `IteratedPrisonersDilemma-v1` | `num_rounds=10`, `communication_turns=1`, `cooperate_reward=3`, `defect_reward=5`, `sucker_reward=0`, `mutual_defect_reward=1` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedPrisonersDilemma-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedPrisonersDilemma-v0", num_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedPrisonersDilemma-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedPrisonersDilemma-v1", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -57,18 +57,18 @@ totals.
 
 ## Parameters
 
-- `num_rounds` (default `5`): number of rounds.
-- `communication_turns` (default `3`): conversation turns before each decision, each one message per player; `0`
-  skips conversation.
-- `cooperate_reward` (default `3`): payoff to each player when both cooperate.
-- `defect_reward` (default `5`): payoff to a defector whose opponent cooperates.
-- `sucker_reward` (default `0`): payoff to a cooperator whose opponent defects.
-- `mutual_defect_reward` (default `1`): payoff to each player when both defect.
-
-The payoffs may be any integers, including negative ones; their ordering is not checked.
+<!-- BEGIN GENERATED: parameters -->
+- `num_rounds` (default `5`): The number of rounds. Accepts a positive integer.
+- `communication_turns` (default `3`): The conversation turns before each decision, each one message per player; 0 skips conversation. Accepts a non-negative integer.
+- `cooperate_reward` (default `3`): The payoff to each player when both cooperate. Accepts an integer.
+- `defect_reward` (default `5`): The payoff to a defector whose opponent cooperates. Accepts an integer.
+- `sucker_reward` (default `0`): The payoff to a cooperator whose opponent defects. Accepts an integer.
+- `mutual_defect_reward` (default `1`): The payoff to each player when both defect. Accepts an integer.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 
+- The ordering of the payoffs is not checked, and negative payoffs are allowed.
 - Only the comparison of totals decides the reward, so the match is zero-sum even though each round is not: mutual
   cooperation can at best draw, and a round only changes the standings when exactly one player defects. Players aiming
   to win should not simply maximize their own total as in the classic iterated dilemma.

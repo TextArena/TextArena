@@ -12,9 +12,9 @@ cells.
 
 | Env ID | Parameters |
 | --- | --- |
-| `ReverseTicTacToe-v0` | defaults |
+| `ReverseTicTacToe-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `ReverseTicTacToe-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `ReverseTicTacToe-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules

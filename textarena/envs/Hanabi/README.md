@@ -10,9 +10,9 @@ learn about only through a limited supply of hints ([rules](https://en.wikipedia
 
 | Env ID | Parameters |
 | --- | --- |
-| `Hanabi-v0` | defaults |
+| `Hanabi-v1` | defaults |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Hanabi-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Hanabi-v1-mdp`).
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -75,8 +75,10 @@ Every player receives the same reward.
 
 ## Parameters
 
-- `info_tokens` (default `8`): starting and maximum number of information tokens.
-- `fuse_tokens` (default `3`): fuse tokens; the game is lost when the last one is used.
+<!-- BEGIN GENERATED: parameters -->
+- `info_tokens` (default `8`): The starting and maximum number of information tokens. Accepts an integer of at least 0.
+- `fuse_tokens` (default `3`): The number of fuse tokens; the game is lost when the last one is used. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

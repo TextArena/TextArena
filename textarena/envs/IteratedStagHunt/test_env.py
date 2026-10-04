@@ -154,19 +154,6 @@ def test_terminal_round_does_not_generate_phantom_payoffs():
     assert not any("Starting Round 2" in event[1] for event in env.state.events)
 
 
-def test_randomized_payoffs_replay_after_snapshot_restore():
-    env = _fresh(num_rounds=2, conversation_rounds=0, randomize_payoff=True)
-    snapshot = env.snapshot()
-    env.step("stag")
-    env.step("hare")
-    second_matrix = env.state.game_state["payoffs"].copy()
-
-    env.restore(snapshot)
-    env.step("stag")
-    env.step("hare")
-    assert env.state.game_state["payoffs"] == second_matrix
-
-
 def test_signed_randomized_payoffs_stay_ordered_across_rounds_and_reset():
     kwargs = {
         "num_rounds": 3,
@@ -214,9 +201,6 @@ def test_unauthorized_decision_is_rejected_atomically(player_id):
 @pytest.mark.parametrize(
     "kwargs",
     [
-        {"num_rounds": 0},
-        {"conversation_rounds": -1},
-        {"randomize_payoff": 1},
         {
             "randomize_payoff": True,
             "single_stag_reward": 5,

@@ -10,9 +10,9 @@ Two to fifteen players play a fixed number of no-limit Texas Hold'em hands and a
 
 | Env ID | Parameters |
 | --- | --- |
-| `Poker-v0` | `num_rounds=10`, `starting_chips=1000`, `small_blind=10`, `big_blind=20` |
+| `Poker-v1` | `num_rounds=10`, `starting_chips=1000`, `small_blind=10`, `big_blind=20` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Poker-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Poker-v0", num_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Poker-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Poker-v1", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -69,10 +69,12 @@ With two players, an elimination for invalid moves ends the game: the opponent w
 
 ## Parameters
 
-- `num_rounds` (default `10`): number of hands.
-- `starting_chips` (default `1000`): chips per player at the start.
-- `small_blind` (default `10`) and `big_blind` (default `20`): the blinds; the small blind may not exceed the big
-  blind.
+<!-- BEGIN GENERATED: parameters -->
+- `num_rounds` (default `10`): The number of hands. Accepts an integer of at least 1.
+- `starting_chips` (default `1000`): The number of chips per player at the start. Accepts an integer of at least 1.
+- `small_blind` (default `10`): The small blind; it may not exceed the big blind. Accepts an integer of at least 1.
+- `big_blind` (default `20`): The big blind. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

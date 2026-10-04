@@ -18,49 +18,24 @@ class IteratedPrisonersDilemmaEnv(ta.GameEnv):
     max_players = 2
     broadcast_actions = False  # raw action echoed only to its author
 
-    def __init__(self, num_rounds: int=5, communication_turns: int=3, cooperate_reward: int=3, defect_reward: int=5, sucker_reward: int=0, mutual_defect_reward: int = 1):
-        if (
-            not isinstance(num_rounds, int)
-            or isinstance(num_rounds, bool)
-            or num_rounds <= 0
-            or not _is_renderable(num_rounds)
-        ):
-            raise ValueError("num_rounds must be a positive integer")
-        if (
-            not isinstance(communication_turns, int)
-            or isinstance(communication_turns, bool)
-            or communication_turns < 0
-            or not _is_renderable(communication_turns)
-        ):
-            raise ValueError("communication_turns must be a non-negative integer")
-        rewards = (cooperate_reward, defect_reward, sucker_reward, mutual_defect_reward)
-        if any(
-            not isinstance(reward, int)
-            or isinstance(reward, bool)
-            or not _is_renderable(reward)
-            for reward in rewards
-        ):
-            raise ValueError("all rewards must be integers")
+    cooperate_pattern = re.compile(r"^Cooperate$", re.IGNORECASE)
+    defect_pattern    = re.compile(r"^Defect$",    re.IGNORECASE)
 
-        # game/round structure
-        self.num_rounds = num_rounds
-        self.conversation_rounds = communication_turns
-
-        # payoff matrix (constant across rounds)
-        self.cooperate_reward = cooperate_reward
-        self.defect_reward = defect_reward
-        self.sucker_reward = sucker_reward
-        self.mutual_defect_reward = mutual_defect_reward
-
-        # action regex
-        self.cooperate_pattern = re.compile(r"^Cooperate$", re.IGNORECASE)
-        self.defect_pattern    = re.compile(r"^Defect$",    re.IGNORECASE)
+    num_rounds = ta.Param(5, "The number of rounds.", min=1, check=_is_renderable, rule="a positive integer")
+    communication_turns = ta.Param(
+        3, "The conversation turns before each decision, each one message per player; 0 skips conversation.",
+        min=0, check=_is_renderable, rule="a non-negative integer",
+    )
+    cooperate_reward = ta.Param(3, "The payoff to each player when both cooperate.", check=_is_renderable, rule="an integer")
+    defect_reward = ta.Param(5, "The payoff to a defector whose opponent cooperates.", check=_is_renderable, rule="an integer")
+    sucker_reward = ta.Param(0, "The payoff to a cooperator whose opponent defects.", check=_is_renderable, rule="an integer")
+    mutual_defect_reward = ta.Param(1, "The payoff to each player when both defect.", check=_is_renderable, rule="an integer")
 
     def setup(self) -> Dict[str, Any]:
         return {
             "round": 1, "num_rounds": self.num_rounds,
-            "phase": "decision" if self.conversation_rounds == 0 else "conversation",
-            "conversation_round": 0, "total_conversation_rounds": self.conversation_rounds,
+            "phase": "decision" if self.communication_turns == 0 else "conversation",
+            "conversation_round": 0, "total_conversation_rounds": self.communication_turns,
             "decisions": {0: None, 1: None}, "scores": {0: 0, 1: 0}, "history": [],
         }
 

@@ -90,11 +90,10 @@ def test_reset_requires_even_players_at_least_four():
     [
         {"categories": [], "max_rounds": 1, "max_attempts_per_player": 1},
         {"categories": None, "max_rounds": 1, "max_attempts_per_player": 1},
-        {"categories": "animals", "max_rounds": 0, "max_attempts_per_player": 1},
-        {"categories": "animals", "max_rounds": 1, "max_attempts_per_player": 0},
+        {"categories": ["animals", " "], "max_rounds": 1, "max_attempts_per_player": 1},
     ],
 )
-def test_constructor_rejects_invalid_bounds(kwargs):
+def test_constructor_rejects_invalid_categories(kwargs):
     with pytest.raises(ValueError):
         TabooEnv(**kwargs)
 
@@ -152,7 +151,7 @@ def test_forbidden_words_use_token_boundaries(tmp_path):
         json.dumps({"custom": {"art": ["cat"], "second": ["other"]}}),
         encoding="utf-8",
     )
-    env = TabooEnv("custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
+    env = TabooEnv(categories="custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
     env.reset(num_players=4, seed=3)
     env.state.game_state["word_to_guess"] = "art"
     env.state.game_state["taboo_words"] = ["cat"]
@@ -177,7 +176,7 @@ def test_forbidden_phrase_cannot_be_evaded_with_separator_or_unicode_variants(tm
         "Try CAFE\u0301.",
         "A c\u200bat clue.",
     ):
-        env = TabooEnv("custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
+        env = TabooEnv(categories="custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
         env.reset(num_players=4, seed=3)
         done, _ = env.step(clue)
         assert not done
@@ -198,7 +197,7 @@ def test_guesser_can_submit_bundled_title_shapes_and_unicode(tmp_path):
         ),
         encoding="utf-8",
     )
-    env = TabooEnv("custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
+    env = TabooEnv(categories="custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
     env.reset(num_players=4, seed=1)
     env.state.game_state["word_to_guess"] = "Réunion (U.S.), #1"
     env.state.game_state["taboo_words"] = ["island"]
@@ -217,7 +216,7 @@ def test_custom_data_collapses_accidental_internal_whitespace(tmp_path):
         json.dumps({"custom": {"Oedipus  Rex": ["Greek  tragedy"]}}),
         encoding="utf-8",
     )
-    env = TabooEnv("custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
+    env = TabooEnv(categories="custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
     env.reset(num_players=4, seed=1)
 
     assert list(env.data) == ["Oedipus Rex"]
@@ -225,7 +224,7 @@ def test_custom_data_collapses_accidental_internal_whitespace(tmp_path):
 
 
 def test_six_player_team_turn_reaches_every_guesser():
-    env = TabooEnv("animals", max_rounds=1, max_attempts_per_player=1)
+    env = TabooEnv(categories="animals", max_rounds=1, max_attempts_per_player=1)
     env.reset(num_players=6, seed=4)
 
     env.step("xxxx")
@@ -239,30 +238,11 @@ def test_six_player_team_turn_reaches_every_guesser():
     assert env.state.game_state["round"] == 1
 
 
-def test_seeded_reset_and_snapshot_restore_exact_turn_state():
-    env = _fresh(max_rounds=2)
-    first_deal = env.state.game_state["team_word_pairs"]
-    env.reset(num_players=4, seed=42)
-    assert env.state.game_state["team_word_pairs"] == first_deal
-
-    env.step("xxxx")
-    data = env.data
-    snapshot = env.snapshot()
-    expected_word = env.state.game_state["word_to_guess"]
-    env.step("wrong")
-    env.restore(snapshot)
-
-    assert env.state.current_player_id == 1
-    assert env.state.game_state["word_to_guess"] == expected_word
-    assert env.state.game_state["turn_in_round"] == 1
-    assert env.data is data
-
-
 @pytest.mark.parametrize("entry", [{"target": "not-a-list"}, {"!?": ["unguessable target"]}])
 def test_malformed_custom_data_is_rejected(tmp_path, entry):
     data_path = tmp_path / "bad.json"
     data_path.write_text(json.dumps({"custom": entry}), encoding="utf-8")
-    env = TabooEnv("custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
+    env = TabooEnv(categories="custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
     with pytest.raises(ValueError):
         env.reset(num_players=4, seed=1)
 
@@ -270,7 +250,7 @@ def test_malformed_custom_data_is_rejected(tmp_path, entry):
 def _custom(tmp_path, target, taboo_words):
     data_path = tmp_path / "taboo.json"
     data_path.write_text(json.dumps({"custom": {target: taboo_words, "zz filler": ["filler"]}}), encoding="utf-8")
-    env = TabooEnv("custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
+    env = TabooEnv(categories="custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
     env.reset(num_players=4, seed=0)
     env.state.game_state["word_to_guess"] = target
     env.state.game_state["taboo_words"] = list(taboo_words)

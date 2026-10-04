@@ -7,8 +7,6 @@ to the micro square just used, unless that board is closed (then free move).
 """
 import copy
 
-import pytest
-
 import textarena as ta
 from textarena.envs.UltimateTicTacToe.env import UltimateTicTacToeEnv
 
@@ -218,14 +216,3 @@ def test_game_ending_move_does_not_announce_a_next_board():
         if event_type == ta.ObservationType.GAME_BOARD
     ][-1]
     assert "Valid moves" not in final_board
-
-
-def test_snapshot_restore_recovers_forced_board_and_marks():
-    env = _fresh()
-    snapshot = env.snapshot()
-    env.step("4 4")
-    env.restore(snapshot)
-    assert env.state.current_player_id == 0
-    assert env.state.game_state["next_micro_board"] is None
-    assert env.state.game_state["board"][4][1][1] == " "
-    assert len(env.state.game_state["valid_moves"]) == 81

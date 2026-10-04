@@ -12,9 +12,9 @@ under symmetric or asymmetric bargaining power.
 
 | Env ID | Parameters |
 | --- | --- |
-| `UsedCarNegotiation-v0` | `max_rounds=10` |
+| `UsedCarNegotiation-v1` | `max_rounds=10` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `UsedCarNegotiation-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("UsedCarNegotiation-v0", max_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `UsedCarNegotiation-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("UsedCarNegotiation-v1", max_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -58,10 +58,10 @@ gets their raw reply echoed back. The opponent's background and alternative are 
 
 ## Parameters
 
-- `max_rounds` (default `10`): total number of actions by both players (including rejections) before the game ends
-  without a deal.
-- `batna` (default `None`): the `(buyer, seller)` strength of each role's alternative, each `"strong"` or `"weak"`.
-  `None` picks `("strong", "weak")`, `("weak", "strong")`, or `("strong", "strong")` at random.
+<!-- BEGIN GENERATED: parameters -->
+- `max_rounds` (default `10`): The total number of actions by both players (including rejections) before the game ends without a deal. Accepts an integer of at least 1.
+- `batna` (default `None`): The `(buyer, seller)` strength of each role's alternative. `None` picks `("strong", "weak")`, `("weak", "strong")`, or `("strong", "strong")` at random. Accepts two values, each "strong" or "weak" or None.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

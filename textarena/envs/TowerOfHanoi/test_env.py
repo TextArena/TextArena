@@ -105,24 +105,9 @@ def test_same_tower_move_is_invalid_and_atomic():
     assert env.state.turn == 0
 
 
-def test_snapshot_and_repeat_reset_restore_towers():
-    env = _fresh()
-    initial = copy.deepcopy(env.state.game_state)
-    snapshot = env.snapshot()
-    env.step("A C")
-    env.restore(snapshot)
-    assert env.state.game_state == initial
-
-    env.reset(num_players=1, seed=999)
-    assert env.state.game_state == initial
-
-
 @pytest.mark.parametrize(
     "kwargs",
     [
-        {"num_disks": 0},
-        {"num_disks": True},
-        {"max_turns": 0},
         {"num_disks": 3, "max_turns": 6},
         {"num_disks": TowerOfHanoiEnv.MAX_DISKS + 1, "max_turns": 2 ** (TowerOfHanoiEnv.MAX_DISKS + 1) - 1},
     ],

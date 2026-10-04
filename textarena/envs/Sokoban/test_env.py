@@ -351,7 +351,7 @@ def test_snapshot_restore_recovers_board_aliases():
     "kwargs",
     [
         {"dim_room": (3, 6)},
-        {"dim_room": [6, 6]},
+        {"dim_room": (6, 6, 6)},
         {"num_boxes": 0},
         {"dim_room": (4, 4), "num_boxes": 3},
         {"max_turns": 0},

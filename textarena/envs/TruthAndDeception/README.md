@@ -10,9 +10,9 @@ true one; a correct guess wins for the Guesser and a wrong one for the Deceiver.
 
 | Env ID | Parameters |
 | --- | --- |
-| `TruthAndDeception-v0` | `max_turns=6` |
+| `TruthAndDeception-v1` | `max_turns=6` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `TruthAndDeception-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("TruthAndDeception-v0", max_turns=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `TruthAndDeception-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("TruthAndDeception-v1", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -48,7 +48,7 @@ There is no draw.
 
 ## Parameters
 
-- `max_turns` (default `6`): turns in the whole game; must be an even number of at least 2 so the Guesser takes the
-  final turn.
-- `data_path` (default: the bundled `facts.json`): JSON list of entries of the form
-  `{"facts": {"fact1": "...", "fact2": "..."}, "correct_fact": "fact1"}` with two distinct facts each.
+<!-- BEGIN GENERATED: parameters -->
+- `max_turns` (default `6`): The number of turns in the whole game. The Guesser takes the final turn. Accepts an even integer of at least 2.
+- `data_path` (default `None`): A JSON list of entries of the form `{"facts": {"fact1": "...", "fact2": "..."}, "correct_fact": "fact1"}` with two distinct facts each, replacing the bundled `facts.json`.
+<!-- END GENERATED: parameters -->

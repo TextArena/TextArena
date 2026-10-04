@@ -11,10 +11,10 @@ digits sets the difficulty.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Sudoku-v0` | `clues=60`, `max_turns=100` |
-| `Sudoku-v0-hard` | `clues=20`, `max_turns=100` |
+| `Sudoku-v1` | `clues=60`, `max_turns=100` |
+| `Sudoku-v1-hard` | `clues=20`, `max_turns=100` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Sudoku-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Sudoku-v0", clues=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Sudoku-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Sudoku-v1", clues=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -58,8 +58,10 @@ Because only correct digits are accepted, the fraction filled is also the fracti
 
 ## Parameters
 
-- `clues` (default `30`): the number of filled cells at the start, from 17 to 80. Fewer clues make a harder puzzle.
-- `max_turns` (default `100`): the maximum number of accepted digits.
+<!-- BEGIN GENERATED: parameters -->
+- `clues` (default `30`): The number of filled cells at the start. Fewer clues make a harder puzzle. Accepts an integer from 17 to 80.
+- `max_turns` (default `100`): The maximum number of accepted digits. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

@@ -10,20 +10,14 @@ class BattleshipEnv(ta.GameEnv):
     mdp_includes_actions = False
     action_pattern = r"^([A-Za-z])\s*(\d+)$"
 
-    def __init__(self, grid_size: Optional[int] = 10):
-        """
-        Args:
-            grid_size (int): Grid size
-        """
+    grid_size = ta.Param(
+        10, "The side length of both grids (rows use the letters A to Z). The fleet is the same on every grid size, "
+            "so on the 5×5 grid it fills 17 of the 25 cells.", min=5, max=26,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.ships = {"Aircraft Carrier": 5, "Battleship": 4, "Submarine": 3, "Destroyer": 3, "Patrol Boat": 2}
-        if (
-            not isinstance(grid_size, int)
-            or isinstance(grid_size, bool)
-            or grid_size < max(self.ships.values())
-            or grid_size > 26
-        ):
-            raise ValueError("grid_size must be an integer from 5 through 26")
-        self.grid_size = grid_size
 
     @property
     def action_format(self) -> str:

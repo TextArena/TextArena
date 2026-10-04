@@ -10,10 +10,10 @@ Reveal a hidden English word by guessing one letter at a time, or the whole word
 
 | Env ID | Parameters |
 | --- | --- |
-| `Hangman-v0` | `hardcore=False` |
-| `Hangman-v0-hardcore` | `hardcore=True` |
+| `Hangman-v1` | `hardcore=False` |
+| `Hangman-v1-hardcore` | `hardcore=True` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Hangman-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Hangman-v0", hardcore=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Hangman-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Hangman-v1", hardcore=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -57,7 +57,9 @@ revealed when you run out of tries.
 
 ## Parameters
 
-- `hardcore` (default `False`): draw the secret word from every dictionary headword instead of Basic English.
+<!-- BEGIN GENERATED: parameters -->
+- `hardcore` (default `False`): Draw the secret word from every dictionary headword instead of Basic English.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

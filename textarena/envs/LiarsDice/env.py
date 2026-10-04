@@ -15,14 +15,7 @@ class LiarsDiceEnv(ta.GameEnv):
     _CALL_RE = re.compile(r"call", re.IGNORECASE)
     _BID_RE = re.compile(r"bid\s*(?::\s*)?(\d+)[,\s]+(\d+)", re.IGNORECASE)
 
-    def __init__(self, num_dice: int = 5):
-        """
-        Args:
-            num_dice (int): Initial number of dice each player starts with.
-        """
-        if not isinstance(num_dice, int) or isinstance(num_dice, bool) or num_dice < 1:
-            raise ValueError("num_dice must be a positive integer")
-        self.num_dice = num_dice
+    num_dice = ta.Param(5, "The number of dice each player starts with.", min=1)
 
     def setup(self) -> Dict[str, Any]:
         return {

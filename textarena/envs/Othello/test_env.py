@@ -192,7 +192,6 @@ def test_prompt_explains_passing_and_game_end():
     assert "numbered from 0" in prompt
 
 
-@pytest.mark.parametrize("kwargs", [{"board_size": 5}, {"board_size": 8.0}, {"show_valid": 1}])
-def test_invalid_configuration_rejected(kwargs):
-    with pytest.raises(ValueError):
-        OthelloEnv(**kwargs)
+def test_odd_board_size_rejected():
+    with pytest.raises(ValueError, match="board_size must be an even integer of at least 4"):
+        OthelloEnv(board_size=5)

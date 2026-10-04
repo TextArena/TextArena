@@ -2,20 +2,20 @@
 The TextArena game engine.
 
 This module contains the single game loop shared by all environments. A game
-implements a small set of hooks (`setup`, `prompt`, `apply`, and optionally
-`render`, `roles`, `on_turn_limit`, `on_invalid_limit`) and the engine owns
-everything else: turn rotation, invalid-move handling, eliminations, turn
-limits, reward bookkeeping, observation routing, and logging.
-
-The user-facing API is unchanged: `ta.make(...)`, `env.reset(num_players)`,
-`env.get_observation()`, `env.step(action)` and `env.close()` behave exactly
-as before, and all wrappers keep working.
+declares its settings as `Param`s, implements a small set of hooks (`setup`,
+`prompt`, `apply`, and optionally `render`, `roles`, `on_turn_limit`,
+`on_invalid_limit`) and the engine owns everything else: parameter validation,
+turn rotation, invalid-move handling, eliminations, turn limits, reward
+bookkeeping, observation routing, and logging.
 """
 import re
 import copy
+import json
+import math
 import random
+import importlib
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 from textarena.core import Env, Info, ObservationType, GAME_ID
 
@@ -43,6 +43,87 @@ class Retryable:
     reason: str
 
 
+@dataclass(frozen=True)
+class Param:
+    """A game setting, declared as a class attribute: ``max_turns = Param(100, "Moves before a draw.", min=1)``.
+
+    The type is that of the default unless given. `GameEnv.__init__` validates every value and sets it as an
+    instance attribute; the docs generator lists the description and the accepted values in the game's README.
+    `check` covers any other rule, described in words by `rule` (e.g. "a list of unique names").
+    """
+    default: Any
+    description: str
+    type: Optional[type] = None
+    min: Optional[float] = None
+    max: Optional[float] = None
+    choices: Optional[Tuple[Any, ...]] = None
+    optional: bool = False
+    check: Optional[Callable[[Any], bool]] = None
+    rule: Optional[str] = None
+
+    @property
+    def kind(self) -> type:
+        return self.type or (type(self.default) if self.default is not None else object)
+
+    def describe(self) -> str:
+        """The accepted values in words, e.g. "an integer from 1 to 100"."""
+        if self.rule:
+            text = self.rule
+        elif self.choices is not None:
+            text = "one of " + ", ".join(repr(choice) for choice in self.choices)
+        else:
+            nouns = {bool: "True or False", int: "an integer", float: "a number", str: "a string",
+                     list: "a list", tuple: "a list", dict: "a mapping"}
+            text = nouns.get(self.kind, "any value")
+            if self.min is not None and self.max is not None:
+                text += f" from {self.min} to {self.max}"
+            elif self.min is not None:
+                text += f" of at least {self.min}"
+            elif self.max is not None:
+                text += f" of at most {self.max}"
+        return text + (" or None" if self.optional or self.default is None else "")
+
+    def validate(self, name: str, value: Any) -> Any:
+        """The value to store, or ValueError if it is not accepted."""
+        if value is None and (self.optional or self.default is None):
+            return None
+        kind = self.kind
+        if kind is bool:
+            ok = isinstance(value, bool)
+        elif kind is int:
+            ok = isinstance(value, int) and not isinstance(value, bool)
+        elif kind is float:
+            try:
+                ok = isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+            except OverflowError:  # integers beyond the float range
+                ok = False
+            value = float(value) if ok else value
+        elif kind in (list, tuple):
+            ok = isinstance(value, (list, tuple))
+            value = kind(value) if ok else value
+        elif kind is dict:
+            ok = isinstance(value, dict)
+            value = dict(value) if ok else value
+        else:
+            ok = kind is object or isinstance(value, kind)
+        ok = ok and (self.min is None or value >= self.min) and (self.max is None or value <= self.max)
+        ok = ok and (self.choices is None or value in self.choices)
+        if ok and self.check is not None:
+            try:
+                ok = bool(self.check(value))
+            except Exception:
+                ok = False
+        if not ok:
+            try:
+                shown = repr(value)
+            except ValueError:  # e.g. integers with more digits than Python will print
+                shown = "a value too large to print"
+            if len(shown) > 80:
+                shown = shown[:77] + "..."
+            raise ValueError(f"{name} must be {self.describe()}, received {shown}")
+        return value
+
+
 # One entry in the event log. `to_id == -1` means visible to everyone.
 Event = Tuple[int, str, ObservationType, int]
 
@@ -54,10 +135,13 @@ class GameState:
     snapshotted, serialized, and inspected.
     """
 
-    def __init__(self, num_players: int, max_turns: Optional[int], error_allowance: int):
+    def __init__(self, num_players: int, max_turns: Optional[int], error_allowance: int, seed: Optional[int] = None):
         self.num_players = num_players
         self.max_turns = max_turns
         self.error_allowance = error_allowance
+        self.seed = seed
+        self.actions: List[Any] = []  # every processed action, for GameEnv.record()
+        self.external_answers: List[Any] = []  # answers returned by GameEnv.ask(), for replays
 
         self.current_player_id: int = 0
         self.turn: int = 0
@@ -136,6 +220,10 @@ class GameEnv(Env):
                                          called when a player exhausts the error allowance;
                                          the default eliminates them (see method docs) (optional)
 
+    Settings that `ta.make` can override are declared as `Param` class attributes; `GameEnv.__init__` validates
+    them. A game only defines `__init__` (calling `super().__init__(**kwargs)` first) for derived values or rules
+    that involve several parameters.
+
     Class-level configuration:
         min_players / max_players        allowed player counts (set them in __init__ when they depend on configuration)
         default_num_players              used when reset() is called without num_players
@@ -162,9 +250,23 @@ class GameEnv(Env):
     action_format: Optional[str] = None
     snapshot_excluded_attributes: Tuple[str, ...] = ()
 
-    max_turns: Optional[int] = None  # usually set in __init__ from registry kwargs
+    max_turns: Optional[int] = None  # usually declared as a Param
+    parameters: Dict[str, Param] = {}  # collected from the Param class attributes, base classes first
     state: GameState
     rng: random.Random
+
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
+        cls.parameters = {
+            name: value for klass in reversed(cls.__mro__) for name, value in vars(klass).items() if isinstance(value, Param)
+        }
+
+    def __init__(self, **kwargs):
+        unknown = sorted(set(kwargs) - set(self.parameters))
+        if unknown:
+            raise TypeError(f"{type(self).__name__.removesuffix('Env')} has no parameter {unknown[0]!r}")
+        for name, param in self.parameters.items():
+            setattr(self, name, param.validate(name, kwargs.get(name, param.default)))
 
     # ------------------------------------------------------------------ hooks
     def setup(self) -> Dict[str, Any]:
@@ -327,8 +429,11 @@ class GameEnv(Env):
             game = type(self).__name__.removesuffix("Env")
             raise ValueError(f"{game} needs {supported}, received {num_players!r}.")
         self.check_num_players(num_players)
+        if seed is None:
+            # A concrete seed keeps every game replayable; SystemRandom leaves Python's global random state alone.
+            seed = random.SystemRandom().randrange(2**63)
         self.rng = random.Random(seed)
-        self.state = GameState(num_players=num_players, max_turns=self.max_turns, error_allowance=self.error_allowance)
+        self.state = GameState(num_players, self.max_turns, self.error_allowance, seed=seed)
         self.state.game_state = self.setup()
         self.state.role_mapping = dict(self.roles())
         self.state.role_mapping.setdefault(GAME_ID, "GAME")
@@ -344,6 +449,8 @@ class GameEnv(Env):
         if self.state.done:
             return True, self._drain_step_info()
         pid = self.state.current_player_id
+        self.state.actions.append(action)
+        answers_before = len(self.state.external_answers)
         if not isinstance(action, str):
             self._handle_invalid(pid, "Actions must be strings.")
             self._send_render()
@@ -394,6 +501,9 @@ class GameEnv(Env):
         if isinstance(result, Invalid):
             self._handle_invalid(pid, result.reason)
         elif isinstance(result, Retryable):
+            # An unprocessed action is not part of the game, so replays skip it.
+            self.state.actions.pop()
+            del self.state.external_answers[answers_before:]
             self.state.retry_count += 1
             if self.state.retry_count > self.max_consecutive_retries:
                 # A dead service would otherwise ask the player to retry forever.
@@ -416,6 +526,38 @@ class GameEnv(Env):
         return self.state.done, self._drain_step_info()
 
     # (get_observation and close are inherited from Env)
+
+    # ------------------------------------------------------- record / replay
+    _replay_answers: Optional[List[Any]] = None  # set by replay() so that ask() reuses recorded answers
+
+    def ask(self, service: Callable[..., Any], *args, **kwargs) -> Any:
+        """Call an outside service such as an LLM judge. Replays reuse the recorded answer instead of calling it."""
+        answer = self._replay_answers.pop(0) if self._replay_answers else service(*args, **kwargs)
+        self.state.external_answers.append(answer)
+        return answer
+
+    def record(self) -> Dict[str, Any]:
+        """Everything `replay` needs to rebuild this game: its class, parameters, player count, seed and actions.
+
+        Parameters that cannot be stored as JSON (such as a custom jury class) are left out and take their defaults.
+        """
+        parameters = {}
+        for name in self.parameters:
+            value = getattr(self, name)
+            try:
+                json.dumps(value)
+            except (TypeError, ValueError):
+                continue
+            parameters[name] = list(value) if isinstance(value, tuple) else value
+        return {
+            "game": f"{type(self).__module__}:{type(self).__qualname__}",
+            "env_id": getattr(self, "env_id", None),
+            "parameters": parameters,
+            "num_players": self.state.num_players,
+            "seed": self.state.seed,
+            "actions": list(self.state.actions),
+            "external_answers": list(self.state.external_answers),
+        }
 
     # ---------------------------------------------------------- snapshotting
     def snapshot(self) -> Dict[str, Any]:
@@ -510,3 +652,17 @@ class GameEnv(Env):
         info = self.state.step_info
         self.state.step_info = {}
         return info
+
+
+def replay(record: Dict[str, Any], steps: Optional[int] = None) -> GameEnv:
+    """Rebuild a game from `GameEnv.record()` and apply its first `steps` actions (all by default).
+
+    Returns the unwrapped game; its event log (`env.state.events`) holds everything every player saw.
+    """
+    module_name, class_name = record["game"].split(":")
+    env = getattr(importlib.import_module(module_name), class_name)(**record["parameters"])
+    env._replay_answers = list(record.get("external_answers", []))
+    env.reset(num_players=record["num_players"], seed=record["seed"])
+    for action in record["actions"][:steps]:
+        env.step(action)
+    return env

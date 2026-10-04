@@ -10,9 +10,9 @@ AI jury votes for the more effective and feasible one.
 
 | Env ID | Parameters |
 | --- | --- |
-| `ScenarioPlanning-v0` | `jury_size=11` |
+| `ScenarioPlanning-v1` | `jury_size=11` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `ScenarioPlanning-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ScenarioPlanning-v0", jury_size=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `ScenarioPlanning-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ScenarioPlanning-v1", jury_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -45,12 +45,11 @@ jury's votes; the final message names the winner.
 
 ## Parameters
 
-- `jury_size` (default `5`, at most `100`): number of judges.
-- `jury_class` (default `OpenRouterJury`): class or factory called with `options` and `jury_size` (and the env's
-  seeded `rng` if it accepts one). The object it returns must provide `evaluate(context)` returning
-  `{"Player 0": votes, "Player 1": votes}`.
-- `scenarios_path` (default: the bundled `scenarios.json`): JSON file of the form `{"scenarios": ["...", ...]}` with
-  unique, non-empty scenarios.
+<!-- BEGIN GENERATED: parameters -->
+- `jury_size` (default `5`): The number of judges. Accepts an integer from 1 to 100.
+- `jury_class` (default `None`): The class or factory called with `options` and `jury_size` (and the env's seeded `rng` if it accepts one). The object it returns must provide `evaluate(context)` returning `{"Player 0": votes, "Player 1": votes}`. None uses `OpenRouterJury`. Accepts a callable or None.
+- `scenarios_path` (default `None`): A JSON file of the form `{"scenarios": ["...", ...]}` with unique, non-empty scenarios. None uses the bundled `scenarios.json`.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 

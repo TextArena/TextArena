@@ -12,9 +12,9 @@ team coordination.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Taboo-v0` | `max_rounds=4`, `max_attempts_per_player=6`, `categories=['things']` |
+| `Taboo-v1` | `max_rounds=4`, `max_attempts_per_player=6`, `categories=['things']` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Taboo-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Taboo-v0", max_rounds=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Taboo-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Taboo-v1", max_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -64,9 +64,9 @@ when a team scores (with the current score) and when play passes to the other te
 
 ## Parameters
 
-- `categories`: one category or a list whose words are combined, chosen from `animals`, `cars`, `city/country`, `food`,
-  `literature`, `people`, `things`, and `tv` (84 to 495 targets each).
-- `max_rounds`: number of rounds, i.e. turns per team.
-- `max_attempts_per_player`: actions each player takes during each of their team's turns.
-- `data_path` (default `None`): optional JSON file of the form `{"category": {"target": ["taboo", ...]}}` that replaces
-  the bundled `words.json`. Every target must contain at least one letter or digit.
+<!-- BEGIN GENERATED: parameters -->
+- `categories` (default `['things']`): One category or a list whose words are combined, chosen from `animals`, `cars`, `city/country`, `food`, `literature`, `people`, `things`, and `tv` (84 to 495 targets each). Accepts a category name or a non-empty list of category names.
+- `max_rounds` (default `4`): The number of rounds, i.e. turns per team. Accepts an integer of at least 1.
+- `max_attempts_per_player` (default `6`): The actions each player takes during each of their team's turns. Accepts an integer of at least 1.
+- `data_path` (default `None`): An optional JSON file of the form `{"category": {"target": ["taboo", ...]}}` that replaces the bundled `words.json`. Every target must contain at least one letter or digit.
+<!-- END GENERATED: parameters -->

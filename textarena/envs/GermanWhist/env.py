@@ -9,8 +9,9 @@ class GermanWhistEnv(ta.GameEnv):
     max_players = 2
     mdp_includes_actions = False
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         """ Initializes the German Whist card game environment """
+        super().__init__(**kwargs)
         self.deck = self._create_deck()
 
     def _create_deck(self) -> List[Dict[str, Any]]:

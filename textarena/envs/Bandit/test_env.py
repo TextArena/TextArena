@@ -1,4 +1,4 @@
-"""Deterministic game-logic tests for Bandit-v0."""
+"""Deterministic game-logic tests for Bandit-v1."""
 import copy
 
 import pytest

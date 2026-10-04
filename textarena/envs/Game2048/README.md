@@ -10,11 +10,11 @@ Slide and merge numbered tiles on a square board to build a target tile, such as
 
 | Env ID | Parameters |
 | --- | --- |
-| `2048-v0` | `target_tile=2048` |
-| `2048-v0-3x3` | `target_tile=256`, `board_size=3` |
-| `2048-v0-easy` | `target_tile=1024` |
+| `2048-v1` | `target_tile=2048` |
+| `2048-v1-3x3` | `target_tile=256`, `board_size=3` |
+| `2048-v1-easy` | `target_tile=1024` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `2048-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("2048-v0", target_tile=...)`.
+Append `-mdp` to any ID for the state-complete variant (e.g. `2048-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("2048-v1", target_tile=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -70,10 +70,12 @@ with `target_tile` 2048 and a starting 2, a 256 tile scores `0.7` and a 1024 til
 
 ## Parameters
 
-- `target_tile` (default `2048`): the tile that wins, a power of two from 4 to 65,536.
-- `board_size` (default `4`): the board's side length, from 2 to 10.
+<!-- BEGIN GENERATED: parameters -->
+- `target_tile` (default `2048`): The tile that wins. Accepts a power of two from 4 to 65536.
+- `board_size` (default `4`): The board's side length. Accepts an integer from 2 to 10.
+<!-- END GENERATED: parameters -->
 
 ## Notes
 
 - A board with *n* cells can hold at most a 2<sup>*n*+1</sup> tile, even with lucky 4s, so 1024 is the largest tile
-  possible on 3×3, and the 256 target of `2048-v0-3x3` can be reached.
+  possible on 3×3, and the 256 target of `2048-v1-3x3` can be reached.
