@@ -40,6 +40,7 @@ def _has_set(cards: list[Card]):
 class SetEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
 
     def __init__(self):
         self.deck = list(itertools.product(_NUMBERS, _COLORS, _FILLS, _SHAPES))

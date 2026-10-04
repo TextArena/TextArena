@@ -7,16 +7,14 @@ always safe.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Minesweeper-v0` | `rows=8`, `cols=8`, `num_mines=10`, `max_turns=100` |
 | `Minesweeper-v0-hard` | `rows=12`, `cols=12`, `num_mines=30`, `max_turns=100` |
-| `Minesweeper-v0-medium` | `rows=10`, `cols=10`, `num_mines=20`, `max_turns=100` |
-| `Minesweeper-v0-small` | `rows=5`, `cols=5`, `num_mines=5`, `max_turns=100` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Minesweeper-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Minesweeper-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Minesweeper-v0", rows=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

@@ -17,6 +17,7 @@ def _is_renderable(value: Any) -> bool:
 class IteratedTwoThirdsAverageEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
 
     def __init__(self, num_rounds: int = 5, min_guess: float = 0.0, max_guess: float = 100.0):
         if (

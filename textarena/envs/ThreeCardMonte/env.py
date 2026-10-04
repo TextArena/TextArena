@@ -7,6 +7,7 @@ import textarena as ta
 class ThreeCardMonteEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     _ACTION_RE = re.compile(r"(\d+)")
 
     def __init__(self, num_cups: int = 3, steps: int = 10):

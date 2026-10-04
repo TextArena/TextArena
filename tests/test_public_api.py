@@ -1,4 +1,5 @@
 import random
+from pathlib import Path
 
 import pytest
 
@@ -250,6 +251,25 @@ def test_mdp_observation_accumulates_history_and_reset_clears_it():
     env.reset(num_players=2, seed=1)
     _, reset_observation = env.get_observation()
     assert reset_observation.count("You are Player 0") == 1
+
+
+@pytest.mark.parametrize("includes_actions", [False, True])
+def test_mdp_observation_shows_raw_actions_only_when_the_game_needs_them(includes_actions):
+    env = ta.make("TicTacToe-v0-mdp")
+    env.env.mdp_includes_actions = includes_actions
+    env.reset(num_players=2, seed=1)
+    env.get_observation()
+    env.step("4")
+    _, observation = env.get_observation()
+    assert (f"[{env.state.role_mapping[0]}] 4" in observation.splitlines()) is includes_actions
+    assert "placed their symbol" in observation
+
+
+def test_every_game_folder_registers_itself():
+    envs_dir = Path(ta.envs.__file__).parent
+    folders = {path.name for path in envs_dir.iterdir() if (path / "env.py").exists()}
+    registered = {spec.entry_point.split(".envs.")[1].split(".")[0] for spec in ENV_REGISTRY.values()}
+    assert folders == registered
 
 
 def test_mdp_snapshot_restores_wrapper_history():

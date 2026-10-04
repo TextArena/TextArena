@@ -19,6 +19,7 @@ def _parse_bounded_uint(text: str, maximum: int) -> Optional[int]:
 class NimEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     MAX_PILES = 100
     MAX_PILE_SIZE = 1_000_000
     action_pattern = r"^(?P<pile>[0-9]+)\s+(?P<quantity>[0-9]+)$"

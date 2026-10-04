@@ -44,12 +44,13 @@ class Env(ABC):
     state: Any
 
     @abstractmethod
-    def reset(self, num_players: int, seed: Optional[int]=None):
+    def reset(self, num_players: Optional[int] = None, seed: Optional[int] = None):
         """
         Resets the environment to an initial state.
 
         Args:
-            num_players (int): Number of players in the game.
+            num_players (Optional[int]): Number of players in the game; may be omitted when the game has a fixed or
+                default player count.
             seed (Optional[int]): Seed for the random number generator to ensure reproducibility.
         """
         raise NotImplementedError
@@ -88,7 +89,7 @@ class Wrapper(Env):
     def __getattr__(self, name):
         return getattr(self.env, name)
 
-    def reset(self, num_players: int , seed: Optional[int] = None):
+    def reset(self, num_players: Optional[int] = None, seed: Optional[int] = None):
         return self.env.reset(num_players=num_players, seed=seed)
 
     def step(self, action: str) -> Tuple[bool, Info]:
@@ -151,7 +152,7 @@ class RenderWrapper(Wrapper):
     def step(self, action: str) -> Tuple[bool, Optional[Info]]:
         return self.env.step(action=action)
     
-    def reset(self, num_players: int , seed: Optional[int] = None):
+    def reset(self, num_players: Optional[int] = None, seed: Optional[int] = None):
         self.reset_render()
         return self.env.reset(num_players=num_players, seed=seed)
 

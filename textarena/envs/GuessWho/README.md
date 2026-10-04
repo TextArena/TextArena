@@ -7,13 +7,13 @@ tests information-efficient questioning and deduction over a structured set of c
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `GuessWho-v0` | `max_turns=20` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `GuessWho-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `GuessWho-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("GuessWho-v0", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

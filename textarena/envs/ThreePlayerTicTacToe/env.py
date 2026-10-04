@@ -8,6 +8,7 @@ from textarena.envs.ThreePlayerTicTacToe.renderer import create_board_str
 class ThreePlayerTicTacToeEnv(ta.GameEnv):
     min_players = 3
     max_players = 3
+    mdp_includes_actions = False
     action_pattern = r"^([0-9]{1,2})$"
 
     def __init__(self):

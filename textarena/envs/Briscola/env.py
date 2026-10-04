@@ -7,6 +7,7 @@ import textarena as ta
 class BriscolaEnv(ta.GameEnv):
     min_players = 2
     max_players = 4
+    mdp_includes_actions = False
 
     def __init__(self):
         """ Initializes the Briscola card game environment """

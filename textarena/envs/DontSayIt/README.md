@@ -6,15 +6,14 @@ saying the opponent's word. It tests conversational steering, subtlety, and infe
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `DontSayIt-v0` | `hardcore=False`, `max_turns=20` |
 | `DontSayIt-v0-hardcore` | `hardcore=True`, `max_turns=30` |
-| `DontSayIt-v0-unlimited` | `hardcore=False`, `max_turns=None` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `DontSayIt-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `DontSayIt-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("DontSayIt-v0", hardcore=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

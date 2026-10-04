@@ -6,15 +6,13 @@ lost challenge costs a die, and the last player with dice wins ([rules](https://
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2–15
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `LiarsDice-v0` | `num_dice=5` |
-| `LiarsDice-v0-large` | `num_dice=12` |
-| `LiarsDice-v0-small` | `num_dice=3` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `LiarsDice-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `LiarsDice-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("LiarsDice-v0", num_dice=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

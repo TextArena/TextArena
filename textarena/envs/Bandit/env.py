@@ -8,6 +8,7 @@ import textarena as ta
 class BanditEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     max_button_chars = 128
     max_action_chars = 256
 

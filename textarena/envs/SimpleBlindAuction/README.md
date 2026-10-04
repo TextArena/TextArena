@@ -7,15 +7,13 @@ private messages, and tests negotiation and bidding under private valuations.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `SimpleBlindAuction-v0` | `starting_capital=1000`, `num_items=5`, `conversation_rounds=3` |
-| `SimpleBlindAuction-v0-quick` | `starting_capital=750`, `num_items=3`, `conversation_rounds=1` |
-| `SimpleBlindAuction-v0-rich` | `starting_capital=2000`, `num_items=5`, `conversation_rounds=5` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `SimpleBlindAuction-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `SimpleBlindAuction-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("SimpleBlindAuction-v0", starting_capital=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

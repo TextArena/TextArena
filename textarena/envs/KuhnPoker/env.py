@@ -8,6 +8,7 @@ from textarena.envs.KuhnPoker.renderer import create_board_str
 class KuhnPokerEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
 
     def __init__(self, max_rounds: int = 1):
         if not isinstance(max_rounds, int) or isinstance(max_rounds, bool) or max_rounds < 1:

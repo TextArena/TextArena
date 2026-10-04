@@ -8,6 +8,7 @@ from textarena.utils.word_lists import get_basic_english_words, get_english_word
 class WordleEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     action_pattern = r"^([a-zA-Z]+)$"
     snapshot_excluded_attributes = ("word_list",)
 

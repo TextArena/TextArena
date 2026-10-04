@@ -14,6 +14,7 @@ class LetterAuctionEnv(ta.GameEnv):
     """ The environment for Letter Auction Game """
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     broadcast_actions = False
 
     def __init__(self, starting_coins: int = 100, max_turns: Optional[int] = None):

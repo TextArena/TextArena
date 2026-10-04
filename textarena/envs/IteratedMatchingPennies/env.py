@@ -15,6 +15,7 @@ def _is_renderable(value: Any) -> bool:
 class IteratedMatchingPenniesEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
 
     def __init__(self, num_rounds: int = 5):
         if (

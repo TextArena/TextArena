@@ -1,5 +1,5 @@
-import re, random, importlib
-from typing import Any, Union, List, Callable, Dict, Tuple, Optional
+import random, importlib
+from typing import Any, Union, List, Callable, Dict, Optional
 from dataclasses import dataclass, field
 
 import textarena as ta 
@@ -38,19 +38,16 @@ def register(id: str, entry_point: Callable, default_wrappers: Optional[List[ta.
         EnvSpec(id=id, entry_point=entry_point, default_wrappers=default_wrappers, kwargs=kwargs)
     ])
 
-def register_with_versions(id: str, entry_point: Callable, mdp_wrappers: Optional[List[ta.Wrapper]]=None, **kwargs: Any):
-    """Register the two standard variants of an environment:
+def register_with_versions(id: str, entry_point: Callable, **kwargs: Any):
+    """Register both views of an environment configuration:
 
-    - `id`      -> CurrentTurnObservationWrapper (agents see only this turn's messages)
-    - `id-mdp`  -> `mdp_wrappers` (a single observation carries the complete state;
-                   which wrapper achieves that is environment dependent, defaulting
-                   to FullHistoryObservationWrapper)
+    - `id`      -> CurrentTurnObservationWrapper (agents see only the messages since their last turn)
+    - `id-mdp`  -> MDPObservationWrapper (every observation holds everything needed to act)
     """
-    from textarena.wrappers import CurrentTurnObservationWrapper, FullHistoryObservationWrapper
-    if mdp_wrappers is None: mdp_wrappers = [FullHistoryObservationWrapper]
+    from textarena.wrappers import CurrentTurnObservationWrapper, MDPObservationWrapper
     _register_specs([
         EnvSpec(id=id, entry_point=entry_point, default_wrappers=[CurrentTurnObservationWrapper], kwargs=kwargs),
-        EnvSpec(id=f"{id}-mdp", entry_point=entry_point, default_wrappers=mdp_wrappers, kwargs=kwargs),
+        EnvSpec(id=f"{id}-mdp", entry_point=entry_point, default_wrappers=[MDPObservationWrapper], kwargs=kwargs),
     ])
 
 def pprint_registry_detailed():

@@ -7,14 +7,13 @@ persuasion, and trading under private valuations.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2–15
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `Negotiation-v0` | `turn_multiple=8` |
-| `Negotiation-v0-long` | `turn_multiple=15` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Negotiation-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Negotiation-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Negotiation-v0", turn_multiple=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

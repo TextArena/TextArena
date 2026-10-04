@@ -8,6 +8,7 @@ from textarena.envs.Sudoku.renderer import create_board_str
 class SudokuEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     max_action_chars = 4096
 
     def __init__(self, clues: int = 30, max_turns: Optional[int] = 100):

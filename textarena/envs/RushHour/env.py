@@ -45,6 +45,7 @@ class _Vehicle:
 class RushHourEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
 
     BOARD_SIZE = 6
     MAX_ACTION_CHARS = 4096

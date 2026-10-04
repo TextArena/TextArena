@@ -7,15 +7,14 @@ known as Concentration, it tests remembering every card that has been revealed, 
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `MemoryGame-v0` | `grid_size=4`, `max_turns=30` |
 | `MemoryGame-v0-hard` | `grid_size=8`, `max_turns=80` |
-| `MemoryGame-v0-medium` | `grid_size=6`, `max_turns=50` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `MemoryGame-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `MemoryGame-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("MemoryGame-v0", grid_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

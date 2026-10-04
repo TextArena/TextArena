@@ -7,15 +7,14 @@ a graph of word neighbors.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `WordLadder-v0` | `min_distance=5`, `max_distance=7`, `max_turns=100` |
 | `WordLadder-v0-hard` | `min_distance=13`, `max_distance=15`, `max_turns=100` |
-| `WordLadder-v0-medium` | `min_distance=8`, `max_distance=12`, `max_turns=100` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `WordLadder-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `WordLadder-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("WordLadder-v0", min_distance=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

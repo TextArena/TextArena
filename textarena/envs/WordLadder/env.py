@@ -13,6 +13,7 @@ class WordLadderEnv(ta.GameEnv):
 
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     action_pattern = r"^([a-zA-Z]+)$"
     snapshot_excluded_attributes = ("universal_word_list", "word_list")
 

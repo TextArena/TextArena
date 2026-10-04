@@ -309,11 +309,13 @@ class TestVendorNegotiationWinConditions:
         
         assert env.state.rewards == {0: -1, 1: 1}
 
-    @pytest.mark.parametrize("env_id", ["VendorNegotiation-v0-lite", "VendorNegotiation-v0", "VendorNegotiation-v0-heavy"])
-    def test_each_role_can_win_in_every_registered_variant(self, env_id):
+    @pytest.mark.parametrize(
+        "kwargs", [{"num_products": 3, "max_rounds": 10}, {}, {"num_products": 8, "max_rounds": 30}]
+    )
+    def test_each_role_can_win_at_every_size(self, kwargs):
         for seed in range(15):
             for discount, expected in ((0, {0: -1, 1: 1}), (30, {0: 1, 1: -1})):
-                env = ta.make(env_id)
+                env = ta.make("VendorNegotiation-v0", **kwargs)
                 env.reset(num_players=2, seed=seed)
                 num_products = len(env.selected_products)
                 env.step(_propose([discount] * num_products))

@@ -7,15 +7,13 @@ their own; the first to knock out both of the opponent's hands wins
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Chopsticks-v0` | `max_turns=40` |
-| `Chopsticks-v0-long` | `max_turns=80` |
-| `Chopsticks-v0-medium` | `max_turns=60` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Chopsticks-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Chopsticks-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Chopsticks-v0", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

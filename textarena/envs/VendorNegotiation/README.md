@@ -7,15 +7,13 @@ with numeric data.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `VendorNegotiation-v0` | `num_products=5`, `max_rounds=20` |
-| `VendorNegotiation-v0-heavy` | `num_products=8`, `max_rounds=30` |
-| `VendorNegotiation-v0-lite` | `num_products=3`, `max_rounds=10` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `VendorNegotiation-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `VendorNegotiation-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("VendorNegotiation-v0", num_products=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

@@ -8,13 +8,13 @@ and multi-unit tactical planning.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 3–7
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `Diplomacy-v0` | `max_turns=30` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Diplomacy-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Diplomacy-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Diplomacy-v0", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

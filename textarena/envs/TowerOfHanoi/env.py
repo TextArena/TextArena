@@ -8,6 +8,7 @@ from textarena.envs.TowerOfHanoi.renderer import create_board_str
 class TowerOfHanoiEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     MAX_DISKS = 20
     _MOVE_RE = re.compile(r"(?P<source>[ABCabc])(?:\s*,\s*|\s+)(?P<target>[ABCabc])")
 

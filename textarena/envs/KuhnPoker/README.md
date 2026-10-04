@@ -6,17 +6,13 @@ betting round ([rules](https://en.wikipedia.org/wiki/Kuhn_poker)).
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `KuhnPoker-v0` | `max_rounds=3` |
-| `KuhnPoker-v0-extreme` | `max_rounds=25` |
-| `KuhnPoker-v0-long` | `max_rounds=15` |
-| `KuhnPoker-v0-medium` | `max_rounds=9` |
-| `KuhnPoker-v0-short` | `max_rounds=5` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `KuhnPoker-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `KuhnPoker-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("KuhnPoker-v0", max_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

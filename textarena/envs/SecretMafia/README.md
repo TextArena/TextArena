@@ -6,13 +6,13 @@ every Mafia member out by day ([rules](https://en.wikipedia.org/wiki/Mafia_%28pa
 <!-- BEGIN GENERATED: variants -->
 **Players:** 6–15
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `SecretMafia-v0` | `mafia_ratio=0.25`, `discussion_rounds=3` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `SecretMafia-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `SecretMafia-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("SecretMafia-v0", mafia_ratio=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

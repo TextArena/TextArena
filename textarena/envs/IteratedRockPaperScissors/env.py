@@ -16,6 +16,7 @@ def _is_renderable(value: Any) -> bool:
 class IteratedRockPaperScissorsEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     broadcast_actions = False  # submissions stay hidden until the round resolves
 
     def __init__(self, num_rounds: int = 5):

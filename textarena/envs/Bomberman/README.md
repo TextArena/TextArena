@@ -6,13 +6,13 @@ moves, and be the last player standing ([background](https://en.wikipedia.org/wi
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Bomberman-v0` | `grid_size=10`, `max_turns=100` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Bomberman-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Bomberman-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Bomberman-v0", grid_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

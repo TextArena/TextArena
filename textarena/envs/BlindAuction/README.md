@@ -6,16 +6,13 @@ player with the highest final net worth wins. It tests negotiation, bluffing, an
 <!-- BEGIN GENERATED: variants -->
 **Players:** 3–15
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `BlindAuction-v0` | `starting_capital=1000`, `num_items=5`, `conversation_rounds=3` |
-| `BlindAuction-v0-complex` | `starting_capital=1500`, `num_items=12`, `conversation_rounds=8` |
-| `BlindAuction-v0-fast` | `starting_capital=750`, `num_items=3`, `conversation_rounds=1` |
-| `BlindAuction-v0-high` | `starting_capital=2500`, `num_items=8`, `conversation_rounds=5` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `BlindAuction-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `BlindAuction-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("BlindAuction-v0", starting_capital=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

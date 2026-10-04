@@ -6,16 +6,13 @@ Two to fifteen players play a fixed number of no-limit Texas Hold'em hands and a
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2–15
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Poker-v0` | `num_rounds=10`, `starting_chips=1000`, `small_blind=10`, `big_blind=20` |
-| `Poker-v0-extreme` | `num_rounds=50`, `starting_chips=1000`, `small_blind=10`, `big_blind=20` |
-| `Poker-v0-long` | `num_rounds=15`, `starting_chips=1000`, `small_blind=10`, `big_blind=20` |
-| `Poker-v0-small` | `num_rounds=5`, `starting_chips=1000`, `small_blind=10`, `big_blind=20` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Poker-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Poker-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Poker-v0", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

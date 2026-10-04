@@ -7,14 +7,14 @@ most but only if both hunt it, a hare pays less but safely, and the higher total
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `IteratedStagHunt-v0` | `num_rounds=5`, `conversation_rounds=3`, `mutual_stag_reward=10`, `single_hare_reward=8`, `single_stag_reward=1`, `mutual_hare_reward=5`, `randomize_payoff=False` |
 | `IteratedStagHunt-v0-randomized` | `num_rounds=5`, `conversation_rounds=3`, `mutual_stag_reward=10`, `single_hare_reward=8`, `single_stag_reward=1`, `mutual_hare_reward=5`, `randomize_payoff=True` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedStagHunt-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedStagHunt-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedStagHunt-v0", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

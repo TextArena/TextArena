@@ -6,15 +6,13 @@ true one; a correct guess wins for the Guesser and a wrong one for the Deceiver.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `TruthAndDeception-v0` | `max_turns=6` |
-| `TruthAndDeception-v0-extreme` | `max_turns=50` |
-| `TruthAndDeception-v0-long` | `max_turns=12` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `TruthAndDeception-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `TruthAndDeception-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("TruthAndDeception-v0", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

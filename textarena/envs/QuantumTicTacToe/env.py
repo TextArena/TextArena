@@ -7,6 +7,7 @@ import textarena as ta
 class QuantumTicTacToeEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
 
     def __init__(self):
         self.cell_mapping = {i * 3 + j: (i, j) for i in range(3) for j in range(3)}

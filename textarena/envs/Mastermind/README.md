@@ -7,15 +7,14 @@ position; white pegs count correct numbers in the wrong position.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Mastermind-v0` | `code_length=4`, `num_numbers=6`, `max_turns=20`, `duplicate_numbers=False` |
-| `Mastermind-v0-extreme` | `code_length=6`, `num_numbers=12`, `max_turns=50`, `duplicate_numbers=True` |
 | `Mastermind-v0-hard` | `code_length=4`, `num_numbers=8`, `max_turns=30`, `duplicate_numbers=False` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Mastermind-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Mastermind-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Mastermind-v0", code_length=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
@@ -34,8 +33,8 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Mastermind-v0-mdp`
 
 Reply with the guess as `code_length` numbers separated by spaces (commas also work).
 
-Examples: `1 2 3 4` for `Mastermind-v0`; `3 12 3 7 1 9` for `Mastermind-v0-extreme`, whose six-number codes use 1–12
-and may repeat numbers.
+Examples: `1 2 3 4` for `Mastermind-v0`; `3 12 3 7 1 9` for six-number codes that use 1–12 and may repeat numbers
+(`code_length=6`, `num_numbers=12`, `duplicate_numbers=True`).
 
 ## Observations
 

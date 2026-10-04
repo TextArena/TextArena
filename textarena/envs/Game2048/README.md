@@ -6,26 +6,15 @@ Slide and merge numbered tiles on a square board to build a target tile, such as
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `2048-v0` | `target_tile=2048` |
-| `2048-v0-10x10` | `target_tile=2048`, `board_size=10` |
 | `2048-v0-3x3` | `target_tile=256`, `board_size=3` |
-| `2048-v0-5x5` | `target_tile=2048`, `board_size=5` |
-| `2048-v0-6x6` | `target_tile=2048`, `board_size=6` |
-| `2048-v0-8x8` | `target_tile=2048`, `board_size=8` |
 | `2048-v0-easy` | `target_tile=1024` |
-| `2048-v0-extreme` | `target_tile=16384` |
-| `2048-v0-hard` | `target_tile=4096` |
-| `2048-v0-mega-easy` | `target_tile=64` |
-| `2048-v0-super-easy` | `target_tile=128` |
-| `2048-v0-ultra-easy` | `target_tile=32` |
-| `2048-v0-very-easy` | `target_tile=256` |
-| `2048-v0-very-hard` | `target_tile=8192` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `2048-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `2048-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("2048-v0", target_tile=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

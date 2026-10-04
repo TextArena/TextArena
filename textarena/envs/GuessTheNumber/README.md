@@ -6,14 +6,14 @@ guess. It tests systematic search, since halving the remaining range with each g
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `GuessTheNumber-v0` | `min_number=1`, `max_number=20`, `max_turns=10` |
 | `GuessTheNumber-v0-hardcore` | `min_number=1`, `max_number=50`, `max_turns=10` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `GuessTheNumber-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `GuessTheNumber-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("GuessTheNumber-v0", min_number=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

@@ -6,13 +6,13 @@ wins ([rules](https://en.wikipedia.org/wiki/Rock_paper_scissors)).
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `IteratedRockPaperScissors-v0` | `num_rounds=9` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedRockPaperScissors-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedRockPaperScissors-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedRockPaperScissors-v0", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

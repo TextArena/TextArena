@@ -6,7 +6,7 @@ level ([rules](https://en.wikipedia.org/wiki/Santorini_%28game%29)).
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2–3
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |

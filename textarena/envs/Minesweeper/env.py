@@ -9,6 +9,7 @@ from textarena.envs.Minesweeper.renderer import create_board_str
 class MinesweeperEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     max_grid_cells = 10_000
     max_action_chars = 4096
 

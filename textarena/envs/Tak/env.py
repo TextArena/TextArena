@@ -14,6 +14,7 @@ class TakEnv(ta.GameEnv):
     """
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     action_pattern = (
         r"(?i)^(place|move)\s+"  # Match action: "place" or "move"
         r"\((\d+\s*,\s*\d+|\s*)\)\s+"  # Match source: "(row,col)" or "()"

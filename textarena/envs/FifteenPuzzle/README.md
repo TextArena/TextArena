@@ -6,13 +6,13 @@ Slide numbered tiles around a 4×4 board until they read 1 to 15 in order with t
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `FifteenPuzzle-v0` | `max_turns=200` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `FifteenPuzzle-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `FifteenPuzzle-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("FifteenPuzzle-v0", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

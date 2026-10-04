@@ -8,6 +8,7 @@ from textarena.envs.LiarsDice.renderer import create_board_str
 class LiarsDiceEnv(ta.GameEnv):
     min_players = 2
     max_players = 15
+    mdp_includes_actions = False
 
     # Matched against the stripped action; no two adjacent whitespace quantifiers,
     # so padded input cannot trigger quadratic backtracking.

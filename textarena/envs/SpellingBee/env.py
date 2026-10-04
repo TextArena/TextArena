@@ -9,6 +9,7 @@ from textarena.utils.word_lists import is_english_word
 class SpellingBeeEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     snapshot_excluded_attributes = ("is_word",)
     max_word_chars = 64
     max_action_chars = 128

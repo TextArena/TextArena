@@ -8,16 +8,13 @@ under symmetric or asymmetric bargaining power.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `UsedCarNegotiation-v0` | `max_rounds=10` |
-| `UsedCarNegotiation-v0-balanced` | `max_rounds=10`, `batna=('strong', 'strong')` |
-| `UsedCarNegotiation-v0-strong-buyer` | `max_rounds=10`, `batna=('strong', 'weak')` |
-| `UsedCarNegotiation-v0-strong-seller` | `max_rounds=10`, `batna=('weak', 'strong')` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `UsedCarNegotiation-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `UsedCarNegotiation-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("UsedCarNegotiation-v0", max_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

@@ -6,15 +6,13 @@ inventory more by the turn limit wins.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `SimpleNegotiation-v0` | `max_turns=10` |
-| `SimpleNegotiation-v0-long` | `max_turns=30` |
-| `SimpleNegotiation-v0-short` | `max_turns=6` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `SimpleNegotiation-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `SimpleNegotiation-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("SimpleNegotiation-v0", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

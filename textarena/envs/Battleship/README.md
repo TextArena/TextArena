@@ -7,16 +7,14 @@ and following up on hits under hidden information.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Battleship-v0` | `grid_size=5` |
-| `Battleship-v0-extreme` | `grid_size=20` |
-| `Battleship-v0-large` | `grid_size=14` |
 | `Battleship-v0-standard` | `grid_size=10` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Battleship-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Battleship-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Battleship-v0", grid_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

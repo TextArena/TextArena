@@ -18,6 +18,7 @@ def rc_to_coord(r: int, c: int) -> str:
 class AlquerqueEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
 
     BOARD_N = 5
     MAX_MOVES = 60

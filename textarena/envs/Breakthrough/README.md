@@ -6,18 +6,14 @@ capture every opposing piece, wins ([rules](https://en.wikipedia.org/wiki/Breakt
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Breakthrough-v0` | `board_size=8`, `is_open=True` |
 | `Breakthrough-v0-blind` | `board_size=8`, `is_open=False` |
-| `Breakthrough-v0-large` | `board_size=10`, `is_open=True` |
-| `Breakthrough-v0-long` | `board_size=8`, `is_open=True` |
-| `Breakthrough-v0-small` | `board_size=6`, `is_open=True` |
-| `Breakthrough-v0-tiny` | `board_size=5`, `is_open=True` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Breakthrough-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Breakthrough-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Breakthrough-v0", board_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

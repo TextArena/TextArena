@@ -8,7 +8,7 @@ rounds ([rules](https://en.wikipedia.org/wiki/Goofspiel)). It is the three-playe
 <!-- BEGIN GENERATED: variants -->
 **Players:** 3
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |

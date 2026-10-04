@@ -11,6 +11,7 @@ class WordSearchEnv(ta.GameEnv):
 
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     snapshot_excluded_attributes = ("word_list",)
     MAX_INCORRECT_TRIES = 20
     MAX_COORDINATE_DIGITS = 6

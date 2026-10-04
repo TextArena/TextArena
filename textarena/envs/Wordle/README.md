@@ -6,16 +6,14 @@ misplaced, or absent ([rules](https://en.wikipedia.org/wiki/Wordle)).
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Wordle-v0` | `hardcore=False`, `word_length=5`, `num_guesses=6` |
 | `Wordle-v0-hardcore` | `hardcore=True`, `word_length=5`, `num_guesses=6` |
-| `Wordle-v0-long` | `hardcore=False`, `word_length=7`, `num_guesses=9` |
-| `Wordle-v0-long-hardcore` | `hardcore=True`, `word_length=7`, `num_guesses=9` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Wordle-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Wordle-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Wordle-v0", hardcore=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

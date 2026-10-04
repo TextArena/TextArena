@@ -7,6 +7,7 @@ import textarena as ta
 class ChopsticksEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
 
     def __init__(self, max_turns: int = 40):
         """

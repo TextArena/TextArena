@@ -6,15 +6,13 @@ wall or a trail is out, and the last player moving wins ([background](https://en
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2–15
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Surround-v0` | `width=5`, `height=5`, `max_turns=40` |
-| `Surround-v0-large` | `width=15`, `height=15`, `max_turns=250` |
-| `Surround-v0-standard` | `width=10`, `height=10`, `max_turns=100` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Surround-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Surround-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Surround-v0", width=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

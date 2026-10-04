@@ -6,18 +6,14 @@ when neither side can move wins ([rules](https://en.wikipedia.org/wiki/Reversi))
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Othello-v0` | `board_size=8`, `show_valid=True` |
-| `Othello-v0-big` | `board_size=10`, `show_valid=True` |
 | `Othello-v0-hard` | `board_size=8`, `show_valid=False` |
-| `Othello-v0-huge` | `board_size=14`, `show_valid=True` |
-| `Othello-v0-small` | `board_size=6`, `show_valid=True` |
-| `Othello-v0-tiny` | `board_size=4`, `show_valid=True` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Othello-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Othello-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Othello-v0", board_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

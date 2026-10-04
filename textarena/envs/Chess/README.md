@@ -7,15 +7,14 @@ full FIDE move rules; draws that a player could claim are applied automatically,
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Chess-v0` | `is_open=True`, `max_turns=100`, `show_valid=True` |
 | `Chess-v0-blind` | `is_open=False`, `max_turns=100`, `show_valid=False` |
-| `Chess-v0-long` | `is_open=True`, `max_turns=250`, `show_valid=True` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Chess-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Chess-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Chess-v0", is_open=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

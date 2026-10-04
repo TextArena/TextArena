@@ -15,6 +15,7 @@ _ARTICLES = frozenset({"a", "an", "the"})
 class TwentyQuestionsEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     snapshot_excluded_attributes = ("gamemaster",)
     max_action_chars = 4_000
     max_gamemaster_response_chars = 256

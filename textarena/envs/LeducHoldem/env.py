@@ -15,6 +15,7 @@ class LeducHoldemEnv(ta.GameEnv):
     """
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     max_bets_per_round = 2  # the opening bet plus one raise, as in the standard game
 
     def __init__(self, starting_bank: int = 100, max_rounds: int = 5):

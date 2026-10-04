@@ -7,25 +7,13 @@ risk management under chance and adapting to the opponent's score.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `PigDice-v0` | `winning_score=100`, `max_turns=100` |
-| `PigDice-v0-100` | `winning_score=100`, `max_turns=100` |
-| `PigDice-v0-150` | `winning_score=150`, `max_turns=150` |
-| `PigDice-v0-200` | `winning_score=200`, `max_turns=200` |
-| `PigDice-v0-250` | `winning_score=250`, `max_turns=250` |
-| `PigDice-v0-300` | `winning_score=300`, `max_turns=300` |
-| `PigDice-v0-350` | `winning_score=350`, `max_turns=350` |
-| `PigDice-v0-400` | `winning_score=400`, `max_turns=400` |
-| `PigDice-v0-450` | `winning_score=450`, `max_turns=450` |
-| `PigDice-v0-50` | `winning_score=50`, `max_turns=50` |
-| `PigDice-v0-500` | `winning_score=500`, `max_turns=500` |
-| `PigDice-v0-long` | `winning_score=500`, `max_turns=500` |
-| `PigDice-v0-short` | `winning_score=50`, `max_turns=25` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `PigDice-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `PigDice-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("PigDice-v0", winning_score=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

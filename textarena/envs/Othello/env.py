@@ -12,6 +12,7 @@ COLOUR_NAMES = {BLACK: "Black", WHITE: "White"}
 class OthelloEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     action_pattern = r"^(\d+)(?:\s*,\s*|\s+)(\d+)$"
 
     def __init__(self, board_size: int = 8, show_valid: bool = True):

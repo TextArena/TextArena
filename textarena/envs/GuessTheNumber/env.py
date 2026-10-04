@@ -8,6 +8,7 @@ from textarena.envs.GuessTheNumber.renderer import create_board_str
 class GuessTheNumberEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     action_pattern = r"^([+-]?\d+)$"
 
     def __init__(self, min_number: int = 1, max_number: int = 20, max_turns: int = 20):

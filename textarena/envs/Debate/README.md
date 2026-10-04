@@ -6,15 +6,13 @@ the debate decides the winner: the side that gains more of the jury's support.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
-| `Debate-v0` | `max_turns=6`, `jury_class=OpenRouterJury`, `jury_size=7` |
-| `Debate-v0-long` | `max_turns=30`, `jury_class=OpenRouterJury`, `jury_size=13` |
-| `Debate-v0-medium` | `max_turns=12`, `jury_class=OpenRouterJury`, `jury_size=9` |
+| `Debate-v0` | `max_turns=6`, `jury_size=7` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Debate-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Debate-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Debate-v0", max_turns=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

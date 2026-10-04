@@ -20,6 +20,7 @@ class LeTrucEnv(ta.GameEnv):
     """
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
 
     order = ["3", "2", "A", "K", "Q", "J", "7", "6", "5", "4"]  # strongest first
     target_points = 12

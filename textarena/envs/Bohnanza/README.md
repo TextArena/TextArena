@@ -6,14 +6,14 @@ awkward beans with the active player is the heart of the game ([rules](https://w
 <!-- BEGIN GENERATED: variants -->
 **Players:** 3–5
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `Bohnanza-v0` | `deck_cycles=3`, `max_trade_rounds=None`, `max_turns=3000` |
 | `Bohnanza-v0-short` | `deck_cycles=1`, `max_trade_rounds=3`, `max_turns=1000` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Bohnanza-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Bohnanza-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Bohnanza-v0", deck_cycles=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

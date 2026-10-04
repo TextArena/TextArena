@@ -7,17 +7,14 @@ digits sets the difficulty.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Sudoku-v0` | `clues=60`, `max_turns=100` |
-| `Sudoku-v0-easy` | `clues=70`, `max_turns=100` |
 | `Sudoku-v0-hard` | `clues=20`, `max_turns=100` |
-| `Sudoku-v0-medium` | `clues=40`, `max_turns=100` |
-| `Sudoku-v0-very-easy` | `clues=75`, `max_turns=100` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Sudoku-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Sudoku-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Sudoku-v0", clues=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

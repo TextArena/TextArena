@@ -7,7 +7,7 @@ points ([rules](https://www.catan.com/understand-catan/game-rules)).
 <!-- BEGIN GENERATED: variants -->
 **Players:** 3–4
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |

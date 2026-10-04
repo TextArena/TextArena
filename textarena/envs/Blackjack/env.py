@@ -6,6 +6,7 @@ import textarena as ta
 class BlackjackEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     _ACTION_RE = re.compile(r"(hit|stand)", re.I)
 
     def __init__(self, num_hands: int):

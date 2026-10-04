@@ -13,6 +13,7 @@ def _shifted(position: Tuple[int, int], change: Tuple[int, int]) -> Tuple[int, i
 class SokobanEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     max_room_cells = 400
     max_action_chars = 4096
 

@@ -7,15 +7,14 @@ planning toward an uncertain goal.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `LetterAuction-v0` | `starting_coins=100` |
 | `LetterAuction-v0-hard` | `starting_coins=25` |
-| `LetterAuction-v0-medium` | `starting_coins=50` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `LetterAuction-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `LetterAuction-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("LetterAuction-v0", starting_coins=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

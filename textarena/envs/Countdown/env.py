@@ -8,6 +8,7 @@ import textarena as ta
 class CountdownEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
 
     max_action_chars = 128
     max_value = 1_000_000

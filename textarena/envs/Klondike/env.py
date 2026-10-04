@@ -10,6 +10,7 @@ class KlondikeEnv(ta.GameEnv):
 
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     error_allowance = 5
     max_action_chars = 4096
 

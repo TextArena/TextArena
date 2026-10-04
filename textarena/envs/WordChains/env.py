@@ -9,6 +9,7 @@ from textarena.utils.word_lists import get_basic_english_words, get_english_word
 class WordChainsEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     snapshot_excluded_attributes = ("word_list",)
 
     def __init__(self):

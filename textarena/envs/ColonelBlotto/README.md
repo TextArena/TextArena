@@ -8,16 +8,14 @@ allocations revealed after each round.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `ColonelBlotto-v0` | `num_fields=3`, `num_total_units=20`, `num_rounds=9` |
-| `ColonelBlotto-v0-extreme` | `num_fields=7`, `num_total_units=75`, `num_rounds=25` |
 | `ColonelBlotto-v0-large` | `num_fields=5`, `num_total_units=50`, `num_rounds=15` |
-| `ColonelBlotto-v0-small` | `num_fields=3`, `num_total_units=20`, `num_rounds=5` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `ColonelBlotto-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `ColonelBlotto-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ColonelBlotto-v0", num_fields=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

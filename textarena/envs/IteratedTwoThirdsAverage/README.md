@@ -7,13 +7,13 @@ wins the round; whoever wins more rounds wins the game
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `IteratedTwoThirdsAverage-v0` | `num_rounds=10`, `min_guess=0.0`, `max_guess=100.0` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedTwoThirdsAverage-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedTwoThirdsAverage-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedTwoThirdsAverage-v0", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

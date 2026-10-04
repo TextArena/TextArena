@@ -9,6 +9,7 @@ from textarena.envs.Poker.renderer import create_board_str
 class PokerEnv(ta.GameEnv):
     min_players = 2
     max_players = 15
+    mdp_includes_actions = False
 
     _CHECK_RE = re.compile(r"^check$", re.IGNORECASE)
     _FOLD_RE = re.compile(r"^fold$", re.IGNORECASE)

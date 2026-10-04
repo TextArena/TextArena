@@ -31,6 +31,7 @@ class MemoryGameEnv(ta.GameEnv):
     """ Environment for Memory Game """
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     MAX_GRID_SIZE = 20
     action_pattern = (
         r"^(?P<r1>[0-9]+)\s+(?P<c1>[0-9]+)\s+"

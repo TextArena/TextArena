@@ -51,6 +51,7 @@ def _format_number(value: Real) -> str:
 class PublicGoodsGameEnv(ta.GameEnv):
     min_players = 2
     max_players = 15
+    mdp_includes_actions = False
     broadcast_actions = False  # raw actions stay private; messages/contributions are revealed simultaneously
     error_allowance = 2  # allow 2 errors before elimination
 

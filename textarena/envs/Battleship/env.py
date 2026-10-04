@@ -7,6 +7,7 @@ from textarena.envs.Battleship.renderer import create_board_str
 class BattleshipEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     action_pattern = r"^([A-Za-z])\s*(\d+)$"
 
     def __init__(self, grid_size: Optional[int] = 10):

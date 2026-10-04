@@ -10,6 +10,7 @@ class SpiteAndMaliceEnv(ta.GameEnv):
     """
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     broadcast_actions = False  # raw actions are echoed only to their author
 
     def __init__(self):

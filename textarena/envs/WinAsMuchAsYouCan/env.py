@@ -24,6 +24,7 @@ class WinAsMuchAsYouCanEnv(ta.GameEnv):
 
     min_players = 4
     max_players = 4
+    mdp_includes_actions = False
 
     # Choose X strictly dominates Choose Y in every round, so the forced default
     # never beats the offender's best valid move.

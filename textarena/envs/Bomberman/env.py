@@ -31,6 +31,7 @@ class TwoPlayerBombermanEnv(ta.GameEnv):
     """Turn-based two-player Bomberman: players alternate single moves and bombs tick after every move."""
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
 
     def __init__(self, grid_size: int = 10, max_turns: int = 100, bomb_timer: int = 6, bomb_radius: int = 2, wall_density: float = 0.3):
         """

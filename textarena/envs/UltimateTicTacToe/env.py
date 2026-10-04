@@ -8,6 +8,7 @@ from textarena.envs.UltimateTicTacToe.renderer import create_board_str
 class UltimateTicTacToeEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     action_pattern = r"^([0-8])(?:\s*,\s*|\s+)([0-8])$"
     action_format = "two numbers from 0 to 8, the mini-board and then the square inside it, for example '7 8'"
 

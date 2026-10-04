@@ -7,13 +7,13 @@ of players scores a prisoner's dilemma each round, and players are ranked by the
 <!-- BEGIN GENERATED: variants -->
 **Players:** 3
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `ThreePlayerIPD-v0` | `num_rounds=5`, `communication_turns=1`, `cooperate_reward=3`, `defect_reward=5`, `sucker_reward=0`, `mutual_defect_reward=1` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `ThreePlayerIPD-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `ThreePlayerIPD-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ThreePlayerIPD-v0", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

@@ -23,6 +23,7 @@ def _bundled_word_lists() -> Dict[str, Tuple[str, ...]]:
 class CodenamesEnv(ta.GameEnv):
     min_players = 4
     max_players = 4
+    mdp_includes_actions = False
     broadcast_actions = False  # raw clues/guesses are echoed only to their author
     _CLUE_RE = re.compile(r"([a-z]+)\s+([0-9]{1,2})", re.IGNORECASE)
     _GUESS_RE = re.compile(r"([a-z]+)", re.IGNORECASE)

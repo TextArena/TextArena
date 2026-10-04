@@ -7,13 +7,13 @@ trust in a repeated congestion game.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2–15
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `MarketEntryGame-v0` | `num_rounds=5`, `communication_turns=3`, `market_capacity=2`, `entry_profit=15`, `overcrowding_penalty=-5`, `safe_payoff=5`, `default_num_players=4` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `MarketEntryGame-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `MarketEntryGame-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("MarketEntryGame-v0", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

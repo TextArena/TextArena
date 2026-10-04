@@ -10,6 +10,7 @@ class UltimateTexasHoldemEnv(ta.GameEnv):
 
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
 
     # Action patterns - bare actions ('1x', '2x', '4x', ...).
     # A whitespace run must be consumable by only one \s*, as retrying every split of a long run is quadratic.

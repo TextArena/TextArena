@@ -6,14 +6,14 @@ It tests vocabulary, clue interpretation, and keeping track of positions on a te
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Crosswords-v0` | `hardcore=False`, `max_turns=30`, `num_words=3` |
 | `Crosswords-v0-hardcore` | `hardcore=True`, `max_turns=30`, `num_words=3` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Crosswords-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Crosswords-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Crosswords-v0", hardcore=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

@@ -6,14 +6,14 @@ highest payout probability ([best-arm identification](https://en.wikipedia.org/w
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Bandit-v0` | `buttons=['red', 'blue', 'green', 'yellow', 'purple']`, `p_gap=0.1`, `num_turns=20` |
 | `Bandit-v0-hard` | `buttons=['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'p...`, `p_gap=0.05`, `num_turns=40` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Bandit-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Bandit-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Bandit-v0", buttons=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

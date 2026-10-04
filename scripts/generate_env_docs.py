@@ -6,7 +6,7 @@ Hand-written prose lives in ``textarena/envs/README.md`` (the catalog) and in ea
 ``<!-- BEGIN GENERATED: ... -->`` and ``<!-- END GENERATED: ... -->`` markers:
 
 - per environment: player count, every registered env id with its parameters,
-  and the observation wrapper behind the ``-mdp`` variant;
+  and what the ``-mdp`` observation contains;
 - in the catalog: one table per player-count category, linking every game.
 
 Usage:
@@ -19,7 +19,6 @@ import inspect
 import os
 import re
 import sys
-from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 
@@ -34,8 +33,8 @@ BLOCK = re.compile(
     re.S,
 )
 MDP_VIEWS = {
-    "BoardObservationWrapper": "game messages and the latest board (no raw player actions)",
-    "FullHistoryObservationWrapper": "the full transcript, including every player action",
+    False: "the prompt, every game message and the latest board (raw player actions are left out)",
+    True: "the prompt, the full transcript including every player action, and the latest board",
 }
 
 
@@ -44,7 +43,6 @@ class EnvDoc:
     directory: str
     cls: type
     variants: Dict[str, dict] = field(default_factory=dict)
-    mdp_wrapper: Optional[str] = None
 
     @property
     def min_players(self) -> int:
@@ -86,12 +84,8 @@ def collect() -> List[EnvDoc]:
         if directory not in docs:
             cls = getattr(importlib.import_module(module_path), class_name)
             docs[directory] = EnvDoc(directory=directory, cls=cls)
-        doc = docs[directory]
-        if env_id.endswith("-mdp"):
-            wrappers = spec.default_wrappers or []
-            doc.mdp_wrapper = wrappers[0].__name__ if wrappers else None
-        else:
-            doc.variants[env_id] = spec.kwargs
+        if not env_id.endswith("-mdp"):
+            docs[directory].variants[env_id] = spec.kwargs
     return [docs[name] for name in sorted(docs, key=str.lower)]
 
 
@@ -115,13 +109,17 @@ def env_block(doc: EnvDoc) -> str:
     lines = [
         f"**Players:** {doc.players}",
         "",
-        f"**`-mdp` observation:** {MDP_VIEWS.get(doc.mdp_wrapper, doc.mdp_wrapper or 'n/a')}",
+        f"**`-mdp` observation:** {MDP_VIEWS[doc.cls.mdp_includes_actions]}",
         "",
         "| Env ID | Parameters |",
         "| --- | --- |",
     ]
     lines += [f"| `{env_id}` | {_format_kwargs(doc.variants[env_id])} |" for env_id in ids]
-    lines += ["", f"Append `-mdp` to any ID for the state-complete variant (e.g. `{ids[0]}-mdp`).", ""]
+    note = f"Append `-mdp` to any ID for the state-complete variant (e.g. `{ids[0]}-mdp`)."
+    parameters = list(doc.variants[ids[0]])
+    if parameters:
+        note += f' Parameters can be overridden in `ta.make`, e.g. `ta.make("{ids[0]}", {parameters[0]}=...)`.'
+    lines += ["", note, ""]
     return "\n".join(lines)
 
 

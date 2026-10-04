@@ -6,13 +6,13 @@ ends up in the same room as the Blue Team's President. It tests social deduction
 <!-- BEGIN GENERATED: variants -->
 **Players:** 6–20
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `TwoRoomsAndABoom-v0` | `num_rounds=3`, `cards_per_room=3`, `discussion_rounds=2` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `TwoRoomsAndABoom-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `TwoRoomsAndABoom-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("TwoRoomsAndABoom-v0", num_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

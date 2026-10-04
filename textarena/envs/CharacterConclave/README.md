@@ -6,15 +6,13 @@ impressive other player; the most-voted player wins. It tests concise, persuasiv
 <!-- BEGIN GENERATED: variants -->
 **Players:** 3–15
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `CharacterConclave-v0` | `character_budget=1000` |
-| `CharacterConclave-v0-extreme` | `character_budget=10000` |
-| `CharacterConclave-v0-long` | `character_budget=5000` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `CharacterConclave-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `CharacterConclave-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("CharacterConclave-v0", character_budget=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

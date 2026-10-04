@@ -8,13 +8,13 @@ planning with a shrinking set of numbers.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Countdown-v0` | `numbers=[100, 75, 6, 4, 3, 2]`, `target=532` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Countdown-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Countdown-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Countdown-v0", numbers=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

@@ -7,17 +7,14 @@ for `n` disks), so it tests long, exact sequential planning.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `TowerOfHanoi-v0` | `num_disks=3`, `max_turns=14` |
-| `TowerOfHanoi-v0-extreme` | `num_disks=7`, `max_turns=254` |
 | `TowerOfHanoi-v0-hard` | `num_disks=5`, `max_turns=62` |
-| `TowerOfHanoi-v0-hardcore` | `num_disks=6`, `max_turns=126` |
-| `TowerOfHanoi-v0-medium` | `num_disks=4`, `max_turns=30` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `TowerOfHanoi-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `TowerOfHanoi-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("TowerOfHanoi-v0", num_disks=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

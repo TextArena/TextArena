@@ -1,7 +1,7 @@
 from rich.markup import escape
-import io, os, re, shutil, time, rich, rich.layout
+import io, os, shutil, time, rich, rich.layout
 from typing import Dict, Optional, Tuple
-from textarena.core import Env, Message, Info, RenderWrapper
+from textarena.core import Env, Info, RenderWrapper
 
 __all__ = ["SimpleRenderWrapper"]
 
@@ -130,7 +130,7 @@ class SimpleRenderWrapper(RenderWrapper):
                 self.console.file.seek(0)
                 self.console.file.truncate(0)
 
-    def reset(self, num_players: int, seed: Optional[int]=None) -> None:
+    def reset(self, num_players: Optional[int] = None, seed: Optional[int] = None) -> None:
         result = self.env.reset(num_players=num_players, seed=seed)
         self.state = self.env.state
         if self.player_names is None:

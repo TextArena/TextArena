@@ -8,6 +8,7 @@ import textarena as ta
 class LinesOfActionEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
 
     BOARD_N = 8
     FILES = "abcdefgh"

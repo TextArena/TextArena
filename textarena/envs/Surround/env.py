@@ -28,6 +28,7 @@ class SurroundEnv(ta.GameEnv):
     MAX_PLAYERS = 15
     min_players = 2
     max_players = 15
+    mdp_includes_actions = False
     broadcast_actions = False  # moves are sealed until the round resolves
     error_allowance = 0  # every invalid action is immediately fatal
 

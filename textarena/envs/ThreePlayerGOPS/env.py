@@ -7,6 +7,7 @@ import textarena as ta
 class ThreePlayerGOPSEnv(ta.GameEnv):
     min_players = 3
     max_players = 3
+    mdp_includes_actions = False
     broadcast_actions = False  # sealed bids: raw actions echoed only to their author
 
     def __init__(self):

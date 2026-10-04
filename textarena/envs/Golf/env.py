@@ -7,6 +7,7 @@ import textarena as ta
 class GolfEnv(ta.GameEnv):
     min_players = 2
     max_players = 4
+    mdp_includes_actions = False
 
     # Default cap, in full rounds (every player takes one draw/take + swap/discard turn)
     # per card in a grid. A game where each player flips one new card per turn ends in

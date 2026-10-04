@@ -8,6 +8,7 @@ from textarena.envs.Mastermind.renderer import create_board_str
 class MastermindEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     max_code_length = 256
     max_number_options = 1_000_000
     max_action_chars = 4096

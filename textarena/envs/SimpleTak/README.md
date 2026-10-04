@@ -6,16 +6,13 @@ connected path of their own stones wins.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `SimpleTak-v0` | `board_size=4` |
-| `SimpleTak-v0-extreme` | `board_size=8` |
-| `SimpleTak-v0-large` | `board_size=6` |
-| `SimpleTak-v0-medium` | `board_size=5` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `SimpleTak-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `SimpleTak-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("SimpleTak-v0", board_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

@@ -6,7 +6,7 @@ last player with influence wins ([rules](https://www.qugs.org/rules/r131357.pdf)
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2–6
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |

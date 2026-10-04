@@ -32,6 +32,7 @@ class SnakeEnv(ta.GameEnv):
     """ N-player Snake environment with simultaneous movement """
     min_players = 2
     max_players = 15
+    mdp_includes_actions = False
     broadcast_actions = False  # moves are sealed until the round resolves
     error_allowance = 0  # an invalid move kills the snake immediately
 

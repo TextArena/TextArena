@@ -15,7 +15,7 @@ from pathlib import Path
 import pytest
 
 import textarena as ta
-from textarena.wrappers import FullHistoryObservationWrapper, CurrentTurnObservationWrapper, TranslationWrapper
+from textarena.wrappers import MDPObservationWrapper, CurrentTurnObservationWrapper, TranslationWrapper
 from textarena.wrappers.translation import SHARED_CATALOG, Catalog, template_id
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -214,7 +214,7 @@ def test_per_player_languages(game):
 
 
 def test_typed_text_is_never_translated(game):
-    env = game(lang="de", wrapper=FullHistoryObservationWrapper)
+    env = game(lang="de", wrapper=MDPObservationWrapper)
     env.step("3")
     env.get_observation()
     env.step("Reply with a number from 1 to 5, e.g. '3'.")  # invalid, echoed verbatim
@@ -231,7 +231,7 @@ def test_typed_text_is_never_translated(game):
 
 
 def test_mdp_history_is_translated_every_turn(game):
-    env = game(wrapper=FullHistoryObservationWrapper)
+    env = game(wrapper=MDPObservationWrapper)
     for action in ["1", "2", "3"]:
         env.get_observation()
         env.step(action)

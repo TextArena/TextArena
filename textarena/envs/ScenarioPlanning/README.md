@@ -6,13 +6,13 @@ AI jury votes for the more effective and feasible one.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
-| `ScenarioPlanning-v0` | `jury_class=OpenRouterJury`, `jury_size=11` |
+| `ScenarioPlanning-v0` | `jury_size=11` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `ScenarioPlanning-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `ScenarioPlanning-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ScenarioPlanning-v0", jury_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

@@ -37,6 +37,7 @@ class Card:
 class HanabiEnv(ta.GameEnv):
     min_players = 2
     max_players = 5
+    mdp_includes_actions = False
     broadcast_actions = False  # raw actions are echoed only to their author
     error_allowance = 1
     _play_pattern = re.compile(r"^play\s+([0-9]{1,6})$", re.IGNORECASE)

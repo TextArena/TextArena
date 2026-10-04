@@ -6,15 +6,13 @@ Players take turns removing one or more objects from a single pile, and whoever 
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Nim-v0` | `piles=[3, 4, 5]` |
-| `Nim-v0-large` | `piles=[5, 7, 9, 11, 2]` |
-| `Nim-v0-medium` | `piles=[4, 2, 3, 7]` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Nim-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Nim-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Nim-v0", piles=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

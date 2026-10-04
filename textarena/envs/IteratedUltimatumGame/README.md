@@ -8,14 +8,14 @@ repeated play.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `IteratedUltimatumGame-v0` | `pool=50`, `max_turns=10`, `alternate_roles=False` |
 | `IteratedUltimatumGame-v0-alternate` | `pool=50`, `max_turns=12`, `alternate_roles=True` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedUltimatumGame-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `IteratedUltimatumGame-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("IteratedUltimatumGame-v0", pool=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

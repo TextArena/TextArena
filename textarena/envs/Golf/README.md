@@ -6,14 +6,14 @@ Two to four players draw and swap cards to build the lowest-scoring grid, where 
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2–4
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Golf-v0` | `num_cards=6`, `num_columns=3` |
 | `Golf-v0-medium` | `num_cards=9`, `num_columns=3` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Golf-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Golf-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Golf-v0", num_cards=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

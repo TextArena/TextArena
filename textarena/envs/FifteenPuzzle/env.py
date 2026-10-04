@@ -8,6 +8,7 @@ class FifteenPuzzleEnv(ta.GameEnv):
     """ Fifteen Puzzle environment """
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     action_pattern = r"^(?P<direction>[a-zA-Z]+)$"
     action_format = "one of the directions 'up', 'down', 'left' or 'right'"
 

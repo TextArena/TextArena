@@ -16,6 +16,7 @@ def _is_renderable(value: Any) -> bool:
 class ColonelBlottoEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     broadcast_actions = False  # allocations are hidden: raw actions echoed only to their author
 
     def __init__(self, num_fields: int = 3, num_total_units: int = 20, num_rounds: int = 10):

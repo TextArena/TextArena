@@ -142,6 +142,8 @@ class GameEnv(Env):
         action_pattern                   regex; if set, the engine extracts the move
                                          (an `re.Match`) and rejects non-matching actions
         broadcast_actions                if False, raw actions are only echoed to their author
+        mdp_includes_actions             if False, the -mdp observation leaves out raw player actions because the
+                                         board and game messages already capture the state (most board games)
         error_allowance                  consecutive invalid moves allowed before escalation
         max_action_chars                 maximum input size accepted before parsing/logging
     """
@@ -151,6 +153,7 @@ class GameEnv(Env):
     default_num_players: Optional[int] = None
     action_pattern: Optional[str] = None
     broadcast_actions: bool = True
+    mdp_includes_actions: bool = True
     error_allowance: int = 1
     max_action_chars: int = 32_768
     max_consecutive_retries: int = 5  # Retryable results in a row before step() raises

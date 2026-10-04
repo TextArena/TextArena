@@ -41,6 +41,7 @@ class RetroSpaceDuelEnv(ta.GameEnv):
     """Turn-based two-player space shooter: ships alternate single moves or shots."""
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
 
     def __init__(self, grid_size: Sequence[int] = (15, 15), max_turns: int = 100,
                  num_asteroids: int = 5, num_debris: int = 8, num_nebulas: int = 3,

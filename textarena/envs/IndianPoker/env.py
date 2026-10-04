@@ -8,6 +8,7 @@ import textarena as ta
 class IndianPokerEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
 
     def __init__(self, max_rounds: int=1, starting_chips: int=100):
         if not isinstance(max_rounds, int) or isinstance(max_rounds, bool) or max_rounds < 1:

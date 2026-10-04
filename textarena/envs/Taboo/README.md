@@ -8,22 +8,13 @@ team coordination.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 4+
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `Taboo-v0` | `max_rounds=4`, `max_attempts_per_player=6`, `categories=['things']` |
-| `Taboo-v0-animals` | `max_rounds=4`, `max_attempts_per_player=6`, `categories=['animals']` |
-| `Taboo-v0-cars` | `max_rounds=4`, `max_attempts_per_player=6`, `categories=['cars']` |
-| `Taboo-v0-city/country` | `max_rounds=4`, `max_attempts_per_player=6`, `categories=['city/country']` |
-| `Taboo-v0-food` | `max_rounds=4`, `max_attempts_per_player=6`, `categories=['food']` |
-| `Taboo-v0-full` | `max_rounds=4`, `max_attempts_per_player=6`, `categories=['animals', 'cars', 'city/country', 'food', 'literature',...` |
-| `Taboo-v0-literature` | `max_rounds=4`, `max_attempts_per_player=6`, `categories=['literature']` |
-| `Taboo-v0-long` | `max_rounds=12`, `max_attempts_per_player=6`, `categories=['things']` |
-| `Taboo-v0-people` | `max_rounds=4`, `max_attempts_per_player=6`, `categories=['people']` |
-| `Taboo-v0-tv` | `max_rounds=4`, `max_attempts_per_player=6`, `categories=['tv']` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Taboo-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Taboo-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Taboo-v0", max_rounds=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

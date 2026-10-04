@@ -7,6 +7,7 @@ import textarena as ta
 class CryptarithmEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     MAX_EQUATION_LENGTH = 512
     MAX_ADDENDS = 20
     MAX_WORD_LENGTH = 64

@@ -6,15 +6,14 @@ discs horizontally, vertically, or diagonally wins ([rules](https://en.wikipedia
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `ConnectFour-v0` | `is_open=True`, `num_rows=6`, `num_cols=7` |
 | `ConnectFour-v0-blind` | `is_open=False`, `num_rows=6`, `num_cols=7` |
-| `ConnectFour-v0-large` | `is_open=True`, `num_rows=12`, `num_cols=15` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `ConnectFour-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `ConnectFour-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ConnectFour-v0", is_open=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

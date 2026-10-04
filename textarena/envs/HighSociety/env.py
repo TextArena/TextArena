@@ -15,6 +15,7 @@ def _is_renderable(value: Any) -> bool:
 class HighSocietyEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     broadcast_actions = False  # sealed bids: raw actions are echoed only to their author
 
     def __init__(self, max_ties: int = 3):

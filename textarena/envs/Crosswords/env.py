@@ -12,6 +12,7 @@ from textarena.envs.Crosswords.renderer import create_board_str
 class CrosswordsEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     MAX_COORDINATE_DIGITS = 6
     _ACTION_RE = re.compile(r"(?P<row>\d+)\s+(?P<col>\d+)\s+(?P<letter>[A-Za-z])")
 

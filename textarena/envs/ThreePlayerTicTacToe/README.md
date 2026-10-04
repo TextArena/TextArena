@@ -6,7 +6,7 @@ vertically, or diagonally wins. With two opponents, blocking one of them can ope
 <!-- BEGIN GENERATED: variants -->
 **Players:** 3
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |

@@ -7,6 +7,7 @@ import textarena as ta
 class PegJumpEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     ACTION_RE = re.compile(r"(?P<source>\d{1,2})(?:\s*,\s*|\s+)(?P<target>\d{1,2})")
     BOARD_SIZE = 15
 

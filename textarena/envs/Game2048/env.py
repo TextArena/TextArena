@@ -8,6 +8,7 @@ import textarena as ta
 class Game2048Env(ta.GameEnv):
     min_players = 1
     max_players = 1
+    mdp_includes_actions = False
     DEFAULT_BOARD_SIZE = 4
     MAX_TARGET_TILE = 65536
     CELL_W = 6

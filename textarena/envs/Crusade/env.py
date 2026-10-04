@@ -26,6 +26,7 @@ def _parse_cell_id(text: str) -> Optional[int]:
 class CrusadeEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
 
     BOARD_N = 8
     MAX_MOVES = 40

@@ -51,6 +51,7 @@ def _format_number(value: Real) -> str:
 class MarketEntryGameEnv(ta.GameEnv):
     min_players = 2
     max_players = 15
+    mdp_includes_actions = False
     broadcast_actions = False  # raw actions stay private; the game reveals messages/decisions simultaneously
     error_allowance = 2  # allow 2 errors before elimination
 

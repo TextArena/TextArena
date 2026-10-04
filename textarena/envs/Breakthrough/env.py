@@ -8,6 +8,7 @@ from textarena.envs.Breakthrough.renderer import create_board_str
 class BreakthroughEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
 
     def __init__(self, is_open: bool = True, board_size: int = 8):
         """

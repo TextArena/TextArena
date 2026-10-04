@@ -8,6 +8,7 @@ from textarena.envs.Checkers.renderer import create_board_str
 class CheckersEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
+    mdp_includes_actions = False
     action_pattern = r"^([0-7])\s+([0-7])\s+([0-7])\s+([0-7])$"
     action_format = (
         "a move 'rowFrom colFrom rowTo colTo' as four numbers from 0 to 7 separated by spaces, "

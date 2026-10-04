@@ -9,20 +9,13 @@ compromises under private preferences.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2–15
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `ScorableGames-v0` | `game_config="base"`, `max_rounds=120`, `invalid_move_default="Accept"` |
-| `ScorableGames-v0-7players` | `game_config="base_7players"`, `max_rounds=140`, `invalid_move_default="Accept"` |
-| `ScorableGames-v0-conservative` | `game_config="base"`, `max_rounds=120`, `invalid_move_default="Reject"` |
-| `ScorableGames-v0-game1` | `game_config="game1"`, `max_rounds=120`, `invalid_move_default="Accept"` |
-| `ScorableGames-v0-game2` | `game_config="game2"`, `max_rounds=120`, `invalid_move_default="Accept"` |
-| `ScorableGames-v0-game3` | `game_config="game3"`, `max_rounds=120`, `invalid_move_default="Accept"` |
-| `ScorableGames-v0-medicalethics` | `game_config="medical_ethics"`, `max_rounds=80`, `invalid_move_default="Accept"` |
-| `ScorableGames-v0-vendorretailer` | `game_config="vendor_retailer"`, `max_rounds=40`, `invalid_move_default="Accept"` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `ScorableGames-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `ScorableGames-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("ScorableGames-v0", game_config=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

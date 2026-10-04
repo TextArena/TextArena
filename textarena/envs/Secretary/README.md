@@ -8,14 +8,13 @@ everything seen so far.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** the full transcript, including every player action
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
 | Env ID | Parameters |
 | --- | --- |
 | `Secretary-v0` | `N=5` |
-| `Secretary-v0-long` | `N=10` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Secretary-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Secretary-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Secretary-v0", N=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules

@@ -6,15 +6,14 @@ opposite edges ([rules](https://en.wikipedia.org/wiki/Tak_%28game%29)).
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** game messages and the latest board (no raw player actions)
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
 | `Tak-v0` | `board_size=4`, `stones=15`, `capstones=1`, `max_turns=100` |
 | `Tak-v0-hard` | `board_size=6`, `stones=30`, `capstones=1`, `max_turns=200` |
-| `Tak-v0-medium` | `board_size=5`, `stones=21`, `capstones=1`, `max_turns=150` |
 
-Append `-mdp` to any ID for the state-complete variant (e.g. `Tak-v0-mdp`).
+Append `-mdp` to any ID for the state-complete variant (e.g. `Tak-v0-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Tak-v0", board_size=...)`.
 <!-- END GENERATED: variants -->
 
 ## Rules
