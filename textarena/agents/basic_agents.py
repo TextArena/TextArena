@@ -98,7 +98,8 @@ class TinkerAgent(_ModelAgent):
 
     Point it at a base model (e.g. model_name="Qwen/Qwen3-8B") or at weights saved from a
     Tinker training run (e.g. model_path="tinker://run-id/weights/checkpoint-001"), which makes
-    it easy to evaluate checkpoints you fine-tuned on TextArena games.
+    it easy to evaluate checkpoints you fine-tuned on TextArena games. The Tinker SDK finds the
+    credentials: TINKER_API_KEY, or TINKER_CREDENTIAL_CMD where an organization issues them.
     """
     def __init__(self, model_name: Optional[str]=None, model_path: Optional[str]=None,
                  system_prompt: Optional[str]=STANDARD_GAME_PROMPT, max_tokens: int=1024,
@@ -126,9 +127,6 @@ class TinkerAgent(_ModelAgent):
         except ImportError:
             raise ImportError("Tinker package is required for TinkerAgent. Install it with: pip install tinker")
         self._types = types
-
-        if not os.getenv("TINKER_API_KEY"):
-            raise ValueError("Tinker API key not found. Please set the TINKER_API_KEY environment variable.")
 
         self.service_client = tinker.ServiceClient()
         self.sampling_client = self.service_client.create_sampling_client(base_model=model_name, model_path=model_path)

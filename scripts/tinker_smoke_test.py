@@ -11,6 +11,8 @@ tag, which usually means the reply was cut off mid-reasoning, and shows what the
 Usage:
     pip install -e . tinker transformers
     TINKER_API_KEY=... python scripts/tinker_smoke_test.py [--model thinkingmachines/Inkling-Small]
+
+TINKER_CREDENTIAL_CMD works instead of TINKER_API_KEY, as everywhere in the Tinker SDK.
 """
 import argparse
 import collections
@@ -89,8 +91,8 @@ def main() -> int:
     parser.add_argument("--max-tokens", type=int, help="reply budget per call (default: TinkerAgent's default)")
     args = parser.parse_args()
 
-    if not os.getenv("TINKER_API_KEY"):
-        print("Set TINKER_API_KEY to run the smoke test.")
+    if not (os.getenv("TINKER_API_KEY") or os.getenv("TINKER_CREDENTIAL_CMD")):
+        print("Set TINKER_API_KEY (or TINKER_CREDENTIAL_CMD) to run the smoke test.")
         return 1
     import tinker
 
