@@ -128,6 +128,50 @@ def test_invalid_action_is_atomic():
     assert env.state.game_state == before
 
 
+def test_blackjack_beats_a_dealer_21_and_settles_without_a_dealer_draw():
+    env = _fresh()
+    gs = env.state.game_state
+    gs["player_hand"] = ["A♠", "K♥"]
+    gs["dealer_hand"] = ["9♦", "2♣"]
+    env._draw_card = lambda: "K♠"  # would give the dealer 21 if the dealer drew
+    done, _ = env.step("stand")
+    assert done
+    assert gs["dealer_hand"] == ["9♦", "2♣"]
+    assert gs["results_summary"] == {"win": 1, "lose": 0, "draw": 0}
+    assert env.state.rewards == {0: 1.0}
+
+
+def test_dealer_blackjack_beats_a_three_card_21():
+    env = _fresh()
+    gs = env.state.game_state
+    gs["player_hand"] = ["7♠", "7♥", "7♦"]
+    gs["dealer_hand"] = ["Q♣", "A♦"]
+    done, _ = env.step("stand")
+    assert done
+    assert gs["results_summary"] == {"win": 0, "lose": 1, "draw": 0}
+    assert env.state.rewards == {0: 0.0}
+
+
+def test_two_blackjacks_push():
+    env = _fresh()
+    gs = env.state.game_state
+    gs["player_hand"] = ["A♠", "J♥"]
+    gs["dealer_hand"] = ["10♣", "A♦"]
+    done, _ = env.step("stand")
+    assert done
+    assert gs["results_summary"] == {"win": 0, "lose": 0, "draw": 1}
+    assert env.state.rewards == {0: 0.5}
+
+
+def test_prompt_states_hand_count_dealer_rule_and_scoring():
+    env = _fresh(num_hands=7)
+    prompt = env.state.events[0][1]
+    assert "for 7 hands" in prompt
+    assert "draws until reaching 17 or more" in prompt and "soft 17" in prompt
+    assert "blackjack" in prompt
+    assert "(wins + 0.5 x pushes) / 7" in prompt
+
+
 def test_snapshot_restores_rng_for_same_hit_card():
     env = _fresh()
     env.state.game_state["player_hand"] = ["2♠", "2♥"]

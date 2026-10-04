@@ -87,7 +87,8 @@ class GermanWhistEnv(ta.GameEnv):
             'trump_card': trump_card,
             'current_trick': [],
             'completed_tricks': [],
-            'tricks_won': {0: 0, 1: 0},
+            'tricks_won': {0: 0, 1: 0},  # both phases, for display only
+            'playing_tricks_won': {0: 0, 1: 0},  # only these decide the game
             'phase': 'learning',  # learning, playing, finished
             'trick_leader': 0,
             'next_card': next_card,  # The card that winner of trick will receive
@@ -101,7 +102,7 @@ class GermanWhistEnv(ta.GameEnv):
         trump_str = self._card_to_string(gs['trump_card']) if gs['trump_card'] else "None"
 
         self.broadcast(
-            f"German Whist game started!\nTrump suit: {gs['trump_suit']} (Trump card: {trump_str})\n\nLEARNING PHASE: Win tricks to get the face-up card from the deck. The winner sees the next card, the loser gets it blind.",
+            f"German Whist game started!\nTrump suit: {gs['trump_suit']} (Trump card: {trump_str})\n\nLEARNING PHASE: The trick winner takes the face-up card from the deck and the loser takes the next card face down (only the loser sees it); then the next card is turned face up. Tricks won in this phase do not count towards victory.",
             ta.ObservationType.GAME_MESSAGE
         )
 
@@ -109,14 +110,14 @@ class GermanWhistEnv(ta.GameEnv):
         game_state = self.game_state
         phase_info = ""
         if game_state['phase'] == 'learning':
-            phase_info = "LEARNING PHASE: Win tricks to get the visible next card. You can see what you're competing for!"
+            phase_info = "LEARNING PHASE: Win tricks to get the visible next card. You can see what you're competing for! These tricks do not count towards victory."
         else:
-            phase_info = "PLAYING PHASE: No more cards to draw. Win as many tricks as possible!"
+            phase_info = "PLAYING PHASE: No more cards to draw. Every trick from now on counts towards victory!"
 
         return (
             f"You are playing German Whist - Player {player_id}.\n"
             f"{phase_info}\n"
-            f"Goal: Win the majority of tricks (14+ out of 26 total).\n"
+            f"Goal: Win the majority (7+) of the 13 playing-phase tricks. The first 13 tricks (learning phase) only decide who gets which cards.\n"
             f"Card Power: A > K > Q > J > 10 > 9 > 8 > 7 > 6 > 5 > 4 > 3 > 2\n"
             f"Trump cards beat non-trump cards. You must follow suit if possible.\n\n"
             f"Action: reply with 'play X' where X is the position (1-{len(game_state['players'][player_id]['hand']) if player_id in game_state['players'] else 13}) of the card in your hand\n"
@@ -192,7 +193,10 @@ class GermanWhistEnv(ta.GameEnv):
         next_card_str = self._render_next_card_info()
 
         # Show current score
-        scores_str = f"Tricks won - Player 0: {gs['tricks_won'][0]} | Player 1: {gs['tricks_won'][1]}"
+        if gs['phase'] == 'learning':
+            scores_str = f"Learning-phase tricks (do not count) - Player 0: {gs['tricks_won'][0]} | Player 1: {gs['tricks_won'][1]}"
+        else:
+            scores_str = f"Scoring tricks - Player 0: {gs['playing_tricks_won'][0]} | Player 1: {gs['playing_tricks_won'][1]}"
 
         # Phase information
         phase_str = f"Phase: {gs['phase'].upper()}"
@@ -275,6 +279,7 @@ class GermanWhistEnv(ta.GameEnv):
             gs['tricks_in_learning'] += 1
         else:
             gs['tricks_in_playing'] += 1
+            gs['playing_tricks_won'][winner_id] += 1
 
         self.broadcast(
             f"Player {winner_id} wins the trick with {self._card_to_string(winning_card)}!",
@@ -293,7 +298,7 @@ class GermanWhistEnv(ta.GameEnv):
         if gs['phase'] == 'learning' and not gs['deck']:
             gs['phase'] = 'playing'
             self.broadcast(
-                f"LEARNING PHASE COMPLETE! No more cards to draw.\nPLAYING PHASE: Win as many tricks as possible with your current hand!",
+                f"LEARNING PHASE COMPLETE! No more cards to draw.\nPLAYING PHASE: Every remaining trick counts towards victory. Win as many as possible with your current hand!",
                 ta.ObservationType.GAME_MESSAGE
             )
 
@@ -313,12 +318,12 @@ class GermanWhistEnv(ta.GameEnv):
         if not gs['deck']:
             return
 
-        # Winner gets the face-up card (next_card)
+        # Winner gets the face-up card (next_card), which both players have seen
         if gs['next_card']:
             gs['players'][winner_id]['hand'].append(gs['next_card'])
-            self.message(
-                winner_id,
-                f"You won the trick and received: {self._card_to_string(gs['next_card'])}",
+            self.broadcast(
+                f"Player {winner_id} takes the face-up {self._card_to_string(gs['next_card'])}; "
+                f"Player {loser_id} draws the next card face down.",
                 ta.ObservationType.GAME_MESSAGE
             )
 
@@ -337,12 +342,11 @@ class GermanWhistEnv(ta.GameEnv):
                 ta.ObservationType.GAME_MESSAGE
             )
 
-            # Winner gets to see what the next card will be
+            # The next stock card is turned face up for both players
             if gs['deck']:
                 gs['next_card'] = gs['deck'][-1]
-                self.message(
-                    winner_id,
-                    f"Next card available (you can see this because you won): {self._card_to_string(gs['next_card'])}",
+                self.broadcast(
+                    f"The next face-up card is {self._card_to_string(gs['next_card'])}.",
                     ta.ObservationType.GAME_MESSAGE
                 )
             else:
@@ -393,26 +397,25 @@ class GermanWhistEnv(ta.GameEnv):
         gs = self.game_state
         gs['phase'] = 'finished'
 
-        # Find winner (most tricks - need 14+ to win)
-        player_0_tricks = gs['tricks_won'][0]
-        player_1_tricks = gs['tricks_won'][1]
-        total_tricks = player_0_tricks + player_1_tricks
+        # Only the 13 playing-phase tricks count, so a complete game cannot tie.
+        player_0_tricks = gs['playing_tricks_won'][0]
+        player_1_tricks = gs['playing_tricks_won'][1]
 
         if player_0_tricks > player_1_tricks:
             winner_id = 0
         elif player_1_tricks > player_0_tricks:
             winner_id = 1
         else:
-            winner_id = None  # Tie (shouldn't happen with 26 tricks)
+            winner_id = None
 
         # Create final summary
-        summary = f"Game Over! Total tricks played: {total_tricks}\n\n"
-        summary += f"Final Score:\n"
-        summary += f"Player 0: {player_0_tricks} tricks\n"
-        summary += f"Player 1: {player_1_tricks} tricks\n\n"
+        summary = "Game Over! Only the playing-phase tricks count towards victory.\n\n"
+        summary += "Final Score (playing phase):\n"
+        summary += f"Player 0: {player_0_tricks} tricks ({gs['tricks_won'][0]} including the learning phase)\n"
+        summary += f"Player 1: {player_1_tricks} tricks ({gs['tricks_won'][1]} including the learning phase)\n\n"
 
         if winner_id is not None:
-            summary += f"Player {winner_id} wins with {gs['tricks_won'][winner_id]} tricks!"
+            summary += f"Player {winner_id} wins with {gs['playing_tricks_won'][winner_id]} scoring tricks!"
             return self.winner(winner_id, summary)
         else:
             summary += "It's a tie!"
@@ -453,7 +456,8 @@ class GermanWhistEnv(ta.GameEnv):
                 player = gs['players'][player_id]
                 hand_size = len(player['hand'])
                 tricks = gs['tricks_won'][player_id]
+                scoring = gs['playing_tricks_won'][player_id]
 
-                output.append(f"Player {player_id}: {tricks} tricks won, {hand_size} cards in hand")
+                output.append(f"Player {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} cards in hand")
 
         return "\n".join(output)

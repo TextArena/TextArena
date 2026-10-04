@@ -45,7 +45,8 @@ class LightsOutEnv(ta.GameEnv):
             f"Welcome to Lights Out! You have a {self.size}x{self.size} grid of lights.\n"
             "Your goal is to turn ALL lights OFF (represented by '.')\n"
             "When you press a light, it toggles itself AND its adjacent neighbors (up/down/left/right).\n"
-            f"Reply with 'row col' to press a light (0-indexed, so valid range is 0-{self.size-1}), e.g. '2 3'.\n"
+            f"Reply with 'row col' to press a light (0-indexed, so valid range is 0-{self.size-1}), "
+            f"e.g. '{min(2, self.size - 1)} {min(3, self.size - 1)}'.\n"
             f"You have up to {self.max_turns} moves to solve the puzzle.\n"
             "Legend: 'O' = light ON, '.' = light OFF"
         )

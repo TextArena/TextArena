@@ -40,7 +40,8 @@ class IteratedMatchingPenniesEnv(ta.GameEnv):
         role = "Matcher" if player_id == 0 else "Mismatcher"
         return (
             f"You are Player {player_id} ({role}) in a {self.num_rounds}-round Matching Pennies game.\n- Each round, submit 'heads' or 'tails' (or 'h', 't').\n"
-            "- If your choice matches your opponent’s, Player 0 wins the round; otherwise Player 1 wins.\nReply with your choice, e.g. 'heads' or 'tails'.\n"
+            "- If your choice matches your opponent’s, Player 0 wins the round; otherwise Player 1 wins.\n"
+            "- The player who wins more rounds wins the game; equal round wins is a draw.\nReply with your choice, e.g. 'heads' or 'tails'.\n"
         )
 
     def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
@@ -78,8 +79,9 @@ class IteratedMatchingPenniesEnv(ta.GameEnv):
             same = (moves[0] == moves[1])
             winner = 0 if same else 1
             gs["history"].append(moves.copy())
-            self.broadcast(f"Player 0 picked {moves[0]}; Player 1 picked {moves[1]}. {'Match -> Player 0 wins' if same else 'Mismatch -> Player 1 wins.'}", ta.ObservationType.GAME_MESSAGE)
             gs["points"][winner] += 1
+            self.broadcast(f"Player 0 picked {moves[0]}; Player 1 picked {moves[1]}. {'Match -> Player 0 wins.' if same else 'Mismatch -> Player 1 wins.'}", ta.ObservationType.GAME_MESSAGE)
+            self.broadcast(f"Score after round {gs['round']}/{self.num_rounds}: Player 0 {gs['points'][0]}, Player 1 {gs['points'][1]}.", ta.ObservationType.GAME_MESSAGE)
             gs["moves"].clear()
             if gs["round"] >= self.num_rounds:
                 p0, p1 = gs["points"][0], gs["points"][1]

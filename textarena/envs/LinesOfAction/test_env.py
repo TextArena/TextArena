@@ -46,6 +46,22 @@ def test_invalid_format():
     assert env.state.current_player_id == 0
 
 
+def test_format_error_describes_expected_action():
+    env = _fresh()
+    env.step("move b8 to b6")
+    notice = next(message for _, message in env.state.logs if "attempted an invalid move" in message)
+    assert f"Expected {env.action_format}." in notice
+
+    assert "for example 'b1b3', or 'pass'" in env.action_format
+    fresh = _fresh()
+    fresh.step("b1b3")
+    blocked = _fresh()
+    _stage_blocked_o(blocked)
+    blocked.step("pass")
+    for game in (fresh, blocked):
+        assert game.state.turn == 1 and game.state.error_count == 0
+
+
 def test_no_piece_at_source():
     env = _fresh()
     # a1 (bottom-left corner) is empty for O.
@@ -172,6 +188,48 @@ def test_pass_is_rejected_while_a_move_exists():
     assert not done
     assert env.state.game_state == before
     assert env.state.current_player_id == 0
+
+
+def _stage_blocked_o(env):
+    """O (a8, h1) has no legal move: every line is blocked by X or leaves the board."""
+    board = env.state.game_state["board"]
+    board[:] = [["" for _ in range(8)] for _ in range(8)]
+    board[0][0] = board[7][7] = "O"
+    for r, c in [(0, 1), (1, 0), (1, 1), (7, 6), (6, 7), (6, 6)]:
+        board[r][c] = "X"
+    return board
+
+
+def test_render_lists_legal_moves_for_the_acting_player():
+    env = _fresh()
+    board = env.render(0)
+    assert "Legal moves:" in board
+    listed = board.split("Legal moves:")[1].strip().split(", ")
+    assert sorted(listed) == sorted(env._legal_moves(0))
+
+
+def test_player_without_moves_is_told_to_pass_and_can_pass():
+    env = _fresh()
+    _stage_blocked_o(env)
+    assert env._legal_moves(0) == []
+    assert "pass" in env.prompt(0)
+
+    assert env.render(0).rstrip().endswith("Legal moves: pass")
+    done, _ = env.step("pass")
+
+    assert not done
+    assert env.state.error_count == 0
+    assert env.state.current_player_id == 1
+
+
+def test_separated_coordinates_are_accepted_and_echoed_in_lowercase():
+    env = _fresh()
+    done, _ = env.step("B8 b6")
+    assert not done and env.state.error_count == 0
+    done, _ = env.step("a7-a1")
+    assert not done and env.state.error_count == 0
+    descriptions = [m for f, m, t, _ in env.state.events if m.startswith("Player 0 moved")]
+    assert descriptions == ["Player 0 moved b8 -> b6"]
 
 
 def test_snapshot_restore_recovers_repetition_and_halfmove_state():

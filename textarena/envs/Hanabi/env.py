@@ -47,7 +47,7 @@ class HanabiEnv(ta.GameEnv):
         re.IGNORECASE,
     )
 
-    def __init__(self, info_tokens: int = 8, fuse_tokens: int = 4,):
+    def __init__(self, info_tokens: int = 8, fuse_tokens: int = 3,):
         if not isinstance(info_tokens, int) or isinstance(info_tokens, bool) or info_tokens < 0:
             raise ValueError("info_tokens must be a non-negative integer")
         if not isinstance(fuse_tokens, int) or isinstance(fuse_tokens, bool) or fuse_tokens < 1:
@@ -60,6 +60,7 @@ class HanabiEnv(ta.GameEnv):
         self.num_players = self.state.num_players
         self.hand_size = 5 if self.num_players <= 3 else 4  # The hand size is 5 for 2-3 players, and 4 for 4-5 players
         self.deck = self._generate_deck()
+        hands = {player: self.generate_hand(self.deck) for player in range(self.num_players)}
         return {
             "info_tokens": self.info_tokens,
             "fuse_tokens": self.fuse_tokens,
@@ -72,12 +73,25 @@ class HanabiEnv(ta.GameEnv):
             },
             "deck_size": self.deck_size,
             "deck": self.deck,
-            "player_hands": {
-                player: self.generate_hand(self.deck) for player in range(self.num_players)
-            },
+            "player_hands": hands,
+            # What each player has been told about each card in their hand, aligned with player_hands.
+            "hints": {player: [self._no_hints() for _ in hand] for player, hand in hands.items()},
             "discard_pile": [],
             "last_round": -1,
+            "skips_in_a_row": 0,  # turns skipped for repeated invalid moves since the last valid action
         }
+
+    @staticmethod
+    def _no_hints() -> Dict[str, Any]:
+        return {"color": None, "rank": None, "not_colors": [], "not_ranks": []}
+
+    @staticmethod
+    def _hint_text(knowledge: Dict[str, Any]) -> str:
+        known = " ".join(str(value) for value in (knowledge["color"], knowledge["rank"]) if value is not None)
+        excluded = [] if knowledge["color"] else list(knowledge["not_colors"])
+        excluded += [] if knowledge["rank"] else [str(rank) for rank in knowledge["not_ranks"]]
+        parts = ([f"known: {known}"] if known else []) + ([f"not {', '.join(excluded)}"] if excluded else [])
+        return "; ".join(parts) if parts else "no hints"
 
     def get_board_str(self) -> str:
         """Get the string representing the Hanabi board."""
@@ -92,29 +106,39 @@ class HanabiEnv(ta.GameEnv):
 
         f"Objective:\n"
         f"The objective is to play cards in sequence (1 through 5) for each color without making mistakes. "
-        f"There are 5 different colors and each color has cards numbered 1 to 5.\n\n"
+        f"There are 5 different colors (white, yellow, green, blue, red); each color has three 1s, two each of 2s, "
+        f"3s and 4s, and one 5.\n\n"
 
         f"Key Rules:\n"
         "On your turn, you have three types of possible actions:\n"
 
         "1. Give a Hint (Reveal): Provide a hint to another player about their cards, specifying either a color or a"
-            " number present in their hand. Hints must be accurate and can only reveal positions of cards matching the "
-            "hint.\n"
-        "2. Discard a Card: Discard one of your own cards to potentially gain an Info token.\n"
+            " number present in their hand. Hints must be accurate and reveal the positions of all of their cards "
+            "matching the hint. A hint costs one info token.\n"
+        f"2. Discard a Card: Discard one of your own cards to regain one info token. Discarding is not allowed "
+            f"while all {self.info_tokens} info tokens are available.\n"
         "3. Play a Card: Attempt to play a card from your hand. If played correctly in sequence, it adds to the "
-            "fireworks; if not, it reduces one fuse token.\n\n"
+            "fireworks; if not, it is discarded and the team loses one fuse token. Completing a firework with its 5 "
+            "returns one info token.\n"
+        "After playing or discarding you draw a new card while the deck lasts.\n\n"
 
         "Tokens:\n"
-        "Fuse Tokens: Deducted when a wrong card is played.\n"
-        "Info Tokens: Used to give clues.\n\n"
+        f"Fuse Tokens: The team starts with {self.fuse_tokens}; one is lost for every wrong card played.\n"
+        f"Info Tokens: The team starts with {self.info_tokens} (the maximum); they are used to give clues.\n\n"
+
+        "Card positions:\n"
+        "Cards in a hand are numbered from 0. A newly drawn card goes to the end of the hand, and the cards after "
+        "a played or discarded card move down one position.\n\n"
 
         "Illegal Moves:\n"
         "Playing a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in "
-        "failure.\n\n"
+        f"failure with a score of 0. {self.error_allowance + 1} invalid replies in a row skip your turn; if every "
+        "player skips a turn in a row, the game ends with the current score.\n\n"
 
         "Game End:\n"
         "The game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted "
-        "and each player has taken one final turn, or when the players run out of fuse tokens.\n\n"
+        "and each player has taken one final turn, or when the players run out of fuse tokens. "
+        "The team score is the number of cards played on the fireworks.\n\n"
 
         "State Representation:\n"
         "The game state is represented with the following details:\n"
@@ -156,13 +180,22 @@ class HanabiEnv(ta.GameEnv):
                 visible_cards += f"- Player {other_id} has cards:\n"
                 for i, card in enumerate(gs['player_hands'][other_id]):
                     if card is not None:
-                        visible_cards += f"\tcard {i}: {card}\n"
+                        visible_cards += f"\tcard {i}: {card} (their hints: {self._hint_text(gs['hints'][other_id][i])})\n"
 
+        own_hints = gs['hints'][player_id]
+        own_cards = "".join(f"\tcard {i}: {self._hint_text(knowledge)}\n" for i, knowledge in enumerate(own_hints))
+        final_round = (
+            f"The deck is empty: this is the final round, which ends after Player {gs['last_round']}'s turn.\n"
+            if gs['last_round'] != -1 else ""
+        )
         return (
             f"You are player {player_id}. \n\n"
             f"Current game state:\n"
             f"Fuse tokens: there are {gs['fuse_tokens']} fuse tokens remaining.\n"
-            f"Info tokens: there are {gs['info_tokens']} info tokens remaining.\n\n"
+            f"Info tokens: there are {gs['info_tokens']} info tokens remaining.\n"
+            f"Deck: there are {len(gs['deck'])} cards left to draw.\n{final_round}\n"
+            f"Your hand: you hold {len(own_hints)} cards (positions 0 to {len(own_hints) - 1}) that you cannot see. "
+            f"What the hints so far have told you:\n{own_cards}\n"
             f"Fireworks: The current progress on each firework color is:\n"
             f"\t{Suit.WHITE.value}: {gs['fireworks'][Suit.WHITE]}.\n"
             f"\t{Suit.YELLOW.value}: {gs['fireworks'][Suit.YELLOW]}.\n"
@@ -190,6 +223,7 @@ class HanabiEnv(ta.GameEnv):
 
         if isinstance(result, ta.Invalid):
             return result
+        self.game_state["skips_in_a_row"] = 0
         return self._check_game_end()
 
     def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
@@ -197,6 +231,16 @@ class HanabiEnv(ta.GameEnv):
         outcome = self._check_game_end()
         if outcome is not None:
             return outcome
+        gs = self.game_state
+        gs["skips_in_a_row"] += 1
+        if gs["skips_in_a_row"] >= self.num_players:
+            # Skipped turns change nothing, so a full round of them would repeat forever.
+            score = self._calculate_scores()
+            return self.outcome(
+                {pid: score / 25 for pid in range(self.num_players)},
+                reason=f"Every player skipped a turn in a row for repeated invalid moves, so the game ends. "
+                       f"Final team score: {score}/25.",
+            )
         message = (f"Player {player_id} made {self.state.error_allowance + 1} "
                    f"invalid moves in a row, skipping a turn. ")
         self.broadcast(message, ta.ObservationType.GAME_MESSAGE, from_id=player_id)
@@ -220,7 +264,7 @@ class HanabiEnv(ta.GameEnv):
                 f"Card {card_idx} does not exist; choose an index between 0 and {len(hand) - 1}."
             )
 
-        card = hand.pop(card_idx)
+        card = self._remove_card(player_id, card_idx)
         message = f"Player {player_id} discards {card}."
         gs['discard_pile'].append(card)
 
@@ -231,10 +275,18 @@ class HanabiEnv(ta.GameEnv):
             message += " This does not replenish an info token as the token cap is reached."
 
         self.broadcast(message, ta.ObservationType.GAME_MESSAGE, from_id=player_id)
-        replacement = self._draw_card(gs['deck'])
-        if replacement is not None:
-            hand.append(replacement)
+        self._draw_replacement(player_id)
         return None
+
+    def _remove_card(self, player_id: int, card_idx: int) -> Card:
+        self.game_state['hints'][player_id].pop(card_idx)
+        return self.game_state['player_hands'][player_id].pop(card_idx)
+
+    def _draw_replacement(self, player_id: int):
+        replacement = self._draw_card(self.game_state['deck'])
+        if replacement is not None:
+            self.game_state['player_hands'][player_id].append(replacement)
+            self.game_state['hints'][player_id].append(self._no_hints())
 
     def _handle_play(self, player_id: int, match: re.Match) -> Optional[ta.Invalid]:
         """
@@ -248,7 +300,7 @@ class HanabiEnv(ta.GameEnv):
                 f"Card {card_idx} does not exist; choose an index between 0 and {len(hand) - 1}."
             )
 
-        card = hand.pop(card_idx)
+        card = self._remove_card(player_id, card_idx)
         action_description = f"Player {player_id} attempts to play {card}."
         if self._play(card):
             if card.rank == 5 and gs['info_tokens'] < self.info_tokens:
@@ -269,9 +321,7 @@ class HanabiEnv(ta.GameEnv):
             self.broadcast(message, ta.ObservationType.GAME_MESSAGE, from_id=player_id)
             gs['discard_pile'].append(card)
 
-        replacement = self._draw_card(gs['deck'])
-        if replacement is not None:
-            hand.append(replacement)
+        self._draw_replacement(player_id)
         return None
 
     def _handle_reveal(self, player_id: int, match: re.Match) -> Optional[ta.Invalid]:
@@ -300,6 +350,8 @@ class HanabiEnv(ta.GameEnv):
                 f"All {hint_value} cards in Player {target_player}'s hand are at "
                 f"indices {matching_indices}."
             )
+            known_key, excluded_key, value = "color", "not_colors", hint_value
+            order = [suit.value for suit in Suit]
         else:  # The player gave a hint about the rank
             rank = int(hint_value)
             matching_indices = [
@@ -309,6 +361,14 @@ class HanabiEnv(ta.GameEnv):
                 f"All rank {rank} cards in Player {target_player}'s hand are at "
                 f"indices {matching_indices}."
             )
+            known_key, excluded_key, value = "rank", "not_ranks", rank
+            order = [1, 2, 3, 4, 5]
+
+        for idx, knowledge in enumerate(gs["hints"][target_player]):
+            if idx in matching_indices:
+                knowledge[known_key] = value
+            elif value not in knowledge[excluded_key]:
+                knowledge[excluded_key] = sorted(knowledge[excluded_key] + [value], key=order.index)
 
         gs['info_tokens'] = gs['info_tokens'] - 1
         self.broadcast(hint, ta.ObservationType.GAME_MESSAGE, from_id=player_id)

@@ -11,14 +11,15 @@ class UltimateTexasHoldemEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
 
-    # Action patterns - bare actions ('1x', '2x', '4x', ...), stray brackets tolerated
-    _PLAY_BET_4X_RE = re.compile(r"^\s*\[?\s*(?:4x?|play\s+bet\s+4x?|play\s+4x?\s+bet|play_bet_4x)\s*\]?\s*$", re.IGNORECASE)
-    _PLAY_BET_3X_RE = re.compile(r"^\s*\[?\s*(?:3x?|play\s+bet\s+3x?|play\s+3x?\s+bet|play_bet_3x)\s*\]?\s*$", re.IGNORECASE)
-    _PLAY_BET_2X_RE = re.compile(r"^\s*\[?\s*(?:2x?|play\s+bet\s+2x?|play\s+2x?\s+bet|play_bet_2x)\s*\]?\s*$", re.IGNORECASE)
-    _PLAY_BET_1X_RE = re.compile(r"^\s*\[?\s*(?:1x?|play\s+bet\s+1x?|play\s+1x?\s+bet|play_bet_1x)\s*\]?\s*$", re.IGNORECASE)
-    _CHECK_RE = re.compile(r"^\s*\[?\s*(?:check|c)\s*\]?\s*$", re.IGNORECASE)
-    _FOLD_RE = re.compile(r"^\s*\[?\s*(?:fold|f)\s*\]?\s*$", re.IGNORECASE)
-    _SKIP_RE = re.compile(r"^\s*\[?\s*(?:skip|s)\s*\]?\s*$", re.IGNORECASE)
+    # Action patterns - bare actions ('1x', '2x', '4x', ...), stray brackets tolerated.
+    # A whitespace run must be consumable by only one \s*, as retrying every split of a long run is quadratic.
+    _PLAY_BET_4X_RE = re.compile(r"^\s*(?:\[\s*)?(?:4x?|play\s+bet\s+4x?|play\s+4x?\s+bet|play_bet_4x)(?:\s*\])?\s*$", re.IGNORECASE)
+    _PLAY_BET_3X_RE = re.compile(r"^\s*(?:\[\s*)?(?:3x?|play\s+bet\s+3x?|play\s+3x?\s+bet|play_bet_3x)(?:\s*\])?\s*$", re.IGNORECASE)
+    _PLAY_BET_2X_RE = re.compile(r"^\s*(?:\[\s*)?(?:2x?|play\s+bet\s+2x?|play\s+2x?\s+bet|play_bet_2x)(?:\s*\])?\s*$", re.IGNORECASE)
+    _PLAY_BET_1X_RE = re.compile(r"^\s*(?:\[\s*)?(?:1x?|play\s+bet\s+1x?|play\s+1x?\s+bet|play_bet_1x)(?:\s*\])?\s*$", re.IGNORECASE)
+    _CHECK_RE = re.compile(r"^\s*(?:\[\s*)?(?:check|c)(?:\s*\])?\s*$", re.IGNORECASE)
+    _FOLD_RE = re.compile(r"^\s*(?:\[\s*)?(?:fold|f)(?:\s*\])?\s*$", re.IGNORECASE)
+    _SKIP_RE = re.compile(r"^\s*(?:\[\s*)?(?:skip|s)(?:\s*\])?\s*$", re.IGNORECASE)
 
     def __init__(self, max_turns: int = 1000, start_chips: int = 1000, ante_amount: int = 25):
         # `max_turns` counts ROUNDS (the legacy env never used the engine step
@@ -131,8 +132,6 @@ class UltimateTexasHoldemEnv(ta.GameEnv):
         gs["legal_actions"] = self.legal_action_tree["pre_flop"][:]
 
         self.broadcast(f"🎮 Round {gs['current_round']} started! Bets: ANTE ${gs['ante_bet']}, BLIND ${gs['blind_bet']}. You have {gs['chips']} chips remaining.", ta.ObservationType.GAME_MESSAGE)
-        hand_str = ", ".join([f"{c['rank']}{c['suit']}" for c in gs["player_hand"]])
-        self.broadcast(f"🎴 Your hand: {hand_str}", ta.ObservationType.GAME_BOARD)
 
     def _create_deck(self) -> List[Dict[str, str]]:
         return [{"rank": r, "suit": s} for s in self.suits for r in self.ranks]
@@ -142,10 +141,6 @@ class UltimateTexasHoldemEnv(ta.GameEnv):
         return ", ".join(f"{card['rank']}{card['suit']}" for card in cards)
 
     def prompt(self, player_id: int) -> str:
-        gs = self.game_state
-        phase = gs["current_phase"]
-
-        # Game rules and instructions
         rules = (
             "🎯 ULTIMATE TEXAS HOLD'EM - Single Player vs Dealer\n\n"
             "📖 GAME OVERVIEW:\n"
@@ -248,31 +243,39 @@ class UltimateTexasHoldemEnv(ta.GameEnv):
             "• Strong starting hands (pairs, high cards) often justify 4x bets\n"
             "• Consider dealer qualification - weak hands may push if dealer doesn't qualify\n"
             "• BLIND bet can be very profitable with strong hands (Royal Flush = 500:1!)\n"
-            "• Watch your chip stack! If it goes to 0 or below at start of round, you lose.\n\n"
+            f"• Watch your chip stack! If a round leaves you with less than ${2 * self.ante_amount} for the next ANTE and BLIND, you lose.\n\n"
 
             "⚠️  IMPORTANT NOTES:\n"
             "• ANTE and BLIND bets are mandatory every round\n"
             "• PLAY bets are optional and strategic\n"
-            "• Make sure you input the correct action, and only one action at a time.\n\n"
+            "• Make sure you input the correct action, and only one action at a time.\n"
+            "• Before every decision you are shown your cards, the revealed community cards, your bets and the available actions.\n\n"
         )
+        return rules
 
-        # Current game state
-        player_hand_str = (
-            ", ".join(f"{card['rank']}{card['suit']}" for card in gs["player_hand"])
-            if gs["player_hand"]
-            else "No cards yet"
-        )
-        legal_actions_str = ", ".join(f"'{action}'" for action in gs.get("legal_actions", []))
-        state_info = (
-            f"🎯 ROUND {gs['current_round']}\n"
-            f"💰 Chips: {gs['chips']}\n"
-            f"🎴 Your hand: {player_hand_str}\n"
-            f"📊 Current bets: Ante ${gs['ante_bet']}, Blind ${gs['blind_bet']}, Play ${gs['play_bet']}\n"
-            f"📋 Phase: {self.game_phases[phase]}\n"
-            f"🎯 Available actions: {legal_actions_str}\n\n"
-        )
+    _ACTION_NAMES = {
+        "play_bet_4x": "4x", "play_bet_3x": "3x", "play_bet_2x": "2x", "play_bet_1x": "1x",
+        "check": "check", "fold": "fold", "skip": "skip",
+    }
 
-        return rules + state_info
+    def _available_actions(self) -> str:
+        return ", ".join(f"'{self._ACTION_NAMES[action]}'" for action in self.game_state["legal_actions"])
+
+    def render(self, player_id: int) -> str:
+        gs = self.game_state
+        hidden = len(gs["community_cards"]) - len(gs["visible_community_cards"])
+        community = self._cards_str(gs["visible_community_cards"]) or "none revealed"
+        lines = [
+            f"Round {gs['current_round']} of {self.max_rounds} - {self.game_phases[gs['current_phase']]}",
+            f"Chips: {gs['chips']} (excluding the bets below)",
+            f"Bets: Ante ${gs['ante_bet']}, Blind ${gs['blind_bet']}, Play ${gs['play_bet']}",
+            f"Your hand: {self._cards_str(gs['player_hand'])}",
+            f"Community cards: {community}" + (f" ({hidden} still hidden)" if hidden else ""),
+            "Dealer's hand: hidden",
+        ]
+        if not self.state.done:
+            lines.append(f"Available actions: {self._available_actions()}")
+        return "\n".join(lines)
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         gs = self.game_state
@@ -283,11 +286,7 @@ class UltimateTexasHoldemEnv(ta.GameEnv):
         parsed = self._parse_action(action)
 
         if parsed is None:
-            # Get current legal actions for better error feedback
-            current_actions = gs.get("legal_actions", [])
-            available_actions = ", ".join([f"'{a}'" for a in current_actions])
-            self.broadcast(f"❌ Invalid action! Available actions: {available_actions}", ta.ObservationType.GAME_MESSAGE)
-            return self.invalid(f"Invalid action for current phase. Available actions: {available_actions}")
+            return self.invalid(f"Invalid action for current phase. Available actions: {self._available_actions()}")
 
         wager = {
             "play_bet_4x": 4 * self.ante_amount,

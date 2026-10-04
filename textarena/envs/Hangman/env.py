@@ -1,42 +1,28 @@
 import re
 from typing import Any, Dict, Optional, Union
 
-from nltk.corpus import words
-
 import textarena as ta
 from textarena.envs.Hangman.renderer import create_board_str
-from textarena.utils.word_lists import EnglishDictionary
+from textarena.utils.word_lists import get_basic_english_words, get_headwords
 
 
 class HangmanEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
     action_pattern = r"^\s*\[?\s*([a-zA-Z]+)\s*\]?\s*$"
+    action_format = "a single letter or the entire word, for example 'L' or 'LIGHT'"
     snapshot_excluded_attributes = ("word_list",)
 
     def __init__(self, hardcore: Optional[bool] = False):
         """
         Args:
-            hardcore: Whether to play in hardcore mode.
+            hardcore: Draw the secret word from every dictionary headword instead of Basic English.
         """
         if not isinstance(hardcore, bool):
             raise ValueError("hardcore must be a boolean.")
         self.hardcore = hardcore
-        try:
-            source_words = words.words("en") if hardcore else words.words("en-basic")
-        except LookupError:
-            dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=False)
-            source_words = dictionary.get_all_words()
-        self.word_list = sorted(
-            {
-                word.lower()
-                for word in source_words
-                if isinstance(word, str)
-                and word.isascii()
-                and word.isalpha()
-                and len(word) >= 3
-            }
-        )
+        source_words = get_headwords() if hardcore else get_basic_english_words()
+        self.word_list = sorted(word for word in source_words if len(word) >= 3)
         if not self.word_list:
             raise ValueError("The selected dictionary contains no playable Hangman words.")
 
@@ -58,7 +44,8 @@ class HangmanEnv(ta.GameEnv):
             "If the given letter is in the word, it will be revealed in the grid.\n"
             "If the given word is correct, you win.\n"
             "As you play, the history of your choices will be appended below. Use the information to figure out the word and win.\n"
-            "You have 6 incorrect tries before the game ends.\n\n"
+            "You have 6 incorrect tries before the game ends: every letter that is not in the word and every wrong word guess costs one try.\n"
+            "Repeating a letter or word you already guessed is an invalid move.\n\n"
         )
 
     def render(self, player_id: int) -> str:

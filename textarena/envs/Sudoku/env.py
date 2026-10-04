@@ -52,37 +52,19 @@ class SudokuEnv(ta.GameEnv):
         }
 
     def prompt(self, player_id: int) -> str:
+        empty_cells = sum(cell == 0 for row in self.game_state["board"] for cell in row)
         return (
             f"You are Player {player_id}. You are playing Sudoku.\n"
-            "Here is the current state of the Sudoku grid. Each row is numbered from 1 to 9, and each column is also numbered from 1 to 9.\n"
-            "Empty cells are represented by '.', and pre-filled cells contain digits from 1 to 9.\n\n"
-            "Current Sudoku Grid:\n"
-            "Your objective is to fill the empty cells in the 9x9 grid with digits from 1 to 9 such that:\n"
-            "1. Each row contains all digits from 1 to 9 without repetition.\n"
-            "2. Each column contains all digits from 1 to 9 without repetition.\n"
-            "3. Each of the nine 3x3 subgrids contains all digits from 1 to 9 without repetition.\n\n"
-            "Rules and Instructions:\n"
-            "1. **Do not overwrite** the initial numbers provided in the grid.\n"
-            "2. **Only fill** empty cells represented by '.'.\n"
-            "3. Reply with your move in the format 'row column number', e.g. '5 3 7'.\n"
-            "4. **Ensure** that your move does not violate Sudoku rules. Invalid moves will result in penalties.\n"
-            "Examples:\n"
-            "- **Valid Move**:\n"
-            "  - Grid Snippet Before Move:\n"
-            "  \n"
-            "  - Move: `5 3 7`\n"
-            "  - Explanation: Placing 7 at row 5, column 3 does not violate any Sudoku rules.\n\n"
-            "- **Invalid Move** (Overwriting a pre-filled cell):\n"
-            "  - Grid Snippet Before Move:\n"
-            "  \n"
-            "  - Move: `1 1 9`\n"
-            "  - Explanation: Cell (1,1) is already filled with 5. You cannot overwrite it.\n\n"
-            "- **Invalid Move** (Violating Sudoku rules):\n"
-            "  - Grid Snippet Before Move:\n"
-            "  \n"
-            "  - Move: `1 3 5`\n"
-            "  - Explanation: Placing 5 in row 1, column 3 violates the rule since 5 already exists in row 1.\n\n"
-            "The history of your moves and thoughts will be appended as you play more rounds. Use the history of your move to improve your decision making by avoiding the moves you have tried. Good luck!\n\n"
+            "Fill every empty cell of the 9x9 grid with a digit from 1 to 9 so that each row, each column, "
+            "and each of the nine 3x3 boxes contains every digit exactly once.\n"
+            "Rows are numbered 1 to 9 from top to bottom and columns 1 to 9 from left to right, as labeled on the "
+            "board. Empty cells are shown as '.'.\n"
+            "On your turn, fill one empty cell by replying with 'row column digit'. For example, '5 3 7' would "
+            "place a 7 in row 5, column 3.\n"
+            "The puzzle has exactly one solution, and a digit is only accepted if it is the solution's digit for "
+            "that cell. Filled cells cannot be changed.\n"
+            f"You have {self.max_turns} turns to fill the {empty_cells} empty cells; each accepted digit uses one turn.\n"
+            "A rejected move changes nothing and you may try again, but two rejected moves in a row end the game."
         )
 
     def render(self, player_id: int) -> str:
@@ -112,9 +94,15 @@ class SudokuEnv(ta.GameEnv):
         row_idx, col_idx = row - 1, col - 1
         board = self.game_state["board"]
         if board[row_idx][col_idx] != 0:
-            return self.invalid(f"Invalid move. Player {player_id} attempted to overwrite a pre-filled cell ({row}, {col}).")
+            return self.invalid(f"Invalid move. Player {player_id} attempted to overwrite the filled cell ({row}, {col}).")
+        conflict = self._conflicting_unit(row_idx, col_idx, num)
+        if conflict is not None:
+            return self.invalid(f"Invalid move. Player {player_id} attempted to place {num} at ({row}, {col}), but {conflict} already contains a {num}.")
         if not self._is_move_correct(row_idx, col_idx, num):
-            return self.invalid(f"Invalid move. Player {player_id} attempted to place {num} at ({row}, {col}), which violates Sudoku rules.")
+            return self.invalid(
+                f"Incorrect digit. {num} does not conflict with the grid at ({row}, {col}), "
+                "but it is not the solution's digit for that cell."
+            )
 
         board[row_idx][col_idx] = num
         self.game_state["rendered_board"] = create_board_str(board)
@@ -217,6 +205,17 @@ class SudokuEnv(ta.GameEnv):
 
     def _is_move_correct(self, row: int, col: int, num: int) -> bool:
         return self.full_grid[row][col] == num
+
+    def _conflicting_unit(self, row: int, col: int, num: int) -> Optional[str]:
+        board = self.game_state["board"]
+        if num in board[row]:
+            return f"row {row + 1}"
+        if any(board[r][col] == num for r in range(9)):
+            return f"column {col + 1}"
+        box_row, box_col = 3 * (row // 3), 3 * (col // 3)
+        if any(board[r][c] == num for r in range(box_row, box_row + 3) for c in range(box_col, box_col + 3)):
+            return "its 3x3 box"
+        return None
 
     def _is_puzzle_complete(self) -> bool:
         for i in range(9):

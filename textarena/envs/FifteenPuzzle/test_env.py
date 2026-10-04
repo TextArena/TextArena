@@ -4,9 +4,11 @@ The board is randomly shuffled, so tests that need a specific layout overwrite
 ``env.board`` directly.
 """
 import copy
+import re
 
 import pytest
 
+import textarena as ta
 from textarena.envs.FifteenPuzzle.env import FifteenPuzzleEnv
 
 
@@ -36,6 +38,21 @@ def test_invalid_format_increments_error_count():
     env = _fresh()
     done, _ = env.step("go up please")  # not a bare direction word
     assert not done and env.state.error_count == 1
+
+
+def test_format_error_describes_expected_action():
+    env = _fresh()
+    env.step("go up please")
+    notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
+    assert f"Expected {env.action_format}." in notices[-1]
+
+    directions = re.findall(r"'([a-z]+)'", env.action_format)
+    assert directions == ["up", "down", "left", "right"]
+    for direction in directions:  # with the blank in the middle every direction is legal
+        fresh = _fresh()
+        _set_board(fresh, [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, None, 12], [13, 14, 11, 15]])
+        fresh.step(direction)
+        assert fresh.state.turn == 1 and fresh.state.error_count == 0
 
 
 def test_illegal_direction_rejected():
@@ -138,6 +155,42 @@ def test_dynamic_render_cannot_go_stale():
 def test_invalid_turn_limit_rejected():
     with pytest.raises(ValueError):
         FifteenPuzzleEnv(max_turns=0)
+
+
+@pytest.mark.parametrize("max_turns,seed", [(12, 915), (12, 3633), (14, 12305), (16, 2784)])
+def test_generator_never_starts_on_the_solved_board(max_turns, seed):
+    env = FifteenPuzzleEnv(max_turns=max_turns)
+    env.reset(num_players=1, seed=seed)
+    assert not env._is_solved()
+    assert _is_solvable(env.board)
+
+
+def test_each_move_delivers_exactly_one_board():
+    env = _fresh()
+    _set_board(env, [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, None, 12], [13, 14, 11, 15]])
+    env.get_observation()
+    env.step("up")
+    _, observation = env.get_observation()
+    boards = [message for _, message, kind in observation if kind == ta.ObservationType.GAME_BOARD]
+    assert len(boards) == 1 and "Available Moves" in boards[0]
+
+
+def test_partial_reward_stays_below_a_win_when_solved_tiles_are_displaced():
+    env = FifteenPuzzleEnv(max_turns=1)
+    env.reset(num_players=1, seed=42)
+    env.state.game_state["initial_board"] = [[2, 3, 1, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, None]]
+    _set_board(env, [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, None, 12], [13, 14, 11, 15]])
+    done, _ = env.step("up")  # every scrambled tile is fixed, but 15 and the gap are swapped
+    assert done and not env._is_solved()
+    assert env.state.rewards == {0: pytest.approx(1 / 3)}
+
+
+def test_unknown_direction_is_reported_as_such():
+    env = _fresh()
+    env.get_observation()
+    env.step("north")
+    _, observation = env.get_observation()
+    assert any("Unknown direction 'north'" in message for _, message, _ in observation)
 
 
 def test_turn_limit_counts_final_move_and_returns_partial_reward():

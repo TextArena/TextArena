@@ -22,7 +22,7 @@ class CrosswordsEnv(ta.GameEnv):
         """
         Args:
             hardcore (Optional[bool]): Whether to use hardcore mode.
-            max_turns (Optional[int]): Maximum number of turns allowed.
+            max_turns (Optional[int]): Maximum total length of the sampled words, i.e. the most turns a game can take.
             num_words (Optional[int]): Number of words to use in the game.
         """
         if not isinstance(hardcore, bool):
@@ -32,13 +32,15 @@ class CrosswordsEnv(ta.GameEnv):
         if not isinstance(num_words, int) or isinstance(num_words, bool) or num_words < 1:
             raise ValueError("num_words must be a positive integer")
         self.hardcore = hardcore
-        self.max_turns = max_turns
+        # `max_turns` caps the puzzle size. Every accepted guess fills one letter cell, so a game can
+        # never outlast it, and it is intentionally NOT assigned to self.max_turns (no engine turn limit).
+        self.max_letters = max_turns
         self.num_words = num_words
         self._load_words(hardcore=hardcore)
         if self.num_words > len(self.word_data):
             raise ValueError("num_words exceeds the available word data")
         minimum_cells = sum(sorted(len(entry["word"]) for entry in self.word_data)[: self.num_words])
-        if minimum_cells > self.max_turns:
+        if minimum_cells > self.max_letters:
             raise ValueError("max_turns is too small for the requested number of words")
 
     def get_board_str(self): return create_board_str(game_state=self.state.game_state)
@@ -116,12 +118,6 @@ class CrosswordsEnv(ta.GameEnv):
             return self.outcome({0: 1}, reason="Congratulations! You completed the Crosswords puzzle.")
         return None
 
-    def on_turn_limit(self) -> ta.Outcome:
-        return self.outcome(
-            {0: self._get_percentage_completion()},
-            reason=f"The turn limit has been reached. You completed {self._get_percentage_completion()*100} percent of the Crossword puzzle.",
-        )
-
     def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
         return self.outcome({0: self._get_percentage_completion()}, reason=f"Invalid Move: {reason}")
 
@@ -130,7 +126,7 @@ class CrosswordsEnv(ta.GameEnv):
         sampled_word_data = None
         for _ in range(1000):
             candidate = self.rng.sample(self.word_data, self.num_words)
-            if sum(len(entry["word"]) for entry in candidate) <= self.max_turns:
+            if sum(len(entry["word"]) for entry in candidate) <= self.max_letters:
                 sampled_word_data = candidate
                 break
         if sampled_word_data is None:

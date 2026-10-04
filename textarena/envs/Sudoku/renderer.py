@@ -2,7 +2,7 @@ from typing import List
 
 def create_board_str(board: List[List[int]]) -> str:
     def cell_str(num):
-        return str(num) if num != 0 else " "
+        return str(num) if num != 0 else "."
 
     col_header = "    " + "   ".join([str(i) if i % 3 != 0 else f"{i}  " for i in range(1, 10)])
     thick_line =     "  ┌───┬───┬───┐ ┌───┬───┬───┐ ┌───┬───┬───┐"

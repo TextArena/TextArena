@@ -2,10 +2,21 @@ import re
 import unicodedata
 from typing import Any, Dict, Optional, Union
 
-from nltk.corpus import words
-
 import textarena as ta
-from textarena.utils.word_lists import EnglishDictionary
+from textarena.utils.word_lists import get_basic_english_words, get_headwords
+
+# Ogden's 100 "operations": the verbs, prepositions, pronouns, conjunctions and adverbs of
+# Basic English. They are unusable secret words, since any conversation says them by accident.
+OGDEN_OPERATIONS = frozenset(
+    """
+    come get give go keep let make put seem take be do have say see send may will
+    about across after against among at before between by down from in off on over through to under up with
+    as for of till than a the all any every little much no other some such that this i he you who
+    and because but or if though while how when where why again ever far forward here near now out still
+    then there together well almost enough even not only quite so very tomorrow yesterday north south east
+    west please yes
+    """.split()
+)
 
 
 class DontSayItEnv(ta.GameEnv):
@@ -23,7 +34,9 @@ class DontSayItEnv(ta.GameEnv):
     def __init__(self, max_turns: Optional[int], hardcore: Optional[bool] = False):
         """
         Args:
-            hardcore (bool): If True, use the full English word set; otherwise, use a simplified word set.
+            hardcore (bool): If True, draw secret words from every headword of the bundled dictionaries;
+                otherwise from the 750 nouns and adjectives of Ogden's Basic English. Both lists are
+                bundled, so a seed picks the same words on every machine, with or without NLTK data.
             max_turns (int): Maximum number of turns before the game ends in a draw.
         """
         if max_turns is not None and (
@@ -35,20 +48,11 @@ class DontSayItEnv(ta.GameEnv):
             raise ValueError("max_turns must be an even integer of at least 2, or None.")
         if not isinstance(hardcore, bool):
             raise ValueError("hardcore must be a boolean.")
-        try:
-            all_words = words.words("en") if hardcore else words.words("en-basic")
-        except LookupError:
-            dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=False)
-            all_words = dictionary.get_all_words()
-        self.word_list = sorted(
-            {
-                word.lower()
-                for word in all_words
-                if isinstance(word, str) and len(word) > 1 and word.isascii() and word.isalpha()
-            }
-        )
-        if len(self.word_list) < 2:
-            raise ValueError("The selected dictionary must contain at least two distinct words.")
+        self.hardcore = hardcore
+        if hardcore:
+            self.word_list = sorted(get_headwords())
+        else:
+            self.word_list = sorted(word for word in get_basic_english_words() if word not in OGDEN_OPERATIONS)
         self.max_turns = max_turns
 
     def setup(self) -> Dict[str, Any]:

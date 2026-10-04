@@ -74,7 +74,10 @@ class ScenarioPlanningEnv(ta.GameEnv):
         return (
             f"You are Player {player_id} in the Scenario Planning game.\nScenario: {self.game_state['scenario']}\n"
             "Your goal is to propose a strategy for survival in this scenario.\n"
-            "After both players submit their strategies, a panel of judges will evaluate them.\n"
+            f"Each player submits exactly one strategy (Player 0 first), at most {self.max_strategy_chars} characters; "
+            "the other player never sees it.\n"
+            f"After both players submit their strategies, a panel of {self._jury_size} AI judges votes for the more "
+            "effective and feasible one. The strategy with more votes wins; equal votes are a draw.\n"
             "On your turn, simply type your strategy."
         )
 

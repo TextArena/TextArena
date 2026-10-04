@@ -5,6 +5,7 @@ script the internal grid directly (after reset) to obtain guaranteed outcomes.
 """
 import copy
 import random
+import re
 
 import pytest
 
@@ -192,6 +193,20 @@ def test_snapshot_restore_recovers_grid_backed_aliases():
     assert env.first_move
     assert env.grid is env.game_state["grid"]
     assert env.revealed is env.game_state["revealed"]
+
+
+@pytest.mark.parametrize("rows,cols,num_mines", [(5, 5, 5), (8, 8, 10), (10, 10, 20), (12, 12, 30)])
+def test_prompt_examples_fit_the_board_and_state_the_mine_count(rows, cols, num_mines):
+    env = _fresh(rows=rows, cols=cols, num_mines=num_mines)
+    _, observation = env.get_observation()
+    prompt = observation[0][1]
+    examples = re.findall(r"'(\d+) (\d+)'", prompt)
+    assert examples
+    assert all(int(r) < rows and int(c) < cols for r, c in examples)
+    assert f"{num_mines} hidden mines" in prompt
+    assert f"{env.max_turns} turns" in prompt
+    done, _ = env.step(" ".join(examples[0]))
+    assert env.state.error_count == 0 and env.state.turn == 1
 
 
 def test_renderer_honors_flags_and_multi_digit_coordinates():

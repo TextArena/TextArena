@@ -67,6 +67,20 @@ def test_bad_format_is_invalid():
     assert env.state.error_count == 1
 
 
+@pytest.mark.parametrize("bounds", [(1, 20), (1, 50), (100, 200), (-5, -2)])
+def test_format_error_describes_expected_action(bounds):
+    low, high = bounds
+    env = _fresh(min_number=low, max_number=high)
+    env.step("I think it is seven")
+    notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
+    assert f"Expected {env.action_format}." in notices[-1]
+    assert env.action_format == f"a whole number from {low} to {high}, for example '{low}'"
+
+    fresh = _fresh(min_number=low, max_number=high)
+    fresh.step(str(low))
+    assert fresh.state.turn == 1 and fresh.state.error_count == 0
+
+
 @pytest.mark.parametrize(
     "kwargs",
     [
@@ -191,6 +205,29 @@ def test_snapshot_restores_history_and_target():
     assert env.state.game_state["game_number"] == target
     assert env.state.game_state["guess_history"] == []
     assert env.state.turn == 0
+
+
+def test_mdp_observation_pairs_every_hint_with_its_guess():
+    env = ta.make("GuessTheNumber-v0-mdp")
+    env.reset(num_players=1, seed=42)
+    target = env.env.state.game_state["game_number"]
+    guesses = [guess for guess in (1, 20, 10) if guess != target][:2]
+    for guess in guesses:
+        env.get_observation()
+        env.step(str(guess))
+
+    _, observation = env.get_observation()
+
+    for left, guess in enumerate(guesses, start=1):
+        direction = "low: the target number is higher" if guess < target else "high: the target number is lower"
+        assert f"Your guess {guess} is too {direction}. Guesses left: {10 - left}." in observation
+
+
+def test_prompt_example_is_inside_a_custom_range():
+    env = _fresh(min_number=100, max_number=200, max_turns=8)
+    prompt = env.prompt(0)
+    assert "between 100 and 200 (inclusive) within 8 turns" in prompt
+    assert "e.g. '100'" in prompt
 
 
 def test_step_after_terminal_is_idempotent():

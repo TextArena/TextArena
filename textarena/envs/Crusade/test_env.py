@@ -39,6 +39,19 @@ def test_invalid_format_increments_error_count():
     assert not done and env.state.error_count == 1
 
 
+def test_format_error_describes_expected_action():
+    env = _fresh()
+    env.step("no move here")
+    notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
+    assert f"Expected {env.action_format}." in notices[-1]
+
+    assert "for example 'b1 c3' as White or 'b8 c6' as Black" in env.action_format
+    fresh = _fresh()
+    fresh.step("b1 c3")
+    fresh.step("b8 c6")
+    assert fresh.state.turn == 2 and fresh.state.error_count == 0
+
+
 def test_moving_opponent_piece_rejected():
     env = _fresh()
     # a8/b6 are Black pieces on the default board; player 0 controls White.
@@ -156,6 +169,32 @@ def test_tied_score_draws_at_exact_move_limit():
     assert env.state.turn == 1
     assert env.state.game_state["move_count"] == 1
     assert env.state.rewards == {0: 0, 1: 0}
+
+
+def test_moves_are_described_in_algebraic_coordinates_whatever_the_input_form():
+    env = _fresh()
+    env.step("[00048 00042]")  # a2 -> c3
+    env.step("B7 C5")
+
+    descriptions = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ACTION_DESCRIPTION]
+    assert descriptions == [
+        "Player 0 moved their piece from a2 to c3.",
+        "Player 1 moved their piece from b7 to c5.",
+    ]
+
+
+def test_render_shows_capture_score_and_remaining_moves():
+    env = _fresh()
+    gs = env.state.game_state
+    gs["board"] = [["" for _ in range(8)] for _ in range(8)]
+    gs["board"][0][0] = "W"  # a8
+    gs["board"][2][1] = "B"  # b6
+    gs["board"][7][7] = "B"  # h1
+    env.step("a8 b6")
+
+    board = env.render(1)
+
+    assert "Score: White (Player 0) 1, Black (Player 1) 0 | Moves left: 39" in board
 
 
 def test_snapshot_restores_board_score_and_actor():

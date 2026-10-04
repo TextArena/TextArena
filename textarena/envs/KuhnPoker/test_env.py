@@ -6,6 +6,8 @@ guaranteed outcomes. Note: the non-dealer/starting player is player 1.
 """
 import copy
 
+import pytest
+
 from textarena.envs.KuhnPoker.env import KuhnPokerEnv
 
 
@@ -97,6 +99,24 @@ def test_round_starter_alternates_and_pot_is_conserved():
     assert sum(gs["player_chips"].values()) + gs["pot"] == 0
 
 
+@pytest.mark.parametrize(
+    "max_rounds, final_chips, rewards",
+    [(3, {0: -1, 1: 1}, {0: -1, 1: 1}), (2, {0: 0, 1: 0}, {0: 0, 1: 0})],
+)
+def test_final_round_ends_match_without_dealing_or_anteing_another(max_rounds, final_chips, rewards):
+    env = _fresh(max_rounds=max_rounds)
+    gs = env.state.game_state
+    for _ in range(max_rounds):
+        env.step("bet")
+        done, _ = env.step("fold")  # the round's starter wins a pot of 3
+    assert done
+    assert gs["current_round"] == max_rounds
+    assert gs["pot"] == 0
+    assert gs["player_chips"] == final_chips
+    assert env.state.rewards == rewards
+    assert not any(f"Starting round {max_rounds + 1}" in message for _, message, _, _ in env.state.events)
+
+
 def test_illegal_action_is_atomic():
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)
@@ -114,6 +134,18 @@ def test_private_renderer_never_exposes_opponent_card():
     assert public_board.count("│  │ ?       │") == 2
     assert own_face in private_board
     assert f"│  │ {opponent_face}       │" not in private_board
+
+
+def test_mdp_observation_shows_the_actors_legal_actions():
+    import textarena as ta
+
+    env = ta.make("KuhnPoker-v0-mdp")
+    env.reset(num_players=2, seed=1)
+    _, observation = env.get_observation()
+    assert observation.rstrip().endswith("Your available actions are: 'check', 'bet'")
+    env.step("bet")
+    _, observation = env.get_observation()
+    assert observation.rstrip().endswith("Your available actions are: 'fold', 'call'")
 
 
 def test_snapshot_restore_replays_same_deal_and_result():

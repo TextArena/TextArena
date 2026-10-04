@@ -26,11 +26,12 @@ class SpellingBeeEnv(ta.GameEnv):
         self.num_letters = num_letters
         if dictionary is None:
             try:
-                dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=True)
+                # Only the bundled UK/US lists, so the accepted words never depend on optional NLTK data.
+                dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=False)
             except Exception as exc:
                 raise RuntimeError(
-                    "Unable to initialize the SpellingBee dictionary. Ensure the NLTK words "
-                    "corpus is installed, or inject a dictionary with is_english_word()."
+                    "Unable to load the bundled SpellingBee dictionary files, "
+                    "or inject a dictionary with is_english_word()."
                 ) from exc
         if not callable(getattr(dictionary, "is_english_word", None)):
             raise TypeError("dictionary must provide an is_english_word(word) method.")
@@ -52,7 +53,10 @@ class SpellingBeeEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         return (
             f"You are Player {player_id} in the Spelling Bee Game.\nAllowed Letters: {''.join(sorted(self.game_state['allowed_letters']))}\n"
+            "Players take turns submitting English words that use only the allowed letters; each letter may be used any number of times.\n"
+            "Words are checked against the game's English dictionary (UK and US spellings are accepted, proper nouns are not).\n"
             "Each word must be at least as long as the previous word.\nRepeated words are not allowed.\n"
+            "If you submit two invalid words in a row, you lose.\n"
             "Reply with exactly one word, e.g., 'example'.\n"
         )
 

@@ -31,10 +31,22 @@ class CharacterConclaveEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         return (
             f"You are Player {player_id} in a {self.state.num_players} player game of Character Conclave.\nEach of you has a limited character budget of {self.character_budget} characters.\n"
-            f"Use them up across multiple turns by sending messages.\n\nOnce all players have used their budgets, each will vote exactly once "
+            f"Use them up across multiple turns by sending messages. Before each of your turns you are shown how many characters you have left; "
+            f"a longer message is cut off at that limit.\n\nOnce all players have used their budgets, each will vote exactly once "
             f"for the player they found most impressive by replying with that player's ID (for example, '2' or 'player 2').\n"
             f"You cannot vote for yourself.\nThe player with the most votes wins.\n"
         )
+
+    def render(self, player_id: int) -> Optional[str]:
+        gs = self.game_state
+        if self.state.done:
+            return None
+        if gs["phase"] == "discussion":
+            return f"Your remaining character budget: {gs['budget_remaining'][player_id]} of {self.character_budget} characters."
+        if gs["phase"] == "voting":
+            candidates = ", ".join(f"Player {pid}" for pid in self.state.alive_players if pid != player_id)
+            return f"Voting phase: reply with the ID of the player you found most impressive. You can vote for: {candidates}."
+        return None
 
     def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
         # Discussion messages are broadcast manually (possibly truncated to the budget);
@@ -44,14 +56,22 @@ class CharacterConclaveEnv(ta.GameEnv):
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         gs = self.game_state
         if gs["phase"] == "discussion":
-            if not action.strip():
+            text = self.strip_role_tags(action).strip()
+            if not text:
                 return self.invalid("Discussion messages cannot be empty.")
-            if len(action) > gs["budget_remaining"][player_id]:
-                action = action[: gs["budget_remaining"][player_id]]  # truncate to remaining budget
-                if not action.strip():
-                    return self.invalid("The portion of your message within the remaining budget cannot be empty.")
-            self.broadcast(action, ta.ObservationType.PLAYER_ACTION, from_id=player_id)
-            gs["budget_remaining"][player_id] -= len(action)
+            remaining = gs["budget_remaining"][player_id]
+            message = text[:remaining]  # truncate to remaining budget
+            if not message.strip():
+                return self.invalid("The portion of your message within the remaining budget cannot be empty.")
+            self.broadcast(message, ta.ObservationType.PLAYER_ACTION, from_id=player_id)
+            if len(message) < len(text):
+                self.message(
+                    player_id,
+                    f"Your message was {len(text)} characters long, but you only had {remaining} characters left, "
+                    f"so only the first {remaining} characters were sent. Your character budget is now used up.",
+                    ta.ObservationType.GAME_MESSAGE,
+                )
+            gs["budget_remaining"][player_id] -= len(message)
             next_pid = self._next_player_where(
                 player_id,
                 lambda pid: self.state.is_player_alive(pid) and gs["budget_remaining"][pid] > 0,
@@ -73,12 +93,17 @@ class CharacterConclaveEnv(ta.GameEnv):
         return self._rotate_voting_or_finish(player_id)
 
     def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
+        # Eliminated players score -1 and cannot receive votes, so votes already cast for them stop counting.
         self.eliminate(player_id)
+        alive = self.state.alive_players
         if self.game_state["phase"] == "discussion":
             self.game_state["budget_remaining"][player_id] = 0
-            alive = self.state.alive_players
             if len(alive) == 1:
                 return self.winner(alive[0], reason=f"Player {player_id} was eliminated for repeated empty messages.")
+            self.broadcast(
+                f"Player {player_id} was eliminated for repeated empty messages and can no longer receive votes.",
+                ta.ObservationType.GAME_ADMIN,
+            )
             next_pid = self._next_player_where(
                 player_id,
                 lambda pid: self.state.is_player_alive(pid) and self.game_state["budget_remaining"][pid] > 0,
@@ -89,9 +114,17 @@ class CharacterConclaveEnv(ta.GameEnv):
                 self.set_next_player(next_pid)
             return None
 
-        # The offender's vote is discarded and the game continues privately.
         self.game_state["votes"][player_id] = -1
-        self.message(player_id, "You submitted an invalid vote. It will not be counted.", ta.ObservationType.GAME_ADMIN)
+        if len(alive) == 1:  # nobody is left for the survivor to vote for
+            return self.winner(
+                alive[0],
+                reason=f"Player {player_id} was eliminated for repeated invalid votes, leaving Player {alive[0]} as the only remaining player.",
+            )
+        self.broadcast(
+            f"Player {player_id} was eliminated for repeated invalid votes. "
+            "Their vote is discarded, and votes cast for them do not count.",
+            ta.ObservationType.GAME_ADMIN,
+        )
         next_pid = self._next_player_where(
             player_id,
             lambda pid: self.state.is_player_alive(pid) and pid not in self.game_state["votes"],

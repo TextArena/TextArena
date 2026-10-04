@@ -1,0 +1,834 @@
+{
+  "en": {
+    "005aeb3160": "The board is full.",
+    "02d8fd6d32": "Use () as the source of a placement. {usage}",
+    "0e471c2145": "Player {player_id} placed {pieces} on ({row},{col}).",
+    "0f8b7b4189": "Rows and columns are numbered from 0, so (0,0) is the top-left square. Each square on the board shows its stack height in parentheses and its pieces from bottom to top: '(2) F1/W0' is a wall W0 standing on a flat stone F1.",
+    "1217cb246c": "- Wall, a standing stone (W{me}): never part of a road, and nothing may be stacked on it except a capstone that flattens it.",
+    "156601c76f": "1. Place one of your pieces on an empty square: place () {{(row,col): [piece]}}",
+    "15df773e16": "On your turn, do exactly one of the following:",
+    "1ca981012f": "The game ends:",
+    "1ef07c1268": "Turns played: {turn} of {max_turns}",
+    "20de1018bc": "The stack on ({source_row},{source_col}) only has {count}.",
+    "266bebcb8d": "Each player starts with {count} (each one is placed as either a flat stone or a wall) and {count_2}.",
+    "270544251c": "- Flat stone (F{me}): counts toward roads, and any piece may be stacked on top of it.",
+    "2b24b7498b": "During the opening you must place one of your opponent's flat stones (F{opponent}).",
+    "35d5249818": "- Player {pid}: {count} and {count_2} left",
+    "3836cd1199": "Examples (as Player {me}):",
+    "3b3e2ebda5": "{trigger} Player 0 wins the flat count {counts}-{counts_2}.",
+    "3ec5a68bcd": "- move (2,0) {{(1,0): [F{opp}], (0,0): [F{me}]}} carries the stack '(2) F{opp}/F{me}' upward, dropping F{opp} on (1,0) and then F{me} on (0,0).",
+    "4478ddffd2": "- as a safeguard, after {max_turns} turns in total (every move by either player counts): the flat count decides the result.",
+    "464ae31c1e": "{trigger} Player 1 wins the flat count {counts}-{counts_2}.",
+    "46f78f38d5": "Write the drops in travel order, mapping each square to the pieces left there from bottom to top: move (row,col) {{(row,col): [pieces], (row,col): [pieces]}}. Read in order, the dropped pieces must equal the top of the source stack from bottom to top.",
+    "487f3c573c": "The dropped pieces must be the top {count} of the stack on ({source_row},{source_col}) in bottom-to-top order: {top}.",
+    "4a3286e3cc": "Square ({row},{col}) is not on the {board_size}x{board_size} board.",
+    "4b2a4764a3": ", flattening the wall {destination}",
+    "4bd86f978e": "- place () {{(0,1): [W{me}]}} places a wall on row 0, column 1.",
+    "4c5f3f98d9": "Invalid allocation entry",
+    "52df467263": "The allocation could not be parsed. Write it as a dictionary from squares to piece lists, e.g. {{(1,2): [F{player_id}]}}.",
+    "548c3633d9": "Invalid action. Player {player_id} tried to perform an unknown action.",
+    "56427a94da": "There is no stack on ({source_row},{source_col}).",
+    "5c92a9b12f": "- move (0,2) {{(0,1): [C{me}]}} carries only your capstone from (0,2) onto (0,1); if a wall stands there, it is flattened.",
+    "5c9d2e905f": "board_size must be an integer from 3 through 8",
+    "641d0a53b0": "a placement 'place () {{(row,col): [piece]}}' or a stack move 'move (row,col) {{(row,col): [pieces], (row,col): [pieces]}}' with rows and columns from 0 to {v0}, for example 'place () {{(1,2): [{piece}]}}'",
+    "667a9fdbc1": "Player {opponent_id} has connected two opposite edges of the board.",
+    "67217be677": "- move (1,1) {{(1,2): [F{me}]}} moves the single flat stone on (1,1) one square to the right.",
+    "6a061f1dbd": "You can carry at most {size} pieces (the board size).",
+    "729246685e": "moved {count} from ({source},{source_2}): {drops}.",
+    "7b23dd95f2": "capstones must be a non-negative integer",
+    "7b8ee2295c": "The first drop must be on a square next to the source (up, down, left, or right).",
+    "829e50225b": "A move names a source square and one or more drops, e.g. move (1,1) {{(1,2): [F{player_id}]}}.",
+    "83a5259b48": "stones must be a positive integer",
+    "8798930905": "- place () {{(2,2): [C{me}]}} places a capstone on row 2, column 2.",
+    "8aa205d46c": "The stack on ({source_row},{source_col}) is topped by {source_stack}; you can only move stacks topped by your own piece.",
+    "98ba7f2827": "Opening: place one of Player {v0}'s flat stones (F{v0}) on an empty square.",
+    "9b7fcf5d2b": "You can only place your own pieces (F{player_id}, W{player_id}, or C{player_id}).",
+    "9bcd1a673b": "A move cannot enter a square topped by a wall or a capstone, except that a capstone dropped alone as the final piece flattens a wall into a flat stone.",
+    "a403f81ed8": "Allocation cannot contain duplicate targets",
+    "a7126e23f4": "Opening: on each of the first two turns, place one of your opponent's flat stones instead of your own (Player 0 places an F1, then Player 1 places an F0); no stack may move yet.",
+    "a8cdb90243": "max_turns must be a positive integer",
+    "ab1db0d923": "Stacks cannot move during the opening; place one of your opponent's flat stones (F{v0}) instead.",
+    "b861965306": "Current Board:",
+    "bb295fcdcc": "Every square you move onto must receive at least one piece.",
+    "d1b7ae859d": "A placement names one square and one piece, e.g. place () {{(1,2): [F{player_id}]}}.",
+    "df3830a1ad": "Reserves (each stone can be placed as a flat stone or a wall):",
+    "e02beab803": "There are no capstones left to place.",
+    "e104410c60": "Player {pid} has no pieces left to place.",
+    "e225ee2c01": "The turn limit has been reached.",
+    "e575978e8f": "- place () {{(1,2): [F{me}]}} places a flat stone on row 1, column 2.",
+    "e6ec278703": "Pieces are written as a letter followed by the owner's player number:",
+    "e715162b2c": "Allocation must be a dictionary",
+    "e7f9b2c481": "You cannot move onto the capstone on ({target_row},{target_col}).",
+    "e945d195aa": "{trigger} The flat count is tied {counts}-{counts_2}, so the game is a draw.",
+    "ed29df8fd4": "Square ({row},{col}) is not empty; pieces can only be placed on empty squares.",
+    "edd1775911": "There are no stones left to place.",
+    "ee21171406": "- when the board is full or either player has placed all of their stones and capstones: unless that move completed a road, the player with more flat stones on top of stacks wins the flat count (walls, capstones, and covered stones do not count); a tied flat count is a draw.",
+    "f229ece21d": "Your goal is to build a road: a path of orthogonally adjacent squares topped by your flat stones or capstones that connects two opposite edges of the board (top to bottom or left to right), while blocking your opponent from doing the same.",
+    "f2a90e29cd": "Drops must be on consecutive squares in one straight line from the source.",
+    "f66e12e6c2": "2. Move a stack whose top piece is yours: pick up 1 to {size} pieces from the top of the stack (never more than {size}, the board size), travel in a straight line (up, down, left, or right), and drop at least one piece on every square you enter, starting with the square next to the source. Pieces leave the bottom of the carried pile first.",
+    "f679149c4c": "You cannot move onto the wall on ({target_row},{target_col}); only a capstone dropped alone as the final piece can flatten it.",
+    "f7a866c91b": "- as soon as a move completes a road: the road's owner wins. If one move completes roads for both players, the player who made the move wins.",
+    "f7ffa69285": "- Capstone (C{me}): counts toward roads, can flatten walls, and can never be covered.",
+    "fe67c589a0": "You are Player {me} in Tak, playing on a {size}x{size} board. Player 0 moves first.",
+    "ffe44a706e": "Invalid input string: {input_str}"
+  },
+  "ace": {
+    "b861965306": "Papan Jinoe:",
+    "e225ee2c01": "Watèe meulikôt ka trôk."
+  },
+  "acm": {
+    "b861965306": "اللوحة الحالية:",
+    "e225ee2c01": "حد التحول وصل."
+  },
+  "acq": {
+    "b861965306": "اللوحة الحالية:",
+    "e225ee2c01": "وصلنا للحد الأقصى من الأدوار."
+  },
+  "aeb": {
+    "b861965306": "اللوحة الحالية:",
+    "e225ee2c01": "وصلنا للحد الأقصى من الدور."
+  },
+  "af": {
+    "b861965306": "Huidige Bord:",
+    "e225ee2c01": "Die beurtlimiet is bereik."
+  },
+  "ajp": {
+    "b861965306": "اللوحة الحالية:",
+    "e225ee2c01": "وصلنا لحد التحول."
+  },
+  "aka": {
+    "b861965306": "Board a ɛwɔ hɔ nnɛ:",
+    "e225ee2c01": "Wɔadu ntweaso no so."
+  },
+  "am": {
+    "b861965306": "የአሁን ቻርት:",
+    "e225ee2c01": "የመዞሪያ ገደቡ ደርሷል።"
+  },
+  "apc": {
+    "b861965306": "اللوحة الحالية:",
+    "e225ee2c01": "وصلنا للحد الأقصى من الدور."
+  },
+  "ar": {
+    "548c3633d9": "إجراء غير صالح. حاول اللاعب {player_id} تنفيذ إجراء غير معروف.",
+    "667a9fdbc1": "ربط اللاعب {opponent_id} حافتين متقابلتين من اللوحة.",
+    "b861965306": "اللوحة الحالية:",
+    "e225ee2c01": "تم بلوغ الحد الأقصى لعدد الأدوار."
+  },
+  "ars": {
+    "b861965306": "اللوحة الحالية:",
+    "e225ee2c01": "وصلنا للحد الأقصى من الأدوار."
+  },
+  "ary": {
+    "b861965306": "اللوحة الحالية:",
+    "e225ee2c01": "وصلنا للحد الأقصى ديال الدور."
+  },
+  "arz": {
+    "b861965306": "اللوحة الحالية:",
+    "e225ee2c01": "حد التحول وصل."
+  },
+  "as": {
+    "e225ee2c01": "টাৰ্ণ লিমিট সম্পূৰ্ণ হৈছে।"
+  },
+  "ast": {
+    "b861965306": "Tableru actual:",
+    "e225ee2c01": "El llende de vuelta algamóse."
+  },
+  "awa": {
+    "b861965306": "वर्तमान बोर्ड:",
+    "e225ee2c01": "टर्न सीमा पूरी हो गई है।"
+  },
+  "ayr": {
+    "b861965306": "Q'awiri P'acha:",
+    "e225ee2c01": "Pacha tukuyawipxiwa."
+  },
+  "az": {
+    "b861965306": "Cari Taxta:",
+    "e225ee2c01": "Növbə limiti çatdı."
+  },
+  "azb": {
+    "b861965306": "ایندیکی تخته:",
+    "e225ee2c01": "دؤنوش حدینه چاتدی."
+  },
+  "bak": {
+    "b861965306": "Хәҙерге такта:",
+    "e225ee2c01": "Боролоу сиктәре етте."
+  },
+  "bam": {
+    "b861965306": "Bɛɛ kɔnɔntɛ:",
+    "e225ee2c01": "Damɛɛrɛɛ kɔnɔtɔnɛɛ ka tɛɛɛ."
+  },
+  "ban": {
+    "b861965306": "Papan Mangkin:",
+    "e225ee2c01": "Wates giliran sampun kaanggén."
+  },
+  "be": {
+    "e225ee2c01": "Ліміт павароту дасягнуты."
+  },
+  "bem": {
+    "b861965306": "Bodi ya Sasa:",
+    "e225ee2c01": "Ukupusanako kwafikile."
+  },
+  "bg": {
+    "b861965306": "Текуща дъска:",
+    "e225ee2c01": "Лимитът на ходове е достигнат."
+  },
+  "bho": {
+    "b861965306": "वर्तमान बोर्ड:",
+    "e225ee2c01": "मोड़ के सीमा पहुँच गइल बा."
+  },
+  "bjn": {
+    "b861965306": "Papan Saarang:",
+    "e225ee2c01": "Batas giliran sudah ditcapai."
+  },
+  "bn": {
+    "b861965306": "বর্তমান বোর্ড:",
+    "e225ee2c01": "পালা সীমা পৌঁছে গেছে।"
+  },
+  "bod": {
+    "b861965306": "Current Board:",
+    "e225ee2c01": "ཕྱོགས་བསྒྱུར་ཚད་མཚམས་ཟིན་པ།"
+  },
+  "bug": {
+    "b861965306": "Papan Saaran:",
+    "e225ee2c01": "Watang belona pura ripigau."
+  },
+  "ca": {
+    "b861965306": "Tauler actual:",
+    "e225ee2c01": "S'ha assolit el límit de torns."
+  },
+  "ceb": {
+    "b861965306": "Kasamtangang Board:",
+    "e225ee2c01": "Ang limitasyon sa pag-ikot naabot."
+  },
+  "cjk": {
+    "548c3633d9": "Hatua si sahihi. Mchezaji {player_id} alijaribu kufanya kitendo kisichojulikana.",
+    "667a9fdbc1": "Mchezaji {opponent_id} amefunga kingo mbili za ubao.",
+    "b861965306": "Kuvuka kwa Sasa:",
+    "e225ee2c01": "Kǝla kǝnzanza dǝn gǝna."
+  },
+  "ckb": {
+    "b861965306": "تەختەی ئێستا:",
+    "e225ee2c01": "سنووری وەرگەڕان گەیشتووەتە."
+  },
+  "crh": {
+    "b861965306": "Şimdiki Tahta:",
+    "e225ee2c01": "Dönüv sıñırı yetildi."
+  },
+  "cs": {
+    "b861965306": "Aktuální deska:",
+    "e225ee2c01": "Byl dosažen limit tahů."
+  },
+  "cy": {
+    "e225ee2c01": "Mae'r terfyn troi wedi'i gyrraedd."
+  },
+  "da": {
+    "b861965306": "Aktuelt bræt:",
+    "e225ee2c01": "Tidsgrænsen er nået."
+  },
+  "de": {
+    "548c3633d9": "Ungültige Aktion. Spieler {player_id} hat versucht, eine unbekannte Aktion auszuführen.",
+    "667a9fdbc1": "Spieler {opponent_id} hat zwei gegenüberliegende Ränder des Bretts verbunden.",
+    "b861965306": "Aktuelles Brett:",
+    "e225ee2c01": "Das Zuglimit wurde erreicht."
+  },
+  "dik": {
+    "b861965306": "Piny de Board:",
+    "e225ee2c01": "Kä ye kek waar yiic acï bɛ̈n thök."
+  },
+  "dyu": {
+    "b861965306": "Tablɛ kɔnɔ:",
+    "e225ee2c01": "An sera ka yɛlɛma."
+  },
+  "dzo": {
+    "b861965306": "དེང་གི་བོད།:",
+    "e225ee2c01": "ཕྱོགས་བསྒྱུར་ཚད་དེ་ ལྷོད་ནུག"
+  },
+  "el": {
+    "b861965306": "Τρέχων Πίνακας:",
+    "e225ee2c01": "Έχει επιτευχθεί το όριο των γύρων."
+  },
+  "epo": {
+    "b861965306": "Nuna Tabulo:",
+    "e225ee2c01": "La limo de vicoj estas atingita."
+  },
+  "es": {
+    "548c3633d9": "Acción no válida. El jugador {player_id} intentó realizar una acción desconocida.",
+    "667a9fdbc1": "El jugador {opponent_id} ha conectado dos bordes opuestos del tablero.",
+    "b861965306": "Tablero actual:",
+    "e225ee2c01": "Se ha alcanzado el límite de turnos."
+  },
+  "et": {
+    "b861965306": "Praegune laud:",
+    "e225ee2c01": "Käikude limiit on täis."
+  },
+  "eu": {
+    "b861965306": "Uneko Taula:",
+    "e225ee2c01": "Biraketa-muga gainditua."
+  },
+  "ewe": {
+    "b861965306": "Asa ŋuti:",
+    "e225ee2c01": "Míeto míaƒe mɔa ƒe akpa si le eƒe goawo dzi."
+  },
+  "fa": {
+    "b861965306": "تخته فعلی:",
+    "e225ee2c01": "محدودیت نوبت به پایان رسیده است."
+  },
+  "fao": {
+    "b861965306": "Núverandi borð:",
+    "e225ee2c01": "Tað er komið á tað avmarkaða sving."
+  },
+  "fi": {
+    "b861965306": "Nykyinen pelilauta:",
+    "e225ee2c01": "Vuororajan on saavutettu."
+  },
+  "fij": {
+    "b861965306": "Bilo ni Board:",
+    "e225ee2c01": "Sa yacova na iyalayala ni gauna me vuki kina."
+  },
+  "fil": {
+    "b861965306": "Kasalukuyang Board:",
+    "e225ee2c01": "Ang limitasyon sa pagkilos ay naabot."
+  },
+  "fon": {
+    "b861965306": "Tablo gannu:",
+    "e225ee2c01": "È ko kpé fí e è ɖó na lɛ́ kɔ dó é."
+  },
+  "fr": {
+    "548c3633d9": "Action invalide. Le joueur {player_id} a tenté d'effectuer une action inconnue.",
+    "667a9fdbc1": "Le joueur {opponent_id} a relié deux bords opposés du plateau.",
+    "b861965306": "Plateau actuel :",
+    "e225ee2c01": "La limite de tours a été atteinte."
+  },
+  "fur": {
+    "b861965306": "Tavoliere corrent:",
+    "e225ee2c01": "Il limit di volte al è stât rivât."
+  },
+  "fuv": {
+    "b861965306": "Bortu Majje:",
+    "e225ee2c01": "Limgal waylugo yotti."
+  },
+  "gaz": {
+    "b861965306": "Booradii kuusaa:",
+    "e225ee2c01": "Daangaa daandii bira ga'uu."
+  },
+  "gl": {
+    "b861965306": "Taboleiro actual:",
+    "e225ee2c01": "O límite de quendas foi alcanzado."
+  },
+  "gla": {
+    "b861965306": "Bòrd Làithreach:",
+    "e225ee2c01": "Tha crìoch an tionndaidh air a ruighinn."
+  },
+  "gle": {
+    "b861965306": "Cláir Reatha:",
+    "e225ee2c01": "Tá an teorainn casadh bainte amach."
+  },
+  "grn": {
+    "b861965306": "Tablero Ag̃agua:",
+    "e225ee2c01": "Oñemboja'o límite oñemoañetéva."
+  },
+  "gu": {
+    "e225ee2c01": "વળાંકની મર્યાદા પહોંચી ગઈ છે."
+  },
+  "ha": {
+    "e225ee2c01": "An kai iyakar juyawa."
+  },
+  "hat": {
+    "b861965306": "Bwod Aktyèl:",
+    "e225ee2c01": "Limit vire a rive."
+  },
+  "he": {
+    "548c3633d9": "פעולה לא תקינה. שחקן {player_id} ניסה לבצע פעולה לא מוכרת.",
+    "667a9fdbc1": "שחקן {opponent_id} חיבר שני קצוות מנוגדים של הלוח.",
+    "b861965306": "הלוח הנוכחי:",
+    "e225ee2c01": "הגעת למגבלת התורות."
+  },
+  "hi": {
+    "b861965306": "वर्तमान बोर्ड:",
+    "e225ee2c01": "टर्न सीमा पूरी हो गई है।"
+  },
+  "hne": {
+    "b861965306": "वर्तमान बोर्ड:",
+    "e225ee2c01": "टर्न सीमा पूरा हो गिया हे।"
+  },
+  "hr": {
+    "b861965306": "Trenutna ploča:",
+    "e225ee2c01": "Dosegnuta je granica poteza."
+  },
+  "hu": {
+    "b861965306": "Aktuális tábla:",
+    "e225ee2c01": "Elérte a lépéshatárt."
+  },
+  "hy": {
+    "b861965306": "Ներկայիս տախտակը՝",
+    "e225ee2c01": "Փուլերի սահմանափակումը հասել է։"
+  },
+  "id": {
+    "b861965306": "Papan Saat Ini:",
+    "e225ee2c01": "Batas giliran telah tercapai."
+  },
+  "ig": {
+    "b861965306": "Oche Ugbu a:",
+    "e225ee2c01": "Egwu agafela ókè ya."
+  },
+  "ilo": {
+    "b861965306": "Agdama a Tabla:",
+    "e225ee2c01": "Naabot ti limitasion a pagbaw-ing."
+  },
+  "is": {
+    "b861965306": "Núverandi Borð:",
+    "e225ee2c01": "Tímamörk leiksins hafa verið náð."
+  },
+  "it": {
+    "b861965306": "Tavola attuale:",
+    "e225ee2c01": "È stato raggiunto il limite di turni."
+  },
+  "ja": {
+    "b861965306": "現在のボード:",
+    "e225ee2c01": "ターンの制限に達しました。"
+  },
+  "jav": {
+    "b861965306": "Papan Saiki:",
+    "e225ee2c01": "Watesan belokan wis tekan."
+  },
+  "ka": {
+    "e225ee2c01": "სვლების ლიმიტი მიღწეულია."
+  },
+  "kab": {
+    "b861965306": "Asaɣ usrid:",
+    "e225ee2c01": "Yewweḍ-d uswir n uḥric."
+  },
+  "kac": {
+    "b861965306": "Hkum Hta Bra:",
+    "e225ee2c01": "Hpang jahtum na matu, dai hpe galaw u."
+  },
+  "kam": {
+    "b861965306": "Ubao wa Sasa:",
+    "e225ee2c01": "Tũlũlũmĩlye ũtwi witũ wa kũendeea kũkitana na mũisyo ũsu kwa nzĩa nzeo."
+  },
+  "kas": {
+    "b861965306": "موجودہ بورڈ:",
+    "e225ee2c01": "چالوں کی حد پُڑ گئی چھُ."
+  },
+  "kbp": {
+    "b861965306": "Tablo Hɛnɛ:",
+    "e225ee2c01": "Pɩtɛŋ lɛ, ɖɩtalɩ ɖenɖe pɩpɔzʋʋ se ɖikizi yɔ."
+  },
+  "kea": {
+    "b861965306": "Tabuleiru Atual:",
+    "e225ee2c01": "Nu txiga na limiti di virason."
+  },
+  "kik": {
+    "b861965306": "Bodi Iri Current:",
+    "e225ee2c01": "Mũhaka wa kũgarũrũka nĩ ũhingio."
+  },
+  "kin": {
+    "b861965306": "Kibanza kijyewe:",
+    "e225ee2c01": "Igipimo cyo guhindukira cyarageze."
+  },
+  "kk": {
+    "e225ee2c01": "Бұрылыс шегіне жеттік."
+  },
+  "km": {
+    "b861965306": "ក្តារបច្ចុប្បន្ន៖",
+    "e225ee2c01": "កំណត់បត់បានឈានដល់។"
+  },
+  "kmb": {
+    "b861965306": "Tábua ya Sasa:",
+    "e225ee2c01": "O jimbambe ja ku bhixila bhu kididi kiki, a ji tolola kiá."
+  },
+  "kmr": {
+    "b861965306": "Taqeta Heyî",
+    "e225ee2c01": "Sînorê guherînê hatiye gihîşt."
+  },
+  "kn": {
+    "e225ee2c01": "ತಿರುವು ಮಿತಿ ತಲುಪಿದೆ."
+  },
+  "knc": {
+    "b861965306": "Borti Kadi:",
+    "e225ee2c01": "Kәndaram kalkalye dәga fando."
+  },
+  "ko": {
+    "b861965306": "현재 보드:",
+    "e225ee2c01": "턴 제한이 도달했습니다."
+  },
+  "kon": {
+    "b861965306": "Nkanda ya Sasa:",
+    "e225ee2c01": "Muda wa zamu umefikiwa."
+  },
+  "ky": {
+    "e225ee2c01": "Жүрүш чектелүүсү жетти."
+  },
+  "lij": {
+    "b861965306": "Tavoliêre atoâle:",
+    "e225ee2c01": "O limite de rotaçion o l'é stæto raggiunto."
+  },
+  "lim": {
+    "b861965306": "Huidig Bord:",
+    "e225ee2c01": "De beurtelimiet is bereik."
+  },
+  "lin": {
+    "b861965306": "Lopango la sika:",
+    "e225ee2c01": "Mpiko ya nzela ekomi."
+  },
+  "lmo": {
+    "b861965306": "Tavol current:",
+    "e225ee2c01": "L'è rivà el limit de gir."
+  },
+  "lo": {
+    "e225ee2c01": "ຂີດຈໍາກັດການຫັນໄດ້ບັນລຸ."
+  },
+  "lt": {
+    "b861965306": "Dabartinė lenta:",
+    "e225ee2c01": "Pasiekta ėjimų limitas."
+  },
+  "ltg": {
+    "b861965306": "Pašreizējā tabula:",
+    "e225ee2c01": "Izapleidzis rūbežs ir sasnāgts."
+  },
+  "ltz": {
+    "b861965306": "Aktuell Schachbriet:",
+    "e225ee2c01": "D'Kehrlimit ass erreecht ginn."
+  },
+  "lua": {
+    "b861965306": "Lubamba lwa Bokasi:",
+    "e225ee2c01": "Tudi bafike ku tshipiminu tshia dikudimuka."
+  },
+  "lug": {
+    "b861965306": "Bodi y'obudde:",
+    "e225ee2c01": "Ekigero ky'okukyuka kituuse."
+  },
+  "luo": {
+    "b861965306": "Bodi E Maber:",
+    "e225ee2c01": "Muda wa kuom timo."
+  },
+  "lus": {
+    "b861965306": "Board Hmanmek:",
+    "e225ee2c01": "A hawi chin chu a thleng ta."
+  },
+  "lv": {
+    "b861965306": "Pašreizējais galdiņš:",
+    "e225ee2c01": "Gājienu limits ir sasniegts."
+  },
+  "mag": {
+    "b861965306": "वर्तमान बोर्ड:",
+    "e225ee2c01": "मोड़ के सीमा पहुँच गेल छै ।"
+  },
+  "mai": {
+    "b861965306": "वर्तमान बोर्ड:",
+    "e225ee2c01": "वक्र सीमा पहुँच गेल अछि."
+  },
+  "mg": {
+    "e225ee2c01": "Efa tonga ny fetran'ny fihodinana."
+  },
+  "min": {
+    "b861965306": "Papan Saikini:",
+    "e225ee2c01": "Bateh giliran lah digunoan."
+  },
+  "mk": {
+    "b861965306": "Моментална табла:",
+    "e225ee2c01": "Лимитот на потези е достигнат."
+  },
+  "ml": {
+    "e225ee2c01": "ടേൺ പരിധി എത്തിയിരിക്കുന്നു."
+  },
+  "mlt": {
+    "b861965306": "Bord Attwali:",
+    "e225ee2c01": "Il-limitu tat-dawran intlaħaq."
+  },
+  "mn": {
+    "b861965306": "Одоогийн Самбар:",
+    "e225ee2c01": "Хаалганы хязгаар хүрчээ."
+  },
+  "mni": {
+    "b861965306": "বর্তমান বোর্ড:",
+    "e225ee2c01": "তর্ন লিমিৎ য়ৌরে।"
+  },
+  "mos": {
+    "b861965306": "Bɛɛri lahaba:",
+    "e225ee2c01": "B sẽn tõe n wẽnemã taame."
+  },
+  "mr": {
+    "e225ee2c01": "वळण मर्यादा गाठली आहे."
+  },
+  "mri": {
+    "b861965306": "Papa Hou:",
+    "e225ee2c01": "Kua tae te rohe huri."
+  },
+  "ms": {
+    "548c3633d9": "Tindakan tidak sah. Pemain {player_id} cuba melakukan tindakan yang tidak diketahui.",
+    "667a9fdbc1": "Pemain {opponent_id} telah menghubungkan dua sisi bertentangan pada papan.",
+    "b861965306": "Papan Semasa:",
+    "e225ee2c01": "Had giliran telah dicapai."
+  },
+  "my": {
+    "e225ee2c01": "အလှည့်အပြောင်း ကန့်သတ်ချက်ကို ရောက်ပါပြီ။"
+  },
+  "nb": {
+    "b861965306": "Nåværende brett:",
+    "e225ee2c01": "Tidsbegrensningen er nådd."
+  },
+  "ne": {
+    "e225ee2c01": "घुमाउरो सीमा पुगेको छ।"
+  },
+  "nl": {
+    "b861965306": "Huidig bord:",
+    "e225ee2c01": "De zetlimiet is bereikt."
+  },
+  "nno": {
+    "b861965306": "Gjeldande brett:",
+    "e225ee2c01": "Tidsfristen for trekk er nådd."
+  },
+  "nso": {
+    "b861965306": "Boro ya Tokologo:",
+    "e225ee2c01": "Moedi wa go retologa o fihlilwe."
+  },
+  "nus": {
+    "b861965306": "Kɛmɛ̈thɛ̈rɛ̈k ë bɔ̈r:",
+    "e225ee2c01": "Kä pek in dëë riet thi̱n cɛ cop."
+  },
+  "nya": {
+    "b861965306": "Bodi Lililonse:",
+    "e225ee2c01": "Malire a kutembenuka afikiridwa."
+  },
+  "oci": {
+    "b861965306": "Taula actual:",
+    "e225ee2c01": "La limita de virada es arribada."
+  },
+  "or": {
+    "e225ee2c01": "ବକ୍ର ସୀମା ଅତିକ୍ରମ କରିସାରିଛି ।"
+  },
+  "pa": {
+    "e225ee2c01": "ਵਾਰੀ ਦੀ ਸੀਮਾ ਪਹੁੰਚ ਗਈ ਹੈ।"
+  },
+  "pag": {
+    "b861965306": "Kasalukuyan a Board:",
+    "e225ee2c01": "Akasabi la so limitasyon na kalkalnan iyalis."
+  },
+  "pap": {
+    "b861965306": "Tablero Aktual:",
+    "e225ee2c01": "E limite di turno a ser alcansa."
+  },
+  "pl": {
+    "b861965306": "Aktualna plansza:",
+    "e225ee2c01": "Osiągnięto limit tur."
+  },
+  "ps": {
+    "e225ee2c01": "د ګرځېدو حد ته رسېدلی شو."
+  },
+  "pt": {
+    "b861965306": "Tabuleiro Atual:",
+    "e225ee2c01": "O limite de turnos foi alcançado."
+  },
+  "quy": {
+    "b861965306": "P'unchay p'ankallari:",
+    "e225ee2c01": "T'inkay pacha tukukuymi."
+  },
+  "ro": {
+    "b861965306": "Tablă curentă:",
+    "e225ee2c01": "Limita de ture a fost atinsă."
+  },
+  "ru": {
+    "b861965306": "Текущая доска:",
+    "e225ee2c01": "Достигнут предел количества ходов."
+  },
+  "run": {
+    "b861965306": "Kibao cha sasa:",
+    "e225ee2c01": "Umwanya ntarengwa wo guhindukira warashitse."
+  },
+  "sag": {
+    "b861965306": "Ködörö tî sô:",
+    "e225ee2c01": "A si na ndo so a lingbi ti yôro ni."
+  },
+  "san": {
+    "b861965306": "वर्तमानबोर्ड:",
+    "e225ee2c01": "वक्रस्य सीमां प्राप्ता।"
+  },
+  "sat": {
+    "b861965306": "ᱱᱤᱛᱟᱜ ᱵᱳᱨᱰ:",
+    "e225ee2c01": "ᱵᱚᱫᱚᱞᱟᱜ ᱞᱤᱢᱤᱴᱮ ᱦᱟᱛᱟᱣ ᱟᱠᱟᱱᱟ᱾"
+  },
+  "scn": {
+    "b861965306": "Tavuliera current:",
+    "e225ee2c01": "Lu limiti di girata è raggiuntu."
+  },
+  "sd": {
+    "e225ee2c01": "موڙ جي حد تائين پهچي ويا آهيون."
+  },
+  "shn": {
+    "b861965306": "ၽိုၼ်လိၵ်ႈၸိူဝ်ႉၸႂ်ႈ။",
+    "e225ee2c01": "လွင်ႈၶၢႆႉလႅၼ်ႊၼႆႉ ႁွတ်ႈထိုင်ဝႆႉယဝ်ႉ။"
+  },
+  "si": {
+    "e225ee2c01": "වංගු සීමාව ඉටුකරලා."
+  },
+  "sk": {
+    "b861965306": "Aktuálna doska:",
+    "e225ee2c01": "Bol dosiahnutý limit ťahov."
+  },
+  "sl": {
+    "b861965306": "Trenutna plošča:",
+    "e225ee2c01": "Dosežen je časovni limit potez."
+  },
+  "smo": {
+    "b861965306": "Lapa o le taimi nei:",
+    "e225ee2c01": "Ua oo i le taimi e liliu ai."
+  },
+  "sna": {
+    "b861965306": "Bhoja Rairo:",
+    "e225ee2c01": "Magumo okutsauka asvika."
+  },
+  "so": {
+    "e225ee2c01": "Xadka wareegga waa la gaadhay."
+  },
+  "sot": {
+    "b861965306": "Boro ya tsohle ya kajeno:",
+    "e225ee2c01": "Moeli oa ho fetoha o fihlile."
+  },
+  "sq": {
+    "b861965306": "Bordi aktual:",
+    "e225ee2c01": "Limiti i radhës është arritur."
+  },
+  "sr": {
+    "b861965306": "Тренутна табла:",
+    "e225ee2c01": "Достигнут је лимит потеза."
+  },
+  "srd": {
+    "b861965306": "Tavoliere corrente:",
+    "e225ee2c01": "Su lìmite de curva est istadu cròmpidu."
+  },
+  "ssw": {
+    "b861965306": "Bhoja Lesitsheni:",
+    "e225ee2c01": "Umkhawulo wekugucuka sewufinyelelwe."
+  },
+  "sun": {
+    "b861965306": "Papan Saiki:",
+    "e225ee2c01": "Wates giliran geus kahontal."
+  },
+  "sv": {
+    "b861965306": "Aktuellt bräde:",
+    "e225ee2c01": "Tidsgränsen har nåtts."
+  },
+  "sw": {
+    "b861965306": "Ubao wa Sasa:",
+    "e225ee2c01": "Kikomo cha zamu kimefikia."
+  },
+  "szl": {
+    "b861965306": "Aktualno płyta:",
+    "e225ee2c01": "Ôgraniczōno je granica zwrotu."
+  },
+  "ta": {
+    "b861965306": "தற்போதைய பலகை:",
+    "e225ee2c01": "நகர்வு எண்ணிக்கை கடந்துவிட்டது."
+  },
+  "taq": {
+    "b861965306": "Asaḍen n wengam:",
+    "e225ee2c01": "ⴰⴾⴰⵍⴰ ⵓⴰⵔ ⵏ ⵉⵍⴰ ⴰⵍⵆⵉⴷⵎⴰⵜ."
+  },
+  "tat": {
+    "b861965306": "Хәзерге такта:",
+    "e225ee2c01": "Борылыш чиге җиткерелде."
+  },
+  "te": {
+    "e225ee2c01": "మలుపు పరిమితి చేరుకుంది."
+  },
+  "tgk": {
+    "b861965306": "Таблои кунуни:",
+    "e225ee2c01": "Ҳудуди гардиш ба даст омадааст."
+  },
+  "th": {
+    "b861965306": "กระดานปัจจุบัน:",
+    "e225ee2c01": "ถึงขีดจำกัดการเล่นแล้ว."
+  },
+  "tir": {
+    "b861965306": "ቦርድ ኣብ ሂለት:",
+    "e225ee2c01": "እቲ ናይ ምምላስ ገደብ በጺሑ ኣሎ።"
+  },
+  "tpi": {
+    "b861965306": "Bord Nau:",
+    "e225ee2c01": "Mipela i kamap pinis long mak bilong tanim."
+  },
+  "tr": {
+    "b861965306": "Mevcut Tahta:",
+    "e225ee2c01": "Tur sınırına ulaşıldı."
+  },
+  "tsn": {
+    "b861965306": "Boro ya kgwele ya tshwane:",
+    "e225ee2c01": "Tekanyetso ya go retologa e fitlhetswe."
+  },
+  "tso": {
+    "b861965306": "Bhoza ra Lehagu:",
+    "e225ee2c01": "Mpimo wa ku jikela wu fikeleriwile."
+  },
+  "tuk": {
+    "b861965306": "Häzirki tahta:",
+    "e225ee2c01": "Çäklendirmäniň çäkli derejesine ýetildi."
+  },
+  "tum": {
+    "b861965306": "Bodi Lililonse:",
+    "e225ee2c01": "Mzere wa mphambano ya msewu uwu wafiskika."
+  },
+  "twi": {
+    "b861965306": "Bɔɔde akyɛ sen:",
+    "e225ee2c01": "Wɔadu baabi a ɛsɛ sɛ yɛdan no."
+  },
+  "tzm": {
+    "b861965306": "Asenmel n uṭṭun:",
+    "e225ee2c01": "ⵜⵍⴽⵎⴷ ⵉ ⵓⵡⵜⵜⵓ ⵏ ⵓⵙⵏⴼⵍ."
+  },
+  "uig": {
+    "b861965306": "ھازىرقى تەختە:",
+    "e225ee2c01": "بۇرۇلۇش چەكلىمىسىگە يەتتى."
+  },
+  "uk": {
+    "b861965306": "Поточна дошка:",
+    "e225ee2c01": "Досягнуто ліміту ходів."
+  },
+  "umb": {
+    "b861965306": "Ombala oyuukala:",
+    "e225ee2c01": "Ocimãho ca tẽlisiwa."
+  },
+  "ur": {
+    "b861965306": "موجودہ بورڈ:",
+    "e225ee2c01": "چال کی حد پہنچ گئی ہے۔"
+  },
+  "uz": {
+    "e225ee2c01": "Burilish chegarasiga yetildi."
+  },
+  "vec": {
+    "b861965306": "Tavolo corente:",
+    "e225ee2c01": "El limite de giro xe stà rivà."
+  },
+  "vi": {
+    "b861965306": "Bàn cờ hiện tại:",
+    "e225ee2c01": "Đã đạt giới hạn lượt chơi."
+  },
+  "war": {
+    "b861965306": "Karuhaan nga Bangga:",
+    "e225ee2c01": "Naabot na an limitasyon han pagliso."
+  },
+  "wol": {
+    "b861965306": "Tablo yi",
+    "e225ee2c01": "Jëfandikoo nañu àpp bi."
+  },
+  "xho": {
+    "b861965306": "Bhoja Eliyingo:",
+    "e225ee2c01": "Umda wenguqu ufikelelwe."
+  },
+  "ydd": {
+    "b861965306": "אַקטועלער ברעט:",
+    "e225ee2c01": "די ווענדן לימיט איז דערגרייכט געוואָרן."
+  },
+  "yo": {
+    "e225ee2c01": "A ti dé ibi tí a ti lè yí padà."
+  },
+  "zh": {
+    "548c3633d9": "无效的动作。玩家 {player_id} 试图执行一个未知的动作。",
+    "667a9fdbc1": "玩家 {opponent_id} 已连接棋盘上两条相对的边。",
+    "b861965306": "当前棋盘：",
+    "e225ee2c01": "已达到回合上限。"
+  },
+  "zu": {
+    "e225ee2c01": "Umkhawulo wokuphenduka ufinyelelwe."
+  }
+}

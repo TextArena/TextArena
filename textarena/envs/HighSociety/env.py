@@ -4,15 +4,32 @@ from typing import Any, Dict, Optional, Union
 import textarena as ta
 
 
+def _is_renderable(value: Any) -> bool:
+    try:
+        str(value)
+    except (OverflowError, ValueError):
+        return False
+    return True
+
+
 class HighSocietyEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
     broadcast_actions = False  # sealed bids: raw actions are echoed only to their author
 
-    def __init__(self):
+    def __init__(self, max_ties: int = 3):
+        """
+        Args:
+            max_ties (int): Tied bids allowed in a row on one prestige card; the tie that reaches
+                this count discards the card so repeated ties cannot stall the game.
+        """
+        if not isinstance(max_ties, int) or isinstance(max_ties, bool) or max_ties < 1 or not _is_renderable(max_ties):
+            raise ValueError("max_ties must be a positive integer")
+        self.max_ties = max_ties
         self.money_cards = list(range(1, 12))   # 1-11
+        # A whitespace run must be consumable by only one \s*, as retrying every split of a long run is quadratic.
         self.action_space = re.compile(
-            r"^\s*(?P<legacy>\[)?\s*(?P<bid>11|10|[1-9])\s*(?(legacy)\])\s*$",
+            r"^\s*(?:(?P<legacy>\[)\s*)?(?P<bid>11|10|[1-9])(?(legacy)\s*\])\s*$",
             re.IGNORECASE,
         )
 
@@ -22,19 +39,26 @@ class HighSocietyEnv(ta.GameEnv):
     def setup(self) -> Dict[str, Any]:
         deck = list(range(1, 11))
         self.rng.shuffle(deck)
-        return {"round": 0, "prestige_deck": deck, "player_money": {0: self.money_cards.copy(), 1: self.money_cards.copy()}, "player_prestige": {0: 0, 1: 0}, "pending_bids": {}, "starting_player": 0}
+        return {"round": 0, "prestige_deck": deck, "player_money": {0: self.money_cards.copy(), 1: self.money_cards.copy()}, "player_prestige": {0: 0, 1: 0}, "pending_bids": {}, "ties": 0, "starting_player": 0}
 
     def on_start(self):
         self._next_auction()
 
     def prompt(self, player_id: int) -> str:
+        if self.max_ties == 1:
+            tie_rule = "            • Tie -> both bids are returned and the prestige card is discarded: nobody gets it.\n"
+        else:
+            tie_rule = (
+                "            • Tie -> both bids are returned and the same prestige card is re-auctioned.\n"
+                f"            • After {self.max_ties} ties in a row the card is discarded instead: nobody gets it.\n"
+            )
         return (
             f"You are Player {player_id} in a game of HighSociety (2-player version).\n"
             f"Game flow:  Ten prestige cards are auctioned one after another.\n"
             f"Bidding:    Each auction, secretly choose a money card 1-11 and reveal.\n"
             f"            • Higher bid wins the prestige card and discards that money card.\n"
             f"            • Lower bid keeps their money card.\n"
-            f"            • Tie -> both bids are returned and the same prestige card is re-auctioned.\n"
+            f"{tie_rule}"
             f"Scoring:    After all ten auctions, add **remaining cash + prestige points**.\n"
             f"            Higher *net-worth* wins (exact tie -> draw).\n\n"
             f"**Action syntax**  →  bid a single card like '7' or '11'."
@@ -47,6 +71,7 @@ class HighSocietyEnv(ta.GameEnv):
         prize = gs["prestige_deck"].pop()
         gs["current_prize"] = prize
         gs["pending_bids"] = {}
+        gs["ties"] = 0
         for pid in (0, 1):
             self.message(pid, f"\n### Auction {gs['round']}/10  |  Prestige card: {prize}", ta.ObservationType.GAME_MESSAGE)
             self.message(pid, f"Your remaining money cards: {self._intlist_to_str(gs['player_money'][pid])}", ta.ObservationType.GAME_BOARD)
@@ -63,14 +88,18 @@ class HighSocietyEnv(ta.GameEnv):
         # both bids in
         bid0, bid1 = gs["pending_bids"][0], gs["pending_bids"][1]
         prize = gs["current_prize"]
-        if bid0 == bid1:  # tie -> redraw bids
-            self.broadcast("Tie - bids returned. Rebid!", ta.ObservationType.GAME_MESSAGE)
+        if bid0 == bid1:
             gs["pending_bids"] = {}
-            return None
-        winner = 0 if bid0 > bid1 else 1
-        gs["player_prestige"][winner] += prize
-        gs["player_money"][winner].remove(gs["pending_bids"][winner])  # pay cost
-        self.broadcast(f"P0 bid {bid0}, P1 bid {bid1}. Player {winner} wins prestige {prize} (total {gs['player_prestige'][winner]}).", ta.ObservationType.GAME_MESSAGE)
+            gs["ties"] += 1
+            if gs["ties"] < self.max_ties:
+                self.broadcast(f"Both bid {bid0}: tie {gs['ties']} of {self.max_ties} on prestige card {prize}. Bids returned. Rebid!", ta.ObservationType.GAME_MESSAGE)
+                return None
+            self.broadcast(f"Both bid {bid0}: tie {gs['ties']} of {self.max_ties}. Prestige card {prize} is discarded; both players keep their money.", ta.ObservationType.GAME_MESSAGE)
+        else:
+            winner = 0 if bid0 > bid1 else 1
+            gs["player_prestige"][winner] += prize
+            gs["player_money"][winner].remove(gs["pending_bids"][winner])  # pay cost
+            self.broadcast(f"P0 bid {bid0}, P1 bid {bid1}. Player {winner} wins prestige {prize} (total {gs['player_prestige'][winner]}).", ta.ObservationType.GAME_MESSAGE)
         outcome = self._next_auction()
         if outcome is not None: return outcome
         self.set_next_player(player_id)  # the second bidder opens the next auction

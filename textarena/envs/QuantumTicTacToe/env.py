@@ -28,16 +28,19 @@ class QuantumTicTacToeEnv(ta.GameEnv):
             f"{'even' if player_id == 1 else 'odd'} in this environment because Player 0 moves first.\n\n"
             "Goal: Win by forming a line of three classical marks (solidified from superpositions).\n\n"
             "How to Play:\n"
-            "- On each turn, place a spooky mark in two different empty squares by replying with the two cell numbers, e.g. 'a,b'.\n"
-            "- These marks are entangled, and labeled like 'O1 / O1' or 'X2 / X2'.\n"
+            "- Cells are numbered 0-8, left to right and top to bottom (0 1 2 / 3 4 5 / 6 7 8).\n"
+            "- On each turn, place a spooky mark in two different open (not yet collapsed) cells by replying with the two cell numbers, e.g. 'a,b'.\n"
+            "- Both halves of a spooky mark are entangled and carry your symbol and the move number, e.g. 'O1' or 'X2'.\n"
             "- You cannot place spooky marks in a square that has already collapsed (solidified).\n\n"
             "Collapse Rule:\n"
             "- If your move creates a cycle in the entanglement graph, it collapses automatically.\n"
-            "- Each spooky mark in the cycle turns into a classical mark in one of its two positions.\n"
-            "- Any dependent spooky marks also collapse.\n\n"
+            "- The mark you just placed becomes a classical mark in the lower-numbered of its two cells.\n"
+            "- Every other spooky mark in a cell that collapses is pushed into its other cell, which can collapse further marks in turn.\n"
+            "- If a collapse leaves only one open cell, it is filled automatically with the next player's classical mark.\n\n"
             "Victory:\n"
             "- The game ends when a player has three classical marks in a row.\n"
-            "- If both players get a line during the same collapse, the one with the lower max move number wins.\n\n"
+            "- If both players get a line during the same collapse, the one with the lower max move number wins.\n"
+            "- A full board without a line is a draw.\n\n"
             "Example move: '0,4' places a spooky mark in cells 0 and 4."
         )
 
@@ -48,7 +51,7 @@ class QuantumTicTacToeEnv(ta.GameEnv):
         return self._render_board()
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
-        match = re.search(r"^\s*\[?\s*(\d+)\s*,\s*(\d+)\s*\]?\s*$", action)
+        match = re.search(r"^\s*\[?\s*([0-9]+)\s*,\s*([0-9]+)\s*\]?\s*$", action)
         if not match:
             return self.invalid("Invalid format. Use 'a,b'.")
         try:
@@ -69,38 +72,43 @@ class QuantumTicTacToeEnv(ta.GameEnv):
         gs["superpositions"][gs["move_count"]] = (player_id, pos_a, pos_b)
         gs["move_log"].append((gs["move_count"], player_id, pos_a, pos_b))
         gs["move_count"] += 1
-        self.broadcast(f"Player {player_id} placed their symbol in a superposition between cells {pos_a} and {pos_b}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        self.broadcast(
+            f"Player {player_id} placed spooky mark {self._mark(player_id, gs['move_count'] - 1)} "
+            f"in cells {self._cell(pos_a)} and {self._cell(pos_b)}.",
+            ta.ObservationType.GAME_ACTION_DESCRIPTION,
+        )
         return self._resolve_cycles()
 
+    @staticmethod
+    def _mark(player_id: int, move_id: int) -> str:
+        return f"{'O' if player_id == 0 else 'X'}{move_id + 1}"
+
+    @staticmethod
+    def _cell(position: Tuple[int, int]) -> int:
+        return position[0] * 3 + position[1]
+
     def _render_board(self):
+        """Classical marks in the grid (open cells show their number), then every spooky mark and the open cells."""
         gs = self.game_state
-        # Build a dictionary from cell -> list of marks
-        cell_marks = {(r, c): [] for r in range(3) for c in range(3)}
-        for move_id, (pid, a, b) in gs["superpositions"].items():
-            mark = f"{'O' if pid == 0 else 'X'}{move_id + 1}"
-            cell_marks[a].append(mark)
-            cell_marks[b].append(mark)
-
-        def render_cell(r, c):
-            if gs['board'][r][c]:
-                move_number = gs["classical_moves"][r][c]
-                mark = f"{gs['board'][r][c]}{move_number}" if move_number is not None else gs['board'][r][c]
-                return [f"[{r * 3 + c}]", "", f"  {mark}"]
-            elif cell_marks[(r, c)]:
-                lines = [f"[{r * 3 + c}]"]
-                if len(cell_marks[(r, c)]) <= 2: lines += [" / ".join(cell_marks[(r, c)]), ""]
-                else: lines += [" / ".join(cell_marks[(r, c)][:2]), " / ".join(cell_marks[(r, c)][2:])]
-                return lines
-            else: return [f"[{r * 3 + c}]", "", ""]
-
-        rendered_rows = []
+        rows = []
         for r in range(3):
-            row_lines = [""] * 3  # three lines per cell
+            cells = []
             for c in range(3):
-                cell = render_cell(r, c)
-                for i in range(3): row_lines[i] += f"{cell[i]:^10}"
-            rendered_rows.append("\n".join(row_lines))
-        return "\n" + "\n" + "\n---+----------+----------+---\n".join(rendered_rows) + "\n"
+                if gs["board"][r][c]:
+                    move_number = gs["classical_moves"][r][c]
+                    cells.append(f"{gs['board'][r][c]}{move_number if move_number is not None else ''}")
+                else:
+                    cells.append(str(r * 3 + c))
+            rows.append("|".join(f" {cell:<2} " for cell in cells))
+        spooky = "; ".join(
+            f"{self._mark(pid, move_id)} in cells {self._cell(a)} and {self._cell(b)}"
+            for move_id, (pid, a, b) in sorted(gs["superpositions"].items())
+        )
+        open_cells = ", ".join(str(self._cell(position)) for position in self._get_empty_cells())
+        return (
+            "\n----+----+----\n".join(rows)
+            + f"\n\nSpooky marks: {spooky or 'none'}\nOpen cells: {open_cells or 'none'}"
+        )
 
     def _resolve_cycles(self) -> Optional[ta.Outcome]:
         superpositions = self.game_state["superpositions"]
@@ -146,7 +154,7 @@ class QuantumTicTacToeEnv(ta.GameEnv):
         gs["board"][r][c] = symbol
         gs["classical_moves"][r][c] = move_id + 1
         self.broadcast(
-            f"Superposition {symbol}{move_id + 1} resolved at cell ({r}, {c}).",
+            f"Superposition {symbol}{move_id + 1} resolved at cell {self._cell(chosen)}.",
             ta.ObservationType.GAME_MESSAGE,
         )
 
@@ -162,7 +170,11 @@ class QuantumTicTacToeEnv(ta.GameEnv):
         next_player_symbol = 'X' if self.current_player_id == 0 else 'O'
         self.game_state["board"][r][c] = next_player_symbol
         self.game_state["classical_moves"][r][c] = self.game_state["move_count"] + 1
-        self.broadcast(f"Superposition for last cell resolved. Cell ({r}, {c}) is now {next_player_symbol}.", ta.ObservationType.GAME_MESSAGE)
+        self.broadcast(
+            f"Superposition for last cell resolved. Cell {self._cell((r, c))} is now "
+            f"{next_player_symbol}{self.game_state['move_count'] + 1}.",
+            ta.ObservationType.GAME_MESSAGE,
+        )
 
     def _collapse_superpositions(self, move_ids: List[int], seed_move_id: Optional[int] = None) -> Optional[ta.Outcome]:
         gs = self.game_state

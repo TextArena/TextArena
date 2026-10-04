@@ -35,7 +35,6 @@ class SokobanEnv(ta.GameEnv):
         self.num_boxes = num_boxes
         self.max_turns = max_turns
         self.action_space = ['up', 'down', 'left', 'right']
-        self._seed: Optional[int] = None
         self._max_retries: int = 50
 
     def reset(self, num_players: int, seed: Optional[int] = None, max_retries: int = 50):
@@ -45,8 +44,6 @@ class SokobanEnv(ta.GameEnv):
             or not 1 <= max_retries <= 100
         ):
             raise ValueError("max_retries must be an integer between 1 and 100")
-        # Room generation needs the raw seed (it retries with seed + attempt).
-        self._seed = seed
         self._max_retries = max_retries
         super().reset(num_players=num_players, seed=seed)
 
@@ -66,16 +63,16 @@ class SokobanEnv(ta.GameEnv):
     def player_position(self, value): self.game_state["player_position"] = value
 
     def setup(self) -> Dict[str, Any]:
+        # The reverse search only returns rooms solvable in at most search_depth - 2 moves.
+        search_depth = min(max(10, min(self.max_turns, 30)), self.max_turns + 2)
         for attempt in range(self._max_retries):
             try:
-                # Vary the seed for each attempt to avoid identical failures
-                current_seed = None if self._seed is None else self._seed + attempt
                 room_fixed, room_state, box_mapping = generate_room(
                     dim=self.dim_room,
                     num_steps=self.num_gen_steps,
                     num_boxes=self.num_boxes,
-                    seed=current_seed,
-                    search_depth=max(10, min(self.max_turns, 30)),
+                    seed=self.rng.getrandbits(32),
+                    search_depth=search_depth,
                 )
                 break
             except (RuntimeError, RuntimeWarning):
@@ -91,18 +88,21 @@ class SokobanEnv(ta.GameEnv):
         }
 
     def prompt(self, player_id: int) -> str:
-        return """You are solving the Sokoban puzzle. You are the player and you need to push all boxes to targets.
-        When you are right next to a box, you can push it by moving in the same direction.
-        You cannot push a box through a wall, and you cannot pull a box.
-        On the board, objects are represented as: 
-        - The player (you) appears as 'P' 
-        - Walls are represented with '#' 
-        - Boxes are marked as 'X' 
-        - Empty goals are shown with a 'O'
-        - Boxes on goals are visualized with '√'
-        Reply with a direction: 'up', 'down', 'left' or 'right'.
-        You can also use 'w' for up, 'a' for left, 's' for down, and 'd' for right.
-        """
+        return (
+            "You are solving the Sokoban puzzle. You are the player and you need to push all boxes to targets.\n"
+            "When you are right next to a box, you can push it by moving in the same direction.\n"
+            "You cannot push a box through a wall or into another box, and you cannot pull a box.\n"
+            "On the board, objects are represented as:\n"
+            "- The player (you) appears as 'P', or '+' while standing on an empty goal\n"
+            "- Walls are represented with '#'\n"
+            "- Empty floor is shown as '_'\n"
+            "- Boxes are marked as 'X'\n"
+            "- Empty goals are shown with a 'O'\n"
+            "- Boxes on goals are visualized with '√'\n"
+            "Reply with a direction: 'up', 'down', 'left' or 'right'.\n"
+            "You can also use 'w' for up, 'a' for left, 's' for down, and 'd' for right.\n"
+            f"Walking into a wall or making a blocked push is an invalid move. You have {self.max_turns} moves.\n"
+        )
 
     def render(self, player_id: int) -> str:
         return f"Current Board:\n\n{self.create_board_str(self.room_state)}\nAvailable Moves: " + ", ".join(self.action_space)
@@ -111,11 +111,13 @@ class SokobanEnv(ta.GameEnv):
         return self.create_board_str(board_state=self.state.game_state['board'])
 
     def create_board_str(self, board_state: np.ndarray) -> str:
-        grid_lookup = {0: "#", 1: "_", 2: "O", 3: "√", 4: "X", 5: "P", 6: "S"}
+        grid_lookup = {0: "#", 1: "_", 2: "O", 3: "√", 4: "X", 5: "P", 6: "+"}
+        room_fixed = self.room_fixed
 
         board_str = ""
-        for row in board_state:
-            board_str += ' '.join([grid_lookup[cell] for cell in row])
+        for r, row in enumerate(board_state):
+            cells = [6 if cell == 5 and room_fixed[r, c] == 2 else cell for c, cell in enumerate(row)]
+            board_str += ' '.join([grid_lookup[cell] for cell in cells])
             board_str += "\n"
         return board_str
 
@@ -145,14 +147,15 @@ class SokobanEnv(ta.GameEnv):
 
         if action not in self.action_space:
             return self.invalid("The submitted move is not a valid action.")
-        if self._would_collide_with_wall(action):
-            return self.invalid("You cannot move into a wall!")
+        collision = self._collision_reason(action)
+        if collision is not None:
+            return self.invalid(collision)
 
         move_successful, box_pushed = self._push(action)
         if not move_successful:
             return self.invalid("Invalid move - cannot move to that position.")
 
-        msg = f"You {'pushed a box while' if box_pushed else ''} moved '{action}'."
+        msg = f"You moved {action} and pushed a box." if box_pushed else f"You moved {action}."
         self.broadcast(msg, ta.ObservationType.GAME_MESSAGE)
 
         boxes_on_targets, all_boxes_on_targets = self._check_if_all_boxes_on_target()
@@ -171,17 +174,21 @@ class SokobanEnv(ta.GameEnv):
         Check if the given action would result in a wall collision.
         Returns True if the player would collide with a wall, False otherwise.
         """
+        return self._collision_reason(action) is not None
+
+    def _collision_reason(self, action: str) -> Optional[str]:
+        """Why the player cannot move in this direction (a wall or a blocked push), or None if they can."""
         change = CHANGE_COORDINATES[self.action_space.index(action)]
         new_position = self.player_position + change
 
         # Check bounds
         if (new_position[0] < 0 or new_position[0] >= self.room_state.shape[0] or
                 new_position[1] < 0 or new_position[1] >= self.room_state.shape[1]):
-            return True
+            return "You cannot move into a wall!"
 
         # Check if the new position is a wall (value 0)
         if self.room_state[new_position[0], new_position[1]] == 0:
-            return True
+            return "You cannot move into a wall!"
 
         # Check if there's a box that would be pushed into a wall or out of bounds
         if self.room_state[new_position[0], new_position[1]] in [3, 4]:  # There's a box
@@ -190,13 +197,15 @@ class SokobanEnv(ta.GameEnv):
             # Check if box would go out of bounds
             if (box_new_position[0] < 0 or box_new_position[0] >= self.room_state.shape[0] or
                     box_new_position[1] < 0 or box_new_position[1] >= self.room_state.shape[1]):
-                return True
+                return "You cannot push a box into a wall!"
 
             # Check if box would be pushed into a wall or another box
+            if self.room_state[box_new_position[0], box_new_position[1]] in [3, 4]:
+                return "You cannot push a box into another box!"
             if self.room_state[box_new_position[0], box_new_position[1]] not in [1, 2]:  # Not empty floor or target
-                return True
+                return "You cannot push a box into a wall!"
 
-        return False
+        return None
 
     def _push(self, action):
         """

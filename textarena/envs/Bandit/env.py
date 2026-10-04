@@ -73,7 +73,9 @@ class BanditEnv(ta.GameEnv):
             'For each button, when you press it, you will get a reward that is sampled from associated distribution.\n'
             f'You have {self.num_turns} time steps and, on each time step, you can choose any button and receive the reward.\n'
             f'Your goal is to strategically choose buttons at each time step to collect information about their reward distribution, that will let you choose the button with the highest mean reward correctly at the end of {self.num_turns} turns.\n'
-            f"On each turn, reply with the name of the button you want to press, e.g. '{self.buttons[0]}'."
+            f"On each turn, reply with the name of the button you want to press, e.g. '{self.buttons[0]}'.\n"
+            f"After your {self.num_turns} presses, reply with the name of the button you believe has the highest mean reward. "
+            "That final answer ends the game: a correct answer scores 1, and a wrong one scores minus the gap between the best mean and the mean of the button you chose."
         )
 
     def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
@@ -87,9 +89,9 @@ class BanditEnv(ta.GameEnv):
         match = self._ACTION_RE.fullmatch(move)
         if match is None:
             return self.invalid("Submit a bare button name or enclose the entire name in brackets.")
-        button = match.group("button")
-        if button not in self.buttons:
-            return self.invalid("An invalid button has been selected.")
+        button = self._resolve_button(match.group("button"))
+        if button is None:
+            return self.invalid(f"An invalid button has been selected. Choose one of: {', '.join(self.buttons)}.")
 
         if self.state.turn >= self.num_turns:  # final decision turn
             if button == max(self.game_state['ground_truth'], key=self.game_state['ground_truth'].get):
@@ -102,8 +104,14 @@ class BanditEnv(ta.GameEnv):
         if self.include_summary:
             self.broadcast(f'Summary:\n{self._observe_statistics()}', ta.ObservationType.GAME_BOARD)
         if self.state.turn == self.num_turns - 1:
-            self.broadcast("You have exhausted your budget for trying out different choices and observe their rewards. Now make a deduction about what the best choice is.", ta.ObservationType.GAME_MESSAGE)
+            self.broadcast("You have exhausted your budget for trying out different choices and observe their rewards. Now make a deduction about what the best choice is and reply with the name of that button.", ta.ObservationType.GAME_MESSAGE)
         return None
+
+    def _resolve_button(self, name: str) -> Optional[str]:
+        if name in self.buttons:
+            return name
+        matches = [button for button in self.buttons if button.casefold() == name.casefold()]
+        return matches[0] if len(matches) == 1 else None
 
     def _observe_statistics(self) -> str:
         lines = []

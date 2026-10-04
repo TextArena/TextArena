@@ -138,7 +138,13 @@ class BriscolaEnv(ta.GameEnv):
             f"Goal: Win tricks and collect the most points (120 total points in the deck).\n"
             f"Card Points: A=11, 3=10, K=4, Q=3, J=2, others=0\n"
             f"Card Power: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\n"
-            f"Trump cards beat non-trump cards regardless of power.\n\n"
+            f"Trump cards beat non-trump cards regardless of power.\n"
+            "You never have to follow suit. The highest trump played wins the trick; if no trump is played, the highest card "
+            "of the suit that was led wins, and cards of any other suit cannot win.\n"
+            "After each trick, its winner draws first and the others follow in turn order; the face-up trump card is the "
+            "last card drawn. The trick winner leads the next trick.\n"
+            + ("With 3 players, the 2♣ is removed so the 39 cards divide evenly.\n" if self.state.num_players == 3 else "")
+            + "When all cards have been played, the player(s) with the most points win; if everyone ties, it is a draw.\n\n"
             f"Action: reply with 'play X' where X is the position (1-{len(game_state['players'][player_id]['hand']) if player_id in game_state['players'] else 3}) of the card in your hand\n"
         )
 
@@ -191,7 +197,10 @@ class BriscolaEnv(ta.GameEnv):
 
         trump_info = f"Trump suit: {gs['trump_suit']}"
         if gs['deck']:
-            trump_info += f" | Cards left in deck: {len(gs['deck'])}"
+            trump_info += (
+                f" | Cards left in deck: {len(gs['deck'])} "
+                f"(the face-up {self._card_to_string(gs['deck'][0])} at the bottom is drawn last)"
+            )
 
         return f"{hand_str}\n\n{trick_str}\n\nScores: {scores_str}\n{trump_info}\n\nPlay a card by replying 'play X'"
 

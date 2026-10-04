@@ -1,3 +1,4 @@
+import math
 import re
 from typing import Any, Dict, List, Optional, Tuple, Union
 
@@ -38,12 +39,18 @@ class Game2048Env(ta.GameEnv):
         board = [[0] * self.board_size for _ in range(self.board_size)]
         self._spawn_tile(board)
         self._spawn_tile(board)
-        return {"board": board, "score": 0}
+        return {"board": board, "score": 0, "start_max_tile": max(max(row) for row in board)}
 
     def prompt(self, player_id: int) -> str:
+        spawn = "a 2 (or, one time in ten, a 4)" if self.target_tile > 4 else "a 2"
         return (
             f"You are playing 2048 on a {self.board_size}x{self.board_size} board. Your goal is to reach a {self.target_tile} tile by sliding identical numbers together!\n"
-            "Valid moves: 'up', 'down', 'left', 'right'. Tiles combine when they collide, doubling their value.\n"
+            "Valid moves: 'up', 'down', 'left', 'right'. Each move slides every tile as far as it can in that direction; "
+            "two equal tiles that collide merge into one tile with double the value, and a tile merges at most once per move.\n"
+            f"After every move, {spawn} appears in a random empty cell. Your score grows by the value of every merged tile.\n"
+            "You lose when the board is full and no merge is possible.\n"
+            "A move that does not change the board is invalid; the moves that do are listed under the board. "
+            "An invalid move changes nothing and you may try again, but two invalid moves in a row end the game.\n"
         )
 
     def render(self, player_id: int) -> str:
@@ -52,7 +59,8 @@ class Game2048Env(ta.GameEnv):
         rows = [" ".join(make_cell(v) for v in row) for row in board]
         horiz = "+" + "-" * (len(rows[0])) + "+"
         framed = [horiz] + [f"|{r}|" for r in rows] + [horiz]
-        return f"Score: {self.game_state['score']}\n" + "\n".join(framed)
+        available = ", ".join(self._available_moves()) or "none"
+        return f"Score: {self.game_state['score']}\n" + "\n".join(framed) + f"\nAvailable moves: {available}"
 
     def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
         dir_idx = self._parse_action(move)
@@ -76,28 +84,27 @@ class Game2048Env(ta.GameEnv):
     def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
         return self.outcome({0: self._get_percentage_completion()}, reason=f"Invalid Move: {reason}")
 
-    @staticmethod
-    def _min_score_to_reach_tile(tile: int) -> int:
-        assert (tile & (tile - 1)) == 0, "tile must be a power of 2"
-        total = 0
-        while tile > 2: total += tile; tile //= 2
-        return total
-
     def _get_percentage_completion(self) -> float:
-        if self._max_tile() >= self.target_tile: return 1.0
-        min_score_needed = self._min_score_to_reach_tile(self.target_tile) * 1.5
-        score_part = self.game_state['score'] / min_score_needed
-        max_part = self._max_tile() / self.target_tile
-        reward = 0.5 * score_part + 0.5 * max_part
-        return float(min(1.0, reward))
+        """Doublings of the largest tile since the start, as a share of the doublings the target needs (below 1.0 unless won)."""
+        start = math.log2(self.game_state["start_max_tile"])  # always below the target: 4s only spawn when the target exceeds 4
+        return max(0.0, (math.log2(self._max_tile()) - start) / (math.log2(self.target_tile) - start))
 
     def _parse_action(self, action: str) -> Optional[int]:
         m = self._ACTION_RE.fullmatch(action.strip())
         if not m: return None
         return self.ACTIONS.get(m.group("direction").upper())
 
-    def _apply_move(self, dir_idx: int) -> Tuple[bool, int]:
+    def _available_moves(self) -> List[str]:
         board = self.game_state["board"]
+        return [
+            name.lower()
+            for name, dir_idx in self.ACTIONS.items()
+            if self._apply_move(dir_idx, [row[:] for row in board])[0]
+        ]
+
+    def _apply_move(self, dir_idx: int, board: Optional[List[List[int]]] = None) -> Tuple[bool, int]:
+        if board is None:
+            board = self.game_state["board"]
         moved = False
         gained = 0
 

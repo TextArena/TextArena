@@ -168,6 +168,25 @@ def test_huge_card_index_is_invalid_and_atomic():
     assert env.state.game_state == before
 
 
+def test_prompt_explains_trick_and_drawing_rules():
+    env = _fresh()
+    prompt = env.state.events[0][1]
+    assert "You never have to follow suit" in prompt
+    assert "highest card of the suit that was led wins" in prompt
+    assert "trump card is the last card drawn" in prompt
+    assert "2♣ is removed" not in prompt
+    assert "2♣ is removed" in _fresh(num_players=3).state.events[0][1]
+
+
+def test_render_shows_the_face_up_trump_card_until_the_deck_is_empty():
+    env = _fresh()
+    gs = env.state.game_state
+    trump = env._card_to_string(gs["trump_card"])
+    assert f"the face-up {trump} at the bottom is drawn last" in env.render(0)
+    gs["deck"] = []
+    assert trump not in env.render(0).split("Scores:")[1]
+
+
 def test_render_and_snapshot_preserve_hidden_hands():
     env = _fresh()
     gs = env.state.game_state

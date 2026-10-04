@@ -55,6 +55,18 @@ def test_two_consecutive_invalid_moves_end_the_game():
     assert env.state.rewards[1] == 1
 
 
+def test_format_error_describes_expected_action():
+    env = _fresh()
+    env.step("the middle square")
+    notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
+    assert f"Expected {env.action_format}." in notices[-1]
+
+    assert "for example '4'" in env.action_format
+    fresh = _fresh()
+    fresh.step("4")
+    assert fresh.state.turn == 1 and fresh.state.error_count == 0
+
+
 def test_out_of_range_cell_is_invalid():
     env = _fresh()
     done, _ = env.step("99")

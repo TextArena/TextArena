@@ -23,9 +23,13 @@ class AlquerqueEnv(ta.GameEnv):
     MAX_MOVES = 60
     SCORE_PER_CAPTURE = 10
 
-    _CELL_TOKEN = r"(?:[a-eA-E][1-5]|\d+)"
+    _CELL_TOKEN = r"(?:[a-eA-E][1-5]|[0-9]+)"
     action_pattern = (
         rf"^\s*\[?\s*({_CELL_TOKEN}(?:(?:\s*->\s*|\s+){_CELL_TOKEN})+)\s*\]?\s*$"
+    )
+    action_format = (
+        "a move 'from to' in board coordinates, listing every landing point of a multi-jump capture, "
+        "for example 'c2 c3' as Red or 'c4 c3' as Black"
     )
 
     def __init__(self):
@@ -45,18 +49,31 @@ class AlquerqueEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         piece = 'R' if player_id == 0 else 'B'
         opp   = 'B' if player_id == 0 else 'R'
+        example, forward = ("c2 c3", "toward rank 5") if player_id == 0 else ("c4 c3", "toward rank 1")
         return (
-            f"You are Player {player_id} ({piece}). Opponent is ({opp}).\nSubmit moves as 'a2 a3' (from → to).\n"
-            "- A normal move is one forward step to an adjacent empty vertex.\n"
-            "- A capture is a jump over an adjacent enemy piece landing on the empty node beyond.\n"
+            f"You are Player {player_id} ({piece}). Opponent is ({opp}). Red (Player 0) starts on ranks 1-2 and moves first; "
+            "Black (Player 1) starts on ranks 4-5.\n"
+            "The board is a 5x5 grid of points: files a-e run left to right, ranks 1-5 bottom to top. Lines join neighbouring points "
+            "horizontally and vertically, and diagonally only through a1, c1, e1, b2, d2, a3, c3, e3, b4, d4, a5, c5 and e5.\n"
+            f"Submit moves as 'from to', e.g. '{example}'.\n"
+            f"- A normal move is one forward step ({forward}, straight or diagonally along a line) to an adjacent empty vertex.\n"
+            "- A capture is a jump over an adjacent enemy piece landing on the empty node beyond, in any direction along a line.\n"
             "- Captures are mandatory. Continue a capture in the same action while another jump is available "
             "(for example, 'c3 a3 c1').\n"
             f"Each capture yields {self.SCORE_PER_CAPTURE} points.\n"
-            f"Game ends after {self.MAX_MOVES} moves or when a player has no legal move."
+            f"You lose if you have no pieces or no legal move on your turn. After {self.MAX_MOVES} moves in total, "
+            "the higher score wins and equal scores draw."
         )
 
     def render(self, player_id: int) -> str:
-        return f"Move #{self.game_state['move_count']}\n\n{self._render_board()}"
+        gs = self.game_state
+        text = (
+            f"Move #{gs['move_count']}\n\n{self._render_board()}\n\n"
+            f"Score: Red (Player 0) {gs['score'][0]}, Black (Player 1) {gs['score'][1]} | Moves left: {self.MAX_MOVES - gs['move_count']}"
+        )
+        if not self.state.done:
+            text += "\nLegal moves: " + ", ".join(self._legal_moves(player_id))
+        return text
 
     def get_board_str(self) -> str:
         return self._render_board()
@@ -117,13 +134,14 @@ class AlquerqueEnv(ta.GameEnv):
 
         for row, trial_row in zip(board, trial):
             row[:] = trial_row
+        description = f"Player {player_id} ({piece}) moved " + " -> ".join(rc_to_coord(*self.cell_to_rc[cell]) for cell in path)
         if captures:
             points = captures * self.SCORE_PER_CAPTURE
             self.game_state["score"][player_id] += points
-            self.broadcast(
-                f"Player {player_id} captured {captures} piece(s)! (+{points})",
-                ta.ObservationType.GAME_ACTION_DESCRIPTION,
-            )
+            description += f", capturing {captures} piece(s)! (+{points})"
+        else:
+            description += "."
+        self.broadcast(description, ta.ObservationType.GAME_ACTION_DESCRIPTION)
         return self._after_move(player_id)
 
     def _after_move(self, player_id: int) -> Optional[ta.Outcome]:
@@ -231,3 +249,38 @@ class AlquerqueEnv(ta.GameEnv):
                    and board[mr][mc] not in ('', piece):
                     return True
         return False
+
+    def _legal_moves(self, pid: int) -> List[str]:
+        """Every complete capture sequence if a capture exists, otherwise every forward step."""
+        piece = 'R' if pid == 0 else 'B'
+        opp = 'B' if pid == 0 else 'R'
+        board = self.game_state["board"]
+        squares = [(r, c) for r in range(self.BOARD_N) for c in range(self.BOARD_N) if board[r][c] == piece]
+        sequences: List[List[Tuple[int, int]]] = []
+        for square in squares:
+            self._collect_capture_sequences(board, [square], piece, opp, sequences)
+        if sequences:
+            return [" ".join(rc_to_coord(r, c) for r, c in sequence) for sequence in sequences]
+        steps = []
+        for r, c in squares:
+            for dr, dc in self.forward_dirs[pid]:
+                nr, nc = r + dr, c + dc
+                if 0 <= nr < self.BOARD_N and 0 <= nc < self.BOARD_N and board[nr][nc] == '' \
+                   and self._is_connected_step(r, c, nr, nc):
+                    steps.append(f"{rc_to_coord(r, c)} {rc_to_coord(nr, nc)}")
+        return steps
+
+    def _collect_capture_sequences(self, board, path: List[Tuple[int, int]], piece: str, opp: str, out: List[List[Tuple[int, int]]]) -> None:
+        r, c = path[-1]
+        extended = False
+        for dr, dc in self.neighbours:
+            if dr and dc and not self._diagonal_vertex(r, c):
+                continue
+            mr, mc, nr, nc = r + dr, c + dc, r + 2 * dr, c + 2 * dc
+            if 0 <= nr < self.BOARD_N and 0 <= nc < self.BOARD_N and board[mr][mc] == opp and board[nr][nc] == '':
+                trial = [row[:] for row in board]
+                trial[r][c], trial[mr][mc], trial[nr][nc] = '', '', piece
+                self._collect_capture_sequences(trial, path + [(nr, nc)], piece, opp, out)
+                extended = True
+        if not extended and len(path) > 1:
+            out.append(path)

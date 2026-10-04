@@ -167,6 +167,33 @@ def test_huge_numeric_action_is_invalid_without_mutation():
     assert env.state.game_state == before
 
 
+def test_board_shows_opponent_card_pot_chips_and_bet_ranges():
+    env = _fresh(max_rounds=2)
+    gs = env.state.game_state
+    actor = env.state.current_player_id
+    board = env.render(actor)
+    assert f"Opponent's card: {env._rank_to_str(gs['player_cards'][1 - actor])} | Your card: hidden" in board
+    assert "Pot: 2 | Your chips: 99 | Opponent chips: 99" in board
+    assert "Your possible actions: 'check', 'bet X' (X from 1 to 99)" in board
+    env.step("bet 9")
+    board = env.render(1 - actor)
+    assert "Pot: 11 | Your chips: 99 | Opponent chips: 90" in board
+    assert "'call' (cost 9), 'fold', 'raise X' (X from 1 to 90)" in board
+
+
+def test_board_never_shows_a_players_own_card():
+    env = _fresh()
+    env.state.game_state["player_cards"] = {0: 12, 1: 11}  # Player 0 holds an ace, Player 1 a king
+    assert "Opponent's card: K" in env.render(0) and "A" not in env.render(0)
+    assert "Opponent's card: A" in env.render(1) and "K" not in env.render(1)
+
+
+def test_prompt_states_the_starting_chips():
+    env = IndianPokerEnv(max_rounds=3, starting_chips=40)
+    env.reset(num_players=2, seed=0)
+    assert "Both players start with 40 chips" in env.prompt(0)
+
+
 def test_snapshot_restore_replays_identically():
     env = _fresh(max_rounds=2)
     snapshot = env.snapshot()

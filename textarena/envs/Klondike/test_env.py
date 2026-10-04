@@ -87,6 +87,18 @@ def test_turn_limit_terminates_with_partial_reward():
     assert "maximum" in env.state.game_info[0]["reason"].lower()
 
 
+def test_turn_limit_applies_when_the_final_turn_is_a_failed_move():
+    env = KlondikeEnv(max_turns=2)
+    env.reset(num_players=1, seed=42)
+    done, _ = env.step("draw")
+    assert not done
+    done, _ = env.step("move F1 T1")  # well-formed, but foundation F1 is empty
+    assert done
+    assert env.state.error_count == 0
+    assert env.state.rewards == {0: 0}
+    assert "maximum" in env.state.game_info[0]["reason"].lower()
+
+
 def test_win_detection_awards_full_reward():
     env = _fresh()
     # Force a won position, then take any successful action to trigger the check
@@ -98,6 +110,60 @@ def test_win_detection_awards_full_reward():
     assert done
     assert env.state.game_state["game_won"] is True
     assert env.state.rewards == {0: 52}
+
+
+def _one_move_from_winning(env):
+    """All cards on the foundations except the K♣, which sits alone on T1."""
+    game = env.klondike
+    game.foundations = [
+        [Card(rank, suit) for rank in range(1, 14)]
+        for suit in ("♣️", "♦️", "♥️", "♠️")
+    ]
+    game.foundations[0].pop()
+    game.tableau = [[(Card(13, "♣️"), True)]] + [[] for _ in range(6)]
+    game.stock = []
+    game.waste = []
+
+
+def test_win_is_detected_even_if_a_later_batched_action_fails():
+    env = _fresh()
+    _one_move_from_winning(env)
+    done, _ = env.step("move T1 F1, draw")  # stock and waste are empty, so the draw fails
+    assert done
+    assert env.state.game_state["game_won"] is True
+    assert env.state.rewards == {0: 52}
+
+
+def test_batched_actions_after_the_winning_move_are_not_executed():
+    env = _fresh()
+    _one_move_from_winning(env)
+    done, _ = env.step("move T1 F1, move F1 T1")
+    assert done
+    assert env.klondike.is_won()
+    assert env.state.rewards == {0: 52}
+
+
+def test_repeated_invalid_commands_keep_the_foundation_score():
+    env = _fresh()
+    env.klondike.foundations[0] = [Card(1, "♠️"), Card(2, "♠️")]
+    for _ in range(env.error_allowance):
+        done, _ = env.step("fly to the moon")
+        assert not done
+    done, _ = env.step("fly to the moon")
+    assert done
+    assert env.state.rewards == {0: 2}
+    assert env.state.game_info[0]["invalid_move"] is True
+
+
+@pytest.mark.parametrize("draw_count,drawn", [(1, "the next card"), (3, "the next 3 cards")])
+def test_prompt_states_draw_count_turn_limit_and_scoring(draw_count, drawn):
+    env = KlondikeEnv(max_turns=150, draw_count=draw_count)
+    env.reset(num_players=1, seed=1)
+    prompt = env.state.events[0][1]
+    assert f"'draw' turns {drawn} from the stock" in prompt
+    assert "unlimited passes" in prompt
+    assert "You have 150 turns" in prompt
+    assert "number of cards on the foundations" in prompt
 
 
 def _card_state(env):

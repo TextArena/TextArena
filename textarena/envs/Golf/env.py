@@ -8,14 +8,28 @@ class GolfEnv(ta.GameEnv):
     min_players = 2
     max_players = 4
 
-    def __init__(self, num_cards: int = 6, num_columns: int = 3):
-        """ Initializes the Golf card game environment """
+    # Default cap, in full rounds (every player takes one draw/take + swap/discard turn)
+    # per card in a grid. A game where each player flips one new card per turn ends in
+    # about num_cards rounds, so this leaves at least 4x slack for normal play.
+    default_rounds_per_card = 4
+
+    def __init__(self, num_cards: int = 6, num_columns: int = 3, max_turns: Optional[int] = None):
+        """ Initializes the Golf card game environment
+
+        Args:
+            max_turns: Total number of accepted actions (engine turns) before the game is
+                scored as it stands. ``None`` derives the cap from the grid size and the
+                player count: 2 actions x num_players x default_rounds_per_card x num_cards.
+        """
         if not isinstance(num_cards, int) or isinstance(num_cards, bool) or not 2 <= num_cards <= 12:
             raise ValueError("num_cards must be an integer between 2 and 12")
         if not isinstance(num_columns, int) or isinstance(num_columns, bool) or num_columns < 1:
             raise ValueError("num_columns must be a positive integer")
         if num_cards % num_columns != 0:
             raise ValueError("num_cards must be divisible by num_columns")
+        if max_turns is not None and (not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1):
+            raise ValueError("max_turns must be a positive integer or None")
+        self.max_turns = max_turns
         self.num_cards = num_cards
         self.num_columns = num_columns
         self.num_rows = num_cards // num_columns
@@ -81,8 +95,12 @@ class GolfEnv(ta.GameEnv):
 
         return action_name, params
 
+    def default_max_turns(self, num_players: int) -> int:
+        return 2 * num_players * self.default_rounds_per_card * self.num_cards
+
     def setup(self) -> Dict[str, Any]:
         num_players = self.state.num_players
+        self.state.max_turns = self.max_turns if self.max_turns is not None else self.default_max_turns(num_players)
         deck_copy = self.deck.copy()
         self.rng.shuffle(deck_copy)
 
@@ -114,15 +132,20 @@ class GolfEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         return (
             f"You are playing Golf (Card Game) - Player {player_id}.\n"
-            f"Goal: Get the lowest total score in this single round. If columns share the same value, they are summed as 0.\n"
-            f"Card Values: A=1, 2-10=face value, J/Q=10, K=0\n\n"
+            f"Goal: Get the lowest total score in this single round. A column whose cards all have the same rank (e.g. two 7s) scores 0.\n"
+            f"Card Values: A=1, 2-10=face value, J/Q=10, K=0\n"
+            f"The round ends when a player has turned all of their cards face up or knocks: every other player then gets one final turn. "
+            f"It also ends as soon as the turn that draws the last card of the draw pile is over.\n\n"
             f"Actions (reply with exactly one):\n"
             f"- 'draw' - Draw from deck\n"
             f"- 'take' - Take from discard pile\n"
             f"- 'swap X Y' - Swap drawn card with position X (row) Y (column)\n"
             f"- 'discard' - Discard the drawn card\n"
             f"- 'knock' - End your turn and give each opponent one final turn\n"
-            f"- 'peek X Y' - Privately inspect one face-down card during final turns\n"
+            f"- 'peek X Y' - Privately inspect one face-down card during final turns\n\n"
+            f"Turn limit: the game ends after {self.state.max_turns} accepted actions in total across all players "
+            f"(each draw, take, swap, discard, knock or peek counts as one; invalid moves do not count). "
+            f"At the limit, all face-down cards are revealed and scored as usual; the lowest total wins.\n"
         )
 
     def _render_player_hand(self, player_id: int, viewer_id: Optional[int] = None) -> str:
@@ -177,7 +200,8 @@ class GolfEnv(ta.GameEnv):
         drawn = ""
         if gs['turn_phase'] == 'action_with_card' and 'drawn_card' in gs:
             drawn = f"\nYour drawn card: {self._card_to_string(gs['drawn_card'])}"
-        return f"{hand_str}\nDiscard pile: {discard_top}{drawn}\n{options}"
+        turns = f"\nActions used: {self.state.turn}/{self.state.max_turns}"
+        return f"{hand_str}\nDiscard pile: {discard_top}\nCards left in the draw pile: {len(gs['deck'])}{drawn}{turns}\n{options}"
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         action_name, params = self._find_action_token(action)
@@ -346,11 +370,21 @@ class GolfEnv(ta.GameEnv):
     def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
         """Forfeit an eliminated player's pending final turn exactly once."""
         self.eliminate(player_id)
+        gs = self.game_state
+        if 'drawn_card' in gs:
+            # The card in hand goes face up on the discard pile; the next player starts a fresh turn.
+            card = gs.pop('drawn_card')
+            gs['discard_pile'].append(card)
+            self.broadcast(
+                f"Player {player_id}'s card in hand ({self._card_to_string(card)}) goes to the discard pile.",
+                ta.ObservationType.GAME_MESSAGE,
+            )
+        gs['took_from_discard'] = False
+        gs['turn_phase'] = 'draw'
         alive = self.state.alive_players
         if len(alive) <= 1:
             return self.winner(alive, reason=f"Player {player_id} made repeated invalid moves: {reason}")
 
-        gs = self.game_state
         if gs['current_phase'] == 'final_round':
             gs['final_turns_remaining'] -= 1
             if gs['final_turns_remaining'] <= 0:
@@ -361,7 +395,21 @@ class GolfEnv(ta.GameEnv):
         )
         return None
 
-    def _end_game(self) -> ta.Outcome:
+    def on_turn_limit(self) -> ta.Outcome:
+        """Score the hands as they stand once the action cap is reached."""
+        gs = self.game_state
+        if 'drawn_card' in gs:
+            gs['discard_pile'].append(gs.pop('drawn_card'))
+        gs['took_from_discard'] = False
+        gs['turn_phase'] = 'draw'
+        return self._end_game(
+            headline=(
+                f"Turn limit of {self.state.max_turns} actions reached before the round ended. "
+                f"All face-down cards are revealed and scored as usual."
+            )
+        )
+
+    def _end_game(self, headline: Optional[str] = None) -> ta.Outcome:
         """ End the game and determine winner """
         gs = self.game_state
         gs['current_phase'] = 'finished'
@@ -372,16 +420,14 @@ class GolfEnv(ta.GameEnv):
 
             total_score = 0
             for col in range(self.num_columns):
-                column_values = []
-                for row in range(self.num_rows):
-                    card_idx = row * self.num_columns + col
-                    if card_idx < len(player['cards']):
-                        column_values.append(player['cards'][card_idx]['card']['value'])
-
-                if len(set(column_values)) == 1 and len(column_values) > 1:
-                    column_score = 0  # all cards in the column match
+                column_cards = [
+                    player['cards'][row * self.num_columns + col]['card'] for row in range(self.num_rows)
+                ]
+                # Only cards of equal rank cancel: a 10 and a J are both worth 10 but are not a pair.
+                if len(column_cards) > 1 and len({card['rank'] for card in column_cards}) == 1:
+                    column_score = 0
                 else:
-                    column_score = sum(column_values)
+                    column_score = sum(card['value'] for card in column_cards)
                 total_score += column_score
 
             player['score'] = total_score
@@ -392,7 +438,8 @@ class GolfEnv(ta.GameEnv):
         winners = [pid for pid in active_players if gs['players'][pid]['score'] == winner_score]
         winner_label = ", ".join(str(pid) for pid in winners)
 
-        summary = f"Game Over! Player(s) {winner_label} finished with {winner_score} points!\n\nFinal Scores:\n"
+        summary = f"{headline}\n\n" if headline else ""
+        summary += f"Game Over! Player(s) {winner_label} finished with {winner_score} points!\n\nFinal Scores:\n"
         for player_id, player in sorted(gs['players'].items(), key=lambda x: x[1]['score']):
             summary += f"Player {player_id}: {player['score']} points\n"
 

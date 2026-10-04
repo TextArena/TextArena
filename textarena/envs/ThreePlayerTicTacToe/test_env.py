@@ -70,6 +70,18 @@ def test_out_of_range_cell_first_invalid_not_terminal():
     assert env.state.error_count == 1
 
 
+def test_format_error_describes_expected_action():
+    env = _fresh()
+    env.step("not a number")
+    notice = next(message for _, message in env.state.logs if "attempted an invalid move" in message)
+    assert f"Expected {env.action_format}." in notice
+    assert env.action_format == "a cell number from 0 to 24, for example '4'"
+
+    fresh = _fresh()
+    fresh.step("4")
+    assert fresh.state.turn == 1 and fresh.state.error_count == 0
+
+
 def test_huge_numeric_cell_is_invalid_without_integer_conversion_crash():
     env = _fresh()
     before = [row.copy() for row in env.state.game_state["board"]]

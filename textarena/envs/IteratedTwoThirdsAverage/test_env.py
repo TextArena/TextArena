@@ -4,6 +4,9 @@ Two-player game. Each round both players guess a number; target = (2/3)*avg,
 closest guess wins the round. After ``num_rounds`` the player with more round
 wins takes the game (winner {w:1, l:-1}; draw {0:0, 1:0}).
 """
+import copy
+import time
+
 import pytest
 import textarena as ta
 
@@ -133,6 +136,21 @@ def test_extreme_finite_guesses_do_not_overflow_target_math():
     assert env.state.rewards == {0: 1, 1: -1}
 
 
+def test_round_results_report_running_score_to_both_players():
+    env = _fresh(num_rounds=3)
+    env.step("10"); env.step("20")  # target 10 -> P0
+    env.step("50"); env.step("50")  # draw
+    for pid in (0, 1):
+        messages = [message for _, message, _ in env.state.observations[pid]]
+        assert "Score after round 1/3: Player 0 1, Player 1 0." in messages
+        assert "Round is a draw." in messages
+        assert "Score after round 2/3: Player 0 1, Player 1 0." in messages
+
+
+def test_prompt_states_how_the_game_is_won():
+    assert "The player who wins more rounds wins the game; equal round wins is a draw." in _fresh().prompt(1)
+
+
 def test_pending_guess_is_hidden_and_duplicate_is_atomic():
     env = _fresh()
     env.step("17")
@@ -179,3 +197,27 @@ def test_terminal_state_keeps_last_round_and_turn_count():
 def test_invalid_configuration_rejected(kwargs):
     with pytest.raises(ValueError):
         IteratedTwoThirdsAverageEnv(**kwargs)
+
+
+PADDING = 30_000
+
+
+@pytest.mark.parametrize(
+    "action",
+    [
+        pytest.param(" " * PADDING + "x" + " " * 1000, id="leading-trailing-spaces"),
+        pytest.param("4" + " " * PADDING + "x", id="inner-spaces"),
+        pytest.param("\t\n " * (PADDING // 3) + "x", id="tab-newline-runs"),
+        pytest.param("[" * (PADDING // 2) + "x" + "]" * (PADDING // 2 - 2), id="deep-brackets"),
+    ],
+)
+def test_long_padded_input_is_rejected_quickly_without_changing_state(action):
+    env = _fresh()
+    before = copy.deepcopy(env.state.game_state)
+    player = env.state.current_player_id
+    start = time.perf_counter()
+    env.step(action)
+    assert time.perf_counter() - start < 0.25
+    assert env.state.error_count == 1
+    assert env.state.current_player_id == player
+    assert env.state.game_state == before

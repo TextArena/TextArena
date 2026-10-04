@@ -3,9 +3,21 @@ import importlib.resources
 import json
 import os
 import re
+import unicodedata
 from typing import Any, Dict, List, Optional, Union
 
 import textarena as ta
+
+_ARTICLES = frozenset({"a", "an", "the"})
+
+
+def _answer_key(text: str) -> str:
+    """Letters and digits only, without accents or a leading article."""
+    decomposed = unicodedata.normalize("NFKD", unicodedata.normalize("NFKC", text).casefold())
+    tokens = re.findall(r"[^\W_]+", "".join(char for char in decomposed if not unicodedata.combining(char)))
+    if len(tokens) > 1 and tokens[0] in _ARTICLES:
+        tokens = tokens[1:]
+    return "".join(tokens)
 
 
 class GuessWhoEnv(ta.GameEnv):
@@ -28,8 +40,8 @@ class GuessWhoEnv(ta.GameEnv):
         gamemaster: Optional[Any] = None,
         characters_path: Optional[str] = None,
     ):
-        if isinstance(max_turns, bool) or not isinstance(max_turns, int) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer.")
+        if isinstance(max_turns, bool) or not isinstance(max_turns, int) or max_turns < 2:
+            raise ValueError("max_turns must be an integer of at least 2 (questions plus a final guess).")
         if gamemaster is not None and not callable(gamemaster):
             raise TypeError("gamemaster must be callable.")
         self.max_turns = max_turns
@@ -71,7 +83,7 @@ class GuessWhoEnv(ta.GameEnv):
                 or any(not isinstance(item, str) or not item.strip() for item in char["accessories"])
                 for char in characters
             )
-            or len({char["name"].strip().casefold() for char in characters}) != len(characters)
+            or len({_answer_key(char["name"]) for char in characters} - {""}) != len(characters)
             or any(
                 (char["hat_type"].strip().casefold() != "none")
                 != any(accessory.strip().casefold() == "hat" for accessory in char["accessories"])
@@ -143,7 +155,7 @@ class GuessWhoEnv(ta.GameEnv):
         lines = [
             "Guess Who",
             f"Target Character: {target_name}",
-            f"Questions Asked: {len(self.gamemaster_history)} / {self.max_turns}",
+            f"Questions Asked: {len(self.gamemaster_history)} / {self.max_turns - 1}",
         ]
         if self.gamemaster_history:
             lines.append("History:")
@@ -204,8 +216,12 @@ class GuessWhoEnv(ta.GameEnv):
             f"You are Player {player_id}. You are playing Guess Who.\n"
             "The gamemaster has chosen one target character from the list of characters that you will be shown below.\n"
             "You have to guess the target character by asking yes-or-no questions about the target character's traits.\n"
-            "You can ask questions like 'Is the character male?' or 'Does the character have a beard?'.\n"
-            "You can also guess the name of the target character at any time by replying with 'guess <name>', e.g. 'guess Zach'.\n"
+            "You can ask questions like 'Is the character male?' or 'Does the character have a beard?'. "
+            "Any message containing a '?' is treated as a question.\n"
+            f"You may ask up to {self.max_turns - 1} questions; the turn after that is reserved for your guess.\n"
+            "You can also guess the name of the target character at any time by replying with 'guess <name>', "
+            f"e.g. 'guess {self.characters[0]['name']}'. You get exactly one guess: naming the target wins, and naming "
+            "any other character from the list ends the game without a win.\n"
             "As you play, the history of your questions and gamemaster's responses will be displayed.\n"
             "Here is the list of characters you can ask questions about:\n"
         ) + self._characters_to_string()
@@ -230,30 +246,47 @@ class GuessWhoEnv(ta.GameEnv):
             formatted_descriptions.append(description)
         return "\n\n".join(formatted_descriptions) # Join all descriptions into a single text block
 
+    def _parse_guess(self, action: str) -> Optional[str]:
+        """The guessed name, or None when the message is a question."""
+        if "?" in unicodedata.normalize("NFKC", action):
+            return None  # e.g. "Guess what, is the character male?" is a question
+        match = self._GUESS_RE.fullmatch(action) or self._LEGACY_GUESS_RE.fullmatch(action)
+        return match.group("guess") if match else None
+
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         if not isinstance(action, str) or not action.strip():
             return self.invalid("Ask a non-empty question or submit 'guess <name>'.")
         if len(action) > self.max_action_chars:
             return self.invalid(f"Questions and guesses are limited to {self.max_action_chars} characters.")
+        action = self.strip_role_tags(action)
         if self._EMPTY_GUESS_RE.fullmatch(action):
             return self.invalid("A guess must include a character name after 'guess'.")
-        guess_match = self._GUESS_RE.fullmatch(action) or self._LEGACY_GUESS_RE.fullmatch(action)
-        if guess_match is None:
+        guess = self._parse_guess(action)
+        if guess is None:
+            question = " ".join(action.split())
+            if not re.search(r"[^\W_]", question):
+                return self.invalid("Ask a yes-or-no question in words or submit 'guess <name>'.")
+            if self.state.turn >= self.max_turns - 1:
+                return self.invalid("The question budget is exhausted; submit 'guess <name>'.")
             original_gamemaster = self.gamemaster
             checkpoint, copied = self._copy_resource(original_gamemaster)
             try:
-                response = self.get_gamemaster_response(action.strip())
+                response = self.get_gamemaster_response(question)
             except Exception:
                 self._restore_gamemaster_checkpoint(original_gamemaster, checkpoint, copied)
                 return self.retryable("The gamemaster could not answer the question.")
+            if self.state.turn == self.max_turns - 2:
+                response += "\nYou have run out of questions. What is your final guess? Reply with 'guess <name>'."
             self.message(player_id, response, ta.ObservationType.GAME_MESSAGE)
             return None
         ## the action is a guess
-        action_text = re.sub(r"\s+", " ", guess_match.group("guess").strip()).casefold()
-        target_name = re.sub(r"\s+", " ", self.target_character["name"].strip()).casefold()
-        if action_text == target_name:
+        guess_key = _answer_key(guess)
+        if guess_key not in {_answer_key(char["name"]) for char in self.characters}:
+            return self.invalid(f"'{guess.strip()}' is not one of the characters. Guess a name from the list.")
+        target_name = self.target_character["name"]
+        if guess_key == _answer_key(target_name):
             return self.outcome({0: 1}, reason=f"Congratulations! Player {player_id} guessed the target character.")
-        return self.invalid(f"Invalid guess. Player {player_id} guessed incorrectly.")
+        return self.outcome({0: 0}, reason=f"Wrong guess. The target character was {target_name}.")
 
     def on_turn_limit(self) -> ta.Outcome:
         return self.outcome({0: 0}, reason="The turn limit has been reached.")

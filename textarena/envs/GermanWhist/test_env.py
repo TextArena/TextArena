@@ -6,12 +6,14 @@ with 'play X' (1-based index into the current hand).
 """
 import copy
 
+import pytest
+
 from textarena.envs.GermanWhist.env import GermanWhistEnv
 
 
-def _fresh():
+def _fresh(seed=42):
     env = GermanWhistEnv()
-    env.reset(num_players=2, seed=42)
+    env.reset(num_players=2, seed=seed)
     return env
 
 
@@ -54,8 +56,9 @@ def test_single_trick_resolves_and_redraws():
     assert len(gs["players"][1]["hand"]) == 13
 
 
-def test_full_game_reaches_terminal_with_consistent_winner():
-    env = _fresh()
+@pytest.mark.parametrize("seed", [42, 0, 1, 2, 3, 4, 5, 6, 7, 8])
+def test_full_game_reaches_terminal_with_consistent_winner(seed):
+    env = _fresh(seed)
     done = False
     for _ in range(200):
         done, _ = env.step(f"play {_legal_index(env)}")
@@ -63,14 +66,14 @@ def test_full_game_reaches_terminal_with_consistent_winner():
             break
     assert done
     gs = env.state.game_state
-    t0, t1 = gs["tricks_won"][0], gs["tricks_won"][1]
-    assert t0 + t1 == 26
-    if t0 > t1:
+    assert gs["tricks_won"][0] + gs["tricks_won"][1] == 26
+    # Only the 13 playing-phase tricks score, so the game can never be drawn.
+    p0, p1 = gs["playing_tricks_won"][0], gs["playing_tricks_won"][1]
+    assert p0 + p1 == 13
+    if p0 > p1:
         assert env.state.rewards == {0: 1, 1: -1}
-    elif t1 > t0:
-        assert env.state.rewards == {0: -1, 1: 1}
     else:
-        assert env.state.rewards == {0: 0, 1: 0}
+        assert env.state.rewards == {0: -1, 1: 1}
     played = [
         (card["rank"], card["suit"])
         for trick in gs["completed_tricks"]
@@ -149,8 +152,37 @@ def test_learning_phase_transitions_after_exactly_thirteen_tricks():
     assert gs["phase"] == "playing"
     assert gs["tricks_in_learning"] == 13
     assert gs["tricks_in_playing"] == 0
+    assert gs["tricks_won"][0] + gs["tricks_won"][1] == 13
+    assert gs["playing_tricks_won"] == {0: 0, 1: 0}
     assert len(gs["deck"]) == 0
     assert [len(gs["players"][pid]["hand"]) for pid in (0, 1)] == [13, 13]
+
+
+def test_only_playing_phase_tricks_decide_the_winner():
+    env = _fresh()
+    gs = env.state.game_state
+    # Final trick: Player 1 swept the learning phase (19 tricks overall) but the
+    # playing phase is tied 6-6, so whoever takes this trick wins the game.
+    gs.update({
+        "deck": [],
+        "next_card": None,
+        "phase": "playing",
+        "tricks_in_learning": 13,
+        "tricks_in_playing": 12,
+        "tricks_won": {0: 6, 1: 19},
+        "playing_tricks_won": {0: 6, 1: 6},
+    })
+    gs["players"][0]["hand"] = [{"rank": "A", "suit": "♠", "power": 14}]
+    gs["players"][1]["hand"] = [{"rank": "2", "suit": "♠", "power": 2}]
+
+    env.step("play 1")
+    done, _ = env.step("play 1")
+
+    assert done
+    assert gs["playing_tricks_won"] == {0: 7, 1: 6}
+    assert gs["tricks_won"] == {0: 7, 1: 19}
+    assert env.state.rewards == {0: 1, 1: -1}
+    assert "7 scoring tricks" in env.state.game_info[0]["reason"]
 
 
 def test_trump_and_lead_suit_ranking():
@@ -181,6 +213,20 @@ def test_face_down_draw_is_private_to_loser():
         for _, public_message, _, to_id in env.state.events
         if to_id == -1 and public_message != message
     )
+
+
+def test_new_face_up_card_is_announced_to_both_players():
+    env = _fresh()
+    start = len(env.state.events)
+    env.step(f"play {_legal_index(env)}")
+    env.step(f"play {_legal_index(env)}")
+    face_up = env._card_to_string(env.state.game_state["next_card"])
+    announcements = [
+        to_id for _, message, _, to_id in env.state.events[start:]
+        if message == f"The next face-up card is {face_up}."
+    ]
+    assert announcements == [-1]
+    assert not any("because you won" in message for _, message, _, _ in env.state.events)
 
 
 def test_huge_card_index_is_invalid_and_atomic():

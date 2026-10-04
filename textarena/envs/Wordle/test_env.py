@@ -8,7 +8,11 @@ import copy
 
 import pytest
 
+import textarena as ta
+import textarena.envs.Wordle.env as wordle_module
+import textarena.utils.word_lists as word_lists
 from textarena.envs.Wordle.env import WordleEnv
+from textarena.utils.word_lists import get_basic_english_words, get_headwords
 
 
 def _fresh(word_length=5, num_guesses=6):
@@ -63,6 +67,19 @@ def test_invalid_format_rejected():
     assert env.state.error_count == 1
 
 
+@pytest.mark.parametrize("word_length", [5, 7, 4])
+def test_format_error_describes_expected_action(word_length):
+    env = _fresh(word_length=word_length)
+    env.step("no brackets here")
+    notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
+    assert f"Expected {env.action_format}." in notices[-1]
+    assert env.action_format.startswith(f"a {word_length}-letter English word, for example '")
+
+    fresh = _fresh(word_length=word_length)
+    fresh.step(env.action_format.split("'")[1])
+    assert fresh.state.turn == 1 and fresh.state.error_count == 0
+
+
 def test_wrong_length_rejected():
     env = _fresh()
     # Four-letter word cannot match a five-letter secret.
@@ -97,6 +114,20 @@ def test_feedback_recorded_for_valid_non_winning_guess():
     assert word == guess
     assert len(feedback) == 5
     assert all(f in ("G", "Y", "X") for f in feedback)
+
+
+def test_guess_is_logged_and_broadcast_as_coming_from_the_player():
+    env = _fresh()
+    guess = _valid_nonsecret(env)
+    assert guess is not None
+    env.get_observation()
+    start = len(env.state.events)
+    env.step(guess)
+    echoes = [event for event in env.state.events[start:] if event[2] == ta.ObservationType.PLAYER_ACTION]
+    assert echoes == [(0, guess, ta.ObservationType.PLAYER_ACTION, -1)]
+    assert (0, guess) in env.state.logs
+    _, observations = env.get_observation()
+    assert (0, guess, ta.ObservationType.PLAYER_ACTION) in observations
 
 
 @pytest.mark.parametrize(
@@ -160,6 +191,7 @@ def test_turn_limit_reward_uses_best_guess_not_latest_guess():
     assert done
     assert env.state.turn == 2
     assert env.state.rewards == {0: 0.8}
+    assert "best guess scored 80% (a green letter counts 1, a yellow letter 0.5)" in env.state.game_info[0]["reason"]
 
 
 def test_renderer_hides_secret_until_terminal():
@@ -186,40 +218,43 @@ def test_snapshot_restores_guesses_and_dictionary_resource():
     assert env.word_list is word_list
 
 
-def test_missing_nltk_corpus_uses_offline_dictionary(monkeypatch):
-    def unavailable(*_args, **_kwargs):
+class _MissingCorpus:
+    def words(self, *args, **kwargs):
         raise LookupError("corpus unavailable")
 
-    monkeypatch.setattr("textarena.envs.Wordle.env.words.words", unavailable)
-    env = WordleEnv(word_length=5, num_guesses=2)
-    env.reset(num_players=1, seed=1)
-    secret = env.state.game_state["secret_word"]
-    assert len(secret) == 5
-    assert env._check_word(secret)
+
+@pytest.mark.parametrize("hardcore", [False, True])
+@pytest.mark.parametrize("word_length", [5, 7])
+def test_secret_and_accepted_words_do_not_depend_on_the_nltk_corpus(monkeypatch, word_length, hardcore):
+    with_corpus = WordleEnv(word_length=word_length, hardcore=hardcore)
+    monkeypatch.setattr(word_lists, "words", _MissingCorpus())
+    monkeypatch.setattr(wordle_module, "words", _MissingCorpus(), raising=False)
+    without_corpus = WordleEnv(word_length=word_length, hardcore=hardcore)
+    assert without_corpus.word_list == with_corpus.word_list
+    # "abear" and "aalii" are only in the optional NLTK corpus
+    for word in ("apple", "colour", "color", "abear", "aalii", "zzzzz"):
+        assert without_corpus._check_word(word) == with_corpus._check_word(word)
 
 
-def test_missing_pos_tagger_does_not_disable_wordle(monkeypatch):
-    def unavailable(*_args, **_kwargs):
-        raise LookupError("tagger unavailable")
+@pytest.mark.parametrize("hardcore", [False, True])
+@pytest.mark.parametrize("word_length", [5, 7])
+def test_secret_words_are_basic_english_or_headwords_and_always_accepted(word_length, hardcore):
+    env = WordleEnv(word_length=word_length, hardcore=hardcore)
+    source = get_headwords() if hardcore else get_basic_english_words()
+    assert env.word_list == sorted(word for word in source if len(word) == word_length)
+    assert all(env._check_word(word) for word in env.word_list)
 
-    monkeypatch.setattr("textarena.envs.Wordle.env.pos_tag", unavailable)
-    env = WordleEnv(word_length=5, num_guesses=2)
-    env.reset(num_players=1, seed=1)
-    assert env.state.game_state["secret_word"] in env.word_list
+
+def test_lengths_missing_from_the_secret_list_fall_back_to_the_dictionary():
+    env = WordleEnv(word_length=2, num_guesses=3, hardcore=True)
+    assert env.word_list
+    assert all(len(word) == 2 and env._check_word(word) for word in env.word_list)
 
 
-def test_partial_nltk_corpus_never_selects_an_unaccepted_target(monkeypatch):
-    def partial_corpus(name):
-        if name == "en":
-            raise LookupError("full corpus unavailable")
-        return ["zzzzz"]
-
-    monkeypatch.setattr("textarena.envs.Wordle.env.words.words", partial_corpus)
-    monkeypatch.setattr(
-        "textarena.envs.Wordle.env.pos_tag",
-        lambda tokens: [(tokens[0], "NN")],
-    )
-    env = WordleEnv(word_length=5, num_guesses=2)
-    env.reset(num_players=1, seed=1)
-    assert env._check_word(env.state.game_state["secret_word"])
-    assert "zzzzz" not in env.word_list
+def test_prompt_states_the_word_rules_with_an_example_of_the_right_length():
+    env = WordleEnv(word_length=7, num_guesses=9)
+    env.reset(num_players=1, seed=0)
+    prompt = env.state.events[0][1]
+    assert "e.g. 'example'" in prompt and "'apple'" not in prompt
+    assert "Every guess must be a 7-letter English word from the game's dictionary" in prompt
+    assert "you cannot repeat a guess" in prompt

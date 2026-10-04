@@ -8,6 +8,7 @@ import json
 
 import pytest
 
+import textarena as ta
 from textarena.envs.Crosswords.env import CrosswordsEnv
 
 
@@ -116,9 +117,30 @@ def test_many_seeded_hardcore_boards_fit_turn_budget_and_place_every_word():
         env.reset(num_players=1, seed=seed)
         gs = env.state.game_state
         letter_cells = sum(cell != "." for row in gs["solution"] for cell in row)
-        assert letter_cells <= env.max_turns
+        assert letter_cells <= env.max_letters
         assert len(gs["placed_words"]) == env.num_words
         assert set(gs["clues"]) == set(gs["placed_words"])
+
+
+@pytest.mark.parametrize("env_id", ["Crosswords-v0", "Crosswords-v0-hardcore"])
+def test_no_engine_turn_limit_and_games_finish_within_max_turns_guesses(env_id):
+    env = ta.make(env_id)
+    env.reset(num_players=1, seed=5)
+    game = env.unwrapped if hasattr(env, "unwrapped") else env
+    while hasattr(game, "env"):
+        game = game.env
+    assert game.max_turns is None and game.state.max_turns is None
+    assert game.max_letters == 30
+
+    actions = _all_correct_actions(game)
+    done = False
+    for action in actions:
+        assert not done
+        done, _ = env.step("not a guess")  # an invalid move in between never counts as a turn
+        assert not done
+        done, _ = env.step(action)
+    assert done and game.state.rewards == {0: 1}
+    assert game.state.turn == len(actions) <= game.max_letters
 
 
 @pytest.mark.parametrize(

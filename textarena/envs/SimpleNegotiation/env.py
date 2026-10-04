@@ -9,32 +9,28 @@ class SimpleNegotiationEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
 
-    def __init__(self, max_turns: Optional[int] = 10):
-        if max_turns is not None and (
-            not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0
-        ):
-            raise ValueError("max_turns must be a positive integer or None")
+    # A line is a command attempt when it starts with one of these words; anything
+    # else is free-text chat. Bracketed forms remain accepted for backwards compatibility.
+    _COMMAND_WORD_RE = re.compile(r"\[?\s*(?:accept|deny|offer)\b", re.IGNORECASE)
+    max_command_chars = 500
+
+    def __init__(self, max_turns: int = 10):
+        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
+            raise ValueError("max_turns must be a positive integer")
         self.max_turns = max_turns
         self.resource_names = ["Wheat", "Wood", "Sheep", "Brick", "Ore"]
         self.base_values = {"Wheat": 5, "Wood": 10, "Sheep": 15, "Brick": 25, "Ore": 40}
-        # Canonical commands must occupy their own line. Bracketed forms remain
-        # accepted only for backwards compatibility.
-        self.accept_pattern = re.compile(r"^\s*(?:Accept|\[\s*Accept\s*\])\s*$", re.IGNORECASE)
-        self.deny_pattern = re.compile(r"^\s*(?:Deny|\[\s*Deny\s*\])\s*$", re.IGNORECASE)
-        self.offer_pattern = re.compile(
-            r"^\s*(?:"
-            r"Offer\s*:\s*(?P<bare>[^\[\]\r\n]+?)"
-            r"|\[\s*Offer:?\s*(?:I\s+(?:give|offer)\s+)?(?P<legacy>[^\[\]\r\n]+?)\s*\]"
-            r")\s*$",
-            re.IGNORECASE,
-        )
 
     def get_board_str(self):
-        return create_board_str(
+        return self.render(self.state.current_player_id)
+
+    def render(self, player_id: int) -> str:
+        board = create_board_str(
             player_resources=self.game_state["player_resources"], player_values=self.game_state["player_values"],
             inventory_values=self.game_state["inventory_value"], current_offer=self.game_state["current_offer"],
-            viewer_id=self.state.current_player_id,
+            viewer_id=player_id,
         )
+        return f"Turn {min(self.state.turn + 1, self.max_turns)} of {self.max_turns}\n{board}"
 
     def setup(self) -> Dict[str, Any]:
         player_resources = {0: {resource: self.rng.randint(5, 25) for resource in self.resource_names}, 1: {resource: self.rng.randint(5, 25) for resource in self.resource_names}}
@@ -64,28 +60,37 @@ class SimpleNegotiationEnv(ta.GameEnv):
         )
         return (
             f"You are Player {player_id} in the Negotiation Game.\nYou have some resources, and your task is to trade such that the total value of your resources increases.\n"
-            f"The resources and associated values you currently have are:\n\t+ {resource_value_list}\nAt each turn, you can talk to your opponent and make a trade offer.\n"
-            "Put any structured command on its own line:\n"
-            "  - Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep\n"
-            "  - Accept — accept an incoming offer.\n"
-            "  - Deny — deny an incoming offer (default).\n"
-            f"The game lasts for {self.max_turns} turns in total."
+            f"The resources and associated values you currently have are:\n\t+ {resource_value_list}\n"
+            "Your values are private, and your opponent values the resources differently.\n"
+            f"The game lasts for {self.max_turns} turns in total; players alternate, starting with Player 0. When it ends, "
+            "each inventory is valued at its owner's prices, and the player whose inventory value increased more wins "
+            "(equal increases are a draw).\n"
+            "At each turn, you can talk to your opponent and make a trade offer. Your whole message is shown to your "
+            "opponent; put at most one structured command on its own line:\n"
+            "  - Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep — you give the resources before '->' and receive the ones after it.\n"
+            "  - Accept — accept the offer you just received; the trade executes immediately.\n"
+            "  - Deny — reject the offer you just received.\n"
+            "An offer you receive is rejected automatically unless you Accept it on your next turn, and making a "
+            "counteroffer also rejects it. Any line that begins with Offer, Accept, or Deny is read as a command and "
+            "must match one of these formats exactly."
         )
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         gs = self.game_state
 
-        command, command_match, parse_error = self._extract_command(action)
+        command, offer_text, parse_error = self._extract_command(action)
         if parse_error is not None:
             return self.invalid(parse_error)
 
         # Parse and validate any new offer up front so an invalid move never mutates state.
         parsed_offer = None
         if command == "offer":
-            offer_text = command_match.group("bare") or command_match.group("legacy")
-            parsed_offer = self._parse_offer(offer_text.strip())
+            parsed_offer = self._parse_offer(offer_text)
             if not parsed_offer:
-                return self.invalid(f"Player {player_id} made a trade offer in an incorrect format.")
+                return self.invalid(
+                    f"Player {player_id} made a trade offer in an incorrect format. "
+                    "Use 'Offer: <qty> <resource>, ... -> <qty> <resource>, ...', e.g. 'Offer: 2 Wheat, 1 Ore -> 3 Sheep'."
+                )
             if not self._check_if_sufficient_resources(trade_resources=parsed_offer["offered_resources"], player_resources=gs["player_resources"][player_id]):
                 return self.invalid(f"Player {player_id} tried to make a trade offer without having the necessary resources.")
 
@@ -127,29 +132,46 @@ class SimpleNegotiationEnv(ta.GameEnv):
             self.broadcast(f"Player {player_id} made no new trade offer.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
         return None
 
-    def _extract_command(
-        self, action: str
-    ) -> Tuple[Optional[str], Optional[re.Match], Optional[str]]:
-        """Return the one structured command present in an otherwise free-text message."""
+    def _extract_command(self, action: str) -> Tuple[Optional[str], Optional[str], Optional[str]]:
+        """Return (command, offer text, error) for the one structured command in an otherwise free-text message."""
         commands = []
         for line in action.splitlines():
-            if self.accept_pattern.fullmatch(line):
-                commands.append(("accept", None))
-            elif self.deny_pattern.fullmatch(line):
-                commands.append(("deny", None))
-            else:
-                offer_match = self.offer_pattern.fullmatch(line)
-                if offer_match:
-                    commands.append(("offer", offer_match))
-                elif re.match(r"^\s*\[?\s*(?:Accept|Deny|Offer)\b", line, re.IGNORECASE):
-                    return None, None, "Malformed structured command."
-
+            parsed = self._parse_command_line(line)
+            if parsed is None:
+                continue
+            if parsed[0] == "malformed":
+                return None, None, (
+                    f"Malformed command line: '{line.strip()[:80]}'. Lines that begin with Accept, Deny, or Offer are "
+                    "commands and must be exactly 'Accept', 'Deny', or 'Offer: <offered> -> <requested>' "
+                    "(e.g. 'Offer: 2 Wheat, 1 Ore -> 3 Sheep')."
+                )
+            commands.append(parsed)
         if len(commands) > 1:
             return None, None, "Submit at most one structured command per turn."
         if not commands:
             return None, None, None
-        command, match = commands[0]
-        return command, match, None
+        command, offer_text = commands[0]
+        return command, offer_text, None
+
+    def _parse_command_line(self, line: str) -> Optional[Tuple[str, Optional[str]]]:
+        """None for chat, ("accept"|"deny", None), ("offer", body), or ("malformed", None)."""
+        text = line.strip()
+        if not self._COMMAND_WORD_RE.match(text):
+            return None
+        if len(text) > self.max_command_chars:
+            return ("malformed", None)
+        bracketed = text.startswith("[") and text.endswith("]")
+        inner = text[1:-1].strip() if bracketed else text
+        keyword = inner.lower()
+        if keyword in ("accept", "deny"):
+            return (keyword, None)
+        if keyword.startswith("offer"):
+            rest = inner[len("offer"):].lstrip()
+            if rest.startswith(":"):
+                return ("offer", rest[1:].strip())
+            if bracketed:  # legacy "[Offer 2 Wheat -> 3 Ore]"
+                return ("offer", rest)
+        return ("malformed", None)
 
     def _execute_trade(self, acceptor_id: int) -> None:
         """Execute the currently pending trade (already validated)."""
@@ -190,7 +212,7 @@ class SimpleNegotiationEnv(ta.GameEnv):
         """Parse a trade offer string into a structured dictionary"""
         try:
             offer_str = ' '.join(offer_str.split()) # Remove any line breaks and extra spaces for robust parsing
-            offer_str = re.sub(r'[.,!?]+$', '', offer_str) # Remove trailing punctuation (e.g., period)
+            offer_str = offer_str.rstrip('.,!?') # Remove trailing punctuation (e.g., period)
             offer_str = re.sub(r'^(I\s+(?:give|offer)\s+)', '', offer_str, flags=re.IGNORECASE) # Remove leading phrases like "I give" or "I offer"
             offer_parts = re.split(r'\s*->\s*', offer_str) # Split by '->' to separate offered and requested resources
             if len(offer_parts) != 2: return None  # Erroneous offer

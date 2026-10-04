@@ -104,6 +104,35 @@ def test_invalid_format_increments_error():
     assert env.state.game_state["accepted_idx"] is None
 
 
+def test_repeated_invalid_moves_score_like_a_loss():
+    env = _fresh()
+    env.step("skip")
+    done, _ = env.step("skip")
+    assert done
+    assert env.state.rewards == {0: 0.0}
+    assert env.state.game_info[0]["invalid_move"] is True
+    assert env.state.game_info[0]["reason"].startswith("Invalid Move:")
+
+
+def test_value_messages_state_position_and_flag_the_final_value():
+    env = _fresh(N=3)
+    draws = env.state.game_state["draws"]
+    for position in range(3):
+        if position:
+            env.step("continue")
+        _, observation = env.get_observation()
+        text = "\n".join(message for _, message, _ in observation)
+        assert f"The current value ({position + 1} of 3) is {draws[position]:.4f}." in text
+        assert ("This is the final value" in text) == (position == 2)
+
+
+@pytest.mark.parametrize("seed", range(20))
+def test_draws_are_exactly_the_displayed_values(seed):
+    env = SecretaryEnv(N=10)
+    env.reset(num_players=1, seed=seed)
+    assert all(value == float(f"{value:.4f}") for value in env.state.game_state["draws"])
+
+
 def test_snapshot_restore_and_repeat_reset_restore_sequence_position():
     env = _fresh()
     original_draws = env.state.game_state["draws"].copy()

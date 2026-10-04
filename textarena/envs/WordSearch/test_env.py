@@ -10,9 +10,15 @@ import copy
 import pytest
 
 from textarena.envs.WordSearch.env import WordSearchEnv
+from textarena.utils.word_lists import get_common_words, get_headwords
 
 
-def _fresh(max_turns=50):
+class _MissingCorpus:
+    def words(self, *_args, **_kwargs):
+        raise LookupError("corpus unavailable")
+
+
+def _fresh(max_turns=None):
     env = WordSearchEnv(max_turns=max_turns)
     env.reset(num_players=1, seed=42)
     return env
@@ -22,6 +28,18 @@ def _endpoints(word, row, col, direction):
     if direction == "across":
         return row, col, row, col + len(word) - 1
     return row, col, row + len(word) - 1, col
+
+
+def _correct_guesses(env):
+    return [" ".join(map(str, _endpoints(word, *placement))) for word, placement in env.placed_words.items()]
+
+
+def _incorrect_guesses(env, count):
+    """Distinct single-cell selections; every placed word has at least two letters."""
+    size = len(env.state.game_state["board"])
+    cells = [(row, col) for row in range(size) for col in range(size)][:count]
+    assert len(cells) == count
+    return [f"{row} {col} {row} {col}" for row, col in cells]
 
 
 def test_reset_initial_state():
@@ -203,13 +221,13 @@ def test_helpers_reject_bad_bounds_and_direction():
     assert not env._can_place_word(grid, "DOG", "across", 0, 3)
 
 
-@pytest.mark.parametrize("kwargs", [{"max_turns": 0}, {"hardcore": "yes"}])
+@pytest.mark.parametrize("kwargs", [{"max_turns": 0}, {"max_turns": True}, {"hardcore": "yes"}])
 def test_invalid_configuration_rejected(kwargs):
     with pytest.raises(ValueError):
         WordSearchEnv(**kwargs)
 
 
-def test_turn_limit_counts_successful_guess_and_awards_word_progress():
+def test_explicit_guess_cap_counts_correct_guesses_and_awards_word_progress():
     env = _fresh(max_turns=1)
     word, (row, col, direction) = next(iter(env.placed_words.items()))
     action = " ".join(map(str, _endpoints(word, row, col, direction)))
@@ -218,3 +236,60 @@ def test_turn_limit_counts_successful_guess_and_awards_word_progress():
     assert env.state.turn == 1
     assert env.state.game_info[0]["turn_count"] == 1
     assert env.state.rewards == {0: 1 / len(env.placed_words)}
+    assert "limit of 1 guesses" in env.state.game_info[0]["reason"]
+
+
+def test_default_game_allows_all_incorrect_attempts_after_finding_a_word():
+    env = _fresh()
+    env.step(_correct_guesses(env)[0])
+    misses = _incorrect_guesses(env, env.MAX_INCORRECT_TRIES)
+    for miss in misses[:-1]:
+        done, _ = env.step(miss)
+        assert not done
+    assert env.num_incorrect_tries == 1
+    done, _ = env.step(misses[-1])
+    assert done
+    assert env.state.turn == 1 + env.MAX_INCORRECT_TRIES
+    assert env.state.rewards == {0: round(1 / env.num_words, 3)}
+    assert env.state.game_info[0]["reason"].startswith("No more incorrect tries remaining")
+
+
+def test_default_guess_cap_is_never_reached_by_the_longest_game():
+    env = _fresh()
+    assert env.max_turns == env.num_words + env.MAX_INCORRECT_TRIES
+    for guess in _correct_guesses(env)[:-1]:
+        done, _ = env.step(guess)
+        assert not done
+    for miss in _incorrect_guesses(env, env.MAX_INCORRECT_TRIES):
+        done, _ = env.step(miss)
+    assert done
+    assert env.state.turn == env.num_words - 1 + env.MAX_INCORRECT_TRIES < env.max_turns
+    assert env.state.game_info[0]["reason"].startswith("No more incorrect tries remaining")
+    assert env.state.rewards == {0: round((env.num_words - 1) / env.num_words, 3)}
+
+
+def test_prompt_states_the_limits_that_can_end_the_game():
+    default_prompt = _fresh().prompt(0)
+    assert "You have a total of 20 incorrect attempts. Correct guesses do not use them up" in default_prompt
+    assert "guesses in total" not in default_prompt
+
+    capped_prompt = _fresh(max_turns=10).prompt(0)
+    assert "The game also ends after 10 guesses in total, correct or incorrect." in capped_prompt
+
+
+@pytest.mark.parametrize("hardcore", [False, True])
+def test_missing_nltk_corpus_falls_back_to_bundled_word_lists(monkeypatch, hardcore):
+    monkeypatch.setattr("textarena.envs.WordSearch.env.words", _MissingCorpus())
+    first = WordSearchEnv(hardcore=hardcore)
+    second = WordSearchEnv(hardcore=hardcore)
+    expected = get_headwords() if hardcore else get_common_words()
+    assert first.word_list == sorted(word.upper() for word in expected)
+
+    first.reset(num_players=1, seed=3)
+    second.reset(num_players=1, seed=3)
+    assert first.state.game_state == second.state.game_state
+    assert set(first.placed_words) <= set(first.word_list)
+    done = False
+    for guess in _correct_guesses(first):
+        done, _ = first.step(guess)
+    assert done and first.state.rewards == {0: 1.0}

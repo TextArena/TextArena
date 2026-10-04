@@ -1,11 +1,43 @@
+import functools
 import json
 import importlib.resources
 import os
 import re
 import unicodedata
-from typing import Optional, Tuple, Dict, List, Any, Union
+from typing import Optional, Set, Tuple, Dict, List, Any, Union
 
 import textarena as ta
+
+_TOKEN = re.compile(r"[^\W_]+")
+_ARTICLES = frozenset({"a", "an", "the"})
+# Words of a multi-word target that a clue may still use (e.g. "of" for "The Lord of the Rings").
+_FUNCTION_WORDS = frozenset({
+    "a", "an", "the", "and", "or", "but", "nor", "if", "so", "as", "than", "then", "not", "no",
+    "at", "by", "for", "from", "in", "into", "of", "off", "on", "onto", "out", "over", "to", "up", "upon",
+    "with", "without", "i", "me", "my", "you", "your", "he", "him", "his", "she", "her", "it", "its", "we",
+    "us", "our", "they", "them", "their", "is", "are", "was", "were", "be", "been", "am", "do", "does", "did",
+    "de", "del", "der", "des", "di", "du", "el", "en", "la", "le", "les", "und", "van", "von",
+})
+# Lowercase Cyrillic, Greek and Latin letters that render like the Latin letter they map to.
+_CONFUSABLES = str.maketrans({
+    "а": "a", "в": "b", "е": "e", "к": "k", "м": "m", "н": "h", "о": "o", "р": "p", "с": "c", "т": "t",
+    "у": "y", "х": "x", "ѕ": "s", "і": "i", "ј": "j", "һ": "h", "ԁ": "d", "ԛ": "q", "ԝ": "w", "ӏ": "l",
+    "α": "a", "β": "b", "γ": "y", "ε": "e", "η": "n", "ι": "i", "κ": "k", "ν": "v", "ο": "o", "ρ": "p",
+    "τ": "t", "υ": "u", "χ": "x", "ı": "i", "ɑ": "a", "ɡ": "g",
+})
+_IN_WORD_GAP = r"(?:[^\w\s]|_)*"  # punctuation splitting a word, as in "ca-mel" or "U.S.A."
+
+
+@functools.lru_cache(maxsize=4096)
+def _phrase_pattern(tokens: Tuple[str, ...]) -> "re.Pattern[str]":
+    """Whole-word pattern for a forbidden word or phrase in match form."""
+    parts = [_IN_WORD_GAP.join(map(re.escape, tokens[0]))]
+    for previous, token in zip(tokens, tokens[1:]):
+        # Words may run together ("icecream"), but single letters need a separator so
+        # that "U.S." does not match the word "us".
+        gap = r"[\W_]*" if len(previous) > 1 and len(token) > 1 else r"[\W_]+"
+        parts.append(gap + _IN_WORD_GAP.join(map(re.escape, token)))
+    return re.compile(r"(?<![^\W_])" + "".join(parts) + r"(?![^\W_])")
 
 
 class TabooEnv(ta.GameEnv):
@@ -60,40 +92,82 @@ class TabooEnv(ta.GameEnv):
         """Normalize configured text while preserving its display casing."""
         return " ".join(unicodedata.normalize("NFKC", value).split())
 
-    @classmethod
-    def _normalize_for_match(cls, value: str) -> str:
-        normalized = cls._clean_text(value).casefold()
-        return "".join(
-            char for char in normalized if unicodedata.category(char) != "Cf"
+    @staticmethod
+    def _match_form(value: str) -> str:
+        """Text as the rules compare it: case, accents, invisible characters and look-alike letters ignored."""
+        decomposed = unicodedata.normalize("NFKD", unicodedata.normalize("NFKC", value).casefold())
+        kept = "".join(
+            char for char in decomposed if not unicodedata.combining(char) and unicodedata.category(char) != "Cf"
         )
+        return " ".join(kept.translate(_CONFUSABLES).split())
+
+    @staticmethod
+    def _without_parentheticals(text: str) -> str:
+        """Drop qualifiers in parentheses, e.g. 'Kabul (Afghanistan)' -> 'Kabul'."""
+        kept, depth = [], 0
+        for char in text:
+            if char == "(":
+                depth += 1
+            elif char == ")" and depth:
+                depth -= 1
+            elif not depth:
+                kept.append(char)
+        return " ".join("".join(kept).split())
 
     @classmethod
     def _contains_forbidden_word(cls, action: str, forbidden_words: List[str]) -> bool:
-        """Match words and multi-word phrases across harmless separator variants."""
-        normalized_action = cls._normalize_for_match(action)
-        for forbidden in forbidden_words:
-            normalized_word = cls._normalize_for_match(forbidden)
-            if not normalized_word:
+        """Match whole words and phrases, also when split by punctuation or spelled out letter by letter."""
+        text = cls._match_form(action)
+        spelled_out, run = [], []
+        for token in _TOKEN.findall(text) + [""]:
+            if len(token) == 1:
+                run.append(token)
                 continue
-
-            exact_pattern = re.compile(r"(?<!\w)" + re.escape(normalized_word) + r"(?!\w)")
-            if exact_pattern.search(normalized_action):
+            if len(run) > 1:
+                spelled_out.append("".join(run))
+            run = []
+        for forbidden in forbidden_words:
+            tokens = tuple(_TOKEN.findall(cls._match_form(forbidden)))
+            if not tokens:
+                continue
+            if _phrase_pattern(tokens).search(text):
                 return True
-
-            # A phrase cannot be evaded by replacing spaces with punctuation,
-            # e.g. "ice-cream" for the forbidden phrase "ice cream".
-            tokens = re.findall(r"[^\W_]+", normalized_word, re.UNICODE)
-            if len(tokens) > 1:
-                phrase_pattern = re.compile(
-                    r"(?<!\w)" + r"[\W_]+".join(map(re.escape, tokens)) + r"(?!\w)"
-                )
-                if phrase_pattern.search(normalized_action):
-                    return True
+            joined = "".join(tokens)
+            if len(joined) > 1 and any(joined in letters for letters in spelled_out):
+                return True
         return False
+
+    def _forbidden_words(self) -> List[str]:
+        """The target, every taboo word, and each significant word of the target on its own."""
+        gs = self.game_state
+        core = _TOKEN.findall(self._match_form(self._without_parentheticals(gs["word_to_guess"])))
+        target_words = [word for word in core if len(word) > 1 and word not in _FUNCTION_WORDS]
+        return [gs["word_to_guess"], *gs["taboo_words"], *target_words]
+
+    @classmethod
+    def _answer_keys(cls, text: str) -> Set[str]:
+        """Comparison keys of a guess or answer: letters and digits only, a leading article optional."""
+        tokens = _TOKEN.findall(cls._match_form(text))
+        keys = {"".join(tokens)}
+        if len(tokens) > 1 and tokens[0] in _ARTICLES:
+            keys.add("".join(tokens[1:]))
+        keys.discard("")
+        return keys
+
+    @classmethod
+    def _is_correct_guess(cls, guess: str, target: str) -> bool:
+        """Also accept the target without parenthesized qualifiers or an inverted official-name suffix."""
+        names = {target, cls._without_parentheticals(target)}
+        for name in list(names):
+            inverted = re.fullmatch(r"(.+?),\s*[^,]*\bof", name, re.IGNORECASE)  # "Palestine, State of"
+            if inverted:
+                names.add(inverted.group(1))
+        answers = set().union(*(cls._answer_keys(name) for name in names))
+        return bool(cls._answer_keys(guess) & answers)
 
     @classmethod
     def _parse_guess(cls, action: str) -> Optional[str]:
-        """Return a normalized title-like guess, or None for malformed text."""
+        """Return the guess text, or None for malformed text."""
         if not isinstance(action, str) or any(char in action for char in "\r\n"):
             return None
         guess = action.strip()
@@ -103,7 +177,7 @@ class TabooEnv(ta.GameEnv):
             return None
         if not any(char.isalpha() or char.isdigit() for char in guess):
             return None
-        return cls._normalize_for_match(guess)
+        return guess
 
     def _load_data(self, data_path: Optional[str] = None) -> Dict[str, List[str]]:
         """Load the word list based on the specified categories from the JSON file."""
@@ -132,7 +206,7 @@ class TabooEnv(ta.GameEnv):
             for target, taboo_words in category_data.items():
                 if (
                     not isinstance(target, str)
-                    or not target.strip()
+                    or not _TOKEN.search(target)  # a guess needs a letter or digit to match
                     or not isinstance(taboo_words, list)
                     or any(not isinstance(word, str) for word in taboo_words)
                 ):
@@ -188,19 +262,29 @@ class TabooEnv(ta.GameEnv):
 
     def prompt(self, player_id: int) -> str:
         team_id = self._get_team_id(player_id)
+        scoring = (
+            "Each correct guess scores a point for the team, and the team moves on to its next word. "
+            f"After {self.max_rounds} rounds (one turn per team each), the team with more points wins; equal scores draw.\n"
+            f"Each player may make up to {self.max_attempts_per_player} actions during each team turn.\n"
+        )
         if self.state.role_mapping[player_id] == "Clue Giver":
             return (
                 f"You are Player {player_id}, the Clue Giver for Team {team_id} in the Taboo game.\n"
-                "Your goal is to provide clues to help the Guesser guess the word without using the taboo words or the word to guess.\n"
-                f"Each player may make up to {self.max_attempts_per_player} actions during each team turn.\n"
-                "On your turn, simply type your clue.\n"
+                "Your goal is to provide clues that help your teammates guess the word without using the taboo words or the word to guess.\n"
+                "A clue must not contain the word to guess, any of its words (short words such as 'the' or 'of' excepted), or a taboo word. "
+                "Case, accents, punctuation, look-alike letters and spelling a word out letter by letter do not get around this. "
+                "Such a clue is rejected; a second rejected clue in a row costs your team its current word and ends its turn.\n"
+                + scoring
+                + "On your turn, simply type your clue.\n"
             )
         else:
             return (
-                f"You are Player {player_id}, the Guesser for Team {team_id} in the Taboo game.\n"
-                "Your goal is to guess the secret word based on the clues provided by the Clue Giver.\n"
-                f"Each player may make up to {self.max_attempts_per_player} actions during each team turn.\n"
-                "On your turn, simply reply with your guess. For example: 'elephant'.\n"
+                f"You are Player {player_id}, a Guesser for Team {team_id} in the Taboo game.\n"
+                "Your goal is to guess the secret word based on the clues provided by your team's Clue Giver.\n"
+                + scoring
+                + "On your turn, simply reply with your guess on a single line. For example: 'elephant'. "
+                "Case, accents, punctuation and a leading 'the' or 'a' are ignored, and a qualifier in parentheses may be left out "
+                "(e.g. 'Kabul' for 'Kabul (Afghanistan)').\n"
             )
 
     def on_start(self):
@@ -214,25 +298,26 @@ class TabooEnv(ta.GameEnv):
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         gs = self.game_state
+        # Rules are checked on exactly the text teammates will see.
+        text = self.strip_role_tags(action)
         if self.state.role_mapping[player_id] == "Clue Giver":
-            if not action.strip():
+            if not text.strip():
                 return self.invalid("The clue must not be empty.")
-            forbidden_words = gs["taboo_words"] + [gs["word_to_guess"]]
-            if self._contains_forbidden_word(action, forbidden_words):
+            if self._contains_forbidden_word(text, self._forbidden_words()):
                 return self.invalid(f"The Clue Giver (Player {player_id}) mentioned a taboo word, or the target word.")
             next_player = self._next_player_within_team(player_id)
             correct_guess = False
 
         else:  # Guesser
-            guess = self._parse_guess(action)
+            guess = self._parse_guess(text)
             if guess is None:
                 return self.invalid("Invalid guess format. Please reply with just your guess, e.g., 'apple'.")
-            correct_guess = guess == self._normalize_for_match(gs["word_to_guess"])
+            correct_guess = self._is_correct_guess(guess, gs["word_to_guess"])
             next_player = gs["current_team"] * self.team_size if correct_guess else self._next_player_within_team(player_id)
 
         # Invalid actions must not mutate state or enter a teammate's observation.
         for teammate_id in self._get_team_members(player_id):
-            self.message(teammate_id, action, ta.ObservationType.PLAYER_ACTION, from_id=player_id)
+            self.message(teammate_id, text, ta.ObservationType.PLAYER_ACTION, from_id=player_id)
         gs["turn_in_round"] += 1
 
         if correct_guess:

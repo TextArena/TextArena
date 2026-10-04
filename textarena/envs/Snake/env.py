@@ -3,20 +3,20 @@ from collections import deque
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
-from textarena.envs.Snake.renderer import create_board_str
+from textarena.envs.Snake.renderer import create_board_str, head_symbol
 
 _DIR_DELTAS = {"up":(0,1), "w":(0,1), "down":(0,-1), "s":(0,-1), "left":(-1,0), "a":(-1,0), "right":(1,0), "d":(1,0)}
+_DIR_NAMES = {"w": "up", "s": "down", "a": "left", "d": "right"}
 _DIR_RE = re.compile(r"^\s*\[?\s*(up|down|left|right|w|a|s|d)\s*\]?\s*$", re.I)
+_DEATH_DESCRIPTIONS = {"wall": "hit the wall", "head-on": "collided head-on", "body collision": "ran into a snake body"}
 
 def _dir_token(move: str) -> Optional[str]:
-    """Return the direction token if *move* is a single bare direction (brackets tolerated)."""
+    """Return the direction name if *move* is a single bare direction (brackets tolerated)."""
     m = _DIR_RE.match(move)
-    return m.group(1).lower() if m else None
-
-def _step_from_str(move: str) -> Tuple[int, int]:
-    """Return (dx, dy) corresponding to the direction token in *move*."""
-    token = _dir_token(move)
-    return _DIR_DELTAS[token] if token else (0, 0) # unreachable if caller validated the string first
+    if not m:
+        return None
+    token = m.group(1).lower()
+    return _DIR_NAMES.get(token, token)
 
 class Snake:
     """ Represents a snake in the game with position and alive status """
@@ -33,6 +33,7 @@ class SnakeEnv(ta.GameEnv):
     min_players = 2
     max_players = 15
     broadcast_actions = False  # moves are sealed until the round resolves
+    error_allowance = 0  # an invalid move kills the snake immediately
 
     def __init__(self, width: int = 10, height: int = 10, num_apples: int = 3, max_turns: int = 100):
         if any(not isinstance(value, int) or isinstance(value, bool) for value in (width, height)):
@@ -78,20 +79,8 @@ class SnakeEnv(ta.GameEnv):
         return create_board_str(width=self.width, height=self.height, snakes=self.state.game_state["snakes"], apples=self.state.game_state["apples"])
 
     def _get_board_string(self, snakes: Dict[int, "Snake"], apples: List[Tuple[int, int]]) -> str:
-        """ASCII board. Top row printed last so y grows upward."""
-        board = [["." for _ in range(self.width)] for _ in range(self.height)]
-        for ax, ay in apples:
-            board[ay][ax] = "A"
-        for pid, snake in snakes.items():
-            if not snake.alive: continue
-            for idx, (x, y) in enumerate(snake.positions):
-                board[y][x] = format(pid, "X") if idx == 0 else "#"
-        horiz = "+" + "-" * (self.width * 2 + 1) + "+"
-        lines = [horiz]
-        for row in reversed(board):
-            lines.append("| " + " ".join(row) + " |")
-        lines.append(horiz)
-        return "\n".join(lines)
+        """ASCII board. Top row printed first so y grows upward."""
+        return create_board_str(width=self.width, height=self.height, snakes=snakes, apples=apples)
 
     def setup(self) -> Dict[str, Any]:
         num_players = self.state.num_players
@@ -116,46 +105,64 @@ class SnakeEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         return (
             f"{self.state.num_players}-Player Snake on a {self.width}×{self.height} grid.\n"
-            f"You control snake {player_id}. Valid moves: 'up'/'down'/'left'/'right' (or 'w'/'s'/'a'/'d').\n"
-            f"Objective: survive longest or be the longest and get the highest score (turn limit {self.max_turns} turns)."
+            f"You control snake {player_id}; its head is shown as '{head_symbol(player_id)}'.\n"
+            "Every round, all living snakes move one cell at the same time. Reply with one direction: "
+            "'up', 'down', 'left' or 'right' (or 'w', 's', 'a', 'd'); 'up' moves toward the top of the printed board. "
+            "Moves stay hidden until the round resolves.\n"
+            f"Board legend: heads show snake numbers (snakes 10-14 appear as A-E), '#' is a body segment, '*' is an apple, '.' is empty.\n"
+            "Rules:\n"
+            "- Moving onto an apple scores 1 point and grows your snake by one segment; eaten apples reappear on random empty cells.\n"
+            "- A snake dies if it moves off the board, into a cell occupied by any snake (including itself and snakes that die this round), "
+            "into the same cell as another head, or trades places with another head. A tail cell is free if its snake moves on this round "
+            "without eating or dying.\n"
+            "- An invalid reply kills your snake immediately.\n"
+            f"The game ends when at most one snake is alive or after {self.max_turns} rounds. Living snakes rank above dead ones, "
+            "dead snakes rank by the round they died in (later is better), and score breaks ties; snakes that are still tied share a rank. "
+            "Rewards are spread evenly from +1 (best rank) to -1 (worst rank); if every snake ties, all get 0."
         )
 
     def render(self, player_id: int) -> str:
-        return f"Current Board:\n{self.game_state['board_state']}"
+        gs = self.game_state
+        lines = [f"Current Board:\n{gs['board_state']}", f"Rounds played: {gs['round_count']}/{self.max_turns}"]
+        for pid, snake in gs["snakes"].items():
+            you = " (you)" if pid == player_id else ""
+            if snake.alive:
+                lines.append(f"Snake {pid}{you} [{head_symbol(pid)}]: length {len(snake.positions)}, score {gs['scores'][pid]}")
+            else:
+                lines.append(f"Snake {pid}{you}: died in round {gs['death_turn'][pid] + 1} ({snake.death_reason}), score {gs['scores'][pid]}")
+        return "\n".join(lines)
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
-        gs = self.game_state
-        snakes = gs["snakes"]
-
-        # ── validate & possibly kill on invalid ──
         token = _dir_token(action)
         if token is None:
-            snake = snakes[player_id]
-            if snake.alive:
-                snake.alive = False
-                snake.death_reason = "invalid move"
-                gs["death_turn"][player_id] = gs["round_count"]
-                self.eliminate(player_id)
-                self.broadcast(f"Snake {player_id} died due to invalid move.", ta.ObservationType.GAME_MESSAGE)
-            gs["pending_actions"][player_id] = None  # clear any stale action
-            gs["board_state"] = self._get_board_string(snakes, gs["apples"])
-        else:
-            gs["pending_actions"][player_id] = action
+            return self.invalid("Reply with exactly one direction: up, down, left or right (or w, s, a, d).")
+        self.game_state["pending_actions"][player_id] = token
+        return self._resolve_round_if_ready()
 
-        # ── resolve turn if all living snakes have acted ──
-        outcome = None
-        living = [p for p, s in snakes.items() if s.alive]
-        if living and all(gs["pending_actions"][p] for p in living):
-            outcome = self._apply_simultaneous_moves()
-            for p in living:
-                gs["pending_actions"][p] = None
-        if outcome is not None:
-            return outcome
+    def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
+        gs = self.game_state
+        snake = gs["snakes"][player_id]
+        if snake.alive:
+            snake.alive = False
+            snake.death_reason = "invalid move"
+            gs["death_turn"][player_id] = gs["round_count"]
+            self.eliminate(player_id)
+            self.broadcast(f"Snake {player_id} died due to an invalid move: {reason}", ta.ObservationType.GAME_MESSAGE)
+            gs["board_state"] = self._get_board_string(gs["snakes"], gs["apples"])
+        gs["pending_actions"][player_id] = None
+        return self._resolve_round_if_ready()
 
-        alive = [pid for pid, s in snakes.items() if s.alive]
-        if len(alive) <= 1:
-            return self._finalise_rewards("Player outlived all others." if alive else "All snakes dead.")
-        return None
+    def _resolve_round_if_ready(self) -> Optional[ta.Outcome]:
+        gs = self.game_state
+        living = [pid for pid, snake in gs["snakes"].items() if snake.alive]
+        if len(living) <= 1:
+            return self._finalise_rewards(f"Snake {living[0]} outlived all others." if living else "All snakes are dead.")
+        if not all(gs["pending_actions"][pid] for pid in living):
+            return None
+        outcome = self._apply_simultaneous_moves()
+        for pid in gs["pending_actions"]:
+            gs["pending_actions"][pid] = None
+        return outcome
 
     def on_turn_limit(self) -> ta.Outcome:
         return self._finalise_rewards("Turn limit reached - best score wins tie-break.")
@@ -217,7 +224,7 @@ class SnakeEnv(ta.GameEnv):
             # Skip if no pending action (e.g., player died from invalid move)
             if gs["pending_actions"][pid] is None:
                 continue
-            dx, dy = _step_from_str(gs["pending_actions"][pid])
+            dx, dy = _DIR_DELTAS[gs["pending_actions"][pid]]
             hx, hy = snake.head
             desired[pid] = (hx + dx, hy + dy)
         planned = dict(desired)
@@ -300,9 +307,19 @@ class SnakeEnv(ta.GameEnv):
                 break
             apples.append(new_apple)
 
-        # 8. Update the board state
+        # 8. Update the board state and reveal the round's moves
         gs["board_state"] = self._get_board_string(snakes, apples)
         gs["round_count"] += 1
+        results = [f"Round {gs['round_count']} results:"]
+        for pid in sorted(planned):
+            direction = gs["pending_actions"][pid]
+            if pid in deaths:
+                results.append(f"- Snake {pid} moved {direction} and died ({_DEATH_DESCRIPTIONS[deaths[pid]]}).")
+            elif pid in eating:
+                results.append(f"- Snake {pid} moved {direction} and ate an apple.")
+            else:
+                results.append(f"- Snake {pid} moved {direction}.")
+        self.broadcast("\n".join(results), ta.ObservationType.GAME_MESSAGE)
 
         # 9. Check for end-of-game conditions
         alive = [pid for pid, s in snakes.items() if s.alive]

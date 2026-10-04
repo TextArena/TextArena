@@ -1,121 +1,72 @@
-# Minesweeper Environment Documentation
+# Minesweeper
 
-## Overview
-**Minesweeper** is a classic single-player puzzle game where the objective is to reveal every safe cell without selecting a mine. Adjacent numbers indicate how many neighboring mines surround a cell, and the first move is guaranteed to be safe.
+Reveal every safe cell of a hidden minefield, using the count of neighboring mines shown on each revealed cell to work
+out where the mines are ([rules](https://en.wikipedia.org/wiki/Minesweeper_%28video_game%29)). The first reveal is
+always safe.
 
-## Action Space
+<!-- BEGIN GENERATED: variants -->
+**Players:** 1
 
-- **Format:** Submit `row column` to reveal a cell.
-- **Example:** `3 2` reveals the cell at row 3, column 2.
+**`-mdp` observation:** game messages and the latest board (no raw player actions)
 
-## Observation Space
+| Env ID | Parameters |
+| --- | --- |
+| `Minesweeper-v0` | `rows=8`, `cols=8`, `num_mines=10`, `max_turns=100` |
+| `Minesweeper-v0-hard` | `rows=12`, `cols=12`, `num_mines=30`, `max_turns=100` |
+| `Minesweeper-v0-medium` | `rows=10`, `cols=10`, `num_mines=20`, `max_turns=100` |
+| `Minesweeper-v0-small` | `rows=5`, `cols=5`, `num_mines=5`, `max_turns=100` |
 
-**Reset Observations**
-On reset, the player receives a prompt containing the game instructions and the initial board state. For example:
+Append `-mdp` to any ID for the state-complete variant (e.g. `Minesweeper-v0-mdp`).
+<!-- END GENERATED: variants -->
 
-```plaintext
-You are Player 0. You are playing the Minesweeper game.
-The objective of the game is to reveal all cells that do not contain mines.
-Reply with the row and column coordinates you want to reveal, in the format 'row col'.
-For example, '3 2' reveals the cell in Row 3, Column 2.
-On your first move, you will reveal an area around the cell you choose to ensure a safe start.
-The current board layout is shown below. Unrevealed cells are dots, and revealed numbers show the count of adjacent mines.
-Use logic and deduction to avoid revealing cells with mines!
-Do not choose a cell that has already been revealed.
-Here is the current board layout:
+## Rules
 
-   0  1  2  3  4  5  6  7
- 0  .  .  .  .  .  .  .  .
- 1  .  .  .  .  .  .  .  .
- 2  .  .  .  .  .  .  .  .
- 3  .  .  .  .  .  .  .  .
- 4  .  .  .  .  .  .  .  .
- 5  .  .  .  .  .  .  .  .
- 6  .  .  .  .  .  .  .  .
- 7  .  .  .  .  .  .  .  .
-```
+- The board has `rows` × `cols` cells and `num_mines` mines. The mines are placed when you make your first reveal,
+  never on or next to the chosen cell, so the first reveal always opens a mine-free area.
+- On your turn, reveal one hidden cell. A revealed cell shows how many of its eight neighbors contain mines. Revealing
+  a `0` automatically reveals all of its neighbors, cascading through connected zeros.
+- Revealing a mine ends the game.
+- You win once every cell without a mine is revealed.
+- Every reveal uses a turn, and the game ends after `max_turns` reveals. The registered limit of 100 is far more than a
+  good player needs, since one `0` can open a whole region. Revealing numbered cells one at a time can still run out
+  of turns on the 12×12 board, which has 114 safe cells.
+- A cell outside the board, an already revealed cell, or a malformed reply is an invalid move. It changes nothing and
+  does not use a turn, but two invalid moves in a row end the game.
 
-**Step Observations**
-After each move, the player receives an updated view of the board. For example:
+## Actions
 
-```plaintext
-[Player 0] 4 4
-[GAME] Game Board:
-   0  1  2  3  4  5  6  7
- 0  .  .  .  .  .  .  .  .
- 1  .  .  .  .  .  .  .  .
- 2  .  .  .  1  1  1  .  .
- 3  .  .  1  1  0  1  1  .
- 4  .  .  1  0  0  0  1  .
- 5  .  .  1  0  0  0  1  .
- 6  .  .  1  1  1  1  1  .
- 7  .  .  .  .  .  .  .  .
-```
+Reply with `row col`: the 0-indexed row and column of a hidden cell (as labeled on the board), separated by a space or
+a comma.
 
-## Gameplay
+Examples: `4 4` reveals the cell in row 4, column 4; `0,7` reveals the top-right cell of an 8×8 board.
 
-- **Players:** 1 player (single-player game)
-- **Initial Setup:** A rectangular grid with hidden mines is created
-- **Turns:** The player reveals one cell per turn
-- **Objective:** Reveal all cells that do not contain mines
-- **Maximum Turns:** Configurable, default is 100 turns
+## Observations
 
-## Key Rules
-
-1. **Board Generation:**
-   - The game board is a rectangular grid (default: 8×8) containing a specified number of randomly placed mines (default: 10)
-   - The first move is guaranteed to be safe, with no mines in the 3×3 area around the first revealed cell
-
-2. **Cell Revealing:**
-   - When a cell is revealed, it shows either a number (indicating the count of adjacent mines) or remains empty (if no adjacent mines)
-   - If a cell with no adjacent mines is revealed, all neighboring cells are automatically revealed in a cascade
-   - Revealing a cell containing a mine results in immediate game over
-
-3. **Valid Moves:**
-   - Players can reveal cells within the grid bounds
-   - Players cannot reveal cells that are already revealed
-
-4. **Winning Conditions:**
-   - **Win:** The player reveals all safe cells
-   - **Loss:** The player reveals a cell containing a mine
-
-5. **Game Termination:**
-   - The game concludes when all safe cells are revealed or the turn limit is reached
+The player first receives the rules, the board size, the number of mines, and the turn limit. Before every move, the
+player sees the board with rows and columns numbered from 0: `.` is a hidden cell and a digit is a revealed cell's
+count of neighboring mines. A mine that ends the game is shown as `*` on the final board. After every reveal, a
+message confirms the cell (`You revealed the cell at (4, 4).`) or reports the mine.
 
 ## Rewards
 
-| Outcome     | Reward for Player |
-|-------------|:-----------------:|
-| **Win**     | `+1`              |
-| **Loss**    | `self._get_percentage_completion()`              |
-| **Invalid** | `self._get_percentage_completion()`              |
+Partial credit is the fraction of safe cells revealed, not counting the area opened by the first reveal.
+
+| Outcome | Reward |
+| --- | --- |
+| Every safe cell revealed | `1` |
+| Mine revealed | Partial credit (`0` to below `1`) |
+| `max_turns` reveals made | Partial credit |
+| Second consecutive invalid move | Partial credit (`0` before the first reveal) |
 
 ## Parameters
 
-- `rows` (`int`, default: `8`):
-  - **Description:** Sets the number of rows in the grid
-  - **Impact:** Larger grid increases difficulty by expanding the playing area
+- `rows`, `cols` (defaults `8`, `8`): the board size, at most 10,000 cells.
+- `num_mines` (default `10`): the number of mines. It must leave room for the mine-free area around the first reveal,
+  so it can be at most `rows × cols − 9` on boards of at least 3×3.
+- `max_turns` (default `100`): the maximum number of reveals.
 
-- `cols` (`int`, default: `8`):
-  - **Description:** Sets the number of columns in the grid
-  - **Impact:** Larger grid increases difficulty by expanding the playing area
+## Notes
 
-- `num_mines` (`int`, default: `10`):
-  - **Description:** Sets the number of mines in the grid
-  - **Impact:** More mines increase difficulty by making it harder to find safe paths
-
-- `max_turns` (`int`, default: `100`):
-  - **Description:** Sets the maximum number of turns allowed
-  - **Impact:** Fewer turns make the game more challenging by limiting attempts
-
-## Variants
-
-| Env-id                  | rows | cols | num_mines | max_turns |
-|-------------------------|:----:|:----:|:---------:|:---------:|
-| `Minesweeper-v0`        | `8`  | `8`  | `10`      | `100`     |
-| 'Minesweeper-v0-small   | `5`  | `5`  | `5`       | `100`     |
-| `Minesweeper-v0-medium` | `10` | `10` | `20`      | `100`     |
-| `Minesweeper-v0-hard`   | `12` | `12` | `30`      | `100`     |
-
-### Contact
-If you have questions or face issues with this specific environment, please reach out directly to bobby_cheng@i2r.a-star.edu.sg
+- As in classic Minesweeper, a board can require guessing; the generator does not guarantee a board that logic alone
+  can solve.
+- There is no flag command. Flags are only a memory aid in Minesweeper, so they are not needed to win.

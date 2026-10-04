@@ -6,21 +6,19 @@ import textarena as ta
 from textarena.envs.SettlersOfCatan.game_engine import Board, render_board, Terrain
 
 
-# Canonical bare, line-anchored negotiation commands. Accept/Deny/Done must be
-# a line of their own (optional trailing punctuation) so incidental prose is
-# not misparsed; Offer takes the rest of its line. Stray square brackets from
-# the legacy format are tolerated.
-_NEGO_ACCEPT_RE = re.compile(r'^[ \t]*\[?accept\]?[ \t]*[.!]?[ \t]*$', re.I | re.M)
-_NEGO_DENY_RE   = re.compile(r'^[ \t]*\[?deny\]?[ \t]*[.!]?[ \t]*$',   re.I | re.M)
-_NEGO_DONE_RE   = re.compile(r'^[ \t]*\[?done\]?[ \t]*[.!]?[ \t]*$',   re.I | re.M)
-_NEGO_OFFER_RE  = re.compile(r'^[ \t]*\[?offer[ \t]*:[ \t]*(?:i[ \t]+(?:give|offer)[ \t]+)?([^\[\]\n]+?)[ \t]*\]?[ \t]*$', re.I | re.M)
-_NEGO_OFFER_PREFIX_RE = re.compile(r'^[ \t]*\[?offer\b[^\n]*$', re.I | re.M)
+# Canonical bare, line-anchored negotiation commands, matched against each
+# stripped line. Accept/Deny/Done must be a line of their own (optional trailing
+# punctuation) so incidental prose is not misparsed; any line starting with the
+# word "offer" is an offer attempt and must be well formed. Stray square
+# brackets from the legacy format are tolerated.
+_NEGO_DECISION_RE = re.compile(r'\[?(accept|deny|done)\]?[ \t]*[.!]?', re.I)
+_NEGO_OFFER_WORD_RE = re.compile(r'\[?offer\b', re.I)
+_NEGO_OFFER_RE = re.compile(r'\[?offer[ \t]*:(?P<body>[^\[\]]*)\]?', re.I)
+_MAX_COMMAND_CHARS = 500
 _RESOURCE_PAIR_RE = re.compile(r'(\d+)\s+([A-Za-z]+)', re.I)
+_RESOURCE_ORDER = (Terrain.BRICK, Terrain.WOOD, Terrain.WHEAT, Terrain.ORE, Terrain.SHEEP)
 
 """
-- TODO show hand cards at start of negotiation (to nego opponents)
-- TODO show num remaining moves for player
-
 - TODO add Thief logic
 - TODO add development cards
 - TODO add mini version maybe (i.e. smaller top score requirement)
@@ -42,6 +40,7 @@ def _parse_resource_list(text: str) -> Optional[Dict[Terrain, int]]:
         if match is None:
             return None
         qty_s, raw = match.groups()
+        if len(qty_s) > 9: return None
         qty = int(qty_s)
         if qty <= 0: return None
         try: terr = _to_terrain(raw)
@@ -53,7 +52,7 @@ def _parse_resource_list(text: str) -> Optional[Dict[Terrain, int]]:
 
 def _parse_offer_body(body: str) -> Optional[Dict[str, Dict[Terrain, int]]]:
     body = ' '.join(body.split())
-    body = re.sub(r'[.,!?]+$', '', body)
+    body = body.rstrip('.,!?')
     body = re.sub(r'^(i\s+(?:give|offer)\s+)', '', body, flags=re.I)
     parts = re.split(r'\s*->\s*', body)
     if len(parts) != 2: return None
@@ -65,37 +64,39 @@ def _parse_offer_body(body: str) -> Optional[Dict[str, Dict[Terrain, int]]]:
 def _has_resources(player_inv: Counter, costs: Dict[Terrain, int]) -> bool:
     return all(player_inv.get(res, 0) >= qty for res, qty in costs.items())
 
+def _format_resources(resources: Dict[Terrain, int]) -> str:
+    return ", ".join(f"{qty} {terrain.name.title()}" for terrain, qty in resources.items())
+
+def _format_offer(offer: Dict[str, Dict[Terrain, int]]) -> str:
+    return f"{_format_resources(offer['offered_resources'])} -> {_format_resources(offer['requested_resources'])}"
+
 
 def _parse_negotiation_command(
     action: str,
 ) -> Tuple[Optional[str], Optional[Dict[str, Any]], Optional[str]]:
     """Parse at most one negotiation control command from an action."""
-    accept_count = len(list(_NEGO_ACCEPT_RE.finditer(action)))
-    deny_count = len(list(_NEGO_DENY_RE.finditer(action)))
-    done_count = len(list(_NEGO_DONE_RE.finditer(action)))
-    offer_prefixes = list(_NEGO_OFFER_PREFIX_RE.finditer(action))
-    offer_matches = list(_NEGO_OFFER_RE.finditer(action))
-
-    if len(offer_prefixes) != len(offer_matches):
-        return None, None, "Malformed offer command."
-    command_count = (
-        accept_count + deny_count + done_count + len(offer_prefixes)
-    )
-    if command_count > 1:
+    commands = []
+    for line in action.splitlines():
+        text = line.strip()
+        decision = _NEGO_DECISION_RE.fullmatch(text)
+        if decision:
+            commands.append((decision.group(1).lower(), None))
+            continue
+        if _NEGO_OFFER_WORD_RE.match(text):
+            match = _NEGO_OFFER_RE.fullmatch(text) if len(text) <= _MAX_COMMAND_CHARS else None
+            parsed = _parse_offer_body(match.group("body")) if match else None
+            if parsed is None:
+                return None, None, (
+                    "Malformed offer command. Put 'Offer: <resources you give> -> <resources you want>' on its own "
+                    "line, e.g. 'Offer: 2 Wood, 1 Brick -> 1 Wheat'."
+                )
+            commands.append(("offer", {"body": _format_offer(parsed), **parsed}))
+    if len(commands) > 1:
         return None, None, "Submit at most one negotiation command per action."
-    if done_count:
-        return "done", None, None
-    if accept_count:
-        return "accept", None, None
-    if deny_count:
-        return "deny", None, None
-    if offer_matches:
-        body = offer_matches[0].group(1)
-        parsed = _parse_offer_body(body)
-        if parsed is None:
-            return None, None, "Malformed offer command."
-        return "offer", {"body": body, **parsed}, None
-    return None, None, None
+    if not commands:
+        return None, None, None
+    command, data = commands[0]
+    return command, data, None
 
 
 class SettlersOfCatanEnv(ta.GameEnv):
@@ -107,12 +108,14 @@ class SettlersOfCatanEnv(ta.GameEnv):
     pids_from_roles = {"red": 0, "white": 1, "blue": 2, "orange": 3}
 
     def __init__(self, player_move_allowance: int = 10, max_turns: int = 200, winning_score: int = 10):
-        if player_move_allowance < 1:
-            raise ValueError("player_move_allowance must be at least one")
-        if max_turns < 1:
-            raise ValueError("max_turns must be at least one")
-        if winning_score < 1:
-            raise ValueError("winning_score must be at least one")
+        # Every player starts with two settlements (2 VP), so a lower target would end the game on the first move.
+        for name, value, minimum in (
+            ("player_move_allowance", player_move_allowance, 1),
+            ("max_turns", max_turns, 1),
+            ("winning_score", winning_score, 3),
+        ):
+            if isinstance(value, bool) or not isinstance(value, int) or value < minimum:
+                raise ValueError(f"{name} must be an integer of at least {minimum}, received {value!r}")
         self.game_moves = None
         self.player_move_allowance = player_move_allowance
         self.max_turns = max_turns
@@ -180,7 +183,8 @@ class SettlersOfCatanEnv(ta.GameEnv):
     - Maximize Victory Points (VP).
     - The first player to reach {self.winning_score} VP wins.
     - VP sources implemented: Settlement = 1 VP, City = 2 VP.
-    - Not implemented in this environment: Largest Road, Largest Army, Development cards / VP cards.
+    - Not implemented in this environment: Largest Road, Largest Army, Development cards / VP cards, and trading with the bank or harbors (you can only trade with other players).
+    - The game also ends after {self.max_turns} moves in total, counting every valid reply from any player (including negotiation messages); players are then ranked by VP.
 
     TURN FLOW (what you can do)
     1) Dice are rolled automatically at the start of a turn and resources are distributed to any settlements/cities on tiles matching the roll (desert produces nothing).
@@ -211,8 +215,10 @@ class SettlersOfCatanEnv(ta.GameEnv):
     - The other player can respond with a line containing exactly:
     Accept   — trade executes if both sides have the resources
     Deny     — trade is declined
+    - Only one offer can be open at a time; it stays open until its recipient accepts or denies it.
+    - Either negotiator ends the negotiation with a line containing exactly: Done
     - Starting the negotiation consumes 1 action. Messages and "Done" do not consume additional actions.
-    - While negotiating, you can also send normal chat text on other lines alongside these commands.
+    - While negotiating, you can also send normal chat text on other lines alongside these commands; it is shown only to your negotiation partner. Any line that starts with "Offer" is read as an offer and must use the exact format.
 
     BOARD LEGEND (text board you will see)
     - Settlements appear as 'V' with the owner initial near them; Cities as 'C'.
@@ -238,8 +244,11 @@ class SettlersOfCatanEnv(ta.GameEnv):
         self.broadcast(message, ta.ObservationType.GAME_MESSAGE)
 
     def render(self, player_id: int) -> Optional[str]:
-        """Board + viable-move list shown to the player about to act (action phase only)."""
-        if self.state.game_state["turn_phase"] != "action":
+        """Board + viable-move list in the action phase; hand + open offer while negotiating."""
+        phase = self.state.game_state["turn_phase"]
+        if phase == "negotiation":
+            return self._render_negotiation(player_id)
+        if phase != "action":
             return None
         colour = self.board.str_to_enum(color_str=self.role_colors[player_id])
         player = self.board.players[colour]
@@ -256,6 +265,28 @@ class SettlersOfCatanEnv(ta.GameEnv):
             "", f"Your hand cards are:\n\t{hand_cards}", "", "Viable moves\n────────────", move_block, "Please select one of the viable actions by replying with the move index, e.g. '3'.",
             f"You have {remaining_turn_moves} moves left in your turn."
         ])
+
+    def _render_negotiation(self, player_id: int) -> str:
+        gs = self.state.game_state
+        partner = gs["negotiation_partner"] if player_id == gs["main_negotiator"] else gs["main_negotiator"]
+        hand = self.board.players[self.board.str_to_enum(self.role_colors[player_id])].hand
+        lines = [
+            f"NEGOTIATION between Player {gs['main_negotiator']} ({self.role_colors[gs['main_negotiator']]}) "
+            f"and Player {gs['negotiation_partner']} ({self.role_colors[gs['negotiation_partner']]})",
+            "Your hand: " + ", ".join(f"{terrain.name.lower()}: {hand.get(terrain, 0)}" for terrain in _RESOURCE_ORDER),
+        ]
+        offer = gs["current_offer"]
+        if offer is None:
+            lines.append("No open offer. Put 'Offer: <give> -> <get>' on its own line to propose a trade.")
+        else:
+            lines.append(
+                f"Open offer from Player {offer['from_player']} to Player {offer['to_player']}: "
+                f"{_format_offer(offer)} (the proposer gives the resources before '->')"
+            )
+            if offer["to_player"] == player_id:
+                lines.append("Reply with a line containing exactly 'Accept' or 'Deny'.")
+        lines.append(f"Chat with Player {partner} ({self.role_colors[partner]}) freely; a line containing exactly 'Done' ends the negotiation.")
+        return "\n".join(lines)
 
     def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
         """A player who exceeds the error allowance is eliminated from play; the turn moves on."""
@@ -332,9 +363,9 @@ class SettlersOfCatanEnv(ta.GameEnv):
         next_holder = player_id  # who holds the turn after this action (never auto-rotated)
         match gs["turn_phase"]:
             case "action":
-                m = re.search(r'^\s*\[?\s*(\d+)\s*\]?\s*$', action)
+                m = re.fullmatch(r'\[?\s*(\d+)\s*\]?', action.strip())
                 if m is None: return self.invalid("No action found. Please reply with the index of a viable move, e.g. '3'.")
-                act = int(m.group(1))
+                act = int(m.group(1)) if len(m.group(1)) <= 6 else 0
                 if act > len(self.game_moves) or act <=0: 
                     return self.invalid("Selected action index is out of bounds. Please select from the list.")
 
@@ -357,19 +388,19 @@ class SettlersOfCatanEnv(ta.GameEnv):
                     if not ok:
                         return self.invalid(err or "The selected build is no longer legal.")
                     gs["move_count"] += 1
+                    self.broadcast(f"Player {player_id} ({self.role_colors[player_id]}): {' '.join(selected[1].split())}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
             case "negotiation_start":
                 successful = self._negotiation_partner_selection(player_id, action=action)
                 if not successful: # invalid move 
-                    return self.invalid(f"Invalid negotiation partner selection. Received: {action}")
+                    options = ", ".join(f"'{pid}'/'{self.role_colors[pid]}'" for pid in range(self.state.num_players) if pid != player_id and pid not in gs["eliminated_players"])
+                    return self.invalid(f"Invalid negotiation partner selection. Reply with exactly one of: {options}.")
 
             case "negotiation":
-                if player_id == gs["main_negotiator"]: result = self._negotiation_step(player_id, action=action)
-                else: result = self._negotiation_response_step(player_id, action=action)
+                result = self._negotiation_message(player_id, action=action)
                 if isinstance(result, ta.Invalid):
                     return result
-                if result is not None:
-                    next_holder = result
+                next_holder = result
 
         # check for win
         scores = self.board.get_scores()
@@ -405,9 +436,8 @@ class SettlersOfCatanEnv(ta.GameEnv):
     def _negotiation_partner_selection(self, player_id: int, action: str):
         gs = self.game_state
         pid_options = [pid for pid in range(self.state.num_players) if (pid not in gs["eliminated_players"] and pid != player_id)]
-        m_list = list(re.compile(r'(?i)^\s*\[?\s*([0123]|red|white|blue|orange)\s*\]?\s*$').finditer(action))
-        if not m_list: return False
-        m = m_list[-1]
+        m = re.fullmatch(r'(?i)\[?\s*([0123]|red|white|blue|orange)\s*\]?', action.strip())
+        if m is None: return False
         choice = m.group(1).lower()
         choice = self.pids_from_roles[choice] if choice in self.pids_from_roles else int(choice)
         if choice not in pid_options: return False
@@ -419,15 +449,17 @@ class SettlersOfCatanEnv(ta.GameEnv):
         gs["turn_phase"] = "negotiation"
         return True
 
-    def _negotiation_step(self, player_id: int, action: str) -> Union[ta.Invalid, int, None]:
-        """Returns the pid holding the turn next, or Invalid."""
+    def _negotiation_message(self, player_id: int, action: str) -> Union[ta.Invalid, int]:
+        """Handle one negotiation message; returns the pid holding the turn next, or Invalid."""
         gs = self.game_state
         me = player_id
-        opp = gs["negotiation_partner"]
+        owner = gs["main_negotiator"]
+        opp = gs["negotiation_partner"] if me == owner else owner
+        action = self.strip_role_tags(action).strip()  # commands are read from exactly the text the partner sees
         command, offer_data, error = _parse_negotiation_command(action)
         if error:
             return self.invalid(error)
-        # 1) A 'Done' line ends negotiation immediately for BOTH players
+        # 1) A 'Done' line ends negotiation immediately for BOTH players; the turn returns to its owner
         if command == "done":
             self._share_negotiation_message(me, opp, action)
             gs["turn_phase"] = "action"
@@ -435,7 +467,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
             gs["main_negotiator"] = None
             gs["current_offer"] = None
             self.broadcast("Negotiation finished.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
-            return me
+            return owner
         # 2) Accept / Deny an existing offer (if I'm the receiver)
         if command in {"accept", "deny"}:
             if (
@@ -465,66 +497,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
                 player.hand, offer_data["offered_resources"]
             ):
                 return self.invalid(
-                    f"Malformed or unaffordable offer. Submitted action: {action}"
-                )
-            body = offer_data.pop("body")
-            gs["current_offer"] = {
-                "from_player": me,
-                "to_player": opp,
-                **offer_data,
-            }
-            self._notify_negotiators(
-                f"Player {me} offered to Player {opp}: {body}"
-            )
-        self._share_negotiation_message(me, opp, action)
-        return opp
-
-    def _negotiation_response_step(self, player_id: int, action: str) -> Union[ta.Invalid, int, None]:
-        """Returns the pid holding the turn next, or Invalid."""
-        gs = self.game_state
-        me = player_id
-        opp = gs["main_negotiator"]
-        command, offer_data, error = _parse_negotiation_command(action)
-        if error:
-            return self.invalid(error)
-        if command == "done":
-            self._share_negotiation_message(me, opp, action)
-            gs["turn_phase"] = "action"
-            gs["negotiation_partner"] = None
-            gs["main_negotiator"] = None
-            gs["current_offer"] = None
-            self.broadcast("Negotiation finished.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
-            return opp
-        # 1) Accept / Deny an existing offer (if I'm the receiver)
-        if command in {"accept", "deny"}:
-            if (
-                not gs.get("current_offer")
-                or gs["current_offer"]["to_player"] != me
-            ):
-                return self.invalid("There is no offer for you to resolve.")
-            if command == "accept":
-                result = self._execute_trade_accept()
-                if isinstance(result, ta.Invalid):
-                    return result
-            else:
-                self._notify_negotiators(
-                    f"Player {me} denied the trade offer."
-                )
-                gs["current_offer"] = None
-        # 2) Look for a NEW offer (only one active at a time)
-        if command == "offer":
-            if gs.get("current_offer"):
-                return self.invalid(
-                    "Resolve the current offer before making another."
-                )
-            player = self.board.players[
-                self.board.str_to_enum(self.role_colors[me])
-            ]
-            if not _has_resources(
-                player.hand, offer_data["offered_resources"]
-            ):
-                return self.invalid(
-                    f"Malformed or unaffordable offer. Submitted action: {action}"
+                    f"Unaffordable offer: you do not hold {_format_resources(offer_data['offered_resources'])}."
                 )
             body = offer_data.pop("body")
             gs["current_offer"] = {
@@ -539,8 +512,8 @@ class SettlersOfCatanEnv(ta.GameEnv):
         return opp
 
     def _share_negotiation_message(self, sender: int, recipient: int, action: str):
+        # The engine already echoes the raw action to its author.
         self.message(recipient, action, ta.ObservationType.GAME_ACTION_DESCRIPTION, from_id=sender)
-        self.message(sender, action, ta.ObservationType.GAME_ACTION_DESCRIPTION, from_id=sender)
 
     def _notify_negotiators(self, message: str) -> None:
         participants = {

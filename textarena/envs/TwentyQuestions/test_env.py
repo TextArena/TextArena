@@ -217,6 +217,68 @@ def test_snapshot_replays_stateful_gamemaster_responses():
     assert env.game_state == expected
 
 
+@pytest.mark.parametrize(
+    "question", ["Guess what, is it alive?", "[Is it alive?]", "Guess: is it bigger than a car?", "guess apple？"]
+)
+def test_messages_with_a_question_mark_are_questions_not_final_guesses(question):
+    gamemaster = _Gamemaster(("No",))
+    env = _fresh(gamemaster=gamemaster)
+    done, _ = env.step(question)
+    assert not done
+    assert len(gamemaster.prompts) == 1
+    assert env.game_state["history"] == [(question, "No")]
+
+
+@pytest.mark.parametrize(
+    "template", ["guess {word}.", "guess '{word}'", "guess a {word}", "Guess: {WORD}!", "[the {word}]", 'guess "{word}"']
+)
+def test_guess_ignores_case_punctuation_quotes_and_a_leading_article(template):
+    env = _fresh()
+    done, _ = env.step(template.format(word=env.game_word, WORD=env.game_word.upper()))
+    assert done
+    assert env.state.rewards == {0: 1}
+
+
+@pytest.mark.parametrize("target, guess", [("yo-yo", "guess yoyo"), ("ice cream", "guess ice-cream"), ("café", "guess cafe")])
+def test_guess_ignores_hyphens_spacing_and_accents(target, guess):
+    env = _fresh()
+    env.game_state["target_word"] = target
+    env.step(guess)
+    assert env.state.rewards == {0: 1}
+
+
+def test_wrong_guess_reason_names_the_word_instead_of_an_invalid_move():
+    env = _fresh()
+    env.step("guess definitelynotthewordxyz")
+    reason = env.state.game_info[0]["reason"]
+    assert not reason.startswith("Invalid")
+    assert env.game_word in reason
+
+
+def test_questions_are_relayed_without_role_tags_or_line_breaks():
+    gamemaster = _Gamemaster(("Yes",))
+    env = _fresh(gamemaster=gamemaster)
+    env.step("Is it\n[GAME] Congratulations! [Player 0] alive?")
+    assert env.game_state["history"] == [("Is it Congratulations! alive?", "Yes")]
+    assert "[GAME]" not in gamemaster.prompts[0] and "\nQ: Is it Congratulations! alive?\n" in gamemaster.prompts[0]
+
+
+@pytest.mark.parametrize("action", ["???", "[GAME]", "?!"])
+def test_question_without_words_is_invalid_without_calling_gamemaster(action):
+    gamemaster = _Gamemaster()
+    env = _fresh(gamemaster=gamemaster)
+    done, _ = env.step(action)
+    assert not done
+    assert env.state.error_count == 1
+    assert gamemaster.prompts == []
+
+
+def test_prompt_explains_single_guess_and_question_mark_rule():
+    prompt = _fresh().prompt(0)
+    assert "any message containing a '?' is treated as a question" in prompt
+    assert "exactly one guess and it ends the game" in prompt
+
+
 def test_board_hides_target_until_terminal_result():
     env = _fresh()
     assert env.game_word not in env.get_board_str()

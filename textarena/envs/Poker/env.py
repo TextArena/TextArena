@@ -98,7 +98,6 @@ class PokerEnv(ta.GameEnv):
         outcome = self._progress_after_action(player_id)
         if outcome is not None:
             return outcome
-        self._observe_current_pot()
         self.set_next_player(self._cur)
         return None
 
@@ -115,7 +114,6 @@ class PokerEnv(ta.GameEnv):
         outcome = self._progress_after_action(player_id)
         if outcome is not None:
             return outcome
-        self._observe_current_pot()
         self.set_next_player(self._cur)
         return None
 
@@ -191,9 +189,9 @@ class PokerEnv(ta.GameEnv):
         gs["current_bet"] = self.big_blind
         first_actor = self._first_required_actor_from(first_to_act)
         self._cur = first_actor if first_actor is not None else first_to_act
-        self._observe_current_pot()
 
-    def _observe_current_pot(self):
+    def render(self, player_id: int) -> str:
+        """The table as seen by `player_id`: only their own hole cards, plus their legal options."""
         gs = self.game_state
         n = self.state.num_players
         comm = ", ".join(f"{c['rank']}{c['suit']}" for c in gs["visible_community_cards"])
@@ -213,9 +211,9 @@ class PokerEnv(ta.GameEnv):
             elif pid in gs["folded_players"]: status = "folded"
             elif pid in gs["all_in_players"]: status = "all-in"
             else: status = "active"
-            lines.append(f"P{pid}{role_txt}: {gs['player_chips'][pid]:.2f} chips | bet {gs['player_bets'][pid]:.2f} | {status}")
+            lines.append(f"P{pid}{role_txt}: {gs['player_chips'][pid]} chips | bet {gs['player_bets'][pid]} | {status}")
 
-        hole = gs["player_hands"].get(self._cur, [])
+        hole = gs["player_hands"].get(player_id, [])
         hole_text = ", ".join(f"{card['rank']}{card['suit']}" for card in hole) if hole else "(not dealt)"
         msg = (
             f"===== Hand {gs['round']} / {self.num_rounds} - {betting_round_names[gs['betting_round']]} =====\n"
@@ -223,7 +221,38 @@ class PokerEnv(ta.GameEnv):
             f"\nYour hole: {hole_text}\n"
             "=============================================="
         )
-        self.message(self._cur, msg, ta.ObservationType.GAME_BOARD)
+        if not self.state.done and self._can_act(player_id):
+            due = max(0, gs["current_bet"] - gs["player_bets"][player_id])
+            msg += f"\nTo call: {due} | Your options: {', '.join(self._options(player_id))}"
+        return msg
+
+    def _options(self, pid: int) -> List[str]:
+        """Legal commands for `pid`, with the amounts `_apply_action` accepts."""
+        gs = self.game_state
+        chips, committed, current = gs["player_chips"][pid], gs["player_bets"][pid], gs["current_bet"]
+        due = current - committed
+        options = ["'fold'"] if due > 0 else ["'check'"]
+        if due > 0:
+            options.append(f"'call' ({min(due, chips)} chips{', all-in' if due >= chips else ''})")
+
+        stack_total = committed + chips
+        if current == 0:
+            verb, low_total = "bet", self.big_blind
+        else:
+            reopened = (
+                pid not in gs["acted_players"]
+                or current - gs["acted_bet_levels"].get(pid, current) >= gs["last_full_raise"]
+            )
+            if not reopened or stack_total <= current:
+                return options
+            verb = "raise"
+            low_total = self.big_blind if current < self.big_blind else current + gs["last_full_raise"]
+        low, high = low_total - current, stack_total - current
+        if low < high:
+            options.append(f"'{verb} N' (N from {low} to {high}; {high} is all-in)")
+        else:
+            options.append(f"'{verb} {high}' (all-in)")
+        return options
 
     # ----------------------------------------------------------- turn logic
     def _progress_after_action(self, player_id: int) -> Optional[ta.Outcome]:

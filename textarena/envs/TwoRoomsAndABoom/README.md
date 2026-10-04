@@ -1,216 +1,78 @@
-# Two Rooms and a Boom Environment Documentation
+# Two Rooms and a Boom
 
-## Overview
-**Two Rooms and a Boom** is a social deduction game where players are divided into two teams (Red and Blue) and physically separated into two rooms. Players do not initially know other players' teams or roles. The Red Team's goal is to have the Red Team Bomber and Blue Team President in the same room at the end of the game, while the Blue Team's goal is to keep them in separate rooms. The game involves discussion, identity revelation, and strategic hostage exchanges between rooms.
+Two hidden teams are split across two rooms whose leaders trade hostages every round; the Red Team wins if its Bomber
+ends up in the same room as the Blue Team's President. It tests social deduction, trust building, and deception.
 
-## Action Space
+<!-- BEGIN GENERATED: variants -->
+**Players:** 6–20
 
-- **Format:** Actions are strings that depend on the current game phase and player role:
-  - **Discussion Phase (All Players):**
-    - Free-form text communication with other players in the same room
-    - Role revealing: Say `reveal card` or `show role` to initiate revealing your role
-  - **Role Reveal Phase (Revealing Player Only):**
-    - **Select Target:** `Player 3` or `3` to select which player to reveal to
-  - **Leader Selection Phase (Room Leaders Only):**
-    - **Select Hostage:** `Player 3` or `3` to select a player ID in the leader's room
+**`-mdp` observation:** the full transcript, including every player action
 
-- **Examples:**
-  - Discussion: `I am on the Blue team, and I'm not the President.`
-  - Role reveal initiation: `I want to reveal my card` (triggers system prompt)
-  - Role reveal target selection: `Player 3` or `3`
-  - Leader selection: `Player 3` or `3`
+| Env ID | Parameters |
+| --- | --- |
+| `TwoRoomsAndABoom-v0` | `num_rounds=3`, `cards_per_room=3`, `discussion_rounds=2` |
 
-- **Notes:** The game automatically handles hostage exchanges and room transitions. Leaders cannot select themselves as hostages.
+Append `-mdp` to any ID for the state-complete variant (e.g. `TwoRoomsAndABoom-v0-mdp`).
+<!-- END GENERATED: variants -->
 
-## Observation Space
+## Rules
 
-**Reset Observations**
-On reset, each player receives a prompt containing their role, team, and available actions:
+- The game needs exactly twice `cards_per_room` players (6 for the registered variant). Half of the players (rounded
+  down) are Red and the rest Blue; one Blue player is the President and one Red player is the Bomber. Nobody knows
+  anyone else's role.
+- Players are split evenly between Room 0 and Room 1, with the President starting in Room 0 and the Bomber in Room 1.
+  Each room has a Leader, picked at random and preferably neither the President nor the Bomber. As in the board game,
+  leadership is public: everyone in a room is told who its Leader is.
+- Every round has three steps:
+  1. **Discussion:** every player speaks `discussion_rounds` times, in a random order within each room (Room 0 first).
+     Messages only reach players in the same room.
+  2. **Hostage selection:** each Leader (Room 0 first) picks one other player from their own room. A Leader can never
+     be a hostage, so the Leaders stay the same for the whole game.
+  3. **Exchange:** the two hostages swap rooms.
+- Instead of sending a discussion message, a player may privately reveal their true role to one player in their room,
+  up to 5 times per game.
+- After `num_rounds` rounds (the last round also ends with an exchange), Red wins if the President and the Bomber are
+  in the same room, and Blue wins otherwise.
 
-```plaintext
-Welcome to Two Rooms and a Boom! You are Player 2.
-Your role: Blue
-Team: Blue Team
-Description: Member of the Blue Team. Your goal is to make sure the Bomber and President are in different rooms at the end of the game.
+## Actions
 
-You are currently in Room 0.
-You are the Leader of your room.
+- **Discussion:** any text, which is sent to everyone in your room, e.g. `I'm Blue. Who will trade reveals with me?`
+- **Reveal:** a discussion reply consisting of exactly `reveal` (case-insensitive) starts a reveal instead of being
+  sent. Your next reply must name the target: `Player 3` or `3`. Any other reply is sent as discussion, even one that
+  mentions revealing or roles, such as `I won't show my role yet`.
+- **Leader:** during hostage selection, reply with the hostage's id: `Player 3` or `3`.
 
-The game progresses through 3 rounds:
-• In each round, players in the same room can talk to each other
-• Room Leaders can choose one player to trade to the other room
-• During discussions, you can choose to privately reveal your card to another player
-• At the end of all rounds, the game checks which room contains the President and Bomber
+Choosing yourself or a player outside your room, replying with anything other than a player id when one is requested,
+or sending `reveal` after using all 5 reveals is invalid.
 
-The Red Team wins if the President and Bomber are in the same room at the end.
-The Blue Team wins if the President and Bomber are in different rooms at the end.
+## Observations
 
-Role Revealing:
-• During discussions, you can say 'reveal card' or 'show role' to initiate revealing your role
-• The game will then prompt you to select which player to reveal to
-• You can reveal your role up to 5 times per game
-• This is a way to build trust, but be careful who you reveal to!
-```
-
-**Step Observations**
-During gameplay, players receive observations based on the current phase and actions:
-
-```plaintext
-# Discussion Phase
-[GAME] Round 1: Discussion phase has started.
-You are in Room 0 with: Player 0, Player 2, Player 4, Player 6.
-You can talk freely with the other players in your room.
-To reveal your role to someone, say 'reveal card' or 'show role' during your turn.
-
-Players who have revealed their roles to you:
-Player 0: Blue
-Player 4: Red
-
-[Player 0] I'm on the Blue team, but I'm not the President.
-[Player 4] I'm on the Red team, just a regular member.
-
-# Role Reveal Initiation
-[GAME] You've chosen to reveal your role.
-Players in your room: Player 0, Player 4, Player 6
-To whom would you like to reveal your role?
-Reply with the player number, e.g. 'Player X' or 'X'.
-Valid options: 0, 4, 6
-
-Note: This will be your reveal #1 out of 5 allowed reveals.
-
-# Role Reveal Confirmation
-[GAME] You revealed your role (Bomber) to Player 2. You have 4 reveals remaining.
-
-# Role Reveal Notification (to target player)
-[PRIVATE] Player 6 has revealed their card to you. Their true role is: President
-
-# Leader Selection Phase
-[GAME] Round 1: As the Leader of Room 0, you must select one player to trade with the other room.
-Your team: Blue Team
-
-Known player roles:
-Player 0: Blue
-Player 4: Red
-
-Reply with the player number, e.g. 'Player X' or 'X'.
-Valid options: 0, 4, 6
-
-Strategic reminder: Blue Team wants the President and Bomber in different rooms at the end.
-If you know who the Bomber is, consider your strategy carefully.
-
-[LEADER] I have selected Player 4 to be traded with the other room.
-
-# Trade Execution
-[GAME] Round 1: The Leaders have exchanged hostages.
-Player 4 moved from Room 0 to Room 1.
-Player 5 moved from Room 1 to Room 0.
-```
-
-## Gameplay
-
-- **Players:** 6-20 players, with `num_players` equal to `2 * cards_per_room`
-- **Initial Setup:** Players are assigned roles and divided into two rooms with a leader for each room
-- **Game Progression:** Multiple rounds of discussion followed by hostage exchanges
-- **Objective:**
-  - **Red Team:** Have the Bomber and President in the same room at the end
-  - **Blue Team:** Keep the Bomber and President in different rooms at the end
-
-## Key Rules
-
-1. **Roles:**
-   - **Blue Team Member:** Regular Blue Team member
-   - **Red Team Member:** Regular Red Team member
-   - **President:** Special Blue Team role (target for the Red Team)
-   - **Bomber:** Special Red Team role (must reach the President for Red Team to win)
-   - **Leader:** A player in each room designated as the leader (can be any role)
-
-2. **Communication:**
-   - Players can only communicate with others in the same room
-   - Players can reveal their true role to specific players using the reveal mechanism
-   - Each player is limited to 5 role reveals per game
-   - Ordinary discussion does not expose authoritative role or team metadata
-
-3. **Hostage Exchange:**
-   - Each round, leaders select one player from their room to trade
-   - Selected players swap rooms
-   - Leaders cannot select themselves as hostages
-   - If a leader is traded, a new leader is automatically appointed in that room
-
-4. **Room Balance:**
-   - Both rooms start with the configured number of players
-   - Each completed exchange swaps one hostage from each room, preserving room sizes
-   - If a leader fails to select a hostage, the system selects an eligible hostage at random
-
-5. **Victory Conditions:**
-   - **Red Team Wins:** The Bomber and President are in the same room at the end
-   - **Blue Team Wins:** The Bomber and President are in different rooms at the end
+Each player first receives their role, team, starting room, who leads their room (or that they do), and the rules. At
+the start of every discussion phase, each player is told the round, who is in their room and who its Leader is, which
+roles have been revealed to them, and up to ten recent messages they witnessed in that room. Discussion messages arrive
+from players in the same room, and the speaker gets a delivery confirmation. When a player reveals, the target
+privately learns their true role, and the rest of the room only sees `I am revealing my card to Player X.` Leaders get
+a selection prompt with the valid options and the roles revealed to them, and their choice is announced to their room.
+Players are not told who leads the other room until they are traded into it. Everyone sees each exchange, and the game
+ends by announcing the final rooms and who the President and the Bomber were.
 
 ## Rewards
 
-| Outcome          | Reward for Winners | Reward for Others |
-|------------------|:------------------:|:-----------------:|
-| **Red Team Win** | `+1`               | `-1`              |
-| **Blue Team Win**| `+1`               | `-1`              |
-
-An invalid action is retried once. A second consecutive invalid action forfeits
-that turn without eliminating the player or changing team rewards.
+| Outcome | Reward |
+| --- | --- |
+| President and Bomber in the same room at the end | Red Team `+1`, Blue Team `-1` |
+| President and Bomber in different rooms at the end | Blue Team `+1`, Red Team `-1` |
+| Second consecutive invalid move | The action is forfeited (the discussion turn passes, a reveal is abandoned, or a Leader's hostage is chosen at random); no elimination or direct penalty |
 
 ## Parameters
 
-- `num_rounds` (`int`, default: `3`):
-  - **Description:** Number of rounds to play
-  - **Impact:** More rounds give players more information but also more opportunities for strategic moves
+- `num_rounds` (default `3`): number of rounds, each ending with an exchange.
+- `cards_per_room` (default `3`, between 3 and 10): players per room; the game requires exactly twice this many players.
+- `discussion_rounds` (default `2`): messages each player sends per round; `0` skips the discussion.
 
-- `cards_per_room` (`int`, default: `3`):
-  - **Description:** Exact number of player cards initially placed in each room; must be between 3 and 10
-  - **Impact:** Reset requires exactly twice this many players
+## Notes
 
-- `discussion_rounds` (`int`, default: `2`):
-  - **Description:** Number of discussion turns each player gets per round
-  - **Impact:** Controls how much communication occurs between hostage exchanges
-
-## Game Phases
-
-1. **Discussion:** Players in each room discuss freely to gather information and can initiate role reveals
-2. **Role Reveal:** When a player chooses to reveal their role, they enter this phase to select a target player
-3. **Leader Selection:** Room leaders select a hostage to trade
-4. **Trade Execution:** Selected hostages swap rooms and the game either advances to the next round or ends
-
-## Implementation Notes
-
-- The game maintains two rooms with distinct sets of players
-- Special roles (President and Bomber) are assigned to random players on the respective teams
-- One leader is designated for each room, preferring regular team members over special roles
-- The game automatically handles hostage exchanges and tracking which players are in which room
-- Communication is strictly limited to players in the same room
-- Role reveals use a system-guided two-step process (initiate, then select target)
-- Role reveals are limited to 5 per player and only work within the same room
-- Balanced room sizes are preserved by exchanging exactly one hostage each way
-- The environment includes robust error recovery mechanisms
-- Message history is capped at 200 messages per room and replayed only to players who witnessed each message
-- Winning is determined by the final positions of the President and Bomber
-- Player selections use `Player 3` or simply `3`.
-
-## Example Game Flow
-
-1. Game starts with players randomly assigned to roles and rooms
-2. Leaders are randomly assigned in each room
-3. Players discuss within their rooms
-4. A player may say "reveal card" to initiate the role reveal process
-5. The system prompts that player to select a target, who then receives the true role information
-6. Leaders select hostages to trade
-7. Hostages swap rooms
-8. Steps 3-7 repeat for the specified number of rounds
-9. Game ends and winner is determined based on President and Bomber locations
-
-## Variants
-
-| Env-id                     | num_rounds | cards_per_room | discussion_rounds |
-|----------------------------|:----------:|:--------------:|:-----------------:|
-| `TwoRoomsAndABoom-v0`      |    `3`     |      `3`       |        `2`        |
-
-### Credit
-Based on the party game "Two Rooms and a Boom" by Tuesday Knight Games.
-
-### Contact
-If you have questions or face issues with this specific environment, please reach out directly to [benjaminliu.eecs@gmail.com](mailto:benjaminliu.eecs@gmail.com).
+- Based on the party game *Two Rooms and a Boom* by Tuesday Knight Games. This version only has the President and the
+  Bomber as special roles, and a reveal always shows the full role card.
+- Leaders are drawn from regular players whenever possible, and each room starts with exactly one of the President and
+  the Bomber, so a player who knows these setup rules can rule out their (public) Leader as a special role.

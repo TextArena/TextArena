@@ -3,10 +3,13 @@ import importlib.resources
 import json
 import os
 import re
+import unicodedata
 from typing import Any, Dict, List, Optional, Union
 
 import textarena as ta
 from textarena.envs.TwentyQuestions.renderer import create_board_str
+
+_ARTICLES = frozenset({"a", "an", "the"})
 
 
 class TwentyQuestionsEnv(ta.GameEnv):
@@ -200,44 +203,64 @@ class TwentyQuestionsEnv(ta.GameEnv):
             f"You are Player {player_id}. You are playing 20 Questions ({'Hardcore' if self.hardcore else 'Basic'}).\n"
             f"The gamemaster has chosen an object that can be one or two words. This object is related to {self.game_theme}. You have to guess this object by asking yes-or-no questions.\n"
             f"The game will last for a maximum of {self.max_turns - 1} questions. After that, the gamemaster will prompt you to make a guess.\n"
-            "You may ask your question in any manner.\n"
-            "Then, to make your final word guess, reply with 'guess <word>', e.g. 'guess plane', 'guess diving bell'.\n"
+            "You may ask your question in any manner; any message containing a '?' is treated as a question.\n"
+            "To make your final word guess, at any time, reply with 'guess <word>', e.g. 'guess plane', 'guess diving bell'. "
+            "You get exactly one guess and it ends the game; case, punctuation and a leading 'a' or 'the' are ignored.\n"
             "As you play, the history of your questions and gamemaster's responses will be displayed."
         )
+
+    @staticmethod
+    def _answer_key(text: str) -> str:
+        """Letters and digits only, without accents or a leading article."""
+        decomposed = unicodedata.normalize("NFKD", unicodedata.normalize("NFKC", text).casefold())
+        tokens = re.findall(r"[^\W_]+", "".join(char for char in decomposed if not unicodedata.combining(char)))
+        if len(tokens) > 1 and tokens[0] in _ARTICLES:
+            tokens = tokens[1:]
+        return "".join(tokens)
+
+    def _parse_guess(self, action: str) -> Optional[str]:
+        """The guessed text, or None when the message is a question."""
+        if "?" in unicodedata.normalize("NFKC", action):
+            return None  # e.g. "Guess what, is it alive?" must not end the game
+        match = self._GUESS_RE.fullmatch(action) or self._LEGACY_GUESS_RE.fullmatch(action)
+        return match.group("guess") if match else None
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         if not isinstance(action, str) or not action.strip():
             return self.invalid("Ask a non-empty question or submit 'guess <word>'.")
         if len(action) > self.max_action_chars:
             return self.invalid(f"Questions and guesses are limited to {self.max_action_chars} characters.")
+        action = self.strip_role_tags(action)
         if self._EMPTY_GUESS_RE.fullmatch(action):
             return self.invalid("A guess must include a word after 'guess'.")
-        guess_match = self._GUESS_RE.fullmatch(action)
-        legacy_match = self._LEGACY_GUESS_RE.fullmatch(action)
-        if guess_match is None and legacy_match is None:
+        guess = self._parse_guess(action)
+        if guess is None:
+            question = " ".join(action.split())
+            if not re.search(r"[^\W_]", question):
+                return self.invalid("Ask a yes-or-no question in words or submit 'guess <word>'.")
             if self.state.turn >= self.max_turns - 1:
                 return self.invalid("The question budget is exhausted; submit 'guess <word>'.")
             original_gamemaster = self.gamemaster
             checkpoint, copied = self._copy_resource(original_gamemaster)
             try:
-                gamemaster_response = self.get_gamemaster_response(action.strip())
+                gamemaster_response = self.get_gamemaster_response(question)
             except Exception:
                 self._restore_gamemaster_checkpoint(original_gamemaster, checkpoint, copied)
                 return self.retryable("The gamemaster could not answer the question.")
-            self.game_state["history"].append((action, gamemaster_response))
+            self.game_state["history"].append((question, gamemaster_response))
             if self.state.turn == self.max_turns - 2:
                 gamemaster_response += "\nYou have run out of questions. What is your final guess?"
             self.broadcast(gamemaster_response, ta.ObservationType.GAME_MESSAGE)
             return None
         ## the action is a guess
-        action_text = (guess_match or legacy_match).group("guess")
-        action_text = re.sub(r"\s+", " ", action_text.strip()).casefold()
-        target = re.sub(r"\s+", " ", self.game_word.strip()).casefold()
+        guess_key = self._answer_key(guess)
+        if not guess_key:
+            return self.invalid("A guess must include a word after 'guess'.")
         self.game_state["target_revealed"] = True
         self.game_state["rendered_text"] = f"Game word: {self.game_word}"
-        if action_text == target:
+        if guess_key == self._answer_key(self.game_word):
             return self.outcome({0: 1}, reason="Congratulations! You guessed the word.")
-        return self.outcome({0: 0}, reason="Invalid guess. You guessed incorrectly.")
+        return self.outcome({0: 0}, reason=f"Wrong guess. The word was '{self.game_word}'.")
 
     def on_turn_limit(self) -> ta.Outcome:
         self.game_state["target_revealed"] = True

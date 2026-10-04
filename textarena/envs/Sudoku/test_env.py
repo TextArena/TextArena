@@ -167,6 +167,59 @@ def test_runtime_renderer_reflects_moves_and_uses_numeric_rows():
     assert "\n1" in after
 
 
+def test_empty_cells_render_as_dots_as_the_prompt_says():
+    env = _fresh(clues=40)
+    _, observation = env.get_observation()
+    prompt = observation[0][1]
+    board = env.get_board_str()
+    assert "Empty cells are shown as '.'" in prompt
+    assert board.count(".") == len(_empty_cells(env)) == 41
+
+
+def test_prompt_states_turn_budget_and_empty_cell_count():
+    env = _fresh(clues=40, max_turns=100)
+    _, observation = env.get_observation()
+    prompt = observation[0][1]
+    assert "100 turns" in prompt and "41 empty cells" in prompt
+    assert "Grid Snippet" not in prompt
+
+
+def _invalid_reason(env):
+    _, observation = env.get_observation()
+    return next(message for _, message, _ in observation if "attempted an invalid move" in message)
+
+
+def _wrong_digits(env, row, col):
+    """Split the wrong digits for an empty cell into (conflicting, non-conflicting)."""
+    board = env.game_state["board"]
+    box = {
+        board[r][c]
+        for r in range(3 * (row // 3), 3 * (row // 3) + 3)
+        for c in range(3 * (col // 3), 3 * (col // 3) + 3)
+    }
+    seen = set(board[row]) | {board[r][col] for r in range(9)} | box
+    wrong = [d for d in range(1, 10) if d != env.full_grid[row][col]]
+    return [d for d in wrong if d in seen], [d for d in wrong if d not in seen]
+
+
+def test_wrong_digit_feedback_distinguishes_conflicts_from_non_solution_digits():
+    env = _fresh(clues=17)
+    row, col, quiet = next(
+        (r, c, _wrong_digits(env, r, c)[1])
+        for r, c in _empty_cells(env)
+        if _wrong_digits(env, r, c)[0] and _wrong_digits(env, r, c)[1]
+    )
+    env.get_observation()
+    env.step(f"{row + 1} {col + 1} {quiet[0]}")
+    assert "not the solution's digit" in _invalid_reason(env)
+
+    loud = _wrong_digits(env, row, col)[0][0]
+    env.step(f"{row + 1} {col + 1} {loud}")
+    assert env.state.done  # second rejection in a row
+    reason = env.state.game_info[0]["reason"]
+    assert "already contains a" in reason and "violates Sudoku rules" not in reason
+
+
 def test_turn_limit_scores_only_player_filled_cells():
     env = _fresh(clues=70, max_turns=1)
     row, col = _empty_cells(env)[0]

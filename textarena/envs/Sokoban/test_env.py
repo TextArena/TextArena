@@ -168,6 +168,24 @@ def test_registered_sokoban_sizes_have_solutions_within_turn_budget(
     assert len(solution) <= max_turns
 
 
+@pytest.mark.parametrize("seed", [-3, 2**70])
+def test_any_integer_seed_generates_a_reproducible_room(seed):
+    first = SokobanEnv(dim_room=(6, 6), num_boxes=1)
+    second = SokobanEnv(dim_room=(6, 6), num_boxes=1)
+    first.reset(num_players=1, seed=seed)
+    second.reset(num_players=1, seed=seed)
+    assert _board_signature(first) == _board_signature(second)
+
+
+@pytest.mark.parametrize("max_turns", [1, 2, 3, 5])
+def test_small_turn_limits_only_generate_rooms_solvable_within_the_limit(max_turns):
+    for seed in range(15):
+        env = SokobanEnv(dim_room=(6, 6), num_boxes=1, max_turns=max_turns)
+        env.reset(num_players=1, seed=seed)
+        solution = _solve(env)
+        assert solution is not None and len(solution) <= max_turns
+
+
 def test_generation_does_not_consume_global_random_generators():
     random.seed(1234)
     np.random.seed(5678)
@@ -252,6 +270,34 @@ def test_push_box_onto_target_wins_and_terminal_render_updates():
     assert "√" in env.render(0)
 
 
+def _last_game_messages(env, count):
+    return [message for _, message, kind, _ in env.state.events if kind.name == "GAME_MESSAGE"][-count:]
+
+
+def test_player_standing_on_a_goal_keeps_the_goal_visible():
+    env = SokobanEnv(dim_room=(5, 5), num_boxes=1)
+    env.reset(num_players=1, seed=42)
+    _install_scripted_room(env)
+    for move in ("left", "up", "up", "right"):
+        done, _ = env.step(move)
+        assert not done
+    assert tuple(env.player_position) == (1, 2) and env.room_fixed[1, 2] == 2
+    assert env.create_board_str(env.room_state).splitlines()[1] == "# _ + _ #"
+    assert "+" in env.render(0) and "+" in env.get_board_str()
+    assert "'+' while standing on an empty goal" in env.prompt(0)
+    assert "'_'" in env.prompt(0)
+
+
+def test_move_messages_describe_walks_and_pushes():
+    env = SokobanEnv(dim_room=(5, 5), num_boxes=1)
+    env.reset(num_players=1, seed=42)
+    _install_scripted_room(env)
+    env.step("left")
+    env.step("right")
+    env.step("up")
+    assert _last_game_messages(env, 3) == ["You moved left.", "You moved right.", "You moved up and pushed a box."]
+
+
 def test_blocked_push_is_invalid_and_atomic():
     env = SokobanEnv(dim_room=(5, 5), num_boxes=1)
     env.reset(num_players=1, seed=42)
@@ -262,6 +308,21 @@ def test_blocked_push_is_invalid_and_atomic():
     assert not done
     assert env.state.error_count == 1
     assert _board_signature(env) == before
+
+
+@pytest.mark.parametrize(
+    "blocker,reason",
+    [(0, "You cannot push a box into a wall!"), (3, "You cannot push a box into another box!")],
+)
+def test_blocked_push_reason_names_what_blocks_the_box(blocker, reason):
+    env = SokobanEnv(dim_room=(5, 5), num_boxes=1)
+    env.reset(num_players=1, seed=42)
+    _install_scripted_room(env)
+    env.room_state[1, 2] = blocker
+    before = len(env.state.events)
+    env.step("up")
+    messages = [message for _, message, _, _ in env.state.events[before:]]
+    assert any(f"Reason: {reason}" in message for message in messages)
 
 
 def test_turn_limit_returns_box_completion_reward():

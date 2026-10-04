@@ -18,7 +18,7 @@ class BlindAuctionEnv(ta.GameEnv):
     max_players = 15
     broadcast_actions = False  # raw actions are echoed only to their author; messages are re-emitted below
 
-    # Canonical bare commands. Each command occupies one line or semicolon-delimited segment.
+    # Canonical bare commands. Each command occupies one line or semicolon-separated segment.
     bare_broadcast_pattern = re.compile(r"^Broadcast\s*:\s*(.+)$", re.IGNORECASE | re.DOTALL)
     bare_whisper_pattern = re.compile(
         r"^Whisper\s+(?:to\s+)?(?:Player\s+)?(\d+)\s*:\s*(.+)$",
@@ -30,19 +30,34 @@ class BlindAuctionEnv(ta.GameEnv):
     )
 
     # Legacy bracketed commands retained for backwards compatibility.
+    # A whitespace run must be consumable in only one way, as retrying every split of a long run is
+    # quadratic: e.g. `\s*(.*?)\]` is written `\s*(?!\s)([^\]]*)\]`, which matches the same text.
     broadcast_pattern = re.compile(
         r"(?:"
-        r"\s*\[Broadcast\s*:\s*(.*?)\]"            # Alternative A: colon present
+        r"\s*\[Broadcast\s*:\s*(?!\s)([^\]]*)\]"              # Alternative A: colon present
         r"|"
-        r"\s*\[Broadcast((?:\s+).*?)\]"            # Alternative B: no colon, whitespace inside
+        r"\s*\[Broadcast(\s+(?!\s)[^\]]*)\]"                  # Alternative B: no colon, whitespace inside
         r"|"
-        r"\s*\[Broadcast\](\s+.*?)(?=\s*\[|$)"     # Alternative C: message appears after bracket
+        r"\s*\[Broadcast\](\s+(?:\s*[^\s\[])*)(?=\s*\[|\s*$)"  # Alternative C: message appears after bracket
         r")",
         re.IGNORECASE | re.DOTALL
     )
 
-    whisper_pattern = re.compile(r"\s*\[Whisper\s+(?:to\s+)?(?:Player\s+)?(\d+)\s*:\s*(.*?)\]", re.IGNORECASE | re.DOTALL)
+    whisper_pattern = re.compile(
+        r"\s*\[Whisper\s+(?:to\s+)?(?:Player\s+)?(\d+)\s*:\s*(?!\s)([^\]]*)\]",
+        re.IGNORECASE | re.DOTALL,
+    )
     bid_pattern = re.compile(r"\[Bid\s+(?:on\s+)?(?:Item\s+)?(\d+)\s*:\s*(\d+)\]", re.IGNORECASE)
+
+    bare_patterns = {"Broadcast": bare_broadcast_pattern, "Whisper": bare_whisper_pattern, "Bid": bare_bid_pattern}
+    legacy_patterns = {"Broadcast": broadcast_pattern, "Whisper": whisper_pattern, "Bid": bid_pattern}
+    command_name_pattern = re.compile(r"\[?\s*(Broadcast|Whisper|Bid)\b", re.IGNORECASE)
+    # Line breaks always separate commands, but a semicolon only does when a command follows it,
+    # so message text may contain semicolons.
+    command_separator = re.compile(r";\s*(?=(?:\[\s*)?(?:Broadcast|Whisper|Bid)\b)", re.IGNORECASE)
+    # The lookbehind keeps the trailing alternative from restarting at every character of an inner
+    # whitespace run, which is quadratic.
+    segment_padding = re.compile(r"^[\s;]+|(?<![\s;])[\s;]+$")
 
     def __init__(
         self,
@@ -162,11 +177,13 @@ class BlindAuctionEnv(ta.GameEnv):
             f"Available Commands:\n"
             f"- Conversation Phase:\n"
             f"  'Broadcast: message' - Send a message to all players\n"
-            f"  'Whisper X: message' - Send a private message to Player X\n\n"
+            f"  'Whisper X: message' - Send a private message to Player X\n"
+            f"  You can send several messages per turn, one per line. Messages may contain semicolons, "
+            f"but a semicolon followed by a command name starts a new command.\n\n"
             f"- Bidding Phase:\n"
             f"  'Bid Item X: amount' - Bid the specified amount on Item X\n"
             f"  To submit multiple bids, put each bid on its own line or separate bids with semicolons.\n\n"
-            f"The winner is the player with the highest net worth (total subjectvie item value + remaining coins)."
+            f"The winner is the player with the highest net worth (total subjective item value + remaining coins)."
         )
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
@@ -196,6 +213,12 @@ class BlindAuctionEnv(ta.GameEnv):
     def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
         """Forfeit one phase action without eliminating a player from an N-player game."""
         gs = self.game_state
+        self.message(
+            player_id,
+            f"You made too many invalid moves in a row and your {'message' if gs['phase'] == 'conversation' else 'bid'} "
+            f"turn is forfeited. Reason: {reason}",
+            ta.ObservationType.GAME_ADMIN,
+        )
         self.state.game_info[player_id]["turn_count"] += 1
         self.state.turn += 1
         if gs["phase"] == "conversation":
@@ -214,32 +237,29 @@ class BlindAuctionEnv(ta.GameEnv):
     def _handle_conversation_action(self, player_id: int, action: str) -> Optional[str]:
         """Process conversation phase actions (broadcasts and whispers). Nothing is
         emitted unless every command is valid; returns the failure reason otherwise."""
-        malformed = self._find_malformed_command(
-            action,
-            {"Broadcast": self.bare_broadcast_pattern, "Whisper": self.bare_whisper_pattern},
-        )
-        if malformed is not None:
-            return malformed
-        if self._starts_with_command(action, {"Bid"}):
+        commands, other_segments = self._parse_commands(action)
+        for segment in other_segments:
+            malformed = self._malformed_command_reason(segment)
+            if malformed is not None:
+                return malformed
+        if commands["Bid"]:
             return "Bid commands are only allowed during the bidding phase."
-        for segment in self._bare_command_segments(action):
-            if not (
-                self.bare_broadcast_pattern.fullmatch(segment)
-                or self.bare_whisper_pattern.fullmatch(segment)
-                or self.broadcast_pattern.fullmatch(segment)
-                or self.whisper_pattern.fullmatch(segment)
-            ):
-                return "Conversation actions may contain only complete Broadcast or Whisper commands."
+        if other_segments:
+            return "Conversation actions may contain only complete Broadcast or Whisper commands."
         events = []
-        for msg in self._parse_broadcasts(action):
-            events.append((-1, f"(Broadcast) Player {player_id} says:{msg}"))
-        for target_pid_str, msg in self._parse_whispers(action):
-            target_pid = int(target_pid_str)
-            if target_pid not in range(self.state.num_players):
-                return f"Attempted to whisper to non-existent Player {target_pid}."
+        for (msg,) in commands["Broadcast"]:
+            msg = self.strip_role_tags(msg).strip()
+            if msg:
+                events.append((-1, f"(Broadcast) Player {player_id} says: {msg}"))
+        for target_pid_str, msg in commands["Whisper"]:
+            target_pid = self._parse_number(target_pid_str)
+            if target_pid is None or target_pid not in range(self.state.num_players):
+                return f"Attempted to whisper to non-existent Player {target_pid_str}."
             if target_pid == player_id:
                 return "You cannot whisper to yourself."
-            events.append((target_pid, f"(Private) Player {player_id} says:{msg}"))
+            msg = self.strip_role_tags(msg).strip()
+            if msg:
+                events.append((target_pid, f"(Private) Player {player_id} says: {msg}"))
         if not events:
             return "Submit at least one Broadcast or Whisper command during conversation."
 
@@ -254,24 +274,22 @@ class BlindAuctionEnv(ta.GameEnv):
         """Process bidding phase actions. Bids are recorded only if every bid command is
         valid and the total is affordable; returns the failure reason otherwise."""
         gs = self.game_state
-        malformed = self._find_malformed_command(action, {"Bid": self.bare_bid_pattern})
-        if malformed is not None:
-            return malformed
-        if self._starts_with_command(action, {"Broadcast", "Whisper"}):
+        commands, other_segments = self._parse_commands(action)
+        names = [self._command_name(segment) for segment in other_segments]
+        if "Bid" in names:
+            return self._malformed_command_reason(other_segments[names.index("Bid")])
+        if commands["Broadcast"] or commands["Whisper"] or any(names):
             return "Communication commands are not allowed during the bidding phase."
         if gs["bidding_done"][player_id]:
             return "You have already submitted your sealed bids."
-        bids = self._parse_bids(action)
+        bids = commands["Bid"]
+        embeds_bid = any(self.bid_pattern.search(segment) for segment in other_segments)
 
-        if not bids:  # not bidding is allowed
+        if not bids and not embeds_bid:  # not bidding is allowed
             self.broadcast(f"Player {player_id} submitted no bids this turn.", ta.ObservationType.GAME_MESSAGE)
             return None
-        for segment in self._bare_command_segments(action):
-            if not (
-                self.bare_bid_pattern.fullmatch(segment)
-                or self.bid_pattern.fullmatch(segment)
-            ):
-                return "A bid submission may contain only complete Bid commands."
+        if other_segments:
+            return "A bid submission may contain only complete Bid commands."
 
         total_bid_amount = 0
         valid_bids = []
@@ -452,66 +470,69 @@ class BlindAuctionEnv(ta.GameEnv):
         reason = f"Multiple players tied for first with a net worth of {max_worth} coins:\n" + "\n".join(details)
         return self.winner(winners, reason=reason)
 
-    def _parse_broadcasts(self, text: str) -> List[str]:
-        """Extract canonical bare and legacy bracketed broadcast commands."""
-        results = []
-        for segment in self._bare_command_segments(text):
-            match = self.bare_broadcast_pattern.fullmatch(segment)
+    def _parse_commands(self, text: str) -> Tuple[Dict[str, List[tuple]], List[str]]:
+        """Group the action's commands by type, and collect the segments that are not complete commands."""
+        commands: Dict[str, List[tuple]] = {name: [] for name in self.bare_patterns}
+        other_segments = []
+        for segment in self._command_segments(text):
+            parsed = self._parse_segment(segment)
+            if parsed is None:
+                other_segments.append(segment)
+                continue
+            for name, groups in parsed:
+                commands[name].append(groups)
+        return commands, other_segments
+
+    def _command_segments(self, text: str) -> List[str]:
+        segments = []
+        for line in text.splitlines():
+            for segment in self.command_separator.split(line):
+                segment = self.segment_padding.sub("", segment)
+                if segment:
+                    segments.append(segment)
+        return segments
+
+    def _parse_segment(self, segment: str) -> Optional[List[Tuple[str, tuple]]]:
+        """Parse one bare command or a run of legacy bracketed commands; None if the segment is anything else.
+
+        Each segment is parsed exactly once, so message text is never scanned for commands."""
+        for name, pattern in self.bare_patterns.items():
+            match = pattern.fullmatch(segment)
             if match:
-                results.append(" " + match.group(1).strip())
-        for g1, g2, g3 in self.broadcast_pattern.findall(text):
-            msg = g1 or g2 or g3
-            if msg and msg.strip():
-                if not msg.startswith(" "):
-                    msg = " " + msg
-                results.append(msg)
-        return results
+                return [(name, match.groups())]
+        commands, pos = [], 0
+        while pos < len(segment):
+            if segment[pos].isspace():
+                pos += 1
+                continue
+            for name, pattern in self.legacy_patterns.items():
+                match = pattern.match(segment, pos)
+                if match:
+                    break
+            else:
+                return None
+            groups = match.groups()
+            if name == "Broadcast":  # one group per historical spelling, exactly one of which matched
+                groups = (next(group for group in groups if group is not None),)
+            commands.append((name, groups))
+            pos = match.end()
+        return commands
 
-    def _parse_whispers(self, text: str) -> List[Tuple[str, str]]:
-        """Extract canonical bare and legacy bracketed whisper commands."""
-        results = []
-        for segment in self._bare_command_segments(text):
-            match = self.bare_whisper_pattern.fullmatch(segment)
-            if match:
-                results.append((match.group(1), " " + match.group(2).strip()))
-        for pid_str, msg in self.whisper_pattern.findall(text):
-            if msg and not msg.startswith(" "):
-                msg = " " + msg
-            results.append((pid_str, msg))
-        return results
+    def _command_name(self, segment: str) -> Optional[str]:
+        match = self.command_name_pattern.match(segment)
+        return match.group(1).capitalize() if match else None
 
-    def _parse_bids(self, text: str) -> List[Tuple[str, str]]:
-        """Extract canonical bare and legacy bracketed bid commands."""
-        results = []
-        for segment in self._bare_command_segments(text):
-            match = self.bare_bid_pattern.fullmatch(segment)
-            if match:
-                results.append(match.groups())
-        results.extend(self.bid_pattern.findall(text))
-        return results
-
-    def _bare_command_segments(self, text: str) -> List[str]:
-        return [segment.strip() for segment in re.split(r"[;\n]+", text) if segment.strip()]
-
-    def _find_malformed_command(self, text: str, patterns: Dict[str, re.Pattern]) -> Optional[str]:
-        for segment in self._bare_command_segments(text):
-            for command, pattern in patterns.items():
-                if not re.match(rf"^\[?\s*{command}\b", segment, re.IGNORECASE):
-                    continue
-                if segment.lstrip().startswith("["):
-                    legacy_pattern = {
-                        "Broadcast": self.broadcast_pattern,
-                        "Whisper": self.whisper_pattern,
-                        "Bid": self.bid_pattern,
-                    }[command]
-                    if not legacy_pattern.fullmatch(segment):
-                        return f"Malformed {command} command."
-                elif not pattern.fullmatch(segment):
-                    return f"Malformed {command} command."
-        return None
-
-    def _starts_with_command(self, text: str, commands: set[str]) -> bool:
-        return any(
-            re.match(rf"^\[?\s*(?:{'|'.join(commands)})\b", segment, re.IGNORECASE)
-            for segment in self._bare_command_segments(text)
+    def _malformed_command_reason(self, segment: str) -> Optional[str]:
+        name = self._command_name(segment)
+        if name is None:
+            return None
+        return (
+            f"Malformed {name} command: {segment!r}. "
+            "(A line break, or a semicolon followed by a command name, starts a new command.)"
         )
+
+    @staticmethod
+    def _parse_number(digits: str) -> Optional[int]:
+        """Parse a player id; None if it has implausibly many digits."""
+        significant = digits.lstrip("0") or "0"
+        return int(significant) if len(significant) <= 18 else None

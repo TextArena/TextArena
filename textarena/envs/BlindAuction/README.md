@@ -1,164 +1,88 @@
-# BlindAuction Environment Documentation
+# Blind Auction
 
-## Overview
-**BlindAuction** is a multi-player strategic auction game where players bid on items with different personal valuations. The game consists of two phases: a conversation phase where players can communicate openly or privately, followed by a bidding phase where each player submits blind bids for items. The goal is to maximize profit by strategically bidding on items that are worth more to you than what you pay. This environment supports flexible communication, strategic information gathering, and competitive bidding in a multi-player setting.
+Players talk in public and in private, then submit sealed bids on items that each of them values differently; the
+player with the highest final net worth wins. It tests negotiation, bluffing, and bidding under private valuations.
 
-## Action Space
+<!-- BEGIN GENERATED: variants -->
+**Players:** 3–15
 
-- **Format:** Actions are strings that vary based on the current game phase:
-  - **Conversation Phase:**
-    - **Broadcast:** `Broadcast: message`
-    - **Private Message:** `Whisper to X: message` where X is a player ID
-  - **Bidding Phase:**
-    - **Bid:** `Bid on Item X: amount` where X is an item ID and amount is the bid in coins
+**`-mdp` observation:** the full transcript, including every player action
 
-- **Examples:**
-  - Send a public message: `Broadcast: I'm interested in the Ancient Vase`
-  - Send a private message: `Whisper to 2: Are you bidding on the Diamond Necklace?`
-  - Submit a bid: `Bid on Item 0: 250`
-  - Submit multiple bids on separate lines or separated by semicolons: `Bid on Item 0: 250; Bid on Item 3: 175`
+| Env ID | Parameters |
+| --- | --- |
+| `BlindAuction-v0` | `starting_capital=1000`, `num_items=5`, `conversation_rounds=3` |
+| `BlindAuction-v0-complex` | `starting_capital=1500`, `num_items=12`, `conversation_rounds=8` |
+| `BlindAuction-v0-fast` | `starting_capital=750`, `num_items=3`, `conversation_rounds=1` |
+| `BlindAuction-v0-high` | `starting_capital=2500`, `num_items=8`, `conversation_rounds=5` |
 
-- **Notes:** Players can include multiple bids in a single bidding phase action, allowing them to bid on multiple items simultaneously.
+Append `-mdp` to any ID for the state-complete variant (e.g. `BlindAuction-v0-mdp`).
+<!-- END GENERATED: variants -->
 
-## Observation Space
+## Rules
 
-**Reset Observations**
-On reset, each player receives a prompt containing their starting capital, item information, and personal valuations. For example:
+- Every player starts with `starting_capital` coins. Each item has a base value (random 50–500 unless configured), and
+  each player privately values every item at a random amount within ±20% of its base value.
+- **Conversation phase:** `conversation_rounds` rounds in which every player, starting with Player 0, takes one turn to
+  send public and/or private messages.
+- **Bidding phase:** every player takes exactly one turn and submits all of their sealed bids at once, or no bids. The
+  total of a player's bids may not exceed their coins.
+- For each item the highest bid wins and only the winner pays; if the highest bid is tied, nobody gets the item.
+- Net worth is remaining coins plus your own valuation of the items you won. The game ends after the last player's
+  bidding turn, and the highest net worth wins.
 
-```plaintext
-Welcome to the Blind Auction, Player 0!
+## Actions
 
-You have 1000 coins to bid on 5 valuable items.
+During the conversation phase, send one or more messages per turn, one command per line or separated by semicolons:
 
-The auction has two phases:
-1. Conversation Phase (3 rounds): Talk with other players to gather information or make deals.
-2. Bidding Phase (1 round): Submit blind bids on items. Highest bidder wins each item.
+- `Broadcast: <message>` sends a message to every player, e.g. `Broadcast: Anyone else after the Gold Statue?`
+- `Whisper <player id>: <message>` sends a private message, e.g. `Whisper 2: I'll stay off Item 1 if you skip Item 3.`
+  (`Whisper to 2:` and `Whisper to Player 2:` also work).
 
-Available Items (with their value TO YOU):
-- Item 0: Ancient Vase - Value to you: 420 coins
-- Item 1: Diamond Necklace - Value to you: 385 coins
-- Item 2: Antique Clock - Value to you: 175 coins
-- Item 3: Signed Painting - Value to you: 290 coins
-- Item 4: Gold Statue - Value to you: 510 coins
+A semicolon only starts a new command when a command name follows it, so messages may contain semicolons:
+`Broadcast: I want the vase; who else does?` is a single message.
 
-Note: Each player may value items differently, up to ±20% difference!
+During the bidding phase, submit every bid in a single reply, one per line or separated by semicolons:
 
-Available Commands:
-- Conversation Phase:
-  'Broadcast: message' - Send a message to all players
-  'Whisper to X: message' - Send a private message to Player X
+- `Bid Item <item id>: <amount>`, e.g. `Bid Item 0: 250; Bid Item 3: 175` (`Bid on Item 0: 250` and `Bid 0: 250` also
+  work). Amounts are positive integers, and each item may be bid on at most once.
+- A reply without any `Bid` command, such as `pass`, submits no bids.
 
-- Bidding Phase:
-  'Bid on Item X: amount' - Bid the specified amount on Item X
-  You can submit multiple bids for different items in a single turn.
+Commands are case-insensitive. Apart from a bid-free pass, every line of a reply must be a complete command, so plain
+prose during the conversation, prose mixed with commands (including a bracketed bid such as `[Bid 0: 50]` inside
+prose), bids during the conversation, messages during bidding, whispers to yourself or to a non-existent player, bids on
+unknown items, and bids totalling more than your coins are all rejected as a whole.
 
-Your goal is to win items that are worth more to you than what you paid, maximizing your profit.
-The winner is the player with the highest total value of items minus spent coins.
-```
+## Observations
 
-**Step Observations**
-During gameplay, players receive various observations based on actions taken. For example:
-
-```plaintext
-[Player 1] Broadcast: Is anyone particularly interested in the Gold Statue?
-[GAME] (Broadcast) Player 1 says: Is anyone particularly interested in the Gold Statue?
-[Player 2] Whisper to 1: I'm more interested in the Diamond Necklace than the Gold Statue
-[GAME] (Private) Player 2 says: I'm more interested in the Diamond Necklace than the Gold Statue
-
-[GAME] Conversation phase complete! Now entering the bidding phase. Each player will have one turn to submit bids.
-[GAME] Bidding Format: 'Bid on Item X: amount' - Bid the specified amount on Item X
-You can submit multiple bids in a single turn. Highest bidder wins each item.
-
-[Player 0] Bid on Item 0: 300; Bid on Item 4: 450
-[GAME] Player 0 submitted bids for Items: 0, 4.
-
-[GAME] ==================== AUCTION RESULTS ====================
-
-🏆 ITEM RESULTS:
-- Item 0 (Ancient Vase): Won by Player 0 for 300 coins
-  Value to Player 0: 420 coins (Profit: 120 coins)
-- Item 1 (Diamond Necklace): Won by Player 2 for 325 coins
-  Value to Player 2: 405 coins (Profit: 80 coins)
-...
-```
-
-## Gameplay
-
-- **Players:** 3-15 players
-- **Initial Setup:** Each player starts with an equal amount of capital (coins)
-- **Item Valuation:** Each player has personal valuations for each item that vary up to ±20% from base values
-- **Phases:**
-  1. **Conversation Phase:** Players take turns communicating
-  2. **Bidding Phase:** Players submit bids for items
-- **Objective:** Maximize profit by winning items for less than their value to you
-- **Game Structure:** Configurable number of conversation rounds followed by a single bidding round
-
-## Key Rules
-
-1. **Capital Management:**
-   - Each player begins with the same starting capital
-   - Players cannot bid more than their available capital
-   - The total of all bids cannot exceed a player's remaining capital
-
-2. **Communication:**
-   - **Broadcasting:** Send messages visible to all players
-   - **Private Messaging:** Send messages only visible to a specific player
-   - Communication happens only during the conversation phase
-
-3. **Bidding System:**
-   - **Blind Bidding:** Players cannot see others' bids until results are revealed
-   - **Multiple Bids:** Players can bid on as many items as they want in a single turn
-   - **Highest Bid Wins:** For each item, the player with the highest bid wins
-   - **Payment:** Only winning bids are paid; losing and tied bids are returned
-
-4. **Valid Moves:**
-   - During conversation phase: broadcast and whisper actions
-   - During bidding phase: bid actions
-   - Bids must be positive integers and cannot exceed remaining capital
-
-5. **Winning Conditions:**
-   - The player with the highest net worth at the end of the game wins
-   - Net worth = remaining capital + total value of won items
-   - In case of a tie, multiple players are declared winners
-
-6. **Game Termination:**
-   - The game concludes after all players have submitted their bids
-   - Final scores are calculated based on each player's net worth
+Each player first receives the rules, their coins, and the item list with their private value for every item. During the
+conversation, broadcasts reach everyone as `(Broadcast) Player X says: ...`, while a whisper reaches only its target as
+`(Private) Player X says: ...`; raw replies are echoed only to their author. A game message announces the start of the
+bidding phase. A bidder receives a private confirmation of the items they bid on, but no bid amounts are shown to anyone
+else; a player who submits no bids is announced publicly. Once everyone has bid, the full results are broadcast: each
+item's winner, winning bid, and the winner's valuation, plus every player's spending, remaining coins, profit, and net
+worth. No board is shown to players during the game.
 
 ## Rewards
 
-| Outcome     | Reward for Winner | Reward for Others |
-|-------------|:-----------------:|:-----------------:|
-| **Win**     | `+1`              | `-1`              |
-| **Draw**    | `0`               | `0`               |
-| **Invalid** | `-1`              | `0`               |
+| Outcome | Reward |
+| --- | --- |
+| Single highest net worth | Winner `+1`, everyone else `-1` |
+| Several (but not all) players tie for the highest net worth | Each tied leader `+1`, everyone else `-1` |
+| All players tie (e.g. nobody wins an item) | Everyone `0` |
+| Second consecutive invalid move | The turn is forfeited (in the bidding phase, the player bids nothing); no elimination or direct penalty |
 
 ## Parameters
 
-- `starting_capital` (`int`, default: `1000`):
-  - **Description:** Initial amount of coins for each player
-  - **Impact:** Higher values allow for more aggressive bidding strategies
+- `starting_capital` (default `1000`): coins per player, which also caps the total of a player's bids.
+- `num_items` (default `5`): number of items up for auction.
+- `conversation_rounds` (default `3`): rounds of conversation before bidding; `0` starts directly with bidding.
+- `base_item_values` (default `None`): optional fixed base values; missing entries are drawn at random and extra entries
+  are ignored.
 
-- `num_items` (`int`, default: `5`):
-  - **Description:** Number of items available for auction
-  - **Impact:** More items create more complex bidding decisions and strategic considerations
+## Notes
 
-- `conversation_rounds` (`int`, default: `3`):
-  - **Description:** Number of conversation rounds before bidding
-  - **Impact:** More rounds allow for better information gathering and potential deception
-
-- `base_item_values` (`Optional[List[int]]`, default: `None`):
-  - **Description:** Preset base values for items (if None, random values are generated)
-  - **Impact:** Can be used to create specific auction scenarios with predetermined valuations
-
-## Variants
-
-| Env-id                    | starting_capital | num_items | conversation_rounds |
-|---------------------------|:----------------:|:---------:|:-------------------:|
-| `BlindAuction-v0`         | `1000`           | `5`       | `3`                 |
-| `BlindAuction-v0-high`    | `2500`           | `8`       | `5`                 |
-| `BlindAuction-v0-fast`    | `750`            | `3`       | `1`                 |
-| `BlindAuction-v0-complex` | `1500`           | `12`      | `8`                 |
-
-### Contact
-If you have questions or face issues with this specific environment, please reach out directly to guertlerlo@cfar.a-star.edu.sg
+- A line break always ends a command, so a message cannot span several lines. A semicolon followed by a command name
+  also starts a new command even inside a message (`Broadcast: I like the vase; bid wisely` is rejected as a malformed
+  `Bid`), which keeps a mistyped whisper from being broadcast by accident.
+- Text inside a message is never interpreted as commands; for example, a broadcast quoting `[Whisper 2: hi]` does not
+  also send a whisper.

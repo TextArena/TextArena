@@ -87,6 +87,40 @@ def test_multiple_bids_use_one_bare_command_per_line():
     assert env.state.game_state["player_bids"][0] == {0: 10, 1: 20}
 
 
+def test_bids_may_also_be_separated_by_semicolons():
+    env = _fresh(conversation_rounds=1)
+    _advance_to_bidding(env)
+    done, _ = env.step("Bid on Item 0: 10; Bid on Item 1: 20;")
+    assert not done
+    assert env.state.error_count == 0
+    assert env.state.game_state["player_bids"][0] == {0: 10, 1: 20}
+    done, _ = env.step("[Bid Item 0: 15]; [Bid Item 2: 5]\n[Bid Item 3: 1]")
+    assert done
+    assert env.state.game_state["player_bids"][1] == {0: 15, 2: 5, 3: 1}
+
+
+def test_semicolon_separated_bid_mixed_with_prose_is_invalid_but_plain_prose_passes():
+    env = _fresh(conversation_rounds=0, num_items=2)
+    before = copy.deepcopy(env.game_state)
+    done, _ = env.step("Bid on Item 0: 10; I hope that is enough")
+    assert not done
+    assert env.state.error_count == 1
+    assert env.game_state == before
+
+    done, _ = env.step("No bids from me; good luck")
+    assert not done
+    assert env.state.error_count == 0
+    assert env.game_state["bidding_done"][0] is True
+    assert env.game_state["player_bids"][0] == {}
+
+
+def test_prompt_and_announcement_teach_both_bid_separators():
+    env = _fresh(conversation_rounds=1)
+    assert "one per line or separated by semicolons" in env.prompt(0)
+    _advance_to_bidding(env)
+    assert any("separate bids with semicolons" in message for _, message, _, _ in env.state.events)
+
+
 def test_duplicate_item_bids_are_rejected_atomically():
     env = _fresh(conversation_rounds=0, num_items=1)
     before = copy.deepcopy(env.game_state)

@@ -16,6 +16,20 @@ class Role:
     description: str = ""
     def get_prompt(self, player_id: int, player_roles: Dict[int, str], num_players: int, num_discussion_rounds: int) -> str: raise NotImplementedError
 
+    @staticmethod
+    def rules(num_discussion_rounds: int) -> str:
+        return (
+            "\nHow a game flows:\n"
+            "- Night: the Mafia secretly vote on a non-Mafia victim; then the Doctor protects one other player "
+            "and the Detective investigates one other player.\n"
+            "- Day: the night's result is announced (who was killed, if anyone; roles are never revealed), followed by "
+            f"{num_discussion_rounds} rounds of public discussion in which every living player speaks in turn. "
+            "Then every living player votes publicly by replying with a player number; the player with the most "
+            "votes is eliminated, and ties are broken at random.\n"
+            "- The Village wins once every Mafia member is eliminated; the Mafia win as soon as they make up at least "
+            "half of the living players.\n"
+        )
+
 class Villager(Role):
     name = "Villager"
     team = "Village"
@@ -25,14 +39,10 @@ class Villager(Role):
             f"Welcome to Secret Mafia! You are Player {player_id}.\n"
             f"Your role: {self.name}\nTeam: {self.team}\nDescription: {self.description}\n\n"
             f"Players: {', '.join([f'Player {i}' for i in range(num_players)])}\n\n"
-            f"The game progresses through Day and Night phases.\n"
-            f"- During the Day phase, there are {num_discussion_rounds} rounds of discussion followed by voting.\n"
-            f"- During discussions, everything you say is automatically broadcasted to all players.\n"
-            f"- After discussions, all players must vote to eliminate one player.\n"
-            f"- During the Night phase, you have no special actions.\n\n"
-            f"The game ends when either all Mafia members are eliminated (Village wins) or\n"
-            f"Mafia members equal or outnumber Villagers (Mafia wins).\n"
-        )
+            f"During DAY phase: Speak freely and vote. Everything you say during discussions is broadcast to all players.\n"
+            f"During NIGHT phase: you have no special actions.\n"
+            f"Win by identifying and eliminating all Mafia members.\n"
+        ) + self.rules(num_discussion_rounds)
 
 class Mafia(Role):
     name = "Mafia"
@@ -46,9 +56,10 @@ class Mafia(Role):
             f"Players: {', '.join([f'Player {i}' for i in range(num_players)])}\n\n"
             f"Your teammates are: {', '.join(teammates)}.\n\n"
             f"During DAY phase: Speak freely and vote.\n"
-            f"During NIGHT phase: reply with the player number, e.g. 'Player X' or just 'X', to vote and eliminate a villager.\n"
+            f"During NIGHT phase: reply with the player number, e.g. 'Player X' or just 'X', to vote and eliminate a villager. "
+            f"Only your fellow Mafia see these votes; the most-voted target is attacked.\n"
             f"Win by eliminating villagers until Mafia equal or outnumber them.\n"
-        )
+        ) + self.rules(num_discussion_rounds)
 
 class Doctor(Role):
     name = "Doctor"
@@ -60,9 +71,10 @@ class Doctor(Role):
             f"Your role: {self.name}\nTeam: {self.team}\nDescription: {self.description}\n\n"
             f"Players: {', '.join([f'Player {i}' for i in range(num_players)])}\n\n"
             f"During DAY phase: Speak freely and vote.\n"
-            f"During NIGHT phase: reply with the player number, e.g. 'Player X' or just 'X', to protect a player.\n"
+            f"During NIGHT phase: reply with the player number, e.g. 'Player X' or just 'X', to protect a player. "
+            f"You cannot protect yourself.\n"
             f"Win by identifying and eliminating all Mafia members.\n"
-        )
+        ) + self.rules(num_discussion_rounds)
 
 class Detective(Role):
     name = "Detective"
@@ -74,15 +86,16 @@ class Detective(Role):
             f"Your role: {self.name}\nTeam: {self.team}\nDescription: {self.description}\n\n"
             f"Players: {', '.join([f'Player {i}' for i in range(num_players)])}\n\n"
             f"During DAY phase: Speak freely and vote.\n"
-            f"During NIGHT phase: reply with the player number, e.g. 'Player X' or just 'X', to investigate.\n"
+            f"During NIGHT phase: reply with the player number, e.g. 'Player X' or just 'X', to investigate. "
+            f"You cannot investigate yourself.\n"
             f"You'll learn immediately if the target is Mafia.\n"
             f"Win by identifying and eliminating all Mafia members.\n"
-        )
+        ) + self.rules(num_discussion_rounds)
 
 class VoteHandler:
     @staticmethod
     def parse(text: str) -> Optional[int]:
-        m = SecretMafiaEnv.voting_pattern.search(text)
+        m = SecretMafiaEnv.voting_pattern.fullmatch(text.strip())
         if not m:
             return None
         try:
@@ -90,7 +103,7 @@ class VoteHandler:
         except ValueError:
             return None
     @staticmethod
-    def tally(votes: Dict[int, int], rng=random) -> Optional[int]:
+    def tally(votes: Dict[int, int], rng: random.Random) -> Optional[int]:
         if not votes: return None
         # Count votes per target
         counts: Dict[int, int] = {}
@@ -104,7 +117,7 @@ class SecretMafiaEnv(ta.GameEnv):
     min_players = 6
     max_players = 15
 
-    voting_pattern = re.compile(r"^\s*\[?\s*(?:player\s*)?([0-9]{1,2})\s*\]?\s*$", re.IGNORECASE)
+    voting_pattern = re.compile(r"\[?\s*(?:player\s*)?([0-9]{1,2})\s*\]?", re.IGNORECASE)  # fullmatch on stripped text
     _ROLE_FACTORY = {
         "Villager":  Villager,
         "Mafia":     Mafia,
@@ -190,14 +203,15 @@ class SecretMafiaEnv(ta.GameEnv):
             Phase.DAY_DISCUSSION: self._handle_discussion, Phase.DAY_VOTING: self._handle_day_vote, Phase.NIGHT_MAFIA: self._handle_mafia_vote,
             Phase.NIGHT_DOCTOR: self._handle_doctor_action, Phase.NIGHT_DETECTIVE: self._handle_detective_action,
         }
-        result = phase_dispatch[self.phase](player_id, action)
+        # Votes are parsed from the same label-free text that is echoed to the other players.
+        result = phase_dispatch[self.phase](player_id, self.strip_role_tags(action).strip())
         if isinstance(result, ta.Invalid):
             return result
         return self._advance(self.set_next_player)
 
     def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
         # Repeated invalid move: the player is killed off and the game moves on.
-        outcome = self._eliminate_player(player_id, "has been eliminated by making an invalid move.")
+        outcome = self._eliminate_player(player_id, "has been eliminated by making an invalid move")
         if outcome is not None:
             return outcome
         def assign(pid: int):
@@ -285,9 +299,7 @@ class SecretMafiaEnv(ta.GameEnv):
         gs["next_player_ids"] = next_player_ids
 
     def _echo_action(self, from_pid: int, action: str, to_id: int = -1):
-        """Echo a raw player action, stripping role tags exactly like the legacy observation logging."""
-        for role_tag in self.state.role_mapping.values():
-            action = action.replace(f"[{role_tag}]", "")
+        """Echo a player action that apply() has already stripped of sender labels."""
         self.state.add_event(from_pid, action, ta.ObservationType.PLAYER_ACTION, to_id=to_id)
 
     def _handle_discussion(self, pid: int, action: str) -> None:
@@ -313,7 +325,7 @@ class SecretMafiaEnv(ta.GameEnv):
     def _handle_doctor_action(self, pid: int, action: str) -> Optional[ta.Invalid]:
         target = VoteHandler.parse(action)
         if target is None or target == pid or target not in self.game_state["alive_players"]:
-            return self.invalid("Invalid protection target.")
+            return self.invalid(self._target_hint("Invalid protection target", [p for p in self.game_state["alive_players"] if p != pid]))
 
         # save target
         if target == self.game_state["pending_elimination"]:
@@ -324,7 +336,7 @@ class SecretMafiaEnv(ta.GameEnv):
     def _handle_detective_action(self, pid: int, action: str) -> Optional[ta.Invalid]:
         target = VoteHandler.parse(action)
         if target is None or target == pid or target not in self.game_state["alive_players"]:
-            return self.invalid("Invalid investigation target.")
+            return self.invalid(self._target_hint("Invalid investigation target", [p for p in self.game_state["alive_players"] if p != pid]))
         is_mafia = self.player_roles[target] == "Mafia"
         result = f"Player {target} IS{' ' if is_mafia else ' NOT '}a Mafia member."
         self.message(pid, result, ta.ObservationType.GAME_MESSAGE)  # investigation result stays private
@@ -342,7 +354,7 @@ class SecretMafiaEnv(ta.GameEnv):
         target = VoteHandler.parse(action)
         valid_targets = self.game_state["alive_players"] if valid_targets is None else valid_targets
         if target is None or target not in valid_targets:
-            return self.invalid("Vote not in valid format or invalid target.")
+            return self.invalid(self._target_hint("Vote not in valid format or invalid target", valid_targets))
 
         self.game_state["votes"][pid] = target
 
@@ -353,6 +365,11 @@ class SecretMafiaEnv(ta.GameEnv):
             for m in mafia:
                 self._echo_action(pid, action, to_id=m)  # night votes are visible to the mafia only
         return None
+
+    @staticmethod
+    def _target_hint(problem: str, targets: List[int]) -> str:
+        example = targets[0] if targets else 0
+        return f"{problem}. Reply with just a player number, e.g. '{example}'. Valid: {', '.join(map(str, targets))}."
 
     def _resolve_day_votes(self) -> Optional[ta.Outcome]:
         target = VoteHandler.tally(self.game_state["votes"], rng=self.rng)

@@ -41,11 +41,12 @@ class TowerOfHanoiEnv(ta.GameEnv):
         return (
             f"You are playing Tower of Hanoi with {self.num_disks} disks.\nYou have to move the disks from tower A to tower C.\n"
             "To move a disk, reply with the source tower and the target tower (e.g., 'A C').\nNote that you can only move the top disk of a tower, and that a bigger disk cannot be placed on a smaller disk.\n"
-            "At each turn, submit one move."
+            "The board lists each tower's disks from bottom to top; larger numbers are larger disks.\n"
+            f"At each turn, submit one move. You have {self.max_turns} moves."
         )
 
     def render(self, player_id: int) -> str:
-        return f"Current Board: \n{self._render_board()}."
+        return f"Current Board (disks listed bottom to top):\n{self._render_board()}"
 
     def _render_board(self):
         rendered_board = ""

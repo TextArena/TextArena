@@ -53,6 +53,13 @@ class MemoryGameEnv(ta.GameEnv):
         self.grid_size = grid_size
         self.max_turns = max_turns
 
+    @property
+    def action_format(self) -> str:
+        return (
+            f"the row and column of the first card and then of the second card, four numbers from 0 to "
+            f"{self.grid_size - 1} separated by spaces, for example '0 1 1 0'"
+        )
+
     def setup(self) -> Dict[str, Any]:
         return {"board": self._generate_board(), "matched_positions": set(), "score": {0: 0, 1: 0}, "scores": {0: {"Score": 0}, 1: {"Score": 0}}}
 
@@ -66,12 +73,16 @@ class MemoryGameEnv(ta.GameEnv):
             f"You are Player {player_id}. You are playing the Memory Game.\n"
             "Your goal is to match more pairs of cards on the board, than your opponent.\n"
             "On your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively, e.g. '0 1 1 0', where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.\n"
-            "If the two cards match, you get a point, the cards remain face up, and you take another turn. If they do not match, the cards are flipped back face down, e.g. '.'.\n"
+            "If the two cards match, you get a point, the cards remain face up, and you take another turn. If they do not match, both players are told the two symbols and the cards are flipped back face down, e.g. '.'.\n"
             f"The game ends when all pairs have been matched{turn_limit_rule}. The player with the higher score wins."
         )
 
     def render(self, player_id: int) -> str:
-        return f"Current board:\n{self._render_board()}"
+        score = self.game_state["score"]
+        status = f"Scores: Player 0: {score[0]}, Player 1: {score[1]}"
+        if self.max_turns is not None:
+            status += f" | Turns played: {self.state.turn}/{self.max_turns}"
+        return f"Current board:\n{self._render_board()}\n{status}"
 
     def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
         gs = self.game_state
@@ -121,11 +132,10 @@ class MemoryGameEnv(ta.GameEnv):
 
     def _render_board(self) -> str:
         gs = self.game_state
-        rendered_board = "  " + " ".join(str(c) for c in range(self.grid_size)) + "\n"
+        index_width = len(str(self.grid_size - 1))
+        cell_width = max(index_width, max(len(symbol) for row in gs["board"] for symbol in row))
+        lines = [" " * index_width + " " + " ".join(f"{c:<{cell_width}}" for c in range(self.grid_size))]
         for r in range(self.grid_size):
-            row = f"{r} "
-            for c in range(self.grid_size):
-                if (r, c) in gs["matched_positions"]: row += f"{gs['board'][r][c]} "
-                else: row += ". "
-            rendered_board += row.strip() + "\n"
-        return rendered_board
+            cells = [gs["board"][r][c] if (r, c) in gs["matched_positions"] else "." for c in range(self.grid_size)]
+            lines.append(f"{r:<{index_width}} " + " ".join(f"{cell:<{cell_width}}" for cell in cells))
+        return "".join(line.rstrip() + "\n" for line in lines)

@@ -14,7 +14,7 @@ import copy
 import pytest
 
 import textarena.envs.LetterAuction.env as letter_auction_module
-from textarena.envs.LetterAuction.env import LetterAuctionEnv
+from textarena.envs.LetterAuction.env import MIN_COMPLETE_GAME_TURNS, LetterAuctionEnv
 
 
 def _fresh():
@@ -165,10 +165,79 @@ def test_seeded_reset_snapshot_and_configuration_bounds():
     assert first.round_number == 0
     with pytest.raises(ValueError):
         LetterAuctionEnv(starting_coins=0)
-    with pytest.raises(ValueError):
-        LetterAuctionEnv(max_turns=0)
-    with pytest.raises(ValueError):
-        LetterAuctionEnv(max_turns=True)
+    for max_turns in (0, True, 26, MIN_COMPLETE_GAME_TURNS - 1):
+        with pytest.raises(ValueError, match="max_turns"):
+            LetterAuctionEnv(max_turns=max_turns)
+    assert MIN_COMPLETE_GAME_TURNS == 54
+    assert LetterAuctionEnv().max_turns is None
+    assert LetterAuctionEnv(max_turns=MIN_COMPLETE_GAME_TURNS).max_turns == MIN_COMPLETE_GAME_TURNS
+
+
+def _auction(env, prices):
+    """Play out the auction: `prices` maps a letter to (winner, price); every other letter is double-passed."""
+    while env.round_number < len(env.letters):
+        target, price = prices.get(env.round_letter, (None, None))
+        current = env.state.current_player_id
+        if target is None:
+            env.step("pass")
+            env.step("pass")
+        elif current == target:
+            env.step(f"bid {price}")
+            env.step("pass")
+        else:
+            env.step("pass")
+            env.step(f"bid {price}")
+
+
+def test_max_turns_ends_an_unfinished_game_as_a_draw():
+    env = LetterAuctionEnv(max_turns=MIN_COMPLETE_GAME_TURNS)
+    env.reset(num_players=2, seed=42)
+    env.step("bid 1")
+    env.step("bid 2")  # the bidding war costs one extra turn
+    while env.round_number < len(env.letters):
+        env.step("pass")
+    assert env.state.turn == MIN_COMPLETE_GAME_TURNS - 1
+
+    done, _ = env.step("pass")  # first word submission is the last allowed turn
+    assert done
+    assert env.state.rewards == {0: 0, 1: 0}
+    assert "turn limit" in env.state.game_info[0]["reason"]
+
+
+def test_game_finishing_on_the_last_allowed_turn_keeps_its_result():
+    env = LetterAuctionEnv(max_turns=MIN_COMPLETE_GAME_TURNS)
+    env.reset(num_players=2, seed=42)
+    _auction(env, {"A": (0, 2), "I": (1, 1)})
+    words = {0: "a", 1: "i"}
+    env.step(words[env.state.current_player_id])
+    done, _ = env.step(words[env.state.current_player_id])
+    assert done
+    assert env.state.turn == MIN_COMPLETE_GAME_TURNS
+    assert env.state.rewards == {0: 1, 1: -1}
+
+
+def test_passing_in_the_word_phase_submits_no_word():
+    env = _fresh()
+    _auction(env, {})
+    first = env.state.current_player_id
+    done, _ = env.step("pass")
+    assert not done
+    assert env.state.error_count == 0
+    assert env.player_states[first]["word"] == ""
+    assert env.player_states[first]["word_value"] == 0
+    done, _ = env.step("PASS")
+    assert done
+    assert env.state.rewards == {0: 0, 1: 0}
+
+
+def test_any_word_beats_submitting_no_word():
+    env = _fresh()
+    _auction(env, {"A": (1, 1)})
+    moves = {0: "pass", 1: "a"}
+    env.step(moves[env.state.current_player_id])
+    done, _ = env.step(moves[env.state.current_player_id])
+    assert done
+    assert env.state.rewards == {0: -1, 1: 1}
 
 
 def test_renderer_is_pure_and_does_not_reveal_future_letter_order():

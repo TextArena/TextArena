@@ -5,6 +5,7 @@ graph forms a cycle, marks collapse into classical symbols. The sequences below
 force a triangular cycle among cells 0,1,2 so a full row solidifies for one player.
 Player 0 is 'O' (even), Player 1 is 'X' (odd); Player 0 moves first.
 """
+import textarena as ta
 from textarena.envs.QuantumTicTacToe.env import QuantumTicTacToeEnv
 
 
@@ -197,6 +198,55 @@ def test_out_of_range_cell_rejected():
     done, _ = env.step("9,0")
     assert not done
     assert env.state.error_count == 1
+
+
+def _game_messages(env):
+    return [m for f, m, t, to in env.state.events if f == -1 and to == -1 and t != ta.ObservationType.GAME_BOARD]
+
+
+def test_feedback_uses_the_same_cell_numbers_as_actions():
+    env = _fresh()
+    for action in ["2,8", "3,4", "8,2"]:  # X2 and O1 share cells 2 and 8 -> collapse
+        env.step(action)
+
+    messages = _game_messages(env)
+    assert "Player 0 placed spooky mark O1 in cells 2 and 8." in messages
+    assert "Player 0 placed spooky mark O3 in cells 2 and 8." in messages
+    assert "Superposition O3 resolved at cell 2." in messages
+    assert "Superposition O1 resolved at cell 8." in messages
+    assert not any("(0, 2)" in m or "(2, 2)" in m for m in messages)
+
+
+def test_render_lists_open_cells_and_every_spooky_mark():
+    env = _fresh()
+    for action in ["4,0", "4,1", "4,2", "4,3", "4,5"]:  # five marks share cell 4
+        env.step(action)
+
+    board = env.render(1)
+
+    assert "Spooky marks: O1 in cells 0 and 4; X2 in cells 1 and 4; O3 in cells 2 and 4; X4 in cells 3 and 4; O5 in cells 4 and 5" in board
+    assert "Open cells: 0, 1, 2, 3, 4, 5, 6, 7, 8" in board
+    grid = [line for line in board.splitlines() if "|" in line or line.startswith("-")]
+    assert len(grid) == 5 and len({len(line) for line in grid}) == 1
+
+    env.step("0,4")  # X6 closes the cycle 0-4: X6 -> cell 0, then everything in that component collapses
+    board = env.render(0)
+    assert "Spooky marks: none" in board
+    assert "X6" in board and "Open cells: 6, 7, 8" in board
+
+
+def test_prompt_states_how_automatic_collapse_is_resolved():
+    prompt = _fresh().prompt(0)
+    assert "lower-numbered" in prompt
+    assert "only one open cell" in prompt
+
+
+def test_non_ascii_digits_are_rejected():
+    env = _fresh()
+    done, _ = env.step("0,\u0664")  # ARABIC-INDIC DIGIT FOUR
+    assert not done
+    assert env.state.error_count == 1
+    assert env.state.game_state["superpositions"] == {}
 
 
 def test_huge_cell_index_is_rejected_atomically():

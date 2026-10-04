@@ -6,7 +6,14 @@ The secret words are random per seed, so we read them from
 import pytest
 
 import textarena as ta
-from textarena.envs.DontSayIt.env import DontSayItEnv
+from textarena.envs.DontSayIt.env import OGDEN_OPERATIONS, DontSayItEnv
+from textarena.utils import word_lists
+from textarena.utils.word_lists import get_basic_english_words, get_headwords
+
+
+class _MissingCorpus:
+    def words(self, *_args, **_kwargs):
+        raise LookupError("corpus unavailable")
 
 
 def _fresh(max_turns=6):
@@ -118,13 +125,41 @@ def test_unlimited_prompt_and_snapshot_restore():
     assert env.state.turn == 0
 
 
-def test_missing_nltk_corpus_uses_offline_dictionary(monkeypatch):
-    def unavailable(*_args, **_kwargs):
-        raise LookupError("corpus unavailable")
+@pytest.mark.parametrize("hardcore", [False, True])
+def test_word_selection_is_identical_with_and_without_nltk(monkeypatch, hardcore):
+    def selections():
+        env = DontSayItEnv(max_turns=2, hardcore=hardcore)
+        expected_pool = get_headwords() if hardcore else get_basic_english_words() - OGDEN_OPERATIONS
+        assert env.word_list == sorted(expected_pool)
+        targets = []
+        for seed in range(5):
+            env.reset(num_players=2, seed=seed)
+            targets.append(dict(env.state.game_state["target_words"]))
+        return targets
 
-    monkeypatch.setattr("textarena.envs.DontSayIt.env.words.words", unavailable)
+    with_nltk = selections()
+    monkeypatch.setattr(word_lists, "words", _MissingCorpus())
+    for cached in (word_lists._load_basic_english, word_lists.get_headwords, word_lists._load_headword_flags):
+        cached.cache_clear()
+    assert selections() == with_nltk
+
+
+def test_normal_mode_draws_basic_english_nouns_and_adjectives():
     env = DontSayItEnv(max_turns=2)
-    env.reset(num_players=2, seed=2)
-    targets = env.state.game_state["target_words"]
-    assert targets[0] != targets[1]
-    assert all(word.isascii() and word.isalpha() for word in targets.values())
+    assert len(env.word_list) == 750
+    assert {"apple", "water", "cheese", "angry", "beautiful"} <= set(env.word_list)
+    assert not {"the", "and", "not", "very", "about", "because", "have", "you"} & set(env.word_list)
+    assert min(len(word) for word in env.word_list) >= 3
+    assert OGDEN_OPERATIONS <= get_basic_english_words() | {"i"}
+    assert len(OGDEN_OPERATIONS) == 100
+
+
+def test_hardcore_draws_from_a_larger_pool():
+    common = DontSayItEnv(max_turns=2)
+    hardcore = DontSayItEnv(max_turns=2, hardcore=True)
+    assert len(hardcore.word_list) > 10 * len(common.word_list)
+    common.reset(num_players=2, seed=1)
+    hardcore.reset(num_players=2, seed=1)
+    assert common.state.game_state["target_words"] != hardcore.state.game_state["target_words"]
+    assert set(common.state.game_state["target_words"].values()) <= set(common.word_list)
+    assert set(hardcore.state.game_state["target_words"].values()) <= set(hardcore.word_list)

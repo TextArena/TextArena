@@ -1,0 +1,887 @@
+{
+  "en": {
+    "0229e960cf": "Navy",
+    "09732bcbfe": "After more than {error_allowance} invalid moves in a row you lose{v0}.",
+    "0c342dfc46": "Invalid build at {build}",
+    "152a374320": "- Then build with the worker you moved, on a square adjacent to its new position (the square it just left counts)",
+    "1ced325ddd": "Grey",
+    "20819805fa": "Player {player_id} ({PLAYER_COLORS}) moved worker {worker_num} from {source} to {dest}.",
+    "2781c7b7ff": "- Height: 0-3 for building levels, 4 for dome",
+    "2a0412c69d": "Cannot move {PLAYER_COLORS} worker (you are {PLAYER_COLORS_2})",
+    "301283170a": "1. Movement:",
+    "37619fc130": "White",
+    "3dbcab9084": "Player {player_id} ({PLAYER_COLORS}) moved worker {worker_num} from {source} to {dest} and built at {build}",
+    "4540757717": "No players remain.",
+    "45af12c40b": "Game Rules:",
+    "53789e63c0": "Legend:",
+    "5822495565": "Player {alive} is the last player remaining.",
+    "5db6aca499": "is_open must be a boolean",
+    "5ef8cf4bf1": "- Can move up maximum one level, but can move down any number of levels",
+    "5f93f141da": "Invalid move format. Expected format: 'worker_id source dest build' as one token, e.g. 'N1C1C2B2'",
+    "62a60ffe32": "Player {player_id} ({PLAYER_COLORS}) was eliminated for repeated invalid moves, and their workers were removed.",
+    "63025d8b95": "- On your turn, move one of your workers to an adjacent square (including diagonals)",
+    "6543a3f89a": "- A player who cannot make a legal turn (a move followed by a build), or who makes too many invalid moves in a row, is eliminated and their workers are removed; the last player remaining wins",
+    "6ba0573c47": "Number of players must be 2 or 3",
+    "6fd84eb6c9": "- Cannot move to squares occupied by other workers or domes",
+    "7351db7172": "Valid moves: {get_valid_moves}",
+    "75d24eef24": "Example: {example} means move {color} worker {example_2} from {example_3} to {example_4} and build at {example_5}",
+    "7a1d39a66f": "You are playing {color} in a game of Santorini with {num_players} players. Turn order: {PLAYER_COLORS}.",
+    "866c63034e": "- Workers: Navy(N1,N2), White(W1,W2), Grey(G1,G2)",
+    "91ac441794": "error_allowance must be a non-negative integer",
+    "93a046cee5": "- Building adds one level (or creates a dome on level 3)",
+    "99b225fbd1": "The board is a 5x5 grid: rows are lettered A-E from top to bottom and columns are numbered 1-5 from left to right. Each player has two workers, written as the first letter of their color plus 1 or 2 (Navy N1/N2, White W1/W2, Grey G1/G2).",
+    "9b5edb54ae": "show_valid must be a boolean",
+    "abd23d8710": "- Win by moving up from level 2 to level 3; the turn ends before building, so the build square may be left out",
+    "b41244c32a": "- Cannot build on top of a dome (level 4)",
+    "b599f06330": "Player {candidate} ({PLAYER_COLORS}) was eliminated because they had no valid moves.",
+    "bbe6a542fd": "- Cell format is [height worker]",
+    "c1bb64eff4": "(you are eliminated)",
+    "d055c475e9": "- Cannot build where any worker is standing",
+    "d439b2b4fa": "2. Building:",
+    "eb917af4f1": "3. Win Conditions:",
+    "ef6cdead8e": "Invalid move from {source} to {dest}",
+    "f0cc7cc880": "No worker {worker_num} at position {source}",
+    "f11770900d": "A non-winning move must include a build coordinate",
+    "f4a5d2feb1": "The board is not shown in this game: keep track of it from the announced moves.",
+    "f7efb66ac7": "- Win if your opponent cannot make a legal turn (a move followed by a build)",
+    "fd6cdc0dec": "Player {player_id} ({PLAYER_COLORS}) won by moving up to level 3!",
+    "fdb58ac2b7": "{blocked_rule}Make your move in the format 'worker_id source dest build', written as one token."
+  },
+  "ace": {
+    "45af12c40b": "Peuraton Game:",
+    "7351db7172": "Gerakan sah: {get_valid_moves}"
+  },
+  "acm": {
+    "45af12c40b": "قواعد اللعبة:",
+    "7351db7172": "النقرات الصالحة: {get_valid_moves}"
+  },
+  "acq": {
+    "45af12c40b": "قواعد اللعبة:",
+    "7351db7172": "النقرات الصالحة: {get_valid_moves}"
+  },
+  "aeb": {
+    "45af12c40b": "قواعد اللعبة:",
+    "7351db7172": "النقرات الصالحة: {get_valid_moves}"
+  },
+  "af": {
+    "45af12c40b": "Spelreëls:",
+    "7351db7172": "Geldige skuiwe: {get_valid_moves}"
+  },
+  "ajp": {
+    "45af12c40b": "قواعد اللعبة:",
+    "7351db7172": "النقرات الصحيحة: {get_valid_moves}"
+  },
+  "aka": {
+    "45af12c40b": "Mmara a wɔde di dwuma:",
+    "7351db7172": "Nhyehyɛeɛ a wɔtumi yɛ: {get_valid_moves}"
+  },
+  "am": {
+    "45af12c40b": "አሰራር ደንቦች:",
+    "7351db7172": "ተስማሚ ስንት ማስሂያ: {get_valid_moves}"
+  },
+  "apc": {
+    "45af12c40b": "قواعد اللعبة:",
+    "7351db7172": "النقرات الصحيحة: {get_valid_moves}"
+  },
+  "ar": {
+    "0c342dfc46": "بناء غير صالح عند {build}",
+    "2a0412c69d": "لا يمكنك تحريك العامل {PLAYER_COLORS} (أنت {PLAYER_COLORS_2})",
+    "301283170a": "1. الحركة:",
+    "3dbcab9084": "اللاعب {player_id} ({PLAYER_COLORS}) حرّك العامل {worker_num} من {source} إلى {dest} وبنى عند {build}",
+    "45af12c40b": "قواعد اللعبة:",
+    "5ef8cf4bf1": "- يمكن الصعود مستوى واحدًا كحد أقصى، لكن يمكن النزول أي عدد من المستويات",
+    "6fd84eb6c9": "- لا يمكن التحرك إلى مربعات يشغلها عمّال آخرون أو قِباب",
+    "7351db7172": "النقلات الصالحة: {get_valid_moves}",
+    "93a046cee5": "- البناء يضيف مستوى واحدًا (أو ينشئ قبة عند المستوى 3)",
+    "b41244c32a": "- لا يمكن البناء فوق قبة (المستوى 4)",
+    "d055c475e9": "- لا يمكن البناء حيث يقف أي عامل",
+    "d439b2b4fa": "2. البناء:",
+    "eb917af4f1": "3. شروط الفوز:",
+    "ef6cdead8e": "نقلة غير صالحة من {source} إلى {dest}",
+    "f0cc7cc880": "لا يوجد عامل {worker_num} في الموضع {source}"
+  },
+  "ars": {
+    "45af12c40b": "قواعد اللعبة:",
+    "7351db7172": "الحركات الصحيحة: {get_valid_moves}"
+  },
+  "ary": {
+    "45af12c40b": "قواعد اللعبة:",
+    "7351db7172": "النقرات الصحيحة: {get_valid_moves}"
+  },
+  "arz": {
+    "45af12c40b": "قواعد اللعبة:",
+    "7351db7172": "الحركات الصالحة: {get_valid_moves}"
+  },
+  "as": {
+    "45af12c40b": "খেলার নিয়ম:"
+  },
+  "ast": {
+    "45af12c40b": "Regles del xuegu:"
+  },
+  "awa": {
+    "45af12c40b": "गेम नियम:",
+    "7351db7172": "मान्य चालें: {get_valid_moves}"
+  },
+  "ayr": {
+    "45af12c40b": "P'ukllay T'aqi:",
+    "7351db7172": "Kunan pukllay t'inkipana: {get_valid_moves}"
+  },
+  "az": {
+    "45af12c40b": "Oyun Qaydaları:",
+    "7351db7172": "Etibarlı hərəkətlər: {get_valid_moves}"
+  },
+  "azb": {
+    "45af12c40b": "اویون قایدالاری:",
+    "7351db7172": "معتبر حرکتلر: {get_valid_moves}"
+  },
+  "bak": {
+    "45af12c40b": "Уйын ҡағиҙәләре:",
+    "7351db7172": "Ғәмәлдәге йөрөштәр: {get_valid_moves}"
+  },
+  "bam": {
+    "45af12c40b": "Jɛnw ka ɲɛfɛnw:",
+    "7351db7172": "Jwele dɔw la: {get_valid_moves}"
+  },
+  "ban": {
+    "45af12c40b": "Tetanduran Permainan:",
+    "7351db7172": "Gerakan sah: {get_valid_moves}"
+  },
+  "be": {
+    "45af12c40b": "Правілы гульні:"
+  },
+  "bem": {
+    "45af12c40b": "Mikwamo ya Mchezo:",
+    "7351db7172": "Mipimo inayowezekana: {get_valid_moves}"
+  },
+  "bg": {
+    "45af12c40b": "Правила на играта:",
+    "7351db7172": "Валидни ходове: {get_valid_moves}"
+  },
+  "bho": {
+    "45af12c40b": "खेल के नियम:",
+    "7351db7172": "वैध चाल: {get_valid_moves}"
+  },
+  "bjn": {
+    "45af12c40b": "Aturan Main:",
+    "7351db7172": "Gérak sah valid: {get_valid_moves}"
+  },
+  "bn": {
+    "45af12c40b": "খেলার নিয়ম:",
+    "7351db7172": "বৈধ চালগুলি: {get_valid_moves}"
+  },
+  "bod": {
+    "45af12c40b": "རྩེད་མོའི་སྒྲིག་གཞི།",
+    "7351db7172": "རྩིག་སྒྱུར་འབྱུང་བ།: {get_valid_moves}"
+  },
+  "bug": {
+    "45af12c40b": "Paturu Game:",
+    "7351db7172": "Gerak sah: {get_valid_moves}"
+  },
+  "ca": {
+    "45af12c40b": "Regles del joc:",
+    "7351db7172": "Moviments vàlids: {get_valid_moves}"
+  },
+  "ceb": {
+    "45af12c40b": "Mga Balaod sa Dula:",
+    "7351db7172": "Ang mga balidos nga mga galaw: {get_valid_moves}"
+  },
+  "cjk": {
+    "0c342dfc46": "Ujenzi si sahihi kwa {build}",
+    "2a0412c69d": "Vatamba vangana kusonga {PLAYER_COLORS} mtumaji (wena uli {PLAYER_COLORS_2})",
+    "301283170a": "1. Kuendelea:",
+    "3dbcab9084": "Mchezaji {player_id} ({PLAYER_COLORS}) alihamisha mtumaji {worker_num} kutoka {source} hadi {dest} na ujenzi kwa {build}",
+    "45af12c40b": "Mvila ya Michezo:",
+    "5ef8cf4bf1": "- Vatamba vangana kupanda kiwango kimoja, lakini vangana kushuka kiwango chochote",
+    "6fd84eb6c9": "- Vatamba vangana kwenda kwa miraba iliyo na vatamba vingine au kupala",
+    "7351db7172": "Michezo halali: {get_valid_moves}",
+    "93a046cee5": "- Kujenga kuongeza kiwango kimoja (au kuunda kupala kwa kiwango 3)",
+    "b41244c32a": "- Vatamba vangana kujenga juu ya kupala (kiwango 4)",
+    "d055c475e9": "- Vatamba vangana kujenga ambapo mtumaji yeyote aliwima",
+    "d439b2b4fa": "2. Kujenga:",
+    "eb917af4f1": "3. Masharti ya Kushinda:",
+    "ef6cdead8e": "Mchezo si sahihi kutoka {source} hadi {dest}",
+    "f0cc7cc880": "Hakuna mtumaji {worker_num} kwa nafasi {source}"
+  },
+  "ckb": {
+    "45af12c40b": "یاساکانی یاری:",
+    "7351db7172": "جوڵە هەڵگەڕاوەکان: {get_valid_moves}"
+  },
+  "crh": {
+    "45af12c40b": "Oyun Qaydaları:",
+    "7351db7172": "Mümkün hareketler: {get_valid_moves}"
+  },
+  "cs": {
+    "45af12c40b": "Pravidla hry:",
+    "7351db7172": "Platné tahy: {get_valid_moves}"
+  },
+  "cy": {
+    "45af12c40b": "Rheolau'r Gêm:"
+  },
+  "da": {
+    "45af12c40b": "Spilregler:",
+    "7351db7172": "Gyldige træk: {get_valid_moves}"
+  },
+  "de": {
+    "0c342dfc46": "Ungültiges Bauen bei {build}",
+    "2a0412c69d": "Du kannst den Arbeiter {PLAYER_COLORS} nicht ziehen (du bist {PLAYER_COLORS_2})",
+    "301283170a": "1. Bewegung:",
+    "3dbcab9084": "Spieler {player_id} ({PLAYER_COLORS}) zog Arbeiter {worker_num} von {source} nach {dest} und baute bei {build}",
+    "45af12c40b": "Spielregeln:",
+    "5ef8cf4bf1": "- Können höchstens eine Stufe hinaufsteigen, aber beliebig viele Stufen hinabsteigen",
+    "6fd84eb6c9": "- Können nicht auf Felder ziehen, die von anderen Arbeitern oder Kuppeln besetzt sind",
+    "7351db7172": "Gültige Züge: {get_valid_moves}",
+    "93a046cee5": "- Bauen fügt eine Stufe hinzu (oder erzeugt eine Kuppel auf Stufe 3)",
+    "b41244c32a": "- Es kann nicht auf einer Kuppel (Stufe 4) gebaut werden",
+    "d055c475e9": "- Es kann nicht dort gebaut werden, wo ein Arbeiter steht",
+    "d439b2b4fa": "2. Bauen:",
+    "eb917af4f1": "3. Siegbedingungen:",
+    "ef6cdead8e": "Ungültiger Zug von {source} nach {dest}",
+    "f0cc7cc880": "Kein Arbeiter {worker_num} auf Position {source}"
+  },
+  "dik": {
+    "45af12c40b": "Game Rules:",
+    "7351db7172": "Käär kekä thïn: {get_valid_moves}"
+  },
+  "dyu": {
+    "45af12c40b": "Jɛlɛ ka kan:",
+    "7351db7172": "Mouvman valablɛ: {get_valid_moves}"
+  },
+  "dzo": {
+    "45af12c40b": "རྩེད་མོའི་སྒྲིག་གཞི།",
+    "7351db7172": "འགྲུབ་པའི་གོམ་སྤོ། {get_valid_moves}"
+  },
+  "el": {
+    "45af12c40b": "Κανόνες Παιχνιδιού:",
+    "7351db7172": "Εγκυρές κινήσεις: {get_valid_moves}"
+  },
+  "epo": {
+    "45af12c40b": "Ludreguloj:",
+    "7351db7172": "Validaj movoj: {get_valid_moves}"
+  },
+  "es": {
+    "0c342dfc46": "Construcción no válida en {build}",
+    "2a0412c69d": "No puedes mover el trabajador {PLAYER_COLORS} (tú eres {PLAYER_COLORS_2})",
+    "301283170a": "1. Movimiento:",
+    "3dbcab9084": "El jugador {player_id} ({PLAYER_COLORS}) movió el trabajador {worker_num} de {source} a {dest} y construyó en {build}",
+    "45af12c40b": "Reglas del juego:",
+    "5ef8cf4bf1": "- Pueden subir como máximo un nivel, pero pueden bajar cualquier número de niveles",
+    "6fd84eb6c9": "- No pueden moverse a casillas ocupadas por otros trabajadores o cúpulas",
+    "7351db7172": "Jugadas válidas: {get_valid_moves}",
+    "93a046cee5": "- Construir añade un nivel (o crea una cúpula en el nivel 3)",
+    "b41244c32a": "- No puedes construir sobre una cúpula (nivel 4)",
+    "d055c475e9": "- No puedes construir donde haya un trabajador",
+    "d439b2b4fa": "2. Construcción:",
+    "eb917af4f1": "3. Condiciones de victoria:",
+    "ef6cdead8e": "Movimiento no válido de {source} a {dest}",
+    "f0cc7cc880": "No hay trabajador {worker_num} en la posición {source}"
+  },
+  "et": {
+    "45af12c40b": "Mängu reeglid:",
+    "7351db7172": "Kehtivad käigud: {get_valid_moves}"
+  },
+  "eu": {
+    "45af12c40b": "Joko Arauak:"
+  },
+  "ewe": {
+    "45af12c40b": "Gbɔgbɔ siwo:",
+    "7351db7172": "Dɔwɔna wɔwɔ: {get_valid_moves}"
+  },
+  "fa": {
+    "45af12c40b": "قوانین بازی:",
+    "7351db7172": "حرکات مجاز: {get_valid_moves}"
+  },
+  "fao": {
+    "45af12c40b": "Leikareglur:",
+    "7351db7172": "Gildir leikir: {get_valid_moves}"
+  },
+  "fi": {
+    "45af12c40b": "Pelisäännöt:",
+    "7351db7172": "Kelvolliset siirrot: {get_valid_moves}"
+  },
+  "fij": {
+    "45af12c40b": "Na lawa ni qito:",
+    "7351db7172": "Vakadidike ni kena ibali: {get_valid_moves}"
+  },
+  "fil": {
+    "45af12c40b": "Mga Tuntunin ng Laro:",
+    "7351db7172": "Mga wastong pagkilos: {get_valid_moves}"
+  },
+  "fon": {
+    "45af12c40b": "Nuwànzọn ahyọ̀n tọn:",
+    "7351db7172": "Wɛmɛnɛ wɛwɛwɛ: {get_valid_moves}"
+  },
+  "fr": {
+    "0c342dfc46": "Construction invalide en {build}",
+    "2a0412c69d": "Tu ne peux pas déplacer le pion {PLAYER_COLORS} (tu es {PLAYER_COLORS_2})",
+    "301283170a": "1. Déplacement :",
+    "3dbcab9084": "Le joueur {player_id} ({PLAYER_COLORS}) a déplacé le pion {worker_num} de {source} à {dest} et a construit en {build}",
+    "45af12c40b": "Règles du jeu :",
+    "5ef8cf4bf1": "- Peuvent monter d'un niveau au maximum, mais peuvent descendre d'autant de niveaux que voulu",
+    "6fd84eb6c9": "- Ne peuvent pas se déplacer vers des cases occupées par d'autres pions ou par des dômes",
+    "7351db7172": "Coups valides : {get_valid_moves}",
+    "93a046cee5": "- Construire ajoute un niveau (ou crée un dôme au niveau 3)",
+    "b41244c32a": "- Tu ne peux pas construire au sommet d'un dôme (niveau 4)",
+    "d055c475e9": "- Tu ne peux pas construire là où se trouve un pion",
+    "d439b2b4fa": "2. Construction :",
+    "eb917af4f1": "3. Conditions de victoire :",
+    "ef6cdead8e": "Coup invalide de {source} à {dest}",
+    "f0cc7cc880": "Aucun pion {worker_num} à la position {source}"
+  },
+  "fur": {
+    "45af12c40b": "Regulis dal zûc:",
+    "7351db7172": "Mozions validis: {get_valid_moves}"
+  },
+  "fuv": {
+    "45af12c40b": "Dokkal Waƙa:",
+    "7351db7172": "Tafarkin da suka dace: {get_valid_moves}"
+  },
+  "gaz": {
+    "45af12c40b": "Seerota Tapha:",
+    "7351db7172": "Galaarii dhaban: {get_valid_moves}"
+  },
+  "gl": {
+    "45af12c40b": "Regras do xogo:",
+    "7351db7172": "Movementos válidos: {get_valid_moves}"
+  },
+  "gla": {
+    "45af12c40b": "Riaghailtean a' Gheama:",
+    "7351db7172": "Glèidheadh chuibh: {get_valid_moves}"
+  },
+  "gle": {
+    "45af12c40b": "Rialacha an Chluiche:",
+    "7351db7172": "Gluaisní bailí: {get_valid_moves}"
+  },
+  "grn": {
+    "45af12c40b": "Tembikuaa Japo:",
+    "7351db7172": "Mba'éichapa ojejapo: {get_valid_moves}"
+  },
+  "gu": {
+    "45af12c40b": "રમતના નિયમો:"
+  },
+  "ha": {
+    "45af12c40b": "Ka'idojin Wasa:"
+  },
+  "hat": {
+    "45af12c40b": "Règ Jwèt la:",
+    "7351db7172": "Deplasman valab: {get_valid_moves}"
+  },
+  "he": {
+    "0c342dfc46": "בנייה לא חוקית ב-{build}",
+    "2a0412c69d": "אי אפשר להזיז את הפועל {PLAYER_COLORS} (אתה {PLAYER_COLORS_2})",
+    "301283170a": "1. תנועה:",
+    "3dbcab9084": "שחקן {player_id} ({PLAYER_COLORS}) הזיז את פועל {worker_num} מ-{source} ל-{dest} ובנה ב-{build}",
+    "45af12c40b": "חוקי המשחק:",
+    "5ef8cf4bf1": "- אפשר לעלות רמה אחת לכל היותר, אך אפשר לרדת כל מספר של רמות",
+    "6fd84eb6c9": "- אי אפשר לנוע למשבצות התפוסות על ידי פועלים אחרים או כיפות",
+    "7351db7172": "מהלכים חוקיים: {get_valid_moves}",
+    "93a046cee5": "- בנייה מוסיפה רמה אחת (או יוצרת כיפה ברמה 3)",
+    "b41244c32a": "- אי אפשר לבנות מעל כיפה (רמה 4)",
+    "d055c475e9": "- אי אפשר לבנות במקום שבו עומד פועל כלשהו",
+    "d439b2b4fa": "2. בנייה:",
+    "eb917af4f1": "3. תנאי ניצחון:",
+    "ef6cdead8e": "מהלך לא חוקי מ-{source} ל-{dest}",
+    "f0cc7cc880": "אין פועל {worker_num} במיקום {source}"
+  },
+  "hi": {
+    "45af12c40b": "खेल नियम:",
+    "7351db7172": "मान्य चालें: {get_valid_moves}"
+  },
+  "hne": {
+    "45af12c40b": "खेल के नियम:",
+    "7351db7172": "सही चाल: {get_valid_moves}"
+  },
+  "hr": {
+    "45af12c40b": "Pravila igre:",
+    "7351db7172": "Valjani potezi: {get_valid_moves}"
+  },
+  "hu": {
+    "45af12c40b": "Játékszabályok:",
+    "7351db7172": "Érvényes lépések: {get_valid_moves}"
+  },
+  "hy": {
+    "45af12c40b": "Խաղի կանոնները."
+  },
+  "id": {
+    "45af12c40b": "Aturan Permainan:",
+    "7351db7172": "Langkah-langkah yang valid: {get_valid_moves}"
+  },
+  "ig": {
+    "45af12c40b": "Egwuregwu:"
+  },
+  "ilo": {
+    "45af12c40b": "Dagiti Alagaden ti Game:",
+    "7351db7172": "Mabalin a pagliwliwan: {get_valid_moves}"
+  },
+  "is": {
+    "45af12c40b": "Leikreglur:",
+    "7351db7172": "Gildir leikir: {get_valid_moves}"
+  },
+  "it": {
+    "45af12c40b": "Regole del gioco:",
+    "7351db7172": "Mosse valide: {get_valid_moves}"
+  },
+  "ja": {
+    "45af12c40b": "ゲームルール:",
+    "7351db7172": "有効な手: {get_valid_moves}"
+  },
+  "jav": {
+    "45af12c40b": "Aturan Dolanan:",
+    "7351db7172": "Langkah-langkah sing sah: {get_valid_moves}"
+  },
+  "ka": {
+    "45af12c40b": "თამაშის წესები:"
+  },
+  "kab": {
+    "45af12c40b": "Tawurta n Ureqqas:",
+    "7351db7172": "Izmer ummid : {get_valid_moves}"
+  },
+  "kac": {
+    "45af12c40b": "Kaji Gunhpawt:",
+    "7351db7172": "Hkum sha ai wa {get_valid_moves}"
+  },
+  "kam": {
+    "45af12c40b": "Sheria za Mchezo:",
+    "7351db7172": "Michezo halali: {get_valid_moves}"
+  },
+  "kas": {
+    "45af12c40b": "کھیل دے اصول:",
+    "7351db7172": "واضع چلنے والے چال: {get_valid_moves}"
+  },
+  "kbp": {
+    "45af12c40b": "Tʋmɩyɛ Paɣtʋ:",
+    "7351db7172": "Lɩm tɛlɛŋa: {get_valid_moves}"
+  },
+  "kea": {
+    "45af12c40b": "Regula di Jogu:",
+    "7351db7172": "Mudansas validas: {get_valid_moves}"
+  },
+  "kik": {
+    "45af12c40b": "Sheria za Mchezo:",
+    "7351db7172": "Mikaro ĩrĩa ĩĩtagwo: {get_valid_moves}"
+  },
+  "kin": {
+    "45af12c40b": "Amategeko ya Mchezo:",
+    "7351db7172": "Mikono ihakikishwa: {get_valid_moves}"
+  },
+  "kk": {
+    "45af12c40b": "Ойын ережелері:"
+  },
+  "km": {
+    "45af12c40b": "ច្បាប់លេង៖"
+  },
+  "kmb": {
+    "45af12c40b": "Mukanda wa Mpira:"
+  },
+  "kmr": {
+    "45af12c40b": "Rêgezên Lîstikê:",
+    "7351db7172": "Biskên dijîn: {get_valid_moves}"
+  },
+  "kn": {
+    "45af12c40b": "ಆಟದ ನಿಯಮಗಳು:"
+  },
+  "knc": {
+    "45af12c40b": "Kəmə kaga:",
+    "7351db7172": "Kwamɨɲi kadi: {get_valid_moves}"
+  },
+  "ko": {
+    "45af12c40b": "게임 규칙:",
+    "7351db7172": "유효한 수: {get_valid_moves}"
+  },
+  "kon": {
+    "45af12c40b": "Mvutu ya Mbanza:",
+    "7351db7172": "Mikimvo ya kwenda: {get_valid_moves}"
+  },
+  "ky": {
+    "45af12c40b": "Оюн эрежелери:"
+  },
+  "lij": {
+    "45af12c40b": "Regole do xêugo:",
+    "7351db7172": "Mövi valìdi: {get_valid_moves}"
+  },
+  "lim": {
+    "45af12c40b": "Spelregele:",
+    "7351db7172": "Geldige zètte: {get_valid_moves}"
+  },
+  "lin": {
+    "45af12c40b": "Mikano ya Komona:",
+    "7351db7172": "Mikano ya kosalisa: {get_valid_moves}"
+  },
+  "lmo": {
+    "45af12c40b": "Regol del giugh:",
+    "7351db7172": "Moviment valid: {get_valid_moves}"
+  },
+  "lo": {
+    "45af12c40b": "ກົດຫມາຍສະມາຊິກ:"
+  },
+  "lt": {
+    "45af12c40b": "Žaidimo taisyklės:",
+    "7351db7172": "Leidžiami ėjimai: {get_valid_moves}"
+  },
+  "ltg": {
+    "45af12c40b": "Spēļu Noteikumi:",
+    "7351db7172": "Derīgi soļi: {get_valid_moves}"
+  },
+  "ltz": {
+    "45af12c40b": "Spillreegelen:",
+    "7351db7172": "Déi gülteg Zich: {get_valid_moves}"
+  },
+  "lua": {
+    "45af12c40b": "Mikano ya Mwingilango:",
+    "7351db7172": "Mikulukulu ikwata: {get_valid_moves}"
+  },
+  "lug": {
+    "45af12c40b": "Emirimu gy'Omukino:",
+    "7351db7172": "Ebiiso ebirungi: {get_valid_moves}"
+  },
+  "luo": {
+    "45af12c40b": "Sheria za Mchezo:",
+    "7351db7172": "Mikwano miongoni: {get_valid_moves}"
+  },
+  "lus": {
+    "45af12c40b": "Game Dan:",
+    "7351db7172": "Mimal phal theih: {get_valid_moves}"
+  },
+  "lv": {
+    "45af12c40b": "Spēles noteikumi:",
+    "7351db7172": "Derīgie gājieni: {get_valid_moves}"
+  },
+  "mag": {
+    "45af12c40b": "गेम नियम:",
+    "7351db7172": "वैध चालें: {get_valid_moves}"
+  },
+  "mai": {
+    "45af12c40b": "गेम नियम:",
+    "7351db7172": "मान्य चाल: {get_valid_moves}"
+  },
+  "mg": {
+    "45af12c40b": "Tantara ny lalao:"
+  },
+  "min": {
+    "45af12c40b": "Aturan Permainan:",
+    "7351db7172": "Gerakan sah: {get_valid_moves}"
+  },
+  "mk": {
+    "45af12c40b": "Правила на играта:",
+    "7351db7172": "Валидни потези: {get_valid_moves}"
+  },
+  "ml": {
+    "45af12c40b": "ഗെയിം നിയമങ്ങൾ:"
+  },
+  "mlt": {
+    "45af12c40b": "Regoli tal-Logħba:",
+    "7351db7172": "Mozzjonijiet validi: {get_valid_moves}"
+  },
+  "mn": {
+    "45af12c40b": "Тоглоомын дүрэм:"
+  },
+  "mni": {
+    "45af12c40b": "ကစားနည်း စည်းမျဉ်း:",
+    "7351db7172": "Amatta wari: {get_valid_moves}"
+  },
+  "mos": {
+    "45af12c40b": "Yɛɛla kɛɛsɛ:",
+    "7351db7172": "Zɛɛ u zɔri: {get_valid_moves}"
+  },
+  "mr": {
+    "45af12c40b": "गेम नियम:"
+  },
+  "mri": {
+    "45af12c40b": "Ngā Ture o te Kēmu:",
+    "7351db7172": "Ngā hūnuku tika: {get_valid_moves}"
+  },
+  "ms": {
+    "0c342dfc46": "Pembinaan tidak sah di {build}",
+    "2a0412c69d": "Tidak boleh menggerakkan pekerja {PLAYER_COLORS} (anda ialah {PLAYER_COLORS_2})",
+    "301283170a": "1. Pergerakan:",
+    "3dbcab9084": "Pemain {player_id} ({PLAYER_COLORS}) menggerakkan pekerja {worker_num} dari {source} ke {dest} dan membina di {build}",
+    "45af12c40b": "Peraturan Permainan:",
+    "5ef8cf4bf1": "- Boleh naik paling banyak satu aras, tetapi boleh turun sebanyak mana-mana aras",
+    "6fd84eb6c9": "- Tidak boleh bergerak ke petak yang diduduki pekerja lain atau kubah",
+    "7351db7172": "Gerakan sah: {get_valid_moves}",
+    "93a046cee5": "- Membina menambah satu aras (atau mencipta kubah pada aras 3)",
+    "b41244c32a": "- Tidak boleh membina di atas kubah (aras 4)",
+    "d055c475e9": "- Tidak boleh membina di tempat mana-mana pekerja berdiri",
+    "d439b2b4fa": "2. Pembinaan:",
+    "eb917af4f1": "3. Syarat Kemenangan:",
+    "ef6cdead8e": "Gerakan tidak sah dari {source} ke {dest}",
+    "f0cc7cc880": "Tiada pekerja {worker_num} di kedudukan {source}"
+  },
+  "my": {
+    "45af12c40b": "ဂိမ်း စည်းမျဉ်းများ:"
+  },
+  "nb": {
+    "45af12c40b": "Spilleregler:",
+    "7351db7172": "Gyldige trekk: {get_valid_moves}"
+  },
+  "ne": {
+    "45af12c40b": "खेलका नियमहरू:"
+  },
+  "nl": {
+    "45af12c40b": "Spelregels:",
+    "7351db7172": "Geldige zetten: {get_valid_moves}"
+  },
+  "nno": {
+    "45af12c40b": "Spelereglar:",
+    "7351db7172": "Gyldige trekk: {get_valid_moves}"
+  },
+  "nso": {
+    "45af12c40b": "Melao ya Tšomo:",
+    "7351db7172": "Diketo tša kgonego: {get_valid_moves}"
+  },
+  "nus": {
+    "45af12c40b": "Tɛɛmɛɛ kɛɛ:",
+    "7351db7172": "Ciɛ̈l kuɔɔch: {get_valid_moves}"
+  },
+  "nya": {
+    "45af12c40b": "Mwambo wa Msewero:",
+    "7351db7172": "Mavuto apongoza: {get_valid_moves}"
+  },
+  "oci": {
+    "45af12c40b": "Reglas del jòc:",
+    "7351db7172": "Movements valables: {get_valid_moves}"
+  },
+  "or": {
+    "45af12c40b": "ଖେଳ ନିୟମ:"
+  },
+  "pa": {
+    "45af12c40b": "ਖੇਡ ਦੇ ਨਿਯਮ:"
+  },
+  "pag": {
+    "45af12c40b": "Panaglayag ya Laro:",
+    "7351db7172": "Mabalin a liket: {get_valid_moves}"
+  },
+  "pap": {
+    "45af12c40b": "Reglanan di Wega:",
+    "7351db7172": "Moveshonan validu: {get_valid_moves}"
+  },
+  "pl": {
+    "45af12c40b": "Zasady gry:",
+    "7351db7172": "Dostępne ruchy: {get_valid_moves}"
+  },
+  "ps": {
+    "45af12c40b": "د لوبې قواعد:"
+  },
+  "pt": {
+    "45af12c40b": "Regras do Jogo:",
+    "7351db7172": "Jogadas válidas: {get_valid_moves}"
+  },
+  "quy": {
+    "45af12c40b": "Pukllay Kamachikuna:",
+    "7351db7172": "Kamayaq ruwakuna: {get_valid_moves}"
+  },
+  "ro": {
+    "45af12c40b": "Reguli de joc:",
+    "7351db7172": "Mutări valide: {get_valid_moves}"
+  },
+  "ru": {
+    "45af12c40b": "Правила игры:",
+    "7351db7172": "Доступные ходы: {get_valid_moves}"
+  },
+  "run": {
+    "45af12c40b": "Mizani ya Mchezo:",
+    "7351db7172": "Ingendo zishobora: {get_valid_moves}"
+  },
+  "sag": {
+    "45af12c40b": "Règles du jeu:",
+    "7351db7172": "Kôzo tiîngî: {get_valid_moves}"
+  },
+  "san": {
+    "45af12c40b": "क्रीडानियमाः",
+    "7351db7172": "वैध चेष्टाः: {get_valid_moves}"
+  },
+  "sat": {
+    "45af12c40b": "ᱠᱷᱮᱞ ᱱᱤᱭᱚᱢ:",
+    "7351db7172": "ᱥᱤᱵᱷᱟᱹᱥ ᱪᱟᱞ: {get_valid_moves}"
+  },
+  "scn": {
+    "45af12c40b": "Reguli di jocu:",
+    "7351db7172": "Mossi validi: {get_valid_moves}"
+  },
+  "sd": {
+    "45af12c40b": "ڪھڙي قائدن:"
+  },
+  "shn": {
+    "45af12c40b": "ၶေႃႈၵႂၢမ်းပၢႆးလဵၼ်ႈ:",
+    "7351db7172": "ဗိုလ်ချိန်းလုပ်နိုင်တဲ့အရာများ: {get_valid_moves}"
+  },
+  "si": {
+    "45af12c40b": "ක්‍රීඩා නීති:"
+  },
+  "sk": {
+    "45af12c40b": "Pravidlá hry:",
+    "7351db7172": "Platné ťahy: {get_valid_moves}"
+  },
+  "sl": {
+    "45af12c40b": "Pravila igre:",
+    "7351db7172": "Veljavne poteze: {get_valid_moves}"
+  },
+  "smo": {
+    "45af12c40b": "Tulafono o le Ta'aloga:",
+    "7351db7172": "Gaioiga saʻo: {get_valid_moves}"
+  },
+  "sna": {
+    "45af12c40b": "Miongozo ya Mchezo:",
+    "7351db7172": "Mikazo yakakwana: {get_valid_moves}"
+  },
+  "so": {
+    "45af12c40b": "Qawaaniinta Ciyaarta:"
+  },
+  "sot": {
+    "45af12c40b": "Melao ya Mokhatlo:",
+    "7351db7172": "Litsamaiso tse lokileng: {get_valid_moves}"
+  },
+  "sq": {
+    "45af12c40b": "Rregullat e Lojës:",
+    "7351db7172": "Lëvizjet e vlefshme: {get_valid_moves}"
+  },
+  "sr": {
+    "45af12c40b": "Правила игре:",
+    "7351db7172": "Важећи потези: {get_valid_moves}"
+  },
+  "srd": {
+    "45af12c40b": "Regulas de su giogu:",
+    "7351db7172": "Moziones bàlidas: {get_valid_moves}"
+  },
+  "ssw": {
+    "45af12c40b": "Imiyalo ye-Mdlalo:",
+    "7351db7172": "Imovhu lemphumelelo: {get_valid_moves}"
+  },
+  "sun": {
+    "45af12c40b": "Aturan Permainan:",
+    "7351db7172": "Gerak sah: {get_valid_moves}"
+  },
+  "sv": {
+    "45af12c40b": "Spelregler:",
+    "7351db7172": "Giltiga drag: {get_valid_moves}"
+  },
+  "sw": {
+    "45af12c40b": "Sheria za Mchezo:",
+    "7351db7172": "Michezo halali: {get_valid_moves}"
+  },
+  "szl": {
+    "45af12c40b": "Prawidła Gry:",
+    "7351db7172": "Ważne posunęćia: {get_valid_moves}"
+  },
+  "ta": {
+    "45af12c40b": "ஆட்ட விதிகள்:",
+    "7351db7172": "செல்லுபடியாகும் நகர்வுகள்: {get_valid_moves}"
+  },
+  "taq": {
+    "45af12c40b": "Tawuriwin n uzzuzzu:",
+    "7351db7172": "Imaylanen iɣelsanen: {get_valid_moves}"
+  },
+  "tat": {
+    "45af12c40b": "Game Rules:",
+    "7351db7172": "Иң яхшы хәрәкәтләр: {get_valid_moves}"
+  },
+  "te": {
+    "45af12c40b": "గేమ్ నియమాలు:"
+  },
+  "tgk": {
+    "45af12c40b": "Қоидаҳои бозӣ:",
+    "7351db7172": "Хисобҳои муҳаққақ: {get_valid_moves}"
+  },
+  "th": {
+    "45af12c40b": "กติกาเกม:",
+    "7351db7172": "การเคลื่อนไหวที่สามารถทำได้: {get_valid_moves}"
+  },
+  "tir": {
+    "45af12c40b": "Game Rules:",
+    "7351db7172": "ተስማሚ ሂወት: {get_valid_moves}"
+  },
+  "tpi": {
+    "45af12c40b": "Rul bilong Game:",
+    "7351db7172": "Ol gutpela muv: {get_valid_moves}"
+  },
+  "tr": {
+    "45af12c40b": "Oyun Kuralları:",
+    "7351db7172": "Geçerli hamleler: {get_valid_moves}"
+  },
+  "tsn": {
+    "45af12c40b": "Melao ya Tshameko:",
+    "7351db7172": "Ditshelele tse di halalelang: {get_valid_moves}"
+  },
+  "tso": {
+    "45af12c40b": "Milawu ya michezo:",
+    "7351db7172": "Mikhuza yo vekela: {get_valid_moves}"
+  },
+  "tuk": {
+    "45af12c40b": "Oýun düzgünleri:",
+    "7351db7172": "Ýagdaýly hereketler: {get_valid_moves}"
+  },
+  "tum": {
+    "45af12c40b": "Kanuni za Mchezo:",
+    "7351db7172": "Mizowonjezera ya kuyenda: {get_valid_moves}"
+  },
+  "twi": {
+    "45af12c40b": "Mmara:",
+    "7351db7172": "Mmoa ahorow akyɛ: {get_valid_moves}"
+  },
+  "tzm": {
+    "45af12c40b": "Tawwuri n wari:",
+    "7351db7172": "Ismawan imunniten: {get_valid_moves}"
+  },
+  "uig": {
+    "45af12c40b": "ئويۇن قائىدىلىرى:",
+    "7351db7172": "Jèkkè qilmish harakatlar: {get_valid_moves}"
+  },
+  "uk": {
+    "45af12c40b": "Правила гри:",
+    "7351db7172": "Доступні ходи: {get_valid_moves}"
+  },
+  "umb": {
+    "45af12c40b": "Ovilo vya Mchezo:",
+    "7351db7172": "Ovilwa viyambo: {get_valid_moves}"
+  },
+  "ur": {
+    "45af12c40b": "کھیل کے اصول:",
+    "7351db7172": "درست چالیں: {get_valid_moves}"
+  },
+  "uz": {
+    "45af12c40b": "O'yin qoidalari:"
+  },
+  "vec": {
+    "45af12c40b": "Regole del zugo:",
+    "7351db7172": "Mossi validi: {get_valid_moves}"
+  },
+  "vi": {
+    "45af12c40b": "Luật Trò Chơi:",
+    "7351db7172": "Các nước đi hợp lệ: {get_valid_moves}"
+  },
+  "war": {
+    "45af12c40b": "Mga Patakaran han Game:",
+    "7351db7172": "Mga balido nga mga galaw: {get_valid_moves}"
+  },
+  "wol": {
+    "45af12c40b": "Nguur gi:",
+    "7351db7172": "Tànk yi ñu man a def: {get_valid_moves}"
+  },
+  "xho": {
+    "45af12c40b": "Imithetho yeMdlalo:",
+    "7351db7172": "Kusetyenziso okwenza: {get_valid_moves}"
+  },
+  "ydd": {
+    "45af12c40b": "Shpil-reglen:",
+    "7351db7172": "גילטיקע צוגן: {get_valid_moves}"
+  },
+  "zh": {
+    "0c342dfc46": "在 {build} 的建造无效",
+    "2a0412c69d": "无法移动 {PLAYER_COLORS} 的工人（你是 {PLAYER_COLORS_2}）",
+    "301283170a": "1. 移动：",
+    "3dbcab9084": "玩家 {player_id}（{PLAYER_COLORS}）将工人 {worker_num} 从 {source} 移动到 {dest} 并在 {build} 建造",
+    "45af12c40b": "游戏规则：",
+    "5ef8cf4bf1": "- 最多可向上移动一层，但可向下移动任意层数",
+    "6fd84eb6c9": "- 不能移动到被其他工人或圆顶占据的格子",
+    "7351db7172": "合法走法：{get_valid_moves}",
+    "93a046cee5": "- 建造会增加一层（或在第 3 层上造出圆顶）",
+    "b41244c32a": "- 不能在圆顶（第 4 层）之上建造",
+    "d055c475e9": "- 不能在有工人站立的格子建造",
+    "d439b2b4fa": "2. 建造：",
+    "eb917af4f1": "3. 获胜条件：",
+    "ef6cdead8e": "从 {source} 到 {dest} 的移动无效",
+    "f0cc7cc880": "位置 {source} 没有工人 {worker_num}"
+  },
+  "zu": {
+    "45af12c40b": "Imithetho yeMdlalo:"
+  }
+}

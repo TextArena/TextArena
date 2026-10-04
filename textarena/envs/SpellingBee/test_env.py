@@ -1,8 +1,11 @@
 """Offline, deterministic tests for the Spelling Bee environment."""
 import copy
+import string
+from collections import Counter
 
 import pytest
 import textarena.envs.SpellingBee.env as spelling_module
+import textarena.utils.word_lists as word_lists
 from textarena.envs.SpellingBee.env import SpellingBeeEnv
 
 
@@ -29,6 +32,27 @@ def test_reset_allowed_letters_and_history():
     assert gs["allowed_letters"].issubset(set("abcdefghijklmnopqrstuvwxyz"))
     assert gs["word_history"] == []
     assert env.state.current_player_id == 0
+
+
+@pytest.mark.parametrize("num_letters", [1, 7, 13, 26])
+def test_allowed_letters_are_exactly_num_letters_distinct_letters(num_letters):
+    env = SpellingBeeEnv(num_letters=num_letters, dictionary=_Dictionary())
+    for seed in range(50):
+        env.reset(num_players=2, seed=seed)
+        letters = env.game_state["allowed_letters"]
+        assert len(letters) == num_letters
+        assert letters <= set(string.ascii_lowercase)
+
+
+def test_allowed_letters_are_weighted_by_english_letter_frequency():
+    env = SpellingBeeEnv(num_letters=1, dictionary=_Dictionary())
+    counts = Counter()
+    for seed in range(400):
+        env.reset(num_players=2, seed=seed)
+        counts.update(env.game_state["allowed_letters"])
+    common = sum(counts[letter] for letter in "etao")
+    rare = sum(counts[letter] for letter in "jqxz")
+    assert common > 10 * max(rare, 1)
 
 
 def test_valid_word_accepted_and_turn_rotates():
@@ -158,11 +182,33 @@ def test_invalid_letter_count_is_rejected(num_letters):
 
 def test_dictionary_dependency_failure_is_explained(monkeypatch):
     def fail(**kwargs):
-        raise LookupError("missing corpus")
+        raise OSError("missing data file")
 
     monkeypatch.setattr(spelling_module, "EnglishDictionary", fail)
-    with pytest.raises(RuntimeError, match="NLTK words corpus"):
+    with pytest.raises(RuntimeError, match="bundled SpellingBee dictionary"):
         SpellingBeeEnv(num_letters=7)
+
+
+class _MissingCorpus:
+    def words(self, *args, **kwargs):
+        raise LookupError("corpus unavailable")
+
+
+def test_default_dictionary_accepts_the_same_words_without_the_nltk_corpus(monkeypatch):
+    with_corpus = SpellingBeeEnv(num_letters=7).dictionary
+    monkeypatch.setattr(word_lists, "words", _MissingCorpus())
+    without_corpus = SpellingBeeEnv(num_letters=7).dictionary
+    # "aa", "abear" and "aalii" are only in the optional NLTK corpus
+    for word in ("cat", "colour", "color", "aa", "abear", "aalii", "zzzzz"):
+        assert without_corpus.is_english_word(word) == with_corpus.is_english_word(word)
+
+
+def test_prompt_states_the_word_rules_and_how_a_player_loses():
+    env = _fresh(num_letters=7)
+    prompt = env.state.events[0][1]
+    assert "use only the allowed letters; each letter may be used any number of times" in prompt
+    assert "checked against the game's English dictionary" in prompt
+    assert "If you submit two invalid words in a row, you lose." in prompt
 
 
 def test_dictionary_lookup_failure_is_retryable_and_atomic():

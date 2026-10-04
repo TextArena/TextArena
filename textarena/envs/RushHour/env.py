@@ -1,6 +1,5 @@
 import re
 from typing import Any, Dict, List, Optional, Tuple, Union
-from collections import deque
 
 import textarena as ta
 
@@ -49,6 +48,7 @@ class RushHourEnv(ta.GameEnv):
 
     BOARD_SIZE = 6
     MAX_ACTION_CHARS = 4096
+    MAX_SEARCH_STATES = 50000  # Bound malformed/custom layouts without cutting off searches on generated puzzles.
     ACTION_RE = re.compile(r"(?P<id>[A-Z])\s*(?P<dir>[+-])", re.I)
 
     def __init__(self, difficulty: str = "medium", max_turns: int = 100):
@@ -264,42 +264,36 @@ class RushHourEnv(ta.GameEnv):
 
     def _is_solvable(self, vehicles: List[_Vehicle]) -> bool:
         """Use BFS to check if puzzle is solvable."""
-        initial_vehicles = {v.vid: v.copy() for v in vehicles}
+        return self._moves_to_solve({v.vid: v for v in vehicles}) is not None
 
-        # If already solved, return True
-        if self._is_solved_state(initial_vehicles):
-            return True
+    def _moves_to_solve(self, vehicles: Dict[str, _Vehicle], max_moves: Optional[int] = None) -> Optional[int]:
+        """Fewest moves (including the final 'X+' through the exit) that solve the layout, found by breadth-first search.
 
-        visited = set()
-        queue = deque([initial_vehicles])
-        visited.add(self._get_state_hash(initial_vehicles))
-
-        max_iterations = 50000  # Bound malformed/custom layouts without rejecting normal puzzles.
-        iterations = 0
-
-        while queue and iterations < max_iterations:
-            iterations += 1
-            current_vehicles = queue.popleft()
-
-            # Try all possible moves
-            for vid, vehicle in current_vehicles.items():
-                for forward in [True, False]:
-                    if self._can_move(current_vehicles, vehicle, forward):
-                        # Make move
+        Returns None if that takes more than `max_moves` moves or the search exceeds MAX_SEARCH_STATES positions.
+        """
+        frontier = [{vid: v.copy() for vid, v in vehicles.items()}]
+        if self._is_solved_state(frontier[0]):
+            return 0
+        seen = {self._get_state_hash(frontier[0])}
+        moves = 0
+        while frontier and (max_moves is None or moves < max_moves) and len(seen) <= self.MAX_SEARCH_STATES:
+            moves += 1
+            next_frontier = []
+            for current_vehicles in frontier:
+                for vid, vehicle in current_vehicles.items():
+                    for forward in (True, False):
+                        if not self._can_move(current_vehicles, vehicle, forward):
+                            continue
                         new_vehicles = {v.vid: v.copy() for v in current_vehicles.values()}
                         new_vehicles[vid].move(forward)
-
-                        # Check if solved
                         if self._is_solved_state(new_vehicles):
-                            return True
-
-                        # Add to queue if not visited
+                            return moves
                         state_hash = self._get_state_hash(new_vehicles)
-                        if state_hash not in visited:
-                            visited.add(state_hash)
-                            queue.append(new_vehicles)
-
-        return False
+                        if state_hash not in seen:
+                            seen.add(state_hash)
+                            next_frontier.append(new_vehicles)
+            frontier = next_frontier
+        return None
 
     def _is_solved_state(self, vehicles: Dict[str, _Vehicle]) -> bool:
         """Check if the puzzle is in solved state."""
@@ -310,7 +304,12 @@ class RushHourEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         return (
             f"You are playing a {self.difficulty} RushHour puzzle. Slide cars to free the red car 'X' and drive it out the right edge.\n"
-            "Actions: 'A+', 'B-', etc.  (+ = forward, - = backward)."
+            "On the board each letter is one vehicle and '.' is an empty square; the exit '>' is at the right end of X's row (the third row).\n"
+            "Actions: a vehicle letter followed by '+' or '-', e.g. 'X+' or 'X-'. Each action slides one vehicle by one square:\n"
+            "'+' moves a horizontal vehicle right or a vertical vehicle down; '-' moves it left or up.\n"
+            "Vehicles cannot pass through each other or leave the board, except X through the exit: once X touches the exit, "
+            "one more 'X+' drives it out and solves the puzzle.\n"
+            f"You have {self.max_turns} moves."
         )
 
     def render(self, player_id: int) -> str:
@@ -405,17 +404,12 @@ class RushHourEnv(ta.GameEnv):
                 x.col > self.BOARD_SIZE - x.length)
 
     def _get_percentage_completion(self) -> float:
-        """Heuristic: how close is the red car to the exit?"""
-        x = self.game_state["vehicles"]["X"]
-        if not x.horizontal or x.row != 2:
-            return 0.0  # Red car not in exit row
-
-        # Calculate distance to exit
-        exit_position = self.BOARD_SIZE - x.length
-        current_position = x.col
-
-        if current_position > exit_position:
-            return 1.0
-
-        moves_to_exit = exit_position + 1
-        return min(max(current_position / moves_to_exit, 0.0), 0.95)
+        """Share of the starting layout's solution length (in moves) that the current layout has cut: 0.0 to below 1.0."""
+        start_moves = self._moves_to_solve({v.vid: v for v in self.initial_layout})
+        if not start_moves:
+            return 0.0
+        # Layouts at least as far from a solution as the start score 0, so the search can stop one move short of it.
+        moves_left = self._moves_to_solve(self.game_state["vehicles"], max_moves=start_moves - 1)
+        if moves_left is None:
+            return 0.0
+        return (start_moves - moves_left) / start_moves

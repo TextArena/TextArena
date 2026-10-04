@@ -184,6 +184,75 @@ def test_three_player_blocked_player_is_eliminated_and_skipped():
     )
 
 
+def test_each_player_sees_their_own_valid_moves_every_turn():
+    env = _fresh(2)
+    assert all("Valid moves" not in env.prompt(player_id) for player_id in (0, 1))
+
+    env.step("N1C2C3B2")
+    white_view = env.render(1)
+    assert f"Valid moves: {env._get_valid_moves(1)}" in white_view
+    assert "N1" not in white_view.split("Valid moves:")[1]
+
+    env.step(env._get_valid_moves(1).split(", ")[0])
+    assert f"Valid moves: {env._get_valid_moves(0)}" in env.render(0)
+
+
+def test_hidden_valid_moves_and_hidden_board_render_nothing():
+    env = _fresh(2, is_open=False, show_valid=False)
+    assert env.render(0) is None
+    assert "board is not shown" in env.prompt(0)
+
+
+@pytest.mark.parametrize("num_players", [2, 3])
+def test_prompt_example_is_legal_for_each_player(num_players):
+    env = _fresh(num_players)
+    for player_id in range(num_players):
+        prompt = env.prompt(player_id)
+        example = prompt.split("Example: ")[1].split()[0]
+        assert example in env._get_valid_moves(player_id).split(", ")
+    assert ("last player remaining wins" in env.prompt(0)) == (num_players == 3)
+
+
+def _eliminate_by_invalid_moves(env, player_id):
+    assert env.state.current_player_id == player_id
+    for _ in range(env.error_allowance + 1):
+        env.step("garbage")
+
+
+def test_three_player_invalid_elimination_removes_workers_and_passes_turn():
+    env = _fresh(3)
+    env.step(env._get_valid_moves(0).split(", ")[0])
+
+    _eliminate_by_invalid_moves(env, 1)
+
+    assert env.state.eliminated == [1] and not env.state.done
+    assert not any(worker is not None and worker[0] == 1 for row in env.board for _, worker in row)
+    assert env.state.current_player_id == 2
+    assert env.game_state["valid_moves"] == env._get_valid_moves(2)
+
+
+def test_three_player_invalid_elimination_also_eliminates_a_blocked_next_player():
+    env = _fresh(3)
+    env.board = [[(0, None) for _ in range(5)] for _ in range(5)]
+    env.board[0][0] = (0, (0, 1))
+    env.board[0][2] = (0, (0, 2))
+    env.board[2][2] = (0, (1, 1))
+    env.board[2][3] = (0, (1, 2))
+    env.board[4][4] = (0, (2, 1))
+    env.board[4][3] = (0, (2, 2))
+    for row, col in [(3, 2), (3, 3), (3, 4), (4, 2)]:
+        env.board[row][col] = (4, None)  # Grey's workers are walled in by domes
+    env.step("N1A1B1A1")
+    assert env.state.current_player_id == 1
+
+    done = False
+    for _ in range(env.error_allowance + 1):
+        done, _ = env.step("garbage")
+
+    assert done
+    assert env.state.rewards == {0: 1, 1: -1, 2: -1}
+
+
 def test_snapshot_restore_recovers_board_valid_moves_and_turn():
     env = _fresh(2)
     snapshot = env.snapshot()

@@ -8,6 +8,10 @@ class StrategoEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
     action_pattern = r"(?i)^\s*\[?\s*([A-J])([0-9])\s+([A-J])([0-9])\s*\]?\s*$"
+    action_format = (
+        "the source and destination squares, each a row letter from A to J followed by a column number from 0 to 9, "
+        "for example 'A0 B0'"
+    )
     broadcast_actions = False  # raw actions are echoed only to their author
 
     def __init__(self, max_turns: int = 1000):
@@ -57,23 +61,33 @@ class StrategoEnv(ta.GameEnv):
 
     def prompt(self, player_id: int) -> str:
         return (
-            f"You are Player {player_id} in Stratego.\n"
+            f"You are Player {player_id} in Stratego. Player 0 moves first.\n"
             "Your goal is to capture your opponent's Flag or eliminate all of their movable pieces.\n"
             "Your army has been placed for you on the board, including your Flag, Bombs, and other pieces of varying ranks.\n"
+            "\n"
+            "### Your Pieces (abbreviation, rank, count)\n"
+            "- MS Marshal (10) x1, GN General (9) x1, CL Colonel (8) x2, MJ Major (7) x3, CP Captain (6) x4, LT Lieutenant (5) x4,\n"
+            "  SG Sergeant (4) x4, MN Miner (3) x5, SC Scout (2) x8, SP Spy (1) x1, BM Bomb x6, FL Flag x1.\n"
             "\n"
             "### Gameplay Instructions\n"
             "1. **Movement Rules:**\n"
             "   - On your turn, you can move one piece by one step to an adjacent empty or enemy square (up, down, left, or right).\n"
             "   - Example: A piece can move from A1 to B1 or A1 to A2 if B1 and A2 are not placed with the player's own pieces.\n"
+            "   - Scouts may instead move any number of empty squares in a straight line (not diagonally), and may attack the first enemy piece in that line; they cannot pass pieces or lakes.\n"
             "   - If the selected piece is a Bomb or a Flag, it cannot be moved.\n"
+            "   - A piece may not move back and forth between the same two squares more than three turns in a row.\n"
             "2. **Battles:**\n"
-            "   - If you move onto a square occupied by an opponent's piece, then a battle will occur:\n"
+            "   - If you move onto a square occupied by an opponent's piece, then a battle will occur and both ranks are revealed to both players:\n"
             "     - The piece with the higher rank wins and eliminates the opponent's piece.\n"
             "     - If the ranks are equal, both pieces are removed from the board.\n"
             "     - **Special Cases:**\n"
             "       - Bombs eliminate most attacking pieces except Miners, which defuse Bombs.\n"
             "       - Spies can defeat the Marshal if the Spy attacks first but lose to all other pieces.\n"
-            "3. **Strategic Goals:**\n"
+            "3. **End of the Game:**\n"
+            "   - Capturing the opponent's Flag wins.\n"
+            "   - A player with no movable pieces left, or with no legal move on their turn, loses; if neither player has a movable piece left, the game is a draw.\n"
+            f"   - The game is a draw after {self.max_turns} turns in total (each player's move is one turn).\n"
+            "4. **Strategic Goals:**\n"
             "   - Identify your opponent's pieces through their movements and battles.\n"
             "   - Protect your Flag while attempting to capture your opponent's Flag.\n"
             "   - Use Scouts strategically to gain information about your opponent's pieces and attack weak ones.\n"
@@ -81,16 +95,15 @@ class StrategoEnv(ta.GameEnv):
             "### How to Make a Move:\n"
             "1. Specify the coordinates of the piece you want to move and its destination.\n"
             "2. Use the format: 'A0 B0', where A0 is the source position, and B0 is the destination.\n"
-            "   - Example: To move a piece from row 0, column 0 to row 1, column 0, input 'A0 B0'.\n"
-            "3. Ensure the destination is valid according to the movement rules above.\n"
+            "   - Rows are lettered A-J from top to bottom and columns numbered 0-9 from left to right.\n"
+            "   - Example: To move a piece from row A, column 0 to row B, column 0, input 'A0 B0'.\n"
+            "3. Choose one of the Available Moves listed under the board.\n"
             "\n"
             "### Important Notes:\n"
-            "- The board will show your pieces and their positions, e.g. MN, MS.\n"
-            "- The board will also show known positions of your opponent's pieces without revealing their ranks, e.g. ?.\n"
+            "- The board shows your own pieces by abbreviation, e.g. MN, MS.\n"
+            "- Opponent pieces are shown as ? without revealing their ranks.\n"
             "- Grids with ~ are lakes and cannot be moved onto.\n"
             "- As a suggestion, start your game by moving your pieces that are on the front lines to gain information about your opponent's pieces. Player 0 and player 1's frontlines are row D and G respectively.\n"
-            "\n"
-            "Here is the current board state:\n"
         )
 
     def render(self, player_id: int) -> str:
@@ -215,15 +228,21 @@ class StrategoEnv(ta.GameEnv):
         ## Keep the cached board private until a terminal outcome.
         self.game_state["rendered_board"] = self._render_board(player_id=None, full_board=False)
 
-        if not self._has_movable_piece(player_id):
+        opponent = 1 - player_id
+        mover_can_move = self._has_movable_piece(player_id)
+        if not mover_can_move and not self._has_movable_piece(opponent):
             self.game_state["rendered_board"] = self._render_board(player_id=None, full_board=True)
-            return self.winner(1 - player_id, reason=f"Player {player_id} has no movable pieces remaining.")
+            return self.draw(reason="Neither player has a movable piece left, so the game is a draw.")
 
         ## The player who is about to act loses if they have no legal move.
-        winner = self._check_winner(1 - player_id)
+        winner = self._check_winner(opponent)
         if winner is not None:
             self.game_state["rendered_board"] = self._render_board(player_id=None, full_board=True)
-            return self.winner(winner, reason=f"Player {winner} wins! Player {1 - winner} has no more movable pieces.")
+            return self.winner(winner, reason=f"Player {winner} wins! Player {1 - winner} has no legal moves left.")
+
+        if not mover_can_move:
+            self.game_state["rendered_board"] = self._render_board(player_id=None, full_board=True)
+            return self.winner(opponent, reason=f"Player {player_id} has no movable pieces remaining.")
         return None
 
     def on_turn_limit(self) -> ta.Outcome:

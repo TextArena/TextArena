@@ -58,14 +58,30 @@ class IndianPokerEnv(ta.GameEnv):
         gs["starting_player"] = 1 - gs["starting_player"]
         for pid in (0, 1):
             self.message(pid, f"### Round {gs['current_round']}/{self.max_rounds}\nYour opponent's card is: {self._rank_to_str(gs['player_cards'][1-pid])}", ta.ObservationType.GAME_MESSAGE)
-        self._announce_actions(gs["starting_player"])
         return None
 
     def prompt(self, player_id: int) -> str:
         return (
             f"You are Player {player_id} in a game of Indian Poker.\n- 52-card deck; you see only the opponent's card.\n- Ante {self.ante} chip(s) each round, {self.max_rounds} round(s) total.\n"
             f"- Valid moves: 'check'  |  'bet X'  |  'call'  |  'raise X'  |  'fold'  (X is a positive integer <= your chip count.)\n- Highest hidden card wins the pot at showdown.\n"
+            f"- Both players start with {self.starting_bank} chips. 'raise X' adds X chips on top of the bet you face; a bet or raise "
+            f"can never exceed what your opponent has left to call it. There is no limit on the number of raises.\n"
+            f"- Cards rank 2 (low) to A (high); suits do not matter and equal ranks split the pot.\n"
+            f"- After {self.max_rounds} round(s), or as soon as a player cannot pay the ante, the player with more chips wins.\n"
         )
+
+    def render(self, player_id: int) -> str:
+        gs = self.game_state
+        opponent = 1 - player_id
+        lines = [
+            f"Round {gs['current_round']} of {self.max_rounds}",
+            f"Opponent's card: {self._rank_to_str(gs['player_cards'][opponent])} | Your card: hidden",
+            f"Pot: {gs['pot']} | Your chips: {gs['player_chips'][player_id]} | Opponent chips: {gs['player_chips'][opponent]}",
+            f"Chips bet this round - you: {gs['current_bets'][player_id]}, opponent: {gs['current_bets'][opponent]}",
+        ]
+        if not self.state.done:
+            lines.append(f"Your possible actions: {self._legal_actions(player_id)}")
+        return "\n".join(lines)
 
     def _find_token(self, msg: str):
         patterns = [
@@ -158,25 +174,22 @@ class IndianPokerEnv(ta.GameEnv):
             if outcome is not None:
                 return outcome
             self.set_next_player(gs["starting_player"])  # new round: its starter acts next
-        else:
-            self._announce_actions(1 - pid)  # round continues: prompt the other player
-        return None
+        return None  # otherwise the round continues with the other player
 
-    def _announce_actions(self, to_pid: int):
+    def _legal_actions(self, pid: int) -> str:
         gs = self.game_state
-        to_call = gs["highest_bet"] - gs["current_bets"][to_pid]
+        to_call = gs["highest_bet"] - gs["current_bets"][pid]
         if to_call == 0:
             legal = "'check'"
-            if min(gs["player_chips"][to_pid], gs["player_chips"][1 - to_pid]) > 0:
-                legal += ", 'bet X'"
+            max_bet = min(gs["player_chips"][pid], gs["player_chips"][1 - pid])
+            if max_bet > 0:
+                legal += f", 'bet X' (X from 1 to {max_bet})"
         else:
             legal = f"'call' (cost {to_call}), 'fold'"
-            if min(
-                gs["player_chips"][to_pid] - to_call,
-                gs["player_chips"][1 - to_pid],
-            ) > 0:
-                legal += ", 'raise X'"
-        self.message(to_pid, f"Your possible actions: {legal}", ta.ObservationType.GAME_BOARD)
+            max_raise = min(gs["player_chips"][pid] - to_call, gs["player_chips"][1 - pid])
+            if max_raise > 0:
+                legal += f", 'raise X' (X from 1 to {max_raise})"
+        return legal
 
     def _end_round(self, winner: int, reason: str) -> Optional[ta.Outcome]:
         gs = self.game_state

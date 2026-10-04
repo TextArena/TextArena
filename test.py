@@ -1,24 +1,27 @@
-""" A minimal script showing how to run textarena locally """
+"""A minimal script showing how to run TextArena locally."""
 
-import textarena as ta 
+import textarena as ta
 
 agents = {
     0: ta.agents.HumanAgent(),
     1: ta.agents.HumanAgent(),
-    # 1: ta.agents.OpenRouterAgent(model_name="google/gemini-2.0-flash-001"),
 }
 
-# initialize the environment
-env = ta.make(env_id="SimpleTak-v0-mdp")
-# env = ta.wrappers.SimpleRenderWrapper(env=env) #, render_mode="standard")
+# Initialize the environment
+env = ta.make(env_id="TicTacToe-v0")
+
+# Optionally, show each player the game in their own language
+# env = ta.wrappers.TranslationWrapper(env, lang={0: "en", 1: "de"})
+
 env.reset(num_players=len(agents))
 
-# main game loop
-done = False 
+done = False
 while not done:
-  player_id, observation = env.get_observation()
-  action = agents[player_id](observation)
-  done, step_info = env.step(action=action)
+    player_id, observation = env.get_observation()
+    action = agents[player_id](observation)
+    done, step_info = env.step(action)
+
 rewards, game_info = env.close()
+
 print(rewards)
 print(game_info)

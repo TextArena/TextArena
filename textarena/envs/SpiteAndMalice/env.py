@@ -88,7 +88,7 @@ class SpiteAndMaliceEnv(ta.GameEnv):
             "- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).\n"
             "- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.\n"
             "- If a center pile reaches Queen, it will be cleared automatically.\n"
-            "- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.\n\n"
+            "- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild. The deck has no 10s.\n\n"
 
             "### Actions:\n"
             "1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **draw** to begin.\n"
@@ -232,6 +232,7 @@ class SpiteAndMaliceEnv(ta.GameEnv):
 
     def _parse_commands(self, action: str):
         """Parse a complete command chain without ignoring unmatched text."""
+        action = action.replace("\ufe0f", "").replace("\ufe0e", "")  # emoji-style suits such as '♥️'
         if action.count("[") != action.count("]"):
             return None
         command_pattern = re.compile(
@@ -388,7 +389,7 @@ class SpiteAndMaliceEnv(ta.GameEnv):
 
     def _render_board(self, player_id: Optional[int] = None) -> str:
         """ Render the game board """
-        board = "--- Center Piles ---\n"
+        board = f"Draw pile: {len(self.deck)} card(s)\n\n--- Center Piles ---\n"
         for i, pile in enumerate(self.center_piles):
             board += f"Pile {i}: {pile}\n"
 

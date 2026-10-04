@@ -11,7 +11,8 @@ class ThreePlayerGOPSEnv(ta.GameEnv):
 
     def __init__(self):
         self.full_hand: List[int] = list(range(1, 14))
-        self.action_space = re.compile(r"^\s*\[?\s*(a|k|q|j|10|[2-9])\s*\]?\s*$", re.I)
+        # A whitespace run must be consumable by only one \s*, as retrying every split of a long run is quadratic.
+        self.action_space = re.compile(r"^\s*(?:\[\s*)?(a|k|q|j|10|[2-9])(?:\s*\])?\s*$", re.I)
 
     @staticmethod
     def _face_to_val(face: str) -> int:
@@ -42,7 +43,9 @@ class ThreePlayerGOPSEnv(ta.GameEnv):
             "`10`, `2` …\n"
             "- Highest card wins the prize (+ any carry-over pot). "
             "Ties roll the prize into the next round.\n"
-            "- After 13 rounds, highest total wins. Invalid moves = elimination."
+            "- After 13 rounds, rewards follow the ranking by total: highest +1, lowest -1, middle 0. "
+            "Two players tied ahead of the third both get +1, two tied behind both get -1, and a three-way tie gives everyone 0.\n"
+            "- Two invalid moves in a row eliminate you with -1; the others play on and are ranked among themselves, and a lone survivor wins."
         )
 
     def on_start(self):

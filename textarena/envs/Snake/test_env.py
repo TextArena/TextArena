@@ -240,3 +240,101 @@ def test_turn_limit_finalises_rewards():
     assert done
     assert env.state.rewards is not None
     assert set(env.state.rewards.keys()) == {0, 1}
+
+
+def _place(env, positions, apples=()):
+    gs = env.state.game_state
+    for pid, cells in positions.items():
+        gs["snakes"][pid].positions.clear()
+        gs["snakes"][pid].positions.extend(cells)
+    gs["apples"][:] = list(apples)
+    gs["board_state"] = env._get_board_string(gs["snakes"], gs["apples"])
+
+
+def test_engine_rejected_action_kills_snake_and_rounds_keep_resolving():
+    env = _fresh(num_players=3, width=10, height=10, num_apples=0)
+
+    done, _ = env.step("x" * (env.max_action_chars + 1))
+
+    assert not done
+    assert env.state.eliminated == [0]
+    assert not env.state.game_state["snakes"][0].alive
+    assert env.state.current_player_id == 1
+    env.step("up")
+    env.step("up")
+    assert env.state.game_state["round_count"] == 1
+
+
+def test_invalid_move_uses_engine_escalation_bookkeeping():
+    env = _fresh(num_players=3, width=5, height=5, num_apples=0)
+
+    done, _ = env.step("north")
+
+    assert not done
+    assert env.state.game_info[0]["invalid_move"] is True
+    assert env.state.game_info[0]["turn_count"] == 0
+    death = [m for _, m, _, to in env.state.events if m.startswith("Snake 0 died")]
+    assert death and "up, down, left or right" in death[0]
+
+
+def test_fatal_action_by_last_submitter_resolves_the_pending_round():
+    env = _fresh(num_players=3, width=7, height=7, num_apples=0)
+    _place(env, {0: [(1, 1)], 1: [(3, 3)], 2: [(5, 5)]})
+    env.step("up")
+    env.step("up")
+
+    done, _ = env.step(None)
+
+    assert not done
+    gs = env.state.game_state
+    assert gs["round_count"] == 1
+    assert gs["snakes"][0].head == (1, 2) and gs["snakes"][1].head == (3, 4)
+    assert env.state.current_player_id == 0
+
+
+def test_apples_are_distinguishable_from_two_digit_player_heads():
+    env = _fresh(num_players=11, width=10, height=10, num_apples=3)
+    board = env.state.game_state["board_state"]
+
+    assert board.count("A") == 1  # snake 10's head
+    assert board.count("*") == 3
+    assert "'A'" in env.prompt(10)
+
+
+def test_round_results_reveal_moves_and_deaths_only_after_resolution():
+    env = _fresh(num_players=3, width=5, height=5, num_apples=0)
+    _place(env, {0: [(0, 0)], 1: [(2, 2)], 2: [(4, 4)]}, apples=[(2, 3)])
+    env.step("left")
+    env.step("up")
+    assert not any("Snake 0 moved" in m for _, m, _, _ in env.state.events)
+
+    env.step("down")
+
+    summary = [m for _, m, _, to in env.state.events if m.startswith("Round 1 results") and to == -1]
+    assert len(summary) == 1
+    assert "Snake 0 moved left and died (hit the wall)" in summary[0]
+    assert "Snake 1 moved up and ate an apple" in summary[0]
+    assert "Snake 2 moved down." in summary[0]
+
+
+def test_render_reports_round_scores_and_dead_snakes():
+    env = _fresh(num_players=3, width=5, height=5, num_apples=0)
+    env.step("nonsense")
+
+    board = env.render(1)
+
+    assert "Rounds played: 0/100" in board
+    assert "Snake 1 (you) [1]: length 1, score 0" in board
+    assert "Snake 0: died in round 1 (invalid move), score 0" in board
+
+
+def test_last_survivor_wins_without_resolving_its_pending_move():
+    env = _fresh(num_players=2, width=5, height=5, num_apples=0)
+    _place(env, {0: [(0, 0)], 1: [(3, 3)]})
+    env.step("left")  # would hit the wall if the round were resolved
+
+    done, _ = env.step("sideways")
+
+    assert done
+    assert env.state.rewards == {0: 1.0, 1: -1.0}
+    assert env.state.game_state["snakes"][0].alive

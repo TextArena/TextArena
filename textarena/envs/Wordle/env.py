@@ -1,11 +1,9 @@
 import re
-from nltk import pos_tag
-from nltk.corpus import words
 from typing import Optional, List, Dict, Any, Union
 
 import textarena as ta
 from textarena.envs.Wordle.renderer import create_board_str
-from textarena.utils.word_lists import EnglishDictionary
+from textarena.utils.word_lists import EnglishDictionary, get_basic_english_words, get_headwords
 
 class WordleEnv(ta.GameEnv):
     min_players = 1
@@ -24,49 +22,23 @@ class WordleEnv(ta.GameEnv):
         self.word_length = word_length
         self.num_guesses = num_guesses
         self.max_turns = num_guesses
-        self.dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=True)
+        # Only the bundled UK/US lists, so the accepted words never depend on optional NLTK data.
+        self.dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=False)
         self._load_word_list(hardcore=hardcore)
 
     def _check_word(self, word: str) -> bool:
         return self.dictionary.is_english_word(word)
 
     def _load_word_list(self, hardcore: bool = False) -> None:
-        """ Load the word list based on the 'hardcore' parameter """
-        use_pos_filter = True
-        try:
-            word_list = words.words("en") if hardcore else words.words("en-basic")
-        except LookupError:
-            use_pos_filter = False
-            word_list = self.dictionary.get_all_words()
-        candidates = sorted(
-            {
-                word.lower()
-                for word in word_list
-                if isinstance(word, str)
-                and word.isascii()
-                and word.isalpha()
-                and len(word) == self.word_length
-            }
-        )
-        if use_pos_filter:
-            try:
-                candidates = [word for word in candidates if pos_tag([word])[0][1] == "NN"]
-            except LookupError:
-                # The tagger is an optional NLTK download; dictionary membership
-                # is sufficient when it is unavailable.
-                pass
-        self.word_list = [word for word in candidates if self._check_word(word)]
+        """ Secret words: Basic English, or every dictionary headword in hardcore mode """
+        source = get_headwords() if hardcore else get_basic_english_words()
+        self.word_list = sorted(word for word in source if len(word) == self.word_length and self._check_word(word))
         if not self.word_list:
-            # A partial NLTK install can expose target candidates without the
-            # larger validation corpus. Fall back to the bundled dictionaries
-            # so every selected answer is also an accepted guess.
+            # Lengths the chosen list lacks still get playable secrets from the full dictionary.
             self.word_list = sorted(
-                word.lower()
+                word
                 for word in self.dictionary.get_all_words()
-                if isinstance(word, str)
-                and word.isascii()
-                and word.isalpha()
-                and len(word) == self.word_length
+                if word.isascii() and word.isalpha() and word.islower() and len(word) == self.word_length
             )
         if not self.word_list:
             raise ValueError(f"No target words are available with length {self.word_length}.")
@@ -84,12 +56,22 @@ class WordleEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         return (
             f"You are Playing Wordle.\nA secret {self.game_state['word_length']}-letter word has been chosen. You have {self.game_state['num_guesses']} attempts to guess it.\n"
-            "For each guess, reply with the word you want to try, e.g. 'apple'.\nFeedback for each letter will be given as follows:\n"
+            f"For each guess, reply with the word you want to try, e.g. '{self._example_guess()}'.\n"
+            f"Every guess must be a {self.game_state['word_length']}-letter English word from the game's dictionary (UK and US spellings are accepted, proper nouns are not), and you cannot repeat a guess.\n"
+            "Feedback for each letter will be given as follows:\n"
             "  - G (green): correct letter in the correct position\n"
             "  - Y (yellow): letter exists in the word but in the wrong position\n"
             "  - X (wrong): letter is not in the word\n"
             "Enter your guess to begin.\n"
         )
+
+    def _example_guess(self) -> str:
+        examples = {5: "apple", 7: "example"}
+        return examples.get(self.word_length, self.word_list[0])
+
+    @property
+    def action_format(self) -> str:
+        return f"a {self.word_length}-letter English word, for example '{self._example_guess()}'"
 
     def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
         gs = self.game_state
@@ -102,7 +84,7 @@ class WordleEnv(ta.GameEnv):
             return self.invalid(f"You have already guessed '{word}' before. Please try a different word.")
 
         if not self._check_word(word):
-            return self.invalid(f"'{word}' is not an English word.")
+            return self.invalid(f"'{word}' is not in the game's English dictionary.")
 
         feedback = self._evaluate_guess(word) # Evaluate the word
         gs["guess_history"].append((word, feedback)) # Save the guess and feedback
@@ -123,7 +105,7 @@ class WordleEnv(ta.GameEnv):
     def on_turn_limit(self) -> ta.Outcome:
         pct_complete = self._get_percentage_completion()
         reason = (
-            f"The turn limit has been reached. You didn't guess the word, but your best guess matched {round(pct_complete * 100)}% of the letters in the correct positions.\n"
+            f"The turn limit has been reached. You didn't guess the word, but your best guess scored {round(pct_complete * 100)}% (a green letter counts 1, a yellow letter 0.5).\n"
             f"The secret word was: **{self.game_state['secret_word']}**."
         )
         return self.outcome({0: pct_complete}, reason=reason)

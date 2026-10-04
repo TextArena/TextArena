@@ -81,6 +81,19 @@ def test_incorrect_final_choice_returns_negative_regret():
     assert env.game_state["history"] == {"red": [], "blue": []}
 
 
+@pytest.mark.parametrize(
+    "choice,expected",
+    [("green", 1.0), ("red", -0.4), ("blue", -0.3)],
+)
+def test_final_choice_is_scored_against_the_argmax_button(choice, expected):
+    env = BanditEnv(buttons=["red", "blue", "green"], num_turns=0)
+    env.reset(num_players=1, seed=42)
+    env.game_state["ground_truth"] = {"red": 0.2, "blue": 0.3, "green": 0.6}
+    done, _ = env.step(choice)
+    assert done
+    assert env.state.rewards == {0: pytest.approx(expected)}
+
+
 def test_invalid_final_choice_does_not_consume_a_turn():
     env = _fresh(num_turns=0)
     before = copy.deepcopy(env.game_state)
@@ -98,6 +111,48 @@ def test_bare_and_bracketed_button_names_are_accepted():
     bare.step("red")
     bracketed.step("[red]")
     assert bare.game_state == bracketed.game_state
+
+
+@pytest.mark.parametrize("action", ["RED", "Red", "[Red]"])
+def test_button_names_are_case_insensitive(action):
+    env = _fresh(num_turns=2)
+    done, _ = env.step(action)
+    assert not done
+    assert env.state.error_count == 0
+    assert len(env.game_state["history"]["red"]) == 1
+
+
+def test_final_choice_is_case_insensitive():
+    env = _fresh(num_turns=0)
+    done, _ = env.step(_best_button(env).upper())
+    assert done
+    assert env.state.rewards == {0: 1.0}
+
+
+def test_case_variants_of_distinct_buttons_must_match_exactly():
+    env = BanditEnv(buttons=["red", "Red"], num_turns=2)
+    env.reset(num_players=1, seed=42)
+    done, _ = env.step("RED")
+    assert not done
+    assert env.state.error_count == 1
+    env.step("Red")
+    assert env.state.error_count == 0
+    assert len(env.game_state["history"]["Red"]) == 1
+
+
+def test_unknown_button_feedback_lists_the_buttons():
+    env = _fresh()
+    env.get_observation()
+    env.step("green")
+    _, observations = env.get_observation()
+    assert any("Choose one of: red, blue." in message for _, message, _ in observations)
+
+
+def test_prompt_explains_the_final_answer_and_its_scoring():
+    env = _fresh(num_turns=3)
+    prompt = env.state.events[0][1]
+    assert "After your 3 presses, reply with the name of the button you believe has the highest mean reward" in prompt
+    assert "a correct answer scores 1" in prompt
 
 
 @pytest.mark.parametrize("action", ["[red", "red]"])

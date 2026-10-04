@@ -1,5 +1,6 @@
 """Deterministic game-logic tests for ColonelBlotto."""
 import copy
+import re
 
 import pytest
 
@@ -121,11 +122,49 @@ def test_terminal_board_preserves_final_battle_and_is_repeatable():
         {"num_fields": 27},
         {"num_total_units": 2},
         {"num_rounds": 0},
+        {"num_total_units": 10**5000},
+        {"num_rounds": 10**5000},
     ],
 )
 def test_invalid_configuration_is_rejected(kwargs):
     with pytest.raises(ValueError):
         ColonelBlottoEnv(**kwargs)
+
+
+def test_huge_unit_counts_are_rejected_without_crashing():
+    env = _fresh(num_total_units=20, num_rounds=2)
+    before = copy.deepcopy(env.game_state)
+    done, _ = env.step("A" + "9" * 4300 + " B" + "9" * 4300)
+    assert not done
+    assert env.state.error_count == 1
+    assert env.game_state == before
+
+
+@pytest.mark.parametrize(
+    "kwargs",
+    [
+        {"num_fields": 2, "num_total_units": 2, "num_rounds": 4},
+        {"num_fields": 3, "num_total_units": 20, "num_rounds": 9},
+        {"num_fields": 7, "num_total_units": 75, "num_rounds": 25},
+    ],
+)
+def test_prompt_example_is_legal_and_game_rules_are_stated(kwargs):
+    env = _fresh(**kwargs)
+    prompt = env.prompt(0)
+    example = re.search(r"^Format: (.+)$", prompt, re.M).group(1)
+    assert f"Format: {example}" in env.state.observations[0][1][1]  # the round board repeats it
+    assert f"up to {kwargs['num_rounds']} rounds" in prompt
+    assert f"Winning {kwargs['num_rounds'] // 2 + 1} rounds" in prompt
+    assert "majority of fields" not in prompt
+    done, _ = env.step(example)
+    assert not done and env.state.error_count == 0 and env.state.current_player_id == 1
+
+
+def test_round_can_be_won_with_a_minority_of_fields():
+    env = _fresh(num_fields=5, num_total_units=10, num_rounds=1)
+    env.step("A3 B3 C1 D2 E1")
+    done, _ = env.step("A2 B2 C3 D2 E1")  # Alpha wins A and B, Beta wins C, D and E are tied
+    assert done and env.state.rewards == {0: 1, 1: -1}
 
 
 def test_snapshot_restores_hidden_round_allocation():

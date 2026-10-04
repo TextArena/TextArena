@@ -2,16 +2,20 @@
 
 Ten prestige cards are auctioned. Each auction both players bid a money card
 1-11; the higher bid wins the prestige card and discards that money card, the
-loser keeps their card. Ties re-auction the same prestige card. Winner is the
-higher final net-worth (remaining cash + prestige), as stated in the player prompt.
+loser keeps their card. Ties re-auction the same prestige card until
+``max_ties`` ties in a row discard it. Winner is the higher final net-worth
+(remaining cash + prestige), as stated in the player prompt.
 """
 import copy
+import time
+
+import pytest
 
 from textarena.envs.HighSociety.env import HighSocietyEnv
 
 
-def _fresh():
-    env = HighSocietyEnv()
+def _fresh(**kwargs):
+    env = HighSocietyEnv(**kwargs)
     env.reset(num_players=2, seed=42)
     return env
 
@@ -128,6 +132,70 @@ def test_mixed_or_duplicate_bid_text_is_invalid_and_atomic():
     assert env.state.current_player_id == 0
 
 
+def test_identical_bids_forever_cannot_stall_the_game():
+    env = _fresh()
+    done = False
+    for _ in range(1000):
+        done, _ = env.step("5")
+        if done:
+            break
+    assert done
+    assert env.state.turn == 10 * 3 * 2  # every card tied three times, then discarded
+    assert env.game_state["player_prestige"] == {0: 0, 1: 0}
+    assert env.game_state["player_money"] == {0: list(range(1, 12)), 1: list(range(1, 12))}
+    assert env.state.rewards == {0: 0, 1: 0}
+
+
+def test_third_tie_discards_card_and_second_bidder_opens_next_auction():
+    env = _fresh()
+    first_prize = env.game_state["current_prize"]
+    for _ in range(2):
+        env.step("4")
+        env.step("4")
+        assert env.game_state["round"] == 1 and env.state.current_player_id == 0
+    assert env.game_state["ties"] == 2
+    env.step("4")
+    env.step("4")
+    gs = env.game_state
+    assert gs["round"] == 2 and gs["ties"] == 0 and gs["current_prize"] != first_prize
+    assert gs["player_prestige"] == {0: 0, 1: 0}
+    assert gs["player_money"] == {0: list(range(1, 12)), 1: list(range(1, 12))}
+    assert env.state.current_player_id == 1
+    messages = [message for _, message, _, _ in env.state.events]
+    assert any(f"Prestige card {first_prize} is discarded" in message for message in messages)
+
+
+def test_tie_counter_resets_after_a_decided_auction():
+    env = _fresh(max_ties=2)
+    env.step("4")
+    env.step("4")  # first tie on card 1
+    env.step("6")
+    env.step("3")  # P0 wins card 1
+    assert env.game_state["round"] == 2 and env.game_state["ties"] == 0
+    env.step("2")  # P1 opens auction 2
+    env.step("2")
+    assert env.game_state["round"] == 2 and env.game_state["ties"] == 1
+
+
+def test_single_tie_limit_discards_immediately_and_prompt_says_so():
+    env = _fresh(max_ties=1)
+    assert "re-auctioned" not in env.prompt(0)
+    env.step("4")
+    env.step("4")
+    assert env.game_state["round"] == 2
+    assert env.game_state["player_prestige"] == {0: 0, 1: 0}
+
+
+def test_prompt_states_tie_limit():
+    assert "After 3 ties in a row the card is discarded" in _fresh().prompt(1)
+
+
+@pytest.mark.parametrize("max_ties", [0, -1, 1.5, True, None, pytest.param(10**5000, id="unrenderable-large-int")])
+def test_invalid_tie_limit_rejected(max_ties):
+    with pytest.raises(ValueError):
+        HighSocietyEnv(max_ties=max_ties)
+
+
 def test_seeded_reset_and_snapshot_restore_auction():
     first, second = _fresh(), _fresh()
     assert first.game_state["prestige_deck"] == second.game_state["prestige_deck"]
@@ -138,3 +206,27 @@ def test_seeded_reset_and_snapshot_restore_auction():
     first.restore(snapshot)
     assert first.game_state["pending_bids"] == {}
     assert first.state.turn == 0
+
+
+PADDING = 30_000
+
+
+@pytest.mark.parametrize(
+    "action",
+    [
+        pytest.param(" " * PADDING + "x" + " " * 1000, id="leading-trailing-spaces"),
+        pytest.param("4" + " " * PADDING + "x", id="inner-spaces"),
+        pytest.param("\t\n " * (PADDING // 3) + "x", id="tab-newline-runs"),
+        pytest.param("[" * (PADDING // 2) + "x" + "]" * (PADDING // 2 - 2), id="deep-brackets"),
+    ],
+)
+def test_long_padded_input_is_rejected_quickly_without_changing_state(action):
+    env = _fresh()
+    before = copy.deepcopy(env.state.game_state)
+    player = env.state.current_player_id
+    start = time.perf_counter()
+    env.step(action)
+    assert time.perf_counter() - start < 0.25
+    assert env.state.error_count == 1
+    assert env.state.current_player_id == player
+    assert env.state.game_state == before

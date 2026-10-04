@@ -84,6 +84,22 @@ def test_two_consecutive_invalid_moves_end_game():
     assert env.state.rewards == {0: -1, 1: 1}
 
 
+def test_round_results_reveal_both_moves_and_running_score_to_both_players():
+    env = _fresh(num_rounds=3)
+    env.step("rock"); env.step("scissors")  # P0 wins
+    env.step("paper"); env.step("paper")    # draw
+    for pid in (0, 1):
+        messages = [message for _, message, _ in env.state.observations[pid]]
+        assert "Player 0 played rock; Player 1 played scissors." in messages
+        assert "Score after round 1/3: Player 0 1, Player 1 0." in messages
+        assert "Player 0 played paper; Player 1 played paper." in messages
+        assert "Score after round 2/3: Player 0 1, Player 1 0." in messages
+
+
+def test_prompt_states_how_the_game_is_won():
+    assert "The player who wins more rounds wins the game; equal round wins is a draw." in _fresh().prompt(0)
+
+
 def test_pending_move_is_private_and_duplicate_is_atomic():
     env = _fresh(num_rounds=1)
     env.step("rock")

@@ -13,6 +13,7 @@ class PigDiceEnv(ta.GameEnv):
         r"(?i)^\s*(?P<bracket>\[)?\s*(?P<action>roll|hold)\s*"
         r"(?(bracket)\])\s*$"
     )
+    action_format = "either 'roll' to roll the die or 'hold' to bank your turn total"
 
     def __init__(self, winning_score: int = 100, max_turns: int = 500):
         """
@@ -24,8 +25,9 @@ class PigDiceEnv(ta.GameEnv):
             raise ValueError("winning_score must be a positive integer.")
         if winning_score > self.MAX_WINNING_SCORE:
             raise ValueError(f"winning_score cannot exceed {self.MAX_WINNING_SCORE}.")
-        if max_turns is not None and (type(max_turns) is not int or max_turns < 1):
-            raise ValueError("max_turns must be None or a positive integer.")
+        # A cap is required: two players who only hold (or only roll) would otherwise never finish.
+        if type(max_turns) is not int or max_turns < 1:
+            raise ValueError("max_turns must be a positive integer.")
         self.winning_score = winning_score
         self.max_turns = max_turns
         self.roll_value = None
@@ -36,12 +38,8 @@ class PigDiceEnv(ta.GameEnv):
 
     def prompt(self, player_id: int) -> str:
         turn_limit_rule = (
-            ""
-            if self.max_turns is None
-            else (
-                f"\n- After {self.max_turns} completed actions, the player with "
-                "the higher banked score wins; equal scores draw"
-            )
+            f"\n- After {self.max_turns} completed actions, the player with "
+            "the higher banked score wins; equal scores draw"
         )
         return (
             f"You are Player {player_id} playing a game of Pig Dice.\n"

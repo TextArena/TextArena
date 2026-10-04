@@ -21,7 +21,7 @@ def test_reset_state():
     env = _fresh()
     gs = env.state.game_state
     assert gs["info_tokens"] == 8
-    assert gs["fuse_tokens"] == 4
+    assert gs["fuse_tokens"] == 3
     assert env.hand_size == 5  # 2-3 players -> hand size 5
     assert len(gs["player_hands"][0]) == 5
     assert len(gs["player_hands"][1]) == 5
@@ -32,6 +32,12 @@ def test_reset_state():
 def test_registered_default_and_mdp_variants():
     assert ta.make("Hanabi-v0").env.__class__ is HanabiEnv
     assert ta.make("Hanabi-v0-mdp").env.__class__ is HanabiEnv
+
+
+def test_registered_env_starts_with_three_fuse_tokens():
+    env = ta.make("Hanabi-v0")
+    env.reset(num_players=2, seed=0)
+    assert env.state.game_state["fuse_tokens"] == 3
 
 
 def test_play_card_updates_fireworks_or_fuse():
@@ -148,6 +154,18 @@ def test_deck_exhaustion_returns_normalized_team_score():
     assert env.state.rewards == {0: 3 / 25, 1: 3 / 25}
 
 
+def test_default_game_ends_on_the_third_misplay():
+    env = _fresh()
+    gs = env.state.game_state
+    for misplay in (1, 2, 3):
+        card = gs["player_hands"][env.state.current_player_id][0]
+        gs["fireworks"][card.suit] = card.rank  # that rank is already on the firework
+        done, _ = env.step("Play 0")
+        assert gs["fuse_tokens"] == 3 - misplay
+        assert done == (misplay == 3)
+    assert env.state.rewards == {0: 0, 1: 0}
+
+
 def test_using_last_fuse_ends_game():
     env = _fresh()
     gs = env.state.game_state
@@ -195,6 +213,59 @@ def test_repeated_invalid_skips_turn_without_ending():
     assert not done  # game does not end on repeated invalid moves
     assert env.state.rewards is None
     assert env.state.current_player_id == 1  # turn advanced to next player
+
+
+@pytest.mark.parametrize("num_players", [2, 5])
+def test_a_full_round_of_skipped_turns_ends_the_game_with_the_current_score(num_players):
+    env = _fresh(num_players=num_players)
+    env.state.game_state["fireworks"][Suit.GREEN] = 2
+    steps = 0
+    done = False
+    while not done and steps < 1_000:
+        done, _ = env.step("Frobnicate 0")
+        steps += 1
+    assert done
+    assert steps == num_players * (env.error_allowance + 1)
+    assert env.state.rewards == {pid: 2 / 25 for pid in range(num_players)}
+    assert "Every player skipped a turn" in env.state.game_info[0]["reason"]
+
+
+def test_a_valid_action_resets_the_skipped_turn_count():
+    env = _fresh()
+    gs = env.state.game_state
+    env.step("Frobnicate 0")
+    env.step("Frobnicate 0")  # Player 0 skips
+    target_color = gs["player_hands"][0][0].suit.value
+    env.step(f"Reveal player 0 card 0 color {target_color}")  # Player 1 acts
+    env.step("Frobnicate 0")
+    done, _ = env.step("Frobnicate 0")  # Player 0 skips again, but not twice in a row
+    assert not done
+    assert gs["skips_in_a_row"] == 1
+    assert env.state.current_player_id == 1
+
+
+def test_render_shows_own_hand_size_deck_size_and_hint_knowledge():
+    env = _fresh()
+    gs = env.state.game_state
+    board = env.render(1)
+    assert "you hold 5 cards (positions 0 to 4)" in board
+    assert f"there are {len(gs['deck'])} cards left to draw" in board
+
+    hand = gs["player_hands"][1]
+    color = hand[0].suit.value
+    env.step(f"Reveal player 1 card 0 color {color}")
+    matching = [i for i, card in enumerate(hand) if card.suit.value == color]
+    board = env.render(1)
+    for i in range(5):
+        expected = f"known: {color}" if i in matching else f"not {color}"
+        assert f"card {i}: {expected}" in board
+
+    env.step("Discard 0")  # Player 1 discards the hinted card; the rest shift down
+    board = env.render(1)
+    for new_index, old_index in enumerate(range(1, 5)):
+        expected = f"known: {color}" if old_index in matching else f"not {color}"
+        assert f"card {new_index}: {expected}" in board
+    assert "card 4: no hints" in board  # the replacement card
 
 
 def test_reveal_about_self_is_invalid():

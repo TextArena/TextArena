@@ -22,23 +22,30 @@ class TwoDollarEnv(ta.GameEnv):
     """
     Two-player negotiation environment where players split a fixed amount of money.
     Players have secret role instructions that create different constraints and objectives.
+
+    Money is tracked in integer cents; the dollar-valued properties are views for
+    renderers and callers.
     """
 
     min_players = 2
     max_players = 2
 
-    # Command grammar: the decision is a bare command phrase on its own line
-    # (this is what the prompts teach). Optional surrounding brackets and the
-    # legacy embedded "[Command]" tokens are still recognized for backwards
-    # compatibility, but brackets are never required.
-    _BARE_ACCEPT_RE = re.compile(r"^[ \t]*(?:accept|\[[ \t]*accept[ \t]*\])[ \t]*[.!]?[ \t]*$", re.IGNORECASE | re.MULTILINE)
-    _BARE_REJECT_RE = re.compile(r"^[ \t]*(?:reject|\[[ \t]*reject[ \t]*\])[ \t]*[.!]?[ \t]*$", re.IGNORECASE | re.MULTILINE)
-    _BARE_PROPOSE_RE = re.compile(r"^[ \t]*propose[ \t]*:?[ \t]*(?P<rest>[^\n]*)$", re.IGNORECASE | re.MULTILINE)
-    _PROPOSE_AMOUNT_RE = re.compile(r"[ \t]*\$(\d+(?:\.\d{1,2})?)[ \t]*[.!]?[ \t]*")
+    # Decision grammar (what the prompts teach): every message ends with
+    # exactly one decision line whose first token is exactly the command
+    # keyword, case-insensitive and optionally bracketed, followed by its
+    # arguments; trailing "." or "!" is tolerated. A "propose" line whose
+    # remainder is empty or starts with "$" or a digit is a proposal attempt
+    # and must be well-formed. Every other line, such as "Proposed split: ..."
+    # or "Propose we split it", is persuasion text. The legacy embedded
+    # "[Accept]", "[Reject]", "[Propose] $X" and "[Propose $X]" tokens still count.
+    _ACCEPT_LINE_RE = re.compile(r"\[?\s*accept\s*\]?[.!]*", re.IGNORECASE)
+    _REJECT_LINE_RE = re.compile(r"\[?\s*reject\s*\]?[.!]*", re.IGNORECASE)
+    _PROPOSE_LINE_RE = re.compile(r"\[?\s*propose\s*\]?(?![^\s:.!])\s*:?\s*(?P<args>.*)", re.IGNORECASE)
+    _AMOUNT_RE = re.compile(r"\$(?P<dollars>[0-9]+)(?:\.(?P<cents>[0-9]{1,2}))?")
     _LEGACY_COMMAND_RE = re.compile(
-        r"(?:\[(?P<decision>Accept|Reject)\][ \t]*[.!]?"
-        r"|\[Propose\][ \t]*\$(?P<proposal>\d+(?:\.\d{1,2})?)[ \t]*[.!]?"
-        r"|\[Propose[ \t]+\$(?P<inside>\d+(?:\.\d{1,2})?)[ \t]*\][ \t]*[.!]?)"
+        r"\[(?P<decision>Accept|Reject)\]"
+        r"|\[Propose\][ \t]*(?P<proposal>\$[0-9]+(?:\.[0-9]{1,2})?)"
+        r"|\[Propose[ \t]+(?P<inside>\$[0-9]+(?:\.[0-9]{1,2})?)[ \t]*\]"
     )
 
     def __init__(self,
@@ -79,20 +86,24 @@ class TwoDollarEnv(ta.GameEnv):
             raise ValueError("error_allowance must be a non-negative integer")
         self.player_roles_config = list(player_roles) if player_roles is not None else None
         self.total_amount = normalized_total
+        self.total_cents = round(normalized_total * 100)
         self.max_rounds = max_rounds
         self.error_allowance = error_allowance
 
         # Load all available roles
         self.available_roles = self._load_available_roles()
+        for role_name in self.player_roles_config or []:
+            self._check_role_feasible(role_name)
 
         # Assigned per reset
         self.player_roles = {}
         self.player_deadline = {}  # For x_rounds role
 
-    # -- game_state-backed views (kept as attributes for renderers/analysis) --
+    # -- dollar views of the cent-valued game_state (for renderers/analysis) --
     @property
     def current_proposal(self) -> Dict[str, Any]:
-        return self.game_state["current_proposal"]
+        proposal = self.game_state["current_proposal"]
+        return {"amount": self._dollars(proposal["amount_cents"]), "proposer": proposal["proposer"]}
 
     @property
     def negotiation_history(self) -> List[Dict[str, Any]]:
@@ -100,11 +111,22 @@ class TwoDollarEnv(ta.GameEnv):
 
     @property
     def player_proposal_history(self) -> Dict[int, List[float]]:
-        return self.game_state["player_proposal_history"]
+        return {
+            pid: [self._dollars(cents) for cents in proposals]
+            for pid, proposals in self.game_state["player_proposal_history"].items()
+        }
 
     @property
     def final_amounts(self) -> Dict[int, float]:
-        return self.game_state["final_amounts"]
+        return {pid: self._dollars(cents) for pid, cents in self.game_state["final_cents"].items()}
+
+    @staticmethod
+    def _dollars(cents: Optional[int]) -> Optional[float]:
+        return None if cents is None else cents / 100
+
+    @staticmethod
+    def _format_cents(cents: int) -> str:
+        return f"${cents // 100}.{cents % 100:02d}"
 
     def _load_available_roles(self) -> Dict[str, Dict]:
         """Load all role definitions from enforceable and non_enforceable folders"""
@@ -138,15 +160,32 @@ class TwoDollarEnv(ta.GameEnv):
                 self.player_deadline[player_id] = self.max_rounds // 2
 
         return {
-            "current_proposal": {"amount": None, "proposer": None},
+            "current_proposal": {"amount_cents": None, "proposer": None},
             "negotiation_history": [],
             "player_proposal_history": {0: [], 1: []},
-            "final_amounts": {0: 0.0, 1: 0.0}
+            "final_cents": {0: 0, 1: 0},
         }
 
+    @staticmethod
+    def _x_rounds_feasible(max_rounds: int) -> bool:
+        """Whether the x_rounds deadline (max_rounds // 2 turns) leaves room for a
+        proposal in round 1 and an acceptance in round 2."""
+        return max_rounds // 2 >= 2
+
+    def _check_role_feasible(self, role_name: str):
+        if role_name == "x_rounds" and not self._x_rounds_feasible(self.max_rounds):
+            raise ValueError(
+                f"Role 'x_rounds' needs max_rounds >= 4 (got {self.max_rounds}): its deadline is "
+                f"max_rounds // 2 = {self.max_rounds // 2} rounds, and the earliest possible "
+                "deal is accepted in round 2"
+            )
+
     def _assign_random_roles(self) -> Dict[int, Dict]:
-        """Randomly assign 2 different roles"""
-        selected_roles = self.rng.sample(list(self.available_roles.keys()), 2)
+        """Randomly assign 2 different roles that can be satisfied under max_rounds"""
+        pool = list(self.available_roles.keys())
+        if not self._x_rounds_feasible(self.max_rounds):
+            pool.remove("x_rounds")
+        selected_roles = self.rng.sample(pool, 2)
         return {
             0: self.available_roles[selected_roles[0]],
             1: self.available_roles[selected_roles[1]]
@@ -158,6 +197,7 @@ class TwoDollarEnv(ta.GameEnv):
         for i, role_name in enumerate(role_names):
             if role_name not in self.available_roles:
                 raise ValueError(f"Unknown role: {role_name}. Available roles: {list(self.available_roles.keys())}")
+            self._check_role_feasible(role_name)
             player_roles[i] = self.available_roles[role_name]
         return player_roles
 
@@ -194,6 +234,7 @@ Propose $1.00
         prompt += f"{role['instructions']}\n"
         prompt += f"\nVICTORY CONDITION: {role['victory_condition']}\n"
         prompt += f"FAILURE CONDITION: {role['failure_condition']}\n"
+        prompt = prompt.replace("{forfeit_after}", str(self.error_allowance + 1))
 
         # Add deadline info for x_rounds role
         if role.get("name") == "x_rounds":
@@ -209,250 +250,199 @@ Propose $1.00
     def render(self, player_id: int) -> str:
         """Round header + current proposal shown to the player about to act."""
         board = f"=== ROUND {self.state.turn + 1} of {self.max_rounds} ===\n"
-        if self.current_proposal["amount"] is not None:
-            proposer_id = self.current_proposal["proposer"]
-            amount = self.current_proposal["amount"]
-            other_amount = self.total_amount - amount
+        proposal = self.game_state["current_proposal"]
+        if proposal["amount_cents"] is not None:
+            proposer_id = proposal["proposer"]
+            amount = proposal["amount_cents"]
             board += f"\nCURRENT PROPOSAL:\n"
-            board += f"Player {proposer_id} wants ${amount:.2f}, Player {1 - proposer_id} gets ${other_amount:.2f}\n"
+            board += (
+                f"Player {proposer_id} wants {self._format_cents(amount)}, "
+                f"Player {1 - proposer_id} gets {self._format_cents(self.total_cents - amount)}\n"
+            )
         return board
 
-    # -- command detection: bare own-line phrase or legacy bracketed token --
-    def _has_accept(self, action: str) -> bool:
-        return any(command["type"] == "accept" for command in self._find_commands(action))
+    # -- command detection: own-line decision or legacy bracketed token --
+    def _classify_line(self, line: str) -> Optional[Tuple[str, str]]:
+        """('accept'|'reject', '') or ('propose', arguments) if a stripped line is a decision."""
+        if self._ACCEPT_LINE_RE.fullmatch(line):
+            return "accept", ""
+        if self._REJECT_LINE_RE.fullmatch(line):
+            return "reject", ""
+        match = self._PROPOSE_LINE_RE.fullmatch(line)
+        if match is not None:
+            args = match.group("args").rstrip(" \t.!")
+            if not args or args[0] in "$0123456789":
+                return "propose", args
+        return None
 
-    def _has_reject(self, action: str) -> bool:
-        return any(command["type"] == "reject" for command in self._find_commands(action))
-
-    def _has_propose(self, action: str) -> bool:
-        return any(command["type"] == "propose" for command in self._find_commands(action))
-
-    def _text_before_command(self, action: str, legacy_token: str, bare_re: re.Pattern) -> str:
-        """Free-text rationale: everything before the command token/line."""
-        commands = self._find_commands(action)
-        return action[:commands[0]["start"]].strip() if commands else action.strip()
-
-    def _find_commands(self, action: str) -> List[Dict[str, Any]]:
-        """Find every real decision command, preserving duplicates for validation."""
-        commands: List[Dict[str, Any]] = []
-        occupied = []
-
-        for command_type, pattern in (
-            ("accept", self._BARE_ACCEPT_RE),
-            ("reject", self._BARE_REJECT_RE),
-        ):
-            for match in pattern.finditer(action):
-                commands.append({"type": command_type, "amount": None, "start": match.start(), "end": match.end()})
-                occupied.append(match.span())
-
-        for match in self._BARE_PROPOSE_RE.finditer(action):
-            amount_match = self._PROPOSE_AMOUNT_RE.fullmatch(match.group("rest"))
-            amount = float(amount_match.group(1)) if amount_match else None
-            commands.append({"type": "propose", "amount": amount, "start": match.start(), "end": match.end()})
-            occupied.append(match.span())
-
-        for match in self._LEGACY_COMMAND_RE.finditer(action):
-            if any(match.start() >= start and match.end() <= end for start, end in occupied):
+    def _find_decisions(self, lines: List[str]) -> List[Dict[str, Any]]:
+        """Every decision in the message: kind, arguments, line index, and the
+        column span the command (with its arguments) covers in that line."""
+        decisions = []
+        for index, line in enumerate(lines):
+            classified = self._classify_line(line.strip())
+            if classified is not None:
+                kind, args = classified
+                decisions.append({"kind": kind, "args": args, "line": index, "start": 0, "end": len(line)})
                 continue
-            decision = match.group("decision")
-            if decision is not None:
-                command_type, amount = decision.lower(), None
-            else:
-                command_type = "propose"
-                amount = float(match.group("proposal") or match.group("inside"))
-            commands.append({"type": command_type, "amount": amount, "start": match.start(), "end": match.end()})
+            for match in self._LEGACY_COMMAND_RE.finditer(line):
+                decision = match.group("decision")
+                decisions.append({
+                    "kind": decision.lower() if decision is not None else "propose",
+                    "args": match.group("proposal") or match.group("inside") or "",
+                    "line": index,
+                    "start": match.start(),
+                    "end": match.end(),
+                })
+        return decisions
 
-        return sorted(commands, key=lambda command: command["start"])
-
-    def _extract_rationale(self, action: str) -> str:
-        """Free-text part of the message, before whichever command it carries."""
-        if self._has_propose(action):
-            return self._text_before_command(action, "[Propose]", self._BARE_PROPOSE_RE)
-        if self._has_accept(action):
-            return self._text_before_command(action, "[Accept]", self._BARE_ACCEPT_RE)
-        if self._has_reject(action):
-            return self._text_before_command(action, "[Reject]", self._BARE_REJECT_RE)
-        return action.strip()
+    def _parse_amount(self, args: str) -> Tuple[Optional[int], Optional[str]]:
+        """'$X.XX' -> (cents, None), or (None, reason) if malformed or out of range."""
+        match = self._AMOUNT_RE.fullmatch(args)
+        if match is None:
+            return None, "Invalid proposal format. Use: 'Propose $X.XX' where X.XX is a valid dollar amount"
+        dollars = match.group("dollars").lstrip("0") or "0"
+        cents = (match.group("cents") or "").ljust(2, "0")
+        # More dollar digits than the total has cent digits is always out of
+        # range; checking first keeps int() off arbitrarily long digit strings.
+        fits = len(dollars) <= len(str(self.total_cents))
+        amount_cents = int(dollars) * 100 + int(cents) if fits else None
+        if amount_cents is None or amount_cents > self.total_cents:
+            return None, f"Invalid amount {args}. Must be between $0.00 and {self._format_cents(self.total_cents)}"
+        return amount_cents, None
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         """Process a player's action."""
-        valid, reason = self._validate_action(player_id, action)
-        if not valid:
+        action = self.strip_role_tags(action).strip()
+        decision, reason = self._parse_action(player_id, action)
+        if reason is not None:
             return self.invalid(reason)
 
         # Log only validated raw actions to their author (the engine raw-echo is suppressed).
         self.message(player_id, f"Your action: {action}", ta.ObservationType.PLAYER_ACTION, from_id=player_id)
-        self._process_valid_action(player_id, action)
+        rationale = decision["before"]
+        if decision["kind"] == "propose":
+            self._process_proposal(player_id, decision["amount_cents"], rationale)
+        elif decision["kind"] == "accept":
+            self._process_accept(player_id, rationale)
+        else:
+            self._process_reject(player_id, rationale)
 
         # Check for game end conditions
         if self._check_deal_accepted() or self.state.turn >= self.max_rounds - 1:
             return self._end_game()
         return None
 
-    def _validate_action(self, player_id: int, action: str) -> Tuple[bool, Optional[str]]:
-        """Check if an action is valid; return (valid, reason)."""
-        action = action.strip()
+    def _parse_action(self, player_id: int, action: str) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
+        """Return (decision, None) for a valid action or (None, reason) for an invalid one."""
+        lines = action.split("\n")
+        decisions = self._find_decisions(lines)
+        if not decisions:
+            return None, "Invalid action. Finish your message with your decision on its own line: 'Propose $X.XX', 'Accept', or 'Reject'"
+        if len(decisions) > 1:
+            return None, "Multiple actions detected. Use only one action per turn: 'Propose $X.XX', 'Accept', or 'Reject'"
+        decision = decisions[0]
+        line = lines[decision["line"]]
+        trailing = line[decision["end"]:].strip().lstrip(".!").strip()
+        if trailing or any(rest.strip() for rest in lines[decision["line"] + 1:]):
+            return None, "The decision command must be the final non-empty part of the message."
+        decision["before"] = "\n".join(lines[:decision["line"]] + [line[:decision["start"]]]).strip()
 
-        commands = self._find_commands(action)
-        action_count = len(commands)
+        if decision["kind"] == "propose":
+            amount_cents, reason = self._parse_amount(decision["args"])
+            if reason is not None:
+                return None, reason
+            decision["amount_cents"] = amount_cents
+        elif self.game_state["current_proposal"]["amount_cents"] is None:
+            return None, f"No current proposal to {decision['kind']}"
+        elif self.game_state["current_proposal"]["proposer"] == player_id:
+            return None, f"You cannot {decision['kind']} your own proposal"
 
-        if action_count == 0:
-            return False, "Invalid action. Finish your message with your decision on its own line: 'Propose $X.XX', 'Accept', or 'Reject'"
-        elif action_count > 1:
-            return False, "Multiple actions detected. Use only one action per turn: 'Propose $X.XX', 'Accept', or 'Reject'"
-        if action[commands[0]["end"]:].strip():
-            return False, "The decision command must be the final non-empty part of the message."
+        reason = self._role_violation(player_id, decision)
+        if reason is not None:
+            return None, reason
+        return decision, None
 
-        has_propose = commands[0]["type"] == "propose"
-        has_accept = commands[0]["type"] == "accept"
-        has_reject = commands[0]["type"] == "reject"
-
-        # Validate proposal format
-        if has_propose:
-            if not self._is_valid_proposal(action):
-                amount = self._extract_proposal_amount(action)
-                if amount is None:
-                    return False, "Invalid proposal format. Use: 'Propose $X.XX' where X.XX is a valid dollar amount"
-                elif amount < 0 or amount > self.total_amount:
-                    return False, f"Invalid amount ${amount:.2f}. Must be between $0.00 and ${self.total_amount:.2f}"
-                else:
-                    return False, "Invalid proposal format"
-
-        # Validate accept/reject actions require a current proposal
-        if has_accept or has_reject:
-            if self.current_proposal["amount"] is None:
-                action_type = "accept" if has_accept else "reject"
-                return False, f"No current proposal to {action_type}"
-
-            # Players cannot accept/reject their own proposals
-            if self.current_proposal["proposer"] == player_id:
-                action_type = "accept" if has_accept else "reject"
-                return False, f"You cannot {action_type} your own proposal"
-
-        # Role-specific validation
-        valid, error_msg = self._validate_role_specific_action(player_id, action)
-        if not valid:
-            return False, error_msg
-
-        return True, None
-
-    def _is_valid_proposal(self, action: str) -> bool:
-        """Check if a proposal has valid format and amount."""
-        try:
-            amount = self._extract_proposal_amount(action)
-            if amount is None:
-                return False
-            if amount < 0 or amount > self.total_amount:
-                return False
-            return True
-        except Exception:
-            return False
-
-    def _extract_proposal_amount(self, action: str) -> Optional[float]:
-        """Extract dollar amount from proposal action (bare or legacy form)."""
-        proposals = [command for command in self._find_commands(action) if command["type"] == "propose"]
-        return proposals[0]["amount"] if len(proposals) == 1 else None
-
-    def _validate_role_specific_action(self, player_id: int, action: str) -> Tuple[bool, Optional[str]]:
-        """Validate action against player's role requirements"""
+    def _role_violation(self, player_id: int, decision: Dict[str, Any]) -> Optional[str]:
+        """Reason the action breaks the player's per-message role rules, if it does."""
         role = self.player_roles[player_id]
+        if role.get("enforcement") != "action_validation":
+            return None
+        rules = role["behavioral_rules"]
 
-        if role.get("enforcement") == "action_validation":
-            if role["name"] == "say_little":
-                # Count words in the free-text part before the command
-                message_part = self._extract_rationale(action)
-                word_count = len(message_part.split())
-                if word_count > role["behavioral_rules"]["max_words_per_message"]:
-                    return False, role["behavioral_rules"]["violation_message"].format(word_count=word_count)
+        if role["name"] == "say_little":
+            word_count = len(decision["before"].split())
+            if word_count > rules["max_words_per_message"]:
+                return rules["violation_message"].format(word_count=word_count)
 
-            elif role["name"] == "high_tension" and self._has_propose(action):
-                # Check concession size against own previous proposals
-                amount = self._extract_proposal_amount(action)
-                proposals = self.player_proposal_history[player_id]
+        elif role["name"] == "high_tension" and decision["kind"] == "propose":
+            proposals = self.game_state["player_proposal_history"][player_id]
+            if proposals:
+                concession = proposals[-1] - decision["amount_cents"]
+                if concession > round(rules["max_concession"] * 100):
+                    return rules["violation_message"].format(concession=concession / 100)
 
-                if proposals and amount is not None and amount < proposals[-1]:  # Making concession
-                    concession = proposals[-1] - amount
-                    max_concession = role["behavioral_rules"]["max_concession"]
-                    if concession > max_concession:
-                        return False, role["behavioral_rules"]["violation_message"].format(concession=concession)
+        return None
 
-        return True, None
-
-    def _process_valid_action(self, player_id: int, action: str):
-        """Process a valid action."""
-        action = action.strip()
-
-        if self._has_propose(action):
-            self._process_proposal(player_id, action)
-        elif self._has_accept(action):
-            self._process_accept(player_id, action)
-        elif self._has_reject(action):
-            self._process_reject(player_id, action)
-
-    def _process_proposal(self, player_id: int, action: str):
+    def _process_proposal(self, player_id: int, amount_cents: int, rationale: str):
         """Process a deal proposal."""
-        rationale = self._text_before_command(action, "[Propose]", self._BARE_PROPOSE_RE)
-        amount = self._extract_proposal_amount(action)
+        self.game_state["current_proposal"] = {"amount_cents": amount_cents, "proposer": player_id}
+        self._record_action(player_id, "propose", amount_cents, rationale)
 
-        if amount is None:
-            return  # Should not happen due to validation
-
-        self.game_state["current_proposal"] = {"amount": amount, "proposer": player_id}
-        self._record_action(player_id, "propose", amount, rationale)
-
-        other_amount = self.total_amount - amount
-        message = f"Player {player_id} proposes: ${amount:.2f} for themselves, ${other_amount:.2f} for their opponent"
+        message = (
+            f"Player {player_id} proposes: {self._format_cents(amount_cents)} for themselves, "
+            f"{self._format_cents(self.total_cents - amount_cents)} for their opponent"
+        )
         if rationale:
             message = f"Player {player_id} says: {rationale}\n{message}"
         self.broadcast(message, ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-    def _process_accept(self, player_id: int, action: str):
+    def _process_accept(self, player_id: int, rationale: str):
         """Process an accept action."""
-        rationale = self._text_before_command(action, "[Accept]", self._BARE_ACCEPT_RE)
-        self._record_action(player_id, "accept", self.current_proposal["amount"], rationale)
+        self._record_action(player_id, "accept", self.game_state["current_proposal"]["amount_cents"], rationale)
 
         message = f"Player {player_id} accepts the proposal"
         if rationale:
             message = f"Player {player_id} says: {rationale}\n{message}"
         self.broadcast(message, ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-    def _process_reject(self, player_id: int, action: str):
+    def _process_reject(self, player_id: int, rationale: str):
         """Process a reject action."""
-        rationale = self._text_before_command(action, "[Reject]", self._BARE_REJECT_RE)
         self._record_action(player_id, "reject", None, rationale)
 
         message = f"Player {player_id} rejects the proposal"
         if rationale:
             message = f"Player {player_id} says: {rationale}\n{message}"
 
-        # Reset the proposal amount to none
-        self.current_proposal["amount"] = None
+        self.game_state["current_proposal"] = {"amount_cents": None, "proposer": None}
         self.broadcast(message, ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-    def _record_action(self, player_id: int, action_type: str, amount: Optional[float] = None, message: str = ""):
+    def _record_action(self, player_id: int, action_type: str, amount_cents: Optional[int] = None, message: str = ""):
         """Record all actions for analysis"""
-        self.negotiation_history.append({
+        self.game_state["negotiation_history"].append({
             "player_id": player_id,
             "action_type": action_type,
-            "amount": amount,
+            "amount_cents": amount_cents,
             "message": message,
             "round": self.state.turn
         })
 
         # Track proposals separately for easy access
-        if action_type == "propose" and amount is not None:
-            self.player_proposal_history[player_id].append(amount)
+        if action_type == "propose" and amount_cents is not None:
+            self.game_state["player_proposal_history"][player_id].append(amount_cents)
 
     def _check_deal_accepted(self) -> bool:
         """Check if the current deal has been accepted."""
-        if self.current_proposal["amount"] is None:
+        proposal = self.game_state["current_proposal"]
+        if proposal["amount_cents"] is None:
             return False
 
         # Only count as accepted if someone other than the proposer accepted
-        if self.negotiation_history:
-            last_action = self.negotiation_history[-1]
+        history = self.game_state["negotiation_history"]
+        if history:
+            last_action = history[-1]
             if (last_action["action_type"] == "accept" and
-                last_action["player_id"] != self.current_proposal["proposer"]):
+                last_action["player_id"] != proposal["proposer"]):
                 return True
 
         return False
@@ -465,66 +455,62 @@ Propose $1.00
 
     def _finalize_accepted_deal(self) -> ta.Outcome:
         """Finalize an accepted deal and check role compliance."""
-        proposer_id = self.current_proposal["proposer"]
-        accepter_id = 1 - proposer_id
-        proposer_amount = self.current_proposal["amount"]
-        accepter_amount = round(self.total_amount - proposer_amount, 2)
-
-        self.final_amounts[proposer_id] = proposer_amount
-        self.final_amounts[accepter_id] = accepter_amount
+        proposal = self.game_state["current_proposal"]
+        proposer_id = proposal["proposer"]
+        final_cents = {
+            proposer_id: proposal["amount_cents"],
+            1 - proposer_id: self.total_cents - proposal["amount_cents"],
+        }
+        accepted_round = self.game_state["negotiation_history"][-1]["round"]
 
         # Check role compliance for each player
         for player_id in [0, 1]:
             role = self.player_roles[player_id]
-            player_amount = self.final_amounts[player_id]
 
             if role.get("enforcement") == "end_game_check":
                 if role.get("threshold") is not None:
-                    threshold = role.get("threshold", 0)
-                    if player_amount < threshold:
-                        self.final_amounts[player_id] = 0.0  # Failed threshold
+                    if final_cents[player_id] < round(role["threshold"] * 100):
+                        final_cents[player_id] = 0  # Failed threshold
 
                 elif role.get("name") == "x_rounds":
-                    # Check if they met their deadline
+                    # The deal counts if it was concluded in time, whoever accepted it.
                     deadline = self.player_deadline.get(player_id, self.max_rounds // 2)
-                    met_deadline = False
-                    for action in self.negotiation_history:
-                        if (action["player_id"] == player_id and
-                            action["action_type"] == "accept" and
-                            action["round"] < deadline):
-                            met_deadline = True
-                            break
-
-                    if not met_deadline:
-                        self.final_amounts[player_id] = 0.0  # Failed deadline
+                    if accepted_round >= deadline:
+                        final_cents[player_id] = 0  # Failed deadline
 
             elif role.get("enforcement") == "action_validation":
                 # Already enforced during the game via the error allowance
                 pass
 
-        deal_str = f"${self.final_amounts[0]:.2f} for Player 0, ${self.final_amounts[1]:.2f} for Player 1"
+        self.game_state["final_cents"] = final_cents
+        deal_str = (
+            f"{self._format_cents(final_cents[0])} for Player 0, "
+            f"{self._format_cents(final_cents[1])} for Player 1"
+        )
         self.broadcast(f"DEAL FINALIZED: {deal_str}", ta.ObservationType.GAME_ADMIN)
 
         return self._final_outcome()
 
     def _handle_no_deal(self) -> ta.Outcome:
         """Handle case where no deal was reached."""
-        self.game_state["final_amounts"] = {0: 0.0, 1: 0.0}
+        self.game_state["final_cents"] = {0: 0, 1: 0}
         self.broadcast("NO DEAL REACHED - Both players receive $0.00", ta.ObservationType.GAME_ADMIN)
         return self._final_outcome()
 
     def _final_outcome(self) -> ta.Outcome:
         """Build the final Outcome from the final amounts."""
+        final = self.game_state["final_cents"]
+        shares = {pid: self._format_cents(final[pid]) for pid in (0, 1)}
         # Determine winners (players who got more than $0)
-        winners = [pid for pid in [0, 1] if self.final_amounts[pid] > 0]
+        winners = [pid for pid in [0, 1] if final[pid] > 0]
 
         if len(winners) == 2:
-            if self.final_amounts[0] > self.final_amounts[1]:
-                return self.winner(0, reason=f"Player 0 received more money (${self.final_amounts[0]:.2f} vs ${self.final_amounts[1]:.2f})")
-            elif self.final_amounts[1] > self.final_amounts[0]:
-                return self.winner(1, reason=f"Player 1 received more money (${self.final_amounts[1]:.2f} vs ${self.final_amounts[0]:.2f})")
+            if final[0] > final[1]:
+                return self.winner(0, reason=f"Player 0 received more money ({shares[0]} vs {shares[1]})")
+            elif final[1] > final[0]:
+                return self.winner(1, reason=f"Player 1 received more money ({shares[1]} vs {shares[0]})")
             else:
-                return self.draw(reason=f"Both players received equal amounts (${self.final_amounts[0]:.2f} each)")
+                return self.draw(reason=f"Both players received equal amounts ({shares[0]} each)")
         elif len(winners) == 1:
             return self.winner(winners[0], reason=f"Player {winners[0]} met their role requirements, Player {1 - winners[0]} failed")
         else:
@@ -536,9 +522,13 @@ Propose $1.00
         - Ongoing: current state (proposals + history)
         - Done: negotiation summary (and results)
         """
+        history = [
+            dict(entry, amount=self._dollars(entry["amount_cents"]))
+            for entry in self.negotiation_history
+        ]
         if getattr(self.state, "done", False):
             summary = render_negotiation_summary(
-                negotiation_history=self.negotiation_history,
+                negotiation_history=history,
                 player_proposal_history=self.player_proposal_history,
                 total_amount=self.total_amount,
             )
@@ -552,6 +542,6 @@ Propose $1.00
         return render_game_state(
             current_proposal=self.current_proposal,
             total_amount=self.total_amount,
-            negotiation_history=self.negotiation_history,
+            negotiation_history=history,
             max_history_items=5,
         )

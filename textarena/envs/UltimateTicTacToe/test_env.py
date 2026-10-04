@@ -9,10 +9,11 @@ import copy
 
 import pytest
 
+import textarena as ta
 from textarena.envs.UltimateTicTacToe.env import UltimateTicTacToeEnv
 
 
-# The original scripted game: a full 66-move replay that ends in a win.
+# The original scripted game: a full 66-move replay that ends in a draw.
 PREDEFINED_ACTIONS = [
     '8 2', '2 8', '8 1', '1 4', '4 4', '4 7', '7 2', '2 2',
     '2 4', '4 1', '1 5', '5 3', '3 7', '7 1', '1 0', '0 7',
@@ -59,6 +60,18 @@ def test_invalid_format_rejected():
     assert not done
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0
+
+
+def test_format_error_describes_expected_action():
+    env = _fresh()
+    env.step("no move here")
+    notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
+    assert f"Expected {env.action_format}." in notices[-1]
+
+    assert "for example '7 8'" in env.action_format
+    fresh = _fresh()
+    fresh.step("7 8")
+    assert fresh.state.turn == 1 and fresh.state.error_count == 0
 
 
 def test_must_play_in_forced_micro_board():
@@ -147,6 +160,64 @@ def test_concatenated_indices_are_rejected():
     assert not done
     assert env.state.error_count == 1
     assert env.state.game_state["board"][0][0][0] == " "
+
+
+def test_render_hides_unused_squares_of_closed_mini_boards():
+    env = _fresh()
+    board = env.state.game_state["board"][0]
+    board[0] = ["X", "X", " "]
+    board[1][0] = "O"
+    env.step("0 2")
+
+    view = env.render(1)
+
+    assert "'0," not in view
+    assert " X | 1 | 2 " in view
+
+
+def test_render_names_the_forced_mini_board_and_its_valid_moves():
+    env = _fresh()
+    env.step("4 4")
+
+    view = env.render(1)
+
+    assert "You must play in mini-board 4." in view
+    assert "Valid moves: '4 0', '4 1', '4 2', '4 3', '4 5', '4 6', '4 7', '4 8'" in view
+
+
+def test_render_offers_a_free_move_when_sent_to_a_closed_board():
+    env = _fresh()
+    env.state.game_state["macro_board"][1][1] = "D"
+    env.step("0 4")
+
+    view = env.render(1)
+
+    assert "You may play in any open mini-board." in view
+    assert "'4 0'" not in view.split("Valid moves: ", 1)[1]
+
+
+def test_game_ending_move_does_not_announce_a_next_board():
+    env = _fresh()
+    gs = env.state.game_state
+    gs["macro_board"][0] = ["X", "X", " "]
+    gs["board"][2][0] = ["X", "X", " "]
+    start = len(env.state.events)
+
+    done, _ = env.step("2 2")
+
+    assert done
+    descriptions = [
+        message
+        for _, message, event_type, _ in env.state.events[start:]
+        if event_type == ta.ObservationType.GAME_ACTION_DESCRIPTION
+    ]
+    assert descriptions == ["Player 0 played in mini-board 2, square 2 (row 0, col 2)."]
+    final_board = [
+        message
+        for _, message, event_type, _ in env.state.events
+        if event_type == ta.ObservationType.GAME_BOARD
+    ][-1]
+    assert "Valid moves" not in final_board
 
 
 def test_snapshot_restore_recovers_forced_board_and_marks():

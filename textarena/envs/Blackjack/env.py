@@ -31,8 +31,13 @@ class BlackjackEnv(ta.GameEnv):
 
     def prompt(self, player_id: int) -> str:
         return (
-            "You are playing Blackjack against the dealer.\nYour goal is to get as close to 21 as possible without going over.\n"
+            f"You are playing Blackjack against the dealer for {self.num_hands} hands.\nYour goal is to get as close to 21 as possible without going over.\n"
             "On your turn, reply 'hit' to draw another card or 'stand' to hold.\nJ/Q/K = 10 points; A = 11 or 1, whichever is better.\n"
+            "Cards come from an infinite deck: every card dealt is equally likely to be any of the 52 cards.\n"
+            "You see both of your cards and one of the dealer's. Going over 21 is a bust and loses the hand at once.\n"
+            "When you stand, the dealer reveals the hidden card and draws until reaching 17 or more (the dealer stands on soft 17).\n"
+            "The higher total wins the hand and equal totals push, except that a two-card 21 (blackjack) beats any other 21.\n"
+            f"Your final score is (wins + 0.5 x pushes) / {self.num_hands}.\n"
         )
 
     def _hand_score(self, hand: List[str]) -> int:
@@ -64,15 +69,24 @@ class BlackjackEnv(ta.GameEnv):
             return self._advance_or_finish("bust")
         return None
 
+    def _is_blackjack(self, hand: List[str]) -> bool:
+        return len(hand) == 2 and self._hand_score(hand) == 21
+
     def _handle_stand(self) -> Optional[ta.Outcome]:
-        while self._hand_score(self.game_state["dealer_hand"]) < 17: # dealer draws until ≥17
-            self.game_state["dealer_hand"].append(self._draw_card())
+        player_blackjack = self._is_blackjack(self.game_state["player_hand"])
+        dealer_blackjack = self._is_blackjack(self.game_state["dealer_hand"])
+        if not player_blackjack: # a player blackjack settles the hand without a dealer draw
+            while self._hand_score(self.game_state["dealer_hand"]) < 17: # dealer draws until ≥17
+                self.game_state["dealer_hand"].append(self._draw_card())
         # compare scores
         p = self._hand_score(self.game_state["player_hand"])
         d = self._hand_score(self.game_state["dealer_hand"])
-        if d > 21 or p > d:     self.game_state["results_summary"]["win"] += 1;   outcome = "win"
-        elif p == d:            self.game_state["results_summary"]["draw"] += 1;  outcome = "draw"
-        else:                   self.game_state["results_summary"]["lose"] += 1;  outcome = "lose"
+        if player_blackjack and dealer_blackjack:   self.game_state["results_summary"]["draw"] += 1;  outcome = "draw (both have blackjack)"
+        elif player_blackjack:                      self.game_state["results_summary"]["win"] += 1;   outcome = "win with a blackjack"
+        elif dealer_blackjack:                      self.game_state["results_summary"]["lose"] += 1;  outcome = "lose to the dealer's blackjack"
+        elif d > 21 or p > d:                       self.game_state["results_summary"]["win"] += 1;   outcome = "win"
+        elif p == d:                                self.game_state["results_summary"]["draw"] += 1;  outcome = "draw"
+        else:                                       self.game_state["results_summary"]["lose"] += 1;  outcome = "lose"
         return self._advance_or_finish(outcome)
 
     def _advance_or_finish(self, outcome: str) -> Optional[ta.Outcome]:

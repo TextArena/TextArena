@@ -36,13 +36,21 @@ class PegJumpEnv(ta.GameEnv):
         return {"board": board}
 
     def prompt(self, player_id: int) -> str:
+        source, over, target = self._legal_moves()[0]
         return (
-            "You are playing PegJump. Jump one peg over another into an empty hole, removing the jumped peg.\n"
-            "Goal: finish with exactly **one** peg left. Reply with the source and target holes, e.g. '4 1'."
+            "You are playing PegJump, a triangular peg solitaire with 15 holes numbered 1 to 15 row by row from the "
+            "top (hole 1 is the apex, holes 11 to 15 the bottom row). On the board, ● is a peg and ○ is an empty hole.\n"
+            "A move jumps one peg over an adjacent peg into the empty hole directly beyond it, in a straight line "
+            "along a row or a diagonal. The jumped peg is removed.\n"
+            f"Reply with the source and target holes, e.g. '{source} {target}' jumps the peg in hole {source} over "
+            f"hole {over} into hole {target}. The legal jumps are listed under the board.\n"
+            "Goal: finish with exactly one peg left. The game ends when one peg remains or no jump is possible.\n"
+            "An illegal or malformed move changes nothing and you may try again, but two invalid moves in a row end the game."
         )
 
     def render(self, player_id: int) -> str:
-        return f"Pegs left: {self.game_state['board'].count(True)}\n" + self._render_board()
+        legal = ", ".join(f"{source} {target}" for source, _, target in self._legal_moves()) or "none"
+        return f"Pegs left: {self.game_state['board'].count(True)}\n{self._render_board()}\nLegal jumps: {legal}"
 
     def _render_board(self) -> str:
         """Return a string visualising the triangle with hole numbers."""
@@ -67,9 +75,17 @@ class PegJumpEnv(ta.GameEnv):
             return self.invalid("Invalid syntax. Reply with 'from to' hole numbers, e.g. '4 1'.")
         frm, to = int(match.group("source")), int(match.group("target"))
         board = self.game_state["board"]
+        if not (1 <= frm <= self.BOARD_SIZE and 1 <= to <= self.BOARD_SIZE):
+            return self.invalid(f"Illegal move: holes are numbered 1 to {self.BOARD_SIZE}.")
         over = self._get_over(frm, to)
-        if over is None or (frm, over, to) not in self.ALLOWED_MOVES or not board[frm] or not board[over] or board[to]:
-            return self.invalid("Illegal move.")
+        if over is None:
+            return self.invalid(f"Illegal move: hole {to} is not two holes away from hole {frm} in a straight line.")
+        if not board[frm]:
+            return self.invalid(f"Illegal move: hole {frm} has no peg.")
+        if not board[over]:
+            return self.invalid(f"Illegal move: hole {over} between {frm} and {to} has no peg to jump over.")
+        if board[to]:
+            return self.invalid(f"Illegal move: hole {to} is not empty.")
         # Execute move
         board[frm] = False
         board[over] = False
@@ -90,10 +106,11 @@ class PegJumpEnv(ta.GameEnv):
         return None
 
     def _has_move(self) -> bool:
+        return bool(self._legal_moves())
+
+    def _legal_moves(self) -> List[Tuple[int, int, int]]:
         board = self.game_state["board"]
-        for f, o, t in self.ALLOWED_MOVES:
-            if board[f] and board[o] and not board[t]: return True
-        return False
+        return sorted((f, o, t) for f, o, t in self.ALLOWED_MOVES if board[f] and board[o] and not board[t])
 
     def _get_percentage_completion(self) -> float:
         # A standard opening has 14 pegs and therefore requires 13 jumps to

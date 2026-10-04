@@ -7,6 +7,8 @@ from textarena.envs.Coup.coup_types import ActionMetadata, CoupActionType, GameP
 
 from rich.text import Text
 
+CARDS = ("Duke", "Assassin", "Ambassador", "Captain", "Contessa")
+
 
 class CoupEnv(ta.GameEnv):
     """
@@ -17,6 +19,7 @@ class CoupEnv(ta.GameEnv):
       - PASS                 -> The player makes an action.
       - BULLSHIT             -> The player challenges the last play.
       - block foreign aid    -> The player counteracts the last play.
+      - reveal duke          -> The player chooses which influence to lose.
     """
 
     min_players = 2
@@ -25,10 +28,14 @@ class CoupEnv(ta.GameEnv):
 
     def setup(self) -> Dict[str, Any]:
         # Create deck with three of each card
-        deck = ["Duke", "Assassin", "Ambassador", "Captain", "Contessa"] * 3
+        deck = list(CARDS) * 3
         self.rng.shuffle(deck)
 
         num_players = self.state.num_players
+        # Each player starts with 2 coins, except that in a two-player game the starting player (player 0) gets 1
+        coins = {pid: 2 for pid in range(num_players)}
+        if num_players == 2:
+            coins[0] = 1
         game_state = {
             "phase": GamePhase.Play,
 
@@ -36,8 +43,8 @@ class CoupEnv(ta.GameEnv):
             "revealed_hand": {},  # The cards each player has revealed/lost
             "pile": [],  # The cards in the pile in the middle
 
-            "coins": {pid: 2 for pid in range(num_players)},  # Each player starts with 2 coins
-            "treasury_coins": 50 - 2 * num_players,  # Max 50 coins in the pot, minus the coins each player starts with
+            "coins": coins,
+            "treasury_coins": 50 - sum(coins.values()),  # 50 coins in total, minus the coins the players start with
 
             "action_metadata": None,  # The metadata about the current action that is being taken (can span multiple "turns")
             "pending_influence_loss": None,
@@ -71,8 +78,10 @@ class CoupEnv(ta.GameEnv):
         return self._render_board(viewer_id=self.state.current_player_id)
 
     def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
-        # A keep response exposes the exchange player's private card options.
-        if self.game_state["phase"] == GamePhase.QueryWhichToKeep:
+        # A keep response exposes the exchange player's private card options, and a
+        # rejected reveal would expose a card the player does not hold. Valid reveals
+        # are announced by the game itself.
+        if self.game_state["phase"] in (GamePhase.QueryWhichToKeep, GamePhase.QueryWhichToReveal):
             return player_id
         return -1
 
@@ -113,16 +122,20 @@ class CoupEnv(ta.GameEnv):
                 gs["pile"].append(gs["hidden_hand"][player_id].pop())
             self.rng.shuffle(gs["pile"])
             gs["phase"] = GamePhase.Play
-            gs["action_metadata"] = None
-        elif gs["phase"] == GamePhase.QueryWhichToReveal:
-            gs["pending_influence_loss"] = None
-            gs["phase"] = GamePhase.Play
-            gs["action_metadata"] = None
 
-        while gs["hidden_hand"][player_id]:
-            self._make_player_lose_a_card(player_id)
+        forfeited = list(gs["hidden_hand"][player_id])
+        for card in forfeited:
+            self._lose_influence(player_id, card, announce=False)
+        # A forfeit during a reveal settles that influence loss; resolution then
+        # continues as if they had revealed (e.g. a proven action still executes).
+        pending = gs["pending_influence_loss"]
+        if pending is not None and pending["player_id"] == player_id:
+            pending["resolved"] = True
         self.message(player_id, "You made too many invalid moves in a row and are eliminated from play.", ta.ObservationType.GAME_ADMIN)
-        self._broadcast_observations(f"Player #{player_id} made too many invalid moves in a row and is eliminated from play.", exclude_player_ids=[player_id])
+        self._broadcast_observations(
+            f"Player #{player_id} made too many invalid moves in a row and is eliminated from play, revealing {' and '.join(forfeited)}.",
+            exclude_player_ids=[player_id],
+        )
 
         # If they were queued to be queried about a block/challenge, drop them from the queue
         metadata = gs["action_metadata"]
@@ -140,6 +153,7 @@ class CoupEnv(ta.GameEnv):
                 # An administratively eliminated blocker cannot sustain a block.
                 metadata.blocker_challenger_player_id = metadata.source_player_id
                 metadata.players_to_query = []
+        self._settle_exiled_coins()
 
         winner = self._get_winner()
         if winner is not None:
@@ -322,53 +336,76 @@ class CoupEnv(ta.GameEnv):
         """Let the affected player choose which hidden influence to lose."""
         gs = self.game_state
         pending = gs["pending_influence_loss"]
-        if pending is None or pending["player_id"] != player_id:
+        if pending is None or pending["resolved"] or pending["player_id"] != player_id:
             return self.invalid("No influence loss is awaiting your choice.")
+        options = self._reveal_options_str(player_id)
         if action_type is not CoupActionType.Reveal:
-            return self.invalid(
-                "You must choose a hidden influence with 'reveal <card>'."
-            )
+            return self.invalid(f"Invalid action: {action_type.value}. You must lose an influence; choose which hidden card to reveal with {options}.")
         if cards_to_reveal is None or len(cards_to_reveal) != 1:
-            return self.invalid("Reveal exactly one hidden influence card.")
+            return self.invalid(f"Reveal exactly one hidden influence card: {options}.")
 
         card = cards_to_reveal[0].title()
         if card not in gs["hidden_hand"][player_id]:
-            return self.invalid(f"Cannot reveal {card}; it is not in your hidden hand.")
+            return self.invalid(f"Cannot reveal {card}, it is not one of your hidden cards. Choose {options}.")
 
-        gs["hidden_hand"][player_id].remove(card)
-        gs["revealed_hand"][player_id].append(card)
         pending["lost_card"] = card
         pending["resolved"] = True
-        self.broadcast(
-            f"Player #{player_id} revealed and lost a {card} influence.",
-            ta.ObservationType.GAME_ACTION_DESCRIPTION,
-        )
-        if not gs["hidden_hand"][player_id]:
-            self.eliminate(player_id)
-            gs["treasury_coins"] += gs["coins"][player_id]
-            gs["coins"][player_id] = 0
+        self._lose_influence(player_id, card)
         return None
 
     ######################################################################################################################################################################
     # These are all the "sink" states for a single turn. Either we execute the action, or we resolve a block or challenge and then potentially execute the action still. #
     ######################################################################################################################################################################
-    def _queue_influence_loss(self, player_id: int, continuation: str):
-        """Pause resolution until ``player_id`` chooses an influence to reveal."""
+    def _queue_influence_loss(self, player_id: int, continuation: str, reason: str):
+        """
+        Make `player_id` lose an influence, pausing resolution in QueryWhichToReveal while they choose the card.
+
+        `continuation` says how resolution proceeds once the card is revealed: "finish_action" ends the action
+        (coup, assassination) and "resume" returns to the interrupted query phase (lost challenges).
+        `reason` is shown to the player in their call to action.
+        """
         gs = self.game_state
-        if not gs["hidden_hand"][player_id]:
-            return
-        gs["pending_influence_loss"] = {
+        pending = {
             "player_id": player_id,
             "continuation": continuation,
+            "resume_phase": gs["phase"],
+            "reason": reason,
             "resolved": False,
             "lost_card": None,
         }
+        gs["pending_influence_loss"] = pending
         gs["phase"] = GamePhase.QueryWhichToReveal
-        self.message(
-            player_id,
-            "You must lose an influence. Choose it with 'reveal <card>'.",
-            ta.ObservationType.GAME_ACTION_DESCRIPTION,
-        )
+
+        hidden = gs["hidden_hand"][player_id]
+        # Two identical cards still require a choice: skipping it would tell everyone the hand is a pair.
+        if len(hidden) > 1:
+            self._broadcast_observations(f"Player #{player_id} must choose which influence to reveal.", exclude_player_ids=[player_id])
+            return
+        if hidden:
+            pending["lost_card"] = hidden[0]
+            self._lose_influence(player_id, hidden[0])
+        pending["resolved"] = True
+
+    def _lose_influence(self, player_id: int, card: str, announce: bool = True):
+        """Turn `card` face up. A player left without hidden cards is exiled and returns their coins to the Treasury."""
+        gs = self.game_state
+        gs["hidden_hand"][player_id].remove(card)
+        gs["revealed_hand"][player_id].append(card)
+        remaining = len(gs["hidden_hand"][player_id])
+        if remaining == 0:
+            self.eliminate(player_id)
+            # A steal against this player still resolves against their coins before the
+            # remainder goes back; _settle_exiled_coins returns it when the action ends.
+            metadata = gs["action_metadata"]
+            if not (metadata is not None and metadata.action_type is CoupActionType.Steal and metadata.target_player_id == player_id):
+                gs["treasury_coins"] += gs["coins"][player_id]
+                gs["coins"][player_id] = 0
+        if announce:
+            if remaining:
+                message = f"Player #{player_id} revealed and lost a {card} influence and has {remaining} hidden influence card remaining."
+            else:
+                message = f"Player #{player_id} revealed and lost their last influence, a {card}, and is eliminated from play."
+            self.broadcast(message, ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
     def _execute_current_action(self):
         gs = self.game_state
@@ -379,6 +416,7 @@ class CoupEnv(ta.GameEnv):
             return
 
         source_player_observation, target_player_observation, other_player_observations = None, None, None
+        target_loss_reason = None  # set when the action costs the target an influence
 
         if curr_action.action_type is CoupActionType.Income:
             gs["coins"][curr_action.source_player_id] += 1
@@ -390,21 +428,10 @@ class CoupEnv(ta.GameEnv):
             gs["coins"][curr_action.source_player_id] -= 7
             gs["treasury_coins"] += 7
 
-            self._queue_influence_loss(
-                curr_action.target_player_id, "finish_direct_action"
-            )
-            source_player_observation = (
-                f"Your coup against Player #{curr_action.target_player_id} succeeded. "
-                "They must choose an influence to reveal."
-            )
-            target_player_observation = (
-                f"Player #{curr_action.source_player_id} couped you. "
-                "Choose an influence to reveal."
-            )
-            other_player_observations = (
-                f"Player #{curr_action.source_player_id} couped Player "
-                f"#{curr_action.target_player_id}, who must reveal an influence."
-            )
+            target_loss_reason = f"Player #{curr_action.source_player_id} launched a coup against you"
+            source_player_observation = f"You paid 7 coins and launched a coup against Player #{curr_action.target_player_id}. They must lose an influence."
+            target_player_observation = f"Player #{curr_action.source_player_id} launched a coup against you. You must lose an influence."
+            other_player_observations = f"Player #{curr_action.source_player_id} paid 7 coins and launched a coup against Player #{curr_action.target_player_id}, who must lose an influence."
 
         elif curr_action.action_type is CoupActionType.ForeignAid:
             gs["coins"][curr_action.source_player_id] += 2
@@ -425,32 +452,28 @@ class CoupEnv(ta.GameEnv):
             if len(gs["hidden_hand"][curr_action.target_player_id]) == 0:
                 return
 
-            self._queue_influence_loss(
-                curr_action.target_player_id, "finish_direct_action"
-            )
-            source_player_observation = (
-                f"Your assassination of Player #{curr_action.target_player_id} "
-                "succeeded. They must choose an influence to reveal."
-            )
-            target_player_observation = (
-                f"Player #{curr_action.source_player_id} successfully assassinated "
-                "you. Choose an influence to reveal."
-            )
-            other_player_observations = (
-                f"Player #{curr_action.source_player_id} successfully assassinated "
-                f"Player #{curr_action.target_player_id}, who must reveal an influence."
-            )
+            target_loss_reason = f"Player #{curr_action.source_player_id} assassinated you"
+            source_player_observation = f"Your assassination of Player #{curr_action.target_player_id} succeeded. They must lose an influence."
+            target_player_observation = f"Player #{curr_action.source_player_id} successfully assassinated you. You must lose an influence."
+            other_player_observations = f"Player #{curr_action.source_player_id} successfully assassinated Player #{curr_action.target_player_id}, who must lose an influence."
 
         elif curr_action.action_type is CoupActionType.Steal:
-            if len(gs["hidden_hand"][curr_action.target_player_id]) == 0:
-                return
+            # An exiled target (e.g. a bluffing blocker) still pays before the rest of their coins return to the Treasury.
             amount_stolen = min(2, gs["coins"][curr_action.target_player_id])
             gs["coins"][curr_action.source_player_id] += amount_stolen
             gs["coins"][curr_action.target_player_id] -= amount_stolen
+            target_exiled = len(gs["hidden_hand"][curr_action.target_player_id]) == 0
+            returned = gs["coins"][curr_action.target_player_id]
+            self._settle_exiled_coins()
 
             source_player_observation = f"You just successfully stole {amount_stolen} coin(s) from Player #{curr_action.target_player_id}. You now have {gs['coins'][curr_action.source_player_id]} coins. Player #{curr_action.target_player_id} has {gs['coins'][curr_action.target_player_id]} coins"
             target_player_observation = f"Player #{curr_action.source_player_id} just stole {amount_stolen} coin(s) from you. You now have {gs['coins'][curr_action.target_player_id]} coins. Player #{curr_action.source_player_id} has {gs['coins'][curr_action.source_player_id]} coins"
             other_player_observations = f"Player #{curr_action.source_player_id} just stole {amount_stolen} coin(s) from Player #{curr_action.target_player_id}. Player #{curr_action.source_player_id} has {gs['coins'][curr_action.source_player_id]} coins. Player #{curr_action.target_player_id} has {gs['coins'][curr_action.target_player_id]} coins"
+            if target_exiled:
+                exile_note = f". Player #{curr_action.target_player_id} is exiled, so their remaining {returned} coin(s) returned to the Treasury"
+                source_player_observation += exile_note
+                target_player_observation += exile_note
+                other_player_observations += exile_note
 
         elif curr_action.action_type is CoupActionType.Exchange:
             # Draw two cards from the pile
@@ -492,6 +515,9 @@ class CoupEnv(ta.GameEnv):
                 exclude_ids.append(curr_action.target_player_id)
             self._broadcast_observations(other_player_observations, exclude_player_ids=exclude_ids)
 
+        if target_loss_reason is not None:
+            self._queue_influence_loss(curr_action.target_player_id, "finish_action", target_loss_reason)
+
     def _execute_showdown_on_bullshit(self):
         gs = self.game_state
         metadata = gs["action_metadata"]
@@ -499,6 +525,7 @@ class CoupEnv(ta.GameEnv):
         challenger_player_id = metadata.challenger_player_id
         challenged_card = self._action_to_card(metadata.action_type)
         challenged_player_id = metadata.source_player_id  # The person who made the original claim
+        action_name = metadata.action_type.value
         is_honest = gs["hidden_hand"][challenged_player_id].count(challenged_card) > 0
 
         if is_honest:
@@ -510,71 +537,45 @@ class CoupEnv(ta.GameEnv):
             new_pulled_card = gs["pile"].pop()
             gs["hidden_hand"][challenged_player_id].append(new_pulled_card)
 
-            # Player who called bullshit loses a card
-            card_lost_by_challenger = self._make_player_lose_a_card(challenger_player_id)
+            loser_player_id = challenger_player_id
+            loss_reason = f"your challenge of Player #{challenged_player_id}'s {challenged_card} claim failed"
+            challenger_message = f"Your challenge of Player #{challenged_player_id}'s {challenged_card} claim failed: they had a {challenged_card}. You must lose an influence."
+            challenged_message = f"Player #{challenger_player_id} challenged your {challenged_card} claim. You proved it, shuffled your {challenged_card} back into the Court deck and drew a {new_pulled_card}. Player #{challenger_player_id} must lose an influence."
+            other_player_observations = f"Player #{challenger_player_id} challenged Player #{challenged_player_id}'s {challenged_card} claim and lost: Player #{challenged_player_id} showed a {challenged_card}, shuffled it back into the Court deck and drew a replacement. Player #{challenger_player_id} must lose an influence."
 
-            ###### UPDATE OBSERVATIONS
-            challenger_remaining_cards = gs["hidden_hand"][challenger_player_id]
-
-            # A targeted action cannot continue against a challenger who just
-            # lost their final influence.
-            if (metadata.action_type in {CoupActionType.Assassinate, CoupActionType.Steal} and
-                    metadata.target_player_id == challenger_player_id and
-                    len(challenger_remaining_cards) == 0):
-                metadata.action_type = CoupActionType.PASS
-
-            # Tell the challenger that their bullshit call failed
-            challenger_message = f"Your bullshit call on Player #{challenged_player_id} failed. They did indeed have a {challenged_card} card." + \
-                (f"You lost a {card_lost_by_challenger} card." if (len(challenger_remaining_cards) == 0 or challenger_remaining_cards[0] != card_lost_by_challenger) else f"You lost one of your {card_lost_by_challenger} cards.") + \
-                (f"You now have only one card remaining, the {challenger_remaining_cards[0]} card." if len(challenger_remaining_cards) > 0 else
-                 "You have no cards remaining, you're eliminated!")
-            # Tell the challenged player that they just survived a bullshit challenge
-            challenged_message = f"You were unsuccessfully challenged on your {challenged_card} claim by Player #{challenger_player_id}. " + \
-                f"Because you had to reveal your {challenged_card} card to prove them wrong, you were given a new one from the pile. It is a {new_pulled_card} card. Player #{challenger_player_id} revealed and lost a {card_lost_by_challenger} card, " + \
-                ("they now have only one card remaining." if len(challenger_remaining_cards) > 0 else f"they have no cards remaining, Player #{challenger_player_id} is eliminated!")
-            # Tell everyone else what happened
-            other_player_observations = f"Player #{challenger_player_id} just unsuccessfully called bullshit on Player #{challenged_player_id}'s {challenged_card} claim! " + \
-                f"Player #{challenged_player_id} did indeed have a {challenged_card} card, put it back in the pile and got a new one. Player #{challenger_player_id} lost an influence and revealed a {card_lost_by_challenger} card." + \
-                (f"Player #{challenger_player_id} now has 1 card remaining." if len(challenger_remaining_cards) > 0 else f"Player #{challenger_player_id} has no cards remaining, they're eliminated!")
+            # A target that unsuccessfully challenged a targeted action still gets its separate
+            # counteraction opportunity once it has revealed (skipped if that eliminated them).
+            # The claim itself is now proven, so it cannot be challenged a second time.
+            if metadata.action_type in {CoupActionType.Assassinate, CoupActionType.Steal} and metadata.target_player_id == challenger_player_id:
+                metadata.players_to_query = [challenger_player_id]
+            else:
+                metadata.players_to_query = None
 
         else:
-            # Player who got challenged loses a card, nothing else changes
-            card_lost_by_challenged = self._make_player_lose_a_card(challenged_player_id)
+            loser_player_id = challenged_player_id
+            loss_reason = f"you could not show a {challenged_card} when Player #{challenger_player_id} challenged your {action_name}"
+            challenged_message = f"Player #{challenger_player_id} challenged your {challenged_card} claim and you could not show a {challenged_card}. Your {action_name} fails and you must lose an influence."
+            challenger_message = f"Your challenge succeeded: Player #{challenged_player_id} could not show a {challenged_card}. Their {action_name} fails and they must lose an influence."
+            other_player_observations = f"Player #{challenger_player_id} successfully challenged Player #{challenged_player_id}'s {challenged_card} claim. The {action_name} fails and Player #{challenged_player_id} must lose an influence."
 
-            challenged_remaining_cards = gs["hidden_hand"][challenged_player_id]
-            challenged_message = f"You were challenged on your {challenged_card} claim by Player #{challenger_player_id}, Since you did not have a {challenged_card} card, you lost your {card_lost_by_challenged} card." + \
-                (f" You now have only one card remaining, the {challenged_remaining_cards[0]} card." if len(challenged_remaining_cards) > 0 else
-                 " You have no cards remaining, you're eliminated!")
-            # Tell the challenger that they just successfully challenged the challenged player
-            challenger_message = f"You just successfully challenged Player #{challenged_player_id} on their {challenged_card} claim! " + \
-                (f"They are blocked from doing it and have {len(challenged_remaining_cards)} card remaining." if len(challenged_remaining_cards) > 0 else
-                 "They have no cards remaining, they're eliminated!")
-            # Other players see the challenger successfully challenge the challenged player
-            other_player_observations = f"Player #{challenger_player_id} just successfully challenged Player #{challenged_player_id} on their {challenged_card} claim! " + \
-                (f"Player #{challenged_player_id} was blocked from doing it and has {len(challenged_remaining_cards)} card remaining." if len(challenged_remaining_cards) > 0 else
-                 f"Player #{challenged_player_id} has no cards remaining, they're eliminated!")
+            # A successfully challenged action fails entirely and its cost is returned
+            # (a blocked action, by contrast, keeps its cost spent).
+            if metadata.action_type is CoupActionType.Assassinate:
+                gs["coins"][challenged_player_id] += 3
+                gs["treasury_coins"] -= 3
+                refund_note = " The 3 coins paid for the assassination are returned."
+                challenged_message += refund_note
+                challenger_message += refund_note
+                other_player_observations += refund_note
 
-            # Mark no-op for _advance_turn()
+            # Mark no-op for the resolution step
             metadata.action_type = CoupActionType.PASS
-
-        # A surviving target that unsuccessfully challenged a targeted action
-        # still gets its separate counteraction opportunity. The claim itself
-        # is now proven, so it cannot be challenged a second time.
-        if (
-            is_honest
-            and metadata.action_type in {
-                CoupActionType.Assassinate,
-                CoupActionType.Steal,
-            }
-            and metadata.target_player_id == challenger_player_id
-            and challenger_remaining_cards
-        ):
-            metadata.players_to_query = [challenger_player_id]
-        else:
             metadata.players_to_query = None
+
         self.message(challenged_player_id, challenged_message, ta.ObservationType.GAME_ACTION_DESCRIPTION)
         self.message(challenger_player_id, challenger_message, ta.ObservationType.GAME_ACTION_DESCRIPTION)
         self._broadcast_observations(other_player_observations, exclude_player_ids=[challenged_player_id, challenger_player_id])
+        self._queue_influence_loss(loser_player_id, "resume", loss_reason)
 
     def _execute_showdown_on_blocker_bullshit(self):
         gs = self.game_state
@@ -610,37 +611,34 @@ class CoupEnv(ta.GameEnv):
             gs["hidden_hand"][blocker_player_id].append(new_card)
 
             # Challenger loses a card
-            card_lost = self._make_player_lose_a_card(challenger_player_id)
-            challenger_remaining = len(gs["hidden_hand"][challenger_player_id])
-
-            # Send observations
-            blocker_msg = f"You were challenged on your {block_card} block by Player #{challenger_player_id}. Since you had the {block_card}, you shuffled it back and drew a {new_card}. Player #{challenger_player_id} lost a {card_lost} and has {challenger_remaining} card(s) remaining."
-            challenger_msg = f"Your challenge on Player #{blocker_player_id}'s {block_card} block failed. They did have a {block_card}. You lost a {card_lost} and have {challenger_remaining} card(s) remaining."
-            others_msg = f"Player #{challenger_player_id} challenged Player #{blocker_player_id}'s {block_card} block and failed. Player #{blocker_player_id} had the {block_card}, shuffled it back and drew a new card. Player #{challenger_player_id} lost a {card_lost} and has {challenger_remaining} card(s) remaining."
+            loser_player_id = challenger_player_id
+            loss_reason = f"your challenge of Player #{blocker_player_id}'s {block_card} block failed"
+            blocker_msg = f"Player #{challenger_player_id} challenged your {block_card} block. You proved it, shuffled your {block_card} back into the Court deck and drew a {new_card}. The block stands and Player #{challenger_player_id} must lose an influence."
+            challenger_msg = f"Your challenge of Player #{blocker_player_id}'s {block_card} block failed: they had a {block_card}. The block stands and you must lose an influence."
+            others_msg = f"Player #{challenger_player_id} challenged Player #{blocker_player_id}'s {block_card} block and lost: Player #{blocker_player_id} showed a {block_card}, shuffled it back into the Court deck and drew a replacement. The block stands and Player #{challenger_player_id} must lose an influence."
 
             # The block was successful, so the original action is cancelled
             metadata.action_type = CoupActionType.PASS
 
         else:
             # Blocker was lying - they lose a card, original action proceeds
-            card_lost = self._make_player_lose_a_card(blocker_player_id)
-            blocker_remaining = len(gs["hidden_hand"][blocker_player_id])
-
-            # Send observations
-            blocker_msg = f"You were challenged on your {block_card} block by Player #{challenger_player_id}. Since you didn't have a {block_card}, you lost a {card_lost} and have {blocker_remaining} card(s) remaining."
-            challenger_msg = f"Your challenge on Player #{blocker_player_id}'s {block_card} block succeeded! They didn't have a {block_card}. They lost a {card_lost} and have {blocker_remaining} card(s) remaining."
-            others_msg = f"Player #{challenger_player_id} successfully challenged Player #{blocker_player_id}'s {block_card} block. Player #{blocker_player_id} didn't have the {block_card}, lost a {card_lost} and has {blocker_remaining} card(s) remaining."
+            loser_player_id = blocker_player_id
+            loss_reason = f"you could not show a {block_card} when Player #{challenger_player_id} challenged your block"
+            blocker_msg = f"Player #{challenger_player_id} challenged your {block_card} block and you could not show a {block_card}. The block fails and you must lose an influence."
+            challenger_msg = f"Your challenge succeeded: Player #{blocker_player_id} could not show a {block_card}. The block fails and they must lose an influence."
+            others_msg = f"Player #{challenger_player_id} successfully challenged Player #{blocker_player_id}'s {block_card} block. The block fails and Player #{blocker_player_id} must lose an influence."
 
             # The block failed, so the original action will proceed
             # No need to change action_type
+
+        # Mark that we're done querying
+        metadata.players_to_query = None
 
         # Send all observations
         self.message(blocker_player_id, blocker_msg, ta.ObservationType.GAME_ACTION_DESCRIPTION)
         self.message(challenger_player_id, challenger_msg, ta.ObservationType.GAME_ACTION_DESCRIPTION)
         self._broadcast_observations(others_msg, exclude_player_ids=[blocker_player_id, challenger_player_id])
-
-        # Mark that we're done querying
-        metadata.players_to_query = None
+        self._queue_influence_loss(loser_player_id, "resume", loss_reason)
 
     def _execute_exchange_action(self, cards_returned: List[str]):
         """Execute the exchange action after player has chosen which cards to keep"""
@@ -713,7 +711,14 @@ class CoupEnv(ta.GameEnv):
         """
         gs = self.game_state
         # Determine the call to action based on the current phase
-        if gs["phase"] == GamePhase.QueryWhichToKeep:
+        if gs["phase"] == GamePhase.QueryWhichToReveal:
+            pending = gs["pending_influence_loss"]
+            if pending["player_id"] == player_id and not pending["resolved"]:
+                call_to_action_str = f"You must lose an influence because {pending['reason']}. Choose which of your hidden cards to reveal (it is permanently lost): {self._reveal_options_str(player_id)}."
+            else:
+                call_to_action_str = f"Player #{pending['player_id']} is revealing an influence."
+
+        elif gs["phase"] == GamePhase.QueryWhichToKeep:
             # Player needs to choose which cards to keep after exchange
             call_to_action_str = f"You need to choose which {'two cards' if len(gs['revealed_hand'][player_id]) == 0 else 'card'} to keep. Use 'keep <card1>" + \
                 f"{' <card2>' if len(gs['revealed_hand'][player_id]) == 0 else ''}'"
@@ -793,6 +798,9 @@ class CoupEnv(ta.GameEnv):
 
         return call_to_action_str
 
+    def _reveal_options_str(self, player_id: int) -> str:
+        return " or ".join(f"'reveal {card}'" for card in dict.fromkeys(self.game_state["hidden_hand"][player_id]))
+
     def _action_to_card(self, action: CoupActionType) -> str:
         """ Convert a CoupActionType to a card """
         if action is CoupActionType.Tax:
@@ -822,72 +830,11 @@ class CoupEnv(ta.GameEnv):
     def _is_valid_target(self, target_player_id: Optional[int]) -> bool:
         return target_player_id is not None and 0 <= target_player_id < self.state.num_players
 
-    def _make_player_lose_a_card(self, player_id: int):
-        """
-        In a perfect world, the player would pick which card they want to lose.
-        But for now, we'll just pop the last card in their hand.
-        """
-        card = self.game_state["hidden_hand"][player_id].pop()
-        self.game_state["revealed_hand"][player_id].append(card)
-        if not self.game_state["hidden_hand"][player_id]:
-            self.eliminate(player_id)
-        return card
-
     def _advance_game_turn(self) -> Optional[ta.Outcome]:
         """
-        Advance the state to the next player based on current phase.
+        Resolve the current action as far as possible, then hand the turn to whoever must respond next.
         """
-        gs = self.game_state
-        if gs["phase"] == GamePhase.Play:
-            # Normal play phase - go to next player in turn order
-            next_pid = self._next_active_player_after(self.state.current_player_id)
-
-            # Income and Coup immediately advance the turn, so action_metadata is no longer needed
-            if gs["action_metadata"] is not None and gs["action_metadata"].action_type in {CoupActionType.Income, CoupActionType.Coup}:
-                gs["action_metadata"] = None
-
-        elif gs["phase"] == GamePhase.QueryWhichToKeep:
-            # Check if the exchange has been completed (cards_to_keep is set)
-            metadata = gs["action_metadata"]
-            if metadata.cards_to_keep is not None:
-                # Exchange is complete, move to next player
-                gs["phase"] = GamePhase.Play
-                next_pid = self._next_active_player_after(metadata.source_player_id)
-                gs["action_metadata"] = None
-            else:
-                # Stay with the same player - they still need to choose cards
-                next_pid = self.state.current_player_id
-
-        elif gs["phase"] in {GamePhase.QueryForBlockOrChallenge, GamePhase.QueryToChallengeTheBlocker}:
-            metadata = gs["action_metadata"]
-            if metadata.players_to_query and len(metadata.players_to_query) > 0:
-                # Query next player in the list
-                next_pid = metadata.players_to_query.pop(0)
-            else:
-                # No more players to query
-                if gs["phase"] == GamePhase.QueryToChallengeTheBlocker:
-                    # Only cancel the original action if no one challenged the block
-                    # (If someone did challenge and the blocker was honest, the action was already set to PASS in _execute_showdown_on_blocker_bullshit)
-                    if metadata.blocker_challenger_player_id is None:
-                        # Block was not challenged, so cancel the original action
-                        metadata.action_type = CoupActionType.PASS
-
-                # Execute the action (may be PASS if blocked/challenged successfully)
-                self._execute_current_action()
-
-                # If we just executed an Exchange, we'll be in QueryWhichToKeep phase
-                if gs["phase"] == GamePhase.QueryWhichToKeep:
-                    next_pid = metadata.source_player_id
-                    metadata.players_to_query = []  # No more players to query
-                else:
-                    # Return to normal play - next player after action source
-                    gs["phase"] = GamePhase.Play
-                    next_pid = self._next_active_player_after(metadata.source_player_id)
-                    gs["action_metadata"] = None
-        else:
-            raise Exception(f"Unexpected game phase: {gs['phase']}")
-
-        self.set_next_player(next_pid)
+        self.set_next_player(self._resolve_until_input())
 
         # Check for winner
         winner = self._get_winner()
@@ -895,6 +842,84 @@ class CoupEnv(ta.GameEnv):
             self.step_info["winner"] = winner
             return self.winner(winner, reason=f"Player {winner} has won the game!")
         return None
+
+    def _resolve_until_input(self) -> int:
+        """
+        Advance the phase machine until some player has to respond, and return that player's id.
+
+        Influence losses pause resolution in QueryWhichToReveal; once the card is revealed the
+        interrupted step resumes, so a single action can cost several influences in a row.
+        """
+        gs = self.game_state
+        while True:
+            phase = gs["phase"]
+            metadata = gs["action_metadata"]
+            if phase == GamePhase.QueryWhichToReveal:
+                pending = gs["pending_influence_loss"]
+                if not pending["resolved"]:
+                    return pending["player_id"]
+                gs["pending_influence_loss"] = None
+                if pending["continuation"] == "finish_action":
+                    return self._end_action()
+                if pending["continuation"] != "resume":
+                    raise Exception(f"Unexpected influence-loss continuation: {pending['continuation']}")
+                gs["phase"] = pending["resume_phase"]
+
+            elif phase == GamePhase.QueryWhichToKeep:
+                # Stay with the exchanging player until they have chosen their cards
+                if metadata.cards_to_keep is None:
+                    return metadata.source_player_id
+                return self._end_action()
+
+            elif phase in (GamePhase.QueryForBlockOrChallenge, GamePhase.QueryToChallengeTheBlocker):
+                responder = self._pop_next_responder(metadata)
+                if responder is not None:
+                    return responder
+                # Only cancel the original action if no one challenged the block
+                # (If someone did challenge and the blocker was honest, the action was already set to PASS in _execute_showdown_on_blocker_bullshit)
+                if phase == GamePhase.QueryToChallengeTheBlocker and metadata.blocker_challenger_player_id is None:
+                    metadata.action_type = CoupActionType.PASS
+
+                # Execute the action (may be PASS if blocked/challenged successfully). It stays in Play
+                # unless it opens a follow-up phase (QueryWhichToKeep after Exchange, QueryWhichToReveal after Assassinate).
+                gs["phase"] = GamePhase.Play
+                self._execute_current_action()
+                if gs["phase"] == GamePhase.Play:
+                    return self._end_action()
+
+            elif phase == GamePhase.Play:
+                # Income completes immediately; also reached when a player is removed on their own turn
+                return self._end_action()
+
+            else:
+                raise Exception(f"Unexpected game phase: {phase}")
+
+    def _pop_next_responder(self, metadata: ActionMetadata) -> Optional[int]:
+        """Pop queued responders until one who is still in the game is found (None once the queue is empty)."""
+        while metadata.players_to_query:
+            player_id = metadata.players_to_query.pop(0)
+            if self.game_state["hidden_hand"][player_id]:
+                return player_id
+        return None
+
+    def _end_action(self) -> int:
+        """Close out the current action and return the next active player after its source."""
+        gs = self.game_state
+        metadata = gs["action_metadata"]
+        source_player_id = metadata.source_player_id if metadata is not None else self.state.current_player_id
+        gs["phase"] = GamePhase.Play
+        gs["action_metadata"] = None
+        gs["pending_influence_loss"] = None
+        self._settle_exiled_coins()
+        return self._next_active_player_after(source_player_id)
+
+    def _settle_exiled_coins(self):
+        """Return any coins still held by exiled players to the Treasury."""
+        gs = self.game_state
+        for pid in range(self.state.num_players):
+            if not gs["hidden_hand"][pid] and gs["coins"][pid]:
+                gs["treasury_coins"] += gs["coins"][pid]
+                gs["coins"][pid] = 0
 
     def _next_active_player_after(self, player_id: int) -> int:
         """Next player clockwise who still has hidden influence cards (falls back to `player_id`)."""
@@ -958,6 +983,8 @@ class CoupEnv(ta.GameEnv):
                 raise ValueError(f"Missing / invalid target for '{tokens[0]}'.")
             return directed_map[tokens[0]], int(tokens[1])
 
+        card_names = {card.lower() for card in CARDS}
+
         # ---------- Ambassador "keep" special ----------
         if tokens[0] == "keep":
             if len(tokens) < 2 or len(tokens) > 3:
@@ -965,11 +992,19 @@ class CoupEnv(ta.GameEnv):
 
             cards = []
             for i in range(1, len(tokens)):
-                if tokens[i].lower() not in {"duke", "assassin", "ambassador", "captain", "contessa"}:
+                if tokens[i].lower() not in card_names:
                     raise ValueError(f"Invalid card name: {tokens[i]}")
                 cards.append(tokens[i].lower())
 
             return CoupActionType.Keep, cards
+
+        # ---------- Influence loss "reveal" ----------
+        if tokens[0] == "reveal":
+            if len(tokens) != 2:
+                raise ValueError("'reveal' must name exactly one of your hidden cards, e.g. 'reveal duke'.")
+            if tokens[1] not in card_names:
+                raise ValueError(f"Invalid card name: {tokens[1]}")
+            return CoupActionType.Reveal, [tokens[1]]
 
         # ---------- Blocks ----------
         if tokens[0] == "block":
@@ -1006,6 +1041,8 @@ class CoupEnv(ta.GameEnv):
             return f"Player #{game_state['action_metadata'].blocker_player_id} is doing a {game_state['action_metadata'].block_type.name} on Player #{game_state['action_metadata'].source_player_id}, asking if Player #{self.state.current_player_id} wants to challenge the block."
         elif game_state["phase"] == GamePhase.QueryWhichToKeep:
             return f"Player #{game_state['action_metadata'].source_player_id} is attempting an Exchange, asking which they wish to keep."
+        elif game_state["phase"] == GamePhase.QueryWhichToReveal:
+            return f"Player #{game_state['pending_influence_loss']['player_id']} must choose an influence to reveal."
         else:
             raise Exception(f"Unexpected game phase: {game_state['phase']}")
 

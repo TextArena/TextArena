@@ -129,6 +129,58 @@ def test_observations_consumed_exactly_once(env_id, spec):
     assert second == [], "calling get_observation twice must not replay messages"
 
 
+@pytest.mark.parametrize(
+    "env_id,spec",
+    sorted((env_id, spec) for env_id, spec in ENV_REGISTRY.items() if not env_id.endswith("-mdp")),
+    ids=lambda v: v if isinstance(v, str) else "",
+)
+def test_no_progress_play_earns_no_reward(env_id, spec):
+    """Ending a single-player game through invalid moves alone must never pay out."""
+    cls = _resolve_class(spec)
+    dir_name = spec.entry_point.split(".envs.")[1].split(".")[0]
+    if cls.max_players != 1:
+        pytest.skip("single-player games only")
+    if dir_name in SKIP:
+        pytest.skip(SKIP[dir_name])
+    for seed in range(3):
+        env = ta.make(env_id)
+        env.reset(num_players=1, seed=seed)
+        done = False
+        for _ in range(500):
+            env.get_observation()
+            done, _ = env.step("@@@ not a move @@@")
+            if done:
+                break
+        assert done, "repeated invalid moves must end the game"
+        rewards, _ = env.close()
+        assert rewards[0] <= 0, f"no-progress play earned {rewards[0]} (seed {seed})"
+
+
+_PATHOLOGICAL_LENGTH = 20_000
+PATHOLOGICAL_ACTIONS = {
+    "padded": " " * _PATHOLOGICAL_LENGTH + "x" + " " * 1000,
+    "inner-spaces": "4" + " " * _PATHOLOGICAL_LENGTH + "x",
+    "whitespace-mix": "\t\n " * (_PATHOLOGICAL_LENGTH // 3) + "x",
+    "nested-brackets": "[" * (_PATHOLOGICAL_LENGTH // 2) + "x" + "]" * (_PATHOLOGICAL_LENGTH // 2),
+}
+
+
+@pytest.mark.parametrize("env_id,spec", _representative_specs(), ids=lambda v: v if isinstance(v, str) else "")
+def test_long_pathological_actions_are_handled_quickly(env_id, spec):
+    """Training workers step envs with raw model output, so parsing must stay linear-time."""
+    import time
+
+    cls, num_players = _load_env_or_skip(env_id, spec)
+    for label, action in PATHOLOGICAL_ACTIONS.items():
+        env = ta.make(env_id=env_id)
+        env.reset(num_players=num_players, seed=0)
+        env.get_observation()
+        start = time.perf_counter()
+        env.step(action)
+        elapsed = time.perf_counter() - start
+        assert elapsed < 0.25, f"{label} input took {elapsed:.2f}s"
+
+
 @pytest.mark.parametrize("env_id,spec", sorted(ENV_REGISTRY.items()), ids=lambda v: v if isinstance(v, str) else "")
 def test_every_registered_variant_resets(env_id, spec):
     cls = _resolve_class(spec)

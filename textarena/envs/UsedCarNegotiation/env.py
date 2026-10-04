@@ -79,7 +79,7 @@ class UsedCarNegotiationEnv(ta.GameEnv):
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         gs = self.game_state
-        opponent_pid = 1 - player_id; action = action.strip()
+        opponent_pid = 1 - player_id; action = self.strip_role_tags(action).strip()
 
         offer_match = self.offer_pattern.fullmatch(action)
         accept_match = self.accept_pattern.fullmatch(action)

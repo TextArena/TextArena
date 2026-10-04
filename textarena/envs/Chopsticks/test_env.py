@@ -72,6 +72,25 @@ def test_split_cannot_create_hand_above_four_and_is_atomic():
     assert env.state.error_count == 1
 
 
+def test_out_of_range_split_explains_the_finger_limit():
+    env = _fresh()
+    env.state.game_state["hands"][0] = [4, 2]
+    done, _ = env.step("split 5 1")
+    assert not done
+    assert env.state.game_state["hands"][0] == [4, 2]
+    _, observations = env.get_observation()
+    assert any("between 0 and 4 fingers" in message for _, message, _ in observations)
+
+
+def test_prompt_states_goal_split_limits_and_turn_limit():
+    env = _fresh(max_turns=12)
+    prompt = env.prompt(0)
+    assert "You win by making both of your opponent's hands dead." in prompt
+    assert "After 12 moves in total, the game is a draw." in prompt
+    assert "Each hand holds 0 to 4 fingers" in prompt and "only swapping them is not allowed" in prompt
+    assert "You cannot attack with a dead (0) hand or attack a dead hand." in prompt
+
+
 def test_large_split_token_is_invalid_without_integer_conversion():
     env = _fresh()
     done, _ = env.step(f"split {'9' * 10_000} 0")

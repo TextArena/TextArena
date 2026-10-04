@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Set, Union
+from typing import Any, Callable, Dict, List, Set, Union
 
 import textarena as ta
 
@@ -14,7 +14,7 @@ class CryptarithmEnv(ta.GameEnv):
 
     _ACTION_RE = re.compile(
         r"(?P<wrapped>\[)?\s*(?P<letter>[A-Za-z])"
-        r"(?:\s*,\s*|\s+)(?P<digit>\d)\s*(?(wrapped)\])"
+        r"(?:\s*,\s*|\s+)(?P<digit>\d|-)\s*(?(wrapped)\])"
     )
 
     def __init__(self, equation: str = "SEND + MORE = MONEY", max_turns: int = 100):
@@ -58,7 +58,15 @@ class CryptarithmEnv(ta.GameEnv):
         }
 
     def prompt(self, player_id: int) -> str:
-        return "Map each letter to a unique digit so the arithmetic holds.\nAssign by replying with the letter and digit, e.g. 'A 5'; re-assign anytime.\n"
+        example = self.addends[0][0]
+        return (
+            f"Solve the cryptarithm {' + '.join(self.addends)} = {self.result}: map each letter to a digit so the arithmetic holds.\n"
+            "Different letters need different digits, and the first letter of a word cannot be 0 "
+            f"(here: {', '.join(sorted(self.first_letters))}).\n"
+            f"Assign by replying with the letter and digit, e.g. '{example} 5'; re-assign anytime to a digit no other letter is using.\n"
+            f"Reply with the letter and '-' (e.g. '{example} -') to clear its digit so another letter can use it.\n"
+            f"You win as soon as every letter is assigned and the equation holds. You have {self.max_turns} moves.\n"
+        )
 
     def render(self, player_id: int) -> str:
         mapping = self.game_state["mapping"]
@@ -67,15 +75,22 @@ class CryptarithmEnv(ta.GameEnv):
     def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
         m = self._ACTION_RE.fullmatch(move.strip())
         if not m:
-            return self.invalid("Bad action format. Reply with a letter and a digit, e.g. 'A 5'.")
+            example = self.addends[0][0]
+            return self.invalid(
+                f"Bad action format. Reply with a letter and a digit, e.g. '{example} 5', or a letter and '-' to clear it."
+            )
 
         letter = m.group("letter").upper()
-        digit = int(m.group("digit"))
         mapping, digit_used = self.game_state["mapping"], self.game_state["digit_used"]
-
-        # basic validity checks
         if letter not in self.letters:
             return self.invalid(f"Letter {letter} not in puzzle.")
+        if m.group("digit") == "-":
+            if letter not in mapping:
+                return self.invalid(f"Letter {letter} has no digit to clear.")
+            del digit_used[mapping.pop(letter)]
+            return None
+
+        digit = int(m.group("digit"))
         if digit in digit_used and digit_used[digit] != letter:
             return self.invalid(f"Digit {digit} already used by {digit_used[digit]}.")
         if letter in self.first_letters and digit == 0:
@@ -93,16 +108,16 @@ class CryptarithmEnv(ta.GameEnv):
                 return self.outcome({0: 1.0}, reason="Correct! Equation satisfied.")
             self.message(
                 player_id,
-                "All letters are assigned, but the equation is incorrect. Reassign a letter and try again.",
+                "All letters are assigned, but the equation is incorrect. Reassign or clear a letter and try again.",
                 ta.ObservationType.GAME_MESSAGE,
             )
         return None
 
     def on_turn_limit(self) -> ta.Outcome:
-        return self.outcome({0: self._progress()}, reason="Move limit reached.")
+        return self.outcome({0: self._partial_credit()}, reason="Move limit reached.")
 
     def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
-        return self.outcome({0: self._progress()}, reason=f"Invalid Move: {reason}")
+        return self.outcome({0: self._partial_credit()}, reason=f"Invalid Move: {reason}")
 
     def _word_value(self, word: str) -> int:
         mapping = self.game_state["mapping"]
@@ -113,13 +128,29 @@ class CryptarithmEnv(ta.GameEnv):
         return sum(self._word_value(w) for w in self.addends) == self._word_value(self.result)
 
     def _progress(self) -> float:
+        """Share of letters that have a digit, right or wrong; shown on the board."""
+        return len(self.game_state["mapping"]) / len(self.letters)
+
+    def _partial_credit(self) -> float:
+        """Fraction of letters whose digit matches a solution, taking the best-matching solution if there are several."""
         mapping = self.game_state["mapping"]
-        if len(mapping) == len(self.letters) and not self._equation_holds():
-            return 0.0
-        return len(mapping) / len(self.letters)
+        best = 0
+
+        def visit(solution: Dict[str, int]) -> bool:
+            nonlocal best
+            best = max(best, sum(mapping.get(letter) == digit for letter, digit in solution.items()))
+            return best == len(mapping)  # no solution can match more letters than are assigned
+
+        if mapping:
+            self._search_solutions(visit)
+        return best / len(self.letters)
 
     def _has_solution(self) -> bool:
         """Return whether the configured alphametic has at least one solution."""
+        return self._search_solutions(lambda solution: True)
+
+    def _search_solutions(self, visit: Callable[[Dict[str, int]], bool]) -> bool:
+        """Call `visit` with each solution until it returns True; return whether it did."""
         mapping: Dict[str, int] = {}
         used: Set[int] = set()
         columns = max(max(map(len, self.addends)), len(self.result))
@@ -161,7 +192,7 @@ class CryptarithmEnv(ta.GameEnv):
 
         def solve_column(column: int, carry: int) -> bool:
             if column == columns:
-                return carry == 0
+                return carry == 0 and visit(dict(mapping))
             return assign_addends(column, 0, carry)
 
         return solve_column(0, 0)

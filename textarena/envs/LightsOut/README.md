@@ -1,106 +1,72 @@
-# Lights Out Environment Documentation
+# Lights Out
 
-## Overview
+Turn off every light on a square grid, where pressing a light toggles it and its four orthogonal neighbors
+([rules](https://en.wikipedia.org/wiki/Lights_Out_%28game%29)). It tests reasoning about interacting toggles: the
+order of presses does not matter, and pressing a light twice undoes it.
 
-**Lights Out** is a classic single-player puzzle game played on a grid of lights. Each light can be either on or off. When a player presses a light, it toggles its state and the state of its four adjacent neighbors (up, down, left, and right). The objective is to turn all the lights off. 
+<!-- BEGIN GENERATED: variants -->
+**Players:** 1
 
-## Action Space
+**`-mdp` observation:** game messages and the latest board (no raw player actions)
 
-* **Format:** Submit `row col` using 0-indexed coordinates.
-* **Examples:**
+| Env ID | Parameters |
+| --- | --- |
+| `LightsOut-v0` | `size=5`, `max_turns=20` |
 
-  * Press the light at row 2, column 3: `2 3`
-  * Press the light at the top-left corner: `0 0`
+Append `-mdp` to any ID for the state-complete variant (e.g. `LightsOut-v0-mdp`).
+<!-- END GENERATED: variants -->
 
-## Observation Space
+## Rules
 
-**Reset Observations**
+- The grid is `size` × `size`. At reset, all lights start off and between 1 and `min(15, max_turns)` random presses
+  are applied (plus one more if they happen to cancel out), so every puzzle can be solved within `max_turns` presses.
+- Each move presses one light, which toggles it and the lights directly above, below, left, and right of it (fewer at
+  edges and corners).
+- You win when every light is off.
+- A cell outside the grid or a malformed reply is an invalid move. It changes nothing and does not count as a move.
+  Two invalid moves in a row end the game.
+- The game ends after `max_turns` valid presses.
 
-The first observation contains the rules and a generated, non-solved grid. `O`
-is an illuminated cell and `.` is an unlit cell. For example:
+## Actions
 
-```plaintext
-Current grid state (Move 0, 20 moves remaining, 0.0% complete):
+Reply with `row col`: two 0-indexed numbers separated by a space or a comma.
+
+Examples: `2 3` presses the light in row 2, column 3; `0 0` presses the top-left light.
+
+## Observations
+
+The player first receives the rules, the grid size, and the move limit. Before every press, the player sees the grid
+with row and column labels (`O` is on, `.` is off), the number of presses made and remaining, and the completion
+percentage:
+
+```
+Current grid state (Move 1, 19 moves remaining, 9.1% complete):
    0 1 2 3 4
-0: O . O . .
+0: . . O . .
 1: . O O . .
-2: . . O . .
-3: . . . . .
-4: . . . . .
+2: . . . O O
+3: O . . . O
+4: O O O . .
 ```
-
-### Step Observations
-
-After each valid press, the player receives the current grid, valid-move count,
-moves remaining, and bounded completion percentage:
-
-```plaintext
-[Player 0] 2 2
-Current grid state (Move 1, 19 moves remaining, 25.0% complete):
-   0 1 2 3 4
-0: O . O . .
-1: . O . . .
-2: . O . O .
-3: . . O . .
-4: . . . . .
-```
-
-
-## Gameplay
-
-- **Players:** 1 (single-player game)
-- **Initial Setup:** A square grid of lights in a random configuration.
-- **Turns:** The player presses one light per turn.
-- **Objective:** Turn all lights off.
-
-## Key Rules
-
-1. **Move Mechanics:**
-
-   * A move consists of choosing one cell as `row col`.
-   * Pressing a cell toggles the state of that cell and its four orthogonal neighbors (up, down, left, right).
-
-2. **Valid Moves:**
-
-   * Both coordinates must be within the grid boundaries.
-
-3. **Winning Condition:**
-
-   * The player wins when all lights on the grid are turned off.
-
-4. **Loss Condition:**
-
-   * The player loses if they fail to solve the puzzle within the maximum allowed turns.
-
-5. **Game Termination:**
-
-   * The game concludes when the puzzle is solved or the turn limit is reached.
-
 
 ## Rewards
 
-| Outcome | Reward for Player |
+Unless you solve the puzzle, you score your completion: the number of lights that were on at the start minus the
+number on now, divided by the number on at the start, clamped between `0` and `1`.
+
+| Outcome | Reward |
 | --- | --- |
-| Solved | `1.0` |
-| Turn limit | bounded fraction of the initially lit cells turned off |
-| Invalid-move limit | the same bounded completion fraction |
+| All lights off | `1` |
+| `max_turns` valid presses made | Completion, from `0` to below `1` |
+| Second consecutive invalid move | Completion, from `0` to below `1` |
 
 ## Parameters
 
-* **`size`** (`int`, default: `5`, range: `1`–`20`):
+- `size` (default `5`): the width and height of the grid, from 1 to 20.
+- `max_turns` (default `50`): the number of valid presses allowed. It also caps the number of scrambling presses at
+  reset, so the puzzle stays solvable within the limit.
 
-  * **Description:** Sets the height and width of the square grid.
-  * **Impact:** Larger grids exponentially increase the complexity of the puzzle.
+## Notes
 
-* **`max_turns`** (`int`, default: `50`):
-
-  * **Description:** Maximum number of turns allowed to complete the puzzle
-  * **Impact:** Fewer turns increase pressure on the player to solve quickly
-
-## Variants
-
-| Env-id | `size` | `max_turns` |
-| --- | ---: | ---: |
-| `LightsOut-v0` | `5` | `20` |
-
-
+- Completion measures how many fewer lights are on than at the start, not how close the grid is to a solution. A
+  necessary press that turns more lights on lowers it, and it never goes below `0`.

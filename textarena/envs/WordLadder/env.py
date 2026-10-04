@@ -1,13 +1,33 @@
+import functools
 import re
+import string
 from collections import deque
-from typing import Any, Dict, List, Tuple, Union
+from typing import Any, Dict, FrozenSet, List, Tuple, Union
 
 import textarena as ta
 from textarena.envs.WordLadder.renderer import create_board_str
-from textarena.utils.word_lists import EnglishDictionary
+from textarena.utils.word_lists import EnglishDictionary, get_basic_english_words
 
 
 from nltk.corpus import words
+
+
+def _nltk_words_available() -> bool:
+    """Whether the NLTK words corpus is installed; it only widens move validation, never the puzzles."""
+    try:
+        words.words("en-basic")
+    except LookupError:
+        return False
+    return True
+
+
+@functools.lru_cache(maxsize=None)
+def _dictionary_words(include_nltk: bool) -> FrozenSet[str]:
+    """Every lowercase alphabetic word of the shared English dictionary, built once per process."""
+    dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=include_nltk)
+    return frozenset(
+        word.lower() for word in dictionary.get_all_words() if word.isascii() and word.isalpha()
+    )
 
 
 class WordLadderEnv(ta.GameEnv):
@@ -21,8 +41,8 @@ class WordLadderEnv(ta.GameEnv):
     def __init__(self, min_distance: int = 5, max_distance: int = 7, max_turns: int = 100):
         """
         Args:
-            min_distance: minimum number of letter-change steps between start and target
-            max_distance: maximum number of letter-change steps between start and target
+            min_distance: minimum length of the shortest ladder from start to target through Basic English words
+            max_distance: maximum length of the shortest ladder from start to target through Basic English words
             max_turns:    maximum turns before the game ends in a loss
         """
         if (
@@ -44,28 +64,13 @@ class WordLadderEnv(ta.GameEnv):
         self.min_distance = min_distance
         self.max_distance = max_distance
         self.max_turns = max_turns
-        try:
-            source_words = words.words("en-basic")
-        except LookupError:
-            dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=False)
-            source_words = dictionary.get_all_words()
-        self.word_list = sorted(
-            {
-                word.lower()
-                for word in source_words
-                if isinstance(word, str)
-                and word.isascii()
-                and word.isalpha()
-                and 3 <= len(word) <= 11
-            }
-        )
-        if not self.word_list:
-            raise ValueError("The dictionary contains no playable Word Ladder words.")
-        self.universal_word_list = self._load_universal_word_list()
+        self.word_list = sorted(word for word in get_basic_english_words() if 3 <= len(word) <= 11)
+        self.universal_word_list = self._load_universal_word_list(include_nltk=_nltk_words_available())
 
-    def _load_universal_word_list(self):
-        """Use the same normalized vocabulary for generation and validation."""
-        return set(self.word_list)
+    def _load_universal_word_list(self, include_nltk: bool = True) -> FrozenSet[str]:
+        """Accept every dictionary word; puzzles are still built from the Basic English `word_list`."""
+        accepted = _dictionary_words(include_nltk)
+        return accepted if accepted.issuperset(self.word_list) else accepted.union(self.word_list)
 
     @staticmethod
     def _one_letter_diff(w1: str, w2: str) -> bool:
@@ -120,7 +125,7 @@ class WordLadderEnv(ta.GameEnv):
         return valid_pairs
 
     def _sample_start_target(self) -> Tuple[str, str]:
-        """ Pick word length, build neighbour map, then randomly select a (start, target) pair whose shortest path fits distance constraints """
+        """ Pick word length, build neighbour map, then randomly select a (start, target) pair whose shortest path through `word_list` fits distance constraints """
         lengths = list(range(3, 12))
         self.rng.shuffle(lengths)
         for length in lengths:
@@ -170,6 +175,14 @@ class WordLadderEnv(ta.GameEnv):
     def history(self) -> List[str]:
         return self.game_state["history"]
 
+    @property
+    def action_format(self) -> str:
+        # No sample word: any legal example would reveal a valid next rung of the ladder.
+        return (
+            f"only the next word: a {len(self.target_word)}-letter English word that differs from "
+            f"'{self.current_word}' in exactly one letter"
+        )
+
     def setup(self) -> Dict[str, Any]:
         start_word, target_word = self._sample_start_target()
         game_state = {
@@ -191,6 +204,12 @@ class WordLadderEnv(ta.GameEnv):
             "by changing **one letter at a time**.\n"
             f"- Start word:  **{self.start_word}**\n"
             f"- Target word: **{self.target_word}**\n"
+            f"Every word you submit must have {len(self.target_word)} letters, differ from your current word in "
+            "exactly one position, and be an English dictionary word. Any word in the game's British and American "
+            "English dictionaries counts, including plurals and other inflected forms; proper nouns and "
+            "abbreviations do not.\n"
+            f"You have {self.max_turns} moves. A rejected word does not use a move, but two rejected words in a row "
+            "end the game.\n"
             "Submit each move as the word itself, e.g.  `word`.\n"
             "History appears below as you play.  Good luck!\n"
         )
@@ -218,13 +237,37 @@ class WordLadderEnv(ta.GameEnv):
 
     def on_turn_limit(self) -> ta.Outcome:
         pct_complete = self._get_percentage_completion()
-        reason = f"The turn limit has been reached. You reached `{self.current_word}` which shares {round(pct_complete * 100)}% of its letters with the target `{self.target_word}`."
+        reason = (
+            f"The turn limit has been reached. You reached `{self.current_word}`, closing {round(pct_complete * 100)}% "
+            f"of the start word's ladder distance to the target `{self.target_word}`."
+        )
         return self.outcome({0: pct_complete}, reason=reason)
 
     def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
         return self.outcome({0: self._get_percentage_completion()}, reason=f"Invalid Move: {reason}")
 
+    def _ladder_distances(self, stop_word: str) -> Dict[str, int]:
+        """Fewest moves from accepted words to the target, searching outward from the target until `stop_word` is reached."""
+        distances = {self.target_word: 0}
+        frontier = [self.target_word]
+        while frontier and stop_word not in distances:
+            next_frontier = []
+            for word in frontier:
+                for i in range(len(word)):
+                    for letter in string.ascii_lowercase:
+                        candidate = word[:i] + letter + word[i + 1:]
+                        if candidate not in distances and candidate in self.universal_word_list:
+                            distances[candidate] = distances[word] + 1
+                            next_frontier.append(candidate)
+            frontier = next_frontier
+        return distances
+
     def _get_percentage_completion(self) -> float:
-        """ Compute the percentage of matching letters between current and target word. Returns a float in [0.0, 1.0] """
-        matches = sum(c1 == c2 for c1, c2 in zip(self.current_word, self.target_word))
-        return matches / len(self.target_word)
+        """Share of the start word's ladder distance to the target that the current word has closed: 0.0 to below 1.0."""
+        distances = self._ladder_distances(stop_word=self.start_word)
+        start_distance = distances.get(self.start_word)
+        if not start_distance:
+            return 0.0
+        # Every word closer to the target than the start word was reached before the search stopped.
+        current_distance = distances.get(self.current_word, start_distance)
+        return max(0.0, (start_distance - current_distance) / start_distance)

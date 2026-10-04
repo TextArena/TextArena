@@ -4,6 +4,7 @@ import json
 
 import pytest
 from textarena.envs.ScenarioPlanning.env import ScenarioPlanningEnv
+from textarena.utils.jury import OpenRouterJury
 
 
 class _FakeJury:
@@ -251,6 +252,13 @@ def test_bundled_scenarios_are_unique():
     assert len(env.scenarios) == len({scenario.casefold() for scenario in env.scenarios})
 
 
+def test_default_jury_class_resolves_without_building_a_jury():
+    env = ScenarioPlanningEnv()
+    assert env._jury_class is OpenRouterJury
+    env.reset(num_players=2, seed=42)
+    assert env.judge is None
+
+
 def test_configuration_and_player_bounds_are_validated():
     with pytest.raises(ValueError):
         ScenarioPlanningEnv(jury_class=_FakeJury, jury_size=0)
@@ -261,3 +269,14 @@ def test_configuration_and_player_bounds_are_validated():
         env.reset(num_players=1)
     with pytest.raises(AssertionError):
         env.reset(num_players=3)
+
+
+def test_prompt_explains_single_hidden_submission_and_jury_vote():
+    env = ScenarioPlanningEnv(jury_class=_FakeJury, jury_size=11)
+    env.reset(num_players=2, seed=42)
+    prompt = env.prompt(1)
+    assert "exactly one strategy" in prompt
+    assert "the other player never sees it" in prompt
+    assert "a panel of 11 AI judges" in prompt
+    assert "equal votes are a draw" in prompt
+    assert f"at most {env.max_strategy_chars} characters" in prompt

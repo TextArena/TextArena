@@ -275,6 +275,28 @@ def test_three_pair_uses_third_pair_as_kicker():
     assert env._evaluate_hand(cards) == (3, [14, 13, 12])
 
 
+@pytest.mark.parametrize(
+    "ranks, high",
+    [
+        ([2, 3, 4, 5, 6, 7], 7),           # the highest window, not the first one found
+        ([2, 3, 4, 5, 6, 14], 6),          # a natural six-high straight beats the wheel
+        ([2, 3, 4, 5, 9, 14], 5),          # the wheel is only a fallback
+        ([9, 10, 11, 12, 13, 14], 14),
+    ],
+)
+def test_check_straight_returns_the_highest_straight(ranks, high):
+    assert PokerEnv()._check_straight(ranks) == (True, high)
+
+
+def test_six_high_straight_with_an_ace_splits_with_another_six_high_straight():
+    env = _fresh()
+    hands = {0: [_card("6", "♥"), _card("A", "♣")], 1: [_card("6", "♦"), _card("9", "♦")]}
+    board = [_card("2", "♠"), _card("3", "♦"), _card("4", "♣"), _card("5", "♥"), _card("K", "♠")]
+    _configure_showdown(env, hands, board, contributions={0: 50, 1: 50})
+    env._handle_showdown()
+    assert env.state.game_state["player_chips"] == {0: 50, 1: 50}
+
+
 def test_zero_due_call_emits_game_action_description():
     env = _fresh()
     env.step("call")
@@ -317,6 +339,37 @@ def test_heads_up_board_labels_button_as_small_blind():
     ]
     assert any("P0 (Dealer/SB)" in message for message in board_messages)
     assert any("P1 (BB)" in message for message in board_messages)
+
+
+def test_board_lists_amount_to_call_and_legal_raise_range():
+    env = _fresh()
+    board = env.render(0)
+    assert "To call: 10 | Your options: 'fold', 'call' (10 chips), 'raise N' (N from 20 to 980; 980 is all-in)" in board
+    env.step("call")
+    assert "To call: 0 | Your options: 'check', 'raise N' (N from 20 to 980; 980 is all-in)" in env.render(1)
+
+
+def test_board_offers_no_raise_after_a_short_all_in_that_does_not_reopen_action():
+    env = _fresh(num_players=3)
+    gs = env.state.game_state
+    env.step("call")
+    env.step("call")
+    gs["player_chips"][2] = 5
+    env.step("raise 20")  # P2 is all-in for 25 total, a short raise
+    board = env.render(0)
+    assert "To call: 5 | Your options: 'fold', 'call' (5 chips)" in board
+    assert "raise" not in board.split("Your options:")[1]
+
+
+def test_each_decision_gets_exactly_one_board():
+    env = _fresh(num_rounds=2)
+    start = len(env.state.events)
+    env.step("fold")  # ends hand 1 and deals hand 2
+    boards = [
+        to_id for _, _, observation_type, to_id in env.state.events[start:]
+        if observation_type is ta.ObservationType.GAME_BOARD
+    ]
+    assert boards == [env.state.current_player_id]
 
 
 def test_under_minimum_raise_is_invalid_and_atomic():

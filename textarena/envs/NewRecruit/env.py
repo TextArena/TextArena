@@ -16,6 +16,12 @@ class NewRecruitEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
 
+    # Matched against stripped text (the proposal against the last line only), so
+    # padded or very long input cannot trigger catastrophic backtracking.
+    _DECISION_RE = re.compile(r"\[?\s*(accept|reject)\s*\]?", re.IGNORECASE)
+    _PROPOSE_LINE_RE = re.compile(r"\[?\s*propose(?:\s*\])?\s+(?P<letters>[a-e](?:[ \t]*[a-e]){7})", re.IGNORECASE)
+    _PROPOSE_WORD_RE = re.compile(r"\[?\s*propose\b", re.IGNORECASE)
+
     def __init__(self, max_turns: int = 10, error_allowance: int = 3):
         """
         Initialize the New Recruit environment.
@@ -34,16 +40,6 @@ class NewRecruitEnv(ta.GameEnv):
             raise ValueError("error_allowance must be a non-negative integer")
         self.max_turns = max_turns
         self.error_allowance = error_allowance
-
-        # Define regex patterns for parsing player actions
-        self.accept_pattern = re.compile(r"^\s*\[?\s*Accept\s*\]?\s*$", re.IGNORECASE)
-        self.reject_pattern = re.compile(r"^\s*\[?\s*Reject\s*\]?\s*$", re.IGNORECASE)
-        self.proposal_pattern = re.compile(
-            r"^\s*(?:(?P<rationale>.*\S)\s*\n\s*)?"
-            r"\[?\s*Propose\s*\]?\s+"
-            r"(?P<letters>[A-E](?:[ \t]*[A-E]){7})\s*$",
-            re.IGNORECASE | re.DOTALL,
-        )
 
         # Define the point value dictionary as provided in the task
         self.point_value_dict = {
@@ -136,7 +132,14 @@ class NewRecruitEnv(ta.GameEnv):
                 self.letter_choices[issue][choice] = letter
 
     def get_board_str(self):
-        return create_board_str(game_state=self.state.game_state, player_id=self.state.current_player_id)
+        return self.render(self.state.current_player_id)
+
+    def render(self, player_id: int) -> str:
+        return create_board_str(
+            game_state=self.game_state, player_id=player_id, issues=self.issues,
+            point_value_dict=self.point_value_dict, letter_choices=self.letter_choices,
+            turn=min(self.state.turn + 1, self.max_turns), max_turns=self.max_turns,
+        )
 
     def setup(self) -> Dict[str, Any]:
         return {
@@ -180,7 +183,7 @@ class NewRecruitEnv(ta.GameEnv):
             "The issues are in this order:\n"
             f"{issue_order_str}\n\n"
             "Available actions:\n"
-            f"  - Write your rationale to convince {opponent_role}, followed by a proposal using letter choices:\n"
+            f"  - Write your rationale to convince {opponent_role}, followed by a proposal using letter choices on the last line:\n"
             f"    You may say anything (truths, lies, all in between) to persuade {opponent_role} to accept the proposal.\n"
             "    Example format:\n"
             "    ```\n"
@@ -188,53 +191,45 @@ class NewRecruitEnv(ta.GameEnv):
             "    Propose CCAACCCC\n"
             "    ```\n"
             "    Where each letter corresponds to a choice for each issue in the order listed above.\n"
-            "    You must always propose one letter A-E for each issue, 8 letters in total.\n"
-            "  - Reply with 'Accept' to accept the current proposal.\n"
-            "  - Reply with 'Reject' to reject the current proposal.\n\n"
-            f"The game will end after {self.max_turns} turns if no proposal is accepted, resulting in 0 points for both players.\n"
-            "Your goal is to maximize your points by negotiating effectively."
+            "    You must always propose one letter A-E for each issue, 8 letters in total. A new proposal replaces the one on the table.\n"
+            "  - Reply with exactly 'Accept' to accept the proposal you received; this ends the game.\n"
+            "  - Reply with exactly 'Reject' to reject the proposal you received.\n\n"
+            "Scoring: when a proposal is accepted, each player scores it with their own point table, and the player "
+            "with the higher total wins (equal totals are a draw).\n"
+            f"If no proposal is accepted within {self.max_turns} turns (counting both players' turns), the game ends in a draw."
         )
-
-        # Add information about the current proposal if there is one
-        if game_state["current_proposal"]:
-            proposer_id = game_state["current_proposal"]["proposer_id"]
-            proposer_role = game_state["roles"][proposer_id]
-            proposal_str = self._proposal_to_str(game_state["current_proposal"]["choices"])
-            prompt += f"\n\nCurrent proposal from {proposer_role}:\n{proposal_str}\n"
-            prompt += "You can reply with 'Accept' or 'Reject' for this proposal."
-
         return prompt
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         game_state = self.game_state
+        text = action.strip()
 
-        # Check if the player is accepting a proposal
-        if game_state["current_proposal"] and self.accept_pattern.search(action):
+        decision = self._DECISION_RE.fullmatch(text)
+        if decision:
+            verb = decision.group(1).lower()
+            if not game_state["current_proposal"]:
+                return self.invalid(f"There is no proposal to {verb}. Make one with 'Propose' followed by 8 letters (A-E).")
             if game_state["current_proposal"]["proposer_id"] == player_id:
-                return self.invalid("You cannot accept your own proposal.")
-            return self._accept_proposal(player_id)
-
-        # Check if the player is rejecting a proposal
-        if game_state["current_proposal"] and self.reject_pattern.search(action):
-            if game_state["current_proposal"]["proposer_id"] == player_id:
-                return self.invalid("You cannot reject your own proposal.")
+                return self.invalid(f"You cannot {verb} your own proposal.")
+            if verb == "accept":
+                return self._accept_proposal(player_id)
             self._reject_proposal(player_id)
             return None
 
-        # Check if the player is making a new proposal
-        proposal_match = self.proposal_pattern.fullmatch(action)
+        # Otherwise the last line must be the proposal; everything before it is the rationale.
+        lines = text.splitlines()
+        proposal_match = self._PROPOSE_LINE_RE.fullmatch(lines[-1].strip()) if lines else None
         if not proposal_match:
             return self.invalid(
                 "Invalid action. Please submit 'Propose' followed by 8 letters (A-E), "
                 "or reply with 'Accept'/'Reject' when there's a current proposal."
             )
 
-        rationale_text = (proposal_match.group("rationale") or "").strip()
+        rationale_lines = lines[:-1]
+        rationale_text = "\n".join(rationale_lines).strip()
         if any(
-            self.accept_pattern.fullmatch(line)
-            or self.reject_pattern.fullmatch(line)
-            or re.match(r"^\s*\[?\s*Propose\b", line, re.IGNORECASE)
-            for line in rationale_text.splitlines()
+            self._DECISION_RE.fullmatch(line.strip()) or self._PROPOSE_WORD_RE.match(line.strip())
+            for line in rationale_lines
         ):
             return self.invalid("Submit exactly one decision or proposal command per action.")
 
@@ -264,35 +259,6 @@ class NewRecruitEnv(ta.GameEnv):
 
     def on_turn_limit(self) -> ta.Outcome:
         return self.draw(reason="Maximum number of turns reached without an accepted proposal.")
-
-    def _proposal_to_str(self, proposal: Dict[str, str]) -> str:
-        result = []
-
-        # Add rationale if it exists
-        if self.game_state.get("current_rationale"):
-            result.append(f"Rationale: {self.game_state['current_rationale']}")
-            result.append("")
-
-        # Create letter sequence
-        letter_sequence = ""
-        for issue in self.issues:
-            if issue in proposal:
-                choice = proposal[issue]
-                letter = self.letter_choices[issue].get(choice, "")
-                letter_sequence += letter if letter else "?"
-
-        result.append(f"Letter sequence: Propose {letter_sequence}")
-        result.append("")
-
-        # Add all issues and choices with their letter choices
-        for issue, choice in proposal.items():
-            letter = self.letter_choices[issue].get(choice, "")
-            if letter:
-                result.append(f"- {issue}: {letter}. {choice}")
-            else:
-                result.append(f"- {issue}: {choice}")
-
-        return "\n".join(result)
 
     def _accept_proposal(self, player_id: int) -> ta.Outcome:
         """Accept the current proposal and end the game."""

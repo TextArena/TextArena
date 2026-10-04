@@ -35,10 +35,10 @@ def create_board_str(game_state: Dict[str, Any], player_id: Optional[int] = None
         lines.append("")
     q = game_state.get("current_bid", {"quantity": 0, "face_value": 0}).get("quantity", 0)
     f = game_state.get("current_bid", {"quantity": 0, "face_value": 0}).get("face_value", 0)
-    bid_box = f"""
-┌─────────────────────────┐
-│ Current Bid: {q} × face {f:<2}│
-└─────────────────────────┘
-""".strip()
-    lines.append(bid_box)
+    total = sum(game_state.get("remaining_dice", {}).values())
+    rows = [f"Dice in play: {total}", f"Current bid: {q} × face {f}" if q else "Current bid: none"]
+    width = max(len(row) for row in rows) + 2
+    lines.append("┌" + "─" * width + "┐")
+    lines.extend(f"│ {row.ljust(width - 2)} │" for row in rows)
+    lines.append("└" + "─" * width + "┘")
     return "\n".join(lines)

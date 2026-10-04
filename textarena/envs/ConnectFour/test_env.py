@@ -1,4 +1,6 @@
 """Deterministic game-logic tests for ConnectFour."""
+import re
+
 import pytest
 
 from textarena.envs.ConnectFour.env import ConnectFourEnv
@@ -97,6 +99,22 @@ def test_invalid_format_increments_error_count():
     assert not done and env.state.error_count == 1
 
 
+@pytest.mark.parametrize("num_cols", [7, 15, 3])
+def test_format_error_describes_expected_action(num_cols):
+    env = _fresh(num_cols=num_cols)
+    env.step("no move here")
+    notice = next(message for _, message in env.state.logs if "attempted an invalid move" in message)
+    assert f"Expected {env.action_format}." in notice
+    assert f"a column number from 0 to {num_cols - 1}," in env.action_format
+
+    examples = re.findall(r"'([^']+)'", env.action_format)
+    assert len(examples) == 2
+    for example in examples:
+        fresh = _fresh(num_cols=num_cols)
+        fresh.step(example)
+        assert fresh.state.turn == 1 and fresh.state.error_count == 0
+
+
 def test_illegal_out_of_bounds_column_rejected():
     env = _fresh()
     # Well-formatted but out of range for the default 7-column board.
@@ -122,6 +140,23 @@ def test_illegal_full_column_rejected():
     env.step("0")  # p1 -> col0 top (now full)
     done, _ = env.step("0")  # p0 attempts a full column
     assert not done and env.state.error_count == 1
+
+
+@pytest.mark.parametrize("action", ["\u0663", "\uff11", "col \u0663"])  # Arabic-Indic 3, fullwidth 1
+def test_non_ascii_digits_are_rejected(action):
+    env = _fresh()
+    done, _ = env.step(action)
+    assert not done
+    assert env.state.error_count == 1
+    assert env.state.game_state["move_history"] == []
+
+
+def test_render_lists_columns_that_still_have_room():
+    env = _fresh(num_rows=2, num_cols=3)
+    env.step("0")
+    env.step("0")
+
+    assert env.render(0).rstrip().endswith("Available columns: 1, 2")
 
 
 def test_two_consecutive_invalid_moves_end_game():

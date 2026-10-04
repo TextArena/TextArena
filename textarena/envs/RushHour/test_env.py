@@ -8,13 +8,32 @@ import random
 
 import pytest
 
+import textarena as ta
+from textarena.envs.registration import ENV_REGISTRY
 from textarena.envs.RushHour.env import RushHourEnv, _Vehicle
+
+REGISTERED_IDS = sorted(
+    env_id for env_id, spec in ENV_REGISTRY.items() if spec.entry_point == "textarena.envs.RushHour.env:RushHourEnv"
+)
 
 
 def _fresh(seed=42, **kwargs):
     env = RushHourEnv(**kwargs)
     env.reset(num_players=1, seed=seed)
     return env
+
+
+def _start_from(env, *vehicles):
+    """Replace the generated puzzle with a scripted layout that also counts as the starting position."""
+    env.initial_layout = [vehicle.copy() for vehicle in vehicles]
+    env.game_state["vehicles"] = {vehicle.vid: vehicle.copy() for vehicle in vehicles}
+
+
+def _end_with_invalid_moves(env):
+    env.step("garbage")
+    done, _ = env.step("garbage")
+    assert done
+    return env.state.rewards[0]
 
 
 def test_scripted_win_drives_red_car_out():
@@ -27,6 +46,25 @@ def test_scripted_win_drives_red_car_out():
     done, _ = env.step("X+")  # crosses the board boundary
     assert done
     assert env.state.rewards == {0: 1.0}
+
+
+def test_prompt_explains_directions_and_limit_as_the_rules_apply_them():
+    env = _fresh(max_turns=40)
+    prompt = env.prompt(0)
+    assert "'+' moves a horizontal vehicle right or a vertical vehicle down; '-' moves it left or up." in prompt
+    assert "You have 40 moves." in prompt
+    env.state.game_state["vehicles"] = {
+        "X": _Vehicle("X", 2, 1, 2, True),
+        "A": _Vehicle("A", 0, 4, 2, False),
+    }
+    for action in ("A+", "X+", "A-", "X-"):
+        done, _ = env.step(action)
+        assert not done and env.state.error_count == 0
+        if action == "A+":
+            assert (env.game_state["vehicles"]["A"].row, env.game_state["vehicles"]["A"].col) == (1, 4)
+        if action == "X+":
+            assert env.game_state["vehicles"]["X"].col == 2
+    assert _positions(env) == {"X": (2, 1, 2, True), "A": (0, 4, 2, False)}
 
 
 def test_invalid_format_increments_error():
@@ -158,11 +196,71 @@ def test_oversized_action_is_invalid_without_vehicle_mutation():
 
 def test_turn_limit_returns_partial_reward():
     env = _fresh(max_turns=1)
-    env.game_state["vehicles"] = {"X": _Vehicle("X", 2, 0, 2, True)}
-    done, _ = env.step("X+")
+    _start_from(env, _Vehicle("X", 2, 0, 2, True))  # 5 moves from a solution
+    done, _ = env.step("X+")  # 4 moves left
     assert done
-    assert env.state.rewards == {0: pytest.approx(0.2)}
+    assert env.state.rewards == {0: pytest.approx(1 / 5)}
     assert "limit" in env.state.game_info[0]["reason"].lower()
+
+
+@pytest.mark.parametrize("env_id", REGISTERED_IDS)
+@pytest.mark.parametrize("seed", range(5))
+def test_immediate_invalid_policy_scores_zero_on_registered_configs(env_id, seed):
+    env = ta.make(env_id)
+    env.reset(num_players=1, seed=seed)
+    for _ in range(5):
+        done, _ = env.step("@@@ not a move @@@")
+        if done:
+            break
+    assert done
+    assert env.close()[0] == {0: 0}
+
+
+@pytest.mark.parametrize("difficulty", ["easy", "medium", "hard"])
+@pytest.mark.parametrize("seed", range(8))
+def test_starting_position_scores_zero_even_with_the_red_car_near_the_exit(difficulty, seed):
+    env = _fresh(seed=seed, difficulty=difficulty)
+    assert _end_with_invalid_moves(env) == 0
+
+
+def test_partial_progress_counts_moves_cut_from_the_optimal_solution():
+    env = _fresh(seed=7)
+    solution = _solution(env)
+    assert len(solution) >= 4
+    for action in solution[:3]:
+        done, _ = env.step(action)
+        assert not done
+    assert _end_with_invalid_moves(env) == pytest.approx(3 / len(solution))
+
+
+def test_moving_back_and_forth_or_away_from_the_exit_earns_nothing():
+    env = _fresh()
+    _start_from(env, _Vehicle("X", 2, 2, 2, True), _Vehicle("A", 0, 0, 2, False))  # 3 moves from a solution
+    for action in ("A+", "A-", "X+", "X-", "X-", "A+"):  # ends with X one square further from the exit
+        done, _ = env.step(action)
+        assert not done
+    assert _end_with_invalid_moves(env) == 0
+
+
+def test_partial_credit_follows_the_solver_not_the_red_car_column():
+    env = _fresh()
+    # X is one square from the exit, but truck B blocks it and must drive down three squares first: 5 moves.
+    _start_from(env, _Vehicle("X", 2, 3, 2, True), _Vehicle("B", 0, 5, 3, False))
+    assert env._moves_to_solve(env.game_state["vehicles"]) == 5
+    env.step("X-")  # 6 moves left
+    env.step("X+")  # back to 5
+    env.step("B+")  # 4
+    env.step("B+")  # 3
+    assert _end_with_invalid_moves(env) == pytest.approx(2 / 5)
+
+
+def test_solver_distance_is_exact_and_respects_the_move_limit():
+    env = _fresh()
+    layout = {"X": _Vehicle("X", 2, 0, 2, True)}
+    assert env._moves_to_solve(layout) == 5
+    assert env._moves_to_solve(layout, max_moves=5) == 5
+    assert env._moves_to_solve(layout, max_moves=4) is None
+    assert env._moves_to_solve({"X": _Vehicle("X", 2, 5, 2, True)}) == 0
 
 
 def test_snapshot_restore_recovers_vehicle_objects_and_render():

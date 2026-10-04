@@ -1,4 +1,6 @@
 """Deterministic game-logic tests for Alquerque-v0."""
+import re
+
 from textarena.envs.Alquerque.env import AlquerqueEnv
 
 
@@ -128,6 +130,23 @@ def test_invalid_format_increments_error_count():
     assert env.state.current_player_id == 0  # offender keeps the turn
 
 
+def test_format_error_describes_expected_action():
+    env = _fresh()
+    env.step("not a move at all")
+    notice = next(message for _, message in env.state.logs if "attempted an invalid move" in message)
+    assert f"Expected {env.action_format}." in notice
+
+    red_example, black_example = re.search(
+        r"for example '([^']+)' as Red or '([^']+)' as Black", env.action_format
+    ).groups()
+    # Black's example needs a Red opening that leaves c3 empty and offers no capture.
+    for moves in ([red_example], ["b2 a3", black_example]):
+        fresh = _fresh()
+        for move in moves:
+            fresh.step(move)
+        assert fresh.state.turn == len(moves) and fresh.state.error_count == 0
+
+
 def test_illegal_but_wellformatted_move_rejected():
     env = _fresh()
     # cell 20 = row4,col0 (R) jumping to cell 10 over own piece at row3,col0 -> illegal.
@@ -148,9 +167,82 @@ def test_huge_numeric_coordinate_is_rejected_without_exception():
     assert env.state.game_state["board"] == before
 
 
+def test_non_ascii_digit_cell_ids_are_rejected():
+    env = _fresh()
+    before = [row[:] for row in env.state.game_state["board"]]
+    done, _ = env.step("\u0661\u0667 \u0661\u0662")  # Arabic-Indic "17 12"
+    assert not done
+    assert env.state.error_count == 1
+    assert env.state.game_state["board"] == before
+
+
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     env.step("garbage")
     done, _ = env.step("garbage again")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
+
+
+def test_render_lists_legal_moves_and_scores():
+    env = _fresh()
+    board = env.render(0)
+    assert "Score: Red (Player 0) 0, Black (Player 1) 0" in board
+    listed = board.split("Legal moves: ")[1].strip().split(", ")
+    assert sorted(listed) == sorted(env._legal_moves(0))
+    assert "a2 a3" in listed and "b2 c3" in listed and "a2 b3" not in listed
+    assert "'c4 c3'" in env.prompt(1)
+
+
+def test_legal_moves_are_complete_capture_sequences_when_a_capture_exists():
+    env = _fresh()
+    board = env.state.game_state["board"]
+    _clear(board)
+    board[2][2] = "R"  # c3
+    board[2][1] = "B"  # b3
+    board[3][1] = "B"  # b2
+
+    assert env._legal_moves(0) == ["c3 a3 c1", "c3 a1"]
+    assert env.render(0).rstrip().endswith("Legal moves: c3 a3 c1, c3 a1")
+
+
+def _assert_listed_moves_match_apply(env):
+    pid = env.state.current_player_id
+    listed = set(env._legal_moves(pid))
+    squares = [f"{f}{r}" for f in "abcde" for r in "12345"]
+    candidates = {f"{a} {b}" for a in squares for b in squares} | listed
+    for move in candidates:
+        clone = AlquerqueEnv()
+        clone.restore(env.snapshot())
+        clone.step(move)
+        assert (clone.state.error_count == 0) == (move in listed), move
+
+
+def test_every_listed_move_is_accepted_and_others_are_rejected():
+    env = _fresh()
+    for _ in range(5):
+        _assert_listed_moves_match_apply(env)
+        done, _ = env.step(env._legal_moves(env.state.current_player_id)[0])
+        assert not done and env.state.error_count == 0
+
+    staged = _fresh()
+    board = staged.state.game_state["board"]
+    _clear(board)
+    board[2][2] = "R"  # c3 can capture b3 then b2 (via a3), or b2 diagonally
+    board[2][1] = board[3][1] = board[0][4] = "B"
+    _assert_listed_moves_match_apply(staged)
+
+
+def test_every_move_is_described_with_board_coordinates():
+    env = _fresh()
+    env.step("17 12")
+    board = env.state.game_state["board"]
+    _clear(board)
+    board[2][2] = "R"
+    board[1][1] = "B"  # b4 jumps c3 to land on d2
+    board[0][0] = "B"
+    env.step("b4 d2")
+
+    descriptions = [m for _, m, t, _ in env.state.events if m.startswith("Player")]
+    assert descriptions[0] == "Player 0 (R) moved c2 -> c3."
+    assert descriptions[1] == "Player 1 (B) moved b4 -> d2, capturing 1 piece(s)! (+10)"

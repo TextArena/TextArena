@@ -65,8 +65,7 @@ class IteratedPrisonersDilemmaEnv(ta.GameEnv):
         }
 
     def on_start(self):
-        if self.game_state["phase"] == "decision":
-            self._announce_decision_phase()
+        self._announce_round_start()
 
     def get_board_str(self) -> str:
         return create_board_str(self.game_state)
@@ -85,6 +84,8 @@ class IteratedPrisonersDilemmaEnv(ta.GameEnv):
             f"- Both Defect ➜ each {self.mutual_defect_reward}\n"
             f"- One Defects, one Cooperates ➜ Defector {self.defect_reward}, "
             f"Cooperator {self.sucker_reward}\n\n"
+            f"Winning:\n"
+            f"- Payoffs add up over all rounds. The player with the higher total after the last round wins; equal totals are a draw.\n\n"
             f"How to Play:\n"
             f"- During conversation: type any text you wish.\n"
             f"- During decision phase: reply with just 'cooperate' or 'defect' (case-insensitive).\n"
@@ -108,8 +109,18 @@ class IteratedPrisonersDilemmaEnv(ta.GameEnv):
             case "conversation":    return self._handle_conversation_phase(player_id, action)
             case "decision":        return self._handle_decision_phase(player_id, action)
 
+    def _strip_role_tags(self, text: str) -> str:
+        """Remove sender labels such as '[GAME]' so chat cannot impersonate other senders."""
+        tags = [f"[{role}]" for role in self.state.role_mapping.values()]
+        previous = None
+        while previous != text:
+            previous = text
+            for tag in tags:
+                text = text.replace(tag, "")
+        return text
+
     def _handle_conversation_phase(self, player_id: int, action: str) -> None:
-        self.message(1 - player_id, action.strip(), ta.ObservationType.PLAYER_ACTION, from_id=player_id)
+        self.message(1 - player_id, self._strip_role_tags(action).strip(), ta.ObservationType.PLAYER_ACTION, from_id=player_id)
 
         # advance the conversation counter after the *second* player's turn
         if player_id == 1:
@@ -121,6 +132,11 @@ class IteratedPrisonersDilemmaEnv(ta.GameEnv):
                 self.game_state["phase"] = "decision"
                 self._announce_decision_phase()
         return None
+
+    def _announce_round_start(self) -> None:
+        self.broadcast(f"--- Starting Round {self.game_state['round']} ---", ta.ObservationType.GAME_MESSAGE)
+        if self.game_state["phase"] == "decision":
+            self._announce_decision_phase()
 
     def _announce_decision_phase(self) -> None:
         self.broadcast(
@@ -152,9 +168,7 @@ class IteratedPrisonersDilemmaEnv(ta.GameEnv):
             self.game_state["round"] += 1
             phase = "decision" if self.game_state["total_conversation_rounds"] == 0 else "conversation"
             self.game_state.update({"phase": phase, "conversation_round": 0, "decisions": {0: None, 1: None}})
-            self.broadcast(f"--- Starting Round {self.game_state['round']} ---", ta.ObservationType.GAME_MESSAGE)
-            if phase == "decision":
-                self._announce_decision_phase()
+            self._announce_round_start()
         return None
 
     def _resolve_round(self):

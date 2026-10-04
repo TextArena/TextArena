@@ -18,7 +18,8 @@ class LogicPuzzleEnv(ta.GameEnv):
         Initialize the Logic Puzzle environment with the specified difficulty level.
 
         Args:
-            difficulty (str): The difficulty level of the puzzle (e.g., "easy", "medium", "hard").
+            difficulty (str): The difficulty level of the bundled puzzles, "easy" or "hard".
+            max_turns (int): The maximum number of submissions allowed.
         """
         if not isinstance(difficulty, str) or not difficulty.strip():
             raise ValueError("difficulty must be a non-empty string")
@@ -151,6 +152,16 @@ class LogicPuzzleEnv(ta.GameEnv):
     @property
     def clues(self) -> List[str]: return self.game_state["clues"]
 
+    @property
+    def action_format(self) -> str:
+        grid = next(iter(self.game_board.values()))
+        row = next(iter(grid))
+        col = next(iter(grid[row]))
+        return (
+            "a row label, a column label and the mark X or O, with several marks separated by commas, "
+            f"for example '{row} {col} X'"
+        )
+
     def get_board_str(self):
         return create_board_str(game_state=self.state.game_state)
 
@@ -185,24 +196,29 @@ class LogicPuzzleEnv(ta.GameEnv):
         return game_board, game_board_solution
 
     def prompt(self, player_id: int) -> str:
+        grid_name, grid = next(iter(self.game_board.items()))
+        row = next(iter(grid))
+        col = next(iter(grid[row]))
         return (
             f"You are Player {player_id} in the Logic Puzzle game.\n"
-            "Your goal is to solve the puzzle by correctly assigning items to categories based on the clues provided.\n"
+            "Your goal is to solve the puzzle by deducing from the clues which items belong together.\n"
+            "Each grid pairs two categories: its rows are labeled with the items of one and its columns with the items of the other.\n"
             "\n"
-            "To make a move, specify the row and column for each item in the shown tables, followed by the mark ('X' or 'O').\n"
+            "To make a move, give the row label, then the column label, then the mark ('X' or 'O').\n"
             "Use the format: 'row col X' or 'row col O', where:\n"
-            "- 'O' indicates the item is assigned to the category.\n"
-            "- 'X' indicates the item is not assigned to the category.\n"
+            "- 'O' indicates the row item and the column item belong together.\n"
+            "- 'X' indicates they do not.\n"
             "\n"
-            "Example: To mark an item in the 'people_locations' grid, enter 'park Alice X' or 'park Alice O'.\n"
-            "Only items shown in the current grids can be marked, and you can update a cell if needed.\n"
+            f"Example: to mark a cell in the '{grid_name}' grid, enter '{row} {col} X' or '{row} {col} O'.\n"
+            "Labels are not case-sensitive. Each row and each column of a grid has exactly one 'O'.\n"
+            "The puzzle is solved once every cell of every grid holds the correct mark, including an 'X' in every non-matching cell.\n"
             "\n"
             "Note:\n"
-            "- You may revisit and update previously marked cells as your understanding evolves. As long as the update is a mark that is different from the previous.\n"
-            "- Each move will be recorded in the history.\n"
-            "\n"
-            "You may submit multiple moves separated by commas; the full batch "
-            "is validated before any marks are applied."
+            "- You may change a mark by marking the cell again with the other symbol; repeating a cell's current mark is invalid.\n"
+            "- You may submit multiple marks separated by commas; the full batch is validated before any marks are applied, "
+            "and one invalid mark rejects the whole batch.\n"
+            f"- You have {self.max_turns} turns, and each submission uses one turn.\n"
+            "- An invalid move changes nothing and you may try again, but two invalid moves in a row end the game."
         )
 
     def render(self, player_id: int) -> str:
@@ -244,17 +260,17 @@ class LogicPuzzleEnv(ta.GameEnv):
         action_text = move.strip()
         if action_text.startswith("[") or action_text.endswith("]"):
             if not (action_text.startswith("[") and action_text.endswith("]")):
-                return self.invalid("Invalid move format: mismatched brackets.")
+                return self._format_error("Invalid move format: mismatched brackets.")
             action_text = action_text[1:-1].strip()
         raw_actions = [part.strip() for part in action_text.split(",")]
         action_pattern = re.compile(r"([a-zA-Z]+)\s+([a-zA-Z]+)\s+([XOxo])")
         if not raw_actions or any(not part for part in raw_actions):
-            return self.invalid(f"Invalid move format. Player {player_id} did not respond with a valid 'row col X|O' move.")
+            return self._format_error(f"Invalid move format. Player {player_id} did not respond with a valid 'row col X|O' move.")
         matches = []
         for raw_action in raw_actions:
             match = action_pattern.fullmatch(raw_action)
             if match is None:
-                return self.invalid(
+                return self._format_error(
                     f"Invalid move format. Player {player_id} did not respond "
                     "with comma-separated 'row col X|O' moves."
                 )
@@ -267,6 +283,11 @@ class LogicPuzzleEnv(ta.GameEnv):
             row, col, mark = match
             row, col, mark = row.lower(), col.lower(), mark.upper()
             if not self._is_within_bounds(row, col):
+                if self._is_within_bounds(col, row):
+                    return self.invalid(
+                        f"Invalid move. '{row}' is a column label and '{col}' a row label; "
+                        f"give the row first: '{col} {row} {mark}'."
+                    )
                 return self.invalid(
                     "Invalid move. The item is not within the bounds of the grid."
                 )
@@ -284,13 +305,17 @@ class LogicPuzzleEnv(ta.GameEnv):
             self._mark_item(row, col, mark)
             self.message(
                 player_id,
-                f"'{row} {col} {mark}' is valid.",
+                f"Marked '{row} {col} {mark}'.",
                 ta.ObservationType.GAME_MESSAGE,
             )
 
         if self._is_solved():
             return self.outcome({0: 1}, reason=f"Congratulations! Player {player_id} has solved the logic puzzle!")
         return None
+
+    def _format_error(self, reason: str) -> ta.Invalid:
+        # This game parses in apply() instead of setting action_pattern, so it appends the hint itself.
+        return self.invalid(f"{reason} Expected {self.action_format}.")
 
     def on_turn_limit(self) -> ta.Outcome:
         pct_complete = self._get_percentage_completion()

@@ -9,7 +9,10 @@ import string
 
 import pytest
 
+import textarena.envs.Hangman.env as hangman_module
+import textarena.utils.word_lists as word_lists
 from textarena.envs.Hangman.env import HangmanEnv
+from textarena.utils.word_lists import get_basic_english_words, get_headwords
 
 
 def _fresh():
@@ -74,6 +77,19 @@ def test_invalid_format_does_not_end_game():
     done, _ = env.step("no brackets here")
     assert not done
     assert env.state.error_count == 1
+
+
+def test_format_error_describes_expected_action():
+    env = _fresh()
+    env.step("no brackets here")
+    notice = next(message for _, message in env.state.logs if "attempted an invalid move" in message)
+    assert f"Expected {env.action_format}." in notice
+
+    assert "for example 'L' or 'LIGHT'" in env.action_format
+    for example in ("L", "LIGHT"):
+        fresh = _fresh()
+        fresh.step(example)
+        assert fresh.state.turn == 1 and fresh.state.error_count == 0
 
 
 def test_repeated_letter_is_invalid():
@@ -180,13 +196,30 @@ def test_long_adversarial_word_costs_only_one_try():
     assert env.state.game_state["tries_left"] == 5
 
 
-def test_missing_nltk_corpus_uses_offline_dictionary(monkeypatch):
-    def unavailable(*_args, **_kwargs):
+class _MissingCorpus:
+    def words(self, *args, **kwargs):
         raise LookupError("corpus unavailable")
 
-    monkeypatch.setattr("textarena.envs.Hangman.env.words.words", unavailable)
-    env = HangmanEnv()
+
+@pytest.mark.parametrize("hardcore", [False, True])
+def test_secret_words_do_not_depend_on_the_nltk_corpus(monkeypatch, hardcore):
+    monkeypatch.setattr(word_lists, "words", _MissingCorpus())
+    monkeypatch.setattr(hangman_module, "words", _MissingCorpus(), raising=False)
+    env = HangmanEnv(hardcore=hardcore)
+    source = get_headwords() if hardcore else get_basic_english_words()
+    assert env.word_list == sorted(word for word in source if len(word) >= 3)
     env.reset(num_players=1, seed=2)
-    target = env.state.game_state["target_word"]
-    assert len(target) >= 3
-    assert target.isascii() and target.isalpha()
+    assert env.state.game_state["target_word"] in env.word_list
+
+
+def test_hardcore_secret_words_exclude_proper_nouns():
+    env = HangmanEnv(hardcore=True)
+    assert not {"aaron", "aaronic", "paris", "london"} & set(env.word_list)
+    assert all(word.isascii() and word.isalpha() and word.islower() for word in env.word_list)
+
+
+def test_prompt_says_wrong_words_cost_a_try_and_repeats_are_invalid():
+    env = _fresh()
+    prompt = env.state.events[0][1]
+    assert "every wrong word guess costs one try" in prompt
+    assert "Repeating a letter or word you already guessed is an invalid move" in prompt

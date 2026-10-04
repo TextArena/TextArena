@@ -1,11 +1,15 @@
 """Utils for Word Lists, common to language games. (by Dilan Hillier)"""
 
+import functools
 import importlib.resources
 import re
 from collections import defaultdict
 
 from nltk.corpus import words
 
+# en.aff flags for regular inflections: plural (S), past tense (D), -ing (G),
+# comparative (R) and superlative (T).
+_INFLECTION_FLAGS = frozenset("SDGRT")
 
 
 def _parse_affix_rules(file_content: list[str]):
@@ -69,8 +73,9 @@ class EnglishDictionary:
         # self.uk_words = self.expand(self.uk_words, self.uk_affs)
         self.us_words = self._load_dic("en_US.dic", "en.aff")
         # self.us_words = self.expand(self.us_words, self.us_affs)
-        self.nltk_words = self._load_nltk(basic=False) if include_nltk else set()
-        self.nltk_basic_words = self._load_nltk(basic=True) if include_nltk else set()
+        self.nltk_words = self._load_nltk() if include_nltk else set()
+        # Ogden's Basic English (NLTK's "en-basic"), bundled so it never depends on NLTK data.
+        self.nltk_basic_words = self._filter(set(_load_basic_english()))
 
     def _filter(
         self,
@@ -78,6 +83,10 @@ class EnglishDictionary:
     ) -> set[str]:
         filtered = set()
         for word in word_set:
+            text = word[0] if isinstance(word, tuple) else word
+            # Hunspell lists every letter as an entry; only "a" and "I" are English words.
+            if len(text) == 1 and text.lower() not in {"a", "i"}:
+                continue
             if word[0].isalpha() or self.keep_non_alpha:
                 if word[0].islower() or self.keep_proper_nouns:
                     filtered.add(word)
@@ -184,9 +193,9 @@ class EnglishDictionary:
         all_words = self._filter(all_words)
         return all_words
 
-    def _load_nltk(self, basic: bool) -> set[str]:
+    def _load_nltk(self) -> set[str]:
         try:
-            nltk_words = set(words.words("en-basic") if basic else words.words("en"))
+            nltk_words = set(words.words("en"))
         except LookupError:
             # The bundled UK/US dictionaries keep word games functional offline.
             return set()
@@ -202,5 +211,87 @@ class EnglishDictionary:
         return self.uk_words | self.us_words | self.nltk_words
 
     def get_basic_words(self) -> set[str]:
-        """Get all words in the basic NLTK dictionary as a set"""
+        """Get all words of Ogden's Basic English list (bundled; identical on every machine)"""
         return self.nltk_basic_words
+
+
+@functools.lru_cache(maxsize=None)
+def _load_basic_english() -> tuple[str, ...]:
+    """The 850 words of Ogden's Basic English as shipped in en_basic.txt (exported from NLTK's "en-basic")."""
+    with (
+        importlib.resources.files("textarena.utils.data")
+        .joinpath("en_basic.txt")
+        .open("r", encoding="utf-8") as f
+    ):
+        return tuple(line.strip() for line in f if line.strip())
+
+
+def get_basic_english_words() -> frozenset[str]:
+    """Lowercase alphabetic words of Ogden's Basic English (the pronoun "I" excluded); needs no NLTK data."""
+    return frozenset(word for word in _load_basic_english() if word.isalpha() and word.islower())
+
+
+@functools.lru_cache(maxsize=None)
+def _load_headword_flags(filename: str) -> dict[str, frozenset[str]]:
+    """Map each lowercase ASCII entry of a bundled .dic file to its affix flags."""
+    with (
+        importlib.resources.files("textarena.utils.data")
+        .joinpath(filename)
+        .open("r", encoding="utf-8") as f
+    ):
+        lines = f.readlines()[1:]  # Skip first line (word count)
+    flags = defaultdict(set)
+    for line in lines:
+        word, _, word_flags = line.strip().partition("/")
+        if word.isascii() and word.isalpha() and word.islower():
+            flags[word].update(word_flags)
+    return {word: frozenset(word_flags) for word, word_flags in flags.items()}
+
+
+@functools.lru_cache(maxsize=None)
+def get_blocked_words() -> frozenset[str]:
+    """Slurs, sexual and vulgar terms that games never draw as secret or board words."""
+    with (
+        importlib.resources.files("textarena.utils.data")
+        .joinpath("blocked_words.txt")
+        .open("r", encoding="utf-8") as f
+    ):
+        return frozenset(line.strip() for line in f if line.strip() and not line.startswith("#"))
+
+
+@functools.lru_cache(maxsize=None)
+def get_headwords() -> frozenset[str]:
+    """Base words of the bundled UK and US dictionaries; needs no NLTK data.
+
+    Lowercase ASCII entries of at least three letters that take at least one
+    affix rule. The dictionaries store abbreviations and irregular inflected
+    forms without affix rules, so requiring one drops them (along with a few
+    base words that never inflect).
+    """
+    uk, us = _load_headword_flags("en_GB.dic"), _load_headword_flags("en_US.dic")
+    blocked = get_blocked_words()
+    return frozenset(
+        word
+        for word in uk.keys() | us.keys()
+        if len(word) >= 3 and word not in blocked and (uk.get(word, frozenset()) | us.get(word, frozenset()))
+    )
+
+
+@functools.lru_cache(maxsize=None)
+def get_common_words() -> frozenset[str]:
+    """Common vocabulary from the bundled dictionaries; needs no NLTK data.
+
+    Headwords of three to eight letters that both the UK and the US dictionary
+    list and that take a regular inflection (plural, -ed, -ing, -er or -est):
+    ordinary nouns, verbs and adjectives, without long rare words,
+    abbreviations, or spellings that differ between British and American
+    English. It depends only on the bundled files, so it is identical on
+    every machine.
+    """
+    uk, us = _load_headword_flags("en_GB.dic"), _load_headword_flags("en_US.dic")
+    blocked = get_blocked_words()
+    return frozenset(
+        word
+        for word in uk.keys() & us.keys()
+        if 3 <= len(word) <= 8 and word not in blocked and (uk[word] | us[word]) & _INFLECTION_FLAGS
+    )

@@ -1,8 +1,23 @@
+import functools
+import importlib.resources
+import json
 import re
-from nltk.corpus import words
-from nltk import pos_tag
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Optional, Tuple, Union
 import textarena as ta
+from textarena.utils.word_lists import get_blocked_words
+
+
+@functools.lru_cache(maxsize=None)
+def _bundled_word_lists() -> Dict[str, Tuple[str, ...]]:
+    """Board-word candidates shipped with the env, so boards never depend on NLTK data.
+
+    The lists are the nouns of NLTK's Basic English ("basic") and full English ("hardcore")
+    word lists as tagged by NLTK's part-of-speech tagger, frozen in their original order.
+    """
+    with importlib.resources.files("textarena.envs.Codenames").joinpath("words.json").open("r", encoding="utf-8") as file:
+        data = json.load(file)
+    blocked = get_blocked_words()
+    return {level: tuple(word for word in data[level] if word not in blocked) for level in ("basic", "hardcore")}
 
 
 class CodenamesEnv(ta.GameEnv):
@@ -11,16 +26,6 @@ class CodenamesEnv(ta.GameEnv):
     broadcast_actions = False  # raw clues/guesses are echoed only to their author
     _CLUE_RE = re.compile(r"^\s*\[?\s*([a-z]+)\s+([0-9]{1,2})\s*\]?\s*$", re.IGNORECASE)
     _GUESS_RE = re.compile(r"^\s*\[?\s*([a-z]+)\s*\]?\s*$", re.IGNORECASE)
-    _FALLBACK_WORDS = (
-        "anchor", "apple", "arrow", "badge", "beach", "bear", "bell", "bridge",
-        "brush", "cabin", "camel", "candle", "castle", "chair", "cloud", "crown",
-        "dance", "doctor", "dragon", "drum", "eagle", "engine", "field", "flame",
-        "forest", "giant", "glass", "glove", "grace", "hammer", "heart", "horse",
-        "island", "knife", "lemon", "light", "maple", "moon", "mouse", "needle",
-        "ocean", "olive", "panda", "paper", "pearl", "piano", "pilot", "queen",
-        "river", "robot", "shadow", "shark", "shell", "ship", "snake", "spoon",
-        "star", "stone", "storm", "table", "tiger", "tower", "train", "whale",
-    )
 
     def __init__(self, hardcore: Optional[bool] = False, max_turns: int = 80):
         if not isinstance(hardcore, bool):
@@ -31,13 +36,7 @@ class CodenamesEnv(ta.GameEnv):
         self.max_turns = max_turns
 
     def _load_word_list(self, hardcore: bool = False) -> None:
-        try:
-            word_list = words.words("en-basic" if not hardcore else "en")
-            noun_mask = [tag == "NN" for _, tag in pos_tag(word_list)]
-            candidates = [w.lower() for w, is_noun in zip(word_list, noun_mask) if is_noun]
-        except LookupError:
-            # Importing an environment must never trigger a network download.
-            candidates = list(self._FALLBACK_WORDS)
+        candidates = _bundled_word_lists()["hardcore" if hardcore else "basic"]
         self.word_list = list(dict.fromkeys(
             word for word in candidates
             if word != "pass" and len(word) < 8 and re.fullmatch(r"[a-z]+", word)
@@ -73,19 +72,26 @@ class CodenamesEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         prompt = (
             "You are playing Codenames, a 2v2 word deduction game. Each team (Red and Blue) has a Spymaster and an Operative.\nRules:\n"
-            "1. The Spymaster gives a one-word clue + number (e.g., 'wind 2') based on the team's secret words (the clue may not contain any of the words on the board).\n"
-            "2. The Operative guesses up to N+1 words, one at a time (e.g., 'breeze') based on the clue. They can also 'pass'.\n"
-            "3. Avoid guessing opponent words, neutral words (N), or the Assassin (A), which causes instant loss.\n"
-            "4. First team to guess all their words wins.\n\n"
+            "1. The board has 25 words: 9 Red (R), 8 Blue (B), 7 Neutral (N) and 1 Assassin (A). Only the Spymasters see which is which. Red moves first.\n"
+            "2. The Spymaster gives a clue: one alphabetic word and a number from 1 to 25 (e.g., 'wind 2'). The clue word must not be a board word, contain one, or be contained in one (e.g., 'sea' while 'seal' is on the board); such a clue loses the game immediately.\n"
+            "3. The Operative then guesses one board word at a time (e.g., 'breeze'), up to the number + 1 guesses, or replies 'pass' to end the turn. "
+            "Guessing one of your own words lets you continue; a Neutral or opposing word ends the turn; the Assassin loses the game immediately.\n"
+            "4. A team wins as soon as all of its words are revealed, even if the other team revealed the last one.\n"
+            f"5. After {self.max_turns} moves in total (clues and guesses), the team with more of its words revealed wins; equal counts are a draw.\n\n"
         )
         if player_id in [0, 2]: return prompt + f"You are Player {player_id}, the Spymaster for {'Red' if player_id == 0 else 'Blue'} team. Give a one-word clue and number."
         else:                   return prompt + f"You are Player {player_id}, the Operative for {'Red' if player_id == 1 else 'Blue'} team. Guess words based on the clue."
 
     def render(self, player_id: int) -> str:
+        gs = self.game_state
         view = "Codenames Words:\n"
         for word in list(self.board.keys()):
-            if player_id in [0, 2]: view += f"{word:<8} {self.board[word]} {'revealed' if word in self.game_state['guessed_words'] else ''}\n" # Show the team label for spymasters
-            else:                   view += f"{word:<8} {self.board[word] if word in self.game_state['guessed_words'] else ''}\n"
+            if player_id in [0, 2]: view += f"{word:<8} {self.board[word]} {'revealed' if word in gs['guessed_words'] else ''}\n" # Show the team label for spymasters
+            else:                   view += f"{word:<8} {self.board[word] if word in gs['guessed_words'] else ''}\n"
+        if gs["remaining_guesses"] > 0:
+            guesses = f"{gs['remaining_guesses']} guess{'es' if gs['remaining_guesses'] != 1 else ''}"
+            view += f"Current clue: '{gs['last_clue']} {gs['last_number']}' ({guesses} left this turn)\n"
+        view += f"Moves played: {self.state.turn} of {self.max_turns}\n"
         return view
 
     def _next_player(self, player_id: int, done_guessing: bool=False, skip_guessing: bool=False) -> int:

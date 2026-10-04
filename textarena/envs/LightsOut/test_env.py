@@ -92,6 +92,15 @@ def test_solver_wins_size5():
     assert env.state.rewards == {0: 1.0}
 
 
+@pytest.mark.parametrize("size,example", [(1, "0 0"), (3, "2 2"), (5, "2 3")])
+def test_prompt_example_is_on_the_board(size, example):
+    env = LightsOutEnv(size=size, max_turns=20)
+    env.reset(num_players=1, seed=0)
+    assert f"e.g. '{example}'" in env.prompt(0)
+    env.step(example)
+    assert env.state.error_count == 0 and env.state.turn == 1
+
+
 def test_invalid_format():
     env = _fresh()
     done, _ = env.step("press 0 0")  # not a bare 'row col' action

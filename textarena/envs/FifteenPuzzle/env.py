@@ -12,6 +12,7 @@ class FifteenPuzzleEnv(ta.GameEnv):
         r"^\s*(?P<wrapped>\[)?\s*(?P<direction>[a-zA-Z]+)"
         r"\s*(?(wrapped)\])\s*$"
     )
+    action_format = "one of the directions 'up', 'down', 'left' or 'right'"
 
     def __init__(self, max_turns: int = 50):
         """ Initialize the Fifteen Puzzle environment """
@@ -42,14 +43,15 @@ class FifteenPuzzleEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         return (
             f"You are Player {player_id}. You are playing the 15-Puzzle game.\n"
-            "The objective of the game is to arrange the numbered tiles in ascending order from 1 to 15, with the empty space located in the bottom-right corner.\n"
+            "The objective of the game is to arrange the numbered tiles in ascending order from 1 to 15, read left to right and top to bottom, with the empty space located in the bottom-right corner.\n"
             "To make a move, you can slide a tile into the empty space (represented by a double underscore, e.g. __) by using one of the following commands:\n"
             "- 'up': Move the tile below the empty space up.\n"
             "- 'down': Move the tile above the empty space down.\n"
             "- 'left': Move the tile to the right of the empty space left.\n"
             "- 'right': Move the tile to the left of the empty space right.\n"
-            "To submit your move, reply with the direction, e.g. 'up', 'down', 'left', or 'right'.\n"
-            "The current board layout is shown below. Use the information to solve the puzzle.\n"
+            "To submit your move, reply with the direction, e.g. 'up', 'down', 'left', or 'right'. The moves available on the current board are listed under it.\n"
+            f"You have {self.max_turns} moves to solve the puzzle.\n"
+            "A move that is not available changes nothing and you may try again, but two invalid moves in a row end the game.\n"
         )
 
     def render(self, player_id: int) -> str:
@@ -68,23 +70,31 @@ class FifteenPuzzleEnv(ta.GameEnv):
             [9, 10, 11, 12],
             [13, 14, 15, None],
         ]
+        solved = [row[:] for row in board]
         previous_blank = None
         for _ in range(min(self.max_turns, 100)):
-            empty_row, empty_col = self._find_empty(board)
-            targets = [
-                (empty_row + dr, empty_col + dc)
-                for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1))
-                if 0 <= empty_row + dr < 4 and 0 <= empty_col + dc < 4
-            ]
-            if previous_blank in targets and len(targets) > 1:
-                targets.remove(previous_blank)
-            target_row, target_col = self.rng.choice(targets)
-            board[empty_row][empty_col], board[target_row][target_col] = (
-                board[target_row][target_col],
-                board[empty_row][empty_col],
-            )
-            previous_blank = (empty_row, empty_col)
+            previous_blank = self._random_slide(board, previous_blank)
+        # A walk can loop back to the goal; one more slide leaves a board that is
+        # one move from solved, which is still within the turn limit.
+        if board == solved:
+            self._random_slide(board, previous_blank)
         return board
+
+    def _random_slide(self, board, previous_blank):
+        empty_row, empty_col = self._find_empty(board)
+        targets = [
+            (empty_row + dr, empty_col + dc)
+            for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1))
+            if 0 <= empty_row + dr < 4 and 0 <= empty_col + dc < 4
+        ]
+        if previous_blank in targets and len(targets) > 1:
+            targets.remove(previous_blank)
+        target_row, target_col = self.rng.choice(targets)
+        board[empty_row][empty_col], board[target_row][target_col] = (
+            board[target_row][target_col],
+            board[empty_row][empty_col],
+        )
+        return (empty_row, empty_col)
 
     def _render_board(self, board):
         """ Render the current board layout """
@@ -95,11 +105,12 @@ class FifteenPuzzleEnv(ta.GameEnv):
 
     def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
         direction = move.group("direction").lower()
+        if direction not in ("up", "down", "left", "right"):
+            return self.invalid(f"Unknown direction '{direction}'. Reply with 'up', 'down', 'left', or 'right'.")
         if not self._move(direction):
-            return self.invalid("Invalid move. The tile cannot be moved in the specified direction.")
+            return self.invalid(f"Invalid move. No tile can slide {direction} into the empty space; choose one of the available moves.")
 
         self.game_state["rendered_board"] = self._render_board(self.board)  # update the rendered board
-        self.message(player_id, f"Game Board:\n{self._render_board(self.board)}", ta.ObservationType.GAME_BOARD, from_id=-1)
 
         if self._is_solved():  # check if the puzzle is solved
             return self.outcome({0: 1}, reason=f"Congratulations! Player {player_id} have successfully solved the 15-Puzzle.")
@@ -107,7 +118,7 @@ class FifteenPuzzleEnv(ta.GameEnv):
 
     def on_turn_limit(self) -> ta.Outcome:
         pct_completion = self._get_percentage_completion()
-        return self.outcome({0: pct_completion}, reason=f"The turn limit has been reached. The model completed {pct_completion*100} percent of the puzzle")
+        return self.outcome({0: pct_completion}, reason=f"The turn limit has been reached. The puzzle progress score is {pct_completion:.0%}.")
 
     def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
         return self.outcome({0: self._get_percentage_completion()}, reason=f"Invalid Move: {reason}")
@@ -145,14 +156,17 @@ class FifteenPuzzleEnv(ta.GameEnv):
         raise ValueError("board must contain one empty cell")
 
     def _get_percentage_completion(self) -> float:
+        """Net progress on the positions that started wrong: each one now correct
+        counts +1 and each initially correct position now wrong counts -1, so
+        only a solved board scores 1."""
         goal = list(range(1, 16)) + [None]
-        correct = 0
-        total = 0
+        fixed = broken = total = 0
         flat_current = [tile for row in self.board for tile in row]
         flat_initial = [tile for row in self.game_state["initial_board"] for tile in row]
         for idx, goal_tile in enumerate(goal):
-            if flat_initial[idx] == goal_tile: continue  # Skip tiles that were already in the right place initially
-            total += 1
-            if flat_current[idx] == goal_tile:
-                correct += 1
-        return correct / total if total > 0 else 0.0
+            if flat_initial[idx] == goal_tile:
+                broken += flat_current[idx] != goal_tile
+            else:
+                total += 1
+                fixed += flat_current[idx] == goal_tile
+        return max(0.0, (fixed - broken) / total) if total > 0 else 0.0

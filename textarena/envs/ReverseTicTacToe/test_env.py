@@ -46,6 +46,18 @@ def test_invalid_format_increments_error():
     assert env.state.error_count == 1
 
 
+def test_format_error_describes_expected_action():
+    env = _fresh()
+    env.step("place at four")
+    notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
+    assert f"Expected {env.action_format}." in notices[-1]
+
+    assert "for example '4'" in env.action_format
+    fresh = _fresh()
+    fresh.step("4")
+    assert fresh.state.turn == 1 and fresh.state.error_count == 0
+
+
 def test_occupied_cell_rejected():
     env = _fresh()
     env.step("0")               # P0 -> O at cell 0

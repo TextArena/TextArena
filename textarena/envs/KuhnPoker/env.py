@@ -21,8 +21,12 @@ class KuhnPokerEnv(ta.GameEnv):
         return create_board_str(self.state.game_state)
 
     def render(self, player_id: int) -> str:
-        """Render the acting player's card while keeping the opponent's hidden."""
-        return create_board_str(self.game_state, viewer_id=player_id)
+        """Render the acting player's card (keeping the opponent's hidden) and their legal actions."""
+        board = create_board_str(self.game_state, viewer_id=player_id)
+        if self.state.done:
+            return board
+        legal_actions = ', '.join(f"'{k}'" for k in self.game_state["current_legal_action_tree"].keys())
+        return f"{board}\nYour available actions are: {legal_actions}"
 
     def setup(self) -> Dict[str, Any]:
         return {"pot": None, "player_chips": {0: 0, 1: 0}, "current_round": 0, "starting_player": 0, "deck": [0, 1, 2]}  # 0=J, 1=Q, 2=K
@@ -55,9 +59,6 @@ class KuhnPokerEnv(ta.GameEnv):
         for player_id in range(2):
             message = f"### Starting round {gs['current_round']} out of {self.max_rounds} rounds. Your card is: '{self._rank_to_str(gs['player_cards'][player_id])}'"
             self.message(player_id, message, ta.ObservationType.GAME_MESSAGE)
-            if player_id == starting_player:
-                message = f"Your available actions are: " + ', '.join(f"'{k}'" for k in gs["current_legal_action_tree"].keys())
-                self.message(player_id, message, ta.ObservationType.GAME_BOARD)
         return None
 
     def prompt(self, player_id: int) -> str:
@@ -98,10 +99,7 @@ class KuhnPokerEnv(ta.GameEnv):
             return self._set_round_winner(player_id=1 - player_id, reason=f"Player {player_id} has folded.")
         elif gs["current_legal_action_tree"] == "showdown":
             return self._handle_showdown()
-        else:  # show valid next actions
-            legal_actions = ', '.join([f"'{k}'" for k in gs["current_legal_action_tree"].keys()])
-            self.message(1 - player_id, f"Your available actions are: {legal_actions}", ta.ObservationType.GAME_BOARD)
-            return None
+        return None  # the opponent responds; their board lists the legal actions
 
     def _set_round_winner(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
         gs = self.game_state

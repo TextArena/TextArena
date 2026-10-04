@@ -63,15 +63,22 @@ class MastermindEnv(ta.GameEnv):
         return {"secret_code": code, "guess": [], "code_length": self.code_length, "num_numbers": self.num_numbers, "duplicate_numbers": self.duplicate_numbers, "history": []}
 
     def prompt(self, player_id: int) -> str:
-        game_state = self.game_state
+        example = " ".join(str(i % self.num_numbers + 1) for i in range(self.code_length))
+        repeats = (
+            "Numbers may repeat, in the code and in your guesses."
+            if self.duplicate_numbers
+            else "All numbers in the code are different, and your guesses may not repeat a number either."
+        )
         return (
             f"You are playing Mastermind.\n"
-            f"You need to find the code that is {game_state['code_length']} digits long, each digit from 1 to {game_state['num_numbers']}, "
-            f"{'with possible repeats' if game_state['duplicate_numbers'] else 'with no duplicates'}.\n"
-            "Submit your guess as space-separated digits, e.g. '2 1 4 5'.\n"
+            f"You need to find the secret code: {self.code_length} numbers, each from 1 to {self.num_numbers}. {repeats}\n"
+            f"Submit your guess as {self.code_length} space-separated numbers, e.g. '{example}'.\n"
             "After each guess, you will receive feedback in the form of black and white pegs.\n"
-            "A black peg indicates a correct digit in the correct position, while a white peg indicates a correct digit in the wrong position.\n"
-            f"You have {self.max_turns:.0f} turns to guess the code.\n"
+            "A black peg indicates a correct number in the correct position, while a white peg indicates a correct number in the wrong position.\n"
+            "In the guess history, 🎯 is a black peg, ⚪ is a white peg, and ▫️ is an empty slot.\n"
+            f"You have {self.max_turns} guesses to crack the code.\n"
+            "Repeating an earlier guess or submitting the wrong count or range of numbers is an invalid move. "
+            "It changes nothing and you may try again, but two invalid moves in a row end the game."
         )
 
     def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:

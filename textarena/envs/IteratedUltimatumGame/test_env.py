@@ -161,6 +161,12 @@ def test_fixed_role_renderer_matches_configuration():
     assert "Players alternate as Proposer" not in board
 
 
+@pytest.mark.parametrize("player_id", [0, 1])
+def test_prompt_states_how_the_match_is_won(player_id):
+    prompt = _fresh(max_turns=4).prompt(player_id)
+    assert "the player with more money after the last round wins, and equal totals are a draw" in prompt
+
+
 def test_responder_prompt_does_not_claim_ownership_of_pool():
     env = _fresh()
     prompt = env.prompt(1)

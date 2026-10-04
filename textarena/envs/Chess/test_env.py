@@ -1,9 +1,9 @@
-"""Deterministic game-logic tests for Chess-v0 (backed by python-chess)."""
+"""Deterministic game-logic tests for Chess-v0."""
 import copy
 
-import chess
 import pytest
 
+from textarena.envs.Chess.board import A8, D5, D6, E4, F1, G1, KING, PAWN, QUEEN, ROOK, Board
 from textarena.envs.Chess.env import ChessEnv
 
 
@@ -25,7 +25,7 @@ def test_legal_move_updates_board_and_rotates():
     done, _ = env.step("e2e4")
     assert not done
     board = env.state.game_state["board"]
-    assert board.piece_at(__import__("chess").E4) is not None
+    assert board.piece_at(E4) is not None
     assert env.state.current_player_id == 1
     assert env.state.game_state["valid_moves"] == ", ".join(move.uci() for move in board.legal_moves)
 
@@ -44,6 +44,18 @@ def test_invalid_format_increments_error_count():
     done, _ = env.step("I move my pawn")
     assert not done
     assert env.state.error_count == 1
+
+
+def test_format_error_describes_expected_action():
+    env = _fresh()
+    env.step("I move my pawn")
+    notice = next(message for _, message in env.state.logs if "attempted an invalid move" in message)
+    assert f"Expected {env.action_format}." in notice
+
+    assert "'e2e4'" in env.action_format
+    fresh = _fresh()
+    fresh.step("e2e4")
+    assert fresh.state.turn == 1 and fresh.state.error_count == 0
 
 
 def test_illegal_move_increments_error_count():
@@ -77,8 +89,8 @@ def test_castling_moves_rook_and_king():
         done, _ = env.step(move)
     assert not done
     board = env.state.game_state["board"]
-    assert board.piece_at(chess.G1).piece_type == chess.KING
-    assert board.piece_at(chess.F1).piece_type == chess.ROOK
+    assert board.piece_at(G1).piece_type == KING
+    assert board.piece_at(F1).piece_type == ROOK
 
 
 def test_en_passant_capture():
@@ -87,8 +99,8 @@ def test_en_passant_capture():
         done, _ = env.step(move)
     assert not done
     board = env.state.game_state["board"]
-    assert board.piece_at(chess.D6).piece_type == chess.PAWN
-    assert board.piece_at(chess.D5) is None
+    assert board.piece_at(D6).piece_type == PAWN
+    assert board.piece_at(D5) is None
 
 
 def test_promotion_requires_and_applies_piece_suffix():
@@ -100,7 +112,7 @@ def test_promotion_requires_and_applies_piece_suffix():
     assert board.fen() == before
     done, _ = env.step("a7a8q")
     assert not done
-    assert board.piece_at(chess.A8).piece_type == chess.QUEEN
+    assert board.piece_at(A8).piece_type == QUEEN
 
 
 def test_stalemate_is_draw():
@@ -168,12 +180,12 @@ def test_turn_limit_draw_and_blind_rendering():
     assert blind.render(0) is None
 
 
-def test_snapshot_restore_recovers_python_chess_state():
+def test_snapshot_restore_recovers_board_state():
     env = _fresh()
     snapshot = env.snapshot()
     env.step("e2e4")
     env.restore(snapshot)
-    assert env.state.game_state["board"].fen() == chess.Board().fen()
+    assert env.state.game_state["board"].fen() == Board().fen()
     assert env.state.current_player_id == 0
 
 

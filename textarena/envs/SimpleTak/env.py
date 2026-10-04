@@ -21,18 +21,25 @@ class SimpleTakEnv(ta.GameEnv):
         self.board_size = board_size
         self.cell_mapping = {i: (i // board_size, i % board_size) for i in range(board_size * board_size)}
 
+    @property
+    def action_format(self) -> str:
+        last = self.board_size ** 2 - 1
+        return f"the number of an empty cell from 0 to {last}, for example '{min(2, last)}'"
+
     def setup(self) -> Dict[str, Any]:
         return {"board": [['' for _ in range(self.board_size)] for _ in range(self.board_size)]}
 
     def prompt(self, player_id: int) -> str:
         return (
-            f"You are Player {player_id} in SimpleTak.\n"
+            f"You are Player {player_id} in SimpleTak on a {self.board_size}x{self.board_size} board. Player 0 moves first.\n"
             f"On the board, your stones appear as '{'O' if player_id == 0 else 'X'}' and "
             f"your opponent's stones appear as '{'O' if player_id == 1 else 'X'}'.\n\n"
-            "On your turn, choose one empty cell (by its numbered index) and place your stone there.\n"
-            "For example, '12' places your stone in cell 12.\n\n"
+            f"On your turn, choose one empty cell by its number (0 to {self.board_size ** 2 - 1}, counted left to right and top to bottom) "
+            "and place your stone there. Empty cells show their number on the board.\n"
+            "For example, '2' places your stone in cell 2.\n\n"
             "Your objective is to form a continuous path of your stones that connects two opposite edges of the board "
-            "(top-to-bottom or left-to-right)."
+            "(top-to-bottom or left-to-right). Stones connect only horizontally or vertically, not diagonally.\n"
+            "The first player to complete such a path wins. If the board fills up without one, the game is a draw."
         )
 
     def render(self, player_id: int) -> str:

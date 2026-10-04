@@ -37,6 +37,7 @@ class CrusadeEnv(ta.GameEnv):
         r"(?P<target>[a-hA-H][1-8]|[0-9]+)\s*"
         r"(?(bracket)\])\s*$"
     )
+    action_format = "a move 'from to' in board coordinates, for example 'b1 c3' as White or 'b8 c6' as Black"
 
     def __init__(self):
         self.CELL_TO_RC = {i: (i // self.BOARD_N, i % self.BOARD_N) for i in range(self.BOARD_N ** 2)}
@@ -54,15 +55,21 @@ class CrusadeEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         piece = 'W' if player_id == 0 else 'B'
         opp = 'B' if player_id == 0 else 'W'
+        example = 'b1 c3' if player_id == 0 else 'b8 c6'
         return (
-            f"You are Player {player_id} ({piece}). Opponent is ({opp}). Submit moves as 'b1 c3' (from → to). All pieces move like chess knights.\n"
-            f"Each capture scores {self.SCORE_PER_CAPTURE} point. Game ends after {self.MAX_MOVES} moves or when a player has no legal move / no pieces. Higher score wins."
+            f"You are Player {player_id} ({piece}). Opponent is ({opp}). Submit moves as '{example}' (from → to). All pieces move like chess knights.\n"
+            "White (Player 0) starts on ranks 1-2 and moves first; Black (Player 1) starts on ranks 7-8. Files a-h run left to right, ranks 1-8 bottom to top. "
+            "A piece may jump over other pieces and may land on an empty square or on an enemy piece, capturing it.\n"
+            f"Each capture scores {self.SCORE_PER_CAPTURE} point. Capturing every enemy piece wins at once. Otherwise the game ends after "
+            f"{self.MAX_MOVES} moves in total ({self.MAX_MOVES // 2} per player): higher score wins, equal scores draw."
         )
 
     def render(self, player_id: int) -> str:
+        gs = self.game_state
         return (
-            f"Move #{self.game_state['move_count']}\n\n{self._render_board()}\n\nAvailable Moves: "
-            + ", ".join(self._legal_moves_for_player(player_id))
+            f"Move #{gs['move_count']}\n\n{self._render_board()}\n\n"
+            f"Score: White (Player 0) {gs['score'][0]}, Black (Player 1) {gs['score'][1]} | Moves left: {self.MAX_MOVES - gs['move_count']}\n"
+            "Available Moves: " + ", ".join(self._legal_moves_for_player(player_id))
         )
 
     def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
@@ -82,7 +89,7 @@ class CrusadeEnv(ta.GameEnv):
         if (dr, dc) not in self.KNIGHT_DIRS: return self.invalid("Not a knight move.")
 
         # Handle capture
-        message = f"Player {player_id} moved their piece from {move.group('source')} to {move.group('target')}."
+        message = f"Player {player_id} moved their piece from {rc_to_coord(fr, fc)} to {rc_to_coord(tr, tc)}."
         if board[tr][tc] == ('B' if player_id == 0 else 'W'):
             self.game_state["score"][player_id] += self.SCORE_PER_CAPTURE
             message += f" Capturing a piece! (+{self.SCORE_PER_CAPTURE})"

@@ -1,11 +1,9 @@
 import re
 from typing import Any, Dict, Union
 
-from nltk.corpus import words
-
 import textarena as ta
 from textarena.envs.WordChains.renderer import create_board_str
-from textarena.utils.word_lists import EnglishDictionary
+from textarena.utils.word_lists import EnglishDictionary, get_basic_english_words
 
 
 class WordChainsEnv(ta.GameEnv):
@@ -15,23 +13,11 @@ class WordChainsEnv(ta.GameEnv):
 
     def __init__(self):
         self.dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=True)
-        try:
-            source_words = words.words("en-basic")
-        except LookupError:
-            source_words = self.dictionary.get_basic_words() or self.dictionary.get_all_words()
-        basic_words = sorted(
-            {
-                word.lower()
-                for word in source_words
-                if isinstance(word, str)
-                and word.isascii()
-                and word.isalpha()
-                and len(word) <= 5
-            }
-        )
+        basic_words = sorted(word for word in get_basic_english_words() if len(word) <= 5)
+        # Only the bundled lists, so the starting words do not depend on whether NLTK data is installed.
         next_shapes = {
             (word[0], len(word))
-            for word in self.dictionary.get_all_words()
+            for word in self.dictionary.uk_words | self.dictionary.us_words
             if word and word.isascii() and word.isalpha()
         }
         # Never start from a word for which the first player has no legal move.

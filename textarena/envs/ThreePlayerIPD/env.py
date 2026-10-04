@@ -6,15 +6,23 @@ from typing import Any, Dict, Optional, Tuple, Union
 import textarena as ta
 
 
+def _is_renderable(value: Any) -> bool:
+    try:
+        str(value)
+    except (OverflowError, ValueError):
+        return False
+    return True
+
+
 class ThreePlayerIPDEnv(ta.GameEnv):
     min_players = 3
     max_players = 3
     broadcast_actions = False  # raw actions echoed only to their author; chat is re-broadcast cleaned
 
     def __init__(self, num_rounds: int=5, communication_turns: int=3, cooperate_reward: int=3, defect_reward: int=5, sucker_reward: int=0, mutual_defect_reward: int=1):
-        if isinstance(num_rounds, bool) or not isinstance(num_rounds, int) or num_rounds < 1:
+        if isinstance(num_rounds, bool) or not isinstance(num_rounds, int) or num_rounds < 1 or not _is_renderable(num_rounds):
             raise ValueError("num_rounds must be a positive integer")
-        if isinstance(communication_turns, bool) or not isinstance(communication_turns, int) or communication_turns < 0:
+        if isinstance(communication_turns, bool) or not isinstance(communication_turns, int) or communication_turns < 0 or not _is_renderable(communication_turns):
             raise ValueError("communication_turns must be a non-negative integer")
         payoffs = {
             "cooperate_reward": cooperate_reward,
@@ -26,6 +34,7 @@ class ThreePlayerIPDEnv(ta.GameEnv):
             isinstance(value, bool)
             or not isinstance(value, (int, float))
             or (isinstance(value, float) and not math.isfinite(value))
+            or not _is_renderable(value)
             for value in payoffs.values()
         ):
             raise ValueError("payoff values must be finite numbers")
@@ -58,17 +67,20 @@ class ThreePlayerIPDEnv(ta.GameEnv):
 
     def prompt(self, player_id: int) -> str:
         gs = self.game_state
+        first, second = [pid for pid in range(self.state.num_players) if pid != player_id]
         return (
             f"You are Player {player_id} in a 3-player Iterated Prisoner's Dilemma. The match lasts {gs['num_rounds']} rounds.\n"
             f"Round structure:\n"
             f"• {gs['total_conversation_rounds']} free-chat turns\n"
-            f"• 1 decision turn - submit one token per opponent: '<opp-id> cooperate' or '<opp-id> defect' (i.e. '1 defect 2 cooperate'; the default is 'cooperate'). \n"
+            f"• 1 decision turn - submit one token per opponent: '<opp-id> cooperate' or '<opp-id> defect' (i.e. '{first} defect {second} cooperate'; the default is 'cooperate'). \n"
             f"Pair-wise payoff matrix (applied to each unordered pair):\n"
             f"  - Both cooperate  ->  {self.R}\n"
             f"  - Both defect     ->  {self.P}\n"
             f"  - You defect, they cooperate -> {self.T}\n"
             f"  - You cooperate, they defect -> {self.S}\n"
-            f"The player(s) with the highest score at the end of all rounds wins.\n"
+            "Rewards follow the final ranking by total score: highest +1, lowest -1, middle 0. "
+            "Two players tied ahead of the third both get +1, two tied behind both get -1, and a three-way tie gives everyone 0.\n"
+            "Two invalid moves in a row forfeit the match: you get -1 and both opponents get +1.\n"
         )
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
@@ -76,7 +88,10 @@ class ThreePlayerIPDEnv(ta.GameEnv):
             case "conversation":    return self._conversation_phase(player_id, msg=action)
             case "decision":        return self._decision_phase(player_id, msg=action)
 
-    def _clean_message(self, msg: str) -> str: return re.sub(r"\s+", " ", msg)
+    def _clean_message(self, msg: str) -> str:
+        """Collapse whitespace and remove sender labels such as '[GAME]' so chat cannot impersonate other senders."""
+        # Strip again after collapsing whitespace, which can turn '[Player\n1]' into a label.
+        return self.strip_role_tags(re.sub(r"\s+", " ", self.strip_role_tags(msg)))
 
     def _conversation_phase(self, cid: int, msg: str) -> None:
         # broadcast chat to others

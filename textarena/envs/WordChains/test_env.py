@@ -10,6 +10,13 @@ import copy
 
 from textarena.envs.WordChains.env import WordChainsEnv
 from textarena.envs.WordChains.renderer import create_board_str
+from textarena.utils import word_lists
+from textarena.utils.word_lists import get_basic_english_words
+
+
+class _MissingCorpus:
+    def words(self, *_args, **_kwargs):
+        raise LookupError("corpus unavailable")
 
 
 def _fresh():
@@ -149,12 +156,19 @@ def test_renderer_order_is_stable_for_equal_length_words():
     assert board.index("- ape") < board.index("- cat") < board.index("- dog")
 
 
-def test_missing_nltk_corpus_uses_offline_dictionary(monkeypatch):
-    def unavailable(*_args, **_kwargs):
-        raise LookupError("corpus unavailable")
+def test_starting_words_are_identical_with_and_without_nltk(monkeypatch):
+    def starting_words():
+        env = WordChainsEnv()
+        picks = []
+        for seed in range(10):
+            env.reset(num_players=2, seed=seed)
+            assert _find_valid_word(env) is not None
+            picks.append(env.state.game_state["current_word"])
+        return env.word_list, picks
 
-    monkeypatch.setattr("textarena.envs.WordChains.env.words.words", unavailable)
-    env = WordChainsEnv()
-    env.reset(num_players=2, seed=4)
-    assert env.word_list
-    assert _find_valid_word(env) is not None
+    with_nltk = starting_words()
+    assert set(with_nltk[0]) <= get_basic_english_words()
+    monkeypatch.setattr(word_lists, "words", _MissingCorpus())
+    word_lists._load_basic_english.cache_clear()
+    assert WordChainsEnv().dictionary.nltk_words == set()
+    assert starting_words() == with_nltk

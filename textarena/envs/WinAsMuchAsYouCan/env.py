@@ -18,10 +18,17 @@ class WinAsMuchAsYouCanEnv(ta.GameEnv):
     - Point scoring based on X/Y distribution
     - Communication phases with public/private messaging
     - Scoring multipliers: 1x (rounds 1-4,6-7,9), 3x (round 5), 5x (round 8), 10x (round 10)
+    - A player who exceeds the error allowance has their pending decision made for
+      them (DEFAULT_TALK_ACTION or DEFAULT_ACT_ACTION), so every game finishes
     """
 
     min_players = 4
     max_players = 4
+
+    # Choose X strictly dominates Choose Y in every round, so the forced default
+    # never beats the offender's best valid move.
+    DEFAULT_TALK_ACTION = "Pass"
+    DEFAULT_ACT_ACTION = "Choose Y"
 
     def __init__(self, error_allowance: int = 3):
         """
@@ -111,6 +118,9 @@ ACT PHASE RULES:
 - Choose your action: 'Choose X' or 'Choose Y'
 - All players choose simultaneously
 - Round scored when all choices collected
+
+INVALID MOVES:
+- After {self.error_allowance + 1} invalid moves in a row, '{self.DEFAULT_TALK_ACTION}' (talk phase) or '{self.DEFAULT_ACT_ACTION}' (act phase) is applied for you
 """
 
     def render(self, player_id: int) -> str:
@@ -125,10 +135,16 @@ ACT PHASE RULES:
         return None
 
     def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
-        # Players are never removed from play: the offender keeps their turn and
-        # must still submit a valid action (matching the legacy behavior where
-        # "elimination" had no effect on this game).
-        return None
+        # Only the offender is told which default was applied, so act-phase
+        # choices stay secret until the round is scored.
+        default = self.DEFAULT_TALK_ACTION if self.game_state["current_phase"] == "talk" else self.DEFAULT_ACT_ACTION
+        self.message(
+            player_id,
+            f"Player {player_id} attempted an invalid move. Reason: {reason} "
+            f"After {self.error_allowance + 1} invalid moves in a row, '{default}' was applied for you.",
+            ta.ObservationType.GAME_ADMIN,
+        )
+        return self.apply(player_id, default)
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         if self.game_state["current_phase"] == "talk":
@@ -146,7 +162,7 @@ ACT PHASE RULES:
         pass_match = self.pass_pattern.search(action)
 
         if broadcast_match:
-            message = broadcast_match.group(1).strip()
+            message = self.strip_role_tags(broadcast_match.group(1)).strip()
             if not message:
                 return self.invalid("Broadcast message cannot be empty")
             self.broadcast(f"Player {player_id} (Broadcast): {message}", ta.ObservationType.GAME_ACTION_DESCRIPTION)
@@ -156,7 +172,7 @@ ACT PHASE RULES:
             })
         elif whisper_match:
             target_str = whisper_match.group(1)
-            message = whisper_match.group(2).strip()
+            message = self.strip_role_tags(whisper_match.group(2)).strip()
             try:
                 target_id = int(target_str)
             except ValueError:
@@ -314,17 +330,24 @@ ACT PHASE RULES:
     def _end_game(self) -> ta.Outcome:
         gs = self.game_state
         final_scores = gs["player_scores"]
-        max_score = max(final_scores.values())
-        winners = [pid for pid, score in final_scores.items() if score == max_score]
+        # A player whose move ever had to be forced cannot share the win; otherwise
+        # four players sending nothing but garbage would "cooperate" their way to +1.
+        contenders = [pid for pid in range(4) if not self.state.game_info[pid]["invalid_move"]]
+        max_score = max((final_scores[pid] for pid in contenders), default=None)
+        winners = [pid for pid in contenders if final_scores[pid] == max_score]
 
         self.broadcast("GAME OVER - Final Scores:", ta.ObservationType.GAME_ACTION_DESCRIPTION)
         for player_id in range(4):
             self.broadcast(f"Player {player_id}: {final_scores[player_id]} points", ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-        if len(winners) == 1:
+        if not winners:
+            reason = "Every player had a move forced after repeated invalid moves, so nobody wins."
+        elif len(winners) == 1:
             reason = f"Player {winners[0]} wins with {max_score} points!"
         else:
             reason = f"Tie between players {winners} with {max_score} points each!"
+        if winners and len(contenders) < 4:
+            reason += f" Players {[pid for pid in range(4) if pid not in contenders]} had moves forced and cannot win."
 
         # Highest score wins even when every score is non-positive.
         rewards = {pid: (1 if pid in winners else -1) for pid in range(4)}

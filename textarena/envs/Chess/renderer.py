@@ -1,13 +1,14 @@
-import chess
 from typing import Optional
 
-def create_board_str(board: chess.Board, player_id: Optional[int] = None) -> str:
+from textarena.envs.Chess.board import Board, parse_square
+
+def create_board_str(board: Board, player_id: Optional[int] = None) -> str:
     piece_symbols = {'r': '♜', 'n': '♞', 'b': '♝', 'q': '♛', 'k': '♚', 'p': '♟', 'R': '♖', 'N': '♘', 'B': '♗', 'Q': '♕', 'K': '♔', 'P': '♙'}
     squares = {}
     for file_char in "abcdefgh":
         for rank_char in "12345678":
             square_name = f"{file_char}{rank_char}"
-            piece = board.piece_at(chess.parse_square(square_name))
+            piece = board.piece_at(parse_square(square_name))
             squares[square_name] = piece_symbols[piece.symbol()] if piece else " "
 
     board_template = f"""

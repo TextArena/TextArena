@@ -71,6 +71,7 @@ class GameState:
         }
         self.eliminated: List[int] = []  # in order of elimination
         self.error_count: int = 0  # consecutive invalid moves by the current player
+        self.retry_count: int = 0  # consecutive actions an external service could not process
         self.next_player_override: Optional[int] = None
 
         self.events: List[Event] = []
@@ -150,6 +151,10 @@ class GameEnv(Env):
     broadcast_actions: bool = True
     error_allowance: int = 1
     max_action_chars: int = 32_768
+    max_consecutive_retries: int = 5  # Retryable results in a row before step() raises
+    # Noun phrase describing a valid action, appended to format errors when action_pattern does not match,
+    # e.g. "a cell number from 0 to 8, for example '4'". May be overridden per instance or as a property.
+    action_format: Optional[str] = None
     snapshot_excluded_attributes: Tuple[str, ...] = ()
 
     max_turns: Optional[int] = None  # usually set in __init__ from registry kwargs
@@ -274,6 +279,24 @@ class GameEnv(Env):
         """Record a (possibly secret) role in game_info, e.g. for RL training."""
         self.state.game_info[player_id]["role"] = role
 
+    def strip_role_tags(self, text: str) -> str:
+        """Remove sender labels such as ``[GAME]`` or ``[Player 1]`` from player-written text.
+
+        Use this before relaying chat so a player cannot impersonate the game or
+        another player. Nested attempts like ``[GA[GAME]ME]`` are removed too.
+        """
+        tags = [f"[{role}]" for role in self.state.role_mapping.values() if role]
+        kept: List[str] = []
+        for char in text:
+            kept.append(char)
+            if char != "]":
+                continue
+            for tag in tags:
+                if len(kept) >= len(tag) and "".join(kept[-len(tag):]) == tag:
+                    del kept[-len(tag):]
+                    break
+        return "".join(kept)
+
     # -------------------------------------------------------------- Env API
     def reset(self, num_players: int, seed: Optional[int] = None):
         assert num_players >= self.min_players and (self.max_players is None or num_players <= self.max_players), (
@@ -309,24 +332,47 @@ class GameEnv(Env):
             self._send_render()
             return self.state.done, self._drain_step_info()
 
-        # echo the raw action into the observation stream
+        # Surrounding whitespace is never meaningful, and long whitespace runs make
+        # patterns like r"^\s*\[?\s*(...)\s*\]?\s*$" backtrack quadratically.
+        action = action.strip()
+
+        # The echo target depends on the phase before the action is applied.
         echo_target = self.action_echo_target(pid, action)
-        if echo_target is not None:
-            echoed = action
-            for role_tag in self.state.role_mapping.values():
-                echoed = echoed.replace(f"[{role_tag}]", "")
-            self.state.add_event(pid, echoed, ObservationType.PLAYER_ACTION, to_id=echo_target)
+        echo_index = len(self.state.events)
 
         # parse and apply
         if self.action_pattern is not None:
-            match = re.search(self.action_pattern, action, re.DOTALL)
-            result = self.apply(pid, match) if match is not None else Invalid("The submitted move does not follow the correct format.")
+            # action_pattern games take single-line commands, so whitespace runs carry no meaning.
+            match = re.search(self.action_pattern, " ".join(action.split()), re.DOTALL)
+            if match is not None:
+                result = self.apply(pid, match)
+            else:
+                reason = "The submitted move does not follow the correct format."
+                result = Invalid(f"{reason} Expected {self.action_format}." if self.action_format else reason)
         else:
             result = self.apply(pid, action)
 
+        # The echo goes before anything apply() emitted. Rejected or unprocessed actions are
+        # shown only to their author, so an invalid move is never a free-text channel to others.
+        if echo_target is not None:
+            if isinstance(result, (Invalid, Retryable)):
+                echo_target = pid
+            self.state.events.insert(
+                echo_index, (pid, self.strip_role_tags(action), ObservationType.PLAYER_ACTION, echo_target)
+            )
+
+        if not isinstance(result, Retryable):
+            self.state.retry_count = 0
         if isinstance(result, Invalid):
             self._handle_invalid(pid, result.reason)
         elif isinstance(result, Retryable):
+            self.state.retry_count += 1
+            if self.state.retry_count > self.max_consecutive_retries:
+                # A dead service would otherwise ask the player to retry forever.
+                raise RuntimeError(
+                    f"{type(self).__name__} could not process {self.state.retry_count} actions in a row "
+                    f"because an external service is unavailable. Last reason: {result.reason}"
+                )
             self.message(
                 pid,
                 f"The action could not be processed and was not counted. Please retry. Reason: {result.reason}",

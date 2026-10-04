@@ -105,37 +105,60 @@ class SantoriniBaseFixedWorkerEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         """Generate the initial prompt for a player."""
         color = self.PLAYER_COLORS[player_id]
+        num_players = self.state.num_players
+        example = self._get_valid_moves(player_id).split(", ")[0]
+        if num_players == 2:
+            blocked_rule = "   - Win if your opponent cannot make a legal turn (a move followed by a build)\n\n"
+        else:
+            blocked_rule = (
+                "   - A player who cannot make a legal turn (a move followed by a build), or who makes too many invalid moves in a row, "
+                "is eliminated and their workers are removed; the last player remaining wins\n\n"
+            )
         prompt = (
-            f"You are playing {color} in a game of Santorini.\n\n"
+            f"You are playing {color} in a game of Santorini with {num_players} players. "
+            f"Turn order: {', '.join(self.PLAYER_COLORS[:num_players])}.\n\n"
+            "The board is a 5x5 grid: rows are lettered A-E from top to bottom and columns are numbered 1-5 from left to right. "
+            "Each player has two workers, written as the first letter of their color plus 1 or 2 (Navy N1/N2, White W1/W2, Grey G1/G2).\n\n"
             "Game Rules:\n"
             "1. Movement:\n"
-            "   - Workers can only move to adjacent squares (including diagonals)\n"
+            "   - On your turn, move one of your workers to an adjacent square (including diagonals)\n"
             "   - Cannot move to squares occupied by other workers or domes\n"
             "   - Can move up maximum one level, but can move down any number of levels\n\n"
             "2. Building:\n"
-            "   - Must build in a square adjacent to where your worker moved to\n"
+            "   - Then build with the worker you moved, on a square adjacent to its new position (the square it just left counts)\n"
             "   - Cannot build where any worker is standing\n"
             "   - Cannot build on top of a dome (level 4)\n"
             "   - Building adds one level (or creates a dome on level 3)\n\n"
             "3. Win Conditions:\n"
-            "   - Win by moving up from level 2 to level 3; the turn ends before building\n"
-            "   - Win if opponent has no valid moves\n\n"
+            "   - Win by moving up from level 2 to level 3; the turn ends before building, so the build square may be left out\n"
+            f"{blocked_rule}"
             "Make your move in the format 'worker_id source dest build', written as one token.\n"
-            f"Example: {color[0]}1C1C2B2 means move {color} worker 1 from C1 to C2 and build at B2\n"
+            f"Example: {example} means move {color} worker {example[1]} from {example[2:4]} to {example[4:6]} and build at {example[6:8]}\n"
+            f"After more than {self.error_allowance} invalid moves in a row you lose{'' if num_players == 2 else ' (you are eliminated)'}.\n"
         )
-
-        if self.is_open:
-            prompt += f"\nCurrent board state:\n{create_board_str(self.board)}\n"
-
-        if self.show_valid:
-            prompt += f"\nValid moves: {self.game_state['valid_moves']}"
-
+        if not self.is_open:
+            prompt += "The board is not shown in this game: keep track of it from the announced moves.\n"
         return prompt
 
     def render(self, player_id: int) -> Optional[str]:
+        parts = []
         if self.is_open:
-            return create_board_str(self.board)
-        return None
+            parts.append(create_board_str(self.board))
+        if self.show_valid and not self.state.done:
+            parts.append(f"Valid moves: {self._get_valid_moves(player_id)}")
+        return "\n".join(parts) if parts else None
+
+    def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
+        if len(self.state.alive_players) <= 2:
+            self.game_state["valid_moves"] = ""
+            return super().on_invalid_limit(player_id, reason)
+        self.eliminate(player_id)
+        self._remove_workers(player_id)
+        self.broadcast(
+            f"Player {player_id} ({self.PLAYER_COLORS[player_id]}) was eliminated for repeated invalid moves, and their workers were removed.",
+            ta.ObservationType.GAME_ADMIN,
+        )
+        return self._advance_or_eliminate_blocked(player_id)
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         match = self.move_pattern.search(action.strip())

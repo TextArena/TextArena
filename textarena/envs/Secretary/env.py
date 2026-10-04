@@ -15,7 +15,8 @@ class SecretaryEnv(ta.GameEnv):
         self.action_space = re.compile(r'\[?\s*(accept|continue)\s*\]?', re.IGNORECASE)
 
     def setup(self) -> Dict[str, Any]:
-        return dict(draws=[self.rng.random() for _ in range(self.N)], accepted_idx=None, current_idx=0)
+        # Values are kept at the 4 decimals shown to the player, so the comparisons they see are exact.
+        return dict(draws=[round(self.rng.random(), 4) for _ in range(self.N)], accepted_idx=None, current_idx=0)
 
     def prompt(self, player_id: int) -> str:
         return (
@@ -39,10 +40,17 @@ class SecretaryEnv(ta.GameEnv):
         self._show_next_value()
         return None
 
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome({0: 0.0}, reason=f"Invalid Move: {reason}")
+
     def _show_next_value(self):
-        if self.game_state["current_idx"] >= self.N:
+        idx = self.game_state["current_idx"]
+        if idx >= self.N:
             raise RuntimeError("No unrevealed secretary values remain")
-        self.broadcast(f"The current value is {self.game_state['draws'][self.game_state['current_idx']]:.4f}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        message = f"The current value ({idx + 1} of {self.N}) is {self.game_state['draws'][idx]:.4f}."
+        if idx == self.N - 1:
+            message += " This is the final value: you get it whether you reply 'accept' or 'continue'."
+        self.broadcast(message, ta.ObservationType.GAME_ACTION_DESCRIPTION)
         self.game_state['current_idx'] += 1
 
     def _resolve(self, accepted_at: int) -> ta.Outcome:

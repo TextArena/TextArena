@@ -133,13 +133,22 @@ def test_randomized_prompt_names_actual_endpoints():
 
 
 def test_turn_limit_uses_closeness_and_counts_only_valid_moves():
-    env = _fresh(num_holes=0, max_turns=2)
-    done, _ = env.step("right")
-    assert not done
+    env = _fresh(num_holes=0, max_turns=6)
+    for move in ["right", "left"] * 2 + ["up", "right"]:  # 'up' hits the wall and does not count
+        done, _ = env.step(move)
+        assert not done
     done, _ = env.step("left")
     assert done
+    assert env.state.turn == 6
     assert env.state.rewards == {0: 0.0}
     assert "turn limit" in env.state.game_info[0]["reason"].lower()
+
+
+def test_prompt_states_coordinates_walls_and_move_limit():
+    prompt = _fresh(max_turns=40).prompt(0)
+    assert "goal at (3, 3) (row, column)" in prompt
+    assert "moving off the grid is an invalid move" in prompt
+    assert "You have 40 moves." in prompt
 
 
 def test_hole_loss_is_terminal_and_render_identifies_hole():
@@ -184,6 +193,8 @@ def test_oversized_action_is_invalid_without_moving():
         {"num_holes": -1},
         {"size": 4, "num_holes": 10},
         {"max_turns": 0},
+        {"size": 4, "max_turns": 5},
+        {"size": 60},  # the default 100 moves cannot cover the 118-step shortest path
         {"randomize_start_goal": "yes"},
         {"size": 101},
     ],

@@ -86,16 +86,21 @@ class MinesweeperEnv(ta.GameEnv):
         return game_state
 
     def prompt(self, player_id: int) -> str:
+        example_row, example_col = self.rows // 2, self.cols // 2
         return (
-            f"You are playing the Minesweeper game.\nThe objective of the game is to reveal all cells that do not contain mines.\n"
-            "To make a move, simply reply with the row and column coordinates you want to reveal, in the format 'row col'.\n"
-            "For example:\n"
-            "- '3 2' to reveal the cell in Row 3, Column 2.\n"
-            "- '5 6' to reveal the cell in Row 5, Column 6.\n"
-            "On your first move, you will reveal an area around the cell you choose to ensure a safe start.\n"
-            "The current board layout is shown below. Cells that are unrevealed are represented by a dot ('.'), revealed numbers show the count of adjacent mines.\n"
-            "Be mindful not to choose already revealed cells.\n"
-            "Here is the current board layout:\n"
+            f"You are playing Minesweeper on a {self.rows}x{self.cols} grid with {self.num_mines} hidden mines.\n"
+            "The objective of the game is to reveal every cell that does not contain a mine.\n"
+            f"Rows are numbered 0 to {self.rows - 1} from top to bottom and columns 0 to {self.cols - 1} from left "
+            "to right, as labeled on the board.\n"
+            f"On your turn, reveal one hidden cell by replying with 'row col'. For example, '{example_row} {example_col}' "
+            f"reveals the cell in row {example_row}, column {example_col}.\n"
+            "Hidden cells are shown as '.'. A revealed cell shows how many of its eight neighbors contain mines, "
+            "and revealing a 0 automatically reveals its neighbors as well.\n"
+            "Your first reveal is always safe: no mine is placed on or next to the first cell you choose.\n"
+            "Revealing a mine ends the game.\n"
+            f"You have {self.max_turns} turns; each reveal uses one turn.\n"
+            "Choosing a cell outside the board, an already revealed cell, or a malformed reply is an invalid move. "
+            "It changes nothing and you may try again, but two invalid moves in a row end the game."
         )
 
     def render(self, player_id: int) -> str:

@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Optional, Union
 
 import textarena as ta
 from textarena.envs.Checkers.renderer import create_board_str
@@ -9,6 +9,10 @@ class CheckersEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
     action_pattern = r"^\s*\[?\s*([0-7])\s+([0-7])\s+([0-7])\s+([0-7])\s*\]?\s*$"
+    action_format = (
+        "a move 'rowFrom colFrom rowTo colTo' as four numbers from 0 to 7 separated by spaces, "
+        "for example '5 0 4 1' as Red or '2 1 3 2' as Black"
+    )
 
     def __init__(self, max_turns: int = 50):
         """
@@ -31,23 +35,43 @@ class CheckersEnv(ta.GameEnv):
         return {0: "Red", 1: "Black"}
 
     def prompt(self, player_id: int) -> str:
+        if player_id == 0:
+            colour, own, other, start, forward, example = "Red", "r", "b", "rows 5-7 at the bottom", "up (towards row 0)", "5 0 4 1"
+        else:
+            colour, own, other, start, forward, example = "Black", "b", "r", "rows 0-2 at the top", "down (towards row 7)", "2 1 3 2"
         return (
-            f"You are Player {player_id} playing a game of Checkers as {'Red' if player_id==0 else 'Black'}.\n"
-            "Make your move in the format 'rowFrom colFrom rowTo colTo', e.g. '2 1 3 2'.\nBasic rules:\n"
-            "  • Move diagonally forward by 1 if empty.\n"
-            "  • Captures are mandatory; continue jumping with the same piece while another capture is available.\n"
-            "  • A piece is Kinged if it reaches the opposite end.\n"
+            f"You are Player {player_id} playing a game of Checkers (English draughts) as {colour}. Red (Player 0) moves first.\n"
+            f"On the board your men are '{own}' and your kings '{own.upper()}'; your opponent's are '{other}' and '{other.upper()}', and '.' is empty. "
+            f"Your pieces start on {start}, and your men move {forward}.\n"
+            "Make your move in the format 'rowFrom colFrom rowTo colTo' using the row and column numbers (0-7) shown on the board, "
+            f"e.g. '{example}'.\nRules:\n"
+            "  • A man moves one square diagonally forward onto an empty square; a king moves one square diagonally in any direction.\n"
+            "  • Capture by jumping diagonally over an adjacent opposing piece onto the empty square right behind it, giving that landing square as the destination. "
+            "Men capture only forward; kings capture in any diagonal direction.\n"
+            "  • Captures are mandatory; continue jumping with the same piece while another capture is available, submitting each jump as a separate move.\n"
+            "  • A man that reaches the far row is Kinged; this ends the turn, even in the middle of a capture sequence.\n"
+            "  • You win when your opponent has no pieces left or cannot move on their turn.\n"
+            f"  • The game is a draw after {self.max_turns} turns in total (each player's move is one turn; a multi-jump counts as one turn).\n"
         )
 
     def render(self, player_id: int) -> str:
-        return f"Current board:\n{self._render_board()}"
+        text = f"Current board:\n{self._render_board()}"
+        forced = self.game_state["forced_piece"]
+        if forced is not None:
+            text += (
+                f"\nYour capture continues: jump again with your piece on ({forced[0]},{forced[1]}). "
+                f"Legal jumps: {', '.join(self.game_state['valid_moves'])}"
+            )
+        return text
 
     def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
         row_from, col_from, row_to, col_to = map(int, move.groups())
-        if not self._is_valid_move(player_id, row_from, col_from, row_to, col_to):
-            return self.invalid(f"Move '{row_from} {col_from} {row_to} {col_to}' is illegal.")
+        error = self._move_error(player_id, row_from, col_from, row_to, col_to)
+        if error is not None:
+            return self.invalid(f"Move '{row_from} {col_from} {row_to} {col_to}' is illegal. {error}")
         captured = abs(row_to - row_from) == 2
         promoted = self._move_piece(player_id, row_from, col_from, row_to, col_to)
+        self.game_state["forced_piece"] = None
 
         board = self.game_state["board"]
         red_pieces = sum(cell.lower() == 'r' for row in board for cell in row)
@@ -65,6 +89,7 @@ class CheckersEnv(ta.GameEnv):
         if continuation:
             self.game_state["forced_piece"] = (row_to, col_to)
             self.game_state["valid_moves"] = [" ".join(map(str, move)) for move in continuation]
+            self.broadcast(f"Player {player_id} must continue jumping with the piece on ({row_to},{col_to}).", ta.ObservationType.GAME_MESSAGE)
             # The engine counts submitted actions, while a compulsory
             # multi-jump is one checkers turn. Offset each continuation so the
             # configured limit is evaluated only after the chain is complete.
@@ -73,7 +98,6 @@ class CheckersEnv(ta.GameEnv):
             self.set_next_player(player_id)
             return None
 
-        self.game_state["forced_piece"] = None
         next_player = 1 - player_id
         next_moves = self._legal_moves(next_player)
         self.game_state["valid_moves"] = next_moves
@@ -96,29 +120,34 @@ class CheckersEnv(ta.GameEnv):
         rows = "\n".join(f" {row} |" + "".join(f" {self.game_state['board'][row][col]} " for col in range(8)) for row in range(8))
         return header + divider + rows + "\n"
 
-    def _is_valid_move(self, player_id: int, r1: int, c1: int, r2: int, c2: int) -> bool:
-        """Check a single step or jump under English/American checkers rules."""
+    def _move_error(self, player_id: int, r1: int, c1: int, r2: int, c2: int) -> Optional[str]:
+        """Why a single step or jump is illegal under English/American checkers rules, or None if it is legal."""
         if not (0 <= r1 < 8 and 0 <= c1 < 8 and 0 <= r2 < 8 and 0 <= c2 < 8):
-            return False  # Out of board bounds
+            return "Both squares must be on the board."
         piece = self.game_state['board'][r1][c1]; target = self.game_state['board'][r2][c2]
-        if player_id == 0: # Check piece ownership
-            if piece not in ['r', 'R']: return False # Player 0 -> must move 'r' or 'R'
-        else:
-            if piece not in ['b', 'B']: return False # Player 1 -> must move 'b' or 'B'
-
-        if target != '.': return False   # destination must be empty
+        if piece not in (('r', 'R') if player_id == 0 else ('b', 'B')):
+            return f"There is no piece of yours on ({r1},{c1})."
         forced_piece = self.game_state.get("forced_piece")
+        continue_jumping = None if forced_piece is None else f"You must continue jumping with your piece on ({forced_piece[0]},{forced_piece[1]})."
         if forced_piece is not None and forced_piece != (r1, c1):
-            return False
+            return continue_jumping
+        if target != '.':
+            return f"The destination ({r2},{c2}) is not empty."
 
         dr = r2 - r1; dc = abs(c2 - c1)
         directions = (-1, 1) if piece in ('R', 'B') else ((-1,) if piece == 'r' else (1,))
         is_capture = dc == 2 and dr in tuple(2 * direction for direction in directions)
         if is_capture:
-            return self._is_valid_capture(r1, c1, r2, c2)
-        if forced_piece is not None or self._player_has_capture(player_id):
-            return False
-        return dc == 1 and dr in directions
+            return None if self._is_valid_capture(r1, c1, r2, c2) else "A jump must pass over an adjacent opposing piece."
+        if forced_piece is not None:
+            return continue_jumping
+        if dc == 1 and dr in directions:
+            if self._player_has_capture(player_id):
+                return f"A capture is available and captures are mandatory. Legal moves: {', '.join(self._legal_moves(player_id))}."
+            return None
+        if piece in ('r', 'b') and dc == abs(dr) and dr in (-2 * directions[0], -directions[0]):
+            return "Men move and capture only diagonally forward; only kings may move backward."
+        return "Pieces move one square diagonally, or jump two squares diagonally over an opposing piece."
 
     def _is_valid_capture(self, r1: int, c1: int, r2: int, c2: int) -> bool:
         mid_r = (r1 + r2) // 2

@@ -41,6 +41,10 @@ class SimpleBlindAuctionEnv(ta.GameEnv):
         ]
         self.bid_pattern = re.compile(r"Bid\s+(?:on\s+)?(?:Item\s+)?(\d+)\s*:\s*(\d+)", re.IGNORECASE)
         self.legacy_bid_pattern = re.compile(r"\[\s*Bid\s+(?:on\s+)?(?:Item\s+)?(\d+)\s*:\s*(\d+)\s*\]", re.IGNORECASE)
+        self.bid_start_pattern = re.compile(r"\[?\s*Bid\b", re.IGNORECASE)
+        # Bids are separated by line breaks or by semicolons followed by the next bid, as in BlindAuction.
+        self.bid_separator = re.compile(r";\s*(?=\[?\s*Bid\b)", re.IGNORECASE)
+        self.segment_padding = re.compile(r"^[\s;]+|[\s;]+$")
 
     def get_board_str(self):
         return create_board_str(
@@ -108,8 +112,10 @@ class SimpleBlindAuctionEnv(ta.GameEnv):
             f"Note: Each player may value items differently, up to ±20% difference!\n\n"
             f"How to play:\n"
             f"- Conversation Phase: Just type your messages normally\n"
-            f"- Bidding Phase: Put each bid on its own line as 'Bid on Item X: amount'\n"
-            f"  Example:\nBid on Item 0: 250\nBid on Item 3: 175\n\n"
+            f"- Bidding Phase: Submit all of your bids in one reply as 'Bid on Item X: amount', "
+            f"one per line or separated by semicolons\n"
+            f"  Example:\nBid on Item 0: 250\nBid on Item 3: 175\n"
+            f"  or: Bid on Item 0: 250; Bid on Item 3: 175\n\n"
             f"Your goal is to win items that are worth more to you than what you paid.\n"
             f"The player with the highest net worth at the end wins.\n"
             f"Net worth = remaining capital + value of won items.\n"
@@ -135,8 +141,9 @@ class SimpleBlindAuctionEnv(ta.GameEnv):
     def _announce_bidding_phase(self) -> None:
         message = (
             "Conversation phase complete! Now entering the bidding phase.\n"
-            "Put each bid on its own line using the format: Bid on Item X: amount\n"
-            "For example:\nBid on Item 0: 150\nBid on Item 2: 200\nBid on Item 4: 350"
+            "Submit all of your bids in one reply using the format: Bid on Item X: amount\n"
+            "Put each bid on its own line or separate bids with semicolons. For example:\n"
+            "Bid on Item 0: 150\nBid on Item 2: 200\nBid on Item 4: 350"
         )
         self.broadcast(message, ta.ObservationType.GAME_MESSAGE)
 
@@ -144,7 +151,10 @@ class SimpleBlindAuctionEnv(ta.GameEnv):
         gs = self.game_state
         bids = self._parse_bids(action)
         if bids is None:
-            return self.invalid("Malformed or mixed bid command. Put one complete bid on each line.")
+            return self.invalid(
+                "Malformed or mixed bid command. Submit only complete bids such as 'Bid on Item 0: 250', "
+                "one per line or separated by semicolons."
+            )
         if gs["bidding_done"][player_id]:
             return self.invalid("You have already submitted your sealed bids.")
         if not bids:
@@ -181,23 +191,26 @@ class SimpleBlindAuctionEnv(ta.GameEnv):
         return None
 
     def _parse_bids(self, action: str) -> Optional[List[tuple[str, str]]]:
-        """Parse canonical one-bid-per-line input, plus legacy bracketed tokens."""
-        lines = [line.strip() for line in action.splitlines() if line.strip()]
-        bare_bids = []
-        if lines:
-            for line in lines:
-                match = self.bid_pattern.fullmatch(line)
-                if match is None:
-                    bare_bids = []
-                    break
-                bare_bids.append(match.groups())
-        if bare_bids:
-            return bare_bids
+        """Parse bids that are either all bare or all legacy bracketed tokens.
 
-        legacy_bids = self.legacy_bid_pattern.findall(action)
-        if legacy_bids and not self.legacy_bid_pattern.sub("", action).strip():
-            return legacy_bids
-        if re.search(r"(?im)^\s*\[?\s*Bid\b", action):
+        Returns [] for a reply without any bid and None for malformed or mixed bids."""
+        segments = []
+        for line in action.splitlines():
+            for segment in self.bid_separator.split(line):
+                segment = self.segment_padding.sub("", segment)
+                if segment:
+                    segments.append(segment)
+        if not segments:
+            return []
+
+        bare_matches = [self.bid_pattern.fullmatch(segment) for segment in segments]
+        if all(bare_matches):
+            return [match.groups() for match in bare_matches]
+
+        legacy_bids = [self.legacy_bid_pattern.findall(segment) for segment in segments]
+        if all(bids and not self.legacy_bid_pattern.sub("", segment).strip() for bids, segment in zip(legacy_bids, segments)):
+            return [bid for bids in legacy_bids for bid in bids]
+        if any(self.bid_start_pattern.match(segment) for segment in segments):
             return None
         return []
 

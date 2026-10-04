@@ -5,8 +5,11 @@ Player 0 is the Recruiter, Player 1 the Candidate. Proposals use one letter
     Salary, Signing Bonus, Job Assignment, Company Car,
     Starting Date, Vacation Days, Moving Expense Reimbursement, Insurance Coverage
 """
+import time
+
 import pytest
 
+import textarena as ta
 from textarena.envs.NewRecruit.env import NewRecruitEnv
 
 
@@ -30,6 +33,16 @@ def test_reset_initializes_roles_and_preferences():
     for pid in (0, 1):
         for issue in issues:
             assert issue in gs["player_preferences"][pid]
+
+
+def test_prompt_names_the_opponent_role_instead_of_a_placeholder():
+    env = _fresh()
+    recruiter_prompt, candidate_prompt = env.prompt(0), env.prompt(1)
+    assert "{opponent_role}" not in recruiter_prompt + candidate_prompt
+    assert "convince Candidate" in recruiter_prompt
+    assert "persuade Candidate" in recruiter_prompt
+    assert "convince Recruiter" in candidate_prompt
+    assert "persuade Recruiter" in candidate_prompt
 
 
 def test_propose_then_accept_recruiter_wins():
@@ -183,3 +196,58 @@ def test_snapshot_restore_replays_proposal():
 def test_invalid_configuration_is_rejected(kwargs, message):
     with pytest.raises(ValueError, match=message):
         NewRecruitEnv(**kwargs)
+
+
+def test_line_padded_input_is_rejected_quickly():
+    env = _fresh()
+    start = time.perf_counter()
+    done, _ = env.step("a" + " \n" * 1500 + "x")
+    assert time.perf_counter() - start < 1.0
+    assert not done and env.state.error_count == 1
+
+
+def test_padded_decision_is_rejected_quickly():
+    env = _fresh()
+    env.step("Propose AAAAAAAA")
+    start = time.perf_counter()
+    done, _ = env.step("Accept" + " " * 32_000 + "x")
+    assert time.perf_counter() - start < 1.0
+    assert not done and env.state.error_count == 1
+    assert env.state.game_state["accepted_proposal"] is None
+
+
+def test_multiline_rationale_and_padded_commands_still_parse():
+    env = _fresh()
+    env.step("  First point.\n\n  Second point.  \n  [Propose] a b c d e a b c  \n")
+    gs = env.state.game_state
+    assert gs["current_rationale"] == "First point.\n\n  Second point."
+    assert gs["current_proposal"]["choices"]["Job Assignment"] == "Division C"
+    done, _ = env.step("  [ accept ]  ")
+    assert done
+
+
+def test_prompt_states_the_actual_win_and_draw_rules():
+    prompt = _fresh().prompt(1)
+    assert "the player with the higher total wins" in prompt
+    assert "the game ends in a draw" in prompt
+    assert "0 points for both" not in prompt
+
+
+def test_acting_player_sees_the_decoded_proposal_scored_with_their_own_points():
+    env = _fresh()
+    env.get_observation()
+    env.step("This is a fair split.\nPropose EEAAAEEE")
+    _, observation = env.get_observation()
+    board = [message for _, message, kind in observation if kind == ta.ObservationType.GAME_BOARD][-1]
+    assert "Turn 2 of 10" in board
+    assert "Propose EEAAAEEE" in board
+    assert "Salary: E. $52000 (-6000 points for you)" in board
+    assert "Total for you: -4800 points" in board
+    assert "14800" not in board  # the Recruiter's score stays private
+
+
+def test_accept_without_a_proposal_explains_why():
+    env = _fresh()
+    env.step("Accept")
+    _, observation = env.get_observation()
+    assert any("There is no proposal to accept" in message for _, message, _ in observation)

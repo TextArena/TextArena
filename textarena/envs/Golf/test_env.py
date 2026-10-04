@@ -152,6 +152,51 @@ def test_eliminated_opponent_forfeits_exactly_one_final_turn():
     assert gs["current_phase"] == "finished"
 
 
+def test_eliminated_player_does_not_hand_their_drawn_card_to_the_next_player():
+    env = _fresh(num_players=3)
+    gs = env.state.game_state
+    env.step("draw")
+    drawn = gs["drawn_card"]
+    env.step("bad")
+    done, _ = env.step("still bad")
+
+    assert not done
+    assert env.state.eliminated == [0]
+    assert env.state.current_player_id == 1
+    assert gs["turn_phase"] == "draw"
+    assert "drawn_card" not in gs
+    assert gs["discard_pile"][-1] == drawn
+    assert "Your drawn card" not in env.render(1)
+    done, _ = env.step("swap 1 1")  # player 1 must start with draw/take
+    assert not done and env.state.error_count == 1
+
+
+def _column(*ranks):
+    values = {"A": 1, "J": 10, "Q": 10, "K": 0}
+    return [{"rank": rank, "suit": "♠", "value": values.get(rank, int(rank) if rank.isdigit() else 0)} for rank in ranks]
+
+
+def test_only_equal_ranks_cancel_a_column():
+    env = _fresh()
+    gs = env.state.game_state
+    layouts = {0: ("10", "J", "Q", "Q", "7", "7"), 1: ("J", "Q", "3", "J", "Q", "4")}
+    for pid, ranks in layouts.items():
+        for info, card in zip(gs["players"][pid]["cards"], _column(*ranks)):
+            info["card"] = card
+    env._end_game()
+    # Player 0: columns (10, Q), (J, 7), (Q, 7) -> no pairs. Player 1: (J, J), (Q, Q), (3, 4).
+    assert gs["players"][0]["score"] == 20 + 17 + 17
+    assert gs["players"][1]["score"] == 0 + 0 + 7
+
+
+def test_render_shows_cards_left_in_the_draw_pile():
+    env = _fresh()
+    deck_size = len(env.state.game_state["deck"])
+    assert f"Cards left in the draw pile: {deck_size}" in env.render(0)
+    env.step("draw")
+    assert f"Cards left in the draw pile: {deck_size - 1}" in env.render(0)
+
+
 def test_revealing_last_card_still_gives_opponent_a_final_turn():
     env = _fresh()
     gs = env.state.game_state
@@ -268,3 +313,172 @@ def test_invalid_layout_configuration_is_rejected():
             pass
         else:
             raise AssertionError(f"Expected invalid configuration: {kwargs}")
+
+
+def _first_revealed_rowcol(env, pid):
+    cards = env.state.game_state["players"][pid]["cards"]
+    for idx, info in enumerate(cards):
+        if info["revealed"]:
+            return idx // env.num_columns + 1, idx % env.num_columns + 1
+    return None
+
+
+def _expected_scores(env):
+    scores = {}
+    for pid, player in env.state.game_state["players"].items():
+        total = 0
+        for col in range(env.num_columns):
+            cards = [player["cards"][row * env.num_columns + col]["card"] for row in range(env.num_rows)]
+            paired = len(cards) > 1 and len({card["rank"] for card in cards}) == 1
+            total += 0 if paired else sum(card["value"] for card in cards)
+        scores[pid] = total
+    return scores
+
+
+def _play_take_swap_loop(env, max_steps=10_000):
+    """Take the discard and swap it onto an already face-up card, forever."""
+    done = False
+    for _ in range(max_steps):
+        pid = env.state.current_player_id
+        if env.state.game_state["turn_phase"] == "draw":
+            done, _ = env.step("take")
+        else:
+            row, col = _first_revealed_rowcol(env, pid)
+            done, _ = env.step(f"swap {row} {col}")
+        if done:
+            break
+    return done
+
+
+def test_default_turn_cap_scales_with_players_and_grid():
+    for num_players in (2, 3, 4):
+        env = _fresh(num_players)
+        assert env.state.max_turns == 2 * num_players * 4 * 6
+    medium = GolfEnv(num_cards=9, num_columns=3)
+    medium.reset(num_players=3, seed=0)
+    assert medium.state.max_turns == 2 * 3 * 4 * 9
+
+
+def test_registered_variants_get_the_default_turn_cap():
+    from textarena.envs.registration import ENV_REGISTRY
+
+    for env_id in ("Golf-v0", "Golf-v0-medium"):
+        kwargs = ENV_REGISTRY[env_id].kwargs
+        assert "max_turns" not in kwargs
+        env = GolfEnv(**kwargs)
+        env.reset(num_players=2, seed=0)
+        assert env.state.max_turns == env.default_max_turns(2)
+
+
+def test_take_and_swap_into_face_up_loop_ends_at_cap_with_scores():
+    env = _fresh()
+    deck_before = len(env.state.game_state["deck"])
+    assert _play_take_swap_loop(env)
+    assert env.state.turn == env.state.max_turns == 96
+    gs = env.state.game_state
+    assert len(gs["deck"]) == deck_before  # the stock never moved: only the cap could end this
+    assert gs["current_phase"] == "finished"
+    assert all(c["revealed"] for p in gs["players"].values() for c in p["cards"])
+
+    scores = _expected_scores(env)
+    assert {pid: p["score"] for pid, p in gs["players"].items()} == scores
+    rewards, info = env.close()
+    best = min(scores.values())
+    if list(scores.values()).count(best) == len(scores):
+        assert rewards == {0: 0, 1: 0}
+    else:
+        assert rewards == {pid: (1 if s == best else -1) for pid, s in scores.items()}
+    assert "Turn limit of 96 actions reached" in info[0]["reason"]
+    assert "Final Scores" in info[0]["reason"]
+
+
+def test_cap_mid_turn_returns_drawn_card_and_conserves_cards():
+    from collections import Counter
+
+    env = GolfEnv(max_turns=3)
+    env.reset(num_players=2, seed=42)
+    env.step("draw")
+    row, col = _first_unrevealed_rowcol(env, 0)
+    env.step(f"swap {row} {col}")
+    done, _ = env.step("draw")  # third accepted action: cap hits while holding a card
+    assert done
+    gs = env.state.game_state
+    assert "drawn_card" not in gs
+
+    def key(card):
+        return card["rank"], card["suit"]
+
+    held = gs["deck"] + gs["discard_pile"] + [c["card"] for p in gs["players"].values() for c in p["cards"]]
+    assert Counter(map(key, held)) == Counter(map(key, env.deck))
+    assert "Turn limit of 3 actions reached" in env.state.game_info[0]["reason"]
+
+
+def test_turn_cap_ties_follow_normal_tie_handling():
+    env = GolfEnv(max_turns=2)
+    env.reset(num_players=2, seed=42)
+    for player in env.state.game_state["players"].values():
+        for card_info in player["cards"]:
+            card_info["card"] = {"rank": "K", "suit": "♠", "value": 0}
+    env.step("draw")
+    done, _ = env.step("discard")
+    assert done
+    rewards, _ = env.close()
+    assert rewards == {0: 0, 1: 0}
+
+
+def test_invalid_moves_do_not_count_toward_turn_cap():
+    env = GolfEnv(max_turns=2)
+    env.reset(num_players=2, seed=42)
+    env.step("draw")
+    for _ in range(env.error_allowance):
+        done, _ = env.step("nonsense")
+        assert not done
+    assert env.state.turn == 1
+    done, _ = env.step("discard")
+    assert done and env.state.turn == 2
+    assert "Turn limit of 2 actions reached" in env.state.game_info[0]["reason"]
+
+
+def test_invalid_max_turns_is_rejected():
+    for bad in (0, -1, True, 2.5, "10"):
+        try:
+            GolfEnv(max_turns=bad)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"Expected invalid max_turns: {bad!r}")
+
+
+def test_prompt_and_render_mention_the_cap():
+    env = _fresh()
+    _, observations = env.get_observation()
+    text = "\n".join(str(o) for o in observations)
+    assert "Turn limit: the game ends after 96 accepted actions" in text
+    assert "Actions used: 0/96" in env.render(0)
+
+
+def test_random_play_finishes_naturally_under_default_cap():
+    import random
+
+    natural = total = 0
+    for num_cards in (6, 9):
+        for num_players in (2, 3, 4):
+            for seed in range(50):
+                env = GolfEnv(num_cards=num_cards, num_columns=3)
+                env.reset(num_players=num_players, seed=seed)
+                rng = random.Random(seed)
+                done = False
+                while not done:
+                    gs = env.state.game_state
+                    if gs["turn_phase"] == "draw":
+                        options = ["draw"] * 6 + ["take"] * 3
+                        options.append("knock" if gs["current_phase"] == "playing" else f"peek 1 {rng.randint(1, 3)}")
+                        action = rng.choice(options)
+                    elif not gs.get("took_from_discard") and rng.random() < 0.3:
+                        action = "discard"
+                    else:
+                        action = f"swap {rng.randint(1, env.num_rows)} {rng.randint(1, 3)}"
+                    done, _ = env.step(action)
+                total += 1
+                natural += "Turn limit" not in env.state.game_info[0]["reason"]
+    assert natural / total >= 0.99

@@ -1,6 +1,7 @@
 """Deterministic offline tests for the Mastermind environment."""
 import copy
 import random
+import re
 
 import pytest
 
@@ -178,6 +179,26 @@ def test_turn_limit_returns_latest_weighted_feedback():
     assert done
     assert env.state.rewards == {0: pytest.approx((black + white * 0.5) / 4)}
     assert "turn limit" in env.state.game_info[0]["reason"].lower()
+
+
+@pytest.mark.parametrize(
+    "kwargs",
+    [
+        {"code_length": 4, "num_numbers": 6, "max_turns": 20, "duplicate_numbers": False},
+        {"code_length": 4, "num_numbers": 8, "max_turns": 30, "duplicate_numbers": False},
+        {"code_length": 6, "num_numbers": 12, "max_turns": 50, "duplicate_numbers": True},
+        {"code_length": 5, "num_numbers": 3, "max_turns": 10, "duplicate_numbers": True},
+    ],
+)
+def test_prompt_example_is_a_legal_guess_for_every_configuration(kwargs):
+    env = _fresh(**kwargs)
+    _, observation = env.get_observation()
+    prompt = observation[0][1]
+    example = re.search(r"e\.g\. '([\d ]+)'", prompt).group(1)
+    assert f"{kwargs['max_turns']} guesses" in prompt
+    env.step(example)
+    assert env.state.error_count == 0
+    assert env.state.turn == 1
 
 
 def test_snapshot_restore_recovers_history_alias():

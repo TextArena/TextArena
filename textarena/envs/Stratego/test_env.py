@@ -105,6 +105,23 @@ def test_bad_format_is_invalid():
     assert env.state.current_player_id == 0
 
 
+def test_format_error_describes_expected_action():
+    env = _fresh()
+    env.step("move my piece forward")
+    notice = next(message for _, message in env.state.logs if "attempted an invalid move" in message)
+    assert f"Expected {env.action_format}." in notice
+
+    example = re.search(r"for example '([^']+)'", env.action_format).group(1)
+    assert re.search(env.action_pattern, example)
+    # The random setup fills both A0 and B0 with Player 0's pieces, so stage a position where the example is legal.
+    staged = _fresh()
+    _clear(staged)
+    _place(staged, 0, "Captain", (0, 0), "captain-0")
+    _place(staged, 1, "Captain", (9, 9), "captain-1")
+    done, _ = staged.step(example)
+    assert not done and staged.state.turn == 1 and staged.state.error_count == 0
+
+
 def test_moving_empty_or_enemy_source_rejected():
     # Find a cell owned by the opponent (player 1) and try to move it as player 0.
     env = _fresh()
@@ -277,6 +294,66 @@ def test_invalid_forfeit_reveals_cached_terminal_board():
     done, _ = env.step("garbage")
     assert done
     assert "?" not in env.game_state["rendered_board"]
+
+
+def test_trade_of_the_last_movable_pieces_is_a_draw():
+    env = _fresh()
+    _clear(env)
+    _place(env, 0, "Captain", (3, 0), "captain-0")
+    _place(env, 1, "Captain", (3, 1), "captain-1")
+    _place(env, 0, "Flag", (0, 0), "flag-0")
+    _place(env, 1, "Flag", (9, 9), "flag-1")
+
+    done, _ = env.step("D0 D1")
+
+    assert done
+    assert env.state.rewards == {0: 0, 1: 0}
+    assert "Neither player has a movable piece left" in env.state.game_info[0]["reason"]
+
+
+def test_losing_your_last_movable_piece_loses_while_the_opponent_can_move():
+    env = _fresh()
+    _clear(env)
+    _place(env, 0, "Scout", (3, 0), "scout")
+    _place(env, 1, "Bomb", (3, 1), "bomb")
+    _place(env, 1, "Miner", (8, 8), "miner")
+    _place(env, 0, "Flag", (0, 0), "flag-0")
+
+    done, _ = env.step("D0 D1")
+
+    assert done
+    assert env.state.rewards == {0: -1, 1: 1}
+
+
+def test_blocked_opponent_loses_even_if_the_mover_cannot_move_again():
+    env = _fresh()
+    _clear(env)
+    _place(env, 0, "Scout", (3, 0), "scout")
+    _place(env, 1, "Bomb", (3, 1), "bomb")
+    _place(env, 0, "Flag", (0, 0), "flag-0")
+    # Player 1's only movable piece is boxed in by its own bombs and the board corner.
+    _place(env, 1, "Miner", (9, 9), "miner")
+    _place(env, 1, "Bomb", (8, 9), "bomb-2")
+    _place(env, 1, "Bomb", (9, 8), "bomb-3")
+
+    done, _ = env.step("D0 D1")
+
+    assert done
+    assert env.state.rewards == {0: 1, 1: -1}
+
+
+def test_prompt_lists_ranks_scout_movement_and_end_conditions():
+    env = StrategoEnv(max_turns=321)
+    env.reset(num_players=2, seed=0)
+
+    prompt = env.prompt(1)
+
+    for entry in ("MS Marshal (10) x1", "CP Captain (6) x4", "SC Scout (2) x8", "SP Spy (1) x1", "BM Bomb x6", "FL Flag x1"):
+        assert entry in prompt
+    assert "Scouts may instead move any number of empty squares in a straight line" in prompt
+    assert "more than three turns in a row" in prompt
+    assert "draw after 321 turns" in prompt
+    assert not prompt.rstrip().endswith("board state:")
 
 
 @pytest.mark.parametrize("max_turns", [0, -1, 1.5, True])

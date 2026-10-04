@@ -22,7 +22,7 @@ register_with_versions(id="2048-v0-very-hard",      entry_point="textarena.envs.
 register_with_versions(id="2048-v0-extreme",        entry_point="textarena.envs.Game2048.env:Game2048Env", mdp_wrappers=BOARD_MDP, target_tile=16384  )
 
 # Arbitrary board size variants
-register_with_versions(id="2048-v0-3x3",            entry_point="textarena.envs.Game2048.env:Game2048Env", mdp_wrappers=BOARD_MDP, target_tile=2048, board_size=3)
+register_with_versions(id="2048-v0-3x3",            entry_point="textarena.envs.Game2048.env:Game2048Env", mdp_wrappers=BOARD_MDP, target_tile=256, board_size=3)
 register_with_versions(id="2048-v0-5x5",            entry_point="textarena.envs.Game2048.env:Game2048Env", mdp_wrappers=BOARD_MDP, target_tile=2048, board_size=5)
 register_with_versions(id="2048-v0-6x6",            entry_point="textarena.envs.Game2048.env:Game2048Env", mdp_wrappers=BOARD_MDP, target_tile=2048, board_size=6)
 register_with_versions(id="2048-v0-8x8",            entry_point="textarena.envs.Game2048.env:Game2048Env", mdp_wrappers=BOARD_MDP, target_tile=2048, board_size=8)
@@ -236,6 +236,7 @@ register_with_versions(id="IteratedMatchingPennies-v0", entry_point="textarena.e
 
 # IteratedPrisonersDilemma [2 Player]
 register_with_versions(id="IteratedPrisonersDilemma-v0", entry_point="textarena.envs.IteratedPrisonersDilemma.env:IteratedPrisonersDilemmaEnv", mdp_wrappers=HISTORY_MDP, num_rounds=10, communication_turns=1, cooperate_reward=3, defect_reward=5, sucker_reward=0, mutual_defect_reward=1)
+register_with_versions(id="IteratedPrisonersDilemma-v0-short", entry_point="textarena.envs.IteratedPrisonersDilemma.env:IteratedPrisonersDilemmaEnv", mdp_wrappers=HISTORY_MDP, num_rounds=5, communication_turns=1, cooperate_reward=3, defect_reward=5, sucker_reward=0, mutual_defect_reward=1)
 
 # IteratedRockPaperScissors [2 Player]
 register_with_versions(id="IteratedRockPaperScissors-v0", entry_point="textarena.envs.IteratedRockPaperScissors.env:IteratedRockPaperScissorsEnv", mdp_wrappers=BOARD_MDP, num_rounds=9)
@@ -253,6 +254,12 @@ register_with_versions(id="KuhnPoker-v0-short",   entry_point="textarena.envs.Ku
 register_with_versions(id="KuhnPoker-v0-medium",  entry_point="textarena.envs.KuhnPoker.env:KuhnPokerEnv", mdp_wrappers=BOARD_MDP, max_rounds=9   )
 register_with_versions(id="KuhnPoker-v0-long",    entry_point="textarena.envs.KuhnPoker.env:KuhnPokerEnv", mdp_wrappers=BOARD_MDP, max_rounds=15  )
 register_with_versions(id="KuhnPoker-v0-extreme", entry_point="textarena.envs.KuhnPoker.env:KuhnPokerEnv", mdp_wrappers=BOARD_MDP, max_rounds=25  )
+
+# LeducHoldem [2 Player]
+register_with_versions(id="LeducHoldem-v0",         entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", mdp_wrappers=BOARD_MDP, max_rounds=5   )
+register_with_versions(id="LeducHoldem-v0-medium",  entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", mdp_wrappers=BOARD_MDP, max_rounds=9   )
+register_with_versions(id="LeducHoldem-v0-long",    entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", mdp_wrappers=BOARD_MDP, max_rounds=15  )
+register_with_versions(id="LeducHoldem-v0-extreme", entry_point="textarena.envs.LeducHoldem.env:LeducHoldemEnv", mdp_wrappers=BOARD_MDP, max_rounds=25  )
 
 # LeTruc [2 Player]
 register_with_versions(id="LeTruc-v0", entry_point="textarena.envs.LeTruc.env:LeTrucEnv", mdp_wrappers=BOARD_MDP)
@@ -313,9 +320,9 @@ register_with_versions(id="SimpleBlindAuction-v0",        entry_point="textarena
 register_with_versions(id="SimpleBlindAuction-v0-rich",   entry_point="textarena.envs.SimpleBlindAuction.env:SimpleBlindAuctionEnv", mdp_wrappers=HISTORY_MDP, starting_capital=2000,   num_items=5, conversation_rounds=5)
 
 # SimpleNegotiation [2 Player]
-register_with_versions(id="SimpleNegotiation-v0-short",   entry_point="textarena.envs.SimpleNegotiation.env:SimpleNegotiationEnv", mdp_wrappers=BOARD_MDP, max_turns=6)
-register_with_versions(id="SimpleNegotiation-v0",         entry_point="textarena.envs.SimpleNegotiation.env:SimpleNegotiationEnv", mdp_wrappers=BOARD_MDP, max_turns=10)
-register_with_versions(id="SimpleNegotiation-v0-long",    entry_point="textarena.envs.SimpleNegotiation.env:SimpleNegotiationEnv", mdp_wrappers=BOARD_MDP, max_turns=30)
+register_with_versions(id="SimpleNegotiation-v0-short",   entry_point="textarena.envs.SimpleNegotiation.env:SimpleNegotiationEnv", mdp_wrappers=HISTORY_MDP, max_turns=6)
+register_with_versions(id="SimpleNegotiation-v0",         entry_point="textarena.envs.SimpleNegotiation.env:SimpleNegotiationEnv", mdp_wrappers=HISTORY_MDP, max_turns=10)
+register_with_versions(id="SimpleNegotiation-v0-long",    entry_point="textarena.envs.SimpleNegotiation.env:SimpleNegotiationEnv", mdp_wrappers=HISTORY_MDP, max_turns=30)
 
 # SimpleTak [2 Player]
 register_with_versions(id="SimpleTak-v0",         entry_point="textarena.envs.SimpleTak.env:SimpleTakEnv", mdp_wrappers=BOARD_MDP, board_size=4)
@@ -335,9 +342,9 @@ register_with_versions(id="SpiteAndMalice-v0", entry_point="textarena.envs.Spite
 register_with_versions(id="Stratego-v0", entry_point="textarena.envs.Stratego.env:StrategoEnv", mdp_wrappers=BOARD_MDP)
 
 # Tak [2 Player]
-register_with_versions(id="Tak-v0",         entry_point="textarena.envs.Tak.env:TakEnv", mdp_wrappers=BOARD_MDP, board_size=4, stones=15, capstones=1)
-register_with_versions(id="Tak-v0-medium",  entry_point="textarena.envs.Tak.env:TakEnv", mdp_wrappers=BOARD_MDP, board_size=5, stones=21, capstones=1)
-register_with_versions(id="Tak-v0-hard",    entry_point="textarena.envs.Tak.env:TakEnv", mdp_wrappers=BOARD_MDP, board_size=6, stones=30, capstones=1)
+register_with_versions(id="Tak-v0",         entry_point="textarena.envs.Tak.env:TakEnv", mdp_wrappers=BOARD_MDP, board_size=4, stones=15, capstones=1, max_turns=100)
+register_with_versions(id="Tak-v0-medium",  entry_point="textarena.envs.Tak.env:TakEnv", mdp_wrappers=BOARD_MDP, board_size=5, stones=21, capstones=1, max_turns=150)
+register_with_versions(id="Tak-v0-hard",    entry_point="textarena.envs.Tak.env:TakEnv", mdp_wrappers=BOARD_MDP, board_size=6, stones=30, capstones=1, max_turns=200)
 
 # TicTacToe [2 Player]
 register_with_versions(id="TicTacToe-v0", entry_point="textarena.envs.TicTacToe.env:TicTacToeEnv", mdp_wrappers=BOARD_MDP)
@@ -470,6 +477,10 @@ register_with_versions(id="Hanabi-v0", entry_point="textarena.envs.Hanabi.env:Ha
 # SettlersOfCatan [3-4 Players]
 register_with_versions(id="SettlersOfCatan-v0", entry_point="textarena.envs.SettlersOfCatan.env:SettlersOfCatanEnv", mdp_wrappers=HISTORY_MDP)
 
+# Bohnanza [3-5 Players]
+register_with_versions(id="Bohnanza-v0",        entry_point="textarena.envs.Bohnanza.env:BohnanzaEnv", mdp_wrappers=HISTORY_MDP, deck_cycles=3, max_trade_rounds=None, max_turns=3000)
+register_with_versions(id="Bohnanza-v0-short",  entry_point="textarena.envs.Bohnanza.env:BohnanzaEnv", mdp_wrappers=HISTORY_MDP, deck_cycles=1, max_trade_rounds=3,    max_turns=1000)
+
 # SecretMafia [6-15 Players]
 register_with_versions(id="SecretMafia-v0", entry_point="textarena.envs.SecretMafia.env:SecretMafiaEnv", mdp_wrappers=HISTORY_MDP, mafia_ratio=0.25, discussion_rounds=3)
 
@@ -532,6 +543,15 @@ register_with_versions(id="ScorableGames-v0-game3",         entry_point="textare
 register_with_versions(id="ScorableGames-v0-7players",      entry_point="textarena.envs.ScorableGames.env:ScorableGamesEnv", mdp_wrappers=HISTORY_MDP, game_config="base_7players", max_rounds=140, invalid_move_default="Accept")
 register_with_versions(id="ScorableGames-v0-medicalethics", entry_point="textarena.envs.ScorableGames.env:ScorableGamesEnv", mdp_wrappers=HISTORY_MDP, game_config="medical_ethics", max_rounds=80, invalid_move_default="Accept")
 register_with_versions(id="ScorableGames-v0-vendorretailer",entry_point="textarena.envs.ScorableGames.env:ScorableGamesEnv", mdp_wrappers=HISTORY_MDP, game_config="vendor_retailer", max_rounds=40, invalid_move_default="Accept")
+
+# Bomberman [2 Player]
+register_with_versions(id="Bomberman-v0", entry_point="textarena.envs.Bomberman.env:TwoPlayerBombermanEnv", mdp_wrappers=BOARD_MDP, grid_size=10, max_turns=100)
+
+# RetroSpaceDuel [2 Player]
+register_with_versions(id="RetroSpaceDuel-v0", entry_point="textarena.envs.RetroSpaceDuel.env:RetroSpaceDuelEnv", mdp_wrappers=BOARD_MDP, max_turns=100)
+
+# JoJoJoin [2 Player]
+register_with_versions(id="JoJoJoin-v0", entry_point="textarena.envs.JoJoJoin.env:JoJoJoinEnv", mdp_wrappers=BOARD_MDP)
 
 # UltimateTexasHoldem [1 Player]
 register_with_versions(id="UltimateTexasHoldem-v0", entry_point="textarena.envs.UltimateTexasHoldem.env:UltimateTexasHoldemEnv", mdp_wrappers=BOARD_MDP, max_turns = 1000, start_chips = 1000, ante_amount = 25)

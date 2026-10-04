@@ -26,6 +26,14 @@ class BreakthroughEnv(ta.GameEnv):
         last_file = chr(ord('a') + board_size - 1)
         self.action_pattern = rf"(?i)^\s*\[?([a-{last_file}])([1-9]\d?)([a-{last_file}])([1-9]\d?)\]?\s*$"
 
+    @property
+    def action_format(self) -> str:
+        size = self.board_size
+        return (
+            f"a move in UCI-like notation, the start square followed by the end square (columns a to "
+            f"{self._col_to_file[size - 1]}, rows 1 to {size}), for example 'a2a3' as White or 'a{size - 1}a{size - 2}' as Black"
+        )
+
     def setup(self) -> Dict[str, Any]:
         board = self._build_board()
         return {"board": board, "valid_moves": self._get_valid_moves(0, board)}
@@ -34,16 +42,23 @@ class BreakthroughEnv(ta.GameEnv):
         return {0: "White", 1: "Black"}
 
     def prompt(self, player_id: int) -> str:
-        return (
-            f"You are playing {'White' if player_id == 0 else 'Black'} in a game of Breakthrough. You move {'up' if player_id == 0 else 'down'} on an {self.board_size}x{self.board_size} board.\n"
+        size = self.board_size
+        last_file = self._col_to_file[size - 1]
+        example = "a2a3" if player_id == 0 else f"a{size - 1}a{size - 2}"
+        text = (
+            f"You are playing {'White' if player_id == 0 else 'Black'} in a game of Breakthrough. You move {'up' if player_id == 0 else 'down'} on the {size}x{size} board.\n"
+            f"Each side starts with {2 * size} pieces filling its two home rows: White (W) on rows 1 and 2, Black (B) on rows {size - 1} and {size}. White moves first.\n"
             "In your turn you can move a single piece one step forward or diagonally forward.\n"
             "A piece may move diagonally into an empty square or capture an opponent there; it cannot capture straight ahead.\n"
             "When stepping into a square with an opponent piece, you capture it and the opponent's piece is removed permanently from the board.\n"
-            "Use UCI-like notation, e.g. 'a2a3' to move from a2 to a3.\n"
-            "* 'a' corresponds to the leftmost column, '1' is the bottom row (from White's perspective).\n"
-            "* Blacks's home row is the top row (row 8 for an 8x8). White's home row is the bottom row (row 1 for an 8x8).\n"
-            "The first player whose piece reaches the opponent's home row wins. If your pieces are all captured, you lose."
+            f"Use UCI-like notation, e.g. '{example}' to move from {example[:len(example) // 2]} to {example[len(example) // 2:]}.\n"
+            f"* Columns are lettered 'a' (leftmost) to '{last_file}', and rows are numbered from '1' (the bottom row, from White's perspective) to '{size}'.\n"
+            f"* Black's home row is the top row (row {size}). White's home row is the bottom row (row 1).\n"
+            "The first player whose piece reaches the opponent's home row wins. If all your pieces are captured, you lose."
         )
+        if not self.is_open:
+            text += "\nThe board is not shown in this variant: keep track of the position from the starting setup and the announced moves."
+        return text
 
     def render(self, player_id: int) -> Optional[str]:
         return self._render_board() if self.is_open else None

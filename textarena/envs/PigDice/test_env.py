@@ -76,6 +76,19 @@ def test_invalid_format_increments_error():
     assert env.state.current_player_id == 0
 
 
+def test_format_error_describes_expected_action():
+    env = _fresh()
+    env.step("jump")
+    notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
+    assert f"Expected {env.action_format}." in notices[-1]
+
+    assert "either 'roll'" in env.action_format and "or 'hold'" in env.action_format
+    for action in ("roll", "hold"):
+        fresh = _fresh()
+        fresh.step(action)
+        assert fresh.state.turn == 1 and fresh.state.error_count == 0
+
+
 def test_two_consecutive_invalids_end_game():
     env = _fresh()
     done, _ = env.step("nonsense")
@@ -91,7 +104,7 @@ def test_invalid_winning_scores_are_rejected(winning_score):
         PigDiceEnv(winning_score=winning_score)
 
 
-@pytest.mark.parametrize("max_turns", (0, -1, 1.5, True))
+@pytest.mark.parametrize("max_turns", (0, -1, 1.5, True, None))
 def test_invalid_turn_limits_are_rejected(max_turns):
     with pytest.raises(ValueError):
         PigDiceEnv(max_turns=max_turns)

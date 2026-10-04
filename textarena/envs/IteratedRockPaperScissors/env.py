@@ -43,6 +43,7 @@ class IteratedRockPaperScissorsEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         return (
             f"You are Player {player_id} in a {self.num_rounds}-round Rock-Paper-Scissors game.\nYour goal is to win as many rounds as possible.\n"
+            "Identical moves tie the round. The player who wins more rounds wins the game; equal round wins is a draw.\n"
             "In each round, respond with one of: 'rock', 'paper', or 'scissors'.\nYou may also use 'r', 'p', or 's' as shorthand.\n"
         )
 
@@ -71,11 +72,13 @@ class IteratedRockPaperScissorsEnv(ta.GameEnv):
             gs["history"].append({0: p0_move, 1: p1_move})
             gs["moves"] = {0: None, 1: None}
 
+            self.broadcast(f"Player 0 played {p0_move}; Player 1 played {p1_move}.", ta.ObservationType.GAME_MESSAGE)
             if result == 0:
                 self.broadcast("Round result: Draw", ta.ObservationType.GAME_MESSAGE)
             else:
                 self.broadcast(f"Round result: Player {result - 1} wins!", ta.ObservationType.GAME_MESSAGE)
                 gs["points"][result - 1] += 1
+            self.broadcast(f"Score after round {gs['round']}/{self.num_rounds}: Player 0 {gs['points'][0]}, Player 1 {gs['points'][1]}.", ta.ObservationType.GAME_MESSAGE)
 
             if gs["round"] >= self.num_rounds:  # check end condition
                 wins = gs["points"]

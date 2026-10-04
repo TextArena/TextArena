@@ -7,6 +7,9 @@ terminal outcomes. Folding always forfeits ANTE+BLIND regardless of the cards,
 which lets us drive a guaranteed bust without depending on the random deal.
 Actions: '4x', '2x', '1x', 'check', 'fold', 'skip'.
 """
+import copy
+import time
+
 import pytest
 
 from textarena.envs.UltimateTexasHoldem.env import UltimateTexasHoldemEnv
@@ -282,6 +285,32 @@ def test_blind_flush_uses_official_three_to_two_payout():
     assert env._get_blind_payout(25, 6) == 37.5
 
 
+def test_every_decision_shows_hand_board_and_available_actions():
+    import textarena as ta
+
+    env = ta.make("UltimateTexasHoldem-v0")
+    env.reset(num_players=1, seed=42)
+    gs = env.env.state.game_state
+    _, observation = env.get_observation()
+    assert "ROUND 0" not in observation and "No cards yet" not in observation
+    assert f"Your hand: {env.env._cards_str(gs['player_hand'])}" in observation
+    assert "Community cards: none revealed (5 still hidden)" in observation
+    assert "Available actions: '4x', '3x', 'check'" in observation
+    env.step("4x")
+    _, observation = env.get_observation()
+    assert f"Community cards: {env.env._cards_str(gs['community_cards'][:3])} (2 still hidden)" in observation
+    assert "Available actions: 'skip'" in observation
+    assert all(f"{c['rank']}{c['suit']}" not in observation for c in gs["dealer_hand"])
+
+
+def test_invalid_action_feedback_names_the_bare_commands():
+    env = _fresh()
+    env.step("fold")
+    feedback = [message for _, message, _, _ in env.state.events if "Invalid action for current phase" in message]
+    assert len(feedback) == 1
+    assert "Available actions: '4x', '3x', 'check'" in feedback[0]
+
+
 def test_prompt_interpolates_configured_play_bet_amounts():
     env = _fresh(ante_amount=10)
     prompt = env.prompt(0)
@@ -290,3 +319,25 @@ def test_prompt_interpolates_configured_play_bet_amounts():
     assert "Royal Flush: 500:1 ($5000)" in prompt
     assert "Flush: 3:2 ($15)" in prompt
     assert "${self.ante_amount" not in prompt
+
+
+PADDING = 30_000
+
+
+@pytest.mark.parametrize(
+    "action",
+    [
+        pytest.param(" " * PADDING + "x" + " " * 1000, id="leading-trailing-spaces"),
+        pytest.param("4" + " " * PADDING + "x", id="inner-spaces"),
+        pytest.param("\t\n " * (PADDING // 3) + "x", id="tab-newline-runs"),
+        pytest.param("[" * (PADDING // 2) + "x" + "]" * (PADDING // 2 - 2), id="deep-brackets"),
+    ],
+)
+def test_long_padded_input_is_rejected_quickly_without_changing_state(action):
+    env = _fresh()
+    before = copy.deepcopy(env.state.game_state)
+    start = time.perf_counter()
+    env.step(action)
+    assert time.perf_counter() - start < 0.25
+    assert env.state.error_count == 1
+    assert env.state.game_state == before

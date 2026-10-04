@@ -18,7 +18,7 @@ class NegotiationEnv(ta.GameEnv):
     max_players = 15
     broadcast_actions = False  # raw actions are echoed only to their author; tokens are re-emitted below
 
-    # Canonical bare commands. Each command occupies one line or semicolon-delimited segment.
+    # Canonical bare commands. Each command occupies one line or semicolon-separated segment.
     bare_broadcast_pattern = re.compile(r"^Broadcast\s*:\s*(.+)$", re.IGNORECASE | re.DOTALL)
     bare_whisper_pattern = re.compile(
         r"^Whisper\s+(?:to\s+)?(?:Player\s+)?(\d+)\s*:\s*(.+)$",
@@ -28,31 +28,61 @@ class NegotiationEnv(ta.GameEnv):
         r"^Offer\s+(?:to\s+)?(?:Player\s+)?(\d+)\s*:?\s*(.+)$",
         re.IGNORECASE | re.DOTALL,
     )
-    bare_accept_pattern = re.compile(r"^Accept\s*#?\s*(\d+)$", re.IGNORECASE)
-    bare_deny_pattern = re.compile(r"^Deny\s*#?\s*(\d+)$", re.IGNORECASE)
+    bare_accept_pattern = re.compile(r"^Accept\s*(?:#\s*)?(\d+)$", re.IGNORECASE)
+    bare_deny_pattern = re.compile(r"^Deny\s*(?:#\s*)?(\d+)$", re.IGNORECASE)
 
     # Legacy bracketed commands retained for backwards compatibility.
     # Broadcast supports three historical alternatives:
     #   A: [Broadcast: message] inside the brackets
     #   B: [Broadcast message] inside the brackets (no colon)
     #   C: [Broadcast] message (outside the brackets)
+    # A whitespace run must be consumable in only one way, as retrying every split of a long run is
+    # quadratic: e.g. `\s*(.+?)\]` is written `\s*((?!\s).[^\]]*|\s(?=\]))\]`, which matches the same text.
     broadcast_pattern = re.compile(
         r"(?:"
-        r"\s*\[Broadcast\s*:\s*(.+?)\]"           # Alternative A: colon present.
+        r"\s*\[Broadcast\s*:\s*((?!\s).[^\]]*|\s(?=\]))\]"     # Alternative A: colon present.
         r"|"
-        r"\s*\[Broadcast((?:\s+).+?)\]"           # Alternative B: no colon, whitespace inside.
+        r"\s*\[Broadcast(\s+(?!\s).[^\]]*|\s\s+(?=\]))\]"      # Alternative B: no colon, whitespace inside.
         r"|"
-        r"\s*\[Broadcast\](\s+.+?)(?=\s*\[|$)"    # Alternative C: message appears after the bracket.
+        r"\s*\[Broadcast\](\s+.(?:\s*[^\s\[])*)(?=\s*\[|\s*$)"  # Alternative C: message appears after the bracket.
         r")",
         re.IGNORECASE | re.DOTALL
     )
 
     # Whisper: require a player id and a colon
-    whisper_pattern = re.compile(r"\s*\[Whisper\s+(?:to\s+)?(?:Player\s+)?(\d+)\s*:\s*(.+?)\]", re.IGNORECASE | re.DOTALL)
+    whisper_pattern = re.compile(
+        r"\s*\[Whisper\s+(?:to\s+)?(?:Player\s+)?(\d+)\s*:\s*((?!\s).[^\]]*|\s(?=\]))\]",
+        re.IGNORECASE | re.DOTALL,
+    )
 
-    offer_pattern = re.compile(r"\[Offer\s+(?:to\s+)?(?:Player\s+)?(\d+)\s*:?\s*(.+?)\]", re.IGNORECASE | re.DOTALL)
-    accept_pattern = re.compile(r"\[Accept\s*#?\s*(\d+)\]", re.IGNORECASE)
-    deny_pattern = re.compile(r"\[Deny\s*#?\s*(\d+)\]", re.IGNORECASE)
+    # The lookahead fails fast when no "]" follows, instead of rescanning the text once per digit of the id.
+    offer_pattern = re.compile(
+        r"\[Offer(?=[^\]]*\])\s+(?:to\s+)?(?:Player\s+)?(\d+)\s*(?::\s*)?((?!\s).[^\]]*|\s(?=\]))\]",
+        re.IGNORECASE | re.DOTALL,
+    )
+    accept_pattern = re.compile(r"\[Accept\s*(?:#\s*)?(\d+)\]", re.IGNORECASE)
+    deny_pattern = re.compile(r"\[Deny\s*(?:#\s*)?(\d+)\]", re.IGNORECASE)
+
+    bare_patterns = {
+        "Broadcast": bare_broadcast_pattern,
+        "Whisper": bare_whisper_pattern,
+        "Offer": bare_offer_pattern,
+        "Accept": bare_accept_pattern,
+        "Deny": bare_deny_pattern,
+    }
+    legacy_patterns = {
+        "Broadcast": broadcast_pattern,
+        "Whisper": whisper_pattern,
+        "Offer": offer_pattern,
+        "Accept": accept_pattern,
+        "Deny": deny_pattern,
+    }
+    # Line breaks always separate commands, but a semicolon only does when a command follows it,
+    # so message text may contain semicolons.
+    command_separator = re.compile(r";\s*(?=(?:\[\s*)?(?:Broadcast|Whisper|Offer|Accept|Deny)\b)", re.IGNORECASE)
+    # The lookbehind keeps the trailing alternative from restarting at every character of an inner
+    # whitespace run, which is quadratic.
+    segment_padding = re.compile(r"^[\s;]+|(?<![\s;])[\s;]+$")
 
     def __init__(self, turn_multiple: int = 3):
         """
@@ -115,6 +145,7 @@ class NegotiationEnv(ta.GameEnv):
             "  'Offer to X: 2 Wheat -> 3 Wood' - Make a single trade offer to a specific player\n"
             "  'Accept #X' or 'Deny #X' - Accept or deny a single trade offer\n"
             "To combine commands in one turn, put each command on its own line or separate them with semicolons.\n"
+            "Messages may contain semicolons, but a semicolon followed by a command name (e.g. '; Offer') starts a new command.\n"
         )
         if self.state.max_turns is not None:
             prompt += f"Game ends after {self.state.max_turns} turns.\n"
@@ -128,6 +159,11 @@ class NegotiationEnv(ta.GameEnv):
             # The player already used up their warning: forfeit the turn (counts as a
             # normal turn, play rotates on) instead of eliminating them.
             self.state.game_info[player_id]["invalid_move"] = True
+            self.message(
+                player_id,
+                f"Your action was invalid again and your turn is forfeited. Reason: {failure_reason}",
+                ta.ObservationType.GAME_ADMIN,
+            )
             return None
         return self.invalid(failure_reason)
 
@@ -136,38 +172,38 @@ class NegotiationEnv(ta.GameEnv):
         committed (with their observations) if no command is invalid; returns the first
         failure reason otherwise."""
         gs = self.game_state
+        commands, failure_reason = self._parse_commands(action)
+        if failure_reason is not None:
+            return failure_reason
         resources = copy.deepcopy(gs["player_resources"])
         pending = copy.deepcopy(gs["pending_offers"])
         offer_counter = gs["offer_id_counter"]
         events: List[Tuple[int, int, str, ta.ObservationType]] = []  # (to_id, from_id, message, type)
 
-        malformed = self._find_malformed_bare_command(action)
-        if malformed is not None:
-            return malformed
-
         # 1. broadcasts (never invalid; empty ones are skipped)
-        for msg_content in self._parse_broadcast(action):
-            if msg_content.strip():
-                events.append((-1, player_id, f"(Broadcast) Player {player_id} says:{msg_content}", ta.ObservationType.PLAYER_ACTION))
+        for (msg_content,) in commands["Broadcast"]:
+            msg_content = self.strip_role_tags(msg_content).strip()
+            if msg_content:
+                events.append((-1, player_id, f"(Broadcast) Player {player_id} says: {msg_content}", ta.ObservationType.PLAYER_ACTION))
 
         # 2. private messages
-        for target_str, msg_content in self._parse_whisper(action):
-            msg_content = msg_content.strip()
-            target_pid = int(target_str)
-            if target_pid not in range(self.state.num_players):
-                return f"Attempted to message a non-existent player {target_pid}."
+        for target_str, msg_content in commands["Whisper"]:
+            msg_content = self.strip_role_tags(msg_content).strip()
+            target_pid = self._parse_number(target_str)
+            if target_pid is None or target_pid not in range(self.state.num_players):
+                return f"Attempted to message a non-existent player {target_str}."
             if target_pid == player_id:
                 return "You cannot send a private message to yourself."
             if not msg_content:
                 return "Empty private message?"
-            events.append((target_pid, player_id, f"(Private) Player {player_id} says:{msg_content}", ta.ObservationType.PLAYER_ACTION))
+            events.append((target_pid, player_id, f"(Private) Player {player_id} says: {msg_content}", ta.ObservationType.PLAYER_ACTION))
 
         # 3. offers
-        for target_str, offer_str in self._parse_offers(action):
+        for target_str, offer_str in commands["Offer"]:
             offer_str = offer_str.strip()
-            target_pid = int(target_str)
-            if target_pid not in range(self.state.num_players):
-                return f"Offer made to invalid player ID {target_pid}"
+            target_pid = self._parse_number(target_str)
+            if target_pid is None or target_pid not in range(self.state.num_players):
+                return f"Offer made to invalid player ID {target_str}"
             if target_pid == player_id:
                 return "You cannot make a trade offer to yourself."
 
@@ -198,10 +234,10 @@ class NegotiationEnv(ta.GameEnv):
             ))
 
         # 4. accepts
-        for offer_id_str in self._parse_offer_responses(action, self.accept_pattern, self.bare_accept_pattern):
-            offer_id = int(offer_id_str)
+        for (offer_id_str,) in commands["Accept"]:
+            offer_id = self._parse_number(offer_id_str)
             if offer_id not in pending:
-                return f"Offer #{offer_id} does not exist."
+                return f"Offer #{offer_id_str} does not exist."
             off = pending[offer_id]
             if off["to"] != player_id:
                 return f"Offer #{offer_id} is not addressed to you."
@@ -223,10 +259,10 @@ class NegotiationEnv(ta.GameEnv):
             del pending[offer_id]
 
         # 5. denies
-        for offer_id_str in self._parse_offer_responses(action, self.deny_pattern, self.bare_deny_pattern):
-            offer_id = int(offer_id_str)
+        for (offer_id_str,) in commands["Deny"]:
+            offer_id = self._parse_number(offer_id_str)
             if offer_id not in pending:
-                return f"Offer #{offer_id} does not exist."
+                return f"Offer #{offer_id_str} does not exist."
             off = pending[offer_id]
             if off["to"] != player_id:
                 return f"Offer #{offer_id} is not addressed to you."
@@ -247,92 +283,70 @@ class NegotiationEnv(ta.GameEnv):
     def on_turn_limit(self) -> ta.Outcome:
         return self._determine_winner()
 
-    # --- Helper Methods for Broadcasts and Whispers ---
-    def _parse_broadcast(self, text: str) -> List[str]:
-        """Extract canonical bare and legacy bracketed broadcast commands."""
-        results = []
-        for segment in self._bare_command_segments(text):
-            match = self.bare_broadcast_pattern.fullmatch(segment)
-            if match:
-                results.append(" " + match.group(1).strip())
-        for g1, g2, g3 in self.broadcast_pattern.findall(text):
-            msg = g1 or g2 or g3
-            if msg and msg.strip():
-                if not msg.startswith(" "):
-                    msg = " " + msg
-                results.append(msg)
-        return results
-
-    def _parse_whisper(self, text: str) -> List[Tuple[str, str]]:
-        """Extract canonical bare and legacy bracketed whisper commands."""
-        results = []
-        for segment in self._bare_command_segments(text):
-            match = self.bare_whisper_pattern.fullmatch(segment)
-            if match:
-                results.append((match.group(1), " " + match.group(2).strip()))
-        for pid_str, msg in self.whisper_pattern.findall(text):
-            if msg and not msg.startswith(" "):
-                msg = " " + msg
-            results.append((pid_str, msg))
-        return results
-
-    def _parse_offers(self, text: str) -> List[Tuple[str, str]]:
-        """Extract canonical bare and legacy bracketed offer commands."""
-        results = []
-        for segment in self._bare_command_segments(text):
-            match = self.bare_offer_pattern.fullmatch(segment)
-            if match:
-                results.append(match.groups())
-        results.extend(self.offer_pattern.findall(text))
-        return results
-
-    def _parse_offer_responses(self, text: str, bracketed_pattern, bare_pattern) -> List[str]:
-        """Extract canonical bare and legacy bracketed offer responses."""
-        results = []
-        for segment in self._bare_command_segments(text):
-            match = bare_pattern.fullmatch(segment)
-            if match:
-                results.append(match.group(1))
-        results.extend(bracketed_pattern.findall(text))
-        return results
-
-    def _bare_command_segments(self, text: str) -> List[str]:
-        return [segment.strip() for segment in re.split(r"[;\n]+", text) if segment.strip()]
-
-    def _find_malformed_bare_command(self, text: str) -> Optional[str]:
-        bare_patterns = {
-            "Broadcast": self.bare_broadcast_pattern,
-            "Whisper": self.bare_whisper_pattern,
-            "Offer": self.bare_offer_pattern,
-            "Accept": self.bare_accept_pattern,
-            "Deny": self.bare_deny_pattern,
-        }
-        legacy_patterns = (
-            self.broadcast_pattern,
-            self.whisper_pattern,
-            self.offer_pattern,
-            self.accept_pattern,
-            self.deny_pattern,
-        )
-        segments = self._bare_command_segments(text)
+    # --- Command parsing ---
+    def _parse_commands(self, text: str) -> Tuple[Dict[str, List[tuple]], Optional[str]]:
+        """Group the action's commands by type; returns a failure reason instead if any part is not a complete command."""
+        commands: Dict[str, List[tuple]] = {name: [] for name in self.bare_patterns}
+        segments = self._command_segments(text)
         if not segments:
-            return "No command was provided."
-
+            return commands, "No command was provided."
         for segment in segments:
-            if any(pattern.fullmatch(segment) for pattern in bare_patterns.values()):
-                continue
+            parsed = self._parse_segment(segment)
+            if parsed is None:
+                return commands, self._describe_invalid_segment(segment)
+            for name, groups in parsed:
+                commands[name].append(groups)
+        return commands, None
 
-            legacy_remainder = segment
-            for pattern in legacy_patterns:
-                legacy_remainder = pattern.sub("", legacy_remainder)
-            if not legacy_remainder.strip():
-                continue
+    def _command_segments(self, text: str) -> List[str]:
+        segments = []
+        for line in text.splitlines():
+            for segment in self.command_separator.split(line):
+                segment = self.segment_padding.sub("", segment)
+                if segment:
+                    segments.append(segment)
+        return segments
 
-            for command, pattern in bare_patterns.items():
-                if re.match(rf"^{command}\b", segment, re.IGNORECASE) and not pattern.fullmatch(segment):
-                    return f"Malformed {command} command."
-            return f"Unrecognized command: {segment!r}."
-        return None
+    def _parse_segment(self, segment: str) -> Optional[List[Tuple[str, tuple]]]:
+        """Parse one bare command or a run of legacy bracketed commands; None if the segment is anything else.
+
+        Each segment is parsed exactly once, so message text is never scanned for commands."""
+        for name, pattern in self.bare_patterns.items():
+            match = pattern.fullmatch(segment)
+            if match:
+                return [(name, match.groups())]
+        commands, pos = [], 0
+        while pos < len(segment):
+            if segment[pos].isspace():
+                pos += 1
+                continue
+            for name, pattern in self.legacy_patterns.items():
+                match = pattern.match(segment, pos)
+                if match:
+                    break
+            else:
+                return None
+            groups = match.groups()
+            if name == "Broadcast":  # one group per historical spelling, exactly one of which matched
+                groups = (next(group for group in groups if group is not None),)
+            commands.append((name, groups))
+            pos = match.end()
+        return commands
+
+    def _describe_invalid_segment(self, segment: str) -> str:
+        command = re.match(r"\[?\s*(Broadcast|Whisper|Offer|Accept|Deny)\b", segment, re.IGNORECASE)
+        if command:
+            return (
+                f"Malformed {command.group(1).capitalize()} command: {segment!r}. "
+                "(A line break, or a semicolon followed by a command name, starts a new command.)"
+            )
+        return f"Unrecognized command: {segment!r}."
+
+    @staticmethod
+    def _parse_number(digits: str) -> Optional[int]:
+        """Parse a player id, offer id, or quantity; None if it has implausibly many digits."""
+        significant = digits.lstrip("0") or "0"
+        return int(significant) if len(significant) <= 18 else None
 
     def _check_sufficient_resources(self, pid: int, needed: Dict[str, int], all_resources: Dict[int, Dict[str, int]]) -> bool:
         """Return True if player `pid` has at least `needed[resource]` of each resource."""
@@ -352,7 +366,7 @@ class NegotiationEnv(ta.GameEnv):
 
     def _parse_resource_list(self, resource_str: str) -> Optional[Dict[str, int]]:
         """Parse e.g. "2 Wheat, 1 Ore" into {"Wheat": 2, "Ore": 1}. Returns None on parse error."""
-        items = re.split(r",\s*|\s+and\s+", resource_str, flags=re.IGNORECASE)
+        items = re.split(r",\s*|(?<!\s)\s+and\s+", resource_str, flags=re.IGNORECASE)
         parsed = {}
         for item in items:
             item = item.strip()
@@ -362,11 +376,11 @@ class NegotiationEnv(ta.GameEnv):
             if not match:
                 return None
             qty_str, rname = match.groups()
-            qty = int(qty_str)
+            qty = self._parse_number(qty_str)
             rname = rname.strip().title()
             if rname not in self.resource_names:
                 return None
-            if qty <= 0:
+            if qty is None or qty <= 0:
                 return None
             parsed[rname] = parsed.get(rname, 0) + qty
         return parsed if parsed else None

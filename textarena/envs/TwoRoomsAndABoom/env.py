@@ -16,11 +16,11 @@ class TwoRoomsAndABoomEnv(ta.GameEnv):
     min_players = 6  # Absolute minimum for gameplay
     max_players = 20  # Reasonable maximum for communication
 
-    # Message patterns for player actions and card reveals (improved with more specific patterns)
     # Support bare 'Player X' / 'X' selections, tolerating optional stray brackets
     target_pattern = re.compile(r'^\s*\[?\s*(?:player\s*)?(\d+)\s*\]?\s*$', re.IGNORECASE)
-    reveal_verb_pattern = re.compile(r"\b(?:reveal|show)\b", re.IGNORECASE)
-    reveal_object_pattern = re.compile(r"\b(?:card|role)\b", re.IGNORECASE)
+    # Only a discussion reply consisting of exactly this command starts a role reveal;
+    # every other reply, even one mentioning reveals or roles, is ordinary discussion.
+    reveal_command_pattern = re.compile(r"\s*reveal\s*", re.IGNORECASE)
 
     # Maximum number of role reveals per player per game
     MAX_REVEALS_PER_PLAYER = 5
@@ -84,12 +84,6 @@ class TwoRoomsAndABoomEnv(ta.GameEnv):
         # Actions are never echoed globally: discussion messages are routed only to
         # the speaker's room by the game logic itself (see _handle_discussion).
         return None
-
-    @classmethod
-    def _wants_role_reveal(cls, action: str) -> bool:
-        """Recognize a reveal request in linear time, with the verb before its object."""
-        verb = cls.reveal_verb_pattern.search(action)
-        return bool(verb and cls.reveal_object_pattern.search(action, verb.end()))
 
     def setup(self) -> Dict[str, Any]:
         num_players = self.state.num_players
@@ -353,9 +347,14 @@ class TwoRoomsAndABoomEnv(ta.GameEnv):
             # Failsafe for missing room assignment
             player_room = "unknown"
 
-        # Determine if player is a leader
+        # Leadership is public knowledge within a room
         is_leader = player_id in game_state["leaders"]
-        leader_status = "You are the Leader of your room." if is_leader else ""
+        if is_leader:
+            leader_status = "You are the Leader of your room."
+        elif player_room in (0, 1):
+            leader_status = f"The Leader of your room is Player {game_state['leaders'][player_room]}."
+        else:
+            leader_status = ""
 
         # Basic prompt for all players
         prompt = (
@@ -367,7 +366,7 @@ class TwoRoomsAndABoomEnv(ta.GameEnv):
             f"{leader_status}\n\n"
             f"The game progresses through {self.num_rounds} rounds:\n"
             f"• In each round, players in the same room can talk to each other\n"
-            f"• Room Leaders can choose one player to trade to the other room\n"
+            f"• Each room has a Leader, known to everyone in that room, who chooses one player to trade to the other room\n"
             f"• During discussions, you can choose to privately reveal your card to another player\n"
             f"• At the end of all rounds, the game checks which room contains the President and Bomber\n\n"
             f"The Red Team wins if the President and Bomber are in the same room at the end.\n"
@@ -401,8 +400,9 @@ class TwoRoomsAndABoomEnv(ta.GameEnv):
         # Add information about revealing roles
         prompt += (
             "Role Revealing:\n"
-            "• During discussions, you can say 'reveal card' or 'show role' to initiate revealing your role\n"
-            "• The game will then prompt you to select which player to reveal to\n"
+            "• To reveal your role, reply with exactly 'reveal' (and nothing else) on your discussion turn\n"
+            "• The game will then ask which player in your room to reveal it to; reply with their number\n"
+            "• Any other reply, even one that mentions revealing or roles, is sent to your room as discussion\n"
             f"• You can reveal your role up to {self.MAX_REVEALS_PER_PLAYER} times per game\n"
             "• This is a way to build trust, but be careful who you reveal to!\n\n"
         )
@@ -448,6 +448,7 @@ class TwoRoomsAndABoomEnv(ta.GameEnv):
 
                 # Create a player list string
                 player_list = ", ".join([f"Player {pid}" for pid in room_players])
+                room_leader = gs["leaders"][room_idx]
 
                 # List roles that have been revealed to each player
                 for pid in room_players:
@@ -472,11 +473,19 @@ class TwoRoomsAndABoomEnv(ta.GameEnv):
                             previous_messages = ""
 
                     # Create the discussion observation
+                    if pid == room_leader:
+                        leader_line = "You are the Leader of this room.\n"
+                    elif room_leader is not None:
+                        leader_line = f"The Leader of this room is Player {room_leader}.\n"
+                    else:
+                        leader_line = ""
                     discussion_observation = (
                         f"Round {gs['round']}: Discussion phase has started.\n"
                         f"You are in Room {room_idx} with: {player_list}.\n"
+                        f"{leader_line}"
                         f"You can talk freely with the other players in your room.\n"
-                        f"To reveal your role to someone, say 'reveal card' or 'show role' during your turn.\n"
+                        f"To reveal your role to someone, reply with exactly 'reveal' on your turn; "
+                        f"any other reply is sent to your room.\n"
                     )
 
                     # Add revealed roles if any
@@ -544,30 +553,19 @@ class TwoRoomsAndABoomEnv(ta.GameEnv):
                 self._resume_discussion_after_reveal()
                 return None
 
-            # Check if player has reveals left
-            current_reveals = gs["reveal_counts"].get(revealing_player, 0)
-            if current_reveals >= self.MAX_REVEALS_PER_PLAYER:
-                error_msg = f"You have already used all {self.MAX_REVEALS_PER_PLAYER} of your allowed role reveals."
-                self.message(revealing_player, error_msg, ta.ObservationType.GAME_ADMIN)
+            # apply() already rejects unavailable reveals as invalid moves
+            unavailable = self._reveal_unavailable_reason(revealing_player)
+            if unavailable is not None:
+                self.message(revealing_player, unavailable, ta.ObservationType.GAME_ADMIN)
                 # Return to Discussion, continuing with the existing turn queue
                 self._resume_discussion_after_reveal()
                 return None
 
-            # Get list of players in the same room
+            current_reveals = gs["reveal_counts"].get(revealing_player, 0)
             room_players = [
                 pid for pid in gs["rooms"][player_room]
                 if pid != revealing_player
             ]
-
-            # Create selection prompt
-            if not room_players:
-                # No one to reveal to
-                error_msg = "There are no other players in your room to reveal your role to."
-                self.message(revealing_player, error_msg, ta.ObservationType.GAME_ADMIN)
-                # Return to Discussion, continuing with the existing turn queue
-                self._resume_discussion_after_reveal()
-                return None
-
             player_list = ", ".join([f"Player {pid}" for pid in room_players])
             selection_options = ", ".join(str(pid) for pid in room_players)
 
@@ -1028,8 +1026,10 @@ class TwoRoomsAndABoomEnv(ta.GameEnv):
 
         # Handle different phases
         if current_phase == "Discussion":
-            # Check if the player wants to reveal their role
-            if self._wants_role_reveal(action):
+            if self.reveal_command_pattern.fullmatch(action):
+                unavailable = self._reveal_unavailable_reason(player_id)
+                if unavailable is not None:
+                    return self.invalid(unavailable)
                 # Player wants to reveal their role - start the role reveal phase
                 gs["revealing_player"] = player_id
                 gs["current_phase"] = "Role_Reveal"
@@ -1063,6 +1063,16 @@ class TwoRoomsAndABoomEnv(ta.GameEnv):
         action (they stay in the game) and play continues with the next queued player.
         """
         return self._transition_current_pid()
+
+    def _reveal_unavailable_reason(self, player_id: int) -> Optional[str]:
+        """Why `player_id` cannot start a role reveal right now, or None if they can."""
+        gs = self.game_state
+        if gs["reveal_counts"].get(player_id, 0) >= self.MAX_REVEALS_PER_PLAYER:
+            return f"You have already used all {self.MAX_REVEALS_PER_PLAYER} of your allowed role reveals."
+        room_idx = 0 if player_id in gs["rooms"][0] else 1
+        if not any(pid != player_id for pid in gs["rooms"][room_idx]):
+            return "There are no other players in your room to reveal your role to."
+        return None
 
     def _handle_role_reveal_selection(self, current_pid, action) -> Optional[ta.Invalid]:
         """
@@ -1186,7 +1196,7 @@ class TwoRoomsAndABoomEnv(ta.GameEnv):
             return self.invalid(error_msg)
 
         # Sanitize the message for safety
-        sanitized_action = action.strip()
+        sanitized_action = self.strip_role_tags(action).strip()
 
         # Store message in history with room-specific tracking
         if str(player_room) not in gs["message_history"]:

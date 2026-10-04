@@ -8,7 +8,7 @@ from textarena.envs.ConnectFour.renderer import create_board_str
 class ConnectFourEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
-    action_pattern = r"(?i)^\s*\[?\s*(?:col\s*)?(\d+)\s*\]?\s*$"
+    action_pattern = r"(?i)^\s*\[?\s*(?:col\s*)?([0-9]+)\s*\]?\s*$"
 
     def __init__(self, is_open: bool = True, num_rows: int = 6, num_cols: int = 7):
         """
@@ -26,6 +26,11 @@ class ConnectFourEnv(ta.GameEnv):
         self.is_open = is_open
         self.num_rows = num_rows
         self.num_cols = num_cols
+
+    @property
+    def action_format(self) -> str:
+        last = self.num_cols - 1
+        return f"a column number from 0 to {last}, for example '{min(4, last)}' or 'col {min(1, last)}'"
 
     def setup(self) -> Dict[str, Any]:
         return {
@@ -49,7 +54,8 @@ class ConnectFourEnv(ta.GameEnv):
     def render(self, player_id: int) -> Optional[str]:
         if not self.is_open:
             return None
-        return f"Board state:\n{self._render_board()}"
+        open_columns = [str(c) for c in range(self.num_cols) if self.game_state["board"][0][c] == "."]
+        return f"Board state:\n{self._render_board()}\nAvailable columns: {', '.join(open_columns) or 'none'}"
 
     def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
         try:

@@ -4,6 +4,15 @@ from typing import Any, Dict, Optional, Union
 import textarena as ta
 from textarena.envs.ColonelBlotto.renderer import create_game_str
 
+
+def _is_renderable(value: Any) -> bool:
+    try:
+        str(value)
+    except (OverflowError, ValueError):
+        return False
+    return True
+
+
 class ColonelBlottoEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
@@ -18,9 +27,9 @@ class ColonelBlottoEnv(ta.GameEnv):
         """
         if not isinstance(num_fields, int) or isinstance(num_fields, bool) or not 2 <= num_fields <= 26:
             raise ValueError("num_fields must be an integer between 2 and 26")
-        if not isinstance(num_total_units, int) or isinstance(num_total_units, bool) or num_total_units < num_fields:
+        if not isinstance(num_total_units, int) or isinstance(num_total_units, bool) or num_total_units < num_fields or not _is_renderable(num_total_units):
             raise ValueError("num_total_units must be an integer at least as large as num_fields")
-        if not isinstance(num_rounds, int) or isinstance(num_rounds, bool) or num_rounds <= 0:
+        if not isinstance(num_rounds, int) or isinstance(num_rounds, bool) or num_rounds <= 0 or not _is_renderable(num_rounds):
             raise ValueError("num_rounds must be a positive integer")
         self.num_fields = num_fields
         self.field_names = list(string.ascii_uppercase[:self.num_fields])
@@ -29,6 +38,10 @@ class ColonelBlottoEnv(ta.GameEnv):
 
     def get_board_str(self):  # TODO have to re-check
         return create_game_str(game_state=self.game_state)
+
+    def _example_allocation(self) -> str:
+        base, extra = divmod(self.num_total_units, self.num_fields)
+        return " ".join(f"{name}{base + (1 if idx < extra else 0)}" for idx, name in enumerate(self.field_names))
 
     def _fresh_player_state(self) -> Dict[str, Any]:
         return {'units_remaining': self.num_total_units, 'current_allocation': {field_name: 0 for field_name in self.field_names}, 'allocation_complete': False}
@@ -53,14 +66,18 @@ class ColonelBlottoEnv(ta.GameEnv):
         lines.append(f"Rounds Won - Commander Alpha: {self.game_state['scores'][0]}, Commander Beta: {self.game_state['scores'][1]}")
         lines.append(f"Available fields: {', '.join(self.field_names)}")
         lines.append(f"Units to allocate: {self.num_total_units}")
-        lines.append("Format: A4 B2 C2")
+        lines.append(f"Format: {self._example_allocation()}")
         self.broadcast("\n".join(lines), ta.ObservationType.GAME_BOARD)
 
     def prompt(self, player_id: int) -> str:
         role = "Commander Alpha" if player_id == 0 else "Commander Beta"
         return (
             f"You are {role} in a game of ColonelBlotto. Each round, you have to allocate exactly {self.num_total_units} units across fields: {', '.join(self.field_names)}\n"
-            f"Format: A4 B2 C2\nWin the majority of fields to win the round!"
+            f"Format: {self._example_allocation()}\n"
+            "Fields you leave out get 0 units. Whoever puts more units on a field wins it; equal units win it for nobody.\n"
+            "Win more fields than your opponent to win the round; equal field counts tie the round.\n"
+            f"The game lasts up to {self.num_rounds} rounds. Winning {self.num_rounds // 2 + 1} rounds wins the game immediately; "
+            "otherwise the commander with more round wins after the last round wins, and equal round wins is a draw."
         )
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
@@ -116,9 +133,10 @@ class ColonelBlottoEnv(ta.GameEnv):
 
     def _validate_allocation(self, allocation_dict: Optional[Dict[str, int]]) -> str:
         """Validate allocation dictionary, allowing omitted fields (now 0 by default)."""
-        if allocation_dict is None:                                                 return "Invalid input format. Use: A:5, B:10, C:5"
+        if allocation_dict is None:                                                 return f"Invalid input format. Use: {self._example_allocation()}"
         if any(f not in self.field_names for f in allocation_dict):                 return f"Invalid field name(s). Valid fields: {', '.join(self.field_names)}"
         if any(not isinstance(u, int) or u < 0 for u in allocation_dict.values()):  return "All allocations must be non-negative integers."
+        if any(u > self.num_total_units for u in allocation_dict.values()):         return f"A field cannot receive more than {self.num_total_units} units."
         if sum(allocation_dict.values()) != self.num_total_units:                   return f"You have to allocate exactly {self.num_total_units} units. Current sum: {sum(allocation_dict.values())}"
         return "Allocation is good."
 

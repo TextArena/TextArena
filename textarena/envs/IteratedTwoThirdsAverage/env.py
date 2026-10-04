@@ -43,8 +43,9 @@ class IteratedTwoThirdsAverageEnv(ta.GameEnv):
         self.num_rounds = num_rounds
         self.min_guess = min_guess
         self.max_guess = max_guess
+        # A whitespace run must be consumable by only one \s*, as retrying every split of a long run is quadratic.
         self._guess_re = re.compile(
-            r"^\s*\[?\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)\s*\]?\s*$"
+            r"^\s*(?:\[\s*)?([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)(?:\s*\])?\s*$"
         )
 
     def setup(self) -> Dict[str, Any]:
@@ -59,7 +60,9 @@ class IteratedTwoThirdsAverageEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         return (
             f"You are Player {player_id} in a {self.num_rounds}-round of IteratedTwoThirdsAverage.\nEach round, guess a number between {self.min_guess} and {self.max_guess}.\n"
-            "After both guesses, the target is (2/3)x(average of both guesses),\nand the player whose guess is closest to the target wins that round.\nReply with your guess as a plain number, e.g. '42'."
+            "After both guesses, the target is (2/3)x(average of both guesses),\nand the player whose guess is closest to the target wins that round.\n"
+            "Equal distances tie the round. The player who wins more rounds wins the game; equal round wins is a draw.\n"
+            "Reply with your guess as a plain number, e.g. '42'."
         )
 
     def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
@@ -117,6 +120,7 @@ class IteratedTwoThirdsAverageEnv(ta.GameEnv):
             else:
                 gs["points"][winner] += 1
                 self.broadcast(f"Player {winner} wins the round!", ta.ObservationType.GAME_MESSAGE)
+            self.broadcast(f"Score after round {gs['round']}/{self.num_rounds}: Player 0 {gs['points'][0]}, Player 1 {gs['points'][1]}.", ta.ObservationType.GAME_MESSAGE)
             gs["guesses"].clear()
             # check end-of-game
             if gs["round"] >= self.num_rounds:

@@ -15,6 +15,10 @@ class ThreePlayerTicTacToeEnv(ta.GameEnv):
         self.cell_mapping = {i * self.board_size + j: (i, j) for i in range(self.board_size) for j in range(self.board_size)}
         self.symbols = {0: 'A', 1: 'B', 2: 'C'}
 
+    @property
+    def action_format(self) -> str:
+        return f"a cell number from 0 to {self.board_size ** 2 - 1}, for example '4'"
+
     def get_board_str(self):
         return create_board_str(game_state=self.state.game_state)
 

@@ -65,6 +65,18 @@ def test_invalid_format_is_rejected_but_game_continues():
     assert env.state.current_player_id == 1
 
 
+def test_format_error_describes_expected_action():
+    env = _fresh()
+    env.step("Z 0")
+    notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
+    assert f"Expected {env.action_format}." in notices[-1]
+
+    assert "for example 'X 4'" in env.action_format
+    fresh = _fresh()
+    fresh.step("X 4")
+    assert fresh.state.turn == 1 and fresh.state.error_count == 0
+
+
 def test_occupied_cell_is_rejected():
     env = _fresh()
     env.step("X 0")           # p0 -> cell 0

@@ -11,20 +11,21 @@ class CountdownEnv(ta.GameEnv):
 
     max_action_chars = 128
     max_value = 1_000_000
+    max_numbers = 100
     _ACTION_RE = re.compile(
         r"^\s*(?P<legacy>\[)?\s*(?P<i>\d+)\s+(?P<j>\d+)\s*(?P<op>[+\-*/])\s*(?(legacy)\])\s*$"
     )
-    _OPS = {'+': operator.add, '-': operator.sub, '*': operator.mul, '/': operator.truediv}
+    _OPS = {'+': operator.add, '-': operator.sub, '*': operator.mul}
 
     def __init__(self, numbers: Optional[List[int]] = None, target: Optional[int] = None, max_turns: int = 12):
         if numbers is not None and (
             not isinstance(numbers, (list, tuple))
-            or len(numbers) < 2
+            or not 2 <= len(numbers) <= self.max_numbers
             or any(isinstance(number, bool) or not isinstance(number, int) or number <= 0 for number in numbers)
             or any(number > self.max_value for number in numbers)
         ):
             raise ValueError(
-                f"numbers must contain at least two positive integers no greater than {self.max_value}."
+                f"numbers must contain 2 to {self.max_numbers} positive integers no greater than {self.max_value}."
             )
         if target is not None and (
             isinstance(target, bool)
@@ -34,6 +35,8 @@ class CountdownEnv(ta.GameEnv):
             raise ValueError(f"target must be a positive integer no greater than {self.max_value}.")
         if isinstance(max_turns, bool) or not isinstance(max_turns, int) or max_turns < 1:
             raise ValueError("max_turns must be a positive integer.")
+        if numbers is not None and target is not None and target in numbers:
+            raise ValueError("target must not be one of the starting numbers.")
         self._configured_numbers = list(numbers) if numbers is not None else None
         self._configured_target = target
         self.max_turns = max_turns
@@ -45,10 +48,18 @@ class CountdownEnv(ta.GameEnv):
     def setup(self) -> Dict[str, Any]:
         big_numbers = [25, 50, 75, 100]
         small_numbers = list(range(1, 11)) * 2
-        self.orig_numbers = self._configured_numbers[:] if self._configured_numbers is not None else (
-            self.rng.sample(big_numbers, 2) + self.rng.sample(small_numbers, 4)
-        )
+
+        def draw_numbers() -> List[int]:
+            return self.rng.sample(big_numbers, 2) + self.rng.sample(small_numbers, 4)
+
+        self.orig_numbers = self._configured_numbers[:] if self._configured_numbers is not None else draw_numbers()
         self.target = self._configured_target if self._configured_target is not None else self.rng.randint(100, 999)
+        # A starting number equal to the target would award the full score without a single operation.
+        while self.target in self.orig_numbers:
+            if self._configured_target is None:
+                self.target = self.rng.randint(100, 999)
+            else:
+                self.orig_numbers = draw_numbers()
         numbers = self.orig_numbers[:]
         best_value = min(numbers, key=lambda v: abs(v - self.target)) if numbers else 0
         return {
@@ -62,10 +73,15 @@ class CountdownEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         return (
             "You are playing Countdown numbers game!\n"
-            "Goal: Combine numbers using +, -, *, / to reach the target.\n"
-            "Action format: 'i j op' where i,j are indices and op is the operation.\n"
-            "Example: '0 2 *' multiplies number at index 0 with number at index 2.\n"
-            "Division must result in whole numbers only."
+            f"Goal: Combine numbers using +, -, *, / to reach the target {self.target} exactly.\n"
+            "Action format: 'i j op' where i,j are the indices of two different numbers on the board and op is the "
+            "operation. It computes (number i) op (number j), so the order matters for '-' and '/'.\n"
+            "Example: '0 1 +' adds the number at index 0 to the number at index 1.\n"
+            "Both numbers are replaced by the result, which is appended to the end of the list, so indices change after every move.\n"
+            f"Division must result in whole numbers only, and results must stay between -{self.max_value:,} and {self.max_value:,}.\n"
+            f"The game ends when you reach the target, when only one number is left, or after {self.max_turns} moves. "
+            "If you miss the target, your score is the fraction of the starting gap you closed: how much closer the "
+            "closest value ever on the board got to the target than the closest starting number."
         )
 
     def render(self, player_id: int) -> str:
@@ -88,8 +104,8 @@ class CountdownEnv(ta.GameEnv):
             return self.invalid(f"Invalid indices. Must be different and in range 0-{len(numbers)-1}")
 
         result = self._execute_operation(i, j, op)
-        if result is None:
-            return self.invalid("Invalid operation (division by zero or non-integer result)")
+        if isinstance(result, ta.Invalid):
+            return result
 
         self._update_state(i, j, op, result)
 
@@ -128,24 +144,23 @@ class CountdownEnv(ta.GameEnv):
         numbers = self.game_state["numbers"]
         return (0 <= i < len(numbers) and 0 <= j < len(numbers) and i != j)
 
-    def _execute_operation(self, i: int, j: int, op: str) -> Optional[int]:
-        """Execute arithmetic operation and return result."""
-        if op not in self._OPS: return None
+    def _execute_operation(self, i: int, j: int, op: str) -> Union[int, ta.Invalid]:
+        """Execute arithmetic operation and return the result, or why it is not allowed."""
         numbers = self.game_state["numbers"]
         a, b = numbers[i], numbers[j]
-        operation = self._OPS[op]
-
-        try:
-            if op == '/':
-                if b == 0 or a % b != 0: return None
-                result = a // b
-            else:
-                result = operation(a, b)
-            if abs(result) > self.max_value:
-                return None
-            return result
-        except (ZeroDivisionError, OverflowError, ValueError):
-            return None
+        if op == '/':
+            if b == 0:
+                return self.invalid("Division by zero is not allowed.")
+            if a % b != 0:
+                return self.invalid(f"{a} / {b} is not a whole number.")
+            result = a // b
+        else:
+            result = self._OPS[op](a, b)
+        if abs(result) > self.max_value:
+            return self.invalid(
+                f"{a} {op} {b} = {result}, but results must stay between -{self.max_value:,} and {self.max_value:,}."
+            )
+        return result
 
     def _update_state(self, i: int, j: int, op: str, result: int):
         """Update game state after successful operation."""
@@ -170,10 +185,10 @@ class CountdownEnv(ta.GameEnv):
             gs["best_expression"] = new_expr
 
     def _calculate_progress(self) -> float:
-        """Calculate progress score (0.0 to 1.0, higher is better)."""
+        """Fraction of the starting gap to the target closed by the best value: 0.0 at the start, below 1.0 unless solved."""
+        start_distance = min(abs(number - self.target) for number in self.orig_numbers)  # >= 1: target is never a starting number
         distance = abs(self.game_state["best_value"] - self.target)
-        # Scale progress: exact match = 1.0, distance of 1000 = 0.0
-        return max(0.0, 1.0 - distance / 1000.0)
+        return max(0.0, (start_distance - distance) / start_distance)
 
     def _render_board(self) -> str:
         gs = self.game_state

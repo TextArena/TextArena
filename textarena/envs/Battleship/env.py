@@ -24,23 +24,33 @@ class BattleshipEnv(ta.GameEnv):
             raise ValueError("grid_size must be an integer from 5 through 26")
         self.grid_size = grid_size
 
+    @property
+    def action_format(self) -> str:
+        last_row = chr(ord('A') + self.grid_size - 1)
+        return (
+            f"a row letter from A to {last_row} followed by a column number from 0 to {self.grid_size - 1}, "
+            "for example 'C4'"
+        )
+
     def setup(self) -> Dict[str, Any]:
         board, tracking_board, ship_placements = self._generate_board()
         return {"board": board, "tracking_board": tracking_board, "ship_placements": ship_placements}
 
-    def on_start(self):
-        # Show the starting player their private view (own ships + tracking grid).
-        pid = self.state.current_player_id
-        self.message(pid, self._render_player_view(pid), ta.ObservationType.GAME_BOARD, from_id=-1)
-
     def prompt(self, player_id: int) -> str:
+        last_row = chr(ord('A') + self.grid_size - 1)
+        fleet = ", ".join(f"{name} ({name[0]}, {length} cells)" for name, length in self.ships.items())
         return (
             f"You are Player {player_id}. You are playing the Battleship game.\nYour goal is to sink all of your opponent's ships before they sink yours.\n"
-            "On your turn, you can fire missiles at specific coordinates by replying with the coordinate, e.g. 'a4'. If the missile hits a ship, it is marked with 'X'. If it misses, it is marked with 'O'. "
-            "In either scenarios, the game environment will inform you of your hits. If you have sunk a boat, the game environment will tell you!\nThe game ends when all of one player's ships have been sunk.\n"
-            "Your initial board will show all of your ships placed and your opponent's hits on you, and your hits and misses on your opponent's board without showing your opponent's ships.\n"
-            "Here is the initial board:\n"
+            f"Each player has a hidden {self.grid_size}x{self.grid_size} grid with five ships placed horizontally or vertically without overlapping: {fleet}.\n"
+            f"Players take turns firing one shot each. On your turn, reply with the coordinate to fire at: a row letter (A-{last_row}) followed by a column number (0-{self.grid_size - 1}), e.g. 'C4'.\n"
+            "After every shot, both players learn whether it hit or missed, and when a ship is sunk, which ship it was. You cannot fire at the same coordinate twice.\n"
+            "The game ends when all of one player's ships have been sunk.\n"
+            "Before each of your turns you will see your own grid (your ships by initial, '~' for water, 'X' where your opponent hit and 'O' where they missed) "
+            "and your shots at the opponent ('X' for a hit, 'O' for a miss, '~' for coordinates not yet fired at). Your opponent's ships stay hidden."
         )
+
+    def render(self, player_id: int) -> str:
+        return self._render_player_view(player_id)
 
     def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
         row = ord(move.group(1).upper()) - ord('A')
@@ -64,15 +74,16 @@ class BattleshipEnv(ta.GameEnv):
             ship_initial = opponent_board[row][col]
             opponent_board[row][col] = 'X'
             if not any(ship_initial in board_row for board_row in opponent_board):
-                self.message(player_id, f"Sunk! You sunk a ship at {coord}! Your updated board:\n{self._render_player_view(player_id)}", ta.ObservationType.GAME_ACTION_DESCRIPTION)
-                self.message(opponent_id, f"Opponent sunk your ship at {coord}! Your updated board:\n{self._render_player_view(opponent_id)}", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+                ship_name = next(name for name in self.ships if name[0] == ship_initial)
+                self.message(player_id, f"Sunk! You hit a ship at {coord} and sank the opponent's {ship_name}!", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+                self.message(opponent_id, f"Opponent hit your ship at {coord} and sank your {ship_name}!", ta.ObservationType.GAME_ACTION_DESCRIPTION)
             else:
-                self.message(player_id, f"Hit! You hit a ship at {coord}! Your updated board:\n{self._render_player_view(player_id)}", ta.ObservationType.GAME_ACTION_DESCRIPTION)
-                self.message(opponent_id, f"Opponent hit your ship at {coord}! Your updated board:\n{self._render_player_view(opponent_id)}", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+                self.message(player_id, f"Hit! You hit a ship at {coord}!", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+                self.message(opponent_id, f"Opponent hit your ship at {coord}!", ta.ObservationType.GAME_ACTION_DESCRIPTION)
         else:
             tracking_board[row][col] = 'O'; opponent_board[row][col] = 'O'
-            self.message(player_id, f"Miss! You missed the ship at {coord}! Your updated board:\n{self._render_player_view(player_id)}", ta.ObservationType.GAME_ACTION_DESCRIPTION)
-            self.message(opponent_id, f"Opponent missed your ship at {coord}! Your updated board:\n{self._render_player_view(opponent_id)}", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+            self.message(player_id, f"Miss! Your shot at {coord} hit only water.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+            self.message(opponent_id, f"Opponent fired at {coord} and missed.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
         if self._check_win(player_id):
             return self.winner(player_id, reason=f"Player {player_id} has sunk all of their opponent's ships!")
@@ -136,16 +147,6 @@ class BattleshipEnv(ta.GameEnv):
             raise ValueError(f"Fleet cannot be placed on a {self.grid_size}x{self.grid_size} board")
         return placements
 
-    def _place_ship_on_board(self, grid: List[List[str]], ship_name: str, length: int) -> List[Tuple[int, int]]:
-        """Place one ship without an unbounded random retry loop."""
-        candidates = self._candidate_placements(grid, length)
-        if not candidates:
-            raise ValueError(f"{ship_name} cannot be placed on the remaining board")
-        cells = self.rng.choice(candidates)
-        for row, col in cells:
-            grid[row][col] = ship_name[0]
-        return [cells[0], cells[-1]]
-
     def _render_player_view(self, player_id: int) -> str:
         """ Render the player's private view of the game. """
         own_grid = self.game_state['board'][player_id]
@@ -153,7 +154,7 @@ class BattleshipEnv(ta.GameEnv):
         player_label = f"Player {player_id}"
 
         view = []
-        view.append(f"\n{player_label}'s View".center(self.grid_size * 4 + 15))
+        view.append(f"{player_label}'s View".center(self.grid_size * 6 + 11).rstrip())
         view.append("   " + "Your Ships".center(self.grid_size * 3) + "        " + "Your Hits on Opponent".center(self.grid_size * 3))
         view.append("   " + " ".join([f"{i:2}" for i in range(self.grid_size)]) + "      " + "   " + " ".join([f"{i:2}" for i in range(self.grid_size)]))
 

@@ -38,6 +38,10 @@ class FrozenLakeEnv(ta.GameEnv):
             )
         if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
             raise ValueError("max_turns must be a positive integer")
+        if max_turns < 2 * (size - 1):
+            raise ValueError(
+                f"max_turns must be at least {2 * (size - 1)}, the length of the shortest path to the goal"
+            )
         if not isinstance(randomize_start_goal, bool):
             raise ValueError("randomize_start_goal must be a boolean")
         self.size = size
@@ -160,9 +164,9 @@ class FrozenLakeEnv(ta.GameEnv):
             f"  'G' = Goal (reach this to win!)\n"
             f"  'P' = Your current position\n\n"
             f"Available actions: up, down, left, right (or w, a, s, d)\n"
-            f"Reply with your action, e.g. 'up' or 'w'.\n\n"
-            f"Objective: Navigate from {start} to the goal at {goal} "
-            f"without falling into any holes!\n"
+            f"Reply with your action, e.g. 'up' or 'w'. Each action moves you one cell; moving off the grid is an invalid move.\n\n"
+            f"Objective: Navigate from {start} to the goal at {goal} (row, column) "
+            f"without falling into any holes! You have {self.max_turns} moves.\n"
         )
 
     def render(self, player_id: int) -> str:

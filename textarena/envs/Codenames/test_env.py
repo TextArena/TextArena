@@ -4,8 +4,13 @@ Players: 0 = Red spymaster, 1 = Red operative, 2 = Blue spymaster, 3 = Blue oper
 The board assignment is read from ``env.board`` so outcomes are scripted deterministically.
 """
 from collections import Counter
+import re
+
+import nltk
+import nltk.corpus
 import pytest
 import textarena as ta
+import textarena.envs.Codenames.env as codenames_module
 from textarena.envs.Codenames.env import CodenamesEnv
 
 
@@ -63,14 +68,75 @@ def test_constructor_rejects_invalid_options(kwargs):
         CodenamesEnv(**kwargs)
 
 
-def test_missing_nltk_data_uses_offline_fallback(monkeypatch):
-    def unavailable(*args, **kwargs):
+class _MissingCorpus:
+    def words(self, *args, **kwargs):
         raise LookupError("corpus unavailable")
 
-    monkeypatch.setattr("textarena.envs.Codenames.env.words.words", unavailable)
-    env = CodenamesEnv()
+
+def _missing_tagger(*args, **kwargs):
+    raise LookupError("tagger unavailable")
+
+
+def _boards(hardcore):
+    boards = []
+    for seed in range(3):
+        env = CodenamesEnv(hardcore=hardcore)
+        env.reset(num_players=4, seed=seed)
+        boards.append(list(env.board.items()))
+    return boards
+
+
+@pytest.mark.parametrize("hardcore", [False, True])
+def test_board_words_never_include_blocked_words(hardcore):
+    from textarena.utils.word_lists import get_blocked_words
+
+    assert not set(CodenamesEnv(hardcore=hardcore).word_list) & get_blocked_words()
+
+
+def test_missing_nltk_data_does_not_change_boards(monkeypatch):
+    expected = {hardcore: _boards(hardcore) for hardcore in (False, True)}
+
+    # Replace the module-level references themselves: reading an attribute of NLTK's
+    # lazy corpus loader would load the corpus, which fails when the data is missing.
+    monkeypatch.setattr(nltk.corpus, "words", _MissingCorpus())
+    monkeypatch.setattr(nltk, "pos_tag", _missing_tagger)
+    monkeypatch.setattr(codenames_module, "words", _MissingCorpus(), raising=False)
+    monkeypatch.setattr(codenames_module, "pos_tag", _missing_tagger, raising=False)
+    codenames_module._bundled_word_lists.cache_clear()
+
+    assert {hardcore: _boards(hardcore) for hardcore in (False, True)} == expected
+    assert CodenamesEnv(hardcore=True).word_list != CodenamesEnv(hardcore=False).word_list
+
+
+@pytest.mark.parametrize("level", ["basic", "hardcore"])
+def test_bundled_word_lists_hold_valid_board_words(level):
+    words = codenames_module._bundled_word_lists()[level]
+    assert len(words) == len(set(words)) >= 25
+    assert "pass" not in words
+    assert all(re.fullmatch(r"[a-z]{1,7}", word) for word in words)
+    assert CodenamesEnv(hardcore=level == "hardcore").word_list == list(words)
+
+
+def test_prompt_states_the_full_clue_rule_and_turn_limit():
+    env = CodenamesEnv(max_turns=30)
     env.reset(num_players=4, seed=42)
-    assert len(env.board) == 25
+    for player_id in range(4):
+        prompt = env.prompt(player_id)
+        assert "contain one, or be contained in one" in prompt
+        assert "loses the game immediately" in prompt
+        assert "a Neutral or opposing word ends the turn" in prompt
+        assert "After 30 moves in total" in prompt
+
+
+def test_board_shows_active_clue_and_guesses_left():
+    env = _fresh()
+    env.step(f"{SAFE_CLUE} 2")
+    assert f"Current clue: '{SAFE_CLUE} 2' (3 guesses left this turn)" in env.render(1)
+    env.step(_words(env, "R")[0])
+    assert f"Current clue: '{SAFE_CLUE} 2' (2 guesses left this turn)" in env.render(1)
+    assert "Moves played: 2 of 80" in env.render(1)
+    env.step("pass")
+    assert "Current clue" not in env.render(2)
 
 
 def test_spymaster_clue_rotates_to_operative():

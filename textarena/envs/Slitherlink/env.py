@@ -129,13 +129,18 @@ class SlitherlinkEnv(ta.GameEnv):
 
     def prompt(self, player_id: int) -> str:
         return (
-            f"You are playing Slitherlink on a {self.R}x{self.C} grid!\n"
-            "Draw a single continuous loop so each numbered cell has that many bordering edges.\n"
-            "Toggle edges with:\n"
-            "  'h r c' - toggle horizontal edge above dots at row r, column c\n"
-            "  'v r c' - toggle vertical edge left of dots at row r, column c\n"
-            "Numbers show required edge count, '.' means no constraint.\n"
-            f"You have up to {self.max_turns} moves to solve the puzzle."
+            f"You are playing Slitherlink on a {self.R}x{self.C} grid of cells!\n"
+            "Draw a single continuous loop along the grid lines so each numbered cell has exactly that many of its four "
+            "sides on the loop. The loop must close and may not branch or cross itself. '·' means no constraint.\n"
+            f"Dots are numbered by row 0 to {self.R} and column 0 to {self.C}, as labeled on the board; cell (r, c) is "
+            "the square whose top-left corner is dot (r, c).\n"
+            "Each move toggles (draws or erases) one edge:\n"
+            f"  'h r c' - the horizontal edge from dot (r, c) to dot (r, c+1), the top side of cell (r, c); r is 0 to {self.R}, c is 0 to {self.C - 1}\n"
+            f"  'v r c' - the vertical edge from dot (r, c) to dot (r+1, c), the left side of cell (r, c); r is 0 to {self.R - 1}, c is 0 to {self.C}\n"
+            "For example, 'h 0 0' toggles the top side of the top-left cell.\n"
+            f"You have up to {self.max_turns} moves to solve the puzzle.\n"
+            "An edge outside the board or a malformed reply is an invalid move. It changes nothing and you may try again, "
+            "but two invalid moves in a row end the game."
         )
 
     def render(self, player_id: int) -> str:
@@ -166,10 +171,21 @@ class SlitherlinkEnv(ta.GameEnv):
         return None
 
     def on_turn_limit(self) -> ta.Outcome:
-        return self.outcome({0: self._progress()}, reason="Move limit reached. Puzzle unfinished.")
+        return self.outcome({0: self._partial_score()}, reason="Move limit reached. Puzzle unfinished.")
 
     def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
-        return self.outcome({0: self._progress()}, reason=f"Invalid Move: {reason}")
+        return self.outcome({0: self._partial_score()}, reason=f"Invalid Move: {reason}")
+
+    def _partial_score(self) -> float:
+        """Drawn edges on the hidden solution loop minus drawn edges off it, as a share of the loop's length.
+
+        An empty board scores 0, every wrong edge cancels a right one, and only drawing the loop itself
+        (which wins) reaches 1.
+        """
+        solution_h, solution_v = self.game_state["solution_h_edges"], self.game_state["solution_v_edges"]
+        on_loop = len(self.h_edges & solution_h) + len(self.v_edges & solution_v)
+        off_loop = len(self.h_edges - solution_h) + len(self.v_edges - solution_v)
+        return max(0, on_loop - off_loop) / (len(solution_h) + len(solution_v))
 
     def _valid_edge(self, kind: str, r: int, c: int) -> bool:
         if kind == 'h': return 0 <= r <= self.R and 0 <= c < self.C
@@ -182,6 +198,10 @@ class SlitherlinkEnv(ta.GameEnv):
 
     def _progress(self) -> float:
         """Fraction of clue cells currently satisfied."""
+        satisfied, total = self._clue_counts()
+        return satisfied / max(1, total)
+
+    def _clue_counts(self) -> Tuple[int, int]:
         satisfied = 0
         total = 0
         for r in range(self.R):
@@ -190,7 +210,7 @@ class SlitherlinkEnv(ta.GameEnv):
                     total += 1
                     if self._cell_edge_count(r, c) == self.clues[r][c]:
                         satisfied += 1
-        return satisfied / max(1, total)
+        return satisfied, total
 
     def _cell_edge_count(self, r: int, c: int) -> int:
         cnt = 0
@@ -201,10 +221,10 @@ class SlitherlinkEnv(ta.GameEnv):
         return cnt
 
     def _is_solved(self) -> bool:
-        # 1. All clues satisfied
-        if self._progress() < 1.0:
-            return False
-        # 2. Every dot has 0 or 2 incident edges AND at least one edge exists
+        return self._progress() == 1.0 and self._is_single_loop()
+
+    def _is_single_loop(self) -> bool:
+        # 1. Every dot has 0 or 2 incident edges AND at least one edge exists
         if not (self.h_edges or self.v_edges):
             return False
 
@@ -217,7 +237,7 @@ class SlitherlinkEnv(ta.GameEnv):
             deg[(r+1, c)]   += 1
         if any(v not in (0, 2) for v in deg.values()):
             return False
-        # 3. Exactly one loop → start BFS from any edge-dot and ensure all
+        # 2. Exactly one loop → start BFS from any edge-dot and ensure all
         start = next(iter(deg.keys()))
         seen = set([start])
         q = deque([start])

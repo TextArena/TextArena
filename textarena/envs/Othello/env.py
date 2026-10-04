@@ -2,11 +2,12 @@ import re
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
-from textarena.envs.Othello.renderer import create_board_str
+from textarena.envs.Othello.renderer import PIECE_SYMBOLS, create_board_str
 
 
 DIRS = [(-1,-1),(-1,0),(-1,1),(0,-1),(0,1),(1,-1),(1,0),(1,1)]
 EMPTY, BLACK, WHITE = "", "B", "W"
+COLOUR_NAMES = {BLACK: "Black", WHITE: "White"}
 
 class OthelloEnv(ta.GameEnv):
     min_players = 2
@@ -26,6 +27,11 @@ class OthelloEnv(ta.GameEnv):
         self.N = board_size
         self.show_valid = show_valid
 
+    @property
+    def action_format(self) -> str:
+        row, col = self.N // 2 - 2, self.N // 2 - 1  # one of Black's opening moves, (2, 3) on 8x8
+        return f"the row and column of your move, each from 0 to {self.N - 1}, for example '{row}, {col}'"
+
     def setup(self) -> Dict[str, Any]:
         board = [[EMPTY for _ in range(self.N)] for _ in range(self.N)]
         m1, m2 = self.N // 2 - 1, self.N // 2  # initial four stones in the middle
@@ -42,11 +48,16 @@ class OthelloEnv(ta.GameEnv):
         return {0: "Black", 1: "White"}
 
     def prompt(self, player_id: int) -> str:
-        piece, colour = (BLACK, "Black") if player_id == 0 else (WHITE, "White")
+        piece = BLACK if player_id == 0 else WHITE
         return (
-            f"You are Player {player_id} playing {colour} ({piece}) in a game of Othello.\nYour goal is to have more pieces of your color on the board by the end of the game.\n"
+            f"You are Player {player_id} playing {COLOUR_NAMES[piece]} in a game of Othello.\n"
+            f"On the board, Black discs are shown as '{PIECE_SYMBOLS[BLACK]}' and White discs as '{PIECE_SYMBOLS[WHITE]}'; your discs are '{PIECE_SYMBOLS[piece]}'.\n"
+            "Your goal is to have more pieces of your color on the board by the end of the game.\n"
             f"On your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. "
-            f"All flanked opponent pieces will be flipped to your color.\nReply with the row and column of your move, e.g. '2, 3'."
+            f"All flanked opponent pieces will be flipped to your color.\n"
+            "If you have no legal move, your turn is skipped automatically. The game ends when the board is full or neither player can move; "
+            "the player with more discs wins, and equal counts are a draw.\n"
+            f"Reply with the row and column of your move (numbered from 0, as labelled on the board), e.g. '2, 3'."
         )
 
     def render(self, player_id: int) -> str:
@@ -54,7 +65,7 @@ class OthelloEnv(ta.GameEnv):
         obs = f"Game Board:\n{gs['rendered_board']}"
         if self.show_valid:
             obs += "\nValid moves: " + ", ".join([f"'{r}, {c}'" for r, c in gs["valid_moves"]]) if gs["valid_moves"] else "\nNo valid moves - you may have to skip."
-        obs += f"\nScores - Black: {gs['black_count']}, White: {gs['white_count']}\n"
+        obs += f"\nScores - {self._label(BLACK)}: {gs['black_count']}, {self._label(WHITE)}: {gs['white_count']}\n"
         return obs
 
     def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
@@ -69,10 +80,13 @@ class OthelloEnv(ta.GameEnv):
             return self.invalid("Coordinates are too large.")
         valid = self._valid_moves(board, piece)
         if [r, c] not in valid:
-            return self.invalid("Illegal move. Valid moves: " + ", ".join(f"'{vr}, {vc}'" for vr, vc in valid))
+            reason = f"({r}, {c}) is not a legal move: a move must be on an empty square and flip at least one opposing disc."
+            if self.show_valid:
+                reason += " Valid moves: " + ", ".join(f"'{vr}, {vc}'" for vr, vc in valid)
+            return self.invalid(reason)
 
         flipped = self._place_and_flip(board, r, c, piece)
-        self.broadcast(f"Player {player_id} ({piece}) played ({r}, {c}) flipping {flipped} piece(s)", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        self.broadcast(f"Player {player_id} ({self._label(piece)}) played ({r}, {c}) flipping {flipped} piece(s)", ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
         b, w = self._counts(board)
         gs.update({"rendered_board": self._render_board(board), "black_count": b, "white_count": w})
@@ -83,13 +97,16 @@ class OthelloEnv(ta.GameEnv):
             return self._final_outcome(b, w)
         if not opp_valid:  # opponent has no legal move: they skip, same player moves again
             opp_pid = 1 - player_id
-            self.broadcast(f"Player {opp_pid} ({opp}) has no valid moves and must skip.", ta.ObservationType.GAME_MESSAGE)
+            self.broadcast(f"Player {opp_pid} ({self._label(opp)}) has no valid moves and must skip.", ta.ObservationType.GAME_MESSAGE)
             gs["valid_moves"] = self._valid_moves(board, piece)
             self.set_next_player(player_id)
         return None
 
     def get_board_str(self) -> str:
         return create_board_str(self.game_state["board"])
+
+    def _label(self, piece: str) -> str:
+        return f"{COLOUR_NAMES[piece]} {PIECE_SYMBOLS[piece]}"
 
     def _in_bounds(self, r: int, c: int) -> bool:
         return 0 <= r < self.N and 0 <= c < self.N

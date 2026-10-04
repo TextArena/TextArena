@@ -62,6 +62,20 @@ def test_invalid_format_increments_error():
     assert env.state.current_player_id == 0
 
 
+@pytest.mark.parametrize("grid_size", (2, 4, 8))
+def test_format_error_describes_expected_action(grid_size):
+    env = _fresh(grid_size=grid_size)
+    env.step("flip some cards")
+    notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
+    assert f"Expected {env.action_format}." in notices[-1]
+    assert f"four numbers from 0 to {grid_size - 1} separated by spaces," in env.action_format
+
+    assert env.action_format.endswith("for example '0 1 1 0'")
+    fresh = _fresh(grid_size=grid_size)
+    fresh.step("0 1 1 0")
+    assert fresh.state.turn == 1 and fresh.state.error_count == 0
+
+
 def test_out_of_bounds_rejected():
     env = _fresh(grid_size=2)
     done, _ = env.step("0 0 5 5")
@@ -176,7 +190,7 @@ def test_rich_renderer_reveals_only_matched_cards():
     (r1, c1), (r2, c2) = next(iter(_pairs(env).values()))
     symbol = env.state.game_state["board"][r1][c1]
 
-    done, _ = env.step(f"[{r1} {c1} {r2} {c2}]")
+    done, _ = env.step(f"{r1} {c1} {r2} {c2}")
     rich_board = env.get_board_str()
 
     assert not done
@@ -264,6 +278,42 @@ def test_exact_turn_limit_draws_tied_scores():
     assert done
     assert env.state.turn == 1
     assert env.state.rewards == {0: 0, 1: 0}
+
+
+@pytest.mark.parametrize("grid_size", (8, 12))
+def test_text_board_columns_stay_aligned_with_two_letter_labels(grid_size):
+    env = _fresh(grid_size=grid_size)
+    gs = env.state.game_state
+    gs["matched_positions"] = {
+        (r, c)
+        for r in range(grid_size)
+        for c in range(grid_size)
+        if len(gs["board"][r][c]) == 2 or (r + c) % 3 == 0
+    }
+
+    header, *rows = env._render_board().splitlines()
+
+    positions, start = [], 0
+    for c in range(grid_size):
+        positions.append(header.index(str(c), start))
+        start = positions[-1] + len(str(c))
+    for r, line in enumerate(rows):
+        assert line.split(" ", 1)[0] == str(r)
+        for c, position in enumerate(positions):
+            expected = gs["board"][r][c] if (r, c) in gs["matched_positions"] else "."
+            assert line[position - 1] == " "
+            assert line[position:position + len(expected)] == expected
+
+
+def test_render_shows_scores_and_turns_played():
+    env = MemoryGameEnv(grid_size=2, max_turns=10)
+    env.reset(num_players=2, seed=42)
+    (r1, c1), (r2, c2) = next(iter(_pairs(env).values()))
+
+    env.step(f"{r1} {c1} {r2} {c2}")
+
+    view = env.render(0)
+    assert "Scores: Player 0: 1, Player 1: 0 | Turns played: 1/10" in view
 
 
 def test_seeded_reset_and_snapshot_restore_hidden_state():

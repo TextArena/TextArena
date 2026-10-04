@@ -1,5 +1,10 @@
 """Offline deterministic tests for the single-player Set environment."""
 import itertools
+import random
+import re
+import time
+
+import pytest
 
 from textarena.envs.Set.env import SetEnv, _is_set
 
@@ -191,6 +196,20 @@ def test_invalid_limit_preserves_points_already_earned():
     assert env.state.rewards == {0: 1}
 
 
+def test_seeding_only_happens_through_reset():
+    with pytest.raises(TypeError):
+        SetEnv(seed=1)
+
+
+def test_prompt_describes_the_deck_refills_and_early_end():
+    env = _fresh()
+    prompt = env.state.events[0][1]
+    assert "color (red, green, purple), fill (open, striped, solid), and shape (oval, diamond, squiggle)" in prompt
+    assert "refilled up to 12 cards" in prompt
+    assert "or earlier if no Set remains and the deck is empty" in prompt
+    assert "12 or more" not in prompt
+
+
 def test_valid_non_set_move_ends_when_no_sets_can_remain():
     env = _fresh()
     board = [
@@ -204,3 +223,30 @@ def test_valid_non_set_move_ends_when_no_sets_can_remain():
     done, _ = env.step("1, 2, 3")
     assert done
     assert env.state.rewards == {0: 0}
+
+
+_OLD_ACTION_REGEX = re.compile(r"\[?\s*([0-9]{1,6})\s*[,\s]\s*([0-9]{1,6})\s*[,\s]\s*([0-9]{1,6})\s*\]?")
+
+
+def _old_parse(action):
+    m = _OLD_ACTION_REGEX.fullmatch(action.strip())
+    return None if m is None else tuple(int(g) for g in m.groups())
+
+
+def test_tokenized_parser_accepts_exactly_what_the_old_regex_accepted():
+    env = _fresh()
+    rng = random.Random(0)
+    alphabet = ["1", "2", "12", "1234567", " ", "  ", ",", ", ", "[", "]", "x", "\t", "٣"]
+    for _ in range(20000):
+        action = "".join(rng.choice(alphabet) for _ in range(rng.randint(0, 9)))
+        assert env._parse_action(action) == _old_parse(action), repr(action)
+
+
+def test_long_whitespace_runs_are_parsed_in_linear_time():
+    env = _fresh()
+    before = env.state.game_state["num_turns"]
+    for action in ("4" + " " * 30000 + "x", " " * 30000 + "1 2 3x", "1" + " ," * 15000 + "2"):
+        start = time.perf_counter()
+        env.step(action)
+        assert time.perf_counter() - start < 0.25, repr(action[:20])
+    assert env.state.game_state["num_turns"] == before

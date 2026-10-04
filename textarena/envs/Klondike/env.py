@@ -53,12 +53,14 @@ class KlondikeEnv(ta.GameEnv):
         }
 
     def prompt(self, player_id: int) -> str:
+        drawn = "the next card" if self.draw_count == 1 else f"the next {self.draw_count} cards"
         return (
-            "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\n"
+            "You are playing Klondike Solitaire. Your goal is to move all 52 cards to the foundation piles.\n\n"
             "Game Rules:\n"
-            "- Foundation piles (F1-F4): Build up from Ace to King in suit\n"
+            "- Foundation piles (F1-F4): Build up from Ace to King in suit; any empty foundation accepts an Ace\n"
             "- Tableau piles (T1-T7): Build down alternating colors (red on black, black on red)\n"
-            "- Stock: Draw cards to waste pile\n"
+            f"- Stock: 'draw' turns {drawn} from the stock onto the waste; when the stock is empty, "
+            "it first turns the whole waste back over into the stock (unlimited passes)\n"
             "- Waste (W): Top card available for play\n\n"
             "Commands:\n"
             "- 'draw' - Draw cards from stock to waste\n"
@@ -70,6 +72,9 @@ class KlondikeEnv(ta.GameEnv):
             "  Example: 'draw, move W T1, move T2 F1'\n\n"
             "Only Kings can be placed on empty tableau piles.\n"
             "Actions execute in order - if one fails, the remaining actions are skipped.\n"
+            f"You have {self.max_turns} turns; each reply counts as one turn, however many actions it contains.\n"
+            "Your score is the number of cards on the foundations (52 for a win). The game ends when you win, "
+            "forfeit, or run out of turns.\n"
             "Use 'forfeit' if you believe the game is impossible to win."
         )
 
@@ -101,7 +106,7 @@ class KlondikeEnv(ta.GameEnv):
 
         if forfeit_requested:
             # Player forfeited - end game with current score
-            cards_in_foundations = sum(len(pile) for pile in self.klondike.foundations)
+            cards_in_foundations = self._cards_in_foundations()
             return self.outcome(
                 {0: cards_in_foundations},
                 reason=f"Game forfeited. Final score: {cards_in_foundations} cards in foundations.",
@@ -120,11 +125,21 @@ class KlondikeEnv(ta.GameEnv):
 
     def on_turn_limit(self) -> ta.Outcome:
         # Partial reward based on cards in foundations (1 point per card)
-        cards_in_foundations = sum(len(pile) for pile in self.klondike.foundations)
+        cards_in_foundations = self._cards_in_foundations()
         return self.outcome(
             {0: cards_in_foundations},
             reason=f"Game over! You reached the maximum of {self.max_turns} turns. Score: {cards_in_foundations} cards in foundations.",
         )
+
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        cards_in_foundations = self._cards_in_foundations()
+        return self.outcome(
+            {0: cards_in_foundations},
+            reason=f"Invalid Move: {reason} Final score: {cards_in_foundations} cards in foundations.",
+        )
+
+    def _cards_in_foundations(self) -> int:
+        return sum(len(pile) for pile in self.klondike.foundations)
 
     def _execute_actions(self, action: str) -> Tuple[bool, List[str], bool]:
         """Execute multiple comma-separated actions and return (success, messages, is_format_error)"""
@@ -176,6 +191,9 @@ class KlondikeEnv(ta.GameEnv):
             else:
                 # Success - add message and continue
                 messages.append(f"Action {i + 1}: {message}")
+                if self.klondike.is_won():
+                    # The game is over the moment the last card reaches a foundation.
+                    break
 
         return True, messages, False
 

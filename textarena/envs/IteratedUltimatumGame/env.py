@@ -90,7 +90,8 @@ class IteratedUltimatumGameEnv(ta.GameEnv):
         return (
             f"You are Player {player_id}, playing {self.max_turns // 2} rounds of Iterated Ultimatum Game.\n"
             f"You begin as the {initial_role}. {role_cadence}\n"
-            f"Each round, the Proposer splits a ${self.game_state['pool']} pool with the Responder.\n\n"
+            f"Each round, the Proposer splits a ${self.game_state['pool']} pool with the Responder.\n"
+            "Money adds up over all rounds: the player with more money after the last round wins, and equal totals are a draw.\n\n"
             "Proposer:\n"
             "  - Make an offer by replying 'Offer: $X' (0 <= X <= pool)\n"
             "  - If accepted → You get $(pool - X), other player gets $X\n"

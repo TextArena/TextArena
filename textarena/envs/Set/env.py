@@ -1,6 +1,5 @@
 import copy
 import itertools
-import re
 from typing import Dict, Tuple, Optional, Any, Union
 
 import textarena as ta
@@ -42,11 +41,8 @@ class SetEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
 
-    def __init__(self, seed: int = 42):
-        # pre-generate all valid sets
+    def __init__(self):
         self.deck = list(itertools.product(_NUMBERS, _COLORS, _FILLS, _SHAPES))
-        all_pairs = [(x, y) for (x, y) in itertools.product(self.deck, self.deck) if x != y]
-        self.all_sets = set([(*pair, _get_missing_card(pair)) for pair in all_pairs])
         self.max_turns = 20
 
     def setup(self) -> Dict[str, Any]:
@@ -64,14 +60,19 @@ class SetEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         return (
             "You are playing a single-player game of Set. "
-            "Your goal is to find as many Sets as you can in 20 turns, without making mistakes. "
-            "The board contains a numbered list of 12 or more cards with (number, color, fill, shape). "
+            "Your goal is to find as many Sets as you can in 20 turns. "
+            "The deck has 81 cards, one for every combination of number (one, two, three), "
+            "color (red, green, purple), fill (open, striped, solid), and shape (oval, diamond, squiggle). "
+            "The board is a numbered list of cards, normally 12; whenever it holds no Set, "
+            "3 more cards are dealt until it does or the deck runs out. "
             "A Set is a set of 3 cards where, for each attribute, they're all 3 the same, "
             "or all 3 different. For instance, 'one red open squiggle', "
             "'two green open squiggle', 'three purple open squiggle' would be a Set. "
             "Each turn, you select a list of 3 cards from the board by their numbered index. "
-            "For example, '1, 4, 11'. If it is a Set, you score and the cards are replaced. "
-            'If it is not a Set, that turn was wasted. The game ends when you run out of turns. '
+            "For example, '1, 4, 11'. If it is a Set, you score 1 point, the cards are removed, "
+            "and the board is refilled up to 12 cards from the deck. "
+            "If it is not a Set, that turn was wasted. "
+            "The game ends after 20 turns, or earlier if no Set remains and the deck is empty. "
             "Reply with exactly the 3 card indices, e.g. '2, 4, 8'."
         )
 
@@ -80,16 +81,32 @@ class SetEnv(ta.GameEnv):
         self._observe_state()
 
     def _parse_action(self, action: str) -> Optional[Tuple[int, int, int]]:
-        # Board indices can never exceed two digits. A small bounded allowance
-        # keeps malformed digit floods from reaching Python's integer parser.
-        m = re.fullmatch(
-            r"\[?\s*([0-9]{1,6})\s*[,\s]\s*([0-9]{1,6})"
-            r"\s*[,\s]\s*([0-9]{1,6})\s*\]?",
-            action.strip(),
-        )
-        if m is None:
+        """Three indices separated by whitespace or single commas, optionally bracketed.
+
+        Tokenized rather than matched with a regex: patterns like ``\\s*[,\\s]\\s*``
+        backtrack quadratically on long whitespace runs.
+        """
+        text = action.strip()
+        if text.startswith("["):
+            text = text[1:]
+        if text.endswith("]"):
+            text = text[:-1]
+        numbers, pending_comma = [], False
+        for token in text.replace(",", " , ").split():
+            if token == ",":
+                if not numbers or pending_comma:
+                    return None
+                pending_comma = True
+            # Board indices never exceed two digits; the bound keeps digit floods
+            # away from Python's integer parser.
+            elif token.isascii() and token.isdigit() and len(token) <= 6:
+                numbers.append(int(token))
+                pending_comma = False
+            else:
+                return None
+        if pending_comma or len(numbers) != 3:
             return None
-        return (int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        return (numbers[0], numbers[1], numbers[2])
 
     def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
         parsed = self._parse_action(move)

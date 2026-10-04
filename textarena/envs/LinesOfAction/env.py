@@ -12,7 +12,8 @@ class LinesOfActionEnv(ta.GameEnv):
     BOARD_N = 8
     FILES = "abcdefgh"
     RANKS = "12345678"
-    action_pattern = r"(?i)^\s*\[?\s*(?:(pass)|([a-h][1-8])([a-h][1-8]))\s*\]?\s*$"
+    action_pattern = r"(?i)^\s*\[?\s*(?:(pass)|([a-h][1-8])\s*(?:->|[->])?\s*([a-h][1-8]))\s*\]?\s*$"
+    action_format = "the from and to squares of your move, for example 'b1b3', or 'pass' when you have no legal move"
 
     @classmethod
     def coord_to_rc(cls, coord: str) -> Tuple[int, int]:
@@ -38,19 +39,28 @@ class LinesOfActionEnv(ta.GameEnv):
         side  = 'O' if player_id == 0 else 'X'
         other = 'X' if side == 'O' else 'O'
         return (
-            f"You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'.\n"
-            "Move format: `b1b3` (from-coord to-coord). A legal move travels horizontally, vertically, or diagonally a number of squares equal to the total pieces (any colour) in that line. "
-            "You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected."
+            f"You are Player {player_id} in game of LinesOfAction.\nYour pieces are '{side}', opponent pieces are '{other}'. Player 0 moves first.\n"
+            "Move format: `b1b3` (from-coord to-coord; 'b1 b3' and 'b1-b3' also work). Files a-h run left to right, ranks 1-8 bottom to top. "
+            "A legal move travels horizontally, vertically, or diagonally exactly as many squares as there are pieces (any colour, including the moving piece) on that whole line. "
+            "You may jump over your own pieces, but not opponent pieces; landing on an opponent captures it.  Win when all your pieces are 8-neighbour connected.\n"
+            "A player reduced to a single piece is connected. If a move leaves both players connected, the player who moved wins.\n"
+            "If you have no legal move, reply `pass`. The game is a draw after 60 consecutive moves (both players counted) without a capture, "
+            "or when the same position occurs for the third time with the same player to move."
         )
 
     def render(self, player_id: int) -> str:
-        return f"Board:\n\n{self._render_board()}"
+        board = f"Board:\n\n{self._render_board()}"
+        if self.state.done:
+            return board
+        moves = self._legal_moves(player_id) or ["pass"]
+        return f"{board}\n\nLegal moves: {', '.join(moves)}"
 
     def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
         side, enemy = ('O', 'X') if player_id == 0 else ('X', 'O')
         board = self.game_state["board"]
 
         pass_token, frm_coord, to_coord = move.groups()
+        frm_coord, to_coord = (frm_coord or "").lower(), (to_coord or "").lower()
         if pass_token is not None:
             if self._legal_moves(player_id):
                 return self.invalid("Pass is only legal when no move is available.")

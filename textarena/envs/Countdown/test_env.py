@@ -3,7 +3,14 @@ import copy
 
 import pytest
 
+import textarena as ta
 from textarena.envs.Countdown.env import CountdownEnv
+from textarena.envs.registration import ENV_REGISTRY
+
+REGISTERED_IDS = sorted(
+    env_id for env_id, spec in ENV_REGISTRY.items() if spec.entry_point == "textarena.envs.Countdown.env:CountdownEnv"
+)
+REGISTERED_KWARGS = ENV_REGISTRY["Countdown-v0"].kwargs  # numbers 100 75 6 4 3 2, target 532
 
 
 def _fresh(numbers=None, target=6):
@@ -106,7 +113,60 @@ def test_exhausting_numbers_uses_best_historical_value():
     done, _ = env.step("0 1 +")
     assert done
     assert env.game_state["best_value"] == 14
-    assert env.state.rewards == {0: pytest.approx(0.994)}
+    assert env.state.rewards == {0: pytest.approx((10 - 6) / 10)}  # 10 was 10 away, 14 is 6 away
+
+
+@pytest.mark.parametrize("env_id", REGISTERED_IDS)
+@pytest.mark.parametrize("seed", range(5))
+def test_immediate_invalid_policy_scores_zero_on_registered_configs(env_id, seed):
+    env = ta.make(env_id)
+    env.reset(num_players=1, seed=seed)
+    for _ in range(5):
+        done, _ = env.step("@@@ not a move @@@")
+        if done:
+            break
+    assert done
+    assert env.close()[0] == {0: 0}
+
+
+@pytest.mark.parametrize("seed", range(10))
+def test_immediate_invalid_policy_scores_zero_on_random_draws(seed):
+    env = CountdownEnv()
+    env.reset(num_players=1, seed=seed)
+    env.step("garbage")
+    done, _ = env.step("garbage")
+    assert done and env.state.rewards == {0: 0}
+
+
+def test_partial_progress_is_measured_from_the_closest_starting_number():
+    env = CountdownEnv(**REGISTERED_KWARGS)
+    env.reset(num_players=1, seed=0)
+    assert "Current progress score: 0.000" in env.render(0)
+    env.step("0 2 *")  # 100 * 6 = 600, 68 away
+    env.step("4 0 -")  # 600 - 75 = 525, 7 away
+    env.step("garbage")
+    done, _ = env.step("garbage")
+    assert done
+    # 100 is the closest starting number, 432 away from 532.
+    assert env.state.rewards == {0: pytest.approx((432 - 7) / 432)}
+    assert 0 < env.state.rewards[0] < 1
+
+
+def test_values_no_closer_than_the_starting_numbers_score_zero():
+    env = CountdownEnv(**REGISTERED_KWARGS, max_turns=2)
+    env.reset(num_players=1, seed=0)
+    env.step("4 5 +")  # 3 + 2 = 5
+    done, _ = env.step("0 1 -")  # 100 - 75 = 25
+    assert done and "Turn limit" in env.state.game_info[0]["reason"]
+    assert env.state.rewards == {0: 0}
+
+
+def test_registered_puzzle_solved_still_scores_one():
+    env = ta.make("Countdown-v0")
+    env.reset(num_players=1, seed=0)
+    for action in ["0 1 +", "0 3 /", "0 1 +", "0 1 *", "0 1 +"]:  # 175, 3, 7, 525, 532
+        done, _ = env.step(action)
+    assert done and env.close()[0] == {0: 1.0}
 
 
 def test_turn_limit_records_only_completed_valid_turns():
@@ -136,6 +196,52 @@ def test_reset_snapshot_and_render_are_fresh_and_pure():
     assert env.numbers == [2, 3, 4]
 
 
+def _invalid_reason(env, action):
+    before = len(env.state.events)
+    done, _ = env.step(action)
+    assert not done
+    reasons = [message for _, message, _, _ in env.state.events[before:] if "attempted an invalid move" in message]
+    assert len(reasons) == 1
+    return reasons[0]
+
+
+def test_rejected_operations_report_the_actual_reason():
+    env = _fresh(numbers=[1000, 1001, 2], target=999)
+    assert "results must stay between -1,000,000 and 1,000,000" in _invalid_reason(env, "0 1 *")
+    env = _fresh(numbers=[1000, 1001, 2], target=999)
+    assert "1001 / 2 is not a whole number." in _invalid_reason(env, "1 2 /")
+    env = _fresh(numbers=[2, 2, 1], target=99)
+    env.step("0 1 -")
+    assert "Division by zero is not allowed." in _invalid_reason(env, "0 1 /")
+
+
+# Seeds whose first random target equals one of the drawn starting numbers.
+@pytest.mark.parametrize("seed", [769, 1936, 3420])
+def test_random_target_is_never_a_starting_number(seed):
+    env = CountdownEnv()
+    env.reset(num_players=1, seed=seed)
+    assert env.target not in env.orig_numbers
+    assert 100 <= env.target <= 999
+    assert env.game_state["best_value"] != env.target
+
+
+def test_configured_target_is_never_among_random_starting_numbers():
+    for seed in range(10):
+        env = CountdownEnv(target=100)
+        env.reset(num_players=1, seed=seed)
+        assert env.target == 100 and 100 not in env.orig_numbers
+
+
+def test_prompt_states_target_and_limit_and_its_example_is_legal():
+    env = CountdownEnv(numbers=[2, 3], target=7, max_turns=5)
+    env.reset(num_players=1, seed=0)
+    prompt = env.prompt(0)
+    assert "target 7" in prompt and "after 5 moves" in prompt and "'0 1 +'" in prompt
+    assert "fraction of the starting gap you closed" in prompt
+    done, _ = env.step("0 1 +")
+    assert done and env.state.error_count == 0 and env.game_state["numbers"] == [5]
+
+
 def test_seeded_generation_is_isolated_and_deterministic():
     first = CountdownEnv()
     second = CountdownEnv()
@@ -153,6 +259,8 @@ def test_seeded_generation_is_isolated_and_deterministic():
         {"numbers": [1, 0]},
         {"numbers": [1, True]},
         {"numbers": [1_000_001, 1]},
+        {"numbers": [1] * (CountdownEnv.max_numbers + 1)},
+        {"numbers": [2, 3], "target": 3},
         {"target": 0},
         {"target": 1_000_001},
         {"max_turns": 0},

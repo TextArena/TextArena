@@ -186,3 +186,79 @@ def test_non_string_action_is_an_immediate_consistent_death():
 def test_invalid_configuration_rejected(kwargs):
     with pytest.raises(ValueError):
         SurroundEnv(**kwargs)
+
+
+def _place(env, positions):
+    players = env.game_state["players"]
+    for pid, position in positions.items():
+        players[pid].position = position
+    env.game_state["board_state"] = env._ascii_board(env.game_state["board"], players)
+
+
+def test_fatal_action_by_last_submitter_resolves_round_instead_of_reopening_it():
+    env = _fresh(width=7, height=7, num_players=3)
+    _place(env, {0: (1, 1), 1: (3, 3), 2: (5, 5)})
+    env.step("up")
+    env.step("up")
+
+    done, _ = env.step("x" * (env.max_action_chars + 1))
+
+    assert not done
+    players = env.game_state["players"]
+    assert env.game_state["round"] == 1
+    assert players[0].position == (1, 2) and players[1].position == (3, 4)
+    assert env.game_state["pending_actions"] == {0: None, 1: None, 2: None}
+    assert env.state.current_player_id == 0
+
+
+def test_invalid_move_uses_engine_escalation_bookkeeping():
+    env = _fresh(num_players=3)
+
+    done, _ = env.step("north")
+
+    assert not done
+    assert env.state.game_info[0]["invalid_move"] is True
+    assert env.state.game_info[0]["turn_count"] == 0
+    death = [m for _, m, _, _ in env.state.events if m.startswith("Player 0 died")]
+    assert death and "up, down, left or right" in death[0]
+
+
+def test_round_results_reveal_moves_and_crashes_only_after_resolution():
+    env = _fresh(width=7, height=7, num_players=3)
+    _place(env, {0: (0, 0), 1: (3, 3), 2: (5, 5)})
+    env.step("left")
+    env.step("up")
+    assert not any("Player 0 moved" in m for _, m, _, _ in env.state.events)
+
+    env.step("down")
+
+    summary = [m for _, m, _, to in env.state.events if m.startswith("Round 1 results") and to == -1]
+    assert len(summary) == 1
+    assert "Player 0 moved left and crashed (hit the wall)" in summary[0]
+    assert "Player 1 moved up." in summary[0]
+    assert "Player 2 moved down." in summary[0]
+
+
+def test_render_reports_round_and_player_status():
+    env = _fresh(num_players=3)
+    env.step("nonsense")
+
+    board = env.render(1)
+
+    assert "Rounds played: 0/100" in board
+    assert "Player 1 (you) [1]: alive" in board
+    assert "Player 0: crashed in round 1 (invalid move)" in board
+
+
+def test_prompt_names_the_head_symbol_of_two_digit_players():
+    env = SurroundEnv(width=10, height=10)
+    env.reset(num_players=12, seed=3)
+
+    assert "'B'" in env.prompt(11)
+    assert env.game_state["board_state"].count("B") == 1
+
+
+def test_board_capacity_error_names_the_player_limit():
+    env = SurroundEnv(width=5, height=5)
+    with pytest.raises(ValueError, match="at most 9 players"):
+        env.reset(num_players=10, seed=1)

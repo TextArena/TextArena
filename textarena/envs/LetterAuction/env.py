@@ -14,6 +14,10 @@ except LookupError:
     # minimal fallback; deployments can install the corpus for the full lexicon.
     en_uk_dict = {"a", "i"}
 
+ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# Every letter takes at least two turns (bid + pass, or pass + pass), then both players submit.
+MIN_COMPLETE_GAME_TURNS = 2 * len(ALPHABET) + 2
+
 
 class LetterAuctionEnv(ta.GameEnv):
     """ The environment for Letter Auction Game """
@@ -21,21 +25,27 @@ class LetterAuctionEnv(ta.GameEnv):
     max_players = 2
     broadcast_actions = False
 
-    def __init__(self, starting_coins: int = 100, max_turns: int = 26):
+    def __init__(self, starting_coins: int = 100, max_turns: Optional[int] = None):
         """
         Initialize the environment for Letter Auction Game.
 
         Args:
-            starting_coins (int):
+            starting_coins (int): Coins each player starts with.
+            max_turns (Optional[int]): Optional cap on the total number of turns; reaching it ends the game
+                as a draw. Must be at least MIN_COMPLETE_GAME_TURNS, the length of the shortest complete game.
         """
         if not isinstance(starting_coins, int) or isinstance(starting_coins, bool) or starting_coins <= 0:
             raise ValueError("starting_coins must be a positive integer")
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
-            raise ValueError("max_turns must be a positive integer")
+        if max_turns is not None and (
+            not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < MIN_COMPLETE_GAME_TURNS
+        ):
+            raise ValueError(
+                f"max_turns must be None or an integer of at least {MIN_COMPLETE_GAME_TURNS} "
+                "(the length of the shortest complete game)"
+            )
         self.letter_values = [1 for _ in range(26)]
         self.starting_coins = starting_coins
-        # Keep the constructor argument for compatibility, but do not set an
-        # engine turn limit: a complete auction takes at least 52 turns.
+        self.max_turns = max_turns
 
     @property
     def terminal_render_keys(self):
@@ -56,7 +66,7 @@ class LetterAuctionEnv(ta.GameEnv):
     def current_player(self): return self.game_state["current_player"]
 
     def setup(self) -> Dict[str, Any]:
-        letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        letters = list(ALPHABET)
         self.rng.shuffle(letters)
         player_states = {
             pid: {
@@ -96,6 +106,7 @@ class LetterAuctionEnv(ta.GameEnv):
             "To bid, reply with 'bid 2', 'bid 10', or another amount.\n"
             "If you do not want to bid, reply with 'pass'.\n"
             "At the end of the auction, submit your highest-value word directly, e.g. 'dog'.\n"
+            "If you cannot form a valid word, reply 'pass' to submit no word (worth 0).\n"
             "Here is your starting information:\n"
             f"Your current coins: {gs['player_states'][player_id]['coins']}\n"
             f"Your current letters: {gs['player_states'][player_id]['letters']}\n"
@@ -147,11 +158,15 @@ class LetterAuctionEnv(ta.GameEnv):
                 action,
             )
             if not match:
-                return self.invalid(f"Invalid action: {action}. Please enter one English word.")
+                return self.invalid(f"Invalid action: {action}. Please enter one English word, or 'pass' to submit no word.")
             word = match.group("word").lower()
-            result = self._calculate_word_value(player_id, word)
-            if result is not None:
-                return result
+            # "pass" can never be spelled: it needs two S tiles and every letter is auctioned once.
+            if word == "pass":
+                self._submit_no_word(player_id)
+            else:
+                result = self._calculate_word_value(player_id, word)
+                if result is not None:
+                    return result
 
         gs["turn"] = self.state.turn + 1
         gs["rendered_text"] = self._render_text(gs)
@@ -245,7 +260,7 @@ class LetterAuctionEnv(ta.GameEnv):
                 next_prompt = f" Player {gs['current_player']}, do you want to start bid on the letter '{gs['round_letter']}' for {gs['bid_amount']}?"
             else:
                 # the auction is over
-                next_prompt = "The auction is over. Now, players will use the letters they've won to form the highest value english word from the letters won. The player with the highest value word wins the game. Submit the word directly, for example: dog."
+                next_prompt = "The auction is over. Now, players will use the letters they've won to form the highest value english word from the letters won. The player with the highest value word wins the game. Submit the word directly, for example: dog. If you cannot form a valid word, reply 'pass' to submit no word (worth 0)."
         else:
             next_prompt = f" Player {gs['current_player']}, do you want to bid on the letter '{gs['round_letter']}' for more than {gs['bid_amount']}?"
 
@@ -283,6 +298,14 @@ class LetterAuctionEnv(ta.GameEnv):
         # move on to the other player
         self._turn_manager(next_round=False, next_player=True)
         return None
+
+    def _submit_no_word(self, player_id: int) -> None:
+        """ Record that the player submits no word, which is worth 0 """
+        player_state = self.game_state["player_states"][player_id]
+        player_state["word"] = ""
+        player_state["word_value"] = 0
+        self.broadcast(f"Player {player_id} passes and submits no word, with a value of 0.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        self._turn_manager(next_round=False, next_player=True)
 
     def _render_text(self, game_state: Dict[str, Any]) -> str:
         """Render the game state."""

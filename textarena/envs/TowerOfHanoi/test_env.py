@@ -38,6 +38,14 @@ def test_solving_two_disks_wins():
     assert env.state.game_info[0]["turn_count"] == 3
 
 
+def test_prompt_and_board_state_the_limit_and_disk_order():
+    env = TowerOfHanoiEnv(num_disks=3, max_turns=14)
+    env.reset(num_players=1, seed=0)
+    assert "You have 14 moves." in env.prompt(0)
+    assert "from bottom to top" in env.prompt(0)
+    assert env.render(0) == "Current Board (disks listed bottom to top):\nA: [3, 2, 1]\nB: []\nC: []\n"
+
+
 def test_bad_format_is_invalid():
     env = _fresh()
     done, _ = env.step("move from A to C")
@@ -80,9 +88,10 @@ def test_parser_rejects_noncanonical_actions_atomically(action):
     assert env.state.game_state == before
 
 
-def test_paired_legacy_brackets_and_comma_remain_valid():
+@pytest.mark.parametrize("action", ["[A, C]", "[ A C ]", "[a, c]"])
+def test_paired_legacy_brackets_and_comma_remain_valid(action):
     env = _fresh()
-    done, _ = env.step("[A, C]")
+    done, _ = env.step(action)
     assert not done
     assert env.state.game_state["towers"] == {"A": [2], "B": [], "C": [1]}
 

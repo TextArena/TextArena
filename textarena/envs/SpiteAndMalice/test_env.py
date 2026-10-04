@@ -59,6 +59,18 @@ def test_valid_discard_rotates_turn():
     assert card not in env.players[0]["hand"]
 
 
+def test_discard_messages_address_the_actor_correctly():
+    env = _fresh()
+    card = env.players[0]["hand"][0]
+    start = len(env.state.events)
+    env.step(f"draw discard {card} 0")
+    events = env.state.events[start:]
+    actor_messages = [message for _, message, _, to_id in events if to_id == 0]
+    assert f"You discarded {card} to discard pile 0 and ended your turn." in actor_messages
+    assert not any("their turn" in message for message in actor_messages)
+    assert not any("is considered" in message for _, message, _, _ in events)
+
+
 def test_valid_play_updates_center_pile_if_available():
     """If the current player can legally start a center pile, playing works."""
     env = _fresh()
@@ -215,6 +227,21 @@ def test_empty_hand_with_no_play_automatically_ends_turn():
     assert not done
     assert env.state.current_player_id == 1
     assert gs["turn_has_drawn"][0] is False
+
+
+def test_emoji_style_suit_symbols_are_accepted():
+    env = _fresh()
+    env.players[0]["hand"] = ["A♥", "5♠", "6♠", "7♠", "8♠"]
+    done, _ = env.step("draw play A\u2665\ufe0f 0")
+    assert not done
+    assert env.state.error_count == 0
+    assert env.center_piles[0] == ["A♥"]
+
+
+def test_board_shows_the_draw_pile_size():
+    env = _fresh()
+    assert f"Draw pile: {len(env.deck)} card(s)" in env.render(0)
+    assert f"Draw pile: {len(env.deck)} card(s)" in env.state.game_state["rendered_board"]
 
 
 def test_public_terminal_board_hides_hands():

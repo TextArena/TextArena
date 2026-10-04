@@ -7,6 +7,11 @@ players bid the same value every round, producing 13 ties, zero scores, and a
 triple-tie outcome (all rewards 0).
 """
 
+import copy
+import time
+
+import pytest
+
 import textarena as ta
 from textarena.envs.ThreePlayerGOPS.env import ThreePlayerGOPSEnv
 
@@ -106,6 +111,32 @@ def test_repeat_reset_and_snapshot_restore_sealed_round_state():
     assert env.state.game_state["pending_bids"] == {}
 
 
+@pytest.mark.parametrize(
+    "scores, eliminated, expected",
+    [
+        ({0: 30, 1: 20, 2: 10}, [], {0: 1.0, 1: 0.0, 2: -1.0}),
+        ({0: 30, 1: 30, 2: 10}, [], {0: 1.0, 1: 1.0, 2: -1.0}),
+        ({0: 30, 1: 10, 2: 10}, [], {0: 1.0, 1: -1.0, 2: -1.0}),
+        ({0: 20, 1: 20, 2: 20}, [], {0: 0, 1: 0, 2: 0}),
+        ({0: 50, 1: 20, 2: 10}, [0], {0: -1, 1: 1.0, 2: -1.0}),
+        ({0: 50, 1: 20, 2: 20}, [0], {0: -1, 1: 0, 2: 0}),
+    ],
+)
+def test_final_rewards_rank_survivors_and_punish_eliminated(scores, eliminated, expected):
+    env = _fresh()
+    env.state.game_state["player_scores"] = scores
+    for pid in eliminated:
+        env.eliminate(pid)
+    assert env._final_outcome().rewards == expected
+
+
+def test_prompt_states_rank_rewards_and_elimination_rule():
+    prompt = _fresh().prompt(2)
+    assert "highest +1, lowest -1, middle 0" in prompt
+    assert "Two invalid moves in a row eliminate you with -1" in prompt
+    assert "Invalid moves = elimination" not in prompt
+
+
 def test_repeated_invalid_eliminates_player():
     env = _fresh()
     done, _ = env.step("z")  # unparsable card
@@ -135,3 +166,27 @@ def test_eliminating_final_bidder_resolves_survivors_without_rebidding():
     assert gs["player_hands"][0] == list(range(2, 14))
     assert gs["player_hands"][1] == [1] + list(range(3, 14))
     assert env.state.current_player_id == 0
+
+
+PADDING = 30_000
+
+
+@pytest.mark.parametrize(
+    "action",
+    [
+        pytest.param(" " * PADDING + "x" + " " * 1000, id="leading-trailing-spaces"),
+        pytest.param("4" + " " * PADDING + "x", id="inner-spaces"),
+        pytest.param("\t\n " * (PADDING // 3) + "x", id="tab-newline-runs"),
+        pytest.param("[" * (PADDING // 2) + "x" + "]" * (PADDING // 2 - 2), id="deep-brackets"),
+    ],
+)
+def test_long_padded_input_is_rejected_quickly_without_changing_state(action):
+    env = _fresh()
+    before = copy.deepcopy(env.state.game_state)
+    player = env.state.current_player_id
+    start = time.perf_counter()
+    env.step(action)
+    assert time.perf_counter() - start < 0.25
+    assert env.state.error_count == 1
+    assert env.state.current_player_id == player
+    assert env.state.game_state == before

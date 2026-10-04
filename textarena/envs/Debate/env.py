@@ -85,7 +85,12 @@ class DebateEnv(ta.GameEnv):
         game_state = self.game_state
         return (
             f"You are Player {player_id} in the Debate game.\nTopic: {game_state['topic']}\nYour position: {game_state['sides'][player_id]}\n"
-            f"You will have {self.max_turns} total turns (shared between both players) to present your arguments. On your turn, type your argument.\n"
+            f"You will have {self.max_turns} total turns (shared between both players) to present your arguments. "
+            f"Player 0 speaks first and the players alternate, so each of you gets {self.max_turns // 2} turns. "
+            f"On your turn, type your argument (at most {self.max_argument_chars} characters).\n"
+            f"Scoring: a jury of {self._jury_size} AI jurors votes Affirmative or Negative on the topic before the debate "
+            "and again after reading the full transcript. The side whose share of the vote grows more wins; equal gains "
+            "are a draw.\n"
         )
 
     def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
@@ -178,9 +183,10 @@ class DebateEnv(ta.GameEnv):
             raise
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
-        if not isinstance(action, str) or not action.strip():
+        argument = self.strip_role_tags(action).strip() if isinstance(action, str) else ""
+        if not argument:
             return self.invalid("An argument must contain non-whitespace text.")
-        if len(action) > self.max_argument_chars:
+        if len(argument) > self.max_argument_chars:
             return self.invalid(f"Arguments are limited to {self.max_argument_chars} characters.")
         if not self.game_state["pre_vote_recorded"]:
             try:
@@ -193,7 +199,7 @@ class DebateEnv(ta.GameEnv):
         proposed_arguments = {
             pid: list(arguments) for pid, arguments in self.game_state["arguments"].items()
         }
-        proposed_arguments[player_id].append(action.strip())
+        proposed_arguments[player_id].append(argument)
         if self.state.turn >= self.max_turns - 1: # Check if the debate has ended
             try:
                 winner_id, post_votes = self._determine_debate_winner(proposed_arguments)
@@ -201,12 +207,12 @@ class DebateEnv(ta.GameEnv):
                 return self.retryable("The jury could not cast its post-debate vote.")
             self.game_state["arguments"] = proposed_arguments
             self.game_state["votes"]["post-debate"] = post_votes
-            self.broadcast(action.strip(), ta.ObservationType.PLAYER_ACTION, from_id=player_id)
+            self.broadcast(argument, ta.ObservationType.PLAYER_ACTION, from_id=player_id)
             if winner_id is None:
                 return self.draw(reason="The jury's opinion did not favor either side more.")
             return self.winner(winner_id, reason=f"Player {winner_id} wins by gaining more support.")
         self.game_state["arguments"] = proposed_arguments
-        self.broadcast(action.strip(), ta.ObservationType.PLAYER_ACTION, from_id=player_id)
+        self.broadcast(argument, ta.ObservationType.PLAYER_ACTION, from_id=player_id)
         return None
 
     def _determine_debate_winner(self, arguments: Dict[int, list]):

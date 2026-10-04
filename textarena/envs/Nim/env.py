@@ -45,6 +45,15 @@ class NimEnv(ta.GameEnv):
             raise ValueError("At least one pile must contain an object.")
         self.initial_piles = initial_piles.copy()
 
+    @property
+    def action_format(self) -> str:
+        pile = next(index for index, size in enumerate(self.initial_piles) if size)
+        quantity = min(3, self.initial_piles[pile])
+        return (
+            f"a pile number from 0 to {len(self.initial_piles) - 1} and how many objects to remove from it, "
+            f"separated by a space, for example '{pile} {quantity}'"
+        )
+
     def setup(self) -> Dict[str, Any]:
         return {"piles": self.initial_piles.copy()}
 

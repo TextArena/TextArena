@@ -1,148 +1,76 @@
-# Spite and Malice Environment Documentation
+# Spite and Malice
 
-## Overview
-**Spite and Malice** is a two-player competitive card game that combines elements of solitaire and strategic play. Each player has their own payoff pile that they aim to deplete first to win. Players can play cards to shared center piles in ascending sequence (Ace to Queen), with Kings serving as wild cards. The game involves careful resource management, opportunistic card placement, and strategic blocking to prevent your opponent from emptying their payoff pile. This implementation features a complete deck management system, discard piles, and a hand limit of five cards.
+Two players race to empty their payoff piles by building shared center piles from Ace up to Queen, with Kings wild
+([rules](https://www.pagat.com/patience/spitemal.html)).
 
-## Action Space
+<!-- BEGIN GENERATED: variants -->
+**Players:** 2
 
-- **Format:** Submit one or more bare commands:
-  - **Draw:** `draw` - Draw cards to refill your hand to 5 cards
-  - **Play:** `play Card Index` - Play a card to a center pile (e.g. `play A♠ 0`)
-  - **Discard:** `discard Card Index` - Discard a card to end your turn (e.g. `discard 3♥ 2`)
+**`-mdp` observation:** game messages and the latest board (no raw player actions)
 
-- **Examples:**
-  - Draw cards at the beginning of a turn: `draw`
-  - Play the Ace of Spades to center pile 0: `play A♠ 0`
-  - Discard the Three of Hearts to discard pile 2: `discard 3♥ 2`
+| Env ID | Parameters |
+| --- | --- |
+| `SpiteAndMalice-v0` | defaults |
 
-- **Notes:** Players can include multiple actions in a single turn (except after discarding, which ends the turn). A typical turn consists of first drawing cards, then playing one or more cards, and finally discarding to end the turn.
+Append `-mdp` to any ID for the state-complete variant (e.g. `SpiteAndMalice-v0-mdp`).
+<!-- END GENERATED: variants -->
 
-## Observation Space
+## Rules
 
-**Reset Observations**
-On reset, each player receives a prompt containing the game rules and their initial game state. For example:
+- Two 52-card decks without the 10s are shuffled together (96 cards). Ranks run A = 1, 2–9, J = 10, Q = 11; Kings
+  are wild.
+- Each player has a 20-card payoff pile with only its top card face up, a hand of 5 cards, and four personal discard
+  piles that start empty. There are four shared center piles. The remaining cards form the draw pile.
+- Player 0 goes first. Every turn starts with a draw, which refills your hand to 5 cards while the draw pile lasts.
+- You may then play any number of cards onto the center piles, taken from your hand, the top of your payoff pile, or
+  the top of any of your discard piles. An empty center pile must be started with an Ace; after that each card must
+  be exactly one rank higher than the pile's top card, regardless of suit. A King can be played anywhere and counts as
+  the rank it replaces. A pile that reaches the Queen (11 cards) is cleared.
+- If you play every card in your hand, you immediately draw 5 more (while the draw pile lasts) and keep playing.
+- You end your turn by moving one card from your hand onto one of your discard piles. If your hand is empty and you
+  have no legal play, your turn ends automatically.
+- The first player to empty their payoff pile wins.
+- **Deadlock:** when the draw pile is empty, both hands are empty and neither player can play from their payoff or
+  discard piles, the player with fewer payoff cards left wins; equal counts are a draw. Because cleared center piles
+  are not reused, the draw pile only shrinks, so every game ends; there is no turn limit.
 
-```plaintext
-You are Player 0 in a two-player game of Spite and Malice. Your goal is to be the first to empty your payoff pile.
+## Actions
 
-### Game Overview:
-- The objective is to clear your payoff pile by playing cards to the center piles.
-- You can play cards from three sources:
-  1. Your **hand** (you start each turn with up to 5 cards in hand).
-  2. The **top card of your payoff pile**.
-  3. The **top card of any of your discard piles**.
+A reply contains one or more commands separated by spaces, executed in order:
 
-### Playing Rules:
-- You may play a card to a center pile if it is **one rank higher** than the top card on that pile (center piles start with Ace and go up to Queen; Kings are wild - they can be played on any card but do not change the rank sequence. This means if a King is used after 4, then that King is ranked 5 and the next card must be a 6).
-- If you can't play any more cards, you must **discard a card** to one of your discard piles to end your turn.
-- If a center pile reaches Queen, it will be cleared automatically.
-- The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.
+- `draw` must be the first command of each turn.
+- `play <card> <pile>` plays a card onto center pile 0–3.
+- `discard <card> <pile>` moves a card from your hand onto your discard pile 0–3 and ends your turn, so it must be the
+  last command.
 
-### Actions:
-1. **Draw**: At the start of your turn, enter **draw** to fill your hand up to 5 cards.
-2. **Play a Card**: Enter **play A♠ 0**, where `A♠` is the card and `0` is the center-pile index.
-3. **Discard**: Enter **discard A♠ 1** to discard from your hand and end your turn. You cannot discard from the payoff pile.
+Cards are written as rank then suit: `A♠`, `7♥`, `J♦`, `K♣` (there are no 10s). Ranks are case-insensitive and
+emoji-style suits such as `♥️` are accepted. If the same card is available from several places, it is taken from your
+payoff pile first, then your hand, then your discard piles.
 
-Here is the current game state:
---- Center Piles ---
-Pile 0: []
-Pile 1: []
-Pile 2: []
-Pile 3: []
+Examples: `draw`, `play A♠ 0`, `draw play A♠ 0 play 2♥ 0 discard 7♣ 3`.
 
---- Player 0's View ---
-Payoff Pile (Top Card): 7♠, Payoff Pile Length: 20
-Hand: ['A♥', 'K♦', '3♣', 'Q♠', '5♦']
-Discard Piles: [[], [], [], []]
-```
+A reply is applied completely or not at all: if any command is illegal, or there is extra text, nothing changes and
+the reply counts as one invalid move. A turn may also be spread over several replies until you discard.
 
-**Step Observations**
-During gameplay, players receive updates about their actions and the current game state. For example:
+## Observations
 
-```plaintext
-[Player 0] draw
-[GAME] You drew cards. Your updated view:
---- Center Piles ---
-Pile 0: []
-Pile 1: []
-Pile 2: []
-Pile 3: []
-
---- Player 0's View ---
-Payoff Pile (Top Card): 7♠, Payoff Pile Length: 20
-Hand: ['A♥', 'K♦', '3♣', 'Q♠', '5♦']
-Discard Piles: [[], [], [], []]
-
-[Player 0] play A♥ 0
-[GAME] You played A♥ on center pile 0. Your updated view:
---- Center Piles ---
-Pile 0: ['A♥']
-Pile 1: []
-Pile 2: []
-Pile 3: []
-
---- Player 0's View ---
-Payoff Pile (Top Card): 7♠, Payoff Pile Length: 20
-Hand: ['K♦', '3♣', 'Q♠', '5♦']
-Discard Piles: [[], [], [], []]
-
-[Player 0] discard Q♠ 1
-[GAME] You have discarded Q♠ to discard pile 1, which also means you have finished their turn. Your updated view:
---- Center Piles ---
-Pile 0: ['A♥']
-Pile 1: []
-Pile 2: []
-Pile 3: []
-
---- Player 0's View ---
-Payoff Pile (Top Card): 7♠, Payoff Pile Length: 20
-Hand: ['K♦', '3♣', '5♦']
-Discard Piles: [[], ['Q♠'], [], []]
-```
-
-## Gameplay
-
-- **Players:** 2 players
-- **Initial Setup:** Each player starts with a 20-card payoff pile, 5 cards in hand, and 4 empty discard piles
-- **Center Piles:** 4 shared center piles where cards are played in ascending sequence (Ace to Queen)
-- **Turns:** Players take turns drawing, playing cards, and discarding
-- **Objective:** Be the first to empty your payoff pile
-
-## Key Rules
-
-1. **Card Sources:**
-   - Players can play cards from their hand, the top card of their payoff pile, or the top card of any of their discard piles
-   - Cards can only be discarded from the hand, not from the payoff pile or discard piles
-
-2. **Card Sequence:**
-   - Center piles must be built in ascending sequence: A, 2, 3, 4, 5, 6, 7, 8, 9, J, Q (where J=10, Q=11)
-   - Kings are wild cards and can be played on any card but don't change the required sequence
-   - Empty center piles can only be started with an Ace (or King representing an Ace)
-
-3. **Pile Management:**
-   - When a center pile reaches a Queen (or completes a sequence from A to Q), it is cleared automatically
-   - Players must discard to one of their four discard piles at the end of their turn if they cannot play any more cards
-   - Players draw cards at the start of their turn to refill their hand to 5 cards
-
-4. **Turn Structure:**
-   - **Draw Phase:** Draw cards to refill hand to 5 cards
-   - **Play Phase:** Play as many valid cards as possible to center piles
-   - **Discard Phase:** Discard one card from hand to end the turn
-
-5. **Winning Conditions:**
-   - **Win:** The first player to empty their payoff pile
-   - **Loss:** Failing to empty your payoff pile before your opponent
-
-6. **Game Termination:**
-   - The game concludes when one player completely empties their payoff pile
+Each player first receives the rules. Before every reply the acting player sees the size of the draw pile, the center
+piles, both players' payoff tops, payoff sizes and discard piles, their own hand (only the size of the opponent's),
+and a list of their available moves. Both players are told about every play, discard and refill; the opponent's
+draws are announced without revealing the cards.
 
 ## Rewards
 
-| Outcome     | Reward for Winner | Reward for Loser |
-|-------------|:-----------------:|:----------------:|
-| **Win**     | `+1`              | `-1`             |
-| **Invalid** | `-1`              | `0`              |
+| Outcome | Reward |
+| --- | --- |
+| Empty your payoff pile | Winner `+1`, loser `-1` |
+| Deadlock with fewer payoff cards left | That player `+1`, opponent `-1` |
+| Deadlock with equal payoff cards left | Both `0` |
+| Second consecutive invalid reply | Offender `-1`, opponent `+1` |
 
+## Notes
 
-### Contact
-If you have questions or face issues with this specific environment, please reach out directly to bobby_cheng@i2r.a-star.edu.sg
+- Differences from the standard game: cleared center piles are set aside instead of being shuffled back into the
+  draw pile, so long games often end by deadlock; Player 0 always starts (normally the higher payoff card starts);
+  there are four center piles (Pagat allows three); and no card ever has to be played (some groups force Aces to be
+  played at once).

@@ -3,6 +3,7 @@ from typing import Any, Dict, List, Optional, Set, Tuple, Union
 
 import textarena as ta
 from textarena.envs.WordSearch.renderer import create_board_str
+from textarena.utils.word_lists import get_common_words, get_headwords
 
 from nltk.corpus import words
 
@@ -20,29 +21,30 @@ class WordSearchEnv(ta.GameEnv):
         r"\s+(?P<end_row>\d+)\s+(?P<end_col>\d+)\s*(?(wrapped)\])"
     )
 
-    def __init__(self, hardcore: Optional[bool] = False, max_turns: int = 20):
+    def __init__(self, hardcore: Optional[bool] = False, max_turns: Optional[int] = None):
         """
         Initialize the Word Search environment.
 
         Args:
             hardcore: Whether to play in hardcore mode.
+            max_turns: Optional cap on the total number of guesses, correct or not. The default,
+                num_words + MAX_INCORRECT_TRIES, is never reached: the game ends at the last word
+                or the last incorrect attempt first.
         """
         if not isinstance(hardcore, bool):
             raise ValueError("hardcore must be a boolean")
-        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
-            raise ValueError("max_turns must be a positive integer")
+        if max_turns is not None and (not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1):
+            raise ValueError("max_turns must be a positive integer or None")
         self.hardcore = hardcore
-        self.max_turns = max_turns
         self.num_words = 5
+        self.max_turns = self.num_words + self.MAX_INCORRECT_TRIES if max_turns is None else max_turns
 
         ## load the word list
         corpus_name = "en" if self.hardcore else "en-basic"
         try:
             corpus_words = words.words(corpus_name)
-        except LookupError as exc:
-            raise RuntimeError(
-                "The NLTK words corpus is required; install it with nltk.download('words')."
-            ) from exc
+        except LookupError:
+            corpus_words = sorted(get_headwords() if self.hardcore else get_common_words())
         self.word_list = list(
             dict.fromkeys(word.upper() for word in corpus_words if word.isalpha() and len(word) >= 2)
         )
@@ -107,7 +109,12 @@ class WordSearchEnv(ta.GameEnv):
             "For instance, if you want to find the word 'HELLO' starting at row 1, column 1 and ending at row 1, column 5, enter '1 1 1 5'.\n"
             "\nGuidelines:\n"
             "- Each guess must be unique; you cannot repeat the same guess.\n"
-            f"- You have a total of {self.MAX_INCORRECT_TRIES} incorrect attempts remaining.\n"
+            f"- You have a total of {self.MAX_INCORRECT_TRIES} incorrect attempts. Correct guesses do not use them up; "
+            "the game ends when you have found every word or used all incorrect attempts.\n"
+        )
+        if self.max_turns < self.num_words + self.MAX_INCORRECT_TRIES:
+            prompt += f"- The game also ends after {self.max_turns} guesses in total, correct or incorrect.\n"
+        prompt += (
             "- The history of your attempts will be recorded below.\n\n"
             f"Make your guesses carefully and strategically. Good luck, Player {player_id}! Let's see how many words you can find!\n"
         )
@@ -188,7 +195,7 @@ class WordSearchEnv(ta.GameEnv):
 
     def on_turn_limit(self) -> ta.Outcome:
         pct_complete = self._get_percentage_completion()
-        reason = f"The turn limit has been reached. You found {len(self.correct_words)} out of {len(self.placed_words)} words ({round(pct_complete * 100)}%)."
+        reason = f"The limit of {self.state.max_turns} guesses has been reached. You found {len(self.correct_words)} out of {len(self.placed_words)} words ({round(pct_complete * 100)}%)."
         return self.outcome({0: pct_complete}, reason=reason)
 
     def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:

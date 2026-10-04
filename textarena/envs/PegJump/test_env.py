@@ -1,5 +1,6 @@
 """Deterministic offline tests for the PegJump (peg solitaire) environment."""
 import copy
+import re
 
 import pytest
 
@@ -166,6 +167,48 @@ def test_snapshot_and_repeat_reset_restore_board():
 def test_invalid_opening_rejected(initial_empty):
     with pytest.raises(ValueError):
         PegJumpEnv(initial_empty=initial_empty)
+
+
+@pytest.mark.parametrize("initial_empty", range(1, 16))
+def test_prompt_example_is_a_legal_opening_jump(initial_empty):
+    env = _fresh(initial_empty=initial_empty)
+    _, observation = env.get_observation()
+    prompt = observation[0][1]
+    example = re.search(r"e\.g\. '(\d+ \d+)'", prompt).group(1)
+    done, _ = env.step(example)
+    assert not done and env.state.error_count == 0
+    assert env.state.game_state["board"].count(True) == 13
+
+
+def test_render_lists_exactly_the_legal_jumps():
+    env = _fresh(initial_empty=5)
+    assert "Legal jumps: 12 5, 14 5" in env.render(0)
+    for jump in ("12 5", "14 5"):
+        probe = _fresh(initial_empty=5)
+        probe.step(jump)
+        assert probe.state.error_count == 0
+
+    env.state.game_state["board"] = [False] * 16
+    env.state.game_state["board"][1] = True
+    assert "Legal jumps: none" in env.render(0)
+
+
+@pytest.mark.parametrize(
+    "action,reason",
+    [
+        ("1 4", "hole 1 has no peg"),
+        ("4 6", "hole 6 is not empty"),
+        ("4 9", "not two holes away"),
+        ("16 14", "numbered 1 to 15"),
+    ],
+)
+def test_illegal_jumps_explain_why(action, reason):
+    env = _fresh(initial_empty=1)
+    env.get_observation()
+    env.step(action)
+    _, observation = env.get_observation()
+    assert any(reason in message for _, message, _ in observation)
+    assert env.state.error_count == 1
 
 
 def test_last_available_jump_terminates_with_partial_reward():

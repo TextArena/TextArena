@@ -32,6 +32,10 @@ class GuessTheNumberEnv(ta.GameEnv):
         self.max_number = max_number
         self.max_turns = max_turns
 
+    @property
+    def action_format(self) -> str:
+        return f"a whole number from {self.min_number} to {self.max_number}, for example '{self.min_number}'"
+
     def setup(self) -> Dict[str, Any]:
         return {
             "game_number": self.rng.randint(self.min_number, self.max_number),
@@ -42,10 +46,10 @@ class GuessTheNumberEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         return (
             f"You are Player {player_id}. You are playing Guess The Number.\n"
-            f"You have to guess the number between {self.min_number} and {self.max_number} within {self.max_turns} turns.\n"
-            "As you enter your guess, the game will provide you with hints such as 'higher' or 'lower'.\n"
-            "Reply with the number you want to guess, e.g. '5'.\n"
-            "As you play, the history of your guesses will be appended below. Use the information to complete the game before you run out of guesses.\n"
+            f"You have to guess the number between {self.min_number} and {self.max_number} (inclusive) within {self.max_turns} turns.\n"
+            "After each wrong guess, the game tells you whether the target number is higher or lower than your guess and how many guesses you have left.\n"
+            f"Reply with the number you want to guess, e.g. '{self.min_number}'. Numbers outside the range and numbers you have already guessed are invalid moves.\n"
+            "Use the hints to find the number before you run out of guesses.\n"
             "Enter your guess."
         )
 
@@ -64,7 +68,11 @@ class GuessTheNumberEnv(ta.GameEnv):
             self.game_state["guess_history"].append((guess, "correct"))
             return self.outcome({0: 1}, reason="Congratulations! You guessed the correct number.")
         hint = "lower" if guess > self.game_state["game_number"] else "higher"
-        self.broadcast(f"The target number is {hint}.", ta.ObservationType.GAME_MESSAGE)
+        guesses_left = self.max_turns - self.state.turn - 1
+        self.broadcast(
+            f"Your guess {guess} is too {'high' if hint == 'lower' else 'low'}: the target number is {hint}. Guesses left: {guesses_left}.",
+            ta.ObservationType.GAME_MESSAGE,
+        )
         self.game_state["guess_history"].append((guess, hint))
         return None
 

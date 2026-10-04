@@ -11,12 +11,16 @@ from textarena.envs.ScorableGames.renderer import (
 
 # Canonical commands are bare and must start a line, so free-text rationale can
 # coexist on the preceding lines without ambiguity. Stray square brackets around
-# the keyword (legacy format) are tolerated. Keywords are case-sensitive.
+# the keyword (legacy format) are tolerated. Keywords are case-insensitive.
 _COMMAND_PATTERNS = (
-    ("Propose", re.compile(r"^[ \t]*\[?Propose\]?:?(?=[ \t]|$)", re.M)),
-    ("Accept",  re.compile(r"^[ \t]*\[?Accept\]?:?(?=[ \t]|$)",  re.M)),
-    ("Reject",  re.compile(r"^[ \t]*\[?Reject\]?:?(?=[ \t]|$)",  re.M)),
+    ("Propose", re.compile(r"^[ \t]*\[?Propose\]?:?(?=[ \t]|$)", re.M | re.I)),
+    ("Accept",  re.compile(r"^[ \t]*\[?Accept\]?:?(?=[ \t]|$)",  re.M | re.I)),
+    ("Reject",  re.compile(r"^[ \t]*\[?Reject\]?:?(?=[ \t]|$)",  re.M | re.I)),
 )
+
+# Only option-shaped tokens (an issue letter followed by a number) on the
+# proposal line are read; other words such as "And" or "Because" are ignored.
+_OPTION_TOKEN = re.compile(r"[A-Za-z]\d+")
 
 
 def _find_command(action: str):
@@ -157,7 +161,10 @@ class ScorableGamesEnv(ta.GameEnv):
 
         # Validate number of players matches config
         if len(self.player_configs) != num_players:
-            raise ValueError(f"Game config expects {len(self.player_configs)} players, got {num_players}")
+            raise ValueError(
+                f"Game config expects {len(self.player_configs)} players, got {num_players} "
+                f"(game_config={self.game_config!r} has a fixed number of parties)"
+            )
         if self.required_votes is not None and self.required_votes > num_players:
             raise ValueError(
                 f"required_votes cannot exceed the configured player count ({num_players})"
@@ -474,6 +481,7 @@ SCORING:
         # Combine all parts
         voting_rules = "VOTING RULES:\n"
         voting_rules += threshold_text + "\n"
+        voting_rules += "- Proposing a deal counts as your acceptance of it; a new proposal clears all earlier votes\n"
         if veto_text:
             voting_rules += veto_text + "\n"
         if bonus_text:
@@ -501,6 +509,7 @@ SCORING:
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         """Process a player's action."""
+        action = self.strip_role_tags(action).strip()  # validate exactly the text other agents will see
         valid, reason = self._validate_action(action)
         if not valid:
             return self.invalid(reason)
@@ -596,12 +605,14 @@ SCORING:
 
             for raw_part in deal_parts:
                 part = raw_part.strip().rstrip('.,!?;:')
-                if len(part) >= 2:
-                    issue_key = part[0]
-                    if issue_key in expected_issues:
-                        if part not in self.issues[issue_key]["options"]:
-                            return None
-                        proposal[issue_key] = part
+                if not _OPTION_TOKEN.fullmatch(part):
+                    continue
+                option = part.upper()
+                issue_key = option[0]
+                if issue_key in expected_issues:
+                    if option not in self.issues[issue_key]["options"]:
+                        return None
+                    proposal[issue_key] = option
 
             return proposal if set(proposal) == expected_issues else None
 
@@ -660,8 +671,8 @@ SCORING:
                 # Different deal - normal proposal logic
                 self.current_deal = new_deal
 
-                # Clear previous votes
-                self.player_votes = {}
+                # Clear previous votes; the proposer supports their own proposal
+                self.player_votes = {player_id: "Accept"}
 
                 # Announce the proposal with rationale
                 deal_str = ", ".join([f"{k}:{v}" for k, v in sorted(new_deal.items())])
@@ -763,8 +774,8 @@ SCORING:
             optimal_proposal = self._generate_optimal_proposal(player_id)
             self.current_deal = optimal_proposal
 
-            # Clear previous votes
-            self.player_votes = {}
+            # Clear previous votes; the defaulted player's own vote is the configured default
+            self.player_votes = {player_id: self.invalid_move_default}
 
             # Announce the auto-generated proposal
             deal_str = ", ".join([f"{k}:{v}" for k, v in sorted(optimal_proposal.items())])
@@ -883,40 +894,24 @@ SCORING:
             config = self.player_configs[pid]
             self.message(pid, f"{config['agent_name']} final score: {score} points (threshold: {threshold})", ta.ObservationType.GAME_ADMIN)
 
-        # Step 2: Threshold-based rewards
-        rewards = {}
+        # Step 2: Threshold-based rewards: +1 if the deal meets the player's minimum
+        # acceptable score, -1 if it is worse than walking away with no deal (which scores 0)
         winners = [pid for pid, score in final_scores.items()
                 if score >= self.player_scores[pid].get("threshold", 0)]
+        rewards = {pid: (1.0 if pid in winners else -1.0) for pid in range(self.state.num_players)}
 
+        # Step 3: Outcome annotation
         if winners:
-            # Players who meet threshold → +1, others → -1
-            for pid in range(self.state.num_players):
-                rewards[pid] = 1.0 if pid in winners else -1.0
+            names = ", ".join(self.player_configs[pid]["agent_name"] for pid in winners)
+            reason = (
+                f"Deal accepted: {len(winners)} of {self.state.num_players} parties "
+                f"met their minimum acceptable score ({names})"
+            )
+            self.state.step_info["winner_reason"] = reason
         else:
-            # No players met threshold → everyone gets 0 (draw)
-            rewards = {pid: 0.0 for pid in final_scores}
-
-        # Step 3: Winner/draw annotation
-        if winners:
-            best_score = max(final_scores[pid] for pid in winners)
-            best_players = [pid for pid in winners if final_scores[pid] == best_score]
-
-            if len(best_players) == 1:
-                reason = (
-                    f"{self.player_configs[best_players[0]]['agent_name']} wins "
-                    f"with highest score {best_score} (meeting threshold)"
-                )
-                self.state.step_info["winner_reason"] = reason
-            else:
-                reason = f"Tie with score {best_score} among {len(best_players)} players"
-                self.state.step_info["draw_reason"] = reason
-            for pid in range(self.state.num_players):
-                self.state.game_info[pid]["winner"] = pid in best_players
-        else:
-            reason = "No players met their minimum acceptable score"
-            self.state.step_info["draw_reason"] = reason
-            for pid in range(self.state.num_players):
-                self.state.game_info[pid]["winner"] = False
+            reason = "Deal accepted, but no party met its minimum acceptable score"
+        for pid in range(self.state.num_players):
+            self.state.game_info[pid]["winner"] = pid in winners
 
         # Step 4: Log scores + rewards together
         lines = ["=== Final Scores and Rewards (Threshold-Based) ==="]
@@ -939,21 +934,22 @@ SCORING:
         return self.outcome(rewards, reason)
 
     def _handle_no_deal(self) -> ta.Outcome:
-        """Handle case where no deal was reached - give players their minimum acceptable scores."""
+        """Handle case where no deal was reached: every party falls back to exactly its
+        minimum acceptable score, which is neither a success nor a failure (reward 0)."""
         cached = self.game_state.get("terminal_result")
         if cached is not None:
             return self.outcome(cached["rewards"], cached["reason"])
 
         self.broadcast("NO DEAL REACHED - Each player receives their minimum acceptable score", ta.ObservationType.GAME_ADMIN)
 
-        # Give each player their threshold score directly
-        threshold_rewards = {}
+        fallback_scores = {}
+        rewards = {pid: 0.0 for pid in range(self.state.num_players)}
         last_proposal = self.current_deal.copy()
         self.current_deal = {}
         self.player_votes = {}
         for player_id in range(self.state.num_players):
             threshold = self.player_scores[player_id].get("threshold", 0)
-            threshold_rewards[player_id] = threshold
+            fallback_scores[player_id] = threshold
             self.state.game_info[player_id]["score"] = threshold
             self.state.game_info[player_id]["threshold"] = threshold
             self.state.game_info[player_id]["deal_accepted"] = False
@@ -963,21 +959,21 @@ SCORING:
             message = f"{config['agent_name']} receives minimum acceptable score: {threshold} points"
             self.message(player_id, message, ta.ObservationType.GAME_ADMIN)
 
-        # Still set as draw since no negotiated agreement was reached
+        # A draw: no negotiated agreement, and nobody ends below their minimum
         for pid in range(self.state.num_players):
             self.state.game_info[pid]["winner"] = False
-        reason = "No agreement reached - players received minimum acceptable scores"
+        reason = "No agreement reached - players received minimum acceptable scores (draw)"
         self.state.step_info["draw_reason"] = reason
 
         self.game_state["terminal_result"] = {
             "deal_accepted": False,
             "deal": None,
             "last_proposal": last_proposal,
-            "scores": threshold_rewards.copy(),
-            "rewards": threshold_rewards.copy(),
+            "scores": fallback_scores.copy(),
+            "rewards": rewards.copy(),
             "reason": reason,
         }
-        return self.outcome(threshold_rewards, reason)
+        return self.outcome(rewards, reason)
 
     def _calculate_player_score(self, player_id: int, deal: Dict[str, str]) -> int:
         """Calculate a player's score for a given deal."""

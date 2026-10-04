@@ -9,6 +9,7 @@ class TicTacToeEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
     action_pattern = r"^\s*\[?\s*([0-8])\s*\]?\s*$"
+    action_format = "a cell number from 0 to 8, for example '4'"
 
     def setup(self) -> Dict[str, Any]:
         return {"board": [['' for _ in range(3)] for _ in range(3)]}

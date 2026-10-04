@@ -26,6 +26,9 @@ class ChopsticksEnv(ta.GameEnv):
             "  + Attack:  'attack M O'  where M=your hand (0 or 1), O=opponent hand (0 or 1).\n"
             "    - Opponent's hand count increases by your hand; if >=5, it becomes 0.\n"
             "  + Split:   'split L R'  to redistribute your total fingers into L and R (L+R = your total).\n"
+            "    - Each hand holds 0 to 4 fingers, and a split must change your hands (only swapping them is not allowed).\n"
+            "You cannot attack with a dead (0) hand or attack a dead hand.\n"
+            f"You win by making both of your opponent's hands dead. After {self.max_turns} moves in total, the game is a draw.\n"
             "Reply with exactly one of those commands."
         )
 
@@ -51,9 +54,10 @@ class ChopsticksEnv(ta.GameEnv):
                 return self.winner(player_id, reason="Both opponent hands dead.")
             return None
 
-        m_sp = re.compile(r"^\s*\[?\s*split\s+([0-4])\s+([0-4])\s*\]?\s*$", re.IGNORECASE).search(action)
+        m_sp = re.compile(r"^\s*\[?\s*split\s+([0-9]{1,2})\s+([0-9]{1,2})\s*\]?\s*$", re.IGNORECASE).search(action)
         if m_sp:
             L, R = map(int, m_sp.groups())
+            if L > 4 or R > 4: return self.invalid("Each hand must hold between 0 and 4 fingers.")
             cur_L, cur_R = gs["hands"][player_id]
             total = cur_L + cur_R
             if L + R != total: return self.invalid(f"Split must sum to {total}.")

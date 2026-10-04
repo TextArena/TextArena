@@ -1,6 +1,7 @@
 """Deterministic game-logic tests for Battleship-v0."""
 import pytest
 
+import textarena as ta
 from textarena.envs.Battleship.env import BattleshipEnv
 
 SHIP_INITIALS = {"A", "B", "S", "D", "P"}
@@ -147,6 +148,20 @@ def test_invalid_format_increments_error_count():
     assert env.state.error_count == 1
 
 
+@pytest.mark.parametrize("grid_size, last_row", [(5, "E"), (10, "J"), (14, "N"), (20, "T")])
+def test_format_error_describes_expected_action(grid_size, last_row):
+    env = _fresh(grid_size=grid_size)
+    env.step("fire somewhere")
+    notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
+    assert f"Expected {env.action_format}." in notices[-1]
+    assert f"from A to {last_row} followed by a column number from 0 to {grid_size - 1}," in env.action_format
+
+    assert env.action_format.endswith("for example 'C4'")
+    fresh = _fresh(grid_size=grid_size)
+    fresh.step("C4")
+    assert fresh.state.turn == 1 and fresh.state.error_count == 0
+
+
 def test_out_of_bounds_increments_error_count():
     env = _fresh()
     done, _ = env.step("Z9")  # row 'Z' is far outside a 10x10 board
@@ -171,3 +186,77 @@ def test_two_consecutive_invalid_moves_end_game():
     done, _ = env.step("still garbage")
     assert done
     assert env.state.rewards == {0: -1, 1: 1}
+
+
+def _ship_cells(env, player_id, ship_name):
+    (r1, c1), (r2, c2) = env.state.game_state["ship_placements"][player_id][ship_name]
+    return [
+        (r, c)
+        for r in range(min(r1, r2), max(r1, r2) + 1)
+        for c in range(min(c1, c2), max(c1, c2) + 1)
+    ]
+
+
+def _water_cells(env, player_id):
+    board = env.state.game_state["board"][player_id]
+    return [(r, c) for r in range(env.grid_size) for c in range(env.grid_size) if board[r][c] == "~"]
+
+
+def _coord(cell):
+    return f"{chr(ord('A') + cell[0])}{cell[1]}"
+
+
+def test_mdp_observation_keeps_only_the_latest_board():
+    env = ta.make("Battleship-v0-standard-mdp")
+    env.reset(num_players=2, seed=3)
+    raw = env.env
+    shots = {pid: _water_cells(raw, 1 - pid) for pid in range(2)}
+    for _ in range(20):
+        pid, _ = env.get_observation()
+        env.step(_coord(shots[pid].pop()))
+
+    _, observation = env.get_observation()
+
+    assert observation.count("Your Ships") == 1
+    assert len(observation) < 6000
+
+
+def test_invalid_move_rerenders_the_actors_board():
+    env = _fresh(grid_size=5)
+    start = len(env.state.events)
+
+    env.step("not a coordinate")
+
+    boards = [
+        (to_id, message)
+        for _, message, event_type, to_id in env.state.events[start:]
+        if event_type == ta.ObservationType.GAME_BOARD
+    ]
+    assert boards == [(0, env.get_board_str(player_id=0))]
+
+
+def test_sinking_announces_the_ship_type_to_both_players():
+    env = _fresh()
+    patrol_boat = _ship_cells(env, 1, "Patrol Boat")
+    misses = _water_cells(env, 0)
+
+    env.step(_coord(patrol_boat[0]))
+    env.step(_coord(misses.pop()))
+    start = len(env.state.events)
+    env.step(_coord(patrol_boat[1]))
+
+    messages = {
+        to_id: message
+        for _, message, event_type, to_id in env.state.events[start:]
+        if event_type == ta.ObservationType.GAME_ACTION_DESCRIPTION
+    }
+    assert "sank the opponent's Patrol Boat" in messages[0]
+    assert "sank your Patrol Boat" in messages[1]
+
+
+def test_prompt_states_the_coordinate_ranges_and_fleet():
+    env = _fresh(grid_size=5)
+    prompt = env.prompt(0)
+    assert "A-E" in prompt and "0-4" in prompt
+    assert "Patrol Boat (P, 2 cells)" in prompt
+    assert "Here is the initial board" not in prompt

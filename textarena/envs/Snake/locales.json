@@ -1,0 +1,1892 @@
+{
+  "en": {
+    "0138bbb028": "- Moving onto an apple scores 1 point and grows your snake by one segment; eaten apples reappear on random empty cells.",
+    "068b83bf4e": "Rounds played: {round_count}/{max_turns}",
+    "267e324e57": "hit the wall",
+    "28982879da": "collided head-on",
+    "2ad3f6c806": "Board {width}x{height} is too small for {k} snakes",
+    "35019f2c96": "Every round, all living snakes move one cell at the same time. Reply with one direction: 'up', 'down', 'left' or 'right' (or 'w', 's', 'a', 'd'); 'up' moves toward the top of the printed board. Moves stay hidden until the round resolves.",
+    "3666a96ee8": "- Snake {pid} moved {direction} and ate an apple.",
+    "384017b5fd": "Round {round_count} results:",
+    "3af6413381": "body collision",
+    "3b6b015209": "width and height must be positive",
+    "402a41576b": "Board {width}x{height} too small for {num_apples} apples and up to {v0} snakes",
+    "47971fb0af": "- An invalid reply kills your snake immediately.",
+    "500ebdc711": "{num_players}-Player Snake on a {width}×{height} grid.",
+    "59d2c5cbfe": "Player {alive} survived; all others perished.",
+    "5b8555296a": "- A snake dies if it moves off the board, into a cell occupied by any snake (including itself and snakes that die this round), into the same cell as another head, or trades places with another head. A tail cell is free if its snake moves on this round without eating or dying.",
+    "62147dbceb": "invalid move",
+    "69ae254926": "Snake {pid}{you}: died in round {v0} ({death_reason}), score {scores}",
+    "7f161a04c2": "Board legend: heads show snake numbers (snakes 10-14 appear as A-E), '#' is a body segment, '*' is an apple, '.' is empty.",
+    "8af9d82d3e": "num_apples must be a non-negative integer",
+    "90a5c7b295": "The game ends when at most one snake is alive or after {max_turns} rounds. Living snakes rank above dead ones, dead snakes rank by the round they died in (later is better), and score breaks ties; snakes that are still tied share a rank. Rewards are spread evenly from +1 (best rank) to -1 (worst rank); if every snake ties, all get 0.",
+    "9107cf770e": "All snakes died simultaneously.",
+    "926234fd09": "{reason} Final ranking groups (worst→best): {groups}",
+    "a8cdb90243": "max_turns must be a positive integer",
+    "b08c6833d7": "- Snake {pid} moved {direction} and died ({DEATH_DESCRIPTIONS}).",
+    "b0d9d2fa45": "ran into a snake body",
+    "b861965306": "Current Board:",
+    "c11a848dde": "Reply with exactly one direction: up, down, left or right (or w, s, a, d).",
+    "c1cb5bfb54": "width and height must be integers",
+    "d644d3a7cd": "All snakes are dead.",
+    "d6ae0c8a03": "Rules:",
+    "d724584859": "Snake {living} outlived all others.",
+    "e4ba594af4": "- Snake {pid} moved {direction}.",
+    "e9ffc6e220": "Snake {pid}{you} [{head_symbol}]: length {num_positions}, score {scores}",
+    "eb5da36d13": "Snake {player_id} died due to an invalid move: {reason}",
+    "f008d21c0c": "You control snake {player_id}; its head is shown as '{head_symbol}'.",
+    "f384fe23dc": "Turn limit reached - best score wins tie-break."
+  },
+  "ace": {
+    "384017b5fd": "Hasélat thôn {round_count}:",
+    "500ebdc711": "{num_players}-Pemain Ular pada grid {width}×{height}.",
+    "59d2c5cbfe": "Pemain {alive} bertahan; yang laen binasa.",
+    "9107cf770e": "Ular nyang mandum maté sabé-sabé.",
+    "926234fd09": "{reason} Peringkat akhir grup (paling buruk→paling baik): {groups}",
+    "b861965306": "Papan Jinoe:",
+    "d6ae0c8a03": "Aturan:",
+    "f384fe23dc": "Batasan giliran tercapai - skor paleng get meunang tie-break."
+  },
+  "acm": {
+    "384017b5fd": "نتائج الجولة {round_count}:",
+    "500ebdc711": "ثعبان {num_players}-لاعب على شبكة {width}×{height}.",
+    "59d2c5cbfe": "لاعب {alive} نجا؛ كل الاخرين ماتوا.",
+    "9107cf770e": "كُلّ الأفاعي مَاتت في نفس الوقت.",
+    "926234fd09": "{reason} التصنيف النهائي للمجموعات (أسوأ → أفضل): {groups}",
+    "b861965306": "اللوحة الحالية:",
+    "d6ae0c8a03": "القواعد:",
+    "f384fe23dc": "حد التحول وصل - افضل نتيجه تفوز بالانهيار."
+  },
+  "acq": {
+    "384017b5fd": "نتائج الجولة {round_count}:",
+    "500ebdc711": "{num_players}-اللاعب الثعبان على شبكة {width}×{height}.",
+    "59d2c5cbfe": "اللاعب {alive} نجا؛ كل الاخرين ماتوا.",
+    "9107cf770e": "كل الثعابين ماتوا في نفس الوقت.",
+    "926234fd09": "{reason} التصنيف النهائي للمجموعات (أسوأ → أفضل): {groups}",
+    "b861965306": "اللوحة الحالية:",
+    "d6ae0c8a03": "القواعد:",
+    "f384fe23dc": "حد التحول وصل - افضل نتيجه تفوز بالانهيار."
+  },
+  "aeb": {
+    "384017b5fd": "نتائج الجولة {round_count}:",
+    "500ebdc711": "{num_players}-اللاعب الثعبان على شبكة {width}×{height}.",
+    "59d2c5cbfe": "لاعب {alive} نجى، و الباقين ماتوا.",
+    "9107cf770e": "الثعابين الكل ماتوا في وقت واحد.",
+    "926234fd09": "{reason} التصنيف النهائي للمجموعات (أسوأ → أفضل): {groups}",
+    "b861965306": "اللوحة الحالية:",
+    "d6ae0c8a03": "القواعد:",
+    "f384fe23dc": "حد التحول ووصلت - أحسن نتيجة تفوز في التعادل."
+  },
+  "af": {
+    "384017b5fd": "Ronde {round_count} resultate:",
+    "500ebdc711": "{num_players}-Speler Slang op 'n {width}×{height}-rooster.",
+    "59d2c5cbfe": "Speler {alive} het oorleef; al die ander het omgekom.",
+    "9107cf770e": "Al die slange het gelyktydig gesterf.",
+    "926234fd09": "{reason} Finale rangorde-groepe (slegste→beste): {groups}",
+    "b861965306": "Huidige Bord:",
+    "d6ae0c8a03": "Reëls:",
+    "f384fe23dc": "Beurtdrempel bereik - beste telling wen gelykopuitslag."
+  },
+  "ajp": {
+    "384017b5fd": "نتائج الجولة {round_count}:",
+    "500ebdc711": "{num_players}-اللاعب الثعبان على شبكة {width}×{height}.",
+    "59d2c5cbfe": "اللاعب {alive} نجا، والآخرين ماتوا.",
+    "9107cf770e": "كل الأفاعي متت في وقت واحد.",
+    "926234fd09": "{reason} التصنيف النهائي للمجموعات (أسوأ → أفضل): {groups}",
+    "b861965306": "لوحة دلوقتي:",
+    "d6ae0c8a03": "القواعد:",
+    "f384fe23dc": "حد التحول وصل - احسن نتيجة تفوز بالفصل العادل."
+  },
+  "aka": {
+    "384017b5fd": "Nkrataa {round_count} mfonyini:",
+    "500ebdc711": "{num_players}-Agyeman Snake wɔ {width}×{height} grid so.",
+    "59d2c5cbfe": "Ɔbɔadeɛ {alive} nyaa nkwa; wɔn a aka no nyinaa wui.",
+    "9107cf770e": "Wɔmaa awɔ no nyinaa wuwui prɛko pɛ.",
+    "926234fd09": "{reason} Nkrataa kɛseɛ (buronyi→boroso): {groups}",
+    "b861965306": "Board a ɛwɔ hɔ nnɛ:",
+    "d6ae0c8a03": "Mmara:",
+    "f384fe23dc": "Ɛdan no ano aduru - nea ɔwɔ nkontaabu a ɛkyɛn so na odi nkonim wɔ tie-break mu."
+  },
+  "am": {
+    "384017b5fd": "ማረጋገጫ {round_count} ውጤቶች:",
+    "500ebdc711": "{num_players} ተጫዋቾች ላይ የ{width}×{height} ግሪድ ላይ የእባብ ጨዋታ.",
+    "59d2c5cbfe": "ተጫዋቹ {alive} በሕይወት ተረፈ; ሌሎቹ ሁሉ ሞቱ ።",
+    "9107cf770e": "ሁሉም እባቦች በአንድ ጊዜ ሞቱ።",
+    "926234fd09": "{reason} የመጨረሻ ምድብ አነቃቂ (ከማይበረታው ወደ ከበረታው): {groups}",
+    "b861965306": "የአሁን ቻርት:",
+    "d6ae0c8a03": "ሕጎች:",
+    "f384fe23dc": "የማዞሪያ ገደብ ደርሷል - ከፍተኛ ውጤት አሸናፊ-ጥፋት."
+  },
+  "apc": {
+    "384017b5fd": "نتائج الجولة {round_count}:",
+    "500ebdc711": "ثعبان {num_players} لاعب على شبكة {width}×{height}.",
+    "59d2c5cbfe": "اللاعب {alive} نجا؛ كل الباقين ماتوا.",
+    "9107cf770e": "كل الأفاعي ماتوا في نفس الوقت.",
+    "926234fd09": "{reason} مجموعات التصنيف النهائية (من الأسوأ إلى الأفضل): {groups}",
+    "b861965306": "اللوحة الحالية:",
+    "d6ae0c8a03": "القواعد:",
+    "f384fe23dc": "وصلت حدود التحول - أحسن نتيجة تفوز بالفصل العادل."
+  },
+  "ar": {
+    "384017b5fd": "نتائج الجولة {round_count}:",
+    "500ebdc711": "لعبة Snake لـ {num_players} لاعبين على شبكة {width}×{height}.",
+    "59d2c5cbfe": "نجا اللاعب {alive}؛ وهلك جميع الآخرين.",
+    "9107cf770e": "ماتت جميع الأفاعي في وقت واحد.",
+    "926234fd09": "{reason} مجموعات الترتيب النهائية (من الأسوأ إلى الأفضل): {groups}",
+    "b861965306": "اللوحة الحالية:",
+    "d6ae0c8a03": "القواعد:",
+    "f384fe23dc": "تم بلوغ حد الأدوار - أفضل نتيجة تفوز في حالة التعادل."
+  },
+  "ars": {
+    "384017b5fd": "نتائج الجولة {round_count}:",
+    "500ebdc711": "{num_players}-اللاعب الثعبان على شبكة {width}×{height}.",
+    "59d2c5cbfe": "اللاعب {alive} نجا؛ كل الآخرين ماتوا.",
+    "9107cf770e": "كل الثعابين ماتت في نفس الوقت.",
+    "926234fd09": "{reason} التصنيف النهائي للمجموعات (أسوأ → أفضل): {groups}",
+    "b861965306": "اللوحة الحالية:",
+    "d6ae0c8a03": "القواعد:",
+    "f384fe23dc": "وصلت لحدود الدور - يفوز صاحب أعلى نتيجة في حال التعادل."
+  },
+  "ary": {
+    "384017b5fd": "نتائج الجولة {round_count}:",
+    "500ebdc711": "ثعبان {num_players} لاعب على شبكة {width}×{height}.",
+    "59d2c5cbfe": "لاعب {alive} نجى، و باقي اللاعبين ماتوا.",
+    "9107cf770e": "كُلّْ اللْفَاعِي مَاتوا فدوك الوقت.",
+    "926234fd09": "{reason} التصنيف النهائي للمجموعات (أسوأ → أفضل): {groups}",
+    "b861965306": "اللوحة الحالية:",
+    "d6ae0c8a03": "القواعد:",
+    "f384fe23dc": "وصل الحد الأقصى من التحولات، و فاز أحسن نتيجة في الاختراق."
+  },
+  "arz": {
+    "384017b5fd": "نتائج الجولة {round_count}:",
+    "500ebdc711": "ثعبان {num_players} لاعب على شبكة {width}×{height}.",
+    "59d2c5cbfe": "اللاعب {alive} نجا؛ كل الآخرين ماتوا.",
+    "9107cf770e": "كل الأفاعي متت في وقت واحد.",
+    "926234fd09": "{reason} التصنيف النهائي للمجموعات (أسوأ → أفضل): {groups}",
+    "b861965306": "اللوحة الحالية:",
+    "d6ae0c8a03": "القواعد:",
+    "f384fe23dc": "حد التحول وصل - أحسن نتيجة تفوز بالفصل العادل."
+  },
+  "as": {
+    "500ebdc711": "{num_players}-প্লেয়ার স্নেক একটি {width}×{height} গ্রিডতে。",
+    "59d2c5cbfe": "খেলুৱৈ {alive} জীৱিত; বাকী সকলো নিহত।",
+    "9107cf770e": "সকলো সাপ একেলগে মৰি গ'ল।",
+    "926234fd09": "{reason} চূড়ান্ত ৰেংকিং গোট (শ্ৰেষ্ঠৰ পৰা নিকৃষ্টলৈ): {groups}",
+    "d6ae0c8a03": "নিয়ম:",
+    "f384fe23dc": "টাৰ্ণ লিমিট পূৰণ হৈছে - সৰ্বাধিক স্ক'ৰ বিজয়ী টাই-ব্ৰেক।"
+  },
+  "ast": {
+    "384017b5fd": "Resultaos de la ronda {round_count}:",
+    "500ebdc711": "{num_players}-Xugador Culiebra nun tableru de {width}×{height}.",
+    "59d2c5cbfe": "El xugador {alive} sobrevivió; los demás perecieron.",
+    "9107cf770e": "Les serpientes morrieron simultáneamente.",
+    "926234fd09": "{reason} Grupos de clasificación final (peor→meyor): {groups}",
+    "b861965306": "Tableru actual:",
+    "d6ae0c8a03": "Regles:",
+    "f384fe23dc": "Llendóse la llende de veces - la meyor puntuación gana l'empate."
+  },
+  "awa": {
+    "384017b5fd": "राउंड {round_count} के परिणाम:",
+    "500ebdc711": "{num_players}-खिलाड़ी साँप {width}×{height} ग्रिड पर है।",
+    "59d2c5cbfe": "खिलाड़ी {alive} बच गया; बाकी सब खतम हो गए।",
+    "9107cf770e": "सब सांप एक ही समय मा मर गयेन।",
+    "926234fd09": "{reason} अंतिम रैंकिंग समूह (सबसे खराब→सबसे अच्छा): {groups}",
+    "b861965306": "वर्तमान बोर्ड:",
+    "d6ae0c8a03": "नियम:",
+    "f384fe23dc": "वक्र सीमा पहुंच गई - सबसे अच्छा स्कोर टाई-ब्रेक जीतता है।"
+  },
+  "ayr": {
+    "384017b5fd": "P'unchay {round_count} tukuy:",
+    "500ebdc711": "{num_players}-Jaqi Amaru {width}×{height} pampa patana.",
+    "59d2c5cbfe": "{alive} anatirix janiw jiwapkänti; mayninakax jiwarapxänwa.",
+    "9107cf770e": "Uka katarinakasti mä kutiw jiwarapxäna.",
+    "926234fd09": "{reason} Ranking final jach'a awki (anaqasi→jiliri): {groups}",
+    "b861965306": "Q'awiri P'acha:",
+    "d6ae0c8a03": "Q'awa:",
+    "f384fe23dc": "Mayampi kuttaña tukuyawi: suma atipt'awimpiw t'unjtawin atipja."
+  },
+  "az": {
+    "384017b5fd": "Raund {round_count} nəticələri:",
+    "500ebdc711": "{num_players}-Oyunçu İlan {width}×{height} şəbəkəsində.",
+    "59d2c5cbfe": "Oyunçu {alive} sağ qaldı; bütün digərləri məhv oldu.",
+    "9107cf770e": "Bütün ilan eyni vaxtda öldü.",
+    "926234fd09": "{reason} Final reytinq qrupları (ən pisdən ən yaxşısına): {groups}",
+    "b861965306": "Cari Taxta:",
+    "d6ae0c8a03": "Qaydalar:",
+    "f384fe23dc": "Növbə limitinə çatdı - ən yaxşı hesab qalib gəlir."
+  },
+  "azb": {
+    "384017b5fd": "Tur {round_count} nəticələri:",
+    "500ebdc711": "{num_players}-oplayer ilan bir {width}×{height} şəbəkədə.",
+    "59d2c5cbfe": "اویونچو {alive} جانینی قورتاردی؛ باشقالاری دا هلاک اولدو.",
+    "9107cf770e": "بوتون ائلانلار بیر آندا اؤلوبلر.",
+    "926234fd09": "{reason} نۆی final قروپلار (پیچیندن->یاخشییا): {groups}",
+    "b861965306": "ایندیکی تخته:",
+    "d6ae0c8a03": "قایدالار:",
+    "f384fe23dc": "دؤنوش حدینه چاتدی - ان یاخشی نومره لی اویونچولار تای-برئکده قالیرلار."
+  },
+  "bak": {
+    "384017b5fd": "{round_count} раунды һөҙөмтәләре:",
+    "500ebdc711": "{num_players}-Уйынсы Йылан {width}×{height} күсәрле тәхеттә.",
+    "59d2c5cbfe": "Уйынсы {alive} иҫән ҡала; башҡалар бөтәһе лә һәләк була.",
+    "9107cf770e": "Бөтә йыландар ҙа бер үк ваҡытта үлә.",
+    "926234fd09": "{reason} Йомғаҡлау рейтинг төркөмдәре (насарынан яҡшыға): {groups}",
+    "b861965306": "Хәҙерге такта:",
+    "d6ae0c8a03": "Ҡағиҙәләр:",
+    "f384fe23dc": "Тәртип сиктәре үтәлгән - иң яҡшы һөҙөмтә менән тий-брейк еңеүсе."
+  },
+  "bam": {
+    "384017b5fd": "Séri {round_count} kɔnɔ:",
+    "500ebdc711": "{num_players}-Player Snake on a {width}×{height} grid.",
+    "59d2c5cbfe": "Jalakɛla {alive} ye a yɛrɛ kisi; tɔw bɛɛ sara.",
+    "9107cf770e": "Sa bɛɛ sara waati kelen na.",
+    "926234fd09": "{reason} Kɛlɛkɛw dɔnkoɲɔgɔw (sɛbɛn→sɩkɩ): {groups}",
+    "b861965306": "Bɛɛ kɔnɔntɛ:",
+    "d6ae0c8a03": "Kalanw:",
+    "f384fe23dc": "Yɛlɛma danfara sera - a ka fisa i k'i sen don o la."
+  },
+  "ban": {
+    "384017b5fd": "Hasil ronde {round_count}:",
+    "500ebdc711": "{num_players}-Pemain Ular pada {width}×{height} grid.",
+    "59d2c5cbfe": "Pamain {alive} maurip; sané tiosan padem.",
+    "9107cf770e": "Makasami lelipi padem sinarengan.",
+    "926234fd09": "{reason} Peringkat akhir grup (paling buruk→paling baik): {groups}",
+    "b861965306": "Papan Mangkin:",
+    "d6ae0c8a03": "Aturan:",
+    "f384fe23dc": "Turning limit sampun kapolihang - skor pinih becik menang tie-break."
+  },
+  "be": {
+    "500ebdc711": "{num_players}-Гулец Змея на {width}×{height} сетцы.",
+    "59d2c5cbfe": "Гулец {alive} выжыў; усе астатнія загінулі.",
+    "9107cf770e": "Усе змяі загінулі адначасова.",
+    "926234fd09": "{reason} Канчатковыя групы рэйтынгу (горшы→лепшы): {groups}",
+    "f384fe23dc": "Ліміт павароту дасягнуты - лепшы бал выйграе ў раўнінгу."
+  },
+  "bem": {
+    "384017b5fd": "Mafyo ya round {round_count}:",
+    "500ebdc711": "{num_players}-Bakalamba ba Snake kwa gridi ya {width}×{height}.",
+    "59d2c5cbfe": "Umulayi {alive} alipuswike; bambi bonse balifwile.",
+    "9107cf770e": "Insoka shonse shafwile pa muku umo.",
+    "926234fd09": "{reason} Malango ya mwisho ya magulu (mbaya→nzuri): {groups}",
+    "b861965306": "Bodi ya Sasa:",
+    "d6ae0c8a03": "Mikano:",
+    "f384fe23dc": "Ukupwisha ukupilibuka - uwacilapo ukupoka amano e wacimfya."
+  },
+  "bg": {
+    "384017b5fd": "Резултати от рунд {round_count}:",
+    "500ebdc711": "{num_players}-Играч Змия на {width}×{height} мрежа.",
+    "59d2c5cbfe": "Играч {alive} оцеля; всички останали загинаха.",
+    "9107cf770e": "Всички змии умряха едновременно.",
+    "926234fd09": "{reason} Финални групи за ранглистата (от най-лошия към най-добрия): {groups}",
+    "b861965306": "Текуща дъска:",
+    "d6ae0c8a03": "Правила:",
+    "f384fe23dc": "Лимитът за ходове е достигнат - най-добрият резултат печели при равенство."
+  },
+  "bho": {
+    "384017b5fd": "राउंड {round_count} के परिणाम:",
+    "500ebdc711": "{num_players}-खिलाड़ी साँप {width}×{height} ग्रिड पर।",
+    "59d2c5cbfe": "खिलाड़ी {alive} बच गइल; बाकी सब मर गइले.",
+    "9107cf770e": "सब सांप एक साथे मर गइलन.",
+    "926234fd09": "{reason} अंतिम रैंकिंग समूह (सबसे खराब→सबसे अच्छा): {groups}",
+    "b861965306": "वर्तमान बोर्ड:",
+    "d6ae0c8a03": "नियम:",
+    "f384fe23dc": "टर्न सीमा पहुँच गई - सर्वश्रेष्ठ स्कोर टाई-ब्रेक जीतता है।"
+  },
+  "bjn": {
+    "384017b5fd": "Hasil ronde {round_count}:",
+    "500ebdc711": "{num_players}-Pemain Ular di atas {width}×{height} grid.",
+    "59d2c5cbfe": "Pamain {alive} batahan; nang lainnya mati.",
+    "9107cf770e": "Sabarataan ular mati sakaligus.",
+    "926234fd09": "{reason} Kalasaran ranking grup (paling buruk→paling baik): {groups}",
+    "b861965306": "Papan Saarang:",
+    "d6ae0c8a03": "Aturan:",
+    "f384fe23dc": "Batas giliran hudah sampai - skor nang paling baik manang tie-break."
+  },
+  "bn": {
+    "384017b5fd": "রাউন্ড {round_count} ফলাফল:",
+    "500ebdc711": "{num_players}-খেলোয়াড় স্নেক {width}×{height} গ্রিডে।",
+    "59d2c5cbfe": "খেলোয়াড় {alive} বেঁচে আছে; সবাই মারা গেছে।",
+    "9107cf770e": "সমস্ত স্নেক একই সাথে মারা গেছে।",
+    "926234fd09": "{reason} চূড়ান্ত র‍্যাঙ্কিং গ্রুপ (সবচেয়ে খারাপ→সেরা): {groups}",
+    "b861965306": "বর্তমান বোর্ড:",
+    "d6ae0c8a03": "নিয়ম:",
+    "f384fe23dc": "পালা সীমা পৌঁছেছে - সেরা স্কোর টাই-ব্রেক জিতেছে।"
+  },
+  "bod": {
+    "384017b5fd": "ར་འཁོར་{round_count} གསལ་བཤད།:",
+    "500ebdc711": "{num_players}-མི་ལུ་སྦྲུལ་གྱི་{width}×{height} གྲིབ་སྟེགས།",
+    "59d2c5cbfe": "{alive}རྩེད་འགྲན་པ་གསོན་པོར་གནས་པ། གཞན་རྣམས་ཤི་བ་རེད།",
+    "9107cf770e": "སྦྲུལ་རྣམས་ཚང་མ་དུས་གཅིག་ཏུ་ཤི་བ་རེད།",
+    "926234fd09": "{reason} མཐའ་མི་རིམ་པ་གྲས་པ་(ང་ནས→བཟང་པ་)：{groups}",
+    "b861965306": "Current Board:",
+    "d6ae0c8a03": "Rules:",
+    "f384fe23dc": "ཕྱོགས་མཚམས་བསླེབས་པ། - ཨང་ཆེ་ཤོས་ཀྱིས་འགྲན་བསྡུར་ལ་རྒྱལ་ཁ་ཐོབ་ཡོད།"
+  },
+  "bug": {
+    "384017b5fd": "Hasili ripakale {round_count}:",
+    "500ebdc711": "{num_players}-Matoa Ula ri laleng {width}×{height}.",
+    "59d2c5cbfe": "Pelaen {alive} salama; sininna tau lainge mateni.",
+    "9107cf770e": "Sininna ulae mate maneng siseng.",
+    "926234fd09": "{reason} Kalerenganna giliranna (buruk→makasi): {groups}",
+    "b861965306": "Papan Saaran:",
+    "d6ae0c8a03": "Patokan:",
+    "f384fe23dc": "Watang giliranna lettu - skor kaminang makessing naalai tie-break."
+  },
+  "ca": {
+    "384017b5fd": "Resultats de la ronda {round_count}:",
+    "500ebdc711": "Serp de {num_players} jugadors en una quadrícula de {width}×{height}.",
+    "59d2c5cbfe": "El jugador {alive} va sobreviure; tots els altres van perir.",
+    "9107cf770e": "Totes les serps van morir simultàniament.",
+    "926234fd09": "{reason} Grups de classificació finals (del pitjor al millor): {groups}",
+    "b861965306": "Tauler actual:",
+    "d6ae0c8a03": "Regles:",
+    "f384fe23dc": "S'ha assolit el límit de torns - la millor puntuació guanya l'empat."
+  },
+  "ceb": {
+    "384017b5fd": "Mga resulta sa round {round_count}:",
+    "500ebdc711": "{num_players}-Player Snake sa usa ka {width}×{height} grid.",
+    "59d2c5cbfe": "Player {alive} nabuhi; ang tanan nga uban namatay.",
+    "9107cf770e": "Ang tanang halas namatay sa samang higayon.",
+    "926234fd09": "{reason} Tinal na ranking groups (worst→best): {groups}",
+    "b861965306": "Kasamtangang Board:",
+    "d6ae0c8a03": "Mga pamaagi:",
+    "f384fe23dc": "Ang limitasyon sa pag-ikot nakaabot - ang kinamaayohang puntos maoy modaog ug tiebreak."
+  },
+  "cjk": {
+    "384017b5fd": "Matokeo ya mzunguko {round_count}:",
+    "500ebdc711": "{num_players}-Muntu akulwana Snake pa {width}×{height} gridi.",
+    "59d2c5cbfe": "Mchezaji {alive} akakula; wengine wote wafa.",
+    "9107cf770e": "Kwena wote wakafa pamo.",
+    "926234fd09": "{reason} Vikundi vya mwisho vya uwekaji wa nafasi (mbaya→bora): {groups}",
+    "b861965306": "Gridi ya Sasa:",
+    "d6ae0c8a03": "Nidhamu:",
+    "f384fe23dc": "Kikomo cha zamu kimefikia - alama bora hushinda kipindi cha usawa."
+  },
+  "ckb": {
+    "384017b5fd": "ئەنجامەکانی خول {round_count}:",
+    "500ebdc711": "{num_players}-یاریزانی مار لەسەر تەختەیەکی {width}×{height}.",
+    "59d2c5cbfe": "یاریزان {alive} ڕزگاری بوو؛ هەموو ئەوانەی تر گیانیان لەدەستدا.",
+    "9107cf770e": "هەموو مارەکان لە یەک کاتدا مردبوون.",
+    "926234fd09": "{reason} ریزبندی کۆتایی گرووپەکان (ئاوسێترین→باشتر): {groups}",
+    "b861965306": "تەختەی ئێستا:",
+    "d6ae0c8a03": "یاساکان:",
+    "f384fe23dc": "سنووری وەرچەرخان گەیشت - باشترین خاڵ براوەی یەکسانبوونە."
+  },
+  "crh": {
+    "384017b5fd": "Raund {round_count} neticeleri:",
+    "500ebdc711": "{num_players}-Oyunculu Yılan {width}×{height} şebekede.",
+    "59d2c5cbfe": "Oyuncı {alive} sağ qaldı; digerleri elâk oldı.",
+    "9107cf770e": "Bütün yılanlar aynı vaqıtta öldi.",
+    "926234fd09": "{reason} Final reyting grupları (ən pis→ən yaxşı): {groups}",
+    "b861965306": "Şimdiki Tahta:",
+    "d6ae0c8a03": "Qaydalar:",
+    "f384fe23dc": "Dönüş sıñırı yetildi - eñ yahşı skor teñlik qazandı."
+  },
+  "cs": {
+    "384017b5fd": "Výsledky kola {round_count}:",
+    "500ebdc711": "{num_players}-hráč Snake na {width}×{height} mřížce.",
+    "59d2c5cbfe": "Hráč {alive} přežil; všichni ostatní zemřeli.",
+    "9107cf770e": "Všichni hadi zemřeli současně.",
+    "926234fd09": "{reason} Konečné pořadí skupin (od nejhoršího po nejlepší): {groups}",
+    "b861965306": "Aktuální deska:",
+    "d6ae0c8a03": "Pravidla:",
+    "f384fe23dc": "Byl dosažen limit tahů - nejlepší skóre vyhrává remízu."
+  },
+  "cy": {
+    "500ebdc711": "{num_players}-Chwaraewr Snake ar grid {width}×{height}.",
+    "59d2c5cbfe": "Gweithiwr {alive} a oroesodd; bu farw pawb arall.",
+    "9107cf770e": "Bu farw'r holl sarphiau ar yr un pryd.",
+    "926234fd09": "{reason} Grwpiau safle terfynol (waeth→gorau): {groups}",
+    "f384fe23dc": "Cyfyngiad tro wedi'i gyrraedd - mae'r sgôr gorau yn ennill y taith-drin."
+  },
+  "da": {
+    "384017b5fd": "Resultater for runde {round_count}:",
+    "500ebdc711": "{num_players}-spillers Snake på et {width}×{height} gitter.",
+    "59d2c5cbfe": "Spiller {alive} overlevede; alle andre omkom.",
+    "9107cf770e": "Alle slanger døde samtidigt.",
+    "926234fd09": "{reason} Endelig rangordningsgrupper (værst→bedst): {groups}",
+    "b861965306": "Aktuelt bræt:",
+    "d6ae0c8a03": "Regler:",
+    "f384fe23dc": "Tidsgrænsen nået - bedste score vinder uafgjort."
+  },
+  "de": {
+    "384017b5fd": "Ergebnisse von Runde {round_count}:",
+    "500ebdc711": "{num_players}-Spieler-Snake auf einem {width}×{height}-Raster.",
+    "59d2c5cbfe": "Spieler {alive} hat überlebt; alle anderen sind umgekommen.",
+    "9107cf770e": "Alle Schlangen sind gleichzeitig gestorben.",
+    "926234fd09": "{reason} Endgültige Ranggruppen (schlechteste→beste): {groups}",
+    "b861965306": "Aktuelles Spielfeld:",
+    "d6ae0c8a03": "Regeln:",
+    "f384fe23dc": "Zuglimit erreicht - die beste Punktzahl gewinnt den Gleichstand."
+  },
+  "dik": {
+    "384017b5fd": "Round {round_count} kɔc:",
+    "500ebdc711": "{num_players}-Wëër ë ŋɛn ku jɔl yɛn ë thɛɛr {width}×{height}.",
+    "59d2c5cbfe": "Raan ye gɔ̈ɔ̈r {alive} acï pïïr; kɔc kɔ̈k ëbën aacï thou.",
+    "9107cf770e": "Käpiɛny ëbën aacï thou në kaam töŋ yic.",
+    "926234fd09": "{reason} Kɛmken ë riɛl kuɛr (kɛm ë ɣɔ̈ɔ̈k → kɛm ë lɔ̈k): {groups}",
+    "b861965306": "Piny de Board:",
+    "d6ae0c8a03": "Käŋɛɛk:",
+    "f384fe23dc": "Thëm cï bɛ̈n nhial acï thök - raan cë käŋ yök apɛi ee yen bï tiam."
+  },
+  "dyu": {
+    "384017b5fd": "Kalo {round_count} kɛlɛw:",
+    "500ebdc711": "{num_players}-Jɛnɛba Sɔgɔmasɛnɛ kɔnɔ {width}×{height} kɛlɛ.",
+    "59d2c5cbfe": "Jokɔra {alive} taara; anw bɛɛ wɛrɛ.",
+    "9107cf770e": "O saw bɛɛ sara yɔrɔnin kelen.",
+    "926234fd09": "{reason} Kɔnɔtɔw sɛgɛsɛgɛ (kɛlɛfɛla → kɛlɛkɛla): {groups}",
+    "b861965306": "Tablɛ kɔnɔ:",
+    "d6ae0c8a03": "Rules:",
+    "f384fe23dc": "A laban, a ka nɛgɛso ɲɔndi. O la do, u bɛɛ be se k'u seen don kɛlɛkɛyɔrɔ dɔ kɔnɔ ani o yɔrɔ mɔgɔw tɛ yen tugun."
+  },
+  "dzo": {
+    "384017b5fd": "ར་འཁོར་{round_count} གི་འབྲས་བུ།:",
+    "500ebdc711": "{num_players}-མཉམ་འབྲེལ་བྱེད་མཁན་གྱི་སྦྱིན་བདག་གི་རྩེད་མོ་ལྡེ་མིག་{width}×{height} གྱི་སྟེང་དུ།",
+    "59d2c5cbfe": "རྩེད་འགྲན་པ་ {alive}འདི་ སྲོག་སྐྱབས་འབད་ཡོདཔ་དང་ གཞན་མི་ཚུ་ཤི་སོང་ཡོདཔ་ཨིན།",
+    "9107cf770e": "སྦུལ་ཆ་མཉམ་རང་ དུས་ཚོད་གཅིག་ནང་ཤི་ནུག",
+    "926234fd09": "{reason} མཐའ་མིི་རྒྱུག་རིམ་གྲས་པ་ (ངན་པ་→བཟང་པ་): {groups}",
+    "b861965306": "དེང་གི་བོད།:",
+    "d6ae0c8a03": "སྒྲིག་འགྲོ་ཚུལ་ཁྲིམས་འགལ་བའི་སྐབས་སུ་:",
+    "f384fe23dc": "ཕྱོགས་ཚད་དེ་ལྷོད་ནུག ཨང་མཐོ་ཤོས་ཐོབ་མི་གིས་ ཐའི་བེཀ་འདི་ རྒྱལ་ཁ་ཐོབ་ཡོདཔ་ཨིན།"
+  },
+  "el": {
+    "384017b5fd": "Αποτελέσματα γύρου {round_count}:",
+    "500ebdc711": "{num_players}-Παίκτης Snake σε ένα πίνακα {width}×{height}.",
+    "59d2c5cbfe": "Ο Παίκτης {alive} επιβίωσε. Όλοι οι άλλοι εξαφανίστηκαν.",
+    "9107cf770e": "Όλα τα φίδια πέθαναν ταυτόχρονα.",
+    "926234fd09": "{reason} Τελικές ομάδες κατάταξης (από τη χειρότερη στη καλύτερη): {groups}",
+    "b861965306": "Τρέχων Πίνακας:",
+    "d6ae0c8a03": "Κανόνες:",
+    "f384fe23dc": "Το όριο γύρων επιτεύχθηκε - το καλύτερο σκορ κερδίζει την ισοπαλία."
+  },
+  "epo": {
+    "384017b5fd": "Rezultoj de raŭndo {round_count}:",
+    "500ebdc711": "{num_players}-Ludanta Serpento sur {width}×{height} krado.",
+    "59d2c5cbfe": "Ludanto {alive} postvivis; ĉiuj aliaj pereis.",
+    "9107cf770e": "Ĉiuj serpentoj mortis samtempe.",
+    "926234fd09": "{reason} Finaj rangigoj (plej malbona→plej bona): {groups}",
+    "b861965306": "Nuna Tabulo:",
+    "d6ae0c8a03": "Reguloj:",
+    "f384fe23dc": "Turniĝlimo atingita - plej bona poentaro gajnas tie-rompon."
+  },
+  "es": {
+    "384017b5fd": "Resultados de la ronda {round_count}:",
+    "500ebdc711": "Snake para {num_players} jugadores en una cuadrícula de {width}×{height}.",
+    "59d2c5cbfe": "El jugador {alive} sobrevivió; todos los demás perecieron.",
+    "9107cf770e": "Todas las serpientes murieron simultáneamente.",
+    "926234fd09": "{reason} Grupos de clasificación finales (peor→mejor): {groups}",
+    "b861965306": "Tablero actual:",
+    "d6ae0c8a03": "Reglas:",
+    "f384fe23dc": "Límite de turnos alcanzado - la mejor puntuación gana el desempate."
+  },
+  "et": {
+    "384017b5fd": "Vooru {round_count} tulemused:",
+    "500ebdc711": "{num_players}-mängija Snake {width}×{height} võrel.",
+    "59d2c5cbfe": "Mängija {alive} jäi ellu; kõik teised hukkusid.",
+    "9107cf770e": "Kõik ussid surid samaaegselt.",
+    "926234fd09": "{reason} Lõplik edetabeli grupid (halvimast parimani): {groups}",
+    "b861965306": "Praegune laud:",
+    "d6ae0c8a03": "Reeglid:",
+    "f384fe23dc": "Käikude piir saavutati - parim skoor võidab viigi."
+  },
+  "eu": {
+    "384017b5fd": "{round_count} itzuliaren emaitzak:",
+    "500ebdc711": "{num_players}-Jokalari Sugea {width}×{height} sarean.",
+    "59d2c5cbfe": "{alive} jokalariak biziraun zuen; beste guztiak hil ziren.",
+    "9107cf770e": "Suge guztiak hil dira bat-batean.",
+    "926234fd09": "{reason} Azken sailkapen taldeak (txarrena→ onena): {groups}",
+    "b861965306": "Uneko taula:",
+    "d6ae0c8a03": "Arauak:",
+    "f384fe23dc": "Bira-muga gainditua. Puntuazio onenak irabaziko du berdinketa."
+  },
+  "ewe": {
+    "384017b5fd": "Round {round_count} ɖoɖowɔwɔ:",
+    "500ebdc711": "{num_players}-Tɔxɛ Snake le {width}×{height} kafukafu dzi.",
+    "59d2c5cbfe": "Fefewɔla {alive} tsi agbe; ame susɔeawo katã ku.",
+    "9107cf770e": "Daawo katã ku le ɣeyiɣi ɖeka me.",
+    "926234fd09": "{reason} Ɖoɖoɖo kɔkɔtɔwo ƒe ŋgɔ (gbɔgblɔ → didi): {groups}",
+    "b861965306": "Asa ŋuti:",
+    "d6ae0c8a03": "Dzɔdzɔwo:",
+    "f384fe23dc": "Ne wotrɔ asi le eŋu wòde akpa ɖeka dzi la, woaɖo eƒe teƒe."
+  },
+  "fa": {
+    "384017b5fd": "نتایج دور {round_count}:",
+    "500ebdc711": "مار {num_players}-بازیکنی در یک شبکه {width}×{height}.",
+    "59d2c5cbfe": "بازیکن {alive} زنده ماند؛ همه دیگران مردند.",
+    "9107cf770e": "همه مارها همزمان مردند.",
+    "926234fd09": "{reason} گروه‌های رتبه‌بندی نهایی (از بدترین به بهترین): {groups}",
+    "b861965306": "تخته فعلی:",
+    "d6ae0c8a03": "قوانین:",
+    "f384fe23dc": "محدودیت نوبت به پایان رسید - بهترین امتیاز برنده می‌شود."
+  },
+  "fao": {
+    "384017b5fd": "Úrslit umfar {round_count}:",
+    "500ebdc711": "{num_players}-Spælarar Snake á einum {width}×{height} neti.",
+    "59d2c5cbfe": "Leikarurin {alive} yvirlivdi; allir hinir doyðu.",
+    "9107cf770e": "Allar slangurnar doyðu samstundis.",
+    "926234fd09": "{reason} Endalig rankingbólkar (verst→best): {groups}",
+    "b861965306": "Núverandi borð:",
+    "d6ae0c8a03": "Reglur:",
+    "f384fe23dc": "Leikumark nádd - besta stig vinnur javnleik."
+  },
+  "fi": {
+    "384017b5fd": "Kierroksen {round_count} tulokset:",
+    "500ebdc711": "{num_players}-pelaajan Snake {width}×{height}-ruudukolla.",
+    "59d2c5cbfe": "Pelaaja {alive} selviytyi; kaikki muut menehtyivät.",
+    "9107cf770e": "Kaikki käärmeet kuolivat samanaikaisesti.",
+    "926234fd09": "{reason} Lopulliset ranking-ryhmät (huonoin→paras): {groups}",
+    "b861965306": "Nykyinen pelilauta:",
+    "d6ae0c8a03": "Säännöt:",
+    "f384fe23dc": "Vuororajoitus saavutettu - paras pistemäärä voittaa tasapelin."
+  },
+  "fij": {
+    "384017b5fd": "Na iwasewase ni round {round_count}:",
+    "500ebdc711": "{num_players}-Dauqitoqito Snake ena {width}×{height} grid.",
+    "59d2c5cbfe": "Na dauqito {alive} a bula; era mate kece na kena vo.",
+    "9107cf770e": "Era mate kece na gata ena dua ga na gauna.",
+    "926234fd09": "{reason} Kena ivakarau ni veiqaravi (worst→best): {groups}",
+    "b861965306": "Bilo ni Board:",
+    "d6ae0c8a03": "Lawatu:",
+    "f384fe23dc": "Sa yacova na iyalayala ni gauna me vuki kina - sa qaqa o koya e levu duadua."
+  },
+  "fil": {
+    "384017b5fd": "Mga resulta ng Round {round_count}:",
+    "500ebdc711": "{num_players}-Manlalarong Snake sa isang {width}×{height} grid.",
+    "59d2c5cbfe": "Ang Manlalaro {alive} ay nabuhay; ang lahat ng iba ay namatay.",
+    "9107cf770e": "Ang lahat ng mga ahas ay namatay nang sabay-sabay.",
+    "926234fd09": "{reason} Mga pangkat ng panghuling ranggo (pinakamahina→pinakamahusay): {groups}",
+    "b861965306": "Kasalukuyang Board:",
+    "d6ae0c8a03": "Mga Patakaran:",
+    "f384fe23dc": "Ang hangganan ng pagkakataon ay naabot - ang pinakamahusay na iskor ay nanalo sa tie-break."
+  },
+  "fon": {
+    "384017b5fd": "Kọnta {round_count} wema:",
+    "500ebdc711": "{num_players}-Mì sɛ̀ ɖò Snake lɛ̀ {width}×{height} kà.",
+    "59d2c5cbfe": "{alive} ɔ́ ɖíɖá; mɛ ɖě lɛ́ɛ bǐ kú.",
+    "9107cf770e": "Dǒ lɛ bǐ kú ɖò hwe ɖokpo ɔ mɛ.",
+    "926234fd09": "{reason} Gbɛ̀n ɖò wɛ̀n ɖò tɛ̀n (gbɛ̀nɖì→gbɛ̀nɖɔ̀): {groups}",
+    "b861965306": "Tablo gannu:",
+    "d6ae0c8a03": "Nùkpɛ̀:",
+    "f384fe23dc": "E kpò ɖò fí e è ɖó na lɛ́ kɔ dó é - mɛ nɔ mɔ nǔ jɛ nukɔn hugǎn ɔ wɛ ɖu bɔ̀ è ɖè yeɖée."
+  },
+  "fr": {
+    "384017b5fd": "Résultats de la manche {round_count} :",
+    "500ebdc711": "Snake à {num_players} joueurs sur une grille de {width}×{height}.",
+    "59d2c5cbfe": "Le joueur {alive} a survécu ; tous les autres ont péri.",
+    "9107cf770e": "Tous les serpents sont morts simultanément.",
+    "926234fd09": "{reason} Groupes de classement finaux (pire→meilleur) : {groups}",
+    "b861965306": "Plateau actuel :",
+    "d6ae0c8a03": "Règles :",
+    "f384fe23dc": "Limite de tours atteinte - le meilleur score l'emporte en cas d'égalité."
+  },
+  "fur": {
+    "384017b5fd": "Risultâts de tornade {round_count}:",
+    "500ebdc711": "{num_players}-Zuiadôr Serpont su une {width}×{height} grilee.",
+    "59d2c5cbfe": "Il zuiadôr {alive} al è sorevivude; ducj chei altris a son muarts.",
+    "9107cf770e": "Ducj i sarpints a muririn tal stes moment.",
+    "926234fd09": "{reason} Classifiche finâl grupis (pegjor→miglior): {groups}",
+    "b861965306": "Tavoliere corrent:",
+    "d6ae0c8a03": "Regulis:",
+    "f384fe23dc": "Al è rivât il limit di volte - vincidôr al tie-break."
+  },
+  "fuv": {
+    "384017b5fd": "Ɓangal yuɓɓorɗe {round_count}:",
+    "500ebdc711": "{num_players}-Jokkondirde Snake a ɗon {width}×{height} grid.",
+    "59d2c5cbfe": "Jawɗo {alive} yeeɗi; luttuɓe fuu maayi.",
+    "9107cf770e": "Koolɗi fuu maayi ha wakkere go'o.",
+    "926234fd09": "{reason} Kakkalol ranking ɓe (mboɗaa→mbeli): {groups}",
+    "b861965306": "Bortu Majje:",
+    "d6ae0c8a03": "Ka'idoji:",
+    "f384fe23dc": "Limgal waylugo yotti - ɓurɗo heɓgo limtol ɗon heɓa jeɓɓol."
+  },
+  "gaz": {
+    "384017b5fd": "Raundi {round_count} bu'aa:",
+    "500ebdc711": "{num_players}-Pleyer Sineekaa kan gridi {width}×{height}.",
+    "59d2c5cbfe": "Taphachiisaa {alive} lubbuun hafe; warri kaan hundi ni du'an.",
+    "9107cf770e": "Bofawwan hundi al tokko du'an.",
+    "926234fd09": "{reason} Sadarkaa guutuu (dheerina→wanjaala): {groups}",
+    "b861965306": "Booradii kuusaa:",
+    "d6ae0c8a03": "Seerota:",
+    "f384fe23dc": "Daangaa dabaree ga'eera - lakkoofsi gaariin mo'ata."
+  },
+  "gl": {
+    "384017b5fd": "Resultados da ronda {round_count}:",
+    "500ebdc711": "Snake de {num_players} xogadores nunha grella de {width}×{height}.",
+    "59d2c5cbfe": "O xogador {alive} sobreviviu; todos os demais pereceron.",
+    "9107cf770e": "Todas as serpes morreron simultaneamente.",
+    "926234fd09": "{reason} Grupos de clasificación finais (do peor ao mellor): {groups}",
+    "b861965306": "Taboleiro actual:",
+    "d6ae0c8a03": "Regras:",
+    "f384fe23dc": "Límite de turnos alcanzado - a mellor puntuación gaña o desempate."
+  },
+  "gla": {
+    "384017b5fd": "Toraidhean cuairt {round_count}:",
+    "500ebdc711": "{num_players}-Snake Clann air {width}×{height} grìd.",
+    "59d2c5cbfe": "Choimhead cluicheadair {alive} beò; chaill a h-uile duine eile.",
+    "9107cf770e": "Bhàsaich na nathair uile aig an aon àm.",
+    "926234fd09": "{reason} Clasachd dheireannach buidhnean (mì-chheist→feàrr): {groups}",
+    "b861965306": "Bòrd Làithreach:",
+    "d6ae0c8a03": "Riaghailtean:",
+    "f384fe23dc": "Tha crìoch cas air a ruighinn - bidh an sgòr as fheàrr a 'buannachadh briseadh-dìcheil."
+  },
+  "gle": {
+    "384017b5fd": "Torthaí bhabhta {round_count}:",
+    "500ebdc711": "{num_players}-Imreoir Snake ar ghréasán {width}×{height}.",
+    "59d2c5cbfe": "D'éirigh leis an imreoir {alive} maireachtáil; fuair na daoine eile bás.",
+    "9107cf770e": "Fuair na nathair go léir bás ag an am céanna.",
+    "926234fd09": "{reason} Grúpaí rangaithe deiridh (don laghad→don fearr): {groups}",
+    "b861965306": "Cláir Reatha:",
+    "d6ae0c8a03": "Rialacha:",
+    "f384fe23dc": "Tá an teorainn tiontaithe bainte amach - is é an scór is fearr a bhuaigh na comhréiteach."
+  },
+  "grn": {
+    "384017b5fd": "Round {round_count} apytu'ũ:",
+    "500ebdc711": "{num_players}-Ñande ñañirõ Snake {width}×{height} kuádi ári.",
+    "59d2c5cbfe": "Oikove pe jugador {alive}; opavave omano.",
+    "9107cf770e": "Opaite mbói omano oñondive.",
+    "926234fd09": "{reason} Kuatia ñembyaty paha (mbaya→porãve): {groups}",
+    "b861965306": "Tablero Ag̃agua:",
+    "d6ae0c8a03": "Reglas:",
+    "f384fe23dc": "Oñeg̃uahẽ límite de vuelta - puntaje iporãvéva ogana tie-break."
+  },
+  "gu": {
+    "500ebdc711": "{num_players}-પ્લેયર સ્નેક એક {width}×{height} ગ્રિડ પર.",
+    "59d2c5cbfe": "ખેલાડી {alive} બચી ગયો; બાકીના બધા મૃત્યુ પામ્યા.",
+    "9107cf770e": "બધા સાપ એક સાથે મૃત્યુ પામ્યા હતા.",
+    "926234fd09": "{reason} અંતિમ રેન્કિંગ જૂથો (સૌથી ખરાબ→શ્રેષ્ઠ): {groups}",
+    "f384fe23dc": "ટર્ન મર્યાદા પહોંચી - શ્રેષ્ઠ સ્કોર ટાઇ-બ્રેક જીતે છે."
+  },
+  "ha": {
+    "500ebdc711": "{num_players}-Dan wasan Snake a kan {width}×{height} grid.",
+    "59d2c5cbfe": "Mai kunnawa {alive} ya tsira; duk sauran sun mutu.",
+    "9107cf770e": "Duk macizai sun mutu a lokaci guda.",
+    "926234fd09": "{reason} Ƙungiyoyin matsayi na ƙarshe (mafi muni→mafi kyau): {groups}",
+    "d6ae0c8a03": "Ka'idoji:",
+    "f384fe23dc": "Ƙuntataccen juyawa ya isa - mafi kyawun nasara ya lashe wasan."
+  },
+  "hat": {
+    "384017b5fd": "Rezilta tou {round_count}:",
+    "500ebdc711": "{num_players}-Jwè Sèpan sou yon grid {width}×{height}.",
+    "59d2c5cbfe": "Jwè {alive} siviv; tout lòt moun mouri.",
+    "9107cf770e": "Tout koulèv yo te mouri an menm tan.",
+    "926234fd09": "{reason} Klasman final gwoup yo (pi mal→pi byen): {groups}",
+    "b861965306": "Tablo Aktuel:",
+    "d6ae0c8a03": "Reglemàn:",
+    "f384fe23dc": "Limit vire rive - pi bon nòt genyen tie-break."
+  },
+  "he": {
+    "384017b5fd": "תוצאות סיבוב {round_count}:",
+    "500ebdc711": "משחק Snake ל-{num_players} שחקנים על רשת {width}×{height}.",
+    "59d2c5cbfe": "השחקן {alive} שרד; כל האחרים נספו.",
+    "9107cf770e": "כל הנחשים מתו בו-זמנית.",
+    "926234fd09": "{reason} קבוצות דירוג סופיות (מהגרוע לטוב): {groups}",
+    "b861965306": "הלוח הנוכחי:",
+    "d6ae0c8a03": "חוקים:",
+    "f384fe23dc": "מגבלת התורות הושגה - הניקוד הטוב ביותר מנצח בשובר שוויון."
+  },
+  "hi": {
+    "384017b5fd": "राउंड {round_count} परिणाम:",
+    "500ebdc711": "{num_players}-खिलाड़ी स्नेक {width}×{height} ग्रिड पर।",
+    "59d2c5cbfe": "खिलाड़ी {alive} जीवित रहा; सभी अन्य मर गए।",
+    "9107cf770e": "सभी स्नेक एक साथ मर गए।",
+    "926234fd09": "{reason} अंतिम रैंकिंग समूह (सबसे खराब→सर्वश्रेष्ठ): {groups}",
+    "b861965306": "वर्तमान बोर्ड:",
+    "d6ae0c8a03": "नियम:",
+    "f384fe23dc": "टर्न सीमा पहुंच गई - सर्वश्रेष्ठ स्कोर टाई-ब्रेक जीतता है।"
+  },
+  "hne": {
+    "384017b5fd": "राउंड {round_count} के परिणाम:",
+    "500ebdc711": "{num_players}-खेलाड़ी साँप {width}×{height} ग्रिड मा।",
+    "59d2c5cbfe": "खिलाड़ी {alive} बच गइस; बाकी जम्मो मर गिन।",
+    "9107cf770e": "जम्मो सांप एक साथ मर गिन।",
+    "926234fd09": "{reason} अंतिम रैंकिंग समूह (सबसे खराब→सबसे अच्छा): {groups}",
+    "b861965306": "वर्तमान बोर्ड:",
+    "d6ae0c8a03": "नियम:",
+    "f384fe23dc": "टर्न लिमिट पहुंच गइस - सबले अच्छा स्कोर टाई-ब्रेक जीतता हवय।"
+  },
+  "hr": {
+    "384017b5fd": "Rezultati runde {round_count}:",
+    "500ebdc711": "{num_players}-Igrački Snake na {width}×{height} mreži.",
+    "59d2c5cbfe": "Igrač {alive} je preživio; svi ostali su izginuli.",
+    "9107cf770e": "Sve zmije su umrle istovremeno.",
+    "926234fd09": "{reason} Konačne skupine rangiranja (od najgoreg do najboljeg): {groups}",
+    "b861965306": "Trenutna ploča:",
+    "d6ae0c8a03": "Pravila:",
+    "f384fe23dc": "Ograničenje poteza je dosegnuto - najbolji rezultat pobjeđuje u slučaju izjednačenja."
+  },
+  "hu": {
+    "384017b5fd": "A {round_count}. kör eredményei:",
+    "500ebdc711": "{num_players} játékosos Snake egy {width}×{height} méretű rácsban.",
+    "59d2c5cbfe": "A {alive}. játékos túlélte; mindenki más elpusztult.",
+    "9107cf770e": "Az összes kígyó egyszerre halt meg.",
+    "926234fd09": "{reason} Végső rangsor csoportok (a legrosszabbtól a legjobbig): {groups}",
+    "b861965306": "Aktuális tábla:",
+    "d6ae0c8a03": "Szabályok:",
+    "f384fe23dc": "A lépésszám-korlát elérésével a legjobb pontszám nyeri a döntetlent."
+  },
+  "hy": {
+    "500ebdc711": "{num_players}-Օձ խաղացող մի {width}×{height} ցանցում։",
+    "59d2c5cbfe": "Խաղացողը {alive} ողջ մնաց, մյուսները մահացան:",
+    "9107cf770e": "Բոլոր օձերը միաժամանակ մահացան:",
+    "926234fd09": "{reason} Վերջնական վարկանիշային խմբերը (վատագույն→լավագույն): {groups}",
+    "b861965306": "Ներկայիս տախտակը՝",
+    "d6ae0c8a03": "Կանոնները.",
+    "f384fe23dc": "Մտեք սահմանը հասել է, լավագույն միավորը հաղթում է tie-break- ում:"
+  },
+  "id": {
+    "384017b5fd": "Hasil Putaran {round_count}:",
+    "500ebdc711": "{num_players}-Pemain Snake pada grid {width}×{height}.",
+    "59d2c5cbfe": "Pemain {alive} bertahan; semua yang lain mati.",
+    "9107cf770e": "Semua ular mati secara bersamaan.",
+    "926234fd09": "{reason} Peringkat akhir (terburuk→terbaik): {groups}",
+    "b861965306": "Papan Saat Ini:",
+    "d6ae0c8a03": "Aturan:",
+    "f384fe23dc": "Batas giliran tercapai - skor terbaik memenangkan tie-break."
+  },
+  "ig": {
+    "59d2c5cbfe": "Onye na-egwu egwu {alive} lanarịrị; ndị ọzọ niile nwụrụ.",
+    "9107cf770e": "Agwọ niile nwụrụ n'otu oge.",
+    "926234fd09": "{reason} Ndị otu ikpeazụ (ka njọ→ka mma): {groups}",
+    "b861965306": "Oche Ugbu a:",
+    "f384fe23dc": "E ruola oke ntụgharị - onye kacha nwee akara ga-emeri tie-break."
+  },
+  "ilo": {
+    "384017b5fd": "Resulta ti Raond {round_count}:",
+    "500ebdc711": "{num_players}-Agay-ayam a Snake iti {width}×{height} a grid.",
+    "59d2c5cbfe": "Nagbiag ti agay-ayam {alive}; natay amin dagiti dadduma.",
+    "9107cf770e": "Agpapada a natay amin dagiti uleg.",
+    "926234fd09": "{reason} Patingga a ranking grupo (saan→napintas): {groups}",
+    "b861965306": "Agdama a Tabla:",
+    "d6ae0c8a03": "Dagiti pammalubos:",
+    "f384fe23dc": "Naabot ti limitasion iti panagbueltana - mangabak ti kalaingan a puntos."
+  },
+  "is": {
+    "384017b5fd": "Niðurstöður umferðar {round_count}:",
+    "500ebdc711": "{num_players}-Leikmanns Snake á {width}×{height} grind.",
+    "59d2c5cbfe": "Leikmaður {alive} lifði af; allir aðrir dóu.",
+    "9107cf770e": "Allir snákar dóu samtímis.",
+    "926234fd09": "{reason} Loka röðunargrupper (verst→best): {groups}",
+    "b861965306": "Núverandi Borð:",
+    "d6ae0c8a03": "Reglur:",
+    "f384fe23dc": "Umferðartakmörk náð - best stig vinna jafntefli."
+  },
+  "it": {
+    "384017b5fd": "Risultati del round {round_count}:",
+    "500ebdc711": "Snake con {num_players} giocatori su una griglia {width}×{height}.",
+    "59d2c5cbfe": "Il giocatore {alive} è sopravvissuto; tutti gli altri sono periti.",
+    "9107cf770e": "Tutti i serpenti sono morti simultaneamente.",
+    "926234fd09": "{reason} Gruppi di classifica finali (dal peggiore al migliore): {groups}",
+    "b861965306": "Tavola attuale:",
+    "d6ae0c8a03": "Regole:",
+    "f384fe23dc": "Raggiunto il limite di turni - il miglior punteggio vince in caso di parità."
+  },
+  "ja": {
+    "384017b5fd": "ラウンド {round_count} の結果:",
+    "500ebdc711": "{num_players}プレイヤーの Snake で、{width}×{height} のグリッド上をプレイします。",
+    "59d2c5cbfe": "プレイヤー {alive} が生き残り、他のすべてのプレイヤーが死亡しました。",
+    "9107cf770e": "すべての蛇が同時に死亡しました。",
+    "926234fd09": "{reason} 最終ランキンググループ（最下位→最上位）: {groups}",
+    "b861965306": "現在のボード:",
+    "d6ae0c8a03": "ルール:",
+    "f384fe23dc": "ターン制限に達しました - 最高得点で引き分けを決します。"
+  },
+  "jav": {
+    "384017b5fd": "Hasil ronde {round_count}:",
+    "500ebdc711": "{num_players}-Pemain Ular ing grid {width}×{height}.",
+    "59d2c5cbfe": "Pemain {alive} slamet; kabeh liyane tiwas.",
+    "9107cf770e": "Kabeh ula mati bebarengan.",
+    "926234fd09": "{reason} Peringkat pungkasan golongan (paling ala→paling apik): {groups}",
+    "b861965306": "Papan Saiki:",
+    "d6ae0c8a03": "Rules:",
+    "f384fe23dc": "Watesan giliran wis tekan - skor paling apik menang tie-break."
+  },
+  "ka": {
+    "500ebdc711": "{num_players}-მოთამაშე გველი {width}×{height} გრიდზე.",
+    "59d2c5cbfe": "მოთამაშე {alive} გადარჩა; ყველა დანარჩენი დაიღუპა.",
+    "9107cf770e": "გველები ერთდროულად მოკვდნენ.",
+    "926234fd09": "{reason} საბოლოო რეიტინგის ჯგუფები (ყველაზე ცუდი→საუკეთესო): {groups}",
+    "f384fe23dc": "სვლების ლიმიტი მიღწეულია - საუკეთესო ქულა გადაწყვეტს ფრეს."
+  },
+  "kab": {
+    "384017b5fd": "Iɣewwaṛen n tuɣzi {round_count}:",
+    "500ebdc711": "{num_players}-Imawlan n uɣerda ɣef {width}×{height} tigrid.",
+    "59d2c5cbfe": "Amyurar {alive} yeqqim; akk wiyaḍ mmuten.",
+    "9107cf770e": "Iεejlan-nni merra mmuten ɣef tikelt.",
+    "926234fd09": "{reason} Azrar n tneflit n yigraden (meṛṛa→amezwar): {groups}",
+    "b861965306": "Asaɣ usrid:",
+    "d6ae0c8a03": "Tisfiltin:",
+    "f384fe23dc": "Tazrawt n tuqqna tewweḍ-d - win i d-yewwten ugar ad yerbeḥ."
+  },
+  "kac": {
+    "384017b5fd": "Round {round_count} result:",
+    "500ebdc711": "{num_players}-ကစားသမား မြွေကို {width}×{height} ကွက်လပ်တွင်။",
+    "59d2c5cbfe": "Player {alive} gaw asak lawt wa nna, kaga ni yawng si mat ai.",
+    "9107cf770e": "Magwi ni yawng kalang ta si mat ai.",
+    "926234fd09": "{reason} မော်ကွန်း အဆင့်အတန်း အုပ်စုများ (ဆိုးရွား → ကောင်းမွန်): {groups}",
+    "b861965306": "Hkum Hta Bra:",
+    "d6ae0c8a03": "Hpungdan:",
+    "f384fe23dc": "Turn limit dep sai - kaja htum sum ai wa gaw tie-break lu na."
+  },
+  "kam": {
+    "384017b5fd": "Matokeo ya mzunguko {round_count}:",
+    "500ebdc711": "Nyoka ya {num_players}-Wachezaji kwenye gridi ya {width}×{height}.",
+    "59d2c5cbfe": "Mchezaji {alive} alinusurika; wengine wote walikufa.",
+    "9107cf770e": "Nzoka isu syonthe syakw'ĩĩe vau.",
+    "926234fd09": "{reason} Mavuno ya mwisho ya vikundi (mbaya→bora): {groups}",
+    "b861965306": "Ubao wa Sasa:",
+    "d6ae0c8a03": "Rules:",
+    "f384fe23dc": "Kikomo cha zamu kimefikia - alama bora inashinda kufungua kwa sare."
+  },
+  "kas": {
+    "384017b5fd": "راؤنڈ {round_count} دے نتائج:",
+    "500ebdc711": "{num_players}-کھلاڑی سنیک {width}×{height} گرڈ پہ۔",
+    "59d2c5cbfe": "کھلاڑی {alive} زندہ رہا؛ باقی سب مر گئے۔",
+    "9107cf770e": "سارے سپ ایک ساتھ مر گئے۔",
+    "926234fd09": "{reason} فائنل رینکنگ گروپ (بدترین→بہترین): {groups}",
+    "b861965306": "موجودہ بورڈ:",
+    "d6ae0c8a03": "قاعدے:",
+    "f384fe23dc": "ٹرن لمٹ پہنچ گئی - بہترین سکور ٹائی بریک جیتتا ہے۔"
+  },
+  "kbp": {
+    "384017b5fd": "Kɩyɛɛ {round_count} tɛ tɔm:",
+    "500ebdc711": "{num_players}-Mɛlɩya ɖɩ Snake kɛ {width}×{height} tɛɛ lɩbʊ.",
+    "59d2c5cbfe": "Aleɣya laɖʋ {alive} pɩzaa nɛ ɛɖɔkɩ e-nesi, lalaa tɩŋa sɩba.",
+    "9107cf770e": "Kʋñɔŋ ŋgʋ kɩ-taa lɛ, ɖʋm tɩŋa sɩba.",
+    "926234fd09": "{reason} Pɩyɛɛ kɩfam tɩŋɛ tʊma (kɩcɛcɛyɩ→kɩkpaɖɩyɩ): {groups}",
+    "b861965306": "Tablo Hɛnɛ:",
+    "d6ae0c8a03": "Sɔsɔɔlɩ:",
+    "f384fe23dc": "Ye ŋtalɩ hɔɔlʋʋ ŋgʋ kɩ-taa pɩwɛɛ se ŋpɩsɩ yɔ, mbʋ pɩhaɣ waɖɛ nɛ ña ɖɔɖɔ ŋkpaɣ lɩmaɣza."
+  },
+  "kea": {
+    "384017b5fd": "Rezultadu ronda {round_count}:",
+    "500ebdc711": "{num_players}-Jogadór Snake on a {width}×{height} grid.",
+    "59d2c5cbfe": "Jogador {alive} sobrevive; tudu kes otu morri.",
+    "9107cf770e": "Tudu kes kóbra móre na mésmu óra.",
+    "926234fd09": "{reason} Ranki final grupu (peor→mijor): {groups}",
+    "b861965306": "Tabuleiru Atual:",
+    "d6ae0c8a03": "Regras:",
+    "f384fe23dc": "Txiga limiti di txon - midjór pontu ta ganha na disputa."
+  },
+  "kik": {
+    "384017b5fd": "Matokeo ya Raundi {round_count}:",
+    "500ebdc711": "{num_players}-Mchezaji Snake kwenye {width}×{height} grid.",
+    "59d2c5cbfe": "Mũteng'eri {alive} nĩ aahonokire; arĩa angĩ othe magĩkua.",
+    "9107cf770e": "Njoka ciothe ciakuire o hĩndĩ ĩmwe.",
+    "926234fd09": "{reason} Kuuma kwa kuhesabu vikundi (vibaya→bora zaidi): {groups}",
+    "b861965306": "Bodi Iri Current:",
+    "d6ae0c8a03": "Rules:",
+    "f384fe23dc": "Mũhaka wa kũgarũrũka nĩ wakinyire - mũndũ ũrĩa ũkoragwo na kĩo kĩnene nĩwe ũkũhootana."
+  },
+  "kin": {
+    "384017b5fd": "Emewe ya cyiciro {round_count}:",
+    "500ebdc711": "{num_players}-Banywanyi ba Snake kwenye gridi ya {width}×{height}.",
+    "59d2c5cbfe": "Umukinnyi {alive} yarokotse; abandi bose barapfuye.",
+    "9107cf770e": "Inzoka zose zapfuye icyarimwe.",
+    "926234fd09": "{reason} Vikundi vya mwisho vya utaratibu (mbaya→nzuri): {groups}",
+    "b861965306": "Kibanza kijyewe:",
+    "d6ae0c8a03": "Amanota:",
+    "f384fe23dc": "Igihe ntarengwa cyo guhinduranya cyageze - igitego cyiza kurusha ibindi ni cyo gitsinda."
+  },
+  "kk": {
+    "500ebdc711": "{num_players}-Ойыншы Жылан {width}×{height} торда.",
+    "59d2c5cbfe": "Ойыншы {alive} аман қалды; қалғандары қаза тапты.",
+    "9107cf770e": "Барлық жыландар бір мезгілде өліп қалды.",
+    "926234fd09": "{reason} Түпкілікті рейтингтік топтар (ең нашар→ең жақсы): {groups}",
+    "d6ae0c8a03": "Ережелер:",
+    "f384fe23dc": "Ауысымның шегі жетіп, ең жақсы ұпай теңдікке жетеді."
+  },
+  "km": {
+    "500ebdc711": "{num_players}-កីឡាករ Snake លើបណ្តាញ {width}×{height}。",
+    "59d2c5cbfe": "កីឡាករ {alive} បានរស់រានមានជីវិត; អ្នកដទៃបានស្លាប់។",
+    "9107cf770e": "ពស់ ទាំង អស់ បាន ស្លាប់ ភ្លាម ៗ",
+    "926234fd09": "{reason} ក្រុមចំណាត់ថ្នាក់ចុងក្រោយ (អាក្រក់បំផុត→ល្អបំផុត): {groups}",
+    "b861965306": "ក្តារបច្ចុប្បន្ន៖",
+    "f384fe23dc": "លទ្ធផលល្អបំផុតឈ្នះការបំបែកបំបាក់។"
+  },
+  "kmb": {
+    "384017b5fd": "Matokeo ya dibwe {round_count}:",
+    "500ebdc711": "{num_players}-Mithu uka Snake ku {width}×{height} dikwesa.",
+    "59d2c5cbfe": "Mithu {alive} akumukila; wengine wote akufa.",
+    "9107cf770e": "O ji-anju joso ja fuile mu kithangana kimoxi.",
+    "926234fd09": "{reason} Klasa ya mwisho ya vikundi (mbaya→bora): {groups}",
+    "b861965306": "Tábua ya Sasa:",
+    "d6ae0c8a03": "Kanuni:",
+    "f384fe23dc": "Mpaka wa zamu umefikiwa - pontu bora inashinda usawa."
+  },
+  "kmr": {
+    "384017b5fd": "Encamên Çerxa {round_count}:",
+    "500ebdc711": "{num_players}-Lîstikvan Maran li ser grîdek {width}×{height}.",
+    "59d2c5cbfe": "Lîstikvan {alive} sax ma; hemû yên din mirin.",
+    "9107cf770e": "Hemû şêrîn di heman demê de mirin.",
+    "926234fd09": "{reason} Rêzîkê paşîn a komên (xirab→baş): {groups}",
+    "b861965306": "Taqeta Heyî",
+    "d6ae0c8a03": "Rêzik:",
+    "f384fe23dc": "Sînorê guherandinê gihîşt - herî baş skor tie-break qezenc dike."
+  },
+  "kn": {
+    "500ebdc711": "{num_players}-ಪ್ಲೇಯರ್ ಸ್ನೇಕ್ ಒಂದು {width}×{height} ಗ್ರಿಡ್‌ನಲ್ಲಿ.",
+    "59d2c5cbfe": "ಆಟಗಾರ {alive} ಬದುಕುಳಿದರು; ಉಳಿದವರೆಲ್ಲರೂ ಮೃತಪಟ್ಟರು.",
+    "9107cf770e": "ಎಲ್ಲಾ ಹಾವುಗಳು ಏಕಕಾಲದಲ್ಲಿ ಸತ್ತವು.",
+    "926234fd09": "{reason} ಅಂತಿಮ ಶ್ರೇಯಾಂಕ ಗುಂಪುಗಳು (ಕೆಟ್ಟ→ಉತ್ತಮ): {groups}",
+    "f384fe23dc": "ತಿರುವು ಮಿತಿ ತಲುಪಿದೆ - ಅತ್ಯುತ್ತಮ ಸ್ಕೋರ್ ಟೈ-ಬ್ರೇಕ್ ಗೆಲ್ಲುತ್ತದೆ."
+  },
+  "knc": {
+    "384017b5fd": "Kolo {round_count} sakkwana:",
+    "500ebdc711": "{num_players}-Dan wasa Snake a kan {width}×{height} grid.",
+    "59d2c5cbfe": "Kambiwu {alive} dә kənəngatǝna; sandi gade samma so gǝrza.",
+    "9107cf770e": "Njokawa samma so dǝ sa fal lan kәrmuzayin.",
+    "926234fd09": "{reason} Kɔɔrɔngɔ kɛɛlɛŋɛ (mbɛɛlɛ → kʊɛsɛ): {groups}",
+    "b861965306": "Borti Kadi:",
+    "d6ae0c8a03": "Kárá:",
+    "f384fe23dc": "Kәnza kalkalye dәga sǝdǝna - nǝmkambe kambowo dǝ tie-break lan kǝnasarjin."
+  },
+  "ko": {
+    "384017b5fd": "라운드 {round_count} 결과:",
+    "500ebdc711": "{num_players}명 플레이어 스네이크, {width}×{height} 그리드에서 진행됩니다.",
+    "59d2c5cbfe": "플레이어 {alive}가 생존; 모든 다른 플레이어가 사망했습니다.",
+    "9107cf770e": "모든 뱀이 동시에 사망했습니다.",
+    "926234fd09": "{reason} 최종 순위 그룹 (가장 나쁜→가장 좋은): {groups}",
+    "b861965306": "현재 보드:",
+    "d6ae0c8a03": "규칙:",
+    "f384fe23dc": "턴 제한 도달 - 가장 높은 점수가 승리합니다."
+  },
+  "kon": {
+    "384017b5fd": "Mambu {round_count} matokeo:",
+    "500ebdc711": "Nyoka ya {num_players}-Wachezaji kwenye gridi ya {width}×{height}.",
+    "59d2c5cbfe": "Muntu yina vandaka kubula {alive} kugulukaka; bantu yonso yankaka kufwaka.",
+    "9107cf770e": "Binyoka yonso kufwaka na mbala mosi.",
+    "926234fd09": "{reason} Mvula ya mwana (malu→menvu): {groups}",
+    "b861965306": "Nkanda ya Sasa:",
+    "d6ae0c8a03": "Mvutu:",
+    "f384fe23dc": "Kana bo me kuma na nsuka ya kitini yina kele ti makuki mingi, yo ke tendula nde nsaka ta suka mutindu mosi."
+  },
+  "ky": {
+    "384017b5fd": "Раунд {round_count} жыйынтыгы:",
+    "500ebdc711": "{num_players}-Оюнчу Жылан {width}×{height} торчодо.",
+    "59d2c5cbfe": "Оюнчу {alive} аман калды; калгандарынын баары каза болду.",
+    "9107cf770e": "Жыландардын баары бир учурда өлүп калган.",
+    "926234fd09": "{reason} Акыркы рейтинг топтору (эң начар→эң мыкты): {groups}",
+    "d6ae0c8a03": "Эрежелер:",
+    "f384fe23dc": "Турдун чеги жетилди - эң мыкты упай тай-брейк утат."
+  },
+  "lij": {
+    "384017b5fd": "Rizultati do turnu {round_count}:",
+    "500ebdc711": "{num_players}-Giocatô Serpe in sce 'n {width}×{height} griglia.",
+    "59d2c5cbfe": "O zugatô {alive} o l'é rescivæu; tutti i atri en mòrti.",
+    "9107cf770e": "Tutti i serpenti en mòrti à l'instante.",
+    "926234fd09": "{reason} Grùppi de clasificaçión finâle (da-o pèzo a-o mêgio): {groups}",
+    "b861965306": "Tabellon Attoâ:",
+    "d6ae0c8a03": "Regole:",
+    "f384fe23dc": "O limite de rotaçion o l'é stæto raggiunto: a ciù bella scortua vinse in tie-break."
+  },
+  "lim": {
+    "384017b5fd": "Resultate ronde {round_count}:",
+    "500ebdc711": "{num_players}-Speler Slang op 'n {width}×{height} rooster.",
+    "59d2c5cbfe": "Speler {alive} overleefde; alle anderen perieërden.",
+    "9107cf770e": "Alle slange stierven tegeliek.",
+    "926234fd09": "{reason} Definitief rangsjèlling groepe (slechtst→bètste): {groups}",
+    "b861965306": "Huidig Bord:",
+    "d6ae0c8a03": "Regele:",
+    "f384fe23dc": "Drejlimiet bereikt - beste score wint gelieke stand."
+  },
+  "lin": {
+    "384017b5fd": "Maboko {round_count} maye makomaki:",
+    "500ebdc711": "{num_players}-Bato ya Snake o libanda {width}×{height}.",
+    "59d2c5cbfe": "Moyembi {alive} abikaki; basusu nyonso bakufaki.",
+    "9107cf770e": "Nyoka nyonso ekufaki na mbala moko.",
+    "926234fd09": "{reason} Mokanda ya mwisho ya makundi (mabaya→mazuri): {groups}",
+    "b861965306": "Lopango la sika:",
+    "d6ae0c8a03": "Mikano:",
+    "f384fe23dc": "Kizui ya mikano ekomi - mbala ya juu ikunda mabulu."
+  },
+  "lmo": {
+    "384017b5fd": "Resultaa del gir {round_count}:",
+    "500ebdc711": "{num_players}-Giugador Biscia in sü una griglia {width}×{height}.",
+    "59d2c5cbfe": "Al giugador {alive} al è survivìt; tüti i àter a hinn mòrt.",
+    "9107cf770e": "Tüt i serpent hinn mort insemma.",
+    "926234fd09": "{reason} Grupp de classifega finai (del pez al mej): {groups}",
+    "b861965306": "Tabella Atüala:",
+    "d6ae0c8a03": "Regol:",
+    "f384fe23dc": "L'è rivà el limit de gir - la migliore scor vinc l'tie-break."
+  },
+  "lo": {
+    "500ebdc711": "{num_players}-Player ສົນ ເປັນຫນຶ່ງຢູ່ໃນ {width}×{height} ກຣິດ.",
+    "59d2c5cbfe": "ຜູ້ນ {alive} ລອດຊີວິດ; ຄົນອື່ນ ຫມົດ ເສຍຊີວິດ.",
+    "9107cf770e": "ພວກງູທັງຫຼາຍຕາຍພ້ອມກັນ.",
+    "926234fd09": "{reason} ກຸ່ມຈັດອັນດັບສຸດທ້າຍ (ຮ້າຍແຮງທີ່ສຸດ→ດີທີ່ສຸດ): {groups}",
+    "d6ae0c8a03": "ກົດຫົນ:",
+    "f384fe23dc": "ຂີດ ຈໍາ ກັດການຫັນມາ - ຄະແນນທີ່ດີທີ່ສຸດຊະນະການຕັດສີນ."
+  },
+  "lt": {
+    "384017b5fd": "{round_count} raundo rezultatai:",
+    "500ebdc711": "{num_players}-žaidėjų Slinkis {width}×{height} tinklelyje.",
+    "59d2c5cbfe": "Žaidėjas {alive} išgyveno; visi kiti žuvo.",
+    "9107cf770e": "Visos gyvatės mirė vienu metu.",
+    "926234fd09": "{reason} Galutinės reitingo grupės (nuo blogiausio iki geriausio): {groups}",
+    "b861965306": "Dabartinė lentelė:",
+    "d6ae0c8a03": "Taisyklės:",
+    "f384fe23dc": "Ėjimų limitas pasiektas - geriausias balas laimi lygiosios."
+  },
+  "ltg": {
+    "384017b5fd": "{round_count}. kārtas rezultāti:",
+    "500ebdc711": "{num_players}-Spēletāja Čūska {width}×{height} gridā.",
+    "59d2c5cbfe": "Spālātuojs {alive} izdzeivuoja; vysi cyti nūmyra.",
+    "9107cf770e": "Vysys čūmys nūmyra vīnlaiceigi.",
+    "926234fd09": "{reason} Fināla rētinga grupas (sliktākā→labākā): {groups}",
+    "b861965306": "Pašreizējā tabula:",
+    "d6ae0c8a03": "Noteikumi:",
+    "f384fe23dc": "Izkuopšonys rūbežs sasnāgts - lobuokais rezultats uzvar tiebreiku."
+  },
+  "ltz": {
+    "384017b5fd": "Resultater vun der Ronn {round_count}:",
+    "500ebdc711": "{num_players}-Spiller-Schnäer op engem {width}×{height}-Gitter.",
+    "59d2c5cbfe": "De Spiller {alive} huet iwwerlieft; all déi aner si gestuerwen.",
+    "9107cf770e": "All d'Schlaangen sinn gläichzäiteg gestuerwen.",
+    "926234fd09": "{reason} Endgëlteg Ranking-Gruppen (schlechtsten → beschte): {groups}",
+    "b861965306": "Aktuell Schachbriet:",
+    "d6ae0c8a03": "Reegelen:",
+    "f384fe23dc": "D'Récklimit ass erreecht - de beschte Score gewënnt den Tie-break."
+  },
+  "lua": {
+    "384017b5fd": "Matokeo ya mzunguko {round_count}:",
+    "500ebdc711": "{num_players}-Muntu wa kubwata kwenye {width}×{height} gridi.",
+    "59d2c5cbfe": "Muena manaya {alive} wakapanduka; bakuabu bonso bakafua.",
+    "9107cf770e": "Nyoka yonso yakafua diakamue.",
+    "926234fd09": "{reason} Mwano wa mwisho wa vikundi (mbaya→bora): {groups}",
+    "b861965306": "Lubamba lwa Bokasi:",
+    "d6ae0c8a03": "Rules:",
+    "f384fe23dc": "Badi bapeta tshipiminu tshia dikudimuna dia nsongo, ne muntu udi mupete bipeta bimpe menemene ke wikala mutshimune."
+  },
+  "lug": {
+    "384017b5fd": "Mazengo ga mzunguko {round_count}:",
+    "500ebdc711": "{num_players}-Omuzannyi Snake ku {width}×{height} grid.",
+    "59d2c5cbfe": "Omuzannyi {alive} yawonawo; abalala bonna baafa.",
+    "9107cf770e": "Emisota gyonna gyafa omulundi gumu.",
+    "926234fd09": "{reason} Mpaka z'akafubo (zzaasi→zzibuukira): {groups}",
+    "b861965306": "Bodi y'obudde:",
+    "d6ae0c8a03": "Nnono:",
+    "f384fe23dc": "Ekigero ky'ekikopo kituuse - ekifo ekisingayo obulungi kiwangula tie-break."
+  },
+  "luo": {
+    "384017b5fd": "Matokeo ya mzunguko {round_count}:",
+    "500ebdc711": "{num_players}-Jatelo Snake kwenye kisanduku cha {width}×{height}.",
+    "59d2c5cbfe": "Jalo {alive} ne otony; jomamoko duto notho.",
+    "9107cf770e": "Thuonde duto notho e kinde achiel.",
+    "926234fd09": "{reason} Madhiyo marankingi (mbaya→nzuri): {groups}",
+    "b861965306": "Bodi E Maber:",
+    "d6ae0c8a03": "Rules:",
+    "f384fe23dc": "Ka osechopo tong' mar ng'wech, to jal ma nigi alama maber moloyo ema locho."
+  },
+  "lus": {
+    "384017b5fd": "Round {round_count} result:",
+    "500ebdc711": "{num_players}-Player Snake {width}×{height} grid-ah.",
+    "59d2c5cbfe": "Player {alive} chu a dam chhuak ta; midang zawng zawngte an thi.",
+    "9107cf770e": "Rûl zawng zawngte chu a tlâng khâwm vek.",
+    "926234fd09": "{reason} Ranking group zawng zawng (worst→best): {groups}",
+    "b861965306": "Board Hmanmek:",
+    "d6ae0c8a03": "Dan:",
+    "f384fe23dc": "Turn limit thleng - score nei ṭha ber chuan tie-break a hneh."
+  },
+  "lv": {
+    "384017b5fd": "{round_count}. kārtas rezultāti:",
+    "500ebdc711": "{num_players}-spēlētāju Čūska uz {width}×{height} režģa.",
+    "59d2c5cbfe": "Spēlētājs {alive} izdzīvoja; visi citi nomira.",
+    "9107cf770e": "Visas čūskas nomira vienlaicīgi.",
+    "926234fd09": "{reason} Galīgā rangi grupu sadalījums (no sliktākajiem līdz labākajiem): {groups}",
+    "b861965306": "Pašreizējais galdiņš:",
+    "d6ae0c8a03": "Noteikumi:",
+    "f384fe23dc": "Gājienu limits sasniegts - labākais punktu skaita uzvarētājs tie-break."
+  },
+  "mag": {
+    "384017b5fd": "राउंड {round_count} के परिणाम:",
+    "500ebdc711": "{num_players}-खिलाड़ी साँप {width}×{height} ग्रिड पर।",
+    "59d2c5cbfe": "खिलाड़ी {alive} बच गेलइ; बाकी सब मर गेले हल।",
+    "9107cf770e": "सभे साँप एक्के साथ मर गेल ।",
+    "926234fd09": "{reason} अंतिम रैंकिंग समूह (सबसे खराब→सबसे अच्छा): {groups}",
+    "b861965306": "वर्तमान बोर्ड:",
+    "d6ae0c8a03": "नियम:",
+    "f384fe23dc": "वक्र सीमा तक पहुँच गेल - सबसे अच्छा स्कोर टाई-ब्रेक जीतलइ।"
+  },
+  "mai": {
+    "384017b5fd": "राउंड {round_count} के परिणाम:",
+    "500ebdc711": "{num_players}-खिलाड़ी स्नेक {width}×{height} ग्रिड पर।",
+    "59d2c5cbfe": "प्लेयर {alive} जीवित रहल; अन्य सब मारल गेल।",
+    "9107cf770e": "सभ साँप एकहि बेर मरि गेल।",
+    "926234fd09": "{reason} अंतिम रैंकिंग समूह (सबसे खराब→सबसे अच्छा): {groups}",
+    "b861965306": "वर्तमान बोर्ड:",
+    "d6ae0c8a03": "नियम:",
+    "f384fe23dc": "टर्न लिमिट पहुँचल - सभसँ बेसी स्कोर टाई-ब्रेक जीतैत अछि।"
+  },
+  "mg": {
+    "500ebdc711": "{num_players}-Player Snake on a {width}×{height} grid.",
+    "59d2c5cbfe": "Ny mpilalao {alive} no tafavoaka velona; maty ny hafa rehetra.",
+    "9107cf770e": "Maty niaraka tamin'izay ny bibilava rehetra.",
+    "926234fd09": "{reason} Vondrona farany (ratsy indrindra→tsara indrindra): {groups}",
+    "f384fe23dc": "Nahatratra ny fetran'ny fihodinana - ny isa tsara indrindra no mandresy amin'ny fifandirana."
+  },
+  "min": {
+    "384017b5fd": "Hasil putaran {round_count}:",
+    "500ebdc711": "{num_players}-Pemain Ular pada {width}×{height} grid.",
+    "59d2c5cbfe": "Pamain {alive} batahan; sadonyo nan lainnyo mati.",
+    "9107cf770e": "Kasadonyo ula mati sakaligus.",
+    "926234fd09": "{reason} Peringkat akhir grup (terburuk→terbaik): {groups}",
+    "b861965306": "Papan Saikini:",
+    "d6ae0c8a03": "Aturan:",
+    "f384fe23dc": "Bateh giliran alah digunoan - skor paliang baiak manang tie-break."
+  },
+  "mk": {
+    "384017b5fd": "Резултати од рунда {round_count}:",
+    "500ebdc711": "{num_players}-Играчка Змија на {width}×{height} мрежа.",
+    "59d2c5cbfe": "Играчот {alive} преживеа; сите други умреа.",
+    "9107cf770e": "Сите змији умреа истовремено.",
+    "926234fd09": "{reason} Крајна ранг-листа (најлоши→најдобри): {groups}",
+    "b861965306": "Моментална Табла:",
+    "d6ae0c8a03": "Правила:",
+    "f384fe23dc": "Лимитот на потези е постигнат - најдобриот резултат го освојува нерешената врска."
+  },
+  "ml": {
+    "500ebdc711": "{num_players}-പ്ലേയർ സ്നേക്ക് ഒരു {width}×{height} ഗ്രിഡിൽ.",
+    "59d2c5cbfe": "കളിക്കാരൻ {alive} അതിജീവിച്ചു; മറ്റുള്ളവർ മരിച്ചു.",
+    "9107cf770e": "എല്ലാ പാമ്പുകളും ഒരേ സമയം ചത്തു.",
+    "926234fd09": "{reason} അന്തിമ റാങ്കിംഗ് ഗ്രൂപ്പുകൾ (മോശം→മികച്ചത്): {groups}",
+    "f384fe23dc": "ടേൺ പരിധി കൈവരിച്ചു - മികച്ച സ്കോർ ടൈ ബ്രേക്ക് ജയിക്കുന്നു."
+  },
+  "mlt": {
+    "384017b5fd": "Riżultati tar-Rawnd {round_count}:",
+    "500ebdc711": "{num_players}-Plejers tas-Snake fuq grilja ta' {width}×{height}.",
+    "59d2c5cbfe": "Il-plejer {alive} baqa' ħaj; l-oħrajn kollha mietu.",
+    "9107cf770e": "Il- serpenti kollha mietu fl- istess ħin.",
+    "926234fd09": "{reason} Klassifika finali tal-gruppi (l-aghar→l-aħjar): {groups}",
+    "b861965306": "Bord Attwali:",
+    "d6ae0c8a03": "Regoli:",
+    "f384fe23dc": "Il-limitu tal-dawran jintlaħaq - l-aħjar skor jirbaħ tie break."
+  },
+  "mn": {
+    "384017b5fd": "Тойролт {round_count}-ийн дүн:",
+    "500ebdc711": "{num_players}-Тоглогчтай Могойн тоглолт {width}×{height} торгон самбарт.",
+    "59d2c5cbfe": "Тоглогч {alive} амьд үлдсэн; бусад нь бүгд үхсэн.",
+    "9107cf770e": "Бүх зүүд нэгэн зэрэг үхсэн.",
+    "926234fd09": "{reason} Эцсийн жагсаалтын бүлэгүүд (болохгүй→боловсрол): {groups}",
+    "b861965306": "Одоогийн Самбар:",
+    "d6ae0c8a03": "Дүрэм:",
+    "f384fe23dc": "Хязгаарлалт хүрсэн - хамгийн сайн оноотой нь тэнцвэрт тоглолтод түрүүлнэ."
+  },
+  "mni": {
+    "384017b5fd": "{round_count}  রাউন্ডগী ফলাফল:",
+    "500ebdc711": "{num_players}  ki  Snake, {width}×{height}  grid da leiriba.",
+    "59d2c5cbfe": "খেলৈবা {alive} বাঁচল; সকল খেলৈবা মতামত মরল।",
+    "9107cf770e": "সকল স্নেক একই সময়ে মরল।",
+    "926234fd09": "{reason} চূড়ান্ত র‍্যাংকিং গ্রুপ (সবচেয়ে খারাপ→সবচেয়ে ভাল): {groups}",
+    "b861965306": "বর্তমান বোর্ড:",
+    "d6ae0c8a03": "নিয়ম:",
+    "f384fe23dc": "টার্ন লিমিট পৌছল - সর্বোত্তম স্কোর জয় টাই-ব্রেক।"
+  },
+  "mos": {
+    "384017b5fd": "Round {round_count} taariha:",
+    "500ebdc711": "{num_players}-Ŋun kam yɛla Snake zaŋ ti {width}×{height} grid.",
+    "59d2c5cbfe": "Ŋun kam yɛla {alive}; ban kpeeni kam kɔɣa",
+    "9107cf770e": "Saanse zaa ti yɛɛre nɛɛre.",
+    "926234fd09": "{reason} Zaasim tɛha (worst→best): {groups}",
+    "b861965306": "Bɛɛri lahaba:",
+    "d6ae0c8a03": "Kɛ̀rɛ:",
+    "f384fe23dc": "B sẽn ta b sẽk n na n wẽndã, yaa ned ning fãa sẽn paam-a sõma wã la a tõoge."
+  },
+  "mr": {
+    "500ebdc711": "{num_players}-प्लेयर स्नेक {width}×{height} ग्रिडवर.",
+    "59d2c5cbfe": "खेळाडू {alive} जिवंत राहिला; इतर सर्वजण मरण पावले.",
+    "9107cf770e": "सर्व साप एकाच वेळी मेले.",
+    "926234fd09": "{reason} अंतिम क्रमवारी गट (सर्वात वाईट→सर्वोत्तम): {groups}",
+    "f384fe23dc": "वळण मर्यादा गाठली - सर्वोत्तम स्कोअर जिंकतो टाई-ब्रेक."
+  },
+  "mri": {
+    "384017b5fd": "Ngā huanga o te rauniga {round_count}:",
+    "500ebdc711": "{num_players}-Snake kei runga i te {width}×{height} taratoha.",
+    "59d2c5cbfe": "I ora te kaitākaro {alive}; i mate katoa ētahi atu.",
+    "9107cf770e": "I mate katoa ngā nakahi i te wā kotahi.",
+    "926234fd09": "{reason} Urutapanga whakamutunga o ngā rōpū (kino ki te pai rawa): {groups}",
+    "b861965306": "Papa Hou:",
+    "d6ae0c8a03": "Ture:",
+    "f384fe23dc": "Kua tae te rohe huri - ko te kaute pai rawa atu e wikitoria ana i te wehenga."
+  },
+  "ms": {
+    "384017b5fd": "Keputusan pusingan {round_count}:",
+    "500ebdc711": "Snake {num_players} pemain pada grid {width}×{height}.",
+    "59d2c5cbfe": "Pemain {alive} terselamat; semua yang lain terkorban.",
+    "9107cf770e": "Semua ular mati serentak.",
+    "926234fd09": "{reason} Kumpulan kedudukan akhir (terburuk→terbaik): {groups}",
+    "b861965306": "Papan Semasa:",
+    "d6ae0c8a03": "Peraturan:",
+    "f384fe23dc": "Had giliran dicapai - skor terbaik menang dalam keadaan seri."
+  },
+  "my": {
+    "500ebdc711": "{num_players}-Player နဂါးကို {width}×{height} ကွက်လပ်တွင်။",
+    "59d2c5cbfe": "ကစားသမား {alive} အသက်ရှင်ကျန်ရစ်ပြီး ကျန်တဲ့လူတွေ သေဆုံးသွားပါတယ်။",
+    "9107cf770e": "မြွေတွေအားလုံး တစ်ပြိုင်နက် သေသွားကြတယ်",
+    "926234fd09": "{reason} နောက်ဆုံးအဆင့် အုပ်စုများ (အဆိုးဆုံး→အကောင်းဆုံး): {groups}",
+    "f384fe23dc": "အလှည့်အပြောင်း ကန့်သတ်ချက်ရောက်ပြီ - အကောင်းဆုံးရမှတ်က ထီပေါက်"
+  },
+  "nb": {
+    "384017b5fd": "Resultater for runde {round_count}:",
+    "500ebdc711": "{num_players}-spillers Slange på et {width}×{height}-rutenett.",
+    "59d2c5cbfe": "Spiller {alive} overlevde; alle andre omkom.",
+    "9107cf770e": "Alle slangene døde samtidig.",
+    "926234fd09": "{reason} Endelig rangeringsgrupper (dårligst→best): {groups}",
+    "b861965306": "Nåværende brett:",
+    "d6ae0c8a03": "Regler:",
+    "f384fe23dc": "Tidsbegrensningen er nådd - beste poengsum vinner ved uavgjort."
+  },
+  "ne": {
+    "500ebdc711": "{num_players}-प्लेयर स्नेक {width}×{height} ग्रिडमा।",
+    "59d2c5cbfe": "खेलाडी {alive} बाँचे; अरू सबै मरे।",
+    "9107cf770e": "सबै सर्पहरू एकै समयमा मरे।",
+    "926234fd09": "{reason} अन्तिम श्रेणीकरण समूहहरू (सबैभन्दा खराब→सर्वश्रेष्ठ): {groups}",
+    "d6ae0c8a03": "नियम:",
+    "f384fe23dc": "टर्न लिमिट पुगेको छ - सबैभन्दा राम्रो स्कोरले टाई-ब्रेक जित्छ।"
+  },
+  "nl": {
+    "384017b5fd": "Resultaten Ronde {round_count}:",
+    "500ebdc711": "{num_players}-Speler Snake op een {width}×{height} raster.",
+    "59d2c5cbfe": "Speler {alive} overleefde; alle anderen stierven.",
+    "9107cf770e": "Alle slangen stierven tegelijkertijd.",
+    "926234fd09": "{reason} Eindelijke rangschikkingsgroepen (slechtst→beste): {groups}",
+    "b861965306": "Huidig bord:",
+    "d6ae0c8a03": "Regels:",
+    "f384fe23dc": "Beurtenlimiet bereikt - beste score wint gelijkspel."
+  },
+  "nno": {
+    "384017b5fd": "Resultat for runde {round_count}:",
+    "500ebdc711": "{num_players}-spelar Snake på eit {width}×{height}-rutenett.",
+    "59d2c5cbfe": "Spelaren {alive} overlevde; alle andre døydde.",
+    "9107cf770e": "Alle slangane døydde samstundes.",
+    "926234fd09": "{reason} Endleg rangering av grupper (verst→best): {groups}",
+    "b861965306": "No er tavla:",
+    "d6ae0c8a03": "Reglar:",
+    "f384fe23dc": "Tidsfristen er nådd - beste poengsum vinn tie-break."
+  },
+  "nso": {
+    "384017b5fd": "Matokeo a Raundi {round_count}:",
+    "500ebdc711": "{num_players}-Moromu wa Snake holofelong ya {width}×{height}.",
+    "59d2c5cbfe": "Sebapadi {alive} se ile sa phologa; ba bangwe ka moka ba hwile.",
+    "9107cf770e": "Dinoga ka moka di ile tša hwa gatee-tee.",
+    "926234fd09": "{reason} Tengwa ya kgwele ya morero (e ntle le e betere): {groups}",
+    "b861965306": "Boro ya Tokologo:",
+    "d6ae0c8a03": "Melao:",
+    "f384fe23dc": "Go fihlelelwa ga mollwane wa go retologa - poelo e kaone kudu ke yona e fenyago papadi ya tie-break."
+  },
+  "nus": {
+    "384017b5fd": "Round {round_count} kɛ̈kɛ̈:",
+    "500ebdc711": "{num_players}-Wɛl Snake alɔŋ a {width}×{height} kuɔr.",
+    "59d2c5cbfe": "Player {alive} cɛ tëk; nɛy tin kɔ̱ŋ diaal ci li̱w.",
+    "9107cf770e": "Kɛn thɔ̱ɔ̱l diaal cukɛ li̱w kɛɛl.",
+    "926234fd09": "{reason} Kɛm kɛ thiäi kuoth (tɛk → dɛl): {groups}",
+    "b861965306": "Kɛmɛ̈thɛ̈rɛ̈k ë bɔ̈r:",
+    "d6ae0c8a03": "Käŋɛ̈ɛ̈r:",
+    "f384fe23dc": "Mi̱ ci̱ pek in ca thöp ɛ mi̱ cɛ cop - min gɔa ni̱ jɛn kä bi̱ ben raar bɛ jiek."
+  },
+  "nya": {
+    "384017b5fd": "Matokeo ya raundi {round_count}:",
+    "500ebdc711": "Njoka ya {num_players}-Wosewera pa gridi ya {width}×{height}.",
+    "59d2c5cbfe": "Wosewera {alive} anapulumuka; ena onse anafa.",
+    "9107cf770e": "Njoka zonse zinafa nthaŵi imodzi.",
+    "926234fd09": "{reason} Malo a ranking (wodziwa→wobiri): {groups}",
+    "b861965306": "Bodi Lililonse:",
+    "d6ae0c8a03": "Sheria:",
+    "f384fe23dc": "Kufikira malire a kutembenuka - wopambana kupambana pa tie-break."
+  },
+  "oci": {
+    "384017b5fd": "Resultats del torn {round_count}:",
+    "500ebdc711": "{num_players}-Serp del jogaire sus un grillat {width}×{height}.",
+    "59d2c5cbfe": "Lo jogaire {alive} subrevisquèt; totes los autres moriguèron.",
+    "9107cf770e": "Totas las sèrps moriguèron simultanèament.",
+    "926234fd09": "{reason} Classament final dels grops (pitjor→melhor): {groups}",
+    "b861965306": "Taulièr actual:",
+    "d6ae0c8a03": "Reglas:",
+    "f384fe23dc": "Limite de virada atengut - lo melhor score ganha l'estagi."
+  },
+  "or": {
+    "384017b5fd": "ରାଉଣ୍ଡ {round_count} ଫଳାଫଳ:",
+    "500ebdc711": "{num_players}-ପ୍ଲେୟାର ସାପ ଏକ {width}×{height} ଗ୍ରିଡରେ。",
+    "59d2c5cbfe": "Player {alive} ବଞ୍ଚି ରହିଲା; ଅନ୍ୟ ସମସ୍ତ ମରିଗଲେ.",
+    "9107cf770e": "ସମସ୍ତ ସାପ ଏକାସାଙ୍ଗରେ ମରିଗଲେ ।",
+    "926234fd09": "{reason} ଅନ୍ତିମ ରାଙ୍କିଙ୍ଗ ଦଳ (ସବୁଠାରୁ ଖରାପ→ଶ୍ରେଷ୍ଠ): {groups}",
+    "d6ae0c8a03": "ନିୟମ:",
+    "f384fe23dc": "ଟର୍ନ ଲିମିଟ ଛୁଇଁଲା - ଶ୍ରେଷ୍ଠ ସ୍କୋର ବିଜୟୀ, ଟାଇ ବ୍ରେକ ।"
+  },
+  "pa": {
+    "500ebdc711": "{num_players}-ਪਲੇਅਰ ਸਨੇਕ ਇੱਕ {width}×{height} ਗ੍ਰਿਡ 'ਤੇ।",
+    "59d2c5cbfe": "ਖਿਡਾਰੀ {alive} ਬਚ ਗਿਆ; ਬਾਕੀ ਸਾਰੇ ਮਾਰੇ ਗਏ।",
+    "9107cf770e": "ਸਾਰੇ ਸੱਪ ਇੱਕੋ ਵੇਲੇ ਮਰ ਗਏ।",
+    "926234fd09": "{reason} ਅੰਤਮ ਰੈਂਕਿੰਗ ਸਮੂਹ (ਸਭ ਤੋਂ ਬੁਰਾ→ਸਭ ਤੋਂ ਵਧੀਆ): {groups}",
+    "f384fe23dc": "ਵਾਰੀ ਦੀ ਸੀਮਾ ਪਹੁੰਚ ਗਈ - ਸਭ ਤੋਂ ਵਧੀਆ ਸਕੋਰ ਜਿੱਤ-ਤੋੜ ਜਿੱਤਦਾ ਹੈ।"
+  },
+  "pag": {
+    "384017b5fd": "Resulta na Round {round_count}:",
+    "500ebdc711": "{num_players}-Player Snake diad saray {width}×{height} grid.",
+    "59d2c5cbfe": "Akaligtas so manlalaban a {alive}; amin ya arum et inatey.",
+    "9107cf770e": "Amin ya uleg et inatey a tampol.",
+    "926234fd09": "{reason} Grupo na ranking (worst→best): {groups}",
+    "b861965306": "Kasalukuyan a Board:",
+    "d6ae0c8a03": "Saray rules:",
+    "f384fe23dc": "Akasabi so limitasyon na panag-turn - say sankarakelan ya score et manalo ed tiebreak."
+  },
+  "pap": {
+    "384017b5fd": "Resultado di rondo {round_count}:",
+    "500ebdc711": "{num_players}-Hues i Sèrpiente na un {width}×{height} grid.",
+    "59d2c5cbfe": "E hungadó {alive} a sobrebibí; tur otro persona a pèrdè nan bida.",
+    "9107cf770e": "Tur e serpentenan a muri simultáneamente.",
+    "926234fd09": "{reason} Klasementu final (peor→mihó): {groups}",
+    "b861965306": "Tablero Akta:",
+    "d6ae0c8a03": "Reglanan:",
+    "f384fe23dc": "E limite di turno a yega - e mihó skor ta gana den tie-break."
+  },
+  "pl": {
+    "384017b5fd": "Wyniki rundy {round_count}:",
+    "500ebdc711": "{num_players}-osobowy Snake na siatce {width}×{height}.",
+    "59d2c5cbfe": "Gracz {alive} przeżył; wszyscy inni zginęli.",
+    "9107cf770e": "Wszystkie węże zginęły jednocześnie.",
+    "926234fd09": "{reason} Ostateczne grupy rankingowe (od najgorszych do najlepszych): {groups}",
+    "b861965306": "Aktualna plansza:",
+    "d6ae0c8a03": "Zasady:",
+    "f384fe23dc": "Osiągnięto limit tur - najlepszy wynik wygrywa w przypadku remisu."
+  },
+  "ps": {
+    "500ebdc711": "{num_players}-د سنېک په یو {width}×{height} ګرید کې دی.",
+    "59d2c5cbfe": "لوبغاړی {alive} ژوندی پاتې شو؛ نور ټول مړه شول.",
+    "9107cf770e": "ټول ماران په يو وخت کې مړه شول.",
+    "926234fd09": "{reason} د وروستي درجه بندي ډلې (بدترین→ غوره): {groups}",
+    "d6ae0c8a03": "نियमونه:",
+    "f384fe23dc": "د ګرځېدلو حد ته رسېدلی - تر ټولو ښه سکور د ټای بریک ګټونکی دی."
+  },
+  "pt": {
+    "384017b5fd": "Resultados da rodada {round_count}:",
+    "500ebdc711": "Snake de {num_players} jogadores em uma grade de {width}×{height}.",
+    "59d2c5cbfe": "O jogador {alive} sobreviveu; todos os outros pereceram.",
+    "9107cf770e": "Todas as cobras morreram simultaneamente.",
+    "926234fd09": "{reason} Grupos de classificação finais (do pior para o melhor): {groups}",
+    "b861965306": "Tabuleiro Atual:",
+    "d6ae0c8a03": "Regras:",
+    "f384fe23dc": "Limite de turnos alcançado - a melhor pontuação vence o desempate."
+  },
+  "quy": {
+    "384017b5fd": "P'unchay {round_count} willakuna:",
+    "500ebdc711": "{num_players}-Pukllayuq Amaru {width}×{height} willañiqipi.",
+    "59d2c5cbfe": "Pukllayuq {alive} kawsarqa; wakin pukllayuqkuna wañuykamurqa.",
+    "9107cf770e": "Tukuy chay machʼasqa uj ratolla wañurqanku.",
+    "926234fd09": "{reason} Qhipa ranking q'umir (pisipaymanta aswan allin): {groups}",
+    "b861965306": "P'unchay p'ankallari:",
+    "d6ae0c8a03": "Kamachikuna:",
+    "f384fe23dc": "Chaypi, mayqen pukllaykunapas aswan allin kaqmi."
+  },
+  "ro": {
+    "384017b5fd": "Rezultatele rundei {round_count}:",
+    "500ebdc711": "Șarpe cu {num_players} jucători pe o grilă de {width}×{height}.",
+    "59d2c5cbfe": "Jucătorul {alive} a supraviețuit; toți ceilalți au pierit.",
+    "9107cf770e": "Toți șerpii au murit simultan.",
+    "926234fd09": "{reason} Grupuri de clasament finale (de la cel mai slab la cel mai bun): {groups}",
+    "b861965306": "Tablă curentă:",
+    "d6ae0c8a03": "Reguli:",
+    "f384fe23dc": "Limita de ture a fost atinsă - cel mai bun scor câștigă la egalitate."
+  },
+  "ru": {
+    "384017b5fd": "Результаты раунда {round_count}:",
+    "500ebdc711": "{num_players}-игроков Змейка на сетке {width}×{height}.",
+    "59d2c5cbfe": "Игрок {alive} выжил; все остальные погибли.",
+    "9107cf770e": "Все змейки умерли одновременно.",
+    "926234fd09": "{reason} Окончательные группы ранжирования (от худшего к лучшему): {groups}",
+    "b861965306": "Текущая доска:",
+    "d6ae0c8a03": "Правила:",
+    "f384fe23dc": "Достигнут лимит ходов - лучший балл выигрывает в случае ничьей."
+  },
+  "run": {
+    "384017b5fd": "Emiziki ya mukondo {round_count}:",
+    "500ebdc711": "{num_players}-Nyoka ya Wachezaji kwenye gridi ya {width}×{height}.",
+    "59d2c5cbfe": "Umukinyi {alive} yarokotse; abandi bose barapfuye.",
+    "9107cf770e": "Inzoka zose zapfuye icarimwe.",
+    "926234fd09": "{reason} Vikundi vya utaratibu wa mwisho (mbaya→bora): {groups}",
+    "b861965306": "Igikarita c'iki:",
+    "d6ae0c8a03": "Amategeko:",
+    "f384fe23dc": "Igihe ntarengwa c'inzira kirashitse - uwushizemwo igitigiri ciza kuruta abandi ni we atsinda."
+  },
+  "sag": {
+    "384017b5fd": "Mîngî {round_count} êngî:",
+    "500ebdc711": "{num_players}-Môko Sèpè so {width}×{height} kété.",
+    "59d2c5cbfe": "Zo ti pikango ye {alive} asö kuâ; tanga ni kue akui.",
+    "9107cf770e": "Köli ngbânga zîa tî ndö gbâ tî ènzî.",
+    "926234fd09": "{reason} Kôtaïngö sängö (pîngö → lîngö): {groups}",
+    "b861965306": "Kötä gbânga ôko:",
+    "d6ae0c8a03": "Kötä gbätä:",
+    "f384fe23dc": "A si na katikati ti tour ni awe - zo so ayeke wara ye mingi ahon atanga ni kue awara fini."
+  },
+  "san": {
+    "384017b5fd": "परिभ्रमणं {round_count} परिणामाः",
+    "500ebdc711": "{num_players}-आदिमानुषः सर्पः {width}×{height} जालके उपरि।",
+    "59d2c5cbfe": "क्रीडाकरः {alive} जीवितवान्; अन्यैः सर्वेभ्यः प्राणान् हतः।",
+    "9107cf770e": "सर्वे सर्पाः एकस्मिन् एव समये मृताः।",
+    "926234fd09": "{reason} अन्तिम श्रेणीसमूहाः (निकृष्टात् उत्तमं प्रति) {groups}",
+    "b861965306": "वर्तमानबोर्ड:",
+    "d6ae0c8a03": "नियमाः",
+    "f384fe23dc": "वक्रस्य सीमायाः आगमनम् - सर्वोत्कृष्टं स्कोरः टाई-ब्रेक विजयी भवति ।"
+  },
+  "sat": {
+    "384017b5fd": "ᱨᱟᱣᱩᱱᱰ {round_count} ᱨᱮᱡᱟᱞᱴ:",
+    "500ebdc711": "{num_players}-ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ ᱥᱱᱮᱠ {width}×{height} ᱜᱨᱤᱰ ᱨᱮ᱾",
+    "59d2c5cbfe": "ᱠᱷᱮᱞᱚᱸᱰᱤᱭᱟᱹ {alive} ᱫᱚᱭ ᱡᱤᱣᱤᱫ ᱞᱮᱱᱟ; ᱮᱴᱟᱜ ᱠᱚᱫᱚ ᱢᱩᱪᱟ.",
+    "9107cf770e": "ᱥᱟᱱᱟᱢ ᱥᱟᱱᱛᱟᱲ ᱠᱚ ᱢᱤᱫ ᱫᱷᱟᱣ ᱜᱮᱠᱚ ᱜᱚᱡ ᱮᱱ᱾",
+    "926234fd09": "{reason} ᱱᱤᱛᱟᱝ ᱨᱮᱸᱠᱤᱝ ᱜᱩᱴ (ᱟᱱᱟᱴ→ᱥᱚᱨᱮᱥᱴ): {groups}",
+    "b861965306": "ᱱᱤᱛᱟᱜ ᱵᱳᱨᱰ:",
+    "d6ae0c8a03": "ᱱᱤᱭᱚᱢ:",
+    "f384fe23dc": "ᱴᱟᱨᱱ ᱞᱤᱢᱤᱴ ᱦᱟᱛᱟᱣ - ᱡᱚᱛᱚ ᱠᱷᱚᱱ ᱱᱟᱯᱟᱭ ᱥᱠᱳᱨ ᱛᱮ ᱴᱷᱟᱶ ᱵᱮᱱᱟᱣ ᱾"
+  },
+  "scn": {
+    "384017b5fd": "Risultati dû turnu {round_count}:",
+    "500ebdc711": "{num_players}-Jucaturi di Serpi supra a na {width}×{height} griglia.",
+    "59d2c5cbfe": "Lu jucaturi {alive} supravivìu; tutti l'àutri pirìaru.",
+    "9107cf770e": "Tutti li serpenti mureru simultaneamente.",
+    "926234fd09": "{reason} Classifica finali dei gruppi (peggiu→migliuri): {groups}",
+    "b861965306": "Tavuliera current:",
+    "d6ae0c8a03": "Reguli:",
+    "f384fe23dc": "Limitu di curva raggiunutu - u megliu punteggiu vince a parità."
+  },
+  "sd": {
+    "500ebdc711": "{num_players}-پليئر سنیک هڪ {width}×{height} گرڊ تي.",
+    "59d2c5cbfe": "پليئر {alive} بچي ويو؛ ٻيا سڀ مري ويا.",
+    "9107cf770e": "سڀئي نانگ هڪ ئي وقت مري ويا.",
+    "926234fd09": "{reason} حتمي درجه بندي گروپ (بدترين→بهترين): {groups}",
+    "d6ae0c8a03": "قاعدا:",
+    "f384fe23dc": "ٽرن جي حد تائين پهچي ويو - بهترين اسڪور ٽائي بريڪ کٽي ٿو."
+  },
+  "shn": {
+    "384017b5fd": "အပတ္ {round_count} ရလဒ္မ်ား။",
+    "500ebdc711": "{num_players}-ကစားသမား မြွေကို {width}×{height} ကွက်လပ်တွင်။",
+    "59d2c5cbfe": "ၽူႈလဵၼ်ႈ {alive} လႆႈသၢႆၸႂ်ၵိုတ်းဝႆႉသေ ၵူၼ်းတၢင်ႇၸိူဝ်းလႆႈလူႉသဵင်ႈတၢႆၵႂႃႇယဝ်ႉ။",
+    "9107cf770e": "သတ်းတိရတ်ႉသၢၼ်ႇတင်းသဵင်ႈ တၢႆၵႂႃႇၸွမ်းၵၼ်ယဝ်ႉ။",
+    "926234fd09": "{reason} ရလဒ် အဆင့်အတန်း (ဆိုးရွား → ကောင်းမွန်): {groups}",
+    "b861965306": "ၽိုၼ်လိၵ်ႈၸိူဝ်ႉၸႂ်ႈ။",
+    "d6ae0c8a03": "Rules:",
+    "f384fe23dc": "ပေႃးထိုင်ၶၢဝ်းယၢမ်းၶၢႆႉယဝ်ႉၼႆ ၽူႈဢၼ်လႆႈသူးထီႉၼမ်သုတ်းၼၼ်ႉ လႆႈသုမ်းတီႈယူႇတႅၵ်ႇၵၼ်ၼၼ်ႉယဝ်ႉ။"
+  },
+  "si": {
+    "500ebdc711": "{num_players}-ක්‍රීඩක ස්නේක් {width}×{height} ග්‍රිඩයක.",
+    "59d2c5cbfe": "ක්‍රීඩක {alive} ජීවත් විය; අනෙක් සියල්ලෝ මිය ගියහ.",
+    "9107cf770e": "සර්පයන් ඔක්කොම එකපාර මැරුණා.",
+    "926234fd09": "{reason} අවසාන ශ් රේණිගත කිරීමේ කණ්ඩායම් (නරකම→හොඳම): {groups}",
+    "f384fe23dc": "වාර සීමාව ඉටුකරලා, හොදම ලකුණු ප් රමාණය දිනුම් අංකය."
+  },
+  "sk": {
+    "384017b5fd": "Výsledky kola {round_count}:",
+    "500ebdc711": "{num_players}-hráčová hra Snake na {width}×{height} mriežke.",
+    "59d2c5cbfe": "Hráč {alive} prežil; všetci ostatní zahynuli.",
+    "9107cf770e": "Všetci hadi zomreli súčasne.",
+    "926234fd09": "{reason} Konečné skupiny rebríčka (od najhorších po najlepších): {groups}",
+    "b861965306": "Aktuálna doska:",
+    "d6ae0c8a03": "Pravidlá:",
+    "f384fe23dc": "Bol dosiahnutý limit ťahov - najlepší skóre víťazí v prípade nerozhodného výsledku."
+  },
+  "sl": {
+    "384017b5fd": "Rezultati kroga {round_count}:",
+    "500ebdc711": "{num_players}-Igralec Snake na {width}×{height} mreži.",
+    "59d2c5cbfe": "Igralec {alive} je preživel; vsi ostali so umrli.",
+    "9107cf770e": "Vse kače so umrle hkrati.",
+    "926234fd09": "{reason} Končne skupine uvrstitve (od najslabših do najboljših): {groups}",
+    "b861965306": "Trenutna plošča:",
+    "d6ae0c8a03": "Pravila:",
+    "f384fe23dc": "Omejitev potez je bila dosežena - najboljši rezultat zmaga v primeru izenačenja."
+  },
+  "smo": {
+    "384017b5fd": "Mafuaiga o le tasi {round_count}:",
+    "500ebdc711": "{num_players}-Pela Snake i luga o se {width}×{height} grid.",
+    "59d2c5cbfe": "Na ola le tagata taalo {alive}; na maliliu isi uma.",
+    "9107cf770e": "Na feoti uma gata i le taimi e tasi.",
+    "926234fd09": "{reason} Vaega o le faʻaiʻuina o le faʻatau (sili ona leaga→sili ona lelei): {groups}",
+    "b861965306": "Lapa o le taimi nei:",
+    "d6ae0c8a03": "Tulafono:",
+    "f384fe23dc": "Ua oo i le tapulaa o taamilosaga - e manumalo lē ua sili ona lelei lana togi."
+  },
+  "sna": {
+    "384017b5fd": "Matokeo ya raundi {round_count}:",
+    "500ebdc711": "{num_players}-Vachezi veSnake pabodo {width}×{height}.",
+    "59d2c5cbfe": "Mutambi {alive} akapona; vamwe vose vakafa.",
+    "9107cf770e": "Nyoka dzose dzakafa panguva imwe chete.",
+    "926234fd09": "{reason} Mafaro emuungano (mambo ose→mambo mazvi): {groups}",
+    "b861965306": "Bhoja Rairo:",
+    "d6ae0c8a03": "Miongozo:",
+    "f384fe23dc": "Kuchinja kwakaganhurirwa kwasvika - zvibodzwa zvakanakisisa zvinokunda tie-break."
+  },
+  "so": {
+    "500ebdc711": "{num_players}-Cayaar ee Snake kuwa {width}×{height} shabakada.",
+    "59d2c5cbfe": "Ciyaaryahanka {alive} wuu badbaaday; dhammaan kuwa kale way dhinteen.",
+    "9107cf770e": "Masaska oo dhan waxay u dhinteen si isku mar ah.",
+    "926234fd09": "{reason} Kooxaha darajooyinka ugu dambeeya (ugu xun→ugu fiican): {groups}",
+    "f384fe23dc": "Xadka wareega ayaa la gaaray - dhibcaha ugu fiican ayaa ku guuleysta isku dheelitirka."
+  },
+  "sot": {
+    "384017b5fd": "Matokeo a mabapi {round_count}:",
+    "500ebdc711": "{num_players}-Player Snake ka gridi ea {width}×{height}.",
+    "59d2c5cbfe": "Sebapali {alive} se ile sa pholoha; ba bang kaofela ba timetse.",
+    "9107cf770e": "Linyoka tsohle li ile tsa shoa ka nako e le 'ngoe.",
+    "926234fd09": "{reason} Theko e felletseng ea dikolo (e nyanehetseng → e betere): {groups}",
+    "b861965306": "Boro ya tsohle ya kajeno:",
+    "d6ae0c8a03": "Mekgwa:",
+    "f384fe23dc": "Ho fihleloa moeli oa ho fetoha - e leng motho ea nang le lintlha tse ngata o hlōla tlholisano."
+  },
+  "sq": {
+    "384017b5fd": "Rezultatet e Raundit {round_count}:",
+    "500ebdc711": "{num_players}-Lojtarë Snake në një rrjetë {width}×{height}.",
+    "59d2c5cbfe": "Lojtari {alive} mbijetoi; të gjithë të tjerët vdiqën.",
+    "9107cf770e": "Të gjithë gjarpërit vdiqën njëkohësisht.",
+    "926234fd09": "{reason} Grupet e fundit të renditjes (nga më e keqja tek më e mira): {groups}",
+    "b861965306": "Bordi aktual:",
+    "d6ae0c8a03": "Rregullat:",
+    "f384fe23dc": "Kufiri i radhëve u arrit - rezultati më i mirë fiton barazimin."
+  },
+  "sr": {
+    "384017b5fd": "Резултати рунде {round_count}:",
+    "500ebdc711": "{num_players}-Играча Змија на табли {width}×{height}.",
+    "59d2c5cbfe": "Играч {alive} преживео; сви остали умрли.",
+    "9107cf770e": "Све змије умрле истовремено.",
+    "926234fd09": "{reason} Коначне групе рангирања (од најгорег до најбољег): {groups}",
+    "b861965306": "Тренутна табла:",
+    "d6ae0c8a03": "Правила:",
+    "f384fe23dc": "Достигнут лимит потеза - најбољи резултат побеђује у нерешеном исходу."
+  },
+  "srd": {
+    "384017b5fd": "Resultados de sa rundha {round_count}:",
+    "500ebdc711": "{num_players}-Giocadore Serpe in una grìgia {width}×{height}.",
+    "59d2c5cbfe": "Su giogadore {alive} est subrabìvidu; totu sos àteros sunt mortos.",
+    "9107cf770e": "Totu sos serpentes sunt mortos in su matessi tempus.",
+    "926234fd09": "{reason} Classificazione finale de gruppos (peggius→mègius): {groups}",
+    "b861965306": "Tavoliere corrente:",
+    "d6ae0c8a03": "Regulas:",
+    "f384fe23dc": "Limite de curva atzetadu - su prus bonu puntu binchet sa parta."
+  },
+  "ssw": {
+    "384017b5fd": "Imiphumela yeRound {round_count}:",
+    "500ebdc711": "{num_players}-Bafana be-Snake ku-gridi ye-{width}×{height}.",
+    "59d2c5cbfe": "Umdlali {alive} wasindza; bonkhe labanye bafa.",
+    "9107cf770e": "Tonkhe letinyoka tafa ngesikhatsi lesifanako.",
+    "926234fd09": "{reason} Mafinyiko ya mahhala (mabaya kuwa mazuri): {groups}",
+    "b861965306": "Bhoja Lesitsheni:",
+    "d6ae0c8a03": "Mithetho:",
+    "f384fe23dc": "Umkhawulo wekujika ufinyelelwe - umcashi lonemaphuzu lamanyenti uncoba ekubhidlikeni."
+  },
+  "sun": {
+    "384017b5fd": "Hasil puteran {round_count}:",
+    "500ebdc711": "{num_players}-Pemain Ular di {width}×{height} grid.",
+    "59d2c5cbfe": "Pamaén {alive} salamet; sadaya anu sanésna tiwas.",
+    "9107cf770e": "Kabéh oray maot sakaligus.",
+    "926234fd09": "{reason} Peringkat akhir grup (paling buruk→paling baik): {groups}",
+    "b861965306": "Papan Saiki:",
+    "d6ae0c8a03": "Aturan:",
+    "f384fe23dc": "Wates giliran geus nepi - skor pangalusna meunang tie-break."
+  },
+  "sv": {
+    "384017b5fd": "Resultat för omgång {round_count}:",
+    "500ebdc711": "{num_players}-spelars orm på en {width}×{height}-ruta.",
+    "59d2c5cbfe": "Spelare {alive} överlevde; alla andra dog.",
+    "9107cf770e": "Alla ormar dog samtidigt.",
+    "926234fd09": "{reason} Slutliga rankningsgrupper (sämst→bäst): {groups}",
+    "b861965306": "Aktuell bräda:",
+    "d6ae0c8a03": "Regler:",
+    "f384fe23dc": "Tidsgränsen nåddes - bästa poäng vinner vid lika resultat."
+  },
+  "sw": {
+    "384017b5fd": "Matokeo ya Raundi {round_count}:",
+    "500ebdc711": "Nyoka ya {num_players}-Wachezaji kwenye gridi ya {width}×{height}.",
+    "59d2c5cbfe": "Mchezaji {alive} aliishi; wengine wote walikufa.",
+    "9107cf770e": "Nyoka zote zilikufa kwa wakati mmoja.",
+    "926234fd09": "{reason} Vikundi vya mwisho vya kiwango (mbaya→bora): {groups}",
+    "b861965306": "Ubao wa Sasa:",
+    "d6ae0c8a03": "Sheria:",
+    "f384fe23dc": "Kikomo cha zamu kimefikia - alama bora hushinda katika hali ya usawa."
+  },
+  "szl": {
+    "384017b5fd": "Wyniki rundy {round_count}:",
+    "500ebdc711": "{num_players}-Graczyj Wąż na {width}×{height} siatce.",
+    "59d2c5cbfe": "Gracz {alive} przeżył; wszyjscy inksi zginōli.",
+    "9107cf770e": "Wszyjske wōmy umrziły rōwnoczesnie.",
+    "926234fd09": "{reason} Definitywny rankig grup (najgorszy→najlepszy): {groups}",
+    "b861965306": "Aktualnŏ Tabla:",
+    "d6ae0c8a03": "Reguły:",
+    "f384fe23dc": "Utrŏp limit - nojlepszy wynik wygrywo tie-break."
+  },
+  "ta": {
+    "384017b5fd": "சுற்று {round_count} முடிவுகள்:",
+    "500ebdc711": "{num_players}-விளையாட்டாளர் பாம்பு {width}×{height} கிரிட்டில்.",
+    "59d2c5cbfe": "விளையாட்டாளர் {alive} உயிர் வாழ்ந்தார்; மற்ற அனைவரும் இறந்தனர்.",
+    "9107cf770e": "அனைத்து பாம்புகளும் ஒரே நேரத்தில் இறந்தன.",
+    "926234fd09": "{reason} இறுதி தரவரிசை குழுக்கள் (மோசமானது→சிறந்தது): {groups}",
+    "b861965306": "தற்போதைய பலகை:",
+    "d6ae0c8a03": "விதிகள்:",
+    "f384fe23dc": "திருப்பங்கள் வரம்பு எட்டப்பட்டது - சமநிலையை உடைக்க சிறந்த மதிப்பெண் வெல்கிறது."
+  },
+  "taq": {
+    "384017b5fd": "Aɣzum {round_count} yewwi-d:",
+    "500ebdc711": "{num_players}-Amɣus Anɣad ad izgan d tamnatt {width}×{height}.",
+    "59d2c5cbfe": "ⴰⵎⵓⵔⴰⵔ {alive} ⵉⴶⵔⴰⵓ;ⵉⴰⴷ ⴰⴾⴰⵍⵍⴰⵏ ⴼⵓⴾ.",
+    "9107cf770e": "Iⴾⴰⵙⴰⵏ ⴼⵓⴾ ⵉⵎⵎⵓⵜⴰⵏ ⴷⴰⵗ ⴰⵍⵓⴰⵈ ⵉⵉⵉⴰⵏ.",
+    "926234fd09": "{reason} Tasartit n uɣawas ameqran (meɣri→amezwar): {groups}",
+    "b861965306": "Asaḍen n wengam:",
+    "d6ae0c8a03": "Tawuriwin:",
+    "f384fe23dc": "ⴰⴾⴰⵍⴰ ⵓⴰⵔ ⵏ ⵉⵍⴰ ⵜⴰⵣⵓⵍⵉ - ⴰⴷⴷⵉⵏⴰⵜ ⵙ ⵜⵉⵛⵉⵜ ⵎⴰⵈⵈⵓⵔⴰⵜ ⴰⵔⵂⴰⵏ ⵜⵢⴱⵔⴻⵉⴶ."
+  },
+  "tat": {
+    "384017b5fd": "{round_count} раунды нәтиҗәләре:",
+    "500ebdc711": "{num_players}-Уенчы Йылан {width}×{height} тәрәзәдә.",
+    "59d2c5cbfe": "Уенчы {alive} исән калган; башкалар һәлак булган.",
+    "9107cf770e": "Барлык еланнар бер үк вакытта үлгәннәр.",
+    "926234fd09": "{reason} Төп рейтинг төркемнәре (иң яманы→иң яхшысы): {groups}",
+    "b861965306": "Хәзерге такта:",
+    "d6ae0c8a03": "Кагыйдәләр:",
+    "f384fe23dc": "Йөрөш чикләнмәсенә җиттек - иң яхшы балл тигезлекне ерып җибәрә."
+  },
+  "te": {
+    "500ebdc711": "{num_players}-ప్లేయర్ స్నేక్ ఒక {width}×{height} గ్రిడ్‌లో.",
+    "59d2c5cbfe": "ఆటగాడు {alive} ప్రాణాలతో బయటపడ్డాడు; మిగతా వారంతా మరణించారు.",
+    "9107cf770e": "అన్ని పాములు ఒకేసారి చనిపోయాయి.",
+    "926234fd09": "{reason} తుది ర్యాంకింగ్ గ్రూపులు (చెత్త→ఉత్తమ): {groups}",
+    "f384fe23dc": "మలుపు పరిమితి చేరుకుంది - అత్యుత్తమ స్కోరు టై-బ్రేక్ గెలుస్తుంది."
+  },
+  "tgk": {
+    "384017b5fd": "Натиҷаҳои давраи {round_count}:",
+    "500ebdc711": "{num_players}-Мурғи бозигар дар шабакаи {width}×{height}.",
+    "59d2c5cbfe": "Бозингар {alive} зинда монд; ҳамаи дигарон ҳалок шуданд.",
+    "9107cf770e": "Ҳамаи морҳо якбора мурданд.",
+    "926234fd09": "{reason} Рейтинги ниҳоӣ гурӯҳҳо (бадтарин→беҳтарин): {groups}",
+    "b861965306": "Таблои кунуни:",
+    "d6ae0c8a03": "Қоидаҳо:",
+    "f384fe23dc": "Ҳудуди гардиш ба даст омадааст - беҳтарин хол ғолиби мусобақаи рақобатӣ мешавад."
+  },
+  "th": {
+    "384017b5fd": "ผลลัพธ์ของรอบ {round_count}:",
+    "500ebdc711": "{num_players}-Player Snake บนกริด {width}×{height}.",
+    "59d2c5cbfe": "ผู้เล่น {alive} อยู่รอด; ผู้เล่นทั้งหมดเสียชีวิต",
+    "9107cf770e": "งูทั้งหมดเสียชีวิตพร้อมกัน",
+    "926234fd09": "{reason} กลุ่มการจัดอันดับสุดท้าย (แย่→ดี): {groups}",
+    "b861965306": "กระดานปัจจุบัน:",
+    "d6ae0c8a03": "กติกา:",
+    "f384fe23dc": "ถึงขีดจำกัดรอบ - ผู้ที่มีคะแนนสูงสุดเป็นผู้ชนะ"
+  },
+  "tir": {
+    "384017b5fd": "ሮንድ {round_count} ውጽኢት:",
+    "500ebdc711": "{num_players}-ተጻዋሪ ሳንክ በ {width}×{height} ግሪድ ላይ።",
+    "59d2c5cbfe": "ተጻዋታይ {alive} ብህይወት ተረፈ፤ ካልኦት ኩሎም ጠፍኡ።",
+    "9107cf770e": "ኩሎም ተመን ብሓንሳብ ሞቱ።",
+    "926234fd09": "{reason} መጨረሻ ደረጃ ቡድኖች (ከጥፋት ወደ ምርጥነት)፦ {groups}",
+    "b861965306": "ቦርድ ኣብ ሂለት:",
+    "d6ae0c8a03": "Rules:",
+    "f384fe23dc": "ናይ መቐይሮ ገደብ በጺሑ፡ እቲ ዝበለጸ ነጥቢ ኣብ ምቁራጽ ተዓዊቱ እዩ።"
+  },
+  "tpi": {
+    "384017b5fd": "Raun {round_count} i bin go:",
+    "500ebdc711": "{num_players}-Pleya Snek long {width}×{height} grid.",
+    "59d2c5cbfe": "Man {alive} i stap laip; olgeta narapela man ol i dai.",
+    "9107cf770e": "Olgeta snek i dai long wankain taim.",
+    "926234fd09": "{reason} Final ranking grup (wos→bet): {groups}",
+    "b861965306": "Bord Nau:",
+    "d6ae0c8a03": "Rul:",
+    "f384fe23dc": "Taim bilong wok i pinis - skor i winim long tie-break."
+  },
+  "tr": {
+    "384017b5fd": "Tur {round_count} sonuçları:",
+    "500ebdc711": "{num_players}-Oyunculu Snake {width}×{height} ızgarasında.",
+    "59d2c5cbfe": "Oyuncu {alive} hayatta kaldı; diğerleri yok oldu.",
+    "9107cf770e": "Tüm yılanlar aynı anda öldü.",
+    "926234fd09": "{reason} Nihai sıralama grupları (en kötü→en iyi): {groups}",
+    "b861965306": "Mevcut Tahta:",
+    "d6ae0c8a03": "Kurallar:",
+    "f384fe23dc": "Tur sınırına ulaşıldı - en iyi puan tie-break'i kazanıyor."
+  },
+  "tsn": {
+    "384017b5fd": "Dikamano tsa round {round_count}:",
+    "500ebdc711": "{num_players}-Motswana wa Snake mo gridi ya {width}×{height}.",
+    "59d2c5cbfe": "Motshameki {alive} o ne a falola; ba bangwe botlhe ba ile ba swa.",
+    "9107cf770e": "Dinoga tsotlhe di ne tsa swa ka nako e le nngwe.",
+    "926234fd09": "{reason} Rangolo la gare la kgwele (le lesha→le lebotse): {groups}",
+    "b861965306": "Boro ya kgwele ya tshwane:",
+    "d6ae0c8a03": "Melao:",
+    "f384fe23dc": "Fa go fitlhetswe tekanyetso ya motshameko - motho yo o nang le maduo a mantle thata ke ene a fenyang mo kgaisanong."
+  },
+  "tso": {
+    "384017b5fd": "Mato ya magidi {round_count}:",
+    "500ebdc711": "Nyoka ya vatshani {num_players} kwenye bredeni ya {width}×{height}.",
+    "59d2c5cbfe": "Mutlangi {alive} u ponile; lavan'wana hinkwavo va file.",
+    "9107cf770e": "Tinyoka hinkwato ti fe hi nkarhi wun'we.",
+    "926234fd09": "{reason} Hilelo ya mahungu ya finali (mababi→matamu): {groups}",
+    "b861965306": "Bhoza ra Lehagu:",
+    "d6ae0c8a03": "Milawu:",
+    "f384fe23dc": "Loko ku fikeleriwe mpimo wa ndzhendzheleko - loyi a nga ni timaraka to tala u hlula eka tie-break."
+  },
+  "tuk": {
+    "384017b5fd": "Tur {round_count} netijeleri:",
+    "500ebdc711": "{num_players}-Oýunçy Sılan {width}×{height} kwadratda.",
+    "59d2c5cbfe": "Oýunçy {alive} diri galdy; galanlar heläk boldy.",
+    "9107cf770e": "Hemme ýylanlar bir wagtda öldi.",
+    "926234fd09": "{reason} Tälimiň ýeri (iň ýaramsyz→iň ýaxşy): {groups}",
+    "b861965306": "Häzirki Tagta:",
+    "d6ae0c8a03": "Nyzamnamalar:",
+    "f384fe23dc": "Dönüş çägi ýetildi - iň gowy netije tie-breýkde ýeňiş gazandy."
+  },
+  "tum": {
+    "384017b5fd": "Matokeo ya mpinduko {round_count}:",
+    "500ebdc711": "Nyoka wa {num_players}-Wachezaji kwenye gridi ya {width}×{height}.",
+    "59d2c5cbfe": "Mchezaji {alive} aliishi; wengine wote walifariki.",
+    "9107cf770e": "Njoka zose zikafwa nyengo yimoza.",
+    "926234fd09": "{reason} Malinga a kuwonga (wabaya→wodzi): {groups}",
+    "b861965306": "Bodi Lililonse:",
+    "d6ae0c8a03": "Mwiko:",
+    "f384fe23dc": "Para nyengo ya kuzgoka kwa chigaŵa ichi yakwana, wose awo ŵafika pa malo ghakwenelera ndiwo ŵakutonda."
+  },
+  "twi": {
+    "384017b5fd": "Nsn afe {round_count} nsm:",
+    "500ebdc711": "{num_players}-Akɔnkye Snake wɔ {width}×{height} pɔwboard so.",
+    "59d2c5cbfe": "Ɔbɔadeɛ {alive} nyaa nkwa; wɔn a aka no nyinaa wui.",
+    "9107cf770e": "Wɔmaa awɔ no nyinaa wuwui bere koro mu.",
+    "926234fd09": "{reason} Akɔnkye no mu nsɛm a wɔde kyerɛɛ a ɛwɔ hɔ no (bɔne sen kɛseɛ): {groups}",
+    "b861965306": "Bɔɔde akyɛ sen:",
+    "d6ae0c8a03": "Mmara:",
+    "f384fe23dc": "Sɛ wudu baabi a ɛsɛ sɛ wohyere no - nea ɔwɔ akatua pa sen biara di nkonim wɔ tie-break mu."
+  },
+  "tzm": {
+    "384017b5fd": "Iɣewwaɣen n tarrayt {round_count}:",
+    "500ebdc711": "{num_players}-Imurar n wesɣa ɣef {width}×{height} n wesɣa.",
+    "59d2c5cbfe": "ⵢⵓⴷⵔ ⵓⵎⵓⵔⴰⵔ {alive}, ⴽⵓⵍⵍⵓ ⵡⵉⵢⵢⴰⴹ ⵎⵎⵓⵜⵏ.",
+    "9107cf770e": "ⵎⵎⵓⵜⵏ ⴰⴽⴽⵡ ⵉⵎⵖⵏⴰⵙⵏ ⴳ ⵢⴰⵜ ⵜⵉⵣⵉ.",
+    "926234fd09": "{reason} Tanẓẓi tagrawla s ufellay (meqqṛ→amezwar): {groups}",
+    "b861965306": "Asenmel n uṭṭun:",
+    "d6ae0c8a03": "Tisḍaf:",
+    "f384fe23dc": "ⵢⵉⵡⴹ ⵓⵜⵜⵓ ⵏ ⵜⴽⵍⵉⵜ - ⵡⵉⵏ ⵉⵍⴰⵏ ⵜⴰⵖⴰⵔⴰⵙⵜ ⵉⵖⵓⴷⴰⵏ ⴷⴰ ⵉⵙⵙⵎⵖⵔ ⴰⵙⴳⵓⵎ."
+  },
+  "uig": {
+    "384017b5fd": "{round_count} راوندىنىڭ نەتىجىسى:",
+    "500ebdc711": "{num_players}-ئويۇنچىلىق ئىلان تاختىسى {width}×{height}.",
+    "59d2c5cbfe": "ئويۇنچى {alive} ھايات قالدى؛ قالغانلارنىڭ ھەممىسى ئۆلدى.",
+    "9107cf770e": "بارلىق يىلانلار بىردىنلا ئۆلدى.",
+    "926234fd09": "{reason} تاماملاشقان گۇرۇپلارنىڭ ئاخىرلىشىش تەرتيبى (ئەڭ يامان→ئەڭ ياخشى): {groups}",
+    "b861965306": "ھازىرقى تەختە:",
+    "d6ae0c8a03": "قائىدەلەر:",
+    "f384fe23dc": "نۆۋەت چەكلىمىسىگە يەتكەن - ئەڭ ياخشى نومۇر تەڭلەش مۇسابىقىسىدە غەلىبە قىلىدۇ."
+  },
+  "uk": {
+    "384017b5fd": "Результати раунду {round_count}:",
+    "500ebdc711": "{num_players}-Гравець Snake на сітці {width}×{height}.",
+    "59d2c5cbfe": "Гравець {alive} вижив; усі інші загинули.",
+    "9107cf770e": "Усі змії загинули одночасно.",
+    "926234fd09": "{reason} Остаточні групи рейтингу (від гіршого до кращого): {groups}",
+    "b861965306": "Поточна дошка:",
+    "d6ae0c8a03": "Правила:",
+    "f384fe23dc": "Досягнуто ліміту ходів - найкращий рахунок виграє нічийний розіграш."
+  },
+  "umb": {
+    "384017b5fd": "Zikwiza {round_count} zisikwiza:",
+    "500ebdc711": "{num_players}-Vantu yomboli Snake kwa {width}×{height} ndaka.",
+    "59d2c5cbfe": "Mwadi {alive} ali selukwa; akele aza.",
+    "9107cf770e": "Eci olonyõha via fetika oku iñila vocimbaluku, ovio via fa.",
+    "926234fd09": "{reason} Vipindi vya mpangala vya mwisho (mbi→mbwisi): {groups}",
+    "b861965306": "Tchiba Tchilukulu:",
+    "d6ae0c8a03": "Rules:",
+    "f384fe23dc": "Kuenje, o linga ohundo ya velapo vokuenda kueteke."
+  },
+  "ur": {
+    "384017b5fd": "راؤنڈ {round_count} کے نتائج:",
+    "500ebdc711": "{num_players}-کھلاڑیوں کا سنیک {width}×{height} گرڈ پر۔",
+    "59d2c5cbfe": "کھلاڑی {alive} زندہ بچ گیا؛ باقی تمام کھلاڑی مر گئے۔",
+    "9107cf770e": "تمام سنیک ایک ہی وقت میں مر گئے۔",
+    "926234fd09": "{reason} فائنل درجہ بندی گروپ (بدترین سے بہترین تک): {groups}",
+    "b861965306": "موجودہ بورڈ:",
+    "d6ae0c8a03": "قواعد:",
+    "f384fe23dc": "موڑ کی حد پہنچ گئی ہے - بہترین سکور ٹائی بریک جیتتا ہے۔"
+  },
+  "uz": {
+    "500ebdc711": "{num_players}-O'yinchi ilon {width}×{height} grid da.",
+    "59d2c5cbfe": "O'yinchi {alive} omon qoldi; qolganlar halok bo'ldi.",
+    "9107cf770e": "Barcha ilonlar bir vaqtning o'zida o'ldi.",
+    "926234fd09": "{reason} Yakuniy reyting guruhlari (eng yomon→eng yaxshi): {groups}",
+    "d6ae0c8a03": "Qoidalar:",
+    "f384fe23dc": "To'g'ri chiziq chegarasi yetkazildi - eng yaxshi natija tenglik o'tkazadi."
+  },
+  "vec": {
+    "384017b5fd": "Risultati del giro {round_count}:",
+    "500ebdc711": "{num_players}-Zogo Serpente su na {width}×{height} griglia.",
+    "59d2c5cbfe": "El xugador {alive} el xe sopravvissù; tuti i altri i ga perìo.",
+    "9107cf770e": "Tuti i serpenti xe morti in isteso momento.",
+    "926234fd09": "{reason} Clasifica finałi dei grupi (pegio→mijo): {groups}",
+    "b861965306": "Tavola Atuale:",
+    "d6ae0c8a03": "Regole:",
+    "f384fe23dc": "El limite de turno xe rivà - el miglior scor vinse la pareggia."
+  },
+  "vi": {
+    "384017b5fd": "Kết quả Vòng {round_count}:",
+    "500ebdc711": "{num_players}-Người chơi Snake trên lưới {width}×{height}.",
+    "59d2c5cbfe": "Người chơi {alive} sống sót; tất cả người chơi khác đã chết.",
+    "9107cf770e": "Tất cả các rắn chết cùng lúc.",
+    "926234fd09": "{reason} Xếp hạng cuối cùng (kém→tốt): {groups}",
+    "b861965306": "Bàn cờ hiện tại:",
+    "d6ae0c8a03": "Luật chơi:",
+    "f384fe23dc": "Đạt giới hạn lượt - điểm cao nhất thắng."
+  },
+  "war": {
+    "384017b5fd": "Mga resulta ha round {round_count}:",
+    "500ebdc711": "{num_players}-Ka-Magmurulay nga Snake ha {width}×{height} grid.",
+    "59d2c5cbfe": "An magdudula {alive} nakabuhi; an ngatanan nga iba namatay.",
+    "9107cf770e": "An ngatanan nga halas namatay ha usa la ka higayon.",
+    "926234fd09": "{reason} Pagkakasunodsunod ha katapusan nga mga grupo (pinakamaaw-ay→pinakamaupay): {groups}",
+    "b861965306": "Karuhaan nga Bangga:",
+    "d6ae0c8a03": "Mga pamaagi:",
+    "f384fe23dc": "An turning limit inabot - an pinakadako nga score nagdaog ha tie-break."
+  },
+  "wol": {
+    "384017b5fd": "Réewu {round_count} yi:",
+    "500ebdc711": "{num_players}-Jëfandikukat Sàpp bi ci ab {width}×{height} këmbët.",
+    "59d2c5cbfe": "Jëfandikukat {alive} mucc; ñeneen ñépp dee.",
+    "9107cf770e": "Ay jaan yépp dee ci benn waxtu.",
+    "926234fd09": "{reason} Kàllaayu jëfandikoo (màgg-miñ): {groups}",
+    "b861965306": "Tablo yi",
+    "d6ae0c8a03": "Yëngu-yënguy xeex bi:",
+    "f384fe23dc": "Limite jëf bi ñaaree - màgg ñaare moo gënëe màgg."
+  },
+  "xho": {
+    "384017b5fd": "Imiphumela yeXesha {round_count}:",
+    "500ebdc711": "{num_players}-Player Snake kwi-{width}×{height} grid.",
+    "59d2c5cbfe": "Umdlali {alive} wasinda; bonke abanye bafa.",
+    "9107cf770e": "Zonke iinyoka zafa ngaxeshanye.",
+    "926234fd09": "{reason} Ukwenza kwemikhakha yekupheleleyo (kubaphaneli→kubayihle): {groups}",
+    "b861965306": "Bhoja Eliyingo:",
+    "d6ae0c8a03": "Imithetho:",
+    "f384fe23dc": "Umda wenguqu ufikelelwe - eyona ngqokelela yeengongoma iphumelele i tie-break."
+  },
+  "ydd": {
+    "384017b5fd": "רונד {round_count} רעזולטאַטן:",
+    "500ebdc711": "{num_players}-שפּילער שלאַנג אויף אַ {width}×{height} גריד.",
+    "59d2c5cbfe": "דער שפּילער {alive} איז איבערגעלעבט; אַלע אַנדערע זענען אומגעקומען.",
+    "9107cf770e": "אַלע שלאַנגען זענען געשטאָרבן גלײַך.",
+    "926234fd09": "{reason} פֿינאַלע ראַנקינג גרופּעס (שלעכטס→בעסט): {groups}",
+    "b861965306": "אַקטועלער ברעט:",
+    "d6ae0c8a03": "רעגלן:",
+    "f384fe23dc": "דער טורן־לימיט איז געגרייכט - די בעסטע סקאָר געווינט דעם טיי-ברעיק."
+  },
+  "yo": {
+    "500ebdc711": "{num_players}-Akópa Snake lórí àpapọ̀ {width}×{height}.",
+    "59d2c5cbfe": "Ẹlẹsẹ {alive} yè; gbogbo àwọn yòókù kú.",
+    "9107cf770e": "Gbogbo àwọn ejò náà ló kú lẹ́ẹ̀kan náà.",
+    "926234fd09": "{reason} Awọn ẹgbẹ ipo ipari (ti o buru julọ→ti o dara julọ): {groups}",
+    "f384fe23dc": "Ìlà ìyí ti dé - ẹni tó bá ní ìlà tó dára jù lọ ló máa gba ìyàsọ́tọ̀."
+  },
+  "zh": {
+    "384017b5fd": "第 {round_count} 轮结果：",
+    "500ebdc711": "{num_players} 人贪吃蛇，棋盘为 {width}×{height}。",
+    "59d2c5cbfe": "玩家 {alive} 存活；其余全部死亡。",
+    "9107cf770e": "所有蛇同时死亡。",
+    "926234fd09": "{reason} 最终排名分组（从最差到最好）：{groups}",
+    "b861965306": "当前棋盘：",
+    "d6ae0c8a03": "规则：",
+    "f384fe23dc": "已达到回合上限 - 最高分在平局中获胜。"
+  },
+  "zu": {
+    "500ebdc711": "{num_players}-Badlali be-Snake kwenye igridi {width}×{height}.",
+    "59d2c5cbfe": "Umdlali {alive} wasinda; bonke abanye bashona.",
+    "9107cf770e": "Zonke izinyoka zafa ngesikhathi esisodwa.",
+    "926234fd09": "{reason} Amaqembu okubalwa kokugcina (okubi kakhulu→okuhle kakhulu): {groups}",
+    "d6ae0c8a03": "Izimfuno:",
+    "f384fe23dc": "Umkhawulo wokuphenduka ufinyelelwe - umklomelo onamaphuzu amahle kakhulu uwina i-tie-break."
+  }
+}

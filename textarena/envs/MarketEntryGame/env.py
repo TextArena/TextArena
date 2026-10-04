@@ -223,7 +223,7 @@ class MarketEntryGameEnv(ta.GameEnv):
         if matches:
             valid_messages = [match.strip() for match in matches if match.strip()]
             if valid_messages:
-                return " ".join(valid_messages)
+                return self.strip_role_tags(" ".join(valid_messages)).strip() or None
         return None
 
     def _handle_conversation_phase(self, player_id: int, action: str) -> Union[ta.Invalid, None]:
@@ -386,6 +386,10 @@ class MarketEntryGameEnv(ta.GameEnv):
             return self.winner(
                 winners[0],
                 reason=f"{final_message}\nPlayer {winners[0]} wins with {_format_number(max_score)} points!",
+            )
+        if len(winners) == self.state.num_players:
+            return self.draw(
+                reason=f"{final_message}\nAll players tied with {_format_number(max_score)} points. It's a draw!"
             )
         return self.winner(
             winners,

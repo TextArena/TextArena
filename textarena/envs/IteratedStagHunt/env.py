@@ -85,6 +85,11 @@ class IteratedStagHuntEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         """Generate the initial prompt for a player."""
         game_state = self.game_state
+        variability = (
+            "- The rewards associated with hunting stags and hares may differ between rounds\n"
+            if self.randomize_payoff
+            else "- The rewards are the same every round\n"
+        )
         return (
             f"You are Player {player_id} in an {game_state['num_rounds']} round game of Iterated Stag Hunt.\n\n"
             f"Game Structure:\n"
@@ -92,8 +97,9 @@ class IteratedStagHuntEnv(ta.GameEnv):
             f"- Before each decision, you have {game_state['total_conversation_rounds']} turns to communicate\n"
             f"- After communication, both players simultaneously choose to hunt a Stag or Hare\n\n"
             f"Rewards:\n"
-            f"- The rewards associated with hunting stags and hares may differ between rounds\n"
-            f"- The rewards are presented at the start of each round\n\n"
+            f"{variability}"
+            f"- The rewards are presented at the start of each round\n"
+            f"- Payoffs add up over all rounds. The player with the higher total after the last round wins; equal totals are a draw.\n\n"
             f"How to Play:\n"
             f"- During communication: Simply type your message\n"
             f"- During decision phase: Reply with just 'stag' or 'hare'\n"
@@ -148,9 +154,19 @@ class IteratedStagHuntEnv(ta.GameEnv):
             case "conversation":    return self._handle_conversation_phase(player_id, action)
             case "decision":        return self._handle_decision_phase(player_id, action)
 
+    def _strip_role_tags(self, text: str) -> str:
+        """Remove sender labels such as '[GAME]' so chat cannot impersonate other senders."""
+        tags = [f"[{role}]" for role in self.state.role_mapping.values()]
+        previous = None
+        while previous != text:
+            previous = text
+            for tag in tags:
+                text = text.replace(tag, "")
+        return text
+
     def _handle_conversation_phase(self, player_id: int, action: str) -> None:
         # relay player action to opponent
-        self.message(1 - player_id, action.strip(), ta.ObservationType.PLAYER_ACTION, from_id=player_id)
+        self.message(1 - player_id, self._strip_role_tags(action).strip(), ta.ObservationType.PLAYER_ACTION, from_id=player_id)
 
         # only increment conversation round on player 1
         if player_id == 1:

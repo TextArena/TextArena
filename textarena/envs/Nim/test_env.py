@@ -54,6 +54,25 @@ def test_bad_format_is_invalid():
     assert env.state.error_count == 1
 
 
+@pytest.mark.parametrize(
+    "piles, example",
+    [([3, 4, 5], "0 3"), ([4, 2, 3, 7], "0 3"), ([5, 7, 9, 11, 2], "0 3"), ([2, 6], "0 2"), ([0, 5], "1 3")],
+)
+def test_format_error_describes_expected_action(piles, example):
+    env = NimEnv(piles=piles)
+    env.reset(num_players=2, seed=42)
+    env.step("take one from pile zero")
+    notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
+    assert f"Expected {env.action_format}." in notices[-1]
+    assert env.action_format.startswith(f"a pile number from 0 to {len(piles) - 1} ")
+    assert env.action_format.endswith(f"for example '{example}'")
+
+    fresh = NimEnv(piles=piles)
+    fresh.reset(num_players=2, seed=42)
+    fresh.step(example)
+    assert fresh.state.turn == 1 and fresh.state.error_count == 0
+
+
 def test_zero_quantity_is_atomic_and_does_not_rotate():
     env = NimEnv(piles=[3])
     env.reset(num_players=2, seed=42)

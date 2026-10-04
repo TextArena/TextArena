@@ -41,7 +41,8 @@ def create_board_str(game_state: dict) -> str:
     
     # Legal actions
     if gs['legal_actions'] and gs['current_phase'] != 'showdown':
-        actions_str = ", ".join([f"[{action}]" for action in gs['legal_actions']])
+        names = {"play_bet_4x": "4x", "play_bet_3x": "3x", "play_bet_2x": "2x", "play_bet_1x": "1x"}
+        actions_str = ", ".join(f"'{names.get(action, action)}'" for action in gs['legal_actions'])
         board_str += f"✅ Available actions: {actions_str}\n\n"
     
     # Game status
