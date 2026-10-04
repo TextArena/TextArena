@@ -1,81 +1,89 @@
-import re, random
-from typing import Optional, Tuple, Dict, Any, List
+import re
+from collections import Counter
+from typing import Any, Dict, Optional, Union
 
 import textarena as ta
 
-import nltk
-nltk.download("words")
 from nltk.corpus import words
 
-en_uk_dict = set(words.words())
+try:
+    en_uk_dict = {word.lower() for word in words.words()}
+except LookupError:
+    # Keep imports/reset offline and deterministic even when the optional NLTK
+    # corpus is absent. These one-letter English words preserve a playable
+    # minimal fallback; deployments can install the corpus for the full lexicon.
+    en_uk_dict = {"a", "i"}
 
 
-class LetterAuctionEnv(ta.Env):
+class LetterAuctionEnv(ta.GameEnv):
     """ The environment for Letter Auction Game """
+    min_players = 2
+    max_players = 2
+    broadcast_actions = False
+
     def __init__(self, starting_coins: int = 100, max_turns: int = 26):
         """
         Initialize the environment for Letter Auction Game.
-        
+
         Args:
-            starting_coins (int): 
+            starting_coins (int):
         """
-        self.letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-        self.letter_values = [1 for _ in self.letters]
+        if not isinstance(starting_coins, int) or isinstance(starting_coins, bool) or starting_coins <= 0:
+            raise ValueError("starting_coins must be a positive integer")
+        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
+            raise ValueError("max_turns must be a positive integer")
+        self.letter_values = [1 for _ in range(26)]
         self.starting_coins = starting_coins
-        self.max_turns = max_turns 
+        # Keep the constructor argument for compatibility, but do not set an
+        # engine turn limit: a complete auction takes at least 52 turns.
 
     @property
     def terminal_render_keys(self):
         return ["rendered_text", "turn"]
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        """ Reset the environment to start a new game """
-        # Initialize the game state
-        self.state = ta.TwoPlayerState(num_players=num_players, seed=seed, max_turns=self.max_turns)
+    # Read-only accessors kept for renderers/tests that inspect the env directly.
+    @property
+    def player_states(self): return self.game_state["player_states"]
+    @property
+    def letters(self): return self.game_state["letters"]
+    @property
+    def round_number(self): return self.game_state["round_number"]
+    @property
+    def round_letter(self): return self.game_state["round_letter"]
+    @property
+    def bid_amount(self): return self.game_state["bid_amount"]
+    @property
+    def current_player(self): return self.game_state["current_player"]
 
-        # Initialize the player state
-        self.player_states = {
-            0: {
+    def setup(self) -> Dict[str, Any]:
+        letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        self.rng.shuffle(letters)
+        player_states = {
+            pid: {
                 "coins": self.starting_coins,
                 "letters": [],
                 "letter_values": [],
-                "letter_bid_history": {
-                    i: None for i in range(len(self.letters))
-                },
-                "word": None,
-                "word_value": 0,
-            },
-            1: {
-                "coins": self.starting_coins,
-                "letters": [],
-                "letter_values": [],
-                "letter_bid_history": {
-                    i: None for i in range(len(self.letters))
-                },
+                "letter_bid_history": {i: None for i in range(len(letters))},
                 "word": None,
                 "word_value": 0,
             }
+            for pid in (0, 1)
         }
-
-        # Initialize the game
-        self.current_player = 0 
-        random.shuffle(self.letters) 
-        self.round_number = 0 
-        self.round_letter = self.letters[self.round_number]
-        self.bid_amount = self.letter_values[self.round_number] 
-
-        # intialize the game states
         game_state = {
-            "player_states": self.player_states,
-            "rendered_text": self.render_text(),
-            "turn": self.current_player,
+            "player_states": player_states,
+            "letters": letters,
+            "round_number": 0,
+            "round_letter": letters[0],
+            "bid_amount": self.letter_values[0],
+            "current_player": 0,
+            "turn": 0,
         }
-        self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
-    
+        game_state["rendered_text"] = self._render_text(game_state)
+        return game_state
 
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
-        """ Generate the prompt for the current player """
-        prompt = (
+    def prompt(self, player_id: int) -> str:
+        gs = self.game_state
+        return (
             f"You are Player {player_id}. You are currently in the Letter Auction game.\n"
             "The goal of the game is to strategically bid on letters to form the highest value word. This is how the game works.\n"
             "You must listen to the gamemaster for guidance to play the game.\n"
@@ -85,164 +93,134 @@ class LetterAuctionEnv(ta.Env):
             "This bidding of letters will repeat till all the letters have been auctioned off. You are not rewarded for saving your coins.\n"
             "After all the letters have been auctioned, you will use the letters to form the highest value english word from the letters won.\n"
             "The player with the highest value word wins the game.\n"
-            "If you want to bid, submit your bid amount in square brackets like [bid 2] or [bid 10].\n"
-            "If you do not want to bid, submit [pass].\n"
-            "For the submission of the highest value word, you will be prompted at the end of the game to submit them in square brackets like [dog].\n"
+            "To bid, reply with 'bid 2', 'bid 10', or another amount.\n"
+            "If you do not want to bid, reply with 'pass'.\n"
+            "At the end of the auction, submit your highest-value word directly, e.g. 'dog'.\n"
             "Here is your starting information:\n"
-            f"Your current coins: {self.player_states[player_id]['coins']}\n"
-            f"Your current letters: {self.player_states[player_id]['letters']}\n"
+            f"Your current coins: {gs['player_states'][player_id]['coins']}\n"
+            f"Your current letters: {gs['player_states'][player_id]['letters']}\n"
             "\n"
-            f"[Game] Player 0 will go first. The first letter for bid: {self.round_letter}.\n"
-            f"Starting bid is {self.bid_amount} coin. You can bid any amount of coins, or choose not to bid.\n"
+            f"Game: Player 0 will go first. The first letter for bid: {gs['round_letter']}.\n"
+            f"Starting bid is {gs['bid_amount']} coin. You can bid any amount of coins, or choose not to bid.\n"
         )
-        return prompt
-    
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        """Execute the player's action in the environment."""
-        player_id = self.state.current_player_id
 
-        # Validate player turn
-        if player_id != self.current_player:
-            raise ValueError(f"Invalid player ID: {player_id}. It is not the turn of player {player_id}.")
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        gs = self.game_state
 
-        # Record player's action
-        self.state.add_observation(from_id=player_id, to_id=-1, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-
-        self.auction_over_prompt = ""
-        next_player = True  # default behavior
-
-        if self.round_number < len(self.letters):
+        if gs["round_number"] < len(gs["letters"]):
             # Auction phase
-            match = re.search(r"\[(bid \d+|pass)\]", action, re.IGNORECASE)
-
+            match = re.fullmatch(
+                r"\s*(?P<legacy>\[)?\s*(?P<command>bid\s+\d+|pass)\s*(?(legacy)\])\s*",
+                action,
+                re.IGNORECASE,
+            )
             if not match:
-                reason = f"Invalid action: {action}. Please enter a valid action: '[bid <amount>]' or '[pass]'."
-                self.state.set_invalid_move(reason=reason)
-            else:
-                action_text = match.group(1).lower()
-                # Update bid history if it's the player's first move this round
-                if self.player_states[player_id]["letter_bid_history"][self.round_number] is None:
-                    self.player_states[player_id]["letter_bid_history"][self.round_number] = "pass" if "pass" in action_text else "bid"
+                return self.invalid(f"Invalid action: {action}. Please enter 'bid <amount>' or 'pass'.")
+            action_text = match.group("command").lower()
+            is_pass = action_text == "pass"
 
-                if "pass" in action_text:
-                    next_player = self._pass_bid(player_id)
-                else:
+            if not is_pass:
+                try:
                     bid_amount = int(action_text.split()[1])
-                    next_player = self._place_bid(player_id, bid_amount)
+                except ValueError:
+                    return self.invalid("Invalid bid: the amount is too large to parse.")
+                opponent_status = gs["player_states"][1 - player_id]["letter_bid_history"][gs["round_number"]]
+                if bid_amount <= 0:
+                    return self.invalid("Invalid bid: the amount must be a positive integer.")
+                if gs["player_states"][player_id]["coins"] < bid_amount:
+                    return self.invalid(f"Invalid bid: {bid_amount}. You do not have enough coins.")
+                if opponent_status == "bid" and bid_amount <= gs["bid_amount"]:
+                    return self.invalid(f"Invalid bid: {bid_amount}. You must bid more than the current bid of {gs['bid_amount']}.")
+                if opponent_status is None and bid_amount < gs["bid_amount"]:
+                    return self.invalid(f"Invalid bid: {bid_amount}. The opening bid is {gs['bid_amount']}.")
 
+            # Record bid history if it's the player's first move this round
+            if gs["player_states"][player_id]["letter_bid_history"][gs["round_number"]] is None:
+                gs["player_states"][player_id]["letter_bid_history"][gs["round_number"]] = "pass" if is_pass else "bid"
+
+            if is_pass: self._pass_bid(player_id)
+            else: self._place_bid(player_id, bid_amount)
         else:
             # Word-submission phase
-            match = re.search(r"\[([a-zA-Z]+)\]", action)
+            match = re.fullmatch(
+                r"\s*(?P<legacy>\[)?\s*(?P<word>[a-zA-Z]+)\s*(?(legacy)\])\s*",
+                action,
+            )
             if not match:
-                reason = f"Invalid action: {action}. Please enter a valid action: '[<word>]'."
-                self.state.set_invalid_move(reason=reason)
-            else:
-                word = match.group(1).lower()
-                self._calculate_word_value(player_id, word)
+                return self.invalid(f"Invalid action: {action}. Please enter one English word.")
+            word = match.group("word").lower()
+            result = self._calculate_word_value(player_id, word)
+            if result is not None:
+                return result
 
-        # Update the rendered game state
-        self.state.game_state["rendered_text"] = self.render_text()
+        gs["turn"] = self.state.turn + 1
+        gs["rendered_text"] = self._render_text(gs)
 
         # Check for game completion
-        if self._check_game_done():
-            p0_score = self.player_states[0]["word_value"]
-            p1_score = self.player_states[1]["word_value"]
-
+        if all(gs["player_states"][pid]["word"] is not None for pid in gs["player_states"]):
+            p0_score = gs["player_states"][0]["word_value"]
+            p1_score = gs["player_states"][1]["word_value"]
             if p0_score > p1_score:
-                self.state.set_winner(player_id=0, reason=f"Player 0 wins with a score of {p0_score}")
+                return self.winner(0, reason=f"Player 0 wins with a score of {p0_score}")
             elif p1_score > p0_score:
-                self.state.set_winner(player_id=1, reason=f"Player 1 wins with a score of {p1_score}")
+                return self.winner(1, reason=f"Player 1 wins with a score of {p1_score}")
             else:
-                self.state.set_draw(reason="It's a draw!")
+                return self.draw(reason="It's a draw!")
 
-        return self.state.step(rotate_player=next_player)
+        self.set_next_player(gs["current_player"])
+        return None
 
-    
-    def _pass_bid(self, player_id: int) -> bool:
+    def _pass_bid(self, player_id: int) -> None:
         """Pass on the current letter, allowing opponent to bid if they haven't yet."""
+        gs = self.game_state
         opponent_id = 1 - player_id
-        letter = self.round_letter
-        round_num = self.round_number
-        bid_status = self.player_states[opponent_id]["letter_bid_history"][round_num]
+        letter = gs["round_letter"]
+        bid_status = gs["player_states"][opponent_id]["letter_bid_history"][gs["round_number"]]
 
         prompt = f"Player {player_id} passes on the letter '{letter}'."
-        
-        # Decide next_player and round progression based on opponent's status
+
         if bid_status is None:
             # Opponent hasn't bid yet — it's now their turn
-            next_player = True
-            prompt += self._turn_manager(next_round=False, next_player=next_player)
-
+            prompt += self._turn_manager(next_round=False, next_player=True)
         elif bid_status == "bid":
             # Opponent already bid — they win the letter
-            self._assign_letter(opponent_id, letter, self.bid_amount)
-            prompt += f" Player {opponent_id} will have '{letter}' for {self.bid_amount}."
-            next_player = False
-            prompt += self._turn_manager(next_round=True, next_player=next_player)
-
+            self._assign_letter(opponent_id, letter, gs["bid_amount"])
+            prompt += f" Player {opponent_id} will have '{letter}' for {gs['bid_amount']}."
+            prompt += self._turn_manager(next_round=True, next_player=False)
         else:
             # Opponent also passed — no one gets the letter
             prompt += f" Player {opponent_id} also passes on the letter '{letter}'. So, no one will gain the letter."
-            next_player = False
-            prompt += self._turn_manager(next_round=True, next_player=next_player)
+            prompt += self._turn_manager(next_round=True, next_player=False)
 
-        self.state.add_observation(message=prompt, observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.broadcast(prompt, ta.ObservationType.GAME_MESSAGE)
 
-        return next_player
-
-    def _place_bid(self, player_id: int, bid_amount: int) -> bool:
-        """Place a bid on the current letter."""
+    def _place_bid(self, player_id: int, bid_amount: int) -> None:
+        """Place a bid on the current letter (already validated)."""
+        gs = self.game_state
         opponent_id = 1 - player_id
-        letter = self.round_letter
-        round_num = self.round_number
-        opponent_status = self.player_states[opponent_id]["letter_bid_history"][round_num]
-
-        # Check for invalid bid - not enough coins
-        if self.player_states[player_id]["coins"] < bid_amount:
-            reason = f"Invalid bid: {bid_amount}. You do not have enough coins."
-            self.state.set_invalid_move(reason=reason)
-            return False
-
-        # NEW: Check if bid is high enough when opponent has already bid
-        if opponent_status == "bid" and bid_amount <= self.bid_amount:
-            reason = f"Invalid bid: {bid_amount}. You must bid more than the current bid of {self.bid_amount}."
-            self.state.set_invalid_move(reason=reason)
-            return False
+        letter = gs["round_letter"]
+        opponent_status = gs["player_states"][opponent_id]["letter_bid_history"][gs["round_number"]]
 
         prompt = f"Player {player_id} bids {bid_amount} on the letter '{letter}'."
 
-        # Case 1: Opponent has not bid yet
-        if opponent_status is None:
-            self.bid_amount = bid_amount
-            next_player = True
-            prompt += self._turn_manager(next_round=False, next_player=next_player)
-
-        # Case 2: Opponent has already bid
-        elif opponent_status == "bid":
-            # At this point we know bid_amount > self.bid_amount due to the check above
-            # This player becomes the top bidder; opponent will be asked again
-            self.bid_amount = bid_amount
-            next_player = True
-            prompt += self._turn_manager(next_round=False, next_player=next_player)
-
-        # Case 3: Opponent passed
+        if opponent_status is None or opponent_status == "bid":
+            # This player becomes the top bidder; opponent will be asked (again)
+            gs["bid_amount"] = bid_amount
+            prompt += self._turn_manager(next_round=False, next_player=True)
         else:
-            # This player automatically wins the letter
+            # Opponent passed — this player automatically wins the letter
             prompt += f" Since Player {opponent_id} passes on the letter '{letter}', Player {player_id} will have it for {bid_amount}."
             self._assign_letter(player_id, letter, bid_amount)
-            next_player = True
-            prompt += self._turn_manager(next_round=True, next_player=next_player)
+            prompt += self._turn_manager(next_round=True, next_player=True)
 
-        self.state.add_observation(message=prompt, observation_type=ta.ObservationType.GAME_MESSAGE)
-
-        return next_player
-
+        self.broadcast(prompt, ta.ObservationType.GAME_MESSAGE)
 
     def _assign_letter(self, player_id: int, letter: str, bid_amount: int) -> None:
         """ Assign the letter to the player """
-        self.player_states[player_id]["letters"].append(letter)
-        self.player_states[player_id]["letter_values"].append(bid_amount)
-        self.player_states[player_id]["coins"] -= bid_amount
+        player_state = self.game_state["player_states"][player_id]
+        player_state["letters"].append(letter)
+        player_state["letter_values"].append(bid_amount)
+        player_state["coins"] -= bid_amount
 
     def _turn_manager(self, next_round: bool = False, next_player: Optional[bool] = False) -> str:
         """
@@ -251,85 +229,72 @@ class LetterAuctionEnv(ta.Env):
         Args:
             next_round (bool, optional): Move to the next round. Defaults to False.
             next_player (bool, optional): Move to the next player. Defaults to False.
-        
+
         Returns:
             str: The prompt for the next player or the end of auction.
         """
-
+        gs = self.game_state
         if next_player:
-            # we switch the player
-            self.current_player = 1 - self.current_player
+            gs["current_player"] = 1 - gs["current_player"]
 
         if next_round:
-            # we advance to the next round if within the rounds
-            self.round_number += 1
-            if self.round_number < len(self.letters):
-                self.round_letter = self.letters[self.round_number]
-                self.bid_amount = self.letter_values[self.round_number]
-                next_prompt = f" Player {self.current_player}, do you want to start bid on the letter '{self.round_letter}' for {self.bid_amount}?"
+            gs["round_number"] += 1
+            if gs["round_number"] < len(gs["letters"]):
+                gs["round_letter"] = gs["letters"][gs["round_number"]]
+                gs["bid_amount"] = self.letter_values[gs["round_number"]]
+                next_prompt = f" Player {gs['current_player']}, do you want to start bid on the letter '{gs['round_letter']}' for {gs['bid_amount']}?"
             else:
                 # the auction is over
-                next_prompt = "The auction is over. Now, players will use the letters they've won to form the highest value english word from the letters won. The player with the highest value word wins the game. To submit the word, submit it in square brackets like [dog]."
-
+                next_prompt = "The auction is over. Now, players will use the letters they've won to form the highest value english word from the letters won. The player with the highest value word wins the game. Submit the word directly, for example: dog."
         else:
-            next_prompt = f" Player {self.current_player}, do you want to bid on the letter '{self.round_letter}' for more than {self.bid_amount}?"
+            next_prompt = f" Player {gs['current_player']}, do you want to bid on the letter '{gs['round_letter']}' for more than {gs['bid_amount']}?"
 
         return next_prompt
 
-
-    def _calculate_word_value(self, player_id: int, word: str) -> None:
+    def _calculate_word_value(self, player_id: int, word: str) -> Optional[ta.Invalid]:
         """ Calculate the value of the player's chosen word based on the bids """
-        # check if the word is valid
+        gs = self.game_state
         word = word.upper()
+        player_state = gs["player_states"][player_id]
 
         if word.lower() not in en_uk_dict:
-            self.player_states[player_id]["word"] = ""
-            self.player_states[player_id]["word_value"] = 0
-
-            reason=f"Invalid word: {word}. Please enter a valid English word."
-            self.state.set_invalid_move(reason=reason)
-            return
-        
-        # check if the word is valid based on the letters
-        for letter in word:
-            if letter not in self.player_states[player_id]["letters"]:
-                self.player_states[player_id]["word"] = ""
-                self.player_states[player_id]["word_value"] = 0
-
-                self.state.set_invalid_move(reason=f"Invalid word: {word}. You do not have the letter '{letter}'.")
-                return
+            return self.invalid(f"Invalid word: {word}. Please enter a valid English word.")
+        available = Counter(player_state["letters"])
+        needed = Counter(word)
+        for letter, count in needed.items():
+            if available[letter] < count:
+                return self.invalid(
+                    f"Invalid word: {word}. You need {count} '{letter}' tile(s), but only have {available[letter]}."
+                )
 
         # calculate the word value
-        word_value = sum(self.player_states[player_id]["letter_values"][self.player_states[player_id]["letters"].index(letter)] for letter in word)
-        self.player_states[player_id]["word"] = word
-        self.player_states[player_id]["word_value"] = word_value
+        values_by_letter: Dict[str, list[int]] = {}
+        for letter, value in zip(player_state["letters"], player_state["letter_values"]):
+            values_by_letter.setdefault(letter, []).append(value)
+        word_value = sum(
+            sum(values_by_letter[letter][:count])
+            for letter, count in needed.items()
+        )
+        player_state["word"] = word
+        player_state["word_value"] = word_value
 
-        message=f"Player {player_id} chooses the word '{word}' with a value of {self.player_states[player_id]['word_value']}."
-        self.state.add_observation(from_id=ta.GAME_ID, to_id=-1, message=message, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        self.broadcast(f"Player {player_id} chooses the word '{word}' with a value of {player_state['word_value']}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
-        # move to the next round
+        # move on to the other player
         self._turn_manager(next_round=False, next_player=True)
+        return None
 
-    def _check_game_done(self) -> bool:
-        """ Check if the game is done """
-        for player_id in self.player_states:
-            if self.player_states[player_id]["word"] is None:
-                return False
-            
-        return True
-    
-    def render_text(self) -> str:
-        """
-        Render the game state.
-        
-        Returns:
-            str: The rendered game state.
-        """
-        rendered_text = f"Round {self.round_number + 1}/{len(self.letters) + 1}\n" # +1 for the word phase
-        rendered_text += f"All letters: {self.letters}\n"
-        rendered_text += f"Current letter: {self.round_letter}\n"
-        rendered_text += f"Player 0: {self.player_states[0]['coins']} coins, {self.player_states[0]['letters']}\n"
-        rendered_text += f"Player 1: {self.player_states[1]['coins']} coins, {self.player_states[1]['letters']}\n"
-        rendered_text += f"Current player: {self.current_player}\n"
+    def _render_text(self, game_state: Dict[str, Any]) -> str:
+        """Render the game state."""
+        rendered_text = f"Round {game_state['round_number'] + 1}/{len(game_state['letters']) + 1}\n" # +1 for the word phase
+        rendered_text += f"Auctioned letters: {game_state['letters'][:game_state['round_number']]}\n"
+        rendered_text += f"Letters remaining: {max(0, len(game_state['letters']) - game_state['round_number'])}\n"
+        current_letter = game_state["round_letter"] if game_state["round_number"] < len(game_state["letters"]) else "Auction complete"
+        rendered_text += f"Current letter: {current_letter}\n"
+        rendered_text += f"Player 0: {game_state['player_states'][0]['coins']} coins, {game_state['player_states'][0]['letters']}\n"
+        rendered_text += f"Player 1: {game_state['player_states'][1]['coins']} coins, {game_state['player_states'][1]['letters']}\n"
+        rendered_text += f"Current player: {game_state['current_player']}\n"
         return rendered_text
-    
+
+    def render_text(self) -> str:
+        return self._render_text(self.game_state)

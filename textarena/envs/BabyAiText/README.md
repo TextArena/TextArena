@@ -105,7 +105,7 @@ Each letter in the board is presenting some object or color according to the lis
 
 | Env-id             | max_turns |
 |--------------------|:---------:|
-| `BabyAi-Text-v0`   |   `20`    | 
+| `BabyAiText-v0`    |   `20`    |
 
 
 ### Contact

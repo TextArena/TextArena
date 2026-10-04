@@ -26,20 +26,21 @@ Ultimate Texas Hold'em is a casino poker game where you compete against the deal
 
 #### 2. PRE-FLOP
 - **Options**:
-  - `[4x]` or `[play bet 4x]`: Bet 100 chips (4x ante) - reveals first 3 community cards
-  - `[check]` or `[c]`: No additional bet - reveals first 3 community cards
+  - `3x` or `play bet 3x`: Bet 75 chips (3x ante) - reveals first 3 community cards
+  - `4x` or `play bet 4x`: Bet 100 chips (4x ante) - reveals first 3 community cards
+  - `check` or `c`: No additional bet - reveals first 3 community cards
 
 #### 3. FLOP
-- If you bet 4x at PRE-FLOP: Only `[skip]` or `[s]` available (auto-reveals last 2 community cards)
+- If you bet 4x at PRE-FLOP: Only `skip` or `s` is available (auto-reveals last 2 community cards)
 - Otherwise, **options**:
-  - `[2x]` or `[play bet 2x]`: Bet 50 chips (2x ante) - reveals last 2 community cards
-  - `[check]` or `[c]`: No additional bet - reveals last 2 community cards
+  - `2x` or `play bet 2x`: Bet 50 chips (2x ante) - reveals last 2 community cards
+  - `check` or `c`: No additional bet - reveals last 2 community cards
 
 #### 4. RIVER
-- If you made any play bet (4x or 2x): Only `[skip]` or `[s]` available (auto-proceeds to showdown)
+- If you made any play bet (4x or 2x): Only `skip` or `s` is available (auto-proceeds to showdown)
 - Otherwise, **options**:
-  - `[1x]` or `[play bet 1x]`: Bet 25 chips (1x ante) - proceeds to showdown
-  - `[fold]` or `[f]`: Give up hand - lose ANTE and BLIND bets
+  - `1x` or `play bet 1x`: Bet 25 chips (1x ante) - proceeds to showdown
+  - `fold` or `f`: Give up hand - lose ANTE and BLIND bets
 
 #### 5. SHOWDOWN
 - All cards are revealed and evaluated
@@ -70,7 +71,7 @@ Ultimate Texas Hold'em is a casino poker game where you compete against the deal
 - **Straight Flush**: 50:1 (1,250 chips)
 - **Four of a Kind**: 10:1 (250 chips)
 - **Full House**: 3:1 (75 chips)
-- **Flush**: 3:1 (75 chips)
+- **Flush**: 3:2 (37.5 chips)
 - **Straight**: 1:1 (25 chips)
 - **Less than Straight**: No additional payout
 
@@ -101,17 +102,18 @@ Ultimate Texas Hold'em is a casino poker game where you compete against the deal
 
 ## Action Commands
 
-All actions must be enclosed in square brackets:
+Submit exactly one bare action:
 
 ### Primary Actions
-- `[4x]` or `[play bet 4x]` - Place 4x ante PLAY bet (100 chips)
-- `[2x]` or `[play bet 2x]` - Place 2x ante PLAY bet (50 chips)
-- `[1x]` or `[play bet 1x]` - Place 1x ante PLAY bet (25 chips)
+- `4x` or `play bet 4x` - Place 4x ante PLAY bet (100 chips)
+- `3x` or `play bet 3x` - Place 3x ante PLAY bet (75 chips)
+- `2x` or `play bet 2x` - Place 2x ante PLAY bet (50 chips)
+- `1x` or `play bet 1x` - Place 1x ante PLAY bet (25 chips)
 
 ### Game Control
-- `[check]` or `[c]` - Check (no additional bet)
-- `[fold]` or `[f]` - Fold (give up hand, lose ANTE and BLIND)
-- `[skip]` or `[s]` - Skip to next phase (when no action needed)
+- `check` or `c` - Check (no additional bet)
+- `fold` or `f` - Fold (give up hand, lose ANTE and BLIND)
+- `skip` or `s` - Skip to next phase (when no action is needed)
 
 ### Important Notes
 - **Only ONE PLAY bet per round** - choose timing strategically
@@ -128,9 +130,9 @@ All actions must be enclosed in square brackets:
 ## Example Game Flow
 
 1. **PRE-ROUND**: Place 50 chips (ante + blind), receive 2 cards
-2. **PRE-FLOP**: Choose `[4x]` or `[check]`
-3. **FLOP**: If you checked, choose `[2x]` or `[check]`
-4. **RIVER**: If you checked, choose `[1x]` or `[fold]`
+2. **PRE-FLOP**: Choose `3x`, `4x`, or `check`
+3. **FLOP**: If you checked, choose `2x` or `check`
+4. **RIVER**: If you checked, choose `1x` or `fold`
 5. **SHOWDOWN**: All cards revealed, bets evaluated automatically
 6. **Next Round**: Start over with new cards
 

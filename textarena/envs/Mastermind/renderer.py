@@ -1,6 +1,9 @@
 from typing import Dict, Any, List
 
-def create_board_str(game_state: Dict[str, Any]) -> str:
+def create_board_str(
+    game_state: Dict[str, Any],
+    reveal_secret: bool = False,
+) -> str:
     secret_code = game_state.get("secret_code", [])
     history: List[Dict[str, Any]] = game_state.get("history", [])
     def format_code(code):
@@ -9,7 +12,11 @@ def create_board_str(game_state: Dict[str, Any]) -> str:
         return f"{' 🎯' * b}{' ⚪' * w}{' ▫️' * (len(secret_code) - b - w)}"
     lines = [
         "===============================================================",
-        f"Secret Code: {format_code(secret_code)}",
+        (
+            f"Secret Code: {format_code(secret_code)}"
+            if reveal_secret
+            else f"Secret Code: {' '.join('[?]' for _ in secret_code)}"
+        ),
         "===============================================================",
     ]
     if not history:

@@ -1,11 +1,15 @@
-import re, chess 
-from typing import Any, Dict, Optional, Tuple
+import re, chess
+from typing import Any, Dict, Optional, Union
 
 import textarena as ta
 from textarena.envs.Chess.renderer import create_board_str
 
 
-class ChessEnv(ta.Env):
+class ChessEnv(ta.GameEnv):
+    min_players = 2
+    max_players = 2
+    action_pattern = r"(?i)^\s*\[?\s*([a-h][1-8][a-h][1-8][qrbn]?)\s*\]?\s*$"
+
     def __init__(self, is_open: bool=True, max_turns: int=30, show_valid: bool=True):
         """
         Args:
@@ -13,54 +17,77 @@ class ChessEnv(ta.Env):
             max_turns (int): Maximum number of turns before the game ends.
             show_valid (bool): If True, players can see a list of valid moves.
         """
+        if not isinstance(is_open, bool):
+            raise ValueError("is_open must be a boolean")
+        if not isinstance(show_valid, bool):
+            raise ValueError("show_valid must be a boolean")
+        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
+            raise ValueError("max_turns must be a positive integer")
         self.max_turns = max_turns
-        self.is_open = is_open 
-        self.show_valid = show_valid 
+        self.is_open = is_open
+        self.show_valid = show_valid
 
-    def get_board_str(self): return create_board_str(board=self.state.game_state["board"])
-
-    def reset(self, num_players: int, seed: Optional[int]=None):
-        self.state = ta.TwoPlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
+    def setup(self) -> Dict[str, Any]:
         board = chess.Board()
-        valid_moves = ', '.join([f'[{move.uci()}]' for move in board.legal_moves])
-        game_state = {"board": board, "valid_moves": valid_moves}
-        self.state.reset(game_state=game_state, player_prompt_function=self._prompt, role_mapping={0:"White", 1:"Black"})
-        self._agument_observations()
+        valid_moves = ', '.join([move.uci() for move in board.legal_moves])
+        return {"board": board, "valid_moves": valid_moves}
 
-    def _prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
-        return f"You are playing {'White' if player_id==0 else 'Black'} in a game of Chess.\n Make your moves in UCI format enclosed in square brackets (e.g., [e2e4])."
-    
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        self._execute_player_move(action=action)
-        self._check_gameover()
-        self._agument_observations()
-        return self.state.step()
+    def roles(self) -> Dict[int, str]:
+        return {0: "White", 1: "Black"}
 
-    def _execute_player_move(self, action: str):
-        match = re.compile(r"\[[a-h][1-8][a-h][1-8][qrbn]?\]", re.IGNORECASE).search(action.strip())
-        if match is None: self.state.set_invalid_move(reason=f"Wrong move format.") # check if a move was provided
-        else:
-            move_uci = match.group(0).lower().replace("[", "").replace("]", "") # Extract the move from within the brackets
-            move = chess.Move.from_uci(move_uci) # Attempt to make the move
-            if move in self.state.game_state["board"].legal_moves:
-                self.state.game_state["board"].push(move) # execute move
-                self.state.add_observation(message=f"Player {self.state.current_player_id} made the following move: {move_uci}", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-            else: self.state.set_invalid_move(reason=f"Illegal move.") # illegal move
+    def prompt(self, player_id: int) -> str:
+        return f"You are playing {'White' if player_id==0 else 'Black'} in a game of Chess.\n Make your moves in UCI format (e.g., 'e2e4')."
 
-    def _check_gameover(self):
-        if self.state.game_state["board"].is_game_over():
-            outcome = self.state.game_state["board"].outcome().result()
-            if outcome == "1/2-1/2": self.state.set_draw(reason=f"Game ended in a draw.") # check for draw
-            else:
-                winner_id = 0 if outcome == "1-0" else 1
-                self.state.set_winner(player_id=winner_id, reason=f"Player {winner_id} wins the match.")
-
-    def _agument_observations(self):
+    def render(self, player_id: int) -> Optional[str]:
+        board = self.game_state["board"]
         message = ""
-        if self.is_open: message+=f"Current board:\n{self._board_with_coords(self.state.game_state['board'])}" #f"Current board:\n{str(self.state.game_state["board"])}" # display the board state
-        if self.show_valid: message+=f"\nValid moves: {', '.join([f'[{move.uci()}]' for move in self.state.game_state["board"].legal_moves])}"# show the valid moves
-        self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_BOARD)
+        if self.is_open: message += f"Current board:\n{self._board_with_coords(board)}"
+        if self.show_valid: message += f"\nValid moves: {', '.join([move.uci() for move in board.legal_moves])}"
+        return message or None
+
+    def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
+        board = self.game_state["board"]
+        move_uci = move.group(1).lower()
+        expected_player = 0 if board.turn == chess.WHITE else 1
+        if player_id != expected_player:
+            return self.invalid("It is not this player's turn.")
+        try:
+            chess_move = chess.Move.from_uci(move_uci)
+        except ValueError:
+            # Some strings accepted by the outer shape check (for example
+            # ``a1a1``) are not valid UCI moves according to python-chess.
+            return self.invalid("Invalid UCI move.")
+        if chess_move not in board.legal_moves:
+            return self.invalid("Illegal move.")
+        board.push(chess_move)
+        self.game_state["valid_moves"] = ', '.join(legal.uci() for legal in board.legal_moves)
+        self.broadcast(f"Player {player_id} made the following move: {move_uci}", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+
+        # Automatic terminal conditions (checkmate, stalemate, insufficient
+        # material, fivefold repetition and the 75-move rule) are handled by
+        # python-chess. Claimable draws are auto-accepted by this environment
+        # only once the current position itself qualifies. Using
+        # ``claim_draw=True`` here would also return true when the *next*
+        # player merely has a legal move that could create a claim, ending the
+        # game one ply before that move is selected.
+        outcome = board.outcome(claim_draw=False)
+        if outcome is not None:
+            self.game_state["valid_moves"] = ""
+            termination = outcome.termination.name.replace("_", " ").lower()
+            if outcome.winner is None:
+                return self.draw(reason=f"Game ended in a draw by {termination}.")
+            winner_id = 0 if outcome.winner == chess.WHITE else 1
+            return self.winner(winner_id, reason=f"Player {winner_id} wins by {termination}.")
+        if board.is_repetition(3):
+            self.game_state["valid_moves"] = ""
+            return self.draw(reason="Game ended in a draw by threefold repetition.")
+        if board.is_fifty_moves():
+            self.game_state["valid_moves"] = ""
+            return self.draw(reason="Game ended in a draw by fifty-move rule.")
+        return None
+
+    def get_board_str(self):
+        return create_board_str(board=self.game_state["board"])
 
     @staticmethod
     def _board_with_coords(board: chess.Board) -> str:

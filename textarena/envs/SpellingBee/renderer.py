@@ -4,26 +4,17 @@ def create_board_str(game_state: dict) -> str:
         lines = []
         lines.append("┌─ ALLOWED LETTERS ──────────────────┐")
         lines.append("│                                    │")
-        n = len(allowed_letters)
-        if n <= 4:      rows = [allowed_letters]
-        elif n <= 6:    rows = [allowed_letters[:2], allowed_letters[2:4], allowed_letters[4:]]
-        else:
-            top = allowed_letters[:2]
-            middle = allowed_letters[2:5]
-            bottom = allowed_letters[5:]
-            rows = [top, middle, bottom]
+        rows = [allowed_letters[i:i + 6] for i in range(0, len(allowed_letters), 6)]
+        if not rows:
+            rows = [[]]
         for row in rows:
-            padding = (6 - len(row)) * 2
-            line_top = " " * padding
-            line_mid = " " * padding
-            line_bot = " " * padding
-            for ch in row:
-                line_top += f"┌───┐ "
-                line_mid += f"│ {ch.upper()} │ "
-                line_bot += f"└───┘ "
-            lines.append(f"│{line_top.rstrip():<36}│")
-            lines.append(f"│{line_mid.rstrip():<36}│")
-            lines.append(f"│{line_bot.rstrip():<36}│")
+            line_top = "".join("┌───┐ " for _ in row).rstrip()
+            line_mid = "".join(f"│ {ch.upper()} │ " for ch in row).rstrip()
+            line_bot = "".join("└───┘ " for _ in row).rstrip()
+            for content in (line_top, line_mid, line_bot):
+                left = (36 - len(content)) // 2
+                right = 36 - len(content) - left
+                lines.append(f"│{' ' * left}{content}{' ' * right}│")
             lines.append("│                                    │")
         lines.append("└────────────────────────────────────┘")
         return lines
@@ -34,7 +25,7 @@ def create_board_str(game_state: dict) -> str:
         for i, word in enumerate(game_state.get("word_history", [])):
             player = f"P{i % 2}"
             entry = f"{player}: {word.upper()} ({len(word):<2} letters)   "
-            lines.append(f"│  {entry.ljust(32)}│")
+            lines.append(f"│  {entry[:32].ljust(32)}│")
         lines.append("│                                  │")
         lines.append("└──────────────────────────────────┘")
         return lines

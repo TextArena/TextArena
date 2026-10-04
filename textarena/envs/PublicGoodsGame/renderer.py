@@ -1,3 +1,24 @@
+import math
+from decimal import Decimal, localcontext
+from fractions import Fraction
+from numbers import Rational
+
+
+def _format_number(value) -> str:
+    try:
+        numeric = float(value)
+    except (OverflowError, TypeError, ValueError):
+        numeric = None
+    if numeric is not None and math.isfinite(numeric):
+        return f"{numeric:.1f}" if abs(numeric) < 1e12 else f"{numeric:.3e}"
+    if isinstance(value, Rational):
+        with localcontext() as context:
+            context.prec = 8
+            decimal_value = Decimal(value.numerator) / Decimal(value.denominator)
+        return f"{decimal_value:.3E}"
+    return str(value)
+
+
 def create_board_str(game_state: dict) -> str:
     """Create a visual representation of the Public Goods Game state."""
     lines = []
@@ -11,6 +32,8 @@ def create_board_str(game_state: dict) -> str:
         conv_round = game_state.get("conversation_round", 0) + 1
         total_conv = game_state.get("total_conversation_rounds", 3)
         phase_display = f"💬 Communication ({conv_round}/{total_conv})"
+    elif phase == "complete":
+        phase_display = "🏁 Game Complete"
     else:
         phase_display = "🎯 Decision Phase"
     
@@ -42,13 +65,7 @@ def create_board_str(game_state: dict) -> str:
             if player_id in eliminations:
                 status = "❌ ELIMINATED"
             elif player_id in pending_messages:
-                msg = pending_messages[player_id]
-                if msg:
-                    # Truncate long messages
-                    msg_display = msg[:25] + "..." if len(msg) > 25 else msg
-                    status = f"💬 \"{msg_display}\""
-                else:
-                    status = "🤐 Silent"
+                status = "✅ Submitted (hidden)"
             else:
                 status = "⏳ Waiting..."
             lines.append(f"│ Player {player_id}: {status:<45} │")
@@ -69,8 +86,7 @@ def create_board_str(game_state: dict) -> str:
                 amount = contributions[player_id]
                 status = f"✅ {amount} tokens"
             elif player_id in pending_contributions:
-                amount = pending_contributions[player_id]
-                status = f"⏳ {amount} tokens (pending)"
+                status = "✅ Submitted (hidden)"
             else:
                 status = "⏳ Deciding..."
             lines.append(f"│ Player {player_id}: {status:<45} │")
@@ -78,7 +94,7 @@ def create_board_str(game_state: dict) -> str:
     lines.append("└───────────────────────────────────────────────────────────┘")
     
     # Round results (if decision phase and contributions revealed)
-    if phase == "decision" and game_state.get("contributions"):
+    if phase in ("decision", "complete") and game_state.get("contributions"):
         contributions = game_state.get("contributions", {})
         if any(c is not None for c in contributions.values()):
             # Calculate what we can show
@@ -86,14 +102,24 @@ def create_board_str(game_state: dict) -> str:
                             if amt is not None and pid not in eliminations}
             if alive_contribs:
                 total_contrib = sum(alive_contribs.values())
-                public_good = total_contrib * multiplier
                 num_alive = len(alive_contribs)
-                share_per_player = public_good / num_alive if num_alive > 0 else 0
+                round_info = game_state.get("history", [])[-1]
+                public_good = round_info["public_good"]
+                first_player = next(iter(alive_contribs))
+                share_per_player = (
+                    round_info["payoffs"][first_player]
+                    - (endowment - alive_contribs[first_player])
+                )
                 
                 lines.append("┌─ 💰 ROUND CALCULATION ────────────────────────────────────┐")
                 lines.append(f"│ Total Contributions: {total_contrib:>3} tokens                        │")
-                lines.append(f"│ Public Good: {total_contrib} × {multiplier} = {public_good:>6.1f}                    │")
-                lines.append(f"│ Share per Player: {share_per_player:>6.1f} tokens                     │")
+                lines.append(
+                    f"│ Public Good: {total_contrib} × {multiplier} = "
+                    f"{_format_number(public_good):>6}                    │"
+                )
+                lines.append(
+                    f"│ Share per Player: {_format_number(share_per_player):>6} tokens                     │"
+                )
                 lines.append("└───────────────────────────────────────────────────────────┘")
     
     # Player standings
@@ -113,11 +139,11 @@ def create_board_str(game_state: dict) -> str:
         # Show alive players first
         for rank, (player_id, score) in enumerate(alive_scores, 1):
             rank_icon = "🥇" if rank == 1 else "🥈" if rank == 2 else "🥉" if rank == 3 else f"{rank}."
-            lines.append(f"│ {rank_icon:<3} Player {player_id}: {score:>6.1f} points                    │")
+            lines.append(f"│ {rank_icon:<3} Player {player_id}: {_format_number(score):>6} points                    │")
         
         # Then eliminated players
         for player_id, score in eliminated_scores:
-            lines.append(f"│ ❌  Player {player_id}: {score:>6.1f} points (eliminated)         │")
+            lines.append(f"│ ❌  Player {player_id}: {_format_number(score):>6} points (eliminated)         │")
         
         lines.append("└───────────────────────────────────────────────────────────┘")
     
@@ -141,9 +167,12 @@ def create_board_str(game_state: dict) -> str:
             total = round_info.get("total_contribution", 0)
             public_good = round_info.get("public_good", 0)
             payoffs = round_info.get("payoffs", {})
-            avg_payoff = sum(payoffs.values()) / len(payoffs) if payoffs else 0
+            avg_payoff = Fraction(sum(payoffs.values()), len(payoffs)) if payoffs else 0
             
-            lines.append(f"│ {round_num:>3} │ {contrib_str:<14} │ {total:>5} │ {public_good:>6.1f} │ {avg_payoff:>8.1f}         │")
+            lines.append(
+                f"│ {round_num:>3} │ {contrib_str:<14} │ {total:>5} │ "
+                f"{_format_number(public_good):>6} │ {_format_number(avg_payoff):>8}         │"
+            )
         
         if len(history) > 5:
             lines.append(f"│     │ ... ({len(history)-5} more rounds shown above)          │")
@@ -152,7 +181,7 @@ def create_board_str(game_state: dict) -> str:
     
     # Game mechanics reminder (compact)
     lines.append("┌─ ℹ️  QUICK REFERENCE ──────────────────────────────────────┐")
-    lines.append("│ Communication: {message}  │  Decision: [amount]           │")
+    lines.append("│ Communication: {message}  │  Decision: amount             │")
     lines.append(f"│ Payoff = kept_tokens + share_of_public_good               │")
     lines.append("└───────────────────────────────────────────────────────────┘")
     

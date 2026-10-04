@@ -12,7 +12,7 @@ def render_hand_cards_table(board, eliminated_pids=None, pids_from_roles=None) -
     rows = []
     for color_enum, player in board.players.items():
         color_str = getattr(color_enum, "name", str(color_enum))
-        pid = pids_from_roles.get(color_str, None)
+        pid = pids_from_roles.get(color_str.lower(), None)
         name = color_str + (" (eliminated)" if pid in eliminated_pids else "")
         counts = {k.name.lower(): v for k, v in player.hand.items()}
         row = [name] + [str(counts.get(r, 0)) for r in RESOURCE_ORDER]

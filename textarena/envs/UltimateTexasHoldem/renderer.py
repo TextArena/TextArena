@@ -53,8 +53,8 @@ def create_board_str(game_state: dict) -> str:
             board_str += "💀 GAME OVER - DEALER WINS 💀\n"
     elif gs.get('chips', 0) <= 0:
         board_str += "💀 GAME OVER - OUT OF CHIPS 💀\n"
-    elif gs.get('current_round', 0) >= 1000:
-        board_str += "🏆 GAME OVER - 1000 ROUNDS COMPLETED! 🏆\n"
+    elif gs.get('current_round', 0) >= gs.get('max_rounds', 1000):
+        board_str += f"🏆 GAME OVER - {gs.get('max_rounds', 1000)} ROUNDS COMPLETED! 🏆\n"
     elif gs['round_complete']:
         board_str += "🔄 Round complete - starting next round...\n"
     

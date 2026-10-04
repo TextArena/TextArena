@@ -1,0 +1,438 @@
+"""
+The TextArena game engine.
+
+This module contains the single game loop shared by all environments. A game
+implements a small set of hooks (`setup`, `prompt`, `apply`, and optionally
+`render`, `roles`, `on_turn_limit`, `on_invalid_limit`) and the engine owns
+everything else: turn rotation, invalid-move handling, eliminations, turn
+limits, reward bookkeeping, observation routing, and logging.
+
+The user-facing API is unchanged: `ta.make(...)`, `env.reset(num_players)`,
+`env.get_observation()`, `env.step(action)` and `env.close()` behave exactly
+as before, and all wrappers keep working.
+"""
+import re
+import copy
+import random
+from dataclasses import dataclass, field
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+
+from textarena.core import Env, Info, ObservationType, GAME_ID
+
+
+@dataclass
+class Outcome:
+    """Terminal result of a game: a reward per player and a reason."""
+    rewards: Dict[int, float]
+    reason: str
+
+
+@dataclass
+class Invalid:
+    """Returned by `apply` when the submitted action is illegal.
+
+    The engine handles the retry/escalation policy; `apply` must not have
+    mutated the game state before returning this.
+    """
+    reason: str
+
+
+@dataclass
+class Retryable:
+    """The action could not be processed because infrastructure was unavailable."""
+    reason: str
+
+
+# One entry in the event log. `to_id == -1` means visible to everyone.
+Event = Tuple[int, str, ObservationType, int]
+
+
+class GameState:
+    """Pure data record for a running game.
+
+    All behavior lives in `GameEnv`; this object only holds state so it can be
+    snapshotted, serialized, and inspected.
+    """
+
+    def __init__(self, num_players: int, max_turns: Optional[int], error_allowance: int):
+        self.num_players = num_players
+        self.max_turns = max_turns
+        self.error_allowance = error_allowance
+
+        self.current_player_id: int = 0
+        self.turn: int = 0
+        self.done: bool = False
+        self.rewards: Optional[Dict[int, float]] = None
+        self.game_state: Dict[str, Any] = {}
+        self.role_mapping: Dict[int, str] = {}
+        self.step_info: Dict[str, Any] = {}
+        self.game_info: Dict[int, Dict[str, Any]] = {
+            pid: {"role": f"Player {pid}", "invalid_move": False, "turn_count": 0} for pid in range(num_players)
+        }
+        self.eliminated: List[int] = []  # in order of elimination
+        self.error_count: int = 0  # consecutive invalid moves by the current player
+        self.next_player_override: Optional[int] = None
+
+        self.events: List[Event] = []
+        self._cursors: Dict[int, int] = {pid: 0 for pid in range(num_players)}
+
+    # -- observation routing ------------------------------------------------
+    def add_event(self, from_id: int, message: str, observation_type: ObservationType, to_id: int = -1):
+        self.events.append((from_id, message, observation_type, to_id))
+
+    def get_current_player_observation(self) -> List[Tuple[int, str, ObservationType]]:
+        pid = self.current_player_id
+        start = self._cursors[pid]
+        self._cursors[pid] = len(self.events)
+        return [(f, m, t) for (f, m, t, to) in self.events[start:] if to == -1 or to == pid]
+
+    @property
+    def logs(self) -> List[Tuple[int, str]]:
+        """Full chronological log of every event, for renderers and replays."""
+        return [(f, m) for (f, m, _, _) in self.events]
+
+    @property
+    def observations(self) -> Dict[int, List[Tuple[int, str, ObservationType]]]:
+        """Pending (not yet consumed) observations per player. Legacy shape."""
+        return {
+            pid: [(f, m, t) for (f, m, t, to) in self.events[self._cursors[pid]:] if to == -1 or to == pid]
+            for pid in range(self.num_players)
+        }
+
+    # -- helpers -------------------------------------------------------------
+    def is_player_alive(self, pid: int) -> bool:
+        return pid not in self.eliminated
+
+    @property
+    def alive_players(self) -> List[int]:
+        return [pid for pid in range(self.num_players) if pid not in self.eliminated]
+
+    def next_alive_player(self, after: Optional[int] = None) -> Optional[int]:
+        start = self.current_player_id if after is None else after
+        for offset in range(1, self.num_players + 1):
+            pid = (start + offset) % self.num_players
+            if pid not in self.eliminated:
+                return pid
+        return None
+
+    def close(self):
+        return self.rewards, self.game_info
+
+
+class GameEnv(Env):
+    """Base class for all game environments.
+
+    Subclasses implement:
+        setup() -> Dict[str, Any]        build and return the initial game_state (required)
+        prompt(player_id) -> str         the initial prompt for a player (required)
+        apply(player_id, move)           apply one action; return None to continue,
+                                         Outcome to end, Invalid for a bad action, or
+                                         Retryable for infrastructure failure (required)
+        render(player_id) -> str|None    board string shown to the player about to act (optional)
+        roles() -> Dict[int, str]        public role names, defaults to "Player {i}" (optional)
+        on_turn_limit() -> Outcome       outcome when max_turns is reached; defaults to a draw (optional)
+        on_invalid_limit(pid) -> Outcome|None
+                                         called when a player exhausts the error allowance;
+                                         the default eliminates them (see method docs) (optional)
+
+    Class-level configuration:
+        min_players / max_players        allowed player counts
+        action_pattern                   regex; if set, the engine extracts the move
+                                         (an `re.Match`) and rejects non-matching actions
+        broadcast_actions                if False, raw actions are only echoed to their author
+        error_allowance                  consecutive invalid moves allowed before escalation
+        max_action_chars                 maximum input size accepted before parsing/logging
+    """
+
+    min_players: int = 1
+    max_players: Optional[int] = None
+    action_pattern: Optional[str] = None
+    broadcast_actions: bool = True
+    error_allowance: int = 1
+    max_action_chars: int = 32_768
+    snapshot_excluded_attributes: Tuple[str, ...] = ()
+
+    max_turns: Optional[int] = None  # usually set in __init__ from registry kwargs
+    state: GameState
+    rng: random.Random
+
+    # ------------------------------------------------------------------ hooks
+    def setup(self) -> Dict[str, Any]:
+        raise NotImplementedError
+
+    def prompt(self, player_id: int) -> str:
+        raise NotImplementedError
+
+    def apply(self, player_id: int, move) -> Union[Outcome, Invalid, Retryable, None]:
+        raise NotImplementedError
+
+    def render(self, player_id: int) -> Optional[str]:
+        return None
+
+    def roles(self) -> Dict[int, str]:
+        return {pid: f"Player {pid}" for pid in range(self.state.num_players)}
+
+    def on_start(self):
+        """Called once after the initial prompts are sent, e.g. to deal private cards."""
+        return None
+
+    def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
+        """Who sees the raw action: -1 for everyone (default), a player id for
+        just them, or None to suppress the echo entirely (the game can then emit
+        its own sanitized description inside `apply`)."""
+        return -1 if self.broadcast_actions else player_id
+
+    def on_turn_limit(self) -> Outcome:
+        return self.draw(reason="The turn limit has been reached.")
+
+    def on_invalid_limit(self, player_id: int, reason: str) -> Optional[Outcome]:
+        """Default escalation: eliminate the offender.
+
+        If fewer than two players remain alive, the game ends (the offender
+        loses; any remaining player wins). Otherwise the game continues
+        without the eliminated player. Override for custom semantics.
+        """
+        self.eliminate(player_id)
+        alive = self.state.alive_players
+        if len(alive) == 0:  # single-player game
+            return Outcome(rewards={player_id: -1}, reason=f"Invalid Move: {reason}")
+        if len(alive) == 1:
+            return self.winner(alive[0], reason=f"Player {player_id} made an invalid move. Reason: {reason}")
+        self.broadcast(f"Player {player_id} was eliminated for repeated invalid moves.", ObservationType.GAME_ADMIN)
+        return None
+
+    # ------------------------------------------------------- outcome factories
+    def winner(self, player_ids: Union[int, List[int]], reason: str) -> Outcome:
+        if isinstance(player_ids, int):
+            player_ids = [player_ids]
+        rewards = {pid: (1 if pid in player_ids else -1) for pid in range(self.state.num_players)}
+        return Outcome(rewards=rewards, reason=reason)
+
+    def loser(self, player_ids: Union[int, List[int]], reason: str) -> Outcome:
+        if isinstance(player_ids, int):
+            player_ids = [player_ids]
+        winners = [pid for pid in range(self.state.num_players) if pid not in player_ids]
+        rewards = {pid: (1 if pid in winners else -1) for pid in range(self.state.num_players)}
+        return Outcome(rewards=rewards, reason=reason)
+
+    def draw(self, reason: str) -> Outcome:
+        return Outcome(rewards={pid: 0 for pid in range(self.state.num_players)}, reason=reason)
+
+    def outcome(self, rewards: Dict[int, float], reason: str) -> Outcome:
+        return Outcome(rewards=rewards, reason=reason)
+
+    def invalid(self, reason: str) -> Invalid:
+        return Invalid(reason=reason)
+
+    def retryable(self, reason: str) -> Retryable:
+        return Retryable(reason=reason)
+
+    # ------------------------------------------------------------ game helpers
+    @property
+    def game_state(self) -> Dict[str, Any]:
+        return self.state.game_state
+
+    @property
+    def current_player_id(self) -> int:
+        return self.state.current_player_id
+
+    @property
+    def step_info(self) -> Dict[str, Any]:
+        return self.state.step_info
+
+    def message(self, player_id: int, message: str, observation_type: ObservationType = ObservationType.GAME_MESSAGE, from_id: int = GAME_ID):
+        """Send a message visible to a single player."""
+        self.state.add_event(from_id, message, observation_type, to_id=player_id)
+
+    def broadcast(self, message: str, observation_type: ObservationType = ObservationType.GAME_MESSAGE, from_id: int = GAME_ID):
+        """Send a message visible to every player."""
+        self.state.add_event(from_id, message, observation_type, to_id=-1)
+
+    def set_next_player(self, player_id: int):
+        """Choose who acts next instead of the default round-robin rotation."""
+        self.state.next_player_override = player_id
+
+    def set_current_player(self, player_id: int):
+        """Immediately set the acting player.
+
+        Use this during setup or exceptional flows (such as an invalid move
+        that forfeits the turn). During a normal valid action, prefer
+        `set_next_player`, which applies after turn bookkeeping.
+        """
+        if not 0 <= player_id < self.state.num_players:
+            raise ValueError(f"Unknown player id: {player_id}")
+        if not self.state.is_player_alive(player_id):
+            raise ValueError(f"Player {player_id} has been eliminated")
+        self.state.current_player_id = player_id
+
+    def eliminate(self, player_id: int):
+        """Remove a player from the turn rotation."""
+        if player_id not in self.state.eliminated:
+            self.state.eliminated.append(player_id)
+
+    def set_role(self, player_id: int, role: str):
+        """Record a (possibly secret) role in game_info, e.g. for RL training."""
+        self.state.game_info[player_id]["role"] = role
+
+    # -------------------------------------------------------------- Env API
+    def reset(self, num_players: int, seed: Optional[int] = None):
+        assert num_players >= self.min_players and (self.max_players is None or num_players <= self.max_players), (
+            f"{type(self).__name__} supports {self.min_players}"
+            f"{'+' if self.max_players is None else f'-{self.max_players}'} players, received {num_players}"
+        )
+        self.rng = random.Random(seed)
+        self.state = GameState(num_players=num_players, max_turns=self.max_turns, error_allowance=self.error_allowance)
+        self.state.game_state = self.setup()
+        self.state.role_mapping = dict(self.roles())
+        self.state.role_mapping.setdefault(GAME_ID, "GAME")
+        for pid in range(num_players):
+            if self.state.game_info[pid]["role"] == f"Player {pid}":
+                self.set_role(pid, self.state.role_mapping.get(pid, f"Player {pid}"))
+        for pid in range(num_players):
+            self.message(pid, self.prompt(player_id=pid), ObservationType.PROMPT)
+        self.on_start()
+        self._send_render()
+
+    def step(self, action: str) -> Tuple[bool, Info]:
+        if self.state.done:
+            return True, self._drain_step_info()
+        pid = self.state.current_player_id
+        if not isinstance(action, str):
+            self._handle_invalid(pid, "Actions must be strings.")
+            self._send_render()
+            return self.state.done, self._drain_step_info()
+        if len(action) > self.max_action_chars:
+            self._handle_invalid(
+                pid,
+                f"Action exceeds the maximum length of {self.max_action_chars} characters.",
+            )
+            self._send_render()
+            return self.state.done, self._drain_step_info()
+
+        # echo the raw action into the observation stream
+        echo_target = self.action_echo_target(pid, action)
+        if echo_target is not None:
+            echoed = action
+            for role_tag in self.state.role_mapping.values():
+                echoed = echoed.replace(f"[{role_tag}]", "")
+            self.state.add_event(pid, echoed, ObservationType.PLAYER_ACTION, to_id=echo_target)
+
+        # parse and apply
+        if self.action_pattern is not None:
+            match = re.search(self.action_pattern, action, re.DOTALL)
+            result = self.apply(pid, match) if match is not None else Invalid("The submitted move does not follow the correct format.")
+        else:
+            result = self.apply(pid, action)
+
+        if isinstance(result, Invalid):
+            self._handle_invalid(pid, result.reason)
+        elif isinstance(result, Retryable):
+            self.message(
+                pid,
+                f"The action could not be processed and was not counted. Please retry. Reason: {result.reason}",
+                ObservationType.GAME_ADMIN,
+            )
+        elif isinstance(result, Outcome):
+            self._record_completed_turn(pid)
+            self._finalize(result)
+        else:
+            self._advance_turn(pid)
+
+        self._send_render()
+        return self.state.done, self._drain_step_info()
+
+    # (get_observation and close are inherited from Env)
+
+    # ---------------------------------------------------------- snapshotting
+    def snapshot(self) -> Dict[str, Any]:
+        """Capture privileged full state for restore/debugging.
+
+        Snapshots may contain hidden cards, answers, and roles. They must never
+        be included in player observations.
+        """
+        memo: Dict[int, Any] = {}
+        state = copy.deepcopy(self.state, memo)
+        excluded = set(self.snapshot_excluded_attributes)
+        attributes = {
+            name: copy.deepcopy(value, memo)
+            for name, value in self.__dict__.items()
+            if name not in {"state", "rng"} and name not in excluded
+        }
+        return {"state": state, "rng": self.rng.getstate(), "attributes": attributes}
+
+    def restore(self, snapshot: Dict[str, Any]):
+        memo: Dict[int, Any] = {}
+        state = copy.deepcopy(snapshot["state"], memo)
+        preserved = {
+            name: self.__dict__[name]
+            for name in self.snapshot_excluded_attributes
+            if name in self.__dict__
+        }
+        attributes = {
+            name: copy.deepcopy(value, memo)
+            for name, value in snapshot.get("attributes", {}).items()
+        }
+        self.__dict__.clear()
+        self.__dict__.update(preserved)
+        self.__dict__.update(attributes)
+        self.state = state
+        self.rng = random.Random()
+        self.rng.setstate(snapshot["rng"])
+
+    # ------------------------------------------------------------- internals
+    def _handle_invalid(self, pid: int, reason: str):
+        self.state.next_player_override = None
+        self.state.error_count += 1
+        if self.state.error_count <= self.state.error_allowance:
+            self.message(
+                pid,
+                f"Player {pid} attempted an invalid move. Reason: {reason} "
+                "Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
+                ObservationType.GAME_ADMIN,
+            )
+            return
+        self.state.error_count = 0
+        self.state.game_info[pid]["invalid_move"] = True
+        outcome = self.on_invalid_limit(pid, reason)
+        if outcome is not None:
+            self._finalize(outcome)
+        elif self.state.next_player_override is not None:
+            self.state.current_player_id = self.state.next_player_override
+            self.state.next_player_override = None
+        elif not self.state.is_player_alive(pid):
+            self.state.current_player_id = self.state.next_alive_player()
+
+    def _advance_turn(self, pid: int):
+        self._record_completed_turn(pid)
+        if self.state.max_turns is not None and self.state.turn >= self.state.max_turns:
+            self._finalize(self.on_turn_limit())
+            return
+        if self.state.next_player_override is not None:
+            self.state.current_player_id = self.state.next_player_override
+            self.state.next_player_override = None
+        else:
+            nxt = self.state.next_alive_player()
+            if nxt is not None:
+                self.state.current_player_id = nxt
+
+    def _record_completed_turn(self, pid: int):
+        self.state.error_count = 0
+        self.state.game_info[pid]["turn_count"] += 1
+        self.state.turn += 1
+
+    def _finalize(self, outcome: Outcome):
+        self.state.rewards = outcome.rewards
+        for pid in range(self.state.num_players):
+            self.state.game_info[pid]["reason"] = outcome.reason
+        self.broadcast(outcome.reason, ObservationType.GAME_ADMIN)
+        self.state.done = True
+
+    def _send_render(self):
+        board = self.render(player_id=self.state.current_player_id)
+        if board is not None:
+            self.message(self.state.current_player_id, board, ObservationType.GAME_BOARD)
+
+    def _drain_step_info(self) -> Info:
+        info = self.state.step_info
+        self.state.step_info = {}
+        return info

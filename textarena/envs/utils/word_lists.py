@@ -4,8 +4,6 @@ import importlib.resources
 import re
 from collections import defaultdict
 
-# Load NLTK word list
-import nltk
 from nltk.corpus import words
 
 
@@ -64,8 +62,6 @@ class EnglishDictionary:
         self, keep_proper_nouns=False, include_nltk=True, keep_non_alpha=False
     ):
         """Initialize the dictionary."""
-        nltk.download("words")
-        
         self.include_nltk = include_nltk
         self.keep_non_alpha = keep_non_alpha
         self.keep_proper_nouns = keep_proper_nouns
@@ -189,7 +185,11 @@ class EnglishDictionary:
         return all_words
 
     def _load_nltk(self, basic: bool) -> set[str]:
-        nltk_words = set(words.words("en-basic") if basic else words.words("en"))
+        try:
+            nltk_words = set(words.words("en-basic") if basic else words.words("en"))
+        except LookupError:
+            # The bundled UK/US dictionaries keep word games functional offline.
+            return set()
         return self._filter(nltk_words)
 
     def is_english_word(self, word: str) -> bool:

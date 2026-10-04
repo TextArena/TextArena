@@ -68,24 +68,24 @@ The default scenario involves "SportCo" seeking to build a "Harbour Sport Park" 
 ## Turn Structure
 
 1. Players take turns making proposals or voting on existing proposals
-2. **Proposals** must cover all 5 issues using the format: `[Propose] A1 B2 C3 D1 E4`
-3. **Voting** on current proposals using `[Accept]` or `[Reject]`
-4. Players can include rationale before their bracketed actions
+2. **Proposals** must cover all 5 issues using `Propose A1 B2 C3 D1 E4`
+3. **Voting** uses `Accept` or `Reject`
+4. Players can include rationale before the command line
 5. Game continues until a proposal is accepted or maximum rounds reached
 
 ## Rules
 
 ### Making Proposals
-- Format: `[Propose] A1 B2 C3 D1 E4` (one option for each issue A-E)
+- Format: `Propose A1 B2 C3 D1 E4` (one option for each issue A-E)
 - Must cover all issues with valid options
-- Can include rationale before the bracketed action
+- Put optional rationale before the command, which must start its own line
 - If identical to current proposal, treated as acceptance
 
 ### Voting
-- `[Accept]` to accept the current proposal
-- `[Reject]` to reject the current proposal
+- `Accept` to accept the current proposal
+- `Reject` to reject the current proposal
 - Can only vote when there is an active proposal
-- Can include rationale before the bracketed action
+- Put optional rationale before the command line
 
 ### Voting Rules (Configurable)
 - **Default**: Requires 5 out of 6 players to accept
@@ -95,7 +95,7 @@ The default scenario involves "SportCo" seeking to build a "Harbour Sport Park" 
 ### Invalid Moves
 - Players have 3 invalid moves allowed before automatic default action
 - Invalid moves include incorrect formats, missing keywords, or incomplete proposals
-- Default action is `[Accept]` (configurable)
+- Default action is `Accept` (configurable)
 
 ## Winning Conditions
 
@@ -116,31 +116,31 @@ The game ends when:
 **Making a proposal with rationale:**
 ```
 I believe this proposal balances economic growth with environmental protection.
-[Propose] A2 B2 C3 D2 E3
+Propose A2 B2 C3 D2 E3
 ```
 
 **Accepting a proposal:**
 ```
 This meets our environmental standards and provides fair compensation.
-[Accept]
+Accept
 ```
 
 **Rejecting a proposal:**
 ```
 The ecological impact is too severe for our constituents to accept.
-[Reject]
+Reject
 ```
 
 ### Example Game Flow
 
-1. **SportCo** proposes: `[Propose] A1 B1 C4 D1 E5`
-2. **Environmental League** rejects: `Environmental damage is unacceptable [Reject]`
-3. **Department of Tourism** proposes: `[Propose] A2 B2 C3 D2 E3`
-4. **Mayor** accepts: `This balances all interests [Accept]`
-5. **Local Labour Union** accepts: `Fair employment terms [Accept]`
-6. **Other Cities** accepts: `Adequate compensation [Accept]`
-7. **Environmental League** accepts: `Environmental protections included [Accept]`
-8. **SportCo** accepts: `Workable compromise [Accept]`
+1. **SportCo** proposes: `Propose A1 B1 C4 D1 E5`
+2. **Environmental League** rejects with rationale followed by `Reject` on its own line
+3. **Department of Tourism** proposes: `Propose A2 B2 C3 D2 E3`
+4. **Mayor** submits `Accept`
+5. **Local Labour Union** submits `Accept`
+6. **Other Cities** submits `Accept`
+7. **Environmental League** submits `Accept`
+8. **SportCo** submits `Accept`
 9. Game ends - deal accepted with unanimity bonus for SportCo
 
 ## Quick Start Guide
@@ -200,7 +200,7 @@ env = ta.make(env_id="ScorableGames-v0",
               veto_roles=["p1"],            # Only P1 has veto power
               unanimity_bonus_role="p2",     # P2 gets unanimity bonus
               starting_role="p2",            # P2 starts the game
-              invalid_move_default="[Reject]", # Default to reject
+              invalid_move_default="Reject",   # Default to reject
               error_allowance=5)             # Allow 5 invalid moves
 ```
 

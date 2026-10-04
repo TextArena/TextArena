@@ -4,7 +4,7 @@ def create_board_str(game_state: Dict[str, Any]) -> str:
     current_word = game_state["current_word"]
     required_start = game_state["required_start_letter"]
     required_length = game_state["required_length"]
-    used_words = sorted(list(game_state["used_words"]), key=lambda w: len(w))  # sort by length for visual logic
+    used_words = sorted(game_state["used_words"], key=lambda word: (len(word), word))
 
     max_width = max(len(word) for word in used_words + [current_word])
     border = "+" + "-" * (max_width + 26) + "+"

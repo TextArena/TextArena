@@ -1,15 +1,12 @@
 # Minesweeper Environment Documentation
 
 ## Overview
-**Minesweeper** is a classic single-player puzzle game where the objective is to clear a rectangular board containing hidden mines without detonating any of them. The board is divided into cells, some of which contain mines. Cells adjacent to mines contain numbers indicating the total number of neighboring mines, and these clues help the player avoid mines. The player uses logic and probability to determine which cells are safe to reveal. This environment includes features for revealing cells, placing flags on suspected mine locations, and ensures that the first move is always safe.
+**Minesweeper** is a classic single-player puzzle game where the objective is to reveal every safe cell without selecting a mine. Adjacent numbers indicate how many neighboring mines surround a cell, and the first move is guaranteed to be safe.
 
 ## Action Space
 
-- **Format:** Actions are strings representing either revealing a cell or placing/removing a flag, in the format `[action row column]`, where action is either "reveal" or "flag", and row and column indicate the cell's coordinates.
-- **Examples:**
-  - Reveal the cell at row 3, column 2: `[reveal 3 2]`
-  - Place or remove a flag at row 5, column 6: `[flag 5 6]`
-- **Notes:** Players can include additional text in their replies, but must provide their action in the correct format with square brackets.
+- **Format:** Submit `row column` to reveal a cell.
+- **Example:** `3 2` reveals the cell at row 3, column 2.
 
 ## Observation Space
 
@@ -19,17 +16,12 @@ On reset, the player receives a prompt containing the game instructions and the 
 ```plaintext
 You are Player 0. You are playing the Minesweeper game.
 The objective of the game is to reveal all cells that do not contain mines.
-To make a move, you can either reveal a cell or place a flag on a suspected mine location using one of the following commands:
-- 'reveal': Reveal the contents of a specific cell.
-- 'flag': Place or remove a flag on a specific cell to mark it as a potential mine.
-To submit your move, type the command followed by the row and column in square brackets.
-For example:
-- [reveal 3 2] to reveal the cell in Row 3, Column 2.
-- [flag 5 6] to place or remove a flag on the cell in Row 5, Column 6.
+Reply with the row and column coordinates you want to reveal, in the format 'row col'.
+For example, '3 2' reveals the cell in Row 3, Column 2.
 On your first move, you will reveal an area around the cell you choose to ensure a safe start.
-The current board layout is shown below. Cells that are unrevealed are represented by a dot ('.'), revealed numbers show the count of adjacent mines, and flagged cells are marked with an 'F'.
+The current board layout is shown below. Unrevealed cells are dots, and revealed numbers show the count of adjacent mines.
 Use logic and deduction to avoid revealing cells with mines!
-Be mindful not to choose revealed or flagged cells.
+Do not choose a cell that has already been revealed.
 Here is the current board layout:
 
    0  1  2  3  4  5  6  7
@@ -47,23 +39,11 @@ Here is the current board layout:
 After each move, the player receives an updated view of the board. For example:
 
 ```plaintext
-[Player 0] I'll make my first move to reveal the cell at [reveal 4 4].
+[Player 0] 4 4
 [GAME] Game Board:
    0  1  2  3  4  5  6  7
  0  .  .  .  .  .  .  .  .
  1  .  .  .  .  .  .  .  .
- 2  .  .  .  1  1  1  .  .
- 3  .  .  1  1  0  1  1  .
- 4  .  .  1  0  0  0  1  .
- 5  .  .  1  0  0  0  1  .
- 6  .  .  1  1  1  1  1  .
- 7  .  .  .  .  .  .  .  .
-
-[Player 0] Now I'll flag a potential mine location at [flag 1 1].
-[GAME] Game Board:
-   0  1  2  3  4  5  6  7
- 0  .  .  .  .  .  .  .  .
- 1  .  F  .  .  .  .  .  .
  2  .  .  .  1  1  1  .  .
  3  .  .  1  1  0  1  1  .
  4  .  .  1  0  0  0  1  .
@@ -76,7 +56,7 @@ After each move, the player receives an updated view of the board. For example:
 
 - **Players:** 1 player (single-player game)
 - **Initial Setup:** A rectangular grid with hidden mines is created
-- **Turns:** The player takes turns revealing cells or placing flags
+- **Turns:** The player reveals one cell per turn
 - **Objective:** Reveal all cells that do not contain mines
 - **Maximum Turns:** Configurable, default is 100 turns
 
@@ -91,22 +71,16 @@ After each move, the player receives an updated view of the board. For example:
    - If a cell with no adjacent mines is revealed, all neighboring cells are automatically revealed in a cascade
    - Revealing a cell containing a mine results in immediate game over
 
-3. **Flagging:**
-   - Players can place a flag on a cell to mark it as a suspected mine location
-   - Flagged cells cannot be revealed until the flag is removed
-   - Placing a flag on an already flagged cell removes the flag
+3. **Valid Moves:**
+   - Players can reveal cells within the grid bounds
+   - Players cannot reveal cells that are already revealed
 
-4. **Valid Moves:**
-   - Players can only reveal or flag cells that are within the grid bounds
-   - Players cannot reveal cells that are already revealed or flagged
-   - Players can flag or unflag any unrevealed cell
-
-5. **Winning Conditions:**
-   - **Win:** The player reveals all safe cells (cells without mines) or correctly flags all mines
+4. **Winning Conditions:**
+   - **Win:** The player reveals all safe cells
    - **Loss:** The player reveals a cell containing a mine
 
-6. **Game Termination:**
-   - The game concludes when either all safe cells are revealed, all mines are correctly flagged, a mine is revealed, or the maximum turn limit is reached
+5. **Game Termination:**
+   - The game concludes when all safe cells are revealed or the turn limit is reached
 
 ## Rewards
 

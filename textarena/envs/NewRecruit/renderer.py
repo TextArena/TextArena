@@ -104,11 +104,11 @@ def create_board_str(game_state: Dict[str, Any], player_id: Optional[int] = None
         # Add instructions
         board_str.append("")
         if player_id != proposer_id:
-            board_str.append("You can [Accept] or [Reject] this proposal.")
+            board_str.append("You can reply with 'Accept' or 'Reject' for this proposal.")
     else:
         board_str.append("NO CURRENT PROPOSAL")
         board_str.append("")
-        board_str.append("Write your rationale followed by [Propose] ABCDEFGH")
+        board_str.append("Write your rationale, then put Propose CCAACCCC on the final line.")
         board_str.append("where each letter (A-E) corresponds to a choice for each issue.")
     
     # Add proposal history

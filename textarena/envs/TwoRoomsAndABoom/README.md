@@ -10,15 +10,15 @@
     - Free-form text communication with other players in the same room
     - Role revealing: Say `reveal card` or `show role` to initiate revealing your role
   - **Role Reveal Phase (Revealing Player Only):**
-    - **Select Target:** `[Player 3]` or `[3]` to select which player to reveal to
+    - **Select Target:** `Player 3` or `3` to select which player to reveal to
   - **Leader Selection Phase (Room Leaders Only):**
-    - **Select Hostage:**  `[Player 3]` or `[3]` to select a player ID in the leader's room
+    - **Select Hostage:** `Player 3` or `3` to select a player ID in the leader's room
 
 - **Examples:**
   - Discussion: `I am on the Blue team, and I'm not the President.`
   - Role reveal initiation: `I want to reveal my card` (triggers system prompt)
-  - Role reveal target selection: `[Player 3]` or `[3]` (selects Player 3 to receive your true role)
-  - Leader selection: `[Player 3]` or `[3]` to select Player 3 as a hostage
+  - Role reveal target selection: `Player 3` or `3`
+  - Leader selection: `Player 3` or `3`
 
 - **Notes:** The game automatically handles hostage exchanges and room transitions. Leaders cannot select themselves as hostages.
 
@@ -73,8 +73,8 @@ Player 4: Red
 [GAME] You've chosen to reveal your role.
 Players in your room: Player 0, Player 4, Player 6
 To whom would you like to reveal your role?
-Simply reply in the following format: '[Player X]' or '[X]'
-Valid options: [0], [4], [6]
+Reply with the player number, e.g. 'Player X' or 'X'.
+Valid options: 0, 4, 6
 
 Note: This will be your reveal #1 out of 5 allowed reveals.
 
@@ -92,8 +92,8 @@ Known player roles:
 Player 0: Blue
 Player 4: Red
 
-Simply reply in the following format: '[Player X]' or '[X]'
-Valid options: [0], [4], [6]
+Reply with the player number, e.g. 'Player X' or 'X'.
+Valid options: 0, 4, 6
 
 Strategic reminder: Blue Team wants the President and Bomber in different rooms at the end.
 If you know who the Bomber is, consider your strategy carefully.
@@ -108,7 +108,7 @@ Player 5 moved from Room 1 to Room 0.
 
 ## Gameplay
 
-- **Players:** 6-20 players
+- **Players:** 6-20 players, with `num_players` equal to `2 * cards_per_room`
 - **Initial Setup:** Players are assigned roles and divided into two rooms with a leader for each room
 - **Game Progression:** Multiple rounds of discussion followed by hostage exchanges
 - **Objective:**
@@ -128,7 +128,7 @@ Player 5 moved from Room 1 to Room 0.
    - Players can only communicate with others in the same room
    - Players can reveal their true role to specific players using the reveal mechanism
    - Each player is limited to 5 role reveals per game
-   - Leaders receive additional team-strategic context from teammates in the same room
+   - Ordinary discussion does not expose authoritative role or team metadata
 
 3. **Hostage Exchange:**
    - Each round, leaders select one player from their room to trade
@@ -137,9 +137,9 @@ Player 5 moved from Room 1 to Room 0.
    - If a leader is traded, a new leader is automatically appointed in that room
 
 4. **Room Balance:**
-   - The environment automatically corrects extreme room imbalances
-   - Empty rooms will be repopulated if possible
-   - If both leaders fail to select hostages, the system forces a random trade
+   - Both rooms start with the configured number of players
+   - Each completed exchange swaps one hostage from each room, preserving room sizes
+   - If a leader fails to select a hostage, the system selects an eligible hostage at random
 
 5. **Victory Conditions:**
    - **Red Team Wins:** The Bomber and President are in the same room at the end
@@ -151,7 +151,9 @@ Player 5 moved from Room 1 to Room 0.
 |------------------|:------------------:|:-----------------:|
 | **Red Team Win** | `+1`               | `-1`              |
 | **Blue Team Win**| `+1`               | `-1`              |
-| **Invalid Move** | `-1`               | `0`               |
+
+An invalid action is retried once. A second consecutive invalid action forfeits
+that turn without eliminating the player or changing team rewards.
 
 ## Parameters
 
@@ -160,8 +162,8 @@ Player 5 moved from Room 1 to Room 0.
   - **Impact:** More rounds give players more information but also more opportunities for strategic moves
 
 - `cards_per_room` (`int`, default: `3`):
-  - **Description:** Initial number of cards to use in role assignment
-  - **Impact:** Affects the starting distribution of players
+  - **Description:** Exact number of player cards initially placed in each room; must be between 3 and 10
+  - **Impact:** Reset requires exactly twice this many players
 
 - `discussion_rounds` (`int`, default: `2`):
   - **Description:** Number of discussion turns each player gets per round
@@ -183,11 +185,11 @@ Player 5 moved from Room 1 to Room 0.
 - Communication is strictly limited to players in the same room
 - Role reveals use a system-guided two-step process (initiate, then select target)
 - Role reveals are limited to 5 per player and only work within the same room
-- Room balance is automatically maintained to prevent completely empty rooms
+- Balanced room sizes are preserved by exchanging exactly one hostage each way
 - The environment includes robust error recovery mechanisms
-- Message history is capped at 200 messages per room to manage memory usage
+- Message history is capped at 200 messages per room and replayed only to players who witnessed each message
 - Winning is determined by the final positions of the President and Bomber
-- Player selection requires using the bracketed format (e.g., "[Player 3]" or "[3]")
+- Player selections use `Player 3` or simply `3`.
 
 ## Example Game Flow
 

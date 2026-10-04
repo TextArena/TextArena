@@ -1,6 +1,6 @@
 from enum import Enum
 import re, random
-from typing import Tuple, Dict, Optional, List
+from typing import Any, Dict, Optional, List, Union
 import textarena as ta
 
 class Phase(Enum):
@@ -46,7 +46,7 @@ class Mafia(Role):
             f"Players: {', '.join([f'Player {i}' for i in range(num_players)])}\n\n"
             f"Your teammates are: {', '.join(teammates)}.\n\n"
             f"During DAY phase: Speak freely and vote.\n"
-            f"During NIGHT phase: '[Player X]' to vote and eliminate a villager.\n"
+            f"During NIGHT phase: reply with the player number, e.g. 'Player X' or just 'X', to vote and eliminate a villager.\n"
             f"Win by eliminating villagers until Mafia equal or outnumber them.\n"
         )
 
@@ -60,7 +60,7 @@ class Doctor(Role):
             f"Your role: {self.name}\nTeam: {self.team}\nDescription: {self.description}\n\n"
             f"Players: {', '.join([f'Player {i}' for i in range(num_players)])}\n\n"
             f"During DAY phase: Speak freely and vote.\n"
-            f"During NIGHT phase: '[Player X]' to protect a player.\n"
+            f"During NIGHT phase: reply with the player number, e.g. 'Player X' or just 'X', to protect a player.\n"
             f"Win by identifying and eliminating all Mafia members.\n"
         )
 
@@ -74,7 +74,7 @@ class Detective(Role):
             f"Your role: {self.name}\nTeam: {self.team}\nDescription: {self.description}\n\n"
             f"Players: {', '.join([f'Player {i}' for i in range(num_players)])}\n\n"
             f"During DAY phase: Speak freely and vote.\n"
-            f"During NIGHT phase: '[Player X]' to investigate.\n"
+            f"During NIGHT phase: reply with the player number, e.g. 'Player X' or just 'X', to investigate.\n"
             f"You'll learn immediately if the target is Mafia.\n"
             f"Win by identifying and eliminating all Mafia members.\n"
         )
@@ -83,9 +83,14 @@ class VoteHandler:
     @staticmethod
     def parse(text: str) -> Optional[int]:
         m = SecretMafiaEnv.voting_pattern.search(text)
-        return int(m.group(1)) if m else None
+        if not m:
+            return None
+        try:
+            return int(m.group(1))
+        except ValueError:
+            return None
     @staticmethod
-    def tally(votes: Dict[int, int]) -> Optional[int]:
+    def tally(votes: Dict[int, int], rng=random) -> Optional[int]:
         if not votes: return None
         # Count votes per target
         counts: Dict[int, int] = {}
@@ -93,10 +98,13 @@ class VoteHandler:
             counts[target] = counts.get(target, 0) + 1
         top_score = max(counts.values()) # Highest vote count
         top_players = [pid for pid, c in counts.items() if c == top_score] # All players who received the top score (could be 1 or many)
-        return random.choice(top_players) # Randomly resolve ties
+        return rng.choice(top_players) # Randomly resolve ties
 
-class SecretMafiaEnv(ta.Env):
-    voting_pattern = re.compile(r".*\[(?:player\s*)?(\d+)\].*", re.IGNORECASE)
+class SecretMafiaEnv(ta.GameEnv):
+    min_players = 6
+    max_players = 15
+
+    voting_pattern = re.compile(r"^\s*\[?\s*(?:player\s*)?([0-9]{1,2})\s*\]?\s*$", re.IGNORECASE)
     _ROLE_FACTORY = {
         "Villager":  Villager,
         "Mafia":     Mafia,
@@ -109,83 +117,128 @@ class SecretMafiaEnv(ta.Env):
             mafia_ratio (float): Ratio of Mafia members to total players (default: 0.25)
             discussion_rounds (int): The number of discussion rounds
         """
+        if (
+            isinstance(mafia_ratio, bool)
+            or not isinstance(mafia_ratio, (int, float))
+            or not 0 < mafia_ratio < 1
+        ):
+            raise ValueError(f"mafia_ratio must be between 0 and 1, received {mafia_ratio}")
+        if (
+            isinstance(discussion_rounds, bool)
+            or not isinstance(discussion_rounds, int)
+            or discussion_rounds < 1
+        ):
+            raise ValueError(f"discussion_rounds must be at least 1, received {discussion_rounds}")
         self.mafia_ratio = mafia_ratio
         self.discussion_rounds = discussion_rounds
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        assert 6 <= num_players <= 15, "Player count must be between 5 and 15."
-        self.state = ta.TeamMultiPlayerState(num_players=num_players, seed=seed)
+    def setup(self) -> Dict[str, Any]:
+        num_players = self.state.num_players
         self._assign_roles(num_players)
-        self.phase: Phase = Phase.NIGHT_MAFIA
-        game_state = {
-            "phase": self.phase,
+        for pid, role_name in self.player_roles.items():
+            self.set_role(pid, role_name)  # secret roles, carried in game_info for RL training
+        return {
+            "phase": Phase.NIGHT_MAFIA,
             "day_number": 1,
             "alive_players": list(range(num_players)),
             "player_roles": self.player_roles,
             "num_discussion_rounds": self.discussion_rounds,
             "votes": {},
             "pending_elimination": None,
+            "next_player_ids": [],
         }
-        self.state.reset(game_state=game_state, player_prompt_function=self._prompt, secret_roles=self.player_roles)
-        self._send_phase_prompts() # populate self.next_player_ids
-        self.state.manually_set_current_player_id(self.next_player_ids.pop())
-    
+
+    @property
+    def phase(self) -> Phase:
+        return self.game_state["phase"]
+
+    def on_start(self):
+        self._send_phase_prompts()
+        self.set_current_player(self.game_state["next_player_ids"].pop())
 
     def _assign_roles(self, num_players: int):
         self.player_roles = {}
-        self.roles = {}                              # <- NEW
+        self.roles_by_pid = {}
         num_mafia = max(1, round(num_players * self.mafia_ratio))
-        role_pool = ["Mafia"] * num_mafia + ["Doctor", "Detective"] 
+        if num_mafia > num_players - 2:
+            raise ValueError(
+                f"mafia_ratio={self.mafia_ratio} assigns {num_mafia} Mafia but "
+                "the game must also contain a Doctor and Detective."
+            )
+        if num_mafia >= num_players - num_mafia:
+            raise ValueError(
+                f"mafia_ratio={self.mafia_ratio} assigns {num_mafia} Mafia, "
+                "but Mafia must begin in the minority."
+            )
+        role_pool = ["Mafia"] * num_mafia + ["Doctor", "Detective"]
         role_pool += ["Villager"] * (num_players - len(role_pool))
-        random.shuffle(role_pool)
+        self.rng.shuffle(role_pool)
 
         for pid, r_name in enumerate(role_pool):
             self.player_roles[pid] = r_name
-            self.roles[pid] = self._ROLE_FACTORY[r_name]()
+            self.roles_by_pid[pid] = self._ROLE_FACTORY[r_name]()
 
-    def _prompt(self, player_id: int, game_state: dict) -> str:
-        role_obj = self.roles[player_id]
-        return role_obj.get_prompt(player_id = player_id, player_roles = self.player_roles, num_players = self.state.num_players, num_discussion_rounds = self.discussion_rounds)
+    def prompt(self, player_id: int) -> str:
+        role_obj = self.roles_by_pid[player_id]
+        return role_obj.get_prompt(player_id=player_id, player_roles=self.player_roles, num_players=self.state.num_players, num_discussion_rounds=self.discussion_rounds)
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        pid = self.state.current_player_id
+    def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
+        return None  # who sees an action depends on the phase; echoes are emitted inside apply
+
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         phase_dispatch = {
-            Phase.DAY_DISCUSSION: self._handle_discussion, Phase.DAY_VOTING: self._handle_day_vote, Phase.NIGHT_MAFIA: self._handle_mafia_vote, 
+            Phase.DAY_DISCUSSION: self._handle_discussion, Phase.DAY_VOTING: self._handle_day_vote, Phase.NIGHT_MAFIA: self._handle_mafia_vote,
             Phase.NIGHT_DOCTOR: self._handle_doctor_action, Phase.NIGHT_DETECTIVE: self._handle_detective_action,
         }
-        phase_dispatch[self.phase](pid, action)
-        self._after_player_action() # rotate / advance phase
-        return self.state.step(rotate_player=False)
+        result = phase_dispatch[self.phase](player_id, action)
+        if isinstance(result, ta.Invalid):
+            return result
+        return self._advance(self.set_next_player)
 
-    def _after_player_action(self):
-        if self.state.made_invalid_move: return
-        # If players still queued, just rotate.
-        if self.next_player_ids:
-            self.state.manually_set_current_player_id(self.next_player_ids.pop())
-            return
+    def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
+        # Repeated invalid move: the player is killed off and the game moves on.
+        outcome = self._eliminate_player(player_id, "has been eliminated by making an invalid move.")
+        if outcome is not None:
+            return outcome
+        def assign(pid: int):
+            self.set_next_player(pid)
+        return self._advance(assign)
 
-        # Phase complete ─ evaluate votes / killings, decide next phase, queue players
-        if self.phase == Phase.DAY_VOTING:      self._resolve_day_votes()
-        elif self.phase == Phase.NIGHT_MAFIA:   self._store_mafia_target()
+    def _advance(self, assign) -> Optional[ta.Outcome]:
+        """Rotate to the next queued player, or resolve the phase and start the next one."""
+        gs = self.game_state
+        if gs["next_player_ids"]:
+            assign(gs["next_player_ids"].pop())
+            return None
 
-        # When night sequence ends (Doctor or Detective → Day)
-        if self.phase in (Phase.NIGHT_DOCTOR, Phase.NIGHT_DETECTIVE):
-            next_phase = self._compute_next_phase()
+        # Phase complete - evaluate votes / killings, decide next phase, queue players
+        outcome = None
+        if self.phase == Phase.DAY_VOTING:
+            outcome = self._resolve_day_votes()
+        elif self.phase == Phase.NIGHT_MAFIA:
+            self._store_mafia_target()
+
+        # When night sequence ends (Doctor or Detective -> Day)
+        next_phase = self._compute_next_phase()
+        if self.phase in (Phase.NIGHT_MAFIA, Phase.NIGHT_DOCTOR, Phase.NIGHT_DETECTIVE):
             if next_phase == Phase.DAY_DISCUSSION:
-                self._resolve_night_outcome()
+                outcome = self._resolve_night_outcome()
 
         # Check if game has concluded
-        if self.state.done: return
+        if outcome is not None:
+            return outcome
 
         # Advance to next phase
-        self.phase = self._compute_next_phase()
-        self.state.game_state["phase"] = self.phase
+        if self.phase == Phase.DAY_VOTING:
+            gs["day_number"] += 1
+        gs["phase"] = next_phase
         self._send_phase_prompts()
-        self.state.manually_set_current_player_id(self.next_player_ids.pop())
+        assign(gs["next_player_ids"].pop())
+        return None
 
     def _compute_next_phase(self) -> Phase:
-        doctor_alive     = any(self.player_roles[p] == "Doctor"    for p in self.state.game_state["alive_players"])
-        detective_alive  = any(self.player_roles[p] == "Detective" for p in self.state.game_state["alive_players"])
+        doctor_alive     = any(self.player_roles[p] == "Doctor"    for p in self.game_state["alive_players"])
+        detective_alive  = any(self.player_roles[p] == "Detective" for p in self.game_state["alive_players"])
         match self.phase:
             case Phase.NIGHT_MAFIA:     return Phase.NIGHT_DOCTOR if doctor_alive else (Phase.NIGHT_DETECTIVE if detective_alive else Phase.DAY_DISCUSSION)
             case Phase.NIGHT_DOCTOR:    return Phase.NIGHT_DETECTIVE if detective_alive else Phase.DAY_DISCUSSION
@@ -193,138 +246,160 @@ class SecretMafiaEnv(ta.Env):
             case Phase.DAY_DISCUSSION:  return Phase.DAY_VOTING
             case Phase.DAY_VOTING:      return Phase.NIGHT_MAFIA
             case _:                     raise RuntimeError("Unknown phase")
-                
 
     def _send_phase_prompts(self):
-        gs = self.state.game_state
+        gs = self.game_state
         alive = gs["alive_players"]
-        self.next_player_ids: List[int] = []
+        next_player_ids: List[int] = []
 
         if self.phase == Phase.NIGHT_MAFIA:
             mafia = [p for p in alive if self.player_roles[p] == "Mafia"]
             targets = [p for p in alive if p not in mafia]
             for p in mafia:
-                self.state.add_observation(to_id=p, message=f"Night has fallen. Mafia, agree on a victim.\nValid targets: {', '.join(f'[{t}]' for t in targets)}", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.next_player_ids = random.sample(mafia, k=len(mafia))
+                self.message(p, f"Night has fallen. Mafia, agree on a victim by replying with their player number.\nValid targets: {', '.join(str(t) for t in targets)}", ta.ObservationType.GAME_MESSAGE)
+            next_player_ids = self.rng.sample(mafia, k=len(mafia))
 
         elif self.phase == Phase.NIGHT_DOCTOR:
             doc = next(p for p in alive if self.player_roles[p] == "Doctor")
-            opts = ", ".join(f"[{t}]" for t in alive if t != doc)
-            self.state.add_observation(to_id=doc, message=f"Night phase - choose one player to protect: {opts}", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.next_player_ids = [doc]
+            opts = ", ".join(str(t) for t in alive if t != doc)
+            self.message(doc, f"Night phase - reply with the player number of the player to protect: {opts}", ta.ObservationType.GAME_MESSAGE)
+            next_player_ids = [doc]
 
         elif self.phase == Phase.NIGHT_DETECTIVE:
             det = next(p for p in alive if self.player_roles[p] == "Detective")
-            opts = ", ".join(f"[{t}]" for t in alive if t != det)
-            self.state.add_observation(to_id=det, message=f"Night phase - choose one player to investigate: {opts}", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.next_player_ids = [det]
+            opts = ", ".join(str(t) for t in alive if t != det)
+            self.message(det, f"Night phase - reply with the player number of the player to investigate: {opts}", ta.ObservationType.GAME_MESSAGE)
+            next_player_ids = [det]
 
         elif self.phase == Phase.DAY_DISCUSSION:
             rounds = self.discussion_rounds
-            self.state.add_observation(to_id=-1, message=f"Day breaks. Discuss for {rounds} rounds, then a vote will follow.", observation_type=ta.ObservationType.GAME_MESSAGE)
-            players = random.sample(alive, k=len(alive))
-            self.next_player_ids = players * rounds
+            self.broadcast(f"Day breaks. Discuss for {rounds} rounds, then a vote will follow.", ta.ObservationType.GAME_MESSAGE)
+            players = self.rng.sample(alive, k=len(alive))
+            next_player_ids = players * rounds
 
         elif self.phase == Phase.DAY_VOTING:
-            opts = ", ".join(f"[{p}]" for p in alive)
-            self.state.add_observation(to_id=-1, message=f"Voting phase - submit one vote in format [X]. Valid: {opts}", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self.next_player_ids = random.sample(alive, k=len(alive))
+            opts = ", ".join(str(p) for p in alive)
+            self.broadcast(f"Voting phase - submit one vote by replying with the player number, e.g. '3'. Valid: {opts}", ta.ObservationType.GAME_MESSAGE)
+            next_player_ids = self.rng.sample(alive, k=len(alive))
 
-    def _handle_discussion(self, pid: int, action: str):    self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-    def _handle_day_vote(self, pid: int, action: str):      self._record_vote(pid, action, broadcast_to_all=True)
-    def _handle_mafia_vote(self, pid: int, action: str):    self._record_vote(pid, action, broadcast_to_mafia_only=True)
-    def _handle_doctor_action(self, pid: int, action: str):
+        gs["next_player_ids"] = next_player_ids
+
+    def _echo_action(self, from_pid: int, action: str, to_id: int = -1):
+        """Echo a raw player action, stripping role tags exactly like the legacy observation logging."""
+        for role_tag in self.state.role_mapping.values():
+            action = action.replace(f"[{role_tag}]", "")
+        self.state.add_event(from_pid, action, ta.ObservationType.PLAYER_ACTION, to_id=to_id)
+
+    def _handle_discussion(self, pid: int, action: str) -> None:
+        self._echo_action(pid, action)  # discussions are public
+        return None
+
+    def _handle_day_vote(self, pid: int, action: str):
+        return self._record_vote(pid, action, broadcast_to_all=True)
+
+    def _handle_mafia_vote(self, pid: int, action: str):
+        valid_targets = [
+            target
+            for target in self.game_state["alive_players"]
+            if self.player_roles[target] != "Mafia"
+        ]
+        return self._record_vote(
+            pid,
+            action,
+            broadcast_to_mafia_only=True,
+            valid_targets=valid_targets,
+        )
+
+    def _handle_doctor_action(self, pid: int, action: str) -> Optional[ta.Invalid]:
         target = VoteHandler.parse(action)
-        if target is None or target not in self.state.game_state["alive_players"]:
-            fatal = self._mark_invalid(pid, "Invalid protection target.")
-            if not fatal: 
-                return
-            else: # player was eliminated by invalid move
-                self.state.made_invalid_move = False  # such that we can rotate off the player 
-                return
+        if target is None or target == pid or target not in self.game_state["alive_players"]:
+            return self.invalid("Invalid protection target.")
 
         # save target
-        if target == self.state.game_state["pending_elimination"]:
-            self.state.game_state["pending_elimination"] = None
-        self.state.add_observation(from_id=pid, to_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+        if target == self.game_state["pending_elimination"]:
+            self.game_state["pending_elimination"] = None
+        self._echo_action(pid, action, to_id=pid)  # only the doctor sees their own action
+        return None
 
-    def _handle_detective_action(self, pid: int, action: str):
+    def _handle_detective_action(self, pid: int, action: str) -> Optional[ta.Invalid]:
         target = VoteHandler.parse(action)
-        if target is None or target not in self.state.game_state["alive_players"]:
-            fatal = self._mark_invalid(pid, "Invalid investigation target.")
-            if not fatal: return
-            else:# player was eliminated by invalid move
-                self.state.made_invalid_move = False  # such that we can rotate off the player 
-                return
+        if target is None or target == pid or target not in self.game_state["alive_players"]:
+            return self.invalid("Invalid investigation target.")
         is_mafia = self.player_roles[target] == "Mafia"
         result = f"Player {target} IS{' ' if is_mafia else ' NOT '}a Mafia member."
-        self.state.add_observation(to_id=pid, message=result, observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.message(pid, result, ta.ObservationType.GAME_MESSAGE)  # investigation result stays private
+        return None
 
-    def _record_vote(self, pid: int, action: str, *, broadcast_to_all=False, broadcast_to_mafia_only=False):
+    def _record_vote(
+        self,
+        pid: int,
+        action: str,
+        *,
+        broadcast_to_all: bool = False,
+        broadcast_to_mafia_only: bool = False,
+        valid_targets: Optional[List[int]] = None,
+    ) -> Optional[ta.Invalid]:
         target = VoteHandler.parse(action)
-        if target is None or target not in self.state.game_state["alive_players"]:
-            fatal = self._mark_invalid(pid, "Vote not in valid format or invalid target.")
-            if not fatal: return
-            else: # player was eliminated by invalid move
-                self.state.made_invalid_move = False  # such that we can rotate off the player 
-                return
+        valid_targets = self.game_state["alive_players"] if valid_targets is None else valid_targets
+        if target is None or target not in valid_targets:
+            return self.invalid("Vote not in valid format or invalid target.")
 
-
-        self.state.game_state["votes"][pid] = target
+        self.game_state["votes"][pid] = target
 
         if broadcast_to_all:
-            self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+            self._echo_action(pid, action)
         elif broadcast_to_mafia_only:
-            mafia = [p for p in self.state.game_state["alive_players"] if self.player_roles[p] == "Mafia"]
+            mafia = [p for p in self.game_state["alive_players"] if self.player_roles[p] == "Mafia"]
             for m in mafia:
-                self.state.add_observation(from_id=pid, to_id=m, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+                self._echo_action(pid, action, to_id=m)  # night votes are visible to the mafia only
+        return None
 
-    def _mark_invalid(self, pid: int, reason: str):
-        fatal = self.state.set_invalid_move(reason)
-        if fatal: self._eliminate_player(self.state.current_player_id, "has been eliminated by making an invalid move.")
-        return fatal 
-    
-        # if self.state.set_invalid_move(reason):
-        #     # repeated invalid move by player, kill'em
-        #     self._eliminate_player(self.state.current_player_id, "has been eliminated by making an invalid move.")
-
-            # # TODO kill player off
-            # others = [p for p in range(self.state.num_players) if p != pid]
-            # self.state.set_winners(player_ids=others, reason=f"Player {pid} made an invalid move.")
-
-    def _resolve_day_votes(self):
-        target = VoteHandler.tally(self.state.game_state["votes"])
-        self.state.game_state["votes"].clear()
+    def _resolve_day_votes(self) -> Optional[ta.Outcome]:
+        target = VoteHandler.tally(self.game_state["votes"], rng=self.rng)
+        self.game_state["votes"].clear()
         if target is None:
-            self.state.add_observation(message="No consensus - nobody was eliminated.", observation_type=ta.ObservationType.GAME_MESSAGE)
-            return
-        self._eliminate_player(target, "was eliminated by vote")
+            self.broadcast("No consensus - nobody was eliminated.", ta.ObservationType.GAME_MESSAGE)
+            return None
+        return self._eliminate_player(target, "was eliminated by vote")
 
     def _store_mafia_target(self):
-        self.state.game_state["pending_elimination"] = VoteHandler.tally(self.state.game_state["votes"])
-        self.state.game_state["votes"].clear()
+        self.game_state["pending_elimination"] = VoteHandler.tally(self.game_state["votes"], rng=self.rng)
+        self.game_state["votes"].clear()
 
-    def _resolve_night_outcome(self):
-        tgt = self.state.game_state["pending_elimination"]
-        self.state.game_state["pending_elimination"] = None
+    def _resolve_night_outcome(self) -> Optional[ta.Outcome]:
+        tgt = self.game_state["pending_elimination"]
+        self.game_state["pending_elimination"] = None
         if tgt is None:
-            self.state.add_observation(message="No one was killed tonight.", observation_type=ta.ObservationType.GAME_MESSAGE)
-        else:
-            self._eliminate_player(tgt, "was killed during the night")
+            self.broadcast("No one was killed tonight.", ta.ObservationType.GAME_MESSAGE)
+            return None
+        return self._eliminate_player(tgt, "was killed during the night")
 
-    def _eliminate_player(self, pid: int, reason: str):
-        if pid in self.state.game_state["alive_players"]:
-            self.state.game_state["alive_players"].remove(pid)
-        self.state.add_observation(message=f"Player {pid} {reason}.", observation_type=ta.ObservationType.GAME_MESSAGE)
-        self._check_win()
+    def _eliminate_player(self, pid: int, reason: str) -> Optional[ta.Outcome]:
+        if pid in self.game_state["alive_players"]:
+            self.game_state["alive_players"].remove(pid)
+        self.eliminate(pid)
+        self.game_state["next_player_ids"] = [
+            queued_pid for queued_pid in self.game_state["next_player_ids"] if queued_pid != pid
+        ]
+        self.game_state["votes"].pop(pid, None)
+        self.game_state["votes"] = {
+            voter: target
+            for voter, target in self.game_state["votes"].items()
+            if target != pid
+        }
+        if self.game_state["pending_elimination"] == pid:
+            self.game_state["pending_elimination"] = None
+        self.broadcast(f"Player {pid} {reason}.", ta.ObservationType.GAME_MESSAGE)
+        return self._check_win()
 
-    def _check_win(self):
-        alive = self.state.game_state["alive_players"]
+    def _check_win(self) -> Optional[ta.Outcome]:
+        alive = self.game_state["alive_players"]
         mafia_alive = [p for p in alive if self.player_roles[p] == "Mafia"]
 
         if not mafia_alive:
             villagers = [p for p in range(self.state.num_players) if self.player_roles[p] != "Mafia"]
-            self.state.set_winners(player_ids=villagers, reason="All Mafia were eliminated. Village wins!")
+            return self.winner(villagers, reason="All Mafia were eliminated. Village wins!")
         elif len(mafia_alive) >= len(alive) / 2:
             mafia = [p for p in range(self.state.num_players) if self.player_roles[p] == "Mafia"]
-            self.state.set_winners(player_ids=mafia, reason="Mafia reached parity with villagers. Mafia wins!")
+            return self.winner(mafia, reason="Mafia reached parity with villagers. Mafia wins!")
+        return None

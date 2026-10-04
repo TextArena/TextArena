@@ -1,55 +1,96 @@
-
-import re, numpy
-from typing import Optional, Tuple, Dict, Any
+import re
+from typing import Any, Dict, Optional, Union
 
 import textarena as ta
 from textarena.envs.SpellingBee.renderer import create_board_str
 from textarena.envs.utils.word_lists import EnglishDictionary
 
-class SpellingBeeEnv(ta.Env):
-    def __init__(self, num_letters: int):
+
+class SpellingBeeEnv(ta.GameEnv):
+    min_players = 2
+    max_players = 2
+    snapshot_excluded_attributes = ("dictionary",)
+    max_word_chars = 64
+    max_action_chars = 128
+    _ACTION_RE = re.compile(
+        rf"^\s*(?P<legacy>\[)?\s*(?P<word>[A-Za-z]{{1,{max_word_chars}}})\s*(?(legacy)\])\s*$"
+    )
+
+    def __init__(self, num_letters: int, dictionary=None):
         """
         Args:
             num_letters (int): Number of unique allowed letters.
         """
-        super().__init__()
+        if isinstance(num_letters, bool) or not isinstance(num_letters, int) or not 1 <= num_letters <= 26:
+            raise ValueError("num_letters must be an integer from 1 through 26.")
         self.num_letters = num_letters
-        self.dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=True)
+        if dictionary is None:
+            try:
+                dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=True)
+            except Exception as exc:
+                raise RuntimeError(
+                    "Unable to initialize the SpellingBee dictionary. Ensure the NLTK words "
+                    "corpus is installed, or inject a dictionary with is_english_word()."
+                ) from exc
+        if not callable(getattr(dictionary, "is_english_word", None)):
+            raise TypeError("dictionary must provide an is_english_word(word) method.")
+        self.dictionary = dictionary
 
-    def get_board_str(self): return create_board_str(game_state=self.state.game_state)
+    def get_board_str(self): return create_board_str(game_state=self.game_state)
 
-    def reset(self, num_players: int = 2, seed: Optional[int]=None):
-        self.state = ta.TwoPlayerState(num_players=num_players, seed=seed)
-        self.state.reset(game_state={"allowed_letters": self._generate_allowed_letters(), "word_history": []}, player_prompt_function=self._prompt)
+    def render(self, player_id: int) -> str:
+        return self.get_board_str()
 
-    def _prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
+    def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
+        if not isinstance(action, str) or len(action) > self.max_action_chars:
+            return None
+        return super().action_echo_target(player_id, action)
+
+    def setup(self) -> Dict[str, Any]:
+        return {"allowed_letters": self._generate_allowed_letters(), "word_history": []}
+
+    def prompt(self, player_id: int) -> str:
         return (
-            f"You are Player {player_id} in the Spelling Bee Game.\nAllowed Letters: {''.join(sorted(game_state['allowed_letters']))}\n"
+            f"You are Player {player_id} in the Spelling Bee Game.\nAllowed Letters: {''.join(sorted(self.game_state['allowed_letters']))}\n"
             "Each word must be at least as long as the previous word.\nRepeated words are not allowed.\n"
-            "Wrap your word in square brackets, e.g., '[example]'.\n"
+            "Reply with exactly one word, e.g., 'example'.\n"
         )
 
     def _generate_allowed_letters(self) -> set:
-        assert self.num_letters <= 26, "num_letters cannot exceed 26." 
         letter_frequencies = { # Frequency of letters in the English language (rough estimates)
-            'a': 8.17, 'b': 1.49, 'c': 2.78, 'd': 4.25, 'e': 12.70, 'f': 2.23, 'g': 2.02, 'h': 6.09, 'i': 7.00, 'j': 0.15, 'k': 0.77, 'l': 4.03, 'm': 2.41, 
+            'a': 8.17, 'b': 1.49, 'c': 2.78, 'd': 4.25, 'e': 12.70, 'f': 2.23, 'g': 2.02, 'h': 6.09, 'i': 7.00, 'j': 0.15, 'k': 0.77, 'l': 4.03, 'm': 2.41,
             'n': 6.75, 'o': 7.51, 'p': 1.93, 'q': 0.10, 'r': 5.99, 's': 6.33, 't': 9.06, 'u': 2.76, 'v': 0.98, 'w': 2.36, 'x': 0.15, 'y': 1.97, 'z': 0.07
         }
-        probs = [w / sum(list(letter_frequencies.values())) for w in list(letter_frequencies.values())] # Convert weights to probabilities that sum to 1.
-        return set(numpy.random.choice(list(letter_frequencies.keys()), size=self.num_letters, replace=False, p=probs))
+        # Weighted sampling without replacement using the env RNG (was numpy.random.choice)
+        letters = list(letter_frequencies.keys())
+        weights = list(letter_frequencies.values())
+        chosen = set()
+        while len(chosen) < self.num_letters:
+            pick = self.rng.choices(letters, weights=weights, k=1)[0]
+            idx = letters.index(pick)
+            letters.pop(idx); weights.pop(idx)
+            chosen.add(pick)
+        return chosen
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        match = re.search(r"\[(\w+)\]", action.strip().lower()) # extract provided word
-        reason = None
-        if match:
-            word = match.group(1)
-            # check if the word is longer/equal than the last word, and not a repeated word
-            if len(self.state.game_state["word_history"])!=0 and len(word) < len(self.state.game_state["word_history"][-1]): reason="The submitted word is shorter than the previous word."
-            elif word in self.state.game_state["word_history"]: reason="The submitted word has been submitted before."
-            elif not (self.dictionary.is_english_word(word)): reason="The submitted word is not a valid english word."
-            elif not set(word).issubset(self.state.game_state["allowed_letters"]): reason="The submitted word contains illegal characters."
-            else: self.state.game_state["word_history"].append(word); self.state.add_observation(message=f"Player {self.state.current_player_id} submitted the word: {word}", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-        else: reason="The submitted word does not follow the proper format. Please make sure to use squared brackets."
-        if reason: self.state.set_invalid_move(reason=reason)
-        return self.state.step()
+    def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        if not isinstance(move, str):
+            return self.invalid("Submit exactly one word.")
+        if len(move) > self.max_action_chars:
+            return self.invalid(f"Actions are limited to {self.max_action_chars} characters.")
+        match = self._ACTION_RE.fullmatch(move)
+        if match is None:
+            return self.invalid(f"Submit one word of at most {self.max_word_chars} letters.")
+        word = match.group("word").lower()
+        gs = self.game_state
+        # check if the word is longer/equal than the last word, and not a repeated word
+        if len(gs["word_history"]) != 0 and len(word) < len(gs["word_history"][-1]): return self.invalid("The submitted word is shorter than the previous word.")
+        if word in gs["word_history"]: return self.invalid("The submitted word has been submitted before.")
+        if not set(word).issubset(gs["allowed_letters"]): return self.invalid("The submitted word contains illegal characters.")
+        try:
+            is_english_word = bool(self.dictionary.is_english_word(word))
+        except Exception:
+            return self.retryable("The dictionary could not validate the word.")
+        if not is_english_word: return self.invalid("The submitted word is not a valid English word.")
+        gs["word_history"].append(word)
+        self.broadcast(f"Player {player_id} submitted the word: {word}", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        return None

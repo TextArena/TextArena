@@ -50,12 +50,11 @@ On your turn, you must:
 ## Usage
 
 ### Action Format
-Actions should be in the format: `[worker_id source dest build]`
-where worker_id is N1/N2 for Navy, W1/W2 for White, or G1/G2 for Grey.
+Actions use the single-token format `worker_id source dest build`, where worker_id is N1/N2 for Navy, W1/W2 for White, or G1/G2 for Grey.
 
 Example:
-- `[N1C2C3B3]` - Move Navy worker 1 from C2 to C3 and build at B3
-- `[W2D3E3E4]` - Move White worker 2 from D3 to E3 and build at E4
+- `N1C2C3B2` - Move Navy worker 1 from C2 to C3 and build at B2
+- `W1D3E3E4` - Move White worker 1 from D3 to E3 and build at E4
 
 ### Board Representation
 ```

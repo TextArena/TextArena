@@ -9,9 +9,9 @@ The players engage in a negotiation between a buyer and seller of a used car. A 
 ## Action Space
 
 - **Format:** Actions are strings of the following format:
-  - **Offer:** `[Offer: price]` Propose a price to buy or sell the car for.
-  - **Discuss:** `[Discuss: message]` Make an argument or statement
-  - **Accept/Reject Offer:** `[Accept]` or `[Reject]`
+  - **Offer:** `Offer: price` Propose a price to buy or sell the car for.
+  - **Discuss:** `Discuss: message` Make an argument or statement.
+  - **Accept/Reject Offer:** `Accept` or `Reject`.
 
 ## Observation Space
 
@@ -56,24 +56,24 @@ Total                   $7,038          $8.500          $9,699
 
 
 Available actions:
-- [Offer: <PRICE>] - Some price for which you offer to buy the car
-- [Accept] - In case of a pending offer by the seller, accept the offer and end the negotiation
-- [Reject] - In case of a pending offer by the seller, reject the offer.
-- [Discuss: <MESSAGE>] - Make a statement or argument
+- Offer: <PRICE> - Some price for which you offer to buy the car
+- Accept - In case of a pending offer by the seller, accept the offer and end the negotiation
+- Reject - In case of a pending offer by the seller, reject the offer.
+- Discuss: <MESSAGE> - Make a statement or argument
 
 Guidelines:
 - Do not use coercion, lie, or misrepresent any facts presented to you in order to accomplish your goals in the negotiation
-- The game ends when a player accepts an offer or the maximum number of rounds is reached.
+- The game ends when a player accepts an offer or the maximum number of negotiation turns is reached.
 ```
 
 **Step Observations**
 During gameplay, players receive various observations based on actions taken. For example:
 
 ```plaintext
-[Player 0] Your action: [Propose: $8000]
+[Player 0] Your action: Offer: $8000
 [GAME] The buyer proposed a price of $8000.
 [GAME] The seller rejected the offer.
-[GAME] The seller says: : I want more than $9,000!]
+[GAME] The seller says: I want more than $9,000!
 ```
 
 ## Variants

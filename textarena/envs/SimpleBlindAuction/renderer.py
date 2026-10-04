@@ -1,4 +1,7 @@
-def create_board_str(game_state: dict) -> str:
+from typing import Optional
+
+
+def create_board_str(game_state: dict, viewer_id: Optional[int] = None, reveal_all: bool = False) -> str:
     lines = []
     lines.append(f"╭── SIMPLE BLIND AUCTION ───── Phase: {game_state.get('phase', '').capitalize():<10} | Round: {game_state.get('round', 0)} ──────────────────────╮")
     lines.append("│ Item │ Item Name                                                     │ Base Value │")
@@ -10,7 +13,10 @@ def create_board_str(game_state: dict) -> str:
     lines.append("│ Player │ " + f"{header_str:<72}" + "│")
     lines.append("├────────┼─────────────────────────────────────────────────────────────────────────┤")
     for pid in [0, 1]:
-        value_str = " ".join(f"{game_state.get('player_item_values', {})[pid][i]:<4}" for i in range(len(game_state.get("item_names", []))))
+        if reveal_all or pid == viewer_id:
+            value_str = " ".join(f"{game_state.get('player_item_values', {})[pid][i]:<4}" for i in range(len(game_state.get("item_names", []))))
+        else:
+            value_str = "(private)"
         lines.append(f"│   {pid:<4} │ {value_str:<72}│")
     lines.append("└──────────────────────────────────────────────────────────────────────────────────┘")
     lines.append("┌─ PLAYER CAPITAL ────────────┐")
@@ -24,8 +30,11 @@ def create_board_str(game_state: dict) -> str:
         lines.append("│ Player │ " + f"{header_str:<42}" + "│")
         lines.append("├────────┼───────────────────────────────────────────┤")
         for pid in [0, 1]:
-            bids = game_state.get("player_bids", {}).get(pid, {})
-            bid_str = " ".join(f"{bids.get(i, 0):<4}" for i in range(len(game_state.get("item_names", []))))
+            if reveal_all or pid == viewer_id:
+                bids = game_state.get("player_bids", {}).get(pid, {})
+                bid_str = " ".join(f"{bids.get(i, 0):<4}" for i in range(len(game_state.get("item_names", []))))
+            else:
+                bid_str = "(sealed)"
             lines.append(f"│   {pid:<4} │ {bid_str:<42}│")
         lines.append("└────────────────────────────────────────────────────┘")
     return "\n".join(lines)

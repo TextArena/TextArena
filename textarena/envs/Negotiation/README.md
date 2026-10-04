@@ -5,20 +5,17 @@
 
 ## Action Space
 
-- **Format:** Actions are strings that can include multiple commands in a single turn, each in its own format:
-  - **Broadcast:** `[Broadcast: message]` or `[Broadcast message]` or `[Broadcast] message`
-  - **Private Message:** `[Whisper to X: message]` where X is a player ID
-  - **Trade Offer:** `[Offer to X: A B -> C D]` where X is a player ID, and A B -> C D represents resources offered and requested
-  - **Accept/Deny Offer:** `[Accept #X]` or `[Deny #X]` where X is an offer ID
+- **Format:** Submit one bare command:
+  - **Broadcast:** `Broadcast: message`
+  - **Private Message:** `Whisper to X: message` where X is a player ID
+  - **Trade Offer:** `Offer to X: A B -> C D` where X is a player ID, and A B -> C D represents resources offered and requested
+  - **Accept/Deny Offer:** `Accept #X` or `Deny #X` where X is an offer ID
 
 - **Examples:**
-  - Send a public message: `[Broadcast: I have excess Wheat to trade]`
-  - Send a private message: `[Whisper to 2: Would you trade your Wood for my Wheat?]`
-  - Make a trade offer: `[Offer to 3: 2 Wheat, 1 Ore -> 3 Wood]`
-  - Accept a pending offer: `[Accept #5]`
-  - Combine multiple actions: `[Broadcast: Looking for Wood] [Offer to 1: 2 Wheat -> 1 Wood]`
-
-- **Notes:** Players can include multiple commands in a single response, allowing for complex strategic interactions in a single turn.
+  - Send a public message: `Broadcast: I have excess Wheat to trade`
+  - Send a private message: `Whisper to 2: Would you trade your Wood for my Wheat?`
+  - Make a trade offer: `Offer to 3: 2 Wheat, 1 Ore -> 3 Wood`
+  - Accept a pending offer: `Accept #5`
 
 ## Observation Space
 
@@ -38,11 +35,10 @@ You can broadcast messages, privately message someone, or make trade offers.
 You can also accept or deny any offers you received previously.
 Your personal valuations are shown above; your goal is to maximize your total resource value.
 Available actions:
-  '[Broadcast: Some message]' - Send a message to all players
-  '[Whisper to X: Some message]' - Send a private message to a specific player
-  '[Offer to X: 2 Wheat -> 3 Wood]' - Make a trade offer to a specific player
-  '[Accept <x>]' or '[Deny <x>]' - Accept or Deny a trade offer
-You may combine multiple tokens in a single turn if you like.
+  'Broadcast: Some message' - Send a message to all players
+  'Whisper to X: Some message' - Send a private message to a specific player
+  'Offer to X: 2 Wheat -> 3 Wood' - Make a trade offer to a specific player
+  'Accept #X' or 'Deny #X' - Accept or deny a trade offer
 Game ends after 12 turns.
 ```
 
@@ -50,15 +46,15 @@ Game ends after 12 turns.
 During gameplay, players receive various observations based on actions taken. For example:
 
 ```plaintext
-[Player 1] [Broadcast: I have excess Wheat and need Wood. Anyone interested in trading?]
+[Player 1] Broadcast: I have excess Wheat and need Wood. Anyone interested in trading?
 [GAME] (Broadcast) Player 1 says: I have excess Wheat and need Wood. Anyone interested in trading?
-[Player 2] [Whisper to 1: I can trade 3 Wood for 4 Wheat]
+[Player 2] Whisper to 1: I can trade 3 Wood for 4 Wheat
 [GAME] (Private) Player 2 says: I can trade 3 Wood for 4 Wheat
-[Player 1] [Offer to 2: 4 Wheat -> 3 Wood]
+[Player 1] Offer to 2: 4 Wheat -> 3 Wood
 [GAME] Offer #1 created: Player 1 -> Player 2.
 [GAME] You have a new offer [ID #1] from Player 1: 4 Wheat -> 3 Wood
-You can [accept #1] or [deny #1] it.
-[Player 2] [Accept #1]
+You can accept #1 or deny #1.
+[Player 2] Accept #1
 [GAME] Player 2 ACCEPTED Offer #1 from Player 1: 4 Wheat -> 3 Wood
 ```
 

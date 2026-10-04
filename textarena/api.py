@@ -1,3 +1,9 @@
+"""
+TODO - completely re-write this. Maybe set up a new local server that runs well and has good capacity limits so if there is too much traffic you just can't queue
+
+"""
+
+
 import json, logging
 import ssl
 import asyncio
@@ -40,7 +46,7 @@ NAME_TO_ID_DICT = {
 }
 
 def strip_env_variant(env_id: str) -> str:
-    for suffix in ["-train", "-raw"]:
+    for suffix in ["-mdp"]:
         if env_id.endswith(suffix):
             return env_id[: -len(suffix)]
     return env_id
@@ -1224,9 +1230,9 @@ def make_mgc_online(
 
     # Ensure env_ids is a list
     if track == "Social Detection":
-        env_ids = ["SecretMafia-v0-train"]
+        env_ids = ["SecretMafia-v0-mdp"]
     elif track == "Generalization":
-        env_ids = ["Codenames-v0-train", "ColonelBlotto-v0-train", "ThreePlayerIPD-v0-train"]
+        env_ids = ["Codenames-v0-mdp", "ColonelBlotto-v0-mdp", "ThreePlayerIPD-v0-mdp"]
     else:
         raise ValueError(f"Track '{track}' not recognized for Mind Games Challenge. Use 'Social Detection' or 'Generalization'.")
 

@@ -5,10 +5,10 @@
 Word Ladder is a single-player puzzle game where the player aims to transform a starting word into a target word by changing one letter at a time. Each step must yield a valid word that differs by exactly one letter from the previous word, forming a chain from the start word to the target. The environment provides both a standard and a hardcore mode, impacting the word list difficulty. Players are guided by a prompt detailing the rules and gameplay, and their move history is displayed to track progress.
 
 ## Action Space
-- **Format**: Actions are strings in the format [word], where:
+- **Format**: Submit the next word itself.
 - **Examples**:
-    - To say that the next word after "sain" is "main": [main]
-- **Notes**: Additional text may accompany the action, but it must contain the correct format for the action to be processed. Incorrectly formatted actions will be marked as invalid.
+    - To say that the next word after "sain" is "main": `main`
+- **Notes**: Submit one word at a time.
 
 ## Observation Space
 **Reset Observation:**
@@ -18,7 +18,7 @@ On reset, the observation provides the initial prompt and the starting words and
 The objective of the game is to convert the start word to the target word by changing one letter at a time.
 The start word is: man
 The target word is: put
-You may only submit one word at a time. To submit your word, you must wrap it in square brackets, e.g. [word].
+Submit one word at a time, e.g. `word`.
 As you play, the history of your choices will be appended below. Use the information to win the game.
 ```
 
@@ -27,7 +27,7 @@ After each step, the environment returns the action and the updated Word Ladder 
 ```plaintext
 [Player 0] To form a word ladder from "man" to "put," I'll change one letter at a time, ensuring each intermediate step is still a valid word. Here's the first word in the sequence:
 
-[pan]
+pan
 [GAME] You've selected a valid word.
 ('Word Ladder History: man -> pan. Target Word: put\n',)
 ```
@@ -46,7 +46,7 @@ By default, the environment returns observations in the following format:
 ## Gameplay
 **Word Length:** The length of the words is customizable, with a default setting of four-letter words. Both the starting and target words are of this length, with other words in the chain matching this requirement.
 
-**Turns:** The player enters words by typing them in the format [word], where each word differs from the previous one by exactly one letter. Players continue to submit words in this format until they reach the target word or exhaust their turns. The game defaults to a maximum of 10 turns.
+**Turns:** The player submits one word per turn. Each word must differ from the previous one by exactly one letter. Play continues until the target word is reached or the turn limit expires.
 
 **Word Graph:** All words of the specified length are represented as nodes in a graph, with edges connecting words that differ by one letter. The start and target words are selected to ensure a valid path exists between them.
 

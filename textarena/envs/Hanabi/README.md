@@ -12,12 +12,12 @@
   - The Hanabi deck contains cards in 5 suits, (white, yellow, green, blue, and red): three 1s, two each of 2s, 3s, and 4s, and one 5.
 - **Action types:**
   - **Play a card**: Players can play a card, taking it from their hand and attempting to add it to the cards that have already been played. The play is successful if it is a 1 of a suit that has not been played, or a number that is next in line to a suit that has already been played. If played successfully, the card is added to the sequence of cards that have already been played. If a card is played unsuccessfully, a fuse token is consumed and the misplayed card is discarded. Regardless of the outcome of the play, the player draws a new card (if there are any left).   
-    - Example: `[Play] x`, plays the card at index `x` in the player's hand. 
-  - **Give information**: Players can give information about the other player's cards. This can be done by pointing out a card, and indicating its suit or rank. Giving information consumes one information token and is limited to a specific format. 
-    - Example: `[Reveal] player 1 card 3 color green`, indicates that the card at index 3 from player 1 is green. 
-    - Example: `[Reveal] player 4 card 0 rank 4`, indicates that the card at index 0 from player 4 has rank 4. 
-  - **Discard a card**: Players can discard a card, removing it from their hand and putting it on the discard pile. A discarded card is removed from the game, and can no longer be played. Discarding a card replenishes 1 information token. Players draw a new card to replace the card they've just discarded. 
-    - Example: `[Discard] 0`, discards the card at index 0. 
+    - Example: `Play x` plays the card at index `x` in the player's hand.
+  - **Give information**: Players can give information about another player's cards by naming a suit or rank that is present. A valid hint identifies every card in that hand matching the named property. Giving information consumes one information token and is limited to a specific format. 
+    - Example: `Reveal player 1 card 3 color green` indicates that the card at index 3 from player 1 is green.
+    - Example: `Reveal player 4 card 0 rank 4` indicates that the card at index 0 from player 4 has rank 4.
+  - **Discard a card**: Players can discard a card, removing it from their hand and putting it on the discard pile. A discarded card is removed from the game, and can no longer be played. Discarding a card replenishes 1 information token and is illegal when all information tokens are already available. Players draw a new card to replace the card they've just discarded. 
+    - Example: `Discard 0` discards the card at index 0.
 
 ## Observation Space
 **Reset Observations**
@@ -60,10 +60,10 @@ Although you cannot see your own cards, you can see the cards in the hands of yo
 Use hints, discards, and plays strategically to guide the team towards successful sequences.
 When it's your turn, your output should be in one of the following formats between quotes:
 
-'[Reveal] player N card X color C', to give a hint about color C of card X to the player at index N.
-'[Reveal] player N card X rank R', to give hint about rank R of card X to the player at index N.
-'[Play] X', to play the card in position X from your hand.
-'[Discard] X', to discard the card in position X from your hand.
+'Reveal player N card X color C', to give a hint about color C of card X to the player at index N.
+'Reveal player N card X rank R', to give hint about rank R of card X to the player at index N.
+'Play X', to play the card in position X from your hand.
+'Discard X', to discard the card in position X from your hand.
 
 Remember, communication is limited to hints about colors or numbers only, and sharing illegal or extraneous information is not allowed. Work together, follow the rules, and aim for the highest cooperative score possible!
 ```
@@ -99,7 +99,7 @@ Discards: The following cards have been discarded:
 
 **Actions**
 
-Players receive messages relating to the actions of the other players. For example, if `Player 0` successfully plays the first card from their hand (`[play] 0`), the other players receive the following message:
+Players receive messages relating to the actions of the other players. For example, if `Player 0` successfully plays the first card from their hand (`play 0`), the other players receive the following message:
 
 ```plaintext
 [Player 0] Player 0 attempts to play a blue card with rank 1. The card was played successfully.
@@ -166,7 +166,7 @@ If the action fails, the board is updated accordingly:
 - **Rounds:** Flexible. The game ends immediately if all fuse tokens are used up, or when all 5s have been played successfully. If the deck has run out, the game continues for another round before ending. 
 - **Turn Structure:**
   - The players receive information about the board and game state. 
-  - The players may submit their action (`[play]`, `[reveal]` or `[discard]`) based on the game state.
+  - The players may submit `play`, `reveal`, or `discard` based on the game state.
   - All players receive feedback and prepare for the next round
   
 - **Objective:** Maximize the score before the game has ended. The score is calculated by summing the values of the highest cards that have been played for each suit. The maximal score is 25. 
@@ -174,13 +174,13 @@ If the action fails, the board is updated accordingly:
 ## Key Rules
 1. **Action Selection:**
    - Each player must submit exactly one action per turn
-   - Valid actions are only ``[play]...``,  ``[reveal]...`` or `[discard]...`.
+   - Valid actions begin with `play`, `reveal`, or `discard`.
    
 2.**Game Duration:**
 - The game duration depends on the number of rounds. 
 
 3.**Invalid Moves:**
-- During decision turns, only ``[play]...``,  ``[reveal]...`` or `[discard]...` are valid actions
+- During decision turns, only `play`, `reveal`, or `discard` actions are valid.
 - Invalid moves may count as defection or be penalized (implementation-specific)
 
 4.**Winning Conditions:**

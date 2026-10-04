@@ -1,59 +1,77 @@
 import re
-import random
-from typing import Dict, Tuple, Any, Optional, List, Set
+from typing import Any, Dict, List, Optional, Set, Tuple, Union
 from collections import defaultdict, deque
 
 import textarena as ta
 
 
-class SlitherlinkEnv(ta.Env):
-    _ACTION_RE = re.compile(r"\[\s*([hv])\s+(\d+)\s+(\d+)\s*\]", re.I)
+class SlitherlinkEnv(ta.GameEnv):
+    min_players = 1
+    max_players = 1
+
+    max_grid_cells = 10_000
+    max_action_chars = 4096
+    _ACTION_RE = re.compile(r"([hv])\s+(\d+)\s+(\d+)", re.I)
 
     def __init__(self, rows: int = 4, cols: int = 4, max_turns: int = 200):
         """
         Initialize Slitherlink environment with configurable grid size.
-        
+
         Args:
             rows: Number of rows in the grid
-            cols: Number of columns in the grid  
+            cols: Number of columns in the grid
             max_turns: Maximum number of moves allowed
         """
-        super().__init__()
+        if not isinstance(rows, int) or isinstance(rows, bool) or rows < 2:
+            raise ValueError("rows must be an integer of at least 2")
+        if not isinstance(cols, int) or isinstance(cols, bool) or cols < 2:
+            raise ValueError("cols must be an integer of at least 2")
+        if rows * cols > self.max_grid_cells:
+            raise ValueError(
+                f"rows and cols create more than {self.max_grid_cells} cells"
+            )
+        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
+            raise ValueError("max_turns must be a positive integer")
         self.R = rows
         self.C = cols
         self.max_turns = max_turns
-        self.clues: List[List[Optional[int]]] = []
 
-        # Edge sets (row, col) index the *upper-left* dot
-        self.h_edges: Set[Tuple[int, int]] = set()
-        self.v_edges: Set[Tuple[int, int]] = set()
+    @property
+    def clues(self) -> List[List[Optional[int]]]: return self.game_state["clues"]
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.h_edges.clear()
-        self.v_edges.clear()
-        
-        # Generate a random solvable puzzle
-        self.clues = self._generate_puzzle(seed)
+    @property
+    def h_edges(self) -> Set[Tuple[int, int]]: return self.game_state["h_edges"]
 
-        self.state = ta.SinglePlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
-        self.state.reset(game_state={}, player_prompt_function=self._prompt)
-        self._observe()
+    @property
+    def v_edges(self) -> Set[Tuple[int, int]]: return self.game_state["v_edges"]
 
-    def _generate_puzzle(self, seed: Optional[int] = None) -> List[List[Optional[int]]]:
+    def setup(self) -> Dict[str, Any]:
+        clues, solution_h_edges, solution_v_edges = self._generate_puzzle()
+        return {
+            "clues": clues,
+            "h_edges": set(),  # (row, col) indexes the *upper-left* dot
+            "v_edges": set(),
+            "solution_h_edges": frozenset(solution_h_edges),
+            "solution_v_edges": frozenset(solution_v_edges),
+        }
+
+    def _generate_puzzle(
+        self,
+    ) -> Tuple[
+        List[List[Optional[int]]],
+        Set[Tuple[int, int]],
+        Set[Tuple[int, int]],
+    ]:
         """Generate a random solvable Slitherlink puzzle by creating a solution first."""
-        if seed is not None:
-            random.seed(seed)
-        
-        # Start with empty edges
         solution_h_edges: Set[Tuple[int, int]] = set()
         solution_v_edges: Set[Tuple[int, int]] = set()
-        
+
         # Generate a random simple loop
         self._generate_random_loop(solution_h_edges, solution_v_edges)
-        
+
         # Create clues based on the solution
         clues = [[None for _ in range(self.C)] for _ in range(self.R)]
-        
+
         # For each cell, count how many edges surround it in the solution
         for r in range(self.R):
             for c in range(self.C):
@@ -62,85 +80,105 @@ class SlitherlinkEnv(ta.Env):
                 if (r+1, c) in solution_h_edges:       edge_count += 1
                 if (r, c) in solution_v_edges:         edge_count += 1
                 if (r, c+1) in solution_v_edges:       edge_count += 1
-                
+
                 # Add clue with some probability (not every cell needs a clue)
-                if random.random() < 0.6:  # 60% chance to add a clue
+                if self.rng.random() < 0.6:  # 60% chance to add a clue
                     clues[r][c] = edge_count
-        
-        return clues
+
+        # A clue-free puzzle makes clue progress permanently zero and therefore
+        # cannot satisfy _is_solved, even if the loop itself is correct.
+        if not any(clue is not None for row in clues for clue in row):
+            clue_r = self.rng.randrange(self.R)
+            clue_c = self.rng.randrange(self.C)
+            edge_count = 0
+            if (clue_r, clue_c) in solution_h_edges:
+                edge_count += 1
+            if (clue_r + 1, clue_c) in solution_h_edges:
+                edge_count += 1
+            if (clue_r, clue_c) in solution_v_edges:
+                edge_count += 1
+            if (clue_r, clue_c + 1) in solution_v_edges:
+                edge_count += 1
+            clues[clue_r][clue_c] = edge_count
+
+        return clues, solution_h_edges, solution_v_edges
 
     def _generate_random_loop(self, h_edges: Set[Tuple[int, int]], v_edges: Set[Tuple[int, int]]):
         """Generate a simple random rectangular loop."""
-        # Create a simple rectangular loop to ensure solvability
-        # This is a basic implementation - could be made more sophisticated
-        
         # Choose random rectangle dimensions within the grid
         min_size = 2
         max_width = min(self.C, 4)
         max_height = min(self.R, 4)
-        
-        width = random.randint(min_size, max_width)
-        height = random.randint(min_size, max_height)
-        
+
+        width = self.rng.randint(min_size, max_width)
+        height = self.rng.randint(min_size, max_height)
+
         # Choose random position for the rectangle
-        start_r = random.randint(0, self.R - height)
-        start_c = random.randint(0, self.C - width)
-        
+        start_r = self.rng.randint(0, self.R - height)
+        start_c = self.rng.randint(0, self.C - width)
+
         # Add horizontal edges (top and bottom of rectangle)
         for c in range(start_c, start_c + width):
             h_edges.add((start_r, c))                    # top edge
             h_edges.add((start_r + height, c))           # bottom edge
-        
-        # Add vertical edges (left and right of rectangle)  
+
+        # Add vertical edges (left and right of rectangle)
         for r in range(start_r, start_r + height):
             v_edges.add((r, start_c))                    # left edge
             v_edges.add((r, start_c + width))            # right edge
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(self.state.current_player_id, action, ta.ObservationType.PLAYER_ACTION)
-
-        m = self._ACTION_RE.fullmatch(action.strip().lower())
-        if not m:
-            self.state.set_invalid_move(self._progress(), "Bad action format. Use [h row col] or [v row col].")
-            return self.state.step()
-
-        kind, r, c = m.group(1), int(m.group(2)), int(m.group(3))
-        if not self._valid_edge(kind, r, c):
-            self.state.set_invalid_move(self._progress(), "Edge outside board.")
-            return self.state.step()
-
-        self._toggle_edge(kind, r, c)
-        self._observe()
-
-        if self._is_solved():                
-            self.state.set_outcome(1.0, "🎉 You formed a single loop! Puzzle solved!")
-        elif self.state.check_turn_limit():  
-            self.state.set_outcome(self._progress(), "Move limit reached. Puzzle unfinished.")
-
-        return self.state.step()
-
-    def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
+    def prompt(self, player_id: int) -> str:
         return (
             f"You are playing Slitherlink on a {self.R}x{self.C} grid!\n"
             "Draw a single continuous loop so each numbered cell has that many bordering edges.\n"
             "Toggle edges with:\n"
-            "  [h r c] - toggle horizontal edge above dots at row r, column c\n"
-            "  [v r c] - toggle vertical edge left of dots at row r, column c\n"
+            "  'h r c' - toggle horizontal edge above dots at row r, column c\n"
+            "  'v r c' - toggle vertical edge left of dots at row r, column c\n"
             "Numbers show required edge count, '.' means no constraint.\n"
             f"You have up to {self.max_turns} moves to solve the puzzle."
         )
 
+    def render(self, player_id: int) -> str:
+        return f"{self._render_board()}\nClues satisfied: {self._progress():.0%}"
+
+    def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        if len(move) > self.max_action_chars:
+            return self.invalid(
+                f"Action is too long (maximum {self.max_action_chars} characters)."
+            )
+        action_text = move.strip()
+        if action_text.startswith("[") or action_text.endswith("]"):
+            if not (action_text.startswith("[") and action_text.endswith("]")):
+                return self.invalid("Bad action format: mismatched brackets.")
+            action_text = action_text[1:-1].strip()
+        m = self._ACTION_RE.fullmatch(action_text.lower())
+        if not m:
+            return self.invalid("Bad action format. Use 'h row col' or 'v row col'.")
+
+        kind, r, c = m.group(1), int(m.group(2)), int(m.group(3))
+        if not self._valid_edge(kind, r, c):
+            return self.invalid("Edge outside board.")
+
+        self._toggle_edge(kind, r, c)
+
+        if self._is_solved():
+            return self.outcome({0: 1.0}, reason="🎉 You formed a single loop! Puzzle solved!")
+        return None
+
+    def on_turn_limit(self) -> ta.Outcome:
+        return self.outcome({0: self._progress()}, reason="Move limit reached. Puzzle unfinished.")
+
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome({0: self._progress()}, reason=f"Invalid Move: {reason}")
+
     def _valid_edge(self, kind: str, r: int, c: int) -> bool:
         if kind == 'h': return 0 <= r <= self.R and 0 <= c < self.C
-        else:           return 0 <= r < self.R and 0 <= c <= self.C # 'v'
+        else:           return 0 <= r < self.R and 0 <= c <= self.C  # 'v'
 
     def _toggle_edge(self, kind: str, r: int, c: int):
-        if kind == 'h':
-            edge = (r, c)
-            self.h_edges.discard(edge) if edge in self.h_edges else self.h_edges.add(edge)
-        else:
-            edge = (r, c)
-            self.v_edges.discard(edge) if edge in self.v_edges else self.v_edges.add(edge)
+        edges = self.h_edges if kind == 'h' else self.v_edges
+        edge = (r, c)
+        edges.discard(edge) if edge in edges else edges.add(edge)
 
     def _progress(self) -> float:
         """Fraction of clue cells currently satisfied."""
@@ -164,12 +202,12 @@ class SlitherlinkEnv(ta.Env):
 
     def _is_solved(self) -> bool:
         # 1. All clues satisfied
-        if self._progress() < 1.0: 
+        if self._progress() < 1.0:
             return False
         # 2. Every dot has 0 or 2 incident edges AND at least one edge exists
         if not (self.h_edges or self.v_edges):
             return False
-        
+
         deg = defaultdict(int)
         for (r, c) in self.h_edges:
             deg[(r, c)]     += 1
@@ -201,17 +239,17 @@ class SlitherlinkEnv(ta.Env):
     def _render_board(self) -> str:
         """Render a clean, spacious Slitherlink grid."""
         lines = []
-        
+
         # Add some spacing at the top
         lines.append("")
-        
+
         # Column headers with better spacing
         col_header = " "  # indent for row labels
         for c in range(self.C + 1):
             col_header += f"{c:>4}"
         lines.append(col_header)
         lines.append("")  # blank line for separation
-        
+
         # Build the grid row by row
         for r in range(self.R + 1):
             # Dot row with horizontal edges
@@ -224,7 +262,7 @@ class SlitherlinkEnv(ta.Env):
                     dot_line += "   "
             dot_line += "+"
             lines.append(dot_line)
-            
+
             # Cell row with vertical edges and clues (if not the last row)
             if r < self.R:
                 cell_line = "    "  # indent to align with dot row
@@ -233,7 +271,7 @@ class SlitherlinkEnv(ta.Env):
                         cell_line += "│"
                     else:
                         cell_line += " "
-                    
+
                     if c < self.C:
                         clue = self.clues[r][c]
                         if clue is not None:
@@ -241,11 +279,6 @@ class SlitherlinkEnv(ta.Env):
                         else:
                             cell_line += " · "
                 lines.append(cell_line)
-        
+
         lines.append("")  # blank line at bottom
         return '\n'+'\n'.join(lines)
-
-    def _observe(self):
-        progress_pct = f"{self._progress():.0%}"
-        message = f"{self._render_board()}\nClues satisfied: {progress_pct}"
-        self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_BOARD)

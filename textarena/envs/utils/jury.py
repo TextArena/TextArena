@@ -1,5 +1,5 @@
 import random
-from typing import Optional, List, Dict
+from typing import Callable, Optional, List, Dict
 
 import textarena as ta
 
@@ -31,7 +31,16 @@ class OpenRouterJury:
         options (List[str]): The possible options jurors may select.
     """
 
-    def __init__(self, options: List[str], jury_size: int=5, model_names: Optional[List[str]]=default_models):
+    def __init__(
+        self,
+        options: List[str],
+        jury_size: int = 5,
+        model_names: Optional[List[str]] = None,
+        *,
+        seed: Optional[int] = None,
+        rng: Optional[random.Random] = None,
+        agent_factory: Optional[Callable[..., ta.Agent]] = None,
+    ):
         """
         Initialize an OpenRouterJury instance.
 
@@ -41,13 +50,21 @@ class OpenRouterJury:
             model_names (Optional[List[str]]): A list of model names to choose from.
                 Defaults to `default_models`.
         """
-        self.available_models = model_names if model_names is not None else default_models
+        if not options:
+            raise ValueError("A jury requires at least one voting option.")
+        if jury_size < 1:
+            raise ValueError(f"jury_size must be positive, received {jury_size}")
+        self.available_models = list(model_names) if model_names is not None else list(default_models)
+        if not self.available_models:
+            raise ValueError("A jury requires at least one available model.")
+        self.rng = rng if rng is not None else random.Random(seed)
+        factory = agent_factory or ta.agents.OpenRouterAgent
         self.jury = []
         for _ in range(jury_size):
-            model_name = random.choice(self.available_models)
-            juror = ta.agents.OpenRouterAgent(model_name=model_name, system_prompt=JUROR_SYSTEM_PROMPT)
+            model_name = self.rng.choice(self.available_models)
+            juror = factory(model_name=model_name, system_prompt=JUROR_SYSTEM_PROMPT)
             self.jury.append(juror)
-        self.options = options
+        self.options = list(options)
 
     def _create_juror_prompt(self, context: str) -> str:
         """
@@ -82,29 +99,35 @@ class OpenRouterJury:
         """
         result_dict = {option: 0 for option in self.options}
         num_casted_votes = 0
+        failures = []
 
         jury_prompt = self._create_juror_prompt(context=context)
 
         for juror in self.jury:
             try:
                 judgement = juror(jury_prompt)
-                chosen_option = None
-                for option in self.options:
-                    if option.lower() in judgement.lower():
-                        chosen_option = option
-                        break
+                normalized = judgement.strip().casefold()
+                chosen_option = next(
+                    (option for option in self.options if option.casefold() == normalized),
+                    None,
+                )
 
                 if chosen_option:
                     result_dict[chosen_option] += 1
                     num_casted_votes += 1
-                # else:  # You could log or handle invalid votes here.
+                else:
+                    failures.append(f"invalid vote {judgement!r}")
             except Exception as exc:
-                pass
+                failures.append(f"{type(exc).__name__}: {exc}")
+
+        if failures:
+            raise RuntimeError(
+                f"{len(failures)} of {len(self.jury)} jurors failed to cast a valid vote: "
+                + "; ".join(failures)
+            )
 
         # Normalize
         if num_casted_votes > 0:
             for key in result_dict.keys():
                 result_dict[key] /= num_casted_votes
-        # If no votes are casted correctly, the dictionary stays with zeros.
-
         return result_dict

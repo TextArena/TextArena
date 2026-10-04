@@ -7,10 +7,10 @@
 ## Action Space
 - **Format:** Actions are strings representing the player's actions. For example:
 - **Example:**
-    - Bid 10 coins for the round's letter: [bid 10]
-    - Pass on the round's letter: [pass]
-    - To submit the word "SEE" based on the letters ["S", "E"]: [see]
-- **Notes:** Players can have additional texts in their replies, as long as they provide their actions in the correct format.
+    - Bid 10 coins for the round's letter: `bid 10`
+    - Pass on the round's letter: `pass`
+    - To submit the word "SEE" based on the letters ["S", "E", "E"]: `see`
+- **Notes:** Submit exactly one bare action without surrounding prose.
 
 ## Observation Space
 **Reset Observations**
@@ -25,21 +25,21 @@ The letter will be added to your collection, and the coins you bid will be deduc
 This bidding of letters will repeat till all the letters have been auctioned off. You are not rewarded for saving your coins.
 After all the letters have been auctioned, you will use the letters to form the highest value english word from the letters won.
 The player with the highest value word wins the game.
-If you want to bid, submit your bid amount in square brackets like [bid 2] or [bid 10].
-If you do not want to bid, submit [pass].
-For the submission of the highest value word, you will be prompted at the end of the game to submit them in square brackets like [dog].
+To bid, reply with 'bid 2', 'bid 10', or another amount.
+If you do not want to bid, reply with 'pass'.
+At the end of the auction, submit your highest-value word directly, e.g. 'dog'.
 Here is your starting information:
 Your current coins: 100
 Your current letters: []
 
-[Game] Player 0 will go first. The first letter for bid: M.
+Game: Player 0 will go first. The first letter for bid: M.
 Starting bid is 1 coin. You can bid any amount of coins, or choose not to bid.
 ```
 
 **Step Observation:**
 After each step, the players receive the latest message from the game environment that determines who gets the word, and what the next letter is for bidding. For example:
 ```plaintext
-[Player 0] [bid 5]
+[Player 0] bid 5
 [GAME] Player 0 bids 5 on the letter 'M'. Player 1, do you want to bid on the letter 'M' for more than 5?
 ```
 
@@ -60,7 +60,7 @@ After each step, the players receive the latest message from the game environmen
 ## Key Rules
 
 1. **Bidding**:
-   - Players take turns deciding to bid on a letter or pass (e.g., "[bid 10]" or "[pass]").
+   - Players take turns deciding to bid on a letter or pass (e.g., `bid 10` or `pass`).
    - The player with the highest bid on a letter wins it and adds it to their collection.
    - If both players pass on a letter, it is forfeited, and neither player can use it in word formation.
 

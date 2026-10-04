@@ -1,4 +1,4 @@
-# Truth And Deception Environment Documentation
+# Taboo Environment Documentation
 
 ## Overview
 
@@ -10,15 +10,15 @@
 
 - **Format:**
   - **Clue Giver:** Any string representing the clue, **excluding** the taboo words and the word to guess.
-  - **Guesser:** Must provide their guess within squared brackets. For example: `[apple]`.
+  - **Guesser:** Provide only the guessed word. For example: `apple`.
 
 - **Examples:**
   - **Clue Giver:** `"It's something you might eat for breakfast."`
-  - **Guesser:** `"[toast]"`
+  - **Guesser:** `"toast"`
 
 - **Notes:**
   - Clue Givers must avoid using any taboo words or the word to guess in their clues.
-  - Guessers must format their guesses within squared brackets to be recognized by the environment.
+  - Guessers should reply with only their guess.
 
 
 ## Observation Space
@@ -46,7 +46,7 @@ On your turn, simply type your clue.
 [Game]: You are Player 1, the Guesser in the Taboo game.
 Your goal is to guess the secret word based on the clues provided by the Clue Giver.
 You have 30 turns to guess the word.
-On your turn, type your guess within squared brackets. For example: '[apple]'.
+On your turn, reply with only your guess. For example: 'apple'.
 ```
 
 
@@ -54,7 +54,7 @@ On your turn, type your guess within squared brackets. For example: '[apple]'.
 After each step, players receive the latest action taken by their opponent. For example:
 ```plaintext
 [Clue Giver (Player 0)]: It's something you might eat for breakfast.
-[Guesser (Player 1)]: [toast]
+[Guesser (Player 1)]: toast
 ```
 
 
@@ -65,7 +65,7 @@ After each step, players receive the latest action taken by their opponent. For 
 - **Target Word**: The Clue Giver is assigned a secret word along with a list of taboo words that cannot be used in clues.
 - **Objective**:
     - **Clue Giver**: Provide effective clues to help the Guesser identify the secret word without using any taboo words or the word itself.
-    - **Guesser**: Deduce the secret word based on the clues provided by the Clue Giver by making guesses within squared brackets.
+    - **Guesser**: Deduce the secret word based on the clues provided by the Clue Giver.
 - **Turn Limit:** The game can be configured with a maximum number of turns. If the Guesser does not correctly guess the word within this limit, the game ends.
 
 ## Key Rules
@@ -74,8 +74,7 @@ After each step, players receive the latest action taken by their opponent. For 
     - Clues should be clear enough to help the Guesser but subtle to avoid using forbidden terms.
 
 2. Guesser's Rules:
-    - Must format their guesses within squared brackets (e.g., `[apple]`).
-    - Only guesses within the correct format are considered valid.
+    - Must reply with only the guessed word (e.g., `apple`).
 
 3. Winning Conditions:
     - **Win:** Both players win if the word is guessed correctly.

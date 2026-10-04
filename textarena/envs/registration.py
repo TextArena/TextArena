@@ -20,22 +20,38 @@ class EnvSpec:
         """Create an environment instance."""
         all_kwargs = {**self.kwargs, **kwargs}
         return self.entry_point(**all_kwargs)
-    
+
+
+def _register_specs(specs: List[EnvSpec]):
+    """Register equivalent re-imports idempotently, but reject real conflicts."""
+    for spec in specs:
+        existing = ENV_REGISTRY.get(spec.id)
+        if existing is not None and existing != spec:
+            raise ValueError(f"Environment {spec.id} already registered with a different specification.")
+    for spec in specs:
+        ENV_REGISTRY.setdefault(spec.id, spec)
+
+
 def register(id: str, entry_point: Callable, default_wrappers: Optional[List[ta.Wrapper]]=None, **kwargs: Any):
     """Register an environment with a given ID."""
-    if id in ENV_REGISTRY:
-        raise ValueError(f"Environment {id} already registered.")
-    ENV_REGISTRY[id] = EnvSpec(id=id, entry_point=entry_point, default_wrappers=default_wrappers, kwargs=kwargs)
+    _register_specs([
+        EnvSpec(id=id, entry_point=entry_point, default_wrappers=default_wrappers, kwargs=kwargs)
+    ])
 
-def register_with_versions(id: str, entry_point: Callable, wrappers: Optional[Dict[str, List[ta.Wrapper]]]=None, **kwargs: Any):
-    """Register an environment with a given ID."""
-    if id in ENV_REGISTRY: raise ValueError(f"Environment {id} already registered.")
+def register_with_versions(id: str, entry_point: Callable, mdp_wrappers: Optional[List[ta.Wrapper]]=None, **kwargs: Any):
+    """Register the two standard variants of an environment:
 
-    # first register default version
-    ENV_REGISTRY[id] = EnvSpec(id=id, entry_point=entry_point, default_wrappers=wrappers.get("default"), kwargs=kwargs)
-    for wrapper_version_key in list(wrappers.keys())+["-raw"]:
-        if wrapper_version_key=="default": continue
-        ENV_REGISTRY[f"{id}{wrapper_version_key}"] = EnvSpec(id=f"{id}{wrapper_version_key}", entry_point=entry_point, default_wrappers=wrappers.get(wrapper_version_key), kwargs=kwargs)
+    - `id`      -> CurrentTurnObservationWrapper (agents see only this turn's messages)
+    - `id-mdp`  -> `mdp_wrappers` (a single observation carries the complete state;
+                   which wrapper achieves that is environment dependent, defaulting
+                   to FullHistoryObservationWrapper)
+    """
+    from textarena.wrappers import CurrentTurnObservationWrapper, FullHistoryObservationWrapper
+    if mdp_wrappers is None: mdp_wrappers = [FullHistoryObservationWrapper]
+    _register_specs([
+        EnvSpec(id=id, entry_point=entry_point, default_wrappers=[CurrentTurnObservationWrapper], kwargs=kwargs),
+        EnvSpec(id=f"{id}-mdp", entry_point=entry_point, default_wrappers=mdp_wrappers, kwargs=kwargs),
+    ])
 
 def pprint_registry_detailed():
     """Pretty print the registry with additional details like kwargs."""

@@ -4,11 +4,10 @@
 **Ultimate Tic Tac Toe** is a strategic two-player game that combines the classic Tic Tac Toe with an added layer of complexity. Players aim to win three micro boards in a row (horizontally, vertically, or diagonally) on the macro board, which tracks the outcomes of individual micro boards. Each move influences the opponent's next playable micro board, creating dynamic and strategic gameplay. This environment implements the full rules of Ultimate Tic Tac Toe, including valid move enforcement, micro board and macro board win detection, and a clear rendering of the board state for agent-based gameplay and experimentation.
 
 ## Action Space
-- **Format:** Actions are strings representing the player's choice. For example:
+- **Format:** Submit `macro micro`, where both values are indices from 0-8.
 - **Example:**
-    - Choosing the micro board 0 and marking row 1 col 0: [0 1 0]
-    - Choosing the micro board 3 and marking row 0 col 2: [3 0 2]
-- **Notes:** The players are free to have additional texts in their replies, so long they provide their action in the correct format of [micro_board row col].
+    - Choosing macro board 0 and marking its cell 3 (row 1, column 0): `0 3`
+    - Choosing macro board 3 and marking its cell 2 (row 0, column 2): `3 2`
 
 ## Observation Space
 **Reset Observation**
@@ -27,10 +26,10 @@ Rules to remember:
 3. You win a micro board by completing a row, column, or diagonal within that board.
 4. You win the game by completing three micro boards in a row on the macro board.
 5. The game ends in a draw if all micro boards are filled, and no player has three in a row on the macro board.
-6. To submit your move, submit them as [micro_board, row, col], where micro_board is the index of the micro board (0-8), and row and col are the cell coordinates (0-2).
-For example, to play in the center cell of the top-left micro board, submit [0 1 1].
+6. Submit `macro micro`, where macro is the micro-board index (0-8), and micro is the cell index within that board (0-8).
+For example, to play in the center cell of the top-left micro board, submit `0 4`.
 
-As Player 0, you will be 'O', whereas your opponent is 'X'.
+As Player 0, you will be 'X', whereas your opponent is 'O'.
 Below is the current state of the macro board (tracking micro board wins):
       |       |      
       |       |      
@@ -49,14 +48,14 @@ Below is the current state of the macro board (tracking micro board wins):
 **Step Observation**
 After each step, the players will receive the latest message from the game environment. For example, here's player 0 making its first move and the environment responds back:
 ```plaintext
-[Player 0] [4 1 1]
-[GAME] Player 0 made a move in micro board 4 at row 1, col 1. Player 1 must play in micro board 4. New state of the board:
+[Player 0] 4 4
+[GAME] Player 0 made a move in micro board 4 at cell 4 (row 1, col 1). Player 1 must play in micro board 4. New state of the board:
       |       |      
       |       |      
       |       |      
 -----------------------
       |       |      
-      |   O   |      
+      |   X   |      
       |       |      
 -----------------------
       |       |      

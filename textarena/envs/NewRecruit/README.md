@@ -46,13 +46,13 @@ Each issue has 5 possible choices (labeled A through E), and each choice has dif
 ## Rules
 
 ### Making Proposals
-- Proposals must be in the format: `[Propose] XXXXXXXX` where each X is a letter A-E
+- Proposals must use `Propose XXXXXXXX`, where each X is a letter A-E.
 - Each letter corresponds to a choice for an issue (in order)
 - Players can include a rationale before the proposal to persuade the other player
 
 ### Accepting/Rejecting
-- To accept a proposal: `[Accept]`
-- To reject a proposal: `[Reject]`
+- To accept a proposal: `Accept`
+- To reject a proposal: `Reject`
 - Players can only accept or reject when there is a current proposal
 
 ### Invalid Moves
@@ -61,7 +61,7 @@ Each issue has 5 possible choices (labeled A through E), and each choice has dif
 - Invalid moves include:
   - Incorrect proposal format
   - Using letters outside A-E
-  - Missing keywords ([Accept], [Reject], [Propose])
+  - Missing an `Accept`, `Reject`, or `Propose` keyword
   - Accepting/rejecting when there is no proposal
 
 ## Winning Conditions
@@ -83,28 +83,27 @@ Each issue has 5 possible choices (labeled A through E), and each choice has dif
 
 **Making a proposal:**
 ```
-I believe this proposal is fair because it balances our interests.
-[Propose] ABCDEABC
+Propose ABCDEABC
 ```
 
 **Accepting a proposal:**
 ```
-[Accept]
+Accept
 ```
 
 **Rejecting a proposal:**
 ```
-[Reject]
+Reject
 ```
 
 ### Example Game Flow
 
-1. Player 0 (Recruiter) makes a proposal: `[Propose] ABCDEABC`
-2. Player 1 (Candidate) rejects: `[Reject]`
-3. Player 1 makes a counter-proposal: `[Propose] EDCBAABC`
-4. Player 0 rejects: `[Reject]`
-5. Player 0 makes another proposal: `[Propose] BCDEAABC`
-6. Player 1 accepts: `[Accept]`
+1. Player 0 (Recruiter) makes a proposal: `Propose ABCDEABC`
+2. Player 1 (Candidate) rejects: `Reject`
+3. Player 1 makes a counter-proposal: `Propose EDCBAABC`
+4. Player 0 rejects: `Reject`
+5. Player 0 makes another proposal: `Propose BCDEAABC`
+6. Player 1 accepts: `Accept`
 7. Game ends, scores are calculated, and a winner is determined
 
 ## Quick Start Guide

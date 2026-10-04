@@ -1,12 +1,15 @@
-import re, random
+import re
 from collections import defaultdict
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Union
 
 import textarena as ta
 from textarena.envs.SimpleBlindAuction.renderer import create_board_str
 
 
-class SimpleBlindAuctionEnv(ta.Env):
+class SimpleBlindAuctionEnv(ta.GameEnv):
+    min_players = 2
+    max_players = 2
+
     def __init__(self, starting_capital: int = 1000, num_items: int = 5, conversation_rounds: int = 3, base_item_values: Optional[List[int]] = None):
         """
         Args:
@@ -15,41 +18,62 @@ class SimpleBlindAuctionEnv(ta.Env):
             conversation_rounds (int): Number of rounds for conversation phase.
             base_item_values (Optional[List[int]]): Base values for items. If None, will be generated.
         """
+        if not isinstance(starting_capital, int) or isinstance(starting_capital, bool) or starting_capital <= 0:
+            raise ValueError("starting_capital must be a positive integer")
+        if not isinstance(num_items, int) or isinstance(num_items, bool) or num_items <= 0:
+            raise ValueError("num_items must be a positive integer")
+        if not isinstance(conversation_rounds, int) or isinstance(conversation_rounds, bool) or conversation_rounds < 0:
+            raise ValueError("conversation_rounds must be a non-negative integer")
+        if base_item_values is not None:
+            if not isinstance(base_item_values, (list, tuple)) or any(
+                not isinstance(value, int) or isinstance(value, bool) or value <= 0
+                for value in base_item_values
+            ):
+                raise ValueError("base_item_values must be a sequence of positive integers")
         self.starting_capital = starting_capital
         self.num_items = num_items
         self.conversation_rounds = conversation_rounds
-        self.base_item_values = base_item_values # If no base values provided, we'll generate them during reset
+        self.base_item_values = list(base_item_values) if base_item_values is not None else None
+        self.max_turns = conversation_rounds * 2 + 2
         self.item_names = [ # Item names for flavor
             "Ancient Vase", "Diamond Necklace", "Antique Clock", "Signed Painting", "Gold Statue", "Rare Manuscript", "Silver Chalice", "Vintage Watch",
             "Jade Figurine", "Bronze Sculpture", "Crystal Decanter", "Royal Tapestry", "Emerald Ring", "Ivory Chess Set", "Pearl Earrings"
         ]
+        self.bid_pattern = re.compile(r"Bid\s+(?:on\s+)?(?:Item\s+)?(\d+)\s*:\s*(\d+)", re.IGNORECASE)
+        self.legacy_bid_pattern = re.compile(r"\[\s*Bid\s+(?:on\s+)?(?:Item\s+)?(\d+)\s*:\s*(\d+)\s*\]", re.IGNORECASE)
 
-    def get_board_str(self): return create_board_str(game_state=self.state.game_state)
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.state = ta.TwoPlayerState(num_players=num_players, max_turns=self.conversation_rounds * 2 + 2, seed=seed)
-        while len(self.item_names) < self.num_items: self.item_names.append(f"Mystery Item {len(self.item_names)}")  # Ensure we have enough item names
-        item_names = random.sample(self.item_names, self.num_items) # Randomly select item names for this game
-        
+    def get_board_str(self):
+        return create_board_str(
+            game_state=self.game_state,
+            viewer_id=self.state.current_player_id,
+            reveal_all=self.state.done,
+        )
+
+    def setup(self) -> Dict[str, Any]:
+        available_names = self.item_names + [
+            f"Mystery Item {i}" for i in range(len(self.item_names), self.num_items)
+        ]
+        item_names = self.rng.sample(available_names, self.num_items)
+
         # Generate base item values if not provided
-        if not self.base_item_values: base_item_values = [random.randint(50, 500) for _ in range(self.num_items)]
-        else: 
-            base_item_values = self.base_item_values[:self.num_items] # Use provided values, but ensure we have enough
-            while len(base_item_values) < self.num_items: base_item_values.append(random.randint(50, 500)) # Add random values if needed
-        
+        if self.base_item_values is None: base_item_values = [self.rng.randint(50, 500) for _ in range(self.num_items)]
+        else:
+            base_item_values = list(self.base_item_values[:self.num_items])
+            while len(base_item_values) < self.num_items: base_item_values.append(self.rng.randint(50, 500)) # Add random values if needed
+
         # Generate player-specific item values (±20% around base values)
         player_item_values = {}
         for pid in range(2):
             player_item_values[pid] = {}
             for i in range(self.num_items):
                 base_value = base_item_values[i]
-                variation = int(0.2 * base_value)  # ±20%
+                variation = base_value // 5  # ±20%, without overflowing through float
                 min_value = max(1, base_value - variation)
                 max_value = base_value + variation
-                player_item_values[pid][i] = random.randint(min_value, max_value)
-        
-        # Initialize game state
-        game_state = {
-            "phase": "conversation", # Either "conversation" or "bidding"
+                player_item_values[pid][i] = self.rng.randint(min_value, max_value)
+
+        return {
+            "phase": "conversation" if self.conversation_rounds > 0 else "bidding",
             "round": 1,  # Current conversation round
             "item_names": item_names[:self.num_items],
             "base_item_values": base_item_values,
@@ -60,10 +84,13 @@ class SimpleBlindAuctionEnv(ta.Env):
             "conversations_completed": 0,  # Track completed conversation turns
             "bidding_done": {0: False, 1: False}
         }
-        self.state.reset(game_state=game_state, player_prompt_function=self._prompt) # Reset the state
 
+    def on_start(self):
+        if self.conversation_rounds == 0:
+            self._announce_bidding_phase()
 
-    def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
+    def prompt(self, player_id: int) -> str:
+        game_state = self.game_state
         # Create a formatted list of items with values
         item_values = []
         for i in range(self.num_items):
@@ -81,73 +108,103 @@ class SimpleBlindAuctionEnv(ta.Env):
             f"Note: Each player may value items differently, up to ±20% difference!\n\n"
             f"How to play:\n"
             f"- Conversation Phase: Just type your messages normally\n"
-            f"- Bidding Phase: Use '[Bid on Item X: amount]' format to bid\n"
-            f"  Example: '[Bid on Item 0: 250] [Bid on Item 3: 175]'\n\n"
+            f"- Bidding Phase: Put each bid on its own line as 'Bid on Item X: amount'\n"
+            f"  Example:\nBid on Item 0: 250\nBid on Item 3: 175\n\n"
             f"Your goal is to win items that are worth more to you than what you paid.\n"
             f"The player with the highest net worth at the end wins.\n"
             f"Net worth = remaining capital + value of won items.\n"
         )
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        current_pid = self.state.current_player_id
-        if self.state.game_state["phase"] == "conversation":
-            self.state.add_observation(from_id=current_pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-            self.state.game_state["conversations_completed"] += 1
-            if self.state.game_state["conversations_completed"] >= self.conversation_rounds * 2: self._transition_to_bidding_phase()
-        elif self.state.game_state["phase"] == "bidding":
-            self._handle_bidding_action(current_pid, action)
-            # Now each player only gets ONE chance to place bids (or pass).
-            # So mark them as "done" after their action:
-            self.state.game_state["bidding_done"][current_pid] = True
-            # If both players are done, we finalize immediately
-            if all(self.state.game_state["bidding_done"].values()): self._determine_auction_results()
-        return self.state.step()
+    def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
+        # Conversation messages are public; bid submissions are sealed (echoed only to their author).
+        return -1 if self.game_state["phase"] == "conversation" else player_id
+
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        gs = self.game_state
+        if gs["phase"] == "conversation":
+            gs["conversations_completed"] += 1
+            if gs["conversations_completed"] >= self.conversation_rounds * 2: self._transition_to_bidding_phase()
+            return None
+        return self._handle_bidding_action(player_id, action)
 
     def _transition_to_bidding_phase(self) -> None:
         """Transition from conversation phase to bidding phase."""
-        self.state.game_state["phase"] = "bidding"
-        # Announce the transition
-        message=(
-                "Conversation phase complete! Now entering the bidding phase.\nPlease submit your bids using the format: [Bid on Item X: amount]\n"
-                "You can submit multiple bids in one turn, for example:\n'[Bid on Item 0: 150] [Bid on Item 2: 200] [Bid on Item 4: 350]'"
-            )
-        self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
+        self.game_state["phase"] = "bidding"
+        self._announce_bidding_phase()
 
-    def _handle_bidding_action(self, player_id: int, action: str) -> None:
-        self.state.add_observation(from_id=player_id, to_id=player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        bids = re.compile(r"\[Bid\s+(?:on\s+)?(?:Item\s+)?(\d+)\s*:\s*(\d+)\]", re.IGNORECASE).findall(action)
+    def _announce_bidding_phase(self) -> None:
+        message = (
+            "Conversation phase complete! Now entering the bidding phase.\n"
+            "Put each bid on its own line using the format: Bid on Item X: amount\n"
+            "For example:\nBid on Item 0: 150\nBid on Item 2: 200\nBid on Item 4: 350"
+        )
+        self.broadcast(message, ta.ObservationType.GAME_MESSAGE)
 
-        if not bids: self.state.add_observation(to_id=player_id, message="You submitted no valid bids.", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION); return # Even if there are zero bids, the player is “done” for this environment’s rules
-        # Process each bid
-        total_bid_amount = 0
-        valid_bids = []
-        
-        for item_id_str, bid_amount_str in bids:
-            try:
-                item_id = int(item_id_str); bid_amount = int(bid_amount_str)
-                if item_id not in range(self.num_items): self.state.set_invalid_move(reason=f"Item {item_id} does not exist. Valid items are 0-{self.num_items-1}."); continue # Validate item ID
-                if bid_amount <= 0: self.state.set_invalid_move(reason="Bid amount must be positive."); continue # Validate bid amount is positive
-                
-                # Track total bid amount to validate against remaining capital
+    def _handle_bidding_action(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        gs = self.game_state
+        bids = self._parse_bids(action)
+        if bids is None:
+            return self.invalid("Malformed or mixed bid command. Put one complete bid on each line.")
+        if gs["bidding_done"][player_id]:
+            return self.invalid("You have already submitted your sealed bids.")
+        if not bids:
+            # Even with zero bids the player is "done" for this environment's rules
+            self.message(player_id, "You submitted no valid bids.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        else:
+            # Validate every bid before mutating any state
+            total_bid_amount = 0
+            valid_bids = []
+            seen_items = set()
+            for item_id_str, bid_amount_str in bids:
+                try:
+                    item_id = int(item_id_str); bid_amount = int(bid_amount_str)
+                except ValueError:
+                    return self.invalid("Bid item and amount must be reasonably sized integers.")
+                if item_id not in range(self.num_items): return self.invalid(f"Item {item_id} does not exist. Valid items are 0-{self.num_items-1}.")
+                if bid_amount <= 0: return self.invalid("Bid amount must be positive.")
+                if item_id in seen_items: return self.invalid(f"Submit at most one bid for Item {item_id}.")
+                seen_items.add(item_id)
                 total_bid_amount += bid_amount
                 valid_bids.append((item_id, bid_amount))
-            except ValueError: self.state.set_invalid_move(reason=f"Invalid bid format. Use '[Bid on Item X: amount]'.")
-        
-        # Check if total bids exceed player's capital
-        if total_bid_amount > self.state.game_state["remaining_capital"][player_id]: self.state.set_invalid_move(reason=f"Total bid amount {total_bid_amount} exceeds your remaining capital {self.state.game_state['remaining_capital'][player_id]}."); return
-        for item_id, bid_amount in valid_bids: self.state.game_state["player_bids"][player_id][item_id] = bid_amount # Record valid bids
-        self.state.game_state["remaining_capital"][player_id] -= total_bid_amount # Update the player's remaining capital
-        
-        # Confirm bids were received (privately)
-        bid_items = [item_id for item_id, _ in valid_bids]
-        if bid_items:
-            self.state.add_observation(to_id=player_id, message=f"You submitted bids for Items: {', '.join(map(str, bid_items))}.", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-            self.state.add_observation(to_id=1-player_id, message=f"Player {player_id} has submitted bids.", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION) # Public notification (without specific details)
+            if total_bid_amount > gs["remaining_capital"][player_id]:
+                return self.invalid(f"Total bid amount {total_bid_amount} exceeds your remaining capital {gs['remaining_capital'][player_id]}.")
 
-    def _determine_auction_results(self) -> None:
+            for item_id, bid_amount in valid_bids: gs["player_bids"][player_id][item_id] = bid_amount # Record valid bids
+
+            # Confirm bids were received (privately)
+            bid_items = [item_id for item_id, _ in valid_bids]
+            self.message(player_id, f"You submitted bids for Items: {', '.join(map(str, bid_items))}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+            self.message(1 - player_id, f"Player {player_id} has submitted bids.", ta.ObservationType.GAME_ACTION_DESCRIPTION) # Public notification (without specific details)
+
+        gs["bidding_done"][player_id] = True
+        if all(gs["bidding_done"].values()): return self._determine_auction_results()
+        return None
+
+    def _parse_bids(self, action: str) -> Optional[List[tuple[str, str]]]:
+        """Parse canonical one-bid-per-line input, plus legacy bracketed tokens."""
+        lines = [line.strip() for line in action.splitlines() if line.strip()]
+        bare_bids = []
+        if lines:
+            for line in lines:
+                match = self.bid_pattern.fullmatch(line)
+                if match is None:
+                    bare_bids = []
+                    break
+                bare_bids.append(match.groups())
+        if bare_bids:
+            return bare_bids
+
+        legacy_bids = self.legacy_bid_pattern.findall(action)
+        if legacy_bids and not self.legacy_bid_pattern.sub("", action).strip():
+            return legacy_bids
+        if re.search(r"(?im)^\s*\[?\s*Bid\b", action):
+            return None
+        return []
+
+    def _determine_auction_results(self) -> ta.Outcome:
         """Determine the results of the auction and calculate the winner."""
-        game_state = self.state.game_state
-        
+        game_state = self.game_state
+
         # Initialize results
         auction_results = {
             "item_winners": {},           # {item_id: winner_pid}
@@ -158,40 +215,41 @@ class SimpleBlindAuctionEnv(ta.Env):
             "player_profit": defaultdict(int),  # {player_id: total_value - total_spent}
             "player_net_worth": defaultdict(int)  # {player_id: remaining_capital + item_value}
         }
-        
+
         # Determine winners for each item
         for item_id in range(self.num_items):
             player0_bid = game_state["player_bids"][0].get(item_id, 0)
             player1_bid = game_state["player_bids"][1].get(item_id, 0)
-            
+
             # If there's a tie or no bids, no one wins
             if player0_bid > player1_bid:   winner_pid = 0; highest_bid = player0_bid
             elif player1_bid > player0_bid: winner_pid = 1; highest_bid = player1_bid
             else: continue # Tie or no bids - no winner
-            
+
             # Record the result for this item
             auction_results["item_winners"][item_id] = winner_pid
             auction_results["winning_bids"][item_id] = highest_bid
             auction_results["player_wins"][winner_pid].append(item_id)
             auction_results["player_spent"][winner_pid] += highest_bid
-                
+
             # Calculate value to the winner
             item_value = game_state["player_item_values"][winner_pid][item_id]
             auction_results["player_value"][winner_pid] += item_value
-        
+
         # Calculate profit and net worth for each player
         for pid in range(2):
             value = auction_results["player_value"][pid]
             spent = auction_results["player_spent"][pid]
-            remaining = game_state["remaining_capital"][pid]
+            remaining = self.starting_capital - spent
+            game_state["remaining_capital"][pid] = remaining
             auction_results["player_profit"][pid] = value - spent # Profit = value of items - amount spent
             auction_results["player_net_worth"][pid] = remaining + value # Net worth = remaining capital + value of items
         game_state["auction_results"] = auction_results # Save results to game state
         self._announce_auction_results() # Announce results
-        self._determine_winner() # Determine the winner
+        return self._determine_winner() # Determine the winner
 
     def _announce_auction_results(self) -> None:
-        game_state = self.state.game_state
+        game_state = self.game_state
         results = game_state["auction_results"]
         # Announce overall auction results
         message = "==================== AUCTION RESULTS ====================\n\n"
@@ -229,7 +287,7 @@ class SimpleBlindAuctionEnv(ta.Env):
                     message += f"  - Item {item_id} ({item_name}): Paid {bid} coins, Value {value_to_player} coins\n"
             else:
                 message += f"  Items Won: None\n"
-            
+
             # Show financial summary
             message += f"  Financial Summary:\n"
             message += f"  - Initial Capital: {initial} coins\n"
@@ -238,18 +296,18 @@ class SimpleBlindAuctionEnv(ta.Env):
             message += f"  - Total Item Value: {value} coins\n"
             message += f"  - Profit: {profit} coins\n"
             message += f"  - Net Worth: {net_worth} coins\n\n"
-        
-        # Send the results
-        self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
 
-    def _determine_winner(self) -> None:
-        game_state = self.state.game_state
+        # Send the results
+        self.broadcast(message, ta.ObservationType.GAME_MESSAGE)
+
+    def _determine_winner(self) -> ta.Outcome:
+        game_state = self.game_state
         results = game_state["auction_results"]
-        
+
         # Find the player(s) with the highest net worth
         max_worth = max(results["player_net_worth"].values(), default=0)
         winners = [pid for pid, worth in results["player_net_worth"].items() if worth == max_worth]
-        
+
         # Set the winner(s)
         if len(winners) == 1:
             winner = winners[0]
@@ -258,7 +316,7 @@ class SimpleBlindAuctionEnv(ta.Env):
             remaining = game_state["remaining_capital"][winner]
             item_value = results["player_value"][winner]
             reason = f"Player {winner} won with a final net worth of {max_worth} coins! (Remaining capital: {remaining} coins, Item value: {item_value} coins, Profit: {profit} coins)"
-            self.state.set_winner(player_id=winner, reason=reason)
+            return self.winner(winner, reason=reason)
         else:
             # For ties, provide detailed info for all winners
             details = []
@@ -266,4 +324,4 @@ class SimpleBlindAuctionEnv(ta.Env):
                 profit = results["player_profit"][pid]
                 remaining = game_state["remaining_capital"][pid]
                 details.append(f"Player {pid} (Net worth: {max_worth} coins, Remaining capital: {remaining} coins, Profit: {profit} coins)")
-            self.state.set_draw(reason=f"Both players tied with a net worth of {max_worth} coins.\n" + "\n".join(details))
+            return self.draw(reason=f"Both players tied with a net worth of {max_worth} coins.\n" + "\n".join(details))

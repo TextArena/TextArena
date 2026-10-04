@@ -1,57 +1,84 @@
 import re
-from typing import Any, Dict, Optional, Tuple, List
+from typing import Any, Dict, List, Optional, Union
 
 import textarena as ta
 from textarena.envs.Nim.renderer import create_board_str
 
-class NimEnv(ta.Env):
+
+def _parse_bounded_uint(text: str, maximum: int) -> Optional[int]:
+    """Parse decimal text only when it is no larger than ``maximum``."""
+    normalized = text.lstrip("0") or "0"
+    maximum_text = str(maximum)
+    if len(normalized) > len(maximum_text):
+        return None
+    if len(normalized) == len(maximum_text) and normalized > maximum_text:
+        return None
+    return int(normalized)
+
+
+class NimEnv(ta.GameEnv):
+    min_players = 2
+    max_players = 2
+    MAX_PILES = 100
+    MAX_PILE_SIZE = 1_000_000
+    action_pattern = (
+        r"^\s*(?P<bracket>\[)?\s*"
+        r"(?P<pile>[0-9]+)\s+(?P<quantity>[0-9]+)\s*"
+        r"(?(bracket)\])\s*$"
+    )
+
     def __init__(self, piles: List[int] = None):
         """
         Args:
             piles (List[int]): Initial sizes of the piles (e.g. [3, 5, 7]). If None, defaults to [3,4,5].
         """
-        super().__init__()
-        self.initial_piles = piles if piles is not None else [3, 4, 5]
+        initial_piles = [3, 4, 5] if piles is None else piles
+        if not isinstance(initial_piles, list) or not initial_piles:
+            raise ValueError("piles must be a non-empty list of non-negative integers.")
+        if any(type(pile) is not int or pile < 0 for pile in initial_piles):
+            raise ValueError("piles must contain only non-negative integers.")
+        if len(initial_piles) > self.MAX_PILES:
+            raise ValueError(f"piles cannot contain more than {self.MAX_PILES} piles.")
+        if any(pile > self.MAX_PILE_SIZE for pile in initial_piles):
+            raise ValueError(f"pile sizes cannot exceed {self.MAX_PILE_SIZE}.")
+        if not any(initial_piles):
+            raise ValueError("At least one pile must contain an object.")
+        self.initial_piles = initial_piles.copy()
 
-    def get_board_str(self):
-        return create_board_str(self.state.game_state["piles"])
+    def setup(self) -> Dict[str, Any]:
+        return {"piles": self.initial_piles.copy()}
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.state = ta.TwoPlayerState(num_players=num_players, seed=seed)
-        self.state.reset(game_state={"piles": self.initial_piles.copy()}, player_prompt_function=self._prompt)
-        self.state.add_observation(message="Current Pile:\n" + self._render_piles(), observation_type=ta.ObservationType.GAME_BOARD)
-
-    def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
+    def prompt(self, player_id: int) -> str:
         return (
             f"Welcome to Nim, Player {player_id}!\nRules:\n- On your turn, remove at least one object from exactly one pile.\n"
-            "- Remove objects with the format '[pile quantity]', e.g. '[0 3]'.\n- Whoever takes the last object(s) wins!"
+            "- Remove objects with the format 'pile quantity', e.g. '0 3' removes 3 objects from pile 0.\n- Whoever takes the last object(s) wins!"
         )
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        self._execute_move(action) # Execute the move (or mark invalid if the format is incorrect/illegal)
-        self.state.add_observation(message="Current Pile:\n" + self._render_piles(), observation_type=ta.ObservationType.GAME_BOARD) # After the current player moves, send the updated board to the opponent.
-        self._check_game_over() # Check if the game is over
-        return self.state.step() # Proceed to the next turn (or finalize if done)
+    def render(self, player_id: int) -> str:
+        return "Current Piles:\n" + self._render_piles()
 
-    def _execute_move(self, action: str) -> None:
-        match = re.compile(r"\[\s*(\d+)\s+(\d+)\s*\]").search(action.strip()) # We'll look for actions in the format [pile_index quantity_to_remove], e.g. [1 3].
-        if not match: self.state.set_invalid_move(reason="No valid move format found. Use '[pile quantity]'."); return
-        try: pile_index, quantity = map(int, match.groups()) # Extract pile index and quantity to remove
-        except ValueError: self.state.set_invalid_move(reason="Action must be two integers: '[pile quantity]'."); return
-        # Validate the move
-        if not (0 <= pile_index < len(self.state.game_state["piles"])): self.state.set_invalid_move(reason=f"Pile index {pile_index} is out of range."); return
-        if quantity <= 0: self.state.set_invalid_move(reason="Must remove at least 1 object."); return
-        if self.state.game_state["piles"][pile_index] < quantity: self.state.set_invalid_move(reason=f"Cannot remove {quantity} from pile {pile_index} (only {self.state.game_state['piles'][pile_index]} left)."); return
-        self.state.game_state["piles"][pile_index] -= quantity # Perform the removal
-        self.state.add_observation(message=f"Player {self.state.current_player_id} removes {quantity} from pile {pile_index}.", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION) # Announce the move
+    def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
+        piles = self.game_state["piles"]
+        pile_index = _parse_bounded_uint(move.group("pile"), len(piles) - 1)
+        if pile_index is None:
+            return self.invalid("Pile index is out of range.")
+        quantity_text = move.group("quantity")
+        if not quantity_text.strip("0"):
+            return self.invalid("Must remove at least 1 object.")
+        quantity = _parse_bounded_uint(quantity_text, piles[pile_index])
+        if quantity is None:
+            return self.invalid(
+                f"Cannot remove the requested quantity from pile {pile_index} "
+                f"(only {piles[pile_index]} left)."
+            )
+        piles[pile_index] -= quantity
+        self.broadcast(f"Player {player_id} removes {quantity} from pile {pile_index}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        if all(pile == 0 for pile in piles):
+            return self.winner(player_id, reason=f"Player {player_id} took the last object(s)!")
+        return None
 
-    def _check_game_over(self) -> None:
-        if all(pile == 0 for pile in self.state.game_state["piles"]):
-            self.state.set_winner(player_id=self.state.current_player_id, reason=f"Player {self.state.current_player_id} took the last object(s)!")
+    def get_board_str(self):
+        return create_board_str(self.game_state["piles"])
 
     def _render_piles(self) -> str:
-        lines = []
-        for i, amt in enumerate(self.state.game_state["piles"]):
-            lines.append(f"  pile {i}: {amt}")
-        return "\n".join(lines)
+        return "\n".join(f"  pile {i}: {amt}" for i, amt in enumerate(self.game_state["piles"]))

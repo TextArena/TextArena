@@ -1,5 +1,4 @@
 from typing import List
-from string import ascii_uppercase
 
 def create_board_str(board: List[List[int]]) -> str:
     def cell_str(num):
@@ -13,7 +12,7 @@ def create_board_str(board: List[List[int]]) -> str:
 
     for i in range(9):
         row = board[i]
-        row_label = ascii_uppercase[i]
+        row_label = str(i + 1)
         row_line = f"{row_label}"
         for j in range(9):
             val = cell_str(row[j])

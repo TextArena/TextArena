@@ -46,13 +46,13 @@ The player who wins the majority of tricks (14 or more) wins the game.
 Each turn, players must play a card using the following format:
 
 ```text
-[play X]
+play X
 ```
 where `X` is the 1-based index of the card in the player's hand.
 
 Example:
 ```bash
-[play 3]
+play 3
 ```
 
 ## Turn Prompt Example
@@ -63,7 +63,7 @@ Goal: Win the majority of tricks (14+ out of 26 total).
 Card Power: A > K > Q > J > 10 > 9 > 8 > 7 > 6 > 5 > 4 > 3 > 2
 Trump cards beat non-trump cards. You must follow suit if possible.
 
-Action: '[play X]' where X is the position (1-13) of the card in your hand
+Action: 'play X' where X is the position (1-13) of the card in your hand
 
 [GAME] German Whist game started!
 Trump suit: ♠ (Trump card: 4♠)
@@ -95,7 +95,7 @@ Next card for trick winner: 4♠ (TRUMP)
 Tricks won - Player 0: 0 | Player 1: 0
 Phase: LEARNING (26 cards left in deck)
 
-Play a card using [play X]
+Play a card using `play X`
 ```
 
 

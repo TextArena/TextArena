@@ -1,0 +1,158 @@
+"""Offline deterministic tests for the SimpleNegotiation environment."""
+import copy
+
+import pytest
+
+from textarena.envs.SimpleNegotiation.env import SimpleNegotiationEnv
+
+
+def _fresh(max_turns=10):
+    env = SimpleNegotiationEnv(max_turns=max_turns)
+    env.reset(num_players=2, seed=42)
+    return env
+
+
+def test_reset_initial_state():
+    env = _fresh()
+    gs = env.state.game_state
+    assert gs["current_offer"] is None
+    for pid in (0, 1):
+        assert set(gs["player_resources"][pid].keys()) == set(env.resource_names)
+        inv = gs["inventory_value"][pid]
+        assert inv["initial"] == inv["current"]
+        assert inv["change"] == 0
+
+
+def test_successful_trade_mutates_resources():
+    env = _fresh()
+    gs = env.state.game_state
+    ore_p0 = gs["player_resources"][0]["Ore"]
+    wheat_p1 = gs["player_resources"][1]["Wheat"]
+    # P0 offers 1 Wheat for 1 Ore; P1 accepts.
+    env.step("Here is my proposal:\nOffer: 1 Wheat -> 1 Ore")
+    done, _ = env.step("That works for me.\nAccept")
+    assert not done
+    assert gs["player_resources"][0]["Ore"] == ore_p0 + 1
+    assert gs["player_resources"][1]["Wheat"] == wheat_p1 + 1
+    # Inventory change is tracked for both players.
+    assert gs["inventory_value"][0]["change"] != 0
+    assert gs["inventory_value"][1]["change"] != 0
+
+
+def test_favorable_trade_lets_player0_win_at_turn_limit():
+    # Wheat is worth far less than Ore, so trading Wheat for Ore is great for P0
+    # and bad for P1 -> P0 has the larger inventory-value change.
+    env = _fresh(max_turns=3)
+    vals0 = env.state.game_state["player_values"][0]
+    assert vals0["Ore"] > vals0["Wheat"]
+    env.step("Offer: 1 Wheat -> 1 Ore")  # turn 0
+    env.step("Accept")                    # turn 1, trade executes
+    done, _ = env.step("No further offers.")  # turn 2 == max_turns -> resolve
+    assert done
+    assert env.state.turn == 3
+    assert env.state.rewards == {0: 1, 1: -1}
+
+
+def test_no_trades_results_in_draw():
+    env = _fresh(max_turns=2)
+    done = False
+    for _ in range(2):  # engine resolves the turn limit after exactly max_turns valid moves
+        assert not done
+        done, _ = env.step("just chatting, no offers")
+    assert done
+    assert env.state.rewards == {0: 0, 1: 0}
+
+
+def test_offer_without_resources_is_invalid():
+    env = _fresh()
+    # No player holds 100 Ore (resources are sampled in [5, 25]).
+    done, _ = env.step("Offer: 100 Ore -> 1 Wheat")
+    assert not done
+    assert env.state.error_count == 1
+
+
+def test_malformed_offer_is_invalid():
+    env = _fresh()
+    done, _ = env.step("Offer: total nonsense with no arrow")
+    assert not done
+    assert env.state.error_count == 1
+
+
+def test_accept_in_ordinary_prose_does_not_accept_offer():
+    env = _fresh()
+    env.step("Offer: 1 Wheat -> 1 Ore")
+    done, _ = env.step("I accept that this is an interesting proposal.")
+    assert not done
+    assert env.state.game_state["current_offer"] is None
+    assert env.state.game_state["trade_history"][-1]["outcome"] == "Rejected"
+
+
+def test_accept_and_deny_require_an_incoming_offer():
+    env = _fresh()
+    done, _ = env.step("Accept")
+    assert not done and env.state.error_count == 1
+    done, _ = env.step("Deny")
+    assert done
+    assert env.state.rewards == {0: -1, 1: 1}
+
+
+def test_mixed_or_duplicate_commands_are_invalid_and_atomic():
+    env = _fresh()
+    env.step("Offer: 1 Wheat -> 1 Ore")
+    before = copy.deepcopy(env.game_state)
+    done, _ = env.step("Accept\nOffer: 1 Wood -> 1 Brick")
+    assert not done
+    assert env.game_state == before
+    assert env.state.current_player_id == 1
+
+    done, _ = env.step("Accept\nAccept")
+    assert done
+    assert env.state.rewards == {0: 1, 1: -1}
+
+
+def test_resource_parser_rejects_unconsumed_text():
+    env = _fresh()
+    before = copy.deepcopy(env.game_state)
+    done, _ = env.step("Offer: 1 Wheat plus unlimited Ore -> 1 Brick")
+    assert not done
+    assert env.game_state == before
+
+
+def test_accept_revalidates_both_sides_atomically():
+    env = _fresh()
+    env.step("Offer: 1 Wheat -> 1 Ore")
+    env.game_state["player_resources"][0]["Wheat"] = 0
+    before = copy.deepcopy(env.game_state)
+    done, _ = env.step("Accept")
+    assert not done
+    assert env.game_state == before
+
+
+def test_private_board_is_pure_and_offer_labels_are_dynamic():
+    env = _fresh()
+    env.step("Offer: 1 Wheat -> 1 Ore")
+    before = copy.deepcopy(env.game_state)
+    board = env.get_board_str()
+    assert env.game_state == before
+    assert "Player 0 offers" in board
+    assert "Player 1's turn to respond" in board
+    assert "Inventory and values are private" in board
+    p1_ore_value = env.game_state["player_values"][1]["Ore"]
+    p0_ore_value = env.game_state["player_values"][0]["Ore"]
+    assert str(p1_ore_value) in board
+    if p0_ore_value != p1_ore_value:
+        hidden_section = board.split("Player 1 Inventory", 1)[0]
+        assert str(p0_ore_value) not in hidden_section
+
+
+def test_seeded_reset_snapshot_and_configuration_bounds():
+    first, second = _fresh(), _fresh()
+    assert first.game_state["player_resources"] == second.game_state["player_resources"]
+    assert first.game_state["player_values"] == second.game_state["player_values"]
+    snapshot = first.snapshot()
+    first.step("Offer: 1 Wheat -> 1 Ore")
+    first.restore(snapshot)
+    assert first.game_state["current_offer"] is None
+    assert first.state.turn == 0
+    with pytest.raises(ValueError):
+        SimpleNegotiationEnv(max_turns=0)

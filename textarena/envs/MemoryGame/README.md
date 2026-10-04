@@ -5,11 +5,10 @@
 
 ## Action Space
 
-- **Format:** Actions are strings representing the positions of two cards to flip, in the format `[R1 C1 R2 C2]`, where R1 and C1 are the row and column of the first card, and R2 and C2 are the row and column of the second card.
+- **Format:** Submit `R1 C1 R2 C2`, where each pair is the row and column of one card.
 - **Examples:**
-  - Flip card at (0,1) and card at (1,0): `[0 1 1 0]`
-  - Flip card at (2,3) and card at (3,1): `[2 3 3 1]`
-- **Notes:** Players can include additional text in their replies, but must provide their card selections in the correct format with square brackets.
+  - Flip card at (0,1) and card at (1,0): `0 1 1 0`
+  - Flip card at (2,3) and card at (3,1): `2 3 3 1`
 
 ## Observation Space
 
@@ -19,8 +18,8 @@ On reset, each player receives a prompt containing their game instructions and t
 ```plaintext
 You are Player 0. You are playing the Memory Game.
 Your goal is to match more pairs of cards on the board, than your opponent.
-On your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like [0 1 1 0], where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.
-If the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.
+On your turn, select two cards by entering their row and column numbers, e.g. '0 1 1 0'.
+If the two cards match, you get a point, the cards remain face up, and you take another turn. If they do not match, the cards are flipped back face down, e.g. '.'.
 The game ends when all pairs have been matched.
 Here is the initial board with all cards faced down:
   0 1 2 3
@@ -34,10 +33,10 @@ Here is the initial board with all cards faced down:
 After each move, players receive updates about the cards flipped and whether they matched. For example:
 
 ```plaintext
-[Player 0] I'll try to find a matching pair. Let me flip the cards at positions [0 0 1 1].
-[GAME] The cards do not match. Cards at positions [0 0] and [1 1] are B and C respectively.
-[Player 1] I'm going to try to find a pair. I'll flip [2 3 0 2].
-[GAME] Cards at positions [2 3] and [0 2] match!
+[Player 0] 0 0 1 1
+[GAME] The cards do not match. Cards at positions (0, 0) and (1, 1) are B and C respectively.
+[Player 1] 2 3 0 2
+[GAME] Cards at positions (2, 3) and (0, 2) match!
 Updated board:
   0 1 2 3
 0 . . A .
@@ -50,7 +49,7 @@ Updated board:
 
 - **Players:** 2 players
 - **Initial Setup:** All cards are face-down in a grid, with each card having exactly one matching partner
-- **Turns:** Players take turns flipping two cards to try to find matching pairs
+- **Turns:** Players flip two cards; a successful match grants another turn
 - **Scoring:** A player scores 1 point for each pair they successfully match
 - **Objective:** Match more pairs than the opponent by the end of the game
 
@@ -63,7 +62,7 @@ Updated board:
 
 2. **Card Flipping:**
    - On their turn, a player selects two face-down cards to flip
-   - If the two cards have the same symbol (match), they remain face-up and the player scores a point
+   - If the two cards have the same symbol (match), they remain face-up, the player scores a point, and that player takes another turn
    - If the two cards have different symbols (no match), they are flipped back face-down
    - A player cannot select a card that is already face-up (matched)
 
@@ -78,7 +77,8 @@ Updated board:
    - **Loss:** The player with fewer matched pairs when all pairs have been found
 
 5. **Game Termination:**
-   - The game concludes when all pairs have been matched
+   - The game concludes when all pairs have been matched or when the configured turn limit is reached
+   - At the turn limit, the player with more matched pairs wins; equal scores draw
 
 ## Rewards
 
@@ -86,21 +86,23 @@ Updated board:
 |-------------|:-----------------:|:----------------:|
 | **Win**     | `+1`              | `-1`             |
 | **Draw**    | `0`               | `0`              |
-| **Invalid** | `-1`              | `0`              |
+| **Repeated invalid moves** | Opponent `+1` | Offender `-1` |
 
 ## Parameters
 
 - `grid_size` (`int`, default: `4`):
-  - **Description:** Sets the size of the grid (grid_size × grid_size)
+  - **Description:** Sets the even grid size (grid_size × grid_size), from 2 through 20
   - **Impact:** Larger grids increase difficulty by requiring more memory and creating more potential matches
+- `max_turns` (`int` or `None`, default: `100`):
+  - **Description:** Maximum number of completed card selections; `None` disables the turn limit
 
 ## Variants
 
-| Env-id                     | grid_size |
-|----------------------------|:---------:|
-| `MemoryGame-v0`            | `4`       |
-| `MemoryGame-v0-medium`     | `6`       |
-| `MemoryGame-v0-hard`       | `8`       |
+| Env-id                     | grid_size | max_turns |
+|----------------------------|:---------:|:---------:|
+| `MemoryGame-v0`            | `4`       | `30`      |
+| `MemoryGame-v0-medium`     | `6`       | `50`      |
+| `MemoryGame-v0-hard`       | `8`       | `80`      |
 
 
 ### Contact

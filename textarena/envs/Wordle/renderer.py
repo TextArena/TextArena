@@ -1,8 +1,8 @@
-def create_board_str(game_state: dict) -> str:
+def create_board_str(game_state: dict, reveal_answer: bool = False) -> str:
     """Render the full Wordle board as ASCII with emoji box feedback."""
     history = game_state.get("guess_history", [])
-    target_word = game_state.get("secret_word", "").upper()
-    word_length = len(target_word) if target_word else 5
+    word_length = game_state.get("word_length", 5)
+    target_word = game_state.get("secret_word", "").upper() if reveal_answer else "?" * word_length
 
     # Emoji mapping
     color_map = {"G": "🟩", "Y": "🟨", "X": "⬜"}

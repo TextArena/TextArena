@@ -1,83 +1,121 @@
-import json, os, re, random
+import json, os, re
 import importlib.resources
-from typing import Optional, Tuple, Dict, Any
+import unicodedata
+from typing import Any, Dict, Optional, Union
 
-import textarena as ta 
+import textarena as ta
 from textarena.envs.TruthAndDeception.renderer import create_board_str
 
-class TruthAndDeceptionEnv(ta.Env):
-    def __init__(self, max_turns: Optional[int]=5, data_path: Optional[str]=None):
-        assert max_turns%2==0, f"Please use an even number of max turns. Current max_turns: {max_turns}"
+
+class TruthAndDeceptionEnv(ta.GameEnv):
+    min_players = 2
+    max_players = 2
+    snapshot_excluded_attributes = ("facts_data",)
+
+    def __init__(self, max_turns: int = 6, data_path: Optional[str] = None):
+        if (
+            not isinstance(max_turns, int)
+            or isinstance(max_turns, bool)
+            or max_turns < 2
+            or max_turns % 2 != 0
+        ):
+            raise ValueError("max_turns must be an even integer of at least 2 so the Guesser takes the final turn.")
         self.max_turns = max_turns
         self._load_facts(data_path=data_path)
-        self.guess_fact1_pattern = re.compile(r"\[Fact 1\]", re.IGNORECASE)
-        self.guess_fact2_pattern = re.compile(r"\[Fact 2\]", re.IGNORECASE)
+        self.guess_fact1_pattern = re.compile(r"^\s*(?:Fact\s+1|\[\s*Fact\s+1\s*\])\s*$", re.IGNORECASE)
+        self.guess_fact2_pattern = re.compile(r"^\s*(?:Fact\s+2|\[\s*Fact\s+2\s*\])\s*$", re.IGNORECASE)
 
     def get_board_str(self):
-        return create_board_str(game_state=self.state.game_state)
+        return create_board_str(game_state=self.game_state, reveal_answer=self.state.done)
 
     def _load_facts(self, data_path: Optional[str]) -> None:
-        try:
-            if data_path is not None: # Use provided path
-                if not os.path.exists(data_path):
-                    raise FileNotFoundError(f"Facts data file not found at: {data_path}")
-                with open(data_path, "r", encoding="utf-8") as file:
-                    self.facts_data = json.load(file)
-            else: # Use package resource
-                with importlib.resources.files('textarena.envs.TruthAndDeception').joinpath('facts.json').open('r') as file:
-                    self.facts_data = json.load(file)
-        except Exception as e:
-            raise FileNotFoundError(f"Failed to load facts data: {str(e)}")
+        if data_path is not None:
+            if not os.path.isfile(data_path):
+                raise FileNotFoundError(f"Facts data file not found at: {data_path}")
+            with open(data_path, "r", encoding="utf-8") as file:
+                facts_data = json.load(file)
+        else:
+            with importlib.resources.files("textarena.envs.TruthAndDeception").joinpath("facts.json").open(
+                "r", encoding="utf-8"
+            ) as file:
+                facts_data = json.load(file)
 
-    def reset(self, num_players: int, seed: Optional[int]=None):
-        self.state = ta.TwoPlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
-        selected_facts = random.choice(self.facts_data) # Select a random set of facts
-        facts = [ # Randomize the order in which the facts are presented
-            (selected_facts["facts"]["fact1"], selected_facts["correct_fact"]=="fact1"),
-            (selected_facts["facts"]["fact2"], selected_facts["correct_fact"]=="fact2"),
+        if not isinstance(facts_data, list) or not facts_data:
+            raise ValueError("Facts data must be a non-empty JSON list.")
+        for entry in facts_data:
+            facts = entry.get("facts") if isinstance(entry, dict) else None
+            if (
+                not isinstance(facts, dict)
+                or not isinstance(facts.get("fact1"), str)
+                or not facts["fact1"].strip()
+                or not isinstance(facts.get("fact2"), str)
+                or not facts["fact2"].strip()
+                or entry.get("correct_fact") not in {"fact1", "fact2"}
+            ):
+                raise ValueError("Each facts entry must contain two non-empty facts and a valid correct_fact.")
+            normalized_fact1 = " ".join(unicodedata.normalize("NFKC", facts["fact1"]).casefold().split())
+            normalized_fact2 = " ".join(unicodedata.normalize("NFKC", facts["fact2"]).casefold().split())
+            if normalized_fact1 == normalized_fact2:
+                raise ValueError("The two facts in an entry must be distinct.")
+        self.facts_data = facts_data
+
+    def setup(self) -> Dict[str, Any]:
+        selected_facts = self.rng.choice(self.facts_data)
+        facts = [
+            (selected_facts["facts"]["fact1"], selected_facts["correct_fact"] == "fact1"),
+            (selected_facts["facts"]["fact2"], selected_facts["correct_fact"] == "fact2"),
         ]
-        random.shuffle(facts)
-        game_state={
-                "fact1": {"fact": facts[0][0], "is_correct": facts[0][1]}, "fact2": {"fact": facts[1][0], "is_correct": facts[1][1]},
-                "correct_fact": facts[0][0] if facts[0][1] else facts[1][0], "wrong_fact": facts[0][0] if facts[1][1] else facts[1][0]
-            }
-        self.state.reset(game_state=game_state, player_prompt_function=self._prompt, role_mapping={0: "Deceiver", 1: "Guesser"})
+        self.rng.shuffle(facts)
+        return {
+            "fact1": {"fact": facts[0][0], "is_correct": facts[0][1]},
+            "fact2": {"fact": facts[1][0], "is_correct": facts[1][1]},
+        }
 
-    def _prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
-        prompt = f"You are Player {player_id}, and you are the {self.state.role_mapping[player_id]} in the 'Truth and Deception' game.\n"
-        if self.state.role_mapping[player_id] == "Deceiver":
+    def roles(self) -> Dict[int, str]:
+        return {0: "Deceiver", 1: "Guesser"}
+
+    def prompt(self, player_id: int) -> str:
+        game_state = self.game_state
+        role = self.state.role_mapping[player_id]
+        prompt = f"You are Player {player_id}, and you are the {role} in the 'Truth and Deception' game.\n"
+        if role == "Deceiver":
             prompt += (
                 f"You know which of the following two facts is correct:\n"
                 f"Fact 1: {game_state['fact1']['fact']} ({'correct' if game_state['fact1']['is_correct'] else 'wrong'})\n"
                 f"Fact 2: {game_state['fact2']['fact']} ({'correct' if game_state['fact2']['is_correct'] else 'wrong'})\n"
                 "Your goal is to convince the other player to choose the incorrect fact.\n"
-                f"You will have a conversation for {self.state.max_turns} turns.\n"
-                "After that, the other player will make their guess.\n"
+                f"The first {self.max_turns - 1} total turns are conversation.\n"
+                "On the final turn, the Guesser must reply with exactly 'Fact 1' or 'Fact 2'.\n"
                 "On your turn, simply type your message."
             )
-        elif self.state.role_mapping[player_id] == "Guesser":
+        elif role == "Guesser":
             prompt += (
                 f"You need to determine which of the following two facts is correct:\n"
                 f"Fact 1: {game_state['fact1']['fact']}\n"
                 f"Fact 2: {game_state['fact2']['fact']}\n"
-                f"You will have a conversation with the other player for {self.state.max_turns} turns.\n"
-                "After that, you will make your guess.\n"
+                f"The first {self.max_turns - 1} total turns are conversation.\n"
+                "On the final turn, reply with exactly 'Fact 1' or 'Fact 2'.\n"
                 "On your turn, simply type your message."
             )
-        else: raise ValueError(f"Unexpected role mapping: {self.state.role_mapping[player_id]}. Expected 'Deceiver' or 'Guesser'.")
-        return prompt 
+        else:
+            raise ValueError(f"Unexpected role mapping: {role}. Expected 'Deceiver' or 'Guesser'.")
+        return prompt
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        if self.state.turn == self.state.max_turns-2:  # check if the guessing phase has started
-            self.state.add_observation(message="Now guess which of the two facts are correct by returning '[Fact 1]' or '[Fact 2]'.", observation_type=ta.ObservationType.GAME_MESSAGE) 
-        elif self.state.turn == self.state.max_turns-1:
-            if self.guess_fact1_pattern.search(action) or self.guess_fact2_pattern.search(action): # evaluate guess
-                if (self.guess_fact1_pattern.search(action) and self.state.game_state["fact1"]["is_correct"]) or (self.guess_fact2_pattern.search(action) and self.state.game_state["fact2"]["is_correct"]):
-                    winner_id=self.state.current_player_id; reason=f"Player {self.state.current_player_id} guessed correct fact." # correct guess
-                else: winner_id=1-self.state.current_player_id; reason=f"Player {self.state.current_player_id} guessed the wrong fact." # wrong guess
-                self.state.set_winner(player_id=winner_id, reason=reason) # set state winner
-            else: self.state.set_invalid_move(reason=f"Player {self.state.current_player_id} did not make their guess in the correct format.")
-        return self.state.step()
-
-            
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        if self.state.turn == self.max_turns - 2:  # check if the guessing phase has started
+            self.broadcast("Now guess which fact is correct by replying with 'Fact 1' or 'Fact 2'.", ta.ObservationType.GAME_MESSAGE)
+        elif self.state.turn == self.max_turns - 1:
+            normalized_action = unicodedata.normalize("NFKC", action)
+            normalized_action = "".join(
+                char
+                for char in normalized_action
+                if unicodedata.category(char) != "Cf"
+            )
+            guessed_fact1 = self.guess_fact1_pattern.search(normalized_action) is not None
+            guessed_fact2 = self.guess_fact2_pattern.search(normalized_action) is not None
+            if guessed_fact1 or guessed_fact2: # evaluate guess
+                if (guessed_fact1 and self.game_state["fact1"]["is_correct"]) or (guessed_fact2 and self.game_state["fact2"]["is_correct"]):
+                    return self.winner(player_id, reason=f"Player {player_id} guessed correct fact.") # correct guess
+                return self.winner(1 - player_id, reason=f"Player {player_id} guessed the wrong fact.") # wrong guess
+            return self.invalid(f"Player {player_id} did not make their guess in the correct format.")
+        return None

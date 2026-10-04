@@ -23,19 +23,19 @@ The game ends when all players have all 6 of their cards revealed. The player wi
 
 ## Actions
 
-Actions are text strings containing a single bracketed command. The environment recognizes the following formats:
+Submit exactly one bare command:
 
 - **Draw Phase (must choose one of):**
-  - `[draw]` — Draw a face-down card from the deck.
-  - `[take]` — Take the top card from the discard pile.
+  - `draw` — Draw a face-down card from the deck.
+  - `take` — Take the top card from the discard pile.
 
 - **Action Phase (after drawing a card):**
-  - `[swap X Y]` — Swap the drawn card into position at **row X, column Y**.
-  - `[discard]` — Discard the drawn card instead of swapping it (*only allowed if drawn from deck*).
+  - `swap X Y` — Swap the drawn card into position at **row X, column Y**.
+  - `discard` — Discard the drawn card instead of swapping it (*only allowed if drawn from deck*).
 
 - **Optional:**
-  - `[peek X Y]` — Peek at a face-down card at position (X, Y). This action may cost a turn depending on variant.
-  - `[knock]` — (Optional Rule) Declare final round. Each opponent gets one more turn.
+  - `peek X Y` — Peek at a face-down card at position (X, Y).
+  - `knock` — Declare the final round. Each opponent gets one more turn.
 
 **Note:** Players may not see the value of face-down cards before swapping.
 
@@ -69,10 +69,10 @@ Cards marked `?` are faced-down. You must use coordinates (row, column) when swa
 
 ## Example Moves
 
-- `[draw]` → Draw a card from the deck.
-- `[take]` → Take the top discard.
-- `[swap 2 1]` → Place drawn card at Row 2, Column 1.
-- `[discard]` → Discard the drawn card (if drawn from deck).
+- `draw` → Draw a card from the deck.
+- `take` → Take the top discard.
+- `swap 2 1` → Place the drawn card at Row 2, Column 1.
+- `discard` → Discard the drawn card (if drawn from deck).
 
 ## Available Environments
 

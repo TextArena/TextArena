@@ -7,8 +7,10 @@ def create_board_str(width: int, height: int, game_state: Dict[str, Any]) -> str
         for x in range(width):
             if trail_data[y][x] is not None: board[y][x] = '#'
     for pid, pdata in game_state["players"].items(): # Fill in live player heads
-        if pdata["alive"]:
-            px, py = pdata["position"]
+        alive = pdata.alive if hasattr(pdata, "alive") else pdata["alive"]
+        if alive:
+            position = pdata.position if hasattr(pdata, "position") else pdata["position"]
+            px, py = position
             board[py][px] = format(pid, 'X')  # Hex digit for player ID
     lines = []
     content_width = width * 2 - 1

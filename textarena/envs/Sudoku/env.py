@@ -1,118 +1,57 @@
-import re, random, copy
-from typing import Any, Dict, Optional, Tuple, List
+import re, copy
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
 from textarena.envs.Sudoku.renderer import create_board_str
 
-class SudokuEnv(ta.Env):
-    def __init__(self, clues: int= 30, max_turns: Optional[int] = 100):
+
+class SudokuEnv(ta.GameEnv):
+    min_players = 1
+    max_players = 1
+    max_action_chars = 4096
+
+    def __init__(self, clues: int = 30, max_turns: Optional[int] = 100):
         """
         Args:
-            clues (str): The number of clues.
+            clues (int): The exact number of initially filled cells.
             max_turns (int): The maximum number of moves allowed.
         """
+        if (
+            not isinstance(clues, int)
+            or isinstance(clues, bool)
+            or not 17 <= clues <= 80
+        ):
+            raise ValueError(f"clues must be between 17 and 80, received {clues}")
+        if (
+            not isinstance(max_turns, int)
+            or isinstance(max_turns, bool)
+            or max_turns <= 0
+        ):
+            raise ValueError("max_turns must be a positive integer")
         self.clues = clues
         self.max_turns = max_turns
 
-    def get_board_str(self): return create_board_str(board=self.game_board)
-    def _generate_board(self) -> List[List[int]]:
-        full_grid = self._generate_full_grid() ## generate a full grid
-        puzzle_grid = self._remove_cells(full_grid, self.clues) ## remove cells to create puzzle
-        return full_grid, puzzle_grid
-    
-    def _generate_full_grid(self) -> List[List[int]]:
-        grid = [[0 for _ in range(9)] for _ in range(9)]
-        self._fill_grid(grid)
-        return grid
+    @property
+    def full_grid(self) -> List[List[int]]:
+        return self.game_state["full_grid"]
 
-    def _fill_grid(self, grid: List[List[int]]) -> bool:
-        empty = self._find_empty(grid)
-        if not empty: return True  # Grid is complete
-        row, col = empty
+    @property
+    def game_board(self) -> List[List[int]]:
+        return self.game_state["initial_board"]
 
-        numbers = list(range(1, 10))
-        random.shuffle(numbers)
-        for num in numbers:
-            if self.is_safe(grid, row, col, num):
-                grid[row][col] = num
-                if self._fill_grid(grid): return True
-                grid[row][col] = 0
-        return False
-    
-    def _find_empty(self, grid: List[List[int]]) -> Optional[Tuple[int, int]]:
-        for i in range(9):
-            for j in range(9):
-                if grid[i][j] == 0:
-                    return (i, j)
-        return None
+    def get_board_str(self): return create_board_str(board=self.game_state["board"])
 
-    def is_safe(self, grid: List[List[int]], row: int, col: int, num: int) -> bool:
-        # Check row
-        if num in grid[row]: return False
-        # Check column
-        if num in [grid[i][col] for i in range(9)]: return False
-        # Check subgrid
-        start_row, start_col = 3 * (row // 3), 3 * (col // 3)
-        for i in range(start_row, start_row + 3):
-            for j in range(start_col, start_col + 3):
-                if grid[i][j] == num:
-                    return False
-        return True
+    def setup(self) -> Dict[str, Any]:
+        full_grid, puzzle_grid = self._generate_board()
+        return {
+            "board": copy.deepcopy(puzzle_grid),
+            "rendered_board": create_board_str(puzzle_grid),
+            "completed": False,
+            "full_grid": full_grid,
+            "initial_board": puzzle_grid,
+        }
 
-    def _remove_cells(self, grid: List[List[int]], clues: int) -> List[List[int]]:
-        puzzle = copy.deepcopy(grid)
-        cells = [(i, j) for i in range(9) for j in range(9)]
-        random.shuffle(cells)
-
-        while len(cells) > clues:
-            row, col = cells.pop()
-            removed = puzzle[row][col]
-            puzzle[row][col] = 0
-
-            # Make a copy to check for uniqueness
-            grid_copy = copy.deepcopy(puzzle)
-            solutions = []
-            self._count_solutions(grid_copy, solutions)
-            if len(solutions) != 1:
-                # Not unique, revert the removal
-                puzzle[row][col] = removed
-        return puzzle
-
-    def _solve_sudoku(self, grid: List[List[int]]) -> bool:
-        empty = self._find_empty(grid)
-        if not empty: return True  # Solved
-        row, col = empty
-        for num in range(1, 10):
-            if self.is_safe(grid, row, col, num):
-                grid[row][col] = num
-                if self._solve_sudoku(grid):
-                    return True
-                grid[row][col] = 0
-        return False
-
-    def _count_solutions(self, grid: List[List[int]], solutions: List[List[List[int]]], limit: int = 2) -> int:
-        if len(solutions) >= limit: return len(solutions)
-        empty = self._find_empty(grid)
-        if not empty:
-            solutions.append(copy.deepcopy(grid))
-            return len(solutions)
-        row, col = empty
-
-        for num in range(1, 10):
-            if self.is_safe(grid, row, col, num):
-                grid[row][col] = num
-                self._count_solutions(grid, solutions, limit)
-                grid[row][col] = 0
-        return len(solutions)
-    
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.state = ta.SinglePlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed) ## intitialise the game state
-        self.full_grid, self.game_board = self._generate_board()
-        game_state={"board": copy.deepcopy(self.game_board), "rendered_board": self._get_grid_string_with_indices(self.game_board), "completed": False}
-        self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
-        self.state.add_observation(message=f"Game Board:\n{self._get_grid_string_with_indices()}", observation_type=ta.ObservationType.GAME_BOARD)
-    
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
+    def prompt(self, player_id: int) -> str:
         return (
             f"You are Player {player_id}. You are playing Sudoku.\n"
             "Here is the current state of the Sudoku grid. Each row is numbered from 1 to 9, and each column is also numbered from 1 to 9.\n"
@@ -125,66 +64,143 @@ class SudokuEnv(ta.Env):
             "Rules and Instructions:\n"
             "1. **Do not overwrite** the initial numbers provided in the grid.\n"
             "2. **Only fill** empty cells represented by '.'.\n"
-            "3. You may respond in any manner you prefer, but ensure that your response includes the format of '[row column number]'.\n"
+            "3. Reply with your move in the format 'row column number', e.g. '5 3 7'.\n"
             "4. **Ensure** that your move does not violate Sudoku rules. Invalid moves will result in penalties.\n"
             "Examples:\n"
             "- **Valid Move**:\n"
             "  - Grid Snippet Before Move:\n"
             "  \n"
-            "  - Move: `[5 3 7]`\n"
+            "  - Move: `5 3 7`\n"
             "  - Explanation: Placing 7 at row 5, column 3 does not violate any Sudoku rules.\n\n"
             "- **Invalid Move** (Overwriting a pre-filled cell):\n"
             "  - Grid Snippet Before Move:\n"
             "  \n"
-            "  - Move: `[1 1 9]`\n"
+            "  - Move: `1 1 9`\n"
             "  - Explanation: Cell (1,1) is already filled with 5. You cannot overwrite it.\n\n"
             "- **Invalid Move** (Violating Sudoku rules):\n"
             "  - Grid Snippet Before Move:\n"
             "  \n"
-            "  - Move: `[1 3 5]`\n"
+            "  - Move: `1 3 5`\n"
             "  - Explanation: Placing 5 in row 1, column 3 violates the rule since 5 already exists in row 1.\n\n"
             "The history of your moves and thoughts will be appended as you play more rounds. Use the history of your move to improve your decision making by avoiding the moves you have tried. Good luck!\n\n"
         )
 
+    def render(self, player_id: int) -> str:
+        return f"Board state: \n{self.get_board_str()}"
 
-    def step(self, action: str) -> Tuple[bool, ta.Info ]:
-        player_id = self.state.current_player_id
-        self.state.add_observation(from_id=player_id, to_id=-1, message=action, observation_type=ta.ObservationType.PLAYER_ACTION) ## update the observation
-        ## validate the actions
-        ## extract the format [row column number] from the action
-        action_search_pattern = re.compile(r"\[(\d+)\s(\d+)\s(\d+)\]")
-        match = action_search_pattern.search(action)
+    def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        if len(move) > self.max_action_chars:
+            return self.invalid(
+                f"Action is too long (maximum {self.max_action_chars} characters)."
+            )
+        action_text = move.strip()
+        if action_text.startswith("[") or action_text.endswith("]"):
+            if not (action_text.startswith("[") and action_text.endswith("]")):
+                return self.invalid("Invalid move format: mismatched brackets.")
+            action_text = action_text[1:-1].strip()
+        match = re.fullmatch(
+            r"(\d+)\s*[,\s]\s*(\d+)\s*[,\s]\s*(\d+)",
+            action_text,
+        )
+        if not match:
+            return self.invalid(f"Invalid move format. Player {player_id} did not respond with valid 'row column number'.")
 
-        if not match: self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"Invalid move format. Player {player_id} did not respond with valid 'row column number'.")
-        else:
-            row, col, num = map(int, match.groups())
-            if row < 1 or row > 9 or col < 1 or col > 9 or num < 1 or num > 9:
-                self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"Invalid move. Player {player_id} attempted to place {num} at ({row}, {col}), which is out of bounds.")
-            else:
-                row_idx, col_idx = row - 1, col - 1
-                ## check if the cell is already filled in the initial grid
-                if self.state.game_state["board"][row_idx][col_idx] != 0:
-                    self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"Invalid move. Player {player_id} attempted to overwrite a pre-filled cell ({row}, {col}).")
-                elif self._is_move_correct(row_idx, col_idx, num):
-                    self.state.game_state["board"][row_idx][col_idx] = num ## update the grid
-                    self.state.add_observation(message=f"Board state: \n{self._get_grid_string_with_indices()}", observation_type=ta.ObservationType.GAME_BOARD) ## update the observation
-                else:
-                    self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"Invalid move. Player {player_id} attempted to place {num} at ({row}, {col}), which violates Sudoku rules.")
+        row, col, num = map(int, match.groups())
+        if row < 1 or row > 9 or col < 1 or col > 9 or num < 1 or num > 9:
+            return self.invalid(f"Invalid move. Player {player_id} attempted to place {num} at ({row}, {col}), which is out of bounds.")
 
-                ## check if the game is completed
-                if self._is_puzzle_complete():
-                    self.state.game_state["completed"] = True
-                    self.state.set_outcome(reward=1, reason=f"Congratulations! Player {player_id} completed the Sudoku puzzle.")
-                self.state.game_state["rendered_board"] = self._get_grid_string_with_indices(self.state.game_state["board"])
+        row_idx, col_idx = row - 1, col - 1
+        board = self.game_state["board"]
+        if board[row_idx][col_idx] != 0:
+            return self.invalid(f"Invalid move. Player {player_id} attempted to overwrite a pre-filled cell ({row}, {col}).")
+        if not self._is_move_correct(row_idx, col_idx, num):
+            return self.invalid(f"Invalid move. Player {player_id} attempted to place {num} at ({row}, {col}), which violates Sudoku rules.")
 
-        # check turn count
-        if self.state.check_turn_limit() and not self.state.done:
-            pct_complete = self._get_percentage_completion()
-            self.state.set_outcome(reward=pct_complete, reason=f"The turn limit has been reached. You correctly filled {round(pct_complete * 100)}% of the empty cells.")
-        return self.state.step()
-            
-    def _get_grid_string_with_indices(self, game_board: Optional[List[int]] = None) -> str:
-        if game_board is None: game_board = self.state.game_state["board"]
+        board[row_idx][col_idx] = num
+        self.game_state["rendered_board"] = create_board_str(board)
+
+        if self._is_puzzle_complete():
+            self.game_state["completed"] = True
+            return self.outcome({0: 1}, reason=f"Congratulations! Player {player_id} completed the Sudoku puzzle.")
+        return None
+
+    def on_turn_limit(self) -> ta.Outcome:
+        pct_complete = self._get_percentage_completion()
+        return self.outcome({0: pct_complete}, reason=f"The turn limit has been reached. You correctly filled {round(pct_complete * 100)}% of the empty cells.")
+
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome({0: self._get_percentage_completion()}, reason=f"Invalid Move: {reason}")
+
+    # ------------------------------------------------------- board generation
+    def _generate_board(self) -> Tuple[List[List[int]], List[List[int]]]:
+        # This is a known uniquely solvable 17-clue puzzle and its solution.
+        # Digit, row, and column symmetries produce a large deterministic family
+        # of equivalent puzzles without rerunning an expensive uniqueness search.
+        base_puzzle = [
+            [0, 0, 0, 0, 0, 0, 0, 1, 0],
+            [4, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 2, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 5, 0, 4, 0, 7],
+            [0, 0, 8, 0, 0, 0, 3, 0, 0],
+            [0, 0, 1, 0, 9, 0, 0, 0, 0],
+            [3, 0, 0, 4, 0, 0, 2, 0, 0],
+            [0, 5, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 8, 0, 6, 0, 0, 0],
+        ]
+        base_solution = [
+            [6, 9, 3, 7, 8, 4, 5, 1, 2],
+            [4, 8, 7, 5, 1, 2, 9, 3, 6],
+            [1, 2, 5, 9, 6, 3, 8, 7, 4],
+            [9, 3, 2, 6, 5, 1, 4, 8, 7],
+            [5, 6, 8, 2, 4, 7, 3, 9, 1],
+            [7, 4, 1, 3, 9, 8, 6, 2, 5],
+            [3, 1, 9, 4, 7, 5, 2, 6, 8],
+            [8, 5, 6, 1, 2, 9, 7, 4, 3],
+            [2, 7, 4, 8, 3, 6, 1, 5, 9],
+        ]
+
+        digits = list(range(1, 10))
+        self.rng.shuffle(digits)
+        digit_map = {old: new for old, new in zip(range(1, 10), digits)}
+
+        bands = [0, 1, 2]
+        self.rng.shuffle(bands)
+        row_order = []
+        for band in bands:
+            rows = [band * 3 + offset for offset in range(3)]
+            self.rng.shuffle(rows)
+            row_order.extend(rows)
+
+        stacks = [0, 1, 2]
+        self.rng.shuffle(stacks)
+        col_order = []
+        for stack in stacks:
+            cols = [stack * 3 + offset for offset in range(3)]
+            self.rng.shuffle(cols)
+            col_order.extend(cols)
+
+        def transform(grid: List[List[int]]) -> List[List[int]]:
+            return [
+                [digit_map[grid[row][col]] if grid[row][col] else 0 for col in col_order]
+                for row in row_order
+            ]
+
+        full_grid = transform(base_solution)
+        puzzle_grid = transform(base_puzzle)
+        extra_positions = [
+            (row, col)
+            for row in range(9)
+            for col in range(9)
+            if puzzle_grid[row][col] == 0
+        ]
+        self.rng.shuffle(extra_positions)
+        for row, col in extra_positions[: self.clues - 17]:
+            puzzle_grid[row][col] = full_grid[row][col]
+        return full_grid, puzzle_grid
+
+    # ---------------------------------------------------------------- helpers
+    def _get_grid_string_with_indices(self, game_board: Optional[List[List[int]]] = None) -> str:
+        if game_board is None: game_board = self.game_state["board"]
         header = "   " + " ".join([f"C{j+1}" + ("  " if (j + 1) % 3 == 0 else "") for j in range(9)])  # Column headers
         lines = [header]
         for i, row in enumerate(game_board):
@@ -198,31 +214,28 @@ class SudokuEnv(ta.Env):
             if (i + 1) % 3 == 0 and i < 8:
                 lines.append("   " + "- " * 16)
         return "\n".join(lines)
-    
+
     def _is_move_correct(self, row: int, col: int, num: int) -> bool:
         return self.full_grid[row][col] == num
 
     def _is_puzzle_complete(self) -> bool:
         for i in range(9):
             for j in range(9):
-                num = self.state.game_state["board"][i][j]
+                num = self.game_state["board"][i][j]
                 if num == 0 or not self._is_move_correct_complete(i, j, num):
                     return False
         return True
-    
+
     def _is_move_correct_complete(self, row: int, col: int, num: int) -> bool:
-        self.state.game_state["board"][row][col] = 0
-        correct = self._is_move_correct(row, col, num)
-        self.state.game_state["board"][row][col] = num
-        return correct
+        return self._is_move_correct(row, col, num)
 
     def _get_percentage_completion(self) -> float:
         correct = 0; total = 0
         for i in range(9):
             for j in range(9):
-                if self.game_board[i][j] != 0: # Skip original clues
+                if self.game_board[i][j] != 0:  # Skip original clues
                     continue
                 total += 1
-                if self.state.game_state["board"][i][j] == self.full_grid[i][j]:
+                if self.game_state["board"][i][j] == self.full_grid[i][j]:
                     correct += 1
         return correct/total if total > 0 else 0.0

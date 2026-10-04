@@ -1,15 +1,24 @@
-import re, random, copy, string
-from typing import Any, Dict, Optional, Tuple, Union
+import re, copy, string
+from typing import Any, Dict, List, Optional, Set, Tuple, Union
 
 import textarena as ta
 from textarena.envs.WordSearch.renderer import create_board_str
 
-import nltk
 from nltk.corpus import words
-nltk.download('words')
 
-class WordSearchEnv(ta.Env):
+
+class WordSearchEnv(ta.GameEnv):
     """ Word Search environment """
+
+    min_players = 1
+    max_players = 1
+    snapshot_excluded_attributes = ("word_list",)
+    MAX_INCORRECT_TRIES = 20
+    MAX_COORDINATE_DIGITS = 6
+    _ACTION_RE = re.compile(
+        r"(?P<wrapped>\[)?\s*(?P<start_row>\d+)\s+(?P<start_col>\d+)"
+        r"\s+(?P<end_row>\d+)\s+(?P<end_col>\d+)\s*(?(wrapped)\])"
+    )
 
     def __init__(self, hardcore: Optional[bool] = False, max_turns: int = 20):
         """
@@ -18,28 +27,71 @@ class WordSearchEnv(ta.Env):
         Args:
             hardcore: Whether to play in hardcore mode.
         """
-        super().__init__()
+        if not isinstance(hardcore, bool):
+            raise ValueError("hardcore must be a boolean")
+        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
+            raise ValueError("max_turns must be a positive integer")
         self.hardcore = hardcore
         self.max_turns = max_turns
         self.num_words = 5
-        self.num_incorrect_tries = 20
 
         ## load the word list
-        self.word_list = words.words("en") if self.hardcore else words.words("en-basic")
+        corpus_name = "en" if self.hardcore else "en-basic"
+        try:
+            corpus_words = words.words(corpus_name)
+        except LookupError as exc:
+            raise RuntimeError(
+                "The NLTK words corpus is required; install it with nltk.download('words')."
+            ) from exc
+        self.word_list = list(
+            dict.fromkeys(word.upper() for word in corpus_words if word.isalpha() and len(word) >= 2)
+        )
+        if len(self.word_list) < self.num_words:
+            raise ValueError("word corpus does not contain enough usable words")
+
+    # Convenience accessors kept for renderers/tests; game data lives in game_state.
+    @property
+    def placed_words(self) -> Dict[str, Tuple[int, int, str]]:
+        return self.game_state["placed_words"]
+
+    @property
+    def correct_words(self) -> Set[str]:
+        return self.game_state["correct_words"]
+
+    @property
+    def incorrect_attempts(self) -> List[Tuple[int, int, int, int]]:
+        return self.game_state["incorrect_attempts"]
+
+    @property
+    def highlighted_positions(self) -> Set[Tuple[int, int]]:
+        return self.game_state["highlighted_positions"]
+
+    @property
+    def num_incorrect_tries(self) -> int:
+        return self.game_state["num_incorrect_tries"]
+
+    @property
+    def attempted_coordinates(self) -> Set[Tuple[int, int, int, int]]:
+        return self.game_state["attempted_coordinates"]
 
     def get_board_str(self):
         return create_board_str(game_state=self.state.game_state)
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        """ Reset the environment """
-        self.state = ta.SinglePlayerState(num_players=num_players, seed=seed, max_turns=self.max_turns) ## initialise the game state
-        self.game_board, self.placed_words = self._generate_word_search() ## load the game board
-        ## reset the state
-        game_state = {"board": copy.deepcopy(self.game_board), "rendered_board": self._render_board(self.game_board),}
-        self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
-        self._observe_current_state()
+    def setup(self) -> Dict[str, Any]:
+        board, placed_words = self._generate_word_search()
+        game_state = {
+            "board": copy.deepcopy(board),
+            "placed_words": placed_words,
+            "correct_words": set(),
+            "incorrect_attempts": [],
+            "highlighted_positions": set(),
+            "attempted_coordinates": set(),
+            "num_incorrect_tries": self.MAX_INCORRECT_TRIES,
+        }
+        game_state["rendered_board"] = self._render_board(board, highlighted_positions=game_state["highlighted_positions"])
+        return game_state
 
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
+    def prompt(self, player_id: int) -> str:
         """ Generate the player prompt """
         prompt = (
             f"You are Player {player_id}, and you are participating in a Word Search challenge "
@@ -51,28 +103,97 @@ class WordSearchEnv(ta.Env):
         )
         prompt += (
             "\n\nTo locate a word, specify the row and column of its start and end letters. Note that words are either across or down.\n"
-            "You may type your response and thoughts in any manner. But you may only submit one submission at a time. For your submissions, use the format '[start_row start_col end_row end_col]'.\n"
-            "For instance, if you want to find the word 'HELLO' starting at row 1, column 1 and ending at row 1, column 5, enter '[1 1 1 5]'.\n"
+            "You may only submit one guess at a time. For your submissions, use the format 'start_row start_col end_row end_col'.\n"
+            "For instance, if you want to find the word 'HELLO' starting at row 1, column 1 and ending at row 1, column 5, enter '1 1 1 5'.\n"
             "\nGuidelines:\n"
             "- Each guess must be unique; you cannot repeat the same guess.\n"
-            "- You have a total of 20 incorrect attempts remaining.\n"
+            f"- You have a total of {self.MAX_INCORRECT_TRIES} incorrect attempts remaining.\n"
             "- The history of your attempts will be recorded below.\n\n"
-            "Make your guesses carefully and strategically. Good luck, Player {player_id}! Let's see how many words you can find!\n"
+            f"Make your guesses carefully and strategically. Good luck, Player {player_id}! Let's see how many words you can find!\n"
         )
         return prompt
-    
-    def _observe_current_state(self) -> None:
-        """
-        Observe the current state of the game and update the observations.
-        This includes the current board, placed words, and any incorrect attempts.
-        """
-        self.state.add_observation(
-            message=f"Current Board:\n\n{self._render_board(self.state.game_state['board'], show_words=True)}\n"
-                    f"Placed Words: {', '.join(self.placed_words.keys())}\n"
-                    f"Incorrect Attempts Remaining: {self.num_incorrect_tries}",
-            observation_type=ta.ObservationType.GAME_BOARD
+
+    def render(self, player_id: int) -> str:
+        return (
+            f"Current Board:\n\n{self._render_board(self.game_state['board'], show_words=True)}\n"
+            f"Placed Words: {', '.join(self.placed_words.keys())}\n"
+            f"Incorrect Attempts Remaining: {self.num_incorrect_tries}"
         )
-    
+
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        gs = self.game_state
+        match = self._ACTION_RE.fullmatch(action.strip())
+        if not match:
+            return self.invalid(f"Invalid move format. Player {player_id} did not respond with valid 'start_row start_col end_row end_col'.")
+
+        coordinate_values = (
+            match.group("start_row"),
+            match.group("start_col"),
+            match.group("end_row"),
+            match.group("end_col"),
+        )
+        if any(len(value) > self.MAX_COORDINATE_DIGITS for value in coordinate_values):
+            return self.invalid("Invalid move. One or more coordinates are out of bounds.")
+
+        coords = [
+            (
+                int(coordinate_values[0]),
+                int(coordinate_values[1]),
+                int(coordinate_values[2]),
+                int(coordinate_values[3]),
+            )
+        ]
+
+        # Validate everything up-front so no state is mutated before an invalid return.
+        for start_row, start_col, end_row, end_col in coords:
+            if not (0 <= start_row < len(gs["board"])
+                    and 0 <= start_col < len(gs["board"][0])
+                    and 0 <= end_row < len(gs["board"])
+                    and 0 <= end_col < len(gs["board"][0])):
+                return self.invalid(f"Invalid move format. Player {player_id} did not respond with valid 'start_row start_col end_row end_col'.")
+            coordinate = (start_row, start_col, end_row, end_col)
+            reverse = (end_row, end_col, start_row, start_col)
+            if coordinate in gs["attempted_coordinates"] or reverse in gs["attempted_coordinates"]:
+                return self.invalid("Invalid move. The action has already been attempted.")
+
+        for start_row, start_col, end_row, end_col in coords:
+            coordinate = (start_row, start_col, end_row, end_col)
+            gs["attempted_coordinates"].add(coordinate)
+            word_found = self._map_coordinate_to_word(start_row, start_col, end_row, end_col)
+            if word_found is None:
+                ## action is incorrect
+                gs["incorrect_attempts"].append(coordinate)
+                gs["num_incorrect_tries"] -= 1
+                message = f"'{start_row} {start_col} {end_row} {end_col}' is an incorrect attempt. {gs['num_incorrect_tries']} incorrect tries remaining."
+                self.message(player_id, message, ta.ObservationType.GAME_MESSAGE)
+                if gs["num_incorrect_tries"] == 0:
+                    gs["rendered_board"] = self._render_board(gs["board"], show_words=True)
+                    reward = round(len(gs["correct_words"]) / len(gs["placed_words"]), 3)
+                    reason = f"No more incorrect tries remaining. You found {len(gs['correct_words'])} out of {len(gs['placed_words'])} words ({round(reward * 100)}%)."
+                    return self.outcome({0: reward}, reason=reason)
+                break
+            else:
+                ## action is correct
+                gs["correct_words"].add(word_found)
+                self._highlight_word(start_row, start_col, end_row, end_col)
+                message = f"'{start_row} {start_col} {end_row} {end_col}' is a correct attempt. You found the word '{word_found}'."
+                self.message(player_id, message, ta.ObservationType.GAME_MESSAGE)
+
+        ## update the game board
+        gs["rendered_board"] = self._render_board(gs["board"], show_words=True)
+
+        if len(gs["correct_words"]) == len(gs["placed_words"]):
+            return self.outcome({0: 1.0}, reason="Congratulations! You completed the Word Search puzzle.")
+        return None
+
+    def on_turn_limit(self) -> ta.Outcome:
+        pct_complete = self._get_percentage_completion()
+        reason = f"The turn limit has been reached. You found {len(self.correct_words)} out of {len(self.placed_words)} words ({round(pct_complete * 100)}%)."
+        return self.outcome({0: pct_complete}, reason=reason)
+
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome({0: self._get_percentage_completion()}, reason=f"Invalid Move: {reason}")
+
     def _generate_word_search(self):
         """
         Generate a word search grid with the given words and their directions.
@@ -80,48 +201,42 @@ class WordSearchEnv(ta.Env):
         Returns:
             List[List[str]]: The generated word search grid.
             Dict[str, Tuple[int, int, str]]: The placed words and their positions and directions.
-
         """
         ## sample the words
-        self.words = random.sample(self.word_list, self.num_words)
-        self.words = [word.upper() for word in self.words]
-        self.words = sorted(self.words, key=lambda w: len(w), reverse=True)
-        self.directions = {word: random.choice(["across", "down"]) for word in self.words}
+        sampled = self.rng.sample(self.word_list, self.num_words)
+        sampled = sorted(sampled, key=lambda w: len(w), reverse=True)
+        directions = {word: self.rng.choice(["across", "down"]) for word in sampled}
 
-        self.highlighted_positions = set()
-        self.correct_words = set()
-        self.incorrect_attempts = []
-
-        grid_size = self._determine_initial_grid_size(self.words)
+        grid_size = self._determine_initial_grid_size(sampled)
         grid = self._create_empty_grid(grid_size)
 
-        self.placed_words = {}  # word: (row, col), where 0 is the starting index
+        placed_words = {}  # word: (row, col, direction), where 0 is the starting index
 
-        for word in self.words:
+        for word in sampled:
             placed = False
-            if not self.placed_words:  # First word
+            if not placed_words:  # First word
                 # Place the first word in the center of the grid
-                if self.directions[word] == "across":
+                if directions[word] == "across":
                     row = grid_size // 2
                     col = (grid_size - len(word)) // 2
                 else:
                     row = (grid_size - len(word)) // 2
                     col = grid_size // 2
 
-                if self._can_place_word(grid, word, self.directions[word], row, col):
-                    self._place_word_on_grid(grid, word, self.directions[word], row, col)
-                    self.placed_words[word] = (row, col, self.directions[word])
+                if self._can_place_word(grid, word, directions[word], row, col):
+                    self._place_word_on_grid(grid, word, directions[word], row, col)
+                    placed_words[word] = (row, col, directions[word])
                     placed = True
-            
+
             else:
                 # Attempt to find overlaps
-                possible_positions = self._find_overlaps(word, grid, self.directions)
-                random.shuffle(possible_positions)  # Randomize to add variability
+                possible_positions = self._find_overlaps(word, grid, directions, placed_words)
+                self.rng.shuffle(possible_positions)  # Randomize to add variability
                 for pos in possible_positions:
                     row, col, direction = pos
                     if self._can_place_word(grid, word, direction, row, col):
                         self._place_word_on_grid(grid, word, direction, row, col)
-                        self.placed_words[word] = (row, col, direction)
+                        placed_words[word] = (row, col, direction)
                         placed = True
                         break
 
@@ -129,66 +244,51 @@ class WordSearchEnv(ta.Env):
                 # If no overlap placement is possible, try placing the word in any free position
                 for row in range(grid_size):
                     for col in range(grid_size):
-                        if self._can_place_word(grid, word, self.directions[word], row, col):
-                            self._place_word_on_grid(grid, word, self.directions[word], row, col)
-                            self.placed_words[word] = (row, col, self.directions[word])
+                        if self._can_place_word(grid, word, directions[word], row, col):
+                            self._place_word_on_grid(grid, word, directions[word], row, col)
+                            placed_words[word] = (row, col, directions[word])
                             placed = True
                             break
                     if placed:
                         break
 
+        if len(placed_words) != len(sampled):
+            raise RuntimeError("failed to place every sampled word-search word")
+
         # Fill the remaining grid with random letters
         self._fill_empty_cells(grid)
-        return grid, self.placed_words
+        return grid, placed_words
 
     def _determine_initial_grid_size(self, words):
-        """
-        Determine the initial size of the grid based on the length of the longest word.
-
-        Args:
-            words (List[str]): The list of words to place on the grid.
-
-        Returns:
-            int: The initial size of the grid.
-
-        """
+        """Determine the initial size of the grid based on the length of the longest word."""
         max_length = max(len(word) for word in words)
-        return round(max_length * 1.5)  # Ensures that the grid size is larger than the longest word to allow placement
+        # Reserve enough untouched rows/columns for every sampled word. This
+        # makes fallback placement total rather than seed-dependent when short
+        # words have no compatible overlaps.
+        return max(round(max_length * 1.5), max_length + len(words))
 
     def _create_empty_grid(self, size):
-        """
-        Create an empty grid of the specified size.
-
-        Args:
-            size (int): The size of the grid.
-
-        Returns:
-            List[List[str]]: The empty grid.
-
-        """
+        """Create an empty grid of the specified size."""
         return [["." for _ in range(size)] for _ in range(size)]
 
     def _can_place_word(self, grid, word, direction, row, col):
-        """
-        Check if a word can be placed on the grid at the specified position.
-
-        Args:
-            grid (List[List[str]]): The current grid.
-            word (str): The word to place.
-            direction (str): The direction of the word ("across" or "down").
-            row (int): The starting row index.
-            col (int): The starting column index.
-
-        Returns:
-            bool: True if the word can be placed, False otherwise.
-
-        """
+        """Check if a word can be placed on the grid at the specified position."""
+        if (
+            direction not in {"across", "down"}
+            or not grid
+            or not grid[0]
+            or row < 0
+            or col < 0
+            or row >= len(grid)
+            or col >= len(grid[0])
+        ):
+            return False
         if direction == "across":
             if col + len(word) > len(grid[0]):
                 return False
             for i, letter in enumerate(word):
                 current_cell = grid[row][col + i]
-                if current_cell != "." and current_cell != letter: 
+                if current_cell != "." and current_cell != letter:
                     return False
         else:  # "down"
             if row + len(word) > len(grid):
@@ -201,17 +301,7 @@ class WordSearchEnv(ta.Env):
         return True
 
     def _place_word_on_grid(self, grid, word, direction, row, col):
-        """
-        Place a word on the grid at the specified position.
-
-        Args:
-            grid (List[List[str]]): The current grid.
-            word (str): The word to place.
-            direction (str): The direction of the word ("across" or "down").
-            row (int): The starting row index.
-            col (int): The starting column index.
-
-        """
+        """Place a word on the grid at the specified position."""
         if direction == "across":
             for i, letter in enumerate(word):
                 grid[row][col + i] = letter
@@ -219,21 +309,15 @@ class WordSearchEnv(ta.Env):
             for i, letter in enumerate(word):
                 grid[row + i][col] = letter
 
-    def _find_overlaps(self, word, grid, directions):
+    def _find_overlaps(self, word, grid, directions, placed_words):
         """
         Find all possible valid overlaps for the word with already placed words.
-        
-        Args:
-            word (str): The word to place.
-            grid (List[List[str]]): The current grid.
-            directions (Dict[str, str]): The directions of the words.
-            
+
         Returns:
             List[Tuple[int, int, str]]: The list of possible overlaps (row, col, direction).
-            
         """
         overlaps = []
-        for placed_word, (p_row, p_col, p_direction) in self.placed_words.items():
+        for placed_word, (p_row, p_col, p_direction) in placed_words.items():
             for i, letter in enumerate(word):
                 for j, placed_letter in enumerate(placed_word):
                     if letter == placed_letter:
@@ -253,138 +337,27 @@ class WordSearchEnv(ta.Env):
         return overlaps
 
     def _fill_empty_cells(self, grid):
-        """
-        Fill empty cells with random letters.
-        
-        Args:
-            grid (List[List[str]]): The current grid.
-            
-        """
+        """Fill empty cells with random letters."""
         for row in range(len(grid)):
             for col in range(len(grid[0])):
                 if grid[row][col] == ".":
-                    grid[row][col] = random.choice(string.ascii_uppercase)
+                    grid[row][col] = self.rng.choice(string.ascii_uppercase)
 
-    def _validate_and_replace_unintended_words(self, grid, words):
-        """
-        Validate the grid and replace unintended words with random letters in a single pass
-        
-        Args:
-            grid (List[List[str]]): The current grid.
-            words (List[str]): The list of words to place on the grid.
-            
-        """
-        grid_size = len(grid)
-        word_set = set(words)
-
-        # Check each row for unintended words
-        for row_index, row in enumerate(grid):
-            row_str = "".join(row)
-            self._find_and_replace_unintended_words(grid, row_str, word_set, row_index, is_row=True)
-
-        # Check each column for unintended words
-        for col_index in range(grid_size):
-            col_str = "".join(grid[row][col_index] for row in range(grid_size))
-            self._find_and_replace_unintended_words(grid, col_str, word_set, col_index, is_row=False)
-
-    def _find_and_replace_unintended_words(self, grid, string, word_set, index, is_row):
-        """
-        Helper function to find and replace unintended words in a string, avoiding placed word positions.
-        
-        Args:
-            grid (List[List[str]]): The current grid.
-            string (str): The string to check for unintended words.
-            word_set (Set[str]): The set of words to avoid.
-            index (int): The row or column index.
-            is_row (bool): Whether the string is a row or column.
-            
-        """
-        min_word_length = 3  # Only consider words of length 3 or greater
-        placed_positions = self._get_positions()
-
-        for start in range(len(string)):
-            for end in range(start + min_word_length, len(string) + 1):
-                substring = string[start:end]
-                
-                # Map the substring positions to (row, col) based on whether it's a row or column
-                if is_row:
-                    substring_positions = {(index, start + i) for i in range(len(substring))}
-                else:
-                    substring_positions = {(start + i, index) for i in range(len(substring))}
-                
-                # Check if any part of the substring overlaps with placed word positions
-                if substring_positions & placed_positions:
-                    continue  # Skip if any part of the substring overlaps with placed words
-
-                if substring in word_set:
-                    continue  # This is an intended word, skip it
-                
-                # Check if the substring is a valid English word
-                if self._is_valid_word(substring):
-                    print(f"Unintended word found: {substring}")
-                    self._replace_unintended_word(grid, substring_positions)
-
-    def _replace_unintended_word(self, grid, positions):
-        """
-        Replace unintended word positions in the grid with random uppercase letters.
-        
-        Args:
-            grid (List[List[str]]): The current grid.
-            positions (Set[Tuple[int, int]]): The positions to replace.
-            
-        """
-        for row, col in positions:
-            grid[row][col] = random.choice(string.ascii_uppercase)
-
-    def _is_valid_word(self, word):
-        """
-        Check if the word is valid (could use a dictionary or predefined list).
-        
-        Args:
-            word (str): The word to check.
-            
-        Returns:
-            bool: True if the word is valid, False otherwise.
-            """
-        return word.lower() in words.words("en")
-    
-    def _get_positions(self):
-        """
-        Get the positions of the placed words.
-
-        Returns:
-            Set[Tuple[int, int]]: The positions of the placed words.
-
-        """
-        positions = set()
-        for word, (row, col, direction) in self.placed_words.items():
-            if direction == "across":
-                for position in [(row, col + i) for i in range(len(word))]:
-                    positions.add(position)
-            else:  # "down"
-                for position in [(row + i, col) for i in range(len(word))]:
-                    positions.add(position)
-        return positions
-    
-
-    def _render_board(self, grid, show_words=True):
+    def _render_board(self, grid, show_words=True, highlighted_positions: Optional[Set[Tuple[int, int]]] = None):
         """
         Print the grid with the words highlighted based on the stored highlighted positions.
-        
-        Args:
-            grid (List[List[str]]): The current grid.
-            show_words (bool): Whether to show the words in square brackets.
-            
+
         Returns:
             str: The rendered board as a string.
-            
         """
+        if highlighted_positions is None:
+            highlighted_positions = self.highlighted_positions
         header = "   " + " ".join(f"C{i:02}" for i in range(len(grid)))
         lines = [header]
         for i, row in enumerate(grid):
             row_str = f"R{i:02} "
             for j, val in enumerate(row):
-                if (i, j) in self.highlighted_positions:
+                if (i, j) in highlighted_positions:
                     row_str += f"[{val}] " if show_words else f" {val}  "
                 else:
                     row_str += f" {val}  "
@@ -394,195 +367,56 @@ class WordSearchEnv(ta.Env):
 
     def _check_word(self, grid, start_row, start_col, end_row, end_col):
         """
-        Check if the selected word exactly matches a placed word and update game state.
-
-        Args:
-            grid (List[List[str]]): The current grid.
-            start_row (int): The starting row index.
-            start_col (int): The starting column index.
-            end_row (int): The ending row index.
-            end_col (int): The ending column index.
+        Check if the selected coordinates exactly match a placed word.
 
         Returns:
             bool: True if the word is correct, False otherwise.
         """
-        for placed_word, (row, col, direction) in self.placed_words.items():
-            expected_start = (row, col)
-            if direction == "across":
-                expected_end = (row, col + len(placed_word) - 1)
-            else:  # "down"
-                expected_end = (row + len(placed_word) - 1, col)
+        return self._map_coordinate_to_word(start_row, start_col, end_row, end_col) is not None
 
-            actual_start = (start_row, start_col)
-            actual_end = (end_row, end_col)
-
-            if (actual_start == expected_start and actual_end == expected_end) or \
-            (actual_start == expected_end and actual_end == expected_start):
-                self.correct_words.add(placed_word)
-                self._highlight_word(start_row, start_col, end_row, end_col)
-                print(f"Correct! The word '{placed_word}' was found.")
-                return True
-
-        # If no match, record as an incorrect attempt
-        self.incorrect_attempts.append((start_row, start_col, end_row, end_col))
-        print("Incorrect attempt.")
-        return False
-
-        
     def _highlight_word(self, start_row, start_col, end_row, end_col):
-        """
-        Highlight a word's positions based on the start and end coordinates.
-
-        Args:
-            start_row (int): The starting row index.
-            start_col (int): The starting column index.
-            end_row (int): The ending row index.
-            end_col (int): The ending column index.
-
-        """
+        """Highlight a word's positions based on the start and end coordinates."""
         if start_row == end_row:  # Horizontal word
             for col in range(min(start_col, end_col), max(start_col, end_col) + 1):
                 self.highlighted_positions.add((start_row, col))
         elif start_col == end_col:  # Vertical word
             for row in range(min(start_row, end_row), max(start_row, end_row) + 1):
                 self.highlighted_positions.add((row, start_col))
-        else:
-            print("Invalid input: Words can only be horizontal or vertical.")
 
     def _extract_word(self, grid, start_row, start_col, end_row, end_col):
-        """
-        Extracts the word from the grid based on start and end coordinates.
-
-        Args:
-            grid (List[List[str]]): The current grid.
-            start_row (int): The starting row index.
-            start_col (int): The starting column index.
-            end_row (int): The ending row index.
-            end_col (int): The ending column index.
-
-        Returns:
-            str: The extracted word
-
-        """
+        """Extracts the word from the grid based on start and end coordinates."""
         if start_row == end_row:  # Horizontal word
             return "".join(grid[start_row][col] for col in range(min(start_col, end_col), max(start_col, end_col) + 1))
         elif start_col == end_col:  # Vertical word
             return "".join(grid[row][start_col] for row in range(min(start_row, end_row), max(start_row, end_row) + 1))
         else:
-            print("Invalid input: Words can only be horizontal or vertical.")
             return ""
 
     def _matches_position(self, word, row, col, direction, start_row, start_col, end_row, end_col):
-        """
-        Check if the provided start and end positions match a placed word's position.
-
-        Args:
-            word (str): The word to check.
-            row (int): The row index of the placed word.
-            col (int): The column index of the placed word.
-            direction (str): The direction of the placed word.
-            start_row (int): The starting row index.
-            start_col (int): The starting column index.
-            end_row (int): The ending row index.
-            end_col (int): The ending column index.
-
-        Returns:
-            bool: True if the positions match, False otherwise.
-
-        """
-        if direction == "across" and row == start_row and col == min(start_col, end_col):
-            return len(word) == abs(end_col - start_col) + 1
-        elif direction == "down" and col == start_col and row == min(start_row, end_row):
-            return len(word) == abs(end_row - start_row) + 1
-        return False
-    
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        """ Take a step in the environment """
-        player_id = self.state.current_player_id
-        self.state.add_observation(from_id=player_id, to_id=-1, message=action, observation_type=ta.ObservationType.PLAYER_ACTION) ## Update the observations that was provided by the player
-        ## validate the action
-        action_search_pattern = re.compile(r"\[(\d+)\s(\d+)\s(\d+)\s(\d+)\]")
-        matches = action_search_pattern.findall(action)
-        matches = set(matches)
-
-        if not matches:
-            ## invalid action
-            reason=f"Invalid move format. Player {player_id} did not respond with valid 'start_row, start_col, end_row, end_col'."
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=reason)
+        """Check if the provided start and end positions match a placed word's position."""
+        expected_start = (row, col)
+        if direction == "across":
+            expected_end = (row, col + len(word) - 1)
+        elif direction == "down":
+            expected_end = (row + len(word) - 1, col)
         else:
-            for match in matches:
-                print("Checking match:", match)
-                start_row, start_col, end_row, end_col = [int(x) for x in match]
-                if not (0 <= start_row < len(self.state.game_state["board"]) 
-                        and 0 <= start_col < len(self.state.game_state["board"][0]) 
-                        and 0 <= end_row < len(self.state.game_state["board"]) 
-                        and 0 <= end_col < len(self.state.game_state["board"][0])):
-                    ## action out of bounds
-                    reason=f"Invalid move format. Player {player_id} did not respond with valid 'start_row, start_col, end_row, end_col'."
-                    self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=reason)
-                    break
-                elif (start_row, start_col, end_row, end_col) in self.incorrect_attempts:
-                    ## action already attempted
-                    reason=f"Invalid move. The action has already been attempted."
-                    self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=reason)
-                    break
-                elif not self._check_word(self.state.game_state["board"], start_row, start_col, end_row, end_col):
-                    ## action is incorrect
-                    self.num_incorrect_tries -= 1
-                    message=f"[{start_row} {start_col} {end_row} {end_col}] is an incorrect attempt. {self.num_incorrect_tries} incorrect tries remaining."
-                    self.state.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
-                    if self.num_incorrect_tries == 0:
-                        reward = round(len(self.correct_words) / len(self.placed_words), 3)
-                        reason = f"No more incorrect tries remaining. You found {len(self.correct_words)} out of {len(self.placed_words)} words ({round(reward * 100)}%)."
-                        self.state.set_outcome(reward=reward, reason=reason)
-                    break
-                else:
-                    ## action is correct
-                    word_found = self._map_coordinate_to_word(start_row, start_col, end_row, end_col)
-                    if word_found:
-                        self.correct_words.add(word_found)
-                        self._highlight_word(start_row, start_col, end_row, end_col)
-                        message = f"[{start_row} {start_col} {end_row} {end_col}] is a correct attempt. You found the word '{word_found}'."
-                    else:
-                        message = f"[{start_row} {start_col} {end_row} {end_col}] is a correct attempt, but the word was not found in the placed words."
-                    self.state.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
-            
-            ## update the game board
-            self.state.game_state["rendered_board"] = self._render_board(self.state.game_state["board"], show_words=True)
-
-        if len(self.correct_words) == len(self.placed_words):
-            reason = f"Congratulations! You completed the Word Search puzzle."
-            self.state.set_outcome(reward=1.0, reason=reason)
-
-        self._observe_current_state()  # Update the current state observation
-        return self.state.step()
+            return False
+        actual_start = (start_row, start_col)
+        actual_end = (end_row, end_col)
+        return (actual_start, actual_end) in {
+            (expected_start, expected_end),
+            (expected_end, expected_start),
+        }
 
     def _map_coordinate_to_word(self, start_row: int, start_col: int, end_row: int, end_col: int) -> Union[str, None]:
-        """
-        Map the coordinates to the corresponding word if it exists.
-
-        Args:
-            start_row (int): The starting row index.
-            start_col (int): The starting column index.
-            end_row (int): The ending row index.
-            end_col (int): The ending column index.
-
-        Returns:
-            str or None: The word if found, otherwise None.
-        """
+        """Map the coordinates to the corresponding word if it exists."""
         for word, (row, col, direction) in self.placed_words.items():
             if self._matches_position(word, row, col, direction, start_row, start_col, end_row, end_col):
                 return word
         return None
-    
 
     def _get_percentage_completion(self) -> float:
-        """
-        Calculate the percentage of words found compared to the total number of words.
-
-        Returns:
-            float: The percentage of words found.
-        """
+        """Calculate the percentage of words found compared to the total number of words."""
         if not self.placed_words:
             return 0.0
         return len(self.correct_words) / len(self.placed_words)

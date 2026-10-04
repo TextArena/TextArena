@@ -1,7 +1,22 @@
-import random
+import copy
+import re
 from abc import ABC, abstractmethod
 from enum import Enum, auto
-from typing import Any, Dict, List, Tuple, Optional, Callable
+from typing import Any, Dict, List, Tuple, Optional
+
+
+def extract_action(text: str) -> str:
+    """Extract the final action from a model response.
+
+    Models are instructed to put the action they want to submit inside
+    <action>...</action> tags; the content of the last non-empty tag is what
+    gets passed to `env.step`. If no tags are present, the raw text is used.
+    """
+    matches = re.findall(r"<action>(.*?)</action>", text, re.DOTALL | re.IGNORECASE)
+    for match in reversed(matches):
+        if match.strip():
+            return match.strip()
+    return text.strip()
 
 class ObservationType(Enum):
     PROMPT = auto() # the player prompts
@@ -14,80 +29,9 @@ class ObservationType(Enum):
 
 GAME_ID = -1  # literal for use in game messages
 Message = Tuple[int, str, ObservationType]  # maps role to content
-Observations = dict[int, List[Message]]  # consists of the message seen by each player after the action
-Rewards = Dict[int, int]  # maps player ID to reward
+Observations = List[Message]  # messages newly visible to the acting player
+Rewards = Dict[int, float]  # maps player ID to reward
 Info = Dict[str, Any]  # additional information about the environment
-
-
-class State:
-    def __init__(self, num_players: int, seed: Optional[int]=None, max_turns: Optional[int]=None):
-        if seed is not None: random.seed(seed) # set the random seed
-        self.max_turns = max_turns 
-        self.num_players = num_players
-        self.current_player_id = 0
-
-    def check_turn_limit(self):
-        return self.turn >= self.max_turns and self.done == False
-
-    def update_current_player_id(self, player_id: int):
-        assert player_id in self.role_mapping, f"Tried to update current player to {player_id}, which does not exist. Available players: {list(self.role_mapping.keys())}"
-
-    def standard_resets(self, game_state: Optional[Dict[str, Any]]=None, player_prompt_function: Optional[Callable]=None, role_mapping: Optional[Dict[int, str]]={}, secret_roles: Optional[Dict[int, str]]=None):
-        self.game_state = game_state
-        self.role_mapping = role_mapping
-        
-        # reset standard game parameters
-        self.turn = 0
-        self.done = False 
-        self.step_info = {} # returned and reset every step.
-        self.game_info = {pid: {"role": f"Player {pid}", "invalid_move": False, "turn_count": 0} for pid in range(self.num_players)} # returned at the end of the game
-        # the role is intentionally a string so ppl don't use it as an index for role advantage calculation, as some environments will return str based roles and then crash their code
-        # invalid moves should be returned on a per-player basis since in most multiplayer games an invalid move won't end the game
-        # same with the turn-count. It's not always symmetric, so no point having a global one, esp. for multiplayer games.
-        if secret_roles is not None:
-            for pid, role in secret_roles.items():
-                self.game_info[pid]["role"] = role # important for RL training on games like secret mafia
-                
-        self.observations = {pid: [] for pid in range(self.num_players)}
-        self.rewards = None
-        self.logs = []
-
-        # set role mapping
-        if self.role_mapping is None:
-            for pid in range(self.num_players):
-                self.role_mapping[pid] = f"Player {pid}"
-        self.role_mapping[GAME_ID] = self.role_mapping.get(GAME_ID, "GAME") # add if not provided
-
-        # generate the player prompts
-        if player_prompt_function is not None:
-            for player_id in range(self.num_players):
-                self.add_observation(to_id=player_id, message=player_prompt_function(player_id=player_id, game_state=self.game_state), observation_type=ObservationType.PROMPT)
-
-    def add_observation(self, message: str, observation_type: ObservationType, from_id: int=GAME_ID, to_id: int=-1):
-        if observation_type==ObservationType.PLAYER_ACTION:
-            for role_tag in self.role_mapping.values(): message = message.replace(f"[{role_tag}]", "") # filter out role tags from message
-        self.logs.append((from_id, message))
-        if to_id == -1:
-            for pid in range(self.num_players):
-                self.observations[pid].append((from_id, message, observation_type))
-        else:
-            assert to_id in self.observations, f"The provided 'to_id' {to_id} does not exists. ({list(self.observations.keys())})"
-            self.observations[to_id].append((from_id, message, observation_type))
-
-    def get_current_player_observation(self):
-        current_player_observation = self.observations[self.current_player_id]
-        self.observations[self.current_player_id] = []
-        return current_player_observation
-
-    def step(self):
-        if self.done: return (True, self.step_info)# if game happens to be terminated on last turn ...
-        self.turn += 1 # increment turn counter
-        step_info = self.step_info 
-        self.step_info = {} # reset info
-        return (self.done, step_info)
-
-    def close(self):
-        return self.rewards, self.game_info
 
 
 class Env(ABC):
@@ -97,7 +41,7 @@ class Env(ABC):
     This class outlines the interface for the environment, including methods for resetting the environment,
     stepping through the environment (taking actions), and rendering the environment state.
     """
-    game_state: State  # the state of the environment
+    state: Any
 
     @abstractmethod
     def reset(self, num_players: int, seed: Optional[int]=None):
@@ -155,6 +99,25 @@ class Wrapper(Env):
 
     def close(self):
         return self.env.close()
+
+    def snapshot(self):
+        """Capture the wrapped environment and this wrapper's mutable state."""
+        wrapper_state = {
+            name: copy.deepcopy(value)
+            for name, value in self.__dict__.items()
+            if name != "env"
+        }
+        return {"env": self.env.snapshot(), "wrapper": wrapper_state}
+
+    def restore(self, snapshot):
+        """Restore a snapshot produced by this wrapper."""
+        if "wrapper" not in snapshot:
+            return self.env.restore(snapshot)
+        self.env.restore(snapshot["env"])
+        for name in tuple(self.__dict__):
+            if name != "env":
+                del self.__dict__[name]
+        self.__dict__.update(copy.deepcopy(snapshot["wrapper"]))
 
     def __deepcopy__(self, memo):
         import copy

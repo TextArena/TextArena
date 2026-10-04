@@ -7,16 +7,16 @@
 
 - **Format:** Actions are strings that vary based on the current game phase:
   - **Conversation Phase:**
-    - **Broadcast:** `[Broadcast: message]` or `[Broadcast message]` or `[Broadcast] message`
-    - **Private Message:** `[Whisper to X: message]` where X is a player ID
+    - **Broadcast:** `Broadcast: message`
+    - **Private Message:** `Whisper to X: message` where X is a player ID
   - **Bidding Phase:**
-    - **Bid:** `[Bid on Item X: amount]` where X is an item ID and amount is the bid in coins
+    - **Bid:** `Bid on Item X: amount` where X is an item ID and amount is the bid in coins
 
 - **Examples:**
-  - Send a public message: `[Broadcast: I'm interested in the Ancient Vase]`
-  - Send a private message: `[Whisper to 2: Are you bidding on the Diamond Necklace?]`
-  - Submit a bid: `[Bid on Item 0: 250]`
-  - Submit multiple bids: `[Bid on Item 0: 250] [Bid on Item 3: 175]`
+  - Send a public message: `Broadcast: I'm interested in the Ancient Vase`
+  - Send a private message: `Whisper to 2: Are you bidding on the Diamond Necklace?`
+  - Submit a bid: `Bid on Item 0: 250`
+  - Submit multiple bids on separate lines or separated by semicolons: `Bid on Item 0: 250; Bid on Item 3: 175`
 
 - **Notes:** Players can include multiple bids in a single bidding phase action, allowing them to bid on multiple items simultaneously.
 
@@ -45,11 +45,11 @@ Note: Each player may value items differently, up to ±20% difference!
 
 Available Commands:
 - Conversation Phase:
-  '[Broadcast: message]' - Send a message to all players
-  '[Whisper to X: message]' - Send a private message to Player X
+  'Broadcast: message' - Send a message to all players
+  'Whisper to X: message' - Send a private message to Player X
 
 - Bidding Phase:
-  '[Bid on Item X: amount]' - Bid the specified amount on Item X
+  'Bid on Item X: amount' - Bid the specified amount on Item X
   You can submit multiple bids for different items in a single turn.
 
 Your goal is to win items that are worth more to you than what you paid, maximizing your profit.
@@ -60,16 +60,16 @@ The winner is the player with the highest total value of items minus spent coins
 During gameplay, players receive various observations based on actions taken. For example:
 
 ```plaintext
-[Player 1] [Broadcast: Is anyone particularly interested in the Gold Statue?]
+[Player 1] Broadcast: Is anyone particularly interested in the Gold Statue?
 [GAME] (Broadcast) Player 1 says: Is anyone particularly interested in the Gold Statue?
-[Player 2] [Whisper to 1: I'm more interested in the Diamond Necklace than the Gold Statue]
+[Player 2] Whisper to 1: I'm more interested in the Diamond Necklace than the Gold Statue
 [GAME] (Private) Player 2 says: I'm more interested in the Diamond Necklace than the Gold Statue
 
 [GAME] Conversation phase complete! Now entering the bidding phase. Each player will have one turn to submit bids.
-[GAME] Bidding Format: '[Bid on Item X: amount]' - Bid the specified amount on Item X
+[GAME] Bidding Format: 'Bid on Item X: amount' - Bid the specified amount on Item X
 You can submit multiple bids in a single turn. Highest bidder wins each item.
 
-[Player 0] [Bid on Item 0: 300] [Bid on Item 4: 450]
+[Player 0] Bid on Item 0: 300; Bid on Item 4: 450
 [GAME] Player 0 submitted bids for Items: 0, 4.
 
 [GAME] ==================== AUCTION RESULTS ====================
@@ -109,6 +109,7 @@ You can submit multiple bids in a single turn. Highest bidder wins each item.
    - **Blind Bidding:** Players cannot see others' bids until results are revealed
    - **Multiple Bids:** Players can bid on as many items as they want in a single turn
    - **Highest Bid Wins:** For each item, the player with the highest bid wins
+   - **Payment:** Only winning bids are paid; losing and tied bids are returned
 
 4. **Valid Moves:**
    - During conversation phase: broadcast and whisper actions

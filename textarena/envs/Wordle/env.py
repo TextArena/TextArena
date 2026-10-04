@@ -1,121 +1,156 @@
-import re, nltk, random 
+import re
 from nltk import pos_tag
 from nltk.corpus import words
-from typing import Optional, Tuple, List, Dict, Any
+from typing import Optional, List, Dict, Any, Union
 
 import textarena as ta
 from textarena.envs.Wordle.renderer import create_board_str
 from textarena.envs.utils.word_lists import EnglishDictionary
 
-try:
-    pos_tag(['test'])
-except LookupError:
-    nltk.download('averaged_perceptron_tagger_eng', quiet=True)
+class WordleEnv(ta.GameEnv):
+    min_players = 1
+    max_players = 1
+    action_pattern = r"^\s*\[?\s*([a-zA-Z]+)\s*\]?\s*$"
+    snapshot_excluded_attributes = ("dictionary", "word_list")
 
-try:
-    words.words()
-except LookupError:
-    nltk.download('words', quiet=True)
-    
-class WordleEnv(ta.Env):
     def __init__(self, word_length: int = 5, num_guesses: int = 6, hardcore: Optional[bool] = False):
         """ Initializes the Wordle environment """
-        super().__init__()
+        if not isinstance(word_length, int) or isinstance(word_length, bool) or word_length < 1:
+            raise ValueError("word_length must be a positive integer.")
+        if not isinstance(num_guesses, int) or isinstance(num_guesses, bool) or num_guesses < 1:
+            raise ValueError("num_guesses must be a positive integer.")
+        if not isinstance(hardcore, bool):
+            raise ValueError("hardcore must be a boolean.")
         self.word_length = word_length
         self.num_guesses = num_guesses
-        self._load_word_list(hardcore=hardcore)
+        self.max_turns = num_guesses
         self.dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=True)
+        self._load_word_list(hardcore=hardcore)
 
-    def get_board_str(self):
-        return create_board_str(game_state=self.state.game_state)
-        
     def _check_word(self, word: str) -> bool:
         return self.dictionary.is_english_word(word)
-    
+
     def _load_word_list(self, hardcore: bool = False) -> None:
         """ Load the word list based on the 'hardcore' parameter """
-        word_list = words.words("en") if hardcore else words.words("en-basic") # Get word list
-        self.word_list = [word for word in word_list if pos_tag([word])[0][1] in ["NN"] and len(word) == self.word_length] # Filter words based on POS tags
+        use_pos_filter = True
+        try:
+            word_list = words.words("en") if hardcore else words.words("en-basic")
+        except LookupError:
+            use_pos_filter = False
+            word_list = self.dictionary.get_all_words()
+        candidates = sorted(
+            {
+                word.lower()
+                for word in word_list
+                if isinstance(word, str)
+                and word.isascii()
+                and word.isalpha()
+                and len(word) == self.word_length
+            }
+        )
+        if use_pos_filter:
+            try:
+                candidates = [word for word in candidates if pos_tag([word])[0][1] == "NN"]
+            except LookupError:
+                # The tagger is an optional NLTK download; dictionary membership
+                # is sufficient when it is unavailable.
+                pass
+        self.word_list = [word for word in candidates if self._check_word(word)]
+        if not self.word_list:
+            # A partial NLTK install can expose target candidates without the
+            # larger validation corpus. Fall back to the bundled dictionaries
+            # so every selected answer is also an accepted guess.
+            self.word_list = sorted(
+                word.lower()
+                for word in self.dictionary.get_all_words()
+                if isinstance(word, str)
+                and word.isascii()
+                and word.isalpha()
+                and len(word) == self.word_length
+            )
+        if not self.word_list:
+            raise ValueError(f"No target words are available with length {self.word_length}.")
 
-    def reset(self, num_players: int = 1, seed: Optional[int] = None):
-        self.state = ta.SinglePlayerState(num_players=num_players, seed=seed)
-        game_state = {"secret_word": random.choice(self.word_list), "guess_history": [], "word_length": self.word_length, "num_guesses": self.num_guesses}
-        self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
-    
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
+    def setup(self) -> Dict[str, Any]:
+        return {
+            "secret_word": self.rng.choice(self.word_list),
+            "guess_history": [],
+            "word_length": self.word_length,
+            "num_guesses": self.num_guesses,
+            "rendered_board": "No guesses yet.",
+            "player_view": "No guesses yet.",
+        }
+
+    def prompt(self, player_id: int) -> str:
         return (
-            f"You are Playing Wordle.\nA secret {game_state['word_length']}-letter word has been chosen. You have {game_state['num_guesses']} attempts to guess it.\n"
-            "For each guess, wrap your word in square brackets (e.g., '[apple]').\nFeedback for each letter will be given as follows:\n"
+            f"You are Playing Wordle.\nA secret {self.game_state['word_length']}-letter word has been chosen. You have {self.game_state['num_guesses']} attempts to guess it.\n"
+            "For each guess, reply with the word you want to try, e.g. 'apple'.\nFeedback for each letter will be given as follows:\n"
             "  - G (green): correct letter in the correct position\n"
             "  - Y (yellow): letter exists in the word but in the wrong position\n"
             "  - X (wrong): letter is not in the word\n"
             "Enter your guess to begin.\n"
         )
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        player_id = self.state.current_player_id
-        self.state.add_observation(message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        match = re.search(r"\[(\w+)\]", action) # Extract the guess using regex
+    def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
+        gs = self.game_state
+        word = move.group(1).lower()
+        if len(word) != gs["word_length"]:
+            return self.invalid(f"Your word must be exactly {gs['word_length']} letters.")
 
-        if match is None:
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"You tried submitting a word in the wrong format. Please make sure to use squared brackets.")
-            return self.state.step()
-        
-        word = match.group(1).lower()
-        if len(word) != self.state.game_state["word_length"]:
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"Your word must be exactly {self.state.game_state['word_length']} letters.")
-            return self.state.step()
-        
-        # Check if the word has been guessed before
-        previous_words = [guess_word for guess_word, _ in self.state.game_state["guess_history"]]
+        previous_words = [guess_word for guess_word, _ in gs["guess_history"]]
         if word in previous_words:
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"You have already guessed '{word}' before. Please try a different word.")
-            return self.state.step()
-        
-        if not self._check_word(word):
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=f"'{word}' is not an English word.")
-            return self.state.step()
+            return self.invalid(f"You have already guessed '{word}' before. Please try a different word.")
 
-        
+        if not self._check_word(word):
+            return self.invalid(f"'{word}' is not an English word.")
+
         feedback = self._evaluate_guess(word) # Evaluate the word
-        self.state.game_state["guess_history"].append((word, feedback)) # Save the guess and feedback
+        gs["guess_history"].append((word, feedback)) # Save the guess and feedback
 
         # Update board views
-        self.state.game_state["rendered_board"] = self._render_board()
-        self.state.game_state["player_view"] = self._render_player_view(player_id)
+        gs["rendered_board"] = self._render_board()
+        gs["player_view"] = self._render_player_view(player_id)
 
         # Check for win condition (all letters green)
         if all(f == "G" for f in feedback):
-            self.state.set_outcome(reward=1, reason=f"Congratulations! You guessed the word correctly!")
-        else:
-            self.state.add_observation(message=f"You submitted [{word}].\nFeedback:\n{self._render_player_view(player_id)}\nYou have {self.state.game_state['num_guesses'] - self.state.turn - 1} guesses left.", observation_type=ta.ObservationType.GAME_MESSAGE)
+            return self.outcome({0: 1}, reason="Congratulations! You guessed the word correctly!")
+        self.broadcast(
+            f"You submitted '{word}'.\nFeedback:\n{self._render_player_view(player_id)}\nYou have {gs['num_guesses'] - self.state.turn - 1} guesses left.",
+            ta.ObservationType.GAME_MESSAGE,
+        )
+        return None
 
-        # check if max num guesses reached
-        if len(self.state.game_state["guess_history"]) >= self.num_guesses and not self.state.done:
-            pct_complete = self._get_percentage_completion()
-            secret = self.state.game_state["secret_word"]
-            reason = f"The turn limit has been reached. You didn't guess the word, but your best guess matched {round(pct_complete * 100)}% of the letters in the correct positions.\nThe secret word was: **{self.state.game_state['secret_word']}**."
-            self.state.set_outcome(reward=pct_complete, reason=reason)
+    def on_turn_limit(self) -> ta.Outcome:
+        pct_complete = self._get_percentage_completion()
+        reason = (
+            f"The turn limit has been reached. You didn't guess the word, but your best guess matched {round(pct_complete * 100)}% of the letters in the correct positions.\n"
+            f"The secret word was: **{self.game_state['secret_word']}**."
+        )
+        return self.outcome({0: pct_complete}, reason=reason)
 
-        return self.state.step()
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome({0: self._get_percentage_completion()}, reason=f"Invalid Move: {reason}")
+
+    def get_board_str(self):
+        return create_board_str(game_state=self.state.game_state, reveal_answer=self.state.done)
 
     def _evaluate_guess(self, guess: str) -> List[str]:
         """
         Evaluates the player's guess against the secret word and returns feedback for each letter.
-        
+
         Feedback:
             - "green": correct letter in the correct position.
             - "yellow": letter is in the word but in the wrong position.
             - "wrong": letter is not in the word.
-        
+
         Args:
             guess (str): The player's guess.
-        
+
         Returns:
             List[str]: A list of feedback tokens for each letter.
         """
-        feedback = [None] * self.state.game_state["word_length"]
-        secret_list = list(self.state.game_state["secret_word"])
+        feedback = [None] * self.game_state["word_length"]
+        secret_list = list(self.game_state["secret_word"])
         guess_list = list(guess)
 
         # First pass: mark correct letters in the correct position (green)
@@ -135,49 +170,44 @@ class WordleEnv(ta.Env):
                 else:
                     feedback[i] = "X"
         return feedback
-    
+
     def _render_board(self) -> str:
         """ Renders the board in full Wordle format. """
-        history = self.state.game_state["guess_history"]
+        history = self.game_state["guess_history"]
         if not history:
             return "No guesses yet."
 
         output = []
         for word, feedback in history:
             letters_row = "| Letter  | " + " ".join(word.upper()) + " |"
-            divider_row = "|---------|" + "--" * self.state.game_state['word_length'] + "--"
+            divider_row = "|---------|" + "--" * self.game_state['word_length'] + "--"
             status_row = "| Status  | " + " ".join(feedback) + " |"
             output.append(f"{letters_row}\n{divider_row}\n{status_row}\n")
 
         return "\n".join(output)
-    
+
     def _render_player_view(self, player_id: int) -> str:
         """ Renders a simplified player view (letters and feedback only). """
-        if not self.state.game_state["guess_history"]:
+        if not self.game_state["guess_history"]:
             return "No guesses yet."
-        
+
         # Get the most recent guess
-        word, feedback = self.state.game_state["guess_history"][-1]
+        word, feedback = self.game_state["guess_history"][-1]
         word_row = " ".join(word.upper())
         feedback_row = " ".join(feedback)
         return f"{word_row}\n{feedback_row}"
 
     def _get_percentage_completion(self) -> float:
-        """ 
-        Compute completion based on the most recent guess for RL training.
-        This encourages the model to maximize immediate performance.
+        """
+        Compute completion based on the best submitted guess.
         Returns a float ∈ [0.0, 1.0]
         """
-        if not self.state.game_state.get("guess_history", []):
+        if not self.game_state.get("guess_history", []):
             return 0.0
-        
-        # Get the most recent guess feedback
-        _, latest_feedback = self.state.game_state["guess_history"][-1]
-        
-        # Calculate the percentage of letters that are green (correct position) and yellow (correct letter, wrong position)
-        greens = sum(1 for f in latest_feedback if f == "G")
-        yellows = sum(1 for f in latest_feedback if f == "Y") * 0.5  # Yellow letters count as half for completion
 
-        # Calculate the percentage completion based on the number of green and yellow letters
-        return (greens + yellows) / self.state.game_state["word_length"]
-    
+        def score(feedback: List[str]) -> float:
+            greens = sum(f == "G" for f in feedback)
+            yellows = sum(f == "Y" for f in feedback) * 0.5
+            return (greens + yellows) / self.game_state["word_length"]
+
+        return max(score(feedback) for _, feedback in self.game_state["guess_history"])

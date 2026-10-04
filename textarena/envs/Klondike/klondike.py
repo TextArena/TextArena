@@ -11,7 +11,7 @@ class Card:
 
     @property
     def color(self) -> str:
-        return "red" if self.suit in ("♦️", "♥️") else "black"
+        return "red" if self.suit in ("D", "H", "♦️", "♥️") else "black"
 
     def __str__(self) -> str:
         rank_str = {1: "A", 11: "J", 12: "Q", 13: "K"}.get(self.rank, str(self.rank))
@@ -31,14 +31,19 @@ class KlondikeGame:
         from the stock at a time (1 or 3 are common). For simplicity, this game uses
         draw_count=1 by default.
         """
+        if (
+            not isinstance(draw_count, int)
+            or isinstance(draw_count, bool)
+            or draw_count not in (1, 3)
+        ):
+            raise ValueError("draw_count must be either 1 or 3")
         self.draw_count = draw_count
         # Create a deck of cards
         self.deck: List[Card] = [
             Card(rank, suit) for suit in ("♣️", "♦️", "♥️", "♠️") for rank in range(1, 14)
         ]
-        if seed is not None:
-            random.seed(seed)
-        random.shuffle(self.deck)
+        self.rng = random.Random(seed)
+        self.rng.shuffle(self.deck)
         # Data structures
         self.tableau: List[
             List[Tuple[Card, bool]]
@@ -269,6 +274,10 @@ class KlondikeGame:
         moving_slice = src_pile[-count:]
         if not all(face_up for _, face_up in moving_slice):
             return False
+        # A movable tableau run must itself build down in alternating colors.
+        for (lower, _), (upper, _) in zip(moving_slice, moving_slice[1:]):
+            if lower.rank != upper.rank + 1 or lower.color == upper.color:
+                return False
         bottom_card_to_move = moving_slice[0][0]
         dest_top_card = dest_pile[-1][0] if dest_pile else None
         if not self.can_place_on_tableau(dest_top_card, bottom_card_to_move):

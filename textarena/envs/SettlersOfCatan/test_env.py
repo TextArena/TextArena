@@ -1,0 +1,522 @@
+"""Offline deterministic tests for the SettlersOfCatan environment.
+
+Many mechanics are explicitly unimplemented (robber, dev cards, largest
+road/army - see the TODOs in env.py), so these tests cover only the implemented
+paths: reset/config, turn ending & rotation, negotiation phase transitions, and
+invalid-move handling.
+"""
+import pytest
+
+from textarena.envs.SettlersOfCatan.env import SettlersOfCatanEnv, _parse_offer_body
+from textarena.envs.SettlersOfCatan.game_engine import Color, Piece, Terrain
+from textarena.envs.SettlersOfCatan.renderer import render_hand_cards_table
+
+
+def _fresh():
+    env = SettlersOfCatanEnv()
+    env.reset(num_players=4, seed=42)
+    return env
+
+
+@pytest.mark.parametrize(
+    "kwargs",
+    [
+        {"player_move_allowance": 0},
+        {"max_turns": 0},
+        {"winning_score": 0},
+    ],
+)
+def test_constructor_rejects_nonpositive_limits(kwargs):
+    with pytest.raises(ValueError):
+        SettlersOfCatanEnv(**kwargs)
+
+
+def test_reset_rejects_unsupported_player_counts():
+    env = SettlersOfCatanEnv()
+    for n in (2, 5):
+        with pytest.raises(AssertionError):
+            env.reset(num_players=n, seed=42)
+
+
+def test_three_player_reset_removes_inactive_color_and_pieces():
+    env = SettlersOfCatanEnv()
+    env.reset(num_players=3, seed=42)
+
+    orange = env.board.str_to_enum("Orange")
+    assert orange not in env.board.players
+    assert all(corner.owner is not orange for corner in env.board.corners.values())
+    assert all(edge.owner is not orange for edge in env.board.edges.values())
+    assert set(env.state.role_mapping) == {-1, 0, 1, 2}
+
+
+def test_reset_initial_state():
+    env = _fresh()
+    gs = env.state.game_state
+    assert env.state.num_players == 4
+    assert env.state.current_player_id == 0
+    assert gs["turn_phase"] == "action"
+    assert gs["eliminated_players"] == set()
+    assert gs["move_count"] == 0
+    # Viable-move list ends with the synthetic "Negotiate." / "Nothing." options.
+    assert env.game_moves[-1][1] == "Nothing."
+    assert env.game_moves[-2][1] == "Negotiate."
+
+
+def test_reset_is_silent(capsys):
+    _fresh()
+    assert capsys.readouterr().out == ""
+
+
+def test_nothing_action_ends_turn_and_rotates():
+    env = _fresh()
+    nothing_idx = len(env.game_moves)
+    done, _ = env.step(str(nothing_idx))
+    assert not done
+    assert env.state.current_player_id == 1
+    assert env.state.game_state["turn_phase"] == "action"
+    assert env.state.game_state["move_count"] == 0
+
+
+def test_ten_victory_points_ends_game():
+    env = _fresh()
+    scores = env.board.get_scores()
+    red = env.board.str_to_enum("Red")
+    scores[red]["total"] = 10
+    env.board.get_scores = lambda: scores
+
+    done, _ = env.step(str(len(env.game_moves)))
+
+    assert done
+    assert env.state.rewards[0] == 1.0
+
+
+def test_out_of_bounds_action_is_invalid():
+    env = _fresh()
+    done, _ = env.step("9999")
+    assert not done
+    assert env.state.error_count == 1
+    assert env.state.current_player_id == 0  # no rotation on first invalid
+
+
+def test_non_index_action_is_invalid():
+    env = _fresh()
+    done, _ = env.step("I would like to build something please")
+    assert not done
+    assert env.state.error_count == 1
+
+
+def test_negotiation_phase_transitions():
+    env = _fresh()
+    negotiate_idx = len(env.game_moves) - 1
+    env.step(str(negotiate_idx))
+    assert env.state.game_state["turn_phase"] == "negotiation_start"
+    assert env.state.current_player_id == 0  # still the initiator's turn
+
+    env.step("1")  # pick Player 1 as the counterparty
+    gs = env.state.game_state
+    assert gs["turn_phase"] == "negotiation"
+    assert gs["negotiation_partner"] == 1
+    assert gs["main_negotiator"] == 0
+
+
+def test_conversation_does_not_implicitly_deny_active_offer():
+    env = _fresh()
+    gs = env.state.game_state
+    gs["turn_phase"] = "negotiation"
+    gs["negotiation_partner"] = 1
+    gs["main_negotiator"] = 0
+    gs["current_offer"] = {
+        "from_player": 0,
+        "to_player": 1,
+        "offered_resources": {},
+        "requested_resources": {},
+    }
+    env.set_current_player(1)
+
+    done, _ = env.step("Could you improve the offer?")
+
+    assert not done
+    assert gs["current_offer"] is not None
+    assert env.state.current_player_id == 0
+
+
+def test_either_negotiator_can_finish_negotiation():
+    env = _fresh()
+    gs = env.state.game_state
+    gs["turn_phase"] = "negotiation"
+    gs["negotiation_partner"] = 1
+    gs["main_negotiator"] = 0
+    env.set_current_player(1)
+
+    done, _ = env.step("Done")
+
+    assert not done
+    assert gs["turn_phase"] == "action"
+    assert gs["negotiation_partner"] is None
+    assert env.state.current_player_id == 0
+
+
+def test_malformed_offer_is_atomic_and_private():
+    env = _fresh()
+    gs = env.state.game_state
+    gs["turn_phase"] = "negotiation"
+    gs["negotiation_partner"] = 1
+    gs["main_negotiator"] = 0
+    recipient_events_before = [
+        event for event in env.state.events if event[3] == 1
+    ]
+
+    done, _ = env.step("Offer: 1 Wood junk -> 1 Wheat trailing")
+
+    assert not done
+    assert env.state.error_count == 1
+    assert gs["current_offer"] is None
+    assert [event for event in env.state.events if event[3] == 1] == recipient_events_before
+
+
+def test_offer_parser_rejects_unmatched_junk():
+    assert _parse_offer_body("1 Wood steal-text -> 1 Wheat trailing-text") is None
+    assert _parse_offer_body("1 Desert -> 1 Wheat") is None
+
+
+def test_invalid_elimination_finishes_with_last_survivor():
+    env = _fresh()
+    for pid in (1, 2):
+        env.eliminate(pid)
+        env.game_state["eliminated_players"].add(pid)
+
+    outcome = env.on_invalid_limit(0, "bad action")
+
+    assert outcome is not None
+    assert outcome.rewards == {0: -1, 1: -1, 2: -1, 3: 1}
+
+
+def test_final_ranking_never_rewards_eliminated_players():
+    env = _fresh()
+    env.eliminate(0)
+    env.game_state["eliminated_players"].add(0)
+    scores = env.board.get_scores()
+    for pid, total in enumerate((99, 3, 2, 1)):
+        color = env.board.str_to_enum(env.role_colors[pid])
+        scores[color]["total"] = total
+    env.board.get_scores = lambda: scores
+
+    outcome = env._determine_winner()
+
+    assert outcome.rewards[0] == -1.0
+    assert outcome.rewards[1] == 1.0
+
+
+def test_invalid_negotiation_partner_is_rejected():
+    env = _fresh()
+    negotiate_idx = len(env.game_moves) - 1
+    env.step(str(negotiate_idx))
+    done, _ = env.step("9")  # 9 is not a valid partner id
+    assert not done
+    assert env.state.error_count == 1
+    assert env.state.game_state["turn_phase"] == "negotiation_start"
+
+
+def test_negotiation_uses_one_move_and_finishes_before_turn_rotation():
+    env = SettlersOfCatanEnv(player_move_allowance=1)
+    env.reset(num_players=4, seed=42)
+    env.step(str(len(env.game_moves) - 1))
+    env.step("1")
+
+    env.step("Would you trade with me?")
+
+    assert env.state.game_state["turn_phase"] == "negotiation"
+    assert env.state.game_state["move_count"] == 1
+    assert env.state.current_player_id == 1
+
+    env.step("Done")
+
+    assert env.state.game_state["turn_phase"] == "action"
+    assert env.state.game_state["move_count"] == 0
+    assert env.state.current_player_id == 1
+
+
+def test_trade_is_atomic_resource_conserving_and_private():
+    env = _fresh()
+    red = env.board.players[Color.RED]
+    white = env.board.players[Color.WHITE]
+    red.hand.clear()
+    white.hand.clear()
+    red.hand[Terrain.WOOD] = 1
+    white.hand[Terrain.WHEAT] = 1
+    env.step(str(len(env.game_moves) - 1))
+    env.step("1")
+    start = len(env.state.events)
+
+    env.step("Offer: 1 Wood -> 1 Wheat")
+    env.step("Accept")
+
+    assert red.hand[Terrain.WOOD] == 0
+    assert red.hand[Terrain.WHEAT] == 1
+    assert white.hand[Terrain.WOOD] == 1
+    assert white.hand[Terrain.WHEAT] == 0
+    assert sum(red.hand.values()) + sum(white.hand.values()) == 2
+    negotiation_events = env.state.events[start:]
+    assert all(event[3] in {0, 1} for event in negotiation_events)
+
+
+def test_accept_plus_invalid_counteroffer_is_transactionally_invalid():
+    env = _fresh()
+    red = env.board.players[Color.RED]
+    white = env.board.players[Color.WHITE]
+    red.hand.clear()
+    white.hand.clear()
+    red.hand[Terrain.WOOD] = 1
+    white.hand[Terrain.WHEAT] = 1
+    env.step(str(len(env.game_moves) - 1))
+    env.step("1")
+    env.step("Offer: 1 Wood -> 1 Wheat")
+    hands_before = (red.hand.copy(), white.hand.copy())
+    offer_before = dict(env.game_state["current_offer"])
+
+    done, _ = env.step("Accept\nOffer: 999 Wood -> 1 Ore")
+
+    assert not done
+    assert env.state.error_count == 1
+    assert red.hand == hands_before[0]
+    assert white.hand == hands_before[1]
+    assert env.game_state["current_offer"] == offer_before
+    assert env.state.current_player_id == 1
+
+
+@pytest.mark.parametrize(
+    "malformed",
+    [
+        "Offer 1 Wood -> 1 Wheat",
+        "Offer: 1 Wood ->",
+        "Accept\nDeny",
+    ],
+)
+def test_malformed_negotiation_commands_are_atomic(malformed):
+    env = _fresh()
+    env.step(str(len(env.game_moves) - 1))
+    env.step("1")
+    recipient_events_before = [
+        event for event in env.state.events if event[3] == 1
+    ]
+
+    done, _ = env.step(malformed)
+
+    assert not done
+    assert env.state.error_count == 1
+    assert env.game_state["current_offer"] is None
+    assert [
+        event for event in env.state.events if event[3] == 1
+    ] == recipient_events_before
+
+
+def test_opponent_settlement_blocks_road_network_extension():
+    env = _fresh()
+    board = env.board
+    player = board.players[Color.RED]
+    opponent = board.players[Color.BLUE]
+    blocked_corner = None
+    target_edge = None
+    for owned_edge, edge in board.edges.items():
+        if edge.owner is not player.color:
+            continue
+        for corner_id in owned_edge:
+            corner = board.corners[corner_id]
+            if corner.piece is not None:
+                continue
+            candidates = [
+                edge_id
+                for edge_id in board._adjacent_edges(corner_id)
+                if board.edges[edge_id].owner is None
+            ]
+            if candidates:
+                blocked_corner = corner_id
+                target_edge = candidates[0]
+                break
+        if target_edge is not None:
+            break
+    assert blocked_corner is not None and target_edge is not None
+    board.corners[blocked_corner].piece = Piece.SETTLEMENT
+    board.corners[blocked_corner].owner = opponent.color
+    opponent.settlements.append(blocked_corner)
+    player.hand.update({Terrain.BRICK: 1, Terrain.WOOD: 1})
+    hand_before = player.hand.copy()
+
+    ok, reason = board.player_build_road(player, target_edge)
+
+    assert not ok
+    assert "connected" in reason.lower()
+    assert player.hand == hand_before
+    assert board.edges[target_edge].owner is None
+
+
+def test_road_score_uses_board_as_source_of_truth():
+    env = _fresh()
+    red = env.board.players[Color.RED]
+    board_road_count = sum(
+        edge.owner is Color.RED for edge in env.board.edges.values()
+    )
+    red.roads.clear()
+
+    scores = env.board.get_scores()
+
+    assert scores[Color.RED]["roads"] == board_road_count
+
+
+def test_stale_build_selection_is_invalid_without_consuming_move():
+    env = _fresh()
+    player = env.board.players[Color.RED]
+    player.hand.update({Terrain.BRICK: 1, Terrain.WOOD: 1})
+    env.render(0)
+    build_index, _description, action = next(
+        move for move in env.game_moves if move[2] and move[2][0] == "build_road"
+    )
+    target_edge = action[1]
+    env.board.edges[target_edge].owner = Color.BLUE
+    hand_before = player.hand.copy()
+
+    done, _ = env.step(str(build_index))
+
+    assert not done
+    assert env.state.error_count == 1
+    assert env.game_state["move_count"] == 0
+    assert player.hand == hand_before
+
+
+def test_eliminated_player_score_cannot_trigger_terminal():
+    env = _fresh()
+    env.eliminate(0)
+    env.game_state["eliminated_players"].add(0)
+    scores = env.board.get_scores()
+    scores[Color.RED]["total"] = env.winning_score
+    env.board.get_scores = lambda: scores
+    env.set_current_player(1)
+    env.render(1)
+
+    done, _ = env.step(str(len(env.game_moves)))
+
+    assert not done
+    assert env.state.current_player_id == 2
+
+
+def test_eliminated_negotiation_responder_returns_turn_to_initiator():
+    env = _fresh()
+    env.step(str(len(env.game_moves) - 1))
+    env.step("1")
+    assert env.state.current_player_id == 0
+    env.step("hello")
+    assert env.state.current_player_id == 1
+
+    env.step("Accept")
+    done, _ = env.step("Accept")
+
+    assert not done
+    assert not env.state.is_player_alive(1)
+    assert env.game_state["turn_phase"] == "action"
+    assert env.state.current_player_id == 0
+    assert env.game_state["move_count"] == 1
+
+
+def test_renderer_marks_eliminated_player():
+    env = _fresh()
+
+    rendered = render_hand_cards_table(
+        env.board,
+        eliminated_pids={0},
+        pids_from_roles=env.pids_from_roles,
+    )
+
+    assert "RED (eliminated)" in rendered
+
+
+def test_seed_and_snapshot_restore_replay_next_dice_roll():
+    env = _fresh()
+    snapshot = env.snapshot()
+    nothing = str(len(env.game_moves))
+    env.step(nothing)
+    first_replay = (
+        env.state.current_player_id,
+        list(env.state.events),
+        {
+            color: player.hand.copy()
+            for color, player in env.board.players.items()
+        },
+    )
+
+    env.restore(snapshot)
+    env.step(nothing)
+
+    assert env.state.current_player_id == first_replay[0]
+    assert env.state.events == first_replay[1]
+    assert {
+        color: player.hand
+        for color, player in env.board.players.items()
+    } == first_replay[2]
+
+
+def test_piece_limits_reject_builds_without_charging_resources():
+    env = _fresh()
+    board = env.board
+    red = board.players[Color.RED]
+
+    for edge in board.edges.values():
+        edge.owner = None
+    edges = list(board.edges)
+    for edge_id in edges[:15]:
+        board.edges[edge_id].owner = Color.RED
+    red.hand.update({Terrain.BRICK: 1, Terrain.WOOD: 1})
+    hand_before = red.hand.copy()
+    ok, reason = board.player_build_road(red, edges[15])
+    assert not ok and "road pieces" in reason.lower()
+    assert red.hand == hand_before
+
+    for corner in board.corners.values():
+        corner.piece = None
+        corner.owner = None
+    corners = list(board.corners)
+    for corner_id in corners[:5]:
+        board.corners[corner_id].piece = Piece.SETTLEMENT
+        board.corners[corner_id].owner = Color.RED
+    red.hand.update(
+        {
+            Terrain.BRICK: 1,
+            Terrain.WOOD: 1,
+            Terrain.WHEAT: 1,
+            Terrain.SHEEP: 1,
+        }
+    )
+    hand_before = red.hand.copy()
+    ok, reason = board.player_build_settlement(red, corners[5])
+    assert not ok and "settlement pieces" in reason.lower()
+    assert red.hand == hand_before
+
+    for corner in board.corners.values():
+        corner.piece = None
+        corner.owner = None
+    for corner_id in corners[:4]:
+        board.corners[corner_id].piece = Piece.CITY
+        board.corners[corner_id].owner = Color.RED
+    board.corners[corners[4]].piece = Piece.SETTLEMENT
+    board.corners[corners[4]].owner = Color.RED
+    red.hand.update({Terrain.ORE: 3, Terrain.WHEAT: 2})
+    hand_before = red.hand.copy()
+    ok, reason = board.player_build_city(red, corners[4])
+    assert not ok and "city pieces" in reason.lower()
+    assert red.hand == hand_before
+
+
+def test_turn_limit_ranks_three_active_players():
+    env = SettlersOfCatanEnv(max_turns=1)
+    env.reset(num_players=3, seed=42)
+    scores = env.board.get_scores()
+    scores[Color.RED]["total"] = 3
+    scores[Color.WHITE]["total"] = 2
+    scores[Color.BLUE]["total"] = 1
+    env.board.get_scores = lambda: scores
+
+    done, _ = env.step(str(len(env.game_moves)))
+
+    assert done
+    assert env.state.rewards == {0: 1.0, 1: 0.0, 2: -1.0}
+    reason = env.state.game_info[0]["reason"]
+    assert "Player 0 (Red): 3 VP" in reason

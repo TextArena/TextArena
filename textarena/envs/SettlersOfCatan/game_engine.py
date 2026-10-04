@@ -1,4 +1,4 @@
-import re, random, string
+import re, string
 from math import sqrt
 from enum import Enum, auto
 from collections import Counter
@@ -70,6 +70,9 @@ class Player:
 COST_ROAD = Counter({Terrain.BRICK: 1, Terrain.WOOD: 1})
 COST_SETTLEMENT = Counter({Terrain.BRICK: 1, Terrain.WOOD: 1, Terrain.WHEAT: 1, Terrain.SHEEP: 1})
 COST_CITY = Counter({Terrain.ORE: 3, Terrain.WHEAT: 2})
+MAX_ROADS = 15
+MAX_SETTLEMENTS = 5
+MAX_CITIES = 4
 
 # regex helpers
 _desc_re = re.compile(r"\s*(\d+)?\s*([a-zA-Z]+)\s*", re.I)
@@ -134,7 +137,6 @@ class Board:
 
     def build_settlement(self, cid: CornerID, player: Player):
         corner = self.corners[cid]
-        print(cid, self.corners[cid])
         assert corner.piece is None, "intersection already taken"
         corner.piece  = Piece.SETTLEMENT
         corner.owner  = player.color
@@ -155,6 +157,30 @@ class Board:
             a, b = eid
             neigh.append(b if a == cid else a)
         return neigh
+
+    def _piece_count(self, player: Player, piece: Piece) -> int:
+        return sum(
+            corner.owner is player.color and corner.piece is piece
+            for corner in self.corners.values()
+        )
+
+    def _road_count(self, player: Player) -> int:
+        return sum(edge.owner is player.color for edge in self.edges.values())
+
+    def _road_is_connected(self, player: Player, eid: EdgeID) -> bool:
+        """A road connects at an endpoint unless an opponent building blocks it."""
+        for cid in eid:
+            corner = self.corners[cid]
+            if corner.owner is player.color:
+                return True
+            if corner.owner is not None:
+                continue
+            if any(
+                self.edges[adjacent].owner is player.color
+                for adjacent in self._adjacent_edges(cid)
+            ):
+                return True
+        return False
 
     def _corner_from_triplet(self, descriptors: list[str]) -> tuple[CornerID | None, str | None]:
         """Return CornerID matching the three token/terrain descriptors."""
@@ -253,9 +279,9 @@ class Board:
         return board
     
 
-    def roll_dice(self) -> tuple[str, dict[Color, dict[Terrain, int]]]: # TODO add 7 roll
+    def roll_dice(self, rng) -> tuple[str, dict[Color, dict[Terrain, int]]]: # TODO add 7 roll
         """Roll 2 d6, distribute resources, return roll-string & payout map."""
-        d1, d2 = random.randint(1, 6), random.randint(1, 6)
+        d1, d2 = rng.randint(1, 6), rng.randint(1, 6)
         total  = d1 + d2
         roll_str = f"{d1} + {d2} = {total}"
 
@@ -284,9 +310,10 @@ class Board:
         edge = self.edges.get(eid)
         if edge is None:                    return False, "Edge does not exist"
         if edge.owner is not None:          return False, "Edge already occupied"
+        if self._road_count(player) >= MAX_ROADS: return False, "No road pieces remaining"
         if not player.can_pay(COST_ROAD):   return False, "Insufficient resources"
         # connectivity – must touch player road or settlement
-        if not any((cid in player.settlements or eid2 in player.roads) for cid in eid for eid2 in self._adjacent_edges(cid)):
+        if not self._road_is_connected(player, eid):
             return False, "Road not connected to your network"
         player.pay(COST_ROAD)
         edge.owner = player.color
@@ -297,6 +324,7 @@ class Board:
         corner = self.corners.get(cid)
         if corner is None:                                                                  return False, "Corner does not exist"
         if corner.piece is not None:                                                        return False, "Corner already occupied"
+        if self._piece_count(player, Piece.SETTLEMENT) >= MAX_SETTLEMENTS:                   return False, "No settlement pieces remaining"
         if not player.can_pay(COST_SETTLEMENT):                                             return False, "Insufficient resources"
         if any(self.corners[n].piece is not None for n in self._adjacent_corners(cid)):     return False, "Too close to another settlement/city" # 2-space rule – no adjacent occupied intersections
         if not any(self.edges[e].owner == player.color for e in self._adjacent_edges(cid)): return False, "Must connect to one of your roads" # connectivity – must touch player road
@@ -309,6 +337,7 @@ class Board:
         corner = self.corners.get(cid)
         if corner is None:                                                      return False, "Corner does not exist"
         if corner.piece != Piece.SETTLEMENT or corner.owner != player.color:    return False, "Must upgrade your own settlement"
+        if self._piece_count(player, Piece.CITY) >= MAX_CITIES:                 return False, "No city pieces remaining"
         if not player.can_pay(COST_CITY):                                       return False, "Insufficient resources"
         player.pay(COST_CITY)
         corner.piece = Piece.CITY
@@ -337,9 +366,9 @@ class Board:
             elif corner.piece is Piece.SETTLEMENT:
                 record["settlements"] += 1
                 record["total"] += 1  # each settlement = 1 VP
-        # roads are easy – just trust the player list
-        for col, p in self.players.items():
-            results[col]["roads"] = len(p.roads)
+        for edge in self.edges.values():
+            if edge.owner in results:
+                results[edge.owner]["roads"] += 1
         return results
 
     def _viable_moves(self, player: Player) -> list[Move]:
@@ -347,17 +376,20 @@ class Board:
         idx = 1
 
         # roads 
-        if player.can_pay(COST_ROAD):
+        if player.can_pay(COST_ROAD) and self._road_count(player) < MAX_ROADS:
             for eid, edge in self.edges.items():
                 if edge.owner is not None: continue
-                if not any((cid in player.settlements or eid2 in player.roads) for cid in eid for eid2 in self._adjacent_edges(cid)): continue
+                if not self._road_is_connected(player, eid): continue
                 desc = f"Build ROAD  between {_corner_descr(eid[0], self)} ↔ {_corner_descr(eid[1], self)}"
                 action = _mk_action("build_road", eid)
                 moves.append((idx, desc, action))
                 idx += 1
 
         # settlements
-        if player.can_pay(COST_SETTLEMENT):
+        if (
+            player.can_pay(COST_SETTLEMENT)
+            and self._piece_count(player, Piece.SETTLEMENT) < MAX_SETTLEMENTS
+        ):
             for cid, corner in self.corners.items():
                 if corner.piece is not None: continue
                 if any(self.corners[n].piece is not None for n in self._adjacent_corners(cid)): continue # 2-space rule
@@ -368,10 +400,15 @@ class Board:
                 idx += 1
 
         # cities
-        if player.can_pay(COST_CITY):
-            for cid in player.settlements:
-                corner = self.corners[cid]
-                if corner.piece is Piece.SETTLEMENT:
+        if (
+            player.can_pay(COST_CITY)
+            and self._piece_count(player, Piece.CITY) < MAX_CITIES
+        ):
+            for cid, corner in self.corners.items():
+                if (
+                    corner.owner is player.color
+                    and corner.piece is Piece.SETTLEMENT
+                ):
                     desc = f"Upgrade CITY at {_corner_descr(cid, self)}"
                     action = _mk_action("build_city", cid)
                     moves.append((idx, desc, action))

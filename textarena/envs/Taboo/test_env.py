@@ -1,0 +1,266 @@
+"""Offline, deterministic tests for the Taboo environment.
+
+Despite involving clues and guesses, Taboo is fully offline: the Guesser simply
+types the target word and the env compares it to
+``game_state['word_to_guess']`` (which we can read directly). No LLM/network is
+used. We play with 4 players (two teams of two), a single round, and one attempt
+per player to reach a terminal state quickly.
+"""
+
+import json
+
+import pytest
+
+import textarena as ta
+from textarena.envs.Taboo.env import TabooEnv
+
+
+def _fresh(max_rounds=1, max_attempts_per_player=1):
+    env = TabooEnv(categories="animals", max_rounds=max_rounds, max_attempts_per_player=max_attempts_per_player)
+    env.reset(num_players=4, seed=42)
+    return env
+
+
+def test_reset_roles_and_state():
+    env = _fresh()
+    # Player 0 & 2 are clue givers; 1 & 3 are guessers.
+    assert env.state.role_mapping[0] == "Clue Giver"
+    assert env.state.role_mapping[1] == "Guesser"
+    assert env.state.role_mapping[2] == "Clue Giver"
+    assert env.state.role_mapping[3] == "Guesser"
+    assert env.state.game_state["score"] == {0: 0, 1: 0}
+    assert isinstance(env.state.game_state["word_to_guess"], str)
+    assert env.state.current_player_id == 0
+
+
+def test_correct_guess_wins_for_team():
+    env = _fresh()
+    # Clue giver plays a safe, non-taboo clue.
+    env.step("xxxx hint")
+    assert env.state.current_player_id == 1  # rotated to the guesser
+    word = env.state.game_state["word_to_guess"]
+    done, _ = env.step(word)
+    assert not done
+    assert env.state.current_player_id == 2
+
+    # A round contains one turn for each team, so Team 1 also gets to play.
+    env.step("xxxx hint")
+    done, _ = env.step("definitely-not-the-target")
+    assert done
+    assert env.state.game_state["score"][0] == 1
+    assert env.state.rewards == {0: 1, 1: 1, 2: -1, 3: -1}
+
+
+def test_guesser_bad_format_is_invalid():
+    env = _fresh()
+    env.step("xxxx hint")  # clue giver -> guesser
+    done, _ = env.step("!!!")  # punctuation alone is not a title-like guess
+    assert not done
+    assert env.state.error_count == 1
+
+
+def test_repeated_malformed_guess_forfeits_action_and_advances_team():
+    env = _fresh()
+    env.step("xxxx hint")
+    env.step("!!!")
+    done, _ = env.step("\n")
+    assert not done
+    assert env.state.current_player_id == 2
+    assert env.state.game_state["current_team"] == 1
+
+
+def test_clue_giver_taboo_word_is_invalid():
+    env = _fresh()
+    taboo = env.state.game_state["taboo_words"][0]
+    done, _ = env.step(f"my clue mentions {taboo} oops")
+    assert not done
+    assert env.state.error_count == 1
+
+
+def test_reset_requires_even_players_at_least_four():
+    env = TabooEnv(categories="animals", max_rounds=1, max_attempts_per_player=1)
+    with pytest.raises(AssertionError):
+        env.reset(num_players=3, seed=42)
+    with pytest.raises(AssertionError):
+        env.reset(num_players=2, seed=42)
+
+
+@pytest.mark.parametrize(
+    "kwargs",
+    [
+        {"categories": [], "max_rounds": 1, "max_attempts_per_player": 1},
+        {"categories": None, "max_rounds": 1, "max_attempts_per_player": 1},
+        {"categories": "animals", "max_rounds": 0, "max_attempts_per_player": 1},
+        {"categories": "animals", "max_rounds": 1, "max_attempts_per_player": 0},
+    ],
+)
+def test_constructor_rejects_invalid_bounds(kwargs):
+    with pytest.raises(ValueError):
+        TabooEnv(**kwargs)
+
+
+def test_all_requested_categories_are_combined():
+    env = TabooEnv(categories=["animals", "cars"], max_rounds=1, max_attempts_per_player=1)
+    env.reset(num_players=4, seed=1)
+    assert "Alpaca" in env.data
+    assert "Alfa Romeo" in env.data
+    assert len(env.state.game_state["team_word_pairs"][0]) > 20
+
+
+def test_invalid_clue_is_atomic_and_does_not_leak_to_guessers():
+    env = _fresh()
+    gs = env.state.game_state
+    target = gs["word_to_guess"]
+    before_turn = gs["turn_in_round"]
+    before_player_actions = [
+        event for event in env.state.events if event[2] == ta.ObservationType.PLAYER_ACTION
+    ]
+
+    done, _ = env.step(f"The answer is {target}")
+
+    assert not done
+    assert gs["turn_in_round"] == before_turn
+    assert env.state.current_player_id == 0
+    assert [
+        event for event in env.state.events if event[2] == ta.ObservationType.PLAYER_ACTION
+    ] == before_player_actions
+    assert not any(
+        target in message
+        for _, message, event_type, to_id in env.state.events
+        if event_type == ta.ObservationType.PLAYER_ACTION and to_id == 1
+    )
+
+
+def test_secret_actions_never_enter_opposing_team_events():
+    env = _fresh()
+    target = env.state.game_state["word_to_guess"]
+    env.step("safe clue")
+    env.step(target)
+
+    target_action_events = [
+        event
+        for event in env.state.events
+        if event[1] == target and event[2] == ta.ObservationType.PLAYER_ACTION
+    ]
+    assert target_action_events
+    assert {to_id for _, _, _, to_id in target_action_events} <= {0, 1}
+
+
+def test_forbidden_words_use_token_boundaries(tmp_path):
+    data_path = tmp_path / "taboo.json"
+    data_path.write_text(
+        json.dumps({"custom": {"art": ["cat"], "second": ["other"]}}),
+        encoding="utf-8",
+    )
+    env = TabooEnv("custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
+    env.reset(num_players=4, seed=3)
+    env.state.game_state["word_to_guess"] = "art"
+    env.state.game_state["taboo_words"] = ["cat"]
+
+    done, _ = env.step("This concatenate clue is safe.")
+
+    assert not done
+    assert env.state.error_count == 0
+    assert env.state.current_player_id == 1
+
+
+def test_forbidden_phrase_cannot_be_evaded_with_separator_or_unicode_variants(tmp_path):
+    data_path = tmp_path / "taboo.json"
+    data_path.write_text(
+        json.dumps({"custom": {"ice cream": ["South America", "café", "cat"]}}),
+        encoding="utf-8",
+    )
+
+    for clue in (
+        "This is ice-cream.",
+        "It is from South_America.",
+        "Try CAFE\u0301.",
+        "A c\u200bat clue.",
+    ):
+        env = TabooEnv("custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
+        env.reset(num_players=4, seed=3)
+        done, _ = env.step(clue)
+        assert not done
+        assert env.state.error_count == 1
+        assert env.state.current_player_id == 0
+
+
+def test_guesser_can_submit_bundled_title_shapes_and_unicode(tmp_path):
+    data_path = tmp_path / "taboo.json"
+    data_path.write_text(
+        json.dumps(
+            {
+                "custom": {
+                    "Réunion (U.S.), #1": ["island"],
+                    "other": ["different"],
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    env = TabooEnv("custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
+    env.reset(num_players=4, seed=1)
+    env.state.game_state["word_to_guess"] = "Réunion (U.S.), #1"
+    env.state.game_state["taboo_words"] = ["island"]
+
+    env.step("A safe clue")
+    done, _ = env.step("[RE\u0301UNION (U.S.), #1]")
+
+    assert not done
+    assert env.state.game_state["score"][0] == 1
+    assert env.state.error_count == 0
+
+
+def test_custom_data_collapses_accidental_internal_whitespace(tmp_path):
+    data_path = tmp_path / "taboo.json"
+    data_path.write_text(
+        json.dumps({"custom": {"Oedipus  Rex": ["Greek  tragedy"]}}),
+        encoding="utf-8",
+    )
+    env = TabooEnv("custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
+    env.reset(num_players=4, seed=1)
+
+    assert list(env.data) == ["Oedipus Rex"]
+    assert env.data["Oedipus Rex"] == ["Greek tragedy"]
+
+
+def test_six_player_team_turn_reaches_every_guesser():
+    env = TabooEnv("animals", max_rounds=1, max_attempts_per_player=1)
+    env.reset(num_players=6, seed=4)
+
+    env.step("xxxx")
+    assert env.state.current_player_id == 1
+    env.step("wrong")
+    assert env.state.current_player_id == 2
+    env.step("also wrong")
+
+    assert env.state.current_player_id == 3
+    assert env.state.game_state["current_team"] == 1
+    assert env.state.game_state["round"] == 1
+
+
+def test_seeded_reset_and_snapshot_restore_exact_turn_state():
+    env = _fresh(max_rounds=2)
+    first_deal = env.state.game_state["team_word_pairs"]
+    env.reset(num_players=4, seed=42)
+    assert env.state.game_state["team_word_pairs"] == first_deal
+
+    env.step("xxxx")
+    data = env.data
+    snapshot = env.snapshot()
+    expected_word = env.state.game_state["word_to_guess"]
+    env.step("wrong")
+    env.restore(snapshot)
+
+    assert env.state.current_player_id == 1
+    assert env.state.game_state["word_to_guess"] == expected_word
+    assert env.state.game_state["turn_in_round"] == 1
+    assert env.data is data
+
+
+def test_malformed_custom_data_is_rejected(tmp_path):
+    data_path = tmp_path / "bad.json"
+    data_path.write_text(json.dumps({"custom": {"target": "not-a-list"}}), encoding="utf-8")
+    env = TabooEnv("custom", max_rounds=1, max_attempts_per_player=1, data_path=str(data_path))
+    with pytest.raises(ValueError):
+        env.reset(num_players=4, seed=1)

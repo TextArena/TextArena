@@ -43,7 +43,7 @@ The scoring rubric creates a classic social dilemma where individual and group i
 ### Rounds 1-4: Pure Action Phases
 - **Phase**: Act only
 - **Multiplier**: 1x points
-- **Actions**: Each player chooses `[Choose X]` or `[Choose Y]`
+- **Actions**: Each player chooses `Choose X` or `Choose Y`
 - **Scoring**: Standard rubric applied
 
 ### Round 5: Communication + High Stakes
@@ -88,7 +88,7 @@ The scoring rubric creates a classic social dilemma where individual and group i
 
 **Public Broadcasting:**
 ```
-[Broadcast] Let's all choose Y for mutual benefit!
+Broadcast: Let's all choose Y for mutual benefit!
 ```
 - Everyone sees the sender and message content
 - Builds trust through transparency
@@ -96,7 +96,7 @@ The scoring rubric creates a classic social dilemma where individual and group i
 
 **Private Messaging:**
 ```
-[Whisper to 2] I'll choose Y if you do the same
+Whisper to 2: I'll choose Y if you do the same
 ```
 - Only sender and receiver know the content
 - Others see "A private message was sent between two players"
@@ -104,7 +104,7 @@ The scoring rubric creates a classic social dilemma where individual and group i
 
 **Passing:**
 ```
-[Pass]
+Pass
 ```
 - Ends participation in current talk phase
 - Cannot send more messages this phase
@@ -117,12 +117,12 @@ Players simultaneously choose their actions:
 
 **Choose X (Competitive):**
 ```
-[Choose X]
+Choose X
 ```
 
 **Choose Y (Cooperative):**
 ```
-[Choose Y]
+Choose Y
 ```
 
 ### Simultaneous Resolution
@@ -152,33 +152,33 @@ Players simultaneously choose their actions:
 
 **During Act Phases:**
 ```
-[Choose X]
-[Choose Y]
+Choose X
+Choose Y
 ```
 
 **During Talk Phases:**
 ```
-[Broadcast] I propose we all choose Y this round for +1 each
-[Whisper to 1] Want to form an alliance? We both choose Y?
-[Pass]
+Broadcast: I propose we all choose Y this round for +1 each
+Whisper to 1: Want to form an alliance? We both choose Y?
+Pass
 ```
 
 ### Example Game Flow
 
 **Round 1 (Act Phase - 1x):**
-- Player 0: `[Choose Y]`
-- Player 1: `[Choose Y]` 
-- Player 2: `[Choose X]`
-- Player 3: `[Choose Y]`
+- Player 0: `Choose Y`
+- Player 1: `Choose Y`
+- Player 2: `Choose X`
+- Player 3: `Choose Y`
 - **Result**: 1X, 3Y → Player 2: +3, Others: -1 each
 
 **Round 5 (Talk + Act Phase - 3x):**
 - **Talk Phase:**
-  - Player 0: `[Broadcast] That X choice hurt us all. Let's cooperate this time.`
-  - Player 2: `[Broadcast] Sorry about that. I'll choose Y this round.`
-  - Player 1: `[Whisper to 3] Don't trust Player 2. Want to both choose X?`
-  - Player 3: `[Whisper to 1] Agreed. X it is.`
-  - All players: `[Pass]`
+  - Player 0: `Broadcast: That X choice hurt us all. Let's cooperate this time.`
+  - Player 2: `Broadcast: Sorry about that. I'll choose Y this round.`
+  - Player 1: `Whisper to 3: Don't trust Player 2. Want to both choose X?`
+  - Player 3: `Whisper to 1: Agreed. X it is.`
+  - All players: `Pass`
 - **Act Phase:**
   - All choose Y except Players 1&3 choose X
   - **Result**: 2X, 2Y → X players: +6 each, Y players: -6 each

@@ -5,11 +5,11 @@
 
 ## Action Space
 - **Format:** Actions are strings representing the player's choice. For example:
-- **Example"** 
-    - As player 0, place a flat stone on row 0 col 1: [place () {(0,1):[F0]}]
-    - As player 1, move a standing stone from row 0 col 1 to row 1 col 1: [move (0,1) {(1,1):[W1]}]
-    - As player 0, move a series of stones from row 2 col 2 to row 2 col 3 and row 2 col 4: [move (2,2) {(2,3): [F0, F1], (2,4): [F0]}]
-- **Notes:** The players are free to have additional texts in their replies, so long the provide their action in the correct format of [action source allocation].
+- **Examples:** 
+    - On the first turn, Player 0 places Player 1's flat stone: `place () {(0,1):[F1]}`
+    - After the two opening turns, Player 0 can place their own flat stone: `place () {(0,1):[F0]}`
+    - As player 1, move a standing stone from row 0, column 1 to row 1, column 1: `move (0,1) {(1,1):[W1]}`
+    - As player 0, move a series of stones from row 2, column 2 to row 2, columns 3 and 4: `move (2,2) {(2,3): [F0, F1], (2,4): [F0]}`
 
 ## Observation Space
 **Reset Observations**
@@ -18,6 +18,7 @@ On reset, each player receives a prompt containing their beginning game instruct
 [GAME] You are Player 0. You are playing the Tak game.
 Your goal is to connect two opposite edges of the board with your pieces to form a road while blocking your opponent from doing the same.
 You can perform the following actions on your turn:
+- On each of the first two turns, place one of the opponent's flat stones; stack movement is not allowed yet.
 - Place a piece on an empty square.
 - Move a stack of pieces from one square to one or more squares. You can stack your pieces on top of other pieces on the target square. The topmost piece determines ownership of the stack.
 - Split a stack of pieces into two or more stacks and distribute them to adjacent squares.
@@ -26,7 +27,7 @@ You can perform the following actions on your turn:
 - Move a Capstone from one square to one or more squares. A capstone can also flatten a wall stone during its move.
 
 For each move, submit your action using the format:
-[ACTION SOURCE ALLOCATION]
+ACTION SOURCE ALLOCATION
 - ACTION: The type of move you are making ('place' or 'move').
 - SOURCE: The grid coordinates where the stones originate. Use () for 'place'.
 - ALLOCATION: A dictionary where keys are target grid coordinates and values are the stones or pieces being moved or placed.
@@ -55,13 +56,13 @@ The stones will be identified by the player as follows:
 
 Examples:
 - To place a capstone on (3,2):
-  [place () {(3,2): [C0]}]
+  place () {(3,2): [C0]}
 - To move all pieces from (2,2) to (2,3):
-  [move (2,2) {(2,3): [F0]}]
+  move (2,2) {(2,3): [F0]}
 - To split a stack of 5 pieces from (2,2) into two squares:
-  [move (2,2) {(2,3): [F0, F0], (2,4): [W0, F0, C0]}]
+  move (2,2) {(2,3): [F0, F0], (2,4): [W0, F0, C0]}
 - To move and stack one piece from (2,2) onto an existing stack at (2,3):
-  [move (2,2) {(2,3): [F0]}]
+  move (2,2) {(2,3): [F0]}
 
 When submitting your move, think strategically about your road-building goals and your opponent's potential moves.
 Here is the current board:
@@ -79,13 +80,13 @@ Note that you have 15 stones and 1 capstones to begin with.
 ```
 
 **Step Observation**
-After each step, the players receive the latest message from the game environment. For example, here's player 0 making its first move and the environment responds back:
+After each step, the players receive the latest message from the game environment. For example, here's player 0 making the opening move and the environment responds back:
 ```plaintext
-[Player 0] [place () {(0,0):[F0]}]
+[Player 0] place () {(0,0):[F1]}
 [GAME] Player 0 placed a piece on ([(0, 0)]). New board state:
         0        1        2        3   
      -----------------------------------
-  0 | (1) F0 |        |        |        |
+  0 | (1) F1 |        |        |        |
      -----------------------------------
   1 |        |        |        |        |
      -----------------------------------
@@ -104,23 +105,27 @@ After each step, the players receive the latest message from the game environmen
 
 ## Key Rules
 ### Gameplay Mechanics
-1. Piece Placement:
+1. Opening:
+- On the first turn, each player places one of the opponent's Flat Stones on an empty square.
+- Standing Stones, Capstones, and stack movement are unavailable until both opening placements are complete.
+
+2. Piece Placement:
 - Players can place a Flat Stone, a Standing Stone (Wall), or a Capstone on any empty square of the board.
 - Capstones cannot be covered by other pieces.
 
-2. Stack Movement:
+3. Stack Movement:
 - Players can move stacks of pieces they control. The number of pieces in the stack determines how far the stack can move.
 - A stack can be split, with pieces dropped along its path, and the remaining pieces continuing to their destination.
 
-3. Blocking and Flattening:
+4. Blocking and Flattening:
 - Walls (Standing Stones) block roads and prevent opponents from forming connections.
 - Capstones can flatten Walls into Flat Stones, enabling road formation.
 
-4. Road Formation:
+5. Road Formation:
 - A road is a continuous path of connected Flat Stones or Capstones.
 - Walls and opponent pieces do not contribute to a player's road.
 
-5. Draws:
+6. Draws:
 - If no player forms a road and all pieces are placed, the game ends in a draw.
 - The winner is then determined by the player with the highest number of visible Flat Stones.
 

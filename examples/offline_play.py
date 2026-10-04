@@ -9,7 +9,7 @@ agents = {
 }
 
 # initialize the environment
-#env = ta.make(env_id="TicTacToe-v0-train")
+# env = ta.make(env_id="TicTacToe-v0-mdp")
 env = ta.make(env_id="Chess-v0") 
 env.reset(num_players=len(agents))
 

@@ -1,5 +1,6 @@
 # good explanation of the game: https://www.youtube.com/watch?v=l53oL0ptt7k
 import random
+import re
 from enum import Enum
 from typing import List, Optional, Dict, Set, Tuple, Any
 from collections import defaultdict
@@ -34,6 +35,41 @@ class OrderType(Enum):
     BUILD = "B"
     DISBAND = "D"
     WAIVE = "WAIVE"
+
+
+MULTI_COASTS: Dict[str, Dict[str, Set[str]]] = {
+    "SPA": {
+        "NC": {"GAS", "MAO", "POR"},
+        "SC": {"LYO", "MAO", "MAR", "WES"},
+    },
+    "STP": {
+        "NC": {"BAR", "NWY"},
+        "SC": {"BOT", "FIN", "LVN"},
+    },
+    "BUL": {
+        "EC": {"BLA", "CON", "RUM"},
+        "SC": {"AEG", "CON", "GRE"},
+    },
+}
+_LOCATION_RE = re.compile(
+    r"^([A-Z]{3})(?:\((NC|SC|EC)\)|/(NC|SC|EC))?$"
+)
+
+
+def _parse_location(token: str) -> Tuple[str, Optional[str]]:
+    """Parse a province token and normalize optional split-coast notation."""
+    match = _LOCATION_RE.fullmatch(token.upper())
+    if not match:
+        raise ValueError(f"Invalid province: {token}")
+    province = match.group(1)
+    coast = match.group(2) or match.group(3)
+    if coast and coast not in MULTI_COASTS.get(province, {}):
+        raise ValueError(f"{province} has no {coast} coast")
+    return province, coast
+
+
+def _format_location(province: str, coast: Optional[str]) -> str:
+    return f"{province}({coast})" if coast else province
 
 
 class Region:
@@ -95,6 +131,8 @@ class Unit:
         self.region: Optional[Region] = None # will be set when placed on map
         self.dislodged: bool = False 
         self.retreat_options: List[str] = [] 
+        self.dislodged_from: Optional[str] = None
+        self.coast: Optional[str] = None
 
     def place_in_region(self, region: Region) -> bool:
         """ Place this unit in a region """
@@ -118,24 +156,34 @@ class Unit:
     def dislodge(self) -> None:
         """ Mark this unit as dislodged """
         self.dislodged = True 
-        if self.region:
+        if self.region and self.region.unit is self:
             self.region.unit = None 
 
-    def retreat(self, region: Region) -> bool:
+    def retreat(self, region: Region, coast: Optional[str] = None) -> bool:
         """ Retreat this unit to a new region """
-        if not self.dislodged or region.name not in self.retreat_options:
+        destination = _format_location(region.name, coast)
+        if not self.dislodged or destination not in self.retreat_options:
             return False 
 
         if region.place_unit(self):
+            old_region = self.region
+            if old_region and old_region.dislodged_unit is self:
+                old_region.dislodged_unit = None
             self.dislodged = False 
             self.region = region 
+            self.coast = coast
             self.retreat_options = []
+            self.dislodged_from = None
             return True 
         return False
 
     def __str__(self) -> str:
         prefix = "*" if self.dislodged else ""
-        location = self.region.name if self.region else "NOWHERE"
+        location = (
+            _format_location(self.region.name, self.coast)
+            if self.region
+            else "NOWHERE"
+        )
         return f"{prefix}{self.type.value} {location}"
 
 
@@ -143,7 +191,10 @@ class Unit:
 class Order:
     """ Represents an order in the game """
     def __init__(self, power: str, unit_type: UnitType, location: str, 
-                 order_type: OrderType, target: str = None, secondary_target: str = None):
+                 order_type: OrderType, target: str = None,
+                 secondary_target: str = None, location_coast: str = None,
+                 target_coast: str = None, secondary_target_coast: str = None,
+                 via_convoy: bool = False):
         self.power: str = power
         self.unit_type: UnitType = unit_type 
         self.location: str = location 
@@ -152,27 +203,62 @@ class Order:
         self.secondary_target: Optional[str] = secondary_target
         self.result: Optional[str] = None # For storing resolution results
         self.strength: int = 1 # Base strength of the order 
+        self.location_coast: Optional[str] = location_coast
+        self.target_coast: Optional[str] = target_coast
+        self.secondary_target_coast: Optional[str] = secondary_target_coast
+        self.via_convoy: bool = via_convoy
 
     def __str__(self) -> str:
+        location = _format_location(self.location, self.location_coast)
         if self.order_type == OrderType.HOLD:
-            return f"{self.unit_type.value} {self.location} {self.order_type.value}"
+            return f"{self.unit_type.value} {location} {self.order_type.value}"
         elif self.order_type == OrderType.MOVE:
-            return f"{self.unit_type.value} {self.location} {self.order_type.value} {self.target}"
+            target = _format_location(self.target, self.target_coast)
+            suffix = " VIA" if self.via_convoy else ""
+            return (
+                f"{self.unit_type.value} {location} "
+                f"{self.order_type.value} {target}{suffix}"
+            )
         elif self.order_type == OrderType.SUPPORT:
+            supported = _format_location(
+                self.target.split()[1], self.target_coast
+            )
             if self.secondary_target:
                 # Support move
-                return f"{self.unit_type.value} {self.location} {self.order_type.value} {self.target} {OrderType.MOVE.value} {self.secondary_target}"
+                destination = _format_location(
+                    self.secondary_target, self.secondary_target_coast
+                )
+                return (
+                    f"{self.unit_type.value} {location} "
+                    f"{self.order_type.value} {self.target.split()[0]} "
+                    f"{supported} {OrderType.MOVE.value} {destination}"
+                )
             else:
                 # Support hold
-                return f"{self.unit_type.value} {self.location} {self.order_type.value} {self.target}"
+                return (
+                    f"{self.unit_type.value} {location} "
+                    f"{self.order_type.value} {self.target.split()[0]} "
+                    f"{supported}"
+                )
         elif self.order_type == OrderType.CONVOY:
-            return f"{self.unit_type.value} {self.location} {self.order_type.value} {self.target} {OrderType.MOVE.value} {self.secondary_target}"
+            supported = _format_location(
+                self.target.split()[1], self.target_coast
+            )
+            destination = _format_location(
+                self.secondary_target, self.secondary_target_coast
+            )
+            return (
+                f"{self.unit_type.value} {location} "
+                f"{self.order_type.value} {self.target.split()[0]} "
+                f"{supported} {OrderType.MOVE.value} {destination}"
+            )
         elif self.order_type == OrderType.RETREAT:
-            return f"{self.unit_type.value} {self.location} R {self.target}"
+            target = _format_location(self.target, self.target_coast)
+            return f"{self.unit_type.value} {location} R {target}"
         elif self.order_type == OrderType.BUILD:
-            return f"{self.unit_type.value} {self.location} B"
+            return f"{self.unit_type.value} {location} B"
         elif self.order_type == OrderType.DISBAND:
-            return f"{self.unit_type.value} {self.location} D"
+            return f"{self.unit_type.value} {location} D"
         elif self.order_type == OrderType.WAIVE:
             return "WAIVE"
         return "Invalid Order"
@@ -180,53 +266,109 @@ class Order:
     @classmethod
     def parse(cls, order_str: str, power: str) -> 'Order':
         """Parse an order string into an Order object"""
-        if order_str.strip().upper() == "WAIVE":
+        if not isinstance(order_str, str):
+            raise ValueError("Order must be a string")
+
+        normalized = order_str.strip().upper()
+        if normalized == "WAIVE":
             return cls(power, None, None, OrderType.WAIVE)
             
-        parts = order_str.strip().split()
+        parts = normalized.split()
         if len(parts) < 3:
             raise ValueError(f"Invalid order format: {order_str}")
-            
-        unit_type = UnitType.ARMY if parts[0] == 'A' else UnitType.FLEET
-        location = parts[1]
+
+        if parts[0] not in {"A", "F"}:
+            raise ValueError(f"Unknown unit type {parts[0]!r}: {order_str}")
+        unit_type = UnitType(parts[0])
+        location, location_coast = _parse_location(parts[1])
         
         if parts[2] == 'H':
-            return cls(power, unit_type, location, OrderType.HOLD)
+            if len(parts) != 3:
+                raise ValueError(f"Hold order invalid: {order_str}")
+            return cls(
+                power, unit_type, location, OrderType.HOLD,
+                location_coast=location_coast,
+            )
         elif parts[2] == '-':
-            if len(parts) < 4:
+            if len(parts) not in {4, 5} or (
+                len(parts) == 5 and parts[4] != "VIA"
+            ):
                 raise ValueError(f"Move order missing destination: {order_str}")
-            return cls(power, unit_type, location, OrderType.MOVE, parts[3])
+            target, target_coast = _parse_location(parts[3])
+            return cls(
+                power, unit_type, location, OrderType.MOVE, target,
+                location_coast=location_coast,
+                target_coast=target_coast,
+                via_convoy=len(parts) == 5,
+            )
         elif parts[2] == 'S':
-            if len(parts) < 4:
+            if len(parts) == 6 and parts[5] == "H":
+                parts = parts[:5]
+            if len(parts) not in {5, 7}:
                 raise ValueError(f"Support order invalid: {order_str}")
-            supported_unit_type = UnitType.ARMY if parts[3] == 'A' else UnitType.FLEET
-            supported_location = parts[4]
+            if parts[3] not in {"A", "F"}:
+                raise ValueError(f"Unknown supported unit type {parts[3]!r}: {order_str}")
+            supported_unit_type = UnitType(parts[3])
+            supported_location, supported_coast = _parse_location(parts[4])
             
-            if len(parts) >= 7 and parts[5] == '-':
+            if len(parts) == 7:
+                if parts[5] != '-':
+                    raise ValueError(f"Support move order invalid: {order_str}")
                 # Support move
-                return cls(power, unit_type, location, OrderType.SUPPORT, 
-                          f"{supported_unit_type.value} {supported_location}", parts[6])
+                destination, destination_coast = _parse_location(parts[6])
+                return cls(
+                    power, unit_type, location, OrderType.SUPPORT,
+                    f"{supported_unit_type.value} {supported_location}",
+                    destination, location_coast, supported_coast,
+                    destination_coast,
+                )
             else:
                 # Support hold
-                return cls(power, unit_type, location, OrderType.SUPPORT, 
-                          f"{supported_unit_type.value} {supported_location}")
+                return cls(
+                    power, unit_type, location, OrderType.SUPPORT,
+                    f"{supported_unit_type.value} {supported_location}",
+                    location_coast=location_coast,
+                    target_coast=supported_coast,
+                )
         elif parts[2] == 'C':
-            if len(parts) < 7 or parts[5] != '-':
+            if len(parts) != 7 or parts[5] != '-':
                 raise ValueError(f"Convoy order invalid: {order_str}")
-            convoyed_unit_type = UnitType.ARMY if parts[3] == 'A' else UnitType.FLEET
-            convoyed_location = parts[4]
-            return cls(power, unit_type, location, OrderType.CONVOY, 
-                      f"{convoyed_unit_type.value} {convoyed_location}", parts[6])
+            if parts[3] not in {"A", "F"}:
+                raise ValueError(f"Unknown convoyed unit type {parts[3]!r}: {order_str}")
+            convoyed_unit_type = UnitType(parts[3])
+            convoyed_location, convoyed_coast = _parse_location(parts[4])
+            destination, destination_coast = _parse_location(parts[6])
+            return cls(
+                power, unit_type, location, OrderType.CONVOY,
+                f"{convoyed_unit_type.value} {convoyed_location}",
+                destination, location_coast, convoyed_coast,
+                destination_coast,
+            )
         elif parts[2] == 'R':
-            if len(parts) < 4:
+            if len(parts) != 4:
                 raise ValueError(f"Retreat order missing destination: {order_str}")
-            return cls(power, unit_type, location, OrderType.RETREAT, parts[3])
+            target, target_coast = _parse_location(parts[3])
+            return cls(
+                power, unit_type, location, OrderType.RETREAT, target,
+                location_coast=location_coast,
+                target_coast=target_coast,
+            )
         elif parts[2] == 'B':
-            return cls(power, unit_type, location, OrderType.BUILD)
+            if len(parts) != 3:
+                raise ValueError(f"Build order invalid: {order_str}")
+            return cls(
+                power, unit_type, location, OrderType.BUILD,
+                location_coast=location_coast,
+            )
         elif parts[2] == 'D':
-            return cls(power, unit_type, location, OrderType.DISBAND)
+            if len(parts) != 3:
+                raise ValueError(f"Disband order invalid: {order_str}")
+            return cls(
+                power, unit_type, location, OrderType.DISBAND,
+                location_coast=location_coast,
+            )
             
-        raise ValueError(f"Unknown order type")
+        raise ValueError(f"Unknown order type: {parts[2]}")
 
 
 
@@ -392,7 +534,7 @@ class Map:
             ('LVN', TerrainType.COAST, False, None),
             ('UKR', TerrainType.LAND, False, None),
             ('ALB', TerrainType.COAST, False, None),
-            ('ARM', TerrainType.LAND, False, None),
+            ('ARM', TerrainType.COAST, False, None),
             ('SYR', TerrainType.COAST, False, None),
             # Seas
             ('MAO', TerrainType.SEA, False, None),
@@ -427,7 +569,7 @@ class Map:
             ('BRE', 'MAO', ['F']),
             ('BRE', 'PAR', ['A']),
             ('BRE', 'PIC', ['A', 'F']),
-            ('BRE', 'GAS', ['A']),
+            ('BRE', 'GAS', ['A', 'F']),
             ('PAR', 'PIC', ['A']),
             ('PAR', 'BUR', ['A']),
             ('PAR', 'GAS', ['A']),
@@ -436,7 +578,7 @@ class Map:
             ('MAR', 'GAS', ['A']),
             ('MAR', 'LYO', ['F']),
             ('MAR', 'SPA', ['A', 'F']),
-            ('GAS', 'SPA', ['A']),
+            ('GAS', 'SPA', ['A', 'F']),
             ('GAS', 'BUR', ['A']),
             ('GAS', 'MAO', ['F']),
             ('PIC', 'BUR', ['A']),
@@ -448,20 +590,21 @@ class Map:
             
             # British Isles
             ('EDI', 'CLY', ['A', 'F']),
-            ('EDI', 'YOR', ['A']),
+            ('EDI', 'YOR', ['A', 'F']),
+            ('EDI', 'LVP', ['A']),
             ('EDI', 'NTH', ['F']),
             ('EDI', 'NWG', ['F']),
             ('CLY', 'NAO', ['F']),
             ('CLY', 'NWG', ['F']),
-            ('CLY', 'LVP', ['A']),
+            ('CLY', 'LVP', ['A', 'F']),
             ('LVP', 'YOR', ['A']),
-            ('LVP', 'WAL', ['A']),
+            ('LVP', 'WAL', ['A', 'F']),
             ('LVP', 'IRI', ['F']),
             ('LVP', 'NAO', ['F']),
             ('YOR', 'WAL', ['A']),
-            ('YOR', 'LON', ['A']),
+            ('YOR', 'LON', ['A', 'F']),
             ('YOR', 'NTH', ['F']),
-            ('WAL', 'LON', ['A']),
+            ('WAL', 'LON', ['A', 'F']),
             ('WAL', 'ENG', ['F']),
             ('WAL', 'IRI', ['F']),
             ('LON', 'NTH', ['F']),
@@ -476,7 +619,9 @@ class Map:
             ('ENG', 'NTH', ['F']),
             ('ENG', 'MAO', ['F']),
             ('ENG', 'BEL', ['F']),
+            ('MAO', 'WES', ['F']),
             ('NTH', 'NWG', ['F']),
+            ('NTH', 'NWY', ['F']),
             ('NTH', 'SKA', ['F']),
             ('NTH', 'DEN', ['F']),
             ('NTH', 'HEL', ['F']),
@@ -516,16 +661,14 @@ class Map:
             ('DEN', 'HEL', ['F']),
             ('NWY', 'SWE', ['A', 'F']),
             ('NWY', 'FIN', ['A']),
-            ('NWY', 'STP', ['A']),
+            ('NWY', 'STP', ['A', 'F']),
             ('NWY', 'SKA', ['F']),
             ('SWE', 'FIN', ['A', 'F']),
-            ('SWE', 'STP', ['A']),
             ('SWE', 'SKA', ['F']),
             ('SWE', 'BAL', ['F']),
             ('SWE', 'BOT', ['F']),
-            ('FIN', 'STP', ['A']),
+            ('FIN', 'STP', ['A', 'F']),
             ('FIN', 'BOT', ['F']),
-            ('SKA', 'BAL', ['F']),
             
             # Baltic Region
             ('BAL', 'PRU', ['F']),
@@ -560,11 +703,12 @@ class Map:
             # Italy and Adriatic
             ('PIE', 'TYR', ['A']),
             ('PIE', 'VEN', ['A']),
-            ('PIE', 'TUS', ['A']),
+            ('PIE', 'TUS', ['A', 'F']),
+            ('PIE', 'MAR', ['F']),
             ('PIE', 'LYO', ['F']),
             ('VEN', 'TYR', ['A']),
-            ('VEN', 'TRI', ['A']),
-            ('VEN', 'APU', ['A']),
+            ('VEN', 'TRI', ['A', 'F']),
+            ('VEN', 'APU', ['A', 'F']),
             ('VEN', 'ROM', ['A']),
             ('VEN', 'TUS', ['A']),
             ('VEN', 'ADR', ['F']),
@@ -572,13 +716,13 @@ class Map:
             ('TYR', 'VIE', ['A']),
             ('TYR', 'TRI', ['A']),
             ('TYR', 'MUN', ['A']),
-            ('TUS', 'ROM', ['A']),
+            ('TUS', 'ROM', ['A', 'F']),
             ('TUS', 'LYO', ['F']),
             ('TUS', 'TYS', ['F']),
-            ('ROM', 'NAP', ['A']),
+            ('ROM', 'NAP', ['A', 'F']),
             ('ROM', 'APU', ['A']),
             ('ROM', 'TYS', ['F']),
-            ('NAP', 'APU', ['A']),
+            ('NAP', 'APU', ['A', 'F']),
             ('NAP', 'ION', ['F']),
             ('NAP', 'TYS', ['F']),
             ('APU', 'ADR', ['F']),
@@ -655,12 +799,12 @@ class Map:
             ('BLA', 'ARM', ['F']),
             ('BLA', 'CON', ['F']),
             ('CON', 'ANK', ['A', 'F']),
-            ('CON', 'SMY', ['A']),
+            ('CON', 'SMY', ['A', 'F']),
             ('ANK', 'ARM', ['A', 'F']),
             ('ANK', 'SMY', ['A']),
             ('ARM', 'SYR', ['A']),
             ('ARM', 'SMY', ['A']),
-            ('SMY', 'SYR', ['A']),
+            ('SMY', 'SYR', ['A', 'F']),
             ('SMY', 'EAS', ['F'])
         ]
         
@@ -675,21 +819,31 @@ class DiplomacyGameEngine:
     """ The core game engine for Diplomacy """
     
     def __init__(self, rules=None, max_turns: int = 100):
+        if max_turns < 1:
+            raise ValueError("max_turns must be at least one game year")
         self.map: Map = Map.create_standard_map()
         self.powers: Dict[str, Power] = {} # Dict mapping power names to Power objects
-        self.year: int = 1901
+        self.start_year: int = 1901
+        self.year: int = self.start_year
         self.season: Season = Season.SPRING
         self.phase: PhaseType = PhaseType.MOVEMENT 
         self.turn_number: int = 1 
+        self.max_game_years: int = max_turns
+        # Backward-compatible name retained for callers that still pass/read max_turns.
         self.max_turns: int = max_turns
         self.winners: List[str] = []
         self.game_over: bool = False
         self.ascii_map_version: int = 5
         self.order_history: List[Dict[str, Any]] = [] # Track order history
         self.game_state_history: List[Dict[str, Any]] = []  # Store game state history
+        self._standoff_regions: Set[str] = set()
 
         # Initialize powers
         self._initialize_powers()
+
+    @property
+    def completed_game_years(self) -> int:
+        return self.year - self.start_year
 
     def _initialize_powers(self):
         """ Initialize powers with starting units and centers """
@@ -744,6 +898,8 @@ class DiplomacyGameEngine:
             # Add initial units
             for unit_type, location in starting_units:
                 unit: Unit = Unit(unit_type, power_name)
+                if power_name == "RUSSIA" and location == "STP":
+                    unit.coast = "SC"
                 region: Optional[Region] = self.map.get_region(location)
                 if region and unit.place_in_region(region):
                     power.add_unit(unit)
@@ -755,7 +911,7 @@ class DiplomacyGameEngine:
                 if region:
                     region.set_owner(power_name)
 
-    def setup_game(self, num_players) -> Dict[int, str]:
+    def setup_game(self, num_players, rng=None) -> Dict[int, str]:
         """ Set up the game with the specified number of players """
         # assert correct player number once more
         if num_players < 3 or num_players > 7:
@@ -764,11 +920,27 @@ class DiplomacyGameEngine:
 
         # Select powers for the game 
         all_powers = list(self.powers.keys()) # ["AUS", "ENG", "FR", "GER", "ITA", "RUS", "TUR"]
-        active_powers = random.sample(all_powers, num_players)
+        active_powers = (rng or random).sample(all_powers, num_players)
 
         # Remove unused powers
         for power_name in all_powers:
             if power_name not in active_powers:
+                inactive_power = self.powers[power_name]
+                for unit in list(inactive_power.units):
+                    if unit.region:
+                        if unit.region.unit is unit:
+                            unit.region.unit = None
+                        if unit.region.dislodged_unit is unit:
+                            unit.region.dislodged_unit = None
+                    unit.region = None
+                    unit.dislodged = False
+                    unit.retreat_options = []
+                inactive_power.units.clear()
+                inactive_power.controlled_centers.clear()
+
+                for region in self.map.regions.values():
+                    if region.owner == power_name:
+                        region.set_owner(None)
                 self.powers.pop(power_name)
 
         return {i: power for i, power in enumerate(active_powers)}
@@ -810,7 +982,8 @@ class DiplomacyGameEngine:
         elif self.phase == PhaseType.RETREATS:
             # In retreat phase, only dislodged units can be ordered
             for unit in power.units:
-                orderable_locations.append(unit.region.name)
+                if unit.dislodged and unit.region:
+                    orderable_locations.append(unit.region.name)
 
         elif self.phase == PhaseType.ADJUSTMENTS:
             # Calculate build/disband count 
@@ -853,36 +1026,92 @@ class DiplomacyGameEngine:
                 # Hold order is always possible
                 orders.append(f"{unit.type.value} {location} H")
                 
-                # Move orders - check all adjacent regions
-                for adj_region_name in unit.region.adjacent_regions[unit.type.value]:
-                    orders.append(f"{unit.type.value} {location} - {adj_region_name}")
+                # Move orders, preserving split-coast destinations for fleets.
+                for destination, coast in self._adjacent_destinations(unit):
+                    orders.append(
+                        f"{unit.type.value} {location} - "
+                        f"{_format_location(destination, coast)}"
+                    )
                 
                 # Support orders
-                for adj_region_name in unit.region.adjacent_regions[unit.type.value]:
-                    adj_region = self.map.get_region(adj_region_name)
-                    if adj_region and adj_region.unit:
+                for supported_power in self.powers.values():
+                    for supported_unit in supported_power.units:
+                        if (
+                            supported_unit.dislodged
+                            or supported_unit is unit
+                            or not self._can_unit_move_to(
+                                unit,
+                                supported_unit.region.name,
+                                supported_unit.coast,
+                                require_explicit_coast=False,
+                            )
+                        ):
+                            continue
                         # Support hold
-                        orders.append(f"{unit.type.value} {location} S {adj_region.unit.type.value} {adj_region_name}")
-                        
-                        # Support move - check where the adjacent unit can move
-                        for adj_unit_dest in adj_region.adjacent_regions[adj_region.unit.type.value]:
-                            # Only if the destination is also adjacent to the supporting unit
-                            if adj_unit_dest in unit.region.adjacent_regions[unit.type.value]:
-                                orders.append(f"{unit.type.value} {location} S {adj_region.unit.type.value} {adj_region_name} - {adj_unit_dest}")
+                        orders.append(
+                            f"{unit.type.value} {location} S "
+                            f"{supported_unit.type.value} "
+                            f"{_format_location(supported_unit.region.name, supported_unit.coast)}"
+                        )
+
+                # A unit may support a move by a non-adjacent unit as long as
+                # both the supported unit and supporter can reach the destination.
+                for supported_power in self.powers.values():
+                    for supported_unit in supported_power.units:
+                        if supported_unit.dislodged or supported_unit is unit:
+                            continue
+                        supported_location = supported_unit.region.name
+                        supported_destinations = self._adjacent_destinations(
+                            supported_unit
+                        )
+                        if supported_unit.type == UnitType.ARMY:
+                            supported_destinations.extend(
+                                (destination, None)
+                                for destination, region in self.map.regions.items()
+                                if (
+                                    destination != supported_location
+                                    and region.terrain_type == TerrainType.COAST
+                                    and self._has_possible_convoy_path(
+                                        supported_location, destination
+                                    )
+                                )
+                            )
+                        for destination, coast in supported_destinations:
+                            if self._can_unit_move_to(
+                                unit,
+                                destination,
+                                coast,
+                                require_explicit_coast=False,
+                            ):
+                                orders.append(
+                                    f"{unit.type.value} {location} S "
+                                    f"{supported_unit.type.value} {supported_location} "
+                                    f"- {_format_location(destination, coast)}"
+                                )
                 
                 # Convoy orders (only for fleets in sea regions)
                 if unit.type == UnitType.FLEET and unit.region.terrain_type == TerrainType.SEA:
-                    for adj_region_name in unit.region.adjacent_regions[unit.type.value]:
-                        adj_region = self.map.get_region(adj_region_name)
-                        if adj_region and adj_region.unit and adj_region.unit.type == UnitType.ARMY:
-                            # Find possible convoy destinations
-                            for dest_region_name in self.map.regions:
-                                dest_region = self.map.get_region(dest_region_name)
-                                if (dest_region and 
-                                    dest_region.terrain_type == TerrainType.COAST and
-                                    dest_region_name != adj_region_name and
-                                    self._has_possible_convoy_path(adj_region_name, dest_region_name)):
-                                    orders.append(f"{unit.type.value} {location} C {adj_region.unit.type.value} {adj_region_name} - {dest_region_name}")
+                    for army_power in self.powers.values():
+                        for army in army_power.units:
+                            if (
+                                army.dislodged
+                                or army.type != UnitType.ARMY
+                                or army.region.terrain_type != TerrainType.COAST
+                            ):
+                                continue
+                            army_location = army.region.name
+                            for dest_region_name, dest_region in self.map.regions.items():
+                                if (
+                                    dest_region.terrain_type == TerrainType.COAST
+                                    and dest_region_name != army_location
+                                    and self._fleet_can_participate_in_convoy(
+                                        unit, army_location, dest_region_name
+                                    )
+                                ):
+                                    orders.append(
+                                        f"F {location} C A {army_location} - "
+                                        f"{dest_region_name}"
+                                    )
                 
                 possible_orders[location] = orders
                 
@@ -920,7 +1149,13 @@ class DiplomacyGameEngine:
                     
                     # Can build fleet only in coastal regions
                     if region.terrain_type == TerrainType.COAST:
-                        orders.append(f"F {location} B")
+                        if location in MULTI_COASTS:
+                            orders.extend(
+                                f"F {_format_location(location, coast)} B"
+                                for coast in MULTI_COASTS[location]
+                            )
+                        else:
+                            orders.append(f"F {location} B")
                     
                     # Can also waive a build
                     orders.append("WAIVE")
@@ -938,6 +1173,9 @@ class DiplomacyGameEngine:
 
     def validate_order(self, order: Order) -> Tuple[bool, Optional[str]]:
         """ Validate if an order is legal and return reason if invalid """
+        if order.power not in self.powers:
+            return False, f"Power {order.power} does not exist"
+
         if order.order_type == OrderType.WAIVE:
             # WAIVE is only valid in adjustment phase when building 
             if self.phase != PhaseType.ADJUSTMENTS:
@@ -946,11 +1184,37 @@ class DiplomacyGameEngine:
                 return False, "WAIVE orders only valid when builds are available"
             return True, None
 
-        # Get the unit that would execute this order
-        unit: Optional[Unit] = self._find_unit(order.power, order.unit_type, order.location)
-        if not unit:
-            print(f"No {order.unit_type.value} unit found at {order.location} for {order.power}")
-            return False, f"No {order.unit_type.value} unit found at {order.location} for {order.power}"
+        movement_orders = {
+            OrderType.HOLD,
+            OrderType.MOVE,
+            OrderType.SUPPORT,
+            OrderType.CONVOY,
+        }
+        if order.order_type in movement_orders and self.phase != PhaseType.MOVEMENT:
+            return False, f"{order.order_type.value} orders are only valid in movement phases"
+        if order.order_type == OrderType.RETREAT and self.phase != PhaseType.RETREATS:
+            return False, "Retreat orders are only valid in retreat phases"
+        if order.order_type == OrderType.BUILD and self.phase != PhaseType.ADJUSTMENTS:
+            return False, "Build orders are only valid in adjustment phases"
+        if order.order_type == OrderType.DISBAND and self.phase not in {
+            PhaseType.RETREATS,
+            PhaseType.ADJUSTMENTS,
+        }:
+            return False, "Disband orders are only valid in retreat or adjustment phases"
+
+        # Builds create a new unit; every other non-waive order acts on an existing one.
+        unit: Optional[Unit] = None
+        if order.order_type != OrderType.BUILD:
+            unit = self._find_unit(order.power, order.unit_type, order.location)
+            if not unit:
+                return False, f"No {order.unit_type.value} unit found at {order.location} for {order.power}"
+            if order.location_coast and order.location_coast != unit.coast:
+                return False, (
+                    f"Unit at {order.location} is not on the "
+                    f"{order.location_coast} coast"
+                )
+            if self.phase == PhaseType.MOVEMENT and unit.dislodged:
+                return False, f"Unit at {order.location} is dislodged and cannot receive movement orders"
 
         # Validate based on order type 
         if order.order_type == OrderType.HOLD:
@@ -963,41 +1227,82 @@ class DiplomacyGameEngine:
             if not dest_region:
                 return False, f"Destination region {order.target} does not exist"
 
+            if order.via_convoy:
+                if unit.type != UnitType.ARMY:
+                    return False, "Only armies can move VIA convoy"
+                if order.target_coast:
+                    return False, "Convoyed armies do not specify a destination coast"
+                if self._has_possible_convoy_path(unit.region.name, order.target):
+                    return True, None
+                return False, (
+                    f"No possible convoy path from {order.location} "
+                    f"to {order.target}"
+                )
+
             # Check if the move is adjacent (or can be convoyed for armies)
-            if unit.region.is_adjacent(unit.type, order.target):
+            if self._can_unit_move_to(
+                unit, order.target, order.target_coast
+            ):
                 return True, None
 
             # Check if army can be convoyed
-            if unit.type == UnitType.ARMY and self._has_possible_convoy_path(unit.region.name, order.target):
+            if (
+                unit.type == UnitType.ARMY
+                and order.target_coast is None
+                and self._has_possible_convoy_path(unit.region.name, order.target)
+            ):
                 return True, None
 
             return False, f"Unit at {order.location} cannot move to {order.target} (not adjacent or no convoy path)"
 
         elif order.order_type == OrderType.SUPPORT:
             # Check if the supported unit exists
-            supported_type = UnitType.ARMY if order.target.startswith("A ") else UnitType.FLEET
-            supported_loc = order.target.split()[1]
+            target_parts = order.target.split()
+            if len(target_parts) != 2 or target_parts[0] not in {"A", "F"}:
+                return False, f"Invalid supported unit: {order.target}"
+            supported_type = UnitType(target_parts[0])
+            supported_loc = target_parts[1]
             supported_unit = self._find_unit(None, supported_type, supported_loc)
 
             if not supported_unit:
                 return False, f"No {supported_type.value} unit found at {supported_loc} to support"
 
-            # Check if the supported location is adjacent
-            if not unit.region.is_adjacent(unit.type, supported_loc):
-                return False, f"Cannot support unit at {supported_loc} (not adjacent)"
-
             if order.secondary_target:
-                # Support move - check if the destination is adjacent to the supported unit
-                if not supported_unit.region.is_adjacent(supported_unit.type, order.secondary_target):
-                    # Check if it could be a convoyed move
-                    if (supported_unit.type == UnitType.ARMY and 
-                        self._has_possible_convoy_path(supported_loc, order.secondary_target)):
-                        return True, None
-                    return False, f"Unit at {supported_loc} cannot move to {order.secondary_target}"
+                destination = self.map.get_region(order.secondary_target)
+                if not destination:
+                    return False, f"Destination region {order.secondary_target} does not exist"
 
-                # Check if the destination is adjacent to the supporting unit
-                if not unit.region.is_adjacent(unit.type, order.secondary_target):
+                # Support move - check if the destination is reachable by the
+                # supported unit. A fleet move into a split coast must name it.
+                if not self._can_unit_move_to(
+                    supported_unit,
+                    order.secondary_target,
+                    order.secondary_target_coast,
+                ):
+                    # Check if it could be a convoyed move
+                    if not (
+                        supported_unit.type == UnitType.ARMY
+                        and order.secondary_target_coast is None
+                        and self._has_possible_convoy_path(supported_loc, order.secondary_target)
+                    ):
+                        return False, f"Unit at {supported_loc} cannot move to {order.secondary_target}"
+
+                # A supporter must be able to move to the supported destination.
+                if not self._can_unit_move_to(
+                    unit,
+                    order.secondary_target,
+                    order.secondary_target_coast,
+                    require_explicit_coast=False,
+                ):
                     return False, f"Cannot support move to {order.secondary_target} (not adjacent to supporting unit)"
+            elif not self._can_unit_move_to(
+                unit,
+                supported_loc,
+                supported_unit.coast,
+                require_explicit_coast=False,
+            ):
+                # Support-to-hold is given into the supported unit's province.
+                return False, f"Cannot support unit at {supported_loc} (not adjacent)"
 
             return True, None
 
@@ -1017,10 +1322,8 @@ class DiplomacyGameEngine:
                 return False, f"No {convoyed_type.value} unit found at {convoyed_loc} to convoy"
             if convoyed_unit.type != UnitType.ARMY:
                 return False, "Only armies can be convoyed"
-
-            # Check if the convoyed unit is adjacent to this fleet
-            if not unit.region.is_adjacent(unit.type, convoyed_loc):
-                return False, f"Convoying fleet not adjacent to unit at {convoyed_loc}"
+            if order.target_coast or order.secondary_target_coast:
+                return False, "Convoyed armies do not specify coast qualifiers"
 
             # Check if the destination is a coastal region
             dest_region = self.map.get_region(order.secondary_target)
@@ -1028,6 +1331,13 @@ class DiplomacyGameEngine:
                 return False, f"Destination region {order.secondary_target} does not exist"
             if dest_region.terrain_type != TerrainType.COAST:
                 return False, f"Convoy destination {order.secondary_target} must be a coastal region"
+            if not self._fleet_can_participate_in_convoy(
+                unit, convoyed_loc, order.secondary_target
+            ):
+                return False, (
+                    f"Fleet at {unit.region.name} is not on a convoy path from "
+                    f"{convoyed_loc} to {order.secondary_target}"
+                )
             
             return True, None
 
@@ -1037,7 +1347,10 @@ class DiplomacyGameEngine:
                 return False, f"Unit at {order.location} is not dislodged and cannot retreat"
 
             # Check if retreat location is valid
-            if order.target not in unit.retreat_options:
+            retreat_destination = _format_location(
+                order.target, order.target_coast
+            )
+            if retreat_destination not in unit.retreat_options:
                 return False, f"Cannot retreat to {order.target} (not a valid retreat option)"
             
             return True, None
@@ -1062,6 +1375,21 @@ class DiplomacyGameEngine:
             region = self.map.get_region(order.location)
             if order.unit_type == UnitType.FLEET and region.terrain_type != TerrainType.COAST:
                 return False, f"Cannot build fleet at {order.location} (not a coastal region)"
+            if order.unit_type == UnitType.ARMY and order.location_coast:
+                return False, "Army builds do not specify a coast"
+            if order.unit_type == UnitType.FLEET:
+                if (
+                    order.location in MULTI_COASTS
+                    and order.location_coast not in MULTI_COASTS[order.location]
+                ):
+                    return False, (
+                        f"Fleet build at {order.location} must specify a coast"
+                    )
+                if (
+                    order.location not in MULTI_COASTS
+                    and order.location_coast
+                ):
+                    return False, f"{order.location} does not have split coasts"
 
             return True, None
 
@@ -1091,55 +1419,207 @@ class DiplomacyGameEngine:
         if not region:
             return None
 
-        unit: Optional[Unit] = region.unit 
-        if not unit:
-            # Check if there's a dislodged unit
-            unit = region.dislodged_unit
-
-        if not unit:
-            print(f"Unit {unit_type} at {location} not found")
-            return None 
+        for unit in (region.unit, region.dislodged_unit):
+            if (
+                unit
+                and unit.type == unit_type
+                and (power_name is None or unit.power == power_name)
+            ):
+                return unit
         
-        if unit.type != unit_type:
-            print(f"Unit {unit_type} at {location} is not a {unit.type}")
-            return None
+        return None
 
-        if power_name and unit.power != power_name:
-            print(f"Unit {unit_type} at {location} is not {power_name}")
-            return None 
-        
-        return unit
+    def _adjacent_destinations(
+        self, unit: Unit
+    ) -> List[Tuple[str, Optional[str]]]:
+        """Enumerate direct destinations with explicit split coasts."""
+        destinations: List[Tuple[str, Optional[str]]] = []
+        for destination in self.map.regions:
+            if unit.type == UnitType.FLEET and destination in MULTI_COASTS:
+                for coast in MULTI_COASTS[destination]:
+                    if self._can_unit_move_to(unit, destination, coast):
+                        destinations.append((destination, coast))
+            elif self._can_unit_move_to(unit, destination):
+                destinations.append((destination, None))
+        return destinations
+
+    @staticmethod
+    def _fleet_destination_coasts(source: str, destination: str) -> Set[str]:
+        """Return destination coasts reachable from the source province."""
+        return {
+            coast
+            for coast, neighbors in MULTI_COASTS.get(destination, {}).items()
+            if source in neighbors
+        }
+
+    def _can_unit_move_to(
+        self,
+        unit: Unit,
+        destination: str,
+        destination_coast: Optional[str] = None,
+        *,
+        require_explicit_coast: bool = True,
+    ) -> bool:
+        """Check adjacency while preserving the standard map's split coasts."""
+        destination_region = self.map.get_region(destination)
+        if not unit.region or not destination_region:
+            return False
+
+        if unit.type == UnitType.ARMY:
+            return (
+                destination_coast is None
+                and unit.region.is_adjacent(UnitType.ARMY, destination)
+            )
+
+        source = unit.region.name
+        if source in MULTI_COASTS:
+            if unit.coast not in MULTI_COASTS[source]:
+                return False
+            if destination not in MULTI_COASTS[source][unit.coast]:
+                return False
+        elif not unit.region.is_adjacent(UnitType.FLEET, destination):
+            return False
+
+        if destination in MULTI_COASTS:
+            reachable_coasts = self._fleet_destination_coasts(
+                source, destination
+            )
+            if destination_coast:
+                return destination_coast in reachable_coasts
+            return bool(reachable_coasts) and not require_explicit_coast
+
+        return destination_coast is None
 
     def _has_possible_convoy_path(self, start, end):
         """ Check if there's a possible convoy path between locations """
-        # Simple BFS to find a path of fleets
-        visited = set()
-        queue = [(start, [])] # (location, path_so_far)
+        start_region = self.map.get_region(start)
+        end_region = self.map.get_region(end)
+        if (
+            not start_region
+            or not end_region
+            or start_region.terrain_type != TerrainType.COAST
+            or end_region.terrain_type != TerrainType.COAST
+        ):
+            return False
 
+        fleets = [
+            region.unit
+            for region in self.map.regions.values()
+            if (
+                region.terrain_type == TerrainType.SEA
+                and region.unit
+                and region.unit.type == UnitType.FLEET
+                and not region.unit.dislodged
+            )
+        ]
+        return self._convoy_fleets_connect(start, end, fleets)
+
+    def _convoy_fleets_connect(self, start: str, end: str, fleets: List[Unit]) -> bool:
+        """Return whether the supplied fleets form a sea chain between two coasts."""
+        fleet_regions = {fleet.region.name for fleet in fleets if fleet.region}
+        start_region = self.map.get_region(start)
+        if not start_region:
+            return False
+
+        queue = [
+            location
+            for location in start_region.adjacent_regions["F"]
+            if location in fleet_regions
+        ]
+        visited: Set[str] = set()
         while queue:
-            current, path = queue.pop(0)
-
-            if current == end:
-                return True 
-
+            current = queue.pop(0)
             if current in visited:
-                continue 
-
+                continue
             visited.add(current)
             current_region = self.map.get_region(current)
+            if end in current_region.adjacent_regions["F"]:
+                return True
+            queue.extend(
+                adjacent
+                for adjacent in current_region.adjacent_regions["F"]
+                if adjacent in fleet_regions and adjacent not in visited
+            )
+        return False
 
-
-            # For each adjacent sea region with a fleet 
-            for adj in current_region.adjacent_regions["F"]:
-                adj_region = self.map.get_region(adj)
-                if adj_region and adj_region.terrain_type == TerrainType.SEA:
-                    # Check if there's a fleet here 
-                    if adj_region.unit and adj_region.unit.type == UnitType.FLEET:
-                        queue.append((adj, path + [adj]))
-        
-        return False 
+    def _fleet_can_participate_in_convoy(
+        self, fleet: Unit, start: str, end: str
+    ) -> bool:
+        """Return whether a fleet belongs to an occupied chain joining both coasts."""
+        if not fleet.region or fleet.region.terrain_type != TerrainType.SEA:
+            return False
+        all_fleets = [
+            region.unit
+            for region in self.map.regions.values()
+            if (
+                region.terrain_type == TerrainType.SEA
+                and region.unit
+                and region.unit.type == UnitType.FLEET
+                and not region.unit.dislodged
+            )
+        ]
+        fleet_regions = {candidate.region.name for candidate in all_fleets}
+        start_region = self.map.get_region(start)
+        if not start_region:
+            return False
+        queue = [
+            location
+            for location in start_region.adjacent_regions["F"]
+            if location in fleet_regions
+        ]
+        component: Set[str] = set()
+        while queue:
+            current = queue.pop(0)
+            if current in component:
+                continue
+            component.add(current)
+            current_region = self.map.get_region(current)
+            queue.extend(
+                adjacent
+                for adjacent in current_region.adjacent_regions["F"]
+                if adjacent in fleet_regions and adjacent not in component
+            )
+        return (
+            fleet.region.name in component
+            and any(
+                end in self.map.get_region(location).adjacent_regions["F"]
+                for location in component
+            )
+        )
 
     # TODO maybe keep track of completed and failed orders to add as observations?
+    def parse_orders(
+        self, power_name: str, order_strings: List[str]
+    ) -> Tuple[List[Order], List[Dict[str, Any]]]:
+        """Parse and validate an order set without mutating engine state."""
+        if power_name not in self.powers:
+            return [], [{"reason": "Power not found", "orders": list(order_strings)}]
+
+        parsed_orders: List[Order] = []
+        invalid_orders: List[Dict[str, Any]] = []
+        ordered_locations: Set[str] = set()
+        for order_str in order_strings:
+            try:
+                if isinstance(order_str, str) and order_str.strip() == "```":
+                    continue
+                order = Order.parse(order_str, power_name)
+                is_valid, reason = self.validate_order(order)
+                if not is_valid:
+                    invalid_orders.append({"reason": reason, "orders": [order_str]})
+                    continue
+                if order.location and order.location in ordered_locations:
+                    invalid_orders.append({
+                        "reason": f"Multiple orders submitted for unit at {order.location}",
+                        "orders": [order_str],
+                    })
+                    continue
+                if order.location:
+                    ordered_locations.add(order.location)
+                parsed_orders.append(order)
+            except (ValueError, IndexError, TypeError, AttributeError) as exc:
+                invalid_orders.append({"reason": str(exc), "orders": [order_str]})
+        return parsed_orders, invalid_orders
+
     def resolve_orders(self, orders_by_power: Dict[str, List[str]]) -> Tuple[bool, Dict[str, Any]]:
         """ Process and resolve orders for all powers """
         # Reset waiting status
@@ -1156,23 +1636,8 @@ class DiplomacyGameEngine:
                 continue
 
             power = self.powers[power_name]
-            parsed_orders = []
-
-            for order_str in orders_list:
-                try:
-                    if order_str == "```":
-                        continue
-                    order = Order.parse(order_str, power_name)
-                    is_valid, reason = self.validate_order(order)
-                    if is_valid:
-                        parsed_orders.append(order)
-                    else:
-                        invalid_orders[power_name].append({"reason": reason, "orders": [order_str]})
-                except ValueError as e:
-                    # Skip unknown order types, likely model's reasoning process
-                    if "Unknown order type" in str(e):
-                        continue
-                    invalid_orders[power_name].append({"reason": str(e), "orders": [order_str]})
+            parsed_orders, parse_errors = self.parse_orders(power_name, orders_list)
+            invalid_orders[power_name].extend(parse_errors)
 
             power.set_orders(parsed_orders)
             valid_orders[power_name] = parsed_orders 
@@ -1225,198 +1690,411 @@ class DiplomacyGameEngine:
 
     def _resolve_movement(self, valid_orders: Dict[str, List[Order]]):
         """ Resolve the movement orders """
-        # Maps a region to all orders targeting it
-        # Maps a region to all orders targeting it
-        attack_strength = {}  # {region_name: {strength: [(unit, [supporting_units])]}}
-        move_targets = {}     # {region_name: [units moving there]}
-        supports = {}         # {unit: [units supporting it]}
-        convoys = {}          # {(start, end): [convoying fleets]}
-        move_orders = {}      # {unit: target_region}
-        support_orders = {}   # {unit: (target_unit, destination)}
-        convoy_orders = {}    # {unit: (convoyed_unit, destination)}
+        move_orders: Dict[Unit, str] = {}
+        move_target_coasts: Dict[Unit, Optional[str]] = {}
+        via_convoy_units: Set[Unit] = set()
+        support_orders: Dict[
+            Unit, Tuple[Unit, Optional[str], Optional[str]]
+        ] = {}
+        convoys: Dict[Tuple[str, str], List[Unit]] = defaultdict(list)
 
-        # Step 1: Identify all moves, supports, and convoys
+        # Identify all moves, supports, and convoy orders.
         for power_name, orders in valid_orders.items():
             for order in orders:
                 unit: Optional[Unit] = self._find_unit(power_name, order.unit_type, order.location)
-                if not unit:
+                if not unit or unit.dislodged:
                     continue
 
                 if order.order_type == OrderType.MOVE:
-                    move_orders[unit] = order.target 
-                    move_targets.setdefault(order.target, []).append(unit)
-
+                    move_orders[unit] = order.target
+                    move_target_coasts[unit] = order.target_coast
+                    if order.via_convoy:
+                        via_convoy_units.add(unit)
                 elif order.order_type == OrderType.SUPPORT:
-                    supported_type = UnitType.ARMY if order.target.startswith("A ") else UnitType.FLEET
+                    supported_type = UnitType(order.target.split()[0])
                     supported_loc = order.target.split()[1]
                     supported_unit = self._find_unit(None, supported_type, supported_loc)
-
-                    if supported_unit:
-                        if order.secondary_target: # Support move
-                            support_orders[unit] = (supported_unit, order.secondary_target)
-                            supports.setdefault(supported_unit, []).append(unit)
-                        else: # Support hold
-                            support_orders[unit] = (supported_unit, None)
-                            supports.setdefault(supported_unit, []).append(unit)
-
+                    if supported_unit and not supported_unit.dislodged:
+                        support_orders[unit] = (
+                            supported_unit,
+                            order.secondary_target,
+                            order.secondary_target_coast,
+                        )
                 elif order.order_type == OrderType.CONVOY:
-                    convoyed_type = UnitType.ARMY if order.target.startswith("A ") else UnitType.FLEET
+                    convoyed_type = UnitType(order.target.split()[0])
                     convoyed_loc = order.target.split()[1]
                     convoyed_unit = self._find_unit(None, convoyed_type, convoyed_loc)
-
                     if convoyed_unit and convoyed_unit.type == UnitType.ARMY:
-                        convoy_key = (convoyed_loc, order.secondary_target)
-                        convoys.setdefault(convoy_key, []).append(unit)
-                        convoy_orders[unit] = (convoyed_unit, order.secondary_target)
+                        convoys[(convoyed_loc, order.secondary_target)].append(unit)
 
-        # Setp 2: Calculate attack strengths for all potential conflicts
-        for target, attacking_units in move_targets.items():
-            attack_strength[target] = {}
+        # Convoy validity, support cutting, and dislodgement depend on one
+        # another. Re-adjudicate after removing dislodged supporters and convoy
+        # fleets until no additional dependency can be invalidated.
+        disabled_supporters: Set[Unit] = set()
+        unavailable_convoy_fleets: Set[Unit] = set()
+        convoy_fleets = {
+            fleet for fleet_list in convoys.values() for fleet in fleet_list
+        }
+        successful_moves: Dict[Unit, str] = {}
+        dislodged_units: Dict[Unit, str] = {}
+        standoff_regions: Set[str] = set()
 
-            # Add defending unit's strength
-            defending_region = self.map.get_region(target)
-            if defending_region and defending_region.unit:
-                defending_unit = defending_region.unit 
-                # If defender is not moving 
-                if defending_unit not in move_orders:
-                    defender_supports = supports.get(defending_unit, [])
-                    strength = 1 + len(defender_supports)
-                    attack_strength[target][strength] = [(defending_unit, defender_supports)]
-            
-            # Add each attacker's strength
-            for attacker in attacking_units:
-                attacker_supports: List[Unit] = supports.get(attacker, [])
-                # Filter out invalid supports
-                valid_supports: List[Unit] = []
-                for support in attacker_supports:
-                    # Support is valid if:
-                    # 1. The supporting unit isn't dislodged
-                    # 2. The supporting unit isn't being attacked from the unit it's supporting against
-                    if not support.dislodged and self._is_valid_support(support, attacker, target, valid_orders):
-                        valid_supports.append(support)
+        dependency_count = len(support_orders) + len(convoy_fleets) + 1
+        for _ in range(dependency_count):
+            active_convoys = {
+                route
+                for route, fleets in convoys.items()
+                if self._convoy_fleets_connect(
+                    route[0],
+                    route[1],
+                    [
+                        fleet
+                        for fleet in fleets
+                        if fleet not in unavailable_convoy_fleets
+                    ],
+                )
+            }
 
-                strength = 1 + len(valid_supports)
-                attack_strength[target].setdefault(strength, []).append((attacker, valid_supports))
+            supports: Dict[Unit, List[Unit]] = defaultdict(list)
+            for supporting_unit, (
+                supported_unit,
+                destination,
+                destination_coast,
+            ) in support_orders.items():
+                if supporting_unit in disabled_supporters:
+                    continue
+                supported_move = move_orders.get(supported_unit)
+                support_matches = (
+                    (destination is None and supported_move is None)
+                    or (
+                        destination is not None
+                        and supported_move == destination
+                        and move_target_coasts.get(supported_unit)
+                        == destination_coast
+                    )
+                )
+                support_target = destination or supported_unit.region.name
+                if (
+                    support_matches
+                    and self._is_valid_support(
+                        supporting_unit,
+                        supported_unit,
+                        support_target,
+                        valid_orders,
+                        active_convoys,
+                    )
+                ):
+                    supports[supported_unit].append(supporting_unit)
 
-        
-        # Step 3: Resolve convoy disruptions
-        disrupted_convoys = self._resolve_convoy_disruptions(convoys, attack_strength, supports)
+            disrupted_convoys = {
+                (unit.region.name, destination)
+                for unit, destination in move_orders.items()
+                if (
+                    (
+                        unit in via_convoy_units
+                        or not self._can_unit_move_to(
+                            unit,
+                            destination,
+                            move_target_coasts.get(unit),
+                        )
+                    )
+                    and (unit.region.name, destination) not in active_convoys
+                )
+            }
+            (
+                successful_moves,
+                dislodged_units,
+                standoff_regions,
+            ) = self._calculate_movements(
+                move_orders,
+                supports,
+                disrupted_convoys,
+                via_convoy_units,
+                move_target_coasts,
+            )
 
-        # Step 4: Resolve movements 
-        self._resolve_movements(attack_strength, move_orders, disrupted_convoys)
+            newly_disabled_supporters = (
+                set(dislodged_units) & set(support_orders)
+            ) - disabled_supporters
+            newly_unavailable_fleets = (
+                set(dislodged_units) & convoy_fleets
+            ) - unavailable_convoy_fleets
+            if not newly_disabled_supporters and not newly_unavailable_fleets:
+                break
+            disabled_supporters.update(newly_disabled_supporters)
+            unavailable_convoy_fleets.update(newly_unavailable_fleets)
 
-        # Step 5: Update supply center ownership
+        self._standoff_regions = standoff_regions
+        self._apply_movements(
+            successful_moves,
+            dislodged_units,
+            move_target_coasts,
+        )
+
+        # Update supply center ownership and prepare retreats.
         self._update_supply_centers()
-
-        # Step 6: Prepare retreat options for dislodged units
         self._prepare_retreats()
 
-    def _is_valid_support(self, supporting_unit: Unit, supported_unit: Unit, target: str, valid_orders: Dict[str, List[Order]]) -> bool:
+    def _is_valid_support(
+        self,
+        supporting_unit: Unit,
+        supported_unit: Unit,
+        target: str,
+        valid_orders: Dict[str, List[Order]],
+        active_convoys: Optional[Set[Tuple[str, str]]] = None,
+    ) -> bool:
         """ Check if a support is valid (not cut) """
-        # Check if the supporting unit is being attacked
-        supporting_region: Region = supporting_unit.region 
+        supporting_region: Region = supporting_unit.region
+        active_convoys = active_convoys or set()
 
         for power_name, orders in valid_orders.items():
             for order in orders:
-                if (order.order_type == OrderType.MOVE and 
-                order.target == supporting_region.name and 
-                power_name != supporting_unit.power):
-                    # Support is cut unless the attack comes from the unit being supported
-                    attacking_unit: Optional[Unit] = self._find_unit(power_name, order.unit_type, order.location)
-                    if attacking_unit and attacking_unit != supported_unit:
+                if (
+                    order.order_type == OrderType.MOVE
+                    and order.target == supporting_region.name
+                    and power_name != supporting_unit.power
+                ):
+                    attacking_unit = self._find_unit(
+                        power_name, order.unit_type, order.location
+                    )
+                    if not attacking_unit or attacking_unit.dislodged:
+                        continue
+                    if (
+                        (
+                            order.via_convoy
+                            or not self._can_unit_move_to(
+                                attacking_unit,
+                                supporting_region.name,
+                                order.target_coast,
+                            )
+                        )
+                        and (
+                            attacking_unit.region.name,
+                            supporting_region.name,
+                        )
+                        not in active_convoys
+                    ):
+                        # A convoyed move whose convoy failed never attacks the
+                        # supporter's province and therefore cannot cut support.
+                        continue
+                    # An attack from the province against which support is given
+                    # does not cut that support; every other enemy attack does.
+                    if order.location != target:
                         return False 
 
         return True 
 
-    def _resolve_convoy_disruptions(self, convoys: Dict[Tuple[str, str], List[Unit]], attacking_strength: Dict[str, Dict[int, List[Tuple[Unit, List[Unit]]]]], supports: Dict[Unit, List[Unit]]) -> Set[Tuple[str, str]]:
+    def _resolve_convoy_disruptions(
+        self,
+        convoys: Dict[Tuple[str, str], List[Unit]],
+        move_orders: Dict[Unit, str],
+        supports: Dict[Unit, List[Unit]],
+    ) -> Set[Tuple[str, str]]:
         """ Determine which convoys are disrupted """
         disrupted_convoys: Set[Tuple[str, str]] = set()
+        attackers_by_target: Dict[str, List[Unit]] = defaultdict(list)
+        for attacker, target in move_orders.items():
+            attackers_by_target[target].append(attacker)
 
-        # Check each convoying fleet to see if it's dislodged
         for (start, end), fleet_list in convoys.items():
             for fleet in fleet_list:
-                fleet_region = fleet.region 
-
-                # if there's an attack on this flee'ts location
-                if fleet_region.name in attacking_strength:
-                    strengths = sorted(attacking_strength[fleet_region.name].keys(), reverse=True)
-                    if not strengths:
-                        continue 
-
-                    highest_strength = strengths[0]
-                    strongest_attackers = attacking_strength[fleet_region.name][highest_strength]
-
-
-                    # if the fleet is not among the strongest units at its location
-                    fleet_strength = 1 
-                    if fleet in supports:
-                        fleet_strength += len(supports[fleet])
-
-                    if fleet_strength < highest_strength:
-                        # The convoy is disrupted 
-                        disrupted_convoys.add((start, end))
-                        break 
+                attackers = [
+                    attacker
+                    for attacker in attackers_by_target.get(fleet.region.name, [])
+                    if attacker.power != fleet.power
+                ]
+                if not attackers:
+                    continue
+                strengths = {
+                    attacker: 1 + len(supports.get(attacker, []))
+                    for attacker in attackers
+                }
+                highest = max(strengths.values())
+                strongest = [
+                    attacker for attacker, strength in strengths.items()
+                    if strength == highest
+                ]
+                fleet_strength = 1 + len(supports.get(fleet, []))
+                if len(strongest) == 1 and highest > fleet_strength:
+                    disrupted_convoys.add((start, end))
+                    break
         return disrupted_convoys
 
-    def _resolve_movements(self, attack_strength: Dict[str, Dict[int, List[Tuple[Unit, List[Unit]]]]], move_orders: Dict[Unit, str], disrupted_convoys: Set[Tuple[str, str]]) -> None:
-        """ Resolve all movements based on attack strengths """
-        # Track successful moves and dislodge units
-        successful_moves: Dict[Unit, str] = {}
+    def _resolve_movements(
+        self,
+        move_orders: Dict[Unit, str],
+        supports: Dict[Unit, List[Unit]],
+        disrupted_convoys: Set[Tuple[str, str]],
+    ) -> None:
+        """Resolve and apply one movement adjudication."""
+        successful_moves, dislodged_units, standoffs = self._calculate_movements(
+            move_orders, supports, disrupted_convoys
+        )
+        self._standoff_regions = standoffs
+        self._apply_movements(successful_moves, dislodged_units)
+
+    def _calculate_movements(
+        self,
+        move_orders: Dict[Unit, str],
+        supports: Dict[Unit, List[Unit]],
+        disrupted_convoys: Set[Tuple[str, str]],
+        via_convoy_units: Optional[Set[Unit]] = None,
+        move_target_coasts: Optional[Dict[Unit, Optional[str]]] = None,
+    ) -> Tuple[Dict[Unit, str], Dict[Unit, str], Set[str]]:
+        """Adjudicate movement without mutating units or map occupancy."""
+        via_convoy_units = via_convoy_units or set()
+        move_target_coasts = move_target_coasts or {}
+        original_regions = {unit: unit.region for unit in move_orders}
+        original_occupants = {
+            name: region.unit for name, region in self.map.regions.items()
+        }
+
+        blocked_moves: Set[Unit] = set()
+        direct_moves: Dict[Unit, bool] = {}
+        for unit, destination in move_orders.items():
+            source = original_regions[unit].name
+            direct_moves[unit] = (
+                unit not in via_convoy_units
+                and self._can_unit_move_to(
+                    unit, destination, move_target_coasts.get(unit)
+                )
+            )
+            if not direct_moves[unit] and (source, destination) in disrupted_convoys:
+                blocked_moves.add(unit)
+
+        attackers_by_target: Dict[str, List[Unit]] = defaultdict(list)
+        attack_strength: Dict[Unit, int] = {}
+        for unit, destination in move_orders.items():
+            if unit in blocked_moves:
+                continue
+            attackers_by_target[destination].append(unit)
+            attack_strength[unit] = 1 + len(supports.get(unit, []))
+
+        winner_by_target: Dict[str, Unit] = {}
+        standoff_regions: Set[str] = set()
+        for destination, attackers in attackers_by_target.items():
+            highest = max(attack_strength[attacker] for attacker in attackers)
+            strongest = [
+                attacker for attacker in attackers
+                if attack_strength[attacker] == highest
+            ]
+            if len(strongest) == 1:
+                winner_by_target[destination] = strongest[0]
+            elif len(strongest) > 1:
+                standoff_regions.add(destination)
+
+        status: Dict[Unit, bool] = {}
+        resolving: Set[Unit] = set()
+
+        def dislodging_strength(attacker: Unit, defender: Unit) -> int:
+            # Support supplied by the defender's own power cannot dislodge it,
+            # though it still counts when determining standoffs.
+            return 1 + sum(
+                supporter.power != defender.power
+                for supporter in supports.get(attacker, [])
+            )
+
+        def succeeds(unit: Unit) -> bool:
+            if unit in status:
+                return status[unit]
+            destination = move_orders[unit]
+            if unit in blocked_moves or winner_by_target.get(destination) is not unit:
+                status[unit] = False
+                return False
+
+            defender = original_occupants[destination]
+            if defender is None:
+                status[unit] = True
+                return True
+
+            source = original_regions[unit].name
+            defender_destination = move_orders.get(defender)
+            is_head_to_head = (
+                defender_destination == source
+                and direct_moves.get(unit, False)
+                and direct_moves.get(defender, False)
+                and defender not in blocked_moves
+            )
+            if is_head_to_head:
+                status[unit] = (
+                    unit.power != defender.power
+                    and dislodging_strength(unit, defender)
+                    > attack_strength.get(defender, 1)
+                )
+                return status[unit]
+
+            if defender in move_orders:
+                if defender in resolving:
+                    # A cycle of three or more moves vacates all its provinces.
+                    status[unit] = True
+                    return True
+                resolving.add(unit)
+                defender_succeeds = succeeds(defender)
+                resolving.discard(unit)
+                if defender_succeeds:
+                    status[unit] = True
+                    return True
+
+            # The province remains occupied. A power may not dislodge its own unit.
+            if unit.power == defender.power:
+                status[unit] = False
+                return False
+            defense_strength = 1
+            if defender not in move_orders:
+                defense_strength += len(supports.get(defender, []))
+            status[unit] = (
+                dislodging_strength(unit, defender) > defense_strength
+            )
+            return status[unit]
+
+        successful_moves = {
+            unit: destination
+            for unit, destination in move_orders.items()
+            if succeeds(unit)
+        }
+        successful_units = set(successful_moves)
+
         dislodged_units: Dict[Unit, str] = {}
+        for attacker, destination in successful_moves.items():
+            defender = original_occupants[destination]
+            if defender and defender not in successful_units:
+                dislodged_units[defender] = original_regions[attacker].name
 
-        # Process each location with conflicts
-        for location, strength_dict in attack_strength.items():
-            if not strength_dict:
-                continue 
+        return successful_moves, dislodged_units, standoff_regions
 
-            strengths: List[int] = sorted(strength_dict.keys(), reverse=True)
-            highest_strength: int = strengths[0]
-            strongest_units: List[Tuple[Unit, List[Unit]]] = strength_dict[highest_strength]
+    def _apply_movements(
+        self,
+        successful_moves: Dict[Unit, str],
+        dislodged_units: Dict[Unit, str],
+        move_target_coasts: Optional[Dict[Unit, Optional[str]]] = None,
+    ) -> None:
+        """Apply a completed movement adjudication atomically."""
+        move_target_coasts = move_target_coasts or {}
+        original_regions = {unit: unit.region for unit in successful_moves}
+        successful_units = set(successful_moves)
 
-            # If there's only one strongest unit or attacker
-            if len(strongest_units) == 1:
-                unit: Unit = strongest_units[0][0]
-                supporters: List[Unit] = strongest_units[0][1]
-                defending_region: Optional[Region] = self.map.get_region(location)
+        # Clear every source and dislodged defender before placing any attacker.
+        for unit in successful_units:
+            source_region = original_regions[unit]
+            if source_region.unit is unit:
+                source_region.unit = None
+        for unit, attacker_origin in dislodged_units.items():
+            region = unit.region
+            if region and region.unit is unit:
+                region.unit = None
+            unit.dislodged = True
+            unit.dislodged_from = attacker_origin
+            unit.retreat_options = []
+            if region:
+                region.dislodged_unit = unit
 
-                # If this is an attack (not a hold)
-                if unit in move_orders and move_orders[unit] == location:
-                    # Check if the convoy is disrupted
-                    unit_start: str = unit.region.name 
-                    if (unit_start, location) in disrupted_convoys:
-                        continue 
-
-                    # Move succeeds 
-                    successful_moves[unit] = location 
-
-                    # if there's a defender, it's dislodged
-                    if defending_region and defending_region.unit:
-                        defender: Unit = defending_region.unit
-                        # Only if defender isn't also moving
-                        if defender not in move_orders:
-                            dislodged_units[defender] = unit.region.name 
-
-            # If there are multiple strongest units, everyone bounces
-            else:
-                # No movement occurs
-                pass 
-
-        # Execute successful moves
         for unit, destination in successful_moves.items():
-            source_region: Region = unit.region 
-            dest_region: Optional[Region] = self.map.get_region(destination)
-
-            # Remove from source
-            source_region.remove_unit()
-
-            # Place in destination
-            unit.region = dest_region 
-            dest_region.unit = unit 
-
-        # Process dislodgements
-        for unit, attacker_loc in dislodged_units.items():
-            unit.dislodge()
-            unit.region.dislodged_unit = unit 
+            destination_region = self.map.get_region(destination)
+            unit.region = destination_region
+            unit.coast = move_target_coasts.get(unit)
+            unit.dislodged = False
+            unit.dislodged_from = None
+            destination_region.unit = unit
 
     def _update_supply_centers(self):
         """ Update supply center ownership after Fall movement """
@@ -1434,10 +2112,11 @@ class DiplomacyGameEngine:
 
                 # Transfer ownership if changed
                 if old_owner != new_owner:
-                    if old_owner:
+                    if old_owner in self.powers:
                         self.powers[old_owner].remove_center(region_name)
 
-                    self.powers[new_owner].add_center(region_name)
+                    if new_owner in self.powers:
+                        self.powers[new_owner].add_center(region_name)
                     region.set_owner(new_owner)
 
     def _prepare_retreats(self):
@@ -1448,23 +2127,33 @@ class DiplomacyGameEngine:
                 if unit.dislodged:
                     retreat_options = [] 
 
-                    # Check all adjacent locations
-                    for adjacent in unit.region.adjacent_regions[unit.type.value]:
+                    # Check all adjacent locations, keeping split coasts distinct.
+                    for adjacent, coast in self._adjacent_destinations(unit):
                         adjacent_region = self.map.get_region(adjacent)
 
                         # Location must be empty and not be a bounce location
                         if (adjacent_region and 
                             not adjacent_region.unit and
-                            not adjacent_region.dislodged_unit):
-                            retreat_options.append(adjacent)
+                            not adjacent_region.dislodged_unit and
+                            adjacent != unit.dislodged_from and
+                            adjacent not in self._standoff_regions):
+                            retreat_options.append(
+                                _format_location(adjacent, coast)
+                            )
 
                     unit.retreat_options = retreat_options
 
     def _resolve_retreats(self, valid_orders: Dict[str, List[Order]]):
         """ Resolve retreat phase orders """
-        retreat_targets: Dict[str, List[Unit]] = {}  # {location: [retreating units]}
-        retreat_orders: Dict[Unit, str] = {}   # {unit: destination}
-        disband_units: Set[Unit] = set()
+        retreat_targets: Dict[
+            str, List[Tuple[Unit, Optional[str]]]
+        ] = {}  # {province: [(retreating unit, coast)]}
+        disband_units: Set[Unit] = {
+            unit
+            for power in self.powers.values()
+            for unit in power.units
+            if unit.dislodged
+        }
 
         # Collect all retreat orders
         for power_name, orders in valid_orders.items():
@@ -1474,37 +2163,51 @@ class DiplomacyGameEngine:
                     continue 
 
                 if order.order_type == OrderType.RETREAT:
-                    retreat_orders[unit] = order.target 
-                    retreat_targets.setdefault(order.target, []).append(unit)
+                    retreat_targets.setdefault(order.target, []).append(
+                        (unit, order.target_coast)
+                    )
                 elif order.order_type == OrderType.DISBAND:
                     disband_units.add(unit)
 
         # Resolve retreats - units bounce if multiple units retreat to same location
-        successful_retreats = {}
-        for location, units in retreat_targets.items():
-            if len(units) == 1:
-                successful_retreats[units[0]] = location 
+        successful_retreats: Dict[
+            Unit, Tuple[str, Optional[str]]
+        ] = {}
+        for location, unit_coasts in retreat_targets.items():
+            if len(unit_coasts) == 1:
+                unit, coast = unit_coasts[0]
+                successful_retreats[unit] = (location, coast)
+                disband_units.discard(unit)
             else:
                 # All bounced units are disbanded
-                disband_units.update(units) # TODO: check action
+                disband_units.update(unit for unit, _coast in unit_coasts)
 
         # Execute successful retreats
-        for unit, destination in successful_retreats.items():
+        for unit, (destination, coast) in successful_retreats.items():
             region: Optional[Region] = self.map.get_region(destination)
-            unit.retreat(region)
+            if not region or not unit.retreat(region, coast):
+                disband_units.add(unit)
 
-        # Disband failed retreats
+        # Disband explicit, failed, and omitted retreats.
         for unit in disband_units:
             power: Power = self.powers[unit.power]
             power.remove_unit(unit)
             if unit.region:
-                unit.region.dislodge_unit() # This is not a function in the Region class, does it mean dislodge = False?
+                if unit.region.dislodged_unit is unit:
+                    unit.region.dislodged_unit = None
+                if unit.region.unit is unit:
+                    unit.region.unit = None
+            unit.region = None
+            unit.coast = None
+            unit.dislodged = False
+            unit.dislodged_from = None
+            unit.retreat_options = []
 
 
     def _resolve_adjustments(self, valid_orders: Dict[str, List[Order]]):
         """ Resolve adjustment phase orders """
-        for power_name, orders in valid_orders.items():
-            power: Power = self.powers[power_name]
+        for power_name, power in self.powers.items():
+            orders = valid_orders.get(power_name, [])
             build_count: int = power.count_needed_builds()
 
             # Process builds if needed
@@ -1516,6 +2219,7 @@ class DiplomacyGameEngine:
                     if order.order_type == OrderType.BUILD and builds_executed < build_count:
                         # Create and place the new unit
                         unit: Unit = Unit(order.unit_type, power_name)
+                        unit.coast = order.location_coast
                         region: Optional[Region] = self.map.get_region(order.location)
 
                         if unit.place_in_region(region):
@@ -1536,9 +2240,7 @@ class DiplomacyGameEngine:
                     if order.order_type == OrderType.DISBAND and disbands_executed < disbands_needed:
                         unit: Optional[Unit] = self._find_unit(power_name, order.unit_type, order.location)
                         if unit:
-                            region: Optional[Region] = unit.region
-                            power.remove_unit(unit)
-                            region.remove_unit()
+                            self._remove_unit_from_map(power, unit)
                             disbands_executed += 1
 
 
@@ -1549,9 +2251,23 @@ class DiplomacyGameEngine:
                     )
 
                     for unit in units_to_disband:
-                        region = unit.region 
-                        power.remove_unit(unit)
-                        region.remove_unit()
+                        self._remove_unit_from_map(power, unit)
+
+    @staticmethod
+    def _remove_unit_from_map(power: Power, unit: Unit) -> None:
+        """Remove a unit while keeping power, unit, and region pointers aligned."""
+        region = unit.region
+        power.remove_unit(unit)
+        if region:
+            if region.unit is unit:
+                region.unit = None
+            if region.dislodged_unit is unit:
+                region.dislodged_unit = None
+        unit.region = None
+        unit.coast = None
+        unit.dislodged = False
+        unit.dislodged_from = None
+        unit.retreat_options = []
 
     def _select_units_to_disband(self, power: Power, count: int) -> List[Unit]:
         """ Select units to automatically disband on distance from home centers """
@@ -1613,6 +2329,7 @@ class DiplomacyGameEngine:
             
         elif self.phase == PhaseType.RETREATS:
             if self.season == Season.FALL:
+                self.season = Season.WINTER
                 self.phase = PhaseType.ADJUSTMENTS
             else:
                 self.season = Season.FALL
@@ -1638,6 +2355,8 @@ class DiplomacyGameEngine:
         for power_name, power in self.powers.items():
             # Check for elimination
             power.check_elimination()
+            if power.is_defeated:
+                continue
 
             # Check for victory
             center_count = len(power.controlled_centers)
@@ -1649,9 +2368,13 @@ class DiplomacyGameEngine:
                 self.game_over = True 
                 return 
 
-        # Check if game should end (max turns reached or only one power remains)
+        # A game year is complete only after its Winter adjustment advances the
+        # engine to the next Spring. Do not treat movement/retreat phases as years.
         active_powers = [p for p in self.powers.values() if not p.is_defeated]
-        if len(active_powers) <= 1 or self.turn_number >= self.max_turns:
+        if (
+            len(active_powers) <= 1
+            or self.completed_game_years >= self.max_game_years
+        ):
             # Game ends in draw or with one winner
             if len(active_powers) == 1:
                 self.winners = [active_powers[0].name]

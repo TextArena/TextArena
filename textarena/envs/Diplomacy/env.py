@@ -1,14 +1,25 @@
 import re
-import random
-from typing import Any, Dict, Optional, Tuple, List, Set
-from functools import partial
+from typing import Any, Dict, Optional, Tuple, List, Union
 import textarena as ta
 from textarena.envs.Diplomacy.game_engine import DiplomacyGameEngine
 from textarena.envs.Diplomacy.prompts.prompt import get_state_specific_prompt
 import os
 
-class DiplomacyEnv(ta.Env):
+# A bare command section runs until the next line that starts a new command,
+# or the end of the action string.
+_BARE_NEXT_CMD = (
+    r"(?=\n[ \t]*(?:Broadcast[ \t]*:|Whisper[ \t]+(?:to[ \t]+)?(?:Player[ \t]+)?\d+"
+    r"|Submit[ \t]+Orders)|\Z)"
+)
+
+
+class DiplomacyEnv(ta.GameEnv):
     """Environment for Diplomacy with negotiation support"""
+
+    min_players = 3
+    max_players = 7
+
+    # Legacy bracketed forms - still accepted as input, but no longer taught in prompts
     broadcast_pattern = re.compile(
         r"(?:"
         r"\s*\[Broadcast\s*:\s*(.*?)\]"            # [Broadcast: message]
@@ -20,16 +31,35 @@ class DiplomacyEnv(ta.Env):
         re.IGNORECASE | re.DOTALL
     )
     
-    # Whisper to another player
+    # Whisper to another player (legacy bracketed form)
     whisper_pattern = re.compile(
         r"\s*\[Whisper\s+(?:to\s+)?(?:Player\s+)?(\d+)(?:\s+\(([A-Z]+)\))?\s*:\s*(.*?)\]",
         re.IGNORECASE | re.DOTALL
     )
     
-    # Submit orders for the current phase
+    # Submit orders for the current phase (legacy bracketed form)
     submit_orders_pattern = re.compile(
         r"\[Submit\s+Orders\]([\s\S]*?)(?=\[|$)",
         re.IGNORECASE
+    )
+
+    # Canonical bare, line-oriented grammar. Each command starts at the
+    # beginning of a line; several commands can be stacked in one action.
+    #   Broadcast: message
+    bare_broadcast_pattern = re.compile(
+        r"^[ \t]*Broadcast[ \t]*:[ \t]*([\s\S]*?)" + _BARE_NEXT_CMD,
+        re.IGNORECASE | re.MULTILINE
+    )
+    #   Whisper to 2: message      /      Whisper to 3 (ITALY): message
+    bare_whisper_pattern = re.compile(
+        r"^[ \t]*Whisper[ \t]+(?:to[ \t]+)?(?:Player[ \t]+)?(\d+)[ \t]*(?:\(([A-Z]+)\))?[ \t]*:[ \t]*([\s\S]*?)"
+        + _BARE_NEXT_CMD,
+        re.IGNORECASE | re.MULTILINE
+    )
+    #   Submit Orders:   followed by one order per line
+    bare_submit_orders_pattern = re.compile(
+        r"^[ \t]*Submit[ \t]+Orders[ \t]*:?[ \t]*\n?([\s\S]*?)" + _BARE_NEXT_CMD,
+        re.IGNORECASE | re.MULTILINE
     )
 
     def __init__(self, max_turns: int = 30, 
@@ -41,7 +71,13 @@ class DiplomacyEnv(ta.Env):
             max_turns (int): Maximum number of game years before ending in a draw
             negotiations_per_phase (int): How many negotiation rounds per game phase
         """
-        self.max_turns = max_turns
+        if max_turns < 1:
+            raise ValueError("max_turns must be at least one game year")
+        if negotiations_per_phase < 1:
+            raise ValueError("negotiations_per_phase must be at least one")
+        # NOTE: `max_turns` counts game YEARS and is enforced by DiplomacyGameEngine;
+        # it is NOT an engine-step limit, so it must not be stored as self.max_turns.
+        self.max_game_years = max_turns
         self.negotiations_per_phase = negotiations_per_phase
         
         # Game state
@@ -56,14 +92,17 @@ class DiplomacyEnv(ta.Env):
         self.current_phase = None
         self.chat_history: List[Dict[str, Any]] = []
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        """ Reset the environment and start a new game """
-        self.state = ta.State(num_players=num_players, min_players=3, max_players=7, seed=seed)
-        
+    def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
+        # The raw action is echoed to its author (with chat_history bookkeeping) in apply().
+        return None
+
+    def setup(self) -> Dict[str, Any]:
+        """ Set up a new game """
+        num_players = self.state.num_players
+
         # Initialize game engine
-        self.engine = DiplomacyGameEngine(max_turns=self.max_turns)
-        self.player_power_map = self.engine.setup_game(num_players)
-        self.state.role_mapping = self.player_power_map
+        self.engine = DiplomacyGameEngine(max_turns=self.max_game_years)
+        self.player_power_map = self.engine.setup_game(num_players, rng=self.rng)
         self.power_player_map = {power: player for player, power in self.player_power_map.items()}
         
         # Reset game state tracking
@@ -78,28 +117,37 @@ class DiplomacyEnv(ta.Env):
         self.agreements = {}
         self.chat_history: List[Dict[str, Any]] = []
 
-        # Initialize game state for players
-        game_state = self.engine.get_state()
-        game_state['player_power_map'] = self.player_power_map
-        game_state['powers_info'] = {power: {
-            'home_centers': self.engine.powers[power].home_centers,
-            'controlled_centers': self.engine.powers[power].controlled_centers,
-            'units': [str(unit) for unit in self.engine.powers[power].units],
-        } for power in self.player_power_map.values()}
-        game_state['current_negotiation_round'] = 0
-        game_state['total_negotiation_rounds'] = self.negotiations_per_phase
+        return self._build_game_state()
 
-        player_prompt_function = partial(self._generate_player_prompt, player_power_map=self.player_power_map, start_of_game=True)
-        # Initialize the state
-        self.state.reset(
-            game_state=game_state,
-            player_prompt_function=player_prompt_function,
-        )
-        
+    def _build_game_state(
+        self, engine_state: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Return the stable public state schema used at setup and resolution."""
+        game_state = dict(engine_state or self.engine.get_state())
+        game_state["player_power_map"] = dict(self.player_power_map)
+        game_state["powers_info"] = {
+            power: {
+                "home_centers": list(self.engine.powers[power].home_centers),
+                "controlled_centers": list(
+                    self.engine.powers[power].controlled_centers
+                ),
+                "units": [str(unit) for unit in self.engine.powers[power].units],
+            }
+            for power in self.player_power_map.values()
+        }
+        game_state["current_negotiation_round"] = self.current_negotiation_round
+        game_state["total_negotiation_rounds"] = self.negotiations_per_phase
+        return game_state
+
+    def roles(self) -> Dict[int, str]:
+        return dict(self.player_power_map)
+
+    def prompt(self, player_id: int) -> str:
+        return self._generate_player_prompt(player_power_map=self.player_power_map, player_id=player_id, game_state=self.game_state, start_of_game=True)
+
+    def on_start(self):
         # Send initial game state announcement to all players
         self._announce_game_state()
-        
-        return self.state
 
     def _generate_player_prompt(self, player_power_map: Dict[str, str], player_id: int, game_state: Dict[str, Any], start_of_game: bool = False) -> str:
         """
@@ -131,7 +179,7 @@ class DiplomacyEnv(ta.Env):
             "- Each season has a Movement phase and possibly a Retreat phase",
             "- After Fall, there's an Adjustment phase where you build new units or disband excess units",
             "- The game lasts until one power controls 18+ supply centers or until the maximum number of turns",
-            f"- This game will last at most {self.max_turns} years",
+            f"- This game will last at most {self.max_game_years} years",
             "",
             "### YOUR OBJECTIVE",
             "To win, you must control the majority of supply centers (currently 18 out of 34). This requires:",
@@ -179,31 +227,31 @@ class DiplomacyEnv(ta.Env):
             "## COMMUNICATION OPTIONS",
             "You can interact in the following ways:",
             "",
+            "Each command must start at the beginning of its own line.",
+            "",
             "1. **Broadcast messages** - Send a message to all players",
-            "   Example: [Broadcast: I propose we all focus on containing Russia this turn]",
-            "   Alternative: [Broadcast] Let's coordinate our attacks against Turkey",
+            "   Example: Broadcast: I propose we all focus on containing Russia this turn",
             "",
             "2. **Whisper messages** - Send a private message to another player",
-            "   Example: [Whisper to 2: Would you be interested in coordinating against Germany?]",
-            "   Alternative: [Whisper to 3 (ITALY): I can support your move to Trieste]",
+            "   Example: Whisper to 2: Would you be interested in coordinating against Germany?",
+            "   Alternative: Whisper to 3 (ITALY): I can support your move to Trieste",
             "",
-            "3. **Submit orders** (final negotiation round only) - Send your orders for the current phase",
+            "3. **Submit orders** (final negotiation round only) - Send your orders for the current phase,",
+            "   one order per line after the 'Submit Orders:' line",
             "   Example:",
             "   ```",
-            "   [Submit Orders]",
+            "   Submit Orders:",
             "   A PAR - BUR",
             "   A MAR S A PAR - BUR",
             "   F BRE - MAO",
             "   ```",
             "",
-            "You can combine multiple communication types in a single response:",
+            "You can combine multiple communication types in a single response, each on its own line/section:",
             "",
             "```",
-            "[Broadcast: I'm looking to form alliances this turn]",
-            "",
-            "[Whisper to 1: I noticed England is threatening your northern border. I could help you against them if you agree not to attack me.]",
-            "",
-            "[Whisper to 3: Let's coordinate our fleets in the Mediterranean]",
+            "Broadcast: I'm looking to form alliances this turn",
+            "Whisper to 1: I noticed England is threatening your northern border. I could help you against them if you agree not to attack me.",
+            "Whisper to 3: Let's coordinate our fleets in the Mediterranean",
             "```",
             "",
             "## STRATEGY TIPS",
@@ -306,9 +354,9 @@ class DiplomacyEnv(ta.Env):
             "TACTICAL": [],   # Orders that improve position without immediate captures
             "SUPPORT": []     # Support orders
         }
-        
+
         # Get supply centers for context
-        supply_centers = set(self.engine.map.scs)
+        supply_centers = set(self.engine.map.get_supply_centers())
         
         # Get current supply center ownership
         power_centers = {}
@@ -382,21 +430,17 @@ class DiplomacyEnv(ta.Env):
 
     def get_prompt(self, player_id: int, history_text: str):
         # 1) Load the template
-        template = open("textarena/envs/Diplomacy/prompts/context_prompt.txt", "r").read()
+        template_path = os.path.join(
+            os.path.dirname(__file__), "prompts", "context_prompt.txt"
+        )
+        with open(template_path, "r") as prompt_file:
+            template = prompt_file.read()
 
         # 2) Expand the phase info
         phase_info = self.expand_phase_info()
 
         # 3) Get the game state
-        game_state = self.engine.get_state()
-        game_state['player_power_map'] = self.player_power_map
-        game_state['powers_info'] = {power: {
-            'home_centers': self.engine.powers[power].home_centers,
-            'controlled_centers': self.engine.powers[power].controlled_centers,
-            'units': [str(unit) for unit in self.engine.powers[power].units],
-        } for power in self.player_power_map.values()}
-        game_state['current_negotiation_round'] = self.current_negotiation_round
-        game_state['total_negotiation_rounds'] = self.negotiations_per_phase
+        game_state = self._build_game_state()
 
         # 4) Get the state summaries
         game_state['our_state_summary_text'] = self.format_power_units_and_centers(player_id)
@@ -427,68 +471,177 @@ class DiplomacyEnv(ta.Env):
             possible_orders_text=game_state['possible_orders_text'],
         )
 
-        print(prompt)
         game_settings_prompt = self._generate_player_prompt(player_power_map=self.player_power_map, player_id=player_id, game_state=game_state, start_of_game=False)
 
         return game_settings_prompt + "\n\n" + prompt
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         """
-        Process player actions
-        
-        Args:
-            action (str): Player's action as a multi-line string
-            
-        Returns:
-            Tuple[bool, ta.Info]: Game completion status and additional info
+        Process a player's action (a multi-line string of communications and orders).
         """
-        current_pid = self.state.current_player_id
-        power_name = self.player_power_map.get(current_pid)
-        
+        power_name = self.player_power_map.get(player_id)
+
         if not power_name:
-            done, info = self.state.step(rotate_player=False)
-            info['reason'] = "Skipped"
-            info['detailed_reason'] = "You are not an active player in this game."
-            return done, info
-        
+            # Failsafe - every player is mapped to a power
+            self.message(player_id, "You are not an active player in this game.", ta.ObservationType.GAME_ADMIN)
+            return None
+
+        communication_error = self._validate_communications(player_id, action)
+        if communication_error:
+            return self.invalid(communication_error)
+
+        # In the final round, validate the complete order section before
+        # emitting any part of the action. Invalid actions must be atomic.
+        if (
+            self.current_negotiation_round == self.negotiations_per_phase - 1
+            and player_id not in self.orders_submitted
+        ):
+            _, validation_error = self._validate_orders_submission(
+                power_name, action
+            )
+            if validation_error:
+                return self.invalid(validation_error)
+
         # Always add the player's full action as an observation to themselves
-        self.add_observation(from_id=current_pid, to_id=current_pid, message=action)
-        
+        self.add_observation(from_id=player_id, to_id=player_id, message=action)
+
         # Process communications and orders
-        actions, game_state_changed = self._process_player_action(current_pid, power_name, action)
-        
+        actions, game_state_changed = self._process_player_action(player_id, power_name, action)
+
+        # In the final negotiation round every (still alive) player must submit orders
+        if (not game_state_changed and self.current_negotiation_round == self.negotiations_per_phase - 1
+                and player_id not in self.orders_submitted):
+            return self.invalid("You must submit orders in the final negotiation round using the 'Submit Orders:' format (one order per line).")
+
         if game_state_changed: # Meaning all players have submitted orders
             # Check if game is over
-            game_completed = self.engine.game_over
-            if game_completed:
-                self._announce_game_result()
-                done, info = self.state.step(rotate_player=False)
-                info.update({
-                    'reason': "Game Over",
-                    'detailed_reason': f"Game ended after {self.engine.turn_number} turns. The winners are {self.engine.winners}.",
-                    'winners': self.engine.winners,
-                    'winning_players': [self.power_player_map[power] for power in self.engine.winners] if self.engine.winners else [],
-                    'final_sc_count': {power: len(self.engine.powers[power].controlled_centers) for power in self.engine.powers},
-                    'turn_number': self.engine.turn_number
-                })
-                return done, info
-                
-        # Move to next player or negotiate a new round
-        # self._rotate_players()
-        
-        done, info = self.state.step(rotate_player=True)
-        # If we've completed a full round of negotiations
-        if self.state.current_player_id == 0 and not game_state_changed:
-            self._advance_negotiation_round()
-        
+            if self.engine.game_over:
+                return self._game_over_outcome()
+
         # Add detailed game state info
-        info.update({
-            'current_player': current_pid,
+        self.step_info.update({
+            'current_player': player_id,
             'current_power': power_name,
             'actions': actions
         })
-        
-        return done, info
+
+        # Default round-robin rotation moves to the next alive player; if the
+        # rotation wraps around, a full round of negotiations has completed.
+        if not game_state_changed:
+            next_pid = self.state.next_alive_player()
+            if next_pid is not None and next_pid <= player_id:
+                self._advance_negotiation_round()
+        return None
+
+    def _validate_communications(
+        self, player_id: int, action: str
+    ) -> Optional[str]:
+        """Validate directed messages before emitting any part of an action."""
+        for pattern in (self.bare_whisper_pattern, self.whisper_pattern):
+            for match in pattern.finditer(action):
+                target_id = int(match.group(1))
+                target_power = match.group(2)
+                message = (match.group(3) or "").strip()
+                if target_id not in self.player_power_map:
+                    return f"Unknown whisper target: Player {target_id}."
+                if target_id == player_id:
+                    return "You cannot whisper to yourself."
+                if not self.state.is_player_alive(target_id):
+                    return f"Player {target_id} is no longer active."
+                if (
+                    target_power
+                    and self.player_power_map[target_id] != target_power.upper()
+                ):
+                    return (
+                        f"Player {target_id} is not {target_power.upper()}."
+                    )
+                if not message:
+                    return "Whisper messages cannot be empty."
+        return None
+
+    def _required_order_players(self) -> set:
+        """Players still participating in the current engine phase."""
+        return {
+            pid
+            for pid, power_name in self.player_power_map.items()
+            if (
+                self.state.is_player_alive(pid)
+                and not self.engine.powers[power_name].is_defeated
+            )
+        }
+
+    def _all_required_orders_submitted(self) -> bool:
+        return self._required_order_players() <= self.orders_submitted
+
+    def _extract_order_sections(self, action: str) -> List[str]:
+        """Extract canonical or legacy order sections without side effects."""
+        sections: List[str] = []
+        for pattern in (self.bare_submit_orders_pattern, self.submit_orders_pattern):
+            sections.extend(match.group(1) or "" for match in pattern.finditer(action))
+        return sections
+
+    @staticmethod
+    def _parse_order_lines(orders_text: str) -> List[str]:
+        return [
+            line.strip()
+            for line in orders_text.splitlines()
+            if line.strip() and not line.strip().startswith("#")
+        ]
+
+    def _validate_orders_submission(
+        self, power_name: str, action: str
+    ) -> Tuple[List[str], Optional[str]]:
+        sections = self._extract_order_sections(action)
+        if not sections:
+            return [], (
+                "You must submit orders in the final negotiation round using "
+                "the 'Submit Orders:' format (one order per line)."
+            )
+        if len(sections) != 1:
+            return [], "Submit exactly one order section per action."
+
+        orders = self._parse_order_lines(sections[0])
+        _, invalid_orders = self.engine.parse_orders(power_name, orders)
+        if invalid_orders:
+            first_error = invalid_orders[0]["reason"]
+            return [], f"Invalid order submission: {first_error}"
+        return orders, None
+
+    def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
+        """A player who repeatedly fails to submit orders in the final round is eliminated."""
+        power_name = self.player_power_map[player_id]
+        self.eliminate(player_id)
+        self.engine.powers[power_name].is_defeated = True
+        self.add_observation(from_id=ta.GAME_ID, to_id=-1, message=f"Player {player_id} ({power_name}) has been eliminated after repeated invalid moves.")
+        # Treat the eliminated power as having submitted no orders so the phase can still resolve
+        self.pending_orders.setdefault(power_name, [])
+        self.orders_submitted.add(player_id)
+        alive = [pid for pid in self.player_power_map if self.state.is_player_alive(pid)]
+        if len(alive) <= 1:
+            return self.winner(alive, reason="All other players were eliminated by repeated invalid moves.")
+        if self._all_required_orders_submitted():
+            self._process_orders()
+            if self.engine.game_over:
+                return self._game_over_outcome()
+        # The engine hands the turn to the next alive player
+        return None
+
+    def _game_over_outcome(self) -> ta.Outcome:
+        """Build the final Outcome and announce the game result to all players."""
+        outcome = self._announce_game_result()
+        self.step_info.update({
+            'reason': "Game Over",
+            'detailed_reason': (
+                f"Game ended after {self.engine.completed_game_years} game years. "
+                f"The winners are {self.engine.winners}."
+            ),
+            'winners': self.engine.winners,
+            'winning_players': [self.power_player_map[power] for power in self.engine.winners] if self.engine.winners else [],
+            'final_sc_count': {power: len(self.engine.powers[power].controlled_centers) for power in self.engine.powers},
+            'turn_number': self.engine.turn_number,
+            'completed_game_years': self.engine.completed_game_years,
+        })
+        return outcome
 
     def _process_player_action(self, player_id: int, power_name: str, action: str) -> Tuple[Dict, bool]:
         """
@@ -510,85 +663,83 @@ class DiplomacyEnv(ta.Env):
             "orders": []
         }
         
-        # Process broadcasts
-        for match in self.broadcast_pattern.finditer(action):
-            message = match.group(1) or match.group(2) or match.group(3)
-            if message:
-                # broadcast to all 
-                self.add_observation(from_id=player_id, to_id=-1, message=message)
-                action_summary["broadcasts"].append(message)
-        
-        # Process whispers
-        for match in self.whisper_pattern.finditer(action):
-            target_id = int(match.group(1))
-            target_power = match.group(2)
-            message = match.group(3)
-            
-            # Validate target_power if provided
-            if target_power and self.player_power_map.get(target_id) != target_power:
-                continue
-            
-            # add observation to the whisperee
-            self.add_observation(from_id=player_id, to_id=target_id, message=message)
-            action_summary["whispers"].append({
-                "to_player": target_id,
-                "to_power": self.player_power_map.get(target_id),
-                "message": message
-            })
-        
-        # Process order submission
+        # Process broadcasts (bare line-oriented form + legacy bracketed form)
+        for pattern in (self.bare_broadcast_pattern, self.broadcast_pattern):
+            for match in pattern.finditer(action):
+                message = next((g for g in match.groups() if g and g.strip()), None)
+                if message:
+                    message = message.strip()
+                    # broadcast to all
+                    self.add_observation(from_id=player_id, to_id=-1, message=message)
+                    action_summary["broadcasts"].append(message)
+
+        # Process whispers (bare line-oriented form + legacy bracketed form)
+        for pattern in (self.bare_whisper_pattern, self.whisper_pattern):
+            for match in pattern.finditer(action):
+                target_id = int(match.group(1))
+                target_power = match.group(2)
+                message = (match.group(3) or "").strip()
+
+                # Validate target_power if provided
+                if (
+                    target_power
+                    and self.player_power_map.get(target_id)
+                    != target_power.upper()
+                ):
+                    continue
+
+                # add observation to the whisperee
+                self.add_observation(from_id=player_id, to_id=target_id, message=message)
+                action_summary["whispers"].append({
+                    "to_player": target_id,
+                    "to_power": self.player_power_map.get(target_id),
+                    "message": message
+                })
+
+        # Process order submission (bare line-oriented form + legacy bracketed form)
         if self.current_negotiation_round == self.negotiations_per_phase - 1:
-            for match in self.submit_orders_pattern.finditer(action):
-                orders_text = match.group(1).strip()
-                if orders_text:
-                    self._handle_orders_submission(player_id, power_name, orders_text)
+            sections = self._extract_order_sections(action)
+            if len(sections) == 1:
+                orders_text = sections[0].strip()
+                if self._handle_orders_submission(
+                    player_id, power_name, orders_text
+                ):
                     action_summary["orders_submitted"] = True
                     action_summary["orders"].append(orders_text)
-            
+
             # Check if all players have submitted orders and it's time to process them
-            if len(self.orders_submitted) == len(self.player_power_map):
+            if self._all_required_orders_submitted():
                 game_state_changed = self._process_orders()
 
         return action_summary, game_state_changed
 
 
-    def _rotate_players(self):
-        """Rotate to the next player"""
-        current_player_id = self.state.current_player_id
-        next_player_id = (current_player_id + 1) % self.state.num_players
-        while next_player_id != current_player_id:
-            self.state.manually_update_current_player(new_player_id=next_player_id)
-            break
-            # if self.state.game_state["remaining_dice"][next_player_id] > 0:
-            #     self.state.manually_update_current_player(new_player_id=next_player_id)
-            #     break
-            # @Leon TODO add the break condition
-            # next_player_id = (next_player_id + 1) % self.state.num_players
-        # else:
-        #     self.state.set_winners(player_ids=[current_player_id], reason=f"Player {current_player_id} wins! All other players ran out of dice.")
-
-    def _handle_orders_submission(self, player_id: int, power_name: str, orders_text: str):
+    def _handle_orders_submission(
+        self, player_id: int, power_name: str, orders_text: str
+    ) -> bool:
         """Handle order submission from a player"""
-        # Parse orders line by line
-        orders = [line.strip() for line in orders_text.split('\n') 
-                 if line.strip() and not line.strip().startswith('#')]
+        orders = self._parse_order_lines(orders_text)
+        _, invalid_orders = self.engine.parse_orders(power_name, orders)
+        if invalid_orders:
+            return False
     
         # Store pending orders and mark player as submitted
         self.pending_orders[power_name] = orders
         self.orders_submitted.add(player_id)
         
         # Notify player their orders were received
-        msg = f"[Orders received for {power_name} ({len(orders)} orders)]"
+        msg = f"Orders received for {power_name} ({len(orders)} orders)"
         self.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=msg)
+        return True
 
     def _process_orders(self) -> bool:
         """Process all submitted orders"""
         # Submit orders to the engine
         phase_changed, new_state = self.engine.resolve_orders(self.pending_orders)
+        self._sync_defeated_players()
         
         # Update game state
-        new_state['player_power_map'] = self.player_power_map
-        self.state.game_state = new_state
+        self.state.game_state = self._build_game_state(new_state)
         
         # Update phase tracking
         self.current_season = self.engine.season
@@ -608,6 +759,24 @@ class DiplomacyEnv(ta.Env):
         
         return True
 
+    def _sync_defeated_players(self) -> None:
+        """Remove engine-defeated powers from future environment rotations."""
+        for player_id, power_name in self.player_power_map.items():
+            if (
+                self.engine.powers[power_name].is_defeated
+                and self.state.is_player_alive(player_id)
+            ):
+                self.eliminate(player_id)
+                self.add_observation(
+                    from_id=ta.GAME_ID,
+                    to_id=-1,
+                    message=(
+                        f"Player {player_id} ({power_name}) has been "
+                        "eliminated from the game."
+                    ),
+                    observation_type=ta.ObservationType.GAME_ADMIN,
+                )
+
     def _advance_negotiation_round(self):
         """Advance to the next negotiation round"""
         self.current_negotiation_round += 1
@@ -615,13 +784,13 @@ class DiplomacyEnv(ta.Env):
         
         # Notify all players about the new negotiation round
         if self.current_negotiation_round < self.negotiations_per_phase:
-            message=(f"[Negotiation Round {self.current_negotiation_round + 1} of "
-                       f"{self.negotiations_per_phase} begins]")
+            message=(f"Negotiation Round {self.current_negotiation_round + 1} of "
+                       f"{self.negotiations_per_phase} begins")
             self.add_observation(from_id=ta.GAME_ID, to_id=-1, message=message)
                 
             # If this is the final round, notify players to submit orders
             if self.current_negotiation_round == self.negotiations_per_phase - 1:
-                message="[Final negotiation round: Please submit your orders]"
+                message="Final negotiation round: please submit your orders"
                 self.add_observation(from_id=ta.GAME_ID, to_id=-1, message=message)
         else:
             # Force order processing if we've somehow exceeded max rounds
@@ -682,8 +851,8 @@ class DiplomacyEnv(ta.Env):
         # Announce new phase
         self._announce_game_state()
 
-    def _announce_game_result(self):
-        """Announce the game result to all players"""
+    def _announce_game_result(self) -> ta.Outcome:
+        """Announce the game result to all players and return the final Outcome"""
         if self.engine.winners:
             # Victory announcement
             winners_text = ", ".join(self.engine.winners)
@@ -694,33 +863,44 @@ class DiplomacyEnv(ta.Env):
                 f"Victory achieved by: {winners_text} ({winning_players_text})\n\n"
                 f"Final supply center counts:\n"
             )
-            self.state.set_winners(player_ids=winning_players, reason=reason)
         else:
             # Draw announcement
             reason = (
-                f"Game ended in a DRAW after {self.engine.turn_number} turns.\n\n"
+                f"Game ended in a DRAW after "
+                f"{self.engine.completed_game_years} game years.\n\n"
                 f"Final supply center counts:\n"
             )
-            self.state.set_draw(reason=reason)
 
-        announcement = "Game Results:\n" + reason
-        # Add final supply center counts
+        # Include final counts in both the terminal Outcome and announcement.
         for power_name, player_id in self.power_player_map.items():
             if power_name in self.engine.powers:
                 centers = len(self.engine.powers[power_name].controlled_centers)
-                announcement += f"- Player {player_id} ({power_name}): {centers} centers\n"
+                reason += (
+                    f"- Player {player_id} ({power_name}): "
+                    f"{centers} centers\n"
+                )
+
+        if self.engine.winners:
+            outcome = self.winner(winning_players, reason=reason)
+        else:
+            outcome = self.draw(reason=reason)
         
+        announcement = "Game Results:\n" + reason
         # Add game history summary
         announcement += "\nGame Summary:\n"
-        for entry in self.engine.history:
-            announcement += f"- {entry['phase']}\n"
+        for entry in self.engine.order_history:
+            announcement += f"- {entry['season']} {entry['year']} {entry['phase']}\n"
 
         # Send to all players
         for player_id in self.player_power_map.keys():
             self.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=announcement)
 
-    def add_observation(self, from_id: int, to_id: int, message: str):
+        return outcome
+
+    def add_observation(self, from_id: int, to_id: int, message: str, observation_type: Optional[ta.ObservationType] = None):
         """Add an observation to the chat history"""
+        if observation_type is None:
+            observation_type = ta.ObservationType.GAME_MESSAGE if from_id == ta.GAME_ID else ta.ObservationType.PLAYER_ACTION
         self.chat_history.append({
             "turn": self.state.turn,
             "from": from_id,
@@ -729,7 +909,7 @@ class DiplomacyEnv(ta.Env):
             "to_power": self.player_power_map.get(to_id),
             "message": message
         })
-        self.state.add_observation(from_id=from_id, to_id=to_id, message=message)
+        self.state.add_event(from_id=from_id, message=message, observation_type=observation_type, to_id=to_id)
 
     def get_game_state(self):
         game_state = {

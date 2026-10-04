@@ -1,70 +1,107 @@
-from openai import OpenAI
-import random
-import nltk
-import os
-import tqdm
-import json
-from typing import Optional
 import argparse
+import json
+import os
+import random
+from pathlib import Path
+from typing import Dict, List, Optional, Union
 
-# Use the nltk library to get the list of easy words.
 from nltk.corpus import words
-nltk.download('words')
 
-# Use OpenAI to get the clues for the words.
-client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.getenv("OPENROUTER_API_KEY"))
 
-def get_clue_examples(word: str) -> list:
+DEFAULT_OUTPUT_PATH = Path(__file__).resolve().parents[1] / "words_clues.jsonl"
+
+
+def get_clue_examples(word: str, model: str = "gpt-4o-mini") -> Dict[str, str]:
     """
     Get 10 clue examples for the specified word from OpenRouter.
-    
-    Args:
-        word (str): The word for which to get the clues.
-    
-    Returns:
-        list: A list of 10 distinct clues for the word.
     """
+    api_key = os.getenv("OPENROUTER_API_KEY")
+    if not api_key:
+        raise RuntimeError("OPENROUTER_API_KEY must be set to generate crossword clues")
+
+    # Keep the network client lazy so importing the helper (including
+    # ``--help`` and offline tests) never requires credentials or network.
+    from openai import OpenAI
+
+    client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
+    response = client.chat.completions.create(
+        model=model,
+        messages=[
+            {
+                "role": "user",
+                "content": (
+                    "I am getting clues that will be used for the game 'crosswords'. "
+                    f"Provide 10 distinct clue sentences for the word '{word}', each "
+                    "on its own line without numbering. Include the number of letters "
+                    "at the end of each clue, e.g. (5 letters)."
+                ),
+            }
+        ],
+        temperature=0.7,
+    )
+    content = response.choices[0].message.content
+    clues: List[str] = [line.strip() for line in (content or "").splitlines() if line.strip()]
+    if len(clues) < 10:
+        raise RuntimeError(f"OpenRouter returned only {len(clues)} clues for {word!r}")
+    return {str(index): clue for index, clue in enumerate(clues[:10], start=1)}
+
+
+def _usable_words(corpus_name: str) -> List[str]:
     try:
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "user", "content": f"I am getting clues that will be used for the game 'crosswords'. Provide 10 distinct clue sentences for the word '{word}', each in its own line without any numerical point form. Include the number of letters in the word in parentheses at the end of each clue, e.g. (5 letters)."}
-            ],
-            temperature=0.7,
-        )
-        # Extract the assistant's reply and split it into separate clues
-        clues_text = response.choices[0].message.content.strip()
-        clues_list = clues_text.split("\n")
-        clues_list = clues_list[:10] if len(clues_list) >= 10 else clues_list
-        # Limit to exactly 10 clues in case more or fewer are generated
-        return dict([(f"{i+1}", clues_list[i]) for i in range(len(clues_list))])
-    except Exception as e:
-        return [f"An error occurred: {e}"]
+        corpus = words.words(corpus_name)
+    except LookupError as exc:
+        raise RuntimeError(
+            "The NLTK words corpus is required; install it with nltk.download('words')."
+        ) from exc
+    return list(dict.fromkeys(word.lower() for word in corpus if word.isalpha()))
 
-def main(num_words: Optional[int] = 10):
-    easy_words = random.sample(words.words("en-basic"), num_words)
-    hard_words = random.sample(words.words("en"), num_words)
 
-    easy_tag = [False] * num_words
-    hard_tag = [True] * num_words
+def main(
+    num_words: int = 10,
+    output_path: Optional[Union[str, Path]] = None,
+    seed: Optional[int] = None,
+    model: str = "gpt-4o-mini",
+) -> Path:
+    if not isinstance(num_words, int) or isinstance(num_words, bool) or num_words < 1:
+        raise ValueError("num_words must be a positive integer")
 
-    all_words = easy_words + hard_words
-    all_tags = easy_tag + hard_tag
+    rng = random.Random(seed)
+    easy_pool = _usable_words("en-basic")
+    hard_pool = _usable_words("en")
+    if len(easy_pool) < num_words or len(hard_pool) < num_words:
+        raise ValueError("requested more words than the NLTK corpus provides")
 
-    # Open the file in write mode
-    with open("textarena/envs/single_player/crosswords/crosswords_dataset.jsonl", "w") as f:
-        for word, tag in tqdm.tqdm(zip(all_words, all_tags)):
-            clues = get_clue_examples(word)
-            # Write each entry as a JSON object line by line
-            json_line = json.dumps({"word": word, "hardcore": tag, "clues": clues})
-            f.write(json_line + "\n")
+    selected = [
+        *((word, False) for word in rng.sample(easy_pool, num_words)),
+        *((word, True) for word in rng.sample(hard_pool, num_words)),
+    ]
+    entries = []
+    for word, hardcore in selected:
+        clues = get_clue_examples(word, model=model)
+        if not clues or not all(isinstance(clue, str) and clue for clue in clues.values()):
+            raise RuntimeError(f"invalid clues generated for {word!r}")
+        entries.append({"word": word, "hardcore": hardcore, "clues": clues})
 
-    print("Dataset generated and saved to 'textarena/envs/single_player/crosswords/crosswords_dataset.jsonl'.")
+    destination = Path(output_path) if output_path is not None else DEFAULT_OUTPUT_PATH
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    temporary = destination.with_suffix(destination.suffix + ".tmp")
+    try:
+        with temporary.open("w", encoding="utf-8") as file:
+            for entry in entries:
+                file.write(json.dumps(entry, ensure_ascii=False) + "\n")
+        os.replace(temporary, destination)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
+    return destination
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate a crossword dataset.")
-    parser.add_argument("--num_words", type=int, default=10, help="Number of easy and hard words to include in the dataset.")
+    parser.add_argument("--num-words", type=int, default=10, help="Words per difficulty.")
+    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
+    parser.add_argument("--seed", type=int)
+    parser.add_argument("--model", default="gpt-4o-mini")
     args = parser.parse_args()
-
-    # Pass the parsed num_words to the main function
-    main(args.num_words)
+    generated_path = main(args.num_words, args.output, args.seed, args.model)
+    print(f"Dataset generated at {generated_path}")

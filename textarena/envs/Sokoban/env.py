@@ -1,21 +1,96 @@
 import re
 import numpy as np
-from typing import Optional, Dict, Tuple, Any
+from typing import Any, Dict, Optional, Tuple, Union
 
 import textarena as ta
 
 from textarena.envs.Sokoban.utils import generate_room, CHANGE_COORDINATES
 
 
-class SokobanEnv(ta.Env):
+class SokobanEnv(ta.GameEnv):
+    min_players = 1
+    max_players = 1
+    max_room_cells = 400
+    max_action_chars = 4096
+
     def __init__(self, dim_room=(6, 6), max_turns=100, num_boxes=3):
+        if (
+            not isinstance(dim_room, tuple)
+            or len(dim_room) != 2
+            or any(not isinstance(v, int) or isinstance(v, bool) or v < 4 for v in dim_room)
+        ):
+            raise ValueError("dim_room must be a (rows, cols) tuple with both dimensions at least 4")
+        if dim_room[0] * dim_room[1] > self.max_room_cells:
+            raise ValueError(
+                f"dim_room creates more than {self.max_room_cells} room cells"
+            )
+        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
+            raise ValueError("max_turns must be a positive integer")
+        if not isinstance(num_boxes, int) or isinstance(num_boxes, bool) or num_boxes <= 0:
+            raise ValueError("num_boxes must be a positive integer")
+        if num_boxes + 1 >= (dim_room[0] - 2) * (dim_room[1] - 2):
+            raise ValueError("num_boxes is too large for the room dimensions")
         self.dim_room = dim_room
         self.num_gen_steps = int(1.7 * (dim_room[0] + dim_room[1]))
         self.num_boxes = num_boxes
         self.max_turns = max_turns
         self.action_space = ['up', 'down', 'left', 'right']
-        
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
+        self._seed: Optional[int] = None
+        self._max_retries: int = 50
+
+    def reset(self, num_players: int, seed: Optional[int] = None, max_retries: int = 50):
+        if (
+            not isinstance(max_retries, int)
+            or isinstance(max_retries, bool)
+            or not 1 <= max_retries <= 100
+        ):
+            raise ValueError("max_retries must be an integer between 1 and 100")
+        # Room generation needs the raw seed (it retries with seed + attempt).
+        self._seed = seed
+        self._max_retries = max_retries
+        super().reset(num_players=num_players, seed=seed)
+
+    @property
+    def room_state(self) -> np.ndarray: return self.game_state["board"]
+
+    @property
+    def room_fixed(self) -> np.ndarray: return self.game_state["room_fixed"]
+
+    @property
+    def box_mapping(self) -> Dict: return self.game_state["box_mapping"]
+
+    @property
+    def player_position(self) -> np.ndarray: return self.game_state["player_position"]
+
+    @player_position.setter
+    def player_position(self, value): self.game_state["player_position"] = value
+
+    def setup(self) -> Dict[str, Any]:
+        for attempt in range(self._max_retries):
+            try:
+                # Vary the seed for each attempt to avoid identical failures
+                current_seed = None if self._seed is None else self._seed + attempt
+                room_fixed, room_state, box_mapping = generate_room(
+                    dim=self.dim_room,
+                    num_steps=self.num_gen_steps,
+                    num_boxes=self.num_boxes,
+                    seed=current_seed,
+                    search_depth=max(10, min(self.max_turns, 30)),
+                )
+                break
+            except (RuntimeError, RuntimeWarning):
+                if attempt == self._max_retries - 1:
+                    raise RuntimeError(f"Failed to generate valid room after {self._max_retries} attempts")
+                continue
+
+        return {
+            "board": room_state,
+            "room_fixed": room_fixed,
+            "box_mapping": box_mapping,
+            "player_position": np.argwhere(room_state == 5)[0],
+        }
+
+    def prompt(self, player_id: int) -> str:
         return """You are solving the Sokoban puzzle. You are the player and you need to push all boxes to targets.
         When you are right next to a box, you can push it by moving in the same direction.
         You cannot push a box through a wall, and you cannot pull a box.
@@ -25,18 +100,18 @@ class SokobanEnv(ta.Env):
         - Boxes are marked as 'X' 
         - Empty goals are shown with a 'O'
         - Boxes on goals are visualized with '√'
-        You can also use [w] for up, [a] for left, [s] for down, and [d] for right.
+        Reply with a direction: 'up', 'down', 'left' or 'right'.
+        You can also use 'w' for up, 'a' for left, 's' for down, and 'd' for right.
         """
-    
-    def _observe_current_state(self):
-        board_str = f"Current Board:\n\n{self.create_board_str(self.room_state)}\nAvailable Moves: " + ", ".join(self.action_space)
-        self.state.add_observation(message=board_str, observation_type=ta.ObservationType.GAME_BOARD)
+
+    def render(self, player_id: int) -> str:
+        return f"Current Board:\n\n{self.create_board_str(self.room_state)}\nAvailable Moves: " + ", ".join(self.action_space)
 
     def get_board_str(self):
         return self.create_board_str(board_state=self.state.game_state['board'])
-    
+
     def create_board_str(self, board_state: np.ndarray) -> str:
-        grid_lookup = {0:"#", 1:"_", 2:"O", 3:"√", 4:"X", 5:"P", 6:"S"}
+        grid_lookup = {0: "#", 1: "_", 2: "O", 3: "√", 4: "X", 5: "P", 6: "S"}
 
         board_str = ""
         for row in board_state:
@@ -44,67 +119,53 @@ class SokobanEnv(ta.Env):
             board_str += "\n"
         return board_str
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(
-            from_id=self.state.current_player_id, 
-            to_id=-1, 
-            message=action, 
-            observation_type=ta.ObservationType.PLAYER_ACTION
+    def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        if len(move) > self.max_action_chars:
+            return self.invalid(
+                f"Action is too long (maximum {self.max_action_chars} characters)."
+            )
+        # Accept both full and alias directions (e.g., up, w)
+        action_text = move.strip()
+        if action_text.startswith("[") or action_text.endswith("]"):
+            if not (action_text.startswith("[") and action_text.endswith("]")):
+                return self.invalid("The submitted move has mismatched brackets.")
+            action_text = action_text[1:-1].strip()
+        matches = re.fullmatch(
+            r"(up|down|left|right|w|a|s|d)",
+            action_text,
+            re.IGNORECASE,
         )
 
-        # Accept both full and alias directions (e.g., [up], [w])
-        action_search_pattern = re.compile(r'\[(up|down|left|right|w|a|s|d)\]', re.IGNORECASE)
-        matches = action_search_pattern.search(action)
-
         if matches is None:
-            self.state.set_invalid_move(
-                reward=self._get_percentage_completion(), 
-                reason="The submitted move does not follow the correct format. Use [up], [down], [left], [right] or [w], [a], [s], [d]."
-            )
-        else:
-            raw_action = matches.group(1).lower()
-            alias_to_action = {'w': 'up', 'a': 'left', 's': 'down', 'd': 'right'}
-            action = alias_to_action.get(raw_action, raw_action)
+            return self.invalid("The submitted move does not follow the correct format. Use 'up', 'down', 'left', 'right' or 'w', 'a', 's', 'd'.")
 
-            if action not in self.action_space:
-                self.state.set_invalid_move(
-                    reward=self._get_percentage_completion(), 
-                    reason="The submitted move is not a valid action."
-                )
-            elif self._would_collide_with_wall(action):
-                self.state.set_invalid_move(
-                    reward=self._get_percentage_completion(), 
-                    reason="You cannot move into a wall!"
-                )
-            else:
-                move_successful, box_pushed = self._push(action)
+        raw_action = matches.group(1).lower()
+        alias_to_action = {'w': 'up', 'a': 'left', 's': 'down', 'd': 'right'}
+        action = alias_to_action.get(raw_action, raw_action)
 
-                if not move_successful:
-                    self.state.set_invalid_move(
-                        reward=self._get_percentage_completion(), 
-                        reason="Invalid move - cannot move to that position."
-                    )
-                else:
-                    msg = f"You {'pushed a box while' if box_pushed else ''} moved [{action}]."
-                    self.state.add_observation(message=msg, observation_type=ta.ObservationType.GAME_MESSAGE)
+        if action not in self.action_space:
+            return self.invalid("The submitted move is not a valid action.")
+        if self._would_collide_with_wall(action):
+            return self.invalid("You cannot move into a wall!")
 
-                    board_str = f"Current Board:\n\n{self.create_board_str(self.room_state)}\nAvailable Moves: " + ", ".join(self.action_space)
-                    self.state.add_observation(
-                        from_id=-1, 
-                        to_id=self.state.current_player_id, 
-                        message=board_str, 
-                        observation_type=ta.ObservationType.GAME_BOARD
-                    )
+        move_successful, box_pushed = self._push(action)
+        if not move_successful:
+            return self.invalid("Invalid move - cannot move to that position.")
 
-                    boxes_on_targets, all_boxes_on_targets = self._check_if_all_boxes_on_target()
-                    if all_boxes_on_targets:
-                        self.state.set_outcome(reward=1, reason="Congratulations! You have solved the Sokoban puzzle!")
-                    elif self.state.turn >= self.max_turns:
-                        self.state.set_outcome(reward=self._get_percentage_completion(), reason="The turn limit has been reached. You did not solve the puzzle.")
+        msg = f"You {'pushed a box while' if box_pushed else ''} moved '{action}'."
+        self.broadcast(msg, ta.ObservationType.GAME_MESSAGE)
 
-        return self.state.step()
+        boxes_on_targets, all_boxes_on_targets = self._check_if_all_boxes_on_target()
+        if all_boxes_on_targets:
+            return self.outcome({0: 1}, reason="Congratulations! You have solved the Sokoban puzzle!")
+        return None
 
-    
+    def on_turn_limit(self) -> ta.Outcome:
+        return self.outcome({0: self._get_percentage_completion()}, reason="The turn limit has been reached. You did not solve the puzzle.")
+
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome({0: self._get_percentage_completion()}, reason=f"Invalid Move: {reason}")
+
     def _would_collide_with_wall(self, action: str) -> bool:
         """
         Check if the given action would result in a wall collision.
@@ -112,54 +173,30 @@ class SokobanEnv(ta.Env):
         """
         change = CHANGE_COORDINATES[self.action_space.index(action)]
         new_position = self.player_position + change
-        
+
         # Check bounds
         if (new_position[0] < 0 or new_position[0] >= self.room_state.shape[0] or
-            new_position[1] < 0 or new_position[1] >= self.room_state.shape[1]):
+                new_position[1] < 0 or new_position[1] >= self.room_state.shape[1]):
             return True
-        
+
         # Check if the new position is a wall (value 0)
         if self.room_state[new_position[0], new_position[1]] == 0:
             return True
-        
+
         # Check if there's a box that would be pushed into a wall or out of bounds
         if self.room_state[new_position[0], new_position[1]] in [3, 4]:  # There's a box
             box_new_position = new_position + change
-            
+
             # Check if box would go out of bounds
             if (box_new_position[0] < 0 or box_new_position[0] >= self.room_state.shape[0] or
-                box_new_position[1] < 0 or box_new_position[1] >= self.room_state.shape[1]):
+                    box_new_position[1] < 0 or box_new_position[1] >= self.room_state.shape[1]):
                 return True
-            
+
             # Check if box would be pushed into a wall or another box
             if self.room_state[box_new_position[0], box_new_position[1]] not in [1, 2]:  # Not empty floor or target
                 return True
-        
+
         return False
-    
-    def reset(self, num_players: int, seed: Optional[int]=None, max_retries: int = 50):
-        self.state = ta.SinglePlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
-        
-        for attempt in range(max_retries):
-            try:
-                # Vary the seed for each attempt to avoid identical failures
-                current_seed = None if seed is None else seed + attempt
-                self.room_fixed, self.room_state, self.box_mapping = generate_room(
-                    dim=self.dim_room,
-                    num_steps=self.num_gen_steps,
-                    num_boxes=self.num_boxes,
-                    seed=current_seed
-                )
-                break
-            except (RuntimeError, RuntimeWarning):
-                if attempt == max_retries - 1:
-                    # Fallback: reduce constraints or use simpler generation
-                    raise RuntimeError(f"Failed to generate valid room after {max_retries} attempts")
-                continue
-                
-        self.player_position = np.argwhere(self.room_state == 5)[0]
-        self.state.reset(game_state={'board': self.create_board_str(self.room_state)}, player_prompt_function=self._generate_player_prompt)
-        self._observe_current_state()
 
     def _push(self, action):
         """
@@ -172,13 +209,13 @@ class SokobanEnv(ta.Env):
 
         # Check bounds first
         if (new_position[0] < 0 or new_position[0] >= self.room_state.shape[0] or
-            new_position[1] < 0 or new_position[1] >= self.room_state.shape[1]):
+                new_position[1] < 0 or new_position[1] >= self.room_state.shape[1]):
             return False, False
 
         # No push, if the push would get the box out of the room's grid
         new_box_position = new_position + change
         if (new_box_position[0] < 0 or new_box_position[0] >= self.room_state.shape[0] or
-            new_box_position[1] < 0 or new_box_position[1] >= self.room_state.shape[1]):
+                new_box_position[1] < 0 or new_box_position[1] >= self.room_state.shape[1]):
             # Try to move instead if no box pushing is possible
             return self._move(action), False
 
@@ -200,7 +237,7 @@ class SokobanEnv(ta.Env):
             return True, True
 
         # Try to move if no box to push, available
-        else: 
+        else:
             return self._move(action), False
 
     def _move(self, action):
@@ -213,7 +250,7 @@ class SokobanEnv(ta.Env):
 
         # Check bounds
         if (new_position[0] < 0 or new_position[0] >= self.room_state.shape[0] or
-            new_position[1] < 0 or new_position[1] >= self.room_state.shape[1]):
+                new_position[1] < 0 or new_position[1] >= self.room_state.shape[1]):
             return False
 
         # Move player if the field in the moving direction is either
@@ -228,28 +265,12 @@ class SokobanEnv(ta.Env):
     def _check_if_all_boxes_on_target(self):
         """
         Check how many boxes are currently on targets and if all boxes are on targets.
-        
+
         Returns:
             tuple: (number_of_boxes_on_targets, all_boxes_on_targets_boolean)
         """
         # Count boxes that are on targets (value 3 = √)
         boxes_on_targets = int(np.sum(self.room_state == 3))
-        
-        # Check if player is standing on a target that should have a box
-        player_on_target_with_box = 0
-        player_pos = np.where(self.room_state == 5)
-        if len(player_pos[0]) > 0:
-            player_row, player_col = player_pos[0][0], player_pos[1][0]
-            # If player is on a target position in the fixed room layout
-            if self.room_fixed[player_row, player_col] == 2:
-                # Check if this target should have a box (from box_mapping)
-                if hasattr(self, 'box_mapping'):
-                    for target_pos in self.box_mapping.keys():
-                        if target_pos == (player_row, player_col):
-                            # There should be a box here but player is standing on it
-                            # This doesn't count as a box on target
-                            break
-        
         all_boxes_on_targets = (boxes_on_targets == self.num_boxes)
         return boxes_on_targets, all_boxes_on_targets
 

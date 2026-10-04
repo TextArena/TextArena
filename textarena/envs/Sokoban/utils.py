@@ -15,6 +15,7 @@ CHANGE_COORDINATES = {
     2: (0, -1),
     3: (0, 1)
 }
+MAX_EXPLORED_STATES = 50_000
 
 
 def is_deadlock_position(room_structure, position):
@@ -150,7 +151,16 @@ def check_initial_deadlocks(room_state, room_structure):
     return False
 
 
-def generate_room(dim=(13, 13), p_change_directions=0.35, num_steps=25, num_boxes=3, tries=1000, second_player=False, seed: int = None):
+def generate_room(
+    dim=(13, 13),
+    p_change_directions=0.35,
+    num_steps=25,
+    num_boxes=3,
+    tries=1000,
+    second_player=False,
+    seed: int = None,
+    search_depth: int = 100,
+):
     """
     Generates a Sokoban room with deadlock detection to ensure solvability.
     """
@@ -174,8 +184,12 @@ def generate_room(dim=(13, 13), p_change_directions=0.35, num_steps=25, num_boxe
             if check_initial_deadlocks(room_state, room_structure):
                 continue
             
-            room_state, score, box_mapping = reverse_playing(room_state, room_structure)
-            room_state[room_state == 3] = 4
+            room_state, score, box_mapping = reverse_playing(
+                room_state, room_structure, search_depth=search_depth
+            )
+            box_cells = (room_state == 3) | (room_state == 4)
+            room_state[box_cells] = 4
+            room_state[box_cells & (room_structure == 2)] = 3
             
             # Double-check final state for deadlocks
             if score > 0 and not check_initial_deadlocks(room_state, room_structure):
@@ -359,7 +373,14 @@ def reverse_playing(room_state, room_structure, search_depth=100):
     explored_states = set()
     best_room_score = -1
     best_box_mapping = box_mapping
-    depth_first_search(room_state, room_structure, box_mapping, box_swaps=0, last_pull=(-1, -1), ttl=300)
+    depth_first_search(
+        room_state,
+        room_structure,
+        box_mapping,
+        box_swaps=0,
+        last_pull=(-1, -1),
+        ttl=search_depth,
+    )
 
     return best_room, best_room_score, best_box_mapping
 
@@ -373,7 +394,7 @@ def depth_first_search(room_state, room_structure, box_mapping, box_swaps=0, las
     global explored_states, num_boxes, best_room_score, best_room, best_box_mapping
 
     ttl -= 1
-    if ttl <= 0 or len(explored_states) >= 300000:
+    if ttl <= 0 or len(explored_states) >= MAX_EXPLORED_STATES:
         return
 
     state_tohash = marshal.dumps(room_state)
@@ -408,7 +429,7 @@ def depth_first_search(room_state, room_structure, box_mapping, box_swaps=0, las
 
             depth_first_search(room_state_next, room_structure,
                                box_mapping_next, box_swaps_next,
-                               last_pull, ttl)
+                               last_pull_next, ttl)
 
 
 def reverse_move(room_state, room_structure, box_mapping, last_pull, action):

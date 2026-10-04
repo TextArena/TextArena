@@ -1,12 +1,17 @@
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
 
 from .klondike import KlondikeGame
 
 
-class KlondikeEnv(ta.Env):
+class KlondikeEnv(ta.GameEnv):
     """Environment for Klondike Solitaire"""
+
+    min_players = 1
+    max_players = 1
+    error_allowance = 5
+    max_action_chars = 4096
 
     def __init__(
         self, seed: Optional[int] = None, max_turns: int = 200, draw_count: int = 1
@@ -17,33 +22,37 @@ class KlondikeEnv(ta.Env):
             max_turns: Maximum number of turns before game ends
             draw_count: Number of cards to draw from stock (1 or 3)
         """
+        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns <= 0:
+            raise ValueError("max_turns must be a positive integer")
+        if (
+            not isinstance(draw_count, int)
+            or isinstance(draw_count, bool)
+            or draw_count not in (1, 3)
+        ):
+            raise ValueError("draw_count must be either 1 or 3")
         self.seed = seed
         self.max_turns = max_turns
         self.draw_count = draw_count
+        self._reset_seed: Optional[int] = None
 
     def reset(self, num_players: int, seed: Optional[int] = None):
-        """Reset the game state"""
-        self.state = ta.SinglePlayerState(
-            num_players=num_players,
-            seed=seed,
-            max_turns=self.max_turns,
-            error_allowance=5,
-        )
+        # KlondikeGame seeds its own deck shuffle from the raw seed.
+        self._reset_seed = seed
+        super().reset(num_players=num_players, seed=seed)
 
-        # Create a new Klondike game
-        game_seed = seed if seed is not None else self.seed
-        self.klondike = KlondikeGame(seed=game_seed, draw_count=self.draw_count)
+    @property
+    def klondike(self) -> KlondikeGame:
+        return self.game_state["klondike"]
 
-        game_state = {"turn_count": 0, "game_won": False}
+    def setup(self) -> Dict[str, Any]:
+        game_seed = self._reset_seed if self._reset_seed is not None else self.seed
+        return {
+            "turn_count": 0,
+            "game_won": False,
+            "klondike": KlondikeGame(seed=game_seed, draw_count=self.draw_count),
+        }
 
-        self.state.reset(
-            game_state=game_state, player_prompt_function=self._generate_player_prompt
-        )
-        self._observe_state()
-
-    def _generate_player_prompt(
-        self, player_id: int, game_state: Dict[str, Any]
-    ) -> str:
+    def prompt(self, player_id: int) -> str:
         return (
             "You are playing Klondike Solitaire. Your goal is to move all cards to the foundation piles.\n\n"
             "Game Rules:\n"
@@ -64,94 +73,89 @@ class KlondikeEnv(ta.Env):
             "Use 'forfeit' if you believe the game is impossible to win."
         )
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        """Process a player action"""
-        player_id = self.state.current_player_id
-        self.state.add_observation(
-            from_id=player_id,
-            message=action,
-            observation_type=ta.ObservationType.PLAYER_ACTION,
-        )
+    def render(self, player_id: int) -> str:
+        return self._render_board()
 
+    def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        if len(move) > self.max_action_chars:
+            return self.invalid(
+                f"Action is too long (maximum {self.max_action_chars} characters)."
+            )
         # Parse and execute multiple actions (comma-separated)
-        success, messages, is_format_error = self._execute_actions(action.strip())
+        success, messages, is_format_error = self._execute_actions(move.strip())
 
         if not success:
             if is_format_error:
                 # Format/syntax errors are invalid moves
-                self.state.set_invalid_move(reason=messages[0])
-            else:
-                # Legal moves that fail are just unsuccessful, not invalid
-                self.state.game_state["turn_count"] += 1
-                for message in messages:
-                    self.state.add_observation(
-                        message=message,
-                        observation_type=ta.ObservationType.GAME_MESSAGE,
-                    )
-        else:
-            self.state.game_state["turn_count"] += 1
-            
-            # Check for forfeit action
-            forfeit_requested = any("FORFEIT" in message for message in messages)
-            
-            if forfeit_requested:
-                # Player forfeited - end game with current score
-                cards_in_foundations = sum(len(pile) for pile in self.klondike.foundations)
-                self.state.set_outcome(
-                    reward=cards_in_foundations,
-                    reason=f"Game forfeited. Final score: {cards_in_foundations} cards in foundations."
-                )
-            else:
-                # Normal message processing
-                for message in messages:
-                    if message and message != "FORFEIT":
-                        self.state.add_observation(
-                            message=message,
-                            observation_type=ta.ObservationType.GAME_MESSAGE,
-                        )
+                return self.invalid(messages[0])
+            # Legal moves that fail are just unsuccessful, not invalid
+            self.game_state["turn_count"] += 1
+            for message in messages:
+                self.broadcast(message, ta.ObservationType.GAME_MESSAGE)
+            return None
 
-                # Check if game is won
-                if self.klondike.is_won():
-                    self.state.game_state["game_won"] = True
-                    self.state.set_outcome(
-                        reward=52, reason="Congratulations! You've won Klondike Solitaire!"
-                    )
-            elif self.state.game_state["turn_count"] >= self.max_turns:
-                # Partial reward based on cards in foundations (1 point per card)
-                cards_in_foundations = sum(
-                    len(pile) for pile in self.klondike.foundations
-                )
-                self.state.set_outcome(
-                    reward=cards_in_foundations,
-                    reason=f"Game over! You reached the maximum of {self.max_turns} turns. Score: {cards_in_foundations} cards in foundations.",
-                )
+        self.game_state["turn_count"] += 1
 
-            # Update board observation
-            self._observe_state()
+        # Check for forfeit action
+        forfeit_requested = any("FORFEIT" in message for message in messages)
 
-        return self.state.step()
+        if forfeit_requested:
+            # Player forfeited - end game with current score
+            cards_in_foundations = sum(len(pile) for pile in self.klondike.foundations)
+            return self.outcome(
+                {0: cards_in_foundations},
+                reason=f"Game forfeited. Final score: {cards_in_foundations} cards in foundations.",
+            )
+
+        # Normal message processing
+        for message in messages:
+            if message and message != "FORFEIT":
+                self.broadcast(message, ta.ObservationType.GAME_MESSAGE)
+
+        # Check if game is won
+        if self.klondike.is_won():
+            self.game_state["game_won"] = True
+            return self.outcome({0: 52}, reason="Congratulations! You've won Klondike Solitaire!")
+        return None
+
+    def on_turn_limit(self) -> ta.Outcome:
+        # Partial reward based on cards in foundations (1 point per card)
+        cards_in_foundations = sum(len(pile) for pile in self.klondike.foundations)
+        return self.outcome(
+            {0: cards_in_foundations},
+            reason=f"Game over! You reached the maximum of {self.max_turns} turns. Score: {cards_in_foundations} cards in foundations.",
+        )
 
     def _execute_actions(self, action: str) -> Tuple[bool, List[str], bool]:
         """Execute multiple comma-separated actions and return (success, messages, is_format_error)"""
-        # Extract content from brackets (added by ActionFormattingWrapper)
-        if "[" not in action:
-            return False, ["Invalid action format. Action should be in brackets."], True
-
-        # Extract the content between brackets
-        action = action.split("[")[1]
-        if "]" not in action:
-            return False, ["Invalid action format. Missing closing bracket ']'"], True
-        action = action.split("]")[0].strip()
+        action = action.strip()
+        if action.startswith("[") or action.endswith("]"):
+            if not (action.startswith("[") and action.endswith("]")):
+                return False, ["Mismatched action brackets."], True
+            action = action[1:-1].strip()
 
         if not action:
             return (
                 False,
-                ["Empty command. Type 'draw' or 'move <source> <destination> [count]'"],
+                ["Empty command. Type 'draw' or 'move <source> <destination>'; add an optional card count at the end."],
                 True,
             )
 
-        # Split by commas and execute each action
         action_list = [act.strip() for act in action.split(",")]
+        if any(not act for act in action_list):
+            return False, ["Empty action in comma-separated command."], True
+
+        # Validate the complete batch before applying anything. GameEnv requires
+        # actions returning Invalid to leave game state untouched.
+        for i, single_action in enumerate(action_list):
+            format_error = self._validate_action_format(single_action)
+            if format_error is not None:
+                return False, [f"Action {i + 1}: {format_error}"], True
+        if len(action_list) > 1 and any(
+            act.lower().split()[0] == "forfeit" for act in action_list
+        ):
+            return False, ["Forfeit must be submitted as the only action."], True
+
         messages = []
 
         for i, single_action in enumerate(action_list):
@@ -175,6 +179,39 @@ class KlondikeEnv(ta.Env):
 
         return True, messages, False
 
+    def _validate_action_format(self, action: str) -> Optional[str]:
+        """Return a syntax error without mutating state, or ``None``."""
+        parts = action.split()
+        if not parts:
+            return "Empty action"
+        command = parts[0].lower()
+        if command in ("draw", "forfeit"):
+            if len(parts) != 1:
+                return f"'{command}' does not accept arguments"
+            return None
+        if command != "move":
+            return (
+                f"Unknown command '{parts[0]}'. Use 'draw', "
+                "'move <source> <destination> [count]', or 'forfeit'"
+            )
+        if len(parts) not in (3, 4):
+            return (
+                "Move command usage: "
+                "'move <source> <destination> [count]'"
+            )
+        if self._parse_pile(parts[1])[0] == "?" or self._parse_pile(parts[2])[0] == "?":
+            return "Invalid pile name. Use W, F1-F4, or T1-T7"
+        if len(parts) == 4:
+            if parts[3].lower() == "all":
+                return None
+            try:
+                count = int(parts[3])
+            except ValueError:
+                return "Invalid count. Use a positive number or 'all'"
+            if count <= 0:
+                return "Count must be positive or 'all'"
+        return None
+
     def _execute_single_action(self, action: str) -> Tuple[bool, str, bool]:
         """Execute a single action and return (success, message, is_format_error)"""
         parts = action.lower().split()
@@ -184,20 +221,24 @@ class KlondikeEnv(ta.Env):
         command = parts[0]
 
         if command == "draw":
+            if len(parts) != 1:
+                return False, "'draw' does not accept arguments", True
             if self.klondike.draw():
                 return True, "Drew card(s) from stock to waste.", False
             else:
                 return False, "Cannot draw. Both stock and waste are empty.", False
 
         elif command == "forfeit":
+            if len(parts) != 1:
+                return False, "'forfeit' does not accept arguments", True
             # Special action that triggers game end with current score
             return True, "FORFEIT", False
 
         elif command == "move":
-            if len(parts) < 3:
+            if len(parts) not in (3, 4):
                 return (
                     False,
-                    "Move command requires source and destination. Usage: 'move <source> <destination> [count]'",
+                    "Move command usage: 'move <source> <destination> [count]'",
                     True,
                 )
 
@@ -340,13 +381,6 @@ class KlondikeEnv(ta.Env):
 
         return ("?", None)
 
-    def _observe_state(self):
-        """Add current game board to observations"""
-        board_str = self._render_board()
-        self.state.add_observation(
-            to_id=-1, message=board_str, observation_type=ta.ObservationType.GAME_BOARD
-        )
-
     def _render_board(self) -> str:
         """Render the current game board as a string"""
         lines = []
@@ -384,6 +418,6 @@ class KlondikeEnv(ta.Env):
 
     def get_board_str(self) -> str:
         """Return the current board state as a string for rendering"""
-        if not hasattr(self.state, "game_state") or not self.state.game_state:
+        if not hasattr(self, "state") or not self.state.game_state:
             return "Game not started"
         return self._render_board()

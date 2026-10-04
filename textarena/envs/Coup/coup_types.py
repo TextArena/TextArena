@@ -5,6 +5,7 @@ from typing import Optional, List
 class GamePhase(Enum):
     Play = "play" # A player is doing an initial action like income, foreign aid, etc
     QueryWhichToKeep = "query_which_to_keep" # We are querying the source player about which cards they want to keep after an exchange
+    QueryWhichToReveal = "query_which_to_reveal" # A player chooses which influence to lose
     QueryForBlockOrChallenge = "query_for_block_or_challenge" # We are querying all other players about whether they want to challenge or block an action
     QueryToChallengeTheBlocker = "query_to_challenge_the_blocker" # We are querying the other players if they want to challenge the blocker's claim
 
@@ -25,6 +26,7 @@ class CoupActionType(Enum):
     # This is a bit of a hack to make the game work, but it's not a real action in the game.
     # Tells us which two cards they want to keep after the exchange
     Keep = "keep"
+    Reveal = "reveal"
 
     # Counteractions
     PASS = "pass"

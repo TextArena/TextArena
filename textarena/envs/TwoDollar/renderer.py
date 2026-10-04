@@ -155,7 +155,7 @@ def render_negotiation_summary(negotiation_history: List[Dict[str, Any]],
     if accepts:
         final_accept = accepts[-1]
         output.append("OUTCOME: Deal accepted")
-        output.append(f"Accepted by: Player {final_accept['player_id'] + 1}")
+        output.append(f"Accepted by: Player {final_accept['player_id']}")
         output.append(f"Final round: {final_accept['round'] + 1}")
     else:
         output.append("OUTCOME: No deal reached")

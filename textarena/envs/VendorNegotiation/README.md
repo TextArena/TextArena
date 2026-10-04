@@ -4,14 +4,14 @@
 **VendorNegotiation** is a two-player negotiation game where a Brand Specialist negotiates with a Vendor over discount rates for products in an upcoming sales event. Both players can win by achieving their respective objectives through cooperative-competitive dynamics.
 
 ## Action Space
-- **Format:** Actions are strings with optional conversation before bracketed commands:
-  - `[Propose] X%, Y%, Z%, ...` - Propose discount rates (positional format)
-  - `[Accept]` - Accept current proposal
-  - `[Reject]` - Reject current proposal
-  - Free text conversation (no brackets)
+- **Format:** Actions are strings with optional conversation, finished with the decision on its own line:
+  - `Propose X%, Y%, Z%, ...` - Propose discount rates (positional format)
+  - `Accept` - Accept current proposal
+  - `Reject` - Reject current proposal
+  - Free text conversation (no decision line)
 - **Example:**
-  - `"I think moderate discounts work well [Propose] 20%, 15%, 20%, 20%, 15%"`
-  - `"This looks reasonable to me [Accept]"`
+  - `"I think moderate discounts work well\nPropose 20%, 15%, 20%, 20%, 15%"`
+  - `"This looks reasonable to me\nAccept"`
   - `"Hello, let's discuss the discount rates"`
 
 ## Observation Space
@@ -37,10 +37,10 @@ Gaming_Mouse ($60/unit):
 
 PRODUCT ORDER: Gaming_Mouse, Premium_Laptop, USB_Hub, Power_Bank, Phone_Charger
 
-ACTIONS:
-[Propose] X%, Y%, Z%, ... (follow product order above)
-[Accept]
-[Reject]
+ACTIONS (decision on its own line):
+Propose X%, Y%, Z%, ... (follow product order above)
+Accept
+Reject
 ```
 
 ### Turn Observation
@@ -73,7 +73,7 @@ R2: Player 0 proposed Gaming_Mouse:20%, Premium_Laptop:20%, ...
 ## Key Rules
 1. **Proposal Format**: Must specify discount for all products in order
 2. **Allowed Discounts**: 0%, 15%, 20%, 30%
-3. **Conversation**: Free text allowed, captured before bracketed actions
+3. **Conversation**: Free text allowed, captured before the decision line
 4. **Error Allowance**: 3 invalid moves before penalty
 
 ## Rewards

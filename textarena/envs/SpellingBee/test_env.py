@@ -1,0 +1,206 @@
+"""Offline, deterministic tests for the Spelling Bee environment."""
+import copy
+
+import pytest
+import textarena.envs.SpellingBee.env as spelling_module
+from textarena.envs.SpellingBee.env import SpellingBeeEnv
+
+
+class _Dictionary:
+    def __init__(self):
+        self.words = {"a", "cat", "cats", "cater", "dog", "to"}
+        self.queries = []
+
+    def is_english_word(self, word):
+        self.queries.append(word)
+        return word in self.words
+
+
+def _fresh(num_letters: int = 26):
+    env = SpellingBeeEnv(num_letters=num_letters, dictionary=_Dictionary())
+    env.reset(num_players=2, seed=42)
+    return env
+
+
+def test_reset_allowed_letters_and_history():
+    env = _fresh()
+    gs = env.state.game_state
+    assert len(gs["allowed_letters"]) == 26
+    assert gs["allowed_letters"].issubset(set("abcdefghijklmnopqrstuvwxyz"))
+    assert gs["word_history"] == []
+    assert env.state.current_player_id == 0
+
+
+def test_valid_word_accepted_and_turn_rotates():
+    env = _fresh()
+    done, _ = env.step("cat")
+    assert not done
+    assert env.state.game_state["word_history"] == ["cat"]
+    # A valid, non-invalid move rotates to the other player.
+    assert env.state.current_player_id == 1
+
+
+def test_non_decreasing_length_enforced():
+    env = _fresh()
+    env.step("cats")  # length 4 by player 0
+    # Player 1 submits a shorter word -> invalid (first offence, no termination).
+    done, _ = env.step("to")
+    assert not done
+    assert env.state.error_count == 1
+    # History unchanged after the invalid move.
+    assert env.state.game_state["word_history"] == ["cats"]
+
+
+def test_non_english_word_rejected():
+    env = _fresh()
+    done, _ = env.step("zzzzz")
+    assert not done
+    assert env.state.error_count == 1
+    assert env.state.game_state["word_history"] == []
+
+
+def test_repeated_word_rejected():
+    env = _fresh()
+    env.step("cat")   # player 0
+    env.step("cats")  # player 1 (len 4 >= 3, valid)
+    # Player 0 repeats an already used word -> invalid.
+    done, _ = env.step("cat")
+    assert not done
+    assert env.state.error_count == 1
+
+
+def test_bad_format_rejected():
+    env = _fresh()
+    done, _ = env.step("two words")
+    assert not done
+    assert env.state.error_count == 1
+    assert env.state.game_state["word_history"] == []
+
+
+def test_two_consecutive_invalids_end_game():
+    env = _fresh()
+    env.step("cat")  # player 0 valid -> now player 1
+    # Player 1 submits a too-short word twice in a row.
+    done, _ = env.step("to")
+    assert not done and env.state.error_count == 1
+    done, _ = env.step("to")
+    assert done
+    # Offender (player 1) loses, player 0 wins.
+    assert env.state.rewards == {0: 1, 1: -1}
+    assert env.state.turn == 1
+    assert env.state.game_info[0]["turn_count"] == 1
+    assert env.state.game_info[1]["turn_count"] == 0
+
+
+def test_illegal_letters_are_rejected_before_dictionary_lookup():
+    dictionary = _Dictionary()
+    env = SpellingBeeEnv(num_letters=3, dictionary=dictionary)
+    env.reset(num_players=2, seed=42)
+    env.game_state["allowed_letters"] = {"c", "a", "t"}
+    before = copy.deepcopy(env.game_state)
+    done, _ = env.step("dog")
+    assert not done
+    assert env.game_state == before
+    assert dictionary.queries == []
+
+
+def test_bare_and_legacy_bracketed_words_are_accepted():
+    env = _fresh()
+    env.step("cat")
+    env.step("[cats]")
+    assert env.game_state["word_history"] == ["cat", "cats"]
+
+
+@pytest.mark.parametrize("action", ["two words", "cat!", "123", "c_at", "[cat"])
+def test_non_word_actions_are_rejected_atomically(action):
+    env = _fresh()
+    before = copy.deepcopy(env.game_state)
+    env.step(action)
+    assert env.state.turn == 0
+    assert env.game_state == before
+
+
+def test_reset_snapshot_rng_and_renderer_are_fresh_and_pure():
+    env = _fresh()
+    allowed = set(env.game_state["allowed_letters"])
+    env.step("cat")
+    snapshot = env.snapshot()
+    assert "dictionary" not in snapshot["attributes"]
+    before = copy.deepcopy(env.game_state)
+    board = env.get_board_str()
+    assert env.game_state == before
+    assert all(len(line) <= 90 for line in board.splitlines())
+    env.step("cats")
+    env.restore(snapshot)
+    assert env.game_state == before
+    env.reset(num_players=2, seed=42)
+    assert env.game_state == {"allowed_letters": allowed, "word_history": []}
+
+
+def test_renderer_handles_all_supported_letter_counts():
+    for count in (1, 4, 7, 10, 26):
+        env = _fresh(num_letters=count)
+        board = env.get_board_str()
+        assert all(len(line) <= 90 for line in board.splitlines())
+
+
+def test_renderer_truncates_long_word_history_entries():
+    env = _fresh()
+    env.game_state["word_history"] = ["a" * env.max_word_chars]
+    assert all(len(line) <= 90 for line in env.get_board_str().splitlines())
+
+
+@pytest.mark.parametrize("num_letters", [0, -1, 27, 1.5, True])
+def test_invalid_letter_count_is_rejected(num_letters):
+    with pytest.raises(ValueError):
+        SpellingBeeEnv(num_letters=num_letters, dictionary=_Dictionary())
+
+
+def test_dictionary_dependency_failure_is_explained(monkeypatch):
+    def fail(**kwargs):
+        raise LookupError("missing corpus")
+
+    monkeypatch.setattr(spelling_module, "EnglishDictionary", fail)
+    with pytest.raises(RuntimeError, match="NLTK words corpus"):
+        SpellingBeeEnv(num_letters=7)
+
+
+def test_dictionary_lookup_failure_is_retryable_and_atomic():
+    class FailingDictionary:
+        def is_english_word(self, word):
+            raise RuntimeError("dictionary unavailable")
+
+    env = SpellingBeeEnv(num_letters=26, dictionary=FailingDictionary())
+    env.reset(num_players=2, seed=42)
+    before = copy.deepcopy(env.game_state)
+    done, _ = env.step("cat")
+    assert not done
+    assert env.state.error_count == 0
+    assert env.state.turn == 0
+    assert env.game_state == before
+
+
+def test_non_text_and_oversized_words_are_rejected_before_lookup():
+    dictionary = _Dictionary()
+    env = SpellingBeeEnv(num_letters=26, dictionary=dictionary)
+    env.reset(num_players=2, seed=42)
+    before = copy.deepcopy(env.game_state)
+    env.step(None)
+    assert env.game_state == before
+    assert dictionary.queries == []
+    env.reset(num_players=2, seed=42)
+    env.step("a" * (env.max_word_chars + 1))
+    assert env.game_state == before
+    assert dictionary.queries == []
+    env.reset(num_players=2, seed=42)
+    env.step(" " * env.max_action_chars + "cat")
+    assert env.game_state == before
+    assert dictionary.queries == []
+
+
+def test_player_bounds_are_enforced():
+    env = SpellingBeeEnv(num_letters=7, dictionary=_Dictionary())
+    with pytest.raises(AssertionError):
+        env.reset(num_players=1)
+    with pytest.raises(AssertionError):
+        env.reset(num_players=3)

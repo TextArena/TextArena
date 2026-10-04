@@ -6,9 +6,8 @@
 ## Action Space
 - **Format:** Actions are strings representing the player's choice. For example:
 - **Example:**
-    - Move a piece from row 4 col 0 to an empty cell at row 5 col 0: [D0 E0]
-    - Move a piece from row 5 col 8 into a battle with opponent piece in row 5 col 9: [E8 E9]
-- **Notes:** The players are free to have additional texts in their replies, so long they provide their action in the correct format of [source destination].
+    - Move a piece from row 4, column 0 to an empty cell at row 5, column 0: `D0 E0`
+    - Move a piece from row 5, column 8 into a battle with an opponent piece in row 5, column 9: `E8 E9`
 
 ## Observation Space
 **Reset Observations**
@@ -40,8 +39,8 @@ At the start of the game, you have placed your army on the board, including your
 
 ### How to Make a Move:
 1. Specify the coordinates of the piece you want to move and its destination.
-2. Use the format: [A0 B0], where A0 is the source position, and B0 is the destination.
-   - Example: To move a piece from row 0, column 0 to row 1, column 0, input [A0 B0].
+2. Use the format `A0 B0`, where A0 is the source position and B0 is the destination.
+   - Example: To move a piece from row 0, column 0 to row 1, column 0, input `A0 B0`.
 3. Ensure the destination is valid according to the movement rules above.
 
 ### Important Notes:
@@ -66,7 +65,7 @@ J    ?   ?   ?   ?   ?   ?   ?   ?   ?   ?
 **Step Observation**
 After each step, the players receive the latest message from the game environment. For example, here's player 0 making its first move and the environment responds back:
 ```plaintext
-[Player 0] [D0 E0]
+[Player 0] D0 E0
 [GAME] You have moved your piece from D0 to E0. Here is the updated board state:
      0   1   2   3   4   5   6   7   8   9
 A   SG  SG  SC  LT  GN  LT  SC  LT  BM  MS 

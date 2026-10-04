@@ -45,9 +45,10 @@ def render_deal_with_scores_and_votes(deal_state: Dict[str, str], issues: Dict[s
             vote = player_votes.get(player_id, "No vote yet")
             lines.append(f"{agent_name}: {vote}")
             
-            if vote == "[Accept]":
+            normalized_vote = vote.strip().strip("[]")
+            if normalized_vote == "Accept":
                 accept_count += 1
-            elif vote == "[Reject]":
+            elif normalized_vote == "Reject":
                 reject_count += 1
         
         lines.append("-" * 30)

@@ -5,15 +5,15 @@
 
 ## Action Space
 
-- **Format:** Actions are commands enclosed in square brackets that specify the player's move:
-  - **Draw:** `[draw]` - Draw cards to refill your hand to 5 cards at the start of your turn
-  - **Play:** `[play Card Index]` - Play a card to a center pile (e.g., `[play A♠ 0]`)
-  - **Discard:** `[discard Card Index]` - Discard a card to end your turn (e.g., `[discard 3♥ 2]`)
+- **Format:** Submit one or more bare commands:
+  - **Draw:** `draw` - Draw cards to refill your hand to 5 cards
+  - **Play:** `play Card Index` - Play a card to a center pile (e.g. `play A♠ 0`)
+  - **Discard:** `discard Card Index` - Discard a card to end your turn (e.g. `discard 3♥ 2`)
 
 - **Examples:**
-  - Draw cards at the beginning of a turn: `[draw]`
-  - Play the Ace of Spades to center pile 0: `[play A♠ 0]`
-  - Discard the Three of Hearts to discard pile 2: `[discard 3♥ 2]`
+  - Draw cards at the beginning of a turn: `draw`
+  - Play the Ace of Spades to center pile 0: `play A♠ 0`
+  - Discard the Three of Hearts to discard pile 2: `discard 3♥ 2`
 
 - **Notes:** Players can include multiple actions in a single turn (except after discarding, which ends the turn). A typical turn consists of first drawing cards, then playing one or more cards, and finally discarding to end the turn.
 
@@ -39,9 +39,9 @@ You are Player 0 in a two-player game of Spite and Malice. Your goal is to be th
 - The rank order is: A=1, 2=2, ..., 9=9, J=10, Q=11, K as wild.
 
 ### Actions:
-1. **Draw**: At the start of your turn, draw cards to fill your hand up to 5 cards. Enter **[draw]** to begin.
-2. **Play a Card**: To play a card, specify the card and the center pile like this: **[play A♠ 0]** (where 'A♠' is the card and '0' is the center pile index).
-3. **Discard**: If you can't play any more cards, discard a card from your hand to a discard pile to end your turn. Enter **[discard A♠ 1]** (where 'A♠' is the card and '1' is the discard pile index). Note that you cannot discard any card from the payoff pile. You may only discard the cards from your hand.
+1. **Draw**: At the start of your turn, enter **draw** to fill your hand up to 5 cards.
+2. **Play a Card**: Enter **play A♠ 0**, where `A♠` is the card and `0` is the center-pile index.
+3. **Discard**: Enter **discard A♠ 1** to discard from your hand and end your turn. You cannot discard from the payoff pile.
 
 Here is the current game state:
 --- Center Piles ---
@@ -60,7 +60,7 @@ Discard Piles: [[], [], [], []]
 During gameplay, players receive updates about their actions and the current game state. For example:
 
 ```plaintext
-[Player 0] I'll start by drawing cards to fill my hand. [draw]
+[Player 0] draw
 [GAME] You drew cards. Your updated view:
 --- Center Piles ---
 Pile 0: []
@@ -73,7 +73,7 @@ Payoff Pile (Top Card): 7♠, Payoff Pile Length: 20
 Hand: ['A♥', 'K♦', '3♣', 'Q♠', '5♦']
 Discard Piles: [[], [], [], []]
 
-[Player 0] I'll play an Ace to start center pile 0. [play A♥ 0]
+[Player 0] play A♥ 0
 [GAME] You played A♥ on center pile 0. Your updated view:
 --- Center Piles ---
 Pile 0: ['A♥']
@@ -86,7 +86,7 @@ Payoff Pile (Top Card): 7♠, Payoff Pile Length: 20
 Hand: ['K♦', '3♣', 'Q♠', '5♦']
 Discard Piles: [[], [], [], []]
 
-[Player 0] Now I'll discard a card since I can't play any more cards to the center piles. [discard Q♠ 1]
+[Player 0] discard Q♠ 1
 [GAME] You have discarded Q♠ to discard pile 1, which also means you have finished their turn. Your updated view:
 --- Center Piles ---
 Pile 0: ['A♥']

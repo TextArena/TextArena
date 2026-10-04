@@ -4,11 +4,12 @@ import textarena as ta
 
 agents = {
     0: ta.agents.HumanAgent(),
-    1: ta.agents.OpenRouterAgent(model_name="google/gemini-2.0-flash-001"),
+    1: ta.agents.HumanAgent(),
+    # 1: ta.agents.OpenRouterAgent(model_name="google/gemini-2.0-flash-001"),
 }
 
 # initialize the environment
-env = ta.make(env_id="SimpleTak-v0-train")
+env = ta.make(env_id="SimpleTak-v0-mdp")
 # env = ta.wrappers.SimpleRenderWrapper(env=env) #, render_mode="standard")
 env.reset(num_players=len(agents))
 

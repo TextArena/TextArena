@@ -1,86 +1,183 @@
 import re
-from typing import Dict, Tuple, Optional, Any, List, Set
+from typing import Any, Dict, List, Set, Union
 
 import textarena as ta
 
 
-class CryptarithmEnv(ta.Env):
-    _ACTION_RE = re.compile(r"\[\s*([A-Za-z])\s+(\d)\s*\]")
+class CryptarithmEnv(ta.GameEnv):
+    min_players = 1
+    max_players = 1
+    MAX_EQUATION_LENGTH = 512
+    MAX_ADDENDS = 20
+    MAX_WORD_LENGTH = 64
+    MAX_SOLVER_DEPTH = 500
+
+    _ACTION_RE = re.compile(
+        r"(?P<wrapped>\[)?\s*(?P<letter>[A-Za-z])"
+        r"(?:\s*,\s*|\s+)(?P<digit>\d)\s*(?(wrapped)\])"
+    )
 
     def __init__(self, equation: str = "SEND + MORE = MONEY", max_turns: int = 100):
         """ equation : string of the form 'WORD [+ WORD …] = WORD' """
-        super().__init__()
-        self.equation_raw = equation.upper().replace(' ', '')
-        lhs, rhs = self.equation_raw.split('=')
+        if not isinstance(equation, str):
+            raise ValueError("equation must be a string")
+        if len(equation) > self.MAX_EQUATION_LENGTH:
+            raise ValueError(f"equation cannot exceed {self.MAX_EQUATION_LENGTH} characters")
+        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
+            raise ValueError("max_turns must be a positive integer")
+
+        self.equation_raw = re.sub(r"\s+", "", equation.upper())
+        if self.equation_raw.count("=") != 1:
+            raise ValueError("equation must contain exactly one '='")
+        lhs, rhs = self.equation_raw.split("=")
         self.addends: List[str] = lhs.split('+')
         self.result: str = rhs
+        if len(self.addends) > self.MAX_ADDENDS:
+            raise ValueError(f"equation cannot contain more than {self.MAX_ADDENDS} addends")
+        if not self.addends or any(re.fullmatch(r"[A-Z]+", word) is None for word in self.addends):
+            raise ValueError("each addend must contain only letters")
+        if re.fullmatch(r"[A-Z]+", self.result) is None:
+            raise ValueError("the result must contain only letters")
+        if any(len(word) > self.MAX_WORD_LENGTH for word in self.addends + [self.result]):
+            raise ValueError(f"words cannot exceed {self.MAX_WORD_LENGTH} letters")
+        columns = max(max(map(len, self.addends)), len(self.result))
+        if columns * (len(self.addends) + 2) > self.MAX_SOLVER_DEPTH:
+            raise ValueError("equation is too large to solve safely")
         self.letters: Set[str] = set(''.join(self.addends) + self.result)
         self.first_letters: Set[str] = {w[0] for w in self.addends + [self.result]}
+        if len(self.letters) > 10:
+            raise ValueError("equation cannot contain more than 10 distinct letters")
         self.max_turns = max_turns
+        if not self._has_solution():
+            raise ValueError("equation has no valid digit assignment")
 
-        # mutable state (reset each episode)
-        self.mapping: Dict[str, int] = {}      # current letter → digit
-        self.digit_used: Dict[int, str] = {}   # digit → letter
+    def setup(self) -> Dict[str, Any]:
+        return {
+            "mapping": {},     # current letter -> digit
+            "digit_used": {},  # digit -> letter
+        }
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.mapping.clear()
-        self.digit_used.clear()
-        self.state = ta.SinglePlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
-        self.state.reset(game_state={}, player_prompt_function=self._prompt)
-        self._observe()
+    def prompt(self, player_id: int) -> str:
+        return "Map each letter to a unique digit so the arithmetic holds.\nAssign by replying with the letter and digit, e.g. 'A 5'; re-assign anytime.\n"
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(self.state.current_player_id, action, ta.ObservationType.PLAYER_ACTION)
+    def render(self, player_id: int) -> str:
+        mapping = self.game_state["mapping"]
+        return self._render_board() + f"\nAssigned: {len(mapping)}/{len(self.letters)} ({self._progress():.0%})"
 
-        m = self._ACTION_RE.fullmatch(action.strip())
-        if not m: self.state.set_invalid_move(self._progress(), "Bad action format. Use `[A 5]`."); return self.state.step()
+    def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        m = self._ACTION_RE.fullmatch(move.strip())
+        if not m:
+            return self.invalid("Bad action format. Reply with a letter and a digit, e.g. 'A 5'.")
 
-        letter, digit = m.group(1).upper(), int(m.group(2))
+        letter = m.group("letter").upper()
+        digit = int(m.group("digit"))
+        mapping, digit_used = self.game_state["mapping"], self.game_state["digit_used"]
 
         # basic validity checks
-        if letter not in self.letters:                                  self.state.set_invalid_move(self._progress(), f"Letter {letter} not in puzzle.");                           return self.state.step()
-        if digit in self.digit_used and self.digit_used[digit]!=letter: self.state.set_invalid_move(self._progress(), f"Digit {digit} already used by {self.digit_used[digit]}.");  return self.state.step()
-        if letter in self.first_letters and digit == 0:                 self.state.set_invalid_move(self._progress(), "Leading digit of a word cannot be 0.");                      return self.state.step()
+        if letter not in self.letters:
+            return self.invalid(f"Letter {letter} not in puzzle.")
+        if digit in digit_used and digit_used[digit] != letter:
+            return self.invalid(f"Digit {digit} already used by {digit_used[digit]}.")
+        if letter in self.first_letters and digit == 0:
+            return self.invalid("Leading digit of a word cannot be 0.")
 
         # apply (re)assignment
-        prev_digit = self.mapping.get(letter)
+        prev_digit = mapping.get(letter)
         if prev_digit is not None:
-            del self.digit_used[prev_digit]
-        self.mapping[letter] = digit
-        self.digit_used[digit] = letter
+            del digit_used[prev_digit]
+        mapping[letter] = digit
+        digit_used[digit] = letter
 
-        self._observe()
+        if len(mapping) == len(self.letters):
+            if self._equation_holds():
+                return self.outcome({0: 1.0}, reason="Correct! Equation satisfied.")
+            self.message(
+                player_id,
+                "All letters are assigned, but the equation is incorrect. Reassign a letter and try again.",
+                ta.ObservationType.GAME_MESSAGE,
+            )
+        return None
 
-        # check win / max-turn
-        if len(self.mapping) == len(self.letters):
-            if self._equation_holds():      self.state.set_outcome(1.0, "Correct! Equation satisfied.")
-            else:                           self.state.set_outcome(0.0, "Mapping complete but equation incorrect.")
-        elif self.state.check_turn_limit(): self.state.set_outcome(self._progress(), "Move limit reached.")
-        return self.state.step()
+    def on_turn_limit(self) -> ta.Outcome:
+        return self.outcome({0: self._progress()}, reason="Move limit reached.")
 
-    def _prompt(self, player_id, game_state) -> str:    return "Map each letter to a unique digit so the arithmetic holds.\nAssign with `[A 5]`, re-assign anytime.\n"
-    def _word_value(self, word: str) -> int:            return int(''.join(str(self.mapping[ch]) for ch in word))
-    def _equation_holds(self) -> bool:                  return sum(self._word_value(w) for w in self.addends) == self._word_value(self.result) # leading-zero guard already enforced, so just compute integers
-    def _progress(self) -> float:                       return len(self.mapping) / len(self.letters)
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome({0: self._progress()}, reason=f"Invalid Move: {reason}")
+
+    def _word_value(self, word: str) -> int:
+        mapping = self.game_state["mapping"]
+        return int(''.join(str(mapping[ch]) for ch in word))
+
+    def _equation_holds(self) -> bool:
+        # leading-zero guard already enforced, so just compute integers
+        return sum(self._word_value(w) for w in self.addends) == self._word_value(self.result)
+
+    def _progress(self) -> float:
+        mapping = self.game_state["mapping"]
+        if len(mapping) == len(self.letters) and not self._equation_holds():
+            return 0.0
+        return len(mapping) / len(self.letters)
+
+    def _has_solution(self) -> bool:
+        """Return whether the configured alphametic has at least one solution."""
+        mapping: Dict[str, int] = {}
+        used: Set[int] = set()
+        columns = max(max(map(len, self.addends)), len(self.result))
+
+        def assign_addends(column: int, addend_index: int, total: int) -> bool:
+            if addend_index == len(self.addends):
+                result_letter = self.result[-1 - column] if column < len(self.result) else None
+                required = total % 10
+                carry = total // 10
+                if result_letter is None:
+                    return required == 0 and solve_column(column + 1, carry)
+                if result_letter in mapping:
+                    return mapping[result_letter] == required and solve_column(column + 1, carry)
+                if required in used or (required == 0 and result_letter in self.first_letters):
+                    return False
+                mapping[result_letter] = required
+                used.add(required)
+                solved = solve_column(column + 1, carry)
+                used.remove(required)
+                del mapping[result_letter]
+                return solved
+
+            word = self.addends[addend_index]
+            if column >= len(word):
+                return assign_addends(column, addend_index + 1, total)
+            letter = word[-1 - column]
+            if letter in mapping:
+                return assign_addends(column, addend_index + 1, total + mapping[letter])
+            for digit in range(10):
+                if digit in used or (digit == 0 and letter in self.first_letters):
+                    continue
+                mapping[letter] = digit
+                used.add(digit)
+                if assign_addends(column, addend_index + 1, total + digit):
+                    return True
+                used.remove(digit)
+                del mapping[letter]
+            return False
+
+        def solve_column(column: int, carry: int) -> bool:
+            if column == columns:
+                return carry == 0
+            return assign_addends(column, 0, carry)
+
+        return solve_column(0, 0)
 
     def _render_board(self) -> str:
-        # 1) Original equation with letters
+        mapping = self.game_state["mapping"]
         eq_letters = ' + '.join(self.addends) + f' = {self.result}'
 
-        # 2) Partially-filled numeric view (digits for mapped letters, '_' for unknown)
-        def show_word(w): return ''.join(str(self.mapping[ch]) if ch in self.mapping else '_' for ch in w)
+        def show_word(w):
+            return ''.join(str(mapping[ch]) if ch in mapping else '_' for ch in w)
 
         eq_digits = ' + '.join(show_word(w) for w in self.addends) + f' = {show_word(self.result)}'
 
-        # 3) Current mapping table
         mapping_lines = ["Mapping:"]
-        mapping_lines += [f"  {l} → {d}" for l, d in sorted(self.mapping.items())]
+        mapping_lines += [f"  {l} → {d}" for l, d in sorted(mapping.items())]
         if len(mapping_lines) == 1:
             mapping_lines.append("  (none yet)")
 
-        # Combine everything
-        return "\n"+'\n'.join([eq_letters, eq_digits, *mapping_lines])
-
-
-    def _observe(self):
-        self.state.add_observation(message=self._render_board()+f"\nAssigned: {len(self.mapping)}/{len(self.letters)} ({self._progress():.0%})", observation_type=ta.ObservationType.GAME_MESSAGE)
+        return "\n" + '\n'.join([eq_letters, eq_digits, *mapping_lines])

@@ -1,0 +1,235 @@
+"""Deterministic, network-free tests for GuessWho."""
+import copy
+import json
+
+import pytest
+from textarena.envs.GuessWho.env import GuessWhoEnv  # noqa: E402
+
+
+class _Gamemaster:
+    def __init__(self, responses=("Yes",)):
+        self.responses = list(responses)
+        self.prompts = []
+
+    def __call__(self, prompt):
+        self.prompts.append(prompt)
+        response = self.responses.pop(0)
+        if isinstance(response, Exception):
+            raise response
+        return response
+
+
+def _fresh(*, seed=42, max_turns=40, gamemaster=None):
+    env = GuessWhoEnv(max_turns=max_turns, gamemaster=gamemaster or _Gamemaster())
+    env.reset(num_players=1, seed=seed)
+    return env
+
+
+def test_reset_state():
+    env = _fresh()
+    assert env.target_character is not None
+    assert "name" in env.target_character
+    assert env.state.done is False
+    with pytest.raises(AssertionError):
+        env.reset(num_players=2)
+
+
+def test_correct_guess_wins():
+    env = _fresh()
+    name = env.target_character["name"]
+    done, _ = env.step(f"Guess {name}")  # 'guess' keyword is case-insensitive
+    assert done
+    assert env.state.rewards == {0: 1}
+    assert env.state.turn == 1
+    assert env.state.game_info[0]["turn_count"] == 1
+
+
+def test_wrong_guess_is_invalid_and_continues():
+    env = _fresh()
+    done, _ = env.step("guess Zzzzzz")  # a well-formed but incorrect name guess
+    assert not done
+    assert env.state.error_count == 1
+
+
+def test_two_wrong_guesses_end_game():
+    env = _fresh()
+    done, _ = env.step("guess Zzzzzz")
+    assert not done
+    done, _ = env.step("guess Qqqqqq")
+    assert done
+    assert env.state.rewards == {0: -1}
+    assert env.state.turn == 0
+
+
+def test_bracketed_text_inside_a_question_is_not_a_guess():
+    gamemaster = _Gamemaster(("No",))
+    env = _fresh(gamemaster=gamemaster)
+    done, _ = env.step("Is the person wearing [glasses]?")
+    assert not done
+    assert env.state.error_count == 0
+    assert len(gamemaster.prompts) == 1
+
+
+def test_gamemaster_response_is_normalized_and_recorded():
+    env = _fresh(gamemaster=_Gamemaster(("Answer: “i DON’T KNOW”.",)))
+    done, _ = env.step("Do they have a hat?")
+    assert not done
+    assert env.gamemaster_history == [("Do they have a hat?", "I don't know")]
+    _, observations = env.get_observation()
+    assert any(message == "I don't know" for _, message, _ in observations)
+
+
+def test_gamemaster_failure_is_retryable_and_atomic():
+    env = _fresh(gamemaster=_Gamemaster((RuntimeError("offline"),)))
+    before = copy.deepcopy(env.game_state)
+    done, _ = env.step("Do they have a hat?")
+    assert not done
+    assert env.state.error_count == 0
+    assert env.state.turn == 0
+    assert env.game_state == before
+
+
+def test_malformed_gamemaster_output_is_retryable_and_atomic():
+    env = _fresh(gamemaster=_Gamemaster(("Maybe",)))
+    before = copy.deepcopy(env.game_state)
+    done, _ = env.step("Do they have a hat?")
+    assert not done
+    assert env.state.error_count == 0
+    assert env.state.turn == 0
+    assert env.game_state == before
+
+
+def test_gamemaster_error_cannot_leak_target_identity():
+    gamemaster = _Gamemaster()
+    env = _fresh(gamemaster=gamemaster)
+    target_name = env.target_character["name"]
+    gamemaster.responses = [RuntimeError(f"request contained {target_name}")]
+    env.get_observation()
+    done, _ = env.step("Do they have a hat?")
+    assert not done
+    _, observations = env.get_observation()
+    assert target_name not in "\n".join(message for _, message, _ in observations)
+
+
+@pytest.mark.parametrize("action", ["guess", "guess:", "[ ]"])
+def test_empty_guess_is_invalid_without_calling_gamemaster(action):
+    gamemaster = _Gamemaster()
+    env = _fresh(gamemaster=gamemaster)
+    done, _ = env.step(action)
+    assert not done
+    assert env.state.error_count == 1
+    assert env.state.turn == 0
+    assert gamemaster.prompts == []
+
+
+def test_reset_is_seeded_fresh_and_does_not_alias_character_data():
+    env = _fresh(seed=7)
+    original = copy.deepcopy(env.target_character)
+    env.target_character["name"] = "mutated"
+    env.gamemaster_history.append(("question", "Yes"))
+    env.reset(num_players=1, seed=7)
+    assert env.target_character == original
+    assert env.gamemaster_history == []
+
+
+def test_snapshot_restores_episode_history():
+    env = _fresh(gamemaster=_Gamemaster(("Yes", "No")))
+    env.step("First?")
+    snapshot = env.snapshot()
+    assert "gamemaster" not in snapshot["attributes"]
+    expected = copy.deepcopy(env.game_state)
+    env.step("Second?")
+    env.restore(snapshot)
+    assert env.game_state == expected
+
+
+def test_board_tracks_history_and_reveals_target_only_after_terminal_action():
+    env = _fresh(gamemaster=_Gamemaster(("Yes",)))
+    target = env.target_character["name"]
+    assert target not in env.get_board_str()
+    env.step("First?")
+    assert "First?" in env.get_board_str()
+    done, _ = env.step(f"guess {target}")
+    assert done
+    assert target in env.get_board_str()
+    final_boards = [
+        message
+        for _, message, observation_type, _ in env.state.events
+        if observation_type.name == "GAME_BOARD"
+    ]
+    assert target in final_boards[-1]
+
+
+def test_turn_limit_returns_zero_reward_after_exact_number_of_questions():
+    env = _fresh(max_turns=2, gamemaster=_Gamemaster(("Yes", "No")))
+    env.step("First?")
+    done, _ = env.step("Second?")
+    assert done
+    assert env.state.rewards == {0: 0}
+    assert env.state.turn == 2
+    assert env.state.game_info[0]["turn_count"] == 2
+
+
+def test_invalid_character_data_has_clear_error(tmp_path):
+    path = tmp_path / "characters.json"
+    path.write_text(json.dumps([{"name": "Incomplete"}]), encoding="utf-8")
+    with pytest.raises(ValueError, match="all required traits"):
+        GuessWhoEnv(characters_path=str(path), gamemaster=_Gamemaster())
+
+
+def test_character_descriptions_include_hat_traits_used_by_gamemaster():
+    env = _fresh()
+    descriptions = env._characters_to_string()
+    assert "Alfred" in descriptions
+    assert "beanie hat" in descriptions
+    assert "Bernard" in descriptions
+    assert "bowler hat" in descriptions
+
+
+def test_character_data_rejects_inconsistent_hat_traits(tmp_path):
+    characters = copy.deepcopy(_fresh().characters)
+    characters[0]["hat_type"] = "beanie"
+    path = tmp_path / "characters.json"
+    path.write_text(json.dumps(characters), encoding="utf-8")
+    with pytest.raises(ValueError, match="consistent hat accessories"):
+        GuessWhoEnv(characters_path=str(path), gamemaster=_Gamemaster())
+
+
+def test_construction_and_local_guess_do_not_require_network(monkeypatch):
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
+    env = GuessWhoEnv()
+    env.reset(num_players=1, seed=42)
+    done, _ = env.step(f"guess {env.target_character['name']}")
+    assert done and env.state.rewards == {0: 1}
+
+
+def test_non_callable_gamemaster_is_rejected():
+    with pytest.raises(TypeError, match="callable"):
+        GuessWhoEnv(gamemaster=object())
+
+
+def test_non_text_and_oversized_actions_are_invalid_without_calling_gamemaster():
+    gamemaster = _Gamemaster(("Yes",))
+    env = _fresh(gamemaster=gamemaster)
+    before = copy.deepcopy(env.game_state)
+    done, _ = env.step(None)
+    assert not done
+    assert env.game_state == before
+    assert gamemaster.prompts == []
+
+    env.reset(num_players=1, seed=42)
+    done, _ = env.step("q" * (env.max_action_chars + 1))
+    assert not done
+    assert env.game_state == before
+    assert gamemaster.prompts == []
+
+
+def test_snapshot_replays_stateful_gamemaster_responses():
+    env = _fresh(gamemaster=_Gamemaster(("Yes", "No", "I don't know")))
+    env.step("First?")
+    snapshot = env.snapshot()
+    env.step("Second?")
+    expected = copy.deepcopy(env.game_state)
+    env.restore(snapshot)
+    env.step("Second?")
+    assert env.game_state == expected

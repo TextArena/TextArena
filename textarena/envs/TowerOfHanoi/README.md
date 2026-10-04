@@ -5,11 +5,10 @@
 
 ## Action Space
 
-- **Format:** Actions are strings representing the source and target towers for moving a disk, in the format `[source target]` or `[source, target]`, where source and target are tower identifiers (A, B, or C).
+- **Format:** Submit `source target`, where source and target are tower identifiers (A, B, or C).
 - **Examples:**
-  - Move a disk from tower A to tower C: `[A C]` or `[A, C]`
-  - Move a disk from tower B to tower A: `[B A]` or `[B, A]`
-- **Notes:** Tower identifiers are case-insensitive, and the format allows for optional commas and flexible spacing between the tower identifiers.
+  - Move a disk from tower A to tower C: `A C`
+  - Move a disk from tower B to tower A: `B A`
 
 ## Observation Space
 
@@ -19,7 +18,7 @@ On reset, the player receives a prompt containing the initial state of the tower
 ```plaintext
 You are Player 0. You are playing Tower of Hanoi with 3 disks.
 You have to move the disks from tower A to tower C.
-To move a disk, type the source tower and the target tower (e.g., '[A C]').
+To move a disk, type the source tower and the target tower (e.g., 'A C').
 Note that you can only move the top disk of a tower, and that a bigger disk cannot be placed on a smaller disk.
 As you play, the history of your moves will be displayed.
 Here is the current state of the towers:
@@ -32,13 +31,13 @@ C: []
 After each move, the player receives an updated view of the towers. For example:
 
 ```plaintext
-[Player 0] I'll move the top disk from tower A to tower C. [A C]
+[Player 0] A C
 [GAME] Player 0 moved disk from A to C. Here is the current state of the towers:
 A: [3, 2]
 B: []
 C: [1]
 
-[Player 0] Now I'll move the next disk from tower A to tower B. [A B]
+[Player 0] A B
 [GAME] Player 0 moved disk from A to B. Here is the current state of the towers:
 A: [3]
 B: [2]
@@ -78,27 +77,29 @@ C: [1]
 | Outcome     | Reward for Player |
 |-------------|:-----------------:|
 | **Win**     | `+1`              |
-| **Loss**    | `-1`              |
-| **Invalid** | `-1`              |
+| **Turn limit** | fraction of disks correctly stacked from the base of tower C |
+| **Invalid-move limit** | the same bounded completion fraction |
 
 ## Parameters
 
 - `num_disks` (`int`, default: `3`):
   - **Description:** Number of disks in the puzzle
+  - **Allowed range:** `1` to `20`
   - **Impact:** More disks exponentially increase the puzzle's complexity and minimum required moves
 
 - `max_turns` (`int`, default: `100`):
   - **Description:** Maximum number of turns allowed to solve the puzzle
-  - **Impact:** Restricts the number of moves available to complete the puzzle
+  - **Constraint:** Must be at least `2 ** num_disks - 1`, the optimal solution length
 
 ## Variants
 
 | Env-id                    | num_disks | max_turns |
 |---------------------------|:---------:|:---------:|
-| `TowerOfHanoi-v0`         | `3`       | `100`     |
-| `TowerOfHanoi-v0-medium`  | `4`       | `100`     |
-| `TowerOfHanoi-v0-hard`    | `5`       | `100`     |
-| `TowerOfHanoi-v0-extreme` | `7`       | `100`     |
+| `TowerOfHanoi-v0`         | `3`       | `14`      |
+| `TowerOfHanoi-v0-medium`  | `4`       | `30`      |
+| `TowerOfHanoi-v0-hard`    | `5`       | `62`      |
+| `TowerOfHanoi-v0-hardcore`| `6`       | `126`     |
+| `TowerOfHanoi-v0-extreme` | `7`       | `254`     |
 
 
 ### Contact

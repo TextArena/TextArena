@@ -127,13 +127,13 @@ These are the "sink" functions that execute actions after all blocking/challengi
   - [X] you still lose your coins if your assassination is blocked
   - [X] fake block an assassination with 2 cards remaining (double hit, insta-eliminate)
   - [X] fake block an assassination with 1 cards remaining (double hit, but shouldn't crash)
-  - [X] incorrect block (`[block foreign aid]` when last played was a `tax`)
+  - [X] incorrect block (`block foreign aid` when last played was a `tax`)
   - [X] two players end-to-end
   - [X] three players end-to-end
   - [X] four players end-to-end
   - [X] five players end-to-end
   - [X] six players end-to-end
-  - [X] invalid steal target player (`[steal 7]`)
+  - [X] invalid steal target player (`steal 7`)
   - [X] target player on a steal doesn't have enough coins
   - [X] invalid coup
   - [X] recovery from invalid move

@@ -1,52 +1,79 @@
 import re
 from collections import deque
-from typing import Optional, Dict, Tuple, List, Any
+from typing import Any, Dict, List, Tuple, Union
 
 import textarena as ta
 from textarena.envs.SimpleTak.renderer import create_board_str
 
-class SimpleTakEnv(ta.Env):
+
+class SimpleTakEnv(ta.GameEnv):
+    min_players = 2
+    max_players = 2
+    action_pattern = r"^\s*\[?\s*(\d+)\s*\]?\s*$"
+
     def __init__(self, board_size: int = 5):
         """
         Args:
             board_size (int): The size of the NxN board (default 5).
         """
-        super().__init__()
+        if not isinstance(board_size, int) or isinstance(board_size, bool) or board_size < 1:
+            raise ValueError("board_size must be a positive integer")
         self.board_size = board_size
         self.cell_mapping = {i: (i // board_size, i % board_size) for i in range(board_size * board_size)}
 
-    def get_board_str(self): return create_board_str(board=self.state.game_state["board"], board_size=self.board_size)
-    def reset(self, num_players: int = 2, seed: Optional[int] = None):
-        self.state = ta.TwoPlayerState(num_players=num_players, seed=seed)
-        self.state.reset(game_state={"board": [['' for _ in range(self.board_size)] for _ in range(self.board_size)]}, player_prompt_function=self._prompt)
-        self._observe_current_state()
+    def setup(self) -> Dict[str, Any]:
+        return {"board": [['' for _ in range(self.board_size)] for _ in range(self.board_size)]}
 
-    def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
+    def prompt(self, player_id: int) -> str:
         return (
             f"You are Player {player_id} in SimpleTak.\n"
             f"On the board, your stones appear as '{'O' if player_id == 0 else 'X'}' and "
             f"your opponent's stones appear as '{'O' if player_id == 1 else 'X'}'.\n\n"
             "On your turn, choose one empty cell (by its numbered index) and place your stone there.\n"
-            "For example, '[12]' places your stone in cell 12.\n\n"
+            "For example, '12' places your stone in cell 12.\n\n"
             "Your objective is to form a continuous path of your stones that connects two opposite edges of the board "
             "(top-to-bottom or left-to-right)."
         )
 
-    def _observe_current_state(self) -> None:
+    def render(self, player_id: int) -> str:
         available_moves = []
         for i in range(self.board_size * self.board_size):
             r, c = self.cell_mapping[i]
-            if self.state.game_state["board"][r][c] == '': 
-                available_moves.append(f"[{i}]")
-        self.state.add_observation(message=f"Current Board:\n\n{self._render_board()}\nAvailable Moves: " + ", ".join(available_moves), observation_type=ta.ObservationType.GAME_BOARD)
+            if self.game_state["board"][r][c] == '':
+                available_moves.append(f"'{i}'")
+        return f"Current Board:\n\n{self._render_board()}\nAvailable Moves: " + ", ".join(available_moves)
+
+    def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
+        try:
+            cell_num = int(move.group(1))
+        except ValueError:
+            return self.invalid("Cell number is too large.")
+        if cell_num not in self.cell_mapping:
+            return self.invalid(f"Invalid cell number {cell_num}. Must be between 0 and {self.board_size**2 - 1}.")
+        row, col = self.cell_mapping[cell_num]
+        board = self.game_state["board"]
+        if board[row][col] != '':
+            return self.invalid(f"Cell {cell_num} is already occupied. Choose an empty cell.")
+
+        symbol = 'O' if player_id == 0 else 'X'
+        board[row][col] = symbol
+        self.broadcast(f"Player {player_id} placed their symbol ({symbol}) in cell {cell_num}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        if self._check_win(symbol):
+            return self.winner(player_id, reason=f"Player {player_id} ('{symbol}') connected two opposite edges!")
+        if all(board[r][c] != '' for r in range(self.board_size) for c in range(self.board_size)):
+            return self.draw(reason="The board is full. It's a draw!")
+        return None
+
+    def get_board_str(self):
+        return create_board_str(board=self.game_state["board"], board_size=self.board_size)
 
     def _render_board(self) -> str:
         max_cell_num = self.board_size * self.board_size - 1
         digit_count = len(str(max_cell_num))
         cell_width = max(digit_count, 2)  # at least 2 for occupant symbols
         def cell_str(r: int, c: int) -> str:
-            if self.state.game_state["board"][r][c] == '': return str(r * self.board_size + c) # If empty, show cell number
-            else: return self.state.game_state["board"][r][c] # Occupied by 'O' or 'X'
+            if self.game_state["board"][r][c] == '': return str(r * self.board_size + c) # If empty, show cell number
+            else: return self.game_state["board"][r][c] # Occupied by 'O' or 'X'
         def build_hline() -> str:
             line_parts = []
             for _ in range(self.board_size): line_parts.append("-" * (cell_width + 2))  # +2 for spacing around content
@@ -64,35 +91,9 @@ class SimpleTakEnv(ta.Env):
             lines.append(build_hline())
         return "\n".join(lines)
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        symbol = 'O' if self.state.current_player_id == 0 else 'X'
-        self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        match = re.compile(r"\[\s*(\d+)\s*\]").search(action) # Regex to parse moves like [12]
-        if match is None:
-            self.state.set_invalid_move(reason="Invalid move format")
-        else:
-            cell_num = int(match.group(1))
-            if cell_num not in self.cell_mapping: # Check if cell_num in valid range
-                self.state.set_invalid_move(reason=f"Invalid cell number {cell_num}. Must be between 0 and {self.board_size**2 - 1}.")
-            else:
-                row, col = self.cell_mapping[cell_num]
-                board = self.state.game_state["board"]
-                if board[row][col] == '':
-                    board[row][col] = symbol # Place the stone
-                    self.state.add_observation(message=f"Player {self.state.current_player_id} placed their symbol ({symbol}) in cell {cell_num}.", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-                    if self._check_win(symbol): # Check for a winning path
-                        self.state.set_winner(player_id=self.state.current_player_id, reason=f"Player {self.state.current_player_id} ('{symbol}') connected two opposite edges!")
-                    else:
-                        if all(board[r][c] != '' for r in range(self.board_size) for c in range(self.board_size)): # If board is fully occupied and no winner => draw
-                            self.state.set_draw(reason="The board is full. It's a draw!")
-                else:
-                    self.state.set_invalid_move(reason=f"Cell {cell_num} is already occupied. Choose an empty cell.")
-        self._observe_current_state()
-        return self.state.step()
-
     def _check_win(self, symbol: str) -> bool:
         n   = self.board_size
-        bd  = self.state.game_state["board"]
+        bd  = self.game_state["board"]
         dirs = [(0,1), (1,0), (0,-1), (-1,0)]           # 4-neighbour connectivity
 
         def bfs(starts: List[Tuple[int,int]], target_edge) -> bool:

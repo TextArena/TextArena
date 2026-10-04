@@ -1,99 +1,105 @@
-import re, random
-from typing import Any, Dict, Optional, Tuple
+import re
+from typing import Any, Dict, Optional, Union
 
 import textarena as ta
 from textarena.envs.PigDice.renderer import create_board_str
 
-class PigDiceEnv(ta.Env):
+
+class PigDiceEnv(ta.GameEnv):
+    min_players = 2
+    max_players = 2
+    MAX_WINNING_SCORE = 1_000_000
+    action_pattern = (
+        r"(?i)^\s*(?P<bracket>\[)?\s*(?P<action>roll|hold)\s*"
+        r"(?(bracket)\])\s*$"
+    )
+
     def __init__(self, winning_score: int = 100, max_turns: int = 500):
         """
         Args:
             winning_score (int): The score needed to win.
             max_turns (int): Maximum number of turns before the game ends.
         """
-        super().__init__()
+        if type(winning_score) is not int or winning_score < 1:
+            raise ValueError("winning_score must be a positive integer.")
+        if winning_score > self.MAX_WINNING_SCORE:
+            raise ValueError(f"winning_score cannot exceed {self.MAX_WINNING_SCORE}.")
+        if max_turns is not None and (type(max_turns) is not int or max_turns < 1):
+            raise ValueError("max_turns must be None or a positive integer.")
         self.winning_score = winning_score
         self.max_turns = max_turns
         self.roll_value = None
 
-    def get_board_str(self):
-        return create_board_str(scores=self.state.game_state["scores"], turn_total=self.state.game_state["turn_total"], current_player=self.state.current_player_id, current_roll=self.roll_value)
+    def setup(self) -> Dict[str, Any]:
+        self.roll_value = None
+        return {"scores": [0, 0], "turn_total": 0, "turn_rolls": []}
 
-    def reset(self, num_players: int, seed: Optional[int] = None) -> None:
-        self.state = ta.TwoPlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
-        self.state.reset(game_state={"scores": [0]*num_players, "turn_total": 0, "turn_rolls": []}, player_prompt_function=self._prompt)
-        self._add_current_board_observation()
-
-    def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
+    def prompt(self, player_id: int) -> str:
+        turn_limit_rule = (
+            ""
+            if self.max_turns is None
+            else (
+                f"\n- After {self.max_turns} completed actions, the player with "
+                "the higher banked score wins; equal scores draw"
+            )
+        )
         return (
             f"You are Player {player_id} playing a game of Pig Dice.\n"
-            f"Rules:\n- On your turn, you can either '[roll]' or '[hold]'\n- Roll a 2-6: Add to your turn total\n"
+            f"Rules:\n- On your turn, you can either 'roll' or 'hold'\n- Roll a 2-6: Add to your turn total\n"
             f"- Roll a 1: Lose turn total and end turn\n- Hold: Add turn total to your score and end turn\n"
-            f"- First to {self.winning_score} points wins\n\nWhen it's your turn, you'll see the current scores and turn total.\n"
-            f"Respond with '[roll]' to roll the die or '[hold]' to bank your points."
+            f"- First to {self.winning_score} points wins{turn_limit_rule}\n\nWhen it's your turn, you'll see the current scores and turn total.\n"
+            f"Respond with 'roll' to roll the die or 'hold' to bank your points."
         )
-    
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        match = re.compile(r"\[(roll|hold)\]", re.IGNORECASE).search(action.strip()) # Parse the action using regex
-        if not match:
-            self.state.set_invalid_move(reason=f"Invalid action format. Use '[roll]' or '[hold]'.")
-            return self.state.step(rotate_player=False) 
-        action = match.group(1).lower() # Extract the actual action
-        # Execute the action
-        if action == "roll": self._perform_roll(self.state.current_player_id)
-        elif action == "hold": self._perform_hold(self.state.current_player_id)
-        self._add_current_board_observation()
-        return self.state.step(rotate_player=False)
-    
-    def _add_current_board_observation(self):
-        observation = "Current Total Scores: "+"; ".join(f"Player {i}: '{score}'" for i, score in enumerate(self.state.game_state['scores']))
-        observation += f"\nYou current turn total is {self.state.game_state['turn_total']}. "
-        observation += f"\nYour roll history for this turn: {', '.join(self.state.game_state['turn_rolls'])}" if self.state.game_state['turn_rolls'] else "\nThis is the first roll of your turn."
-        observation += "\nAvailable actions: '[roll]' or '[hold]'"
-        self.state.add_observation(message=observation, observation_type=ta.ObservationType.GAME_BOARD)
-        
-    def _determine_winner(self, scores):
-        if scores[0] > scores[1]: return 0
-        elif scores[0] < scores[1]: return 1
-        return None
 
-    def _rotate_to_next_player(self):
-        scores = self.state.game_state['scores']
-        # End game if the turn limit is reached
-        if self.state.check_turn_limit():
-            winner_id = self._determine_winner(scores)
-            if winner_id is None: self.state.set_draw(reason=f"The turn limit has been reached and all players have the same score: {scores}")
-            else: self.state.set_winner(player_id=winner_id, reason=f"Player {winner_id} won by having a higher score at the turn limit ({scores})")
-            return
-        # End game if the winning score is reached
-        if any(score >= self.winning_score for score in scores):
-            winner_id = 0 if scores[0] > scores[1] else 1
-            self.state.set_winner(player_id=winner_id, reason=f"Player {winner_id} won by reaching the target score of {self.winning_score}!")
-            return
-        # Otherwise, continue the game
-        self.state.game_state["turn_total"] = 0
-        self.state.game_state["turn_rolls"] = []
-        next_player_id = (self.state.current_player_id + 1) % self.state.num_players
-        self.state.manually_set_current_player_id(new_player_id=next_player_id)
+    def render(self, player_id: int) -> str:
+        gs = self.game_state
+        board = "Current Total Scores: " + "; ".join(f"Player {i}: '{score}'" for i, score in enumerate(gs["scores"]))
+        board += f"\nYour current turn total is {gs['turn_total']}. "
+        board += f"\nYour roll history for this turn: {', '.join(gs['turn_rolls'])}" if gs["turn_rolls"] else "\nThis is the first roll of your turn."
+        board += "\nAvailable actions: 'roll' or 'hold'"
+        return board
 
-        # add current scores to observation
-        self.state.add_observation(message="Current Scores: "+"; ".join(f"Player {i}: '{score}'" for i, score in enumerate(self.state.game_state['scores'])), observation_type=ta.ObservationType.GAME_MESSAGE)
+    def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
+        action = move.group("action").lower()
+        if action == "roll":
+            roll_value = self.rng.randint(1, 6)
+            self.roll_value = roll_value
+            self.broadcast(
+                f"Player {player_id} rolled a {roll_value}.",
+                ta.ObservationType.GAME_ACTION_DESCRIPTION,
+            )
+            if roll_value == 1:  # bust: lose the turn total, end the turn
+                self.broadcast(f"Player {player_id} busted, losing {self.game_state['turn_total']} points!", ta.ObservationType.GAME_MESSAGE)
+                return self._end_turn(player_id)
+            self.game_state["turn_total"] += roll_value
+            self.game_state["turn_rolls"].append(f"'{roll_value}'")
+            self.set_next_player(player_id)  # keep rolling
+            return None
+        else:  # hold
+            self.game_state["scores"][player_id] += self.game_state["turn_total"]
+            self.broadcast(f"Player {player_id} holds and banks {self.game_state['turn_total']} points.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+            return self._end_turn(player_id)
 
-    def _perform_roll(self, player_id: int) -> None:
-        """ Perform the dice roll logic """
-        roll_value = random.randint(1, 6)
-        self.roll_value = roll_value
-        if roll_value == 1: # Bust! Lose the turn total, end the turn
-            self.state.add_observation(message=f"Player {player_id} busted, losing {self.state.game_state['turn_total']} points!", observation_type=ta.ObservationType.GAME_MESSAGE)
-            self._rotate_to_next_player()
-        else: # Accumulate turn total
-            self.state.game_state["turn_total"] += roll_value
-            self.state.game_state["turn_rolls"].append(f"'{roll_value}'")
+    def _end_turn(self, player_id: int) -> Optional[ta.Outcome]:
+        scores = self.game_state["scores"]
+        self.game_state["turn_total"] = 0
+        self.game_state["turn_rolls"] = []
+        self.roll_value = None
+        if scores[player_id] >= self.winning_score:
+            return self.winner(player_id, reason=f"Player {player_id} won by reaching the target score of {self.winning_score}!")
+        self.broadcast("Current Scores: " + "; ".join(f"Player {i}: '{score}'" for i, score in enumerate(scores)), ta.ObservationType.GAME_MESSAGE)
+        return None  # default rotation passes the turn to the other player
 
-    def _perform_hold(self, player_id: int) -> None:
-        # Add turn total to player's score
-        self.state.game_state['scores'][player_id] += self.state.game_state['turn_total']
-        self.state.add_observation(message=f"Player {player_id} holds and banks {self.state.game_state['turn_total']} points.", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-        self._rotate_to_next_player()
+    def on_turn_limit(self) -> ta.Outcome:
+        scores = self.game_state["scores"]
+        if scores[0] == scores[1]:
+            return self.draw(reason=f"The turn limit has been reached and all players have the same score: {scores}")
+        winner_id = 0 if scores[0] > scores[1] else 1
+        return self.winner(winner_id, reason=f"Player {winner_id} won by having a higher score at the turn limit ({scores})")
 
+    def get_board_str(self):
+        return create_board_str(
+            scores=self.game_state["scores"], turn_total=self.game_state["turn_total"],
+            current_player=self.state.current_player_id, current_roll=self.roll_value,
+            goal=self.winning_score,
+        )

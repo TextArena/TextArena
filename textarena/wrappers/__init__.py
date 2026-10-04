@@ -1,9 +1,7 @@
-from textarena.wrappers.RenderWrappers import SimpleRenderWrapper
-from textarena.wrappers.ObservationWrappers import LLMObservationWrapper, GameBoardObservationWrapper, GameMessagesObservationWrapper, GameMessagesAndCurrentBoardObservationWrapper, SingleTurnObservationWrapper, SettlersOfCatanObservationWrapper #, GameMessagesAndCurrentBoardWithInvalidMovesObservationWrapper
-from textarena.wrappers.ActionWrappers import ClipWordsActionWrapper, ClipCharactersActionWrapper, ActionFormattingWrapper
+from textarena.wrappers.renderers import SimpleRenderWrapper
+from textarena.wrappers.observation_wrappers import CurrentTurnObservationWrapper, FullHistoryObservationWrapper, BoardObservationWrapper
 
 __all__ = [
-    'SimpleRenderWrapper', 
-    'ClipWordsActionWrapper', 'ClipCharactersActionWrapper', 'ActionFormattingWrapper', 
-    'LLMObservationWrapper', 'GameBoardObservationWrapper', 'GameMessagesObservationWrapper', 'GameMessagesAndCurrentBoardObservationWrapper', 'SingleTurnObservationWrapper', 'SettlersOfCatanObservationWrapper', #"GameMessagesAndCurrentBoardWithInvalidMovesObservationWrapper",
+    'SimpleRenderWrapper',
+    'CurrentTurnObservationWrapper', 'FullHistoryObservationWrapper', 'BoardObservationWrapper',
 ]

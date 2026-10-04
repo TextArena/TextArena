@@ -1,18 +1,22 @@
-import random, math
+import math, re
 from collections import defaultdict
-from typing import Dict, List, Optional, Tuple, Any
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
-from textarena.envs.Surround.renderer import create_board_str 
+from textarena.envs.Surround.renderer import create_board_str
 
 _DIR_DELTAS = {"up": (0, 1), "w": (0, 1), "down": (0, -1), "s": (0, -1), "left": (-1, 0), "a": (-1, 0), "right": (1, 0), "d": (1, 0)}
+_DIR_RE = re.compile(r"^\s*\[?\s*(up|down|left|right|w|a|s|d)\s*\]?\s*$", re.I)
+
+def _dir_token(move: str) -> Optional[str]:
+    """Return the direction token if *move* is a single bare direction (brackets tolerated)."""
+    m = _DIR_RE.match(move)
+    return m.group(1).lower() if m else None
 
 def _step_from_str(move: str) -> Tuple[int, int]:
-    """Return (dx, dy) for the *first* direction token in *move*."""
-    lower = move.lower()
-    for tok, d in _DIR_DELTAS.items():
-        if f"[{tok}]" in lower: return d
-    return (0, 0)
+    """Return (dx, dy) for the direction token in *move*."""
+    token = _dir_token(move)
+    return _DIR_DELTAS[token] if token else (0, 0)
 
 class _Player:
     def __init__(self, pos: Tuple[int, int]):
@@ -20,14 +24,34 @@ class _Player:
         self.alive: bool = True
         self.death_reason: Optional[str] = None
 
-class SurroundEnv(ta.Env):
+class SurroundEnv(ta.GameEnv):
     MAX_PLAYERS = 15
-    def __init__(self, width: int = 10, height: int = 10, max_turns: int = 100):
-        if width * height < self.MAX_PLAYERS + 5: raise ValueError("Board too small for potential players+trails")
-        self.width, self.height, self.max_turns = width, height, max_turns
-        self.pending_actions: Dict[int, Optional[str]] = {}
+    min_players = 2
+    max_players = 15
+    broadcast_actions = False  # moves are sealed until the round resolves
+    error_allowance = 0  # every malformed action is immediately fatal
 
-    def get_board_str(self) -> str: return create_board_str(width=self.width, height=self.height, board=self.state.game_state["board"], players=self.state.game_state["players"])
+    def __init__(self, width: int = 10, height: int = 10, max_turns: int = 100):
+        if (
+            not isinstance(width, int) or isinstance(width, bool)
+            or not isinstance(height, int) or isinstance(height, bool)
+        ):
+            raise ValueError("Board dimensions must be integers")
+        if width < 3 or height < 3:
+            raise ValueError("Board dimensions must each be at least 3")
+        if (width - 2) * (height - 2) < self.min_players:
+            raise ValueError("Board interior must have room for at least two players")
+        if not isinstance(max_turns, int) or isinstance(max_turns, bool) or max_turns < 1:
+            raise ValueError("max_turns must be a positive integer")
+        self.width, self.height, self.max_turns = width, height, max_turns
+
+    @property
+    def pending_actions(self) -> Dict[int, Optional[str]]:
+        return self.game_state["pending_actions"]
+
+    def get_board_str(self) -> str:
+        return create_board_str(width=self.width, height=self.height, game_state=self.game_state)
+
     def _ascii_board(self, board, players) -> str:
         grid = [["." for _ in range(self.width)] for _ in range(self.height)]
         # trails
@@ -47,29 +71,26 @@ class SurroundEnv(ta.Env):
         rows.append(horiz)
         return "\n".join(rows)
 
-    def _random_free_cell(self, occupied: set[Tuple[int, int]]) -> Tuple[int, int]:
-        while True:
-            x = random.randint(0, self.width - 1)
-            y = random.randint(0, self.height - 1)
-            if (x, y) not in occupied: return (x, y)
-
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        if not 2 <= num_players <= self.MAX_PLAYERS: raise ValueError(f"2 ≤ players ≤ {self.MAX_PLAYERS}")
-        self.state = ta.FFAMultiPlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
+    def setup(self) -> Dict[str, Any]:
+        num_players = self.state.num_players
+        # Simultaneous submissions make a game turn a completed round, not one
+        # player's sealed action. The environment enforces the round limit.
+        self.state.max_turns = None
         # spawn players (farthest-point sampling like Snake for fairness)
         spawns: List[Tuple[int, int]] = self._generate_spawn_positions(num_players)
         players: Dict[int, _Player] = {pid: _Player(pos) for pid, pos in enumerate(spawns)}
-        game_state = {"board": [[None for _ in range(self.width)] for _ in range(self.height)], "players": players, "death_turn": {}, "board_state": "",}
-        self.state.reset(game_state=game_state, player_prompt_function=self._prompt)
-        self.pending_actions = {pid: None for pid in range(num_players)}
-        # initial board broadcast
+        game_state = {
+            "board": [[None for _ in range(self.width)] for _ in range(self.height)],
+            "players": players, "death_turn": {}, "board_state": "", "round": 0,
+            "pending_actions": {pid: None for pid in range(num_players)},
+        }
         game_state["board_state"] = self._ascii_board(game_state["board"], players)
-        self.state.add_observation(f"Current Board:\n{game_state['board_state']}", observation_type=ta.ObservationType.GAME_BOARD)
+        return game_state
 
     def _generate_spawn_positions(self, k: int) -> List[Tuple[int, int]]:
         candidates = [(x, y) for x in range(1, self.width - 1) for y in range(1, self.height - 1)]
         if len(candidates) < k: raise ValueError("Board too small for spawn sampling")
-        random.shuffle(candidates)
+        self.rng.shuffle(candidates)
         spawns = [candidates.pop()]
         while len(spawns) < k:
             best = max(candidates, key=lambda p: min(math.dist(p, s) for s in spawns))
@@ -77,42 +98,79 @@ class SurroundEnv(ta.Env):
             candidates.remove(best)
         return spawns
 
-    def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
+    def prompt(self, player_id: int) -> str:
         return (
             f"{self.state.num_players}-Player Surround on a {self.width}x{self.height} grid.\n"
-            f"You are player {player_id}. Valid moves: '[up]' '[down]' '[left]' '[right]' or w/s/a/d.\n"
+            f"You are player {player_id}. Valid moves: 'up' 'down' 'left' 'right' or 'w'/'s'/'a'/'d'.\n"
             f"Objective: outlive everyone else. Trails are deadly; wall hits kill; head-on crashes kill both."
         )
 
-    def step(self, action: str):
-        pid = self.state.current_player_id
-        token = next((t for t in _DIR_DELTAS if f"[{t}]" in action.lower()), None)
+    def render(self, player_id: int) -> str:
+        return f"Current Board:\n{self.game_state['board_state']}"
+
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        gs = self.game_state
+        players: Dict[int, _Player] = gs["players"]
+        token = _dir_token(action)
 
         # Invalid move → instant death, like in SnakeEnv
-        players: Dict[int, _Player] = self.state.game_state["players"]
         if token is None:
-            pl = players[pid]
-            if pl.alive:
-                pl.alive, pl.death_reason = False, "invalid move"
-                self.state.game_state["death_turn"][pid] = self.state.turn
-                self.state.add_observation(f"Player {pid} died due to invalid move.", observation_type=ta.ObservationType.GAME_ADMIN)
-            self.pending_actions[pid] = None
+            outcome = self._eliminate_for_invalid_action(player_id)
+            if outcome is not None:
+                return outcome
         else:
-            self.pending_actions[pid] = action
+            gs["pending_actions"][player_id] = action
 
         # resolve turn when all living acted
+        outcome = None
         living = [p for p, pl in players.items() if pl.alive]
-        if living and all(self.pending_actions[p] for p in living):
-            self._apply_simultaneous_moves()
+        if living and all(gs["pending_actions"][p] for p in living):
+            outcome = self._apply_simultaneous_moves()
             for p in living:
-                self.pending_actions[p] = None
+                gs["pending_actions"][p] = None
+        if outcome is not None:
+            return outcome
 
-        self._rotate_players()
-        self._check_turn_limit()
-        return self.state.step(rotate_player=False)
+        alive = [pid for pid, pl in players.items() if pl.alive]
+        if len(alive) <= 1:
+            return self._finalise_rewards("Player outlived all others." if alive else "All players dead.")
+        return None
 
-    def _apply_simultaneous_moves(self):
-        gs = self.state.game_state
+    def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
+        """Keep engine preflight rejections consistent with Surround deaths.
+
+        Oversized and non-string actions are rejected by the shared engine
+        before ``apply`` runs. They still count as fatal malformed actions in
+        Surround and therefore must update both the engine elimination list
+        and the environment's per-player alive state.
+        """
+        return self._eliminate_for_invalid_action(player_id)
+
+    def _eliminate_for_invalid_action(self, player_id: int) -> Optional[ta.Outcome]:
+        gs = self.game_state
+        player = gs["players"][player_id]
+        if player.alive:
+            player.alive = False
+            player.death_reason = "invalid move"
+            gs["death_turn"][player_id] = gs["round"]
+            x, y = player.position
+            gs["board"][y][x] = player_id
+            self.eliminate(player_id)
+            self.broadcast(
+                f"Player {player_id} died due to invalid move.",
+                ta.ObservationType.GAME_ADMIN,
+            )
+            gs["board_state"] = self._ascii_board(gs["board"], gs["players"])
+        gs["pending_actions"][player_id] = None
+
+        alive = [pid for pid, candidate in gs["players"].items() if candidate.alive]
+        if len(alive) <= 1:
+            reason = "Player outlived all others." if alive else "All players dead."
+            return self._finalise_rewards(reason)
+        return None
+
+    def _apply_simultaneous_moves(self) -> Optional[ta.Outcome]:
+        gs = self.game_state
         players: Dict[int, _Player] = gs["players"]
         board = gs["board"]
 
@@ -122,7 +180,7 @@ class SurroundEnv(ta.Env):
 
         # 1. desired head positions
         for pid in living:
-            dx, dy = _step_from_str(self.pending_actions[pid])
+            dx, dy = _step_from_str(gs["pending_actions"][pid])
             x, y = old_pos[pid]
             desired[pid] = (x + dx, y + dy)
 
@@ -151,45 +209,42 @@ class SurroundEnv(ta.Env):
         for pos, ids in bins.items():
             if len(ids) > 1: crashes.update(ids)
 
+        # Every old head square becomes trail, including heads that crash.
+        for pid in living:
+            ox, oy = old_pos[pid]
+            board[oy][ox] = pid
+
         # ── apply results ──
         for pid in living:
             if pid in crashes:
                 players[pid].alive = False
                 players[pid].death_reason = "crash"
-                gs["death_turn"][pid] = self.state.turn
+                gs["death_turn"][pid] = gs["round"]
+                self.eliminate(pid)
             else:
-                ox, oy = old_pos[pid]
                 nx, ny = desired[pid]
                 players[pid].position = (nx, ny)
-                board[oy][ox] = pid              # leave trail
+
+        gs["round"] += 1
+        gs["board_state"] = self._ascii_board(board, players)
 
         # ── end-of-game checks ──
         alive = [pid for pid, pl in players.items() if pl.alive]
         if len(alive) <= 1:
-            if alive: self._finalise_rewards(f"Player {alive[0]} survived; all others crashed.")
-            else: self._finalise_rewards("All players crashed simultaneously.")
-            self.state.step(rotate_player=False)   # make terminal transition
-            return
+            if alive: return self._finalise_rewards(f"Player {alive[0]} survived; all others crashed.")
+            return self._finalise_rewards("All players crashed simultaneously.")
+        if gs["round"] >= self.max_turns:
+            return self._finalise_rewards("Turn limit reached - longest survivor wins.")
+        return None
 
-        # broadcast board every normal turn
-        gs["board_state"] = self._ascii_board(board, players)
-        self.state.add_observation(f"Board after simultaneous moves:\n{gs['board_state']}", observation_type=ta.ObservationType.GAME_BOARD)
+    def on_turn_limit(self) -> ta.Outcome:
+        return self._finalise_rewards("Turn limit reached - longest survivor wins.")
 
-    def _rotate_players(self):
-        if self.state.done: return
-        alive = {pid for pid, pl in self.state.game_state["players"].items() if pl.alive}
-        if len(alive) <= 1: self._finalise_rewards("Player outlived all others." if alive else "All players dead."); return
-        nxt = (self.state.current_player_id + 1) % self.state.num_players
-        while nxt not in alive: nxt = (nxt + 1) % self.state.num_players
-        self.state.manually_set_current_player_id(nxt)
-
-    def _check_turn_limit(self):
-        if not self.state.done and self.state.turn >= self.state.max_turns: self._finalise_rewards("Turn limit reached - longest survivor wins.")
-
-    def _finalise_rewards(self, reason: str):
-        survival_turn = {pid: (self.state.turn + 1) if pl.alive else self.state.game_state["death_turn"].get(pid, -1) for pid, pl in self.state.game_state["players"].items()}
+    def _finalise_rewards(self, reason: str) -> ta.Outcome:
+        gs = self.game_state
+        survival_turn = {pid: (gs["round"] + 1) if pl.alive else gs["death_turn"].get(pid, -1) for pid, pl in gs["players"].items()}
         # build ranking groups (same survival = tie)
-        sorted_pids = sorted(range(self.state.num_players), key=lambda pid: (survival_turn[pid], self.state.game_state["players"][pid].alive, -pid))
+        sorted_pids = sorted(range(self.state.num_players), key=lambda pid: (survival_turn[pid], gs["players"][pid].alive, -pid))
         groups: List[List[int]] = []
         for pid in sorted_pids:
             if not groups or survival_turn[groups[-1][0]] != survival_turn[pid]: groups.append([pid])
@@ -202,4 +257,4 @@ class SurroundEnv(ta.Env):
             for g_idx, grp in enumerate(reversed(groups)): # best group first
                 r = 1.0 - 2.0 * g_idx / (G - 1)
                 for pid in grp: reward[pid] = r
-        self.state.set_game_outcome(reward_dict=reward, reason=f"{reason} Final ranking groups (best→worst): {list(reversed(groups))}")
+        return self.outcome(reward, reason=f"{reason} Final ranking groups (best→worst): {list(reversed(groups))}")

@@ -1,11 +1,11 @@
-import re, random
-from typing import Any, Dict, List, Optional, Tuple
+import re
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
 from textarena.envs.BlindAuction.renderer import create_board_str
 
 
-class BlindAuctionEnv(ta.Env):
+class BlindAuctionEnv(ta.GameEnv):
     """
     N-player Blind Auction game with conversation phase followed by bidding phase.
     Players can:
@@ -14,7 +14,22 @@ class BlindAuctionEnv(ta.Env):
     - Submit bids for multiple items (during bidding phase)
     """
 
-    # Regex patterns for parsing actions
+    min_players = 3
+    max_players = 15
+    broadcast_actions = False  # raw actions are echoed only to their author; messages are re-emitted below
+
+    # Canonical bare commands. Each command occupies one line or semicolon-delimited segment.
+    bare_broadcast_pattern = re.compile(r"^Broadcast\s*:\s*(.+)$", re.IGNORECASE | re.DOTALL)
+    bare_whisper_pattern = re.compile(
+        r"^Whisper\s+(?:to\s+)?(?:Player\s+)?(\d+)\s*:\s*(.+)$",
+        re.IGNORECASE | re.DOTALL,
+    )
+    bare_bid_pattern = re.compile(
+        r"^Bid\s+(?:on\s+)?(?:Item\s+)?(\d+)\s*:\s*(\d+)$",
+        re.IGNORECASE,
+    )
+
+    # Legacy bracketed commands retained for backwards compatibility.
     broadcast_pattern = re.compile(
         r"(?:"
         r"\s*\[Broadcast\s*:\s*(.*?)\]"            # Alternative A: colon present
@@ -45,16 +60,26 @@ class BlindAuctionEnv(ta.Env):
             conversation_rounds (int): Number of rounds for conversation phase.
             base_item_values (Optional[List[int]]): Base values for items. If None, will be generated.
         """
+        if not isinstance(starting_capital, int) or isinstance(starting_capital, bool) or starting_capital <= 0:
+            raise ValueError("starting_capital must be a positive integer")
+        if not isinstance(num_items, int) or isinstance(num_items, bool) or num_items <= 0:
+            raise ValueError("num_items must be a positive integer")
+        if not isinstance(conversation_rounds, int) or isinstance(conversation_rounds, bool) or conversation_rounds < 0:
+            raise ValueError("conversation_rounds must be a non-negative integer")
+        if base_item_values is not None:
+            if not isinstance(base_item_values, (list, tuple)) or any(
+                not isinstance(value, int) or isinstance(value, bool) or value <= 0
+                for value in base_item_values
+            ):
+                raise ValueError("base_item_values must be a sequence of positive integers")
         self.starting_capital = starting_capital
         self.num_items = num_items
         self.conversation_rounds = conversation_rounds
-        
-        # If no base values provided, we'll generate them during reset
-        self.base_item_values = base_item_values
-        
+        self.base_item_values = list(base_item_values) if base_item_values is not None else None
+
         # Item names for flavor
         self.item_names = [
-            "Ancient Vase", "Diamond Necklace", "Antique Clock", "Signed Painting", 
+            "Ancient Vase", "Diamond Necklace", "Antique Clock", "Signed Painting",
             "Gold Statue", "Rare Manuscript", "Silver Chalice", "Vintage Watch",
             "Jade Figurine", "Bronze Sculpture", "Crystal Decanter", "Royal Tapestry",
             "Emerald Ring", "Ivory Chess Set", "Pearl Earrings", "Platinum Coin Collection",
@@ -62,69 +87,71 @@ class BlindAuctionEnv(ta.Env):
         ]
 
     def get_board_str(self):
-        return create_board_str(game_state=self.state.game_state)
+        return create_board_str(
+            game_state=self.state.game_state,
+            viewer_id=self.state.current_player_id,
+            reveal_all=self.state.done,
+        )
 
     def reset(self, num_players: int, seed: Optional[int] = None):
-        """Reset the environment to its initial state."""
-        # Create the underlying state for N players
-        self.state = ta.State(
-            num_players=num_players, 
-            min_players=3, 
-            max_players=15,
-            max_turns=self.conversation_rounds * num_players + num_players,
-            check_truncated=False,
-            seed=seed
-        )
-        
-        # Generate item names and values if needed
-        if not self.base_item_values:
-            self.base_item_values = [random.randint(50, 500) for _ in range(self.num_items)]
-        
-        # Ensure we have enough item names
-        while len(self.item_names) < self.num_items:
-            self.item_names.append(f"Mystery Item {len(self.item_names)}")
-        
+        # Phase counters terminate the game explicitly, including forfeited turns.
+        self.max_turns = None
+        super().reset(num_players=num_players, seed=seed)
+
+    def setup(self) -> Dict[str, Any]:
+        num_players = self.state.num_players
+
+        if self.base_item_values is None:
+            base_item_values = [self.rng.randint(50, 500) for _ in range(self.num_items)]
+        else:
+            base_item_values = list(self.base_item_values[:self.num_items])
+            while len(base_item_values) < self.num_items:
+                base_item_values.append(self.rng.randint(50, 500))
+
+        available_names = self.item_names + [
+            f"Mystery Item {i}" for i in range(len(self.item_names), self.num_items)
+        ]
+
         # Assign item names for this game (randomized order)
-        item_names = random.sample(self.item_names, self.num_items)
-        
+        item_names = self.rng.sample(available_names, self.num_items)
+
         # Generate player-specific item values (±20% around base values)
         player_item_values = {}
         for pid in range(num_players):
             player_item_values[pid] = {}
-            for i, base_value in enumerate(self.base_item_values):
-                variation = int(0.2 * base_value)  # ±20%
+            for i, base_value in enumerate(base_item_values):
+                variation = base_value // 5
                 min_value = max(1, base_value - variation)
                 max_value = base_value + variation
-                player_item_values[pid][i] = random.randint(min_value, max_value)
-        
-        # Initialize game state
-        game_state = {
-            "phase": "conversation",  # Either "conversation" or "bidding"
+                player_item_values[pid][i] = self.rng.randint(min_value, max_value)
+
+        return {
+            "phase": "conversation" if self.conversation_rounds > 0 else "bidding",
             "round": 1,  # Current conversation round
             "item_names": item_names[:self.num_items],
-            "base_item_values": self.base_item_values[:self.num_items],
+            "base_item_values": base_item_values,
             "player_item_values": player_item_values,
             "remaining_capital": {pid: self.starting_capital for pid in range(num_players)},
-            "player_bids": {pid: {} for pid in range(num_players)},  # Format: {player_id: {item_id: bid_amount}}
+            "player_bids": {pid: {} for pid in range(num_players)},  # {player_id: {item_id: bid_amount}}
             "auction_results": None,  # Will be populated after bidding phase
-            "conversations_completed": 0  # Track completed conversation turns
+            "conversations_completed": 0,  # Track completed conversation turns
+            "bidding_done": {pid: False for pid in range(num_players)},
         }
-        
-        # Reset the state
-        self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
-        
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        """Generate the initial prompt for a player."""
-        # Create a formatted list of items with values
+
+    def on_start(self):
+        if self.conversation_rounds == 0:
+            self._announce_bidding_phase()
+
+    def prompt(self, player_id: int) -> str:
+        game_state = self.game_state
         item_values = []
         for i in range(self.num_items):
             item_name = game_state["item_names"][i]
             value = game_state["player_item_values"][player_id][i]
             item_values.append(f"- Item {i}: {item_name} - Value to you: {value} coins")
-        
         items_str = "\n".join(item_values)
-        
-        prompt = (
+
+        return (
             f"Welcome to the Blind Auction, Player {player_id}!\n\n"
             f"You have {self.starting_capital} coins to bid on {self.num_items} valuable items.\n\n"
             f"The auction has two phases:\n"
@@ -134,164 +161,179 @@ class BlindAuctionEnv(ta.Env):
             f"Note: Each player may value items differently, up to ±20% difference!\n\n"
             f"Available Commands:\n"
             f"- Conversation Phase:\n"
-            f"  '[Broadcast: message]' - Send a message to all players\n"
-            f"  '[Whisper to X: message]' - Send a private message to Player X\n\n"
+            f"  'Broadcast: message' - Send a message to all players\n"
+            f"  'Whisper X: message' - Send a private message to Player X\n\n"
             f"- Bidding Phase:\n"
-            f"  '[Bid on Item X: amount]' - Bid the specified amount on Item X\n"
-            f"  You can submit multiple bids for different items in a single turn.\n\n"
+            f"  'Bid Item X: amount' - Bid the specified amount on Item X\n"
+            f"  To submit multiple bids, put each bid on its own line or separate bids with semicolons.\n\n"
             f"The winner is the player with the highest net worth (total subjectvie item value + remaining coins)."
         )
-        return prompt
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        """Process a player's action based on the current game phase."""
-        current_pid = self.state.current_player_id
-        game_state = self.state.game_state
-        
-        # Log the player's action
-        self.state.add_observation(from_id=current_pid, to_id=current_pid, message=action)
-        
-        # Handle action based on current phase
-        if game_state["phase"] == "conversation":
-            self._handle_conversation_action(current_pid, action)
-            
-            # Check if we should transition to bidding phase
-            game_state["conversations_completed"] += 1
-            if game_state["conversations_completed"] >= self.conversation_rounds * self.state.num_players:
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        gs = self.game_state
+        if gs["phase"] == "conversation":
+            failure_reason = self._handle_conversation_action(player_id, action)
+        else:
+            failure_reason = self._handle_bidding_action(player_id, action)
+
+        if failure_reason is not None:
+            return self.invalid(failure_reason)
+
+        if gs["phase"] == "conversation":
+            gs["conversations_completed"] += 1
+            gs["round"] = min(
+                self.conversation_rounds,
+                gs["conversations_completed"] // self.state.num_players + 1,
+            )
+            if gs["conversations_completed"] >= self.conversation_rounds * self.state.num_players:
                 self._transition_to_bidding_phase()
-                
-        elif game_state["phase"] == "bidding":
-            self._handle_bidding_action(current_pid, action)
-            
-            # Check if all players have bid
-            if self.state.turn >= self.conversation_rounds * self.state.num_players + self.state.num_players - 1:
-                self._determine_auction_results()
-                
-        # Return the step results
-        return self.state.step()
+            return None
+        gs["bidding_done"][player_id] = True
+        if all(gs["bidding_done"].values()):
+            return self._determine_auction_results()
+        return None
 
-    def _handle_conversation_action(self, player_id: int, action: str) -> None:
-        """Process conversation phase actions: broadcasts and whispers."""
-        # Process broadcast messages
-        broadcasts = self._parse_broadcasts(action)
-        for msg in broadcasts:
-            broadcast_msg = f"(Broadcast) Player {player_id} says:{msg}"
-            self.state.add_observation(from_id=player_id, to_id=-1, message=broadcast_msg)
-        
-        # Process whispers
-        whispers = self._parse_whispers(action)
-        for target_pid_str, msg in whispers:
-            try:
-                target_pid = int(target_pid_str)
-                if target_pid not in range(self.state.num_players):
-                    self.state.set_invalid_move(
-                        player_id=player_id, 
-                        reason=f"Attempted to whisper to non-existent Player {target_pid}."
-                    )
-                    continue
-                
-                whisper_msg = f"(Private) Player {player_id} says:{msg}"
-                self.state.add_observation(from_id=player_id, to_id=target_pid, message=whisper_msg)
-            except ValueError:
-                self.state.set_invalid_move(player_id=player_id, reason=f"Invalid player target: {target_pid_str}")
+    def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
+        """Forfeit one phase action without eliminating a player from an N-player game."""
+        gs = self.game_state
+        self.state.game_info[player_id]["turn_count"] += 1
+        self.state.turn += 1
+        if gs["phase"] == "conversation":
+            gs["conversations_completed"] += 1
+            if gs["conversations_completed"] >= self.conversation_rounds * self.state.num_players:
+                self._transition_to_bidding_phase()
+        else:
+            gs["bidding_done"][player_id] = True
+            if all(gs["bidding_done"].values()):
+                return self._determine_auction_results()
+        next_player = self.state.next_alive_player(after=player_id)
+        if next_player is not None:
+            self.set_next_player(next_player)
+        return None
 
-    def _handle_bidding_action(self, player_id: int, action: str) -> None:
-        """Process bidding phase actions: submitting bids for items."""
-        game_state = self.state.game_state
-        bids = self.bid_pattern.findall(action)
-        
-        # Check if player made any bids
-        if not bids:
-            message=f"Player {player_id} submitted no bids this turn."
-            self.state.add_observation(from_id=ta.GAME_ID, to_id=-1, message=message)
-            return
-            
-        # Process each bid
+    def _handle_conversation_action(self, player_id: int, action: str) -> Optional[str]:
+        """Process conversation phase actions (broadcasts and whispers). Nothing is
+        emitted unless every command is valid; returns the failure reason otherwise."""
+        malformed = self._find_malformed_command(
+            action,
+            {"Broadcast": self.bare_broadcast_pattern, "Whisper": self.bare_whisper_pattern},
+        )
+        if malformed is not None:
+            return malformed
+        if self._starts_with_command(action, {"Bid"}):
+            return "Bid commands are only allowed during the bidding phase."
+        for segment in self._bare_command_segments(action):
+            if not (
+                self.bare_broadcast_pattern.fullmatch(segment)
+                or self.bare_whisper_pattern.fullmatch(segment)
+                or self.broadcast_pattern.fullmatch(segment)
+                or self.whisper_pattern.fullmatch(segment)
+            ):
+                return "Conversation actions may contain only complete Broadcast or Whisper commands."
+        events = []
+        for msg in self._parse_broadcasts(action):
+            events.append((-1, f"(Broadcast) Player {player_id} says:{msg}"))
+        for target_pid_str, msg in self._parse_whispers(action):
+            target_pid = int(target_pid_str)
+            if target_pid not in range(self.state.num_players):
+                return f"Attempted to whisper to non-existent Player {target_pid}."
+            if target_pid == player_id:
+                return "You cannot whisper to yourself."
+            events.append((target_pid, f"(Private) Player {player_id} says:{msg}"))
+        if not events:
+            return "Submit at least one Broadcast or Whisper command during conversation."
+
+        for to_id, message in events:
+            if to_id == -1:
+                self.broadcast(message, ta.ObservationType.PLAYER_ACTION, from_id=player_id)
+            else:
+                self.message(to_id, message, ta.ObservationType.PLAYER_ACTION, from_id=player_id)
+        return None
+
+    def _handle_bidding_action(self, player_id: int, action: str) -> Optional[str]:
+        """Process bidding phase actions. Bids are recorded only if every bid command is
+        valid and the total is affordable; returns the failure reason otherwise."""
+        gs = self.game_state
+        malformed = self._find_malformed_command(action, {"Bid": self.bare_bid_pattern})
+        if malformed is not None:
+            return malformed
+        if self._starts_with_command(action, {"Broadcast", "Whisper"}):
+            return "Communication commands are not allowed during the bidding phase."
+        if gs["bidding_done"][player_id]:
+            return "You have already submitted your sealed bids."
+        bids = self._parse_bids(action)
+
+        if not bids:  # not bidding is allowed
+            self.broadcast(f"Player {player_id} submitted no bids this turn.", ta.ObservationType.GAME_MESSAGE)
+            return None
+        for segment in self._bare_command_segments(action):
+            if not (
+                self.bare_bid_pattern.fullmatch(segment)
+                or self.bid_pattern.fullmatch(segment)
+            ):
+                return "A bid submission may contain only complete Bid commands."
+
         total_bid_amount = 0
         valid_bids = []
-        
+        seen_items = set()
         for item_id_str, bid_amount_str in bids:
             try:
-                item_id = int(item_id_str)
-                bid_amount = int(bid_amount_str)
-                
-                # Validate item ID
-                if item_id not in range(self.num_items):
-                    reason=f"Bid on non-existent Item {item_id}."
-                    self.state.set_invalid_move(player_id=player_id, reason=reason)
-                    continue
-                
-                # Validate bid amount is positive
-                if bid_amount <= 0:
-                    reason=f"Bid amount must be positive, got {bid_amount}."
-                    self.state.set_invalid_move(
-                        player_id=player_id, reason=reason)
-                    continue
-                
-                # Track total bid amount to validate against remaining capital
-                total_bid_amount += bid_amount
-                valid_bids.append((item_id, bid_amount))
-                
+                item_id, bid_amount = int(item_id_str), int(bid_amount_str)
             except ValueError:
-                reason=f"Invalid bid format: [{item_id_str}:{bid_amount_str}]"
-                self.state.set_invalid_move(player_id=player_id, reason=reason)
-        
-        # Check if total bids exceed player's capital
-        if total_bid_amount > game_state["remaining_capital"][player_id]:
-            reason=f"Total bid amount {total_bid_amount} exceeds your remaining capital {game_state['remaining_capital'][player_id]}."
-            self.state.set_invalid_move(player_id=player_id, reason=reason)
-            return
-            
-        # Record valid bids
+                return "Bid item and amount must be reasonably sized integers."
+            if item_id not in range(self.num_items):
+                return f"Bid on non-existent Item {item_id}."
+            if bid_amount <= 0:
+                return f"Bid amount must be positive, got {bid_amount}."
+            if item_id in seen_items:
+                return f"Submit at most one bid for Item {item_id}."
+            seen_items.add(item_id)
+            total_bid_amount += bid_amount
+            valid_bids.append((item_id, bid_amount))
+
+        if total_bid_amount > gs["remaining_capital"][player_id]:
+            return f"Total bid amount {total_bid_amount} exceeds your remaining capital {gs['remaining_capital'][player_id]}."
+
         for item_id, bid_amount in valid_bids:
-            game_state["player_bids"][player_id][item_id] = bid_amount
-            
-        # Update the player's remaining capital
-        game_state["remaining_capital"][player_id] -= total_bid_amount
-        
+            gs["player_bids"][player_id][item_id] = bid_amount
+
         # Confirm bids were received (don't reveal specific amounts)
         bid_items = [item_id for item_id, _ in valid_bids]
-        if bid_items:
-            message=f"Player {player_id} submitted bids for Items: {', '.join(map(str, bid_items))}."
-            self.state.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=message)
+        self.message(player_id, f"Player {player_id} submitted bids for Items: {', '.join(map(str, bid_items))}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        return None
 
     def _transition_to_bidding_phase(self) -> None:
         """Transition from conversation phase to bidding phase."""
-        game_state = self.state.game_state
-        game_state["phase"] = "bidding"
-        
-        # Announce the transition
-        message=f"Conversation phase complete! Now entering the bidding phase. Each player will have one turn to submit bids."
-        self.state.add_observation(from_id=ta.GAME_ID, to_id=-1, message=message)
-        
-        # Reminder of bidding format
-        bidding_reminder = (
-            "Bidding Format: '[Bid on Item X: amount]' - Bid the specified amount on Item X\n"
-            "You have to submit all of your bids in a single turn. Highest bidder wins each item."
-        )
-        self.state.add_observation(from_id=ta.GAME_ID, to_id=-1, message=bidding_reminder)
+        self.game_state["phase"] = "bidding"
+        self._announce_bidding_phase()
 
-    def _determine_auction_results(self) -> None:
+    def _announce_bidding_phase(self) -> None:
+        self.broadcast("Conversation phase complete! Now entering the bidding phase. Each player will have one turn to submit bids.", ta.ObservationType.GAME_MESSAGE)
+        self.broadcast(
+            "Bidding format: 'Bid Item X: amount'. Put multiple bids on separate lines or separate them with semicolons.\n"
+            "You have to submit all of your bids in a single turn. Highest bidder wins each item.",
+            ta.ObservationType.GAME_MESSAGE,
+        )
+
+    def _determine_auction_results(self) -> ta.Outcome:
         """Determine the results of the auction and calculate the winner."""
-        game_state = self.state.game_state
+        game_state = self.game_state
         num_players = self.state.num_players
-        
-        # Initialize results
+
         auction_results = {
-            "item_winners": {},                # {item_id: winner_pid}
-            "winning_bids": {},                # {item_id: winning_bid_amount}
-            "player_wins": {}, # defaultdict(list),  # {player_id: [item_ids]}
-            "player_spent": {},# defaultdict(int),  # {player_id: total_spent}
-            "player_value": {},# defaultdict(int),  # {player_id: total_value_of_won_items}
-            "player_profit": {},#defaultdict(int), # {player_id: total_value - total_spent}
-            "player_net_worth": {},#defaultdict(int)  # {player_id: remaining_capital + item_value}
+            "item_winners": {},      # {item_id: winner_pid}
+            "winning_bids": {},      # {item_id: winning_bid_amount}
+            "player_wins": {},       # {player_id: [item_ids]}
+            "player_spent": {},      # {player_id: total_spent}
+            "player_value": {},      # {player_id: total_value_of_won_items}
+            "player_profit": {},     # {player_id: total_value - total_spent}
+            "player_net_worth": {},  # {player_id: remaining_capital + item_value}
         }
-        
-        # Determine winners for each item
+
+        # Determine winners for each item (ties mean nobody wins the item)
         for item_id in range(self.num_items):
             highest_bid = 0
             winner_pid = None
-            
             for pid in range(num_players):
                 bid = game_state["player_bids"][pid].get(item_id, 0)
                 if bid > highest_bid:
@@ -299,55 +341,37 @@ class BlindAuctionEnv(ta.Env):
                     winner_pid = pid
                 elif bid == highest_bid:
                     winner_pid = None
-            
-            # Record the result for this item
+
             if winner_pid is not None and highest_bid > 0:
                 auction_results["item_winners"][item_id] = winner_pid
                 auction_results["winning_bids"][item_id] = highest_bid
-                if winner_pid not in auction_results["player_wins"]:
-                    auction_results["player_wins"][winner_pid] = [] 
-                auction_results["player_wins"][winner_pid].append(item_id)
-                if winner_pid not in auction_results["player_spent"]:
-                    auction_results["player_spent"][winner_pid] = 0 
-                auction_results["player_spent"][winner_pid] += highest_bid
-                
-                # Calculate value to the winner
+                auction_results["player_wins"].setdefault(winner_pid, []).append(item_id)
+                auction_results["player_spent"][winner_pid] = auction_results["player_spent"].get(winner_pid, 0) + highest_bid
                 item_value = game_state["player_item_values"][winner_pid][item_id]
+                auction_results["player_value"][winner_pid] = auction_results["player_value"].get(winner_pid, 0) + item_value
 
-                if not winner_pid in auction_results["player_value"]:
-                    auction_results["player_value"][winner_pid] = 0 
-                auction_results["player_value"][winner_pid] += item_value
-        
         # Calculate profit and net worth for each player
         for pid in range(num_players):
+            auction_results["player_wins"].setdefault(pid, [])
+            auction_results["player_spent"].setdefault(pid, 0)
+            auction_results["player_value"].setdefault(pid, 0)
             value = auction_results["player_value"].get(pid, 0)
             spent = auction_results["player_spent"].get(pid, 0)
-            remaining = game_state["remaining_capital"].get(pid)
-            
-            # Profit = value of items - amount spent
+            remaining = self.starting_capital - spent
+            game_state["remaining_capital"][pid] = remaining
             auction_results["player_profit"][pid] = value - spent
-            
-            # Net worth = remaining capital + value of items
             auction_results["player_net_worth"][pid] = remaining + value
-        
-        # Save results to game state
+
         game_state["auction_results"] = auction_results
-        
-        # Announce results
         self._announce_auction_results()
-        
-        # Determine the winner
-        self._determine_winner()
+        return self._determine_winner()
 
     def _announce_auction_results(self) -> None:
         """Announce the results of the auction to all players."""
-        game_state = self.state.game_state
+        game_state = self.game_state
         results = game_state["auction_results"]
-        
-        # Announce overall auction results
+
         message = "==================== AUCTION RESULTS ====================\n\n"
-        
-        # Results for each item
         message += "🏆 ITEM RESULTS:\n"
         for item_id in range(self.num_items):
             item_name = game_state["item_names"][item_id]
@@ -360,111 +384,134 @@ class BlindAuctionEnv(ta.Env):
                 message += f"  Value to Player {winner_pid}: {item_value} coins (Profit: {profit} coins)\n"
             else:
                 message += f"- Item {item_id} ({item_name}): No valid bids\n"
-        
+
         message += "\n💰 PLAYER RESULTS:\n"
         for pid in range(self.state.num_players):
-            # Calculate remaining capital
             remaining = game_state["remaining_capital"][pid]
             initial = self.starting_capital
-            spent = results["player_spent"].get(pid, 0) #pid]
-            value = results["player_value"].get(pid, 0) #[pid]
-            profit = results["player_profit"].get(pid, 0) #[pid]
-            net_worth = remaining + value  # Net worth = remaining capital + value of items
-            
-            # Add net worth to player results
-            # results["player_net_worth"] = {} #defaultdict(int)
+            spent = results["player_spent"].get(pid, 0)
+            value = results["player_value"].get(pid, 0)
+            profit = results["player_profit"].get(pid, 0)
+            net_worth = remaining + value
             results["player_net_worth"][pid] = net_worth
-            
+
             message += f"- Player {pid}:\n"
-            
-            # Show items won with details
             items_won = results["player_wins"].get(pid, [])
             if items_won:
-                message += f"  Items Won:\n"
+                message += "  Items Won:\n"
                 for item_id in items_won:
                     item_name = game_state["item_names"][item_id]
                     bid = results["winning_bids"][item_id]
                     value_to_player = game_state["player_item_values"][pid][item_id]
                     message += f"  - Item {item_id} ({item_name}): Paid {bid} coins, Value {value_to_player} coins\n"
             else:
-                message += f"  Items Won: None\n"
-            
-            # Show financial summary
-            message += f"  Financial Summary:\n"
+                message += "  Items Won: None\n"
+
+            message += "  Financial Summary:\n"
             message += f"  - Initial Capital: {initial} coins\n"
             message += f"  - Total Spent: {spent} coins\n"
             message += f"  - Remaining Capital: {remaining} coins\n"
             message += f"  - Total Item Value: {value} coins\n"
             message += f"  - Profit: {profit} coins\n"
             message += f"  - Net Worth: {net_worth} coins\n\n"
-        
-        # Send the results
-        self.state.add_observation(
-            from_id=ta.GAME_ID,
-            to_id=-1,
-            message=message
-        )
 
-    def _determine_winner(self) -> None:
+        self.broadcast(message, ta.ObservationType.GAME_MESSAGE)
+
+    def _determine_winner(self) -> ta.Outcome:
         """Determine the winner of the auction based on net worth."""
-        game_state = self.state.game_state
+        game_state = self.game_state
         results = game_state["auction_results"]
-        
-        # Find the player(s) with the highest net worth
-        max_worth = max(results["player_net_worth"].values(), default=0)
-        winners = []
-        for pid, worth in results["player_net_worth"].items():
-            if worth == max_worth:
-                winners.append(pid)
 
-        # Set the winner(s)
+        max_worth = max(results["player_net_worth"].values(), default=0)
+        winners = [pid for pid, worth in results["player_net_worth"].items() if worth == max_worth]
+
         if len(winners) == 1:
             winner = winners[0]
-            profit = results["player_profit"][winner]
-            spent = results["player_spent"][winner]
+            profit = results["player_profit"].get(winner, 0)
             remaining = game_state["remaining_capital"][winner]
-            item_value = results["player_value"][winner]
-            
+            item_value = results["player_value"].get(winner, 0)
             reason = (
                 f"Player {winner} won with a final net worth of {max_worth} coins! "
                 f"(Remaining capital: {remaining} coins, Item value: {item_value} coins, "
                 f"Profit: {profit} coins)"
             )
-            self.state.set_winners(player_ids=[winner], reason=reason)
-        else:
-            # For ties, provide detailed info for all winners
-            details = []
-            for pid in winners:
-                profit = results["player_profit"][pid]
-                remaining = game_state["remaining_capital"][pid]
-                details.append(
-                    f"Player {pid} (Net worth: {max_worth} coins, "
-                    f"Remaining capital: {remaining} coins, "
-                    f"Profit: {profit} coins)"
-                )
-            
-            reason = f"Multiple players tied with a net worth of {max_worth} coins:\n" + "\n".join(details)
-            self.state.set_draw(reason=reason)
+            return self.winner(winner, reason=reason)
+
+        if len(winners) == self.state.num_players:
+            return self.draw(reason=f"All players tied with a net worth of {max_worth} coins.")
+
+        details = []
+        for pid in winners:
+            profit = results["player_profit"].get(pid, 0)
+            remaining = game_state["remaining_capital"][pid]
+            details.append(
+                f"Player {pid} (Net worth: {max_worth} coins, "
+                f"Remaining capital: {remaining} coins, "
+                f"Profit: {profit} coins)"
+            )
+        reason = f"Multiple players tied for first with a net worth of {max_worth} coins:\n" + "\n".join(details)
+        return self.winner(winners, reason=reason)
 
     def _parse_broadcasts(self, text: str) -> List[str]:
-        """Process text to extract broadcast messages."""
+        """Extract canonical bare and legacy bracketed broadcast commands."""
         results = []
-        raw = self.broadcast_pattern.findall(text)
-        for g1, g2, g3 in raw:
+        for segment in self._bare_command_segments(text):
+            match = self.bare_broadcast_pattern.fullmatch(segment)
+            if match:
+                results.append(" " + match.group(1).strip())
+        for g1, g2, g3 in self.broadcast_pattern.findall(text):
             msg = g1 or g2 or g3
             if msg and msg.strip():
-                # Prepend a space if not present
                 if not msg.startswith(" "):
                     msg = " " + msg
                 results.append(msg)
         return results
 
     def _parse_whispers(self, text: str) -> List[Tuple[str, str]]:
-        """Process text to extract whisper tokens."""
+        """Extract canonical bare and legacy bracketed whisper commands."""
         results = []
-        matches = self.whisper_pattern.findall(text)
-        for pid_str, msg in matches:
+        for segment in self._bare_command_segments(text):
+            match = self.bare_whisper_pattern.fullmatch(segment)
+            if match:
+                results.append((match.group(1), " " + match.group(2).strip()))
+        for pid_str, msg in self.whisper_pattern.findall(text):
             if msg and not msg.startswith(" "):
                 msg = " " + msg
             results.append((pid_str, msg))
         return results
+
+    def _parse_bids(self, text: str) -> List[Tuple[str, str]]:
+        """Extract canonical bare and legacy bracketed bid commands."""
+        results = []
+        for segment in self._bare_command_segments(text):
+            match = self.bare_bid_pattern.fullmatch(segment)
+            if match:
+                results.append(match.groups())
+        results.extend(self.bid_pattern.findall(text))
+        return results
+
+    def _bare_command_segments(self, text: str) -> List[str]:
+        return [segment.strip() for segment in re.split(r"[;\n]+", text) if segment.strip()]
+
+    def _find_malformed_command(self, text: str, patterns: Dict[str, re.Pattern]) -> Optional[str]:
+        for segment in self._bare_command_segments(text):
+            for command, pattern in patterns.items():
+                if not re.match(rf"^\[?\s*{command}\b", segment, re.IGNORECASE):
+                    continue
+                if segment.lstrip().startswith("["):
+                    legacy_pattern = {
+                        "Broadcast": self.broadcast_pattern,
+                        "Whisper": self.whisper_pattern,
+                        "Bid": self.bid_pattern,
+                    }[command]
+                    if not legacy_pattern.fullmatch(segment):
+                        return f"Malformed {command} command."
+                elif not pattern.fullmatch(segment):
+                    return f"Malformed {command} command."
+        return None
+
+    def _starts_with_command(self, text: str, commands: set[str]) -> bool:
+        return any(
+            re.match(rf"^\[?\s*(?:{'|'.join(commands)})\b", segment, re.IGNORECASE)
+            for segment in self._bare_command_segments(text)
+        )
