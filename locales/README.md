@@ -1,6 +1,6 @@
 # textarena-locales
 
-Translations of [TextArena](https://github.com/LeonGuertler/TextArena) games into 192 languages. Install it with
+Translations of [TextArena](https://github.com/TextArena/TextArena) games into 192 languages. Install it with
 `pip install "textarena[translations]"` and wrap an environment in `ta.wrappers.TranslationWrapper` to show each
 player the game in their own language. English needs no translations, so the core `textarena` package works
 without this one.

@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -8,17 +8,19 @@ version = "1.0.0"
 description = "Translations of TextArena games into 192 languages, used by textarena's TranslationWrapper"
 readme = "README.md"
 requires-python = ">=3.10"
-license = {text = "MIT"}
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [
     {name = "Leon Guertler", email = "Guertlerlo@cfar.a-star.edu.sg"},
     {name = "Bobby Cheng", email = "bobbycxy1994@gmail.com"},
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/LeonGuertler/TextArena"
+"Homepage" = "https://github.com/TextArena/TextArena"
 
 [tool.setuptools]
-packages = ["textarena_locales"]
+packages = ["textarena_locales", "textarena_locales.envs"]
 
 [tool.setuptools.package-data]
-textarena_locales = ["*.json", "envs/*.json"]
+textarena_locales = ["*.json"]
+"textarena_locales.envs" = ["*.json"]

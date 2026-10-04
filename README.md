@@ -1,21 +1,21 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: light)" srcset="/docs/ta_black.svg">
-  <img alt="TextArena logo" src="/docs/ta_white.svg" width="25%" height="25%">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/TextArena/TextArena/main/docs/ta_black.svg">
+  <img alt="TextArena logo" src="https://raw.githubusercontent.com/TextArena/TextArena/main/docs/ta_white.svg" width="25%" height="25%">
 </picture>
 
 108 single-, two-, and multi-player text games for evaluating and training LLM agents.
 
 <h3>
 
-[Games](textarena/envs/README.md) | [Examples](examples) | [Paper](https://arxiv.org/abs/2504.11442) | [Discord](https://discord.gg/dnScm47kNq)
+[Games](https://github.com/TextArena/TextArena/blob/main/textarena/envs/README.md) | [Examples](https://github.com/TextArena/TextArena/tree/main/examples) | [Paper](https://arxiv.org/abs/2504.11442) | [Discord](https://discord.gg/dnScm47kNq)
 
 </h3>
 
 [![PyPI version](https://img.shields.io/pypi/v/textarena.svg)](https://pypi.org/project/textarena)
 [![PyPI Downloads](https://static.pepy.tech/badge/textarena)](https://pepy.tech/projects/textarena)
-[![GitHub Repo stars](https://img.shields.io/github/stars/LeonGuertler/TextArena)](https://github.com/LeonGuertler/TextArena/stargazers)
+[![GitHub Repo stars](https://img.shields.io/github/stars/TextArena/TextArena)](https://github.com/TextArena/TextArena/stargazers)
 [![Discord](https://img.shields.io/discord/1257951838322561075?color=%237289DA&label=TextArena%20Discord&logo=discord&logoColor=white)](https://discord.gg/dnScm47kNq)
 [![arXiv](https://img.shields.io/badge/arXiv-2504.11442-b31b1b.svg)](https://arxiv.org/abs/2504.11442)
 
@@ -25,7 +25,7 @@ TextArena puts board and card games, puzzles, negotiation, social deduction, and
 one Gym-style interface. Every game enforces its own rules, shows each player only what they may see, and returns
 rewards, so models can be evaluated against each other or trained through self-play. A seed replays a game
 exactly, and observations can be translated into 192 languages. Upgrading from 0.x? See the
-[changelog](CHANGELOG.md) for what changed in 1.0 and how to migrate.
+[changelog](https://github.com/TextArena/TextArena/blob/main/CHANGELOG.md) for what changed in 1.0 and how to migrate.
 
 ## Installation
 
@@ -86,7 +86,7 @@ Every configuration is registered twice:
 
 ## Games
 
-There are 30 single-player, 52 two-player, and 26 multi-player games. The [catalog](textarena/envs/README.md)
+There are 30 single-player, 52 two-player, and 26 multi-player games. The [catalog](https://github.com/TextArena/TextArena/blob/main/textarena/envs/README.md)
 lists them all, and each game's README covers its rules, actions, rewards, registered configurations, and
 parameters. Settings that are not registered are a keyword away: `ta.make("Chess-v1", max_turns=250)`.
 
@@ -129,7 +129,7 @@ model is unreachable, is recorded with its error instead of stopping the evaluat
 
 ## Training
 
-[`examples/tinker`](examples/tinker) is a compact self-play RL loop on Tinker. Projects built on TextArena include:
+[`examples/tinker`](https://github.com/TextArena/TextArena/tree/main/examples/tinker) is a compact self-play RL loop on Tinker. Projects built on TextArena include:
 
 - [SPIRAL](https://arxiv.org/pdf/2506.24119): reinforcement learning through self-play on zero-sum games improves
   reasoning.
@@ -162,10 +162,10 @@ line, so a line whose English wording changes falls back to English instead of s
 
 <div align="center">
 
-<img src="docs/othello.gif" alt="Multilingual Othello in TextArena" width="48%">
-<img src="docs/connectfour.gif" alt="Multilingual Connect Four in TextArena" width="48%">
-<img src="docs/simpletak.gif" alt="Multilingual SimpleTak in TextArena" width="48%">
-<img src="docs/nim.gif" alt="Multilingual Nim in TextArena" width="48%">
+<img src="https://raw.githubusercontent.com/TextArena/TextArena/main/docs/othello.gif" alt="Multilingual Othello in TextArena" width="48%">
+<img src="https://raw.githubusercontent.com/TextArena/TextArena/main/docs/connectfour.gif" alt="Multilingual Connect Four in TextArena" width="48%">
+<img src="https://raw.githubusercontent.com/TextArena/TextArena/main/docs/simpletak.gif" alt="Multilingual SimpleTak in TextArena" width="48%">
+<img src="https://raw.githubusercontent.com/TextArena/TextArena/main/docs/nim.gif" alt="Multilingual Nim in TextArena" width="48%">
 
 </div>
 
@@ -188,7 +188,7 @@ Languages fall into two confidence tiers:
   substantially more machine correction.
 
 All shipped low-resource localizations reach at least 94% measured fidelity after repair. Per-language scores are
-in [`locales/textarena_locales/confidence.json`](locales/textarena_locales/confidence.json), and the pipeline that
+in [`locales/textarena_locales/confidence.json`](https://github.com/TextArena/TextArena/blob/main/locales/textarena_locales/confidence.json), and the pipeline that
 translated, verified, and repaired them is on the
 [`multilingual`](https://github.com/TextArena/TextArena/tree/multilingual) branch. Research using these
 localizations should report each language's confidence tier and distinguish machine-verified from native-reviewed
@@ -205,9 +205,9 @@ pip install -e ./locales -e ".[test]"
 pytest
 ```
 
-[Adding a game](textarena/envs/README.md#adding-a-game) describes the folder layout and the engine hooks. After
+[Adding a game](https://github.com/TextArena/TextArena/blob/main/textarena/envs/README.md#adding-a-game) describes the folder layout and the engine hooks. After
 changing a game, `python scripts/generate_env_docs.py` updates the generated parts of the docs and
-`python scripts/locales.py extract` updates the translation catalogs in [`locales/`](locales), the source of the
+`python scripts/locales.py extract` updates the translation catalogs in [`locales/`](https://github.com/TextArena/TextArena/tree/main/locales), the source of the
 `textarena-locales` package. Questions and ideas are welcome on [Discord](https://discord.gg/dnScm47kNq).
 
 ## Citation
