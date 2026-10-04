@@ -135,19 +135,28 @@ def test_jury_uses_injected_rng_without_mutating_global_random_state():
     assert random.random() == expected
 
 
+class _Juror:
+    def __init__(self, response):
+        self.response = response
+
+    def __call__(self, prompt):
+        if isinstance(self.response, Exception):
+            raise self.response
+        return self.response
+
+
 def test_jury_rejects_invalid_or_failed_votes():
-    class Juror:
-        def __init__(self, response):
-            self.response = response
-
-        def __call__(self, prompt):
-            if isinstance(self.response, Exception):
-                raise self.response
-            return self.response
-
     jury = OpenRouterJury.__new__(OpenRouterJury)
     jury.options = ["Affirmative", "Negative"]
-    jury.jury = [Juror("Affirmative because..."), Juror(RuntimeError("offline"))]
+    jury.jury = [_Juror("Affirmative because..."), _Juror(RuntimeError("offline"))]
 
     with pytest.raises(RuntimeError, match="2 of 2 jurors"):
         jury.evaluate("context")
+
+
+def test_jury_accepts_quoted_or_punctuated_votes():
+    jury = OpenRouterJury.__new__(OpenRouterJury)
+    jury.options = ["Affirmative", "Negative"]
+    jury.jury = [_Juror("'Affirmative'"), _Juror(" negative. "), _Juror("**Affirmative**"), _Juror("“Negative”")]
+
+    assert jury.evaluate("context") == {"Affirmative": 0.5, "Negative": 0.5}

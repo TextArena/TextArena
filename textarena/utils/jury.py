@@ -99,7 +99,7 @@ class OpenRouterJury:
         for juror in self.jury:
             try:
                 judgement = juror(jury_prompt)
-                normalized = judgement.strip().casefold()
+                normalized = judgement.strip().strip("\"'“”‘’*.!").strip().casefold()
                 chosen_option = next(
                     (option for option in self.options if option.casefold() == normalized),
                     None,
