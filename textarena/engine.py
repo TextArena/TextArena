@@ -654,13 +654,21 @@ class GameEnv(Env):
         return info
 
 
-def replay(record: Dict[str, Any], steps: Optional[int] = None) -> GameEnv:
+def replay(record: Dict[str, Any], steps: Optional[int] = None, game: Optional[type] = None) -> GameEnv:
     """Rebuild a game from `GameEnv.record()` and apply its first `steps` actions (all by default).
 
-    Returns the unwrapped game; its event log (`env.state.events`) holds everything every player saw.
+    Records name the game's class, so only TextArena's own games are imported from them; pass `game` to replay a
+    game defined elsewhere. Returns the unwrapped game; its event log (`env.state.events`) holds everything every
+    player saw.
     """
-    module_name, class_name = record["game"].split(":")
-    env = getattr(importlib.import_module(module_name), class_name)(**record["parameters"])
+    if game is None:
+        module_name, _, class_name = record["game"].partition(":")
+        if not module_name.startswith("textarena.envs."):
+            raise ValueError(f"Records only name TextArena games; pass game= to replay {record['game']!r}.")
+        game = getattr(importlib.import_module(module_name), class_name)
+    if not (isinstance(game, type) and issubclass(game, GameEnv)):
+        raise ValueError(f"{game!r} is not a TextArena game.")
+    env = game(**record["parameters"])
     env._replay_answers = list(record.get("external_answers", []))
     env.reset(num_players=record["num_players"], seed=record["seed"])
     for action in record["actions"][:steps]:

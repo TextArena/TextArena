@@ -153,8 +153,22 @@ def test_replays_reuse_recorded_answers_and_skip_unprocessed_actions():
     env.step("judged")
     record = env.record()
     assert record["actions"] == ["first", "judged"] and record["external_answers"] == [6]
-    replayed = ta.replay(record)
+    replayed = ta.replay(record, game=_JudgedEnv)
     assert replayed.state.rewards == {0: 6} and replayed.state.events[-1] == env.state.events[-1]
+
+
+@pytest.mark.parametrize("target", ["subprocess:Popen", "textarena.envs.registration:make", "os:system"])
+def test_replay_never_calls_anything_but_a_textarena_game(target):
+    with pytest.raises(ValueError):
+        ta.replay({"game": target, "parameters": {"args": "echo unsafe"}, "num_players": 1, "seed": 0, "actions": []})
+
+
+def test_replay_accepts_an_explicit_game_class():
+    env = _JudgedEnv()
+    env.reset(seed=1)
+    env.step("first")
+    record = env.record()
+    assert ta.replay(record, game=_JudgedEnv).state.turn == 1
 
 
 def test_records_rebuild_a_seeded_game_from_its_parameters():
