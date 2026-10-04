@@ -4,7 +4,7 @@ from typing import Any, Dict, List, Tuple, Union
 
 import textarena as ta
 from textarena.envs.WordLadder.renderer import create_board_str
-from textarena.envs.utils.word_lists import EnglishDictionary
+from textarena.utils.word_lists import EnglishDictionary
 
 
 from nltk.corpus import words

@@ -23,7 +23,6 @@ from textarena.envs.registration import ENV_REGISTRY
 SKIP = {
     "Debate": "outcome requires an LLM jury (network)",
     "ScenarioPlanning": "outcome requires an LLM jury (network)",
-    "BabyAiText": "requires external BabyAI/gym dependency",
     "GuessWho": "requires an OpenRouter gamemaster agent (network)",
     "TwentyQuestions": "requires an OpenRouter gamemaster agent (network)",
 }
@@ -61,10 +60,7 @@ def _load_env_or_skip(env_id, spec):
     dir_name = spec.entry_point.split(".envs.")[1].split(".")[0]
     if dir_name in SKIP:
         pytest.skip(SKIP[dir_name])
-    try:
-        cls = _resolve_class(spec)
-    except ImportError as exc:
-        pytest.skip(f"import failed (missing optional dependency): {exc}")
+    cls = _resolve_class(spec)
     assert isinstance(cls, type) and issubclass(cls, GameEnv), f"{spec.entry_point} must subclass GameEnv"
     return cls, NUM_PLAYERS_OVERRIDE.get(dir_name, cls.min_players)
 
@@ -135,13 +131,7 @@ def test_observations_consumed_exactly_once(env_id, spec):
 
 @pytest.mark.parametrize("env_id,spec", sorted(ENV_REGISTRY.items()), ids=lambda v: v if isinstance(v, str) else "")
 def test_every_registered_variant_resets(env_id, spec):
-    dir_name = spec.entry_point.split(".envs.")[1].split(".")[0]
-    if dir_name == "BabyAiText":
-        pytest.skip(SKIP[dir_name])
-    try:
-        cls = _resolve_class(spec)
-    except ImportError as exc:
-        pytest.skip(f"import failed (missing optional dependency): {exc}")
+    cls = _resolve_class(spec)
     num_players = _variant_player_count(spec, cls)
     env = ta.make(env_id)
     env.reset(num_players=num_players, seed=19)

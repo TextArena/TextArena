@@ -3,10 +3,10 @@ import importlib
 
 import pytest
 
-from textarena.envs.utils.jury import OpenRouterJury
-from textarena.envs.utils.word_lists import EnglishDictionary
+from textarena.utils.jury import OpenRouterJury
+from textarena.utils.word_lists import EnglishDictionary
 
-word_lists_module = importlib.import_module("textarena.envs.utils.word_lists")
+word_lists_module = importlib.import_module("textarena.utils.word_lists")
 
 
 def test_dictionary_does_not_download_nltk_when_disabled(monkeypatch):

@@ -1,7 +1,7 @@
 """ Register all game environments """ 
 
 from textarena.envs.registration import register, register_with_versions
-from textarena.envs.utils.jury import OpenRouterJury
+from textarena.utils.jury import OpenRouterJury
 from textarena.wrappers import FullHistoryObservationWrapper, BoardObservationWrapper
 
 # '-mdp' wrapper choices (the default variant always uses CurrentTurnObservationWrapper)
@@ -519,9 +519,6 @@ register_with_versions(id="TwoRoomsAndABoom-v0", entry_point="textarena.envs.Two
 
 # Santorini Base Version with Fixed Worker Placement 
 register_with_versions(id="SantoriniBaseFixed-v0", entry_point="textarena.envs.Santorini.env:SantoriniBaseFixedWorkerEnv", mdp_wrappers=HISTORY_MDP)
-
-# BabyAiText (single-player)
-register_with_versions(id="BabyAiText-v0", entry_point="textarena.envs.BabyAiText.env:BabyAiTextEnv", mdp_wrappers=HISTORY_MDP)
 
 # New Recruit
 register_with_versions(id="NewRecruit-v0", entry_point="textarena.envs.NewRecruit.env:NewRecruitEnv", mdp_wrappers=HISTORY_MDP)

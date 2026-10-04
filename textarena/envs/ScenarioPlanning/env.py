@@ -24,7 +24,7 @@ class ScenarioPlanningEnv(ta.GameEnv):
             scenarios_path (str): Path to the JSON file containing scenarios.
         """
         if jury_class is None:
-            from textarena.envs.utils import OpenRouterJury  # or from your local import
+            from textarena.utils import OpenRouterJury
             jury_class = OpenRouterJury
         if not callable(jury_class):
             raise TypeError("jury_class must be callable.")

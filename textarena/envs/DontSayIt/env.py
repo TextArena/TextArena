@@ -5,7 +5,7 @@ from typing import Any, Dict, Optional, Union
 from nltk.corpus import words
 
 import textarena as ta
-from textarena.envs.utils.word_lists import EnglishDictionary
+from textarena.utils.word_lists import EnglishDictionary
 
 
 class DontSayItEnv(ta.GameEnv):

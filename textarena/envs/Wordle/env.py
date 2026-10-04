@@ -5,7 +5,7 @@ from typing import Optional, List, Dict, Any, Union
 
 import textarena as ta
 from textarena.envs.Wordle.renderer import create_board_str
-from textarena.envs.utils.word_lists import EnglishDictionary
+from textarena.utils.word_lists import EnglishDictionary
 
 class WordleEnv(ta.GameEnv):
     min_players = 1

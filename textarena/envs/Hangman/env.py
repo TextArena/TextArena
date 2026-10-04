@@ -5,7 +5,7 @@ from nltk.corpus import words
 
 import textarena as ta
 from textarena.envs.Hangman.renderer import create_board_str
-from textarena.envs.utils.word_lists import EnglishDictionary
+from textarena.utils.word_lists import EnglishDictionary
 
 
 class HangmanEnv(ta.GameEnv):

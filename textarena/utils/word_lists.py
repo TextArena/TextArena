@@ -90,13 +90,13 @@ class EnglishDictionary:
     ) -> set[str]:
         """Load words from a .dic file inside the package's data folder."""
         with (
-            importlib.resources.files("textarena.envs.utils.data")
+            importlib.resources.files("textarena.utils.data")
             .joinpath(filename)
             .open("r") as f
         ):
             lines = f.readlines()[1:]  # Skip first line (word count)
         with (
-            importlib.resources.files("textarena.envs.utils.data")
+            importlib.resources.files("textarena.utils.data")
             .joinpath(acc_filename)
             .open("r") as f
         ):
