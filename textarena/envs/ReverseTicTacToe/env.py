@@ -16,10 +16,7 @@ def _parse_cell(text: str) -> Optional[int]:
 class ReverseTicTacToeEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
-    action_pattern = (
-        r"^\s*(?P<bracket>\[)?\s*(?P<cell>[0-9]+)\s*"
-        r"(?(bracket)\])\s*$"
-    )
+    action_pattern = r"^(?P<cell>[0-9]+)$"
     action_format = "a cell number from 0 to 8, for example '4'"
 
     def __init__(self):

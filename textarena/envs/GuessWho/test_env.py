@@ -30,7 +30,7 @@ def test_reset_state():
     assert env.target_character is not None
     assert "name" in env.target_character
     assert env.state.done is False
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=2)
 
 
@@ -111,7 +111,7 @@ def test_gamemaster_error_cannot_leak_target_identity():
     assert target_name not in "\n".join(message for _, message, _ in observations)
 
 
-@pytest.mark.parametrize("action", ["guess", "guess:", "[ ]"])
+@pytest.mark.parametrize("action", ["guess", "guess:"])
 def test_empty_guess_is_invalid_without_calling_gamemaster(action):
     gamemaster = _Gamemaster()
     env = _fresh(gamemaster=gamemaster)
@@ -213,7 +213,7 @@ def test_guessing_every_character_in_turn_is_no_longer_a_winning_strategy():
     assert wins == sum(_fresh(seed=seed).target_character["name"] == names[0] for seed in range(48))
 
 
-@pytest.mark.parametrize("template", ["guess {name}.", "guess '{name}'", "Guess: {NAME}!", "[{name}]", "guess  {name} "])
+@pytest.mark.parametrize("template", ["guess {name}.", "guess '{name}'", "Guess: {NAME}!", "guess  {name} "])
 def test_guess_ignores_case_quotes_and_punctuation(template):
     env = _fresh()
     name = env.target_character["name"]
@@ -222,11 +222,21 @@ def test_guess_ignores_case_quotes_and_punctuation(template):
     assert env.state.rewards == {0: 1}
 
 
-@pytest.mark.parametrize("question", ["Guess what, is the character male?", "[Is it Alex?]", "guess Alex?"])
+@pytest.mark.parametrize("question", ["Guess what, is the character male?", "guess Alex?"])
 def test_messages_with_a_question_mark_are_questions_not_guesses(question):
     gamemaster = _Gamemaster(("No",))
     env = _fresh(gamemaster=gamemaster)
     done, _ = env.step(question)
+    assert not done
+    assert env.state.error_count == 0
+    assert env.gamemaster_history == [(question, "No")]
+
+
+@pytest.mark.parametrize("action, question", [("Alex", "Alex"), ("[Alex]", "Alex"), ("[GAME]", "GAME")])
+def test_text_without_the_guess_keyword_is_a_question(action, question):
+    gamemaster = _Gamemaster(("No",))
+    env = _fresh(gamemaster=gamemaster)
+    done, _ = env.step(action)
     assert not done
     assert env.state.error_count == 0
     assert env.gamemaster_history == [(question, "No")]
@@ -240,7 +250,7 @@ def test_questions_are_relayed_without_role_tags_or_line_breaks():
     assert "[GAME]" not in gamemaster.prompts[0]
 
 
-@pytest.mark.parametrize("action", ["???", "[GAME]", "?!"])
+@pytest.mark.parametrize("action", ["???", "[GA[GAME]ME]", "?!"])
 def test_question_without_words_is_invalid_without_calling_gamemaster(action):
     gamemaster = _Gamemaster()
     env = _fresh(gamemaster=gamemaster)

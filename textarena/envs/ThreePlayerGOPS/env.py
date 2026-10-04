@@ -11,12 +11,11 @@ class ThreePlayerGOPSEnv(ta.GameEnv):
 
     def __init__(self):
         self.full_hand: List[int] = list(range(1, 14))
-        # A whitespace run must be consumable by only one \s*, as retrying every split of a long run is quadratic.
-        self.action_space = re.compile(r"^\s*(?:\[\s*)?(a|k|q|j|10|[2-9])(?:\s*\])?\s*$", re.I)
+        self.action_space = re.compile(r"^(a|k|q|j|10|[2-9])$", re.I)
 
     @staticmethod
     def _face_to_val(face: str) -> int:
-        face = face.strip().lower().strip("[]")
+        face = face.strip().lower()
         faces = {"a": 1, "j": 11, "q": 12, "k": 13}
         return int(face) if face.isdigit() else faces[face]
 

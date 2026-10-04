@@ -171,8 +171,6 @@ class TabooEnv(ta.GameEnv):
         if not isinstance(action, str) or any(char in action for char in "\r\n"):
             return None
         guess = action.strip()
-        if guess.startswith("[") and guess.endswith("]"):
-            guess = guess[1:-1].strip()
         if not guess or any(unicodedata.category(char).startswith("C") for char in guess):
             return None
         if not any(char.isalpha() or char.isdigit() for char in guess):
@@ -211,7 +209,7 @@ class TabooEnv(ta.GameEnv):
                     or any(not isinstance(word, str) for word in taboo_words)
                 ):
                     raise ValueError(f"Category '{category}' contains an invalid word entry.")
-                # Empty entries in legacy data carry no rule and must not become
+                # Empty entries in the data carry no rule and must not become
                 # an empty regex alternative that rejects every possible clue.
                 clean_target = self._clean_text(target)
                 clean_taboo_words = [
@@ -223,10 +221,9 @@ class TabooEnv(ta.GameEnv):
             raise ValueError(f"No words found for selected categories: {', '.join(self.categories)}")
         return data
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        assert num_players % 2 == 0, "Number of players must be even for Taboo game."
-        assert num_players >= 4, "Taboo game requires at least 4 players."
-        super().reset(num_players=num_players, seed=seed)
+    def check_num_players(self, num_players: int) -> None:
+        if num_players % 2:
+            raise ValueError(f"Taboo needs an even number of players (two equal teams), received {num_players}.")
 
     def setup(self) -> Dict[str, Any]:
         self.data = self._load_data(self.data_path)

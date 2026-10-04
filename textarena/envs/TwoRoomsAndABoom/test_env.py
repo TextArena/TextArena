@@ -45,13 +45,13 @@ def _play_discussion(env, max_steps=100):
 
 def test_too_few_players_raises_error():
     env = TwoRoomsAndABoomEnv()
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=5, seed=42)  # minimum is 6
 
 
 def test_too_many_players_raises_error():
     env = TwoRoomsAndABoomEnv()
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=21, seed=42)  # maximum is 20
 
 

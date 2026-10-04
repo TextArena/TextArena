@@ -336,10 +336,6 @@ class RushHourEnv(ta.GameEnv):
                 f"Action is too long (maximum {self.MAX_ACTION_CHARS} characters)."
             )
         action_text = move.strip()
-        if action_text.startswith("[") or action_text.endswith("]"):
-            if not (action_text.startswith("[") and action_text.endswith("]")):
-                return self.invalid("Invalid action: mismatched brackets.")
-            action_text = action_text[1:-1].strip()
         match = self.ACTION_RE.fullmatch(action_text)
         if not match:
             return self.invalid("Invalid action. Use format 'A+' / 'B-'.")

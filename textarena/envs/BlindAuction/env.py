@@ -29,32 +29,11 @@ class BlindAuctionEnv(ta.GameEnv):
         re.IGNORECASE,
     )
 
-    # Legacy bracketed commands retained for backwards compatibility.
-    # A whitespace run must be consumable in only one way, as retrying every split of a long run is
-    # quadratic: e.g. `\s*(.*?)\]` is written `\s*(?!\s)([^\]]*)\]`, which matches the same text.
-    broadcast_pattern = re.compile(
-        r"(?:"
-        r"\s*\[Broadcast\s*:\s*(?!\s)([^\]]*)\]"              # Alternative A: colon present
-        r"|"
-        r"\s*\[Broadcast(\s+(?!\s)[^\]]*)\]"                  # Alternative B: no colon, whitespace inside
-        r"|"
-        r"\s*\[Broadcast\](\s+(?:\s*[^\s\[])*)(?=\s*\[|\s*$)"  # Alternative C: message appears after bracket
-        r")",
-        re.IGNORECASE | re.DOTALL
-    )
-
-    whisper_pattern = re.compile(
-        r"\s*\[Whisper\s+(?:to\s+)?(?:Player\s+)?(\d+)\s*:\s*(?!\s)([^\]]*)\]",
-        re.IGNORECASE | re.DOTALL,
-    )
-    bid_pattern = re.compile(r"\[Bid\s+(?:on\s+)?(?:Item\s+)?(\d+)\s*:\s*(\d+)\]", re.IGNORECASE)
-
     bare_patterns = {"Broadcast": bare_broadcast_pattern, "Whisper": bare_whisper_pattern, "Bid": bare_bid_pattern}
-    legacy_patterns = {"Broadcast": broadcast_pattern, "Whisper": whisper_pattern, "Bid": bid_pattern}
-    command_name_pattern = re.compile(r"\[?\s*(Broadcast|Whisper|Bid)\b", re.IGNORECASE)
+    command_name_pattern = re.compile(r"(Broadcast|Whisper|Bid)\b", re.IGNORECASE)
     # Line breaks always separate commands, but a semicolon only does when a command follows it,
     # so message text may contain semicolons.
-    command_separator = re.compile(r";\s*(?=(?:\[\s*)?(?:Broadcast|Whisper|Bid)\b)", re.IGNORECASE)
+    command_separator = re.compile(r";\s*(?=(?:Broadcast|Whisper|Bid)\b)", re.IGNORECASE)
     # The lookbehind keeps the trailing alternative from restarting at every character of an inner
     # whitespace run, which is quadratic.
     segment_padding = re.compile(r"^[\s;]+|(?<![\s;])[\s;]+$")
@@ -107,11 +86,6 @@ class BlindAuctionEnv(ta.GameEnv):
             viewer_id=self.state.current_player_id,
             reveal_all=self.state.done,
         )
-
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        # Phase counters terminate the game explicitly, including forfeited turns.
-        self.max_turns = None
-        super().reset(num_players=num_players, seed=seed)
 
     def setup(self) -> Dict[str, Any]:
         num_players = self.state.num_players
@@ -283,9 +257,8 @@ class BlindAuctionEnv(ta.GameEnv):
         if gs["bidding_done"][player_id]:
             return "You have already submitted your sealed bids."
         bids = commands["Bid"]
-        embeds_bid = any(self.bid_pattern.search(segment) for segment in other_segments)
 
-        if not bids and not embeds_bid:  # not bidding is allowed
+        if not bids:  # not bidding is allowed
             self.broadcast(f"Player {player_id} submitted no bids this turn.", ta.ObservationType.GAME_MESSAGE)
             return None
         if other_segments:
@@ -479,8 +452,8 @@ class BlindAuctionEnv(ta.GameEnv):
             if parsed is None:
                 other_segments.append(segment)
                 continue
-            for name, groups in parsed:
-                commands[name].append(groups)
+            name, groups = parsed
+            commands[name].append(groups)
         return commands, other_segments
 
     def _command_segments(self, text: str) -> List[str]:
@@ -492,31 +465,15 @@ class BlindAuctionEnv(ta.GameEnv):
                     segments.append(segment)
         return segments
 
-    def _parse_segment(self, segment: str) -> Optional[List[Tuple[str, tuple]]]:
-        """Parse one bare command or a run of legacy bracketed commands; None if the segment is anything else.
+    def _parse_segment(self, segment: str) -> Optional[Tuple[str, tuple]]:
+        """Parse one command; None if the segment is anything else.
 
         Each segment is parsed exactly once, so message text is never scanned for commands."""
         for name, pattern in self.bare_patterns.items():
             match = pattern.fullmatch(segment)
             if match:
-                return [(name, match.groups())]
-        commands, pos = [], 0
-        while pos < len(segment):
-            if segment[pos].isspace():
-                pos += 1
-                continue
-            for name, pattern in self.legacy_patterns.items():
-                match = pattern.match(segment, pos)
-                if match:
-                    break
-            else:
-                return None
-            groups = match.groups()
-            if name == "Broadcast":  # one group per historical spelling, exactly one of which matched
-                groups = (next(group for group in groups if group is not None),)
-            commands.append((name, groups))
-            pos = match.end()
-        return commands
+                return name, match.groups()
+        return None
 
     def _command_name(self, segment: str) -> Optional[str]:
         match = self.command_name_pattern.match(segment)

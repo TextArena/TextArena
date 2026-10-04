@@ -1,4 +1,3 @@
-import functools
 import re
 import string
 from collections import deque
@@ -6,28 +5,7 @@ from typing import Any, Dict, FrozenSet, List, Tuple, Union
 
 import textarena as ta
 from textarena.envs.WordLadder.renderer import create_board_str
-from textarena.utils.word_lists import EnglishDictionary, get_basic_english_words
-
-
-from nltk.corpus import words
-
-
-def _nltk_words_available() -> bool:
-    """Whether the NLTK words corpus is installed; it only widens move validation, never the puzzles."""
-    try:
-        words.words("en-basic")
-    except LookupError:
-        return False
-    return True
-
-
-@functools.lru_cache(maxsize=None)
-def _dictionary_words(include_nltk: bool) -> FrozenSet[str]:
-    """Every lowercase alphabetic word of the shared English dictionary, built once per process."""
-    dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=include_nltk)
-    return frozenset(
-        word.lower() for word in dictionary.get_all_words() if word.isascii() and word.isalpha()
-    )
+from textarena.utils.word_lists import get_basic_english_words, get_english_words
 
 
 class WordLadderEnv(ta.GameEnv):
@@ -35,7 +13,7 @@ class WordLadderEnv(ta.GameEnv):
 
     min_players = 1
     max_players = 1
-    action_pattern = r"^\s*\[?\s*([a-zA-Z]+)\s*\]?\s*$"
+    action_pattern = r"^([a-zA-Z]+)$"
     snapshot_excluded_attributes = ("universal_word_list", "word_list")
 
     def __init__(self, min_distance: int = 5, max_distance: int = 7, max_turns: int = 100):
@@ -65,11 +43,11 @@ class WordLadderEnv(ta.GameEnv):
         self.max_distance = max_distance
         self.max_turns = max_turns
         self.word_list = sorted(word for word in get_basic_english_words() if 3 <= len(word) <= 11)
-        self.universal_word_list = self._load_universal_word_list(include_nltk=_nltk_words_available())
+        self.universal_word_list = self._load_universal_word_list()
 
-    def _load_universal_word_list(self, include_nltk: bool = True) -> FrozenSet[str]:
+    def _load_universal_word_list(self) -> FrozenSet[str]:
         """Accept every dictionary word; puzzles are still built from the Basic English `word_list`."""
-        accepted = _dictionary_words(include_nltk)
+        accepted = get_english_words()
         return accepted if accepted.issuperset(self.word_list) else accepted.union(self.word_list)
 
     @staticmethod

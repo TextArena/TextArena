@@ -71,12 +71,12 @@ class GolfEnv(ta.GameEnv):
     def _find_action_token(self, message: str) -> Tuple[Optional[str], Optional[Dict[str, Any]]]:
         """ Parse action from player message using regex patterns """
         patterns = [
-            ("draw", re.compile(r"^\s*\[?\s*draw\s*\]?\s*$", re.I)),
-            ("take", re.compile(r"^\s*\[?\s*take\s*\]?\s*$", re.I)),
-            ("swap", re.compile(r"^\s*\[?\s*swap\s+(\d+)\s+(\d+)\s*\]?\s*$", re.I)),
-            ("discard", re.compile(r"^\s*\[?\s*discard\s*\]?\s*$", re.I)),
-            ("knock", re.compile(r"^\s*\[?\s*knock\s*\]?\s*$", re.I)),
-            ("peek", re.compile(r"^\s*\[?\s*peek\s+(\d+)\s+(\d+)\s*\]?\s*$", re.I))
+            ("draw", re.compile(r"^draw$", re.I)),
+            ("take", re.compile(r"^take$", re.I)),
+            ("swap", re.compile(r"^swap\s+(\d+)\s+(\d+)$", re.I)),
+            ("discard", re.compile(r"^discard$", re.I)),
+            ("knock", re.compile(r"^knock$", re.I)),
+            ("peek", re.compile(r"^peek\s+(\d+)\s+(\d+)$", re.I))
         ]
 
         found = [(name, m) for name, rx in patterns if (m := rx.search(message))]

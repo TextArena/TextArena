@@ -8,7 +8,7 @@ from textarena.envs.ConnectFour.renderer import create_board_str
 class ConnectFourEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
-    action_pattern = r"(?i)^\s*\[?\s*(?:col\s*)?([0-9]+)\s*\]?\s*$"
+    action_pattern = r"(?i)^(?:col\s*)?([0-9]+)$"
 
     def __init__(self, is_open: bool = True, num_rows: int = 6, num_cols: int = 7):
         """

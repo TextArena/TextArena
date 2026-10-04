@@ -16,11 +16,7 @@ def _parse_cell(text: str) -> Optional[int]:
 class WildTicTacToeEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
-    action_pattern = (
-        r"(?i)^\s*(?P<bracket>\[)?\s*"
-        r"(?P<mark>[XO])\s+(?P<cell>[0-9]+)\s*"
-        r"(?(bracket)\])\s*$"
-    )
+    action_pattern = r"(?i)^(?P<mark>[XO])\s+(?P<cell>[0-9]+)$"
     action_format = "the mark X or O followed by a cell number from 0 to 8, for example 'X 4'"
 
     def __init__(self):

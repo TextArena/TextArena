@@ -34,7 +34,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Blackjack-v0-mdp`)
 
 ## Actions
 
-Reply `hit` or `stand`. Case does not matter, and the command may be wrapped in square brackets (`[hit]`).
+Reply `hit` or `stand`. Case does not matter.
 
 ## Observations
 

@@ -115,10 +115,10 @@ def test_guess_tokens_are_conversation_until_final_turn():
     assert done
 
 
-def test_bracketed_case_insensitive_guess_is_accepted():
+def test_case_insensitive_guess_is_accepted():
     env = _fresh()
     env.step("message")
-    token = "[ fact 1 ]" if env.state.game_state["fact1"]["is_correct"] else "[ FACT 2 ]"
+    token = "fact 1" if env.state.game_state["fact1"]["is_correct"] else "FACT 2"
     done, _ = env.step(token)
     assert done and env.state.rewards[1] == 1
 

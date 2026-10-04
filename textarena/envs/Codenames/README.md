@@ -68,7 +68,7 @@ also shows the active clue and how many guesses are left, and every board shows 
 ## Notes
 
 - Board words are nouns shorter than eight letters, originally selected with NLTK's `words` corpus and part-of-speech
-  tagger. Both lists ship with the environment in `words.json`, so boards are identical on every machine whether or not
-  NLTK data is installed, and nothing is downloaded.
+  tagger. Both lists ship with the environment in `words.json`, so boards are identical on every machine and nothing
+  is downloaded.
 - Slurs and sexual or vulgar terms (the shared list in `textarena/utils/data/blocked_words.txt`) are never drawn as
   board words.

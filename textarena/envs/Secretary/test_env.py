@@ -20,7 +20,7 @@ def test_reset_initial_state():
 
 @pytest.mark.parametrize("num_players", [0, 2])
 def test_reset_requires_exactly_one_player(num_players):
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         SecretaryEnv().reset(num_players=num_players, seed=42)
 
 
@@ -89,7 +89,7 @@ def test_single_draw_continue_forces_acceptance_in_bounds():
 
 def test_actions_are_case_insensitive_but_strict():
     env = _fresh()
-    done, _ = env.step("[ACCEPT]")
+    done, _ = env.step("ACCEPT")
     assert done
     assert env.state.game_state["accepted_idx"] == 0
 

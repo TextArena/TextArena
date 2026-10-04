@@ -25,16 +25,11 @@ class UsedCarNegotiationEnv(ta.GameEnv):
         self._configured_batna = tuple(batna) if batna is not None else None
         self.game_dir = os.path.dirname(__file__)
         with open(os.path.join(self.game_dir, "instructions", "blue_book.txt"), "r") as f: self.blue_book = f.read()
-        self.offer_pattern = re.compile(
-            r"\s*(?P<legacy>\[)?\s*Offer\s*:\s*\$?(?P<price>\d+)\s*(?(legacy)\])\s*",
-            re.IGNORECASE,
-        )
-        self.accept_pattern = re.compile(r"\s*(?P<legacy>\[)?\s*Accept\s*(?(legacy)\])\s*", re.IGNORECASE)
-        self.reject_pattern = re.compile(r"\s*(?P<legacy>\[)?\s*Reject\s*(?(legacy)\])\s*", re.IGNORECASE)
-        self.discuss_pattern = re.compile(
-            r"\s*(?P<legacy>\[)?\s*Discuss\s*:\s*(?P<content>.+?)\s*(?(legacy)\])\s*",
-            re.IGNORECASE | re.DOTALL,
-        )
+        self.offer_pattern = re.compile(r"\s*Offer\s*:\s*\$?(?P<price>\d+)\s*", re.IGNORECASE)
+        self.accept_pattern = re.compile(r"\s*Accept\s*", re.IGNORECASE)
+        self.reject_pattern = re.compile(r"\s*Reject\s*", re.IGNORECASE)
+        # The content ends at its last non-space character, so a long whitespace run inside it is scanned only once.
+        self.discuss_pattern = re.compile(r"\s*Discuss\s*:\s*(?P<content>.*\S)\s*", re.IGNORECASE | re.DOTALL)
 
     @property
     def player_roles(self) -> Dict[int, str]:

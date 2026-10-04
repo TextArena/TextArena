@@ -101,7 +101,7 @@ def test_huge_bid_numbers_are_rejected_without_integer_parse_failure():
 def test_two_consecutive_invalids_eliminate():
     env = _fresh()
     env.step("Call")               # invalid #1 (no prior bid)
-    done, _ = env.step("[Call]")      # invalid #2 (brackets tolerated) -> P0 eliminated, game ends
+    done, _ = env.step("Call")        # invalid #2 -> P0 eliminated, game ends
     assert done is True
     assert env.state.rewards == {0: -1.0, 1: 1.0}
 
@@ -294,7 +294,7 @@ def test_whitespace_padded_input_is_rejected_quickly(action):
 
 def test_padded_valid_commands_are_still_accepted():
     env = _fresh(num_dice=2)
-    env.step("  [ Bid : 1 , 2 ]  ")
+    env.step("  Bid : 1 , 2  ")
     assert env.state.game_state["current_bid"] == {"quantity": 1, "face_value": 2}
     done, _ = env.step("\n call \n")
     assert env.state.game_state["current_bid"] == {"quantity": 0, "face_value": 0}

@@ -85,11 +85,11 @@ class IndianPokerEnv(ta.GameEnv):
 
     def _find_token(self, msg: str):
         patterns = [
-            ("check", re.compile(r"^\s*\[?\s*check\s*\]?\s*$", re.I)),
-            ("fold", re.compile(r"^\s*\[?\s*fold\s*\]?\s*$", re.I)),
-            ("call", re.compile(r"^\s*\[?\s*call\s*\]?\s*$", re.I)),
-            ("bet", re.compile(r"^\s*\[?\s*bet\s+(\d+)\s*\]?\s*$", re.I)),
-            ("raise", re.compile(r"^\s*\[?\s*raise\s+(\d+)\s*\]?\s*$", re.I)),
+            ("check", re.compile(r"^check$", re.I)),
+            ("fold", re.compile(r"^fold$", re.I)),
+            ("call", re.compile(r"^call$", re.I)),
+            ("bet", re.compile(r"^bet\s+(\d+)$", re.I)),
+            ("raise", re.compile(r"^raise\s+(\d+)$", re.I)),
         ]
         found = [(name, m) for name, rx in patterns if (m := rx.match(msg))]
         if len(found) != 1: return None, None # none or ambiguous

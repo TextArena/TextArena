@@ -42,8 +42,8 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `SecretMafia-v0-mdp
 | Day: discussion | Every living player, in turn | Any text, e.g. `Player 2 dodged my question; I'm suspicious.` |
 | Day: vote | Every living player | A living player's number |
 
-A number must be the whole reply; `Player 4` and `[4]` also work (case-insensitive). Anything else, a dead player, a
-fellow Mafia member at night, or yourself as Doctor or Detective is invalid.
+A number must be the whole reply; `Player 4` also works (case-insensitive). Anything else, a dead player, a fellow
+Mafia member at night, or yourself as Doctor or Detective is invalid.
 
 ## Observations
 

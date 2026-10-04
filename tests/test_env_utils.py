@@ -1,89 +1,100 @@
+import importlib.util
 import random
-import importlib
+from pathlib import Path
 
 import pytest
 
 from textarena.utils.jury import OpenRouterJury
-from textarena.utils.word_lists import EnglishDictionary, get_basic_english_words, get_common_words, get_headwords
+from textarena.utils.word_lists import (
+    get_basic_english_words,
+    get_blocked_words,
+    get_common_words,
+    get_english_words,
+    get_headwords,
+    is_english_word,
+)
 
-word_lists_module = importlib.import_module("textarena.utils.word_lists")
+ROOT = Path(__file__).resolve().parents[1]
 
 
-# Stubs replace the module's `words` reference itself: patching an attribute of
-# NLTK's lazy corpus loader would load the corpus, which fails when it is missing.
-class _FailingCorpus:
-    def words(self, *args, **kwargs):
-        pytest.fail("unexpected corpus access")
+def _load_word_list_builder():
+    spec = importlib.util.spec_from_file_location("build_word_lists", ROOT / "scripts" / "build_word_lists.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
-class _MissingCorpus:
-    def words(self, *args, **kwargs):
-        raise LookupError("corpus unavailable")
+def test_frozen_word_lists_match_their_sources():
+    for name, text in _load_word_list_builder().build().items():
+        path = ROOT / "textarena" / "utils" / "data" / name
+        assert path.read_text(encoding="utf-8") == text, f"{name} is stale: run python scripts/build_word_lists.py"
+
+
+def test_affix_rules_honour_conditions_strips_and_cross_products(tmp_path):
+    builder = _load_word_list_builder()
+    aff = tmp_path / "test.aff"
+    aff.write_text(
+        "PFX A Y 1\nPFX A 0 re .\n\n"
+        "PFX U N 1\nPFX U 0 un .\n\n"
+        "SFX S Y 3\nSFX S y ies [^aeiou]y\nSFX S 0 s [aeiou]y\nSFX S 0 s [^sxzhy]\n\n"
+        "SFX T N 1\nSFX T 0 est [^ey]\n\n"
+        "SFX V N 1\nSFX V e ive .\n",
+        encoding="utf-8",
+    )
+    prefixes, suffixes = builder.read_affixes(aff)
+
+    def expand(word, flags):
+        return builder.expand(word, set(flags), prefixes, suffixes)
+
+    assert expand("try", "AS") == {"try", "tries", "retry", "retries"}
+    assert expand("play", "US") == {"play", "plays", "unplay"}  # U is not cross-product
+    assert expand("tall", "AT") == {"tall", "tallest", "retall"}  # neither is T
+    assert expand("abuse", "V") == {"abuse", "abusive"}
+    assert expand("act", "V") == {"act"}  # the strip "e" must be present
+
+    aff.write_text("SFX S Y 2\nSFX S 0 s .\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="missing rules"):
+        builder.read_affixes(aff)
+
+
+def test_english_words_hold_inflections_but_no_invented_forms():
+    words = get_english_words()
+    assert isinstance(words, frozenset) and 90_000 < len(words) < 120_000
+    assert all(word.isascii() and word.isalpha() and word.islower() for word in words)
+    assert {"congeniality", "congenialities", "running", "walked", "happier", "churches", "boxes", "boys"} <= words
+    assert {"colour", "color", "colours", "colors"} <= words
+    assert not {"congenialitys", "concaveed", "confesss", "alwaies"} & words
+    assert not {"paris", "london", "dog's"} & words
+
+
+def test_is_english_word_ignores_letter_case():
+    assert is_english_word("Colour") and is_english_word("APPLE")
+    assert not is_english_word("Zzzzz")
 
 
 def test_secret_word_pools_never_contain_blocked_words():
-    blocked = word_lists_module.get_blocked_words()
+    blocked = get_blocked_words()
     assert len(blocked) > 100 and all(word == word.strip().lower() for word in blocked)
     for pool in (get_headwords(), get_common_words(), get_basic_english_words()):
         assert not pool & blocked
 
 
-@pytest.mark.parametrize("include_nltk", [False, True])
-def test_only_a_and_i_count_as_single_letter_words(include_nltk):
-    dictionary = EnglishDictionary(include_nltk=include_nltk)
-    assert dictionary.is_english_word("a") and dictionary.is_english_word("I")
-    assert not any(dictionary.is_english_word(letter) for letter in "bcdefghjklmnopqrstuvwxyz")
-    assert {word for word in dictionary.get_all_words() if len(word) == 1} == {"a", "i"}
+def test_only_a_and_i_count_as_single_letter_words():
+    assert is_english_word("a") and is_english_word("I")
+    assert not any(is_english_word(letter) for letter in "bcdefghjklmnopqrstuvwxyz")
+    assert {word for word in get_english_words() if len(word) == 1} == {"a", "i"}
 
 
-def test_dictionary_does_not_download_nltk_when_disabled(monkeypatch):
-    monkeypatch.setattr(word_lists_module, "words", _FailingCorpus())
-    dictionary = EnglishDictionary(include_nltk=False)
-    assert dictionary.nltk_words == set()
-    assert dictionary.get_basic_words() == get_basic_english_words()
-
-
-def test_dictionary_falls_back_to_bundled_words_offline(monkeypatch):
-    monkeypatch.setattr(word_lists_module, "words", _MissingCorpus())
-    dictionary = EnglishDictionary(include_nltk=True)
-    assert dictionary.nltk_words == set()
-    assert dictionary.us_words
-    assert dictionary.uk_words
-
-
-def test_basic_words_are_identical_without_nltk(monkeypatch):
-    expected = EnglishDictionary().get_basic_words()
-    expected_module = get_basic_english_words()
-    monkeypatch.setattr(word_lists_module, "words", _MissingCorpus())
-    word_lists_module._load_basic_english.cache_clear()
-    assert EnglishDictionary().get_basic_words() == expected
-    assert get_basic_english_words() == expected_module
-    assert len(expected) == 849  # Ogden's 850 words; the default filter drops the capitalized "I"
-    assert expected_module == expected
-    assert {"apple", "water", "the", "about"} <= expected
-
-
-def test_bundled_basic_english_matches_the_nltk_corpus():
-    from nltk.corpus import words
-
-    try:
-        nltk_basic = words.words("en-basic")
-    except LookupError:
-        pytest.skip("NLTK words corpus not installed")
-    assert list(word_lists_module._load_basic_english()) == sorted(nltk_basic, key=lambda w: (w.lower(), w))
-
-
-def test_bundled_word_tiers_are_built_without_nltk(monkeypatch):
-    expected = (get_common_words(), get_headwords())
-    monkeypatch.setattr(word_lists_module, "words", _FailingCorpus())
-    for cached in (get_common_words, get_headwords, word_lists_module._load_headword_flags):
-        cached.cache_clear()
-    assert (get_common_words(), get_headwords()) == expected
+def test_basic_english_is_bundled_and_accepted():
+    basic = get_basic_english_words()
+    assert len(basic) == 849  # Ogden's 850 words without the capitalized "I"
+    assert {"apple", "water", "the", "about"} <= basic
+    assert basic <= get_english_words()
 
 
 def test_common_words_are_ordinary_base_words_of_the_bundled_dictionaries():
     common, headwords = get_common_words(), get_headwords()
-    full = EnglishDictionary(include_nltk=False).get_all_words()
+    full = get_english_words()
     assert isinstance(common, frozenset) and isinstance(headwords, frozenset)
     assert common < headwords <= full
     assert 10_000 < len(common) < 20_000 and 30_000 < len(headwords) < 50_000

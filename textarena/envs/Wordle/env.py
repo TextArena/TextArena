@@ -3,13 +3,13 @@ from typing import Optional, List, Dict, Any, Union
 
 import textarena as ta
 from textarena.envs.Wordle.renderer import create_board_str
-from textarena.utils.word_lists import EnglishDictionary, get_basic_english_words, get_headwords
+from textarena.utils.word_lists import get_basic_english_words, get_english_words, get_headwords, is_english_word
 
 class WordleEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
-    action_pattern = r"^\s*\[?\s*([a-zA-Z]+)\s*\]?\s*$"
-    snapshot_excluded_attributes = ("dictionary", "word_list")
+    action_pattern = r"^([a-zA-Z]+)$"
+    snapshot_excluded_attributes = ("word_list",)
 
     def __init__(self, word_length: int = 5, num_guesses: int = 6, hardcore: Optional[bool] = False):
         """ Initializes the Wordle environment """
@@ -22,12 +22,10 @@ class WordleEnv(ta.GameEnv):
         self.word_length = word_length
         self.num_guesses = num_guesses
         self.max_turns = num_guesses
-        # Only the bundled UK/US lists, so the accepted words never depend on optional NLTK data.
-        self.dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=False)
         self._load_word_list(hardcore=hardcore)
 
     def _check_word(self, word: str) -> bool:
-        return self.dictionary.is_english_word(word)
+        return is_english_word(word)
 
     def _load_word_list(self, hardcore: bool = False) -> None:
         """ Secret words: Basic English, or every dictionary headword in hardcore mode """
@@ -35,11 +33,7 @@ class WordleEnv(ta.GameEnv):
         self.word_list = sorted(word for word in source if len(word) == self.word_length and self._check_word(word))
         if not self.word_list:
             # Lengths the chosen list lacks still get playable secrets from the full dictionary.
-            self.word_list = sorted(
-                word
-                for word in self.dictionary.get_all_words()
-                if word.isascii() and word.isalpha() and word.islower() and len(word) == self.word_length
-            )
+            self.word_list = sorted(word for word in get_english_words() if len(word) == self.word_length)
         if not self.word_list:
             raise ValueError(f"No target words are available with length {self.word_length}.")
 

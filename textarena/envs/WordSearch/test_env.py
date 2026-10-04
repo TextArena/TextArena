@@ -13,11 +13,6 @@ from textarena.envs.WordSearch.env import WordSearchEnv
 from textarena.utils.word_lists import get_common_words, get_headwords
 
 
-class _MissingCorpus:
-    def words(self, *_args, **_kwargs):
-        raise LookupError("corpus unavailable")
-
-
 def _fresh(max_turns=None):
     env = WordSearchEnv(max_turns=max_turns)
     env.reset(num_players=1, seed=42)
@@ -114,15 +109,6 @@ def test_parser_rejects_noncanonical_actions_atomically(action):
     done, _ = env.step(action)
     assert not done and env.state.error_count == 1
     assert env.state.game_state == before
-
-
-def test_paired_legacy_brackets_remain_valid():
-    env = _fresh()
-    word, (row, col, direction) = next(iter(env.placed_words.items()))
-    sr, sc, er, ec = _endpoints(word, row, col, direction)
-    done, _ = env.step(f"[{sr} {sc} {er} {ec}]")
-    assert not done
-    assert word in env.correct_words
 
 
 def test_repeated_successful_guess_in_either_direction_is_atomic_invalid():
@@ -278,8 +264,7 @@ def test_prompt_states_the_limits_that_can_end_the_game():
 
 
 @pytest.mark.parametrize("hardcore", [False, True])
-def test_missing_nltk_corpus_falls_back_to_bundled_word_lists(monkeypatch, hardcore):
-    monkeypatch.setattr("textarena.envs.WordSearch.env.words", _MissingCorpus())
+def test_words_come_from_the_common_words_or_headwords(hardcore):
     first = WordSearchEnv(hardcore=hardcore)
     second = WordSearchEnv(hardcore=hardcore)
     expected = get_headwords() if hardcore else get_common_words()

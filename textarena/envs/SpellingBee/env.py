@@ -1,41 +1,31 @@
 import re
-from typing import Any, Dict, Optional, Union
+from typing import Any, Callable, Dict, Optional, Union
 
 import textarena as ta
 from textarena.envs.SpellingBee.renderer import create_board_str
-from textarena.utils.word_lists import EnglishDictionary
+from textarena.utils.word_lists import is_english_word
 
 
 class SpellingBeeEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
-    snapshot_excluded_attributes = ("dictionary",)
+    snapshot_excluded_attributes = ("is_word",)
     max_word_chars = 64
     max_action_chars = 128
-    _ACTION_RE = re.compile(
-        rf"^\s*(?P<legacy>\[)?\s*(?P<word>[A-Za-z]{{1,{max_word_chars}}})\s*(?(legacy)\])\s*$"
-    )
+    _ACTION_RE = re.compile(rf"[A-Za-z]{{1,{max_word_chars}}}")
 
-    def __init__(self, num_letters: int, dictionary=None):
+    def __init__(self, num_letters: int, is_word: Callable[[str], bool] = is_english_word):
         """
         Args:
             num_letters (int): Number of unique allowed letters.
+            is_word (Callable[[str], bool]): Decides whether a lowercase word counts as English.
         """
         if isinstance(num_letters, bool) or not isinstance(num_letters, int) or not 1 <= num_letters <= 26:
             raise ValueError("num_letters must be an integer from 1 through 26.")
+        if not callable(is_word):
+            raise TypeError("is_word must be a function that takes a word and returns whether it is valid.")
         self.num_letters = num_letters
-        if dictionary is None:
-            try:
-                # Only the bundled UK/US lists, so the accepted words never depend on optional NLTK data.
-                dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=False)
-            except Exception as exc:
-                raise RuntimeError(
-                    "Unable to load the bundled SpellingBee dictionary files, "
-                    "or inject a dictionary with is_english_word()."
-                ) from exc
-        if not callable(getattr(dictionary, "is_english_word", None)):
-            raise TypeError("dictionary must provide an is_english_word(word) method.")
-        self.dictionary = dictionary
+        self.is_word = is_word
 
     def get_board_str(self): return create_board_str(game_state=self.game_state)
 
@@ -65,7 +55,7 @@ class SpellingBeeEnv(ta.GameEnv):
             'a': 8.17, 'b': 1.49, 'c': 2.78, 'd': 4.25, 'e': 12.70, 'f': 2.23, 'g': 2.02, 'h': 6.09, 'i': 7.00, 'j': 0.15, 'k': 0.77, 'l': 4.03, 'm': 2.41,
             'n': 6.75, 'o': 7.51, 'p': 1.93, 'q': 0.10, 'r': 5.99, 's': 6.33, 't': 9.06, 'u': 2.76, 'v': 0.98, 'w': 2.36, 'x': 0.15, 'y': 1.97, 'z': 0.07
         }
-        # Weighted sampling without replacement using the env RNG (was numpy.random.choice)
+        # Weighted sampling without replacement using the env RNG
         letters = list(letter_frequencies.keys())
         weights = list(letter_frequencies.values())
         chosen = set()
@@ -81,20 +71,19 @@ class SpellingBeeEnv(ta.GameEnv):
             return self.invalid("Submit exactly one word.")
         if len(move) > self.max_action_chars:
             return self.invalid(f"Actions are limited to {self.max_action_chars} characters.")
-        match = self._ACTION_RE.fullmatch(move)
-        if match is None:
+        if not self._ACTION_RE.fullmatch(move):
             return self.invalid(f"Submit one word of at most {self.max_word_chars} letters.")
-        word = match.group("word").lower()
+        word = move.lower()
         gs = self.game_state
         # check if the word is longer/equal than the last word, and not a repeated word
         if len(gs["word_history"]) != 0 and len(word) < len(gs["word_history"][-1]): return self.invalid("The submitted word is shorter than the previous word.")
         if word in gs["word_history"]: return self.invalid("The submitted word has been submitted before.")
         if not set(word).issubset(gs["allowed_letters"]): return self.invalid("The submitted word contains illegal characters.")
         try:
-            is_english_word = bool(self.dictionary.is_english_word(word))
+            valid = bool(self.is_word(word))
         except Exception:
             return self.retryable("The dictionary could not validate the word.")
-        if not is_english_word: return self.invalid("The submitted word is not a valid English word.")
+        if not valid: return self.invalid("The submitted word is not a valid English word.")
         gs["word_history"].append(word)
         self.broadcast(f"Player {player_id} submitted the word: {word}", ta.ObservationType.GAME_ACTION_DESCRIPTION)
         return None

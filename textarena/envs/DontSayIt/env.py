@@ -36,7 +36,7 @@ class DontSayItEnv(ta.GameEnv):
         Args:
             hardcore (bool): If True, draw secret words from every headword of the bundled dictionaries;
                 otherwise from the 750 nouns and adjectives of Ogden's Basic English. Both lists are
-                bundled, so a seed picks the same words on every machine, with or without NLTK data.
+                bundled, so a seed picks the same words on every machine.
             max_turns (int): Maximum number of turns before the game ends in a draw.
         """
         if max_turns is not None and (

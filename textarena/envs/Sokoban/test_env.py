@@ -6,10 +6,10 @@ straight from the env and run a small BFS push-solver to script a guaranteed win
 from collections import deque
 import random
 
-import numpy as np
 import pytest
 
 from textarena.envs.Sokoban.env import SokobanEnv
+from textarena.envs.Sokoban import env as sokoban_env
 from textarena.envs.Sokoban import utils as sokoban_utils
 
 _DIRS = {"up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1)}
@@ -24,15 +24,15 @@ def _fresh(dim_room=(6, 6), num_boxes=2, max_turns=100):
 def _solve(env, max_states=300000):
     """BFS over (player, boxes) states; returns a list of move names or None."""
     room_fixed = env.room_fixed
-    H, W = room_fixed.shape
-    walls = {(r, c) for r in range(H) for c in range(W) if room_fixed[r, c] == 0}
+    H, W = len(room_fixed), len(room_fixed[0])
+    walls = {(r, c) for r in range(H) for c in range(W) if room_fixed[r][c] == 0}
     targets = frozenset(
-        (r, c) for r in range(H) for c in range(W) if room_fixed[r, c] == 2
+        (r, c) for r in range(H) for c in range(W) if room_fixed[r][c] == 2
     )
     boxes0 = frozenset(
-        (r, c) for r in range(H) for c in range(W) if env.room_state[r, c] in (3, 4)
+        (r, c) for r in range(H) for c in range(W) if env.room_state[r][c] in (3, 4)
     )
-    player0 = (int(env.player_position[0]), int(env.player_position[1]))
+    player0 = env.player_position
     if boxes0 == targets:
         return []
 
@@ -68,7 +68,7 @@ def test_reset_initial_state():
     assert not env.state.done
     assert env.player_position is not None
     # Exactly num_boxes boxes present (value 3=on target, 4=off target).
-    box_count = int((env.room_state == 3).sum() + (env.room_state == 4).sum())
+    box_count = sum(cell in (3, 4) for row in env.room_state for cell in row)
     assert box_count == 2
 
 
@@ -102,11 +102,11 @@ def test_valid_move_updates_board():
     env = _fresh()
     legal = [a for a in env.action_space if not env._would_collide_with_wall(a)]
     assert legal, "player should have at least one legal move"
-    before = env.player_position.copy()
+    before = env.player_position
     done, _ = env.step(legal[0])
     assert not done
     # Either the player moved or pushed a box (position changes on a plain move).
-    assert not (env.player_position == before).all() or env.state.turn >= 1
+    assert env.player_position != before or env.state.turn >= 1
 
 
 def test_solving_puzzle_wins():
@@ -123,9 +123,9 @@ def test_solving_puzzle_wins():
 
 def _board_signature(env):
     return (
-        env.room_fixed.tobytes(),
-        env.room_state.tobytes(),
-        tuple(int(v) for v in env.player_position),
+        tuple(map(tuple, env.room_fixed)),
+        tuple(map(tuple, env.room_state)),
+        env.player_position,
     )
 
 
@@ -177,6 +177,15 @@ def test_any_integer_seed_generates_a_reproducible_room(seed):
     assert _board_signature(first) == _board_signature(second)
 
 
+def test_different_seeds_generate_different_rooms():
+    signatures = set()
+    for seed in range(8):
+        env = SokobanEnv(dim_room=(6, 6), num_boxes=1)
+        env.reset(num_players=1, seed=seed)
+        signatures.add(_board_signature(env))
+    assert len(signatures) > 1
+
+
 @pytest.mark.parametrize("max_turns", [1, 2, 3, 5])
 def test_small_turn_limits_only_generate_rooms_solvable_within_the_limit(max_turns):
     for seed in range(15):
@@ -186,18 +195,12 @@ def test_small_turn_limits_only_generate_rooms_solvable_within_the_limit(max_tur
         assert solution is not None and len(solution) <= max_turns
 
 
-def test_generation_does_not_consume_global_random_generators():
+def test_generation_does_not_consume_the_global_random_generator():
     random.seed(1234)
-    np.random.seed(5678)
     python_state = random.getstate()
-    numpy_state = np.random.get_state()
     env = SokobanEnv(dim_room=(6, 6), num_boxes=1)
     env.reset(num_players=1, seed=9)
     assert random.getstate() == python_state
-    actual_numpy_state = np.random.get_state()
-    assert actual_numpy_state[0] == numpy_state[0]
-    assert np.array_equal(actual_numpy_state[1], numpy_state[1])
-    assert actual_numpy_state[2:] == numpy_state[2:]
 
 
 def test_reverse_generation_honors_search_depth_budget(monkeypatch):
@@ -207,11 +210,11 @@ def test_reverse_generation_honors_search_depth_budget(monkeypatch):
         captured["ttl"] = kwargs["ttl"]
 
     monkeypatch.setattr(sokoban_utils, "depth_first_search", fake_search)
-    room_structure = np.ones((4, 4), dtype=int)
-    room_structure[1, 1] = 2
-    room_state = room_structure.copy()
-    room_state[1, 1] = 4
-    room_state[2, 1] = 5
+    room_structure = [[1] * 4 for _ in range(4)]
+    room_structure[1][1] = 2
+    room_state = [row[:] for row in room_structure]
+    room_state[1][1] = 4
+    room_state[2][1] = 5
     sokoban_utils.reverse_playing(room_state, room_structure, search_depth=7)
     assert captured["ttl"] == 7
 
@@ -240,22 +243,19 @@ def test_oversized_action_is_invalid_without_board_mutation():
 
 
 def _install_scripted_room(env):
-    room_fixed = np.array(
-        [
-            [0, 0, 0, 0, 0],
-            [0, 1, 2, 1, 0],
-            [0, 1, 1, 1, 0],
-            [0, 1, 1, 1, 0],
-            [0, 0, 0, 0, 0],
-        ],
-        dtype=int,
-    )
-    room_state = room_fixed.copy()
-    room_state[2, 2] = 4
-    room_state[3, 2] = 5
+    room_fixed = [
+        [0, 0, 0, 0, 0],
+        [0, 1, 2, 1, 0],
+        [0, 1, 1, 1, 0],
+        [0, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0],
+    ]
+    room_state = [row[:] for row in room_fixed]
+    room_state[2][2] = 4
+    room_state[3][2] = 5
     env.game_state["room_fixed"] = room_fixed
     env.game_state["board"] = room_state
-    env.game_state["player_position"] = np.array([3, 2])
+    env.game_state["player_position"] = (3, 2)
 
 
 def test_push_box_onto_target_wins_and_terminal_render_updates():
@@ -266,7 +266,7 @@ def test_push_box_onto_target_wins_and_terminal_render_updates():
     done, _ = env.step("up")
     assert done
     assert env.state.rewards == {0: 1}
-    assert env.room_state[1, 2] == 3
+    assert env.room_state[1][2] == 3
     assert "√" in env.render(0)
 
 
@@ -281,7 +281,7 @@ def test_player_standing_on_a_goal_keeps_the_goal_visible():
     for move in ("left", "up", "up", "right"):
         done, _ = env.step(move)
         assert not done
-    assert tuple(env.player_position) == (1, 2) and env.room_fixed[1, 2] == 2
+    assert env.player_position == (1, 2) and env.room_fixed[1][2] == 2
     assert env.create_board_str(env.room_state).splitlines()[1] == "# _ + _ #"
     assert "+" in env.render(0) and "+" in env.get_board_str()
     assert "'+' while standing on an empty goal" in env.prompt(0)
@@ -302,7 +302,7 @@ def test_blocked_push_is_invalid_and_atomic():
     env = SokobanEnv(dim_room=(5, 5), num_boxes=1)
     env.reset(num_players=1, seed=42)
     _install_scripted_room(env)
-    env.room_state[1, 2] = 0
+    env.room_state[1][2] = 0
     before = _board_signature(env)
     done, _ = env.step("up")
     assert not done
@@ -318,7 +318,7 @@ def test_blocked_push_reason_names_what_blocks_the_box(blocker, reason):
     env = SokobanEnv(dim_room=(5, 5), num_boxes=1)
     env.reset(num_players=1, seed=42)
     _install_scripted_room(env)
-    env.room_state[1, 2] = blocker
+    env.room_state[1][2] = blocker
     before = len(env.state.events)
     env.step("up")
     messages = [message for _, message, _, _ in env.state.events[before:]]
@@ -335,15 +335,15 @@ def test_turn_limit_returns_box_completion_reward():
     assert "turn limit" in env.state.game_info[0]["reason"].lower()
 
 
-def test_snapshot_restore_recovers_array_backed_aliases():
+def test_snapshot_restore_recovers_board_aliases():
     env = SokobanEnv(dim_room=(5, 5), num_boxes=1)
     env.reset(num_players=1, seed=42)
     _install_scripted_room(env)
     snapshot = env.snapshot()
     env.step("left")
-    assert tuple(env.player_position) == (3, 1)
+    assert env.player_position == (3, 1)
     env.restore(snapshot)
-    assert tuple(env.player_position) == (3, 2)
+    assert env.player_position == (3, 2)
     assert env.room_state is env.game_state["board"]
 
 
@@ -356,6 +356,9 @@ def test_snapshot_restore_recovers_array_backed_aliases():
         {"dim_room": (4, 4), "num_boxes": 3},
         {"max_turns": 0},
         {"dim_room": (21, 20)},
+        {"max_retries": 0},
+        {"max_retries": 101},
+        {"max_retries": True},
     ],
 )
 def test_invalid_configuration_rejected(kwargs):
@@ -363,9 +366,15 @@ def test_invalid_configuration_rejected(kwargs):
         SokobanEnv(**kwargs)
 
 
-def test_invalid_retry_count_rejected_before_generation():
-    env = SokobanEnv(dim_room=(6, 6), num_boxes=1)
-    with pytest.raises(ValueError):
-        env.reset(num_players=1, seed=1, max_retries=0)
-    with pytest.raises(ValueError):
-        env.reset(num_players=1, seed=1, max_retries=101)
+def test_generation_gives_up_after_max_retries(monkeypatch):
+    attempts = []
+
+    def failing_generate_room(*args, **kwargs):
+        attempts.append(kwargs)
+        return None
+
+    monkeypatch.setattr(sokoban_env, "generate_room", failing_generate_room)
+    env = SokobanEnv(dim_room=(6, 6), num_boxes=1, max_retries=3)
+    with pytest.raises(RuntimeError, match="after 3 attempts"):
+        env.reset(num_players=1, seed=1)
+    assert len(attempts) == 3

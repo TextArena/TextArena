@@ -218,11 +218,11 @@ def test_padded_decision_is_rejected_quickly():
 
 def test_multiline_rationale_and_padded_commands_still_parse():
     env = _fresh()
-    env.step("  First point.\n\n  Second point.  \n  [Propose] a b c d e a b c  \n")
+    env.step("  First point.\n\n  Second point.  \n  Propose a b c d e a b c  \n")
     gs = env.state.game_state
     assert gs["current_rationale"] == "First point.\n\n  Second point."
     assert gs["current_proposal"]["choices"]["Job Assignment"] == "Division C"
-    done, _ = env.step("  [ accept ]  ")
+    done, _ = env.step("  accept  ")
     assert done
 
 

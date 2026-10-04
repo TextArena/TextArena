@@ -89,7 +89,7 @@ class IteratedRockPaperScissorsEnv(ta.GameEnv):
         return None
 
     def _parse_action(self, action: str) -> str:
-        match = re.match(r"^\s*\[?\s*(rock|paper|scissors|r|p|s)\s*\]?\s*$", action.strip().lower())
+        match = re.match(r"^(rock|paper|scissors|r|p|s)$", action.strip().lower())
         if not match: return ""
         return {"r": "rock", "p": "paper", "s": "scissors"}.get(match.group(1), match.group(1))
 

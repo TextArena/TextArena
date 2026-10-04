@@ -12,10 +12,7 @@ class CryptarithmEnv(ta.GameEnv):
     MAX_WORD_LENGTH = 64
     MAX_SOLVER_DEPTH = 500
 
-    _ACTION_RE = re.compile(
-        r"(?P<wrapped>\[)?\s*(?P<letter>[A-Za-z])"
-        r"(?:\s*,\s*|\s+)(?P<digit>\d|-)\s*(?(wrapped)\])"
-    )
+    _ACTION_RE = re.compile(r"(?P<letter>[A-Za-z])(?:\s*,\s*|\s+)(?P<digit>\d|-)")
 
     def __init__(self, equation: str = "SEND + MORE = MONEY", max_turns: int = 100):
         """ equation : string of the form 'WORD [+ WORD …] = WORD' """

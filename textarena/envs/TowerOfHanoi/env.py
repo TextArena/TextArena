@@ -9,10 +9,7 @@ class TowerOfHanoiEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
     MAX_DISKS = 20
-    _MOVE_RE = re.compile(
-        r"(?P<wrapped>\[)?\s*(?P<source>[ABCabc])"
-        r"(?:\s*,\s*|\s+)(?P<target>[ABCabc])\s*(?(wrapped)\])"
-    )
+    _MOVE_RE = re.compile(r"(?P<source>[ABCabc])(?:\s*,\s*|\s+)(?P<target>[ABCabc])")
 
     def __init__(self, num_disks: int=3, max_turns: int=100):
         """

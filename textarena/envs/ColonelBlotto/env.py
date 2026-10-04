@@ -106,16 +106,8 @@ class ColonelBlottoEnv(ta.GameEnv):
 
     def _parse_allocation_input(self, action_string: str) -> Optional[Dict[str, int]]:
         if not action_string or not action_string.strip(): return None
-        raw = action_string.strip()
-        legacy_match = re.fullmatch(r"\[\s*([^\[\]]+?)\s*\]", raw)
-        if legacy_match:
-            s = legacy_match.group(1).strip()
-        elif "[" in raw or "]" in raw:
-            return None
-        else:
-            s = raw
-        if not s: return None
-        token_re = re.compile(r"([A-Za-z])\s*:?\s*(\d+)", re.IGNORECASE)
+        s = action_string.strip()
+        token_re = re.compile(r"([A-Za-z])\s*(?::\s*)?(\d+)", re.IGNORECASE)
         matches = list(token_re.finditer(s))
         if not matches: return None
         allocations: Dict[str, int] = {}

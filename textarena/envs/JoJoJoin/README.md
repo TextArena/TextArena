@@ -27,8 +27,7 @@ when evaluating.
 
 ## Actions
 
-Reply with the number of an empty cell; surrounding brackets are tolerated. Cells are numbered left to right, top to
-bottom:
+Reply with the number of an empty cell. Cells are numbered left to right, top to bottom:
 
 ```
   0 |  1 |  2 |  3 |  4

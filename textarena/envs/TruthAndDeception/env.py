@@ -22,8 +22,8 @@ class TruthAndDeceptionEnv(ta.GameEnv):
             raise ValueError("max_turns must be an even integer of at least 2 so the Guesser takes the final turn.")
         self.max_turns = max_turns
         self._load_facts(data_path=data_path)
-        self.guess_fact1_pattern = re.compile(r"^\s*(?:Fact\s+1|\[\s*Fact\s+1\s*\])\s*$", re.IGNORECASE)
-        self.guess_fact2_pattern = re.compile(r"^\s*(?:Fact\s+2|\[\s*Fact\s+2\s*\])\s*$", re.IGNORECASE)
+        self.guess_fact1_pattern = re.compile(r"^\s*Fact\s+1\s*$", re.IGNORECASE)
+        self.guess_fact2_pattern = re.compile(r"^\s*Fact\s+2\s*$", re.IGNORECASE)
 
     def get_board_str(self):
         return create_board_str(game_state=self.game_state, reveal_answer=self.state.done)

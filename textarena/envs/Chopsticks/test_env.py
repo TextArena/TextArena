@@ -17,7 +17,7 @@ def test_reset_initial_hands():
 
 @pytest.mark.parametrize("num_players", [1, 3])
 def test_reset_requires_exactly_two_players(num_players):
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         ChopsticksEnv().reset(num_players=num_players, seed=42)
 
 

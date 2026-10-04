@@ -32,10 +32,8 @@ class CrusadeEnv(ta.GameEnv):
     SCORE_PER_CAPTURE = 1
 
     action_pattern = (
-        r"^\s*(?P<bracket>\[)?\s*"
-        r"(?P<source>[a-hA-H][1-8]|[0-9]+)\s+"
-        r"(?P<target>[a-hA-H][1-8]|[0-9]+)\s*"
-        r"(?(bracket)\])\s*$"
+        r"^(?P<source>[a-hA-H][1-8]|[0-9]+)\s+"
+        r"(?P<target>[a-hA-H][1-8]|[0-9]+)$"
     )
     action_format = "a move 'from to' in board coordinates, for example 'b1 c3' as White or 'b8 c6' as Black"
 

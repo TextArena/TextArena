@@ -26,7 +26,7 @@ class LeTrucEnv(ta.GameEnv):
     max_stake = 12
 
     _ACTION_RE = re.compile(
-        r"^\s*\[?\s*(?P<verb>play|raise|accept|fold)(?:\s+(?P<rank>10|[2-9AKQJ]))?\s*\]?\s*$",
+        r"^(?P<verb>play|raise|accept|fold)(?:\s+(?P<rank>10|[2-9AKQJ]))?$",
         re.IGNORECASE,
     )
 

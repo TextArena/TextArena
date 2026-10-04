@@ -10,8 +10,8 @@ class SimpleNegotiationEnv(ta.GameEnv):
     max_players = 2
 
     # A line is a command attempt when it starts with one of these words; anything
-    # else is free-text chat. Bracketed forms remain accepted for backwards compatibility.
-    _COMMAND_WORD_RE = re.compile(r"\[?\s*(?:accept|deny|offer)\b", re.IGNORECASE)
+    # else is free-text chat.
+    _COMMAND_WORD_RE = re.compile(r"(?:accept|deny|offer)\b", re.IGNORECASE)
     max_command_chars = 500
 
     def __init__(self, max_turns: int = 10):
@@ -160,17 +160,13 @@ class SimpleNegotiationEnv(ta.GameEnv):
             return None
         if len(text) > self.max_command_chars:
             return ("malformed", None)
-        bracketed = text.startswith("[") and text.endswith("]")
-        inner = text[1:-1].strip() if bracketed else text
-        keyword = inner.lower()
+        keyword = text.lower()
         if keyword in ("accept", "deny"):
             return (keyword, None)
         if keyword.startswith("offer"):
-            rest = inner[len("offer"):].lstrip()
+            rest = text[len("offer"):].lstrip()
             if rest.startswith(":"):
                 return ("offer", rest[1:].strip())
-            if bracketed:  # legacy "[Offer 2 Wheat -> 3 Ore]"
-                return ("offer", rest)
         return ("malformed", None)
 
     def _execute_trade(self, acceptor_id: int) -> None:

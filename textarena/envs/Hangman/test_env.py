@@ -9,8 +9,6 @@ import string
 
 import pytest
 
-import textarena.envs.Hangman.env as hangman_module
-import textarena.utils.word_lists as word_lists
 from textarena.envs.Hangman.env import HangmanEnv
 from textarena.utils.word_lists import get_basic_english_words, get_headwords
 
@@ -74,14 +72,14 @@ def test_running_out_of_tries_loses():
 
 def test_invalid_format_does_not_end_game():
     env = _fresh()
-    done, _ = env.step("no brackets here")
+    done, _ = env.step("not one word")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_format_error_describes_expected_action():
     env = _fresh()
-    env.step("no brackets here")
+    env.step("not one word")
     notice = next(message for _, message in env.state.logs if "attempted an invalid move" in message)
     assert f"Expected {env.action_format}." in notice
 
@@ -196,15 +194,8 @@ def test_long_adversarial_word_costs_only_one_try():
     assert env.state.game_state["tries_left"] == 5
 
 
-class _MissingCorpus:
-    def words(self, *args, **kwargs):
-        raise LookupError("corpus unavailable")
-
-
 @pytest.mark.parametrize("hardcore", [False, True])
-def test_secret_words_do_not_depend_on_the_nltk_corpus(monkeypatch, hardcore):
-    monkeypatch.setattr(word_lists, "words", _MissingCorpus())
-    monkeypatch.setattr(hangman_module, "words", _MissingCorpus(), raising=False)
+def test_secret_words_come_from_basic_english_or_headwords(hardcore):
     env = HangmanEnv(hardcore=hardcore)
     source = get_headwords() if hardcore else get_basic_english_words()
     assert env.word_list == sorted(word for word in source if len(word) >= 3)

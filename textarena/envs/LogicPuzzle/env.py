@@ -258,10 +258,6 @@ class LogicPuzzleEnv(ta.GameEnv):
                 f"Action is too long (maximum {self.max_action_chars} characters)."
             )
         action_text = move.strip()
-        if action_text.startswith("[") or action_text.endswith("]"):
-            if not (action_text.startswith("[") and action_text.endswith("]")):
-                return self._format_error("Invalid move format: mismatched brackets.")
-            action_text = action_text[1:-1].strip()
         raw_actions = [part.strip() for part in action_text.split(",")]
         action_pattern = re.compile(r"([a-zA-Z]+)\s+([a-zA-Z]+)\s+([XOxo])")
         if not raw_actions or any(not part for part in raw_actions):

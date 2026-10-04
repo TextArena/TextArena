@@ -15,7 +15,7 @@ import os
 import re
 import csv
 import math
-import numpy as np
+import statistics
 from typing import Any, Dict, List, Optional, Tuple, Union
 from collections import defaultdict
 
@@ -41,17 +41,15 @@ class VendorNegotiationEnv(ta.GameEnv):
     max_players = 2
 
     # Decision grammar (what the prompts teach): a decision is a line whose
-    # first token is exactly the command keyword, case-insensitive and
-    # optionally bracketed, followed by its arguments; trailing "." or "!" is
-    # tolerated. A "propose" line whose remainder is empty or starts with a
-    # digit is a proposal attempt and must be well-formed. Every other line,
-    # such as "Proposed changes ..." or "Accept this?", is conversation. The
-    # legacy embedded "[Propose]"/"[Accept]"/"[Reject]" tokens still count.
-    _ACCEPT_LINE_RE = re.compile(r"\[?\s*accept\s*\]?[.!]*", re.IGNORECASE)
-    _REJECT_LINE_RE = re.compile(r"\[?\s*reject\s*\]?[.!]*", re.IGNORECASE)
-    _PROPOSE_LINE_RE = re.compile(r"\[?\s*propose\s*\]?(?![^\s:.!])\s*:?\s*(?P<args>.*)", re.IGNORECASE)
+    # first token is exactly the command keyword, case-insensitive, followed
+    # by its arguments; trailing "." or "!" is tolerated. A "propose" line
+    # whose remainder is empty or starts with a digit is a proposal attempt
+    # and must be well-formed. Every other line, such as "Proposed changes ..."
+    # or "Accept this?", is conversation.
+    _ACCEPT_LINE_RE = re.compile(r"accept[.!]*", re.IGNORECASE)
+    _REJECT_LINE_RE = re.compile(r"reject[.!]*", re.IGNORECASE)
+    _PROPOSE_LINE_RE = re.compile(r"propose(?![^\s:.!])\s*:?\s*(?P<args>.*)", re.IGNORECASE)
     _DISCOUNT_LIST_RE = re.compile(r"[0-9]+%(?:\s*,\s*[0-9]+%)*")
-    _LEGACY_DECISION_RE = re.compile(r"\[(Propose|Accept|Reject)\]")
 
     def __init__(self,
                  num_products: int = 5,
@@ -62,8 +60,7 @@ class VendorNegotiationEnv(ta.GameEnv):
                  num_simulations: int = 1000,
                  brand_role: Optional[str] = None,
                  vendor_role: Optional[str] = None,
-                 product_list_path: Optional[str] = None,
-                 seed: Optional[int] = None):
+                 product_list_path: Optional[str] = None):
         """
         Initialize the Vendor Negotiation environment.
 
@@ -79,7 +76,6 @@ class VendorNegotiationEnv(ta.GameEnv):
             brand_role: Role file name for Player 0 (default: "default")
             vendor_role: Role file name for Player 1 (default: "default")
             product_list_path: Path to product CSV file (default: "data/product_list.csv")
-            seed: Random seed for reproducibility
         """
         if not isinstance(num_products, int) or isinstance(num_products, bool) or num_products <= 0:
             raise ValueError("num_products must be a positive integer")
@@ -89,7 +85,6 @@ class VendorNegotiationEnv(ta.GameEnv):
             raise ValueError("error_allowance must be a non-negative integer")
         if not isinstance(num_simulations, int) or isinstance(num_simulations, bool) or num_simulations <= 0:
             raise ValueError("num_simulations must be a positive integer")
-        self._validate_seed(seed)
         self.num_products = num_products
         self.max_rounds = max_rounds
         self.error_allowance = error_allowance
@@ -99,7 +94,6 @@ class VendorNegotiationEnv(ta.GameEnv):
         self.brand_role_name = brand_role or "default"
         self.vendor_role_name = vendor_role or "default"
         self.product_list_path = product_list_path or "data/product_list.csv"
-        self.seed = seed
 
         # Load product data and roles
         self.all_products = self._load_product_data()
@@ -213,21 +207,6 @@ class VendorNegotiationEnv(ta.GameEnv):
             default_path = os.path.join(os.path.dirname(__file__), "data", "roles", player_type, "default.txt")
             with open(default_path, 'r') as f:
                 return f.read().strip()
-
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        """Reset the environment with an isolated NumPy generator for simulation."""
-        if seed is None:
-            seed = self.seed
-        self._validate_seed(seed)
-        self.np_rng = np.random.default_rng(seed)
-        super().reset(num_players=num_players, seed=seed)
-
-    @staticmethod
-    def _validate_seed(seed: Optional[int]) -> None:
-        if seed is not None and (
-            not isinstance(seed, int) or isinstance(seed, bool) or seed < 0
-        ):
-            raise ValueError("seed must be a non-negative integer or None")
 
     @staticmethod
     def _validate_fraction(value: float, name: str) -> float:
@@ -348,7 +327,7 @@ ROUNDS: {self.max_rounds} maximum
             self.num_simulations,
         )
 
-    # -- command detection: own-line decision or legacy bracketed token --
+    # -- command detection: a decision is a line of its own --
     def _classify_line(self, line: str) -> Optional[Tuple[str, str]]:
         """('accept'|'reject', '') or ('propose', arguments) if a stripped line is a decision."""
         if self._ACCEPT_LINE_RE.fullmatch(line):
@@ -363,22 +342,13 @@ ROUNDS: {self.max_rounds} maximum
         return None
 
     def _find_decisions(self, lines: List[str]) -> List[Dict[str, Any]]:
-        """Every decision in the message: kind, arguments, line index, and the
-        column span the command (with its arguments) covers in that line."""
+        """Every decision line in the message: kind, arguments, and line index."""
         decisions = []
         for index, line in enumerate(lines):
             classified = self._classify_line(line.strip())
             if classified is not None:
                 kind, args = classified
-                decisions.append({"kind": kind, "args": args, "line": index, "start": 0, "end": len(line)})
-                continue
-            for match in self._LEGACY_DECISION_RE.finditer(line):
-                kind = match.group(1).lower()
-                if kind == "propose":
-                    args, end = line[match.end():].strip().rstrip(".!").rstrip(), len(line)
-                else:
-                    args, end = "", match.end()
-                decisions.append({"kind": kind, "args": args, "line": index, "start": match.start(), "end": end})
+                decisions.append({"kind": kind, "args": args, "line": index})
         return decisions
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
@@ -418,11 +388,9 @@ ROUNDS: {self.max_rounds} maximum
         if len(decisions) > 1:
             return None, "Multiple decisions detected. Use only one decision per turn."
         decision = decisions[0]
-        line = lines[decision["line"]]
-        trailing = line[decision["end"]:].strip().lstrip(".!").strip()
-        if trailing or any(rest.strip() for rest in lines[decision["line"] + 1:]):
+        if any(rest.strip() for rest in lines[decision["line"] + 1:]):
             return None, "The decision must be the last line of your message."
-        decision["before"] = "\n".join(lines[:decision["line"]] + [line[:decision["start"]]]).strip()
+        decision["before"] = "\n".join(lines[:decision["line"]]).strip()
 
         if decision["kind"] == "propose":
             discounts, reason = self._parse_discounts(decision["args"])
@@ -559,19 +527,15 @@ ROUNDS: {self.max_rounds} maximum
 
     def _calculate_actual_sales(self, agreed_discounts: Dict[str, int]) -> Dict[str, Dict[str, float]]:
         """Run Monte Carlo simulation to calculate expected sales and profit."""
-        all_simulations = {
-            product: {'units': [], 'sales': [], 'profit': []} for product in agreed_discounts.keys()
-        }
-
-        # Run simulations (vectorized for speed)
+        results = {}
         for product_name, discount in agreed_discounts.items():
             product_data = self.products[product_name]['data'][discount]
 
-            units_samples = np.maximum(0, self.np_rng.normal(
-                product_data['mean_units'],
-                product_data['std_units'],
-                size=self.num_simulations
-            ))
+            units_samples = [
+                max(0.0, self.rng.gauss(product_data['mean_units'], product_data['std_units']))
+                for _ in range(self.num_simulations)
+            ]
+            avg_units = statistics.fmean(units_samples)
 
             # Each unit earns the forecast's per-unit sales and profit, so the
             # expected totals match the forecasts both players are shown.
@@ -579,18 +543,11 @@ ROUNDS: {self.max_rounds} maximum
             sales_per_unit = product_data['mean_sales'] / mean_units if mean_units else 0.0
             profit_per_unit = product_data['mean_profit'] / mean_units if mean_units else 0.0
 
-            all_simulations[product_name]['units'] = units_samples
-            all_simulations[product_name]['sales'] = units_samples * sales_per_unit
-            all_simulations[product_name]['profit'] = units_samples * profit_per_unit
-
-        # Calculate statistics
-        results = {}
-        for product_name in agreed_discounts.keys():
             results[product_name] = {
-                'discount': agreed_discounts[product_name],
-                'avg_units': float(np.mean(all_simulations[product_name]['units'])),
-                'avg_sales': float(np.mean(all_simulations[product_name]['sales'])),
-                'avg_profit': float(np.mean(all_simulations[product_name]['profit']))
+                'discount': discount,
+                'avg_units': avg_units,
+                'avg_sales': avg_units * sales_per_unit,
+                'avg_profit': avg_units * profit_per_unit,
             }
 
         return results

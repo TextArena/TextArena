@@ -68,5 +68,6 @@ and direction, and most clues state the word length, for example:
 ## Notes
 
 - The words and clues live in `words_clues.jsonl`: 100 words (50 standard, 50 hardcore), each with ten clues.
-- `utils/words_clues_generator.py` regenerates that file by sampling words from the NLTK `words` corpus and asking an
-  LLM for clues through OpenRouter (requires `OPENROUTER_API_KEY`). Playing the game needs neither.
+- `scripts/crosswords_clues.py` in the repository regenerates that file by sampling standard words from Ogden's Basic
+  English and hardcore words from the dictionary headwords (both in `textarena/utils/word_lists.py`) and asking an LLM
+  for clues through OpenRouter (requires `OPENROUTER_API_KEY`). Playing the game needs neither.

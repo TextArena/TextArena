@@ -18,10 +18,9 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `WordSearch-v0-mdp`
 
 ## Rules
 
-- At reset, five words are drawn from NLTK's Basic English list (or from the full NLTK English word list in hardcore
-  mode; without the NLTK corpus, from bundled lists instead, see Notes). Each is placed in a square grid either
-  across (left to right) or down (top to bottom), sometimes crossing another word on a shared letter. The remaining
-  cells are filled with random letters.
+- At reset, five words are drawn from a bundled list of common words (or from every dictionary headword in hardcore
+  mode; see Notes). Each is placed in a square grid either across (left to right) or down (top to bottom), sometimes
+  crossing another word on a shared letter. The remaining cells are filled with random letters.
 - The player is told which words to find.
 - Each turn, you name the start and end cells of one word. A guess is correct only if the two cells are exactly the
   endpoints of a hidden word; they may be given in either order.
@@ -58,16 +57,15 @@ found) or incorrect.
 
 ## Parameters
 
-- `hardcore` (default `False`): draw the words from the full NLTK English word list (about 236,000 entries, many of
-  them rare) instead of the 850-word Basic English list.
+- `hardcore` (default `False`): draw the words from every dictionary headword (about 38,700 words, many of them rare)
+  instead of the 14,700 common words.
 - `max_turns` (default `None`): an optional cap on the total number of guesses, correct or incorrect. The default cap
   is 25 (five words plus 20 incorrect attempts), which a game can never reach; it only guarantees termination. A
   smaller value can end the game while incorrect attempts remain, and the prompt then states it.
 
 ## Notes
 
-- The words come from the NLTK `words` corpus (`nltk.download('words')`). Without it, the game uses the bundled
-  dictionaries in `textarena/utils/word_lists.py`: `get_common_words()` (about 14,800 base words of 3 to 8 letters
-  that both the UK and the US list contain and that take a regular inflection) instead of Basic English, and
-  `get_headwords()` (about 38,800 base words of 3 or more letters) in hardcore mode. A seed then produces different
-  boards than it does with NLTK installed.
+- Both word lists are bundled in `textarena/utils/word_lists.py`: `get_common_words()` (about 14,700 base words of 3
+  to 8 letters that both the UK and the US dictionary contain and that take a regular inflection) and, in hardcore
+  mode, `get_headwords()` (about 38,700 base words of 3 or more letters). A seed produces the same board on every
+  machine.

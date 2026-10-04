@@ -141,7 +141,7 @@ def test_format_error_describes_expected_action():
     assert fresh.state.turn == 1
 
 
-@pytest.mark.parametrize("action, cell", [("[12]", 12), (" 7 ", 7), ("007", 7), ("0", 0), ("24", 24)])
+@pytest.mark.parametrize("action, cell", [(" 7 ", 7), ("007", 7), ("0", 0), ("24", 24)])
 def test_lenient_but_unambiguous_formats_are_accepted(action, cell):
     env = _fresh()
     _play(env, action)

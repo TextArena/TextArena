@@ -5,8 +5,6 @@ import textarena as ta
 from textarena.envs.WordSearch.renderer import create_board_str
 from textarena.utils.word_lists import get_common_words, get_headwords
 
-from nltk.corpus import words
-
 
 class WordSearchEnv(ta.GameEnv):
     """ Word Search environment """
@@ -16,17 +14,14 @@ class WordSearchEnv(ta.GameEnv):
     snapshot_excluded_attributes = ("word_list",)
     MAX_INCORRECT_TRIES = 20
     MAX_COORDINATE_DIGITS = 6
-    _ACTION_RE = re.compile(
-        r"(?P<wrapped>\[)?\s*(?P<start_row>\d+)\s+(?P<start_col>\d+)"
-        r"\s+(?P<end_row>\d+)\s+(?P<end_col>\d+)\s*(?(wrapped)\])"
-    )
+    _ACTION_RE = re.compile(r"(?P<start_row>\d+)\s+(?P<start_col>\d+)\s+(?P<end_row>\d+)\s+(?P<end_col>\d+)")
 
     def __init__(self, hardcore: Optional[bool] = False, max_turns: Optional[int] = None):
         """
         Initialize the Word Search environment.
 
         Args:
-            hardcore: Whether to play in hardcore mode.
+            hardcore: Draw the words from every dictionary headword instead of the common words.
             max_turns: Optional cap on the total number of guesses, correct or not. The default,
                 num_words + MAX_INCORRECT_TRIES, is never reached: the game ends at the last word
                 or the last incorrect attempt first.
@@ -39,17 +34,7 @@ class WordSearchEnv(ta.GameEnv):
         self.num_words = 5
         self.max_turns = self.num_words + self.MAX_INCORRECT_TRIES if max_turns is None else max_turns
 
-        ## load the word list
-        corpus_name = "en" if self.hardcore else "en-basic"
-        try:
-            corpus_words = words.words(corpus_name)
-        except LookupError:
-            corpus_words = sorted(get_headwords() if self.hardcore else get_common_words())
-        self.word_list = list(
-            dict.fromkeys(word.upper() for word in corpus_words if word.isalpha() and len(word) >= 2)
-        )
-        if len(self.word_list) < self.num_words:
-            raise ValueError("word corpus does not contain enough usable words")
+        self.word_list = [word.upper() for word in sorted(get_headwords() if self.hardcore else get_common_words())]
 
     # Convenience accessors kept for renderers/tests; game data lives in game_state.
     @property
@@ -129,7 +114,7 @@ class WordSearchEnv(ta.GameEnv):
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         gs = self.game_state
-        match = self._ACTION_RE.fullmatch(action.strip())
+        match = self._ACTION_RE.fullmatch(action)
         if not match:
             return self.invalid(f"Invalid move format. Player {player_id} did not respond with valid 'start_row start_col end_row end_col'.")
 

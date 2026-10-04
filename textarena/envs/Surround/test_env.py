@@ -1,11 +1,10 @@
 """Offline, deterministic tests for the Surround environment.
 
 Surround is an FFA "light-cycle" game with simultaneous moves. Players submit a
-direction token (``up/down/left/right`` or w/a/s/d, brackets tolerated); an unparsable action
+direction token (``up/down/left/right`` or w/a/s/d); an unparsable action
 kills that player immediately. Ranking-based rewards span [-1, +1]. All spawns are
 deterministic via ``seed=42``. We use a compact 5x5 board.
 """
-import copy
 
 import pytest
 
@@ -44,7 +43,7 @@ def test_valid_move_leaves_trail_and_moves_head():
     start1 = players[1].position
     # Two "up" moves complete one simultaneous resolution.
     env.step("up")
-    env.step("[up]")  # brackets tolerated
+    env.step("up")
     board = env.state.game_state["board"]
     trails = sum(1 for row in board for cell in row if cell is not None)
     assert trails >= 2  # both heads left a trail behind

@@ -4,9 +4,10 @@ evaluate it offline against a fixed opponent.
 We evaluate a Tinker checkpoint against a fixed opponent served via OpenRouter.
 """
 import os
+import random
+import statistics
 from collections import defaultdict
 
-import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
@@ -32,7 +33,7 @@ def run_game(env_id: str, num_players: int, model, opponent) -> dict:
     env = ta.make(env_id)
     env.reset(num_players=num_players)
 
-    model_pid = np.random.randint(0, num_players)    # random seat
+    model_pid = random.randrange(num_players)    # random seat
     done = False
 
     while not done:
@@ -44,7 +45,7 @@ def run_game(env_id: str, num_players: int, model, opponent) -> dict:
 
     return {
         "model_reward": rewards[model_pid],
-        "opponent_reward": np.mean([rewards[i] for i in range(num_players) if i != model_pid]),
+        "opponent_reward": statistics.fmean(rewards[i] for i in range(num_players) if i != model_pid),
         "invalid_move": bool(game_info[model_pid]["invalid_move"]),
         "turn_count":  game_info[model_pid]["turn_count"],
     }

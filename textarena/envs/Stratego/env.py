@@ -7,7 +7,7 @@ class StrategoEnv(ta.GameEnv):
     """ A two-player implementation of the board game Stratego """
     min_players = 2
     max_players = 2
-    action_pattern = r"(?i)^\s*\[?\s*([A-J])([0-9])\s+([A-J])([0-9])\s*\]?\s*$"
+    action_pattern = r"(?i)^([A-J])([0-9])\s+([A-J])([0-9])$"
     action_format = (
         "the source and destination squares, each a row letter from A to J followed by a column number from 0 to 9, "
         "for example 'A0 B0'"

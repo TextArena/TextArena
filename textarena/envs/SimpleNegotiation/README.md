@@ -52,8 +52,7 @@ Any line that begins with `Offer`, `Accept`, or `Deny` is read as a command and 
 exactly, so `Accept.` or `Offer 3 Sheep -> 1 Brick` (no colon) is invalid. Lines that merely contain those words, such
 as `I accept your point`, are chat. A message is also invalid if it has more than one command, offers resources you
 do not hold, names an unknown resource or a zero quantity, accepts or denies when no offer is pending, or accepts
-without holding the requested resources. The legacy bracketed forms `[Accept]`, `[Deny]`, and `[Offer: ...]` still
-work.
+without holding the requested resources.
 
 ## Observations
 

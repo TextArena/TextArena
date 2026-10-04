@@ -82,7 +82,7 @@ class ScenarioPlanningEnv(ta.GameEnv):
         )
 
     def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
-        return None  # strategies are never echoed (the legacy env did not surface them at all)
+        return None  # an echo would show the strategy to the opponent
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         if not isinstance(action, str) or not action.strip():

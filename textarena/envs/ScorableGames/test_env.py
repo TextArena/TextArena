@@ -1,7 +1,4 @@
 import pytest
-import os
-from typing import Dict, Any, List, Optional
-from unittest.mock import patch
 
 import textarena as ta
 from textarena.envs.ScorableGames.env import ScorableGamesEnv
@@ -92,10 +89,10 @@ class TestScorableGamesEnv:
     def test_reset_wrong_player_count(self, env):
         """Test reset with incorrect number of players."""
         # Base game expects 6 players
-        with pytest.raises(ValueError, match="Game config expects 6 players, got 4"):
+        with pytest.raises(ValueError, match="needs exactly 6 players, received 4"):
             env.reset(num_players=4)
         
-        with pytest.raises(ValueError, match="Game config expects 6 players, got 8"):
+        with pytest.raises(ValueError, match="needs exactly 6 players, received 8"):
             env.reset(num_players=8)
 
     def test_game_configuration_loading(self, reset_env):
@@ -126,8 +123,8 @@ class TestScorableGamesEnv:
             for issue in ["A", "B", "C", "D", "E"]:
                 assert issue in env.player_scores[player_id]
     
-    def test_missing_bracketed_keyword(self, reset_env):
-        """Test actions without bracketed keywords."""
+    def test_missing_command_keyword(self, reset_env):
+        """Test actions without a command keyword at the start of a line."""
         env = reset_env
         
         # Missing Propose command
@@ -171,37 +168,37 @@ class TestScorableGamesEnv:
         
         # 1. Multiple complete proposals - last valid options win
         env.current_deal = {}
-        env._process_valid_action(current_player, "Propose A1 B2 C3 D1 E4 A2 B1 C2 D2 E3")
+        env._process_action(current_player, "Propose A1 B2 C3 D1 E4 A2 B1 C2 D2 E3")
         # The last valid option for each issue should be used: A2, B1, C2, D2, E3
         assert env.current_deal == {"A": "A2", "B": "B1", "C": "C2", "D": "D2", "E": "E3"}
         
         # 2. Duplicate options for same issue - last one wins
         env.current_deal = {}
-        env._process_valid_action(current_player, "Propose A1 A2 B2 C3 D1 E4")
+        env._process_action(current_player, "Propose A1 A2 B2 C3 D1 E4")
         # A2 should override A1
         assert env.current_deal == {"A": "A2", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         
         # 3. Duplicate in middle - still last one wins
         env.current_deal = {}
-        env._process_valid_action(current_player, "Propose A1 B2 A2 C3 D1 E4")
+        env._process_action(current_player, "Propose A1 B2 A2 C3 D1 E4")
         # A2 should override A1 even though it appears in the middle
         assert env.current_deal == {"A": "A2", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         
         # 4. Extra option at end - last valid one wins
         env.current_deal = {}
-        env._process_valid_action(current_player, "Propose A1 B2 C3 D1 E4 A2")
+        env._process_action(current_player, "Propose A1 B2 C3 D1 E4 A2")
         # A2 should override A1
         assert env.current_deal == {"A": "A2", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         
         # 5. Invalid options are ignored
         env.current_deal = {}
-        env._process_valid_action(current_player, "Propose A1 B2 C3 D1 E4 X1 Y2")
+        env._process_action(current_player, "Propose A1 B2 C3 D1 E4 X1 Y2")
         # Invalid options X1, Y2 are ignored, original proposal stands
         assert env.current_deal == {"A": "A1", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         
         # 6. Newline separation - only first line is processed
         env.current_deal = {}
-        env._process_valid_action(current_player, "Propose A1 B2 C3 D1 E4\nA2 B1 C2 D2 E3")
+        env._process_action(current_player, "Propose A1 B2 C3 D1 E4\nA2 B1 C2 D2 E3")
         # Only the first line should be processed
         assert env.current_deal == {"A": "A1", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
 
@@ -224,7 +221,7 @@ class TestScorableGamesEnv:
         # 1. Rationale before keyword - should be extracted
         env.negotiation_history = []
         env.current_deal = {}
-        env._process_valid_action(current_player, "I think this is fair\nPropose A1 B2 C3 D1 E4")
+        env._process_action(current_player, "I think this is fair\nPropose A1 B2 C3 D1 E4")
         assert len(env.negotiation_history) == 1
         assert env.negotiation_history[0]["rationale"] == "I think this is fair"
         assert env.negotiation_history[0]["action_type"] == "Propose"
@@ -232,7 +229,7 @@ class TestScorableGamesEnv:
         # 2. Rationale after keyword - should be empty (text after keyword is ignored)
         env.negotiation_history = []
         env.current_deal = {}
-        env._process_valid_action(current_player, "Propose A1 B2 C3 D1 E4 because it's balanced")
+        env._process_action(current_player, "Propose A1 B2 C3 D1 E4 because it's balanced")
         assert len(env.negotiation_history) == 1
         assert env.negotiation_history[0]["rationale"] == ""
         assert env.negotiation_history[0]["action_type"] == "Propose"
@@ -240,7 +237,7 @@ class TestScorableGamesEnv:
         # 3. Both before and after - only before keyword is extracted
         env.negotiation_history = []
         env.current_deal = {}
-        env._process_valid_action(current_player, "I believe\nPropose A1 B2 C3 D1 E4 is the best option")
+        env._process_action(current_player, "I believe\nPropose A1 B2 C3 D1 E4 is the best option")
         assert len(env.negotiation_history) == 1
         assert env.negotiation_history[0]["rationale"] == "I believe"
         assert env.negotiation_history[0]["action_type"] == "Propose"
@@ -249,7 +246,7 @@ class TestScorableGamesEnv:
         env.negotiation_history = []
         env.current_deal = {"A": "A1", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         env.player_votes = {}
-        env._process_valid_action(current_player, "This meets our needs\nAccept")
+        env._process_action(current_player, "This meets our needs\nAccept")
         assert len(env.negotiation_history) == 1
         assert env.negotiation_history[0]["rationale"] == "This meets our needs"
         assert env.negotiation_history[0]["action_type"] == "Accept"
@@ -258,7 +255,7 @@ class TestScorableGamesEnv:
         env.negotiation_history = []
         env.current_deal = {"A": "A1", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         env.player_votes = {}
-        env._process_valid_action(current_player, "Accept this proposal")
+        env._process_action(current_player, "Accept this proposal")
         assert len(env.negotiation_history) == 1
         assert env.negotiation_history[0]["rationale"] == ""
         assert env.negotiation_history[0]["action_type"] == "Accept"
@@ -267,7 +264,7 @@ class TestScorableGamesEnv:
         env.negotiation_history = []
         env.current_deal = {"A": "A1", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         env.player_votes = {}
-        env._process_valid_action(current_player, "Environmental concerns\nReject")
+        env._process_action(current_player, "Environmental concerns\nReject")
         assert len(env.negotiation_history) == 1
         assert env.negotiation_history[0]["rationale"] == "Environmental concerns"
         assert env.negotiation_history[0]["action_type"] == "Reject"
@@ -276,7 +273,7 @@ class TestScorableGamesEnv:
         env.negotiation_history = []
         env.current_deal = {"A": "A1", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         env.player_votes = {}
-        env._process_valid_action(current_player, "Reject due to environmental impact")
+        env._process_action(current_player, "Reject due to environmental impact")
         assert len(env.negotiation_history) == 1
         assert env.negotiation_history[0]["rationale"] == ""
         assert env.negotiation_history[0]["action_type"] == "Reject"
@@ -284,7 +281,7 @@ class TestScorableGamesEnv:
         # 8. No rationale - should be empty
         env.negotiation_history = []
         env.current_deal = {}
-        env._process_valid_action(current_player, "Propose A1 B2 C3 D1 E4")
+        env._process_action(current_player, "Propose A1 B2 C3 D1 E4")
         assert len(env.negotiation_history) == 1
         assert env.negotiation_history[0]["rationale"] == ""
         assert env.negotiation_history[0]["action_type"] == "Propose"
@@ -293,7 +290,7 @@ class TestScorableGamesEnv:
         env.negotiation_history = []
         env.current_deal = {"A": "A1", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         env.player_votes = {}
-        env._process_valid_action(current_player, "   Leading spaces\nAccept   ")
+        env._process_action(current_player, "   Leading spaces\nAccept   ")
         assert len(env.negotiation_history) == 1
         assert env.negotiation_history[0]["rationale"] == "Leading spaces"  # Trimmed
         assert env.negotiation_history[0]["action_type"] == "Accept"
@@ -329,7 +326,7 @@ class TestScorableGamesEnv:
         assert env._is_valid_action("InvalidKeyword\nPropose A1 B2 C3 D1 E4")
         env.negotiation_history = []
         env.current_deal = {}
-        env._process_valid_action(current_player, "InvalidKeyword\nPropose A1 B2 C3 D1 E4")
+        env._process_action(current_player, "InvalidKeyword\nPropose A1 B2 C3 D1 E4")
         assert env.current_deal == {"A": "A1", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         assert env.negotiation_history[-1]["action_type"] == "Propose"
         
@@ -337,7 +334,7 @@ class TestScorableGamesEnv:
         assert env._is_valid_action("Propose A1 B2 C3 D1 E4 InvalidKeyword")
         env.negotiation_history = []
         env.current_deal = {}
-        env._process_valid_action(current_player, "Propose A1 B2 C3 D1 E4 InvalidKeyword")
+        env._process_action(current_player, "Propose A1 B2 C3 D1 E4 InvalidKeyword")
         assert env.current_deal == {"A": "A1", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         assert env.negotiation_history[-1]["action_type"] == "Propose"
         
@@ -346,7 +343,7 @@ class TestScorableGamesEnv:
         env.negotiation_history = []
         env.current_deal = {"A": "A1", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         env.player_votes = {}
-        env._process_valid_action(current_player, "Maybe\nAccept")
+        env._process_action(current_player, "Maybe\nAccept")
         assert env.player_votes[current_player] == "Accept"
         assert env.negotiation_history[-1]["action_type"] == "Accept"
         
@@ -355,7 +352,7 @@ class TestScorableGamesEnv:
         env.negotiation_history = []
         env.current_deal = {"A": "A1", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         env.player_votes = {}
-        env._process_valid_action(current_player, "Accept Vote")
+        env._process_action(current_player, "Accept Vote")
         assert env.player_votes[current_player] == "Accept"
         assert env.negotiation_history[-1]["action_type"] == "Accept"
         
@@ -364,7 +361,7 @@ class TestScorableGamesEnv:
         env.negotiation_history = []
         env.current_deal = {"A": "A1", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         env.player_votes = {}
-        env._process_valid_action(current_player, "NotAKeyword\nReject")
+        env._process_action(current_player, "NotAKeyword\nReject")
         assert env.player_votes[current_player] == "Reject"
         assert env.negotiation_history[-1]["action_type"] == "Reject"
         
@@ -373,7 +370,7 @@ class TestScorableGamesEnv:
         env.negotiation_history = []
         env.current_deal = {"A": "A1", "B": "B2", "C": "C3", "D": "D1", "E": "E4"}
         env.player_votes = {}
-        env._process_valid_action(current_player, "Reject SomeOtherThing")
+        env._process_action(current_player, "Reject SomeOtherThing")
         assert env.player_votes[current_player] == "Reject"
         assert env.negotiation_history[-1]["action_type"] == "Reject"
         
@@ -708,7 +705,7 @@ class TestScorableGamesEnv:
         env.player_votes = {i: "Accept" for i in range(6)}
         
         # End the game (which calls _finalize_accepted_deal internally)
-        env._end_game()
+        env._finalize(env._final_outcome())
         
         # Check that game is marked as done and rewards are set
         assert env.state.done
@@ -720,16 +717,16 @@ class TestScorableGamesEnv:
         env = reset_env
         
         current_player = env.state.current_player_id
-        
-        # Make invalid actions up to error allowance
-        for i in range(env.error_allowance):
-            # Should not apply default yet
-            can_advance = env._handle_invalid_action(current_player, "invalid action")
-            assert not can_advance  # Should not advance turn
-        
-        # Next invalid action should trigger default
-        can_advance = env._handle_invalid_action(current_player, "invalid action")
-        assert can_advance  # Should advance turn after applying default
+
+        # Invalid actions within the allowance keep the turn with the same player
+        for _ in range(env.error_allowance):
+            env.step("invalid action")
+            assert env.state.current_player_id == current_player
+
+        # The next one applies the default action and passes the turn on
+        env.step("invalid action")
+        assert env.state.current_player_id != current_player
+        assert env.player_votes[current_player] == env.invalid_move_default
 
     def test_default_action_application(self, reset_env):
         """Test default action application when error allowance exceeded."""
@@ -833,7 +830,7 @@ class TestScorableGamesEnv:
         action = f"{rationale}\nPropose A1 B2 C3 D1 E4"
         
         # Process the action
-        env._process_valid_action(0, action)
+        env._process_action(0, action)
         
         # Check that proposal was created and rationale stored
         assert env.current_deal is not None
@@ -850,7 +847,7 @@ class TestScorableGamesEnv:
         current_player = env.state.current_player_id
         
         # Make identical proposal
-        env._process_valid_action(current_player, "Propose A1 B2 C3 D1 E4")
+        env._process_action(current_player, "Propose A1 B2 C3 D1 E4")
         
         # Should be treated as acceptance
         assert current_player in env.player_votes
@@ -862,9 +859,10 @@ class TestScorableGamesEnv:
         
         current_player = env.state.current_player_id
         
-        # Try to accept without proposal - should be handled as invalid
-        result = env._handle_invalid_action(current_player, "Accept")
-        assert not result  # Should not advance turn
+        # Accepting without a proposal is invalid and keeps the turn
+        env.step("Accept")
+        assert env.state.error_count == 1
+        assert env.state.current_player_id == current_player
     
     def test_different_required_votes_settings(self):
         """Test different required_votes configurations."""
@@ -1307,6 +1305,7 @@ class TestScorableGamesRegressions:
             {"unanimity_bonus_role": ""},
             {"starting_role": ""},
             {"invalid_move_default": "Maybe"},
+            {"invalid_move_default": "[Reject]"},
             {"error_allowance": -1},
         ],
     )
@@ -1315,14 +1314,13 @@ class TestScorableGamesRegressions:
             ScorableGamesEnv(**kwargs)
 
     def test_required_votes_cannot_exceed_loaded_player_count(self):
-        env = ScorableGamesEnv(game_config="medical_ethics", required_votes=5)
         with pytest.raises(ValueError, match="required_votes"):
-            env.reset(num_players=4, seed=42)
+            ScorableGamesEnv(game_config="medical_ethics", required_votes=5)
 
     def test_veto_role_configuration_is_detached_and_default_vote_normalized(self):
         veto_roles = ["p1"]
         env = ScorableGamesEnv(
-            veto_roles=veto_roles, invalid_move_default="[reject]"
+            veto_roles=veto_roles, invalid_move_default=" reject "
         )
         veto_roles.append("p2")
         assert env.veto_roles == ["p1"]
@@ -1351,7 +1349,7 @@ class TestScorableGamesRegressions:
         env.current_deal = {"A": "A3", "B": "B1", "C": "C4", "D": "D4", "E": "E5"}
         env.player_votes = {pid: "Accept" for pid in (0, 1, 3, 4, 5)}
 
-        env._end_game()
+        env._finalize(env._final_outcome())
 
         assert env.state.rewards == {pid: -1 for pid in range(6)}
 
@@ -1361,7 +1359,7 @@ class TestScorableGamesRegressions:
         env.current_deal = {"A": "A3", "B": "B1", "C": "C4", "D": "D4", "E": "E5"}
         env.player_votes = {pid: "Accept" for pid in range(6)}
 
-        env._end_game()
+        env._finalize(env._final_outcome())
 
         sportco = env._get_player_by_role("p1")
         assert env.state.game_info[sportco]["score"] == 61  # 51 + 10 against a minimum of 55
@@ -1453,7 +1451,7 @@ class TestScorableGamesRegressions:
     @pytest.mark.parametrize("game_config,players", SCENARIO_PLAYERS)
     def test_each_scenario_requires_its_own_player_count(self, game_config, players):
         env = ScorableGamesEnv(game_config=game_config)
-        with pytest.raises(ValueError, match=rf"expects {players} players, got {players + 1}.*'{game_config}'"):
+        with pytest.raises(ValueError, match=rf"needs exactly {players} players, received {players + 1}"):
             env.reset(num_players=players + 1)
         env.reset(num_players=players, seed=0)
         assert env.state.num_players == players

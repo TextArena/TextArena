@@ -1,8 +1,8 @@
 """Offline, deterministic tests for the Three-Player Iterated Prisoner's Dilemma.
 
 Each round has a free-chat phase followed by a decision phase where every player
-submits one token per opponent (``<id> cooperate`` / ``<id> defect``, brackets
-tolerated; the default is cooperate). We shrink the game to a single round with one chat turn to
+submits one token per opponent (``<id> cooperate`` / ``<id> defect``; the default
+is cooperate). We shrink the game to a single round with one chat turn to
 reach terminal quickly. Rewards are rank-based across players in [-1, +1].
 """
 
@@ -22,7 +22,7 @@ def _fresh(num_rounds=1, communication_turns=1):
 def test_reset_requires_three_players():
     env = ThreePlayerIPDEnv()
     for num_players in (2, 4):
-        with pytest.raises(AssertionError):
+        with pytest.raises(ValueError):
             env.reset(num_players=num_players, seed=42)
 
 
@@ -133,16 +133,6 @@ def test_unspecified_opponent_defaults_to_cooperate():
     assert env.state.rewards == {0: 1.0, 1: -1.0, 2: 0.0}
 
 
-def test_balanced_bracketed_decision_tokens_are_accepted():
-    env = _fresh(communication_turns=0)
-
-    done, _ = env.step("[1 defect] [2 cooperate]")
-
-    assert not done
-    assert env.state.game_state["decisions"][0] == {1: "defect", 2: "cooperate"}
-    assert env.state.current_player_id == 1
-
-
 @pytest.mark.parametrize(
     "action",
     [
@@ -152,6 +142,7 @@ def test_balanced_bracketed_decision_tokens_are_accepted():
         f"{'9' * 10_000} defect",
         "1 defect and 2 cooperate",
         "1 defect2 cooperate",
+        "[1 defect] [2 cooperate]",
         "[1 defect][2 cooperate]",
         "1 defect 2 cooperate;",
         "[1 defect",

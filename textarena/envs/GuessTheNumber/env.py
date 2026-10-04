@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Union
 
 import textarena as ta
 from textarena.envs.GuessTheNumber.renderer import create_board_str
@@ -8,7 +8,7 @@ from textarena.envs.GuessTheNumber.renderer import create_board_str
 class GuessTheNumberEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
-    action_pattern = r"^\s*\[?\s*([+-]?\d+)\s*\]?\s*$"
+    action_pattern = r"^([+-]?\d+)$"
 
     def __init__(self, min_number: int = 1, max_number: int = 20, max_turns: int = 20):
         """

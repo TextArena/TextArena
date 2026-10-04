@@ -11,8 +11,8 @@ class LiarsDiceEnv(ta.GameEnv):
 
     # Matched against the stripped action; no two adjacent whitespace quantifiers,
     # so padded input cannot trigger quadratic backtracking.
-    _CALL_RE = re.compile(r"\[?\s*call\s*\]?", re.IGNORECASE)
-    _BID_RE = re.compile(r"\[?\s*bid\s*(?::\s*)?(\d+)[,\s]+(\d+)\s*\]?", re.IGNORECASE)
+    _CALL_RE = re.compile(r"call", re.IGNORECASE)
+    _BID_RE = re.compile(r"bid\s*(?::\s*)?(\d+)[,\s]+(\d+)", re.IGNORECASE)
 
     def __init__(self, num_dice: int = 5):
         """

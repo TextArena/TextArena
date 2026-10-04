@@ -25,7 +25,7 @@ class IteratedMatchingPenniesEnv(ta.GameEnv):
         ):
             raise ValueError("num_rounds must be a positive integer")
         self.num_rounds = num_rounds
-        self._choice_re = re.compile(r"^\s*\[?\s*(heads|tails|h|t)\s*\]?\s*$", re.IGNORECASE) # parses 'heads', 'tails', or shorthand 'h', 't'
+        self._choice_re = re.compile(r"^(heads|tails|h|t)$", re.IGNORECASE) # parses 'heads', 'tails', or shorthand 'h', 't'
 
     def setup(self) -> Dict[str, Any]:
         return {
@@ -45,7 +45,7 @@ class IteratedMatchingPenniesEnv(ta.GameEnv):
         )
 
     def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
-        return None  # the legacy env never echoed submissions; keep them fully hidden
+        return None  # moves are simultaneous, so an echo would reveal the choice to the opponent
 
     def get_board_str(self) -> str:
         gs = self.state.game_state

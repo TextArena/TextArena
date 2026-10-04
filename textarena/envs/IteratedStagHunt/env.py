@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Union
 
 import textarena as ta
 from textarena.envs.IteratedStagHunt.renderer import create_board_str
@@ -61,9 +61,9 @@ class IteratedStagHuntEnv(ta.GameEnv):
         self.mutual_hare_reward = mutual_hare_reward
         self.randomize_payoff = randomize_payoff
 
-        # Action pattern (bare token, tolerating optional stray brackets)
-        self.stag_pattern = re.compile(r"^\s*\[?\s*Stag\s*\]?\s*$", re.IGNORECASE)
-        self.hare_pattern = re.compile(r"^\s*\[?\s*Hare\s*\]?\s*$", re.IGNORECASE)
+        # Action pattern
+        self.stag_pattern = re.compile(r"^Stag$", re.IGNORECASE)
+        self.hare_pattern = re.compile(r"^Hare$", re.IGNORECASE)
 
     def setup(self) -> Dict[str, Any]:
         return {

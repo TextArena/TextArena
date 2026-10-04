@@ -115,7 +115,6 @@ players see the simulated units, sales, and profit per product, the totals, and 
 - `product_list_path` (default `data/product_list.csv`): an alternative product file in the same format, with one
   row per product and discount rate. Only the discount rates shared by every product can be proposed, and 0% must be
   one of them.
-- `seed` (default `None`): the seed used when `reset` is called without one.
 
 ## Notes
 

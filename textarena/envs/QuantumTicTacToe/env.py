@@ -51,7 +51,7 @@ class QuantumTicTacToeEnv(ta.GameEnv):
         return self._render_board()
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
-        match = re.search(r"^\s*\[?\s*([0-9]+)\s*,\s*([0-9]+)\s*\]?\s*$", action)
+        match = re.search(r"^([0-9]+)\s*,\s*([0-9]+)$", action)
         if not match:
             return self.invalid("Invalid format. Use 'a,b'.")
         try:
@@ -178,7 +178,6 @@ class QuantumTicTacToeEnv(ta.GameEnv):
 
     def _collapse_superpositions(self, move_ids: List[int], seed_move_id: Optional[int] = None) -> Optional[ta.Outcome]:
         gs = self.game_state
-        board = gs["board"]
         superpositions = gs["superpositions"]
         if move_ids:
             seed_move_id = move_ids[-1] if seed_move_id is None else seed_move_id

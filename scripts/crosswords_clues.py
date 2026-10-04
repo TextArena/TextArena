@@ -1,14 +1,26 @@
+#!/usr/bin/env python3
+"""Regenerate ``textarena/envs/Crosswords/words_clues.jsonl`` (development only, not shipped).
+
+Standard words are sampled from Ogden's Basic English and hardcore words from the dictionary headwords in
+``textarena/utils/word_lists.py``; an LLM writes ten clues per word through OpenRouter (needs OPENROUTER_API_KEY).
+
+    python scripts/crosswords_clues.py --num-words 50 --seed 0
+"""
 import argparse
 import json
 import os
 import random
+import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Union
 
-from nltk.corpus import words
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
+from textarena.utils.word_lists import get_basic_english_words, get_headwords  # noqa: E402
 
-DEFAULT_OUTPUT_PATH = Path(__file__).resolve().parents[1] / "words_clues.jsonl"
+DEFAULT_OUTPUT_PATH = ROOT / "textarena" / "envs" / "Crosswords" / "words_clues.jsonl"
 
 
 def get_clue_examples(word: str, model: str = "gpt-4o-mini") -> Dict[str, str]:
@@ -46,14 +58,8 @@ def get_clue_examples(word: str, model: str = "gpt-4o-mini") -> Dict[str, str]:
     return {str(index): clue for index, clue in enumerate(clues[:10], start=1)}
 
 
-def _usable_words(corpus_name: str) -> List[str]:
-    try:
-        corpus = words.words(corpus_name)
-    except LookupError as exc:
-        raise RuntimeError(
-            "The NLTK words corpus is required; install it with nltk.download('words')."
-        ) from exc
-    return list(dict.fromkeys(word.lower() for word in corpus if word.isalpha()))
+def _usable_words(hardcore: bool) -> List[str]:
+    return sorted(get_headwords() if hardcore else get_basic_english_words())
 
 
 def main(
@@ -66,10 +72,10 @@ def main(
         raise ValueError("num_words must be a positive integer")
 
     rng = random.Random(seed)
-    easy_pool = _usable_words("en-basic")
-    hard_pool = _usable_words("en")
+    easy_pool = _usable_words(hardcore=False)
+    hard_pool = _usable_words(hardcore=True)
     if len(easy_pool) < num_words or len(hard_pool) < num_words:
-        raise ValueError("requested more words than the NLTK corpus provides")
+        raise ValueError("requested more words than the word lists provide")
 
     selected = [
         *((word, False) for word in rng.sample(easy_pool, num_words)),

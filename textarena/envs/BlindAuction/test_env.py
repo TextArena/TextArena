@@ -41,9 +41,9 @@ def test_reset_initializes_game_state():
 
 def test_num_players_bounds_enforced():
     env = BlindAuctionEnv(num_items=3, conversation_rounds=1, base_item_values=[100, 200, 300])
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=2, seed=42)
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=16, seed=42)
 
 
@@ -105,13 +105,13 @@ def test_malformed_whisper_after_a_semicolon_is_rejected_instead_of_broadcast():
     )
 
 
-def test_bracketed_command_quoted_inside_a_message_is_not_executed():
+def test_command_quoted_inside_a_message_is_not_executed():
     env = make_env()
-    done, _ = env.step("Broadcast: please do not [Whisper 2: tell anyone]")
+    done, _ = env.step("Broadcast: please do not Whisper 2: tell anyone")
     assert done is False
     assert not any("(Private)" in message for _, message, _, _ in env.state.events)
     p1_messages = [msg for _, msg, _ in env.state.observations[1]]
-    assert "(Broadcast) Player 0 says: please do not [Whisper 2: tell anyone]" in p1_messages
+    assert "(Broadcast) Player 0 says: please do not Whisper 2: tell anyone" in p1_messages
 
 
 def test_oversized_whisper_target_is_invalid_not_a_crash():
@@ -169,7 +169,7 @@ def test_bids_may_be_semicolon_separated_but_not_wrapped_in_prose():
     assert done is False
     assert env.game_state["player_bids"][0] == {0: 100, 1: 200}
 
-    done, _ = env.step("I'll go with [Bid Item 2: 50]")
+    done, _ = env.step("I'll go with this:\nBid Item 2: 50")
     assert done is False
     assert env.state.error_count == 1
     assert env.game_state["player_bids"][1] == {}
@@ -432,8 +432,6 @@ PADDING = 30_000
         pytest.param("4" + " " * PADDING + "x", id="inner-spaces"),
         pytest.param("\t\n " * (PADDING // 3) + "x", id="tab-newline-runs"),
         pytest.param("[" * (PADDING // 2) + "x" + "]" * (PADDING // 2 - 2), id="deep-brackets"),
-        pytest.param("[Broadcast:" + " " * PADDING + "x", id="legacy-broadcast"),
-        pytest.param("[Whisper 1:" + " " * PADDING + "x", id="legacy-whisper"),
         pytest.param("x;" + " " * (PADDING // 2) + "[" + " " * (PADDING // 2) + "x", id="semicolon"),
     ],
 )
@@ -448,10 +446,10 @@ def test_long_padded_input_is_rejected_quickly_without_changing_state(action):
     assert env.state.game_state == before
 
 
-def test_padded_legacy_messages_are_still_delivered_intact():
+def test_padded_messages_are_delivered_intact():
     env = make_env()
     gap = " " * 5000
-    done, _ = env.step(f"[Broadcast] hello{gap}all\n[Whisper 1: psst{gap}there]")
+    done, _ = env.step(f"Broadcast: hello{gap}all\nWhisper 1: psst{gap}there")
     assert not done
     assert env.state.error_count == 0
     p1_messages = [message for _, message, _ in env.state.observations[1]]

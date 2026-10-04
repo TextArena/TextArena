@@ -1,4 +1,3 @@
-import re
 import math
 from numbers import Real
 from typing import Any, Dict, List, Optional, Union
@@ -11,9 +10,6 @@ class BanditEnv(ta.GameEnv):
     max_players = 1
     max_button_chars = 128
     max_action_chars = 256
-    _ACTION_RE = re.compile(
-        r"^\s*(?P<legacy>\[)?\s*(?P<button>[^\[\]]+?)\s*(?(legacy)\])\s*$"
-    )
 
     def __init__(
         self,
@@ -86,10 +82,7 @@ class BanditEnv(ta.GameEnv):
     def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
         if not isinstance(move, str) or len(move) > self.max_action_chars:
             return self.invalid("Submit one button name.")
-        match = self._ACTION_RE.fullmatch(move)
-        if match is None:
-            return self.invalid("Submit a bare button name or enclose the entire name in brackets.")
-        button = self._resolve_button(match.group("button"))
+        button = self._resolve_button(move)
         if button is None:
             return self.invalid(f"An invalid button has been selected. Choose one of: {', '.join(self.buttons)}.")
 

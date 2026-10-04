@@ -1,5 +1,6 @@
 """Offline deterministic tests for the SimpleBlindAuction environment."""
 import copy
+import time
 
 import pytest
 
@@ -94,7 +95,7 @@ def test_bids_may_also_be_separated_by_semicolons():
     assert not done
     assert env.state.error_count == 0
     assert env.state.game_state["player_bids"][0] == {0: 10, 1: 20}
-    done, _ = env.step("[Bid Item 0: 15]; [Bid Item 2: 5]\n[Bid Item 3: 1]")
+    done, _ = env.step("Bid Item 0: 15; Bid Item 2: 5\nBid Item 3: 1")
     assert done
     assert env.state.game_state["player_bids"][1] == {0: 15, 2: 5, 3: 1}
 
@@ -136,6 +137,14 @@ def test_pathologically_large_bid_is_invalid_not_an_exception():
     done, _ = env.step("Bid Item 0: " + "9" * 5000)
     assert not done
     assert env.game_state == before
+
+
+@pytest.mark.parametrize("action", ["Bid" + " " * 30_000 + "x", "x" + " " * 30_000 + "x"])
+def test_long_inner_whitespace_in_a_bid_reply_is_parsed_quickly(action):
+    env = _fresh(conversation_rounds=0)
+    start = time.perf_counter()
+    env.step(action)
+    assert time.perf_counter() - start < 0.25
 
 
 def test_command_like_malformed_or_mixed_bid_is_invalid():

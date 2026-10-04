@@ -9,10 +9,7 @@ class PigDiceEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
     MAX_WINNING_SCORE = 1_000_000
-    action_pattern = (
-        r"(?i)^\s*(?P<bracket>\[)?\s*(?P<action>roll|hold)\s*"
-        r"(?(bracket)\])\s*$"
-    )
+    action_pattern = r"(?i)^(?P<action>roll|hold)$"
     action_format = "either 'roll' to roll the die or 'hold' to bank your turn total"
 
     def __init__(self, winning_score: int = 100, max_turns: int = 500):

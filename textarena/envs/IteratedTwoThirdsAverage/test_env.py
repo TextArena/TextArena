@@ -58,7 +58,7 @@ def test_draw_equal_guesses():
 
 def test_invalid_format_then_recover():
     env = _fresh(num_rounds=1)
-    done, _ = env.step("no brackets here")
+    done, _ = env.step("not a number")
     assert done is False
     assert env.state.error_count == 1
     assert env.state.current_player_id == 0  # no rotation on invalid

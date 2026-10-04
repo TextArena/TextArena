@@ -47,7 +47,6 @@ def create_board_str(game_state: dict) -> str:
     
     # Game status
     if gs.get('game_complete', False) or gs.get('winner'):
-        # Legacy support for old game state format
         if gs.get('winner') == 'player':
             board_str += "🏆 GAME OVER - YOU WIN! 🏆\n"
         else:

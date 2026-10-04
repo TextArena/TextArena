@@ -144,10 +144,10 @@ def test_parser_rejects_noncanonical_actions_atomically(action):
     assert env.state.game_state == before
 
 
-def test_paired_legacy_brackets_remain_valid():
+def test_comma_separated_coordinates_are_valid():
     env = _fresh()
     before = copy.deepcopy(env.state.game_state["grid"])
-    done, _ = env.step("[1, 1]")
+    done, _ = env.step("1, 1")
     assert not done
     changed = sum(
         before[r][c] != env.state.game_state["grid"][r][c]

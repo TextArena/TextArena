@@ -12,7 +12,7 @@ PLAYER_SYMBOLS = ("0", "1")
 BLAST_MARKER_MOVES = 2  # a blast stays visible for two moves, so both players see it once
 
 _MOVES = {"up": (0, -1), "down": (0, 1), "left": (-1, 0), "right": (1, 0)}
-_ACTION_RE = re.compile(r"^\s*\[?\s*(up|down|left|right|stay|bomb)\s*\]?\s*$", re.IGNORECASE)
+_ACTION_RE = re.compile(r"^(up|down|left|right|stay|bomb)$", re.IGNORECASE)
 
 
 def _is_int(value: Any) -> bool:

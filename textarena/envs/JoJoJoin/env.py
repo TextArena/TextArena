@@ -21,7 +21,7 @@ class JoJoJoinEnv(ta.GameEnv):
     """Place marks on a 5x5 board; four in a row (any direction) wins."""
     min_players = 2
     max_players = 2
-    action_pattern = r"^\s*\[?\s*([0-9]+)\s*\]?\s*$"
+    action_pattern = r"^([0-9]+)$"
     action_format = f"a cell number from 0 to {NUM_CELLS - 1}, for example '12'"
 
     def setup(self) -> Dict[str, Any]:

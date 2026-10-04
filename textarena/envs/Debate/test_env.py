@@ -343,9 +343,9 @@ def test_jury_size_and_player_bounds_are_validated():
     with pytest.raises(ValueError):
         DebateEnv(jury_class=_TieJury, jury_size=101)
     env = DebateEnv(jury_class=_TieJury)
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=1)
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=3)
 
 

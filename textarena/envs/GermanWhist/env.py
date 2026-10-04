@@ -42,7 +42,7 @@ class GermanWhistEnv(ta.GameEnv):
 
     def _find_action_token(self, message: str) -> Optional[int]:
         """ Parse card play action from player message """
-        pattern = re.compile(r"^\s*\[?\s*play\s+(\d+)\s*\]?\s*$", re.I)
+        pattern = re.compile(r"^play\s+(\d+)$", re.I)
         match = pattern.match(message)
 
         if match:

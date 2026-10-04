@@ -28,8 +28,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Hangman-v0-mdp`).
 
 ## Actions
 
-Reply with a single letter (`e`) or a whole word (`light`), letters only. Case does not matter, and the reply may be
-wrapped in square brackets.
+Reply with a single letter (`e`) or a whole word (`light`), letters only. Case does not matter.
 
 ## Observations
 
@@ -64,6 +63,6 @@ revealed when you run out of tries.
 
 - Secret words come from `textarena/utils/word_lists.py` and need no downloads. By default they are the 832 words of
   Ogden's Basic English list with three or more letters (common words such as `water`, `answer`, or `light`). In
-  hardcore mode they are the headwords of the bundled UK and US dictionaries (about 38,800 base words without
+  hardcore mode they are the headwords of the bundled UK and US dictionaries (about 38,700 base words without
   inflected forms, many of them rare). Neither list contains proper nouns, and a seed picks the same word on every
   machine.

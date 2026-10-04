@@ -12,7 +12,7 @@ class LinesOfActionEnv(ta.GameEnv):
     BOARD_N = 8
     FILES = "abcdefgh"
     RANKS = "12345678"
-    action_pattern = r"(?i)^\s*\[?\s*(?:(pass)|([a-h][1-8])\s*(?:->|[->])?\s*([a-h][1-8]))\s*\]?\s*$"
+    action_pattern = r"(?i)^(?:(pass)|([a-h][1-8])\s*(?:->|[->])?\s*([a-h][1-8]))$"
     action_format = "the from and to squares of your move, for example 'b1b3', or 'pass' when you have no legal move"
 
     @classmethod

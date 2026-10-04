@@ -27,7 +27,7 @@ def test_player_count_bounds_accept_minimum_and_maximum_only():
     CharacterConclaveEnv(character_budget=1).reset(num_players=3, seed=42)
     CharacterConclaveEnv(character_budget=1).reset(num_players=15, seed=42)
     for num_players in (2, 16):
-        with pytest.raises(AssertionError):
+        with pytest.raises(ValueError):
             CharacterConclaveEnv(character_budget=1).reset(
                 num_players=num_players,
                 seed=42,

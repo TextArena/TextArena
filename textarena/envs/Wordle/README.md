@@ -35,8 +35,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Wordle-v0-mdp`).
 
 ## Actions
 
-Reply with a single word made of letters only, for example `crane`. Case does not matter, and the word may be wrapped
-in square brackets.
+Reply with a single word made of letters only, for example `crane`. Case does not matter.
 
 ## Observations
 
@@ -69,9 +68,9 @@ A rejected guess is answered with the reason. If you run out of guesses, the sec
 
 ## Notes
 
-- Guesses are checked against the UK and US Hunspell word lists bundled in `textarena/utils/word_lists.py`, including
-  their regular inflections (plurals, past tenses, and so on); proper nouns are rejected. The optional NLTK `words`
-  corpus is not used, so the same guesses are accepted on every machine.
+- Guesses are checked against the English word list bundled in `textarena/utils/word_lists.py`: every word of the UK
+  and US Hunspell dictionaries with its regular inflections (plurals, past tenses, and so on), about 101,000 words.
+  Proper nouns are rejected, and the same guesses are accepted on every machine.
 - Secret words come from the same module and need no downloads. By default they are the words of the right length in
   Ogden's Basic English list (850 words, 192 of them with five letters and 81 with seven). In hardcore mode they are
   the dictionary headwords of the right length (base words without inflections, about 3,300 with five letters and

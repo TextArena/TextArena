@@ -27,11 +27,7 @@ class HighSocietyEnv(ta.GameEnv):
             raise ValueError("max_ties must be a positive integer")
         self.max_ties = max_ties
         self.money_cards = list(range(1, 12))   # 1-11
-        # A whitespace run must be consumable by only one \s*, as retrying every split of a long run is quadratic.
-        self.action_space = re.compile(
-            r"^\s*(?:(?P<legacy>\[)\s*)?(?P<bid>11|10|[1-9])(?(legacy)\s*\])\s*$",
-            re.IGNORECASE,
-        )
+        self.action_space = re.compile(r"^(?P<bid>11|10|[1-9])$", re.IGNORECASE)
 
     @staticmethod
     def _intlist_to_str(lst): return " ".join(str(x) for x in sorted(lst))

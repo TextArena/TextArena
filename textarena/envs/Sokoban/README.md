@@ -76,13 +76,13 @@ board and the accepted directions; after each valid move, they are told what hap
   cells in total; the outer ring is always wall.
 - `num_boxes` (default `3`): the number of boxes and goals. It must leave room for the player inside the outer walls.
 - `max_turns` (default `100`): the number of valid moves allowed. Generated rooms are always solvable within it.
-- `reset(num_players=1, seed=None, max_retries=50)` also accepts `max_retries` (1 to 100): the number of generation
-  attempts before giving up with `RuntimeError`.
+- `max_retries` (default `50`): the number of generation attempts (1 to 100) before `reset` gives up with
+  `RuntimeError`.
 
 ## Notes
 
 - The room generator (a random walk that carves the floor, then reverse play that pulls the boxes off their goals) is
-  adapted from [gym-sokoban](https://github.com/mpSchrader/gym-sokoban).
+  adapted from [gym-sokoban](https://github.com/mpSchrader/gym-sokoban). Undoing the pulls solves the room, so every
+  generated room is solvable.
 - Some custom settings cannot be generated, such as many boxes in a small room or a `max_turns` too small to move
-  every box. `reset` then raises `RuntimeError`; for large rooms this can take minutes because every attempt runs the
-  full search.
+  every box. `reset` then raises `RuntimeError` after `max_retries` attempts.

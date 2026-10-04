@@ -41,7 +41,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `NewRecruit-v0-mdp`
 ## Actions
 
 - **Propose:** optional free-text rationale, then a final line with `Propose` and one letter per issue in the order
-  above (case-insensitive; spaces between letters and `[Propose]` are accepted):
+  above (case-insensitive; spaces between letters are accepted):
 
   ```
   I can start in August if you meet me halfway on salary.

@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, Optional, Union
 
 import textarena as ta
 
@@ -16,8 +16,8 @@ class TwoRoomsAndABoomEnv(ta.GameEnv):
     min_players = 6  # Absolute minimum for gameplay
     max_players = 20  # Reasonable maximum for communication
 
-    # Support bare 'Player X' / 'X' selections, tolerating optional stray brackets
-    target_pattern = re.compile(r'^\s*\[?\s*(?:player\s*)?(\d+)\s*\]?\s*$', re.IGNORECASE)
+    # Support bare 'Player X' / 'X' selections
+    target_pattern = re.compile(r'^\s*(?:player\s*)?(\d+)\s*$', re.IGNORECASE)
     # Only a discussion reply consisting of exactly this command starts a role reveal;
     # every other reply, even one mentioning reveals or roles, is ordinary discussion.
     reveal_command_pattern = re.compile(r"\s*reveal\s*", re.IGNORECASE)
@@ -1059,8 +1059,8 @@ class TwoRoomsAndABoomEnv(ta.GameEnv):
 
     def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
         """
-        Legacy behavior: a player who exhausts the error allowance forfeits their
-        action (they stay in the game) and play continues with the next queued player.
+        A player who exhausts the error allowance forfeits their action (they stay
+        in the game) and play continues with the next queued player.
         """
         return self._transition_current_pid()
 

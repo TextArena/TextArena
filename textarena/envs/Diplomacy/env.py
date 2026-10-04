@@ -13,12 +13,9 @@ from textarena.envs.Diplomacy.game_engine import (
 from textarena.envs.Diplomacy.prompts.power_strategy import POWER_STRATEGY
 
 # A command starts at the beginning of a line and runs until the next line that
-# starts a command (or the end of the action). Lines that open a legacy
-# bracketed command also end the previous command, so their text never leaks
-# into a broadcast.
+# starts a command (or the end of the action).
 _COMMAND_START = re.compile(
-    r"^[ \t]*(?:(Broadcast|Whisper|Submit[ \t]+Orders?)\b"
-    r"|\[[ \t]*(?:Broadcast|Whisper|Submit[ \t]+Orders?)\b)",
+    r"^[ \t]*(Broadcast|Whisper|Submit[ \t]+Orders?)\b",
     re.IGNORECASE | re.MULTILINE,
 )
 _BARE_BROADCAST = re.compile(r"\s*Broadcast\s*:(.*)", re.IGNORECASE | re.DOTALL)
@@ -28,7 +25,6 @@ _BARE_WHISPER = re.compile(
     re.IGNORECASE | re.DOTALL,
 )
 _BARE_SUBMIT = re.compile(r"\s*Submit\s+Orders?\s*:?(.*)", re.IGNORECASE | re.DOTALL)
-_BROADCAST_START = re.compile(r"\[Broadcast", re.IGNORECASE)
 
 
 def _location(province: str, coast: Optional[str]) -> str:
@@ -40,28 +36,6 @@ class DiplomacyEnv(ta.GameEnv):
 
     min_players = 3
     max_players = 7
-
-    # Legacy bracketed forms - still accepted as input, but no longer taught in prompts.
-    # A whitespace run must be consumable in only one way, as retrying every split of a long run is
-    # quadratic: the forms are searched for, so no leading \s*, and `\s*(.*?)\]` is `\s*(?!\s)([^\]]*)\]`.
-    broadcast_pattern = re.compile(
-        r"(?:"
-        r"\[Broadcast\s*:\s*(?!\s)([^\]]*)\]"              # [Broadcast: message]
-        r"|"
-        r"\[Broadcast(\s+(?!\s)[^\]]*)\]"                  # [Broadcast message]
-        r"|"
-        r"\[Broadcast\](\s+(?:\s*[^\s\[])*)(?=\s*\[|\s*$)"  # [Broadcast] message
-        r")",
-        re.IGNORECASE | re.DOTALL
-    )
-    whisper_pattern = re.compile(
-        r"\[Whisper\s+(?:to\s+)?(?:Player\s+)?(\d+)(?:\s+\(([A-Z]+)\))?\s*:\s*(?!\s)([^\]]*)\]",
-        re.IGNORECASE | re.DOTALL
-    )
-    submit_orders_pattern = re.compile(
-        r"\[Submit\s+Orders\]([\s\S]*?)(?=\[|$)",
-        re.IGNORECASE
-    )
 
     def __init__(self, max_turns: int = 30, 
                 negotiations_per_phase: int = 3):
@@ -488,18 +462,12 @@ class DiplomacyEnv(ta.GameEnv):
         """Split an action into messages and order sections without side effects."""
         commands: Dict[str, list] = {"messages": [], "order_sections": []}
         starts = list(_COMMAND_START.finditer(action))
-        # Text before the first command line may still hold legacy bracketed commands.
-        preamble = action[:starts[0].start()] if starts else action
-        error = self._parse_legacy(player_id, preamble, commands, required=False)
+        error = None
         for index, start in enumerate(starts):
+            end = starts[index + 1].start() if index + 1 < len(starts) else len(action)
+            error = self._parse_bare(player_id, start.group(1), action[start.start():end], commands)
             if error:
                 break
-            end = starts[index + 1].start() if index + 1 < len(starts) else len(action)
-            segment = action[start.start():end]
-            if start.group(1) is None:
-                error = self._parse_legacy(player_id, segment, commands, required=True)
-            else:
-                error = self._parse_bare(player_id, start.group(1), segment, commands)
         return commands, error
 
     def _parse_bare(self, player_id: int, keyword: str, segment: str, commands: Dict[str, list]) -> Optional[str]:
@@ -521,43 +489,6 @@ class DiplomacyEnv(ta.GameEnv):
         match = _BARE_SUBMIT.fullmatch(segment)
         commands["order_sections"].append(match.group(1))
         return None
-
-    def _parse_legacy(self, player_id: int, text: str, commands: Dict[str, list], required: bool) -> Optional[str]:
-        found = False
-        # Every legacy broadcast or whisper has a "]" at or after its start, so none starts after the last one.
-        closed = text.rfind("]") + 1
-        for match in self._legacy_broadcasts(text, closed):
-            found = True
-            message = next((group for group in match.groups() if group and group.strip()), None)
-            if message:
-                commands["messages"].append((-1, message.strip()))
-        for match in self.whisper_pattern.finditer(text, 0, closed):
-            found = True
-            error = self._add_whisper(player_id, *match.groups(), commands)
-            if error:
-                return error
-        for match in self.submit_orders_pattern.finditer(text):
-            found = True
-            commands["order_sections"].append(match.group(1) or "")
-        if required and not found:
-            first_line = text.strip().splitlines()[0][:80]
-            return (
-                f"Could not read '{first_line}'. Use 'Broadcast: <message>', 'Whisper to <player id>: <message>' "
-                "or 'Submit Orders:', each at the start of its own line."
-            )
-        return None
-
-    def _legacy_broadcasts(self, text: str, closed: int):
-        """Yield the matches of broadcast_pattern.finditer(text); `closed` is the end of the text's last "]".
-
-        finditer would also try every "[Broadcast" after `closed`, each rescanning the rest of the text."""
-        end = 0
-        for start in _BROADCAST_START.finditer(text, 0, closed):
-            if start.start() >= end:
-                match = self.broadcast_pattern.match(text, start.start())
-                if match:
-                    end = match.end()
-                    yield match
 
     def _add_whisper(
         self, player_id: int, target: str, power_check: Optional[str], message: Optional[str],
@@ -898,13 +829,7 @@ class DiplomacyEnv(ta.GameEnv):
         # Use the dedicated chat_history attribute
         for entry in self.chat_history:
             turn = entry["turn"]
-            
-            # Process the message to clean up whispers
             message = entry["message"]
-            if "[Whisper to" in message:
-                # Remove the whisper prefix for cleaner history
-                message = re.sub(r"\[Whisper to \d+(?:\s+\([A-Z]+\))?: ", "", message)
-                entry["message"] = message
             
             # Organize by turn
             if turn not in turn_messages:

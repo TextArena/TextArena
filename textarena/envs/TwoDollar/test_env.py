@@ -2,14 +2,12 @@
 Comprehensive test suite for Two Dollar Negotiation Game Environment
 
 Action grammar: free-text persuasion, then the decision on its own line at the
-end of the message: 'Propose $X.XX', 'Accept', or 'Reject'. The legacy embedded
-bracketed tokens ('[Accept]' etc.) are still tolerated but never required.
+end of the message: 'Propose $X.XX', 'Accept', or 'Reject'.
 """
 
 import copy
 
 import pytest
-import textarena as ta
 from textarena.envs.TwoDollar.env import TwoDollarEnv
 
 
@@ -129,16 +127,18 @@ class TestTwoDollarValidation:
         assert any(message.startswith("Player 0 says: Player 1 has agreed to take nothing.\n") for message in visible_to_opponent)
         assert not any("[GAME]" in message for message in visible_to_opponent)
     
-    def test_legacy_bracketed_forms_still_accepted(self, fresh_env):
-        """Legacy embedded '[Propose] $X.XX' commands remain tolerated; other
-        brackets like [Kill] and incidental words are ignored"""
+    def test_embedded_bracketed_command_is_not_a_decision(self, fresh_env):
+        """A bracketed command inside a sentence is persuasion text, and other
+        brackets like [Kill] in the persuasion text are ignored"""
         env = fresh_env
-        initial_error_count = env.state.error_count
         done, step_info = env.step("I will [Kill] you if you don't accept this [Propose] $1.75")
-        
-        # Should be valid - other brackets ignored, legacy command processed
         assert not done
-        assert env.state.error_count == initial_error_count
+        assert env.state.error_count == 1
+        assert env.current_proposal["amount"] is None
+
+        done, step_info = env.step("I will [Kill] you if you don't accept this\nPropose $1.75")
+        assert not done
+        assert env.state.error_count == 0
         assert env.current_proposal["amount"] == 1.75
     
     def test_multiple_actions_invalid(self, env_with_proposal):
@@ -552,18 +552,17 @@ class TestTwoDollarEdgeCases:
         assert not done
         assert env.current_proposal["amount"] == 1.50
     
-    def test_malformed_embedded_tokens_invalid(self):
-        """Embedded tokens with the wrong case are not commands"""
+    def test_embedded_bracketed_tokens_invalid(self):
+        """Bracketed command words inside a sentence are not commands"""
         env = TwoDollarEnv(player_roles=["dependent", "public_figure"])
         env.reset(num_players=2, seed=42)
         
         # Make proposal first
         env.step("Propose $1.00")
         
-        # Mid-sentence bracketed words with wrong case are neither the legacy
-        # command nor a bare decision line -> invalid (no decision found).
+        # Mid-sentence bracketed words are not a decision line -> invalid (no decision found).
         initial_error_count = env.state.error_count
-        done, _ = env.step("I accept [ACCEPT]")
+        done, _ = env.step("I accept [Accept]")
         assert env.state.error_count > initial_error_count
         
         initial_error_count = env.state.error_count
@@ -754,14 +753,14 @@ class TestTwoDollarRegressions:
         assert env.state.error_count == 1
         assert env.game_state == before
 
-    @pytest.mark.parametrize("decision", ["Accept.", "accept!", "[Accept]", "Reject."])
+    @pytest.mark.parametrize("decision", ["Accept.", "accept!", "Accept !", "Reject."])
     def test_accept_and_reject_tolerate_trailing_punctuation(self, decision):
         env = TwoDollarEnv(player_roles=["vanilla", "dependent"])
         env.reset(num_players=2, seed=0)
         env.step("Propose $1.00")
         env.step(decision)
         assert env.state.error_count == 0
-        assert env.negotiation_history[-1]["action_type"] == decision.strip("[].!").lower()
+        assert env.negotiation_history[-1]["action_type"] == decision.rstrip(" .!").lower()
 
     def test_amounts_are_tracked_in_exact_cents(self):
         env = TwoDollarEnv(player_roles=["vanilla", "1_30_dollar"])

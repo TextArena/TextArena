@@ -39,11 +39,11 @@ class HanabiEnv(ta.GameEnv):
     max_players = 5
     broadcast_actions = False  # raw actions are echoed only to their author
     error_allowance = 1
-    _play_pattern = re.compile(r"^\s*\[?\s*play\s+([0-9]{1,6})\s*\]?\s*$", re.IGNORECASE)
-    _discard_pattern = re.compile(r"^\s*\[?\s*discard\s+([0-9]{1,6})\s*\]?\s*$", re.IGNORECASE)
+    _play_pattern = re.compile(r"^play\s+([0-9]{1,6})$", re.IGNORECASE)
+    _discard_pattern = re.compile(r"^discard\s+([0-9]{1,6})$", re.IGNORECASE)
     _reveal_pattern = re.compile(
-        r"^\s*\[?\s*reveal\s+player\s+([0-9]{1,6})\s+card\s+"
-        r"([0-9]{1,6})\s+(color|rank)\s+([a-z0-9]+)\s*\]?\s*$",
+        r"^reveal\s+player\s+([0-9]{1,6})\s+card\s+"
+        r"([0-9]{1,6})\s+(color|rank)\s+([a-z0-9]+)$",
         re.IGNORECASE,
     )
 
@@ -428,7 +428,7 @@ class HanabiEnv(ta.GameEnv):
 
     def _check_game_end(self) -> Optional[ta.Outcome]:
         """
-        Check whether the game has ended. Later conditions take precedence, matching the legacy check order.
+        Check whether the game has ended. Later conditions take precedence.
         """
         gs = self.game_state
         outcome = None

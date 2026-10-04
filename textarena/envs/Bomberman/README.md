@@ -39,8 +39,8 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Bomberman-v0-mdp`)
 
 ## Actions
 
-Reply with exactly one bare command (case-insensitive; surrounding brackets are tolerated): `up`, `down`, `left`,
-`right`, `stay` or `bomb`. Positions are `(x, y)`, where `x` is the column and `y` the row, so `up` decreases `y`.
+Reply with exactly one bare command (case-insensitive): `up`, `down`, `left`, `right`, `stay` or `bomb`. Positions
+are `(x, y)`, where `x` is the column and `y` the row, so `up` decreases `y`.
 
 ## Observations
 

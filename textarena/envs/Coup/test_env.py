@@ -4,7 +4,6 @@ import random
 
 import pytest
 
-import textarena as ta
 from textarena.envs.Coup.env import CARDS, CoupEnv
 from textarena.envs.Coup.coup_types import CoupActionType, GamePhase
 
@@ -73,9 +72,9 @@ def test_reset_initializes_game_state():
 
 def test_num_players_bounds_enforced():
     env = CoupEnv()
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=1, seed=42)
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=7, seed=42)
 
 
@@ -820,7 +819,7 @@ def test_invalid_reveals_are_atomic(command):
     assert_awaiting_reveal(env, 2)
 
 
-@pytest.mark.parametrize("command", ["reveal captain", "REVEAL Captain", "[reveal captain]"])
+@pytest.mark.parametrize("command", ["reveal captain", "REVEAL Captain"])
 def test_reveal_command_is_case_insensitive(command):
     env = make_env(num_players=3)
     gs = deal(env, {0: ["Assassin", "Duke"], 2: ["Duke", "Captain"]})

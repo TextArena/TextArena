@@ -48,13 +48,13 @@ def test_player_count_bounds_accept_minimum_and_maximum_only():
     SecretMafiaEnv().reset(num_players=6, seed=42)
     SecretMafiaEnv().reset(num_players=15, seed=42)
     for num_players in (5, 16):
-        with pytest.raises(AssertionError):
+        with pytest.raises(ValueError):
             SecretMafiaEnv().reset(num_players=num_players, seed=42)
 
 
 @pytest.mark.parametrize("num_players", [5, 16])
 def test_player_count_error_message_states_six_to_fifteen(num_players):
-    with pytest.raises(AssertionError, match="6-15"):
+    with pytest.raises(ValueError, match="6 to 15"):
         SecretMafiaEnv().reset(num_players=num_players, seed=42)
 
 
@@ -341,19 +341,27 @@ def test_day_discussion_cannot_impersonate_the_game(label):
     assert not any("[GAME]" in message for message in visible_to_others)
 
 
-def test_a_vote_written_as_a_sender_label_is_rejected():
+def test_a_vote_written_as_sender_labels_is_rejected():
+    env = _fresh(6)
+    target = next(pid for pid, role in _roles(env).items() if role != "Mafia")
+    actor = env.state.current_player_id
+    env.step(f"[Player {actor}] [Player {target}]")
+    assert env.state.error_count == 1 and actor not in env.game_state["votes"]
+
+
+def test_a_vote_in_one_pair_of_brackets_counts_as_the_bare_vote():
     env = _fresh(6)
     target = next(pid for pid, role in _roles(env).items() if role != "Mafia")
     actor = env.state.current_player_id
     env.step(f"[Player {target}]")
-    assert env.state.error_count == 1 and actor not in env.game_state["votes"]
+    assert env.state.error_count == 0 and env.game_state["votes"][actor] == target
 
 
 def test_padded_vote_is_still_accepted():
     env = _fresh(6)
     target = next(pid for pid, role in _roles(env).items() if role != "Mafia")
     actor = env.state.current_player_id
-    env.step(f"  [ Player {target} ]  \n")
+    env.step(f"  Player {target}  \n")
     assert env.game_state["votes"][actor] == target
 
 

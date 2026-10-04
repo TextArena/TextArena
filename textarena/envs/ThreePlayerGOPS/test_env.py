@@ -34,7 +34,7 @@ def test_reset_requires_three_players():
 
     env = ThreePlayerGOPSEnv()
     for num_players in (2, 4):
-        with pytest.raises(AssertionError):
+        with pytest.raises(ValueError):
             env.reset(num_players=num_players, seed=42)
 
 

@@ -335,10 +335,10 @@ def test_turn_counter_in_render():
 
 
 # ------------------------------------------------------------ action parsing
-def test_actions_tolerate_case_whitespace_and_brackets():
+def test_actions_tolerate_case_and_whitespace():
     env = _fresh()
     gs = _arena(env, p1=(11, 3), objects={(5, 3): "debris", (9, 2): "debris"})
-    assert not _play(env, "D", "[s]", " F  D ", "fq")  # the shots hit (5, 3) and (9, 2)
+    assert not _play(env, "D", "s", " F  D ", "fq")  # the shots hit (5, 3) and (9, 2)
     assert gs["ships"][0]["pos"] == (4, 3)
     assert gs["ships"][1]["pos"] == (11, 4)
     assert gs["objects"] == {}

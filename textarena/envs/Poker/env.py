@@ -10,11 +10,11 @@ class PokerEnv(ta.GameEnv):
     min_players = 2
     max_players = 15
 
-    _CHECK_RE = re.compile(r"^\s*\[?\s*check\s*\]?\s*$", re.IGNORECASE)
-    _FOLD_RE = re.compile(r"^\s*\[?\s*fold\s*\]?\s*$", re.IGNORECASE)
-    _CALL_RE = re.compile(r"^\s*\[?\s*call\s*\]?\s*$", re.IGNORECASE)
-    _BET_RE = re.compile(r"^\s*\[?\s*bet\s+(\d+)\s*\]?\s*$", re.IGNORECASE)
-    _RAISE_RE = re.compile(r"^\s*\[?\s*raise\s+(\d+)\s*\]?\s*$", re.IGNORECASE)
+    _CHECK_RE = re.compile(r"^check$", re.IGNORECASE)
+    _FOLD_RE = re.compile(r"^fold$", re.IGNORECASE)
+    _CALL_RE = re.compile(r"^call$", re.IGNORECASE)
+    _BET_RE = re.compile(r"^bet\s+(\d+)$", re.IGNORECASE)
+    _RAISE_RE = re.compile(r"^raise\s+(\d+)$", re.IGNORECASE)
 
     def __init__(self, num_rounds: int = 10, starting_chips: int = 1_000, small_blind: int = 10, big_blind: int = 20):
         for name, value in (
@@ -183,8 +183,8 @@ class PokerEnv(ta.GameEnv):
                 gs["all_in_players"].add(pid)
             return amt
 
-        sb = post_blind(sbp, self.small_blind)
-        bb = post_blind(bbp, self.big_blind)
+        post_blind(sbp, self.small_blind)
+        post_blind(bbp, self.big_blind)
         # A short all-in big blind does not lower the pre-flop bring-in.
         gs["current_bet"] = self.big_blind
         first_actor = self._first_required_actor_from(first_to_act)

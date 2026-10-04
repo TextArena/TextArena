@@ -167,7 +167,7 @@ def test_reset_valid_player_counts():
 
 @pytest.mark.parametrize("num_players", [0, 1, 2, 6])
 def test_reset_invalid_player_count(num_players):
-    with pytest.raises(ValueError, match="Bohnanza requires 3-5 players"):
+    with pytest.raises(ValueError, match="Bohnanza needs 3 to 5 players"):
         BohnanzaEnv().reset(num_players=num_players)
 
 
@@ -786,7 +786,7 @@ def test_draw_action_is_not_needed():
     env = make_env()
     env.step("draw")
     assert env.state.error_count == 1
-    env.step("[Draw]")
+    env.step("Draw")
     assert env.state.error_count == 2
 
 
@@ -978,9 +978,7 @@ def test_tie_breaking():
 def test_plant_action_parsing():
     assert parse_command("plant 1") == ("plant", {"bean": None, "field": 1})
     assert parse_command("Plant field 2") == ("plant", {"bean": None, "field": 2})
-    assert parse_command("[Plant] 3") == ("plant", {"bean": None, "field": 3})
     assert parse_command("plant Blue 2") == ("plant", {"bean": "Blue", "field": 2})
-    assert parse_command("[Plant] Blue 1") == ("plant", {"bean": "Blue", "field": 1})
     assert parse_command("plant black-eyed into field 1") == ("plant", {"bean": "black-eyed", "field": 1})
     assert parse_command("plant") is None
     assert parse_command("plant Blue") is None
@@ -990,7 +988,7 @@ def test_plant_action_parsing():
 def test_trade_action_parsing():
     assert parse_command("trade Blue for Red") == ("trade", {"offer": "Blue", "want": "Red", "target": None})
     assert parse_command("trade 2 Blue for Red") == ("trade", {"offer": "2 Blue", "want": "Red", "target": None})
-    assert parse_command("[Trade] Blue for Nothing") == ("trade", {"offer": "Blue", "want": "Nothing", "target": None})
+    assert parse_command("Trade Blue for Nothing") == ("trade", {"offer": "Blue", "want": "Nothing", "target": None})
     assert parse_command("trade 1 Soy for 1 Red with Player 2") == ("trade", {"offer": "1 Soy", "want": "1 Red", "target": 2})
     assert parse_command("offer Soy for Red to 1") == ("trade", {"offer": "Soy", "want": "Red", "target": 1})
     assert parse_command("trade Blue") is None
@@ -1000,13 +998,12 @@ def test_trade_action_parsing():
 def test_harvest_action_parsing():
     assert parse_command("harvest 1") == ("harvest", {"field": 1})
     assert parse_command("Harvest field 2") == ("harvest", {"field": 2})
-    assert parse_command("[Harvest] 2") == ("harvest", {"field": 2})
     assert parse_command("harvest") is None
     assert parse_command("harvest all") is None
 
 
 def test_accept_action_parsing():
-    for text, trade_id in (("accept 1", 1), ("accept 10", 10), ("accept trade 3", 3), ("accept #4", 4), ("[Accept] Trade1", 1)):
+    for text, trade_id in (("accept 1", 1), ("accept 10", 10), ("accept trade 3", 3), ("accept #4", 4), ("Accept Trade1", 1)):
         assert parse_command(text) == ("accept", {"trade_id": trade_id})
     assert parse_command("accept") is None
     assert parse_command("accept trade") is None
@@ -1014,9 +1011,8 @@ def test_accept_action_parsing():
 
 def test_other_command_parsing():
     assert parse_command("pass") == ("pass", {})
-    assert parse_command("[Pass]") == ("pass", {})
     assert parse_command("Pass.") == ("pass", {})
-    for text in ("end trading", "End Trading", "EndTrading", "[EndTrading]", "end"):
+    for text in ("end trading", "End Trading", "EndTrading", "end"):
         assert parse_command(text) == ("end_trading", {})
     assert parse_command("cancel 2") == ("cancel", {"trade_id": 2})
     assert parse_command("withdraw trade 2") == ("cancel", {"trade_id": 2})
@@ -1296,17 +1292,6 @@ def test_long_games_do_not_accumulate_unconsumed_observations():
         assert len(messages) < 100, player_id
     env.get_observation()
     assert env.state.observations[env.state.current_player_id] == []
-
-
-def test_legacy_bracket_actions_are_accepted():
-    env = make_env()
-    gs(env)["players"][0]["hand"] = ["Blue", "Red", "Soy"]
-    for action in ("[Plant] 1", "[Plant] Red 2"):
-        env.step(action)
-        assert env.state.error_count == 0
-    assert gs(env)["current_phase"] == "draw_trade"
-    env.step("[EndTrading]")
-    assert gs(env)["current_phase"] == "plant_mandatory"
 
 
 def test_bean_names_are_case_insensitive_in_actions():

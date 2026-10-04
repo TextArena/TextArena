@@ -7,7 +7,7 @@ import textarena as ta
 class ThreeCardMonteEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
-    _ACTION_RE = re.compile(r"\[?\s*(\d+)\s*\]?")
+    _ACTION_RE = re.compile(r"(\d+)")
 
     def __init__(self, num_cups: int = 3, steps: int = 10):
         if isinstance(num_cups, bool) or not isinstance(num_cups, int) or num_cups < 3:

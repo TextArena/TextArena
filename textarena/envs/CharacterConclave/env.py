@@ -161,7 +161,7 @@ class CharacterConclaveEnv(ta.GameEnv):
         return None
 
     def _validate_player_vote(self, player_id: int, action: str) -> Tuple[Optional[int], Optional[str]]:
-        match = re.search(r"^\s*\[?\s*(?:player\s+)?(\d+)\s*\]?\s*$", action, re.IGNORECASE)
+        match = re.search(r"^\s*(?:player\s+)?(\d+)\s*$", action, re.IGNORECASE)
         if not match: return None, "Invalid voting format. Please submit your vote as 'x' or 'player x'."
         try: target_pid = int(match.group(1))
         except ValueError: return None, "Could not parse the player ID from your vote."

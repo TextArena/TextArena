@@ -12,7 +12,7 @@ class Game2048Env(ta.GameEnv):
     MAX_TARGET_TILE = 65536
     CELL_W = 6
     ACTIONS = {"UP": 0, "DOWN": 1, "LEFT": 2, "RIGHT": 3}
-    _ACTION_RE = re.compile(r"(?P<wrapped>\[)?\s*(?P<direction>[A-Za-z]+)\s*(?(wrapped)\])")
+    _ACTION_RE = re.compile(r"(?P<direction>[A-Za-z]+)")
 
     def __init__(self, target_tile: int = 2048, board_size: int = None):
         if (

@@ -3,8 +3,6 @@
 Two-player game: 26 letters are auctioned one at a time, then each player forms
 the highest-value English word from letters won. Player 0 bids first.
 
-NOTE: importing this env triggers ``nltk.download("words")`` (cached locally),
-required to validate submitted words. Tests avoid needing the network at runtime.
 Full "form a real word and win" outcomes depend on which letters are won, so we
 verify auction mechanics, invalid handling, and a scripted terminal reached by
 passing every letter then submitting invalid words.
@@ -13,7 +11,6 @@ import copy
 
 import pytest
 
-import textarena.envs.LetterAuction.env as letter_auction_module
 from textarena.envs.LetterAuction.env import MIN_COMPLETE_GAME_TURNS, LetterAuctionEnv
 
 
@@ -106,17 +103,30 @@ def test_pathologically_large_bid_is_invalid_not_an_exception():
     assert env.game_state == before
 
 
-def test_word_requires_the_owned_letter_multiplicity(monkeypatch):
+def test_word_requires_the_owned_letter_multiplicity():
     env = _fresh()
     gs = env.game_state
     gs["round_number"] = len(gs["letters"])
-    gs["player_states"][0]["letters"] = ["A", "B"]
+    gs["player_states"][0]["letters"] = ["A", "D"]
     gs["player_states"][0]["letter_values"] = [3, 5]
-    monkeypatch.setattr(letter_auction_module, "en_uk_dict", {"aba"})
     before = copy.deepcopy(gs["player_states"][0])
-    done, _ = env.step("aba")
+    done, _ = env.step("add")
     assert not done
+    assert env.state.error_count == 1
     assert gs["player_states"][0] == before
+
+
+def test_words_outside_the_dictionary_are_rejected():
+    env = _fresh()
+    gs = env.game_state
+    gs["round_number"] = len(gs["letters"])
+    gs["player_states"][0]["letters"] = ["D", "A"]
+    gs["player_states"][0]["letter_values"] = [3, 5]
+    env.step("da")
+    assert env.state.error_count == 1 and gs["player_states"][0]["word"] is None
+    done, _ = env.step("ad")
+    assert not done and env.state.error_count == 0
+    assert gs["player_states"][0]["word"] == "AD" and gs["player_states"][0]["word_value"] == 8
 
 
 def test_complete_valid_game_reaches_scored_draw():

@@ -37,7 +37,7 @@ def test_constructor_rejects_nonpositive_limits(kwargs):
 def test_reset_rejects_unsupported_player_counts():
     env = SettlersOfCatanEnv()
     for n in (2, 5):
-        with pytest.raises(AssertionError):
+        with pytest.raises(ValueError):
             env.reset(num_players=n, seed=42)
 
 

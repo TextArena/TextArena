@@ -136,7 +136,7 @@ def test_reset_succeeds(num_players):
 @pytest.mark.parametrize("num_players", [2, 8])
 def test_reset_rejects_invalid_player_counts(num_players):
     env = DiplomacyEnv()
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=num_players, seed=42)
 
 
@@ -1101,8 +1101,6 @@ PADDING = 30_000
         pytest.param("\t\n " * (PADDING // 3) + "x", id="tab-newline-runs"),
         pytest.param("[" * (PADDING // 2) + "x" + "]" * (PADDING // 2 - 2), id="deep-brackets"),
         pytest.param("Whisper 1" + " " * PADDING + "x", id="whisper"),
-        pytest.param("[Whisper 1:" + " " * PADDING + "x", id="legacy-whisper"),
-        pytest.param("[Broadcast] a" + " " * PADDING + "b", id="legacy-broadcast"),
     ],
 )
 def test_long_padded_input_is_rejected_quickly_without_changing_state(action):
@@ -1119,16 +1117,14 @@ def test_long_padded_input_is_rejected_quickly_without_changing_state(action):
     assert env.pending_orders == {}
 
 
-def test_padded_legacy_messages_are_still_delivered_intact():
+def test_padded_messages_are_delivered_intact():
     env = DiplomacyEnv()
     env.reset(num_players=3, seed=42)
     gap = " " * 5000
-    unclosed = "[Broadcast:x" * 1000  # after the last "]", so none of these can match
-    done, _ = env.step(f"[Broadcast: hi{gap}all]\n[Whisper 1: psst{gap}there]\n[Broadcast] bye{gap}now{unclosed}")
+    done, _ = env.step(f"Broadcast: hi{gap}all\nWhisper to 1: psst{gap}there\nBroadcast: bye{gap}now")
     assert not done
     assert env.state.error_count == 0
     visible = _visible_to(env, 1)
     assert f"(to all) hi{gap}all" in visible
     assert f"(privately to you) psst{gap}there" in visible
     assert f"(to all) bye{gap}now" in visible
-    assert not any("[Broadcast:x" in message for message in _visible_to(env, 2))

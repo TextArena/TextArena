@@ -32,7 +32,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Set-v0-mdp`).
 ## Actions
 
 Reply with the board numbers of three different cards, separated by commas or spaces, for example `1, 4, 11` or
-`1 4 11`. The numbers may be wrapped in square brackets.
+`1 4 11`.
 
 ## Observations
 

@@ -33,8 +33,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `SpellingBee-v0-mdp
 
 ## Actions
 
-Reply with exactly one word made of letters only, at most 64 letters long, for example `bean`. Case does not matter,
-and the word may be wrapped in square brackets.
+Reply with exactly one word made of letters only, at most 64 letters long, for example `bean`. Case does not matter.
 
 ## Observations
 
@@ -51,12 +50,13 @@ submission, and each accepted word is announced as `Player 0 submitted the word:
 ## Parameters
 
 - `num_letters` (required, from 1 to 26): the size of the letter set.
-- `dictionary` (default: the bundled dictionary): any object with an `is_english_word(word)` method, for example a
-  custom word list. If the lookup raises an exception, the submission is not counted and the player is asked to retry.
+- `is_word` (default: `is_english_word` from `textarena/utils/word_lists.py`): a function that receives a lowercase
+  word and returns whether it counts, for example to use a custom word list. If it raises an exception, the submission
+  is not counted and the player is asked to retry.
 
 ## Notes
 
-- Words are checked against the UK and US Hunspell word lists bundled in `textarena/utils/word_lists.py`, including
-  their regular inflections (plurals, past tenses, and so on). The optional NLTK `words` corpus is not used, so the same
-  words are accepted on every machine.
-- The bundled dictionary lists every single letter as a word, so any allowed letter is a valid one-letter opening.
+- Words are checked against the English word list bundled in `textarena/utils/word_lists.py`: every word of the UK
+  and US Hunspell dictionaries with its regular inflections (plurals, past tenses, and so on). The same words are
+  accepted on every machine.
+- Of the single letters, only `a` and `i` count as words.

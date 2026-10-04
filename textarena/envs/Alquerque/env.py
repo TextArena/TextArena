@@ -24,9 +24,7 @@ class AlquerqueEnv(ta.GameEnv):
     SCORE_PER_CAPTURE = 10
 
     _CELL_TOKEN = r"(?:[a-eA-E][1-5]|[0-9]+)"
-    action_pattern = (
-        rf"^\s*\[?\s*({_CELL_TOKEN}(?:(?:\s*->\s*|\s+){_CELL_TOKEN})+)\s*\]?\s*$"
-    )
+    action_pattern = rf"^({_CELL_TOKEN}(?:(?:\s*->\s*|\s+){_CELL_TOKEN})+)$"
     action_format = (
         "a move 'from to' in board coordinates, listing every landing point of a multi-jump capture, "
         "for example 'c2 c3' as Red or 'c4 c3' as Black"

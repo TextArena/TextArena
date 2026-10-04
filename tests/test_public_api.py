@@ -133,19 +133,73 @@ def test_a_processed_action_resets_the_retry_count():
     assert done and env.state.retry_count == 0
 
 
+class _CellEnv(_FlakyServiceEnv):
+    action_pattern = r"^([0-8])$"
+    action_format = "a cell number from 0 to 8, for example '4'"
+
+    def apply(self, player_id, move):
+        return self.outcome({0: 1}, reason="done")
+
+
+class _TextEnv(_FlakyServiceEnv):
+    def apply(self, player_id, action):
+        self.received = action
+        return self.outcome({0: 1}, reason="done")
+
+
 def test_format_errors_describe_the_expected_action():
-    class _FormatEnv(_FlakyServiceEnv):
-        action_pattern = r"^\s*([0-8])\s*$"
-        action_format = "a cell number from 0 to 8, for example '4'"
-
-        def apply(self, player_id, move):
-            return self.outcome({0: 1}, reason="done")
-
-    env = _FormatEnv()
+    env = _CellEnv()
     env.reset(num_players=1, seed=0)
     env.step("nine")
     notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
     assert "Expected a cell number from 0 to 8, for example '4'." in notices[-1]
+
+
+@pytest.mark.parametrize(
+    "action, accepted",
+    [("4", True), ("[4]", True), (" [ 4 ]\n", True), ("[4", False), ("4]", False), ("[[4]]", False)],
+)
+def test_one_enclosing_bracket_pair_is_ignored(action, accepted):
+    env = _CellEnv()
+    env.reset(seed=0)
+    done, _ = env.step(action)
+    assert done is accepted
+    assert env.state.error_count == (0 if accepted else 1)
+
+
+@pytest.mark.parametrize(
+    "action, received",
+    [(" [Broadcast: hi] ", "Broadcast: hi"), ("[a] and [b]", "[a] and [b]"), ("x [y]", "x [y]")],
+)
+def test_actions_reach_apply_stripped_of_one_enclosing_bracket_pair(action, received):
+    env = _TextEnv()
+    env.reset(seed=0)
+    env.step(action)
+    assert env.received == received
+
+
+class _TeamEnv(_FlakyServiceEnv):
+    min_players, max_players = 2, 8
+
+    def check_num_players(self, num_players):
+        if num_players % 2:
+            raise ValueError("two equal teams")
+
+
+@pytest.mark.parametrize("num_players", [None, 1, 9, 3, 2.0, True])
+def test_reset_rejects_unsupported_player_counts(num_players):
+    with pytest.raises(ValueError):
+        _TeamEnv().reset(num_players=num_players)
+
+
+def test_reset_falls_back_to_the_default_or_only_player_count():
+    env = _FlakyServiceEnv()
+    env.reset()
+    assert env.state.num_players == 1
+    env = _TeamEnv()
+    env.default_num_players = 4
+    env.reset(seed=0)
+    assert env.state.num_players == 4
 
 
 def test_role_tag_stripping_is_linear_on_deeply_nested_input():

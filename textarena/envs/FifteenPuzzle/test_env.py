@@ -112,10 +112,10 @@ def test_parser_rejects_noncanonical_actions_atomically(action):
     assert env.state.game_state == before
 
 
-def test_case_insensitive_paired_legacy_action():
+def test_directions_are_case_insensitive():
     env = _fresh()
     _set_board(env, [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, None, 12], [13, 14, 11, 15]])
-    done, _ = env.step("[UP]")
+    done, _ = env.step("UP")
     assert not done
     assert env.board[2][2] == 11
 

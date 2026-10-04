@@ -29,9 +29,8 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `TruthAndDeception-
 ## Actions
 
 - **Conversation:** any text. Before the final turn, even `Fact 1` is just a message.
-- **Final guess (Guesser):** exactly `Fact 1` or `Fact 2`. Case, surrounding spaces, square brackets (`[Fact 2]`), and
-  Unicode look-alikes such as full-width characters are tolerated; a sentence like `I think Fact 1 is true` is
-  invalid.
+- **Final guess (Guesser):** exactly `Fact 1` or `Fact 2`. Case, surrounding spaces, and Unicode look-alikes such as
+  full-width characters are tolerated; a sentence like `I think Fact 1 is true` is invalid.
 
 ## Observations
 

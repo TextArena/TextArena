@@ -59,14 +59,6 @@ def test_two_consecutive_invalid_moves_end_game():
     assert done and env.state.game_info[0]["invalid_move"] is True
 
 
-def test_bracketed_and_bare_actions_have_the_same_result():
-    bare = _fresh(numbers=[2, 3, 4], target=99)
-    bracketed = _fresh(numbers=[2, 3, 4], target=99)
-    bare.step("0 1 +")
-    bracketed.step("[0 1 +]")
-    assert bare.game_state == bracketed.game_state
-
-
 @pytest.mark.parametrize("action", ["[0 1 +", "0 1 +]"])
 def test_unmatched_brackets_are_rejected_atomically(action):
     env = _fresh(numbers=[2, 3, 4], target=99)
@@ -273,7 +265,7 @@ def test_invalid_configuration_is_rejected(kwargs):
 
 def test_player_bounds_are_enforced():
     env = CountdownEnv(numbers=[2, 3], target=6)
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=0)
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=2)

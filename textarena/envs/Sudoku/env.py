@@ -76,12 +76,8 @@ class SudokuEnv(ta.GameEnv):
                 f"Action is too long (maximum {self.max_action_chars} characters)."
             )
         action_text = move.strip()
-        if action_text.startswith("[") or action_text.endswith("]"):
-            if not (action_text.startswith("[") and action_text.endswith("]")):
-                return self.invalid("Invalid move format: mismatched brackets.")
-            action_text = action_text[1:-1].strip()
         match = re.fullmatch(
-            r"(\d+)\s*[,\s]\s*(\d+)\s*[,\s]\s*(\d+)",
+            r"(\d+)(?:\s*,\s*|\s+)(\d+)(?:\s*,\s*|\s+)(\d+)",
             action_text,
         )
         if not match:

@@ -1,6 +1,6 @@
 import re
 from collections import deque
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
 import textarena as ta
 
@@ -120,7 +120,7 @@ class FrozenLakeEnv(ta.GameEnv):
         pr, pc = self.player_pos
         gr, gc = self.goal_pos
         # Path 1: Move horizontally first, then vertically
-        current_r, current_c = pr, pc
+        current_r = pr
         # Add horizontal movement
         if pc < gc:  # Move right
             for c in range(pc, gc + 1): safe_path.add((current_r, c))
@@ -213,10 +213,6 @@ class FrozenLakeEnv(ta.GameEnv):
                 f"Action is too long (maximum {self.max_action_chars} characters)."
             )
         action_text = move.strip()
-        if action_text.startswith("[") or action_text.endswith("]"):
-            if not (action_text.startswith("[") and action_text.endswith("]")):
-                return self.invalid("Invalid action format: mismatched brackets.")
-            action_text = action_text[1:-1].strip()
         match = re.fullmatch(
             r"(up|down|left|right|w|a|s|d)",
             action_text,

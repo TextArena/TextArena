@@ -21,10 +21,7 @@ class LightsOutEnv(ta.GameEnv):
         self.size = size
         self.max_turns = max_turns
         # Action format: 'row col' where row and col are 0-indexed
-        self.action_space = re.compile(
-            r"(?P<wrapped>\[)?\s*(?P<row>\d+)(?:\s*,\s*|\s+)"
-            r"(?P<col>\d+)\s*(?(wrapped)\])"
-        )
+        self.action_space = re.compile(r"(?P<row>\d+)(?:\s*,\s*|\s+)(?P<col>\d+)")
 
     def setup(self) -> Dict[str, Any]:
         grid = [[False for _ in range(self.size)] for _ in range(self.size)]

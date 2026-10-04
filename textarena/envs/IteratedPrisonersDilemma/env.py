@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Union
 
 import textarena as ta
 from textarena.envs.IteratedPrisonersDilemma.renderer import create_board_str
@@ -52,9 +52,9 @@ class IteratedPrisonersDilemmaEnv(ta.GameEnv):
         self.sucker_reward = sucker_reward
         self.mutual_defect_reward = mutual_defect_reward
 
-        # action regex (bare token, tolerating optional stray brackets)
-        self.cooperate_pattern = re.compile(r"^\s*\[?\s*Cooperate\s*\]?\s*$", re.IGNORECASE)
-        self.defect_pattern    = re.compile(r"^\s*\[?\s*Defect\s*\]?\s*$",    re.IGNORECASE)
+        # action regex
+        self.cooperate_pattern = re.compile(r"^Cooperate$", re.IGNORECASE)
+        self.defect_pattern    = re.compile(r"^Defect$",    re.IGNORECASE)
 
     def setup(self) -> Dict[str, Any]:
         return {

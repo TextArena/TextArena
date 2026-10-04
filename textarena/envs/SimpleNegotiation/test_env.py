@@ -192,12 +192,21 @@ def test_prompt_states_the_relative_scoring_rule_and_default_deny():
     assert "rejected automatically unless you Accept" in prompt
 
 
-def test_legacy_bracketed_offer_is_still_accepted():
+def test_offer_may_start_with_i_give():
     env = _fresh()
-    env.step("[Offer: I give 1 Wheat -> 1 Ore]")
+    env.step("Offer: I give 1 Wheat -> 1 Ore")
     offer = env.state.game_state["current_offer"]
     assert offer["offered_resources"] == {"Wheat": 1}
     assert offer["requested_resources"] == {"Ore": 1}
+
+
+@pytest.mark.parametrize("action", ["Offer 1 Wheat -> 1 Ore", "[Offer 1 Wheat -> 1 Ore]"])
+def test_offer_without_a_colon_is_malformed(action):
+    env = _fresh()
+    done, _ = env.step(action)
+    assert not done
+    assert env.state.error_count == 1
+    assert env.state.game_state["current_offer"] is None
 
 
 def test_chat_lines_that_merely_mention_commands_are_chat():

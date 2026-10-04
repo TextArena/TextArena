@@ -15,11 +15,9 @@ class TakEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
     action_pattern = (
-        r"(?i)^\s*\[?\s*"
-        r"(place|move)\s+"       # Match action: "place" or "move"
+        r"(?i)^(place|move)\s+"  # Match action: "place" or "move"
         r"\((\d+\s*,\s*\d+|\s*)\)\s+"  # Match source: "(row,col)" or "()"
-        r"(\{.*\})"               # Match allocation dictionary
-        r"\s*\]?\s*$"
+        r"(\{.*\})$"              # Match allocation dictionary
     )  # Example: move (2,2) {(2,3): [F1], (2,4): [F0, C0]}
 
     def __init__(self, board_size, stones, capstones, max_turns: int = 100):

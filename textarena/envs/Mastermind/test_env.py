@@ -128,9 +128,9 @@ def test_exact_parser_rejects_malformed_guesses_atomically(action):
     assert env.state.turn == 0
 
 
-def test_comma_and_matched_bracket_guess_formats():
+def test_comma_separated_guess_format():
     env = _fresh()
-    done, _ = env.step("[1, 2, 3, 4]")
+    done, _ = env.step("1, 2, 3, 4")
     assert not done
     assert env.game_state["history"][0]["guess"] == [1, 2, 3, 4]
 

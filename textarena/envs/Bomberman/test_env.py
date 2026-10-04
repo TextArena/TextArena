@@ -306,10 +306,10 @@ def test_round_counter_in_render():
 
 
 # ------------------------------------------------------------ action parsing
-def test_commands_tolerate_case_whitespace_and_brackets():
+def test_commands_tolerate_case_and_whitespace():
     env = _fresh()
     gs = _arena(env, (3, 3), (6, 6))
-    _play(env, "  Right ", "[stay]", "BOMB")
+    _play(env, "  Right ", "stay", "BOMB")
     assert gs["positions"] == [(4, 3), (6, 6)]
     assert gs["bombs"][0]["owner"] == 0
 

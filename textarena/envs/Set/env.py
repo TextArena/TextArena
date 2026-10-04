@@ -81,18 +81,13 @@ class SetEnv(ta.GameEnv):
         self._observe_state()
 
     def _parse_action(self, action: str) -> Optional[Tuple[int, int, int]]:
-        """Three indices separated by whitespace or single commas, optionally bracketed.
+        """Three indices separated by whitespace or single commas.
 
         Tokenized rather than matched with a regex: patterns like ``\\s*[,\\s]\\s*``
         backtrack quadratically on long whitespace runs.
         """
-        text = action.strip()
-        if text.startswith("["):
-            text = text[1:]
-        if text.endswith("]"):
-            text = text[:-1]
         numbers, pending_comma = [], False
-        for token in text.replace(",", " , ").split():
+        for token in action.replace(",", " , ").split():
             if token == ",":
                 if not numbers or pending_comma:
                     return None

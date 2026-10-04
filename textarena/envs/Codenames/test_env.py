@@ -6,8 +6,6 @@ The board assignment is read from ``env.board`` so outcomes are scripted determi
 from collections import Counter
 import re
 
-import nltk
-import nltk.corpus
 import pytest
 import textarena as ta
 import textarena.envs.Codenames.env as codenames_module
@@ -38,7 +36,7 @@ def test_reset_board_composition():
 
 @pytest.mark.parametrize("num_players", [3, 5])
 def test_reset_requires_exactly_four_players(num_players):
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         CodenamesEnv().reset(num_players=num_players, seed=42)
 
 
@@ -68,44 +66,11 @@ def test_constructor_rejects_invalid_options(kwargs):
         CodenamesEnv(**kwargs)
 
 
-class _MissingCorpus:
-    def words(self, *args, **kwargs):
-        raise LookupError("corpus unavailable")
-
-
-def _missing_tagger(*args, **kwargs):
-    raise LookupError("tagger unavailable")
-
-
-def _boards(hardcore):
-    boards = []
-    for seed in range(3):
-        env = CodenamesEnv(hardcore=hardcore)
-        env.reset(num_players=4, seed=seed)
-        boards.append(list(env.board.items()))
-    return boards
-
-
 @pytest.mark.parametrize("hardcore", [False, True])
 def test_board_words_never_include_blocked_words(hardcore):
     from textarena.utils.word_lists import get_blocked_words
 
     assert not set(CodenamesEnv(hardcore=hardcore).word_list) & get_blocked_words()
-
-
-def test_missing_nltk_data_does_not_change_boards(monkeypatch):
-    expected = {hardcore: _boards(hardcore) for hardcore in (False, True)}
-
-    # Replace the module-level references themselves: reading an attribute of NLTK's
-    # lazy corpus loader would load the corpus, which fails when the data is missing.
-    monkeypatch.setattr(nltk.corpus, "words", _MissingCorpus())
-    monkeypatch.setattr(nltk, "pos_tag", _missing_tagger)
-    monkeypatch.setattr(codenames_module, "words", _MissingCorpus(), raising=False)
-    monkeypatch.setattr(codenames_module, "pos_tag", _missing_tagger, raising=False)
-    codenames_module._bundled_word_lists.cache_clear()
-
-    assert {hardcore: _boards(hardcore) for hardcore in (False, True)} == expected
-    assert CodenamesEnv(hardcore=True).word_list != CodenamesEnv(hardcore=False).word_list
 
 
 @pytest.mark.parametrize("level", ["basic", "hardcore"])

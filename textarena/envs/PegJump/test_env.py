@@ -144,9 +144,9 @@ def test_parser_rejects_noncanonical_actions_atomically(action):
     assert env.state.game_state == before
 
 
-def test_paired_legacy_brackets_remain_valid():
+def test_comma_separated_holes_are_valid():
     env = _fresh()
-    done, _ = env.step("[4, 1]")
+    done, _ = env.step("4, 1")
     assert not done
     assert env.state.game_state["board"].count(True) == 13
 

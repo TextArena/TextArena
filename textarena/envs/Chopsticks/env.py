@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Union
 
 import textarena as ta
 
@@ -38,7 +38,7 @@ class ChopsticksEnv(ta.GameEnv):
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         gs = self.game_state
-        m_atk = re.compile(r"^\s*\[?\s*attack\s+([01])\s+([01])\s*\]?\s*$", re.IGNORECASE).search(action)
+        m_atk = re.compile(r"^attack\s+([01])\s+([01])$", re.IGNORECASE).search(action)
         if m_atk:
             my_idx, opp_idx = map(int, m_atk.groups())
             my_val = gs["hands"][player_id][my_idx]
@@ -54,7 +54,7 @@ class ChopsticksEnv(ta.GameEnv):
                 return self.winner(player_id, reason="Both opponent hands dead.")
             return None
 
-        m_sp = re.compile(r"^\s*\[?\s*split\s+([0-9]{1,2})\s+([0-9]{1,2})\s*\]?\s*$", re.IGNORECASE).search(action)
+        m_sp = re.compile(r"^split\s+([0-9]{1,2})\s+([0-9]{1,2})$", re.IGNORECASE).search(action)
         if m_sp:
             L, R = map(int, m_sp.groups())
             if L > 4 or R > 4: return self.invalid("Each hand must hold between 0 and 4 fingers.")

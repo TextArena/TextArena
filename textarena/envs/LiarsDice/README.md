@@ -33,7 +33,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `LiarsDice-v0-mdp`)
 
 ## Actions
 
-Reply with exactly one command (case-insensitive; surrounding spaces and square brackets are ignored):
+Reply with exactly one command (case-insensitive; surrounding spaces are ignored):
 
 - `Bid: <quantity>, <face>`, e.g. `Bid: 3, 4` claims at least three 4s. `Bid 3 4` and `Bid:3,4` also work.
 - `Call` challenges the current bid.

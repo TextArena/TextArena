@@ -8,10 +8,7 @@ class FifteenPuzzleEnv(ta.GameEnv):
     """ Fifteen Puzzle environment """
     min_players = 1
     max_players = 1
-    action_pattern = (
-        r"^\s*(?P<wrapped>\[)?\s*(?P<direction>[a-zA-Z]+)"
-        r"\s*(?(wrapped)\])\s*$"
-    )
+    action_pattern = r"^(?P<direction>[a-zA-Z]+)$"
     action_format = "one of the directions 'up', 'down', 'left' or 'right'"
 
     def __init__(self, max_turns: int = 50):

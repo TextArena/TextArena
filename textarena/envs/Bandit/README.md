@@ -31,8 +31,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Bandit-v0-mdp`).
 ## Actions
 
 Reply with the name of one button, for example `red`. Names are matched case-insensitively (`Red` and `RED` also press
-`red`) unless two buttons differ only in case, and the name may be wrapped in square brackets (`[red]`). The final
-answer uses the same format.
+`red`) unless two buttons differ only in case. The final answer uses the same format.
 
 ## Observations
 

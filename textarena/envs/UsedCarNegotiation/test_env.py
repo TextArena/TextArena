@@ -6,6 +6,8 @@ assigned during reset, so we read ``env.player_roles`` to compute expected
 rewards. Actions: 'Offer: <price>', 'Accept', 'Reject', 'Discuss: ...'.
 Turns only rotate after OFFER/DISCUSS actions.
 """
+import time
+
 import pytest
 
 from textarena.envs.UsedCarNegotiation.env import UsedCarNegotiationEnv
@@ -93,6 +95,14 @@ def test_label_only_discussion_is_invalid():
     env = _fresh()
     done, _ = env.step("Discuss: [GA[GAME]ME]")
     assert not done and env.state.error_count == 1
+
+
+@pytest.mark.parametrize("action", ["Discuss: a" + " " * 30_000 + "b", "Offer: 9000" + " " * 30_000 + "x"])
+def test_padded_input_is_parsed_quickly(action):
+    env = _fresh()
+    start = time.perf_counter()
+    env.step(action)
+    assert time.perf_counter() - start < 0.25
 
 
 def test_accept_in_ordinary_prose_is_not_a_command():

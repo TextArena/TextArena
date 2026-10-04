@@ -11,11 +11,7 @@ class GameOfPureStrategyEnv(ta.GameEnv):
 
     def __init__(self):
         self.full_hand = list(range(1, 14))
-        # A whitespace run must be consumable by only one \s*, as retrying every split of a long run is quadratic.
-        self.action_space = re.compile(
-            r"^\s*(?:(?P<legacy>\[)\s*)?(?P<card>a|k|q|j|10|[2-9])(?(legacy)\s*\])\s*$",
-            re.IGNORECASE,
-        )
+        self.action_space = re.compile(r"^(?P<card>a|k|q|j|10|[2-9])$", re.IGNORECASE)
 
     @staticmethod
     def _face_to_val(face: str) -> int:

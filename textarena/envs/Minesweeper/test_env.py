@@ -128,13 +128,13 @@ def test_exact_parser_rejects_malformed_coordinates_atomically(action):
     assert env.state.turn == 0
 
 
-def test_comma_coordinates_and_matched_brackets_are_supported():
-    plain = _fresh(rows=5, cols=5, num_mines=3)
-    bracketed = _fresh(rows=5, cols=5, num_mines=3)
-    plain.step("2, 2")
-    bracketed.step("[2 2]")
-    assert plain.grid == bracketed.grid
-    assert plain.revealed == bracketed.revealed
+def test_comma_and_space_separated_coordinates_are_equivalent():
+    comma = _fresh(rows=5, cols=5, num_mines=3)
+    space = _fresh(rows=5, cols=5, num_mines=3)
+    comma.step("2, 2")
+    space.step("2 2")
+    assert comma.grid == space.grid
+    assert comma.revealed == space.revealed
 
 
 def test_oversized_numeric_action_is_invalid_without_first_move_setup():

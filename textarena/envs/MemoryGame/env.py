@@ -33,10 +33,8 @@ class MemoryGameEnv(ta.GameEnv):
     max_players = 2
     MAX_GRID_SIZE = 20
     action_pattern = (
-        r"^\s*(?P<bracket>\[)?\s*"
-        r"(?P<r1>[0-9]+)\s+(?P<c1>[0-9]+)\s+"
-        r"(?P<r2>[0-9]+)\s+(?P<c2>[0-9]+)\s*"
-        r"(?(bracket)\])\s*$"
+        r"^(?P<r1>[0-9]+)\s+(?P<c1>[0-9]+)\s+"
+        r"(?P<r2>[0-9]+)\s+(?P<c2>[0-9]+)$"
     )
 
     def __init__(self, grid_size: Optional[int] = 4, max_turns: Optional[int] = 100):

@@ -138,16 +138,6 @@ def test_huge_cell_is_rejected_without_integer_conversion(monkeypatch):
     assert env.state.game_state == before
 
 
-def test_balanced_brackets_are_accepted():
-    env = _fresh()
-
-    done, _ = env.step("[4]")
-
-    assert not done
-    assert env.state.game_state["board"][1][1] == "O"
-    assert env.state.current_player_id == 1
-
-
 def test_terminal_action_is_counted_and_final_board_is_rendered():
     env = _fresh()
     for action in ("0", "3", "1", "4", "2"):

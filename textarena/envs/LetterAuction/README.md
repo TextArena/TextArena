@@ -71,5 +71,7 @@ keep track of their coins and letters from these messages.
 
 ## Notes
 
-- Words are checked against NLTK's `words` corpus. If that corpus is not installed, only `a` and `i` are accepted.
+- Words are checked against the English word list bundled in `textarena/utils/word_lists.py`: every word of the UK
+  and US Hunspell dictionaries with its regular inflections (plurals, past tenses, and so on), the same on every
+  machine. Proper nouns are rejected, and of the single letters only `a` and `i` count as words.
 - `pass` is reserved for submitting no word; it can never be spelled anyway, since it needs two S tiles.

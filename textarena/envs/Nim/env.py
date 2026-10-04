@@ -21,11 +21,7 @@ class NimEnv(ta.GameEnv):
     max_players = 2
     MAX_PILES = 100
     MAX_PILE_SIZE = 1_000_000
-    action_pattern = (
-        r"^\s*(?P<bracket>\[)?\s*"
-        r"(?P<pile>[0-9]+)\s+(?P<quantity>[0-9]+)\s*"
-        r"(?(bracket)\])\s*$"
-    )
+    action_pattern = r"^(?P<pile>[0-9]+)\s+(?P<quantity>[0-9]+)$"
 
     def __init__(self, piles: List[int] = None):
         """

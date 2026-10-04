@@ -9,10 +9,8 @@ import copy
 import pytest
 
 import textarena as ta
-import textarena.envs.Wordle.env as wordle_module
-import textarena.utils.word_lists as word_lists
 from textarena.envs.Wordle.env import WordleEnv
-from textarena.utils.word_lists import get_basic_english_words, get_headwords
+from textarena.utils.word_lists import get_basic_english_words, get_english_words, get_headwords
 
 
 def _fresh(word_length=5, num_guesses=6):
@@ -24,14 +22,7 @@ def _fresh(word_length=5, num_guesses=6):
 def _valid_nonsecret(env):
     secret = env.state.game_state["secret_word"]
     return next(
-        (
-            word
-            for word in sorted(env.dictionary.get_all_words())
-            if word.isascii()
-            and word.isalpha()
-            and len(word) == env.word_length
-            and word != secret
-        ),
+        (word for word in sorted(get_english_words()) if len(word) == env.word_length and word != secret),
         None,
     )
 
@@ -62,7 +53,7 @@ def test_correct_guess_on_last_allowed_turn_wins():
 
 def test_invalid_format_rejected():
     env = _fresh()
-    done, _ = env.step("no brackets here")
+    done, _ = env.step("not one word")
     assert not done
     assert env.state.error_count == 1
 
@@ -70,7 +61,7 @@ def test_invalid_format_rejected():
 @pytest.mark.parametrize("word_length", [5, 7, 4])
 def test_format_error_describes_expected_action(word_length):
     env = _fresh(word_length=word_length)
-    env.step("no brackets here")
+    env.step("not one word")
     notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
     assert f"Expected {env.action_format}." in notices[-1]
     assert env.action_format.startswith(f"a {word_length}-letter English word, for example '")
@@ -97,7 +88,7 @@ def test_non_english_word_rejected():
 
 def test_repeated_invalid_moves_end_game():
     env = _fresh()
-    env.step("no brackets")          # first invalid
+    env.step("not one word")         # first invalid
     done, _ = env.step("still none")  # second consecutive invalid -> ends
     assert done
     assert 0 <= env.state.rewards[0] <= 1
@@ -203,9 +194,8 @@ def test_renderer_hides_secret_until_terminal():
     assert secret in env.get_board_str()
 
 
-def test_snapshot_restores_guesses_and_dictionary_resource():
+def test_snapshot_restores_guesses_and_word_list():
     env = _fresh()
-    dictionary = env.dictionary
     word_list = env.word_list
     guess = _valid_nonsecret(env)
     assert guess is not None
@@ -214,26 +204,13 @@ def test_snapshot_restores_guesses_and_dictionary_resource():
     env.restore(snapshot)
     assert env.state.game_state["guess_history"] == []
     assert env.state.turn == 0
-    assert env.dictionary is dictionary
     assert env.word_list is word_list
 
 
-class _MissingCorpus:
-    def words(self, *args, **kwargs):
-        raise LookupError("corpus unavailable")
-
-
-@pytest.mark.parametrize("hardcore", [False, True])
-@pytest.mark.parametrize("word_length", [5, 7])
-def test_secret_and_accepted_words_do_not_depend_on_the_nltk_corpus(monkeypatch, word_length, hardcore):
-    with_corpus = WordleEnv(word_length=word_length, hardcore=hardcore)
-    monkeypatch.setattr(word_lists, "words", _MissingCorpus())
-    monkeypatch.setattr(wordle_module, "words", _MissingCorpus(), raising=False)
-    without_corpus = WordleEnv(word_length=word_length, hardcore=hardcore)
-    assert without_corpus.word_list == with_corpus.word_list
-    # "abear" and "aalii" are only in the optional NLTK corpus
-    for word in ("apple", "colour", "color", "abear", "aalii", "zzzzz"):
-        assert without_corpus._check_word(word) == with_corpus._check_word(word)
+def test_uk_and_us_spellings_and_inflections_are_accepted_but_proper_nouns_are_not():
+    env = WordleEnv()
+    assert all(env._check_word(word) for word in ("apple", "colour", "color", "boxes"))
+    assert not any(env._check_word(word) for word in ("paris", "zzzzz"))
 
 
 @pytest.mark.parametrize("hardcore", [False, True])

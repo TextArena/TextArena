@@ -54,7 +54,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Bohnanza-v0-mdp`).
 
 ## Actions
 
-Submit exactly one bare command (case-insensitive; legacy brackets like `[Plant] 1` are tolerated).
+Submit exactly one bare command (case-insensitive).
 
 - **Any phase, when you have the move:** `harvest <field>` (e.g. `harvest 2`; does not use up your move).
 - **Phase 1:** `plant <field>` plants the front card (e.g. `plant 1`); `pass` stops after one card.

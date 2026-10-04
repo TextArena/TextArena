@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Union
 
 import textarena as ta
 from textarena.envs.TicTacToe.renderer import create_board_str
@@ -8,7 +8,7 @@ from textarena.envs.TicTacToe.renderer import create_board_str
 class TicTacToeEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
-    action_pattern = r"^\s*\[?\s*([0-8])\s*\]?\s*$"
+    action_pattern = r"^([0-8])$"
     action_format = "a cell number from 0 to 8, for example '4'"
 
     def setup(self) -> Dict[str, Any]:

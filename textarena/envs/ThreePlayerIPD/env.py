@@ -41,10 +41,7 @@ class ThreePlayerIPDEnv(ta.GameEnv):
         self.num_rounds = num_rounds
         self.conversation_rounds = communication_turns
         self.R, self.T, self.S, self.P = (cooperate_reward, defect_reward, sucker_reward, mutual_defect_reward) # pay-off constants
-        self.token_pat = re.compile(
-            r"(?P<bracket>\[\s*)?(\d+)\s+(cooperate|defect)(?(bracket)\s*\])",
-            re.I,
-        )
+        self.token_pat = re.compile(r"(?<!\d)(\d+)\s+(cooperate|defect)", re.I)
 
     def setup(self) -> Dict[str, Any]:
         num_players = self.state.num_players
@@ -157,9 +154,9 @@ class ThreePlayerIPDEnv(ta.GameEnv):
             separator_pattern = r"\s*" if index == 0 else r"[\s,;]+"
             if not re.fullmatch(separator_pattern, separator):
                 return None, "Decision tokens may only be separated by spaces, commas, or semicolons."
-            target_token = match.group(2).lstrip("0") or "0"
+            target_token = match.group(1).lstrip("0") or "0"
             if len(target_token) > 1:
-                return None, f"Player {match.group(2)} is not a valid opponent."
+                return None, f"Player {match.group(1)} is not a valid opponent."
             target = int(target_token)
             if target == player_id:
                 return None, "You cannot submit a decision against yourself."
@@ -167,7 +164,7 @@ class ThreePlayerIPDEnv(ta.GameEnv):
                 return None, f"Player {target} is not a valid opponent."
             if target in parsed:
                 return None, f"Submit exactly one decision for Player {target}."
-            parsed[target] = match.group(3).lower()
+            parsed[target] = match.group(2).lower()
             cursor = match.end()
         if not re.fullmatch(r"\s*", msg[cursor:]):
             return None, "Unexpected text after the decision tokens."

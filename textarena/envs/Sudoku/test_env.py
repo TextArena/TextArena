@@ -137,14 +137,6 @@ def test_mismatched_brackets_are_invalid_and_atomic(brackets):
     assert env.state.turn == 0
 
 
-def test_matched_brackets_are_accepted():
-    env = _fresh()
-    row, col = _empty_cells(env)[0]
-    number = env.full_grid[row][col]
-    env.step(f"[{row + 1} {col + 1} {number}]")
-    assert env.game_state["board"][row][col] == number
-
-
 def test_oversized_numeric_action_is_invalid_without_mutation():
     env = _fresh()
     before = copy.deepcopy(env.game_state["board"])

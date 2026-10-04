@@ -85,14 +85,6 @@ def test_parser_rejects_noncanonical_actions(action):
     assert env.state.game_state == before
 
 
-def test_paired_legacy_brackets_remain_valid():
-    env = _fresh(target_tile=2048, board_size=2)
-    env.state.game_state["board"] = [[2, 0], [0, 0]]
-    done, _ = env.step("[right]")
-    assert not done
-    assert env.state.game_state["board"][0][1] == 2
-
-
 @pytest.mark.parametrize(
     "kwargs",
     [

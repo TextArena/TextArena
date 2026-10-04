@@ -3,23 +3,17 @@ from typing import Any, Dict, Union
 
 import textarena as ta
 from textarena.envs.WordChains.renderer import create_board_str
-from textarena.utils.word_lists import EnglishDictionary, get_basic_english_words
+from textarena.utils.word_lists import get_basic_english_words, get_english_words, is_english_word
 
 
 class WordChainsEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
-    snapshot_excluded_attributes = ("dictionary", "word_list")
+    snapshot_excluded_attributes = ("word_list",)
 
     def __init__(self):
-        self.dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=True)
         basic_words = sorted(word for word in get_basic_english_words() if len(word) <= 5)
-        # Only the bundled lists, so the starting words do not depend on whether NLTK data is installed.
-        next_shapes = {
-            (word[0], len(word))
-            for word in self.dictionary.uk_words | self.dictionary.us_words
-            if word and word.isascii() and word.isalpha()
-        }
+        next_shapes = {(word[0], len(word)) for word in get_english_words()}
         # Never start from a word for which the first player has no legal move.
         self.word_list = [
             word for word in basic_words if (word[-1], len(word) + 1) in next_shapes
@@ -52,15 +46,14 @@ class WordChainsEnv(ta.GameEnv):
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         gs = self.game_state
-        word_match = re.fullmatch(r"\s*\[?\s*([a-zA-Z]+)\s*\]?\s*", action)
-        if not word_match:
+        if not re.fullmatch(r"[a-zA-Z]+", action):
             return self.invalid(f"Player {player_id} did not provide a word in the valid format.")
-        word = word_match.group(1).lower()
+        word = action.lower()
         if len(word) != gs["required_length"]:
             return self.invalid(f"The word must be exactly {gs['required_length']} letters long. '{word}' has {len(word)} characters.")
         if not word.startswith(gs["required_start_letter"]):
             return self.invalid(f"The word must start with '{gs['required_start_letter']}'.")
-        if not self.dictionary.is_english_word(word):
+        if not is_english_word(word):
             return self.invalid(f"'{word}' is not a valid English word.")
         if word in gs["used_words"]:
             return self.invalid(f"The word '{word}' has already been used.")

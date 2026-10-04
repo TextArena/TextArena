@@ -103,7 +103,7 @@ def test_full_game_terminal_lowest_score_wins():
             if pid == 0:
                 rc = _first_unrevealed_rowcol(env, 0)
                 assert rc is not None
-                done, _ = env.step(f"[swap {rc[0]} {rc[1]}]")  # brackets tolerated
+                done, _ = env.step(f"swap {rc[0]} {rc[1]}")
             else:
                 done, _ = env.step("discard")
         if done:

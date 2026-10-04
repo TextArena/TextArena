@@ -9,7 +9,7 @@ DIRECTIONS = {
     "q": ("up-left", -1, -1), "e": ("up-right", 1, -1), "z": ("down-left", -1, 1), "c": ("down-right", 1, 1),
 }
 CLOCKWISE = [(0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1)]
-_ACTION_RE = re.compile(r"^\s*\[?\s*(f\s*)?([wasdqezc])\s*\]?\s*$", re.IGNORECASE)
+_ACTION_RE = re.compile(r"^(f\s*)?([wasdqezc])$", re.IGNORECASE)
 
 OBJECT_KINDS = ("asteroid", "debris", "nebula", "mine", "powerup")
 GLYPHS = {"asteroid": "A", "debris": "D", "nebula": "~", "mine": "M", "powerup": "+"}

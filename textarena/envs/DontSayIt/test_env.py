@@ -7,13 +7,7 @@ import pytest
 
 import textarena as ta
 from textarena.envs.DontSayIt.env import OGDEN_OPERATIONS, DontSayItEnv
-from textarena.utils import word_lists
 from textarena.utils.word_lists import get_basic_english_words, get_headwords
-
-
-class _MissingCorpus:
-    def words(self, *_args, **_kwargs):
-        raise LookupError("corpus unavailable")
 
 
 def _fresh(max_turns=6):
@@ -126,22 +120,13 @@ def test_unlimited_prompt_and_snapshot_restore():
 
 
 @pytest.mark.parametrize("hardcore", [False, True])
-def test_word_selection_is_identical_with_and_without_nltk(monkeypatch, hardcore):
-    def selections():
-        env = DontSayItEnv(max_turns=2, hardcore=hardcore)
-        expected_pool = get_headwords() if hardcore else get_basic_english_words() - OGDEN_OPERATIONS
-        assert env.word_list == sorted(expected_pool)
-        targets = []
-        for seed in range(5):
-            env.reset(num_players=2, seed=seed)
-            targets.append(dict(env.state.game_state["target_words"]))
-        return targets
-
-    with_nltk = selections()
-    monkeypatch.setattr(word_lists, "words", _MissingCorpus())
-    for cached in (word_lists._load_basic_english, word_lists.get_headwords, word_lists._load_headword_flags):
-        cached.cache_clear()
-    assert selections() == with_nltk
+def test_secret_words_come_from_the_bundled_lists(hardcore):
+    env = DontSayItEnv(max_turns=2, hardcore=hardcore)
+    expected_pool = get_headwords() if hardcore else get_basic_english_words() - OGDEN_OPERATIONS
+    assert env.word_list == sorted(expected_pool)
+    for seed in range(5):
+        env.reset(num_players=2, seed=seed)
+        assert set(env.state.game_state["target_words"].values()) <= expected_pool
 
 
 def test_normal_mode_draws_basic_english_nouns_and_adjectives():

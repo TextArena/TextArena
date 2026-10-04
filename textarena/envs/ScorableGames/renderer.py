@@ -1,4 +1,4 @@
-from typing import Dict, List, Any
+from typing import Dict
 
 def render_deal_with_scores_and_votes(deal_state: Dict[str, str], issues: Dict[str, Dict], 
                            player_scores: Dict[str, int], player_name: str, 
@@ -45,7 +45,7 @@ def render_deal_with_scores_and_votes(deal_state: Dict[str, str], issues: Dict[s
             vote = player_votes.get(player_id, "No vote yet")
             lines.append(f"{agent_name}: {vote}")
             
-            normalized_vote = vote.strip().strip("[]")
+            normalized_vote = vote.strip()
             if normalized_vote == "Accept":
                 accept_count += 1
             elif normalized_vote == "Reject":

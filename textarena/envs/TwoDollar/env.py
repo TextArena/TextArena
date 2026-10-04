@@ -32,21 +32,15 @@ class TwoDollarEnv(ta.GameEnv):
 
     # Decision grammar (what the prompts teach): every message ends with
     # exactly one decision line whose first token is exactly the command
-    # keyword, case-insensitive and optionally bracketed, followed by its
-    # arguments; trailing "." or "!" is tolerated. A "propose" line whose
-    # remainder is empty or starts with "$" or a digit is a proposal attempt
-    # and must be well-formed. Every other line, such as "Proposed split: ..."
-    # or "Propose we split it", is persuasion text. The legacy embedded
-    # "[Accept]", "[Reject]", "[Propose] $X" and "[Propose $X]" tokens still count.
-    _ACCEPT_LINE_RE = re.compile(r"\[?\s*accept\s*\]?[.!]*", re.IGNORECASE)
-    _REJECT_LINE_RE = re.compile(r"\[?\s*reject\s*\]?[.!]*", re.IGNORECASE)
-    _PROPOSE_LINE_RE = re.compile(r"\[?\s*propose\s*\]?(?![^\s:.!])\s*:?\s*(?P<args>.*)", re.IGNORECASE)
+    # keyword, case-insensitive, followed by its arguments; trailing "." or
+    # "!" is tolerated. A "propose" line whose remainder is empty or starts
+    # with "$" or a digit is a proposal attempt and must be well-formed. Every
+    # other line, such as "Proposed split: ..." or "Propose we split it", is
+    # persuasion text.
+    _ACCEPT_LINE_RE = re.compile(r"accept\s*[.!]*", re.IGNORECASE)
+    _REJECT_LINE_RE = re.compile(r"reject\s*[.!]*", re.IGNORECASE)
+    _PROPOSE_LINE_RE = re.compile(r"propose(?![^\s:.!])\s*:?\s*(?P<args>.*)", re.IGNORECASE)
     _AMOUNT_RE = re.compile(r"\$(?P<dollars>[0-9]+)(?:\.(?P<cents>[0-9]{1,2}))?")
-    _LEGACY_COMMAND_RE = re.compile(
-        r"\[(?P<decision>Accept|Reject)\]"
-        r"|\[Propose\][ \t]*(?P<proposal>\$[0-9]+(?:\.[0-9]{1,2})?)"
-        r"|\[Propose[ \t]+(?P<inside>\$[0-9]+(?:\.[0-9]{1,2})?)[ \t]*\]"
-    )
 
     def __init__(self,
                  player_roles: Optional[List[str]] = None,
@@ -261,7 +255,7 @@ Propose $1.00
             )
         return board
 
-    # -- command detection: own-line decision or legacy bracketed token --
+    # -- command detection: own-line decisions --
     def _classify_line(self, line: str) -> Optional[Tuple[str, str]]:
         """('accept'|'reject', '') or ('propose', arguments) if a stripped line is a decision."""
         if self._ACCEPT_LINE_RE.fullmatch(line):
@@ -276,24 +270,13 @@ Propose $1.00
         return None
 
     def _find_decisions(self, lines: List[str]) -> List[Dict[str, Any]]:
-        """Every decision in the message: kind, arguments, line index, and the
-        column span the command (with its arguments) covers in that line."""
+        """Every decision line in the message: kind, arguments, and line index."""
         decisions = []
         for index, line in enumerate(lines):
             classified = self._classify_line(line.strip())
             if classified is not None:
                 kind, args = classified
-                decisions.append({"kind": kind, "args": args, "line": index, "start": 0, "end": len(line)})
-                continue
-            for match in self._LEGACY_COMMAND_RE.finditer(line):
-                decision = match.group("decision")
-                decisions.append({
-                    "kind": decision.lower() if decision is not None else "propose",
-                    "args": match.group("proposal") or match.group("inside") or "",
-                    "line": index,
-                    "start": match.start(),
-                    "end": match.end(),
-                })
+                decisions.append({"kind": kind, "args": args, "line": index})
         return decisions
 
     def _parse_amount(self, args: str) -> Tuple[Optional[int], Optional[str]]:
@@ -342,11 +325,9 @@ Propose $1.00
         if len(decisions) > 1:
             return None, "Multiple actions detected. Use only one action per turn: 'Propose $X.XX', 'Accept', or 'Reject'"
         decision = decisions[0]
-        line = lines[decision["line"]]
-        trailing = line[decision["end"]:].strip().lstrip(".!").strip()
-        if trailing or any(rest.strip() for rest in lines[decision["line"] + 1:]):
+        if any(rest.strip() for rest in lines[decision["line"] + 1:]):
             return None, "The decision command must be the final non-empty part of the message."
-        decision["before"] = "\n".join(lines[:decision["line"]] + [line[:decision["start"]]]).strip()
+        decision["before"] = "\n".join(lines[:decision["line"]]).strip()
 
         if decision["kind"] == "propose":
             amount_cents, reason = self._parse_amount(decision["args"])

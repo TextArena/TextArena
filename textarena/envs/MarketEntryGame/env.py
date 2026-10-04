@@ -118,18 +118,13 @@ class MarketEntryGameEnv(ta.GameEnv):
         self.safe_payoff = safe_payoff
         self.default_num_players = default_num_players
 
-        # Decision regex - bare E/S, with optional stray brackets for robustness.
-        self.decision_pattern = re.compile(r"^\s*\[?\s*(E|S)\s*\]?\s*$", re.IGNORECASE)
+        # Decision regex - bare E/S.
+        self.decision_pattern = re.compile(r"^\s*(E|S)\s*$", re.IGNORECASE)
         # Public message regex - matches messages in curly braces like {Hello everyone!}
         self.public_message_pattern = re.compile(r"\{([^}]*)\}", re.DOTALL)
 
     def get_board_str(self):
         return create_board_str(self.state.game_state)
-
-    def reset(self, num_players: Optional[int] = None, seed: Optional[int] = None):
-        if num_players is None:
-            num_players = self.default_num_players
-        super().reset(num_players=num_players, seed=seed)
 
     def setup(self) -> Dict[str, Any]:
         num_players = self.state.num_players

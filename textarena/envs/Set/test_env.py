@@ -225,21 +225,21 @@ def test_valid_non_set_move_ends_when_no_sets_can_remain():
     assert env.state.rewards == {0: 0}
 
 
-_OLD_ACTION_REGEX = re.compile(r"\[?\s*([0-9]{1,6})\s*[,\s]\s*([0-9]{1,6})\s*[,\s]\s*([0-9]{1,6})\s*\]?")
+_REFERENCE_ACTION_REGEX = re.compile(r"([0-9]{1,6})\s*[,\s]\s*([0-9]{1,6})\s*[,\s]\s*([0-9]{1,6})")
 
 
-def _old_parse(action):
-    m = _OLD_ACTION_REGEX.fullmatch(action.strip())
+def _reference_parse(action):
+    m = _REFERENCE_ACTION_REGEX.fullmatch(action.strip())
     return None if m is None else tuple(int(g) for g in m.groups())
 
 
-def test_tokenized_parser_accepts_exactly_what_the_old_regex_accepted():
+def test_tokenized_parser_accepts_exactly_what_the_reference_regex_accepts():
     env = _fresh()
     rng = random.Random(0)
     alphabet = ["1", "2", "12", "1234567", " ", "  ", ",", ", ", "[", "]", "x", "\t", "٣"]
     for _ in range(20000):
         action = "".join(rng.choice(alphabet) for _ in range(rng.randint(0, 9)))
-        assert env._parse_action(action) == _old_parse(action), repr(action)
+        assert env._parse_action(action) == _reference_parse(action), repr(action)
 
 
 def test_long_whitespace_runs_are_parsed_in_linear_time():

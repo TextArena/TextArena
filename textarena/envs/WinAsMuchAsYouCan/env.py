@@ -45,25 +45,16 @@ class WinAsMuchAsYouCanEnv(ta.GameEnv):
             raise ValueError("error_allowance must be a non-negative integer")
         self.error_allowance = error_allowance
 
-        # Regex patterns for parsing actions
-        self.broadcast_pattern = re.compile(r"^\s*Broadcast\s*:\s*(.+?)\s*$", re.IGNORECASE | re.DOTALL)
+        # Regex patterns for parsing actions. A message ends at its last non-space character,
+        # so a long whitespace run inside it is scanned only once.
+        self.broadcast_pattern = re.compile(r"^\s*Broadcast\s*:\s*(.*\S)\s*$", re.IGNORECASE | re.DOTALL)
         self.whisper_pattern = re.compile(
-            r"^\s*Whisper\s+(?:to\s+)?(?:Player\s+)?(\d+)\s*:\s*(.+?)\s*$",
+            r"^\s*Whisper\s+(?:to\s+)?(?:Player\s+)?(\d+)\s*:\s*(.*\S)\s*$",
             re.IGNORECASE | re.DOTALL,
         )
-        self.legacy_broadcast_pattern = re.compile(r"^\s*\[Broadcast\]\s*(.+?)\s*$", re.IGNORECASE | re.DOTALL)
-        self.legacy_whisper_pattern = re.compile(
-            r"^\s*\[Whisper\s+to\s+(\d+)\]\s*(.+?)\s*$",
-            re.IGNORECASE | re.DOTALL,
-        )
-        self.pass_pattern = re.compile(r"^\s*\[?\s*Pass\s*\]?\s*$", re.IGNORECASE)
-        self.choose_x_pattern = re.compile(r"^\s*\[?\s*Choose\s+X\s*\]?\s*$", re.IGNORECASE)
-        self.choose_y_pattern = re.compile(r"^\s*\[?\s*Choose\s+Y\s*\]?\s*$", re.IGNORECASE)
-
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        if num_players != 4:
-            raise ValueError("Win as Much as You Can requires exactly 4 players")
-        super().reset(num_players=num_players, seed=seed)
+        self.pass_pattern = re.compile(r"^\s*Pass\s*$", re.IGNORECASE)
+        self.choose_x_pattern = re.compile(r"^\s*Choose\s+X\s*$", re.IGNORECASE)
+        self.choose_y_pattern = re.compile(r"^\s*Choose\s+Y\s*$", re.IGNORECASE)
 
     def setup(self) -> Dict[str, Any]:
         return {
@@ -157,8 +148,8 @@ INVALID MOVES:
         if player_id in gs["players_passed"]:
             return self.invalid("You have already passed")
 
-        broadcast_match = self._match_broadcast(action)
-        whisper_match = self._match_whisper(action)
+        broadcast_match = self.broadcast_pattern.search(action)
+        whisper_match = self.whisper_pattern.search(action)
         pass_match = self.pass_pattern.search(action)
 
         if broadcast_match:
@@ -219,12 +210,6 @@ INVALID MOVES:
         if next_talker is not None:
             self.set_next_player(next_talker)
         return None
-
-    def _match_broadcast(self, action: str):
-        return self.broadcast_pattern.search(action) or self.legacy_broadcast_pattern.search(action)
-
-    def _match_whisper(self, action: str):
-        return self.whisper_pattern.search(action) or self.legacy_whisper_pattern.search(action)
 
     def _start_act_phase(self):
         gs = self.game_state

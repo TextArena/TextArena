@@ -13,10 +13,7 @@ class CrosswordsEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
     MAX_COORDINATE_DIGITS = 6
-    _ACTION_RE = re.compile(
-        r"(?P<wrapped>\[)?\s*(?P<row>\d+)\s+(?P<col>\d+)"
-        r"\s+(?P<letter>[A-Za-z])\s*(?(wrapped)\])"
-    )
+    _ACTION_RE = re.compile(r"(?P<row>\d+)\s+(?P<col>\d+)\s+(?P<letter>[A-Za-z])")
 
     def __init__(self, hardcore: Optional[bool] = False, max_turns: Optional[int] = 100, num_words: Optional[int] = 5):
         """
@@ -86,8 +83,8 @@ class CrosswordsEnv(ta.GameEnv):
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         gs = self.game_state
-        ## validate the action; one 'row column letter' guess per turn (stray brackets tolerated)
-        match = self._ACTION_RE.fullmatch(action.strip())
+        ## validate the action; one 'row column letter' guess per turn
+        match = self._ACTION_RE.fullmatch(action)
         if not match:
             return self.invalid("The Player did not respond with valid 'row column letter'.")
         matches = [(match.group("row"), match.group("col"), match.group("letter"))]

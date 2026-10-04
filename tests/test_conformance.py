@@ -27,11 +27,6 @@ SKIP = {
     "TwentyQuestions": "requires an OpenRouter gamemaster agent (network)",
 }
 
-# Some registered configurations require a specific player count.
-NUM_PLAYERS_OVERRIDE = {
-    "ScorableGames": 6,
-}
-
 # A generic action pool: enough shapes that most games either accept some of
 # them or terminate via invalid-move escalation.
 ACTION_POOL = [
@@ -62,19 +57,12 @@ def _load_env_or_skip(env_id, spec):
         pytest.skip(SKIP[dir_name])
     cls = _resolve_class(spec)
     assert isinstance(cls, type) and issubclass(cls, GameEnv), f"{spec.entry_point} must subclass GameEnv"
-    return cls, NUM_PLAYERS_OVERRIDE.get(dir_name, cls.min_players)
+    return cls, _player_count(cls, spec)
 
 
-def _variant_player_count(spec, cls):
-    if "num_players" in spec.kwargs:
-        return spec.kwargs["num_players"]
-    if "default_num_players" in spec.kwargs:
-        return spec.kwargs["default_num_players"]
-    if ".ScorableGames." in spec.entry_point:
-        probe = cls(**spec.kwargs)
-        probe._load_game_configuration()
-        return len(probe.player_configs)
-    return cls.min_players
+def _player_count(cls, spec):
+    env = cls(**spec.kwargs)
+    return env.default_num_players or env.min_players
 
 
 def _rollout(env_id, num_players, seed, max_steps=300):
@@ -160,6 +148,8 @@ _PATHOLOGICAL_LENGTH = 20_000
 PATHOLOGICAL_ACTIONS = {
     "padded": " " * _PATHOLOGICAL_LENGTH + "x" + " " * 1000,
     "inner-spaces": "4" + " " * _PATHOLOGICAL_LENGTH + "x",
+    "letter-then-spaces": "A" + " " * _PATHOLOGICAL_LENGTH + "x",
+    "long-number": "1" * _PATHOLOGICAL_LENGTH + " x",
     "whitespace-mix": "\t\n " * (_PATHOLOGICAL_LENGTH // 3) + "x",
     "nested-brackets": "[" * (_PATHOLOGICAL_LENGTH // 2) + "x" + "]" * (_PATHOLOGICAL_LENGTH // 2),
 }
@@ -183,8 +173,7 @@ def test_long_pathological_actions_are_handled_quickly(env_id, spec):
 
 @pytest.mark.parametrize("env_id,spec", sorted(ENV_REGISTRY.items()), ids=lambda v: v if isinstance(v, str) else "")
 def test_every_registered_variant_resets(env_id, spec):
-    cls = _resolve_class(spec)
-    num_players = _variant_player_count(spec, cls)
+    num_players = _player_count(_resolve_class(spec), spec)
     env = ta.make(env_id)
     env.reset(num_players=num_players, seed=19)
     player_id, observation = env.get_observation()

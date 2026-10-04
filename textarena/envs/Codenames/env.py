@@ -9,7 +9,7 @@ from textarena.utils.word_lists import get_blocked_words
 
 @functools.lru_cache(maxsize=None)
 def _bundled_word_lists() -> Dict[str, Tuple[str, ...]]:
-    """Board-word candidates shipped with the env, so boards never depend on NLTK data.
+    """Board-word candidates shipped with the env in words.json.
 
     The lists are the nouns of NLTK's Basic English ("basic") and full English ("hardcore")
     word lists as tagged by NLTK's part-of-speech tagger, frozen in their original order.
@@ -24,8 +24,8 @@ class CodenamesEnv(ta.GameEnv):
     min_players = 4
     max_players = 4
     broadcast_actions = False  # raw clues/guesses are echoed only to their author
-    _CLUE_RE = re.compile(r"^\s*\[?\s*([a-z]+)\s+([0-9]{1,2})\s*\]?\s*$", re.IGNORECASE)
-    _GUESS_RE = re.compile(r"^\s*\[?\s*([a-z]+)\s*\]?\s*$", re.IGNORECASE)
+    _CLUE_RE = re.compile(r"([a-z]+)\s+([0-9]{1,2})", re.IGNORECASE)
+    _GUESS_RE = re.compile(r"([a-z]+)", re.IGNORECASE)
 
     def __init__(self, hardcore: Optional[bool] = False, max_turns: int = 80):
         if not isinstance(hardcore, bool):

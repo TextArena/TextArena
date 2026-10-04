@@ -79,7 +79,7 @@ class KuhnPokerEnv(ta.GameEnv):
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         gs = self.game_state
-        match = re.compile(r"^\s*\[?\s*(Check|Bet|Fold|Call)\s*\]?\s*$", re.IGNORECASE).match(action.strip())
+        match = re.compile(r"^(Check|Bet|Fold|Call)$", re.IGNORECASE).match(action.strip())
         if not match:  # Invalid action
             return self.invalid("Action must be 'check', 'bet', 'call', or 'fold'.")
 

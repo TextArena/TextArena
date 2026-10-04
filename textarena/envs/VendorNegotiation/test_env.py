@@ -3,8 +3,7 @@ Comprehensive test suite for Vendor Negotiation Environment
 
 Action grammar: free-text conversation, optionally finished with a decision on
 its own line: 'Propose X%, Y%, Z%, ...', 'Accept', or 'Reject'. A message
-without a decision line is pure conversation. The legacy embedded bracketed
-tokens ('[Accept]' etc.) are still tolerated but never required.
+without a decision line is pure conversation.
 """
 
 import itertools
@@ -230,7 +229,7 @@ class TestVendorNegotiationGameFlow:
         env = fresh_env
         
         # Player 0 proposes
-        done, _ = env.step("I propose [Propose] 20%, 20%, 20%")
+        done, _ = env.step("Propose 20%, 20%, 20%")
         assert not done
         
         # Player 1 accepts
@@ -305,7 +304,7 @@ class TestVendorNegotiationWinConditions:
         env = VendorNegotiationEnv(num_products=3)
         env.reset(num_players=2, seed=42)
         
-        env.step("I propose [Propose] 0%, 0%, 0%")
+        env.step("Propose 0%, 0%, 0%")
         env.step("Accept")
         
         assert env.state.rewards == {0: -1, 1: 1}
@@ -717,23 +716,31 @@ class TestVendorNegotiationEdgeCases:
         assert not done
         assert env.current_proposal['discounts'] is not None
     
-    def test_case_sensitivity(self):
-        """Malformed embedded tokens stay free text"""
+    @pytest.mark.parametrize(
+        "action",
+        [
+            "I think this works [Propose] 20%, 20%, 20%",
+            "[Propose] 20%, 20%, 20%",
+            "This looks good to me [Accept]",
+            "Sounds good.\n[Accept]",
+        ],
+    )
+    def test_bracketed_commands_inside_text_are_conversation(self, action):
         env = VendorNegotiationEnv(num_products=3)
         env.reset(num_players=2, seed=42)
-        
-        # Make proposal first
         env.step("Propose 15%, 20%, 15%")
-        
-        # A mid-sentence bracketed token with the wrong case is neither the
-        # legacy command nor a bare decision line
-        initial_error_count = env.state.error_count
-        done, _ = env.step("I propose [PROPOSE] 15%, 20%, 15%")  # Wrong case for legacy Propose
-        
-        # Should be treated as free text conversation, not invalid proposal
+        proposal_before = {
+            "discounts": env.current_proposal["discounts"].copy(),
+            "proposer": env.current_proposal["proposer"],
+        }
+
+        done, _ = env.step(action)
+
         assert not done
-        assert env.state.error_count == initial_error_count
-        assert len(env.conversation_history) > 0
+        assert env.state.error_count == 0
+        assert env.current_proposal == proposal_before
+        assert not env._check_deal_accepted()
+        assert env.conversation_history[-1]["message"] == action
     
     def test_incidental_words_not_commands(self):
         """Words like 'accept'/'reject' inside a sentence are just conversation"""
@@ -753,21 +760,8 @@ class TestVendorNegotiationEdgeCases:
         assert env.current_proposal['discounts'] is not None  # proposal untouched
         assert not env._check_deal_accepted()
 
-    def test_legacy_bracketed_forms_still_accepted(self):
-        """Legacy embedded '[Propose]'/'[Accept]' commands remain tolerated"""
-        env = VendorNegotiationEnv(num_products=3)
-        env.reset(num_players=2, seed=42)
-
-        done, _ = env.step("I think this works [Propose] 15%, 20%, 15%")
-        assert not done
-        assert env.current_proposal['discounts'] is not None
-
-        done, _ = env.step("This looks good to me [Accept]")
-        assert done
-        assert env._check_deal_accepted()
-
     def test_bare_single_command_turns_valid(self):
-        """A pure single-command turn may omit the brackets entirely."""
+        """A turn may consist of the decision line alone."""
         env = VendorNegotiationEnv(num_products=3)
         env.reset(num_players=2, seed=42)
 
@@ -798,14 +792,6 @@ class TestVendorNegotiationEdgeCases:
 
 
 class TestVendorNegotiationRegressions:
-    def test_numpy_is_declared_as_runtime_dependency(self):
-        repo_root = Path(__file__).resolve().parents[3]
-        pyproject = (repo_root / "pyproject.toml").read_text()
-        requirements = (repo_root / "requirements.txt").read_text().splitlines()
-
-        assert '"numpy"' in pyproject
-        assert "numpy" in requirements
-
     def test_terminal_simulation_runs_once_and_render_matches_rewards(self, monkeypatch):
         env = VendorNegotiationEnv(num_products=3, num_simulations=50)
         env.reset(num_players=2, seed=42)
@@ -934,17 +920,11 @@ class TestVendorNegotiationRegressions:
             {"vendor_target_fraction": 10 ** 1000},
             {"vendor_target_fraction": "0.5"},
             {"num_simulations": 0},
-            {"seed": -1},
         ],
     )
     def test_invalid_configuration_is_rejected(self, kwargs):
         with pytest.raises(ValueError):
             VendorNegotiationEnv(**kwargs)
-
-    def test_invalid_reset_seed_is_rejected(self):
-        env = VendorNegotiationEnv(num_products=1)
-        with pytest.raises(ValueError):
-            env.reset(num_players=2, seed=-1)
 
     def test_terminal_accept_is_counted_for_both_players(self):
         env = VendorNegotiationEnv(num_products=3)
@@ -991,7 +971,6 @@ class TestVendorNegotiationDecisionGrammar:
             "Propose 15%, 20%, 15%.",
             "Propose 15%, 20%, 15%!",
             "propose: 15%, 20%, 15%",
-            "[Propose] 15%, 20%, 15%",
         ],
     )
     def test_trailing_punctuation_and_keyword_variants_are_proposals(self, env, action):

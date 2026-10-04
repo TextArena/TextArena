@@ -6,7 +6,7 @@ import textarena as ta
 class BlackjackEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
-    _ACTION_RE = re.compile(r"\[?\s*(hit|stand)\s*\]?", re.I)
+    _ACTION_RE = re.compile(r"(hit|stand)", re.I)
 
     def __init__(self, num_hands: int):
         if not isinstance(num_hands, int) or isinstance(num_hands, bool) or num_hands < 1:

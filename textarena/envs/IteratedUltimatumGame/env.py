@@ -58,12 +58,10 @@ class IteratedUltimatumGameEnv(ta.GameEnv):
         self.max_turns = max_turns
         self.alternate_roles = alternate_roles
 
-        # Regex patterns for parsing player actions (bare forms, tolerating optional stray brackets)
-        self.offer_pattern = re.compile(
-            r"^\s*\[?\s*Offer:\s*\$?(\d+)\s*\]?\s*$", re.IGNORECASE
-        )
-        self.accept_pattern = re.compile(r"^\s*\[?\s*Accept\s*\]?\s*$", re.IGNORECASE)
-        self.reject_pattern = re.compile(r"^\s*\[?\s*Reject\s*\]?\s*$", re.IGNORECASE)
+        # Regex patterns for parsing player actions
+        self.offer_pattern = re.compile(r"^Offer:\s*\$?(\d+)$", re.IGNORECASE)
+        self.accept_pattern = re.compile(r"^Accept$", re.IGNORECASE)
+        self.reject_pattern = re.compile(r"^Reject$", re.IGNORECASE)
 
     def get_board_str(self):
         """Get the current board state as a string."""

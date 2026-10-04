@@ -152,10 +152,6 @@ class SlitherlinkEnv(ta.GameEnv):
                 f"Action is too long (maximum {self.max_action_chars} characters)."
             )
         action_text = move.strip()
-        if action_text.startswith("[") or action_text.endswith("]"):
-            if not (action_text.startswith("[") and action_text.endswith("]")):
-                return self.invalid("Bad action format: mismatched brackets.")
-            action_text = action_text[1:-1].strip()
         m = self._ACTION_RE.fullmatch(action_text.lower())
         if not m:
             return self.invalid("Bad action format. Use 'h row col' or 'v row col'.")

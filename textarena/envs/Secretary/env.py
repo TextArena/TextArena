@@ -12,7 +12,7 @@ class SecretaryEnv(ta.GameEnv):
         if isinstance(N, bool) or not isinstance(N, int) or N < 1:
             raise ValueError("N must be a positive integer")
         self.N = N
-        self.action_space = re.compile(r'\[?\s*(accept|continue)\s*\]?', re.IGNORECASE)
+        self.action_space = re.compile(r'(accept|continue)', re.IGNORECASE)
 
     def setup(self) -> Dict[str, Any]:
         # Values are kept at the 4 decimals shown to the player, so the comparisons they see are exact.

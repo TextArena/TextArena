@@ -7,11 +7,11 @@ from textarena.envs.Surround.renderer import create_board_str
 
 _DIR_DELTAS = {"up": (0, 1), "w": (0, 1), "down": (0, -1), "s": (0, -1), "left": (-1, 0), "a": (-1, 0), "right": (1, 0), "d": (1, 0)}
 _DIR_NAMES = {"w": "up", "s": "down", "a": "left", "d": "right"}
-_DIR_RE = re.compile(r"^\s*\[?\s*(up|down|left|right|w|a|s|d)\s*\]?\s*$", re.I)
+_DIR_RE = re.compile(r"^(up|down|left|right|w|a|s|d)$", re.I)
 _CRASH_DESCRIPTIONS = {"wall": "hit the wall", "trail": "hit a trail", "head-on": "collided head-on"}
 
 def _dir_token(move: str) -> Optional[str]:
-    """Return the direction name if *move* is a single bare direction (brackets tolerated)."""
+    """Return the direction name if *move* is a single bare direction."""
     m = _DIR_RE.match(move)
     if not m:
         return None

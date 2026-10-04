@@ -19,8 +19,7 @@ class TwentyQuestionsEnv(ta.GameEnv):
     max_action_chars = 4_000
     max_gamemaster_response_chars = 256
     _GUESS_RE = re.compile(r"^\s*guess(?:\s+|:\s*)(?P<guess>.+?)\s*$", re.IGNORECASE)
-    _LEGACY_GUESS_RE = re.compile(r"^\s*\[(?P<guess>[^\[\]]+)\]\s*$")
-    _EMPTY_GUESS_RE = re.compile(r"^\s*(?:guess\s*:?\s*|\[\s*\])$", re.IGNORECASE)
+    _EMPTY_GUESS_RE = re.compile(r"^\s*guess\s*:?\s*$", re.IGNORECASE)
     _GAMEMASTER_RESPONSE_RE = re.compile(
         r"""^\s*(?:answer\s*:\s*)?["'“”]?(?P<answer>yes|no|i\s+don['’]t\s+know)["'“”]?[.!]?\s*$""",
         re.IGNORECASE,
@@ -222,7 +221,7 @@ class TwentyQuestionsEnv(ta.GameEnv):
         """The guessed text, or None when the message is a question."""
         if "?" in unicodedata.normalize("NFKC", action):
             return None  # e.g. "Guess what, is it alive?" must not end the game
-        match = self._GUESS_RE.fullmatch(action) or self._LEGACY_GUESS_RE.fullmatch(action)
+        match = self._GUESS_RE.fullmatch(action)
         return match.group("guess") if match else None
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:

@@ -11,19 +11,18 @@ class UltimateTexasHoldemEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
 
-    # Action patterns - bare actions ('1x', '2x', '4x', ...), stray brackets tolerated.
+    # Action patterns - bare actions ('1x', '2x', '4x', ...).
     # A whitespace run must be consumable by only one \s*, as retrying every split of a long run is quadratic.
-    _PLAY_BET_4X_RE = re.compile(r"^\s*(?:\[\s*)?(?:4x?|play\s+bet\s+4x?|play\s+4x?\s+bet|play_bet_4x)(?:\s*\])?\s*$", re.IGNORECASE)
-    _PLAY_BET_3X_RE = re.compile(r"^\s*(?:\[\s*)?(?:3x?|play\s+bet\s+3x?|play\s+3x?\s+bet|play_bet_3x)(?:\s*\])?\s*$", re.IGNORECASE)
-    _PLAY_BET_2X_RE = re.compile(r"^\s*(?:\[\s*)?(?:2x?|play\s+bet\s+2x?|play\s+2x?\s+bet|play_bet_2x)(?:\s*\])?\s*$", re.IGNORECASE)
-    _PLAY_BET_1X_RE = re.compile(r"^\s*(?:\[\s*)?(?:1x?|play\s+bet\s+1x?|play\s+1x?\s+bet|play_bet_1x)(?:\s*\])?\s*$", re.IGNORECASE)
-    _CHECK_RE = re.compile(r"^\s*(?:\[\s*)?(?:check|c)(?:\s*\])?\s*$", re.IGNORECASE)
-    _FOLD_RE = re.compile(r"^\s*(?:\[\s*)?(?:fold|f)(?:\s*\])?\s*$", re.IGNORECASE)
-    _SKIP_RE = re.compile(r"^\s*(?:\[\s*)?(?:skip|s)(?:\s*\])?\s*$", re.IGNORECASE)
+    _PLAY_BET_4X_RE = re.compile(r"^(?:4x?|play\s+bet\s+4x?|play\s+4x?\s+bet|play_bet_4x)$", re.IGNORECASE)
+    _PLAY_BET_3X_RE = re.compile(r"^(?:3x?|play\s+bet\s+3x?|play\s+3x?\s+bet|play_bet_3x)$", re.IGNORECASE)
+    _PLAY_BET_2X_RE = re.compile(r"^(?:2x?|play\s+bet\s+2x?|play\s+2x?\s+bet|play_bet_2x)$", re.IGNORECASE)
+    _PLAY_BET_1X_RE = re.compile(r"^(?:1x?|play\s+bet\s+1x?|play\s+1x?\s+bet|play_bet_1x)$", re.IGNORECASE)
+    _CHECK_RE = re.compile(r"^(?:check|c)$", re.IGNORECASE)
+    _FOLD_RE = re.compile(r"^(?:fold|f)$", re.IGNORECASE)
+    _SKIP_RE = re.compile(r"^(?:skip|s)$", re.IGNORECASE)
 
     def __init__(self, max_turns: int = 1000, start_chips: int = 1000, ante_amount: int = 25):
-        # `max_turns` counts ROUNDS (the legacy env never used the engine step
-        # limit), so it is intentionally NOT assigned to self.max_turns.
+        # `max_turns` counts rounds, not engine steps, so it is deliberately not assigned to self.max_turns.
         self.max_rounds = max_turns
         self.start_chips = start_chips
         self.ante_amount = ante_amount
@@ -74,12 +73,6 @@ class UltimateTexasHoldemEnv(ta.GameEnv):
 
     def get_board_str(self):
         return create_board_str(self.state.game_state)
-
-    def reset(self, num_players: int = 1, seed: Optional[int] = None):
-        if num_players != 1:
-            raise ValueError("UltimateTexasHoldem is a single-player game")
-        super().reset(num_players=num_players, seed=seed)
-        return self.state
 
     def setup(self) -> Dict[str, Any]:
         return {

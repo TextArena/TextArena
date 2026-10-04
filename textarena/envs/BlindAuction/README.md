@@ -48,9 +48,9 @@ During the bidding phase, submit every bid in a single reply, one per line or se
 - A reply without any `Bid` command, such as `pass`, submits no bids.
 
 Commands are case-insensitive. Apart from a bid-free pass, every line of a reply must be a complete command, so plain
-prose during the conversation, prose mixed with commands (including a bracketed bid such as `[Bid 0: 50]` inside
-prose), bids during the conversation, messages during bidding, whispers to yourself or to a non-existent player, bids on
-unknown items, and bids totalling more than your coins are all rejected as a whole.
+prose during the conversation, prose mixed with commands, bids during the conversation, messages during bidding,
+whispers to yourself or to a non-existent player, bids on unknown items, and bids totalling more than your coins are all
+rejected as a whole.
 
 ## Observations
 
@@ -84,5 +84,5 @@ worth. No board is shown to players during the game.
 - A line break always ends a command, so a message cannot span several lines. A semicolon followed by a command name
   also starts a new command even inside a message (`Broadcast: I like the vase; bid wisely` is rejected as a malformed
   `Bid`), which keeps a mistyped whisper from being broadcast by accident.
-- Text inside a message is never interpreted as commands; for example, a broadcast quoting `[Whisper 2: hi]` does not
+- Text inside a message is never interpreted as commands; for example, a broadcast quoting `Whisper 2: hi` does not
   also send a whisper.

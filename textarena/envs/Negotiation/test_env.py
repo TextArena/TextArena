@@ -135,29 +135,31 @@ def test_malformed_command_after_a_semicolon_is_rejected_instead_of_broadcast():
     )
 
 
-def test_bracketed_command_quoted_inside_a_message_is_not_executed():
+def test_command_quoted_inside_a_message_is_not_executed():
     env = _fresh()
     env.step("Offer to 1: 1 Wheat -> 1 Wood")
     resources_before = copy.deepcopy(env.game_state["player_resources"])
-    done, _ = env.step("Broadcast: I would never [Accept 1]")
+    done, _ = env.step("Broadcast: I would never Accept #1")
     assert not done
     assert 1 in env.game_state["pending_offers"]
     assert env.game_state["player_resources"] == resources_before
     p2_messages = [message for _, message, _ in env.state.observations[2]]
-    assert "(Broadcast) Player 1 says: I would never [Accept 1]" in p2_messages
+    assert "(Broadcast) Player 1 says: I would never Accept #1" in p2_messages
 
 
-def test_legacy_bracketed_commands_still_work():
+@pytest.mark.parametrize(
+    "action",
+    ["[Broadcast: hi; all] [Offer to 1: 2 Wheat -> 1 Ore]", "Offer to 1: 1 Wheat -> 1 Ore; [Broadcast] thanks"],
+)
+def test_bracketed_commands_are_rejected_atomically(action):
     env = _fresh()
-    done, _ = env.step("[Broadcast: hi; all] [Offer to 1: 2 Wheat -> 1 Ore]")
+    before = copy.deepcopy(env.game_state)
+    events_before = len(env.state.events)
+    done, _ = env.step(action)
     assert not done
-    assert env.game_state["pending_offers"][1]["to"] == 1
-    p2_messages = [message for _, message, _ in env.state.observations[2]]
-    assert "(Broadcast) Player 0 says: hi; all" in p2_messages
-
-    done, _ = env.step("[Accept 1]; [Broadcast] thanks")
-    assert not done
-    assert env.game_state["pending_offers"] == {}
+    assert env.state.error_count == 1
+    assert env.game_state == before
+    assert all(target == 0 for _, _, _, target in env.state.events[events_before:])
 
 
 @pytest.mark.parametrize(
@@ -270,9 +272,9 @@ def test_self_whisper_rejects_all_mixed_effects_atomically():
 
 @pytest.mark.parametrize(
     "action",
-    ["[Whisper 1 missing colon]", "[Accept nope]", "[Broadcast:]"],
+    ["Whisper 1 missing colon", "Accept nope", "Broadcast:"],
 )
-def test_malformed_legacy_commands_are_rejected(action):
+def test_malformed_commands_are_rejected(action):
     env = _fresh()
     done, _ = env.step(action)
     assert not done
@@ -357,9 +359,6 @@ PADDING = 30_000
         pytest.param("4" + " " * PADDING + "x", id="inner-spaces"),
         pytest.param("\t\n " * (PADDING // 3) + "x", id="tab-newline-runs"),
         pytest.param("[" * (PADDING // 2) + "x" + "]" * (PADDING // 2 - 2), id="deep-brackets"),
-        # Cubic before the fix, so it is kept short enough to fail in seconds instead of hanging.
-        pytest.param("[Offer 1" + " " * 2_000 + "x", id="legacy-offer"),
-        pytest.param("[Broadcast:" + " " * PADDING + "x", id="legacy-broadcast"),
         pytest.param("Accept" + " " * PADDING + "x", id="accept"),
         pytest.param("x;" + " " * (PADDING // 2) + "[" + " " * (PADDING // 2) + "x", id="semicolon"),
         pytest.param("Offer to 1: 2" + " " * PADDING + "Gold -> 1 Ore", id="offer-resources"),

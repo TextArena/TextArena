@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
 import textarena as ta
 from textarena.envs.Othello.renderer import PIECE_SYMBOLS, create_board_str
@@ -12,7 +12,7 @@ COLOUR_NAMES = {BLACK: "Black", WHITE: "White"}
 class OthelloEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
-    action_pattern = r"^\s*\[?\s*(\d+)(?:\s*,\s*|\s+)(\d+)\s*\]?\s*$"
+    action_pattern = r"^(\d+)(?:\s*,\s*|\s+)(\d+)$"
 
     def __init__(self, board_size: int = 8, show_valid: bool = True):
         if (

@@ -26,7 +26,7 @@ class LeducHoldemEnv(ta.GameEnv):
         self.deck = [r for r in range(3) for _ in range(2)] # deck = two of each rank 0-2  (0=J, 1=Q, 2=K)
         self.bet_sizes = [2, 4] # round-0 / round-1 fixed bet
         self.max_rounds = max_rounds
-        self.action_space = re.compile(r"^\s*\[?\s*(check|call|bet|raise|fold)\s*\]?\s*$", re.I)
+        self.action_space = re.compile(r"^(check|call|bet|raise|fold)$", re.I)
 
     @staticmethod
     def _rank_to_str(r: int) -> str: return ["J", "Q", "K"][r]

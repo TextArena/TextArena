@@ -12,9 +12,7 @@ class CountdownEnv(ta.GameEnv):
     max_action_chars = 128
     max_value = 1_000_000
     max_numbers = 100
-    _ACTION_RE = re.compile(
-        r"^\s*(?P<legacy>\[)?\s*(?P<i>\d+)\s+(?P<j>\d+)\s*(?P<op>[+\-*/])\s*(?(legacy)\])\s*$"
-    )
+    _ACTION_RE = re.compile(r"(?P<i>\d+)\s+(?P<j>\d+)\s*(?P<op>[+\-*/])")
     _OPS = {'+': operator.add, '-': operator.sub, '*': operator.mul}
 
     def __init__(self, numbers: Optional[List[int]] = None, target: Optional[int] = None, max_turns: int = 12):

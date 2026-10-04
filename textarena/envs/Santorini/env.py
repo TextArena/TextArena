@@ -61,8 +61,8 @@ class SantoriniBaseFixedWorkerEnv(ta.GameEnv):
 
         # The build coordinate is optional only for a winning move onto level 3.
         self.move_pattern = re.compile(
-            r"^\s*\[?\s*(N[12]|W[12]|G[12])\s*([A-E][1-5])\s*"
-            r"([A-E][1-5])(?:\s*([A-E][1-5]))?\s*\]?\s*$",
+            r"^(N[12]|W[12]|G[12])\s*([A-E][1-5])\s*"
+            r"([A-E][1-5])(?:\s*([A-E][1-5]))?$",
             re.IGNORECASE,
         )
 
@@ -77,11 +77,6 @@ class SantoriniBaseFixedWorkerEnv(ta.GameEnv):
     @board.setter
     def board(self, value):
         self.game_state["board"] = value
-
-    def reset(self, num_players: int, seed: Optional[int]=None):
-        if not isinstance(num_players, int) or isinstance(num_players, bool) or num_players not in (2, 3):
-            raise ValueError("Number of players must be 2 or 3")
-        super().reset(num_players=num_players, seed=seed)
 
     def setup(self) -> Dict[str, Any]:
         # Each cell contains (height, worker)

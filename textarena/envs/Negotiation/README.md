@@ -77,5 +77,5 @@ track their own holdings, and other players' valuations and inventories are neve
 - A line break always ends a command, so a message cannot span several lines. A semicolon followed by a command name
   also starts a new command even inside a message (`Broadcast: I need Ore; offer me anything` is rejected as a
   malformed `Offer`), which keeps a mistyped whisper or offer from being broadcast by accident.
-- Text inside a message is never interpreted as commands; for example, `Broadcast: I would never [Accept 1]` does not
+- Text inside a message is never interpreted as commands; for example, `Broadcast: I would never Accept #1` does not
   accept offer #1.

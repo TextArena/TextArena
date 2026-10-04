@@ -41,6 +41,7 @@ action = ta.extract_action(model_response)  # "...so the center is best. <action
 ```
 
 Each game's README lists its exact commands. Matching is case-insensitive unless the README says otherwise.
+Surrounding whitespace and one pair of enclosing square brackets are ignored, so `[e2e4]` is read as `e2e4`.
 
 ## Two variants of every configuration
 
@@ -65,6 +66,9 @@ Named configurations put `-mdp` last: `Chess-v0-long-mdp`.
   `1` in single-player games. Each README has the exact table.
 - **Turn limits** (`max_turns`) end the game as a draw unless the game defines another result, such as
   comparing scores.
+- **Player counts**: `env.reset` raises `ValueError` for a player count the game does not support (each
+  README lists the allowed counts). Games with a fixed or configured default count can be reset without
+  `num_players`.
 - **Seeding**: `env.reset(num_players, seed=...)` seeds a private random generator, so the same seed and the
   same actions always replay the same game. Environments never touch Python's global random state.
 - **External models**: Debate, ScenarioPlanning (LLM juries), GuessWho, and TwentyQuestions (LLM game
@@ -76,9 +80,11 @@ Named configurations put `-mdp` last: `Chess-v0-long-mdp`.
 
 ## Adding a game
 
-1. Create `textarena/envs/<Game>/env.py` with a `ta.GameEnv` subclass. Implement `setup` (initial state),
-   `prompt` (per-player instructions), and `apply` (validate and apply one action), plus optionally `render`,
-   `roles`, `on_turn_limit`, and `on_invalid_limit`. Use `self.rng` for all randomness.
+1. Create `textarena/envs/<Game>/env.py` with a `ta.GameEnv` subclass. Set `min_players`/`max_players` and
+   implement `setup` (initial state), `prompt` (per-player instructions), and `apply` (validate and apply one
+   bare action), plus optionally `render`, `roles`, `on_turn_limit`, `on_invalid_limit`, and
+   `check_num_players` (player-count rules beyond the range, such as even teams). Use `self.rng` for all
+   randomness. Games never override `reset` or `step`.
 2. Register it in `textarena/envs/__init__.py` with `register_with_versions(...)`.
 3. Add `test_env.py` with deterministic tests. `tests/test_conformance.py` checks every registered game
    automatically (termination, reward shape, determinism, observation routing).

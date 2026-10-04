@@ -52,16 +52,16 @@ opponent's word is never shown. On each turn, the acting player sees the opponen
 
 - `max_turns` (required): the total number of messages, counting both players, before the game is a draw. It must be
   an even integer of at least 2, or `None` for no limit.
-- `hardcore` (default `False`): draw secret words from every headword of the bundled dictionaries (about 38,800 base
+- `hardcore` (default `False`): draw secret words from every headword of the bundled dictionaries (about 38,700 base
   words of 3 or more letters, many of them rare, such as `oakum` or `glyceride`) instead of the Basic English list
   (750 everyday words, such as `apple`, `bridge`, or `angry`).
 
 ## Notes
 
-- Both word lists are bundled with TextArena (`textarena/utils/data/`), so the game needs no NLTK data or downloads
-  and a seed picks the same secret words on every machine.
-- The normal list is Ogden's Basic English (850 words, the same list as NLTK's `en-basic`) without its 100
-  "operations": the verbs, prepositions, pronouns, conjunctions, and adverbs such as `the`, `have`, `about`, or `very`,
-  which come up in any conversation. That leaves his 600 nouns and 150 adjectives. The hardcore list
-  (`get_headwords()`) holds every base word of 3 or more letters in the bundled UK and US dictionaries that takes an
-  affix rule; derived forms, abbreviations, and proper nouns are excluded.
+- Both word lists are bundled with TextArena (`textarena/utils/data/`), so the game needs no downloads and a seed
+  picks the same secret words on every machine.
+- The normal list is Ogden's Basic English (850 words) without its 100 "operations": the verbs, prepositions,
+  pronouns, conjunctions, and adverbs such as `the`, `have`, `about`, or `very`, which come up in any conversation.
+  That leaves his 600 nouns and 150 adjectives. The hardcore list (`get_headwords()`) holds every base word of 3 or
+  more letters in the bundled UK and US dictionaries that takes an affix rule; derived forms, abbreviations, and
+  proper nouns are excluded.

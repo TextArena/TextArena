@@ -10,12 +10,11 @@ from textarena.envs.ScorableGames.renderer import (
 
 
 # Canonical commands are bare and must start a line, so free-text rationale can
-# coexist on the preceding lines without ambiguity. Stray square brackets around
-# the keyword (legacy format) are tolerated. Keywords are case-insensitive.
+# coexist on the preceding lines without ambiguity. Keywords are case-insensitive.
 _COMMAND_PATTERNS = (
-    ("Propose", re.compile(r"^[ \t]*\[?Propose\]?:?(?=[ \t]|$)", re.M | re.I)),
-    ("Accept",  re.compile(r"^[ \t]*\[?Accept\]?:?(?=[ \t]|$)",  re.M | re.I)),
-    ("Reject",  re.compile(r"^[ \t]*\[?Reject\]?:?(?=[ \t]|$)",  re.M | re.I)),
+    ("Propose", re.compile(r"^[ \t]*Propose:?(?=[ \t]|$)", re.M | re.I)),
+    ("Accept",  re.compile(r"^[ \t]*Accept:?(?=[ \t]|$)",  re.M | re.I)),
+    ("Reject",  re.compile(r"^[ \t]*Reject:?(?=[ \t]|$)",  re.M | re.I)),
 )
 
 # Only option-shaped tokens (an issue letter followed by a number) on the
@@ -96,7 +95,7 @@ class ScorableGamesEnv(ta.GameEnv):
             raise ValueError("starting_role must be a non-empty role name or None")
         if not isinstance(invalid_move_default, str):
             raise ValueError("invalid_move_default must be 'Accept' or 'Reject'")
-        normalized_default = invalid_move_default.strip().strip("[]").title()
+        normalized_default = invalid_move_default.strip().title()
         if normalized_default not in {"Accept", "Reject"}:
             raise ValueError("invalid_move_default must be 'Accept' or 'Reject'")
         if not isinstance(error_allowance, int) or isinstance(error_allowance, bool) or error_allowance < 0:
@@ -109,17 +108,15 @@ class ScorableGamesEnv(ta.GameEnv):
         self.veto_roles = list(veto_roles)
         self.unanimity_bonus_role = unanimity_bonus_role
         self.starting_role = starting_role
-        # Tolerate legacy bracketed values like "[Accept]"
         self.invalid_move_default = normalized_default
         self.error_allowance = error_allowance
 
-        # Game configuration data
         self.game_dir = os.path.join(os.path.dirname(__file__), "games_descriptions", game_config)
-        self.global_instructions = ""
-        self.issues = {}  # Issue definitions and options
-        self.player_configs = {}  # Player configurations from config.txt
-        self.player_scores = {}  # Private scoring functions
-        self.player_instructions = {}  # Individual instructions
+        self._load_game_configuration()
+        # Each scenario has a fixed cast of parties.
+        self.min_players = self.max_players = len(self.player_configs)
+        if required_votes is not None and required_votes > self.max_players:
+            raise ValueError(f"required_votes cannot exceed the configured player count ({self.max_players})")
 
     # game_state is the canonical owner of all mutable gameplay containers.
     @property
@@ -153,24 +150,6 @@ class ScorableGamesEnv(ta.GameEnv):
     @valid_actions_this_round.setter
     def valid_actions_this_round(self, value: set):
         self.game_state["valid_actions_this_round"] = value
-
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        """Reset the environment to initial state."""
-        # Load game configuration
-        self._load_game_configuration()
-
-        # Validate number of players matches config
-        if len(self.player_configs) != num_players:
-            raise ValueError(
-                f"Game config expects {len(self.player_configs)} players, got {num_players} "
-                f"(game_config={self.game_config!r} has a fixed number of parties)"
-            )
-        if self.required_votes is not None and self.required_votes > num_players:
-            raise ValueError(
-                f"required_votes cannot exceed the configured player count ({num_players})"
-            )
-
-        super().reset(num_players=num_players, seed=seed)
 
     def setup(self) -> Dict[str, Any]:
         return {
@@ -530,7 +509,7 @@ SCORING:
         self._apply_default_action(player_id)
         self.valid_actions_this_round.add(player_id)
 
-        # A defaulted action consumes a round, just like the legacy flow did.
+        # A defaulted action consumes a round.
         self.state.game_info[player_id]["turn_count"] += 1
         self.state.turn += 1
 
@@ -573,7 +552,7 @@ SCORING:
         return True, None
 
     def _invalid_reason(self, action: str) -> str:
-        """Determine the reason for an invalid action (legacy wording)."""
+        """Determine the reason for an invalid action."""
         commands = _find_commands(action)
         if len(commands) > 1:
             return "Multiple decision lines detected. Use exactly one Propose, Accept, or Reject command"
@@ -629,10 +608,6 @@ SCORING:
         elif kind == "Reject":
             return self._process_vote(player_id, action, "Reject")
         return None
-
-    def _process_valid_action(self, player_id: int, action: str):
-        """Legacy-named wrapper kept for compatibility (tests call it directly)."""
-        self._process_action(player_id, action)
 
     def _process_proposal(self, player_id: int, action: str) -> Optional[ta.Invalid]:
         """Process a deal proposal."""
@@ -728,28 +703,6 @@ SCORING:
         })
         return None
 
-    def _handle_invalid_action(self, player_id: int, action: str) -> bool:
-        """Legacy escalation helper (kept for compatibility; the engine performs the
-        same warn/escalate logic during step). Returns True if default action was applied."""
-        reason = self._invalid_reason(action)
-
-        if self.state.error_allowance > self.state.error_count:
-            # Player gets another chance - don't advance turn
-            self.state.error_count += 1
-            self.state.made_invalid_move = True
-            self.message(
-                player_id,
-                f"Player {player_id} attempted an invalid move. Reason: {reason} "
-                "Please resubmit a valid move and remember to follow the game rules to avoid penalties.",
-                ta.ObservationType.GAME_ADMIN,
-            )
-            return False
-        else:
-            # Player exceeded error allowance - apply default action and advance turn
-            self.state.game_info[player_id]["invalid_move"] = True
-            self._apply_default_action(player_id)
-            return True
-
     def _apply_default_action(self, player_id: int):
         """Apply default action when player exceeds error allowance."""
         config = self.player_configs[player_id]
@@ -840,23 +793,11 @@ SCORING:
         }
         return all(self.player_votes.get(pid) == "Accept" for pid in veto_player_ids)
 
-    def _check_simple_majority(self) -> bool:
-        """Legacy helper: enforce the configured threshold without veto checks."""
-        total_players = self.state.num_players
-        accept_votes = sum(1 for vote in self.player_votes.values() if vote == "Accept")
-        required_votes = self.required_votes if self.required_votes is not None else (total_players - 1)
-        return accept_votes >= required_votes
-
     def _check_unanimity(self) -> bool:
         """Check if all players voted Accept (for P1 bonus)."""
         if len(self.player_votes) != self.state.num_players:
             return False
         return all(vote == "Accept" for vote in self.player_votes.values())
-
-    def _end_game(self):
-        """Compatibility helper (tests call it directly): compute the terminal
-        Outcome and finalize it through the engine exactly once."""
-        self._finalize(self._final_outcome())
 
     def _finalize_accepted_deal(self) -> ta.Outcome:
         """Finalize an accepted deal, determine scores, and build the threshold-based Outcome."""

@@ -25,7 +25,7 @@ def test_reset_sets_ball_position():
 
 @pytest.mark.parametrize("num_players", [0, 2])
 def test_reset_requires_exactly_one_player(num_players):
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         ThreeCardMonteEnv().reset(num_players=num_players, seed=42)
 
 

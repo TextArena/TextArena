@@ -26,9 +26,8 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `WordLadder-v0-mdp`
   is at least `max_distance`, every puzzle can be solved within the turn limit.
 - Each turn, you submit the next word. It must have the same length as the target, differ from your current word in
   exactly one position, and be in the game's dictionary: any word in the bundled British and American English word
-  lists, including plurals and other inflected forms, plus NLTK's English word list when it is installed. Proper
-  nouns, abbreviations, and words containing anything but letters are rejected. Revisiting an earlier word is
-  allowed.
+  lists, including plurals and other inflected forms. Proper nouns, abbreviations, and words containing anything but
+  letters are rejected. Revisiting an earlier word is allowed.
 - Because every dictionary word is accepted, not just Basic English ones, a ladder shorter than `min_distance` often exists.
 - You win by reaching the target word.
 - Each accepted word uses one turn. After `max_turns` accepted words without reaching the target, the game ends.
@@ -71,11 +70,10 @@ closer to the target; letters that already match the target count only if they s
 
 ## Notes
 
-- The Basic English list (850 words, the same list as NLTK's `en-basic`) is bundled in `textarena/utils/data/`, so
-  puzzles need no NLTK data and a seed produces the same puzzle on every machine.
-- Moves are checked against `EnglishDictionary` in `textarena/utils/word_lists.py`: the bundled UK and US Hunspell
-  word lists with their affix rules applied (about 100,000 words), plus the NLTK `words` corpus when it is installed
-  (`nltk.download('words')`), for about 264,000 words in total. Without the corpus, only the bundled lists are
-  accepted; the puzzles themselves are unchanged, but the ladder distances behind partial credit can be longer.
+- The Basic English list (850 words) is bundled in `textarena/utils/data/`, so a seed produces the same puzzle on
+  every machine.
+- Moves are checked against `get_english_words()` in `textarena/utils/word_lists.py`: every word of the bundled UK and
+  US Hunspell dictionaries with its affix rules applied (about 101,000 words). The same words are accepted on every
+  machine, so the ladder distances behind partial credit are the same everywhere too.
 - Ladders through the whole dictionary are much shorter than through Basic English: in the registered variants the
   start word is usually only 2 to 6 moves from the target, so each move along a shortest ladder is worth a large share.

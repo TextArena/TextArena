@@ -233,12 +233,9 @@ class SpiteAndMaliceEnv(ta.GameEnv):
     def _parse_commands(self, action: str):
         """Parse a complete command chain without ignoring unmatched text."""
         action = action.replace("\ufe0f", "").replace("\ufe0e", "")  # emoji-style suits such as '♥️'
-        if action.count("[") != action.count("]"):
-            return None
         command_pattern = re.compile(
-            r"(?:\[\s*)?\b(draw|play|discard)\b"
-            r"(?:\s+([A23456789JQK][♠♥♦♣])\s+([0-3]))?"
-            r"(?:\s*\])?",
+            r"\b(draw|play|discard)\b"
+            r"(?:\s+([A23456789JQK][♠♥♦♣])\s+([0-3]))?",
             re.IGNORECASE,
         )
         commands = []

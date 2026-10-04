@@ -68,10 +68,10 @@ I'm short on Wheat for a city. Fair price?
 Offer: 2 Wood -> 1 Wheat
 ```
 
-Indices, ids, colors, and commands may be wrapped in square brackets, and `Accept`, `Deny`, and `Done` may end with `.`
-or `!`. Any line that starts with `Offer` must be a complete offer. A reply is invalid if it names a move that is not
-in the list, contains more than one command, offers resources you do not hold, makes an offer while one is open,
-answers an offer that is not addressed to you, or accepts without holding the requested resources.
+`Accept`, `Deny`, and `Done` may end with `.` or `!`. Any line that starts with `Offer` must be a complete offer. A
+reply is invalid if it names a move that is not in the list, contains more than one command, offers resources you do
+not hold, makes an offer while one is open, answers an offer that is not addressed to you, or accepts without holding
+the requested resources.
 
 ## Observations
 

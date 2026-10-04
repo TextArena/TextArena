@@ -79,9 +79,9 @@ def test_clue_giver_taboo_word_is_invalid():
 
 def test_reset_requires_even_players_at_least_four():
     env = TabooEnv(categories="animals", max_rounds=1, max_attempts_per_player=1)
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=3, seed=42)
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=2, seed=42)
 
 
@@ -204,7 +204,7 @@ def test_guesser_can_submit_bundled_title_shapes_and_unicode(tmp_path):
     env.state.game_state["taboo_words"] = ["island"]
 
     env.step("A safe clue")
-    done, _ = env.step("[RE\u0301UNION (U.S.), #1]")
+    done, _ = env.step("RE\u0301UNION (U.S.), #1")
 
     assert not done
     assert env.state.game_state["score"][0] == 1

@@ -15,23 +15,12 @@ import pytest
 import textarena as ta
 from textarena.envs.registration import ENV_REGISTRY
 from textarena.envs.WordLadder.env import WordLadderEnv
-from textarena.utils import word_lists
 from textarena.utils.word_lists import get_basic_english_words
 
 REGISTERED_IDS = sorted(
     env_id for env_id, spec in ENV_REGISTRY.items()
     if spec.entry_point == "textarena.envs.WordLadder.env:WordLadderEnv"
 )
-
-
-class _MissingCorpus:
-    def words(self, *_args, **_kwargs):
-        raise LookupError("corpus unavailable")
-
-
-def _without_nltk(monkeypatch):
-    monkeypatch.setattr("textarena.envs.WordLadder.env.words", _MissingCorpus())
-    monkeypatch.setattr("textarena.utils.word_lists.words", _MissingCorpus())
 
 
 def _fresh(min_distance=3, max_distance=5, max_turns=100):
@@ -101,14 +90,14 @@ def test_reaching_target_on_turn_limit_is_still_a_win():
 
 def test_invalid_format_rejected():
     env = _fresh()
-    done, _ = env.step("no brackets word")
+    done, _ = env.step("not one word")
     assert not done
     assert env.state.error_count == 1
 
 
 def test_format_error_describes_expected_action():
     env = _fresh()
-    env.step("no brackets word")
+    env.step("not one word")
     notices = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ADMIN]
     assert f"Expected {env.action_format}." in notices[-1]
     assert f"a {len(env.target_word)}-letter English word that differs from '{env.start_word}'" in env.action_format
@@ -336,10 +325,7 @@ def test_malformed_actions_are_rejected(action):
 
 
 @pytest.mark.parametrize("min_distance,max_distance", [(5, 7), (8, 12), (13, 15)])
-def test_missing_nltk_corpus_supports_registered_distances(
-    monkeypatch, min_distance, max_distance
-):
-    _without_nltk(monkeypatch)
+def test_registered_distances_build_basic_english_puzzles(min_distance, max_distance):
     env = WordLadderEnv(
         min_distance=min_distance,
         max_distance=max_distance,
@@ -355,19 +341,3 @@ def test_missing_nltk_corpus_supports_registered_distances(
     path = _bfs_path(env, env.word_list)
     assert path is not None
     assert min_distance <= len(path) - 1 <= max_distance
-
-
-@pytest.mark.parametrize("min_distance,max_distance", [(5, 7), (13, 15)])
-def test_puzzles_are_identical_with_and_without_nltk(monkeypatch, min_distance, max_distance):
-    def puzzles():
-        env = WordLadderEnv(min_distance=min_distance, max_distance=max_distance, max_turns=100)
-        result = []
-        for seed in range(5):
-            env.reset(num_players=1, seed=seed)
-            result.append((env.start_word, env.target_word))
-        return env.word_list, result
-
-    with_nltk = puzzles()
-    _without_nltk(monkeypatch)
-    word_lists._load_basic_english.cache_clear()
-    assert puzzles() == with_nltk

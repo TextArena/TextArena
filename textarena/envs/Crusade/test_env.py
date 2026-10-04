@@ -107,10 +107,10 @@ def test_huge_numeric_square_is_rejected_without_integer_conversion(monkeypatch)
     assert env.state.game_state == before
 
 
-def test_numeric_cells_and_balanced_brackets_are_accepted():
+def test_numeric_cells_are_accepted():
     env = _fresh()
 
-    done, _ = env.step("[00048 00042]")  # a2 -> c3
+    done, _ = env.step("00048 00042")  # a2 -> c3
 
     assert not done
     assert env.state.game_state["board"][6][0] == ""
@@ -173,7 +173,7 @@ def test_tied_score_draws_at_exact_move_limit():
 
 def test_moves_are_described_in_algebraic_coordinates_whatever_the_input_form():
     env = _fresh()
-    env.step("[00048 00042]")  # a2 -> c3
+    env.step("00048 00042")  # a2 -> c3
     env.step("B7 C5")
 
     descriptions = [m for _, m, t, _ in env.state.events if t == ta.ObservationType.GAME_ACTION_DESCRIPTION]

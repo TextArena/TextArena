@@ -51,7 +51,7 @@ en passant possibilities.
 
 Reply with one move in [UCI](https://en.wikipedia.org/wiki/Universal_Chess_Interface) notation: the from-square
 followed by the to-square, plus a promotion letter (`q`, `r`, `b`, `n`) when a pawn reaches the last rank.
-Matching is case-insensitive, and surrounding whitespace or square brackets are ignored.
+Matching is case-insensitive, and surrounding whitespace is ignored.
 
 - `e2e4`: pawn from e2 to e4.
 - `g1f3`: knight from g1 to f3.

@@ -38,7 +38,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Briscola-v0-mdp`).
 ## Actions
 
 Reply `play X`, where `X` is the position of a card in your hand, counting from 1. Example: `play 2`. The command is
-case-insensitive and may be wrapped in square brackets.
+case-insensitive.
 
 ## Observations
 

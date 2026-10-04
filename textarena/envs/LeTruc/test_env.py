@@ -292,10 +292,10 @@ def test_unplayable_actions_are_rejected_atomically(action):
     assert env.state.game_state == before
 
 
-def test_actions_are_case_insensitive_and_tolerate_brackets():
+def test_actions_are_case_insensitive():
     env = _fresh()
     _deal(env, ["K♣", "5♣", "6♣"], ["3♦", "5♦", "6♦"])
-    _play(env, "Play k", "[play 3]")
+    _play(env, "Play k", "PLAY 3")
     assert env.state.game_state["tricks"] == [1]
     assert env.state.error_count == 0
 

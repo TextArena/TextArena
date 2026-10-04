@@ -9,7 +9,7 @@ from textarena.utils.word_lists import get_basic_english_words, get_headwords
 class HangmanEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
-    action_pattern = r"^\s*\[?\s*([a-zA-Z]+)\s*\]?\s*$"
+    action_pattern = r"^([a-zA-Z]+)$"
     action_format = "a single letter or the entire word, for example 'L' or 'LIGHT'"
     snapshot_excluded_attributes = ("word_list",)
 

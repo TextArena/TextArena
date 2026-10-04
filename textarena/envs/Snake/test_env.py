@@ -232,7 +232,7 @@ def test_turn_limit_finalises_rewards():
     # (equal survival, equal score => single tie-group => all zeros).
     env = _fresh(num_players=2, max_turns=2)
     done = False
-    moves = ["up", "[up]", "left", "right"]  # brackets tolerated
+    moves = ["up", "up", "left", "right"]
     for m in moves:
         if done:
             break

@@ -23,8 +23,7 @@ _BEAN_ALIASES = {bean.lower(): bean for bean in BEAN_TYPES}
 _BEAN_ALIASES.update({"chilli": "Chili", "soya": "Soy", "blackeye": "BlackEyed"})
 _NUMBER_WORDS = {"a": 1, "an": 1, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5}
 
-# Exactly one bare command per action, matched against the whole whitespace-normalized
-# action. Legacy brackets such as "[Plant] 1" or "[accept 3]" are tolerated.
+# Exactly one bare command per action, matched against the whole whitespace-normalized action.
 _SEP = r"(?:\s*:\s*|\s+)"
 _NUM = r"\d{1,9}"
 _COMMAND_PATTERNS = [
@@ -39,7 +38,6 @@ _COMMAND_PATTERNS = [
     ("draw", re.compile(r"draw(?:\s+\d{1,9})?(?:\s+cards?)?", re.I)),
 ]
 _COMMAND_PREFIX = re.compile(r"(?:plant|harvest|trade|offer|accept|cancel|withdraw|pass|draw)\b|end\s*trad", re.I)
-_LEGACY_BRACKETS = re.compile(r"\[\s*([^\[\]]*?)\s*\]\s*(.*)", re.DOTALL)
 _NOTHING = re.compile(r"nothing|none|no beans?", re.I)
 _BEAN_LIST_SPLIT = re.compile(r"\s*(?:,|\+|&|\band\b)\s*", re.I)
 _BEAN_AMOUNT = re.compile(rf"(?:({_NUM}|a|an|one|two|three|four|five)\s*x?\s+)?(.+)", re.I)
@@ -47,9 +45,6 @@ _BEAN_AMOUNT = re.compile(rf"(?:({_NUM}|a|an|one|two|three|four|five)\s*x?\s+)?(
 
 def normalize_command(action: str) -> str:
     text = " ".join(action.split()).strip("`'\" ")
-    match = _LEGACY_BRACKETS.fullmatch(text)
-    if match:
-        text = f"{match.group(1)} {match.group(2)}".strip()
     return text.rstrip(".!").strip()
 
 
@@ -165,11 +160,6 @@ class BohnanzaEnv(ta.GameEnv):
         self.error_allowance = error_allowance
         self.deck_cycles = deck_cycles
         self.max_trade_rounds = max_trade_rounds
-
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        if isinstance(num_players, bool) or not isinstance(num_players, int) or not self.min_players <= num_players <= self.max_players:
-            raise ValueError(f"Bohnanza requires 3-5 players, received {num_players}")
-        super().reset(num_players=num_players, seed=seed)
 
     # ------------------------------------------------------------------ hooks
     def setup(self) -> Dict[str, Any]:

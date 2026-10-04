@@ -1,4 +1,3 @@
-import re
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
@@ -946,19 +945,11 @@ class CoupEnv(ta.GameEnv):
     def _parse_action(self, response_str: str) -> Tuple[CoupActionType, Optional[Union[int, List[str]]]]:
         """
         Convert the submitted action to (CoupActionType, arg). The action is the bare command
-        (e.g. 'income', 'coup 3'); stray square brackets are tolerated for robustness (the last
-        bracketed chunk is used if any are present).
+        (e.g. 'income', 'coup 3').
 
         The purpose of this method is TO PARSE ONLY. It makes sure the response is translated into a valid action, but does not validate against the state of the game.
         """
-        cleaned = response_str.replace("[GAME]", " ").strip()
-        bracketed = re.fullmatch(r"\[\s*([^\[\]]+?)\s*\]", cleaned)
-        if bracketed:
-            cmd = bracketed.group(1).strip().lower()
-        else:
-            if "[" in cleaned or "]" in cleaned:
-                raise ValueError("Submit exactly one complete Coup command.")
-            cmd = cleaned.lower()
+        cmd = response_str.strip().lower()
         tokens = cmd.split()
 
         if not tokens:

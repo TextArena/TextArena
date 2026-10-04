@@ -172,10 +172,10 @@ def test_huge_cell_is_rejected_without_integer_conversion(monkeypatch):
     assert len(admin_messages[-1]) < 500
 
 
-def test_lowercase_balanced_action_is_accepted():
+def test_lowercase_mark_is_accepted():
     env = _fresh()
 
-    done, _ = env.step("[x 4]")
+    done, _ = env.step("x 4")
 
     assert not done
     assert env.state.game_state["board"][1][1] == "X"

@@ -9,7 +9,7 @@ from textarena.envs.Chess.renderer import create_board_str
 class ChessEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
-    action_pattern = r"(?i)^\s*\[?\s*([a-h][1-8][a-h][1-8][qrbn]?)\s*\]?\s*$"
+    action_pattern = r"(?i)^([a-h][1-8][a-h][1-8][qrbn]?)$"
     action_format = "a move in UCI format, the start square followed by the end square (add q, r, b or n to promote a pawn), for example 'e2e4'"
 
     def __init__(self, is_open: bool=True, max_turns: int=30, show_valid: bool=True):

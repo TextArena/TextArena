@@ -124,10 +124,10 @@ def test_unbalanced_brackets_are_atomic_invalid_moves(action):
     assert env.roll_value is None
 
 
-def test_balanced_case_insensitive_action_is_accepted():
+def test_case_insensitive_action_is_accepted():
     env = _fresh()
 
-    done, _ = env.step("[ROLL]")
+    done, _ = env.step("ROLL")
 
     assert not done
     assert env.state.game_state["turn_total"] == 6

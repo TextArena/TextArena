@@ -24,7 +24,7 @@ class BreakthroughEnv(ta.GameEnv):
         self._file_to_col = {chr(ord('a') + i): i for i in range(board_size)}
         self._col_to_file = {v: k for k, v in self._file_to_col.items()}
         last_file = chr(ord('a') + board_size - 1)
-        self.action_pattern = rf"(?i)^\s*\[?([a-{last_file}])([1-9]\d?)([a-{last_file}])([1-9]\d?)\]?\s*$"
+        self.action_pattern = rf"(?i)^([a-{last_file}])([1-9]\d?)([a-{last_file}])([1-9]\d?)$"
 
     @property
     def action_format(self) -> str:

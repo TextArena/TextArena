@@ -14,8 +14,8 @@ as before, and all wrappers keep working.
 import re
 import copy
 import random
-from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 from textarena.core import Env, Info, ObservationType, GAME_ID
 
@@ -94,7 +94,7 @@ class GameState:
 
     @property
     def observations(self) -> Dict[int, List[Tuple[int, str, ObservationType]]]:
-        """Pending (not yet consumed) observations per player. Legacy shape."""
+        """Pending (not yet consumed) observations per player as (sender, message, type) tuples."""
         return {
             pid: [(f, m, t) for (f, m, t, to) in self.events[self._cursors[pid]:] if to == -1 or to == pid]
             for pid in range(self.num_players)
@@ -137,7 +137,8 @@ class GameEnv(Env):
                                          the default eliminates them (see method docs) (optional)
 
     Class-level configuration:
-        min_players / max_players        allowed player counts
+        min_players / max_players        allowed player counts (set them in __init__ when they depend on configuration)
+        default_num_players              used when reset() is called without num_players
         action_pattern                   regex; if set, the engine extracts the move
                                          (an `re.Match`) and rejects non-matching actions
         broadcast_actions                if False, raw actions are only echoed to their author
@@ -147,6 +148,7 @@ class GameEnv(Env):
 
     min_players: int = 1
     max_players: Optional[int] = None
+    default_num_players: Optional[int] = None
     action_pattern: Optional[str] = None
     broadcast_actions: bool = True
     error_allowance: int = 1
@@ -176,6 +178,10 @@ class GameEnv(Env):
 
     def roles(self) -> Dict[int, str]:
         return {pid: f"Player {pid}" for pid in range(self.state.num_players)}
+
+    def check_num_players(self, num_players: int) -> None:
+        """Raise ValueError for player counts within min/max_players that the game still cannot use."""
+        return None
 
     def on_start(self):
         """Called once after the initial prompts are sent, e.g. to deal private cards."""
@@ -298,11 +304,26 @@ class GameEnv(Env):
         return "".join(kept)
 
     # -------------------------------------------------------------- Env API
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        assert num_players >= self.min_players and (self.max_players is None or num_players <= self.max_players), (
-            f"{type(self).__name__} supports {self.min_players}"
-            f"{'+' if self.max_players is None else f'-{self.max_players}'} players, received {num_players}"
-        )
+    def reset(self, num_players: Optional[int] = None, seed: Optional[int] = None):
+        if num_players is None:
+            num_players = self.default_num_players
+        if num_players is None and self.min_players == self.max_players:
+            num_players = self.min_players
+        if (
+            isinstance(num_players, bool)
+            or not isinstance(num_players, int)
+            or num_players < self.min_players
+            or (self.max_players is not None and num_players > self.max_players)
+        ):
+            if self.max_players is None:
+                supported = f"{self.min_players} or more players"
+            elif self.max_players == self.min_players:
+                supported = f"exactly {self.min_players} player{'' if self.min_players == 1 else 's'}"
+            else:
+                supported = f"{self.min_players} to {self.max_players} players"
+            game = type(self).__name__.removesuffix("Env")
+            raise ValueError(f"{game} needs {supported}, received {num_players!r}.")
+        self.check_num_players(num_players)
         self.rng = random.Random(seed)
         self.state = GameState(num_players=num_players, max_turns=self.max_turns, error_allowance=self.error_allowance)
         self.state.game_state = self.setup()
@@ -333,8 +354,12 @@ class GameEnv(Env):
             return self.state.done, self._drain_step_info()
 
         # Surrounding whitespace is never meaningful, and long whitespace runs make
-        # patterns like r"^\s*\[?\s*(...)\s*\]?\s*$" backtrack quadratically.
+        # patterns like r"^\s*(...)\s*$" backtrack quadratically.
         action = action.strip()
+        # Older prompts asked for moves in brackets ("[e2e4]"). One surrounding pair is dropped here so that
+        # games only parse bare moves; text with inner brackets is left alone because the outer pair may not match.
+        if action[:1] == "[" and action[-1:] == "]" and "[" not in action[1:-1] and "]" not in action[1:-1]:
+            action = action[1:-1].strip()
 
         # The echo target depends on the phase before the action is applied.
         echo_target = self.action_echo_target(pid, action)

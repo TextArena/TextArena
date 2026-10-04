@@ -9,11 +9,10 @@ from textarena.envs.SettlersOfCatan.game_engine import Board, render_board, Terr
 # Canonical bare, line-anchored negotiation commands, matched against each
 # stripped line. Accept/Deny/Done must be a line of their own (optional trailing
 # punctuation) so incidental prose is not misparsed; any line starting with the
-# word "offer" is an offer attempt and must be well formed. Stray square
-# brackets from the legacy format are tolerated.
-_NEGO_DECISION_RE = re.compile(r'\[?(accept|deny|done)\]?[ \t]*[.!]?', re.I)
-_NEGO_OFFER_WORD_RE = re.compile(r'\[?offer\b', re.I)
-_NEGO_OFFER_RE = re.compile(r'\[?offer[ \t]*:(?P<body>[^\[\]]*)\]?', re.I)
+# word "offer" is an offer attempt and must be well formed.
+_NEGO_DECISION_RE = re.compile(r'(accept|deny|done)[ \t]*[.!]?', re.I)
+_NEGO_OFFER_WORD_RE = re.compile(r'offer\b', re.I)
+_NEGO_OFFER_RE = re.compile(r'offer[ \t]*:(?P<body>.*)', re.I)
 _MAX_COMMAND_CHARS = 500
 _RESOURCE_PAIR_RE = re.compile(r'(\d+)\s+([A-Za-z]+)', re.I)
 _RESOURCE_ORDER = (Terrain.BRICK, Terrain.WOOD, Terrain.WHEAT, Terrain.ORE, Terrain.SHEEP)
@@ -128,7 +127,6 @@ class SettlersOfCatanEnv(ta.GameEnv):
         }
 
     def get_board_str(self):
-        cpid = self.state.current_player_id
         colour = self.board.str_to_enum(color_str=self.role_colors[self.state.current_player_id])
         scores = self.board.get_scores()
         score_lines = [f"{str(c):6} {rec['total']:>2} VP   (S:{rec['settlements']}  C:{rec['cities']}  R:{rec['roads']}) {'(eliminated)' if self.pids_from_roles[str(c)] in self.state.game_state['eliminated_players'] else ''}" for c, rec in scores.items()]
@@ -363,7 +361,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
         next_holder = player_id  # who holds the turn after this action (never auto-rotated)
         match gs["turn_phase"]:
             case "action":
-                m = re.fullmatch(r'\[?\s*(\d+)\s*\]?', action.strip())
+                m = re.fullmatch(r'\s*(\d+)\s*', action.strip())
                 if m is None: return self.invalid("No action found. Please reply with the index of a viable move, e.g. '3'.")
                 act = int(m.group(1)) if len(m.group(1)) <= 6 else 0
                 if act > len(self.game_moves) or act <=0: 
@@ -436,7 +434,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
     def _negotiation_partner_selection(self, player_id: int, action: str):
         gs = self.game_state
         pid_options = [pid for pid in range(self.state.num_players) if (pid not in gs["eliminated_players"] and pid != player_id)]
-        m = re.fullmatch(r'(?i)\[?\s*([0123]|red|white|blue|orange)\s*\]?', action.strip())
+        m = re.fullmatch(r'(?i)\s*([0123]|red|white|blue|orange)\s*', action.strip())
         if m is None: return False
         choice = m.group(1).lower()
         choice = self.pids_from_roles[choice] if choice in self.pids_from_roles else int(choice)

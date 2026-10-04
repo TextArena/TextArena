@@ -19,7 +19,7 @@ def test_reset_requires_three_players():
 
     env = ThreePlayerTicTacToeEnv()
     for num_players in (2, 4):
-        with pytest.raises(AssertionError):
+        with pytest.raises(ValueError):
             env.reset(num_players=num_players, seed=42)
 
 
@@ -58,7 +58,7 @@ def test_player0_diagonal_line_wins_complete_game():
 def test_occupied_cell_first_invalid_not_terminal():
     env = _fresh()
     env.step("0")          # P0 takes cell 0
-    done, _ = env.step("[0]")  # P1 tries the same cell (brackets tolerated)
+    done, _ = env.step("0")  # P1 tries the same cell
     assert not done
     assert env.state.error_count == 1
 

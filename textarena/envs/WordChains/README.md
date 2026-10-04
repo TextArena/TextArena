@@ -19,7 +19,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `WordChains-v0-mdp`
 ## Rules
 
 - At reset, a starting word of one to five letters is drawn from Ogden's Basic English list. It is always one that has
-  at least one valid successor in the bundled dictionaries.
+  at least one valid successor in the game's dictionary.
 - Players alternate, starting with Player 0. Each word must:
   - start with the last letter of the previous word,
   - be exactly one letter longer than the previous word,
@@ -49,8 +49,7 @@ announced as `Player 0 played: 'pear'`. There is no hidden information.
 
 ## Notes
 
-- Words are checked against the shared English dictionary in `textarena/utils/word_lists.py`: the bundled UK and US
-  Hunspell word lists, plus the NLTK `words` corpus (`nltk.download('words')`) when it is installed.
-- The starting words come from the bundled copy of Basic English (850 words, the same list as NLTK's `en-basic`) in
-  `textarena/utils/data/`, and the successor check uses only the bundled UK and US lists. A seed therefore picks the
-  same starting word on every machine, with or without NLTK data.
+- Words are checked against the English word list bundled in `textarena/utils/word_lists.py`: every word of the UK
+  and US Hunspell dictionaries with its regular inflections (plurals, past tenses, and so on).
+- The starting words come from the bundled copy of Basic English (850 words) in `textarena/utils/data/`, and the
+  successor check uses the same word list as move validation, so a seed picks the same starting word on every machine.

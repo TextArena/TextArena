@@ -9,7 +9,7 @@ from textarena.envs.SimpleTak.renderer import create_board_str
 class SimpleTakEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
-    action_pattern = r"^\s*\[?\s*(\d+)\s*\]?\s*$"
+    action_pattern = r"^(\d+)$"
 
     def __init__(self, board_size: int = 5):
         """

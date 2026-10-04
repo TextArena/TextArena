@@ -43,10 +43,7 @@ class IteratedTwoThirdsAverageEnv(ta.GameEnv):
         self.num_rounds = num_rounds
         self.min_guess = min_guess
         self.max_guess = max_guess
-        # A whitespace run must be consumable by only one \s*, as retrying every split of a long run is quadratic.
-        self._guess_re = re.compile(
-            r"^\s*(?:\[\s*)?([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)(?:\s*\])?\s*$"
-        )
+        self._guess_re = re.compile(r"^([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)$")
 
     def setup(self) -> Dict[str, Any]:
         return {

@@ -40,11 +40,12 @@ class SimpleBlindAuctionEnv(ta.GameEnv):
             "Jade Figurine", "Bronze Sculpture", "Crystal Decanter", "Royal Tapestry", "Emerald Ring", "Ivory Chess Set", "Pearl Earrings"
         ]
         self.bid_pattern = re.compile(r"Bid\s+(?:on\s+)?(?:Item\s+)?(\d+)\s*:\s*(\d+)", re.IGNORECASE)
-        self.legacy_bid_pattern = re.compile(r"\[\s*Bid\s+(?:on\s+)?(?:Item\s+)?(\d+)\s*:\s*(\d+)\s*\]", re.IGNORECASE)
-        self.bid_start_pattern = re.compile(r"\[?\s*Bid\b", re.IGNORECASE)
+        self.bid_start_pattern = re.compile(r"Bid\b", re.IGNORECASE)
         # Bids are separated by line breaks or by semicolons followed by the next bid, as in BlindAuction.
-        self.bid_separator = re.compile(r";\s*(?=\[?\s*Bid\b)", re.IGNORECASE)
-        self.segment_padding = re.compile(r"^[\s;]+|[\s;]+$")
+        self.bid_separator = re.compile(r";\s*(?=Bid\b)", re.IGNORECASE)
+        # The lookbehind keeps the trailing alternative from restarting at every character of an inner
+        # whitespace run, which is quadratic.
+        self.segment_padding = re.compile(r"^[\s;]+|(?<![\s;])[\s;]+$")
 
     def get_board_str(self):
         return create_board_str(
@@ -191,7 +192,7 @@ class SimpleBlindAuctionEnv(ta.GameEnv):
         return None
 
     def _parse_bids(self, action: str) -> Optional[List[tuple[str, str]]]:
-        """Parse bids that are either all bare or all legacy bracketed tokens.
+        """Parse a reply made only of bids.
 
         Returns [] for a reply without any bid and None for malformed or mixed bids."""
         segments = []
@@ -206,10 +207,6 @@ class SimpleBlindAuctionEnv(ta.GameEnv):
         bare_matches = [self.bid_pattern.fullmatch(segment) for segment in segments]
         if all(bare_matches):
             return [match.groups() for match in bare_matches]
-
-        legacy_bids = [self.legacy_bid_pattern.findall(segment) for segment in segments]
-        if all(bids and not self.legacy_bid_pattern.sub("", segment).strip() for bids, segment in zip(legacy_bids, segments)):
-            return [bid for bids in legacy_bids for bid in bids]
         if any(self.bid_start_pattern.match(segment) for segment in segments):
             return None
         return []
@@ -325,7 +322,6 @@ class SimpleBlindAuctionEnv(ta.GameEnv):
         if len(winners) == 1:
             winner = winners[0]
             profit = results["player_profit"][winner]
-            spent = results["player_spent"][winner]
             remaining = game_state["remaining_capital"][winner]
             item_value = results["player_value"][winner]
             reason = f"Player {winner} won with a final net worth of {max_worth} coins! (Remaining capital: {remaining} coins, Item value: {item_value} coins, Profit: {profit} coins)"

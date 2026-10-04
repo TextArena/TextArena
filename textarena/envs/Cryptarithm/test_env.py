@@ -110,7 +110,7 @@ def test_clearing_a_letter_lets_a_full_ten_letter_mapping_be_corrected():
     assert "A" not in env.game_state["mapping"] and 7 not in env.game_state["digit_used"]
     done, _ = env.step("T 7")
     assert not done
-    done, _ = env.step("[a, 2]")
+    done, _ = env.step("a, 2")
     assert done and env.state.rewards == {0: 1.0}
 
 
@@ -144,9 +144,9 @@ def test_parser_rejects_noncanonical_actions(action):
     assert env.state.game_state == before
 
 
-def test_paired_legacy_brackets_remain_valid():
+def test_comma_separated_assignment_is_valid():
     env = _fresh()
-    done, _ = env.step("[A, 1]")
+    done, _ = env.step("A, 1")
     assert not done
     assert env.state.game_state["mapping"] == {"A": 1}
 

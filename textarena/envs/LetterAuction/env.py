@@ -3,16 +3,7 @@ from collections import Counter
 from typing import Any, Dict, Optional, Union
 
 import textarena as ta
-
-from nltk.corpus import words
-
-try:
-    en_uk_dict = {word.lower() for word in words.words()}
-except LookupError:
-    # Keep imports/reset offline and deterministic even when the optional NLTK
-    # corpus is absent. These one-letter English words preserve a playable
-    # minimal fallback; deployments can install the corpus for the full lexicon.
-    en_uk_dict = {"a", "i"}
+from textarena.utils.word_lists import is_english_word
 
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # Every letter takes at least two turns (bid + pass, or pass + pass), then both players submit.
@@ -120,14 +111,9 @@ class LetterAuctionEnv(ta.GameEnv):
 
         if gs["round_number"] < len(gs["letters"]):
             # Auction phase
-            match = re.fullmatch(
-                r"\s*(?P<legacy>\[)?\s*(?P<command>bid\s+\d+|pass)\s*(?(legacy)\])\s*",
-                action,
-                re.IGNORECASE,
-            )
-            if not match:
+            if not re.fullmatch(r"bid\s+\d+|pass", action, re.IGNORECASE):
                 return self.invalid(f"Invalid action: {action}. Please enter 'bid <amount>' or 'pass'.")
-            action_text = match.group("command").lower()
+            action_text = action.lower()
             is_pass = action_text == "pass"
 
             if not is_pass:
@@ -153,13 +139,9 @@ class LetterAuctionEnv(ta.GameEnv):
             else: self._place_bid(player_id, bid_amount)
         else:
             # Word-submission phase
-            match = re.fullmatch(
-                r"\s*(?P<legacy>\[)?\s*(?P<word>[a-zA-Z]+)\s*(?(legacy)\])\s*",
-                action,
-            )
-            if not match:
+            if not re.fullmatch(r"[a-zA-Z]+", action):
                 return self.invalid(f"Invalid action: {action}. Please enter one English word, or 'pass' to submit no word.")
-            word = match.group("word").lower()
+            word = action.lower()
             # "pass" can never be spelled: it needs two S tiles and every letter is auctioned once.
             if word == "pass":
                 self._submit_no_word(player_id)
@@ -272,7 +254,7 @@ class LetterAuctionEnv(ta.GameEnv):
         word = word.upper()
         player_state = gs["player_states"][player_id]
 
-        if word.lower() not in en_uk_dict:
+        if not is_english_word(word):
             return self.invalid(f"Invalid word: {word}. Please enter a valid English word.")
         available = Counter(player_state["letters"])
         needed = Counter(word)

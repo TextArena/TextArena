@@ -7,10 +7,7 @@ import textarena as ta
 class PegJumpEnv(ta.GameEnv):
     min_players = 1
     max_players = 1
-    ACTION_RE = re.compile(
-        r"(?P<wrapped>\[)?\s*(?P<source>\d{1,2})(?:\s*,\s*|\s+)"
-        r"(?P<target>\d{1,2})\s*(?(wrapped)\])"
-    )
+    ACTION_RE = re.compile(r"(?P<source>\d{1,2})(?:\s*,\s*|\s+)(?P<target>\d{1,2})")
     BOARD_SIZE = 15
 
     _BASE_TRIPLES: List[Tuple[int, int, int]] = [

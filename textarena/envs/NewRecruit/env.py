@@ -18,9 +18,9 @@ class NewRecruitEnv(ta.GameEnv):
 
     # Matched against stripped text (the proposal against the last line only), so
     # padded or very long input cannot trigger catastrophic backtracking.
-    _DECISION_RE = re.compile(r"\[?\s*(accept|reject)\s*\]?", re.IGNORECASE)
-    _PROPOSE_LINE_RE = re.compile(r"\[?\s*propose(?:\s*\])?\s+(?P<letters>[a-e](?:[ \t]*[a-e]){7})", re.IGNORECASE)
-    _PROPOSE_WORD_RE = re.compile(r"\[?\s*propose\b", re.IGNORECASE)
+    _DECISION_RE = re.compile(r"(accept|reject)", re.IGNORECASE)
+    _PROPOSE_LINE_RE = re.compile(r"propose\s+(?P<letters>[a-e](?:[ \t]*[a-e]){7})", re.IGNORECASE)
+    _PROPOSE_WORD_RE = re.compile(r"propose\b", re.IGNORECASE)
 
     def __init__(self, max_turns: int = 10, error_allowance: int = 3):
         """

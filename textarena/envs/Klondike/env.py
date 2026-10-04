@@ -13,12 +13,9 @@ class KlondikeEnv(ta.GameEnv):
     error_allowance = 5
     max_action_chars = 4096
 
-    def __init__(
-        self, seed: Optional[int] = None, max_turns: int = 200, draw_count: int = 1
-    ):
+    def __init__(self, max_turns: int = 200, draw_count: int = 1):
         """
         Args:
-            seed: Random seed for reproducible games
             max_turns: Maximum number of turns before game ends
             draw_count: Number of cards to draw from stock (1 or 3)
         """
@@ -30,26 +27,18 @@ class KlondikeEnv(ta.GameEnv):
             or draw_count not in (1, 3)
         ):
             raise ValueError("draw_count must be either 1 or 3")
-        self.seed = seed
         self.max_turns = max_turns
         self.draw_count = draw_count
-        self._reset_seed: Optional[int] = None
-
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        # KlondikeGame seeds its own deck shuffle from the raw seed.
-        self._reset_seed = seed
-        super().reset(num_players=num_players, seed=seed)
 
     @property
     def klondike(self) -> KlondikeGame:
         return self.game_state["klondike"]
 
     def setup(self) -> Dict[str, Any]:
-        game_seed = self._reset_seed if self._reset_seed is not None else self.seed
         return {
             "turn_count": 0,
             "game_won": False,
-            "klondike": KlondikeGame(seed=game_seed, draw_count=self.draw_count),
+            "klondike": KlondikeGame(seed=self.rng.getrandbits(64), draw_count=self.draw_count),
         }
 
     def prompt(self, player_id: int) -> str:
@@ -144,10 +133,6 @@ class KlondikeEnv(ta.GameEnv):
     def _execute_actions(self, action: str) -> Tuple[bool, List[str], bool]:
         """Execute multiple comma-separated actions and return (success, messages, is_format_error)"""
         action = action.strip()
-        if action.startswith("[") or action.endswith("]"):
-            if not (action.startswith("[") and action.endswith("]")):
-                return False, ["Mismatched action brackets."], True
-            action = action[1:-1].strip()
 
         if not action:
             return (

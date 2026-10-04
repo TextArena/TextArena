@@ -88,8 +88,8 @@ def test_parser_rejects_noncanonical_actions_atomically(action):
     assert env.state.game_state == before
 
 
-@pytest.mark.parametrize("action", ["[A, C]", "[ A C ]", "[a, c]"])
-def test_paired_legacy_brackets_and_comma_remain_valid(action):
+@pytest.mark.parametrize("action", ["A, C", "A,C", "a, c"])
+def test_comma_separator_and_lowercase_are_valid(action):
     env = _fresh()
     done, _ = env.step(action)
     assert not done

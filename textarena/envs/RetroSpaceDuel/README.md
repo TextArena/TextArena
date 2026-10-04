@@ -39,7 +39,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `RetroSpaceDuel-v0-
 
 ## Actions
 
-Reply with exactly one bare action (case-insensitive; surrounding brackets are tolerated):
+Reply with exactly one bare action (case-insensitive):
 
 - Move: `w` (up), `s` (down), `a` (left), `d` (right), `q` (up-left), `e` (up-right), `z` (down-left), `c`
   (down-right).

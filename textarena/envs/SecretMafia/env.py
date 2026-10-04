@@ -117,7 +117,7 @@ class SecretMafiaEnv(ta.GameEnv):
     min_players = 6
     max_players = 15
 
-    voting_pattern = re.compile(r"\[?\s*(?:player\s*)?([0-9]{1,2})\s*\]?", re.IGNORECASE)  # fullmatch on stripped text
+    voting_pattern = re.compile(r"(?:player\s*)?([0-9]{1,2})", re.IGNORECASE)  # fullmatch on stripped text
     _ROLE_FACTORY = {
         "Villager":  Villager,
         "Mafia":     Mafia,

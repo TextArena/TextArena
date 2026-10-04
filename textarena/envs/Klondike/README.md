@@ -45,8 +45,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Klondike-v0-mdp`).
   every face-up card of the source pile. Examples: `move W T3`, `move T1 F2`, `move T3 T5 2`, `move T4 T1 all`.
 - `forfeit` ends the game and keeps your current score. It must be the only action in the reply.
 
-Actions can be combined, for example `draw, move W T1, move T2 F1`. Commands are case-insensitive, and a whole reply
-may be wrapped in square brackets.
+Actions can be combined, for example `draw, move W T1, move T2 F1`. Commands are case-insensitive.
 
 ## Observations
 
@@ -88,9 +87,7 @@ After each turn you are told what each action did, or why the first failing acti
 
 - `max_turns` (default `200`): the number of turns (replies) before the game ends.
 - `draw_count` (default `1`): how many cards `draw` turns over, `1` or `3`. Only the top waste card is shown and
-  playable.
-- `seed` (default `None`): a fixed deal for resets that do not pass their own seed. A seed passed to `reset` takes
-  precedence.
+  playable. The deal is fixed by the seed passed to `reset`.
 
 ## Notes
 

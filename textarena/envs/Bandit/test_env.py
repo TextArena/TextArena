@@ -105,15 +105,7 @@ def test_invalid_final_choice_does_not_consume_a_turn():
     assert done and env.state.turn == 1
 
 
-def test_bare_and_bracketed_button_names_are_accepted():
-    bare = _fresh(num_turns=2)
-    bracketed = _fresh(num_turns=2)
-    bare.step("red")
-    bracketed.step("[red]")
-    assert bare.game_state == bracketed.game_state
-
-
-@pytest.mark.parametrize("action", ["RED", "Red", "[Red]"])
+@pytest.mark.parametrize("action", ["RED", "Red"])
 def test_button_names_are_case_insensitive(action):
     env = _fresh(num_turns=2)
     done, _ = env.step(action)
@@ -238,7 +230,7 @@ def test_invalid_configuration_is_rejected(kwargs):
 
 def test_player_bounds_are_enforced():
     env = _fresh()
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=0)
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         env.reset(num_players=2)
