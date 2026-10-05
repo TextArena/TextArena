@@ -1,52 +1,61 @@
-import random
 import re
-from typing import Dict, Any, Optional, Tuple, List
+from typing import Any, Dict, Union
 
 import textarena as ta
 
 
-class SecretaryEnv(ta.Env):
+class SecretaryEnv(ta.GameEnv):
+    min_players = 1
+    max_players = 1
 
-    def __init__(self, N: int = 20):
-        self.N = N
-        self.value_sampler = random.random
-        self.action_space = re.compile(r'\[(accept|continue)\]')
+    action_space = re.compile(r'(accept|continue)', re.IGNORECASE)
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.state = ta.SinglePlayerState(num_players=num_players, max_turns=self.N, seed=seed)
-        draws: List[float] = [self.value_sampler() for _ in range(self.N)]
-        self.state.reset(game_state=dict(draws=draws, accepted_idx=None, current_idx=0), player_prompt_function=self._prompt)
+    N = ta.Param(20, "The number of values.", min=1)
+
+    def setup(self) -> Dict[str, Any]:
+        # Values are kept at the 4 decimals shown to the player, so the comparisons they see are exact.
+        return dict(draws=[round(self.rng.random(), 4) for _ in range(self.N)], accepted_idx=None, current_idx=0)
+
+    def prompt(self, player_id: int) -> str:
+        return (
+            f"You will observe {self.N} hidden values sequentially.\nAt each step reply 'accept' to pick the *current* value, "
+            "or 'continue' to skip it and see the next one.\nIf you never accept, you are forced to take the final value.\n"
+            "You win (reward = 1) **only** if the value you ultimately pick is the highest of all."
+        )
+
+    def on_start(self):
         self._show_next_value()
 
-    def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return self.m("player_prompt", "intro", N=self.N)
-    
-    def _show_next_value(self):
-        self.state.add_observation(message=self.m("game_action", "current_value", value=f"{self.state.game_state['draws'][self.state.game_state['current_idx']]:.4f}"), observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-        self.state.game_state['current_idx'] += 1
-
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-
-        # Validate action format
-        m = self.action_space.fullmatch(action.strip())
+    def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        m = self.action_space.fullmatch(move.strip())
         if m is None:
-            self.state.set_invalid_move(reason=self.m("invalid_move", "wrong_format"))
-            return self.state.step()
+            return self.invalid("Action must be either 'accept' or 'continue'.")
 
-        choice = m.group(1)
-        if choice == "accept": self._resolve(accepted_at=self.state.game_state['current_idx']-1)
- 
+        choice = m.group(1).lower()
         # Auto-accept on the very last turn if no decision yet
-        if (self.state.game_state['current_idx'] >= self.N or choice=="accept"):
-            self._resolve(accepted_at=self.state.game_state['current_idx']-1)
-        else:                   
-            self._show_next_value()
-        return self.state.step()
+        if self.game_state['current_idx'] >= self.N or choice == "accept":
+            return self._resolve(accepted_at=self.game_state['current_idx'] - 1)
+        self._show_next_value()
+        return None
 
-    def _resolve(self, accepted_at: int):
-        draws = self.state.game_state["draws"]
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome({0: 0.0}, reason=f"Invalid Move: {reason}")
+
+    def _show_next_value(self):
+        idx = self.game_state["current_idx"]
+        if idx >= self.N:
+            raise RuntimeError("No unrevealed secretary values remain")
+        message = f"The current value ({idx + 1} of {self.N}) is {self.game_state['draws'][idx]:.4f}."
+        if idx == self.N - 1:
+            message += " This is the final value: you get it whether you reply 'accept' or 'continue'."
+        self.broadcast(message, ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        self.game_state['current_idx'] += 1
+
+    def _resolve(self, accepted_at: int) -> ta.Outcome:
+        draws = self.game_state["draws"]
+        if not 0 <= accepted_at < len(draws):
+            raise RuntimeError("Accepted draw index is out of bounds")
+        self.game_state["accepted_idx"] = accepted_at
         won = draws[accepted_at] == max(draws)
-        result = self.m("outcome", "perfect") if won else self.m("outcome", "not_max")
-        reason = self.m("outcome", "summary", value=f"{draws[accepted_at]:.4f}", draw_num=accepted_at + 1, N=self.N, best=f"{max(draws):.4f}", result=result)
-        self.state.set_outcome(reward=1.0 if won else 0.0, reason=reason)
+        message = f"You accepted value {draws[accepted_at]:.4f} at draw {accepted_at + 1}/{self.N}. The best overall was {max(draws):.4f}. "
+        return self.outcome({0: 1.0 if won else 0.0}, reason=message + ("Perfect choice! 🎉" if won else "Not the maximum."))

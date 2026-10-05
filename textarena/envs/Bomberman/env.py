@@ -1,235 +1,244 @@
-import re, random
-from typing import Any, Dict, Optional, Tuple, List
+import re
+from typing import Any, Dict, List, Optional, Set, Tuple, Union
 
 import textarena as ta
 
+EMPTY = "."
+INDESTRUCTIBLE_WALL = "#"
+DESTRUCTIBLE_WALL = "+"
+BOMB = "B"
+BLAST = "*"
+PLAYER_SYMBOLS = ("0", "1")
+BLAST_MARKER_MOVES = 2  # a blast stays visible for two moves, so both players see it once
 
-class TwoPlayerBombermanEnv(ta.Env):
-    """Environment for a turn-based two-player adaptation of Bomberman."""
+_MOVES = {"up": (0, -1), "down": (0, 1), "left": (-1, 0), "right": (1, 0)}
+_ACTION_RE = re.compile(r"^(up|down|left|right|stay|bomb)$", re.IGNORECASE)
 
-    def __init__(self, grid_size: int = 10, max_turns: int = 100,
-                 bomb_timer: int = 6, bomb_radius: int = 2, wall_density: float = 0.3):
+
+def _format_grid(canvas: List[List[str]]) -> str:
+    """Grid with column numbers (x) on top and row numbers (y) on the left."""
+    width = len(str(max(len(canvas), len(canvas[0])) - 1))
+    header = " " * (width + 1) + " ".join(str(x).rjust(width) for x in range(len(canvas[0])))
+    rows = [str(y).rjust(width) + " " + " ".join(cell.rjust(width) for cell in row) for y, row in enumerate(canvas)]
+    return "\n".join([header] + rows)
+
+
+class TwoPlayerBombermanEnv(ta.GameEnv):
+    """Turn-based two-player Bomberman: players alternate single moves and bombs tick after every move."""
+    min_players = 2
+    max_players = 2
+    mdp_includes_actions = False
+
+    grid_size = ta.Param(10, "The side length of the square arena, including its outer wall.", min=5)
+    max_turns = ta.Param(100, "The number of rounds (one move by each player) before the game ends in a draw.", min=1)
+    bomb_timer = ta.Param(
+        6, "The fuse length in moves, counting the move that drops the bomb; both players' moves count.", min=1,
+    )
+    bomb_radius = ta.Param(2, "The number of cells a blast reaches in each of the four directions.", min=1)
+    wall_density = ta.Param(0.3, "The probability that a free cell starts as a destructible wall.", min=0, max=1)
+
+    # ------------------------------------------------------------------ setup
+    def setup(self) -> Dict[str, Any]:
+        # max_turns counts rounds, while the engine counts individual moves.
+        # Players strictly alternate, so a round is exactly two engine turns.
+        self.state.max_turns = 2 * self.max_turns
+        return {
+            "grid": self._generate_grid(),
+            "positions": list(self._spawns()),
+            "alive": [True, True],
+            "bombs": [],   # {"x", "y", "timer", "owner"}; timer = moves until it explodes, counting the next move
+            "blasts": [],  # [x, y, remaining moves the blast marker stays visible]
+        }
+
+    def _spawns(self) -> Tuple[Tuple[int, int], Tuple[int, int]]:
+        return (1, 1), (self.grid_size - 2, self.grid_size - 2)
+
+    def _is_indestructible(self, x: int, y: int) -> bool:
+        """Outer wall plus pillars wherever both distances to the nearest outer wall are even.
+
+        For odd sizes this is the classic lattice of pillars on every second
+        cell. Measuring from the nearest wall keeps the arena point-symmetric
+        for even sizes too, so neither spawn sits on or beside a different
+        pillar arrangement.
         """
-        Args:
-            grid_size (int): Size of the square grid arena.
-            max_turns (int): Maximum number of rounds (both players move each round) before a draw.
-            bomb_timer (int): Number of half-turns before a bomb explodes.
-            bomb_radius (int): Radius of bomb explosions.
-            wall_density (float): Density of destructible walls (0.0 to 1.0).
-        """
-        self.grid_size = grid_size
-        self.max_turns = max_turns
-        self.bomb_timer = bomb_timer
-        self.bomb_radius = bomb_radius
-        self.wall_density = wall_density
+        n = self.grid_size
+        if x in (0, n - 1) or y in (0, n - 1):
+            return True
+        return min(x, n - 1 - x) % 2 == 0 and min(y, n - 1 - y) % 2 == 0
 
-        # Grid element glyphs
-        self.EMPTY = " "
-        self.INDESTRUCTIBLE_WALL = "#"
-        self.DESTRUCTIBLE_WALL = "+"
-        self.PLAYER_SYMBOLS = ["0", "1"]
-        self.BOMB = "B"
-        self.EXPLOSION = "*"
+    def _generate_grid(self) -> List[List[str]]:
+        n = self.grid_size
+        grid = [[INDESTRUCTIBLE_WALL if self._is_indestructible(x, y) else EMPTY for x in range(n)] for y in range(n)]
+        # Destructible walls are mirrored through the centre so both players get the same arena.
+        for y in range(1, n - 1):
+            for x in range(1, n - 1):
+                mirror_x, mirror_y = n - 1 - x, n - 1 - y
+                if (y, x) > (mirror_y, mirror_x) or grid[y][x] != EMPTY:
+                    continue
+                if self.rng.random() < self.wall_density:
+                    grid[y][x] = grid[mirror_y][mirror_x] = DESTRUCTIBLE_WALL
+        # Clear a pocket around each spawn so both players can stand and move.
+        for sx, sy in self._spawns():
+            for y in range(sy - 1, sy + 2):
+                for x in range(sx - 1, sx + 2):
+                    if grid[y][x] == DESTRUCTIBLE_WALL:
+                        grid[y][x] = EMPTY
+        return grid
 
-        self.move_pattern = re.compile(r"\[(up|down|left|right|stay|bomb)\]", re.IGNORECASE)
+    # ----------------------------------------------------------------- prompts
+    def prompt(self, player_id: int) -> str:
+        n, fuse = self.grid_size, self.bomb_timer
+        return (
+            f"You are Player {player_id} in a turn-based two-player Bomberman game on a {n}x{n} grid.\n"
+            f"You are shown as '{PLAYER_SYMBOLS[player_id]}' and your opponent as '{PLAYER_SYMBOLS[1 - player_id]}'. "
+            "Players alternate moves and Player 0 moves first; a round is one move by each player.\n\n"
+            "On your move, reply with exactly one command:\n"
+            "  up / down / left / right - move one cell\n"
+            "  stay - stay where you are\n"
+            "  bomb - drop a bomb on your current cell\n"
+            "For example: 'left' or 'bomb'.\n\n"
+            "Rules:\n"
+            "- You cannot move into a wall, a bomb or the other player. You can walk off a bomb you are standing on.\n"
+            f"- Bombs have a {fuse}-move fuse: counting the move that drops a bomb as move 1, it explodes at the end of "
+            f"move {fuse} (both players' moves count). After dropping a bomb you get {(fuse - 1) // 2} more move(s) to "
+            f"get clear of it; your opponent gets {fuse // 2}.\n"
+            f"- A blast covers the bomb's cell and up to {self.bomb_radius} cells up, down, left and right. "
+            "Indestructible walls (#) stop it; a destructible wall (+) in its path is destroyed and also stops it. "
+            "Blasts pass over other bombs without setting them off.\n"
+            "- Anyone standing on a cell covered by a blast when it goes off is eliminated.\n"
+            f"- The last player standing wins. If both players are caught in the same explosion, or both survive "
+            f"{self.max_turns} rounds, the game is a draw.\n\n"
+            "Board legend: '0' and '1' players, '#' indestructible wall, '+' destructible wall, 'B' bomb, "
+            "'*' cell hit by an explosion during the last two moves (already resolved, safe to enter), '.' empty floor.\n"
+            "Positions are (x, y): x is the column number and y the row number printed around the board, so 'up' "
+            "decreases y. Each bomb is listed as 'explodes after N more move(s)': it goes off at the end of the N-th "
+            "move from now, counting the move about to be made."
+        )
+
+    def render(self, player_id: int) -> str:
+        if self.state.done:
+            header = "Final board:"
+        else:
+            header = f"Round {self.state.turn // 2 + 1}/{self.max_turns}: Player {player_id} to move."
+        return f"{header}\n{self.get_board_str()}"
 
     def get_board_str(self) -> str:
-        return self._generate_board_string()
-
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.state = ta.TwoPlayerState(num_players=num_players, seed=seed, max_turns=None)
-
-        self.current_turn = 0
-        self.bombs = []       # [x, y, timer]
-        self.explosions = []  # [x, y, timer]
-
-        self._initialize_grid()
-        self.player_positions = [[1, 1], [self.grid_size - 2, self.grid_size - 2]]
-
-        # Clear a pocket around each spawn so both players can actually stand and move.
-        for px, py in self.player_positions:
-            for dx in (-1, 0, 1):
-                for dy in (-1, 0, 1):
-                    x, y = px + dx, py + dy
-                    if 0 <= x < self.grid_size and 0 <= y < self.grid_size:
-                        if self.grid[y][x] == self.DESTRUCTIBLE_WALL:
-                            self.grid[y][x] = self.EMPTY
-            self.grid[py][px] = self.EMPTY  # spawn cell may be an indestructible pillar; force it clear
-
-        game_state = {
-            "current_board": self._generate_board_string(),
-            "valid_moves": "Valid moves: [up], [down], [left], [right], [stay], [bomb]",
-            "turn_info": f"Turn: 0/{self.max_turns}",
-        }
-        self.state.reset(
-            game_state=game_state,
-            player_prompt_function=self._generate_player_prompt,
+        gs = self.game_state
+        canvas = [row[:] for row in gs["grid"]]
+        for x, y, _ in gs["blasts"]:
+            canvas[y][x] = BLAST
+        for bomb in gs["bombs"]:
+            canvas[bomb["y"]][bomb["x"]] = BOMB
+        for pid, (x, y) in enumerate(gs["positions"]):
+            if gs["alive"][pid]:
+                canvas[y][x] = PLAYER_SYMBOLS[pid]
+        players = "; ".join(
+            f"Player {pid} at ({x}, {y})" + ("" if gs["alive"][pid] else " (eliminated)")
+            for pid, (x, y) in enumerate(gs["positions"])
         )
-        self.state.add_observation(message=self._generate_board_string(), observation_type=ta.ObservationType.GAME_BOARD)
-
-    def _initialize_grid(self):
-        self.grid = [[self.EMPTY for _ in range(self.grid_size)] for _ in range(self.grid_size)]
-        for i in range(self.grid_size):
-            for j in range(self.grid_size):
-                if (i == 0 or i == self.grid_size - 1 or j == 0 or j == self.grid_size - 1 or
-                        (i % 2 == 0 and j % 2 == 0)):
-                    self.grid[i][j] = self.INDESTRUCTIBLE_WALL
-        for i in range(1, self.grid_size - 1):
-            for j in range(1, self.grid_size - 1):
-                if self.grid[i][j] == self.EMPTY and random.random() < self.wall_density:
-                    self.grid[i][j] = self.DESTRUCTIBLE_WALL
-
-    def _generate_board_string(self) -> str:
-        render_grid = [row[:] for row in self.grid]
-        for i in range(self.grid_size):
-            for j in range(self.grid_size):
-                if render_grid[i][j] in self.PLAYER_SYMBOLS:
-                    render_grid[i][j] = self.EMPTY
-        for x, y, _ in self.bombs:
-            render_grid[y][x] = self.BOMB
-        for x, y, _ in self.explosions:
-            render_grid[y][x] = self.EXPLOSION
-        for i, pos in enumerate(self.player_positions):
-            if pos is not None:
-                render_grid[pos[1]][pos[0]] = self.PLAYER_SYMBOLS[i]
-
-        board_str = "+" + "-" * self.grid_size * 2 + "+\n"
-        for row in render_grid:
-            board_str += "|" + "".join(cell + " " for cell in row) + "|\n"
-        board_str += "+" + "-" * self.grid_size * 2 + "+"
-        return board_str
-
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        prompt = (
-            f"You are Player {player_id} in a turn-based Bomberman game.\n"
-            "Make your move using one of these commands (in square brackets):\n"
-            "[up] / [down] / [left] / [right] - move one cell\n"
-            "[stay] - stay in place\n"
-            "[bomb] - place a bomb at your current position\n"
-            f"Bombs explode after {self.bomb_timer} half-turns (about {self.bomb_timer // 2} of your own turns) "
-            f"with a blast radius of {self.bomb_radius}. Destructible walls (+) block and are destroyed by blasts; "
-            "indestructible walls (#) block everything.\n\n"
-            "You may include extra text, but mention the move command only once.\n\n"
-            f"Current board state:\n{game_state['current_board']}\n\n"
-            f"{game_state['turn_info']}\n\n"
-            "Legend:\n"
-            f"{self.PLAYER_SYMBOLS[0]} - Player 0\n"
-            f"{self.PLAYER_SYMBOLS[1]} - Player 1\n"
-            f"{self.INDESTRUCTIBLE_WALL} - Indestructible wall\n"
-            f"{self.DESTRUCTIBLE_WALL} - Destructible wall\n"
-            f"{self.BOMB} - Bomb\n"
-            f"{self.EXPLOSION} - Explosion\n\n"
-            f"{game_state['valid_moves']}"
+        bombs = "; ".join(
+            f"({b['x']}, {b['y']}) explodes after {b['timer']} more move{'' if b['timer'] == 1 else 's'}"
+            for b in gs["bombs"]
         )
-        return prompt
+        return f"{_format_grid(canvas)}\nPlayers: {players}\nBombs: {bombs or 'none'}"
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        player_id = self.state.current_player_id
-        self.state.add_observation(from_id=player_id, to_id=-1, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-
-        if not self._execute_player_move(player_id=player_id, action=action):
-            return self.state.step()  # invalid move already recorded
-
-        self._update_bombs_and_explosions()
-
-        if player_id == 1:  # a full round has completed
-            self.current_turn += 1
-            self.state.game_state["turn_info"] = f"Turn: {self.current_turn}/{self.max_turns}"
-            if self.current_turn >= self.max_turns:
-                alive = [i for i, p in enumerate(self.player_positions) if p is not None]
-                if len(alive) > 1:
-                    self.state.set_draw(reason=f"Maximum turns ({self.max_turns}) reached. The game ends in a draw.")
-
-        self._check_gameover()
-
-        self.state.game_state["current_board"] = self._generate_board_string()
-        self.state.add_observation(message=self._generate_board_string(), observation_type=ta.ObservationType.GAME_BOARD)
-        return self.state.step()
-
-    def _execute_player_move(self, player_id: int, action: str) -> bool:
-        match = self.move_pattern.search(action.strip())
+    # ------------------------------------------------------------------- moves
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        match = _ACTION_RE.match(action)
         if match is None:
-            self.state.set_invalid_move(reason=f"Player {player_id} did not provide a valid move, e.g. [up] or [bomb].")
-            return False
+            return self.invalid("Reply with exactly one command: up, down, left, right, stay or bomb.")
+        command = match.group(1).lower()
+        gs = self.game_state
+        x, y = gs["positions"][player_id]
 
-        if self.player_positions[player_id] is None:
-            self.state.set_invalid_move(reason=f"Player {player_id} has been eliminated and cannot move.")
-            return False
+        if command == "bomb":
+            if self._bomb_at(x, y):
+                return self.invalid(f"There is already a bomb on your cell ({x}, {y}).")
+            gs["bombs"].append({"x": x, "y": y, "timer": self.bomb_timer, "owner": player_id})
+            description = f"Player {player_id} dropped a bomb at ({x}, {y})."
+        elif command == "stay":
+            description = f"Player {player_id} stayed at ({x}, {y})."
+        else:
+            dx, dy = _MOVES[command]
+            nx, ny = x + dx, y + dy
+            blocker = self._blocker(nx, ny, player_id)
+            if blocker is not None:
+                return self.invalid(f"You cannot move {command} from ({x}, {y}): ({nx}, {ny}) is blocked by {blocker}.")
+            gs["positions"][player_id] = (nx, ny)
+            description = f"Player {player_id} moved {command} to ({nx}, {ny})."
 
-        move = match.group(1).lower()
-        x, y = self.player_positions[player_id]
+        self.broadcast(description, ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        return self._tick()
 
-        if move == "bomb":
-            if any(b[0] == x and b[1] == y for b in self.bombs):
-                self.state.set_invalid_move(reason=f"Player {player_id} tried to place a bomb where one already exists.")
-                return False
-            self.bombs.append([x, y, self.bomb_timer])
-            self.state.add_observation(message=f"Player {player_id} placed a bomb at ({x}, {y}).", observation_type=ta.ObservationType.GAME_MESSAGE)
-            return True
+    def on_turn_limit(self) -> ta.Outcome:
+        return self.draw(reason=f"The round limit ({self.max_turns}) was reached with both players alive. The game is a draw.")
 
-        deltas = {"up": (0, -1), "down": (0, 1), "left": (-1, 0), "right": (1, 0), "stay": (0, 0)}
-        dx, dy = deltas[move]
-        new_x, new_y = x + dx, y + dy
+    def _bomb_at(self, x: int, y: int) -> bool:
+        return any(bomb["x"] == x and bomb["y"] == y for bomb in self.game_state["bombs"])
 
-        if move == "stay":
-            self.state.add_observation(message=f"Player {player_id} stayed in place.", observation_type=ta.ObservationType.GAME_MESSAGE)
-            return True
+    def _blocker(self, x: int, y: int, player_id: int) -> Optional[str]:
+        gs = self.game_state
+        if not (0 <= x < self.grid_size and 0 <= y < self.grid_size):
+            return "the edge of the arena"
+        cell = gs["grid"][y][x]
+        if cell == INDESTRUCTIBLE_WALL:
+            return "an indestructible wall"
+        if cell == DESTRUCTIBLE_WALL:
+            return "a destructible wall"
+        if self._bomb_at(x, y):
+            return "a bomb"
+        other = 1 - player_id
+        if gs["alive"][other] and gs["positions"][other] == (x, y):
+            return f"Player {other}"
+        return None
 
-        if not (0 <= new_x < self.grid_size and 0 <= new_y < self.grid_size):
-            self.state.set_invalid_move(reason=f"Player {player_id} tried to move {move} but hit the boundary.")
-            return False
-        if self.grid[new_y][new_x] in (self.INDESTRUCTIBLE_WALL, self.DESTRUCTIBLE_WALL):
-            self.state.set_invalid_move(reason=f"Player {player_id} tried to move {move} but hit a wall.")
-            return False
-        if any(b[0] == new_x and b[1] == new_y for b in self.bombs):
-            self.state.set_invalid_move(reason=f"Player {player_id} tried to move {move} but a bomb is there.")
-            return False
-        if any(p is not None and p[0] == new_x and p[1] == new_y for i, p in enumerate(self.player_positions) if i != player_id):
-            self.state.set_invalid_move(reason=f"Player {player_id} tried to move {move} but the other player is there.")
-            return False
+    # -------------------------------------------------------------- explosions
+    def _tick(self) -> Optional[ta.Outcome]:
+        """End-of-move update: age blast markers, count bombs down and resolve explosions."""
+        gs = self.game_state
+        gs["blasts"] = [[x, y, moves - 1] for x, y, moves in gs["blasts"] if moves > 1]
+        exploding = [bomb for bomb in gs["bombs"] if bomb["timer"] <= 1]
+        gs["bombs"] = [dict(bomb, timer=bomb["timer"] - 1) for bomb in gs["bombs"] if bomb["timer"] > 1]
+        if not exploding:
+            return None
 
-        self.player_positions[player_id] = [new_x, new_y]
-        self.state.add_observation(message=f"Player {player_id} moved {move} to ({new_x}, {new_y}).", observation_type=ta.ObservationType.GAME_MESSAGE)
-        return True
+        # Bombs going off together are resolved against the walls as they stood
+        # before this tick, so the result does not depend on bomb order.
+        hit: Set[Tuple[int, int]] = set()
+        broken: Set[Tuple[int, int]] = set()
+        for bomb in exploding:
+            cells, walls = self._blast_area(bomb["x"], bomb["y"])
+            hit |= cells
+            broken |= walls
+            self.broadcast(f"Player {bomb['owner']}'s bomb at ({bomb['x']}, {bomb['y']}) exploded!", ta.ObservationType.GAME_MESSAGE)
+        for x, y in broken:
+            gs["grid"][y][x] = EMPTY
+        gs["blasts"] = [marker for marker in gs["blasts"] if (marker[0], marker[1]) not in hit]
+        gs["blasts"] += [[x, y, BLAST_MARKER_MOVES] for x, y in sorted(hit)]
 
-    def _update_bombs_and_explosions(self):
-        self.explosions = [[x, y, t - 1] for x, y, t in self.explosions if t > 1]
-        new_bombs = []
-        for x, y, timer in self.bombs:
-            if timer > 1:
-                new_bombs.append([x, y, timer - 1])
-            else:
-                self._create_explosion(x, y)
-                self.state.add_observation(message=f"Bomb at ({x}, {y}) exploded!", observation_type=ta.ObservationType.GAME_MESSAGE)
-        self.bombs = new_bombs
+        caught = [pid for pid in range(2) if gs["alive"][pid] and gs["positions"][pid] in hit]
+        for pid in caught:
+            gs["alive"][pid] = False
+            self.broadcast(f"Player {pid} was caught in the explosion and eliminated!", ta.ObservationType.GAME_MESSAGE)
+        if len(caught) == 2:
+            return self.draw(reason="Both players were caught in the same explosion. The game is a draw.")
+        if caught:
+            loser = caught[0]
+            return self.winner(1 - loser, reason=f"Player {1 - loser} wins - Player {loser} was caught in an explosion.")
+        return None
 
-    def _create_explosion(self, bomb_x: int, bomb_y: int):
-        self._add_explosion_cell(bomb_x, bomb_y)
-        for dx, dy in [(0, -1), (1, 0), (0, 1), (-1, 0)]:
-            for r in range(1, self.bomb_radius + 1):
-                x, y = bomb_x + dx * r, bomb_y + dy * r
-                if not (0 <= x < self.grid_size and 0 <= y < self.grid_size):
+    def _blast_area(self, bomb_x: int, bomb_y: int) -> Tuple[Set[Tuple[int, int]], Set[Tuple[int, int]]]:
+        """Cells covered by a bomb's blast, and the destructible walls it breaks."""
+        grid = self.game_state["grid"]
+        cells = {(bomb_x, bomb_y)}
+        walls = set()
+        for dx, dy in _MOVES.values():
+            for distance in range(1, self.bomb_radius + 1):
+                x, y = bomb_x + dx * distance, bomb_y + dy * distance
+                if not (0 <= x < self.grid_size and 0 <= y < self.grid_size) or grid[y][x] == INDESTRUCTIBLE_WALL:
                     break
-                if self.grid[y][x] == self.INDESTRUCTIBLE_WALL:
+                cells.add((x, y))
+                if grid[y][x] == DESTRUCTIBLE_WALL:
+                    walls.add((x, y))
                     break
-                self._add_explosion_cell(x, y)
-                if self.grid[y][x] == self.DESTRUCTIBLE_WALL:
-                    self.grid[y][x] = self.EMPTY  # destroy the wall; blast stops here
-                    break
-
-    def _add_explosion_cell(self, x: int, y: int):
-        self.explosions.append([x, y, 2])  # visible for 2 half-turns
-        for player_id, pos in enumerate(self.player_positions):
-            if pos is not None and pos[0] == x and pos[1] == y:
-                self.player_positions[player_id] = None
-                self.state.add_observation(message=f"Player {player_id} was caught in an explosion and eliminated!", observation_type=ta.ObservationType.GAME_MESSAGE)
-
-    def _check_gameover(self):
-        if self.state.done:
-            return
-        alive = [i for i, pos in enumerate(self.player_positions) if pos is not None]
-        if len(alive) == 0:
-            self.state.set_draw(reason="Both players were eliminated in the same blast. The game ends in a draw.")
-        elif len(alive) == 1:
-            winner_id = alive[0]
-            self.state.set_winner(player_id=winner_id, reason=f"Player {winner_id} wins - the other player was eliminated.")
+        return cells, walls

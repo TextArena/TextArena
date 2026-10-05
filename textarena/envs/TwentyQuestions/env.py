@@ -1,44 +1,175 @@
-import re, random, json, os, importlib.resources
-from typing import Any, Dict, Optional, Tuple
+import copy
+import importlib.resources
+import json
+import os
+import re
+import unicodedata
+from typing import Any, Dict, List, Optional, Union
+
 import textarena as ta
 from textarena.envs.TwentyQuestions.renderer import create_board_str
+from textarena.utils.jury import DEFAULT_JUDGE_MODEL
 
-class TwentyQuestionsEnv(ta.Env):
-    def __init__(self, hardcore: Optional[bool]=False, max_turns: int=21):
-        """
-        Args:
-            hardcore: Whether to use more challenging words
-            max_turns: Maximum number of turns allowed in the game
-        """
-        self.hardcore = hardcore
-        self.max_turns = max_turns
+_ARTICLES = frozenset({"a", "an", "the"})
+GAMEMASTER_SYSTEM_PROMPT = (
+    "You are the impartial game master of a 20 Questions game. You know the secret target. Answer each question "
+    "truthfully about the target, replying with exactly one of the allowed answers and nothing else."
+)
 
-        # Initialize the gamemaster
-        self.gamemaster = ta.agents.OpenRouterAgent(model_name="openai/gpt-4o")
+
+class TwentyQuestionsEnv(ta.GameEnv):
+    min_players = 1
+    max_players = 1
+    mdp_includes_actions = False
+    snapshot_excluded_attributes = ("gamemaster",)
+    max_action_chars = 4_000
+    max_gamemaster_response_chars = 256
+    _GUESS_RE = re.compile(r"^\s*guess(?:\s+|:\s*)(?P<guess>.+?)\s*$", re.IGNORECASE)
+    _EMPTY_GUESS_RE = re.compile(r"^\s*guess\s*:?\s*$", re.IGNORECASE)
+    _GAMEMASTER_RESPONSE_RE = re.compile(
+        r"""^\s*[*_`]*(?:answer[*_`]*\s*:\s*[*_`]*\s*)?[*_`"'“”]*(?P<answer>yes|no|i\s+don['’]t\s+know)"""
+        r"""[*_`"'“”]*[.!]?[*_`"'“”]*\s*$""",
+        re.IGNORECASE,
+    )
+
+    hardcore = ta.Param(
+        False, "Draw from the hardcore list (150 uncommon words such as `astrolabe`, `sommelier`, or `catacombs`) "
+               "instead of the basic list (257 everyday words such as `library`, `nurse`, or `banana`).",
+    )
+    max_turns = ta.Param(
+        21, "The total number of turns. The player may ask `max_turns - 1` questions, and the final turn is reserved "
+            "for the guess.", min=2,
+    )
+    gamemaster = ta.Param(
+        None, "The game master that answers the questions, called with a prompt string and returning `Yes`, `No`, or "
+              "`I don't know`. Inject one to play offline or with a different model; without one, questions go to "
+              f"OpenRouter `{DEFAULT_JUDGE_MODEL}`.",
+        type=object, check=callable, rule="a callable",
+    )
+    words_path = ta.Param(
+        None, "An alternative word file with `basic` and `hardcore` sections, each mapping theme names to lists of "
+              "words. Without it, the bundled `twenty_questions_words.json` is used.",
+        type=str,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.gamemaster_options = ["Yes", "No", "I don't know"]
-        self.gamemaster_context = None
-        self.gamemaster_history = []
+        self.word_list = self._load_words(self.words_path)
 
-        # Load the word list
-        self.word_list = self._load_words()
-        
     def _load_words(self, words_path: Optional[str] = None):
         try:
             if words_path is not None:
-                # Use provided path
-                if not os.path.exists(words_path): raise FileNotFoundError(f"Words data file not found at: {words_path}")
-                with open(words_path, "r", encoding="utf-8") as file: word_data = json.load(file)
-            else:
-                # Use package resource
-                with importlib.resources.files('textarena.envs.TwentyQuestions').joinpath('twenty_questions_words.json').open('r') as file:
+                if not os.path.exists(words_path):
+                    raise FileNotFoundError(f"Words data file not found at: {words_path}")
+                with open(words_path, "r", encoding="utf-8") as file:
                     word_data = json.load(file)
-            category = "hardcore" if self.hardcore else "basic"
-            words = word_data.get(category, [])
-            if not words: raise ValueError(f"No words found for difficulty level '{category}'.")
-            return words
-        except Exception as e: raise FileNotFoundError(f"Failed to load words data: {str(e)}")
-        
+            else:
+                with importlib.resources.files("textarena.envs.TwentyQuestions").joinpath(
+                    "twenty_questions_words.json"
+                ).open("r", encoding="utf-8") as file:
+                    word_data = json.load(file)
+        except FileNotFoundError:
+            raise
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ValueError(f"Failed to load words data: {exc}") from exc
+
+        category = "hardcore" if self.hardcore else "basic"
+        words = word_data.get(category) if isinstance(word_data, dict) else None
+        if not isinstance(words, dict) or not words:
+            raise ValueError(f"No word categories found for difficulty level '{category}'.")
+        if any(
+            not isinstance(theme, str)
+            or not theme.strip()
+            or not isinstance(theme_words, list)
+            or not theme_words
+            or any(not isinstance(word, str) or not word.strip() for word in theme_words)
+            or len({word.strip().casefold() for word in theme_words}) != len(theme_words)
+            for theme, theme_words in words.items()
+        ):
+            raise ValueError(f"Invalid word data for difficulty level '{category}'.")
+        return words
+
     def get_board_str(self): return create_board_str(game_state=self.state.game_state)
+
+    def render(self, player_id: int) -> str:
+        return self.get_board_str()
+
+    def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
+        if not isinstance(action, str) or len(action) > self.max_action_chars:
+            return None
+        return super().action_echo_target(player_id, action)
+
+    @staticmethod
+    def _copy_resource(resource):
+        try:
+            return copy.deepcopy(resource), True
+        except Exception:
+            return None, False
+
+    def _restore_gamemaster_checkpoint(self, original, checkpoint, copied: bool):
+        if copied:
+            if (
+                original is not None
+                and checkpoint is not None
+                and checkpoint is not original
+                and type(original) is type(checkpoint)
+                and hasattr(original, "__dict__")
+                and hasattr(checkpoint, "__dict__")
+            ):
+                original.__dict__.clear()
+                original.__dict__.update(copy.deepcopy(checkpoint.__dict__))
+                self.gamemaster = original
+            else:
+                self.gamemaster = checkpoint
+        elif original is None:
+            self.gamemaster = None
+
+    def snapshot(self) -> Dict[str, Any]:
+        snapshot = super().snapshot()
+        resource, copied = self._copy_resource(self.gamemaster)
+        snapshot["gamemaster_resource"] = {"copied": copied, "value": resource}
+        return snapshot
+
+    def restore(self, snapshot: Dict[str, Any]):
+        super().restore(snapshot)
+        resource = snapshot.get("gamemaster_resource", {})
+        if resource.get("copied"):
+            self.gamemaster = copy.deepcopy(resource["value"])
+
+    # Convenience accessors; the per-episode data lives in game_state.
+    @property
+    def game_theme(self) -> str:
+        return self.game_state["game_theme"]
+
+    @property
+    def game_word(self) -> str:
+        return self.game_state["target_word"]
+
+    @property
+    def gamemaster_context(self) -> str:
+        return self.game_state["gamemaster_context"]
+
+    @property
+    def gamemaster_history(self) -> List:
+        return self.game_state["gamemaster_history"]
+
+    def _get_gamemaster(self):
+        if self.gamemaster is None:
+            try:
+                self.gamemaster = ta.agents.OpenRouterAgent(
+                    model_name=DEFAULT_JUDGE_MODEL, system_prompt=GAMEMASTER_SYSTEM_PROMPT
+                )
+            except (ImportError, ValueError) as exc:
+                raise RuntimeError(
+                    'TwentyQuestions questions require OpenRouter: pip install "textarena[agents]" '
+                    "and set OPENROUTER_API_KEY, or inject a gamemaster."
+                ) from exc
+        return self.gamemaster
+
+    def _ask_gamemaster(self, prompt: str) -> Any:
+        return self._get_gamemaster()(prompt)
+
     def get_gamemaster_response(self, action: str) -> str:
         # Validate gamemaster state
         if self.gamemaster_context is None: raise ValueError("Gamemaster context is not set.")
@@ -46,51 +177,107 @@ class TwentyQuestionsEnv(ta.Env):
         if self.gamemaster_options is None: raise ValueError("Gamemaster options are not set.")
         options = ", ".join(f"'{opt}'" for opt in self.gamemaster_options) # Format available response options
         history = "\n".join(f"Q: {q}\nA: {a}" for q, a in self.gamemaster_history) # Construct conversation history
-        prompt = (f"{self.gamemaster_context}\n{history}\n\nQ: {action}\nOptions: {options}\n\nPlease respond with the most appropriate option.") # Create prompt
-        response = self.gamemaster(prompt).strip() # Get response from the gamemaster agent
-        # Validate response
-        if any(option.lower() in response.lower() for option in self.gamemaster_options): self.gamemaster_history.append((action, response))  # Store valid responses
-        else: self.gamemaster_history.append((action, "I'm sorry, I don't understand. Please try asking again."))  # Log fallback response
-        return response
-
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.state = ta.SinglePlayerState(num_players=num_players, seed=seed, max_turns=self.max_turns)
-        ## load the game word
-        self.game_theme = random.choice(list(self.word_list.keys()))
-        self.game_word = random.choice(self.word_list[self.game_theme])
-        ## update the gamemaster
-        self.gamemaster_context = (
-            f"You are the gamemaster for the game of '20 Questions'.\n"
-            f"You will provide responses to the players' questions that guides them into guessing the target word: {self.game_word}\n"
+        prompt = (f"{self.gamemaster_context}\n{history}\n\nQ: {action}\nOptions: {options}\n\nReply with exactly one of the options.") # Create prompt
+        response = self.ask(self._ask_gamemaster, prompt)
+        if not isinstance(response, str) or len(response) > self.max_gamemaster_response_chars:
+            raise ValueError("gamemaster returned an invalid answer")
+        match = self._GAMEMASTER_RESPONSE_RE.fullmatch(response)
+        if match is None:
+            raise ValueError("gamemaster returned an invalid answer")
+        answer = re.sub(r"\s+", " ", match.group("answer")).replace("’", "'").casefold()
+        normalized = next(
+            option for option in self.gamemaster_options if answer == option.casefold()
         )
-        self.state.reset(game_state={"target_word": self.game_word, "rendered_text": f"Game word: {self.game_word}"}, player_prompt_function=self._prompt)
-    
-    def _prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
+        self.gamemaster_history.append((action, normalized))
+        return normalized
+
+    def setup(self) -> Dict[str, Any]:
+        ## load the game word
+        game_theme = self.rng.choice(list(self.word_list.keys()))
+        game_word = self.rng.choice(self.word_list[game_theme])
+        ## the gamemaster context
+        gamemaster_context = (
+            f"You are the game master of a game of 20 Questions.\n"
+            f"The secret target is '{game_word}', from the theme '{game_theme}'. The player knows the theme but not the target.\n"
+            "Answer the player's latest question truthfully about the target with 'Yes' or 'No'. Reply 'I don't know' only "
+            "when the question cannot be answered with yes or no or the answer is genuinely uncertain. Do not add "
+            "anything else to your answer.\n"
+        )
+        return {
+            "target_word": game_word, "game_theme": game_theme, "rendered_text": "Game word: ???",
+            "gamemaster_context": gamemaster_context, "gamemaster_history": [], "history": [],
+            "question_limit": self.max_turns - 1, "target_revealed": False,
+        }
+
+    def prompt(self, player_id: int) -> str:
         return (
             f"You are Player {player_id}. You are playing 20 Questions ({'Hardcore' if self.hardcore else 'Basic'}).\n"
-            f"The gamemaster has chosen an object that can be one or two words. This object is related to {self.game_theme}. You have to guess this object by asking yes-or-no questions.\n"
-            "The game will last for a maximum of 20 questions. After 20 questions, the gamemaster will prompt you to make a guess.\n"
-            "You may ask your question in any manner, so long they are not wrapped in square brackets.\n"
-            "Then, to make your final word guess, ensure that you wrap it with square brackets, e.g. [plane], [diving bell].\n"
+            f"The gamemaster has chosen a secret target of one or two words from the theme '{self.game_theme}'. You have to guess this target by asking yes-or-no questions.\n"
+            f"The game will last for a maximum of {self.max_turns - 1} questions. After that, the gamemaster will prompt you to make a guess.\n"
+            "You may ask your question in any manner; any message containing a '?' is treated as a question.\n"
+            "To make your final word guess, at any time, reply with 'guess <word>', e.g. 'guess plane', 'guess diving bell'. "
+            "You get exactly one guess and it ends the game; case, punctuation, spacing and a leading 'a', 'an' or 'the' are ignored, "
+            "but singular and plural forms are different words (a target such as 'scissors' must be guessed exactly).\n"
             "As you play, the history of your questions and gamemaster's responses will be displayed."
         )
-    
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        player_id = self.state.current_player_id
-        self.state.add_observation(from_id=player_id, to_id=-1, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        action_match = re.compile(r"\[([a-zA-Z\s]+)\]").search(action) # e.g. [diving bell]
-        if not action_match or (action_match and '?' in action): ## if the action is not a guess, or if it is a action but contains a question mark, then it is a question
-            gamemaster_response = self.get_gamemaster_response(action)
-            if "history" not in self.state.game_state: self.state.game_state["history"] = []
-            self.state.game_state["history"].append((action, gamemaster_response))
-            if self.state.turn == self.state.max_turns-2: gamemaster_response += "\nYou have run out of questions. What is your final guess?"
-            self.state.add_observation(from_id=ta.GAME_ID, to_id=-1, message=gamemaster_response, observation_type=ta.ObservationType.GAME_MESSAGE)
-        else: ## if the action is a guess
-            action_text = action_match.group(1).lower()
-            if self.game_word in action_text: self.state.set_outcome(reward=1, reason=f"Congratulations! You guessed the word.")
-            else: self.state.set_outcome(reward=0, reason=f"Invalid guess. You guessed incorrectly.")
-            self.state.game_state["rendered_text"] = f"Game word: {self.game_word}"
-        if self.state.check_turn_limit() and not self.state.done: self.state.set_outcome(reward=0, reason=f"The turn limit has been reached")
-        return self.state.step()
-    
-    
+
+    @staticmethod
+    def _answer_key(text: str) -> str:
+        """Letters and digits only, without accents or a leading article."""
+        decomposed = unicodedata.normalize("NFKD", unicodedata.normalize("NFKC", text).casefold())
+        tokens = re.findall(r"[^\W_]+", "".join(char for char in decomposed if not unicodedata.combining(char)))
+        if len(tokens) > 1 and tokens[0] in _ARTICLES:
+            tokens = tokens[1:]
+        return "".join(tokens)
+
+    def _parse_guess(self, action: str) -> Optional[str]:
+        """The guessed text, or None when the message is a question."""
+        if "?" in unicodedata.normalize("NFKC", action):
+            return None  # e.g. "Guess what, is it alive?" must not end the game
+        match = self._GUESS_RE.fullmatch(" ".join(action.split()))
+        return match.group("guess") if match else None
+
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        if not action.strip():
+            return self.invalid("Ask a non-empty question or submit 'guess <word>'.")
+        action = self.strip_role_tags(action)
+        if self._EMPTY_GUESS_RE.fullmatch(action):
+            return self.invalid("A guess must include a word after 'guess'.")
+        guess = self._parse_guess(action)
+        if guess is None:
+            question = " ".join(action.split())
+            if not re.search(r"[^\W_]", question):
+                return self.invalid("Ask a yes-or-no question in words or submit 'guess <word>'.")
+            if self.state.turn >= self.max_turns - 1:
+                return self.invalid("The question budget is exhausted; submit 'guess <word>'.")
+            original_gamemaster = self.gamemaster
+            checkpoint, copied = self._copy_resource(original_gamemaster)
+            try:
+                gamemaster_response = self.get_gamemaster_response(question)
+            except Exception as error:
+                self._restore_gamemaster_checkpoint(original_gamemaster, checkpoint, copied)
+                return self.retryable("The gamemaster could not answer the question.", error)
+            self.game_state["history"].append((question, gamemaster_response))
+            if self.state.turn == self.max_turns - 2:
+                gamemaster_response += "\nYou have run out of questions. What is your final guess?"
+            self.broadcast(gamemaster_response, ta.ObservationType.GAME_MESSAGE)
+            return None
+        ## the action is a guess
+        guess_key = self._answer_key(guess)
+        if not guess_key:
+            return self.invalid("A guess must include a word after 'guess'.")
+        self.game_state["target_revealed"] = True
+        self.game_state["rendered_text"] = f"Game word: {self.game_word}"
+        if guess_key == self._answer_key(self.game_word):
+            return self.outcome({0: 1}, reason="Congratulations! You guessed the word.")
+        return self.outcome({0: 0}, reason=f"Wrong guess. The word was '{self.game_word}'.")
+
+    def on_turn_limit(self) -> ta.Outcome:
+        self.game_state["target_revealed"] = True
+        self.game_state["rendered_text"] = f"Game word: {self.game_word}"
+        return self.outcome({0: 0}, reason="The turn limit has been reached")
+
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        self.game_state["target_revealed"] = True
+        self.game_state["rendered_text"] = f"Game word: {self.game_word}"
+        return super().on_invalid_limit(player_id, reason)

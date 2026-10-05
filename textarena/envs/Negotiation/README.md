@@ -1,129 +1,82 @@
-# Negotiation Environment Documentation
+# Negotiation
 
-## Overview
-**Negotiation** is a multi-player strategic trading game where players manage resources with different personal valuations. Players can communicate openly or privately, make targeted trade offers, and accept or deny proposals from others. The goal is to maximize the total value of your resource portfolio through strategic trading and negotiation. This environment supports flexible communication options and a robust trading system for complex multi-player interactions.
+Players trade five resources that each of them values differently, using public messages, private messages, and
+targeted trade offers; whoever holds the most valuable inventory when the turns run out wins. It tests negotiation,
+persuasion, and trading under private valuations.
 
-## Action Space
+<!-- BEGIN GENERATED: variants -->
+**Players:** 2–15
 
-- **Format:** Actions are strings that can include multiple commands in a single turn, each in its own format:
-  - **Broadcast:** `[Broadcast: message]` or `[Broadcast message]` or `[Broadcast] message`
-  - **Private Message:** `[Whisper to X: message]` where X is a player ID
-  - **Trade Offer:** `[Offer to X: A B -> C D]` where X is a player ID, and A B -> C D represents resources offered and requested
-  - **Accept/Deny Offer:** `[Accept #X]` or `[Deny #X]` where X is an offer ID
+**`-mdp` observation:** the prompt and the full transcript including every player action
 
-- **Examples:**
-  - Send a public message: `[Broadcast: I have excess Wheat to trade]`
-  - Send a private message: `[Whisper to 2: Would you trade your Wood for my Wheat?]`
-  - Make a trade offer: `[Offer to 3: 2 Wheat, 1 Ore -> 3 Wood]`
-  - Accept a pending offer: `[Accept #5]`
-  - Combine multiple actions: `[Broadcast: Looking for Wood] [Offer to 1: 2 Wheat -> 1 Wood]`
+| Env ID | Parameters |
+| --- | --- |
+| `Negotiation-v1` | `turn_multiple=8` |
 
-- **Notes:** Players can include multiple commands in a single response, allowing for complex strategic interactions in a single turn.
+Append `-mdp` to any ID for the state-complete variant (e.g. `Negotiation-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Negotiation-v1", turn_multiple=...)`.
+<!-- END GENERATED: variants -->
 
-## Observation Space
+## Rules
 
-**Reset Observations**
-On reset, each player receives a prompt containing their resource information and personal valuations. For example:
+- Every player starts with a random 5–25 units of each resource: Wheat, Wood, Sheep, Brick, and Ore.
+- Each player privately values every resource at a random amount within ±20% of its base value (Wheat 5, Wood 10,
+  Sheep 15, Brick 25, Ore 40), limited to the range 5–40.
+- Players take turns in order, starting with Player 0. In one turn a player may send any number of messages, make trade
+  offers, and accept or deny offers addressed to them.
+- An offer proposes giving some resources in exchange for others and stays pending until its recipient accepts or
+  denies it. Accepting swaps the resources immediately. If the offering player no longer holds what they offered, the
+  offer is cancelled instead.
+- The game ends after `turn_multiple` turns per player (`num_players × turn_multiple` turns in total). Each inventory is
+  then valued at its owner's private valuations, and the highest total wins.
 
-```plaintext
-You are Player 0 in a multi-player game of Negotiation with 4 players.
-You have:
-- 12 x Wheat (value: 6 each)
-- 18 x Wood (value: 8 each)
-- 8 x Sheep (value: 17 each)
-- 10 x Brick (value: 23 each)
-- 7 x Ore (value: 35 each)
+## Actions
 
-You can broadcast messages, privately message someone, or make trade offers.
-You can also accept or deny any offers you received previously.
-Your personal valuations are shown above; your goal is to maximize your total resource value.
-Available actions:
-  '[Broadcast: Some message]' - Send a message to all players
-  '[Whisper to X: Some message]' - Send a private message to a specific player
-  '[Offer to X: 2 Wheat -> 3 Wood]' - Make a trade offer to a specific player
-  '[Accept <x>]' or '[Deny <x>]' - Accept or Deny a trade offer
-You may combine multiple tokens in a single turn if you like.
-Game ends after 12 turns.
-```
+Put each command on its own line or separate commands with semicolons; commands are case-insensitive. A semicolon
+only starts a new command when a command name follows it, so messages may contain semicolons:
+`Broadcast: Wheat for sale; Ore wanted` is a single message.
 
-**Step Observations**
-During gameplay, players receive various observations based on actions taken. For example:
+- `Broadcast: <message>` sends a message to every player, e.g. `Broadcast: I have spare Wheat, who needs some?`
+- `Whisper <player id>: <message>` sends a private message, e.g. `Whisper 2: I can beat any offer for your Ore.`
+  (`Whisper to 2:` also works).
+- `Offer to <player id>: <items> -> <items>` offers the items before the arrow in exchange for the items after it, e.g.
+  `Offer to 3: 2 Wheat, 1 Ore -> 3 Wood`. Items are `<quantity> <resource>` separated by commas or `and`.
+- `Accept #<offer id>` or `Deny #<offer id>` answers an offer addressed to you, e.g. `Accept #5`.
 
-```plaintext
-[Player 1] [Broadcast: I have excess Wheat and need Wood. Anyone interested in trading?]
-[GAME] (Broadcast) Player 1 says: I have excess Wheat and need Wood. Anyone interested in trading?
-[Player 2] [Whisper to 1: I can trade 3 Wood for 4 Wheat]
-[GAME] (Private) Player 2 says: I can trade 3 Wood for 4 Wheat
-[Player 1] [Offer to 2: 4 Wheat -> 3 Wood]
-[GAME] Offer #1 created: Player 1 -> Player 2.
-[GAME] You have a new offer [ID #1] from Player 1: 4 Wheat -> 3 Wood
-You can [accept #1] or [deny #1] it.
-[Player 2] [Accept #1]
-[GAME] Player 2 ACCEPTED Offer #1 from Player 1: 4 Wheat -> 3 Wood
-```
+Example turn: `Whisper 1: Deal if you add a Brick.; Deny #4; Offer to 1: 3 Sheep -> 1 Brick, 1 Ore`
 
-## Gameplay
+A reply is rejected as a whole if any part of it is not a complete command (including plain prose), if it messages or
+makes an offer to yourself or a non-existent player, if an offer names an unknown resource or more than you hold, or if
+it answers an offer that does not exist or is addressed to someone else, or that you cannot afford to accept.
 
-- **Players:** 2-15 players
-- **Initial Setup:** Each player starts with random amounts of five different resources (Wheat, Wood, Sheep, Brick, Ore)
-- **Resource Valuation:** Each player has personal valuations for each resource that vary slightly from base market values
-- **Turns:** Players take turns communicating, making offers, and accepting/denying pending offers
-- **Objective:** Maximize the total value of your resource portfolio by the end of the game
-- **Maximum Turns:** Configurable, default is 3 turns per player (e.g., 12 turns for 4 players)
+## Observations
 
-## Key Rules
-
-1. **Resource Management:**
-   - Each player begins with random amounts of five different resources
-   - Each player has unique personal valuations for each resource
-   - Players can only trade resources they possess in sufficient quantities
-
-2. **Communication:**
-   - **Broadcasting:** Send messages visible to all players
-   - **Private Messaging:** Send messages only visible to a specific player
-   - Both communication types do not directly affect game state but facilitate negotiations
-
-3. **Trading System:**
-   - **Making Offers:** Specify resources to give and receive with a target player
-   - **Accepting Offers:** Target player can accept if both parties have the required resources
-   - **Denying Offers:** Target player can deny any offer directed to them
-   - **Automatic Cancellation:** Offers are canceled if the offering player no longer has sufficient resources
-
-4. **Valid Moves:**
-   - Players can perform multiple actions in a single turn (broadcast, whisper, offer, accept, deny)
-   - Trade offers must specify valid resource types and quantities
-   - Only the player to whom an offer was made can accept or deny it
-
-5. **Winning Conditions:**
-   - **Win:** The player with the highest total resource value at game end
-   - **Draw:** Multiple players tied for the highest resource value
-   - **Loss:** Having a lower total resource value than another player at game end
-
-6. **Game Termination:**
-   - The game concludes after a predetermined number of turns (default: players × turn_multiple)
-   - Final scores are calculated based on each player's personal valuations of their resources
+Each player first receives their inventory with their own valuation of every resource, the commands, and the turn
+limit. Broadcasts reach everyone as `(Broadcast) Player X says: ...`, while whispers reach only their target as
+`(Private) Player X says: ...`; raw replies are echoed only to their author. Everyone is told when an offer is created
+and between whom, but only the recipient sees its contents, together with its id. Acceptances (including the traded
+resources), denials, and cancellations are announced to everyone. Inventories are never re-sent, so players have to
+track their own holdings, and other players' valuations and inventories are never shown.
 
 ## Rewards
 
-| Outcome     | Reward for Winner | Reward for Others |
-|-------------|:-----------------:|:-----------------:|
-| **Win**     | `+1`              | `-1`              |
-| **Draw**    | `0`               | `0`               |
-| **Invalid** | `-1`              | `0`               |
+| Outcome | Reward |
+| --- | --- |
+| Single highest inventory value at the turn limit | Winner `+1`, everyone else `-1` |
+| Tie for the highest inventory value | Everyone `0` |
+| Second consecutive invalid move | The turn is forfeited and counts toward the turn limit; no elimination or direct penalty |
 
 ## Parameters
 
-- `turn_multiple` (`int`, default: `3`):
-  - **Description:** Sets the number of turns per player
-  - **Impact:** Higher values provide more opportunities for negotiation and trading
+<!-- BEGIN GENERATED: parameters -->
+- `turn_multiple` (default `3`): The turns per player, so the game lasts `num_players × turn_multiple` turns. Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
-## Variants
+## Notes
 
-| Env-id                   | turn_multiple |
-|--------------------------|:-------------:|
-| `Negotiation-v0`         | `8`           |
-| `Negotiation-v0-long`    | `15`          |
-
-
-### Contact
-If you have questions or face issues with this specific environment, please reach out directly to guertlerlo@cfar.a-star.edu.sg
+- The winner is the player with the highest absolute inventory value, not the largest gain, so the random starting
+  inventories strongly influence the result.
+- A line break always ends a command, so a message cannot span several lines. A semicolon followed by a command name
+  also starts a new command even inside a message (`Broadcast: I need Ore; offer me anything` is rejected as a
+  malformed `Offer`), which keeps a mistyped whisper or offer from being broadcast by accident.
+- Text inside a message is never interpreted as commands; for example, `Broadcast: I would never Accept #1` does not
+  accept offer #1.

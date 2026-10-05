@@ -1,5 +1,5 @@
-import re, random, string
-from math import sqrt
+import math
+import string
 from enum import Enum, auto
 from collections import Counter
 from dataclasses import dataclass, field
@@ -9,8 +9,6 @@ from typing import Dict, List, Tuple, Optional, Set
 HexCoord = Tuple[int, int] # (q, r)   axial
 CornerID = Tuple[HexCoord, HexCoord, HexCoord]  # sorted triple of tiles
 EdgeID = Tuple[CornerID, CornerID] # canonical edge key
-InterCoord = Tuple[int, int, int] # cube coords, uniquely identifies a corner
-EdgeCoord = Tuple[InterCoord, InterCoord]
 
 AXIAL_DIRS: list[HexCoord] = [(+1,  0), (+1, -1), ( 0, -1), (-1,  0), (-1, +1), ( 0, +1)]
 CORNER_DIR_PAIRS = [(2, 3), (1, 2), (0, 1), (5, 0), (4, 5), (3, 4)]
@@ -35,7 +33,6 @@ class Hex:
     terrain: Terrain
     token: Optional[int] # None for desert
     has_robber: bool = False
-    def produces(self) -> Optional[str]: return None if self.terrain is Terrain.DESERT else self.terrain.value
 
 @dataclass
 class Corner:
@@ -70,9 +67,9 @@ class Player:
 COST_ROAD = Counter({Terrain.BRICK: 1, Terrain.WOOD: 1})
 COST_SETTLEMENT = Counter({Terrain.BRICK: 1, Terrain.WOOD: 1, Terrain.WHEAT: 1, Terrain.SHEEP: 1})
 COST_CITY = Counter({Terrain.ORE: 3, Terrain.WHEAT: 2})
-
-# regex helpers
-_desc_re = re.compile(r"\s*(\d+)?\s*([a-zA-Z]+)\s*", re.I)
+MAX_ROADS = 15
+MAX_SETTLEMENTS = 5
+MAX_CITIES = 4
 
 def corner_ids_of_tile(q: int, r: int) -> List[CornerID]:
     """ Return the six CornerIDs (triples of axial coords) for tile (q,r) """
@@ -84,19 +81,16 @@ def corner_ids_of_tile(q: int, r: int) -> List[CornerID]:
         corners.append(triple)
     return corners
 
-def _parse_hex_descriptor(text: str) -> tuple[Terrain, Optional[int]] | None:
-    """ Accepts strings like '8 wood', 'wood 8', 'desert'. Returns (Terrain, token)  where token is int or None. """
-    text = text.lower()
-    if text.strip() == "desert": return Terrain.DESERT, None
-    m = _desc_re.fullmatch(text)
-    if not m: return None
-    a, b = m.group(1), m.group(2)
-    if a and b:                      # '8 wood' or 'wood 8'
-        token = int(a) if a.isdigit() else int(b)
-        word  = b if a.isdigit() else a
-    else: return None # just 'wood' or just '8'  (disallow)
-    try:                return Terrain[word.upper()], token
-    except KeyError:    return None
+_CORNER_NAMES = ("right", "upper-right", "upper-left", "left", "lower-left", "lower-right")
+
+def _corner_direction(cid: CornerID, tile: HexCoord) -> str:
+    """Which corner of `tile` `cid` is, as drawn: flat-top hexes, q growing to the right and r upwards."""
+    x = y = 0.0
+    for q, r in cid:
+        dq, dr = q - tile[0], r - tile[1]
+        x += 1.5 * dq
+        y += math.sqrt(3) * (dr + dq / 2)
+    return _CORNER_NAMES[round(math.degrees(math.atan2(y, x)) / 60) % 6]
 
 def _corner_descr(cid: CornerID, board: "Board") -> str:
     parts = []
@@ -105,6 +99,9 @@ def _corner_descr(cid: CornerID, board: "Board") -> str:
         if hex_ is None: continue # sea / harbour
         tok = "/" if hex_.terrain is Terrain.DESERT else hex_.token
         parts.append(f"{tok} {hex_.terrain.value}")
+    if len(parts) == 1:  # a coastal corner touching one tile is named by its position on that tile
+        tile = next(t for t in cid if t in board.hexes)
+        parts[0] += f" ({_corner_direction(cid, tile)} corner)"
     return "{" + ", ".join(parts) + "}" if parts else "{edge}"
 
 def _encode(n: int) -> str:
@@ -155,21 +152,29 @@ class Board:
             neigh.append(b if a == cid else a)
         return neigh
 
-    def _corner_from_triplet(self, descriptors: list[str]) -> tuple[CornerID | None, str | None]:
-        """Return CornerID matching the three token/terrain descriptors."""
-        if len(descriptors) != 3:
-            return None, "Need exactly three hex descriptors"
-        parsed = []
-        for txt in descriptors:
-            pair = _parse_hex_descriptor(txt)
-            if pair is None:
-                return None, f"Cannot parse descriptor '{txt}'"
-            parsed.append(pair)
-        key = frozenset(parsed)
-        cid = self._corner_lookup.get(key)
-        if cid is None:
-            return None, "No corner matches those three hexes"
-        return cid, None
+    def _piece_count(self, player: Player, piece: Piece) -> int:
+        return sum(
+            corner.owner is player.color and corner.piece is piece
+            for corner in self.corners.values()
+        )
+
+    def _road_count(self, player: Player) -> int:
+        return sum(edge.owner is player.color for edge in self.edges.values())
+
+    def _road_is_connected(self, player: Player, eid: EdgeID) -> bool:
+        """A road connects at an endpoint unless an opponent building blocks it."""
+        for cid in eid:
+            corner = self.corners[cid]
+            if corner.owner is player.color:
+                return True
+            if corner.owner is not None:
+                continue
+            if any(
+                self.edges[adjacent].owner is player.color
+                for adjacent in self._adjacent_edges(cid)
+            ):
+                return True
+        return False
 
     @classmethod
     def build_standard(cls) -> "Board":
@@ -205,21 +210,6 @@ class Board:
                     else:             edge.orient = 'B' #'B'  # ╲
                     edge.i = i
 
-
-        board._corner_lookup = {}
-        for cid in board.corners:
-            triple = []
-            for coord in cid:
-                if coord not in board.hexes: # sea edge → skip
-                    break
-                terr, tok = board.hexes[coord].terrain, board.hexes[coord].token
-                triple.append((terr, tok))
-            else: # only if all 3 on-board
-                key = frozenset(triple)
-                # duplicates should not occur; assert for safety
-                assert key not in board._corner_lookup, "non-unique triplet!"
-                board._corner_lookup[key] = cid
-
         # 4) players
         for col in Color:                       # BLUE, ORANGE, WHITE, RED
             board.players[col] = Player(color=col)
@@ -252,9 +242,9 @@ class Board:
         return board
     
 
-    def roll_dice(self) -> tuple[str, dict[Color, dict[Terrain, int]]]: # TODO add 7 roll
+    def roll_dice(self, rng) -> tuple[str, dict[Color, dict[Terrain, int]]]: # TODO add 7 roll
         """Roll 2 d6, distribute resources, return roll-string & payout map."""
-        d1, d2 = random.randint(1, 6), random.randint(1, 6)
+        d1, d2 = rng.randint(1, 6), rng.randint(1, 6)
         total  = d1 + d2
         roll_str = f"{d1} + {d2} = {total}"
 
@@ -283,9 +273,10 @@ class Board:
         edge = self.edges.get(eid)
         if edge is None:                    return False, "Edge does not exist"
         if edge.owner is not None:          return False, "Edge already occupied"
+        if self._road_count(player) >= MAX_ROADS: return False, "No road pieces remaining"
         if not player.can_pay(COST_ROAD):   return False, "Insufficient resources"
         # connectivity – must touch player road or settlement
-        if not any((cid in player.settlements or eid2 in player.roads) for cid in eid for eid2 in self._adjacent_edges(cid)):
+        if not self._road_is_connected(player, eid):
             return False, "Road not connected to your network"
         player.pay(COST_ROAD)
         edge.owner = player.color
@@ -296,6 +287,7 @@ class Board:
         corner = self.corners.get(cid)
         if corner is None:                                                                  return False, "Corner does not exist"
         if corner.piece is not None:                                                        return False, "Corner already occupied"
+        if self._piece_count(player, Piece.SETTLEMENT) >= MAX_SETTLEMENTS:                   return False, "No settlement pieces remaining"
         if not player.can_pay(COST_SETTLEMENT):                                             return False, "Insufficient resources"
         if any(self.corners[n].piece is not None for n in self._adjacent_corners(cid)):     return False, "Too close to another settlement/city" # 2-space rule – no adjacent occupied intersections
         if not any(self.edges[e].owner == player.color for e in self._adjacent_edges(cid)): return False, "Must connect to one of your roads" # connectivity – must touch player road
@@ -308,21 +300,11 @@ class Board:
         corner = self.corners.get(cid)
         if corner is None:                                                      return False, "Corner does not exist"
         if corner.piece != Piece.SETTLEMENT or corner.owner != player.color:    return False, "Must upgrade your own settlement"
+        if self._piece_count(player, Piece.CITY) >= MAX_CITIES:                 return False, "No city pieces remaining"
         if not player.can_pay(COST_CITY):                                       return False, "Insufficient resources"
         player.pay(COST_CITY)
         corner.piece = Piece.CITY
         return True, None
-
-    def player_build_settlement_by_triplet(self, player: Player, triplet: list[str]) -> tuple[bool, str | None]:
-        cid, err = self._corner_from_triplet(triplet)
-        if cid is None: return False, err
-        return self.player_build_settlement(player, cid)
-
-    def player_build_city_by_triplet(self, player: Player, triplet: list[str]) -> tuple[bool, str | None]:
-        cid, err = self._corner_from_triplet(triplet)
-        if cid is None: return False, err
-        return self.player_build_city(player, cid)
-    
 
     def get_scores(self) -> dict[Color, dict[str, int]]:
         results: dict[Color, dict[str, int]] = {col: {"total": 0, "cities": 0, "settlements": 0, "roads": 0} for col in self.players}
@@ -336,9 +318,9 @@ class Board:
             elif corner.piece is Piece.SETTLEMENT:
                 record["settlements"] += 1
                 record["total"] += 1  # each settlement = 1 VP
-        # roads are easy – just trust the player list
-        for col, p in self.players.items():
-            results[col]["roads"] = len(p.roads)
+        for edge in self.edges.values():
+            if edge.owner in results:
+                results[edge.owner]["roads"] += 1
         return results
 
     def _viable_moves(self, player: Player) -> list[Move]:
@@ -346,17 +328,20 @@ class Board:
         idx = 1
 
         # roads 
-        if player.can_pay(COST_ROAD):
+        if player.can_pay(COST_ROAD) and self._road_count(player) < MAX_ROADS:
             for eid, edge in self.edges.items():
                 if edge.owner is not None: continue
-                if not any((cid in player.settlements or eid2 in player.roads) for cid in eid for eid2 in self._adjacent_edges(cid)): continue
+                if not self._road_is_connected(player, eid): continue
                 desc = f"Build ROAD  between {_corner_descr(eid[0], self)} ↔ {_corner_descr(eid[1], self)}"
                 action = _mk_action("build_road", eid)
                 moves.append((idx, desc, action))
                 idx += 1
 
         # settlements
-        if player.can_pay(COST_SETTLEMENT):
+        if (
+            player.can_pay(COST_SETTLEMENT)
+            and self._piece_count(player, Piece.SETTLEMENT) < MAX_SETTLEMENTS
+        ):
             for cid, corner in self.corners.items():
                 if corner.piece is not None: continue
                 if any(self.corners[n].piece is not None for n in self._adjacent_corners(cid)): continue # 2-space rule
@@ -367,28 +352,20 @@ class Board:
                 idx += 1
 
         # cities
-        if player.can_pay(COST_CITY):
-            for cid in player.settlements:
-                corner = self.corners[cid]
-                if corner.piece is Piece.SETTLEMENT:
+        if (
+            player.can_pay(COST_CITY)
+            and self._piece_count(player, Piece.CITY) < MAX_CITIES
+        ):
+            for cid, corner in self.corners.items():
+                if (
+                    corner.owner is player.color
+                    and corner.piece is Piece.SETTLEMENT
+                ):
                     desc = f"Upgrade CITY at {_corner_descr(cid, self)}"
                     action = _mk_action("build_city", cid)
                     moves.append((idx, desc, action))
                     idx += 1
         return moves
-
-    def render_player_view(self, colour: Color) -> str:
-        player = self.players[colour]
-        scores = self.get_scores()
-        score_lines = [f"{str(c):6} {rec['total']:>2} Victory Points   (Settlements:{rec['settlements']}  Cities:{rec['cities']}  Roads:{rec['roads']})" for c, rec in scores.items()]
-        moves = self._viable_moves(player)
-        move_block = "\n".join(f"{idx}. {desc}" for idx, desc, _ in moves) or "No legal moves."
-        parts = [
-            f"{'='*24}  {colour.name}  {'='*24}", f"Hand:  {{{', '.join(f'{k.name}:{v}' for k,v in player.hand.items())}}}", "", "Scores\n───────", 
-            "\n".join(score_lines), "", "Board \n──────", render_board(self), "", "Viable moves\n────────────", move_block,
-        ]
-        return "\n".join(parts)
-
 
     def execute_action(self, player: Player, action: Action) -> Tuple[bool, str | None]:
         kind, data = action
@@ -480,21 +457,3 @@ def render_board(board: 'Board') -> str:
     missing  = required - mapping.keys()
     assert not missing, f"still missing: {missing}"
     return _TEMPLATE.format_map(_SafeDict(mapping))
-
-
-if __name__ == "__main__":
-    board = Board.build_standard()
-
-    # give Blue some resources to make options interesting
-    blue = board.players[Color.BLUE]
-    blue.hand.update({Terrain.BRICK: 2, Terrain.WOOD: 2, Terrain.SHEEP: 1, Terrain.WHEAT: 1, Terrain.ORE: 3})
-
-    print(board.render_player_view(Color.BLUE))
-
-    moves = board._viable_moves(blue)  # list[Move]
-    choice = int(input("Pick a move number: "))
-    selected = next(m for m in moves if m[0] == choice)   # (idx, desc, action_spec)
-
-    ok, err = board.execute_action(blue, selected[2])
-    print("Success!" if ok else f"Failed: {err}")
-    print(board.render_player_view(Color.BLUE))

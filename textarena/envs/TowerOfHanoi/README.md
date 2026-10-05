@@ -1,105 +1,71 @@
-# Tower of Hanoi Environment Documentation
+# Tower of Hanoi
 
-## Overview
-**Tower of Hanoi** is a classic single-player puzzle game where the objective is to move a stack of disks from one tower to another following specific rules. The puzzle consists of three towers (labeled A, B, and C) and a set of disks of different sizes. Initially, all disks are stacked on tower A in descending order of size with the largest disk at the bottom. The goal is to move the entire stack to tower C while adhering to the constraint that a larger disk can never be placed on top of a smaller disk. This implementation offers configurable difficulty through the number of disks and provides move validation to ensure game rules are followed.
+Move a stack of disks from tower A to tower C one disk at a time, never placing a larger disk on a smaller one
+([rules](https://en.wikipedia.org/wiki/Tower_of_Hanoi)). The shortest solution doubles with every disk (`2ⁿ − 1` moves
+for `n` disks), so it tests long, exact sequential planning.
 
-## Action Space
+<!-- BEGIN GENERATED: variants -->
+**Players:** 1
 
-- **Format:** Actions are strings representing the source and target towers for moving a disk, in the format `[source target]` or `[source, target]`, where source and target are tower identifiers (A, B, or C).
-- **Examples:**
-  - Move a disk from tower A to tower C: `[A C]` or `[A, C]`
-  - Move a disk from tower B to tower A: `[B A]` or `[B, A]`
-- **Notes:** Tower identifiers are case-insensitive, and the format allows for optional commas and flexible spacing between the tower identifiers.
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
-## Observation Space
+| Env ID | Parameters |
+| --- | --- |
+| `TowerOfHanoi-v1` | `num_disks=3`, `max_turns=14` |
+| `TowerOfHanoi-v1-hard` | `num_disks=5`, `max_turns=62` |
 
-**Reset Observations**
-On reset, the player receives a prompt containing the initial state of the towers and the game rules. For example:
+Append `-mdp` to any ID for the state-complete variant (e.g. `TowerOfHanoi-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("TowerOfHanoi-v1", num_disks=...)`.
+<!-- END GENERATED: variants -->
 
-```plaintext
-You are Player 0. You are playing Tower of Hanoi with 3 disks.
-You have to move the disks from tower A to tower C.
-To move a disk, type the source tower and the target tower (e.g., '[A C]').
-Note that you can only move the top disk of a tower, and that a bigger disk cannot be placed on a smaller disk.
-As you play, the history of your moves will be displayed.
-Here is the current state of the towers:
-A: [3, 2, 1]
-B: []
-C: []
+## Rules
+
+- The disks are numbered by size, from 1 (smallest) to `num_disks`, and start stacked on tower A with the largest at
+  the bottom. Towers B and C start empty.
+- Each move takes the top disk of one tower and puts it on another tower that is empty or whose top disk is larger.
+- You win when every disk is on tower C.
+- Moving from an empty tower, onto a smaller disk, or onto the same tower, or a malformed reply (including a tower
+  other than A, B, or C) is an invalid move. It changes nothing and does not count as a move. Two invalid moves in a
+  row end the game.
+- The game ends after `max_turns` valid moves.
+
+## Actions
+
+Reply with the source tower and the target tower, separated by a space or a comma (case-insensitive).
+
+Example: `A C` moves the top disk of tower A onto tower C.
+
+## Observations
+
+The player first receives the rules, the number of disks, and the move limit. Before every move, the player sees each
+tower's disks listed from bottom to top; after each valid move, they are told which disk moved, for example
+`You moved disk 1 from A to C.`
+
 ```
-
-**Step Observations**
-After each move, the player receives an updated view of the towers. For example:
-
-```plaintext
-[Player 0] I'll move the top disk from tower A to tower C. [A C]
-[GAME] Player 0 moved disk from A to C. Here is the current state of the towers:
+Current Board (disks listed bottom to top):
 A: [3, 2]
 B: []
 C: [1]
-
-[Player 0] Now I'll move the next disk from tower A to tower B. [A B]
-[GAME] Player 0 moved disk from A to B. Here is the current state of the towers:
-A: [3]
-B: [2]
-C: [1]
 ```
-
-## Gameplay
-
-- **Players:** 1 player (single-player game)
-- **Initial Setup:** All disks stacked on tower A in descending order of size (largest at the bottom)
-- **Towers:** Three towers labeled A, B, and C
-- **Objective:** Move all disks from tower A to tower C following the game rules
-- **Maximum Turns:** Configurable, default is 100 turns
-
-## Key Rules
-
-1. **Disk Movement:**
-   - Only one disk can be moved at a time
-   - Only the topmost disk of a tower can be moved
-   - A disk can be placed on an empty tower or on top of a larger disk
-   - A larger disk cannot be placed on top of a smaller disk
-
-2. **Valid Moves:**
-   - Source tower must not be empty
-   - Target tower must either be empty or have a top disk larger than the disk being moved
-   - Source and target towers must be valid tower identifiers (A, B, or C)
-
-3. **Winning Condition:**
-   - **Win:** All disks are moved to tower C in the correct order (largest at the bottom)
-   - **Loss:** Failing to complete the puzzle within the maximum number of allowed turns
-
-4. **Game Termination:**
-   - The game concludes when either all disks are successfully moved to tower C or the maximum turn limit is reached
 
 ## Rewards
 
-| Outcome     | Reward for Player |
-|-------------|:-----------------:|
-| **Win**     | `+1`              |
-| **Loss**    | `-1`              |
-| **Invalid** | `-1`              |
+| Outcome | Reward |
+| --- | --- |
+| Every disk on tower C | `1` |
+| `max_turns` valid moves made | Fraction of disks correctly stacked from the base of tower C |
+| Second consecutive invalid move | Fraction of disks correctly stacked from the base of tower C |
+
+Disks count as correctly stacked from the bottom of tower C upward, starting with the largest disk and stopping at
+the first disk that is out of place.
 
 ## Parameters
 
-- `num_disks` (`int`, default: `3`):
-  - **Description:** Number of disks in the puzzle
-  - **Impact:** More disks exponentially increase the puzzle's complexity and minimum required moves
+<!-- BEGIN GENERATED: parameters -->
+- `num_disks` (default `3`): The number of disks. Accepts an integer from 1 to 20.
+- `max_turns` (default `100`): The number of valid moves allowed. It must be at least `2^num_disks − 1`, the length of the shortest solution. The registered variants allow about twice that (`2^(num_disks + 1) − 2`). Accepts an integer of at least 1.
+<!-- END GENERATED: parameters -->
 
-- `max_turns` (`int`, default: `100`):
-  - **Description:** Maximum number of turns allowed to solve the puzzle
-  - **Impact:** Restricts the number of moves available to complete the puzzle
+## Notes
 
-## Variants
-
-| Env-id                    | num_disks | max_turns |
-|---------------------------|:---------:|:---------:|
-| `TowerOfHanoi-v0`         | `3`       | `100`     |
-| `TowerOfHanoi-v0-medium`  | `4`       | `100`     |
-| `TowerOfHanoi-v0-hard`    | `5`       | `100`     |
-| `TowerOfHanoi-v0-extreme` | `7`       | `100`     |
-
-
-### Contact
-If you have questions or face issues with this specific environment, please reach out directly to bobby_cheng@i2r.a-star.edu.sg
+- `renderer.py` draws the towers as ASCII art for the visual renderer (`get_board_str`); players see the lists shown
+  above.

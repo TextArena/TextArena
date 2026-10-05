@@ -14,8 +14,11 @@ def create_board_str(game_state: dict) -> str:
 
     def render_single_board(grid, title):
         lines = []
-        header = "    " + "   ".join(str(i) for i in range(grid_size))
-        lines.append(f"    {title.center(grid_size * 5 - 1)}")
+        # Each cell is five columns wide ("│ " + two-column content + " ").
+        board_width = 3 + grid_size * 5
+        header = ("    " + "".join(f"{i:<5}" for i in range(grid_size)))[:board_width]
+        lines.append(title.center(board_width))
+        lines.append(header)
         lines.append("  ┌" + "────┬" * (grid_size - 1) + "────┐")
         for r in range(grid_size):
             row_cells = " │ ".join(cell_repr(grid[r][c]) for c in range(grid_size))

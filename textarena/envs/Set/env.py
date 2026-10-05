@@ -1,7 +1,6 @@
-import random
 import copy
 import itertools
-from typing import Dict, Tuple, Optional, Any, List, TypeAlias
+from typing import Dict, Tuple, Optional, Any, Union
 
 import textarena as ta
 
@@ -12,7 +11,7 @@ _FILLS = ["open", "striped", "solid"]
 _SHAPES = ["oval", "diamond", "squiggle"]
 
 # one card is [number, color, fill, shape]
-Card: TypeAlias = Tuple[str, str, str, str]
+Card = Tuple[str, str, str, str]
 
 # for each attribute, a set must have 3 different values or 1 value
 def _is_set(cards: Tuple[Card, Card, Card]):
@@ -38,114 +37,144 @@ def _has_set(cards: list[Card]):
             return True
     return False
 
-class SetEnv(ta.Env):
-    def __init__(self, seed: int = 42):
-        super().__init__()
-        # pre-generate all valid sets
-        self.deck = list(itertools.product(_NUMBERS, _COLORS, _FILLS, _SHAPES))
-        all_pairs = [(x, y) for (x, y) in itertools.product(self.deck, self.deck) if x != y]
-        self.all_sets = set([(*pair, _get_missing_card(pair)) for pair in all_pairs])
+class SetEnv(ta.GameEnv):
+    min_players = 1
+    max_players = 1
+    mdp_includes_actions = False
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.state = ta.SinglePlayerState(num_players=num_players, seed=seed, max_turns=20)
+    deck = list(itertools.product(_NUMBERS, _COLORS, _FILLS, _SHAPES))
+    max_turns = 20
+
+    def setup(self) -> Dict[str, Any]:
         _initial_deck = copy.deepcopy(self.deck)
-        random.shuffle(_initial_deck)
+        self.rng.shuffle(_initial_deck)
         _initial_board = [_initial_deck.pop() for _ in range(12)]
-        game_state = {"deck": _initial_deck, "board": _initial_board, "score": 0, "num_turns": 0}
-        self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
+        return {
+            "deck": _initial_deck,
+            "board": _initial_board,
+            "found_cards": [],
+            "score": 0,
+            "num_turns": 0,
+        }
+
+    def prompt(self, player_id: int) -> str:
+        return (
+            "You are playing a single-player game of Set. "
+            "Your goal is to find as many Sets as you can in 20 turns. "
+            "The deck has 81 cards, one for every combination of number (one, two, three), "
+            "color (red, green, purple), fill (open, striped, solid), and shape (oval, diamond, squiggle). "
+            "The board is a numbered list of cards, normally 12; whenever it holds no Set, "
+            "3 more cards are dealt until it does or the deck runs out. "
+            "A Set is a set of 3 cards where, for each attribute, they're all 3 the same, "
+            "or all 3 different. For instance, 'one red open squiggle', "
+            "'two green open squiggle', 'three purple open squiggle' would be a Set. "
+            "Each turn, you select a list of 3 cards from the board by their numbered index. "
+            "For example, '1, 4, 11'. If it is a Set, you score 1 point, the cards are removed, "
+            "and the board is refilled up to 12 cards from the deck. "
+            "If it is not a Set, that turn was wasted. "
+            "The game ends after 20 turns, or earlier if no Set remains and the deck is empty. "
+            "Reply with exactly the 3 card indices, e.g. '2, 4, 8'."
+        )
+
+    def on_start(self):
+        self._ensure_set_available()
         self._observe_state()
 
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return self.m("player_prompt", "intro")
+    def _parse_action(self, action: str) -> Optional[Tuple[int, int, int]]:
+        """Three indices separated by whitespace or single commas.
 
-    def _parse_action(self, action: str) -> Tuple[int, int, int] | None:
-        if "[" not in action:
+        Tokenized rather than matched with a regex: patterns like ``\\s*[,\\s]\\s*``
+        backtrack quadratically on long whitespace runs.
+        """
+        numbers, pending_comma = [], False
+        for token in action.replace(",", " , ").split():
+            if token == ",":
+                if not numbers or pending_comma:
+                    return None
+                pending_comma = True
+            # Board indices never exceed two digits; the bound keeps digit floods
+            # away from Python's integer parser.
+            elif token.isascii() and token.isdigit() and len(token) <= 6:
+                numbers.append(int(token))
+                pending_comma = False
+            else:
+                return None
+        if pending_comma or len(numbers) != 3:
             return None
-        action = action.split("[")[1]
-        if "]" not in action:
-            return None
-        action = action.split("]")[0]
-        if "," not in action:
-            return None
-        nums = action.split(",")
-        if len(nums) != 3:
-            return None
-        if not all(x.strip().isdigit() for x in nums):
-            return None
-        nums = [int(x.strip()) for x in nums]
+        return (numbers[0], numbers[1], numbers[2])
 
-        return (nums[0], nums[1], nums[2])
+    def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        parsed = self._parse_action(move)
 
-
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        parsed = self._parse_action(action)
-        
-        # check if no valid sets exist on board and deal 3 more cards if needed (BEFORE validating action)
-        if not _has_set(self.state.game_state['board']) and self.state.game_state['deck']: # type: ignore
-            # deal 3 more cards
-            cards_dealt = 0
-            while cards_dealt < 3 and self.state.game_state['deck']: # type: ignore
-                card = self.state.game_state['deck'].pop() # type: ignore
-                self.state.game_state['board'].append(card) # type: ignore
-                cards_dealt += 1
-            
-            if cards_dealt > 0:
-                self.state.add_observation(self.m("game_message", "dealt_cards", cards_dealt=cards_dealt), observation_type=ta.ObservationType.GAME_MESSAGE)
-                # Update the board observation so AI can see the new cards
-                self._observe_state()
-        
-        board = self.state.game_state["board"] # type: ignore
+        board = self.game_state["board"]
         max_idx = len(board)
         if not parsed:
-            self.state.set_invalid_move(reward=0, reason=self.m("invalid_move", "wrong_format"))
+            return self.invalid("Invalid action format. Reply with 3 card indices like '1, 4, 11'.")
         elif min(parsed) < 1 or max(parsed) > max_idx:
-            self.state.set_invalid_move(reward=0, reason=self.m("invalid_move", "out_of_range", max_idx=max_idx))
+            return self.invalid(f"Invalid action. Card indices must be between 1 and {max_idx}.")
+        elif len(set(parsed)) != 3:
+            return self.invalid("Invalid action. Select three distinct card indices.")
+
+        self.game_state["num_turns"] += 1
+        cards = board[parsed[0]-1], board[parsed[1]-1], board[parsed[2]-1]
+        if _is_set(cards):
+            self.broadcast("You found a Set! +1 point!", ta.ObservationType.GAME_MESSAGE)
+            self.game_state["score"] += 1
+
+            # remove from the board
+            for idx in sorted(parsed, reverse=True):
+                self.game_state["found_cards"].append(board.pop(idx-1))
+
+            # if < 12 cards, deal up to 12
+            while len(board) < 12 and self.game_state['deck']:
+                card = self.game_state['deck'].pop()
+                self.game_state['board'].append(card)
+
+            self._ensure_set_available()
+            self._observe_state()
         else:
-            self.state.game_state["num_turns"] += 1 # type: ignore
-            cards = board[parsed[0]-1], board[parsed[1]-1], board[parsed[2]-1]
-            if _is_set(cards):
-                # add message
-                self.state.add_observation(self.m("game_message", "found_set"), observation_type=ta.ObservationType.GAME_MESSAGE)
+            self.broadcast("That is not a Set. No point for you.", ta.ObservationType.GAME_MESSAGE)
+        if not _has_set(board) and not self.game_state["deck"]:
+            return self.outcome({0: self._reward()}, reason="No sets remain and the deck is empty.")
+        return None
 
-                # score
-                self.state.game_state["score"] += 1 # type: ignore
+    def on_turn_limit(self) -> ta.Outcome:
+        return self.outcome({0: self._reward()}, reason="You've taken 20 turns. The game is over.")
 
-                # remove from the board
-                for idx in sorted(parsed, reverse=True):
-                    board.pop(idx-1)
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome({0: self._reward()}, reason=f"Invalid Move: {reason}")
 
-                # if < 12 cards, deal up to 12
-                while len(board) < 12 and self.state.game_state['deck']: # type: ignore
-                    card = self.state.game_state['deck'].pop() # type: ignore
-                    self.state.game_state['board'].append(card) # type: ignore
-                
-                # Update board observation after refilling
-                self._observe_state()
-            else:
-                self.state.add_observation(self.m("game_message", "not_a_set"), observation_type=ta.ObservationType.GAME_MESSAGE)
-
-
-        # finish if 20 turns completed
-        if self.state.game_state["num_turns"] >= 20: # type: ignore
-            self.state.set_outcome(reward=self.state.game_state["score"], reason=self.m("outcome", "game_over")) # type: ignore
-
-        return self.state.step()
+    def _reward(self) -> float:
+        """Sets found as a share of the most a game allows: one per turn."""
+        return self.game_state["score"] / self.max_turns
 
     def _observe_state(self):
-        gs = self.state.game_state
-        assert gs, "no game state"
-        rows = ""
+        gs = self.game_state
+        assert gs is not None, "no game state"
+        board = "=== BOARD ==="
         for idx, card in enumerate(gs['board']):
-            rows += f"\n{idx+1}: {' '.join(card)}"
-        self.state.add_observation(to_id=-1, message=self.m("board", "state", rows=rows), observation_type=ta.ObservationType.GAME_BOARD)
+            board += f"\n{idx+1}: {' '.join(card)}"
+        self.broadcast(board, ta.ObservationType.GAME_BOARD)
+
+    def _ensure_set_available(self) -> bool:
+        """Deal groups of up to three until the board has a Set or the deck is empty."""
+        gs = self.game_state
+        while not _has_set(gs["board"]) and gs["deck"]:
+            cards_dealt = min(3, len(gs["deck"]))
+            for _ in range(cards_dealt):
+                gs["board"].append(gs["deck"].pop())
+            self.broadcast(
+                f"No valid sets found on board. Dealt {cards_dealt} additional cards.",
+                ta.ObservationType.GAME_MESSAGE,
+            )
+        return _has_set(gs["board"])
 
     def get_board_str(self) -> str:
         """Return the current board state as a string for rendering."""
-        if not hasattr(self.state, 'game_state') or not self.state.game_state:
+        if not hasattr(self, 'state') or not self.state.game_state:
             return "Game not started"
 
-        gs = self.state.game_state
+        gs = self.game_state
         board = f"=== BOARD === (Score: {gs['score']}, Turns: {gs['num_turns']}/20)"
         for idx, card in enumerate(gs['board']):
             board += f"\n{idx+1}: {' '.join(card)}"

@@ -1,0 +1,3 @@
+from textarena.envs.registration import register
+
+register(id="LightsOut-v1", entry_point="textarena.envs.LightsOut.env:LightsOutEnv", size=5, max_turns=20)

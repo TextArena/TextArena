@@ -15,6 +15,7 @@ def create_board_str(
     player_totals: Dict[int, int],
     round_history: List[Dict],
     current_proposer: int,
+    alternate_roles: bool,
 ) -> str:
     lines = []
 
@@ -37,7 +38,9 @@ def create_board_str(
     lines.append("┌" + "─" * BOARD_WIDTH + "┐")
     lines.append(fmt_line(f"Proposer:  Player {current_proposer} (has ${pool} to split)"))
     lines.append(fmt_line(f"Responder: Player {current_responder} (decides on offer)"))
-    if game_phase == "offering":
+    if game_phase == "complete":
+        lines.append(fmt_line("Phase: COMPLETE - Final totals shown above"))
+    elif game_phase == "offering":
         lines.append(fmt_line(f"Phase: OFFERING - Waiting for Player {current_proposer}'s offer"))
     else:
         lines.append(fmt_line(f"Phase: RESPONDING - Waiting for Player {current_responder}'s decision"))
@@ -49,8 +52,9 @@ def create_board_str(
     if current_offer is not None:
         lines.append(fmt_line(f"Player {current_proposer} offers: ${current_offer} to Player {current_responder}"))
         lines.append(fmt_line(f"Player {current_proposer} keeps:  ${pool - current_offer}"))
-        lines.append(fmt_line(""))
-        lines.append(fmt_line(f"Player {current_responder}'s turn to respond: [Accept] or [Reject]"))
+        if game_phase != "complete":
+            lines.append(fmt_line(""))
+            lines.append(fmt_line(f"Player {current_responder}'s turn to respond: 'accept' or 'reject'"))
     else:
         lines.append(fmt_line("No current offer pending"))
     lines.append("└" + "─" * BOARD_WIDTH + "┘")
@@ -58,8 +62,13 @@ def create_board_str(
 
     # Rules
     lines.append("┌" + "─" * BOARD_WIDTH + "┐")
+    role_rule = (
+        "• Players alternate as Proposer/Responder each round"
+        if alternate_roles
+        else f"• Player {current_proposer} remains Proposer every round"
+    )
     rules = [
-        "• Players alternate as Proposer/Responder each round",
+        role_rule,
         "• Each round: Proposer offers part of the pool to Responder",
         "• Responder can ACCEPT (both get their shares) or REJECT (both get $0)",
         "• Money accumulates across rounds - highest total wins!",

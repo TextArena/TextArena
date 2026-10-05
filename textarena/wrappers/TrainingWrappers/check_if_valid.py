@@ -1,1 +1,0 @@
-# TODO # deepcopy game-state and check if the move is valid

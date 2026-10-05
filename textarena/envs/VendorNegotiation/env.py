@@ -4,17 +4,18 @@ Vendor Negotiation Environment
 A two-player negotiation game where a Brand Specialist (Player 0) negotiates
 with a Vendor (Player 1) over discount rates for products in an upcoming sales event.
 
-Both players can win by achieving their respective objectives:
-- Brand Specialist: Achieve target sales (% of maximum possible)
-- Vendor: Achieve profit above baseline (X times 0% discount scenario)
+Each player has a private target placed inside the range of totals the drawn
+products can actually reach, from the worst to the best allowed discount for
+every product:
+- Brand Specialist: total sales at least `brand_target_fraction` of the way up the sales range
+- Vendor: total profit at least `vendor_target_fraction` of the way up the profit range
 """
 
 import os
 import re
-import random
 import csv
-import numpy as np
-from typing import Any, Dict, List, Optional, Tuple
+import statistics
+from typing import Any, Dict, List, Optional, Tuple, Union
 from collections import defaultdict
 
 import textarena as ta
@@ -27,68 +28,87 @@ from textarena.envs.VendorNegotiation.renderer import (
 )
 
 
-class VendorNegotiationEnv(ta.Env):
+class VendorNegotiationEnv(ta.GameEnv):
     """
     Two-player vendor negotiation environment.
-    
+
     Player 0: Brand Specialist (wants high sales)
     Player 1: Vendor (wants high profit)
     """
-    
-    def __init__(self,
-                 num_products: int = 5,
-                 max_rounds: int = 20,
-                 error_allowance: int = 3,
-                 brand_target_percentage: float = 0.8,
-                 vendor_baseline_multiplier: float = 1.2,
-                 num_simulations: int = 1000,
-                 brand_role: Optional[str] = None,
-                 vendor_role: Optional[str] = None,
-                 product_list_path: Optional[str] = None,
-                 seed: Optional[int] = None):
-        """
-        Initialize the Vendor Negotiation environment.
-        
-        Args:
-            num_products: Number of products to negotiate (default: 5)
-            max_rounds: Maximum negotiation rounds (default: 20)
-            error_allowance: Invalid moves allowed before penalty (default: 3)
-            brand_target_percentage: Brand's target as % of max sales (default: 0.95)
-            vendor_baseline_multiplier: Vendor must beat this × baseline (default: 1.5)
-            num_simulations: Monte Carlo simulation runs (default: 1000)
-            brand_role: Role file name for Player 0 (default: "default")
-            vendor_role: Role file name for Player 1 (default: "default")
-            product_list_path: Path to product CSV file (default: "data/product_list.csv")
-            seed: Random seed for reproducibility
-        """
-        super().__init__()
-        
-        self.num_products = num_products
-        self.max_rounds = max_rounds
-        self.error_allowance = error_allowance
-        self.brand_target_percentage = brand_target_percentage
-        self.vendor_baseline_multiplier = vendor_baseline_multiplier
-        self.num_simulations = num_simulations
-        self.brand_role_name = brand_role or "default"
-        self.vendor_role_name = vendor_role or "default"
-        self.product_list_path = product_list_path or "data/product_list.csv"
-        self.seed = seed
-        
+
+    min_players = 2
+    max_players = 2
+
+    # Decision grammar (what the prompts teach): a decision is a line whose
+    # first token is exactly the command keyword, case-insensitive, followed
+    # by its arguments; trailing "." or "!" is tolerated. A "propose" line
+    # whose remainder is empty or starts with a digit is a proposal attempt
+    # and must be well-formed. Every other line, such as "Proposed changes ..."
+    # or "Accept this?", is conversation.
+    _ACCEPT_LINE_RE = re.compile(r"accept[.!]*", re.IGNORECASE)
+    _REJECT_LINE_RE = re.compile(r"reject[.!]*", re.IGNORECASE)
+    _PROPOSE_LINE_RE = re.compile(r"propose(?![^\s:.!])\s*:?\s*(?P<args>.*)", re.IGNORECASE)
+    _DISCOUNT_LIST_RE = re.compile(r"[0-9]+%(?:\s*,\s*[0-9]+%)*")
+
+    num_products = ta.Param(5, "The number of products to negotiate over, capped at the 10 available.", min=1)
+    max_rounds = ta.Param(
+        20, "The number of messages, counting both players, before the game ends without a deal.", min=1,
+    )
+    brand_target_fraction = ta.Param(
+        0.5, "Where the Brand's target sits between the lowest (`0`) and highest (`1`) total sales the drawn products "
+             "can reach.", min=0, max=1,
+    )
+    vendor_target_fraction = ta.Param(
+        0.5, "Where the Vendor's target sits between the lowest (`0`) and highest (`1`) total profit the drawn "
+             "products can reach.", min=0, max=1,
+    )
+    num_simulations = ta.Param(1000, "The number of Monte Carlo draws used to score a deal.", min=1)
+    brand_role = ta.Param(
+        "default", "The Brand's style file in `data/roles/brand/`: `default`, `aggressive`, `collaborative`, or "
+                   "`data_driven`. Unknown names fall back to `default`.",
+    )
+    vendor_role = ta.Param(
+        "default", "The Vendor's style file in `data/roles/vendor/`: `default`, `profit_focused`, `volume_seeker`, or "
+                   "`relationship_builder`. Unknown names fall back to `default`.",
+    )
+    product_list_path = ta.Param(
+        "data/product_list.csv",
+        "An alternative product file in the same format, with one row per product and discount rate. Only the "
+        "discount rates shared by every product can be proposed, and 0% must be one of them.",
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         # Load product data and roles
         self.all_products = self._load_product_data()
-        
+        if not self.all_products:
+            raise ValueError("product data must contain at least one product")
+
         # Always infer allowed discounts from product data
         self.allowed_discounts = self._infer_allowed_discounts()
-        self.brand_role_instructions = self._load_role_instructions("brand", self.brand_role_name)
-        self.vendor_role_instructions = self._load_role_instructions("vendor", self.vendor_role_name)
-        
-        # Game state (initialized in reset)
+        self.brand_role_instructions = self._load_role_instructions("brand", self.brand_role)
+        self.vendor_role_instructions = self._load_role_instructions("vendor", self.vendor_role)
+
+        # Per-game data (initialized in setup)
         self.selected_products = []
         self.products = {}
-        self.current_proposal = {}
-        self.negotiation_history = []
+        self.sales_range = (0.0, 0.0)
+        self.profit_range = (0.0, 0.0)
         self.brand_target = 0.0
-        self.vendor_baseline = 0.0
+        self.vendor_target = 0.0
+
+    # -- game_state-backed views (kept as attributes for renderers/analysis) --
+    @property
+    def current_proposal(self) -> Dict[str, Any]:
+        return self.game_state["current_proposal"]
+
+    @property
+    def negotiation_history(self) -> List[Dict[str, Any]]:
+        return self.game_state["negotiation_history"]
+
+    @property
+    def conversation_history(self) -> List[Dict[str, Any]]:
+        return self.game_state["conversation_history"]
 
     def _load_product_data(self) -> Dict:
         """Load product data from CSV in long format (no pandas)."""
@@ -133,113 +153,85 @@ class VendorNegotiationEnv(ta.Env):
         return dict(products)
 
     def _infer_allowed_discounts(self) -> List[int]:
-        """Infer allowed discount rates from product data."""
-        if not self.all_products:
-            return [0, 15, 20, 30]  # Fallback default
-        
-        # Get all unique discount rates from any product
-        all_discount_rates = set()
-        for product_name, product_data in self.all_products.items():
-            all_discount_rates.update(product_data['data'].keys())
-        
-        # Return sorted list
-        return sorted(list(all_discount_rates))
-    
-    def _get_max_discount_rate(self) -> int:
-        """Get the maximum discount rate from allowed discounts."""
-        return max(self.allowed_discounts) if self.allowed_discounts else 30
-    
+        """Infer rates available for every product so any proposal is executable."""
+        discount_sets = [
+            set(product_data["data"])
+            for product_data in self.all_products.values()
+        ]
+        common_discounts = set.intersection(*discount_sets)
+        if not common_discounts or 0 not in common_discounts:
+            raise ValueError("every product must provide a shared 0% discount option")
+        return sorted(common_discounts)
+
+    def _attainable_range(self, metric: str) -> Tuple[float, float]:
+        """Lowest and highest forecast total of `metric` over all allowed proposals."""
+        low = high = 0.0
+        for product in self.selected_products:
+            values = [self.products[product]['data'][d][metric] for d in self.allowed_discounts]
+            low += min(values)
+            high += max(values)
+        return low, high
+
     def _load_role_instructions(self, player_type: str, role_name: str) -> str:
         """Load role instructions from text file."""
-        role_path = os.path.join(
-            os.path.dirname(__file__),
-            "data",
-            "roles",
-            player_type,
-            f"{role_name}.txt"
-        )
-        
+        if (
+            not isinstance(role_name, str)
+            or not role_name
+            or os.path.basename(role_name) != role_name
+            or role_name in {".", ".."}
+        ):
+            role_name = "default"
+        role_path = os.path.join(os.path.dirname(__file__), "data", "roles", player_type, f"{role_name}.txt")
+
         try:
             with open(role_path, 'r') as f:
                 return f.read().strip()
         except FileNotFoundError:
             # Fallback to default if role not found
-            default_path = os.path.join(
-                os.path.dirname(__file__),
-                "data",
-                "roles",
-                player_type,
-                "default.txt"
-            )
+            default_path = os.path.join(os.path.dirname(__file__), "data", "roles", player_type, "default.txt")
             with open(default_path, 'r') as f:
                 return f.read().strip()
-    
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        """Reset the environment to initial state."""
-        if num_players != 2:
-            raise ValueError("VendorNegotiation requires exactly 2 players")
-        
-        # Set random seed
-        if seed is not None:
-            random.seed(seed)
-            np.random.seed(seed)
-        elif self.seed is not None:
-            random.seed(self.seed)
-            np.random.seed(self.seed)
-        
+
+    def roles(self) -> Dict[int, str]:
+        return {0: "Brand Specialist", 1: "Vendor"}
+
+    def setup(self) -> Dict[str, Any]:
         # Select random products
         all_product_names = list(self.all_products.keys())
-        self.selected_products = random.sample(all_product_names, min(self.num_products, len(all_product_names)))
+        self.selected_products = self.rng.sample(all_product_names, min(self.num_products, len(all_product_names)))
         self.products = {name: self.all_products[name] for name in self.selected_products}
-        
-        # Calculate targets using maximum discount rate
-        max_discount = self._get_max_discount_rate()
-        self.brand_target = self.brand_target_percentage * sum(
-            self.products[p]['data'][max_discount]['mean_sales'] for p in self.selected_products
-        )
-        self.vendor_baseline = self.vendor_baseline_multiplier * sum(
-            self.products[p]['data'][0]['mean_profit'] for p in self.selected_products
-        )
-        
-        # Initialize TextArena state
-        self.state = ta.TwoPlayerState(
-            num_players=num_players,
-            max_turns=self.max_rounds,
-            seed=seed,
-            error_allowance=self.error_allowance
-        )
-        
-        # Reset game state
-        self.current_proposal = {'discounts': None, 'proposer': None}
-        self.negotiation_history = []
-        self.conversation_history = []
-        
-        game_state = {
-            'current_proposal': self.current_proposal,
-            'negotiation_history': self.negotiation_history,
-            'conversation_history': self.conversation_history
+
+        # Each target sits a fixed fraction of the way up the range the drawn
+        # products can reach, so every draw leaves both sides able to meet or miss them.
+        self.sales_range = self._attainable_range('mean_sales')
+        self.profit_range = self._attainable_range('mean_profit')
+        sales_low, sales_high = self.sales_range
+        profit_low, profit_high = self.profit_range
+        self.brand_target = sales_low + self.brand_target_fraction * (sales_high - sales_low)
+        self.vendor_target = profit_low + self.vendor_target_fraction * (profit_high - profit_low)
+
+        return {
+            'current_proposal': {'discounts': None, 'proposer': None},
+            'negotiation_history': [],
+            'conversation_history': [],
+            'terminal_result': None,
         }
-        
-        # Call state's reset method
-        self.state.reset(
-            game_state=game_state,
-            player_prompt_function=self._generate_player_prompt,
-            role_mapping={0: "Brand Specialist", 1: "Vendor"}
-        )
-    
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
+
+    def prompt(self, player_id: int) -> str:
         """Generate initial prompt for a player."""
-        # Create product order string
         product_order = ", ".join(self.selected_products)
         initial_prompt = f"You are Player {player_id}.\n"
-        
+
         if player_id == 0:  # Brand Specialist
+            sales_low, sales_high = self.sales_range
             prompt = f"""ROLE: Brand Specialist at E-commerce Platform
-OBJECTIVE: Achieve total sales ≥ ${self.brand_target:.0f} ({self.brand_target_percentage*100:.0f}% of maximum possible)
+OBJECTIVE: Achieve total sales ≥ ${self.brand_target:.0f}
+(Depending on the discounts, total sales for these products range from ${sales_low:.0f} to ${sales_high:.0f}; your target is {self.brand_target_fraction:.0%} of the way up that range.)
+SCORING: You score 1 if an accepted deal meets your target and 0 if it misses it or no deal is reached.
 
 {self.brand_role_instructions}
 
-NEGOTIATION: Agree on discount rates for {self.num_products} products with Vendor
+NEGOTIATION: Agree on discount rates for {len(self.selected_products)} products with Vendor
 
 {render_product_data_for_brand(self.products, self.selected_products, self.allowed_discounts)}
 
@@ -247,21 +239,25 @@ PRODUCT ORDER: {product_order}
 
 ACTIONS: There are two parts of an action, STRICTLY in this order.
 1. Free-text communication to the other party to persuade them to agree to a deal favorable to you.
-2. ALWAYS end with one of these bracketed actions:
-- [Propose] X%, Y%, Z%, ... (follow product order above)
-- [Accept]
-- [Reject]
+2. To take a structured action, finish your message with the decision on its own line:
+- Propose X%, Y%, Z%, ... (follow product order above)
+- Accept
+- Reject
+A message without a decision line is treated as pure conversation.
 
 ROUNDS: {self.max_rounds} maximum
 """
         else:  # Vendor
+            profit_low, profit_high = self.profit_range
             prompt = f"""ROLE: Vendor
-OBJECTIVE: Achieve total profit > ${self.vendor_baseline:.0f} (baseline at {self.vendor_baseline_multiplier} times profit at 0% discount)
+OBJECTIVE: Achieve total profit ≥ ${self.vendor_target:.0f}
+(Depending on the discounts, total profit for these products ranges from ${profit_low:.0f} to ${profit_high:.0f}; your target is {self.vendor_target_fraction:.0%} of the way up that range.)
+SCORING: You score 1 if an accepted deal meets your target and 0 if it misses it or no deal is reached.
 
 You must NEVER reveal information about your profit and cost.
 {self.vendor_role_instructions}
 
-NEGOTIATION: Agree on discount rates for {self.num_products} products with Brand Specialist
+NEGOTIATION: Agree on discount rates for {len(self.selected_products)} products with Brand Specialist
 
 {render_product_data_for_vendor(self.products, self.selected_products, self.allowed_discounts)}
 
@@ -269,265 +265,170 @@ PRODUCT ORDER: {product_order}
 
 ACTIONS: There are two parts of an action, STRICTLY in this order.
 1. Free-text communication to the other party to persuade them to agree to a deal favorable to you.
-2. ALWAYS end with one of these bracketed actions:
-- [Propose] X%, Y%, Z%, ... (follow product order above)
-- [Accept]
-- [Reject]
+2. To take a structured action, finish your message with the decision on its own line:
+- Propose X%, Y%, Z%, ... (follow product order above)
+- Accept
+- Reject
+A message without a decision line is treated as pure conversation.
 
 ROUNDS: {self.max_rounds} maximum
 """
-        
+
         return initial_prompt + prompt
-    
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        """Process a player's action."""
-        current_pid = self.state.current_player_id
-        
-        # Log the action
-        self.state.add_observation(
-            from_id=current_pid,
-            to_id=current_pid,
-            message=f"Your action: {action}",
-            observation_type=ta.ObservationType.PLAYER_ACTION
+
+    def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
+        return None  # the env emits its own "Your action: ..." echo in apply
+
+    def render(self, player_id: int) -> str:
+        """Current state (with per-player proposal analysis) for the player about to act."""
+        terminal_result = self.game_state.get("terminal_result")
+        if terminal_result is not None:
+            return terminal_result["rendered"]
+
+        return render_current_state(
+            self.current_proposal,
+            self.negotiation_history,
+            self.state.turn + 1,
+            self.max_rounds,
+            self.conversation_history,
+            self.products,
+            self.brand_target,
+            self.vendor_target,
+            player_id,
+            self.num_simulations,
         )
-        
-        # Process the action
-        if self._is_valid_action(action):
-            self._process_valid_action(current_pid, action)
-        
+
+    # -- command detection: a decision is a line of its own --
+    def _classify_line(self, line: str) -> Optional[Tuple[str, str]]:
+        """('accept'|'reject', '') or ('propose', arguments) if a stripped line is a decision."""
+        if self._ACCEPT_LINE_RE.fullmatch(line):
+            return "accept", ""
+        if self._REJECT_LINE_RE.fullmatch(line):
+            return "reject", ""
+        match = self._PROPOSE_LINE_RE.fullmatch(line)
+        if match is not None:
+            args = match.group("args").rstrip(" \t.!")
+            if not args or args[0] in "0123456789":
+                return "propose", args
+        return None
+
+    def _find_decisions(self, lines: List[str]) -> List[Dict[str, Any]]:
+        """Every decision line in the message: kind, arguments, and line index."""
+        decisions = []
+        for index, line in enumerate(lines):
+            classified = self._classify_line(line.strip())
+            if classified is not None:
+                kind, args = classified
+                decisions.append({"kind": kind, "args": args, "line": index})
+        return decisions
+
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        """Process a player's action."""
+        action = self.strip_role_tags(action).strip()
+        decision, reason = self._parse_action(player_id, action)
+        if reason is not None:
+            return self.invalid(reason)
+
+        # Log only after validation; invalid actions must be atomic.
+        self.message(player_id, f"Your action: {action}", ta.ObservationType.PLAYER_ACTION, from_id=player_id)
+        if decision is None:
+            self._process_conversation(player_id, action)
+        else:
+            if decision["before"]:
+                self._record_conversation(player_id, decision["before"])
+            if decision["kind"] == "propose":
+                self._process_proposal(player_id, decision["discounts"])
+            elif decision["kind"] == "accept":
+                self._process_accept(player_id)
+            else:
+                self._process_reject(player_id)
+
         # Check for game end conditions
         deal_accepted = self._check_deal_accepted()
-        max_turns_reached = self.state.turn >= self.max_rounds - 1
-        
-        if deal_accepted or max_turns_reached:
-            self._end_game(deal_accepted)
-        
-        # Let TextArena handle turn advancement
-        return self.state.step()
-    
-    def _is_valid_action(self, action: str) -> bool:
-        """Check if an action is valid."""
-        action = action.strip()
-        
-        # Check for action types
-        has_propose = "[Propose]" in action
-        has_accept = "[Accept]" in action
-        has_reject = "[Reject]" in action
-        
-        action_count = sum([has_propose, has_accept, has_reject])
-        
-        # Allow free-text conversation (no bracketed action)
-        if action_count == 0:
-            # This is just conversation - always valid
-            return True
-        elif action_count > 1:
-            self.state.set_invalid_move("Multiple actions detected. Use only one action per turn")
-            return False
-        
-        # Validate proposal
-        if has_propose:
-            if not self._is_valid_proposal(action):
-                return False
-        
-        # Validate accept/reject
-        if has_accept or has_reject:
-            if self.current_proposal['discounts'] is None:
-                action_type = "accept" if has_accept else "reject"
-                self.state.set_invalid_move(f"No current proposal to {action_type}")
-                return False
-            
-            if self.current_proposal['proposer'] == self.state.current_player_id:
-                action_type = "accept" if has_accept else "reject"
-                self.state.set_invalid_move(f"You cannot {action_type} your own proposal")
-                return False
-        
-        return True
-    
-    def _is_valid_proposal(self, action: str) -> bool:
-        """Check if a proposal is valid."""
-        try:
-            discounts = self._extract_proposal_discounts(action)
-            if discounts is None:
-                product_order = ", ".join(self.selected_products)
-                self.state.set_invalid_move(f"Invalid proposal format. Use: [Propose] X%, Y%, Z%, ... following order: {product_order}")
-                return False
-            
-            # Check all products are included
-            if set(discounts.keys()) != set(self.selected_products):
-                missing = set(self.selected_products) - set(discounts.keys())
-                extra = set(discounts.keys()) - set(self.selected_products)
-                msg = "Proposal must include all products. "
-                if missing:
-                    msg += f"Missing: {', '.join(missing)}. "
-                if extra:
-                    msg += f"Extra: {', '.join(extra)}."
-                self.state.set_invalid_move(msg)
-                return False
-            
-            # Check all discounts are allowed
-            for product, discount in discounts.items():
-                if discount not in self.allowed_discounts:
-                    self.state.set_invalid_move(
-                        f"Invalid discount {discount}% for {product}. "
-                        f"Allowed: {', '.join(str(d) + '%' for d in self.allowed_discounts)}"
-                    )
-                    return False
-            
-            return True
-        except Exception as e:
-            self.state.set_invalid_move(f"Error parsing proposal: {str(e)}")
-            return False
-    
-    def _extract_proposal_discounts(self, action: str) -> Optional[Dict[str, int]]:
-        """
-        Extract discount rates from proposal action.
-        Only supports positional format: [Propose] 10%, 5%, 10%, 20%, 0%
-        """
-        try:
-            # Find the part after [Propose]
-            if "[Propose]" not in action:
-                return None
-            
-            proposal_text = action.split("[Propose]")[1].strip()
-            
-            # Parse positional format: [Propose] 10%, 5%, 10%, 20%, 0%
-            positional_pattern = r'(\d+)%'
-            positional_matches = re.findall(positional_pattern, proposal_text)
-            
-            if not positional_matches:
-                return None
-            
-            # Check correct number of discounts
-            if len(positional_matches) != len(self.selected_products):
-                return None
-            
-            # Map to products in order
-            discounts = {}
-            for i, discount_str in enumerate(positional_matches):
-                discounts[self.selected_products[i]] = int(discount_str)
-            
-            return discounts
-        except Exception:
-            return None
-    
-    def _process_valid_action(self, player_id: int, action: str):
-        """Process a valid action."""
-        action = action.strip()
-        
-        if "[Propose]" in action:
-            self._process_proposal(player_id, action)
-        elif "[Accept]" in action:
-            self._process_accept(player_id, action)
-        elif "[Reject]" in action:
-            self._process_reject(player_id, action)
-        else:
-            # Free-text conversation - just broadcast it
-            self._process_conversation(player_id, action)
-    
-    def _process_conversation(self, player_id: int, action: str):
-        """Process free-text conversation."""
-        # Record in conversation history
+        if deal_accepted or self.state.turn >= self.max_rounds - 1:
+            return self._end_game(deal_accepted)
+        return None
+
+    def _parse_action(self, player_id: int, action: str) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
+        """Return (decision, None) for a valid action (decision is None for pure
+        conversation) or (None, reason) for an invalid one."""
+        lines = action.split("\n")
+        decisions = self._find_decisions(lines)
+        if not decisions:
+            return None, None
+        if len(decisions) > 1:
+            return None, "Multiple decisions detected. Use only one decision per turn."
+        decision = decisions[0]
+        if any(rest.strip() for rest in lines[decision["line"] + 1:]):
+            return None, "The decision must be the last line of your message."
+        decision["before"] = "\n".join(lines[:decision["line"]]).strip()
+
+        if decision["kind"] == "propose":
+            discounts, reason = self._parse_discounts(decision["args"])
+            if reason is not None:
+                return None, reason
+            decision["discounts"] = discounts
+        elif self.current_proposal['discounts'] is None:
+            return None, f"No current proposal to {decision['kind']}"
+        elif self.current_proposal['proposer'] == player_id:
+            return None, f"You cannot {decision['kind']} your own proposal"
+        return decision, None
+
+    def _parse_discounts(self, args: str) -> Tuple[Optional[Dict[str, int]], Optional[str]]:
+        """Map 'X%, Y%, Z%' onto the product order; return (discounts, None) or (None, reason)."""
+        product_order = ", ".join(self.selected_products)
+        if self._DISCOUNT_LIST_RE.fullmatch(args) is None:
+            return None, f"Invalid proposal format. Use: 'Propose X%, Y%, Z%, ...' on its own line, following order: {product_order}"
+        values = re.findall(r"[0-9]+", args)
+        if len(values) != len(self.selected_products):
+            return None, (
+                f"Proposal must list exactly {len(self.selected_products)} discounts, "
+                f"one per product in this order: {product_order}"
+            )
+        allowed = ", ".join(f"{d}%" for d in self.allowed_discounts)
+        discounts = {}
+        for product, value in zip(self.selected_products, values):
+            discount = int(value) if len(value) <= 9 else None
+            if discount not in self.allowed_discounts:
+                return None, f"Invalid discount {value}% for {product}. Allowed: {allowed}"
+            discounts[product] = discount
+        return discounts, None
+
+    def _record_conversation(self, player_id: int, message: str):
         self.conversation_history.append({
             'player': player_id,
-            'message': action,
+            'message': message,
             'round': self.state.turn + 1
         })
-        self.state.game_state['conversation_history'] = self.conversation_history
-        
-        # Record in general history
+
+    def _process_conversation(self, player_id: int, action: str):
+        """Process free-text conversation."""
+        self._record_conversation(player_id, action)
         self._record_action(player_id, 'conversation', None)
-        
-        # Broadcast the message
-        self.state.add_observation(
-            from_id=ta.GAME_ID,
-            to_id=-1,
-            message=f"Player {player_id}: {action}",
-            observation_type=ta.ObservationType.GAME_MESSAGE
-        )
-    
-    def _process_proposal(self, player_id: int, action: str):
+        self.broadcast(f"Player {player_id}: {action}", ta.ObservationType.GAME_MESSAGE)
+
+    def _process_proposal(self, player_id: int, discounts: Dict[str, int]):
         """Process a proposal."""
-        discounts = self._extract_proposal_discounts(action)
-        
-        # Extract conversation part (text before [Propose])
-        conversation_part = action.split("[Propose]")[0].strip()
-        if conversation_part:
-            # Record the conversation part
-            self.conversation_history.append({
-                'player': player_id,
-                'message': conversation_part,
-                'round': self.state.turn + 1
-            })
-            self.state.game_state['conversation_history'] = self.conversation_history
-        
-        # Update current proposal
-        self.current_proposal = {'discounts': discounts, 'proposer': player_id}
-        self.state.game_state['current_proposal'] = self.current_proposal
-        
-        # Record in history
+        self.game_state['current_proposal'] = {'discounts': discounts, 'proposer': player_id}
+
         self._record_action(player_id, 'propose', discounts)
-        
-        # Announce the proposal
+
         proposal_str = ", ".join(f"{p}:{d}%" for p, d in discounts.items())
-        message = f"Player {player_id} proposed: {proposal_str}"
-        
-        self.state.add_observation(
-            from_id=ta.GAME_ID,
-            to_id=-1,
-            message=message,
-            observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION
-        )
-    
-    def _process_accept(self, player_id: int, action: str):
+        self.broadcast(f"Player {player_id} proposed: {proposal_str}", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+
+    def _process_accept(self, player_id: int):
         """Process an accept action."""
-        # Extract conversation part (text before [Accept])
-        conversation_part = action.split("[Accept]")[0].strip()
-        if conversation_part:
-            # Record the conversation part
-            self.conversation_history.append({
-                'player': player_id,
-                'message': conversation_part,
-                'round': self.state.turn + 1
-            })
-            self.state.game_state['conversation_history'] = self.conversation_history
-        
         self._record_action(player_id, 'accept', None)
-        
-        message = f"Player {player_id} accepted the proposal"
-        self.state.add_observation(
-            from_id=ta.GAME_ID,
-            to_id=-1,
-            message=message,
-            observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION
-        )
-    
-    def _process_reject(self, player_id: int, action: str):
+        self.broadcast(f"Player {player_id} accepted the proposal", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+
+    def _process_reject(self, player_id: int):
         """Process a reject action."""
-        # Extract conversation part (text before [Reject])
-        conversation_part = action.split("[Reject]")[0].strip()
-        if conversation_part:
-            # Record the conversation part
-            self.conversation_history.append({
-                'player': player_id,
-                'message': conversation_part,
-                'round': self.state.turn + 1
-            })
-            self.state.game_state['conversation_history'] = self.conversation_history
-        
         self._record_action(player_id, 'reject', None)
-        
-        message = f"Player {player_id} rejected the proposal"
-        
+
         # Reset proposal
-        self.current_proposal = {'discounts': None, 'proposer': None}
-        
-        self.state.add_observation(
-            from_id=ta.GAME_ID,
-            to_id=-1,
-            message=message,
-            observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION
-        )
-    
+        self.game_state['current_proposal'] = {'discounts': None, 'proposer': None}
+        self.broadcast(f"Player {player_id} rejected the proposal", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+
     def _record_action(self, player_id: int, action_type: str, discounts: Optional[Dict]):
         """Record action in history."""
         self.negotiation_history.append({
@@ -536,198 +437,133 @@ ROUNDS: {self.max_rounds} maximum
             'discounts': discounts,
             'round': self.state.turn + 1
         })
-        
-        self.state.game_state['negotiation_history'] = self.negotiation_history
-    
+
     def _check_deal_accepted(self) -> bool:
         """Check if the current deal has been accepted."""
         if self.current_proposal['discounts'] is None:
             return False
-        
+
         if self.negotiation_history:
             last_action = self.negotiation_history[-1]
-            if (last_action['type'] == 'accept' and 
+            if (last_action['type'] == 'accept' and
                 last_action['player'] != self.current_proposal['proposer']):
                 return True
-        
+
         return False
-    
-    def _end_game(self, deal_accepted: bool):
+
+    def _end_game(self, deal_accepted: bool) -> ta.Outcome:
         """End the game and determine outcomes."""
         if deal_accepted:
-            self._finalize_accepted_deal()
-        else:
-            self._handle_no_deal()
-        
-        self.state.done = True
-    
-    def _finalize_accepted_deal(self):
+            return self._finalize_accepted_deal()
+        return self._handle_no_deal()
+
+    def _finalize_accepted_deal(self) -> ta.Outcome:
         """Finalize an accepted deal with Monte Carlo simulation."""
+        cached = self.game_state.get("terminal_result")
+        if cached is not None:
+            return self._final_outcome(cached["brand_won"], cached["vendor_won"])
+
         agreed_discounts = self.current_proposal['discounts']
-        
+
         # Run Monte Carlo simulation
         simulation_results = self._calculate_actual_sales(agreed_discounts)
-        
-        # Calculate totals
+
         total_sales = sum(r['avg_sales'] for r in simulation_results.values())
         total_profit = sum(r['avg_profit'] for r in simulation_results.values())
-        
+
         # Check win conditions
         brand_won = total_sales >= self.brand_target
-        vendor_won = total_profit > self.vendor_baseline
-        
-        # Announce results
+        vendor_won = total_profit >= self.vendor_target
+
         results_str = render_final_results(
             simulation_results,
             agreed_discounts,
             brand_won,
             vendor_won,
             self.brand_target,
-            self.vendor_baseline,
+            self.vendor_target,
             self.num_simulations
         )
-        
-        self.state.add_observation(
-            from_id=ta.GAME_ID,
-            to_id=-1,
-            message=results_str,
-            observation_type=ta.ObservationType.GAME_ADMIN
-        )
-        
-        # Set rewards
-        self._set_final_rewards(brand_won, vendor_won)
-    
+        self.game_state["terminal_result"] = {
+            "deal_accepted": True,
+            "agreed_discounts": agreed_discounts.copy(),
+            "simulation_results": simulation_results,
+            "brand_won": brand_won,
+            "vendor_won": vendor_won,
+            "rendered": results_str,
+        }
+        self.broadcast(results_str, ta.ObservationType.GAME_ADMIN)
+
+        return self._final_outcome(brand_won, vendor_won)
+
     def _calculate_actual_sales(self, agreed_discounts: Dict[str, int]) -> Dict[str, Dict[str, float]]:
         """Run Monte Carlo simulation to calculate expected sales and profit."""
-        # Store all simulation results
-        all_simulations = {
-            product: {
-                'units': [],
-                'sales': [],
-                'profit': []
-            } for product in agreed_discounts.keys()
-        }
-        
-        # Run simulations (vectorized for speed)
+        results = {}
         for product_name, discount in agreed_discounts.items():
             product_data = self.products[product_name]['data'][discount]
-            
-            # Generate all samples at once
-            units_samples = np.maximum(0, np.random.normal(
-                product_data['mean_units'],
-                product_data['std_units'],
-                size=self.num_simulations
-            ))
-            
-            # Vectorized calculations
-            price = self.products[product_name]['price']
-            cost = self.products[product_name]['cost']
-            discount_multiplier = 1 - (discount / 100)
-            
-            sales_samples = units_samples * price * discount_multiplier
-            profit_samples = units_samples * (price * discount_multiplier - cost)
-            
-            all_simulations[product_name]['units'] = units_samples
-            all_simulations[product_name]['sales'] = sales_samples
-            all_simulations[product_name]['profit'] = profit_samples
-        
-        # Calculate statistics
-        results = {}
-        for product_name in agreed_discounts.keys():
-            units_array = all_simulations[product_name]['units']
-            sales_array = all_simulations[product_name]['sales']
-            profit_array = all_simulations[product_name]['profit']
-            
+
+            units_samples = [
+                max(0.0, self.rng.gauss(product_data['mean_units'], product_data['std_units']))
+                for _ in range(self.num_simulations)
+            ]
+            avg_units = statistics.fmean(units_samples)
+
+            # Each unit earns the forecast's per-unit sales and profit, so the
+            # expected totals match the forecasts both players are shown.
+            mean_units = product_data['mean_units']
+            sales_per_unit = product_data['mean_sales'] / mean_units if mean_units else 0.0
+            profit_per_unit = product_data['mean_profit'] / mean_units if mean_units else 0.0
+
             results[product_name] = {
-                'discount': agreed_discounts[product_name],
-                'avg_units': float(np.mean(units_array)),
-                'avg_sales': float(np.mean(sales_array)),
-                'avg_profit': float(np.mean(profit_array))
+                'discount': discount,
+                'avg_units': avg_units,
+                'avg_sales': avg_units * sales_per_unit,
+                'avg_profit': avg_units * profit_per_unit,
             }
-        
+
         return results
-    
-    def _handle_no_deal(self):
+
+    def _handle_no_deal(self) -> ta.Outcome:
         """Handle case where no deal was reached."""
-        results_str = render_no_deal(self.brand_target, self.vendor_baseline)
-        
-        self.state.add_observation(
-            from_id=ta.GAME_ID,
-            to_id=-1,
-            message=results_str,
-            observation_type=ta.ObservationType.GAME_ADMIN
-        )
-        
-        # Both players lose
-        self._set_final_rewards(False, False)
-    
-    def _set_final_rewards(self, brand_won: bool, vendor_won: bool):
-        """Set final rewards based on win conditions."""
+        cached = self.game_state.get("terminal_result")
+        if cached is not None:
+            return self._final_outcome(cached["brand_won"], cached["vendor_won"])
+
+        results_str = render_no_deal(self.brand_target, self.vendor_target)
+        self.game_state["terminal_result"] = {
+            "deal_accepted": False,
+            "brand_won": False,
+            "vendor_won": False,
+            "rendered": results_str,
+        }
+        self.broadcast(results_str, ta.ObservationType.GAME_ADMIN)
+
+        return self._final_outcome(False, False)
+
+    def _final_outcome(self, brand_won: bool, vendor_won: bool) -> ta.Outcome:
+        """Each side scores 1 if it met its own target and 0 otherwise."""
         if brand_won and vendor_won:
-            # Both won - draw
-            self.state.set_draw(reason="Both players achieved their objectives")
-        elif brand_won and not vendor_won:
-            # Brand won
-            self.state.set_winner(player_id=0, reason="Brand Specialist achieved sales target")
-        elif vendor_won and not brand_won:
-            # Vendor won
-            self.state.set_winner(player_id=1, reason="Vendor achieved profit target")
+            reason = "Both players achieved their objectives"
+        elif brand_won:
+            reason = "Only the Brand Specialist achieved its sales target"
+        elif vendor_won:
+            reason = "Only the Vendor achieved its profit target"
         else:
-            # Both lost - draw
-            self.state.set_draw(reason="Neither player achieved their objective")
-    
-    def get_observation(self):
-        """Get observation for current player."""
-        player_id = self.state.current_player_id
-        observation = self.state.get_current_player_observation()
-        
-        # Add current state information
-        state_info = render_current_state(
-            self.current_proposal,
-            self.negotiation_history,
-            self.state.turn + 1,
-            self.max_rounds,
-            self.conversation_history,
-            self.products,
-            self.brand_target,
-            self.vendor_baseline,
-            player_id
+            reason = "Neither player achieved their objective"
+        return self.outcome({0: int(brand_won), 1: int(vendor_won)}, reason=reason)
+
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome(
+            {player_id: 0, 1 - player_id: 1},
+            reason=f"{self.roles()[player_id]} made repeated invalid moves. Reason: {reason}",
         )
-        
-        observation.append((ta.GAME_ID, state_info, ta.ObservationType.GAME_BOARD))
-        
-        return player_id, observation
-    
+
     def get_board_str(self) -> str:
         """Return the main board string for rendering."""
-        if getattr(self.state, "done", False):
-            # Game is over - show final results
-            if self.current_proposal['discounts'] is not None and self._check_deal_accepted():
-                # Deal was accepted - show the actual simulation results
-                agreed_discounts = self.current_proposal['discounts']
-                simulation_results = self._calculate_actual_sales(agreed_discounts)
-                
-                # Calculate totals
-                total_sales = sum(r['avg_sales'] for r in simulation_results.values())
-                total_profit = sum(r['avg_profit'] for r in simulation_results.values())
-                
-                # Check win conditions
-                brand_won = total_sales >= self.brand_target
-                vendor_won = total_profit > self.vendor_baseline
-                
-                return render_final_results(
-                    simulation_results,
-                    agreed_discounts,
-                    brand_won,
-                    vendor_won,
-                    self.brand_target,
-                    self.vendor_baseline,
-                    self.num_simulations
-                )
-            else:
-                # No deal
-                return render_no_deal(self.brand_target, self.vendor_baseline)
-        
+        terminal_result = self.game_state.get("terminal_result")
+        if terminal_result is not None:
+            return terminal_result["rendered"]
+
         # Ongoing game
         return render_current_state(
             self.current_proposal,

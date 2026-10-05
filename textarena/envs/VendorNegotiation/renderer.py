@@ -5,7 +5,7 @@ Provides LLM-optimized display functions for game state, product data,
 and final results. All displays are minimal and structured for easy parsing.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Optional
 
 
 def render_product_data_for_brand(products: Dict, 
@@ -66,6 +66,22 @@ def render_product_data_for_vendor(products: Dict,
     return "\n".join(lines)
 
 
+def _scored_average(products: Dict, discounts: Dict[str, int], metric: str, num_simulations: int):
+    """Mean and standard error of the simulated average total of `metric`.
+
+    Mirrors the scoring simulation: units ~ Normal(mean_units, std_units) per
+    product, each unit worth the forecast's per-unit value (clipping at zero units
+    is negligible for these forecasts).
+    """
+    mean = variance = 0.0
+    for product, discount in discounts.items():
+        data = products[product]['data'][discount]
+        per_unit = data[metric] / data['mean_units'] if data['mean_units'] else 0.0
+        mean += data[metric]
+        variance += (data['std_units'] * per_unit) ** 2
+    return mean, (variance / num_simulations) ** 0.5
+
+
 def render_current_state(current_proposal: Optional[Dict],
                         negotiation_history: List[Dict],
                         current_round: int,
@@ -73,11 +89,15 @@ def render_current_state(current_proposal: Optional[Dict],
                         conversation_history: Optional[List[Dict]] = None,
                         products: Optional[Dict] = None,
                         brand_target: Optional[float] = None,
-                        vendor_baseline: Optional[float] = None,
-                        current_player_id: Optional[int] = None) -> str:
+                        vendor_target: Optional[float] = None,
+                        current_player_id: Optional[int] = None,
+                        num_simulations: int = 1) -> str:
     """
     Render minimal current game state.
     Shows current proposal, recent conversation, and last 3 actions.
+
+    The proposal analysis describes the statistic a deal is scored on: the
+    average over `num_simulations` simulated draws.
     """
     lines = [f"ROUND {current_round}/{max_rounds}\n"]
     
@@ -90,42 +110,24 @@ def render_current_state(current_proposal: Optional[Dict],
         lines.append(f"Proposed by: Player {current_proposal['proposer']}")
         
         # Show proposal analysis if we have the data
-        if products and brand_target is not None and vendor_baseline is not None:
+        if products and brand_target is not None and vendor_target is not None:
             lines.append("")
-            lines.append("PROPOSAL ANALYSIS WITH 95% CONFIDENCE INTERVALS:")
-            
-            total_sales_mean = 0
-            total_sales_std = 0
-            total_profit_mean = 0
-            total_profit_std = 0
-            
-            for product, discount in current_proposal['discounts'].items():
-                if product in products:
-                    data = products[product]['data'][discount]
-                    total_sales_mean += data['mean_sales']
-                    total_sales_std += data['std_sales'] ** 2  # Sum variances
-                    total_profit_mean += data['mean_profit']
-                    total_profit_std += data['std_profit'] ** 2  # Sum variances
-            
-            # Convert back to standard deviations
-            total_sales_std = total_sales_std ** 0.5
-            total_profit_std = total_profit_std ** 0.5
-            
-            # Calculate 95% confidence intervals (mean ± 1.96 * std)
-            sales_lower = max(0, total_sales_mean - 1.96 * total_sales_std)
-            sales_upper = total_sales_mean + 1.96 * total_sales_std
-            profit_lower = total_profit_mean - 1.96 * total_profit_std
-            profit_upper = total_profit_mean + 1.96 * total_profit_std
-            
+            lines.append(f"PROPOSAL ANALYSIS (deals are scored on the average of {num_simulations} simulated draws):")
+
+            sales_mean, sales_std = _scored_average(products, current_proposal['discounts'], 'mean_sales', num_simulations)
+            profit_mean, profit_std = _scored_average(products, current_proposal['discounts'], 'mean_profit', num_simulations)
+            sales_lower, sales_upper = sales_mean - 1.96 * sales_std, sales_mean + 1.96 * sales_std
+            profit_lower, profit_upper = profit_mean - 1.96 * profit_std, profit_mean + 1.96 * profit_std
+
             # Show analysis for current player
             if current_player_id == 0:  # Brand Specialist
                 status = "LIKELY MEETS TARGET" if sales_lower >= brand_target else "RISKY - MAY MISS TARGET"
-                lines.append(f"Expected Sales: ${total_sales_mean:.0f} (95% CI: ${sales_lower:.0f}-${sales_upper:.0f}) - {status}")
+                lines.append(f"Expected Sales: ${sales_mean:.0f} (95% range of the scored average: ${sales_lower:.0f}-${sales_upper:.0f}) - {status}")
                 lines.append(f"Your Target: ${brand_target:.0f}")
             elif current_player_id == 1:  # Vendor
-                status = "LIKELY BEATS BASELINE" if profit_lower > vendor_baseline else "RISKY - MAY MISS BASELINE"
-                lines.append(f"Expected Profit: ${total_profit_mean:.0f} (95% CI: ${profit_lower:.0f}-${profit_upper:.0f}) - {status}")
-                lines.append(f"Your Baseline: ${vendor_baseline:.0f}")
+                status = "LIKELY MEETS TARGET" if profit_lower >= vendor_target else "RISKY - MAY MISS TARGET"
+                lines.append(f"Expected Profit: ${profit_mean:.0f} (95% range of the scored average: ${profit_lower:.0f}-${profit_upper:.0f}) - {status}")
+                lines.append(f"Your Target: ${vendor_target:.0f}")
         
         lines.append("")
     else:
@@ -162,7 +164,7 @@ def render_final_results(simulation_results: Dict,
                         brand_won: bool,
                         vendor_won: bool,
                         brand_target: float,
-                        vendor_baseline: float,
+                        vendor_target: float,
                         num_simulations: int) -> str:
     """
     Render minimal final results with Monte Carlo statistics.
@@ -193,24 +195,24 @@ def render_final_results(simulation_results: Dict,
     
     # Outcomes
     lines.append(f"\nOUTCOMES:")
-    brand_status = "WON" if brand_won else "LOST"
-    vendor_status = "WON" if vendor_won else "LOST"
+    brand_status = "TARGET MET, score 1" if brand_won else "TARGET MISSED, score 0"
+    vendor_status = "TARGET MET, score 1" if vendor_won else "TARGET MISSED, score 0"
     lines.append(
         f"Brand Specialist: {brand_status} "
         f"(Target: ${brand_target:.0f}, Achieved: ${total_sales:.0f})"
     )
     lines.append(
         f"Vendor: {vendor_status} "
-        f"(Baseline: ${vendor_baseline:.0f}, Achieved: ${total_profit:.0f})"
+        f"(Target: ${vendor_target:.0f}, Achieved: ${total_profit:.0f})"
     )
     
     return "\n".join(lines)
 
 
-def render_no_deal(brand_target: float, vendor_baseline: float) -> str:
+def render_no_deal(brand_target: float, vendor_target: float) -> str:
     """Render result when no deal was reached."""
     lines = ["NO DEAL REACHED\n"]
     lines.append("OUTCOMES:")
-    lines.append(f"Brand Specialist: LOST (Target: ${brand_target:.0f}, Achieved: $0)")
-    lines.append(f"Vendor: LOST (Baseline: ${vendor_baseline:.0f}, Achieved: $0)")
+    lines.append(f"Brand Specialist: NO DEAL, score 0 (Target: ${brand_target:.0f}, Achieved: $0)")
+    lines.append(f"Vendor: NO DEAL, score 0 (Target: ${vendor_target:.0f}, Achieved: $0)")
     return "\n".join(lines)

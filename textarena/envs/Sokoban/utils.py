@@ -1,7 +1,7 @@
 import random
-import numpy as np
-import marshal
-from collections import deque
+from dataclasses import dataclass, field
+from itertools import chain
+from typing import Optional
 
 
 # Moves are mapped to coordinate changes as follows
@@ -15,254 +15,51 @@ CHANGE_COORDINATES = {
     2: (0, -1),
     3: (0, 1)
 }
+MAX_EXPLORED_STATES = 50_000
 
 
-def is_deadlock_position(room_structure, position):
+def find_cells(room, *values):
+    """(row, col) of every cell holding one of `values`, in row-major order."""
+    return [(r, c) for r, row in enumerate(room) for c, cell in enumerate(row) if cell in values]
+
+
+def generate_room(
+    rng: random.Random,
+    dim=(13, 13),
+    p_change_directions=0.35,
+    num_steps=25,
+    num_boxes=3,
+    search_depth: int = 100,
+):
     """
-    Check if a position would be a deadlock for a box (corner trap or wall trap).
-    A position is a deadlock if:
-    1. It's a corner (two adjacent walls) and has no target
-    2. It's against a wall with no escape route and no target
+    One attempt at a room: carve floors with a random walk, put every box on its goal, then pull the boxes off
+    by playing in reverse. Undoing the pulls solves the room, so every room returned is solvable.
+    Returns (room_structure, room_state, box_mapping), or None if this attempt failed.
     """
-    r, c = position
-    
-    # If position has a target, it's not a deadlock
-    if room_structure[r, c] == 2:  # Target position
-        return False
-    
-    # Check for corner deadlock (two adjacent walls)
-    walls_adjacent = 0
-    wall_directions = []
-    
-    # Check all 4 directions for walls
-    for i, (dr, dc) in enumerate([(-1, 0), (1, 0), (0, -1), (0, 1)]):
-        nr, nc = r + dr, c + dc
-        if (nr < 0 or nr >= room_structure.shape[0] or 
-            nc < 0 or nc >= room_structure.shape[1] or 
-            room_structure[nr, nc] == 0):  # Wall or boundary
-            walls_adjacent += 1
-            wall_directions.append(i)
-    
-    # Corner deadlock: two adjacent walls
-    if walls_adjacent >= 2:
-        # Check if walls are adjacent (not opposite)
-        if walls_adjacent == 2:
-            # Adjacent if difference in direction indices is 2 or they're 0,3 or 1,2
-            dir_diff = abs(wall_directions[0] - wall_directions[1])
-            if dir_diff == 1 or dir_diff == 3:  # Adjacent walls
-                return True
-        elif walls_adjacent > 2:  # 3 or 4 walls = definitely corner
-            return True
-    
-    return False
+    room = room_topology_generation(rng, dim, p_change_directions, num_steps)
+    floors = find_cells(room, 1)
+    if len(floors) <= num_boxes + 1:
+        return None
+    player, *goals = rng.sample(floors, num_boxes + 1)
+    room[player[0]][player[1]] = 5
+    for r, c in goals:
+        room[r][c] = 2
+
+    # Room structure holds the parts of the room that never move; room state adds the boxes and the player.
+    room_structure = [[1 if cell == 5 else cell for cell in row] for row in room]
+    room_state = [[4 if cell == 2 else cell for cell in row] for row in room]
+    room_state, score, box_mapping = reverse_playing(room_state, room_structure, search_depth=search_depth)
+    if score <= 0:
+        return None
+    for r, c in find_cells(room_state, 3, 4):
+        room_state[r][c] = 3 if room_structure[r][c] == 2 else 4
+    return room_structure, room_state, box_mapping
 
 
-def detect_frozen_deadlocks(room_state, room_structure):
-    """
-    Detect frozen deadlocks - configurations where boxes block each other
-    and cannot be resolved.
-    """
-    # Find all boxes
-    boxes = np.where((room_state == 3) | (room_state == 4))  # Boxes on/off targets
-    
-    if len(boxes[0]) < 2:
-        return False
-    
-    # Check for boxes forming unmovable clusters
-    for i in range(len(boxes[0])):
-        box_pos = (boxes[0][i], boxes[1][i])
-        
-        # Check if this box can move in any direction
-        can_move = False
-        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-            new_r, new_c = box_pos[0] + dr, box_pos[1] + dc
-            push_r, push_c = box_pos[0] - dr, box_pos[1] - dc
-            
-            # Check if player can reach push position and box can move to new position
-            if (0 <= new_r < room_state.shape[0] and 0 <= new_c < room_state.shape[1] and
-                0 <= push_r < room_state.shape[0] and 0 <= push_c < room_state.shape[1]):
-                
-                # New position must be empty or target
-                if room_state[new_r, new_c] in [1, 2]:
-                    # Push position must be reachable by player
-                    if room_state[push_r, push_c] in [1, 2] or is_player_reachable(room_state, (push_r, push_c)):
-                        can_move = True
-                        break
-        
-        if not can_move:
-            return True
-    
-    return False
-
-
-def is_player_reachable(room_state, target_pos):
-    """
-    Check if player can reach a target position using BFS.
-    """
-    player_pos = np.where(room_state == 5)
-    if len(player_pos[0]) == 0:
-        return False
-    
-    start = (player_pos[0][0], player_pos[1][0])
-    if start == target_pos:
-        return True
-    
-    visited = set()
-    queue = deque([start])
-    visited.add(start)
-    
-    while queue:
-        r, c = queue.popleft()
-        
-        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-            nr, nc = r + dr, c + dc
-            
-            if (0 <= nr < room_state.shape[0] and 0 <= nc < room_state.shape[1] and
-                (nr, nc) not in visited):
-                
-                # Player can move to empty spaces or targets
-                if room_state[nr, nc] in [1, 2]:
-                    if (nr, nc) == target_pos:
-                        return True
-                    queue.append((nr, nc))
-                    visited.add((nr, nc))
-    
-    return False
-
-
-def check_initial_deadlocks(room_state, room_structure):
-    """
-    Check if the initial room setup has any deadlock situations.
-    Returns True if deadlocks are found.
-    """
-    # Check for boxes in deadlock positions
-    boxes = np.where((room_state == 3) | (room_state == 4))
-    
-    for i in range(len(boxes[0])):
-        box_pos = (boxes[0][i], boxes[1][i])
-        if is_deadlock_position(room_structure, box_pos):
-            return True
-    
-    # Check for frozen deadlocks
-    if detect_frozen_deadlocks(room_state, room_structure):
-        return True
-    
-    return False
-
-
-def generate_room(dim=(13, 13), p_change_directions=0.35, num_steps=25, num_boxes=3, tries=1000, second_player=False, seed: int = None):
-    """
-    Generates a Sokoban room with deadlock detection to ensure solvability.
-    """
-    rng_objects = {'random': random.Random(seed), 'numpy': np.random.default_rng(seed)} if seed is not None else {}
-    
-    # Increase tries since we're being more strict about deadlocks
-    for t in range(tries):
-        try:
-            room = room_topology_generation(dim, p_change_directions, num_steps, rng_objects=rng_objects)
-            room = place_boxes_and_player(room, num_boxes=num_boxes, second_player=second_player, rng_objects=rng_objects)
-
-            # Room fixed represents all not movable parts of the room
-            room_structure = np.copy(room)
-            room_structure[room_structure == 5] = 1
-
-            # Room structure represents the current state of the room including movable parts
-            room_state = room.copy()
-            room_state[room_state == 2] = 4
-            
-            # Check for initial deadlocks before reverse playing
-            if check_initial_deadlocks(room_state, room_structure):
-                continue
-            
-            room_state, score, box_mapping = reverse_playing(room_state, room_structure)
-            room_state[room_state == 3] = 4
-            
-            # Double-check final state for deadlocks
-            if score > 0 and not check_initial_deadlocks(room_state, room_structure):
-                return room_structure, room_state, box_mapping
-                
-        except (RuntimeError, RuntimeWarning):
-            continue
-    
-    raise RuntimeWarning('Could not generate a room without deadlocks after {} tries'.format(tries))
-
-
-def place_boxes_and_player_safe(room, num_boxes, second_player, rng_objects={}):
-    """
-    Enhanced version that avoids placing boxes in obvious deadlock positions.
-    """
-    numpy_rng = rng_objects['numpy'] if 'numpy' in rng_objects else np.random.default_rng()
-    
-    # Get all available positions
-    possible_positions = np.where(room == 1)
-    num_possible_positions = possible_positions[0].shape[0]
-    num_players = 2 if second_player else 1
-
-    if num_possible_positions <= num_boxes + num_players:
-        raise RuntimeError('Not enough free spots (#{}) to place {} player and {} boxes.'.format(
-            num_possible_positions,
-            num_players,
-            num_boxes)
-        )
-
-    # Place player(s) first
-    ind = numpy_rng.integers(num_possible_positions)
-    player_position = possible_positions[0][ind], possible_positions[1][ind]
-    room[player_position] = 5
-
-    if second_player:
-        possible_positions = np.where(room == 1)
-        num_possible_positions = possible_positions[0].shape[0]
-        ind = numpy_rng.integers(num_possible_positions)
-        player_position = possible_positions[0][ind], possible_positions[1][ind]
-        room[player_position] = 5
-
-    # Place boxes, avoiding obvious deadlock positions
-    boxes_placed = 0
-    attempts = 0
-    max_attempts = num_possible_positions * 3
-    
-    while boxes_placed < num_boxes and attempts < max_attempts:
-        possible_positions = np.where(room == 1)
-        num_possible_positions = possible_positions[0].shape[0]
-        
-        if num_possible_positions == 0:
-            break
-            
-        ind = numpy_rng.integers(num_possible_positions)
-        box_position = possible_positions[0][ind], possible_positions[1][ind]
-        
-        # Check if this position would be a deadlock
-        temp_room = room.copy()
-        temp_room[box_position] = 2
-        
-        if not is_deadlock_position(temp_room, box_position):
-            room[box_position] = 2
-            boxes_placed += 1
-        
-        attempts += 1
-    
-    if boxes_placed < num_boxes:
-        raise RuntimeError('Could not place all boxes without creating deadlocks')
-    
-    return room
-
-
-# Replace the original place_boxes_and_player function
-def place_boxes_and_player(room, num_boxes, second_player, rng_objects={}):
-    """
-    Places the player and the boxes into the floors in a room.
-    Now with deadlock avoidance.
-    """
-    return place_boxes_and_player_safe(room, num_boxes, second_player, rng_objects)
-
-
-# Keep all other original functions unchanged
-def room_topology_generation(dim=(10, 10), p_change_directions=0.35, num_steps=15, rng_objects={}):
+def room_topology_generation(rng, dim=(10, 10), p_change_directions=0.35, num_steps=15):
     """
     Generate a room topology, which consits of empty floors and walls.
     """
-    random_rng = rng_objects['random'] if 'random' in rng_objects else random.Random()
     dim_x, dim_y = dim
 
     # The ones in the mask represent all fields which will be set to floors
@@ -298,45 +95,52 @@ def room_topology_generation(dim=(10, 10), p_change_directions=0.35, num_steps=1
 
     # Possible directions during the walk
     directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
-    direction = random_rng.sample(directions, 1)[0]
+    direction = rng.choice(directions)
 
     # Starting position of random walk
-    position = np.array([
-        random_rng.randint(1, dim_x - 1),
-        random_rng.randint(1, dim_y - 1)]
+    position = (
+        rng.randint(1, dim_x - 1),
+        rng.randint(1, dim_y - 1)
     )
 
-    level = np.zeros(dim, dtype=int)
+    level = [[0] * dim_y for _ in range(dim_x)]
 
     for s in range(num_steps):
 
         # Change direction randomly
-        if random_rng.random() < p_change_directions:
-            direction = random_rng.sample(directions, 1)[0]
+        if rng.random() < p_change_directions:
+            direction = rng.choice(directions)
 
         # Update position
-        position = position + direction
-        position[0] = max(min(position[0], dim_x - 2), 1)
-        position[1] = max(min(position[1], dim_y - 2), 1)
+        position = (
+            max(min(position[0] + direction[0], dim_x - 2), 1),
+            max(min(position[1] + direction[1], dim_y - 2), 1)
+        )
 
         # Apply mask
-        mask = random_rng.sample(masks, 1)[0]
-        mask_start = position - 1
-        level[mask_start[0]:mask_start[0] + 3, mask_start[1]:mask_start[1] + 3] += mask
+        mask = rng.choice(masks)
+        mask_start = (position[0] - 1, position[1] - 1)
+        for dx, mask_row in enumerate(mask):
+            for dy, floor in enumerate(mask_row):
+                if floor:
+                    level[mask_start[0] + dx][mask_start[1] + dy] = 1
 
-    level[level > 0] = 1
-    level[:, [0, dim_y - 1]] = 0
-    level[[0, dim_x - 1], :] = 0
+    for row in level:
+        row[0] = row[dim_y - 1] = 0
+    level[0] = [0] * dim_y
+    level[dim_x - 1] = [0] * dim_y
 
     return level
 
 
-# Global variables used for reverse playing.
-explored_states = set()
-num_boxes = 0
-best_room_score = -1
-best_room = None
-best_box_mapping = None
+@dataclass
+class ReverseSearch:
+    """Explored states and the best room found so far by one reverse-play search."""
+    num_boxes: int
+    best_box_mapping: dict
+    best_room: Optional[list] = None
+    best_room_score: int = -1
+    explored_states: set = field(default_factory=set)
 
 
 def reverse_playing(room_state, room_structure, search_depth=100):
@@ -345,105 +149,103 @@ def reverse_playing(room_state, room_structure, search_depth=100):
     move and pull boxes.
     It ensures a solvable level with all boxes not being placed on a box target.
     """
-    global explored_states, num_boxes, best_room_score, best_room, best_box_mapping
-
     # Box_Mapping is used to calculate the box displacement for every box
-    box_mapping = {}
-    box_locations = np.where(room_structure == 2)
-    num_boxes = len(box_locations[0])
-    for l in range(num_boxes):
-        box = (box_locations[0][l], box_locations[1][l])
-        box_mapping[box] = box
+    box_mapping = {box: box for box in find_cells(room_structure, 2)}
 
-    # explored_states globally stores the best room state and score found during search
-    explored_states = set()
-    best_room_score = -1
-    best_box_mapping = box_mapping
-    depth_first_search(room_state, room_structure, box_mapping, box_swaps=0, last_pull=(-1, -1), ttl=300)
+    search = ReverseSearch(num_boxes=len(box_mapping), best_box_mapping=box_mapping)
+    depth_first_search(
+        search,
+        room_state,
+        room_structure,
+        box_mapping,
+        box_swaps=0,
+        last_pull=(-1, -1),
+        ttl=search_depth,
+    )
 
-    return best_room, best_room_score, best_box_mapping
+    return search.best_room, search.best_room_score, search.best_box_mapping
 
 
-def depth_first_search(room_state, room_structure, box_mapping, box_swaps=0, last_pull=(-1, -1), ttl=300):
+def depth_first_search(search, room_state, room_structure, box_mapping, box_swaps=0, last_pull=(-1, -1), ttl=300):
     """
     Searches through all possible states of the room.
-    This is a recursive function, which stops if the tll is reduced to 0 or
-    over 1.000.000 states have been explored.
+    This is a recursive function, which stops if the ttl is reduced to 0 or
+    MAX_EXPLORED_STATES states have been explored.
     """
-    global explored_states, num_boxes, best_room_score, best_room, best_box_mapping
-
     ttl -= 1
-    if ttl <= 0 or len(explored_states) >= 300000:
+    if ttl <= 0 or len(search.explored_states) >= MAX_EXPLORED_STATES:
         return
 
-    state_tohash = marshal.dumps(room_state)
+    # Cell values are 0-5, so a room state packs into one byte per cell.
+    state_tohash = bytes(chain.from_iterable(room_state))
 
     # Only search this state, if it not yet has been explored
-    if not (state_tohash in explored_states):
+    if not (state_tohash in search.explored_states):
 
         # Add current state and its score to explored states
         room_score = box_swaps * box_displacement_score(box_mapping)
-        if np.where(room_state == 2)[0].shape[0] != num_boxes:
+        if sum(row.count(2) for row in room_state) != search.num_boxes:
             room_score = 0
 
-        if room_score > best_room_score:
-            best_room = room_state
-            best_room_score = room_score
-            best_box_mapping = box_mapping
+        if room_score > search.best_room_score:
+            search.best_room = room_state
+            search.best_room_score = room_score
+            search.best_box_mapping = box_mapping
 
-        explored_states.add(state_tohash)
+        search.explored_states.add(state_tohash)
 
         for action in ['up', 'down', 'left', 'right']:
-            # The state and box mapping  need to be copied to ensure
-            # every action start from a similar state.
-            room_state_next = room_state.copy()
-            box_mapping_next = box_mapping.copy()
-
-            room_state_next, box_mapping_next, last_pull_next = \
-                reverse_move(room_state_next, room_structure, box_mapping_next, last_pull, action)
+            moved = reverse_move(room_state, room_structure, box_mapping, last_pull, action)
+            if moved is None:
+                continue
+            room_state_next, box_mapping_next, last_pull_next = moved
 
             box_swaps_next = box_swaps
             if last_pull_next != last_pull:
                 box_swaps_next += 1
 
-            depth_first_search(room_state_next, room_structure,
+            depth_first_search(search, room_state_next, room_structure,
                                box_mapping_next, box_swaps_next,
-                               last_pull, ttl)
+                               last_pull_next, ttl)
 
 
 def reverse_move(room_state, room_structure, box_mapping, last_pull, action):
     """
-    Perform reverse action. Where all actions in the range [0, 3] correspond to
-    push actions and the ones greater 3 are simmple move actions.
+    Perform a reverse action: the player moves one field and pulls along the box
+    behind them, if there is one. Returns the new room state, box mapping and last
+    pulled box, leaving the arguments unchanged, or None if the move is blocked.
     """
-    player_position = np.where(room_state == 5)
-    player_position = np.array([player_position[0][0], player_position[1][0]])
+    player_row = next(r for r, row in enumerate(room_state) if 5 in row)
+    player_position = (player_row, room_state[player_row].index(5))
 
     change = CHANGE_COORDINATES[['up', 'down', 'left', 'right'].index(action)]
-    next_position = player_position + change
+    next_position = (player_position[0] + change[0], player_position[1] + change[1])
 
     # Check if next position is an empty floor or an empty box target
-    if room_state[next_position[0], next_position[1]] in [1, 2]:
+    if room_state[next_position[0]][next_position[1]] not in [1, 2]:
+        return None
 
-        # Move player, independent of pull or move action.
-        room_state[player_position[0], player_position[1]] = room_structure[player_position[0], player_position[1]]
-        room_state[next_position[0], next_position[1]] = 5
+    room_state = [row[:] for row in room_state]
 
-        # In addition try to pull a box if the action is a pull action
-        possible_box_location = change[0] * -1, change[1] * -1
-        possible_box_location += player_position
+    # Move player, independent of pull or move action.
+    room_state[player_position[0]][player_position[1]] = room_structure[player_position[0]][player_position[1]]
+    room_state[next_position[0]][next_position[1]] = 5
 
-        if room_state[possible_box_location[0], possible_box_location[1]] in [3, 4]:
-            # Perform pull of the adjacent box
-            room_state[player_position[0], player_position[1]] = 3
-            room_state[possible_box_location[0], possible_box_location[1]] = room_structure[
-                possible_box_location[0], possible_box_location[1]]
+    # In addition try to pull a box if the action is a pull action
+    possible_box_location = (player_position[0] - change[0], player_position[1] - change[1])
 
-            # Update the box mapping
-            for k in box_mapping.keys():
-                if box_mapping[k] == (possible_box_location[0], possible_box_location[1]):
-                    box_mapping[k] = (player_position[0], player_position[1])
-                    last_pull = k
+    if room_state[possible_box_location[0]][possible_box_location[1]] in [3, 4]:
+        # Perform pull of the adjacent box
+        room_state[player_position[0]][player_position[1]] = 3
+        room_state[possible_box_location[0]][possible_box_location[1]] = room_structure[
+            possible_box_location[0]][possible_box_location[1]]
+
+        # Update the box mapping
+        box_mapping = box_mapping.copy()
+        for k in box_mapping.keys():
+            if box_mapping[k] == possible_box_location:
+                box_mapping[k] = player_position
+                last_pull = k
 
     return room_state, box_mapping, last_pull
 
@@ -454,9 +256,6 @@ def box_displacement_score(box_mapping):
     and their origin box targets.
     """
     score = 0
-    for box_target in box_mapping.keys():
-        box_location = np.array(box_mapping[box_target])
-        box_target = np.array(box_target)
-        dist = np.sum(np.abs(box_location - box_target))
-        score += dist
+    for box_target, box_location in box_mapping.items():
+        score += abs(box_location[0] - box_target[0]) + abs(box_location[1] - box_target[1])
     return score

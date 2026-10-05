@@ -1,107 +1,68 @@
-# Memory Game Environment Documentation
+# Memory Game
 
-## Overview
-**Memory Game** (also known as Concentration or Matching Pairs) is a card game where players take turns flipping pairs of cards to find matching pairs. The board consists of a grid of face-down cards, with each card having a matching partner somewhere else on the board. When a player successfully matches a pair, they score a point and the cards remain face-up. If the cards don't match, they are flipped back face-down. The player who matches the most pairs by the end of the game wins. This implementation supports variable grid sizes to adjust difficulty.
+Two players take turns turning over two face-down cards, keeping matching pairs and moving again after each match,
+and whoever collects more pairs wins ([rules](https://en.wikipedia.org/wiki/Concentration_%28card_game%29)). Also
+known as Concentration, it tests remembering every card that has been revealed, by either player.
 
-## Action Space
+<!-- BEGIN GENERATED: variants -->
+**Players:** 2
 
-- **Format:** Actions are strings representing the positions of two cards to flip, in the format `[R1 C1 R2 C2]`, where R1 and C1 are the row and column of the first card, and R2 and C2 are the row and column of the second card.
-- **Examples:**
-  - Flip card at (0,1) and card at (1,0): `[0 1 1 0]`
-  - Flip card at (2,3) and card at (3,1): `[2 3 3 1]`
-- **Notes:** Players can include additional text in their replies, but must provide their card selections in the correct format with square brackets.
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
-## Observation Space
+| Env ID | Parameters |
+| --- | --- |
+| `MemoryGame-v1` | `grid_size=4`, `max_turns=30` |
+| `MemoryGame-v1-hard` | `grid_size=8`, `max_turns=80` |
 
-**Reset Observations**
-On reset, each player receives a prompt containing their game instructions and the initial board state. For example:
+Append `-mdp` to any ID for the state-complete variant (e.g. `MemoryGame-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("MemoryGame-v1", grid_size=...)`.
+<!-- END GENERATED: variants -->
 
-```plaintext
-You are Player 0. You are playing the Memory Game.
-Your goal is to match more pairs of cards on the board, than your opponent.
-On your turn, select two cards to flip by entering the row and column numbers of the first and second card respectively like [0 1 1 0], where the first card is in row 0 and column 1, and the second card is in row 1 and column 0.
-If the two cards match, you get a point and the cards remain face up. If they do not match, the cards are flipped back face down, e.g. '.'.
-The game ends when all pairs have been matched.
-Here is the initial board with all cards faced down:
-  0 1 2 3
-0 . . . .
-1 . . . .
-2 . . . .
-3 . . . .
-```
+## Rules
 
-**Step Observations**
-After each move, players receive updates about the cards flipped and whether they matched. For example:
+- The board is a `grid_size`×`grid_size` grid of face-down cards in which every symbol appears exactly twice. Symbols
+  are letters: `A` to `Z`, then `AA`, `AB`, and so on for larger grids.
+- Player 0 goes first. On your turn, name two different face-down cards.
+- If they match, you score a point, the pair stays face up, and you take another turn.
+- If they do not match, both players are told the two symbols, the cards are turned face down again, and the turn
+  passes to your opponent.
+- Naming a face-up card, the same card twice, or a position outside the grid is an invalid move.
+- When the last pair is matched, the player with more pairs wins; equal scores are a draw.
+- Every attempt counts as a turn, including the extra turns earned by matching. After `max_turns` attempts in total
+  (both players combined), the game ends and is decided by the current scores in the same way.
 
-```plaintext
-[Player 0] I'll try to find a matching pair. Let me flip the cards at positions [0 0 1 1].
-[GAME] The cards do not match. Cards at positions [0 0] and [1 1] are B and C respectively.
-[Player 1] I'm going to try to find a pair. I'll flip [2 3 0 2].
-[GAME] Cards at positions [2 3] and [0 2] match!
-Updated board:
-  0 1 2 3
-0 . . A .
-1 . . . .
-2 . . . A
-3 . . . .
-```
+## Actions
 
-## Gameplay
+Reply with `r1 c1 r2 c2`: the row and column of the first card, then of the second card, separated by spaces. Rows and
+columns are numbered from 0.
 
-- **Players:** 2 players
-- **Initial Setup:** All cards are face-down in a grid, with each card having exactly one matching partner
-- **Turns:** Players take turns flipping two cards to try to find matching pairs
-- **Scoring:** A player scores 1 point for each pair they successfully match
-- **Objective:** Match more pairs than the opponent by the end of the game
+Example: `0 1 1 0` turns over the card in row 0, column 1 and the card in row 1, column 0.
 
-## Key Rules
+## Observations
 
-1. **Board Setup:**
-   - The game board is a grid of face-down cards (default: 4×4)
-   - Each card has exactly one matching partner elsewhere on the board
-   - Initially, all cards are face-down, indicated by "." in the display
-
-2. **Card Flipping:**
-   - On their turn, a player selects two face-down cards to flip
-   - If the two cards have the same symbol (match), they remain face-up and the player scores a point
-   - If the two cards have different symbols (no match), they are flipped back face-down
-   - A player cannot select a card that is already face-up (matched)
-
-3. **Valid Moves:**
-   - Players must select two different cards
-   - Both cards must be within the bounds of the grid
-   - Both cards must be face-down (not previously matched)
-
-4. **Winning Conditions:**
-   - **Win:** The player with the most matched pairs when all pairs have been found
-   - **Draw:** If both players match the same number of pairs
-   - **Loss:** The player with fewer matched pairs when all pairs have been found
-
-5. **Game Termination:**
-   - The game concludes when all pairs have been matched
+Each player first receives the rules, including the turn limit. Before every turn, the acting player sees the board
+(`.` for face-down cards, symbols for matched pairs), both scores, and, when there is a turn limit, the number of
+turns played out of `max_turns`. The result of every attempt is announced to both players: which positions matched,
+or, for a miss, the two positions and their symbols. Cards that have not been turned over are hidden from both
+players.
 
 ## Rewards
 
-| Outcome     | Reward for Winner | Reward for Loser |
-|-------------|:-----------------:|:----------------:|
-| **Win**     | `+1`              | `-1`             |
-| **Draw**    | `0`               | `0`              |
-| **Invalid** | `-1`              | `0`              |
+| Outcome | Reward |
+| --- | --- |
+| All pairs matched, unequal scores | More pairs `+1`, fewer pairs `-1` |
+| All pairs matched, equal scores | Both `0` |
+| `max_turns` reached, unequal scores | Higher score `+1`, lower score `-1` |
+| `max_turns` reached, equal scores | Both `0` |
+| Second consecutive invalid move | Offender `-1`, opponent `+1` |
 
 ## Parameters
 
-- `grid_size` (`int`, default: `4`):
-  - **Description:** Sets the size of the grid (grid_size × grid_size)
-  - **Impact:** Larger grids increase difficulty by requiring more memory and creating more potential matches
+<!-- BEGIN GENERATED: parameters -->
+- `grid_size` (default `4`): The side length of the board, giving `grid_size² / 2` pairs. Accepts an even integer from 2 to 20.
+- `max_turns` (default `100`): The total number of attempts by both players before the game is decided by score. `None` removes the limit, so the game only ends when every pair is matched. Accepts an integer of at least 1 or None.
+<!-- END GENERATED: parameters -->
 
-## Variants
+## Notes
 
-| Env-id                     | grid_size |
-|----------------------------|:---------:|
-| `MemoryGame-v0`            | `4`       |
-| `MemoryGame-v0-medium`     | `6`       |
-| `MemoryGame-v0-hard`       | `8`       |
-
-
-### Contact
-If you have questions or face issues with this specific environment, please reach out directly to bobby_cheng@i2r.a-star.edu.sg
+- Both cards are named at once. Unlike the tabletop game, you cannot turn over one card, look at it, and then choose
+  its partner.

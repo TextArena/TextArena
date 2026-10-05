@@ -12,7 +12,7 @@ def create_board_str(game_state: dict) -> str:
     deck_size = len(game_state.get("deck", []))
     discard_pile = game_state.get('discard_pile', [])
     info_tokens = game_state.get('info_tokens', 8)
-    fuse_tokens = game_state.get('fuse_tokens', 4)
+    fuse_tokens = game_state.get('fuse_tokens', 3)
 
 
     lines = []

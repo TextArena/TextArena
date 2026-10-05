@@ -1,131 +1,72 @@
-# Truth And Deception Environment Documentation
+# Taboo
 
-## Overview
+Two teams take turns in which a Clue Giver describes a secret word without saying it or any of its taboo words while
+teammates try to guess it; the team with more correct guesses wins
+([rules](https://en.wikipedia.org/wiki/Taboo_%28game%29)). It tests constrained description, word association, and
+team coordination.
 
-**Taboo** is a classic two-player word game where one player, the **Clue Giver**, provides verbal clues to help the other player, the **Guesser**, identify a secret word without using a set of forbidden "taboo" words. The game emphasizes creativity and effective communication under constraints.
+<!-- BEGIN GENERATED: variants -->
+**Players:** 4+
 
+**`-mdp` observation:** the prompt and the full transcript including every player action
 
+| Env ID | Parameters |
+| --- | --- |
+| `Taboo-v1` | `max_rounds=4`, `max_attempts_per_player=6`, `categories=['things']` |
 
-## Action Space
+Append `-mdp` to any ID for the state-complete variant (e.g. `Taboo-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Taboo-v1", max_rounds=...)`.
+<!-- END GENERATED: variants -->
 
-- **Format:**
-  - **Clue Giver:** Any string representing the clue, **excluding** the taboo words and the word to guess.
-  - **Guesser:** Must provide their guess within squared brackets. For example: `[apple]`.
+## Rules
 
-- **Examples:**
-  - **Clue Giver:** `"It's something you might eat for breakfast."`
-  - **Guesser:** `"[toast]"`
+- The players (an even number, at least four) form two equal teams: Team 0 is the first half of the player ids and
+  Team 1 the second half. The first player of each team (Player 0 and Player N/2) is its Clue Giver; the rest are
+  Guessers.
+- Each team works through its own shuffled sequence of target words from the selected categories. Every target comes
+  with a list of taboo words.
+- A round is one turn for Team 0 followed by one turn for Team 1. During a team turn, the team's members act in
+  rotation (Clue Giver, each Guesser, Clue Giver again, ...) for `max_attempts_per_player` × team size actions in total.
+- A correct guess scores 1 point; the team moves on to its next word, and the Clue Giver acts next. A word that is not
+  guessed carries over to the team's next turn.
+- The game ends after `max_rounds` rounds, or earlier if a team runs out of words, and the team with more points wins.
 
-- **Notes:**
-  - Clue Givers must avoid using any taboo words or the word to guess in their clues.
-  - Guessers must format their guesses within squared brackets to be recognized by the environment.
+## Actions
 
+- **Clue Giver:** any non-empty clue, e.g. `You pour hot water through it to make your morning drink.` A clue that
+  contains the target, any significant word of the target on its own (`duck` or `Amazon` for `Amazon duck`, `Kabul`
+  for `Kabul (Afghanistan)`; short function words such as `the`, `of`, or `you` and words inside parentheses stay
+  allowed), or one of its taboo words is invalid. Matching works on whole words and ignores case, accents, invisible
+  characters, common look-alike letters (such as Cyrillic `а`), and punctuation or underscores inside or between words
+  (`ca-mel`, `U.S.A.`, `the_camel`, `ice-cream`, `icecream`); words spelled out letter by letter (`c a m e l`) also
+  match. Sender tags such as `[GAME]` are removed from the clue before it is checked and relayed.
+- **Guesser:** the guess alone on a single line, e.g. `coffee filter`. The guess must name the whole target, but case,
+  accents, punctuation, spacing, and a leading `the`, `a`, or `an` are ignored, a qualifier in parentheses may be left
+  out (`Kabul` for `Kabul (Afghanistan)`, `Budweiser` for `Budweiser (beer)`), and an inverted official name may be
+  shortened (`Palestine` for `Palestine, State of`). Wrong guesses are valid moves; empty or multi-line replies and
+  replies without any letter or digit are invalid.
 
-## Observation Space
+## Observations
 
-### Observations
-
-Each player receives a series of messages exchanged during the game, along with their specific roles and objectives.
-
-
-**Reset Observation:**
-On reset, each player receives a prompt tailored to their role. For example:
-
-- **Clue Giver (Player 0):**
-```plaintext
-[Game]: You are Player 0, the Clue Giver in the Taboo game.
-The word to guess is 'apple'.
-Taboo words: fruit, red, pie.
-Your goal is to provide clues to the Guesser without using the taboo words or the word to guess.
-You have 30 turns to help the Guesser guess the word.
-On your turn, simply type your clue.
-```
-
-- **Guesser (Player 1):**
-```plaintext
-[Game]: You are Player 1, the Guesser in the Taboo game.
-Your goal is to guess the secret word based on the clues provided by the Clue Giver.
-You have 30 turns to guess the word.
-On your turn, type your guess within squared brackets. For example: '[apple]'.
-```
-
-
-**Step Observation:**
-After each step, players receive the latest action taken by their opponent. For example:
-```plaintext
-[Clue Giver (Player 0)]: It's something you might eat for breakfast.
-[Guesser (Player 1)]: [toast]
-```
-
-
-## Gameplay
-- **Players**: 2
-- **Roles**: Player 0 plays as the Clue Giver, Player 1 plays as the Guesser.
-- **Turns**: Players alternate turns based on their roles.
-- **Target Word**: The Clue Giver is assigned a secret word along with a list of taboo words that cannot be used in clues.
-- **Objective**:
-    - **Clue Giver**: Provide effective clues to help the Guesser identify the secret word without using any taboo words or the word itself.
-    - **Guesser**: Deduce the secret word based on the clues provided by the Clue Giver by making guesses within squared brackets.
-- **Turn Limit:** The game can be configured with a maximum number of turns. If the Guesser does not correctly guess the word within this limit, the game ends.
-
-## Key Rules
-1. Clue Giver's Rules:
-    - Must not use any of the taboo words or the word to guess in their clues.
-    - Clues should be clear enough to help the Guesser but subtle to avoid using forbidden terms.
-
-2. Guesser's Rules:
-    - Must format their guesses within squared brackets (e.g., `[apple]`).
-    - Only guesses within the correct format are considered valid.
-
-3. Winning Conditions:
-    - **Win:** Both players win if the word is guessed correctly.
-    - **Draw:** The game ends in a draw if the turn limit is reached.
-    - **Invalid Move:** If a player makes an invalid move they lose with a -1 reward.
-
-4. Game Termination:
-    - The game ends immediately upon a win or an invalid move.
-    - If the turn limit is reached without a correct guess, the game ends in a draw.
+Each player first receives their role, their team, the clue or guess rules for that role, the scoring, the number of
+rounds, and how many actions they get per team turn. A Clue Giver privately receives the target word and its taboo
+words at the start of each of their team's turns and after every correct guess; Guessers never see them. Clues and
+guesses are shown only to the members of the acting team, with sender tags such as `[GAME]` removed. Everyone is told
+when a team scores (with the current score) and when play passes to the other team.
 
 ## Rewards
 
-| Outcome          | Reward for Player | Reward for Opponent |
-|------------------|:-----------------:|:-------------------:|
-| **Win**          | `+1`              | `-1`                |
-| **Draw**         |  `0`              |  `0`                |
-| **Invalid Move** | `-1`              |  `0`                |
-
+| Outcome | Reward |
+| --- | --- |
+| More points at the end | Members of that team `+1`, other team `-1` |
+| Equal points | Everyone `0` |
+| Clue Giver's second consecutive invalid clue | The team skips its current word and its turn ends at once; no direct penalty |
+| Guesser's second consecutive invalid guess | That action is forfeited and play passes to the next teammate; no direct penalty |
 
 ## Parameters
 
-- `categories` (`List[str]`):
-    - **Description**: Specifies the categories from which words are selected (e.g., [`"animals"`]).
-    - **Impact**: Determines the pool of words and taboo words used in the game.
-
-- `max_turns` (`int`):
-    - **Description**: Sets the maximum number of turns allowed before the game ends in a draw.
-    - **Impact**: Limits the duration of the game, encouraging timely clues and guesses.
-
-- `data_path` (`str`):
-    - **Description**: Path to the JSON file containing the list of words and their associated taboo words.
-    - **Impact**: Allows customization of the word pool used in the game.
-
-
-
-## Variants
-
-| Env-id                     | max_turns  | categories                                                                 |
-|----------------------------|:----------:|:--------------------------------------------------------------------------:|
-| `Taboo-v0`                 | `6`        | `things`                                                                   |
-| `Taboo-v0-animals`         | `6`        | `animals`                                                                  |
-| `Taboo-v0-cars`            | `6`        | `cars`                                                                     |
-| `Taboo-v0-city/country`    | `6`        | `city/country`                                                             |
-| `Taboo-v0-food`            | `6`        | `food`                                                                     |
-| `Taboo-v0-literature`      | `6`        | `literature`                                                               |
-| `Taboo-v0-people`          | `6`        | `people`                                                                   |
-| `Taboo-v0-tv`              | `6`        | `tv`                                                                       |
-| `Taboo-v0-long`            | `24`       | `things`                                                                   |
-| `Taboo-v0-full`            | `6`        | `things`,`animals`,`cars`,`city/country`,`food`,`literature`,`people`,`tv` |
-
-
-### Contact
-If you have questions or face issues with this specific environment, please reach out directly to Guertlerlo@cfar.a-star.edu.sg
+<!-- BEGIN GENERATED: parameters -->
+- `categories` (default `['things']`): One category or a list whose words are combined, chosen from `animals`, `cars`, `city/country`, `food`, `literature`, `people`, `things`, and `tv` (84 to 495 targets each). Accepts a category name or a non-empty list of category names.
+- `max_rounds` (default `4`): The number of rounds, i.e. turns per team. Accepts an integer of at least 1.
+- `max_attempts_per_player` (default `6`): The actions each player takes during each of their team's turns. Accepts an integer of at least 1.
+- `data_path` (default `None`): An optional JSON file of the form `{"category": {"target": ["taboo", ...]}}` that replaces the bundled `words.json`. Every target must contain at least one letter or digit.
+<!-- END GENERATED: parameters -->

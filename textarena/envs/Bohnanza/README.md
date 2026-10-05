@@ -1,174 +1,114 @@
-# Bohnanza Bean Trading Game Environment
+# Bohnanza
 
-This is an implementation of the Bohnanza bean trading card game supporting 3-5 players.
+Players plant, trade, and harvest beans for coins without ever rearranging their hand, so trading away
+awkward beans with the active player is the heart of the game ([rules](https://www.riograndegames.com/wp-content/uploads/2013/02/Bohnanza-Rules.pdf)).
 
-## Game Description
+<!-- BEGIN GENERATED: variants -->
+**Players:** 3–5
 
-[Bohnanza](https://boardgamegeek.com/boardgame/11/bohnanza) is a trading and set collection card game designed by Uwe Rosenberg where players plant, trade, and harvest beans to earn coins. The key twist is that players cannot rearrange their hand order - beans must be planted in the order they were received. See ruleset [here](https://www.riograndegames.com/wp-content/uploads/2013/02/Bohnanza-Rules.pdf).
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
-### Components
-- 154 bean cards of 8 different types
-- Each bean type has different quantities and payout rates
-- 2-3 bean fields per player (depending on player count)
-- Supports 3-5 players
+| Env ID | Parameters |
+| --- | --- |
+| `Bohnanza-v1` | `deck_cycles=3`, `max_trade_rounds=None`, `max_turns=3000` |
+| `Bohnanza-v1-short` | `deck_cycles=1`, `max_trade_rounds=3`, `max_turns=1000` |
 
-### Bean Types and Payouts
-Each bean type has different quantities and coin payouts based on harvest size:
+Append `-mdp` to any ID for the state-complete variant (e.g. `Bohnanza-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Bohnanza-v1", deck_cycles=...)`.
+<!-- END GENERATED: variants -->
 
-| Bean Type | Quantity | Payout Chart (coins for beans) |
-|-----------|----------|--------------------------------|
-| Blue      | 20       | 1→4, 2→6, 3→8, 4→10           |
-| Chili     | 18       | 1→3, 2→6, 3→8, 4→9            |
-| Stink     | 16       | 1→3, 2→5, 3→7, 4→8            |
-| Green     | 14       | 1→3, 2→5, 3→6, 4→7            |
-| Soy       | 12       | 1→2, 2→4, 3→6, 4→7            |
-| BlackEyed | 10       | 1→2, 2→4, 3→5, 4→6            |
-| Red       | 8        | 1→2, 2→3, 3→4, 4→5            |
-| Garden    | 6        | 2→2, 3→3                       |
+## Rules
 
-### Initial Setup
-- Each player receives 5 cards in hand
-- 3 players get 3 bean fields each
-- 4-5 players get 2 bean fields each
-- Remaining cards form the draw deck
+- **Cards:** 104 bean cards of 8 types. Everyone starts with 5 cards; the hand order is fixed (plant from
+  the front, new cards go to the back). With 3 players each has 3 fields, with 4–5 players 2 fields. A field
+  holds any number of beans of a single kind.
+- **Turn** (Player 0 starts, then seat order):
+  1. **Plant:** the active player must plant the front card of their hand and may plant the next one too
+     (at most two). Skipped if the hand is empty.
+  2. **Turn over and trade:** two cards are turned face up; they belong to the active player. Only trades
+     with the active player are allowed, using hand cards from any position (plus the face-up cards for the
+     active player). Any number of beans for any number, or a gift; the receiver must accept. Received beans
+     are set aside and cannot be traded again. The floor passes around the table until the active player
+     ends trading.
+  3. **Plant traded beans:** everyone plants their set-aside beans, the active player also the face-up cards
+     they kept, in any order (active player first, then clockwise).
+  4. **Draw:** the active player automatically draws three cards.
+- **Harvesting:** a whole field, whenever you have the move. Bean protection rule: a single-bean field cannot
+  be harvested while another of your fields holds two or more beans. As many cards as the beanometer pays
+  become coins and leave the game; the rest are discarded.
 
-### Turn Structure
-Each turn consists of 4 phases:
+| Bean | Cards | Beans for 1 / 2 / 3 / 4 coins |
+| --- | :-: | --- |
+| Blue | 20 | 4 / 6 / 8 / 10 |
+| Chili | 18 | 3 / 6 / 8 / 9 |
+| Stink | 16 | 3 / 5 / 7 / 8 |
+| Green | 14 | 3 / 5 / 6 / 7 |
+| Soy | 12 | 2 / 4 / 6 / 7 |
+| BlackEyed | 10 | 2 / 4 / 5 / 6 |
+| Red | 8 | 2 / 3 / 4 / 5 |
+| Garden | 6 | – / 2 / 3 / – |
 
-1. **Plant Phase**: Plant at least 1 and up to 2 beans from hand (in order) into fields
-2. **Draw & Trade Phase**: Draw 2 face-up cards, trade with other players
-3. **Plant Mandatory Phase**: Plant all beans received from trades in any order
-4. **Draw Phase**: Draw 3 cards to hand
+- **Game end:** when the last card of the draw pile is drawn, the discard pile is reshuffled into a new pile.
+  The game ends when the pile runs out for the `deck_cycles`-th time (3 officially). If that happens while
+  turning cards over, the turn still finishes phases 2 and 3; during phase 4 it ends at once. All fields are
+  then harvested; cards in hand are worth nothing.
 
-### Key Rules
+## Actions
 
-#### Hand Order
-- **Cannot rearrange hand order** - this is the core rule!
-- Must plant beans from the front of your hand
-- New cards are always added to the back of your hand
+Submit exactly one bare command (case-insensitive).
 
-#### Planting Rules
-- Must plant at least 1 bean during Plant Phase
-- Can plant up to 2 beans per Plant Phase
-- Each field can only contain one type of bean
-- Can harvest fields anytime during your turn to make space
+- **Any phase, when you have the move:** `harvest <field>` (e.g. `harvest 2`; does not use up your move).
+- **Phase 1:** `plant <field>` plants the front card (e.g. `plant 1`); `pass` stops after one card.
+- **Phase 2 (trading):**
+  - `trade <offer> for <want>`, e.g. `trade 2 Chili for 1 Blue`, `trade Soy for nothing` (gift),
+    `trade nothing for Red` (ask for a gift). The active player's offers are open to everyone unless
+    addressed with `with Player N` (`trade 1 Soy for 1 Red with Player 2`); other players' offers always go
+    to the active player.
+  - `accept <id>` (e.g. `accept 4`), `cancel <id>` to withdraw your own offer, `pass` to give the floor on.
+  - `end trading` (active player only).
+  - Any other text is table talk shown to all players; text starting with a command word that doesn't parse
+    is rejected.
+- **Phase 3:** `plant <bean> <field>` (e.g. `plant Blue 2`); `plant <field>` works if all your set-aside
+  beans are the same kind.
 
-#### Trading Rules
-- Only occurs during Draw & Trade Phase
-- Active player can trade face-up cards and hand cards
-- Other players can only trade hand cards
-- All traded beans must be planted immediately
-- Can trade "Nothing" for gifts
+Bean lists look like `2 Blue, 1 Red`, `Blue and Soy` or `nothing`; names accept plurals and `black-eyed`.
 
-#### Harvesting Rules
-- Can harvest anytime during your turn
-- Cannot harvest 1-bean field if other fields have 2+ beans
-- Earn coins based on bean type and quantity
-- Harvested beans go to discard pile
+## Observations
 
-#### Game End
-- Game ends after deck is reshuffled 3 times
-- All remaining fields are harvested
-- Player with most coins wins
-- Ties broken by furthest clockwise from starting player
+Each player first receives the rules, beanometers and action list. Before every move, the acting player sees
+the public table (fields, coins, hand sizes, face-up cards, open offers, set-aside beans, pile sizes, deck
+cycles) plus their own private hand front to back, and a list of currently legal moves. Every valid move is
+announced to all; raw actions are echoed only to their author, and invalid attempts are reported only to the
+player who made them. Cards drawn in phase 4 are told only to the drawing player.
 
-## Usage
+## Rewards
 
-### Action Format
-Actions use bracketed commands:
+| Outcome | Reward |
+| --- | --- |
+| Game end (deck cycles done) | Most coins `+1`, everyone else `-1`; ties go to the tied player furthest clockwise from Player 0 |
+| Turn limit (`max_turns`) reached | Fields harvested and scored the same way |
+| Second consecutive invalid move | Offender `-1`, everyone else `0` (game ends) |
 
-**Plant Phase:**
-- `[Plant] 1` - Plant first hand card in field 1
-- `[Plant] 2` - Plant first hand card in field 2
-- `[Harvest] 1` - Harvest field 1 for coins
-- `[Pass]` - End plant phase (after planting at least 1 card)
+A first invalid move only earns a warning, and the player tries again.
 
-**Draw & Trade Phase:**
-- `[Trade] Blue for Red` - Offer Blue bean for Red bean
-- `[Trade] 2 Blue for Red` - Offer 2 Blue beans for 1 Red bean
-- `[Trade] Blue for Nothing` - Gift Blue bean
-- `[Accept] Trade1` - Accept trade proposal #1
-- `[EndTrading]` - End trading phase (active player only)
+## Parameters
 
-**Plant Mandatory Phase:**
-- `[Plant] Blue 1` - Plant specific Blue bean in field 1
-- `[Pass]` - Skip if no mandatory beans
+<!-- BEGIN GENERATED: parameters -->
+- `deck_cycles` (default `3`): The game ends when the draw pile runs out this many times (3 in the official rules). Accepts an integer of at least 1.
+- `max_trade_rounds` (default `None`): If set, trading ends automatically after the floor has gone around the table this many times; None lets the active player decide, as in the official rules. Accepts an integer of at least 1 or None.
+- `max_turns` (default `3000`): The step budget; when it is used up, all fields are harvested and the game is scored. A full game takes about 200 steps without trading and up to about 1,500 with lively trading. Accepts an integer of at least 1 or None.
+<!-- END GENERATED: parameters -->
 
-**Draw Phase:**
-- `[Draw]` - Draw 3 cards to hand
+## Notes
 
-### Game State Display
-```
-=== BOHNANZA GAME ===
-Turn: 5 | Phase: DRAW_TRADE | Active Player: 1 | Deck Cycles: 0/3
-
-FACE-UP CARDS: Red, Blue
-
-ACTIVE TRADES:
-  Trade1: Player 2 offers Chili for Blue (open to all)
-
-PLAYER 0 (You):
-  Coins: 3
-  Hand: [Green, Red, Blue, Soy, Chili] (5 cards)
-  Field 1: Blue x3
-  Field 2: Red x2
-  Field 3: Empty
-
-PLAYER 1 (Active):
-  Coins: 2
-  Hand: 4 cards
-  Field 1: Green x1
-  Field 2: Chili x4
-
-PLAYER 2:
-  Coins: 1
-  Hand: 5 cards
-  Field 1: Soy x2
-  Field 2: Empty
-
-MUST PLANT: Blue (from trade)
-```
-
-### Example Turn Sequence
-```
-Player 0's turn:
-1. [Plant] 1          # Plant first hand card in field 1
-2. [Pass]             # End plant phase
-3. [Trade] Red for Blue  # Propose trade during draw/trade
-4. [EndTrading]       # End trading phase
-5. [Plant] Blue 2     # Plant mandatory Blue bean in field 2
-6. [Pass]             # No more mandatory beans
-7. [Draw]             # Draw 3 cards, advance to next player
-```
-
-## Implementation Notes
-
-This implementation includes:
-- Full 4-phase turn structure
-- Authentic bean types and payout calculations
-- Hand order enforcement (core Bohnanza mechanic)
-- Turn-based trading system with open and targeted trades
-- Mandatory planting of traded beans
-- Harvest priority rules
-- 3-deck-cycle game ending
-- Proper tie-breaking rules
-
-### Key Features
-- **Hand Order Constraint**: Players cannot rearrange their hand
-- **Trading Flexibility**: Support for complex multi-bean trades and gifts
-- **Phase Management**: Proper turn structure with phase transitions
-- **Bean Conservation**: All beans are tracked throughout the game
-- **Authentic Payouts**: Uses official Bohnanza payout charts
-
-### Testing
-The environment includes a comprehensive test suite with 66 tests covering:
-- All game phases and transitions
-- Trading mechanics and validation
-- Harvesting rules and coin calculations
-- Error handling and edge cases
-- Complete game flow scenarios
-
-Run tests with:
-```bash
-pytest textarena/envs/Bohnanza/test_env.py -v
-```
+- Originally contributed upstream by cstorm125 (TextArena PR #150), with later fixes by leshem; ported to
+  the `GameEnv` engine here.
+- Compared with the upstream version: coin cards now leave the game, the deck reshuffles on its last card
+  and the game ends on the third run-out, an empty hand skips phase 1, the active player trades face-up
+  cards before matching hand cards, and drawing in phase 4 is automatic.
+- Harvesting "at any time, even off-turn" is approximated as "whenever you have the move".
+- When trading, the front-most copy of a duplicate hand bean is given; you cannot choose another copy, and
+  the active player cannot give a hand card instead of a matching face-up card.
+- House rule: if both the draw and discard piles are empty when a card is needed, the draw pile counts as
+  having run out, so the game cannot stall.
+- The default variant keeps trading unlimited (official rules), so a stubborn active player can use up the
+  step budget; set `max_trade_rounds` to cap it.

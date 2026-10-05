@@ -1,21 +1,27 @@
-import random
 import re
-from typing import Optional, Tuple, List, Dict, Any
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
 
-class BriscolaEnv(ta.Env):
-    def __init__(self):
+TEAMS = ((0, 2), (1, 3))  # the fixed partnerships of a four-player game
+
+
+class BriscolaEnv(ta.GameEnv):
+    min_players = 2
+    max_players = 4
+    mdp_includes_actions = False
+
+    def __init__(self, **kwargs):
         """ Initializes the Briscola card game environment """
-        super().__init__()
+        super().__init__(**kwargs)
         self.deck = self._create_deck()
-        
+
     def _create_deck(self) -> List[Dict[str, Any]]:
         """ Creates a 40-card Italian deck for Briscola """
         suits = ['♠', '♥', '♦', '♣']  # Spades, Hearts, Diamonds, Clubs
         ranks = ['A', '2', '3', '4', '5', '6', '7', 'J', 'Q', 'K']  # No 8, 9, 10 in Italian deck
         deck = []
-        
+
         for suit in suits:
             for rank in ranks:
                 card = {
@@ -26,7 +32,7 @@ class BriscolaEnv(ta.Env):
                 }
                 deck.append(card)
         return deck
-    
+
     def _get_card_points(self, rank: str) -> int:
         """ Returns the point value of a card in Briscola """
         point_values = {
@@ -38,7 +44,7 @@ class BriscolaEnv(ta.Env):
             '7': 0, '6': 0, '5': 0, '4': 0, '2': 0  # No points
         }
         return point_values[rank]
-    
+
     def _get_card_power(self, rank: str) -> int:
         """ Returns the power/strength of a card for trick-taking (higher = stronger) """
         power_values = {
@@ -50,32 +56,39 @@ class BriscolaEnv(ta.Env):
             '7': 3, '6': 2, '5': 1, '4': 0, '2': -1  # Weakest
         }
         return power_values[rank]
-    
+
     def _card_to_string(self, card: Dict[str, Any]) -> str:
         """ Converts a card to a readable string """
         return f"{card['rank']}{card['suit']}"
-    
+
+    def _team(self, player_id: int) -> Optional[Tuple[int, int]]:
+        """ The player's partnership in a four-player game, or None when everyone plays alone """
+        if self.state.num_players != 4:
+            return None
+        return next(team for team in TEAMS if player_id in team)
+
+    def _partner(self, player_id: int) -> Optional[int]:
+        team = self._team(player_id)
+        return None if team is None else next(pid for pid in team if pid != player_id)
+
+    def _team_points(self, team: Tuple[int, int]) -> int:
+        return sum(self.game_state['points_won'][pid] for pid in team)
+
     def _find_action_token(self, message: str) -> Optional[int]:
         """ Parse card play action from player message """
-        pattern = re.compile(r"\[play (\d+)\]", re.I)
-        match = pattern.search(message)
-        
+        pattern = re.compile(r"^play\s+(\d+)$", re.I)
+        match = pattern.match(message)
+
         if match:
-            return int(match.group(1)) - 1  # Convert to 0-based index
+            try:
+                return int(match.group(1)) - 1  # Convert to 0-based index
+            except ValueError:
+                return None
         return None
-    
-    def reset(self, num_players: int = 2, seed: Optional[int] = None):
-        """ Reset the game state """
-        if num_players not in [2, 3, 4]:
-            raise ValueError("Briscola supports 2, 3, or 4 players")
-            
-        if num_players == 2:
-            self.state = ta.TwoPlayerState(num_players=num_players, seed=seed)
-        else:
-            self.state = ta.FFAMultiPlayerState(num_players=num_players, seed=seed)
-        
-        # Initialize game state
-        game_state = {
+
+    def setup(self) -> Dict[str, Any]:
+        """ Initialize and return the complete game state """
+        gs = {
             'players': {},
             'deck': [],
             'trump_suit': None,
@@ -83,316 +96,393 @@ class BriscolaEnv(ta.Env):
             'current_trick': [],
             'tricks_won': {},
             'points_won': {},
+            'removed_cards': [],
             'phase': 'playing',  # playing, finished
             'trick_leader': 0,
-            'cards_in_hand': 3 if num_players <= 3 else 2
+            'cards_in_hand': 3
         }
-        
-        self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
-        self._init_game()
-    
-    def _init_game(self):
-        """ Initialize the game """
-        gs = self.state.game_state
-        
+
         # Shuffle deck
         deck_copy = self.deck.copy()
-        random.shuffle(deck_copy)
-        
-        # Deal cards to players
+        if self.state.num_players == 3:
+            # A three-player deal needs 39 cards so every trick is complete.
+            gs['removed_cards'] = [
+                card for card in deck_copy
+                if card['rank'] == '2' and card['suit'] == '♣'
+            ]
+            deck_copy = [
+                card for card in deck_copy
+                if not (card['rank'] == '2' and card['suit'] == '♣')
+            ]
+        self.rng.shuffle(deck_copy)
+
+        # Deal round-robin, as cards are dealt at a real table.
         cards_per_hand = gs['cards_in_hand']
         for player_id in range(self.state.num_players):
-            player_hand = []
-            for _ in range(cards_per_hand):
-                if deck_copy:
-                    player_hand.append(deck_copy.pop())
-            
             gs['players'][player_id] = {
-                'hand': player_hand,
+                'hand': [],
                 'points': 0
             }
             gs['tricks_won'][player_id] = []
             gs['points_won'][player_id] = 0
-        
+        for _ in range(cards_per_hand):
+            for player_id in range(self.state.num_players):
+                gs['players'][player_id]['hand'].append(deck_copy.pop())
+
         # Set trump card (last card dealt becomes trump indicator)
         if deck_copy:
             gs['trump_card'] = deck_copy.pop()
             gs['trump_suit'] = gs['trump_card']['suit']
             deck_copy.insert(0, gs['trump_card'])  # Put trump card at bottom of deck
-        
+
         gs['deck'] = deck_copy
-        gs['current_trick'] = []
-        gs['trick_leader'] = 0
-        gs['phase'] = 'playing'
-        
-        # Announce game start
-        self._announce_game_start()
-        self._announce_turn(self.state.current_player_id)
-    
-    def _announce_game_start(self):
+        return gs
+
+    def on_start(self):
         """ Announce the start of the game with trump suit """
-        gs = self.state.game_state
+        gs = self.game_state
         trump_str = self._card_to_string(gs['trump_card']) if gs['trump_card'] else "None"
 
-        self.state.add_observation(
-            message=self.m("game", "start", trump_suit=gs['trump_suit'], trump_card=trump_str),
-            observation_type=ta.ObservationType.GAME_MESSAGE
+        self.broadcast(
+            f"Briscola game started! Trump suit: {gs['trump_suit']} (Trump card: {trump_str})",
+            ta.ObservationType.GAME_MESSAGE
         )
-    
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        max_pos = len(game_state['players'][player_id]['hand']) if player_id in game_state['players'] else 3
-        return self.m("prompt", "intro", player_id=player_id, max_pos=max_pos)
-    
+
+    def prompt(self, player_id: int) -> str:
+        game_state = self.game_state
+        partner = self._partner(player_id)
+        if partner is None:
+            goal = "Goal: Win tricks and collect the most points (120 total points in the deck).\n"
+            ending = "When all cards have been played, the player(s) with the most points win; if everyone ties, it is a draw.\n\n"
+        else:
+            goal = (
+                f"You play in a partnership with Player {partner}: Players 0 and 2 play against Players 1 and 3, and "
+                "partners sit opposite each other, so the turn order alternates between the teams.\n"
+                "Goal: Win tricks so that your team collects the most points (120 total points in the deck). Partners' "
+                "card points are combined, and both partners receive their team's result.\n"
+            )
+            ending = (
+                "When all cards have been played, the team with more points wins; 60-60 is a draw. If a player makes "
+                "two invalid moves in a row, their team loses at once.\n\n"
+            )
+        return (
+            f"You are playing Briscola - Player {player_id}.\n"
+            + goal +
+            f"Card Points: A=11, 3=10, K=4, Q=3, J=2, others=0\n"
+            f"Card Power: A > 3 > K > Q > J > 7 > 6 > 5 > 4 > 2\n"
+            f"Trump cards beat non-trump cards regardless of power.\n"
+            "You never have to follow suit. The highest trump played wins the trick; if no trump is played, the highest card "
+            "of the suit that was led wins, and cards of any other suit cannot win.\n"
+            "After each trick, its winner draws first and the others follow in turn order; the face-up trump card is the "
+            "last card drawn. The trick winner leads the next trick.\n"
+            + ("With 3 players, the 2♣ is removed so the 39 cards divide evenly.\n" if self.state.num_players == 3 else "")
+            + ending +
+            f"Action: reply with 'play X' where X is the position (1-{len(game_state['players'][player_id]['hand']) if player_id in game_state['players'] else 3}) of the card in your hand\n"
+        )
+
     def _render_player_hand(self, player_id: int) -> str:
         """ Renders the player's hand """
-        gs = self.state.game_state
+        gs = self.game_state
         if player_id not in gs['players']:
-            return self.m("hand", "none").render(_pid=player_id)
+            return "No cards"
 
         player = gs['players'][player_id]
         hand = player['hand']
 
         if not hand:
-            return self.m("hand", "empty").render(_pid=player_id)
+            return "No cards in hand"
 
-        trump_mark = self.m("hand", "trump_mark").render(_pid=player_id)
         output = []
-        output.append(self.m("hand", "header").render(_pid=player_id))
+        output.append("Your hand:")
         for i, card in enumerate(hand):
-            trump_indicator = trump_mark if card['suit'] == gs['trump_suit'] else ""
-            output.append(self.m("hand", "card_line", pos=i + 1, card=self._card_to_string(card), points=card['points'], trump_mark=trump_indicator).render(_pid=player_id))
+            trump_indicator = " (TRUMP)" if card['suit'] == gs['trump_suit'] else ""
+            output.append(f"  {i+1}. {self._card_to_string(card)} [{card['points']} pts]{trump_indicator}")
 
         return "\n".join(output)
-    
-    def _render_current_trick(self, recipient_id: int) -> str:
+
+    def _render_current_trick(self, viewer_id: int) -> str:
         """ Renders the current trick being played """
-        gs = self.state.game_state
+        gs = self.game_state
         if not gs['current_trick']:
-            return self.m("trick", "empty").render(_pid=recipient_id)
+            return "No cards played yet this trick."
 
-        trump_mark = self.m("hand", "trump_mark").render(_pid=recipient_id)
         output = []
-        output.append(self.m("trick", "header").render(_pid=recipient_id))
+        output.append("Current trick:")
+        partner = self._partner(viewer_id)
         for player_id, card in gs['current_trick']:
-            trump_indicator = trump_mark if card['suit'] == gs['trump_suit'] else ""
-            output.append(self.m("trick", "line", player_id=player_id, card=self._card_to_string(card), trump_mark=trump_indicator).render(_pid=recipient_id))
+            trump_indicator = " (TRUMP)" if card['suit'] == gs['trump_suit'] else ""
+            partner_label = " (your partner)" if player_id == partner else ""
+            output.append(f"  Player {player_id}{partner_label}: {self._card_to_string(card)}{trump_indicator}")
 
         return "\n".join(output)
-    
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        player_id = self.state.current_player_id
-        gs = self.state.game_state
-        
-        self.state.add_observation(
-            from_id=player_id, 
-            message=action, 
-            observation_type=ta.ObservationType.PLAYER_ACTION
-        )
-        
-        # Parse action
-        card_index = self._find_action_token(action)
-        
-        if card_index is None:
-            self.state.set_invalid_move(self.m("invalid_move", "wrong_format"))
-            return self.state.step()
 
-        # Validate card index
-        player = gs['players'][player_id]
-        if card_index < 0 or card_index >= len(player['hand']):
-            self.state.set_invalid_move(self.m("invalid_move", "out_of_range", count=len(player['hand'])))
-            return self.state.step()
+    def render(self, player_id: int) -> str:
+        """ The board shown to the player about to act """
+        gs = self.game_state
 
-        # Play the card
-        played_card = player['hand'].pop(card_index)
-        gs['current_trick'].append((player_id, played_card))
-
-        self.state.add_observation(
-            message=self.m("action", "played", player_id=player_id, card=self._card_to_string(played_card)),
-            observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION
-        )
-        
-        # Check if trick is complete
-        if len(gs['current_trick']) == self.state.num_players:
-            return self._resolve_trick()
-        else:
-            # Move to next player
-            return self._next_player_in_trick()
-    
-    def _next_player_in_trick(self) -> Tuple[bool, ta.Info]:
-        """ Move to the next player in the current trick """
-        next_player = (self.state.current_player_id + 1) % self.state.num_players
-        self.state.manually_set_current_player_id(next_player)
-        
-        self._announce_turn(next_player)
-        return self.state.step(rotate_player=False)
-    
-    def _resolve_trick(self) -> Tuple[bool, ta.Info]:
-        """ Resolve the completed trick """
-        gs = self.state.game_state
-        
-        # Determine trick winner
-        winner_id, winning_card = self._determine_trick_winner(gs['current_trick'], gs['trump_suit'])
-        
-        # Calculate points in this trick
-        trick_points = sum(card['points'] for _, card in gs['current_trick'])
-        
-        # Award points and trick to winner
-        gs['points_won'][winner_id] += trick_points
-        gs['tricks_won'][winner_id].append(gs['current_trick'].copy())
-        
-        self.state.add_observation(
-            message=self.m("action", "trick_win", winner=winner_id, card=self._card_to_string(winning_card), points=trick_points),
-            observation_type=ta.ObservationType.GAME_MESSAGE
-        )
-        
-        # Clear current trick
-        gs['current_trick'] = []
-        
-        # Deal new cards if deck has cards
-        self._deal_new_cards()
-        
-        # Check for game end
-        if self._is_game_over():
-            return self._end_game()
-        
-        # Winner leads next trick
-        gs['trick_leader'] = winner_id
-        self.state.manually_set_current_player_id(winner_id)
-        
-        self._announce_turn(winner_id)
-        return self.state.step(rotate_player=False)
-    
-    def _determine_trick_winner(self, trick: List[Tuple[int, Dict]], trump_suit: str) -> Tuple[int, Dict]:
-        """ Determine who wins the trick """
-        if not trick:
-            return 0, {}
-        
-        # Get the lead card (first card played) and lead suit
-        lead_player_id, lead_card = trick[0]
-        lead_suit = lead_card['suit']
-        
-        # Separate trump cards from non-trump cards
-        trump_cards = [(pid, card) for pid, card in trick if card['suit'] == trump_suit]
-        
-        # Rule 1: If there are trump cards, highest trump wins
-        if trump_cards:
-            winner_id, winning_card = max(trump_cards, key=lambda x: x[1]['power'])
-            return winner_id, winning_card
-        
-        # Rule 2: No trump cards played
-        # Find all cards that follow the lead suit
-        lead_suit_cards = [(pid, card) for pid, card in trick if card['suit'] == lead_suit]
-        
-        if lead_suit_cards:
-            # If there are cards following suit, highest power of lead suit wins
-            winner_id, winning_card = max(lead_suit_cards, key=lambda x: x[1]['power'])
-            return winner_id, winning_card
-        else:
-            # This shouldn't happen in normal Briscola play since the lead card 
-            # should always be in lead_suit_cards, but as a safety fallback:
-            return lead_player_id, lead_card
-    
-    def _deal_new_cards(self):
-        """ Deal new cards to players after a trick """
-        gs = self.state.game_state
-        
-        if not gs['deck']:
-            return
-        
-        # Deal one card to each player, starting with trick winner
-        players_to_deal = []
-        start_player = gs['trick_leader']
-        
-        for i in range(self.state.num_players):
-            player_id = (start_player + i) % self.state.num_players
-            players_to_deal.append(player_id)
-        
-        for player_id in players_to_deal:
-            if gs['deck'] and len(gs['players'][player_id]['hand']) < gs['cards_in_hand']:
-                new_card = gs['deck'].pop()
-                gs['players'][player_id]['hand'].append(new_card)
-    
-    def _is_game_over(self) -> bool:
-        """ Check if the game is over """
-        gs = self.state.game_state
-        
-        # Game is over when all players have no cards left
-        for player in gs['players'].values():
-            if player['hand']:
-                return False
-        
-        return True
-    
-    def _end_game(self) -> Tuple[bool, ta.Info]:
-        """ End the game and determine winner """
-        gs = self.state.game_state
-        gs['phase'] = 'finished'
-        
-        # Find winner (most points)
-        winner_id = max(gs['points_won'].keys(), key=lambda pid: gs['points_won'][pid])
-        winner_points = gs['points_won'][winner_id]
-        
-        # Create final summary
-        sorted_players = sorted(gs['points_won'].items(), key=lambda x: x[1], reverse=True)
-
-        scores = "".join(
-            self.m("outcome", "player_line", player_id=player_id, points=points, tricks=len(gs['tricks_won'][player_id])).render()
-            for player_id, points in sorted_players
-        )
-        summary = self.m("outcome", "head", winner=winner_id, points=winner_points, scores=scores)
-        
-        if self.state.num_players == 2:
-            # Set winner for two-player game
-            self.state.set_winner(winner_id, summary)
-        else:
-            # For multiplayer, set outcome
-            self.state.set_outcome(
-                reward=1 if self.state.current_player_id == winner_id else 0,
-                reason=summary
-            )
-        
-        return self.state.step(rotate_player=False)
-    
-    def _announce_turn(self, player_id: int):
-        """ Announce the current player's turn """
-        gs = self.state.game_state
-        
         hand_str = self._render_player_hand(player_id)
         trick_str = self._render_current_trick(player_id)
 
         # Show current scores
         scores = []
         for pid in range(self.state.num_players):
-            scores.append(self.m("turn", "score_entry", player_id=pid, points=gs['points_won'][pid]).render(_pid=player_id))
+            scores.append(f"Player {pid}: {gs['points_won'][pid]} pts")
         scores_str = " | ".join(scores)
+        partner = self._partner(player_id)
+        if partner is not None:
+            own, other = self._team(player_id), next(team for team in TEAMS if player_id not in team)
+            scores_str += (
+                f"\nYour team (Players {own[0]} and {own[1]}, your partner is Player {partner}): "
+                f"{self._team_points(own)} pts | Opponents (Players {other[0]} and {other[1]}): "
+                f"{self._team_points(other)} pts"
+            )
 
+        trump_info = f"Trump suit: {gs['trump_suit']}"
         if gs['deck']:
-            trump_info = self.m("turn", "trump_info_deck", trump_suit=gs['trump_suit'], deck_count=len(gs['deck'])).render(_pid=player_id)
-        else:
-            trump_info = self.m("turn", "trump_info", trump_suit=gs['trump_suit']).render(_pid=player_id)
+            trump_info += (
+                f" | Cards left in deck: {len(gs['deck'])} "
+                f"(the face-up {self._card_to_string(gs['deck'][0])} at the bottom is drawn last)"
+            )
 
-        self.state.add_observation(
-            to_id=player_id,
-            message=self.m("turn", "board", hand=hand_str, trick=trick_str, scores=scores_str, trump_info=trump_info),
-            observation_type=ta.ObservationType.GAME_BOARD
+        return f"{hand_str}\n\n{trick_str}\n\nScores: {scores_str}\n{trump_info}\n\nPlay a card by replying 'play X'"
+
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        gs = self.game_state
+
+        # Parse action
+        card_index = self._find_action_token(action)
+
+        if card_index is None:
+            return self.invalid("Reply with 'play X' where X is the card position (1, 2, 3, etc.)")
+
+        # Validate card index
+        player = gs['players'][player_id]
+        if card_index < 0 or card_index >= len(player['hand']):
+            return self.invalid(f"Invalid card position. You have {len(player['hand'])} cards (1-{len(player['hand'])})")
+
+        # Play the card
+        played_card = player['hand'].pop(card_index)
+        gs['current_trick'].append((player_id, played_card))
+
+        self.broadcast(
+            f"Player {player_id} played {self._card_to_string(played_card)}",
+            ta.ObservationType.GAME_ACTION_DESCRIPTION
         )
-    
+
+        # Check if trick is complete
+        if len(gs['current_trick']) == len(self.state.alive_players):
+            return self._resolve_trick()
+        # Otherwise the default rotation moves to the next player.
+        return None
+
+    def _resolve_trick(self) -> Optional[ta.Outcome]:
+        """ Resolve the completed trick """
+        gs = self.game_state
+
+        # Determine trick winner
+        winner_id, winning_card = self._determine_trick_winner(gs['current_trick'], gs['trump_suit'])
+
+        # Calculate points in this trick
+        trick_points = sum(card['points'] for _, card in gs['current_trick'])
+
+        # Award points and trick to winner
+        gs['points_won'][winner_id] += trick_points
+        gs['tricks_won'][winner_id].append(gs['current_trick'].copy())
+
+        message = f"Player {winner_id} wins the trick with {self._card_to_string(winning_card)} and gains {trick_points} points!"
+        team = self._team(winner_id)
+        if team is not None:
+            message += f" Players {team[0]} and {team[1]} now have {self._team_points(team)} points together."
+        self.broadcast(message, ta.ObservationType.GAME_MESSAGE)
+
+        # Clear current trick
+        gs['current_trick'] = []
+
+        # The trick winner leads and draws first.
+        gs['trick_leader'] = winner_id
+        self._deal_new_cards()
+
+        # Check for game end
+        if self._is_game_over():
+            return self._end_game()
+
+        # Winner leads next trick
+        self.set_next_player(winner_id)
+        return None
+
+    def _determine_trick_winner(self, trick: List[Tuple[int, Dict]], trump_suit: str) -> Tuple[int, Dict]:
+        """ Determine who wins the trick """
+        if not trick:
+            return 0, {}
+
+        # Get the lead card (first card played) and lead suit
+        lead_player_id, lead_card = trick[0]
+        lead_suit = lead_card['suit']
+
+        # Separate trump cards from non-trump cards
+        trump_cards = [(pid, card) for pid, card in trick if card['suit'] == trump_suit]
+
+        # Rule 1: If there are trump cards, highest trump wins
+        if trump_cards:
+            winner_id, winning_card = max(trump_cards, key=lambda x: x[1]['power'])
+            return winner_id, winning_card
+
+        # Rule 2: No trump cards played
+        # Find all cards that follow the lead suit
+        lead_suit_cards = [(pid, card) for pid, card in trick if card['suit'] == lead_suit]
+
+        if lead_suit_cards:
+            # If there are cards following suit, highest power of lead suit wins
+            winner_id, winning_card = max(lead_suit_cards, key=lambda x: x[1]['power'])
+            return winner_id, winning_card
+        else:
+            # This shouldn't happen in normal Briscola play since the lead card
+            # should always be in lead_suit_cards, but as a safety fallback:
+            return lead_player_id, lead_card
+
+    def _deal_new_cards(self):
+        """ Deal new cards to players after a trick """
+        gs = self.game_state
+
+        if not gs['deck']:
+            return
+
+        # Deal one card to each player, starting with trick winner
+        players_to_deal = []
+        start_player = gs['trick_leader']
+
+        active_players = self.state.alive_players
+        for i in range(self.state.num_players):
+            player_id = (start_player + i) % self.state.num_players
+            if player_id in active_players:
+                players_to_deal.append(player_id)
+
+        recipients = [
+            player_id for player_id in players_to_deal
+            if len(gs['players'][player_id]['hand']) < gs['cards_in_hand']
+        ]
+        if len(gs['deck']) < len(recipients):
+            # Never create a partial final draw that leaves active players with
+            # unequal hand sizes and an impossible trick.
+            gs['removed_cards'].extend(gs['deck'])
+            gs['deck'].clear()
+            return
+        for player_id in recipients:
+            new_card = gs['deck'].pop()
+            gs['players'][player_id]['hand'].append(new_card)
+
+    def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
+        """Remove a forfeiting hand without corrupting future trick sizes; in a partnership game the team forfeits."""
+        gs = self.game_state
+        team = self._team(player_id)
+        if team is not None:
+            opponents = next(other for other in TEAMS if other != team)
+            return self.winner(
+                list(opponents),
+                reason=(
+                    f"Player {player_id} made repeated invalid moves: {reason} Players {team[0]} and {team[1]} "
+                    f"forfeit, so Players {opponents[0]} and {opponents[1]} win."
+                ),
+            )
+        self.eliminate(player_id)
+        gs['removed_cards'].extend(gs['players'][player_id]['hand'])
+        gs['players'][player_id]['hand'] = []
+        alive = self.state.alive_players
+        if len(alive) <= 1:
+            return self.winner(alive, reason=f"Player {player_id} made repeated invalid moves: {reason}")
+
+        # Keep the number of still-playable cards divisible into complete
+        # tricks for the remaining players. Excess stock is out of play.
+        playable = (
+            len(gs['deck'])
+            + len(gs['current_trick'])
+            + sum(len(gs['players'][pid]['hand']) for pid in alive)
+        )
+        excess = playable % len(alive)
+        while excess and gs['deck']:
+            gs['removed_cards'].append(gs['deck'].pop())
+            excess -= 1
+
+        self.broadcast(
+            f"Player {player_id} was eliminated for repeated invalid moves.",
+            ta.ObservationType.GAME_ADMIN,
+        )
+        if len(gs['current_trick']) == len(alive):
+            return self._resolve_trick()
+        return None
+
+    def _is_game_over(self) -> bool:
+        """ Check if the game is over """
+        gs = self.game_state
+
+        # Game is over when all players have no cards left
+        for player_id in self.state.alive_players:
+            if gs['players'][player_id]['hand']:
+                return False
+
+        return True
+
+    def _end_game(self) -> ta.Outcome:
+        """ End the game and determine winner """
+        gs = self.game_state
+        gs['phase'] = 'finished'
+
+        if self.state.num_players == 4:
+            return self._end_partnership_game()
+
+        active_players = self.state.alive_players
+        winner_points = max(gs['points_won'][pid] for pid in active_players)
+        winners = [pid for pid in active_players if gs['points_won'][pid] == winner_points]
+        winner_label = ", ".join(str(pid) for pid in winners)
+
+        # Create final summary
+        summary = f"Game Over! Player(s) {winner_label} finished with {winner_points} points!\n\nFinal Scores:\n"
+        sorted_players = sorted(gs['points_won'].items(), key=lambda x: x[1], reverse=True)
+
+        for player_id, points in sorted_players:
+            tricks_count = len(gs['tricks_won'][player_id])
+            summary += f"Player {player_id}: {points} points ({tricks_count} tricks)\n"
+
+        if len(winners) == len(active_players):
+            if len(active_players) == self.state.num_players:
+                return self.draw(summary)
+            rewards = {
+                pid: (0 if pid in active_players else -1)
+                for pid in range(self.state.num_players)
+            }
+            return self.outcome(rewards, summary)
+        return self.winner(winners, summary)
+
+    def _end_partnership_game(self) -> ta.Outcome:
+        """ Compare the combined points of the two partnerships """
+        gs = self.game_state
+        totals = {team: self._team_points(team) for team in TEAMS}
+        summary = "Game Over!\n\nFinal Scores:\n"
+        for team in TEAMS:
+            members = " + ".join(f"Player {pid} {gs['points_won'][pid]}" for pid in team)
+            summary += f"Players {team[0]} and {team[1]}: {totals[team]} points ({members})\n"
+        (team_a, points_a), (team_b, points_b) = totals.items()
+        if points_a == points_b:
+            return self.draw(summary + f"Both teams finished with {points_a} points. The game is a draw.")
+        winners = team_a if points_a > points_b else team_b
+        return self.winner(list(winners), summary + f"Players {winners[0]} and {winners[1]} win as a team.")
+
     def get_board_str(self) -> str:
         """ Get a string representation of the current game state """
-        gs = self.state.game_state
+        gs = self.game_state
         if not gs:
             return "Game not started"
-            
+
         output = []
         output.append("=== BRISCOLA GAME ===")
         output.append(f"Trump suit: {gs['trump_suit']}")
-        
+
         if gs['trump_card']:
             output.append(f"Trump card: {self._card_to_string(gs['trump_card'])}")
-        
+
         output.append(f"Cards left in deck: {len(gs['deck'])}")
         output.append("")
-        
+
         # Current trick
         if gs['current_trick']:
             output.append("Current trick:")
@@ -400,7 +490,7 @@ class BriscolaEnv(ta.Env):
                 trump_indicator = " (TRUMP)" if card['suit'] == gs['trump_suit'] else ""
                 output.append(f"  Player {player_id}: {self._card_to_string(card)}{trump_indicator}")
             output.append("")
-        
+
         # Player information
         for player_id in range(self.state.num_players):
             if player_id in gs['players']:
@@ -408,7 +498,12 @@ class BriscolaEnv(ta.Env):
                 hand_size = len(player['hand'])
                 points = gs['points_won'][player_id]
                 tricks = len(gs['tricks_won'][player_id])
-                
+
                 output.append(f"Player {player_id}: {points} points, {tricks} tricks, {hand_size} cards in hand")
-        
+
+        if self.state.num_players == 4:
+            output.append("")
+            for team in TEAMS:
+                output.append(f"Team of Players {team[0]} and {team[1]}: {self._team_points(team)} points")
+
         return "\n".join(output)

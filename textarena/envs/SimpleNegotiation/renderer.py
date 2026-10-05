@@ -1,6 +1,10 @@
-def create_board_str(player_resources, player_values, inventory_values, current_offer) -> str:
+def create_board_str(player_resources, player_values, inventory_values, current_offer, viewer_id: int) -> str:
     def render_inventory(player_id):
         header = f"┌──────────────────────────── Player {player_id} Inventory ─────────────────────────────┐\n"
+        if player_id != viewer_id:
+            body = "│                       Inventory and values are private.                     │\n"
+            footer = "└─────────────────────────────────────────────────────────────────────────────┘\n"
+            return header + body + footer
         body = "│ Resource    Qty   Value                                                     │\n"
         body += "│ ─────────────────────────────────────────────────────────────────────────── │\n"
         for res in ["Wheat", "Wood", "Sheep", "Brick", "Ore"]:
@@ -17,13 +21,15 @@ def create_board_str(player_resources, player_values, inventory_values, current_
     def render_offer():
         lines = ["┌─────────────────────────────── Current Offer ───────────────────────────────┐"]
         if current_offer and (current_offer.get('offered_resources') or current_offer.get('requested_resources')):
-            lines.append("│ Player 0 offers:                                                            │")
-            for res, qty in current_offer.get('offered_resources', {}).items(): lines.append(f"│   - {qty} {res:<10}                                                            │")
+            proposer = current_offer["from_player"]
+            recipient = current_offer["to_player"]
+            lines.append(f"│ Player {proposer} offers:                                                            │")
+            for res, qty in current_offer.get('offered_resources', {}).items(): lines.append(f"│   - {str(qty) + ' ' + res:<72}│")
             lines.append("│                                                                             │")
             lines.append("│ In exchange for:                                                            │")
-            for res, qty in current_offer.get('requested_resources', {}).items(): lines.append(f"│   - {qty} {res:<10}                                                            │")
+            for res, qty in current_offer.get('requested_resources', {}).items(): lines.append(f"│   - {str(qty) + ' ' + res:<72}│")
             lines.append("│                                                                             │")
-            lines.append("│ Player 1's turn to respond: [Accept] or [Deny]                              │")
+            lines.append(f"│ Player {recipient}'s turn to respond: Accept or Deny                                  │")
         else:
             lines.append("│                                                                             │")
             lines.append("│                      No current offer on the table                          │")

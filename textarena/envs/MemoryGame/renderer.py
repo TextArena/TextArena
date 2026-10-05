@@ -1,16 +1,10 @@
-from typing import Dict, Any, Tuple
+from typing import Any, Dict
 
 def create_board_str(game_state: Dict[str, Any]) -> str:
     board = game_state.get("board", [])
     scores = game_state.get("scores", {})
     grid_size = len(board)
-    
-    # Collect matched positions
-    matched_positions = set()
-    for r in range(grid_size):
-        for c in range(grid_size):
-            if board[r][c] != ".":
-                matched_positions.add((r, c))
+    matched_positions = set(game_state.get("matched_positions", set()))
 
     # Header row
     output = ["🧠 Memory Game", "  " + " ".join(f"{c:2}" for c in range(grid_size))]

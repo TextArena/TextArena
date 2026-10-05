@@ -18,7 +18,7 @@ def create_board_str(game_state) -> str:
     def cell_display(i, j, val):
         if val == ".":
             return "   "
-        elif (i, j) in clue_numbers:
+        elif (i, j) in clue_numbers and val == "_":
             return f"{clue_numbers[(i, j)]:>2} "
         elif val == "_":
             return " ▢ "
@@ -40,16 +40,9 @@ def create_board_str(game_state) -> str:
 
     # Append clues
     clue_lines = []
-    reverse_map = {v: k for k, v in clue_numbers.items()}
-    for num in sorted(reverse_map):
-        word = None
-        for k, v in placed_words.items():
-            if v[:2] == reverse_map[num]:
-                word = k
-                direction = v[2]
-                break
-        if word and word in clues:
-            clue_lines.append(f"{num}. ({direction}) {clues[word]}")
+    for word, (row, col, direction) in placed_words.items():
+        if word in clues:
+            clue_lines.append(f"{clue_numbers[(row, col)]}. ({direction}) {clues[word]}")
 
     if clue_lines:
         lines.append("\nClues:")

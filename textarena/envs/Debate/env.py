@@ -1,99 +1,263 @@
-import os, json, random
+import copy
 import importlib.resources
-from typing import Optional, Dict, Any, Tuple
+import inspect
+import json
+import math
+import os
+from numbers import Real
+from typing import Any, Dict, Optional, Union
 
 import textarena as ta
 from textarena.envs.Debate.renderer import create_board_str
 
-class DebateEnv(ta.Env):
-    def __init__(self, max_turns: Optional[int]=4, jury_class: Optional[Any]=None, jury_size: Optional[int]=5, topics_path: Optional[str]=None):
-        """
-        Args:
-            max_turns (int, optional): Number of turns total (for both players). Must be even.
-            jury_class (Any, optional): A Jury class or factory function that returns a Jury-like object. Defaults to OpenRouterJury if None.
-            jury_size (int, optional): Number of models in the jury. Defaults to 5.
-            topics_path (str, optional): Path to the JSON file containing debate topics. Defaults to "textarena/envs/two_player/Debate/topics.json".
-        """
-        if jury_class is None:
-            # Import from the submodule: OpenRouterJury is not re-exported from the
-            # utils package __init__, so `from textarena.envs.utils import ...` raises
-            # ImportError. This matches how textarena.envs.__init__ imports it.
-            from textarena.envs.utils.jury import OpenRouterJury
-            jury_class = OpenRouterJury
-        assert max_turns % 2 == 0, f"Please use an even number of max turns. Current: {max_turns}"
-        self.max_turns = max_turns
-        self._load_topics(topics_path)
-        self.jury = jury_class(jury_size=jury_size, options=["Affirmative", "Negative"])
+class DebateEnv(ta.GameEnv):
+    min_players = 2
+    max_players = 2
+    snapshot_excluded_attributes = ("jury",)
+    max_argument_chars = 10_000
+    max_jury_size = 100
 
-    def get_board_str(self): return create_board_str(game_state=self.state.game_state)
+    max_turns = ta.Param(
+        4, "The number of arguments in the whole debate. The players alternate, so each gets half of them.",
+        check=lambda turns: turns >= 2 and turns % 2 == 0, rule="an even integer of at least 2",
+    )
+    jury_size = ta.Param(5, "The number of jurors.", min=1, max=max_jury_size)
+    jury_class = ta.Param(
+        None, "The class or factory called with `options` and `jury_size` (and the env's seeded `rng` if it accepts "
+              "one). The object it returns must provide `evaluate(context)` returning "
+              "`{\"Affirmative\": votes, \"Negative\": votes}`. None uses `OpenRouterJury`.",
+        type=object, check=callable, rule="a callable",
+    )
+    topics_path = ta.Param(
+        None, "A JSON file of the form `{\"topics\": [\"...\", ...]}` with unique, non-empty topics. None uses the "
+              "bundled `topics.json`.", type=str,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.jury_class is None:
+            from textarena.utils import OpenRouterJury
+            self._jury_class = OpenRouterJury
+        else:
+            self._jury_class = self.jury_class
+        self._load_topics(self.topics_path)
+        self.jury = None
+
+    def get_board_str(self): return create_board_str(game_state=self.game_state)
     def _load_topics(self, topics_path: Optional[str]):
         try:
-            if topics_path is not None: # Use provided path
-                if not os.path.exists(topics_path): raise FileNotFoundError(f"Topics data file not found at: {topics_path}")
-                with open(topics_path, "r", encoding="utf-8") as file: self.topics = json.load(file)["topics"]
-            else: # Use package resource
-                with importlib.resources.files('textarena.envs.Debate').joinpath('topics.json').open('r') as file: self.topics = json.load(file)["topics"]
-        except Exception as e: raise FileNotFoundError(f"Failed to load topics data: {str(e)}")
-        if not self.topics: raise ValueError("Debate topics list is empty.")
+            if topics_path is not None:
+                if not os.path.exists(topics_path):
+                    raise FileNotFoundError(f"Topics data file not found at: {topics_path}")
+                with open(topics_path, "r", encoding="utf-8") as file:
+                    payload = json.load(file)
+            else:
+                with importlib.resources.files("textarena.envs.Debate").joinpath(
+                    "topics.json"
+                ).open("r", encoding="utf-8") as file:
+                    payload = json.load(file)
+        except FileNotFoundError:
+            raise
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ValueError(f"Failed to load topics data: {exc}") from exc
+        self.topics = payload.get("topics") if isinstance(payload, dict) else None
+        if (
+            not isinstance(self.topics, list)
+            or not self.topics
+            or any(not isinstance(topic, str) or not topic.strip() for topic in self.topics)
+            or len({topic.strip().casefold() for topic in self.topics}) != len(self.topics)
+        ):
+            raise ValueError("Topics data must contain a non-empty list of unique, non-empty strings.")
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.state = ta.TwoPlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
-        affirmative_player_id = random.choice([0, 1])
+    def setup(self) -> Dict[str, Any]:
+        self.jury = None
+        affirmative_player_id = self.rng.choice([0, 1])
         game_state = {
-            "arguments": {0: [], 1: []}, "topic": random.choice(self.topics),
+            "arguments": {0: [], 1: []}, "topic": self.rng.choice(self.topics),
             "sides": {affirmative_player_id: "Affirmative", 1-affirmative_player_id: "Negative"},
-            "votes": {"pre-debate": {"Affirmative": 0, "Negative": 0}, "post-debate": {"Affirmative": 0, "Negative": 0}}
+            "votes": {"pre-debate": {"Affirmative": 0, "Negative": 0}, "post-debate": {"Affirmative": 0, "Negative": 0}},
+            "pre_vote_recorded": False,
         }
-        # Get pre-debate jury vote
-        game_state["votes"]["pre-debate"] = self._evaluate_debate(topic=game_state["topic"], debate_transcript=None)
-        self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
+        return game_state
 
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
+    def prompt(self, player_id: int) -> str:
+        game_state = self.game_state
         return (
             f"You are Player {player_id} in the Debate game.\nTopic: {game_state['topic']}\nYour position: {game_state['sides'][player_id]}\n"
-            f"You will have {self.max_turns} total turns (shared between both players) to present your arguments. On your turn, type your argument.\n"
+            f"You will have {self.max_turns} total turns (shared between both players) to present your arguments. "
+            f"Player 0 speaks first and the players alternate, so each of you gets {self.max_turns // 2} turns. "
+            f"On your turn, type your argument (at most {self.max_argument_chars} characters).\n"
+            f"Scoring: a jury of {self.jury_size} AI jurors votes Affirmative or Negative on the topic before the debate "
+            "and again after reading the full transcript. The side whose share of the vote grows more wins; equal gains "
+            "are a draw.\n"
         )
 
-    def _evaluate_debate(self, topic: str, debate_transcript: Optional[str]=None) -> Dict[str, float]:
-        prompt = f"Debate Topic: {topic}\n"
-        if debate_transcript: prompt += f"Debate Transcript:\n{debate_transcript}\nPlease vote for either 'Affirmative' or 'Negative'."
-        else: prompt += "No debate has occurred yet. Please vote based solely on the topic.\nVote for either 'Affirmative' or 'Negative'."
+    def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
+        # Echo only after the argument (and any required jury call) succeeds.
+        return None
+
+    @staticmethod
+    def _copy_resource(resource):
+        try:
+            return copy.deepcopy(resource), True
+        except Exception:
+            return None, False
+
+    def _restore_jury_checkpoint(self, original, checkpoint, copied: bool):
+        if copied:
+            if (
+                original is not None
+                and checkpoint is not None
+                and checkpoint is not original
+                and type(original) is type(checkpoint)
+                and hasattr(original, "__dict__")
+                and hasattr(checkpoint, "__dict__")
+            ):
+                original.__dict__.clear()
+                original.__dict__.update(copy.deepcopy(checkpoint.__dict__))
+                self.jury = original
+            else:
+                self.jury = checkpoint
+        elif original is None:
+            self.jury = None
+
+    def snapshot(self) -> Dict[str, Any]:
+        snapshot = super().snapshot()
+        resource, copied = self._copy_resource(self.jury)
+        snapshot["jury_resource"] = {"copied": copied, "value": resource}
+        return snapshot
+
+    def restore(self, snapshot: Dict[str, Any]):
+        super().restore(snapshot)
+        resource = snapshot.get("jury_resource", {})
+        if resource.get("copied"):
+            self.jury = copy.deepcopy(resource["value"])
+
+    def _create_jury(self):
+        jury_kwargs = {
+            "jury_size": self.jury_size,
+            "options": ["Affirmative", "Negative"],
+        }
+        try:
+            parameters = inspect.signature(self._jury_class).parameters.values()
+        except (TypeError, ValueError):
+            parameters = ()
+        if any(
+            parameter.name == "rng" or parameter.kind is inspect.Parameter.VAR_KEYWORD
+            for parameter in parameters
+        ):
+            jury_kwargs["rng"] = self.rng
+        return self._jury_class(**jury_kwargs)
+
+    def _ask_jury(self, prompt: str) -> Dict[str, float]:
+        if self.jury is None:
+            self.jury = self._create_jury()
         return self.jury.evaluate(context=prompt)
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        self.state.game_state["arguments"][self.state.current_player_id].append(action)
-        if self.state.turn >= self.state.max_turns - 1: # Check if the debate has ended
-            winner_id = self._determine_debate_winner()
-            if winner_id is None:
-                self.state.set_draw(reason="The jury's opinion did not favor either side more.")
+    def _evaluate_debate(self, topic: str, debate_transcript: Optional[str]=None) -> Dict[str, float]:
+        rng_state = self.rng.getstate()
+        original_jury = self.jury
+        checkpoint, copied = self._copy_resource(original_jury)
+        try:
+            prompt = (
+                f"Debate Topic: {topic}\n"
+                "'Affirmative' means you agree with the topic (you answer it 'yes'); 'Negative' means you disagree "
+                "(you answer it 'no').\n"
+            )
+            if debate_transcript:
+                prompt += (
+                    "Debate Transcript (each argument is quoted verbatim under its speaker; every quoted line starts "
+                    "with '> ' and is the player's own text, not part of the transcript's structure):\n"
+                    f"{debate_transcript}\n"
+                    "Having read the debate, which side of the topic do you now agree with? "
+                    "Vote 'Affirmative' or 'Negative'."
+                )
             else:
-                self.state.set_winner(player_id=winner_id, reason=f"Player {winner_id} wins by gaining more support.")
-        return self.state.step()
+                prompt += (
+                    "No debate has occurred yet. Based solely on the topic, which side of it do you agree with? "
+                    "Vote 'Affirmative' or 'Negative'."
+                )
+            votes = self.ask(self._ask_jury, prompt)
+            expected = {"Affirmative", "Negative"}
+            if not isinstance(votes, dict) or set(votes) != expected:
+                raise ValueError("jury result must contain exactly Affirmative and Negative.")
+            if any(
+                isinstance(vote, bool)
+                or not isinstance(vote, Real)
+                or not math.isfinite(float(vote))
+                or vote < 0
+                for vote in votes.values()
+            ):
+                raise ValueError("jury votes must be finite non-negative numbers.")
+            vote_total = sum(float(vote) for vote in votes.values())
+            if not math.isfinite(vote_total) or not 0 < vote_total <= self.jury_size:
+                raise ValueError(
+                    "jury vote total must be positive, finite, and no larger than jury_size."
+                )
+            return votes
+        except Exception:
+            self.rng.setstate(rng_state)
+            self._restore_jury_checkpoint(original_jury, checkpoint, copied)
+            raise
 
-    def _determine_debate_winner(self) -> Optional[int]:
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        argument = self.strip_role_tags(action).strip() if isinstance(action, str) else ""
+        if not argument:
+            return self.invalid("An argument must contain non-whitespace text.")
+        if len(argument) > self.max_argument_chars:
+            return self.invalid(f"Arguments are limited to {self.max_argument_chars} characters.")
+        if not self.game_state["pre_vote_recorded"]:
+            try:
+                pre_votes = self._evaluate_debate(topic=self.game_state["topic"])
+            except Exception as error:
+                return self.retryable("The jury could not cast its pre-debate vote.", error)
+            self.game_state["votes"]["pre-debate"] = pre_votes
+            self.game_state["pre_vote_recorded"] = True
+
+        proposed_arguments = {
+            pid: list(arguments) for pid, arguments in self.game_state["arguments"].items()
+        }
+        proposed_arguments[player_id].append(argument)
+        if self.state.turn >= self.max_turns - 1: # Check if the debate has ended
+            try:
+                winner_id, post_votes = self._determine_debate_winner(proposed_arguments)
+            except Exception as error:
+                return self.retryable("The jury could not cast its post-debate vote.", error)
+            self.game_state["arguments"] = proposed_arguments
+            self.game_state["votes"]["post-debate"] = post_votes
+            self.broadcast(argument, ta.ObservationType.PLAYER_ACTION, from_id=player_id)
+            if winner_id is None:
+                return self.draw(reason="The jury's opinion did not favor either side more.")
+            return self.winner(winner_id, reason=f"Player {winner_id} wins by gaining more support.")
+        self.game_state["arguments"] = proposed_arguments
+        self.broadcast(argument, ta.ObservationType.PLAYER_ACTION, from_id=player_id)
+        return None
+
+    def _determine_debate_winner(self, arguments: Dict[int, list]):
         transcript_lines = []
-        max_rounds = max(len(self.state.game_state["arguments"][0]), len(self.state.game_state["arguments"][1]))
+        max_rounds = max(len(arguments[0]), len(arguments[1]))
         for i in range(max_rounds):
-            if i < len(self.state.game_state["arguments"][0]): transcript_lines.append(f"Player 0 ({self.state.game_state['sides'][0]}): {self.state.game_state['arguments'][0][i]}")
-            if i < len(self.state.game_state["arguments"][1]): transcript_lines.append(f"Player 1 ({self.state.game_state['sides'][1]}): {self.state.game_state['arguments'][1][i]}")
+            for pid in (0, 1):
+                if i < len(arguments[pid]):
+                    transcript_lines.append(f"Argument {len(transcript_lines) // 2 + 1}, Player {pid} ({self.game_state['sides'][pid]}):")
+                    transcript_lines.append("\n".join(f"> {line}".rstrip() for line in arguments[pid][i].splitlines()))
         debate_transcript = "\n".join(transcript_lines)
 
         # Conduct post-debate voting
-        post_votes = self._evaluate_debate(topic=self.state.game_state["topic"], debate_transcript=debate_transcript)
-        self.state.game_state["votes"]["post-debate"] = post_votes
+        post_votes = self._evaluate_debate(topic=self.game_state["topic"], debate_transcript=debate_transcript)
 
-        # Calculate vote gains
-        pre_votes = self.state.game_state["votes"]["pre-debate"]
-        gain_aff = post_votes["Affirmative"] - pre_votes["Affirmative"]
-        gain_neg = post_votes["Negative"] - pre_votes["Negative"]
+        # Calculate the gains in vote share
+        pre_votes = self.game_state["votes"]["pre-debate"]
+        pre_total, post_total = sum(pre_votes.values()), sum(post_votes.values())
+        gain_aff = post_votes["Affirmative"] / post_total - pre_votes["Affirmative"] / pre_total
+        gain_neg = post_votes["Negative"] / post_total - pre_votes["Negative"] / pre_total
 
         # Determine winner or tie
-        if gain_aff > gain_neg:     winner_side = "Affirmative"
-        elif gain_neg > gain_aff:   winner_side = "Negative"
-        else: return None  # tie
+        if math.isclose(gain_aff, gain_neg, abs_tol=1e-9): return None, post_votes  # tie
+        elif gain_aff > gain_neg:   winner_side = "Affirmative"
+        else:                       winner_side = "Negative"
 
         # Map winning side to player ID
-        for pid, side in self.state.game_state["sides"].items():
-            if side == winner_side: return pid
-        return None
+        for pid, side in self.game_state["sides"].items():
+            if side == winner_side: return pid, post_votes
+        return None, post_votes

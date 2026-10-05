@@ -4,9 +4,12 @@ def create_game_str(game_state: dict) -> str:
     lines = []
     
     # Header
-    current_round = game_state.get('current_round', 1)
-    max_rounds = 10  # Default, should be passed in but keeping simple for now
     phase = game_state.get('phase', 'allocation')
+    last_battle = game_state.get('last_battle')
+    if phase == 'results' and last_battle:
+        current_round = last_battle['round']
+    else:
+        current_round = game_state.get('current_round', 1)
     scores = game_state.get('scores', {0: 0, 1: 0})
     
     lines.append("┌" + "─" * 50 + "┐")
@@ -17,7 +20,11 @@ def create_game_str(game_state: dict) -> str:
     lines.append("├" + "─" * 50 + "┤")
     
     # Fields display
-    fields = game_state.get('fields', [])
+    fields = (
+        last_battle['fields']
+        if phase == 'results' and last_battle
+        else game_state.get('fields', [])
+    )
     if fields:
         lines.append("│" + " " * 50 + "│")
         lines.append(f"│{'BATTLEFIELD':^50}│")
@@ -34,19 +41,21 @@ def create_game_str(game_state: dict) -> str:
             name = field['name']
             alpha_units = field['player_0_units']
             beta_units = field['player_1_units']
-            
-            if alpha_units > beta_units:
-                winner = "🟢 Alpha"
-            elif beta_units > alpha_units:
-                winner = "🔴 Beta"
-            else:
-                winner = "⚪ Tie"
-            
-            # Handle case where no units are allocated yet
-            if alpha_units == 0 and beta_units == 0 and phase == 'allocation':
+
+            if phase == 'allocation':
+                # Allocations are sealed until the round resolves.
+                alpha_display = beta_display = "?"
                 winner = "❓ TBD"
-            
-            field_row = f"│   {name:^3} │  {alpha_units:^3}  │  {beta_units:^3}  │ {winner:^9} │"
+            else:
+                alpha_display, beta_display = alpha_units, beta_units
+                if alpha_units > beta_units:
+                    winner = "🟢 Alpha"
+                elif beta_units > alpha_units:
+                    winner = "🔴 Beta"
+                else:
+                    winner = "⚪ Tie"
+
+            field_row = f"│   {name:^3} │  {alpha_display:^3}  │  {beta_display:^3}  │ {winner:^9} │"
             lines.append(field_row)
     
     # Player states (if in allocation phase)
@@ -66,11 +75,7 @@ def create_game_str(game_state: dict) -> str:
                 
                 if complete:
                     status = "✅ Complete"
-                    allocation = state.get('current_allocation', {})
-                    alloc_str = ", ".join([f"{k}:{v}" for k, v in allocation.items()])
-                    if len(alloc_str) > 35:
-                        alloc_str = alloc_str[:32] + "..."
-                    lines.append(f"│ {player_name}: {status} - {alloc_str:<25} │")
+                    lines.append(f"│ {player_name}: {status:<40} │")
                 else:
                     status = f"⏳ {remaining} units left"
                     lines.append(f"│ {player_name}: {status:<40} │")
@@ -83,30 +88,5 @@ def create_game_str(game_state: dict) -> str:
         lines.append("│" + " " * 50 + "│")
     
     lines.append("└" + "─" * 50 + "┘")
-    
-    return "\n".join(lines)
-
-
-def create_simple_game_str(game_state: dict) -> str:
-    """Create a simple text representation for debugging"""
-    phase = game_state.get('phase', 'allocation')
-    current_round = game_state.get('current_round', 1)
-    scores = game_state.get('scores', {0: 0, 1: 0})
-    
-    lines = [
-        f"=== COLONEL BLOTTO - Round {current_round} ===",
-        f"Phase: {phase.title()}",
-        f"Score: Alpha {scores[0]} - Beta {scores[1]}",
-        ""
-    ]
-    
-    fields = game_state.get('fields', [])
-    if fields and phase == 'results':
-        lines.append("Battle Results:")
-        for field in fields:
-            alpha = field['player_0_units']
-            beta = field['player_1_units']
-            winner = "Alpha" if alpha > beta else "Beta" if beta > alpha else "Tie"
-            lines.append(f"  Field {field['name']}: Alpha {alpha} vs Beta {beta} -> {winner}")
     
     return "\n".join(lines)

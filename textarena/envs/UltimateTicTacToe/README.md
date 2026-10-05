@@ -1,121 +1,63 @@
-# Ultimate Tic Tac Toe Environment Documentation
+# Ultimate Tic Tac Toe
 
-## Overview
-**Ultimate Tic Tac Toe** is a strategic two-player game that combines the classic Tic Tac Toe with an added layer of complexity. Players aim to win three micro boards in a row (horizontally, vertically, or diagonally) on the macro board, which tracks the outcomes of individual micro boards. Each move influences the opponent's next playable micro board, creating dynamic and strategic gameplay. This environment implements the full rules of Ultimate Tic Tac Toe, including valid move enforcement, micro board and macro board win detection, and a clear rendering of the board state for agent-based gameplay and experimentation.
+Two players play tic-tac-toe on nine small boards arranged in a 3×3 grid, where each move dictates the opponent's next
+board and three won boards in a row win the game ([rules](https://en.wikipedia.org/wiki/Ultimate_tic-tac-toe)). Every
+move both claims a square and chooses the opponent's next board, so good play means thinking about the large board,
+not just the small one in front of you.
 
-## Action Space
-- **Format:** Actions are strings representing the player's choice. For example:
-- **Example:**
-    - Choosing the micro board 0 and marking row 1 col 0: [0 1 0]
-    - Choosing the micro board 3 and marking row 0 col 2: [3 0 2]
-- **Notes:** The players are free to have additional texts in their replies, so long they provide their action in the correct format of [micro_board row col].
+<!-- BEGIN GENERATED: variants -->
+**Players:** 2
 
-## Observation Space
-**Reset Observation**
-On reset, each player receives a prompt containing their beginning game instructions. For example:
-```plaintext
-[GAME] You are Player 0. You are playing Ultimate Tic Tac Toe.
-Your goal is to win three micro boards in a row (horizontally, vertically, or diagonally) on the macro board.
-Each micro board is a 3x3 Tic Tac Toe grid, and the macro board tracks which player has won each micro board.
-On your turn, you can mark an empty cell in a micro board. The position of your move determines which micro board
-your opponent must play in next.
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
-Rules to remember:
-1. A move must be made in the micro board specified by the previous move.
-   For example, if the last move was in the top-left corner of a micro board, the opponent must play in the top-left micro board.
-2. If the directed micro board is already won or full, you are free to play in any available micro board.
-3. You win a micro board by completing a row, column, or diagonal within that board.
-4. You win the game by completing three micro boards in a row on the macro board.
-5. The game ends in a draw if all micro boards are filled, and no player has three in a row on the macro board.
-6. To submit your move, submit them as [micro_board, row, col], where micro_board is the index of the micro board (0-8), and row and col are the cell coordinates (0-2).
-For example, to play in the center cell of the top-left micro board, submit [0 1 1].
+| Env ID | Parameters |
+| --- | --- |
+| `UltimateTicTacToe-v1` | defaults |
 
-As Player 0, you will be 'O', whereas your opponent is 'X'.
-Below is the current state of the macro board (tracking micro board wins):
-      |       |      
-      |       |      
-      |       |      
------------------------
-      |       |      
-      |       |      
-      |       |      
------------------------
-      |       |      
-      |       |      
-      |       |      
------------------------
-```
+Append `-mdp` to any ID for the state-complete variant (e.g. `UltimateTicTacToe-v1-mdp`).
+<!-- END GENERATED: variants -->
 
-**Step Observation**
-After each step, the players will receive the latest message from the game environment. For example, here's player 0 making its first move and the environment responds back:
-```plaintext
-[Player 0] [4 1 1]
-[GAME] Player 0 made a move in micro board 4 at row 1, col 1. Player 1 must play in micro board 4. New state of the board:
-      |       |      
-      |       |      
-      |       |      
------------------------
-      |       |      
-      |   O   |      
-      |       |      
------------------------
-      |       |      
-      |       |      
-      |       |      
------------------------
-```
+## Rules
 
-## Gameplay
-- **Players:** 2
-- **Turns:** Players take turns placing their mark ('X' or 'O') in a specific cell of a micro board. Each turn determines the micro board their opponent must play in.
-- **Board:** The game features a macro board (3x3 grid) representing the outcomes of nine micro boards (each a 3x3 Tic Tac Toe grid). The macro board is updated as players win micro boards.
-- **Objective:** Win the game by completing three micro boards in a row (horizontally, vertically, or diagonally) on the macro board.
-- **Winning Condition:** The first player to achieve three micro boards in a row on the macro board wins the game. If all micro boards are filled without a winner on the macro board, the game ends in a draw.
+- Player 0 is `X` and moves first; Player 1 is `O`.
+- The board is a 3×3 grid of mini-boards numbered 0–8, left to right and top to bottom. Each mini-board is a
+  tic-tac-toe grid whose squares are also numbered 0–8 the same way.
+- The first move may go in any square. After that, the square you mark sends your opponent to the mini-board with the
+  same number: marking square 8 of any mini-board means they must play in mini-board 8 next.
+- Three of your marks in a row inside a mini-board win it. A mini-board that fills up without a winner is drawn and
+  counts for nobody.
+- Won and drawn mini-boards are closed: nobody can play there again, even if empty squares remain. If you are sent to
+  a closed mini-board, you may play in any open one.
+- Winning three mini-boards in a row (horizontally, vertically, or diagonally) wins the game. If every mini-board is
+  closed without such a line, the game is a draw.
 
-## Key Rules
-### Gameplay Mechanics
-1. Moves:
-- Players select a cell in one of the nine micro boards.
-- The selected cell determines the next micro board the opponent must play in.
-- If the specified micro board is full or already won, the opponent can play in any available micro board.
+## Actions
 
-2. Micro Board Wins:
-- A micro board is won by completing a row, column, or diagonal within that board.
-- The winning player's mark ('X' or 'O') is placed in the corresponding cell of the macro board.
+Reply with `macro micro`: the mini-board number and the square number inside it, each 0–8, separated by a space (a
+comma also works).
 
-3. Macro Board Wins:
-- The game is won by completing three micro boards in a row on the macro board (horizontally, vertically, or diagonally).
+Example: `7 8` marks square 8 of mini-board 7 and sends your opponent to mini-board 8 (unless it is closed).
 
-4. Draws:
-- The game ends in a draw if all cells on the macro board are filled and no player achieves three in a row.
+## Observations
 
-### Phases of a Turn
+Each player first receives the rules and their mark. Before every move, the acting player sees:
 
-1. Move Phase:
-- The current player places their mark in an empty cell of the assigned micro board.
-- If the directed micro board is unavailable, the player can choose any available micro board.
+- the full board, where every empty square of an open mini-board is labeled `'macro,micro'` and unused squares of
+  closed mini-boards show `.`;
+- a 3×3 summary of the mini-boards (`X` or `O` for won, `D` for drawn, the board number for open);
+- where they must play (one specific mini-board, or any open one) and the list of valid moves.
 
-2. Board Update Phase:
-- The game checks if the current move wins the micro board and updates the macro board accordingly.
-- The game also evaluates the macro board to determine if a player has won or if the game is a draw.
-
-3. Observation Phase:
-- After the move, the game renders the updated board state (both macro and micro boards) for players to review and strategize.
+Both players see every move, along with where the next player must play. There is no hidden information.
 
 ## Rewards
 
-| Outcome          | Reward for Player | Reward for Opponent |
-|------------------|:-----------------:|:-------------------:|
-| **Win**          | `+1`              | `-1`                |
-| **Lose**         | `-1`              | `+1`                |
-| **Invalid**      | `-1`              | `0`                 |
+| Outcome | Reward |
+| --- | --- |
+| Three mini-boards in a row | Winner `+1`, loser `-1` |
+| Every mini-board closed, no line | Both `0` |
+| Second consecutive invalid move | Offender `-1`, opponent `+1` |
 
-## Variants
+## Notes
 
-| Env-id                  |
-|-------------------------|
-| `UltimateTicTacToe-v0`  |
-
-
-### Contact
-If you have questions or face issues with this specific environment, please reach out directly to bobby_cheng@i2r.a-star.edu.sg
+- This is the common rule set: closed mini-boards accept no more marks, and drawn mini-boards count for nobody. A
+  known variant makes players keep playing in won mini-boards that still have empty squares; it is not implemented.

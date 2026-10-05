@@ -1,4 +1,4 @@
-from typing import List, Dict, Tuple
+from typing import Dict, List, Optional, Tuple
 
 def card_block(rank: str, suit: str) -> List[str]:
     return [
@@ -16,7 +16,15 @@ def render_card_row(cards: List[Tuple[str, str]]) -> List[str]:
         block = card_block(rank, suit)
         for i in range(7): lines[i] += f"{block[i]} "
     return lines
-def create_board_str(community_cards: List[Dict[str, str]], pot: int, player_chips: Dict[int, int], player_hands: Dict[int, List[Dict[str, str]]], bets: Dict[int, float]) -> str:
+def create_board_str(
+    community_cards: List[Dict[str, str]],
+    pot: int,
+    player_chips: Dict[int, int],
+    player_hands: Dict[int, List[Dict[str, str]]],
+    bets: Dict[int, float],
+    viewer_id: Optional[int] = None,
+    reveal_all: bool = False,
+) -> str:
     output = []
     output.append("┌─ COMMUNITY CARDS " + "─" * 52 + "┐")
     output.append(f"│   Pot: {pot:<3}" + " " * 59 + "│")
@@ -38,8 +46,12 @@ def create_board_str(community_cards: List[Dict[str, str]], pot: int, player_chi
             header += f"┌─ PLAYER {pid} " + "─" * 14 + "┐     "
             chips_line += f"│ Chips: {chips:<5}" + f"   Bet: {bets[pid]:<4}" + "│     "
             empty_line += "│" + " " * 25 + "│     "
-            hand = player_hands[pid]
-            cards = render_card_row([(hand[0]['rank'], hand[0]['suit']), (hand[1]['rank'], hand[1]['suit'])])
+            hand = player_hands.get(pid, [])
+            if (reveal_all or pid == viewer_id) and len(hand) == 2:
+                visible_hand = [(hand[0]["rank"], hand[0]["suit"]), (hand[1]["rank"], hand[1]["suit"])]
+            else:
+                visible_hand = [("?", "?"), ("?", "?")]
+            cards = render_card_row(visible_hand)
             for i in range(7): card_lines[i] += f"│ {cards[i]}│     "
             footer += "└" + "─" * 25 + "┘     "
         output.append(header.rstrip())

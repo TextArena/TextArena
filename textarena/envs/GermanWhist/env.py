@@ -1,13 +1,17 @@
-import random
 import re
-from typing import Optional, Tuple, List, Dict, Any
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
 
-class GermanWhistEnv(ta.Env):
-    def __init__(self):
+
+class GermanWhistEnv(ta.GameEnv):
+    min_players = 2
+    max_players = 2
+    mdp_includes_actions = False
+
+    def __init__(self, **kwargs):
         """ Initializes the German Whist card game environment """
-        super().__init__()
+        super().__init__(**kwargs)
         self.deck = self._create_deck()
 
     def _create_deck(self) -> List[Dict[str, Any]]:
@@ -40,46 +44,27 @@ class GermanWhistEnv(ta.Env):
 
     def _find_action_token(self, message: str) -> Optional[int]:
         """ Parse card play action from player message """
-        pattern = re.compile(r"\[play (\d+)\]", re.I)
-        match = pattern.search(message)
+        pattern = re.compile(r"^play\s+(\d+)$", re.I)
+        match = pattern.match(message)
 
         if match:
-            return int(match.group(1)) - 1  # Convert to 0-based index
+            try:
+                return int(match.group(1)) - 1  # Convert to 0-based index
+            except ValueError:
+                return None
         return None
 
-    def reset(self, num_players: int = 2, seed: Optional[int] = None):
-        """ Reset the game state """
-        if num_players != 2:
-            raise ValueError("German Whist is a two-player game only")
-
-        self.state = ta.TwoPlayerState(num_players=num_players, seed=seed)
-
-        # Initialize game state BEFORE calling state.reset()
-        game_state = self._init_game_state()
-
-        self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
-
-        # Announce game start and first turn
-        self._announce_game_start()
-        self._announce_turn(self.state.current_player_id)
-
-    def _init_game_state(self) -> Dict[str, Any]:
+    def setup(self) -> Dict[str, Any]:
         """ Initialize and return the complete game state """
         # Shuffle deck
         deck_copy = self.deck.copy()
-        random.shuffle(deck_copy)
+        self.rng.shuffle(deck_copy)
 
-        # Deal 13 cards to each player
-        players = {}
-        for player_id in range(2):
-            player_hand = []
-            for _ in range(13):
-                if deck_copy:
-                    player_hand.append(deck_copy.pop())
-
-            players[player_id] = {
-                'hand': player_hand
-            }
+        # Deal 13 cards to each player, round-robin.
+        players = {player_id: {'hand': []} for player_id in range(2)}
+        for _ in range(13):
+            for player_id in range(2):
+                players[player_id]['hand'].append(deck_copy.pop())
 
         # Set trump card (next card after dealing)
         trump_card = None
@@ -103,10 +88,9 @@ class GermanWhistEnv(ta.Env):
             'trump_suit': trump_suit,
             'trump_card': trump_card,
             'current_trick': [],
-            # Total tricks won across both phases (for display only)
-            'tricks_won': {0: 0, 1: 0},
-            # Tricks won during the playing phase (these decide the game)
-            'playing_tricks_won': {0: 0, 1: 0},
+            'completed_tricks': [],
+            'tricks_won': {0: 0, 1: 0},  # both phases, for display only
+            'playing_tricks_won': {0: 0, 1: 0},  # only these decide the game
             'phase': 'learning',  # learning, playing, finished
             'trick_leader': 0,
             'next_card': next_card,  # The card that winner of trick will receive
@@ -114,41 +98,50 @@ class GermanWhistEnv(ta.Env):
             'tricks_in_playing': 0
         }
 
-    def _announce_game_start(self):
+    def on_start(self):
         """ Announce the start of the game with trump suit """
-        gs = self.state.game_state
-        trump_str = self._card_to_string(gs['trump_card']) if gs['trump_card'] else self.m("game_start", "no_trump_card")
+        gs = self.game_state
+        trump_str = self._card_to_string(gs['trump_card']) if gs['trump_card'] else "None"
 
-        self.state.add_observation(
-            message=self.m("game_start", "intro", trump_suit=gs['trump_suit'], trump_str=trump_str),
-            observation_type=ta.ObservationType.GAME_MESSAGE
+        self.broadcast(
+            f"German Whist game started!\nTrump suit: {gs['trump_suit']} (Trump card: {trump_str})\n\nLEARNING PHASE: The trick winner takes the face-up card from the deck and the loser takes the next card face down (only the loser sees it); then the next card is turned face up. Tricks won in this phase do not count towards victory.",
+            ta.ObservationType.GAME_MESSAGE
         )
 
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
+    def prompt(self, player_id: int) -> str:
+        game_state = self.game_state
+        phase_info = ""
         if game_state['phase'] == 'learning':
-            phase_info = self.m("player_prompt", "phase_learning")
+            phase_info = "LEARNING PHASE: Win tricks to get the visible next card. You can see what you're competing for! These tricks do not count towards victory."
         else:
-            phase_info = self.m("player_prompt", "phase_playing")
+            phase_info = "PLAYING PHASE: No more cards to draw. Every trick from now on counts towards victory!"
 
-        hand_size = len(game_state['players'][player_id]['hand']) if player_id in game_state['players'] else 13
-        return self.m("player_prompt", "intro", player_id=player_id, phase_info=phase_info, hand_size=hand_size)
+        return (
+            f"You are playing German Whist - Player {player_id}.\n"
+            f"{phase_info}\n"
+            f"Goal: Win the majority (7+) of the 13 playing-phase tricks. The first 13 tricks (learning phase) only decide who gets which cards.\n"
+            f"Card Power: A > K > Q > J > 10 > 9 > 8 > 7 > 6 > 5 > 4 > 3 > 2\n"
+            f"Trump cards beat non-trump cards. You must follow suit if possible.\n\n"
+            f"Action: reply with 'play X' where X is the position (1-{len(game_state['players'][player_id]['hand']) if player_id in game_state['players'] else 13}) of the card in your hand\n"
+        )
 
-    def _render_player_hand(self, player_id: int):
+    def _render_player_hand(self, player_id: int) -> str:
         """ Renders the player's hand organized by suit """
-        gs = self.state.game_state
+        gs = self.game_state
         if player_id not in gs['players']:
-            return self.m("hand", "no_cards")
+            return "No cards"
 
         player = gs['players'][player_id]
         hand = player['hand']
 
         if not hand:
-            return self.m("hand", "no_cards_in_hand")
+            return "No cards in hand"
 
         # Group cards by suit for better readability
         suits_order = [gs['trump_suit']] + [suit for suit in ['♠', '♥', '♦', '♣'] if suit != gs['trump_suit']]
 
-        output = self.m("hand", "header")
+        output = []
+        output.append("Your hand:")
 
         for suit in suits_order:
             suit_cards = [(i, card) for i, card in enumerate(hand) if card['suit'] == suit]
@@ -156,94 +149,105 @@ class GermanWhistEnv(ta.Env):
                 # Sort by power within suit
                 suit_cards.sort(key=lambda x: x[1]['power'], reverse=True)
 
-                trump_indicator = self.m("hand", "trump_indicator") if suit == gs['trump_suit'] else ""
-                output = self.m("hand", "suit_line", observation=output, suit=suit, trump_indicator=trump_indicator)
+                trump_indicator = " (TRUMP)" if suit == gs['trump_suit'] else ""
+                output.append(f"  {suit}{trump_indicator}:")
 
                 for original_index, card in suit_cards:
-                    output = self.m("hand", "card_line", observation=output, index=original_index + 1, card=self._card_to_string(card))
+                    # Find the actual position in the hand for the play command
+                    actual_position = hand.index(card) + 1
+                    output.append(f"    {actual_position}. {self._card_to_string(card)}")
 
-        return output
+        return "\n".join(output)
 
-    def _render_current_trick(self):
+    def _render_current_trick(self) -> str:
         """ Renders the current trick being played """
-        gs = self.state.game_state
+        gs = self.game_state
         if not gs['current_trick']:
-            return self.m("trick_view", "empty")
+            return "No cards played yet this trick."
 
-        output = self.m("trick_view", "header")
+        output = []
+        output.append("Current trick:")
         for player_id, card in gs['current_trick']:
-            trump_indicator = self.m("trick_view", "trump_indicator") if card['suit'] == gs['trump_suit'] else ""
-            output = self.m("trick_view", "card_line", observation=output, player_id=player_id, card=self._card_to_string(card), trump_indicator=trump_indicator)
+            trump_indicator = " (TRUMP)" if card['suit'] == gs['trump_suit'] else ""
+            output.append(f"  Player {player_id}: {self._card_to_string(card)}{trump_indicator}")
 
-        return output
+        return "\n".join(output)
 
-    def _render_next_card_info(self):
+    def _render_next_card_info(self) -> str:
         """ Renders information about the next card to be won """
-        gs = self.state.game_state
+        gs = self.game_state
 
         if gs['phase'] != 'learning':
-            return self.m("next_card", "playing_phase")
+            return "PLAYING PHASE: No more cards to draw from deck."
 
         if not gs['next_card']:
-            return self.m("next_card", "deck_empty")
+            return "No more cards in deck."
 
-        if gs['next_card']['suit'] == gs['trump_suit']:
-            return self.m("next_card", "available_trump", card=self._card_to_string(gs['next_card']))
-        return self.m("next_card", "available", card=self._card_to_string(gs['next_card']))
+        trump_indicator = " (TRUMP)" if gs['next_card']['suit'] == gs['trump_suit'] else ""
+        return f"Next card for trick winner: {self._card_to_string(gs['next_card'])}{trump_indicator}"
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        player_id = self.state.current_player_id
-        gs = self.state.game_state
+    def render(self, player_id: int) -> str:
+        """ The board shown to the player about to act """
+        gs = self.game_state
 
-        self.state.add_observation(
-            from_id=player_id,
-            message=action,
-            observation_type=ta.ObservationType.PLAYER_ACTION
-        )
+        hand_str = self._render_player_hand(player_id)
+        trick_str = self._render_current_trick()
+        next_card_str = self._render_next_card_info()
+
+        # Show current score
+        if gs['phase'] == 'learning':
+            scores_str = f"Learning-phase tricks (do not count) - Player 0: {gs['tricks_won'][0]} | Player 1: {gs['tricks_won'][1]}"
+        else:
+            scores_str = f"Scoring tricks - Player 0: {gs['playing_tricks_won'][0]} | Player 1: {gs['playing_tricks_won'][1]}"
+
+        # Phase information
+        phase_str = f"Phase: {gs['phase'].upper()}"
+        if gs['phase'] == 'learning':
+            remaining_cards = len(gs['deck'])
+            phase_str += f" ({remaining_cards} cards left in deck)"
+
+        message_parts = [hand_str, "", trick_str, "", next_card_str, "", scores_str, phase_str, "", "Play a card by replying 'play X'"]
+        return "\n".join(message_parts)
+
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        gs = self.game_state
 
         # Parse action
         card_index = self._find_action_token(action)
 
         if card_index is None:
-            self.state.set_invalid_move(self.m("invalid_move", "wrong_format"))
-            return self.state.step()
+            return self.invalid("Reply with 'play X' where X is the card position (1, 2, 3, etc.)")
 
         # Validate card index
         player = gs['players'][player_id]
         if card_index < 0 or card_index >= len(player['hand']):
-            self.state.set_invalid_move(self.m("invalid_move", "bad_position", hand_size=len(player['hand'])))
-            return self.state.step()
+            return self.invalid(f"Invalid card position. You have {len(player['hand'])} cards (1-{len(player['hand'])})")
 
         played_card = player['hand'][card_index]
 
         # Validate suit following rules
         if not self._is_valid_play(player_id, played_card):
-            lead_suit = gs['current_trick'][0][1]['suit'] if gs['current_trick'] else None
-            if lead_suit:
-                self.state.set_invalid_move(self.m("invalid_move", "must_follow_suit", lead_suit=lead_suit))
-            else:
-                self.state.set_invalid_move(self.m("invalid_move", "invalid_play"))
-            return self.state.step()
+            lead_suit = gs['current_trick'][0][1]['suit']
+            return self.invalid(f"You must follow suit ({lead_suit}) if you have cards of that suit!")
 
         # Play the card
         player['hand'].pop(card_index)
         gs['current_trick'].append((player_id, played_card))
 
-        self.state.add_observation(
-            message=self.m("game_action", "played", player_id=player_id, card=self._card_to_string(played_card)),
-            observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION
+        self.broadcast(
+            f"Player {player_id} played {self._card_to_string(played_card)}",
+            ta.ObservationType.GAME_ACTION_DESCRIPTION
         )
 
         # Check if trick is complete
         if len(gs['current_trick']) == 2:
             return self._resolve_trick()
-        else:
-            # Move to next player
-            return self._next_player_in_trick()
+        # Otherwise the default rotation moves to the other player.
+        return None
 
     def _is_valid_play(self, player_id: int, played_card: Dict[str, Any]) -> bool:
         """ Check if the played card follows suit rules """
-        gs = self.state.game_state
+        gs = self.game_state
 
         # If leading the trick, any card is valid
         if not gs['current_trick']:
@@ -262,17 +266,9 @@ class GermanWhistEnv(ta.Env):
 
         return not has_lead_suit
 
-    def _next_player_in_trick(self) -> Tuple[bool, ta.Info]:
-        """ Move to the next player in the current trick """
-        next_player = 1 - self.state.current_player_id  # Switch between 0 and 1
-        self.state.manually_set_current_player_id(next_player)
-
-        self._announce_turn(next_player)
-        return self.state.step(rotate_player=False)
-
-    def _resolve_trick(self) -> Tuple[bool, ta.Info]:
+    def _resolve_trick(self) -> Optional[ta.Outcome]:
         """ Resolve the completed trick """
-        gs = self.state.game_state
+        gs = self.game_state
 
         # Determine trick winner
         winner_id, winning_card = self._determine_trick_winner(gs['current_trick'], gs['trump_suit'])
@@ -283,18 +279,17 @@ class GermanWhistEnv(ta.Env):
 
         if gs['phase'] == 'learning':
             gs['tricks_in_learning'] += 1
-            message = self.m("trick", "won_learning", winner_id=winner_id, card=self._card_to_string(winning_card))
         else:
             gs['tricks_in_playing'] += 1
             gs['playing_tricks_won'][winner_id] += 1
-            message = self.m("trick", "won", winner_id=winner_id, card=self._card_to_string(winning_card))
 
-        self.state.add_observation(
-            message=message,
-            observation_type=ta.ObservationType.GAME_MESSAGE
+        self.broadcast(
+            f"Player {winner_id} wins the trick with {self._card_to_string(winning_card)}!",
+            ta.ObservationType.GAME_MESSAGE
         )
 
-        # Clear current trick
+        # Preserve played cards so all 52 physical cards remain accounted for.
+        gs['completed_tricks'].append(gs['current_trick'].copy())
         gs['current_trick'] = []
 
         # Handle card distribution in learning phase
@@ -304,9 +299,9 @@ class GermanWhistEnv(ta.Env):
         # Check for phase transition
         if gs['phase'] == 'learning' and not gs['deck']:
             gs['phase'] = 'playing'
-            self.state.add_observation(
-                message=self.m("phase", "learning_complete"),
-                observation_type=ta.ObservationType.GAME_MESSAGE
+            self.broadcast(
+                f"LEARNING PHASE COMPLETE! No more cards to draw.\nPLAYING PHASE: Every remaining trick counts towards victory. Win as many as possible with your current hand!",
+                ta.ObservationType.GAME_MESSAGE
             )
 
         # Check for game end
@@ -315,25 +310,23 @@ class GermanWhistEnv(ta.Env):
 
         # Winner leads next trick
         gs['trick_leader'] = winner_id
-        self.state.manually_set_current_player_id(winner_id)
-
-        self._announce_turn(winner_id)
-        return self.state.step(rotate_player=False)
+        self.set_next_player(winner_id)
+        return None
 
     def _handle_learning_phase_cards(self, winner_id: int, loser_id: int):
         """ Handle card distribution during learning phase """
-        gs = self.state.game_state
+        gs = self.game_state
 
         if not gs['deck']:
             return
 
-        # Winner gets the face-up card (next_card)
+        # Winner gets the face-up card (next_card), which both players have seen
         if gs['next_card']:
             gs['players'][winner_id]['hand'].append(gs['next_card'])
-            self.state.add_observation(
-                to_id=winner_id,
-                message=self.m("draw", "winner_received", card=self._card_to_string(gs['next_card'])),
-                observation_type=ta.ObservationType.GAME_MESSAGE
+            self.broadcast(
+                f"Player {winner_id} takes the face-up {self._card_to_string(gs['next_card'])}; "
+                f"Player {loser_id} draws the next card face down.",
+                ta.ObservationType.GAME_MESSAGE
             )
 
         # Remove the card from deck
@@ -345,19 +338,18 @@ class GermanWhistEnv(ta.Env):
             loser_card = gs['deck'].pop()
             gs['players'][loser_id]['hand'].append(loser_card)
 
-            self.state.add_observation(
-                to_id=loser_id,
-                message=self.m("draw", "loser_received", card=self._card_to_string(loser_card)),
-                observation_type=ta.ObservationType.GAME_MESSAGE
+            self.message(
+                loser_id,
+                f"You received a face-down card: {self._card_to_string(loser_card)}",
+                ta.ObservationType.GAME_MESSAGE
             )
 
-            # Winner gets to see what the next card will be
+            # The next stock card is turned face up for both players
             if gs['deck']:
                 gs['next_card'] = gs['deck'][-1]
-                self.state.add_observation(
-                    to_id=winner_id,
-                    message=self.m("draw", "winner_preview", card=self._card_to_string(gs['next_card'])),
-                    observation_type=ta.ObservationType.GAME_MESSAGE
+                self.broadcast(
+                    f"The next face-up card is {self._card_to_string(gs['next_card'])}.",
+                    ta.ObservationType.GAME_MESSAGE
                 )
             else:
                 gs['next_card'] = None
@@ -393,7 +385,7 @@ class GermanWhistEnv(ta.Env):
 
     def _is_game_over(self) -> bool:
         """ Check if the game is over """
-        gs = self.state.game_state
+        gs = self.game_state
 
         # Game is over when all players have no cards left
         for player in gs['players'].values():
@@ -402,83 +394,63 @@ class GermanWhistEnv(ta.Env):
 
         return True
 
-    def _end_game(self) -> Tuple[bool, ta.Info]:
+    def _end_game(self) -> ta.Outcome:
         """ End the game and determine winner """
-        gs = self.state.game_state
+        gs = self.game_state
         gs['phase'] = 'finished'
 
-        # Only playing-phase tricks count. 13 tricks, so no tie is possible.
-        p0_playing = gs['playing_tricks_won'][0]
-        p1_playing = gs['playing_tricks_won'][1]
+        # Only the 13 playing-phase tricks count, so a complete game cannot tie.
+        player_0_tricks = gs['playing_tricks_won'][0]
+        player_1_tricks = gs['playing_tricks_won'][1]
 
-        winner_id = 0 if p0_playing > p1_playing else 1
-
-        summary = self.m(
-            "outcome", "summary",
-            l0=gs['tricks_won'][0] - p0_playing, l1=gs['tricks_won'][1] - p1_playing,
-            p0=p0_playing, p1=p1_playing,
-            winner_id=winner_id, winner_tricks=gs['playing_tricks_won'][winner_id]
-        )
-
-        self.state.set_winner(winner_id, summary)
-
-        return self.state.step(rotate_player=False)
-
-    def _announce_turn(self, player_id: int):
-        """ Announce the current player's turn """
-        gs = self.state.game_state
-
-        hand_str = self._render_player_hand(player_id)
-        trick_str = self._render_current_trick()
-        next_card_str = self._render_next_card_info()
-
-        # Show current score
-        if gs['phase'] == 'learning':
-            scores_str = self.m("turn", "scores_learning", tricks0=gs['tricks_won'][0], tricks1=gs['tricks_won'][1])
+        if player_0_tricks > player_1_tricks:
+            winner_id = 0
+        elif player_1_tricks > player_0_tricks:
+            winner_id = 1
         else:
-            scores_str = self.m("turn", "scores_playing", tricks0=gs['playing_tricks_won'][0], tricks1=gs['playing_tricks_won'][1])
+            winner_id = None
 
-        # Phase information
-        if gs['phase'] == 'learning':
-            phase_str = self.m("turn", "phase_learning", phase=gs['phase'].upper(), remaining_cards=len(gs['deck']))
+        # Create final summary
+        summary = "Game Over! Only the playing-phase tricks count towards victory.\n\n"
+        summary += "Final Score (playing phase):\n"
+        summary += f"Player 0: {player_0_tricks} tricks ({gs['tricks_won'][0]} including the learning phase)\n"
+        summary += f"Player 1: {player_1_tricks} tricks ({gs['tricks_won'][1]} including the learning phase)\n\n"
+
+        if winner_id is not None:
+            summary += f"Player {winner_id} wins with {gs['playing_tricks_won'][winner_id]} scoring tricks!"
+            return self.winner(winner_id, summary)
         else:
-            phase_str = self.m("turn", "phase", phase=gs['phase'].upper())
+            summary += "It's a tie!"
+            return self.draw(reason=summary)
 
-        message = self.m("turn", "board", hand=hand_str, trick=trick_str, next_card=next_card_str, scores=scores_str, phase=phase_str)
-
-        self.state.add_observation(
-            to_id=player_id,
-            message=message,
-            observation_type=ta.ObservationType.GAME_BOARD
-        )
-
-    def get_board_str(self):
+    def get_board_str(self) -> str:
         """ Get a string representation of the current game state """
-        gs = self.state.game_state
+        gs = self.game_state
         if not gs:
-            return self.m("board_str", "not_started")
+            return "Game not started"
 
-        output = self.m("board_str", "header")
-        output = self.m("board_str", "phase", observation=output, phase=gs['phase'].upper())
-        output = self.m("board_str", "trump_suit", observation=output, trump_suit=gs['trump_suit'])
+        output = []
+        output.append("=== GERMAN WHIST GAME ===")
+        output.append(f"Phase: {gs['phase'].upper()}")
+        output.append(f"Trump suit: {gs['trump_suit']}")
 
         if gs['trump_card']:
-            output = self.m("board_str", "trump_card", observation=output, card=self._card_to_string(gs['trump_card']))
+            output.append(f"Trump card: {self._card_to_string(gs['trump_card'])}")
 
         if gs['phase'] == 'learning':
-            output = self.m("board_str", "cards_left", observation=output, count=len(gs['deck']))
+            output.append(f"Cards left in deck: {len(gs['deck'])}")
             if gs['next_card']:
-                output = self.m("board_str", "next_card", observation=output, card=self._card_to_string(gs['next_card']))
+                output.append(f"Next card for winner: {self._card_to_string(gs['next_card'])}")
 
-        output = self.m("board_str", "blank", observation=output)
+        output.append("")
 
         # Current trick
         if gs['current_trick']:
-            output = self.m("board_str", "current_trick", observation=output)
+            output.append("Current trick:")
             for player_id, card in gs['current_trick']:
-                trump_indicator = self.m("board_str", "trump_indicator") if card['suit'] == gs['trump_suit'] else ""
-                output = self.m("board_str", "trick_line", observation=output, player_id=player_id, card=self._card_to_string(card), trump_indicator=trump_indicator)
-            output = self.m("board_str", "blank", observation=output)
+                trump_indicator = " (TRUMP)" if card['suit'] == gs['trump_suit'] else ""
+                output.append(f"  Player {player_id}: {self._card_to_string(card)}{trump_indicator}")
+            output.append("")
 
         # Player information
         for player_id in range(2):
@@ -488,6 +460,6 @@ class GermanWhistEnv(ta.Env):
                 tricks = gs['tricks_won'][player_id]
                 scoring = gs['playing_tricks_won'][player_id]
 
-                output = self.m("board_str", "player_line", observation=output, player_id=player_id, scoring=scoring, tricks=tricks, hand_size=hand_size)
+                output.append(f"Player {player_id}: {scoring} scoring tricks ({tricks} total), {hand_size} cards in hand")
 
-        return output
+        return "\n".join(output)

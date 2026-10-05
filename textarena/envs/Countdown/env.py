@@ -1,157 +1,200 @@
 import operator
 import re
-import random
-from typing import Tuple, List, Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
 
+MAX_VALUE = 1_000_000
+MAX_NUMBERS = 100
 
-class CountdownEnv(ta.Env):
-    _ACTION_RE = re.compile(r"\[\s*(\d+)\s+(\d+)\s*([+\-*/])\s*\]")
-    _OPS = {'+': operator.add, '-': operator.sub, '*': operator.mul, '/': operator.truediv}
 
-    def __init__(self, numbers: List[int] = None, target: int = None, max_turns: int = 12):
-        super().__init__()
+class CountdownEnv(ta.GameEnv):
+    min_players = 1
+    max_players = 1
+    mdp_includes_actions = False
+
+    max_action_chars = 128
+    max_value = MAX_VALUE
+    max_numbers = MAX_NUMBERS
+    _ACTION_RE = re.compile(r"(?P<i>\d+)\s+(?P<j>\d+)\s*(?P<op>[+\-*/])")
+    _OPS = {'+': operator.add, '-': operator.sub, '*': operator.mul}
+
+    numbers = ta.Param(
+        None, "The starting numbers. With None, two large and four small numbers are drawn at reset.", type=list,
+        check=lambda numbers: 2 <= len(numbers) <= MAX_NUMBERS and all(
+            isinstance(number, int) and not isinstance(number, bool) and 0 < number <= MAX_VALUE for number in numbers
+        ),
+        rule=f"a list of 2 to {MAX_NUMBERS} integers from 1 to {MAX_VALUE}",
+    )
+    target = ta.Param(
+        None, "The number to reach. It must not be one of the starting numbers. With None, a target from 100 to 999 "
+              "is drawn at reset.", type=int, min=1, max=MAX_VALUE,
+    )
+    max_turns = ta.Param(
+        12, "The number of valid moves allowed. Each move uses up a number, so with six numbers the game always ends "
+            "within five moves and the default limit is never reached.", min=1,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.numbers is not None and self.target is not None and self.target in self.numbers:
+            raise ValueError("target must not be one of the starting numbers.")
+
+    def setup(self) -> Dict[str, Any]:
         big_numbers = [25, 50, 75, 100]
         small_numbers = list(range(1, 11)) * 2
-        
-        if numbers is None: numbers = random.sample(big_numbers, 2) + random.sample(small_numbers, 4)
-        if target is None:  target = random.randint(100, 999)
-        self.orig_numbers = numbers[:]  # Deep copy to avoid mutation
-        self.target = target
-        self.max_turns = max_turns
 
-        # Mutable state (reset per episode)
-        self.numbers: List[int] = []
-        self.expressions: List[str] = []
-        self.best_value: int = 0
-        self.best_expression: str = ""
-        self.move_history: List[str] = []
+        def draw_numbers() -> List[int]:
+            return self.rng.sample(big_numbers, 2) + self.rng.sample(small_numbers, 4)
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.numbers = self.orig_numbers[:]
-        self.expressions = [str(n) for n in self.numbers]
-        self.best_value = self._find_closest_value()
-        self.best_expression = str(self.best_value)
-        self.move_history = []
-        
-        self.state = ta.SinglePlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
-        self.state.reset(game_state={}, player_prompt_function=self._get_player_prompt)
-        self._add_board_observation()
+        start_numbers = self.numbers[:] if self.numbers is not None else draw_numbers()
+        target = self.target if self.target is not None else self.rng.randint(100, 999)
+        # A starting number equal to the target would award the full score without a single operation.
+        while target in start_numbers:
+            if self.target is None:
+                target = self.rng.randint(100, 999)
+            else:
+                start_numbers = draw_numbers()
+        numbers = start_numbers[:]
+        best_value = min(numbers, key=lambda v: abs(v - target)) if numbers else 0
+        return {
+            "target": target,
+            "start_numbers": start_numbers,
+            "numbers": numbers,
+            "expressions": [str(n) for n in numbers],
+            "best_value": best_value,
+            "best_expression": str(best_value),
+            "move_history": [],
+        }
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(self.state.current_player_id, action, ta.ObservationType.PLAYER_ACTION)
-        
-        # Parse and validate action
-        parsed_action = self._parse_action(action)
+    def prompt(self, player_id: int) -> str:
+        return (
+            "You are playing Countdown numbers game!\n"
+            f"Goal: Combine numbers using +, -, *, / to reach the target {self.game_state['target']} exactly.\n"
+            "Action format: 'i j op' where i,j are the indices of two different numbers on the board and op is the "
+            "operation. It computes (number i) op (number j), so the order matters for '-' and '/'.\n"
+            "Example: '0 1 +' adds the number at index 0 to the number at index 1.\n"
+            "Both numbers are replaced by the result, which is appended to the end of the list, so indices change after every move.\n"
+            f"Division must result in whole numbers only, and results must stay between -{self.max_value:,} and {self.max_value:,}.\n"
+            f"The game ends when you reach the target, when only one number is left, or after {self.max_turns} moves. "
+            "If you miss the target, your score is the fraction of the starting gap you closed: how much closer the "
+            "closest value ever on the board got to the target than the closest starting number."
+        )
+
+    def render(self, player_id: int) -> str:
+        return f"{self._render_board()}\nCurrent progress score: {self._calculate_progress():.3f}"
+
+    def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
+        if not isinstance(action, str) or len(action) > self.max_action_chars:
+            return None
+        return super().action_echo_target(player_id, action)
+
+    def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        parsed_action = self._parse_action(move)
         if parsed_action is None:
-            self.state.set_invalid_move(self._calculate_progress(), self.m("invalid_move", "wrong_format"))
-            return self.state.step()
-        
+            return self.invalid("Invalid action format. Use 'i j op' where i,j are indices and op is +,-,*,/")
+
         i, j, op = parsed_action
-        
-        # Validate indices
+        numbers = self.game_state["numbers"]
+
         if not self._validate_indices(i, j):
-            self.state.set_invalid_move(self._calculate_progress(), self.m("invalid_move", "invalid_indices", max_index=len(self.numbers)-1))
-            return self.state.step()
+            return self.invalid(f"Invalid indices. Must be different and in range 0-{len(numbers)-1}")
 
-        # Execute operation
         result = self._execute_operation(i, j, op)
-        if result is None:
-            self.state.set_invalid_move(self._calculate_progress(), self.m("invalid_move", "invalid_operation"))
-            return self.state.step()
+        if isinstance(result, ta.Invalid):
+            return result
 
-        # Update game state
         self._update_state(i, j, op, result)
-        self._add_board_observation()
 
-        # Check win/end conditions
-        if result == self.target:           self.state.set_outcome(1.0, self.m("outcome", "win", target=self.target))
-        elif len(self.numbers) == 1:        self.state.set_outcome(self._calculate_progress(), self.m("outcome", "no_moves", best_value=self.best_value, target=self.target))
-        elif self.state.check_turn_limit(): self.state.set_outcome(self._calculate_progress(), self.m("outcome", "turn_limit", best_value=self.best_value, target=self.target))
-        return self.state.step()
+        if result == self.game_state["target"]:
+            return self.outcome({0: 1.0}, reason=f"Perfect! Found exact target: {self.game_state['target']}")
+        if len(self.game_state["numbers"]) == 1:
+            return self.outcome(
+                {0: self._calculate_progress()},
+                reason=f"No more moves. Best result: {self.game_state['best_value']} (target: {self.game_state['target']})",
+            )
+        return None
+
+    def on_turn_limit(self) -> ta.Outcome:
+        return self.outcome(
+            {0: self._calculate_progress()},
+            reason=f"Turn limit reached. Best result: {self.game_state['best_value']} (target: {self.game_state['target']})",
+        )
+
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome({0: self._calculate_progress()}, reason=f"Invalid Move: {reason}")
 
     def _parse_action(self, action: str) -> Optional[Tuple[int, int, str]]:
+        if not isinstance(action, str) or len(action) > self.max_action_chars:
+            return None
         match = self._ACTION_RE.fullmatch(action.strip())
         if not match: return None
         try:
-            i, j, op = int(match.group(1)), int(match.group(2)), match.group(3)
+            i = int(match.group("i"))
+            j = int(match.group("j"))
+            op = match.group("op")
             return i, j, op
         except (ValueError, IndexError):
             return None
 
     def _validate_indices(self, i: int, j: int) -> bool:
-        return (0 <= i < len(self.numbers) and 0 <= j < len(self.numbers) and i != j)
+        numbers = self.game_state["numbers"]
+        return (0 <= i < len(numbers) and 0 <= j < len(numbers) and i != j)
 
-    def _execute_operation(self, i: int, j: int, op: str) -> Optional[int]:
-        """Execute arithmetic operation and return result."""
-        if op not in self._OPS: return None
-        a, b = self.numbers[i], self.numbers[j]
-        operation = self._OPS[op]
-        
-        try:
-            if op == '/':
-                if b == 0: return None
-                result = operation(a, b)
-                # Only allow integer results for division
-                if not result.is_integer(): return None
-                return int(result)
-            else:
-                result = operation(a, b)
-                # Ensure result is reasonable (prevent overflow)
-                if abs(result) > 1000000: return None
-                return result
-        except (ZeroDivisionError, OverflowError, ValueError):
-            return None
+    def _execute_operation(self, i: int, j: int, op: str) -> Union[int, ta.Invalid]:
+        """Execute arithmetic operation and return the result, or why it is not allowed."""
+        numbers = self.game_state["numbers"]
+        a, b = numbers[i], numbers[j]
+        if op == '/':
+            if b == 0:
+                return self.invalid("Division by zero is not allowed.")
+            if a % b != 0:
+                return self.invalid(f"{a} / {b} is not a whole number.")
+            result = a // b
+        else:
+            result = self._OPS[op](a, b)
+        if abs(result) > self.max_value:
+            return self.invalid(
+                f"{a} {op} {b} = {result}, but results must stay between -{self.max_value:,} and {self.max_value:,}."
+            )
+        return result
 
     def _update_state(self, i: int, j: int, op: str, result: int):
         """Update game state after successful operation."""
-        # Record the move
-        move_desc = f"{self.numbers[i]} {op} {self.numbers[j]} = {result}"
-        self.move_history.append(move_desc)
-        
-        # Create new expression
-        new_expr = f"({self.expressions[i]} {op} {self.expressions[j]})"
-        
-        # Remove used numbers/expressions (higher index first to avoid shifting)
-        indices_to_remove = sorted([i, j], reverse=True)
-        for idx in indices_to_remove:
-            self.numbers.pop(idx)
-            self.expressions.pop(idx)
-        
-        # Add new number/expression
-        self.numbers.append(result)
-        self.expressions.append(new_expr)
-        
-        # Update best result if improved
-        if abs(result - self.target) < abs(self.best_value - self.target):
-            self.best_value = result
-            self.best_expression = new_expr
+        gs = self.game_state
+        numbers, expressions = gs["numbers"], gs["expressions"]
 
-    def _find_closest_value(self) -> int:
-        """Find the value closest to target from current numbers."""
-        if not self.numbers:
-            return 0
-        return min(self.numbers, key=lambda v: abs(v - self.target))
+        move_desc = f"{numbers[i]} {op} {numbers[j]} = {result}"
+        gs["move_history"].append(move_desc)
+
+        new_expr = f"({expressions[i]} {op} {expressions[j]})"
+
+        # Remove used numbers/expressions (higher index first to avoid shifting)
+        for idx in sorted([i, j], reverse=True):
+            numbers.pop(idx)
+            expressions.pop(idx)
+
+        numbers.append(result)
+        expressions.append(new_expr)
+
+        if abs(result - self.game_state["target"]) < abs(gs["best_value"] - self.game_state["target"]):
+            gs["best_value"] = result
+            gs["best_expression"] = new_expr
 
     def _calculate_progress(self) -> float:
-        """Calculate progress score (0.0 to 1.0, higher is better)."""
-        distance = abs(self.best_value - self.target)
-        # Scale progress: exact match = 1.0, distance of 1000 = 0.0
-        return max(0.0, 1.0 - distance / 1000.0)
+        """Fraction of the starting gap to the target closed by the best value: 0.0 at the start, below 1.0 unless solved."""
+        start_distance = min(abs(number - self.game_state["target"]) for number in self.game_state["start_numbers"])  # >= 1: target is never a starting number
+        distance = abs(self.game_state["best_value"] - self.game_state["target"])
+        return max(0.0, (start_distance - distance) / start_distance)
 
-    def _get_player_prompt(self, player_id, game_state) -> str:
-        return self.m("player_prompt", "intro")
-
-    def _add_board_observation(self):
-        observation = self.m("board", "header", target=self.target, numbers=self._render_numbers())
-        observation = self.m("board", "best", observation=observation, best_value=self.best_value, distance=abs(self.best_value - self.target), best_expression=self.best_expression)
-        observation = self.m("board", "history", observation=observation, moves=self._render_moves()) if self.move_history else observation
-        observation = self.m("board", "progress", observation=observation, progress=f"{self._calculate_progress():.3f}")
-        self.state.add_observation(message=observation, observation_type=ta.ObservationType.GAME_BOARD)
-
-    def _render_numbers(self) -> str:
-        return "\n".join(f"  [{idx}] {num}   (from: {expr})" for idx, (num, expr) in enumerate(zip(self.numbers, self.expressions)))
-
-    def _render_moves(self) -> str:
-        return "\n".join(f"  {i}. {move}" for i, move in enumerate(self.move_history, 1))
+    def _render_board(self) -> str:
+        gs = self.game_state
+        lines = [f"TARGET: {self.game_state['target']}", "", "Available numbers:"]
+        for idx, (num, expr) in enumerate(zip(gs["numbers"], gs["expressions"])):
+            lines.append(f"  [{idx}] {num}   (from: {expr})")
+        lines.extend(["", f"Best so far: {gs['best_value']} (distance: {abs(gs['best_value'] - self.game_state['target'])})", f"Best expression: {gs['best_expression']}"])
+        if gs["move_history"]:
+            lines.extend(["", "Move history:"])
+            for i, move in enumerate(gs["move_history"], 1):
+                lines.append(f"  {i}. {move}")
+        return "\n".join(lines)

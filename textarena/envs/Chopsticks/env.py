@@ -1,65 +1,75 @@
 import re
-from typing import Optional, Dict, Any, Tuple
+from typing import Any, Dict, Union
 
 import textarena as ta
 
-class ChopsticksEnv(ta.Env):
-    def __init__(self, max_turns: int = 40):
-        """
-        args:
-            max_turns (int): num of turns before draw.
-        """
-        self.max_turns = max_turns
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.state = ta.TwoPlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
-        self.state.reset(game_state={"hands": {0: [1, 1], 1: [1, 1]}, "history": []}, player_prompt_function=self._prompt)
-        self.state.add_observation(message=self.m("board", "current_board", hands_0=self.state.game_state['hands'][0], hands_1=self.state.game_state['hands'][1]), observation_type=ta.ObservationType.GAME_BOARD)
+class ChopsticksEnv(ta.GameEnv):
+    min_players = 2
+    max_players = 2
+    mdp_includes_actions = False
 
-    def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return self.m("player_prompt", "intro", player_id=player_id)
+    max_turns = ta.Param(
+        40, "The number of valid moves, counting both players, before the game is declared a draw.", min=1,
+    )
+
+    def setup(self) -> Dict[str, Any]:
+        return {"hands": {0: [1, 1], 1: [1, 1]}, "history": []}
+
+    def prompt(self, player_id: int) -> str:
+        return (
+            f"You are Player {player_id} in Chopsticks. On your turn, choose one of:\n"
+            "  + Attack:  'attack M O'  where M=your hand (0 or 1), O=opponent hand (0 or 1).\n"
+            "    - Opponent's hand count increases by your hand; if >=5, it becomes 0.\n"
+            "  + Split:   'split L R'  to redistribute your total fingers into L and R (L+R = your total).\n"
+            "    - Each hand holds 0 to 4 fingers, and a split must change your hands (only swapping them is not allowed).\n"
+            "You cannot attack with a dead (0) hand or attack a dead hand.\n"
+            f"You win by making both of your opponent's hands dead. After {self.max_turns} moves in total, the game is a draw.\n"
+            "Reply with exactly one of those commands."
+        )
+
+    def render(self, player_id: int) -> str:
+        hands = self.game_state["hands"]
+        return f"Current Board:\nPlayer 0: {hands[0]}\nPlayer 1: {hands[1]}"
+
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        gs = self.game_state
+        m_atk = re.compile(r"^attack\s+([01])\s+([01])$", re.IGNORECASE).search(action)
+        if m_atk:
+            my_idx, opp_idx = map(int, m_atk.groups())
+            my_val = gs["hands"][player_id][my_idx]
+            opp_val = gs["hands"][1 - player_id][opp_idx]
+            if my_val == 0: return self.invalid(f"Your hand {my_idx} is dead.")
+            if opp_val == 0: return self.invalid(f"Opponent hand {opp_idx} is already dead.")
+            new_val = my_val + opp_val
+            gs["hands"][1 - player_id][opp_idx] = 0 if new_val >= 5 else new_val
+            desc = f"P{player_id} attacks P{1 - player_id}’s hand {opp_idx}: it goes from {opp_val} to {gs['hands'][1 - player_id][opp_idx]}."
+            self.broadcast(desc, ta.ObservationType.GAME_ACTION_DESCRIPTION)
+            gs["history"].append(desc)
+            if gs["hands"][1 - player_id] == [0, 0]:
+                return self.winner(player_id, reason="Both opponent hands dead.")
+            return None
+
+        m_sp = re.compile(r"^split\s+([0-9]{1,2})\s+([0-9]{1,2})$", re.IGNORECASE).search(action)
+        if m_sp:
+            L, R = map(int, m_sp.groups())
+            if L > 4 or R > 4: return self.invalid("Each hand must hold between 0 and 4 fingers.")
+            cur_L, cur_R = gs["hands"][player_id]
+            total = cur_L + cur_R
+            if L + R != total: return self.invalid(f"Split must sum to {total}.")
+            if sorted((L, R)) == sorted((cur_L, cur_R)):
+                return self.invalid("Split must change your hand distribution, not only swap hand indices.")
+            gs["hands"][player_id] = [L, R]
+            desc = f"P{player_id} splits into [{L}, {R}]."
+            self.broadcast(desc, ta.ObservationType.GAME_ACTION_DESCRIPTION)
+            gs["history"].append(desc)
+            return None
+
+        return self.invalid("Invalid move. Use 'attack M O' or 'split L R'.")
+
     def get_board_str(self) -> str:
-        gs = self.state.game_state
+        gs = self.game_state
         h0, h1 = gs["hands"][0], gs["hands"][1]
         s = f"Hands:\n  Player 0: [{h0[0]}, {h0[1]}]\n  Player 1: [{h1[0]}, {h1[1]}]\n"
         if gs["history"]: s += "History:\n" + "\n".join(f"  {entry}" for entry in gs["history"]) + "\n"
         return s
-
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        pid = self.state.current_player_id
-        gs = self.state.game_state
-        self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        m_atk = re.compile(r"\[\s*attack\s+([01])\s+([01])\s*\]", re.IGNORECASE).search(action)
-        if m_atk: # try attack
-            my_idx, opp_idx = map(int, m_atk.groups())
-            my_val = gs["hands"][pid][my_idx]
-            opp_val = gs["hands"][1 - pid][opp_idx]
-
-            # validation
-            if my_val == 0:     self.state.set_invalid_move(reason=self.m("invalid_move", "my_hand_dead", my_idx=my_idx))
-            elif opp_val == 0:  self.state.set_invalid_move(reason=self.m("invalid_move", "opp_hand_dead", opp_idx=opp_idx))
-            else:
-                new_val = my_val + opp_val
-                gs["hands"][1-pid][opp_idx] = 0 if new_val >= 5 else new_val
-                desc = self.m("game_action", "attack", player_id=pid, opp_id=1-pid, opp_idx=opp_idx, opp_val=opp_val, new_val=gs['hands'][1 - pid][opp_idx])
-                self.state.add_observation(message=desc, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-                gs["history"].append(self.m("history", "entry", player_id=pid, desc=desc))
-                # check for win
-                if gs["hands"][1 - pid] == [0, 0]: self.state.set_winner(player_id=pid, reason=self.m("outcome", "win"))
-        else: # try split
-            m_sp = re.compile(r"\[\s*split\s+(\d+)\s+(\d+)\s*\]", re.IGNORECASE).search(action)
-            if m_sp: 
-                L, R = map(int, m_sp.groups())
-                cur_L, cur_R = gs["hands"][pid]
-                total = cur_L + cur_R
-                if L + R != total:              self.state.set_invalid_move(reason=self.m("invalid_move", "split_sum", total=total))
-                elif (L, R) == (cur_L, cur_R):  self.state.set_invalid_move(reason=self.m("invalid_move", "split_no_change"))
-                else:
-                    gs["hands"][pid] = [L, R]
-                    desc = self.m("game_action", "split", player_id=pid, L=L, R=R)
-                    self.state.add_observation(message=desc, observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-                    gs["history"].append(self.m("history", "entry", player_id=pid, desc=desc))
-            else: self.state.set_invalid_move(reason=self.m("invalid_move", "invalid_command")) # invalid command
-        self.state.add_observation(message=self.m("board", "current_board", hands_0=self.state.game_state['hands'][0], hands_1=self.state.game_state['hands'][1]), observation_type=ta.ObservationType.GAME_BOARD)
-        if self.state.check_turn_limit(): self.state.set_draw(reason=self.m("outcome", "draw"))
-        return self.state.step()

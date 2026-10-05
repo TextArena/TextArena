@@ -1,4 +1,7 @@
-def create_board_str(game_state: dict) -> str:
+from typing import Optional
+
+
+def create_board_str(game_state: dict, viewer_id: Optional[int] = None, reveal_all: bool = False) -> str:
     item_names = game_state.get("item_names", [])
     base_values = game_state.get("base_item_values", [])
     player_values = game_state.get("player_item_values", {})
@@ -24,7 +27,10 @@ def create_board_str(game_state: dict) -> str:
     lines.append(f"{header:<76}│")
     lines.append("├────────┼──────────────────────────────────────────────────────────────────┤")
     for pid in range(num_players):
-        values = " ".join(f"{player_values[pid][i]:<4}" for i in range(num_items))
+        if reveal_all or pid == viewer_id:
+            values = " ".join(f"{player_values[pid][i]:<4}" for i in range(num_items))
+        else:
+            values = "(private)"
         line_str = f"│   {pid:<4} │ {values}"
         lines.append(f"{line_str:<76}│")
     lines.append("└" + "─" * (len(lines[-1]) - 2) + "┘")
@@ -38,15 +44,17 @@ def create_board_str(game_state: dict) -> str:
 
     # Player bids table (structured)
     if phase == "bidding":
-        print(game_state["player_bids"])
         lines.append("┌─ PLAYER BIDS ─────────────────────────────────────────────────────────────┐")
         header = "│ Player │ " + " ".join([f"I{idx:<3}" for idx in range(num_items)]) #+ "│"
 
         lines.append(f"{header:<76}│")
         lines.append("├────────┼──────────────────────────────────────────────────────────────────┤")
         for pid in range(num_players):
-            bids = game_state["player_bids"].get(pid, {})
-            bid_row = " ".join(f"{bids.get(i, 0):<4}" for i in range(num_items))
+            if reveal_all or pid == viewer_id:
+                bids = game_state["player_bids"].get(pid, {})
+                bid_row = " ".join(f"{bids.get(i, 0):<4}" for i in range(num_items))
+            else:
+                bid_row = "(sealed)"
             line_str = f"│   {pid:<4} │ {bid_row}"
             lines.append(f"{line_str:<76}│")
         lines.append("└───────────────────────────────────────────────────────────────────────────┘")

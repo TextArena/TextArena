@@ -1,30 +1,198 @@
-import re, os, random, json, importlib
-from typing import Any, Dict, Optional, Tuple
+import copy
+import importlib.resources
+import json
+import os
+import re
+import unicodedata
+from typing import Any, Dict, List, Optional, Union
 
 import textarena as ta
+from textarena.utils.jury import DEFAULT_JUDGE_MODEL
 
-class GuessWhoEnv(ta.Env):
+_ARTICLES = frozenset({"a", "an", "the"})
+GAMEMASTER_SYSTEM_PROMPT = (
+    "You are the impartial game master of a Guess Who game. You know the secret character's traits. Answer each "
+    "question truthfully about that character, replying with exactly one of the allowed answers and nothing else."
+)
 
-    def __init__(self, max_turns: int=40):
-        super().__init__()
-        self.max_turns = max_turns
-        # Initialize the gamemaster
-        self.gamemaster = ta.agents.OpenRouterAgent(model_name="openai/gpt-4o")
-        self.gamemaster_options = ["Yes", "No", "I don't know"]
-        self.gamemaster_context = None
-        self.gamemaster_history = []
-        self.characters = self._load_characters() # Load character list
+
+def _answer_key(text: str) -> str:
+    """Letters and digits only, without accents or a leading article."""
+    decomposed = unicodedata.normalize("NFKD", unicodedata.normalize("NFKC", text).casefold())
+    tokens = re.findall(r"[^\W_]+", "".join(char for char in decomposed if not unicodedata.combining(char)))
+    if len(tokens) > 1 and tokens[0] in _ARTICLES:
+        tokens = tokens[1:]
+    return "".join(tokens)
+
+
+class GuessWhoEnv(ta.GameEnv):
+    min_players = 1
+    max_players = 1
+    mdp_includes_actions = False
+    snapshot_excluded_attributes = ("gamemaster",)
+    max_action_chars = 4_000
+    max_gamemaster_response_chars = 256
+    _GUESS_RE = re.compile(r"^\s*guess(?:\s+|:\s*)(?P<guess>.+?)\s*$", re.IGNORECASE)
+    _EMPTY_GUESS_RE = re.compile(r"^\s*guess\s*:?\s*$", re.IGNORECASE)
+    _GAMEMASTER_RESPONSE_RE = re.compile(
+        r"""^\s*[*_`]*(?:answer[*_`]*\s*:\s*[*_`]*\s*)?[*_`"'“”]*(?P<answer>yes|no|i\s+don['’]t\s+know)"""
+        r"""[*_`"'“”]*[.!]?[*_`"'“”]*\s*$""",
+        re.IGNORECASE,
+    )
+
+    gamemaster_options = ["Yes", "No", "I don't know"]
+
+    max_turns = ta.Param(
+        40, "The total number of turns. The player may ask `max_turns - 1` questions, and the final turn is reserved "
+            "for the guess.", min=2,
+    )
+    gamemaster = ta.Param(
+        None, f"Answers the player's questions. With None, OpenRouter `{DEFAULT_JUDGE_MODEL}` answers; inject one to "
+              "play offline or with a different model.", type=object, check=callable,
+        rule="a callable that takes a prompt string and returns `Yes`, `No`, or `I don't know`",
+    )
+    characters_path = ta.Param(
+        None, "A JSON file with an alternative character list in the schema of the bundled `characters.json`, which "
+              "None selects. Names must stay distinct once case, accents, punctuation, and spacing are ignored.",
+        type=str,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.characters = self._load_characters(self.characters_path)
 
     def _load_characters(self, characters_path: Optional[str] = None):
         try:
             if characters_path is not None:
-                if not os.path.exists(characters_path): raise FileNotFoundError(f"Characters data file not found at: {characters_path}") # Use provided path
-                with open(characters_path, 'r', encoding='utf-8') as file: characters = json.load(file)
+                if not os.path.exists(characters_path):
+                    raise FileNotFoundError(f"Characters data file not found at: {characters_path}")
+                with open(characters_path, "r", encoding="utf-8") as file:
+                    characters = json.load(file)
             else:
-                with importlib.resources.files('textarena.envs.GuessWho').joinpath('characters.json').open('r') as file: characters = json.load(file) # Use package resource
-            if not characters: raise ValueError("Characters list is empty.")
-            return characters
-        except Exception as e: raise FileNotFoundError(f"Failed to load characters data: {str(e)}")
+                with importlib.resources.files("textarena.envs.GuessWho").joinpath(
+                    "characters.json"
+                ).open("r", encoding="utf-8") as file:
+                    characters = json.load(file)
+        except FileNotFoundError:
+            raise
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ValueError(f"Failed to load characters data: {exc}") from exc
+
+        required = {
+            "name", "age_range", "gender", "hair_style", "hair_color", "eye_color",
+            "accessories", "facial_hair", "complexion", "skin_tone", "smile_type",
+            "clothing_style", "hair_texture", "eyewear_style", "nose_shape", "ear_size",
+            "cheek_features", "hat_type",
+        }
+        if (
+            not isinstance(characters, list)
+            or not characters
+            or any(not isinstance(char, dict) or not required <= char.keys() for char in characters)
+            or any(
+                any(not isinstance(char[field], str) or not char[field].strip() for field in required - {"accessories"})
+                or not isinstance(char["accessories"], list)
+                or any(not isinstance(item, str) or not item.strip() for item in char["accessories"])
+                for char in characters
+            )
+            or len({_answer_key(char["name"]) for char in characters} - {""}) != len(characters)
+            or any(
+                (char["hat_type"].strip().casefold() != "none")
+                != any(accessory.strip().casefold() == "hat" for accessory in char["accessories"])
+                for char in characters
+            )
+        ):
+            raise ValueError(
+                "Characters data must be a non-empty list with unique names, all required traits, "
+                "and consistent hat accessories."
+            )
+        return characters
+
+    def action_echo_target(self, player_id: int, action: str) -> Optional[int]:
+        if not isinstance(action, str) or len(action) > self.max_action_chars:
+            return None
+        return super().action_echo_target(player_id, action)
+
+    @staticmethod
+    def _copy_resource(resource):
+        try:
+            return copy.deepcopy(resource), True
+        except Exception:
+            return None, False
+
+    def _restore_gamemaster_checkpoint(self, original, checkpoint, copied: bool):
+        if copied:
+            if (
+                original is not None
+                and checkpoint is not None
+                and checkpoint is not original
+                and type(original) is type(checkpoint)
+                and hasattr(original, "__dict__")
+                and hasattr(checkpoint, "__dict__")
+            ):
+                original.__dict__.clear()
+                original.__dict__.update(copy.deepcopy(checkpoint.__dict__))
+                self.gamemaster = original
+            else:
+                self.gamemaster = checkpoint
+        elif original is None:
+            self.gamemaster = None
+
+    def snapshot(self) -> Dict[str, Any]:
+        snapshot = super().snapshot()
+        resource, copied = self._copy_resource(self.gamemaster)
+        snapshot["gamemaster_resource"] = {"copied": copied, "value": resource}
+        return snapshot
+
+    def restore(self, snapshot: Dict[str, Any]):
+        super().restore(snapshot)
+        resource = snapshot.get("gamemaster_resource", {})
+        if resource.get("copied"):
+            self.gamemaster = copy.deepcopy(resource["value"])
+
+    # Convenience accessors; the per-episode data lives in game_state.
+    @property
+    def target_character(self) -> Dict[str, Any]:
+        return self.game_state["target_character"]
+
+    @property
+    def gamemaster_context(self) -> str:
+        return self.game_state["gamemaster_context"]
+
+    @property
+    def gamemaster_history(self) -> List:
+        return self.game_state["gamemaster_history"]
+
+    def get_board_str(self) -> str:
+        target_name = self.target_character["name"] if self.state.done else "???"
+        lines = [
+            "Guess Who",
+            f"Target Character: {target_name}",
+            f"Questions Asked: {len(self.gamemaster_history)} / {self.max_turns - 1}",
+        ]
+        if self.gamemaster_history:
+            lines.append("History:")
+            for index, (question, answer) in enumerate(self.gamemaster_history, start=1):
+                lines.append(f"{index}. Q: {question}")
+                lines.append(f"   A: {answer}")
+        else:
+            lines.append("No questions asked yet.")
+        return "\n".join(lines)
+
+    def render(self, player_id: int) -> str:
+        return self.get_board_str()
+
+    def _ask_gamemaster(self, prompt: str):
+        if self.gamemaster is None:
+            try:
+                self.gamemaster = ta.agents.OpenRouterAgent(
+                    model_name=DEFAULT_JUDGE_MODEL, system_prompt=GAMEMASTER_SYSTEM_PROMPT
+                )
+            except (ImportError, ValueError) as exc:
+                raise RuntimeError(
+                    'GuessWho questions require OpenRouter: pip install "textarena[agents]" '
+                    "and set OPENROUTER_API_KEY, or inject a gamemaster."
+                ) from exc
+        return self.gamemaster(prompt)
 
     def get_gamemaster_response(self, action: str) -> str:
         """ Get the gamemaster's response based on the provided action """
@@ -34,64 +202,111 @@ class GuessWhoEnv(ta.Env):
         if self.gamemaster_options is None:     raise ValueError("Gamemaster options are not set.")
         options = ", ".join(f"'{opt}'" for opt in self.gamemaster_options) # Format available response options
         history = "\n".join(f"Q: {q}\nA: {a}" for q, a in self.gamemaster_history) # Construct conversation history
-        prompt = f"{self.gamemaster_context}\n{history}\n\nQ: {action}\nOptions: {options}\n\nPlease respond with the most appropriate option." # Create prompt
-        response = self.gamemaster(prompt).strip() # Get response from the gamemaster agent
-        if any(option.lower() in response.lower() for option in self.gamemaster_options): # Validate response
-            self.gamemaster_history.append((action, response))  # Store valid responses
-        else:
-            response = "I'm sorry, I don't understand. Please try asking again."
-            self.gamemaster_history.append((action, response))  # Log fallback response
-        return response
-
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.state = ta.SinglePlayerState(num_players=num_players, seed=seed, max_turns=self.max_turns) # Initialize the game state
-        self.target_character = random.choice(self.characters) ## select a random character
-        self.gamemaster_context = ( ## update the gamemaster context
-            f"You are the gamemaster for the game of 'Guess Who'.\n"
-            f"You will provide responses to the player's questions that guides them into guessing the target character with the following name and traits: {self.target_character}.\n"
+        prompt = f"{self.gamemaster_context}\n{history}\n\nQ: {action}\nOptions: {options}\n\nReply with exactly one of the options." # Create prompt
+        response = self.ask(self._ask_gamemaster, prompt)
+        if not isinstance(response, str) or len(response) > self.max_gamemaster_response_chars:
+            raise ValueError("gamemaster returned an invalid answer")
+        match = self._GAMEMASTER_RESPONSE_RE.fullmatch(response)
+        if match is None:
+            raise ValueError("gamemaster returned an invalid answer")
+        answer = re.sub(r"\s+", " ", match.group("answer")).replace("’", "'").casefold()
+        normalized = next(
+            option for option in self.gamemaster_options if answer == option.casefold()
         )
-        self.state.reset(game_state={"target_character": self.target_character}, player_prompt_function=self._generate_player_prompt)
+        self.gamemaster_history.append((action, normalized))
+        return normalized
 
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
+    def setup(self) -> Dict[str, Any]:
+        target_character = copy.deepcopy(self.rng.choice(self.characters))
+        traits = "\n".join(
+            f"- {field}: {(', '.join(value) or 'none') if isinstance(value, list) else value}"
+            for field, value in target_character.items()
+        )
+        gamemaster_context = ( ## the gamemaster context
+            "You are the game master of a game of Guess Who.\n"
+            f"The secret character the player must identify has these traits:\n{traits}\n"
+            "Answer the player's latest question truthfully about this character with 'Yes' or 'No'. Reply 'I don't know' "
+            "only when the traits do not settle the question. Do not add anything else to your answer.\n"
+        )
+        return {"target_character": target_character, "gamemaster_context": gamemaster_context, "gamemaster_history": []}
+
+    def prompt(self, player_id: int) -> str:
         """ Generate the player prompt """
         return (
             f"You are Player {player_id}. You are playing Guess Who.\n"
             "The gamemaster has chosen one target character from the list of characters that you will be shown below.\n"
             "You have to guess the target character by asking yes-or-no questions about the target character's traits.\n"
-            "You can ask questions like 'Is the character male?' or 'Does the character have a beard?'.\n"
-            "You can also guess the name of the target character at any time by ensuring that you wrap their name in square brackets, e.g. [Zach].\n"
-            "As you play, the history of your questions and gamemaster's responses will be displayed."
+            "You can ask questions like 'Is the character male?' or 'Does the character have a beard?'. "
+            "Any message containing a '?' is treated as a question.\n"
+            f"You may ask up to {self.max_turns - 1} questions; the turn after that is reserved for your guess.\n"
+            "You can also guess the name of the target character at any time by replying with 'guess <name>', "
+            f"e.g. 'guess {self.characters[0]['name']}'. You get exactly one guess: naming the target wins, and naming "
+            "any other character from the list ends the game without a win.\n"
+            "As you play, the history of your questions and gamemaster's responses will be displayed.\n"
             "Here is the list of characters you can ask questions about:\n"
         ) + self._characters_to_string()
-    
+
     def _characters_to_string(self) -> str:
         formatted_descriptions = []
         for i, char in enumerate(self.characters, start=1):
             # Format the description in a narrative style
-            accessories = ", ".join(char["accessories"]) if char["accessories"] else "no accessories"
+            other_accessories = [
+                accessory for accessory in char["accessories"] if accessory.casefold() != "hat"
+            ]
+            accessories = ", ".join(other_accessories) if other_accessories else "no other accessories"
+            hat = f"a {char['hat_type']} hat" if char["hat_type"].casefold() != "none" else "no hat"
             description = (
                 f"{i}. {char['name']} is a {char['age_range']} {char['gender']} with {char['hair_style']} "
                 f"{char['hair_color']} hair and {char['eye_color']} eyes. {char['name']} has a {char['complexion']} complexion, "
-                f"{char['skin_tone']} skin tone, and {char['smile_type']} smile. They wear {accessories}, "
+                f"{char['skin_tone']} skin tone, and {char['smile_type']} smile. They have {accessories}, wear {hat}, "
                 f"have {char['facial_hair']} facial hair, and their clothing style is {char['clothing_style']}. "
                 f"{char['name']} has {char['hair_texture']} hair texture, {char['eyewear_style']} glasses style, "
                 f"a {char['nose_shape']} nose, {char['ear_size']} ears, and {char['cheek_features']} on their cheeks."
             )
             formatted_descriptions.append(description)
         return "\n\n".join(formatted_descriptions) # Join all descriptions into a single text block
-    
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        """ Process the player's action and update the environment state """
-        player_id = self.state.current_player_id
-        self.state.add_observation(from_id=player_id, to_id=-1, message=action, observation_type=ta.ObservationType.PLAYER_ACTION) ## update the observation
-        action_search_pattern = re.compile(r"\[([a-zA-Z]+)\]") # e.g. [zach]
-        action_match = action_search_pattern.search(action)
-        self.state.add_observation(message=f"You asked: {action}", observation_type=ta.ObservationType.GAME_ACTION_DESCRIPTION)
-        if not action_match: self.state.add_observation(from_id=-1, to_id=player_id, message=self.get_gamemaster_response(action), observation_type=ta.ObservationType.GAME_MESSAGE) ## add the gamemaster response to the game state
-        else: ## if the action is a guess
-            action_text = action_match.group(1).lower()
-            if action_text == self.target_character["name"].lower():    self.state.set_outcome(reward=1, reason=f"Congratulations! Player {player_id} guessed the target character.")
-            else:                                                       self.state.set_invalid_move(reason=f"Invalid guess. Player {player_id} guessed incorrectly.")
-        if self.state.check_turn_limit(): self.state.set_outcome(reward=0, reason="The turn limit has been reached.")
-        return self.state.step()
-    
+
+    def _parse_guess(self, action: str) -> Optional[str]:
+        """The guessed name, or None when the message is a question."""
+        if "?" in unicodedata.normalize("NFKC", action):
+            return None  # e.g. "Guess what, is the character male?" is a question
+        match = self._GUESS_RE.fullmatch(" ".join(action.split()))
+        return match.group("guess") if match else None
+
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        if not isinstance(action, str) or not action.strip():
+            return self.invalid("Ask a non-empty question or submit 'guess <name>'.")
+        if len(action) > self.max_action_chars:
+            return self.invalid(f"Questions and guesses are limited to {self.max_action_chars} characters.")
+        action = self.strip_role_tags(action)
+        if self._EMPTY_GUESS_RE.fullmatch(action):
+            return self.invalid("A guess must include a character name after 'guess'.")
+        guess = self._parse_guess(action)
+        if guess is None:
+            question = " ".join(action.split())
+            if not re.search(r"[^\W_]", question):
+                return self.invalid("Ask a yes-or-no question in words or submit 'guess <name>'.")
+            if self.state.turn >= self.max_turns - 1:
+                return self.invalid("The question budget is exhausted; submit 'guess <name>'.")
+            original_gamemaster = self.gamemaster
+            checkpoint, copied = self._copy_resource(original_gamemaster)
+            try:
+                response = self.get_gamemaster_response(question)
+            except Exception as error:
+                self._restore_gamemaster_checkpoint(original_gamemaster, checkpoint, copied)
+                return self.retryable("The gamemaster could not answer the question.", error)
+            if self.state.turn == self.max_turns - 2:
+                response += "\nYou have run out of questions. What is your final guess? Reply with 'guess <name>'."
+            self.message(player_id, response, ta.ObservationType.GAME_MESSAGE)
+            return None
+        ## the action is a guess
+        guess_key = _answer_key(guess)
+        if guess_key not in {_answer_key(char["name"]) for char in self.characters}:
+            return self.invalid(f"'{guess.strip()}' is not one of the characters. Guess a name from the list.")
+        target_name = self.target_character["name"]
+        if guess_key == _answer_key(target_name):
+            return self.outcome({0: 1}, reason=f"Congratulations! Player {player_id} guessed the target character.")
+        return self.outcome({0: 0}, reason=f"Wrong guess. The target character was {target_name}.")
+
+    def on_turn_limit(self) -> ta.Outcome:
+        return self.outcome({0: 0}, reason="The turn limit has been reached.")

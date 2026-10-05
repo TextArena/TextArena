@@ -1,0 +1,172 @@
+"""Deterministic game-logic tests for Game2048 (single player).
+
+Tile spawns are random, so we overwrite ``game_state['board']`` to script
+guaranteed merges/outcomes.
+"""
+import copy
+
+import pytest
+
+import textarena as ta
+from textarena.envs.Game2048.env import Game2048Env
+from textarena.envs.registration import ENV_REGISTRY
+
+REGISTERED_IDS = sorted(
+    env_id for env_id, spec in ENV_REGISTRY.items() if spec.entry_point == "textarena.envs.Game2048.env:Game2048Env"
+)
+
+
+def _fresh(target_tile=4, board_size=2, seed=42):
+    env = Game2048Env(target_tile=target_tile, board_size=board_size)
+    env.reset(num_players=1, seed=seed)
+    return env
+
+
+def _start_from(env, board):
+    """Replace the spawned board with a scripted one that also counts as the starting position."""
+    env.state.game_state["board"] = board
+    env.state.game_state["start_max_tile"] = max(max(row) for row in board)
+
+
+def test_reaching_target_tile_wins():
+    env = _fresh(target_tile=4, board_size=2)
+    env.state.game_state["board"] = [[2, 2], [0, 0]]
+    done = env.step("left")  # merges into a 4 -> reaches target
+    assert done and env.state.rewards == {0: 1.0}
+    assert sum(cell != 0 for row in env.state.game_state["board"] for cell in row) == 1
+    assert env.state.turn == 1
+    assert env.state.game_info[0]["turn_count"] == 1
+
+
+def test_merge_increases_score():
+    env = _fresh(target_tile=2048, board_size=2)
+    env.state.game_state["board"] = [[2, 2], [0, 0]]
+    done = env.step("left")
+    assert not done and env.state.game_state["score"] == 4
+
+
+def test_invalid_format_increments_error_count():
+    env = _fresh()
+    done = env.step("no direction")
+    assert not done and env.state.error_count == 1
+
+
+def test_no_change_move_rejected():
+    env = _fresh(target_tile=2048, board_size=2)
+    # A single tile in the top-left cannot move further up/left.
+    env.state.game_state["board"] = [[2, 0], [0, 0]]
+    before = copy.deepcopy(env.state.game_state)
+    rng_before = env.rng.getstate()
+    done = env.step("up")
+    assert not done and env.state.error_count == 1
+    assert env.state.game_state == before
+    assert env.rng.getstate() == rng_before
+
+
+def test_two_consecutive_invalid_moves_end_game():
+    env = _fresh()
+    env.step("garbage")
+    done = env.step("also garbage")
+    assert done and env.state.game_info[0]["invalid_move"] is True
+
+
+def test_each_tile_merges_at_most_once():
+    env = _fresh(target_tile=2048, board_size=4)
+    assert env._compress_and_merge([2, 2, 2, 2]) == ([4, 4, 0, 0], 8)
+    assert env._compress_and_merge([2, 2, 4, 0]) == ([4, 4, 0, 0], 4)
+
+
+@pytest.mark.parametrize("action", ["[left", "left]", "left now", "A", "LEFT_RIGHT"])
+def test_parser_rejects_noncanonical_actions(action):
+    env = _fresh(target_tile=2048, board_size=2)
+    before = copy.deepcopy(env.state.game_state)
+    done = env.step(action)
+    assert not done and env.state.error_count == 1
+    assert env.state.game_state == before
+
+
+def test_target_tile_must_be_a_power_of_two():
+    with pytest.raises(ValueError, match="target_tile must be a power of two from 4 to 65536, received 12"):
+        Game2048Env(target_tile=12)
+
+
+def test_repeat_reset_replays_seed_without_aliasing_old_state():
+    env = _fresh(target_tile=2048, board_size=4)
+    expected = copy.deepcopy(env.state.game_state)
+    old_board = env.state.game_state["board"]
+    env.step("left")
+    env.reset(num_players=1, seed=42)
+    assert env.state.game_state == expected
+    assert env.state.game_state["board"] is not old_board
+
+
+def test_losing_with_a_high_score_never_earns_the_win_reward():
+    env = _fresh(target_tile=2048, board_size=4)
+    env.state.game_state["board"] = [
+        [8, 16, 8, 16],
+        [16, 8, 16, 8],
+        [8, 16, 8, 16],
+        [1024, 512, 256, 0],
+    ]
+    env.state.game_state["start_max_tile"] = 2
+    env.state.game_state["score"] = 12000  # typical score for a game that built a 1024 tile
+    done = env.step("right")
+    assert done and env._check_status() == "lose"
+    # 2 -> 1024 is 9 of the 10 doublings to 2048; the score does not count.
+    assert env.state.rewards == {0: pytest.approx(9 / 10)}
+
+
+@pytest.mark.parametrize("env_id", REGISTERED_IDS)
+@pytest.mark.parametrize("seed", range(5))  # seeds 0 and 2 start with a 4 tile
+def test_immediate_invalid_policy_scores_zero_on_registered_configs(env_id, seed):
+    env = ta.make(env_id)
+    env.reset(num_players=1, seed=seed)
+    for _ in range(5):
+        done = env.step("@@@ not a move @@@")
+        if done:
+            break
+    assert done
+    assert env.close()[0] == {0: 0}
+
+
+def test_a_starting_4_tile_is_not_progress():
+    env = _fresh(target_tile=32, board_size=4, seed=0)
+    assert env.game_state["start_max_tile"] == 4
+    env.step("garbage")
+    done = env.step("garbage")
+    assert done and env.state.rewards == {0: 0}
+
+
+def test_partial_progress_counts_doublings_of_the_largest_tile():
+    env = _fresh(target_tile=2048, board_size=2)
+    _start_from(env, [[4, 4], [2, 0]])
+    done = env.step("left")  # 4 + 4 = 8: one of the nine doublings from 4 to 2048
+    assert not done and env._max_tile() == 8
+    env.step("garbage")
+    done = env.step("garbage")
+    assert done
+    assert env.state.rewards == {0: pytest.approx(1 / 9)}
+
+
+def test_render_lists_only_moves_that_change_the_board():
+    env = _fresh(target_tile=2048, board_size=2)
+    env.state.game_state["board"] = [[2, 0], [0, 0]]
+    assert env.render(0).endswith("Available moves: down, right")
+    before = copy.deepcopy(env.state.game_state)
+    env._available_moves()
+    assert env.state.game_state == before
+
+    env.state.game_state["board"] = [[2, 4], [4, 2]]
+    assert env.render(0).endswith("Available moves: none")
+
+
+def test_spawned_full_board_without_merges_terminates_as_loss():
+    env = _fresh(target_tile=2048, board_size=2)
+    env.state.game_state["board"] = [[8, 16], [32, 0]]
+    env.state.game_state["start_max_tile"] = 2
+    done = env.step("down")
+    assert done
+    assert env._check_status() == "lose"
+    assert env.state.turn == 1
+    assert env.state.game_info[0]["turn_count"] == 1
+    assert env.state.rewards == {0: pytest.approx((5 - 1) / (11 - 1))}  # 2 -> 32 is 4 of 10 doublings

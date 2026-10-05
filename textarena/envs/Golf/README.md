@@ -1,85 +1,84 @@
-# Golf Environment Documentation
+# Golf
 
-## Overview
-**Golf** simulates the 6-card version of the classic card game *Golf*. Players are each dealt a 2×3 grid of face-down cards, and take turns drawing from the deck or discard pile to swap and reveal cards in their grid. The objective is to minimize your score by forming low-value combinations and vertical pairs (which cancel out).
+Two to four players draw and swap cards to build the lowest-scoring grid, where a column of equal ranks scores zero
+([rules](https://www.pagat.com/draw/golf.html)).
 
-The game ends when all players have all 6 of their cards revealed. The player with the lowest total score wins the round.
+<!-- BEGIN GENERATED: variants -->
+**Players:** 2–4
 
-## Gameplay
+**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
 
-- **Players:** 2 to 4 (supports both two-player and multi-player modes)
-- **Initial Setup:** Each player is dealt 6 cards in a 2×3 grid, with 2 of those cards revealed at a random order.
-- **Objective:** Minimize your total score by revealing and swapping cards strategically. Vertical pairs (same value in the same column) cancel to 0 points.
+| Env ID | Parameters |
+| --- | --- |
+| `Golf-v1` | `num_cards=6`, `num_columns=3` |
+| `Golf-v1-medium` | `num_cards=9`, `num_columns=3` |
 
-## Card Values
+Append `-mdp` to any ID for the state-complete variant (e.g. `Golf-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Golf-v1", num_cards=...)`.
+<!-- END GENERATED: variants -->
 
-| Card       | Value  |
-|------------|--------|
-| Ace (A)    | 1      |
-| 2–10       | Face value |
-| Jack (J)   | 10     |
-| Queen (Q)  | 10     |
-| King (K)   | 0      |
+## Rules
+
+- Each player is dealt `num_cards` cards face down in a grid of `num_columns` columns (2 rows of 3 by default). A
+  third of them (`num_cards // 3`, at random positions) start face up. One card starts the discard pile and the rest
+  form the draw pile. One 52-card deck is used for up to 6 cards per player, two decks for 7–9, three for 10–12.
+- Player 0 starts and turns pass in seat order. On your turn you do one of:
+  - **Draw** the top card of the draw pile, then either swap it into your grid or discard it.
+  - **Take** the top card of the discard pile, then swap it into your grid (you may not discard it again).
+  - **Knock** instead of drawing (only before the final round has started).
+- Swapping places the new card face up and puts the card it replaces face up on the discard pile. You do not get to
+  look at a face-down card before replacing it.
+- The **final round** starts when a player's cards are all face up or a player knocks: every other player then gets
+  exactly one more turn. During the final round you may spend your turn peeking privately at one of your own
+  face-down cards instead of drawing.
+- The game also ends as soon as the turn that draws the last card of the draw pile is over; the discard pile is not
+  reshuffled.
+- **Scoring:** all cards are turned face up. Ace = 1, 2 = −2, 3–10 = face value, Jack and Queen = 10, King = 0. A
+  column whose cards all have the same rank scores 0, even a column of 2s (a 10 and a Jack are both worth 10 but do not
+  cancel). The lowest total wins, and players tied for the lowest total share the win.
+- **Turn limit:** the game ends after `max_turns` accepted actions in total across all players; each `draw`, `take`,
+  `swap`, `discard`, `knock` and `peek` counts as one and invalid moves do not count. At the limit, a card still in
+  hand goes to the discard pile and the grids are scored as above.
 
 ## Actions
 
-Actions are text strings containing a single bracketed command. The environment recognizes the following formats:
+Reply with exactly one command (case-insensitive). Rows and columns are numbered from 1.
 
-- **Draw Phase (must choose one of):**
-  - `[draw]` — Draw a face-down card from the deck.
-  - `[take]` — Take the top card from the discard pile.
+- At the start of your turn: `draw`, `take`, `knock` (before the final round), or `peek R C` (final round only, on one
+  of your face-down cards).
+- Holding a card: `swap R C` to put it at row `R`, column `C`, or `discard` (only for a card drawn from the draw pile).
 
-- **Action Phase (after drawing a card):**
-  - `[swap X Y]` — Swap the drawn card into position at **row X, column Y**.
-  - `[discard]` — Discard the drawn card instead of swapping it (*only allowed if drawn from deck*).
+Examples: `draw`, `swap 2 1`, `discard`, `take`, `knock`, `peek 1 3`.
 
-- **Optional:**
-  - `[peek X Y]` — Peek at a face-down card at position (X, Y). This action may cost a turn depending on variant.
-  - `[knock]` — (Optional Rule) Declare final round. Each opponent gets one more turn.
+## Observations
 
-**Note:** Players may not see the value of face-down cards before swapping.
-
-## Grid Reference
-
-Each player's grid is displayed as a 2×3 layout:
-
-```python
-  Col:  1  2  3
-Row 1:  ?  4♠ ?
-Row 2:  ?  K♣ ?
-```
-
-Cards marked `?` are faced-down. You must use coordinates (row, column) when swapping. 
-
-## End Condition
-- If a player finished revealing all 6 cards first, then the other players get one final turn. 
+Each player first receives the rules, including the turn limit. Before every action the acting player sees their own
+grid (face-up cards and cards they have peeked at; the rest as `?`), every opponent's face-up cards, the top of the
+discard pile, the number of cards left in the draw pile, the card they are holding, the actions used so far, and
+their options. A card drawn from the draw pile is shown only to its drawer until it is swapped in or discarded;
+everyone sees every swap (both cards) and every discard. Peeks are private.
 
 ## Rewards
 
-| Outcome                        | Reward for Player |
-|--------------------------------|-------------------|
-| **Win (lowest score)**         | `+1`              |
-| **Lose**                       | `-1`               |
-| **Invalid Move**               | `-1`              |
+| Outcome | Reward |
+| --- | --- |
+| Lowest total, at the normal end or the turn limit | Lowest player(s) `+1`, everyone else `-1` |
+| All remaining players tie for the lowest total | Remaining players `0`, eliminated players `-1` |
+| Second consecutive invalid move, two players | Offender `-1`, opponent `+1` |
+| Second consecutive invalid move, three or four players | Offender eliminated and scored `-1` at the end; play continues |
 
-## Observation Space
+An eliminated player's card in hand goes to the discard pile, and if the final round has started, the turn they still
+had is forfeited. When only one player is left, that player wins.
 
-- Players receive prompts indicating available actions and the current board.
-- Prompts include the visible portion of the player's hand, discard pile, and any drawn card they must act on.
+## Parameters
 
-## Example Moves
+<!-- BEGIN GENERATED: parameters -->
+- `num_cards` (default `6`): The number of cards per player; it also sets the number of decks. Accepts an integer from 2 to 12.
+- `num_columns` (default `3`): The number of columns in each grid; it must divide `num_cards`. Accepts an integer of at least 1.
+- `max_turns` (default `None`): The total number of accepted actions before the game is scored as it stands. None uses `2 × num_players × 4 × num_cards`, about four full rounds per grid card (96 actions for two players on the default grid), which normal games finish well within. Accepts an integer of at least 1 or None.
+<!-- END GENERATED: parameters -->
 
-- `[draw]` → Draw a card from the deck.
-- `[take]` → Take the top discard.
-- `[swap 2 1]` → Place drawn card at Row 2, Column 1.
-- `[discard]` → Discard the drawn card (if drawn from deck).
+## Notes
 
-## Available Environments
-
-| Env-id           | Mode          |
-|------------------|---------------|
-| `Golf-v0`        | 2 players     |
-
-## Contact
-
-For issues or feedback related to this environment, contact `chengxy@i2r.a-star.edu.sg`.
+- Differences from Pagat's six-card Golf: the starting face-up cards are chosen at random rather than by the player,
+  knocking is borrowed from four-card Golf, and the game ends when the draw pile runs out instead of reshuffling.
+- A peek happens on a player's last turn, so it does not change what they can do; it is effectively a pass.

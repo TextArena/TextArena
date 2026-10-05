@@ -41,20 +41,20 @@ def create_board_str(game_state: dict) -> str:
     
     # Legal actions
     if gs['legal_actions'] and gs['current_phase'] != 'showdown':
-        actions_str = ", ".join([f"[{action}]" for action in gs['legal_actions']])
+        names = {"play_bet_4x": "4x", "play_bet_3x": "3x", "play_bet_2x": "2x", "play_bet_1x": "1x"}
+        actions_str = ", ".join(f"'{names.get(action, action)}'" for action in gs['legal_actions'])
         board_str += f"✅ Available actions: {actions_str}\n\n"
     
     # Game status
     if gs.get('game_complete', False) or gs.get('winner'):
-        # Legacy support for old game state format
         if gs.get('winner') == 'player':
             board_str += "🏆 GAME OVER - YOU WIN! 🏆\n"
         else:
             board_str += "💀 GAME OVER - DEALER WINS 💀\n"
     elif gs.get('chips', 0) <= 0:
         board_str += "💀 GAME OVER - OUT OF CHIPS 💀\n"
-    elif gs.get('current_round', 0) >= 1000:
-        board_str += "🏆 GAME OVER - 1000 ROUNDS COMPLETED! 🏆\n"
+    elif gs.get('current_round', 0) >= gs.get('max_rounds', 1000):
+        board_str += f"🏆 GAME OVER - {gs.get('max_rounds', 1000)} ROUNDS COMPLETED! 🏆\n"
     elif gs['round_complete']:
         board_str += "🔄 Round complete - starting next round...\n"
     

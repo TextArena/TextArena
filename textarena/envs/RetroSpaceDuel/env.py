@@ -1,329 +1,319 @@
-import random
-from typing import Any, Dict, Optional, Tuple, List
+import re
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
 
+# key -> (name, dx, dy); y grows downward, so "up" decreases y
+DIRECTIONS = {
+    "w": ("up", 0, -1), "s": ("down", 0, 1), "a": ("left", -1, 0), "d": ("right", 1, 0),
+    "q": ("up-left", -1, -1), "e": ("up-right", 1, -1), "z": ("down-left", -1, 1), "c": ("down-right", 1, 1),
+}
+CLOCKWISE = [(0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1)]
+_ACTION_RE = re.compile(r"^(f\s*)?([wasdqezc])$", re.IGNORECASE)
 
-class RetroSpaceDuelEnv(ta.Env):
-    """Environment for playing Retro Space Duel, a two-player competitive space shooter."""
+OBJECT_KINDS = ("asteroid", "debris", "nebula", "mine", "powerup")
+GLYPHS = {"asteroid": "A", "debris": "D", "nebula": "~", "mine": "M", "powerup": "+"}
+DESTRUCTIBLE_NAMES = {"debris": "debris", "mine": "a mine", "powerup": "a power-up"}
+BOUNDARY, EMPTY = "#", "."
+SHIP_SYMBOLS = ("0", "1")
 
-    def __init__(self, grid_size: Tuple[int, int] = (15, 15), max_turns: int = 100,
-                 num_asteroids: int = 5, num_debris: int = 8, num_nebulas: int = 3,
-                 num_mines: int = 4, num_powerups: int = 3):
-        self.grid_size = grid_size
-        self.width, self.height = grid_size
-        self.max_turns = max_turns
-        self.num_asteroids = num_asteroids
-        self.num_debris = num_debris
-        self.num_nebulas = num_nebulas
-        self.num_mines = num_mines
-        self.num_powerups = num_powerups
+START_HEALTH = 100
+SHOT_DAMAGE, SHIELDED_SHOT_DAMAGE = 10, 5
+MINE_DAMAGE, SHIELDED_MINE_DAMAGE = 20, 10
+SHIELD_CHARGES = 3
+BOOSTED_SPEED = 2
+POWERUP_TYPES = ("shield", "speed", "weapon")
 
-        self.directions = [(0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1)]
 
-        # Emoji mappings
-        self.empty_symbol = '  '
-        self.boundary_symbol = '🌍'
-        self.asteroid_symbol = '💥'   # Indestructible
-        self.debris_symbol = '🟤'     # Destructible
-        self.nebula_symbol = '🌪️'    # Slows movement, projectiles pass through
-        self.mine_symbol = '💣'       # Destructible
-        self.powerup_symbol = '⚡'     # Destructible
-        self.projectile_symbol = '🔥'
-        self.player_symbols = {0: '🚀', 1: '🛸'}
+def _is_int(value: Any) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool)
 
-    def get_board_str(self):
-        return self._get_arena_state()
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.state = ta.TwoPlayerState(num_players=num_players, seed=seed, max_turns=self.max_turns)
+def _format_grid(canvas: List[List[str]]) -> str:
+    """Grid with column numbers (x) on top and row numbers (y) on the left."""
+    width = len(str(max(len(canvas), len(canvas[0])) - 1))
+    header = " " * (width + 1) + " ".join(str(x).rjust(width) for x in range(len(canvas[0])))
+    rows = [str(y).rjust(width) + " " + " ".join(cell.rjust(width) for cell in row) for y, row in enumerate(canvas)]
+    return "\n".join([header] + rows)
 
-        self.player_positions = [(1, 1), (self.width - 2, self.height - 2)]
-        self.player_health = [100, 100]
-        self.player_shields = [0, 0]
-        self.player_speed = [1, 1]
-        self.player_weapons = [1, 1]
-        self.projectiles = []  # (x, y, dx, dy, player_id)
 
-        self._generate_game_elements()
+class RetroSpaceDuelEnv(ta.GameEnv):
+    """Turn-based two-player space shooter: ships alternate single moves or shots."""
+    min_players = 2
+    max_players = 2
+    mdp_includes_actions = False
 
-        game_state = {"arena_state": self._get_arena_state(), "turn": 0, "max_turns": self.max_turns}
-        self.state.reset(
-            game_state=game_state,
-            player_prompt_function=self._generate_player_prompt,
-        )
-        self.state.add_observation(message=self._get_arena_state(), observation_type=ta.ObservationType.GAME_BOARD)
+    grid_size = ta.Param(
+        (15, 15), "The arena width and height, including the boundary ring.",
+        check=lambda size: len(size) == 2 and all(_is_int(v) and v >= 5 for v in size),
+        rule="a (width, height) pair of integers of at least 5",
+    )
+    max_turns = ta.Param(
+        100, "The total number of turns, counting both players, before the duel is decided on health.",
+        check=lambda turns: _is_int(turns) and turns >= 2 and turns % 2 == 0,
+        rule="a positive even integer, so both ships get the same number of turns",
+    )
+    num_asteroids = ta.Param(5, "The number of asteroids to scatter.", min=0)
+    num_debris = ta.Param(8, "The number of debris objects to scatter.", min=0)
+    num_nebulas = ta.Param(3, "The number of nebulas to scatter.", min=0)
+    num_mines = ta.Param(4, "The number of mines to scatter.", min=0)
+    num_powerups = ta.Param(3, "The number of power-ups to scatter.", min=0)
 
-    def _generate_game_elements(self):
-        def get_random_position(existing_positions):
-            attempts = 0
-            while attempts < 100:
-                pos = (random.randint(1, self.width - 2), random.randint(1, self.height - 2))
-                if pos not in existing_positions and pos not in self.player_positions:
-                    return pos
-                attempts += 1
-            return None
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.width, self.height = self.grid_size
+        counts = {"asteroid": self.num_asteroids, "debris": self.num_debris, "nebula": self.num_nebulas,
+                  "mine": self.num_mines, "powerup": self.num_powerups}
+        self.object_counts = counts
+        free_cells = len(self._placeable_cells())
+        if sum(counts.values()) > free_cells:
+            raise ValueError(f"a {self.width}x{self.height} arena only has room for {free_cells} objects")
 
-        all_positions = []
-        for target, count in (
-            ("asteroids", self.num_asteroids), ("debris", self.num_debris),
-            ("nebulas", self.num_nebulas), ("mines", self.num_mines), ("powerups", self.num_powerups),
-        ):
-            placed = []
-            for _ in range(count):
-                pos = get_random_position(all_positions)
-                if pos:
-                    placed.append(pos)
-                    all_positions.append(pos)
-            setattr(self, target, placed)
+    # ------------------------------------------------------------------ setup
+    def setup(self) -> Dict[str, Any]:
+        ships = [
+            {"pos": pos, "health": START_HEALTH, "shields": 0, "speed": 1, "spread": False}
+            for pos in self._spawns()
+        ]
+        cells = self.rng.sample(self._placeable_cells(), sum(self.object_counts.values()))
+        objects: Dict[Tuple[int, int], str] = {}
+        for kind in OBJECT_KINDS:
+            for _ in range(self.object_counts[kind]):
+                objects[cells.pop()] = kind
+        first_player = self.rng.randrange(2)
+        self.set_current_player(first_player)
+        return {"ships": ships, "objects": objects, "first_player": first_player}
 
-    def _get_arena_state(self) -> str:
-        grid = [[self.empty_symbol for _ in range(self.width)] for _ in range(self.height)]
+    def _spawns(self) -> Tuple[Tuple[int, int], Tuple[int, int]]:
+        return (1, 1), (self.width - 2, self.height - 2)
 
-        # Boundaries
-        for i in range(self.width):
-            grid[0][i] = self.boundary_symbol
-            grid[self.height - 1][i] = self.boundary_symbol
-        for i in range(self.height):
-            grid[i][0] = self.boundary_symbol
-            grid[i][self.width - 1] = self.boundary_symbol
+    def _placeable_cells(self) -> List[Tuple[int, int]]:
+        """Interior cells outside both spawn neighbourhoods, so no ship starts boxed in or next to a free power-up."""
+        reserved = {(sx + dx, sy + dy) for sx, sy in self._spawns() for dx in (-1, 0, 1) for dy in (-1, 0, 1)}
+        return [
+            (x, y) for y in range(1, self.height - 1) for x in range(1, self.width - 1) if (x, y) not in reserved
+        ]
 
-        for layer, symbol in (
-            (self.asteroids, self.asteroid_symbol), (self.debris, self.debris_symbol),
-            (self.nebulas, self.nebula_symbol), (self.mines, self.mine_symbol),
-            (self.powerups, self.powerup_symbol),
-        ):
-            for x, y in layer:
-                if 0 <= y < self.height and 0 <= x < self.width:
-                    grid[y][x] = symbol
-
-        for x, y, _, _, _ in self.projectiles:
-            if 0 <= y < self.height and 0 <= x < self.width:
-                grid[y][x] = self.projectile_symbol
-
-        for i, (x, y) in enumerate(self.player_positions):
-            if 0 <= y < self.height and 0 <= x < self.width:
-                grid[y][x] = self.player_symbols[i]
-
-        return '\n'.join([''.join(row) for row in grid])
-
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        opponent_id = 1 - player_id
-        element_descriptions = {
-            self.empty_symbol: 'Empty space',
-            self.boundary_symbol: 'Boundary (blocks everything, reflects projectiles)',
-            self.asteroid_symbol: 'Asteroid (indestructible, reflects projectiles)',
-            self.debris_symbol: 'Debris (destructible, blocks movement)',
-            self.nebula_symbol: 'Nebula (slows movement, projectiles pass through)',
-            self.mine_symbol: 'Mine (destructible, causes damage on contact)',
-            self.powerup_symbol: 'Power-up (destructible, grants special abilities)',
-            self.projectile_symbol: 'Projectile (causes damage on contact)',
-            self.player_symbols[player_id]: 'Your spaceship',
-            self.player_symbols[opponent_id]: 'Enemy spaceship',
-        }
-        in_nebula = self.player_positions[player_id] in self.nebulas
-        prompt = (
-            f"=== RETRO SPACE DUEL - TURN {game_state['turn']}/{game_state['max_turns']} ===\n\n"
-            f"You are Player {player_id} in Retro Space Duel.\n"
-            f"Your position: {self.player_positions[player_id]}\n"
-            f"Your health: {self.player_health[player_id]}\n"
-            f"Your shield: {self.player_shields[player_id]} remaining\n"
-            f"Your speed: {self.player_speed[player_id]} {'(reduced in nebula)' if in_nebula else ''}\n"
-            f"Your weapon: {'Normal' if self.player_weapons[player_id] == 1 else 'Spread Shot'}\n\n"
-            f"Enemy health: {self.player_health[opponent_id]}\n"
-            f"Enemy position: {self.player_positions[opponent_id]}\n\n"
-            "LEGEND:\n"
-        )
-        for symbol, description in element_descriptions.items():
-            prompt += f"{symbol}: {description}\n"
-        prompt += (
-            "\nAVAILABLE ACTIONS:\n"
-            "1. Move: a single direction key\n"
-            "   - w: up      s: down     a: left     d: right\n"
-            "   - q: upleft  e: upright  z: downleft c: downright\n"
-            "2. Shoot: 'f' followed by a direction key (e.g. 'f a' shoots left).\n"
-            "   Warning: a shot that reaches a boundary or asteroid ricochets back and eliminates you,\n"
-            "   so only fire when something is lined up in that direction.\n\n"
-            "EXAMPLES: 'w' (move up), 'd' (move right), 'f a' (shoot left), 'f e' (shoot upright)\n\n"
-            f"ARENA:\n{game_state['arena_state']}\n\n"
-            "Enter your action:"
-        )
-        return prompt
-
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        player_id = self.state.current_player_id
-        self.state.add_observation(
-            from_id=player_id, to_id=-1,
-            message=action,
-            observation_type=ta.ObservationType.PLAYER_ACTION,
+    # ----------------------------------------------------------------- prompts
+    def prompt(self, player_id: int) -> str:
+        return (
+            f"You are Player {player_id} in Retro Space Duel, a turn-based two-player space shooter on a "
+            f"{self.width}x{self.height} grid. Your ship is shown as '{SHIP_SYMBOLS[player_id]}' and the enemy ship as "
+            f"'{SHIP_SYMBOLS[1 - player_id]}'. Players alternate turns and Player {self.game_state['first_player']} "
+            "moves first.\n"
+            "Positions are (x, y): x is the column number and y the row number printed around the arena, so 'up' "
+            "decreases y.\n\n"
+            "On your turn, reply with exactly one action:\n"
+            "- Move: a single direction key: w (up), s (down), a (left), d (right), q (up-left), e (up-right), "
+            "z (down-left), c (down-right).\n"
+            "- Shoot: 'f' followed by a direction key.\n"
+            "Examples: 'w' (move up), 'c' (move down-right), 'f a' (shoot left), 'f e' (shoot up-right).\n\n"
+            "Rules:\n"
+            f"- Both ships start with {START_HEALTH} health. A ship whose health reaches 0 is destroyed and its player loses; "
+            "if both ships are destroyed on the same turn, the duel is a draw.\n"
+            "- Moving: your ship moves 1 cell, or up to 2 cells after a speed power-up (only 1 cell when it starts the move "
+            "inside a nebula). The boundary (#), asteroids (A), debris (D) and the enemy ship block movement: a move "
+            "stops in front of a blocked cell, and a move whose first cell is blocked is invalid. A move also ends as "
+            "soon as your ship enters a nebula, mine or power-up cell.\n"
+            "- Shooting: a shot flies in a straight line until it hits something. The enemy ship takes "
+            f"{SHOT_DAMAGE} damage ({SHIELDED_SHOT_DAMAGE} while it has a shield charge, which the hit uses up). Debris, "
+            "mines and power-ups are destroyed and stop the shot. Shots pass through nebulas, but a ship inside a nebula "
+            "can still be hit. A shot that reaches the boundary or an asteroid ricochets back and destroys YOUR ship, so "
+            "only fire when something is lined up in that direction.\n"
+            f"- Mines (M): entering one costs {MINE_DAMAGE} health ({SHIELDED_MINE_DAMAGE} while you have a shield "
+            "charge, which it uses up).\n"
+            "- Power-ups (+): entering one grants a random upgrade: shield (recharges your shield to "
+            f"{SHIELD_CHARGES} charges), speed (move up to {BOOSTED_SPEED} cells per turn) or spread shot (every shot also "
+            "fires two extra projectiles 45 degrees to either side; extra projectiles that reach the boundary or an "
+            "asteroid simply dissipate).\n"
+            f"- After {self.max_turns} turns in total ({self.max_turns // 2} each), the ship with more health wins; "
+            "equal health is a draw.\n\n"
+            "Legend: '0' and '1' ships, '#' boundary, 'A' asteroid, 'D' debris, '~' nebula, 'M' mine, '+' power-up, "
+            "'.' empty space."
         )
 
-        action_result = self._execute_player_action(player_id=player_id, action=action)
-
-        if not action_result['success']:
-            self.state.set_invalid_move(reason=action_result['reason'])
+    def render(self, player_id: int) -> str:
+        if self.state.done:
+            header = "Final arena:"
         else:
-            self.projectiles = []  # projectiles resolve instantly inside _fire_projectile
-            self.state.add_observation(
-                message=f"=== Updated Arena After Player {player_id}'s Move ===\n{self._get_arena_state()}",
-                observation_type=ta.ObservationType.GAME_BOARD,
+            header = f"Turn {self.state.turn + 1}/{self.max_turns}: Player {player_id} to move."
+        return f"{header}\n{self.get_board_str()}"
+
+    def get_board_str(self) -> str:
+        gs = self.game_state
+        canvas = [
+            [BOUNDARY if self._is_boundary(x, y) else EMPTY for x in range(self.width)] for y in range(self.height)
+        ]
+        for (x, y), kind in gs["objects"].items():
+            canvas[y][x] = GLYPHS[kind]
+        for pid, ship in enumerate(gs["ships"]):
+            if ship["health"] > 0:
+                x, y = ship["pos"]
+                canvas[y][x] = SHIP_SYMBOLS[pid]
+        return "\n".join([_format_grid(canvas)] + [self._ship_status(pid) for pid in range(2)])
+
+    def _ship_status(self, player_id: int) -> str:
+        ship = self.game_state["ships"][player_id]
+        x, y = ship["pos"]
+        if ship["health"] <= 0:
+            return f"Player {player_id} ('{SHIP_SYMBOLS[player_id]}'): destroyed at ({x}, {y})"
+        speed = f"speed {ship['speed']}"
+        if self.game_state["objects"].get((x, y)) == "nebula":
+            speed += " (inside a nebula: moves 1 cell this turn)"
+        weapon = "spread shot" if ship["spread"] else "normal"
+        return (
+            f"Player {player_id} ('{SHIP_SYMBOLS[player_id]}'): position ({x}, {y}), health {ship['health']}, "
+            f"shields {ship['shields']}, {speed}, weapon {weapon}"
+        )
+
+    # ----------------------------------------------------------------- actions
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        match = _ACTION_RE.match(action)
+        if match is None:
+            return self.invalid(
+                "Reply with a direction key (w, a, s, d, q, e, z, c) to move, or 'f' followed by a direction key to "
+                "shoot, e.g. 'f a'."
             )
-            self._check_gameover()
-
-        return self.state.step()
-
-    def _execute_player_action(self, player_id: int, action: str) -> Dict[str, Any]:
-        try:
-            action = action.strip().lower()
-            if action.startswith('[') and action.endswith(']'):  # tolerate ActionFormattingWrapper brackets
-                action = action[1:-1].strip()
-            direction_map = {
-                'w': 'up', 's': 'down', 'a': 'left', 'd': 'right',
-                'q': 'upleft', 'e': 'upright', 'z': 'downleft', 'c': 'downright',
-            }
-
-            if action in direction_map:  # Move
-                direction = direction_map[action]
-                steps = 1 if self.player_positions[player_id] in self.nebulas else min(1, self.player_speed[player_id])
-                dx, dy = self._direction_to_delta(direction)
-                new_x = self.player_positions[player_id][0] + dx * steps
-                new_y = self.player_positions[player_id][1] + dy * steps
-                if self._is_valid_move(new_x, new_y):
-                    self.player_positions[player_id] = (new_x, new_y)
-                    self._handle_collisions(player_id)
-                    return {"success": True}
-                return {"success": False, "reason": "Invalid move: collision or out of bounds"}
-
-            elif action.startswith('f ') and len(action.split()) == 2:  # Shoot
-                _, dir_key = action.split()
-                if dir_key not in direction_map:
-                    return {"success": False, "reason": "Invalid shooting direction"}
-                dx, dy = self._direction_to_delta(direction_map[dir_key])
-                px, py = self.player_positions[player_id]
-                self._fire_projectile(player_id, px, py, dx, dy)
-                if self.player_weapons[player_id] != 1 and (dx, dy) in self.directions:  # Spread shot
-                    dir_index = self.directions.index((dx, dy))
-                    for offset in (-1, 1):
-                        ldx, ldy = self.directions[(dir_index + offset) % len(self.directions)]
-                        self._fire_projectile(player_id, px, py, ldx, ldy)
-                return {"success": True}
-
-            return {"success": False, "reason": "Invalid action format. Use a direction key to move (e.g. 'w') or 'f' followed by a direction to shoot (e.g. 'f a')."}
-        except Exception as e:
-            return {"success": False, "reason": f"Error processing action: {str(e)}"}
-
-    def _fire_projectile(self, player_id: int, x: int, y: int, dx: int, dy: int):
-        """Fire a projectile that travels until it hits something."""
-        px, py = x + dx, y + dy
-        while 0 <= px < self.width and 0 <= py < self.height:
-            # Boundary or asteroid (indestructible) -> ricochets back and eliminates the shooter
-            if px in (0, self.width - 1) or py in (0, self.height - 1):
-                self.state.add_observation(
-                    message=f"Player {player_id}'s projectile hit the boundary and ricocheted back, eliminating them!",
-                    observation_type=ta.ObservationType.GAME_MESSAGE,
-                )
-                self.player_health[player_id] = 0
-                break
-            if (px, py) in self.asteroids:
-                self.state.add_observation(
-                    message=f"Player {player_id}'s projectile hit an asteroid and ricocheted back, eliminating them!",
-                    observation_type=ta.ObservationType.GAME_MESSAGE,
-                )
-                self.player_health[player_id] = 0
-                break
-            if (px, py) in self.debris:  # Destructible
-                self.debris.remove((px, py))
-                self.state.add_observation(message=f"A projectile destroyed space debris at {(px, py)}!", observation_type=ta.ObservationType.GAME_MESSAGE)
-                break
-            if (px, py) in self.mines:  # Destructible
-                self.mines.remove((px, py))
-                self.state.add_observation(message=f"A projectile detonated a mine at {(px, py)}!", observation_type=ta.ObservationType.GAME_MESSAGE)
-                for i, ppos in enumerate(self.player_positions):
-                    if (px, py) == ppos:
-                        damage = 20 if self.player_shields[i] == 0 else 10
-                        self.player_health[i] = max(0, self.player_health[i] - damage)
-                        if self.player_shields[i] > 0:
-                            self.player_shields[i] -= 1
-                        self.state.add_observation(message=f"Player {i} was hit by the mine explosion and took {damage} damage!", observation_type=ta.ObservationType.GAME_MESSAGE)
-                break
-            if (px, py) in self.powerups:  # Destructible
-                self.powerups.remove((px, py))
-                self.state.add_observation(message=f"A projectile destroyed a power-up at {(px, py)}!", observation_type=ta.ObservationType.GAME_MESSAGE)
-                break
-            if (px, py) in self.nebulas:  # Projectile passes through
-                px += dx
-                py += dy
-                continue
-            hit_player = False
-            for i, ppos in enumerate(self.player_positions):
-                if (px, py) == ppos:
-                    damage = 10
-                    if self.player_shields[i] > 0:
-                        self.player_shields[i] -= 1
-                        damage = 5
-                        self.state.add_observation(message=f"Player {i}'s shield absorbed some damage! {self.player_shields[i]} shield points remaining.", observation_type=ta.ObservationType.GAME_MESSAGE)
-                    self.player_health[i] = max(0, self.player_health[i] - damage)
-                    self.state.add_observation(message=f"Player {i} was hit by a projectile and took {damage} damage! Health: {self.player_health[i]}", observation_type=ta.ObservationType.GAME_MESSAGE)
-                    hit_player = True
-                    break
-            if hit_player:
-                return
-            px += dx
-            py += dy
-
-    def _direction_to_delta(self, direction: str) -> Tuple[int, int]:
-        return {
-            "up": (0, -1), "down": (0, 1), "left": (-1, 0), "right": (1, 0),
-            "upleft": (-1, -1), "upright": (1, -1), "downleft": (-1, 1), "downright": (1, 1),
-        }[direction]
-
-    def _is_valid_move(self, x: int, y: int) -> bool:
-        if not (0 < x < self.width - 1 and 0 < y < self.height - 1):
-            return False
-        if (x, y) in self.asteroids or (x, y) in self.debris:
-            return False
-        if (x, y) in self.player_positions:
-            return False
-        return True
-
-    def _handle_collisions(self, player_id: int):
-        pos = self.player_positions[player_id]
-        if pos in self.powerups:
-            self.powerups.remove(pos)
-            self._apply_powerup(player_id)
-        if pos in self.mines:
-            self.mines.remove(pos)
-            damage = 20 if self.player_shields[player_id] == 0 else 10
-            self.player_health[player_id] = max(0, self.player_health[player_id] - damage)
-            if self.player_shields[player_id] > 0:
-                self.player_shields[player_id] -= 1
-            self.state.add_observation(message=f"Player {player_id} hit a mine and took {damage} damage!", observation_type=ta.ObservationType.GAME_MESSAGE)
-
-    def _apply_powerup(self, player_id: int):
-        powerup_type = random.choice(["shield", "speed", "weapon"])
-        message = f"Player {player_id} collected a "
-        if powerup_type == "shield":
-            self.player_shields[player_id] = 3
-            message += "shield power-up! +3 shields."
-        elif powerup_type == "speed":
-            self.player_speed[player_id] = 2
-            message += "speed power-up! Movement increased to 2 steps."
+        key = match.group(2).lower()
+        if match.group(1):
+            self._shoot(player_id, key)
         else:
-            self.player_weapons[player_id] = 2
-            message += "weapon power-up! Upgraded to spread shot."
-        self.state.add_observation(message=message, observation_type=ta.ObservationType.GAME_MESSAGE)
+            invalid = self._move(player_id, key)
+            if invalid is not None:
+                return invalid
+        return self._check_destroyed()
 
-    def _check_gameover(self):
-        for i, health in enumerate(self.player_health):
-            if health <= 0:
-                winner_id = 1 - i
-                self.state.set_winner(player_id=winner_id, reason=f"Player {winner_id} wins by eliminating Player {i}.")
+    def on_turn_limit(self) -> ta.Outcome:
+        health = [ship["health"] for ship in self.game_state["ships"]]
+        if health[0] != health[1]:
+            leader = 0 if health[0] > health[1] else 1
+            return self.winner(
+                leader,
+                reason=f"Turn limit reached. Player {leader} wins with more health ({health[leader]} vs {health[1 - leader]}).",
+            )
+        return self.draw(reason=f"Turn limit reached with equal health ({health[0]} each). The duel ends in a draw.")
+
+    def _move(self, player_id: int, key: str) -> Optional[ta.Invalid]:
+        gs = self.game_state
+        ship = gs["ships"][player_id]
+        name, dx, dy = DIRECTIONS[key]
+        start_x, start_y = x, y = ship["pos"]
+        steps = 1 if gs["objects"].get((x, y)) == "nebula" else ship["speed"]
+        for step in range(steps):
+            blocker = self._movement_blocker(x + dx, y + dy, player_id)
+            if blocker is not None:
+                if step == 0:
+                    return self.invalid(
+                        f"You cannot move {name} from ({start_x}, {start_y}): ({x + dx}, {y + dy}) is blocked by {blocker}."
+                    )
+                break
+            x, y = x + dx, y + dy
+            if gs["objects"].get((x, y)) in ("nebula", "mine", "powerup"):
+                break
+
+        ship["pos"] = (x, y)
+        self.broadcast(f"Player {player_id} moved {name} to ({x}, {y}).", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        entered = gs["objects"].get((x, y))
+        if entered == "mine":
+            del gs["objects"][(x, y)]
+            damage = self._damage(player_id, MINE_DAMAGE, SHIELDED_MINE_DAMAGE)
+            self.broadcast(
+                f"Player {player_id} hit a mine at ({x}, {y}) and took {damage} damage (health {ship['health']}).",
+                ta.ObservationType.GAME_MESSAGE,
+            )
+        elif entered == "powerup":
+            del gs["objects"][(x, y)]
+            self._collect_powerup(player_id)
+        return None
+
+    def _movement_blocker(self, x: int, y: int, player_id: int) -> Optional[str]:
+        if self._is_boundary(x, y):
+            return "the boundary"
+        kind = self.game_state["objects"].get((x, y))
+        if kind == "asteroid":
+            return "an asteroid"
+        if kind == "debris":
+            return "debris"
+        if self.game_state["ships"][1 - player_id]["pos"] == (x, y):
+            return "the enemy ship"
+        return None
+
+    def _shoot(self, player_id: int, key: str):
+        ship = self.game_state["ships"][player_id]
+        name, dx, dy = DIRECTIONS[key]
+        shot = "a spread shot" if ship["spread"] else "a shot"
+        self.broadcast(f"Player {player_id} fired {shot} {name}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        self._fire(player_id, dx, dy, ricochet_is_lethal=True)
+        if ship["spread"]:
+            index = CLOCKWISE.index((dx, dy))
+            for offset in (-1, 1):
+                side_dx, side_dy = CLOCKWISE[(index + offset) % len(CLOCKWISE)]
+                self._fire(player_id, side_dx, side_dy, ricochet_is_lethal=False)
+
+    def _fire(self, player_id: int, dx: int, dy: int, ricochet_is_lethal: bool):
+        """Resolve one projectile instantly along its straight path."""
+        gs = self.game_state
+        shooter, target_id = gs["ships"][player_id], 1 - player_id
+        target = gs["ships"][target_id]
+        x, y = shooter["pos"]
+        while True:
+            x, y = x + dx, y + dy
+            kind = gs["objects"].get((x, y))
+            if self._is_boundary(x, y) or kind == "asteroid":
+                obstacle = "the boundary" if self._is_boundary(x, y) else f"an asteroid at ({x}, {y})"
+                if ricochet_is_lethal:
+                    shooter["health"] = 0
+                    message = f"Player {player_id}'s shot hit {obstacle} and ricocheted back, destroying their own ship!"
+                else:
+                    message = f"A side projectile of Player {player_id}'s spread shot hit {obstacle} and dissipated."
+                self.broadcast(message, ta.ObservationType.GAME_MESSAGE)
+                return
+            if target["pos"] == (x, y):
+                damage = self._damage(target_id, SHOT_DAMAGE, SHIELDED_SHOT_DAMAGE)
+                self.broadcast(
+                    f"Player {player_id}'s shot hit Player {target_id} at ({x}, {y}) for {damage} damage "
+                    f"(health {target['health']}, shields {target['shields']}).",
+                    ta.ObservationType.GAME_MESSAGE,
+                )
+                return
+            if kind in DESTRUCTIBLE_NAMES:
+                del gs["objects"][(x, y)]
+                self.broadcast(
+                    f"Player {player_id}'s shot destroyed {DESTRUCTIBLE_NAMES[kind]} at ({x}, {y}).",
+                    ta.ObservationType.GAME_MESSAGE,
+                )
                 return
 
-        if self.state.check_turn_limit():
-            if self.player_health[0] > self.player_health[1]:
-                self.state.set_winner(player_id=0, reason=f"Turn limit reached. Player 0 wins with more health ({self.player_health[0]} vs {self.player_health[1]}).")
-            elif self.player_health[1] > self.player_health[0]:
-                self.state.set_winner(player_id=1, reason=f"Turn limit reached. Player 1 wins with more health ({self.player_health[1]} vs {self.player_health[0]}).")
-            else:
-                self.state.set_draw(reason=f"Turn limit reached with equal health ({self.player_health[0]} each). The duel ends in a draw.")
+    def _damage(self, player_id: int, damage: int, shielded_damage: int) -> int:
+        ship = self.game_state["ships"][player_id]
+        if ship["shields"] > 0:
+            ship["shields"] -= 1
+            damage = shielded_damage
+        ship["health"] = max(0, ship["health"] - damage)
+        return damage
+
+    def _collect_powerup(self, player_id: int):
+        ship = self.game_state["ships"][player_id]
+        kind = self.rng.choice(POWERUP_TYPES)
+        if kind == "shield":
+            ship["shields"] = SHIELD_CHARGES
+            effect = f"a shield power-up: shields recharged to {SHIELD_CHARGES}."
+        elif kind == "speed":
+            ship["speed"] = BOOSTED_SPEED
+            effect = f"a speed power-up: it now moves up to {BOOSTED_SPEED} cells per turn."
+        else:
+            ship["spread"] = True
+            effect = "a weapon power-up: its shots are now spread shots."
+        self.broadcast(f"Player {player_id} collected {effect}", ta.ObservationType.GAME_MESSAGE)
+
+    def _check_destroyed(self) -> Optional[ta.Outcome]:
+        destroyed = [pid for pid, ship in enumerate(self.game_state["ships"]) if ship["health"] <= 0]
+        if len(destroyed) == 2:
+            return self.draw(reason="Both ships were destroyed on the same turn. The duel ends in a draw.")
+        if destroyed:
+            loser = destroyed[0]
+            return self.winner(1 - loser, reason=f"Player {1 - loser} wins - Player {loser}'s ship was destroyed.")
+        return None
+
+    def _is_boundary(self, x: int, y: int) -> bool:
+        return not (0 < x < self.width - 1 and 0 < y < self.height - 1)

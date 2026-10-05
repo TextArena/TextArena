@@ -1,39 +1,47 @@
-import re, random
+import re
+import string
 from collections import deque
-from typing import Any, Dict, List, Tuple, Optional
+from typing import Any, Dict, FrozenSet, List, Tuple, Union
 
 import textarena as ta
 from textarena.envs.WordLadder.renderer import create_board_str
-from textarena.envs.utils.word_lists import EnglishDictionary
+from textarena.utils.word_lists import get_basic_english_words, get_english_words
 
 
-# NLTK is only needed to fetch the basic word list
-import nltk
-from nltk.corpus import words
-nltk.download("words")
-
-
-class WordLadderEnv(ta.Env):
+class WordLadderEnv(ta.GameEnv):
     """Single-player Word Ladder environment without networkx."""
 
-    def __init__(self, min_distance: int=5, max_distance: int=7, max_turns: int=100):
-        """
-        Args:
-            min_distance: minimum number of letter-change steps between start and target
-            max_distance: maximum number of letter-change steps between start and target
-            max_turns:    maximum turns before the game ends in a loss
-        """
-        super().__init__()
-        self.min_distance = min_distance
-        self.max_distance = max_distance
-        self.max_turns = max_turns
-        self.word_list = words.words("en-basic") # Source word lists
+    min_players = 1
+    max_players = 1
+    mdp_includes_actions = False
+    action_pattern = r"^([a-zA-Z]+)$"
+    snapshot_excluded_attributes = ("universal_word_list", "word_list")
+
+    min_distance = ta.Param(
+        5, "The minimum length, in single-letter changes, of the shortest ladder between the start and the target that "
+           "uses only Basic English words. Ladders through other dictionary words can be shorter.", min=1,
+    )
+    max_distance = ta.Param(
+        7, "The maximum length of that shortest ladder. It must be at least `min_distance`.", min=1,
+    )
+    max_turns = ta.Param(
+        100, "The number of accepted words allowed. It must be at least `max_distance`, so every puzzle is solvable "
+             "within the limit.", min=1,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.max_distance < self.min_distance:
+            raise ValueError("max_distance must be an integer greater than or equal to min_distance.")
+        if self.max_turns < self.max_distance:
+            raise ValueError("max_turns must be at least max_distance so every sampled puzzle is solvable.")
+        self.word_list = sorted(word for word in get_basic_english_words() if 3 <= len(word) <= 11)
         self.universal_word_list = self._load_universal_word_list()
 
-    def _load_universal_word_list(self):
-        """Combine NLTK + US/UK spell-check dictionaries (no proper nouns)."""
-        dictionary = EnglishDictionary(keep_proper_nouns=False, include_nltk=True)
-        return dictionary.get_all_words()
+    def _load_universal_word_list(self) -> FrozenSet[str]:
+        """Accept every dictionary word; puzzles are still built from the Basic English `word_list`."""
+        accepted = get_english_words()
+        return accepted if accepted.issuperset(self.word_list) else accepted.union(self.word_list)
 
     @staticmethod
     def _one_letter_diff(w1: str, w2: str) -> bool:
@@ -57,56 +65,73 @@ class WordLadderEnv(ta.Env):
                         neighbours[word].append(candidate)
         return neighbours
 
-    def _find_valid_pairs(self, neighbours: Dict[str, List[str]], min_steps: int, max_steps: int) -> List[Tuple[str, str, List[str]]]:
-        """
-        BFS from each word to collect (start, target, path) triples whose
-        path length ∈ [min_steps, max_steps].  Stops early when distance limit
-        is exceeded.  Complexity is manageable because we work per word-length
-        bucket and cut off BFS at max_steps.
-        """
-        valid_pairs = []
-        for start in neighbours.keys():
-            visited = {start}
-            q = deque([(start, [start])])  # (current_word, path_so_far)
-
-            while q:
-                current, path = q.popleft()
-                dist = len(path) - 1
-                if dist > max_steps:
-                    continue
-                # Avoid (start, start) and enforce distance range
-                if start != current and min_steps <= dist <= max_steps:
-                    valid_pairs.append((start, current, path))
-
-                if dist == max_steps:
-                    continue  # No deeper search past distance cap
-
-                for nxt in neighbours[current]:
-                    if nxt not in visited:
-                        visited.add(nxt)
-                        q.append((nxt, path + [nxt]))
-        return valid_pairs
-
     def _sample_start_target(self) -> Tuple[str, str]:
-        """ Pick word length, build neighbour map, then randomly select a (start, target) pair whose shortest path fits distance constraints """
-        lengths_tried = [] # Try multiple lengths / attempts in case some buckets have no pairs
-
-        while True:
-            # Pick a word length between 3 and 11; avoid repeats if possible
-            available_lengths = [L for L in range(3, 12) if L not in lengths_tried] or list(range(3, 12))
-            length = random.choice(available_lengths)
-            lengths_tried.append(length)
-
-            bucket = [w.lower() for w in self.word_list if len(w) == length]
+        """ Pick word length, build neighbour map, then randomly select a (start, target) pair whose shortest path through `word_list` fits distance constraints """
+        lengths = list(range(3, 12))
+        self.rng.shuffle(lengths)
+        for length in lengths:
+            bucket = [word for word in self.word_list if len(word) == length]
             if len(bucket) < 2:  # Not enough words to form a ladder
                 continue
 
             neighbours = self._build_neighbor_map(bucket)
-            pairs = self._find_valid_pairs(neighbours, self.min_distance, self.max_distance)
-            if pairs:
-                start, target, _ = random.choice(pairs)
-                return start, target
+            starts = list(neighbours)
+            self.rng.shuffle(starts)
+            for start in starts:
+                distances = {start: 0}
+                q = deque([start])
+                candidates = []
+                while q:
+                    current = q.popleft()
+                    distance = distances[current]
+                    if self.min_distance <= distance <= self.max_distance:
+                        candidates.append(current)
+                    if distance == self.max_distance:
+                        continue
+                    for nxt in neighbours[current]:
+                        if nxt not in distances:
+                            distances[nxt] = distance + 1
+                            q.append(nxt)
+                if candidates:
+                    return start, self.rng.choice(candidates)
+        raise ValueError(
+            f"No word-ladder pair exists between {self.min_distance} and "
+            f"{self.max_distance} steps in the configured dictionary."
+        )
 
+    # Convenience accessors kept for renderers/tests; game data lives in game_state.
+    @property
+    def start_word(self) -> str:
+        return self.game_state["start_word"]
+
+    @property
+    def target_word(self) -> str:
+        return self.game_state["target_word"]
+
+    @property
+    def current_word(self) -> str:
+        return self.game_state["current_word"]
+
+    @property
+    def history(self) -> List[str]:
+        return self.game_state["history"]
+
+    @property
+    def action_format(self) -> str:
+        # No sample word: any legal example would reveal a valid next rung of the ladder.
+        return (
+            f"only the next word: a {len(self.target_word)}-letter English word that differs from "
+            f"'{self.current_word}' in exactly one letter"
+        )
+
+    def setup(self) -> Dict[str, Any]:
+        start_word, target_word = self._sample_start_target()
+        game_state = {
+            "start_word": start_word, "target_word": target_word,
+            "current_word": start_word, "history": [start_word],
+        }
+        game_state["rendered_text"] = f"Word Ladder History: {' -> '.join(game_state['history'])}.  Target Word: {target_word}\n"
+        return game_state
 
     def get_board_str(self):
         return create_board_str(game_state=self.state.game_state)
@@ -114,74 +139,76 @@ class WordLadderEnv(ta.Env):
     def _render_text(self) -> str:
         return f"Word Ladder History: {' -> '.join(self.history)}.  Target Word: {self.target_word}\n"
 
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
+    def prompt(self, player_id: int) -> str:
         return (
             f"You are Player {player_id}.  Your goal is to reach the target word "
             "by changing **one letter at a time**.\n"
             f"- Start word:  **{self.start_word}**\n"
             f"- Target word: **{self.target_word}**\n"
-            "Submit each move in square brackets, e.g.  `[word]`.\n"
+            f"Every word you submit must have {len(self.target_word)} letters, differ from your current word in "
+            "exactly one position, and be an English dictionary word. Any word in the game's British and American "
+            "English dictionaries counts, including plurals and other inflected forms; proper nouns and "
+            "abbreviations do not.\n"
+            f"You have {self.max_turns} moves. A rejected word does not use a move, but two rejected words in a row "
+            "end the game.\n"
+            "Submit each move as the word itself, e.g.  `word`.\n"
             "History appears below as you play.  Good luck!\n"
         )
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        """Start a new game."""
-        self.state = ta.SinglePlayerState(num_players=num_players, seed=seed, max_turns=self.max_turns)
-        self.start_word, self.target_word = self._sample_start_target()
-        self.current_word = self.start_word
-        self.history = [self.start_word]
-        game_state = {"start_word": self.start_word, "target_word": self.target_word, "rendered_text": self._render_text()}
-        self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
+    def apply(self, player_id: int, move: re.Match) -> Union[ta.Outcome, ta.Invalid, None]:
+        gs = self.game_state
+        next_word = move.group(1).lower()
 
-    def _is_one_alphabet_different(self, next_word: str) -> bool:
-        """True if `next_word` differs from `self.current_word` by exactly one letter."""
-        return self._one_letter_diff(self.current_word, next_word.lower())
+        # Validation checks
+        if len(next_word) != len(self.target_word):
+            return self.invalid(f"`{next_word}` has wrong length; target is {len(self.target_word)} letters.")
+        if next_word not in self.universal_word_list:
+            return self.invalid(f"`{next_word}` is not a recognised English word.")
+        if not self._one_letter_diff(self.current_word, next_word):
+            return self.invalid(f"`{next_word}` is not exactly one letter different from `{self.current_word}`.")
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        """Validate move, update state, and return (game_over, info)."""
-        player_id = self.state.current_player_id
-        self.state.add_observation(from_id=player_id, to_id=-1, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+        gs["current_word"] = next_word
+        gs["history"].append(next_word)
+        gs["rendered_text"] = self._render_text()
 
-        match = re.search(r"\[([a-zA-Z]+)\]", action)
-        if not match:
-            reason = f"Invalid format. Wrap your word in square brackets, e.g. `[word]`."
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=reason)
-        else:
-            next_word = match.group(1).lower()
+        if next_word == self.target_word:
+            return self.outcome({0: 1}, reason="Congratulations! You reached the target word.")
+        self.message(player_id, f"Nice! Keep going.\n{self._render_text()}", ta.ObservationType.GAME_MESSAGE)
+        return None
 
-            # Validation checks
-            if len(next_word) != len(self.target_word):
-                reason = f"`{next_word}` has wrong length; target is {len(self.target_word)} letters."
-                self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=reason)
+    def on_turn_limit(self) -> ta.Outcome:
+        pct_complete = self._get_percentage_completion()
+        reason = (
+            f"The turn limit has been reached. You reached `{self.current_word}`, closing {round(pct_complete * 100)}% "
+            f"of the start word's ladder distance to the target `{self.target_word}`."
+        )
+        return self.outcome({0: pct_complete}, reason=reason)
 
-            elif next_word not in self.universal_word_list:
-                reason = f"`{next_word}` is not a recognised English word."
-                self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=reason)
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome({0: self._get_percentage_completion()}, reason=f"Invalid Move: {reason}")
 
-            elif not self._is_one_alphabet_different(next_word):
-                reason = f"`{next_word}` is not exactly one letter different from `{self.current_word}`."
-                self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=reason)
-
-            else: 
-                self.current_word = next_word
-                self.history.append(next_word)
-
-                if next_word == self.target_word:
-                    self.state.set_outcome(reward=1, reason=f"Congratulations! You reached the target word.")
-                else:
-                    self.state.add_observation(from_id=ta.GAME_ID, to_id=player_id, message=f"Nice! Keep going.\n{self._render_text()}", observation_type=ta.ObservationType.GAME_MESSAGE)
-
-        if self.state.check_turn_limit() and not self.state.done:
-            pct_complete = self._get_percentage_completion()
-            reason = f"The turn limit has been reached. You reached `{self.current_word}` which shares {round(pct_complete * 100)}% of its letters with the target `{self.target_word}`."
-            self.state.set_outcome(reward=pct_complete, reason=reason)
-
-        # Update rendered text after every turn
-        self.state.game_state["rendered_text"] = self._render_text()
-        return self.state.step()
-
+    def _ladder_distances(self, stop_word: str) -> Dict[str, int]:
+        """Fewest moves from accepted words to the target, searching outward from the target until `stop_word` is reached."""
+        distances = {self.target_word: 0}
+        frontier = [self.target_word]
+        while frontier and stop_word not in distances:
+            next_frontier = []
+            for word in frontier:
+                for i in range(len(word)):
+                    for letter in string.ascii_lowercase:
+                        candidate = word[:i] + letter + word[i + 1:]
+                        if candidate not in distances and candidate in self.universal_word_list:
+                            distances[candidate] = distances[word] + 1
+                            next_frontier.append(candidate)
+            frontier = next_frontier
+        return distances
 
     def _get_percentage_completion(self) -> float:
-        """ Compute the percentage of matching letters between current and target word. Returns a float in [0.0, 1.0] """
-        matches = sum(c1 == c2 for c1, c2 in zip(self.current_word, self.target_word))
-        return matches/len(self.target_word)
+        """Share of the start word's ladder distance to the target that the current word has closed: 0.0 to below 1.0."""
+        distances = self._ladder_distances(stop_word=self.start_word)
+        start_distance = distances.get(self.start_word)
+        if not start_distance:
+            return 0.0
+        # Every word closer to the target than the start word was reached before the search stopped.
+        current_distance = distances.get(self.current_word, start_distance)
+        return max(0.0, (start_distance - current_distance) / start_distance)

@@ -16,16 +16,14 @@ def create_board_str(game_state: dict) -> str:
             mark = "✔" if pid in voted else " "
             lines.append(f"│   [{mark}] Player {pid:<2}                                                          │")
         lines.append("├──────────────────────────────────────────────────────────────────────────┤")
-        if len(game_state.get("votes", {})) == len(game_state.get("budget_remaining", {})):
-            tally = {}
-            for voter, voted_for in game_state.get("votes", {}).items(): tally[voted_for] = tally.get(voted_for, 0) + 1
-            lines.append("│ Final Vote Count:                                                       │")
-            for pid in sorted(tally.keys()):
-                lines.append(f"│   Player {pid}: {tally[pid]} vote(s)                                                    │")
-            lines.append("└──────────────────────────────────────────────────────────────────────────┘")
-        else:
-            lines.append("│ Waiting for all players to submit their votes...                         │")
-            lines.append("└──────────────────────────────────────────────────────────────────────────┘")
+        lines.append("│ Waiting for all players to submit their votes...                         │")
+        lines.append("└──────────────────────────────────────────────────────────────────────────┘")
+    elif game_state.get("phase", "unknown") == "finished":
+        lines.append("┌─ CHARACTER CONCLAVE ──────────── Final Vote Count ───────────────────────┐")
+        tally = game_state.get("final_vote_counts", {})
+        for pid in sorted(game_state.get("budget_remaining", {}).keys()):
+            lines.append(f"│   Player {pid}: {tally.get(pid, 0)} vote(s)                                                    │")
+        lines.append("└──────────────────────────────────────────────────────────────────────────┘")
     else:
         lines.append("┌─ CHARACTER CONCLAVE ─────────────────────────────────────────────────────┐")
         lines.append("│ Unknown game phase.                                                      │")

@@ -1,35 +1,77 @@
-import nltk, random 
-nltk.download(["words", "averaged_perceptron_tagger_eng"])
-from typing import Any, Dict, Optional, Tuple
+import re
+import unicodedata
+from typing import Any, Dict, Union
 
 import textarena as ta
+from textarena.utils.word_lists import get_basic_english_words, get_headwords
+
+# Ogden's 100 "operations": the verbs, prepositions, pronouns, conjunctions and adverbs of
+# Basic English. They are unusable secret words, since any conversation says them by accident.
+OGDEN_OPERATIONS = frozenset(
+    """
+    come get give go keep let make put seem take be do have say see send may will
+    about across after against among at before between by down from in off on over through to under up with
+    as for of till than a the all any every little much no other some such that this i he you who
+    and because but or if though while how when where why again ever far forward here near now out still
+    then there together well almost enough even not only quite so very tomorrow yesterday north south east
+    west please yes
+    """.split()
+)
 
 
-class DontSayItEnv(ta.Env):
-    def __init__(self, max_turns: int, hardcore: Optional[bool] = False):
-        """
-        Args:
-            hardcore (bool): If True, use the full English word set; otherwise, use a simplified word set.
-            max_turns (int): Maximum number of turns before the game ends in a draw.
-        """
-        all_words = nltk.corpus.words.words("en") if hardcore else nltk.corpus.words.words("en-basic")
-        self.word_list = [word for word in all_words if nltk.pos_tag([word])[0][1] in ["NN"]] # Filter words based on POS tags
-        self.max_turns = max_turns
+class DontSayItEnv(ta.GameEnv):
+    min_players = 2
+    max_players = 2
+    snapshot_excluded_attributes = ("word_list",)
 
-    def reset(self, num_players: int, seed: Optional[int]=None):
-        self.state = ta.TwoPlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
-        self.state.reset(game_state={"target_words":{0:random.choice(self.word_list), 1:random.choice(self.word_list)}}, player_prompt_function=self._generate_player_prompt)
-
-    def _generate_player_prompt(self, player_id: int, game_state: Dict[int, Any]) -> str:
-        return (
-            f"You are Player {player_id} in a game of DontSayIt.\nYour secret word is: '{game_state['target_words'][player_id]}'.\n"
-            "Your goal is to get the other player to say your secret word before you say theirs.\n"
-            "You can converse freely, but try to be subtle to avoid making it obvious.\n On your turn, simply type your message.\n"
-            f"The game lasts for {self.state.max_turns} turns in total.\n"
+    @staticmethod
+    def _normalize_for_match(value: str) -> str:
+        normalized = unicodedata.normalize("NFKC", value).casefold()
+        return "".join(
+            char for char in normalized if unicodedata.category(char) != "Cf"
         )
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        if self.state.game_state["target_words"][1-self.state.current_player_id].lower() in action.lower(): self.state.set_winner(player_id=1-self.state.current_player_id, reason=f"Player {self.state.current_player_id} mentioned the opponent's secret word.")            
-        elif self.state.check_turn_limit(): self.state.set_draw(reason="The turn limit has been reached")
-        return self.state.step()
+    max_turns = ta.Param(
+        20, "The total number of messages, counting both players, before the game is a draw. `None` means no limit.",
+        min=2, optional=True, check=lambda turns: turns % 2 == 0, rule="an even integer of at least 2",
+    )
+    hardcore = ta.Param(
+        False, "Draw secret words from every headword of the bundled dictionaries (about 38,700 base words of 3 or more "
+               "letters, many of them rare, such as `oakum` or `glyceride`) instead of the Basic English list (750 "
+               "everyday words, such as `apple`, `bridge`, or `angry`).",
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.hardcore:
+            self.word_list = sorted(get_headwords())
+        else:
+            self.word_list = sorted(word for word in get_basic_english_words() if word not in OGDEN_OPERATIONS)
+
+    def setup(self) -> Dict[str, Any]:
+        first, second = self.rng.sample(self.word_list, 2)
+        return {"target_words": {0: first, 1: second}}
+
+    def prompt(self, player_id: int) -> str:
+        return (
+            f"You are Player {player_id} in a game of DontSayIt.\nYour secret word is: '{self.game_state['target_words'][player_id]}'.\n"
+            "Your goal is to get the other player to say your secret word before you say theirs.\n"
+            "You can converse freely, but try to be subtle to avoid making it obvious.\n On your turn, simply type your message.\n"
+            + (
+                f"The game lasts for {self.max_turns} turns in total.\n"
+                if self.max_turns is not None
+                else "The game has no turn limit.\n"
+            )
+        )
+
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        opponent_word = self._normalize_for_match(
+            self.game_state["target_words"][1 - player_id]
+        )
+        normalized_action = self._normalize_for_match(action)
+        if re.search(rf"(?<!\w){re.escape(opponent_word)}(?!\w)", normalized_action):
+            return self.winner(1 - player_id, reason=f"Player {player_id} mentioned the opponent's secret word.")
+        return None
+
+    def on_turn_limit(self) -> ta.Outcome:
+        return self.draw(reason="The turn limit has been reached")

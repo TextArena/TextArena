@@ -1,139 +1,98 @@
 # Coup
 
-## Rules:
+Players bluff about the court characters they secretly hold to gain coins and knock out rivals' influence; the
+last player with influence wins ([rules](https://www.qugs.org/rules/r131357.pdf)).
 
+<!-- BEGIN GENERATED: variants -->
+**Players:** 2–6
 
-[PDF](https://www.qugs.org/rules/r131357.pdf)
-[Video](https://www.youtube.com/watch?v=xUNWl5fWfEY)
+**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
+| Env ID | Parameters |
+| --- | --- |
+| `Coup-v1` | defaults |
 
-## keep this open WHILE you're reading:
+Append `-mdp` to any ID for the state-complete variant (e.g. `Coup-v1-mdp`).
+<!-- END GENERATED: variants -->
 
-The cheatsheet is useful to have on you while going through the code, as much is structured to match as much as possible.
-https://hexagamers.com/wp-content/uploads/2016/04/Coup-Cheat-Sheet.jpg
+## Rules
 
+- **Setup:** the Court deck has 15 cards, three each of Duke, Assassin, Captain, Ambassador and Contessa. Each
+  player gets 2 face-down influence cards and 2 coins; in a two-player game the starting player (Player 0) gets
+  only 1 coin. The Treasury holds the rest of the 50 coins. Player 0 moves first and turns go clockwise.
+- **Actions** (one per turn, you may not pass):
 
+  | Action | Effect | Cost | Claims | Can be blocked by |
+  | --- | --- | --- | --- | --- |
+  | Income | take 1 coin | – | – | – |
+  | Foreign aid | take 2 coins | – | – | Duke (any player) |
+  | Coup | target loses an influence | 7 | – | – |
+  | Tax | take 3 coins | – | Duke | – |
+  | Assassinate | target loses an influence | 3 | Assassin | Contessa (target) |
+  | Steal | take up to 2 coins from the target | – | Captain | Captain or Ambassador (target) |
+  | Exchange | draw 2 Court cards, keep as many cards as your influence, return the rest | – | Ambassador | – |
 
-## Known Issues:
-  - [ ] There is a weird bug in offline play where a single LLM will all of a sudden play an entire game and then ends before the board advances even once? The reply from the LLM seems to have a word barf of an entire game being played. I can't reliably recreate it or debug, so I am hoping someone else reading this can.
-  - [ ] See `QueryForReveal` TODO below.
+- **Forced coup:** a player who starts their turn with 10 or more coins must coup.
+- **Claims and blocks:** you may claim any character, whether or not you hold it. After a claimed action, the
+  other players are asked one at a time (the target first) to `bullshit`, block where allowed, or `pass`. After
+  a block, the acting player is asked first whether to challenge it, then the others. A block nobody challenges
+  cancels the action; a blocked action's cost stays spent.
+- **Challenges:** a challenged player shows the claimed card if they hold it, shuffles it into the Court deck and
+  draws a replacement, and the challenger loses an influence. If they don't hold it, they lose an influence and
+  their action fails entirely: **coins paid for it are returned** (the 3 coins of a bluffed assassination). A
+  target who loses a challenge against a targeted action can still block it afterwards.
+- **Losing influence:** the player losing an influence always chooses which hidden card to flip face up. A player
+  with one hidden card loses it automatically. One action can cost several influences (e.g. a target who bluffs a
+  Contessa block against a real assassin loses both cards).
+- **Exile:** a player with no hidden cards is out and returns their coins to the Treasury. If they are the target
+  of a steal that still succeeds (e.g. a caught bluffing blocker), the steal is paid from their coins first and
+  only the remainder goes back.
+- **Game end:** the last player with influence wins.
 
+## Actions
 
-## Environment Structure:
+Reply with exactly one bare command (case-insensitive). Replace `X` with a player number.
 
-The `CoupEnv` class is primarily understandable by first breaking down the game into four game phases:
+| When | Commands |
+| --- | --- |
+| Your turn | `income`, `foreign aid`, `tax`, `exchange`, `coup X`, `assassinate X`, `steal X` |
+| Asked about an action | `pass`, `bullshit` (not for foreign aid), `block foreign aid`, and if you are the target `block assassinate`, `block steal captain`, `block steal ambassador` |
+| Asked about a block | `pass`, `bullshit` |
+| After your exchange | `keep <card> <card>` (or `keep <card>` with one influence left) |
+| Losing an influence | `reveal <card>` |
 
- - `Play`: a player plays an initial action (ex: Income, Foreign Aid, etc...)
+Examples: `steal 2`, `block steal ambassador`, `bullshit`, `keep duke contessa`, `reveal captain`.
 
- - `QueryForBlockOrChallenge`: if an action is blockable or challengeable, we ask players (in order) if they wish to block or challenge. For blockable actions like foreign aid, all players get asked. For targeted actions (steal/assassinate), the target gets asked first, then other players can challenge.
+## Observations
 
- - `QueryToChallengeTheBlocker`: if someone claims to block an action, query all players if they wish to challenge that block claim.
+Each player first receives the rules, the command list and a summary of the table. Before every response, the
+acting player sees the summary again plus what is being asked of them (for example "Player #0 is attempting to
+assassinate (they have paid 3 coins) on you (claiming Assassin)").
 
- - `QueryWhichToKeep`: this is a special case, if an exchange is happening, we can't skip immediately to the `Play` phase because the play phase happens once per player per turn, we must first go to an intermediate "QUERY FOR KEEP" phase which asks the player which card(s) they wish to keep  
+- **Public:** every player's coin count, number of hidden cards and revealed (lost) cards, who is out, every
+  action, block, challenge and its result, and other players' `pass`/`bullshit`/action commands.
+- **Private:** your own hidden cards, the replacement card you draw after proving a claim, and the cards you
+  draw and keep during an exchange. Your `keep` and `reveal` commands and invalid-move warnings are shown only
+  to you.
+- **Hidden:** other players' hidden cards (until revealed) and the order of the Court deck.
 
-#### `TODO` for Influence Loss: In Coup, when you lose an influence or someone successfully calls bullshit, you must choose a card to reveal. **Currently, this is not implemented** - the system automatically reveals the last card in the player's hand. This simplification doesn't significantly affect gameplay. If we wanted full fidelity, we'd add a `QueryForReveal` phase to let players choose which card to flip over.
+## Rewards
 
+| Outcome | Reward |
+| --- | --- |
+| Last player with influence | Winner `+1`, every other player `-1` |
+| Second consecutive invalid move | Offender is out and ends with `-1` |
 
-The logic for each phase is executed by the branch in `step()` function, which goes to one of these update methods:
-- `_update_action_metadata_for_play_phase()`: Handles initial actions like Income, Tax, Coup, etc.
-- `_update_action_metadata_for_query_for_block_or_challenge_phase()`: Processes block attempts and bullshit calls
-- `_update_action_metadata_for_query_to_challenge_the_blocker_phase()`: Handles challenges to block claims
-- `_update_action_metadata_for_query_which_to_keep_phase()`: Manages card selection after Exchange
+There is no turn limit and no draw. A first invalid move only earns a private warning and a retry. On the second
+in a row, the offender reveals all their cards and is out: their coins return to the Treasury and
+any action they were the source or target of is cancelled. If that leaves one player, the game ends and that
+player wins.
 
+## Notes
 
-## Actions:
-
-In the cheatsheet above you'll notice there are actions and counteractions. Actions are things like Income, Tax, Coup, Assassinate. Counteractions are essentially blocks to actions.
-
-In the code we don't disambiguate between them, they're all the same, just different cases in the `CoupActionType` enum:
-- **Core Actions**: Income, ForeignAid, Tax, Steal, Assassinate, Exchange, Coup
-- **Block Actions**: BlockForeignAid, BlockStealAmbassador, BlockStealCaptain, BlockAssassinate  
-- **Meta Actions**: BULLSHIT (challenge a claim), PASS (decline to block/challenge), Keep (select cards after Exchange)
-
-### Note on Special Ambassador Logic:
-
-Playing an Ambassador needs two LLM calls, or two `CoupActionType`'s. So the way we do it is as follows:
-
- - Turn 1: Player is in `Play` phase and does an `Exchange` action. We switch to `QueryForBlockOrChallenge` phase, allowing players to challenge.
- - Turn 2: If no one challenges, the player draws 2 cards and we switch to `QueryWhichToKeep` phase. The player must use the `Keep` action to specify which cards to keep.
- - After keeping cards, we return the non-kept cards to the pile, shuffle, and switch back to `Play` phase with the next player. 
-
-
-
-
-## `env.py` file:
-
-
-The file is split into five logical blocks of functions:
-
-
-### Block 1: Core Environment Methods
-
- - `__init__()`: Standard constructor
- - `reset()`: Initializes game state, shuffles deck, deals cards to players
- - `get_board_str()`: Returns the rendered board state
- - `step()`: Main game loop - routes to appropriate phase handler based on current game phase
-
-### Block 2: Action Metadata Update Methods
-
-These methods validate and update game state based on player actions in each phase:
-
- - `_update_action_metadata_for_play_phase()`: Handles initial player actions (Income, Tax, Coup, etc.)
- - `_update_action_metadata_for_query_for_block_or_challenge_phase()`: Processes PASS, BULLSHIT, or block actions
- - `_update_action_metadata_for_query_to_challenge_the_blocker_phase()`: Handles challenges to block claims
- - `_update_action_metadata_for_query_which_to_keep_phase()`: Manages card selection after Exchange
-
-### Block 3: Action Execution Methods
-
-These are the "sink" functions that execute actions after all blocking/challenging is resolved:
-
- - `_execute_current_action()`: Executes the main action (Income, Tax, Steal, etc.)
- - `_execute_showdown_on_bullshit()`: Resolves challenges to main actions
- - `_execute_showdown_on_blocker_bullshit()`: Resolves challenges to block claims
- - `_execute_exchange_action()`: Completes the Exchange action after cards are chosen
- - `_broadcast_observations()`: Sends messages to multiple players
-
-### Block 4: Prompt Generation and Game Flow
-
- - `_gen_initial_prompt()`: Creates the initial game prompt for each player
- - `_make_last_action_msg()`: Generates message about the last action taken
- - `_make_player_observations_prompt()`: Shows player their cards, coins, and game state
- - `_send_call_to_action_prompt()`: Prompts current player for their action
- - `_action_to_card()`: Maps actions to their required cards
- - `_make_player_lose_a_card()`: Removes a card from player's hand when they lose influence
- - `_advance_turn()`: Manages turn progression between players and phases
- - `_get_winner()`: Checks if only one player remains
-
-### Block 5: Parsing and Rendering
-
- - `_parse_action()`: Converts player text input into CoupActionType enum values
- - `_render_board()`: Creates a colorful ASCII representation of the game state
-
-
-# Limitations:
-
- - Players don't choose which card to reveal when they lose an influence - we automatically reveal the last card in their hand (see: `_make_player_lose_a_card()`)
- - In real life, people can challenge at any time, including BEFORE a potentially affected player gets the chance to counteract. We enforce a strict order: affected players get first chance to block, then all players can challenge
-
-
-# Tasklist: 
-
-  - [X] Implement Exchange action logic
-  - [ ] Maybe remove the coins_remaining state variable?
-
-# Things Tested:
-  - [X] exchange and keep end-to-end
-  - [ ] forces a coup when coins >=10
-  - [X] you still lose your coins if your assassination is blocked
-  - [X] fake block an assassination with 2 cards remaining (double hit, insta-eliminate)
-  - [X] fake block an assassination with 1 cards remaining (double hit, but shouldn't crash)
-  - [X] incorrect block (`[block foreign aid]` when last played was a `tax`)
-  - [X] two players end-to-end
-  - [X] three players end-to-end
-  - [X] four players end-to-end
-  - [X] five players end-to-end
-  - [X] six players end-to-end
-  - [X] invalid steal target player (`[steal 7]`)
-  - [X] target player on a steal doesn't have enough coins
-  - [X] invalid coup
-  - [X] recovery from invalid move
+- Rulebook: [Coup (Indie Boards & Cards)](https://www.qugs.org/rules/r131357.pdf); handy
+  [cheat sheet](https://hexagamers.com/wp-content/uploads/2016/04/Coup-Cheat-Sheet.jpg) and
+  [video](https://www.youtube.com/watch?v=xUNWl5fWfEY).
+- Unlike the tabletop game, responses are collected in a fixed order instead of whenever someone speaks up.
+  For targeted actions the target goes first.
+- The optional two-player draft variant from the rulebook is not implemented.

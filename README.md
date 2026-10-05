@@ -1,187 +1,218 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: light)" srcset="/docs/ta_black.svg">
-  <img alt="TextArena logo" src="/docs/ta_white.svg" width="25%" height="25%">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/TextArena/TextArena/main/docs/ta_black.svg">
+  <img alt="TextArena logo" src="https://raw.githubusercontent.com/TextArena/TextArena/main/docs/ta_white.svg" width="25%" height="25%">
 </picture>
 
-A suite of 100+ single-, two-, and multi-player text-based games for benchmarking and training LLMs.
+108 single-, two-, and multi-player text games for evaluating and training LLM agents.
 
 <h3>
 
-[Play](https://textarena.ai) | [Leaderboard](https://textarena.ai/leaderboard) | [Games](https://github.com/LeonGuertler/TextArena/blob/main/textarena/envs/README.md) | [Examples](https://github.com/LeonGuertler/TextArena/tree/main/examples)
+[Games](https://github.com/TextArena/TextArena/blob/main/textarena/envs/README.md) | [Examples](https://github.com/TextArena/TextArena/tree/main/examples) | [Paper](https://arxiv.org/abs/2504.11442) | [Discord](https://discord.gg/dnScm47kNq)
 
 </h3>
 
 [![PyPI version](https://img.shields.io/pypi/v/textarena.svg)](https://pypi.org/project/textarena)
 [![PyPI Downloads](https://static.pepy.tech/badge/textarena)](https://pepy.tech/projects/textarena)
-[![GitHub Repo stars](https://img.shields.io/github/stars/LeonGuertler/TextArena)](https://github.com/LeonGuertler/TextArena/stargazers)
+[![GitHub Repo stars](https://img.shields.io/github/stars/TextArena/TextArena)](https://github.com/TextArena/TextArena/stargazers)
 [![Discord](https://img.shields.io/discord/1257951838322561075?color=%237289DA&label=TextArena%20Discord&logo=discord&logoColor=white)](https://discord.gg/dnScm47kNq)
 [![arXiv](https://img.shields.io/badge/arXiv-2504.11442-b31b1b.svg)](https://arxiv.org/abs/2504.11442)
 
 </div>
 
-## Introduction
+TextArena puts board and card games, puzzles, negotiation, social deduction, and other multi-agent tasks behind
+one Gym-style interface. Every game enforces its own rules, shows each player only what they may see, and returns
+rewards, so models can be evaluated against each other or trained through self-play. A seed replays a game
+exactly, and observations can be translated into 192 languages. Upgrading from 0.x? See the
+[changelog](https://github.com/TextArena/TextArena/blob/main/CHANGELOG.md) for what changed in 1.0 and how to migrate.
 
-**TextArena** is an open-source framework for evaluating and training language-model agents through competitive and cooperative text-based games.
-
-It provides **100+ single-, two-, and multi-player environments** through an interface styled after [OpenAI Gym](https://github.com/openai/gym), ranging from classic board and card games to negotiation, social deduction, and multi-agent reasoning tasks. TextArena makes it easy to plug in language-model agents, run self-play or model-vs-model evaluations, and build training pipelines around interactive environments. It also supports 192 languages, enabling the same environments to be presented to agents through different language interfaces.
-
-## Updates
-
-- **14/08/2026** TextArena goes multilingual: **192 languages** are now supported.
-- **28/05/2026** We released the findings of [**MindGames**](https://arxiv.org/pdf/2605.29512).
-- **31/03/2026** We released the [**MindGames NeurIPS 2025 game trajectories**](https://huggingface.co/datasets/mindgameschallenge/MGC2025).
-- **26/11/2025** We added negotiation games.
-- **31/07/2025** We added **SettlersOfCatan** to TextArena.
-- **14/07/2025** We announced [**MindGames**](https://www.mindgamesarena.com/), a NeurIPS 2025 competition for training LLMs on TextArena games that require theory of mind.
-- **01/07/2025** We released **v0.6.9** with **100 games**, simplified states, new observation wrappers for training, and default environment wrappers.
-- **01/07/2025** We released [**SPIRAL: Self-Play on Zero-Sum Games Incentivizes Reasoning via Multi-Agent Multi-Turn Reinforcement Learning**](https://arxiv.org/pdf/2506.24119), introducing RL through self-play on TextArena games as a potential new training paradigm.
-- **22/06/2025** We released [**UnstableBaselines**](https://github.com/LeonGuertler/UnstableBaselines), a lightweight asynchronous online RL library for training LLMs on TextArena games.
-- **16/04/2025** We released the [**TextArena paper**](https://arxiv.org/pdf/2504.11442).
-- **14/02/2025** We released the new stable version on both PyPI and the website.
-- **31/01/2025** We released the initial demo, which was highlighted by Andrej Karpathy — and promptly crashed all our servers.
-
-## Getting Started
-
-### Installation
-
-Install TextArena directly from PyPI:
+## Installation
 
 ```bash
-pip install textarena
+pip install "textarena[agents]"
 ```
 
-### Offline Play
+TextArena needs Python 3.10 or newer. The games themselves have no dependencies, so `pip install textarena` installs
+nothing else; the extras add the optional parts: `agents` (model agents, via `openai`), `render` (the terminal
+renderer, via `rich`), `translations` (the `textarena-locales` catalogs), and `all`.
 
-Agents only need to implement a `__call__` function that accepts a string observation and returns a string action. We provide several basic agents [here](https://github.com/LeonGuertler/TextArena/blob/main/textarena/agents/basic_agents.py).
+## Quick start
 
-The example below lets **openai/gpt-4o-mini** play against **anthropic/claude-3.5-haiku** in a game of _TicTacToe_.
-
-We use the `OpenRouterAgent`, so first set your OpenRouter API key:
-
-```bash
-export OPENROUTER_API_KEY="YOUR_OPENROUTER_API_KEY"
-```
-
-Then initialize the agents and environment:
+Two models play TicTacToe through [OpenRouter](https://openrouter.ai) (set `OPENROUTER_API_KEY` first):
 
 ```python
 import textarena as ta
 
-# Initialize agents
 agents = {
-    0: ta.agents.OpenRouterAgent(model_name="openai/gpt-4o-mini"),
-    1: ta.agents.OpenRouterAgent(model_name="anthropic/claude-3.5-haiku"),
+    0: ta.agents.OpenRouterAgent(model_name="openai/gpt-5-mini"),
+    1: ta.agents.OpenRouterAgent(model_name="qwen/qwen3.8-27b"),
 }
 
-# Initialize the environment
-env = ta.make(env_id="TicTacToe-v0")
-
-# Optional visualization wrapper
-env = ta.wrappers.SimpleRenderWrapper(env=env)
-
-env.reset(num_players=len(agents))
+env = ta.make("TicTacToe-v1")
+env.reset(num_players=len(agents), seed=42)
 
 done = False
 while not done:
     player_id, observation = env.get_observation()
     action = agents[player_id](observation)
-    done, step_info = env.step(action=action)
+    done = env.step(action)
 
 rewards, game_info = env.close()
 ```
 
-## Multilingual Support
+`get_observation()` returns the player who acts next and the text they see, `step()` returns whether the game is
+over, and `close()` returns each player's reward and game info. An agent is any callable that turns an observation string into an action string. TextArena ships
+`OpenAIAgent` for any OpenAI-compatible API (OpenAI, a vLLM or other local server via `base_url`), its OpenRouter
+preset `OpenRouterAgent`, `TinkerAgent` for models trained with Tinker, and `HumanAgent` for playing in the terminal
+(try `python demo.py`).
 
-TextArena supports UI localization across **192 languages** for more than 60% of its games. See [`textarena/envs/README.md`](textarena/envs/README.md) for a complete list of games with multilingual support, and [`textarena/utils/locales`](textarena/utils/locales) for the localization files covering all 192 supported languages. Languages can be assigned independently to each player using `lang_mapping`, allowing the same environment to be presented through different language interfaces.
+## Actions
 
-Examples of multilingual game interfaces:
+Games take bare actions such as `4`, `roll`, or `e2e4`. Models are asked to reason freely and put their move inside
+`<action>...</action>` tags; the built-in agents pass only the tag contents to `env.step`, and
+`ta.extract_action(response)` does the same for your own agents. An invalid action is never applied: the player is
+told why and can try again once, and a second invalid action in a row ends their game (or their turn, depending on
+the game).
 
+## Observations
+
+Every configuration is registered twice:
+
+| ID | Each observation contains | Use it when |
+| --- | --- | --- |
+| `TicTacToe-v1` | only the messages since the player's last turn | the agent keeps the conversation history itself |
+| `TicTacToe-v1-mdp` | everything needed to act: the prompt, the game's messages, and the latest board | each step should stand on its own, as in RL training |
+
+## Games
+
+There are 30 single-player, 52 two-player, and 26 multi-player games. The [catalog](https://github.com/TextArena/TextArena/blob/main/textarena/envs/README.md)
+lists them all, and each game's README covers its rules, actions, rewards, registered configurations, and
+parameters. Settings that are not registered are a keyword away: `ta.make("Chess-v1", max_turns=250)`.
+
+Rewards use one scale per kind of game: `+1` win, `-1` loss and `0` draw in competitive games; a score from `0` to
+`1` in single-player games; and each player's own score from `0` to `1` in cooperative and mixed-motive games such
+as Hanabi and PublicGoodsGame.
+
+Environment ids end in a version: when a game's rules change, the version goes up and the old id is retired, so
+scores reported for one version are only comparable with scores for the same version. All ids are currently `-v1`.
+
+## Replaying games
+
+Every game can be rebuilt from its seed and actions. `env.record()` returns a JSON-serializable record of the game
+(its parameters, player count, seed, actions, and the answers of any LLM judge), and `ta.replay(record)` rebuilds it,
+optionally stopping after a given number of actions:
+
+```python
+record = env.record()
+replayed = ta.replay(record, steps=10)  # the game after its first ten actions
+```
+
+## Evaluating models
+
+`ta.evaluate` plays agents against each other and summarizes the results. Every agent plays every seat equally often
+on the same seeds, so first-mover advantage and lucky deals cancel out, and games run in parallel threads:
+
+```python
+evaluation = ta.evaluate(
+    {"gpt": ta.agents.OpenRouterAgent("openai/gpt-5-mini"), "qwen": ta.agents.OpenRouterAgent("qwen/qwen3.8-27b")},
+    ["TicTacToe-v1", "Chess-v1", "Wordle-v1"],
+    episodes=20,
+    workers=8,
+)
+evaluation.summary()  # per agent and game: games, mean reward, win rate, invalid-move rate, mean turns, errors
+```
+
+The invalid-move rate is the share of seats that made two invalid moves in a row, which usually ends that player's
+game; a single invalid move that the player then corrects does not count. Each game in `evaluation.games` keeps its
+seed, seating, rewards, and `record`, so any game can be replayed, and
+`evaluation.to_rows()` gives one row per seat for analysis with pandas. A game that fails, for example because a
+model is unreachable, is recorded with its error instead of stopping the evaluation.
+
+## Training
+
+[`examples/tinker`](https://github.com/TextArena/TextArena/tree/main/examples/tinker) is a compact self-play RL loop on Tinker. Projects built on TextArena include:
+
+- [SPIRAL](https://arxiv.org/pdf/2506.24119): reinforcement learning through self-play on zero-sum games improves
+  reasoning.
+- [UnstableBaselines](https://github.com/LeonGuertler/UnstableBaselines): a lightweight asynchronous online RL
+  library for TextArena games.
+- [MindGames](https://www.mindgamesarena.com/): a NeurIPS 2025 competition on games that require theory of mind,
+  with released [trajectories](https://huggingface.co/datasets/mindgameschallenge/MGC2025) and
+  [findings](https://arxiv.org/pdf/2605.29512).
+
+## Watching and recording games
+
+`ta.wrappers.SimpleRenderWrapper(env)` draws the board and the conversation in the terminal. With
+`record_dir="frames", record_only=True` it saves every frame as a fixed-size SVG instead, which is how the GIFs
+below were made.
+
+## Multilingual games
+
+Games are written in English. `TranslationWrapper` translates each player's observations into that player's
+language, even when players in the same match use different languages. The translations ship separately
+(`pip install "textarena[translations]"`):
+
+```python
+env = ta.make("TicTacToe-v1")
+env = ta.wrappers.TranslationWrapper(env, lang={0: "en", 1: "de"})
+```
+
+Actions always stay in English, since that is what the games parse. Translations are keyed by the exact English
+line, so a line whose English wording changes falls back to English instead of showing an outdated translation.
+`python scripts/locales.py coverage --lang de` reports how much of each game is translated.
 
 <div align="center">
 
-<img src="docs/othello.gif" alt="Multilingual Othello in TextArena" width="48%">
-<img src="docs/connectfour.gif" alt="Multilingual Connect Four in TextArena" width="48%">
-<img src="docs/simpletak.gif" alt="Multilingual SimpleTak in TextArena" width="48%">
-<img src="docs/nim.gif" alt="Multilingual Nim in TextArena" width="48%">
+<img src="https://raw.githubusercontent.com/TextArena/TextArena/main/docs/othello.gif" alt="Multilingual Othello in TextArena" width="48%">
+<img src="https://raw.githubusercontent.com/TextArena/TextArena/main/docs/connectfour.gif" alt="Multilingual Connect Four in TextArena" width="48%">
+<img src="https://raw.githubusercontent.com/TextArena/TextArena/main/docs/simpletak.gif" alt="Multilingual SimpleTak in TextArena" width="48%">
+<img src="https://raw.githubusercontent.com/TextArena/TextArena/main/docs/nim.gif" alt="Multilingual Nim in TextArena" width="48%">
 
 </div>
 
-### Language Coverage
-
-* **8 languages** are manually reviewed by native speakers.
-* **42 additional high- and mid-resource languages** are translated and automatically verified.
-* **142 low-resource languages** are produced using open machine translation and evaluated using a multi-model fidelity pipeline.
-
-Low-resource localizations are machine-verified rather than native-reviewed and are labeled by confidence tier.
-
-### Multilingual Usage
-
-Languages can be assigned independently to each player using `lang_mapping` in `env.reset()`:
-
-```python
-import textarena as ta
-
-agents = {
-    0: ta.agents.OpenRouterAgent(model_name="openai/gpt-4o-mini"),
-    1: ta.agents.OpenRouterAgent(model_name="anthropic/claude-3.5-haiku"),
-}
-
-env = ta.make(env_id="TicTacToe-v0")
-
-env.reset(
-    num_players=len(agents),
-    lang_mapping={0: "en", 1: "de"},
-)
-
-done = False
-while not done:
-    player_id, observation = env.get_observation()
-    action = agents[player_id](observation)
-    done, step_info = env.step(action=action)
-
-rewards, game_info = env.close()
-```
+Of the 192 languages, 8 are reviewed by native speakers, 42 high- and mid-resource languages are translated and
+automatically verified, and 142 low-resource languages are machine-translated and machine-verified.
+`TranslationWrapper` emits a `UserWarning` when you select one of the low-resource languages.
 
 <details>
-<summary><b>Translation Quality and Verification</b></summary>
+<summary><b>How the low-resource translations were made and verified</b></summary>
 
-The 142 low-resource UI localizations are produced using **NLLB-200** and verified for meaning fidelity by two independent model families: **Llama-3.1-405B** and **Qwen2.5-72B**.
+The 142 low-resource localizations are produced with **NLLB-200** and checked for meaning fidelity by two
+independent model families, **Llama-3.1-405B** and **Qwen2.5-72B**. Strings both judges accept are kept;
+disagreements are settled by an additional Llama-3.1-405B judgment. Confirmed errors are repaired under structural
+checks that preserve placeholders, command tokens, and template slots.
 
-Each translated string is checked by both model families. Agreements are automatically accepted, while disagreements are adjudicated with an additional Llama-3.1-405B judgment. Confirmed translation errors are repaired under structural checks that preserve placeholders, command tokens, and template slots.
+Languages fall into two confidence tiers:
 
-These localizations are **machine-verified, not native-reviewed**.
+* **Certified-flagged:** meaning fidelity of at least 85% before repair.
+* **Experimental:** meaning fidelity below 85% before repair; structurally valid and repaired, but with
+  substantially more machine correction.
 
-Languages are grouped into two confidence tiers:
-
-* **Certified-flagged:** pre-repair meaning fidelity of at least 85%.
-* **Experimental:** pre-repair meaning fidelity below 85%; structurally valid and repaired, but requiring substantially more machine correction.
-
-All shipped low-resource localizations reach at least **94% post-repair measured fidelity** under the automated evaluation pipeline.
-
-Detailed per-language confidence scores, target-language coverage, and residual bug counts are available in [`textarena/utils/locales/_trackb_confidence.json`](textarena/utils/locales/_trackb_confidence.json).
-
-At runtime:
-
-```python
-from textarena.utils.locales.language_confidence import warn_if_flagged
-
-warn_if_flagged(lang)
-```
-
-This emits a `UserWarning` for non-certified locales.
-
-For those interested in how these localizations were generated and validated at scale, the multilingual generation pipeline, including the tooling used to translate, verify, repair, and evaluate localizations, is available on the [`multilingual`](https://github.com/TextArena/TextArena/tree/multilingual) branch.
-
-For research using these localizations, we recommend reporting the confidence tier of each language and distinguishing machine-verified translations from native-reviewed ones.
+All shipped low-resource localizations reach at least 94% measured fidelity after repair. Per-language scores are
+in [`locales/textarena_locales/confidence.json`](https://github.com/TextArena/TextArena/blob/main/locales/textarena_locales/confidence.json), and the pipeline that
+translated, verified, and repaired them is on the
+[`multilingual`](https://github.com/TextArena/TextArena/tree/multilingual) branch. Research using these
+localizations should report each language's confidence tier and distinguish machine-verified from native-reviewed
+translations.
 
 </details>
 
+## Contributing
 
-## Citation 
+Contributions of all kinds are welcome: new games, fixes, documentation, and translations. To work on TextArena:
 
-If you use **TextArena** in your research, please cite:
+```bash
+pip install -e ./locales -e ".[test]"
+pytest
+```
+
+[Adding a game](https://github.com/TextArena/TextArena/blob/main/textarena/envs/README.md#adding-a-game) describes the folder layout and the engine hooks. After
+changing a game, `python scripts/generate_env_docs.py` updates the generated parts of the docs and
+`python scripts/locales.py extract` updates the translation catalogs in [`locales/`](https://github.com/TextArena/TextArena/tree/main/locales), the source of the
+`textarena-locales` package. Questions and ideas are welcome on [Discord](https://discord.gg/dnScm47kNq).
+
+## Citation
 
 ```bibtex
 @misc{guertler2025textarena,
@@ -194,18 +225,3 @@ If you use **TextArena** in your research, please cite:
     url={https://arxiv.org/abs/2504.11442},
 }
 ```
-
-## Contributing
-
-All forms of contribution are very welcome. Whether you're adding new games, improving existing functionality, fixing bugs, or helping with documentation and translations, we'd be glad to have your help. 
-
-Check out the open issues or join us on [Discord](https://discord.gg/dnScm47kNq) to get started.
-
-Some examples:
-
-- Make RushHour board generation algorithmic.
-- Extend FifteenPuzzle to arbitrary sizes.
-- Review multilingual translations.
-- Improve rendering, tests, or tooling.
-
-

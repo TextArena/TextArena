@@ -1,97 +1,95 @@
-import re, random
-from typing import List, Optional, Tuple, Dict, Any
+import math
+import re
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import textarena as ta
 
 
-class Game2048Env(ta.Env):
-    DEFAULT_BOARD_SIZE = 4
-    CELL_W = 6  
-    ACTIONS = {"[UP]": 0, "[DOWN]": 1, "[LEFT]": 2, "[RIGHT]": 3, "[W]": 0, "[S]": 1, "[A]": 2, "[D]": 3}
-    _BRACKET_GROUP_RE = re.compile(r"\[[^\[\]]*\]")
-    _VALID_DIRECTIONS = {"UP", "DOWN", "LEFT", "RIGHT", "W", "A", "S", "D"}
-                                                                                            
-    def __init__(self, target_tile: int = 2048, board_size: int = None):
-        super().__init__()
-        self.target_tile = target_tile
-        self.board_size = board_size if board_size is not None else self.DEFAULT_BOARD_SIZE
-        
-        # Validate board size
-        if self.board_size < 2:
-            raise ValueError("Board size must be at least 2")
-        if self.board_size > 10:
-            raise ValueError("Board size cannot exceed 10 for practical reasons")
+class Game2048Env(ta.GameEnv):
+    min_players = 1
+    max_players = 1
+    mdp_includes_actions = False
+    MAX_TARGET_TILE = 65536
+    CELL_W = 6
+    ACTIONS = {"UP": 0, "DOWN": 1, "LEFT": 2, "RIGHT": 3}
+    _ACTION_RE = re.compile(r"(?P<direction>[A-Za-z]+)")
 
-    def reset(self, num_players: int, seed: Optional[int] = None):
-        self.state = ta.SinglePlayerState(num_players=num_players, seed=seed)
+    target_tile = ta.Param(
+        2048, "The tile that wins.", min=4, max=MAX_TARGET_TILE, check=lambda tile: tile & (tile - 1) == 0,
+        rule=f"a power of two from 4 to {MAX_TARGET_TILE}",
+    )
+    board_size = ta.Param(4, "The board's side length.", min=2, max=10)
+
+    def setup(self) -> Dict[str, Any]:
         board = [[0] * self.board_size for _ in range(self.board_size)]
         self._spawn_tile(board)
         self._spawn_tile(board)
-        self.state.reset(game_state={"board": board, "score": 0}, player_prompt_function=self._prompt)
-        self._observe_state()
+        return {"board": board, "score": 0, "start_max_tile": max(max(row) for row in board)}
 
-    def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return self.m("player_prompt", "intro", board_size=self.board_size, target_tile=self.target_tile)
+    def prompt(self, player_id: int) -> str:
+        spawn = "a 2 (or, one time in ten, a 4)" if self.target_tile > 4 else "a 2"
+        return (
+            f"You are playing 2048 on a {self.board_size}x{self.board_size} board. Your goal is to reach a {self.target_tile} tile by sliding identical numbers together!\n"
+            "Valid moves: 'up', 'down', 'left', 'right'. Each move slides every tile as far as it can in that direction; "
+            "two equal tiles that collide merge into one tile with double the value, and a tile merges at most once per move.\n"
+            f"After every move, {spawn} appears in a random empty cell. Your score grows by the value of every merged tile.\n"
+            "You lose when the board is full and no merge is possible.\n"
+            "A move that does not change the board is invalid; the moves that do are listed under the board. "
+            "An invalid move changes nothing and you may try again, but two invalid moves in a row end the game.\n"
+        )
 
-    def _observe_state(self):
-        board = self.state.game_state["board"]
+    def render(self, player_id: int) -> str:
+        board = self.game_state["board"]
         make_cell = lambda v: f"{v:^{self.CELL_W}}" if v else "  .   "
         rows = [" ".join(make_cell(v) for v in row) for row in board]
         horiz = "+" + "-" * (len(rows[0])) + "+"
         framed = [horiz] + [f"|{r}|" for r in rows] + [horiz]
-        self.state.add_observation(message=self.m("board", "current_board", score=self.state.game_state['score'], board="\n".join(framed)), observation_type=ta.ObservationType.GAME_BOARD,)
+        available = ", ".join(self._available_moves()) or "none"
+        return f"Score: {self.game_state['score']}\n" + "\n".join(framed) + f"\nAvailable moves: {available}"
 
-    def step(self, action: str) -> Tuple[bool, ta.Info]:
-        self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
-        dir_idx = self._parse_action(action)
+    def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        dir_idx = self._parse_action(move)
         if dir_idx is None:
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "invalid_action"),)
-            return self.state.step()
+            return self.invalid("Invalid action. Use 'up'/'down'/'left'/'right'.")
 
         moved, gained = self._apply_move(dir_idx)
-        if not moved: # Move had no effect – treat as invalid but continue the episode.
-            self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid_move", "no_change"))
-            return self.state.step()
+        if not moved:  # Move had no effect – treat as invalid but continue the episode.
+            return self.invalid("Board did not change - choose a different direction.")
 
-        self.state.game_state["score"] += gained
-        self._spawn_tile(self.state.game_state["board"])
+        self.game_state["score"] += gained
 
-        status = self._check_status()
-        if status == "win":     self.state.set_outcome(reward=1.0, reason=self.m("outcome", "win", target_tile=self.target_tile, score=self.state.game_state['score']))
-        elif status == "lose":  self.state.set_outcome(reward=self._get_percentage_completion(), reason=self.m("outcome", "lose", max_tile=self._max_tile(), score=self.state.game_state['score']))
-        else:                   self._observe_state()
+        if self._check_status() == "win":
+            return self.outcome({0: 1.0}, reason=f"Congratulations, you reached {self.target_tile}! Final score {self.game_state['score']}.")
 
-        return self.state.step()
-    
-    @staticmethod
-    def _min_score_to_reach_tile(tile: int) -> int:
-        assert (tile & (tile - 1)) == 0, "tile must be a power of 2"
-        total = 0
-        while tile > 2: total += tile; tile //= 2
-        return total
-
-    def _get_percentage_completion(self) -> float:
-        if self._max_tile() >= self.target_tile: return 1.0
-        min_score_needed = self._min_score_to_reach_tile(self.target_tile) * 1.5
-        score_part = self.state.game_state['score'] / min_score_needed
-        max_part = self._max_tile() / self.target_tile
-        reward = 0.5 * score_part + 0.5 * max_part
-        return float(min(1.0, reward))
-    
-    def _parse_action(self, action: str) -> Optional[int]:
-        groups = list(self._BRACKET_GROUP_RE.finditer(action))
-        if not groups: return None
-        for g in reversed(groups):
-            inner = g.group(0)[1:-1]  
-            tokens = re.findall(r"\b\w+\b", inner)
-            for token in reversed(tokens): 
-                upper_token = token.upper()
-                if upper_token in self._VALID_DIRECTIONS:
-                    return self.ACTIONS.get(f"[{upper_token}]")
+        self._spawn_tile(self.game_state["board"])
+        if self._check_status() == "lose":
+            return self.outcome({0: self._get_percentage_completion()}, reason=f"No moves left. Max tile {self._max_tile()} - final score {self.game_state['score']}.")
         return None
 
-    def _apply_move(self, dir_idx: int) -> Tuple[bool, int]:
-        board = self.state.game_state["board"]
+    def on_invalid_limit(self, player_id: int, reason: str) -> ta.Outcome:
+        return self.outcome({0: self._get_percentage_completion()}, reason=f"Invalid Move: {reason}")
+
+    def _get_percentage_completion(self) -> float:
+        """Doublings of the largest tile since the start, as a share of the doublings the target needs (below 1.0 unless won)."""
+        start = math.log2(self.game_state["start_max_tile"])  # always below the target: 4s only spawn when the target exceeds 4
+        return max(0.0, (math.log2(self._max_tile()) - start) / (math.log2(self.target_tile) - start))
+
+    def _parse_action(self, action: str) -> Optional[int]:
+        m = self._ACTION_RE.fullmatch(action.strip())
+        if not m: return None
+        return self.ACTIONS.get(m.group("direction").upper())
+
+    def _available_moves(self) -> List[str]:
+        board = self.game_state["board"]
+        return [
+            name.lower()
+            for name, dir_idx in self.ACTIONS.items()
+            if self._apply_move(dir_idx, [row[:] for row in board])[0]
+        ]
+
+    def _apply_move(self, dir_idx: int, board: Optional[List[List[int]]] = None) -> Tuple[bool, int]:
+        if board is None:
+            board = self.game_state["board"]
         moved = False
         gained = 0
 
@@ -127,6 +125,8 @@ class Game2048Env(ta.Env):
 
     def _compress_and_merge(self, line: List[int]) -> Tuple[List[int], int]:
         """Slide non- zero tiles left and merge identical neighbours."""
+        if len(line) != self.board_size:
+            raise ValueError(f"line must contain exactly {self.board_size} cells")
         tiles = [v for v in line if v != 0]
         score_gain = 0
         i = 0
@@ -145,19 +145,19 @@ class Game2048Env(ta.Env):
         """Spawn a new tile (2 with 90%, 4 with 10%) in a random empty cell."""
         empties = [(r, c) for r in range(self.board_size) for c in range(self.board_size) if board[r][c] == 0]
         if not empties: return
-        r, c = random.choice(empties)
-        board[r][c] = 4 if random.random() < 0.1 else 2
+        r, c = self.rng.choice(empties)
+        board[r][c] = 4 if self.target_tile > 4 and self.rng.random() < 0.1 else 2
 
     def _max_tile(self) -> int:
-        return max(max(row) for row in self.state.game_state["board"])
+        return max(max(row) for row in self.game_state["board"])
 
     def _check_status(self) -> str:
         # Win condition
-        if self._max_tile() >= self.target_tile:                        return "win"
+        if self._max_tile() >= self.target_tile:                    return "win"
         # Still space? Continue
-        if any(0 in row for row in self.state.game_state["board"]):     return "ongoing"
+        if any(0 in row for row in self.game_state["board"]):       return "ongoing"
         # Any possible merge?
-        board = self.state.game_state["board"]
+        board = self.game_state["board"]
         for r in range(self.board_size):
             for c in range(self.board_size):
                 v = board[r][c]

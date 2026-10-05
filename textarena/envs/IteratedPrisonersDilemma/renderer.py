@@ -1,26 +1,30 @@
 def create_board_str(game_state: dict) -> str:
-    raise NotImplementedError
-    lines = []
-    phase_str = "🗣️ Communication Phase" if not game_state.get("is_decision_phase", False) else "🎯 Decision Phase"
-    lines.append(f"╭── Iterated Prisoner's Dilemma ─────────────────────╮")
-    lines.append(f"│ Round: {game_state.get('current_round', 1):<2} | Turn: {game_state.get('current_comm_turn', 0):<2} | Phase: {phase_str:<20}│")
-    lines.append(f"╰────────────────────────────────────────────────────╯")
-    lines.append("┌─ 📊 SCORES ─────────────────────┐")
-    lines.append(f"│ Player 0: {game_state.get('scores', {}).get(0, 0):<3} pts               │")
-    lines.append(f"│ Player 1: {game_state.get('scores', {}).get(1, 0):<3} pts               │")
-    lines.append("└─────────────────────────────────┘")
-    if game_state.get('history', []):
-        lines.append("┌─ 📜 ROUND HISTORY ────────────────────────────────────┐")
-        lines.append("│ Round │ Player 0     │ Player 1     │ Outcome         │")
-        lines.append("├───────┼──────────────┼──────────────┼─────────────────┤")
-        for round_info in game_state.get('history', []):
-            d0 = round_info["decisions"].get(0, "?").capitalize()
-            d1 = round_info["decisions"].get(1, "?").capitalize()
-            if d0 == d1 == "Cooperate":                 outcome = "Both Cooperated"
-            elif d0 == d1 == "Defect":                  outcome = "Both Defected"
-            elif d0 == "Cooperate" and d1 == "Defect":  outcome = "P0 Sucker"
-            elif d0 == "Defect" and d1 == "Cooperate":  outcome = "P1 Sucker"
-            else:                                       outcome = "Unknown"
-            lines.append(f"│ {round_info.get("round", "?"):^5} │ {d0:<12} │ {d1:<12} │ {outcome:<8} │")
-        lines.append("└───────────────────────────────────────────────────────┘")
+    """Create a board without revealing a pending simultaneous decision."""
+    phase = game_state["phase"]
+    scores = game_state["scores"]
+    decisions = game_state["decisions"]
+    lines = [
+        "ITERATED PRISONER'S DILEMMA",
+        f"Round {game_state['round']}/{game_state['num_rounds']} | Phase: {phase}",
+        f"Scores: Player 0 = {scores[0]} | Player 1 = {scores[1]}",
+    ]
+    if phase == "conversation":
+        lines.append(
+            f"Communication cycle {game_state['conversation_round'] + 1}/"
+            f"{game_state['total_conversation_rounds']}"
+        )
+    else:
+        submitted = [pid for pid, decision in decisions.items() if decision is not None]
+        lines.append(
+            "Decisions submitted: "
+            + (", ".join(f"Player {pid}" for pid in submitted) if submitted else "none")
+        )
+    if game_state["history"]:
+        lines.append("History:")
+        for item in game_state["history"]:
+            lines.append(
+                f"  Round {item['round']}: P0 {item['decisions'][0]}, "
+                f"P1 {item['decisions'][1]} "
+                f"(+{item['payoffs'][0]}/+{item['payoffs'][1]})"
+            )
     return "\n".join(lines)

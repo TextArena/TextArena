@@ -1,10 +1,9 @@
 from typing import Dict, Any
 
 def create_board_str(game_state: Dict[str, Any]) -> str:
-    history = game_state.get("rendered_text", "")
     start_word = game_state.get("start_word", "?????")
     target_word = game_state.get("target_word", "?????")
-    history_words = history.split("Word Ladder History: ")[-1].split(". Target Word")[0].split(" -> ")
+    history_words = list(game_state.get("history", [start_word]))
 
     width = max(len(w) for w in history_words + [start_word, target_word])
     border = "+" + "-" * (width + 12) + "+"

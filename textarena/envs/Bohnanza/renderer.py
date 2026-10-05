@@ -1,169 +1,129 @@
-from typing import Dict, Any
+"""Text rendering for the Bohnanza environment (pure functions of the game state)."""
+from collections import Counter
+from typing import Any, Dict, Iterable, List, Optional, Tuple
+
+PHASE_TITLES = {
+    "plant": "Phase 1 of 4: plant from your hand",
+    "draw_trade": "Phase 2 of 4: turn over and trade",
+    "plant_mandatory": "Phase 3 of 4: plant traded and turned-over beans",
+    "draw": "Phase 4 of 4: draw",
+    "game_over": "Game over",
+}
 
 
-def get_board_str(game_state: Dict[str, Any], current_player_id: int) -> str:
-    """Create a string representation of the current game board."""
-    lines = []
-    
-    # Game phases and actions reference at the top
-    lines.append("=" * 60)
-    lines.append("GAME PHASES & ACTIONS:")
-    lines.append("-" * 60)
-    lines.append("1. PLANT: [Plant] <field#> (must plant 1st card, may plant 2nd), [Pass], [Harvest] <field#>")
-    lines.append("2. DRAW_TRADE: [Trade] <offer> for <want>, [Accept] Trade<#>, [Pass], [EndTrading], [Harvest] <field#> (will rotate turns)")
-    lines.append("3. PLANT_MANDATORY: [Plant] <bean> <field#>, [Harvest] <field#>, [Pass]")
-    lines.append("4. DRAW: [Draw], [Harvest] <field#>")
-    lines.append("")
-    lines.append("BEAN TYPES & PAYOUTS (coins:beans_needed):")
-    lines.append("-" * 60)
-    
-    # Import bean types from env (we'll need to pass this or make it accessible)
-    bean_types = {
-        "Blue": {"count": 20, "payouts": {1: 4, 2: 6, 3: 8, 4: 10}},
-        "Chili": {"count": 18, "payouts": {1: 3, 2: 6, 3: 8, 4: 9}},
-        "Stink": {"count": 16, "payouts": {1: 3, 2: 5, 3: 7, 4: 8}},
-        "Green": {"count": 14, "payouts": {1: 3, 2: 5, 3: 6, 4: 7}},
-        "Soy": {"count": 12, "payouts": {1: 2, 2: 4, 3: 6, 4: 7}},
-        "BlackEyed": {"count": 10, "payouts": {1: 2, 2: 4, 3: 5, 4: 6}},
-        "Red": {"count": 8, "payouts": {1: 2, 2: 3, 3: 4, 4: 5}},
-        "Garden": {"count": 6, "payouts": {2: 2, 3: 3}}
-    }
-    
-    for bean_type, config in bean_types.items():
-        payouts_str = ", ".join([f"{coins}:{beans}" for coins, beans in config["payouts"].items()])
-        lines.append(f"{bean_type:10} ({config['count']:2} cards): {payouts_str}")
-    
-    lines.append("")
-    lines.append("=" * 60)
-    lines.append("CURRENT GAME STATE")
-    lines.append("=" * 60)
-    
-    # Current phase and turn info
-    current_phase = game_state["current_phase"]
-    lines.append(f"Phase: {current_phase.upper()}")
-    lines.append(f"Deck Cycles: {game_state['deck_cycles']}/3")
-    lines.append(f"Cards in Deck: {len(game_state['deck'])}")
-    lines.append("")
-    
-    # Face-up cards (if any)
-    if game_state["face_up_cards"]:
-        lines.append(f"FACE-UP CARDS: {', '.join(game_state['face_up_cards'])}")
-        lines.append("")
-    
-    # Active trades
-    if game_state["active_trades"]:
-        lines.append("ACTIVE TRADES:")
-        for trade_id, trade in game_state["active_trades"].items():
-            status = trade["status"]
-            if trade["target"] is None:
-                # Open trade
-                lines.append(f"  Trade{trade_id} ({status}): Player{trade['proposer']} offers '{trade['offer']}' for '{trade['want']}' (open to all)")
-            else:
-                # Targeted trade
-                lines.append(f"  Trade{trade_id} ({status}): Player{trade['proposer']} offers '{trade['offer']}' for '{trade['want']}' with Player{trade['target']}")
-        lines.append("")
-    
-    # Player information
-    lines.append("PLAYERS:")
-    lines.append("-" * 60)
-    
-    for player_id, player in game_state["players"].items():
-        # Player header
-        player_marker = " >>> " if player_id == current_player_id else "     "
-        lines.append(f"{player_marker}Player {player_id} - {player['coins']} coins")
-        
-        # Hand info (only show your own hand, others are completely hidden)
-        hand = player["hand"]
-        if player_id == current_player_id:
-            if hand:
-                hand_str = f"Hand ({len(hand)}): [{', '.join(hand)}]"
-            else:
-                hand_str = "Hand: Empty"
+def harvest_coins(payouts: Dict[int, int], count: int) -> int:
+    """Coins earned for harvesting `count` beans; `payouts` maps coins -> beans needed."""
+    for coins, needed in sorted(payouts.items(), reverse=True):
+        if count >= needed:
+            return coins
+    return 0
+
+
+def format_beans(beans: Iterable[str]) -> str:
+    """'2 Blue, 1 Red' (first-appearance order), or 'nothing' for an empty list."""
+    counts = Counter(beans)
+    if not counts:
+        return "nothing"
+    return ", ".join(f"{count} {bean}" for bean, count in counts.items())
+
+
+def format_field(field: Optional[Tuple[str, int]]) -> str:
+    if field is None:
+        return "empty"
+    bean, count = field
+    return f"{bean} x{count}"
+
+
+def describe_field(field: Optional[Tuple[str, int]], bean_types: Dict[str, Dict[str, Any]]) -> str:
+    """'Blue x3 (worth 0 coins; 1 coin at 4 beans)' or 'empty'."""
+    if field is None:
+        return "empty"
+    bean, count = field
+    payouts = bean_types[bean]["payouts"]
+    worth = harvest_coins(payouts, count)
+    upgrades = sorted((needed, coins) for coins, needed in payouts.items() if needed > count)
+    if upgrades:
+        needed, coins = upgrades[0]
+        outlook = f"{coins} coin{'s' if coins != 1 else ''} at {needed} beans"
+    else:
+        outlook = "the maximum"
+    return f"{format_field(field)} (worth {worth} coin{'s' if worth != 1 else ''}; {outlook})"
+
+
+def beanometer_line(bean_types: Dict[str, Dict[str, Any]]) -> str:
+    parts = []
+    for bean, config in bean_types.items():
+        thresholds = "/".join(str(config["payouts"].get(coins, "-")) for coins in (1, 2, 3, 4))
+        parts.append(f"{bean} {thresholds}")
+    return "Beanometers (beans needed for 1/2/3/4 coins): " + " | ".join(parts)
+
+
+def describe_trade(trade_id: int, trade: Dict[str, Any]) -> str:
+    audience = "open to everyone" if trade["target"] is None else f"to Player {trade['target']}"
+    return f"#{trade_id}: Player {trade['proposer']} offers {format_beans(trade['offer'])} for {format_beans(trade['want'])} ({audience})"
+
+
+def render_board(game_state: Dict[str, Any], viewer_id: Optional[int], bean_types: Dict[str, Dict[str, Any]], deck_cycles: int) -> str:
+    """The table as seen by `viewer_id`: everything public plus the viewer's own hand.
+
+    Other players' hands are shown only as card counts. Pass `viewer_id=None`
+    for a spectator view without any hand.
+    """
+    gs = game_state
+    active = gs["active_player"]
+    phase = gs["current_phase"]
+    rule = "-" * 72
+    lines = [
+        "=" * 72,
+        f"BOHNANZA | Turn {gs['turn_number']} | Active player: Player {active} | {PHASE_TITLES.get(phase, phase)}",
+        (
+            f"Draw pile: {len(gs['deck'])} cards | Discard pile: {len(gs['discard_pile'])} cards | "
+            f"The draw pile has run out {gs['deck_cycles_completed']} of {deck_cycles} times "
+            f"(the game ends when it runs out for the {ordinal(deck_cycles)} time)"
+        ),
+    ]
+
+    if phase == "draw_trade":
+        face_up = gs["face_up_cards"]
+        lines.append(f"Face-up cards (they belong to Player {active}): {', '.join(face_up) if face_up else 'none left'}")
+        pending = [(trade_id, trade) for trade_id, trade in gs["active_trades"].items() if trade["status"] == "pending"]
+        if pending:
+            lines.append("Open trade offers:")
+            lines.extend(f"  {describe_trade(trade_id, trade)}" for trade_id, trade in pending)
         else:
-            # Other players' hands are completely hidden - only show count
-            hand_str = f"Hand: {len(hand)} cards"
-        lines.append(f"     {hand_str}")
-        
-        # Fields
-        lines.append("     Fields:")
-        for field_num, field in enumerate(player["fields"]):
-            if field:
-                bean_type, count = field
-                lines.append(f"       Field {field_num + 1}: {count} {bean_type}")
-            else:
-                lines.append(f"       Field {field_num + 1}: Empty")
-        
-        # Mandatory plants (if any)
-        mandatory = game_state["mandatory_plants"][player_id]
-        if mandatory:
-            lines.append(f"     Must Plant: {', '.join(mandatory)}")
-        
-        lines.append("")
-    
-    lines.append("=" * 60)
-    
+            lines.append("Open trade offers: none")
+    waiting = [(pid, beans) for pid, beans in sorted(gs["mandatory_plants"].items()) if beans]
+    if waiting:
+        lines.append(
+            "Beans set aside to be planted in phase 3: "
+            + "; ".join(f"Player {pid}: {format_beans(beans)}" for pid, beans in waiting)
+        )
+
+    lines.append(rule)
+    for pid in sorted(gs["players"]):
+        player = gs["players"][pid]
+        tags = []
+        if pid == viewer_id:
+            tags.append("you")
+        if pid == active:
+            tags.append("active player")
+        tag = f" ({', '.join(tags)})" if tags else ""
+        coins, hand_size = player["coins"], len(player["hand"])
+        lines.append(
+            f"Player {pid}{tag}: {coins} coin{'s' if coins != 1 else ''}, "
+            f"{hand_size} card{'s' if hand_size != 1 else ''} in hand"
+        )
+        for number, field in enumerate(player["fields"], start=1):
+            lines.append(f"  Field {number}: {describe_field(field, bean_types)}")
+    lines.append(rule)
+
+    if viewer_id is not None:
+        hand: List[str] = gs["players"][viewer_id]["hand"]
+        lines.append(f"Your hand, front to back: {', '.join(hand)}" if hand else "Your hand is empty.")
+    lines.append(beanometer_line(bean_types))
     return "\n".join(lines)
 
 
-def render_player_summary(game_state: Dict[str, Any], player_id: int) -> str:
-    """Render a summary for a specific player."""
-    player = game_state["players"][player_id]
-    lines = []
-    
-    lines.append(f"Player {player_id} Summary:")
-    lines.append(f"Coins: {player['coins']}")
-    lines.append(f"Hand: {len(player['hand'])} cards")
-    
-    # Fields
-    for field_num, field in enumerate(player["fields"]):
-        if field:
-            bean_type, count = field
-            lines.append(f"Field {field_num + 1}: {count} {bean_type}")
-        else:
-            lines.append(f"Field {field_num + 1}: Empty")
-    
-    return "\n".join(lines)
-
-
-def render_trade_summary(active_trades: Dict[int, Dict[str, Any]]) -> str:
-    """Render a summary of active trades."""
-    if not active_trades:
-        return "No active trades"
-    
-    lines = ["Active Trades:"]
-    for trade_id, trade in active_trades.items():
-        lines.append(f"Trade{trade_id}: Player{trade['proposer']} → Player{trade['target']}")
-        lines.append(f"  Offers: {trade['offer']}")
-        lines.append(f"  Wants: {trade['want']}")
-        lines.append(f"  Status: {trade['status']}")
-    
-    return "\n".join(lines)
-
-
-def render_harvest_calculation(bean_type: str, bean_count: int) -> str:
-    """Render harvest calculation for a field."""
-    # Bean payouts (should match env.py)
-    bean_payouts = {
-        "Blue": {1: 4, 2: 6, 3: 8, 4: 10},
-        "Chili": {1: 3, 2: 6, 3: 8, 4: 9},
-        "Stink": {1: 3, 2: 5, 3: 7, 4: 8},
-        "Green": {1: 3, 2: 5, 3: 6, 4: 7},
-        "Soy": {1: 2, 2: 4, 3: 6, 4: 7},
-        "BlackEyed": {1: 2, 2: 4, 3: 5, 4: 6},
-        "Red": {1: 2, 2: 3, 3: 4, 4: 5},
-        "Garden": {2: 2, 3: 3}
-    }
-    
-    if bean_type not in bean_payouts:
-        return f"Unknown bean type: {bean_type}"
-    
-    payouts = bean_payouts[bean_type]
-    coins_earned = 0
-    
-    # Find highest coin value where bean_count >= beans_needed
-    for coins, beans_needed in sorted(payouts.items(), reverse=True):
-        if bean_count >= beans_needed:
-            coins_earned = coins
-            break
-    
-    return f"Harvesting {bean_count} {bean_type} beans → {coins_earned} coins"
+def ordinal(n: int) -> str:
+    suffix = "th" if 10 <= n % 100 <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+    return f"{n}{suffix}"

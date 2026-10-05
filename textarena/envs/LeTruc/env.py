@@ -1,234 +1,324 @@
-import random, re
-from typing import Dict, Any, Optional, List, Tuple
+import re
+from typing import Any, Dict, List, Optional, Union
+
 import textarena as ta
 
 
-class LeTrucEnv(ta.Env):
-    """Two-player Le Truc (Catalan/Spanish 40-card variant).
-
-    Deck: 40 cards in four French suits (♣♦♥♠); rank order high->low is
-    ``3 2 A K Q J 7 6 5 4`` -- the Spanish ``3 2 1 Rey Caballo Sota 7 6 5 4``
-    mapped onto K/Q/J. (Removing the 8s, 9s and 10s from a 52-card pack leaves
-    exactly these 40 cards.)
-
-    Each hand both players receive 3 cards and play up to three one-card tricks.
-    The higher rank wins a trick regardless of suit; equal ranks tie ("spoilt")
-    and the same player leads again. A hand is won by taking two tricks, or by
-    winning the first trick when the other is tied -- a spoilt trick counts for
-    whoever won the first trick. If all three tricks tie, neither player scores.
-
-    A hand is worth 1 point. On their turn a player may ``[raise]`` ("truc") to
-    increase the stake: 1->2, then +2 for each further raise, up to 12. The
-    opponent must ``[accept]``, ``[fold]`` or re-``[raise]``; a player who folds
-    concedes the hand and the raiser scores the stake as it stood *before* that
-    raise. First to 12 points wins the match.
+class LeTrucEnv(ta.GameEnv):
     """
-    order = ["3", "2", "A", "K", "Q", "J", "7", "6", "5", "4"]
+    Two-player Le Truc (Catalan/Spanish 40-card variant).
+    • Deck = 40 cards (a 52-card deck without 8s, 9s or 10s). Rank order high->low: 3 2 A K Q J 7 6 5 4.
+    • Each hand both players get 3 cards and play up to three one-card tricks. The higher rank wins a
+      trick regardless of suit; equal ranks tie ("spoilt") and the same player leads again.
+    • A hand is won by taking two tricks, or by winning the first decided trick when another trick is
+      spoilt. If all three tricks are spoilt, nobody scores.
+    • The non-dealer ("mano") leads the first trick and the deal alternates every hand.
+    • A hand is worth 1 point. On their turn a player may 'raise' ("truc"): 1 -> 2, then +2 per raise,
+      capped at 12. The opponent must 'accept', 'fold' or re-'raise'; folding concedes the hand at the
+      stake as it stood before that raise. Once a raise is accepted, only the player who accepted it
+      may make the next raise.
+    • First to 12 match points wins.
+    """
+    min_players = 2
+    max_players = 2
+    mdp_includes_actions = False
 
-    def __init__(self):
-        super().__init__()
-        self.action_space = re.compile(
-            r"""\[
-                (?P<verb>play|raise|accept|fold)            # action keyword
-                (?:\s+(?P<card>(10|[234567JQKA])))?         # optional rank (play)
-            \]""",
-            re.IGNORECASE | re.VERBOSE,
-        )
-        # build the 40-card deck
+    order = ["3", "2", "A", "K", "Q", "J", "7", "6", "5", "4"]  # strongest first
+    target_points = 12
+    max_stake = 12
+
+    _ACTION_RE = re.compile(
+        r"^(?P<verb>play|raise|accept|fold)(?:\s+(?P<rank>10|[2-9AKQJ]))?$",
+        re.IGNORECASE,
+    )
+
+    max_turns = ta.Param(
+        None, "If set, the total number of accepted actions (every `play`, `raise`, `accept` and `fold` by either "
+              "player) after which the match is decided on match points.", type=int, min=1,
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         suits = "♣♦♥♠"
-        self.deck = [r + s for r in self.order for s in suits]
+        self.deck = [rank + suit for rank in self.order for suit in suits]
 
-    # ── setup ───────────────────────────────────────────────────────────────
-    def reset(self, num_players: int = 2, seed: Optional[int] = None):
-        self.state = ta.TwoPlayerState(num_players=num_players, seed=seed)
-        # dealer starts at 1 so the first hand's non-dealer leader is player 0.
-        self.state.reset(game_state={"match_points": {0: 0, 1: 0}, "stake": 1, "dealer": 1}, player_prompt_function=self._prompt)
-        self._deal_hand()
+    def setup(self) -> Dict[str, Any]:
+        return {"match_points": {0: 0, 1: 0}, "hand_number": 0, "dealer": 1}  # Player 0 leads the first hand
 
-    def _prompt(self, player_id: int, game_state: Dict[str, Any]) -> str:
-        return self.m("player_prompt", "intro")
+    def on_start(self):
+        self.set_current_player(self._deal_hand())
 
-    def _deal_hand(self):
-        gs = self.state.game_state
-        d = self.deck.copy()
-        random.shuffle(d)
-        gs["hands"]         = {0: d[:3], 1: d[3:6]}
-        gs["trick_results"] = []            # per completed trick: 0, 1, or None (tie/spoilt)
-        gs["led"]           = None          # (leader_pid, card_str) while a trick is in progress
-        gs["pending"]       = None          # {"offerer": pid, "proposed": int} while a raise is unanswered
-        gs["raise_origin"]  = None          # pid whose turn-to-play a raise negotiation interrupted
-        leader = 1 - gs["dealer"]           # the non-dealer ("mano") leads
-        gs["leader"]  = leader
-        gs["dealer"]  = 1 - gs["dealer"]    # alternate the deal for the next hand
-        for pid in (0, 1):
-            self.state.add_observation(to_id=pid, message=self.m("board", "new_hand", points=gs["stake"], cards=" ".join(gs["hands"][pid])), observation_type=ta.ObservationType.GAME_BOARD)
-        self.state.manually_set_current_player_id(leader)
-        self._announce_legal(leader)
+    def prompt(self, player_id: int) -> str:
+        turn_limit_rule = (
+            ""
+            if self.max_turns is None
+            else (
+                f"\n- If {self.max_turns} actions pass before anyone reaches {self.target_points}, "
+                "the player with more match points wins; equal points draw."
+            )
+        )
+        return (
+            f"You are Player {player_id} in Le Truc, a two-player trick-taking card game. "
+            f"The first player to reach {self.target_points} match points wins.\n"
+            "Cards and tricks:\n"
+            "- 40-card deck (no 8s, 9s or 10s), ranked from highest to lowest: 3 2 A K Q J 7 6 5 4. Suits never matter.\n"
+            "- Each hand you get 3 cards and play up to three one-card tricks. The non-dealer leads the first trick, "
+            "and the deal alternates every hand.\n"
+            "- The higher rank wins a trick and its winner leads the next one. Equal ranks spoil (tie) the trick "
+            "and the same player leads again.\n"
+            "- Win the hand by taking two tricks, or by winning the first decided trick when another trick is spoilt. "
+            "If all three tricks are spoilt, nobody scores.\n"
+            "Stakes:\n"
+            f"- A hand is worth 1 point. On your turn you may raise ('truc'): 1 -> 2, then +2 per raise, up to {self.max_stake}.\n"
+            "- Your opponent must then accept, fold, or raise again. Whoever folds concedes the hand, and the raiser "
+            "scores the stake from before that raise.\n"
+            "- Once a raise is accepted, only the player who accepted it may make the next raise, so you cannot "
+            f"raise twice in a row.{turn_limit_rule}\n"
+            "Actions (reply with exactly one; your legal actions are listed every turn):\n"
+            "- 'play <rank>': play a card of that rank from your hand, e.g. 'play K' or 'play 3'\n"
+            "- 'raise': raise the stake\n"
+            "- 'accept': accept your opponent's raise\n"
+            "- 'fold': refuse your opponent's raise and concede the hand"
+        )
 
-    # ── helpers ──────────────────────────────────────────────────────────────
+    def render(self, player_id: int) -> str:
+        gs = self.game_state
+        points = gs["match_points"]
+        lines = [
+            f"Match points: P0={points[0]}, P1={points[1]} (first to {self.target_points} wins)",
+            f"Hand {gs['hand_number']}: dealer P{gs['dealer']}, first lead P{1 - gs['dealer']}. Hand value: {gs['stake']} pt(s)",
+        ]
+        if gs["raiser"] is not None:
+            reraise = (
+                f", or 'raise' to {self._next_stake(gs['pending_raise_value'])}"
+                if gs["pending_raise_value"] < self.max_stake
+                else ""
+            )
+            lines.append(
+                f"Pending raise: P{gs['raiser']} raised to {gs['pending_raise_value']}. 'accept' to play for "
+                f"{gs['pending_raise_value']}, 'fold' to concede {gs['stake']}{reraise}."
+            )
+        elif gs["raise_right"] is not None and gs["stake"] < self.max_stake:
+            lines.append(f"Next raise: only P{gs['raise_right']} may raise (they accepted the last raise).")
+        tricks = "; ".join(
+            f"{number}) P{leader} {lead_card} vs P{1 - leader} {follow_card}: "
+            + ("spoilt" if winner is None else f"P{winner} won")
+            for number, ((leader, lead_card, follow_card), winner) in enumerate(zip(gs["trick_cards"], gs["tricks"]), start=1)
+        )
+        lines.append(f"Tricks this hand: {tricks or 'none yet'}")
+        if gs["led_card"] is not None:
+            leader, card = gs["led_card"]
+            lines.append(f"Current trick: P{leader} led {card}.")
+        lines.append(f"Your cards: {' '.join(gs['hands'][player_id])}")
+        if not self.state.done:
+            lines.append("Legal actions: " + ", ".join(f"'{action}'" for action in self._legal_actions(player_id)))
+        return "\n".join(lines)
+
+    def get_board_str(self) -> str:
+        """Return the acting player's private board for the spectator renderer."""
+        return self.render(self.state.current_player_id)
+
+    def on_turn_limit(self) -> ta.Outcome:
+        points = self.game_state["match_points"]
+        if points[0] == points[1]:
+            return self.draw(reason=f"The turn limit was reached with both players on {points[0]} match points.")
+        leader = 0 if points[0] > points[1] else 1
+        return self.winner(leader, reason=f"Player {leader} leads on match points ({points[0]}-{points[1]}) at the turn limit.")
+
+    # ------------------------------------------------------------- helpers
     def _rank_idx(self, card: str) -> int:
         return self.order.index(card[:-1])
 
     def _next_stake(self, stake: int) -> int:
-        # First raise lifts the stake 1->2; every further raise adds 2, capped at 12.
-        return 2 if stake == 1 else min(stake + 2, 12)
+        return 2 if stake == 1 else min(stake + 2, self.max_stake)
 
-    def _legal(self, pid: int) -> List[str]:
-        gs = self.state.game_state
-        if gs["pending"] is not None:                       # pid must answer a standing raise
-            acts = ["accept", "fold"]
-            if gs["stake"] < 12: acts.append("raise")
-            return acts
-        acts = [f"play {c[:-1]}" for c in gs["hands"][pid]]  # otherwise pid is to play a card
-        if gs["stake"] < 12: acts.append("raise")
-        return acts
+    @staticmethod
+    def _hand_winner(tricks: List[Optional[int]]) -> Optional[int]:
+        """Winner of a hand from its completed tricks (None = spoilt), or None while undecided.
 
-    def _announce_legal(self, pid: int):
-        legal = ", ".join(f"'[{a}]'" for a in self._legal(pid))
-        self.state.add_observation(to_id=pid, message=self.m("board", "valid_actions", legal=legal), observation_type=ta.ObservationType.GAME_BOARD)
-
-    def _resolve(self, results: List[Optional[int]]):
-        """Decide the hand from completed-trick outcomes.
-
-        results holds one entry per completed trick: 0/1 for a trick won outright,
-        None for a spoilt (tied) trick. A spoilt trick is credited to whoever won
-        the first non-tied trick, so:
-          * two effective tricks  -> that player wins;
-          * win-one + spoilt-one  -> the first-trick winner wins (decided early);
-          * all three spoilt      -> nobody scores (void).
-        Returns 0/1 (winner), None (void, only after three tricks), or the string
-        'undecided' when more tricks are needed.
+        A spoilt trick counts for whoever won the first decided trick, so two tricks, or one trick
+        plus a spoilt one, take the hand. Three spoilt tricks also return None: the hand is void.
         """
-        first_winner = next((r for r in results if r is not None), None)
-        spoilt = sum(1 for r in results if r is None)
-        eff = {0: 0, 1: 0}
-        for r in results:
-            if r is not None: eff[r] += 1
-        if first_winner is not None: eff[first_winner] += spoilt
-        if eff[0] >= 2: return 0
-        if eff[1] >= 2: return 1
-        if len(results) == 3: return None       # three tricks played, no majority -> all tied
-        return "undecided"
+        first = next((winner for winner in tricks if winner is not None), None)
+        if first is None:
+            return None
+        spoilt = tricks.count(None)
+        if tricks.count(first) + spoilt >= 2:
+            return first
+        if tricks.count(1 - first) >= 2:
+            return 1 - first
+        return None
 
-    # ── main ───────────────────────────────────────────────────────────────
-    def step(self, action: str) -> Tuple[bool, Dict[str, Any]]:
-        pid = self.state.current_player_id
-        self.state.add_observation(from_id=pid, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
+    def _legal_actions(self, player_id: int) -> List[str]:
+        gs = self.game_state
+        if gs["raiser"] is not None:
+            actions = ["accept", "fold"]
+            if gs["pending_raise_value"] < self.max_stake:
+                actions.append("raise")
+            return actions
+        actions = list(dict.fromkeys(f"play {card[:-1]}" for card in gs["hands"][player_id]))
+        if gs["stake"] < self.max_stake and gs["raise_right"] in (None, player_id):
+            actions.append("raise")
+        return actions
 
-        m = self.action_space.search(action)
-        if not m:
-            return self._invalid("unrecognised")
-        verb = m.group("verb").lower()
-        if verb == "raise":  return self._do_raise(pid)
-        if verb == "accept": return self._do_accept(pid)
-        if verb == "fold":   return self._do_fold(pid)
-        return self._do_play(pid, m.group("card"))
+    def _deal_hand(self) -> int:
+        """Deal a fresh hand and return its leader, the non-dealer ("mano")."""
+        gs = self.game_state
+        deck = self.deck.copy()
+        self.rng.shuffle(deck)
+        gs["hand_number"] += 1
+        gs.update({
+            "stake": 1,                   # accepted value of the current hand
+            "raiser": None,               # player whose raise is awaiting an answer
+            "pending_raise_value": None,  # stake that raise proposes
+            "raise_origin": None,         # player whose card turn the raise negotiation interrupted
+            "raise_right": None,          # player who accepted the last raise and alone may raise next; None = either
+            "hands": {0: deck[:3], 1: deck[3:6]},
+            "undealt_cards": deck[6:],
+            "played_cards": [],
+            "led_card": None,             # (leader, card) while a trick is in progress
+            "tricks": [],                 # winner of each completed trick, None if spoilt
+            "trick_cards": [],            # (leader, lead card, follow card) of each completed trick
+        })
+        mano = 1 - gs["dealer"]
+        for pid in (0, 1):
+            self.message(
+                pid,
+                f"### Hand {gs['hand_number']} (worth 1 pt): Player {gs['dealer']} deals and Player {mano} leads.\n"
+                f"Your cards: {' '.join(gs['hands'][pid])}",
+                ta.ObservationType.GAME_MESSAGE,
+            )
+        return mano
 
-    def _invalid(self, key: str):
-        self.state.set_invalid_move(reason=self.m("invalid_move", key))
-        return self.state.step()
+    def _start_next_hand(self):
+        self.game_state["dealer"] = 1 - self.game_state["dealer"]
+        self.set_next_player(self._deal_hand())
 
-    def _do_raise(self, pid: int):
-        gs = self.state.game_state
-        if gs["stake"] >= 12:
-            return self._invalid("max_stake")
-        if gs["pending"] is not None and gs["pending"]["offerer"] == pid:
-            return self._invalid("already_raised")           # your offer is still standing
-        if gs["pending"] is not None:
-            gs["stake"] = gs["pending"]["proposed"]          # re-raise implicitly accepts the standing offer
+    def _award_hand(self, winner: int) -> Optional[ta.Outcome]:
+        gs = self.game_state
+        points = gs["match_points"]
+        points[winner] += gs["stake"]
+        self.broadcast(
+            f"Hand won by P{winner} (+{gs['stake']} pt(s)). Score - P0: {points[0]}, P1: {points[1]}.",
+            ta.ObservationType.GAME_MESSAGE,
+        )
+        if points[winner] >= self.target_points:
+            return self.winner(winner, reason=f"Player {winner} reached {self.target_points} match points.")
+        self._start_next_hand()
+        return None
+
+    # ------------------------------------------------------------- actions
+    def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
+        match = self._ACTION_RE.match(action)
+        if match is None:
+            return self.invalid("Unrecognised action. Reply with one legal action, e.g. 'play K', 'raise', 'accept' or 'fold'.")
+        verb = match.group("verb").lower()
+        rank = match.group("rank")
+        if verb != "play" and rank is not None:
+            return self.invalid(f"'{verb}' does not take a card.")
+        if verb == "play":
+            return self._play(player_id, rank)
+        if verb == "raise":
+            return self._raise(player_id)
+        if verb == "accept":
+            return self._accept(player_id)
+        return self._fold(player_id)
+
+    def _raise(self, pid: int) -> Optional[ta.Invalid]:
+        gs = self.game_state
+        reraise = gs["raiser"] is not None
+        if reraise and gs["pending_raise_value"] >= self.max_stake:
+            return self.invalid(f"The pending raise is already the maximum of {self.max_stake} points; reply 'accept' or 'fold'.")
+        if not reraise and gs["stake"] >= self.max_stake:
+            return self.invalid(f"The hand is already worth the maximum of {self.max_stake} points; you cannot raise.")
+        if not reraise and gs["raise_right"] not in (None, pid):
+            return self.invalid(
+                f"Only P{gs['raise_right']}, who accepted the last raise, may raise next. Play a card instead."
+            )
+        if reraise:
+            gs["stake"] = gs["pending_raise_value"]  # a re-raise accepts the standing offer
         else:
-            gs["raise_origin"] = pid                          # remember whose card-turn we interrupted
-        proposed = self._next_stake(gs["stake"])
-        gs["pending"] = {"offerer": pid, "proposed": proposed}
-        self.state.add_observation(message=self.m("action", "raise", pid=pid, points=proposed), observation_type=ta.ObservationType.GAME_MESSAGE)
-        responder = 1 - pid
-        self.state.manually_set_current_player_id(responder)
-        self._announce_legal(responder)
-        return self.state.step(rotate_player=False)
+            gs["raise_origin"] = pid
+        gs["raiser"] = pid
+        gs["pending_raise_value"] = self._next_stake(gs["stake"])
+        opponent = 1 - pid
+        announcement = f"accepts {gs['stake']} and raises again" if reraise else "calls truc"
+        reply = "'accept', 'fold' or 'raise'" if gs["pending_raise_value"] < self.max_stake else "'accept' or 'fold'"
+        self.broadcast(
+            f"P{pid} {announcement}: the hand would be worth {gs['pending_raise_value']} pts. "
+            f"P{opponent} must reply {reply}; folding concedes {gs['stake']} pt(s).",
+            ta.ObservationType.GAME_ACTION_DESCRIPTION,
+        )
+        self.set_next_player(opponent)
+        return None
 
-    def _do_accept(self, pid: int):
-        gs = self.state.game_state
-        if gs["pending"] is None or gs["pending"]["offerer"] == pid:
-            return self._invalid("no_raise_to_accept")
-        gs["stake"] = gs["pending"]["proposed"]
-        gs["pending"] = None
+    def _accept(self, pid: int) -> Optional[ta.Invalid]:
+        gs = self.game_state
+        if gs["raiser"] is None:
+            return self.invalid("There is no raise to accept.")
         origin = gs["raise_origin"]
-        gs["raise_origin"] = None
-        self.state.add_observation(message=self.m("action", "accept", pid=pid, points=gs["stake"]), observation_type=ta.ObservationType.GAME_MESSAGE)
-        self.state.manually_set_current_player_id(origin)     # the interrupted player now plays
-        self._announce_legal(origin)
-        return self.state.step(rotate_player=False)
+        gs.update({
+            "stake": gs["pending_raise_value"], "raiser": None, "pending_raise_value": None, "raise_origin": None,
+            "raise_right": pid,
+        })
+        next_raise = f" Only P{pid} may raise next." if gs["stake"] < self.max_stake else ""
+        self.broadcast(
+            f"P{pid} accepts: the hand is worth {gs['stake']} pts. P{origin} continues.{next_raise}",
+            ta.ObservationType.GAME_ACTION_DESCRIPTION,
+        )
+        self.set_next_player(origin)
+        return None
 
-    def _do_fold(self, pid: int):
-        gs = self.state.game_state
-        if gs["pending"] is None or gs["pending"]["offerer"] == pid:
-            return self._invalid("cannot_fold")
-        winner = 1 - pid                                      # the raiser wins the hand
-        self.state.add_observation(message=self.m("outcome", "folded"), observation_type=ta.ObservationType.GAME_MESSAGE)
-        # gs["stake"] is still the value agreed *before* the pending raise -- exactly
-        # what a fold concedes.
-        return self._award_hand(winner)
+    def _fold(self, pid: int) -> Union[ta.Outcome, ta.Invalid, None]:
+        gs = self.game_state
+        if gs["raiser"] is None:
+            return self.invalid("You can only fold in response to a raise.")
+        self.broadcast(f"P{pid} folds and concedes the hand.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        return self._award_hand(gs["raiser"])  # scores the stake from before the refused raise
 
-    def _do_play(self, pid: int, card_group: Optional[str]):
-        gs = self.state.game_state
-        if gs["pending"] is not None:
-            return self._invalid("must_respond")
-        if card_group is None:
-            return self._invalid("unrecognised")
-        rank = card_group.upper()
-        if rank not in [c[:-1] for c in gs["hands"][pid]]:
-            return self._invalid("wrong_rank")
-        idx = next(i for i, c in enumerate(gs["hands"][pid]) if c[:-1] == rank)
-        card_str = gs["hands"][pid].pop(idx)
+    def _play(self, pid: int, rank: Optional[str]) -> Union[ta.Outcome, ta.Invalid, None]:
+        gs = self.game_state
+        if gs["raiser"] is not None:
+            return self.invalid("A raise is pending: reply 'accept', 'fold' or 'raise' before playing a card.")
+        if rank is None:
+            return self.invalid("Name the rank to play, e.g. 'play K'.")
+        rank = rank.upper()
+        if rank not in self.order:
+            return self.invalid("The Le Truc deck has no 8s, 9s or 10s.")
+        hand = gs["hands"][pid]
+        index = next((i for i, card in enumerate(hand) if card[:-1] == rank), None)
+        if index is None:
+            return self.invalid(f"You have no {rank} in your hand (your cards: {' '.join(hand)}).")
+        card = hand.pop(index)
+        gs["played_cards"].append(card)
 
-        if gs["led"] is None:                                 # lead the trick
-            gs["led"] = (pid, card_str)
-            self.state.add_observation(message=self.m("action", "lead", pid=pid, card=card_str), observation_type=ta.ObservationType.GAME_MESSAGE)
-            follower = 1 - pid
-            self.state.manually_set_current_player_id(follower)
-            self._announce_legal(follower)
-            return self.state.step(rotate_player=False)
+        if gs["led_card"] is None:
+            gs["led_card"] = (pid, card)
+            self.broadcast(f"P{pid} leads {card}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+            self.set_next_player(1 - pid)
+            return None
 
-        # follow -> resolve the trick (lower rank index == stronger card)
-        lead_pid, lead_card = gs["led"]
-        if self._rank_idx(card_str) < self._rank_idx(lead_card):   trick_winner = pid
-        elif self._rank_idx(card_str) > self._rank_idx(lead_card): trick_winner = lead_pid
-        else:                                                      trick_winner = None   # spoilt
-        gs["led"] = None
-        gs["trick_results"].append(trick_winner)
-        if trick_winner is None:
-            self.state.add_observation(message=self.m("action", "spoilt", pid=pid, card=card_str), observation_type=ta.ObservationType.GAME_MESSAGE)
+        leader, lead_card = gs["led_card"]
+        gs["led_card"] = None
+        if self._rank_idx(card) == self._rank_idx(lead_card):
+            trick_winner = None
+            self.broadcast(f"P{pid} plays {card}. Equal ranks: the trick is spoilt.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
         else:
-            self.state.add_observation(message=self.m("action", "play", pid=pid, card=card_str, winner=trick_winner), observation_type=ta.ObservationType.GAME_MESSAGE)
+            trick_winner = pid if self._rank_idx(card) < self._rank_idx(lead_card) else leader
+            self.broadcast(f"P{pid} plays {card}. Trick to P{trick_winner}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        gs["tricks"].append(trick_winner)
+        gs["trick_cards"].append((leader, lead_card, card))
 
-        decision = self._resolve(gs["trick_results"])
-        if decision == "undecided":
-            next_leader = trick_winner if trick_winner is not None else gs["leader"]  # spoilt -> same leader
-            gs["leader"] = next_leader
-            self.state.manually_set_current_player_id(next_leader)
-            self._announce_legal(next_leader)
-            return self.state.step(rotate_player=False)
-        if decision is None:
-            return self._void_hand()
-        return self._award_hand(decision)
-
-    # ── hand endings ─────────────────────────────────────────────────────────
-    def _award_hand(self, winner: int):
-        gs = self.state.game_state
-        gs["match_points"][winner] += gs["stake"]
-        p0, p1 = gs["match_points"][0], gs["match_points"][1]
-        self.state.add_observation(message=self.m("outcome", "hand_won", winner=winner, points=gs["stake"], p0=p0, p1=p1), observation_type=ta.ObservationType.GAME_MESSAGE)
-        if gs["match_points"][winner] >= 12:
-            self.state.set_winner(winner, reason=self.m("outcome", "reached_twelve"))
-            return self.state.step()
-        gs["stake"] = 1
-        self._deal_hand()
-        return self.state.step(rotate_player=False)
-
-    def _void_hand(self):
-        gs = self.state.game_state
-        p0, p1 = gs["match_points"][0], gs["match_points"][1]
-        self.state.add_observation(message=self.m("outcome", "void", p0=p0, p1=p1), observation_type=ta.ObservationType.GAME_MESSAGE)
-        gs["stake"] = 1
-        self._deal_hand()
-        return self.state.step(rotate_player=False)
+        hand_winner = self._hand_winner(gs["tricks"])
+        if hand_winner is not None:
+            return self._award_hand(hand_winner)
+        if len(gs["tricks"]) == 3:
+            points = gs["match_points"]
+            self.broadcast(
+                f"All three tricks were spoilt: nobody scores this hand. Score - P0: {points[0]}, P1: {points[1]}.",
+                ta.ObservationType.GAME_MESSAGE,
+            )
+            self._start_next_hand()
+            return None
+        self.set_next_player(leader if trick_winner is None else trick_winner)
+        return None

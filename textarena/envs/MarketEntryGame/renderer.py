@@ -1,4 +1,27 @@
+import math
 import unicodedata
+from decimal import Decimal, localcontext
+from numbers import Rational
+
+
+def format_number(value) -> str:
+    try:
+        numeric = float(value)
+    except (OverflowError, TypeError, ValueError):
+        numeric = None
+    if numeric is not None and math.isfinite(numeric):
+        return f"{numeric:g}" if abs(numeric) < 1e12 else f"{numeric:.3e}"
+    if isinstance(value, Rational):
+        with localcontext() as context:
+            context.prec = 8
+            decimal_value = Decimal(value.numerator) / Decimal(value.denominator)
+        return f"{decimal_value:.3E}"
+    return str(value)
+
+
+def format_signed(value) -> str:
+    text = format_number(value)
+    return text if text.startswith(("-", "+")) else f"+{text}"
 
 def char_display_width(ch: str) -> int:
     """Return display width of a single character (emoji-safe)."""
@@ -20,21 +43,6 @@ def pad_line(content: str, box_width: int) -> str:
     pad_spaces = box_width - 2 - disp_len
     return f"│ {content}{' ' * max(0, pad_spaces)} │"
 
-def wrap_display(text: str, width: int):
-    """Wrap text by display width instead of len()."""
-    lines, line, cur_width = [], "", 0
-    for ch in text:
-        w = char_display_width(ch)
-        if cur_width + w > width:
-            lines.append(line)
-            line, cur_width = ch, w
-        else:
-            line += ch
-            cur_width += w
-    if line:
-        lines.append(line)
-    return lines
-
 def create_board_str(game_state: dict) -> str:
     """Create a visual representation of the Market Entry Game state."""
     lines = []
@@ -42,11 +50,8 @@ def create_board_str(game_state: dict) -> str:
     # fixed box widths (match your original formatting)
     header_width = 59
     status_width = 59
-    fullmsg_width = 59
     market_width = 59
     standings_width = 59
-    history_width = 59
-    insights_width = 59
     quick_width = 59
     
     # Determine phase info
@@ -58,6 +63,8 @@ def create_board_str(game_state: dict) -> str:
         conv_round = game_state.get("conversation_round", 0) + 1
         total_conv = game_state.get("total_conversation_rounds", 3)
         phase_display = f"💬 Communication ({conv_round}/{total_conv})"
+    elif phase == "complete":
+        phase_display = "🏁 Game Complete"
     else:
         phase_display = "🎯 Decision Phase"
     
@@ -71,7 +78,8 @@ def create_board_str(game_state: dict) -> str:
     safe = game_state.get("safe_payoff", 5)
     
     lines.append(pad_line(
-        f"Market Capacity: {capacity} │ Entry: {entry_profit:+3} │ Crowd: {overcrowding:+3} │ Safe: {safe:+3}",
+        f"Market Capacity: {capacity} │ Entry: {format_signed(entry_profit)} │ "
+        f"Crowd: {format_signed(overcrowding)} │ Safe: {format_signed(safe)}",
         header_width
     ))
     lines.append("╰───────────────────────────────────────────────────────────╯")
@@ -93,21 +101,7 @@ def create_board_str(game_state: dict) -> str:
             if player_id in eliminations:
                 status = "❌ ELIMINATED"
             elif player_id in pending_messages:
-                msg = pending_messages[player_id]
-                if msg:
-                    # Truncate by display width
-                    max_len = 40
-                    disp_len, short_msg = 0, ""
-                    for ch in msg:
-                        w = char_display_width(ch)
-                        if disp_len + w > max_len:
-                            short_msg += "..."
-                            break
-                        short_msg += ch
-                        disp_len += w
-                    status = f"💬 \"{short_msg}\""
-                else:
-                    status = "🤐 Silent"
+                status = "✅ Submitted (hidden)"
             else:
                 status = "⏳ Waiting..."
             lines.append(pad_line(f"Player {player_id}: {status}", status_width))
@@ -127,36 +121,29 @@ def create_board_str(game_state: dict) -> str:
                 decision = decisions[player_id]
                 status = f"✅ {'ENTER' if decision == 'E' else 'STAY OUT'}"
             elif player_id in pending_decisions:
-                decision = pending_decisions[player_id]
-                status = f"⏳ {'ENTER' if decision == 'E' else 'STAY OUT'} (pending)"
+                status = "✅ Submitted (hidden)"
             else:
                 status = "⏳ Deciding..."
             lines.append(pad_line(f"Player {player_id}: {status}", status_width))
     
     lines.append("└───────────────────────────────────────────────────────────┘")
     
-    # Show full messages if in conversation phase and messages exist
-    if phase == "conversation" and game_state.get("pending_messages"):
-        has_messages = [pid for pid, msg in game_state["pending_messages"].items() if msg]
-        if has_messages:
-            lines.append("┌─ 💬 FULL MESSAGES ────────────────────────────────────────┐")
-            for player_id in sorted(has_messages):
-                msg = game_state["pending_messages"][player_id]
-                wrapped = wrap_display(msg, 53)
-                lines.append(pad_line(f"P{player_id}: {wrapped[0]}", fullmsg_width))
-                for line in wrapped[1:]:
-                    lines.append(pad_line(f"    {line}", fullmsg_width))
-            lines.append("└───────────────────────────────────────────────────────────┘")
-    
     # Market status visualization (if decisions have been made)
-    if phase == "decision" and game_state.get("decisions"):
+    if phase in ("decision", "complete") and game_state.get("decisions"):
         decisions = game_state.get("decisions", {})
         alive_entries = [pid for pid, dec in decisions.items() if dec == 'E' and pid not in eliminations]
         if any(d is not None for d in decisions.values()):
             num_entries = len(alive_entries)
             lines.append("┌─ 🏪 MARKET STATUS ────────────────────────────────────────┐")
             
-            capacity_bar = "".join("🟢" if i < num_entries else "⚪" for i in range(capacity))
+            # There can never be more usable slots than players. Capping the
+            # visualization keeps very large, but valid, capacities renderable.
+            visible_capacity = min(capacity, len(total_scores))
+            capacity_bar = "".join(
+                "🟢" if i < num_entries else "⚪" for i in range(visible_capacity)
+            )
+            if capacity > visible_capacity:
+                capacity_bar += f" … (capacity {capacity})"
             if num_entries > capacity:
                 overflow = num_entries - capacity
                 capacity_bar += " +" + "🔴" * overflow + " (OVERCROWDED!)"
@@ -186,18 +173,29 @@ def create_board_str(game_state: dict) -> str:
         
         for rank, (player_id, score) in enumerate(alive_scores, 1):
             rank_icon = "🥇" if rank == 1 else "🥈" if rank == 2 else "🥉" if rank == 3 else f"{rank}."
-            lines.append(pad_line(f"{rank_icon} Player {player_id}: {score} points", standings_width))
+            lines.append(
+                pad_line(
+                    f"{rank_icon} Player {player_id}: {format_number(score)} points",
+                    standings_width,
+                )
+            )
         
         for player_id, score in eliminated_scores:
-            lines.append(pad_line(f"❌ Player {player_id}: {score} points (eliminated)", standings_width))
+            lines.append(
+                pad_line(
+                    f"❌ Player {player_id}: {format_number(score)} points (eliminated)",
+                    standings_width,
+                )
+            )
         
         lines.append("└───────────────────────────────────────────────────────────┘")
     
     # Game mechanics reminder
     lines.append("┌─ ℹ️  QUICK REFERENCE ──────────────────────────────────────┐")
-    lines.append(pad_line("Communication: {message}  │  Decision: [E] or [S]", quick_width))
+    lines.append(pad_line("Communication: {message}  │  Decision: E or S", quick_width))
     lines.append(pad_line(
-        f"Enter: {entry_profit:+3} if ≤{capacity} players, {overcrowding:+3} if >{capacity} │ Stay Out: {safe:+3}",
+        f"Enter: {format_signed(entry_profit)} if ≤{capacity} players, "
+        f"{format_signed(overcrowding)} if >{capacity} │ Stay Out: {format_signed(safe)}",
         quick_width
     ))
     lines.append("└───────────────────────────────────────────────────────────┘")
