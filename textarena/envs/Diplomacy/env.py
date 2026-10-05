@@ -639,9 +639,9 @@ class DiplomacyEnv(ta.GameEnv):
         else:
             winning_players = []
             reason = f"Game ended in a DRAW after {self.engine.completed_game_years} game years.\n\n"
-        reason += "Final supply center counts:\n" + "".join(
+        reason += "Final supply center counts:\n" + "\n".join(
             f"- Player {self.power_player_map[power]} ({power}): "
-            f"{len(self.engine.powers[power].controlled_centers)} centers\n"
+            f"{len(self.engine.powers[power].controlled_centers)} centers"
             for power in self._powers_by_player()
         )
         if winning_players:
