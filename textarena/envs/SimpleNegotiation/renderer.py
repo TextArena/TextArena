@@ -2,7 +2,7 @@ def create_board_str(player_resources, player_values, inventory_values, current_
     def render_inventory(player_id):
         header = f"┌──────────────────────────── Player {player_id} Inventory ─────────────────────────────┐\n"
         if player_id != viewer_id:
-            body = "│                       Inventory and values are private.                      │\n"
+            body = "│                       Inventory and values are private.                     │\n"
             footer = "└─────────────────────────────────────────────────────────────────────────────┘\n"
             return header + body + footer
         body = "│ Resource    Qty   Value                                                     │\n"

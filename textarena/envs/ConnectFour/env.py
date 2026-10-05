@@ -61,7 +61,7 @@ class ConnectFourEnv(ta.GameEnv):
 
         row = self._get_available_row(col)
         player_symbol = "X" if player_id == 0 else "O"
-        self.broadcast(f"Player {player_id} dropped their disk ({player_symbol}) into column {col}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        self.broadcast(f"Player {player_id} dropped their disc ({player_symbol}) into column {col}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
         board[row][col] = player_symbol
         self.game_state["move_history"].append((player_id, col))
         if self._check_win(row, col):

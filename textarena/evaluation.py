@@ -12,7 +12,9 @@ __all__ = ["evaluate", "Evaluation", "GameResult"]
 
 @dataclass
 class GameResult:
-    """One evaluated game. `seats[player_id]` names the agent that played that seat."""
+    """One evaluated game. `seats[player_id]` names the agent that played that seat, and `invalid_moves[player_id]`
+    is True if that seat made two invalid moves in a row, which usually ends its game (a single corrected invalid move
+    does not count)."""
     env_id: str
     seed: int
     seats: Tuple[str, ...]
@@ -47,7 +49,8 @@ class Evaluation:
 
     def summary(self) -> List[Dict[str, Any]]:
         """Per agent and environment: seats played, mean reward, win rate (games with two or more seats only),
-        invalid-move rate, mean turns, and games that failed with an error."""
+        invalid-move rate (the share of seats that made two invalid moves in a row), mean turns, and games that
+        failed with an error."""
         groups: Dict[Tuple[str, str], List[Dict[str, Any]]] = {}
         for row in self.to_rows():
             groups.setdefault((row["agent"], row["env_id"]), []).append(row)

@@ -36,6 +36,7 @@ class DiplomacyEnv(ta.GameEnv):
 
     min_players = 3
     max_players = 7
+    default_num_players = 7
 
     max_game_years = ta.Param(30, "The number of complete game years before the game ends in a draw.", min=1)
     negotiations_per_phase = ta.Param(
@@ -113,8 +114,9 @@ class DiplomacyEnv(ta.GameEnv):
             f"{self.max_game_years} complete game year(s).",
             "",
             "## TURN STRUCTURE",
-            "- Every game year has five phases, always played in this order: Spring Movement, Spring Retreats, "
-            "Fall Movement, Fall Retreats, Winter Adjustments. A phase is played even if nobody has anything to order.",
+            "- Every game year has up to five phases, in this order: Spring Movement, Spring Retreats, Fall Movement, "
+            "Fall Retreats, Winter Adjustments. A Retreats or Adjustments phase in which no power has anything to "
+            "order is skipped, and you are told so.",
             f"- Each phase has {rounds} negotiation round(s). In every round each player takes one turn, in order "
             "of player id.",
             f"- Orders are accepted only in the final round (round {rounds}) of a phase, and every player must submit "
@@ -573,19 +575,29 @@ class DiplomacyEnv(ta.GameEnv):
         return self._required_order_players() <= self.orders_submitted
 
     def _process_orders(self) -> None:
-        """Resolve all submitted orders and announce the results."""
+        """Resolve all submitted orders and announce the results. Retreats and Adjustments phases in which no
+        player has anything to order are resolved at once instead of being played."""
         self.engine.resolve_orders(self.pending_orders)
-        record = self.engine.order_history[-1]
+        self._announce_order_results(self.engine.order_history[-1])
+        while not self.engine.game_over and not self._phase_has_orders():
+            self.engine.resolve_orders({})
+            self._announce_order_results(self.engine.order_history[-1], skipped=True)
 
         self.orders_submitted = set()
         self.pending_orders = {}
         self.current_negotiation_round = 0
         self.state.game_state = self._build_game_state()
 
-        self._announce_order_results(record)
         self._sync_defeated_players()
         if not self.engine.game_over:
             self._announce_phase_start()
+
+    def _phase_has_orders(self) -> bool:
+        if self.engine.phase == PhaseType.MOVEMENT:
+            return True
+        return any(
+            self.engine.get_orderable_locations(self.player_power_map[pid]) for pid in self._required_order_players()
+        )
 
     def _sync_defeated_players(self) -> None:
         """Remove engine-defeated powers from future environment rotations."""
@@ -648,11 +660,18 @@ class DiplomacyEnv(ta.GameEnv):
             ),
         )
 
-    def _announce_order_results(self, record: Dict[str, Any]) -> None:
+    def _announce_order_results(self, record: Dict[str, Any], skipped: bool = False) -> None:
         """Publish every order of the resolved phase with its outcome."""
         phase = record["phase"]
         results = record["results"]
-        lines = [f"===== Results of {record['season']} {record['year']} {phase} ====="]
+        title = f"{record['season']} {record['year']} {phase}"
+        if skipped:
+            lines = [f"===== {title} skipped: no power had anything to order ====="]
+            if phase == PhaseType.RETREATS.value and record["season"] == Season.FALL.value:
+                lines.extend(self._center_change_lines(record))
+            self.add_observation(from_id=ta.GAME_ID, to_id=-1, message="\n".join(lines))
+            return
+        lines = [f"===== Results of {title} ====="]
         for power_name in self._powers_by_player():
             if results.get(power_name):
                 lines.append(f"{self._power_label(power_name)}:")

@@ -80,7 +80,7 @@ class MinesweeperEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         example_row, example_col = self.rows // 2, self.cols // 2
         return (
-            f"You are playing Minesweeper on a {self.rows}x{self.cols} grid with {self.num_mines} hidden mines.\n"
+            f"You are playing Minesweeper on a grid of {self.rows} rows and {self.cols} columns with {self.num_mines} hidden mines.\n"
             "The objective of the game is to reveal every cell that does not contain a mine.\n"
             f"Rows are numbered 0 to {self.rows - 1} from top to bottom and columns 0 to {self.cols - 1} from left "
             "to right, as labeled on the board.\n"

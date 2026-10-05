@@ -165,31 +165,32 @@ def test_relayed_chat_cannot_impersonate_the_game():
     assert len(seen_by_others) == 2 and not any("[GAME]" in m for m in seen_by_others)
 
 
-def test_hold_orders_execute_and_phase_transitions():
+def _skipped(env: DiplomacyEnv):
+    return [message for _, message, _, _ in env.state.events if " skipped: no power had anything to order" in message]
+
+
+def test_hold_orders_execute_and_empty_phases_are_skipped():
     # negotiations_per_phase=1 -> every round is the order-submission round
     env = DiplomacyEnv(negotiations_per_phase=1)
     env.reset(num_players=3, seed=42)
 
-    # Spring 1901 Movement: everyone holds
+    # Spring 1901 Movement: everyone holds, so nobody retreats and Spring Retreats is skipped.
     done = _submit_orders_for_all(env, _hold_orders_action)
     assert done is False
-    assert env.state.game_state["season"] == "Spring"
-    assert env.state.game_state["phase"] == "Retreats"
+    state = env.state.game_state
+    assert (state["season"], state["phase"], state["year"]) == ("Fall", "Movement", 1901)
+    assert [message.splitlines()[0] for message in _skipped(env)] == [
+        "===== Spring 1901 Retreats skipped: no power had anything to order ====="
+    ]
 
-    # Spring 1901 Retreats: an explicit empty order set omits all retreats.
-    done = _submit_orders_for_all(
-        env, lambda e, pid: "Submit Orders:\n# no retreat orders\n"
-    )
-    assert done is False
-    assert env.state.game_state["season"] == "Fall"
-    assert env.state.game_state["phase"] == "Movement"
-    assert env.state.game_state["year"] == 1901
-
-    # Fall 1901 Movement: everyone holds again
+    # Fall 1901 Movement: holds again, so Fall Retreats and Winter Adjustments are skipped too.
     done = _submit_orders_for_all(env, _hold_orders_action)
     assert done is False
-    assert env.state.game_state["season"] == "Fall"
-    assert env.state.game_state["phase"] == "Retreats"
+    state = env.state.game_state
+    assert (state["season"], state["phase"], state["year"]) == ("Spring", "Movement", 1902)
+    fall_retreats, winter = _skipped(env)[1:]
+    assert "No supply centers changed hands at the end of Fall 1901." in fall_retreats
+    assert winter.startswith("===== Winter 1901 Adjustments skipped")
 
 
 def test_invalid_action_is_rejected_without_ending_game():
@@ -229,7 +230,7 @@ def test_repeated_invalid_moves_eliminate_player():
         assert env.state.current_player_id == pid
         done = env.step(_hold_orders_action(env, pid))
     assert done is False
-    assert env.state.game_state["phase"] == "Retreats"
+    assert (env.state.game_state["season"], env.state.game_state["phase"]) == ("Fall", "Movement")
 
 
 def test_supported_head_to_head_keeps_active_and_dislodged_units_synchronized():
@@ -995,7 +996,7 @@ def test_game_ends_in_a_draw_after_max_years_without_a_trailing_board():
         done = env.step(action)
         steps += 1
 
-    assert steps == 15  # five phases, three players, one round each
+    assert steps == 6  # only the two Movement phases have orders: three players, one round each
     rewards, game_info = env.close()
     assert rewards == {0: 0, 1: 0, 2: 0}
     assert "Game ended in a DRAW after 1 game years." in game_info[0]["reason"]
@@ -1016,7 +1017,9 @@ def test_scripted_game_year_shows_each_player_the_board_and_nothing_private(num_
     allowed_viewers = {}  # private token -> players allowed to see it
     seen = {pid: "" for pid in powers}
 
-    for step in range(5 * 2 * num_players):  # one game year
+    # One game year (everyone holds, so only the Movement phases are played), then the first round of 1902, in which
+    # each player reads the Fall results.
+    for step in range(2 * 2 * num_players + num_players):
         pid, observation = env.get_observation()
         seen[pid] += observation
         assert f"It is your turn. You are {powers[pid]} (Player {pid})." in observation
@@ -1044,9 +1047,10 @@ def test_scripted_game_year_shows_each_player_the_board_and_nothing_private(num_
     assert (env.engine.season, env.engine.year) == (Season.SPRING, 1902)
     for pid in powers:
         assert f"[{powers[(pid - 1) % num_players]}] (privately to you) tok" in seen[pid]
-        for phase in ("Spring 1901 Movement", "Spring 1901 Retreats", "Fall 1901 Movement",
-                      "Fall 1901 Retreats"):
+        for phase in ("Spring 1901 Movement", "Fall 1901 Movement"):
             assert f"===== Results of {phase} =====" in seen[pid]
+        for phase in ("Spring 1901 Retreats", "Fall 1901 Retreats", "Winter 1901 Adjustments"):
+            assert f"===== {phase} skipped: no power had anything to order =====" in seen[pid]
 
 
 def test_padded_messages_are_delivered_intact():

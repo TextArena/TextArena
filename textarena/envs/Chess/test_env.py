@@ -35,6 +35,18 @@ def test_fools_mate_black_wins():
         done = env.step(move)
     assert done
     assert env.state.rewards == {1: 1, 0: -1}
+    assert env.state.game_info[0]["reason"] == "Black wins by checkmate."
+
+
+def test_moves_and_checks_are_announced_by_color():
+    env = _fresh()
+    for move in ["e2e4", "f7f6", "d1h5"]:
+        env.step(move)
+    messages = [message for _, message, _, _ in env.state.events]
+    assert messages.index("Black is in check.") == messages.index("White played d1h5.") + 1
+    assert messages.count("Black is in check.") == 1
+    assert "promote a pawn by adding q, r, b or n" in env.prompt(1)
+    assert "drawn after 30 moves in total" in env.prompt(1)
 
 
 def test_invalid_format_increments_error_count():

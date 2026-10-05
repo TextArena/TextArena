@@ -49,12 +49,13 @@ class Mafia(Role):
     team = "Mafia"
     description = "A Mafia member. Eliminate villagers and gain majority."
     def get_prompt(self, player_id, player_roles, num_players, num_discussion_rounds):
-        teammates = [f"Player {pid}" for pid, r in player_roles.items() if r == "Mafia"]
+        teammates = [f"Player {pid}" for pid, r in player_roles.items() if r == "Mafia" and pid != player_id]
+        team_line = f"Your fellow Mafia: {', '.join(teammates)}." if teammates else "You are the only Mafia member."
         return (
             f"Welcome to Secret Mafia! You are Player {player_id}.\n"
             f"Your role: {self.name}\nTeam: {self.team}\nDescription: {self.description}\n\n"
             f"Players: {', '.join([f'Player {i}' for i in range(num_players)])}\n\n"
-            f"Your teammates are: {', '.join(teammates)}.\n\n"
+            f"{team_line}\n\n"
             f"During DAY phase: Speak freely and vote.\n"
             f"During NIGHT phase: reply with the player number, e.g. 'Player X' or just 'X', to vote and eliminate a villager. "
             f"Only your fellow Mafia see these votes; the most-voted target is attacked.\n"

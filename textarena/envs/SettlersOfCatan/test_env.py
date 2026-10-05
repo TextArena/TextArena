@@ -259,6 +259,9 @@ def test_trade_is_atomic_resource_conserving_and_private():
     assert sum(red.hand.values()) + sum(white.hand.values()) == 2
     negotiation_events = env.state.events[start:]
     assert all(event[3] in {0, 1} for event in negotiation_events)
+    assert "Trade executed: Player 0 (Red) gave 1 Wood to Player 1 (White) for 1 Wheat." in [
+        event[1] for event in negotiation_events
+    ]
 
 
 def test_accept_plus_invalid_counteroffer_is_transactionally_invalid():

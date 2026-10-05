@@ -1,6 +1,5 @@
 {
   "en": {
-    "05a2f2b5b0": "Make your moves in UCI format (e.g., 'e2e4').",
     "060acda0d4": "invalid en passant part in fen: {fen}",
     "06b43affb5": "invalid uci: {uci}",
     "075da314d5": "fullmove number",
@@ -11,7 +10,6 @@
     "1d044f774e": "expected uci string to be of length 4 or 5: {uci}",
     "22b5ee27a2": "invalid character in position part of fen: {board_fen}",
     "37619fc130": "White",
-    "3840e24716": "You are playing {v0} in a game of Chess.",
     "39067c15d3": "Illegal move.",
     "4360cff2d9": "expected 8 columns per row in position part of fen: {board_fen}",
     "44c42d8446": "{name} cannot be negative: {fen}",
@@ -22,1186 +20,833 @@
     "5906af6a05": "invalid uci (use 0000 for null moves): {uci}",
     "65506fa4b2": "expected 8 rows in position part of fen: {board_fen}",
     "7581d6f8bc": "two subsequent digits in position part of fen: {board_fen}",
+    "7c412a812f": "{roles} played {move_uci}.",
     "7f3602c5c8": "a move in UCI format, the start square followed by the end square (add q, r, b or n to promote a pawn), for example 'e2e4'",
+    "7fa1543bdc": "You are playing {roles} in a game of Chess.",
     "995891b968": "empty fen",
     "9d0ff59515": "invalid {name} in fen: {fen}",
     "9fbbf53f3e": "illegal uci: {uci} in {fen}",
-    "b21333d662": "Player {player_id} made the following move: {move_uci}",
     "b406fb57b2": "Black",
+    "c57cdcff86": "{roles} wins by {termination}.",
+    "cbb1aec6eb": "{roles} is in check.",
     "d50e4f3eb1": "Game ended in a draw by {termination}.",
     "d7e015d313": "expected 'w' or 'b' for turn part of fen: {fen}",
     "d9c41cd546": "invalid castling part in fen: {fen}",
-    "dc5a48b394": "Player {winner_id} wins by {termination}.",
     "dc9f112512": "Current board:",
     "e4a4ab0abb": "Show the list of legal moves before each move.",
+    "e549930603": "On the board, uppercase letters are White's pieces and lowercase letters are Black's (K king, Q queen, R rook, B bishop, N knight, P pawn), and '.' is an empty square.",
+    "e62ec0c6f8": "The game is drawn after {max_turns} moves in total (both players combined) if it has not ended sooner.",
     "f6739d19c1": "half-move clock",
-    "fac2e57e13": "'~' not after piece in position part of fen: {board_fen}"
+    "fac2e57e13": "'~' not after piece in position part of fen: {board_fen}",
+    "fb2e614c65": "Reply with one move in UCI format: the start square followed by the end square, e.g. 'e2e4'. Castle by moving the king two squares (e.g. 'e1g1'), and promote a pawn by adding q, r, b or n (e.g. 'e7e8q')."
   },
   "ace": {
     "1b90caee82": "Gerakan sah: {v0}",
-    "3840e24716": "Droe jeu {v0} lam permainan Catur.",
-    "39067c15d3": "Peurangoe nyan ilegal.",
-    "b21333d662": "Pemain {player_id} meu'usut geutanyoe nyang baro: {move_uci}"
+    "39067c15d3": "Peurangoe nyan ilegal."
   },
   "acm": {
     "1b90caee82": "النقرات الصالحة: {v0}",
-    "3840e24716": "أنت تلعب {v0} في لعبة الشطرنج.",
-    "39067c15d3": "حركة غير قانونية.",
-    "b21333d662": "اللاعب {player_id} قام بالنقلة التالية: {move_uci}"
+    "39067c15d3": "حركة غير قانونية."
   },
   "acq": {
     "1b90caee82": "النقرات الصالحة: {v0}",
-    "3840e24716": "أنت تلعب {v0} في لعبة الشطرنج.",
-    "39067c15d3": "تحرك غير قانوني.",
-    "b21333d662": "اللاعب {player_id} قام بالنقلة التالية: {move_uci}"
+    "39067c15d3": "تحرك غير قانوني."
   },
   "aeb": {
     "1b90caee82": "النقرات الصالحة: {v0}",
-    "3840e24716": "أنت تلعب {v0} في لعبة الشطرنج.",
-    "39067c15d3": "خطوة ممنوعة.",
-    "b21333d662": "اللاعب {player_id} قام بالنقلة التالية: {move_uci}"
+    "39067c15d3": "خطوة ممنوعة."
   },
   "af": {
     "1b90caee82": "Geldige skuiwe: {v0}",
-    "3840e24716": "Jy speel {v0} in 'n spel van Skaak.",
     "39067c15d3": "Ongeldige skuif.",
-    "b21333d662": "Speler {player_id} het die volgende skuif gemaak: {move_uci}",
     "dc9f112512": "Huidige bord:"
   },
   "ajp": {
     "1b90caee82": "النقرات الصحيحة: {v0}",
-    "3840e24716": "أنت تلعب {v0} في لعبة الشطرنج.",
-    "39067c15d3": "حركة غير قانونية.",
-    "b21333d662": "اللاعب {player_id} قام بالنقلة التالية: {move_uci}"
+    "39067c15d3": "حركة غير قانونية."
   },
   "aka": {
     "1b90caee82": "Nhyehyɛeɛ a wɔtumi yɛ: {v0}",
-    "3840e24716": "Wo reko {v0} wɔ Chess akansi mu.",
-    "39067c15d3": "Akwan a ɛmfata so.",
-    "b21333d662": "Akansifoɔ {player_id} yɛɛ nhyehyɛeɛ a edidi so: {move_uci}"
+    "39067c15d3": "Akwan a ɛmfata so."
   },
   "am": {
     "1b90caee82": "ተስማሚ ስንት ማስሂያ: {v0}",
-    "3840e24716": "እርስዎ በ{v0} በሽቶሎ ጨዋታ ላይ ትጫወታለህ.",
-    "39067c15d3": "ሕገ ወጥ እንቅስቃሴ።",
-    "b21333d662": "ተጫዋች {player_id} የሚከተለውን ማስሂያ አደረገ: {move_uci}"
+    "39067c15d3": "ሕገ ወጥ እንቅስቃሴ።"
   },
   "apc": {
     "1b90caee82": "النقرات الصحيحة: {v0}",
-    "3840e24716": "أنت تلعب {v0} في لعبة الشطرنج.",
-    "39067c15d3": "حركة غير قانونية.",
-    "b21333d662": "اللاعب {player_id} قام بالنقلة التالية: {move_uci}"
+    "39067c15d3": "حركة غير قانونية."
   },
   "ar": {
     "1b90caee82": "الحركات الصالحة: {v0}",
-    "3840e24716": "أنت تلعب باللون {v0} في مباراة شطرنج.",
     "39067c15d3": "حركة غير قانونية.",
-    "b21333d662": "نفّذ اللاعب {player_id} الحركة التالية: {move_uci}",
     "dc9f112512": "اللوحة الحالية:"
   },
   "ars": {
     "1b90caee82": "الحركات الصحيحة: {v0}",
-    "3840e24716": "أنت تلعب {v0} في لعبة الشطرنج.",
-    "39067c15d3": "حركة غير قانونية.",
-    "b21333d662": "اللاعب {player_id} قام بالحركة التالية: {move_uci}"
+    "39067c15d3": "حركة غير قانونية."
   },
   "ary": {
     "1b90caee82": "النقرات الصحيحة: {v0}",
-    "3840e24716": "أنت تلعب {v0} في لعبة الشطرنج.",
-    "39067c15d3": "حركة غير قانونية.",
-    "b21333d662": "اللاعب {player_id} قام بالنقلة التالية: {move_uci}"
+    "39067c15d3": "حركة غير قانونية."
   },
   "arz": {
     "1b90caee82": "الحركات الصالحة: {v0}",
-    "3840e24716": "أنت تلعب {v0} في لعبة الشطرنج.",
-    "39067c15d3": "حركة مش قانونية.",
-    "b21333d662": "اللاعب {player_id} قام بالحركة التالية: {move_uci}"
+    "39067c15d3": "حركة مش قانونية."
   },
   "as": {
-    "39067c15d3": "অবৈধভাৱে চলাচল।",
-    "b21333d662": "খেলুৱৈ {player_id}য়ে নিম্নলিখিত পদক্ষেপটো কৰেঃ {move_uci}"
+    "39067c15d3": "অবৈধভাৱে চলাচল।"
   },
   "ast": {
-    "3840e24716": "Tas xugando {v0} nun partíu d'axedrez.",
     "39067c15d3": "Un movimientu ilegal.",
-    "b21333d662": "El xugador {player_id} fixo'l siguiente movimientu: {move_uci}",
     "dc9f112512": "Tableru actual:"
   },
   "awa": {
     "1b90caee82": "मान्य चालें: {v0}",
-    "3840e24716": "तुम {v0} के रंग से शतरंज का खेल खेल रहे हो।",
     "39067c15d3": "अवैध चाल।",
-    "b21333d662": "खिलाड़ी {player_id} ने निम्नलिखित चाल की: {move_uci}",
     "dc9f112512": "वर्तमान बोर्ड:"
   },
   "ayr": {
     "1b90caee82": "Kunan pukllay t'inkipana: {v0}",
-    "3840e24716": "Jumanxa {v0} utt'ayasiñapatax chess jach'a jaqinakaraki.",
-    "39067c15d3": "Jan wali luräwi.",
-    "b21333d662": "Jaqi {player_id} kunayman jach'a jaqinakaruxa: {move_uci}"
+    "39067c15d3": "Jan wali luräwi."
   },
   "az": {
     "1b90caee82": "Etibarlı hərəkətlər: {v0}",
-    "3840e24716": "Siz Şahmat oyununda {v0} oynuyursunuz.",
     "39067c15d3": "Qanunsuz hərəkət.",
-    "b21333d662": "Oyunçu {player_id} aşağıdakı hərəkəti etdi: {move_uci}",
     "dc9f112512": "Cari taxta:"
   },
   "azb": {
     "1b90caee82": "معتبر حرکتلر: {v0}",
-    "3840e24716": "You are playing {v0} in a game of Chess.",
-    "39067c15d3": "قانونسوز حرکت.",
-    "b21333d662": "اویناجی {player_id} آشرا حرکت ائدیب: {move_uci}"
+    "39067c15d3": "قانونسوز حرکت."
   },
   "bak": {
     "1b90caee82": "Ғәмәлдәге йөрөштәр: {v0}",
-    "3840e24716": "Һеҙ {v0} төҫөндә Шахмат уйынында уйнайһығыҙ.",
     "39067c15d3": "Законһыҙ хәрәкәт.",
-    "b21333d662": "Игрок {player_id} сделал следующий ход: {move_uci}",
     "dc9f112512": "Әлеге таҡта:"
   },
   "bam": {
     "1b90caee82": "Jwele dɔw la: {v0}",
-    "3840e24716": "I nana jɛkulu {v0} kɔnɔ bɔ Chess.",
-    "39067c15d3": "O ye ko balilen ye.",
-    "b21333d662": "Jɛkulu {player_id} yan ina jɛkulu folo: {move_uci}"
+    "39067c15d3": "O ye ko balilen ye."
   },
   "ban": {
     "1b90caee82": "Gerakan sah: {v0}",
-    "3840e24716": "Cai ngmain {v0} ring permainan Sekak.",
-    "39067c15d3": "Pamarginé punika nénten manut ring undang-undang.",
-    "b21333d662": "Pemain {player_id} membuat gerakan berikut: {move_uci}"
+    "39067c15d3": "Pamarginé punika nénten manut ring undang-undang."
   },
   "be": {
-    "39067c15d3": "Незаконны рух.",
-    "b21333d662": "Гулец {player_id} зрабіў наступны ход: {move_uci}"
+    "39067c15d3": "Незаконны рух."
   },
   "bem": {
     "1b90caee82": "Mipimo inayowezekana: {v0}",
-    "3840e24716": "Mwena ukubomba {v0} mu mpila ya Chess.",
-    "39067c15d3": "Ukucita ifyabipa.",
-    "b21333d662": "Mwina {player_id} akasambilila mikute iyofyo: {move_uci}"
+    "39067c15d3": "Ukucita ifyabipa."
   },
   "bg": {
     "1b90caee82": "Валидни ходове: {v0}",
-    "3840e24716": "Играете с {v0} в игра на Шах.",
     "39067c15d3": "Невалиден ход.",
-    "b21333d662": "Играч {player_id} направи следния ход: {move_uci}",
     "dc9f112512": "Текуща дъска:"
   },
   "bho": {
     "1b90caee82": "वैध चाल: {v0}",
-    "3840e24716": "आप {v0} खेल रहे हैं एक गेम ऑफ चेस में।",
-    "39067c15d3": "अवैध चाल चलल बा.",
-    "b21333d662": "प्लेयर {player_id} द्वारा निम्नलिखित चाल बनाई गई: {move_uci}"
+    "39067c15d3": "अवैध चाल चलल बा."
   },
   "bjn": {
     "1b90caee82": "Gérak sah valid: {v0}",
-    "3840e24716": "Kamu bamain {v0} dalam sabuah gim Catur.",
-    "39067c15d3": "Pindah nang ilegal.",
-    "b21333d662": "Pamaian {player_id} ngalakuakan gérak sabagai barikut: {move_uci}"
+    "39067c15d3": "Pindah nang ilegal."
   },
   "bn": {
     "1b90caee82": "বৈধ চালগুলি: {v0}",
-    "3840e24716": "আপনি একটি দাবা খেলায় {v0} খেলছেন।",
     "39067c15d3": "অবৈধ চাল।",
-    "b21333d662": "খেলোয়াড় {player_id} নিম্নলিখিত চালটি করেছেন: {move_uci}",
     "dc9f112512": "বর্তমান বোর্ড:"
   },
   "bod": {
     "1b90caee82": "རྩིག་སྒྱུར་འབྱུང་བ།: {v0}",
-    "3840e24716": "ཁྱེད་{v0}རིག་གནས་ཀྱི་རྩིག་སྒྱུར་འཁྲབ་མཁན་ཡིན།",
-    "39067c15d3": "ཁྲིམས་འགལ་གྱི་ལས་འགུལ་ཞིག",
-    "b21333d662": "མི་{player_id} སྒྱུར་བྱས་པ་དེ་རྩིག་སྒྱུར་འདི་ཡིན།: {move_uci}"
+    "39067c15d3": "ཁྲིམས་འགལ་གྱི་ལས་འགུལ་ཞིག"
   },
   "bug": {
     "1b90caee82": "Gerak sah: {v0}",
-    "3840e24716": "Sita maddarenni {v0} ri olahraga Catur.",
-    "39067c15d3": "Iyyaro gau'e de na legala.",
-    "b21333d662": "Pammulang {player_id} maddarenni maddae: {move_uci}"
+    "39067c15d3": "Iyyaro gau'e de na legala."
   },
   "ca": {
     "1b90caee82": "Moviments vàlids: {v0}",
-    "3840e24716": "Estàs jugant amb {v0} en una partida d'Escacs.",
     "39067c15d3": "Moviment il·legal.",
-    "b21333d662": "El Jugador {player_id} ha fet el següent moviment: {move_uci}",
     "dc9f112512": "Tauler actual:"
   },
   "ceb": {
     "1b90caee82": "Ang mga balidos nga mga galaw: {v0}",
-    "3840e24716": "Ikaw nagdula {v0} sa usa ka partido sa Chess.",
-    "39067c15d3": "Ilegal nga lihok.",
-    "b21333d662": "Ang player {player_id} naghimo sa sunod nga galaw: {move_uci}"
+    "39067c15d3": "Ilegal nga lihok."
   },
   "cjk": {
     "1b90caee82": "Vitendo vyema: {v0}",
-    "3840e24716": "Wena uli kutamba {v0} mu tchess.",
     "39067c15d3": "Kusogola hakuruhusiwi.",
-    "b21333d662": "Mchezaji {player_id} alitamba kitendo kifuatacho: {move_uci}",
     "dc9f112512": "Tchess ya sasa:"
   },
   "ckb": {
     "1b90caee82": "جوڵە هەڵگەڕاوەکان: {v0}",
-    "3840e24716": "توێی {v0} دەکەی لە یاریێکدا شاترانج.",
-    "39067c15d3": "جوڵەی نایاسایی.",
-    "b21333d662": "یاریکەر {player_id} جوڵەی خوارەوەی ئەنجامدا: {move_uci}"
+    "39067c15d3": "جوڵەی نایاسایی."
   },
   "crh": {
     "1b90caee82": "Mümkün hareketler: {v0}",
-    "3840e24716": "Satranç oyununda {v0} oynuyorsunuz.",
     "39067c15d3": "Qanunsız areket.",
-    "b21333d662": "Oyuncu {player_id} aşağıdaki hamleyi yaptı: {move_uci}",
     "dc9f112512": "Şimdiki tahta:"
   },
   "cs": {
     "1b90caee82": "Platné tahy: {v0}",
-    "3840e24716": "Hrajete {v0} v šachu.",
     "39067c15d3": "Nelegální tah.",
-    "b21333d662": "Hráč {player_id} provedl následující tah: {move_uci}",
     "dc9f112512": "Aktuální deska:"
   },
   "cy": {
-    "39067c15d3": "Symud anghyfreithlon.",
-    "b21333d662": "Gwnaeth y chwaraewr {player_id} y symudiad canlynol: {move_uci}"
+    "39067c15d3": "Symud anghyfreithlon."
   },
   "da": {
     "1b90caee82": "Gyldige træk: {v0}",
-    "3840e24716": "Du spiller {v0} i et spil Skak.",
     "39067c15d3": "Ulovligt træk.",
-    "b21333d662": "Spiller {player_id} foretog følgende træk: {move_uci}",
     "dc9f112512": "Aktuelt bræt:"
   },
   "de": {
     "1b90caee82": "Gültige Züge: {v0}",
-    "3840e24716": "Du spielst {v0} in einer Schachpartie.",
     "39067c15d3": "Ungültiger Zug.",
-    "b21333d662": "Spieler {player_id} führte den folgenden Zug aus: {move_uci}",
     "dc9f112512": "Aktuelles Spielfeld:"
   },
   "dik": {
     "1b90caee82": "Käär kekä thïn: {v0}",
-    "3840e24716": "Yin abi ci {v0} ee gem ku Chess.",
-    "39067c15d3": "Löŋ ë kɔc cï gam.",
-    "b21333d662": "Wär {player_id} acë käärë: {move_uci}"
+    "39067c15d3": "Löŋ ë kɔc cï gam."
   },
   "dyu": {
     "1b90caee82": "Mouvman valablɛ: {v0}",
-    "3840e24716": "I sɛn don a jɔ {v0} ɔ kɛ ɛlɛmɛnɛ kan.",
-    "39067c15d3": "O ye koo jugu lo ye.",
-    "b21333d662": "Jokɛra {player_id} a faamɔ ɛlɛmɛnɛ: {move_uci}"
+    "39067c15d3": "O ye koo jugu lo ye."
   },
   "dzo": {
     "1b90caee82": "འགྲུབ་པའི་གོམ་སྤོ། {v0}",
-    "3840e24716": "ཁྱེད་{v0} འཁྲིད་དེ་ཆེས་སྡེ་ལ་རྩེད་མོ་འགྲོ་བཞིན་ཡོད།.",
-    "39067c15d3": "ཁྲིམས་འགལ་གྱི་ལཱ་ཚུ་འབད་ཡོདཔ་ཨིན།",
-    "b21333d662": "རྩེད་མཁན་ {player_id} གྱིས་གོམ་སྤོ་འདི་བྱས་འདུག་ {move_uci}"
+    "39067c15d3": "ཁྲིམས་འགལ་གྱི་ལཱ་ཚུ་འབད་ཡོདཔ་ཨིན།"
   },
   "el": {
     "1b90caee82": "Εγκυρές κινήσεις: {v0}",
-    "3840e24716": "Παίζετε {v0} σε ένα παιχνίδι Σκακιού.",
     "39067c15d3": "Παράνομη κίνηση.",
-    "b21333d662": "Ο Παίκτης {player_id} έκανε την ακόλουθη κίνηση: {move_uci}",
     "dc9f112512": "Τρέχων πίνακας:"
   },
   "epo": {
     "1b90caee82": "Validaj movoj: {v0}",
-    "3840e24716": "Vi ludas {v0} en ludo de Ŝako.",
     "39067c15d3": "Kontraŭleĝa movado.",
-    "b21333d662": "Ludanto {player_id} faris la sekvan movon: {move_uci}",
     "dc9f112512": "Aktuala tabulo:"
   },
   "es": {
     "1b90caee82": "Movimientos válidos: {v0}",
-    "3840e24716": "Estás jugando con {v0} en una partida de ajedrez.",
     "39067c15d3": "Movimiento ilegal.",
-    "b21333d662": "El Jugador {player_id} realizó el siguiente movimiento: {move_uci}",
     "dc9f112512": "Tablero actual:"
   },
   "et": {
     "1b90caee82": "Kehtivad käigud: {v0}",
-    "3840e24716": "Sa mängid {v0} malemängus.",
     "39067c15d3": "Ebaseaduslik käik.",
-    "b21333d662": "Mängija {player_id} tegi järgmise käigu: {move_uci}",
     "dc9f112512": "Praegune laud:"
   },
   "eu": {
-    "3840e24716": "Xake partidu batean {v0} jokatzen ari zara.",
-    "39067c15d3": "Legez kanpoko ekintza bat.",
-    "b21333d662": "Jokalariak {player_id} mugimendu hau egin du: {move_uci}"
+    "39067c15d3": "Legez kanpoko ekintza bat."
   },
   "ewe": {
     "1b90caee82": "Dɔwɔna wɔwɔ: {v0}",
-    "3840e24716": "Efe dɔ wo {v0} le gome la me.",
-    "39067c15d3": "Enye afɔɖeɖe si mele se nu o.",
-    "b21333d662": "Dɔwɔla {player_id} wɔ di wɔwɔ si: {move_uci}"
+    "39067c15d3": "Enye afɔɖeɖe si mele se nu o."
   },
   "fa": {
     "1b90caee82": "حرکات مجاز: {v0}",
-    "3840e24716": "شما با رنگ {v0} در یک بازی شطرنج بازی می‌کنید.",
     "39067c15d3": "حرکت غیرقانونی است.",
-    "b21333d662": "بازیکن {player_id} حرکت زیر را انجام داد: {move_uci}",
     "dc9f112512": "تخته فعلی:"
   },
   "fao": {
     "1b90caee82": "Gildir leikir: {v0}",
-    "3840e24716": "Tú ert at leika {v0} í einum leiki av Skák.",
     "39067c15d3": "Ólógligur flytingar.",
-    "b21333d662": "Leikarin {player_id} gjørdi eftirfylgjandi leikaratak: {move_uci}",
     "dc9f112512": "Núverandi borð:"
   },
   "fi": {
     "1b90caee82": "Kelvolliset siirrot: {v0}",
-    "3840e24716": "Pelaat {v0}ia shakkipelissä.",
     "39067c15d3": "Laiton siirto.",
-    "b21333d662": "Pelaaja {player_id} teki seuraavan siirron: {move_uci}",
     "dc9f112512": "Nykyinen pelilauta:"
   },
   "fij": {
     "1b90caee82": "Vakadidike ni kena ibali: {v0}",
-    "3840e24716": "O ni tauri {v0} ena game ni Chess.",
-    "39067c15d3": "Caka cala vakalawa.",
-    "b21333d662": "Player {player_id} e caka na kena ikuri: {move_uci}"
+    "39067c15d3": "Caka cala vakalawa."
   },
   "fil": {
     "1b90caee82": "Mga wastong pagkilos: {v0}",
-    "3840e24716": "Ikaw ay naglalaro ng {v0} sa isang laro ng Ahedres.",
     "39067c15d3": "Ilegal na pagkilos.",
-    "b21333d662": "Ang Player {player_id} ay gumawa ng sumusunod na pagkilos: {move_uci}",
     "dc9f112512": "Kasalukuyang board:"
   },
   "fon": {
     "1b90caee82": "Wɛmɛnɛ wɛwɛwɛ: {v0}",
-    "3840e24716": "A le tin {v0} to gbede Chess.",
-    "39067c15d3": "Nǔ e è ma ɖó sɛ́n ǎ é.",
-    "b21333d662": "Aɖɔɖɔyɛ {player_id} wa xɔnɔnɔ wɛmɛnɛ ehe: {move_uci}"
+    "39067c15d3": "Nǔ e è ma ɖó sɛ́n ǎ é."
   },
   "fr": {
     "1b90caee82": "Coups valides : {v0}",
-    "3840e24716": "Vous jouez les {v0} dans une partie d'échecs.",
     "39067c15d3": "Coup illégal.",
-    "b21333d662": "Le Joueur {player_id} a effectué le coup suivant : {move_uci}",
     "dc9f112512": "Plateau actuel :"
   },
   "fur": {
     "1b90caee82": "Mozions validis: {v0}",
-    "3840e24716": "Tu zois {v0} in une partide di Scacs.",
-    "39067c15d3": "Moviment ilegâl.",
-    "b21333d662": "Il zogador {player_id} al à fat il moviment che al segue: {move_uci}"
+    "39067c15d3": "Moviment ilegâl."
   },
   "fuv": {
     "1b90caee82": "Tafarkin da suka dace: {v0}",
-    "3840e24716": "A si o waɗa {v0} a cikin wasa na Chess.",
-    "39067c15d3": "Ko ɗum jeyaaka bee dooka.",
-    "b21333d662": "Koɗo {player_id} yi'iwa maayde: {move_uci}"
+    "39067c15d3": "Ko ɗum jeyaaka bee dooka."
   },
   "gaz": {
     "1b90caee82": "Galaarii dhaban: {v0}",
-    "3840e24716": "Ati tuicha {v0} tapha Chess keessatti.",
-    "39067c15d3": "Tarkaanfii seeraan alaa fudhate.",
-    "b21333d662": "Taphattuu {player_id} tapha kana godhe: {move_uci}"
+    "39067c15d3": "Tarkaanfii seeraan alaa fudhate."
   },
   "gl": {
     "1b90caee82": "Movementos válidos: {v0}",
-    "3840e24716": "Estás xogando con {v0} nun xogo de Xadrez.",
     "39067c15d3": "Movemento ilegal.",
-    "b21333d662": "O Xogador {player_id} fixo o seguinte movemento: {move_uci}",
     "dc9f112512": "Taboleiro actual:"
   },
   "gla": {
     "1b90caee82": "Glèidheadh chuibh: {v0}",
-    "3840e24716": "Tha thu a' cluich {v0} ann an geam Ficheall.",
-    "39067c15d3": "Gluasad mì-laghail.",
-    "b21333d662": "Chuir {player_id} an gluasad a leanas: {move_uci}"
+    "39067c15d3": "Gluasad mì-laghail."
   },
   "gle": {
     "1b90caee82": "Gluaisní bailí: {v0}",
-    "3840e24716": "Tá tú ag imirt {v0} i gcluiche Fichille.",
-    "39067c15d3": "Gníomh neamhdhleathach.",
-    "b21333d662": "Rinne imeachtaí an imreoir {player_id} an gluaiseacht seo a leanas: {move_uci}"
+    "39067c15d3": "Gníomh neamhdhleathach."
   },
   "grn": {
     "1b90caee82": "Mba'éichapa ojejapo: {v0}",
-    "3840e24716": "Rehecha {v0} peteĩ jehai Chess.",
-    "39067c15d3": "Ojejapo'ÿva léipe.",
-    "b21333d662": "Jugador {player_id} ojapo ko'ãva mba'e: {move_uci}"
+    "39067c15d3": "Ojejapo'ÿva léipe."
   },
   "gu": {
-    "39067c15d3": "ગેરકાયદેસર ચાલ.",
-    "b21333d662": "ખેલાડી {player_id} નીચેની ચાલ કરે છેઃ {move_uci}"
+    "39067c15d3": "ગેરકાયદેસર ચાલ."
   },
   "ha": {
-    "39067c15d3": "Ƙa'idar doka.",
-    "b21333d662": "Mai kunnawa {player_id} ya yi motsi mai zuwa: {move_uci}"
+    "39067c15d3": "Ƙa'idar doka."
   },
   "hat": {
     "1b90caee82": "Deplasman valab: {v0}",
-    "3840e24716": "Ou ap jwe {v0} nan yon jwèt echèk.",
     "39067c15d3": "Move ilegal.",
-    "b21333d662": "Jwè {player_id} fè deplasman swivan an: {move_uci}",
     "dc9f112512": "Tablo aktyèl la:"
   },
   "he": {
     "1b90caee82": "מהלכים תקינים: {v0}",
-    "3840e24716": "אתה משחק בצבע {v0} במשחק שחמט.",
     "39067c15d3": "מהלך לא חוקי.",
-    "b21333d662": "שחקן {player_id} ביצע את המהלך הבא: {move_uci}",
     "dc9f112512": "הלוח הנוכחי:"
   },
   "hi": {
     "1b90caee82": "मान्य चालें: {v0}",
-    "3840e24716": "आप {v0} के रूप में शतरंज का खेल खेल रहे हैं।",
     "39067c15d3": "अवैध चाल।",
-    "b21333d662": "खिलाड़ी {player_id} ने निम्नलिखित चाल की: {move_uci}",
     "dc9f112512": "वर्तमान बोर्ड:"
   },
   "hne": {
     "1b90caee82": "सही चाल: {v0}",
-    "3840e24716": "तुम {v0} रंग के साथ चेस के खेल में खेलत हो।",
-    "39067c15d3": "अवैध चाल हे।",
-    "b21333d662": "प्लेयर {player_id} ने निम्नलिखित चाल किया हे: {move_uci}"
+    "39067c15d3": "अवैध चाल हे।"
   },
   "hr": {
     "1b90caee82": "Valjani potezi: {v0}",
-    "3840e24716": "Igrate kao {v0} u šahu.",
     "39067c15d3": "Nedopušten potez.",
-    "b21333d662": "Igrač {player_id} je napravio sljedeći potez: {move_uci}",
     "dc9f112512": "Trenutna ploča:"
   },
   "hu": {
     "1b90caee82": "Érvényes lépések: {v0}",
-    "3840e24716": "Ön {v0} színnel játszik egy sakkjátszmában.",
     "39067c15d3": "Érvénytelen lépés.",
-    "b21333d662": "{player_id}. játékos a következő lépést tette: {move_uci}",
     "dc9f112512": "Aktuális tábla:"
   },
   "hy": {
-    "39067c15d3": "Անօրինական քայլ:",
-    "b21333d662": "Խաղացողը {player_id} կատարել է հետեւյալ քայլը. {move_uci}"
+    "39067c15d3": "Անօրինական քայլ:"
   },
   "id": {
     "1b90caee82": "Langkah-langkah yang valid: {v0}",
-    "3840e24716": "Anda memainkan {v0} dalam permainan Catur.",
     "39067c15d3": "Langkah yang tidak sah.",
-    "b21333d662": "Pemain {player_id} melakukan langkah berikut: {move_uci}",
     "dc9f112512": "Papan saat ini:"
   },
   "ig": {
     "39067c15d3": "Ihe megidere iwu.",
-    "b21333d662": "Onye na-egwu egwu {player_id} mere ihe ndị a: {move_uci}",
     "dc9f112512": "Oche ugbu a:"
   },
   "ilo": {
     "1b90caee82": "Mabalin a pagliwliwan: {v0}",
-    "3840e24716": "Kayat mo a mangliwliw iti {v0} iti maysa a pagliwliwan ti Chess.",
-    "39067c15d3": "Ilegal a tignay.",
-    "b21333d662": "Nagbaliw ti Player {player_id} iti sumarsaruno a pagliwliw: {move_uci}"
+    "39067c15d3": "Ilegal a tignay."
   },
   "is": {
     "1b90caee82": "Gildir leikir: {v0}",
-    "3840e24716": "Þú ert að spila {v0} í skák.",
     "39067c15d3": "Ólöglegur leikur.",
-    "b21333d662": "Leikmaður {player_id} gerði eftirfarandi leik: {move_uci}",
     "dc9f112512": "Núverandi borð:"
   },
   "it": {
     "1b90caee82": "Mosse valide: {v0}",
-    "3840e24716": "Stai giocando con il colore {v0} in una partita di Scacchi.",
     "39067c15d3": "Mossa illegale.",
-    "b21333d662": "Il Giocatore {player_id} ha eseguito la seguente mossa: {move_uci}",
     "dc9f112512": "Tavola attuale:"
   },
   "ja": {
     "1b90caee82": "有効な手: {v0}",
-    "3840e24716": "あなたはチェスの {v0} を操作しています。",
     "39067c15d3": "無効な手です。",
-    "b21333d662": "プレイヤー {player_id} が次の手を打ちました: {move_uci}",
     "dc9f112512": "現在のボード:"
   },
   "jav": {
     "1b90caee82": "Langkah-langkah sing sah: {v0}",
-    "3840e24716": "Panjenengan main {v0} ing sawijining dolanan Chess.",
-    "39067c15d3": "Langkah ilegal.",
-    "b21333d662": "Pemain {player_id} ndamel langkah kaya mengkene: {move_uci}"
+    "39067c15d3": "Langkah ilegal."
   },
   "ka": {
-    "39067c15d3": "არაკანონიერი სვლა.",
-    "b21333d662": "მოთამაშემ {player_id} გააკეთა შემდეგი ნაბიჯი: {move_uci}"
+    "39067c15d3": "არაკანონიერი სვლა."
   },
   "kab": {
     "1b90caee82": "Izmer ummid : {v0}",
-    "3840e24716": "Tirid {v0} deg urar n Chess.",
-    "39067c15d3": "Aḥeddad ur nelli d azedgan.",
-    "b21333d662": "Amazan {player_id} is-d-yewwi amayew amezwaru: {move_uci}"
+    "39067c15d3": "Aḥeddad ur nelli d azedgan."
   },
   "kac": {
     "1b90caee82": "Hkum sha ai wa {v0}",
-    "3840e24716": "Nan {v0} hte sha ai ni Chess kata ah sha mu.",
-    "39067c15d3": "Tara n shang ai hku galaw wa ai.",
-    "b21333d662": "Player {player_id} dai sha ai wa {move_uci} hpe gaw la"
+    "39067c15d3": "Tara n shang ai hku galaw wa ai."
   },
   "kam": {
     "1b90caee82": "Michezo halali: {v0}",
-    "3840e24716": "Uki na tii {v0} katika mchezo wa Chess.",
-    "39067c15d3": "Kũthamya kũndũ kũte kũla mĩao yeetĩkĩlĩtye.",
-    "b21333d662": "Mchezaji {player_id} alifanya mchezo ufuatao: {move_uci}"
+    "39067c15d3": "Kũthamya kũndũ kũte kũla mĩao yeetĩkĩlĩtye."
   },
   "kas": {
     "1b90caee82": "واضع چلنے والے چال: {v0}",
-    "3840e24716": "تہسے {v0} کھیلندے اوس چس کی کھیل مۺ.",
     "39067c15d3": "غیر قانونی حرکت.",
-    "b21333d662": "کھلاڑی {player_id}نہ یہ حرکت کٲڑ: {move_uci}",
     "dc9f112512": "ہُنٛد بورڈ:"
   },
   "kbp": {
     "1b90caee82": "Lɩm tɛlɛŋa: {v0}",
-    "3840e24716": "Amaa ŋɛ piloto {v0} ɖeɖe pɩlɩŋa taaŋga.",
-    "39067c15d3": "Paɣtʋ taa lɛ, pɩfɛyɩ ɖeu se ɛyʋ ɛɖɔ nʋmɔʋ ŋgʋ.",
-    "b21333d662": "Piloto {player_id} aŋaa kɛtɛkɛ ɖooo: {move_uci}"
+    "39067c15d3": "Paɣtʋ taa lɛ, pɩfɛyɩ ɖeu se ɛyʋ ɛɖɔ nʋmɔʋ ŋgʋ."
   },
   "kea": {
     "1b90caee82": "Mudansas validas: {v0}",
-    "3840e24716": "Bo ta joga {v0} nha jogu di Xadrez.",
-    "39067c15d3": "Kel-li é ilegal.",
-    "b21333d662": "Jogadôr {player_id} faziu mudansa siguinti: {move_uci}"
+    "39067c15d3": "Kel-li é ilegal."
   },
   "kik": {
     "1b90caee82": "Mikaro ĩrĩa ĩĩtagwo: {v0}",
-    "3840e24716": "Wĩ mweganĩ wa {v0} katikati ya mchezo wa Chess.",
-    "39067c15d3": "Kũthama gũtarĩ gwa kĩwatho.",
-    "b21333d662": "Mchezaji {player_id} aĩkĩrĩ mũgogo ũyũ: {move_uci}"
+    "39067c15d3": "Kũthama gũtarĩ gwa kĩwatho."
   },
   "kin": {
     "1b90caee82": "Mikono ihakikishwa: {v0}",
-    "3840e24716": "Ukina {v0} mu mukino wa Chess.",
-    "39067c15d3": "Ni igikorwa kinyuranyije n'amategeko.",
-    "b21333d662": "Umukinnyi {player_id} yakoreye inzira ikurikira: {move_uci}"
+    "39067c15d3": "Ni igikorwa kinyuranyije n'amategeko."
   },
   "kk": {
-    "39067c15d3": "Заңсыз әрекет.",
-    "b21333d662": "Ойыншы {player_id} келесі қимылды жасады: {move_uci}"
+    "39067c15d3": "Заңсыз әрекет."
   },
   "km": {
-    "39067c15d3": "ការធ្វើដំណើរខុសច្បាប់។",
-    "b21333d662": "កីឡាករ {player_id} បានធ្វើចលនាដូចខាងក្រោម: {move_uci}"
+    "39067c15d3": "ការធ្វើដំណើរខុសច្បាប់។"
   },
   "kmb": {
-    "3840e24716": "Ukala ukina {v0} mu joko ya Xadrez.",
-    "39067c15d3": "O ku bhanga kiki, kituxi.",
-    "b21333d662": "O mu jokala {player_id} u bhanga kiki: {move_uci}"
+    "39067c15d3": "O ku bhanga kiki, kituxi."
   },
   "kmr": {
     "1b90caee82": "Biskên dijîn: {v0}",
-    "39067c15d3": "Bi awayekî neqanûnî.",
-    "b21333d662": "Lîstikvan {player_id} biryara jêrîn pêk anî: {move_uci}"
+    "39067c15d3": "Bi awayekî neqanûnî."
   },
   "kn": {
-    "39067c15d3": "ಕಾನೂನುಬಾಹಿರವಾಗಿ ಚಲಿಸುತ್ತದೆ.",
-    "b21333d662": "ಆಟಗಾರ {player_id} ಈ ಕೆಳಗಿನ ಚಲನೆಯನ್ನು ಮಾಡಿದರುಃ {move_uci}"
+    "39067c15d3": "ಕಾನೂನುಬಾಹಿರವಾಗಿ ಚಲಿಸುತ್ತದೆ."
   },
   "knc": {
     "1b90caee82": "Kwamɨɲi kadi: {v0}",
-    "3840e24716": "Iyu mbɨri {v0} ɲɨ kɨlaŋge cɨ Chess.",
-    "39067c15d3": "Kǝndodә doka ro gǝnazayin.",
-    "b21333d662": "Kɨɲi {player_id} woni kɨlaŋge cɨna: {move_uci}"
+    "39067c15d3": "Kǝndodә doka ro gǝnazayin."
   },
   "ko": {
     "1b90caee82": "유효한 수: {v0}",
-    "3840e24716": "당신은 체스 게임에서 {v0}을(를) 플레이하고 있습니다.",
     "39067c15d3": "불법 수입니다.",
-    "b21333d662": "플레이어 {player_id}가 다음 수를 뒀습니다: {move_uci}",
     "dc9f112512": "현재 보드:"
   },
   "kon": {
     "1b90caee82": "Mikimvo ya kwenda: {v0}",
-    "3840e24716": "Ovua kudia {v0} mu nsi a buadi ya Sesa.",
-    "39067c15d3": "Kusala mutindu yina kele ve na nsiku.",
-    "b21333d662": "Mwana {player_id} akimvika mikimvo ifolo: {move_uci}"
+    "39067c15d3": "Kusala mutindu yina kele ve na nsiku."
   },
   "ky": {
-    "39067c15d3": "Мыйзамсыз түрдө.",
-    "b21333d662": "Оюнчу {player_id} төмөнкү кадамды жасады: {move_uci}"
+    "39067c15d3": "Мыйзамсыз түрдө."
   },
   "lij": {
     "1b90caee82": "Mövi valìdi: {v0}",
-    "3840e24716": "Ti sei zögando {v0} in 'n giögo de Scacchi.",
-    "39067c15d3": "A mossa a l'é ilegale.",
-    "b21333d662": "O giöatore {player_id} o l'ha fæto o seguente möve: {move_uci}"
+    "39067c15d3": "A mossa a l'é ilegale."
   },
   "lim": {
     "1b90caee82": "Geldige zètte: {v0}",
-    "3840e24716": "Se speule {v0} in 'n sjoal sjake.",
     "39067c15d3": "Ongeldige zèt.",
-    "b21333d662": "Speler {player_id} haet de volgende zet gemaak: {move_uci}",
     "dc9f112512": "Aktueel bord:"
   },
   "lin": {
     "1b90caee82": "Mikano ya kosalisa: {v0}",
-    "3840e24716": "Ozali kobeta {v0} na sika ya Chess.",
-    "39067c15d3": "Kosala likambo oyo epekisami na mibeko.",
-    "b21333d662": "Mokeli {player_id} akeli likolo lino: {move_uci}"
+    "39067c15d3": "Kosala likambo oyo epekisami na mibeko."
   },
   "lmo": {
     "1b90caee82": "Moviment valid: {v0}",
-    "3840e24716": "Seet a giugà {v0} in d'on gioco a scacch.",
     "39067c15d3": "Moviment ilegàl.",
-    "b21333d662": "Giugador {player_id} a fa el seguent moviment: {move_uci}",
     "dc9f112512": "Taula d'adess:"
   },
   "lo": {
-    "39067c15d3": "ການເຄື່ອນໄຫວຜິດກົດຫມາຍ.",
-    "b21333d662": "ຜູ້ນ {player_id} ໄດ້ເຮັດການເຄື່ອນໄຫວຕໍ່ໄປນີ້: {move_uci}"
+    "39067c15d3": "ການເຄື່ອນໄຫວຜິດກົດຫມາຍ."
   },
   "lt": {
     "1b90caee82": "Leidžiami ėjimai: {v0}",
-    "3840e24716": "Žaidite {v0} šachmatų partijoje.",
     "39067c15d3": "Neleidžiamas ėjimas.",
-    "b21333d662": "Žaidėjas {player_id} padarė šį ėjimą: {move_uci}",
     "dc9f112512": "Dabartinė lentelė:"
   },
   "ltg": {
     "1b90caee82": "Derīgi soļi: {v0}",
-    "3840e24716": "Jūs spēlējat {v0} šaha spēlē.",
     "39067c15d3": "Ilegalys kusteibys.",
-    "b21333d662": "Spēletajs {player_id} izdarīja sekojoši soļi: {move_uci}",
     "dc9f112512": "Šaļtene plosts:"
   },
   "ltz": {
     "1b90caee82": "Déi gülteg Zich: {v0}",
-    "3840e24716": "Dir spillt {v0} an engem Schachspill.",
-    "39067c15d3": "Illegale Bewegung.",
-    "b21333d662": "Spiller {player_id} huet déi follgend Zuch gemaach: {move_uci}"
+    "39067c15d3": "Illegale Bewegung."
   },
   "lua": {
     "1b90caee82": "Mikulukulu ikwata: {v0}",
-    "3840e24716": "Omanyi kwenda {v0} mu lulimi lwa Chess.",
-    "39067c15d3": "Kuenza bualu bua tshianana.",
-    "b21333d662": "Player {player_id} made the following move: {move_uci}"
+    "39067c15d3": "Kuenza bualu bua tshianana."
   },
   "lug": {
     "1b90caee82": "Ebiiso ebirungi: {v0}",
-    "3840e24716": "Oli mukya {v0} mu muzannyo gwa Chess.",
-    "39067c15d3": "Okutambula mu ngeri emenya amateeka.",
-    "b21333d662": "Omuzannyi {player_id} yakkiriza ekikomo kino: {move_uci}"
+    "39067c15d3": "Okutambula mu ngeri emenya amateeka."
   },
   "luo": {
     "1b90caee82": "Mikwano miongoni: {v0}",
-    "3840e24716": "Unacheza {v0} katika mchezo wa Chess.",
-    "39067c15d3": "Ok en chik.",
-    "b21333d662": "Mchezaji {player_id} alifanya hatua ifuatayo: {move_uci}"
+    "39067c15d3": "Ok en chik."
   },
   "lus": {
     "1b90caee82": "Mimal phal theih: {v0}",
-    "3840e24716": "Chess khelhnaah hian i chuan {v0} i khel mek.",
-    "39067c15d3": "Dan bawhchhiatna a ni.",
-    "b21333d662": "Player {player_id} hian khelh dan hnuai ami hi a siam: {move_uci}"
+    "39067c15d3": "Dan bawhchhiatna a ni."
   },
   "lv": {
     "1b90caee82": "Derīgie gājieni: {v0}",
-    "3840e24716": "Jūs spēlējat {v0} šaha spēlē.",
     "39067c15d3": "Nelegāls gājiens.",
-    "b21333d662": "Spēlētājs {player_id} veica šādu gājienu: {move_uci}",
     "dc9f112512": "Pašreizējais galdiņš:"
   },
   "mag": {
     "1b90caee82": "वैध चालें: {v0}",
-    "3840e24716": "आप {v0} के साथ शतरंज का खेल खेल रहे हैं।",
-    "39067c15d3": "अवैध चाल.",
-    "b21333d662": "खिलाड़ी {player_id} ने निम्नलिखित चाल चली: {move_uci}"
+    "39067c15d3": "अवैध चाल."
   },
   "mai": {
     "1b90caee82": "मान्य चाल: {v0}",
-    "3840e24716": "तहार Chess खेल मे {v0} खेल रहल छी।",
     "39067c15d3": "अवैध चाल।",
-    "b21333d662": "खिलाड़ी {player_id} निम्नलिखित चाल केलक: {move_uci}",
     "dc9f112512": "वर्तमान बोर्ड:"
   },
   "mg": {
-    "39067c15d3": "Fihetsika tsy ara-dalàna.",
-    "b21333d662": "Nanao izao hetsika manaraka izao ny mpilalao {player_id}: {move_uci}"
+    "39067c15d3": "Fihetsika tsy ara-dalàna."
   },
   "min": {
     "1b90caee82": "Gerakan sah: {v0}",
-    "3840e24716": "Kamu bamain {v0} dalam sabuah patandiangan Catur.",
-    "39067c15d3": "Langkah ilegal.",
-    "b21333d662": "Pamain {player_id} mambuek langkah barikuik: {move_uci}"
+    "39067c15d3": "Langkah ilegal."
   },
   "mk": {
     "1b90caee82": "Валидни потези: {v0}",
-    "3840e24716": "Вие играте со {v0} во партија шах.",
     "39067c15d3": "Невалиден потег.",
-    "b21333d662": "Играчот {player_id} направи следниот потег: {move_uci}",
     "dc9f112512": "Моментална табла:"
   },
   "ml": {
-    "39067c15d3": "നിയമവിരുദ്ധമായ നീക്കം.",
-    "b21333d662": "കളിക്കാരൻ {player_id} താഴെ പറയുന്ന നീക്കം നടത്തി: {move_uci}"
+    "39067c15d3": "നിയമവിരുദ്ധമായ നീക്കം."
   },
   "mlt": {
     "1b90caee82": "Mozzjonijiet validi: {v0}",
-    "3840e24716": "Int qiegħed tilgħab {v0} f'logħba ta' Chess.",
-    "39067c15d3": "Mixi illegali.",
-    "b21333d662": "Player {player_id} għamel il-mozzjoni li ġejja: {move_uci}"
+    "39067c15d3": "Mixi illegali."
   },
   "mn": {
-    "3840e24716": "Та {v0}-г Шатранж тоглоомын үеэр тоглож байна.",
     "39067c15d3": "Хууль бус хөдөлгөөн.",
-    "b21333d662": "Тоглогч {player_id} дараах хөдөлгөөн хийжээ: {move_uci}",
     "dc9f112512": "Одоогийн самбар:"
   },
   "mni": {
     "1b90caee82": "Amatta wari: {v0}",
-    "3840e24716": "Ningalliba {v0} chess gi game da oina.",
     "39067c15d3": "বেআইনী চাল",
-    "b21333d662": "Player {player_id} enauwa yengnagani: {move_uci}",
     "dc9f112512": "বর্তমান বোর্ড:"
   },
   "mos": {
     "1b90caee82": "Zɛɛ u zɔri: {v0}",
-    "3840e24716": "I kɛra {v0} o zugun Chess.",
     "39067c15d3": "B sẽn maan bũmb ning n pa zems ne tõogã.",
-    "b21333d662": "Jɛɛga {player_id} daa yi la zɔri ŋɔ: {move_uci}",
     "dc9f112512": "Tablo kãra:"
   },
   "mr": {
-    "3840e24716": "तुम्ही {v0} चेसच्या खेळात खेळत आहात.",
-    "39067c15d3": "बेकायदेशीर हालचाल.",
-    "b21333d662": "खेळाडू {player_id}ने खालील हालचाल केलीः {move_uci}"
+    "39067c15d3": "बेकायदेशीर हालचाल."
   },
   "mri": {
     "1b90caee82": "Ngā hūnuku tika: {v0}",
-    "3840e24716": "Kei te takaro koe i {v0} i tetahi taera o Chess.",
-    "39067c15d3": "He nekehanga ture kore.",
-    "b21333d662": "Kaitakaro {player_id} i mahi i te nekehanga e whai ake nei: {move_uci}"
+    "39067c15d3": "He nekehanga ture kore."
   },
   "ms": {
     "1b90caee82": "Langkah sah: {v0}",
-    "3840e24716": "Anda bermain sebagai {v0} dalam permainan catur.",
     "39067c15d3": "Langkah tidak sah.",
-    "b21333d662": "Pemain {player_id} membuat langkah berikut: {move_uci}",
     "dc9f112512": "Papan semasa:"
   },
   "my": {
-    "39067c15d3": "တရားမဝင် ရွေ့လျားမှုပါ။",
-    "b21333d662": "Player {player_id} က ၿပီးခဲ့တဲ့ လှုပ်ရှားမှုကို လုပ်ခဲ့ပါတယ်။ {move_uci}"
+    "39067c15d3": "တရားမဝင် ရွေ့လျားမှုပါ။"
   },
   "nb": {
     "1b90caee82": "Gyldige trekk: {v0}",
-    "3840e24716": "Du spiller {v0} i et parti Sjakk.",
     "39067c15d3": "Ulovlig trekk.",
-    "b21333d662": "Spiller {player_id} gjorde følgende trekk: {move_uci}",
     "dc9f112512": "Nåværende brett:"
   },
   "ne": {
-    "39067c15d3": "अवैध कदम।",
-    "b21333d662": "खेलाडी {player_id} ले निम्न चाल गरे: {move_uci}"
+    "39067c15d3": "अवैध कदम।"
   },
   "nl": {
     "1b90caee82": "Geldige zetten: {v0}",
-    "3840e24716": "U speelt {v0} in een spelletje Schaken.",
     "39067c15d3": "Ongeldige zet.",
-    "b21333d662": "Speler {player_id} heeft de volgende zet gedaan: {move_uci}",
     "dc9f112512": "Huidig bord:"
   },
   "nno": {
     "1b90caee82": "Gyldige trekk: {v0}",
-    "3840e24716": "Du spelar {v0} i eit spel sjakk.",
     "39067c15d3": "Ulovleg rørsla.",
-    "b21333d662": "Spelar {player_id} gjorde følgjande trekk: {move_uci}",
     "dc9f112512": "Noverande brett:"
   },
   "nso": {
     "1b90caee82": "Diketo tša kgonego: {v0}",
-    "3840e24716": "O tšereka {v0} ka kgato ya Chess.",
-    "39067c15d3": "Go sepela ka tsela e sego molaong.",
-    "b21333d662": "Modiri {player_id} o etetše kgato e latelang: {move_uci}"
+    "39067c15d3": "Go sepela ka tsela e sego molaong."
   },
   "nus": {
     "1b90caee82": "Ciɛ̈l kuɔɔch: {v0}",
-    "3840e24716": "Yin ee {v0} luɔ̈m cë Chess.",
-    "39067c15d3": "Lät mi /ci rɔ lot.",
-    "b21333d662": "Wɛ̈t {player_id} ee cɔɔl kuɔɔch: {move_uci}"
+    "39067c15d3": "Lät mi /ci rɔ lot."
   },
   "nya": {
     "1b90caee82": "Mavuto apongoza: {v0}",
-    "3840e24716": "Mukuchezera {v0} mu mlambi wa Chess.",
-    "39067c15d3": "Kusamuka kosaloledwa.",
-    "b21333d662": "Mchezaji {player_id} anachita lilosi linalofuata: {move_uci}"
+    "39067c15d3": "Kusamuka kosaloledwa."
   },
   "oci": {
     "1b90caee82": "Movements valables: {v0}",
-    "3840e24716": "Jogatz {v0} dins un jòc d'Escacs.",
     "39067c15d3": "Movement illegal.",
-    "b21333d662": "Jogaire {player_id} a realizat lo movement seguent: {move_uci}",
     "dc9f112512": "Taulièr actual:"
   },
   "or": {
-    "3840e24716": "ଆପଣ {v0} ରଙ୍ଗ ସହ ଏକ ଚେସ ଖେଳ ଖେଳୁଛନ୍ତି।",
-    "39067c15d3": "ବେଆଇନ ଭାବେ ଚାଲାଣ କରାଯାଇଛି ।",
-    "b21333d662": "ଖେଳାଳି {player_id} ନିମ୍ନଲିଖିତ ପଦକ୍ଷେପ ନେଇଥିଲେ: {move_uci}"
+    "39067c15d3": "ବେଆଇନ ଭାବେ ଚାଲାଣ କରାଯାଇଛି ।"
   },
   "pa": {
-    "39067c15d3": "ਗੈਰ-ਕਾਨੂੰਨੀ ਚਾਲ।",
-    "b21333d662": "ਖਿਡਾਰੀ {player_id} ਨੇ ਹੇਠ ਲਿਖੀ ਚਾਲ ਕੀਤੀ: {move_uci}"
+    "39067c15d3": "ਗੈਰ-ਕਾਨੂੰਨੀ ਚਾਲ।"
   },
   "pag": {
     "1b90caee82": "Mabalin a liket: {v0}",
-    "3840e24716": "Sikami ed {v0} kaiba la ken Chess.",
-    "39067c15d3": "Iligal itan ya inyalis.",
-    "b21333d662": "Ang manlalaro {player_id} ginawa so sumunod a kilos: {move_uci}"
+    "39067c15d3": "Iligal itan ya inyalis."
   },
   "pap": {
     "1b90caee82": "Moveshonan validu: {v0}",
-    "3840e24716": "Bo ta hunga {v0} den un wega di Chess.",
-    "39067c15d3": "Un moveshon ilegal.",
-    "b21333d662": "Hungador {player_id} a haci e moveshon siguiente: {move_uci}"
+    "39067c15d3": "Un moveshon ilegal."
   },
   "pl": {
     "1b90caee82": "Dostępne ruchy: {v0}",
-    "3840e24716": "Grajesz jako {v0} w partii szachów.",
     "39067c15d3": "Ruch niedozwolony.",
-    "b21333d662": "Gracz {player_id} wykonał następujący ruch: {move_uci}",
     "dc9f112512": "Aktualna plansza:"
   },
   "ps": {
-    "39067c15d3": "غیر قانوني حرکتونه کول.",
-    "b21333d662": "لوبغاړي {player_id} لاندې حرکت وکړ: {move_uci}"
+    "39067c15d3": "غیر قانوني حرکتونه کول."
   },
   "pt": {
     "1b90caee82": "Jogadas válidas: {v0}",
-    "3840e24716": "Você está jogando com a cor {v0} em um jogo de Xadrez.",
     "39067c15d3": "Movimento ilegal.",
-    "b21333d662": "O Jogador {player_id} fez a seguinte jogada: {move_uci}",
     "dc9f112512": "Tabuleiro atual:"
   },
   "quy": {
     "1b90caee82": "Kamayaq ruwakuna: {v0}",
-    "3840e24716": "Q'umir pukara pukllaykita qallariykusqanki {v0}.",
-    "39067c15d3": "Mana leyman jina.",
-    "b21333d662": "Pukaraq {player_id} wakichirqan kay ruwayta: {move_uci}"
+    "39067c15d3": "Mana leyman jina."
   },
   "ro": {
     "1b90caee82": "Mutări valide: {v0}",
-    "3840e24716": "Jucați {v0} într-un joc de șah.",
     "39067c15d3": "Mutare ilegală.",
-    "b21333d662": "Jucătorul {player_id} a făcut următoarea mutare: {move_uci}",
     "dc9f112512": "Tablă curentă:"
   },
   "ru": {
     "1b90caee82": "Доступные ходы: {v0}",
-    "3840e24716": "Вы играете за {v0} в игре в шахматы.",
     "39067c15d3": "Недопустимый ход.",
-    "b21333d662": "Игрок {player_id} сделал следующий ход: {move_uci}",
     "dc9f112512": "Текущая доска:"
   },
   "run": {
     "1b90caee82": "Ingendo zishobora: {v0}",
-    "3840e24716": "Uri gukina {v0} mu mukino wa Chess.",
     "39067c15d3": "Gukora ivyo bintu mu buryo butemewe n'amategeko.",
-    "b21333d662": "Umukino {player_id} yateye igikorwa kirokotso: {move_uci}",
     "dc9f112512": "Igikarito cy'igihe:"
   },
   "sag": {
     "1b90caee82": "Kôzo tiîngî: {v0}",
-    "3840e24716": "Mo kpé {v0} na lë ndênga tî Chess.",
-    "39067c15d3": "A yeke na lege ni pëpe.",
-    "b21333d662": "Mêlê {player_id} aî kûêndo kôzo: {move_uci}"
+    "39067c15d3": "A yeke na lege ni pëpe."
   },
   "san": {
     "1b90caee82": "वैध चेष्टाः: {v0}",
-    "3840e24716": "त्वं {v0} खेलस्य अजीरणस्य खेलायां खेलसि.",
-    "39067c15d3": "अवैधं चलितम् ।",
-    "b21333d662": "खिलाड़ी {player_id} अयं चेष्टां कृतवान्: {move_uci}"
+    "39067c15d3": "अवैधं चलितम् ।"
   },
   "sat": {
     "1b90caee82": "ᱥᱤᱵᱷᱟᱹᱥ ᱪᱟᱞ: {v0}",
-    "3840e24716": "{v0} ᱨᱮ ᱟᱢᱮ ᱪᱮᱥ ᱠᱷᱮᱞ ᱠᱷᱮᱞᱚᱜ ᱠᱟᱱᱟ᱾",
-    "39067c15d3": "ᱚᱞᱪᱤᱠᱤ ᱛᱚᱦᱚᱨ:",
-    "b21333d662": "ᱯᱞᱮᱭᱟᱨ {player_id} ᱟᱜ ᱱᱤᱛᱟᱜ ᱪᱟᱞ ᱫᱚ: {move_uci}"
+    "39067c15d3": "ᱚᱞᱪᱤᱠᱤ ᱛᱚᱦᱚᱨ:"
   },
   "scn": {
     "1b90caee82": "Mossi validi: {v0}",
-    "3840e24716": "Stai jucannu {v0} nta na partita di Scacchi.",
-    "39067c15d3": "Movimentu illegali.",
-    "b21333d662": "Jucaturi {player_id} fici lu mossu siguenti: {move_uci}"
+    "39067c15d3": "Movimentu illegali."
   },
   "sd": {
-    "39067c15d3": "غير قانوني حرڪت.",
-    "b21333d662": "پليئر {player_id} هيٺيان حرڪت ڪئي: {move_uci}"
+    "39067c15d3": "غير قانوني حرڪت."
   },
   "shn": {
     "1b90caee82": "ဗိုလ်ချိန်းလုပ်နိုင်တဲ့အရာများ: {v0}",
-    "3840e24716": "တႆးတီႈၶႃႈတီႈၽိုၵ်း {v0} ၼႂ်းၵႅမ်တီႈ Chess ၶႃႈ။",
-    "39067c15d3": "လွင်ႈၶၢႆႉပၢႆႈ ဢၼ်ဢမ်ႇၸွမ်းမၢႆမီႈ။",
-    "b21333d662": "ၸၢႆးၶႃႈ {player_id} ႁဵတ်းၵၢၼ်ၶိုၼ်ႈၸၼ်ႉၸွမ်းၼင်ႇၼႆၶႃႈ: {move_uci}"
+    "39067c15d3": "လွင်ႈၶၢႆႉပၢႆႈ ဢၼ်ဢမ်ႇၸွမ်းမၢႆမီႈ။"
   },
   "si": {
-    "39067c15d3": "නීති විරෝධී පියවරක්.",
-    "b21333d662": "ක් රීඩකයා {player_id} පහත පියවර සිදු කළේය: {move_uci}"
+    "39067c15d3": "නීති විරෝධී පියවරක්."
   },
   "sk": {
     "1b90caee82": "Platné ťahy: {v0}",
-    "3840e24716": "Hrajete {v0} v šachu.",
     "39067c15d3": "Nelegálny ťah.",
-    "b21333d662": "Hráč {player_id} vykonal nasledujúci ťah: {move_uci}",
     "dc9f112512": "Aktuálna doska:"
   },
   "sl": {
     "1b90caee82": "Veljavne poteze: {v0}",
-    "3840e24716": "Igrate {v0} v šahu.",
     "39067c15d3": "Neveljavna poteza.",
-    "b21333d662": "Igralec {player_id} je naredil naslednjo potezo: {move_uci}",
     "dc9f112512": "Trenutna plošča:"
   },
   "smo": {
     "1b90caee82": "Gaioiga saʻo: {v0}",
-    "3840e24716": "E te taʻalo {v0} i se taʻalafouga o Chess.",
-    "39067c15d3": "O se gaoioiga e lē tusa ai ma le tulafono.",
-    "b21333d662": "Tagata taʻalo {player_id} na faia le mafaiʻaga nei: {move_uci}"
+    "39067c15d3": "O se gaoioiga e lē tusa ai ma le tulafono."
   },
   "sna": {
     "1b90caee82": "Mikazo yakakwana: {v0}",
-    "3840e24716": "Uri kutevera {v0} mumatambi emuChess.",
-    "39067c15d3": "Kufamba zvisiri pamutemo.",
-    "b21333d662": "Mutambo {player_id} akaita kufamba kwakadai: {move_uci}"
+    "39067c15d3": "Kufamba zvisiri pamutemo."
   },
   "so": {
-    "39067c15d3": "Dhaqdhaqaaq sharci darro ah.",
-    "b21333d662": "Ciyaaryahanka {player_id} wuxuu sameeyay talaabada soo socota: {move_uci}"
+    "39067c15d3": "Dhaqdhaqaaq sharci darro ah."
   },
   "sot": {
     "1b90caee82": "Litsamaiso tse lokileng: {v0}",
-    "3840e24716": "U na tlameha {v0} ka tsela e itseng ya Chess.",
-    "39067c15d3": "Ho falla ka tsela e seng molaong.",
-    "b21333d662": "Mothami {player_id} o etsa move e latelang: {move_uci}"
+    "39067c15d3": "Ho falla ka tsela e seng molaong."
   },
   "sq": {
     "1b90caee82": "Lëvizjet e vlefshme: {v0}",
-    "3840e24716": "Ju po luani {v0} në një lojë Shahu.",
     "39067c15d3": "Lëvizje e paligjshme.",
-    "b21333d662": "Lojtari {player_id} bëri lëvizjen e mëposhtme: {move_uci}",
     "dc9f112512": "Bordi aktual:"
   },
   "sr": {
     "1b90caee82": "Важећи потези: {v0}",
-    "3840e24716": "Играш {v0} у игри Шаха.",
     "39067c15d3": "Неважећи потез.",
-    "b21333d662": "Играч {player_id} је направио следећи потез: {move_uci}",
     "dc9f112512": "Тренутна табла:"
   },
   "srd": {
     "1b90caee82": "Moziones bàlidas: {v0}",
-    "3840e24716": "Tzes jugande {v0} in unu giogu de Iscacu.",
-    "39067c15d3": "Movimentu illeghìtile.",
-    "b21333d662": "Giogadore {player_id} at fatu sa seguenti mossa: {move_uci}"
+    "39067c15d3": "Movimentu illeghìtile."
   },
   "ssw": {
     "1b90caee82": "Imovhu lemphumelelo: {v0}",
-    "3840e24716": "Udlala {v0} emdlalweni we-Chess.",
-    "39067c15d3": "Kwenta lokungekho emtsetfweni.",
-    "b21333d662": "Mdlali {player_id} uye wadle move yolandelayo: {move_uci}"
+    "39067c15d3": "Kwenta lokungekho emtsetfweni."
   },
   "sun": {
     "1b90caee82": "Gerak sah: {v0}",
-    "3840e24716": "Anjeun sedeng maénkeun {v0} dina hiji patempatan Catur.",
-    "39067c15d3": "Pindahkeun ilegal.",
-    "b21333d662": "Pamaén {player_id} ngalakonkeun gerak saperti ieu: {move_uci}"
+    "39067c15d3": "Pindahkeun ilegal."
   },
   "sv": {
     "1b90caee82": "Giltiga drag: {v0}",
-    "3840e24716": "Du spelar {v0} i ett parti schack.",
     "39067c15d3": "Ogiltigt drag.",
-    "b21333d662": "Spelare {player_id} gjorde följande drag: {move_uci}",
     "dc9f112512": "Aktuellt bräde:"
   },
   "sw": {
     "1b90caee82": "Michezo halali: {v0}",
-    "3840e24716": "Unacheza {v0} katika mchezo wa Chess.",
     "39067c15d3": "Hatua isiyo halali.",
-    "b21333d662": "Mchezaji {player_id} alifanya hatua ifuatayo: {move_uci}",
     "dc9f112512": "Ubao wa sasa:"
   },
   "szl": {
     "1b90caee82": "Ważne posunęćia: {v0}",
-    "3840e24716": "Grajesz {v0} we szachy.",
-    "39067c15d3": "Niylegalne posuniyncie.",
-    "b21333d662": "Gracź {player_id} wykonał następujōncy ruch: {move_uci}"
+    "39067c15d3": "Niylegalne posuniyncie."
   },
   "ta": {
     "1b90caee82": "செல்லுபடியாகும் நகர்வுகள்: {v0}",
-    "3840e24716": "நீங்கள் சதுரங்க ஆட்டத்தில் {v0} ஆக விளையாடுகிறீர்கள்.",
     "39067c15d3": "சட்டவிரோத நகர்வு.",
-    "b21333d662": "விளையாட்டாளர் {player_id} பின்வரும் நகர்வைச் செய்தார்: {move_uci}",
     "dc9f112512": "தற்போதைய பலகை:"
   },
   "taq": {
     "1b90caee82": "Imaylanen iɣelsanen: {v0}",
-    "3840e24716": "Tadakkest {v0} di iri n teqbaylit n Chess.",
-    "39067c15d3": "ⴰⵛⴰⵍ ⵓⴰⵔ ⵏ ⵉⴾⵏⴰ.",
-    "b21333d662": "Amsadur {player_id} is-d-yuwi imaylan: {move_uci}"
+    "39067c15d3": "ⴰⵛⴰⵍ ⵓⴰⵔ ⵏ ⵉⴾⵏⴰ."
   },
   "tat": {
     "1b90caee82": "Иң яхшы хәрәкәтләр: {v0}",
-    "3840e24716": "Сез Шахмат уенында {v0} уйныйсыз.",
-    "39067c15d3": "Законсыз күченү.",
-    "b21333d662": "Уенчы {player_id} киләсе хәрәкәтне ясады: {move_uci}"
+    "39067c15d3": "Законсыз күченү."
   },
   "te": {
-    "3840e24716": "మీరు {v0} చెస్ ఆటలో ఆడుతున్నారు.",
-    "39067c15d3": "చట్టవిరుద్ధంగా తరలించు.",
-    "b21333d662": "ఆటగాడు {player_id} ఈ క్రింది కదలికను చేశాడుః {move_uci}"
+    "39067c15d3": "చట్టవిరుద్ధంగా తరలించు."
   },
   "tgk": {
     "1b90caee82": "Хисобҳои муҳаққақ: {v0}",
-    "3840e24716": "Шумо {v0} дар бозии Шатранҷ мебозед.",
-    "39067c15d3": "Ҳаракати ғайриқонунӣ.",
-    "b21333d662": "Бозигар {player_id} ҳаракати зеринро анҷом дод: {move_uci}"
+    "39067c15d3": "Ҳаракати ғайриқонунӣ."
   },
   "th": {
     "1b90caee82": "การเคลื่อนไหวที่สามารถทำได้: {v0}",
-    "3840e24716": "คุณกำลังเล่นเป็นสี {v0} ในเกมหมากรุก.",
     "39067c15d3": "การเคลื่อนไหวผิดกติกา.",
-    "b21333d662": "ผู้เล่น {player_id} ได้ทำการเคลื่อนไหวดังนี้: {move_uci}",
     "dc9f112512": "กระดานปัจจุบัน:"
   },
   "tir": {
     "1b90caee82": "ተስማሚ ሂወት: {v0}",
-    "3840e24716": "እትን ኣብ {v0} ብምንባረ ሽቶራዊ ተጫዋት.",
-    "39067c15d3": "ዘይሕጋዊ ምንቅስቓስ.",
-    "b21333d662": "ተጫዋች {player_id} የሚከተለውን ሂደት አደረገ: {move_uci}"
+    "39067c15d3": "ዘይሕጋዊ ምንቅስቓስ."
   },
   "tpi": {
     "1b90caee82": "Ol gutpela muv: {v0}",
-    "3840e24716": "Yu pilai {v0} long gem bilong Chess.",
-    "39067c15d3": "Em i no stret long gavman.",
-    "b21333d662": "Pleeya {player_id} mekim muv we {move_uci}"
+    "39067c15d3": "Em i no stret long gavman."
   },
   "tr": {
     "1b90caee82": "Geçerli hamleler: {v0}",
-    "3840e24716": "Satranç oyununda {v0} oynuyorsunuz.",
     "39067c15d3": "Geçersiz hamle.",
-    "b21333d662": "Oyuncu {player_id} aşağıdaki hamleyi yaptı: {move_uci}",
     "dc9f112512": "Mevcut tahta:"
   },
   "tsn": {
     "1b90caee82": "Ditshelele tse di halalelang: {v0}",
-    "3840e24716": "O tlhoma{v0} mo kgweding ya Chess.",
-    "39067c15d3": "Go tsamaya ka tsela e e seng kafa molaong.",
-    "b21333d662": "Modiri {player_id} o ile a dira phetelele ye: {move_uci}"
+    "39067c15d3": "Go tsamaya ka tsela e e seng kafa molaong."
   },
   "tso": {
     "1b90caee82": "Mikhuza yo vekela: {v0}",
-    "3840e24716": "U khela {v0} eka xidzoza xa Chess.",
-    "39067c15d3": "Ku famba swi nga ri enawini.",
-    "b21333d662": "Mchezaji {player_id} u endlele mikhuza ifolweni: {move_uci}"
+    "39067c15d3": "Ku famba swi nga ri enawini."
   },
   "tuk": {
     "1b90caee82": "Ýagdaýly hereketler: {v0}",
-    "3840e24716": "Siz Şahmat oýnynda {v0} oýnaýasyz.",
-    "39067c15d3": "Ýagny kanunsyz hereket.",
-    "b21333d662": "Oýunçy {player_id} aşakdaky hereketi etdi: {move_uci}"
+    "39067c15d3": "Ýagny kanunsyz hereket."
   },
   "tum": {
     "1b90caee82": "Mizowonjezera ya kuyenda: {v0}",
-    "3840e24716": "Mukuchezera {v0} mu mchezo wa Chess.",
-    "39067c15d3": "Ŵakacita mwambura kuzomerezgeka.",
-    "b21333d662": "Mchezaji {player_id} wakaika mchezo uja: {move_uci}"
+    "39067c15d3": "Ŵakacita mwambura kuzomerezgeka."
   },
   "twi": {
     "1b90caee82": "Mmoa ahorow akyɛ: {v0}",
-    "3840e24716": "Wɔde {v0} di akɔnsɛn wɔ Chess.",
-    "39067c15d3": "Ɛyɛ mmara so adeyɛ.",
-    "b21333d662": "Ɔdan {player_id} ayɛ ɔkɔ ahorow no: {move_uci}"
+    "39067c15d3": "Ɛyɛ mmara so adeyɛ."
   },
   "tzm": {
     "1b90caee82": "Ismawan imunniten: {v0}",
-    "3840e24716": "Tidḍart {v0} i ka-d-turar di urar n Icɛa.",
-    "39067c15d3": "ⴰⵎⵓⵙⵙⵓ ⵓⵔ ⵉⵍⵍⵉⵏ.",
-    "b21333d662": "Anemlal {player_id} ikemmel tamunt tanegzirt: {move_uci}"
+    "39067c15d3": "ⴰⵎⵓⵙⵙⵓ ⵓⵔ ⵉⵍⵍⵉⵏ."
   },
   "uig": {
     "1b90caee82": "Jèkkè qilmish harakatlar: {v0}",
-    "3840e24716": "سىز شاھمات ئويۇنىدا {v0} رەڭدە ئوينىماقتا.",
-    "39067c15d3": "قانۇنسىز ھەرىكەت.",
-    "b21333d662": "O'yunchi {player_id} quyidagi harakatlarni amalga oshirdi: {move_uci}"
+    "39067c15d3": "قانۇنسىز ھەرىكەت."
   },
   "uk": {
     "1b90caee82": "Доступні ходи: {v0}",
-    "3840e24716": "Ви граєте за {v0} у грі в шахи.",
     "39067c15d3": "Недозволений хід.",
-    "b21333d662": "Гравець {player_id} зробив такий хід: {move_uci}",
     "dc9f112512": "Поточна дошка:"
   },
   "umb": {
     "1b90caee82": "Ovilwa viyambo: {v0}",
-    "3840e24716": "Ocimbila {v0} mu joga ya Xadrez.",
     "39067c15d3": "Ondjela yiwe.",
-    "b21333d662": "Jogadori {player_id} afanya movimento ifuatayo: {move_uci}",
     "dc9f112512": "Tábua ya joga:"
   },
   "ur": {
     "1b90caee82": "درست چالیں: {v0}",
-    "3840e24716": "آپ {v0} کھیل رہے ہیں شطرنج کے ایک کھیل میں۔",
     "39067c15d3": "غیر قانونی چال ہے۔",
-    "b21333d662": "کھلاڑی {player_id} نے مندرجہ ذیل چال کی ہے: {move_uci}",
     "dc9f112512": "موجودہ بورڈ:"
   },
   "uz": {
     "39067c15d3": "Noqonuniy harakat.",
-    "b21333d662": "O'yinchi {player_id} quyidagi harakatni amalga oshirdi: {move_uci}",
     "dc9f112512": "Joriy taxta:"
   },
   "vec": {
     "1b90caee82": "Mossi validi: {v0}",
-    "3840e24716": "Stè zogando {v0} in na partia a Scacchi.",
     "39067c15d3": "Movimento ilegale.",
-    "b21333d662": "El zogador {player_id} ga fazesto el seguente mossà: {move_uci}",
     "dc9f112512": "Scachiera atual:"
   },
   "vi": {
     "1b90caee82": "Các nước đi hợp lệ: {v0}",
-    "3840e24716": "Bạn đang chơi {v0} trong một ván Cờ vua.",
     "39067c15d3": "Nước đi không hợp lệ.",
-    "b21333d662": "Người chơi {player_id} đã thực hiện nước đi sau: {move_uci}",
     "dc9f112512": "Bàn cờ hiện tại:"
   },
   "war": {
     "1b90caee82": "Mga balido nga mga galaw: {v0}",
-    "3840e24716": "Naglalara ka han {v0} ha usa nga partido han Chess.",
-    "39067c15d3": "Ilegal nga pag-alis.",
-    "b21333d662": "Gintindog han Player {player_id} an sunod nga galaw: {move_uci}"
+    "39067c15d3": "Ilegal nga pag-alis."
   },
   "wol": {
     "1b90caee82": "Tànk yi ñu man a def: {v0}",
-    "3840e24716": "Yaa ngone {v0} ci geexu Chess.",
     "39067c15d3": "Jëf juy jaaduwul.",
-    "b21333d662": "Jottu {player_id} def nañu muñ ñuul: {move_uci}",
     "dc9f112512": "Tafla bi ñu nekk:"
   },
   "xho": {
     "1b90caee82": "Kusetyenziso okwenza: {v0}",
-    "3840e24716": "Udlalela {v0} kwi-game ya Chess.",
-    "39067c15d3": "Ukwenza oko ngokungekho mthethweni.",
-    "b21333d662": "Mdlali {player_id} wenze ushintsho olufanayo: {move_uci}"
+    "39067c15d3": "Ukwenza oko ngokungekho mthethweni."
   },
   "ydd": {
     "1b90caee82": "גילטיקע צוגן: {v0}",
-    "3840e24716": "Ir shpilt {v0} in a shpil shakhmat.",
-    "39067c15d3": "אַן אומלעגאַלער באַוועגונג.",
-    "b21333d662": "Shpieler {player_id} hot gemakht dem folgendn zug: {move_uci}"
+    "39067c15d3": "אַן אומלעגאַלער באַוועגונג."
   },
   "yo": {
-    "39067c15d3": "Ìgbésẹ̀ tí kò bófin mu.",
-    "b21333d662": "Olùṣeré {player_id} ṣe ìgbésẹ̀ yìí: {move_uci}"
+    "39067c15d3": "Ìgbésẹ̀ tí kò bófin mu."
   },
   "zh": {
     "1b90caee82": "有效移动：{v0}",
-    "3840e24716": "你在一局国际象棋中执 {v0}。",
     "39067c15d3": "非法移动。",
-    "b21333d662": "玩家 {player_id} 进行了以下移动：{move_uci}",
     "dc9f112512": "当前棋盘："
   },
   "zu": {
-    "39067c15d3": "Ukuthutha okungekho emthethweni.",
-    "b21333d662": "Umdlali {player_id} wenza lokhu kulandela: {move_uci}"
+    "39067c15d3": "Ukuthutha okungekho emthethweni."
   }
 }

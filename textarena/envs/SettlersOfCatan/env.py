@@ -1,4 +1,5 @@
 import re
+import textwrap
 from collections import Counter
 from typing import Optional, Dict, Any, Tuple, Union
 
@@ -169,7 +170,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
         color = self.role_colors[player_id]
         allowance = self.player_move_allowance
 
-        return f"""
+        return textwrap.dedent(f"""
     You are playing Settlers of Catan as {color}.
 
     OBJECTIVE
@@ -224,7 +225,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
     - Be concise but explicit: show your choice and any required follow-up in the correct format.
 
     Now wait for the "Board" and "Viable moves" list, then respond with your action index, e.g. "1".
-    """.strip()
+    """).strip()
 
     def _roll_dice(self, player_id: int):
         roll_str, added_clean = self.board.roll_dice(self.rng)
@@ -370,7 +371,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
                     gs["move_count"] += 1
                     gs["turn_phase"] = "negotiation_start"
                     pid_options = ", ".join([f"'{pid}'/'{self.role_colors[pid]}'" for pid in range(self.state.num_players) if (pid not in gs["eliminated_players"] and pid != player_id)])
-                    self.message(player_id, f"You selected action {len(self.game_moves)-1} (Negotiation). Please select a player you would like to negotiation with. The options are: {pid_options}. Please select exactly one.", ta.ObservationType.GAME_MESSAGE)
+                    self.message(player_id, f"You selected action {len(self.game_moves)-1} (Negotiation). Please select a player you would like to negotiate with. The options are: {pid_options}. Please select exactly one.", ta.ObservationType.GAME_MESSAGE)
                     self.set_next_player(player_id)
                     return None
 
@@ -437,7 +438,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
         gs["negotiation_partner"] = choice
         gs["main_negotiator"] = player_id
         negotiation_explanation = "You can converse freely and make trade offers by putting the command on its own line, e.g. 'Offer: 3 Sheep, 2 Ore -> 5 Brick, 2 Sheep' (format: Offer: Offered Resources -> Requested Resources). When you receive a trade offer, reply with a line containing exactly 'Accept' or 'Deny'"
-        self.message(player_id, f"You have selected Player {choice} ({self.role_colors[choice]}) to negotiation with. {negotiation_explanation}. When you are done negotiating, reply with a line containing exactly 'Done'. You may now send your first message.", ta.ObservationType.GAME_MESSAGE)
+        self.message(player_id, f"You have selected Player {choice} ({self.role_colors[choice]}) to negotiate with. {negotiation_explanation}. When you are done negotiating, reply with a line containing exactly 'Done'. You may now send your first message.", ta.ObservationType.GAME_MESSAGE)
         self.message(choice, f"Player {player_id} ({self.role_colors[player_id]}) selected you to negotiate with. {negotiation_explanation}.", ta.ObservationType.GAME_MESSAGE)
         gs["turn_phase"] = "negotiation"
         return True
@@ -535,11 +536,11 @@ class SettlersOfCatanEnv(ta.GameEnv):
 
         for terr, qty in offer["offered_resources"].items():    giver_pl.hand[terr] -= qty; taker_pl.hand[terr] += qty
         for terr, qty in offer["requested_resources"].items():  taker_pl.hand[terr] -= qty; giver_pl.hand[terr] += qty
-        fmt = lambda d: {t.name.title(): n for t, n in d.items()}
+        fmt = lambda d: ", ".join(f"{n} {t.name.title()}" for t, n in d.items())
         self._notify_negotiators(
-            f"Trade executed: Player {giver_pid} → {taker_pid} "
-            f"(offered {fmt(offer['offered_resources'])} / "
-            f"requested {fmt(offer['requested_resources'])})."
+            f"Trade executed: Player {giver_pid} ({self.role_colors[giver_pid]}) gave "
+            f"{fmt(offer['offered_resources'])} to Player {taker_pid} ({self.role_colors[taker_pid]}) for "
+            f"{fmt(offer['requested_resources'])}."
         )
         gs["current_offer"] = None
 

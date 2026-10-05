@@ -91,6 +91,10 @@ of range raises `ValueError`, and an unknown name raises `TypeError`. Renamed or
   **SpiteAndMalice**: cleared center piles are shuffled back into the draw pile, the higher pay-off card starts, and
   only a position where nobody can ever move again ends the game early. **RetroSpaceDuel**: the first mover is drawn
   at random. **SpellingBee**: a 50-turn limit ends in a draw.
+- **Diplomacy** skips a Retreats or Adjustments phase in which no player has anything to order, so a year without
+  retreats or builds takes two phases instead of five, and `env.reset()` defaults to the classic seven players.
+  **Chess** announces check, names players by color, and explains castling, promotion, the board letters, and the turn
+  limit in its prompt. **Poker** starts a side pot only when a player is all-in and returns chips nobody called.
 - **LLM juries and game masters** (Debate, ScenarioPlanning, GuessWho, TwentyQuestions) use `qwen/qwen3.8-27b`.
   A juror's vote may come wrapped in quotes, bold, or a trailing period, but must name exactly one option. When a
   model fails, the warning that is logged and the error raised after repeated failures include the cause.

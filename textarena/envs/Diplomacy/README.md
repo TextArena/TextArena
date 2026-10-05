@@ -6,7 +6,7 @@ military orders; the first power to control 18 of the 34 supply centers wins
 and multi-unit tactical planning.
 
 <!-- BEGIN GENERATED: variants -->
-**Players:** 3–7
+**Players:** 3–7 (default 7)
 
 **`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
 
@@ -22,8 +22,9 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Diplomacy-v1-mdp`)
 - Each player is randomly assigned one of the seven powers (Austria, England, France, Germany, Italy, Russia, Turkey)
   with its standard starting units and home centers on the standard 75-province map. Powers that are not in play are
   removed from the board, leaving their home centers unowned.
-- Play starts in Spring 1901. Every game year has five phases, all of which are always played: Spring Movement, Spring
-  Retreats, Fall Movement, Fall Retreats, and Winter Adjustments.
+- Play starts in Spring 1901. Every game year has up to five phases: Spring Movement, Spring Retreats, Fall Movement,
+  Fall Retreats, and Winter Adjustments. A Retreats or Adjustments phase in which no player has anything to order (no
+  dislodged units, or no builds or disbands) is skipped, and the game announces it.
 - Each phase consists of `negotiations_per_phase` rounds in which every active player takes one turn, in player order.
   Orders are accepted only in the final round of a phase, where every player must submit them; once all have, the
   orders resolve simultaneously.

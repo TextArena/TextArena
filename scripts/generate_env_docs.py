@@ -57,8 +57,11 @@ class EnvDoc:
     def players(self) -> str:
         lo, hi = self.min_players, self.max_players
         if hi is None:
-            return f"{lo}+"
-        return str(lo) if lo == hi else f"{lo}–{hi}"
+            text = f"{lo}+"
+        else:
+            text = str(lo) if lo == hi else f"{lo}–{hi}"
+        default = getattr(self.cls, "default_num_players", None)
+        return f"{text} (default {default})" if isinstance(default, int) and lo != hi else text
 
     @property
     def category(self) -> str:

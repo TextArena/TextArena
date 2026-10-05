@@ -141,6 +141,39 @@ def test_side_pots_use_total_hand_contributions_and_folded_dead_money():
     assert env.state.game_state["pot"] == 0
 
 
+def _showdown_messages(env):
+    env._handle_showdown()
+    return [message for _, message, _, _ in env.state.events]
+
+
+def test_only_all_ins_start_side_pots_and_uncalled_chips_are_returned():
+    env = _fresh(num_players=3)
+    hands = {
+        0: [_card("6", "♦"), _card("6", "♥")],
+        1: [_card("5", "♣"), _card("9", "♦")],
+        2: [_card("Q", "♣"), _card("J", "♥")],
+    }
+    board = [_card("J", "♠"), _card("K", "♥"), _card("2", "♠"), _card("Q", "♥"), _card("A", "♣")]
+    _configure_showdown(env, hands, board, contributions={0: 160, 1: 60, 2: 160}, folded={1})
+    messages = _showdown_messages(env)
+    assert "Player 2 wins the pot of 380 chips." in messages
+    assert not any("side pot" in message for message in messages)
+
+    env = _fresh(num_players=3)
+    hands = {
+        0: [_card("8", "♦"), _card("7", "♠")],
+        1: [_card("A", "♥"), _card("A", "♦")],
+        2: [_card("2", "♦"), _card("5", "♣")],
+    }
+    board = [_card("J", "♣"), _card("6", "♦"), _card("7", "♣"), _card("8", "♣"), _card("K", "♥")]
+    _configure_showdown(env, hands, board, contributions={0: 780, 1: 940, 2: 980})
+    messages = _showdown_messages(env)
+    assert env.state.game_state["player_chips"] == {0: 2340, 1: 320, 2: 40}
+    assert "Player 2's uncalled 40 chips are returned." in messages
+    assert "Player 0 wins the main pot of 2340 chips." in messages
+    assert "Player 1 wins side pot 1 of 320 chips." in messages
+
+
 def test_tied_pot_odd_chip_goes_left_of_button_deterministically():
     env = _fresh(num_players=3)
     hands = {

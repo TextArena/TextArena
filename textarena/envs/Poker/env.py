@@ -56,7 +56,7 @@ class PokerEnv(ta.GameEnv):
         }
 
     def on_start(self):
-        self.broadcast(f"Starting a new {self.num_rounds}-round Texas Hold'em game with {self.state.num_players} players.", ta.ObservationType.GAME_MESSAGE)
+        self.broadcast(f"Starting a {self.num_rounds}-hand Texas Hold'em game with {self.state.num_players} players.", ta.ObservationType.GAME_MESSAGE)
         self._reset_round()
         if self._is_hand_over():
             outcome = self._handle_hand_completion()
@@ -566,10 +566,12 @@ class PokerEnv(ta.GameEnv):
                 f"Poker pot invariant failed: pot={gs['pot']}, contributions={contribution_total}."
             )
 
-        levels = sorted({amount for amount in contributions.values() if amount > 0})
+        # One pot per contribution level, merging levels that the same players can win: a folded
+        # player's smaller contribution does not start a side pot, only an all-in does.
+        pots = []  # [amount, eligible players, contributors]
         previous = 0
-        for pot_index, level in enumerate(levels):
-            contributors = [pid for pid, amount in contributions.items() if amount >= level]
+        for level in sorted({amount for amount in contributions.values() if amount > 0}):
+            contributors = {pid for pid, amount in contributions.items() if amount >= level}
             amount = (level - previous) * len(contributors)
             previous = level
             eligible = [pid for pid in active if contributions[pid] >= level]
@@ -577,17 +579,28 @@ class PokerEnv(ta.GameEnv):
                 # This can only arise after a mid-hand administrative elimination.
                 # Its chips remain dead money and go to the best remaining hand.
                 eligible = list(active)
+            if pots and pots[-1][1] == eligible:
+                pots[-1][0] += amount
+                pots[-1][2] |= contributors
+            else:
+                pots.append([amount, eligible, contributors])
+        if len(pots) > 1 and pots[-1][2] == set(pots[-1][1]) == {pots[-1][1][0]}:
+            amount, (bettor,), _ = pots.pop()
+            gs["player_chips"][bettor] += amount
+            self.broadcast(f"Player {bettor}'s uncalled {amount} chips are returned.", ta.ObservationType.GAME_MESSAGE)
+        for pot_index, (amount, eligible, _) in enumerate(pots):
             if len(eligible) == 1:
                 winners = eligible
             else:
                 best_score = max(scores[pid] for pid in eligible)
                 winners = [pid for pid in eligible if scores[pid] == best_score]
-            self._award_pot(amount, winners, pot_index)
+            pot_name = "the pot" if len(pots) == 1 else "the main pot" if pot_index == 0 else f"side pot {pot_index}"
+            self._award_pot(amount, winners, pot_name)
 
         gs["pot"] = 0
         self._eliminate_busted_players()
 
-    def _award_pot(self, amount: int, winners: List[int], pot_index: int):
+    def _award_pot(self, amount: int, winners: List[int], pot_name: str):
         gs = self.game_state
         ordered_winners = sorted(
             winners,
@@ -596,12 +609,12 @@ class PokerEnv(ta.GameEnv):
         share, remainder = divmod(amount, len(ordered_winners))
         for index, winner in enumerate(ordered_winners):
             gs["player_chips"][winner] += share + (1 if index < remainder else 0)
-        pot_name = "main pot" if pot_index == 0 else f"side pot {pot_index}"
         if len(ordered_winners) == 1:
-            message = f"Player {ordered_winners[0]} wins the {pot_name} of {amount} chips."
+            message = f"Player {ordered_winners[0]} wins {pot_name} of {amount} chips."
         else:
+            names = ", ".join(map(str, ordered_winners[:-1])) + f" and {ordered_winners[-1]}"
             message = (
-                f"Players {ordered_winners} split the {pot_name} of {amount} chips "
+                f"Players {names} split {pot_name} of {amount} chips "
                 f"({share} each; {remainder} odd chip(s) awarded left of the button)."
             )
         self.broadcast(message, ta.ObservationType.GAME_MESSAGE)
@@ -699,12 +712,10 @@ class PokerEnv(ta.GameEnv):
                 reward_by_stack[stack] = -1.0 + 2.0 * average_place / (num_players - 1)
                 first_place = last_place + 1
             rewards = {pid: reward_by_stack[stack] for pid, stack in chips.items()}
-        groups = [
-            [pid for pid, stack in chips.items() if stack == level]
-            for level in stack_levels
-        ]
-        winners = groups[-1]
-        return self.outcome(
-            rewards,
-            reason=f"Final ranking groups (low→high): {groups}. Winner(s): {winners}",
-        )
+        winners = [pid for pid, stack in chips.items() if stack == stack_levels[-1]]
+        if len(winners) == 1:
+            leader = f"Player {winners[0]} wins with the most chips."
+        else:
+            leader = f"Players {', '.join(map(str, winners[:-1]))} and {winners[-1]} tie for the most chips."
+        standings = ", ".join(f"Player {pid} {chips[pid]}" for pid in sorted(chips, key=lambda pid: -chips[pid]))
+        return self.outcome(rewards, reason=f"{leader} Final chip counts: {standings}.")

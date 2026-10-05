@@ -33,7 +33,7 @@ Examples: `3`, `col 3`.
 ## Observations
 
 Each player first receives the rules, their symbol, and the board size. Both players see a description of every move,
-such as `Player 0 dropped their disk (X) into column 3.`
+such as `Player 0 dropped their disc (X) into column 3.`
 
 - Open variants (`is_open=True`): before every move, the acting player sees the board with column numbers and the
   list of columns that still have room.

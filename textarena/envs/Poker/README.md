@@ -34,7 +34,8 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Poker-v1-mdp`). Pa
   can still bet, the remaining community cards are dealt out.
 - **Showdown:** each player's best five-card hand out of their two hole cards and the five community cards, with
   standard rankings (an ace can also play low in A-2-3-4-5). Side pots are formed from each player's total
-  contribution; tied hands split a pot, and odd chips go to the tied winners closest to the button's left.
+  contribution when a player is all-in (chips folded players put in stay in the pot), and chips nobody called are
+  returned to their owner; tied hands split a pot, and odd chips go to the tied winners closest to the button's left.
 - Players with no chips left are eliminated. The game ends after `num_rounds` hands, or earlier when one player holds
   all the chips.
 

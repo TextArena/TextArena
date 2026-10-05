@@ -26,7 +26,18 @@ class ChessEnv(ta.GameEnv):
         return {0: "White", 1: "Black"}
 
     def prompt(self, player_id: int) -> str:
-        return f"You are playing {'White' if player_id==0 else 'Black'} in a game of Chess.\n Make your moves in UCI format (e.g., 'e2e4')."
+        lines = [
+            f"You are playing {self.roles()[player_id]} in a game of Chess.",
+            "Reply with one move in UCI format: the start square followed by the end square, e.g. 'e2e4'. Castle by "
+            "moving the king two squares (e.g. 'e1g1'), and promote a pawn by adding q, r, b or n (e.g. 'e7e8q').",
+        ]
+        if self.is_open:
+            lines.append(
+                "On the board, uppercase letters are White's pieces and lowercase letters are Black's (K king, Q queen, "
+                "R rook, B bishop, N knight, P pawn), and '.' is an empty square."
+            )
+        lines.append(f"The game is drawn after {self.max_turns} moves in total (both players combined) if it has not ended sooner.")
+        return "\n".join(lines)
 
     def render(self, player_id: int) -> Optional[str]:
         board = self.game_state["board"]
@@ -51,7 +62,7 @@ class ChessEnv(ta.GameEnv):
             return self.invalid("Illegal move.")
         board.push(chess_move)
         self.game_state["valid_moves"] = ', '.join(legal.uci() for legal in board.legal_moves)
-        self.broadcast(f"Player {player_id} made the following move: {move_uci}", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+        self.broadcast(f"{self.roles()[player_id]} played {move_uci}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
 
         # Automatic terminal conditions (checkmate, stalemate, insufficient
         # material, fivefold repetition and the 75-move rule) are reported by
@@ -67,13 +78,15 @@ class ChessEnv(ta.GameEnv):
             if outcome.winner is None:
                 return self.draw(reason=f"Game ended in a draw by {termination}.")
             winner_id = 0 if outcome.winner == WHITE else 1
-            return self.winner(winner_id, reason=f"Player {winner_id} wins by {termination}.")
+            return self.winner(winner_id, reason=f"{self.roles()[winner_id]} wins by {termination}.")
         if board.is_repetition(3):
             self.game_state["valid_moves"] = ""
             return self.draw(reason="Game ended in a draw by threefold repetition.")
         if board.is_fifty_moves():
             self.game_state["valid_moves"] = ""
             return self.draw(reason="Game ended in a draw by fifty-move rule.")
+        if board.is_check():
+            self.broadcast(f"{self.roles()[1 - player_id]} is in check.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
         return None
 
     def get_board_str(self):

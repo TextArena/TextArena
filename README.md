@@ -123,7 +123,9 @@ evaluation = ta.evaluate(
 evaluation.summary()  # per agent and game: games, mean reward, win rate, invalid-move rate, mean turns, errors
 ```
 
-Each game in `evaluation.games` keeps its seed, seating, rewards, and `record`, so any game can be replayed, and
+The invalid-move rate is the share of seats that made two invalid moves in a row, which usually ends that player's
+game; a single invalid move that the player then corrects does not count. Each game in `evaluation.games` keeps its
+seed, seating, rewards, and `record`, so any game can be replayed, and
 `evaluation.to_rows()` gives one row per seat for analysis with pandas. A game that fails, for example because a
 model is unreachable, is recorded with its error instead of stopping the evaluation.
 
