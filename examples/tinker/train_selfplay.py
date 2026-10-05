@@ -47,7 +47,7 @@ DEFAULT_INSTRUCTION = (
 @dataclass
 class Config:
     # model
-    model_name: str = "thinkingmachines/Inkling-Small"
+    model_name: str = "Qwen/Qwen3.8-27B"
     lora_rank: int = 32
 
     # environments (during training every seat is played by the current policy)
@@ -215,7 +215,7 @@ async def train(cfg: Config) -> None:
 
 if __name__ == "__main__":
     asyncio.run(train(Config(
-        model_name="thinkingmachines/Inkling-Small",
+        model_name="Qwen/Qwen3.8-27B",
         train_envs=[EnvSpec("SimpleTak-v1-mdp", num_players=2)],
         eval_envs=[EnvSpec("SimpleTak-v1-mdp", num_players=2), EnvSpec("KuhnPoker-v1-mdp", num_players=2)],
         wandb_project=None,  # set to a project name to enable wandb logging

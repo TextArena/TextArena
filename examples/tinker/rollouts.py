@@ -55,15 +55,20 @@ class Policy:
 def build_prompt(tokenizer, instruction: str, observation: str) -> list[int]:
     content = f"{instruction}\n\nObservation: {observation}"
     if getattr(tokenizer, "chat_template", None):
-        return tokenizer.apply_chat_template([{"role": "user", "content": content}], add_generation_prompt=True, tokenize=True)
+        # transformers 5 returns a BatchEncoding unless return_dict=False
+        return tokenizer.apply_chat_template(
+            [{"role": "user", "content": content}], add_generation_prompt=True, tokenize=True, return_dict=False
+        )
     return tokenizer.encode(f"{content}\n\nAnswer: ")
 
 
 def extract_action(text: str) -> tuple[str, bool]:
-    """The action is the content of the last <action>...</action> tag; only that
-    is submitted to the environment. Falls back to the raw text (no tag bonus)."""
-    action = ta.extract_action(text)
-    return action, action != text.strip()
+    """The action is the content of the last <action>...</action> tag after any reasoning
+    that ends in </think>; only that is submitted to the environment. Falls back to the
+    raw answer text (no tag bonus)."""
+    answer = text.rpartition("</think>")[2]
+    action = ta.extract_action(answer)
+    return action, action != answer.strip()
 
 
 async def play_game(
