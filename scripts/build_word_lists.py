@@ -14,8 +14,10 @@ holds one lowercase word per line, sorted:
   differ between British and American English.
 
 Only words made of the letters a-z are kept, so proper nouns, possessives and entries with digits are
-dropped, and of the single letters only "a" and "i" count as words. Blocked words and the entries the
-dictionaries flag as offensive (``!``) are never headwords or common words, but stay in ``english_words.txt``.
+dropped, and of the single letters only "a" and "i" count as words. Words without a vowel (a, e, i, o, u or y)
+are dropped too: the dictionaries list abbreviations such as "std" and "hrs" as words, and this removes them at the
+cost of a few real words such as "nth" and "brr". Blocked words and the entries the dictionaries flag as offensive
+(``!``) are never headwords or common words, but stay in ``english_words.txt``.
 
 Usage:
     python scripts/build_word_lists.py          # rewrite the lists
@@ -32,7 +34,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ROOT / "scripts" / "word_list_sources"
 DATA = ROOT / "textarena" / "utils" / "data"
 
-WORD = re.compile(r"[a-z]+")
+WORD = re.compile(r"[a-z]*[aeiouy][a-z]*")
 SINGLE_LETTER_WORDS = {"a", "i"}
 # en.aff flags of the regular inflections: plural (S), past tense (D), -ing (G), comparative (R), superlative (T).
 INFLECTION_FLAGS = frozenset("SDGRT")

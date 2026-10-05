@@ -100,12 +100,16 @@ of range raises `ValueError`, and an unknown name raises `TypeError`. Renamed or
 - **Diplomacy adjudication** was checked against the DATC test cases: moving to your own province is illegal,
   supports are given into a province (so armies can support fleets onto split coasts), a unit beaten head-to-head no
   longer blocks a third unit, a beleaguered garrison's own power's support no longer counts against rival attackers,
-  and automatic disbands break ties fleets first, then alphabetically. The README documents how convoy paradoxes are
-  resolved. **Poker**: a big blind all-in for less than the small blind no longer lets the small blind lose chips by
-  folding. **SecretMafia**: a night actor eliminated for invalid moves is announced at daybreak, so the timing no
-  longer reveals their role. **Codenames** hardcore boards no longer contain one- or two-letter words, **SpellingBee**
-  letter sets always contain a vowel, **Sokoban** generation retries up to 100 times so no seed fails to reset, and
-  **Hanabi** needs at least one information token.
+  and automatic disbands break ties fleets first, then alphabetically. Convoy paradoxes follow the Szykman rule, and a
+  unit dislodged by a convoyed army may retreat to the army's starting province. **Poker**: a big blind all-in for
+  less than the small blind no longer lets the small blind lose chips by folding, and busted players are ranked by
+  when they went out, like a tournament. **SecretMafia**: two invalid moves in a row at night skip that player's
+  night action instead of eliminating them, so no role is revealed. **Codenames** follows the official rules more
+  closely: operatives must guess at least once per turn, a clue that is, contains the start or end of, or is part of
+  an unrevealed board word ends the team's turn instead of losing the game, and at the move limit the team with fewer
+  words left wins; hardcore boards no longer contain one- or two-letter words. **SpellingBee** letter sets always
+  contain a vowel, **Sokoban** generation retries up to 100 times so no seed fails to reset, and **Hanabi** needs at
+  least one information token.
 - **LLM juries and game masters** (Debate, ScenarioPlanning, GuessWho, TwentyQuestions) use `qwen/qwen3.8-27b`.
   A juror's vote may come wrapped in quotes, bold, brackets, or a trailing period, or carry a 'Vote:' label, but
   must name exactly one option; a juror whose reply is unusable is asked once more. When a model fails, the warning
@@ -114,5 +118,5 @@ of range raises `ValueError`, and an unknown name raises `TypeError`. Renamed or
   the larger share of the vote. Game masters get their own system prompt and answer truthfully; TwentyQuestions
   tells its game master the theme.
 - **Word games** check words against frozen English word lists, identical on every machine, and never draw offensive
-  words as secrets. Chess uses its own rules engine instead of python-chess.
+  words as secrets. The lists leave out entries without a vowel, which are almost all abbreviations ("std", "hrs"). Chess uses its own rules engine instead of python-chess.
 - Many other fixes from a full audit of every game; see each game's README for its exact rules.

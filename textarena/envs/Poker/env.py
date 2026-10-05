@@ -53,6 +53,9 @@ class PokerEnv(ta.GameEnv):
             "hand_contributions": {pid: 0 for pid in range(num_players)}, "hand_players": [], "all_in_players": set(), "checked_players": set(),
             "acted_players": set(), "acted_bet_levels": {}, "round_turn": 0, "game_complete": False, "last_bettor": -1, "bet_round_complete": False,
             "small_blind_player": None, "big_blind_player": None, "last_full_raise": self.big_blind,
+            "hand_start_chips": {pid: self.starting_chips for pid in range(num_players)},
+            # pid -> (hand, 0 for an invalid-move elimination or 1 for losing all chips, tiebreak); higher ranks higher
+            "busted": {},
         }
 
     def on_start(self):
@@ -100,6 +103,7 @@ class PokerEnv(ta.GameEnv):
         self.eliminate(player_id)
         self.broadcast(f"Player {player_id} was eliminated by invalid move.", ta.ObservationType.GAME_MESSAGE)
         gs = self.game_state
+        gs["busted"][player_id] = (gs["round"], 0, len(gs["busted"]))
         gs["folded_players"].add(player_id)
         forfeited = gs["player_chips"][player_id]
         gs["hand_contributions"][player_id] += forfeited
@@ -122,6 +126,7 @@ class PokerEnv(ta.GameEnv):
         n = self.state.num_players
         hand_players = [pid for pid in self.state.alive_players if gs["player_chips"][pid] > 0]
         gs["hand_players"] = hand_players
+        gs["hand_start_chips"] = dict(gs["player_chips"])
         for pid in range(n):
             gs["player_hands"][pid] = []
 
@@ -514,6 +519,7 @@ class PokerEnv(ta.GameEnv):
         for pid, chips in gs["player_chips"].items():
             if chips == 0 and self.state.is_player_alive(pid):
                 self.eliminate(pid)
+                gs["busted"][pid] = (gs["round"], 1, gs["hand_start_chips"][pid])
 
     def _handle_hand_completion(self) -> Optional[ta.Outcome]:
         gs = self.game_state
@@ -704,26 +710,39 @@ class PokerEnv(ta.GameEnv):
         return False, -1
 
     def _final_outcome(self) -> ta.Outcome:
-        """Assign zero-sum rank rewards in [-1, 1], averaging tied places."""
-        chips = self.game_state["player_chips"]
-        stack_levels = sorted(set(chips.values()))
+        """Assign zero-sum rank rewards in [-1, 1], averaging tied places.
+
+        Players with chips rank above busted players, by chips; busted players rank by when they went out.
+        """
+        gs = self.game_state
+        chips, busted = gs["player_chips"], gs["busted"]
+        keys = {pid: (0, *busted[pid]) if pid in busted else (1, chips[pid]) for pid in chips}
+        levels = sorted(set(keys.values()))
         num_players = len(chips)
-        if len(stack_levels) == 1 or num_players == 1:
+        if len(levels) == 1 or num_players == 1:
             rewards = {pid: 0.0 for pid in chips}
         else:
-            reward_by_stack = {}
+            reward_by_key = {}
             first_place = 0
-            for stack in stack_levels:
-                tied_count = sum(value == stack for value in chips.values())
+            for key in levels:
+                tied_count = sum(value == key for value in keys.values())
                 last_place = first_place + tied_count - 1
                 average_place = (first_place + last_place) / 2
-                reward_by_stack[stack] = -1.0 + 2.0 * average_place / (num_players - 1)
+                reward_by_key[key] = -1.0 + 2.0 * average_place / (num_players - 1)
                 first_place = last_place + 1
-            rewards = {pid: reward_by_stack[stack] for pid, stack in chips.items()}
-        winners = [pid for pid, stack in chips.items() if stack == stack_levels[-1]]
+            rewards = {pid: reward_by_key[key] for pid, key in keys.items()}
+        winners = [pid for pid, key in keys.items() if key == levels[-1]]
         if len(winners) == 1:
             leader = f"Player {winners[0]} wins with the most chips."
         else:
             leader = f"Players {', '.join(map(str, winners[:-1]))} and {winners[-1]} tie for the most chips."
-        standings = ", ".join(f"Player {pid} {chips[pid]}" for pid in sorted(chips, key=lambda pid: -chips[pid]))
-        return self.outcome(rewards, reason=f"{leader} Final chip counts: {standings}.")
+        standings = []
+        for pid in sorted(chips, key=lambda pid: keys[pid], reverse=True):
+            place = 1 + sum(key > keys[pid] for key in keys.values())
+            if pid not in busted:
+                standings.append(f"{place}. Player {pid} ({chips[pid]} chips)")
+            elif busted[pid][1] == 0:
+                standings.append(f"{place}. Player {pid} (eliminated for invalid moves in hand {busted[pid][0]})")
+            else:
+                standings.append(f"{place}. Player {pid} (out in hand {busted[pid][0]})")
+        return self.outcome(rewards, reason=f"{leader} Final ranking: {'; '.join(standings)}.")

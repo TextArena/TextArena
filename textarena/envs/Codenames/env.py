@@ -2,7 +2,7 @@ import functools
 import importlib.resources
 import json
 import re
-from typing import Any, Dict, Tuple, Union
+from typing import Any, Dict, Optional, Tuple, Union
 import textarena as ta
 from textarena.utils.word_lists import get_blocked_words
 
@@ -58,6 +58,7 @@ class CodenamesEnv(ta.GameEnv):
             "last_clue": None,
             "last_number": 0,
             "remaining_guesses": 0,
+            "guesses_this_turn": 0,
         }
 
     def roles(self) -> Dict[int, str]:
@@ -76,11 +77,12 @@ class CodenamesEnv(ta.GameEnv):
         prompt = (
             "You are playing Codenames, a 2v2 word deduction game. Each team (Red and Blue) has a Spymaster and an Operative.\nRules:\n"
             "1. The board has 25 words: 9 Red (R), 8 Blue (B), 7 Neutral (N) and 1 Assassin (A). Only the Spymasters see which is which. Red moves first.\n"
-            "2. The Spymaster gives a clue: one alphabetic word and a number from 1 to 25 (e.g., 'wind 2'). The clue word must not be a board word, contain one, or be contained in one (e.g., 'sea' while 'seal' is on the board); such a clue loses the game immediately.\n"
-            "3. The Operative then guesses one board word at a time (e.g., 'breeze'), up to the number + 1 guesses, or replies 'pass' to end the turn. "
+            "2. The Spymaster gives a clue: one alphabetic word and a number from 1 to 25 (e.g., 'wind 2'). The clue word must not be an unrevealed board word, start or end with one, or be the start or end of one (e.g., 'arms' or 'firearm' while 'arm' is on the board, or 'star' while 'starfish' is); "
+            "a board word only in the middle of the clue is fine (e.g., 'charming' with 'arm'). A forbidden clue is not given and the team's turn ends at once.\n"
+            "3. The Operative then guesses one board word at a time (e.g., 'breeze'), up to the number + 1 guesses. The Operative must make at least one guess each turn and may then reply 'pass' to end the turn. "
             "Guessing one of your own words lets you continue; a Neutral or opposing word ends the turn; the Assassin loses the game immediately.\n"
             "4. A team wins as soon as all of its words are revealed, even if the other team revealed the last one.\n"
-            f"5. After {self.max_turns} moves in total (clues and guesses), the team with more of its words revealed wins; equal counts are a draw.\n\n"
+            f"5. After {self.max_turns} moves in total (clues and guesses), the team with fewer of its words still unrevealed wins (Red has 9, Blue 8); equal counts are a draw.\n\n"
         )
         if player_id in [0, 2]: return prompt + f"You are Player {player_id}, the Spymaster for {'Red' if player_id == 0 else 'Blue'} team. Give a one-word clue and number."
         else:                   return prompt + f"You are Player {player_id}, the Operative for {'Red' if player_id == 1 else 'Blue'} team. Guess words based on the clue."
@@ -118,17 +120,26 @@ class CodenamesEnv(ta.GameEnv):
                 return self.invalid("The clue number must be between 1 and 25.")
 
             # Compare case-insensitively so capitalization cannot bypass the board-word rule.
-            overlap = next((board_word for board_word in self.board if word in board_word or board_word in word), None)
-            if overlap is not None:
-                relation = "is" if word == overlap else "contains" if overlap in word else "is part of"
-                return self.winner(
-                    [0, 1] if current_team == "B" else [2, 3],
-                    reason=f"Player {player_id}'s clue '{word}' {relation} the board word '{overlap}', which loses the game.",
+            relation = None
+            for board_word in self.board:
+                if board_word in gs["guessed_words"]:
+                    continue  # covered words are no longer visible on the table
+                relation = self._clue_relation(word, board_word)
+                if relation is not None:
+                    break
+            if relation is not None:
+                self.broadcast(
+                    f"Player {player_id}'s clue '{word}' {relation} the board word '{board_word}', which is not allowed, "
+                    f"so {'Red' if current_team == 'R' else 'Blue'}'s turn ends.",
+                    ta.ObservationType.GAME_MESSAGE,
                 )
+                self.set_next_player(self._next_player(player_id, skip_guessing=True))
+                return None
 
             gs["last_clue"] = word
             gs["last_number"] = number
             gs["remaining_guesses"] = number + 1 # Operatives can make up to N+1 guesses
+            gs["guesses_this_turn"] = 0
             self.broadcast(f"Spymaster of {'Red' if current_team=='R' else 'Blue'} team, Player {player_id}, submitted the clue '{word} {number}'.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
             self.set_next_player(self._next_player(player_id))
             return None
@@ -141,6 +152,8 @@ class CodenamesEnv(ta.GameEnv):
         guessed_word = match.group(1).lower()
 
         if guessed_word == "pass":
+            if gs["guesses_this_turn"] == 0:
+                return self.invalid("You must make at least one guess this turn before you can pass.")
             gs["remaining_guesses"] = 0
             self.broadcast(
                 f"Operative of {'Red' if current_team == 'R' else 'Blue'} team, Player {player_id}, passed.",
@@ -155,6 +168,7 @@ class CodenamesEnv(ta.GameEnv):
             return self.invalid(f"'{guessed_word}' has already been revealed.")
 
         gs["guessed_words"].add(guessed_word)
+        gs["guesses_this_turn"] += 1
 
         if self.board[guessed_word] == "A":
             return self.winner([2, 3] if current_team == "R" else [0, 1], reason=f"Player {player_id} selected the assassin word.")
@@ -187,9 +201,19 @@ class CodenamesEnv(ta.GameEnv):
         winners = [2, 3] if losing_team == "R" else [0, 1]
         return self.winner(winners, reason=f"Player {player_id} forfeited after repeated invalid actions: {reason}")
 
+    @staticmethod
+    def _clue_relation(clue: str, board_word: str) -> Optional[str]:
+        """How a clue overlaps a board word (the word itself, a form of it, or part of a compound), else None."""
+        if clue == board_word:              return "is"
+        if clue.startswith(board_word):     return "starts with"
+        if clue.endswith(board_word):       return "ends with"
+        if board_word.startswith(clue):     return "is the start of"
+        if board_word.endswith(clue):       return "is the end of"
+        return None
+
     def on_turn_limit(self) -> ta.Outcome:
-        red_correct  = sum(1 for word, team in self.board.items() if team == "R" and word in self.game_state["guessed_words"])
-        blue_correct = sum(1 for word, team in self.board.items() if team == "B" and word in self.game_state["guessed_words"])
-        if red_correct > blue_correct:      return self.winner([0, 1], reason=f"Move limit reached ({self.max_turns}). Red revealed {red_correct} vs Blue {blue_correct}.")
-        elif blue_correct > red_correct:    return self.winner([2, 3], reason=f"Move limit reached ({self.max_turns}). Blue revealed {blue_correct} vs Red {red_correct}.")
-        else:                               return self.draw(reason=f"Move limit reached ({self.max_turns}) with equal score: draw.")
+        red_left  = sum(1 for word, team in self.board.items() if team == "R" and word not in self.game_state["guessed_words"])
+        blue_left = sum(1 for word, team in self.board.items() if team == "B" and word not in self.game_state["guessed_words"])
+        if red_left < blue_left:      return self.winner([0, 1], reason=f"Move limit reached ({self.max_turns}). Red has {red_left} words left vs Blue {blue_left}.")
+        elif blue_left < red_left:    return self.winner([2, 3], reason=f"Move limit reached ({self.max_turns}). Blue has {blue_left} words left vs Red {red_left}.")
+        else:                         return self.draw(reason=f"Move limit reached ({self.max_turns}) with {red_left} words left for each team: draw.")

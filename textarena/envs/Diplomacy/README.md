@@ -35,14 +35,13 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Diplomacy-v1-mdp`)
   adjacent or the order ends with `VIA`; otherwise it moves overland. Units without orders hold.
 - A convoy fails when the dislodged convoying fleets leave no chain of convoying fleets from the army to its
   destination; the army then neither moves, cuts support, nor dislodges anything. Convoy paradoxes, in which the
-  convoyed army's own attack decides whether a convoying fleet is dislodged, are resolved by first assuming every
-  convoy works, so convoyed armies cut supports as usual; a convoy whose fleet is dislodged under that assumption fails
-  for the rest of the turn, even if the fleet then survives. So an army convoyed against a unit supporting an attack on
-  one of its convoying fleets cuts that support: the fleet is not dislodged and the army's attack goes ahead (the
-  standard rules instead dislodge the fleet and let the convoy fail).
-- A dislodged unit retreats to an empty adjacent province that its attacker did not come from (even when the attacker
-  was convoyed) and that was not left empty by a bounce, or is disbanded. Units retreating to the same province, and dislodged units without an order, are
-  disbanded.
+  convoyed army's own attack decides whether a convoying fleet is dislodged so that no outcome or more than one is
+  consistent, follow the Szykman rule: every convoyed move in the paradox fails as if its convoy were disrupted, and
+  the rest of the turn resolves normally. So an army convoyed against a unit supporting an attack on one of its
+  convoying fleets does not cut that support, and the fleet can be dislodged.
+- A dislodged unit retreats to an empty adjacent province that was not left empty by a bounce and that its attacker
+  did not come from, unless that attacker was convoyed, or is disbanded. Units retreating to the same province, and
+  dislodged units without an order, are disbanded.
 - Supply-center ownership is updated at the end of each Fall, after the Fall Retreats phase: every occupied center
   passes to the occupying power, so a unit that retreats into a center in the Fall captures it. In Winter, each power
   builds units in vacant home centers it still owns, or disbands units, until its unit count matches its center count.
@@ -103,7 +102,7 @@ Broadcasts reach every player as `(to all) <message>`; a whisper reaches only it
 them, and accepted orders are confirmed privately, so no one sees another player's orders before they resolve. The
 game announces each new phase and negotiation round. After every adjudication, all players receive the same results
 summary: every power's orders and units without orders, each with its outcome (moved, bounced, failed for lack of a
-convoy, held, support given, cut, or void, convoyed, dislodged, retreated, disbanded, built, or waived), the dislodged
+convoy or by a convoy paradox, held, support given, cut, or void, convoyed, dislodged, retreated, disbanded, built, or waived), the dislodged
 units with their retreat options, and, after Fall Retreats, the supply centers that changed hands and the new center
 counts. The game ends with an announcement of every power's final center count.
 

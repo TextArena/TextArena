@@ -36,8 +36,8 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Poker-v1-mdp`). Pa
   standard rankings (an ace can also play low in A-2-3-4-5). Side pots are formed from each player's total
   contribution when a player is all-in (chips folded players put in stay in the pot), and chips nobody called are
   returned to their owner; tied hands split a pot, and odd chips go to the tied winners closest to the button's left.
-- Players with no chips left are eliminated. The game ends after `num_rounds` hands, or earlier when one player holds
-  all the chips.
+- Players with no chips left are eliminated (they bust). The game ends after `num_rounds` hands, or earlier when one
+  player holds all the chips.
 
 ## Actions
 
@@ -57,14 +57,18 @@ sees every action; at a showdown all remaining players' hole cards are revealed 
 
 ## Rewards
 
-Players are ranked by their chips at the end. Rewards go linearly from `+1` for the most chips to `-1` for the fewest;
-players with equal chips share the average of their places, so rewards always sum to zero.
+Players are ranked like a tournament. Everyone still holding chips at the end ranks above every busted player, by
+chips. Busted players rank by when they went out: busting in a later hand ranks higher, and players who bust in the
+same hand rank by the chips they started that hand with (equal starting stacks tie). Rewards go linearly from `+1`
+for first place to `-1` for last; tied players share the average of their places, so rewards always sum to zero. The
+final reason lists the ranking with each remaining player's chips and the hand each busted player went out in.
 
 | Outcome | Reward |
 | --- | --- |
 | Two players, different chip counts | More chips `+1`, fewer `-1` |
 | All players have equal chips | Everyone `0` |
-| Second consecutive invalid move | Offender eliminated: their hand is folded and all their chips go into the pot, so they finish with 0 chips (last place); the others play on |
+| Busting | Ranked below every player who outlasts you, by the hand you went out in |
+| Second consecutive invalid move | Offender eliminated: their hand is folded and all their chips go into the pot, and they count as busting at that moment, ranking below anyone who busts later in the same hand; the others play on |
 
 With two players, an elimination for invalid moves ends the game: the opponent wins `+1` and the offender gets `-1`.
 

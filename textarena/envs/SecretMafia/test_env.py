@@ -78,7 +78,8 @@ def test_non_string_action_is_an_invalid_move_not_a_crash(phase, action):
 
 
 def test_repeated_none_actions_follow_the_invalid_move_policy():
-    env = _fresh(6, discussion_rounds=2)
+    env = _fresh(8, discussion_rounds=2)
+    _play_first_night(env)
     actor = env.state.current_player_id
 
     env.step(None)
@@ -174,7 +175,10 @@ def test_doctor_and_detective_cannot_target_themselves():
 
 
 def test_invalid_limit_eliminates_player_from_state_and_queued_turns():
-    env = _fresh(6, discussion_rounds=2)
+    env = _fresh(8, discussion_rounds=2)
+    _play_first_night(env)
+    while env.phase == Phase.DAY_DISCUSSION:
+        env.step("hello")
     actor = env.state.current_player_id
 
     env.step("99")
@@ -346,89 +350,87 @@ def _public_messages(env):
     return [m for _, m, _, to in env.state.events if to == -1]
 
 
-def _daybreak_index(env):
-    """Index of the night's result, the first message of the day."""
-    return next(
-        i for i, (_, m, _, to) in enumerate(env.state.events)
-        if to == -1 and (m.endswith("was killed during the night.") or m == "No one was killed tonight.")
-    )
+def _skip_night_action(env):
+    """Make the acting night player fail twice; check they stay in the game and only they hear about it."""
+    actor = env.state.current_player_id
+    start = len(env.state.events)
+    env.step("99")
+    env.step("99")
+    notices = [m for _, m, _, to in env.state.events[start:] if to == actor]
+    assert "Your night action was skipped after two invalid moves in a row." in notices
+    assert actor in env.game_state["alive_players"] and actor not in env.state.eliminated
+    assert env.state.game_info[actor]["invalid_move"]
+    assert env.state.current_player_id != actor
+    return actor, start
 
 
-def _options_shown_to(env, pid):
-    prompt = [m for _, m, _, to in env.state.events if to == pid and m.startswith("Night phase")][-1]
-    return [int(p) for p in prompt.split(": ")[1].split(", ")]
+def _seen_by_others(env, start, actor):
+    return [m for _, m, _, to in env.state.events[start:] if to != actor]
 
 
-def test_mafia_eliminated_at_night_is_announced_only_at_daybreak():
+def test_skipped_mafia_vote_is_not_cast_and_stays_secret():
     env = _fresh(6)
     roles = _roles(env)
-    first = env.state.current_player_id
-    partner = next(pid for pid, role in roles.items() if role == "Mafia" and pid != first)
     victim = next(pid for pid, role in roles.items() if role == "Villager")
+    first, start = _skip_night_action(env)
+    partner = env.state.current_player_id
+    assert roles[first] == roles[partner] == "Mafia"
+    assert first not in env.game_state["votes"]
 
-    env.step("99")
-    env.step("99")
-    assert first not in env.game_state["alive_players"]
-    assert env.state.current_player_id == partner
     env.step(str(victim))
-    # The Doctor and Detective still see the eliminated Mafia member as a target, so their lists reveal nothing.
-    for role in ("Doctor", "Detective"):
-        actor = env.state.current_player_id
-        assert roles[actor] == role
-        assert first in _options_shown_to(env, actor)
+    while env.phase in (Phase.NIGHT_DOCTOR, Phase.NIGHT_DETECTIVE):
         env.step(str(first))
-        assert env.state.error_count == 0
 
-    assert env.phase == Phase.DAY_DISCUSSION and not env.state.done
-    before_daybreak = env.state.events[:_daybreak_index(env)]
-    assert not any(
-        "repeated invalid moves" in m for _, m, _, to in before_daybreak if to == -1 or roles[to] != "Mafia"
-    )
-    assert [to for _, m, _, to in before_daybreak if m.startswith("Your fellow Mafia member")] == [partner]
-    assert _public_messages(env)[-3:] == [
-        f"Player {victim} was killed during the night.",
-        f"Player {first} was eliminated for repeated invalid moves.",
-        "Day breaks. Discuss for 1 round, then a vote will follow.",
-    ]
+    assert victim not in env.game_state["alive_players"]
+    assert not any("invalid" in m or "skipped" in m for m in _seen_by_others(env, start, first))
 
 
-def test_doctor_eliminated_at_night_protects_nobody_and_stays_secret_until_daybreak():
+def test_skipped_doctor_protects_nobody_and_stays_secret():
     env = _fresh(8)
     roles = _roles(env)
-    doctor = next(pid for pid, role in roles.items() if role == "Doctor")
-    detective = next(pid for pid, role in roles.items() if role == "Detective")
     victim = next(pid for pid, role in roles.items() if role == "Villager")
     while env.phase == Phase.NIGHT_MAFIA:
         env.step(str(victim))
 
-    assert env.state.current_player_id == doctor
-    env.step("99")
-    env.step("99")
-    assert env.state.current_player_id == detective
-    assert doctor in _options_shown_to(env, detective)
+    doctor, start = _skip_night_action(env)
+    assert roles[doctor] == "Doctor" and env.phase == Phase.NIGHT_DETECTIVE
     env.step(str(doctor))
 
+    assert env.phase == Phase.DAY_DISCUSSION
     assert victim not in env.game_state["alive_players"]
-    assert not any("repeated invalid moves" in m for _, m, _, _ in env.state.events[:_daybreak_index(env)])
-    assert _public_messages(env)[-3:-1] == [
-        f"Player {victim} was killed during the night.",
-        f"Player {doctor} was eliminated for repeated invalid moves.",
-    ]
-    assert env.game_state["unannounced_eliminations"] == []
+    assert not any("invalid" in m or "skipped" in m for m in _seen_by_others(env, start, doctor))
 
 
-def test_night_elimination_that_ends_the_game_is_announced_at_once():
-    env = SecretMafiaEnv(mafia_ratio=0.1)
-    env.reset(num_players=6, seed=42)
-    mafia = env.state.current_player_id
-    assert _roles(env)[mafia] == "Mafia"
+def test_skipped_detective_learns_nothing_and_stays_secret():
+    env = _fresh(8)
+    roles = _roles(env)
+    victim = next(pid for pid, role in roles.items() if role == "Villager")
+    while env.phase == Phase.NIGHT_MAFIA:
+        env.step(str(victim))
+    env.step(str(victim))  # the Doctor saves the victim
 
-    env.step("99")
-    done = env.step("99")
+    detective, start = _skip_night_action(env)
+    assert roles[detective] == "Detective" and env.phase == Phase.DAY_DISCUSSION
+    assert not any("a Mafia member." in m for _, m, _, to in env.state.events if to == detective)
+    assert not any("invalid" in m or "skipped" in m for m in _seen_by_others(env, start, detective))
+    assert _public_messages(env)[-2:] == ["No one was killed tonight.", "Day breaks. Discuss for 1 round, then a vote will follow."]
 
-    assert done
-    assert env.state.rewards == {pid: (-1 if pid == mafia else 1) for pid in range(6)}
-    assert f"Player {mafia} was eliminated for repeated invalid moves." in _public_messages(env)
+
+def test_night_with_every_mafia_vote_skipped_kills_nobody():
+    env = _fresh(6)
+    roles = _roles(env)
+    start = len(env.state.events)
+    skipped = [_skip_night_action(env)[0] for _ in range(2)]
+    assert sorted(skipped) == sorted(pid for pid, role in roles.items() if role == "Mafia")
+    assert env.phase == Phase.NIGHT_DOCTOR
+    while env.phase in (Phase.NIGHT_DOCTOR, Phase.NIGHT_DETECTIVE):
+        env.step(str(skipped[0]))
+
+    assert env.phase == Phase.DAY_DISCUSSION and not env.state.done
+    assert env.game_state["alive_players"] == list(range(6))
+    assert "No one was killed tonight." in _public_messages(env)
+    others = [m for _, m, _, to in env.state.events[start:] if to not in skipped]
+    assert not any("invalid" in m or "skipped" in m for m in others)
 
 
 def test_discussion_round_count_is_singular_or_plural():

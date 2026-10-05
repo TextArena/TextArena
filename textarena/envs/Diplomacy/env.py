@@ -149,8 +149,12 @@ class DiplomacyEnv(ta.GameEnv):
             "- A support is cut if the supporting unit is attacked by another power from any province other than "
             "the one it is supporting a move into, or if it is dislodged. Support is given into a province, so a "
             "support order may omit the coast ('A MAR S F GAS - SPA').",
-            "- A dislodged unit must retreat to an adjacent empty province that its attacker did not come from and "
-            "that was not left empty by a bounce, or disband. Units retreating to the same province are all disbanded.",
+            "- A convoy fails if dislodgements leave no unbroken chain of its convoying fleets; the army then does not move, cut support or dislodge. In a "
+            "convoy paradox (the convoyed army's own attack decides whether its convoying fleet is dislodged), the "
+            "convoyed move fails and everything else resolves normally.",
+            "- A dislodged unit must retreat to an adjacent empty province that was not left empty by a bounce and "
+            "that its attacker did not come from (unless the attacker was convoyed), or disband. Units retreating to "
+            "the same province are all disbanded.",
             "- You can never dislodge your own unit, and your support never helps another power dislodge it.",
             "",
             "## HOW TO REPLY",

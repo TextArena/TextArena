@@ -23,21 +23,29 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Codenames-v1-mdp`)
   the Blue Operative. Red moves first.
 - The board holds 25 words: 9 Red, 8 Blue, 7 neutral, and 1 Assassin. Only the Spymasters know which is which.
 - Turns cycle Red Spymaster, Red Operative, Blue Spymaster, Blue Operative.
-- A Spymaster gives a clue of one word and a number N from 1 to 25. A clue word that contains, or is contained in, any
-  board word (for example `sea` when `seal` is on the board) immediately loses the game for that team.
-- The Operative then guesses one word per move, up to N + 1 guesses, and may pass at any time. Guessing one of their own
-  words lets them continue; a neutral or opposing word is revealed and ends the turn; the Assassin loses the game.
+- A Spymaster gives a clue of one word and a number N from 1 to 25. The clue must not be an unrevealed board word, a
+  form of one or part of a compound with one. This is checked as: the clue equals an unrevealed board word, or one of
+  the two starts or ends with the other (`arms` or `firearm` with `arm` on the board, `star` with `starfish`). A board
+  word only in the middle of the clue is allowed (`charming` with `arm`), and revealed words no longer count. A
+  forbidden clue is not given: everyone is told why, and the team's turn ends at once without guesses.
+- The Operative then guesses one word per move, up to N + 1 guesses. They must make at least one guess each turn and
+  may pass after that. Guessing one of their own words lets them continue; a neutral or opposing word is revealed and
+  ends the turn; the Assassin loses the game.
 - A team wins as soon as all of its words are revealed, even if the opposing Operative revealed the last one.
-- After `max_turns` moves in total (every clue and every guess counts), the team with more of its words revealed wins,
-  and equal counts are a draw.
+- After `max_turns` moves in total (every clue, forbidden clue, guess and pass counts), the team with fewer of its words
+  still unrevealed wins (Red starts with 9, Blue with 8), and equal counts are a draw.
+
+The official game also lets the opposing Spymaster cover one of their own words after a forbidden clue; this version
+only ends the turn.
 
 ## Actions
 
 - **Spymaster:** a single alphabetic word followed by a number, e.g. `ocean 3`.
-- **Operative:** one word from the board, e.g. `whale`, or `pass` to end the team's guessing turn.
+- **Operative:** one word from the board, e.g. `whale`, or `pass` to end the team's guessing turn after at least one
+  guess.
 
-Replies are case-insensitive. A malformed clue, a clue number outside 1–25, a guess that is not on the board, and a
-guess of an already revealed word are invalid.
+Replies are case-insensitive. A malformed clue, a clue number outside 1–25, a guess that is not on the board, a guess
+of an already revealed word, and a pass before the first guess of a turn are invalid.
 
 ## Observations
 
@@ -46,7 +54,7 @@ the acting player sees the board: Spymasters see every word with its label (`R`,
 revealed, while Operatives see only the words plus the labels of revealed words. While a team is guessing, the board
 also shows the active clue and how many guesses are left, and every board shows the number of moves played out of
 `max_turns`. Raw replies are echoed only to their author; instead, the game announces every clue, every guess result
-(correct, or wrong together with the word's type), and every pass to all players.
+(correct, or wrong together with the word's type), every pass and every forbidden clue to all players.
 
 ## Rewards
 
@@ -54,9 +62,8 @@ also shows the active clue and how many guesses are left, and every board shows 
 | --- | --- |
 | A team's words are all revealed | That team `+1`, other team `-1` |
 | An Operative reveals the Assassin | Guessing team `-1`, other team `+1` |
-| A clue overlaps a board word | Clue giver's team `-1`, other team `+1` |
-| Turn limit, one team has more of its words revealed | That team `+1`, other team `-1` |
-| Turn limit, equal number of words revealed | Everyone `0` |
+| Turn limit, one team has fewer of its words unrevealed | That team `+1`, other team `-1` |
+| Turn limit, equal number of words unrevealed | Everyone `0` |
 | Second consecutive invalid move | Offender's team `-1`, other team `+1` |
 
 ## Parameters

@@ -54,7 +54,8 @@ targets).
 
 - **Public:** discussion messages, day votes as they are cast, the result of every night, and every elimination.
 - **Mafia only:** the Mafia's night votes.
-- **Private:** the Doctor's choice (only the Doctor sees it), the Detective's result, and invalid-move warnings.
+- **Private:** the Doctor's choice (only the Doctor sees it), the Detective's result, invalid-move warnings, and the
+  notice that your night action was skipped.
 - **Hidden:** every role except your own (and your teammates', for the Mafia).
 
 ## Rewards
@@ -63,7 +64,8 @@ targets).
 | --- | --- |
 | Every Mafia member eliminated | Village team `+1`, Mafia `-1` (dead players included) |
 | Mafia make up at least half of the living players | Mafia `+1`, Village team `-1` (dead players included) |
-| Second consecutive invalid move | Offender is eliminated, which can end the game; they still share their team's final reward |
+| Second consecutive invalid move by day | Offender is eliminated, which can end the game; they still share their team's final reward |
+| Second consecutive invalid move at night | Offender's night action is skipped; no reward change |
 
 ## Parameters
 
@@ -77,8 +79,8 @@ targets).
 - There is no turn limit: every day vote eliminates somebody, so the game always ends.
 - Unlike many tabletop variants, tied votes eliminate a random tied player rather than nobody, and the Doctor cannot
   protect themselves.
-- A player eliminated for repeated invalid moves at night is announced to everyone at daybreak, after the night's
-  result; until then the Doctor and Detective may still choose them (to no effect beyond the Detective's answer), and
-  only fellow Mafia are told at once when a Mafia member is eliminated during their vote. If that elimination ends the
-  game, it is announced immediately.
+- Eliminating a player at night would reveal that they hold a night role, so two invalid moves in a row at night only
+  skip that player's action for the night, and only they are told: a skipped Mafia vote is not cast, a skipped Doctor
+  protects nobody, and a skipped Detective learns nothing. If every Mafia vote is skipped, nobody is attacked that
+  night and the day opens with "No one was killed tonight."
 - Roles are recorded in each player's `game_info` for analysis after the game.

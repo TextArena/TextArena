@@ -284,6 +284,96 @@ def test_tied_terminal_places_are_averaged_and_rewards_remain_zero_sum():
     assert sum(outcome.rewards.values()) == pytest.approx(0.0)
 
 
+def test_players_busting_in_later_hands_rank_higher():
+    env = PokerEnv(num_rounds=3, starting_chips=100)
+    env.reset(num_players=4, seed=42)
+    gs = env.state.game_state
+    gs["player_chips"] = {0: 150, 1: 0, 2: 150, 3: 100}
+    env._eliminate_busted_players()  # P1 busts in hand 1
+    gs["round"] = 2
+    gs["player_chips"].update({0: 250, 3: 0})
+    env._eliminate_busted_players()  # P3 busts in hand 2
+
+    outcome = env._final_outcome()
+
+    assert outcome.rewards == {0: 1.0, 1: -1.0, 2: pytest.approx(1 / 3), 3: pytest.approx(-1 / 3)}
+    assert outcome.reason == (
+        "Player 0 wins with the most chips. Final ranking: 1. Player 0 (250 chips); 2. Player 2 (150 chips); "
+        "3. Player 3 (out in hand 2); 4. Player 1 (out in hand 1)."
+    )
+
+
+@pytest.mark.parametrize(
+    "starting, rewards, ranking",
+    [
+        ({1: 50, 2: 80}, {1: -1.0, 2: pytest.approx(-1 / 3)}, "3. Player 2 (out in hand 1); 4. Player 1 (out in hand 1)."),
+        ({1: 65, 2: 65}, {1: pytest.approx(-2 / 3), 2: pytest.approx(-2 / 3)}, "3. Player 1 (out in hand 1); 3. Player 2 (out in hand 1)."),
+    ],
+)
+def test_players_busting_in_the_same_hand_rank_by_starting_stack(starting, rewards, ranking):
+    env = PokerEnv(num_rounds=1, starting_chips=100)
+    env.reset(num_players=4, seed=42)
+    gs = env.state.game_state
+    hands = {
+        0: [_card("A", "♠"), _card("A", "♥")],
+        1: [_card("K", "♠"), _card("K", "♥")],
+        2: [_card("Q", "♠"), _card("Q", "♥")],
+    }
+    board = [_card("2", "♣"), _card("5", "♦"), _card("7", "♣"), _card("9", "♦"), _card("J", "♠")]
+    _configure_showdown(env, hands, board, contributions={0: 100, **starting})
+    gs["player_chips"][3] = 400 - 100 - sum(starting.values())
+    gs["hand_start_chips"] = {0: 100, 3: gs["player_chips"][3], **starting}
+
+    env._handle_showdown()
+    outcome = env._final_outcome()
+
+    assert {pid: outcome.rewards[pid] for pid in (1, 2)} == rewards
+    assert outcome.rewards[0] == 1.0 and outcome.rewards[3] == pytest.approx(1 / 3)
+    assert outcome.reason.endswith(ranking)
+
+
+def test_invalid_move_elimination_busts_before_the_hands_showdown():
+    env = PokerEnv(num_rounds=1, starting_chips=100)
+    env.reset(num_players=3, seed=1)
+    gs = env.state.game_state
+    env.step("raise 1000")  # P0 (button) is all-in for 100
+    env.step("garbage")
+    env.step("garbage")  # P1 (small blind) is eliminated, forfeiting its stack
+    done = env.step("call")  # P2 (big blind) calls all-in; P0 and P2 show down
+    assert done
+    loser = 0 if gs["player_chips"][0] == 0 else 2
+    winner = 2 - loser
+    assert gs["player_chips"][winner] == 300
+    assert env.state.rewards == {winner: 1.0, loser: 0.0, 1: -1.0}
+    assert env.state.game_info[0]["reason"] == (
+        f"Player {winner} wins with the most chips. Final ranking: 1. Player {winner} (300 chips); "
+        f"2. Player {loser} (out in hand 1); 3. Player 1 (eliminated for invalid moves in hand 1)."
+    )
+
+
+def test_invalid_move_elimination_ranks_above_earlier_busts():
+    env = _fresh(num_players=3)
+    gs = env.state.game_state
+    gs["player_chips"] = {0: 300, 1: 0, 2: 0}
+    gs["busted"] = {1: (2, 0, 1), 2: (1, 1, 1000)}
+    assert env._final_outcome().rewards == {0: 1.0, 1: 0.0, 2: -1.0}
+
+
+def test_heads_up_bust_ends_the_game_with_full_rewards():
+    env = PokerEnv(num_rounds=5, starting_chips=100)
+    env.reset(num_players=2, seed=1)
+    gs = env.state.game_state
+    env.step("raise 1000")
+    done = env.step("call")
+    assert done
+    winner = 0 if gs["player_chips"][0] == 200 else 1
+    assert env.state.rewards == {winner: 1.0, 1 - winner: -1.0}
+    assert env.state.game_info[0]["reason"] == (
+        f"Player {winner} wins with the most chips. Final ranking: 1. Player {winner} (200 chips); "
+        f"2. Player {1 - winner} (out in hand 1)."
+    )
+
+
 @pytest.mark.parametrize("action", ["check", "bet 10", "raise 0"])
 def test_invalid_actions_do_not_mutate_poker_gameplay_state(action):
     env = _fresh()

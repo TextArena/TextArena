@@ -1240,6 +1240,111 @@ def test_betrayal_paradox_moves_nothing():
         assert (unit.region.name, unit.dislodged) == (location, False)
 
 
+def test_simple_convoy_paradox_fails_the_convoyed_army_and_dislodges_the_fleet():
+    # DATC 6.F.14, Szykman rule
+    engine, units = _engine_with([
+        ("ENGLAND", F, "LON", None), ("ENGLAND", F, "WAL", None), ("FRANCE", A, "BRE", None), ("FRANCE", F, "ENG", None),
+    ])
+
+    engine.resolve_orders({
+        "ENGLAND": ["F LON S F WAL - ENG", "F WAL - ENG"],
+        "FRANCE": ["A BRE - LON", "F ENG C A BRE - LON"],
+    })
+
+    assert units["ENG"].dislodged
+    assert engine.map.get_region("ENG").unit is units["WAL"]
+    assert units["BRE"].region.name == "BRE"
+    assert engine.order_history[-1]["results"]["FRANCE"] == [
+        ["A BRE - LON", "failed (convoy paradox)"],
+        ["F ENG C A BRE - LON", "convoy failed (paradox), dislodged"],
+    ]
+    assert ["F LON S F WAL - ENG", "support given"] in engine.order_history[-1]["results"]["ENGLAND"]
+    _assert_unit_map_consistency(engine)
+
+
+def test_convoy_paradox_does_not_stop_an_unrelated_convoy():
+    # DATC 6.F.15
+    engine, units = _engine_with([
+        ("ENGLAND", F, "LON", None), ("ENGLAND", F, "WAL", None), ("FRANCE", A, "BRE", None), ("FRANCE", F, "ENG", None),
+        ("ITALY", F, "IRI", None), ("ITALY", F, "MAO", None), ("ITALY", A, "NAF", None),
+    ])
+
+    engine.resolve_orders({
+        "ENGLAND": ["F LON S F WAL - ENG", "F WAL - ENG"],
+        "FRANCE": ["A BRE - LON", "F ENG C A BRE - LON"],
+        "ITALY": ["F IRI C A NAF - WAL", "F MAO C A NAF - WAL", "A NAF - WAL"],
+    })
+
+    assert units["ENG"].dislodged
+    assert engine.map.get_region("ENG").unit is units["WAL"]
+    assert engine.map.get_region("WAL").unit is units["NAF"]
+    assert units["BRE"].region.name == "BRE"
+    _assert_unit_map_consistency(engine)
+
+
+def test_supported_convoy_still_dislodges_and_cuts_support():
+    # An ordinary convoy (no paradox): the convoyed army dislodges BEL, whose support for HOL is cut.
+    engine, units = _engine_with([
+        ("ENGLAND", A, "LON", None), ("ENGLAND", F, "NTH", None), ("ENGLAND", A, "PIC", None),
+        ("FRANCE", A, "BEL", None), ("FRANCE", A, "HOL", None), ("GERMANY", A, "RUH", None),
+    ])
+
+    engine.resolve_orders({
+        "ENGLAND": ["A LON - BEL", "F NTH C A LON - BEL", "A PIC S A LON - BEL"],
+        "FRANCE": ["A BEL S A HOL", "A HOL H"],
+        "GERMANY": ["A RUH - HOL"],
+    })
+
+    assert engine.map.get_region("BEL").unit is units["LON"]
+    assert units["BEL"].dislodged
+    results = engine.order_history[-1]["results"]
+    assert ["F NTH C A LON - BEL", "convoyed"] in results["ENGLAND"]
+    assert ["A BEL S A HOL", "support cut, dislodged"] in results["FRANCE"]
+    assert "LON" not in units["BEL"].retreat_options
+    _assert_unit_map_consistency(engine)
+
+
+def test_unit_dislodged_by_a_convoyed_army_may_retreat_to_its_origin():
+    # DATC 6.H.11
+    engine, units = _engine_with([
+        ("FRANCE", A, "GAS", None), ("FRANCE", F, "MAO", None), ("FRANCE", F, "WES", None), ("FRANCE", F, "LYO", None),
+        ("FRANCE", A, "BUR", None), ("ITALY", A, "MAR", None),
+    ])
+
+    engine.resolve_orders({
+        "FRANCE": ["A GAS - MAR VIA", "F MAO C A GAS - MAR", "F WES C A GAS - MAR", "F LYO C A GAS - MAR",
+                   "A BUR S A GAS - MAR"],
+        "ITALY": ["A MAR H"],
+    })
+    assert units["MAR"].dislodged
+    assert "GAS" in units["MAR"].retreat_options
+
+    engine.resolve_orders({"ITALY": ["A MAR R GAS"]})
+
+    assert engine.map.get_region("GAS").unit is units["MAR"]
+    _assert_unit_map_consistency(engine)
+
+
+def test_unit_dislodged_overland_still_cannot_retreat_to_the_attackers_origin():
+    # DATC 6.H.5
+    engine, units = _engine_with([("RUSSIA", F, "CON", None), ("RUSSIA", F, "BLA", None), ("TURKEY", F, "ANK", None)])
+
+    engine.resolve_orders({"RUSSIA": ["F CON S F BLA - ANK", "F BLA - ANK"], "TURKEY": ["F ANK H"]})
+
+    assert units["ANK"].dislodged
+    assert "BLA" not in units["ANK"].retreat_options
+
+
+def test_prompt_states_the_convoy_paradox_and_convoyed_retreat_rules():
+    env = DiplomacyEnv()
+    env.reset(num_players=7, seed=0)
+
+    prompt = next(msg for _, msg, obs_type in env.state.observations[0] if obs_type == ta.ObservationType.PROMPT)
+
+    assert "In a convoy paradox" in prompt and "the convoyed move fails" in prompt
+    assert "that its attacker did not come from (unless the attacker was convoyed)" in prompt
+
+
 def test_automatic_disbands_break_distance_ties_alphabetically():
     # DATC 6.J.4: LVN and UKR are both one province from a Russian home center.
     engine, _ = _engine_with([("RUSSIA", A, "UKR", None), ("RUSSIA", A, "LVN", None)])

@@ -3,7 +3,7 @@ import copy
 import random
 import re
 from enum import Enum
-from typing import List, Optional, Dict, Set, Tuple, Any
+from typing import Any, Callable, Dict, FrozenSet, List, Optional, Set, Tuple
 from collections import defaultdict
 
 
@@ -1731,34 +1731,159 @@ class DiplomacyGameEngine:
                     if convoyed_unit and convoyed_unit.type == UnitType.ARMY:
                         convoys[(convoyed_loc, order.secondary_target)].append(unit)
 
-        # Convoy validity, support cutting, and dislodgement depend on one
-        # another. Re-adjudicate after removing dislodged supporters and convoy
-        # fleets until no additional dependency can be invalidated.
-        disabled_supporters: Set[Unit] = set()
-        unavailable_convoy_fleets: Set[Unit] = set()
-        convoy_fleets = {
-            fleet for fleet_list in convoys.values() for fleet in fleet_list
-        }
-        successful_moves: Dict[Unit, str] = {}
-        dislodged_units: Dict[Unit, str] = {}
-        standoff_regions: Set[str] = set()
+        def moves_by_convoy(unit: Unit) -> bool:
+            return unit in via_convoy_units or not self._can_unit_move_to(
+                unit, move_orders[unit], move_target_coasts.get(unit)
+            )
 
-        dependency_count = (len(support_orders) + 1) * (len(convoy_fleets) + 1)
-        for _ in range(dependency_count):
-            active_convoys = {
-                route
-                for route, fleets in convoys.items()
-                if self._convoy_fleets_connect(
-                    route[0],
-                    route[1],
-                    [
-                        fleet
-                        for fleet in fleets
-                        if fleet not in unavailable_convoy_fleets
-                    ],
+        convoy_routes = sorted({
+            (unit.region.name, destination)
+            for unit, destination in move_orders.items()
+            if moves_by_convoy(unit)
+            and self._convoy_fleets_connect(
+                unit.region.name, destination, convoys.get((unit.region.name, destination), [])
+            )
+        })
+        adjudications: Dict[FrozenSet[Tuple[str, str]], Tuple[Any, ...]] = {}
+
+        def adjudicate(active_convoys: FrozenSet[Tuple[str, str]]) -> Tuple[Any, ...]:
+            """Adjudicate with the given convoys assumed to work."""
+            if active_convoys not in adjudications:
+                adjudications[active_convoys] = self._adjudicate_with_convoys(
+                    active_convoys, move_orders, move_target_coasts, via_convoy_units,
+                    support_orders, valid_orders, moves_by_convoy,
                 )
-            }
+            return adjudications[active_convoys]
 
+        def intact_routes(active_convoys: FrozenSet[Tuple[str, str]]) -> FrozenSet[Tuple[str, str]]:
+            dislodged = adjudicate(active_convoys)[3]
+            return frozenset(
+                route for route in convoy_routes
+                if self._convoy_fleets_connect(
+                    route[0], route[1], [fleet for fleet in convoys[route] if fleet not in dislodged]
+                )
+            )
+
+        active_convoys, paradox_routes = self._settle_convoys(convoy_routes, intact_routes)
+        (
+            support_status,
+            disrupted_convoys,
+            successful_moves,
+            dislodged_units,
+            standoff_regions,
+        ) = adjudicate(active_convoys)
+        convoyed_origins = {
+            unit.region.name for unit in successful_moves if moves_by_convoy(unit)
+        }
+        dislodged_by_convoy = {
+            unit for unit, origin in dislodged_units.items() if origin in convoyed_origins
+        }
+
+        results = self._movement_outcomes(
+            ordered_units,
+            move_orders,
+            successful_moves,
+            dislodged_units,
+            support_status,
+            disrupted_convoys,
+            active_convoys,
+            paradox_routes,
+        )
+        self._standoff_regions = standoff_regions
+        self._apply_movements(
+            successful_moves,
+            dislodged_units,
+            move_target_coasts,
+        )
+
+        # Ownership is not updated here: centers change hands after the Fall
+        # retreats (see resolve_orders).
+        self._prepare_retreats(dislodged_by_convoy)
+        return results
+
+    @staticmethod
+    def _settle_convoys(
+        routes: List[Tuple[str, str]],
+        intact_routes: Callable[[FrozenSet[Tuple[str, str]]], FrozenSet[Tuple[str, str]]],
+    ) -> Tuple[FrozenSet[Tuple[str, str]], Set[Tuple[str, str]]]:
+        """Decide which convoys work, failing paradoxical ones (the Szykman rule).
+
+        `intact_routes(assumed)` gives the convoys whose fleets survive when the
+        `assumed` convoys work. Convoys whose outcomes depend on one another are
+        settled together: a group with exactly one self-consistent outcome takes
+        it, and a group with none or several is a paradox whose convoys all fail.
+        Returns the working convoys and the convoys that failed by paradox.
+        """
+        if len(routes) > 8:
+            # Too many convoys to enumerate: drop convoys that do not survive
+            # until the rest are consistent.
+            active = frozenset(routes)
+            while intact_routes(active) & active != active:
+                active = intact_routes(active) & active
+            return active, set()
+
+        assignments = [
+            frozenset(route for index, route in enumerate(routes) if mask >> index & 1)
+            for mask in range(2 ** len(routes))
+        ]
+        outcome = {assumed: intact_routes(assumed) for assumed in assignments}
+        reaches: Dict[Tuple[str, str], Set[Tuple[str, str]]] = {route: set() for route in routes}
+        for assumed in assignments:
+            for flipped_route in routes:
+                flipped = outcome[assumed ^ {flipped_route}]
+                for route in routes:
+                    if (route in outcome[assumed]) != (route in flipped):
+                        reaches[route].add(flipped_route)
+        changed = True
+        while changed:
+            changed = False
+            for route in routes:
+                expanded = reaches[route].union(*(reaches[other] for other in reaches[route]))
+                if expanded != reaches[route]:
+                    reaches[route], changed = expanded, True
+
+        decided: Dict[Tuple[str, str], bool] = {}
+        paradox_routes: Set[Tuple[str, str]] = set()
+        while len(decided) < len(routes):
+            undecided = [route for route in routes if route not in decided]
+            route = next(
+                candidate for candidate in undecided
+                if all(
+                    other in decided or candidate in reaches[other]
+                    for other in reaches[candidate]
+                )
+            )
+            group = sorted({route} | {other for other in reaches[route] if route in reaches[other]})
+            settled = frozenset(other for other, works in decided.items() if works)
+            solutions = []
+            for mask in range(2 ** len(group)):
+                chosen = frozenset(other for index, other in enumerate(group) if mask >> index & 1)
+                if outcome[settled | chosen] & set(group) == chosen:
+                    solutions.append(chosen)
+            working = solutions[0] if len(solutions) == 1 else frozenset()
+            if len(solutions) != 1:
+                paradox_routes.update(group)
+            for other in group:
+                decided[other] = other in working
+        return frozenset(route for route, works in decided.items() if works), paradox_routes
+
+    def _adjudicate_with_convoys(
+        self,
+        active_convoys: FrozenSet[Tuple[str, str]],
+        move_orders: Dict[Unit, str],
+        move_target_coasts: Dict[Unit, Optional[str]],
+        via_convoy_units: Set[Unit],
+        support_orders: Dict[Unit, Tuple[Unit, Optional[str], Optional[str]]],
+        valid_orders: Dict[str, List[Order]],
+        moves_by_convoy: Callable[[Unit], bool],
+    ) -> Tuple[Dict[Unit, str], Set[Tuple[str, str]], Dict[Unit, str], Dict[Unit, str], Set[str]]:
+        """Adjudicate a turn in which exactly `active_convoys` work.
+
+        Supporters that end up dislodged lose their support, so re-adjudicate
+        until no further supporter is dislodged.
+        """
+        disabled_supporters: Set[Unit] = set()
+        for _ in range(len(support_orders) + 1):
             supports: Dict[Unit, List[Unit]] = defaultdict(list)
             support_status: Dict[Unit, str] = {}
             for supporting_unit, (
@@ -1798,17 +1923,7 @@ class DiplomacyGameEngine:
             disrupted_convoys = {
                 (unit.region.name, destination)
                 for unit, destination in move_orders.items()
-                if (
-                    (
-                        unit in via_convoy_units
-                        or not self._can_unit_move_to(
-                            unit,
-                            destination,
-                            move_target_coasts.get(unit),
-                        )
-                    )
-                    and (unit.region.name, destination) not in active_convoys
-                )
+                if moves_by_convoy(unit) and (unit.region.name, destination) not in active_convoys
             }
             (
                 successful_moves,
@@ -1825,39 +1940,10 @@ class DiplomacyGameEngine:
             newly_disabled_supporters = (
                 set(dislodged_units) & set(support_orders)
             ) - disabled_supporters
-            newly_unavailable_fleets = (
-                set(dislodged_units) & convoy_fleets
-            ) - unavailable_convoy_fleets
-            if not newly_disabled_supporters and not newly_unavailable_fleets:
+            if not newly_disabled_supporters:
                 break
-            if newly_unavailable_fleets:
-                # Supporters dislodged in this pass may have been hit by an army
-                # whose convoy has just been disrupted, so re-derive them.
-                unavailable_convoy_fleets.update(newly_unavailable_fleets)
-                disabled_supporters = set()
-            else:
-                disabled_supporters.update(newly_disabled_supporters)
-
-        results = self._movement_outcomes(
-            ordered_units,
-            move_orders,
-            successful_moves,
-            dislodged_units,
-            support_status,
-            disrupted_convoys,
-            active_convoys,
-        )
-        self._standoff_regions = standoff_regions
-        self._apply_movements(
-            successful_moves,
-            dislodged_units,
-            move_target_coasts,
-        )
-
-        # Ownership is not updated here: centers change hands after the Fall
-        # retreats (see resolve_orders).
-        self._prepare_retreats()
-        return results
+            disabled_supporters.update(newly_disabled_supporters)
+        return support_status, disrupted_convoys, successful_moves, dislodged_units, standoff_regions
 
     def _movement_outcomes(
         self,
@@ -1868,6 +1954,7 @@ class DiplomacyGameEngine:
         support_status: Dict[Unit, str],
         disrupted_convoys: Set[Tuple[str, str]],
         active_convoys: Set[Tuple[str, str]],
+        paradox_routes: Set[Tuple[str, str]],
     ) -> Dict[str, List[List[str]]]:
         """Describe every unit's movement outcome; call before units move."""
         results: Dict[str, List[List[str]]] = {name: [] for name in self.powers}
@@ -1877,6 +1964,8 @@ class DiplomacyGameEngine:
             if order.order_type == OrderType.MOVE:
                 if unit in successful_moves:
                     outcome = "moved"
+                elif (unit.region.name, order.target) in paradox_routes:
+                    outcome = "failed (convoy paradox)"
                 elif (unit.region.name, order.target) in disrupted_convoys:
                     outcome = "failed (no convoy)"
                 else:
@@ -1893,6 +1982,8 @@ class DiplomacyGameEngine:
                     outcome = "convoy void (no matching move)"
                 elif army in successful_moves:
                     outcome = "convoyed"
+                elif (army_location, order.secondary_target) in paradox_routes:
+                    outcome = "convoy failed (paradox)"
                 elif (army_location, order.secondary_target) not in active_convoys:
                     outcome = "convoy disrupted"
                 else:
@@ -2166,8 +2257,11 @@ class DiplomacyGameEngine:
                     changes.append([region_name, old_owner, new_owner])
         return changes
 
-    def _prepare_retreats(self):
-        """ Determine valid retreat locations for all dislodged units """
+    def _prepare_retreats(self, dislodged_by_convoy: Set[Unit]):
+        """Determine valid retreat locations for all dislodged units.
+
+        A unit may retreat to the province a convoyed attacker came from.
+        """
         # For each dislodged unit, find valid retreat locations
         for power in self.powers.values():
             for unit in power.units:
@@ -2182,7 +2276,7 @@ class DiplomacyGameEngine:
                         if (adjacent_region and 
                             not adjacent_region.unit and
                             not adjacent_region.dislodged_unit and
-                            adjacent != unit.dislodged_from and
+                            (adjacent != unit.dislodged_from or unit in dislodged_by_convoy) and
                             adjacent not in self._standoff_regions):
                             retreat_options.append(
                                 _format_location(adjacent, coast)
