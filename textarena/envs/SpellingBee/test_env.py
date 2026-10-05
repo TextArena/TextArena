@@ -43,7 +43,7 @@ def test_allowed_letters_are_exactly_num_letters_distinct_letters(num_letters):
 
 
 def test_allowed_letters_are_weighted_by_english_letter_frequency():
-    env = SpellingBeeEnv(num_letters=1, is_word=_Dictionary())
+    env = SpellingBeeEnv(num_letters=7, is_word=_Dictionary())
     counts = Counter()
     for seed in range(400):
         env.reset(num_players=2, seed=seed)
@@ -51,6 +51,17 @@ def test_allowed_letters_are_weighted_by_english_letter_frequency():
     common = sum(counts[letter] for letter in "etao")
     rare = sum(counts[letter] for letter in "jqxz")
     assert common > 10 * max(rare, 1)
+
+
+@pytest.mark.parametrize("num_letters", [1, 3, 7])
+def test_every_letter_set_has_a_vowel_and_is_seeded(num_letters):
+    env = SpellingBeeEnv(num_letters=num_letters, is_word=_Dictionary())
+    for seed in range(500):
+        env.reset(num_players=2, seed=seed)
+        letters = env.game_state["allowed_letters"]
+        assert letters & set("aeiou")
+        env.reset(num_players=2, seed=seed)
+        assert env.game_state["allowed_letters"] == letters
 
 
 def test_valid_word_accepted_and_turn_rotates():
@@ -153,6 +164,22 @@ def test_illegal_letters_are_rejected_before_dictionary_lookup():
     assert not done
     assert env.game_state == before
     assert dictionary.queries == []
+    notice = env.state.events[-2][1]
+    assert "The submitted word uses letters that are not allowed: d, g, o." in notice
+
+
+def test_prompt_format_line_has_no_example_word():
+    prompt = _fresh(num_letters=7).prompt(0)
+    assert "Reply with exactly one word made only of the allowed letters, with no other text." in prompt
+    assert "e.g." not in prompt
+
+
+def test_renderer_word_lengths_read_naturally():
+    env = _fresh()
+    env.step("a")
+    env.step("cat")
+    board = env.get_board_str()
+    assert "P0: A (1 letter)" in board and "P1: CAT (3 letters)" in board
 
 
 @pytest.mark.parametrize("action", ["two words", "cat!", "123", "c_at", "[cat"])

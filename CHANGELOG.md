@@ -97,9 +97,22 @@ of range raises `ValueError`, and an unknown name raises `TypeError`. Renamed or
   limit in its prompt. **Poker** starts a side pot only when a player is all-in and returns chips nobody called.
   **SettlersOfCatan** allows 500 moves instead of 200, so games end with a player reaching 10 VP instead of at the
   move limit.
+- **Diplomacy adjudication** was checked against the DATC test cases: moving to your own province is illegal,
+  supports are given into a province (so armies can support fleets onto split coasts), a unit beaten head-to-head no
+  longer blocks a third unit, a beleaguered garrison's own power's support no longer counts against rival attackers,
+  and automatic disbands break ties fleets first, then alphabetically. The README documents how convoy paradoxes are
+  resolved. **Poker**: a big blind all-in for less than the small blind no longer lets the small blind lose chips by
+  folding. **SecretMafia**: a night actor eliminated for invalid moves is announced at daybreak, so the timing no
+  longer reveals their role. **Codenames** hardcore boards no longer contain one- or two-letter words, **SpellingBee**
+  letter sets always contain a vowel, **Sokoban** generation retries up to 100 times so no seed fails to reset, and
+  **Hanabi** needs at least one information token.
 - **LLM juries and game masters** (Debate, ScenarioPlanning, GuessWho, TwentyQuestions) use `qwen/qwen3.8-27b`.
-  A juror's vote may come wrapped in quotes, bold, or a trailing period, but must name exactly one option. When a
-  model fails, the warning that is logged and the error raised after repeated failures include the cause.
+  A juror's vote may come wrapped in quotes, bold, brackets, or a trailing period, or carry a 'Vote:' label, but
+  must name exactly one option; a juror whose reply is unusable is asked once more. When a model fails, the warning
+  that is logged and the error raised after repeated failures include the cause. Debate jurors vote on which side of
+  the topic they agree with, read each argument quoted so players cannot forge the transcript, and the winner gains
+  the larger share of the vote. Game masters get their own system prompt and answer truthfully; TwentyQuestions
+  tells its game master the theme.
 - **Word games** check words against frozen English word lists, identical on every machine, and never draw offensive
   words as secrets. Chess uses its own rules engine instead of python-chess.
 - Many other fixes from a full audit of every game; see each game's README for its exact rules.

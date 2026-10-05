@@ -58,12 +58,13 @@ Matching is case-insensitive, and surrounding whitespace is ignored.
 - `e7e8q`: pawn from e7 to e8, promoting to a queen.
 
 A pawn move to the last rank without a promotion letter is illegal. Malformed text, an impossible move such as
-`a1a1`, or an illegal move counts as an invalid move.
+`a1a1`, or an illegal move counts as an invalid move. The rejection names the move and the reason, for example a
+missing promotion letter, an empty start square, or an opponent's piece.
 
 ## Observations
 
-Each player first receives their color, how to write moves (including castling and promotion), what the board
-letters mean, and the turn limit. Every move is broadcast to both players as `White played e2e4.`, followed by
+Each player first receives their color, how to write moves (including castling and promotion, with examples for
+their own color), what the board letters mean (or, when the board is hidden, that it is not shown), and the turn limit. Every move is broadcast to both players as `White played e2e4.`, followed by
 `Black is in check.` when it gives check.
 
 Before each move, the acting player also receives:

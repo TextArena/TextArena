@@ -8,7 +8,7 @@ everything seen so far.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
+**`-mdp` observation:** the prompt and the full transcript including every player action
 
 | Env ID | Parameters |
 | --- | --- |

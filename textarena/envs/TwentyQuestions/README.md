@@ -22,12 +22,14 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `TwentyQuestions-v1
 - At reset, a theme (`places`, `people`, or `things`) is drawn at random, then a target word from that theme. The
   theme is revealed; the word is not. Targets can be one or two words, such as `police officer`.
 - Each turn, you either ask one free-form question or make your guess.
-- An LLM game master that knows the target answers every question with `Yes`, `No`, or `I don't know`.
+- An LLM game master that knows the target and its theme answers every question truthfully with `Yes`, `No`, or
+  `I don't know`.
 - You may ask up to `max_turns - 1` questions (20 by default). The answer to the last one tells you that you have run
   out of questions; after that, only a guess is accepted, and asking another question is an invalid move.
 - You get exactly one guess, and it ends the game. It must name the whole target, ignoring case, accents, punctuation,
   quotes, spacing, and a leading `a`, `an`, or `the` (so `guess a yoyo.` matches `yo-yo`); a partial match such as
-  `apple` for `pineapple` is wrong.
+  `apple` for `pineapple` is wrong. Singular and plural forms are different words, so plural-only targets such as
+  `scissors` or `binoculars` must be guessed exactly.
 
 ## Actions
 
@@ -68,5 +70,6 @@ history. When the game ends, the board reveals the target word.
 
 - The default game master is created on the first question and needs the `openai` package and `OPENROUTER_API_KEY`.
   Guesses are checked locally and never call the game master.
-- If the game master fails or answers with anything other than the three allowed options, the question is not
-  counted and the player is asked to retry.
+- The game master's reply may wrap the answer in quotes, markdown emphasis or backticks (`**Yes**`, `` `No` ``) and
+  may add an `Answer:` prefix or a trailing period. If the game master fails or answers with anything else, the
+  question is not counted and the player is asked to retry.

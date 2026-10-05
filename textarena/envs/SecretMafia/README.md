@@ -6,7 +6,7 @@ every Mafia member out by day ([rules](https://en.wikipedia.org/wiki/Mafia_%28pa
 <!-- BEGIN GENERATED: variants -->
 **Players:** 6–15
 
-**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
+**`-mdp` observation:** the prompt and the full transcript including every player action
 
 | Env ID | Parameters |
 | --- | --- |
@@ -77,4 +77,8 @@ targets).
 - There is no turn limit: every day vote eliminates somebody, so the game always ends.
 - Unlike many tabletop variants, tied votes eliminate a random tied player rather than nobody, and the Doctor cannot
   protect themselves.
+- A player eliminated for repeated invalid moves at night is announced to everyone at daybreak, after the night's
+  result; until then the Doctor and Detective may still choose them (to no effect beyond the Detective's answer), and
+  only fellow Mafia are told at once when a Mafia member is eliminated during their vote. If that elimination ends the
+  game, it is announced immediately.
 - Roles are recorded in each player's `game_info` for analysis after the game.

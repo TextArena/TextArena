@@ -48,7 +48,7 @@ class HanabiEnv(ta.GameEnv):
         re.IGNORECASE,
     )
 
-    info_tokens = ta.Param(8, "The starting and maximum number of information tokens.", min=0)
+    info_tokens = ta.Param(8, "The starting and maximum number of information tokens.", min=1)
     fuse_tokens = ta.Param(3, "The number of fuse tokens; the game is lost when the last one is used.", min=1)
 
     def __init__(self, **kwargs):
@@ -98,7 +98,7 @@ class HanabiEnv(ta.GameEnv):
 
     def prompt(self, player_id: int) -> str:
         return (
-        f"You are Player {player_id} in an {self.state.num_players}-player Hanabi game. "
+        f"You are Player {player_id} in a {self.state.num_players}-player Hanabi game. "
         f"Hanabi is a cooperative card game where players work together to create a series of fireworks by playing "
         f"cards in ascending numerical order starting from 1. Each player holds their cards facing outward so that all "
         f"players can see everyone else's cards but not their own.\n\n"
@@ -129,10 +129,13 @@ class HanabiEnv(ta.GameEnv):
         "Cards in a hand are numbered from 0. A newly drawn card goes to the end of the hand, and the cards after "
         "a played or discarded card move down one position.\n\n"
 
-        "Illegal Moves:\n"
-        "Playing a card that cannot be placed properly costs a fuse token. If fuse tokens reach zero, the game ends in "
-        f"failure with a score of 0. {self.error_allowance + 1} invalid replies in a row skip your turn; if every "
-        "player skips a turn in a row, the game ends with the current score.\n\n"
+        "Misplays:\n"
+        "Playing a card that cannot be placed on its firework is a legal move, but the card is discarded and it costs "
+        "a fuse token. If fuse tokens reach zero, the game ends in failure with a score of 0.\n\n"
+
+        "Invalid Replies:\n"
+        f"A reply that is not a valid action is rejected. {self.error_allowance + 1} invalid replies in a row skip "
+        "your turn; if every player skips a turn in a row, the game ends with the current score.\n\n"
 
         "Game End:\n"
         "The game ends when all fireworks are completed (perfect score of 25), or when the deck is exhausted "

@@ -32,7 +32,8 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Othello-v1-mdp`). 
 ## Actions
 
 Reply with the row and column of your move, numbered from 0 as labelled on the board, separated by a comma or a space:
-`2, 3` or `2 3`. Compact forms such as `23` are rejected because they are ambiguous on larger boards.
+`2, 3` or `2 3`. Parentheses, as in the move announcements, are also accepted: `(2, 3)`. Compact forms such as `23`
+are rejected because they are ambiguous on larger boards.
 
 ```
     0   1   2   3

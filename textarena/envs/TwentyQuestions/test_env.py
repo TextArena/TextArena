@@ -5,7 +5,7 @@ import json
 import pytest
 
 import textarena as ta
-from textarena.envs.TwentyQuestions.env import TwentyQuestionsEnv
+from textarena.envs.TwentyQuestions.env import GAMEMASTER_SYSTEM_PROMPT, TwentyQuestionsEnv
 
 
 class _Gamemaster:
@@ -349,6 +349,65 @@ def test_bundled_targets_are_one_or_two_words_as_the_prompt_says():
         env = TwentyQuestionsEnv(gamemaster=_Gamemaster(), hardcore=hardcore)
         for words in env.word_list.values():
             assert all(len(word.split()) <= 2 for word in words)
+
+
+@pytest.mark.parametrize(
+    "reply, answer",
+    [("**Yes**", "Yes"), ("`No`", "No"), ("*I don't know*", "I don't know"), ("**Answer:** _Yes_.", "Yes"),
+     ("**No.**", "No"), ("**Answer**: Yes", "Yes")],
+)
+def test_gamemaster_answer_may_use_markdown_emphasis_or_backticks(reply, answer):
+    env = _fresh(gamemaster=_Gamemaster((reply,)))
+    env.step("Is it alive?")
+    assert env.game_state["history"] == [("Is it alive?", answer)]
+
+
+def test_default_gamemaster_gets_its_own_system_prompt(monkeypatch):
+    created = {}
+
+    class Agent:
+        def __init__(self, **kwargs):
+            created.update(kwargs)
+
+        def __call__(self, prompt):
+            return "No"
+
+    monkeypatch.setattr(ta.agents, "OpenRouterAgent", Agent)
+    env = TwentyQuestionsEnv()
+    env.reset(num_players=1, seed=42)
+    env.step("Is it alive?")
+    assert created["system_prompt"] == GAMEMASTER_SYSTEM_PROMPT
+    assert "truthfully" in created["system_prompt"] and "competitive" not in created["system_prompt"]
+
+
+def test_gamemaster_prompt_names_the_theme_and_asks_for_truthful_answers():
+    gamemaster = _Gamemaster(("No",))
+    env = _fresh(gamemaster=gamemaster)
+    env.step("Is it alive?")
+    prompt = gamemaster.prompts[0]
+    assert f"The secret target is '{env.game_word}', from the theme '{env.game_theme}'." in prompt
+    assert "truthfully" in prompt and "guide" not in prompt
+    assert prompt.endswith("Reply with exactly one of the options.")
+
+
+def test_prompt_names_the_theme_and_warns_that_plurals_must_match():
+    env = _fresh()
+    prompt = env.prompt(0)
+    assert f"from the theme '{env.game_theme}'" in prompt and "This object is related to" not in prompt
+    assert "singular and plural forms are different words" in prompt
+    env.game_state["target_word"] = "scissors"
+    env.step("guess scissor")
+    assert env.state.rewards == {0: 0}
+
+
+def test_word_list_entries_fit_their_themes():
+    basic = TwentyQuestionsEnv(gamemaster=_Gamemaster()).word_list
+    hardcore = TwentyQuestionsEnv(gamemaster=_Gamemaster(), hardcore=True).word_list
+    assert "butcher shop" in basic["places"] and "butcher" not in basic["places"]
+    assert {"cruise liner", "market bazaar", "water reservoir"}.isdisjoint(hardcore["places"])
+    assert {"scripter", "stoic philosopher"}.isdisjoint(hardcore["people"])
+    assert {"tessellation", "globe-trotting trunk"}.isdisjoint(hardcore["things"])
+    assert sum(map(len, basic.values())) == 257 and sum(map(len, hardcore.values())) == 150
 
 
 def test_board_hides_target_until_terminal_result():

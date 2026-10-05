@@ -1,4 +1,5 @@
 import random
+import re
 from typing import Callable, Optional, List, Dict
 
 import textarena as ta
@@ -10,9 +11,21 @@ default_models = [DEFAULT_JUDGE_MODEL]
 
 JUROR_SYSTEM_PROMPT = (
     "You are a fair and impartial juror. You will be given a context and a list of "
-    "possible options. Please select the single most appropriate option from the list, "
-    "responding with only that exact option name (e.g., 'Affirmative', 'Negative', etc.)."
+    "possible options. Select the single most appropriate option from the list and "
+    "respond with only that exact option, with no other text."
 )
+
+_VOTE_LABEL = re.compile(r"^(?:vote|answer|option|choice)\s*:\s*", re.IGNORECASE)
+_VOTE_WRAPPING = "\"'“”‘’_[]().,!"
+
+
+def _parse_vote(reply: str, options: List[str]) -> Optional[str]:
+    """The option a reply names, allowing quotes, markdown emphasis, brackets, a trailing period or comma, and a
+    'Vote:' or 'Answer:' label; None if the reply is anything else, such as an option followed by an explanation."""
+    text = reply.replace("*", "").replace("`", "").strip().strip(_VOTE_WRAPPING).strip()
+    text = _VOTE_LABEL.sub("", text).strip(_VOTE_WRAPPING).strip().casefold()
+    return next((option for option in options if option.casefold() == text), None)
+
 
 class OpenRouterJury:
     """
@@ -22,7 +35,9 @@ class OpenRouterJury:
         available_models (List[str]): A list of model names that jurors may use.
         jury (List[ta.agents.OpenRouterAgent]): A list of juror agents.
         options (List[str]): The possible options jurors may select.
+        vote_attempts (int): How often a juror is asked before an unusable reply counts as a failed vote.
     """
+    vote_attempts = 2
 
     def __init__(
         self,
@@ -86,32 +101,30 @@ class OpenRouterJury:
             context (str): The text or debate content to evaluate.
 
         Returns:
-            Dict[str, float]: A dictionary mapping each option to its normalized vote count.
-                The values sum to 1.0 if any valid votes were cast; otherwise they remain 0
-                if no valid votes were identified.
+            Dict[str, float]: The share of the votes each option received; the shares sum to 1.
+
+        Raises:
+            RuntimeError: If any juror fails to cast a valid vote, so that a game can retry the whole vote.
         """
         result_dict = {option: 0 for option in self.options}
-        num_casted_votes = 0
         failures = []
 
         jury_prompt = self._create_juror_prompt(context=context)
 
         for juror in self.jury:
-            try:
-                judgement = juror(jury_prompt)
-                normalized = judgement.strip().strip("\"'“”‘’*.!").strip().casefold()
-                chosen_option = next(
-                    (option for option in self.options if option.casefold() == normalized),
-                    None,
-                )
-
-                if chosen_option:
+            # Only an unusable reply is asked again: model agents already retry failed requests.
+            for attempt in range(self.vote_attempts):
+                try:
+                    judgement = juror(jury_prompt)
+                except Exception as exc:
+                    failures.append(f"{type(exc).__name__}: {exc}")
+                    break
+                chosen_option = _parse_vote(judgement, self.options)
+                if chosen_option is not None:
                     result_dict[chosen_option] += 1
-                    num_casted_votes += 1
-                else:
+                    break
+                if attempt == self.vote_attempts - 1:
                     failures.append(f"invalid vote {judgement!r}")
-            except Exception as exc:
-                failures.append(f"{type(exc).__name__}: {exc}")
 
         if failures:
             raise RuntimeError(
@@ -119,8 +132,4 @@ class OpenRouterJury:
                 + "; ".join(failures)
             )
 
-        # Normalize
-        if num_casted_votes > 0:
-            for key in result_dict.keys():
-                result_dict[key] /= num_casted_votes
-        return result_dict
+        return {option: votes / len(self.jury) for option, votes in result_dict.items()}

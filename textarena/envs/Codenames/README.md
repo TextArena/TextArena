@@ -62,13 +62,13 @@ also shows the active clue and how many guesses are left, and every board shows 
 ## Parameters
 
 <!-- BEGIN GENERATED: parameters -->
-- `hardcore` (default `False`): Draw board words from the list built from NLTK's full English word list (29,406 words) instead of the one built from its Basic English list (423 words), which produces rarer words.
+- `hardcore` (default `False`): Draw board words from the list built from NLTK's full English word list (29,345 words) instead of the one built from its Basic English list (423 words), which produces rarer words.
 - `max_turns` (default `80`): The total number of moves (clues and guesses) before the turn-limit result applies. Accepts an integer of at least 1.
 <!-- END GENERATED: parameters -->
 
 ## Notes
 
-- Board words are nouns shorter than eight letters, originally selected with NLTK's `words` corpus and part-of-speech
+- Board words are nouns of three to seven letters, originally selected with NLTK's `words` corpus and part-of-speech
   tagger. Both lists ship with the environment in `words.json`, so boards are identical on every machine and nothing
   is downloaded.
 - Slurs and sexual or vulgar terms (the shared list in `textarena/utils/data/blocked_words.txt`) are never drawn as

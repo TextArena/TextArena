@@ -333,12 +333,113 @@ def test_invalid_vote_feedback_lists_the_valid_targets():
 
 
 def test_invalid_move_elimination_is_announced_once_without_double_period():
-    env = _fresh(6, discussion_rounds=2)
+    env = _fresh(8, discussion_rounds=2)
+    _play_first_night(env)
     actor = env.state.current_player_id
+    env.step(None)
+    env.step(None)
+    announcements = [m for _, m, _, to in env.state.events if to == -1 and "repeated invalid moves" in m]
+    assert announcements == [f"Player {actor} was eliminated for repeated invalid moves."]
+
+
+def _public_messages(env):
+    return [m for _, m, _, to in env.state.events if to == -1]
+
+
+def _daybreak_index(env):
+    """Index of the night's result, the first message of the day."""
+    return next(
+        i for i, (_, m, _, to) in enumerate(env.state.events)
+        if to == -1 and (m.endswith("was killed during the night.") or m == "No one was killed tonight.")
+    )
+
+
+def _options_shown_to(env, pid):
+    prompt = [m for _, m, _, to in env.state.events if to == pid and m.startswith("Night phase")][-1]
+    return [int(p) for p in prompt.split(": ")[1].split(", ")]
+
+
+def test_mafia_eliminated_at_night_is_announced_only_at_daybreak():
+    env = _fresh(6)
+    roles = _roles(env)
+    first = env.state.current_player_id
+    partner = next(pid for pid, role in roles.items() if role == "Mafia" and pid != first)
+    victim = next(pid for pid, role in roles.items() if role == "Villager")
+
     env.step("99")
     env.step("99")
-    announcements = [m for _, m, _, to in env.state.events if to == -1 and "eliminated by making an invalid move" in m]
-    assert announcements == [f"Player {actor} has been eliminated by making an invalid move."]
+    assert first not in env.game_state["alive_players"]
+    assert env.state.current_player_id == partner
+    env.step(str(victim))
+    # The Doctor and Detective still see the eliminated Mafia member as a target, so their lists reveal nothing.
+    for role in ("Doctor", "Detective"):
+        actor = env.state.current_player_id
+        assert roles[actor] == role
+        assert first in _options_shown_to(env, actor)
+        env.step(str(first))
+        assert env.state.error_count == 0
+
+    assert env.phase == Phase.DAY_DISCUSSION and not env.state.done
+    before_daybreak = env.state.events[:_daybreak_index(env)]
+    assert not any(
+        "repeated invalid moves" in m for _, m, _, to in before_daybreak if to == -1 or roles[to] != "Mafia"
+    )
+    assert [to for _, m, _, to in before_daybreak if m.startswith("Your fellow Mafia member")] == [partner]
+    assert _public_messages(env)[-3:] == [
+        f"Player {victim} was killed during the night.",
+        f"Player {first} was eliminated for repeated invalid moves.",
+        "Day breaks. Discuss for 1 round, then a vote will follow.",
+    ]
+
+
+def test_doctor_eliminated_at_night_protects_nobody_and_stays_secret_until_daybreak():
+    env = _fresh(8)
+    roles = _roles(env)
+    doctor = next(pid for pid, role in roles.items() if role == "Doctor")
+    detective = next(pid for pid, role in roles.items() if role == "Detective")
+    victim = next(pid for pid, role in roles.items() if role == "Villager")
+    while env.phase == Phase.NIGHT_MAFIA:
+        env.step(str(victim))
+
+    assert env.state.current_player_id == doctor
+    env.step("99")
+    env.step("99")
+    assert env.state.current_player_id == detective
+    assert doctor in _options_shown_to(env, detective)
+    env.step(str(doctor))
+
+    assert victim not in env.game_state["alive_players"]
+    assert not any("repeated invalid moves" in m for _, m, _, _ in env.state.events[:_daybreak_index(env)])
+    assert _public_messages(env)[-3:-1] == [
+        f"Player {victim} was killed during the night.",
+        f"Player {doctor} was eliminated for repeated invalid moves.",
+    ]
+    assert env.game_state["unannounced_eliminations"] == []
+
+
+def test_night_elimination_that_ends_the_game_is_announced_at_once():
+    env = SecretMafiaEnv(mafia_ratio=0.1)
+    env.reset(num_players=6, seed=42)
+    mafia = env.state.current_player_id
+    assert _roles(env)[mafia] == "Mafia"
+
+    env.step("99")
+    done = env.step("99")
+
+    assert done
+    assert env.state.rewards == {pid: (-1 if pid == mafia else 1) for pid in range(6)}
+    assert f"Player {mafia} was eliminated for repeated invalid moves." in _public_messages(env)
+
+
+def test_discussion_round_count_is_singular_or_plural():
+    single = _fresh(6, discussion_rounds=1)
+    _play_first_night(single)
+    assert "Day breaks. Discuss for 1 round, then a vote will follow." in _public_messages(single)
+    assert "1 round of public discussion" in single.prompt(0)
+    several = _fresh(6, discussion_rounds=2)
+    _play_first_night(several)
+    assert "Day breaks. Discuss for 2 rounds, then a vote will follow." in _public_messages(several)
+    assert "2 rounds of public discussion" in several.prompt(0)
 
 
 def test_every_role_prompt_explains_votes_ties_and_win_conditions():
@@ -346,7 +447,7 @@ def test_every_role_prompt_explains_votes_ties_and_win_conditions():
     for pid in range(8):
         prompt = env.prompt(pid)
         assert "ties are broken at random" in prompt
-        assert "1 rounds of public discussion" in prompt
+        assert "1 round of public discussion" in prompt
         assert "at least half of the living players" in prompt
     doctor = next(pid for pid, role in _roles(env).items() if role == "Doctor")
     assert "You cannot protect yourself." in env.prompt(doctor)

@@ -169,6 +169,23 @@ def test_duplicate_letter_feedback_does_not_overcount():
     assert env._evaluate_guess("allee") == ["G", "Y", "X", "X", "G"]
 
 
+def test_prompt_explains_repeated_letter_feedback():
+    env = _fresh()
+    assert "If a letter appears more often in your guess than in the word, the extra copies are marked X" in env.prompt(0)
+    env.state.game_state["secret_word"] = "crane"
+    assert env._evaluate_guess("eerie") == ["X", "X", "Y", "X", "G"]
+
+
+def test_guesses_left_is_pluralized():
+    env = _fresh(num_guesses=3)
+    env.state.game_state["secret_word"] = "apple"
+    env.step("ample")
+    env.step("angle")
+    messages = [message for _, message, _, _ in env.state.events]
+    assert any(message.endswith("You have 2 guesses left.") for message in messages)
+    assert any(message.endswith("You have 1 guess left.") for message in messages)
+
+
 def test_turn_limit_reward_uses_best_guess_not_latest_guess():
     env = _fresh(num_guesses=2)
     env.state.game_state["secret_word"] = "apple"

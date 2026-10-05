@@ -6,7 +6,7 @@ true one; a correct guess wins for the Guesser and a wrong one for the Deceiver.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
+**`-mdp` observation:** the prompt and the full transcript including every player action
 
 | Env ID | Parameters |
 | --- | --- |

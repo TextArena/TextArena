@@ -378,3 +378,31 @@ def test_generation_gives_up_after_max_retries(monkeypatch):
     with pytest.raises(RuntimeError, match="after 3 attempts"):
         env.reset(num_players=1, seed=1)
     assert len(attempts) == 3
+
+
+@pytest.mark.parametrize(
+    "env_id,seed",
+    [("Sokoban-v1", 34051), ("Sokoban-v1-medium", 9879), ("Sokoban-v1-medium", 12198), ("Sokoban-v1-medium", 94006)],
+)
+def test_registered_variants_reset_on_seeds_that_need_more_than_50_attempts(env_id, seed):
+    import textarena as ta
+
+    env = ta.make(env_id)
+    env.reset(num_players=1, seed=seed)
+    inner = env
+    while hasattr(inner, "env"):
+        inner = inner.env
+    assert inner.max_retries == 100
+    solution = _solve(inner, max_states=2_000_000)
+    assert solution is not None and len(solution) <= inner.max_turns
+
+
+def test_prompt_states_that_invalid_moves_are_free_but_limited():
+    env = _fresh()
+    prompt = env.prompt(0)
+    assert "does not count as a move" in prompt
+    assert "two invalid moves in a row end the game" in prompt
+    turn = env.state.turn
+    env.step("nonsense")
+    assert env.state.turn == turn and not env.state.done
+    assert env.step("nonsense")

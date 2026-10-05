@@ -94,6 +94,22 @@ def test_compact_ambiguous_coordinates_are_rejected():
     assert env.state.error_count == 1
 
 
+@pytest.mark.parametrize("action, accepted", [
+    ("(2, 3)", True), ("( 2 3 )", True), ("(2,3)", True), ("(2, 3", False), ("2, 3)", False), ("((2, 3))", False),
+])
+def test_parenthesized_moves_like_the_announcements_are_accepted(action, accepted):
+    env = _fresh()
+    env.step(action)
+    assert (env.state.game_state["board"][2][3] == "B") == accepted
+    assert env.state.error_count == (0 if accepted else 1)
+
+
+def test_prompt_explains_flanking_in_plain_words():
+    prompt = _fresh().prompt(0)
+    assert "pieces-in" not in prompt and ")-between" not in prompt
+    assert "at least one unbroken straight line (horizontal, vertical, or diagonal) of your opponent's pieces" in prompt
+
+
 def test_huge_coordinate_is_rejected_atomically():
     env = _fresh()
     before = env.snapshot()

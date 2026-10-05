@@ -6,7 +6,7 @@ the debate decides the winner: the side that gains more of the jury's support.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
+**`-mdp` observation:** the prompt and the full transcript including every player action
 
 | Env ID | Parameters |
 | --- | --- |
@@ -21,8 +21,9 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Debate-v1-mdp`). P
   sides are assigned at random.
 - Player 0 speaks first whichever side they hold, and the players alternate for `max_turns` arguments in total, so
   each player makes `max_turns / 2` of them.
-- When the first argument is submitted, a jury of `jury_size` AI jurors votes Affirmative or Negative on the topic
-  alone. After the final argument, the jury reads the full transcript and votes again.
+- When the first argument is submitted, a jury of `jury_size` AI jurors votes on which side of the topic it agrees
+  with (Affirmative answers the topic "yes", Negative "no"), based on the topic alone. After the final argument, the
+  jury reads the full transcript and votes again on which side it now agrees with.
 - Each side's score is its share of the post-debate vote minus its share of the pre-debate vote. The side with the
   larger gain wins; equal gains are a draw.
 
@@ -62,4 +63,5 @@ every accepted argument. The jury's votes are never shown during the game; the f
   differ between runs.
 - If any juror errors out or answers with something other than `Affirmative` or `Negative`, the whole vote fails and
   the move is retried. A missing API key also surfaces as a retry request rather than a crash.
-- Jurors read the arguments verbatim.
+- Jurors read the arguments verbatim, each under a numbered speaker line with every line of the argument quoted
+  with `> `, so an argument cannot pass off text as another speaker's line.

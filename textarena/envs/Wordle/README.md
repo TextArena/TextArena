@@ -6,7 +6,7 @@ misplaced, or absent ([rules](https://en.wikipedia.org/wiki/Wordle)).
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
+**`-mdp` observation:** the prompt and every game message (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |
@@ -73,5 +73,7 @@ A rejected guess is answered with the reason. If you run out of guesses, the sec
   Proper nouns are rejected, and the same guesses are accepted on every machine.
 - Secret words come from the same module and need no downloads. By default they are the words of the right length in
   Ogden's Basic English list (850 words, 192 of them with five letters and 81 with seven). In hardcore mode they are
-  the dictionary headwords of the right length (base words without inflections, about 3,300 with five letters and
-  5,500 with seven). A length that the chosen list lacks falls back to any dictionary word of that length.
+  the dictionary headwords of the right length (the dictionaries' own entries rather than generated inflections, about
+  3,300 with five letters and 5,500 with seven). Some entries look inflected, such as `asked`, `balls` or `dated`
+  (about 6% of the five-letter ones). A length that the chosen list lacks falls back to any dictionary word of that
+  length.

@@ -11,8 +11,8 @@ the wrong wall can never be recovered.
 
 | Env ID | Parameters |
 | --- | --- |
-| `Sokoban-v1` | `dim_room=(6, 6)`, `max_turns=30`, `num_boxes=3` |
-| `Sokoban-v1-medium` | `dim_room=(8, 8)`, `max_turns=50`, `num_boxes=5` |
+| `Sokoban-v1` | `dim_room=(6, 6)`, `max_turns=30`, `num_boxes=3`, `max_retries=100` |
+| `Sokoban-v1-medium` | `dim_room=(8, 8)`, `max_turns=50`, `num_boxes=5`, `max_retries=100` |
 
 Append `-mdp` to any ID for the state-complete variant (e.g. `Sokoban-v1-mdp`). Parameters can be overridden in `ta.make`, e.g. `ta.make("Sokoban-v1", dim_room=...)`.
 <!-- END GENERATED: variants -->
@@ -76,7 +76,7 @@ board and the accepted directions; after each valid move, they are told what hap
 - `dim_room` (default `(6, 6)`): The room size as (rows, columns); the outer ring is always wall. Accepts two integers of at least 4 with at most 400 cells in total.
 - `num_boxes` (default `3`): The number of boxes and goals. It must leave room for the player inside the walls. Accepts an integer of at least 1.
 - `max_turns` (default `100`): The number of valid moves allowed. Generated rooms are always solvable within it. Accepts an integer of at least 1.
-- `max_retries` (default `50`): Generation attempts before reset gives up with RuntimeError. Accepts an integer from 1 to 100.
+- `max_retries` (default `100`): Generation attempts before reset gives up with RuntimeError. Accepts an integer from 1 to 100.
 <!-- END GENERATED: parameters -->
 
 ## Notes
@@ -84,5 +84,8 @@ board and the accepted directions; after each valid move, they are told what hap
 - The room generator (a random walk that carves the floor, then reverse play that pulls the boxes off their goals) is
   adapted from [gym-sokoban](https://github.com/mpSchrader/gym-sokoban). Undoing the pulls solves the room, so every
   generated room is solvable.
-- Some custom settings cannot be generated, such as many boxes in a small room or a `max_turns` too small to move
-  every box. `reset` then raises `RuntimeError` after `max_retries` attempts.
+- Some custom settings cannot be generated, and `reset` then raises `RuntimeError` after `max_retries` attempts.
+  Because the reverse play is limited to 28 moves, 7 or more boxes fail in any room size (6 boxes still generate in
+  10×10 and 12×12 rooms). A small room with many boxes or a `max_turns` too small to move every box also fails.
+- Only about one generation attempt in five succeeds, so the registered variants use the maximum of 100 attempts;
+  with 50, about 1 seed in 30,000 to 200,000 failed.

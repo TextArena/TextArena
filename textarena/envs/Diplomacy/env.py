@@ -132,9 +132,11 @@ class DiplomacyEnv(ta.GameEnv):
             "## ORDERS",
             "Units are A (army: land provinces, can be convoyed across sea) and F (fleet: sea and coastal provinces). "
             "Provinces use three-letter codes; the split coasts of SPA, STP and BUL are written like STP(NC), and a "
-            "fleet moving to one of those provinces must name the coast.",
+            "fleet moving to one of those provinces must name the coast; armies never name a coast.",
             "- Movement: hold 'A PAR H'; move 'A PAR - BUR'; support a hold 'A MAR S A PAR'; support a move "
-            "'A MAR S A PAR - BUR'; convoy 'F NTH C A LON - BEL'; move by convoy 'A LON - BEL VIA'. "
+            "'A MAR S A PAR - BUR'; convoy 'F NTH C A LON - BEL'; move by convoy 'A LON - BEL VIA'. An army moves "
+            "by convoy only when its destination is not adjacent or the order ends with VIA; otherwise it moves "
+            "overland. "
             "Units without an order hold.",
             "- Retreats: retreat 'A PAR R BUR' or disband 'A PAR D'. A dislodged unit without an order is disbanded.",
             "- Adjustments: build 'A PAR B' or 'F STP(NC) B' in a vacant home center you own, skip a build with "

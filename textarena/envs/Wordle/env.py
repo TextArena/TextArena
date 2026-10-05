@@ -53,6 +53,7 @@ class WordleEnv(ta.GameEnv):
             "  - G (green): correct letter in the correct position\n"
             "  - Y (yellow): letter exists in the word but in the wrong position\n"
             "  - X (wrong): letter is not in the word\n"
+            "If a letter appears more often in your guess than in the word, the extra copies are marked X (greens are marked first, then yellows from left to right).\n"
             "Enter your guess to begin.\n"
         )
 
@@ -87,8 +88,9 @@ class WordleEnv(ta.GameEnv):
         # Check for win condition (all letters green)
         if all(f == "G" for f in feedback):
             return self.outcome({0: 1}, reason="Congratulations! You guessed the word correctly!")
+        guesses_left = gs["num_guesses"] - self.state.turn - 1
         self.broadcast(
-            f"You submitted '{word}'.\nFeedback:\n{self._render_player_view(player_id)}\nYou have {gs['num_guesses'] - self.state.turn - 1} guesses left.",
+            f"You submitted '{word}'.\nFeedback:\n{self._render_player_view(player_id)}\nYou have {guesses_left} {'guess' if guesses_left == 1 else 'guesses'} left.",
             ta.ObservationType.GAME_MESSAGE,
         )
         return None

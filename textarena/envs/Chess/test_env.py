@@ -1,6 +1,8 @@
 """Deterministic game-logic tests for Chess-v1."""
 import copy
 
+import pytest
+
 from textarena.envs.Chess.board import A8, D5, D6, E4, F1, G1, KING, PAWN, QUEEN, ROOK
 from textarena.envs.Chess.env import ChessEnv
 
@@ -195,3 +197,39 @@ def test_turn_limit_draw_and_blind_rendering():
     blind = ChessEnv(is_open=False, show_valid=False)
     blind.reset(num_players=2, seed=42)
     assert blind.render(0) is None
+
+
+@pytest.mark.parametrize("fen, move, reason", [
+    ("7k/P7/8/8/8/8/8/7K w - - 0 1", "a7a8", "a7a8 needs a promotion letter: add q, r, b or n, for example 'a7a8q'."),
+    (None, "e2e3q", "e2e3q is not a promotion: only a pawn reaching the last rank takes a letter, so write 'e2e3'."),
+    (None, "e3e4", "e3e4 is not a legal move: there is no piece on e3."),
+    (None, "e7e5", "e7e5 is not a legal move: the piece on e7 is Black's, and White is to move."),
+    (None, "e2e5", "e2e5 is not a legal move in this position."),
+    ("4k3/8/8/8/8/8/8/r3K3 w - - 0 1", "e1d1", "e1d1 is not a legal move in this position. White is in check."),
+])
+def test_illegal_moves_get_specific_reasons(fen, move, reason):
+    env = _fresh()
+    board = env.state.game_state["board"]
+    if fen:
+        board.set_fen(fen)
+    before = board.fen()
+    env.step(move)
+    notice = next(message for _, message in env.state.logs if "attempted an invalid move" in message)
+    assert f"Reason: {reason} Please" in notice
+    assert board.fen() == before and env.state.error_count == 1
+
+
+def test_prompt_examples_match_each_color_and_hidden_views_are_explained():
+    env = _fresh()
+    white, black = env.prompt(0), env.prompt(1)
+    assert all(f"'{example}'" in white for example in ["e2e4", "e1g1", "e7e8q"])
+    assert all(f"'{example}'" in black for example in ["e7e5", "e8g8", "e2e1q"]) and "e1g1" not in black
+    assert "not shown" not in white
+
+    blind = ChessEnv(is_open=False, show_valid=False)
+    blind.reset(num_players=2, seed=42)
+    assert "The board and the list of legal moves are not shown, so track the position from the move history." in (
+        blind.prompt(1))
+    board_hidden = ChessEnv(is_open=False, show_valid=True)
+    board_hidden.reset(num_players=2, seed=42)
+    assert "The board is not shown, so track the position from the move history." in board_hidden.prompt(0)

@@ -1,4 +1,5 @@
 # good explanation of the game: https://www.youtube.com/watch?v=l53oL0ptt7k
+import copy
 import random
 import re
 from enum import Enum
@@ -1146,6 +1147,18 @@ class DiplomacyGameEngine:
             )
         )
 
+    @staticmethod
+    def _army_coast_error(order: Order) -> str:
+        """Rejection for an order that names a coast for an army, with the order rewritten without it."""
+        corrected = copy.copy(order)
+        if order.unit_type == UnitType.ARMY:
+            corrected.location_coast = None
+            if order.order_type in {OrderType.MOVE, OrderType.RETREAT}:
+                corrected.target_coast = None
+        if order.order_type in {OrderType.SUPPORT, OrderType.CONVOY} and order.target.startswith("A "):
+            corrected.target_coast = corrected.secondary_target_coast = None
+        return f"Armies don't use coasts: write '{corrected}'"
+
     def validate_order(self, order: Order) -> Tuple[bool, Optional[str]]:
         """ Validate if an order is legal and return reason if invalid """
         if order.power not in self.powers:
@@ -1183,10 +1196,14 @@ class DiplomacyGameEngine:
             unit = self._find_unit(order.power, order.unit_type, order.location)
             if not unit:
                 return False, f"No {order.unit_type.value} unit found at {order.location} for {order.power}"
+            if unit.type == UnitType.ARMY and order.location_coast:
+                return False, self._army_coast_error(order)
             if order.location_coast and order.location_coast != unit.coast:
+                corrected = copy.copy(order)
+                corrected.location_coast = unit.coast
                 return False, (
-                    f"Unit at {order.location} is not on the "
-                    f"{order.location_coast} coast"
+                    f"The fleet at {order.location} is on the {unit.coast} coast, not "
+                    f"{order.location_coast}: write '{corrected}'"
                 )
             if self.phase == PhaseType.MOVEMENT and unit.dislodged:
                 return False, f"Unit at {order.location} is dislodged and cannot receive movement orders"
@@ -1202,11 +1219,11 @@ class DiplomacyGameEngine:
             if not dest_region:
                 return False, f"Destination region {order.target} does not exist"
 
+            if unit.type == UnitType.ARMY and order.target_coast:
+                return False, self._army_coast_error(order)
             if order.via_convoy:
                 if unit.type != UnitType.ARMY:
                     return False, "Only armies can move VIA convoy"
-                if order.target_coast:
-                    return False, "Convoyed armies do not specify a destination coast"
                 if self._has_possible_convoy_path(unit.region.name, order.target):
                     return True, None
                 return False, (
@@ -1241,6 +1258,8 @@ class DiplomacyGameEngine:
 
             if not supported_unit:
                 return False, f"No {supported_type.value} unit found at {supported_loc} to support"
+            if supported_type == UnitType.ARMY and (order.target_coast or order.secondary_target_coast):
+                return False, self._army_coast_error(order)
 
             if order.secondary_target:
                 destination = self.map.get_region(order.secondary_target)
@@ -1299,7 +1318,7 @@ class DiplomacyGameEngine:
             if convoyed_unit.type != UnitType.ARMY:
                 return False, "Only armies can be convoyed"
             if order.target_coast or order.secondary_target_coast:
-                return False, "Convoyed armies do not specify coast qualifiers"
+                return False, self._army_coast_error(order)
 
             # Check if the destination is a coastal region
             dest_region = self.map.get_region(order.secondary_target)
@@ -1321,6 +1340,9 @@ class DiplomacyGameEngine:
             # Unit must be dislodged
             if not unit.dislodged:
                 return False, f"Unit at {order.location} is not dislodged and cannot retreat"
+
+            if unit.type == UnitType.ARMY and order.target_coast:
+                return False, self._army_coast_error(order)
 
             # Check if retreat location is valid
             retreat_destination = _format_location(

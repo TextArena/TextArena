@@ -27,15 +27,19 @@ REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ENVS_DIR = os.path.join(REPO_ROOT, "textarena", "envs")
 sys.path.insert(0, REPO_ROOT)
 
+from textarena.engine import GameEnv  # noqa: E402
 from textarena.envs.registration import ENV_REGISTRY  # noqa: E402
 
 BLOCK = re.compile(
     r"(<!-- BEGIN GENERATED: (?P<name>[\w-]+) -->\n)(?P<body>.*?)(<!-- END GENERATED: (?P=name) -->)",
     re.S,
 )
+# Keyed by (mdp_includes_actions, whether the game draws a board).
 MDP_VIEWS = {
-    False: "the prompt, every game message and the latest board (raw player actions are left out)",
-    True: "the prompt, the full transcript including every player action, and the latest board",
+    (False, True): "the prompt, every game message and the latest board (raw player actions are left out)",
+    (False, False): "the prompt and every game message (raw player actions are left out)",
+    (True, True): "the prompt, the full transcript including every player action, and the latest board",
+    (True, False): "the prompt and the full transcript including every player action",
 }
 
 
@@ -113,7 +117,7 @@ def env_block(doc: EnvDoc) -> str:
     lines = [
         f"**Players:** {doc.players}",
         "",
-        f"**`-mdp` observation:** {MDP_VIEWS[doc.cls.mdp_includes_actions]}",
+        f"**`-mdp` observation:** {MDP_VIEWS[doc.cls.mdp_includes_actions, doc.cls.render is not GameEnv.render]}",
         "",
         "| Env ID | Parameters |",
         "| --- | --- |",

@@ -2,7 +2,7 @@ import re
 from typing import Any, Dict, Optional, Union
 
 import textarena as ta
-from textarena.envs.Chess.board import WHITE, Board, Move
+from textarena.envs.Chess.board import QUEEN, WHITE, Board, Move
 from textarena.envs.Chess.renderer import create_board_str
 
 
@@ -26,15 +26,22 @@ class ChessEnv(ta.GameEnv):
         return {0: "White", 1: "Black"}
 
     def prompt(self, player_id: int) -> str:
+        move, castle, promote = ("e2e4", "e1g1", "e7e8q") if player_id == 0 else ("e7e5", "e8g8", "e2e1q")
         lines = [
             f"You are playing {self.roles()[player_id]} in a game of Chess.",
-            "Reply with one move in UCI format: the start square followed by the end square, e.g. 'e2e4'. Castle by "
-            "moving the king two squares (e.g. 'e1g1'), and promote a pawn by adding q, r, b or n (e.g. 'e7e8q').",
+            f"Reply with one move in UCI format: the start square followed by the end square, e.g. '{move}'. Castle by "
+            f"moving the king two squares (e.g. '{castle}'), and promote a pawn by adding q, r, b or n (e.g. '{promote}').",
         ]
         if self.is_open:
             lines.append(
                 "On the board, uppercase letters are White's pieces and lowercase letters are Black's (K king, Q queen, "
                 "R rook, B bishop, N knight, P pawn), and '.' is an empty square."
+            )
+        elif self.show_valid:
+            lines.append("The board is not shown, so track the position from the move history.")
+        else:
+            lines.append(
+                "The board and the list of legal moves are not shown, so track the position from the move history."
             )
         lines.append(f"The game is drawn after {self.max_turns} moves in total (both players combined) if it has not ended sooner.")
         return "\n".join(lines)
@@ -59,7 +66,7 @@ class ChessEnv(ta.GameEnv):
             # ``a1a1``) are not valid UCI moves.
             return self.invalid("Invalid UCI move.")
         if chess_move not in board.legal_moves:
-            return self.invalid("Illegal move.")
+            return self.invalid(self._illegal_reason(board, chess_move, move_uci))
         board.push(chess_move)
         self.game_state["valid_moves"] = ', '.join(legal.uci() for legal in board.legal_moves)
         self.broadcast(f"{self.roles()[player_id]} played {move_uci}.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
@@ -88,6 +95,21 @@ class ChessEnv(ta.GameEnv):
         if board.is_check():
             self.broadcast(f"{self.roles()[1 - player_id]} is in check.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
         return None
+
+    def _illegal_reason(self, board: Board, chess_move: Move, move_uci: str) -> str:
+        start, piece = move_uci[:2], board.piece_at(chess_move.from_square)
+        mover, other = (self.roles()[0], self.roles()[1]) if board.turn == WHITE else (self.roles()[1], self.roles()[0])
+        if chess_move.promotion is None and Move(chess_move.from_square, chess_move.to_square, QUEEN) in board.legal_moves:
+            return f"{move_uci} needs a promotion letter: add q, r, b or n, for example '{move_uci}q'."
+        if chess_move.promotion is not None and Move(chess_move.from_square, chess_move.to_square) in board.legal_moves:
+            return f"{move_uci} is not a promotion: only a pawn reaching the last rank takes a letter, so write '{move_uci[:4]}'."
+        if piece is None:
+            return f"{move_uci} is not a legal move: there is no piece on {start}."
+        if piece.color != board.turn:
+            return f"{move_uci} is not a legal move: the piece on {start} is {other}'s, and {mover} is to move."
+        if board.is_check():
+            return f"{move_uci} is not a legal move in this position. {mover} is in check."
+        return f"{move_uci} is not a legal move in this position."
 
     def get_board_str(self):
         return create_board_str(board=self.game_state["board"])

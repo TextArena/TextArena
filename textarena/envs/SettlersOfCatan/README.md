@@ -78,8 +78,10 @@ the requested resources.
 Each player first receives the rules, build costs, and a legend for the text board. Before every action-phase move,
 the acting player sees every color's victory points and piece counts, the full board (settlements `V` and cities `C`
 marked with the owner's initial, roads drawn in the owner's initial), their own hand, the numbered list of legal
-moves, and how many actions they have left. During a negotiation, each negotiator instead sees their own hand, the
-open offer, and how to respond.
+moves, and how many actions they have left. Moves name each corner by the tiles around it, e.g.
+`{10 ore, 6 brick, 2 sheep}`; a coastal corner that touches a single tile also names its position on that tile as
+drawn, e.g. `{10 ore (upper-left corner)}`, so no two moves read the same. During a negotiation, each negotiator
+instead sees their own hand, the open offer, and how to respond.
 
 Dice rolls and everyone's resulting income, every build, a player ending their turn with `Nothing.`, the end of each
 negotiation, and eliminations are announced to all players. Negotiation messages, offers, denials, and completed trades are shown only to the two negotiators, and each

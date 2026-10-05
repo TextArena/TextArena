@@ -201,6 +201,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
     - SETTLEMENT: 1 Brick, 1 Wood, 1 Wheat, 1 Sheep
     - CITY:    3 Ore, 2 Wheat
     - Piece limits: 15 Roads, 5 Settlements, 4 Cities
+    - Placement: a road must connect to one of your roads, settlements or cities (not through a corner holding an opponent's building); a settlement must be connected to one of your roads and at least two edges away from every other settlement or city; a city upgrades one of your settlements.
 
     TRADING / NEGOTIATION (one counterparty at a time)
     - Make an offer by putting this command on its own line (exact format):
@@ -218,6 +219,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
     - Settlements appear as 'V' with the owner initial near them; Cities as 'C'.
     - Roads draw across edges. Empty horizontal edges show "______"; owned horizontal edges show the owner's letter repeated.
     - Tile labels show terrain and number tokens; desert produces nothing.
+    - Moves name a corner by the tiles around it, e.g. {{10 ore, 6 brick, 2 sheep}}; a coastal corner touching a single tile also names its position on that tile as drawn, e.g. {{10 ore (upper-left corner)}}.
 
     GUIDELINES
     - Always pick a legal move from the provided list using its index.
@@ -252,7 +254,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
         len_game_moves = len(self.game_moves)
         self.game_moves += [(len_game_moves+1, f"Negotiate.", None), (len_game_moves+2, f"Nothing.", None)]
         move_block = "\n".join(f"'{idx}'\t-  {desc}" for idx, desc, _ in self.game_moves)
-        hand_cards = '\n\t'.join(f'{k.name.lower()}: {v}' for k,v in player.hand.items())
+        hand_cards = '\n\t'.join(f'{terrain.name.lower()}: {player.hand.get(terrain, 0)}' for terrain in _RESOURCE_ORDER)
         remaining_turn_moves = self.state.game_state["move_allowance"] - self.state.game_state["move_count"]
         return "\n".join([
             f"{'='*24}  {colour.name}  {'='*24}", "Scores\n───────", "\n".join(score_lines), "", "Board\n──────", render_board(self.board),
@@ -339,7 +341,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
         return None
 
     def on_turn_limit(self) -> ta.Outcome:
-        return self._determine_winner()
+        return self._determine_winner(f"The move limit of {self.max_turns} was reached.")
 
     def _next_active_player(self, from_pid: int) -> Optional[int]:
         """Next clockwise player who has not been eliminated; None if nobody else remains."""
@@ -398,13 +400,10 @@ class SettlersOfCatanEnv(ta.GameEnv):
 
         # check for win
         scores = self.board.get_scores()
-        if any(
-            scores[self.board.str_to_enum(self.role_colors[pid])]["total"]
-            >= self.winning_score
-            for pid in range(self.state.num_players)
-            if pid not in gs["eliminated_players"]
-        ):
-            return self._determine_winner()
+        for pid in range(self.state.num_players):
+            vp = scores[self.board.str_to_enum(self.role_colors[pid])]["total"]
+            if pid not in gs["eliminated_players"] and vp >= self.winning_score:
+                return self._determine_winner(f"Player {pid} ({self.role_colors[pid]}) wins with {vp} VP.")
         # check for turn over
         if (
             gs["turn_phase"] == "action"
@@ -415,7 +414,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
         ):
             next_pid = self._next_active_player(next_holder)
             if next_pid is None:
-                return self._determine_winner()
+                return self._determine_winner(f"Player {next_holder} ({self.role_colors[next_holder]}) is the last remaining player.")
             gs["turn_done"] = False; gs["move_count"] = 0
             gs["turn_phase"] = "action"
             gs["negotiation_partner"] = None
@@ -544,7 +543,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
         )
         gs["current_offer"] = None
 
-    def _determine_winner(self) -> ta.Outcome:
+    def _determine_winner(self, headline: str) -> ta.Outcome:
         scores = self.board.get_scores()  # {Color: {"total": vp, ...}}
         eliminated = set(self.game_state["eliminated_players"])
         active = [pid for pid in range(self.state.num_players) if pid not in eliminated]
@@ -584,5 +583,5 @@ class SettlersOfCatanEnv(ta.GameEnv):
         )
         return self.outcome(
             reward_dict,
-            reason=f"Final ranking by victory points: {score_summary}",
+            reason=f"{headline} Final ranking by victory points: {score_summary}",
         )

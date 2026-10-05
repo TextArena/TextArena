@@ -7,7 +7,7 @@ a graph of word neighbors.
 <!-- BEGIN GENERATED: variants -->
 **Players:** 1
 
-**`-mdp` observation:** the prompt, every game message and the latest board (raw player actions are left out)
+**`-mdp` observation:** the prompt and every game message (raw player actions are left out)
 
 | Env ID | Parameters |
 | --- | --- |

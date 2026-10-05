@@ -24,7 +24,7 @@ def create_board_str(game_state: dict) -> str:
         lines.append("│                                  │")
         for i, word in enumerate(game_state.get("word_history", [])):
             player = f"P{i % 2}"
-            entry = f"{player}: {word.upper()} ({len(word):<2} letters)   "
+            entry = f"{player}: {word.upper()} ({len(word)} {'letter' if len(word) == 1 else 'letters'})"
             lines.append(f"│  {entry[:32].ljust(32)}│")
         lines.append("│                                  │")
         lines.append("└──────────────────────────────────┘")

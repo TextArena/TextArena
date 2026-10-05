@@ -189,6 +189,39 @@ def test_offer_without_a_colon_is_malformed(action):
     assert env.state.game_state["current_offer"] is None
 
 
+@pytest.mark.parametrize("reply", ["Accept.", "accept!", "ACCEPT !"])
+def test_accept_may_end_with_punctuation(reply):
+    env = _fresh()
+    env.step("Offer: 1 Wheat -> 1 Ore")
+    done = env.step(f"Deal.\n{reply}")
+    assert not done
+    assert env.state.error_count == 0
+    assert env.state.game_state["trade_history"][-1]["outcome"] == "Accepted"
+
+
+@pytest.mark.parametrize("reply", ["Deny.", "deny!"])
+def test_deny_may_end_with_punctuation(reply):
+    env = _fresh()
+    env.step("Offer: 1 Wheat -> 1 Ore")
+    env.step(reply)
+    assert env.state.error_count == 0
+    assert env.state.game_state["trade_history"][-1]["outcome"] == "Rejected"
+
+
+@pytest.mark.parametrize("reply", ["Accept it", "Accept?", "Accept.."])
+def test_decision_lines_with_other_text_stay_malformed(reply):
+    env = _fresh()
+    env.step("Offer: 1 Wheat -> 1 Ore")
+    before = copy.deepcopy(env.game_state)
+    env.step(reply)
+    assert env.state.error_count == 1
+    assert env.game_state == before
+
+
+def test_prompt_states_that_decisions_may_end_with_punctuation():
+    assert "Accept and Deny may end with '.' or '!'" in _fresh().prompt(0)
+
+
 def test_offer_box_keeps_its_width_for_multi_digit_quantities():
     env = _fresh()
     env.step("Offer: 12 Wheat, 3 Sheep -> 100 Brick")

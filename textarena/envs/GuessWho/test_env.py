@@ -5,7 +5,7 @@ import json
 import pytest
 
 import textarena as ta
-from textarena.envs.GuessWho.env import GuessWhoEnv
+from textarena.envs.GuessWho.env import GAMEMASTER_SYSTEM_PROMPT, GuessWhoEnv
 
 
 class _Gamemaster:
@@ -79,6 +79,69 @@ def test_gamemaster_response_is_normalized_and_recorded():
     assert env.gamemaster_history == [("Do they have a hat?", "I don't know")]
     _, observations = env.get_observation()
     assert any(message == "I don't know" for _, message, _ in observations)
+
+
+@pytest.mark.parametrize(
+    "reply, answer", [("**Yes**", "Yes"), ("`No`", "No"), ("_I don't know_", "I don't know"), ("**Answer**: No.", "No")]
+)
+def test_gamemaster_answer_may_use_markdown_emphasis_or_backticks(reply, answer):
+    env = _fresh(gamemaster=_Gamemaster((reply,)))
+    env.step("Do they have a hat?")
+    assert env.gamemaster_history == [("Do they have a hat?", answer)]
+
+
+def test_default_gamemaster_gets_its_own_system_prompt(monkeypatch):
+    created = {}
+
+    class Agent:
+        def __init__(self, **kwargs):
+            created.update(kwargs)
+
+        def __call__(self, prompt):
+            return "No"
+
+    monkeypatch.setattr(ta.agents, "OpenRouterAgent", Agent)
+    env = GuessWhoEnv()
+    env.reset(num_players=1, seed=42)
+    env.step("Do they have a hat?")
+    assert created["system_prompt"] == GAMEMASTER_SYSTEM_PROMPT
+    assert "truthfully" in created["system_prompt"] and "competitive" not in created["system_prompt"]
+
+
+def test_gamemaster_prompt_lists_traits_and_asks_for_truthful_answers():
+    gamemaster = _Gamemaster(("No",))
+    env = _fresh(gamemaster=gamemaster)
+    env.step("Do they have a hat?")
+    prompt = gamemaster.prompts[0]
+    assert f"- name: {env.target_character['name']}\n" in prompt
+    assert f"- hat_type: {env.target_character['hat_type']}\n" in prompt
+    assert "truthfully" in prompt and "guide" not in prompt
+    assert prompt.endswith("Reply with exactly one of the options.")
+
+
+def test_gamemaster_failure_keeps_a_function_gamemasters_attributes():
+    def gamemaster(prompt):
+        gamemaster.calls += 1
+        if gamemaster.calls == 1:
+            raise RuntimeError("offline")
+        return "Yes"
+
+    gamemaster.calls = 0
+    env = _fresh(gamemaster=gamemaster)
+    env.step("Do they have a hat?")
+    assert gamemaster.calls == 1
+    env.step("Do they have a hat?")
+    assert env.gamemaster_history == [("Do they have a hat?", "Yes")]
+
+
+def test_message_starting_with_guess_is_a_guess_across_lines():
+    gamemaster = _Gamemaster()
+    env = _fresh(gamemaster=gamemaster)
+    assert env.step(f"guess\n{env.target_character['name']}\n")
+    assert env.state.rewards == {0: 1}
+    env = _fresh(gamemaster=gamemaster)
+    env.step(f"guess {env.target_character['name']}\nfinal answer")
+    assert env.state.error_count == 1 and gamemaster.prompts == []
 
 
 def test_gamemaster_failure_is_retryable_and_atomic():

@@ -160,3 +160,30 @@ def test_jury_accepts_quoted_or_punctuated_votes():
     jury.jury = [_Juror("'Affirmative'"), _Juror(" negative. "), _Juror("**Affirmative**"), _Juror("“Negative”")]
 
     assert jury.evaluate("context") == {"Affirmative": 0.5, "Negative": 0.5}
+
+
+@pytest.mark.parametrize("reply", ["`Negative`", "[Negative]", "Vote: Negative", "**Answer**: negative", "Negative,"])
+def test_jury_accepts_labelled_or_formatted_votes(reply):
+    jury = OpenRouterJury.__new__(OpenRouterJury)
+    jury.options = ["Affirmative", "Negative"]
+    jury.jury = [_Juror(reply)]
+
+    assert jury.evaluate("context") == {"Affirmative": 0.0, "Negative": 1.0}
+
+
+def test_jury_asks_again_only_after_an_unusable_reply():
+    class Juror:
+        def __init__(self, replies):
+            self.replies, self.calls = list(replies), 0
+
+        def __call__(self, prompt):
+            self.calls += 1
+            return self.replies.pop(0)
+
+    jury = OpenRouterJury.__new__(OpenRouterJury)
+    jury.options = ["Affirmative", "Negative"]
+    steady, wavering = Juror(["Affirmative"]), Juror(["I lean Negative", "Negative"])
+    jury.jury = [steady, wavering]
+
+    assert jury.evaluate("context") == {"Affirmative": 0.5, "Negative": 0.5}
+    assert (steady.calls, wavering.calls) == (1, 2)

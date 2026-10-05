@@ -10,6 +10,10 @@ import textarena as ta
 from textarena.utils.jury import DEFAULT_JUDGE_MODEL
 
 _ARTICLES = frozenset({"a", "an", "the"})
+GAMEMASTER_SYSTEM_PROMPT = (
+    "You are the impartial game master of a Guess Who game. You know the secret character's traits. Answer each "
+    "question truthfully about that character, replying with exactly one of the allowed answers and nothing else."
+)
 
 
 def _answer_key(text: str) -> str:
@@ -31,7 +35,8 @@ class GuessWhoEnv(ta.GameEnv):
     _GUESS_RE = re.compile(r"^\s*guess(?:\s+|:\s*)(?P<guess>.+?)\s*$", re.IGNORECASE)
     _EMPTY_GUESS_RE = re.compile(r"^\s*guess\s*:?\s*$", re.IGNORECASE)
     _GAMEMASTER_RESPONSE_RE = re.compile(
-        r"""^\s*(?:answer\s*:\s*)?["'“”]?(?P<answer>yes|no|i\s+don['’]t\s+know)["'“”]?[.!]?\s*$""",
+        r"""^\s*[*_`]*(?:answer[*_`]*\s*:\s*[*_`]*\s*)?[*_`"'“”]*(?P<answer>yes|no|i\s+don['’]t\s+know)"""
+        r"""[*_`"'“”]*[.!]?[*_`"'“”]*\s*$""",
         re.IGNORECASE,
     )
 
@@ -119,6 +124,7 @@ class GuessWhoEnv(ta.GameEnv):
             if (
                 original is not None
                 and checkpoint is not None
+                and checkpoint is not original
                 and type(original) is type(checkpoint)
                 and hasattr(original, "__dict__")
                 and hasattr(checkpoint, "__dict__")
@@ -178,7 +184,9 @@ class GuessWhoEnv(ta.GameEnv):
     def _ask_gamemaster(self, prompt: str):
         if self.gamemaster is None:
             try:
-                self.gamemaster = ta.agents.OpenRouterAgent(model_name=DEFAULT_JUDGE_MODEL)
+                self.gamemaster = ta.agents.OpenRouterAgent(
+                    model_name=DEFAULT_JUDGE_MODEL, system_prompt=GAMEMASTER_SYSTEM_PROMPT
+                )
             except (ImportError, ValueError) as exc:
                 raise RuntimeError(
                     'GuessWho questions require OpenRouter: pip install "textarena[agents]" '
@@ -194,7 +202,7 @@ class GuessWhoEnv(ta.GameEnv):
         if self.gamemaster_options is None:     raise ValueError("Gamemaster options are not set.")
         options = ", ".join(f"'{opt}'" for opt in self.gamemaster_options) # Format available response options
         history = "\n".join(f"Q: {q}\nA: {a}" for q, a in self.gamemaster_history) # Construct conversation history
-        prompt = f"{self.gamemaster_context}\n{history}\n\nQ: {action}\nOptions: {options}\n\nPlease respond with the most appropriate option." # Create prompt
+        prompt = f"{self.gamemaster_context}\n{history}\n\nQ: {action}\nOptions: {options}\n\nReply with exactly one of the options." # Create prompt
         response = self.ask(self._ask_gamemaster, prompt)
         if not isinstance(response, str) or len(response) > self.max_gamemaster_response_chars:
             raise ValueError("gamemaster returned an invalid answer")
@@ -210,9 +218,15 @@ class GuessWhoEnv(ta.GameEnv):
 
     def setup(self) -> Dict[str, Any]:
         target_character = copy.deepcopy(self.rng.choice(self.characters))
+        traits = "\n".join(
+            f"- {field}: {(', '.join(value) or 'none') if isinstance(value, list) else value}"
+            for field, value in target_character.items()
+        )
         gamemaster_context = ( ## the gamemaster context
-            f"You are the gamemaster for the game of 'Guess Who'.\n"
-            f"You will provide responses to the player's questions that guides them into guessing the target character with the following name and traits: {target_character}.\n"
+            "You are the game master of a game of Guess Who.\n"
+            f"The secret character the player must identify has these traits:\n{traits}\n"
+            "Answer the player's latest question truthfully about this character with 'Yes' or 'No'. Reply 'I don't know' "
+            "only when the traits do not settle the question. Do not add anything else to your answer.\n"
         )
         return {"target_character": target_character, "gamemaster_context": gamemaster_context, "gamemaster_history": []}
 
@@ -256,7 +270,7 @@ class GuessWhoEnv(ta.GameEnv):
         """The guessed name, or None when the message is a question."""
         if "?" in unicodedata.normalize("NFKC", action):
             return None  # e.g. "Guess what, is the character male?" is a question
-        match = self._GUESS_RE.fullmatch(action)
+        match = self._GUESS_RE.fullmatch(" ".join(action.split()))
         return match.group("guess") if match else None
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:

@@ -7,7 +7,7 @@ most but only if both hunt it, a hare pays less but safely, and the higher total
 <!-- BEGIN GENERATED: variants -->
 **Players:** 2
 
-**`-mdp` observation:** the prompt, the full transcript including every player action, and the latest board
+**`-mdp` observation:** the prompt and the full transcript including every player action
 
 | Env ID | Parameters |
 | --- | --- |

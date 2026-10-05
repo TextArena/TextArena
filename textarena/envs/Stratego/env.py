@@ -193,8 +193,8 @@ class StrategoEnv(ta.GameEnv):
                 player_pieces[1 - player_id].remove((dest_row, dest_col))
 
                 detail = f"The attacking piece was {attacking_piece['rank']} and the destination piece was {target_piece['rank']}."
-                self.message(player_id, f"You have moved your piece from {source} to {dest}. {detail} As the attacker is a spy and the destination is a marshall, you won the battle.", ta.ObservationType.GAME_ACTION_DESCRIPTION, from_id=-1)
-                self.message(1 - player_id, f"Player {player_id} has moved a piece from {source} to {dest}. {detail} As the attacker is a spy and the destination is a marshall, you lost the battle.", ta.ObservationType.GAME_ACTION_DESCRIPTION, from_id=-1)
+                self.message(player_id, f"You have moved your piece from {source} to {dest}. {detail} As the attacker is a spy and the destination is a marshal, you won the battle.", ta.ObservationType.GAME_ACTION_DESCRIPTION, from_id=-1)
+                self.message(1 - player_id, f"Player {player_id} has moved a piece from {source} to {dest}. {detail} As the attacker is a spy and the destination is a marshal, you lost the battle.", ta.ObservationType.GAME_ACTION_DESCRIPTION, from_id=-1)
 
             elif attacking_rank > target_rank:
                 ## attacker wins
@@ -448,7 +448,7 @@ class StrategoEnv(ta.GameEnv):
                 return f"Player {player_id} cannot move a scout diagonally."
 
         if abs(src_row - dest_row) + abs(src_col - dest_col) != 1 and board[src_row][src_col]['rank'].lower() != 'scout':
-            return "Pieces, apart from scouts, can only move one square at a time."
+            return "Pieces move one square up, down, left or right; only scouts may move further, in a straight line."
 
         if board[dest_row][dest_col] is not None:
             if (dest_row, dest_col) in self.lakes:

@@ -114,7 +114,7 @@ def test_first_round_is_announced_like_later_rounds(communication_turns):
         assert messages.count("--- Starting Round 1 ---") == 1
         decision_prompts = [
             idx for idx, message in enumerate(messages)
-            if message.startswith("Conversation finished for round 1")
+            if message.startswith(("Conversation finished for round 1", "Decision for round 1"))
         ]
         expected = [] if communication_turns else [messages.index("--- Starting Round 1 ---") + 1]
         assert decision_prompts == expected
@@ -129,6 +129,26 @@ def test_first_round_is_announced_like_later_rounds(communication_turns):
 def test_prompt_states_how_the_match_is_won():
     prompt = _fresh().prompt(1)
     assert "The player with the higher total after the last round wins; equal totals are a draw." in prompt
+
+
+def test_prompt_lists_the_payoff_matrix_once():
+    prompt = _fresh().prompt(0)
+    assert prompt.count("Both Cooperate") == 1 and prompt.count("Both Defect") == 1
+
+
+@pytest.mark.parametrize("turns, phrase", [(1, "you have 1 turn to communicate"), (2, "you have 2 turns to communicate")])
+def test_prompt_pluralizes_conversation_turns(turns, phrase):
+    assert phrase in _fresh(communication_turns=turns).prompt(0)
+
+
+def test_no_conversation_is_announced_without_conversation_turns():
+    env = _fresh(num_rounds=2, communication_turns=0)
+    assert "There is no conversation" in env.prompt(0) and "During conversation" not in env.prompt(0)
+    env.step("cooperate")
+    env.step("cooperate")
+    messages = [message for _, message, _, _ in env.state.events]
+    assert not any("Conversation finished" in message for message in messages)
+    assert messages.count("Decision for round 2. Please reply with 'cooperate' or 'defect'.") == 1
 
 
 def test_chat_relay_cannot_impersonate_the_game():

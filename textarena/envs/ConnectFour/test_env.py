@@ -150,6 +150,19 @@ def test_render_lists_columns_that_still_have_room():
     assert env.render(0).rstrip().endswith("Available columns: 1, 2")
 
 
+@pytest.mark.parametrize("actions, reason", [
+    (["0", "0", "0"], "Column 0 is full."),
+    (["3"], "Column 3 does not exist. Choose a column from 0 to 2."),
+    (["9" * 5000], "That column number is too large. Choose a column from 0 to 2."),
+])
+def test_rejection_reasons_read_cleanly(actions, reason):
+    env = _fresh(num_rows=2, num_cols=3)
+    for action in actions:
+        env.step(action)
+    notice = next(message for _, message in env.state.logs if "attempted an invalid move" in message)
+    assert f"Reason: {reason} Please" in notice
+
+
 def test_two_consecutive_invalid_moves_end_game():
     env = _fresh()
     env.step("garbage")

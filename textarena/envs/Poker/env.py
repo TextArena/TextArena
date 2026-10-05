@@ -82,7 +82,7 @@ class PokerEnv(ta.GameEnv):
         gs = self.game_state
         a_type, amount = self._parse_action(action)
         if a_type == "invalid":
-            return self.invalid("Invalid poker action.")
+            return self.invalid(f"Invalid poker action. Reply with one of: {', '.join(self._options(player_id))}.")
 
         result = self._apply_action(player_id, a_type, amount)
         if isinstance(result, ta.Invalid):
@@ -394,7 +394,7 @@ class PokerEnv(ta.GameEnv):
         actual_total = min(requested_total, stack_total)
         previous_bet = gs["current_bet"]
         if actual_total <= previous_bet:
-            return self.invalid("Raise must exceed current bet; use call when unable to raise.")
+            return self.invalid(f"You cannot raise: your stack only covers a call. Reply with one of: {', '.join(self._options(pid))}.")
 
         is_all_in = actual_total == stack_total
         if a_type == "bet":
@@ -407,10 +407,16 @@ class PokerEnv(ta.GameEnv):
             )
             full_raise = actual_total >= minimum_total
         if not full_raise and not is_all_in:
-            return self.invalid(
-                f"Minimum legal total is {self.big_blind if a_type == 'bet' else minimum_total}; "
-                "only an all-in may be smaller."
-            )
+            all_in = stack_total - previous_bet
+            if a_type == "bet":
+                rule = f"A bet must be at least {self.big_blind} chips"
+                low = self.big_blind
+            else:
+                low = minimum_total - previous_bet
+                rule = f"A raise must add at least {low} chips (a total bet of at least {minimum_total})"
+            if low < all_in:
+                return self.invalid(f"{rule}: reply '{a_type} {low}' or more.")
+            return self.invalid(f"{rule}, and only an all-in may be smaller; your stack allows only '{a_type} {all_in}' (all-in).")
 
         needed = actual_total - cur_contrib
         gs["bet_round_complete"] = False

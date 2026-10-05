@@ -65,8 +65,15 @@ def test_bundled_word_lists_hold_valid_board_words(level):
     words = codenames_module._bundled_word_lists()[level]
     assert len(words) == len(set(words)) >= 25
     assert "pass" not in words
-    assert all(re.fullmatch(r"[a-z]{1,7}", word) for word in words)
+    assert all(re.fullmatch(r"[a-z]{3,7}", word) for word in words)
     assert CodenamesEnv(hardcore=level == "hardcore").word_list == list(words)
+
+
+def test_hardcore_boards_never_hold_words_shorter_than_three_letters():
+    env = CodenamesEnv(hardcore=True)
+    for seed in range(500):
+        env.reset(num_players=4, seed=seed)
+        assert min(len(word) for word in env.board) >= 3, seed
 
 
 def test_prompt_states_the_full_clue_rule_and_turn_limit():

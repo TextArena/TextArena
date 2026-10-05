@@ -23,7 +23,7 @@ class Role:
             "- Night: the Mafia secretly vote on a non-Mafia victim; then the Doctor protects one other player "
             "and the Detective investigates one other player.\n"
             "- Day: the night's result is announced (who was killed, if anyone; roles are never revealed), followed by "
-            f"{num_discussion_rounds} rounds of public discussion in which every living player speaks in turn. "
+            f"{num_discussion_rounds} round{'' if num_discussion_rounds == 1 else 's'} of public discussion in which every living player speaks in turn. "
             "Then every living player votes publicly by replying with a player number; the player with the most "
             "votes is eliminated, and ties are broken at random.\n"
             "- The Village wins once every Mafia member is eliminated; the Mafia win as soon as they make up at least "
@@ -145,6 +145,7 @@ class SecretMafiaEnv(ta.GameEnv):
             "num_discussion_rounds": self.discussion_rounds,
             "votes": {},
             "pending_elimination": None,
+            "unannounced_eliminations": [],
             "next_player_ids": [],
         }
 
@@ -197,10 +198,17 @@ class SecretMafiaEnv(ta.GameEnv):
         return self._advance(self.set_next_player)
 
     def on_invalid_limit(self, player_id: int, reason: str) -> Optional[ta.Outcome]:
-        # Repeated invalid move: the player is killed off and the game moves on.
-        outcome = self._eliminate_player(player_id, "has been eliminated by making an invalid move")
+        # Repeated invalid move: the player is killed off and the game moves on. Only the Mafia, Doctor and Detective
+        # act at night, so an announcement then would reveal a role; it waits for daybreak unless the game is over.
+        at_night = self.phase in (Phase.NIGHT_MAFIA, Phase.NIGHT_DOCTOR, Phase.NIGHT_DETECTIVE)
+        outcome = self._eliminate_player(player_id, "was eliminated for repeated invalid moves", announce=not at_night)
         if outcome is not None:
+            self._announce_night_eliminations()
             return outcome
+        if at_night and self.player_roles[player_id] == "Mafia":
+            for mafia in self.game_state["alive_players"]:
+                if self.player_roles[mafia] == "Mafia":
+                    self.message(mafia, f"Your fellow Mafia member Player {player_id} was eliminated for repeated invalid moves. The other players learn this at daybreak.", ta.ObservationType.GAME_MESSAGE)
         def assign(pid: int):
             self.set_next_player(pid)
         return self._advance(assign)
@@ -262,19 +270,19 @@ class SecretMafiaEnv(ta.GameEnv):
 
         elif self.phase == Phase.NIGHT_DOCTOR:
             doc = next(p for p in alive if self.player_roles[p] == "Doctor")
-            opts = ", ".join(str(t) for t in alive if t != doc)
+            opts = ", ".join(str(t) for t in self._publicly_alive() if t != doc)
             self.message(doc, f"Night phase - reply with the player number of the player to protect: {opts}", ta.ObservationType.GAME_MESSAGE)
             next_player_ids = [doc]
 
         elif self.phase == Phase.NIGHT_DETECTIVE:
             det = next(p for p in alive if self.player_roles[p] == "Detective")
-            opts = ", ".join(str(t) for t in alive if t != det)
+            opts = ", ".join(str(t) for t in self._publicly_alive() if t != det)
             self.message(det, f"Night phase - reply with the player number of the player to investigate: {opts}", ta.ObservationType.GAME_MESSAGE)
             next_player_ids = [det]
 
         elif self.phase == Phase.DAY_DISCUSSION:
             rounds = self.discussion_rounds
-            self.broadcast(f"Day breaks. Discuss for {rounds} rounds, then a vote will follow.", ta.ObservationType.GAME_MESSAGE)
+            self.broadcast(f"Day breaks. Discuss for {rounds} round{'' if rounds == 1 else 's'}, then a vote will follow.", ta.ObservationType.GAME_MESSAGE)
             players = self.rng.sample(alive, k=len(alive))
             next_player_ids = players * rounds
 
@@ -311,8 +319,8 @@ class SecretMafiaEnv(ta.GameEnv):
 
     def _handle_doctor_action(self, pid: int, action: str) -> Optional[ta.Invalid]:
         target = VoteHandler.parse(action)
-        if target is None or target == pid or target not in self.game_state["alive_players"]:
-            return self.invalid(self._target_hint("Invalid protection target", [p for p in self.game_state["alive_players"] if p != pid]))
+        if target is None or target == pid or target not in self._publicly_alive():
+            return self.invalid(self._target_hint("Invalid protection target", [p for p in self._publicly_alive() if p != pid]))
 
         # save target
         if target == self.game_state["pending_elimination"]:
@@ -322,8 +330,8 @@ class SecretMafiaEnv(ta.GameEnv):
 
     def _handle_detective_action(self, pid: int, action: str) -> Optional[ta.Invalid]:
         target = VoteHandler.parse(action)
-        if target is None or target == pid or target not in self.game_state["alive_players"]:
-            return self.invalid(self._target_hint("Invalid investigation target", [p for p in self.game_state["alive_players"] if p != pid]))
+        if target is None or target == pid or target not in self._publicly_alive():
+            return self.invalid(self._target_hint("Invalid investigation target", [p for p in self._publicly_alive() if p != pid]))
         is_mafia = self.player_roles[target] == "Mafia"
         result = f"Player {target} IS{' ' if is_mafia else ' NOT '}a Mafia member."
         self.message(pid, result, ta.ObservationType.GAME_MESSAGE)  # investigation result stays private
@@ -373,12 +381,24 @@ class SecretMafiaEnv(ta.GameEnv):
     def _resolve_night_outcome(self) -> Optional[ta.Outcome]:
         tgt = self.game_state["pending_elimination"]
         self.game_state["pending_elimination"] = None
+        outcome = None
         if tgt is None:
             self.broadcast("No one was killed tonight.", ta.ObservationType.GAME_MESSAGE)
-            return None
-        return self._eliminate_player(tgt, "was killed during the night")
+        else:
+            outcome = self._eliminate_player(tgt, "was killed during the night")
+        self._announce_night_eliminations()
+        return outcome
 
-    def _eliminate_player(self, pid: int, reason: str) -> Optional[ta.Outcome]:
+    def _publicly_alive(self) -> List[int]:
+        """Living players plus anyone eliminated tonight, whose elimination stays secret until daybreak."""
+        return sorted(self.game_state["alive_players"] + self.game_state["unannounced_eliminations"])
+
+    def _announce_night_eliminations(self):
+        for pid in self.game_state["unannounced_eliminations"]:
+            self.broadcast(f"Player {pid} was eliminated for repeated invalid moves.", ta.ObservationType.GAME_MESSAGE)
+        self.game_state["unannounced_eliminations"] = []
+
+    def _eliminate_player(self, pid: int, reason: str, announce: bool = True) -> Optional[ta.Outcome]:
         if pid in self.game_state["alive_players"]:
             self.game_state["alive_players"].remove(pid)
         self.eliminate(pid)
@@ -393,7 +413,10 @@ class SecretMafiaEnv(ta.GameEnv):
         }
         if self.game_state["pending_elimination"] == pid:
             self.game_state["pending_elimination"] = None
-        self.broadcast(f"Player {pid} {reason}.", ta.ObservationType.GAME_MESSAGE)
+        if announce:
+            self.broadcast(f"Player {pid} {reason}.", ta.ObservationType.GAME_MESSAGE)
+        else:
+            self.game_state["unannounced_eliminations"].append(pid)
         return self._check_win()
 
     def _check_win(self) -> Optional[ta.Outcome]:

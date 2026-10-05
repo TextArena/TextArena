@@ -1270,3 +1270,65 @@ def test_last_player_standing_wins_without_blaming_every_elimination_on_invalid_
     rewards, game_info = env.close()
     assert rewards == {0: -1, 1: -1, 2: 1}
     assert game_info[2]["reason"] == "All other players have been eliminated."
+
+
+@pytest.mark.parametrize(
+    "order,corrected",
+    [
+        ("A GAS - SPA(NC)", "A GAS - SPA"),  # DATC 6.B.12
+        ("A GAS - SPA(SC) VIA", "A GAS - SPA VIA"),
+        ("A SPA(NC) - POR", "A SPA - POR"),
+        ("F MAO S A GAS - SPA(NC)", "F MAO S A GAS - SPA"),
+        ("F MAO C A BRE - SPA(SC)", "F MAO C A BRE - SPA"),
+    ],
+)
+def test_army_orders_naming_a_coast_are_rejected_with_the_corrected_order(order, corrected):
+    engine, _ = _engine_with([
+        ("FRANCE", A, "GAS", None), ("FRANCE", A, "SPA", None), ("FRANCE", F, "MAO", None), ("FRANCE", A, "BRE", None),
+    ])
+
+    parsed, invalid = engine.parse_orders("FRANCE", [order])
+
+    assert parsed == []
+    assert invalid == [{"reason": f"Armies don't use coasts: write '{corrected}'", "orders": [order]}]
+
+
+def test_army_retreat_naming_a_coast_is_rejected_with_the_corrected_order():
+    engine, units = _engine_with([("FRANCE", A, "GAS", None)])
+    engine.phase = PhaseType.RETREATS
+    units["GAS"].dislodged = True
+    units["GAS"].retreat_options = ["SPA"]
+
+    _, invalid = engine.parse_orders("FRANCE", ["A GAS R SPA(NC)"])
+
+    assert invalid[0]["reason"] == "Armies don't use coasts: write 'A GAS R SPA'"
+
+
+def test_army_supporting_a_fleet_may_name_the_fleets_coast():
+    engine, _ = _engine_with([("FRANCE", A, "GAS", None), ("FRANCE", F, "MAO", None)])
+
+    parsed, invalid = engine.parse_orders("FRANCE", ["A GAS S F MAO - SPA(NC)"])
+
+    assert invalid == [] and len(parsed) == 1
+
+
+def test_fleet_order_naming_the_wrong_coast_explains_where_the_fleet_is():
+    # DATC 6.B.10
+    engine, _ = _engine_with([("FRANCE", F, "SPA", "SC")])
+
+    _, invalid = engine.parse_orders("FRANCE", ["F SPA(NC) - LYO"])
+
+    assert invalid[0]["reason"] == "The fleet at SPA is on the SC coast, not NC: write 'F SPA(SC) - LYO'"
+
+
+def test_prompt_states_when_armies_move_by_convoy_and_that_armies_never_name_a_coast():
+    env = DiplomacyEnv()
+    env.reset(num_players=7, seed=0)
+
+    prompt = next(msg for _, msg, obs_type in env.state.observations[0] if obs_type == ta.ObservationType.PROMPT)
+
+    assert (
+        "An army moves by convoy only when its destination is not adjacent or the order ends with VIA; otherwise it "
+        "moves overland." in prompt
+    )
+    assert "armies never name a coast" in prompt

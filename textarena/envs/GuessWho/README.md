@@ -68,7 +68,8 @@ question-and-answer history. The target's name appears on the board only after t
 
 - The default game master is created on the first question and needs the `openai` package and `OPENROUTER_API_KEY`.
   Guessing never calls the game master.
-- If the game master fails or answers with anything other than the three allowed options, the question is not
-  counted and the player is asked to retry.
+- The game master is told to answer truthfully. Its reply may wrap the answer in quotes, markdown emphasis or
+  backticks (`**Yes**`, `` `No` ``) and may add an `Answer:` prefix or a trailing period. If the game master fails or
+  answers with anything else, the question is not counted and the player is asked to retry.
 - The game master receives the target's full trait record and the question history, so its answers are only as
   reliable as the underlying model.

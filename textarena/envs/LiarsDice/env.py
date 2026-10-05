@@ -120,6 +120,7 @@ class LiarsDiceEnv(ta.GameEnv):
         self.game_state["remaining_dice"][loser_id] -= 1
         if self.game_state["remaining_dice"][loser_id] == 0:
             self.eliminate(loser_id)
+            self.broadcast(f"Player {loser_id} has no dice left and is out of the game.", ta.ObservationType.GAME_MESSAGE)
         if len(self.state.alive_players) <= 1:
             return self._final_outcome()
         self._roll_new_dice()

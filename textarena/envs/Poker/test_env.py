@@ -421,6 +421,59 @@ def test_each_decision_gets_exactly_one_board():
     assert boards == [env.state.current_player_id]
 
 
+def _last_rejection(env):
+    return next(
+        message for _, message, _, _ in reversed(env.state.events) if "attempted an invalid move" in message
+    )
+
+
+def test_unrecognized_action_lists_the_current_options():
+    env = _fresh()
+    env.step("jump")
+    assert (
+        "Invalid poker action. Reply with one of: 'fold', 'call' (10 chips), "
+        "'raise N' (N from 20 to 980; 980 is all-in)." in _last_rejection(env)
+    )
+
+
+@pytest.mark.parametrize(
+    "chips, action, expected",
+    [
+        (990, "raise 1", "A raise must add at least 20 chips (a total bet of at least 40): reply 'raise 20' or more."),
+        (
+            25,
+            "raise 10",
+            "A raise must add at least 20 chips (a total bet of at least 40), and only an all-in may be smaller; "
+            "your stack allows only 'raise 15' (all-in).",
+        ),
+        (5, "raise 20", "You cannot raise: your stack only covers a call. Reply with one of: 'fold', 'call' (5 chips, all-in)."),
+    ],
+)
+def test_raise_rejections_use_increment_semantics(chips, action, expected):
+    env = _fresh()
+    env.state.game_state["player_chips"][0] = chips
+    env.step(action)
+    assert env.state.error_count == 1
+    assert expected in _last_rejection(env)
+
+
+@pytest.mark.parametrize(
+    "chips, expected",
+    [
+        (980, "A bet must be at least 20 chips: reply 'bet 20' or more."),
+        (15, "A bet must be at least 20 chips, and only an all-in may be smaller; your stack allows only 'bet 15' (all-in)."),
+    ],
+)
+def test_short_bet_rejection_names_the_minimum_or_the_all_in(chips, expected):
+    env = _fresh()
+    env.step("call")
+    env.step("check")
+    env.state.game_state["player_chips"][1] = chips
+    env.step("bet 10")
+    assert env.state.error_count == 1
+    assert expected in _last_rejection(env)
+
+
 def test_under_minimum_raise_is_invalid_and_atomic():
     env = _fresh()
     before = copy.deepcopy(env.state.game_state)

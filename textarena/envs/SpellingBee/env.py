@@ -13,6 +13,7 @@ class SpellingBeeEnv(ta.GameEnv):
     snapshot_excluded_attributes = ("is_word",)
     max_word_chars = 64
     max_action_chars = 128
+    vowels = "aeiou"
     _ACTION_RE = re.compile(rf"[A-Za-z]{{1,{max_word_chars}}}")
 
     num_letters = ta.Param(7, "The size of the letter set.", min=1, max=26)
@@ -46,7 +47,7 @@ class SpellingBeeEnv(ta.GameEnv):
             "Each word must be at least as long as the previous word.\nRepeated words are not allowed.\n"
             "If you submit two invalid words in a row, you lose.\n"
             f"If {self.max_turns} words have been accepted (counting both players) and nobody has lost, the game is a draw.\n"
-            "Reply with exactly one word, e.g., 'example'.\n"
+            "Reply with exactly one word made only of the allowed letters, with no other text.\n"
         )
 
     def _generate_allowed_letters(self) -> set:
@@ -54,16 +55,18 @@ class SpellingBeeEnv(ta.GameEnv):
             'a': 8.17, 'b': 1.49, 'c': 2.78, 'd': 4.25, 'e': 12.70, 'f': 2.23, 'g': 2.02, 'h': 6.09, 'i': 7.00, 'j': 0.15, 'k': 0.77, 'l': 4.03, 'm': 2.41,
             'n': 6.75, 'o': 7.51, 'p': 1.93, 'q': 0.10, 'r': 5.99, 's': 6.33, 't': 9.06, 'u': 2.76, 'v': 0.98, 'w': 2.36, 'x': 0.15, 'y': 1.97, 'z': 0.07
         }
-        # Weighted sampling without replacement using the env RNG
-        letters = list(letter_frequencies.keys())
-        weights = list(letter_frequencies.values())
-        chosen = set()
-        while len(chosen) < self.num_letters:
-            pick = self.rng.choices(letters, weights=weights, k=1)[0]
-            idx = letters.index(pick)
-            letters.pop(idx); weights.pop(idx)
-            chosen.add(pick)
-        return chosen
+        # Weighted sampling without replacement using the env RNG, redrawn until the set has a vowel
+        while True:
+            letters = list(letter_frequencies.keys())
+            weights = list(letter_frequencies.values())
+            chosen = set()
+            while len(chosen) < self.num_letters:
+                pick = self.rng.choices(letters, weights=weights, k=1)[0]
+                idx = letters.index(pick)
+                letters.pop(idx); weights.pop(idx)
+                chosen.add(pick)
+            if chosen & set(self.vowels):
+                return chosen
 
     def apply(self, player_id: int, move: str) -> Union[ta.Outcome, ta.Invalid, None]:
         if not isinstance(move, str):
@@ -77,7 +80,8 @@ class SpellingBeeEnv(ta.GameEnv):
         # check if the word is longer/equal than the last word, and not a repeated word
         if len(gs["word_history"]) != 0 and len(word) < len(gs["word_history"][-1]): return self.invalid("The submitted word is shorter than the previous word.")
         if word in gs["word_history"]: return self.invalid("The submitted word has been submitted before.")
-        if not set(word).issubset(gs["allowed_letters"]): return self.invalid("The submitted word contains illegal characters.")
+        if not set(word).issubset(gs["allowed_letters"]):
+            return self.invalid(f"The submitted word uses letters that are not allowed: {', '.join(sorted(set(word) - gs['allowed_letters']))}.")
         try:
             valid = bool(self.is_word(word))
         except Exception as error:

@@ -211,6 +211,9 @@ def test_spy_beats_attacking_marshal_but_equal_ranks_remove_both():
     done = env.step("D0 D1")
     assert done
     assert env.board[3][1]["rank"] == "Spy"
+    battle = {to: m for _, m, _, to in env.state.events if "The attacking piece was Spy" in m}
+    assert battle[0].endswith("As the attacker is a spy and the destination is a marshal, you won the battle.")
+    assert battle[1].endswith("As the attacker is a spy and the destination is a marshal, you lost the battle.")
 
     env = _fresh()
     _clear(env)
@@ -238,6 +241,11 @@ def test_invalid_move_reasons_name_the_rule_that_was_broken():
     _place(env, 0, "Bomb", (2, 0), "bomb")
     _place(env, 0, "Scout", (4, 0), "scout")
     _place(env, 0, "Scout", (3, 6), "scout-2")
+    _place(env, 0, "Captain", (2, 8), "captain")
+    # Only Scouts move further than one square, and nothing moves diagonally.
+    one_step = "Pieces move one square up, down, left or right; only scouts may move further, in a straight line."
+    assert env._validate_move(0, 2, 8, 3, 9) == one_step
+    assert env._validate_move(0, 2, 8, 4, 8) == one_step
     # Bombs and Flags never move, whatever the destination.
     assert env._validate_move(0, 2, 0, 2, 2) == "Player 0 cannot move a bomb or flag."
     assert env._validate_move(0, 2, 0, 1, 0) == "Player 0 cannot move a bomb or flag."

@@ -24,7 +24,7 @@ class SokobanEnv(ta.GameEnv):
     )
     num_boxes = ta.Param(3, "The number of boxes and goals. It must leave room for the player inside the walls.", min=1)
     max_turns = ta.Param(100, "The number of valid moves allowed. Generated rooms are always solvable within it.", min=1)
-    max_retries = ta.Param(50, "Generation attempts before reset gives up with RuntimeError.", min=1, max=100)
+    max_retries = ta.Param(100, "Generation attempts before reset gives up with RuntimeError.", min=1, max=100)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -81,6 +81,7 @@ class SokobanEnv(ta.GameEnv):
             "Reply with a direction: 'up', 'down', 'left' or 'right'.\n"
             "You can also use 'w' for up, 'a' for left, 's' for down, and 'd' for right.\n"
             f"Walking into a wall or making a blocked push is an invalid move. You have {self.max_turns} moves.\n"
+            "An invalid move changes nothing and does not count as a move, but two invalid moves in a row end the game.\n"
         )
 
     def render(self, player_id: int) -> str:

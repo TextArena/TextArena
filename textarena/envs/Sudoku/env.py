@@ -60,11 +60,13 @@ class SudokuEnv(ta.GameEnv):
             action_text,
         )
         if not match:
-            return self.invalid(f"Invalid move format. Player {player_id} did not respond with valid 'row column number'.")
+            return self.invalid(f"Invalid move format. Player {player_id} did not respond with valid 'row column digit'.")
 
         row, col, num = map(int, match.groups())
-        if row < 1 or row > 9 or col < 1 or col > 9 or num < 1 or num > 9:
-            return self.invalid(f"Invalid move. Player {player_id} attempted to place {num} at ({row}, {col}), which is out of bounds.")
+        if row < 1 or row > 9 or col < 1 or col > 9:
+            return self.invalid(f"Invalid move. Player {player_id} attempted to place {num} at ({row}, {col}), which is out of bounds. Rows and columns must be from 1 to 9.")
+        if num < 1 or num > 9:
+            return self.invalid(f"Invalid move. Player {player_id} attempted to place {num} at ({row}, {col}), but the digit must be from 1 to 9.")
 
         row_idx, col_idx = row - 1, col - 1
         board = self.game_state["board"]

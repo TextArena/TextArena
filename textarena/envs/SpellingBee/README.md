@@ -18,7 +18,8 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `SpellingBee-v1-mdp
 ## Rules
 
 - At reset, `num_letters` different letters are drawn, weighted by how common they are in English (so `e`, `t`, and
-  `a` show up far more often than `q` or `z`). Both players use the same letters.
+  `a` show up far more often than `q` or `z`). A set without a vowel (`a`, `e`, `i`, `o` or `u`) is redrawn, so every
+  set has at least one. Both players use the same letters.
 - Player 0 starts and the players alternate. Each word must:
   - use only the allowed letters (any letter may be used any number of times),
   - be in the game's dictionary (UK and US spellings are accepted, proper nouns are not),
@@ -64,5 +65,5 @@ player who submitted it. There is no hidden information.
 - Despite the name, this is not the New York Times Spelling Bee, a single-player puzzle where every word must contain a
   required center letter and have at least four letters, and words score points (with a bonus for pangrams that use
   all seven letters). Here two players duel with no center letter, no minimum length and no points; the only
-  constraints between words are the non-decreasing length and no repeats. The letters are drawn at random, so a set
-  is not guaranteed to contain a vowel or a pangram.
+  constraints between words are the non-decreasing length and no repeats. Apart from the vowel guarantee the letters
+  are drawn at random, so a set is not guaranteed to contain a pangram.

@@ -33,8 +33,15 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Diplomacy-v1-mdp`)
   unit's support is cut, and a power cannot dislodge its own unit or support another power in dislodging it. Support
   is given into a province, so a support order may omit the coast. An army moves by convoy when its destination is not
   adjacent or the order ends with `VIA`; otherwise it moves overland. Units without orders hold.
-- A dislodged unit retreats to an empty adjacent province that its attacker did not come from and that was not left
-  empty by a bounce, or is disbanded. Units retreating to the same province, and dislodged units without an order, are
+- A convoy fails when the dislodged convoying fleets leave no chain of convoying fleets from the army to its
+  destination; the army then neither moves, cuts support, nor dislodges anything. Convoy paradoxes, in which the
+  convoyed army's own attack decides whether a convoying fleet is dislodged, are resolved by first assuming every
+  convoy works, so convoyed armies cut supports as usual; a convoy whose fleet is dislodged under that assumption fails
+  for the rest of the turn, even if the fleet then survives. So an army convoyed against a unit supporting an attack on
+  one of its convoying fleets cuts that support: the fleet is not dislodged and the army's attack goes ahead (the
+  standard rules instead dislodge the fleet and let the convoy fail).
+- A dislodged unit retreats to an empty adjacent province that its attacker did not come from (even when the attacker
+  was convoyed) and that was not left empty by a bounce, or is disbanded. Units retreating to the same province, and dislodged units without an order, are
   disbanded.
 - Supply-center ownership is updated at the end of each Fall, after the Fall Retreats phase: every occupied center
   passes to the occupying power, so a unit that retreats into a center in the Fall captures it. In Winter, each power

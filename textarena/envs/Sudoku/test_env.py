@@ -195,6 +195,25 @@ def test_wrong_digit_feedback_distinguishes_conflicts_from_non_solution_digits()
     assert "already contains a" in reason and "violates Sudoku rules" not in reason
 
 
+@pytest.mark.parametrize(
+    "action,expected,unexpected",
+    [
+        ("1 1 0", "the digit must be from 1 to 9", "out of bounds"),
+        ("0 1 5", "out of bounds. Rows and columns must be from 1 to 9", "the digit must be"),
+        ("1 10 5", "out of bounds. Rows and columns must be from 1 to 9", "the digit must be"),
+        ("1 2", "did not respond with valid 'row column digit'", "row column number"),
+    ],
+)
+def test_rejection_reason_names_the_coordinate_digit_or_format_problem(action, expected, unexpected):
+    env = _fresh()
+    env.get_observation()
+    before = copy.deepcopy(env.game_state["board"])
+    env.step(action)
+    reason = _invalid_reason(env)
+    assert expected in reason and unexpected not in reason
+    assert env.game_state["board"] == before and env.state.turn == 0
+
+
 def test_turn_limit_scores_only_player_filled_cells():
     env = _fresh(clues=70, max_turns=1)
     row, col = _empty_cells(env)[0]

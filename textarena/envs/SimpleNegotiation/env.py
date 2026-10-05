@@ -12,6 +12,7 @@ class SimpleNegotiationEnv(ta.GameEnv):
     # A line is a command attempt when it starts with one of these words; anything
     # else is free-text chat.
     _COMMAND_WORD_RE = re.compile(r"(?:accept|deny|offer)\b", re.IGNORECASE)
+    _DECISION_RE = re.compile(r"(accept|deny)[ \t]*[.!]?", re.IGNORECASE)
     max_command_chars = 500
 
     max_turns = ta.Param(10, "The turns in the whole game, counting both players.", min=1)
@@ -72,7 +73,7 @@ class SimpleNegotiationEnv(ta.GameEnv):
             "  - Deny — reject the offer you just received.\n"
             "An offer you receive is rejected automatically unless you Accept it on your next turn, and making a "
             "counteroffer also rejects it. Any line that begins with Offer, Accept, or Deny is read as a command and "
-            "must match one of these formats exactly."
+            "must match one of these formats exactly; Accept and Deny may end with '.' or '!'."
         )
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
@@ -142,8 +143,8 @@ class SimpleNegotiationEnv(ta.GameEnv):
             if parsed[0] == "malformed":
                 return None, None, (
                     f"Malformed command line: '{line.strip()[:80]}'. Lines that begin with Accept, Deny, or Offer are "
-                    "commands and must be exactly 'Accept', 'Deny', or 'Offer: <offered> -> <requested>' "
-                    "(e.g. 'Offer: 2 Wheat, 1 Ore -> 3 Sheep')."
+                    "commands and must be exactly 'Accept', 'Deny' (optionally ending with '.' or '!'), or "
+                    "'Offer: <offered> -> <requested>' (e.g. 'Offer: 2 Wheat, 1 Ore -> 3 Sheep')."
                 )
             commands.append(parsed)
         if len(commands) > 1:
@@ -160,10 +161,10 @@ class SimpleNegotiationEnv(ta.GameEnv):
             return None
         if len(text) > self.max_command_chars:
             return ("malformed", None)
-        keyword = text.lower()
-        if keyword in ("accept", "deny"):
-            return (keyword, None)
-        if keyword.startswith("offer"):
+        decision = self._DECISION_RE.fullmatch(text)
+        if decision:
+            return (decision.group(1).lower(), None)
+        if text.lower().startswith("offer"):
             rest = text[len("offer"):].lstrip()
             if rest.startswith(":"):
                 return ("offer", rest[1:].strip())

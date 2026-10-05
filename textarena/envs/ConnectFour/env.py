@@ -52,12 +52,12 @@ class ConnectFourEnv(ta.GameEnv):
         try:
             col = int(move.group(1))
         except ValueError:
-            return self.invalid(f"Player {player_id}, Invalid action. Column number is too large.")
+            return self.invalid(f"That column number is too large. Choose a column from 0 to {self.num_cols - 1}.")
         if not (0 <= col < self.num_cols):
-            return self.invalid(f"Player {player_id}, Invalid action. Column {col} is out of bounds.")
+            return self.invalid(f"Column {col} does not exist. Choose a column from 0 to {self.num_cols - 1}.")
         board = self.game_state["board"]
         if board[0][col] != ".":
-            return self.invalid(f"Player {player_id}, Invalid action. Column {col} is full.")
+            return self.invalid(f"Column {col} is full.")
 
         row = self._get_available_row(col)
         player_symbol = "X" if player_id == 0 else "O"

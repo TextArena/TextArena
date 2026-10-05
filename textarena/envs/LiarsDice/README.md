@@ -45,8 +45,8 @@ Each player first receives the rules and the starting dice count. At the start o
 receives everyone's remaining dice counts and their own new roll. Before every move, the acting player sees a board
 with their own dice, how many hidden dice every other player has, the total number of dice in play, and the current
 bid (with more than five players the board is a compact list). Every bid is announced to all players; after a call,
-everyone sees all the revealed dice, the actual count of the face, and who lost a die. Other players' dice for the
-current round are never shown.
+everyone sees all the revealed dice, the actual count of the face, who lost a die, and whether that player is now out.
+Other players' dice for the current round are never shown.
 
 ## Rewards
 

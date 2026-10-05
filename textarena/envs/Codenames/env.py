@@ -29,7 +29,7 @@ class CodenamesEnv(ta.GameEnv):
     _GUESS_RE = re.compile(r"([a-z]+)", re.IGNORECASE)
 
     hardcore = ta.Param(
-        False, "Draw board words from the list built from NLTK's full English word list (29,406 words) instead of the "
+        False, "Draw board words from the list built from NLTK's full English word list (29,345 words) instead of the "
                "one built from its Basic English list (423 words), which produces rarer words.",
     )
     max_turns = ta.Param(80, "The total number of moves (clues and guesses) before the turn-limit result applies.", min=1)

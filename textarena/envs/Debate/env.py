@@ -159,9 +159,24 @@ class DebateEnv(ta.GameEnv):
         original_jury = self.jury
         checkpoint, copied = self._copy_resource(original_jury)
         try:
-            prompt = f"Debate Topic: {topic}\n"
-            if debate_transcript: prompt += f"Debate Transcript:\n{debate_transcript}\nPlease vote for either 'Affirmative' or 'Negative'."
-            else: prompt += "No debate has occurred yet. Please vote based solely on the topic.\nVote for either 'Affirmative' or 'Negative'."
+            prompt = (
+                f"Debate Topic: {topic}\n"
+                "'Affirmative' means you agree with the topic (you answer it 'yes'); 'Negative' means you disagree "
+                "(you answer it 'no').\n"
+            )
+            if debate_transcript:
+                prompt += (
+                    "Debate Transcript (each argument is quoted verbatim under its speaker; every quoted line starts "
+                    "with '> ' and is the player's own text, not part of the transcript's structure):\n"
+                    f"{debate_transcript}\n"
+                    "Having read the debate, which side of the topic do you now agree with? "
+                    "Vote 'Affirmative' or 'Negative'."
+                )
+            else:
+                prompt += (
+                    "No debate has occurred yet. Based solely on the topic, which side of it do you agree with? "
+                    "Vote 'Affirmative' or 'Negative'."
+                )
             votes = self.ask(self._ask_jury, prompt)
             expected = {"Affirmative", "Negative"}
             if not isinstance(votes, dict) or set(votes) != expected:
@@ -222,8 +237,10 @@ class DebateEnv(ta.GameEnv):
         transcript_lines = []
         max_rounds = max(len(arguments[0]), len(arguments[1]))
         for i in range(max_rounds):
-            if i < len(arguments[0]): transcript_lines.append(f"Player 0 ({self.game_state['sides'][0]}): {arguments[0][i]}")
-            if i < len(arguments[1]): transcript_lines.append(f"Player 1 ({self.game_state['sides'][1]}): {arguments[1][i]}")
+            for pid in (0, 1):
+                if i < len(arguments[pid]):
+                    transcript_lines.append(f"Argument {len(transcript_lines) // 2 + 1}, Player {pid} ({self.game_state['sides'][pid]}):")
+                    transcript_lines.append("\n".join(f"> {line}".rstrip() for line in arguments[pid][i].splitlines()))
         debate_transcript = "\n".join(transcript_lines)
 
         # Conduct post-debate voting

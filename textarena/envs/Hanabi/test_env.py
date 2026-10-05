@@ -268,6 +268,25 @@ def test_render_shows_own_hand_size_deck_size_and_hint_knowledge():
     assert "card 4: no hints" in board  # the replacement card
 
 
+@pytest.mark.parametrize("num_players", [2, 3, 4, 5])
+def test_prompt_uses_a_before_the_player_count(num_players):
+    env = _fresh(num_players=num_players)
+    assert f"You are Player 0 in a {num_players}-player Hanabi game." in env.prompt(0)
+
+
+def test_prompt_describes_a_misplay_as_legal_rather_than_illegal():
+    prompt = _fresh().prompt(0)
+    assert "Illegal Moves" not in prompt
+    assert "Playing a card that cannot be placed on its firework is a legal move" in prompt
+    assert "costs a fuse token" in prompt
+
+
+def test_info_tokens_must_be_at_least_one():
+    with pytest.raises(ValueError):
+        HanabiEnv(info_tokens=0)
+    assert HanabiEnv(info_tokens=1).info_tokens == 1
+
+
 def test_reveal_about_self_is_invalid():
     env = _fresh()
     done = env.step("Reveal player 0 card 0 color red")

@@ -47,14 +47,25 @@ class IteratedPrisonersDilemmaEnv(ta.GameEnv):
 
     def prompt(self, player_id: int) -> str:
         game_state = self.game_state
+        turns = game_state["total_conversation_rounds"]
+        if turns == 0:
+            structure = "- There is no conversation: each round, both players simultaneously choose 'cooperate' or 'defect'.\n\n"
+            how_to_play = "- Each round: reply with just 'cooperate' or 'defect' (case-insensitive).\n"
+        else:
+            structure = (
+                f"- Before each decision you have {turns} {'turn' if turns == 1 else 'turns'} to communicate freely.\n"
+                "- After that, both players simultaneously choose 'cooperate' or 'defect'.\n\n"
+            )
+            how_to_play = (
+                "- During conversation: type any text you wish.\n"
+                "- During decision phase: reply with just 'cooperate' or 'defect' (case-insensitive).\n"
+            )
         return (
             f"You are Player {player_id} in an Iterated Prisoner's Dilemma spanning "
             f"{game_state['num_rounds']} rounds.\n\n"
             f"Game Structure:\n"
-            f"- Before each decision you have {game_state['total_conversation_rounds']} "
-            f"turns to communicate freely.\n"
-            f"- After that, both players simultaneously choose 'cooperate' or 'defect'.\n\n"
-            f"Payoff Matrix (fixed each round):\n"
+            f"{structure}"
+            f"Payoff Matrix (the same every round):\n"
             f"- Both Cooperate ➜ each {self.cooperate_reward}\n"
             f"- Both Defect ➜ each {self.mutual_defect_reward}\n"
             f"- One Defects, one Cooperates ➜ Defector {self.defect_reward}, "
@@ -62,13 +73,7 @@ class IteratedPrisonersDilemmaEnv(ta.GameEnv):
             f"Winning:\n"
             f"- Payoffs add up over all rounds. The player with the higher total after the last round wins; equal totals are a draw.\n\n"
             f"How to Play:\n"
-            f"- During conversation: type any text you wish.\n"
-            f"- During decision phase: reply with just 'cooperate' or 'defect' (case-insensitive).\n"
-            "The payoff matrix will remain the same every round:\n"
-            f"- Both Cooperate: {self.cooperate_reward}\n"
-            f"- Both Defect: {self.mutual_defect_reward}\n"
-            f"- If you Defect while the other Cooperates: {self.defect_reward}\n"
-            f"- If you Cooperate while the other Defects: {self.sucker_reward}"
+            f"{how_to_play}"
         )
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
@@ -114,11 +119,14 @@ class IteratedPrisonersDilemmaEnv(ta.GameEnv):
             self._announce_decision_phase()
 
     def _announce_decision_phase(self) -> None:
-        self.broadcast(
-            f"Conversation finished for round {self.game_state['round']}. "
-            "Please reply with 'cooperate' or 'defect'.",
-            ta.ObservationType.GAME_BOARD,
-        )
+        if self.game_state["total_conversation_rounds"] == 0:
+            message = f"Decision for round {self.game_state['round']}. Please reply with 'cooperate' or 'defect'."
+        else:
+            message = (
+                f"Conversation finished for round {self.game_state['round']}. "
+                "Please reply with 'cooperate' or 'defect'."
+            )
+        self.broadcast(message, ta.ObservationType.GAME_BOARD)
 
     def _handle_decision_phase(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
         if self.game_state["decisions"][player_id] is not None:

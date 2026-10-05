@@ -13,7 +13,7 @@ class OthelloEnv(ta.GameEnv):
     min_players = 2
     max_players = 2
     mdp_includes_actions = False
-    action_pattern = r"^(\d+)(?:\s*,\s*|\s+)(\d+)$"
+    action_pattern = r"^(\()?\s*(\d+)(?:\s*,\s*|\s+)(\d+)\s*(?(1)\))$"
 
     board_size = ta.Param(
         8, "The side length of the board.", min=4, check=lambda size: size % 2 == 0, rule="an even integer of at least 4",
@@ -52,8 +52,8 @@ class OthelloEnv(ta.GameEnv):
             f"You are Player {player_id} playing {COLOUR_NAMES[piece]} in a game of Othello.\n"
             f"On the board, Black discs are shown as '{PIECE_SYMBOLS[BLACK]}' and White discs as '{PIECE_SYMBOLS[WHITE]}'; your discs are '{PIECE_SYMBOLS[piece]}'.\n"
             "Your goal is to have more pieces of your color on the board by the end of the game.\n"
-            f"On your turn, place a piece such that it flanks one or more of your opponent's pieces-in any direction (horizontal, vertical, or diagonal)-between your new piece and another of your existing pieces. "
-            f"All flanked opponent pieces will be flipped to your color.\n"
+            f"On your turn, place a piece so that at least one unbroken straight line (horizontal, vertical, or diagonal) of your opponent's pieces lies between your new piece and another of your existing pieces. "
+            f"All opponent pieces enclosed this way are flipped to your color.\n"
             "If you have no legal move, your turn is skipped automatically. The game ends when the board is full or neither player can move; "
             "the player with more discs wins, and equal counts are a draw.\n"
             f"Reply with the row and column of your move (numbered from 0, as labelled on the board), e.g. '2, 3'."
@@ -74,7 +74,7 @@ class OthelloEnv(ta.GameEnv):
         opp = BLACK if piece == WHITE else WHITE
 
         try:
-            r, c = map(int, move.groups())
+            r, c = int(move.group(2)), int(move.group(3))
         except ValueError:
             return self.invalid("Coordinates are too large.")
         valid = self._valid_moves(board, piece)

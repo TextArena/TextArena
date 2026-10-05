@@ -76,7 +76,7 @@ Every player receives the same reward.
 ## Parameters
 
 <!-- BEGIN GENERATED: parameters -->
-- `info_tokens` (default `8`): The starting and maximum number of information tokens. Accepts an integer of at least 0.
+- `info_tokens` (default `8`): The starting and maximum number of information tokens. Accepts an integer of at least 1.
 - `fuse_tokens` (default `3`): The number of fuse tokens; the game is lost when the last one is used. Accepts an integer of at least 1.
 <!-- END GENERATED: parameters -->
 

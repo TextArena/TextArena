@@ -9,9 +9,7 @@ import pytest
 
 import textarena as ta
 from textarena.envs.SettlersOfCatan.env import SettlersOfCatanEnv, _parse_offer_body
-from textarena.envs.SettlersOfCatan.game_engine import Color, Piece, Terrain
-from textarena.envs.SettlersOfCatan.renderer import render_hand_cards_table
-
+from textarena.envs.SettlersOfCatan.game_engine import Color, Piece, Terrain, _corner_descr
 
 def _fresh():
     env = SettlersOfCatanEnv()
@@ -76,6 +74,9 @@ def test_ten_victory_points_ends_game():
 
     assert done
     assert env.state.rewards[0] == 1.0
+    assert env.state.game_info[0]["reason"].startswith(
+        "Player 0 (Red) wins with 10 VP. Final ranking by victory points: Player 0 (Red): 10 VP;"
+    )
 
 
 def test_out_of_bounds_action_is_invalid():
@@ -210,7 +211,7 @@ def test_final_ranking_never_rewards_eliminated_players():
         scores[color]["total"] = total
     env.board.get_scores = lambda: scores
 
-    outcome = env._determine_winner()
+    outcome = env._determine_winner("The game is over.")
 
     assert outcome.rewards[0] == -1.0
     assert outcome.rewards[1] == 1.0
@@ -429,16 +430,15 @@ def test_eliminated_negotiation_responder_returns_turn_to_initiator():
     assert env.game_state["move_count"] == 1
 
 
-def test_renderer_marks_eliminated_player():
+def test_scores_mark_eliminated_player():
     env = _fresh()
+    env.eliminate(2)
+    env.game_state["eliminated_players"].add(2)
 
-    rendered = render_hand_cards_table(
-        env.board,
-        eliminated_pids={0},
-        pids_from_roles=env.pids_from_roles,
-    )
+    score_lines = [line for line in env.render(0).splitlines() if line.startswith(("blue", "red"))]
 
-    assert "RED (eliminated)" in rendered
+    assert any(line.startswith("blue") and line.endswith("(eliminated)") for line in score_lines)
+    assert not any(line.startswith("red") and "(eliminated)" in line for line in score_lines)
 
 
 def test_piece_limits_reject_builds_without_charging_resources():
@@ -506,6 +506,7 @@ def test_turn_limit_ranks_three_active_players():
     assert done
     assert env.state.rewards == {0: 1.0, 1: 0.0, 2: -1.0}
     reason = env.state.game_info[0]["reason"]
+    assert reason.startswith("The move limit of 1 was reached. Final ranking by victory points:")
     assert "Player 0 (Red): 3 VP" in reason
 
 
@@ -580,3 +581,32 @@ def test_ending_the_turn_is_announced_without_gendered_pronoun():
     env = _fresh()
     env.step(str(len(env.game_moves)))
     assert "Player 0 (Red) ends their turn." in [m for _, m, _, to in env.state.events if to == -1]
+
+
+def test_prompt_states_the_placement_rules():
+    prompt = _fresh().prompt(0)
+    assert "a road must connect to one of your roads, settlements or cities" in prompt
+    assert "at least two edges away from every other settlement or city" in prompt
+    assert "a city upgrades one of your settlements" in prompt
+
+
+def test_every_corner_and_road_description_is_unique():
+    board = _fresh().board
+    corners = [_corner_descr(cid, board) for cid in board.corners]
+    roads = [f"{_corner_descr(a, board)} ↔ {_corner_descr(b, board)}" for a, b in board.edges]
+    assert len(set(corners)) == len(corners)
+    assert len(set(roads)) == len(roads)
+
+
+def test_coastal_corners_name_their_position_on_the_tile():
+    board = _fresh().board
+    ore_10_only = {_corner_descr(cid, board) for cid in board.corners if [t for t in cid if t in board.hexes] == [(-2, 2)]}
+    assert ore_10_only == {"{10 ore (upper-left corner)}", "{10 ore (left corner)}"}
+
+
+def test_action_phase_hand_lists_all_resources_in_a_fixed_order():
+    env = _fresh()
+    red = env.board.players[Color.RED]
+    red.hand.clear()
+    red.hand.update({Terrain.SHEEP: 2, Terrain.WOOD: 1})
+    assert "Your hand cards are:\n\tbrick: 0\n\twood: 1\n\twheat: 0\n\tore: 0\n\tsheep: 2\n" in env.render(0)

@@ -1,3 +1,4 @@
+import math
 import string
 from enum import Enum, auto
 from collections import Counter
@@ -80,6 +81,17 @@ def corner_ids_of_tile(q: int, r: int) -> List[CornerID]:
         corners.append(triple)
     return corners
 
+_CORNER_NAMES = ("right", "upper-right", "upper-left", "left", "lower-left", "lower-right")
+
+def _corner_direction(cid: CornerID, tile: HexCoord) -> str:
+    """Which corner of `tile` `cid` is, as drawn: flat-top hexes, q growing to the right and r upwards."""
+    x = y = 0.0
+    for q, r in cid:
+        dq, dr = q - tile[0], r - tile[1]
+        x += 1.5 * dq
+        y += math.sqrt(3) * (dr + dq / 2)
+    return _CORNER_NAMES[round(math.degrees(math.atan2(y, x)) / 60) % 6]
+
 def _corner_descr(cid: CornerID, board: "Board") -> str:
     parts = []
     for q, r in cid:
@@ -87,6 +99,9 @@ def _corner_descr(cid: CornerID, board: "Board") -> str:
         if hex_ is None: continue # sea / harbour
         tok = "/" if hex_.terrain is Terrain.DESERT else hex_.token
         parts.append(f"{tok} {hex_.terrain.value}")
+    if len(parts) == 1:  # a coastal corner touching one tile is named by its position on that tile
+        tile = next(t for t in cid if t in board.hexes)
+        parts[0] += f" ({_corner_direction(cid, tile)} corner)"
     return "{" + ", ".join(parts) + "}" if parts else "{edge}"
 
 def _encode(n: int) -> str:

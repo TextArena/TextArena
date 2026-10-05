@@ -11,6 +11,10 @@ from textarena.envs.TwentyQuestions.renderer import create_board_str
 from textarena.utils.jury import DEFAULT_JUDGE_MODEL
 
 _ARTICLES = frozenset({"a", "an", "the"})
+GAMEMASTER_SYSTEM_PROMPT = (
+    "You are the impartial game master of a 20 Questions game. You know the secret target. Answer each question "
+    "truthfully about the target, replying with exactly one of the allowed answers and nothing else."
+)
 
 
 class TwentyQuestionsEnv(ta.GameEnv):
@@ -23,7 +27,8 @@ class TwentyQuestionsEnv(ta.GameEnv):
     _GUESS_RE = re.compile(r"^\s*guess(?:\s+|:\s*)(?P<guess>.+?)\s*$", re.IGNORECASE)
     _EMPTY_GUESS_RE = re.compile(r"^\s*guess\s*:?\s*$", re.IGNORECASE)
     _GAMEMASTER_RESPONSE_RE = re.compile(
-        r"""^\s*(?:answer\s*:\s*)?["'“”]?(?P<answer>yes|no|i\s+don['’]t\s+know)["'“”]?[.!]?\s*$""",
+        r"""^\s*[*_`]*(?:answer[*_`]*\s*:\s*[*_`]*\s*)?[*_`"'“”]*(?P<answer>yes|no|i\s+don['’]t\s+know)"""
+        r"""[*_`"'“”]*[.!]?[*_`"'“”]*\s*$""",
         re.IGNORECASE,
     )
 
@@ -152,7 +157,9 @@ class TwentyQuestionsEnv(ta.GameEnv):
     def _get_gamemaster(self):
         if self.gamemaster is None:
             try:
-                self.gamemaster = ta.agents.OpenRouterAgent(model_name=DEFAULT_JUDGE_MODEL)
+                self.gamemaster = ta.agents.OpenRouterAgent(
+                    model_name=DEFAULT_JUDGE_MODEL, system_prompt=GAMEMASTER_SYSTEM_PROMPT
+                )
             except (ImportError, ValueError) as exc:
                 raise RuntimeError(
                     'TwentyQuestions questions require OpenRouter: pip install "textarena[agents]" '
@@ -170,7 +177,7 @@ class TwentyQuestionsEnv(ta.GameEnv):
         if self.gamemaster_options is None: raise ValueError("Gamemaster options are not set.")
         options = ", ".join(f"'{opt}'" for opt in self.gamemaster_options) # Format available response options
         history = "\n".join(f"Q: {q}\nA: {a}" for q, a in self.gamemaster_history) # Construct conversation history
-        prompt = (f"{self.gamemaster_context}\n{history}\n\nQ: {action}\nOptions: {options}\n\nPlease respond with the most appropriate option.") # Create prompt
+        prompt = (f"{self.gamemaster_context}\n{history}\n\nQ: {action}\nOptions: {options}\n\nReply with exactly one of the options.") # Create prompt
         response = self.ask(self._ask_gamemaster, prompt)
         if not isinstance(response, str) or len(response) > self.max_gamemaster_response_chars:
             raise ValueError("gamemaster returned an invalid answer")
@@ -190,8 +197,11 @@ class TwentyQuestionsEnv(ta.GameEnv):
         game_word = self.rng.choice(self.word_list[game_theme])
         ## the gamemaster context
         gamemaster_context = (
-            f"You are the gamemaster for the game of '20 Questions'.\n"
-            f"You will provide responses to the players' questions that guides them into guessing the target word: {game_word}\n"
+            f"You are the game master of a game of 20 Questions.\n"
+            f"The secret target is '{game_word}', from the theme '{game_theme}'. The player knows the theme but not the target.\n"
+            "Answer the player's latest question truthfully about the target with 'Yes' or 'No'. Reply 'I don't know' only "
+            "when the question cannot be answered with yes or no or the answer is genuinely uncertain. Do not add "
+            "anything else to your answer.\n"
         )
         return {
             "target_word": game_word, "game_theme": game_theme, "rendered_text": "Game word: ???",
@@ -202,11 +212,12 @@ class TwentyQuestionsEnv(ta.GameEnv):
     def prompt(self, player_id: int) -> str:
         return (
             f"You are Player {player_id}. You are playing 20 Questions ({'Hardcore' if self.hardcore else 'Basic'}).\n"
-            f"The gamemaster has chosen an object that can be one or two words. This object is related to {self.game_theme}. You have to guess this object by asking yes-or-no questions.\n"
+            f"The gamemaster has chosen a secret target of one or two words from the theme '{self.game_theme}'. You have to guess this target by asking yes-or-no questions.\n"
             f"The game will last for a maximum of {self.max_turns - 1} questions. After that, the gamemaster will prompt you to make a guess.\n"
             "You may ask your question in any manner; any message containing a '?' is treated as a question.\n"
             "To make your final word guess, at any time, reply with 'guess <word>', e.g. 'guess plane', 'guess diving bell'. "
-            "You get exactly one guess and it ends the game; case, punctuation and a leading 'a' or 'the' are ignored.\n"
+            "You get exactly one guess and it ends the game; case, punctuation, spacing and a leading 'a', 'an' or 'the' are ignored, "
+            "but singular and plural forms are different words (a target such as 'scissors' must be guessed exactly).\n"
             "As you play, the history of your questions and gamemaster's responses will be displayed."
         )
 
