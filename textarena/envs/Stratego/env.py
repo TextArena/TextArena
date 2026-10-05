@@ -427,14 +427,21 @@ class StrategoEnv(ta.GameEnv):
         if board[src_row][src_col] is None or not isinstance(board[src_row][src_col], dict) or board[src_row][src_col]['player'] != player_id:
             return f"Player {player_id} must move one of their own pieces."
 
+        if board[src_row][src_col]['rank'].lower() in ['bomb', 'flag']:
+            return f"Player {player_id} cannot move a bomb or flag."
+
         if abs(src_row - dest_row) + abs(src_col - dest_col) != 1 and board[src_row][src_col]['rank'].lower() == 'scout':
-            ## check if there's a piece in between the source and destination
+            ## check if there's a piece or lake in between the source and destination
             if src_row == dest_row:
                 for col in range(min(src_col, dest_col) + 1, max(src_col, dest_col)):
+                    if (src_row, col) in self.lakes:
+                        return f"Player {player_id} cannot move into the lake."
                     if board[src_row][col] is not None:
                         return f"Player {player_id} cannot move a scout through other pieces."
             elif src_col == dest_col:
                 for row in range(min(src_row, dest_row) + 1, max(src_row, dest_row)):
+                    if (row, src_col) in self.lakes:
+                        return f"Player {player_id} cannot move into the lake."
                     if board[row][src_col] is not None:
                         return f"Player {player_id} cannot move a scout through other pieces."
             else:
@@ -449,9 +456,6 @@ class StrategoEnv(ta.GameEnv):
 
             elif board[dest_row][dest_col]['player'] == player_id:
                 return f"Player {player_id} cannot move onto their own piece."
-
-        if board[src_row][src_col]['rank'].lower() in ['bomb', 'flag']:
-            return f"Player {player_id} cannot move a bomb or flag."
 
         if self._violates_two_square_rule(
             board[src_row][src_col],

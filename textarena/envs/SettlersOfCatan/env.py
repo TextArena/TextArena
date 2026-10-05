@@ -24,7 +24,7 @@ _RESOURCE_ORDER = (Terrain.BRICK, Terrain.WOOD, Terrain.WHEAT, Terrain.ORE, Terr
 - TODO add mini version maybe (i.e. smaller top score requirement)
 """
 
-_RESOURCE_CANON = {"sheeps": "sheep", "woods": "wood"}
+_RESOURCE_CANON = {"sheeps": "sheep", "woods": "wood", "bricks": "brick", "wheats": "wheat", "ores": "ore"}
 
 def _to_terrain(name: str) -> Terrain:
     base = _RESOURCE_CANON.get(name.lower(), name.lower())  # e.g., "woods"->"wood"
@@ -177,7 +177,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
     - Maximize Victory Points (VP).
     - The first player to reach {self.winning_score} VP wins.
     - VP sources implemented: Settlement = 1 VP, City = 2 VP.
-    - Not implemented in this environment: Largest Road, Largest Army, Development cards / VP cards, and trading with the bank or harbors (you can only trade with other players).
+    - Not implemented in this environment: Longest Road, Largest Army, Development cards / VP cards, and trading with the bank or harbors (you can only trade with other players).
     - The game also ends after {self.max_turns} moves in total, counting every valid reply from any player (including negotiation messages); players are then ranked by VP.
 
     TURN FLOW (what you can do)
@@ -364,7 +364,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
                     return self.invalid("Selected action index is out of bounds. Please select from the list.")
 
                 elif act == len(self.game_moves): # skip turn selected
-                    self.broadcast(f"Player {player_id} ({self.role_colors[player_id]}) ends his turn.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
+                    self.broadcast(f"Player {player_id} ({self.role_colors[player_id]}) ends their turn.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
                     gs["turn_done"] = True
 
                 elif act == len(self.game_moves)-1: # player selectes negotiation

@@ -180,6 +180,14 @@ def test_offer_parser_rejects_unmatched_junk():
     assert _parse_offer_body("1 Desert -> 1 Wheat") is None
 
 
+def test_offer_parser_accepts_every_plural_resource_name():
+    parsed = _parse_offer_body("2 Bricks, 1 Ores -> 3 Wheats, 1 Woods, 1 Sheeps")
+    assert parsed == {
+        "offered_resources": {Terrain.BRICK: 2, Terrain.ORE: 1},
+        "requested_resources": {Terrain.WHEAT: 3, Terrain.WOOD: 1, Terrain.SHEEP: 1},
+    }
+
+
 def test_invalid_elimination_finishes_with_last_survivor():
     env = _fresh()
     for pid in (1, 2):
@@ -565,3 +573,10 @@ def test_prompt_mentions_turn_limit_and_missing_bank_trade():
     prompt = env.prompt(0)
     assert "ends after 123 moves" in prompt
     assert "trading with the bank or harbors" in prompt
+    assert "Longest Road" in prompt and "Largest Road" not in prompt
+
+
+def test_ending_the_turn_is_announced_without_gendered_pronoun():
+    env = _fresh()
+    env.step(str(len(env.game_moves)))
+    assert "Player 0 (Red) ends their turn." in [m for _, m, _, to in env.state.events if to == -1]

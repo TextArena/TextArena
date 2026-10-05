@@ -231,6 +231,26 @@ def test_scout_cannot_jump_a_piece_or_lake():
     assert env._validate_move(0, 3, 0, 4, 2) is not None  # diagonal/lake
 
 
+def test_invalid_move_reasons_name_the_rule_that_was_broken():
+    env = _fresh()
+    _clear(env)
+    _place(env, 0, "Flag", (1, 0), "flag")
+    _place(env, 0, "Bomb", (2, 0), "bomb")
+    _place(env, 0, "Scout", (4, 0), "scout")
+    _place(env, 0, "Scout", (3, 6), "scout-2")
+    # Bombs and Flags never move, whatever the destination.
+    assert env._validate_move(0, 2, 0, 2, 2) == "Player 0 cannot move a bomb or flag."
+    assert env._validate_move(0, 2, 0, 1, 0) == "Player 0 cannot move a bomb or flag."
+    assert env._validate_move(0, 1, 0, 3, 0) == "Player 0 cannot move a bomb or flag."
+    # A Scout run across a lake is blocked by the lake, not by a piece.
+    assert env._validate_move(0, 4, 0, 4, 3) == "Player 0 cannot move into the lake."
+    assert env._validate_move(0, 3, 6, 6, 6) == "Player 0 cannot move into the lake."
+    assert env._validate_move(0, 4, 0, 4, 9) == "Player 0 cannot move into the lake."
+    assert env._validate_move(0, 3, 6, 3, 4) is None
+    _place(env, 0, "Miner", (3, 5), "blocker-2")
+    assert env._validate_move(0, 3, 6, 3, 4) == "Player 0 cannot move a scout through other pieces."
+
+
 def test_two_square_repetition_rule_blocks_fourth_traversal():
     env = _fresh()
     _clear(env)

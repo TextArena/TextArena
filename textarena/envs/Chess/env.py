@@ -97,5 +97,5 @@ class ChessEnv(ta.GameEnv):
         inner_width = len(str(board).splitlines()[0])
         top = bottom = f"   +{'-' * (inner_width + 2)}+"
         body = [f" {rank} | {row} |" for rank, row in zip(range(8, 0, -1), str(board).splitlines())]
-        files = "   " + " ".join("a b c d e f g h".split()).center(inner_width + 2)
+        files = "    " + " ".join("a b c d e f g h".split()).center(inner_width + 2)
         return "\n".join([top, *body, bottom, files])

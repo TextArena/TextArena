@@ -108,6 +108,7 @@ class DebateEnv(ta.GameEnv):
             if (
                 original is not None
                 and checkpoint is not None
+                and checkpoint is not original
                 and type(original) is type(checkpoint)
                 and hasattr(original, "__dict__")
                 and hasattr(checkpoint, "__dict__")
@@ -228,15 +229,16 @@ class DebateEnv(ta.GameEnv):
         # Conduct post-debate voting
         post_votes = self._evaluate_debate(topic=self.game_state["topic"], debate_transcript=debate_transcript)
 
-        # Calculate vote gains
+        # Calculate the gains in vote share
         pre_votes = self.game_state["votes"]["pre-debate"]
-        gain_aff = post_votes["Affirmative"] - pre_votes["Affirmative"]
-        gain_neg = post_votes["Negative"] - pre_votes["Negative"]
+        pre_total, post_total = sum(pre_votes.values()), sum(post_votes.values())
+        gain_aff = post_votes["Affirmative"] / post_total - pre_votes["Affirmative"] / pre_total
+        gain_neg = post_votes["Negative"] / post_total - pre_votes["Negative"] / pre_total
 
         # Determine winner or tie
-        if gain_aff > gain_neg:     winner_side = "Affirmative"
-        elif gain_neg > gain_aff:   winner_side = "Negative"
-        else: return None, post_votes  # tie
+        if math.isclose(gain_aff, gain_neg, abs_tol=1e-9): return None, post_votes  # tie
+        elif gain_aff > gain_neg:   winner_side = "Affirmative"
+        else:                       winner_side = "Negative"
 
         # Map winning side to player ID
         for pid, side in self.game_state["sides"].items():

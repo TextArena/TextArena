@@ -24,10 +24,10 @@ def create_board_str(player_resources, player_values, inventory_values, current_
             proposer = current_offer["from_player"]
             recipient = current_offer["to_player"]
             lines.append(f"│ Player {proposer} offers:                                                            │")
-            for res, qty in current_offer.get('offered_resources', {}).items(): lines.append(f"│   - {qty} {res:<10}                                                            │")
+            for res, qty in current_offer.get('offered_resources', {}).items(): lines.append(f"│   - {str(qty) + ' ' + res:<72}│")
             lines.append("│                                                                             │")
             lines.append("│ In exchange for:                                                            │")
-            for res, qty in current_offer.get('requested_resources', {}).items(): lines.append(f"│   - {qty} {res:<10}                                                            │")
+            for res, qty in current_offer.get('requested_resources', {}).items(): lines.append(f"│   - {str(qty) + ' ' + res:<72}│")
             lines.append("│                                                                             │")
             lines.append(f"│ Player {recipient}'s turn to respond: Accept or Deny                                  │")
         else:

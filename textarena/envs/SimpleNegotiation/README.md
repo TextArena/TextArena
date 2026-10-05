@@ -78,5 +78,3 @@ full messages and the game's announcements of every offer, acceptance, and rejec
 - Gains are measured with each player's own prices, so one trade can raise both values; only the comparison decides
   the winner.
 - An offer made on the final turn can never be answered.
-- The `-mdp` variant shows game messages and the board but not raw player messages, so chat is not part of that
-  transcript; offers and responses still are.

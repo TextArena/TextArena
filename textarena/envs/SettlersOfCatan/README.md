@@ -57,7 +57,7 @@ Negotiation commands (case-insensitive):
 
 - `Offer: <items> -> <items>` gives the items before the arrow for the items after it, e.g.
   `Offer: 2 Wood, 1 Brick -> 1 Wheat`. Items are `<quantity> <resource>` separated by commas, using Brick, Wood, Wheat,
-  Ore, and Sheep (`woods` and `sheeps` are also accepted).
+  Ore, and Sheep (plurals such as `Bricks` or `sheeps` are also accepted).
 - `Accept` or `Deny` answers the open offer addressed to you.
 - `Done` ends the negotiation.
 

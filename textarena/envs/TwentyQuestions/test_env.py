@@ -317,6 +317,40 @@ def test_prompt_explains_single_guess_and_question_mark_rule():
     assert "exactly one guess and it ends the game" in prompt
 
 
+@pytest.mark.parametrize(
+    "action, reward", [("guess police\nofficer", 1), ("guess police officer\nThat is my final answer.", 0)]
+)
+def test_message_starting_with_guess_is_the_final_guess_across_lines(action, reward):
+    gamemaster = _Gamemaster()
+    env = _fresh(gamemaster=gamemaster)
+    env.game_state["target_word"] = "police officer"
+    assert env.step(action)
+    assert env.state.rewards == {0: reward}
+    assert gamemaster.prompts == []
+
+
+def test_gamemaster_failure_keeps_a_function_gamemasters_attributes():
+    def gamemaster(prompt):
+        gamemaster.calls += 1
+        if gamemaster.calls == 1:
+            raise RuntimeError("offline")
+        return "Yes"
+
+    gamemaster.calls = 0
+    env = _fresh(gamemaster=gamemaster)
+    env.step("Is it alive?")
+    assert gamemaster.calls == 1
+    env.step("Is it alive?")
+    assert env.game_state["history"] == [("Is it alive?", "Yes")]
+
+
+def test_bundled_targets_are_one_or_two_words_as_the_prompt_says():
+    for hardcore in (False, True):
+        env = TwentyQuestionsEnv(gamemaster=_Gamemaster(), hardcore=hardcore)
+        for words in env.word_list.values():
+            assert all(len(word.split()) <= 2 for word in words)
+
+
 def test_board_hides_target_until_terminal_result():
     env = _fresh()
     assert env.game_word not in env.get_board_str()

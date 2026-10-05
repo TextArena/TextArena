@@ -37,7 +37,8 @@ Reply with exactly one word made of letters only, at most 64 letters long, for e
 
 Each player first receives the allowed letters and the rules. Before every move, the acting player sees a board with the
 allowed letters and the full word history (which player played each word, and its length). Both players see every
-submission, and each accepted word is announced as `Player 0 submitted the word: bean`. There is no hidden information.
+accepted word, announced as `Player 0 submitted the word: bean`; a rejected word and its reason are shown only to the
+player who submitted it. There is no hidden information.
 
 ## Rewards
 
@@ -60,3 +61,8 @@ submission, and each accepted word is announced as `Player 0 submitted the word:
   and US Hunspell dictionaries with its regular inflections (plurals, past tenses, and so on). The same words are
   accepted on every machine.
 - Of the single letters, only `a` and `i` count as words.
+- Despite the name, this is not the New York Times Spelling Bee, a single-player puzzle where every word must contain a
+  required center letter and have at least four letters, and words score points (with a bonus for pangrams that use
+  all seven letters). Here two players duel with no center letter, no minimum length and no points; the only
+  constraints between words are the non-decreasing length and no repeats. The letters are drawn at random, so a set
+  is not guaranteed to contain a vowel or a pangram.

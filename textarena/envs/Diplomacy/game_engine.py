@@ -1006,7 +1006,6 @@ class DiplomacyGameEngine:
                             or not self._can_unit_move_to(
                                 unit,
                                 supported_unit.region.name,
-                                supported_unit.coast,
                                 require_explicit_coast=False,
                             )
                         ):
@@ -1035,6 +1034,7 @@ class DiplomacyGameEngine:
                                 if (
                                     destination != supported_location
                                     and region.terrain_type == TerrainType.COAST
+                                    and not self._can_unit_move_to(supported_unit, destination)
                                     and self._has_possible_convoy_path(
                                         supported_location, destination
                                     )
@@ -1044,7 +1044,6 @@ class DiplomacyGameEngine:
                             if self._can_unit_move_to(
                                 unit,
                                 destination,
-                                coast,
                                 require_explicit_coast=False,
                             ):
                                 orders.append(
@@ -1249,11 +1248,13 @@ class DiplomacyGameEngine:
                     return False, f"Destination region {order.secondary_target} does not exist"
 
                 # Support move - check if the destination is reachable by the
-                # supported unit. A fleet move into a split coast must name it.
+                # supported unit. Support is given to a province, so the coast
+                # may be omitted; a coast that is named must be reachable.
                 if not self._can_unit_move_to(
                     supported_unit,
                     order.secondary_target,
                     order.secondary_target_coast,
+                    require_explicit_coast=False,
                 ):
                     # Check if it could be a convoyed move
                     if not (
@@ -1263,18 +1264,17 @@ class DiplomacyGameEngine:
                     ):
                         return False, f"Unit at {supported_loc} cannot move to {order.secondary_target}"
 
-                # A supporter must be able to move to the supported destination.
+                # A supporter must be able to move to the supported province,
+                # whichever coast the supported unit is moving to.
                 if not self._can_unit_move_to(
                     unit,
                     order.secondary_target,
-                    order.secondary_target_coast,
                     require_explicit_coast=False,
                 ):
                     return False, f"Cannot support move to {order.secondary_target} (not adjacent to supporting unit)"
             elif not self._can_unit_move_to(
                 unit,
                 supported_loc,
-                supported_unit.coast,
                 require_explicit_coast=False,
             ):
                 # Support-to-hold is given into the supported unit's province.
@@ -1494,7 +1494,7 @@ class DiplomacyGameEngine:
         """Return whether the supplied fleets form a sea chain between two coasts."""
         fleet_regions = {fleet.region.name for fleet in fleets if fleet.region}
         start_region = self.map.get_region(start)
-        if not start_region:
+        if not start_region or start == end:
             return False
 
         queue = [
@@ -1536,7 +1536,7 @@ class DiplomacyGameEngine:
         ]
         fleet_regions = {candidate.region.name for candidate in all_fleets}
         start_region = self.map.get_region(start)
-        if not start_region:
+        if not start_region or start == end:
             return False
         queue = [
             location
@@ -1721,7 +1721,7 @@ class DiplomacyGameEngine:
         dislodged_units: Dict[Unit, str] = {}
         standoff_regions: Set[str] = set()
 
-        dependency_count = len(support_orders) + len(convoy_fleets) + 1
+        dependency_count = (len(support_orders) + 1) * (len(convoy_fleets) + 1)
         for _ in range(dependency_count):
             active_convoys = {
                 route
@@ -1753,8 +1753,9 @@ class DiplomacyGameEngine:
                     or (
                         destination is not None
                         and supported_move == destination
-                        and move_target_coasts.get(supported_unit)
-                        == destination_coast
+                        and destination_coast in {
+                            None, move_target_coasts.get(supported_unit),
+                        }
                     )
                 )
                 support_target = destination or supported_unit.region.name
@@ -1807,8 +1808,13 @@ class DiplomacyGameEngine:
             ) - unavailable_convoy_fleets
             if not newly_disabled_supporters and not newly_unavailable_fleets:
                 break
-            disabled_supporters.update(newly_disabled_supporters)
-            unavailable_convoy_fleets.update(newly_unavailable_fleets)
+            if newly_unavailable_fleets:
+                # Supporters dislodged in this pass may have been hit by an army
+                # whose convoy has just been disrupted, so re-derive them.
+                unavailable_convoy_fleets.update(newly_unavailable_fleets)
+                disabled_supporters = set()
+            else:
+                disabled_supporters.update(newly_disabled_supporters)
 
         results = self._movement_outcomes(
             ordered_units,
@@ -1983,19 +1989,6 @@ class DiplomacyGameEngine:
             attackers_by_target[destination].append(unit)
             attack_strength[unit] = 1 + len(supports.get(unit, []))
 
-        winner_by_target: Dict[str, Unit] = {}
-        standoff_regions: Set[str] = set()
-        for destination, attackers in attackers_by_target.items():
-            highest = max(attack_strength[attacker] for attacker in attackers)
-            strongest = [
-                attacker for attacker in attackers
-                if attack_strength[attacker] == highest
-            ]
-            if len(strongest) == 1:
-                winner_by_target[destination] = strongest[0]
-            elif len(strongest) > 1:
-                standoff_regions.add(destination)
-
         status: Dict[Unit, bool] = {}
         resolving: Set[Unit] = set()
 
@@ -2007,63 +2000,77 @@ class DiplomacyGameEngine:
                 for supporter in supports.get(attacker, [])
             )
 
+        def head_to_head_opponent(unit: Unit) -> Optional[Unit]:
+            defender = original_occupants[move_orders[unit]]
+            if (
+                defender is not None
+                and move_orders.get(defender) == original_regions[unit].name
+                and direct_moves.get(unit, False)
+                and direct_moves.get(defender, False)
+            ):
+                return defender
+            return None
+
+        def prevent_strength(unit: Unit) -> int:
+            # A unit beaten in a head-to-head battle has no effect on the
+            # province its opponent came from.
+            opponent = head_to_head_opponent(unit)
+            if opponent is not None and succeeds(opponent):
+                return 0
+            return attack_strength[unit]
+
         def succeeds(unit: Unit) -> bool:
             if unit in status:
                 return status[unit]
+            if unit in resolving:
+                # A cycle of three or more moves vacates all its provinces.
+                return True
+            resolving.add(unit)
+            status[unit] = move_succeeds(unit)
+            resolving.discard(unit)
+            return status[unit]
+
+        def move_succeeds(unit: Unit) -> bool:
+            if unit in blocked_moves:
+                return False
             destination = move_orders[unit]
-            if unit in blocked_moves or winner_by_target.get(destination) is not unit:
-                status[unit] = False
+            rivals = [other for other in attackers_by_target[destination] if other is not unit]
+            if any(attack_strength[unit] <= prevent_strength(other) for other in rivals):
                 return False
 
             defender = original_occupants[destination]
             if defender is None:
-                status[unit] = True
+                return True
+            opponent = head_to_head_opponent(unit)
+            if opponent is None and defender in move_orders and succeeds(defender):
                 return True
 
-            source = original_regions[unit].name
-            defender_destination = move_orders.get(defender)
-            is_head_to_head = (
-                defender_destination == source
-                and direct_moves.get(unit, False)
-                and direct_moves.get(defender, False)
-                and defender not in blocked_moves
-            )
-            if is_head_to_head:
-                status[unit] = (
-                    unit.power != defender.power
-                    and dislodging_strength(unit, defender)
-                    > attack_strength.get(defender, 1)
-                )
-                return status[unit]
-
-            if defender in move_orders:
-                if defender in resolving:
-                    # A cycle of three or more moves vacates all its provinces.
-                    status[unit] = True
-                    return True
-                resolving.add(unit)
-                defender_succeeds = succeeds(defender)
-                resolving.discard(unit)
-                if defender_succeeds:
-                    status[unit] = True
-                    return True
-
-            # The province remains occupied. A power may not dislodge its own unit.
+            # The province remains occupied. A power may not dislodge its own unit,
+            # and support from the occupant's power counts neither against the
+            # occupant nor against rival attackers.
             if unit.power == defender.power:
-                status[unit] = False
                 return False
-            defense_strength = 1
-            if defender not in move_orders:
-                defense_strength += len(supports.get(defender, []))
-            status[unit] = (
-                dislodging_strength(unit, defender) > defense_strength
+            attack = dislodging_strength(unit, defender)
+            if opponent is not None:
+                resistance = attack_strength[opponent]
+            elif defender in move_orders:
+                resistance = 1
+            else:
+                resistance = 1 + len(supports.get(defender, []))
+            return attack > resistance and all(
+                attack > prevent_strength(other) for other in rivals
             )
-            return status[unit]
 
         successful_moves = {
             unit: destination
             for unit, destination in move_orders.items()
             if succeeds(unit)
+        }
+        # Provinces a non-beaten unit failed to enter cannot be retreated to.
+        standoff_regions = {
+            move_orders[unit]
+            for unit in attack_strength
+            if not succeeds(unit) and prevent_strength(unit) > 0
         }
         successful_units = set(successful_moves)
 
@@ -2347,8 +2354,10 @@ class DiplomacyGameEngine:
 
             unit_distances.append((unit, min_distance))
 
-        # Sort by distance (descending) then by unit type (fleets first)
-        unit_distances.sort(key=lambda x: (-x[1], 0 if x[0].type == UnitType.FLEET else 1))
+        # Sort by distance (descending), then fleets first, then alphabetically by province
+        unit_distances.sort(
+            key=lambda x: (-x[1], 0 if x[0].type == UnitType.FLEET else 1, x[0].region.name)
+        )
         
         return [unit for unit, _ in unit_distances[:count]]
 

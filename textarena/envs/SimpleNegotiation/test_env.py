@@ -189,6 +189,25 @@ def test_offer_without_a_colon_is_malformed(action):
     assert env.state.game_state["current_offer"] is None
 
 
+def test_offer_box_keeps_its_width_for_multi_digit_quantities():
+    env = _fresh()
+    env.step("Offer: 12 Wheat, 3 Sheep -> 100 Brick")
+    board = env.get_board_str()
+    box_lines = [line for line in board.splitlines() if line and line[0] in "┌│└"]
+    assert {len(line) for line in box_lines} == {79}
+    assert "│   - 12 Wheat " in board and "│   - 100 Brick " in board
+
+
+def test_mdp_variant_shows_the_opponents_chat():
+    env = ta.make("SimpleNegotiation-v1-mdp")
+    env.reset(num_players=2, seed=42)
+    env.get_observation()
+    env.step("Plenty of wheat here.\nOffer: 1 Wheat -> 1 Ore")
+    player_id, observation = env.get_observation()
+    assert player_id == 1
+    assert "Plenty of wheat here." in observation
+
+
 def test_chat_lines_that_merely_mention_commands_are_chat():
     env = _fresh()
     env.step("Offer: 1 Wheat -> 1 Ore")

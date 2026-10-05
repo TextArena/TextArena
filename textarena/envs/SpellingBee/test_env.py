@@ -73,6 +73,18 @@ def test_non_decreasing_length_enforced():
     assert env.state.game_state["word_history"] == ["cats"]
 
 
+def test_accepted_words_reach_both_players_and_rejected_words_only_their_author():
+    env = _fresh()
+    env.step("cat")
+    env.step("zzzzz")
+    assert ("Player 0 submitted the word: cat", -1) in [(message, to_id) for _, message, _, to_id in env.state.events]
+    rejected = [
+        (message, to_id) for _, message, _, to_id in env.state.events
+        if message == "zzzzz" or message.startswith("Player 1 attempted an invalid move.")
+    ]
+    assert len(rejected) == 2 and all(to_id == 1 for _, to_id in rejected)
+
+
 def test_non_english_word_rejected():
     env = _fresh()
     done = env.step("zzzzz")

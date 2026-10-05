@@ -49,6 +49,13 @@ def test_moves_and_checks_are_announced_by_color():
     assert "drawn after 30 moves in total" in env.prompt(1)
 
 
+def test_board_file_letters_line_up_with_their_columns():
+    rows = _fresh().render(0).splitlines()
+    first_rank, files = rows[9], rows[11]
+    assert first_rank.startswith(" 1 |") and files.split() == list("abcdefgh")
+    assert [first_rank[files.index(letter)] for letter in "abcdefgh"] == list("RNBQKBNR")
+
+
 def test_invalid_format_increments_error_count():
     env = _fresh()
     done = env.step("I move my pawn")

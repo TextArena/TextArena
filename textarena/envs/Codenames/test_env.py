@@ -173,6 +173,35 @@ def test_case_variant_of_board_word_cannot_bypass_clue_rule():
     assert env.state.rewards == {0: -1, 1: -1, 2: 1, 3: 1}
 
 
+@pytest.mark.parametrize(
+    "make_clue, relation",
+    [(lambda word: word, "is"), (lambda word: "x" + word, "contains"), (lambda word: word[:-1], "is part of")],
+)
+def test_board_word_clue_reason_names_the_overlapping_word(make_clue, relation):
+    env = _fresh()
+    board_word = next(iter(env.board))
+    clue = make_clue(board_word)
+    env.step(f"{clue} 1")
+    assert env.state.game_info[0]["reason"] == (
+        f"Player 0's clue '{clue}' {relation} the board word '{board_word}', which loses the game."
+    )
+
+
+def test_win_reason_is_accurate_when_the_other_team_revealed_some_words():
+    env = _fresh()
+    red = _words(env, "R")
+    env.step(f"{SAFE_CLUE} 1")
+    env.step("pass")
+    env.step(f"{SAFE_CLUE} 1")
+    env.step(red[0])  # Blue reveals a Red word
+    env.step(f"{SAFE_CLUE} 8")
+    for word in red[1:]:
+        done = env.step(word)
+    assert done
+    assert env.state.rewards == {0: 1, 1: 1, 2: -1, 3: -1}
+    assert env.state.game_info[0]["reason"] == f"Player 1 guessed '{red[-1]}', their team's last word!"
+
+
 def test_invalid_operative_guess_is_atomic_and_retriable():
     env = _fresh()
     env.step(f"{SAFE_CLUE} 2")

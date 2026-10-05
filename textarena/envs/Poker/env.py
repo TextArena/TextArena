@@ -463,8 +463,9 @@ class PokerEnv(ta.GameEnv):
         if not actors:
             return True
         if len(actors) == 1:
+            # current_bet can exceed every contender's bet when the big blind is a short all-in.
             lone_actor = actors[0]
-            return gs["player_bets"][lone_actor] >= gs["current_bet"]
+            return gs["player_bets"][lone_actor] >= max(gs["player_bets"][pid] for pid in contenders)
         return False
 
     def _is_betting_round_complete(self):
@@ -579,7 +580,8 @@ class PokerEnv(ta.GameEnv):
                 # This can only arise after a mid-hand administrative elimination.
                 # Its chips remain dead money and go to the best remaining hand.
                 eligible = list(active)
-            if pots and pots[-1][1] == eligible:
+            uncalled = len(active) > 1 and len(contributors) == 1 and contributors == set(eligible)
+            if pots and pots[-1][1] == eligible and not uncalled:
                 pots[-1][0] += amount
                 pots[-1][2] |= contributors
             else:

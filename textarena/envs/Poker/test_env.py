@@ -174,6 +174,22 @@ def test_only_all_ins_start_side_pots_and_uncalled_chips_are_returned():
     assert "Player 1 wins side pot 1 of 320 chips." in messages
 
 
+def test_uncalled_chips_are_returned_when_a_folded_player_contributed_less():
+    env = _fresh(num_players=4)
+    hands = {
+        0: [_card("4", "♦"), _card("K", "♦")],
+        2: [_card("9", "♣"), _card("9", "♥")],
+        3: [_card("6", "♣"), _card("2", "♠")],
+    }
+    board = [_card("4", "♥"), _card("7", "♠"), _card("6", "♥"), _card("8", "♣"), _card("7", "♦")]
+    _configure_showdown(env, hands, board, contributions={0: 60, 2: 21, 3: 4}, folded={2})
+    messages = _showdown_messages(env)
+    assert env.state.game_state["player_chips"] == {0: 73, 1: 0, 2: 0, 3: 12}
+    assert "Player 0's uncalled 39 chips are returned." in messages
+    assert "Player 3 wins the main pot of 12 chips." in messages
+    assert "Player 0 wins side pot 1 of 34 chips." in messages
+
+
 def test_tied_pot_odd_chip_goes_left_of_button_deterministically():
     env = _fresh(num_players=3)
     hands = {
@@ -508,6 +524,29 @@ def test_short_big_blind_does_not_lower_preflop_bring_in():
     env.set_current_player(0)
     env.step("call")
     assert gs["player_bets"][0] == env.big_blind
+
+
+@pytest.mark.parametrize("num_players", [2, 3])
+def test_small_blind_covering_a_short_all_in_big_blind_does_not_act(num_players):
+    env = PokerEnv(num_rounds=2, starting_chips=100)
+    env.reset(num_players=num_players, seed=3)
+    gs = env.state.game_state
+    gs["player_chips"] = {pid: 100 for pid in range(num_players)}
+    gs["player_chips"][num_players - 1] = 5
+    total = sum(gs["player_chips"].values())
+    env._reset_round()
+    assert gs["small_blind_player"] == num_players - 2
+    assert gs["big_blind_player"] == num_players - 1
+    if num_players == 3:
+        env.set_current_player(env._cur)
+        env.step("fold")  # the button folds; the small blind already covers the all-in big blind
+    else:
+        assert env._is_hand_over()
+        env._handle_hand_completion()
+    assert sum(gs["player_chips"].values()) + gs["pot"] == total
+    messages = [message for _, message, _, _ in env.state.events]
+    assert f"Player {num_players - 2}'s uncalled 5 chips are returned." in messages
+    assert any(message.startswith("Showdown round 1:") for message in messages)
 
 
 def test_fold_does_not_reveal_unreached_community_cards():

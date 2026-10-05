@@ -152,4 +152,4 @@ class LiarsDiceEnv(ta.GameEnv):
         """Rank-scaled rewards: first eliminated gets -1, winner gets +1."""
         final_ranking = self.state.eliminated + self.state.alive_players
         rewards = {pid: -1.0 + 2.0 * (rank / (self.state.num_players - 1)) for rank, pid in enumerate(final_ranking)}
-        return self.outcome(rewards, reason=f"Player {final_ranking[-1]} wins! Final ranking: {final_ranking}")
+        return self.outcome(rewards, reason=f"Player {final_ranking[-1]} wins! Final ranking: {final_ranking[::-1]}")

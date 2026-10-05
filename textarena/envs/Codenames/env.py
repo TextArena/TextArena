@@ -118,10 +118,12 @@ class CodenamesEnv(ta.GameEnv):
                 return self.invalid("The clue number must be between 1 and 25.")
 
             # Compare case-insensitively so capitalization cannot bypass the board-word rule.
-            if any(word in board_word or board_word in word for board_word in self.board):
+            overlap = next((board_word for board_word in self.board if word in board_word or board_word in word), None)
+            if overlap is not None:
+                relation = "is" if word == overlap else "contains" if overlap in word else "is part of"
                 return self.winner(
                     [0, 1] if current_team == "B" else [2, 3],
-                    reason=f"Player {player_id} mentioned a clue that is a subset/exact match of a word on the board.",
+                    reason=f"Player {player_id}'s clue '{word}' {relation} the board word '{overlap}', which loses the game.",
                 )
 
             gs["last_clue"] = word
@@ -159,7 +161,7 @@ class CodenamesEnv(ta.GameEnv):
 
         if self.board[guessed_word] == current_team:
             if all(word in gs["guessed_words"] for word, team in self.board.items() if team == current_team):
-                return self.winner([0, 1] if current_team == "R" else [2, 3], reason=f"Player {player_id} guessed all their team's words!")
+                return self.winner([0, 1] if current_team == "R" else [2, 3], reason=f"Player {player_id} guessed '{guessed_word}', their team's last word!")
             self.broadcast(f"Operative of {'Red' if current_team=='R' else 'Blue'} team, Player {player_id}, correctly guessed '{guessed_word}'.", ta.ObservationType.GAME_ACTION_DESCRIPTION)
             gs["remaining_guesses"] -= 1
             if gs["remaining_guesses"] <= 0:

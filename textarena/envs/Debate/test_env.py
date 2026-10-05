@@ -77,6 +77,57 @@ def test_negative_side_wins_when_it_gains_support():
     assert env.state.rewards == {negative_pid: 1, 1 - negative_pid: -1}
 
 
+@pytest.mark.parametrize(
+    "pre, post, winner_side",
+    [
+        ({"Affirmative": 3, "Negative": 1}, {"Affirmative": 5, "Negative": 2}, "Negative"),  # 75% -> 71% Affirmative
+        ({"Affirmative": 1, "Negative": 3}, {"Affirmative": 2, "Negative": 4}, "Affirmative"),  # 25% -> 33%
+        ({"Affirmative": 1, "Negative": 2}, {"Affirmative": 2, "Negative": 4}, None),  # a third both times
+    ],
+)
+def test_winner_is_decided_by_vote_shares_when_vote_totals_differ(pre, post, winner_side):
+    class Jury:
+        def __init__(self, **kwargs):
+            pass
+
+        def evaluate(self, context):
+            return pre if "No debate has occurred" in context else post
+
+    env = DebateEnv(max_turns=2, jury_size=7, jury_class=Jury)
+    env.reset(num_players=2, seed=42)
+    env.step("Opening")
+    assert env.step("Closing")
+    if winner_side is None:
+        assert env.state.rewards == {0: 0, 1: 0}
+    else:
+        winner = next(pid for pid, side in env.game_state["sides"].items() if side == winner_side)
+        assert env.state.rewards == {winner: 1, 1 - winner: -1}
+
+
+def test_post_vote_failure_keeps_a_jury_that_deep_copies_to_itself():
+    class Jury:
+        def __init__(self):
+            self.calls = 0
+
+        def __deepcopy__(self, memo):
+            return self
+
+        def evaluate(self, context):
+            self.calls += 1
+            if self.calls == 2:
+                raise RuntimeError("offline")
+            return {"Affirmative": 1, "Negative": 1}
+
+    jury = Jury()
+    env = DebateEnv(max_turns=2, jury_class=lambda **kwargs: jury)
+    env.reset(num_players=2, seed=42)
+    env.step("Opening")
+    env.step("Closing")
+    assert jury.calls == 2 and not env.state.done
+    assert env.step("Closing")
+    assert env.state.rewards == {0: 0, 1: 0}
+
+
 def test_pre_debate_vote_is_lazy_and_recorded_on_first_argument():
     env = _fresh(_AffirmativeJury)
     assert env.state.game_state["pre_vote_recorded"] is False

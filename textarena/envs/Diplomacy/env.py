@@ -144,11 +144,12 @@ class DiplomacyEnv(ta.GameEnv):
             "## COMBAT",
             "- Every unit has strength 1 and each valid support adds 1. The strongest move into a province succeeds; "
             "equally strong moves bounce and none of them moves in.",
-            "- A support is cut if the supporting unit is attacked from any province other than the one it is "
-            "supporting a move into.",
+            "- A support is cut if the supporting unit is attacked by another power from any province other than "
+            "the one it is supporting a move into, or if it is dislodged. Support is given into a province, so a "
+            "support order may omit the coast ('A MAR S F GAS - SPA').",
             "- A dislodged unit must retreat to an adjacent empty province that its attacker did not come from and "
             "that was not left empty by a bounce, or disband. Units retreating to the same province are all disbanded.",
-            "- You can never dislodge your own unit.",
+            "- You can never dislodge your own unit, and your support never helps another power dislodge it.",
             "",
             "## HOW TO REPLY",
             "Start each command on its own line. A command runs until the next command line, so messages may span "
@@ -540,7 +541,7 @@ class DiplomacyEnv(ta.GameEnv):
         )
         alive = [pid for pid in self.player_power_map if self.state.is_player_alive(pid)]
         if len(alive) <= 1:
-            return self.winner(alive, reason="All other players were eliminated by repeated invalid moves.")
+            return self.winner(alive, reason="All other players have been eliminated.")
         if self._is_final_round():
             # The eliminated power submits no orders, so the phase can still resolve.
             self.pending_orders.setdefault(power_name, [])

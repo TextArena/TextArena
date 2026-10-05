@@ -29,8 +29,10 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Diplomacy-v1-mdp`)
   Orders are accepted only in the final round of a phase, where every player must submit them; once all have, the
   orders resolve simultaneously.
 - Movement follows the standard rules: every unit has strength 1, each valid support adds 1, equal strengths bounce,
-  an attack cuts a support unless it comes from the province the support is aimed at, and a power cannot dislodge its
-  own unit. Units without orders hold.
+  an attack by another power cuts a support unless it comes from the province the support is aimed at, a dislodged
+  unit's support is cut, and a power cannot dislodge its own unit or support another power in dislodging it. Support
+  is given into a province, so a support order may omit the coast. An army moves by convoy when its destination is not
+  adjacent or the order ends with `VIA`; otherwise it moves overland. Units without orders hold.
 - A dislodged unit retreats to an empty adjacent province that its attacker did not come from and that was not left
   empty by a bounce, or is disbanded. Units retreating to the same province, and dislodged units without an order, are
   disbanded.
@@ -38,7 +40,7 @@ Append `-mdp` to any ID for the state-complete variant (e.g. `Diplomacy-v1-mdp`)
   passes to the occupying power, so a unit that retreats into a center in the Fall captures it. In Winter, each power
   builds units in vacant home centers it still owns, or disbands units, until its unit count matches its center count.
   Unordered builds are waived; if a power orders too few disbands, the units farthest from its home centers are
-  disbanded automatically.
+  disbanded automatically (on a tie, fleets first, then alphabetically by province).
 - A power with no units and no centers is eliminated. The game ends when a power controls 18 or more supply centers
   (checked after every phase), when only one power remains, or after `max_game_years` complete game years.
 
@@ -117,7 +119,7 @@ counts. The game ends with an announcement of every power's final center count.
 ## Notes
 
 - The per-power strategy texts are adapted from [AI_Diplomacy](https://github.com/Alx-AI/AI_Diplomacy).
-- Games are long: every phase, including Retreats and Adjustments with nothing to order, takes
-  `negotiations_per_phase` full rounds, so one game year is 15 turns per player by default.
+- Games are long: every Movement phase, and every Retreats or Adjustments phase in which someone has something to
+  order, takes `negotiations_per_phase` full rounds, so one game year is up to 15 turns per player by default.
 - A fleet moving to a split-coast province must name the coast even when only one coast is reachable
   (`F GAS - SPA(NC)`, not `F GAS - SPA`); the board summary lists moves in that form.

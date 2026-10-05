@@ -1064,3 +1064,209 @@ def test_padded_messages_are_delivered_intact():
     assert f"(to all) hi{gap}all" in visible
     assert f"(privately to you) psst{gap}there" in visible
     assert f"(to all) bye{gap}now" in visible
+
+
+# ---------------------------------------------------------------------------
+# Adjudication cases from the DATC (Diplomacy Adjudicator Test Cases)
+# ---------------------------------------------------------------------------
+
+def _engine_with(units):
+    """An engine holding only `units`: (power, unit type, location, coast) tuples."""
+    engine = DiplomacyGameEngine()
+    _clear_units(engine)
+    placed = {}
+    for power_name, unit_type, location, coast in units:
+        placed[location] = _place_unit(engine, power_name, unit_type, location)
+        placed[location].coast = coast
+    return engine, placed
+
+
+A, F = UnitType.ARMY, UnitType.FLEET
+
+
+def test_move_to_own_province_is_illegal_even_next_to_a_fleet():
+    # DATC 6.A.5
+    engine, units = _engine_with([
+        ("ENGLAND", F, "NTH", None), ("ENGLAND", A, "YOR", None), ("ENGLAND", A, "LVP", None),
+        ("GERMANY", F, "LON", None), ("GERMANY", A, "WAL", None),
+    ])
+
+    engine.resolve_orders({
+        "ENGLAND": ["F NTH C A YOR - YOR", "A YOR - YOR", "A LVP S A YOR - YOR"],
+        "GERMANY": ["F LON - YOR", "A WAL S F LON - YOR"],
+    })
+
+    assert len(engine.order_history[-1]["invalid_orders"]["ENGLAND"]) == 3
+    assert units["YOR"].dislodged
+    assert engine.map.get_region("YOR").unit is units["LON"]
+
+
+@pytest.mark.parametrize(
+    "supporter,support",
+    [
+        (F, "F MAR S F GAS - SPA"),
+        (F, "F MAR S F GAS - SPA(NC)"),
+        (A, "A MAR S F GAS - SPA"),
+        (A, "A MAR S F GAS - SPA(NC)"),
+    ],
+)
+def test_support_into_a_split_coast_province_does_not_depend_on_the_supporters_coast(supporter, support):
+    # DATC 6.B.4: support is given into a province, whichever coast the supported fleet moves to.
+    engine, units = _engine_with([
+        ("FRANCE", F, "GAS", None), ("FRANCE", supporter, "MAR", None), ("ITALY", F, "WES", None),
+    ])
+
+    engine.resolve_orders({"FRANCE": ["F GAS - SPA(NC)", support], "ITALY": ["F WES - SPA(SC)"]})
+
+    assert engine.order_history[-1]["invalid_orders"]["FRANCE"] == []
+    assert (units["GAS"].region.name, units["GAS"].coast) == ("SPA", "NC")
+
+
+def test_support_naming_the_wrong_coast_is_void():
+    # DATC 6.B.9
+    engine, units = _engine_with([
+        ("FRANCE", F, "POR", None), ("FRANCE", F, "MAO", None), ("ITALY", F, "LYO", None), ("ITALY", F, "WES", None),
+    ])
+
+    engine.resolve_orders({
+        "FRANCE": ["F POR S F MAO - SPA(NC)", "F MAO - SPA(SC)"],
+        "ITALY": ["F LYO S F WES - SPA(SC)", "F WES - SPA(SC)"],
+    })
+
+    assert ["F POR S F MAO - SPA(NC)", "support void (no matching order)"] in (
+        engine.order_history[-1]["results"]["FRANCE"]
+    )
+    assert units["WES"].region.name == "SPA"
+
+
+def test_a_fleet_on_a_split_coast_can_be_supported_to_hold():
+    engine = DiplomacyGameEngine()  # Russia starts with A MOS next to F STP(SC)
+    assert engine.validate_order(Order.parse("A MOS S F STP", "RUSSIA")) == (True, None)
+    assert "A MOS S F STP(SC)" in engine.get_possible_orders("RUSSIA")["MOS"]
+
+    engine, units = _engine_with([
+        ("RUSSIA", F, "STP", "NC"), ("RUSSIA", F, "BOT", None), ("ENGLAND", F, "BAR", None), ("ENGLAND", F, "NWY", None),
+    ])
+    engine.resolve_orders({
+        "RUSSIA": ["F STP H", "F BOT S F STP"],
+        "ENGLAND": ["F BAR - STP(NC)", "F NWY S F BAR - STP(NC)"],
+    })
+    assert engine.order_history[-1]["invalid_orders"]["RUSSIA"] == []
+    assert not units["STP"].dislodged
+
+
+def test_support_for_an_army_reachable_overland_and_by_convoy_is_listed_once():
+    engine, _ = _engine_with([("ENGLAND", A, "NWY", None), ("ENGLAND", F, "SKA", None)])
+
+    orders = engine.get_possible_orders("ENGLAND")["SKA"]
+
+    assert orders.count("F SKA S A NWY - SWE") == 1
+    assert len(orders) == len(set(orders))
+
+
+def test_unit_beaten_head_to_head_does_not_block_the_province_it_attacked():
+    # DATC 6.E.1
+    engine, units = _engine_with([
+        ("GERMANY", A, "BER", None), ("GERMANY", F, "KIE", None), ("GERMANY", A, "SIL", None),
+        ("RUSSIA", A, "PRU", None),
+    ])
+
+    engine.resolve_orders({
+        "GERMANY": ["A BER - PRU", "F KIE - BER", "A SIL S A BER - PRU"],
+        "RUSSIA": ["A PRU - BER"],
+    })
+
+    assert units["BER"].region.name == "PRU"
+    assert units["KIE"].region.name == "BER"
+    assert units["PRU"].dislodged
+    _assert_unit_map_consistency(engine)
+
+
+@pytest.mark.parametrize("north_sea_order", ["F NTH H", "F NTH - NWY", "F NTH - DEN"])
+def test_support_from_the_occupants_power_cannot_win_a_beleaguered_garrison(north_sea_order):
+    # DATC 6.E.7, 6.E.8, 6.E.10: Russia beats Germany's attack on the North Sea only with England's support, which
+    # cannot be used against England's own fleet, so nothing moves.
+    engine, units = _engine_with([
+        ("ENGLAND", F, "NTH", None), ("ENGLAND", F, "YOR", None), ("GERMANY", F, "HOL", None),
+        ("GERMANY", F, "HEL", None), ("GERMANY", F, "DEN", None), ("RUSSIA", F, "SKA", None), ("RUSSIA", F, "NWY", None),
+    ])
+
+    engine.resolve_orders({
+        "ENGLAND": [north_sea_order, "F YOR S F NWY - NTH"],
+        "GERMANY": ["F HOL S F HEL - NTH", "F HEL - NTH", "F DEN - HEL"],
+        "RUSSIA": ["F SKA S F NWY - NTH", "F NWY - NTH"],
+    })
+
+    for location, unit in units.items():
+        assert (unit.region.name, unit.dislodged) == (location, False)
+
+
+def test_army_whose_convoy_is_disrupted_does_not_dislodge_a_supporter():
+    # The convoying fleet is dislodged independently, so LON - HOL never happens and HOL's support keeps RUH.
+    engine, units = _engine_with([
+        ("ENGLAND", A, "LON", None), ("ENGLAND", F, "NTH", None), ("ENGLAND", A, "BEL", None),
+        ("FRANCE", F, "ENG", None), ("FRANCE", F, "EDI", None),
+        ("GERMANY", A, "HOL", None), ("GERMANY", A, "RUH", None),
+        ("RUSSIA", A, "MUN", None), ("RUSSIA", A, "BUR", None),
+    ])
+
+    engine.resolve_orders({
+        "ENGLAND": ["A LON - HOL", "F NTH C A LON - HOL", "A BEL S A LON - HOL"],
+        "FRANCE": ["F ENG - NTH", "F EDI S F ENG - NTH"],
+        "GERMANY": ["A HOL S A RUH", "A RUH H"],
+        "RUSSIA": ["A MUN - RUH", "A BUR S A MUN - RUH"],
+    })
+
+    assert units["NTH"].dislodged
+    assert not units["HOL"].dislodged and not units["RUH"].dislodged
+    assert ["A HOL S A RUH", "support given"] in engine.order_history[-1]["results"]["GERMANY"]
+    _assert_unit_map_consistency(engine)
+
+
+def test_betrayal_paradox_moves_nothing():
+    # DATC 6.F.18
+    engine, units = _engine_with([
+        ("ENGLAND", F, "NTH", None), ("ENGLAND", A, "LON", None), ("ENGLAND", F, "ENG", None),
+        ("FRANCE", F, "BEL", None), ("GERMANY", F, "HEL", None), ("GERMANY", F, "SKA", None),
+    ])
+
+    engine.resolve_orders({
+        "ENGLAND": ["F NTH C A LON - BEL", "A LON - BEL", "F ENG S A LON - BEL"],
+        "FRANCE": ["F BEL S F NTH"],
+        "GERMANY": ["F HEL S F SKA - NTH", "F SKA - NTH"],
+    })
+
+    for location, unit in units.items():
+        assert (unit.region.name, unit.dislodged) == (location, False)
+
+
+def test_automatic_disbands_break_distance_ties_alphabetically():
+    # DATC 6.J.4: LVN and UKR are both one province from a Russian home center.
+    engine, _ = _engine_with([("RUSSIA", A, "UKR", None), ("RUSSIA", A, "LVN", None)])
+    engine.powers["RUSSIA"].controlled_centers = ["STP"]
+    engine.season, engine.phase = Season.WINTER, PhaseType.ADJUSTMENTS
+
+    engine.resolve_orders({})
+
+    assert [str(unit) for unit in engine.powers["RUSSIA"].units] == ["A UKR"]
+
+
+def test_last_player_standing_wins_without_blaming_every_elimination_on_invalid_moves():
+    env = DiplomacyEnv(negotiations_per_phase=1)
+    env.reset(num_players=3, seed=42)
+    power = env.engine.powers[env.player_power_map[1]]
+    for unit in list(power.units):
+        unit.region.unit = None
+        unit.region = None
+    power.units.clear()
+    power.controlled_centers.clear()
+    _submit_orders_for_all(env, _hold_orders_action)
+    assert not env.state.is_player_alive(1)
+
+    env.step("gibberish")
+    done = env.step("more gibberish")
+
+    assert done
+    rewards, game_info = env.close()
+    assert rewards == {0: -1, 1: -1, 2: 1}
+    assert game_info[2]["reason"] == "All other players have been eliminated."

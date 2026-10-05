@@ -182,6 +182,7 @@ def test_scripted_three_player_game_has_rank_scaled_rewards():
     assert done
     assert env.state.eliminated == [0, 1]
     assert env.state.rewards == {0: -1.0, 1: 0.0, 2: 1.0}
+    assert env.state.game_info[0]["reason"] == "Player 2 wins! Final ranking: [2, 1, 0]"
 
 
 def test_repeat_reset_replays_private_rolls():

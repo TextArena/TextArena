@@ -107,6 +107,7 @@ class TwentyQuestionsEnv(ta.GameEnv):
             if (
                 original is not None
                 and checkpoint is not None
+                and checkpoint is not original
                 and type(original) is type(checkpoint)
                 and hasattr(original, "__dict__")
                 and hasattr(checkpoint, "__dict__")
@@ -222,7 +223,7 @@ class TwentyQuestionsEnv(ta.GameEnv):
         """The guessed text, or None when the message is a question."""
         if "?" in unicodedata.normalize("NFKC", action):
             return None  # e.g. "Guess what, is it alive?" must not end the game
-        match = self._GUESS_RE.fullmatch(action)
+        match = self._GUESS_RE.fullmatch(" ".join(action.split()))
         return match.group("guess") if match else None
 
     def apply(self, player_id: int, action: str) -> Union[ta.Outcome, ta.Invalid, None]:
