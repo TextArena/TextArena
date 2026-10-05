@@ -95,6 +95,8 @@ of range raises `ValueError`, and an unknown name raises `TypeError`. Renamed or
   retreats or builds takes two phases instead of five, and `env.reset()` defaults to the classic seven players.
   **Chess** announces check, names players by color, and explains castling, promotion, the board letters, and the turn
   limit in its prompt. **Poker** starts a side pot only when a player is all-in and returns chips nobody called.
+  **SettlersOfCatan** allows 500 moves instead of 200, so games end with a player reaching 10 VP instead of at the
+  move limit.
 - **LLM juries and game masters** (Debate, ScenarioPlanning, GuessWho, TwentyQuestions) use `qwen/qwen3.8-27b`.
   A juror's vote may come wrapped in quotes, bold, or a trailing period, but must name exactly one option. When a
   model fails, the warning that is logged and the error raised after repeated failures include the cause.

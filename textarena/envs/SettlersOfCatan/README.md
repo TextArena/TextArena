@@ -102,7 +102,7 @@ spread evenly from `-1` (fewest points) to `+1` (most). For example, four player
 
 <!-- BEGIN GENERATED: parameters -->
 - `player_move_allowance` (default `10`): The number of actions per turn. Accepts an integer of at least 1.
-- `max_turns` (default `200`): The number of moves in the whole game, counting every valid reply from any player. Accepts an integer of at least 1.
+- `max_turns` (default `500`): The number of moves in the whole game, counting every valid reply from any player. Accepts an integer of at least 1.
 - `winning_score` (default `10`): The victory points needed to win; everyone starts with 2. Accepts an integer of at least 3.
 <!-- END GENERATED: parameters -->
 

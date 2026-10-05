@@ -108,7 +108,7 @@ class SettlersOfCatanEnv(ta.GameEnv):
     pids_from_roles = {"red": 0, "white": 1, "blue": 2, "orange": 3}
 
     player_move_allowance = ta.Param(10, "The number of actions per turn.", min=1)
-    max_turns = ta.Param(200, "The number of moves in the whole game, counting every valid reply from any player.", min=1)
+    max_turns = ta.Param(500, "The number of moves in the whole game, counting every valid reply from any player.", min=1)
     # Every player starts with two settlements (2 VP), so a lower target would end the game on the first move.
     winning_score = ta.Param(10, "The victory points needed to win; everyone starts with 2.", min=3)
 
