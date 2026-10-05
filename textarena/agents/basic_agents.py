@@ -137,7 +137,8 @@ class TinkerAgent(_ModelAgent):
         """ Build a tinker ModelInput, using the model's chat template when available. """
         if getattr(self.tokenizer, "chat_template", None):
             messages = [{"role": "system", "content": self.system_prompt}, {"role": "user", "content": observation}]
-            token_ids = self.tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=True)
+            # transformers 5 returns a BatchEncoding unless return_dict=False
+            token_ids = self.tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=True, return_dict=False)
         else: # base model without a chat template: fall back to a plain-text prompt
             token_ids = self.tokenizer.encode(f"{self.system_prompt}\n\n{observation}\n")
         return self._types.ModelInput.from_ints(token_ids)

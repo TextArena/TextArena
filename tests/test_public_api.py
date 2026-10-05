@@ -1,4 +1,5 @@
 import random
+import types
 from pathlib import Path
 
 import pytest
@@ -15,6 +16,20 @@ def test_extract_action_uses_last_non_empty_tag():
 
 def test_extract_action_falls_back_to_raw_text():
     assert ta.extract_action("  roll  ") == "roll"
+
+
+def test_tinker_agent_prompts_are_plain_token_ids():
+    class Tokenizer:  # like transformers 5, which returns a BatchEncoding unless return_dict=False
+        chat_template = "template"
+
+        def apply_chat_template(self, messages, add_generation_prompt, tokenize, return_dict=True):
+            ids = [1, 2, 3]
+            return {"input_ids": ids, "attention_mask": [1, 1, 1]} if return_dict else ids
+
+    agent = ta.agents.TinkerAgent.__new__(ta.agents.TinkerAgent)
+    agent.system_prompt, agent.tokenizer = "system", Tokenizer()
+    agent._types = types.SimpleNamespace(ModelInput=types.SimpleNamespace(from_ints=lambda tokens: tokens))
+    assert agent._build_prompt("observation") == [1, 2, 3]
 
 
 def test_registry_has_only_default_and_mdp_pairs():
