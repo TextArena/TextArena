@@ -5,12 +5,12 @@ The model plays TicTacToe and Wordle through ``ta.evaluate``, then plays Debate,
 TwentyQuestions while also serving as their jury or game master in place of the OpenRouter judge. Every game is
 then replayed from its JSON record, which has to reproduce the game without calling the model again.
 
-The report fails on games that raised and on replays that diverged. It also counts replies without an <action>
+The report fails on games that raised and on replays that diverged. It also counts answers without an <action>
 tag, which usually means the reply was cut off mid-reasoning, and shows what the jurors answered.
 
 Usage:
     pip install -e . tinker transformers
-    TINKER_API_KEY=... python scripts/tinker_smoke_test.py [--model thinkingmachines/Inkling-Small]
+    TINKER_API_KEY=... python scripts/tinker_smoke_test.py [--model Qwen/Qwen3.8-27B]
 
 TINKER_CREDENTIAL_CMD works instead of TINKER_API_KEY, as everywhere in the Tinker SDK.
 """
@@ -78,8 +78,8 @@ def report(env_id, seats, rewards, turns, invalid, error, replay_ok, seconds=Non
 
 
 def untagged(agent) -> str:
-    missing = [reply for reply in agent.replies if "<action>" not in reply.lower()]
-    summary = f"{len(agent.replies)} replies, {len(missing)} without an <action> tag"
+    missing = [reply for reply in agent.replies if "<action>" not in reply.rpartition("</think>")[2].lower()]
+    summary = f"{len(agent.replies)} replies, {len(missing)} without an <action> tag after the reasoning"
     if missing:
         summary += f"; first one ends with: {missing[0][-200:]!r}"
     return summary
@@ -87,7 +87,7 @@ def untagged(agent) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--model", default="thinkingmachines/Inkling-Small", help="Tinker base model (default: %(default)s)")
+    parser.add_argument("--model", default="Qwen/Qwen3.8-27B", help="Tinker base model (default: %(default)s)")
     parser.add_argument("--max-tokens", type=int, help="reply budget per call (default: TinkerAgent's default)")
     args = parser.parse_args()
 
@@ -134,7 +134,7 @@ def main() -> int:
 
     print(f"\nPlayer: {untagged(player)}")
     print(f"Game master: {untagged(gamemaster)}")
-    votes = collections.Counter(reply.strip() for reply in juror.replies)
+    votes = collections.Counter(reply.rpartition("</think>")[2].strip() for reply in juror.replies)
     print(f"Jurors: {len(juror.replies)} votes, most common answers: {votes.most_common(5)}")
     print("\nPASSED" if passed else "\nFAILED")
     return 0 if passed else 1

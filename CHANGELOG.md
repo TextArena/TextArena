@@ -14,7 +14,8 @@ rules and rewards were corrected along the way, so every environment id moved to
 - **Two views of every configuration.** `Game-v1` shows only the messages since the player's last turn;
   `Game-v1-mdp` puts everything needed to act into every observation.
 - **Bare actions.** Games take moves such as `e2e4` or `bid 3 5s`. Models put their move inside
-  `<action>...</action>` tags, and `ta.extract_action` extracts it.
+  `<action>...</action>` tags, and `ta.extract_action` extracts it. Model agents first drop reasoning that ends in
+  `</think>`, so reasoning models work as players and as judges.
 - **Replays.** `env.record()` returns a JSON-serializable record of a game, and `ta.replay(record)` rebuilds it,
   including the answers of LLM judges.
 - **Evaluation.** `ta.evaluate(agents, env_ids, episodes)` plays agents against each other on paired seeds with

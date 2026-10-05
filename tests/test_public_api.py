@@ -18,6 +18,19 @@ def test_extract_action_falls_back_to_raw_text():
     assert ta.extract_action("  roll  ") == "roll"
 
 
+@pytest.mark.parametrize("response, submitted", [
+    ("Thinking about <action>3</action> first.\n</think>\n\n<action>4</action>", "4"),
+    ("I'll choose Affirmative.\n</think>\n\nAffirmative", "Affirmative"),
+    ("<action>roll</action>", "roll"),
+])
+def test_model_agents_ignore_reasoning_before_the_answer(response, submitted):
+    class Agent(ta.agents.basic_agents._ModelAgent):
+        def generate(self, observation):
+            return response
+
+    assert Agent(system_prompt=None, verbose=False)("observation") == submitted
+
+
 def test_tinker_agent_prompts_are_plain_token_ids():
     class Tokenizer:  # like transformers 5, which returns a BatchEncoding unless return_dict=False
         chat_template = "template"

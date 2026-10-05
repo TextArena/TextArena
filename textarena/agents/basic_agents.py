@@ -22,7 +22,10 @@ class HumanAgent(Agent):
 
 
 class _ModelAgent(Agent):
-    """ An agent backed by a remote model: retries failed requests and submits the model's <action> tag. """
+    """ An agent backed by a remote model: retries failed requests and submits the model's <action> tag.
+
+    Reasoning up to the last </think> is dropped first, since some servers return it inline with the answer.
+    """
 
     def __init__(self, system_prompt: Optional[str], verbose: bool, retries: int = 3, retry_delay: float = 5):
         self.system_prompt = system_prompt
@@ -48,7 +51,7 @@ class _ModelAgent(Agent):
                 time.sleep(self.retry_delay)
         if self.verbose:
             logger.info("Observation: %s\nResponse: %s", observation, response)
-        return extract_action(response)
+        return extract_action(response.rpartition("</think>")[2])
 
 
 class OpenAIAgent(_ModelAgent):
@@ -102,7 +105,7 @@ class TinkerAgent(_ModelAgent):
     credentials: TINKER_API_KEY, or TINKER_CREDENTIAL_CMD where an organization issues them.
     """
     def __init__(self, model_name: Optional[str]=None, model_path: Optional[str]=None,
-                 system_prompt: Optional[str]=STANDARD_GAME_PROMPT, max_tokens: int=1024,
+                 system_prompt: Optional[str]=STANDARD_GAME_PROMPT, max_tokens: int=4096,
                  temperature: float=0.7, verbose: bool=False, **sampling_kwargs):
         """
         Args:
@@ -110,7 +113,7 @@ class TinkerAgent(_ModelAgent):
             model_path (Optional[str]): Path to saved model weights (e.g. "tinker://run-id/weights/checkpoint-001").
                 Provide exactly one of model_name / model_path.
             system_prompt (Optional[str]): The system prompt to use (default: STANDARD_GAME_PROMPT).
-            max_tokens (int): The maximum number of tokens to generate.
+            max_tokens (int): The maximum number of tokens to generate, reasoning included.
             temperature (float): The sampling temperature.
             verbose (bool): If True, every observation and response is logged at INFO level.
             **sampling_kwargs: Additional keyword arguments passed to tinker.types.SamplingParams (e.g. top_p, stop).
