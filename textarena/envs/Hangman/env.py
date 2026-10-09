@@ -61,7 +61,7 @@ class HangmanEnv(ta.Env):
         pool = self._lang_pool(self._content_lang())
         target_word = random.choice(pool)
         game_state = {
-            "target_word": target_word, "target_letters": list(target_word.upper()),
+            "target_word": target_word, "target_letters": [char.upper() for char in target_word],
             "current_board": ["_" for _ in target_word], "guessed_letters": set(), "tries_left":6
         }
         self.state.reset(game_state=game_state, player_prompt_function=self._generate_player_prompt)
@@ -84,14 +84,14 @@ class HangmanEnv(ta.Env):
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         """ Process the player's action and update the game state accordingly """
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION) # Update the observations
-        match = re.compile(r"\[([a-zA-Z]+)\]", re.IGNORECASE).search(action)
+        match = re.search(r"\[([^\W\d_]+)\]", action)
 
         if not match:
             self.state.set_invalid_move(reward=self._get_percentage_completion(), reason=self.m("invalid", "wrong_format"))
         else:
             # for match in matches:
             letter = match.group(1).upper()  # Convert to uppercase for consistency
-            if len(letter) > 1: # Player guessed full word
+            if len(match.group(1)) > 1: # Player guessed full word
                 if letter == self.state.game_state["target_word"].upper():
                     self.state.set_outcome(reward=1, reason=self.m("outcome", "win_word"))
                     self.state.game_state["current_board"] = self.state.game_state["target_letters"]  # reveal the word
