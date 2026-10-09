@@ -38,7 +38,7 @@ register_with_versions(id="Blackjack-v0",       entry_point="textarena.envs.Blac
 register_with_versions(id="Blackjack-v0-long",  entry_point="textarena.envs.Blackjack.env:BlackjackEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameMessagesObservationWrapper, ActionFormattingWrapper]}, num_hands=15  )
 
 # Countdown [1 Player]
-register_with_versions(id="Countdown-v0", entry_point="textarena.envs.Countdown.env:CountdownEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS}, numbers=[100, 75, 6, 4, 3, 2], target=532)
+register_with_versions(id="Countdown-v0", entry_point="textarena.envs.Countdown.env:CountdownEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": BOARDGAME_WRAPPERS})
 
 # Crosswords [1 Player]
 register_with_versions(id="Crosswords-v0",          entry_point="textarena.envs.Crosswords.env:CrosswordsEnv", wrappers={"default": DEFAULT_WRAPPERS, "-train": [GameBoardObservationWrapper, ActionFormattingWrapper]}, hardcore=False,    max_turns=30, num_words=3)

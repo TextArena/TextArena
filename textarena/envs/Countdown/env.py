@@ -12,12 +12,8 @@ class CountdownEnv(ta.Env):
 
     def __init__(self, numbers: List[int] = None, target: int = None, max_turns: int = 12):
         super().__init__()
-        big_numbers = [25, 50, 75, 100]
-        small_numbers = list(range(1, 11)) * 2
-        
-        if numbers is None: numbers = random.sample(big_numbers, 2) + random.sample(small_numbers, 4)
-        if target is None:  target = random.randint(100, 999)
-        self.orig_numbers = numbers[:]  # Deep copy to avoid mutation
+        self.orig_numbers = numbers[:] if numbers is not None else None
+        self.orig_target = target
         self.target = target
         self.max_turns = max_turns
 
@@ -29,13 +25,17 @@ class CountdownEnv(ta.Env):
         self.move_history: List[str] = []
 
     def reset(self, num_players: int, seed: Optional[int] = None):
-        self.numbers = self.orig_numbers[:]
+        # State sets the seed before we draw the new episode's puzzle.
+        self.state = ta.SinglePlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
+        big_numbers = [25, 50, 75, 100]
+        small_numbers = list(range(1, 11)) * 2
+        self.numbers = self.orig_numbers[:] if self.orig_numbers is not None else random.sample(big_numbers, 2) + random.sample(small_numbers, 4)
+        self.target = self.orig_target if self.orig_target is not None else random.randint(100, 999)
         self.expressions = [str(n) for n in self.numbers]
         self.best_value = self._find_closest_value()
         self.best_expression = str(self.best_value)
         self.move_history = []
         
-        self.state = ta.SinglePlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
         self.state.reset(game_state={}, player_prompt_function=self._get_player_prompt)
         self._add_board_observation()
 
