@@ -158,7 +158,7 @@ class Env(ABC):
         def reset_with_lang_mapping(self, num_players, seed=None, lang_mapping=None, *args, **kwargs):
             assert len(lang_mapping) == num_players if lang_mapping is not None else True, (f"Length of lang_mapping ({len(lang_mapping)}) does not match num_players ({num_players}).")
             if lang_mapping is None:
-                lang_mapping = {pid: self.lang for pid in range(num_players)}
+                lang_mapping = {pid: type(self).lang for pid in range(num_players)}
             self.set_lang(lang_mapping)
             if lang_mapping_in_reset:
                 kwargs.setdefault("lang_mapping", lang_mapping)
