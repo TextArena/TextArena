@@ -71,7 +71,7 @@ class FifteenPuzzleEnv(ta.Env):
             
         if self._is_solved(): ## check if the puzzle is solved
             reason=self.m("outcome", "win", player_id=player_id)
-            self.state.set_winners(player_ids=[player_id], reason=reason)
+            self.state.set_outcome(reward=1, reason=reason)
         elif self.state.check_turn_limit():
             pct_completion = self._get_percentage_completion()
             reason=self.m("outcome", "turn_limit", percent=pct_completion*100)
