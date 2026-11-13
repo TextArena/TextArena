@@ -36,8 +36,11 @@ class SpellingBeeEnv(ta.Env):
             'a': 8.17, 'b': 1.49, 'c': 2.78, 'd': 4.25, 'e': 12.70, 'f': 2.23, 'g': 2.02, 'h': 6.09, 'i': 7.00, 'j': 0.15, 'k': 0.77, 'l': 4.03, 'm': 2.41, 
             'n': 6.75, 'o': 7.51, 'p': 1.93, 'q': 0.10, 'r': 5.99, 's': 6.33, 't': 9.06, 'u': 2.76, 'v': 0.98, 'w': 2.36, 'x': 0.15, 'y': 1.97, 'z': 0.07
         }
-        probs = [w / sum(list(letter_frequencies.values())) for w in list(letter_frequencies.values())] # Convert weights to probabilities that sum to 1.
-        return set(random.choices(list(letter_frequencies.keys()), k=self.num_letters))
+        letters, weights = list(letter_frequencies.keys()), list(letter_frequencies.values())
+        allowed_letters = set()
+        while len(allowed_letters) < self.num_letters: # draw frequency-weighted letters until num_letters are unique
+            allowed_letters.add(random.choices(letters, weights=weights, k=1)[0])
+        return allowed_letters
 
     def step(self, action: str) -> Tuple[bool, ta.Info]:
         self.state.add_observation(from_id=self.state.current_player_id, message=action, observation_type=ta.ObservationType.PLAYER_ACTION)
