@@ -16,11 +16,12 @@ class LightsOutEnv(ta.Env):
     def reset(self, num_players: int, seed: Optional[int] = None):
         self.state = ta.SinglePlayerState(num_players=num_players, max_turns=self.max_turns, seed=seed)
         grid = [[False for _ in range(self.size)] for _ in range(self.size)]
-        num_scramble_moves = random.randint(5, 15)
-        for _ in range(num_scramble_moves):
-            row = random.randint(0, self.size - 1)
-            col = random.randint(0, self.size - 1)
-            self._toggle_lights(grid, row, col)
+        while self._is_solved(grid):
+            num_scramble_moves = random.randint(5, 15)
+            for _ in range(num_scramble_moves):
+                row = random.randint(0, self.size - 1)
+                col = random.randint(0, self.size - 1)
+                self._toggle_lights(grid, row, col)
         self._initial_on = sum(light for row in grid for light in row)
         self.state.reset(
             game_state=dict(grid=grid, moves_made=0, solved=False), 
